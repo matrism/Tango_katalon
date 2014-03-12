@@ -19,8 +19,9 @@ They are:
 6. [PageObject Pattern](https://github.com/jamesottaway/js-page-object) Support.
 
 ####Comparing table
+
 | Criteria   | ProtractorJS | webdriverjs-angular | WebdriverJS |
-| ----------  | ------------ | - | - |
+| ----------  | ------------ | --- | --- |
 | 1. Community | 234 questions on StackOverflow | community is less because the initial commit was made on Jan 27, 2014 | community is very huge |
 | 2. Releases Number | 20 | 3 | \>100 |
 | 3. Last Release Date(For Mar 12, 2014) | Mar 06, 2014 | Mar 10, 2014 | N/A |
