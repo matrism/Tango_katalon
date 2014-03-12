@@ -5,17 +5,12 @@ I've decided to compare some e2e testing frameworks that use Selenium.
 They are:
 
 1. [ProtractorJS](https://github.com/angular/protractor)
-2. 
 2. [webdriverjs-angular](https://github.com/webdriverjs/webdriverjs-angular)
-3. 
 3. [WD-tractor](https://github.com/sebv/wd-tractor)
-4. 
 4. [WebdriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs)
-5. 
 5. [js-page-object](https://github.com/jamesottaway/js-page-object)
-6. 
 6. [browserstack-webdriver](https://github.com/browserstack/selenium-webdriver-nodejs)
-7. 
+
 
 ####Choosing comparing criteria:
 1. Community
