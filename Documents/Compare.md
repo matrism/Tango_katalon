@@ -8,7 +8,6 @@ They are:
 3. [WD-tractor](https://github.com/sebv/wd-tractor)
 4. [WebdriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs)
 5. [js-page-object](https://github.com/jamesottaway/js-page-object)
-6. [browserstack-webdriver](https://github.com/browserstack/selenium-webdriver-nodejs)
 
 ####Choosing comparing criteria:
 1. Community
@@ -16,4 +15,4 @@ They are:
     1. Last release date
 3. Angular benefits
 4. Login page with domain redirecting test passing
-5. WebdriverJS (native) support
+5. WebdriverJS (native == browserstack) support
