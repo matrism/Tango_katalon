@@ -21,6 +21,7 @@ Before we start comparing frameworks it is necessary to say that [WebDriver API]
 Browserstack webdriver - is a full copy of selenium-webdriver. The proof of this can be found in Changes.md file of both modules: [browserstack CHANGE.md](https://github.com/browserstack/selenium-webdriver-nodejs/blob/master/CHANGES.md) and [selenium-webdriver CHANGE.md](https://code.google.com/p/selenium/source/browse/javascript/node/selenium-webdriver/CHANGES.md?r=410f33489469744069bbc3debffcfcfd27f93700). That is why it won't be compared separately.
 
 Criterias to compare
+
 1. Downloads number (for last month, info from npmjs website, info is actual on March 13, 2014)
 2. Current version
 3. Last update
@@ -34,6 +35,12 @@ Criterias to compare
 | Last update | Feb 19, 2014 | March 14, 2014 | March 7, 2014 |
 | BrowserStack support | + | \+ ([declaration by developer](http://www.webdriver.io/)) | \+ ([proof](https://www.browserstack.com/automate/node#wd)) |
 | SauceLabs support | + | + | + |
+
+As the conclusion, we can see that selenium-webdriver is the most preferable implementation of WebDriver API. The reasons are:
+
+1. It is developed by Selenium team
+2. It has full BrowserStack and SauceLabs support
+3. It has more downloads than other rivals
 
 <span id="tools_list"><a name="tools_list"></a></span>
 ####Drivers-dependent tools list
@@ -71,6 +78,7 @@ We need framework-base, which is tightly and rapidly and still developed and is 
 
 We decided to compare some e2e testing frameworks that use Selenium.
 They are:
+
 1. ProtractorJS
 2. webdriverjs-angular
 3. WD-tractor
@@ -78,6 +86,7 @@ They are:
 5. NightwatchJS
 
 ####Choosing comparing criteria:
+
 1. Downloads number (last month)
 2. Number of releases (if applied)
     1. Last release date
@@ -103,10 +112,12 @@ They are:
 
 As the conclusion, the ProtractorJS framework looks like the most preferable decision. 
 Advantages: 
+
 1. Angular specific
-2. Huge community
-3. Rapidly developed
-4. Supports PageObject with extension, Jenkins integration with extension. 
+2. Built on preferable selenium-webdriver driver implementation
+3. Huge community
+4. Rapidly developed
+5. Supports PageObject with extension, Jenkins integration with extension. 
 
 In addition we tried to implement test on login with redirects to other domain and ProtractorJS successfully passed that test
 Also Angular team [recommends](https://github.com/angular/angular-seed#end-to-end-testing) to use protractor for e2e testing
