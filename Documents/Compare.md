@@ -11,6 +11,7 @@
 ####Choosing drivers
 
 Before we start comparing frameworks it is necessary to say that [WebDriver API](http://www.w3.org/TR/2013/WD-webdriver-20130117/) is the interface for interacting with browsers to create automated tests in browser. While investigating this subject, we've found 4 implementations of this API (there can be more, but we didn't meet them when searching through Google, GitHub and StackOverflow):
+
 1. [selenium-webdriver](https://code.google.com/p/selenium/wiki/WebDriverJs),  [npm link](https://www.npmjs.org/package/selenium-webdriver)
 2. [webdriverjs](http://www.webdriver.io/), [github](https://github.com/camme/webdriverjs), [npm link](https://www.npmjs.org/package/webdriverjs)
 3. [wd](http://admc.io/wd/), [github](https://github.com/admc/wd), [npm link](https://www.npmjs.org/package/wd)
