@@ -10,7 +10,7 @@
 <span id="choosing_drivers"><a name="choosing_drivers"></a></span>
 ####Choosing drivers
 
-Before we start comparing frameworks it is necessary to say that [WebDriver API](http://www.w3.org/TR/2013/WD-webdriver-20130117/) is the interface for interacting with browsers to create automated tests in browser. While investigating this subject, we've found 4 implementations of this API (there can be more, but we didn't meet them when searching through Google, GitHub and StackOverflow):
+Before we start comparing frameworks it is necessary to say that [WebDriver API](http://www.w3.org/TR/2013/WD-webdriver-20130117/) is the interface for interacting with browsers to create automated tests in browser. While investigating this subject, we've found 4+ implementations of this API (there can be more, but we didn't meet them when searching through Google, GitHub, StackOverflow and NPM):
 
 1. [selenium-webdriver](https://code.google.com/p/selenium/wiki/WebDriverJs),  [npm link](https://www.npmjs.org/package/selenium-webdriver)
 2. [webdriverjs](http://www.webdriver.io/), [github](https://github.com/camme/webdriverjs), [npm link](https://www.npmjs.org/package/webdriverjs)
@@ -30,7 +30,7 @@ Criterias to compare
 
 | Criteria   | selenium-webdriver | webdriverjs | wd |
 | --- | --- | --- | --- |
-| Downloads number (for last month) | 52 698 | 1 602 | 33 216 |
+| Downloads number (for last month) | 52k+ | 1.6k+ | 33k+ |
 | Current version | 2.40.0 | 1.3.4 | 0.2.12 |
 | Last update | Feb 19, 2014 | March 14, 2014 | March 7, 2014 |
 | BrowserStack support | + | \+ ([declaration by developer](http://www.webdriver.io/)) | \+ ([proof](https://www.browserstack.com/automate/node#wd)) |
@@ -45,7 +45,7 @@ As the conclusion, we can see that selenium-webdriver is the most preferable imp
 <span id="tools_list"><a name="tools_list"></a></span>
 ####Drivers-dependent tools list
 
-We decided to make table of tooks and libs that have more then 100 downloads
+We decided to make table of tools and libs that have more then 100 downloads
 
 | Name | Short Description | Downloads number (for last month) | Current version | Last Update | Dependent driver | Angular specific |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -67,16 +67,17 @@ We decided to make table of tooks and libs that have more then 100 downloads
 As AngularJS is one of the most important requirenments, we should compare only angular-specific frameworks:  (but, we should also mention such frameworks as chai[156k+ downloads] and nightwatch[only 600+ downloads, but project was started on Jan 2014]))
 We need framework-base, which is tightly and rapidly and still developed and is commonly used.
 
-(List of nice helpers:
-    [webdriver-helper](https://www.npmjs.org/package/webdriver-helper) - for selenium-webdriver with underscore
-    [browser-perf](https://www.npmjs.org/package/browser-perf) - Measure browser performance metrics (for webdriverjs)
-    [grunt-sauce-screenshots](https://github.com/cvrebert/grunt-sauce-screenshots) - for wd - making screenshot on SauceLabs
-)
+List of possible useful helpers:
+
+1. [webdriver-helper](https://www.npmjs.org/package/webdriver-helper) - for selenium-webdriver with underscore
+2. [browser-perf](https://www.npmjs.org/package/browser-perf) - Measure browser performance metrics (for webdriverjs)
+3. [grunt-sauce-screenshots](https://github.com/cvrebert/grunt-sauce-screenshots) - for wd - making screenshot on SauceLabs
+
 
 <span id="choosing_framework"><a name="choosing_framework"></a></span>
 ####Choosing framework
 
-We decided to compare some e2e testing frameworks that use Selenium.
+We made a selection of frameworks for final comparison.
 They are:
 
 1. ProtractorJS
