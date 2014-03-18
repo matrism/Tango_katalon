@@ -1,0 +1,22 @@
+{
+  "name": "protractor_tests",
+  "version": "0.0.1",
+  "description": "Look into README.md",
+  "main": "conf/protractor-conf.js",
+  "scripts": {
+    "test": "protractor conf/protractor-conf.js"
+  },
+  "keywords": [
+    "testing",
+    "e2e",
+    "protractor",
+    "angular"
+  ],
+  "dependencies": { 
+      "selenium-webdriver": "~2.40.0", 
+      "protractor": "latest",
+      "jasmine-reporters": "latest"
+  },
+  "author": "WMG",
+  "license": "ISC"
+}
