@@ -10,29 +10,24 @@ module.exports = function() {
         
         this.visit(main_page.url).then(function() {
             W.browser.driver.getCurrentUrl().then(function(url) {
-                console.log("url", url);
                 if (url.indexOf("/login") < 0) {
                     W.browser.driver.isElementPresent(W.By.css(main_page.h1.css)).then(function(exists) {
-                        console.log("exists", exists);
                         if (exists) {
                             W.getElement(main_page.h1.css, "css").then(function(elem) {
                                 elem.getText().then(function(text) {
-                                    console.log("h1 text", text); 
                                     if (text.indexOf("503 Service Unavailable") >= 0) {
-                                        throw(new Error("Service is not available"));
+                                        next(new Error("Service is not available"));
                                     } 
                                 });
                             });
                         } 
                     });
-                    W.browser.driver.get
                     if (next) {
                         next();
                     }
                 } 
             });
         }).then(function(){
-            console.log("loggin in");
             login_page.loginWith('uaa_test_user01@wmgdsp.dev', 'No!daIN@124'); //login, password
 
             W.getElement(login_page.username.id, 'id').sendKeys(login_page.username.value); //login

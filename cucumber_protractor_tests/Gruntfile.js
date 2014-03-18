@@ -6,8 +6,8 @@ module.exports = function(grunt) {
             src: 'features',
             options: {
               steps: "features/step_definitions",
-              format: "pretty",
-              tags: "@moreFeatures,@again"
+              format: "json",
+              tags: "@moreFeatures"
             }
           }
     });
