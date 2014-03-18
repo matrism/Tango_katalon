@@ -1,0 +1,19 @@
+{
+  "name": "tests",
+  "version": "0.0.1",
+  "description": "writing tests using protractor and cucumber",
+  "main": "tests/index.js",
+  "scripts": {
+    "test": "test",
+    "postinstall": "./node_modules/protractor/bin/webdriver-manager update"
+  },
+  "author": "WMG",
+  "license": "ISC",
+  "dependencies": {
+    "selenium-webdriver": "~2.40.0",
+    "protractor": "latest",
+    "cucumber": "latest",
+    "expect.js": "latest",
+    "grunt": "^0.4.4"
+  }
+}
