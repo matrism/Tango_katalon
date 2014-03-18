@@ -41,7 +41,7 @@ Gruntfile.js:
       });
     
       grunt.loadNpmTasks('grunt-protractor-runner'); 
-      grunt.registerTask('test', [
+      grunt.registerTask('tests', [
         'protractor:run'
       ]);
     
