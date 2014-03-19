@@ -12,10 +12,15 @@
     "protractor",
     "angular"
   ],
+  "devDependencies": {
+        "grunt": "latest",
+        "grunt-protractor-runner": "latest"
+  },
   "dependencies": { 
-      "selenium-webdriver": "~2.40.0", 
-      "protractor": "latest",
-      "jasmine-reporters": "latest"
+        "selenium-webdriver": "~2.40.0", 
+        "protractor": "latest",
+        "jasmine-reporters": "latest",
+        "jasminewd": "latest"
   },
   "author": "WMG",
   "license": "ISC"

@@ -1,7 +1,7 @@
 
 var //config = require("config"),
     main_page = {
-        url: "http://security-console.devportal-ci.dspdev.wmg.com/",//config.app_home
+        url: "http://security-console.devportal-ci.dspdev.wmg.com",//config.app_home
         h1: {
             css: "h1"
         },
