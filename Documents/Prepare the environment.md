@@ -3,7 +3,7 @@
 * To install ProtractorJS environment (for protractor_tests), follow `Common` and `ProtractorJS` only Steps and Substeps
 * To install CucumberJS environment (for cucumber-protractor-tests), follow `Common` and `CucumberJS` only Steps and Substeps
 
-###Step: `Common`:
+###Step 1: `Common`:
 1. Install node.js & npm
 2. Open CMD/Bash
 3. Go to the test project's folder
@@ -11,17 +11,17 @@
 5. Run `npm install selenium-webdriver` to install Selenium-Webdriver
 
 
-###Step: `CucumberJS`
+###Step 1a: `CucumberJS`
 6. Run `npm install -g cucumber` to install CucumberJS
 7. Run `npm install -g grunt-cli` to install GruntJS
 8. Run `npm install -g grunt-cucumber` to install grunt-cucumber 
 9. Run `npm install -g expect.js` to install expect.js 
 
-###Step: `Common`
+###Step 2: `Common`
 10. If project doesn't have file `package.json` - run `npm init` - initiating package.json and follow all questions.
 
-###Step:
-####Substep: `CucumberJS`:
+###Step 3:
+####Substep 1: `CucumberJS`:
 11. Add dependeny to package.json
 
 ```js 
@@ -35,7 +35,7 @@
     },
 ```
 
-####Substep: `ProtractorJS`:
+####Substep 1: `ProtractorJS`:
 11. Add dependeny to package.json
 
 ```js 
@@ -46,10 +46,10 @@
   },
 ```
 
-###Step: `Common`:
+###Step 4: `Common`:
 12. `npm install` - installing dependency modules
 
-###Step: `CucumberJS`:
+###Step 4a: `CucumberJS`:
 13. Create Gruntfile.js file in the root directory with next content:
 
 ```js
@@ -78,7 +78,7 @@
 };
 ```
 
-###Step : `Common`:
+###Step 5: `Common`:
 12. Run `npm update` - adding dependencies
 13. Run `webdriver-manager update` - installing selenium standalone server and chromedriver
 14. Run `webdriver-manager start` - starting selenium standalone server
