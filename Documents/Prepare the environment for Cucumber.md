@@ -3,7 +3,7 @@
 * To install CucumberJS environment (for cucumber-protractor-tests), follow `Common` and `CucumberJS` only Steps and Substeps
 
 ###Step 1:
-1. Install node.js & npm
+1. Install [node.js](http://nodejs.org/) & [npm](https://www.npmjs.org/)
 2. Open CMD/Bash
 3. Go to the test project's folder
 4. Run `npm install –g protractor` to install ProtractorJS
