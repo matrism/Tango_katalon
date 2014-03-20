@@ -1,4 +1,5 @@
 var //config = require("config"),
+    helper = require("../helpers/helper"),
     provisioning_page = {
         
         url: "http://security-console.devportal-ci.dspdev.wmg.com/provisioning",
@@ -13,7 +14,7 @@ var //config = require("config"),
             }
         },
         goToPage: function() {
-            browser.get(provisioning_page.url);
+            return browser.get(provisioning_page.url);
         },
         
         elementByCssIsPresent: function(cssSelector, shouldBePresent) {
@@ -40,6 +41,25 @@ var //config = require("config"),
         
         elementByCssIsDisplayed: function(cssSelector, shouldBeDisplayed) {
             expect(element(by.css(cssSelector)).isDisplayed()).toBe(shouldBeDisplayed);
+        },
+        buttonAttrShouldBeAsVal: function(attr_name, attr_val) {
+            var el;
+                
+            this.goToPage();
+            browser.wait(function() {
+                return element(By.css('.ugol-page-progress-bar .progress-bar')).getCssValue('width').then(function(width) {
+                    return width === '0px';
+                });
+            });  
+            var el = element(
+                by.xpath(
+                    this.buttons.setup(
+                        this.buttons.xpath_by_text, 
+                        this.buttons.single.text
+                    )
+                )
+            );
+            helper.checkAttributeOfElementContainsValue(el, attr_name, attr_val)
         }
         
     };
