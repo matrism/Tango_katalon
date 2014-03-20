@@ -1,8 +1,5 @@
 ##Prepare the environment
 
-* To install ProtractorJS environment (for protractor_tests), follow `Common` and `ProtractorJS` only Steps and Substeps
-* To install CucumberJS environment (for cucumber-protractor-tests), follow `Common` and `CucumberJS` only Steps and Substeps
-
 ###Step 1:
 1. Install node.js & npm
 2. Open CMD/Bash
