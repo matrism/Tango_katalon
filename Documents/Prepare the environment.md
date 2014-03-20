@@ -59,3 +59,5 @@ module.exports = function(grunt) {
 14. Run `npm update` - adding dependencies
 15. Run `webdriver-manager update` - installing selenium standalone server and chromedriver
 16. Run `webdriver-manager start` - starting selenium standalone server
+
+We recommend to use Jetbrains Webstorm or Oracle Netbeans IDE, but you are free to use any IDE that you like, even RubyMine.
