@@ -5,7 +5,7 @@ exports.config = {
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome' //firefox, ie
   },
 
   // Spec patterns are relative to the location of the spec file. They may
@@ -15,8 +15,8 @@ exports.config = {
   // Spec patterns are relative to the location of the spec file. They may
   // include glob patterns.
   suites: {
-      dashboard: '../tests/e2e/dashboard/**/*Spec.js',
-      search: ['tests/e2e/contact_search/**/*Spec.js', 'tests/e2e/venue_search/**/*Spec.js']
+      dashboard: '../tests/e2e/dashboard/**/*.js',
+      provision_1 : "../tests/e2e/provisioning_step_1/**/*Spec.js"
   },
   
   onPrepare: function() {

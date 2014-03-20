@@ -2,17 +2,15 @@
 var //config = require("config"),
     main_page = {
         url: "http://security-console.devportal-ci.dspdev.wmg.com",//config.app_home
-        h1: {
-            css: "h1"
-        },
-        dashboard: {
-            link: {
-                text: "DASHBOARD"
-            }
-        },
-        main_page_nav: {
-            button: {
-                css: ".btn"
+        links: {
+            start_creating: {
+                text: "Start Creating"
+            },
+            view_details: {
+                text: "View details"
+            },
+            start_provisioning: {
+                text: "Start Provisioning"
             }
         },
         checkButtonByTextToBeDisabledOrNot: function(link_text, should_be_disabled) {

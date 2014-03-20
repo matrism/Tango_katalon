@@ -3,6 +3,15 @@ var //config = require("config"),
         
         url: "http://security-console.devportal-ci.dspdev.wmg.com/provisioning",
         
+        buttons: {
+            single: {
+                text: "Single"
+            },
+            xpath_by_text: "//button[contains(text(), '%s')]",
+            setup: function(template, text) {
+                return template.replace("%s",text);
+            }
+        },
         goToPage: function() {
             browser.get(provisioning_page.url);
         },

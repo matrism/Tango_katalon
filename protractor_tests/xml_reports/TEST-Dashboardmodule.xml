@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="Dashboard module" errors="0" tests="0" failures="0" time="0" timestamp="2014-03-20T11:51:46">
+</testsuite>
+<testsuite name="Dashboard module.Verify that Dashboard&amp;apos;s Provisioning section is enabled" errors="0" tests="1" failures="0" time="13.164" timestamp="2014-03-20T11:51:27">
+  <testcase classname="Dashboard module.Verify that Dashboard&amp;apos;s Provisioning section is enabled" name="Start Provisioning link should not be disabled" time="13.162"></testcase>
+</testsuite>
+<testsuite name="Dashboard module.Verify that Dashboard&amp;apos;s Creation and Management sections are disabled" errors="0" tests="2" failures="0" time="2.681" timestamp="2014-03-20T11:51:40">
+  <testcase classname="Dashboard module.Verify that Dashboard&amp;apos;s Creation and Management sections are disabled" name="Start Creating link should be disabled" time="1.508"></testcase>
+  <testcase classname="Dashboard module.Verify that Dashboard&amp;apos;s Creation and Management sections are disabled" name="View details link should be disabled" time="1.172"></testcase>
+</testsuite>
+<testsuite name="Dashboard module.Navigate to Provisioning page" errors="0" tests="1" failures="0" time="3.354" timestamp="2014-03-20T11:51:43">
+  <testcase classname="Dashboard module.Navigate to Provisioning page" name="View details link should not be disabled" time="3.354"></testcase>
+</testsuite>
+</testsuites>
