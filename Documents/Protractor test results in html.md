@@ -33,3 +33,7 @@ In your Protractor configuration file, register `protractor-screenshot-reporter-
 ### Postprocess Meta Data
 
 On running the task reporter will be generating json and png files for each test and also html page showing the results.
+
+Example of the HTML result reporter:
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/html_report.png "HTML report")
