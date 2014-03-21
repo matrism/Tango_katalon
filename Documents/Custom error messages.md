@@ -1,3 +1,6 @@
+Custom error messages
+======================
+
 The errors are defined in the matchers. Here is no way to set the message from outside a matcher.
 
 Example of the toBeNaN matcher:
