@@ -1,7 +1,6 @@
 
-var //config = require("config"),
-    main_page = {
-        url: "http://security-console.devportal-ci.dspdev.wmg.com",//config.app_home
+var main_page = {
+        url: _tf_config.urls.security_console,
         links: {
             start_creating: {
                 text: "Start Creating"
@@ -18,6 +17,7 @@ var //config = require("config"),
             
             el.getAttribute('className').then(function(className) {
                 var exp = expect(className);
+//                console.log("exp", exp);
                 if (should_be_disabled) {
                     exp.toContain('disabled');
                 } else {

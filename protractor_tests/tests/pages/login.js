@@ -1,9 +1,8 @@
 
-var //config = require("config"),
-    main_page = require("./main"),
+var main_page = require("./main"),
     should_login = true,
     login_page = {
-        url: "http://security-console.devportal-ci.dspdev.wmg.com/",//config.app_home
+        url: _tf_config.urls.security_console,
         username: {
             css: "#username",
             id: "username",
@@ -51,7 +50,7 @@ var //config = require("config"),
                 } 
             }).then(function() {
                 if (should_login) {
-                    login_page.loginWith('uaa_test_user01@wmgdsp.dev', 'No!daIN@124'); //login, password
+                    login_page.loginWith(_tf_config.user_name, _tf_config.user_password); //login, password
 
                     element(by.id(login_page.username.id)).sendKeys(login_page.username.value); //login
                     element(by.id(login_page.password.id)).sendKeys(login_page.password.value);//password

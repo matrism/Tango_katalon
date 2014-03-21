@@ -1,11 +1,25 @@
+global._tf_config = require("../../../conf/config").prepareConf('qa'); 
+/* Example of _tf_config resulting structure
+ *  { 
+ *      client_id: 'devportal',
+ *      client_secret: 'appclientsecret',
+ *      user_name: 'uaa_test_user01@wmgdsp.dev',
+ *      user_password: 'No!daIN@124',
+ *      urls: { 
+ *          sso: 'http://sso.devportal-qa.dspdev.wmg.com',
+ *          security_console: 'http://security-console.devportal-ci.dspdev.wmg.com/' 
+ *      }
+ *  }
+ */
+
 describe('Dashboard module', function() {
     var login_page = require("../../pages/login"),
     main_page = require("../../pages/main"),
-    provision_page = require("../../pages/provisioning"); 
+    provision_page = require("../../pages/provisioning");
     
     // should be logged in
     // background: 
-    beforeEach(login_page.check);    
+    beforeEach(login_page.check);
     
     //Scenario:
     describe('Verify that Dashboard\'s Provisioning section is enabled', function() {

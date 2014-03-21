@@ -35,54 +35,56 @@ exports.config = {
     );
     
     // Screenshots reports with HTML and JSON
-    jasmine.getEnv().addReporter(new ScreenShotReporter({
-        baseDirectory: 'screenshot_reports',
-        metaDataBuilder: function(spec, descriptions, results, capabilities){
-            var metaData = {
-                description: descriptions.join('|')
-                , passed: results.passed()
-                , os: capabilities.caps_.platform
-                , browser: {
-                    name: capabilities.caps_.browserName
-                    , version: capabilities.caps_.version
+    jasmine.getEnv().addReporter(
+        new ScreenShotReporter({
+            baseDirectory: 'screenshot_reports',
+            metaDataBuilder: function(spec, descriptions, results, capabilities){
+                var metaData = {
+                    description: descriptions.join('|')
+                    , passed: results.passed()
+                    , os: capabilities.caps_.platform
+                    , browser: {
+                        name: capabilities.caps_.browserName
+                        , version: capabilities.caps_.version
+                    }
+                  };
+
+                if(results.items_.length > 0) {
+                    var result = results.items_[0];
+                    metaData.message = result.message;
+                    metaData.trace = result.trace.stack;
                 }
-              };
 
-            if(results.items_.length > 0) {
-                var result = results.items_[0];
-                metaData.message = result.message;
-                metaData.trace = result.trace.stack;
+                return metaData;
+
+             },
+             pathBuilder: function pathBuilder(spec, descriptions, results, capabilities) {
+
+                var monthMap = {
+                  "1": "Jan",
+                  "2": "Feb",
+                  "3": "Mar",
+                  "4": "Apr",
+                  "5": "May",
+                  "6": "Jun",
+                  "7": "Jul",
+                  "8": "Aug",
+                  "9": "Sep",
+                  "10": "Oct",
+                  "11": "Nov",
+                  "12": "Dec"
+                };
+
+                var currentDate = new Date(),
+                    currentHoursIn24Hour = currentDate.getHours(),
+                    currentTimeInHours = currentHoursIn24Hour>12? currentHoursIn24Hour-12: currentHoursIn24Hour,
+                    totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()]+ '-'+(currentDate.getYear()+1900) + 
+                                          '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
+
+                return path.join(totalDateString,capabilities.caps_.browserName, descriptions.join('-'));
             }
-
-            return metaData;
-
-         },
-         pathBuilder: function pathBuilder(spec, descriptions, results, capabilities) {
-          
-            var monthMap = {
-              "1": "Jan",
-              "2": "Feb",
-              "3": "Mar",
-              "4": "Apr",
-              "5": "May",
-              "6": "Jun",
-              "7": "Jul",
-              "8": "Aug",
-              "9": "Sep",
-              "10": "Oct",
-              "11": "Nov",
-              "12": "Dec"
-            };
-
-            var currentDate = new Date(),
-                currentHoursIn24Hour = currentDate.getHours(),
-                currentTimeInHours = currentHoursIn24Hour>12? currentHoursIn24Hour-12: currentHoursIn24Hour,
-                totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()]+ '-'+(currentDate.getYear()+1900) + 
-                                      '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
-
-            return path.join(totalDateString,capabilities.caps_.browserName, descriptions.join('-'));
-        }
-    }));
+        })
+    );
 
   },  // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
