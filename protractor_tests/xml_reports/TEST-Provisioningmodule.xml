@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-<testsuite name="Provisioning module" errors="0" tests="0" failures="0" time="0" timestamp="2014-03-20T17:54:36">
+<testsuite name="Provisioning module" errors="0" tests="0" failures="0" time="0" timestamp="2014-03-21T14:41:38">
 </testsuite>
-<testsuite name="Provisioning module. First step" errors="0" tests="0" failures="0" time="0" timestamp="2014-03-20T17:54:36">
+<testsuite name="Provisioning module. First step" errors="0" tests="0" failures="0" time="0" timestamp="2014-03-21T14:41:38">
 </testsuite>
-<testsuite name="Provisioning module. First step.Select user in typeahead" errors="0" tests="7" failures="0" time="11.056" timestamp="2014-03-20T17:54:25">
-  <testcase classname="Provisioning module. First step.Select user in typeahead" name="typeahead input should be present" time="3.279"></testcase>
-  <testcase classname="Provisioning module. First step.Select user in typeahead" name="set value for typeahead" time="1.336"></testcase>
-  <testcase classname="Provisioning module. First step.Select user in typeahead" name="list of suggestions is displayed" time="1.144"></testcase>
-  <testcase classname="Provisioning module. First step.Select user in typeahead" name="select &amp;quot;Sam, Alexander&amp;quot; from suggestions list" time="1.355"></testcase>
-  <testcase classname="Provisioning module. First step.Select user in typeahead" name="user should see item &amp;quot;Sam, Alexander&amp;quot; in typeahead step 1" time="1.273"></testcase>
-  <testcase classname="Provisioning module. First step.Select user in typeahead" name="user clicks on tag option &amp;quot;Sam, Alexander&amp;quot; in step 1" time="1.399"></testcase>
-  <testcase classname="Provisioning module. First step.Select user in typeahead" name="currently editing is &amp;quot;Sam, Alexander&amp;quot;" time="1.269"></testcase>
+<testsuite name="Provisioning module. First step.Select user in typeahead" errors="0" tests="7" failures="0" time="11.91" timestamp="2014-03-21T14:41:26">
+  <testcase classname="Provisioning module. First step.Select user in typeahead" name="typeahead input should be present" time="3.416"></testcase>
+  <testcase classname="Provisioning module. First step.Select user in typeahead" name="set value for typeahead" time="1.453"></testcase>
+  <testcase classname="Provisioning module. First step.Select user in typeahead" name="list of suggestions is displayed" time="1.337"></testcase>
+  <testcase classname="Provisioning module. First step.Select user in typeahead" name="select Sam, Alexander from suggestions list" time="1.384"></testcase>
+  <testcase classname="Provisioning module. First step.Select user in typeahead" name="user should see item Sam, Alexander in typeahead step 1" time="1.409"></testcase>
+  <testcase classname="Provisioning module. First step.Select user in typeahead" name="user clicks on tag option Sam, Alexander in step 1" time="1.511"></testcase>
+  <testcase classname="Provisioning module. First step.Select user in typeahead" name="currently editing is Sam, Alexander" time="1.39"></testcase>
 </testsuite>
 </testsuites>

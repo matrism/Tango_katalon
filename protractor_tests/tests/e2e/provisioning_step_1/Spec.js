@@ -21,11 +21,11 @@ describe('Provisioning module', function() {
                 browser.sleep(1000);
             });
 
-            it('typeahead input should be present', function() {            
-                provisioning_page.elementByCssIsPresent('input[ng-model="typeahead.model"]', true);            
+            it('typeahead input should be present', function() {
+                provisioning_page.elementByCssIsPresent('input[ng-model="typeahead.model"]', true);
             }); 
 
-            it ('set value for typeahead', function() {            
+            it ('set value for typeahead', function() {
                 provisioning_page.setValue('input[ng-model="typeahead.model"]', 'A');
             });
 
@@ -33,19 +33,19 @@ describe('Provisioning module', function() {
                 provisioning_page.elementByCssIsPresent('div.ugol-select-wrapper', true);
             });
 
-            it ('select "Sam, Alexander" from suggestions list',  function() {
+            it ('select Sam, Alexander from suggestions list',  function() {
                 provisioning_page.selectItemFromRepeater("match in matches", 0);
             });
 
-            it ('user should see item "Sam, Alexander" in typeahead step 1',  function() {
+            it ('user should see item Sam, Alexander in typeahead step 1',  function() {
                 provisioning_page.repeaterHasItem("tag in tags", "Sam, Alexander");
             });
             
-            it ('user clicks on tag option "Sam, Alexander" in step 1',  function() {
+            it ('user clicks on tag option Sam, Alexander in step 1',  function() {
                 provisioning_page.selectItemFromRepeater("tag in tags", 0);
             });
             
-            it ('currently editing is "Sam, Alexander"',  function() {
+            it ('currently editing is Sam, Alexander',  function() {
                 provisioning_page.elementByCssIsDisplayed('[ui-view="provisioning-tabs"]', true);
             });
 
