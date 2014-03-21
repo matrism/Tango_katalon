@@ -31,7 +31,7 @@ exports.config = {
 
     require('jasmine-reporters');
     jasmine.getEnv().addReporter(
-      new jasmine.JUnitXmlReporter('xml_reports', true, true)
+        new jasmine.JUnitXmlReporter('xml_reports', true, true)
     );
     
     // Screenshots reports with HTML and JSON

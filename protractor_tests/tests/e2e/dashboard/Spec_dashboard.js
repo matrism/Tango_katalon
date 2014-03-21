@@ -10,7 +10,11 @@ global._tf_config = require("../../../conf/config").prepareConf('qa');
  *          security_console: 'http://security-console.devportal-ci.dspdev.wmg.com/' 
  *      }
  *  }
+ *  
+ *  process.argv.split(2) - access to arguments protractor was called with
  */
+
+
 
 describe('Dashboard module', function() {
     var login_page = require("../../pages/login"),
