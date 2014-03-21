@@ -16,7 +16,7 @@ exports.config = {
   // include glob patterns.
   suites: {
       dashboard: '../tests/e2e/dashboard/**/*.js',
-      provision_1 : "../tests/e2e/provisioning_step_1/**/*Spec.js"
+      provision_1: "../tests/e2e/provisioning_step_1/**/*Spec.js"
   },
   
   onPrepare: function() {
@@ -32,6 +32,6 @@ exports.config = {
 
   },  // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
-    showColors: true, // Use colors in the command line report.
+    showColors: true // Use colors in the command line report.
   }
 };
