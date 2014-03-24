@@ -1,0 +1,31 @@
+{
+    "name": "protractor_tests",
+    "version": "0.0.1",
+    "description": "Look into README.md",
+    "main": "conf/protractor-conf.js",
+    "scripts": {
+        "test": "protractor conf/protractor-conf.js"
+    },
+    "keywords": [
+        "testing",
+        "e2e",
+        "protractor",
+        "angular"
+    ],
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-protractor-runner": "latest"
+    },
+    "dependencies": { 
+        "selenium-webdriver": "~2.40.0", 
+        "protractor": "latest",
+        "jasmine-reporters": "latest",
+        "jasminewd": "latest",
+        "path": "latest",
+        "protractor-screenshot-reporter-with-postprocessing": "latest",
+        "underscore": "latest",
+        "./bower_components/factory-testing-framework": "latest"
+    },
+    "author": "WMG",
+    "license": "ISC"
+}
