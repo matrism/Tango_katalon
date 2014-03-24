@@ -2,3 +2,5 @@
 /cucumber_protractor_tests/node_modules/
 /protractor_tests/node_modules/
 /protractor_tests/bower_components/
+/protractor_tests/screenshot_reports/
+/protractor_tests/xml_reports/
