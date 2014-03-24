@@ -2,7 +2,7 @@
     "name": "factory-testing-framework",
     "version": "0.0.1",
     "description": "JS testing framework",
-    "main": "src/app.js",
+    "main": "testingFramework",
     "keywords": [
         "testing",
         "e2e",
