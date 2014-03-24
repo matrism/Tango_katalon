@@ -3,3 +3,8 @@
 /node_modules/
 /xml_reports/
 /screenshot_reports/
+/prev_tests/cucumber_protractor_tests/node_modules/
+/prev_tests/protractor_tests/xml_reports/
+/prev_tests/protractor_tests/node_modules/
+/prev_tests/protractor_tests/screenshot_reports/
+/prev_tests/protractor_tests/bower_components/
