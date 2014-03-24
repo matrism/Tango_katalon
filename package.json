@@ -1,0 +1,23 @@
+{
+    "name": "factory-testing-framework",
+    "version": "0.0.1",
+    "description": "JS testing framework",
+    "main": "src/app.js",
+    "keywords": [
+        "testing",
+        "e2e",
+        "protractor",
+        "angular"
+    ],
+    "dependencies": { 
+        "selenium-webdriver": "~2.40.0", 
+        "protractor": "latest",
+        "jasmine-reporters": "latest",
+        "jasminewd": "latest",
+        "path": "latest",
+        "protractor-screenshot-reporter-with-postprocessing": "latest",
+        "underscore": "latest"
+    },
+    "author": "WMG",
+    "license": "ISC"
+}
