@@ -4,3 +4,9 @@
 /protractor_tests/bower_components/
 /protractor_tests/screenshot_reports/
 /protractor_tests/xml_reports/
+/nbproject/
+/prev_tests/cucumber_protractor_tests/node_modules/
+/prev_tests/protractor_tests/bower_components/
+/prev_tests/protractor_tests/node_modules/
+/prev_tests/protractor_tests/screenshot_reports/
+/prev_tests/protractor_tests/xml_reports/

@@ -15,8 +15,6 @@ global._tf_config = require("../../../conf/config").prepareConf(process.env.ENV_
  *  process.env - access to environment arguments
  */
 
-console.log(_tf_config);
-
 describe('Dashboard module', function() {
     var login_page = require("../../pages/login"),
     main_page = require("../../pages/main"),
