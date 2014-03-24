@@ -40,7 +40,7 @@ var _ = require('underscore'),
         prepareConf: function() {
             var res = _.extend(config._default_, config[config._env_.ENV_TYPE]);
             res._cli = config._cli_args_;
-            res._env = env;
+            res._env = configer.env;
             return res;
         }
     };
