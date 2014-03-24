@@ -23,8 +23,7 @@
         "jasminewd": "latest",
         "path": "latest",
         "protractor-screenshot-reporter-with-postprocessing": "latest",
-        "underscore": "latest",
-        "./bower_components/factory-testing-framework": "latest"
+        "underscore": "latest"
     },
     "author": "WMG",
     "license": "ISC"
