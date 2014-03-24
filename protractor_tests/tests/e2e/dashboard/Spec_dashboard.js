@@ -1,4 +1,4 @@
-global._tf_config = require("../../../conf/config").prepareConf('qa'); 
+global._tf_config = require("../../../conf/config").prepareConf(process.env.ENV_TYPE); 
 /* Example of _tf_config resulting structure
  *  { 
  *      client_id: 'devportal',
@@ -12,9 +12,10 @@ global._tf_config = require("../../../conf/config").prepareConf('qa');
  *  }
  *  
  *  process.argv.split(2) - access to arguments protractor was called with
+ *  process.env - access to environment arguments
  */
 
-
+console.log(_tf_config);
 
 describe('Dashboard module', function() {
     var login_page = require("../../pages/login"),

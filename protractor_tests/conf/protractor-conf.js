@@ -23,6 +23,10 @@ exports.config = {
       provision_1: "../tests/e2e/provisioning_step_1/**/*Spec.js"
   },
   
+  params: {
+      my_own_var: 166
+  },
+  
   onPrepare: function() {
 
     // The require statement must be down here, since jasmine-reporters
@@ -85,9 +89,9 @@ exports.config = {
             }
         })
     );
-
+    
   },  // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
-    showColors: true // Use colors in the command line report.
+    showColors: true, // Use colors in the command line report.
   }
 };
