@@ -1,8 +1,8 @@
-var env = process.env,
-    _ = require('underscore'),
+var _ = require('underscore'),
     cli_args = process.argv.slice(3),
     config = {},
     configer = {
+        env: process.env,
         process: function(conf) {
             if (!(conf instanceof Object) || typeof conf._default_ == "undefined") {
                 throw (new Error("Incorrect config object was sent to config instancer"));
@@ -33,7 +33,7 @@ var env = process.env,
         },
         setEnv: function() {
             for(var i in config._env_) {
-                env[i] = config._env_[i];
+                configer.env[i] = config._env_[i];
             }
             return this;
         },
