@@ -8,7 +8,9 @@ var _ = require('underscore'),
                 throw (new Error("Incorrect config object was sent to config instancer"));
             }
             config = conf;
-            return configer.addParamsFromCli().setEnv().prepareConf();;
+            configer.addParamsFromCli();
+            configer.setEnv()
+            return configer.prepareConf();;
         },
         addParamsFromCli: function() {
             var splited, waiting_next = false;
