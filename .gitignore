@@ -1,12 +1,5 @@
-/nbproject/private/
-/cucumber_protractor_tests/node_modules/
-/protractor_tests/node_modules/
-/protractor_tests/bower_components/
-/protractor_tests/screenshot_reports/
-/protractor_tests/xml_reports/
+/bower_components/
 /nbproject/
-/prev_tests/cucumber_protractor_tests/node_modules/
-/prev_tests/protractor_tests/bower_components/
-/prev_tests/protractor_tests/node_modules/
-/prev_tests/protractor_tests/screenshot_reports/
-/prev_tests/protractor_tests/xml_reports/
+/node_modules/
+/xml_reports/
+/screenshot_reports/
