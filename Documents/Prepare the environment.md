@@ -51,6 +51,12 @@ Jenkins
 2. `bower install` - installing bower dependency modules
 
 ###Step 4:
+1. Define framework object in `conf/protractor-conf.js`:
+```js
+    global.ftf = require("../bower_components/factory-testing-framework");
+```
+
+###Step 4:
 1. Run `npm update` - adding dependencies
 2. Run `bower update` - adding bower dependencies
 3. Run `webdriver-manager update` - installing selenium standalone server and chromedriver
