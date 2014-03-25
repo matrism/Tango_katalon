@@ -54,13 +54,14 @@ Page.prototype.open = function(is_not_angular) {
     }
     return this;
 };
-Page.prototype.extend = function(o) {
-    o = o || {};
-    for (var i in o) {
-        this[i] = o[i];
-    }
-    return this;
-}
+//Page.prototype.extend = function(o) {
+//    o = o || {};
+//    for (var i in o) {
+//        this[i] = o[i];
+//    }
+//    return this;
+//};
+
 //Page.prototype.byNgModel = function(ng_model) {
 //    
 //};
