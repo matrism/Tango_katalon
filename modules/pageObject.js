@@ -5,6 +5,7 @@ var Page = function(o) {
     for (var i in o) {
         this[i] = o[i];
     }
+    this.index();
     return this;
 };
 
@@ -16,6 +17,26 @@ Page.prototype.url = "";
 //Page.prototype.getTitle = function() {
 //    return browser.getTitle();
 //};
+Page.prototype.index = function() {
+    var locs = this.locators,
+        elems = {}, i, loc, type;
+        
+    for(i in locs) {
+        loc = locs[i];
+        type = Object.keys(loc)[0];
+        if (type === "custom") {
+            elems[i] = loc[type]();
+        }
+        if (typeof loc[type] === "function") {
+            elems[i] = element(By[type](loc[type]()));
+        } else {
+            elems[i] = element(By[type](loc[type]));
+        }
+    }
+    
+    this.elems = elems;
+    return this;
+};
 Page.prototype.setUrl = function(url) {
     this.url = url;
 };
