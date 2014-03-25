@@ -20,3 +20,29 @@ They both allow to include private git repos as libraries to your project, but t
 * Bower doesn't have features to contribute into repo's it uses.
 
 This is the main difference and we recommend to use Bower package way to disallow QA engineers to contribute into JTF's repo.
+
+## Including Testing Framework as a bower package to your project
+
+To **add** Testing framework's Git repository as a [Bower Package](https://github.com/bower/bower) to your project add to the _bower.json_ file dependencies:
+
+    "dependencies": {
+        "factory-testing-framework": "https://github.com/wmgdsp/factory-testing-framework.git#master"
+    }
+    
+And then run `bower install` command.
+
+Installed package will be placed in a `bower_components` directory. You can change this destination using the configuration options in a `.bowerrc` file.
+
+    {
+        "directory": "bower_components"
+    }
+
+## Including Testing Framework as a git submodule to your project
+
+To **add** Testing Framework as [Git Submodule](http://git-scm.com/docs/git-submodule) use the `git submodule add` command:
+
+    $ git submodule add https://github.com/wmgdsp/factory-testing-framework.git testing-framework
+    
+Now you have the testing framework under a subdirectory named `testing-framework` within your project.
+
+When you **clone** a project with a submodule in it after `git clone` command you must run two commands: `git submodule init` to initialize your local configuration file, and `git submodule update` to fetch all the data from that project.
