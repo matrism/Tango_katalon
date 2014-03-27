@@ -124,7 +124,16 @@ var Helper = {
                 return present === true;
             });
         }, timeout);
+    },
+    
+    waitForProgressBar: function() {
+        return browser.wait(function() {
+            return pages.provisioning.elems.progress_bar.getCssValue('width').then(function(width) {
+                return width === '0px';
+            });
+        }, 1500);  
     }
+
 };
 
 module.exports = Helper;
