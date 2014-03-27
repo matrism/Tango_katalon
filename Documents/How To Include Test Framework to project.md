@@ -41,8 +41,48 @@ Installed package will be placed in a `bower_components` directory. You can chan
 
 To **add** Testing Framework as [Git Submodule](http://git-scm.com/docs/git-submodule) use the `git submodule add` command:
 
-    $ git submodule add https://github.com/wmgdsp/factory-testing-framework.git testing-framework
+    $ git submodule add git@:github.com:wmgdsp/factory-testing-framework.git js-framework
     
-Now you have the testing framework under a subdirectory named `testing-framework` within your project.
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_add_submodule.png "Add submodule")
+    
+Now you have the testing framework under a subdirectory named `js-framework` within your project. You can go into that subdirectory, make changes, fetch and merge from the original repository, and more. If you run `git status` right after you add the submodule, you see two things:
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_status.png "Git status")
+
+First you notice the `.gitmodules` file. This is a configuration file that stores the mapping between the project’s URL and the local subdirectory you’ve pulled it into:
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/gitmudules.png ".gitmodules file")
+
+The other listing in the git status output is the js-framework entry. If you run `git diff` on that, you see
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_diff.png "Giff for js-framework")
+
+You record submodule as the exact commit they’re at. You can’t record a submodule at master or some other symbolic reference.
+
+When you commit, you see something like this:
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_commit.png "Commit with js-factory")
+
+160000 mode is a special mode in Git that basically means you’re recording a commit as a directory entry rather than a subdirectory or a file.
+
+You can treat the js-framework directory as a separate project and then update your superproject from time to time with a pointer to the latest commit in that subproject. All the Git commands work independently in the two directories:
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_log.png "")
+
+You can go to `js-framework` subcategory and commit changes to `factory-testing-framework` repository
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_commit_in_submodule.png "Commit to subrepo")
+
+And than push them to the server:
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_push_submodule.png "Push changes")
+
+If you go back to the main directory and run `git status` you will see that directory `js-framework` was changed.
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_status_after_commit.png "Status")
+
+Git record submodule as the exact commit it's at. The main project records the exact commit you’re currently working off of. After commit to project repository you will see
+
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_commit_after_changes.png "Commit after changes")
 
 When you **clone** a project with a submodule in it after `git clone` command you must run two commands: `git submodule init` to initialize your local configuration file, and `git submodule update` to fetch all the data from that project.
