@@ -23,8 +23,8 @@ Matcher.ShouldContain = function(options) {
             isNot = (this.isNot) ? 'not ' : '';
 
         this.message = function() {
-            //elName + ' should ' + isNot + 'contain ' + content;
-            return options.message;
+            return elName + ' should ' + isNot + 'contain ' + content;
+            //return options.message;
         };
 
         return pass;
