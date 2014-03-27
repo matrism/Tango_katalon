@@ -51,7 +51,7 @@ Now you have the testing framework under a subdirectory named `js-framework` wit
 
 First you notice the `.gitmodules` file. This is a configuration file that stores the mapping between the project’s URL and the local subdirectory you’ve pulled it into:
 
-![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/gitmudules.png ".gitmodules file")
+![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/gitmodules.png ".gitmodules file")
 
 The other listing in the git status output is the js-framework entry. If you run `git diff` on that, you see
 
