@@ -1,13 +1,5 @@
 var Matcher = function() {};
 
-if (!String.prototype.parse) {
-    String.prototype.parse = function (params) {
-        return this.replace(/{(\d+)}/g, function (match, number) {
-            return (params[number] !== undefined) ? params[number] : match;
-        });
-    };
-}
-
 Matcher.prototype.create = function(options) {
     
     var type = options;
@@ -27,10 +19,10 @@ Matcher.prototype.create = function(options) {
 Matcher.ShouldContain = function() {
     return function(options) {
         var pass = (this.actual.indexOf(options.compare) !== -1) ? true : false,
-            isNot = (this.isNot) ? 'not ' : '';
+            isNot = (this.isNot) ? 'not' : '';
 
         this.message = function() {
-            return options.message.text.parse(options.message.params);
+            return options.message.replace('{not}', isNot);
         };
 
         return pass;
@@ -40,10 +32,10 @@ Matcher.ShouldContain = function() {
 Matcher.ShouldBePresent = function() {
     return function(options) {
         var pass = (this.actual.isPresent()) ? true : false,
-            isNot = (this.isNot) ? 'not ' : '';
+            isNot = (this.isNot) ? 'not' : '';
 
         this.message = function() {
-            return options.message.text.parse(options.message.params);
+            return options.message.replace('{not}', isNot);
         };
 
         return pass;
