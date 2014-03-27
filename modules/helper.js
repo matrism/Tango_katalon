@@ -132,6 +132,16 @@ var Helper = {
                 return width === '0px';
             });
         }, 1500);  
+    },
+    
+    waitForAjax: function() {
+        return browser.wait(function() {
+            return browser.executeScript("return $.active;").then(function(res) {
+                return res === 0;
+            }) && browser.executeScript("return angular.element([$('body')]).injector().get('$http').pendingRequests.length;").then(function(res) {
+                return res === 0;
+            });
+        }, 2000);
     }
 
 };
