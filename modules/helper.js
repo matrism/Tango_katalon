@@ -119,9 +119,9 @@ var Helper = {
     
     waitForElement: function(el, timeout) {
         timeout = timeout || 2000;
-        browser.wait(function() {
-            return el.isElementPresent().then(function(present) {
-                return present;
+        return browser.wait(function() {
+            return el.isPresent().then(function(present) {
+                return present === true;
             });
         }, timeout);
     }
