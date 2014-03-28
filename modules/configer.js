@@ -9,7 +9,7 @@ var _ = require('underscore'),
             }
             config = conf;
             configer.addParamsFromCli();
-            configer.setEnv()
+            configer.setEnv();
             return configer.prepareConf();;
         },
         addParamsFromCli: function() {
