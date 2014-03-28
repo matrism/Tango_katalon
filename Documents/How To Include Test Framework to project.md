@@ -26,16 +26,24 @@ This is the main difference and we recommend to use Bower package way to disallo
 To **add** Testing framework's Git repository as a [Bower Package](https://github.com/bower/bower) to your project add to the _bower.json_ file dependencies:
 
     "dependencies": {
-        "factory-testing-framework": "https://github.com/wmgdsp/factory-testing-framework.git#master"
+        "factory-testing-framework": "git@github.com/wmgdsp/factory-testing-framework.git#master"
     }
     
-And then run `bower install` command.
+And then run `bower install` command. This command will install `factory-testing-framework` as the package to the project.
 
 Installed package will be placed in a `bower_components` directory. You can change this destination using the configuration options in a `.bowerrc` file.
 
     {
         "directory": "bower_components"
     }
+
+Bower can't contribute code to the `factory-testing-framework.git` repository. In this case framework is used as additional package.
+
+To include installed framework in code add to the protractor configuration file its path. The path can be different. It depends on where you installed the framework.
+
+For example:
+
+    global.ftf = require("../bower_components/factory-testing-framework");
 
 ## Including Testing Framework as a git submodule to your project
 
@@ -86,3 +94,7 @@ Git record submodule as the exact commit it's at. The main project records the e
 ![alt text](https://github.com/wmgdsp/factory-testing-framework/raw/master/Documents/images/git_commit_after_changes.png "Commit after changes")
 
 When you **clone** a project with a submodule in it after `git clone` command you must run two commands: `git submodule init` to initialize your local configuration file, and `git submodule update` to fetch all the data from that project.
+
+To include installed framework in code add to the protractor configuration file its path.
+
+    global.ftf = require("../js-framework");
