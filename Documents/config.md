@@ -2,6 +2,16 @@
 
 I. Create object for config:
 ```js
+var env = {
+        /**
+         * Specify environment variables:
+         * ENV_TYPE - type of environment to use. It must be one of custom configs
+         */
+//      ENV_TYPE: "custom",
+        URL_SSO: "http://sso.devportal-qa.dspdev.wmg.com",
+        URL_DEVPORTAL: "http://security-console.devportal-ci.dspdev.wmg.com/",
+        ENV_TYPE: "custom"
+    },
     config = {
         /**
          * This part will be always in config
@@ -12,16 +22,11 @@ I. Create object for config:
             user_name: "DSP_TestUser2",
             user_password: "W@rn3rTestU$3r"    
         },
+        
         /**
-         * Specify environment variables:
-         * ENV_TYPE - type of environment to use. It must be one of custom configs
+         * Add environment variables to the config
          */
-        _env_: {
-//          ENV_TYPE: "custom",
-//          URL_SSO: "http://sso.devportal-qa.dspdev.wmg.com",
-//          URL_DEVPORTAL: "http://security-console.devportal-ci.dspdev.wmg.com/"
-            ENV_TYPE: "qa"
-        },
+        _env_: env,
         
         /**
          * Custom configs: "qa" and "custom". 
@@ -39,8 +44,8 @@ I. Create object for config:
         },
         custom: {
             urls: {
-                sso: configer.env.URL_SSO,
-                security_console: config.env.URL_DEVPORTAL
+                sso: env.URL_SSO,
+                security_console: env.URL_DEVPORTAL
             }
         }
     };
