@@ -1,4 +1,8 @@
-exports.configer = require("./modules/configer");
-exports.pageObject = require("./modules/pageObject");
-exports.matchers = require("./modules/matchers");
-exports.helper = require("./modules/helper");
+global.ftf = {
+    configer: require("./modules/configer"),
+    pageObject: require("./modules/pageObject"),
+    matchers: require("./modules/matchers"),
+    helper: require("./modules/helper")
+};
+
+exports = global.ftf;

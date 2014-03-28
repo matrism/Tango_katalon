@@ -1,5 +1,4 @@
 //var By = require('selenium-webdriver').By;
-
 var Page = function(o) {
     o = o || {};
     for (var i in o) {
@@ -9,17 +8,11 @@ var Page = function(o) {
     return this;
 };
 
-//for (var i in By) {
-//    Page.prototype["by" + i.charAt(0).toUpperCase() + i.slice(1)] = By[i];
-//}
-//
 Page.prototype.url = "";
 Page.prototype.text = "";
 Page.prototype.title = "";
 Page.prototype.html = "";
-//Page.prototype.getTitle = function() {
-//    return browser.getTitle();
-//};
+
 Page.prototype.index = function() {
     var locs = this.locators,
         elems = {}, i, loc, type;
@@ -53,11 +46,8 @@ Page.prototype.prepare = function() {
         page.html = html;
     });
 };
-Page.prototype.setUrl = function(url) {
-    this.url = url;
-};
 Page.prototype.getUrl = function() {
-    return browser.driver.getCurrentUrl();
+    return this.url;
 };
 Page.prototype.getText = function() {
     return this.text;
@@ -73,9 +63,11 @@ Page.prototype.waitUntil = function(timeout, message, promiseToBeTrue) {
         return promiseToBeTrue;
     }, timeout, message);
 };
-Page.prototype.executeScript = function(args) {
-    browser.executeScript.call(this, args);
-}
+Page.prototype.executeScript = function(code,callback) {
+    browser.executeScript(code).then(function(res) {
+        callback(res);
+    });
+};
 Page.prototype.refresh = function() {
     browser.navigate().refresh();
 };
@@ -111,19 +103,9 @@ Page.prototype.open = function(is_not_angular) {
     } else {
         browser.get(this.url);
     }
+    ftf.helper.waitForAjax();
     this.prepare();
     return this;
 };
-//Page.prototype.extend = function(o) {
-//    o = o || {};
-//    for (var i in o) {
-//        this[i] = o[i];
-//    }
-//    return this;
-//};
-
-//Page.prototype.byNgModel = function(ng_model) {
-//    
-//};
 
 module.exports = Page;
