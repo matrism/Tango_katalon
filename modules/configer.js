@@ -16,8 +16,8 @@ var _ = require('underscore'),
             var res = config._cli_args_.resolution, p, rep = config._cli_args_.reporting;
             if (!_.isEmpty(res)) {
                 p = res.split("x");
-                config._default_._system_.resolution.width = parseInt(p[0]);
-                config._default_._system_.resolution.height = parseInt(p[1]);
+                config._system_.resolution.width = parseInt(p[0]);
+                config._system_.resolution.height = parseInt(p[1]);
             }
         },
         getParamsFromCli: function() {
@@ -66,6 +66,7 @@ var _ = require('underscore'),
             var res = _.extend(config._default_, config[config._env_.ENV_TYPE]);
             res._cli = config._cli_args_;
             res._env = config._env_;
+            res._system_ = config._system_;
             return res;
         }
     };
