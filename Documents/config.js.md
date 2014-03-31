@@ -1,4 +1,4 @@
-###Config
+###conf/config.js
 
 I. Create object for config:
 ```js

@@ -19,9 +19,6 @@ var _ = require('underscore'),
                 config._default_.resolution.width = parseInt(p[0]);
                 config._default_.resolution.height = parseInt(p[1]);
             }
-            if (!_.isEmpty(rep)) {
-                config._default_.reporting = rep;
-            }
         },
         getParamsFromCli: function() {
             var splited, waiting_next = false, tmp = {}, splited_val;
