@@ -107,5 +107,8 @@ Page.prototype.open = function(is_not_angular) {
     this.prepare();
     return this;
 };
+Page.prototype.onPage = function(url, curUrl) {
+    return url.indexOf(curUrl) >= 0;
+};
 
 module.exports = Page;
