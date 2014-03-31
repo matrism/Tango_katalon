@@ -9,20 +9,50 @@ var _ = require('underscore'),
             }
             config = conf;
             configer.addParamsFromCli();
-            configer.setEnv();
+            configer.prepareResolution();
             return configer.prepareConf();;
         },
+        parseCliForCommands: function() {
+            var res = config._cli_args_.resolution, p, rep = config._cli_args_.reporting;
+            if (!_.isEmpty(res)) {
+                p = res.split("x");
+                config._default_.resolution.width = parseInt(p[0]);
+                config._default_.resolution.height = parseInt(p[1]);
+            }
+            if (!_.isEmpty(rep)) {
+                config._default_.reporting = rep;
+            }
+        },
         getParamsFromCli: function() {
-            var splited, waiting_next = false, tmp = {};
+            var splited, waiting_next = false, tmp = {}, splited_val;
             
             _.each(cli_args, function(arg) {
                 if(arg.indexOf("=") >= 0) {
                     splited = arg.split("=");
-                    tmp[splited[0].replace(/^[-=\s]*/mg, "")] = splited[1];
+                    splited_val = splited[1].split(",");
+                    if (splited_val.length < 2) {
+                        tmp[splited[0].replace(/^[-=\s]*/mg, "")] = splited[1];
+                    } else {
+                        tmp[splited[0].replace(/^[-=\s]*/mg, "")] = splited_val;
+                    }
+                    waiting_next = false;
                 } else {
                     if (waiting_next !== false) {
-                        tmp[waiting_next] = arg;
-                        waiting_next = false;
+                        
+                        //arg is val
+                        if (arg.length === arg.replace(/^[-=\s]*/mg, "").length) {
+                            splited_val = arg.split(",");
+                            if (splited_val.length < 2) {
+                                tmp[waiting_next] = arg;
+                            } else {
+                                tmp[waiting_next] = splited_val;
+                            }
+                            waiting_next = false;
+                        //arg is new key
+                        } else {
+                            tmp[waiting_next] = true;
+                            waiting_next = arg.replace(/^[-=\s]*/mg, "");
+                        }
                     } else {
                         waiting_next = arg.replace(/^[-=\s]*/mg, "");
                     }
@@ -35,16 +65,10 @@ var _ = require('underscore'),
             config._cli_args_ = configer.getParamsFromCli();
             return this;
         },
-        setEnv: function() {
-            for(var i in config._env_) {
-                configer.env[i] = config._env_[i];
-            }
-            return this;
-        },
         prepareConf: function() {
             var res = _.extend(config._default_, config[config._env_.ENV_TYPE]);
             res._cli = config._cli_args_;
-            res._env = configer.env;
+            res._env = config._env_;
             return res;
         }
     };
