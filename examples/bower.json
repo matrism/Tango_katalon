@@ -1,0 +1,25 @@
+{
+  "name": "Examples",
+  "version": "0.0.1",
+  "authors": [
+    "WMG"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "tests"
+  ],
+  "dependencies": {
+      "factory-testing-framework": "git@github.com:wmgdsp/factory-testing-framework#master"
+  }
+}
