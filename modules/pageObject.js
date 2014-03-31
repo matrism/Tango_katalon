@@ -102,8 +102,8 @@ Page.prototype.open = function(is_not_angular) {
         browser.driver.get(this.url);
     } else {
         browser.get(this.url);
+        ftf.helper.waitForAjax();
     }
-    ftf.helper.waitForAjax();
     this.prepare();
     return this;
 };

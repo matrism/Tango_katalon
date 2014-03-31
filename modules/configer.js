@@ -12,25 +12,27 @@ var _ = require('underscore'),
             configer.setEnv();
             return configer.prepareConf();;
         },
-        addParamsFromCli: function() {
-            var splited, waiting_next = false;
-
-            config._cli_args_ = {};
-
+        getParamsFromCli: function() {
+            var splited, waiting_next = false, tmp = {};
+            
             _.each(cli_args, function(arg) {
                 if(arg.indexOf("=") >= 0) {
                     splited = arg.split("=");
-                    config._cli_args_[splited[0].replace(/^[-=\s]*/mg, "")] = splited[1];
+                    tmp[splited[0].replace(/^[-=\s]*/mg, "")] = splited[1];
                 } else {
                     if (waiting_next !== false) {
-                        config._cli_args_[waiting_next] = arg;
+                        tmp[waiting_next] = arg;
                         waiting_next = false;
                     } else {
                         waiting_next = arg.replace(/^[-=\s]*/mg, "");
                     }
                 }
             });
-
+            
+            return tmp;
+        },
+        addParamsFromCli: function() {
+            config._cli_args_ = configer.getParamsFromCli();
             return this;
         },
         setEnv: function() {
