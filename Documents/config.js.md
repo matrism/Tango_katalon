@@ -2,38 +2,33 @@
 
 I. Create object for config:
 ```js
-var env = {
-        /**
-         * Specify environment variables:
-         * ENV_TYPE - type of environment to use. It must be one of custom configs
-         */
-//      ENV_TYPE: "custom",
-        URL_SSO: "http://sso.devportal-qa.dspdev.wmg.com",
-        URL_DEVPORTAL: "http://security-console.devportal-ci.dspdev.wmg.com/",
-        ENV_TYPE: "custom"
+var configer = ftf.configer,
+    cli = configer.getParamsFromCli(),
+    env = {
+        URL_SSO: cli["URL_SSO"] || "http://sso.devportal-qa.dspdev.wmg.com",
+        URL_DEVPORTAL: cli["URL_DEVPORTAL"] || "http://security-console.devportal-ci.dspdev.wmg.com/",
+        ENV_TYPE: cli["ENV_TYPE"] || "ci"
     },
     config = {
-        /**
-         * This part will be always in config
-         */
         _default_: {
             client_id: "devportal",
             client_secret: "appclientsecret",
             user_name: "DSP_TestUser2",
-            user_password: "W@rn3rTestU$3r"    
+            user_password: "W@rn3rTestU$3r",
+            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
+            resolution: {
+                width: 800,
+                height: 600
+            },
+            reporting: cli.reporting in ["html", "xml"] ? cli.reporting : "none"
         },
-        
-        /**
-         * Add environment variables to the config
-         */
         _env_: env,
-        
-        /**
-         * Custom configs: "qa" and "custom". 
-         * If you want to use "qa" settings, specify `_env_ -> ENV_TYPE` as "qa"
-         * If you want to use "custom" settings, specify `_env_ -> ENV_TYPE` as "custom"
-         *      And don't forget to specify 
-         */
+        ci: {
+            urls: {
+                sso: "http://sso.devportal-ci.dspdev.wmg.com",
+                security_console: "http://security-console.devportal-ci.dspdev.wmg.com/"
+            }
+        },
         qa: {
             urls: {
                 sso: "http://sso.devportal-qa.dspdev.wmg.com",
@@ -42,6 +37,12 @@ var env = {
             user_name: "uaa_test_user01@wmgdsp.dev",
             user_password: "No!daIN@124"
         },
+        localhost: {
+             urls: {
+                 sso: "http://sso.devportal-ci.dspdev.wmg.com",
+                 security_console:  "http://localhost:9000"
+             }
+        },
         custom: {
             urls: {
                 sso: env.URL_SSO,
@@ -49,6 +50,10 @@ var env = {
             }
         }
     };
+    config = configer.process(config);
+    
+module.exports = config;
+
 ```
 
 II. Creating config:

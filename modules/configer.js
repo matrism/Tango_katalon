@@ -9,15 +9,15 @@ var _ = require('underscore'),
             }
             config = conf;
             configer.addParamsFromCli();
-            configer.prepareResolution();
+            configer.parseCliForCommands();
             return configer.prepareConf();;
         },
         parseCliForCommands: function() {
             var res = config._cli_args_.resolution, p, rep = config._cli_args_.reporting;
             if (!_.isEmpty(res)) {
                 p = res.split("x");
-                config._default_.resolution.width = parseInt(p[0]);
-                config._default_.resolution.height = parseInt(p[1]);
+                config._system_.resolution.width = parseInt(p[0]);
+                config._system_.resolution.height = parseInt(p[1]);
             }
         },
         getParamsFromCli: function() {
