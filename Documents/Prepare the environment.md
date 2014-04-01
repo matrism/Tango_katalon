@@ -15,6 +15,9 @@ Jenkins
 11. Run `npm install -g bower` - to install bower package manager
 12. Run `npm install -g grunt` - to install grunt 
 13. Run `npm install -g grunt-protractor-runner` - to install grunt-protractor-runner package manager
+14. Download [`webdriver.ie.driver`](http://docs.seleniumhq.org/download/) to make it possible run tests on ie (only for Windows).
+Please make sure that this is available on your $PATH (or %PATH% on Windows) in order for the IE Driver to work as expected.
+(Maybe you should run next command: `java -jar path\to\selenium-server-standalone-2.40.0.jar -Dwebdriver.ie.driver="path\to\IEDriverServer.exe"`)
 
 ###Step 1a:
 1. If project doesn't have file `package.json` - run `npm init` - initiating package.json and follow all questions.

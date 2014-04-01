@@ -56,6 +56,10 @@ var _ = require('underscore'),
                 }
             });
             
+            if (waiting_next && tmp[waiting_next] == undefined) {
+                tmp[waiting_next] = true;
+            } 
+            
             return tmp;
         },
         addParamsFromCli: function() {
