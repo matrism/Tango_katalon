@@ -109,6 +109,7 @@ or
 
 You can specify your own custom cli arguments which you want to use. 
 Rules:
+
 1. Keys always have leading `--`, e.g. `--reporting` or `--browser`
 2. If there are two keys one after another, this means first cay automatically equals `true` (bool).
 E.g.: `start.sh --verbose --browser ie` will give the object `{verbose: true, browser: "ie"}`;
