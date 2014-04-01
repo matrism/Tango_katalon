@@ -7,8 +7,6 @@ global._tf_config = require("./config");
 global.pages = {};
 global.steps = {};
 
-console.log(_tf_config);
-
 exports.config = {
   seleniumAddress: "http://localhost:4444/wd/hub",
 
@@ -16,7 +14,7 @@ exports.config = {
     "browserName": _tf_config._system_.browser //firefox, ie
   },
 
-  specs: ["../tests/e2e/p*/*.js"],
+  specs: ["../tests/e2e/**/*.js"],
 
   
   onPrepare: function() {
