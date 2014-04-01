@@ -118,13 +118,13 @@ var Helper = {
         }, 1500);  
     },
     
-    waitForAjax: function() {
+    waitForAjax: function(without_angular) {
         return browser.wait(function() {
             return browser.executeScript("return $.active;").then(function(res) {
                 return res === 0;
-            }) && browser.executeScript("return angular.element([$('body')]).injector().get('$http').pendingRequests.length;").then(function(res) {
+            }) && (without_angular || browser.executeScript("return angular.element([$('body')]).injector().get('$http').pendingRequests.length;").then(function(res) {
                 return res === 0;
-            });
+            }));
         }, 2000);
     }
 

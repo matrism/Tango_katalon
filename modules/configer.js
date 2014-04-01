@@ -56,7 +56,7 @@ var _ = require('underscore'),
                 }
             });
             
-            if (waiting_next && tmp[waiting_next] == undefined) {
+            if (waiting_next && typeof tmp[waiting_next] === 'undefined') {
                 tmp[waiting_next] = true;
             } 
             
