@@ -19,6 +19,7 @@ Page.prototype.index = function() {
     for(i in locs) {
         loc = locs[i];
         type = Object.keys(loc)[0];
+        
         if (type === "custom") {
             elems[i] = loc[type]();
         } else if (type === "repeater") {

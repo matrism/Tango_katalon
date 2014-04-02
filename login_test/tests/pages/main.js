@@ -11,5 +11,3 @@ if (pages.main === undefined) {
 }
 
 module.exports = pages.main;
-
-
