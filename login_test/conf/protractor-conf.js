@@ -28,7 +28,7 @@ exports.config = {
         if (_tf_config._system_.reporting === "xml") {
             require("jasmine-reporters");
             jasmine.getEnv().addReporter(
-                new jasmine.JUnitXmlReporter("xml_reports", true, true)
+                new jasmine.JUnitXmlReporter("reports/xml", true, true)
             );
     
         }
@@ -36,7 +36,7 @@ exports.config = {
         if (_tf_config._system_.reporting === "html") {
             jasmine.getEnv().addReporter(
                 new ScreenShotReporter({
-                    baseDirectory: "screenshot_reports"
+                    baseDirectory: "reports/html"
                 })
             );
 

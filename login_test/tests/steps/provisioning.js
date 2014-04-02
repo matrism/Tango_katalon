@@ -6,7 +6,7 @@ if (steps.provisioning === undefined) {
             });
         },
         
-        itElementIsPresent: function(elName, element, isPresent){
+        itElementIsPresent: function(element, elName, isPresent){
             var isNot = (isPresent === false) ? 'not ' : '';
             it(elName + ' should ' + isNot + 'be present', function() {
                 pages.provisioning.elementIsPresent(element, elName, isPresent);
