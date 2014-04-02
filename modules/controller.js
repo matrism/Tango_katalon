@@ -28,6 +28,8 @@ var _ = require("underscore"),
             if (
                     typeof _tf_config._cli.tags === undefined
                     ||
+                    !(_tf_config._cli.tags instanceof Array)
+                    ||
                     _tf_config._cli.tags.length === 0
                     ||
                     (typeof feature.tags !== undefined
