@@ -1,6 +1,6 @@
 if (pages.main === undefined) {
     pages.main = new ftf.pageObject({
-        url: _tf_config.urls.security_console,
+        url: _tf_config.urls.app_url,
         locators: {
             start_creating: { xpath: "//a[contains(text(), 'Start Creating')]" },
             view_details: { xpath: "//a[contains(text(), 'View details')]" },

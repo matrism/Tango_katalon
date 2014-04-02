@@ -1,12 +1,13 @@
 describe("Login module", function() {
     
     var //pages
-        login_page = require("../../pages/login"),
         main_page = require("../../pages/main"),
-        provisioning_page = require("../../pages/provisioning"); 
+        provisioning_page = require("../../pages/provisioning");         
+        require("../../pages/login");
         
         // steps
         require("../../steps/login"),
+        require("../../steps/main"),
         require("../../steps/provisioning");
         
         matchers = new ftf.matchers();
@@ -22,9 +23,9 @@ describe("Login module", function() {
     describe("Login to Security Console", function() {
         steps.login.itLogin();
 
-        steps.login.itShouldBeDisabled(main_page.elems.start_provisioning, "Start Provisioning", false);
-        steps.login.itShouldBeDisabled(main_page.elems.start_creating, "Start creating", true);
-        steps.login.itShouldBeDisabled(main_page.elems.view_details, "View details", true);
+        steps.main.itShouldBeDisabled(main_page.elems.start_provisioning, "Start Provisioning", false);
+        steps.main.itShouldBeDisabled(main_page.elems.start_creating, "Start creating", true);
+        steps.main.itShouldBeDisabled(main_page.elems.view_details, "View details", true);
     });
     
     describe('Provisioning. First step', function() {

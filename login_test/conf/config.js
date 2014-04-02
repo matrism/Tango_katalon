@@ -25,13 +25,13 @@ var configer = ftf.configer,
         ci: {
             urls: {
                 sso: "http://sso.devportal-ci.dspdev.wmg.com",
-                security_console: "http://security-console.devportal-ci.dspdev.wmg.com/"
+                app_url: "http://security-console.devportal-ci.dspdev.wmg.com/"
             }
         },
         qa: {
             urls: {
                 sso: "http://sso.devportal-qa.dspdev.wmg.com",
-                security_console: "http://security-console.devportal-qa.dspdev.wmg.com/"
+                app_url: "http://security-console.devportal-qa.dspdev.wmg.com/"
             },
             user_name: "uaa_test_user01@wmgdsp.dev",
             user_password: "No!daIN@124"
@@ -39,13 +39,13 @@ var configer = ftf.configer,
         localhost: {
              urls: {
                  sso: "http://sso.devportal-ci.dspdev.wmg.com",
-                 security_console:  "http://localhost:9000"
+                 app_url:  "http://localhost:9000"
              }
         },
         custom: {
             urls: {
                 sso: env.URL_SSO,
-                security_console: env.URL_DEVPORTAL
+                app_url: env.URL_DEVPORTAL
             }
         }
     };
