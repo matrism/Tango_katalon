@@ -3,7 +3,8 @@ global.ftf = ftf = {
     pageObject: require("./modules/pageObject"),
     matchers: require("./modules/matchers"),
     helper: require("./modules/helper"),
-    loginPage: require("./pages/login")
+    loginPage: require("./pages/login"),
+    controller: require("./modules/controller")
 };
 
 module.exports = global.ftf;

@@ -120,7 +120,7 @@ var Helper = {
     
     waitForAjax: function(without_angular) {
         return browser.wait(function() {
-            return browser.executeScript("return $.active;").then(function(res) {
+            return browser.executeScript("return (typeof $ === 'undefined' ? 0 : $.active);").then(function(res) {
                 return res === 0;
             }) && (without_angular || browser.executeScript("return angular.element([$('body')]).injector().get('$http').pendingRequests.length;").then(function(res) {
                 return res === 0;

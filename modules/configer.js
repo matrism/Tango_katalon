@@ -20,6 +20,9 @@ var _ = require('underscore'),
                 config._system_.resolution.height = parseInt(p[1]);
             }
         },
+        getEnvVarByKey: function(key) {
+            return configer.env[key];
+        },
         getParamsFromCli: function() {
             var splited, waiting_next = false, tmp = {}, splited_val;
             
