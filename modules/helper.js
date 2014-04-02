@@ -1,5 +1,4 @@
 var Helper = {
-    
     checkAttributeOfElementContainsValue: function(elem, attr_name, value) {
         elem.getAttribute(attr_name).then(function(attr) {
             expect(attr).toContain(value);
@@ -79,7 +78,10 @@ var Helper = {
         
         expect(elements.count()).toEqual(actual_array.length);
     },
+    
     /**
+     * From here: https://github.com/angular/protractor/issues/610#issuecomment-37917269
+     * 
      * @name waitForUrlToChangeTo
      * @description Wait until the URL changes to match a provided regex
      * @param {RegExp} urlRegex wait until the URL changes to match this regex
@@ -112,8 +114,8 @@ var Helper = {
     
     waitForProgressBar: function() {
         return browser.wait(function() {
-            return pages.provisioning.elems.progress_bar.getCssValue('width').then(function(width) {
-                return width === '0px';
+            return pages.provisioning.elems.progress_bar.getCssValue("width").then(function(width) {
+                return width === "0px";
             });
         }, 1500);  
     },
@@ -127,7 +129,6 @@ var Helper = {
             }));
         }, 2000);
     }
-
 };
 
 module.exports = Helper;

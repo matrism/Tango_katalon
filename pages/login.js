@@ -1,8 +1,7 @@
 var PageObject = require("../modules/pageObject");
     
 var loginPage = function(_tf_config) {
-    this.base = PageObject;
-    this.base({
+    return new PageObject({
         url: _tf_config.urls.app_url,
         locators: {
             username: { css: "#username" },
@@ -30,9 +29,9 @@ var loginPage = function(_tf_config) {
             return this;
         },
         shouldWeLogin: function() {
-            return pages.login.elems.password.getAttribute('value').then(function(text) {
+            return pages.login.elems.password.getAttribute("value").then(function(text) {
                 return text === _tf_config.user_password;
-            }) && pages.login.elems.username.getAttribute('value').then(function(text) {
+            }) && pages.login.elems.username.getAttribute("value").then(function(text) {
                 return text === _tf_config.user_name;
             });
         },
@@ -50,7 +49,5 @@ var loginPage = function(_tf_config) {
         }
     });
 };
-
-loginPage.prototype = new PageObject;
 
 module.exports = loginPage;

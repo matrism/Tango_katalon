@@ -1,10 +1,10 @@
-var _ = require('underscore'),
+var _ = require("underscore"),
     cli_args = process.argv.slice(3),
     config = {},
     configer = {
         env: process.env,
         process: function(conf) {
-            if (!(conf instanceof Object) || typeof conf._default_ == "undefined") {
+            if (!(conf instanceof Object) || typeof conf._default_ === "undefined") {
                 throw (new Error("Incorrect config object was sent to config instancer"));
             }
             config = conf;
@@ -41,9 +41,8 @@ var _ = require('underscore'),
                     waiting_next = false;
                 } else {
                     if (waiting_next !== false) {
-                        
-                        //arg is val
                         if (arg.length === arg.replace(/^[-=\s]*/mg, "").length) {
+                            //arg is val
                             splited_val = arg.split(",");
                             if (splited_val.length < 2) {
                                 tmp[waiting_next] = arg;
@@ -51,8 +50,8 @@ var _ = require('underscore'),
                                 tmp[waiting_next] = splited_val;
                             }
                             waiting_next = false;
-                        //arg is new key
                         } else {
+                            //arg is new key
                             tmp[waiting_next] = true;
                             waiting_next = arg.replace(/^[-=\s]*/mg, "");
                         }
@@ -62,10 +61,9 @@ var _ = require('underscore'),
                 }
             });
             
-            if (waiting_next && typeof tmp[waiting_next] === 'undefined') {
+            if (waiting_next && typeof tmp[waiting_next] === "undefined") {
                 tmp[waiting_next] = true;
             } 
-            
             return tmp;
         },
         addParamsFromCli: function() {

@@ -1,4 +1,3 @@
-//var By = require('selenium-webdriver').By;
 var Page = function(o) {
     o = o || {};
     for (var i in o) {
@@ -83,13 +82,11 @@ Page.prototype.clearCookies = function() {
 Page.prototype.saveScreen = function(name) {
     name = name || "screen";
     browser.takeScreenshot().then(function(png) {
-        var fs = require('fs'),
+        var fs = require("fs"),
             date = new Date(),
-            newdate = date.getDate() + '_' + date.getMonth() + '_' + date.getFullYear() + "-" + date.getHours() + "_" + date.getMinutes() + "_" + date.getSeconds(),
+            newdate = date.getDate() + "_" + date.getMonth() + "_" + date.getFullYear() + "-" + date.getHours() + "_" + date.getMinutes() + "_" + date.getSeconds(),
             filename = "screens/" + name + "_" + newdate + ".png",
             stream = fs.createWriteStream(filename);
-
-        console.log("stream", stream)
 
         stream.write(new Buffer(png, "base64"));
         stream.end();
