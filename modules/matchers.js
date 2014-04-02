@@ -24,20 +24,20 @@ Matcher.prototype.match = function(){
         this.message = function() {
             return options.message.replace("{not}", isNot);
         };
-        return pass;
+        return pass.apply(this, [this.actual, options]);
     };
 };
 
 Matcher.ShouldContain = function() {
-    this.pass = function(){
-        return (this.actual.indexOf(options.compare) !== -1) ? true : false;
+    this.pass = function(actual, options){
+        return (actual.indexOf(options.compare) !== -1) ? true : false;
     };
     return this.match();
 };
 
 Matcher.ShouldBePresent = function() {
-    this.pass = function(){
-        return (this.actual.isPresent()) ? true : false;
+    this.pass = function(actual){
+        return (actual.isPresent()) ? true : false;
     };
     return this.match();
 };
