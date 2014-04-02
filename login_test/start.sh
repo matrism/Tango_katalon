@@ -1,0 +1,1 @@
+protractor conf/protractor-conf.js --verbose $@

@@ -3,7 +3,7 @@ var PageObject = require("../modules/pageObject");
 var loginPage = function(_tf_config) {
     this.base = PageObject;
     this.base({
-        url: _tf_config.urls.security_console,
+        url: _tf_config.urls.app_url,
         locators: {
             username: { css: "#username" },
             password: { css: "#password" },
@@ -16,7 +16,7 @@ var loginPage = function(_tf_config) {
         },
         setPassword: function(password) {
             pages.login.elems.password.clear();
-            pages.login.elems.password.sendKeys(password)
+            pages.login.elems.password.sendKeys(password);
             return this;
         },
         doLogin: function() {

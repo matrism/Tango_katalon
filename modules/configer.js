@@ -19,6 +19,9 @@ var _ = require('underscore'),
                 config._system_.resolution.width = parseInt(p[0]);
                 config._system_.resolution.height = parseInt(p[1]);
             }
+            if (!_.isEmpty(rep)) {
+                config._system_.reporting = rep;
+            }
         },
         getEnvVarByKey: function(key) {
             return configer.env[key];
