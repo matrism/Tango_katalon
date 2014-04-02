@@ -136,6 +136,31 @@ describe("your description", function() {
 
 * `page_obj.index()` - method takes all locators of page object and creates elements for them in `elems` property. Can be used for dynamic reindex of locators if any is added dynamicly. This method is always called in constructor.
 * `page_obj.prepare()` - method takes care of initializing all properties, such as text, html, title, which can be accessed through appropriate methods. It is called each time after navigating to necessary page.
+* `page_obj.setUrl(url)` - method sets static url of the page and makes method `page_obj.open()` to use static url.
+* `page_obj.setDynamicUrl(template, args)` - method sets template of dynamic url and args to compile url for `page_obj.open()` method and makes `page_obj.open()` to use compiled dynamic url. 
+
+Example
+
+template: `http://www.my_url.com/?id={1}&name={2}&dir={3}&higlight={2}`
+
+args: `[34, "Anna", "ASC"]`
+
+resulting url: `http://www.my_url.com/?id=34&name=Anna&dir=ASC&higlight=Anna`
+
+* `page_obj.setDynamicUrlTemplate(template)` - method sets only template part of dynamic url
+* `page_obj.setDynamicUrlArgs(args)` - method sets only args part of dynamic_url
+* `page_obj.makeUrlStatic()` - method makes `page_obj.open` to use static url.
+* `page_obj.makeUrlDynamic()` - method makes `page_obj.open()` to use compiled dynamic url. 
+* `page_obj.prepareUrl()` - method returns url that is used for `page_obj.open()`. It returns static or compiled dynamic url depending on which of next methods was called last: `page_obj.makeUrlStatic()`, `page_obj.makeUrlDynamic()`,  `page_obj.setUrl(url)`, `page_obj.setDynamicUrl(template, args)`. If noone was called, it looks if dynamic or static url data is set and makse its decision. If set both, dynamic url has priority.
+* `page_obj.getDynamicUrlData()` - method returns raw dynamic url data - next obj structure:
+
+```js
+{
+    template: "%string%",
+    args: [%array%]
+}
+```
+
 * `page_obj.getUrl()` - method returns the url you provided to pageObject factory and that is used for navigating to page. Note: if you want to get actual url of browser, you should use 
 
 ```js
