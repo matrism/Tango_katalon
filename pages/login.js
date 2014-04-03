@@ -42,10 +42,7 @@ var loginPage = function(_tf_config) {
                     pages.login.doLogin();
                 } 
             });
-            
-            browser.getTitle().then(function(title) {
-                expect(title).toEqual(_tf_config.title);
-            });
+            expect(element(By.xpath("//span[contains(text(), " + _tf_config.user_name + ")]")).isPresent()).toBe(true);
         }
     });
 };

@@ -28,11 +28,9 @@ We can say that current structure of code makes impossible extending it with sim
 
 ```js
 require("../steps/main");
-require("../steps/provisioning");
 
 var main_page = require("../pages/main"),
     login_page = require("../pages/login"),
-    provision_page = require("../pages/provisioning"),
     feature = [{
         name: "Verify that Dashboard's Provisioning section is enabled",
         tags: ["wip", "@CD-168"],
