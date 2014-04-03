@@ -86,19 +86,21 @@ Page.prototype.makeUrlDynamic = function() {
 };
 Page.prototype.prepareUrl = function() {
     var arg, 
+        _split_,
         _url_ = this._url.template, 
-        args = this._url.args;
+        args = this._url.args,
+        i = 0, max = args.length;
     
     if (!this.dynamic_url) {
         return this.url;
     }
-    
-    for (var i in args) {
+    for ( ;i < max; i++) {
         arg = args[i];
-        _url_.split("{"+i+"}").join(arg);
+        _split_ = new Array("{",i+1,"}").join("");
+        _url_ = _url_.split(_split_).join(arg);
     }
     return _url_;
-}
+};
 Page.prototype.getUrl = function() {
     return this.url;
 };
