@@ -39,11 +39,7 @@ var main_page = require("../pages/main"),
         beforeEach: login_page.login,
         steps: [{
             fn: steps.main.itButtonShouldBeDisabled,
-            args: [
-                main_page.elems.start_provisioning, 
-                "Start Provisioning", 
-                false
-            ]
+            args: [main_page.elems.start_provisioning, "Start Provisioning", false]
         }]
     },{
         name: "Verify that Dashboard's Creation and Management sections are disabled",
