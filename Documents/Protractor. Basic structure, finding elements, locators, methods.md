@@ -12,17 +12,15 @@ To actually implement tests, we’ll use the same expect() syntax that Jasmine g
     var util = require('util');
 
     describe('Adjunct List', function () {
-        var ptor;
-
         beforeEach(function () {
-            ptor = protractor.getInstance();
-            ptor.get('#/');
+            browser.get('#/');
         });
 
         it('should do something', function () {
-            ptor = protractor.getInstance();
-            ptor.findElement(protractor.By.className('brand')).click();
-            expect(ptor.getCurrentUrl()).toContain('#/');
+            element(By.className('brand')).click();
+            browser.getCurrentUrl().then(function(url) {
+                expect(url).toContain('#/');
+            });
         }, 10000);
     });
 
