@@ -9,15 +9,14 @@ var configer = ftf.configer,
         _default_: {
             client_id: "devportal",
             client_secret: "appclientsecret",
-            user_name: "DSP_TestUser2",
-            title: "Security-console",
-            user_password: "W@rn3rTestU$3r"
+            user_name: configer.getEnvVarByKey("USER_NAME") || "DSP_TestUser2",
+            user_password: configer.getEnvVarByKey("USER_PASSWORD") || "W@rn3rTestU$3r"
         },
         _system_: {
             browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
             resolution: {
-                width: 800,
-                height: 600
+                width: 1200,
+                height: 1000
             },
             reporting: cli.reporting in ["html", "xml"] ? cli.reporting : "none"
         },
