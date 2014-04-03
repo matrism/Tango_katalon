@@ -5,9 +5,15 @@ var Page = function(o) {
     }
     this.index();
     return this;
-};
+},
+_ = require("underscore");
 
 Page.prototype.url = "";
+Page.prototype._url = {
+    template: "",
+    args: []
+};
+Page.prototype.dynamic_url = false;
 Page.prototype.text = "";
 Page.prototype.title = "";
 Page.prototype.html = "";
@@ -19,6 +25,7 @@ Page.prototype.index = function() {
     for(i in locs) {
         loc = locs[i];
         type = Object.keys(loc)[0];
+        
         if (type === "custom") {
             elems[i] = loc[type]();
         } else if (type === "repeater") {
@@ -44,9 +51,59 @@ Page.prototype.prepare = function() {
     element(By.tagName("body")).getInnerHtml().then(function(html) {
         page.html = html;
     });
+    if (this._url.template === "" || this._url.args.length < 1) {
+        this.dynamic_url = true;
+    } else {
+        this.dynamic_url = false;
+    }
 };
+Page.prototype.setUrl = function(url) {
+    this.url = url;
+    this.dynamic_url = false;
+    return this;
+};
+Page.prototype.setDynamicUrl = function(template, args) {
+    this.dynamic_url = true;
+    this._url.template = template;
+    this._url.args = _.clone(args);
+    return this;
+};
+Page.prototype.setDynamicUrlTemplate = function(template) {
+    this._url.template = template;
+    return this;
+};
+Page.prototype.setDynamicUrlArgs = function(args) {
+    this._url.args = _.clone(args);
+    return this;
+};
+Page.prototype.makeUrlStatic = function() {
+    this.dynamic_url = false;
+    return this;
+};
+Page.prototype.makeUrlDynamic = function() {
+    this.dynamic_url = true;
+    return this;
+};
+Page.prototype.prepareUrl = function() {
+    var arg, 
+        _url_ = this._url.template, 
+        args = this._url.args;
+    
+    if (!this.dynamic_url) {
+        return this.url;
+    }
+    
+    for (var i in args) {
+        arg = args[i];
+        _url_.split("{"+i+"}").join(arg);
+    }
+    return _url_;
+}
 Page.prototype.getUrl = function() {
     return this.url;
+};
+Page.prototype.getDynamicUrlData = function() {
+    return this._url;
 };
 Page.prototype.getText = function() {
     return this.text;
@@ -96,9 +153,9 @@ Page.prototype.open = function(is_not_angular) {
     is_not_angular = is_not_angular || false;
     if (is_not_angular) {
         browser.ignoreSynchronization = true;
-        browser.driver.get(this.url);
+        browser.driver.get(this.prepareUrl());
     } else {
-        browser.get(this.url);
+        browser.get(this.prepareUrl());
     }
     ftf.helper.waitForAjax(is_not_angular);
     this.prepare();

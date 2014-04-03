@@ -20,5 +20,3 @@ if (steps.main === undefined) {
 }
 
 module.exports = steps.main;
-
-
