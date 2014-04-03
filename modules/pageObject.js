@@ -52,9 +52,9 @@ Page.prototype.prepare = function() {
         page.html = html;
     });
     if (this._url.template === "" || this._url.args.length < 1) {
-        this.dynamic_url = true;
-    } else {
         this.dynamic_url = false;
+    } else {
+        this.dynamic_url = true;
     }
 };
 Page.prototype.setUrl = function(url) {
@@ -157,7 +157,7 @@ Page.prototype.open = function(is_not_angular) {
     } else {
         browser.get(this.prepareUrl());
     }
-    ftf.helper.waitForAjax(is_not_angular);
+    ftf.helper.waitForDocumentToLoad();
     this.prepare();
     return this;
 };

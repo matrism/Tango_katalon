@@ -112,22 +112,21 @@ var Helper = {
         }, timeout);
     },
     
-    waitForProgressBar: function() {
+    waitForProgressBar: function(timeout) {
+        timeout = timeout || 2000;
         return browser.wait(function() {
             return pages.provisioning.elems.progress_bar.getCssValue("width").then(function(width) {
                 return width === "0px";
             });
-        }, 1500);  
+        }, timeout);  
     },
     
-    waitForAjax: function(without_angular) {
+    waitForDocumentToLoad: function() {
         return browser.wait(function() {
-            return browser.executeScript("return (typeof $ === 'undefined' ? 0 : $.active);").then(function(res) {
-                return res === 0;
-            }) && (without_angular || browser.executeScript("return angular.element([$('body')]).injector().get('$http').pendingRequests.length;").then(function(res) {
-                return res === 0;
-            }));
-        }, 2000);
+            return browser.executeScript("return document.readyState === 'complete';").then(function(res) {
+                return res === true;
+            });
+        });
     }
 };
 
