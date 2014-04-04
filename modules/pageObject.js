@@ -37,6 +37,12 @@ Page.prototype.index = function() {
         }
     }
     
+    if (this._url.template === "" || this._url.args.length < 1) {
+        this.dynamic_url = false;
+    } else {
+        this.dynamic_url = true;
+    }
+    
     this.elems = elems;
     return this;
 };
@@ -51,11 +57,6 @@ Page.prototype.prepare = function() {
     element(By.tagName("body")).getInnerHtml().then(function(html) {
         page.html = html;
     });
-    if (this._url.template === "" || this._url.args.length < 1) {
-        this.dynamic_url = false;
-    } else {
-        this.dynamic_url = true;
-    }
 };
 Page.prototype.setUrl = function(url) {
     this.url = url;
@@ -99,6 +100,7 @@ Page.prototype.prepareUrl = function() {
         _split_ = new Array("{",i+1,"}").join("");
         _url_ = _url_.split(_split_).join(arg);
     }
+    console.log("_url_", _url_);
     return _url_;
 };
 Page.prototype.getUrl = function() {
