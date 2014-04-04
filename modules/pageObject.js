@@ -118,11 +118,6 @@ Page.prototype.getTitle = function() {
 Page.prototype.getHtml = function() {
     return this.html;
 };
-Page.prototype.waitUntil = function(timeout, message, promiseToBeTrue) {
-    browser.wait(function() {
-        return promiseToBeTrue;
-    }, timeout, message);
-};
 Page.prototype.executeScript = function(code,callback) {
     browser.executeScript(code).then(function(res) {
         callback(res);
@@ -164,9 +159,6 @@ Page.prototype.open = function(is_not_angular) {
     ftf.helper.waitForDocumentToLoad();
     this.prepare();
     return this;
-};
-Page.prototype.onPage = function(url, curUrl) {
-    return url.indexOf(curUrl) >= 0;
 };
 
 module.exports = Page;
