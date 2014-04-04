@@ -241,7 +241,7 @@ WebElement Methods
 Mouse events
 -----------
 
-For simulation mouse events you can use an action sequence:
+For simulation mouse events you can use action sequences:
 
 * hovering
 
