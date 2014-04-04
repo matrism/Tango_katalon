@@ -100,7 +100,6 @@ Page.prototype.prepareUrl = function() {
         _split_ = new Array("{",i+1,"}").join("");
         _url_ = _url_.split(_split_).join(arg);
     }
-    console.log("_url_", _url_);
     return _url_;
 };
 Page.prototype.getUrl = function() {
