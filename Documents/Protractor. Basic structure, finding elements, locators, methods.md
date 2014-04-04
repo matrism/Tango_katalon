@@ -237,3 +237,24 @@ WebElement Methods
 `isSelected()` - Determine whether or not this element is selected or not.
 
 `sendKeys(keysToSend)` - Use this method to simulate typing into an element, which may set its value.
+
+Mouse events
+-----------
+
+For simulation mouse events you can use an action sequence:
+
+* hovering
+
+        browser.actions().mouseMove(element).perform();
+
+* mousedown
+
+        browser.actions().mouseDown(element).perform();
+        
+* mouseup
+
+        browser.actions().mouseUp().perform();
+
+*Example*:
+    
+        browser.actions().mouseMove(element(By.css("#element-id")).find()).perform();
