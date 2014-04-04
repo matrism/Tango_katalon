@@ -12,17 +12,15 @@ To actually implement tests, we’ll use the same expect() syntax that Jasmine g
     var util = require('util');
 
     describe('Adjunct List', function () {
-        var ptor;
-
         beforeEach(function () {
-            ptor = protractor.getInstance();
-            ptor.get('#/');
+            browser.get('#/');
         });
 
         it('should do something', function () {
-            ptor = protractor.getInstance();
-            ptor.findElement(protractor.By.className('brand')).click();
-            expect(ptor.getCurrentUrl()).toContain('#/');
+            element(By.className('brand')).click();
+            browser.getCurrentUrl().then(function(url) {
+                expect(url).toContain('#/');
+            });
         }, 10000);
     });
 
@@ -239,3 +237,24 @@ WebElement Methods
 `isSelected()` - Determine whether or not this element is selected or not.
 
 `sendKeys(keysToSend)` - Use this method to simulate typing into an element, which may set its value.
+
+Mouse events
+-----------
+
+For simulation mouse events you can use action sequences:
+
+* hovering
+
+        browser.actions().mouseMove(element).perform();
+
+* mousedown
+
+        browser.actions().mouseDown(element).perform();
+        
+* mouseup
+
+        browser.actions().mouseUp().perform();
+
+*Example*:
+    
+        browser.actions().mouseMove(element(By.css("#element-id")).find()).perform();
