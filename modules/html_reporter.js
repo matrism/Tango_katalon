@@ -143,7 +143,7 @@ function reportSpecResults(spec) {
 
             metaData.screenShotFile = screenShotFile;
             
-            console.log("metaData", metaData);
+//            console.log("metaData", metaData);
             
             mkdirp(directory, function(err) {
                 if(err) {
