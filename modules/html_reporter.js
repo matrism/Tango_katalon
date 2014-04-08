@@ -61,7 +61,7 @@ function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
         metaData.message = message;
         metaData.trace = trace;
     } else {
-        metaData.message = metaData.passed ? "Passed." : "Failed.";
+        metaData.message = metaData.passed ? "Passed." : (metaData.skipped ? "Skipped." : "Failed.");
         metaData.trace = "";
     }
 
