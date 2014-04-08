@@ -36,8 +36,6 @@ function generateHTML(data) {
     var str,
         bgColor;
 
-    
-    
     str = '<tr>';
     str +=     '<td>' + data.description + '</td>';
     
@@ -46,7 +44,7 @@ function generateHTML(data) {
     str +=     '<td style="color:#fff;background-color: '+ bgColor+'">' + data.passed + '</td>';
     str +=     '<td>' + data.browser.name+ ':' +data.browser.version + '</td>';
     str +=     '<td>' + data.os + '</td>';
-    str +=     '<td>' + data.message+ '</td>';
+    str +=     '<td>' + (/*(typeof data.message === "undefined" && data.passed) ? "Passed." :*/ data.message) + '</td>';
 
     str +=     '<td><a href="#" onclick="openModal(\'' + path.basename(data.screenShotFile)+ '\')">View </a></td>';
     str += '</tr>';

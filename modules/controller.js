@@ -2,6 +2,7 @@ var _ = require("underscore"),
     feature,
     step,
     args,
+    fn,
     controller = {
         process: function() {
             if (!(_tf_config._cli.tags instanceof Array) && _.isString(_tf_config._cli.tags)) {
@@ -44,8 +45,11 @@ var _ = require("underscore"),
                     }
                     for (var i in feature.steps) {
                         step = feature.steps[i];
-                        args = step.args || [];
-                        step.fn.apply(null, args);
+//                        args = step.args || [];
+//                        step.fn.apply(null, args);
+                        args = step[1] || [];
+                        fn = step[0];
+                        fn.apply(null, args);
                     }
                     if (typeof feature.afterEach !== "undefined") {
                         afterEach(feature.afterEach);

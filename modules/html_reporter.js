@@ -48,12 +48,21 @@ function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
             name: capabilities.caps_.browserName,
             version: capabilities.caps_.version
         }
-    };
+    }, i = 0, max = results.items_.length, message, trace, item;
 
-    if(results.items_.length > 0) {
-        var result = results.items_[0];
-        metaData.message = result.message;
-        metaData.trace = result.trace.stack;
+    if(max > 0) {
+        for (; i < max; i++) {
+            item = results.items_[i];
+            if (item.passed_ === metaData.passed) {
+                message = item.message;
+                trace = item.trace.stack;
+            }
+        }
+        metaData.message = message;
+        metaData.trace = trace;
+    } else {
+        metaData.message = metaData.passed ? "Passed." : "Failed.";
+        metaData.trace = "";
     }
 
     return metaData;
@@ -142,8 +151,6 @@ function reportSpecResults(spec) {
                 directory = path.dirname(screenShotPath);
 
             metaData.screenShotFile = screenShotFile;
-            
-//            console.log("metaData", metaData);
             
             mkdirp(directory, function(err) {
                 if(err) {
