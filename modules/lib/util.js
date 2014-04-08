@@ -39,7 +39,7 @@ function generateHTML(data) {
     str = '<tr>';
     str +=     '<td>' + data.description + '</td>';
     
-    bgColor = data.passed? 'green': 'red';
+    bgColor = data.passed? 'green': (data.skipped ? 'blue' : 'red');
     
     str +=     '<td style="color:#fff;background-color: '+ bgColor+'">' + data.passed + '</td>';
     str +=     '<td>' + data.browser.name+ ':' +data.browser.version + '</td>';

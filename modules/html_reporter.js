@@ -43,6 +43,7 @@ function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
     var metaData = {
         description: descriptions.join(' '), 
         passed: results.passed(), 
+        skipped: results.skipped,
         os: capabilities.caps_.platform, 
         browser: {
             name: capabilities.caps_.browserName,
