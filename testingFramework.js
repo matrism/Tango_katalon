@@ -4,8 +4,7 @@ global.ftf = ftf = {
     matchers: require("./modules/matchers"),
     helper: require("./modules/helper"),
     loginPage: require("./pages/login"),
-    controller: require("./modules/controller"),
-    htmlReporter: require("./modules/html_reporter")
+    controller: require("./modules/controller")
 };
 
 module.exports = global.ftf;

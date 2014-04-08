@@ -29,8 +29,7 @@ Page.prototype.index = function() {
         if (type === "custom") {
             elems[i] = loc[type]();
         } else if (type === "repeater") {
-            elems[i] = element(By[type](loc[type]));
-            elems[i]._all = element.all(By[type](loc[type]));
+            elems[i] = element.all(By[type](loc[type]));
         } else if (typeof loc[type] === "function") {
             elems[i] = element(By[type](loc[type]()));
         } else {
