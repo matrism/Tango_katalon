@@ -147,6 +147,24 @@ Page.prototype.saveScreen = function(name) {
         stream.end();
     });
 };
+Page.prototype.waitForAjax = function() {
+    return browser.wait(function() {
+        browser.sleep(300);
+        return browser.executeScript("return typeof $ === 'undefined' ? 0 : $.active").then(function(res) {
+            return res == 0;
+        }) && browser.executeScript("return typeof angular === 'undefined' ? 0 : angular.element([$('body')]).injector().get('$http').pendingRequests.length").then(function(res) {
+            return res == 0;
+        });
+    }, _tf_config._system_.wait_timeout);
+};
+Page.prototype.waitForAngular = function() {
+    return browser.wait(function() {
+        browser.sleep(300);
+        return browser.executeScript("return angular.element([$('body')]).injector().get('$http').pendingRequests.length").then(function(res) {
+            return res == 0;
+        });
+    }, _tf_config._system_.wait_timeout);
+};
 Page.prototype.open = function(is_not_angular) {
     is_not_angular = is_not_angular || false;
     if (is_not_angular) {
@@ -155,7 +173,6 @@ Page.prototype.open = function(is_not_angular) {
     } else {
         browser.get(this.prepareUrl());
     }
-    ftf.helper.waitForDocumentToLoad();
     this.prepare();
     return this;
 };

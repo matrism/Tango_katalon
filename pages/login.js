@@ -36,7 +36,7 @@ var loginPage = function(_tf_config) {
             });
         },
         login: function() {
-            pages.login.open(true);
+            pages.login.open(true).waitForAjax();
             pages.login.elems.username.isPresent().then(function(present) {
                 if (present) {
                     pages.login.doLogin();
