@@ -104,7 +104,7 @@ var Helper = {
     },
     
     waitForElement: function(el, timeout) {
-        timeout = timeout || 2000;
+        timeout = timeout || _tf_config._system_.wait_timeout || 5000;
         return browser.wait(function() {
             return el.isPresent().then(function(present) {
                 return present === true;

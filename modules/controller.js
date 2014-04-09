@@ -14,14 +14,14 @@ var _ = require("underscore"),
             controller.readFeatures(_tf_config._system_.path_to_features);
         },
         prepareFeatures: function(feature, feature_name) {
-            var background = feature.background || function(){},
-                foreground = feature.foreground || function(){},
+            var beforeFeature = feature.beforeFeature,
+                afterFeature = feature.afterFeature,
                 features = feature.feature;
             
             if (!(features instanceof Array)) {
                 features = [features];
             }
-            controller.processArrayFeatures(features, feature_name, background, foreground);
+            controller.processArrayFeatures(features, feature_name, beforeFeature, afterFeature);
         },
         stringUCFirst: function(str) {
             return str.charAt(0).toUpperCase() + str.substr(1, str.length-1);
@@ -38,17 +38,21 @@ var _ = require("underscore"),
                 controller.prepareFeatures(feature, controller.stringUCFirst(files[i]));
             };
         },
-        processArrayFeatures: function(features, feature_name, background, foreground) {
-            return describe(feature_name, function() {
-                if (typeof background !== "undefined") {
-                    beforeEach(background);
-                }
+        processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature) {
+            describe(feature_name, function() {
                 for (var i in features) {
+                    if (typeof beforeFeature !== "undefined") {
+                        it("\n\tBefore feature", function() {
+                            beforeFeature();
+                        });
+                    }
                     controller.processFeature(features[i]);
+                    if (typeof afterFeature !== "undefined") {
+                        it("After feature\n", function() {
+                            afterFeature();
+                        });
+                    }
                 } 
-                if (typeof foreground !== "undefined") {
-                    afterEach(foreground);
-                }
             });
         },
         processFeature: function(feature) {
