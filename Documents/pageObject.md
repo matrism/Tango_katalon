@@ -183,5 +183,5 @@ browser.getCurrentUrl().then(function(url) {
 * `page_obj.waitForAngular()` - method looks into angular's `$http.pendingRequests` and wait for it to become empty.
 * `page_obj.waitForProgressBar()` - custom wait method for WMG applications which wait ProgressBar to finish loading.
 * `page_obj.waitForDocumentToLoad()` - method waits for `document.readyState` to become `"complete"`.
-* `page_obj.waitForUrlToChangeTo(regex)` - method waits until the URL changes to match a provided regex. regex - 
+* `page_obj.waitForUrlToChangeTo(regex)` - method waits until the URL changes to match a provided regex.
 * `page_obj.open()` - method navigates browser to page url.
