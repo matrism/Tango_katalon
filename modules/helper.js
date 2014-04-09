@@ -6,62 +6,51 @@ var Helper = {
             expect(attr).toContain(value);
         });
     },
-        
+    
     clickOnOneEqual: function(elements, item) {
-        elements._all.each(function(elem) {
+        var findEl;
+        elements._all.map(function(elem) {
             elem.getText().then(function(text) {
                 if (text === item) {
-                    elem.click();
+                    findEl = elem;
                 }
             });
+        }).then(function(){
+            findEl.click();
         });
     },
     
     clickOnOneInclude: function(elements, item) {
-        elements._all.each(function(elem) {
+        var findEl;
+        elements._all.map(function(elem) {
             elem.getText().then(function(text) {
                 if (text.indexOf(item) >= 0) {
-                    elem.click();
+                    findEl = elem;
                 }
             });
+        }).then(function(){
+            findEl.click();
         });
     },
     
     clickOnSame: function(elements, item, time) {
-        var i = 0;
-        elements._all.each(function(elem) {
+        var i = 0,
+            findEl;
+        elements._all.map(function(elem) {
             elem.getText().then(function(text) {
                 if (text.indexOf(item) >= 0) {
                     i++;
                 }
                 if (i === time) {
-                    elem.click();
+                    findEl = elem;
                 }
             });
+        }).then(function(){
+            findEl.click();
         });
     },
     
-    returnOneOfMany: function(elements, item) {
-        var flag = false;
-        
-        elements._all.each(function(elem) {
-            elem.getText().then(function(text) {
-                if (text === item) {
-                    flag = true;
-                }
-            });
-        });
-        
-        browser.wait(function() {
-            return flag;
-        }, 1500);
-        
-        if (!flag) {
-            throw (new Error("Cannot find item " + item + " in the list"))
-        }
-    },
-    
-    shouldBeOne: function(elements, item, should) {
+    _shouldBeAmoungElements: function(elements, item, should) {
         var countAll,
             counter = 0,
             hasItem = false;
@@ -81,6 +70,14 @@ var Helper = {
                 }
             });
         });
+    },
+    
+    shouldBeAmoungElements: function(elements, item) {
+        Helper._shouldBeAmoungElements(elements, item, true);
+    },
+    
+    shouldNotBeAmoungElements: function(elements, item) {
+        Helper._shouldBeAmoungElements(elements, item, false);
     },
     
     splitAndCompare: function(text, elements) {
