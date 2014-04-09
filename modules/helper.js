@@ -1,4 +1,5 @@
-var Helper = {
+var _ = require("underscore"),
+Helper = {
     checkAttributeOfElementContainsValue: function(elem, attr_name, value) {
         elem.getAttribute(attr_name).then(function(attr) {
             expect(attr).toContain(value);
@@ -6,7 +7,7 @@ var Helper = {
     },
         
     clickOnOneEqual: function(elements, item) {
-        elements.each(function(elem) {
+        elements._all.each(function(elem) {
             elem.getText().then(function(text) {
                 if (text === item) {
                     elem.click();
@@ -16,7 +17,7 @@ var Helper = {
     },
     
     clickOnOneInclude: function(elements, item) {
-        elements.each(function(elem) {
+        elements._all.each(function(elem) {
             elem.getText().then(function(text) {
                 if (text.indexOf(item) >= 0) {
                     elem.click();
@@ -27,7 +28,7 @@ var Helper = {
     
     clickOnSame: function(elements, item, time) {
         var i = 0;
-        elements.each(function(elem) {
+        elements._all.each(function(elem) {
             elem.getText().then(function(text) {
                 if (text.indexOf(item) >= 0) {
                     i++;
@@ -42,7 +43,7 @@ var Helper = {
     returnOneOfMany: function(elements, item) {
         var flag = false;
         
-        elements.each(function(elem) {
+        elements._all.each(function(elem) {
             elem.getText().then(function(text) {
                 if (text === item) {
                     flag = true;
@@ -59,24 +60,45 @@ var Helper = {
         }
     },
     
+    shouldBeOne: function(elements, item, should) {
+        var countAll,
+            counter = 0,
+            hasItem = false;
+
+        elements._all.count().then(function(count) {
+            countAll = count;
+        });
+        
+        elements._all.each(function(elem) {
+            elem.getText().then(function(text) {
+                counter++;
+                if (text.indexOf(item) !== -1) {
+                    hasItem = true;
+                }
+                if (counter === countAll) {
+                    expect(hasItem).toBe(should);
+                }
+            });
+        });
+    },
+
     splitAndCompare: function(text, elements) {
-        var ar = text.split("; "),
+        var ar = text.split(", "),
             actual_array = [],
-            items = elements.length;
+            all_count = 0;
     
-        elements.each(function(el) {
+        elements._all.count().then(function(count){
+            all_count = count;
+        });
+    
+        elements._all.each(function(el) {
             el.getText().then(function(text) {
                 actual_array.push(text);
+                if (all_count === actual_array.length) {
+                    expect(_.isEqual(actual_array.sort(), ar.sort())).toBe(true);
+                }
             });
         });
-        
-        browser.wait(function() {
-            return elements.count().then(function(count){
-                return count === actual_array.length;
-            });
-        });
-        
-        expect(elements.count()).toEqual(actual_array.length);
     },
     
     /**
