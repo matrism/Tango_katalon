@@ -63,4 +63,5 @@ Be sure you have ssh-configured [access to github repo](https://help.github.com/
 
 ###Step 5:
 - Run tests with command `start.sh`.
+
 We recommend to use Jetbrains Webstorm or Oracle Netbeans IDE, but you are free to use any IDE that you like, even RubyMine.
