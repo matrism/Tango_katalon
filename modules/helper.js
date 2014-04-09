@@ -102,30 +102,6 @@ var Helper = {
         });
     },
     
-    /**
-     * From here: https://github.com/angular/protractor/issues/610#issuecomment-37917269
-     * 
-     * @name waitForUrlToChangeTo
-     * @description Wait until the URL changes to match a provided regex
-     * @param {RegExp} urlRegex wait until the URL changes to match this regex
-     * @returns {!webdriver.promise.Promise} Promise
-     */
-    waitForUrlToChangeTo: function(urlRegex) {
-        var currentUrl;
-
-        return browser.getCurrentUrl().then(function storeCurrentUrl(url) {
-                currentUrl = url;
-            }
-        ).then(function waitForUrlToChangeTo() {
-                return browser.wait(function waitForUrlToChangeTo() {
-                    return browser.getCurrentUrl().then(function compareCurrentUrl(url) {
-                        return urlRegex.test(url);
-                    });
-                });
-            }
-        );
-    },
-    
     waitForElement: function(el, timeout) {
         timeout = timeout || 5000;
         return browser.wait(function() {
@@ -133,23 +109,6 @@ var Helper = {
                 return present === true;
             });
         }, timeout);
-    },
-    
-    waitForProgressBar: function(timeout) {
-        timeout = timeout || 5000;
-        return browser.wait(function() {
-            return pages.provisioning.elems.progress_bar.getCssValue("width").then(function(width) {
-                return width === "0px";
-            });
-        }, timeout);  
-    },
-    
-    waitForDocumentToLoad: function() {
-        return browser.wait(function() {
-            return browser.executeScript("return document.readyState === 'complete';").then(function(res) {
-                return res === true;
-            });
-        });
     }
 };
 

@@ -170,6 +170,45 @@ Page.prototype.waitForAngular = function() {
         });
     }, _tf_config._system_.wait_timeout);
 };
+Page.prototype.waitForProgressBar = function(timeout) {
+    timeout = timeout || _tf_config._system_.wait_timeout;
+    return browser.wait(function() {
+        return pages.provisioning.elems.progress_bar.getCssValue("width").then(function(width) {
+            return width === "0px";
+        });
+    }, timeout);  
+};
+Page.prototype.waitForDocumentToLoad = function() {
+    return browser.wait(function() {
+        return browser.executeScript("return document.readyState === 'complete';").then(function(res) {
+            return res === true;
+        });
+    });
+};
+
+/**
+ * From here: https://github.com/angular/protractor/issues/610#issuecomment-37917269
+ * 
+ * @name waitForUrlToChangeTo
+ * @description Wait until the URL changes to match a provided regex
+ * @param {RegExp} urlRegex wait until the URL changes to match this regex
+ * @returns {!webdriver.promise.Promise} Promise
+ */
+Page.prototype.waitForUrlToChangeTo = function(urlRegex) {
+    var currentUrl;
+
+    return browser.getCurrentUrl().then(function storeCurrentUrl(url) {
+            currentUrl = url;
+        }
+    ).then(function waitForUrlToChangeTo() {
+            return browser.wait(function waitForUrlToChangeTo() {
+                return browser.getCurrentUrl().then(function compareCurrentUrl(url) {
+                    return urlRegex.test(url);
+                });
+            });
+        }
+    );
+};
 Page.prototype.open = function(is_not_angular) {
     is_not_angular = is_not_angular || false;
     if (is_not_angular) {
