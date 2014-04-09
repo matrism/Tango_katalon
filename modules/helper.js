@@ -1,5 +1,6 @@
-var _ = require("underscore"),
-Helper = {
+_ = require("underscore");
+
+var Helper = {
     checkAttributeOfElementContainsValue: function(elem, attr_name, value) {
         elem.getAttribute(attr_name).then(function(attr) {
             expect(attr).toContain(value);
@@ -81,7 +82,7 @@ Helper = {
             });
         });
     },
-
+    
     splitAndCompare: function(text, elements) {
         var ar = text.split(", "),
             actual_array = [],
@@ -126,7 +127,7 @@ Helper = {
     },
     
     waitForElement: function(el, timeout) {
-        timeout = timeout || _tf_config._system_.wait_timeout || 5000;
+        timeout = timeout || 5000;
         return browser.wait(function() {
             return el.isPresent().then(function(present) {
                 return present === true;
@@ -135,7 +136,7 @@ Helper = {
     },
     
     waitForProgressBar: function(timeout) {
-        timeout = timeout || 2000;
+        timeout = timeout || 5000;
         return browser.wait(function() {
             return pages.provisioning.elems.progress_bar.getCssValue("width").then(function(width) {
                 return width === "0px";
