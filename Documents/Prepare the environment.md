@@ -35,7 +35,7 @@ Please make sure that this is available on your $PATH (or %PATH% on Windows) in 
   },
 ```
 
-- Add dependency to package.json
+- Add dependency to bower.json
 
 ```js 
 "dependencies": {
