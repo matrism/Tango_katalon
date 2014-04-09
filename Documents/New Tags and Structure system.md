@@ -1,25 +1,43 @@
 ###New structure including tags system:
 
-We investigated abilities of integrating framework with tags system. In the same time we were hardly working on creating Framework for e2e tests based on ProtractorJS.
-We've found that current structure of ProtractorJS is not convenient to extend it with tags and we created prototype of completely restructured face of feature files of our framework.
-How current structure looks like:
+We've investigated abilities of integrating framework with tags system. In the same time we were hardly working on creating Framework for e2e tests based on ProtractorJS.
+We've found that current structure of ProtractorJS is not convenient to extend it with tags and we developed tags-convenient structure.
+Common ProtractorJS specs file structure looks like:
 
 ```js
-var login_page = require("../../pages/login"),
-    main_page = require("../../pages/main"),
-    require("../../steps/main");
-
-describe("Dashboard module", function() {
-    beforeEach(login_page.login);
-    afterEach(someFn);
+describe("Components", function() {
+    var docs_page = require("../../pages/docs");
+        require("../../pages/login");
+        require("../../steps/components");
     
-    describe("Verify that Dashboard's Provisioning section is enabled", function() {
-        steps.main.itButtonShouldBeDisabled(main_page.elems.start_provisioning, "Start Provisioning", false);
+    describe("Before all features, is executed only once", function() {
+        // No ability to run this before each describe. Only copy-paste.
     });
     
-    describe("Verify that Dashboard's Creation and Management sections are disabled", function() {
-        steps.main.itButtonShouldBeDisabled(main_page.elems.start_creating, "Start creating", true);
-        steps.main.itButtonShouldBeDisabled(main_page.elems.view_details, "View details", true);
+//  @APSF-166 @smoke
+    describe("Validate Breadcrumb Component tutorial on frontend page", function() {
+        beforeEach(function() {
+            //make something before each step,
+            //e.g. check if still logged in
+        });
+        afterEach(function() {
+            //make something after each step,
+            //e.g. make screenshot
+        });
+        steps.components.itNavigateToDocs();
+        steps.components.itClickOnDocsCategory("frontend");
+        steps.components.itClickOnComponentItem("frontend", "breadcrumb");
+        steps.components.itCheckUrl("/component_library/breadcrumb");
+        steps.components.itElementContains(docs_page.elems.header, "tutorial header", docs_page.categories.frontend.components.breadcrumb.value);
+    });
+    
+//  @APSF-166
+    describe("Validate breadcrumb live demo component", function() {
+        steps.components.itNavigateToDocs();
+        steps.components.itClickOnDocsCategory("frontend");
+        steps.components.itClickOnComponentItem("frontend", "breadcrumb");
+        steps.components.itHoverElement(docs_page.elems.breadcrumb_hover_with_dropdown, "breadcrumb_hover_with_dropdown");
+        steps.components.itElementContainsValues(docs_page.elems.breadcrumb_hover_dropdown, "breadcrumb_hover_dropdown", ["SUB LINK 1", "SUB LINK 2", "SUB LINK 3"]);
     });
 });
 ```
@@ -27,48 +45,110 @@ describe("Dashboard module", function() {
 We can say that current structure of code makes impossible extending it with simple and clear tags system. So, we decided to make it to look like this:
 
 ```js
-require("../steps/main");
+var steps_path = _tf_config._system_.path_to_steps,
+    pages_path = _tf_config._system_.path_to_pages;
 
-var main_page = require("../pages/main"),
-    login_page = require("../pages/login"),
+require(steps_path + "components");
+require(steps_path + "login");
+require(pages_path + "login");
+    
+var docs_page = require(pages_path + "docs"),
+
+    beforeFeature = function() {
+        //make something before each feature,
+        //e.g. login and navigate to page.
+        //note: pass steps to this function
+        steps.components.itNavigateToDocs();
+        steps.components.itClickOnDocsCategory("frontend");
+    },
+    afterFeature = function() {
+        //make something after each feature,
+        //e.g. logout.
+        //note: pass steps to this function
+    },
     feature = [{
-        name: "Verify that Dashboard's Provisioning section is enabled",
-        tags: ["wip", "@CD-168"],
-        beforeEach: login_page.login,
-        steps: [{
-            fn: steps.main.itButtonShouldBeDisabled,
-            args: [main_page.elems.start_provisioning, "Start Provisioning", false]
-        }]
+        name: "Validate Breadcrumb Component tutorial on frontend page",
+        tags: ["APSF-166", "smoke"],
+        beforeEach: function() {
+            //make something before each step,
+            //e.g. check if still logged in
+        },
+        afterEach: function() {
+            //make something after each step,
+            //e.g. make screenshot
+        },
+        steps: [
+            [steps.components.itClickOnComponentItem,["frontend", "breadcrumb"]],
+            [steps.components.itCheckUrl,["/component_library/breadcrumb"]],
+            [steps.components.itElementContains,[docs_page.elems.header, "tutorial header", docs_page.categories.frontend.components.breadcrumb.value]]
+        ]
     },{
-        name: "Verify that Dashboard's Creation and Management sections are disabled",
-        tags: ["smoke", "@CD-168"],
-        beforeEach: login_page.login,
-        steps: [{
-            fn: steps.main.itButtonShouldBeDisabled,
-            args: [main_page.elems.start_creating, "Start creating", true]
-        },{
-            fn: steps.main.itButtonShouldBeDisabled,
-            args: [main_page.elems.view_details, "View details", true]
-        }],
-        afterEach: someFn
+        name: "Validate breadcrumb live demo component",
+        tags: ["APSF-166"],
+        steps: [
+            [steps.components.itClickOnComponentItem,["frontend", "breadcrumb"]],
+            [steps.components.itHoverElement,[docs_page.elems.breadcrumb_hover_with_dropdown, "breadcrumb_hover_with_dropdown"]],
+            [steps.components.itElementContainsValues,[docs_page.elems.breadcrumb_hover_dropdown, "breadcrumb_hover_dropdown", ["SUB LINK 1", "SUB LINK 2", "SUB LINK 3"]]]
+        ]
     }];
 
-module.exports = feature;
+module.exports = {
+    feature: feature,
+    beforeFeature: beforeFeature,
+    afterFeature: afterFeature
+};
 ```
 
 And we added one little file where feature files should be specified: `init.js`:
 
 ```js
-var features = ["components", "dashboard"];
-ftf.controller.process(features);
+ftf.controller.process();
 ```
 
-When we accept the structure we can get rid of manual specifying names of features to tests. 
+This script will read the folder you specified in config.js:
 
-Steps and pages are created in the same way as in current structure. 
+```js
+config = {
+    ...
+    _system_: {
+        ...
+        path_to_features: "./tests/dev_portal/features/",
+        path_to_steps: "../steps/",
+        path_to_pages: "../pages/",
+        ...
+    },
+    ...
+}
+```
+
+and read all feature files from there.
+
+So, the final structure of files is next:
+
+```
+...
+[path_to_tests]
+---->[features]
+--------->feature_name1.js
+--------->feature_name2.js
+--------->...
+--------->feature_nameN.js
+---->[pages]
+--------->page_obj1.js
+--------->...
+---->[steps]
+--------->step_name1.js
+--------->...
+```
 When no tags are specified, system runs all tests and features.
-If you want to run tests only with special tags, you can add cli option:
+If you want to run tests only with special tags, you can add CLI option:
 
 ```Shell
 start.sh --tags tag1[,tag2[,tag3...]]
+```
+
+If you want to exclude tests with some tags, you can add CLI option:
+
+```Shell
+start.sh --@tags tag4[,tag5[,tag6...]]
 ```
