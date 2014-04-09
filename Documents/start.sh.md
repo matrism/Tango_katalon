@@ -99,13 +99,30 @@ or
 --resolution=1450x444
 ```
 
-* `reporting` - type of reporting. Can be one of `xml`, `html` and `none`. Default: `none`
+* `reporting` - type of reporting. Can be one of `xml`, `html`, `all` and `none`. Default: `none`
 
 ```Shell
 --reporting xml
 or
 --reporting=html
 ```
+
+* `tags` - one tag or comma separated list of tags which should be ran. Default - empty. If no tags specified, all test should run.
+
+```Shell
+--tags smoke
+or
+--tags=wip,bugfix
+```
+
+* `@tags` - one or comma separated list of tags which should be excluded from tests. Default: none.
+
+```Shell
+--@tags smoke,wip
+or
+--@tags=bugfix
+```
+
 
 You can specify your own custom cli arguments which you want to use. 
 Rules:
