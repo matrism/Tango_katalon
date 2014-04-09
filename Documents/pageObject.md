@@ -171,6 +171,7 @@ browser.getCurrentUrl().then(function(url) {
 
 * `page_obj.getText()` - method returns textified visible content of current page.
 * `page_obj.getHtml()` - method returns source code of page.
+* `page_obj.getTitle()` - method returns title of page.
 * `page_obj.waitUntil(timeout, message, promiseToBeTrue)` - method that waits until `promiseToBeTrue` Webdriver promise will be resolved before `timeout` (in ms), otherwise `message` will be thrown.
 * `page_obj.executeScript(code,callback)` - method executes `code` script in active browser window and calls `callback` with result of executing.
 * `page_obj.refresh()` - method refreshes browser's window
@@ -178,4 +179,9 @@ browser.getCurrentUrl().then(function(url) {
 * `page_obj.forward()` - metod navigates browser to next page
 * `page_obj.clearCookies()` - method clears all cookies in browser
 * `page_obj.saveScreen(name)` - method saves screenshot to `./screens` folder and names it `%name%_%date%_%time%.png`.
+* `page_obj.waitForAjax()` - method looks into jQuery's `$.active` and angular's `$http.pendingRequests` and waits for them to become empty.
+* `page_obj.waitForAngular()` - method looks into angular's `$http.pendingRequests` and wait for it to become empty.
+* `page_obj.waitForProgressBar()` - custom wait method for WMG applications which wait ProgressBar to finish loading.
+* `page_obj.waitForDocumentToLoad()` - method waits for `document.readyState` to become `"complete"`.
+* `page_obj.waitForUrlToChangeTo(regex)` - method waits until the URL changes to match a provided regex. regex - 
 * `page_obj.open()` - method navigates browser to page url.
