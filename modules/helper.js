@@ -50,34 +50,46 @@ var Helper = {
         });
     },
     
-    _shouldBeAmoungElements: function(elements, item, should) {
-        var countAll,
-            counter = 0,
-            hasItem = false;
-
-        elements._all.count().then(function(count) {
-            countAll = count;
-        });
+    shouldBeAmoungElements: function(elements, item) {
+        var foundItems = 0;
         
-        elements._all.each(function(elem) {
+        elements._all.map(function(elem) {
             elem.getText().then(function(text) {
-                counter++;
-                if (text.indexOf(item) !== -1) {
-                    hasItem = true;
-                }
-                if (counter === countAll) {
-                    expect(hasItem).toBe(should);
+                if (text === item) {
+                    foundItems++;
                 }
             });
+        }).then(function(){
+            expect(foundItems).toBeGreaterThan(0);
         });
-    },
-    
-    shouldBeAmoungElements: function(elements, item) {
-        Helper._shouldBeAmoungElements(elements, item, true);
     },
     
     shouldNotBeAmoungElements: function(elements, item) {
-        Helper._shouldBeAmoungElements(elements, item, false);
+        var foundItems = 0;
+        
+        elements._all.map(function(elem) {
+            elem.getText().then(function(text) {
+                if (text === item) {
+                    foundItems++;
+                }
+            });
+        }).then(function(){
+            expect(foundItems).toBe(0);
+        });
+    },
+    
+    shouldBeOnlyOne: function(elements, item) {
+        var foundItems = 0;
+       
+        elements._all.map(function(elem) {
+            elem.getText().then(function(text) {
+                if (text === item) {
+                    foundItems++;
+                }
+            });
+        }).then(function(){
+            expect(foundItems).toBe(1);
+        });
     },
     
     splitAndCompare: function(text, elements) {
