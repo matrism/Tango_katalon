@@ -127,7 +127,7 @@ var Helper = {
     },
     
     waitForElement: function(el, timeout) {
-        timeout = timeout || 2000;
+        timeout = timeout || 5000;
         return browser.wait(function() {
             return el.isPresent().then(function(present) {
                 return present === true;
@@ -136,7 +136,7 @@ var Helper = {
     },
     
     waitForProgressBar: function(timeout) {
-        timeout = timeout || 2000;
+        timeout = timeout || 5000;
         return browser.wait(function() {
             return pages.provisioning.elems.progress_bar.getCssValue("width").then(function(width) {
                 return width === "0px";
