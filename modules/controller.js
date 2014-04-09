@@ -41,22 +41,17 @@ var _ = require("underscore"),
         processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature) {
             describe(feature_name, function() {
                 for (var i in features) {
-                    if (typeof beforeFeature !== "undefined") {
-                        it("\n\tBefore feature", function() {
-                            beforeFeature();
-                        });
-                    }
-                    controller.processFeature(features[i]);
-                    if (typeof afterFeature !== "undefined") {
-                        it("After feature\n", function() {
-                            afterFeature();
-                        });
-                    }
+                    controller.processFeature(features[i], beforeFeature, afterFeature);
                 } 
             });
         },
-        processFeature: function(feature) {
+        processFeature: function(feature, beforeFeature, afterFeature) {
             if (controller.checkTags(feature)) {
+                if (typeof beforeFeature !== "undefined") {
+                    describe("\n    Before feature", function() {
+                        beforeFeature();
+                    });
+                }
                 describe(feature.name, function() {
                     if (typeof feature.beforeEach !== "undefined") {
                         beforeEach(feature.beforeEach);
@@ -71,6 +66,11 @@ var _ = require("underscore"),
                         afterEach(feature.afterEach);
                     } 
                 });
+                if (typeof afterFeature !== "undefined") {
+                    describe("After feature", function() {
+                        afterFeature();
+                    });
+                }
             }
         },
         checkTags: function(feature) {

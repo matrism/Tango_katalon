@@ -26,6 +26,11 @@ var _ = require("underscore"),
         getEnvVarByKey: function(key) {
             return configer.env[key];
         },
+        getCliParamByKey: function(key) {
+            var params = configer.getParamsFromCli();
+            
+            return params[key];
+        },
         getParamsFromCli: function() {
             var splited, waiting_next = false, tmp = {}, splited_val;
             

@@ -118,21 +118,25 @@ Page.prototype.getHtml = function() {
     return this.html;
 };
 Page.prototype.executeScript = function(code,callback) {
-    browser.executeScript(code).then(function(res) {
+    return browser.executeScript(code).then(function(res) {
         callback(res);
     });
 };
 Page.prototype.refresh = function() {
     browser.navigate().refresh();
+    return this;
 };
 Page.prototype.back = function() {
     browser.navigate().back();
+    return this;
 };
 Page.prototype.forward = function() {
-    browser.navigate().forward ();
+    browser.navigate().forward();
+    return this;
 };
 Page.prototype.clearCookies = function() {
     browser.manage().deleteAllCookies();  
+    return this;
 };
 Page.prototype.saveScreen = function(name) {
     name = name || "screen";
@@ -146,6 +150,7 @@ Page.prototype.saveScreen = function(name) {
         stream.write(new Buffer(png, "base64"));
         stream.end();
     });
+    return this;
 };
 Page.prototype.waitForAjax = function() {
     return browser.wait(function() {
