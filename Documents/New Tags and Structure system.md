@@ -78,6 +78,8 @@ var docs_page = require(pages_path + "docs"),
             //e.g. make screenshot
         },
         steps: [
+            // steps.components.itClickOnComponentItem - step function,
+            // ["frontend", "breadcrumb"] - arguments for step function
             [steps.components.itClickOnComponentItem,["frontend", "breadcrumb"]],
             [steps.components.itCheckUrl,["/component_library/breadcrumb"]],
             [steps.components.itElementContains,[docs_page.elems.header, "tutorial header", docs_page.categories.frontend.components.breadcrumb.value]]
