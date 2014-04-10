@@ -118,6 +118,30 @@ var Helper = {
                 return present === true;
             });
         }, timeout);
+    },
+    
+    switchToNextTab: function() {
+        browser.getAllWindowHandles().then(function(data){
+            browser.switchTo().window(data[data.length -1]);
+        });
+    },
+    
+    closeCurrentTab: function() {
+        browser.getAllWindowHandles().then(function(data){
+            browser.switchTo().window(data[data.length -1]);
+            if (data.length > 0) {
+                browser.close();
+                browser.switchTo().window(data[0]);
+            } else {
+                browser.quit();
+            }
+        });
+    },
+    
+    pageShouldBeScrolled: function() {
+        browser.executeScript("return window.pageYOffset;").then(function(top) {
+            expect(top).toBeGreaterThan(0);
+        });
     }
 };
 
