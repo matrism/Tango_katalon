@@ -20,10 +20,27 @@ Page.prototype.html = "";
 
 Page.prototype.index = function() {
     var locs = this.locators,
-        elems = {}, i, loc, type;
+        include = this.include, i;
         
-    for(i in locs) {
-        loc = locs[i];
+    if (typeof include !== "undefined") {
+        for (i in include) {
+            locs = _.extend(locs, include[i].locators);
+        }
+    }
+    this.elems = this.prepareLocators(locs);
+       
+    if (this._url.template === "" || this._url.args.length < 1) {
+        this.dynamic_url = false;
+    } else {
+        this.dynamic_url = true;
+    }
+    return this;
+};
+Page.prototype.prepareLocators = function(locators) {
+    var loc, i, type, elems = {};
+    
+    for(i in locators) {
+        loc = locators[i];
         type = Object.keys(loc)[0];
         
         if (type === "custom") {
@@ -37,13 +54,10 @@ Page.prototype.index = function() {
         }
     }
     
-    if (this._url.template === "" || this._url.args.length < 1) {
-        this.dynamic_url = false;
-    } else {
-        this.dynamic_url = true;
-    }
-    
-    this.elems = elems;
+    return elems;
+};
+Page.prototype.extendLocators = function(locators) {
+    this.elems = _.extend(this.elems, this.prepareLocators(locators));
     return this;
 };
 Page.prototype.prepare = function() {
