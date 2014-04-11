@@ -102,4 +102,4 @@ Helper functions
 
 * **closeCurrentTab()** - close current tab.
 
-* **pageShouldBeScrolled()** - check if the page is scrolled.
+* **pageShouldBeScrolledDown()** - check if the page is scrolled.
