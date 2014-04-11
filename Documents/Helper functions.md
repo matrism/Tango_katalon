@@ -33,7 +33,7 @@ Helper functions
                 <li class="item>Item3</li>
             </ul>
         
-            helper.clickOnOneEqual(element.all(By.css(".item")), 'Item'); // the first element will be clicked 
+            helper.clickOnOneInclude(element.all(By.css(".item")), 'Item'); // the first element will be clicked 
 
 * **clickOnSame(elements, item, time)** - click on element in the current set of elements which text contains received value and elemnet was found for the `time` time.
 
