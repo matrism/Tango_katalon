@@ -22,7 +22,7 @@ Matcher.prototype.match = function(){
         var isNot = (this.isNot) ? "not" : "";
 
         this.message = function() {
-            return options.message.replace("{not}", isNot);
+            return (options && options.message) ? options.message.replace("{not}", isNot) : "Error";
         };
         return pass.apply(this, [this.actual, options]);
     };
@@ -30,7 +30,7 @@ Matcher.prototype.match = function(){
 
 Matcher.ShouldContain = function() {
     this.pass = function(actual, options){
-        return (actual.indexOf(options.compare) !== -1) ? true : false;
+        return (options && options.compare && actual.indexOf(options.compare) !== -1) ? true : false;
     };
     return this.match();
 };
