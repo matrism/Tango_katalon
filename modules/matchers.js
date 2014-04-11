@@ -42,4 +42,11 @@ Matcher.ShouldBePresent = function() {
     return this.match();
 };
 
+Matcher.ShouldContainA = function() {
+    this.pass = function(actual){
+        return actual.indexOf("a") >= 0;
+    };
+    return this.match();
+};
+
 module.exports = Matcher;

@@ -1,16 +1,29 @@
-var //pages
+var //paths
     path_steps = _tf_config._system_.path_to_steps,
     page_steps = _tf_config._system_.path_to_pages,
+    
+    //pages
     main_page = require(page_steps + "main"),
-    provisioning_page = require(page_steps + "provisioning");        
+    provisioning_page = require(page_steps + "provisioning");       
+     
     require(page_steps + "login");
 
     // steps
     require(path_steps + "login"),
     require(path_steps + "main"),
     require(path_steps + "provisioning");
-
-    var feature = [{
+    
+    var globalBeforeEach = function() {
+        var matchers = new ftf.matchers();
+        this.addMatchers({
+            shouldBePresent: matchers.create("ShouldBePresent")
+        });
+        this.addMatchers({
+            shouldContainA: matchers.create("ShouldContainA")
+        });
+    },
+            
+    feature = [{
         name: "Login to Security Console",
         tags: ["example"],
         steps: [
@@ -29,10 +42,12 @@ var //pages
         name: "Provisioning. First step: typeahead should be present on the page",
         tags: ["example"],
         steps: [
-            [steps.provisioning.itElementIsPresent,[provisioning_page.elems.typeahead_model, "typeahead input", true]]
+            [steps.provisioning.itElementIsPresent,[provisioning_page.elems.typeahead_model, "typeahead input", true]],
+            [steps.provisioning.itTextToContainA,["momomo"]]
         ]
     }];
 
 module.exports = {
-    feature: feature
+    feature: feature,
+    globalBeforeEach: globalBeforeEach
 };

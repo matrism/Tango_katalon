@@ -11,6 +11,15 @@ if (steps.provisioning === undefined) {
             it(elName + " should " + isNot + "be present", function() {
                 pages.provisioning.elementIsPresent(element, elName, isPresent);
             });
+        },
+        
+        itTextToContainA: function(text) {
+            var params = {
+                message: "'" + text + "' should contain 'a'"
+            };
+            it("to contain a", function() {
+                expect(text).shouldContainA(params);
+            });
         }
     };
 }

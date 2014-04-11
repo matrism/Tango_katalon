@@ -16,12 +16,14 @@ var _ = require("underscore"),
         prepareFeatures: function(feature, feature_name) {
             var beforeFeature = feature.beforeFeature,
                 afterFeature = feature.afterFeature,
+                globalBeforeEach = feature.globalBeforeEach,
+                globalAfterEach = feature.globalAfterEach,
                 features = feature.feature;
             
             if (!(features instanceof Array)) {
                 features = [features];
             }
-            controller.processArrayFeatures(features, feature_name, beforeFeature, afterFeature);
+            controller.processArrayFeatures(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach);
         },
         stringUCFirst: function(str) {
             return str.charAt(0).toUpperCase() + str.substr(1, str.length-1);
@@ -38,8 +40,19 @@ var _ = require("underscore"),
                 controller.prepareFeatures(feature, controller.stringUCFirst(files[i]));
             };
         },
-        processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature) {
+        processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach) {
             describe(feature_name, function() {
+                if (typeof globalBeforeEach !== "undefined") {
+                    beforeEach(function() {
+                        globalBeforeEach.call(this);
+                    });
+                }
+                if (typeof globalAfterEach !== "undefined") {
+                    afterEach(function() {
+                        globalAfterEach.call(this);
+                    });
+                }
+                
                 for (var i in features) {
                     controller.processFeature(features[i], beforeFeature, afterFeature);
                 } 

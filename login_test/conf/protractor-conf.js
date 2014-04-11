@@ -4,7 +4,6 @@ var path = require("path"),
 
 global.ftf = require("../bower_components/factory-testing-framework");
 global._tf_config = require("./config"); 
-is_old = typeof _tf_config._cli.old === "undefined" ? false : true;
 ScreenShotReporter = ftf.htmlReporter;
 
 global.pages = {};
@@ -15,7 +14,7 @@ exports.config = {
     capabilities: {
         "browserName": _tf_config._system_.browser //firefox, ie
     },
-    specs: is_old ? ["../tests/e2e/**/*.js"] : ["init.js"],
+    specs: ["init.js"],
     onPrepare: function() {
         var reporting = _tf_config._system_.reporting;
         browser.driver.manage().timeouts().setScriptTimeout(5000);
@@ -37,10 +36,6 @@ exports.config = {
                 })
             );
         }
-        
-        matchers = new ftf.matchers();
-        jasmine.Matchers.prototype.shouldBePresent = matchers.create("ShouldBePresent");
-        
     },  
     jasmineNodeOpts: {
         showColors: true
