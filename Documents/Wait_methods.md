@@ -8,7 +8,7 @@ List of wait functions:
 
 As we have addiotinal requirenments to waiting functions, we implemented our own methods and now developers have reach powerfull waiting features:
 
-####PageObject methods: (See implementation [here](https://github.com/wmgdsp/factory-testing-framework/blob/master/modules/pageObject.js))
+####PageObject methods: (You can find implementation [here](https://github.com/wmgdsp/factory-testing-framework/blob/master/modules/pageObject.js))
 * `page_object.waitForAjax()` - looks into jQuery's `$.active` and angular's `$http.pendingRequests` and waits for them to become empty. This method is the best for waiting of initial loading page with jQuery or AngularJS (even if you don't know which is used) and for waiting loading after navigating via `page_object.open` or different actions that occure redirect/ajax requests. Works even for pages with ProgressBar.
 * `page_object.waitForAngularRequests()` - method looks into angular's `$http.pendingRequests` and wait for it to become empty. This method expects Angular to be on the page for sure. It waits only for finishing \$http provider requests. It is useful for initial loading of page with Angular. Should work on pages with ProgressBar.
 * `page_object.waitForDocumentToLoad()` - method waits for `document.readyState` to become `"complete"`. Statuses of `document.readyState`: 
@@ -18,8 +18,9 @@ As we have addiotinal requirenments to waiting functions, we implemented our own
 * `page_object.waitForUrlToChangeTo(regex)` - method waits until the URL changes to match a provided regex. It is useful to wait while multiple redirects are performed and final url should match the regex
 * `page_object.waitForProgressBar(timeout)` - method waits ProgressBar to finish loading. It is convinient to use it in different WMG application with ProgressBar.
 
-####Helper methods: (See implementation [here](https://github.com/wmgdsp/factory-testing-framework/blob/master/modules/helper.js))
+####Helper methods: (You can find implementation [here](https://github.com/wmgdsp/factory-testing-framework/blob/master/modules/helper.js))
 
 * `helper.waitForElement(element,timeout)` - method waits for element to appear. Useful for different custom actions when it is needed to wait for element.
 
 All methods use default timeout (configured in `config._system_.wait_timeout`). You can specify your timeout for some functions.
+We use these methods in tests that can be found in [js-framework-examples](https://github.com/wmgdsp/js-framework-examples)
