@@ -66,9 +66,7 @@ Helper functions
         <span class="item">Value</span>
         <span class="item">Item</span>
 
-        helper.shouldBeAmoungElements(element.all(By.css(".item")), "Value") // assertion will be true
-
-    helper.shouldNotBeAmoungElements(element.all(By.css(".item")), "Value") // assertion will be false
+        helper.shouldNotBeAmoungElements(element.all(By.css(".item")), "Value") // assertion will be false
 
 * **shouldBeOnlyOne(elements, item)** - check if the set of elements `elements` contains only one element with the text `item`.
 
