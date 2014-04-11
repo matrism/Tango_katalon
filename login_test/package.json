@@ -13,13 +13,11 @@
         "angular"
     ],
     "dependencies": { 
-        "selenium-webdriver": "~2.40.0", 
-        "protractor": "latest",
-        "jasmine-reporters": "latest",
-        "jasminewd": "latest",
-        "path": "latest",
-        "protractor-screenshot-reporter-with-postprocessing": "latest",
-        "underscore": "latest"
+        "selenium-webdriver": "latest", 
+        "protractor"        : "latest",
+        "mkdirp"            : "latest",
+        "path"              : "latest",
+        "underscore"        : "latest"
     },
     "author": "WMG",
     "license": "ISC"

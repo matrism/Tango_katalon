@@ -18,7 +18,11 @@ var configer = ftf.configer,
                 width: 1200,
                 height: 1000
             },
-            reporting: cli.reporting in ["html", "xml"] ? cli.reporting : "none"
+            reporting: cli.reporting in ["html", "xml"] ? cli.reporting : "none",
+            path_to_features: "./tests/features/",
+            path_to_steps: "../steps/",
+            path_to_pages: "../pages/",
+            wait_timeout: 5000
         },
         _env_: env,
         ci: {
