@@ -176,7 +176,7 @@ Page.prototype.waitForAjax = function() {
         });
     }, _tf_config._system_.wait_timeout);
 };
-Page.prototype.waitForAngular = function() {
+Page.prototype.waitForAngularRequests = function() {
     return browser.wait(function() {
         browser.sleep(300);
         return browser.executeScript("return angular.element([$('body')]).injector().get('$http').pendingRequests.length").then(function(res) {

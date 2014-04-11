@@ -1,6 +1,7 @@
 var util = require('./lib/util'), 
     mkdirp = require('mkdirp'), 
-    path = require('path');
+    path = require('path'),
+    _ = require('underscore');
 
 /** Function: defaultPathBuilder
  * This function builds paths for a screenshot file. It is appended to the
@@ -41,31 +42,19 @@ function defaultPathBuilder(spec, descriptions, results, capabilities) {
  */
 function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
     var metaData = {
-        description: descriptions.join(' '), 
-        passed: results.passed(), 
-        skipped: results.skipped,
+        suite_id: spec.suite.id,
+        step_id: spec.id,
+        parent_suite_id: spec.suite.parentSuite.id,
+        description: descriptions.reverse(), 
         os: capabilities.caps_.platform, 
+        results: results,
+        passed: results.passed(),
         browser: {
             name: capabilities.caps_.browserName,
             version: capabilities.caps_.version
         }
-    }, i = 0, max = results.items_.length, message, trace, item;
-
-    if(max > 0) {
-        for (; i < max; i++) {
-            item = results.items_[i];
-            if (item.passed_ === metaData.passed) {
-                message = item.message;
-                trace = item.trace.stack;
-            }
-        }
-        metaData.message = message;
-        metaData.trace = trace;
-    } else {
-        metaData.message = metaData.passed ? "Passed." : (metaData.skipped ? "Skipped." : "Failed.");
-        metaData.trace = "";
-    }
-
+    };
+    
     return metaData;
 }
 
