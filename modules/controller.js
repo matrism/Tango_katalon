@@ -73,10 +73,9 @@ var _ = require("underscore"),
                 }
                 
                 describe(feature.name, function() {
-                        if (typeof feature.beforeEach !== "undefined") {
-                            beforeEach(feature.beforeEach);
-                        }
-                    });
+                    if (typeof feature.beforeEach !== "undefined") {
+                        beforeEach(feature.beforeEach);
+                    }
 
                     if (typeof feature.afterEach !== "undefined") {
                         afterEach(feature.afterEach);
