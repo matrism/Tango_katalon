@@ -43,7 +43,7 @@ Matcher.ShouldBePresent = function() {
 };
 
 Matcher.ShouldContainA = function() {
-    this.pass = function(actual){
+    this.pass = function(actual, options){
         return actual.indexOf("a") >= 0;
     };
     return this.match();

@@ -22,7 +22,7 @@ scriptToAddInHtml += "}";
 scriptToAddInHtml += "</style>";
 
 staticHTMLContentprefix = "<html><head><title>Test file reporter generated</title>"+scriptToAddInHtml+" </head><body style='font-family:Arial;'>";
-staticHTMLContentprefix += "<table cellpadding='10' cellspacing='0' border='1' style='text-align:left'>";
+staticHTMLContentprefix += "<h1>Test Results</h1><table cellpadding='10' cellspacing='0' border='1' style='text-align:left'>";
 staticHTMLContentprefix += "<tr>";
 staticHTMLContentprefix += "<th></th><th></th><th></th>";
 staticHTMLContentprefix += "<th colspan='4'>Assert type</th>";
@@ -112,11 +112,6 @@ function renderSteps(steps) {
             (step.results.items_.length < 1 
                 ?
                 ''
-//                '<tr>' +
-//                '<td colspan="3" class="noBottomTopBorder"></td>' +
-//                '<td colspan="21">No Asserts in this step</td>' +
-//                '<td colspan="2"></td>' +
-//                '</tr>'
                 :
                 renderItems(step.results.items_)
             )
@@ -127,11 +122,12 @@ function renderSteps(steps) {
 }
 
 function renderItems(items) {
-    var l, expect, bgColor, array = [];
+    var l, expect, bgColor, array = [], passed;
     
     for (l in items) {
         expect = items[l];
-        bgColor = expect.passed_? 'green': 'red';
+        bgColor = expect.passed_? 'green': (expect.skipped ? 'blue' : 'red'),
+        passed = (expect.passed_ ? "Passed" : (expect.skipped ? 'Skipped' : 'Failed'));
 
         array.push(
             '<tr>'+
@@ -141,7 +137,7 @@ function renderItems(items) {
             '<td colspan="4">' + expect.expected + '</td>'+
             '<td colspan="4">' + expect.actual + '</td>'+
             '<td colspan="5">' + expect.message + '</td>'+
-            '<td colspan="2" style="color:#fff;background-color: '+ bgColor+'">' + expect.passed_ + '</td>'+
+            '<td colspan="2" style="color:#fff;background-color: '+ bgColor+'">' + passed + '</td>'+
             '</tr>'
         );
     }
@@ -154,14 +150,11 @@ function addHTMLReport(jsonData, baseName){
     var basePath = path.dirname(baseName),
         htmlFile = path.join(basePath, 'reporter.html'),
         stream,
-        dynamicData = '<h1>Test Results</h1>';
+        dynamicData = generateHTML(jsonData);
 
-    dynamicData += generateHTML(jsonData);
-    
     stream = fs.createWriteStream(htmlFile);
     stream.write(staticHTMLContentprefix + dynamicData + staticHTMLContentpostfix);
     stream.end();
-    
 }
 
 function addMetaData(metaData, baseName){

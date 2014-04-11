@@ -169,7 +169,7 @@ Page.prototype.saveScreen = function(name) {
 Page.prototype.waitForAjax = function() {
     return browser.wait(function() {
         browser.sleep(300);
-        return browser.executeScript("return typeof $ === 'undefined' ? 0 : $.active").then(function(res) {
+        return browser.executeScript("return typeof jQuery === 'undefined' ? 0 : jQuery.active").then(function(res) {
             return res == 0;
         }) && browser.executeScript("return typeof angular === 'undefined' ? 0 : angular.element([$('body')]).injector().get('$http').pendingRequests.length").then(function(res) {
             return res == 0;
@@ -187,7 +187,7 @@ Page.prototype.waitForAngularRequests = function() {
 Page.prototype.waitForProgressBar = function(timeout) {
     timeout = timeout || _tf_config._system_.wait_timeout;
     return browser.wait(function() {
-        return pages.provisioning.elems.progress_bar.getCssValue("width").then(function(width) {
+        return element(By.css(".ugol-page-progress-bar .progress-bar")).getCssValue("width").then(function(width) {
             return width === "0px";
         });
     }, timeout);  

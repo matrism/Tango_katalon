@@ -60,28 +60,43 @@ var _ = require("underscore"),
         },
         processFeature: function(feature, beforeFeature, afterFeature) {
             if (controller.checkTags(feature)) {
+                
                 if (typeof beforeFeature !== "undefined") {
-                    describe("\n    Before feature", function() {
-                        beforeFeature();
+                    describe("\n    Before feature: " + feature.name, function() {
+                        for (var i in beforeFeature) {
+                            step = beforeFeature[i];
+                            args = step[1] || [];
+                            fn = step[0];
+                            fn.apply(null, args);
+                        }
                     });
                 }
+                
                 describe(feature.name, function() {
-                    if (typeof feature.beforeEach !== "undefined") {
-                        beforeEach(feature.beforeEach);
-                    }
+                        if (typeof feature.beforeEach !== "undefined") {
+                            beforeEach(feature.beforeEach);
+                        }
+                    });
+
+                    if (typeof feature.afterEach !== "undefined") {
+                        afterEach(feature.afterEach);
+                    } 
+
                     for (var i in feature.steps) {
                         step = feature.steps[i];
                         args = step[1] || [];
                         fn = step[0];
                         fn.apply(null, args);
                     }
-                    if (typeof feature.afterEach !== "undefined") {
-                        afterEach(feature.afterEach);
-                    } 
                 });
                 if (typeof afterFeature !== "undefined") {
-                    describe("After feature", function() {
-                        afterFeature();
+                    describe("After feature: " + feature.name, function() {
+                        for (var i in afterFeature) {
+                            step = beforeFeature[i];
+                            args = step[1] || [];
+                            fn = step[0];
+                            fn.apply(null, args);
+                        }
                     });
                 }
             }
