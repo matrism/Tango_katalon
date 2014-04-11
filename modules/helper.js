@@ -138,7 +138,7 @@ var Helper = {
         });
     },
     
-    pageShouldBeScrolled: function() {
+    pageShouldBeScrolledDown: function() {
         browser.executeScript("return window.pageYOffset;").then(function(top) {
             expect(top).toBeGreaterThan(0);
         });
