@@ -7,29 +7,52 @@ var fs = require('fs'),
     staticHTMLContentpostfix;
 
 scriptToAddInHtml = "<script type='text/javascript'>";
-scriptToAddInHtml +="function openModal(imageSource){";
-scriptToAddInHtml +="var myWindow = window.open('','screenshotWindow');";
-scriptToAddInHtml +="myWindow.document.write('<img src=\"' +imageSource + '\" alt=\"screenshot\" />');}";
+scriptToAddInHtml += "function openModal(imageSource){";
+scriptToAddInHtml += "var myWindow = window.open('','screenshotWindow');";
+scriptToAddInHtml += "myWindow.document.write('<img src=\"' +imageSource + '\" alt=\"screenshot\" />');}";
+scriptToAddInHtml += "function hide( element ) {";
+scriptToAddInHtml += "element.style.display = 'none'; }";
+scriptToAddInHtml += "function show( css ) {";
+scriptToAddInHtml += "var elements = document.querySelectorAll('.'+css), i = 0, max = elements.length;";
+scriptToAddInHtml += "for (; i<max;i++) {";
+scriptToAddInHtml += "elements[i].style.display = ''; }}";
 scriptToAddInHtml += "</script>";
 scriptToAddInHtml += "<style>";
 scriptToAddInHtml += "th {";
 scriptToAddInHtml += "    min-width: 20px;";
+scriptToAddInHtml += "    font-size: 12px;";
 scriptToAddInHtml += "}";
 scriptToAddInHtml += "td.noBottomTopBorder {";
 scriptToAddInHtml += "    border-top: 0px !important;";
 scriptToAddInHtml += "    border-bottom: 0px !important;";
 scriptToAddInHtml += "}";
+scriptToAddInHtml += "th.message{";
+scriptToAddInHtml += "    width: 250px !important;";
+scriptToAddInHtml += "}";
+scriptToAddInHtml += "td{";
+scriptToAddInHtml += "    word-wrap: break-word !important;";
+scriptToAddInHtml += "    font-size: 12px;";
+scriptToAddInHtml += "}";
+scriptToAddInHtml += "span.like_link {";
+scriptToAddInHtml += "     cursor:pointer;";
+scriptToAddInHtml += "     color:blue;";
+scriptToAddInHtml += "     text-decoration:underline;";
+scriptToAddInHtml += "}";
+scriptToAddInHtml += "span.like_link:hover {";
+scriptToAddInHtml += "     text-decoration:none;";
+scriptToAddInHtml += "     text-shadow: 1px 1px 1px #555;";
+scriptToAddInHtml += "}";
 scriptToAddInHtml += "</style>";
 
 staticHTMLContentprefix = "<html><head><title>Test file reporter generated</title>"+scriptToAddInHtml+" </head><body style='font-family:Arial;'>";
-staticHTMLContentprefix += "<h1>Test Results</h1><table cellpadding='10' cellspacing='0' border='1' style='text-align:left'>";
+staticHTMLContentprefix += "<h1>Test Results</h1><table cellpadding='2' cellspacing='0' border='1' style='text-align:left'>";
 staticHTMLContentprefix += "<tr>";
 staticHTMLContentprefix += "<th></th><th></th><th></th>";
 staticHTMLContentprefix += "<th colspan='4'>Assert type</th>";
 staticHTMLContentprefix += "<th colspan='4'>Matcher</th>";
 staticHTMLContentprefix += "<th colspan='4'>Expected</th>";
 staticHTMLContentprefix += "<th colspan='4'>Actual</th>";
-staticHTMLContentprefix += "<th colspan='5'>Message</th>";
+staticHTMLContentprefix += "<th colspan='5' class='message'>Message</th>";
 staticHTMLContentprefix += "<th colspan='2'>Passed</th>";
 staticHTMLContentprefix += "</tr>";
 
@@ -106,14 +129,17 @@ function renderSteps(steps) {
             '<td colspan="2" class="noBottomTopBorder"></td>' +
             '<td colspan="13">Step: '+ step.name + '</td>' +
             '<td colspan="4">OS: '+ step.os + ', Browser: ' + step.browser.name+ ':' +step.browser.version + '</td>' +
-            '<td colspan="5"><a href="#" onclick="openModal(\'' + path.basename(step.screenShotFile)+ '\')">View Screenshot</a></td>' +
+            '<td colspan="5">',
+            '<span class="like_link" onclick="openModal(\'' + path.basename(step.screenShotFile)+ '\')">View Screenshot</span>'+
+            (step.results.items_.length > 0 ? ' | <span class="like_link" onclick="show(\'row' + step.step_id + '\')">View asserts (' + step.results.items_.length + ')</span>' : "") +
+            '</td>' +
             '<td colspan="2" style="color:#fff;background-color: '+ bgColor+'">' + step.passed + '</td>' +
             '</tr>' +
             (step.results.items_.length < 1 
                 ?
                 ''
                 :
-                renderItems(step.results.items_)
+                renderItems(step.results.items_, step.step_id)
             )
         );
     }
@@ -121,7 +147,7 @@ function renderSteps(steps) {
     return array.join("");
 }
 
-function renderItems(items) {
+function renderItems(items, step_id) {
     var l, expect, bgColor, array = [], passed;
     
     for (l in items) {
@@ -130,9 +156,10 @@ function renderItems(items) {
         passed = (expect.passed_ ? "Passed" : (expect.skipped ? 'Skipped' : 'Failed'));
 
         array.push(
-            '<tr>'+
+            '<tr class="row' + step_id + '" style="display:none">'+
             '<td colspan="3" class="noBottomTopBorder"></td>'+
-            '<td colspan="4">' + expect.type + '</td>'+
+            '<td class="noBottomTopBorder"><span class="like_link" onclick="hide(this.parentNode.parentNode)">X</span></td>'+
+            '<td colspan="3">' + expect.type + '</td>'+
             '<td colspan="4">' + expect.matcherName + '</td>'+
             '<td colspan="4">' + expect.expected + '</td>'+
             '<td colspan="4">' + expect.actual + '</td>'+
@@ -221,6 +248,7 @@ function parseMetaData(current, new_data) {
         current[p_id].features[s_id].passed = false;
     }
     current[p_id].features[s_id].steps[st_id] = {
+        step_id: st_id,
         name: descs[2].replace(/^\s+|\s+$/g, ""),
         results: new_data.results,
         os: new_data.os, 
