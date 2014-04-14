@@ -75,6 +75,10 @@ Options:
 
 ####Additional (our) CLI argumetns:
 
+* `-u` - runs `npm update` and `bower update` before tests executing
+* `-s` - starts selenium standalone server before tests executing
+* `-p %prof_name%` - runs pre-configured profile file from profile folder: `profile/%prof_name%.yml`.
+
 * `ENV_TYPE` - select environment setup, specified in `conf/config.js`
 
 ```Shell
