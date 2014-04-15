@@ -24,7 +24,6 @@ DataServicesClient.prototype.get = function(path) {
     });
     result.status = response.statusCode;
     result.response = response.body;
-    console.log(response.headers);
     if (response && parseInt(response.statusCode, 10) !== 200) {
         throw (new Error("GET: " + this.endpoint + "/#" + this.path + " => Response body: " + response.body));
     }
