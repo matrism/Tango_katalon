@@ -10,7 +10,8 @@
         "angular"
     ],
     "dependencies": { 
-        "underscore": "latest"
+        "underscore": "latest",
+        "request-sync": "latest"
     },
     "author": "WMG",
     "license": "ISC"
