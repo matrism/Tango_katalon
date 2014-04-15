@@ -6,6 +6,7 @@ global.ftf = ftf = {
     loginPage: require("./pages/login"),
     controller: require("./modules/controller"),
     htmlReporter: require("./modules/html_reporter"),
+    services: require("./modules/services"),
     dataServicesClient: require("./modules/data_services_client")
 };
 
