@@ -1,104 +1,86 @@
-var request = require('request');
+var request = require("request-sync");
 
 var DataServicesClient = function(endpoint, token) {
     this.endpoint = endpoint;
     this.token = token;
+    this.serviceHeaders = {
+        "user-agent": "Apache-HttpClient/4.1.1 (java 1.5)",
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": token
+    };
 };
 
-DataServicesClient.serviceHeaders = {
-    "User-Agent": "Apache-HttpClient/4.1.1 (java 1.5)",
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-    "authorization": this.token
-};
-
-DataServicesClient.prototype.get = function() {
-    var _this = this,
-        res = {
+DataServicesClient.prototype.get = function(path) {
+    var response,
+        result = {
             status: 0,
             response: ""
         };
-    request({
+    response = request({
         method: "GET",
-        url : _this.endpoint + "/" + _this.token,
-        headers: _this.serviceHeaders
-    }, function(error, response, body) {
-        if (error) {
-            throw (new Error(error));
-        }
-        res.status = response.statusCode;
-        res.response = response.body;
-        if (response.statusCode !== 200) {
-            throw (new Error("GET: " + _this.endpoint + "/" + _this.path + " => Response body: " + body));
-        }
+        url : this.endpoint + "/#" + path,
+        headers: this.serviceHeaders
     });
-    return res;
+    result.status = response.statusCode;
+    result.response = response.body;
+    console.log(response.headers);
+    if (response && parseInt(response.statusCode, 10) !== 200) {
+        throw (new Error("GET: " + this.endpoint + "/#" + this.path + " => Response body: " + response.body));
+    }
+    return result;
 };
 
 DataServicesClient.prototype.post = function(json, path) {
-    var _this = this,
-        res = {
+    var response,
+        result = {
             status: false,
             response: ""
         };
-    request({
+    response = request({
         method: "POST",
-        url : _this.endpoint + "/" + (typeof path !== undefined) ? path : "",
+        url : this.endpoint + "/#" + path,
         body: json,
-        headers: _this.serviceHeaders
-    }, function(error, response, body) {
-        if (error) {
-            throw (new Error(error));
-        }
-        if (response.statusCode === 200) {
-            res.status = true;
-            res.response = body;
-        } else {
-            res.response = response;
-        }
+        headers: this.serviceHeaders
     });
-    return res;
+    if (response && parseInt(response.statusCode, 10) === 200) {
+        result.status = true;
+    }
+    result.response = response.body;
+    return result;
 };
 
 DataServicesClient.prototype.del = function(path) {
-    var _this = this,
-        res = {
+    var response,
+        result = {
             status: false
         };
-    request({
+    response = request({
         method: "DELETE",
-        url : _this.endpoint + "/" + (typeof path !== undefined) ? path : "",
-        headers: _this.serviceHeaders
-    }, function(error, response) {
-        if (error) {
-            throw (new Error(error));
-        }
-        if (response.statusCode === 200) {
-            res.status = true;
-        }
+        url : this.endpoint + "/" + path,
+        headers: this.serviceHeaders
     });
-    return res;
+    if (response && parseInt(response.statusCode, 10) === 200) {
+        result.status = true;
+    }
+    return result;
 };
 
 DataServicesClient.prototype.put = function(json, path) {
-    var _this = this,
-        res = {
+    var response,
+        result = {
             status: false
         };
-    request({
+    response = request({
         method: "PUT",
-        url : _this.endpoint + "/" + (typeof path !== undefined) ? path : "",
+        url : this.endpoint + "/" + path,
         body: json,
-        headers: _this.serviceHeaders
-    }, function(error, response) {
-        if (error) {
-            throw (new Error(error));
-        }
-        if (response.statusCode === 200) {
-            res.status = true;
-        }
+        headers: this.serviceHeaders
     });
-    return res;
+    if (response && parseInt(response.statusCode, 10) === 200) {
+        result.status = true;
+    }
+    return result;
 };
 
 module.exports = DataServicesClient;
