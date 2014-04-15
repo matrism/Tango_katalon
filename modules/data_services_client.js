@@ -19,13 +19,13 @@ DataServicesClient.prototype.get = function(path) {
         };
     response = request({
         method: "GET",
-        url : this.endpoint + "/#" + path,
+        url : this.endpoint + "/" + path,
         headers: this.serviceHeaders
     });
     result.status = response.statusCode;
     result.response = response.body;
     if (response && parseInt(response.statusCode, 10) !== 200) {
-        throw (new Error("GET: " + this.endpoint + "/#" + this.path + " => Response body: " + response.body));
+        throw (new Error("GET: " + this.endpoint + "/" + this.path + " => Response body: " + response.body));
     }
     return result;
 };
@@ -38,7 +38,7 @@ DataServicesClient.prototype.post = function(json, path) {
         };
     response = request({
         method: "POST",
-        url : this.endpoint + "/#" + path,
+        url : this.endpoint + "/" + path,
         body: json,
         headers: this.serviceHeaders
     });
