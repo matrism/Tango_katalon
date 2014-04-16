@@ -55,7 +55,6 @@ function request(uri, options) {
     options = uri;
   }
   options = copy(options);
-  console.log("options", options);
   if (options.url && !options.uri) {
     options.uri = options.url;
     delete options.url;
