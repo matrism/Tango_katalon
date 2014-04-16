@@ -1,4 +1,5 @@
-var Matcher = function() {};
+var Matcher = function() {},
+    _ = require("underscore");
 
 Matcher.prototype.create = function(options) {
     var type = options;
@@ -24,7 +25,7 @@ Matcher.prototype.match = function(){
         this.message = function() {
             return (options && options.message) ? options.message.replace("{not}", isNot) : "Error";
         };
-        return pass.apply(this, [this.actual, options]);
+        return pass.apply(this, [this.actual, options, this.expected]);
     };
 };
 
@@ -48,5 +49,12 @@ Matcher.ShouldContainA = function() {
     };
     return this.match();
 };
+
+Matcher.ShouldBeEqualToObject = function() {
+    this.pass = function(actual, options) {
+        return _.isEqual(actual, options.expected);
+    };
+    return this.match();
+}
 
 module.exports = Matcher;

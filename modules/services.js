@@ -41,8 +41,8 @@ var http = require("./request"),
         parseResponseFields: function(res, field) {
             var array = [], entity, i;
                 
-            for (i in res['data']) {
-                entity = res['data'][i];
+            for (i in res.response.data) {
+                entity = res.response.data[i];
                 array.push(entity[field]);
             }
             return array;
@@ -67,9 +67,6 @@ var http = require("./request"),
                 }
             }
             return _.uniq(array);
-        },
-        getApplicationsFromResponse: function(res) {
-            return JSON.parse(res);
         }
     };
     

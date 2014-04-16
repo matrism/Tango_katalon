@@ -12,62 +12,59 @@ DataServicesClient = function(endpoint, token) {
 };
 
 DataServicesClient.prototype.get = function(path) {
-    var response,
+    var options = {
+            method: "GET",
+            url : this.endpoint + "/" + path,
+            headers: this.serviceHeaders
+        },
         result = {
             status: 0,
             response: ""
         },
-        url = this.endpoint,
-        token = this.token,
-        options = {
-            method: "GET",
-            url : url + "/" + path,
-            headers: {
-                'User-Agent': "Apache-HttpClient/4.1.1 (java 1.5)",
-                'Accept': "application/json, text/javascript; q=0.01",
-                'Content-Type': "application/json",
-                'Authorization': token
-            }
-        };
-        
-    response = http(options);
-    result.status = response.statusCode;
-    result.response = response.body;
-    if (response && parseInt(response.statusCode, 10) !== 200) {
+        response = http(options);
+
+    if (response && parseInt(response.statusCode, 10) === 200) { 
+        result.status = true;
+    } else {
         throw (new Error("GET: " + this.endpoint + "/" + this.path + " => Response body: " + response.body));
     }
+    result.response = JSON.parse(response.body);
     return result;
 };
 
 DataServicesClient.prototype.post = function(json, path) {
-    var response,
+    var options = {
+            method: "POST",
+            url : this.endpoint + "/" + (typeof path === "undefined" ? "" : path),
+            body: json,
+            headers: this.serviceHeaders
+        },
         result = {
             status: false,
             response: ""
-        };
-    response = http({
-        method: "POST",
-        url : this.endpoint + "/" + path,
-        body: json,
-        headers: this.serviceHeaders
-    });
+        },
+        response = http(options);
+        
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
+    } else {
+        throw (new Error("POST: " + this.endpoint + "/" + this.path + " => Response body: " + response.body));
     }
-    result.response = response.body;
+    result.response = JSON.parse(response.body);
     return result;
 };
 
 DataServicesClient.prototype.del = function(path) {
-    var response,
+    var options = {
+            method: "DELETE",
+            url : this.endpoint + "/" + path,
+            headers: this.serviceHeaders
+        },
         result = {
             status: false
-        };
-    response = http({
-        method: "DELETE",
-        url : this.endpoint + "/" + path,
-        headers: this.serviceHeaders
-    });
+        },
+        response = http(options);
+
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
     }
@@ -75,16 +72,17 @@ DataServicesClient.prototype.del = function(path) {
 };
 
 DataServicesClient.prototype.put = function(json, path) {
-    var response,
+    var options = {
+            method: "PUT",
+            url : this.endpoint + "/" + path,
+            body: json,
+            headers: this.serviceHeaders
+        },
         result = {
             status: false
-        };
-    response = http({
-        method: "PUT",
-        url : this.endpoint + "/" + path,
-        body: json,
-        headers: this.serviceHeaders
-    });
+        },
+        response = http(options);
+
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
     }

@@ -102,6 +102,8 @@ var _ = require("underscore"),
         },
         checkTags: function(feature) {
             var check = (
+                typeof feature !== "undefined"
+                &&    
                 typeof feature.tags !== "undefined"
                 &&
                 feature.tags instanceof Array
