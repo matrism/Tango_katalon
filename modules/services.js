@@ -1,5 +1,6 @@
-var http = require("request-sync"),
+var http = require("./request"),
     _ = require("underscore"),
+    DataServiceClient = require("./dataServicesClient"),
     Services = {
         getAccessToken: function() {
             var options = {
@@ -21,15 +22,19 @@ var http = require("request-sync"),
             },            
             res = http(options);
             if (parseInt(res.statusCode) !== 200) {
-                throw new Error("Failed to obtain access_token for #{" + _tf_config.client_id + "}")
+                throw new Error("Failed to obtain access_token for " + _tf_config.client_id);
             }
-            return "Bearer #{" + JSON.parse(res.body).access_token + "}";
+            return "Bearer " + JSON.parse(res.body).access_token;
         },
-        tutorials_service_url: _tf_config.urls.devportal_service,
+        prepare: function(conf) {
+            this.tutorials_service_url = conf.urls.devportal_service + "/api/v1/tutorials";
+            this.applications_service_url = conf.urls.webconsole_service + "/api/v1/applications";
+        },
+        tutorials_service_url: "",
         tutorialClient: function() {
             return new DataServiceClient(Services.tutorials_service_url, Services.getAccessToken());
         },
-        applications_service_url: _tf_config.urls.webconsole_service,
+        applications_service_url: "",
         applicationClient: function() {
             return new DataServiceClient(Services.applications_service_url, Services.getAccessToken());
         },

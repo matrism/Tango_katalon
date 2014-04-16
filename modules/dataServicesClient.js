@@ -1,13 +1,13 @@
-var request = require("request-sync");
+var http = require("./request"),
 
-var DataServicesClient = function(endpoint, token) {
+DataServicesClient = function(endpoint, token) {
     this.endpoint = endpoint;
     this.token = token;
     this.serviceHeaders = {
-        "user-agent": "Apache-HttpClient/4.1.1 (java 1.5)",
-        "accept": "application/json",
-        "content-type": "application/json",
-        "authorization": token
+        "User-Agent": "Apache-HttpClient/4.1.1 (java 1.5)",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token
     };
 };
 
@@ -16,17 +16,25 @@ DataServicesClient.prototype.get = function(path) {
         result = {
             status: 0,
             response: ""
+        },
+        url = this.endpoint,
+        token = this.token,
+        options = {
+            method: "GET",
+            url : url + "/" + path,
+            headers: {
+                'User-Agent': "Apache-HttpClient/4.1.1 (java 1.5)",
+                'Accept': "application/json, text/javascript; q=0.01",
+                'Content-Type': "application/json",
+                'Authorization': "Bearer " + token
+            }
         };
-    response = request({
-        method: "GET",
-        url : this.endpoint + "/#" + path,
-        headers: this.serviceHeaders
-    });
+        
+    response = http(options);
     result.status = response.statusCode;
     result.response = response.body;
-    console.log(response.headers);
     if (response && parseInt(response.statusCode, 10) !== 200) {
-        throw (new Error("GET: " + this.endpoint + "/#" + this.path + " => Response body: " + response.body));
+        throw (new Error("GET: " + this.endpoint + "/" + this.path + " => Response body: " + response.body));
     }
     return result;
 };
@@ -37,9 +45,9 @@ DataServicesClient.prototype.post = function(json, path) {
             status: false,
             response: ""
         };
-    response = request({
+    response = http({
         method: "POST",
-        url : this.endpoint + "/#" + path,
+        url : this.endpoint + "/" + path,
         body: json,
         headers: this.serviceHeaders
     });
@@ -55,7 +63,7 @@ DataServicesClient.prototype.del = function(path) {
         result = {
             status: false
         };
-    response = request({
+    response = http({
         method: "DELETE",
         url : this.endpoint + "/" + path,
         headers: this.serviceHeaders
@@ -71,7 +79,7 @@ DataServicesClient.prototype.put = function(json, path) {
         result = {
             status: false
         };
-    response = request({
+    response = http({
         method: "PUT",
         url : this.endpoint + "/" + path,
         body: json,
