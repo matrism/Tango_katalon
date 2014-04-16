@@ -26,7 +26,7 @@ DataServicesClient.prototype.get = function(path) {
                 'User-Agent': "Apache-HttpClient/4.1.1 (java 1.5)",
                 'Accept': "application/json, text/javascript; q=0.01",
                 'Content-Type': "application/json",
-                'Authorization': "Bearer " + token
+                'Authorization': token
             }
         };
         
