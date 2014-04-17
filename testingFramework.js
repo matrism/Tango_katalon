@@ -8,7 +8,6 @@ global.ftf = ftf = {
     htmlReporter: require("./modules/htmlReporter"),
     services: require("./modules/services"),
     dataServicesClient: require("./modules/dataServicesClient"),
-    dataServicesClientCC: require("./modules/dataServicesClientCC"),
     request: require("./modules/request")
 };
 

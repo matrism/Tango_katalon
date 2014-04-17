@@ -1,32 +1,7 @@
 var http = require("./request"),
     _ = require("underscore"),
     DataServiceClient = require("./dataServicesClient"),
-    DataServiceClientCC = require("./dataServicesClientCC"),
     Services = {
-        getAccessToken: function() {
-            var options = {
-                //"#{$sso}/oauth/token"
-                url: _tf_config.urls.sso + "/oauth/token",
-                auth: {
-                    username: _tf_config.client_id,
-                    password: _tf_config.client_secret
-                },
-                headers: {
-                    "Accept": "application/json"
-                },
-                qs: {
-                    username: _tf_config.user_name,
-                    password: _tf_config.user_password,
-                    grant_type: "password"
-                },
-                method: "POST"
-            },            
-            res = http(options);
-            if (parseInt(res.statusCode) !== 200) {
-                throw new Error("Failed to obtain access_token for " + _tf_config.client_id);
-            }
-            return "Bearer " + JSON.parse(res.body).access_token;
-        },
         prepare: function(conf) {
             this.tutorials_service_url = conf.urls.devportal_service + "/api/v1/tutorials";
             this.applications_service_url = conf.urls.webconsole_service + "/api/v1/applications";
@@ -34,22 +9,24 @@ var http = require("./request"),
         },
         tutorials_service_url: "",
         tutorialClient: function() {
-            return new DataServiceClient(Services.tutorials_service_url, Services.getAccessToken());
+            global.tut_client = new DataServiceClient(Services.tutorials_service_url);
+            return global.tut_client;
         },
         applications_service_url: "",
         applicationClient: function() {
-            return new DataServiceClient(Services.applications_service_url, Services.getAccessToken());
+            global.app_client = new DataServiceClient(Services.applications_service_url);
+            return global.app_client;
         },
         webconsole_service_url: "",
         webconsoleClient: function() {
-            global.webconsole_client = new DataServiceClientCC(Services.webconsole_service_url);
+            global.webconsole_client = new DataServiceClient(Services.webconsole_service_url, true);
             return global.webconsole_client;
         },
         parseResponseFields: function(res, field) {
             var array = [], entity, i;
                 
-            for (i in res["data"]) {
-                entity = res["data"][i];
+            for (i in res.response.data) {
+                entity = res.response.data[i];
                 array.push(entity[field]);
             }
             return array;
@@ -57,8 +34,8 @@ var http = require("./request"),
         getAllFatesCategories: function(res) {
             var array = [], terms, i;
             
-            for (i in res["facets"]) {
-                terms = res["facets"][i];
+            for (i in res.response.facets) {
+                terms = res.response.facets[i];
                 array.push(terms["terms"]["name"]);
             }
             return array;
@@ -66,8 +43,8 @@ var http = require("./request"),
         getItemFieldNames: function(res) {
             var array = [], items, i, j, field;
             
-            for (i in res["data"]) {
-                items = res["data"][i];
+            for (i in res.response.data) {
+                items = res.response.data[i];
                 for (j in items) {
                     field = items[j];
                     array.push(field[0]);
