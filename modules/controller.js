@@ -5,13 +5,23 @@ var _ = require("underscore"),
     fn,
     controller = {
         process: function() {
+            var path_to_features, i = 0, max;
             if (!(_tf_config._cli.tags instanceof Array) && _.isString(_tf_config._cli.tags)) {
                 _tf_config._cli.tags = [_tf_config._cli.tags];
             }
             if (!(_tf_config._cli["@tags"] instanceof Array) && _.isString(_tf_config._cli["@tags"])) {
                 _tf_config._cli["@tags"] = [_tf_config._cli["@tags"]];
             }
-            controller.readFeatures(_tf_config._system_.path_to_features);
+            
+            path_to_features = (typeof _tf_config.path_to_features === "undefined") ? _tf_config._system_.path_to_features : _tf_config.path_to_features;
+            if (typeof path_to_features === "string") {
+                controller.readFeatures(_tf_config._system_.path_to_features);
+            } else if (path_to_features instanceof Array) {
+                max = path_to_features.length;
+                for (; i < max; i++) {
+                    controller.readFeatures(path_to_features[i]);
+                }
+            }
         },
         prepareFeatures: function(feature, feature_name) {
             var beforeFeature = feature.beforeFeature,
