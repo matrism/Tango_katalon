@@ -81,7 +81,7 @@ var _ = require("underscore"),
                             try {
                                 fn.apply(null, args);
                             } catch(e) {
-                                throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step names please.\n Error:" + e.message);
+                                throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step name please. Error:" + e.message);
                             }
                         }
                     });
@@ -104,7 +104,7 @@ var _ = require("underscore"),
                         try {
                             fn.apply(null, args);
                         } catch(e) {
-                            throw new Error("Could not run step in '" + feature.name + "'. Check step names please.\n Error:" + e.message);
+                            throw new Error("Could not run step in '" + feature.name + "'. Check step name please. Error:" + e.message);
                         }
                     }
                 });
@@ -118,7 +118,7 @@ var _ = require("underscore"),
                             try {
                                 fn.apply(null, args);
                             } catch(e) {
-                                throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step names please.\n Error:" + e.message);
+                                throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step name please. Error:" + e.message);
                             }
                         }
                     });
