@@ -54,17 +54,23 @@ require(pages_path + "login");
     
 var docs_page = require(pages_path + "docs"),
 
-    beforeFeature = function() {
+    beforeFeature = [
         //make something before each feature,
         //e.g. login and navigate to page.
         //note: pass steps to this function
-        steps.components.itNavigateToDocs();
-        steps.components.itClickOnDocsCategory("frontend");
-    },
-    afterFeature = function() {
+        [steps.components.itNavigateToDocs],
+        [steps.components.itClickOnDocsCategory,["frontend"]];
+    ],
+    afterFeature = [
         //make something after each feature,
         //e.g. logout.
         //note: pass steps to this function
+    ],
+    globalBeforeEach = function() {
+        //setup your beforeEach function for all features
+    },
+    globalAfterEach = function() {
+        //setup your afterEach function for all features
     },
     feature = [{
         name: "Validate Breadcrumb Component tutorial on frontend page",
@@ -97,7 +103,9 @@ var docs_page = require(pages_path + "docs"),
 module.exports = {
     feature: feature,
     beforeFeature: beforeFeature,
-    afterFeature: afterFeature
+    afterFeature: afterFeature,
+    globalBeforeEach: globalBeforeEach,
+    globalAfterEach: globalAfterEach
 };
 ```
 
