@@ -73,16 +73,22 @@ var _ = require("underscore"),
                 
                 if (typeof beforeFeature !== "undefined") {
                     describe("\n    Before feature: " + feature.name, function() {
+                        var step, args, fn;
                         for (var i in beforeFeature) {
                             step = beforeFeature[i];
                             args = step[1] || [];
                             fn = step[0];
-                            fn.apply(null, args);
+                            try {
+                                fn.apply(null, args);
+                            } catch(e) {
+                                throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step names please.\n Error:" + e.message);
+                            }
                         }
                     });
                 }
                 
                 describe(feature.name, function() {
+                    var step, args, fn;
                     if (typeof feature.beforeEach !== "undefined") {
                         beforeEach(feature.beforeEach);
                     }
@@ -95,16 +101,25 @@ var _ = require("underscore"),
                         step = feature.steps[i];
                         args = step[1] || [];
                         fn = step[0];
-                        fn.apply(null, args);
+                        try {
+                            fn.apply(null, args);
+                        } catch(e) {
+                            throw new Error("Could not run step in '" + feature.name + "'. Check step names please.\n Error:" + e.message);
+                        }
                     }
                 });
                 if (typeof afterFeature !== "undefined") {
                     describe("After feature: " + feature.name, function() {
+                        var step, args, fn;
                         for (var i in afterFeature) {
                             step = beforeFeature[i];
                             args = step[1] || [];
                             fn = step[0];
-                            fn.apply(null, args);
+                            try {
+                                fn.apply(null, args);
+                            } catch(e) {
+                                throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step names please.\n Error:" + e.message);
+                            }
                         }
                     });
                 }
