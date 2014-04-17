@@ -1,6 +1,7 @@
 var http = require("./request"),
     _ = require("underscore"),
     DataServiceClient = require("./dataServicesClient"),
+    DataServiceClientCC = require("./dataServicesClientCC"),
     Services = {
         getAccessToken: function() {
             var options = {
@@ -11,7 +12,7 @@ var http = require("./request"),
                     password: _tf_config.client_secret
                 },
                 headers: {
-                    'Accept': 'application/json'
+                    "Accept": "application/json"
                 },
                 qs: {
                     username: _tf_config.user_name,
@@ -29,6 +30,7 @@ var http = require("./request"),
         prepare: function(conf) {
             this.tutorials_service_url = conf.urls.devportal_service + "/api/v1/tutorials";
             this.applications_service_url = conf.urls.webconsole_service + "/api/v1/applications";
+            this.webconsole_service_url = conf.urls.webconsole_service;
         },
         tutorials_service_url: "",
         tutorialClient: function() {
@@ -38,11 +40,16 @@ var http = require("./request"),
         applicationClient: function() {
             return new DataServiceClient(Services.applications_service_url, Services.getAccessToken());
         },
+        webconsole_service_url: "",
+        webconsoleClient: function() {
+            global.webconsole_client = new DataServiceClientCC(Services.webconsole_service_url);
+            return global.webconsole_client;
+        },
         parseResponseFields: function(res, field) {
             var array = [], entity, i;
                 
-            for (i in res.response.data) {
-                entity = res.response.data[i];
+            for (i in res["data"]) {
+                entity = res["data"][i];
                 array.push(entity[field]);
             }
             return array;
@@ -50,23 +57,26 @@ var http = require("./request"),
         getAllFatesCategories: function(res) {
             var array = [], terms, i;
             
-            for (i in res['facets']) {
-                terms = res['facets'][i];
-                array.push(terms['terms']['name']);
+            for (i in res["facets"]) {
+                terms = res["facets"][i];
+                array.push(terms["terms"]["name"]);
             }
             return array;
         },
         getItemFieldNames: function(res) {
             var array = [], items, i, j, field;
             
-            for (i in res['data']) {
-                items = res['data'][i];
+            for (i in res["data"]) {
+                items = res["data"][i];
                 for (j in items) {
                     field = items[j];
                     array.push(field[0]);
                 }
             }
             return _.uniq(array);
+        },
+        getApplicationsFromResponse: function(res) {
+            return JSON.parse(res);
         }
     };
     
