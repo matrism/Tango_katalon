@@ -4,16 +4,8 @@
 
 This module has helper methods and function for preparing and postprocessing requests to REST services.
 
-* `services.prepare(conf)` - this method takes config as a parameter and initializes url properties for different apps. They are:
-* `services.tutorials_service_url` - helping property for creating REST client for Tutorial service
-* `services.applications_service_url` - helping property for creating REST client for Applications service
-* `services.webconsole_service_url` - helping property for creating REST client for WebConsole (and CloudConsole) services
-* `services.tutorialClient()` - method creates Tutorial service client, sets it to `tut_client` property of global scope and returns it.
-* `services.applicationClient()` - method creates Applications service client, sets it to `app_client` property of global scope and returns it.
-* `services.webconsoleClient()` - method creates WebConsole (and CloudConsole) service client, sets it to `webconsole_client` property of global scope and returns it.
+* `services.restClient(endpoint, use_cookies)` - method creates REST service client, sets it to `restClient` property of global scope and returns it. `endpoint` - url of REST service, `use_cookies` - bool flag: if `true` - client will use cookies for auth, if `false` - client will use token for auth
 * `services.parseResponseFields(response, field_name)` - method receives `response` object and `field_name` string as parameters, parses response, collects values in `response.data.field_name` and returns array of collected data.
-* `services.getAllFatesCategories(response)` - method receives `response` object as a parameter, collects names of Facets and returns array of collected data.
-* `services.getItemFieldNames(res)` - method retrieves unique names of all fields from response and returns them as array.
 
 ####DataServiceClient Constructor
 This class is designed for performing authenticating via tokens and cookies, get, post, put, del requests. It works with JSON and all methods parse JSON response authomatically.
