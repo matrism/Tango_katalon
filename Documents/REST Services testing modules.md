@@ -1,0 +1,49 @@
+##REST Services testing modules
+
+####Services.js 
+
+This module has helper methods and function for preparing and postprocessing requests to REST services.
+
+* `services.prepare(conf)` - this method takes config as a parameter and initializes url properties for different apps. They are:
+* `services.tutorials_service_url` - helping property for creating REST client for Tutorial service
+* `services.applications_service_url` - helping property for creating REST client for Applications service
+* `services.webconsole_service_url` - helping property for creating REST client for WebConsole (and CloudConsole) services
+* `services.tutorialClient()` - method creates Tutorial service client, sets it to `tut_client` property of global scope and returns it.
+* `services.applicationClient()` - method creates Applications service client, sets it to `app_client` property of global scope and returns it.
+* `services.webconsoleClient()` - method creates WebConsole (and CloudConsole) service client, sets it to `webconsole_client` property of global scope and returns it.
+* `services.parseResponseFields(response, field_name)` - method receives `response` object and `field_name` string as parameters, parses response, collects values in `response.data.field_name` and returns array of collected data.
+* `services.getAllFatesCategories(response)` - method receives `response` object as a parameter, collects names of Facets and returns array of collected data.
+* `services.getItemFieldNames(res)` - method retrieves unique names of all fields from response and returns them as array.
+
+####DataServiceClient Constructor
+This class is designed for performing authenticating via tokens and cookies, get, post, put, del requests. It works with JSON and all methods parse JSON response authomatically.
+
+* `costructor(endpoint, use_cookies)` - the constructor method of DataServiceClient. It stores `endpoint` url into its property, checks which authenticating way to use and makes preparations. 
+    * If it should use cookies, it prepares headers object, host names for cookies and makes request with credentials to get access cookies. 
+    * If it should use tokens, it makes request to get token with credentials data, prepares headers with token.
+    
+To create new instance just call `client = new DataServicesClient(url, use_cookies)` and this will create new instance of client
+
+* #####Getting Cookies Access methods
+
+* `client.get2(link, method, body)` - it's the helper internal method which follows all redirects and collects all cookies.
+* `client.getAccessCookie()` - method that gets access cookies on e.g. CloudConsole auth service.
+* `client.getAccess(path)` - method that connects e.g. CloudConsole auth access with e.g. WebConsole access to given path.
+
+* #####Getting Token Access method
+
+* `client.getAccessToken()` - method retrives access token and returns it.
+
+* #####Common methods: all these methods return objects with status, and `client.get(path)` and `client.post(body, path)` return parsed response bodys:
+
+```js
+   result = {
+        status: bool
+        [, response: parsed_json]
+   }
+```
+
+* `client.get(path)` - method for performing `GET` request to given path and returns parsed response. 
+* `client.post(body, path)` - method performs `POST` request to given path with given body string and returns parsed response.
+* `client.del(path)` - method performs `DEL` request to given path.
+* `client.put(body, path)` - method performs `PUT` request to given path with given body string.

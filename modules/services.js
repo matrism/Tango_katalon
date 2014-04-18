@@ -51,9 +51,6 @@ var http = require("./request"),
                 }
             }
             return _.uniq(array);
-        },
-        getApplicationsFromResponse: function(res) {
-            return JSON.parse(res);
         }
     };
     
