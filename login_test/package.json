@@ -12,13 +12,18 @@
         "protractor",
         "angular"
     ],
+    "devDependencies": {},
     "dependencies": { 
-        "selenium-webdriver": "latest", 
         "protractor"        : "latest",
+        "jasmine-reporters" : "latest",
+        "underscore"        : "latest",
         "mkdirp"            : "latest",
         "path"              : "latest",
-        "underscore"        : "latest"
+        "qs"                : "latest"
+    },
+    "optionalDependencies": {
+        "http-sync": "latest",
+        "http-sync-win": "latest"
     },
     "author": "WMG",
     "license": "ISC"
-}

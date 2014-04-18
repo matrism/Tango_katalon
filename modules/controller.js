@@ -70,7 +70,6 @@ var _ = require("underscore"),
         },
         processFeature: function(feature, beforeFeature, afterFeature) {
             if (controller.checkTags(feature)) {
-                
                 if (typeof beforeFeature !== "undefined") {
                     describe("\n    Before feature: " + feature.name, function() {
                         var step, args, fn;
@@ -87,7 +86,7 @@ var _ = require("underscore"),
                     });
                 }
                 
-                describe(feature.name, function() {
+                describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     var step, args, fn;
                     if (typeof feature.beforeEach !== "undefined") {
                         beforeEach(feature.beforeEach);

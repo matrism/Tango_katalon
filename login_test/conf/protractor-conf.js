@@ -1,6 +1,5 @@
 var path = require("path"),
-    ScreenShotReporter,
-    is_old;
+    ScreenShotReporter, config;
 
 global.ftf = require("../bower_components/factory-testing-framework");
 global._tf_config = require("./config"); 
@@ -9,8 +8,7 @@ ScreenShotReporter = ftf.htmlReporter;
 global.pages = {};
 global.steps = {};
 
-exports.config = {
-    seleniumAddress: "http://localhost:4444/wd/hub",
+config = {
     capabilities: {
         "browserName": _tf_config._system_.browser //firefox, ie
     },
@@ -36,8 +34,21 @@ exports.config = {
                 })
             );
         }
+        
+        matchers = new ftf.matchers();
+        jasmine.Matchers.prototype.shouldBePresent = matchers.create("ShouldBePresent");
+        
     },  
     jasmineNodeOpts: {
         showColors: true
     }
 };
+
+if (typeof _tf_config._cli.not_jenkins === "undefined") {
+    config.chromeOnly = true;
+    config.chromeDriver = '/var/lib/jenkins/tools/bin/chromedriver';
+} else {
+    config.seleniumAddress = "http://localhost:4444/wd/hub";
+}
+
+exports.config = config;
