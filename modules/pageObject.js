@@ -20,6 +20,7 @@ Page.prototype.html = "";
 
 Page.prototype.index = function() {
     var locs = this.locators,
+        ind_props = this.indexed_properties,
         include = this.include, i;
         
     if (typeof include !== "undefined") {
@@ -28,12 +29,33 @@ Page.prototype.index = function() {
         }
     }
     this.elems = this.prepareLocators(locs);
+    this.indexed = this.prepareIndexedProperties(ind_props);
        
     if (this._url.template === "" || this._url.args.length < 1) {
         this.dynamic_url = false;
     } else {
         this.dynamic_url = true;
     }
+    return this;
+};
+Page.prototype.prepareIndexedProperties = function(props) {
+    var prop, i, page = this;
+    
+    for (i in props) {
+        prop = props[i];
+        this[i] = function(index) {
+            var locs = {}, loc, elems, j, type;
+            for (j in prop) {
+                loc = prop[j];
+                type = Object.keys(loc)[0];
+                locs[j] = {};
+                locs[j][type] = loc[type].replace("%s", index);
+            }
+            elems = page.prepareLocators(locs);
+            return elems;
+        };
+    }
+    
     return this;
 };
 Page.prototype.prepareLocators = function(locators) {

@@ -42,6 +42,13 @@ var pagePrepare = {
         },
         
         /**
+         * In this way you can extend locators with page modules
+         */
+        include: {
+            header: require("./header")
+        },
+        
+        /**
          * This method will override existing method in prototype
          */
         open: function() {
@@ -174,6 +181,35 @@ browser.getCurrentUrl().then(function(url) {
 * `page_obj.getTitle()` - method returns title of page.
 * `page_obj.waitUntil(timeout, message, promiseToBeTrue)` - method that waits until `promiseToBeTrue` Webdriver promise will be resolved before `timeout` (in ms), otherwise `message` will be thrown.
 * `page_obj.executeScript(code,callback)` - method executes `code` script in active browser window and calls `callback` with result of executing.
+* `page_obj.extendLocators(locators)` - method that allows to extend locators. This is useful e.g. for extending locators of login_page that is natively located inside framework and is hard to be extended.
+
+e.g., in your /path/to/js/tests/pages/login_page.js you can specify next:
+
+```js
+if (pages.login === undefined) {
+    var header = require('./header');
+    pages.login = new ftf.loginPage(_tf_config);
+    pages.login.extendLocators(header.locators);
+}
+
+module.exports = pages.login;
+```
+
+in your header module file in /path/to/js/tests/pages/header.js you can specify additional locators:
+
+```js
+var header = {
+    locators: {
+        header: { css: "h1" }
+    }
+};
+
+module.exports = header;
+```
+
+and in `pages.login.elems` you can find `header` and use it as native element.
+In this way you can reuse modules of pages in different page_objects.
+
 * `page_obj.refresh()` - method refreshes browser's window
 * `page_obj.back()` - method navigates browser to prefious page
 * `page_obj.forward()` - metod navigates browser to next page
@@ -185,3 +221,40 @@ browser.getCurrentUrl().then(function(url) {
 * `page_obj.waitForDocumentToLoad()` - method waits for `document.readyState` to become `"complete"`.
 * `page_obj.waitForUrlToChangeTo(regex)` - method waits until the URL changes to match a provided regex.
 * `page_obj.open()` - method navigates browser to page url.
+
+####Using of Indexed Property.
+
+Definition in /path/to/js/tests/pages/page_obj.js:
+
+```js
+if (pages.page_name === undefined) {
+    pages.page_name = new ftf.pageObject({
+        ...,
+        indexed_properties: {
+            spaces: {
+                titles: { xpath: "(//div[contains(@ugol-list,'space')]//a)[%s]" },
+                number_of_apps: { xpath: "(//div[contains(@ugol-list,'space')]//div[contains(@ng-class,'apps')]//span[@class='ng-binding'])[%s]" },
+                number_of_services: { xpath: "(//div[contains(@ugol-list,'space')]//div[contains(@ng-class,'services')]//span[@class='ng-binding'])[%s]"},
+                number_of_users: { xpath: "(//div[contains(@ugol-list,'space')]//div[contains(@ng-class,'users')]//span[@class='ng-binding'])[%s]" }
+            }
+        },
+        ...
+    });
+}
+
+module.exports = pages.orgs;
+```
+
+When initializing, page object creates methods of indexed_properties which can be used in next way in steps:
+
+```js
+    it("Step by me 2", function() {
+        for (var i = 1; i < 4; i++) {
+            pages.page_name.spaces(i).number_of_apps.getText().then(function(text) {
+                console.log("pages.orgs.spaces.titles => %s", text);
+            });
+        }
+    }); 
+```
+
+You can see that `pages.page_name` now has method `spaces` that takes index as argument and returns object of elements for passed index.
