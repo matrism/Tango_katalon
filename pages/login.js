@@ -18,31 +18,37 @@ var loginPage = function(_tf_config) {
             pages.login.elems.password.sendKeys(password);
             return this;
         },
-        doLogin: function() {
+        doLogin: function(login_name, login_pass) {
+            login_name = login_name || _tf_config.user_name;
+            login_pass = login_pass || _tf_config.user_password;
             pages.login
-                .setUsername(_tf_config.user_name)
-                .setPassword(_tf_config.user_password);
+                .setUsername(login_name)
+                .setPassword(login_pass);
 
-            browser.wait(pages.login.shouldWeLogin);
+            browser.wait(function() {
+                return pages.login.shouldWeLogin(login_name, login_pass);
+            });
 
             pages.login.elems.login_button.click();
             return this;
         },
-        shouldWeLogin: function() {
+        shouldWeLogin: function(login_name, login_pass) {
             return pages.login.elems.password.getAttribute("value").then(function(text) {
-                return text === _tf_config.user_password;
+                return text === login_pass;
             }) && pages.login.elems.username.getAttribute("value").then(function(text) {
-                return text === _tf_config.user_name;
+                return text === login_name;
             });
         },
-        login: function() {
+        login: function(login_name, login_pass) {
+            login_name = login_name || _tf_config.user_name;
+            login_pass = login_pass || _tf_config.user_password;
             pages.login.open(true).waitForAjax();
             pages.login.elems.username.isPresent().then(function(present) {
                 if (present) {
-                    pages.login.doLogin();
+                    pages.login.doLogin(login_name, login_pass);
                 } 
             });
-            expect(element(By.xpath("//span[contains(text(), " + _tf_config.user_name + ")]")).isPresent()).toBe(true);
+            expect(element(By.xpath("//span[contains(text(), " + login_name + ")]")).isPresent()).toBe(true);
         }
     });
 };
