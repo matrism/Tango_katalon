@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test file reporter generated</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var display = {};
+            
+            function openModal(imageSource) {
+                var myWindow = window.open('','screenshotWindow');
+                myWindow.document.write('<img src=\"' +imageSource + '\" alt=\"screenshot\" />');
+            }
+            
+            function hide(css) {
+                var elements = document.querySelectorAll('.'+css),
+                    i = 0,
+                    max = elements.length;
+            
+                for (; i < max; i++) {
+                    elements[i].style.display = 'none';
+                }
+            }
+            
+            function show(css) {
+                var elements = document.querySelectorAll('.'+css),
+                    i = 0,
+                    max = elements.length;
+            
+                for (; i < max; i++) {
+                    elements[i].style.display = '';
+                }
+            }
+            
+            function toggle(css) {
+                var elements = document.querySelectorAll('.'+css),
+                    i = 0,
+                    max = elements.length, className;
+            
+                if(typeof display[css] === 'undefined') {
+                    display[css] = false;
+                }
+                for (; i < max; i++) {
+                    elements[i].style.display = (display[css] ? 'none' : '');
+                }
+                if(display[css] && css.indexOf('feature') >= 0) {
+                    elements = document.querySelectorAll('.f'+css),
+                    i = 0; max = elements.length;
+                    for (; i < max; i++) {
+                        className = elements[i].className.split(' ');
+                        if(className.length > 1) {
+                            display[className[0]] = false;
+                        }
+                        elements[i].style.display = (display[css] ? 'none' : '');
+                    }
+                }
+                display[css] = !display[css];
+            }
+            
+            function filterTags(select) {
+                var i = 0, max = select.length, count = 0; 
+                hide("feature_tags");
+                for (; i < max; i++) {
+                    if (select.options[i].selected) {
+                        show(select.options[i].value);
+                        count++;
+                    }
+                } 
+                if (count === 0) {
+                    show("feature_tags");
+                }
+            }
+            
+            function clearFilters() {
+                var select = document.getElementById("tags_filter"),
+                    i = 0, max = select.length;
+            
+                show("feature_tags");
+                for (; i < max; i++) {
+                    if (select.options[i].selected) {
+                        select.options[i].selected = false;
+                    }
+                } 
+
+            }
+        </script>
+        <style>
+            th {
+                min-width: 20px;
+                font-size: 12px;
+            }
+            th.w20px {
+                width: 20px !important;
+            }
+            th.assert, td.assert {
+                width: 100px !important;
+            }
+            td.noBottomTopBorder {
+                border-top: 0px !important;
+                border-bottom: 0px !important;
+            }
+            th.message, td.message {
+                width: 250px !important;
+            }
+            td {
+                word-wrap: break-word !important;
+                font-size: 12px;
+            }
+            span.like_link {
+                 cursor:pointer;
+                 color:blue;
+                 text-decoration:underline;
+            }
+            span.like_link:hover {
+                 text-decoration:none;
+                 text-shadow: 1px 1px 1px #555;
+            }
+            table.statistics td {
+                border: 1px solid #999999;;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body style="font-family:Arial;">
+        <h1>Test Results</h1>
+        <div style="width:180px; float:right; margin-bottom: 10px">
+            Filters: (multiselect - click with Shift and Ctrl)
+            <span style="margin-right: 20px;">
+                <%= select %>
+            </span>
+            <span class="like_link" onclick="clearFilters();">Clear filters</span>
+        </div>
+        <div style="display:block; width:100%; margin-bottom: 10px;">
+            <%= table_statistics %>
+        </div>
+        <%= table %>
+    </body>
+</html>

@@ -70,58 +70,62 @@ var _ = require("underscore"),
         },
         processFeature: function(feature, beforeFeature, afterFeature) {
             if (controller.checkTags(feature)) {
-                if (typeof beforeFeature !== "undefined") {
-                    describe("\n    Before feature: " + feature.name, function() {
-                        var step, args, fn;
-                        for (var i in beforeFeature) {
-                            step = beforeFeature[i];
-                            args = step[1] || [];
-                            fn = step[0];
-                            try {
-                                fn.apply(null, args);
-                            } catch(e) {
-                                throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step name please. Error: " + e.message);
-                            }
-                        }
-                    });
-                }
                 
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
-                    var step, args, fn;
-                    if (typeof feature.beforeEach !== "undefined") {
-                        beforeEach(feature.beforeEach);
+                    if (typeof beforeFeature !== "undefined") {
+                        describe("Before feature", function() {
+                            var step, args, fn;
+                            for (var i in beforeFeature) {
+                                step = beforeFeature[i];
+                                args = step[1] || [];
+                                fn = step[0];
+                                try {
+                                    fn.apply(null, args);
+                                } catch(e) {
+                                    throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step name please. Error: " + e.message);
+                                }
+                            }
+                        });
                     }
-
-                    if (typeof feature.afterEach !== "undefined") {
-                        afterEach(feature.afterEach);
-                    } 
-
-                    for (var i in feature.steps) {
-                        step = feature.steps[i];
-                        args = step[1] || [];
-                        fn = step[0];
-                        try {
-                            fn.apply(null, args);
-                        } catch(e) {
-                            throw new Error("Could not run step in '" + feature.name + "'. Check step name please. Error: " + e.message);
-                        }
-                    }
-                });
-                if (typeof afterFeature !== "undefined") {
-                    describe("After feature: " + feature.name, function() {
+                    
+                    describe("Feature", function() {
                         var step, args, fn;
-                        for (var i in afterFeature) {
-                            step = beforeFeature[i];
+                        if (typeof feature.beforeEach !== "undefined") {
+                            beforeEach(feature.beforeEach);
+                        }
+
+                        if (typeof feature.afterEach !== "undefined") {
+                            afterEach(feature.afterEach);
+                        } 
+
+                        for (var i in feature.steps) {
+                            step = feature.steps[i];
                             args = step[1] || [];
                             fn = step[0];
                             try {
                                 fn.apply(null, args);
                             } catch(e) {
-                                throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step name please. Error: " + e.message);
+                                throw new Error("Could not run step in '" + feature.name + "'. Check step name please. Error: " + e.message);
                             }
                         }
                     });
-                }
+                    
+                    if (typeof afterFeature !== "undefined") {
+                        describe("After feature", function() {
+                            var step, args, fn;
+                            for (var i in afterFeature) {
+                                step = beforeFeature[i];
+                                args = step[1] || [];
+                                fn = step[0];
+                                try {
+                                    fn.apply(null, args);
+                                } catch(e) {
+                                    throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step name please. Error: " + e.message);
+                                }
+                            }
+                        });
+                    }
+                });
             }
         },
         checkTags: function(feature) {

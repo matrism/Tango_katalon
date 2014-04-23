@@ -1,0 +1,21 @@
+<tr class="row<%= step_id %> ffeature_<%= feature_id %>" style="display:none">
+    <td colspan="4" class="noBottomTopBorder"></td>
+    <td colspan="3" class="assert">
+        <%= expect.type %>
+    </td>
+    <td colspan="4">
+        <%= expect.matcherName %>
+    </td>
+    <td colspan="4">
+        <%= expect.expected %>
+    </td>
+    <td colspan="4">
+        <%= expect.actual %>
+    </td>
+    <td colspan="5" class="message">
+        <%= expect.message %>
+    </td>
+    <td colspan="2" style="color:#fff;background-color: <%= bgColor %>">
+        <%= passed %>
+    </td>
+</tr>

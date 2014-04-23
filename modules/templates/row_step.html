@@ -1,0 +1,21 @@
+<tr class="feature_<%= feature_id %>" style="display:none">
+    <td colspan="3" class="noBottomTopBorder"></td>
+    <td colspan="12">
+        Step: <%= step.name %>
+    </td>
+    <td colspan="4">
+        Browser: <%= step.browser.name %>:<%= step.browser.version %>
+    </td>
+    <td colspan="5" class="message">
+        <span class="like_link" onclick="openModal('<%= filepath %>');">View Screenshot</span>
+        <% 
+        if (parseInt(length) > 0) {
+        %> 
+        | 
+        <span class="like_link" onclick="toggle('row<%= step.step_id %>');">
+            View asserts ( <%= step.results.items_.length %> )
+        </span>
+        <% } %>
+    </td>
+    <td colspan="2" style="color:#fff;background-color: <%= bgColor %>"><%= step.passed %></td>
+</tr>
