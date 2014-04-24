@@ -14,14 +14,31 @@
             
             function hide(css) {
                 var elements = document.querySelectorAll('.'+css),
-                    i = 0,
+                    elem, i = 0, 
                     max = elements.length;
             
                 for (; i < max; i++) {
-                    elements[i].style.display = 'none';
+                    elem = elements[i];
+                    elem.style.display = 'none';
+                    if(css === "feature_tags") {
+                        collapseFeature(elem.className);
+                    }
                 }
             }
-            
+
+            function collapseFeature(className) {
+                var i = 0, id, classNames = className.split(" "), max = classNames.length;
+                
+                for (; i < max; i++) {
+                    if (classNames[i].indexOf("_feature_") >= 0) {
+                        id = classNames[i].replace("_feature_", "");
+                        if (display["feature_" + id]) {
+                            toggle("feature_" + id);
+                        }
+                    }
+                }
+            }
+    
             function show(css) {
                 var elements = document.querySelectorAll('.'+css),
                     i = 0,
@@ -35,7 +52,7 @@
             function toggle(css) {
                 var elements = document.querySelectorAll('.'+css),
                     i = 0,
-                    max = elements.length, className;
+                    max = elements.length, className, element;
             
                 if(typeof display[css] === 'undefined') {
                     display[css] = false;
@@ -52,6 +69,14 @@
                             display[className[0]] = false;
                         }
                         elements[i].style.display = (display[css] ? 'none' : '');
+                    }
+                }
+                if (css.indexOf('feature') >= 0) {
+                    element = document.getElementById("span_" + css);
+                    if (display[css]) {
+                        element.innerHTML = "+";
+                    } else {
+                        element.innerHTML = "-";
                     }
                 }
                 display[css] = !display[css];
@@ -122,6 +147,13 @@
             table.statistics td {
                 border: 1px solid #999999;;
                 padding: 5px;
+            }
+            span.plus_minus {
+                padding: 3px; 
+                color: red; 
+                cursor: pointer; 
+                font-size: 14px; 
+                font-weight: bold;
             }
         </style>
     </head>
