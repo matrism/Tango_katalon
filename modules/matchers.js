@@ -57,9 +57,9 @@ Matcher.ShouldBeEqualToObject = function() {
     return this.match();
 };
 
-Matcher.ShouldContainA = function() {
-    this.pass = function(actual, options){
-        return actual.indexOf("a") >= 0;
+Matcher.ArrayShouldContainsValues = function() {
+    this.pass = function(actual, options) {
+        return _.isEqual(_.intersection(actual, options.expected).sort(), options.expected.sort());
     };
     return this.match();
 };
