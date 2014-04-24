@@ -58,16 +58,20 @@
             }
             
             function filterTags(select) {
-                var i = 0, max = select.length, count = 0; 
+                var i = 0, max = select.length, count = 0, filters = []; 
                 hide("feature_tags");
                 for (; i < max; i++) {
                     if (select.options[i].selected) {
                         show(select.options[i].value);
+                        filters.push(select.options[i].value);
                         count++;
                     }
                 } 
                 if (count === 0) {
                     show("feature_tags");
+                    document.getElementById("current_tags").innerHTML = "None";
+                } else {
+                    document.getElementById("current_tags").innerHTML = filters.join(", ");
                 }
             }
             
@@ -80,7 +84,8 @@
                     if (select.options[i].selected) {
                         select.options[i].selected = false;
                     }
-                } 
+                }
+                document.getElementById("current_tags").innerHTML = "None";
             }
         </script>
         <style>
@@ -127,7 +132,10 @@
             <span style="margin-right: 20px;">
                 <%= select %>
             </span>
-            <span id="current_tags"></span>
+            <br />
+            Filters applied: <span id="current_tags">None</span>
+            <br />
+            <br />
             <span class="like_link" onclick="clearFilters();">Clear filters</span>
         </div>
         <div style="display:block; width:100%; margin-bottom: 10px;">
