@@ -55,6 +55,13 @@ Matcher.ShouldBeEqualToObject = function() {
         return _.isEqual(actual, options.expected);
     };
     return this.match();
-}
+};
+
+Matcher.ShouldContainA = function() {
+    this.pass = function(actual, options){
+        return actual.indexOf("a") >= 0;
+    };
+    return this.match();
+};
 
 module.exports = Matcher;
