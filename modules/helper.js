@@ -13,11 +13,11 @@ var Helper = {
         });
     },
     
-    clickOnOneEqual: function(elements, item) {
-        Helper.clickOnOneInclude(elements, item, true);
+    clickOnElementFromArrayThatHasEqualText: function(elements, item) {
+        Helper.clickOnElementFromArrayThatContainText(elements, item, true);
     },
     
-    clickOnOneInclude: function(elements, item, strict) {
+    clickOnElementFromArrayThatContainText: function(elements, item, strict) {
         var findEl;
         strict = strict || false;
         expect(elements._all.count()).toBeGreaterThan(0);
@@ -38,24 +38,7 @@ var Helper = {
         });
     },
     
-    clickOnSame: function(elements, item, time) {
-        var i = 0, findEl;
-        expect(elements._all.count()).toBeGreaterThan(0);
-        elements._all.map(function(elem) {
-            elem.getText().then(function(text) {
-                if (text.indexOf(item) >= 0) {
-                    i++;
-                }
-                if (i === time) {
-                    findEl = elem;
-                }
-            });
-        }).then(function(){
-            findEl.click();
-        });
-    },
-    
-    shouldOrNotBeAmongElements: function(elements, item, not_be, strict) {
+    shouldBeInArrayOfElements: function(elements, item, not_be, strict) {
         not_be = not_be || false;
         strict = strict || false;
         var foundItems = 0;
@@ -84,54 +67,79 @@ var Helper = {
     },
     
     shouldBeAmoungElements: function(elements, item) {
-        Helper.shouldOrNotBeAmongElements(elements, item, false, true);
+        Helper.shouldBeInArrayOfElements(elements, item, false, true);
     },
     
     shouldNotBeAmoungElements: function(elements, item) {
-        Helper.shouldOrNotBeAmongElements(elements, item, true, true);
+        Helper.shouldBeInArrayOfElements(elements, item, true, true);
     },
     
-    shouldBeOnlyOneWithText: function(elements, given, strict) {
-        strict = strict || false;
-        var foundItems = 0;
-        expect(elements._all.count()).toBeGreaterThan(0);
-       
-        elements._all.map(function(elem) {
-            elem.getText().then(function(text) {
-                if (strict) {
-                    if (text === given) {
-                        foundItems++;
-                    }
-                } else {
-                    if (given.indexOf(text) >= 0) {
-                        foundItems++;
-                    }
-                }
-            });
-        }).then(function(){
-            expect(foundItems).toBe(1);
-        });
-    },
-    
-    shouldBeOnlyOne: function(elements, item) {
-        Helper.shouldBeOnlyOneWithText(elements, text, true);
-    },
-    
-    splitAndCompare: function(text, elements) {
-        var ar = text.split(", "),
+    shouldSplittedTextBeEqualToElementsText: function(elements, textToSplit, strict) {
+        var ar = textToSplit.split(", "),
             actual_array = [],
-            all_count = 0;
+            all_count = 0, i = 0, contain_count = 0;
     
         expect(elements._all.count()).toBeGreaterThan(0);
+
         elements._all.count().then(function(count){
             all_count = count;
         });
-        
+
+        expect(elements._all.count()).toBe(ar.length);
+
         elements._all.each(function(el) {
             el.getText().then(function(text) {
                 actual_array.push(text);
                 if (all_count === actual_array.length) {
-                    expect(_.isEqual(actual_array.sort(), ar.sort())).toBe(true);
+                    actual_array.sort();
+                    ar.sort();
+                    if (strict) {
+                        expect(_.isEqual(actual_array, ar)).toBe(true);
+                    } else {
+                        for(; i < all_count; i++) {
+                            if(actual_array[i].indexOf(ar[i]) >= 0) {
+                                contain_count++;
+                            }
+                        }
+                        expect(contain_count).toBe(all_count);
+                    }
+                }
+            });
+        });
+    },
+    
+    shouldElementsTextContainSplittedText: function(elements, textToSplit, strict) {
+        var ar = textToSplit.split(", "),
+            actual_array = [],
+            all_count = 0, i = 0, j, contain_count = 0, max = ar.length;
+    
+        expect(elements._all.count()).toBeGreaterThan(0);
+
+        elements._all.count().then(function(count){
+            all_count = count;
+        });
+
+        elements._all.each(function(el) {
+            el.getText().then(function(text) {
+                actual_array.push(text);
+                if (all_count === actual_array.length) {
+                    for (; i < max; i++) {
+                        if (strict) {
+                            if (actual_array.indexOf(ar[i]) >= 0) {
+                                contain_count++;
+                                actual_array.splice(actual_array.indexOf(ar[i]), 1);
+                            }
+                        } else {
+                            for (j = 0; j < all_count; j++) {
+                                if (actual_array[j].indexOf(ar[i]) >= 0) {
+                                    contain_count++;
+                                    actual_array.splice(j, 1);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    expect(contain_count).toBe(max);
                 }
             });
         });
@@ -161,12 +169,6 @@ var Helper = {
             } else {
                 browser.quit();
             }
-        });
-    },
-    
-    pageShouldBeScrolledDown: function() {
-        browser.executeScript("return window.pageYOffset;").then(function(top) {
-            expect(top).toBeGreaterThan(0);
         });
     }
 };
