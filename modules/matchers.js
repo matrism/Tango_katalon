@@ -64,4 +64,11 @@ Matcher.ArrayShouldContainsValues = function() {
     return this.match();
 };
 
+Matcher.ShouldBeVisible = function() {
+    this.pass = function(actual, options) {
+        return actual.indexOf("ng-hide") === -1;
+    };
+    return this.match();
+};
+
 module.exports = Matcher;
