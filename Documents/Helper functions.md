@@ -3,103 +3,99 @@ Helper functions
 
 ### Functions for working with elements
 
-* **checkAttributeOfElementContainsValue(elem, attr_name, value)** - check if element attribute contains a value.
+* **`helper.checkAttributeOfElementContainsValue(elem, attr_name, value)`** - check if element attribute contains a value.
 
     Example:
     
-        <span class="item active">Text</span>
-        
-        helper.checkAttributeOfElementContainsValue(element(By.css(".item")), "class", "active"); // assertion will be true
+```html    
+<span class="item active">Text</span>
+```
 
-* **clickOnOneEqual(elements, item)** - click on element in the current set of elements which text is equal to received value.
+```js
+helper.checkAttributeOfElementContainsValue(element(By.css(".item")), "class", "active"); // assertion will be true
+```
+<br />
+
+* **`helper.clickOnElementFromArrayThatHasEqualText(elements, item)`** - click on element in the current set of elements which text is equal to received value.
     
     Example:
 
-        <ul>
-            <li class="item>Item1</li>
-            <li class="item>Item2</li>
-            <li class="item>Item3</li>
-        </ul>
-    
-        helper.clickOnOneEqual(element.all(By.css(".item")), 'Item2'); // the second element will be clicked 
-    
-* **clickOnOneInclude(elements, item)** - click on element in the current set of elements which text contains received value.
+```html
+<ul>
+    <li class="item">Item1</li>
+    <li class="item">Item2</li>
+    <li class="item">Item3</li>
+</ul>
+```
+
+```js
+helper.clickOnElementFromArrayThatHasEqualText(element.all(By.css(".item")), "Item2"); // the second element will be clicked 
+```
+<br />
+
+* **`helper.clickOnElementFromArrayThatContainText(elements, item, strict)`** - click on element in the current set of elements which text contains received value. If `strict` is true, function's behaviour will be the same as `helper.clickOnElementFromArrayThatHasEqualText`
 
     Example:
-    
-            <ul>
-                <li class="item>Item1</li>
-                <li class="item>Item2</li>
-                <li class="item>Item3</li>
-            </ul>
-        
-            helper.clickOnOneInclude(element.all(By.css(".item")), 'Item'); // the first element will be clicked 
 
-* **clickOnSame(elements, item, time)** - click on element in the current set of elements which text contains received value and element was found for the `time` time.
+```html
+<ul>
+    <li class="item">Item1</li>
+    <li class="item">Item2</li>
+    <li class="item">Item3</li>
+</ul>
+```
 
-    Example:
-    
-        <ul>
-            <li class="item>Value</li>
-            <li class="item>Item1</li>
-            <li class="item>Item2</li>
-            <li class="item>Item3</li>
-        </ul>
-    
-        helper.clickOnSame(element.all(By.css(".item")), "Item", 2); // third element will be clicked
+```js
+helper.clickOnElementFromArrayThatContainText(element.all(By.css(".item")), 'Item', false); // the first element will be clicked 
+```
+<br />
 
-* **shouldBeAmoungElements(elements, item)** - check if the set of elements `elements` contains element with the text `item`. Method uses strict comparison of the text of the element with passed value.
+* **`helper.shouldBeInArrayOfElements(elements, item, not_be, strict)`** - check if the set of elements `elements` contains (`not_be = false`) or doesn't contain (`not_be = true`) element with the text `item`. Method uses strict (`strict = true`, ===) or not strict (`strict = false`, searches for substring) comparison of the text of the element with passed value.
     
     Example:
 
-        <span class="item">Item</span>
-        <span class="item">Value</span>
-        <span class="item">Item</span>
+```html
+<span class="item">Item</span>
+<span class="item">Value</span>
+<span class="item">Item</span>
+```
 
-        helper.shouldBeAmoungElements(element.all(By.css(".item")), "Value") // assertion will be true
+```js
+helper.shouldBeInArrayOfElements(element.all(By.css(".item")), "Value", true, true); // assertion will be true
+```
+<br />
 
-* **shouldNotBeAmoungElements(elements, item)** - check if the set of elements `elements` does not contain element with the text `item`. Method uses strict comparison of the text of the element with passed value.
-
-    Example:
-    
-        <span class="item">Item</span>
-        <span class="item">Value</span>
-        <span class="item">Item</span>
-
-        helper.shouldNotBeAmoungElements(element.all(By.css(".item")), "Value") // assertion will be false
-
-* **shouldBeOnlyOne(elements, item)** - check if the set of elements `elements` contains only one element with the text `item`.
+* **`helper.shouldSplittedTextBeEqualToElementsText(text, elements, strict)`** - check if all values in parameter `text` match with text values from elements of the set `elements`. Order of items in text and in element is important. Number of items in text must be equal to number of elements
 
     Example:
     
-        1)
-            <span class="item">Text</span>
-            <span class="item">Value</span>
-            <span class="item">Text</span>
-    
-            helper.shouldBeOnlyOne(element.all(By.css(".item")), "Value") // assertion will be true
-            
-        2)    
-            <span class="item">Text</span>
-            <span class="item">Value</span>
-            <span class="item">Value</span>
-    
-            helper.shouldBeOnlyOne(element.all(By.css(".item")), "Value") // assertion will be false
+```html
+<span class="item">Value-1</span>
+<span class="item">Value-2</span>
+<span class="item">Value-3</span>
+```
 
-* **splitAndCompare(text, elements)** - check if all values in parameter `text` match with text values from elements of the set `elements`.
+```js
+helper.shouldSplittedTextBeEqualToElementsText("Value-2, Value-1, Value-3", element.all(By.css(".item")), true); // assertion will be false because order is important
+```
+<br />
+
+* **`helper.shouldElementsTextContainSplittedText(text, elements, strict)`** - check if all values in parameter `text` are substrings of text values from elements of the set `elements`. Order of items in text and in element is not important. Number of items in text can be less then number of elements.
 
     Example:
     
-        <span class="item">Value-1</span>
-        <span class="item">Value-2</span>
-        <span class="item">Value-3</span>
-        
-        helper.splitAndCompare("Value-2, Value-1, Value-3", element.all(By.css(".item"))) // assertion will be true
+```html
+<span class="item">Value-1</span>
+<span class="item">Value-2</span>
+<span class="item">Value-3</span>
+```
+
+```js
+helper.shouldSplittedTextBeEqualToElementsText("Value-2, Value", element.all(By.css(".item")), true); // assertion will be true
+```
         
 ### Functions for working with tabs and page scrolling:
 
 * **switchToNextTab()** - make the last opened tab current.
 
 * **closeCurrentTab()** - close current tab.
-
-* **pageShouldBeScrolledDown()** - check if the page is scrolled.
