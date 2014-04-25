@@ -31,7 +31,7 @@ Matcher.prototype.match = function(){
 
 Matcher.ShouldContain = function() {
     this.pass = function(actual, options){
-        return (options && options.compare && actual.indexOf(options.compare) !== -1) ? true : false;
+        return (options && options.expected && actual.indexOf(options.expected) !== -1) ? true : false;
     };
     return this.match();
 };
