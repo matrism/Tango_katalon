@@ -35,7 +35,7 @@ Helper functions
         
             helper.clickOnOneInclude(element.all(By.css(".item")), 'Item'); // the first element will be clicked 
 
-* **clickOnSame(elements, item, time)** - click on element in the current set of elements which text contains received value and elemnet was found for the `time` time.
+* **clickOnSame(elements, item, time)** - click on element in the current set of elements which text contains received value and element was found for the `time` time.
 
     Example:
     

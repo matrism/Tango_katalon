@@ -1,31 +1,36 @@
 _ = require("underscore");
 
 var Helper = {
-    checkAttributeOfElementContainsValue: function(elem, attr_name, value) {
+    checkAttributeOfElementContainsValue: function(elem, attr_name, value, strict) {
+        strict = strict || false;
+        expect(elem.isPresent()).toBe(true);
         elem.getAttribute(attr_name).then(function(attr) {
-            expect(attr).toContain(value);
+            if (strict) {
+                expect(attr).toBe(value);
+            } else {
+                expect(attr).toContain(value);
+            }
         });
     },
     
     clickOnOneEqual: function(elements, item) {
-        var findEl;
-        elements._all.map(function(elem) {
-            elem.getText().then(function(text) {
-                if (text === item) {
-                    findEl = elem;
-                }
-            });
-        }).then(function(){
-            findEl.click();
-        });
+        Helper.clickOnOneInclude(elements, item, true);
     },
     
-    clickOnOneInclude: function(elements, item) {
+    clickOnOneInclude: function(elements, item, strict) {
         var findEl;
+        strict = strict || false;
+        expect(elements._all.count()).toBeGreaterThan(0);
         elements._all.map(function(elem) {
             elem.getText().then(function(text) {
-                if (text.indexOf(item) >= 0) {
-                    findEl = elem;
+                if (strict) {
+                    if (text === item) {
+                        findEl = elem;
+                    }
+                } else {
+                    if (text.indexOf(item) >= 0) {
+                        findEl = elem;
+                    }
                 }
             });
         }).then(function(){
@@ -34,8 +39,8 @@ var Helper = {
     },
     
     clickOnSame: function(elements, item, time) {
-        var i = 0,
-            findEl;
+        var i = 0, findEl;
+        expect(elements._all.count()).toBeGreaterThan(0);
         elements._all.map(function(elem) {
             elem.getText().then(function(text) {
                 if (text.indexOf(item) >= 0) {
@@ -50,41 +55,57 @@ var Helper = {
         });
     },
     
-    shouldBeAmoungElements: function(elements, item) {
+    shouldOrNotBeAmongElements: function(elements, item, not_be, strict) {
+        not_be = not_be || false;
+        strict = strict || false;
         var foundItems = 0;
         
+        expect(elements._all.count()).toBeGreaterThan(0);
         elements._all.map(function(elem) {
             elem.getText().then(function(text) {
-                if (text === item) {
-                    foundItems++;
+                if (strict) {
+                    if (text === item) {
+                        foundItems++;
+                    }
+                } else {
+                    if (text.indexOf(item) >= 0) {
+                        foundItems++;
+                    }
                 }
             });
         }).then(function(){
-            expect(foundItems).toBeGreaterThan(0);
+            if (not_be) {
+                expect(foundItems).toBe(0);
+            } else {
+                expect(foundItems).toBeGreaterThan(0);
+            }
         });
+
+    },
+    
+    shouldBeAmoungElements: function(elements, item) {
+        Helper.shouldOrNotBeAmongElements(elements, item, false, true);
     },
     
     shouldNotBeAmoungElements: function(elements, item) {
-        var foundItems = 0;
-        
-        elements._all.map(function(elem) {
-            elem.getText().then(function(text) {
-                if (text === item) {
-                    foundItems++;
-                }
-            });
-        }).then(function(){
-            expect(foundItems).toBe(0);
-        });
+        Helper.shouldOrNotBeAmongElements(elements, item, true, true);
     },
     
-    shouldBeOnlyOne: function(elements, item) {
+    shouldBeOnlyOneWithText: function(elements, given, strict) {
+        strict = strict || false;
         var foundItems = 0;
+        expect(elements._all.count()).toBeGreaterThan(0);
        
         elements._all.map(function(elem) {
             elem.getText().then(function(text) {
-                if (text === item) {
-                    foundItems++;
+                if (strict) {
+                    if (text === given) {
+                        foundItems++;
+                    }
+                } else {
+                    if (given.indexOf(text) >= 0) {
+                        foundItems++;
+                    }
                 }
             });
         }).then(function(){
@@ -92,15 +113,20 @@ var Helper = {
         });
     },
     
+    shouldBeOnlyOne: function(elements, item) {
+        Helper.shouldBeOnlyOneWithText(elements, text, true);
+    },
+    
     splitAndCompare: function(text, elements) {
         var ar = text.split(", "),
             actual_array = [],
             all_count = 0;
     
+        expect(elements._all.count()).toBeGreaterThan(0);
         elements._all.count().then(function(count){
             all_count = count;
         });
-    
+        
         elements._all.each(function(el) {
             el.getText().then(function(text) {
                 actual_array.push(text);
