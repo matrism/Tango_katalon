@@ -31,7 +31,7 @@ Matcher.prototype.match = function(){
 
 Matcher.ShouldContain = function() {
     this.pass = function(actual, options){
-        return (options && options.compare && actual.indexOf(options.compare) !== -1) ? true : false;
+        return (options && options.expected && actual.indexOf(options.expected) !== -1) ? true : false;
     };
     return this.match();
 };
@@ -60,6 +60,13 @@ Matcher.ShouldBeEqualToObject = function() {
 Matcher.ArrayShouldContainsValues = function() {
     this.pass = function(actual, options) {
         return _.isEqual(_.intersection(actual, options.expected).sort(), options.expected.sort());
+    };
+    return this.match();
+};
+
+Matcher.ShouldBeVisible = function() {
+    this.pass = function(actual, options) {
+        return actual.indexOf("ng-hide") === -1;
     };
     return this.match();
 };
