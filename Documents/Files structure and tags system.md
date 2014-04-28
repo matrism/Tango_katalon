@@ -160,7 +160,7 @@ So, the final structure of files is next:
 ---->[pages]
 --------->page_obj1.js
 --------->...
----->[profile]
+---->[profiles]
 --------->profile_name1.yml
 --------->...
 ---->[reports]
