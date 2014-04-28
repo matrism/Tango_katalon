@@ -180,7 +180,7 @@ Page.prototype.saveScreen = function(name) {
         var fs = require("fs"),
             date = new Date(),
             newdate = date.getDate() + "_" + date.getMonth() + "_" + date.getFullYear() + "-" + date.getHours() + "_" + date.getMinutes() + "_" + date.getSeconds(),
-            filename = "screens/" + name + "_" + newdate + ".png",
+            filename = "reports/screens/" + name + "_" + newdate + ".png",
             stream = fs.createWriteStream(filename);
 
         stream.write(new Buffer(png, "base64"));

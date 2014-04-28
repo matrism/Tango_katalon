@@ -148,6 +148,10 @@ So, the final structure of files is next:
 ```
 ...
 [path_to_tests]
+---->[configs]
+--------->config.js
+--------->init.js
+--------->protractor-conf.js
 ---->[features]
 --------->feature_name1.js
 --------->feature_name2.js
@@ -156,9 +160,28 @@ So, the final structure of files is next:
 ---->[pages]
 --------->page_obj1.js
 --------->...
+---->[profile]
+--------->profile_name1.yml
+--------->...
+---->[reports]
+--------->[html]
+-------------->...(empty)
+--------->[xml]
+-------------->...(empty)
+--------->[screens]
+-------------->...(empty)
 ---->[steps]
 --------->step_name1.js
 --------->...
+---->[utils]
+--------->helper.js(optional)
+--------->...
+---->.bowerrc
+---->bower.json
+---->ds.sh
+---->package.json
+---->README.md
+---->start.sh
 ```
 When no tags are specified, system runs all tests and features.
 If you want to run tests only with special tags, you can add CLI option:
