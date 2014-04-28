@@ -71,4 +71,11 @@ Matcher.ShouldBeVisible = function() {
     return this.match();
 };
 
+Matcher.ShouldBeEqual = function() {
+    this.pass = function(actual, options) {
+        return actual === options.expected;
+    };
+    return this.match();
+};
+
 module.exports = Matcher;
