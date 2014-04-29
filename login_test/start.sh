@@ -15,8 +15,8 @@ EOF
 
 runProtr() 
 {
-    echo "Running ./node_modules/protractor/bin/protractor conf/protractor-conf.js --verbose $@"
-    ./node_modules/protractor/bin/protractor conf/protractor-conf.js --verbose $@
+    echo "Running ./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@"
+    ./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@
 }
 
 UPDATE=""
@@ -48,12 +48,12 @@ done
 
 shift "$((OPTIND-1))"
 
-FILE="./profile/$PROFILE.yml"
+FILE="./profiles/$PROFILE.yml"
 
 if [ ! -z "$UPDATE" ]
 then
-    npm update
     bower update
+    npm update
 fi
 
 if [ ! -z "$STARTSERVER" ]

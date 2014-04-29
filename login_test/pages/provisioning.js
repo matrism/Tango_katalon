@@ -1,5 +1,3 @@
-var helper = ftf.helper;
-
 if (pages.provisioning === undefined) {
     pages.provisioning = new ftf.pageObject({
         url: "http://security-console.devportal-ci.dspdev.wmg.com/provisioning",

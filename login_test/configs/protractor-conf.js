@@ -1,7 +1,7 @@
 var path = require("path"),
     ScreenShotReporter, config;
 
-global.ftf = require("../bower_components/factory-testing-framework");
+global.ftf = require("factory-testing-framework");
 global._tf_config = require("./config"); 
 ScreenShotReporter = ftf.htmlReporter;
 
