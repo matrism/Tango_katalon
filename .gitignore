@@ -3,6 +3,7 @@
 /node_modules/
 /xml_reports/
 /screenshot_reports/
+/.idea/
 /prev_tests/cucumber_protractor_tests/node_modules/
 /prev_tests/protractor_tests/xml_reports/
 /prev_tests/protractor_tests/node_modules/
