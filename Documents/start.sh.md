@@ -73,7 +73,7 @@ Options:
   --framework                                        Test framework to use. jasmine or mocha.
 ```
 
-####Additional (our) CLI argumetns:
+####Additional (our) CLI arguments:
 
 * `-u` - runs `npm update` and `bower update` before tests executing
 * `-s` - starts selenium standalone server before tests executing
