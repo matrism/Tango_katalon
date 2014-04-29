@@ -1,4 +1,4 @@
-###conf/protractor-conf.js
+###configs/protractor-conf.js
 
 ####I. Including modules.
 

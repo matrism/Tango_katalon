@@ -3,7 +3,7 @@
 ###What is start.sh
 
 start.sh file provides shortcut for protractor tests run.
-Instead of typing `protractor conf/protractor-conf.js --verbose` you should just type `start.sh` in command line. It will send all CLI arguments to protractor.
+Instead of typing `protractor configs/protractor-conf.js --verbose` you should just type `start.sh` in command line. It will send all CLI arguments to protractor.
 `--verbose` argument makes reports in CLI to have next look:
 
 ```Shell
@@ -79,7 +79,7 @@ Options:
 * `-s` - starts selenium standalone server before tests executing
 * `-p %prof_name%` - runs pre-configured profile file from profile folder: `profile/%prof_name%.yml`.
 
-* `ENV_TYPE` - select environment setup, specified in `conf/config.js`
+* `ENV_TYPE` - select environment setup, specified in `configs/config.js`
 
 ```Shell
 --ENV_TYPE %env_type%

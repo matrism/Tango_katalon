@@ -50,7 +50,7 @@ Be sure you have ssh-configured [access to github repo](https://help.github.com/
 2. `bower install` - installing bower dependency modules
 
 ###Step 4:
-1. Define framework object in `conf/protractor-conf.js`:
+1. Define framework object in `configs/protractor-conf.js`:
 ```js
     global.ftf = require("../bower_components/factory-testing-framework");
 ```

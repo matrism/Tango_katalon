@@ -1,4 +1,4 @@
-##conf/config.js
+##configs/config.js
 
 ###A. Create object for config:
 
@@ -100,7 +100,7 @@ module.exports = config;
 ```
 
 ###B. Creating config: 
-(See conf/protractor-conf.js.md file)
+(See configs/protractor-conf.js.md file)
 
 ```js
 config = ftf.configer.process(config);
