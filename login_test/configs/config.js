@@ -19,7 +19,7 @@ var configer = ftf.configer,
                 height: 768
             },
             reporting: cli.reporting in ["html", "xml", "all"] ? cli.reporting : "none",
-            path_to_features: "./tests/dev_portal/features/",
+            path_to_features: "./features/",
             path_to_steps: "../steps/",
             path_to_pages: "../pages/",
             wait_timeout: 5000
@@ -33,7 +33,7 @@ var configer = ftf.configer,
                 bootstrap_components: "http://bootstrap-components.devportal-ci.dspdev.wmg.com/",
                 webconsole_service: "http://webconsolesvc.devportal-ci.dspdev.wmg.com"
             },
-            path_to_features: ["./tests/dev_portal/features/"]
+            path_to_features: ["./features/"]
         },
         qa: {
             urls: {
@@ -42,16 +42,6 @@ var configer = ftf.configer,
             },
             user_name: "uaa_test_user01@wmgdsp.dev",
             user_password: "No!daIN@124"
-        },
-        wc: {
-            urls: {
-                sso: "http://uaa.cloudconsole.io/login.do",
-                app_url: "http://demo.cloudconsole.io",
-                webconsole_service: "http://demo.cloudconsole.io"
-            },
-            user_name: "admin",
-            user_password: "adm1np455w0rdi55up3rs3cr3t",
-            path_to_features: ["./tests/web_console/features/"]
         },
         cloudconsole: {
             urls: {
@@ -62,16 +52,6 @@ var configer = ftf.configer,
             },
             user_name: configer.getEnvVarByKey("USER_NAME"),
             user_password: configer.getEnvVarByKey("USER_PASSWORD")
-        },
-        ind: {
-            urls: {
-                sso: "http://uaa.cloudconsole.io/login.do",
-                app_url: "http://demo.cloudconsole.io",
-                webconsole_service: "http://demo.cloudconsole.io"
-            },
-            user_name: "admin",
-            user_password: "adm1np455w0rdi55up3rs3cr3t",
-            path_to_features: ["./tests/indexed/features/"]
         },
         localhost: {
              urls: {
