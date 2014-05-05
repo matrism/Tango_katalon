@@ -8,4 +8,4 @@ if (steps.login === undefined) {
     };
 }
 
-module.exports = steps.components;
+module.exports = steps.login;
