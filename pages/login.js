@@ -48,7 +48,7 @@ var loginPage = function(_tf_config) {
                     pages.login.doLogin(login_name, login_pass);
                 } 
             });
-            expect(element(By.xpath("//span[contains(text(), " + login_name + ")]")).isPresent()).toBe(true);
+            expect(element(By.xpath("//span[contains(text(), '" + login_name + "')]")).isPresent()).toBe(true);
         }
     });
 };
