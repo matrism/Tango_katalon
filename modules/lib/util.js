@@ -137,7 +137,7 @@ function renderFeature(feature, feature_id) {
         template = fs.readFileSync(templates_path + '/row_feature.html', {
             encoding: 'utf8'
         }),
-        array = [], tags_splited, i, tag, classnames = ["feature_tags"], args = {};
+        array = [], tags_splited, i, tag, classnames = ["feature_tags _feature_" + feature_id], args = {};
     
     statistics.features_total++;
     feature_name = feature.name.split(" Tags: ");
