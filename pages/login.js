@@ -1,6 +1,6 @@
 var PageObject = require("../modules/pageObject");
     
-var loginPage = function(_tf_config) {
+var loginPage = function(_tf_config, lg_element) {
     return new PageObject({
         url: _tf_config.urls.app_url,
         locators: {
@@ -48,7 +48,8 @@ var loginPage = function(_tf_config) {
                     pages.login.doLogin(login_name, login_pass);
                 } 
             });
-            expect(element(By.xpath("//span[contains(text(), " + login_name + ")]")).isPresent()).toBe(true);
+            lg_element = lg_element || element(By.partialLinkText(login_name.toUpperCase()));
+            expect(lg_element.isPresent()).toBe(true);
         }
     });
 };
