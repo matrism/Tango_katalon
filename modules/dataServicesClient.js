@@ -171,12 +171,12 @@ DataServicesClient.prototype.post = function(json, path) {
         },
         response = http(options);
 
-    if (response && parseInt(response.statusCode, 10) === 200) {
+    if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
     } else {
         throw (new Error("POST: " + this.endpoint + "/" + path + " : Response body: " + response.body + ", \nResponse headers:" + response.headers));
     }
-    result.response = JSON.parse(response.body);
+    result.response = parseInt(response.statusCode, 10) === 204 ? "" : JSON.parse(response.body);
     return result;
 };
 

@@ -114,7 +114,7 @@ var _ = require("underscore"),
                         describe("After feature", function() {
                             var step, args, fn;
                             for (var i in afterFeature) {
-                                step = beforeFeature[i];
+                                step = afterFeature[i];
                                 args = step[1] || [];
                                 fn = step[0];
                                 try {
