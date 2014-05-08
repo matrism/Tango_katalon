@@ -174,7 +174,7 @@ DataServicesClient.prototype.post = function(json, path) {
     if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
     } else {
-        throw (new Error("POST: " + this.endpoint + "/" + path + " : Response body: " + response.body + ", \nResponse headers:" + response.headers));
+        throw (new Error("POST: " + this.endpoint + "/" + path + " : Response body: " + response.body + ", \nResponse headers:" + JSON.stringify(response.headers)));
     }
     result.response = parseInt(response.statusCode, 10) === 204 ? "" : JSON.parse(response.body);
     return result;
