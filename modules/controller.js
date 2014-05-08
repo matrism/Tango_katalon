@@ -73,7 +73,7 @@ var _ = require("underscore"),
                 
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     if (typeof beforeFeature !== "undefined") {
-                        describe("Before feature", function() {
+                        describe("Pre-feature steps: ", function() {
                             var step, args, fn;
                             for (var i in beforeFeature) {
                                 step = beforeFeature[i];
@@ -88,7 +88,7 @@ var _ = require("underscore"),
                         });
                     }
                     
-                    describe("Feature", function() {
+                    describe("Feature steps:", function() {
                         var step, args, fn;
                         if (typeof feature.beforeEach !== "undefined") {
                             beforeEach(feature.beforeEach);
@@ -111,7 +111,7 @@ var _ = require("underscore"),
                     });
                     
                     if (typeof afterFeature !== "undefined") {
-                        describe("After feature", function() {
+                        describe("Post-feature steps:", function() {
                             var step, args, fn;
                             for (var i in afterFeature) {
                                 step = afterFeature[i];
