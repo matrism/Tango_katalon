@@ -39,21 +39,25 @@ Page.prototype.index = function() {
     return this;
 };
 Page.prototype.prepareIndexedProperties = function(props) {
-    var prop, i, page = this;
+    var i, page = this, 
+        factory = function(k) {
+            return function(index) {
+                var locs = {}, loc, elems, j, type, 
+                    prop = props[k];
+            
+                for (j in prop) {
+                    loc = prop[j];
+                    type = Object.keys(loc)[0];
+                    locs[j] = {};
+                    locs[j][type] = loc[type].replace("%s", index);
+                }
+                elems = page.prepareLocators(locs);
+                return elems;            
+            };
+        };
     
     for (i in props) {
-        prop = props[i];
-        this[i] = function(index) {
-            var locs = {}, loc, elems, j, type;
-            for (j in prop) {
-                loc = prop[j];
-                type = Object.keys(loc)[0];
-                locs[j] = {};
-                locs[j][type] = loc[type].replace("%s", index);
-            }
-            elems = page.prepareLocators(locs);
-            return elems;
-        };
+        page[i] = factory(i);
     }
     
     return this;
