@@ -152,7 +152,7 @@ DataServicesClient.prototype.get = function(path) {
     if (response && parseInt(response.statusCode, 10) === 200) { 
         result.status = true;
     } else {
-        throw (new Error("GET: " + this.endpoint + "/" + this.path + " : Response body: " + response.body));
+        throw (new Error("GET: " + options.url + " : Response body: " + response.body));
     }
     result.response = JSON.parse(response.body);
     return result;
