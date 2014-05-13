@@ -78,4 +78,11 @@ Matcher.ShouldBeEqual = function() {
     return this.match();
 };
 
+Matcher.ShouldBeNull = function() {
+    this.pass = function(actual, options) {
+        return _.isNull(actual);
+    };
+    return this.match();
+};
+
 module.exports = Matcher;

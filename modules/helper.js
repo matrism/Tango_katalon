@@ -38,9 +38,10 @@ var Helper = {
         });
     },
     
-    shouldBeInArrayOfElements: function(elements, item, not_be, strict) {
+    shouldBeInArrayOfElements: function(elements, item, not_be, strict, matchers_number) {
         not_be = not_be || false;
         strict = strict || false;
+        matchers_number = matchers_number || false;
         var foundItems = 0;
         
         expect(elements._all.count()).toBeGreaterThan(0);
@@ -57,10 +58,14 @@ var Helper = {
                 }
             });
         }).then(function(){
-            if (not_be) {
+            if (not_be && !matchers_number) {
                 expect(foundItems).toBe(0);
             } else {
-                expect(foundItems).toBeGreaterThan(0);
+                if (matchers_number) {
+                    expect(foundItems).toBe(matchers_number);
+                } else {
+                    expect(foundItems).toBeGreaterThan(0);
+                }
             }
         });
 
@@ -72,6 +77,10 @@ var Helper = {
     
     shouldNotBeAmoungElements: function(elements, item) {
         Helper.shouldBeInArrayOfElements(elements, item, true, true);
+    },
+    
+    shouldBeOneAmoungElements: function(elements, item) {
+        Helper.shouldBeInArrayOfElements(elements, item, true, true, 1);
     },
     
     shouldSplittedTextBeEqualToElementsText: function(elements, textToSplit, strict) {
