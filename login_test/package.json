@@ -16,7 +16,9 @@
         "q": "~0.8.12",
         "grunt": "~0.4.1",
         "lpad": "~0.1.0",
-        "grunt-parallel": "^0.3.1"
+        "grunt-cli": "latest",
+        "grunt-parallel": "^0.3.1",
+        "async": "0.8.0"
     },
     "dependencies": { 
         "protractor"        : "latest",
