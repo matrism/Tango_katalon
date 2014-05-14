@@ -12,7 +12,12 @@
         "protractor",
         "angular"
     ],
-    "devDependencies": {},
+    "devDependencies": {
+        "q": "~0.8.12",
+        "grunt": "~0.4.1",
+        "lpad": "~0.1.0",
+        "grunt-parallel": "^0.3.1"
+    },
     "dependencies": { 
         "protractor"        : "latest",
         "jasmine-reporters" : "latest",
