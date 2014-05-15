@@ -20,7 +20,9 @@ module.exports = function (grunt) {
         if (grunt.__failed) {
             grunt.fail.warn("Done with errors");
         }
+        console.timeEnd(">>Total time");
     })
-
+    
+    console.time(">>Total time");
     grunt.registerTask('default', ['parallel','check']);
 };
