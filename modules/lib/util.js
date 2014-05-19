@@ -17,6 +17,38 @@ var fs = require('fs'),
     },
     tags = {};
 
+function compileReport(basePath) {
+    var htmlFile = path.join(basePath, 'reporter.htm'),
+        jsonData = collectData(basePath),
+        dynamicData = generateHTML(jsonData),
+        res;
+    
+    try {
+        res = fs.writeFileSync(htmlFile, dynamicData);
+    } catch (e) {
+        console.log("fail:", e.message);
+    }
+}
+
+function collectData(basePath) {
+    var json, files = fs.readdirSync(basePath), file, currentData = {}, file_path, content;
+
+    for (var i in files) {
+        if (files[i] === "combined.json") {
+           continue; 
+        }
+        file_path = path.join(basePath, files[i]);
+        content = fs.readFileSync(file_path, {encoding: 'utf8'});
+        try {
+            json = JSON.parse(content);
+        } catch (e) {
+            
+        }
+        currentData = parseMetaData(currentData, json);
+    }
+    return currentData;
+}
+
 /** Function: storeScreenShot
  * Stores base64 encoded PNG data to the file at the given path.
  *
@@ -452,5 +484,6 @@ module.exports = {
     gatherDescriptions: gatherDescriptions,
     generateGuid: generateGuid,
     addMetaData: addMetaData,
-    addHTMLReport: addHTMLReport
+    addHTMLReport: addHTMLReport,
+    compileReport: compileReport
 };
