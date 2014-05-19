@@ -1,9 +1,10 @@
 var path = require("path"),
-    ScreenShotReporter, config;
+    ScreenShotReporter, config, SSReporter_instance;
 
 global.ftf = require("../vendor/factory-testing-framework");
 global._tf_config = require("./config"); 
 ScreenShotReporter = ftf.htmlReporter;
+SSReporter_instance = new ScreenShotReporter({baseDirectory: "reports/html"});
 
 global.pages = {};
 global.steps = {};
@@ -14,6 +15,7 @@ config = {
     },
     specs: ["init.js"],
     onPrepare: function() {
+        console.time("Tests time");
         var reporting = _tf_config._system_.reporting;
         browser.driver.manage().timeouts().setScriptTimeout(5000);
     
@@ -28,17 +30,19 @@ config = {
         }
 
         if (reporting === "html" || reporting === "all") {
-            jasmine.getEnv().addReporter(
-                new ScreenShotReporter({
-                    baseDirectory: "reports/html"
-                })
-            );
+            jasmine.getEnv().addReporter(SSReporter_instance);
         }
         
         matchers = new ftf.matchers();
         jasmine.Matchers.prototype.shouldBePresent = matchers.create("ShouldBePresent");
         
     },  
+    onCleanUp: function() {
+        if (typeof process.env.__using_grunt === "undefined") {
+            SSReporter_instance.compileReport();
+        }
+        console.timeEnd("Tests time");
+    },
     jasmineNodeOpts: {
         showColors: true
     }
@@ -48,7 +52,14 @@ if (typeof _tf_config._cli.not_jenkins === "undefined") {
     config.chromeOnly = true;
     config.chromeDriver = '/var/lib/jenkins/tools/bin/chromedriver';
 } else {
-    config.seleniumAddress = "http://localhost:4444/wd/hub";
+//    config.seleniumAddress = "http://localhost:4444/wd/hub";
+    /**
+     * to allow this, run 
+     * `webdriver-manager update --out_dir node_modules/protractor/selenium` 
+     * in tests dir
+     */
+    config.chromeOnly = true;
+    config.chromeDriver = '../node_modules/protractor/selenium/chromedriver.exe';
 }
 
 exports.config = config;

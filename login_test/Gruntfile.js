@@ -5,6 +5,8 @@ module.exports = function (grunt) {
     'use strict';
     grunt.loadTasks('./vendor/factory-testing-framework/modules/parallel');
     
+    global.__using_grunt = true;
+    
     grunt.initConfig({
         parallel: {
             shell: {
