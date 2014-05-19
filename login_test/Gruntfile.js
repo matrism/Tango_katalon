@@ -12,10 +12,10 @@ module.exports = function (grunt) {
             shell: {
                 tasks: [{
                     cmd: "bash",
-                    args: ["start.sh", "--tags", "search_service", "--reporting", "all"]
+                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "search_service", "--reporting", "all"]
                 },{
                     cmd: "bash",
-                    args: ["start.sh", "--tags", "application_service", "--reporting", "all"]
+                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "application_service", "--reporting", "all"]
                 }]
             }
         }
