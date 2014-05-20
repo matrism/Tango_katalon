@@ -55,32 +55,17 @@ then
     bower update
 fi
 
-echo JENKINS_HOME
-echo $JENKINS_HOME
-
 if [ ! -z "$PROFILE" ]
 then
     if [ ! -f "$FILE" ]
     then
-        if [ -z "$JENKINS_HOME" ]
-        then
-            PARAMS+=" --not_jenkins"
-        fi
         runProtr $PARAMS
     else 
         PROFILELINE=$(cat $FILE)
         PROFILELINE+=$PARAMS
-        if [ -z "$JENKINS_HOME" ]
-        then
-            PROFILELINE+=" --not_jenkins"
-        fi
         echo "Running $PROFILELINE"
         command $PROFILELINE
     fi
 else 
-    if [ -z "$JENKINS_HOME" ]
-    then
-        PARAMS+=" --not_jenkins"
-    fi
     runProtr $PARAMS
 fi

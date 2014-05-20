@@ -10,6 +10,12 @@ global.pages = {};
 global.steps = {};
 
 config = {
+    /**
+     * to allow this, run 
+     * `./node_modules/protractor/bin/webdriver-manager update --out_dir ../selenium`
+     */
+    chromeOnly: true,
+    chromeDriver: '../node_modules/protractor/selenium/chromedriver.exe',
     capabilities: {
         "browserName": _tf_config._system_.browser //firefox, ie
     },
@@ -47,19 +53,5 @@ config = {
         showColors: true
     }
 };
-
-if (typeof _tf_config._cli.not_jenkins === "undefined") {
-    config.chromeOnly = true;
-    config.chromeDriver = '/var/lib/jenkins/tools/bin/chromedriver';
-} else {
-//    config.seleniumAddress = "http://localhost:4444/wd/hub";
-    /**
-     * to allow this, run 
-     * `webdriver-manager update --out_dir node_modules/protractor/selenium` 
-     * in tests dir
-     */
-    config.chromeOnly = true;
-    config.chromeDriver = '../node_modules/protractor/selenium/chromedriver.exe';
-}
 
 exports.config = config;
