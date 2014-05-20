@@ -20,6 +20,8 @@ runProtr()
     ./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@
 }
 
+./node_modules/protractor/bin/webdriver-manager update --out_dir ./node_modules/protractor/selenium
+
 UPDATE=""
 PROFILE=""
 PARAMS=$@

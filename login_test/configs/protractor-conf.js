@@ -10,12 +10,8 @@ global.pages = {};
 global.steps = {};
 
 config = {
-    /**
-     * to allow this, run 
-     * `./node_modules/protractor/bin/webdriver-manager update --out_dir ../selenium`
-     */
     chromeOnly: true,
-    chromeDriver: '../node_modules/protractor/selenium/chromedriver.exe',
+    chromeDriver: '../node_modules/protractor/selenium/chromedriver',
     capabilities: {
         "browserName": _tf_config._system_.browser //firefox, ie
     },
