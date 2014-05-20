@@ -10,13 +10,15 @@ module.exports = function (grunt) {
     grunt.initConfig({
         parallel: {
             shell: {
+                // Configuration of parallel tasks
                 tasks: [{
                     cmd: "bash",
-                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "search_service", "--reporting", "all"]
+                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "search_service"]
                 },{
                     cmd: "bash",
-                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "application_service", "--reporting", "all"]
+                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "application_service"]
                 }]
+                // End of configuration of parallel tasks
             }
         }
     });
@@ -30,5 +32,5 @@ module.exports = function (grunt) {
     })
     
     console.time(">>Total time");
-    grunt.registerTask('default', ['parallel','check']);
+    grunt.registerTask('tests', ['parallel','check']);
 };
