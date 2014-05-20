@@ -1,5 +1,4 @@
-#!/bin/sh
-
+#!/bin/bash
 usage()
 {
 cat << EOF
@@ -23,7 +22,6 @@ runProtr()
 
 UPDATE=""
 PROFILE=""
-STARTSERVER=""
 PARAMS=$@
 OPTIND=1
 PROFILELINE=""
@@ -39,11 +37,8 @@ while getopts ":hup:s" OPTION; do
             ;;
         p)
             PROFILE=$OPTARG
-            PARAMS=${PARAMS/-p/}
+            PARAMS=${PARAMS/"-p"/}
             PARAMS=${PARAMS/$OPTARG/}
-            ;;
-        s)
-            STARTSERVER="1"
             ;;
         *)
             ;;
@@ -52,18 +47,12 @@ done
 
 shift "$((OPTIND-1))"
 
-FILE="./profile/$PROFILE.yml"
+FILE="./profiles/$PROFILE.yml"
 
 if [ ! -z "$UPDATE" ]
 then
     npm update
     bower update
-fi
-
-if [ ! -z "$STARTSERVER" ]
-then
-    start ds.sh &
-    timeout 5
 fi
 
 echo JENKINS_HOME
@@ -73,7 +62,7 @@ if [ ! -z "$PROFILE" ]
 then
     if [ ! -f "$FILE" ]
     then
-        if [ -z "$JENKINS_HOME"]
+        if [ -z "$JENKINS_HOME" ]
         then
             PARAMS+=" --not_jenkins"
         fi
@@ -81,7 +70,7 @@ then
     else 
         PROFILELINE=$(cat $FILE)
         PROFILELINE+=$PARAMS
-        if [ -z "$JENKINS_HOME"]
+        if [ -z "$JENKINS_HOME" ]
         then
             PROFILELINE+=" --not_jenkins"
         fi
@@ -89,7 +78,7 @@ then
         command $PROFILELINE
     fi
 else 
-    if [ -z "$JENKINS_HOME"]
+    if [ -z "$JENKINS_HOME" ]
     then
         PARAMS+=" --not_jenkins"
     fi
