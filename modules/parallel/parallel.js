@@ -19,15 +19,18 @@ module.exports = function(grunt) {
 //      lpad.stdout('    ');
 
       if (error || code !== 0) {
-          grunt.__failed = true;
+        if (typeof result.stderr !== "undefined" && result.stderr !== "") {
+            grunt.__failed = true;
+            grunt.log.warn("---------------");
+            grunt.log.warn("Parallel error: ");
+            grunt.log.warn("code: ", code);
+            grunt.log.warn("error: ", error);
+            grunt.log.warn("stderr:", result.stderr);
+            grunt.log.warn("---------------");
+        }
 //        var message = result.stderr || result.stdout;
 ////        grunt.log.writeln("--------code", message);
 ////
-        grunt.log.warn("---------------");
-        grunt.log.warn("Parallel warn: ");
-        grunt.log.warn("stderr:", result.stderr);
-        grunt.log.warn("stdout:", result.stdout);
-        grunt.log.warn("---------------");
         
 ////        lpad.stdout();
 ////        
