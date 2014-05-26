@@ -20,10 +20,15 @@ module.exports = function(grunt) {
 
       if (error || code !== 0) {
           grunt.__failed = true;
-////        var message = result.stderr || result.stdout;
+//        var message = result.stderr || result.stdout;
 ////        grunt.log.writeln("--------code", message);
 ////
-////        grunt.log.error(message);
+        grunt.log.warn("---------------");
+        grunt.log.warn("Parallel warn: ");
+        grunt.log.warn("stderr:", result.stderr);
+        grunt.log.warn("stdout:", result.stdout);
+        grunt.log.warn("---------------");
+        
 ////        lpad.stdout();
 ////        
 //        return deferred.reject();
