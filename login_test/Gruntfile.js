@@ -1,5 +1,7 @@
 var ftf = require("./vendor/factory-testing-framework"),
-    SSReporter_instance = new ftf.htmlReporter({baseDirectory: "reports/html"});;
+    SSReporter_instance = new ftf.htmlReporter({baseDirectory: "reports/html"}),
+    params = ftf.configer.getParamsFromCli() || false,
+    profile = params !== false ? params["p"] : "ci";
 
 module.exports = function (grunt) {
     'use strict';
@@ -13,10 +15,10 @@ module.exports = function (grunt) {
                 // Configuration of parallel tasks
                 tasks: [{
                     cmd: "bash",
-                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "search_service"]
+                    args: ["start.sh", "-p", profile, "--tags", "search_service"]
                 },{
                     cmd: "bash",
-                    args: ["start.sh", "-p", (process.argv["p"] || "ci"), "--tags", "application_service"]
+                    args: ["start.sh", "-p", profile, "--tags", "application_service"]
                 }]
                 // End of configuration of parallel tasks
             }
