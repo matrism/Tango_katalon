@@ -34,10 +34,11 @@ function collectData(basePath) {
     var json, files = fs.readdirSync(basePath), file, currentData = {}, file_path, content;
 
     for (var i in files) {
-        if (files[i] === "combined.json") {
+        file = files[i];
+        if (file.indexOf(".json") < 0 || file === "combined.json") {
            continue; 
         }
-        file_path = path.join(basePath, files[i]);
+        file_path = path.join(basePath, file);
         content = fs.readFileSync(file_path, {encoding: 'utf8'});
         try {
             json = JSON.parse(content);
