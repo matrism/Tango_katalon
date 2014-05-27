@@ -46,6 +46,9 @@ var _ = require("underscore"),
         
             files = fs.readdirSync(route);
             for (var i in files) {
+                if (files[i].indexOf(".js") < 0) {
+                    continue;
+                }
                 feature = require(route + "/" + files[i]);
                 controller.prepareFeatures(feature, controller.stringUCFirst(files[i]));
             };
