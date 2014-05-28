@@ -15,7 +15,7 @@ var _ = require("underscore"),
             
             path_to_features = (typeof _tf_config.path_to_features === "undefined") ? _tf_config._system_.path_to_features : _tf_config.path_to_features;
             if (typeof path_to_features === "string") {
-                controller.readFeatures(_tf_config._system_.path_to_features);
+                controller.readFeatures(path_to_features);
             } else if (path_to_features instanceof Array) {
                 max = path_to_features.length;
                 for (; i < max; i++) {
