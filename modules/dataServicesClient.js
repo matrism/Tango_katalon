@@ -99,7 +99,7 @@ DataServicesClient.prototype.get2 = function(link, method, body) {
             return this.get2(new_link, "GET");
         }
     } else {
-        throw new Error("Could not reach " + options.url);
+        throw new Error("Could not reach " + options.url + "\n    Response: " + JSON.stringify(res));
     }
 };
 
@@ -132,7 +132,7 @@ DataServicesClient.prototype.getAccessToken = function() {
     },            
     res = http(options);
     if (parseInt(res.statusCode) !== 200) {
-        throw new Error("Failed to obtain access_token for " + _tf_config.client_id);
+        throw new Error("Failed to obtain access_token for " + _tf_config.client_id + "\n    Response: " + JSON.stringify(res));
     }
     return "Bearer " + JSON.parse(res.body).access_token;
 };
@@ -152,7 +152,7 @@ DataServicesClient.prototype.get = function(path) {
     if (response && parseInt(response.statusCode, 10) === 200) { 
         result.status = true;
     } else {
-        throw (new Error("GET: " + options.url + " : Response body: " + response.body));
+        throw (new Error("GET: " + options.url + "\n    Response: " + JSON.stringify(response)));
     }
     result.response = JSON.parse(response.body);
     return result;
@@ -174,7 +174,7 @@ DataServicesClient.prototype.post = function(json, path) {
     if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
     } else {
-        throw (new Error("POST: " + this.endpoint + "/" + path + " : Response body: " + response.body + ", \nResponse headers:" + JSON.stringify(response.headers)));
+        throw (new Error("POST: " + this.endpoint + "/" + path + "\n    Response: " + JSON.stringify(response)));
     }
     result.response = parseInt(response.statusCode, 10) === 204 ? "" : JSON.parse(response.body);
     return result;
