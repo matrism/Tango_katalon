@@ -18,23 +18,20 @@ var Helper = {
     },
     
     clickOnElementFromArrayThatContainText: function(elements, item, strict) {
-        var findEl;
         strict = strict || false;
         expect(elements._all.count()).toBeGreaterThan(0);
         elements._all.map(function(elem) {
             elem.getText().then(function(text) {
                 if (strict) {
                     if (text === item) {
-                        findEl = elem;
+                        elem.click();
                     }
                 } else {
                     if (text.indexOf(item) >= 0) {
-                        findEl = elem;
+                        elem.click();
                     }
                 }
             });
-        }).then(function(){
-            findEl.click();
         });
     },
     
