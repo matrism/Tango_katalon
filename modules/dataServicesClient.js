@@ -157,7 +157,7 @@ DataServicesClient.prototype.get = function(path) {
     try {
         result.response = JSON.parse(response.body);
     } catch(e) {
-        result.response = response.body;
+        throw (new Error(response.body));
     }
     return result;
 };
