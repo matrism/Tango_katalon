@@ -46,8 +46,8 @@ var Helper = {
         expect(elements._all.count()).toBeGreaterThan(0);
         
         elements._all.count().then(function(count) {
-            elements._all.get(count).then(function(elem) {
-                recursive(elem, count, strict);
+            elements._all.get(count - 1).then(function(elem) {
+                recursive(elem, count - 1, strict);
             });
         });
     },
