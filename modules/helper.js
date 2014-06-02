@@ -18,19 +18,36 @@ var Helper = {
     },
     
     clickOnElementFromArrayThatContainText: function(elements, item, strict) {
+        var recursive = function(elem, count, strict) {
+            if (count >= 0) {
+                count--;
+                elem.getText().then(function(text) {
+                    if (strict) {
+                        if (text === item) {
+                            elem.click();
+                        } else {
+                            elements._all.get(count).then(function(elem) {
+                                recursive(elem, count, strict);
+                            });
+                        }
+                    } else {
+                        if (text.indexOf(item) >= 0) {
+                            elem.click();
+                        } else {
+                            elements._all.get(count).then(function(elem) {
+                                recursive(elem, count, strict);
+                            });
+                        }
+                    }
+                });
+            }
+        };
         strict = strict || false;
         expect(elements._all.count()).toBeGreaterThan(0);
-        elements._all.map(function(elem) {
-            elem.getText().then(function(text) {
-                if (strict) {
-                    if (text === item) {
-                        elem.click();
-                    }
-                } else {
-                    if (text.indexOf(item) >= 0) {
-                        elem.click();
-                    }
-                }
+        
+        elements._all.count().then(function(count) {
+            elements._all.get(count).then(function(elem) {
+                recursive(elem, count, strict);
             });
         });
     },
