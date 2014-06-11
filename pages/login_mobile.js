@@ -39,6 +39,7 @@ var loginPage = function(_tf_config, lg_element) {
             });
         },
         login: function(login_name, login_pass) {
+            browser.ignoreSynchronization = true;
             login_name = login_name || _tf_config.user_name;
             login_pass = login_pass || _tf_config.user_password;
             pages.login.elems.username.isPresent().then(function(present) {
@@ -49,7 +50,7 @@ var loginPage = function(_tf_config, lg_element) {
             lg_element = lg_element || element(By.partialLinkText(login_name.toUpperCase()));
             expect(lg_element.isPresent()).toBe(true);
         }
-    });
+   });
 };
 
 module.exports = loginPage;
