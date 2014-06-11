@@ -41,7 +41,6 @@ var loginPage = function(_tf_config, lg_element) {
         login: function(login_name, login_pass) {
             login_name = login_name || _tf_config.user_name;
             login_pass = login_pass || _tf_config.user_password;
-            pages.login.open(true).waitForAjax();
             pages.login.elems.username.isPresent().then(function(present) {
                 if (present) {
                     pages.login.doLogin(login_name, login_pass);
