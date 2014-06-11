@@ -16,6 +16,8 @@ global.ftf = ftf = {
         helper: require("./modules/helper"),
         loginPage: require("./pages/login_mobile"),
         controller: require("./modules/controller"),
+        request: require("./modules/request"),
+        dataServicesClient: require("./modules/dataServicesClient"),
         htmlReporter: require("./modules/htmlReporter")
     }
 };
