@@ -177,6 +177,15 @@ var Helper = {
         }, timeout);
     },
     
+    waitForElementToDisplay: function(el, timeout) {
+        timeout = timeout || 5000;
+        return browser.wait(function() {
+            return el.isDisplayed().then(function(displayed) {
+                return displayed === true;
+            });
+        }, timeout);
+    },
+    
     switchToNextTab: function() {
         browser.getAllWindowHandles().then(function(data){
             browser.switchTo().window(data[data.length -1]);
