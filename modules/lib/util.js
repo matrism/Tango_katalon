@@ -4,6 +4,10 @@ var fs = require('fs'),
     crypto = require('crypto'),
     _ = require('underscore'),
     templates_path = path.resolve(__dirname, '../templates/'),
+    lastStepTime = 0,
+    lastSubFeatureTime = 0,
+    lastFeatureTime = 0,
+    lastFileTime = 0,
     statistics = {
         files_total: 0,
         files_passed: 0,
@@ -126,16 +130,20 @@ function renderFile(file) {
     var array = [], args = {},
         template = fs.readFileSync(templates_path + '/row_file_name.html', {
             encoding: 'utf8'
-        });
+        }),
+        features = renderFeatures(file.features);
     
     statistics.files_total++;
     args = {
         file: file,
-        bgColor: file.passed? 'green': 'red'
+        bgColor: file.passed? 'green': 'red',
+        time: ((lastStepTime - lastFileTime) / 1000)
     };
     
+    lastFileTime = lastStepTime;
+    
     array.push(_.template(template,args));
-    array.push(renderFeatures(file.features));
+    array.push(features);
     
     return array.join("");
 }
@@ -170,6 +178,7 @@ function renderFeature(feature, feature_id) {
         template = fs.readFileSync(templates_path + '/row_feature.html', {
             encoding: 'utf8'
         }),
+        subFeatures = renderSubFeatures(feature.subFeatures, feature_id),
         array = [], tags_splited, i, tag, classnames = ["feature_tags _feature_" + feature_id], args = {};
     
     statistics.features_total++;
@@ -197,11 +206,14 @@ function renderFeature(feature, feature_id) {
         feature_name: feature_name,
         show_tags: show_tags,
         feature_id: feature_id,
-        feature: feature
+        feature: feature,
+        time: ((lastStepTime - lastFeatureTime) / 1000)
     };
     
+    lastFeatureTime = lastStepTime;
+    
     array.push(_.template(template, args));
-    array.push(renderSubFeatures(feature.subFeatures, feature_id));
+    array.push(subFeatures);
     
     return array.join("");
 }
@@ -225,16 +237,20 @@ function renderSubFeature(feature, feature_id) {
         args = {},
         template = fs.readFileSync(templates_path + '/row_subfeature.html', {
             encoding: 'utf8'
-        });
+        }),
+        steps = renderSteps(feature.steps, feature_id);
     
     args = {
         feature_id: feature_id,
         bgColor: feature.passed ? "green" : "red",
-        feature: feature
+        feature: feature,
+        time: ((lastStepTime - lastSubFeatureTime) / 1000)
     };
     
+    lastSubFeatureTime = lastStepTime;
+    
     array.push(_.template(template,args));
-    array.push(renderSteps(feature.steps, feature_id));
+    array.push(steps);
     
     return array.join("");
 }
@@ -252,8 +268,11 @@ function renderSteps(steps, feature_id) {
             step: step,
             filepath: path.basename(step.screenShotFile),
             bgColor: step.passed? 'green': (step.skipped ? 'blue' : 'red'),
-            length: step.results.items_.length
+            length: step.results.items_.length,
+            time: ((step.finishTime - lastStepTime) / 1000)
         };
+        
+        lastStepTime = step.finishTime;
         
         statistics.steps_total++;
         if (step.passed) {
@@ -347,6 +366,7 @@ function parseMetaData(current, new_data) {
         p_id = new_data.parent_suite_id,
         s_id = new_data.suite_id,
         st_id = new_data.step_id,
+        finishTime = new_data.finishTime,
         passed = true, i;
 
     for (i in new_data.results.items_) {
@@ -394,7 +414,8 @@ function parseMetaData(current, new_data) {
         os: new_data.os, 
         browser: new_data.browser,
         passed: new_data.passed,
-        screenShotFile: new_data.screenShotFile
+        screenShotFile: new_data.screenShotFile,
+        finishTime: finishTime
     };
     
     return current;

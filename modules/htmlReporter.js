@@ -49,6 +49,7 @@ function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
         os: capabilities.caps_.platform, 
         results: results,
         passed: results.passed(),
+        finishTime: spec.finishTime,
         browser: {
             name: capabilities.caps_.browserName,
             version: capabilities.caps_.version
