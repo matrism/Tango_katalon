@@ -84,7 +84,7 @@ function generateHTML(data) {
         select: renderSelect(tags),
         table_statistics: _.template(table_statistics, {
             statistics: statistics,
-            totalTime: lastStepTime
+            totalTime: (lastStepTime / 1000)
         })
     });
 }
