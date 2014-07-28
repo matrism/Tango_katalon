@@ -197,7 +197,7 @@ Page.prototype.waitForAjax = function() {
         browser.sleep(300);
         return browser.executeScript("return typeof jQuery === 'undefined' ? 0 : jQuery.active").then(function(res) {
             return res == 0;
-        }) && browser.executeScript("return typeof angular === 'undefined' ? 0 : angular.element([$('body')]).injector().get('$http').pendingRequests.length").then(function(res) {
+        }) && browser.executeScript("return typeof angular === 'undefined' ? 0 : angular.element(document.body).injector().get('$http').pendingRequests.length").then(function(res) {
             return res == 0;
         });
     }, _tf_config._system_.wait_timeout);
