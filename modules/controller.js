@@ -55,7 +55,6 @@ var _ = require("underscore"),
         },
         processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach) {
             describe(feature_name, function() {
-                var empty;
                 if (typeof globalBeforeEach !== "undefined") {
                     beforeEach(function() {
                         globalBeforeEach.call(this);
@@ -68,12 +67,8 @@ var _ = require("underscore"),
                 }
                 
                 for (var i in features) {
-                    empty = controller.processFeature(features[i], beforeFeature, afterFeature);
+                    controller.processFeature(features[i], beforeFeature, afterFeature);
                 } 
-                
-                if (empty) {
-                    it("Skipped", function() {});
-                }
             });
         },
         processFeature: function(feature, beforeFeature, afterFeature) {
@@ -134,9 +129,6 @@ var _ = require("underscore"),
                         });
                     }
                 });
-                return false;
-            } else {
-                return true;
             }
         },
         checkTags: function(feature) {
