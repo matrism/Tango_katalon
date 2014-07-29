@@ -12,9 +12,11 @@ var fs = require("fs"),
         files_total: 0,
         files_passed: 0,
         files_failed: 0,
+        files_skipped: 0,
         features_total: 0,
         features_passed: 0,
         features_failed: 0,
+        features_skipped: 0,
         steps_total: 0,
         steps_passed: 0,
         steps_failed: 0
@@ -94,27 +96,26 @@ function generateHTML(data) {
 }
 
 function renderFiles(files) {
-    var file, i, array = [],
+    var file, i, array = [], skipped,
         template = fs.readFileSync(templates_path + "/row_between_features.html", {
             encoding: "utf8"
         });
     
-    statistics = {
-        files_total: 0,
-        files_passed: 0,
-        files_failed: 0,
-        features_total: 0,
-        features_passed: 0,
-        features_failed: 0,
-        steps_total: 0,
-        steps_passed: 0,
-        steps_failed: 0
-    };
-    tags = {};
-    
     for(i in files) {
         file = files[i];
-        if (!file.passed) {
+        skipped = true;
+        for(i in file.features) {
+            if (!file.features[i].skipped) {
+                skipped = false;
+                break;
+            } else {
+                statistics.features_skipped++;
+            }
+        }
+        file.skipped = skipped;
+        if (file.skipped) {
+            statistics.files_skipped++;
+        } else if (!file.passed) {
             statistics.files_failed++;
             array.push(renderFile(file));
         }
@@ -122,7 +123,7 @@ function renderFiles(files) {
     
     for(i in files) {
         file = files[i];
-        if (file.passed) {
+        if (!file.skipped && file.passed) {
             statistics.files_passed++;
             array.push(renderFile(file));
         }
@@ -137,13 +138,6 @@ function renderFile(file) {
             encoding: "utf8"
         }),
         features = renderFeatures(file.features), skipped = true;
-    
-    for(i in file.features) {
-        if (!file.features[i].skipped) {
-            skipped = false;
-            break
-        }
-    }
     
     statistics.files_total++;
     args = {
