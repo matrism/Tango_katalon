@@ -55,6 +55,7 @@ var _ = require("underscore"),
         },
         processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach) {
             describe(feature_name, function() {
+                var empty;
                 if (typeof globalBeforeEach !== "undefined") {
                     beforeEach(function() {
                         globalBeforeEach.call(this);
@@ -73,7 +74,6 @@ var _ = require("underscore"),
         },
         processFeature: function(feature, beforeFeature, afterFeature) {
             if (controller.checkTags(feature)) {
-                
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     if (typeof beforeFeature !== "undefined") {
                         describe("Pre-feature steps: ", function() {
@@ -128,6 +128,10 @@ var _ = require("underscore"),
                             }
                         });
                     }
+                });
+            } else {
+                describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
+                    it("Skipped", function() {});
                 });
             }
         },

@@ -19,6 +19,10 @@
     <td colspan="5" class="message"></td>
     <td colspan="2"><%= time %></td>
     <td colspan="2" style="color:#fff;background-color: <%= bgColor %>">
+        <% if (feature.skipped) { %>
+        Skipped
+        <% } else { %>
         <%= feature.passed %>
+        <% } %>
     </td>
 </tr>

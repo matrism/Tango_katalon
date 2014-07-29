@@ -1,9 +1,9 @@
-var fs = require('fs'),
-    path = require('path'),
-    mkdirp = require('mkdirp'),
-    crypto = require('crypto'),
-    _ = require('underscore'),
-    templates_path = path.resolve(__dirname, '../templates/'),
+var fs = require("fs"),
+    path = require("path"),
+    mkdirp = require("mkdirp"),
+    crypto = require("crypto"),
+    _ = require("underscore"),
+    templates_path = path.resolve(__dirname, "../templates/"),
     lastStepTime = 0,
     lastSubFeatureTime = 0,
     lastFeatureTime = 0,
@@ -22,7 +22,7 @@ var fs = require('fs'),
     tags = {};
 
 function compileReport(basePath) {
-    var htmlFile = path.join(basePath, 'reporter.htm'),
+    var htmlFile = path.join(basePath, "reporter.htm"),
         jsonData = collectData(basePath),
         dynamicData = generateHTML(jsonData),
         res;
@@ -30,7 +30,7 @@ function compileReport(basePath) {
     try {
         res = fs.writeFileSync(htmlFile, dynamicData);
     } catch (e) {
-        console.log("fail:", e.message);
+        console.error("fail:", e.message);
     }
 }
 
@@ -43,13 +43,17 @@ function collectData(basePath) {
            continue; 
         }
         file_path = path.join(basePath, file);
-        content = fs.readFileSync(file_path, {encoding: 'utf8'});
+        content = fs.readFileSync(file_path, {encoding: "utf8"});
         try {
             json = JSON.parse(content);
         } catch (e) {
             
         }
-        currentData = parseMetaData(currentData, json);
+        try {
+            currentData = parseMetaData(currentData, json);
+        } catch (e) {
+            console.error("Error.", e.message);
+        }
     }
     return currentData;
 }
@@ -64,17 +68,17 @@ function collectData(basePath) {
 function storeScreenShot(data, file) {
     var stream = fs.createWriteStream(file);
 
-    stream.write(new Buffer(data, 'base64'));
+    stream.write(new Buffer(data, "base64"));
     stream.end();
 }
 
 function generateHTML(data) {
-    var html = fs.readFileSync(templates_path + '/report.html', {
-        encoding: 'utf8'
-    }), table = fs.readFileSync(templates_path + '/table.html', {
-        encoding: 'utf8'
-    }), table_statistics = fs.readFileSync(templates_path + '/statistics.html', {
-        encoding: 'utf8'
+    var html = fs.readFileSync(templates_path + "/report.html", {
+        encoding: "utf8"
+    }), table = fs.readFileSync(templates_path + "/table.html", {
+        encoding: "utf8"
+    }), table_statistics = fs.readFileSync(templates_path + "/statistics.html", {
+        encoding: "utf8"
     });
     
     return _.template(html,{
@@ -90,9 +94,9 @@ function generateHTML(data) {
 }
 
 function renderFiles(files) {
-    var bgColor, file, i, array = [],
-        template = fs.readFileSync(templates_path + '/row_between_features.html', {
-            encoding: 'utf8'
+    var file, i, array = [],
+        template = fs.readFileSync(templates_path + "/row_between_features.html", {
+            encoding: "utf8"
         });
     
     statistics = {
@@ -128,17 +132,25 @@ function renderFiles(files) {
 }
 
 function renderFile(file) {
-    var array = [], args = {},
-        template = fs.readFileSync(templates_path + '/row_file_name.html', {
-            encoding: 'utf8'
+    var array = [], args = {}, i,
+        template = fs.readFileSync(templates_path + "/row_file_name.html", {
+            encoding: "utf8"
         }),
-        features = renderFeatures(file.features);
+        features = renderFeatures(file.features), skipped = true;
+    
+    for(i in file.features) {
+        if (!file.features[i].skipped) {
+            skipped = false;
+            break
+        }
+    }
     
     statistics.files_total++;
     args = {
         file: file,
-        bgColor: file.passed? 'green': 'red',
-        time: ((lastStepTime - lastFileTime) / 1000)
+        skipped: skipped,
+        bgColor: skipped ? "#6699CC" : (file.passed ? "green" : "red"),
+        time: ((lastStepTime - lastFileTime) / 1000),
     };
     
     lastFileTime = lastStepTime;
@@ -151,10 +163,13 @@ function renderFile(file) {
 
 function renderFeatures(features) { 
     var feature, array = [], feature_id,
-        template = fs.readFileSync(templates_path + '/row_between_features.html', {
-            encoding: 'utf8'
+        template = fs.readFileSync(templates_path + "/row_between_features.html", {
+            encoding: "utf8"
         });
     
+    if (typeof features === "undefined" || features.length < 1) {
+        return;
+    }
     for (feature_id in features) {
         feature = features[feature_id];
         if (!feature.passed) {
@@ -176,8 +191,8 @@ function renderFeatures(features) {
 
 function renderFeature(feature, feature_id) {
     var feature_name, show_tags, colspan, 
-        template = fs.readFileSync(templates_path + '/row_feature.html', {
-            encoding: 'utf8'
+        template = fs.readFileSync(templates_path + "/row_feature.html", {
+            encoding: "utf8"
         }),
         subFeatures = renderSubFeatures(feature.subFeatures, feature_id),
         array = [], tags_splited, i, tag, classnames = ["feature_tags _feature_" + feature_id], args = {};
@@ -203,7 +218,7 @@ function renderFeature(feature, feature_id) {
     args = {
         classnames: classnames,
         colspan: colspan,
-        bgColor: feature.passed ? "green" : "red",
+        bgColor: feature.skipped ? "#6699CC" : (feature.passed ? "green" : "red"),
         feature_name: feature_name,
         show_tags: show_tags,
         feature_id: feature_id,
@@ -221,8 +236,8 @@ function renderFeature(feature, feature_id) {
 
 function renderSubFeatures(features, feature_id) { 
     var feature, array = [], i, 
-        template = fs.readFileSync(templates_path + '/row_between_subfeatures.html', {
-            encoding: 'utf8'
+        template = fs.readFileSync(templates_path + "/row_between_subfeatures.html", {
+            encoding: "utf8"
         });
     
     for (i in features) {
@@ -236,8 +251,8 @@ function renderSubFeatures(features, feature_id) {
 function renderSubFeature(feature, feature_id) {
     var array = [], 
         args = {},
-        template = fs.readFileSync(templates_path + '/row_subfeature.html', {
-            encoding: 'utf8'
+        template = fs.readFileSync(templates_path + "/row_subfeature.html", {
+            encoding: "utf8"
         }),
         steps = renderSteps(feature.steps, feature_id);
     
@@ -258,8 +273,8 @@ function renderSubFeature(feature, feature_id) {
 
 function renderSteps(steps, feature_id) {
     var step, k, array = [], args = {},
-        template = fs.readFileSync(templates_path + '/row_step.html', {
-            encoding: 'utf8'
+        template = fs.readFileSync(templates_path + "/row_step.html", {
+            encoding: "utf8"
         });
     
     for (k in steps) {
@@ -268,7 +283,7 @@ function renderSteps(steps, feature_id) {
             feature_id: feature_id,
             step: step,
             filepath: path.basename(step.screenShotFile),
-            bgColor: step.passed? 'green': (step.skipped ? 'blue' : 'red'),
+            bgColor: step.passed? "green": (step.skipped ? "#6699CC" : "red"),
             length: step.results.items_.length,
             time: ((step.finishTime - lastStepTime) / 1000)
         };
@@ -293,8 +308,8 @@ function renderSteps(steps, feature_id) {
 
 function renderItems(items, step_id, feature_id) {
     var l, array = [], args = {}, 
-        template = fs.readFileSync(templates_path + '/row_item.html', {
-            encoding: 'utf8'
+        template = fs.readFileSync(templates_path + "/row_item.html", {
+            encoding: "utf8"
         });
     
     for (l in items) {
@@ -302,8 +317,8 @@ function renderItems(items, step_id, feature_id) {
             expect: items[l],
             step_id: step_id,
             feature_id: feature_id,
-            bgColor: items[l].passed_? 'green': (items[l].skipped ? 'blue' : 'red'),
-            passed: (items[l].passed_ ? "Passed" : (items[l].skipped ? 'Skipped' : 'Failed'))
+            bgColor: items[l].passed_? "green": (items[l].skipped ? "#6699CC" : "red"),
+            passed: (items[l].passed_ ? "Passed" : (items[l].skipped ? "Skipped" : "Failed"))
         };
         
         array.push(_.template(template, args));
@@ -313,8 +328,8 @@ function renderItems(items, step_id, feature_id) {
 }
 
 function renderSelect() {
-    var template = fs.readFileSync(templates_path + '/select.html', {
-        encoding: 'utf8'
+    var template = fs.readFileSync(templates_path + "/select.html", {
+        encoding: "utf8"
     });
     
     tags = _.sortBy(tags, function(tag) {return tag; });
@@ -324,7 +339,7 @@ function renderSelect() {
 
 function addHTMLReport(jsonData, baseName){
     var basePath = path.dirname(baseName),
-        htmlFile = path.join(basePath, 'reporter.html'),
+        htmlFile = path.join(basePath, "reporter.html"),
         stream,
         dynamicData = generateHTML(jsonData);
 
@@ -337,14 +352,14 @@ function addMetaData(metaData, baseName){
     var json,
         stream,
         basePath = path.dirname(baseName),
-        file = path.join(basePath,'combined.json');
+        file = path.join(basePath,"combined.json");
 
     try {
         json = metaData;
         var currentData;
         try {
             currentData = JSON.parse(fs.readFileSync(file, {
-                encoding: 'utf8'
+                encoding: "utf8"
             }));
             currentData = parseMetaData(currentData, json);
             json = currentData;
@@ -357,7 +372,7 @@ function addMetaData(metaData, baseName){
         stream.end();
         addHTMLReport(json, baseName);
     } catch(e) {
-        console.error('Could not save meta data: \n' + e.message);
+        console.error("Could not save meta data: \n" + e.message);
     }
 
 }
@@ -368,6 +383,7 @@ function parseMetaData(current, new_data) {
         s_id = new_data.suite_id,
         st_id = new_data.step_id,
         finishTime = new_data.finishTime,
+        sk_id,
         passed = true, i;
 
     for (i in new_data.results.items_) {
@@ -388,36 +404,46 @@ function parseMetaData(current, new_data) {
         current[descs[0]].passed = false;
     }
     
-    if (typeof current[descs[0]].features[p_id] === "undefined") {
-        current[descs[0]].features[p_id] = {
+    sk_id = p_id;
+    if (descs[2] === "Skipped") {
+        descs[1] = descs[1].split("Tags").join(" ~Skipped~ Tags");
+        sk_id = s_id;
+    }
+    if (typeof current[descs[0]].features[sk_id] === "undefined") {
+        current[descs[0]].features[sk_id] = {
             name: descs[1].replace(/^\s+|\s+$/g, ""),
             passed: passed,
+            skipped: descs[2] === "Skipped" ? true : false,
             subFeatures: {}
         };
     }
     if (!passed) {
         current[descs[0]].features[p_id].passed = false;
     }
-    if (typeof current[descs[0]].features[p_id].subFeatures[s_id] === "undefined") {
-        current[descs[0]].features[p_id].subFeatures[s_id] = {
-            name: descs[2].replace(/^\s+|\s+$/g, ""),
-            passed: passed,
-            steps: {}
-        };
+    if (typeof current[descs[0]].features[sk_id].subFeatures[s_id] === "undefined") {
+        if (descs[2] !== "Skipped") {
+            current[descs[0]].features[sk_id].subFeatures[s_id] = {
+                name:  descs[2].replace(/^\s+|\s+$/g, ""),
+                passed: passed,
+                steps: {}
+            };
+        }
     }
     if (!passed) {
-        current[descs[0]].features[p_id].subFeatures[s_id].passed = false;
+        current[descs[0]].features[sk_id].subFeatures[s_id].passed = false;
     }
-    current[descs[0]].features[p_id].subFeatures[s_id].steps[st_id] = {
-        step_id: st_id,
-        name: descs[3].replace(/^\s+|\s+$/g, ""),
-        results: new_data.results,
-        os: new_data.os, 
-        browser: new_data.browser,
-        passed: new_data.passed,
-        screenShotFile: new_data.screenShotFile,
-        finishTime: finishTime
-    };
+    if (typeof descs[3] !== undefined && descs[2] !== "Skipped") {
+        current[descs[0]].features[sk_id].subFeatures[s_id].steps[st_id] = {
+            step_id: st_id,
+            name:  typeof descs[3] === undefined ? "" : descs[3].replace(/^\s+|\s+$/g, ""),
+            results: new_data.results,
+            os: new_data.os, 
+            browser: new_data.browser,
+            passed: new_data.passed,
+            screenShotFile: new_data.screenShotFile,
+            finishTime: finishTime
+        };
+    }
     
     return current;
 }
@@ -441,7 +467,7 @@ function storeMetaData(metaData, file) {
         stream.write(json);
         stream.end();
     } catch(e) {
-        console.error('Could not save meta data for ' + screenShotFile);
+        console.error("Could not save meta data for " + screenShotFile);
     }
 }
 

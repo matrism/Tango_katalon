@@ -44,7 +44,7 @@ function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
     var metaData = {
         suite_id: spec.suite.id,
         step_id: spec.id,
-        parent_suite_id: spec.suite.parentSuite.id,
+        parent_suite_id: (spec !== null && spec.suite !== null && spec.suite.parentSuite !== null) ? spec.suite.parentSuite.id : -1,
         description: descriptions.reverse(), 
         os: capabilities.caps_.platform, 
         results: results,
