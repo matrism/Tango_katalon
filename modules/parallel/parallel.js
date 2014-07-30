@@ -10,12 +10,13 @@ module.exports = function(grunt) {
     var Q = require('q'),
         lpad = require('lpad');
         grunt.__failed = false;
+        
 
   function spawn(task) {
-    var deferred = Q.defer(), cp;
+    var deferred = Q.defer(), cp, stdout_print = [];
     
     cp = grunt.util.spawn(task, function(error, result, code) {
-      grunt.log.writeln();
+        grunt.log.writeln();
 //      lpad.stdout('    ');
 
       if (error || code !== 0) {
@@ -35,16 +36,16 @@ module.exports = function(grunt) {
       deferred.resolve();
     });
     
-//    cp.on("close",function(){
-//        
-//    })
+    cp.on("close",function(){
+        grunt.log.write(stdout_print.join(""));
+    });
 //    cp.stderr.on("data", function(data){
 //        grunt.log.write("Error:" + data);
 //        deferred.reject();
 //    });
 //
     cp.stdout.on("data", function(data){
-        grunt.log.write(data);
+        stdout_print.push(data);
     });
 
     return deferred.promise;
@@ -63,7 +64,7 @@ module.exports = function(grunt) {
         return {
           args: [task],
           grunt: true
-        }
+        };
       });
     }
 
