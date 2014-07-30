@@ -103,11 +103,13 @@ function renderFiles(files) {
     
     for(i in files) {
         file = files[i];
+        statistics.files_total++;
         skipped = true;
         for(i in file.features) {
+            statistics.features_total++;
             if (!file.features[i].skipped) {
                 skipped = false;
-                break;
+                console.log("Should not be skipped");
             } else {
                 statistics.features_skipped++;
             }
@@ -117,14 +119,16 @@ function renderFiles(files) {
             statistics.files_skipped++;
         } else if (!file.passed) {
             statistics.files_failed++;
-            array.push(renderFile(file));
         }
+        array.push(renderFile(file));
     }
     
     for(i in files) {
         file = files[i];
-        if (!file.skipped && file.passed) {
-            statistics.files_passed++;
+        if (file.passed) {
+            if (!file.skipped) {
+                statistics.files_passed++;
+            }
             array.push(renderFile(file));
         }
     }
@@ -137,9 +141,8 @@ function renderFile(file) {
         template = fs.readFileSync(templates_path + "/row_file_name.html", {
             encoding: "utf8"
         }),
-        features = renderFeatures(file.features), skipped = true;
+        features = renderFeatures(file.features), skipped = file.skipped;
     
-    statistics.files_total++;
     args = {
         file: file,
         skipped: skipped,
@@ -175,7 +178,9 @@ function renderFeatures(features) {
     for (feature_id in features) {
         feature = features[feature_id];
         if (feature.passed) {
-            statistics.features_passed++;
+            if (!feature.skipped) {
+                statistics.features_passed++;
+            }
             array.push(renderFeature(feature, feature_id));
         }
     }
@@ -191,7 +196,6 @@ function renderFeature(feature, feature_id) {
         subFeatures = renderSubFeatures(feature.subFeatures, feature_id),
         array = [], tags_splited, i, tag, classnames = ["feature_tags _feature_" + feature_id], args = {};
     
-    statistics.features_total++;
     feature_name = feature.name.split(" Tags: ");
     show_tags = false;
     colspan = 19;
