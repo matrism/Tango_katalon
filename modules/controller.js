@@ -129,7 +129,7 @@ var _ = require("underscore"),
                         });
                     }
                 });
-            } else {
+            } else if (typeof process.env.__using_grunt === "undefined") {
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     it("Skipped", function() {});
                 });
