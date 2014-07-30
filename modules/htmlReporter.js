@@ -2,6 +2,8 @@ var util = require('./lib/util'),
     mkdirp = require('mkdirp'), 
     path = require('path'),
     _ = require('underscore');
+    
+global.__reportLastFinished = 0;
 
 /** Function: defaultPathBuilder
  * This function builds paths for a screenshot file. It is appended to the
@@ -50,11 +52,14 @@ function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
         results: results,
         passed: results.passed(),
         finishTime: spec.finishTime,
+        startTime: __reportLastFinished,
         browser: {
             name: capabilities.caps_.browserName,
             version: capabilities.caps_.version
         }
     };
+    
+    __reportLastFinished = spec.finishTime;
     
     return metaData;
 }

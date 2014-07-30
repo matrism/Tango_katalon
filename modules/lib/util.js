@@ -4,10 +4,11 @@ var fs = require("fs"),
     crypto = require("crypto"),
     _ = require("underscore"),
     templates_path = path.resolve(__dirname, "../templates/"),
-    lastStepTime = 0,
-    lastSubFeatureTime = 0,
-    lastFeatureTime = 0,
-    lastFileTime = 0,
+    prevStepTimeFinish = 0,
+    time = {
+        file: {},
+        feature: {}
+    };
     statistics = {
         files_total: 0,
         files_passed: 0,
@@ -90,7 +91,7 @@ function generateHTML(data) {
         select: renderSelect(tags),
         table_statistics: _.template(table_statistics, {
             statistics: statistics,
-            totalTime: (lastStepTime / 1000)
+            totalTime: (prevStepTimeFinish / 1000)
         })
     });
 }
@@ -109,18 +110,15 @@ function renderFiles(files) {
             statistics.features_total++;
             if (!file.features[i].skipped) {
                 skipped = false;
-                console.log("Should not be skipped");
             } else {
                 statistics.features_skipped++;
             }
         }
         file.skipped = skipped;
-        if (file.skipped) {
-            statistics.files_skipped++;
-        } else if (!file.passed) {
+        if (!file.skipped && !file.passed) {
             statistics.files_failed++;
+            array.push(renderFile(file));
         }
-        array.push(renderFile(file));
     }
     
     for(i in files) {
@@ -129,6 +127,14 @@ function renderFiles(files) {
             if (!file.skipped) {
                 statistics.files_passed++;
             }
+            array.push(renderFile(file));
+        }
+    }
+    
+    for(i in files) {
+        file = files[i];
+        if (file.skipped) {
+            statistics.files_skipped++;
             array.push(renderFile(file));
         }
     }
@@ -147,10 +153,8 @@ function renderFile(file) {
         file: file,
         skipped: skipped,
         bgColor: skipped ? "#6699CC" : (file.passed ? "green" : "red"),
-        time: ((lastStepTime - lastFileTime) / 1000),
+        time: ((time.file[file.name].finish - time.file[file.name].start) / 1000),
     };
-    
-    lastFileTime = lastStepTime;
     
     array.push(_.template(template,args));
     array.push(features);
@@ -221,10 +225,8 @@ function renderFeature(feature, feature_id) {
         show_tags: show_tags,
         feature_id: feature_id,
         feature: feature,
-        time: ((lastStepTime - lastFeatureTime) / 1000)
+        time: ((time.feature[feature_id].finish - time.feature[feature_id].start) / 1000),
     };
-    
-    lastFeatureTime = lastStepTime;
     
     array.push(_.template(template, args));
     array.push(subFeatures);
@@ -258,10 +260,8 @@ function renderSubFeature(feature, feature_id) {
         feature_id: feature_id,
         bgColor: feature.passed ? "green" : "red",
         feature: feature,
-        time: ((lastStepTime - lastSubFeatureTime) / 1000)
+        time: ((time.feature[feature_id].finish - time.feature[feature_id].start) / 1000),
     };
-    
-    lastSubFeatureTime = lastStepTime;
     
     array.push(_.template(template,args));
     array.push(steps);
@@ -283,10 +283,8 @@ function renderSteps(steps, feature_id) {
             filepath: path.basename(step.screenShotFile),
             bgColor: step.passed? "green": (step.skipped ? "#6699CC" : "red"),
             length: step.results.items_.length,
-            time: ((step.finishTime - lastStepTime) / 1000)
+            time: ((step.finishTime - step.startTime) / 1000)
         };
-        
-        lastStepTime = step.finishTime;
         
         statistics.steps_total++;
         if (step.passed) {
@@ -380,10 +378,15 @@ function parseMetaData(current, new_data) {
         p_id = new_data.parent_suite_id,
         s_id = new_data.suite_id,
         st_id = new_data.step_id,
+        startTime = new_data.startTime,
         finishTime = new_data.finishTime,
         sk_id,
         passed = true, i;
 
+    if (finishTime > prevStepTimeFinish) {
+        prevStepTimeFinish = finishTime;
+    }
+    
     for (i in new_data.results.items_) {
         if (new_data.results.items_[i].passed_ === false) {
             passed = false;
@@ -398,6 +401,21 @@ function parseMetaData(current, new_data) {
             passed: passed
         };
     }
+    if (typeof time.file[descs[0]] === "undefined") {
+        time.file[descs[0]] = {
+            start: startTime,
+            finish: finishTime
+        };
+    }
+    
+    if (time.file[descs[0]].start > startTime) {
+        time.file[descs[0]].start = startTime;
+    }
+    if (time.file[descs[0]].finish < finishTime) {
+        time.file[descs[0]].finish = finishTime;
+    }
+    
+    current[descs[0]].finishTime = prevFileTimeFinish = finishTime;
     if (!passed) {
         current[descs[0]].passed = false;
     }
@@ -406,7 +424,7 @@ function parseMetaData(current, new_data) {
     if (descs[2] === "Skipped") {
         descs[1] = descs[1].split("Tags").join(" ~Skipped~ Tags");
         sk_id = s_id;
-    }
+    } 
     if (typeof current[descs[0]].features[sk_id] === "undefined") {
         current[descs[0]].features[sk_id] = {
             name: descs[1].replace(/^\s+|\s+$/g, ""),
@@ -414,6 +432,19 @@ function parseMetaData(current, new_data) {
             skipped: descs[2] === "Skipped" ? true : false,
             subFeatures: {}
         };
+    }
+    if (typeof time.feature[sk_id] === "undefined") {
+        time.feature[sk_id] = {
+            start: startTime,
+            finish: finishTime
+        };
+    }
+    
+    if (time.feature[sk_id].start > startTime) {
+        time.feature[sk_id].start = startTime;
+    }
+    if (time.feature[sk_id].finish < finishTime) {
+        time.feature[sk_id].finish = finishTime;
     }
     if (!passed) {
         current[descs[0]].features[p_id].passed = false;
@@ -425,6 +456,21 @@ function parseMetaData(current, new_data) {
                 passed: passed,
                 steps: {}
             };
+        }
+    }
+    if (descs[2] !== "Skipped") {
+        if (typeof time.feature[s_id] === "undefined") {
+            time.feature[s_id] = {
+                start: startTime,
+                finish: finishTime
+            };
+        }
+
+        if (time.feature[s_id].start > startTime) {
+            time.feature[s_id].start = startTime;
+        }
+        if (time.feature[s_id].finish < finishTime) {
+            time.feature[s_id].finish = finishTime;
         }
     }
     if (!passed) {
@@ -439,6 +485,7 @@ function parseMetaData(current, new_data) {
             browser: new_data.browser,
             passed: new_data.passed,
             screenShotFile: new_data.screenShotFile,
+            startTime: startTime,
             finishTime: finishTime
         };
     }
