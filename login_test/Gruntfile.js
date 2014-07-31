@@ -6,8 +6,14 @@ var ftf = require("./vendor/factory-testing-framework"),
 module.exports = function (grunt) {
     'use strict';
     grunt.loadTasks('./vendor/factory-testing-framework/modules/parallel');
+    grunt.loadNpmTasks("grunt-shell");
     
     global.__using_grunt = true;
+    process.env.__using_grunt = true;
+    
+    var int = setInterval(function() {
+        grunt.log.write(".");
+    }, 1000);
     
     grunt.initConfig({
         parallel: {
@@ -23,10 +29,21 @@ module.exports = function (grunt) {
                 // End of configuration of parallel tasks
             }
         }
+        //for those tests that should run single thread only
+        shell: {                                // Task
+            singleTask: {                       // Target
+                command: "bash ./start.sh -p " + profile + " --tags single_thread_only"
+            }
+        }
     });
     
     grunt.registerTask('check', function() {
-        SSReporter_instance.compileReport();
+        try {
+            SSReporter_instance.compileReport();
+        } catch (e) {
+            console.error(e.message);
+        }
+        clearInterval(int);
         console.timeEnd(">>Total time");
         if (grunt.__failed) {
             grunt.fail.warn("Done with errors");

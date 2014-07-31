@@ -123,8 +123,10 @@ function renderFiles(files) {
     
     for(i in files) {
         file = files[i];
-        if (file.passed && !file.skipped) {
-            statistics.files_passed++;
+        if (file.passed) {
+            if (!file.skipped) {
+                statistics.files_passed++;
+            }
             array.push(renderFile(file));
         }
     }
