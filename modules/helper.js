@@ -179,9 +179,19 @@ var Helper = {
     
     waitForElementToDisplay: function(el, timeout) {
         timeout = timeout || 5000;
+        this.waitForElement(el, timeout);
         return browser.wait(function() {
             return el.isDisplayed().then(function(displayed) {
                 return displayed === true;
+            });
+        }, timeout);
+    },
+    
+    waitForElementToBeHidden: function(el, timeout) {
+        timeout = timeout || 5000;
+        return browser.wait(function() {
+            return el.isDisplayed().then(function(displayed) {
+                return displayed === false;
             });
         }, timeout);
     },
