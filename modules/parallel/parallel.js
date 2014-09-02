@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         grunt.log.writeln();
 //      lpad.stdout('    ');
 
-      if (error || (code !== 0 && (code !== 1 || result.stdout.indexOf("chromedriver is up to date") == -1))) {
+      if (error || code !== 0) {
             grunt.__failed = true;
             var message = result.stderr || code;
 
