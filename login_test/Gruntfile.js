@@ -33,6 +33,9 @@ module.exports = function (grunt) {
         shell: {                                // Task
             singleTask: {                       // Target
                 command: "bash ./start.sh -p " + profile + " --tags single_thread_only"
+            },
+            chromeDriver: {
+                command: "bash ./chromeDriver.sh"
             }
         }
     });
@@ -51,5 +54,5 @@ module.exports = function (grunt) {
     })
     
     console.time(">>Total time");
-    grunt.registerTask('tests', ['parallel','check']);
+    grunt.registerTask('tests', ['shell:chromeDriver','parallel','shell:singleTask','check']);
 };
