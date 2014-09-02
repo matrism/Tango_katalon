@@ -23,7 +23,7 @@ module.exports = function(grunt) {
         var message = result.stderr || result.stdout;
 
         grunt.log.writeln();
-        grunt.log.writeln("Error:", message);
+        grunt.log.writeln("Error: " + message);
         grunt.log.writeln();
 ////
         

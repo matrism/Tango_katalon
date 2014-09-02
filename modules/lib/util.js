@@ -20,7 +20,8 @@ var fs = require("fs"),
         features_skipped: 0,
         steps_total: 0,
         steps_passed: 0,
-        steps_failed: 0
+        steps_failed: 0,
+        using_grunt: global.__using_grunt
     },
     tags = {};
 
@@ -422,6 +423,9 @@ function parseMetaData(current, new_data) {
     
     sk_id = p_id;
     if (descs[2] === "Skipped") {
+        if (global.__using_grunt) {
+            return current;
+        }
         descs[1] = descs[1].split("Tags").join(" ~Skipped~ Tags");
         sk_id = s_id;
     } 
