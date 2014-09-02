@@ -18,13 +18,13 @@ module.exports = function(grunt) {
         grunt.log.writeln();
 //      lpad.stdout('    ');
 
-      if (error || code !== 0) {
-        grunt.__failed = true;
-        var message = result.stderr || code;
+      if (error || (code !== 0 && (code !== 1 || result.stdout.indexOf("chromedriver is up to date") == -1))) {
+            grunt.__failed = true;
+            var message = result.stderr || code;
 
-        grunt.log.writeln();
-        grunt.log.writeln("Error: " + message);
-        grunt.log.writeln();
+            grunt.log.writeln();
+            grunt.log.writeln("Error: " + message);
+            grunt.log.writeln();
 ////
         
 ////        lpad.stdout();
