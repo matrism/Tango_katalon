@@ -10,7 +10,6 @@ module.exports = function(grunt) {
     var Q = require('q'),
         lpad = require('lpad');
         grunt.__failed = false;
-        
 
   function spawn(task) {
     var deferred = Q.defer(), cp, stdout_print = [];
@@ -21,8 +20,11 @@ module.exports = function(grunt) {
 
       if (error || code !== 0) {
         grunt.__failed = true;
-//          var message = result.stderr || result.stdout;
-////        grunt.log.writeln("--------code", message);
+        var message = result.stderr || result.stdout;
+
+        grunt.log.writeln();
+        grunt.log.writeln("Error:", message);
+        grunt.log.writeln();
 ////
         
 ////        lpad.stdout();
