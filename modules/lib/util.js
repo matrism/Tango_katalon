@@ -132,11 +132,13 @@ function renderFiles(files) {
         }
     }
     
-    for(i in files) {
-        file = files[i];
-        if (file.skipped) {
-            statistics.files_skipped++;
-            array.push(renderFile(file));
+    if (!global.__using_grunt) {
+        for(i in files) {
+            file = files[i];
+            if (file.skipped) {
+                statistics.files_skipped++;
+                array.push(renderFile(file));
+            }
         }
     }
     
