@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 
       if (error || code !== 0) {
         grunt.__failed = true;
-        var message = result.stderr || result.stdout;
+        var message = result.stderr || code;
 
         grunt.log.writeln();
         grunt.log.writeln("Error: " + message);
