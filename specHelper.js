@@ -3,9 +3,9 @@
 describe("Tango :: Login", function() {
     it("should login to SSO", function() {
         browser.ignoreSynchronization = true;
-        browser.manage().timeouts().implicitlyWait(1000);
+        browser.manage().timeouts().implicitlyWait(5000);
 
-        //browser.get('/');
+        browser.get('/');
 
         element(by.id('username')).sendKeys('tangoTest1');
         element(by.id('password')).sendKeys('P@ssw0rd78');
