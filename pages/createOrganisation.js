@@ -1,7 +1,8 @@
 function CreateOrganisation () {
     this.subPublisher = {
-        yesButton: element(by.model('orgHas.subPublishers'))
-    }
+        yesButton: element.all(by.model('orgHas.subPublishers')).get(0),
+        noButton: element.all(by.model('orgHas.subPublishers')).get(1)
+    };
 };
 
 CreateOrganisation.prototype = {
@@ -10,12 +11,14 @@ CreateOrganisation.prototype = {
     },
 
     toggleHasSubPublisherOption: function (option) {
-        console.log(this.yesButton);
         if (option) {
-            this.yesButton.click();
+            browser.actions().mouseMove(this.subPublisher.yesButton).perform();
+            this.subPublisher.yesButton.click();
         } else {
-            this.noButton.click();
+            browser.actions().mouseMove(this.subPublisher.noButton).perform();
+            this.subPublisher.noButton.click();
         }
+
     }
 
 };
