@@ -3,7 +3,6 @@
 describe("Tango :: Login", function() {
     iit("should login to SSO", function() {
         browser.ignoreSynchronization = true;
-        browser.manage().timeouts().implicitlyWait(10000);
 
         browser.get('/logout');
 
