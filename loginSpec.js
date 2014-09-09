@@ -5,7 +5,7 @@ describe("Tango :: Login", function() {
         browser.ignoreSynchronization = true;
         browser.manage().timeouts().implicitlyWait(10000);
 
-        browser.get('/');
+        browser.get('/logout');
 
         element(by.id('username')).sendKeys('tangoTest1');
         element(by.id('password')).sendKeys('P@ssw0rd78');
