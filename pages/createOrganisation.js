@@ -31,8 +31,13 @@ CreateOrganisation.prototype = {
     },
 
     addSubPublisher: function () {
-        browser.actions().mouseMove(this.subPublisher.addSubPublisherButton).perform();
-        this.subPublisher.addSubPublisherButton.click();
+        var button = element(by.css('button[data-ng-click="addSubPublisher()"]'));
+        button.isPresent().then(function (present) {
+            if (present) {
+                browser.actions().mouseMove(button).perform();
+                button.click();
+            }
+        });
     },
 
     removeSubPublisher: function (index, confirmation) {
