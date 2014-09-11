@@ -4,7 +4,7 @@ describe("Tango :: Login", function() {
     iit("should login to SSO", function() {
         browser.ignoreSynchronization = true;
 
-        browser.get('/logout');
+        browser.get('/');
 
         element(by.id('username')).sendKeys('tangoTest1');
         element(by.id('password')).sendKeys('P@ssw0rd78');
