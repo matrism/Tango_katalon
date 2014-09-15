@@ -1,37 +1,51 @@
+var pageFactory = require('../helpers/pageFactory.js');
+
 'use strict';
 
-function CreateOrganisation () {
-    this.subPublisher = {
-        yesButton: element.all(by.model('orgHas.subPublishers')).get(0),
-        noButton: element.all(by.model('orgHas.subPublishers')).get(1),
-        section: element(by.css('div[data-ng-show="orgHas.subPublishers"]')),
-        repeater: element.all(by.repeater('sp in getSubPublishers()')),
-        addSubPublisherButton: element(by.css('button[data-ng-click="addSubPublisher()"]'))
-    };
-}
+var PageObject = pageFactory.buildPage('CreateOrganisation', {
+    url: '/create/org',
+    sections: {
+        subPublisher: {
+            elements: {
+                section: {
+                    by: by.css('div[data-ng-show="orgHas.subPublishers"]')
+                },
+                repeater: {
+                    type: 'repeater',
+                    by: by.repeater('sp in getSubPublishers()')
+                },
+                addSubPublisherButton: {
+                    type: 'button',
+                    by: by.css('button[data-ng-click="addSubPublisher()"]')
+                },
+                yesButton: {
+                    type: 'button',
+                    element: element.all(by.model('orgHas.subPublishers')).get(0)
+                },
+                noButton: {
+                    type: 'button',
+                    element: element.all(by.model('orgHas.subPublishers')).get(1)
+                }
+            }
+        }
+    }
+});
 
-CreateOrganisation.prototype = {
-    get: function () {
-        browser.get('/create/org');
-    },
-
+PageObject.prototype = {
     getSubPublisherByIndex: function (index) {
         return this.subPublisher.repeater.get(index);
     },
 
     toggleHasSubPublisherOption: function (option) {
         if (option) {
-            browser.actions().mouseMove(this.subPublisher.yesButton).perform();
             this.subPublisher.yesButton.click();
         } else {
-            browser.actions().mouseMove(this.subPublisher.noButton).perform();
             this.subPublisher.noButton.click();
         }
 
     },
 
     addSubPublisher: function () {
-        browser.actions().mouseMove(this.subPublisher.addSubPublisherButton).perform();
         this.subPublisher.addSubPublisherButton.click();
     },
 
@@ -52,7 +66,6 @@ CreateOrganisation.prototype = {
         browser.actions().mouseMove(confirmationButton).perform();
         confirmationButton.click();
     }
-
 };
 
-module.exports = CreateOrganisation;
+module.exports = PageObject;

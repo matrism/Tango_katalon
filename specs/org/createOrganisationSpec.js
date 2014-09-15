@@ -1,6 +1,8 @@
 var CreateOrganisation = require('./../../pages/createOrganisation.js');
 
 describe(' Create Organisation E2E ::', function () {
+    'use strict';
+
     var page;
     beforeEach(function () {
         page = new CreateOrganisation();
@@ -32,11 +34,13 @@ describe(' Create Organisation E2E ::', function () {
             expect(page.getSubPublisherByIndex(0).element(byCssRemoveButton).isDisplayed()).toBeFalsy();
             expect(page.getSubPublisherByIndex(1).element(byCssRemoveButton).isDisplayed()).toBeTruthy();
 
-            page.removeSubPublisher(1, false);
-            expect(page.subPublisher.repeater.count()).toBe(2);
-
             page.removeSubPublisher(1, true);
             expect(page.subPublisher.repeater.count()).toBe(1);
+            expect(page.getSubPublisherByIndex(0).element(byCssRemoveButton).isDisplayed()).toBeFalsy();
+
+            page.addSubPublisher();
+            page.removeSubPublisher(1, false);
+            expect(page.subPublisher.repeater.count()).toBe(2);
         });
     });
 });
