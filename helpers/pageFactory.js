@@ -5,12 +5,41 @@ var typeMapper = {
             var button = this.default(elDef),
                 oldClickFunction = button.click;
 
-            button.click = function () {
+            button.click = function (saferClick) {
                 var self = this;
-                this.isPresent().then(function (present) {
+                return this.isDisplayed().then(function (present) {
                     if (present) {
                         self.hover();
-                        oldClickFunction.call(self);
+
+                        if (saferClick) {
+                            var saferClickAction = function (location, screenSize) {
+                                if (location.y > screenSize.height - 100) {
+                                    var scroll = location.y - screenSize.height / 2;
+                                    scroll = scroll < 0 ? 0 : scroll;
+                                    return browser.executeScript('window.scrollTo(' + location.x + ',' + scroll + ');').then(function () {
+                                        return oldClickFunction.call(self);
+                                    });
+                                } else {
+                                    return oldClickFunction.call(self);
+
+                                }
+
+                            };
+
+                            return browser.manage().window().getSize().then(function (size) {
+                                return browser.executeScript(function(elem) {
+                                    elem.scrollIntoView(false);
+                                }, self).then(function () {
+                                    return self.getLocation().then(function (location) {
+                                        return saferClickAction(location, size)
+                                    });
+                                });
+                            });
+
+                        } else {
+                            return oldClickFunction.call(self);
+
+                        }
                     }
                 });
             };

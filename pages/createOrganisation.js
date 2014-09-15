@@ -1,10 +1,22 @@
-var pageFactory = require('../helpers/pageFactory.js');
-
 'use strict';
 
-var PageObject = pageFactory.buildPage('CreateOrganisation', {
+var pageFactory = require('../helpers/pageFactory.js'),
+
+    PageObject = pageFactory.buildPage('CreateOrganisation', {
     url: '/create/org',
     sections: {
+        modal: {
+          elements: {
+              yesButton: {
+                  type: 'button',
+                  by: by.css('.modal-footer > button[data-ng-click="ok()"]')
+              },
+              noButton: {
+                  type: 'button',
+                  by: by.css('.modal-footer > button[data-ng-click="cancel()"]')
+              }
+          }
+        },
         subPublisher: {
             elements: {
                 section: {
@@ -46,25 +58,25 @@ PageObject.prototype = {
     },
 
     addSubPublisher: function () {
-        this.subPublisher.addSubPublisherButton.click();
+        this.subPublisher.addSubPublisherButton.click(true);
     },
 
     removeSubPublisher: function (index, confirmation) {
         var byCssRemoveButton = by.css('button[data-ng-click="showDeleteSubPublisherModal($index)"]'),
-            button = this.getSubPublisherByIndex(index).element(byCssRemoveButton),
-            confirmationButton;
+            button = this.getSubPublisherByIndex(index).element(byCssRemoveButton);
 
         browser.actions().mouseMove(button).perform();
         button.click();
 
         if (confirmation) {
-            confirmationButton = element(by.css('.modal-footer > button[data-ng-click="ok()"]'));
+            this.modal.yesButton.click(true);
+
         } else {
-            confirmationButton = element(by.css('.modal-footer > button[data-ng-click="cancel()"]'));
+            this.modal.noButton.click(true);
+
         }
 
-        browser.actions().mouseMove(confirmationButton).perform();
-        confirmationButton.click();
+
     }
 };
 
