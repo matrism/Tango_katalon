@@ -19,7 +19,7 @@ describe(' Create Organisation E2E ::', function () {
             expect(page.subPublisher.section.isDisplayed()).toBeFalsy();
         });
 
-        it(' Should add and remove - when available - the sub-publisher item', function () {
+        xit(' Should add and remove - when available - the sub-publisher item', function () {
             var byCssRemoveButton = by.css('button[data-ng-click="showDeleteSubPublisherModal($index)"]');
 
             page.toggleHasSubPublisherOption(true);
