@@ -49,5 +49,6 @@ var //paths
 
 module.exports = {
     feature: feature,
+    commonFeatureTags: ["thread12"],
     globalBeforeEach: globalBeforeEach
 };
