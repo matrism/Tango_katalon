@@ -28,12 +28,13 @@ var _ = require("underscore"),
                 afterFeature = feature.afterFeature,
                 globalBeforeEach = feature.globalBeforeEach,
                 globalAfterEach = feature.globalAfterEach,
-                features = feature.feature;
+                features = feature.feature,
+                commonFeatureTags = feature.commonFeatureTags || [];
             
             if (!(features instanceof Array)) {
                 features = [features];
             }
-            controller.processArrayFeatures(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach);
+            controller.processArrayFeatures(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach, commonFeatureTags);
         },
         stringUCFirst: function(str) {
             return str.charAt(0).toUpperCase() + str.substr(1, str.length-1);
@@ -53,7 +54,7 @@ var _ = require("underscore"),
                 controller.prepareFeatures(feature, controller.stringUCFirst(files[i]));
             };
         },
-        processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach) {
+        processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach, commonFeatureTags) {
             describe(feature_name, function() {
                 var empty;
                 if (typeof globalBeforeEach !== "undefined") {
@@ -68,12 +69,12 @@ var _ = require("underscore"),
                 }
                 
                 for (var i in features) {
-                    controller.processFeature(features[i], beforeFeature, afterFeature);
+                    controller.processFeature(features[i], beforeFeature, afterFeature, commonFeatureTags);
                 } 
             });
         },
-        processFeature: function(feature, beforeFeature, afterFeature) {
-            if (controller.checkTags(feature)) {
+        processFeature: function(feature, beforeFeature, afterFeature, commonFeatureTags) {
+            if (controller.checkTags(feature, commonFeatureTags)) {
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     if (typeof beforeFeature !== "undefined") {
                         describe("Pre-feature steps: ", function() {
@@ -135,15 +136,25 @@ var _ = require("underscore"),
                 });
             }
         },
-        checkTags: function(feature) {
-            var check = (
-                typeof feature !== "undefined"
-                &&    
-                typeof feature.tags !== "undefined"
-                &&
-                feature.tags instanceof Array
-                &&
-                feature.tags.length > 0
+        checkTags: function(feature, commonFeatureTags) {
+            var first_check = (
+                    typeof feature !== "undefined"
+                    &&    
+                    typeof feature.tags !== "undefined" || commonFeatureTags !== "undefined"
+                    &&
+                    feature.tags instanceof Array || commonFeatureTags instanceof Array
+                    &&
+                    feature.tags.length > 0 || commonFeatureTags.lenght > 0
+                ), tags, check;
+                
+                if (typeof feature.tags !== "undefined" && commonFeatureTags !== "undefined") {
+                    feature.tags = _.union(feature.tags, commonFeatureTags);
+                } else if (typeof commonFeatureTags !== "undefined") {
+                    feature.tags = commonFeatureTags;
+                }
+            
+            check = (
+                first_check
                 &&
                 (
                     typeof _tf_config._cli.tags === "undefined"
@@ -165,6 +176,7 @@ var _ = require("underscore"),
                     (_.intersection(_tf_config._cli["@tags"], feature.tags).length === 0)
                 )
             );
+    
             return check;
         }
     };
