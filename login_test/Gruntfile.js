@@ -11,9 +11,10 @@ module.exports = function (grunt) {
     global.__using_grunt = true;
     process.env.__using_grunt = true;
     
-    var int = setInterval(function() {
-        grunt.log.write(".");
-    }, 1000);
+    logShell = function(err, stdout, stderr, cb) {
+        grunt.log.writeln(stdout);
+        cb();
+    };
     
     grunt.initConfig({
         parallel: {
@@ -32,27 +33,34 @@ module.exports = function (grunt) {
         //for those tests that should run single thread only
         shell: {                                // Task
             singleTask: {                       // Target
-                command: "bash ./start.sh -p " + profile + " --tags single_thread_only"
+                command: "bash ./start.sh -p " + profile + " --tags single_thread_only",
+                options: {
+                    failOnError: false
+                },
+                callback: logShell
             },
             chromeDriver: {
-                command: "bash ./chromeDriver.sh"
+                command: "bash ./chromeDriver.sh",
+                options: {
+                    failOnError: false
+                },
+                callback: logShell
             }
         }
     });
-    
-    grunt.registerTask('check', function() {
+
+    grunt.registerTask("check", function() {
         try {
             SSReporter_instance.compileReport();
         } catch (e) {
             console.error(e.message);
         }
-        clearInterval(int);
         console.timeEnd(">>Total time");
         if (grunt.__failed) {
             grunt.fail.warn("Done with errors");
         }
-    })
+    });
     
     console.time(">>Total time");
-    grunt.registerTask('tests', ['shell:chromeDriver','parallel','shell:singleTask','check']);
+    grunt.registerTask("tests", ["shell:chromeDriver", "parallel", "shell:singleTask", "check"]);
 };
