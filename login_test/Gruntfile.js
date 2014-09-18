@@ -1,17 +1,17 @@
 var ftf = require("./vendor/factory-testing-framework"),
     SSReporter_instance = new ftf.htmlReporter({baseDirectory: "reports/html"}),
     params = ftf.configer.getParamsFromCli() || false,
-    profile = params !== false ? params["p"] : "ci";
+    profile = params !== false && typeof params["p"] !== "undefined" ? params["p"] : "ci";
 
 module.exports = function (grunt) {
-    'use strict';
-    grunt.loadTasks('./vendor/factory-testing-framework/modules/parallel');
+    "use strict";
+    grunt.loadTasks("./vendor/factory-testing-framework/modules/parallel");
     grunt.loadNpmTasks("grunt-shell");
-    
+
     global.__using_grunt = true;
     process.env.__using_grunt = true;
     
-    logShell = function(err, stdout, stderr, cb) {
+    global.__logShell = function(err, stdout, stderr, cb) {
         grunt.log.writeln(stdout);
         cb();
     };
@@ -37,14 +37,14 @@ module.exports = function (grunt) {
                 options: {
                     failOnError: false
                 },
-                callback: logShell
+                callback: global.__logShell
             },
             chromeDriver: {
                 command: "bash ./chromeDriver.sh",
                 options: {
                     failOnError: false
                 },
-                callback: logShell
+                callback: global.__logShell
             }
         }
     });
