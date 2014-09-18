@@ -63,7 +63,7 @@ Page.prototype.prepareIndexedProperties = function(props) {
     return this;
 };
 Page.prototype.prepareLocators = function(locators) {
-    var loc, i, type, elems = {};
+    var loc, i, type, elems = {}, all;
     
     for(i in locators) {
         loc = locators[i];
@@ -72,11 +72,13 @@ Page.prototype.prepareLocators = function(locators) {
         if (type === "custom") {
             elems[i] = loc[type]();
         } else if (typeof loc[type] === "function") {
-            elems[i] = element(By[type](loc[type]()));
-            elems[i]._all = element.all(By[type](loc[type]()));
+            all = element.all(By[type](loc[type]()));
+            elems[i] = all.get(0);
+            elems[i]._all = all;
         } else {
-            elems[i] = element(By[type](loc[type]));
-            elems[i]._all = element.all(By[type](loc[type]));
+            all = element.all(By[type](loc[type]));
+            elems[i] = all.get(0);
+            elems[i]._all = all;
         }
     }
     
