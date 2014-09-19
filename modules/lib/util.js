@@ -337,6 +337,15 @@ function renderSelect() {
     return _.template(template, {tags:tags});
 }
 
+function htmlEscape(str) {
+    return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
 function addHTMLReport(jsonData, baseName){
     var basePath = path.dirname(baseName),
         htmlFile = path.join(basePath, "reporter.html"),
