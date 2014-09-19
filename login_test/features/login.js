@@ -25,7 +25,6 @@ var //paths
             
     feature = [{
         name: "Login to Security Console",
-        tags: ["example"],
         steps: [
             [steps.login.itLogin],
             [steps.main.itShouldBeDisabled,[main_page.elems.start_provisioning, "Start Provisioning", false]],
@@ -34,13 +33,12 @@ var //paths
         ]
     },{
         name: "Provisioning. First step: Navigate to provisioning page",
-        tags: ["example"],
+        tags: ["provisioning"],
         steps: [
             [steps.provisioning.itOpen]
         ]
     },{
         name: "Provisioning. First step: typeahead should be present on the page",
-        tags: ["example"],
         steps: [
             [steps.provisioning.itElementIsPresent,[provisioning_page.elems.typeahead_model, "typeahead input", true]],
             [steps.provisioning.itTextToContainA,["momomo"]]
@@ -49,6 +47,6 @@ var //paths
 
 module.exports = {
     feature: feature,
-    commonFeatureTags: ["thread12"],
+    commonFeatureTags: ["example"],
     globalBeforeEach: globalBeforeEach
 };
