@@ -1,19 +1,20 @@
 var ftf = require("./vendor/factory-testing-framework"),
     SSReporter_instance = new ftf.htmlReporter({baseDirectory: "reports/html"}),
     params = ftf.configer.getParamsFromCli() || false,
-    profile = params !== false ? params["p"] : "ci";
+    profile = params !== false && typeof params["p"] !== "undefined" ? params["p"] : "ci";
 
 module.exports = function (grunt) {
-    'use strict';
-    grunt.loadTasks('./vendor/factory-testing-framework/modules/parallel');
+    "use strict";
+    grunt.loadTasks("./vendor/factory-testing-framework/modules/parallel");
     grunt.loadNpmTasks("grunt-shell");
-    
+
     global.__using_grunt = true;
     process.env.__using_grunt = true;
     
-    var int = setInterval(function() {
-        grunt.log.write(".");
-    }, 1000);
+    global.__logShell = function(err, stdout, stderr, cb) {
+        grunt.log.writeln(stdout);
+        cb();
+    };
     
     grunt.initConfig({
         parallel: {
@@ -32,27 +33,34 @@ module.exports = function (grunt) {
         //for those tests that should run single thread only
         shell: {                                // Task
             singleTask: {                       // Target
-                command: "bash ./start.sh -p " + profile + " --tags single_thread_only"
+                command: "bash ./start.sh -p " + profile + " --tags single_thread_only",
+                options: {
+                    failOnError: false
+                },
+                callback: global.__logShell
             },
             chromeDriver: {
-                command: "bash ./chromeDriver.sh"
+                command: "bash ./chromeDriver.sh",
+                options: {
+                    failOnError: false
+                },
+                callback: global.__logShell
             }
         }
     });
-    
-    grunt.registerTask('check', function() {
+
+    grunt.registerTask("check", function() {
         try {
             SSReporter_instance.compileReport();
         } catch (e) {
             console.error(e.message);
         }
-        clearInterval(int);
         console.timeEnd(">>Total time");
         if (grunt.__failed) {
             grunt.fail.warn("Done with errors");
         }
-    })
+    });
     
     console.time(">>Total time");
-    grunt.registerTask('tests', ['shell:chromeDriver','parallel','shell:singleTask','check']);
+    grunt.registerTask("tests", ["shell:chromeDriver", "parallel", "shell:singleTask", "check"]);
 };
