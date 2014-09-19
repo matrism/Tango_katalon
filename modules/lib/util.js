@@ -313,6 +313,7 @@ function renderItems(items, step_id, feature_id) {
         });
     
     for (l in items) {
+        items[l].message = htmlEscape(items[l].message);
         args = {
             expect: items[l],
             step_id: step_id,
