@@ -103,6 +103,7 @@ function renderFiles(files) {
             encoding: "utf8"
         });
     
+    //Render only failed here
     for(i in files) {
         file = files[i];
         statistics.files_total++;
@@ -122,22 +123,23 @@ function renderFiles(files) {
         }
     }
     
+    //Render only passed here
     for(i in files) {
         file = files[i];
         if (file.passed) {
             if (!file.skipped) {
                 statistics.files_passed++;
+                array.push(renderFile(file));
             }
-            array.push(renderFile(file));
         }
     }
     
-    
-    for(i in files) {
-        file = files[i];
-        if (file.skipped) {
-            statistics.files_skipped++;
-            if (!global.__using_grunt) {
+    //Render only skipped here if needed
+    if (!global.__using_grunt) {
+        for(i in files) {
+            file = files[i];
+            if (file.skipped) {
+                statistics.files_skipped++;
                 array.push(renderFile(file));
             }
         }
@@ -313,6 +315,7 @@ function renderItems(items, step_id, feature_id) {
         });
     
     for (l in items) {
+        items[l].message = htmlEscape(items[l].message);
         args = {
             expect: items[l],
             step_id: step_id,
@@ -344,6 +347,15 @@ function renderSelect() {
     tags = _.sortBy(tags, function(tag) {return tag; });
     
     return _.template(template, {tags:tags});
+}
+
+function htmlEscape(str) {
+    return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
 }
 
 function addHTMLReport(jsonData, baseName){
