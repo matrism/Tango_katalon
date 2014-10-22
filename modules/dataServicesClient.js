@@ -10,20 +10,20 @@ DataServicesClient = function(endpoint, use_cookies) {
         this.cookies = {};
         this.AuthHeaders = { 
             'User-Agent':       'Apache-HttpClient/4.1.1 (java 1.5)',
-            'Accept':           'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Content-Type':     'application/x-www-form-urlencoded'
+            'accept':           'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'content-type':     'application/x-www-form-urlencoded'
         };
         this.serviceHeaders = {
             "User-Agent":       "Apache-HttpClient/4.1.1 (java 1.5)",
-            "Accept":           "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            "Content-Type":     "application/json"
+            "accept":           "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "content-type":     "application/json"
         };
         this.getAccessCookie();
     } else {
         this.serviceHeaders = {
             "User-Agent":       "Apache-HttpClient/4.1.1 (java 1.5)",
-            "Accept":           "application/json",
-            "Content-Type":     "application/json",
+            "accept":           "application/json",
+            "content-type":     "application/json",
             "Authorization":    this.getAccessToken()
         };
     }
