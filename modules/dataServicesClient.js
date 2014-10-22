@@ -137,7 +137,7 @@ DataServicesClient.prototype.getAccessToken = function() {
     return "Bearer " + JSON.parse(res.body).access_token;
 };
 
-DataServicesClient.prototype.get = function(path, debug) {
+DataServicesClient.prototype.get = function(path) {
     var options = {
             method: "GET",
             url : this.endpoint + "/" + path,
@@ -149,7 +149,6 @@ DataServicesClient.prototype.get = function(path, debug) {
         },
         response = http(options);
 
-
     if (response && parseInt(response.statusCode, 10) === 200) { 
         result.status = true;
     } else {
@@ -160,14 +159,10 @@ DataServicesClient.prototype.get = function(path, debug) {
     } catch(e) {
         throw (new Error(response.body));
     }
-    debug = debug || false;
-    if (debug) {
-        console.log("~~~get response:", JSON.stringify(response));
-    }
     return result;
 };
 
-DataServicesClient.prototype.post = function(json, path, debug) {
+DataServicesClient.prototype.post = function(json, path) {
     var options = {
             method: "POST",
             url : this.endpoint + "/" + (typeof path === "undefined" ? "" : path),
@@ -186,14 +181,10 @@ DataServicesClient.prototype.post = function(json, path, debug) {
         throw (new Error("POST: " + this.endpoint + "/" + path + "\n    Response: " + JSON.stringify(response)));
     }
     result.response = parseInt(response.statusCode, 10) === 204 ? "" : JSON.parse(response.body);
-    debug = debug || false;
-    if (debug) {
-        console.log("~~~post response:", JSON.stringify(response));
-    }
     return result;
 };
 
-DataServicesClient.prototype.del = function(path, debug) {
+DataServicesClient.prototype.del = function(path) {
     var options = {
             method: "DELETE",
             url : this.endpoint + "/" + path,
@@ -207,14 +198,10 @@ DataServicesClient.prototype.del = function(path, debug) {
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
     }
-    debug = debug || false;
-    if (debug) {
-        console.log("~~~del response:", JSON.stringify(response));
-    }
     return result;
 };
 
-DataServicesClient.prototype.put = function(json, path, debug) {
+DataServicesClient.prototype.put = function(json, path) {
     var options = {
             method: "PUT",
             url : this.endpoint + "/" + path,
@@ -228,10 +215,6 @@ DataServicesClient.prototype.put = function(json, path, debug) {
 
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
-    }
-    debug = debug || false;
-    if (debug) {
-        console.log("~~~put response:", JSON.stringify(response));
     }
     return result;
 };
