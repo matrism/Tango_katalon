@@ -70,13 +70,21 @@ DataServicesClient.prototype.get2 = function(link, method, body) {
             this.cookies[host] = {};
         }
         if (typeof res.headers["set-cookie"] !== "undefined") {
-            cookie_split = res.headers["set-cookie"].split(";");
-            for (i in cookie_split) {
-                cookie = cookie_split[i];
-                cookie_as_arr = cookie.split("=");
-                if (typeof cookie_as_arr[1] === "undefined")
-                    cookie_as_arr[1] = true;
-                this.cookies[host][cookie_as_arr[0]] = cookie_as_arr[1];
+            if (res.headers["set-cookie"] instanceof Array) {
+                for (i in res.headers["set-cookie"]) {
+                    cookie = res.headers["set-cookie"][i];
+                    cookie_as_arr = cookie.split(";")[0].split("=");
+                    this.cookies[host][cookie_as_arr[0]] = cookie_as_arr[1];
+                }
+            } else {
+                cookie_split = res.headers["set-cookie"].split(";");
+                for (i in cookie_split) {
+                    cookie = cookie_split[i];
+                    cookie_as_arr = cookie.split("=");
+                    if (typeof cookie_as_arr[1] === "undefined")
+                        cookie_as_arr[1] = true;
+                    this.cookies[host][cookie_as_arr[0]] = cookie_as_arr[1];
+                }
             }
             for (i in this.cookies[host]) {
                 cookies.push(i + "=" + this.cookies[host][i]);
