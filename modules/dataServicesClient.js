@@ -1,9 +1,10 @@
 var http = require("./request"),
     url = require("url"),
 
-DataServicesClient = function(endpoint, use_cookies) {
+DataServicesClient = function(endpoint, use_cookies, debug) {
     use_cookies = use_cookies || false;
     this.endpoint = endpoint;
+    this.debug = debug || false;
     if (use_cookies) {
         this.auth_host = url.parse(_tf_config.urls.sso).host;
         this.console_host = url.parse(endpoint).host;
@@ -30,7 +31,7 @@ DataServicesClient = function(endpoint, use_cookies) {
 };
 
 DataServicesClient.prototype.get2 = function(link, method, body) {
-    var host = url.parse(link).host, options, res, i, cookie, cookie_as_arr, cookies = [], new_link, tmp_url;
+    var host = url.parse(link).host, options, res, i, cookie, cookie_as_arr, cookie_split, cookies = [], new_link, tmp_url;
     body = body || null;
     method = method || "GET";
     
@@ -59,29 +60,45 @@ DataServicesClient.prototype.get2 = function(link, method, body) {
         options.body = body;
     }
     res = http(options);
-    
-    if (res.statusCode == 200 || res.statusCode == 304 || res.statusCode == 302) {
+    if (this.debug) {
+        console.log("~~~~res headers", res.headers);
+    }
+
+    if ((res.statusCode == 200 || res.statusCode == 304 || res.statusCode == 302)) {
         
         if (typeof this.cookies[host] === "undefined") {
             this.cookies[host] = {};
         }
-
-        for (i in res.headers["set-cookie"]) {
-            cookie = res.headers["set-cookie"][i];
-            cookie_as_arr = cookie.split(";")[0].split("=");
-            this.cookies[host][cookie_as_arr[0]] = cookie_as_arr[1];
-        }
-        for (i in this.cookies[host]) {
-            cookies.push(i + "=" + this.cookies[host][i]);
-        }
+        if (typeof res.headers["set-cookie"] !== "undefined") {
+            cookie_split = res.headers["set-cookie"].split(";");
+            for (i in cookie_split) {
+                cookie = cookie_split[i];
+                cookie_as_arr = cookie.split("=");
+                if (typeof cookie_as_arr[1] === "undefined")
+                    cookie_as_arr[1] = true;
+                this.cookies[host][cookie_as_arr[0]] = cookie_as_arr[1];
+            }
+            for (i in this.cookies[host]) {
+                cookies.push(i + "=" + this.cookies[host][i]);
+            }
+            if (this.debug) {
+                console.log("");
+                console.log("~~~~getting cookies");
+                console.log("~~~~host", host);
+                console.log("~~~~res set-cookie", res.headers["set-cookie"]);
+                console.log("~~~~cookies", cookies);
+                console.log("~~~~typeof", typeof cookies);
+                console.log("");
+            }
         
-        switch (host) {
-            case this.auth_host: 
-                this.AuthHeaders['Cookie'] = cookies.join("; ");
-                break;
-            case this.console_host:
-                this.serviceHeaders['Cookie'] = cookies.join("; ");
-                break;
+            switch (host) {
+                case this.auth_host: 
+                    this.AuthHeaders['Cookie'] = cookies.join("; ");
+                    break;
+                case this.console_host:
+                    this.serviceHeaders['Cookie'] = cookies.join("; ");
+                    break;
+            }
         }
         if (res.statusCode == 200 || res.statusCode == 304) {
             return res;
@@ -147,7 +164,11 @@ DataServicesClient.prototype.get = function(path) {
             status: 0,
             response: ""
         },
-        response = http(options);
+        response = http(options, null, debug);
+
+    if (this.debug) {
+        console.log("~~~headers:", this.serviceHeaders);
+    }
 
     if (response && parseInt(response.statusCode, 10) === 200) { 
         result.status = true;
@@ -158,6 +179,9 @@ DataServicesClient.prototype.get = function(path) {
         result.response = JSON.parse(response.body);
     } catch(e) {
         throw (new Error(response.body));
+    }
+    if (this.debug) {
+        console.log("~~~get response:", JSON.stringify(response));
     }
     return result;
 };
@@ -173,7 +197,7 @@ DataServicesClient.prototype.post = function(json, path) {
             status: false,
             response: ""
         },
-        response = http(options);
+        response = http(options, null, debug);
 
     if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
@@ -181,6 +205,9 @@ DataServicesClient.prototype.post = function(json, path) {
         throw (new Error("POST: " + this.endpoint + "/" + path + "\n    Response: " + JSON.stringify(response)));
     }
     result.response = parseInt(response.statusCode, 10) === 204 ? "" : JSON.parse(response.body);
+    if (this.debug) {
+        console.log("~~~post response:", JSON.stringify(response));
+    }
     return result;
 };
 
@@ -193,10 +220,13 @@ DataServicesClient.prototype.del = function(path) {
         result = {
             status: false
         },
-        response = http(options);
+        response = http(options, null, debug);
 
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
+    }
+    if (this.debug) {
+        console.log("~~~del response:", JSON.stringify(response));
     }
     return result;
 };
@@ -211,10 +241,13 @@ DataServicesClient.prototype.put = function(json, path) {
         result = {
             status: false
         },
-        response = http(options);
+        response = http(options, null, debug);
 
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
+    }
+    if (this.debug) {
+        console.log("~~~put response:", JSON.stringify(response));
     }
     return result;
 };
