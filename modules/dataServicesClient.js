@@ -59,7 +59,7 @@ DataServicesClient.prototype.get2 = function(link, method, body) {
     if (body !== null) {
         options.body = body;
     }
-    res = http(options);
+    res = http(options, null, this.debug);
     if (this.debug) {
         console.log("~~~~res headers", res.headers);
     }
@@ -147,7 +147,7 @@ DataServicesClient.prototype.getAccessToken = function() {
         },
         method: "POST"
     },            
-    res = http(options);
+    res = http(options, null, this.debug);
     if (parseInt(res.statusCode) !== 200) {
         throw new Error("Failed to obtain access_token for " + _tf_config.client_id + "\n    Response: " + JSON.stringify(res));
     }
@@ -164,7 +164,7 @@ DataServicesClient.prototype.get = function(path) {
             status: 0,
             response: ""
         },
-        response = http(options, null);
+        response = http(options, null, this.debug);
 
     if (this.debug) {
         console.log("~~~headers:", this.serviceHeaders);
@@ -197,7 +197,7 @@ DataServicesClient.prototype.post = function(json, path) {
             status: false,
             response: ""
         },
-        response = http(options, null);
+        response = http(options, null, this.debug);
 
     if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
@@ -225,7 +225,7 @@ DataServicesClient.prototype.del = function(path, json) {
     if (typeof json !== undefined) {
         options.body = json;
     }
-    response = http(options, null);
+    response = http(options, null, this.debug);
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
     }
@@ -245,7 +245,7 @@ DataServicesClient.prototype.put = function(json, path) {
         result = {
             status: false
         },
-        response = http(options, null);
+        response = http(options, null, this.debug);
 
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;

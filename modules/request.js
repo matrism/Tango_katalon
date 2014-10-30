@@ -41,7 +41,7 @@ module.exports.native = native;
  * @param {Object} options
  * @return {Response}
  */
-function request(uri, options) {
+function request(uri, options, debug) {
 
   // 1 - handle variable list of arguments
   if (typeof uri === 'undefined') {
@@ -133,6 +133,12 @@ function request(uri, options) {
     headers: request.headers,
     body: request.body
   });
+  
+  debug = debug || false;
+  if (debug) {
+      console.log("~~~request obj: ", JSON.stringify(req));
+  }  
+  
   var res = req.end();
   if (options.encoding !== null) {
     res.body = res.body.toString(options.encoding);
