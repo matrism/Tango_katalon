@@ -197,7 +197,7 @@ DataServicesClient.prototype.post = function(json, path) {
             status: false,
             response: ""
         },
-        response = http(options, null, debug);
+        response = http(options, null);
 
     if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
@@ -211,7 +211,7 @@ DataServicesClient.prototype.post = function(json, path) {
     return result;
 };
 
-DataServicesClient.prototype.del = function(path) {
+DataServicesClient.prototype.del = function(path, json) {
     var options = {
             method: "DELETE",
             url : this.endpoint + "/" + path,
@@ -220,8 +220,12 @@ DataServicesClient.prototype.del = function(path) {
         result = {
             status: false
         },
-        response = http(options, null, debug);
+        response;
 
+    if (typeof json !== undefined) {
+        options.body = json;
+    }
+    response = http(options, null);
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
     }
@@ -241,7 +245,7 @@ DataServicesClient.prototype.put = function(json, path) {
         result = {
             status: false
         },
-        response = http(options, null, debug);
+        response = http(options, null);
 
     if (response && parseInt(response.statusCode, 10) === 200) {
         result.status = true;
