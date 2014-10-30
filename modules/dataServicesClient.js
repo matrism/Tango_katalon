@@ -234,7 +234,7 @@ DataServicesClient.prototype.del = function(path, json) {
         options.body = json;
     }
     response = http(options, null, this.debug);
-    if (response && parseInt(response.statusCode, 10) === 200) {
+    if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
     }
     if (this.debug) {
