@@ -164,7 +164,7 @@ DataServicesClient.prototype.get = function(path) {
             status: 0,
             response: ""
         },
-        response = http(options, null, debug);
+        response = http(options, null);
 
     if (this.debug) {
         console.log("~~~headers:", this.serviceHeaders);
