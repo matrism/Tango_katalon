@@ -99,36 +99,21 @@ var Helper = {
     
     shouldSplittedTextBeEqualToElementsText: function(elements, textToSplit, strict) {
         var ar = textToSplit.split(", "),
-            actual_array = [],
-            all_count = 0, i = 0, contain_count = 0;
-    
-        expect(elements._all.count()).toBeGreaterThan(0);
-
-        elements._all.count().then(function(count){
-            all_count = count;
-        });
+            actual_array = [];
 
         expect(elements._all.count()).toBe(ar.length);
-
-        elements._all.each(function(el) {
-            el.getText().then(function(text) {
+        elements._all.each(function(item){
+            item.getText().then(function(text){
                 actual_array.push(text);
-                if (all_count === actual_array.length) {
-                    actual_array.sort();
-                    ar.sort();
-                    if (strict) {
-                        expect(_.isEqual(actual_array, ar)).toBe(true);
-                    } else {
-                        for(; i < all_count; i++) {
-                            if(actual_array[i].indexOf(ar[i]) >= 0) {
-                                contain_count++;
-                            }
-                        }
-                        expect(contain_count).toBe(all_count);
-                    }
+            })
+        }).then(function(){
+                if (strict){
+                    expect(ar).toEqual(actual_array)
+                } else{
+                    expect(ar.sort()).toEqual(actual_array.sort())
                 }
-            });
-        });
+            }
+        );
     },
     
     shouldElementsTextContainSplittedText: function(elements, textToSplit, strict) {
