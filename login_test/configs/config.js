@@ -1,15 +1,12 @@
 var configer = ftf.configer,
     cli = configer.getParamsFromCli(),
     env = {
-        ENV_TYPE: cli["ENV_TYPE"] || configer.getEnvVarByKey("ENV_TYPE") || "cloudconsole"
-    },
+        ENV_TYPE: cli["ENV_TYPE"] || configer.getEnvVarByKey("ENV_TYPE") || "localhost"
+   },
     config = {
         _default_:  {
             client_id: "devportal",
-            client_secret: "appclientsecret",
-            path_to_features: "./features/",
-            user_name: configer.getEnvVarByKey("CLOUDCONSOLE_USERNAME"),
-            user_password: configer.getEnvVarByKey("CLOUDCONSOLE_PASSWORD")
+            client_secret: "appclientsecret"
         },
         _system_: {
             browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
@@ -18,32 +15,31 @@ var configer = ftf.configer,
                 height: 768
             },
             reporting: cli.reporting in ["html", "xml", "all"] ? cli.reporting : "none",
+            path_to_features: "./features/",
             path_to_steps: "../steps/",
             path_to_pages: "../pages/",
             wait_timeout: 15000
         },
         _env_: env,
-        cloudconsole: {
+        localhost: {
             urls: {
-                sso: configer.getEnvVarByKey("CLOUDCONSOLE_URL_SSO"), 
-                app_url:  configer.getEnvVarByKey("CLOUDCONSOLE_URL"), 
-                cloudconsole:  configer.getEnvVarByKey("CLOUDCONSOLE_URL"), 
-                cloudconsole_service: configer.getEnvVarByKey("CLOUDCONSOLE_URL_SERVICE")
+                sso: configer.getEnvVarByKey("URL_SSO"),
+                app_url:  "http://localhost:9000",
+                service_url: "http://localhost:9000"
             },
-            user_name: configer.getEnvVarByKey("CLOUDCONSOLE_USERNAME"),
-            user_password: configer.getEnvVarByKey("CLOUDCONSOLE_PASSWORD")
+            user_name: configer.getEnvVarByKey("TEST_USERNAME"),
+            user_password: configer.getEnvVarByKey("TEST_PASSWORD")
         },
         custom: {
             urls: {
                 sso: cli["URL_SSO"],
-                app_url:  cli["URL_CLOUDCONSOLE"], 
-                cloudconsole: cli["URL_CLOUDCONSOLE"],
-                cloudconsole_service: cli["CLOUDCONSOLE_URL_SERVICE"]
+                app_url:  cli["URL"],
+                service_url: cli["URL_SERVICE"]
             },
-            user_name: cli["CLOUDCONSOLE_USERNAME"],
-            user_password: cli["CLOUDCONSOLE_PASSWORD"]
+            user_name: cli["TEST_USERNAME"],
+            user_password: cli["TEST_PASSWORD"]
         }
     };
-    config = configer.process(config);
-    
+config = configer.process(config);
+
 module.exports = config;

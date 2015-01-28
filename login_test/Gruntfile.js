@@ -10,7 +10,6 @@ module.exports = function (grunt) {
 
     global.__using_grunt = true;
     process.env.__using_grunt = true;
-    
     global.__logShell = function(err, stdout, stderr, cb) {
         grunt.log.writeln(stdout);
         cb();
@@ -19,21 +18,15 @@ module.exports = function (grunt) {
     grunt.initConfig({
         parallel: {
             shell: {
-                // Configuration of parallel tasks
                 tasks: [{
                     cmd: "bash",
-                    args: ["start.sh", "-p", profile, "--tags", "search_service"]
-                },{
-                    cmd: "bash",
-                    args: ["start.sh", "-p", profile, "--tags", "application_service"]
+                    args: ["start.sh", "-p", profile, "--tags", "login"]
                 }]
-                // End of configuration of parallel tasks
             }
-        }
-        //for those tests that should run single thread only
-        shell: {                                // Task
-            singleTask: {                       // Target
-                command: "bash ./start.sh -p " + profile + " --tags single_thread_only",
+        },
+        shell: {
+            singleTask: {
+                command: "bash ./start.sh -p " + profile + " --tags login",
                 options: {
                     failOnError: false
                 },
@@ -60,7 +53,6 @@ module.exports = function (grunt) {
             grunt.fail.warn("Done with errors");
         }
     });
-    
     console.time(">>Total time");
     grunt.registerTask("tests", ["shell:chromeDriver", "parallel", "shell:singleTask", "check"]);
 };

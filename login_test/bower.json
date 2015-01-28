@@ -1,21 +1,24 @@
 {
-    "name": "Examples",
+    "name": "protractor_tests",
     "version": "0.0.1",
     "authors": [
         "WMG"
     ],
-    "description": "",
-    "main": "",
+    "description": "desc",
+    "main": "main.js",
     "moduleType": [
         "node"
     ],
-    "keywords": [],
+    "keywords": [
+        "1"
+    ],
     "license": "MIT",
     "private": true,
     "ignore": [
         "**/.*",
         "bower_components",
         "node_modules",
+        "test",
         "tests"
     ],
     "dependencies": {
