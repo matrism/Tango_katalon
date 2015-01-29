@@ -9,13 +9,13 @@ if (steps.login === undefined) {
         itCheckUserMenuHasUsername: function(userName) {
             it ("User menu has username", function() {
                 pages.base.elems.user_icon_menu.getText().then(function(text) {
-                    expect(text.toUpperCase()).toEqual(userName.toUpperCase());
+                    expect(text.trim().toUpperCase()).toEqual(userName.toUpperCase());
                 });
             });
         },
         itCheckUserMenuHasOption: function(optionName) {
             it ("User should see '" + optionName + "' option", function() {
-                ftf.helper.shouldBeAmoungElements(pages.base.elems.user_dropdown_menu_items, optionName);
+                ftf.helper.shouldBeInArrayOfElements(pages.base.elems.user_dropdown_menu_items, optionName, false, false);
             });
         }
     };
