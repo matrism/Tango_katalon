@@ -177,16 +177,19 @@ DataServicesClient.prototype.get = function(path) {
     if (this.debug) {
         console.log("~~~headers:", this.serviceHeaders);
     }
-
-    if (response && parseInt(response.statusCode, 10) === 200) { 
+    
+    if (response && (parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204)) { 
         result.status = true;
+    } else if (response) {
+        result.status = false;
     } else {
         throw (new Error("GET: " + options.url + "\n    Response: " + JSON.stringify(response)));
     }
+    result.statusCode = response.statusCode;
     try {
-        result.response = JSON.parse(response.body);
+        result.response = parseInt(response.statusCode, 10) === 204 ? {} : JSON.parse(response.body);
     } catch(e) {
-        throw (new Error(response.body));
+        throw (new Error("Response body is empty: ", response.body));
     }
     if (this.debug) {
         console.log("~~~get response:", JSON.stringify(response));
@@ -207,12 +210,15 @@ DataServicesClient.prototype.post = function(json, path) {
         },
         response = http(options, null, this.debug);
 
-    if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
+    if (response && (parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204)) {
         result.status = true;
+    } else if (response) {
+        result.status = false;
     } else {
         throw (new Error("POST: " + this.endpoint + "/" + path + "\n    Response: " + JSON.stringify(response)));
     }
-    result.response = parseInt(response.statusCode, 10) === 204 ? "" : JSON.parse(response.body);
+    result.statusCode = response.statusCode;
+    result.response = parseInt(response.statusCode, 10) === 204 ? {} : JSON.parse(response.body);
     if (this.debug) {
         console.log("~~~post response:", JSON.stringify(response));
     }
@@ -236,7 +242,10 @@ DataServicesClient.prototype.del = function(path, json) {
     response = http(options, null, this.debug);
     if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
+    } else {
+        result.status = false;
     }
+    result.statusCode = response.statusCode;
     if (this.debug) {
         console.log("~~~del response:", JSON.stringify(response));
     }
@@ -255,9 +264,12 @@ DataServicesClient.prototype.put = function(json, path) {
         },
         response = http(options, null, this.debug);
 
-    if (response && parseInt(response.statusCode, 10) === 200) {
+    if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204) {
         result.status = true;
+    } else {
+        result.status = false;
     }
+    result.statusCode = response.statusCode;
     if (this.debug) {
         console.log("~~~put response:", JSON.stringify(response));
     }
