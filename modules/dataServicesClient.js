@@ -211,6 +211,7 @@ DataServicesClient.prototype.post = function(json, path) {
         response = http(options, null, this.debug);
 
     if (response && (parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204)) {
+    if (response && parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204 || parseInt(response.statusCode, 10) === 201) {
         result.status = true;
     } else if (response) {
         result.status = false;
