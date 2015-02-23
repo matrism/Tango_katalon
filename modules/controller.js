@@ -12,7 +12,7 @@ var _ = require("underscore"),
             if (!(_tf_config._cli["@tags"] instanceof Array) && _.isString(_tf_config._cli["@tags"])) {
                 _tf_config._cli["@tags"] = [_tf_config._cli["@tags"]];
             }
-            
+
             path_to_features = (typeof _tf_config.path_to_features === "undefined") ? _tf_config._system_.path_to_features : _tf_config.path_to_features;
             if (typeof path_to_features === "string") {
                 controller.readFeatures(path_to_features);
@@ -30,7 +30,7 @@ var _ = require("underscore"),
                 globalAfterEach = feature.globalAfterEach,
                 features = feature.feature,
                 commonFeatureTags = feature.commonFeatureTags || [];
-            
+
             if (!(features instanceof Array)) {
                 features = [features];
             }
@@ -44,7 +44,7 @@ var _ = require("underscore"),
                 route = fs.realpathSync(path),
                 feature,
                 files;
-        
+
             files = fs.readdirSync(route);
             for (var i in files) {
                 if (files[i].indexOf(".js") < 0) {
@@ -67,7 +67,7 @@ var _ = require("underscore"),
                         globalAfterEach.call(this);
                     });
                 }
-                
+
                 for (var i in features) {
                     controller.processFeature(features[i], beforeFeature, afterFeature, commonFeatureTags);
                 } 
@@ -91,7 +91,7 @@ var _ = require("underscore"),
                             }
                         });
                     }
-                    
+
                     describe("Feature steps:", function() {
                         var step, args, fn;
                         if (typeof feature.beforeEach !== "undefined") {
@@ -113,7 +113,7 @@ var _ = require("underscore"),
                             }
                         }
                     });
-                    
+
                     if (typeof afterFeature !== "undefined") {
                         describe("Post-feature steps:", function() {
                             var step, args, fn;
@@ -146,13 +146,22 @@ var _ = require("underscore"),
                     &&
                     feature.tags.length > 0 || commonFeatureTags.lenght > 0
                 ), tags, check;
-                
+
                 if (typeof feature.tags !== "undefined" && commonFeatureTags !== "undefined") {
                     feature.tags = _.union(feature.tags, commonFeatureTags);
                 } else if (typeof commonFeatureTags !== "undefined") {
                     feature.tags = commonFeatureTags;
                 }
-            
+
+            if (typeof process.env.__using_grunt !== "undefined") {
+                if (_tf_config._cli.tags.indexOf("single_thread_only") < 0) {
+                    if (typeof _tf_config._cli["@tags"] === "undefined" || !(_tf_config._cli["@tags"] instanceof Array)) {
+                        _tf_config._cli["@tags"] = [];
+                    }
+                    _tf_config._cli["@tags"].push("single_thread_only");
+                }
+            }
+
             check = (
                 first_check
                 &&
@@ -176,7 +185,7 @@ var _ = require("underscore"),
                     (_.intersection(_tf_config._cli["@tags"], feature.tags).length === 0)
                 )
             );
-    
+
             return check;
         }
     };
