@@ -1,0 +1,1 @@
+./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose --@tags wip --reporting all
