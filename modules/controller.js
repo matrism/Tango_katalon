@@ -130,7 +130,7 @@ var _ = require("underscore"),
                         });
                     }
                 });
-            } else if (typeof process.env.__using_grunt === "undefined") {
+            } else if (typeof process.env.__using_grunt === "undefined" && _tf_config._system_.show_skipped_tests) {
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     it("Skipped", function() {});
                 });
