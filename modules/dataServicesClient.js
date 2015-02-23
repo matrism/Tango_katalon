@@ -178,21 +178,16 @@ DataServicesClient.prototype.get = function(path) {
         console.log("~~~headers:", this.serviceHeaders);
     }
     
-    if (response && (parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204)) { 
+    if (response && (parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204 || parseInt(response.statusCode, 10) === 201)) { 
         result.status = true;
     } else if (response) {
         result.status = false;
-    } else {
-        throw (new Error("GET: " + options.url + "\n    Response: " + JSON.stringify(response)));
     }
     result.statusCode = response.statusCode;
     try {
-        result.response = parseInt(response.statusCode, 10) === 204 ? {} : JSON.parse(response.body);
-    } catch(e) {
-        throw (new Error("Response body is empty: ", response.body));
-    }
-    if (this.debug) {
-        console.log("~~~get response:", JSON.stringify(response));
+        result.response = JSON.parse(response.body);
+    } catch (e) {
+        result.response = response.body;
     }
     return result;
 };
@@ -210,15 +205,17 @@ DataServicesClient.prototype.post = function(json, path) {
         },
         response = http(options, null, this.debug);
 
-    if (response && (parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204)) {
+    if (response && (parseInt(response.statusCode, 10) === 200 || parseInt(response.statusCode, 10) === 204 || parseInt(response.statusCode, 10) === 201)) {
         result.status = true;
     } else if (response) {
         result.status = false;
-    } else {
-        throw (new Error("POST: " + this.endpoint + "/" + path + "\n    Response: " + JSON.stringify(response)));
     }
     result.statusCode = response.statusCode;
-    result.response = parseInt(response.statusCode, 10) === 204 ? {} : JSON.parse(response.body);
+    try {
+        result.response = JSON.parse(response.body);
+    } catch (e) {
+        result.response = response.body;
+    }
     if (this.debug) {
         console.log("~~~post response:", JSON.stringify(response));
     }
