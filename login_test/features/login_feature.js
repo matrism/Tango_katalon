@@ -24,7 +24,8 @@ var beforeFeature = [
 module.exports = {
     commonFeatureTags: ["login"],
     feature: feature,
-    beforeFeature: beforeFeature
+    beforeFeature: beforeFeature,
+    commonFeatureTags: []
 };
 
 
