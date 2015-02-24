@@ -39,10 +39,12 @@ Page.prototype.index = function() {
     return this;
 };
 Page.prototype.prepareIndexedProperties = function(props) {
-    var i, page = this, 
-        factory = function(k) {
-            return function(index) {
-                var locs = {}, loc, elems, j, type, 
+    var i, page = this,
+        // Creating factory of indexed_property
+        factory = function(k) {            
+            // This main function will return the content of indexed property
+            var ret_function = function(index) {
+                var locs = {}, loc, elems, j, type, m,
                     prop = props[k];
             
                 for (j in prop) {
@@ -52,8 +54,22 @@ Page.prototype.prepareIndexedProperties = function(props) {
                     locs[j][type] = loc[type].replace("%s", index);
                 }
                 elems = page.prepareLocators(locs);
-                return elems;            
+                return elems;             
             };
+            // This subfunction will return number of elements for the first item for indexed property
+            ret_function.getLength = function(prop_name) {
+                var m, prop = props[k], loc, elems, type;
+                if (prop_name) {
+                    m = prop_name;
+                } else {
+                    for (m in prop) break;
+                }
+                loc = prop[m];
+                type = Object.keys(loc)[0];
+                elems = element.all(By[type](loc[type].replace("[%s]", "")));
+                return elems.count();
+            };
+            return ret_function;
         };
     
     for (i in props) {
