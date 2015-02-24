@@ -39,10 +39,12 @@ Page.prototype.index = function() {
     return this;
 };
 Page.prototype.prepareIndexedProperties = function(props) {
-    var i, page = this, 
-        factory = function(k) {
-            return function(index) {
-                var locs = {}, loc, elems, j, type, 
+    var i, page = this,
+        // Creating factory of indexed_property
+        factory = function(k) {            
+            // This main function will return the content of indexed property
+            var ret_function = function(index) {
+                var locs = {}, loc, elems, j, type, m,
                     prop = props[k];
             
                 for (j in prop) {
@@ -52,8 +54,22 @@ Page.prototype.prepareIndexedProperties = function(props) {
                     locs[j][type] = loc[type].replace("%s", index);
                 }
                 elems = page.prepareLocators(locs);
-                return elems;            
+                return elems;             
             };
+            // This subfunction will return number of elements for the first item for indexed property
+            ret_function.getLength = function(prop_name) {
+                var m, prop = props[k], loc, elems, type;
+                if (prop_name) {
+                    m = prop_name;
+                } else {
+                    for (m in prop) break;
+                }
+                loc = prop[m];
+                type = Object.keys(loc)[0];
+                elems = element.all(By[type](loc[type].replace("[%s]", "")));
+                return elems.count();
+            };
+            return ret_function;
         };
     
     for (i in props) {
@@ -63,7 +79,7 @@ Page.prototype.prepareIndexedProperties = function(props) {
     return this;
 };
 Page.prototype.prepareLocators = function(locators) {
-    var loc, i, type, elems = {};
+    var loc, i, type, elems = {}, all;
     
     for(i in locators) {
         loc = locators[i];
@@ -72,11 +88,13 @@ Page.prototype.prepareLocators = function(locators) {
         if (type === "custom") {
             elems[i] = loc[type]();
         } else if (typeof loc[type] === "function") {
-            elems[i] = element(By[type](loc[type]()));
-            elems[i]._all = element.all(By[type](loc[type]()));
+            all = element.all(By[type](loc[type]()));
+            elems[i] = all.get(0);
+            elems[i]._all = all;
         } else {
-            elems[i] = element(By[type](loc[type]));
-            elems[i]._all = element.all(By[type](loc[type]));
+            all = element.all(By[type](loc[type]));
+            elems[i] = all.get(0);
+            elems[i]._all = all;
         }
     }
     

@@ -330,6 +330,15 @@ function renderItems(items, step_id, feature_id) {
     return array.join("");
 }
 
+function htmlEscape(str) {
+    return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
 function renderSelect() {
     var template = fs.readFileSync(templates_path + "/select.html", {
         encoding: "utf8"
