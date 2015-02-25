@@ -12,7 +12,9 @@ Change log v 0.0.3
 
 6. Changed find element strategy in pageObject
 
-7. Update Protractor to 1.7.0:
+7. Added elements.getFirst (which is the same as elements._all.first())
+
+8. Update Protractor to 1.7.0:
 
     * protractor-conf.js changes:
 
