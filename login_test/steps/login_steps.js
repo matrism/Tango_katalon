@@ -4,6 +4,7 @@ if (steps.login === undefined) {
             it("User is logged in", function() {
                 pages.login.login();
                 pages.login.waitForAjax();
+                pages.login.check();
             });
         },
         itCheckUserMenuHasUsername: function(userName) {

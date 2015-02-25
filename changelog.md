@@ -14,7 +14,30 @@ Change log v 0.0.3
 
 7. Added elements.getFirst (which is the same as elements._all.first())
 
-8. Update Protractor to 1.7.0:
+8. Login page method `pages.login.login()` is split into two: `pages.login.login(login_name, password)` and `pages.login.check(should_be_logged_in, timeout)`
+
+So, `itLogin` should be implemented in the way like this:
+
+```js
+    pages.login.login();
+    pages.login.waitForAjax();
+    pages.login.check();
+```
+
+and also `itCheckIncorrectCredntials` can be implemented in next way:
+
+```js
+    itNotLoggedIn: function() {
+        it("Check user is not logged in with incorrect creds", function() {
+            var wait_timeout = 6000; //ms
+            pages.login.login("user_doesnt_exist");
+            pages.login.waitForAjax();
+            pages.login.check(false, wait_timeout);
+        });
+    },
+```
+
+9 Update Protractor to 1.7.0:
 
     * protractor-conf.js changes:
 

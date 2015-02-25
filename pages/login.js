@@ -51,7 +51,6 @@ var loginPage = function(_tf_config, lg_element) {
             });
         },
         check: function(should_be_logged_in, wait_timeout) { 
-            console.log("~~~checking!!!");
             lg_element = lg_element || element(By.partialLinkText(this._login_name()));
             wait_timeout = wait_timeout || 10000;
             should_be_logged_in = typeof should_be_logged_in === "undefined" ? true : should_be_logged_in;
