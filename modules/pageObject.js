@@ -88,13 +88,17 @@ Page.prototype.prepareLocators = function(locators) {
         if (type === "custom") {
             elems[i] = loc[type]();
         } else if (typeof loc[type] === "function") {
-            all = element.all(By[type](loc[type]()));
-            elems[i] = all.get(0);
-            elems[i]._all = all;
+            elems[i] = element(By[type](loc[type]()));
+            elems[i]._all = element.all(By[type](loc[type]()));
+            elems[i].getFirst = function() {
+                return this._all.first();
+            };
         } else {
-            all = element.all(By[type](loc[type]));
-            elems[i] = all.get(0);
-            elems[i]._all = all;
+            elems[i] = element(By[type](loc[type]));
+            elems[i]._all = element.all(By[type](loc[type]));
+            elems[i].getFirst = function() {
+                return this._all.first();
+            };
         }
     }
     
@@ -256,16 +260,14 @@ Page.prototype.waitForUrlToChangeTo = function(urlRegex) {
     var currentUrl;
 
     return browser.getCurrentUrl().then(function storeCurrentUrl(url) {
-            currentUrl = url;
-        }
-    ).then(function waitForUrlToChangeTo() {
-            return browser.wait(function waitForUrlToChangeTo() {
-                return browser.getCurrentUrl().then(function compareCurrentUrl(url) {
-                    return urlRegex.test(url);
-                });
+        currentUrl = url;
+    }).then(function waitForUrlToChangeTo() {
+        return browser.wait(function waitForUrlToChangeTo() {
+            return browser.getCurrentUrl().then(function compareCurrentUrl(url) {
+                return urlRegex.test(url);
             });
-        }
-    );
+        });
+    });
 };
 Page.prototype.open = function(is_not_angular) {
     is_not_angular = is_not_angular || false;
