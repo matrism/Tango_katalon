@@ -40,6 +40,7 @@ var loginPage = function(_tf_config, lg_element) {
             });
         },
         login: function(login_name, login_pass) {
+            this._login_name = login_name;
             login_name = login_name || _tf_config.user_name;
             login_pass = login_pass || _tf_config.user_password;
             pages.login.open(true).waitForAjax();
@@ -48,8 +49,15 @@ var loginPage = function(_tf_config, lg_element) {
                     pages.login.doLogin(login_name, login_pass);
                 } 
             });
-            lg_element = lg_element || element(By.partialLinkText(login_name.toUpperCase()));
-            expect(lg_element.isPresent()).toBe(true);
+        },
+        check: function(should_be_logged_in, wait_timeout) { 
+            lg_element = lg_element || element(By.partialLinkText(this._login_name()));
+            wait_timeout = wait_timeout || 10000;
+            should_be_logged_in = typeof should_be_logged_in === "undefined" ? true : should_be_logged_in;
+            ftf.helper.waitForElement(lg_element, wait_timeout);
+            lg_element.isPresent().then(function(present) {
+                expect(present).toBe(should_be_logged_in);
+            });
         }
     });
 };
