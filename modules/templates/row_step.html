@@ -7,11 +7,23 @@
         Browser: <%= step.browser.name %>:<%= step.browser.version %>
     </td>
     <td colspan="5" class="message">
+        <%
+        if (!screenshot_only_on_fail || !step.passed) {
+        %>
         <span class="like_link" onclick="openModal('<%= filepath %>');">View Screenshot</span>
+        <%
+        }
+        %>
+        <% 
+        if ((!screenshot_only_on_fail || !step.passed) && parseInt(length) > 0) {
+        %>
+        |
+        <%
+        }
+        %>
         <% 
         if (parseInt(length) > 0) {
         %> 
-        | 
         <span class="like_link" onclick="toggle('row<%= step.step_id %>');">
             View asserts ( <%= step.results.items_.length %> )
         </span>

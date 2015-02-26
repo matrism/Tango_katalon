@@ -286,6 +286,7 @@ function renderSteps(steps, feature_id) {
         args = {
             feature_id: feature_id,
             step: step,
+            screenshot_only_on_fail: _tf_config._system_.screenshot_only_on_fail,
             filepath: path.basename(step.screenShotFile),
             bgColor: step.passed? "green": (step.skipped ? "#6699CC" : "red"),
             length: step.results.items_.length,

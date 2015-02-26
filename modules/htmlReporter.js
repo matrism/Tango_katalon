@@ -137,23 +137,30 @@ function reportSpecResults(spec) {
                     capabilities
                 ),
 
-                screenShotFile = baseName + '.png',
                 metaFile = baseName + '.json',
-                screenShotPath = path.join(self.baseDirectory, screenShotFile),
                 metaDataPath = path.join(self.baseDirectory, metaFile),
 
+                screenShotFile,
+                screenShotPath,
+                directory = path.dirname(metaDataPath);
+                
+            if (!_tf_config._system_.screenshot_only_on_fail || results.failedCount > 0) {
+                screenShotFile = baseName + '.png';
+                screenShotPath = path.join(self.baseDirectory, screenShotFile);
+                
                 // pathBuilder can return a subfoldered path too. So extract the
                 // directory path without the baseName
-                directory = path.dirname(screenShotPath);
+                metaData.screenShotFile = screenShotFile;
+            }
 
-            metaData.screenShotFile = screenShotFile;
-            
             mkdirp(directory, function(err) {
                 if(err) {
                     throw new Error('Could not create directory ' + directory);
                 } else {
 //                    util.addMetaData(metaData, metaDataPath);
-                    util.storeScreenShot(png, screenShotPath);
+                    if (!_tf_config._system_.screenshot_only_on_fail || results.failedCount > 0) {
+                        util.storeScreenShot(png, screenShotPath);
+                    }
                     util.storeMetaData(metaData, metaDataPath);
                 }
             });
