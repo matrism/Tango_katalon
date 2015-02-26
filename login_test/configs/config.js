@@ -19,7 +19,8 @@ var configer = ftf.configer,
             path_to_steps: "../steps/",
             path_to_pages: "../pages/",
             wait_timeout: 15000,
-            show_skipped_tests: false
+            show_skipped_tests: false,
+            screenshot_only_on_fail: false
         },
         _env_: env,
         localhost: {

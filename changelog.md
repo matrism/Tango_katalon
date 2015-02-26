@@ -92,3 +92,7 @@ and also `itCheckIncorrectCredntials` can be implemented in next way:
             $('navButton').click(); browser.wait(condition, 5000); //wait for condition to be true.
             // do other things
             ```
+
+10. Added `_tf_config._system_.screenshot_only_on_fail` property to `config.js`
+ file to allow save screenshots only on failed tests.
+
