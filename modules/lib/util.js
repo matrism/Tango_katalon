@@ -161,7 +161,7 @@ function renderFile(file, key) {
         file: file,
         skipped: skipped,
         bgColor: skipped ? "#6699CC" : (file.passed ? "green" : "red"),
-        time: ((time.file[key].finish - time.file[key].start) / 1000),
+        time: time.file[key] && time.file[key].start && time.file[key].finish ? ((time.file[key].finish - time.file[key].start) / 1000) : "",
     };
     
     array.push(_.template(template,args));
