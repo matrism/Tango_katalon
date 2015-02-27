@@ -558,7 +558,7 @@ function storeMetaData(metaData, file) {
         stream.write(json);
         stream.end();
     } catch(e) {
-        console.error("Could not save meta data for " + screenShotFile);
+        console.error("Could not save meta data for " + file);
     }
 }
 
@@ -613,6 +613,7 @@ function generateGuid() {
     };
 
     return (
+        (new Date().getTime() / 1000)+"-"+
         S4(buf[0])+S4(buf[1])+"-"+S4(buf[2])+"-"+S4(buf[3])+"-"+
         S4(buf[4])+"-"+S4(buf[5])+S4(buf[6])+S4(buf[7])
     );
