@@ -40,6 +40,13 @@ config = {
             jasmine.getEnv().addReporter(SSReporter_instance);
         }
         
+        if (typeof process.env.__using_grunt === "undefined") {
+            var spawn = require('child_process').spawn
+            var child = spawn("bash", ["grunt","clearReports"]);
+//            child.stdout.on('data', function (data) { console.log(data.toString()); });
+//            child.stderr.on('data', function (data) { console.log(data.toString()); });
+//            child.on('error', function() { console.log(arguments); });
+        }
         matchers = new ftf.matchers();
         jasmine.Matchers.prototype.shouldBePresent = matchers.create("ShouldBePresent");
         
