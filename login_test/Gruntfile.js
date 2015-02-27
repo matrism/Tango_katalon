@@ -49,7 +49,6 @@ module.exports = function (grunt) {
         var callback = this.async();
         setTimeout(function() {
             try {
-                console.log("~~~~starting compiling");
                 SSReporter_instance.compileReport();
             } catch (e) {
                 console.error(e.stack);
