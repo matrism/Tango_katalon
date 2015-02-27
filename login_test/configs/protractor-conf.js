@@ -44,10 +44,15 @@ config = {
         jasmine.Matchers.prototype.shouldBePresent = matchers.create("ShouldBePresent");
         
     },  
-    onCleanUp: function() {
+    onCleanUp: function(statusCode) {
         if (typeof process.env.__using_grunt === "undefined") {
-            SSReporter_instance.compileReport();
+            try {
+                SSReporter_instance.compileReport();
+            } catch(e) {
+                console.error("Error on compileReport", e.stack);
+            }
         }
+        console.log("Finished with code:", statusCode);
         console.timeEnd("Tests time");
     },  
     jasmineNodeOpts: {

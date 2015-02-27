@@ -30,7 +30,7 @@ function compileReport(basePath) {
         jsonData = collectData(basePath),
         dynamicData = generateHTML(jsonData),
         res;
-    
+
     try {
         res = fs.writeFileSync(htmlFile, dynamicData);
     } catch (e) {
@@ -41,24 +41,26 @@ function compileReport(basePath) {
 function collectData(basePath) {
     var json, files = fs.readdirSync(basePath), file, currentData = {}, file_path, content;
 
-    for (var i in files) {
-        file = files[i];
-        if (file.indexOf(".json") < 0 || file === "combined.json") {
-           continue; 
-        }
+    _.chain(files)
+    .filter(function(file) {
+        return path.extname(file) === ".json" && file !== "combined.json";
+    }).sortBy(function(file) {
+        return new Date(fs.statSync(basePath + "/" + file).mtime).getTime() / 1000;
+    }).each(function(file) {
         file_path = path.join(basePath, file);
         content = fs.readFileSync(file_path, {encoding: "utf8"});
         try {
             json = JSON.parse(content);
-        } catch (e) {
-            
-        }
+        } catch (e) {}
         try {
             currentData = parseMetaData(currentData, json);
+//            res = fs.writeFileSync(basePath + "/" + i + ".json", JSON.stringify(currentData));
         } catch (e) {
-            console.error("Error.", e.message);
+            console.error("Error.", e.stack);
         }
-    }
+    });
+
+    res = fs.writeFileSync(basePath + "/combined.json", JSON.stringify(currentData));
     return currentData;
 }
 
@@ -119,7 +121,7 @@ function renderFiles(files) {
         file.skipped = skipped;
         if (!file.skipped && !file.passed) {
             statistics.files_failed++;
-            array.push(renderFile(file));
+            array.push(renderFile(file, i));
         }
     }
     
@@ -129,7 +131,7 @@ function renderFiles(files) {
         if (file.passed) {
             if (!file.skipped) {
                 statistics.files_passed++;
-                array.push(renderFile(file));
+                array.push(renderFile(file, i));
             }
         }
     }
@@ -140,7 +142,7 @@ function renderFiles(files) {
             file = files[i];
             if (file.skipped) {
                 statistics.files_skipped++;
-                array.push(renderFile(file));
+                array.push(renderFile(file, i));
             }
         }
     }
@@ -148,18 +150,18 @@ function renderFiles(files) {
     return array.join(template);
 }
 
-function renderFile(file) {
-    var array = [], args = {}, i,
+function renderFile(file, key) {
+    var array = [], args = {},
         template = fs.readFileSync(templates_path + "/row_file_name.html", {
             encoding: "utf8"
         }),
         features = renderFeatures(file.features), skipped = file.skipped;
-    
+
     args = {
         file: file,
         skipped: skipped,
         bgColor: skipped ? "#6699CC" : (file.passed ? "green" : "red"),
-        time: ((time.file[file.name].finish - time.file[file.name].start) / 1000),
+        time: ((time.file[key].finish - time.file[key].start) / 1000),
     };
     
     array.push(_.template(template,args));
@@ -398,7 +400,10 @@ function parseMetaData(current, new_data) {
         startTime = new_data.startTime,
         finishTime = new_data.finishTime,
         sk_id,
-        passed = true, i;
+        passed = true, i, 
+        descs_0, 
+        descs_1,
+        descs_2;
 
     if (finishTime > prevStepTimeFinish) {
         prevStepTimeFinish = finishTime;
@@ -411,30 +416,33 @@ function parseMetaData(current, new_data) {
         }
     }
     
-    if (typeof current[descs[0]] === "undefined") {
-        current[descs[0]] = {
+    descs_0 = makeSafeForCSS(descs[0]);
+    
+    if (typeof current[descs_0] === "undefined") {
+        current[descs_0] = {
             name: descs[0],
             features: {},
-            passed: passed
+            passed: passed,
+            id: p_id
         };
     }
-    if (typeof time.file[descs[0]] === "undefined") {
-        time.file[descs[0]] = {
+    if (typeof time.file[descs_0] === "undefined") {
+        time.file[descs_0] = {
             start: startTime,
             finish: finishTime
         };
     }
     
-    if (time.file[descs[0]].start > startTime) {
-        time.file[descs[0]].start = startTime;
+    if (time.file[descs_0].start > startTime) {
+        time.file[descs_0].start = startTime;
     }
-    if (time.file[descs[0]].finish < finishTime) {
-        time.file[descs[0]].finish = finishTime;
+    if (time.file[descs_0].finish < finishTime) {
+        time.file[descs_0].finish = finishTime;
     }
     
-    current[descs[0]].finishTime = prevFileTimeFinish = finishTime;
+    current[descs_0].finishTime = prevFileTimeFinish = finishTime;
     if (!passed) {
-        current[descs[0]].passed = false;
+        current[descs_0].passed = false;
     }
     
     sk_id = p_id;
@@ -445,33 +453,40 @@ function parseMetaData(current, new_data) {
         descs[1] = descs[1].split("Tags").join(" ~Skipped~ Tags");
         sk_id = s_id;
     } 
-    if (typeof current[descs[0]].features[sk_id] === "undefined") {
-        current[descs[0]].features[sk_id] = {
+    
+    descs_1 = makeSafeForCSS(descs[1]);
+    
+    if (typeof current[descs_0].features[descs_1] === "undefined") {
+        current[descs_0].features[descs_1] = {
             name: descs[1].replace(/^\s+|\s+$/g, ""),
             passed: passed,
+            id: s_id,
             skipped: descs[2] === "Skipped" ? true : false,
             subFeatures: {}
         };
     }
-    if (typeof time.feature[sk_id] === "undefined") {
-        time.feature[sk_id] = {
+    if (typeof time.feature[descs_1] === "undefined") {
+        time.feature[descs_1] = {
             start: startTime,
             finish: finishTime
         };
     }
     
-    if (time.feature[sk_id].start > startTime) {
-        time.feature[sk_id].start = startTime;
+    if (time.feature[descs_1].start > startTime) {
+        time.feature[descs_1].start = startTime;
     }
-    if (time.feature[sk_id].finish < finishTime) {
-        time.feature[sk_id].finish = finishTime;
+    if (time.feature[descs_1].finish < finishTime) {
+        time.feature[descs_1].finish = finishTime;
     }
     if (!passed) {
-        current[descs[0]].features[p_id].passed = false;
+        current[descs_0].features[descs_1].passed = false;
     }
-    if (typeof current[descs[0]].features[sk_id].subFeatures[s_id] === "undefined") {
+    
+    descs_2 = makeSafeForCSS(descs[2]);
+    
+    if (typeof current[descs_0].features[descs_1].subFeatures[descs_2] === "undefined") {
         if (descs[2] !== "Skipped") {
-            current[descs[0]].features[sk_id].subFeatures[s_id] = {
+            current[descs_0].features[descs_1].subFeatures[descs_2] = {
                 name:  descs[2].replace(/^\s+|\s+$/g, ""),
                 passed: passed,
                 steps: {}
@@ -479,25 +494,25 @@ function parseMetaData(current, new_data) {
         }
     }
     if (descs[2] !== "Skipped") {
-        if (typeof time.feature[s_id] === "undefined") {
-            time.feature[s_id] = {
+        if (typeof time.feature[descs_1] === "undefined") {
+            time.feature[descs_1] = {
                 start: startTime,
                 finish: finishTime
             };
         }
 
-        if (time.feature[s_id].start > startTime) {
-            time.feature[s_id].start = startTime;
+        if (time.feature[descs_1].start > startTime) {
+            time.feature[descs_1].start = startTime;
         }
-        if (time.feature[s_id].finish < finishTime) {
-            time.feature[s_id].finish = finishTime;
+        if (time.feature[descs_1].finish < finishTime) {
+            time.feature[descs_1].finish = finishTime;
         }
     }
     if (!passed) {
-        current[descs[0]].features[sk_id].subFeatures[s_id].passed = false;
+        current[descs_0].features[descs_1].subFeatures[descs_2].passed = false;
     }
     if (typeof descs[3] !== undefined && descs[2] !== "Skipped") {
-        current[descs[0]].features[sk_id].subFeatures[s_id].steps[st_id] = {
+        current[descs_0].features[descs_1].subFeatures[descs_2].steps[st_id] = {
             step_id: st_id,
             name:  typeof descs[3] === undefined ? "" : descs[3].replace(/^\s+|\s+$/g, ""),
             results: new_data.results,
@@ -590,6 +605,15 @@ function generateGuid() {
         S4(buf[0])+S4(buf[1])+"-"+S4(buf[2])+"-"+S4(buf[3])+"-"+
         S4(buf[4])+"-"+S4(buf[5])+S4(buf[6])+S4(buf[7])
     );
+}
+
+function makeSafeForCSS(name) {
+    return name.replace(/[^a-z0-9]/g, function(s) {
+        var c = s.charCodeAt(0);
+        if (c == 32) return '-';
+        if (c >= 65 && c <= 90) return '_' + s.toLowerCase();
+        return '__' + ('000' + c.toString(16)).slice(-4);
+    });
 }
 
 module.exports = {
