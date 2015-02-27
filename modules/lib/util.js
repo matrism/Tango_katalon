@@ -243,15 +243,26 @@ function renderFeature(feature, feature_id) {
 }
 
 function renderSubFeatures(features, feature_id) { 
-    var feature, array = [], i, 
+    var feature, array = [], i, keys,
         template = fs.readFileSync(templates_path + "/row_between_subfeatures.html", {
             encoding: "utf8"
         });
+        
+    keys = Object.keys(features);
     
-    for (i in features) {
-        feature = features[i];
-        array.push(renderSubFeature(feature, feature_id));
-    }
+    keys.sort(function(a,b) {
+        if (b.indexOf("pre") >= 0) {
+            return 1;
+        }
+        if (a.indexOf("post") >= 0) {
+            return -1;
+        }
+        return 0;
+    });
+    
+    _.each(keys, function(key) {
+        array.push(renderSubFeature(features[key], feature_id));
+    });
     
     return array.join(_.template(template, {feature_id: feature_id}));
 }
