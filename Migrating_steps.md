@@ -1,6 +1,6 @@
 ###0. Update package.json file
 
-Change version of proractor to `1.7.0`.
+Change version of protractor to `1.7.0`.
 
 ```js
 /// ...
