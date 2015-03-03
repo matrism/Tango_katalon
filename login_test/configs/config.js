@@ -2,7 +2,7 @@ var configer = ftf.configer,
     cli = configer.getParamsFromCli(),
     env = {
         ENV_TYPE: cli["ENV_TYPE"] || configer.getEnvVarByKey("ENV_TYPE") || "localhost"
-   },
+    },
     config = {
         _default_:  {
             client_id: "devportal",
