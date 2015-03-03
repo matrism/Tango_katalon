@@ -1,3 +1,14 @@
+###0. Update package.json file
+
+Change version of prtoractor to `1.7.0`.
+
+```js
+/// ...
+    "dependencies": { 
+        "protractor"        : "1.7.0",
+/// ...
+```
+
 ###1. Update Gruntfile.js
 
 To make html reporting work on parallel mode you should update your 
