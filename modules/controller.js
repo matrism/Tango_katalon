@@ -47,7 +47,7 @@ var _ = require("underscore"),
 
             files = fs.readdirSync(route);
             for (var i in files) {
-                if (files[i].indexOf(".js") < 0) {
+                if (!files[i].endsWith(".js")) {
                     continue;
                 }
                 feature = require(route + "/" + files[i]);
