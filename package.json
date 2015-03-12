@@ -13,7 +13,8 @@
         "underscore"    : "latest",
         "qs"            : "latest",
         "http-sync-win" : "latest",
-        "http-sync"     : "latest"
+        "http-sync"     : "latest",
+        "mkdirp"        : "latest"
     },
     "author": "WMG",
     "license": "ISC"
