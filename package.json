@@ -10,10 +10,12 @@
         "angular"
     ],
     "dependencies": { 
-        "underscore"    : "latest",
-        "qs"            : "latest",
-        "http-sync-win" : "latest",
-        "http-sync"     : "latest"
+        "underscore"                  : "latest",
+        "qs"                          : "latest",
+        "http-sync-win"               : "latest",
+        "http-sync"                   : "latest",
+        "string.prototype.endswith"   : "latest",
+        "string.prototype.startswith" : "latest"
     },
     "author": "WMG",
     "license": "ISC"
