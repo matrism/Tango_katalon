@@ -1,3 +1,5 @@
+require("string.prototype.startswith");
+require("string.prototype.endswith");
 global.ftf = ftf = {
     configer: require("./modules/configer"),
     pageObject: require("./modules/pageObject"),
