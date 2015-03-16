@@ -74,6 +74,7 @@ var _ = require("underscore"),
             });
         },
         processFeature: function(feature, beforeFeature, afterFeature, commonFeatureTags) {
+            var runContext = {};
             if (controller.checkTags(feature, commonFeatureTags)) {
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     if (typeof beforeFeature !== "undefined") {
@@ -84,7 +85,7 @@ var _ = require("underscore"),
                                 args = step[1] || [];
                                 fn = step[0];
                                 try {
-                                    fn.apply(null, args);
+                                    fn.apply(runContext, args);
                                 } catch(e) {
                                     throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step name please. Error: " + e.message);
                                 }
@@ -107,7 +108,7 @@ var _ = require("underscore"),
                             args = step[1] || [];
                             fn = step[0];
                             try {
-                                fn.apply(null, args);
+                                fn.apply(runContext, args);
                             } catch(e) {
                                 throw new Error("Could not run step in '" + feature.name + "'. Check step name please. Error: " + e.message);
                             }
@@ -122,7 +123,7 @@ var _ = require("underscore"),
                                 args = step[1] || [];
                                 fn = step[0];
                                 try {
-                                    fn.apply(null, args);
+                                    fn.apply(runContext, args);
                                 } catch(e) {
                                     throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step name please. Error: " + e.message);
                                 }
