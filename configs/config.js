@@ -30,8 +30,8 @@ var configer = ftf.configer,
                 app_url:  "http://tango.tango-qa-aws.dspdev.wmg.com",
                 service_url: "http://tango.tango-qa-aws.dspdev.wmg.com"
             },
-            user_name: configer.getEnvVarByKey("TEST_USERNAME"),
-            user_password: configer.getEnvVarByKey("TEST_PASSWORD")
+            user_name: configer.getEnvVarByKey("TEST_USERNAME") || "TangoTest1",
+            user_password: configer.getEnvVarByKey("TEST_PASSWORD") || "P@ssw0rd78"
         },
         custom: {
             urls: {
