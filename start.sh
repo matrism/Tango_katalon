@@ -1,4 +1,9 @@
 #!/bin/bash
+if [[ ! -d node_modules/ ]] || [[ ! -d vendor/factory-testing-framework/ ]] || [[ ! -d vendor/factory-testing-framework/node_modules/ ]];
+then
+	echo "Missing dependencies. Please run install.sh first." >&2
+	exit -1
+fi
 usage()
 {
 cat << EOF
