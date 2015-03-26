@@ -80,14 +80,19 @@ var _ = require("underscore"),
                     if (typeof beforeFeature !== "undefined") {
                         describe("Pre-feature steps: ", function() {
                             var step, args, fn;
-                            for (var i in beforeFeature) {
-                                step = beforeFeature[i];
-                                args = step[1] || [];
-                                fn = step[0];
-                                try {
-                                    fn.apply(runContext, args);
-                                } catch(e) {
-                                    throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step name please. Error: " + e.message);
+                            if(typeof(beforeFeature) === "function") {
+                                beforeFeature.call(runContext);
+                            }
+                            else {
+                                for (var i in beforeFeature) {
+                                    step = beforeFeature[i];
+                                    args = step[1] || [];
+                                    fn = step[0];
+                                    try {
+                                        fn.apply(runContext, args);
+                                    } catch(e) {
+                                        throw new Error("Could not run step in 'Before feature: " + feature.name + "'. Check step name please. Error: " + e.message);
+                                    }
                                 }
                             }
                         });
@@ -103,14 +108,19 @@ var _ = require("underscore"),
                             afterEach(feature.afterEach);
                         } 
 
-                        for (var i in feature.steps) {
-                            step = feature.steps[i];
-                            args = step[1] || [];
-                            fn = step[0];
-                            try {
-                                fn.apply(runContext, args);
-                            } catch(e) {
-                                throw new Error("Could not run step in '" + feature.name + "'. Check step name please. Error: " + e.message);
+                        if(typeof(feature.steps) === "function") {
+                            feature.steps.call(runContext);
+                        }
+                        else {
+                            for (var i in feature.steps) {
+                                step = feature.steps[i];
+                                args = step[1] || [];
+                                fn = step[0];
+                                try {
+                                    fn.apply(runContext, args);
+                                } catch(e) {
+                                    throw new Error("Could not run step in '" + feature.name + "'. Check step name please. Error: " + e.message);
+                                }
                             }
                         }
                     });
@@ -118,14 +128,19 @@ var _ = require("underscore"),
                     if (typeof afterFeature !== "undefined") {
                         describe("Post-feature steps:", function() {
                             var step, args, fn;
-                            for (var i in afterFeature) {
-                                step = afterFeature[i];
-                                args = step[1] || [];
-                                fn = step[0];
-                                try {
-                                    fn.apply(runContext, args);
-                                } catch(e) {
-                                    throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step name please. Error: " + e.message);
+                            if(typeof(afterFeature) === "function") {
+                                afterFeature.call(runContext);
+                            }
+                            else {
+                                for (var i in afterFeature) {
+                                    step = afterFeature[i];
+                                    args = step[1] || [];
+                                    fn = step[0];
+                                    try {
+                                        fn.apply(runContext, args);
+                                    } catch(e) {
+                                        throw new Error("Could not run step in 'After feature: " + feature.name + "'. Check step name please. Error: " + e.message);
+                                    }
                                 }
                             }
                         });
