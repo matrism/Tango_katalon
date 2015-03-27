@@ -136,3 +136,37 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 	pages.base.scrollIntoView(el);
 	el.click();
 };
+module.exports.selectedMusicalDistributionCategory = function() {
+	return (
+		element(by.model("work.musical_work_distribution_category"))
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);
+};
+module.exports.selectedTextMusicRelationship = function() {
+	return (
+		element(by.model("work.text_music_relationship"))
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);
+};
+module.exports.selectedExcerptType = function() {
+	return (
+		element(by.model("work.excerpt_type"))
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);
+};
+module.exports.selectedVersionType = function() {
+	return (
+		element(by.model("work.version_type"))
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);
+};
+module.exports.selectedIntendedPurpose = function() {
+	return (
+		element(by.model("work.intended_purpose"))
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);

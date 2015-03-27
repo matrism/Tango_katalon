@@ -31,6 +31,11 @@ module.exports.create = function(work) {
 					steps.new_work.enterContributionPercentage(number, creator.contributionPercentage);
 				}
 			);
+			steps.new_work.validateDefaultMusicalDistributionCategory();
+			steps.new_work.validateDefaultTextMusicRelationship();
+			steps.new_work.validateDefaultExcerptType();
+			steps.new_work.validateDefaultVersionType();
+			steps.new_work.validateDefaultIntendedPurpose();
 			steps.new_work.ensureTotalContributionIs(100);
 			steps.new_work.optToIncludeWorkOnWebsite(work.includeWorkOnWebsite);
 			steps.base.itClickOnElement("Save Work", pages.new_work.elems.saveWorkButton);
@@ -110,6 +115,41 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 		"Opt " + (!include? "not " : "") + "to include work on WarnerChappell.com",
 		function() {
 			pages.new_work.optToIncludeWorkOnWebsite(include);
+		}
+	);
+};
+module.exports.validateDefaultMusicalDistributionCategory = function() {
+	it (
+		"Validate default musical distribution category", function() {
+			expect(pages.new_work.selectedMusicalDistributionCategory()).toBe("Popular");
+		}
+	);
+};
+module.exports.validateDefaultTextMusicRelationship = function() {
+	it (
+		"Validate default text music relationship", function() {
+			expect(pages.new_work.selectedTextMusicRelationship()).toBe("Select type");
+		}
+	);
+};
+module.exports.validateDefaultExcerptType = function() {
+	it (
+		"Validate default excerpt type", function() {
+			expect(pages.new_work.selectedExcerptType()).toBe("Select type");
+		}
+	);
+};
+module.exports.validateDefaultVersionType = function() {
+	it (
+		"Validate default version type", function() {
+			expect(pages.new_work.selectedVersionType()).toBe("Original Work");
+		}
+	);
+};
+module.exports.validateDefaultIntendedPurpose = function() {
+	it (
+		"Validate default intended purpose", function() {
+			expect(pages.new_work.selectedIntendedPurpose()).toBe("Select type");
 		}
 	);
 };
