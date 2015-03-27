@@ -9,10 +9,12 @@ module.exports.create = function(work) {
 	describe (
 		"Create work", function() {
 			steps.new_work.goToNewWorkPage();
+			steps.new_work.validateDefaultPrimaryWorkLanguage();
 			steps.new_work.enterPrimaryWorkTitle(work.primaryTitle);
 			work.alternateTitles.forEach (
 				function(alternateTitle, i) {
 					var number = i + 1;
+					steps.new_work.validateDefaultAlternateWorkTitleLanguage(number);
 					steps.new_work.enterAlternateWorkTitle(number, alternateTitle);
 				}
 			);
@@ -20,7 +22,9 @@ module.exports.create = function(work) {
 				function(creator, i) {
 					var number = i + 1;
 					var key;
-					var data = steps.new_work.selectCreator(number, creator.searchTerms);
+					var data;
+					steps.new_work.validateDefaultCreatorDesignation(number);
+					data = steps.new_work.selectCreator(number, creator.searchTerms);
 					for(key in data) {
 						creator[key] = data[key];
 					}
@@ -35,6 +39,27 @@ module.exports.create = function(work) {
 		}
 	);
 	return work;
+};
+module.exports.validateDefaultPrimaryWorkLanguage = function() {
+	it (
+		"Validate default primary work title language", function() {
+			expect(pages.new_work.selectedPrimaryWorkTitleLanguage()).toBe("English");
+		}
+	);
+};
+module.exports.validateDefaultAlternateWorkTitleLanguage = function(number) {
+	it (
+		"Validate default alternate work title language #" + number, function() {
+			expect(pages.new_work.selectedAlternateWorkTitleLanguage(number)).toBe("English");
+		}
+	);
+};
+module.exports.validateDefaultCreatorDesignation = function(number) {
+	it (
+		"Validate default creator designation", function() {
+			expect(pages.new_work.selectedCreatorDesignation(number)).toBe("CA");
+		}
+	);
 };
 module.exports.goToNewWorkPage = function() {
 	it (

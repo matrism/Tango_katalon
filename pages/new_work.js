@@ -55,6 +55,13 @@ module.exports.randomCreator = function() {
 		return creatorData;
 	};
 };
+module.exports.selectedPrimaryWorkTitleLanguage = function() {
+	return (
+		element(by.model("work.primary_title.language_code"))
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);
+};
 module.exports.enterPrimaryWorkTitle = function(title) {
 	var inputElement;
 	if(typeof(title) === "function") {
@@ -65,6 +72,14 @@ module.exports.enterPrimaryWorkTitle = function(title) {
 	inputElement.clear();
 	inputElement.sendKeys(title);
 };
+module.exports.selectedAlternateWorkTitleLanguage = function(number) {
+	return (
+		element.all(by.repeater("altTitle in work.alternative_titles"))
+			.get(number - 1)
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);
+};
 module.exports.enterAlternateWorkTitle = function(number, title) {
 	var inputElement;
 	if(typeof(title) === "function") {
@@ -74,6 +89,15 @@ module.exports.enterAlternateWorkTitle = function(number, title) {
 	pages.base.scrollIntoView(inputElement);
     inputElement.clear();
 	inputElement.sendKeys(title);
+};
+module.exports.selectedCreatorDesignation = function(number) {
+	return (
+		element.all(by.repeater("creator in commonDataHolder.creatorsContributions"))
+			.get(number - 1)
+			.element(by.model("creator.role"))
+			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.getText()
+	);
 };
 module.exports.selectCreator = function(number, creator) {
 	return creator(number);
