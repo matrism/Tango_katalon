@@ -56,8 +56,10 @@ module.exports.randomCreator = function() {
 	};
 };
 module.exports.selectedPrimaryWorkTitleLanguage = function() {
+	var rootElement = element(by.model("work.primary_title.language_code"));
+	pages.base.scrollIntoView(rootElement);
 	return (
-		element(by.model("work.primary_title.language_code"))
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
@@ -73,9 +75,13 @@ module.exports.enterPrimaryWorkTitle = function(title) {
 	inputElement.sendKeys(title);
 };
 module.exports.selectedAlternateWorkTitleLanguage = function(number) {
-	return (
+	var rootElement = (
 		element.all(by.repeater("altTitle in work.alternative_titles"))
 			.get(number - 1)
+	);
+	pages.base.scrollIntoView(rootElement);
+	return (
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
@@ -91,10 +97,14 @@ module.exports.enterAlternateWorkTitle = function(number, title) {
 	inputElement.sendKeys(title);
 };
 module.exports.selectedCreatorDesignation = function(number) {
-	return (
+	var rootElement = (
 		element.all(by.repeater("creator in commonDataHolder.creatorsContributions"))
 			.get(number - 1)
 			.element(by.model("creator.role"))
+	);
+	pages.base.scrollIntoView(rootElement);
+	return (
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
@@ -137,36 +147,47 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 	el.click();
 };
 module.exports.selectedMusicalDistributionCategory = function() {
+	var rootElement = element(by.model("work.musical_work_distribution_category"));
+	pages.base.scrollIntoView(rootElement);
 	return (
-		element(by.model("work.musical_work_distribution_category"))
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };
 module.exports.selectedTextMusicRelationship = function() {
+	var rootElement = element(by.model("work.text_music_relationship"));
+	pages.base.scrollIntoView(rootElement);
 	return (
-		element(by.model("work.text_music_relationship"))
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };
 module.exports.selectedExcerptType = function() {
+	var rootElement = element(by.model("work.excerpt_type"));
+	pages.base.scrollIntoView(rootElement);
 	return (
-		element(by.model("work.excerpt_type"))
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };
 module.exports.selectedVersionType = function() {
+	var rootElement = element(by.model("work.version_type"));
+	pages.base.scrollIntoView(rootElement);
 	return (
-		element(by.model("work.version_type"))
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };
 module.exports.selectedIntendedPurpose = function() {
+	var rootElement = element(by.model("work.intended_purpose"));
+	pages.base.scrollIntoView(rootElement);
 	return (
-		element(by.model("work.intended_purpose"))
+		rootElement
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
+};
