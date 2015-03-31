@@ -1,6 +1,7 @@
 "use strict";
 var pages_path = _tf_config._system_.path_to_pages;
 var steps_path = _tf_config._system_.path_to_steps;
+var promise = protractor.promise;
 require(pages_path + "new_work");
 require(steps_path + "base");
 require(steps_path + "works");
@@ -23,11 +24,8 @@ module.exports.create = function(work) {
 					var number = i + 1;
 					var key;
 					var data;
-					steps.new_work.validateDefaultCreatorDesignation(number);
-					data = steps.new_work.selectCreator(number, creator.searchTerms);
-					for(key in data) {
-						creator[key] = data[key];
-					}
+					steps.new_work.validateDefaultCreatorRole(number);
+					creator.name = steps.new_work.selectCreator(number, creator.searchTerms);
 					steps.new_work.enterContributionPercentage(number, creator.contributionPercentage);
 				}
 			);
@@ -37,10 +35,10 @@ module.exports.create = function(work) {
 			steps.new_work.validateDefaultVersionType();
 			steps.new_work.validateDefaultIntendedPurpose();
 			steps.new_work.ensureTotalContributionIs(100);
-			steps.new_work.optToIncludeWorkOnWebsite(work.includeWorkOnWebsite);
+			steps.new_work.optToIncludeWorkOnWebsite(work.includeOnWebsite);
 			steps.base.itClickOnElement("Save Work", pages.new_work.elems.saveWorkButton);
 			steps.base.itCheckIsRedirectToPage("created work page", "/metadata")
-			work.id = steps.works.findWorkId();
+			//work.id = steps.works.findWorkId();
 		}
 	);
 	return work;
@@ -59,10 +57,10 @@ module.exports.validateDefaultAlternateWorkTitleLanguage = function(number) {
 		}
 	);
 };
-module.exports.validateDefaultCreatorDesignation = function(number) {
+module.exports.validateDefaultCreatorRole = function(number) {
 	it (
 		"Validate default creator designation", function() {
-			expect(pages.new_work.selectedCreatorDesignation(number)).toBe("CA");
+			expect(pages.new_work.selectedCreatorRole(number)).toBe("CA");
 		}
 	);
 };
@@ -88,13 +86,13 @@ module.exports.enterAlternateWorkTitle = function(number, title) {
 	);
 };
 module.exports.selectCreator = function(number, creator) {
-	var creatorData;
+	var deferredCreator = promise.defer();
 	describe (
 		"Select creator #" + number, function() {
-			creatorData = pages.new_work.selectCreator(number, creator)
+			deferredCreator.fulfill(pages.new_work.selectCreator(number, creator));
 		}
 	);
-	return creatorData;
+	return deferredCreator.promise;
 };
 module.exports.enterContributionPercentage = function(number, value) {
 	it (

@@ -13,22 +13,8 @@ var feature = [{
 	name: "Create a Musical Composition",
 	tags: [],
 	steps: function() {
-		var work = steps.new_work.create ({
-			primaryTitle: pages.new_work.randomTitle(),
-			alternateTitles: [pages.new_work.randomTitle()],
-			creators: [
-				{
-					searchTerms: pages.new_work.randomCreator(),
-					contributionPercentage: 40
-				},
-				{
-					searchTerms: pages.new_work.randomCreator(),
-					contributionPercentage: 60
-				}
-			],
-			includeWorkOnWebsite: false
-		});
-		steps.works.validate(work);
+		var work = steps.new_work.create(pages.new_work.randomWorkData());
+		//steps.works.validate(work);
 	}
 }];
 
