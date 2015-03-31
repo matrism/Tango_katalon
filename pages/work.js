@@ -1,36 +1,50 @@
 "use strict";
 var pph = require("../helpers/pph");
+var promise = protractor.promise;
 module.exports = pages.work = {};
-module.exports.workId = function() {
-	return element(by.binding("getWorkFullCode(work.pristine)")).getText();
+// Locator.
+module.exports.primaryTitleBinding = function() {
+	return element(by.binding("getWorkName(workPristine)"));
 };
-module.exports.primaryTitle = function() {
-	var titleElement = element(by.binding("getWorkName(workPristine)"));
-	pages.base.scrollIntoView(titleElement);
-	return titleElement.getText();
+module.exports.headerAlternateWorkTitleRootElements = function() {
+	return element.all(by.repeater("altTitle in altTitles | limitTo:workHeaderLimits.altTitles"));
 };
-module.exports.alternateTitles = function() {
-	return element.all(by.repeater("altTitle in altTitles | limitTo:workHeaderLimits.altTitles")).then (
-		function(firstAlternateTitles) {
-			if(firstAlternateTitles.length === 0) {
-				return [];
-			}
-			pages.base.scrollIntoView(firstAlternateTitles[0]);
-			browser.actions().mouseMove(firstAlternateTitles[0]).perform();
-			return element.all(by.repeater("altTitle in altTitles")).all(by.binding("altTitle.title")).map (
-				function(element) {
-					return element.getText();
-				}
-			);
-		}
-	);
+module.exports.alternateWorkTitleBindings = function() {
+	return element.all(by.repeater("altTitle in altTitles")).all(by.binding("altTitle.title"));
 };
+// Navigation.
 module.exports.goToScopeDelivery = function() {
 	return browser.executeScript (
 		function() {
 			jQuery(".nav-tabs span:contains('Scope Delivery')").click();
 		}
 	);
+};
+// Data fetching.
+module.exports.primaryTitle = function() {
+	var element = pages.work.primaryTitleBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.alternateTitles = function() {
+	var deferred = promise.defer();
+	pages.work.headerAlternateWorkTitleRootElements().then (
+		function(headerAlternateWorkTitleRootElements) {
+			if(headerAlternateWorkTitleRootElements.length === 0) {
+				return [];
+			}
+			pages.base.scrollIntoView(headerAlternateWorkTitleRootElements[0]);
+			browser.actions().mouseMove(headerAlternateWorkTitleRootElements[0]).perform();
+			deferred.fulfill (
+				pages.work.alternateWorkTitleBindings().map (
+					function(element) {
+						return element.getText();
+					}
+				)
+			);
+		}
+	);
+	return deferred.promise;
 };
 module.exports.includeWorkOnWebsite = function() {
 	var textElement =
@@ -53,10 +67,14 @@ module.exports.creatorNames = function() {
 		}
 	);
 };
-module.exports.creatorContributionPercentageByName = function(name) {
+module.exports.creatorContributionByName = function(name) {
 	return pph.indexOf(pages.work.creatorNames(), name).then (
 		function(creatorIndex) {
-			var creatorContributionElement = element.all(by.binding("creator.contribution")).get(creatorIndex);
+			var creatorContributionElement;
+			if(creatorIndex === -1) {
+				return null;
+			}
+			creatorContributionElement = element.all(by.binding("creator.contribution")).get(creatorIndex);
 			pages.base.scrollIntoView(creatorContributionElement);
 			return creatorContributionElement.getText().then (
 				function(text) {
