@@ -39,7 +39,7 @@ module.exports.validateCreatorName = function(name) {
 		}
 	);
 };
-module.exports.validateCreatorContribution = function(name, percentage) {
+module.exports.validateCreatorContributionByName = function(name, percentage) {
 	it (
 		"Validate creator contribution percentage", function() {
 			expect(pages.work.creatorContributionByName(name)).toBe(percentage);
@@ -55,7 +55,9 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 };
 // Flow.
 module.exports.validateWork = function(data) {
-	steps.works.goToWorkPage(data.workId);
+	if(data.workId) {
+		steps.works.goToWorkPage(data.workId);
+	}
 	steps.works.validatePrimaryWorkTitle(data.primaryWorkTitle);
 	if(data.alternateWorkTitles) {
 		data.alternateWorkTitles.forEach (
@@ -71,7 +73,7 @@ module.exports.validateWork = function(data) {
 			describe (
 				"Validate creator #" + (i + 1), function() {
 					steps.works.validateCreatorName(creator.name);
-					steps.works.validateCreatorContribution(creator.contribution);
+					steps.works.validateCreatorContributionByName(creator.name, creator.contribution);
 				}
 			);
 		}

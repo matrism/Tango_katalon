@@ -130,45 +130,47 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 	);
 };
 // Flow.
-module.exports.newWork = function(data) {
-	var validationData;
-	data = data || {};
-	validationData = Object.create(data);
-	steps.new_work.goToNewWorkPage();
-	steps.new_work.validateDefaultPrimaryWorkLanguage();
-	validationData.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
-	validationData.alternateWorkTitles = _.times (
-		2, function(i) {
-			steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
-			return steps.new_work.enterRandomAlternateWorkTitle(i);
+module.exports.createBasicWork = function() {
+	var validationData = {};
+	describe (
+		"Create basic work", function() {
+			steps.new_work.goToNewWorkPage();
+			steps.new_work.validateDefaultPrimaryWorkLanguage();
+			validationData.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
+			validationData.alternateWorkTitles = _.times (
+				2, function(i) {
+					steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
+					return steps.new_work.enterRandomAlternateWorkTitle(i);
+				}
+			);
+			validationData.creators = (function() {
+				var howMany = 2;
+				var creators = _.times (
+					howMany, function(i) {
+						var creator = {};
+						steps.new_work.validateDefaultCreatorRole(i);
+						creator.name = steps.new_work.selectRandomCreator(i);
+						creator.contribution = 100 / howMany;
+						steps.new_work.enterCreatorContribution(i, creator.contribution);
+						return creator;
+					}
+				);
+				steps.new_work.validateTotalContributionPercentage();
+				return creators;
+			})();
+			steps.new_work.validateDefaultMusicalDistributionCategory();
+			steps.new_work.validateDefaultTextMusicRelationship();
+			steps.new_work.validateDefaultExcerptType();
+			steps.new_work.validateDefaultVersionType();
+			steps.new_work.validateDefaultIntendedPurpose();
+			validationData.includeOnWebsite = (function() {
+				var includeOnWebsite = _.sample([true, false]);
+				steps.new_work.optToIncludeWorkOnWebsite(includeOnWebsite);
+				return includeOnWebsite;
+			})();
+			steps.base.itClickOnElement("Save Work", pages.new_work.saveWorkButton());
+			steps.base.itCheckIsRedirectToPage("created work page", "/metadata");
 		}
 	);
-	validationData.creators = (function() {
-		var howMany = 2;
-		var creators = _.times (
-			howMany, function(i) {
-				var creator = {};
-				steps.new_work.validateDefaultCreatorRole(i);
-				creator.name = steps.new_work.selectRandomCreator(i);
-				creator.contribution = 100 / howMany;
-				steps.new_work.enterCreatorContribution(i, creator.contribution);
-				return creator;
-			}
-		);
-		steps.new_work.validateTotalContributionPercentage();
-		return creators;
-	})();
-	steps.new_work.validateDefaultMusicalDistributionCategory();
-	steps.new_work.validateDefaultTextMusicRelationship();
-	steps.new_work.validateDefaultExcerptType();
-	steps.new_work.validateDefaultVersionType();
-	steps.new_work.validateDefaultIntendedPurpose();
-	validationData.includeOnWebsite = (function() {
-		var includeOnWebsite = _.sample([true, false]);
-		steps.new_work.optToIncludeWorkOnWebsite(includeOnWebsite);
-		return includeOnWebsite;
-	})();
-	steps.base.itClickOnElement("Save Work", pages.new_work.saveWorkButton());
-	steps.base.itCheckIsRedirectToPage("created work page", "/metadata");
 	return validationData;
 };

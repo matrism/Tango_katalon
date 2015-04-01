@@ -13,28 +13,27 @@ var feature = [{
 	name: "New basic work",
 	tags: [],
 	steps: function() {
-		var validationData;
-		//describe (
-			//"Create basic work", function() {
-				//validationData = steps.new_work.newWork();
-			//}
-		//);
-		describe (
-			"Validate created work data", function() {
-				validationData = {
-					workId: "WW 015006029 00",
-					primaryWorkTitle: "TEST WORK 1426781308581479",
-					creators: [
-						{
-							name: "PAPACACA",
-							contribution: 100
-						}
-					],
-					includeOnWebsite: true
-				};
-				steps.works.validateWork(validationData);
-			}
-		);
+		var validationData = steps.new_work.createBasicWork();
+		//var validationData = {
+			//workId: "WW 015006249 00",
+			//primaryWorkTitle: "TEST WORK TITLE 142792447241860",
+			//alternateWorkTitles: [
+				//"TEST ALTERNATE WORK TITLE 1427924474205725",
+				//"TEST ALTERNATE WORK TITLE 1427924476582667"
+			//],
+			//creators: [
+				//{
+					//name: "FAUZE",
+					//contribution: 50
+				//},
+				//{
+					//name: "WANDO",
+					//contribution: 50
+				//}
+			//],
+			//includeOnWebsite: false
+		//};
+		steps.works.validateWork(validationData);
 	}
 }];
 module.exports = {

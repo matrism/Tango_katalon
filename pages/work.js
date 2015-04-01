@@ -66,33 +66,57 @@ module.exports.includeWorkOnWebsite = function() {
 		}
 	);
 };
-module.exports.creatorNames = function() {
-	var elements = promise.filter (
-		$(".scope-delivery-table").all(by.binding("creator.person_name")), function(element) {
-			return element.isDisplayed();
-		}
-	);
-	return elements.then (
-		function(elements) {
-			return elements.map (
+module.exports.creatorNames = function(i) {
+	var ithElement;
+	var elements = (
+		$(".scope-delivery-table")
+			.all(by.binding("creator.person_name"))
+			.filter (
 				function(element) {
-					pages.base.scrollIntoView(element);
-					return element.getText();
+					return element.isDisplayed();
 				}
-			);
-		}
+			)
 	);
+	function handleElement(el) {
+		pages.base.scrollIntoView(el);
+		return el.getText();
+	}
+	if(i !== undefined) {
+		return handleElement(elements.get(i));
+	}
+	else {
+		return elements.map(handleElement);
+	}
+};
+module.exports.creatorContributions = function(i) {
+	var ithElement;
+	var elements = (
+		$(".scope-delivery-table")
+			.all(by.binding("creator.contribution"))
+			.filter (
+				function(element) {
+					return element.isDisplayed();
+				}
+			)
+	);
+	function handleElement(el) {
+		pages.base.scrollIntoView(el);
+		return el.getText();
+	}
+	if(i !== undefined) {
+		return handleElement(elements.get(i));
+	}
+	else {
+		return elements.map(handleElement);
+	}
 };
 module.exports.creatorContributionByName = function(name) {
 	return pph.indexOf(pages.work.creatorNames(), name).then (
 		function(creatorIndex) {
-			var creatorContributionElement;
 			if(creatorIndex === -1) {
 				return null;
 			}
-			creatorContributionElement = element.all(by.binding("creator.contribution")).get(creatorIndex);
-			pages.base.scrollIntoView(creatorContributionElement);
-			return creatorContributionElement.getText().then (
+			return pages.work.creatorContributions(creatorIndex).then (
 				function(text) {
 					if(!/^\d+\.\d+%$/.test(text)) {
 						return text;
