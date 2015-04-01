@@ -13,70 +13,26 @@ var feature = [{
 	name: "New basic work",
 	tags: [],
 	steps: function() {
-		var primaryWorkTitle;
-		var alternateWorkTitles;
-		var creators;
-		var includeOnWebsite;
-		steps.new_work.goToNewWorkPage();
-		describe (
-			"Create basic work", function() {
-				steps.new_work.validateDefaultPrimaryWorkLanguage();
-				primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
-				alternateWorkTitles = _.times (
-					2, function(i) {
-						steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
-						return steps.new_work.enterRandomAlternateWorkTitle(i);
-					}
-				);
-				creators = (function() {
-					var howMany = 2;
-					var creators = _.times (
-						howMany, function(i) {
-							var creator = {};
-							steps.new_work.validateDefaultCreatorRole(i);
-							creator.name = steps.new_work.selectRandomCreator(i);
-							creator.contribution = 100 / howMany;
-							steps.new_work.enterCreatorContribution(i, creator.contribution);
-							return creator;
-						}
-					);
-					steps.new_work.validateTotalContributionPercentage();
-					return creators;
-				})();
-				steps.new_work.validateDefaultMusicalDistributionCategory();
-				steps.new_work.validateDefaultTextMusicRelationship();
-				steps.new_work.validateDefaultExcerptType();
-				steps.new_work.validateDefaultVersionType();
-				steps.new_work.validateDefaultIntendedPurpose();
-				includeOnWebsite = (function() {
-					var includeOnWebsite = _.sample([true, false]);
-					steps.new_work.optToIncludeWorkOnWebsite(includeOnWebsite);
-					return includeOnWebsite;
-				})();
-				steps.base.itClickOnElement("Save Work", pages.new_work.saveWorkButton());
-				steps.base.itCheckIsRedirectToPage("created work page", "/metadata");
-			}
-		);
+		var validationData;
+		//describe (
+			//"Create basic work", function() {
+				//validationData = steps.new_work.newWork();
+			//}
+		//);
 		describe (
 			"Validate created work data", function() {
-				steps.works.validatePrimaryWorkTitle(primaryWorkTitle);
-				alternateWorkTitles.forEach (
-					function(alternateWorkTitle) {
-						steps.works.validateAlternateWorkTitle(alternateWorkTitle);
-					}
-				);
-				steps.works.validateIncludeWorkOnWebsite(includeOnWebsite);
-				steps.works.goToScopeDelivery();
-				creators.forEach (
-					function(creator, i) {
-						describe (
-							"Validate creator #" + (i + 1), function() {
-								steps.works.validateCreatorName(creator.name);
-								steps.works.validateCreatorContribution(creator.contribution);
-							}
-						);
-					}
-				);
+				validationData = {
+					workId: "WW 015006029 00",
+					primaryWorkTitle: "TEST WORK 1426781308581479",
+					creators: [
+						{
+							name: "PAPACACA",
+							contribution: 100
+						}
+					],
+					includeOnWebsite: true
+				};
+				steps.works.validateWork(validationData);
 			}
 		);
 	}

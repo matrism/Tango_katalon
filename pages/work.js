@@ -1,7 +1,15 @@
 "use strict";
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
-module.exports = pages.work = {};
+module.exports = pages.work = new ftf.pageObject();
+// Navigation.
+module.exports.open = function(workId) {
+	if(typeof(workId) !== "string") {
+		return ftf.pageObject.prototype.open.call(this);
+	}
+	browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
+	pages.base.waitForAjax();
+};
 // Locator.
 module.exports.primaryTitleBinding = function() {
 	return element(by.binding("getWorkName(workPristine)"));
@@ -59,11 +67,19 @@ module.exports.includeWorkOnWebsite = function() {
 	);
 };
 module.exports.creatorNames = function() {
-	var creatorNameElements = element.all(by.binding("creator.person_name"));
-	pages.base.scrollIntoView(creatorNameElements.get(0));
-	return creatorNameElements.map (
-		function(nameElement) {
-			return nameElement.getText();
+	var elements = promise.filter (
+		$(".scope-delivery-table").all(by.binding("creator.person_name")), function(element) {
+			return element.isDisplayed();
+		}
+	);
+	return elements.then (
+		function(elements) {
+			return elements.map (
+				function(element) {
+					pages.base.scrollIntoView(element);
+					return element.getText();
+				}
+			);
 		}
 	);
 };
