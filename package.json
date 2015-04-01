@@ -12,11 +12,13 @@
     "dependencies": { 
         "underscore"                  : "latest",
         "qs"                          : "latest",
-        "http-sync-win"               : "latest",
-        "http-sync"                   : "latest",
         "mkdirp"                      : "latest",
         "string.prototype.endswith"   : "latest",
         "string.prototype.startswith" : "latest"
+    },
+    "optionalDependencies": {
+        "http-sync-win" : "latest",
+        "http-sync"     : "latest"
     },
     "author": "WMG",
     "license": "ISC"
