@@ -9,33 +9,37 @@ var beforeFeature = [
 	[steps.login.itLogin]
 ];
 
+var workData = {};
+
+//workData = {
+	//workId: "WW 015006249 00",
+	//primaryWorkTitle: "TEST WORK TITLE 142792447241860",
+	//alternateWorkTitles: [
+		//"TEST ALTERNATE WORK TITLE 1427924474205725",
+		//"TEST ALTERNATE WORK TITLE 1427924476582667"
+	//],
+	//creators: [
+		//{
+			//name: "FAUZE",
+			//contribution: 50
+		//},
+		//{
+			//name: "WANDO",
+			//contribution: 50
+		//}
+	//],
+	//includeOnWebsite: false
+//};
+
 var feature = [{
 	name: "New basic work",
 	tags: [],
-	steps: function() {
-		var validationData = steps.new_work.createBasicWork();
-		//var validationData = {
-			//workId: "WW 015006249 00",
-			//primaryWorkTitle: "TEST WORK TITLE 142792447241860",
-			//alternateWorkTitles: [
-				//"TEST ALTERNATE WORK TITLE 1427924474205725",
-				//"TEST ALTERNATE WORK TITLE 1427924476582667"
-			//],
-			//creators: [
-				//{
-					//name: "FAUZE",
-					//contribution: 50
-				//},
-				//{
-					//name: "WANDO",
-					//contribution: 50
-				//}
-			//],
-			//includeOnWebsite: false
-		//};
-		steps.works.validateWork(validationData);
-	}
+	steps: [
+		[steps.new_work.createBasicWork, [workData]],
+		[steps.works.validateWork, [workData]]
+	]
 }];
+
 module.exports = {
     commonFeatureTags: [],
     feature: feature,
