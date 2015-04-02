@@ -13,45 +13,45 @@ module.exports.primaryWorkTitleLanguageDropdown = function() {
 module.exports.primaryWorkTitleInput = function() {
 	return element(by.model("work.primary_title.title"));
 };
-module.exports.alternateWorkTitleRootElements = function() {
+module.exports.alternateWorkTitleRows = function() {
 	return element.all(by.repeater("altTitle in work.alternative_titles"));
 };
-module.exports.alternateWorkTitleRootElement = function(index) {
-	return pages.new_work.alternateWorkTitleRootElements().get(index);
+module.exports.alternateWorkTitleRow = function(index) {
+	return pages.new_work.alternateWorkTitleRows().get(index);
 };
 module.exports.alternateWorkTitleLanguageDropdown = function(index) {
 	return (
-		pages.new_work.alternateWorkTitleRootElement(index)
+		pages.new_work.alternateWorkTitleRow(index)
 			.$("[tg-typeahead-render-template='$templates.main.wrapper']")
 	);
 };
 module.exports.alternateWorkTitleInput = function(index) {
 	return (
-		pages.new_work.alternateWorkTitleRootElement(index)
+		pages.new_work.alternateWorkTitleRow(index)
 			.element(by.model("altTitle.title"))
 	);
 };
-module.exports.creatorContributionRootElements = function() {
+module.exports.creatorContributionRows = function() {
 	return element.all(by.repeater("creator in commonDataHolder.creatorsContributions"));
 };
-module.exports.creatorContributionRootElement = function(index) {
-	return pages.new_work.creatorContributionRootElements().get(index);
+module.exports.creatorContributionRow = function(index) {
+	return pages.new_work.creatorContributionRows().get(index);
 };
 module.exports.creatorRoleDropdown = function(index) {
 	return (
-		pages.new_work.creatorContributionRootElement(index)
+		pages.new_work.creatorContributionRow(index)
 			.element(by.model("creator.role"))
 	);
 };
 module.exports.creatorNameInput = function(index) {
 	return (
-		pages.new_work.creatorContributionRootElement(index)
+		pages.new_work.creatorContributionRow(index)
 			.element(by.model("creator.person_name"))
 	);
 };
 module.exports.creatorContributionInput = function(index) {
 	return (
-		pages.new_work.creatorContributionRootElement(index)
+		pages.new_work.creatorContributionRow(index)
 			.element(by.model("creator.contribution"))
 	);
 };
