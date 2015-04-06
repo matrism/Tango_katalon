@@ -1,6 +1,8 @@
 var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
+
+
 if (steps.new_deal === undefined) {
     steps.new_deal = {
         itCreateBasicDeal: function () {
@@ -48,14 +50,28 @@ if (steps.new_deal === undefined) {
 
                 it("Add simple scope", function () {
                     pages.new_deal.addScopeForm();
-                    //pages.new_deal.selectContractTypeScope("Administration");
-                    //pages.new_deal.addTerritoryByTypingToScope();
+                    pages.new_deal.selectContractTypeScope(pages.new_deal.elems.contract_type_dropdown, "Finder");
+                    pages.new_deal.addTerritoryByTypingToScope();
+
                 });
+
+                it("select country", function () {
+                    pages.new_deal.selectRandomCountry();
+                });
+
+                //it("Expect continue button to be enabled", function () {
+                //    expect(pages.new_deal.elems.isEnabled);
+                //});
+
+                //it("Continue with next page", function () {
+                //    pages.new_deal.continueToNextPage();
+                //});
 
 
             });
         }
-    };
+    }
 }
+
 
 module.exports = steps.new_deal;

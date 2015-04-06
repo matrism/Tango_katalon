@@ -1,9 +1,11 @@
 "use strict";
+var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.new_deal === undefined) {
     pages.new_deal = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
+
         locators: {
             dealSigningTerritory: {css: "button.openPopupButton"},
             dealSigningTerritoryDropDownData: {css: "div.typeaheadDropdown"},
@@ -14,9 +16,10 @@ if (pages.new_deal === undefined) {
             start_date: {xpath: "//*[@id='actualStartDate']//input"},
             end_target_months: {xpath: "//*[@name='targetEndDuration']"},
             add_scope_icon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
-            contract_type_dropdown: {name: "scopeContractType"},
+            contract_type_dropdown: {xpath: "//*[@name='scopeContractType']//option"},
             territory_field: {xpath: "//*[@class='territoriesStaticView']"},
-            territory_input: {xpath: "//fieldset[2]/div/div/div/div[2]/div[3]/div[1]/input"}
+            territory_input: {xpath: "//fieldset[2]/div/div/div/div[2]/div[3]/div[1]/input"},
+            territory_dropdown: {css: "div.typeaheadDropdown div.item.ng-scope"}
         },
 
 
@@ -42,6 +45,7 @@ if (pages.new_deal === undefined) {
                     }
                 });
         },
+
 
         fillContractingPartiesField: function (field) {
             pages.new_deal.elems.contractingPartiesField.click();
@@ -73,22 +77,26 @@ if (pages.new_deal === undefined) {
             pages.new_deal.elems.continueButton.click();
         },
 
+
         fillStartActualDate: function () {
             pages.new_deal.elems.start_date.sendKeys("2015-03-12");
         },
 
+
         fillTargetEndMonths: function () {
             pages.new_deal.elems.end_target_months.sendKeys("3");
         },
+
 
         addScopeForm: function () {
             pages.new_deal.elems.add_scope_icon.click();
             expect(pages.new_deal.elems.contract_type_dropdown.isDisplayed);
         },
 
-        selectContractTypeScope: function (specific_value) {
+
+        selectContractTypeScope: function (element, specific_value) {
             var desiredOption;
-            browser.driver.findElements(by.name(""))
+            browser.driver.findElements(By.xpath("//*[@name='scopeContractType']//option"))
                 .then(function findMatchingOption(options) {
                     options.some(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -107,17 +115,27 @@ if (pages.new_deal === undefined) {
                 });
         },
 
-    addTerritoryByTypingToScope: function () {
+
+        addTerritoryByTypingToScope: function () {
             pages.new_deal.elems.territory_field.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.elems.territory_input));
             pages.new_deal.elems.territory_input.sendKeys("a");
-            //browser.wait(ExpectedConditions.visibilityOf(element(by.xpath("//*[@class='typeaheadDropdown']//div"))));
-            var suggestion = $(".typeaheadDropdown");
-            browser.wait(ExpectedConditions.visibilityOf(suggestion));
-            expect(suggestion.getText()).not.toContain("No results");
+            //expect(pages.new_deal.elems.territory_dropdown.isDisplayed);
+            //var suggestion =  $(".typeaheadDropdown div");
+            //browser.wait(ExpectedConditions.visibilityOf(suggestion));
+            //expect(suggestion.getText()).not.toContain("No results");
+        },
+
+
+        selectRandomCountry: function () {
+            $$(".typeaheadDropdown").then(
+                function (suggestions) {
+                    var randomSuggestion = _.sample(suggestions);
+                    randomSuggestion.click();
+                })
         }
 
-    });
+    })
 }
 
-module.exports = pages.new_deal;
+    module.exports = pages.new_deal;
