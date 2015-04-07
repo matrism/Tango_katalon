@@ -163,9 +163,9 @@ module.exports.createBasicWork = function(data) {
 			steps.new_work.validateDefaultVersionType();
 			steps.new_work.validateDefaultIntendedPurpose();
 			data.includeOnWebsite = (function() {
-				var includeOnWebsite = _.sample([true, false]);
-				steps.new_work.optToIncludeWorkOnWebsite(includeOnWebsite);
-				return includeOnWebsite;
+				var include = _.sample([true, false]);
+				steps.new_work.optToIncludeWorkOnWebsite(include);
+				return include;
 			})();
 			steps.base.itClickOnElement("Save Work", pages.new_work.saveWorkButton());
 			steps.base.itCheckIsRedirectToPage("created work page", "/metadata");

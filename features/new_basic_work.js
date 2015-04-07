@@ -31,14 +31,24 @@ var workData = {};
 	//includeOnWebsite: false
 //};
 
-var feature = [{
-	name: "New basic work",
-	tags: [],
-	steps: [
-		[steps.new_work.createBasicWork, [workData]],
-		[steps.works.validateWork, [workData]]
-	]
-}];
+var feature = [
+	{
+		name: "New basic work",
+		tags: [],
+		steps: [
+			[steps.new_work.createBasicWork, [workData]],
+			[steps.works.validateWork, [workData]],
+		]
+	},
+	{
+		name: "Edit basic work",
+		tags: ["edit"],
+		steps: [
+			[steps.works.editBasicWork, [workData]],
+			[steps.works.validateWork, [workData]]
+		]
+	}
+];
 
 module.exports = {
     commonFeatureTags: [],

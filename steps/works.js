@@ -17,6 +17,50 @@ module.exports.goToScopeDelivery = function() {
 		}
 	);
 };
+// Data fetching.
+module.exports.workInclusionOnWebsite = function() {
+	var deferred = promise.defer();
+	it (
+		"Find out whether this work is to be included on the website", function() {
+			deferred.fulfill(pages.work.workInclusionOnWebsite());
+		}
+	);
+	return deferred.promise;
+};
+// Interaction.
+module.exports.hoverWorkTitleHeading = function() {
+	steps.base.hoverElement (
+		"'Work title' heading", pages.work.workTitleHeading()
+	);
+};
+module.exports.clickEditWorkTitlesButton = function() {
+	steps.base.clickElement (
+		"'Edit work titles' button", pages.work.editWorkTitlesButton()
+	);
+};
+module.exports.clickSaveWorkTitlesButton = function() {
+	steps.base.clickElement (
+		"'Save work titles' button", pages.work.saveWorkTitlesButton()
+	);
+};
+module.exports.hoverWorkInclusionOnWebsiteIndicator = function() {
+	steps.base.hoverElement (
+		"'Work inclusion on website' description message",
+		pages.work.workInclusionOnWebsiteDescriptionMessage()
+	);
+};
+module.exports.clickEditWorkInclusionOnWebsiteButton = function() {
+	steps.base.clickElement (
+		"'Edit work inclusion on website' button",
+		pages.work.editWorkInclusionOnWebsiteButton()
+	);
+};
+module.exports.clickSaveWorkInclusionOnWebsiteButton = function() {
+	steps.base.clickElement (
+		"'Save work inclusion on website' button",
+		pages.work.saveWorkInclusionOnWebsiteButton()
+	);
+};
 // Validation.
 module.exports.validatePrimaryWorkTitle = function(title) {
 	it (
@@ -54,6 +98,60 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 	);
 };
 // Flow.
+module.exports.editWorkTitles = function(callback) {
+	describe (
+		"Edit work titles", function() {
+			steps.works.hoverWorkTitleHeading();
+			steps.works.clickEditWorkTitlesButton();
+			callback();
+			steps.works.clickSaveWorkTitlesButton();
+		}
+	);
+};
+module.exports.editWorkInclusionOnWebsiteOption = function(callback) {
+	describe (
+		"Edit 'Include work on website' option", function() {
+			steps.work.hoverWorkInclusionOnWebsiteIndicator();
+			steps.work.clickEditWorkInclusionOnWebsiteButton();
+			callback();
+			steps.work.clickSaveWorkInclusionOnWebsiteButton();
+		}
+	);
+};
+module.exports.editBasicWork = function(data) {
+	describe (
+		"Edit basic work", function() {
+			steps.works.goToWorkPage(data.workId);
+			steps.works.editWorkTitles (
+				function() {
+					data.primaryWorkTitle = steps.works.enterRandomPrimaryWorkTitle();
+					data.alternateWorkTitles = _.times (
+						4, function(i) {
+							return steps.works.enterRandomAlternateWorkTitle(i);
+						}
+					);
+				}
+			);
+			steps.works.editWorkInclusionOnWebsiteOption (
+				function() {
+					data.includeOnWebsite = (function() {
+						var include = steps.works.includeWorkOnWebsite().then (
+							function(include) {
+								return !include;
+							}
+						);
+						steps.works.editWorkInclusionOnWebsiteOption (
+							function() {
+								steps.works.optToIncludeWorkOnWebsite(include);
+							}
+						);
+						return include;
+					})();
+				}
+			);
+		}
+	);
+};
 module.exports.validateWork = function(data) {
 	if(data.workId) {
 		steps.works.goToWorkPage(data.workId);
