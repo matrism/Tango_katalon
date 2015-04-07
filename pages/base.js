@@ -2,14 +2,12 @@
 var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-if (pages.base === undefined) {
-    pages.base = new ftf.pageObject({
-        locators: {
-            logout_link: { id: "DSP-LOGOUT" }
-        }
-    });
-};
-pages.base.selectRandomTypeaheadValue = function(element) {
+module.exports = pages.base = new ftf.pageObject ({
+	locators: {
+		logout_link: { id: "DSP-LOGOUT" }
+	}
+});
+module.exports.selectRandomTypeaheadValue = function(element) {
 	var deferred = promise.defer();
 	it (
 		"Type a random letter in the search field", function() {
@@ -41,7 +39,7 @@ pages.base.selectRandomTypeaheadValue = function(element) {
 	);
 	return deferred.promise;
 };
-pages.base.randomTgDropdownSelector = function(element) {
+module.exports.randomTgDropdownSelector = function(element) {
 	var deferred = promise.defer();
 	var fn = function() {
 		it (
@@ -62,11 +60,10 @@ pages.base.randomTgDropdownSelector = function(element) {
 	fn.then = deferred.promise.then.bind(deferred.promise);
 	return fn;
 };
-pages.base.selectedTgDropdownOption = function(element) {
+module.exports.selectedTgDropdownOption = function(element) {
 	return (
 		element
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };
-module.exports = pages.base;
