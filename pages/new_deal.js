@@ -18,20 +18,19 @@ module.exports.dealSigningTerritoryDropDownData = function () {
 };
 
 module.exports.contractingPartiesInput = function () {
-    //return element(by.css('contractingParties '));
-    return element(by.xpath("//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']//input[@ng-disabled='$isDisabled()']"));
+    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
 module.exports.contractingPartiesField = function () {
-    return element(by.xpath("//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']"));
+    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"));
 };
 
 module.exports.continueButton = function () {
-    return element(by.xpath("//*[@class='page-footer']//button[contains(text(),'Continue')]"));
+    return element(by.css("div.page-footer button[data-ng-click='next()']"));
 };
 
 module.exports.startDate = function () {
-    return element(by.xpath("//*[@id='actualStartDate']//input"));
+    return element(by.css("div#actualStartDate input"));
 };
 
 module.exports.endTargetMonths = function () {
@@ -43,7 +42,7 @@ module.exports.addScopeIcon = function () {
 };
 
 module.exports.contractTypeDropDown = function () {
-    return element(by.xpath("//*[@name='scopeContractType']//option"));
+    return element(by.css("select[name='scopeContractType'] option"));
 };
 
 module.exports.territoryField = function () {
@@ -51,7 +50,7 @@ module.exports.territoryField = function () {
 };
 
 module.exports.territoryInput = function () {
-    return element(by.xpath("//fieldset[2]/div/div/div/div[2]/div[3]/div[1]/input"));
+    return element(by.css("div#scopeTerritory input#searchQueryInput"));
 };
 
 module.exports.territoryDropDown = function () {
@@ -59,26 +58,9 @@ module.exports.territoryDropDown = function () {
 };
 
 module.exports.saveDealButton = function () {
-    return element(by.xpath("//*[@class='page-footer']//button[contains(text(),'Save Deal')]"));
+    return element(by.css("div.page-footer button[data-ng-click='done()']"));
 };
 
-
-//        locators: {
-//            dealSigningTerritory: {css: "button.openPopupButton"},
-//            dealSigningTerritoryDropDownData: {css: "div.typeaheadDropdown"},
-//            contractingPartiesInput: {xpath: "//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']//input[@ng-disabled='$isDisabled()']"},
-//            contractingPartiesField: {xpath: "//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']"},
-//            contractingPartiesDropDownData: {xpath: "//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions ng-scope']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"},
-//            continueButton: {xpath: "//*[@class='page-footer']//button[contains(text(),'Continue')]"},
-//            start_date: {xpath: "//*[@id='actualStartDate']//input"},
-//            end_target_months: {xpath: "//*[@name='targetEndDuration']"},
-//            add_scope_icon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
-//            contract_type_dropdown: {xpath: "//*[@name='scopeContractType']//option"},
-//            territory_field: {xpath: "//*[@class='territoriesStaticView']"},
-//            territory_input: {xpath: "//fieldset[2]/div/div/div/div[2]/div[3]/div[1]/input"},
-//            territory_dropdown: {css: "div.typeaheadDropdown div.item.ng-scope"}
-//        },
-//
 
 module.exports.selectDesiredSigningTerritory = function (specific_country) {
     pages.new_deal.dealSigningTerritoryPopup().click();
@@ -86,7 +68,7 @@ module.exports.selectDesiredSigningTerritory = function (specific_country) {
     var desiredOption;
     browser.driver.findElements(by.css("div.typeaheadDropdown div"))
         .then(function findMatchingOption(options) {
-            options.some(function (option) {
+            options.forEach(function (option) {
                 option.getText().then(function doesOptionMatch(text) {
                         if (text.indexOf(specific_country) != -1) {
                             desiredOption = option;
@@ -113,7 +95,7 @@ module.exports.selectContractingPartyValue = function (specific_value) {
     var desiredOption;
     browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions ng-scope']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
         .then(function findMatchingOption(options) {
-            options.some(function (option) {
+            options.forEach(function (option) {
                 option.getText().then(function doesOptionMatch(text) {
                         if (text.indexOf(specific_value) != -1) {
                             desiredOption = option;
@@ -149,9 +131,9 @@ module.exports.addScopeForm = function () {
 
 module.exports.selectContractTypeScope = function (element, specific_value) {
     var desiredOption;
-    browser.driver.findElements(By.xpath("//*[@name='scopeContractType']//option"))
+    browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
         .then(function findMatchingOption(options) {
-            options.some(function (option) {
+            options.forEach(function (option) {
                 option.getText().then(function doesOptionMatch(text) {
                         if (text.indexOf(specific_value) != -1) {
                             desiredOption = option;
