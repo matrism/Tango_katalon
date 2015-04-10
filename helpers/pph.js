@@ -50,3 +50,14 @@ pph.allInArray = function(array, values) {
 		}
 	);
 };
+pph.hasClass = function(element, className) {
+	if(element instanceof protractor.ElementFinder) {
+		element = element.getWebElement();
+	}
+	return browser.executeScript (
+		function(element, className) {
+			return element.classList.contains(className);
+		},
+		element, className
+	);
+};

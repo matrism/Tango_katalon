@@ -1,7 +1,7 @@
 "use strict";
 var pages_path = _tf_config._system_.path_to_pages;
 require(pages_path + "work");
-module.exports = steps.works = {};
+module.exports = steps.work = {};
 // Navigation.
 module.exports.goToWorkPage = function(workId) {
 	it (
@@ -101,10 +101,10 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 module.exports.editWorkTitles = function(callback) {
 	describe (
 		"Edit work titles", function() {
-			steps.works.hoverWorkTitleHeading();
-			steps.works.clickEditWorkTitlesButton();
+			steps.work.hoverWorkTitleHeading();
+			steps.work.clickEditWorkTitlesButton();
 			callback();
-			steps.works.clickSaveWorkTitlesButton();
+			steps.work.clickSaveWorkTitlesButton();
 		}
 	);
 };
@@ -121,28 +121,28 @@ module.exports.editWorkInclusionOnWebsiteOption = function(callback) {
 module.exports.editBasicWork = function(data) {
 	describe (
 		"Edit basic work", function() {
-			steps.works.goToWorkPage(data.workId);
-			steps.works.editWorkTitles (
+			steps.work.goToWorkPage(data.workId);
+			steps.work.editWorkTitles (
 				function() {
-					data.primaryWorkTitle = steps.works.enterRandomPrimaryWorkTitle();
+					data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
 					data.alternateWorkTitles = _.times (
 						4, function(i) {
-							return steps.works.enterRandomAlternateWorkTitle(i);
+							return steps.work.enterRandomAlternateWorkTitle(i);
 						}
 					);
 				}
 			);
-			steps.works.editWorkInclusionOnWebsiteOption (
+			steps.work.editWorkInclusionOnWebsiteOption (
 				function() {
 					data.includeOnWebsite = (function() {
-						var include = steps.works.includeWorkOnWebsite().then (
+						var include = steps.work.includeWorkOnWebsite().then (
 							function(include) {
 								return !include;
 							}
 						);
-						steps.works.editWorkInclusionOnWebsiteOption (
+						steps.work.editWorkInclusionOnWebsiteOption (
 							function() {
-								steps.works.optToIncludeWorkOnWebsite(include);
+								steps.work.optToIncludeWorkOnWebsite(include);
 							}
 						);
 						return include;
@@ -154,24 +154,24 @@ module.exports.editBasicWork = function(data) {
 };
 module.exports.validateWork = function(data) {
 	if(data.workId) {
-		steps.works.goToWorkPage(data.workId);
+		steps.work.goToWorkPage(data.workId);
 	}
-	steps.works.validatePrimaryWorkTitle(data.primaryWorkTitle);
+	steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
 	if(data.alternateWorkTitles) {
 		data.alternateWorkTitles.forEach (
 			function(alternateWorkTitle) {
-				steps.works.validateAlternateWorkTitle(alternateWorkTitle);
+				steps.work.validateAlternateWorkTitle(alternateWorkTitle);
 			}
 		);
 	}
-	steps.works.validateIncludeWorkOnWebsite(data.includeOnWebsite);
-	steps.works.goToScopeDelivery();
+	steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
+	steps.work.goToScopeDelivery();
 	data.creators.forEach (
 		function(creator, i) {
 			describe (
 				"Validate creator #" + (i + 1), function() {
-					steps.works.validateCreatorName(creator.name);
-					steps.works.validateCreatorContributionByName(creator.name, creator.contribution);
+					steps.work.validateCreatorName(creator.name);
+					steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
 				}
 			);
 		}

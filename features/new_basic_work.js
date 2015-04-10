@@ -37,15 +37,15 @@ var feature = [
 		tags: [],
 		steps: [
 			[steps.new_work.createBasicWork, [workData]],
-			[steps.works.validateWork, [workData]],
+			//[steps.work.validateWork, [workData]],
 		]
 	},
 	{
 		name: "Edit basic work",
 		tags: ["edit"],
 		steps: [
-			[steps.works.editBasicWork, [workData]],
-			[steps.works.validateWork, [workData]]
+			[steps.work.editBasicWork, [workData]],
+			//[steps.work.validateWork, [workData]]
 		]
 	}
 ];

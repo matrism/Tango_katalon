@@ -2,6 +2,7 @@
 var pages_path = _tf_config._system_.path_to_pages;
 var steps_path = _tf_config._system_.path_to_steps;
 var randomId = require("../helpers/randomId");
+var pph = require("../helpers/pph");
 var promise = protractor.promise;
 require(pages_path + "new_work");
 require(steps_path + "base");
@@ -134,6 +135,17 @@ module.exports.createBasicWork = function(data) {
 	describe (
 		"Create basic work", function() {
 			steps.new_work.goToNewWorkPage();
+			it (
+				"asdf", function() {
+					pph.hasClass($(".control-group"), "control-group").then (
+						function(bool) {
+							console.log(bool);
+							process.exit();
+						}
+					);
+				}
+			);
+			return;
 			steps.new_work.validateDefaultPrimaryWorkLanguage();
 			data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
 			data.alternateWorkTitles = _.times (
