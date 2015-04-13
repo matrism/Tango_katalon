@@ -6,7 +6,7 @@ var pph = require("../helpers/pph");
 var promise = protractor.promise;
 require(pages_path + "new_work");
 require(steps_path + "base");
-require(steps_path + "works");
+require(steps_path + "work");
 module.exports = steps.new_work = {};
 // Navigation.
 module.exports.goToNewWorkPage = function() {
@@ -84,7 +84,7 @@ module.exports.validateDefaultIntendedPurpose = function() {
 module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
-		"Enter a random primary work title", function() {
+		"Enter random primary work title", function() {
 			var title = "TEST WORK TITLE " + randomId();
 			pages.new_work.enterPrimaryWorkTitle(title);
 			deferred.fulfill(title);
@@ -135,17 +135,6 @@ module.exports.createBasicWork = function(data) {
 	describe (
 		"Create basic work", function() {
 			steps.new_work.goToNewWorkPage();
-			it (
-				"asdf", function() {
-					pph.hasClass($(".control-group"), "control-group").then (
-						function(bool) {
-							console.log(bool);
-							process.exit();
-						}
-					);
-				}
-			);
-			return;
 			steps.new_work.validateDefaultPrimaryWorkLanguage();
 			data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
 			data.alternateWorkTitles = _.times (

@@ -1,5 +1,7 @@
 "use strict";
 var pages_path = _tf_config._system_.path_to_pages;
+var randomId = require("../helpers/randomId");
+var promise = protractor.promise;
 require(pages_path + "work");
 module.exports = steps.work = {};
 // Navigation.
@@ -28,44 +30,94 @@ module.exports.workInclusionOnWebsite = function() {
 	return deferred.promise;
 };
 // Interaction.
-module.exports.hoverWorkTitleHeading = function() {
+module.exports.hoverPrimaryWorkTitleHeading = function() {
 	steps.base.hoverElement (
-		"'Work title' heading", pages.work.workTitleHeading()
+		"primary work title heading", pages.work.primaryWorkTitleHeading()
 	);
 };
-module.exports.clickEditWorkTitlesButton = function() {
+module.exports.editWorkTitles = function() {
 	steps.base.clickElement (
-		"'Edit work titles' button", pages.work.editWorkTitlesButton()
+		"edit work titles button", pages.work.editWorkTitlesButton()
 	);
 };
-module.exports.clickSaveWorkTitlesButton = function() {
+module.exports.enterRandomPrimaryWorkTitle = function() {
+	var deferred = promise.defer();
+	it (
+		"Enter a random primary work title", function() {
+			var title = "TEST WORK TITLE " + randomId();
+			pages.work.enterPrimaryWorkTitle(title);
+			deferred.fulfill(title);
+		}
+	);
+	return deferred.promise;
+};
+module.exports.enterRandomAlternateWorkTitle = function(i) {
+	var deferred = promise.defer();
+	it (
+		"Enter random alternate work title #" + (i + 1), function() {
+			var title = "TEST ALTERNATE WORK TITLE " + randomId();
+			pages.work.enterAlternateWorkTitle(i, title);
+			deferred.fulfill(title);
+		}
+	);
+	return deferred.promise;
+};
+module.exports.cancelWorkTitlesEditing = function() {
 	steps.base.clickElement (
-		"'Save work titles' button", pages.work.saveWorkTitlesButton()
+		"cancel work titles editing button",
+		pages.work.cancelWorkTitlesEditingButton(),
+		_tf_config._system_.wait_timeout
+	);
+};
+module.exports.saveWorkTitles = function() {
+	steps.base.clickElement (
+		"save work titles button", pages.work.saveWorkTitlesButton()
 	);
 };
 module.exports.hoverWorkInclusionOnWebsiteIndicator = function() {
 	steps.base.hoverElement (
-		"'Work inclusion on website' description message",
+		"work inclusion on website description message",
 		pages.work.workInclusionOnWebsiteDescriptionMessage()
 	);
 };
-module.exports.clickEditWorkInclusionOnWebsiteButton = function() {
+module.exports.editWorkInclusionOnWebsite = function() {
 	steps.base.clickElement (
-		"'Edit work inclusion on website' button",
+		"edit work inclusion on website button",
 		pages.work.editWorkInclusionOnWebsiteButton()
 	);
 };
-module.exports.clickSaveWorkInclusionOnWebsiteButton = function() {
+module.exports.saveWorkInclusionOnWebsite = function() {
 	steps.base.clickElement (
-		"'Save work inclusion on website' button",
+		"save work inclusion on website button",
 		pages.work.saveWorkInclusionOnWebsiteButton()
 	);
 };
 // Validation.
+module.exports.validateDefaultAlternateWorkTitleLanguage = function() {
+	it (
+		"Validate default alternate work title language", function() {
+			expect(pages.work.defaultAlternateWorkTitleLanguage()).toBe("English");
+		}
+	);
+};
+module.exports.expectPrimaryWorkTitleFieldValueToBe = function(title) {
+	it (
+		"Validate primary work title edit field value", function() {
+			expect(pages.work.primaryWorkTitleEditFieldValue()).toBe(title);
+		}
+	);
+};
+module.exports.expectPrimaryWorkTitleFieldValueNotToBe = function(title) {
+	it (
+		"Validate primary work title edit field value", function() {
+			expect(pages.work.primaryWorkTitleEditFieldValue()).not.toBe(title);
+		}
+	);
+};
 module.exports.validatePrimaryWorkTitle = function(title) {
 	it (
 		"Validate primary work title", function() {
-			expect(pages.work.primaryTitle()).toBe(title);
+			expect(pages.work.primaryWorkTitle()).toBe(title);
 		}
 	);
 };
@@ -98,57 +150,47 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 	);
 };
 // Flow.
-module.exports.editWorkTitles = function(callback) {
-	describe (
-		"Edit work titles", function() {
-			steps.work.hoverWorkTitleHeading();
-			steps.work.clickEditWorkTitlesButton();
-			callback();
-			steps.work.clickSaveWorkTitlesButton();
-		}
-	);
-};
-module.exports.editWorkInclusionOnWebsiteOption = function(callback) {
-	describe (
-		"Edit 'Include work on website' option", function() {
-			steps.work.hoverWorkInclusionOnWebsiteIndicator();
-			steps.work.clickEditWorkInclusionOnWebsiteButton();
-			callback();
-			steps.work.clickSaveWorkInclusionOnWebsiteButton();
-		}
-	);
-};
 module.exports.editBasicWork = function(data) {
 	describe (
 		"Edit basic work", function() {
 			steps.work.goToWorkPage(data.workId);
-			steps.work.editWorkTitles (
-				function() {
-					data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
-					data.alternateWorkTitles = _.times (
-						4, function(i) {
-							return steps.work.enterRandomAlternateWorkTitle(i);
-						}
-					);
+			steps.work.hoverPrimaryWorkTitleHeading();
+			steps.work.editWorkTitles();
+			data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
+			steps.work.cancelWorkTitlesEditing();
+			steps.base.dirtyCheckConfirmCancellation();
+			steps.work.hoverPrimaryWorkTitleHeading();
+			steps.work.editWorkTitles();
+			steps.work.expectPrimaryWorkTitleFieldValueNotToBe(data.primaryWorkTitle);
+			data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
+			steps.work.cancelWorkTitlesEditing();
+			steps.base.dirtyCheckContinueEditing();
+			steps.work.expectPrimaryWorkTitleFieldValueToBe(data.primaryWorkTitle);
+			data.alternateWorkTitles = _.times (
+				4, function(i) {
+					steps.work.validateDefaultAlternateWorkTitleLanguage();
+					return steps.work.enterRandomAlternateWorkTitle(i);
 				}
 			);
-			steps.work.editWorkInclusionOnWebsiteOption (
-				function() {
-					data.includeOnWebsite = (function() {
-						var include = steps.work.includeWorkOnWebsite().then (
-							function(include) {
-								return !include;
-							}
-						);
-						steps.work.editWorkInclusionOnWebsiteOption (
-							function() {
-								steps.work.optToIncludeWorkOnWebsite(include);
-							}
-						);
-						return include;
-					})();
-				}
-			);
+			/*
+			steps.work.clickSaveWorkTitlesButton();
+			steps.work.hoverWorkInclusionOnWebsiteIndicator();
+			steps.work.clickEditWorkInclusionOnWebsiteButton();
+			data.includeOnWebsite = (function() {
+				var include = steps.work.includeWorkOnWebsite().then (
+					function(include) {
+						return !include;
+					}
+				);
+				steps.work.editWorkInclusionOnWebsiteOption (
+					function() {
+						steps.work.optToIncludeWorkOnWebsite(include);
+					}
+				);
+				return include;
+			})();
+			steps.work.clickSaveWorkInclusionOnWebsiteButton();
+			*/
 		}
 	);
 };

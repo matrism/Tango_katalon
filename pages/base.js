@@ -7,6 +7,17 @@ module.exports = pages.base = new ftf.pageObject ({
 		logout_link: { id: "DSP-LOGOUT" }
 	}
 });
+// Locators.
+module.exports.dirtyCheckDialogHeading = function() {
+	return $(".modal-header").element(by.cssContainingText("*", "UNSAVED EDITS"));
+};
+module.exports.dirtyCheckContinueEditingButton = function() {
+	return $(".modal-footer").element(by.cssContainingText("button", "Continue Editing"));
+};
+module.exports.dirtyCheckConfirmCancellationButton = function() {
+	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
+};
+// Interaction.
 module.exports.selectRandomTypeaheadValue = function(element) {
 	var deferred = promise.defer();
 	it (
@@ -59,6 +70,9 @@ module.exports.randomTgDropdownSelector = function(element) {
 	};
 	fn.then = deferred.promise.then.bind(deferred.promise);
 	return fn;
+};
+module.exports.selectedDropdownOption = function(element) {
+	return element.$("option:checked").getText();
 };
 module.exports.selectedTgDropdownOption = function(element) {
 	return (
