@@ -85,6 +85,29 @@ module.exports.selectDesiredSigningTerritory = function (specific_country) {
         });
 };
 
+module.exports.selectDesiredSigningTerritorye = function (specific_country) {
+    pages.new_deal.dealSigningTerritoryPopup().click();
+    expect(pages.new_deal.dealSigningTerritoryDropDownData().isDisplayed);
+    var desiredOption;
+    browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
+        .then(function findMatchingOption(options) {
+            options.forEach(function (option) {
+                option.getText().then(function doesOptionMatch(text) {
+                        if (specific_country === text){
+                            desiredOption = option;
+                            return true;
+                        }
+                    }
+                )
+            });
+        })
+        .then(function clickOption() {
+            if (desiredOption) {
+                desiredOption.click();
+            }
+        });
+};
+
 
 module.exports.fillContractingPartiesField = function (field) {
     pages.new_deal.contractingPartiesField().click();
