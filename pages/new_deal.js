@@ -6,7 +6,7 @@ if (pages.new_deal === undefined) {
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
             dealSigningTerritory: {css: "button.openPopupButton"},
-            dealSigningTerritoryDropDownData: {css: "div.typeaheadDropdown"},zz
+            dealSigningTerritoryDropDownData: {css: "div.typeaheadDropdown"},
             contractingPartiesInput: {xpath: "//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']//input[@ng-disabled='$isDisabled()']"},
             contractingPartiesField: {xpath: "//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']"},
             contractingPartiesDropDownData: {xpath: "//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions ng-scope']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"},

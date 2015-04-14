@@ -349,7 +349,8 @@ return incomeProviderInput.getText();
         {
 
             var   effectiveStartDateCalendarIco;
-            effectiveStartDateCalendarIco = element(by.css("   .icon-calendar"));
+            //effectiveStartDateCalendarIco = element(by.css(".icon-calendar"));
+            effectiveStartDateCalendarIco = element(by.css(".rate-set-calendar>.control-group>span"));
             effectiveStartDateCalendarIco.click();
         }
         ,
@@ -373,6 +374,39 @@ return incomeProviderInput.getText();
 
 
         }
+        ,
+        clickOnReceiptApplicationMethod:function()
+        {
+
+            var onReceiptMethodButton;
+            onReceiptMethodButton = element(by.css(".rate-set-rate-ram>.btn-group")).element(by.buttonText("On Receipt"));
+
+
+            //element(by.css('some-css')).element(by.tagName('tag-within-css'));
+
+            onReceiptMethodButton.click();
+
+        },
+        clickYesOnRateMethodModal: function()
+        {
+
+            var rateMethodModalYesButton;
+            rateMethodModalYesButton = element(by.css(".modal-footer>.btn-primary"));
+
+            rateMethodModalYesButton.click();
+
+        },
+        clickDoneButtonForRRSet:function()
+        {
+
+            var RRDoneButton;
+            RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
+
+            RRDoneButton.click();
+
+
+        }
+
 
 
 
