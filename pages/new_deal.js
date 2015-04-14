@@ -115,6 +115,7 @@ module.exports.selectContractingPartyValue = function (specific_value) {
 module.exports.continueToNextPage = function () {
     pages.new_deal.continueButton().click();
 };
+
 module.exports.fillStartActualDate = function () {
     pages.new_deal.startDate().sendKeys("2015-03-12");
 };
