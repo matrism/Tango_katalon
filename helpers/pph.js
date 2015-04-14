@@ -61,3 +61,15 @@ pph.hasClass = function(element, className) {
 		element, className
 	);
 };
+pph.makeCssSelectorPredicate = function(selector) {
+	return function(element) {
+		return browser.executeScript (
+			function(element, selector) {
+				return $(element).is(selector);
+			},
+			element,
+			selector
+		);
+	};
+};
+

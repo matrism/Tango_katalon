@@ -25,6 +25,9 @@ module.exports.clickElement = function(elName, el, wait) {
 	it (
 		"Click " + elName, function() {
 			pages.base.scrollIntoView(el);
+			if(wait === true) {
+				wait = _tf_config._system_.wait_timeout;
+			}
 			if(!wait) {
 				expect(el.getAttribute("disabled")).toBeFalsy();
 			}
@@ -39,12 +42,22 @@ module.exports.clickElement = function(elName, el, wait) {
 		}
 	);
 };
-module.exports.waitForElementToBeDisplayed = function(elName, el) {
+module.exports.waitForElementToBeDisplayed = function(elName, el, wait) {
 	it (
 		"Wait for " + elName + " to be displayed", function() {
 			browser.wait (
 				ExpectedConditions.visibilityOf(el),
-				_tf_config._system_.wait_timeout
+				wait || _tf_config._system_.wait_timeout
+			);
+		}
+	);
+};
+module.exports.waitForElementToBeClickable = function(elName, el, wait) {
+	it (
+		"Wait for " + elName + " to be displayed", function() {
+			browser.wait (
+				ExpectedConditions.elementToBeClickable(el),
+				wait || _tf_config._system_.wait_timeout
 			);
 		}
 	);

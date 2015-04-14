@@ -142,6 +142,20 @@ module.exports.workInclusionOnWebsite = function() {
 		}
 	);
 };
+module.exports.selectedWorkInclusionOnWebsiteOption = function() {
+	return pages.work.activeIncludeWorkOnWebsiteButton().getText().then (
+		function(text) {
+			switch(text.toLowerCase()) {
+				case "yes":
+					return true;
+				case "no":
+					return false;
+				default:
+					return text;
+			}
+		}
+	);
+};
 module.exports.creatorNames = function(i) {
 	var ithElement;
 	var elements = (
@@ -208,6 +222,10 @@ module.exports.primaryWorkTitleEditFieldValue = function() {
 };
 (function() {
 	var buttonCssSelector = "button[data-ng-model='wcmWebsiteEdit.model.includeOnWebsite']";
+	var activeButtonCssSelector = buttonCssSelector + ".active";
+	module.exports.activeIncludeWorkOnWebsiteButton = function() {
+		return $(activeButtonCssSelector);
+	};
 	module.exports.includeWorkOnWebsiteButton = function() {
 		return element(by.cssContainingText(buttonCssSelector, "Yes"));
 	};

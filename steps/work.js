@@ -90,7 +90,7 @@ module.exports.toggleWorkInclusionOnWebsite = function() {
 	var deferred = promise.defer();
 	it (
 		"Toggle work inclusion on website", function() {
-			var include = pages.work.workInclusionOnWebsite().then (
+			var include = pages.work.selectedWorkInclusionOnWebsiteOption().then (
 				function(include) {
 					return !include;
 				}
@@ -166,14 +166,14 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 module.exports.expectWorkInclusionOnWebsiteOptionToBe = function(include) {
 	it (
 		"Validate work inclusion on website option", function() {
-			expect(pages.work.workInclusionOnWebsite()).toBe(include);
+			expect(pages.work.selectedWorkInclusionOnWebsiteOption()).toBe(include);
 		}
 	);
 };
 module.exports.expectWorkInclusionOnWebsiteOptionNotToBe = function(include) {
 	it (
 		"Validate work inclusion on website option", function() {
-			expect(pages.work.workInclusionOnWebsite()).not.toBe(include);
+			expect(pages.work.selectedWorkInclusionOnWebsiteOption()).not.toBe(include);
 		}
 	);
 };
@@ -186,40 +186,53 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 };
 // Flow.
 module.exports.editBasicWork = function(data) {
+	var skip = [
+		"work titles"
+	];
 	describe (
 		"Edit basic work", function() {
 			steps.work.goToWorkPage(data.workId);
-			steps.work.hoverPrimaryWorkTitleHeading();
-			steps.work.editWorkTitles();
-			data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
-			steps.work.cancelWorkTitlesEditing();
-			steps.base.dirtyCheckConfirmCancellation();
-			steps.work.hoverPrimaryWorkTitleHeading();
-			steps.work.editWorkTitles();
-			steps.work.expectPrimaryWorkTitleFieldValueNotToBe(data.primaryWorkTitle);
-			data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
-			steps.work.cancelWorkTitlesEditing();
-			steps.base.dirtyCheckContinueEditing();
-			steps.work.expectPrimaryWorkTitleFieldValueToBe(data.primaryWorkTitle);
-			steps.work.validateDefaultAlternateWorkTitleLanguage();
-			data.alternateWorkTitles = _.times (
-				2, function(i) {
-					return steps.work.enterRandomAlternateWorkTitle(i);
-				}
-			);
-			steps.work.saveWorkTitles();
+
+			if(skip.indexOf("work titles") === -1) {
+				steps.work.hoverPrimaryWorkTitleHeading();
+				steps.work.editWorkTitles();
+				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
+				steps.work.cancelWorkTitlesEditing();
+				steps.base.dirtyCheckConfirmCancellation();
+				steps.work.hoverPrimaryWorkTitleHeading();
+				steps.work.editWorkTitles();
+				steps.work.expectPrimaryWorkTitleFieldValueNotToBe(data.primaryWorkTitle);
+
+				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
+				steps.work.cancelWorkTitlesEditing();
+				steps.base.dirtyCheckContinueEditing();
+				steps.work.expectPrimaryWorkTitleFieldValueToBe(data.primaryWorkTitle);
+
+				steps.work.validateDefaultAlternateWorkTitleLanguage();
+
+				data.alternateWorkTitles = _.times (
+					2, function(i) {
+						return steps.work.enterRandomAlternateWorkTitle(i);
+					}
+				);
+
+				steps.work.saveWorkTitles();
+			}
+
 			steps.work.hoverWorkInclusionOnWebsiteIndicator();
 			steps.work.editWorkInclusionOnWebsite();
 			data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
-			//steps.work.cancelWorkInclusionOnWebsiteEditing();
-			//steps.base.dirtyCheckConfirmCancellation();
-			//steps.work.hoverWorkInclusionOnWebsiteIndicator();
-			//steps.work.editWorkInclusionOnWebsite();
-			//steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data.includeOnWebsite);
-			//data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
-			//steps.work.cancelWorkInclusionOnWebsiteEditing();
-			//steps.base.dirtyCheckContinueEditing();
-			//steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
+			steps.work.cancelWorkInclusionOnWebsiteEditing();
+			steps.base.dirtyCheckConfirmCancellation();
+			steps.work.hoverWorkInclusionOnWebsiteIndicator();
+			steps.work.editWorkInclusionOnWebsite();
+			steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data.includeOnWebsite);
+
+			data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
+			steps.work.cancelWorkInclusionOnWebsiteEditing();
+			steps.base.dirtyCheckContinueEditing();
+			steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
+
 			steps.work.saveWorkInclusionOnWebsite();
 		}
 	);
