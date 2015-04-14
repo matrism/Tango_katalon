@@ -17,7 +17,7 @@ var beforeFeature = function () {
     }];
 
 module.exports = {
-    commonFeatureTags: ["login"],
+    commonFeatureTags: ["deal"],
     feature: feature,
     beforeFeature: beforeFeature
 };
