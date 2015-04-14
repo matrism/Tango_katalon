@@ -33,7 +33,7 @@ module.exports.editWorkTitlesButton = function() {
 module.exports.editWorkTitlesContainer = function() {
 	return $("[data-ng-show='workHeader.title.edit']");
 };
-module.exports.primaryWorkTitleEditField = function() {
+module.exports.editPrimaryWorkTitleField = function() {
 	return (
 		pages.work.editWorkTitlesContainer()
 			.element(by.model("work.title.primary_title.title"))
@@ -54,7 +54,7 @@ module.exports.defaultAlternateWorkTitleLanguage = function(i) {
 			.element(by.model("altTitle.language_code"))
 	);
 };
-module.exports.alternateWorkTitleEditField = function(i) {
+module.exports.editAlternateWorkTitleField = function(i) {
 	return (
 		pages.work.alternateWorkTitleEditRow(i)
 			.element(by.model("altTitle.title"))
@@ -71,6 +71,18 @@ module.exports.saveWorkTitlesButton = function() {
 		pages.work.editWorkTitlesContainer()
 			.element(by.cssContainingText("button", "Save"))
 	);
+};
+module.exports.assetTypeLabel = function() {
+};
+module.exports.editAssetTypeButton = function() {
+};
+module.exports.editMusicalDistributionCategoryField = function() {
+};
+module.exports.editTextMusicRelationshipField = function() {
+};
+module.exports.editExcerptTypeField = function() {
+};
+module.exports.saveAssetTypeButton = function() {
 };
 module.exports.workInclusionOnWebsiteParagraph = function() {
 	return (
@@ -217,8 +229,8 @@ module.exports.creatorContributionByName = function(name) {
 		}
 	);
 };
-module.exports.primaryWorkTitleEditFieldValue = function() {
-	return pages.work.primaryWorkTitleEditField().getAttribute("value"); 
+module.exports.editPrimaryWorkTitleFieldValue = function() {
+	return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
 };
 (function() {
 	var buttonCssSelector = "button[data-ng-model='wcmWebsiteEdit.model.includeOnWebsite']";
@@ -235,13 +247,13 @@ module.exports.primaryWorkTitleEditFieldValue = function() {
 })();
 // Data input.
 module.exports.enterPrimaryWorkTitle = function(title) {
-	var element = pages.work.primaryWorkTitleEditField();
+	var element = pages.work.editPrimaryWorkTitleField();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
 };
 module.exports.enterAlternateWorkTitle = function(i, title) {
-	var element = pages.work.alternateWorkTitleEditField(i);
+	var element = pages.work.editAlternateWorkTitleField(i);
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);

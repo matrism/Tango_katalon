@@ -71,7 +71,44 @@ module.exports.cancelWorkTitlesEditing = function() {
 };
 module.exports.saveWorkTitles = function() {
 	steps.base.clickElement (
-		"save work titles button", pages.work.saveWorkTitlesButton()
+		"save work titles button",
+		pages.work.saveWorkTitlesButton()
+	);
+};
+module.exports.hoverAssetTypeLabel = function() {
+	steps.base.hoverElement("asset type label", pages.work.assetTypeLabel());
+};
+module.exports.editAssetType = function() {
+	steps.base.clickElement (
+		"edit asset type button",
+		pages.work.editAssetTypeButton()
+	);
+};
+module.exports.selectDifferentRandomMusicalDistributionCategory  = function() {
+	steps.base.selectRandomDropdownOption (
+		"musical distribution category",
+		pages.work.editMusicalDistributionCategoryField(),
+		{ different: true }
+	);
+};
+module.exports.selectDifferentRandomTextMusicRelationship  = function() {
+	steps.base.selectRandomDropdownOption (
+		"text music relationship",
+		pages.work.editTextMusicRelationshipField(),
+		{ different: true }
+	);
+};
+module.exports.selectDifferentRandomExcerptType  = function() {
+	steps.base.selectRandomDropdownOption (
+		"excerpt type",
+		pages.work.editExcerptTypeField(),
+		{ different: true }
+	);
+};
+module.exports.saveAssetType = function() {
+	steps.base.clickElement (
+		"save asset type button",
+		pages.work.saveAssetTypeButton()
 	);
 };
 module.exports.hoverWorkInclusionOnWebsiteIndicator = function() {
@@ -124,14 +161,14 @@ module.exports.validateDefaultAlternateWorkTitleLanguage = function() {
 module.exports.expectPrimaryWorkTitleFieldValueToBe = function(title) {
 	it (
 		"Validate primary work title edit field value", function() {
-			expect(pages.work.primaryWorkTitleEditFieldValue()).toBe(title);
+			expect(pages.work.editPrimaryWorkTitleFieldValue()).toBe(title);
 		}
 	);
 };
 module.exports.expectPrimaryWorkTitleFieldValueNotToBe = function(title) {
 	it (
 		"Validate primary work title edit field value", function() {
-			expect(pages.work.primaryWorkTitleEditFieldValue()).not.toBe(title);
+			expect(pages.work.editPrimaryWorkTitleFieldValue()).not.toBe(title);
 		}
 	);
 };
@@ -186,14 +223,15 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 };
 // Flow.
 module.exports.editBasicWork = function(data) {
-	var skip = [
-		"work titles"
+	var debugSkip = [
+		"work titles",
+		"inclusion on website",
 	];
 	describe (
 		"Edit basic work", function() {
 			steps.work.goToWorkPage(data.workId);
 
-			if(skip.indexOf("work titles") === -1) {
+			if(debugSkip.indexOf("work titles") === -1) {
 				steps.work.hoverPrimaryWorkTitleHeading();
 				steps.work.editWorkTitles();
 				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
@@ -219,21 +257,35 @@ module.exports.editBasicWork = function(data) {
 				steps.work.saveWorkTitles();
 			}
 
-			steps.work.hoverWorkInclusionOnWebsiteIndicator();
-			steps.work.editWorkInclusionOnWebsite();
-			data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
-			steps.work.cancelWorkInclusionOnWebsiteEditing();
-			steps.base.dirtyCheckConfirmCancellation();
-			steps.work.hoverWorkInclusionOnWebsiteIndicator();
-			steps.work.editWorkInclusionOnWebsite();
-			steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data.includeOnWebsite);
+			if(debugSkip.indexOf("asset type") === -1) {
+				steps.work.hoverAssetTypeLabel();
+				steps.work.editAssetType();
+				data.musicalDistributionCategory = steps.work.selectDifferentRandomMusicalDistributionCategory();
+				data.textMusicRelationship = steps.work.selectDifferentRandomTextMusicRelationship();
+				data.excerptType = steps.work.selectDifferentRandomVersionType();
+				//data.lyricAdaptation = steps.work.selectDifferentLyricAdaptation();
+				//data.musicArrangement = steps.work.selectDifferentMusicArrengement();
 
-			data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
-			steps.work.cancelWorkInclusionOnWebsiteEditing();
-			steps.base.dirtyCheckContinueEditing();
-			steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
+				steps.work.saveAssetType();
+			}
 
-			steps.work.saveWorkInclusionOnWebsite();
+			if(debugSkip.indexOf("inclusion on website") === -1) {
+				steps.work.hoverWorkInclusionOnWebsiteIndicator();
+				steps.work.editWorkInclusionOnWebsite();
+				data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
+				steps.work.cancelWorkInclusionOnWebsiteEditing();
+				steps.base.dirtyCheckConfirmCancellation();
+				steps.work.hoverWorkInclusionOnWebsiteIndicator();
+				steps.work.editWorkInclusionOnWebsite();
+				steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data.includeOnWebsite);
+
+				data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
+				steps.work.cancelWorkInclusionOnWebsiteEditing();
+				steps.base.dirtyCheckContinueEditing();
+				steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
+
+				steps.work.saveWorkInclusionOnWebsite();
+			}
 		}
 	);
 };

@@ -18,6 +18,26 @@ module.exports.dirtyCheckConfirmCancellationButton = function() {
 	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
 };
 // Interaction.
+module.exports.selectRandomDropdownOption = function(element, more) {
+	var options;
+	var currentOption;
+	more = more || {};
+	options = element.$$("option");
+	if(more.different) {
+		options = options.filter (
+			function(option) {
+				return pph.matchesCssSelector(option, ":checked");
+			}
+		);
+	}
+	return options.then (
+		function(options) {
+			var option = _.sample(option);
+			option.click();
+			return option.getText();
+		}
+	);
+};
 module.exports.selectRandomTypeaheadValue = function(element) {
 	var deferred = promise.defer();
 	it (

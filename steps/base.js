@@ -62,6 +62,13 @@ module.exports.waitForElementToBeClickable = function(elName, el, wait) {
 		}
 	);
 };
+module.exports.selectDifferentRandomOption = function(elName, el) {
+	it (
+		"Select a different random " + elName, function() {
+			pages.base.selectDifferentRandomOption(el);
+		}
+	);
+};
 module.exports.dirtyCheckContinueEditing = function() {
 	steps.base.clickElement (
 		"continue editing button",
