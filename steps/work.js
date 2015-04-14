@@ -76,14 +76,35 @@ module.exports.saveWorkTitles = function() {
 };
 module.exports.hoverWorkInclusionOnWebsiteIndicator = function() {
 	steps.base.hoverElement (
-		"work inclusion on website description message",
-		pages.work.workInclusionOnWebsiteDescriptionMessage()
+		"work inclusion on website paragraph",
+		pages.work.workInclusionOnWebsiteParagraph()
 	);
 };
 module.exports.editWorkInclusionOnWebsite = function() {
 	steps.base.clickElement (
 		"edit work inclusion on website button",
 		pages.work.editWorkInclusionOnWebsiteButton()
+	);
+};
+module.exports.toggleWorkInclusionOnWebsite = function() {
+	var deferred = promise.defer();
+	it (
+		"Toggle work inclusion on website", function() {
+			var include = pages.work.workInclusionOnWebsite().then (
+				function(include) {
+					return !include;
+				}
+			);
+			pages.work.optToIncludeWorkOnWebsite(include);
+			deferred.fulfill(include);
+		}
+	);
+	return deferred.promise;
+};
+module.exports.cancelWorkInclusionOnWebsiteEditing = function() {
+	steps.base.clickElement (
+		"cancel work inclusion on website button",
+		pages.work.cancelWorkInclusionOnWebsiteButton()
 	);
 };
 module.exports.saveWorkInclusionOnWebsite = function() {
@@ -142,10 +163,24 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 		}
 	);
 };
+module.exports.expectWorkInclusionOnWebsiteOptionToBe = function(include) {
+	it (
+		"Validate work inclusion on website option", function() {
+			expect(pages.work.workInclusionOnWebsite()).toBe(include);
+		}
+	);
+};
+module.exports.expectWorkInclusionOnWebsiteOptionNotToBe = function(include) {
+	it (
+		"Validate work inclusion on website option", function() {
+			expect(pages.work.workInclusionOnWebsite()).not.toBe(include);
+		}
+	);
+};
 module.exports.validateIncludeWorkOnWebsite = function(include) {
 	it (
 		"Validate 'Include work on website' option", function() {
-			expect(pages.work.includeWorkOnWebsite()).toBe(include);
+			expect(pages.work.workInclusionOnWebsite()).toBe(include);
 		}
 	);
 };
@@ -166,31 +201,26 @@ module.exports.editBasicWork = function(data) {
 			steps.work.cancelWorkTitlesEditing();
 			steps.base.dirtyCheckContinueEditing();
 			steps.work.expectPrimaryWorkTitleFieldValueToBe(data.primaryWorkTitle);
+			steps.work.validateDefaultAlternateWorkTitleLanguage();
 			data.alternateWorkTitles = _.times (
-				4, function(i) {
-					steps.work.validateDefaultAlternateWorkTitleLanguage();
+				2, function(i) {
 					return steps.work.enterRandomAlternateWorkTitle(i);
 				}
 			);
-			/*
-			steps.work.clickSaveWorkTitlesButton();
+			steps.work.saveWorkTitles();
 			steps.work.hoverWorkInclusionOnWebsiteIndicator();
-			steps.work.clickEditWorkInclusionOnWebsiteButton();
-			data.includeOnWebsite = (function() {
-				var include = steps.work.includeWorkOnWebsite().then (
-					function(include) {
-						return !include;
-					}
-				);
-				steps.work.editWorkInclusionOnWebsiteOption (
-					function() {
-						steps.work.optToIncludeWorkOnWebsite(include);
-					}
-				);
-				return include;
-			})();
-			steps.work.clickSaveWorkInclusionOnWebsiteButton();
-			*/
+			steps.work.editWorkInclusionOnWebsite();
+			data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
+			//steps.work.cancelWorkInclusionOnWebsiteEditing();
+			//steps.base.dirtyCheckConfirmCancellation();
+			//steps.work.hoverWorkInclusionOnWebsiteIndicator();
+			//steps.work.editWorkInclusionOnWebsite();
+			//steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data.includeOnWebsite);
+			//data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
+			//steps.work.cancelWorkInclusionOnWebsiteEditing();
+			//steps.base.dirtyCheckContinueEditing();
+			//steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
+			steps.work.saveWorkInclusionOnWebsite();
 		}
 	);
 };

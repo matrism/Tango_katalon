@@ -66,6 +66,39 @@ module.exports.cancelWorkTitlesEditingButton = function() {
 			.element(by.cssContainingText("button", "Cancel"))
 	);
 };
+module.exports.saveWorkTitlesButton = function() {
+	return (
+		pages.work.editWorkTitlesContainer()
+			.element(by.cssContainingText("button", "Save"))
+	);
+};
+module.exports.workInclusionOnWebsiteParagraph = function() {
+	return (
+		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
+			.element(by.css(".ng-scope"))
+	);
+};
+module.exports.editWorkInclusionOnWebsiteContainer = function() {
+	return $("[data-tg-modular-edit='wcmWebsiteEdit']");
+};
+module.exports.editWorkInclusionOnWebsiteButton = function() {
+	return (
+		pages.work.editWorkInclusionOnWebsiteContainer()
+			.$("[data-ng-click='$$modularScope.showEdit()']")
+	);
+};
+module.exports.cancelWorkInclusionOnWebsiteButton = function() {
+	return (
+		pages.work.editWorkInclusionOnWebsiteContainer()
+			.element(by.cssContainingText("button", "Cancel"))
+	);
+};
+module.exports.saveWorkInclusionOnWebsiteButton = function() {
+	return (
+		pages.work.editWorkInclusionOnWebsiteContainer()
+			.element(by.cssContainingText("button", "Save"))
+	);
+};
 // Navigation.
 module.exports.goToScopeDelivery = function() {
 	return browser.executeScript (
@@ -100,13 +133,10 @@ module.exports.alternateWorkTitles = function() {
 	);
 	return deferred.promise;
 };
-module.exports.includeWorkOnWebsite = function() {
-	var textElement =
-		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
-			.element(by.css(".ng-scope"))
-	;
-	pages.base.scrollIntoView(textElement);
-	return textElement.getText().then (
+module.exports.workInclusionOnWebsite = function() {
+	var element = pages.work.workInclusionOnWebsiteParagraph();
+	pages.base.scrollIntoView(element);
+	return element.getText().then (
 		function(text) {
 			return (text.indexOf("is included") !== -1);
 		}
@@ -176,6 +206,15 @@ module.exports.creatorContributionByName = function(name) {
 module.exports.primaryWorkTitleEditFieldValue = function() {
 	return pages.work.primaryWorkTitleEditField().getAttribute("value"); 
 };
+(function() {
+	var buttonCssSelector = "button[data-ng-model='wcmWebsiteEdit.model.includeOnWebsite']";
+	module.exports.includeWorkOnWebsiteButton = function() {
+		return element(by.cssContainingText(buttonCssSelector, "Yes"));
+	};
+	module.exports.excludeWorkFromWebsiteButton = function() {
+		return element(by.cssContainingText(buttonCssSelector, "No"));
+	};
+})();
 // Data input.
 module.exports.enterPrimaryWorkTitle = function(title) {
 	var element = pages.work.primaryWorkTitleEditField();
@@ -188,4 +227,19 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
+};
+module.exports.optToIncludeWorkOnWebsite = function(include) {
+	promise.when(include).then (
+		function(include) {
+			var button;
+			if(include) {
+				button = pages.work.includeWorkOnWebsiteButton();
+			}
+			else {
+				button = pages.work.excludeWorkFromWebsiteButton();
+			}
+			pages.base.scrollIntoView(button);
+			button.click();
+		}
+	);
 };
