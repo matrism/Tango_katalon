@@ -14,7 +14,7 @@ module.exports.dealSigningTerritoryPopup = function () {
 };
 
 module.exports.dealSigningTerritoryDropDownData = function () {
-    return element(by.css("div.typeaheadDropdown div"));
+    return element(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"));
 };
 
 module.exports.contractingPartiesInput = function () {
@@ -66,7 +66,7 @@ module.exports.selectDesiredSigningTerritory = function (specific_country) {
     pages.new_deal.dealSigningTerritoryPopup().click();
     expect(pages.new_deal.dealSigningTerritoryDropDownData().isDisplayed);
     var desiredOption;
-    browser.driver.findElements(by.css("div.typeaheadDropdown div"))
+    browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
         .then(function findMatchingOption(options) {
             options.forEach(function (option) {
                 option.getText().then(function doesOptionMatch(text) {
