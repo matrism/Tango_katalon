@@ -14,7 +14,7 @@ module.exports.open = function(workId) {
 module.exports.primaryTitleBinding = function() {
 	return element(by.binding("getWorkName(workPristine)"));
 };
-module.exports.headerAlternateWorkTitleRootElements = function() {
+module.exports.headerAlternateWorkTitleRows = function() {
 	return element.all(by.repeater("altTitle in altTitles | limitTo:workHeaderLimits.altTitles"));
 };
 module.exports.alternateWorkTitleBindings = function() {
@@ -36,13 +36,13 @@ module.exports.primaryTitle = function() {
 };
 module.exports.alternateTitles = function() {
 	var deferred = promise.defer();
-	pages.work.headerAlternateWorkTitleRootElements().then (
-		function(headerAlternateWorkTitleRootElements) {
-			if(headerAlternateWorkTitleRootElements.length === 0) {
+	pages.work.headerAlternateWorkTitleRows().then (
+		function(headerAlternateWorkTitleRows) {
+			if(headerAlternateWorkTitleRows.length === 0) {
 				return [];
 			}
-			pages.base.scrollIntoView(headerAlternateWorkTitleRootElements[0]);
-			browser.actions().mouseMove(headerAlternateWorkTitleRootElements[0]).perform();
+			pages.base.scrollIntoView(headerAlternateWorkTitleRows[0]);
+			browser.actions().mouseMove(headerAlternateWorkTitleRows[0]).perform();
 			deferred.fulfill (
 				pages.work.alternateWorkTitleBindings().map (
 					function(element) {

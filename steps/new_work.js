@@ -130,20 +130,19 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 	);
 };
 // Flow.
-module.exports.createBasicWork = function() {
-	var validationData = {};
+module.exports.createBasicWork = function(data) {
 	describe (
 		"Create basic work", function() {
 			steps.new_work.goToNewWorkPage();
 			steps.new_work.validateDefaultPrimaryWorkLanguage();
-			validationData.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
-			validationData.alternateWorkTitles = _.times (
+			data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
+			data.alternateWorkTitles = _.times (
 				2, function(i) {
 					steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
 					return steps.new_work.enterRandomAlternateWorkTitle(i);
 				}
 			);
-			validationData.creators = (function() {
+			data.creators = (function() {
 				var howMany = 2;
 				var creators = _.times (
 					howMany, function(i) {
@@ -163,7 +162,7 @@ module.exports.createBasicWork = function() {
 			steps.new_work.validateDefaultExcerptType();
 			steps.new_work.validateDefaultVersionType();
 			steps.new_work.validateDefaultIntendedPurpose();
-			validationData.includeOnWebsite = (function() {
+			data.includeOnWebsite = (function() {
 				var includeOnWebsite = _.sample([true, false]);
 				steps.new_work.optToIncludeWorkOnWebsite(includeOnWebsite);
 				return includeOnWebsite;
@@ -172,5 +171,4 @@ module.exports.createBasicWork = function() {
 			steps.base.itCheckIsRedirectToPage("created work page", "/metadata");
 		}
 	);
-	return validationData;
 };
