@@ -124,13 +124,14 @@ module.exports.itCreateBasicDeal = function () {
             steps.new_deal.fillMandatoryFieldsContractPeriod();
             steps.new_deal.addSimpleScope();
             steps.new_deal.selectCountry();
+            steps.deal_scope.clickOnAddPublisherShareSetLink();
+            steps.deal_scope.fillInPublisherNameFirstField();
             steps.new_deal.expectContinueButtonEnabled();
             steps.new_deal.goToNextPage();
             steps.new_deal.saveDeal();
             steps.new_deal.waitForDealToBeSaved();
             steps.new_deal.returnDealNumber();
-            steps.deal_scope.clickOnAddPublisherShareSetLink();
-            steps.deal_scope.fillInPublisherNameFirstField();
+
         }
     );
 
