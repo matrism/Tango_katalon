@@ -70,7 +70,7 @@ var beforeFeature = function () {
                 steps.royaltyRates.checkEffectiveStartDateErrorMessages(
 
                     [
-                                          ["date",        "errorMessage"],
+                        ["date",        "errorMessage"],
                         ["12"       ,   "Not a valid date"],
                         ["00-11-2"  ,   "Invalid Year"],
                         ["2015-13-2",   "Invalid Month"],
