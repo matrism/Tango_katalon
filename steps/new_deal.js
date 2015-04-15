@@ -8,7 +8,7 @@ require(pages_path + "new_deal");
 require(pages_path + "deal");
 require(steps_path + "base");
 require(steps_path + "deal_scope");
-//module.exports = steps.new_deal = {};
+module.exports = steps.new_deal = {};
 
 module.exports.goToNewDealPage = function () {
     it(
@@ -98,14 +98,14 @@ module.exports.saveDeal = function () {
 };
 
 module.exports.waitForDealToBeSaved = function () {
-    it("Expect deal screen to be loaded and brief number displayed " , function () {
+    it("Expect deal screen to be loaded and brief number displayed ", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.dealBriefNumber()));
     });
 };
 
 
 module.exports.returnDealNumber = function () {
-    it("Return deal number " , function () {
+    it("Return deal number ", function () {
         return pages.deal.dealBriefNumber();
     });
 };
@@ -128,7 +128,7 @@ module.exports.itCreateBasicDeal = function () {
             steps.new_deal.goToNextPage();
             steps.new_deal.saveDeal();
             steps.new_deal.waitForDealToBeSaved();
-           steps.new_deal.returnDealNumber();
+            steps.new_deal.returnDealNumber();
             steps.deal_scope.clickOnAddPublisherShareSetLink();
             steps.deal_scope.fillInPublisherNameFirstField();
         }
