@@ -7,7 +7,8 @@ var ExpectedConditions = protractor.ExpectedConditions;
 require(pages_path + "new_deal");
 require(pages_path + "deal");
 require(steps_path + "base");
-module.exports = steps.new_deal = {};
+require(steps_path + "deal_scope");
+//module.exports = steps.new_deal = {};
 
 module.exports.goToNewDealPage = function () {
     it(
@@ -128,6 +129,8 @@ module.exports.itCreateBasicDeal = function () {
             steps.new_deal.saveDeal();
             steps.new_deal.waitForDealToBeSaved();
            steps.new_deal.returnDealNumber();
+            steps.deal_scope.clickOnAddPublisherShareSetLink();
+            steps.deal_scope.fillInPublisherNameFirstField();
         }
     );
 

@@ -10,7 +10,7 @@ var configer = ftf.configer,
             client_secret: "appclientsecret"
         },
         _system_: {
-            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "firefox"),
+            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
             resolution: {
                 width: 1024,
                 height: 768

@@ -33,6 +33,10 @@ module.exports.addPublisherShareSetLink= function(){
     return element(by.css("a[ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
 };
 
+module.exports.firstPublisherNameField= function(){
+     return element(by.css("#deal-publisher div.ng-scope:first-child input[name='acquirer']"));
+};
+
 
 
 //methods
@@ -83,6 +87,10 @@ module.exports.selectRandomCountry = function () {
 
 module.exports.clickOnAddPublisherShareSetLink = function () {
     pages.deal_scope.addPublisherShareSetLink().click();
+};
+
+module.exports.fillInFirstPublisherNameField = function () {
+    pages.deal_scope.firstPublisherNameField().sendKeys("test");
 };
 
 
