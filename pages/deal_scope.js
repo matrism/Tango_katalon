@@ -30,7 +30,8 @@ module.exports.territoryDropDown = function () {
 };
 
 module.exports.addPublisherShareSetLink= function(){
-    return element(by.css("a[ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
+    return element(by.xpath("//*[@data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
+    //return element(by.css("a[data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
 };
 
 module.exports.firstPublisherNameField= function(){
@@ -42,7 +43,7 @@ module.exports.firstPublisherNameField= function(){
 //methods
 module.exports.addScopeForm = function () {
     pages.deal_scope.addScopeIcon().click();
-    browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.contractTypeDropDown()));
+    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.contractTypeDropDown()));
 };
 
 
@@ -70,9 +71,9 @@ module.exports.selectContractTypeScope = function (element, specific_value) {
 
 module.exports.addTerritoryByTypingToScope = function () {
     pages.deal_scope.territoryField().click();
-    browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.territoryInput()));
+    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.territoryInput()));
     pages.deal_scope.territoryInput().sendKeys("a");
-    browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.territoryDropDown()));
+    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.territoryDropDown()));
 };
 
 

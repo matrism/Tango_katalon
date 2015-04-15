@@ -5,7 +5,7 @@ var configer = ftf.configer,
         ENV_TYPE: cli["ENV_TYPE"] || configer.getEnvVarByKey("ENV_TYPE") || "localhost"
     },
     config = {
-        _default_:  {
+        _default_: {
             client_id: "devportal",
             client_secret: "appclientsecret"
         },
@@ -27,7 +27,7 @@ var configer = ftf.configer,
         localhost: {
             urls: {
                 sso: configer.getEnvVarByKey("URL_SSO"),
-                app_url:  "http://tango.tango-qa-aws.dspdev.wmg.com",
+                app_url: "http://tango.tango-qa-aws.dspdev.wmg.com",
                 service_url: "http://tango.tango-qa-aws.dspdev.wmg.com"
             },
             user_name: configer.getEnvVarByKey("TEST_USERNAME") || "TangoTest1",
@@ -36,7 +36,7 @@ var configer = ftf.configer,
         custom: {
             urls: {
                 sso: cli["URL_SSO"],
-                app_url:  cli["URL"],
+                app_url: cli["URL"],
                 service_url: cli["URL_SERVICE"]
             },
             user_name: cli["TEST_USERNAME"],

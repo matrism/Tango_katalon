@@ -1,8 +1,16 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps;
 
-require(pages_path + "new_deal");
-require(steps_path + "new_deal");
+require(pages_path + "deal");
+require(steps_path + "deal");
+require(pages_path + "deal_general");
+require(steps_path + "deal_general");
+require(pages_path + "deal_contract_period");
+require(steps_path + "deal_contract_period");
+require(pages_path + "deal_scope");
+require(steps_path + "deal_scope");
+
+
 
 var beforeFeature = function () {
         steps.login.itLogin();
@@ -12,7 +20,15 @@ var beforeFeature = function () {
         name: "Create basic deal",
         tags: [],
         steps: function () {
-            steps.new_deal.itCreateBasicDeal();
+            steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+            steps.deal_scope.itAddSimpleScope();
+            //steps.deal_scope.itAddPublisherShare();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
         }
     }];
 
