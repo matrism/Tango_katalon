@@ -137,50 +137,27 @@ module.exports.selectedIntendedPurpose = function() {
 module.exports.enterPrimaryWorkTitle = function(title) {
 	var element = pages.new_work.primaryWorkTitleInput();
 	pages.base.scrollIntoView(element);
-	if(typeof(title) === "function") {
-		return title(element);
-	}
-	else {
-		element.clear();
-		element.sendKeys(title);
-		return title;
-	}
+	element.clear();
+	element.sendKeys(title);
 };
 module.exports.enterAlternateWorkTitle = function(i, title) {
 	var element = pages.new_work.alternateWorkTitleInput(i);
 	pages.base.scrollIntoView(element);
-	if(typeof(title) === "function") {
-		return title(element);
-	}
-	else {
-		element.clear();
-		element.sendKeys(title);
-		return title;
-	}
+	element.clear();
+	element.sendKeys(title);
 };
 module.exports.enterContributionPercentage = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
-	if(typeof(value) === "function") {
-		return value(element);
-	}
-	else {
-		element.clear();
-		element.sendKeys(value);
-		return value;
-	}
+	element.clear();
+	element.sendKeys(value);
 };
 module.exports.optToIncludeWorkOnWebsite = function(include) {
 	var elements = pages.new_work.includeWorkOnWebsiteButtons();
 	var elementIndex;
 	var element;
-	if(typeof(include) === "function") {
-		return include(element);
-	}
-	else {
-		elementIndex = { "true": 0, "false": 1 }[!!include];
-		element = elements.get(elementIndex);
-		pages.base.scrollIntoView(element);
-		element.click();
-	}
+	elementIndex = { "true": 0, "false": 1 }[!!include];
+	element = elements.get(elementIndex);
+	pages.base.scrollIntoView(element);
+	element.click();
 };

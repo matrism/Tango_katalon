@@ -2,10 +2,11 @@
 var pages_path = _tf_config._system_.path_to_pages;
 var steps_path = _tf_config._system_.path_to_steps;
 var randomId = require("../helpers/randomId");
+var pph = require("../helpers/pph");
 var promise = protractor.promise;
 require(pages_path + "new_work");
 require(steps_path + "base");
-require(steps_path + "works");
+require(steps_path + "work");
 module.exports = steps.new_work = {};
 // Navigation.
 module.exports.goToNewWorkPage = function() {
@@ -83,7 +84,7 @@ module.exports.validateDefaultIntendedPurpose = function() {
 module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
-		"Enter a random primary work title", function() {
+		"Enter random primary work title", function() {
 			var title = "TEST WORK TITLE " + randomId();
 			pages.new_work.enterPrimaryWorkTitle(title);
 			deferred.fulfill(title);
@@ -163,9 +164,9 @@ module.exports.createBasicWork = function(data) {
 			steps.new_work.validateDefaultVersionType();
 			steps.new_work.validateDefaultIntendedPurpose();
 			data.includeOnWebsite = (function() {
-				var includeOnWebsite = _.sample([true, false]);
-				steps.new_work.optToIncludeWorkOnWebsite(includeOnWebsite);
-				return includeOnWebsite;
+				var include = _.sample([true, false]);
+				steps.new_work.optToIncludeWorkOnWebsite(include);
+				return include;
 			})();
 			steps.base.itClickOnElement("Save Work", pages.new_work.saveWorkButton());
 			steps.base.itCheckIsRedirectToPage("created work page", "/metadata");
