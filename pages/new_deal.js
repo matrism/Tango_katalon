@@ -1,128 +1,200 @@
 "use strict";
-var promise = protractor.promise;
+var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
-if (pages.new_deal === undefined) {
-    pages.new_deal = new ftf.pageObject({
-        url: _tf_config.urls.app_url + "#/create/deal",
-        locators: {
-            dealSigningTerritory: {css: "button.openPopupButton"},
-            dealSigningTerritoryDropDownData: {css: "div.typeaheadDropdown"},
-            contractingPartiesInput: {xpath: "//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']//input[@ng-disabled='$isDisabled()']"},
-            contractingPartiesField: {xpath: "//*[@ng-model='contractingParties']//div[@ng-class='tgTypeaheadWrapClass']"},
-            contractingPartiesDropDownData: {xpath: "//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions ng-scope']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"},
-            continueButton: {xpath: "//*[@class='page-footer']//button[contains(text(),'Continue')]"},
-            start_date: {xpath: "//*[@id='actualStartDate']//input"},
-            end_target_months: {xpath: "//*[@name='targetEndDuration']"},
-            add_scope_icon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
-            contract_type_dropdown: {name: "scopeContractType"},
-            territory_field: {xpath: "//*[@class='territoriesStaticView']"},
-            territory_input: {xpath: "//fieldset[2]/div/div/div/div[2]/div[3]/div[1]/input"}
-        },
+var randomId = require("../helpers/randomId");
+var pages_path = _tf_config._system_.path_to_pages;
+require(pages_path + "base");
+module.exports = pages.new_deal = new ftf.pageObject({
+    url: _tf_config.urls.app_url + "#/create/deal"
+});
+
+// Locator.
+module.exports.dealSigningTerritoryPopup = function () {
+    return element(by.css('button.openPopupButton'));
+};
+
+module.exports.dealSigningTerritoryDropDownData = function () {
+    return element(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"));
+};
+
+module.exports.contractingPartiesInput = function () {
+    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+};
+
+module.exports.contractingPartiesField = function () {
+    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"));
+};
+
+module.exports.continueButton = function () {
+    return element(by.css("div.page-footer button[data-ng-click='next()']"));
+};
+
+module.exports.startDate = function () {
+    return element(by.css("div#actualStartDate input"));
+};
+
+module.exports.endTargetMonths = function () {
+    return element(by.name("targetEndDuration"));
+};
+
+module.exports.addScopeIcon = function () {
+    return element(by.xpath("//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"));
+};
+
+module.exports.contractTypeDropDown = function () {
+    return element(by.css("select[name='scopeContractType'] option"));
+};
+
+module.exports.territoryField = function () {
+    return element(by.xpath("//*[@class='territoriesStaticView']"));
+};
+
+module.exports.territoryInput = function () {
+    return element(by.css("div#scopeTerritory input#searchQueryInput"));
+};
+
+module.exports.territoryDropDown = function () {
+    return element(by.css("div.typeaheadDropdown div.item.ng-scope"));
+};
+
+module.exports.saveDealButton = function () {
+    return element(by.css("div.page-footer button[data-ng-click='done()']"));
+};
 
 
-        selectDesiredSigningTerritory: function () {
-            pages.new_deal.elems.dealSigningTerritory.click();
-
-
-
-            element(by.css("  .territoriesContainer")).sendKeys("Argentina");
-
-            expect(pages.new_deal.elems.dealSigningTerritoryDropDownData.isDisplayed);
-            var desiredOption;
-            browser.driver.findElements(by.xpath('//*[@class="item ng-scope"]'))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf("Argentina") != -1) {
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
+module.exports.selectDesiredSigningTerritory = function (specific_country) {
+    pages.new_deal.dealSigningTerritoryPopup().click();
+    expect(pages.new_deal.dealSigningTerritoryDropDownData().isDisplayed);
+    var desiredOption;
+    browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
+        .then(function findMatchingOption(options) {
+            options.forEach(function (option) {
+                option.getText().then(function doesOptionMatch(text) {
+                        if (text.indexOf(specific_country) != -1) {
+                            desiredOption = option;
+                            return true;
+                        }
                     }
-                });
-        },
+                )
+            });
+        })
+        .then(function clickOption() {
+            if (desiredOption) {
+                desiredOption.click();
+            }
+        });
+};
 
-        fillContractingPartiesField: function (field) {
-            pages.new_deal.elems.contractingPartiesField.click();
-            pages.new_deal.elems.contractingPartiesInput.sendKeys(field);
-        },
-
-        selectContractingPartyValue: function (specific_value) {
-            var desiredOption;
-            browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions ng-scope']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(specific_value) != -1) {
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
+module.exports.selectDesiredSigningTerritorye = function (specific_country) {
+    pages.new_deal.dealSigningTerritoryPopup().click();
+    expect(pages.new_deal.dealSigningTerritoryDropDownData().isDisplayed);
+    var desiredOption;
+    browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
+        .then(function findMatchingOption(options) {
+            options.forEach(function (option) {
+                option.getText().then(function doesOptionMatch(text) {
+                        if (specific_country === text){
+                            desiredOption = option;
+                            return true;
+                        }
                     }
-                });
-        },
+                )
+            });
+        })
+        .then(function clickOption() {
+            if (desiredOption) {
+                desiredOption.click();
+            }
+        });
+};
 
-        continueToNextPage: function () {
-            pages.new_deal.elems.continueButton.click();
-        },
 
-        fillStartActualDate: function () {
-            pages.new_deal.elems.start_date.sendKeys("2015-03-12");
-        },
+module.exports.fillContractingPartiesField = function (field) {
+    pages.new_deal.contractingPartiesField().click();
+    pages.new_deal.contractingPartiesInput().sendKeys(field);
+};
 
-        fillTargetEndMonths: function () {
-            pages.new_deal.elems.end_target_months.sendKeys("3");
-        },
-
-        addScopeForm: function () {
-            pages.new_deal.elems.add_scope_icon.click();
-            expect(pages.new_deal.elems.contract_type_dropdown.isDisplayed);
-        },
-
-        selectContractTypeScope: function (specific_value) {
-            var desiredOption;
-            browser.driver.findElements(by.name(""))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(specific_value) != -1) {
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
+module.exports.selectContractingPartyValue = function (specific_value) {
+    var desiredOption;
+    browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions ng-scope']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
+        .then(function findMatchingOption(options) {
+            options.forEach(function (option) {
+                option.getText().then(function doesOptionMatch(text) {
+                        if (text.indexOf(specific_value) != -1) {
+                            desiredOption = option;
+                            return true;
+                        }
                     }
-                });
-        },
+                )
+            });
+        })
+        .then(function clickOption() {
+            if (desiredOption) {
+                desiredOption.click();
+            }
+        });
+};
 
-    addTerritoryByTypingToScope: function () {
-            pages.new_deal.elems.territory_field.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.elems.territory_input));
-            pages.new_deal.elems.territory_input.sendKeys("a");
-            //browser.wait(ExpectedConditions.visibilityOf(element(by.xpath("//*[@class='typeaheadDropdown']//div"))));
-            var suggestion = $(".typeaheadDropdown");
-            browser.wait(ExpectedConditions.visibilityOf(suggestion));
-            expect(suggestion.getText()).not.toContain("No results");
-        }
+module.exports.continueToNextPage = function () {
+    pages.new_deal.continueButton().click();
+};
 
-    });
-}
+module.exports.fillStartActualDate = function () {
+    pages.new_deal.startDate().sendKeys("2015-03-12");
+};
 
-module.exports = pages.new_deal;
+module.exports.fillTargetEndMonths = function () {
+    pages.new_deal.endTargetMonths().sendKeys("3");
+};
+
+module.exports.addScopeForm = function () {
+    pages.new_deal.addScopeIcon().click();
+    browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.contractTypeDropDown()));
+};
+
+
+module.exports.selectContractTypeScope = function (element, specific_value) {
+    var desiredOption;
+    browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
+        .then(function findMatchingOption(options) {
+            options.forEach(function (option) {
+                option.getText().then(function doesOptionMatch(text) {
+                        if (text.indexOf(specific_value) != -1) {
+                            desiredOption = option;
+                            return true;
+                        }
+                    }
+                )
+            });
+        })
+        .then(function clickOption() {
+            if (desiredOption) {
+                desiredOption.click();
+            }
+        });
+};
+
+
+module.exports.addTerritoryByTypingToScope = function () {
+    pages.new_deal.territoryField().click();
+    browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.territoryInput()));
+    pages.new_deal.territoryInput().sendKeys("a");
+    browser.wait(ExpectedConditions.visibilityOf(pages.new_deal.territoryDropDown()));
+};
+
+
+module.exports.selectRandomCountry = function () {
+    var desiredOption;
+    browser.driver.findElements(By.css("div.typeaheadDropdown div"))
+        .then(function (options) {
+            var randomNumber = Math.floor((Math.random() * options.length));
+            options[randomNumber].click();
+        })
+};
+
+module.exports.saveNewDeal = function(){
+    pages.new_deal.saveDealButton().click();
+};
+
+
+

@@ -1,16 +1,115 @@
 "use strict";
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
-module.exports = pages.work = {};
+module.exports = pages.work = new ftf.pageObject();
+// Navigation.
+module.exports.open = function(workId) {
+	if(typeof(workId) !== "string") {
+		return ftf.pageObject.prototype.open.call(this);
+	}
+	browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
+	pages.base.waitForAjax();
+};
 // Locator.
-module.exports.primaryTitleBinding = function() {
+module.exports.primaryWorkTitleBinding = function() {
 	return element(by.binding("getWorkName(workPristine)"));
 };
-module.exports.headerAlternateWorkTitleRootElements = function() {
-	return element.all(by.repeater("altTitle in altTitles | limitTo:workHeaderLimits.altTitles"));
+module.exports.headerAlternateWorkTitleRows = function() {
+	return (
+		element.all(by.repeater("altTitle in altTitles | limitTo:workHeaderLimits.altTitles"))
+	);
 };
 module.exports.alternateWorkTitleBindings = function() {
-	return element.all(by.repeater("altTitle in altTitles")).all(by.binding("altTitle.title"));
+	return (
+		element.all(by.repeater("altTitle in altTitles")).all(by.binding("altTitle.title"))
+	);
+};
+module.exports.primaryWorkTitleHeading = function() {
+	return $("[data-ng-show='workHeader.title.detail']");
+};
+module.exports.editWorkTitlesButton = function() {
+	return $(".title-edit [data-ng-click='showEdit(workHeader.title, titleEditForm)']");
+};
+module.exports.editWorkTitlesContainer = function() {
+	return $("[data-ng-show='workHeader.title.edit']");
+};
+module.exports.editPrimaryWorkTitleField = function() {
+	return (
+		pages.work.editWorkTitlesContainer()
+			.element(by.model("work.title.primary_title.title"))
+	);
+};
+module.exports.alternateWorkTitleEditRows = function() {
+	return (
+		pages.work.editWorkTitlesContainer()
+			.all(by.repeater("altTitle in work.title.alternative_titles"))
+	);
+};
+module.exports.alternateWorkTitleEditRow = function(i) {
+	return pages.work.alternateWorkTitleEditRows().get(i);
+};
+module.exports.defaultAlternateWorkTitleLanguage = function(i) {
+	return pages.base.selectedDropdownOption (
+		pages.work.alternateWorkTitleEditRows().last()
+			.element(by.model("altTitle.language_code"))
+	);
+};
+module.exports.editAlternateWorkTitleField = function(i) {
+	return (
+		pages.work.alternateWorkTitleEditRow(i)
+			.element(by.model("altTitle.title"))
+	);
+};
+module.exports.cancelWorkTitlesEditingButton = function() {
+	return (
+		pages.work.editWorkTitlesContainer()
+			.element(by.cssContainingText("button", "Cancel"))
+	);
+};
+module.exports.saveWorkTitlesButton = function() {
+	return (
+		pages.work.editWorkTitlesContainer()
+			.element(by.cssContainingText("button", "Save"))
+	);
+};
+module.exports.assetTypeLabel = function() {
+};
+module.exports.editAssetTypeButton = function() {
+};
+module.exports.editMusicalDistributionCategoryField = function() {
+};
+module.exports.editTextMusicRelationshipField = function() {
+};
+module.exports.editExcerptTypeField = function() {
+};
+module.exports.saveAssetTypeButton = function() {
+};
+module.exports.workInclusionOnWebsiteParagraph = function() {
+	return (
+		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
+			.element(by.css(".ng-scope"))
+	);
+};
+module.exports.editWorkInclusionOnWebsiteContainer = function() {
+	return $("[data-tg-modular-edit='wcmWebsiteEdit']");
+};
+module.exports.editWorkInclusionOnWebsiteButton = function() {
+	return (
+		pages.work.editWorkInclusionOnWebsiteContainer()
+			.$("[data-ng-click='$$modularScope.showEdit()']")
+	);
+};
+module.exports.cancelWorkInclusionOnWebsiteButton = function() {
+	return (
+		pages.work.editWorkInclusionOnWebsiteContainer()
+			.element(by.cssContainingText("button", "Cancel"))
+	);
+};
+module.exports.saveWorkInclusionOnWebsiteButton = function() {
+	return (
+		pages.work.editWorkInclusionOnWebsiteContainer()
+			.element(by.cssContainingText("button", "Save"))
+	);
 };
 // Navigation.
 module.exports.goToScopeDelivery = function() {
@@ -21,20 +120,20 @@ module.exports.goToScopeDelivery = function() {
 	);
 };
 // Data fetching.
-module.exports.primaryTitle = function() {
-	var element = pages.work.primaryTitleBinding();
+module.exports.primaryWorkTitle = function() {
+	var element = pages.work.primaryWorkTitleBinding();
 	pages.base.scrollIntoView(element);
 	return element.getText();
 };
-module.exports.alternateTitles = function() {
+module.exports.alternateWorkTitles = function() {
 	var deferred = promise.defer();
-	pages.work.headerAlternateWorkTitleRootElements().then (
-		function(headerAlternateWorkTitleRootElements) {
-			if(headerAlternateWorkTitleRootElements.length === 0) {
+	pages.work.headerAlternateWorkTitleRows().then (
+		function(headerAlternateWorkTitleRows) {
+			if(headerAlternateWorkTitleRows.length === 0) {
 				return [];
 			}
-			pages.base.scrollIntoView(headerAlternateWorkTitleRootElements[0]);
-			browser.actions().mouseMove(headerAlternateWorkTitleRootElements[0]).perform();
+			pages.base.scrollIntoView(headerAlternateWorkTitleRows[0]);
+			browser.actions().mouseMove(headerAlternateWorkTitleRows[0]).perform();
 			deferred.fulfill (
 				pages.work.alternateWorkTitleBindings().map (
 					function(element) {
@@ -46,37 +145,80 @@ module.exports.alternateTitles = function() {
 	);
 	return deferred.promise;
 };
-module.exports.includeWorkOnWebsite = function() {
-	var textElement =
-		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
-			.element(by.css(".ng-scope"))
-	;
-	pages.base.scrollIntoView(textElement);
-	return textElement.getText().then (
+module.exports.workInclusionOnWebsite = function() {
+	var element = pages.work.workInclusionOnWebsiteParagraph();
+	pages.base.scrollIntoView(element);
+	return element.getText().then (
 		function(text) {
 			return (text.indexOf("is included") !== -1);
 		}
 	);
 };
-module.exports.creatorNames = function() {
-	var creatorNameElements = element.all(by.binding("creator.person_name"));
-	pages.base.scrollIntoView(creatorNameElements.get(0));
-	return creatorNameElements.map (
-		function(nameElement) {
-			return nameElement.getText();
+module.exports.selectedWorkInclusionOnWebsiteOption = function() {
+	return pages.work.activeIncludeWorkOnWebsiteButton().getText().then (
+		function(text) {
+			switch(text.toLowerCase()) {
+				case "yes":
+					return true;
+				case "no":
+					return false;
+				default:
+					return text;
+			}
 		}
 	);
+};
+module.exports.creatorNames = function(i) {
+	var ithElement;
+	var elements = (
+		$(".scope-delivery-table")
+			.all(by.binding("creator.person_name"))
+			.filter (
+				function(element) {
+					return element.isDisplayed();
+				}
+			)
+	);
+	function handleElement(el) {
+		pages.base.scrollIntoView(el);
+		return el.getText();
+	}
+	if(i !== undefined) {
+		return handleElement(elements.get(i));
+	}
+	else {
+		return elements.map(handleElement);
+	}
+};
+module.exports.creatorContributions = function(i) {
+	var ithElement;
+	var elements = (
+		$(".scope-delivery-table")
+			.all(by.binding("creator.contribution"))
+			.filter (
+				function(element) {
+					return element.isDisplayed();
+				}
+			)
+	);
+	function handleElement(el) {
+		pages.base.scrollIntoView(el);
+		return el.getText();
+	}
+	if(i !== undefined) {
+		return handleElement(elements.get(i));
+	}
+	else {
+		return elements.map(handleElement);
+	}
 };
 module.exports.creatorContributionByName = function(name) {
 	return pph.indexOf(pages.work.creatorNames(), name).then (
 		function(creatorIndex) {
-			var creatorContributionElement;
 			if(creatorIndex === -1) {
 				return null;
 			}
-			creatorContributionElement = element.all(by.binding("creator.contribution")).get(creatorIndex);
-			pages.base.scrollIntoView(creatorContributionElement);
-			return creatorContributionElement.getText().then (
+			return pages.work.creatorContributions(creatorIndex).then (
 				function(text) {
 					if(!/^\d+\.\d+%$/.test(text)) {
 						return text;
@@ -84,6 +226,50 @@ module.exports.creatorContributionByName = function(name) {
 					return parseFloat(text);
 				}
 			);
+		}
+	);
+};
+module.exports.editPrimaryWorkTitleFieldValue = function() {
+	return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
+};
+(function() {
+	var buttonCssSelector = "button[data-ng-model='wcmWebsiteEdit.model.includeOnWebsite']";
+	var activeButtonCssSelector = buttonCssSelector + ".active";
+	module.exports.activeIncludeWorkOnWebsiteButton = function() {
+		return $(activeButtonCssSelector);
+	};
+	module.exports.includeWorkOnWebsiteButton = function() {
+		return element(by.cssContainingText(buttonCssSelector, "Yes"));
+	};
+	module.exports.excludeWorkFromWebsiteButton = function() {
+		return element(by.cssContainingText(buttonCssSelector, "No"));
+	};
+})();
+// Data input.
+module.exports.enterPrimaryWorkTitle = function(title) {
+	var element = pages.work.editPrimaryWorkTitleField();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(title);
+};
+module.exports.enterAlternateWorkTitle = function(i, title) {
+	var element = pages.work.editAlternateWorkTitleField(i);
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(title);
+};
+module.exports.optToIncludeWorkOnWebsite = function(include) {
+	promise.when(include).then (
+		function(include) {
+			var button;
+			if(include) {
+				button = pages.work.includeWorkOnWebsiteButton();
+			}
+			else {
+				button = pages.work.excludeWorkFromWebsiteButton();
+			}
+			pages.base.scrollIntoView(button);
+			button.click();
 		}
 	);
 };

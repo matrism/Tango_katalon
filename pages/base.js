@@ -2,14 +2,43 @@
 var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-if (pages.base === undefined) {
-    pages.base = new ftf.pageObject({
-        locators: {
-            logout_link: { id: "DSP-LOGOUT" }
-        }
-    });
+module.exports = pages.base = new ftf.pageObject ({
+	locators: {
+		logout_link: { id: "DSP-LOGOUT" }
+	}
+});
+// Locators.
+module.exports.dirtyCheckDialogHeading = function() {
+	return $(".modal-header").element(by.cssContainingText("*", "UNSAVED EDITS"));
 };
-pages.base.selectRandomTypeaheadValue = function(element) {
+module.exports.dirtyCheckContinueEditingButton = function() {
+	return $(".modal-footer").element(by.cssContainingText("button", "Continue Editing"));
+};
+module.exports.dirtyCheckConfirmCancellationButton = function() {
+	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
+};
+// Interaction.
+module.exports.selectRandomDropdownOption = function(element, more) {
+	var options;
+	var currentOption;
+	more = more || {};
+	options = element.$$("option");
+	if(more.different) {
+		options = options.filter (
+			function(option) {
+				return pph.matchesCssSelector(option, ":checked");
+			}
+		);
+	}
+	return options.then (
+		function(options) {
+			var option = _.sample(option);
+			option.click();
+			return option.getText();
+		}
+	);
+};
+module.exports.selectRandomTypeaheadValue = function(element) {
 	var deferred = promise.defer();
 	it (
 		"Type a random letter in the search field", function() {
@@ -41,7 +70,7 @@ pages.base.selectRandomTypeaheadValue = function(element) {
 	);
 	return deferred.promise;
 };
-pages.base.randomTgDropdownSelector = function(element) {
+module.exports.randomTgDropdownSelector = function(element) {
 	var deferred = promise.defer();
 	var fn = function() {
 		it (
@@ -62,11 +91,13 @@ pages.base.randomTgDropdownSelector = function(element) {
 	fn.then = deferred.promise.then.bind(deferred.promise);
 	return fn;
 };
-pages.base.selectedTgDropdownOption = function(element) {
+module.exports.selectedDropdownOption = function(element) {
+	return element.$("option:checked").getText();
+};
+module.exports.selectedTgDropdownOption = function(element) {
 	return (
 		element
 			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };
-module.exports = pages.base;

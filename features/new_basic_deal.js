@@ -2,9 +2,7 @@ var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps;
 
 require(pages_path + "new_deal");
-require(pages_path + "royaltyRates");
 require(steps_path + "new_deal");
-
 
 var beforeFeature = function () {
         steps.login.itLogin();
@@ -15,7 +13,6 @@ var beforeFeature = function () {
         tags: [],
         steps: function () {
             steps.new_deal.itCreateBasicDeal();
-
         }
     }];
 

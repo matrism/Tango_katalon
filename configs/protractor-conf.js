@@ -13,9 +13,9 @@ global.steps = {};
 require("../helpers/services_helper");
 
 config = {
-   // chromeOnly: true,
-   // chromeDriver: '../node_modules/protractor/selenium/chromedriver',
-    seleniumAddress: 'http://localhost:4444/wd/hub',
+    chromeOnly: true,
+    chromeDriver: '../node_modules/protractor/selenium/chromedriver',
+    //seleniumAddress: 'http://localhost:4444/wd/hub',
     capabilities: {
         "browserName": _tf_config._system_.browser, //firefox, ie
         'chromeOptions': {
@@ -28,7 +28,7 @@ config = {
         var reporting = _tf_config._system_.reporting;
         var matchers;
         browser.driver.manage().timeouts().setScriptTimeout(15000);
-    
+
         if (_tf_config._system_.resolution.width && _tf_config._system_.resolution.height)
             browser.driver.manage().window().setSize(_tf_config._system_.resolution.width, _tf_config._system_.resolution.height);
     
