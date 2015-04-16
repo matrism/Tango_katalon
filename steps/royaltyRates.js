@@ -106,7 +106,7 @@ if (steps.royaltyRates === undefined) {
 
             it("Delete Name from name input",function()
                 {
-                    pages.royaltyRates.clearNameInput();
+                    pages.royaltyRates.clearRoyaltyRateNameInput();
                 }
             );
         },

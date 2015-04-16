@@ -2,32 +2,28 @@
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.royaltyRates === undefined) {
+
+
+
+
     pages.royaltyRates = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
 
-            newRoyaltyRateSetButton: {xpath:".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[5]/a"},
-            contractualRateField: {xpath:".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[3]/div[2]/div/input"},
-            rrNpsRate: {xpath:".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[3]/div[2]/div/div/ul[1]/li[2]"},
+            newRoyaltyRateSetButton: {css:".ng-scope.ng-warn.ng-dirty>div>a"},
 
 
-            closeRateSetButton: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[1]/div/button"},
+            closeRateSetButton: {css: ".btn-cancel"},
 
-            confirmCancelButton: {xpath:"//html/body/div[10]/div/div[3]/button[2]"},
+            confirmCancelButton: {css:".modal-footer>.btn-primary"},
 
-            royaltyRateName: {xpath:".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"},
-            RRNameLabel: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/div[1]/label"},
-            incomeProvidesLabel: {xpath :".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[2]/label"},
-            incomeProviderInput: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[2]/div[1]/div/div[1]/ul"},
-            incomeDateMethodLabel: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[3]/label"},
-            dealSigningLabel: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[3]/div/button[1]"},
-            warnerChappelLabel:{xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[3]/div/button[2]"},
-            effectiveStartDateLabel: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[4]/label"},
-            effectiveStartDateInput: {xpath : ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[4]/div[1]/input"},
-            contractualRateLabel: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[3]/div[2]/label"},
-            contractualRateInput: {xpath : ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[3]/div[2]/div/input"},
-            interCompanyLabel: {xpath: ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[3]/div[3]/label"},
-            interCompanyInput: {xpath : ".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[3]/div[3]/div/input"}
+            RRNameLabel: {css: ".rate-set-entity-name>div>label"},
+            incomeProvidesLabel: {css :".flex1>label"},
+            incomeProviderInput: {css: ".ux-multiselect-type"},
+            incomeDateMethodLabel: {css: ".flex1>div:nth-child(2)>div:not([class])>label"},
+            effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
+            contractualRateLabel: {css: ".rate-set-rate-field>label"},
+            interCompanyLabel: {css: ".rate-set-header-row:nth-child(3)>div:not([class])>label"},
 
 
 
@@ -35,6 +31,13 @@ if (pages.royaltyRates === undefined) {
 
         },
 
+
+
+   royaltyRateInput:function()
+    {
+        return  browser.driver.findElement(by.css(".rate-set-name-input"));
+
+    },
 
 
       clickNewRoyaltySetButton: function()
@@ -72,24 +75,16 @@ if (pages.royaltyRates === undefined) {
 
         },
 
-        fillContractualRate: function(value)
+
+        clearRoyaltyRateNameInput: function()
         {
-            ftf.pageObject.prototype.scrollIntoView(  pages.royaltyRates.elems.contractualRateField);
-            pages.royaltyRates.elems.contractualRateField.click();
-            pages.royaltyRates.elems.contractualRateField.sendKeys(value);
-            pages.royaltyRates.elems.rrNpsRate.click();
+            var element;
 
-        },
-
-        clearNameInput: function()
-        {
-            var royaltyRateInput;
-
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
+            element = this.royaltyRateInput();
           //  pages.base.scrollIntoView(royaltyRateInput);
 
             //ftf.pageObject.prototype.scrollIntoView(royaltyRateInput);
-            royaltyRateInput.clear();
+            element.clear();
 
 
         },
@@ -100,7 +95,7 @@ if (pages.royaltyRates === undefined) {
 
             var incomeProviderInput;
 
-            incomeProviderInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[2]/div[1]/div/div[1]/ul/li[1]/input"));
+            incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
 
             incomeProviderInput.sendKeys(sentKeys);
             incomeProviderInput.click();
@@ -136,6 +131,7 @@ if (pages.royaltyRates === undefined) {
 
             var incomeProviderInput;
 
+          //  incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-type"));
             incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li.ux-multiselect-item.ng-scope.ng-binding"));
 
 return incomeProviderInput.getText();
@@ -146,74 +142,66 @@ return incomeProviderInput.getText();
        getRRInputBorderTopValue: function()
         {
 
-            var royaltyRateInput;
+            var element;
 
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
+            element = this.royaltyRateInput();
 
-
-            return   royaltyRateInput.getCssValue('border-top-color');
+            return   element.getCssValue('border-top-color');
         },
        getRRInputBorderRightValue: function()
         {
 
-            var royaltyRateInput;
+            var element;
 
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
+            element = this.royaltyRateInput();
 
-
-            return   royaltyRateInput.getCssValue('border-right-color');
+            return   element.getCssValue('border-right-color');
         },
 
        getRRInputBorderBottomValue: function()
         {
 
-            var royaltyRateInput;
 
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
+            var element;
 
+            element = this.royaltyRateInput();
 
-            return   royaltyRateInput.getCssValue('border-bottom-color');
+            return   element.getCssValue('border-bottom-color');
         },
 
        getRRInputBorderLeftValue: function()
         {
 
-            var royaltyRateInput;
+            var element;
 
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
+            element = this.royaltyRateInput();
 
-
-            return   royaltyRateInput.getCssValue('border-left-color');
+            return   element.getCssValue('border-left-color');
         },
         getRRInputPlaceholderValue: function()
-        {
-            var royaltyRateInput;
+        { var element;
 
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
+            element = this.royaltyRateInput();
 
-
-           return  royaltyRateInput.getAttribute('placeholder');
+           return  element.getAttribute('placeholder');
 
         },
         typeIntoRRInput: function(text)
         {
+            var element;
 
-            var royaltyRateInput;
-
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
-
-            royaltyRateInput.clear();
-            royaltyRateInput.sendKeys(text);
+            element = this.royaltyRateInput();
+            element.clear();
+            element.sendKeys(text);
 
         },
         getRRInputValue: function()
         {
 
-            var royaltyRateInput;
+            var element;
 
-            royaltyRateInput = browser.driver.findElement(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/input"));
-
-           return  royaltyRateInput.getAttribute('value');
+            element = this.royaltyRateInput();
+           return  element.getAttribute('value');
 
 
         }
