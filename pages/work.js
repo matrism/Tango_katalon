@@ -4,13 +4,20 @@ var promise = protractor.promise;
 module.exports = pages.work = new ftf.pageObject();
 // Navigation.
 module.exports.open = function(workId) {
-	if(typeof(workId) !== "string") {
+	if(!workId) {
 		return ftf.pageObject.prototype.open.call(this);
 	}
-	browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
-	pages.base.waitForAjax();
+	promise.when(workId).then (
+		function(workId) {
+			browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
+			pages.base.waitForAjax();
+		}
+	);
 };
 // Locator.
+module.exports.workIdBinding = function() {
+	return element(by.binding("getWorkFullCode(work.pristine)"));
+};
 module.exports.primaryWorkTitleBinding = function() {
 	return element(by.binding("getWorkName(workPristine)"));
 };
@@ -141,6 +148,9 @@ module.exports.goToScopeDelivery = function() {
 	);
 };
 // Data fetching.
+module.exports.workId = function() {
+	return pages.work.workIdBinding().getText();
+};
 module.exports.primaryWorkTitle = function() {
 	var element = pages.work.primaryWorkTitleBinding();
 	pages.base.scrollIntoView(element);

@@ -20,6 +20,15 @@ module.exports.goToScopeDelivery = function() {
 	);
 };
 // Data fetching.
+module.exports.findCurrentlyOpenWorkId = function() {
+	var deferred = promise.defer();
+	it (
+		"Find currently open work ID", function() {
+			deferred.fulfill(pages.work.workId());
+		}
+	);
+	return deferred.promise;
+};
 module.exports.workInclusionOnWebsite = function() {
 	var deferred = promise.defer();
 	it (
@@ -206,7 +215,7 @@ module.exports.validatePrimaryWorkTitle = function(title) {
 module.exports.validateAlternateWorkTitle = function(title) {
 	it (
 		"Validate alternate work title", function() {
-			expect(pages.work.alternateTitles()).toContain(title);
+			expect(pages.work.alternateWorkTitles()).toContain(title);
 		}
 	);
 };
@@ -248,12 +257,12 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 // Flow.
 module.exports.editBasicWork = function(data) {
 	var debugSkip = [
-		"work titles",
-		"inclusion on website",
 	];
 	describe (
 		"Edit basic work", function() {
-			steps.work.goToWorkPage(data.workId);
+			if(data.workId) {
+				steps.work.goToWorkPage(data.workId);
+			}
 
 			if(debugSkip.indexOf("work titles") === -1) {
 				steps.work.hoverPrimaryWorkTitleHeading();
@@ -315,25 +324,29 @@ module.exports.editBasicWork = function(data) {
 	);
 };
 module.exports.validateWork = function(data) {
-	if(data.workId) {
-		steps.work.goToWorkPage(data.workId);
-	}
-	steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
-	if(data.alternateWorkTitles) {
-		data.alternateWorkTitles.forEach (
-			function(alternateWorkTitle) {
-				steps.work.validateAlternateWorkTitle(alternateWorkTitle);
+	describe (
+		"Validate work data", function() {
+			if(data.workId) {
+				steps.work.goToWorkPage(data.workId);
 			}
-		);
-	}
-	steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
-	steps.work.goToScopeDelivery();
-	data.creators.forEach (
-		function(creator, i) {
-			describe (
-				"Validate creator #" + (i + 1), function() {
-					steps.work.validateCreatorName(creator.name);
-					steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
+			steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
+			if(data.alternateWorkTitles) {
+				data.alternateWorkTitles.forEach (
+					function(alternateWorkTitle) {
+						steps.work.validateAlternateWorkTitle(alternateWorkTitle);
+					}
+				);
+			}
+			steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
+			steps.work.goToScopeDelivery();
+			data.creators.forEach (
+				function(creator, i) {
+					describe (
+						"Validate creator #" + (i + 1), function() {
+							steps.work.validateCreatorName(creator.name);
+							steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
+						}
+					);
 				}
 			);
 		}
