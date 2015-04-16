@@ -6,12 +6,24 @@ var pages_path = _tf_config._system_.path_to_pages,
 require(pages_path + "royaltyRates");
 require(steps_path + "royaltyRates");
 
-require(pages_path + "new_deal");
-require(steps_path + "new_deal");
+require(pages_path + "deal");
+require(steps_path + "deal");
+
+require(pages_path + "deal_general");
+require(steps_path + "deal_general");
+
+require(pages_path + "deal_contract_period");
+require(steps_path + "deal_contract_period");
+
+require(pages_path + "deal_scope");
+require(steps_path + "deal_scope");
 
 var beforeFeature = function () {
         steps.login.itLogin();
-        steps.new_deal.itCreateBasicDeal();
+        steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
+        steps.deal.itContinueToNextPage();
+        steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+        steps.deal_scope.itAddSimpleScope();
     },
 
     feature = [{

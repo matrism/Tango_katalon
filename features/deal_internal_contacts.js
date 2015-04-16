@@ -7,8 +7,6 @@ require(pages_path + "deal_general");
 require(steps_path + "deal_general");
 require(pages_path + "deal_contract_period");
 require(steps_path + "deal_contract_period");
-require(pages_path + "deal_scope");
-require(steps_path + "deal_scope");
 require(steps_path + "base");
 
 
@@ -21,9 +19,10 @@ var beforeFeature = function () {
         tags: [],
         steps: function () {
             steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
+            steps.base.scrollIntoView("Internal contacts", pages.deal_general.internalContactsInputField());
+            steps.deal_general.itAddInternalContactsToDealGeneralTab("test");
             steps.deal.itContinueToNextPage();
             steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-            steps.deal_scope.itAddSimpleScope();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -32,7 +31,7 @@ var beforeFeature = function () {
     }];
 
 module.exports = {
-    commonFeatureTags: ["deal"],
+    commonFeatureTags: ["deal_internal_contacts"],
     feature: feature,
     beforeFeature: beforeFeature
 };
