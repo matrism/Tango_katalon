@@ -62,10 +62,23 @@ module.exports.waitForElementToBeClickable = function(elName, el, wait) {
 		}
 	);
 };
-module.exports.selectDifferentRandomOption = function(elName, el) {
+module.exports.selectRandomDropdownOption = function(elName, el, more) {
+	var notes = [];
+	if(more.skipIfNotPresent) {
+		notes.push("skip if field is not present");
+	}
+	if(more.skipIfNotDisplayed) {
+		notes.push("skip if field is not displayed");
+	}
+	if(notes.length === 0) {
+		notes = "";
+	}
+	else {
+		notes = " (" + notes.join(", ") + ")";
+	}
 	it (
-		"Select a different random " + elName, function() {
-			pages.base.selectDifferentRandomOption(el);
+		"Select a different random " + elName + notes, function() {
+			pages.base.selectRandomDropdownOption(el, more);
 		}
 	);
 };

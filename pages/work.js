@@ -72,17 +72,38 @@ module.exports.saveWorkTitlesButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
-module.exports.assetTypeLabel = function() {
+module.exports.assetTypeContainer = function() {
+	return $("[data-tg-modular-edit='assetTypeEdit']");
 };
 module.exports.editAssetTypeButton = function() {
+	return (
+		pages.work.assetTypeContainer()
+			.$("[data-ng-click='$$modularScope.showEdit()']")
+	);
 };
 module.exports.editMusicalDistributionCategoryField = function() {
+	return element(by.model("assetTypeEdit.model.musical_work_distribution_category"));
 };
 module.exports.editTextMusicRelationshipField = function() {
+	return element(by.model("assetTypeEdit.model.text_music_relationship"));
 };
 module.exports.editExcerptTypeField = function() {
+	return element(by.model("assetTypeEdit.model.excerpt_type"));
+};
+module.exports.editVersionTypeField = function() {
+	return element(by.model("assetTypeEdit.model.version_type"));
+};
+module.exports.editLyricAdaptationField = function() {
+	return element(by.model("assetTypeEdit.model.lyric_adaptation_type"));
+};
+module.exports.editMusicArrangementField = function() {
+	return element(by.model("assetTypeEdit.model.music_arrangement_type"));
 };
 module.exports.saveAssetTypeButton = function() {
+	return (
+		pages.work.assetTypeContainer()
+			.element(by.cssContainingText("button", "Save"))
+	);
 };
 module.exports.workInclusionOnWebsiteParagraph = function() {
 	return (

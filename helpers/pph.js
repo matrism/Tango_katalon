@@ -62,6 +62,9 @@ pph.hasClass = function(element, className) {
 	);
 };
 pph.matchesCssSelector = function(element, selector) {
+	if(element instanceof protractor.ElementFinder) {
+		element = element.getWebElement();
+	}
 	return browser.executeScript (
 		function(element, selector) {
 			return $(element).is(selector);

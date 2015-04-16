@@ -75,8 +75,11 @@ module.exports.saveWorkTitles = function() {
 		pages.work.saveWorkTitlesButton()
 	);
 };
-module.exports.hoverAssetTypeLabel = function() {
-	steps.base.hoverElement("asset type label", pages.work.assetTypeLabel());
+module.exports.hoverAssetTypeContainer = function() {
+	steps.base.hoverElement (
+		"asset type container",
+		pages.work.assetTypeContainer()
+	);
 };
 module.exports.editAssetType = function() {
 	steps.base.clickElement (
@@ -103,6 +106,27 @@ module.exports.selectDifferentRandomExcerptType  = function() {
 		"excerpt type",
 		pages.work.editExcerptTypeField(),
 		{ different: true }
+	);
+};
+module.exports.selectDifferentRandomVersionType  = function() {
+	steps.base.selectRandomDropdownOption (
+		"version type",
+		pages.work.editVersionTypeField(),
+		{ different: true }
+	);
+};
+module.exports.selectDifferentRandomLyricAdaptation  = function() {
+	steps.base.selectRandomDropdownOption (
+		"lyric adaptation",
+		pages.work.editLyricAdaptationField(),
+		{ skipIfNotPresent: true, different: true }
+	);
+};
+module.exports.selectDifferentRandomMusicArrangement = function() {
+	steps.base.selectRandomDropdownOption (
+		"music arrangement",
+		pages.work.editMusicArrangementField(),
+		{ skipIfNotPresent: true, different: true }
 	);
 };
 module.exports.saveAssetType = function() {
@@ -258,13 +282,14 @@ module.exports.editBasicWork = function(data) {
 			}
 
 			if(debugSkip.indexOf("asset type") === -1) {
-				steps.work.hoverAssetTypeLabel();
+				steps.work.hoverAssetTypeContainer();
 				steps.work.editAssetType();
 				data.musicalDistributionCategory = steps.work.selectDifferentRandomMusicalDistributionCategory();
 				data.textMusicRelationship = steps.work.selectDifferentRandomTextMusicRelationship();
-				data.excerptType = steps.work.selectDifferentRandomVersionType();
-				//data.lyricAdaptation = steps.work.selectDifferentLyricAdaptation();
-				//data.musicArrangement = steps.work.selectDifferentMusicArrengement();
+				data.excerptType = steps.work.selectDifferentRandomExcerptType();
+				data.versionType = steps.work.selectDifferentRandomVersionType();
+				data.lyricAdaptation = steps.work.selectDifferentRandomLyricAdaptation();
+				data.musicArrangement = steps.work.selectDifferentRandomMusicArrangement();
 
 				steps.work.saveAssetType();
 			}
