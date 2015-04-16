@@ -25,7 +25,7 @@ module.exports.selectCountry = function () {
     });
 };
 
-module.exports.addPublisherShare = function () {
+module.exports.addPublisherShareSet = function () {
     it("Open publisher share set form", function () {
             pages.deal_scope.clickOnAddPublisherShareSetLink();
         }
@@ -38,11 +38,18 @@ module.exports.fillInPublisherNameFirstField = function () {
     });
 };
 
+module.exports.selectRandomPublisherNameDropDownValue = function () {
+    it("Select random publisher name drop down value", function () {
+        pages.deal_scope.selectRandomPublisherNameDropDown();
+    });
+};
+
 
 module.exports.itAddPublisherShare = function () {
     describe("Add publisher share set", function () {
-            steps.deal_scope.addPublisherShare();
+            steps.deal_scope.addPublisherShareSet();
             steps.deal_scope.fillInPublisherNameFirstField();
+            steps.deal_scope.selectRandomPublisherNameDropDownValue();
         }
     );
 };

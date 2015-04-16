@@ -47,6 +47,27 @@ module.exports.selectContractingParty = function () {
     );
 };
 
+module.exports.fillIntoInternalContactField = function (internal_contact) {
+    it("Fill into internal contact field", function () {
+            pages.deal_general.fillIntoInternalContactsField(internal_contact);
+        }
+    );
+};
+
+module.exports.selectRandomInternalContactDropDown = function (internal_contact) {
+    it("Select random value from internal contact drop down", function () {
+            pages.deal_general.selectRandomInternalContactsFromDropDown();
+        }
+    );
+};
+
+module.exports.clickOnInternalContactRole = function () {
+    it("Click on internal contact role field", function () {
+            pages.deal_general.clickOnInternalContactsRole();
+        }
+    );
+};
+
 
 
 module.exports.itFillDealMandatoryFieldsGeneralTab = function () {
@@ -58,5 +79,14 @@ module.exports.itFillDealMandatoryFieldsGeneralTab = function () {
             steps.deal_general.selectContractingParty();
         }
     );
+};
 
+    module.exports.itAddInternalContactsToDealGeneralTab = function (internal_contact) {
+        describe("Add internal contacts in deals general tab", function () {
+                steps.deal_general.fillIntoInternalContactField(internal_contact);
+                steps.deal_general.selectRandomInternalContactDropDown();
+                steps.deal_general.clickOnInternalContactRole();
+                steps.deal_general.selectRandomInternalContactDropDown();
+            }
+        );
 };

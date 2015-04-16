@@ -24,7 +24,17 @@ module.exports.contractingPartiesField = function () {
     return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"));
 };
 
+module.exports.internalContactsInputField=function(){
+    return element(by.css("div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+};
 
+module.exports.internalContactsDropDownData = function(){
+    return element(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"));
+};
+
+module.exports.internalContactRoleInputField = function() {
+    return element(by.css("div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+};
 
 module.exports.selectDesiredSigningTerritory = function (specific_country) {
     pages.deal_general.dealSigningTerritoryPopup().click();
@@ -73,4 +83,22 @@ module.exports.selectContractingPartyValue = function (specific_value) {
                 desiredOption.click();
             }
         });
+};
+
+module.exports.fillIntoInternalContactsField = function(internal_contact){
+    pages.deal_general.internalContactsInputField().sendKeys(internal_contact);
+};
+
+module.exports.selectRandomInternalContactsFromDropDown = function(){
+    var desiredOption;
+    browser.wait(ExpectedConditions.visibilityOf(pages.deal_general.internalContactsDropDownData()));
+    browser.driver.findElements(By.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
+        .then(function (options) {
+            var randomNumber = Math.floor((Math.random() * options.length));
+            options[randomNumber].click();
+        })
+};
+
+module.exports.clickOnInternalContactsRole = function(){
+    pages.deal_general.internalContactRoleInputField().click();
 };

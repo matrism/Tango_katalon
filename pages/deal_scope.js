@@ -4,8 +4,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 var randomId = require("../helpers/randomId");
 var pages_path = _tf_config._system_.path_to_pages;
 require(pages_path + "base");
-module.exports = pages.deal_scope = new ftf.pageObject({
-});
+module.exports = pages.deal_scope = new ftf.pageObject({});
 
 
 //locators
@@ -29,15 +28,18 @@ module.exports.territoryDropDown = function () {
     return element(by.css("div.typeaheadDropdown div.item.ng-scope"));
 };
 
-module.exports.addPublisherShareSetLink= function(){
+module.exports.addPublisherShareSetLink = function () {
     return element(by.xpath("//*[@data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
     //return element(by.css("a[data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
 };
 
-module.exports.firstPublisherNameField= function(){
-     return element(by.css("#deal-publisher div.ng-scope:first-child input[name='acquirer']"));
+module.exports.firstPublisherNameField = function () {
+    return element(by.css("#deal-publisher div.ng-scope:first-child input[name='acquirer']"));
 };
 
+module.exports.publisherNameDropDownData = function () {
+    return element(by.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"));
+};
 
 
 //methods
@@ -92,6 +94,16 @@ module.exports.clickOnAddPublisherShareSetLink = function () {
 
 module.exports.fillInFirstPublisherNameField = function () {
     pages.deal_scope.firstPublisherNameField().sendKeys("test");
+};
+
+module.exports.selectRandomPublisherNameDropDown = function () {
+    var desiredOption;
+    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.publisherNameDropDownData()));
+    browser.driver.findElements(By.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"))
+        .then(function (options) {
+            var randomNumber = Math.floor((Math.random() * options.length));
+            options[randomNumber].click();
+        })
 };
 
 
