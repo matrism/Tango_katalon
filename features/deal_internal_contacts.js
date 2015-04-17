@@ -19,11 +19,11 @@ var beforeFeature = function () {
         tags: [],
         steps: function () {
             steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
-            steps.base.scrollIntoView("Internal contacts", pages.deal_general.internalContactsInputField());
+            steps.base.scrollIntoView("Internal contacts", pages.deal_general.elems.internalContactsInputField);
             steps.deal_general.itAddInternalContactsToDealGeneralTab("test");
-            steps.deal.itContinueToNextPage();
+            steps.deal.goToNextPage();
             steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-            steps.deal.itContinueToNextPage();
+            steps.deal.goToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();

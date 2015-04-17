@@ -21,10 +21,10 @@ var beforeFeature = function () {
         tags: [],
         steps: function () {
             steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
-            steps.deal.itContinueToNextPage();
+            steps.deal.goToNextPage();
             steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
             steps.deal_scope.itAddSimpleScope();
-            steps.deal.itContinueToNextPage();
+            steps.deal.goToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();

@@ -1,32 +1,27 @@
 "use strict";
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
-module.exports = pages.deal = new ftf.pageObject();
+if (pages.deal === undefined) {
+    pages.deal = new ftf.pageObject({
+        locators: {
+            dealBriefNumber: {xpath: "//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']"},
+            continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
+            saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"}
+        },
 
+        continueToNextPage: function () {
+            pages.deal.elems.continueButton.click();
+        },
 
-module.exports.dealBriefNumber = function(){
-    return element(By.xpath("//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']"))
-};
+        saveNewDeal: function () {
+            pages.deal.elems.saveDealButton.click();
+        },
 
-module.exports.continueButton = function () {
-    return element(by.css("div.page-footer button[data-ng-click='next()']"));
-};
+        expectContinueButtonEnabled: function () {
+            it("Expect continue button to be enabled", function () {
+                expect(pages.deal.elems.continueButton.isEnabled());
+            });
+        }
 
-module.exports.saveDealButton = function () {
-    return element(by.css("div.page-footer button[data-ng-click='done()']"));
-};
-
-module.exports.continueToNextPage = function () {
-    pages.deal.continueButton().click();
-};
-
-module.exports.saveNewDeal = function(){
-    pages.deal.saveDealButton().click();
-};
-
-
-module.exports.expectContinueButtonEnabled = function () {
-    it("Expect continue button to be enabled", function () {
-        expect(pages.deal.continueButton().isEnabled());
-    });
-};
+});
+}

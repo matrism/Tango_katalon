@@ -4,106 +4,84 @@ var ExpectedConditions = protractor.ExpectedConditions;
 var randomId = require("../helpers/randomId");
 var pages_path = _tf_config._system_.path_to_pages;
 require(pages_path + "base");
-module.exports = pages.deal_scope = new ftf.pageObject({});
+if (pages.deal_scope === undefined) {
+    pages.deal_scope = new ftf.pageObject({
+        //url: _tf_config.urls.app_url + "#/create/deal",
+        locators: {
+            addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
+            contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
+            territoryField: {xpath: "//*[@class='territoriesStaticView']"},
+            territoryInput: {css: "div#scopeTerritory input#searchQueryInput"},
+            territoryDropDown: {css: "div.typeaheadDropdown div.item.ng-scope"},
+            addPublisherShareSetLink: {xpath: "//*[@data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"},
+            firstPublisherNameField: {css: "#deal-publisher div.ng-scope:first-child input[name='acquirer']"},
+            publisherNameDropDownData: {xpath: "//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"}
+        },
+
+        addScopeForm: function () {
+            pages.deal_scope.elems.addScopeIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.contractTypeDropDown));
+        },
 
 
-//locators
-module.exports.addScopeIcon = function () {
-    return element(by.xpath("//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"));
-};
-
-module.exports.contractTypeDropDown = function () {
-    return element(by.css("select[name='scopeContractType'] option"));
-};
-
-module.exports.territoryField = function () {
-    return element(by.xpath("//*[@class='territoriesStaticView']"));
-};
-
-module.exports.territoryInput = function () {
-    return element(by.css("div#scopeTerritory input#searchQueryInput"));
-};
-
-module.exports.territoryDropDown = function () {
-    return element(by.css("div.typeaheadDropdown div.item.ng-scope"));
-};
-
-module.exports.addPublisherShareSetLink = function () {
-    return element(by.xpath("//*[@data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
-    //return element(by.css("a[data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"));
-};
-
-module.exports.firstPublisherNameField = function () {
-    return element(by.css("#deal-publisher div.ng-scope:first-child input[name='acquirer']"));
-};
-
-module.exports.publisherNameDropDownData = function () {
-    return element(by.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"));
-};
-
-
-//methods
-module.exports.addScopeForm = function () {
-    pages.deal_scope.addScopeIcon().click();
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.contractTypeDropDown()));
-};
-
-
-module.exports.selectContractTypeScope = function (element, specific_value) {
-    var desiredOption;
-    browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
-        .then(function findMatchingOption(options) {
-            options.forEach(function (option) {
-                option.getText().then(function doesOptionMatch(text) {
-                        if (text.indexOf(specific_value) != -1) {
-                            desiredOption = option;
-                            return true;
-                        }
+        selectContractTypeScope: function (element, specific_value) {
+            var desiredOption;
+            browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(specific_value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
                     }
-                )
-            });
-        })
-        .then(function clickOption() {
-            if (desiredOption) {
-                desiredOption.click();
-            }
-        });
-};
+                });
+        },
 
 
-module.exports.addTerritoryByTypingToScope = function () {
-    pages.deal_scope.territoryField().click();
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.territoryInput()));
-    pages.deal_scope.territoryInput().sendKeys("a");
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.territoryDropDown()));
-};
+        addTerritoryByTypingToScope: function () {
+            pages.deal_scope.elems.territoryField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryInput));
+            pages.deal_scope.elems.territoryInput.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryDropDown));
+        },
 
 
-module.exports.selectRandomCountry = function () {
-    var desiredOption;
-    browser.driver.findElements(By.css("div.typeaheadDropdown div"))
-        .then(function (options) {
-            var randomNumber = Math.floor((Math.random() * options.length));
-            options[randomNumber].click();
-        })
-};
+        selectRandomCountry: function () {
+            var desiredOption;
+            browser.driver.findElements(By.css("div.typeaheadDropdown div"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
 
-module.exports.clickOnAddPublisherShareSetLink = function () {
-    pages.deal_scope.addPublisherShareSetLink().click();
-};
+        clickOnAddPublisherShareSetLink: function () {
+            pages.deal_scope.elems.addPublisherShareSetLink.click();
+        },
 
-module.exports.fillInFirstPublisherNameField = function () {
-    pages.deal_scope.firstPublisherNameField().sendKeys("test");
-};
+        fillInFirstPublisherNameField: function () {
+            pages.deal_scope.elems.firstPublisherNameField.sendKeys("test");
+        },
 
-module.exports.selectRandomPublisherNameDropDown = function () {
-    var desiredOption;
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.publisherNameDropDownData()));
-    browser.driver.findElements(By.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"))
-        .then(function (options) {
-            var randomNumber = Math.floor((Math.random() * options.length));
-            options[randomNumber].click();
-        })
-};
+        selectRandomPublisherNameDropDown: function () {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.publisherNameDropDownData));
+            browser.driver.findElements(By.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        }
+
+    });
+}
 
 
