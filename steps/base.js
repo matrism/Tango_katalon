@@ -69,10 +69,10 @@ module.exports.waitForElementToBeClickable = function(elName, el, wait) {
 module.exports.selectRandomDropdownOption = function(elName, el, more) {
 	var notes = [];
 	if(more.skipIfNotPresent) {
-		notes.push("skip if field is not present");
+		notes.push("if present");
 	}
 	if(more.skipIfNotDisplayed) {
-		notes.push("skip if field is not displayed");
+		notes.push("if displayed");
 	}
 	if(notes.length === 0) {
 		notes = "";

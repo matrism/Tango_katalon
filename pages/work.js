@@ -130,6 +130,12 @@ module.exports.saveWorkOriginButton = function() {
 module.exports.editIntendedPurposeField = function() {
 	return element(by.model("workOriginEdit.model.intended_purpose"));
 };
+module.exports.editProductionTitleField = function() {
+	return element(by.model("workOriginEdit.model.production_title.title"));
+};
+module.exports.editBltvrField = function() {
+	return element(by.model("workOriginEdit.model.bltvr"));
+};
 module.exports.workInclusionOnWebsiteParagraph = function() {
 	return (
 		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
@@ -306,6 +312,21 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
+};
+module.exports.enterProductionTitle = function(title, more) {
+	var element;
+	more = more || {};
+	element = pages.work.editProductionTitleField();
+	return element.isPresent().then(function(elementPresent) {
+		expect(more.skipIfNotPresent || elementPresent).toBeTruthy();
+		if(!elementPresent) {
+			return;
+		}
+		pages.base.scrollIntoView(element);
+		element.clear();
+		element.sendKeys(title);
+		return title;
+	});
 };
 module.exports.optToIncludeWorkOnWebsite = function(include) {
 	promise.when(include).then (

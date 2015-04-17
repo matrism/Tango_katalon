@@ -163,6 +163,24 @@ module.exports.selectDifferentRandomIntendedPurpose = function() {
 		{ dropdownType: "tg", different: true }
 	);
 };
+module.exports.enterRandomProductionTitle = function() {
+	var deferred = promise.defer();
+	it (
+		"Enter a random production title (if present)", function() {
+			var title = "TEST PRODUCTION TITLE " + randomId();
+			deferred.fulfill (
+				pages.work.enterProductionTitle(title, { skipIfNotPresent: true })
+			);
+		}
+	);
+	return deferred.promise;
+};
+module.exports.selectDifferentRandomBltvr = function() {
+	steps.base.selectRandomDropdownOption (
+		"BLTVR", pages.work.editBltvrField(),
+		{ skipIfNotPresent: true, different: true }
+	);
+};
 module.exports.saveWorkOrigin = function() {
 	steps.base.clickElement (
 		"save work origin button",
@@ -333,8 +351,8 @@ module.exports.editBasicWork = function(data) {
 				steps.work.hoverWorkOriginContainer();
 				steps.work.editWorkOrigin();
 				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
-				//data.productionTitle = steps.work.enterRandomProductionTitle();
-				//data.bltvr = steps.work.selectDifferentRandomBltvr();
+				data.productionTitle = steps.work.enterRandomProductionTitle();
+				data.bltvr = steps.work.selectDifferentRandomBltvr();
 				//data.musicLibrary = steps.work.selectDifferentRandomMusicLibrary();
 
 				steps.work.saveWorkOrigin();
