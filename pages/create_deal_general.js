@@ -3,7 +3,7 @@ var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
 var randomId = require("../helpers/randomId");
 var pages_path = _tf_config._system_.path_to_pages;
-module.exports = pages.deal_general = new ftf.pageObject({
+module.exports = pages.create_deal_general = new ftf.pageObject({
     url: _tf_config.urls.app_url + "#/create/deal"
 });
 
@@ -37,8 +37,8 @@ module.exports.internalContactRoleInputField = function() {
 };
 
 module.exports.selectDesiredSigningTerritory = function (specific_country) {
-    pages.deal_general.dealSigningTerritoryPopup().click();
-    expect(pages.deal_general.dealSigningTerritoryDropDownData().isDisplayed);
+    pages.create_deal_general.dealSigningTerritoryPopup().click();
+    expect(pages.create_deal_general.dealSigningTerritoryDropDownData().isDisplayed);
     var desiredOption;
     browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
         .then(function findMatchingOption(options) {
@@ -60,8 +60,8 @@ module.exports.selectDesiredSigningTerritory = function (specific_country) {
 };
 
 module.exports.fillContractingPartiesField = function (field) {
-    pages.deal_general.contractingPartiesField().click();
-    pages.deal_general.contractingPartiesInput().sendKeys(field);
+    pages.create_deal_general.contractingPartiesField().click();
+    pages.create_deal_general.contractingPartiesInput().sendKeys(field);
 };
 
 module.exports.selectContractingPartyValue = function (specific_value) {
@@ -86,12 +86,12 @@ module.exports.selectContractingPartyValue = function (specific_value) {
 };
 
 module.exports.fillIntoInternalContactsField = function(internal_contact){
-    pages.deal_general.internalContactsInputField().sendKeys(internal_contact);
+    pages.create_deal_general.internalContactsInputField().sendKeys(internal_contact);
 };
 
 module.exports.selectRandomInternalContactsFromDropDown = function(){
     var desiredOption;
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_general.internalContactsDropDownData()));
+    browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.internalContactsDropDownData()));
     browser.driver.findElements(By.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
         .then(function (options) {
             var randomNumber = Math.floor((Math.random() * options.length));
@@ -100,5 +100,5 @@ module.exports.selectRandomInternalContactsFromDropDown = function(){
 };
 
 module.exports.clickOnInternalContactsRole = function(){
-    pages.deal_general.internalContactRoleInputField().click();
+    pages.create_deal_general.internalContactRoleInputField().click();
 };

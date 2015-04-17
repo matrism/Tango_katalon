@@ -4,7 +4,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 var randomId = require("../helpers/randomId");
 var pages_path = _tf_config._system_.path_to_pages;
 require(pages_path + "base");
-module.exports = pages.deal_scope = new ftf.pageObject({});
+module.exports = pages.create_deal_scope = new ftf.pageObject({});
 
 
 //locators
@@ -44,8 +44,8 @@ module.exports.publisherNameDropDownData = function () {
 
 //methods
 module.exports.addScopeForm = function () {
-    pages.deal_scope.addScopeIcon().click();
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.contractTypeDropDown()));
+    pages.create_deal_scope.addScopeIcon().click();
+    browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.contractTypeDropDown()));
 };
 
 
@@ -72,10 +72,10 @@ module.exports.selectContractTypeScope = function (element, specific_value) {
 
 
 module.exports.addTerritoryByTypingToScope = function () {
-    pages.deal_scope.territoryField().click();
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.territoryInput()));
-    pages.deal_scope.territoryInput().sendKeys("a");
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.territoryDropDown()));
+    pages.create_deal_scope.territoryField().click();
+    browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.territoryInput()));
+    pages.create_deal_scope.territoryInput().sendKeys("a");
+    browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.territoryDropDown()));
 };
 
 
@@ -89,16 +89,16 @@ module.exports.selectRandomCountry = function () {
 };
 
 module.exports.clickOnAddPublisherShareSetLink = function () {
-    pages.deal_scope.addPublisherShareSetLink().click();
+    pages.create_deal_scope.addPublisherShareSetLink().click();
 };
 
 module.exports.fillInFirstPublisherNameField = function () {
-    pages.deal_scope.firstPublisherNameField().sendKeys("test");
+    pages.create_deal_scope.firstPublisherNameField().sendKeys("test");
 };
 
 module.exports.selectRandomPublisherNameDropDown = function () {
     var desiredOption;
-    browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.publisherNameDropDownData()));
+    browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.publisherNameDropDownData()));
     browser.driver.findElements(By.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"))
         .then(function (options) {
             var randomNumber = Math.floor((Math.random() * options.length));
