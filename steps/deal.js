@@ -36,8 +36,12 @@ module.exports.waitForDealToBeSaved = function () {
 
 module.exports.returnDealNumber = function () {
     it("Return deal number ", function () {
+        element(By.xpath("//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']")).getText().
+                then(function(promise){
+                    console.log("Deal number is: " + promise);
+                });
+
         return pages.deal.dealBriefNumber();
-        console.log("Deal number is: " + pages.deal.dealBriefNumber());
     });
 };
 
