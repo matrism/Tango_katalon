@@ -144,6 +144,31 @@ module.exports.saveAssetType = function() {
 		pages.work.saveAssetTypeButton()
 	);
 };
+module.exports.hoverWorkOriginContainer = function() {
+	steps.base.hoverElement (
+		"work origin container",
+		pages.work.workOriginContainer()
+	);
+};
+module.exports.editWorkOrigin = function() {
+	steps.base.clickElement (
+		"edit work origin button",
+		pages.work.editWorkOriginButton()
+	);
+};
+module.exports.selectDifferentRandomIntendedPurpose = function() {
+	steps.base.selectRandomDropdownOption (
+		"intended purpose",
+		pages.work.editIntendedPurposeField(),
+		{ dropdownType: "tg", different: true }
+	);
+};
+module.exports.saveWorkOrigin = function() {
+	steps.base.clickElement (
+		"save work origin button",
+		pages.work.saveWorkOriginButton()
+	);
+};
 module.exports.hoverWorkInclusionOnWebsiteIndicator = function() {
 	steps.base.hoverElement (
 		"work inclusion on website paragraph",
@@ -257,6 +282,7 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 // Flow.
 module.exports.editBasicWork = function(data) {
 	var debugSkip = [
+		"work titles", "asset type", "inclusion on website",
 	];
 	describe (
 		"Edit basic work", function() {
@@ -301,6 +327,17 @@ module.exports.editBasicWork = function(data) {
 				data.musicArrangement = steps.work.selectDifferentRandomMusicArrangement();
 
 				steps.work.saveAssetType();
+			}
+
+			if(debugSkip.indexOf("work origin") === -1) {
+				steps.work.hoverWorkOriginContainer();
+				steps.work.editWorkOrigin();
+				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
+				//data.productionTitle = steps.work.enterRandomProductionTitle();
+				//data.bltvr = steps.work.selectDifferentRandomBltvr();
+				//data.musicLibrary = steps.work.selectDifferentRandomMusicLibrary();
+
+				steps.work.saveWorkOrigin();
 			}
 
 			if(debugSkip.indexOf("inclusion on website") === -1) {

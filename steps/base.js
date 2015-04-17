@@ -1,4 +1,5 @@
 "use strict";
+var pph = require("../helpers/pph");
 var ExpectedConditions = protractor.ExpectedConditions;
 if(steps.base === undefined) {
 	module.exports = steps.base = {};
@@ -24,16 +25,19 @@ module.exports.hoverElement = function(elName, el) {
 module.exports.clickElement = function(elName, el, wait) {
 	it (
 		"Click " + elName, function() {
+			var notDisabledCssSelector = ":not([disabled], .disabled)";
 			pages.base.scrollIntoView(el);
 			if(wait === true) {
 				wait = _tf_config._system_.wait_timeout;
 			}
 			if(!wait) {
-				expect(el.getAttribute("disabled")).toBeFalsy();
+				expect(pph.matchesCssSelector(el, notDisabledCssSelector)).toBe(true);
 			}
 			else {
 				browser.wait (
-					ExpectedConditions.elementToBeClickable(el),
+					function() {
+						return pph.matchesCssSelector(el, notDisabledCssSelector);
+					},
 					wait
 				);
 			}

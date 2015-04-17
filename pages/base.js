@@ -21,6 +21,11 @@ module.exports.dirtyCheckConfirmCancellationButton = function() {
 // Interaction.
 module.exports.selectRandomDropdownOption = function(element, more) {
 	more = more || {};
+	more.dropdownType = more.dropdownType || "standard";
+	module.exports.selectRandomDropdownOption[more.dropdownType](element, more);
+};
+module.exports.selectRandomDropdownOption.standard = function(element, more) {
+	more = more || {};
 	return (
 		element.isPresent().then (
 			function(elementPresent) {
@@ -86,6 +91,59 @@ module.exports.selectRandomDropdownOption = function(element, more) {
 			}
 		)
 	);
+};
+module.exports.selectRandomDropdownOption.tg = function(element, more) {
+	more = more || {};
+	return element.isPresent().then(function(elementPresent) {
+		expect(more.skipIfNotPresent || elementPresent).toBeTruthy();
+		if(!elementPresent) {
+			return;
+		}
+		return element.isDisplayed().then(function(elementDisplayed) {
+			var originalOptionText;
+			var blacklist = [];
+			expect(elementDisplayed || more.skipIfNotDisplayed).toBeTruthy();
+			if(!elementDisplayed) {
+				return;
+			}
+			originalOptionText = pages.base.selectedTgDropdownOption(element);
+			return (function tryAgain() {
+				var optionCssSelector = ".dropdown-menu > li .ng-binding";
+				var remainingOptions;
+				element.click();
+				return element.$$(optionCssSelector)
+					.filter(function(option) {
+						return pph.and (
+							pph.notInArray(blacklist, option.getText()),
+							pph.or(!more.different, pph.areNotEqual(option.getText(), originalOptionText))
+						);
+					})
+					.then(function(remainingOptions) {
+						var randomOption;
+						var randomOptionText;
+						expect(remainingOptions.length).toBeGreaterThan(0);
+						if(remainingOptions.length === 0) {
+							console.log("WARNING - TG dropdown options exhausted");
+							element.element(by.cssContainingText(optionCssSelector, originalOptionText)).click();
+							return originalOptionText;
+						}
+						randomOption = _.sample(remainingOptions);
+						randomOptionText = randomOption.getText();
+						randomOption.click();
+						return pph.matchesCssSelector(element, ".ng-invalid").then(function(invalidOption) {
+							if(invalidOption) {
+								console.log("WARNING - Selected an invalid option; will retry");
+								blacklist.push(randomOptionText);
+								return tryAgain();
+							}
+							else {
+								return randomOption.getText();
+							}
+						});
+					});
+			})();
+		});
+	});
 };
 module.exports.selectRandomTypeaheadValue = function(element) {
 	var deferred = promise.defer();

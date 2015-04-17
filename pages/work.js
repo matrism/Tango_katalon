@@ -112,6 +112,24 @@ module.exports.saveAssetTypeButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
+module.exports.workOriginContainer = function() {
+	return $("[data-tg-modular-edit='workOriginEdit']");
+};
+module.exports.editWorkOriginButton = function() {
+	return (
+		pages.work.workOriginContainer()
+			.$("[data-ng-click='$$modularScope.showEdit()']")
+	);
+};
+module.exports.saveWorkOriginButton = function() {
+	return (
+		pages.work.workOriginContainer()
+			.element(by.cssContainingText("button", "Save"))
+	);
+};
+module.exports.editIntendedPurposeField = function() {
+	return element(by.model("workOriginEdit.model.intended_purpose"));
+};
 module.exports.workInclusionOnWebsiteParagraph = function() {
 	return (
 		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
