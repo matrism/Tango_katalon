@@ -136,6 +136,9 @@ module.exports.editProductionTitleField = function() {
 module.exports.editBltvrField = function() {
 	return element(by.model("workOriginEdit.model.bltvr"));
 };
+module.exports.editMusicLibraryField = function() {
+	return element(by.model("workOriginEdit.model.library_code"));
+};
 module.exports.workInclusionOnWebsiteParagraph = function() {
 	return (
 		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))

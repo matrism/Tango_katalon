@@ -137,7 +137,8 @@ module.exports.selectRandomDropdownOption.tg = function(element, more) {
 								return tryAgain();
 							}
 							else {
-								return randomOption.getText();
+								expect(pph.or(!more.different, pph.areNotEqual(randomOptionText, originalOptionText))).toBeTruthy();
+								return randomOptionText;
 							}
 						});
 					});
