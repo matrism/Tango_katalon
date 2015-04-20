@@ -102,3 +102,7 @@ module.exports.selectRandomInternalContactsFromDropDown = function(){
 module.exports.clickOnInternalContactsRole = function(){
     pages.create_deal_general.internalContactRoleInputField().click();
 };
+
+module.exports.fillIntoTheIRowInternalContactField = function(i){
+    browser.findElement(By.xpath(""));
+};

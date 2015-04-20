@@ -20,9 +20,37 @@ module.exports.returnAndCheckInternalContactsTitle = function () {
 
 module.exports.editInternalContactsArea = function () {
     it("Edit internal contacts area ", function () {
-            pages.edit_deal_general.clickOnEditInternalContactsArea();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditIcon()));
-            pages.edit_deal_general.clickOnEditIconInternalContacts();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditInputField()));
-        });
+        pages.edit_deal_general.clickOnEditInternalContactsArea();
+        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditIcon()));
+        pages.edit_deal_general.clickOnEditIconInternalContacts();
+        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditInputField()));
+    });
 };
+
+module.exports.returnAndCheckInternalContactsHeaderTable = function () {
+    it("Return internal contacts ", function () {
+        element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[1]")).getText().
+            then(function (promise) {
+                console.log("Internal Contacts header table is: " + promise);
+                expect(promise).toEqual("Contact Name Role Email");
+            });
+    });
+};
+
+module.exports.returnAndCheckInternalContactsValues = function () {
+    it("Return internal contacts values added ", function () {
+        element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[2]")).getText().
+            then(function (promise) {
+                console.log("Internal Contacts values added: " + promise);
+                expect(promise).not.toEqual("");
+            });
+    });
+};
+
+module.exports.addInternalContactsLink = function () {
+    it("Add internal contacts on edit mode", function () {
+        pages.edit_deal_general.clickOnAddInternalContactsLink();
+        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditInputField()));
+    });
+};
+

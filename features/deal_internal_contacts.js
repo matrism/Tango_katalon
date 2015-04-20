@@ -32,6 +32,8 @@ var beforeFeature = function () {
             steps.deal.goToGeneralDealTabDetails();
             steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.internalContactsArea());
             steps.edit_deal_general.returnAndCheckInternalContactsTitle();
+            steps.edit_deal_general.returnAndCheckInternalContactsHeaderTable();
+            steps.edit_deal_general.returnAndCheckInternalContactsValues();
             steps.edit_deal_general.editInternalContactsArea();
         }
     }];
