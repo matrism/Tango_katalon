@@ -7,6 +7,8 @@ require(pages_path + "create_deal_general");
 require(steps_path + "create_deal_general");
 require(pages_path + "create_deal_contract_period");
 require(steps_path + "create_deal_contract_period");
+require(pages_path + "edit_deal_general");
+require(steps_path + "edit_deal_general");
 require(steps_path + "base");
 
 
@@ -28,6 +30,9 @@ var beforeFeature = function () {
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
             steps.deal.goToGeneralDealTabDetails();
+            steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.internalContactsArea());
+            steps.edit_deal_general.returnAndCheckInternalContactsTitle();
+            steps.edit_deal_general.editInternalContactsArea();
         }
     }];
 
