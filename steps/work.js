@@ -357,12 +357,10 @@ module.exports.editBasicWork = function(data) {
 			if(debugSkip.indexOf("work origin") === -1) {
 				steps.work.hoverWorkOriginContainer();
 				steps.work.editWorkOrigin();
-				_.times(500, function() {
 				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
 				data.productionTitle = steps.work.enterRandomProductionTitle();
 				data.bltvr = steps.work.selectDifferentRandomBltvr();
 				data.musicLibrary = steps.work.selectDifferentRandomMusicLibrary();
-				});
 
 				steps.work.saveWorkOrigin();
 			}

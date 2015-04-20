@@ -19,6 +19,14 @@ module.exports.dirtyCheckConfirmCancellationButton = function() {
 	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
 };
 // Interaction.
+module.exports.isPresentAndDisplayed = function(element) {
+	return element.isPresent().then(function(isPresent) {
+		if(!isPresent) {
+			return false;
+		}
+		return element.isDisplayed();
+	});
+};
 module.exports.selectRandomDropdownOption = function(element, more) {
 	more = more || {};
 	more.dropdownType = more.dropdownType || "standard";

@@ -70,8 +70,23 @@ module.exports.excerptTypeDropdown = function() {
 module.exports.versionTypeDropdown = function() {
 	return element(by.model("work.version_type"));
 };
+module.exports.lyricAdaptationDropdown = function() {
+	return element(by.model("work.lyric_adaptation_type"));
+};
+module.exports.musicArrangementDropdown = function() {
+	return element(by.model("work.music_arrangement_type"));
+};
 module.exports.intendedPurposeDropdown = function() {
 	return element(by.model("work.intended_purpose"));
+};
+module.exports.productionTitleInput = function() {
+	return element(by.model("work.production_title.title"));
+};
+module.exports.bltvrDropdown = function() {
+	return element(by.model("work.bltvr"));
+};
+module.exports.musicLibraryDropdown = function() {
+	return element(by.model("work.library_code"));
 };
 module.exports.includeWorkOnWebsiteButtons = function() {
 	return element.all(by.model("work.include_on_website"));
@@ -128,8 +143,60 @@ module.exports.selectedVersionType = function() {
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
+module.exports.isLyricAdaptationFieldDisplayed = function() {
+	return pages.base.isPresentAndDisplayed(
+		pages.new_work.lyricAdaptationDropdown()
+	);
+};
+module.exports.selectedLyricAdaptation = function() {
+	return pages.base.selectedTgDropdownOption(
+		pages.new_work.lyricAdaptationDropdown()
+	);
+};
+module.exports.isMusicArrangementFieldDisplayed = function() {
+	return pages.base.isPresentAndDisplayed(
+		pages.new_work.musicArrangementDropdown()
+	);
+};
+module.exports.selectedMusicArrangement = function() {
+	return pages.base.selectedTgDropdownOption(
+		pages.new_work.musicArrangementDropdown()
+	);
+};
+module.exports.isIntendedPurposeFieldDisplayed = function() {
+	return pages.base.isPresentAndDisplayed(
+		pages.new_work.intendedPurposeDropdown()
+	);
+};
 module.exports.selectedIntendedPurpose = function() {
 	var element = pages.new_work.intendedPurposeDropdown();
+	pages.base.scrollIntoView(element);
+	return pages.base.selectedTgDropdownOption(element);
+};
+module.exports.isProductionTitleFieldDisplayed = function() {
+	return pages.base.isPresentAndDisplayed(
+		pages.new_work.productionTitleInput()
+	);
+};
+module.exports.enterProductionTitle = function(title) {
+	var element = pages.new_work.productionTitleInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(title);
+};
+module.exports.isBltvrFieldDisplayed = function() {
+	return pages.base.isPresentAndDisplayed(pages.new_work.bltvrDropdown());
+};
+module.exports.selectedBltvr = function() {
+	var element = pages.new_work.bltvrDropdown();
+	pages.base.scrollIntoView(element);
+	return pages.base.selectedTgDropdownOption(element);
+};
+module.exports.isMusicLibraryFieldDisplayed = function() {
+	return pages.base.isPresentAndDisplayed(pages.new_work.musicLibraryDropdown());
+};
+module.exports.selectedMusicLibrary = function() {
+	var element = pages.new_work.musicLibraryDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
