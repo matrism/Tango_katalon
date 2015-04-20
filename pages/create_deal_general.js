@@ -36,6 +36,7 @@ module.exports.internalContactRoleInputField = function() {
     return element(by.css("div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
+
 module.exports.selectDesiredSigningTerritory = function (specific_country) {
     pages.create_deal_general.dealSigningTerritoryPopup().click();
     expect(pages.create_deal_general.dealSigningTerritoryDropDownData().isDisplayed);
@@ -104,5 +105,10 @@ module.exports.clickOnInternalContactsRole = function(){
 };
 
 module.exports.fillIntoTheIRowInternalContactField = function(i){
-    browser.findElement(By.xpath(""));
+    browser.findElement(By.xpath("//*[@class='span7 nomargins']/div[" + i + "]/div[1]/div[@data-ng-model='internalContact.contact']/div/div/div[1]/div/div[2]/input[@ng-model='$term']")).sendKeys("test");
+};
+
+
+module.exports.clickIntoInternalContactsRoleRowI = function(i){
+    browser.findElement(By.xpath("//*[@class='span7 nomargins']/div[" + i + "]/div[2]/div[@data-ng-model='internalContact.roles']/div/div/div[2]/div/div[2]/input[@ng-model='$term']")).click();
 };

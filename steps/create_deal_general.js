@@ -54,7 +54,14 @@ module.exports.fillIntoInternalContactField = function (internal_contact) {
     );
 };
 
-module.exports.selectRandomInternalContactDropDown = function (internal_contact) {
+module.exports.fillIntoInternalContactsFieldRowI = function (i) {
+    it("Fill into internal contact row i ", function () {
+            pages.create_deal_general.fillIntoTheIRowInternalContactField(i);
+        }
+    );
+};
+
+module.exports.selectRandomInternalContactDropDown = function () {
     it("Select random value from internal contact drop down", function () {
             pages.create_deal_general.selectRandomInternalContactsFromDropDown();
         }
@@ -68,7 +75,11 @@ module.exports.clickOnInternalContactRole = function () {
     );
 };
 
-
+module.exports.clickOnInternalContactsRoleRowI = function(i){
+    it("Click on internal contact role row i", function () {
+        pages.create_deal_general.clickIntoInternalContactsRoleRowI(i);
+    });
+};
 
 module.exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
@@ -89,4 +100,15 @@ module.exports.itFillDealMandatoryFieldsGeneralTab = function () {
                 steps.create_deal_general.selectRandomInternalContactDropDown();
             }
         );
+};
+
+
+module.exports.itAddInternalContactsRowIToDealGeneralTab = function (i) {
+    describe("Add internal contacts in deals general tab", function () {
+            steps.create_deal_general.fillIntoInternalContactsFieldRowI(i);
+            steps.create_deal_general.selectRandomInternalContactDropDown();
+            steps.create_deal_general.clickOnInternalContactsRoleRowI(i);
+            steps.create_deal_general.selectRandomInternalContactDropDown();
+        }
+    );
 };

@@ -28,7 +28,7 @@ module.exports.editInternalContactsArea = function () {
 };
 
 module.exports.returnAndCheckInternalContactsHeaderTable = function () {
-    it("Return internal contacts ", function () {
+    it("Return internal contacts table header ", function () {
         element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[1]")).getText().
             then(function (promise) {
                 console.log("Internal Contacts header table is: " + promise);
@@ -37,9 +37,9 @@ module.exports.returnAndCheckInternalContactsHeaderTable = function () {
     });
 };
 
-module.exports.returnAndCheckInternalContactsValues = function () {
+module.exports.returnAndCheckInternalContactsValues = function (i) {
     it("Return internal contacts values added ", function () {
-        element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[2]")).getText().
+        element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[" + i + "]")).getText().
             then(function (promise) {
                 console.log("Internal Contacts values added: " + promise);
                 expect(promise).not.toEqual("");
@@ -53,4 +53,3 @@ module.exports.addInternalContactsLink = function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditInputField()));
     });
 };
-

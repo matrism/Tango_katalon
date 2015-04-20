@@ -20,9 +20,14 @@ var beforeFeature = function () {
         name: "Create basic deal",
         tags: [],
         steps: function () {
+
+            //var i=2;
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.internalContactsInputField());
             steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+            for (var i = 2; i <= 4; i++) {
+                steps.create_deal_general.itAddInternalContactsRowIToDealGeneralTab(i);
+            }
             steps.deal.itContinueToNextPage();
             steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
@@ -33,7 +38,9 @@ var beforeFeature = function () {
             steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.internalContactsArea());
             steps.edit_deal_general.returnAndCheckInternalContactsTitle();
             steps.edit_deal_general.returnAndCheckInternalContactsHeaderTable();
-            steps.edit_deal_general.returnAndCheckInternalContactsValues();
+            for (var i = 2; i <= 4; i++) {
+                steps.edit_deal_general.returnAndCheckInternalContactsValues(i);
+            }
             steps.edit_deal_general.editInternalContactsArea();
         }
     }];
