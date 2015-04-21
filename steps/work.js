@@ -20,6 +20,15 @@ module.exports.goToScopeDelivery = function() {
 	);
 };
 // Data fetching.
+module.exports.findCurrentlyOpenWorkId = function() {
+	var deferred = promise.defer();
+	it (
+		"Find currently open work ID", function() {
+			deferred.fulfill(pages.work.workId());
+		}
+	);
+	return deferred.promise;
+};
 module.exports.workInclusionOnWebsite = function() {
 	var deferred = promise.defer();
 	it (
@@ -75,8 +84,11 @@ module.exports.saveWorkTitles = function() {
 		pages.work.saveWorkTitlesButton()
 	);
 };
-module.exports.hoverAssetTypeLabel = function() {
-	steps.base.hoverElement("asset type label", pages.work.assetTypeLabel());
+module.exports.hoverAssetTypeContainer = function() {
+	steps.base.hoverElement (
+		"asset type container",
+		pages.work.assetTypeContainer()
+	);
 };
 module.exports.editAssetType = function() {
 	steps.base.clickElement (
@@ -105,10 +117,81 @@ module.exports.selectDifferentRandomExcerptType  = function() {
 		{ different: true }
 	);
 };
+module.exports.selectDifferentRandomVersionType  = function() {
+	steps.base.selectRandomDropdownOption (
+		"version type",
+		pages.work.editVersionTypeField(),
+		{ different: true }
+	);
+};
+module.exports.selectDifferentRandomLyricAdaptation  = function() {
+	steps.base.selectRandomDropdownOption (
+		"lyric adaptation",
+		pages.work.editLyricAdaptationField(),
+		{ skipIfNotPresent: true, different: true }
+	);
+};
+module.exports.selectDifferentRandomMusicArrangement = function() {
+	steps.base.selectRandomDropdownOption (
+		"music arrangement",
+		pages.work.editMusicArrangementField(),
+		{ skipIfNotPresent: true, different: true }
+	);
+};
 module.exports.saveAssetType = function() {
 	steps.base.clickElement (
 		"save asset type button",
 		pages.work.saveAssetTypeButton()
+	);
+};
+module.exports.hoverWorkOriginContainer = function() {
+	steps.base.hoverElement (
+		"work origin container",
+		pages.work.workOriginContainer()
+	);
+};
+module.exports.editWorkOrigin = function() {
+	steps.base.clickElement (
+		"edit work origin button",
+		pages.work.editWorkOriginButton()
+	);
+};
+module.exports.selectDifferentRandomIntendedPurpose = function() {
+	steps.base.selectRandomDropdownOption (
+		"intended purpose",
+		pages.work.editIntendedPurposeField(),
+		{ dropdownType: "tg", different: true }
+	);
+};
+module.exports.enterRandomProductionTitle = function() {
+	var deferred = promise.defer();
+	it (
+		"Enter a random production title (if present)", function() {
+			var title = "TEST PRODUCTION TITLE " + randomId();
+			deferred.fulfill (
+				pages.work.enterProductionTitle(title, { skipIfNotPresent: true })
+			);
+		}
+	);
+	return deferred.promise;
+};
+module.exports.selectDifferentRandomBltvr = function() {
+	steps.base.selectRandomDropdownOption (
+		"BLTVR", pages.work.editBltvrField(),
+		{ skipIfNotPresent: true, different: true }
+	);
+};
+module.exports.selectDifferentRandomMusicLibrary = function() {
+	steps.base.selectRandomDropdownOption (
+		"music library",
+		pages.work.editMusicLibraryField(),
+		{ dropdownType: "tg", skipIfNotPresent: true, different: true }
+	);
+};
+module.exports.saveWorkOrigin = function() {
+	steps.base.clickElement (
+		"save work origin button",
+		pages.work.saveWorkOriginButton()
 	);
 };
 module.exports.hoverWorkInclusionOnWebsiteIndicator = function() {
@@ -182,7 +265,7 @@ module.exports.validatePrimaryWorkTitle = function(title) {
 module.exports.validateAlternateWorkTitle = function(title) {
 	it (
 		"Validate alternate work title", function() {
-			expect(pages.work.alternateTitles()).toContain(title);
+			expect(pages.work.alternateWorkTitles()).toContain(title);
 		}
 	);
 };
@@ -224,12 +307,13 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 // Flow.
 module.exports.editBasicWork = function(data) {
 	var debugSkip = [
-		"work titles",
-		"inclusion on website",
+		"work titles", "asset type", "inclusion on website",
 	];
 	describe (
 		"Edit basic work", function() {
-			steps.work.goToWorkPage(data.workId);
+			if(data.workId) {
+				steps.work.goToWorkPage(data.workId);
+			}
 
 			if(debugSkip.indexOf("work titles") === -1) {
 				steps.work.hoverPrimaryWorkTitleHeading();
@@ -258,15 +342,27 @@ module.exports.editBasicWork = function(data) {
 			}
 
 			if(debugSkip.indexOf("asset type") === -1) {
-				steps.work.hoverAssetTypeLabel();
+				steps.work.hoverAssetTypeContainer();
 				steps.work.editAssetType();
 				data.musicalDistributionCategory = steps.work.selectDifferentRandomMusicalDistributionCategory();
 				data.textMusicRelationship = steps.work.selectDifferentRandomTextMusicRelationship();
-				data.excerptType = steps.work.selectDifferentRandomVersionType();
-				//data.lyricAdaptation = steps.work.selectDifferentLyricAdaptation();
-				//data.musicArrangement = steps.work.selectDifferentMusicArrengement();
+				data.excerptType = steps.work.selectDifferentRandomExcerptType();
+				data.versionType = steps.work.selectDifferentRandomVersionType();
+				data.lyricAdaptation = steps.work.selectDifferentRandomLyricAdaptation();
+				data.musicArrangement = steps.work.selectDifferentRandomMusicArrangement();
 
 				steps.work.saveAssetType();
+			}
+
+			if(debugSkip.indexOf("work origin") === -1) {
+				steps.work.hoverWorkOriginContainer();
+				steps.work.editWorkOrigin();
+				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
+				data.productionTitle = steps.work.enterRandomProductionTitle();
+				data.bltvr = steps.work.selectDifferentRandomBltvr();
+				data.musicLibrary = steps.work.selectDifferentRandomMusicLibrary();
+
+				steps.work.saveWorkOrigin();
 			}
 
 			if(debugSkip.indexOf("inclusion on website") === -1) {
@@ -290,25 +386,29 @@ module.exports.editBasicWork = function(data) {
 	);
 };
 module.exports.validateWork = function(data) {
-	if(data.workId) {
-		steps.work.goToWorkPage(data.workId);
-	}
-	steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
-	if(data.alternateWorkTitles) {
-		data.alternateWorkTitles.forEach (
-			function(alternateWorkTitle) {
-				steps.work.validateAlternateWorkTitle(alternateWorkTitle);
+	describe (
+		"Validate work data", function() {
+			if(data.workId) {
+				steps.work.goToWorkPage(data.workId);
 			}
-		);
-	}
-	steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
-	steps.work.goToScopeDelivery();
-	data.creators.forEach (
-		function(creator, i) {
-			describe (
-				"Validate creator #" + (i + 1), function() {
-					steps.work.validateCreatorName(creator.name);
-					steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
+			steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
+			if(data.alternateWorkTitles) {
+				data.alternateWorkTitles.forEach (
+					function(alternateWorkTitle) {
+						steps.work.validateAlternateWorkTitle(alternateWorkTitle);
+					}
+				);
+			}
+			steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
+			steps.work.goToScopeDelivery();
+			data.creators.forEach (
+				function(creator, i) {
+					describe (
+						"Validate creator #" + (i + 1), function() {
+							steps.work.validateCreatorName(creator.name);
+							steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
+						}
+					);
 				}
 			);
 		}
