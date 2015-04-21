@@ -38,6 +38,7 @@ var beforeFeature = function () {
             steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.internalContactsArea());
             steps.edit_deal_general.returnAndCheckInternalContactsTitle();
             steps.edit_deal_general.returnAndCheckInternalContactsHeaderTable();
+            steps.edit_deal_general.returnAndCheckAddInternalContactsLinkPresent();
             for (var i = 2; i <= 4; i++) {
                 steps.edit_deal_general.returnAndCheckInternalContactsValues(i);
             }

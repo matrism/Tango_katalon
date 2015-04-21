@@ -47,7 +47,17 @@ module.exports.returnAndCheckInternalContactsValues = function (i) {
     });
 };
 
-module.exports.addInternalContactsLink = function () {
+module.exports.returnAndCheckAddInternalContactsLinkPresent= function () {
+    it("Return add internal contacts link text ", function () {
+        element(By.css("button[data-ng-click='modularEdit.internalContacts.switchToView('edit');']")).getText().
+            then(function (promise) {
+                console.log("Add Internal Contacts list is present and it's name is: " + promise);
+                //expect(promise).toEqual("Contact Name Role Email");
+            });
+    });
+};
+
+module.exports.addInternalContactLink = function () {
     it("Add internal contacts on edit mode", function () {
         pages.edit_deal_general.clickOnAddInternalContactsLink();
         browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditInputField()));

@@ -24,15 +24,15 @@ module.exports.contractingPartiesField = function () {
     return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"));
 };
 
-module.exports.internalContactsInputField=function(){
+module.exports.internalContactsInputField = function () {
     return element(by.css("div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
-module.exports.internalContactsDropDownData = function(){
-    return element(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"));
+module.exports.internalContactsDropDownData = function () {
+    return element(by.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"));
 };
 
-module.exports.internalContactRoleInputField = function() {
+module.exports.internalContactRoleInputField = function () {
     return element(by.css("div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
@@ -86,11 +86,11 @@ module.exports.selectContractingPartyValue = function (specific_value) {
         });
 };
 
-module.exports.fillIntoInternalContactsField = function(internal_contact){
+module.exports.fillIntoInternalContactsField = function (internal_contact) {
     pages.create_deal_general.internalContactsInputField().sendKeys(internal_contact);
 };
 
-module.exports.selectRandomInternalContactsFromDropDown = function(){
+module.exports.selectRandomInternalContactsFromDropDown = function () {
     var desiredOption;
     browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.internalContactsDropDownData()));
     browser.driver.findElements(By.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
@@ -100,15 +100,15 @@ module.exports.selectRandomInternalContactsFromDropDown = function(){
         })
 };
 
-module.exports.clickOnInternalContactsRole = function(){
+module.exports.clickOnInternalContactsRole = function () {
     pages.create_deal_general.internalContactRoleInputField().click();
 };
 
-module.exports.fillIntoTheIRowInternalContactField = function(i){
+module.exports.fillIntoTheIRowInternalContactField = function (i) {
     browser.findElement(By.xpath("//*[@class='span7 nomargins']/div[" + i + "]/div[1]/div[@data-ng-model='internalContact.contact']/div/div/div[1]/div/div[2]/input[@ng-model='$term']")).sendKeys("test");
 };
 
 
-module.exports.clickIntoInternalContactsRoleRowI = function(i){
+module.exports.clickIntoInternalContactsRoleRowI = function (i) {
     browser.findElement(By.xpath("//*[@class='span7 nomargins']/div[" + i + "]/div[2]/div[@data-ng-model='internalContact.roles']/div/div/div[2]/div/div[2]/input[@ng-model='$term']")).click();
 };
