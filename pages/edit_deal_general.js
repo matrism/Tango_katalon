@@ -26,7 +26,7 @@ module.exports.internalContactsEditInputField = function () {
 };
 
 module.exports.addInternalContactsLink = function () {
-    return element(By.css("button[data-ng-click='modularEdit.internalContacts.switchToView('edit');']"))
+    return element(By.css("div.add-new-button.ng-scope button.btn.btn-link"))
 };
 
 module.exports.saveEditInternalContactsButton = function () {

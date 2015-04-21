@@ -49,10 +49,10 @@ module.exports.returnAndCheckInternalContactsValues = function (i) {
 
 module.exports.returnAndCheckAddInternalContactsLinkPresent= function () {
     it("Return add internal contacts link text ", function () {
-        element(By.css("button[data-ng-click='modularEdit.internalContacts.switchToView('edit');']")).getText().
+        element(By.css("div.add-new-button.ng-scope button.btn.btn-link")).getText().
             then(function (promise) {
                 console.log("Add Internal Contacts list is present and it's name is: " + promise);
-                //expect(promise).toEqual("Contact Name Role Email");
+                expect(promise).toEqual("Add External Contact");
             });
     });
 };
