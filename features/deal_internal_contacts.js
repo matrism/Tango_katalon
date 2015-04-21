@@ -42,6 +42,7 @@ var beforeFeature = function () {
             for (var i = 2; i <= 4; i++) {
                 steps.edit_deal_general.returnAndCheckInternalContactsValues(i);
             }
+            steps.edit_deal_general.printInternalContactList();
             steps.edit_deal_general.editInternalContactsArea();
         }
     }];

@@ -7,7 +7,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 require(pages_path + "edit_deal_general");
 module.exports = steps.edit_deal_general = {};
 
-
+var internalContacts = [];
 module.exports.returnAndCheckInternalContactsTitle = function () {
     it("Return internal contacts ", function () {
         element(By.xpath("//*[@data-ng-show='showSummary']//h2[contains(text(), 'Internal Contacts')]")).getText().
@@ -33,6 +33,7 @@ module.exports.returnAndCheckInternalContactsHeaderTable = function () {
             then(function (promise) {
                 console.log("Internal Contacts header table is: " + promise);
                 expect(promise).toEqual("Contact Name Role Email");
+                internalContacts[0] = promise + "\n";
             });
     });
 };
@@ -43,6 +44,7 @@ module.exports.returnAndCheckInternalContactsValues = function (i) {
             then(function (promise) {
                 console.log("Internal Contacts values added: " + promise);
                 expect(promise).not.toEqual("");
+                internalContacts[i-1] = promise + "\n";
             });
     });
 };
@@ -63,3 +65,11 @@ module.exports.addInternalContactLink = function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditInputField()));
     });
 };
+
+
+module.exports.printInternalContactList= function () {
+    it("Return internal contact list contains ", function () {
+        console.log("Internal contacts list is \n"  + internalContacts);
+    });
+};
+
