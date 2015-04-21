@@ -56,6 +56,7 @@ module.exports.itContinueToNextPage = function () {
 module.exports.goToGeneralDealTabDetails = function () {
     it("Click on general header and go to general deal tab details ", function () {
         pages.deal.goToGeneralDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.dealGeneralSummaryHeader()));
     });
 };
 
