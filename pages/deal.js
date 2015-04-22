@@ -21,8 +21,16 @@ module.exports.generalHeader = function(){
     return element(by.css("li[data-heading='General']"))
 };
 
+module.exports.termsHeader = function(){
+    return element(by.css("li[data-heading='Terms']"))
+};
+
 module.exports.dealGeneralSummaryHeader = function(){
     return element(by.css("a[data-ng-click='showDealSummaryPage()']"))
+};
+
+module.exports.dealTermsSummaryHeader = function(){
+    return element(by.css("a[data-ng-class='{ active: form.show.section.cps }']"))
 };
 
 //methods
@@ -44,5 +52,9 @@ module.exports.expectContinueButtonEnabled = function () {
 module.exports.goToGeneralDealDetails = function(){
     pages.deal.generalHeader().click();
     browser.wait(ExpectedConditions.visibilityOf(pages.deal.dealGeneralSummaryHeader()));
+};
+
+module.exports.goToTermsDealDetails = function(){
+    pages.deal.termsHeader().click();
 };
 

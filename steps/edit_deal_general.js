@@ -171,6 +171,14 @@ module.exports.itSaveInternalContactsChanges = function () {
     })
 };
 
+module.exports.itCancelInternalContactsChanges = function () {
+    it("Cancel internal contacts changes after editing them", function () {
+        pages.edit_deal_general.clickOnCancelEditInternalContacts();
+        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.yesModalDialog()));
+    })
+};
+
+
 
 module.exports.itEditInternalContactsToDealGeneralTab = function (internal_contact) {
     describe("Edit - internal contacts in deals general tab", function () {

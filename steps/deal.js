@@ -60,3 +60,14 @@ module.exports.goToGeneralDealTabDetails = function () {
     });
 };
 
+module.exports.goToTermsDealTabDetails = function () {
+    it("Click on terms header and go to terms deal tab details ", function () {
+        pages.deal.goToTermsDealDetails();
+    });
+};
+
+module.exports.expectTermsDetailsAreOk = function () {
+    it("Expect terms tab is opened successfully ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.dealTermsSummaryHeader()));
+    });
+};

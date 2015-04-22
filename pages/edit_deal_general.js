@@ -34,7 +34,7 @@ module.exports.saveEditInternalContactsButton = function () {
   };
 
 module.exports.cancelEditInternalContactsButton = function () {
-    return element(By.css("div[data-tg-modular-edit='internalContacts'] div div div button.btn btn-cancel ng-binding"));
+    return element(By.css("div[data-tg-modular-edit='internalContacts'] div div div button.btn.btn-cancel.ng-binding"));
 };
 
 module.exports.editInternalContactsInputField = function () {
@@ -117,7 +117,6 @@ module.exports.editTheIRowInternalContactField = function (i) {
 
 module.exports.clickEditInternalContactsRoleRowI = function (i) {
     var element= browser.findElement(By.xpath("//*[@data-tg-modular-view='edit']/div[1]/div[" + i + "]/div[2]/div[@data-ng-model='internalContact.roles']/div/div/div[2]/div/div[2]/input[@ng-model='$term']"));
-    element.clear();
     element.click();
 };
 
