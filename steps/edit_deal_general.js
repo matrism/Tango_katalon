@@ -51,7 +51,7 @@ module.exports.returnAndCheckFirstInternalContactsValues = function () {
 
 module.exports.returnAndCheckInternalContactsValues = function (i) {
     it("Return second third... the rest of internal contacts values added ", function () {
-        element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[" + (i+1) + "]")).getText().
+        element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[" + (i + 1) + "]")).getText().
             then(function (promise) {
                 console.log("Internal Contacts values added: " + promise);
                 expect(promise).not.toEqual("");
@@ -60,7 +60,7 @@ module.exports.returnAndCheckInternalContactsValues = function (i) {
     });
 };
 
-module.exports.returnAndCheckAddInternalContactsLinkPresent= function () {
+module.exports.returnAndCheckAddInternalContactsLinkPresent = function () {
     it("Return add internal contacts link text ", function () {
         element(By.css("div.add-new-button.ng-scope button.btn.btn-link")).getText().
             then(function (promise) {
@@ -77,9 +77,9 @@ module.exports.addInternalContactLink = function () {
     });
 };
 
-module.exports.printInternalContactList= function () {
+module.exports.printInternalContactList = function () {
     it("Return internal contact list contains ", function () {
-        console.log("Internal contacts list is \n"  + internalContacts);
+        console.log("Internal contacts list is \n" + internalContacts);
     });
 };
 
@@ -111,26 +111,45 @@ module.exports.clickEditInternalContactRole = function () {
     );
 };
 
-module.exports.clickEditInternalContactRoleRowI = function(i){
+module.exports.clickEditInternalContactRoleRowI = function (i) {
     it("Click edit internal contact role row i", function () {
         pages.edit_deal_general.clickEditInternalContactsRoleRowI(i);
     });
 };
 
-module.exports.removeInternalContactsRole = function(){
+module.exports.removeInternalContactsRole = function () {
     it("Remove first internal contact role", function () {
         pages.edit_deal_general.removeEditInternalContactRole();
     });
 };
 
-module.exports.removeInternalContactsRoleRowI = function(i){
+module.exports.removeInternalContactsRoleRowI = function (i) {
     it("Remove internal contact role row i", function () {
         pages.edit_deal_general.removeEditInternalContactsRoleRowI(i);
     });
 };
 
-module.exports.itSaveInternalContactsChanges = function(){
-    it("Save internal contacts changes after editing them", function(){
+module.exports.removeInternalContactsRowI = function (i) {
+    it("Remove internal contact row i", function () {
+        pages.edit_deal_general.removeEditInternalContactsRowI(i);
+    });
+};
+
+module.exports.confirmModalDialog = function () {
+    it("Confirm modal dialog action", function () {
+        pages.edit_deal_general.clickOnYesModalDialog();
+    });
+};
+
+module.exports.cancelModalDialog = function () {
+    it("Cancel modal dialog action", function () {
+        pages.edit_deal_general.clickOnNoModalDialog();
+    });
+};
+
+
+module.exports.itSaveInternalContactsChanges = function () {
+    it("Save internal contacts changes after editing them", function () {
         pages.edit_deal_general.clickOnSaveEditInternalContacts();
         browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.internalContactsEditInputField()));
     })
@@ -174,6 +193,21 @@ module.exports.itEditAddInternalContactsRoleRowIToDealGeneralTab = function (i) 
     describe("Edit - internal contacts in deals general tab", function () {
             steps.edit_deal_general.clickEditInternalContactRoleRowI(i);
             steps.edit_deal_general.selectEditRandomInternalContactDropDown();
+        }
+    );
+};
+
+
+module.exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
+    describe("Remove internal contacts row  i in deals general tab", function () {
+            steps.edit_deal_general.removeInternalContactsRowI(i);
+            //browser.driver.waitForAngular();
+            //browser.executeScript("$('.modal').removeClass('fade');");
+            steps.base.scrollIntoView("Modal dialog", pages.edit_deal_general.yesModalDialog());
+            //browser.driver.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.modalDialog()));
+            steps.edit_deal_general.confirmModalDialog();
+            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactRoleInputField()));
+            //browser.driver.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.modalDialog()));
         }
     );
 };

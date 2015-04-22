@@ -98,8 +98,11 @@ feature = [{
         steps.edit_deal_general.returnAndCheckInternalContactsValues(i);
         steps.edit_deal_general.printInternalContactList();
         //delete both internal contacts
-
-
+        steps.edit_deal_general.editInternalContactsArea();
+        steps.edit_deal_general.itRemoveInternalContactsRowIToDealGeneralTab(i);
+        //steps.edit_deal_general.itSaveInternalContactsChanges();
+        //steps.edit_deal_general.returnAndCheckInternalContactsTitle();
+        //steps.edit_deal_general.returnAndCheckFirstInternalContactsValues();
     }
 }];
 
