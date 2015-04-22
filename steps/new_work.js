@@ -38,6 +38,22 @@ module.exports.validateDefaultCreatorRole = function(i) {
 		}
 	);
 };
+module.exports.validateCreatorContributionInputMask = function(i, validationTable) {
+	it("Validate creator contribution input mask", function() {
+		validationTable = validationTable || {
+			"1asdf": "1",
+			"1,0": "10",
+			"1.0.0": "1.00",
+			"50": "50",
+			"1.0": "1.0",
+		};
+		_.each(validationTable, function(expectedValue, input) {
+			pages.new_work.enterCreatorContribution(i, input);
+			expect(pages.new_work.enteredCreatorContribution(i)).toBe(expectedValue);
+		});
+		pages.new_work.enterCreatorContribution(i, "");
+	});
+};
 module.exports.ensureTotalContributionTooLowMessageIsDisplayed = function() {
 	it("Ensure 'Total contribution is less than 100%' message is displayed", function() {
 		expect(pages.base.isPresentAndDisplayed(
@@ -52,7 +68,7 @@ module.exports.ensureTotalContributionTooHighMessageIsDisplayed = function() {
 		)).toBeTruthy();
 	});
 };
-module.exports.validateTotalContributionPercentage = function() {
+module.exports.validateTotalContribution = function() {
 	it (
 		"Validate total contribution", function() {
 			expect(pages.new_work.totalContribution()).toBe(100);
@@ -184,21 +200,21 @@ module.exports.selectRandomCreator = function(i) {
 module.exports.enterMaximumCreatorContribution = function(i) {
 	it (
 		"Enter 100% contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterContributionPercentage(i, 100);
+			pages.new_work.enterCreatorContribution(i, 100);
 		}
 	);
 };
 module.exports.enterMediumCreatorContribution = function(i) {
 	it (
 		"Enter 50% contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterContributionPercentage(i, 50);
+			pages.new_work.enterCreatorContribution(i, 50);
 		}
 	);
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	it (
 		"Enter contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterContributionPercentage(i, value);
+			pages.new_work.enterCreatorContribution(i, value);
 		}
 	);
 };
@@ -458,6 +474,7 @@ module.exports.createBasicWork = function(data) {
 						steps.new_work.validateDefaultCreatorRole(i);
 						creator.name = steps.new_work.selectRandomCreator(i);
 						creator.contribution = 100 / howMany;
+						steps.new_work.validateCreatorContributionInputMask(i);
 						if(firstOne) {
 							steps.new_work.enterMediumCreatorContribution(i);
 							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
@@ -473,7 +490,7 @@ module.exports.createBasicWork = function(data) {
 						return creator;
 					}
 				);
-				steps.new_work.validateTotalContributionPercentage();
+				steps.new_work.validateTotalContribution();
 				steps.new_work.ensureNoTotalContributionValidationErrorsAreDisplayed();
 				return creators;
 			})();

@@ -174,6 +174,11 @@ module.exports.selectedCreatorRole = function(i) {
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
+module.exports.enteredCreatorContribution = function(i) {
+	var element = pages.new_work.creatorContributionInput(i);
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
 module.exports.totalContribution = function() {
 	var element = pages.new_work.contributionTotalBinding();
 	pages.base.scrollIntoView(element);
@@ -307,7 +312,7 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 	element.clear();
 	element.sendKeys(title);
 };
-module.exports.enterContributionPercentage = function(i, value) {
+module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
 	element.clear();
