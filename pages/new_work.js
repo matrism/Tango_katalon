@@ -88,6 +88,60 @@ module.exports.bltvrDropdown = function() {
 module.exports.musicLibraryDropdown = function() {
 	return element(by.model("work.library_code"));
 };
+module.exports.creationDateContainer = function() {
+	return element(by.model("work.creation_date"));
+};
+module.exports.creationDatePickerIcon = function() {
+	return (
+		pages.new_work.creationDateContainer()
+			.$(".date .add-on")
+	);
+};
+module.exports.creationYearInput = function() {
+	return (
+		pages.new_work.creationDateContainer()
+			.element(by.model("date.year"))
+	);
+};
+module.exports.creationMonthInput = function() {
+	return (
+		pages.new_work.creationDateContainer()
+			.element(by.model("date.month"))
+	);
+};
+module.exports.creationDayInput = function() {
+	return (
+		pages.new_work.creationDateContainer()
+			.element(by.model("date.day"))
+	);
+};
+module.exports.deliveryDateContainer = function() {
+	return element(by.model("work.delivery_date"));
+};
+module.exports.deliveryDatePickerIcon = function() {
+	return (
+		pages.new_work.deliveryDateContainer()
+			.$(".date .add-on")
+	);
+};
+module.exports.deliveryYearInput = function() {
+	return (
+		pages.new_work.deliveryDateContainer()
+			.element(by.model("date.year"))
+	);
+};
+module.exports.deliveryMonthInput = function() {
+	return (
+		pages.new_work.deliveryDateContainer()
+			.element(by.model("date.month"))
+	);
+};
+module.exports.deliveryDayInput = function() {
+	return (
+		pages.new_work.deliveryDateContainer()
+			.element(by.model("date.day"))
+	);
+};
 module.exports.includeWorkOnWebsiteButtons = function() {
 	return element.all(by.model("work.include_on_website"));
 };
@@ -200,6 +254,36 @@ module.exports.selectedMusicLibrary = function() {
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
+module.exports.enteredCreationYear = function() {
+	var element = pages.new_work.creationYearInput();
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
+module.exports.enteredCreationMonth = function() {
+	var element = pages.new_work.creationMonthInput();
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
+module.exports.enteredCreationDay = function() {
+	var element = pages.new_work.creationDayInput();
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
+module.exports.enteredDeliveryYear = function() {
+	var element = pages.new_work.deliveryYearInput();
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
+module.exports.enteredDeliveryMonth = function() {
+	var element = pages.new_work.deliveryMonthInput();
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
+module.exports.enteredDeliveryDay = function() {
+	var element = pages.new_work.deliveryDayInput();
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
 // Data input.
 module.exports.enterPrimaryWorkTitle = function(title) {
 	var element = pages.new_work.primaryWorkTitleInput();
@@ -215,6 +299,42 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 };
 module.exports.enterContributionPercentage = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterCreationYear = function(value) {
+	var element = pages.new_work.creationYearInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterCreationMonth = function(value) {
+	var element = pages.new_work.creationMonthInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterCreationDay = function(value) {
+	var element = pages.new_work.creationDayInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterDeliveryYear = function(value) {
+	var element = pages.new_work.deliveryYearInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterDeliveryMonth = function(value) {
+	var element = pages.new_work.deliveryMonthInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterDeliveryDay = function(value) {
+	var element = pages.new_work.deliveryDayInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
