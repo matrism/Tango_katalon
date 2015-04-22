@@ -55,6 +55,14 @@ module.exports.creatorContributionInput = function(index) {
 			.element(by.model("creator.contribution"))
 	);
 };
+module.exports.contributionRequiredMessage = function(i) {
+	return (
+		pages.new_work.creatorContributionRow(i)
+			.element(by.cssContainingText(
+				".validation-message-text", "Contribution is required"
+			))
+	);
+};
 module.exports.contributionTotalBinding = function() {
 	return element(by.binding("getContributionTotalFor(work) | number:3"));
 };

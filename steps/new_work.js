@@ -38,6 +38,13 @@ module.exports.validateDefaultCreatorRole = function(i) {
 		}
 	);
 };
+module.exports.ensureContributionRequiredMessageIsDisplayed = function(i) {
+	it("Ensure contribution required message is displayed", function() {
+		expect(pages.base.isPresentAndDisplayed(
+			pages.new_work.contributionRequiredMessage(i)
+		)).toBeTruthy();
+	});
+};
 module.exports.validateCreatorContributionInputMask = function(i, validationTable) {
 	it("Validate creator contribution input mask", function() {
 		validationTable = validationTable || {
@@ -74,16 +81,6 @@ module.exports.validateTotalContribution = function() {
 			expect(pages.new_work.totalContribution()).toBe(100);
 		}
 	);
-};
-module.exports.ensureNoTotalContributionValidationErrorsAreDisplayed = function() {
-	it("Ensure no total contribution validation errors are displayed", function() {
-		expect(pages.base.isNotPresentOrDisplayed(
-			pages.new_work.totalContributionTooLowMessage()
-		)).toBeTruthy();
-		expect(pages.base.isNotPresentOrDisplayed(
-			pages.new_work.totalContributionTooHighMessage()
-		)).toBeTruthy();
-	});
 };
 module.exports.validateDefaultMusicalDistributionCategory = function() {
 	it (
@@ -473,7 +470,7 @@ module.exports.createBasicWork = function(data) {
 						var lastOne = (i === howMany - 1);
 						steps.new_work.validateDefaultCreatorRole(i);
 						creator.name = steps.new_work.selectRandomCreator(i);
-						creator.contribution = 100 / howMany;
+						steps.new_work.ensureContributionRequiredMessageIsDisplayed();
 						steps.new_work.validateCreatorContributionInputMask(i);
 						if(firstOne) {
 							steps.new_work.enterMediumCreatorContribution(i);
@@ -483,6 +480,7 @@ module.exports.createBasicWork = function(data) {
 							steps.new_work.enterMaximumCreatorContribution(i);
 							steps.new_work.ensureTotalContributionTooHighMessageIsDisplayed();
 						}
+						creator.contribution = 100 / howMany;
 						steps.new_work.enterCreatorContribution(i, creator.contribution);
 						if(howMany > 1 && !firstOne && !lastOne) {
 							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
@@ -491,7 +489,6 @@ module.exports.createBasicWork = function(data) {
 					}
 				);
 				steps.new_work.validateTotalContribution();
-				steps.new_work.ensureNoTotalContributionValidationErrorsAreDisplayed();
 				return creators;
 			})();
 
