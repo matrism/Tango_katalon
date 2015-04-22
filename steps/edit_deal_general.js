@@ -203,10 +203,10 @@ module.exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
             steps.edit_deal_general.removeInternalContactsRowI(i);
             //browser.driver.waitForAngular();
             //browser.executeScript("$('.modal').removeClass('fade');");
-            steps.base.scrollIntoView("Modal dialog", pages.edit_deal_general.yesModalDialog());
+            //steps.base.scrollIntoView("Modal dialog", pages.edit_deal_general.yesModalDialog());
             //browser.driver.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.modalDialog()));
             steps.edit_deal_general.confirmModalDialog();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactRoleInputField()));
+            //browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactRoleInputField()));
             //browser.driver.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.modalDialog()));
         }
     );
