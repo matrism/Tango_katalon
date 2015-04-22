@@ -27,6 +27,9 @@ module.exports.isPresentAndDisplayed = function(element) {
 		return element.isDisplayed();
 	});
 };
+module.exports.isNotPresentOrDisplayed = function(element) {
+	return pph.not(pages.base.isPresentAndDisplayed(element));
+};
 module.exports.selectRandomDropdownOption = function(element, more) {
 	more = more || {};
 	more.dropdownType = more.dropdownType || "standard";

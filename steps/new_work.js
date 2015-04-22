@@ -38,12 +38,36 @@ module.exports.validateDefaultCreatorRole = function(i) {
 		}
 	);
 };
+module.exports.ensureTotalContributionTooLowMessageIsDisplayed = function() {
+	it("Ensure 'Total contribution is less than 100%' message is displayed", function() {
+		expect(pages.base.isPresentAndDisplayed(
+			pages.new_work.totalContributionTooLowMessage()
+		)).toBeTruthy();
+	});
+};
+module.exports.ensureTotalContributionTooHighMessageIsDisplayed = function() {
+	it("Ensure 'Total contribution is more than 100%' message is displayed", function() {
+		expect(pages.base.isPresentAndDisplayed(
+			pages.new_work.totalContributionTooHighMessage()
+		)).toBeTruthy();
+	});
+};
 module.exports.validateTotalContributionPercentage = function() {
 	it (
 		"Validate total contribution", function() {
 			expect(pages.new_work.totalContribution()).toBe(100);
 		}
 	);
+};
+module.exports.ensureNoTotalContributionValidationErrorsAreDisplayed = function() {
+	it("Ensure no total contribution validation errors are displayed", function() {
+		expect(pages.base.isNotPresentOrDisplayed(
+			pages.new_work.totalContributionTooLowMessage()
+		)).toBeTruthy();
+		expect(pages.base.isNotPresentOrDisplayed(
+			pages.new_work.totalContributionTooHighMessage()
+		)).toBeTruthy();
+	});
 };
 module.exports.validateDefaultMusicalDistributionCategory = function() {
 	it (
@@ -156,6 +180,20 @@ module.exports.selectRandomCreator = function(i) {
 		}
 	);
 	return deferred.promise;
+};
+module.exports.enterMaximumCreatorContribution = function(i) {
+	it (
+		"Enter 100% contribution percentage for creator #" + (i + 1), function() {
+			pages.new_work.enterContributionPercentage(i, 100);
+		}
+	);
+};
+module.exports.enterMediumCreatorContribution = function(i) {
+	it (
+		"Enter 50% contribution percentage for creator #" + (i + 1), function() {
+			pages.new_work.enterContributionPercentage(i, 50);
+		}
+	);
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	it (
@@ -415,14 +453,28 @@ module.exports.createBasicWork = function(data) {
 				var creators = _.times (
 					howMany, function(i) {
 						var creator = {};
+						var firstOne = (i === 0);
+						var lastOne = (i === howMany - 1);
 						steps.new_work.validateDefaultCreatorRole(i);
 						creator.name = steps.new_work.selectRandomCreator(i);
 						creator.contribution = 100 / howMany;
+						if(firstOne) {
+							steps.new_work.enterMediumCreatorContribution(i);
+							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+						}
+						if(howMany > 1 && lastOne) {
+							steps.new_work.enterMaximumCreatorContribution(i);
+							steps.new_work.ensureTotalContributionTooHighMessageIsDisplayed();
+						}
 						steps.new_work.enterCreatorContribution(i, creator.contribution);
+						if(howMany > 1 && !firstOne && !lastOne) {
+							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+						}
 						return creator;
 					}
 				);
 				steps.new_work.validateTotalContributionPercentage();
+				steps.new_work.ensureNoTotalContributionValidationErrorsAreDisplayed();
 				return creators;
 			})();
 

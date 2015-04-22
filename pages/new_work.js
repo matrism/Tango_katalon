@@ -58,6 +58,16 @@ module.exports.creatorContributionInput = function(index) {
 module.exports.contributionTotalBinding = function() {
 	return element(by.binding("getContributionTotalFor(work) | number:3"));
 };
+module.exports.totalContributionTooLowMessage = function() {
+	return element(by.cssContainingText(
+		".validation-message-text", "Total contribution is less than 100%"
+	));
+};
+module.exports.totalContributionTooHighMessage = function() {
+	return element(by.cssContainingText(
+		".validation-message-text", "Total contribution is more than 100%"
+	));
+};
 module.exports.musicalDistributionCategoryDropdown = function() {
 	return element(by.model("work.musical_work_distribution_category"));
 };
