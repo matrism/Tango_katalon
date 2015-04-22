@@ -42,7 +42,7 @@ module.exports.returnAndCheckFirstInternalContactsValues = function () {
     it("Return first internal contacts values added ", function () {
         element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[2]")).getText().
             then(function (promise) {
-                console.log("First internal Contacts values added: " + promise);
+                //console.log("First internal Contacts values added: " + promise);
                 expect(promise).not.toEqual("");
                 internalContacts[1] = promise + "\n";
             });
@@ -53,7 +53,7 @@ module.exports.returnAndCheckInternalContactsValues = function (i) {
     it("Return second third... the rest of internal contacts values added ", function () {
         element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[" + (i + 1) + "]")).getText().
             then(function (promise) {
-                console.log("Internal Contacts values added: " + promise);
+                //console.log("Internal Contacts values added: " + promise);
                 expect(promise).not.toEqual("");
                 internalContacts[i] = promise + "\n";
             });
@@ -64,7 +64,7 @@ module.exports.returnAndCheckAddInternalContactsLinkPresent = function () {
     it("Return add internal contacts link text ", function () {
         element(By.css("div.add-new-button.ng-scope button.btn.btn-link")).getText().
             then(function (promise) {
-                console.log("Add Internal Contacts list is present and it's name is: " + promise);
+                //console.log("Add Internal Contacts list is present and it's name is: " + promise);
                 expect(promise).toEqual("Add External Contact");
             });
     });
@@ -129,6 +129,12 @@ module.exports.removeInternalContactsRoleRowI = function (i) {
     });
 };
 
+module.exports.removeInternalContactsRow = function () {
+    it("Remove internal contact row", function () {
+        pages.edit_deal_general.removeEditInternalContactsRow();
+    });
+};
+
 module.exports.removeInternalContactsRowI = function (i) {
     it("Remove internal contact row i", function () {
         pages.edit_deal_general.removeEditInternalContactsRowI(i);
@@ -137,13 +143,23 @@ module.exports.removeInternalContactsRowI = function (i) {
 
 module.exports.confirmModalDialog = function () {
     it("Confirm modal dialog action", function () {
+        browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.yesModalDialog()));
         pages.edit_deal_general.clickOnYesModalDialog();
+        browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.yesModalDialog()));
+    });
+};
+
+module.exports.expectSaveEditInternalContactButtonPresent = function () {
+    it("Expect save edit internal contact button present", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.saveEditInternalContactsButton()));
     });
 };
 
 module.exports.cancelModalDialog = function () {
     it("Cancel modal dialog action", function () {
+        browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.noModalDialog()));
         pages.edit_deal_general.clickOnNoModalDialog();
+        browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.modalDialog()));
     });
 };
 
@@ -179,7 +195,7 @@ module.exports.itEditAndRemoveInternalContactsRowIToDealGeneralTab = function (i
     );
 };
 
-module.exports.itEditWithoutRemoveInternalContactsRowIToDealGeneralTab = function (i) {
+module.exports.itEditAddInternalContactsRowIToDealGeneralTab = function (i) {
     describe("Edit - internal contacts in deals general tab", function () {
             steps.edit_deal_general.editInternalContactsFieldRowI(i);
             steps.edit_deal_general.selectEditRandomInternalContactDropDown();
@@ -197,17 +213,19 @@ module.exports.itEditAddInternalContactsRoleRowIToDealGeneralTab = function (i) 
     );
 };
 
+module.exports.itRemoveFirstInternalContactsRowToDealGeneralTab = function () {
+    describe("Remove first internal contacts row in deals general tab", function () {
+            steps.edit_deal_general.removeInternalContactsRow();
+            steps.edit_deal_general.confirmModalDialog();
+            steps.edit_deal_general.expectSaveEditInternalContactButtonPresent();
+        }
+    );
+};
 
 module.exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
     describe("Remove internal contacts row  i in deals general tab", function () {
             steps.edit_deal_general.removeInternalContactsRowI(i);
-            //browser.driver.waitForAngular();
-            //browser.executeScript("$('.modal').removeClass('fade');");
-            //steps.base.scrollIntoView("Modal dialog", pages.edit_deal_general.yesModalDialog());
-            //browser.driver.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.modalDialog()));
             steps.edit_deal_general.confirmModalDialog();
-            //browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactRoleInputField()));
-            //browser.driver.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.modalDialog()));
         }
     );
 };

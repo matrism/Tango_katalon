@@ -18,7 +18,7 @@ var beforeFeature = function () {
 
     feature = [{
         name: "Create view and edit internal contact deal",
-        tags: ["internal_contacts"],
+        tags: ["create_edit_internal_contacts"],
         steps: function () {
 
             //var i=2;
@@ -66,7 +66,7 @@ var beforeFeature = function () {
 
 feature = [{
     name: "Create edit and view simple flow internal contact",
-    tags: ["internal_simple"],
+    tags: ["create_edit_delete_internal_contacts"],
     steps: function () {
         var i = 2;
         //create a deal with 1 internal contact
@@ -87,7 +87,7 @@ feature = [{
         steps.edit_deal_general.returnAndCheckAddInternalContactsLinkPresent();
         steps.edit_deal_general.printInternalContactList();
         steps.edit_deal_general.editInternalContactsArea();
-        steps.edit_deal_general.itEditWithoutRemoveInternalContactsRowIToDealGeneralTab(i);
+        steps.edit_deal_general.itEditAddInternalContactsRowIToDealGeneralTab(i);
         steps.edit_deal_general.itEditAddInternalContactsRoleRowIToDealGeneralTab(i);
         //save internal contacts and check on view mode
         steps.edit_deal_general.itSaveInternalContactsChanges();
@@ -99,12 +99,42 @@ feature = [{
         steps.edit_deal_general.printInternalContactList();
         //delete both internal contacts
         steps.edit_deal_general.editInternalContactsArea();
-        steps.edit_deal_general.itRemoveInternalContactsRowIToDealGeneralTab(i);
+        steps.edit_deal_general.itRemoveFirstInternalContactsRowToDealGeneralTab();
+        steps.edit_deal_general.itRemoveFirstInternalContactsRowToDealGeneralTab();
         steps.edit_deal_general.itSaveInternalContactsChanges();
-        //steps.edit_deal_general.returnAndCheckInternalContactsTitle();
-        //steps.edit_deal_general.returnAndCheckFirstInternalContactsValues();
+        steps.edit_deal_general.returnAndCheckInternalContactsTitle();
+        //add 2 internal contacts
+        steps.edit_deal_general.editInternalContactsArea();
+        for(j=1; j<=2; j++) {
+            steps.edit_deal_general.itEditAddInternalContactsRowIToDealGeneralTab(j);
+        }
+        steps.edit_deal_general.itSaveInternalContactsChanges();
+        steps.edit_deal_general.returnAndCheckInternalContactsTitle();
+        steps.edit_deal_general.returnAndCheckInternalContactsHeaderTable();
+        steps.edit_deal_general.returnAndCheckAddInternalContactsLinkPresent();
+        steps.edit_deal_general.returnAndCheckInternalContactsValues(i);
+        steps.edit_deal_general.printInternalContactList();
     }
 }];
+
+
+//feature = [{
+//    name: "Dirty check flow internal contact",
+//    tags: ["dirty_check_internal_contacts"],
+//    steps: function () {
+//        steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+//        steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.internalContactsInputField());
+//        steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+//        steps.deal.itContinueToNextPage();
+//        steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+//        steps.deal.itContinueToNextPage();
+//        steps.deal.saveDeal();
+//        steps.deal.waitForDealToBeSaved();
+//        steps.deal.returnDealNumber();
+//        steps.deal.goToGeneralDealTabDetails();
+//    }
+//}];
+
 
 module.exports = {
     commonFeatureTags: ["deal_internal_contacts"],

@@ -53,8 +53,8 @@ module.exports.removeInternalContactRoleInputField = function () {
     return element(By.css("div[data-ng-model='internalContact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"));
 };
 
-module.exports.removeInternalContact = function(){
-    return element(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(1) button[data-ng-click='removeInternalContact(internalContacts.contacts, internalContact)'])"));
+module.exports.removeInternalContactsElement = function(){
+    return element(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(1) button[data-ng-click='removeInternalContact(internalContacts.contacts, internalContact)']"));
 };
 
 module.exports.modalDialog = function(){
@@ -131,12 +131,14 @@ module.exports.removeEditInternalContactRole = function(){
     pages.edit_deal_general.removeInternalContactRoleInputField().click();
 };
 
-
-module.exports.removeEditInternalContactsRowI = function (i) {
-    var element= browser.findElement(By.xpath("//*[@data-tg-modular-edit='internalContacts']/div[2]/div[1]/div[" + i + "]/button[@data-ng-click='removeInternalContact(internalContacts.contacts, internalContact)']"));
-    element.click();
+module.exports.removeEditInternalContactsRow = function () {
+    pages.edit_deal_general.removeInternalContactsElement().click();
 };
 
+module.exports.removeEditInternalContactsRowI = function (i) {
+    var element = browser.findElement(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") button[data-ng-click='removeInternalContact(internalContacts.contacts, internalContact)']"));
+    element.click();
+};
 
 module.exports.clickOnYesModalDialog = function(){
     pages.edit_deal_general.yesModalDialog().click();
