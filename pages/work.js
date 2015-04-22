@@ -106,6 +106,12 @@ module.exports.editLyricAdaptationField = function() {
 module.exports.editMusicArrangementField = function() {
 	return element(by.model("assetTypeEdit.model.music_arrangement_type"));
 };
+module.exports.cancelAssetTypeEditingButton = function() {
+	return (
+		pages.work.assetTypeContainer()
+			.element(by.cssContainingText("button", "Cancel"))
+	);
+};
 module.exports.saveAssetTypeButton = function() {
 	return (
 		pages.work.assetTypeContainer()
@@ -119,6 +125,12 @@ module.exports.editWorkOriginButton = function() {
 	return (
 		pages.work.workOriginContainer()
 			.$("[data-ng-click='$$modularScope.showEdit()']")
+	);
+};
+module.exports.cancelWorkOriginEditingButton = function() {
+	return (
+		pages.work.workOriginContainer()
+			.element(by.cssContainingText("button", "Cancel"))
 	);
 };
 module.exports.saveWorkOriginButton = function() {
@@ -210,6 +222,16 @@ module.exports.workInclusionOnWebsite = function() {
 		function(text) {
 			return (text.indexOf("is included") !== -1);
 		}
+	);
+};
+module.exports.selectedMusicalDistributionCategory = function() {
+	return pages.base.selectedDropdownOption(
+		pages.work.editMusicalDistributionCategoryField()
+	);
+};
+module.exports.selectedIntendedPurpose = function() {
+	return pages.base.selectedTgDropdownOption(
+		pages.work.editIntendedPurposeField()
 	);
 };
 module.exports.selectedWorkInclusionOnWebsiteOption = function() {
