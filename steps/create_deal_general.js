@@ -50,6 +50,7 @@ module.exports.selectContractingParty = function () {
 module.exports.fillIntoInternalContactField = function (internal_contact) {
     it("Fill into internal contact field", function () {
             pages.create_deal_general.fillIntoInternalContactsField(internal_contact);
+            browser.sleep(2000);
         }
     );
 };
@@ -93,7 +94,7 @@ module.exports.itFillDealMandatoryFieldsGeneralTab = function () {
 };
 
     module.exports.itAddInternalContactsToDealGeneralTab = function (internal_contact) {
-        describe("Add internal contacts in deals general tab", function () {
+        describe("Add first internal contacts in deals general tab", function () {
                 steps.create_deal_general.fillIntoInternalContactField(internal_contact);
                 steps.create_deal_general.selectRandomInternalContactDropDown();
                 steps.create_deal_general.clickOnInternalContactRole();

@@ -126,7 +126,9 @@ module.exports.removeInternalContactsRole = function () {
 module.exports.removeInternalContactsRoleRowI = function (i) {
     it("Remove internal contact role row i", function () {
         pages.edit_deal_general.removeEditInternalContactsRoleRowI(i);
-    });
+        //browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div.internal-contact__col.m-role i.internal-contact__error.fa.fa-exclamation-triangle.ng-scope"))));
+        browser.wait(ExpectedConditions.elementToBeClickable(element(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div div[data-ng-model='internalContact.roles'] div div div div div input[ng-model='$term']"))));
+     });
 };
 
 module.exports.removeInternalContactsRow = function () {
@@ -193,18 +195,18 @@ module.exports.itEditInternalContactsToDealGeneralTab = function (internal_conta
 
 
 module.exports.itEditAndRemoveInternalContactsRowIToDealGeneralTab = function (i) {
-    describe("Edit - internal contacts in deals general tab", function () {
+    describe("Edit - internal contacts  remove and add role in deals general tab", function () {
             steps.edit_deal_general.editInternalContactsFieldRowI(i);
             steps.edit_deal_general.selectEditRandomInternalContactDropDown();
             steps.edit_deal_general.removeInternalContactsRoleRowI(i);
-            steps.edit_deal_general.clickEditInternalContactsRoleRowI(i);
+            steps.edit_deal_general.clickEditInternalContactRoleRowI(i);
             steps.edit_deal_general.selectEditRandomInternalContactDropDown();
         }
     );
 };
 
 module.exports.itEditAddInternalContactsRowIToDealGeneralTab = function (i) {
-    describe("Edit - internal contacts in deals general tab", function () {
+    describe("Edit - internal contacts edit values in deals general tab", function () {
             steps.edit_deal_general.editInternalContactsFieldRowI(i);
             steps.edit_deal_general.selectEditRandomInternalContactDropDown();
             steps.edit_deal_general.clickEditInternalContactRoleRowI(i);
@@ -214,7 +216,7 @@ module.exports.itEditAddInternalContactsRowIToDealGeneralTab = function (i) {
 };
 
 module.exports.itEditAddInternalContactsRoleRowIToDealGeneralTab = function (i) {
-    describe("Edit - internal contacts in deals general tab", function () {
+    describe("Edit - internal contacts edit roles in deals general tab", function () {
             steps.edit_deal_general.clickEditInternalContactRoleRowI(i);
             steps.edit_deal_general.selectEditRandomInternalContactDropDown();
         }

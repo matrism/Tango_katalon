@@ -9,19 +9,19 @@ module.exports = pages.create_deal_general = new ftf.pageObject({
 
 // Locator.
 module.exports.dealSigningTerritoryPopup = function () {
-    return element(by.css('button.openPopupButton'));
+    return element(By.css('button.openPopupButton'));
 };
 
 module.exports.dealSigningTerritoryDropDownData = function () {
-    return element(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"));
+    return element(By.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"));
 };
 
 module.exports.contractingPartiesInput = function () {
-    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+    return element(By.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
 module.exports.contractingPartiesField = function () {
-    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"));
+    return element(By.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"));
 };
 
 module.exports.internalContactsInputField = function () {
@@ -33,7 +33,7 @@ module.exports.internalContactsDropDownData = function () {
 };
 
 module.exports.internalContactRoleInputField = function () {
-    return element(by.css("div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+    return element(By.css("div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
 
@@ -97,6 +97,7 @@ module.exports.selectRandomInternalContactsFromDropDown = function () {
         .then(function (options) {
             var randomNumber = Math.floor((Math.random() * options.length));
             options[randomNumber].click();
+            browser.sleep(1000);
         })
 };
 
@@ -105,10 +106,12 @@ module.exports.clickOnInternalContactsRole = function () {
 };
 
 module.exports.fillIntoTheIRowInternalContactField = function (i) {
-    browser.findElement(By.xpath("//*[@class='span7 nomargins']/div[" + i + "]/div[1]/div[@data-ng-model='internalContact.contact']/div/div/div[1]/div/div[2]/input[@ng-model='$term']")).sendKeys("test");
+    var element = browser.findElement(By.css("div.span7.nomargins div:nth-child(" + i + ") div div[data-ng-model='internalContact.contact'] div div div div div input[ng-model='$term']"));
+    element.sendKeys("test");
 };
 
 
 module.exports.clickIntoInternalContactsRoleRowI = function (i) {
-    browser.findElement(By.xpath("//*[@class='span7 nomargins']/div[" + i + "]/div[2]/div[@data-ng-model='internalContact.roles']/div/div/div[2]/div/div[2]/input[@ng-model='$term']")).click();
+    var element = browser.findElement(By.css("div.span7.nomargins div:nth-child(" + i + ") div div[data-ng-model='internalContact.roles'] div div div div div input[ng-model='$term']"));
+    element.click();
 };

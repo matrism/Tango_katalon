@@ -19,6 +19,7 @@ module.exports.endTargetMonths = function () {
 
 
 
+
 //methods
 module.exports.fillStartActualDate = function () {
     pages.create_deal_contract_period.startDate().sendKeys("2015-03-12");

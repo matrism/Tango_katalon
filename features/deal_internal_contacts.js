@@ -48,8 +48,8 @@ var beforeFeature = function () {
 
             steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("a");
             for (var i = 2; i <= 4; i++) {
-                steps.edit_deal_general.itEditAddInternalContactsRowIToDealGeneralTab(i);
-                //steps.edit_deal_general.itEditAndRemoveInternalContactsRowIToDealGeneralTab(i);
+                //steps.edit_deal_general.itEditAddInternalContactsRowIToDealGeneralTab(i);
+                steps.edit_deal_general.itEditAndRemoveInternalContactsRowIToDealGeneralTab(i);
             }
             steps.edit_deal_general.itSaveInternalContactsChanges();
 
@@ -63,10 +63,7 @@ var beforeFeature = function () {
             steps.edit_deal_general.printInternalContactList();
         }
     },
-        //}];
 
-
-//feature = [{
         {
             name: "Create edit and view simple flow internal contact",
             tags: ["create_edit_delete_internal_contacts"],
@@ -120,7 +117,6 @@ var beforeFeature = function () {
             }
         },
 
-//feature = [{
         {
             name: "Dirty check flow internal contact",
             tags: ["dirty_check_internal_contacts"],
