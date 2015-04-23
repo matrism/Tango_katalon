@@ -1,5 +1,6 @@
 "use strict";
 var pages_path = _tf_config._system_.path_to_pages;
+var pph = require("../helpers/pph");
 var randomId = require("../helpers/randomId");
 var promise = protractor.promise;
 require(pages_path + "work");
@@ -70,6 +71,16 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 		}
 	);
 	return deferred.promise;
+};
+module.exports.waitTitleEditorCheckForDuplicates = function() {
+	it("Wait title editor check for duplicates", function() {
+		browser.wait(
+			function() {
+				return pph.not(pages.work.isTitleEditorCheckingForDuplicates());
+			},
+			_tf_config._system_.wait_timeout
+		);
+	});
 };
 module.exports.cancelWorkTitlesEditing = function() {
 	steps.base.clickElement (
@@ -473,6 +484,7 @@ module.exports.editBasicWork = function(data, more) {
 				steps.work.hoverPrimaryWorkTitleHeading();
 				steps.work.editWorkTitles();
 				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
+				steps.work.waitTitleEditorCheckForDuplicates();
 				steps.work.cancelWorkTitlesEditing();
 				steps.base.dirtyCheckConfirmCancellation();
 				steps.work.hoverPrimaryWorkTitleHeading();
@@ -480,6 +492,7 @@ module.exports.editBasicWork = function(data, more) {
 				steps.work.expectPrimaryWorkTitleFieldValueNotToBe(data.primaryWorkTitle);
 
 				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
+				steps.work.waitTitleEditorCheckForDuplicates();
 				steps.work.cancelWorkTitlesEditing();
 				steps.base.dirtyCheckContinueEditing();
 				steps.work.expectPrimaryWorkTitleFieldValueToBe(data.primaryWorkTitle);
@@ -576,6 +589,7 @@ module.exports.editBasicWork = function(data, more) {
 };
 module.exports.validateWork = function(data, more) {
 	more = more || {};
+
 	more.skip = more.skip || {};
 	//more.skip.navigation = true;
 	//more.skip.workTitles = true;
@@ -583,6 +597,7 @@ module.exports.validateWork = function(data, more) {
 	//more.skip.assetType = true;
 	//more.skip.workOrigin = true;
 	//more.skip.inclusionOnWebsite = true;
+
 	describe (
 		"Validate work data", function() {
 			if(!more.skip.navigation && data.workId) {

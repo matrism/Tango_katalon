@@ -38,14 +38,14 @@ workData = {
 };
 
 var feature = [
-	//{
-		//name: "New basic work",
-		//tags: ["create"],
-		//steps: [
-			//[steps.new_work.createBasicWork, [workData]],
-			//[steps.work.validateWork, [workData]],
-		//]
-	//},
+	{
+		name: "New basic work",
+		tags: ["create"],
+		steps: [
+			[steps.new_work.createBasicWork, [workData]],
+			[steps.work.validateWork, [workData]],
+		]
+	},
 	{
 		name: "Edit basic work",
 		tags: ["edit"],

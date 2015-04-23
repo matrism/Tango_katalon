@@ -67,6 +67,9 @@ module.exports.editAlternateWorkTitleField = function(i) {
 			.element(by.model("altTitle.title"))
 	);
 };
+module.exports.titleEditorCheckingForDuplicatesMessage = function() {
+	return $(".title-edit [data-ng-show='show.requests.checkDuplicates']");
+};
 module.exports.cancelWorkTitlesEditingButton = function() {
 	return (
 		pages.work.editWorkTitlesContainer()
@@ -269,6 +272,11 @@ module.exports.alternateWorkTitles = function() {
 		}
 	);
 	return deferred.promise;
+};
+module.exports.isTitleEditorCheckingForDuplicates = function() {
+	return pages.base.isPresentAndDisplayed(
+		pages.work.titleEditorCheckingForDuplicatesMessage()
+	);
 };
 module.exports.workInclusionOnWebsite = function() {
 	var element = pages.work.workInclusionOnWebsiteParagraph();
