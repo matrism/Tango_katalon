@@ -269,8 +269,13 @@ module.exports.expectPrimaryWorkTitleFieldValueNotToBe = function(title) {
 };
 module.exports.validatePrimaryWorkTitle = function(title) {
 	it (
-		"Validate primary work title", function() {
-			expect(pages.work.primaryWorkTitle()).toBe(title);
+		"Validate primary work title (if validation value is not empty)", function() {
+			promise.when(title).then(function(title) {
+				if(!title) {
+					return;
+					expect(pages.work.primaryWorkTitle()).toBe(title);
+				}
+			});
 		}
 	);
 };
@@ -290,10 +295,115 @@ module.exports.validateCreatorName = function(name) {
 };
 module.exports.validateCreatorContributionByName = function(name, percentage) {
 	it (
-		"Validate creator contribution percentage", function() {
-			expect(pages.work.creatorContributionByName(name)).toBe(percentage);
+		"Validate creator contribution percentage (if validation value is not empty)", function() {
+			promise.when(percentage).then(function(percentage) {
+				if(!percentage) {
+					return;
+				}
+				expect(pages.work.creatorContributionByName(name)).toBe(percentage);
+			});
 		}
 	);
+};
+module.exports.validateMusicalDistributionCategory = function(value) {
+	it("Validate musical distribution category (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.musicalDistributionCategory()).toBe(value);
+		});
+	});
+};
+module.exports.validateTextMusicRelationship = function(value) {
+	it("Validate text music relationship (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.textMusicRelationship()).toBe(value);
+		});
+	});
+};
+module.exports.validateExcerptType = function(value) {
+	it("Validate excerpt type (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.excerptType()).toBe(value);
+		});
+	});
+};
+module.exports.validateVersionType = function(value) {
+	it("Validate version type (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.versionType()).toBe(value);
+		});
+	});
+};
+module.exports.validateLyricAdaptation = function(value) {
+	it("Validate lyric adaptation (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.lyricAdaptation()).toBe(value);
+		});
+	});
+};
+module.exports.validateMusicArrangement = function(value) {
+	it("Validate music arrangement (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.musicArrangement()).toBe(value);
+		});
+	});
+};
+module.exports.validateIntendedPurpose = function(value) {
+	it("Validate intended purpose (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.intendedPurpose()).toBe(value);
+		});
+	});
+};
+module.exports.validateProductionTitle = function(value) {
+	it("Validate production title (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.productionTitle()).toBe(value);
+		});
+	});
+};
+module.exports.validateBltvr = function(value) {
+	it("Validate BLTVR (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.bltvr()).toBe(value);
+		});
+	});
+};
+module.exports.validateMusicLibrary = function(value) {
+	it("Validate music library (if validation value is not empty)", function() {
+		promise.when(value).then(function(value) {
+			if(!value) {
+				return;
+			}
+			expect(pages.work.musicLibrary()).toBe(value);
+		});
+	});
 };
 module.exports.expectMusicalDistributionCategoryToBe = function(value) {
 	it("Validate selected musical distribution category", function() {
@@ -331,26 +441,35 @@ module.exports.expectWorkInclusionOnWebsiteOptionNotToBe = function(include) {
 };
 module.exports.validateIncludeWorkOnWebsite = function(include) {
 	it (
-		"Validate 'Include work on website' option", function() {
-			expect(pages.work.workInclusionOnWebsite()).toBe(include);
+		"Validate 'Include work on website' option (if validation value is not empty)", function() {
+			promise.when(include).then(function(include) {
+				if(include === undefined || include === null) {
+					return;
+				}
+				expect(pages.work.workInclusionOnWebsite()).toBe(include);
+			});
 		}
 	);
 };
 // Flow.
-module.exports.editBasicWork = function(data) {
-	var debugSkip = [
-		//"work titles",
-		//"asset type",
-		//"work origin",
-		//"inclusion on website",
-	];
+module.exports.editBasicWork = function(data, more) {
+	more = more || {};
+
+	more.skip = more.skip || {};
+	//more.skip.navigation = true;
+	//more.skip.workTitles = true;
+	//more.skip.creators = true;
+	//more.skip.assetType = true;
+	//more.skip.workOrigin = true;
+	//more.skip.inclusionOnWebsite = true;
+
 	describe (
 		"Edit basic work", function() {
-			if(data.workId) {
+			if(!more.skip.navigation && data.workId) {
 				steps.work.goToWorkPage(data.workId);
 			}
 
-			if(debugSkip.indexOf("work titles") === -1) {
+			if(!more.skip.workTitles) {
 				steps.work.hoverPrimaryWorkTitleHeading();
 				steps.work.editWorkTitles();
 				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
@@ -376,7 +495,7 @@ module.exports.editBasicWork = function(data) {
 				steps.work.saveWorkTitles();
 			}
 
-			if(debugSkip.indexOf("asset type") === -1) {
+			if(!more.skip.assetType) {
 				steps.work.hoverAssetTypeContainer();
 				steps.work.editAssetType();
 				data.musicalDistributionCategory = (
@@ -413,7 +532,7 @@ module.exports.editBasicWork = function(data) {
 				steps.work.saveAssetType();
 			}
 
-			if(debugSkip.indexOf("work origin") === -1) {
+			if(!more.skip.workOrigin) {
 				steps.work.hoverWorkOriginContainer();
 				steps.work.editWorkOrigin();
 				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
@@ -435,7 +554,7 @@ module.exports.editBasicWork = function(data) {
 				steps.work.saveWorkOrigin();
 			}
 
-			if(debugSkip.indexOf("inclusion on website") === -1) {
+			if(!more.skip.inclusionOnWebsite) {
 				steps.work.hoverWorkInclusionOnWebsiteIndicator();
 				steps.work.editWorkInclusionOnWebsite();
 				data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
@@ -455,32 +574,67 @@ module.exports.editBasicWork = function(data) {
 		}
 	);
 };
-module.exports.validateWork = function(data) {
+module.exports.validateWork = function(data, more) {
+	more = more || {};
+	more.skip = more.skip || {};
+	//more.skip.navigation = true;
+	//more.skip.workTitles = true;
+	//more.skip.creators = true;
+	//more.skip.assetType = true;
+	//more.skip.workOrigin = true;
+	//more.skip.inclusionOnWebsite = true;
 	describe (
 		"Validate work data", function() {
-			if(data.workId) {
+			if(!more.skip.navigation && data.workId) {
 				steps.work.goToWorkPage(data.workId);
 			}
-			steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
-			if(data.alternateWorkTitles) {
-				data.alternateWorkTitles.forEach (
-					function(alternateWorkTitle) {
-						steps.work.validateAlternateWorkTitle(alternateWorkTitle);
-					}
-				);
-			}
-			steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
-			steps.work.goToScopeDelivery();
-			data.creators.forEach (
-				function(creator, i) {
-					describe (
-						"Validate creator #" + (i + 1), function() {
-							steps.work.validateCreatorName(creator.name);
-							steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
+
+			if(!more.skip.workTitles) {
+				steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
+
+				if(data.alternateWorkTitles) {
+					data.alternateWorkTitles.forEach (
+						function(alternateWorkTitle) {
+							steps.work.validateAlternateWorkTitle(alternateWorkTitle);
 						}
 					);
 				}
-			);
+			}
+
+			if(!more.skip.assetType) {
+				steps.work.validateMusicalDistributionCategory(data.musicalDistributionCategory);
+				steps.work.validateTextMusicRelationship(data.textMusicRelationship);
+				steps.work.validateExcerptType(data.excerptType);
+				steps.work.validateVersionType(data.versionType);
+				steps.work.validateLyricAdaptation(data.lyricAdaptation);
+				steps.work.validateMusicArrangement(data.musicArrangement);
+			}
+
+			if(!more.skip.workOrigin) {
+				steps.work.validateIntendedPurpose(data.intendedPurpose);
+				steps.work.validateProductionTitle(data.productionTitle);
+				steps.work.validateBltvr(data.bltvr);
+				steps.work.validateMusicLibrary(data.musicLibrary);
+			}
+
+			if(!more.skip.inclusionOnWebsite) {
+				steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
+			}
+
+			if(!more.skip.creators) {
+				steps.work.goToScopeDelivery();
+
+				data.creators.forEach (
+					function(creator, i) {
+						describe (
+							"Validate creator #" + (i + 1), function() {
+								steps.work.validateCreatorName(creator.name);
+								steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
+							}
+						);
+					}
+				);
+			}
 		}
 	);
 };

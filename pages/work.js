@@ -82,6 +82,61 @@ module.exports.saveWorkTitlesButton = function() {
 module.exports.assetTypeContainer = function() {
 	return $("[data-tg-modular-edit='assetTypeEdit']");
 };
+module.exports.musicalDistributionCategoryBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.musicalDistributionCategories, " +
+		"assetTypeEdit.model.musical_work_distribution_category)"
+	));
+};
+module.exports.textMusicRelationshipBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.textMusicRelationships, " +
+		"assetTypeEdit.model.text_music_relationship)"
+	));
+};
+module.exports.excerptTypeBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.excerptTypes, assetTypeEdit.model.excerpt_type)"
+	));
+};
+module.exports.versionTypeBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.versionTypes, assetTypeEdit.model.version_type)"
+	));
+};
+module.exports.lyricAdaptationBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.lyricAdaptations, " +
+		"assetTypeEdit.model.lyric_adaptation_type)"
+	));
+};
+module.exports.musicArrangementBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.musicArrangements, " +
+		"assetTypeEdit.model.music_arrangement_type)"
+	));
+};
+module.exports.intendedPurposeBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.intendedPurposes, " +
+		"workOriginEdit.model.intended_purpose)"
+	));
+};
+module.exports.productionTitleBinding = function() {
+	return element(by.binding("workOriginEdit.model.production_title.title"));
+};
+module.exports.bltvrBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.bltvrs, " +
+		"workOriginEdit.model.bltvr)"
+	));
+};
+module.exports.musicLibraryBinding = function() {
+	return element(by.binding(
+		"getAdminDataName(dataHolder.musicLibrarys, " +
+		"workOriginEdit.model.library_code)"
+	));
+};
 module.exports.editAssetTypeButton = function() {
 	return (
 		pages.work.assetTypeContainer()
@@ -272,6 +327,7 @@ module.exports.creatorNames = function(i) {
 };
 module.exports.creatorContributions = function(i) {
 	var ithElement;
+	// FIXME: Move this into its own locator.
 	var elements = (
 		$(".scope-delivery-table")
 			.all(by.binding("creator.contribution"))
@@ -308,6 +364,56 @@ module.exports.creatorContributionByName = function(name) {
 			);
 		}
 	);
+};
+module.exports.musicalDistributionCategory = function() {
+	var element = pages.work.musicalDistributionCategoryBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.textMusicRelationship = function() {
+	var element = pages.work.textMusicRelationshipBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.excerptType = function() {
+	var element = pages.work.excerptTypeBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.versionType = function() {
+	var element = pages.work.versionTypeBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.lyricAdaptation = function() {
+	var element = pages.work.lyricAdaptationBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.musicArrangement = function() {
+	var element = pages.work.musicArrangementBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.intendedPurpose = function() {
+	var element = pages.work.intendedPurposeBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.productionTitle = function() {
+	var element = pages.work.productionTitleBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.bltvr = function() {
+	var element = pages.work.bltvrBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.musicLibrary = function() {
+	var element = pages.work.musicLibraryBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
 };
 module.exports.editPrimaryWorkTitleFieldValue = function() {
 	return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
