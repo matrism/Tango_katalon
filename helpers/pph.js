@@ -68,6 +68,16 @@ pph.allInArray = function(array, values) {
 		}
 	);
 };
+pph.parseInt = function(value) {
+	return promise.when(value).then(function(value) {
+		return parseInt(value);
+	});
+};
+pph.parseFloat = function(value) {
+	return promise.when(value).then(function(value) {
+		return parseFloat(value);
+	});
+};
 pph.matchesCssSelector = function(element, selector) {
 	if(element instanceof protractor.ElementFinder) {
 		element = element.getWebElement();

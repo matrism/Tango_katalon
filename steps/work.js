@@ -97,45 +97,51 @@ module.exports.editAssetType = function() {
 	);
 };
 module.exports.selectDifferentRandomMusicalDistributionCategory  = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"musical distribution category",
 		pages.work.editMusicalDistributionCategoryField(),
 		{ different: true }
 	);
 };
 module.exports.selectDifferentRandomTextMusicRelationship  = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"text music relationship",
 		pages.work.editTextMusicRelationshipField(),
 		{ different: true }
 	);
 };
 module.exports.selectDifferentRandomExcerptType  = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"excerpt type",
 		pages.work.editExcerptTypeField(),
 		{ different: true }
 	);
 };
 module.exports.selectDifferentRandomVersionType  = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"version type",
 		pages.work.editVersionTypeField(),
 		{ different: true }
 	);
 };
 module.exports.selectDifferentRandomLyricAdaptation  = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"lyric adaptation",
 		pages.work.editLyricAdaptationField(),
 		{ skipIfNotPresent: true, different: true }
 	);
 };
 module.exports.selectDifferentRandomMusicArrangement = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"music arrangement",
 		pages.work.editMusicArrangementField(),
 		{ skipIfNotPresent: true, different: true }
+	);
+};
+module.exports.cancelAssetTypeEditing = function() {
+	steps.base.clickElement (
+		"cancel asset type editing button",
+		pages.work.cancelAssetTypeEditingButton()
 	);
 };
 module.exports.saveAssetType = function() {
@@ -157,7 +163,7 @@ module.exports.editWorkOrigin = function() {
 	);
 };
 module.exports.selectDifferentRandomIntendedPurpose = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"intended purpose",
 		pages.work.editIntendedPurposeField(),
 		{ dropdownType: "tg", different: true }
@@ -176,16 +182,22 @@ module.exports.enterRandomProductionTitle = function() {
 	return deferred.promise;
 };
 module.exports.selectDifferentRandomBltvr = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"BLTVR", pages.work.editBltvrField(),
 		{ skipIfNotPresent: true, different: true }
 	);
 };
 module.exports.selectDifferentRandomMusicLibrary = function() {
-	steps.base.selectRandomDropdownOption (
+	return steps.base.selectRandomDropdownOption (
 		"music library",
 		pages.work.editMusicLibraryField(),
 		{ dropdownType: "tg", skipIfNotPresent: true, different: true }
+	);
+};
+module.exports.cancelWorkOriginEditing = function() {
+	steps.base.clickElement (
+		"cancel work origin editing button",
+		pages.work.cancelWorkOriginEditingButton()
 	);
 };
 module.exports.saveWorkOrigin = function() {
@@ -283,6 +295,26 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 		}
 	);
 };
+module.exports.expectMusicalDistributionCategoryToBe = function(value) {
+	it("Validate selected musical distribution category", function() {
+		expect(pages.work.selectedMusicalDistributionCategory()).toBe(value);
+	});
+};
+module.exports.expectMusicalDistributionCategoryNotToBe = function(value) {
+	it("Validate selected musical distribution category", function() {
+		expect(pages.work.selectedMusicalDistributionCategory()).not.toBe(value);
+	});
+};
+module.exports.expectIntendedPurposeToBe = function(value) {
+	it("Validate selected intended purpose", function() {
+		expect(pages.work.selectedIntendedPurpose()).toBe(value);
+	});
+};
+module.exports.expectIntendedPurposeNotToBe = function(value) {
+	it("Validate selected intended purpose", function() {
+		expect(pages.work.selectedIntendedPurpose()).not.toBe(value);
+	});
+};
 module.exports.expectWorkInclusionOnWebsiteOptionToBe = function(include) {
 	it (
 		"Validate work inclusion on website option", function() {
@@ -307,7 +339,10 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 // Flow.
 module.exports.editBasicWork = function(data) {
 	var debugSkip = [
-		"work titles", "asset type", "inclusion on website",
+		//"work titles",
+		//"asset type",
+		//"work origin",
+		//"inclusion on website",
 	];
 	describe (
 		"Edit basic work", function() {
@@ -344,8 +379,32 @@ module.exports.editBasicWork = function(data) {
 			if(debugSkip.indexOf("asset type") === -1) {
 				steps.work.hoverAssetTypeContainer();
 				steps.work.editAssetType();
-				data.musicalDistributionCategory = steps.work.selectDifferentRandomMusicalDistributionCategory();
-				data.textMusicRelationship = steps.work.selectDifferentRandomTextMusicRelationship();
+				data.musicalDistributionCategory = (
+					steps.work.selectDifferentRandomMusicalDistributionCategory()
+				);
+				steps.work.cancelAssetTypeEditing();
+				steps.base.dirtyCheckConfirmCancellation();
+				steps.work.hoverAssetTypeContainer();
+				steps.work.editAssetType();
+				steps.work.expectMusicalDistributionCategoryNotToBe(
+					data.musicalDistributionCategory
+				);
+
+				data.musicalDistributionCategory = (
+					steps.work.selectDifferentRandomMusicalDistributionCategory()
+				);
+				steps.work.cancelAssetTypeEditing();
+				steps.base.dirtyCheckContinueEditing();
+				data.musicalDistributionCategory.then(function(v) {
+					console.log("cat:",v);
+				});
+				steps.work.expectMusicalDistributionCategoryToBe(
+					data.musicalDistributionCategory
+				);
+
+				data.textMusicRelationship = (
+					steps.work.selectDifferentRandomTextMusicRelationship()
+				);
 				data.excerptType = steps.work.selectDifferentRandomExcerptType();
 				data.versionType = steps.work.selectDifferentRandomVersionType();
 				data.lyricAdaptation = steps.work.selectDifferentRandomLyricAdaptation();
@@ -358,6 +417,17 @@ module.exports.editBasicWork = function(data) {
 				steps.work.hoverWorkOriginContainer();
 				steps.work.editWorkOrigin();
 				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
+				steps.work.cancelWorkOriginEditing();
+				steps.base.dirtyCheckConfirmCancellation();
+				steps.work.hoverWorkOriginContainer();
+				steps.work.editWorkOrigin();
+				steps.work.expectIntendedPurposeNotToBe(data.intendedPurpose);
+
+				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
+				steps.work.cancelWorkOriginEditing();
+				steps.base.dirtyCheckContinueEditing();
+				steps.work.expectIntendedPurposeToBe(data.intendedPurpose);
+
 				data.productionTitle = steps.work.enterRandomProductionTitle();
 				data.bltvr = steps.work.selectDifferentRandomBltvr();
 				data.musicLibrary = steps.work.selectDifferentRandomMusicLibrary();

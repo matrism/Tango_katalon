@@ -9,9 +9,6 @@ module.exports = pages.base = new ftf.pageObject ({
 	}
 });
 // Locators.
-module.exports.dirtyCheckDialogHeading = function() {
-	return $(".modal-header").element(by.cssContainingText("*", "UNSAVED EDITS"));
-};
 module.exports.dirtyCheckContinueEditingButton = function() {
 	return $(".modal-footer").element(by.cssContainingText("button", "Continue Editing"));
 };
@@ -27,10 +24,13 @@ module.exports.isPresentAndDisplayed = function(element) {
 		return element.isDisplayed();
 	});
 };
+module.exports.isNotPresentOrDisplayed = function(element) {
+	return pph.not(pages.base.isPresentAndDisplayed(element));
+};
 module.exports.selectRandomDropdownOption = function(element, more) {
 	more = more || {};
 	more.dropdownType = more.dropdownType || "standard";
-	module.exports.selectRandomDropdownOption[more.dropdownType](element, more);
+	return module.exports.selectRandomDropdownOption[more.dropdownType](element, more);
 };
 module.exports.selectRandomDropdownOption.standard = function(element, more) {
 	more = more || {};

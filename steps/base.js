@@ -1,5 +1,6 @@
 "use strict";
 var pph = require("../helpers/pph");
+var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if(steps.base === undefined) {
 	module.exports = steps.base = {};
@@ -58,7 +59,7 @@ module.exports.waitForElementToBeDisplayed = function(elName, el, wait) {
 };
 module.exports.waitForElementToBeClickable = function(elName, el, wait) {
 	it (
-		"Wait for " + elName + " to be displayed", function() {
+		"Wait for " + elName + " to be clickable", function() {
 			browser.wait (
 				ExpectedConditions.elementToBeClickable(el),
 				wait || _tf_config._system_.wait_timeout
@@ -67,6 +68,7 @@ module.exports.waitForElementToBeClickable = function(elName, el, wait) {
 	);
 };
 module.exports.selectRandomDropdownOption = function(elName, el, more) {
+	var deferred = promise.defer();
 	var notes = [];
 	if(more.skipIfNotPresent) {
 		notes.push("if present");
@@ -85,6 +87,7 @@ module.exports.selectRandomDropdownOption = function(elName, el, more) {
 			pages.base.selectRandomDropdownOption(el, more);
 		}
 	);
+	return deferred.promise;
 };
 module.exports.dirtyCheckContinueEditing = function() {
 	steps.base.clickElement (
