@@ -82,6 +82,12 @@ module.exports.saveWorkTitlesButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
+module.exports.creationDateBinding = function() {
+	return element(by.binding("work.pristine.creation_date"));
+};
+module.exports.deliveryDateBinding = function() {
+	return element(by.binding("work.pristine.delivery_date"));
+};
 module.exports.assetTypeContainer = function() {
 	return $("[data-tg-modular-edit='assetTypeEdit']");
 };
@@ -277,6 +283,16 @@ module.exports.isTitleEditorCheckingForDuplicates = function() {
 	return pages.base.isPresentAndDisplayed(
 		pages.work.titleEditorCheckingForDuplicatesMessage()
 	);
+};
+module.exports.creationDate = function() {
+	var element = pages.work.creationDateBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
+};
+module.exports.deliveryDate = function() {
+	var element = pages.work.deliveryDateBinding();
+	pages.base.scrollIntoView(element);
+	return element.getText();
 };
 module.exports.workInclusionOnWebsite = function() {
 	var element = pages.work.workInclusionOnWebsiteParagraph();

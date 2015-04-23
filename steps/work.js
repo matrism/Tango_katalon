@@ -1,5 +1,6 @@
 "use strict";
 var pages_path = _tf_config._system_.path_to_pages;
+var pad = require("pad");
 var pph = require("../helpers/pph");
 var randomId = require("../helpers/randomId");
 var promise = protractor.promise;
@@ -316,6 +317,42 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 		}
 	);
 };
+module.exports.validateCreationDate = function(year, month, day) {
+	it("Validate creation date (if first validation value is not empty)", function() {
+		promise.all([year, month, day]).then(function(values) {
+			var date;
+			var allTruthy = values.every(function(value) {
+				return !!value;
+			});
+			if(!allTruthy) {
+				return;
+			}
+			_.times(2, function(i) {
+				values[i + 1] = pad(2, values[i + 1], "0");
+			});
+			date = values.join("-");
+			expect(pages.work.creationDate()).toBe(date);
+		});
+	});
+};
+module.exports.validateDeliveryDate = function(year, month, day) {
+	it("Validate delivery date (if first validation value is not empty)", function() {
+		promise.all([year, month, day]).then(function(values) {
+			var date;
+			var allTruthy = values.every(function(value) {
+				return !!value;
+			});
+			if(!allTruthy) {
+				return;
+			}
+			_.times(2, function(i) {
+				values[i + 1] = pad(2, values[i + 1], "0");
+			});
+			date = values.join("-");
+			expect(pages.work.deliveryDate()).toBe(date);
+		});
+	});
+};
 module.exports.validateMusicalDistributionCategory = function(value) {
 	it("Validate musical distribution category (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
@@ -594,6 +631,8 @@ module.exports.validateWork = function(data, more) {
 	//more.skip.navigation = true;
 	//more.skip.workTitles = true;
 	//more.skip.creators = true;
+	//more.skip.creationDate = true;
+	//more.skip.deliveryDate = true;
 	//more.skip.assetType = true;
 	//more.skip.workOrigin = true;
 	//more.skip.inclusionOnWebsite = true;
@@ -614,6 +653,22 @@ module.exports.validateWork = function(data, more) {
 						}
 					);
 				}
+			}
+
+			if(!more.skip.creationDate) {
+				steps.work.validateCreationDate(
+					data.creationYear,
+					data.creationMonth,
+					data.creationDay
+				);
+			}
+
+			if(!more.skip.deliveryDate) {
+				steps.work.validateDeliveryDate(
+					data.deliveryYear,
+					data.deliveryMonth,
+					data.deliveryDay
+				);
 			}
 
 			if(!more.skip.assetType) {
