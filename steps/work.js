@@ -96,6 +96,35 @@ module.exports.saveWorkTitles = function() {
 		pages.work.saveWorkTitlesButton()
 	);
 };
+module.exports.hoverCreatorNamesContainer = function() {
+	steps.base.hoverElement (
+		"creator names container",
+		pages.work.creatorNamesContainer()
+	);
+};
+module.exports.editCreators = function() {
+	steps.base.clickElement (
+		"edit creators button",
+		pages.work.editCreatorsButton()
+	);
+};
+module.exports.calculateEvenCreatorContributions = function() {
+	var deferred = promise.defer();
+	it("Calculate even creator contributions", function() {
+		deferred.fulfill(pages.work.calculateEvenCreatorContributions());
+	});
+	return deferred.promise;
+};
+module.exports.selectDifferentRandomCreator = function(i) {
+	var deferred = promise.defer();
+	it("Select different random creator #" + (i + 1), function() {
+		deferred.fulfill(pages.base.selectRandomTypeaheadValue(
+			pages.work.editCreatorNameInput(i),
+			{ different: true }
+		));
+	});
+	return deferred.promise;
+};
 module.exports.hoverAssetTypeContainer = function() {
 	steps.base.hoverElement (
 		"asset type container",
@@ -536,13 +565,56 @@ module.exports.editBasicWork = function(data, more) {
 
 				steps.work.validateDefaultAlternateWorkTitleLanguage();
 
-				data.alternateWorkTitles = _.times (
+				data.alternateWorkTitles = _.times(
 					2, function(i) {
 						return steps.work.enterRandomAlternateWorkTitle(i);
 					}
 				);
 
 				steps.work.saveWorkTitles();
+			}
+
+			if(!more.skip.creators) {
+				steps.work.hoverCreatorNamesContainer();
+				steps.work.editCreators();
+
+				data.creators = (function() {
+					var howMany = 2;
+					var evenContribution = steps.calculateEvenCreatorContributions();
+
+					return _.times(
+						howMany, function(i) {
+							var creator = {};
+							var firstOne = (i === 0);
+
+							//if(firstOne) {
+								//creator.name = steps.work.selectDifferentRandomCreator(i);
+								//steps.work.waitCreatorsEditorCheckForDuplicates();
+								//steps.work.cancelCreatorsEditing();
+								//steps.base.dirtyCheckConfirmCancellation();
+								//steps.work.hoverCreatorNameList();
+								//steps.work.editCreators();
+								//steps.work.expectFirstCreatorFieldValueNotToBe(creator.name);
+							//}
+
+							creator.name = steps.work.selectDifferentRandomCreator(i);
+
+							//if(firstOne) {
+								//steps.work.waitCreatorsEditorCheckForDuplicates();
+								//steps.work.cancelCreatorsEditing();
+								//steps.base.dirtyCheckContinueEditing();
+								//steps.work.expectFirstCreatorFieldValueToBe(creator.name);
+							//}
+
+							steps.work.validateCreatorContributionInputMask(i);
+
+							creator.contribution = evenContribution;
+							steps.work.enterCreatorContribution(i, creator.contribution);
+						}
+					);
+				})();
+
+				steps.work.saveCreators();
 			}
 
 			if(!more.skip.assetType) {

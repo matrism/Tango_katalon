@@ -82,6 +82,21 @@ module.exports.saveWorkTitlesButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
+module.exports.creatorNamesContainer = function() {
+	return $(".EDITOR.creators-edit");
+};
+module.exports.editCreatorsButton = function() {
+	return $(
+		"[data-ng-click='showEdit(workHeader.creators, " +
+			"contributionEditForm)']"
+	);
+};
+module.exports.editCreatorNameInputs = function() {
+	return element.all(by.model("creator.person_name"));
+};
+module.exports.editCreatorNameInput = function(i) {
+	return pages.work.editCreatorNameInputs().get(i);
+};
 module.exports.creationDateBinding = function() {
 	return element(by.binding("work.pristine.creation_date"));
 };
@@ -283,6 +298,13 @@ module.exports.isTitleEditorCheckingForDuplicates = function() {
 	return pages.base.isPresentAndDisplayed(
 		pages.work.titleEditorCheckingForDuplicatesMessage()
 	);
+};
+module.exports.calculateEvenCreatorContributions = function() {
+	var rows = pages.work.editCreatorRows();
+	pages.base.scrollIntoView(rows.first());
+	return rows.count().then(function(count) {
+		return 100 / count;
+	});
 };
 module.exports.creationDate = function() {
 	var element = pages.work.creationDateBinding();
