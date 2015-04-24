@@ -36,8 +36,9 @@ module.exports.waitForDealToBeSaved = function () {
 
 module.exports.returnDealNumber = function () {
     it("Return deal number ", function () {
-        return pages.deal.dealBriefNumber();
         console.log("Deal number is: " + pages.deal.dealBriefNumber());
+        return pages.deal.dealBriefNumber();
+
     });
 };
 

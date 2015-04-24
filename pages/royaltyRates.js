@@ -25,7 +25,7 @@ if (pages.royaltyRates === undefined) {
             contractualRateLabel: {css: ".rate-set-rate-field>label"},
             interCompanyLabel: {css: ".rate-set-header-row:nth-child(3)>div:not([class])>label"},
 
-
+            scopeHeadingElement: {css:".scope-heading"}
 
 
 
@@ -38,6 +38,14 @@ if (pages.royaltyRates === undefined) {
         return  browser.driver.findElement(by.css(".rate-set-name-input"));
 
     },
+        scopeHeading:function()
+        {
+
+
+
+            return browser.driver.findElement(by.css(".scope-heading"));
+        }
+        ,
 
 
       clickNewRoyaltySetButton: function()
@@ -391,6 +399,39 @@ return incomeProviderInput.getText();
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
 
             RRDoneButton.click();
+
+
+        },
+
+        clickScopeHeading:function()
+
+        {
+
+
+
+
+
+                    //pages.royaltyRates.clickNewRoyaltySetButton();
+                    //
+                    //
+                    ////205511
+                    //console.log("Before wait ");
+                     browser.driver.sleep(5000);
+                    //
+                    //console.log("After wait ");
+
+                    var element;
+                    element = browser.driver.findElement(by.css(".scope-heading.clearfix.relative"));
+
+
+                  //  console.log("After find ");
+
+                    element.click();
+
+                  //  console.log("After click ");
+
+
+
 
 
         }

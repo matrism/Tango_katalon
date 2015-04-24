@@ -103,7 +103,7 @@ var beforeFeature = function () {
 
         {
             name:"Royalty Rate Set fields",
-            tags: ["test"],
+            tags: ["rr4"],
             steps: function()
             {
 
@@ -141,6 +141,8 @@ var beforeFeature = function () {
 
 
             }
+
+
 
 
 

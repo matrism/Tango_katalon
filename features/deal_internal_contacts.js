@@ -16,7 +16,7 @@ var beforeFeature = function () {
 
     feature = [{
         name: "Create basic deal",
-        tags: [],
+        tags: ["test_deal"],
         steps: function () {
             steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.deal_general.internalContactsInputField());

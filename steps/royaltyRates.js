@@ -78,13 +78,13 @@ if (steps.royaltyRates === undefined) {
                 expect(pages.royaltyRates.elems.incomeProvidesLabel.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.incomeProviderInput.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.incomeDateMethodLabel.isPresent()).toBeTruthy();
-                expect(pages.royaltyRates.elems.dealSigningLabel.isPresent()).toBeTruthy();
-                expect(pages.royaltyRates.elems.warnerChappelLabel.isPresent()).toBeTruthy();
+             //   expect(pages.royaltyRates.elems.dealSigningLabel.isPresent()).toBeTruthy();
+              //  expect(pages.royaltyRates.elems.warnerChappelLabel.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.effectiveStartDateLabel.isPresent()).toBeTruthy();
-                expect(pages.royaltyRates.elems.effectiveStartDateInput.isPresent()).toBeTruthy();
+             //   expect(pages.royaltyRates.elems.effectiveStartDateInput.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.contractualRateLabel.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.interCompanyLabel.isPresent()).toBeTruthy();
-                expect(pages.royaltyRates.elems.interCompanyInput.isPresent()).toBeTruthy();
+             //   expect(pages.royaltyRates.elems.interCompanyInput.isPresent()).toBeTruthy();
 
 
 
@@ -275,21 +275,29 @@ if (steps.royaltyRates === undefined) {
         },
 
         checkEffectiveStartDateErrorMessages:function(table, message) {
-            it("Inspect Effective Start Date Error Messages ",function()
-            {
 
-                var fields = table.shift();
-                _.each(table, function (row, index) {
-                        var date = row[0],
-                            errorMessage = row[1];
+            console.log("Inspect Effective Start Date Error Messages")
 
 
+            var fields = table.shift();
+            _.each(table, function (row, index) {
+                var date = row[0],
+                    errorMessage = row[1];
+                var consoleMessage;
 
-                        var consoleMessage;
+                consoleMessage = message.replace("%errorMessage%", errorMessage);
+                consoleMessage =  consoleMessage.replace("%date%", date);
 
-                        consoleMessage = message.replace("%errorMessage%", errorMessage);
-                        consoleMessage =  consoleMessage.replace("%date%", date);
-                        console.log(consoleMessage);
+                it(consoleMessage,function()
+                    {
+
+                        //it(message.replace("%name%", name), function() {
+                        //    var real_trade = helper.getTradeByName(name);
+                        //    expect(real_trade).toBe(trade);
+                        //});
+
+
+                        //  console.log(consoleMessage);
 
 
                         pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
@@ -309,6 +317,8 @@ if (steps.royaltyRates === undefined) {
             {
 
                 pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
+
+                pages.royaltyRates.clickGeneric(element);
 
             });
 
@@ -383,6 +393,31 @@ if (steps.royaltyRates === undefined) {
 
             });
         },
+
+        openSavedScope:function()
+        {
+            it("Click Scope Heading",function()
+            {
+
+                pages.royaltyRates.clickScopeHeading();
+
+            })
+
+
+        },
+
+        pause: function(){
+
+
+            it("Pause Step",function()
+            {
+                browser.manage().timeouts().pageLoadTimeout(10000);
+
+            });
+
+        },
+
+
 
 
 

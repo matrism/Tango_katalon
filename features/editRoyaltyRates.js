@@ -6,6 +6,10 @@ var pages_path = _tf_config._system_.path_to_pages,
 require(pages_path + "royaltyRates");
 require(steps_path + "royaltyRates");
 
+
+require(pages_path + "editRoyaltyRates");
+require(steps_path + "editRoyaltyRates");
+
 require(pages_path + "deal");
 require(steps_path + "deal");
 
@@ -24,14 +28,21 @@ var beforeFeature = function () {
         steps.deal.itContinueToNextPage();
         steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
         steps.deal_scope.itAddSimpleScope();
+        steps.deal.itContinueToNextPage();
+        steps.deal.saveDeal();
+        steps.deal.waitForDealToBeSaved();
+
+       // steps.royaltyRates.pause();
+
+        steps.royaltyRates.openSavedScope();
     },
 
     feature = [{
         name: "I would like to create Royalty Rates within a Deal",
-        tags: ["rr1"],
+        tags: ["rr11"],
         steps: function () {
 
-            steps.royaltyRates.addNewRoyaltySet();
+            steps.editRoyaltyRates.addNewRoyaltySet();
             steps.royaltyRates.inspectRateSetForm();
             steps.royaltyRates.closeRateSetForm();
 
@@ -42,10 +53,12 @@ var beforeFeature = function () {
 
         {
             name:"Royalty Rate Set fields",
-            tags: ["rr2"],
+            tags: ["rr22"],
             steps: function()
             {
-                steps.royaltyRates.addNewRoyaltySet();
+                steps.editRoyaltyRates.addNewRoyaltySet();
+
+
                 steps.royaltyRates.clearRoyaltyRateInput();
                 steps.royaltyRates.validateRoyaltyRateInput();
                 steps.royaltyRates.typeIntoRRInput('First Rate Set');
@@ -74,10 +87,10 @@ var beforeFeature = function () {
         ,
         {
             name:"Royalty Rate Set fields",
-            tags: ["rr3"],
+            tags: ["rr33"],
             steps: function()
             {
-                steps.royaltyRates.addNewRoyaltySet();
+                steps.editRoyaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.inspectEffectiveStartDateArea();
                 steps.royaltyRates.checkEffectiveStartDateErrorMessages(
 
@@ -103,11 +116,11 @@ var beforeFeature = function () {
 
         {
             name:"Royalty Rate Set fields",
-            tags: ["rr4"],
+            tags: ["rr44"],
             steps: function()
             {
 
-                steps.royaltyRates.addNewRoyaltySet();
+                steps.editRoyaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.inspectEffectiveStartDateArea();
 
 
@@ -152,7 +165,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["royalty"],
+    commonFeatureTags: ["edit_royalty"],
     feature: feature,
     beforeFeature: beforeFeature
 };
