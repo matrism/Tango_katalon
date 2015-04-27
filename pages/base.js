@@ -154,21 +154,41 @@ module.exports.selectRandomDropdownOption.tg = function(element, more) {
 		});
 	});
 };
-module.exports.selectRandomTypeaheadValue = function(element) {
+module.exports.selectRandomTypeaheadValue = function(element, more) {
+	more = more || {};
 	var deferred = promise.defer();
-	it (
-		"Type a random letter in the search field", function() {
+	if(more.different) {
+		it("Type a random letter not occurring in the current field value", function() {
+			pages.base.scrollIntoView(element);
+
+			element.getAttribute("value").then(function(currentValue) {
+				var randomLetter;
+
+				do {
+					randomLetter = (
+						String.fromCharCode("A".charCodeAt(0) + Math.round(Math.random() * 25))
+					);
+				} while(currentValue.indexOf(randomLetter) !== -1);
+
+				element.clear();
+				element.sendKeys(randomLetter);
+			});
+		});
+	}
+	else {
+		it("Type a random letter in the search field", function() {
 			var randomLetter = String.fromCharCode("A".charCodeAt(0) + Math.round(Math.random() * 25));
 			pages.base.scrollIntoView(element);
 			element.clear();
 			element.sendKeys(randomLetter);
-		}
-	);
+		});
+	}
 	it (
 		"Wait for suggestions dropdown to appear", function() {
 			var suggestion = $(".typeahead-result");
 			browser.wait (
-				ExpectedConditions.visibilityOf(suggestion)
+				ExpectedConditions.visibilityOf(suggestion),
+				_tf_config._system_.wait_timeout
 			);
 			expect(suggestion.getText()).not.toContain("No results");
 		}

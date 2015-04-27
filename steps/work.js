@@ -117,13 +117,56 @@ module.exports.calculateEvenCreatorContributions = function() {
 };
 module.exports.selectDifferentRandomCreator = function(i) {
 	var deferred = promise.defer();
-	it("Select different random creator #" + (i + 1), function() {
+	describe("Select different random creator #" + (i + 1), function() {
 		deferred.fulfill(pages.base.selectRandomTypeaheadValue(
 			pages.work.editCreatorNameInput(i),
 			{ different: true }
 		));
 	});
 	return deferred.promise;
+};
+module.exports.enterCreatorContribution = function(i, contribution) {
+	it("Enter creator contribution #" + (i + 1), function() {
+		pages.work.enterCreatorContribution(i, contribution);
+	});
+};
+module.exports.expectFirstCreatorContributionFieldValueToBe = function(value) {
+	it("Validate creator contribution #1", function() {
+		expect(pages.work.editFirstCreatorContributionFieldValue()).toBe(
+			pph.toString(value)
+		);
+	});
+};
+module.exports.expectFirstCreatorContributionFieldValueNotToBe = function(value) {
+	it("Validate creator contribution #1", function() {
+		expect(pages.work.editFirstCreatorContributionFieldValue()).not.toBe(
+			pph.toString(value)
+		);
+	});
+};
+module.exports.waitCreatorsEditorCheckForDuplicates = function() {
+	it("Wait creators editor check for duplicates", function() {
+		browser.wait(
+			function() {
+				return pph.not(
+					pages.work.isCreatorsEditorCheckingForDuplicates()
+				);
+			},
+			_tf_config._system_.wait_timeout
+		);
+	});
+};
+module.exports.cancelCreatorsEditing = function() {
+	steps.base.clickElement (
+		"cancel creators button",
+		pages.work.cancelCreatorsButton()
+	);
+};
+module.exports.saveCreators = function() {
+	steps.base.clickElement (
+		"save creators button",
+		pages.work.saveCreatorsButton()
+	);
 };
 module.exports.hoverAssetTypeContainer = function() {
 	steps.base.hoverElement (
@@ -345,6 +388,22 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 			});
 		}
 	);
+};
+module.exports.validateCreatorContributionInputMask = function(i, validationTable) {
+	it("Validate creator contribution input mask", function() {
+		validationTable = validationTable || {
+			"1asdf": "1",
+			"1,0": "10",
+			"1.0.0": "1.00",
+			"50": "50",
+			"1.0": "1.0",
+		};
+		_.each(validationTable, function(expectedValue, input) {
+			pages.work.enterCreatorContribution(i, input);
+			expect(pages.work.enteredCreatorContribution(i)).toBe(expectedValue);
+		});
+		pages.work.enterCreatorContribution(i, "");
+	});
 };
 module.exports.validateCreationDate = function(year, month, day) {
 	it("Validate creation date (if first validation value is not empty)", function() {
@@ -580,36 +639,48 @@ module.exports.editBasicWork = function(data, more) {
 
 				data.creators = (function() {
 					var howMany = 2;
-					var evenContribution = steps.calculateEvenCreatorContributions();
+					var evenContribution = steps.work.calculateEvenCreatorContributions();
 
 					return _.times(
 						howMany, function(i) {
 							var creator = {};
 							var firstOne = (i === 0);
 
-							//if(firstOne) {
-								//creator.name = steps.work.selectDifferentRandomCreator(i);
-								//steps.work.waitCreatorsEditorCheckForDuplicates();
-								//steps.work.cancelCreatorsEditing();
-								//steps.base.dirtyCheckConfirmCancellation();
-								//steps.work.hoverCreatorNameList();
-								//steps.work.editCreators();
-								//steps.work.expectFirstCreatorFieldValueNotToBe(creator.name);
-							//}
+							if(firstOne) {
+								creator.contribution = 0;
+								steps.work.enterCreatorContribution(i, creator.contribution);
+
+								steps.work.cancelCreatorsEditing();
+								steps.base.dirtyCheckConfirmCancellation();
+
+								steps.work.hoverCreatorNamesContainer();
+								steps.work.editCreators();
+
+								steps.work.expectFirstCreatorContributionFieldValueNotToBe(
+									creator.contribution
+								);
+							}
 
 							creator.name = steps.work.selectDifferentRandomCreator(i);
 
-							//if(firstOne) {
-								//steps.work.waitCreatorsEditorCheckForDuplicates();
-								//steps.work.cancelCreatorsEditing();
-								//steps.base.dirtyCheckContinueEditing();
-								//steps.work.expectFirstCreatorFieldValueToBe(creator.name);
-							//}
-
-							steps.work.validateCreatorContributionInputMask(i);
+							if(firstOne) {
+								steps.work.waitCreatorsEditorCheckForDuplicates();
+							}
 
 							creator.contribution = evenContribution;
+							steps.work.validateCreatorContributionInputMask(i);
 							steps.work.enterCreatorContribution(i, creator.contribution);
+
+							if(firstOne) {
+								steps.work.cancelCreatorsEditing();
+								steps.base.dirtyCheckContinueEditing();
+
+								steps.work.expectFirstCreatorContributionFieldValueToBe(
+									creator.contribution
+								);
+							}
+
+							return creator;
 						}
 					);
 				})();
@@ -636,9 +707,6 @@ module.exports.editBasicWork = function(data, more) {
 				);
 				steps.work.cancelAssetTypeEditing();
 				steps.base.dirtyCheckContinueEditing();
-				data.musicalDistributionCategory.then(function(v) {
-					console.log("cat:",v);
-				});
 				steps.work.expectMusicalDistributionCategoryToBe(
 					data.musicalDistributionCategory
 				);

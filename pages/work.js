@@ -85,6 +85,9 @@ module.exports.saveWorkTitlesButton = function() {
 module.exports.creatorNamesContainer = function() {
 	return $(".EDITOR.creators-edit");
 };
+module.exports.editCreatorsContainer = function() {
+	return $("[data-ng-show='workHeader.creators.edit'");
+};
 module.exports.editCreatorsButton = function() {
 	return $(
 		"[data-ng-click='showEdit(workHeader.creators, " +
@@ -96,6 +99,30 @@ module.exports.editCreatorNameInputs = function() {
 };
 module.exports.editCreatorNameInput = function(i) {
 	return pages.work.editCreatorNameInputs().get(i);
+};
+module.exports.editCreatorContributionInputs = function() {
+	return element.all(by.model("creator.contribution"));
+};
+module.exports.editCreatorContributionInput = function(i) {
+	return pages.work.editCreatorContributionInputs().get(i);
+};
+module.exports.editFirstCreatorContributionInput = function(i) {
+	return pages.work.editCreatorContributionInputs().first();
+};
+module.exports.creatorsEditorCheckingForDuplicatesMessage = function() {
+	return $(".creators-edit [data-ng-show='show.requests.checkDuplicates']");
+};
+module.exports.cancelCreatorsButton = function() {
+	return (
+		pages.work.editCreatorsContainer()
+			.element(by.cssContainingText("button", "Cancel"))
+	);
+};
+module.exports.saveCreatorsButton = function() {
+	return (
+		pages.work.editCreatorsContainer()
+			.element(by.cssContainingText("button", "Save"))
+	);
 };
 module.exports.creationDateBinding = function() {
 	return element(by.binding("work.pristine.creation_date"));
@@ -300,11 +327,21 @@ module.exports.isTitleEditorCheckingForDuplicates = function() {
 	);
 };
 module.exports.calculateEvenCreatorContributions = function() {
-	var rows = pages.work.editCreatorRows();
+	var rows = pages.work.editCreatorContributionInputs();
 	pages.base.scrollIntoView(rows.first());
 	return rows.count().then(function(count) {
-		return 100 / count;
+		return 100 / (count - 1);
 	});
+};
+module.exports.enteredCreatorContribution = function(i) {
+	var element = pages.work.editCreatorContributionInput(i);
+	pages.base.scrollIntoView(element);
+	return element.getAttribute("value");
+};
+module.exports.isCreatorsEditorCheckingForDuplicates = function() {
+	return pages.base.isPresentAndDisplayed(
+		pages.work.creatorsEditorCheckingForDuplicatesMessage()
+	);
 };
 module.exports.creationDate = function() {
 	var element = pages.work.creationDateBinding();
@@ -464,6 +501,9 @@ module.exports.musicLibrary = function() {
 module.exports.editPrimaryWorkTitleFieldValue = function() {
 	return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
 };
+module.exports.editFirstCreatorContributionFieldValue = function() {
+	return pages.work.editFirstCreatorContributionInput().getAttribute("value"); 
+};
 (function() {
 	var buttonCssSelector = "button[data-ng-model='wcmWebsiteEdit.model.includeOnWebsite']";
 	var activeButtonCssSelector = buttonCssSelector + ".active";
@@ -489,6 +529,12 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
+};
+module.exports.enterCreatorContribution = function(i, value) {
+	var element = pages.work.editCreatorContributionInput(i);
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
 };
 module.exports.enterProductionTitle = function(title, more) {
 	var element;
