@@ -73,6 +73,17 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	);
 	return deferred.promise;
 };
+module.exports.enterNewRandomAlternateWorkTitle = function() {
+	var deferred = promise.defer();
+	it (
+		"Enter new random alternate work title", function() {
+			var title = "TEST ALTERNATE WORK TITLE " + randomId();
+			pages.work.enterNewAlternateWorkTitle(title);
+			deferred.fulfill(title);
+		}
+	);
+	return deferred.promise;
+};
 module.exports.waitTitleEditorCheckForDuplicates = function() {
 	it("Wait title editor check for duplicates", function() {
 		browser.wait(
@@ -594,10 +605,10 @@ module.exports.editBasicWork = function(data, more) {
 	more.skip = more.skip || {};
 	//more.skip.navigation = true;
 	//more.skip.workTitles = true;
-	//more.skip.creators = true;
-	//more.skip.assetType = true;
-	//more.skip.workOrigin = true;
-	//more.skip.inclusionOnWebsite = true;
+	more.skip.creators = true;
+	more.skip.assetType = true;
+	more.skip.workOrigin = true;
+	more.skip.inclusionOnWebsite = true;
 
 	describe (
 		"Edit basic work", function() {
@@ -630,6 +641,10 @@ module.exports.editBasicWork = function(data, more) {
 					}
 				);
 
+				data.alternateWorkTitles.push(
+					steps.work.enterNewRandomAlternateWorkTitle()
+				);
+
 				steps.work.saveWorkTitles();
 			}
 
@@ -638,10 +653,11 @@ module.exports.editBasicWork = function(data, more) {
 				steps.work.editCreators();
 
 				data.creators = (function() {
+					var creators;
 					var howMany = 2;
 					var evenContribution = steps.work.calculateEvenCreatorContributions();
 
-					return _.times(
+					creators = _.times(
 						howMany, function(i) {
 							var creator = {};
 							var firstOne = (i === 0);
@@ -770,12 +786,12 @@ module.exports.validateWork = function(data, more) {
 	more.skip = more.skip || {};
 	//more.skip.navigation = true;
 	//more.skip.workTitles = true;
-	//more.skip.creators = true;
-	//more.skip.creationDate = true;
-	//more.skip.deliveryDate = true;
-	//more.skip.assetType = true;
-	//more.skip.workOrigin = true;
-	//more.skip.inclusionOnWebsite = true;
+	more.skip.creators = true;
+	more.skip.creationDate = true;
+	more.skip.deliveryDate = true;
+	more.skip.assetType = true;
+	more.skip.workOrigin = true;
+	more.skip.inclusionOnWebsite = true;
 
 	describe (
 		"Validate work data", function() {

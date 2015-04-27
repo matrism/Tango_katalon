@@ -67,6 +67,12 @@ module.exports.editAlternateWorkTitleField = function(i) {
 			.element(by.model("altTitle.title"))
 	);
 };
+module.exports.newAlternateWorkTitleField = function() {
+	return (
+		pages.work.alternateWorkTitleEditRows().last()
+			.element(by.model("altTitle.title"))
+	);
+};
 module.exports.titleEditorCheckingForDuplicatesMessage = function() {
 	return $(".title-edit [data-ng-show='show.requests.checkDuplicates']");
 };
@@ -526,6 +532,12 @@ module.exports.enterPrimaryWorkTitle = function(title) {
 };
 module.exports.enterAlternateWorkTitle = function(i, title) {
 	var element = pages.work.editAlternateWorkTitleField(i);
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(title);
+};
+module.exports.enterNewAlternateWorkTitle = function(title) {
+	var element = pages.work.newAlternateWorkTitleField();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
