@@ -17,6 +17,93 @@ module.exports.fillMandatoryFieldsContractPeriod = function () {
     });
 };
 
+module.exports.clickOnAddMdrc = function () {
+    it("Click on add new MDRC to contract period", function () {
+        pages.create_deal_contract_period.clickOnAddMdrcLink();
+        browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.mdrcQuantity()));
+    });
+};
+
+module.exports.chooseIncompleteMdrcOption = function () {
+    it("Choose incomplete MDRC option ", function () {
+        pages.create_deal_contract_period.clickOnIncompleteOption();
+    });
+};
+
+module.exports.chooseDeemedCompleteMdrcOption = function () {
+    it("Choose deemed complete MDRC option", function () {
+        pages.create_deal_contract_period.clickOnDeemedCompleteOption();
+    });
+};
+
+module.exports.chooseCompleteMdrcOption = function () {
+    it("Choose complete MDRC option", function () {
+        pages.create_deal_contract_period.clickOnCompleteOption();
+    });
+};
+
+module.exports.checkIncompleteMdrcOptionIsSelected = function () {
+    it("Check incomplete MDRC option is selected ", function () {
+        var test = pages.create_deal_contract_period.incompleteMdrc().getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+module.exports.checkDeemedCompleteMdrcOptionIsSelected = function () {
+    it("Check deemed complete MDRC option is selected ", function () {
+        var test = pages.create_deal_contract_period.deemedCompleteMdrc().getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+module.exports.checkCompleteMdrcOptionIsSelected = function () {
+    it("Check complete MDRC option is selected ", function () {
+        var test = pages.create_deal_contract_period.completeMdrc().getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+module.exports.fillMdrcQuantity = function () {
+    it("Fill into MDRC quantity field ", function () {
+        pages.create_deal_contract_period.fillIntoMdrcQuantity();
+    });
+};
+
+module.exports.fillMdrcMinimumWorkContribution = function () {
+    it("Fill into MDRC minimum work contribution ", function () {
+        pages.create_deal_contract_period.fillIntoMdrcMinimumWorkContribution();
+    });
+};
+
+module.exports.fillMdrcQuantityForCommercialRelease = function () {
+    it("Fill into MDRC quantity for commercial release ", function () {
+        pages.create_deal_contract_period.fillIntoMdrcQuantityForCommercialRelease();
+    });
+};
+
+module.exports.fillInMdrcMajorTerritoriesForCommercialRelease = function () {
+    it("Fill into MDRC major territories for commercial release ", function () {
+        pages.create_deal_contract_period.fillIntoMdrcMajorTerritoriesForCommercialeRelease();
+    });
+};
+
+module.exports.addMdrcTerritory = function () {
+    it("Add MDRC territory ", function () {
+        pages.create_deal_contract_period.fillIntoTerritoriesFieldLetter();
+        pages.create_deal_contract_period.selectRandomTerritory();
+    });
+};
+
+
+module.exports.itAddIncompleteMdrcContractPeriod = function () {
+    describe("Add incomplete MDRC on  contract period screen", function () {
+        steps.create_deal_contract_period.clickOnAddMdrc();
+        steps.create_deal_contract_period.checkIncompleteMdrcOptionIsSelected();
+        steps.create_deal_contract_period.fillMdrcQuantity();
+        steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
+        steps.create_deal_contract_period.addMdrcTerritory();
+    });
+};
 
 module.exports.itFillDealMandatoryFieldsContractPeriod = function () {
     describe("Fill mandatory fields contract period screen", function () {
