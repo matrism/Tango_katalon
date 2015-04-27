@@ -2,7 +2,6 @@ var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps;
 
 
-
 require(pages_path + "royaltyRates");
 require(steps_path + "royaltyRates");
 
@@ -41,10 +40,9 @@ var beforeFeature = function () {
 
 
         {
-            name:"Royalty Rate Set fields",
+            name: "Royalty Rate Set fields",
             tags: ["rr2"],
-            steps: function()
-            {
+            steps: function () {
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.clearRoyaltyRateInput();
                 steps.royaltyRates.validateRoyaltyRateInput();
@@ -64,29 +62,25 @@ var beforeFeature = function () {
                 steps.royaltyRates.dealSigningTerritoryIsSelected();
 
 
-
             }
-
 
 
         }
 
         ,
         {
-            name:"Royalty Rate Set fields",
+            name: "Royalty Rate Set fields",
             tags: ["rr3"],
-            steps: function()
-            {
+            steps: function () {
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.inspectEffectiveStartDateArea();
                 steps.royaltyRates.checkEffectiveStartDateErrorMessages(
-
                     [
-                        ["date",        "errorMessage"],
-                        ["12"       ,   "Not a valid date"],
-                        ["00-11-2"  ,   "Invalid Year"],
-                        ["2015-13-2",   "Invalid Month"],
-                        ["2015-11-49",  "Invalid day"]
+                        ["date", "errorMessage"],
+                        ["12", "Not a valid date"],
+                        ["00-11-2", "Invalid Year"],
+                        ["2015-13-2", "Invalid Month"],
+                        ["2015-11-49", "Invalid day"]
 
                     ],
 
@@ -97,53 +91,25 @@ var beforeFeature = function () {
             }
 
 
-
         }
         ,
 
         {
-            name:"Royalty Rate Set fields",
+            name: "Royalty Rate Set fields",
             tags: ["rr4"],
-            steps: function()
-            {
+            steps: function () {
 
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.inspectEffectiveStartDateArea();
-
-
-
-               steps.royaltyRates.openEffectiveStartDateCalender();
-
+                steps.royaltyRates.openEffectiveStartDateCalender();
                 steps.royaltyRates.setEffectiveStartDate("2015-11-11");
-
-
-
                 steps.royaltyRates.addRatePercentageToContractualField('10');
-
-
-                     steps.royaltyRates.clickOnReceiptApplicationMethod();
-                //steps.royaltyRates.rejectChangingRateApplicationMethod();
-                //steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
                 steps.royaltyRates.saveRateSet();
 
-              //  steps.royaltyRates.test();
-                //steps.royaltyRates.closeRateSet();
-                //steps.royaltyRates.openRateSetPanel();
-
-
-                //TODO Step to check calendar is opened , current date highlighted in blue
-
-
-
-
-
-
 
             }
-
-
-
 
 
         }

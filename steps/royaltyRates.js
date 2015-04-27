@@ -3,60 +3,7 @@ var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if (steps.royaltyRates === undefined) {
     steps.royaltyRates = {
-        //itCreateBasicDeal: function () {
-        //    describe("Create basic deal", function () {
-        //
-        //        it("Open create deal page", function () {
-        //            pages.new_deal.open().waitForAjax();
-        //
-        //        });
-        //
-        //        it("Select desired deal signing territory", function () {
-        //            pages.new_deal.selectDesiredSigningTerritory();
-        //            //  pages.new_deal.addTerritoryByTypingToScope();
-        //        });
-        //
-        //        it("Fill in contracting parties field specific value", function () {
-        //            pages.new_deal.fillContractingPartiesField("bmi");
-        //        });
-        //
-        //        it(
-        //            "Wait for suggestions dropdown to appear", function () {
-        //                var suggestion = $(".tg-typeahead__suggestions-container");
-        //                browser.wait(ExpectedConditions.visibilityOf(suggestion));
-        //                expect(suggestion.getText()).not.toContain("No results");
-        //            }
-        //        );
-        //
-        //        it("Select specific suggestion", function () {
-        //                pages.new_deal.selectContractingPartyValue("(021)\n BMI");
-        //            }
-        //        );
-        //
-        //        it("Expect continue button to be enabled", function () {
-        //            expect(pages.new_deal.elems.continueButton.isEnabled);
-        //        });
-        //
-        //        it("Continue with next page", function () {
-        //            pages.new_deal.continueToNextPage();
-        //        });
-        //
-        //        it("Fill mandatory fields contract period", function () {
-        //            expect(pages.new_deal.elems.start_date.isDisplayed);
-        //            pages.new_deal.fillStartActualDate();
-        //            pages.new_deal.fillTargetEndMonths();
-        //        });
-        //
-        //        it("Add simple scope", function () {
-        //            pages.new_deal.addScopeForm();
-        //            //pages.new_deal.selectContractTypeScope("Administration");
-        //            //pages.new_deal.addTerritoryByTypingToScope();
-        //        });
-        //
-        //
-        //
-        //    });
-        //},
+
 
         addNewRoyaltySet : function() {
 
@@ -95,8 +42,6 @@ if (steps.royaltyRates === undefined) {
             {
                 pages.royaltyRates.closeRoyaltySet();
 
-
-                //  expect(browser.driver.findElements(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[2]/div/div[2]/div[1]/div[1]/label"))).toBeFalsy();
 
                 expect(pages.royaltyRates.elems.RRNameLabel.isPresent()).toBeFalsy();
             });
@@ -318,7 +263,7 @@ if (steps.royaltyRates === undefined) {
 
                 pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
 
-                pages.royaltyRates.clickGeneric(element);
+               // pages.royaltyRates.clickGeneric(element);
 
             });
 
@@ -399,6 +344,7 @@ if (steps.royaltyRates === undefined) {
             it("Click Scope Heading",function()
             {
 
+                 browser.pause();
                 pages.royaltyRates.clickScopeHeading();
 
             })

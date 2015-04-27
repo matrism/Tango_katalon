@@ -2,7 +2,6 @@ var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps;
 
 
-
 require(pages_path + "royaltyRates");
 require(steps_path + "royaltyRates");
 
@@ -32,7 +31,7 @@ var beforeFeature = function () {
         steps.deal.saveDeal();
         steps.deal.waitForDealToBeSaved();
 
-       // steps.royaltyRates.pause();
+        // steps.royaltyRates.pause();
 
         steps.royaltyRates.openSavedScope();
     },
@@ -43,8 +42,8 @@ var beforeFeature = function () {
         steps: function () {
 
             steps.editRoyaltyRates.addNewRoyaltySet();
-            steps.royaltyRates.inspectRateSetForm();
-            steps.royaltyRates.closeRateSetForm();
+            steps.editRoyaltyRates.inspectRateSetForm();
+            steps.editRoyaltyRates.closeRateSetForm();
 
 
         }
@@ -52,54 +51,47 @@ var beforeFeature = function () {
 
 
         {
-            name:"Royalty Rate Set fields",
+            name: "Royalty Rate Set fields",
             tags: ["rr22"],
-            steps: function()
-            {
+            steps: function () {
                 steps.editRoyaltyRates.addNewRoyaltySet();
-
-
-                steps.royaltyRates.clearRoyaltyRateInput();
-                steps.royaltyRates.validateRoyaltyRateInput();
-                steps.royaltyRates.typeIntoRRInput('First Rate Set');
-                steps.royaltyRates.validateRRInputText('First Rate Set');
-                steps.royaltyRates.clearRoyaltyRateInput();
-                steps.royaltyRates.typeIntoRRInput('Really really really really really really really really long rate set name');
-                steps.royaltyRates.validateRRInputText('Really really really really really really really really long rate set name');
-                steps.royaltyRates.validateRRInput();
-                steps.royaltyRates.selectAnIncomeProvider('TEST');
-                steps.royaltyRates.incomeProviderIsPresent('TEST\nx');
-                steps.royaltyRates.incomeDateMethodToggleIsDisplayed();
-                steps.royaltyRates.dealSigningTerritoryIsSelected();
-                steps.royaltyRates.selectWarnerChappellToggle();
-                steps.royaltyRates.warnerChappellToggleIsSelected();
-                steps.royaltyRates.selectDealSigningTerritoryToggle();
-                steps.royaltyRates.dealSigningTerritoryIsSelected();
-
+                steps.editRoyaltyRates.clearRoyaltyRateInput();
+                steps.editRoyaltyRates.validateRoyaltyRateInput();
+                steps.editRoyaltyRates.typeIntoRRInput('First Rate Set');
+                steps.editRoyaltyRates.validateRRInputText('First Rate Set');
+                steps.editRoyaltyRates.clearRoyaltyRateInput();
+                steps.editRoyaltyRates.typeIntoRRInput('Really really really really really really really really long rate set name');
+                steps.editRoyaltyRates.validateRRInputText('Really really really really really really really really long rate set name');
+                steps.editRoyaltyRates.validateRRInput();
+                steps.editRoyaltyRates.selectAnIncomeProvider('TEST');
+                steps.editRoyaltyRates.incomeProviderIsPresent('TEST\nx');
+                steps.editRoyaltyRates.incomeDateMethodToggleIsDisplayed();
+                steps.editRoyaltyRates.dealSigningTerritoryIsSelected();
+                steps.editRoyaltyRates.selectWarnerChappellToggle();
+                steps.editRoyaltyRates.warnerChappellToggleIsSelected();
+                steps.editRoyaltyRates.selectDealSigningTerritoryToggle();
+                steps.editRoyaltyRates.dealSigningTerritoryIsSelected();
 
 
             }
-
 
 
         }
 
         ,
         {
-            name:"Royalty Rate Set fields",
+            name: "Royalty Rate Set fields",
             tags: ["rr33"],
-            steps: function()
-            {
+            steps: function () {
                 steps.editRoyaltyRates.addNewRoyaltySet();
-                steps.royaltyRates.inspectEffectiveStartDateArea();
-                steps.royaltyRates.checkEffectiveStartDateErrorMessages(
-
+                steps.editRoyaltyRates.inspectEffectiveStartDateArea();
+                steps.editRoyaltyRates.checkEffectiveStartDateErrorMessages(
                     [
-                        ["date",        "errorMessage"],
-                        ["12"       ,   "Not a valid date"],
-                        ["00-11-2"  ,   "Invalid Year"],
-                        ["2015-13-2",   "Invalid Month"],
-                        ["2015-11-49",  "Invalid day"]
+                        ["date", "errorMessage"],
+                        ["12", "Not a valid date"],
+                        ["00-11-2", "Invalid Year"],
+                        ["2015-13-2", "Invalid Month"],
+                        ["2015-11-49", "Invalid day"]
 
                     ],
 
@@ -110,53 +102,26 @@ var beforeFeature = function () {
             }
 
 
-
         }
         ,
 
         {
-            name:"Royalty Rate Set fields",
+            name: "Royalty Rate Set fields",
             tags: ["rr44"],
-            steps: function()
-            {
+            steps: function () {
 
                 steps.editRoyaltyRates.addNewRoyaltySet();
-                steps.royaltyRates.inspectEffectiveStartDateArea();
-
-
-
-               steps.royaltyRates.openEffectiveStartDateCalender();
-
-                steps.royaltyRates.setEffectiveStartDate("2015-11-11");
-
-
-
-                steps.royaltyRates.addRatePercentageToContractualField('10');
-
-
-                     steps.royaltyRates.clickOnReceiptApplicationMethod();
-                //steps.royaltyRates.rejectChangingRateApplicationMethod();
-                //steps.royaltyRates.clickOnReceiptApplicationMethod();
-                steps.royaltyRates.confirmChangingRateApplicationMethod();
-                steps.royaltyRates.saveRateSet();
-
-              //  steps.royaltyRates.test();
-                //steps.royaltyRates.closeRateSet();
-                //steps.royaltyRates.openRateSetPanel();
-
-
-                //TODO Step to check calendar is opened , current date highlighted in blue
-
-
-
-
+                steps.editRoyaltyRates.inspectEffectiveStartDateArea();
+                steps.editRoyaltyRates.openEffectiveStartDateCalender();
+                steps.editRoyaltyRates.setEffectiveStartDate("2015-11-11");
+                steps.editRoyaltyRates.addRatePercentageToContractualField('10');
+                steps.editRoyaltyRates.clickOnReceiptApplicationMethod();
+                steps.editRoyaltyRates.confirmChangingRateApplicationMethod();
+                steps.editRoyaltyRates.saveRateSet();
 
 
 
             }
-
-
-
 
 
         }
