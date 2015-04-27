@@ -348,8 +348,52 @@ if (pages.editRoyaltyRates === undefined) {
 
         }
 
+        ,
+        openSavedRR:function()
+        {
 
-    });
+            var element = this.editSavedRRIcon();
+            element.click();
+
+
+        }
+        ,
+
+        getSavedRRName:function()
+        {
+           return this.royaltyRateName().getText();
+
+
+
+
+        },
+
+        getSavedRRDate:function()
+        {
+
+            return this.royaltyRateDate().getText();
+
+        },
+
+        getSavedRRIncomeDateMethod:function()
+        {
+
+            return this.RRIncomeDateMethodButton().getText();
+
+        },
+
+        getSavedRRApplicationMethod:function()
+        {
+
+            return this.RApplicationMethodButton().getText();
+
+
+        }
+
+
+
+
+});
 }
 
 module.exports = pages.editRoyaltyRates;

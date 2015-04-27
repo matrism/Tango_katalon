@@ -264,6 +264,7 @@ if (steps.editRoyaltyRates === undefined) {
             it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
+                browser.pause();
             });
         },
         closeRateSet: function () {
@@ -299,6 +300,23 @@ if (steps.editRoyaltyRates === undefined) {
             });
 
         },
+        rateSetSavedSuccesfully: function()
+
+        { it("Rate Set Was Saved ",function(){
+
+            pages.editRoyaltyRates.openSavedRR();
+
+            expect(pages.editRoyaltyRates.getSavedRRName().toBe("Rate Set 1"));
+            expect(pages.editRoyaltyRates.getSavedRRDate().toBe("2015-11-11"));
+            expect(pages.editRoyaltyRates.getSavedRRIncomeDateMethod().toBe("Deal Signing Territory"));
+            expect(pages.editRoyaltyRates.getSavedRRApplicationMethod().toBe("On Receipt"));
+
+
+        })
+
+
+        }
+        ,
 
 
         test: function () {

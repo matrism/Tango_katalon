@@ -344,7 +344,6 @@ if (steps.royaltyRates === undefined) {
             it("Click Scope Heading",function()
             {
 
-                 browser.pause();
                 pages.royaltyRates.clickScopeHeading();
 
             })

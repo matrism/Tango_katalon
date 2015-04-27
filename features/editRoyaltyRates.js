@@ -31,7 +31,6 @@ var beforeFeature = function () {
         steps.deal.saveDeal();
         steps.deal.waitForDealToBeSaved();
 
-        // steps.royaltyRates.pause();
 
         steps.royaltyRates.openSavedScope();
     },
@@ -118,6 +117,7 @@ var beforeFeature = function () {
                 steps.editRoyaltyRates.clickOnReceiptApplicationMethod();
                 steps.editRoyaltyRates.confirmChangingRateApplicationMethod();
                 steps.editRoyaltyRates.saveRateSet();
+                steps.editRoyaltyRates.rateSetSavedSuccesfully();
 
 
 
