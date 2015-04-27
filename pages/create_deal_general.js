@@ -36,6 +36,10 @@ module.exports.internalContactRoleInputField = function () {
     return element(By.css("div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
+module.exports.internalContactCreateRoleRowIRequiredErrorIcon = function (i) {
+    return element(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div.internal-contact__col.m-role i.internal-contact__error.fa.fa-exclamation-triangle.ng-scope"))
+};
+
 
 module.exports.selectDesiredSigningTerritory = function (specific_country) {
     pages.create_deal_general.dealSigningTerritoryPopup().click();

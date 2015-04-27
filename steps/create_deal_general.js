@@ -58,6 +58,7 @@ module.exports.fillIntoInternalContactField = function (internal_contact) {
 module.exports.fillIntoInternalContactsFieldRowI = function (i) {
     it("Fill into internal contact row i ", function () {
             pages.create_deal_general.fillIntoTheIRowInternalContactField(i);
+            browser.sleep(2000);
         }
     );
 };
@@ -65,6 +66,7 @@ module.exports.fillIntoInternalContactsFieldRowI = function (i) {
 module.exports.selectRandomInternalContactDropDown = function () {
     it("Select random value from internal contact drop down", function () {
             pages.create_deal_general.selectRandomInternalContactsFromDropDown();
+            browser.sleep(1000);
         }
     );
 };
@@ -72,7 +74,7 @@ module.exports.selectRandomInternalContactDropDown = function () {
 module.exports.clickOnInternalContactRole = function () {
     it("Click on internal contact role field", function () {
             pages.create_deal_general.clickOnInternalContactsRole();
-        }
+       }
     );
 };
 
