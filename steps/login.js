@@ -21,8 +21,27 @@ if (steps.login === undefined) {
             it ("User should see '" + optionName + "' option", function() {
                 ftf.helper.shouldBeInArrayOfElements(pages.base.elems.user_dropdown_menu_items, optionName, false, false);
             });
+        },
+
+        accessSavedDealByNumber:function(dealContractNumber)
+        {
+
+            it("User accesses deal with number "+ dealContractNumber,function(){
+                pages.login.selectOptionFromSearchDropDown("Deals");
+                pages.login.typeDealNumberIntoInput(dealContractNumber);
+                pages.login.selectValueFromDropdown();
+
+
+            })
+
+
+
+
         }
     };
+
+
+
 }
 
 module.exports = steps.login;
