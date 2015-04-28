@@ -1,4 +1,4 @@
 "use strict";
-module.exports = function() {
+exports.id = function() {
 	return Date.now().toString() + Math.floor(Math.random() * 1000);
 };

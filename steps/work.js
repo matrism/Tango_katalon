@@ -2,7 +2,7 @@
 var pages_path = _tf_config._system_.path_to_pages;
 var pad = require("pad");
 var pph = require("../helpers/pph");
-var randomId = require("../helpers/randomId");
+var random = require("../helpers/random");
 var promise = protractor.promise;
 require(pages_path + "work");
 module.exports = steps.work = {};
@@ -55,7 +55,7 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
 		"Enter a random primary work title", function() {
-			var title = "TEST WORK TITLE " + randomId();
+			var title = "TEST WORK TITLE " + random.id();
 			pages.work.enterPrimaryWorkTitle(title);
 			deferred.fulfill(title);
 		}
@@ -66,7 +66,7 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	var deferred = promise.defer();
 	it (
 		"Enter random alternate work title #" + (i + 1), function() {
-			var title = "TEST ALTERNATE WORK TITLE " + randomId();
+			var title = "TEST ALTERNATE WORK TITLE " + random.id();
 			pages.work.enterAlternateWorkTitle(i, title);
 			deferred.fulfill(title);
 		}
@@ -77,7 +77,7 @@ module.exports.enterNewRandomAlternateWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
 		"Enter new random alternate work title", function() {
-			var title = "TEST ALTERNATE WORK TITLE " + randomId();
+			var title = "TEST ALTERNATE WORK TITLE " + random.id();
 			pages.work.enterNewAlternateWorkTitle(title);
 			deferred.fulfill(title);
 		}
@@ -268,7 +268,7 @@ module.exports.enterRandomProductionTitle = function() {
 	var deferred = promise.defer();
 	it (
 		"Enter a random production title (if present)", function() {
-			var title = "TEST PRODUCTION TITLE " + randomId();
+			var title = "TEST PRODUCTION TITLE " + random.id();
 			deferred.fulfill (
 				pages.work.enterProductionTitle(title, { skipIfNotPresent: true })
 			);

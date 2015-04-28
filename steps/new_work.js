@@ -1,7 +1,7 @@
 "use strict";
 var pages_path = _tf_config._system_.path_to_pages;
 var steps_path = _tf_config._system_.path_to_steps;
-var randomId = require("../helpers/randomId");
+var random = require("../helpers/random");
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 require(pages_path + "new_work");
@@ -163,7 +163,7 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
 		"Enter random primary work title", function() {
-			var title = "TEST WORK TITLE " + randomId();
+			var title = "TEST WORK TITLE " + random.id();
 			pages.new_work.enterPrimaryWorkTitle(title);
 			deferred.fulfill(title);
 		}
@@ -174,7 +174,7 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	var deferred = promise.defer();
 	it (
 		"Enter a random alternate work title #" + (i + 1), function() {
-			var title = "TEST ALTERNATE WORK TITLE " + randomId();
+			var title = "TEST ALTERNATE WORK TITLE " + random.id();
 			pages.new_work.enterAlternateWorkTitle(i, title);
 			deferred.fulfill(title);
 		}
@@ -312,7 +312,7 @@ module.exports.enterRandomProductionTitle = function() {
 				deferred.fulfill(null);
 				return;
 			}
-			title = "TEST PRODUCTION TITLE " + randomId();
+			title = "TEST PRODUCTION TITLE " + random.id();
 			pages.new_work.enterProductionTitle(title);
 			deferred.fulfill(title);
 		});
