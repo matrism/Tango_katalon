@@ -60,7 +60,87 @@ module.exports.mdrcTerritoriesDropDown = function(){
 };
 
 module.exports.mdrcYesCommercialReleaseByMajorLabel = function(){
-    return element(By.css("button[data-ng-model='mdrc.release_label'][text()='Yes']"));
+    return element(By.css("button[data-ng-model='mdrc.release_label']:nth-child(1)"));
+};
+
+module.exports.mdrcNoCommercialReleaseByMajorLabel = function(){
+    return element(By.css("button[data-ng-model='mdrc.release_label']:nth-child(2)"));
+};
+
+module.exports.mdrcLabels = function(){
+    return element(By.css("div[data-ng-model='mdrc.labels'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+};
+
+module.exports.mdrcLabelsDropDownData = function(){
+    return element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"));
+};
+
+module.exports.mdrcYesSelfRecord = function () {
+  return element(By.css("button[data-ng-model='mdrc.self_record']:nth-child(1)"));
+};
+
+module.exports.mdrcNoSelfRecord = function () {
+    return element(By.css("button[data-ng-model='mdrc.self_record']:nth-child(2)"));
+};
+
+module.exports.mdrcPercentOfMinStatutoryRate = function(){
+    return elment(By.model("mdrc.min_stat_mech_rate_percent"));
+};
+
+module.exports.mdrcInNoEventLessThan = function () {
+  return element(By.model("mdrc.no_less_than"));
+};
+
+module.exports.mdrcYesProportionalRecoupmentAllowed = function(){
+    return element(By.css("button[data-ng-model='mdrc.proportional_recoupment']:nth-child(1)"));
+};
+
+module.exports.mdrcNoProportionalRecoupmentAllowed = function(){
+    return element(By.css("button[data-ng-model='mdrc.proportional_recoupment']:nth-child(2)"));
+};
+
+module.exports.mdrcYesSeeContractForAdditionalMdrcComplexities = function () {
+  return element(By.css("button[data-ng-model='mdrc.additional_complexity']:nth-child(1)"));
+};
+
+module.exports.mdrcNoSeeContractForAdditionalMdrcComplexities = function () {
+    return element(By.css("button[data-ng-model='mdrc.additional_complexity']:nth-child(2)"));
+};
+
+module.exports.mdrcDeliverySchedule = function(){
+    return element(By.model("mdrc.delivery_schedule.quantity"));
+};
+
+module.exports.mdrcEveryWeeks = function(){
+    return element(By.model("mdrc.delivery_schedule.frequency"));
+};
+
+module.exports.mdrcDateCompleted = function() {
+    return element(By.css("#dateCompleted input[data-ng-model='date']"));
+};
+
+module.exports.mdrcShortfallAmount = function(){
+    return element(By.id("shortfall"));
+};
+
+module.exports.mdrcForgivenShortfallButton = function () {
+  return element(By.css("div.btn-group.shortfall-action button:nth-child(1)"));
+};
+
+module.exports.mdrcCarriedForwardShortfallButton = function () {
+    return element(By.css("div.btn-group.shortfall-action button:nth-child(2)"));
+};
+
+module.exports.mdrcSaveButton = function () {
+  return element(By.css("button[data-ng-click='activeContractPeriod.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"));
+};
+
+module.exports.mdrcCancelLink = function(){
+    return element(By.css("a[data-ng-click='cancelCommitmentChanges(form.terms.activeCp.id, mdrc.id);']"))
+};
+
+module.exports.mdrcDeleteButton = function(){
+    return element(By.css("button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"));
 };
 
 

@@ -143,8 +143,7 @@ var beforeFeature = function () {
                 steps.deal.goToTermsDealTabDetails();
                 steps.edit_deal_general.cancelModalDialog();
                 steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("test");
-                //steps.base.scrollTop();
-                steps.base.scrollIntoView("Terms header", pages.deal.termsHeader());
+                steps.base.scrollIntoView("Top of page ", pages.deal.generalHeader());
                 steps.deal.goToTermsDealTabDetails();
                 steps.edit_deal_general.confirmModalDialog();
                 steps.deal.expectTermsDetailsAreOk();
