@@ -62,7 +62,6 @@ module.exports.goToGeneralDealTabDetails = function () {
 
 module.exports.goToTermsDealTabDetails = function () {
     it("Click on terms header and go to terms deal tab details ", function () {
-        //browser.executeScript('$("body").scrollTop(1000);');
         pages.deal.goToTermsDealDetails();
     });
 };
