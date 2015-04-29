@@ -51,13 +51,13 @@ var feature = [
 		tags: ["edit"],
 		steps: [
 			[steps.work.editBasicWork, [workData]],
-			[steps.work.validateWork, [workData]],
+			//[steps.work.validateWork, [workData]],
 		]
 	},
 ];
 
 module.exports = {
-    commonFeatureTags: ["new-basic-work"],
+    commonFeatureTags: ["basic-work"],
     feature: feature,
     beforeFeature: beforeFeature
 };

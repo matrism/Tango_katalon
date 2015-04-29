@@ -1,15 +1,16 @@
 "use strict";
 var _ = require("lodash");
+var moment = require("moment");
 exports.id = function() {
 	return Date.now().toString() + Math.floor(Math.random() * 1000);
 };
-exports.date = function(a, b) {
-	a = a.getTime();
+exports.moment = function(a, b) {
+	a = a.valueOf();
 	if(b) {
-		b = b.getTime();
+		b = b.valueOf();
 	}
 	else {
-		b = Date.now();
+		b = moment().valueOf()
 	}
-	return new Date(_.random(a, b));
+	return moment(_.random(a, b));
 };

@@ -1,5 +1,6 @@
 "use strict";
 var pages_path = _tf_config._system_.path_to_pages;
+var moment = require("moment");
 var pad = require("pad");
 var pph = require("../helpers/pph");
 var random = require("../helpers/random");
@@ -177,6 +178,57 @@ module.exports.saveCreators = function() {
 	steps.base.clickElement (
 		"save creators button",
 		pages.work.saveCreatorsButton()
+	);
+};
+module.exports.hoverCreationDateContainerLabel = function() {
+	steps.base.hoverElement(
+		"creation date container label",
+		pages.work.creationDateContainerLabel()
+	);
+};
+module.exports.editCreationDate = function() {
+	steps.base.clickElement(
+		"edit creation date button",
+		pages.work.editCreationDateButton()
+	);
+};
+module.exports.enterDifferentCreationYear = function() {
+	var deferred = promise.defer();
+	it("Enter different creation date year", function() {
+		var enteredYear = pages.work.enteredCreationYear();
+		var differentYear = enteredYear.then(function(enteredYear) {
+			return enteredYear - 1;
+		});
+		pages.work.enterCreationYear(differentYear);
+		deferred.fulfill(differentYear);
+	});
+	return deferred.promise;
+};
+module.exports.enterCreationYear = function(value) {
+	it("Enter the creation year", function() {
+		pages.work.enterCreationYear(value);
+	});
+};
+module.exports.enterCreationMonth = function(value) {
+	it("Enter the creation month", function() {
+		pages.work.enterCreationMonth(value);
+	});
+};
+module.exports.enterCreationDay = function(value) {
+	it("Enter the creation day", function() {
+		pages.work.enterCreationDay(value);
+	});
+};
+module.exports.cancelCreationDateEditing = function() {
+	steps.base.clickElement(
+		"cancel creation date editing button",
+		pages.work.cancelCreationDateEditingButton()
+	);
+};
+module.exports.saveCreationDate = function() {
+	steps.base.clickElement(
+		"save creation date button",
+		pages.work.saveCreationDateButton()
 	);
 };
 module.exports.hoverAssetTypeContainer = function() {
@@ -434,6 +486,16 @@ module.exports.validateCreationDate = function(year, month, day) {
 		});
 	});
 };
+module.exports.expectEnteredCreationYearToBe = function(value) {
+	it("Validate entered creation year", function() {
+		expect(pages.work.enteredCreationYear()).toBe(pph.toString(value));
+	});
+};
+module.exports.expectEnteredCreationYearNotToBe = function(value) {
+	it("Validate entered creation year", function() {
+		expect(pages.work.enteredCreationYear()).not.toBe(pph.toString(value));
+	});
+};
 module.exports.validateDeliveryDate = function(year, month, day) {
 	it("Validate delivery date (if first validation value is not empty)", function() {
 		promise.all([year, month, day]).then(function(values) {
@@ -604,8 +666,9 @@ module.exports.editBasicWork = function(data, more) {
 
 	more.skip = more.skip || {};
 	//more.skip.navigation = true;
-	//more.skip.workTitles = true;
+	more.skip.workTitles = true;
 	more.skip.creators = true;
+	//more.skip.creationDate = true;
 	more.skip.assetType = true;
 	more.skip.workOrigin = true;
 	more.skip.inclusionOnWebsite = true;
@@ -702,6 +765,35 @@ module.exports.editBasicWork = function(data, more) {
 				})();
 
 				steps.work.saveCreators();
+			}
+
+			if(!more.skip.creationDate) {
+				steps.work.hoverCreationDateContainerLabel();
+				steps.work.editCreationDate();
+				(function() {
+					var daysAgo = _.random(1, 30 * 12 * 2);
+					var pastDate = random.moment(moment().subtract(daysAgo, "day"));
+
+					data.creationYear = steps.work.enterDifferentCreationYear();
+					steps.work.cancelCreationDateEditing();
+					steps.base.dirtyCheckConfirmCancellation();
+					steps.work.hoverCreationDateContainerLabel();
+					steps.work.editCreationDate();
+					steps.work.expectEnteredCreationYearNotToBe(data.creationYear);
+
+					data.creationYear = pastDate.year();
+					steps.work.enterCreationYear(data.creationYear);
+					steps.work.cancelCreationDateEditing();
+					steps.base.dirtyCheckContinueEditing();
+					steps.work.expectEnteredCreationYearToBe(data.creationYear);
+
+					data.creationMonth = pastDate.month();
+					steps.work.enterCreationMonth(data.creationMonth);
+
+					data.creationDay = pastDate.date();
+					steps.work.enterCreationDay(data.creationDay);
+				})();
+				steps.work.saveCreationDate();
 			}
 
 			if(!more.skip.assetType) {

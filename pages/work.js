@@ -130,6 +130,46 @@ module.exports.saveCreatorsButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
+module.exports.creationDateContainerLabel = function() {
+	return element(by.cssContainingText(".metadata-label", "CREATION"));
+};
+module.exports.editCreationDateButton = function() {
+	return $(
+		"[data-ng-click='showEdit(workHeader.creationDate, " +
+		"creationDateEditForm)']"
+	);
+};
+module.exports.editCreationDateContainer = function() {
+	return $("[data-ng-show='workHeader.creationDate.edit']");
+};
+module.exports.creationYearInput = function() {
+	return (
+		pages.work.editCreationDateContainer()
+			.element(by.model("date.year"))
+	);
+};
+module.exports.creationMonthInput = function() {
+	return (
+		pages.work.editCreationDateContainer()
+			.element(by.model("date.month"))
+	);
+};
+module.exports.creationDayInput = function() {
+	return (
+		pages.work.editCreationDateContainer()
+			.element(by.model("date.day"))
+	);
+};
+module.exports.cancelCreationDateEditingButton = function() {
+	return pages.work.editCreationDateContainer().element(
+		by.cssContainingText("button", "Cancel")
+	);
+};
+module.exports.saveCreationDateButton = function() {
+	return pages.work.editCreationDateContainer().element(
+		by.cssContainingText("button", "Save")
+	);
+};
 module.exports.creationDateBinding = function() {
 	return element(by.binding("work.pristine.creation_date"));
 };
@@ -349,6 +389,9 @@ module.exports.isCreatorsEditorCheckingForDuplicates = function() {
 		pages.work.creatorsEditorCheckingForDuplicatesMessage()
 	);
 };
+module.exports.enteredCreationYear = function() {
+	return pages.work.creationYearInput().getAttribute("value");
+};
 module.exports.creationDate = function() {
 	var element = pages.work.creationDateBinding();
 	pages.base.scrollIntoView(element);
@@ -544,6 +587,24 @@ module.exports.enterNewAlternateWorkTitle = function(title) {
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.work.editCreatorContributionInput(i);
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterCreationYear = function(value) {
+	var element = pages.work.creationYearInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterCreationMonth = function(value) {
+	var element = pages.work.creationMonthInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterCreationDay = function(value) {
+	var element = pages.work.creationDayInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
