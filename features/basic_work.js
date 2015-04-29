@@ -51,7 +51,7 @@ var feature = [
 		tags: ["edit"],
 		steps: [
 			[steps.work.editBasicWork, [workData]],
-			//[steps.work.validateWork, [workData]],
+			[steps.work.validateWork, [workData]],
 		]
 	},
 ];

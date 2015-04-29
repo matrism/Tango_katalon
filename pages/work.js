@@ -173,6 +173,46 @@ module.exports.saveCreationDateButton = function() {
 module.exports.creationDateBinding = function() {
 	return element(by.binding("work.pristine.creation_date"));
 };
+module.exports.deliveryDateContainerLabel = function() {
+	return element(by.cssContainingText(".metadata-label", "DELIVERY"));
+};
+module.exports.editDeliveryDateButton = function() {
+	return $(
+		"[data-ng-click='showEdit(workHeader.deliveryDate, " +
+		"deliveryDateEditForm)']"
+	);
+};
+module.exports.editDeliveryDateContainer = function() {
+	return $("[data-ng-show='workHeader.deliveryDate.edit']");
+};
+module.exports.deliveryYearInput = function() {
+	return (
+		pages.work.editDeliveryDateContainer()
+			.element(by.model("date.year"))
+	);
+};
+module.exports.deliveryMonthInput = function() {
+	return (
+		pages.work.editDeliveryDateContainer()
+			.element(by.model("date.month"))
+	);
+};
+module.exports.deliveryDayInput = function() {
+	return (
+		pages.work.editDeliveryDateContainer()
+			.element(by.model("date.day"))
+	);
+};
+module.exports.cancelDeliveryDateEditingButton = function() {
+	return pages.work.editDeliveryDateContainer().element(
+		by.cssContainingText("button", "Cancel")
+	);
+};
+module.exports.saveDeliveryDateButton = function() {
+	return pages.work.editDeliveryDateContainer().element(
+		by.cssContainingText("button", "Save")
+	);
+};
 module.exports.deliveryDateBinding = function() {
 	return element(by.binding("work.pristine.delivery_date"));
 };
@@ -397,6 +437,9 @@ module.exports.creationDate = function() {
 	pages.base.scrollIntoView(element);
 	return element.getText();
 };
+module.exports.enteredDeliveryYear = function() {
+	return pages.work.deliveryYearInput().getAttribute("value");
+};
 module.exports.deliveryDate = function() {
 	var element = pages.work.deliveryDateBinding();
 	pages.base.scrollIntoView(element);
@@ -605,6 +648,24 @@ module.exports.enterCreationMonth = function(value) {
 };
 module.exports.enterCreationDay = function(value) {
 	var element = pages.work.creationDayInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterDeliveryYear = function(value) {
+	var element = pages.work.deliveryYearInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterDeliveryMonth = function(value) {
+	var element = pages.work.deliveryMonthInput();
+	pages.base.scrollIntoView(element);
+	element.clear();
+	element.sendKeys(value);
+};
+module.exports.enterDeliveryDay = function(value) {
+	var element = pages.work.deliveryDayInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);

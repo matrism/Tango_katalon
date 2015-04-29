@@ -231,6 +231,57 @@ module.exports.saveCreationDate = function() {
 		pages.work.saveCreationDateButton()
 	);
 };
+module.exports.hoverDeliveryDateContainerLabel = function() {
+	steps.base.hoverElement(
+		"delivery date container label",
+		pages.work.deliveryDateContainerLabel()
+	);
+};
+module.exports.editDeliveryDate = function() {
+	steps.base.clickElement(
+		"edit delivery date button",
+		pages.work.editDeliveryDateButton()
+	);
+};
+module.exports.enterDifferentDeliveryYear = function() {
+	var deferred = promise.defer();
+	it("Enter different delivery date year", function() {
+		var enteredYear = pages.work.enteredDeliveryYear();
+		var differentYear = enteredYear.then(function(enteredYear) {
+			return enteredYear - 1;
+		});
+		pages.work.enterDeliveryYear(differentYear);
+		deferred.fulfill(differentYear);
+	});
+	return deferred.promise;
+};
+module.exports.enterDeliveryYear = function(value) {
+	it("Enter the delivery year", function() {
+		pages.work.enterDeliveryYear(value);
+	});
+};
+module.exports.enterDeliveryMonth = function(value) {
+	it("Enter the delivery month", function() {
+		pages.work.enterDeliveryMonth(value);
+	});
+};
+module.exports.enterDeliveryDay = function(value) {
+	it("Enter the delivery day", function() {
+		pages.work.enterDeliveryDay(value);
+	});
+};
+module.exports.cancelDeliveryDateEditing = function() {
+	steps.base.clickElement(
+		"cancel delivery date editing button",
+		pages.work.cancelDeliveryDateEditingButton()
+	);
+};
+module.exports.saveDeliveryDate = function() {
+	steps.base.clickElement(
+		"save delivery date button",
+		pages.work.saveDeliveryDateButton()
+	);
+};
 module.exports.hoverAssetTypeContainer = function() {
 	steps.base.hoverElement (
 		"asset type container",
@@ -514,6 +565,16 @@ module.exports.validateDeliveryDate = function(year, month, day) {
 		});
 	});
 };
+module.exports.expectEnteredDeliveryYearToBe = function(value) {
+	it("Validate entered delivery year", function() {
+		expect(pages.work.enteredDeliveryYear()).toBe(pph.toString(value));
+	});
+};
+module.exports.expectEnteredDeliveryYearNotToBe = function(value) {
+	it("Validate entered delivery year", function() {
+		expect(pages.work.enteredDeliveryYear()).not.toBe(pph.toString(value));
+	});
+};
 module.exports.validateMusicalDistributionCategory = function(value) {
 	it("Validate musical distribution category (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
@@ -669,6 +730,7 @@ module.exports.editBasicWork = function(data, more) {
 	more.skip.workTitles = true;
 	more.skip.creators = true;
 	//more.skip.creationDate = true;
+	//more.skip.deliveryDate = true;
 	more.skip.assetType = true;
 	more.skip.workOrigin = true;
 	more.skip.inclusionOnWebsite = true;
@@ -796,6 +858,35 @@ module.exports.editBasicWork = function(data, more) {
 				steps.work.saveCreationDate();
 			}
 
+			if(!more.skip.deliveryDate) {
+				steps.work.hoverDeliveryDateContainerLabel();
+				steps.work.editDeliveryDate();
+				(function() {
+					var daysAgo = _.random(1, 30 * 12 * 2);
+					var pastDate = random.moment(moment().subtract(daysAgo, "day"));
+
+					data.deliveryYear = steps.work.enterDifferentDeliveryYear();
+					steps.work.cancelDeliveryDateEditing();
+					steps.base.dirtyCheckConfirmCancellation();
+					steps.work.hoverDeliveryDateContainerLabel();
+					steps.work.editDeliveryDate();
+					steps.work.expectEnteredDeliveryYearNotToBe(data.deliveryYear);
+
+					data.deliveryYear = pastDate.year();
+					steps.work.enterDeliveryYear(data.deliveryYear);
+					steps.work.cancelDeliveryDateEditing();
+					steps.base.dirtyCheckContinueEditing();
+					steps.work.expectEnteredDeliveryYearToBe(data.deliveryYear);
+
+					data.deliveryMonth = pastDate.month();
+					steps.work.enterDeliveryMonth(data.deliveryMonth);
+
+					data.deliveryDay = pastDate.date();
+					steps.work.enterDeliveryDay(data.deliveryDay);
+				})();
+				steps.work.saveDeliveryDate();
+			}
+
 			if(!more.skip.assetType) {
 				steps.work.hoverAssetTypeContainer();
 				steps.work.editAssetType();
@@ -877,10 +968,10 @@ module.exports.validateWork = function(data, more) {
 
 	more.skip = more.skip || {};
 	//more.skip.navigation = true;
-	//more.skip.workTitles = true;
+	more.skip.workTitles = true;
 	more.skip.creators = true;
-	more.skip.creationDate = true;
-	more.skip.deliveryDate = true;
+	//more.skip.creationDate = true;
+	//more.skip.deliveryDate = true;
 	more.skip.assetType = true;
 	more.skip.workOrigin = true;
 	more.skip.inclusionOnWebsite = true;
