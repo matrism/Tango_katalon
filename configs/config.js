@@ -27,8 +27,8 @@ var configer = ftf.configer,
         localhost: {
             urls: {
                 sso: configer.getEnvVarByKey("URL_SSO"),
-                app_url:  "http://musicpublishing.staging.dsp.wmg.com",
-                service_url: "http://musicpublishing.staging.dsp.wmg.com"
+                app_url:  "http://tango.tango-qa-aws.dspdev.wmg.com/",
+                service_url: "http://tango.tango-qa-aws.dspdev.wmg.com/"
             },
             user_name: configer.getEnvVarByKey("TEST_USERNAME") || "TangoTest1",
             user_password: configer.getEnvVarByKey("TEST_PASSWORD") || "P@ssw0rd78"
