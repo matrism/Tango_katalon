@@ -23,21 +23,7 @@ if (steps.login === undefined) {
             });
         },
 
-        accessSavedDealByNumber:function(dealContractNumber)
-        {
 
-            it("User accesses deal with number "+ dealContractNumber,function(){
-                pages.login.selectOptionFromSearchDropDown("Deals");
-                pages.login.typeDealNumberIntoInput(dealContractNumber);
-                pages.login.selectValueFromDropdown();
-
-
-            })
-
-
-
-
-        }
     };
 
 

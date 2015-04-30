@@ -12,8 +12,8 @@ var configer = ftf.configer,
         _system_: {
             browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "firefox"),
             resolution: {
-                width: 1024,
-                height: 768
+                width: 1600,
+                height: 900
             },
             reporting: cli.reporting in ["html", "xml", "all"] ? cli.reporting : "none",
             path_to_features: "./features/",

@@ -24,44 +24,94 @@ if (pages.editRoyaltyRates === undefined) {
 
 
         },
+        rrSumarryTable: function () {
+            return element(by.css(".rate-set-summary-table"));
+        },
 
-        clickNewRoyaltySetButton: function () {
+        editSavedRRIcon: function () {
 
-
-            browser.driver.sleep(5000);
-            var element;
-            element = browser.driver.findElement(by.css(".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"));
-            element.click();
+            return element(by.css(".rate-set-summary-table>button"));
         }
+        ,
+        searchDropdown: function () {
 
+            return element(by.css(".btn.dropdown-toggle"));
+
+
+        },
+        royaltyRateName: function () {
+            return element(by.css(".ng-scope>td>strong"));
+        },
+        searchDropdownOptions: function () {
+
+            return element.all(by.css("#DSP-SEARCH-DROP>.dropdown-menu>li"));
+        }
+        ,
+        searchInput: function () {
+
+            return element(by.css(".tg-typeahead__input"));
+        },
+
+        searchTypeAheadDropdown: function () {
+
+            return element(by.css(" .tg-typeahead__suggestions-group-item-inner"));
+        },
+
+        royaltyRateDate: function () {
+
+            return element(by.css(".rate-sets-table>tbody>tr>td:nth-child(4)"));
+
+        }
         ,
 
+
+        RRIncomeDateMethodButton: function () {
+
+
+        },
+
+        RApplicationMethodButton: function () {
+
+            return this.RApplicationMethodButton().getText();
+
+        },
+
+        newRoyaltySetButton:function()
+        {
+
+            return  element(by.css(".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"));
+
+        }
+,
+
         royaltyRateInput: function () {
-            return browser.driver.findElement(by.css(".rate-set-name-input"));
+            return element(by.css(".rate-set-name-input"));
 
         },
         scopeHeading: function () {
 
 
-            return browser.driver.findElement(by.css(".scope-heading"));
+            return element(by.css(".scope-heading.clearfix.relative"));
         }
         ,
 
 
-        expandAllIncomeGroups: function () {
-            var i = 0;
-            browser.driver.findElements(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[3]/div/div[1]/a/i"))
-
-                .then(function (result) {
-
-                    for (i = 0; i < result.length; i++) {
-                        result[i].click();
-                    }
-                }
-            )
+       incomeProviderInput:function() {
+          return  element(by.css(".ux-multiselect-li.ux-multiselect-item.ng-scope.ng-binding"));
+       },
+        ///END OF LOCATORS
 
 
-        },
+        clickNewRoyaltySetButton: function () {
+
+
+            browser.driver.sleep(5000);
+
+            this.newRoyaltySetButton().click();
+        }
+
+        ,
+
 
         closeRoyaltySet: function () {
             pages.editRoyaltyRates.elems.closeRateSetButton.click();
@@ -73,10 +123,9 @@ if (pages.editRoyaltyRates === undefined) {
 
 
         clearRoyaltyRateNameInput: function () {
-            var element;
 
-            element = this.royaltyRateInput();
-            element.clear();
+            this.royaltyRateInput().clear();
+
 
 
         },
@@ -120,15 +169,13 @@ if (pages.editRoyaltyRates === undefined) {
         getIncomeProviderInputValue: function () {
 
 
-            var incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li.ux-multiselect-item.ng-scope.ng-binding"));
 
-            return incomeProviderInput.getText();
+            return this.incomeProviderInput().getText();
 
 
         },
 
         getRRInputBorderTopValue: function () {
-
 
 
             var element = this.royaltyRateInput();
@@ -138,15 +185,12 @@ if (pages.editRoyaltyRates === undefined) {
         getRRInputBorderRightValue: function () {
 
 
-
-           var element = this.royaltyRateInput();
+            var element = this.royaltyRateInput();
 
             return element.getCssValue('border-right-color');
         },
 
         getRRInputBorderBottomValue: function () {
-
-
 
 
             var element = this.royaltyRateInput();
@@ -155,7 +199,6 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         getRRInputBorderLeftValue: function () {
-
 
 
             var element = this.royaltyRateInput();
@@ -179,8 +222,7 @@ if (pages.editRoyaltyRates === undefined) {
         getRRInputValue: function () {
 
 
-
-          var element = this.royaltyRateInput();
+            var element = this.royaltyRateInput();
 
             return element.getAttribute('value');
 
@@ -252,7 +294,6 @@ if (pages.editRoyaltyRates === undefined) {
             return effectiveStartDateContextualHelp.getText();
 
 
-
         },
         getEffectiveStartDateInputValue: function () {
             var effectiveStartDateInput;
@@ -309,7 +350,6 @@ if (pages.editRoyaltyRates === undefined) {
             onReceiptMethodButton = element(by.css(".rate-set-rate-ram>.btn-group")).element(by.buttonText("On Receipt"));
 
 
-
             onReceiptMethodButton.click();
 
         },
@@ -337,11 +377,8 @@ if (pages.editRoyaltyRates === undefined) {
             browser.driver.sleep(5000);
 
 
-            var element;
-            element = browser.driver.findElement(by.css(".scope-heading.clearfix.relative"));
 
-
-            element.click();
+            this.scopeHeading.click();
 
 
 
@@ -349,51 +386,80 @@ if (pages.editRoyaltyRates === undefined) {
         }
 
         ,
-        openSavedRR:function()
-        {
+        clickRRSumarryTable: function () {
 
-            var element = this.editSavedRRIcon();
-            element.click();
+            browser.wait(ExpectedConditions.visibilityOf(this.rrSumarryTable()));
+            this.rrSumarryTable().click();
+
+        },
+        clickeditSavedRRIcon: function () {
+
+
+              browser.wait(ExpectedConditions.visibilityOf(this.editSavedRRIcon()));
+               this.editSavedRRIcon().click();
 
 
         }
         ,
 
-        getSavedRRName:function()
-        {
-           return this.royaltyRateName().getText();
-
-
+        getSavedRRName: function () {
+            return this.royaltyRateName().getText();
 
 
         },
 
-        getSavedRRDate:function()
-        {
+        getSavedRRDate: function () {
 
             return this.royaltyRateDate().getText();
 
         },
 
-        getSavedRRIncomeDateMethod:function()
-        {
+        getSavedRRIncomeDateMethod: function () {
 
             return this.RRIncomeDateMethodButton().getText();
 
         },
 
-        getSavedRRApplicationMethod:function()
-        {
+        getSavedRRApplicationMethod: function () {
 
             return this.RApplicationMethodButton().getText();
 
 
         }
 
+        ,
+
+        clickDropdownMenu: function () {
+            this.searchDropdown().click();
+
+        }
+        ,
+        selectOptionFromSearchDropDown: function (option) {
+
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("#DSP-SEARCH-DROP>.dropdown-menu"))));
+
+            element(by.css('#SEARCH-DEAL')).click();
 
 
 
-});
+        },
+        typeDealNumberIntoInput: function (dealContractNumber) {
+
+            this.searchInput().sendKeys(dealContractNumber);
+
+        }
+        ,
+        selectValueFromDropdown: function () {
+
+
+            browser.wait(ExpectedConditions.visibilityOf(this.searchTypeAheadDropdown()));
+            this.searchTypeAheadDropdown().click();
+
+
+        }
+
+
+    });
 }
 
 module.exports = pages.editRoyaltyRates;

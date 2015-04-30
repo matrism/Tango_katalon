@@ -27,7 +27,11 @@ if (pages.royaltyRates === undefined) {
 
 
         },
+        newRoyaltyRateSetButton:function()
+        {
+            return element(by.css(".ng-scope.ng-warn.ng-dirty>div>a"));
 
+        },
 
         royaltyRateInput: function () {
             return browser.driver.findElement(by.css(".rate-set-name-input"));
@@ -36,16 +40,28 @@ if (pages.royaltyRates === undefined) {
         scopeHeading: function () {
 
 
-            return browser.driver.findElement(by.css(".scope-heading"));
+            return element(by.css(".scope-heading.clearfix.relative"));
         }
         ,
+        onReceiptMethodButton:function()
+        {
+            return element(by.css(".rate-set-rate-ram>.btn-group")).element(by.buttonText("On Receipt"));
+
+
+        }
+,
+
+
+        //LOCATORS END
 
 
         clickNewRoyaltySetButton: function () {
 
 
-            browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.elems.newRoyaltyRateSetButton), 30000);
-            pages.royaltyRates.elems.newRoyaltyRateSetButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
+
+
+            this.newRoyaltyRateSetButton().click();
         }
         ,
         expandAllIncomeGroups: function () {
@@ -245,8 +261,10 @@ if (pages.royaltyRates === undefined) {
             var effectiveStartDateContextualHelpIcon;
             effectiveStartDateContextualHelpIcon = element(by.css(".rate-set-calendar>.control-label>i"));
             var effectiveStartDateContextualHelp;
-            effectiveStartDateContextualHelp = element(by.css(".tooltip"));
+
             effectiveStartDateContextualHelpIcon.click();
+            effectiveStartDateContextualHelp = element(by.css(".tooltip"));
+
 
 
             browser.wait(ExpectedConditions.visibilityOf(effectiveStartDateContextualHelp), 10000);
@@ -307,12 +325,11 @@ if (pages.royaltyRates === undefined) {
         ,
         clickOnReceiptApplicationMethod: function () {
 
-            var onReceiptMethodButton;
-            onReceiptMethodButton = element(by.css(".rate-set-rate-ram>.btn-group")).element(by.buttonText("On Receipt"));
 
 
 
-            onReceiptMethodButton.click();
+
+            this.onReceiptMethodButton().click();
 
         },
         clickYesOnRateMethodModal: function () {
@@ -336,18 +353,18 @@ if (pages.royaltyRates === undefined) {
         clickScopeHeading: function () {
 
 
+            browser.wait(ExpectedConditions.visibilityOf(this.scopeHeading()));
+
+
+          //  browser.driver.sleep(5000);
+
+
+          //  var element;
+          //  element = browser.driver.findElement(by.css(".scope-heading.clearfix.relative"));
 
 
 
-            browser.driver.sleep(5000);
-
-
-            var element;
-            element = browser.driver.findElement(by.css(".scope-heading.clearfix.relative"));
-
-
-
-            element.click();
+            this.scopeHeading().click();
 
 
 

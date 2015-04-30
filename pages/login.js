@@ -11,6 +11,10 @@ if (pages.login === undefined) {
 		pages.login.scrollIntoView(el);
 		expect(el.isPresent()).toBe(options.should_be_logged_in);
 	};
+
+
+
+
 }
 
 module.exports = pages.login;

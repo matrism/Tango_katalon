@@ -23,17 +23,18 @@ require(steps_path + "deal_scope");
 
 var beforeFeature = function () {
         steps.login.itLogin();
-        steps.base.accessSavedDealByNumber("205622");
+        steps.editRoyaltyRates.accessSavedDealByNumber("205622");
 
 
 
 
-        steps.royaltyRates.openSavedScope();
+
+       steps.royaltyRates.openSavedScope();
     },
 
     feature = [{
         name: "I would like to create Royalty Rates within a Deal",
-        tags: ["rr11"],
+        tags: ["rre1"],
         steps: function () {
 
             steps.editRoyaltyRates.addNewRoyaltySet();
@@ -47,7 +48,7 @@ var beforeFeature = function () {
 
         {
             name: "Royalty Rate Set fields",
-            tags: ["rr22"],
+            tags: ["rre2"],
             steps: function () {
                 steps.editRoyaltyRates.addNewRoyaltySet();
                 steps.editRoyaltyRates.clearRoyaltyRateInput();
@@ -76,7 +77,7 @@ var beforeFeature = function () {
         ,
         {
             name: "Royalty Rate Set fields",
-            tags: ["rr33"],
+            tags: ["rre3"],
             steps: function () {
                 steps.editRoyaltyRates.addNewRoyaltySet();
                 steps.editRoyaltyRates.inspectEffectiveStartDateArea();
@@ -102,7 +103,7 @@ var beforeFeature = function () {
 
         {
             name: "Royalty Rate Set fields",
-            tags: ["rr44"],
+            tags: ["rre4"],
             steps: function () {
 
                 steps.editRoyaltyRates.addNewRoyaltySet();
@@ -126,7 +127,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["edit_royalty"],
+    commonFeatureTags: ["edit_existing_deal_royalty"],
     feature: feature,
     beforeFeature: beforeFeature
 };

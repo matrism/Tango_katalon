@@ -264,7 +264,7 @@ if (steps.editRoyaltyRates === undefined) {
             it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
-                browser.pause();
+               // browser.pause();
             });
         },
         closeRateSet: function () {
@@ -304,15 +304,34 @@ if (steps.editRoyaltyRates === undefined) {
 
         { it("Rate Set Was Saved ",function(){
 
-            pages.editRoyaltyRates.openSavedRR();
+            pages.editRoyaltyRates.clickRRSumarryTable();
+            pages.editRoyaltyRates.clickeditSavedRRIcon();
 
-            expect(pages.editRoyaltyRates.getSavedRRName().toBe("Rate Set 1"));
-            expect(pages.editRoyaltyRates.getSavedRRDate().toBe("2015-11-11"));
-            expect(pages.editRoyaltyRates.getSavedRRIncomeDateMethod().toBe("Deal Signing Territory"));
-            expect(pages.editRoyaltyRates.getSavedRRApplicationMethod().toBe("On Receipt"));
+            expect(pages.editRoyaltyRates.getSavedRRName()).toBe("Rate Set 1");
+            expect(pages.editRoyaltyRates.getSavedRRDate()).toBe("2015-11-11");
+         //   expect(pages.editRoyaltyRates.getSavedRRIncomeDateMethod().toBe("Deal Signing Territory"));
+           // expect(pages.editRoyaltyRates.getSavedRRApplicationMethod().toBe("On Receipt"));
 
 
         })
+
+
+        },
+
+        accessSavedDealByNumber:function(dealContractNumber)
+        {
+
+            it("User accesses deal with number "+ dealContractNumber,function(){
+
+                pages.editRoyaltyRates.clickDropdownMenu();
+                pages.editRoyaltyRates.selectOptionFromSearchDropDown("Deals");
+                pages.editRoyaltyRates.typeDealNumberIntoInput(dealContractNumber);
+                pages.editRoyaltyRates.selectValueFromDropdown();
+
+
+            })
+
+
 
 
         }
