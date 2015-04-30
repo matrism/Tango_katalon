@@ -240,3 +240,16 @@ module.exports.selectMdrcRandomValueFromLabel = function () {
         });
 
 };
+
+module.exports.clickOnMdrcYesSelfRecord = function () {
+    pages.create_deal_contract_period.mdrcYesSelfRecord().click();
+};
+
+module.exports.clickOnMdrcNoSelfRecord = function () {
+    pages.create_deal_contract_period.mdrcNoSelfRecord().click();
+};
+
+module.exports.fillIntoMdrcPercentOfMinStatutoryRate = function(){
+    var percent = Math.floor(Math.random() * 100) + 1;
+    pages.create_deal_contract_period.mdrcPercentOfMinStatutoryRate().sendKeys(percent);
+};

@@ -95,15 +95,15 @@ module.exports.addMdrcTerritory = function () {
 };
 
 
-module.exports.clickMdrcYesCommercialReleaseByMajorLabel=function(){
-    it("Click on MDRC yes commercial release by major label ", function(){
+module.exports.clickMdrcYesCommercialReleaseByMajorLabel = function () {
+    it("Click on MDRC yes commercial release by major label ", function () {
         pages.create_deal_contract_period.clickOnMdrcYesCommercialReleaseByMajorLabel();
     });
 };
 
 
-module.exports.clickMdrcNoCommercialReleaseByMajorLabel=function(){
-    it("Click on MDRC no commercial release by major label ", function(){
+module.exports.clickMdrcNoCommercialReleaseByMajorLabel = function () {
+    it("Click on MDRC no commercial release by major label ", function () {
         pages.create_deal_contract_period.clickOnMdrcNoCommercialReleaseByMajorLabel();
     });
 };
@@ -122,12 +122,47 @@ module.exports.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected = functi
     });
 };
 
-module.exports.selectMdrcRandomLabel= function () {
-  it("Select random mdrc label ", function () {
-      pages.create_deal_contract_period.fillIntoMdrcLabelsField();
-      pages.create_deal_contract_period.selectMdrcRandomValueFromLabel();
-  })
+module.exports.selectMdrcRandomLabel = function () {
+    it("Select random mdrc label ", function () {
+        pages.create_deal_contract_period.fillIntoMdrcLabelsField();
+        pages.create_deal_contract_period.selectMdrcRandomValueFromLabel();
+    })
 };
+
+
+module.exports.clickMdrcYesSelfRecord = function () {
+    it("Click on MDRC yes self record ", function () {
+        pages.create_deal_contract_period.clickOnMdrcYesSelfRecord();
+    });
+};
+
+
+module.exports.clickOnMdrcNoSelfRecord = function () {
+    it("Click on MDRC no self record ", function () {
+        pages.create_deal_contract_period.clickOnMdrcNoSelfRecord();
+    });
+};
+
+module.exports.checkMdrcYesSelfRecordOptionIsSelected = function () {
+    it("Check MDRC yes self record option is selected ", function () {
+        var test = pages.create_deal_contract_period.mdrcYesSelfRecord().getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+module.exports.checkMdrcNoSelfRecordOptionIsSelected = function () {
+    it("Check MDRC no self record option is selected ", function () {
+        var test = pages.create_deal_contract_period.mdrcNoSelfRecord().getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+module.exports.fillMdrcPercentOfMinStatutoryRate = function () {
+    it("Fill MDRC percent of min statutory rate ", function () {
+        pages.create_deal_contract_period.fillIntoMdrcPercentOfMinStatutoryRate();
+    });
+};
+
 
 module.exports.itAddIncompleteMdrcContractPeriod = function () {
     describe("Add incomplete MDRC on  contract period screen", function () {
@@ -137,6 +172,7 @@ module.exports.itAddIncompleteMdrcContractPeriod = function () {
         steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
         steps.create_deal_contract_period.addMdrcTerritory();
         steps.create_deal_contract_period.selectMdrcRandomLabel();
+        steps.create_deal_contract_period.fillMdrcPercentOfMinStatutoryRate();
     });
 };
 
