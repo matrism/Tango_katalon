@@ -9,6 +9,7 @@ SSReporter_instance = new ScreenShotReporter({baseDirectory: "reports/html"});
 
 global.pages = {};
 global.steps = {};
+global.hash = {};
 
 require("../helpers/services_helper");
 
