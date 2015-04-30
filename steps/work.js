@@ -1030,7 +1030,7 @@ module.exports.validateWork = function(data, more) {
 				steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
 			}
 
-			if(!more.skip.creators) {
+			if(!more.skip.creators && data.creators && data.creators.length !== 0) {
 				steps.work.goToScopeDelivery();
 
 				data.creators.forEach (
