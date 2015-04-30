@@ -727,13 +727,13 @@ module.exports.editBasicWork = function(data, more) {
 
 	more.skip = more.skip || {};
 	//more.skip.navigation = true;
-	more.skip.workTitles = true;
-	more.skip.creators = true;
+	//more.skip.workTitles = true;
+	//more.skip.creators = true;
 	//more.skip.creationDate = true;
 	//more.skip.deliveryDate = true;
-	more.skip.assetType = true;
-	more.skip.workOrigin = true;
-	more.skip.inclusionOnWebsite = true;
+	//more.skip.assetType = true;
+	//more.skip.workOrigin = true;
+	//more.skip.inclusionOnWebsite = true;
 
 	describe (
 		"Edit basic work", function() {
@@ -968,13 +968,13 @@ module.exports.validateWork = function(data, more) {
 
 	more.skip = more.skip || {};
 	//more.skip.navigation = true;
-	more.skip.workTitles = true;
-	more.skip.creators = true;
+	//more.skip.workTitles = true;
+	//more.skip.creators = true;
 	//more.skip.creationDate = true;
 	//more.skip.deliveryDate = true;
-	more.skip.assetType = true;
-	more.skip.workOrigin = true;
-	more.skip.inclusionOnWebsite = true;
+	//more.skip.assetType = true;
+	//more.skip.workOrigin = true;
+	//more.skip.inclusionOnWebsite = true;
 
 	describe (
 		"Validate work data", function() {
