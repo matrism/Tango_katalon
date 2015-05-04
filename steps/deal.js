@@ -41,7 +41,7 @@ module.exports.returnDealNumber = function () {
                     console.log("Deal number is: " + promise);
                 });
 
-        return pages.deal.dealBriefNumber();
+        //return pages.deal.dealBriefNumber();
     });
 };
 

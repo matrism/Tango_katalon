@@ -84,7 +84,7 @@ module.exports.mdrcNoSelfRecord = function () {
 };
 
 module.exports.mdrcPercentOfMinStatutoryRate = function () {
-    return elment(By.model("mdrc.min_stat_mech_rate_percent"));
+    return element(By.model("mdrc.min_stat_mech_rate_percent"));
 };
 
 module.exports.mdrcInNoEventLessThan = function () {
@@ -249,7 +249,47 @@ module.exports.clickOnMdrcNoSelfRecord = function () {
     pages.create_deal_contract_period.mdrcNoSelfRecord().click();
 };
 
-module.exports.fillIntoMdrcPercentOfMinStatutoryRate = function(){
+module.exports.fillIntoMdrcPercentOfMinStatutoryRate = function () {
     var percent = Math.floor(Math.random() * 100) + 1;
     pages.create_deal_contract_period.mdrcPercentOfMinStatutoryRate().sendKeys(percent);
+};
+
+module.exports.fillIntoMdrcInNoEventLessThan = function () {
+    var value = Math.floor(Math.random() * 20) + 1;
+    pages.create_deal_contract_period.mdrcInNoEventLessThan().sendKeys(value);
+};
+
+module.exports.clickOnMdrcYesProportionalRecoupmentAllowed = function () {
+    pages.create_deal_contract_period.mdrcYesProportionalRecoupmentAllowed().click();
+};
+
+module.exports.clickOnMdrcNoProportionalRecoupmentAllowed = function () {
+    pages.create_deal_contract_period.mdrcNoProportionalRecoupmentAllowed().click();
+};
+
+module.exports.clickOnMdrcYesSeeContractForAdditionalMdrcComplexities = function () {
+    pages.create_deal_contract_period.mdrcYesSeeContractForAdditionalMdrcComplexities().click();
+};
+
+module.exports.clickOnMdrcNoSeeContractForAdditionalMdrcComplexities = function () {
+    pages.create_deal_contract_period.mdrcNoSeeContractForAdditionalMdrcComplexities().click();
+};
+
+module.exports.clickOnSaveMdrcForm = function () {
+    pages.create_deal_contract_period.mdrcSaveButton().click();
+};
+
+module.exports.fillIntoMdrcDeliverySchedule = function () {
+    var value = Math.floor(Math.random() * 20) + 1;
+    pages.create_deal_contract_period.mdrcDeliverySchedule().sendKeys(value);
+};
+
+module.exports.fillIntoMdrcEveryWeeks = function () {
+    var value = Math.floor(Math.random() * 10) + 1;
+    pages.create_deal_contract_period.mdrcEveryWeeks().sendKeys(value);
+};
+
+module.exports.fillIntoDateCompleted = function () {
+    //var dateCompleted = moment('20151023').format("yyyy-mm-dd");
+  pages.create_deal_contract_period.mdrcDateCompleted().sendKeys("2015-08-12");
 };
