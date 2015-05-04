@@ -21,8 +21,13 @@ if (steps.login === undefined) {
             it ("User should see '" + optionName + "' option", function() {
                 ftf.helper.shouldBeInArrayOfElements(pages.base.elems.user_dropdown_menu_items, optionName, false, false);
             });
-        }
+        },
+
+
     };
+
+
+
 }
 
 module.exports = steps.login;
