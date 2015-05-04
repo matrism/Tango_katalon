@@ -591,7 +591,14 @@ module.exports.validateTextMusicRelationship = function(value) {
 			if(!value) {
 				return;
 			}
-			expect(pages.work.textMusicRelationship()).toBe(value);
+			if(value.toLowerCase() === "select type") {
+				expect(pages.base.isPresentAndDisplayed(
+					pages.work.textMusicRelationshipBinding()
+				)).toBeFalsy();
+			}
+			else {
+				expect(pages.work.textMusicRelationship()).toBe(value);
+			}
 		});
 	});
 };
@@ -601,7 +608,14 @@ module.exports.validateExcerptType = function(value) {
 			if(!value) {
 				return;
 			}
-			expect(pages.work.excerptType()).toBe(value);
+			if(value.toLowerCase() === "select type") {
+				expect(pages.base.isPresentAndDisplayed(
+					pages.work.excerptTypeBinding()
+				)).toBeFalsy();
+			}
+			else {
+				expect(pages.work.excerptType()).toBe(value);
+			}
 		});
 	});
 };
@@ -641,7 +655,14 @@ module.exports.validateIntendedPurpose = function(value) {
 			if(!value) {
 				return;
 			}
-			expect(pages.work.intendedPurpose()).toBe(value);
+			if(value.toLowerCase() === "select type") {
+				expect(pages.base.isPresentAndDisplayed(
+					pages.work.intendedPurposeBinding()
+				)).toBeFalsy();
+			}
+			else {
+				expect(pages.work.intendedPurpose()).toBe(value);
+			}
 		});
 	});
 };
@@ -661,7 +682,14 @@ module.exports.validateBltvr = function(value) {
 			if(!value) {
 				return;
 			}
-			expect(pages.work.bltvr()).toBe(value);
+			if(value.toLowerCase() === "select type") {
+				expect(pages.base.isPresentAndDisplayed(
+					pages.work.bltvrBinding()
+				)).toBeFalsy();
+			}
+			else {
+				expect(pages.work.bltvr()).toBe(value);
+			}
 		});
 	});
 };
