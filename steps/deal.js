@@ -36,9 +36,12 @@ module.exports.waitForDealToBeSaved = function () {
 
 module.exports.returnDealNumber = function () {
     it("Return deal number ", function () {
-        console.log("Deal number is: " + pages.deal.dealBriefNumber());
-        return pages.deal.dealBriefNumber();
+        element(By.xpath("//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']")).getText().
+                then(function(promise){
+                    console.log("Deal number is: " + promise);
+                });
 
+        //return pages.deal.dealBriefNumber();
     });
 };
 
@@ -50,3 +53,21 @@ module.exports.itContinueToNextPage = function () {
     );
 };
 
+module.exports.goToGeneralDealTabDetails = function () {
+    it("Click on general header and go to general deal tab details ", function () {
+        pages.deal.goToGeneralDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.dealGeneralSummaryHeader()));
+    });
+};
+
+module.exports.goToTermsDealTabDetails = function () {
+    it("Click on terms header and go to terms deal tab details ", function () {
+        pages.deal.goToTermsDealDetails();
+    });
+};
+
+module.exports.expectTermsDetailsAreOk = function () {
+    it("Expect terms tab is opened successfully ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.dealTermsSummaryHeader()));
+    });
+};
