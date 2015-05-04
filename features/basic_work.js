@@ -46,14 +46,14 @@ var feature = [
 			[steps.work.validateWork, [workData]],
 		]
 	},
-	//{
-		//name: "Edit basic work",
-		//tags: ["edit"],
-		//steps: [
-			//[steps.work.editBasicWork, [workData]],
-			//[steps.work.validateWork, [workData]],
-		//]
-	//},
+	{
+		name: "Edit basic work",
+		tags: ["edit"],
+		steps: [
+			[steps.work.editBasicWork, [workData]],
+			[steps.work.validateWork, [workData]],
+		]
+	},
 ];
 
 module.exports = {

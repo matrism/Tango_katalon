@@ -52,15 +52,16 @@ module.exports.editWorkTitles = function() {
 		"edit work titles button", pages.work.editWorkTitlesButton()
 	);
 };
-module.exports.enterRandomPrimaryWorkTitle = function(data, key) {
-	key = key || "primaryWorkTitle";
+module.exports.enterRandomPrimaryWorkTitle = function() {
+	var deferred = promise.defer();
 	it (
 		"Enter a random primary work title", function() {
 			var title = "TEST WORK TITLE " + random.id();
 			pages.work.enterPrimaryWorkTitle(title);
-			data[key] = title;
+			deferred.fulfill(title);
 		}
 	);
+	return deferred.promise;
 };
 module.exports.enterRandomAlternateWorkTitle = function(i) {
 	var deferred = promise.defer();
@@ -73,16 +74,16 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	);
 	return deferred.promise;
 };
-module.exports.enterNewRandomAlternateWorkTitle = function(data, key) {
-	key = key || "alternateWorkTitles";
+module.exports.enterNewRandomAlternateWorkTitle = function() {
+	var deferred = promise.defer();
 	it (
 		"Enter new random alternate work title", function() {
 			var title = "TEST ALTERNATE WORK TITLE " + random.id();
 			pages.work.enterNewAlternateWorkTitle(title);
-			data[key] = data[key] || [];
-			data[key].push(title);
+			deferred.fulfill(title);
 		}
 	);
+	return deferred.promise;
 };
 module.exports.waitTitleEditorCheckForDuplicates = function() {
 	it("Wait title editor check for duplicates", function() {
@@ -141,23 +142,17 @@ module.exports.enterCreatorContribution = function(i, contribution) {
 		pages.work.enterCreatorContribution(i, contribution);
 	});
 };
-module.exports.expectFirstCreatorContributionFieldValueToBe = function(data, key) {
-	key = key || "creators";
-	it("Validate first creator's entered contribution", function() {
-		var firstCreator = data[key][0];
-
+module.exports.expectFirstCreatorContributionFieldValueToBe = function(value) {
+	it("Validate creator contribution #1", function() {
 		expect(pages.work.editFirstCreatorContributionFieldValue()).toBe(
-			pph.toString(firstCreator.contribution)
+			pph.toString(value)
 		);
 	});
 };
-module.exports.expectFirstCreatorContributionFieldValueNotToBe = function(data, key) {
-	key = key || "creators";
-	it("Validate first creator's entered contribution", function() {
-		var firstCreator = data[key][0];
-
+module.exports.expectFirstCreatorContributionFieldValueNotToBe = function(value) {
+	it("Validate creator contribution #1", function() {
 		expect(pages.work.editFirstCreatorContributionFieldValue()).not.toBe(
-			pph.toString(firstCreator.contribution)
+			pph.toString(value)
 		);
 	});
 };
@@ -197,16 +192,17 @@ module.exports.editCreationDate = function() {
 		pages.work.editCreationDateButton()
 	);
 };
-module.exports.enterDifferentCreationYear = function(data, key) {
-	key = key || "creationYear";
+module.exports.enterDifferentCreationYear = function() {
+	var deferred = promise.defer();
 	it("Enter different creation date year", function() {
 		var enteredYear = pages.work.enteredCreationYear();
 		var differentYear = enteredYear.then(function(enteredYear) {
 			return enteredYear - 1;
 		});
 		pages.work.enterCreationYear(differentYear);
-		data[key] = differentYear;
+		deferred.fulfill(differentYear);
 	});
+	return deferred.promise;
 };
 module.exports.enterCreationYear = function(value) {
 	it("Enter the creation year", function() {
@@ -247,16 +243,17 @@ module.exports.editDeliveryDate = function() {
 		pages.work.editDeliveryDateButton()
 	);
 };
-module.exports.enterDifferentDeliveryYear = function(data, key) {
-	key = key || "deliveryYear";
+module.exports.enterDifferentDeliveryYear = function() {
+	var deferred = promise.defer();
 	it("Enter different delivery date year", function() {
 		var enteredYear = pages.work.enteredDeliveryYear();
 		var differentYear = enteredYear.then(function(enteredYear) {
 			return enteredYear - 1;
 		});
 		pages.work.enterDeliveryYear(differentYear);
-		data[key] = differentYear;
+		deferred.fulfill(differentYear);
 	});
+	return deferred.promise;
 };
 module.exports.enterDeliveryYear = function(value) {
 	it("Enter the delivery year", function() {
@@ -297,65 +294,47 @@ module.exports.editAssetType = function() {
 		pages.work.editAssetTypeButton()
 	);
 };
-module.exports.selectDifferentRandomMusicalDistributionCategory = function(data, key) {
-	key = key || "musicalDistributionCategory";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomMusicalDistributionCategory  = function() {
+	return steps.base.selectRandomDropdownOption (
 		"musical distribution category",
 		pages.work.editMusicalDistributionCategoryField(),
 		{ different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
-module.exports.selectDifferentRandomTextMusicRelationship = function(data, key) {
-	key = key || "textMusicRelationship";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomTextMusicRelationship  = function() {
+	return steps.base.selectRandomDropdownOption (
 		"text music relationship",
 		pages.work.editTextMusicRelationshipField(),
 		{ different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
-module.exports.selectDifferentRandomExcerptType = function(data, key) {
-	key = key || "excerptType";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomExcerptType  = function() {
+	return steps.base.selectRandomDropdownOption (
 		"excerpt type",
 		pages.work.editExcerptTypeField(),
 		{ different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
-module.exports.selectDifferentRandomVersionType = function(data, key) {
-	key = key || "versionType";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomVersionType  = function() {
+	return steps.base.selectRandomDropdownOption (
 		"version type",
 		pages.work.editVersionTypeField(),
 		{ different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
-module.exports.selectDifferentRandomLyricAdaptation = function(data, key) {
-	key = key || "lyricAdaptation";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomLyricAdaptation  = function() {
+	return steps.base.selectRandomDropdownOption (
 		"lyric adaptation",
 		pages.work.editLyricAdaptationField(),
 		{ skipIfNotPresent: true, different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
-module.exports.selectDifferentRandomMusicArrangement = function(data, key) {
-	key = key || "musicArrangement";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomMusicArrangement = function() {
+	return steps.base.selectRandomDropdownOption (
 		"music arrangement",
 		pages.work.editMusicArrangementField(),
 		{ skipIfNotPresent: true, different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
 module.exports.cancelAssetTypeEditing = function() {
 	steps.base.clickElement (
@@ -381,47 +360,37 @@ module.exports.editWorkOrigin = function() {
 		pages.work.editWorkOriginButton()
 	);
 };
-module.exports.selectDifferentRandomIntendedPurpose = function(data, key) {
-	key = key || "intendedPurpose";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomIntendedPurpose = function() {
+	return steps.base.selectRandomDropdownOption (
 		"intended purpose",
 		pages.work.editIntendedPurposeField(),
 		{ dropdownType: "tg", different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
-module.exports.enterRandomProductionTitle = function(data, key) {
-	key = key || "productionTitle";
+module.exports.enterRandomProductionTitle = function() {
+	var deferred = promise.defer();
 	it (
 		"Enter a random production title (if present)", function() {
 			var title = "TEST PRODUCTION TITLE " + random.id();
-			pages.work.enterProductionTitle(
-				title, { skipIfNotPresent: true }
-			).then(function(value) {
-				data[key] = value;
-			});
+			deferred.fulfill (
+				pages.work.enterProductionTitle(title, { skipIfNotPresent: true })
+			);
 		}
 	);
+	return deferred.promise;
 };
-module.exports.selectDifferentRandomBltvr = function(data, key) {
-	key = key || "bltvr";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomBltvr = function() {
+	return steps.base.selectRandomDropdownOption (
 		"BLTVR", pages.work.editBltvrField(),
 		{ skipIfNotPresent: true, different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
-module.exports.selectDifferentRandomMusicLibrary = function(data, key) {
-	key = key || "musicLibrary";
-	steps.base.selectRandomDropdownOption(
+module.exports.selectDifferentRandomMusicLibrary = function() {
+	return steps.base.selectRandomDropdownOption (
 		"music library",
 		pages.work.editMusicLibraryField(),
 		{ dropdownType: "tg", skipIfNotPresent: true, different: true }
-	).then(function(value) {
-		data[key] = value;
-	});
+	);
 };
 module.exports.cancelWorkOriginEditing = function() {
 	steps.base.clickElement (
@@ -447,8 +416,8 @@ module.exports.editWorkInclusionOnWebsite = function() {
 		pages.work.editWorkInclusionOnWebsiteButton()
 	);
 };
-module.exports.toggleWorkInclusionOnWebsite = function(data, key) {
-	key = key || "inclusionOnWebsite";
+module.exports.toggleWorkInclusionOnWebsite = function() {
+	var deferred = promise.defer();
 	it (
 		"Toggle work inclusion on website", function() {
 			var include = pages.work.selectedWorkInclusionOnWebsiteOption().then (
@@ -457,9 +426,10 @@ module.exports.toggleWorkInclusionOnWebsite = function(data, key) {
 				}
 			);
 			pages.work.optToIncludeWorkOnWebsite(include);
-			data[key] = include;
+			deferred.fulfill(include);
 		}
 	);
+	return deferred.promise;
 };
 module.exports.cancelWorkInclusionOnWebsiteEditing = function() {
 	steps.base.clickElement (
@@ -481,78 +451,54 @@ module.exports.validateDefaultAlternateWorkTitleLanguage = function() {
 		}
 	);
 };
-module.exports.expectPrimaryWorkTitleFieldValueToBe = function(data, key) {
-	key = key || "primaryWorkTitle";
+module.exports.expectPrimaryWorkTitleFieldValueToBe = function(title) {
 	it (
 		"Validate primary work title edit field value", function() {
-			expect(pages.work.editPrimaryWorkTitleFieldValue()).toBe(data[key]);
+			expect(pages.work.editPrimaryWorkTitleFieldValue()).toBe(title);
 		}
 	);
 };
-module.exports.expectPrimaryWorkTitleFieldValueNotToBe = function(data, key) {
-	key = key || "primaryWorkTitle";
+module.exports.expectPrimaryWorkTitleFieldValueNotToBe = function(title) {
 	it (
 		"Validate primary work title edit field value", function() {
-			expect(pages.work.editPrimaryWorkTitleFieldValue()).not.toBe(data[key]);
+			expect(pages.work.editPrimaryWorkTitleFieldValue()).not.toBe(title);
 		}
 	);
 };
-module.exports.validatePrimaryWorkTitle = function(data, key) {
-	key = key || "primaryWorkTitle";
+module.exports.validatePrimaryWorkTitle = function(title) {
 	it (
 		"Validate primary work title (if validation value is not empty)", function() {
-			var title = data[key];
 			promise.when(title).then(function(title) {
 				if(!title) {
 					return;
+					expect(pages.work.primaryWorkTitle()).toBe(title);
 				}
-				expect(pages.work.primaryWorkTitle()).toBe(title);
 			});
 		}
 	);
 };
-module.exports.validateAlternateWorkTitles = function(data, key) {
-	key = key || "alternateWorkTitles";
+module.exports.validateAlternateWorkTitle = function(title) {
 	it (
-		"Validate alternate work titles (if validation list is not empty)", function() {
-			var titles = data[key];
-			if(!titles) {
-				return;
-			}
-			titles.forEach(function(title) {
-				expect(pages.work.alternateWorkTitles()).toContain(title);
-			});
+		"Validate alternate work title", function() {
+			expect(pages.work.alternateWorkTitles()).toContain(title);
 		}
 	);
 };
-module.exports.validateCreatorNames = function(data, key) {
-	key = key || "creators";
+module.exports.validateCreatorName = function(name) {
 	it (
-		"Validate creator names (if validation list is not empty)", function() {
-			var creators = data[key] || [];
-
-			creators.forEach(function(creator) {
-				expect(pages.work.creatorNames()).toContain(creator.name);
-			});
+		"Validate creator name", function() {
+			expect(pages.work.creatorNames()).toContain(name);
 		}
 	);
 };
-module.exports.validateCreatorContributions = function(data, key) {
-	key = key || "creators";
+module.exports.validateCreatorContributionByName = function(name, percentage) {
 	it (
-		"Validate creator contributions (if validation list is not empty)", function() {
-			var creators = data[key] || [];
-
-			creators.forEach(function(creator) {
-				pph.spread(
-					[creator.name, creator.contribution], function(name, contribution) {
-						if(!contribution) {
-							return;
-						}
-
-						expect(pages.work.creatorContributionByName(name)).toBe(contribution);
-					}
-				);
+		"Validate creator contribution percentage (if validation value is not empty)", function() {
+			promise.when(percentage).then(function(percentage) {
+				if(!percentage) {
+					return;
+				}
+				expect(pages.work.creatorContributionByName(name)).toBe(percentage);
 			});
 		}
 	);
@@ -573,19 +519,9 @@ module.exports.validateCreatorContributionInputMask = function(i, validationTabl
 		pages.work.enterCreatorContribution(i, "");
 	});
 };
-module.exports.validateCreationDate = function(data, keys) {
-	keys = keys || {
-		year: "creationYear",
-		month: "creationMonth",
-		day: "creationDay",
-	};
+module.exports.validateCreationDate = function(year, month, day) {
 	it("Validate creation date (if first validation value is not empty)", function() {
-		var values = [
-			data[keys.year],
-			data[keys.month],
-			data[keys.day],
-		];
-		promise.all(values).then(function(values) {
+		promise.all([year, month, day]).then(function(values) {
 			var date;
 			var allTruthy = values.every(function(value) {
 				return !!value;
@@ -601,35 +537,19 @@ module.exports.validateCreationDate = function(data, keys) {
 		});
 	});
 };
-module.exports.expectEnteredCreationYearToBe = function(data, key) {
-	key = key || "creationYear";
+module.exports.expectEnteredCreationYearToBe = function(value) {
 	it("Validate entered creation year", function() {
-		expect(pages.work.enteredCreationYear()).toBe(
-			pph.toString(data[key])
-		);
+		expect(pages.work.enteredCreationYear()).toBe(pph.toString(value));
 	});
 };
-module.exports.expectEnteredCreationYearNotToBe = function(data, key) {
-	key = key || "creationYear";
+module.exports.expectEnteredCreationYearNotToBe = function(value) {
 	it("Validate entered creation year", function() {
-		expect(pages.work.enteredCreationYear()).not.toBe(
-			pph.toString(data[key])
-		);
+		expect(pages.work.enteredCreationYear()).not.toBe(pph.toString(value));
 	});
 };
-module.exports.validateDeliveryDate = function(data, keys) {
-	keys = keys || {
-		year: "deliveryYear",
-		month: "deliveryMonth",
-		day: "deliveryDay",
-	};
+module.exports.validateDeliveryDate = function(year, month, day) {
 	it("Validate delivery date (if first validation value is not empty)", function() {
-		var values = [
-			data[keys.year],
-			data[keys.month],
-			data[keys.day],
-		];
-		promise.all(values).then(function(values) {
+		promise.all([year, month, day]).then(function(values) {
 			var date;
 			var allTruthy = values.every(function(value) {
 				return !!value;
@@ -645,146 +565,88 @@ module.exports.validateDeliveryDate = function(data, keys) {
 		});
 	});
 };
-module.exports.expectEnteredDeliveryYearToBe = function(data, key) {
-	key = key || "deliveryYear";
+module.exports.expectEnteredDeliveryYearToBe = function(value) {
 	it("Validate entered delivery year", function() {
-		expect(pages.work.enteredDeliveryYear()).toBe(
-			pph.toString(data[key])
-		);
+		expect(pages.work.enteredDeliveryYear()).toBe(pph.toString(value));
 	});
 };
-module.exports.expectEnteredDeliveryYearNotToBe = function(data, key) {
-	key = key || "deliveryYear";
+module.exports.expectEnteredDeliveryYearNotToBe = function(value) {
 	it("Validate entered delivery year", function() {
-		expect(pages.work.enteredDeliveryYear()).not.toBe(
-			pph.toString(data[key])
-		);
+		expect(pages.work.enteredDeliveryYear()).not.toBe(pph.toString(value));
 	});
 };
-module.exports.validateMusicalDistributionCategory = function(data, key) {
-	key = key || "musicalDistributionCategory";
+module.exports.validateMusicalDistributionCategory = function(value) {
 	it("Validate musical distribution category (if validation value is not empty)", function() {
-		var value = data[key];
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
 			expect(pages.work.musicalDistributionCategory()).toBe(value);
 		});
 	});
 };
-module.exports.validateTextMusicRelationship = function(data, key) {
-	key = key || "textMusicRelationship";
+module.exports.validateTextMusicRelationship = function(value) {
 	it("Validate text music relationship (if validation value is not empty)", function() {
-		var value = data[key];
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
-			if(value.toLowerCase() === "select type") {
-				expect(pages.base.isPresentAndDisplayed(
-					pages.work.textMusicRelationshipBinding()
-				)).toBeFalsy();
-			}
-			else {
-				expect(pages.work.textMusicRelationship()).toBe(value);
-			}
+			expect(pages.work.textMusicRelationship()).toBe(value);
 		});
 	});
 };
-module.exports.validateExcerptType = function(data, key) {
-	key = key || "excerptType";
+module.exports.validateExcerptType = function(value) {
 	it("Validate excerpt type (if validation value is not empty)", function() {
-		var value = data[key];
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
-			if(value.toLowerCase() === "select type") {
-				expect(pages.base.isPresentAndDisplayed(
-					pages.work.excerptTypeBinding()
-				)).toBeFalsy();
-			}
-			else {
-				expect(pages.work.excerptType()).toBe(value);
-			}
+			expect(pages.work.excerptType()).toBe(value);
 		});
 	});
 };
-module.exports.validateVersionType = function(data, key) {
-	key = key || "versionType";
+module.exports.validateVersionType = function(value) {
 	it("Validate version type (if validation value is not empty)", function() {
-		var value = data[key];
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
 			expect(pages.work.versionType()).toBe(value);
 		});
 	});
 };
-module.exports.validateLyricAdaptation = function(data, key) {
-	key = key || "lyricAdaptation";
-
+module.exports.validateLyricAdaptation = function(value) {
 	it("Validate lyric adaptation (if validation value is not empty)", function() {
-		var value = data[key];
-
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
 			expect(pages.work.lyricAdaptation()).toBe(value);
 		});
 	});
 };
-module.exports.validateMusicArrangement = function(data, key) {
-	key = key || "musicArrangement";
-
+module.exports.validateMusicArrangement = function(value) {
 	it("Validate music arrangement (if validation value is not empty)", function() {
-		var value = data[key];
-
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
 			expect(pages.work.musicArrangement()).toBe(value);
 		});
 	});
 };
-module.exports.validateIntendedPurpose = function(data, key) {
-	key = key || "intendedPurpose";
-
+module.exports.validateIntendedPurpose = function(value) {
 	it("Validate intended purpose (if validation value is not empty)", function() {
-		var value = data[key];
-
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
-			if(value.toLowerCase() === "select type") {
-				expect(pages.base.isPresentAndDisplayed(
-					pages.work.intendedPurposeBinding()
-				)).toBeFalsy();
-			}
-			else {
-				expect(pages.work.intendedPurpose()).toBe(value);
-			}
+			expect(pages.work.intendedPurpose()).toBe(value);
 		});
 	});
 };
-module.exports.validateProductionTitle = function(data, key) {
-	key = key || "productionTitle";
-
+module.exports.validateProductionTitle = function(value) {
 	it("Validate production title (if validation value is not empty)", function() {
-		var value = data[key];
-
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
@@ -793,12 +655,8 @@ module.exports.validateProductionTitle = function(data, key) {
 		});
 	});
 };
-module.exports.validateBltvr = function(data, key) {
-	key = key || "bltvr";
-
+module.exports.validateBltvr = function(value) {
 	it("Validate BLTVR (if validation value is not empty)", function() {
-		var value = data[key];
-
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
@@ -807,86 +665,58 @@ module.exports.validateBltvr = function(data, key) {
 		});
 	});
 };
-module.exports.validateMusicLibrary = function(data, key) {
-	key = key || "musicLibrary";
-
+module.exports.validateMusicLibrary = function(value) {
 	it("Validate music library (if validation value is not empty)", function() {
-		var value = data[key];
-
 		promise.when(value).then(function(value) {
 			if(!value) {
 				return;
 			}
-
 			expect(pages.work.musicLibrary()).toBe(value);
 		});
 	});
 };
-module.exports.expectMusicalDistributionCategoryToBe = function(data, key) {
-	key = key || "musicalDistributionCategory";
-
+module.exports.expectMusicalDistributionCategoryToBe = function(value) {
 	it("Validate selected musical distribution category", function() {
-		expect(pages.work.selectedMusicalDistributionCategory()).toBe(
-			data[key]
-		);
+		expect(pages.work.selectedMusicalDistributionCategory()).toBe(value);
 	});
 };
-module.exports.expectMusicalDistributionCategoryNotToBe = function(data, key) {
-	key = key || "musicalDistributionCategory";
-
+module.exports.expectMusicalDistributionCategoryNotToBe = function(value) {
 	it("Validate selected musical distribution category", function() {
-		expect(pages.work.selectedMusicalDistributionCategory()).not.toBe(
-			data[key]
-		);
+		expect(pages.work.selectedMusicalDistributionCategory()).not.toBe(value);
 	});
 };
-module.exports.expectIntendedPurposeToBe = function(data, key) {
-	key = key || "intendedPurpose";
-
+module.exports.expectIntendedPurposeToBe = function(value) {
 	it("Validate selected intended purpose", function() {
-		expect(pages.work.selectedIntendedPurpose()).toBe(data[key]);
+		expect(pages.work.selectedIntendedPurpose()).toBe(value);
 	});
 };
-module.exports.expectIntendedPurposeNotToBe = function(data, key) {
-	key = key || "intendedPurpose";
-
+module.exports.expectIntendedPurposeNotToBe = function(value) {
 	it("Validate selected intended purpose", function() {
-		expect(pages.work.selectedIntendedPurpose()).not.toBe(data[key]);
+		expect(pages.work.selectedIntendedPurpose()).not.toBe(value);
 	});
 };
-module.exports.expectWorkInclusionOnWebsiteOptionToBe = function(data, key) {
-	key = key || "workInclusionOnWebsiteOption";
-
+module.exports.expectWorkInclusionOnWebsiteOptionToBe = function(include) {
 	it (
 		"Validate work inclusion on website option", function() {
-			expect(pages.work.selectedWorkInclusionOnWebsiteOption()).toBe(
-				data[key]
-			);
+			expect(pages.work.selectedWorkInclusionOnWebsiteOption()).toBe(include);
 		}
 	);
 };
-module.exports.expectWorkInclusionOnWebsiteOptionNotToBe = function(data, key) {
-	key = key || "workInclusionOnWebsiteOption";
-
+module.exports.expectWorkInclusionOnWebsiteOptionNotToBe = function(include) {
 	it (
 		"Validate work inclusion on website option", function() {
-			expect(pages.work.selectedWorkInclusionOnWebsiteOption()).not.toBe(
-				data[key]
-			);
+			expect(pages.work.selectedWorkInclusionOnWebsiteOption()).not.toBe(include);
 		}
 	);
 };
-module.exports.validateIncludeWorkOnWebsite = function(data, key) {
-	key = key || "inclusionOnWebsite";
-
+module.exports.validateIncludeWorkOnWebsite = function(include) {
 	it (
 		"Validate 'Include work on website' option (if validation value is not empty)", function() {
-			var value = data[key];
-			promise.when(value).then(function(value) {
-				if(value === undefined || value === null) {
+			promise.when(include).then(function(include) {
+				if(include === undefined || include === null) {
 					return;
 				}
-				expect(pages.work.workInclusionOnWebsite()).toBe(value);
+				expect(pages.work.workInclusionOnWebsite()).toBe(include);
 			});
 		}
 	);
@@ -914,29 +744,31 @@ module.exports.editBasicWork = function(data, more) {
 			if(!more.skip.workTitles) {
 				steps.work.hoverPrimaryWorkTitleHeading();
 				steps.work.editWorkTitles();
-				steps.work.enterRandomPrimaryWorkTitle(data);
+				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
 				steps.work.waitTitleEditorCheckForDuplicates();
 				steps.work.cancelWorkTitlesEditing();
 				steps.base.dirtyCheckConfirmCancellation();
 				steps.work.hoverPrimaryWorkTitleHeading();
 				steps.work.editWorkTitles();
-				steps.work.expectPrimaryWorkTitleFieldValueNotToBe(data);
+				steps.work.expectPrimaryWorkTitleFieldValueNotToBe(data.primaryWorkTitle);
 
-				steps.work.enterRandomPrimaryWorkTitle(data);
+				data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
 				steps.work.waitTitleEditorCheckForDuplicates();
 				steps.work.cancelWorkTitlesEditing();
 				steps.base.dirtyCheckContinueEditing();
-				steps.work.expectPrimaryWorkTitleFieldValueToBe(data);
+				steps.work.expectPrimaryWorkTitleFieldValueToBe(data.primaryWorkTitle);
 
 				steps.work.validateDefaultAlternateWorkTitleLanguage();
 
-				_.times(
+				data.alternateWorkTitles = _.times(
 					2, function(i) {
-						steps.work.enterRandomAlternateWorkTitle(i, data);
+						return steps.work.enterRandomAlternateWorkTitle(i);
 					}
 				);
 
-				steps.work.enterNewRandomAlternateWorkTitle(data);
+				data.alternateWorkTitles.push(
+					steps.work.enterNewRandomAlternateWorkTitle()
+				);
 
 				steps.work.saveWorkTitles();
 			}
@@ -945,15 +777,19 @@ module.exports.editBasicWork = function(data, more) {
 				steps.work.hoverCreatorNamesContainer();
 				steps.work.editCreators();
 
-				(function() {
+				data.creators = (function() {
+					var creators;
+					var howMany = 2;
 					var evenContribution = steps.work.calculateEvenCreatorContributions();
 
-					_.times(
-						2, function(i) {
+					creators = _.times(
+						howMany, function(i) {
+							var creator = {};
 							var firstOne = (i === 0);
 
 							if(firstOne) {
-								steps.work.enterCreatorContribution(i, 0, data);
+								creator.contribution = 0;
+								steps.work.enterCreatorContribution(i, creator.contribution);
 
 								steps.work.cancelCreatorsEditing();
 								steps.base.dirtyCheckConfirmCancellation();
@@ -961,25 +797,31 @@ module.exports.editBasicWork = function(data, more) {
 								steps.work.hoverCreatorNamesContainer();
 								steps.work.editCreators();
 
-								steps.work.expectFirstCreatorContributionFieldValueNotToBe(data);
+								steps.work.expectFirstCreatorContributionFieldValueNotToBe(
+									creator.contribution
+								);
 							}
 
-							steps.work.selectDifferentRandomCreator(i, data);
+							creator.name = steps.work.selectDifferentRandomCreator(i);
 
 							if(firstOne) {
 								steps.work.waitCreatorsEditorCheckForDuplicates();
-
-								steps.work.validateCreatorContributionInputMask(i);
 							}
 
-							steps.work.enterCreatorContribution(i, evenContribution, data);
+							creator.contribution = evenContribution;
+							steps.work.validateCreatorContributionInputMask(i);
+							steps.work.enterCreatorContribution(i, creator.contribution);
 
 							if(firstOne) {
 								steps.work.cancelCreatorsEditing();
 								steps.base.dirtyCheckContinueEditing();
 
-								steps.work.expectFirstCreatorContributionFieldValueToBe(evenContribution);
+								steps.work.expectFirstCreatorContributionFieldValueToBe(
+									creator.contribution
+								);
 							}
+
+							return creator;
 						}
 					);
 				})();
@@ -990,79 +832,91 @@ module.exports.editBasicWork = function(data, more) {
 			if(!more.skip.creationDate) {
 				steps.work.hoverCreationDateContainerLabel();
 				steps.work.editCreationDate();
-
 				(function() {
 					var daysAgo = _.random(1, 30 * 12 * 2);
 					var pastDate = random.moment(moment().subtract(daysAgo, "day"));
 
-					steps.work.enterDifferentCreationYear(data);
+					data.creationYear = steps.work.enterDifferentCreationYear();
 					steps.work.cancelCreationDateEditing();
 					steps.base.dirtyCheckConfirmCancellation();
 					steps.work.hoverCreationDateContainerLabel();
 					steps.work.editCreationDate();
-					steps.work.expectEnteredCreationYearNotToBe(data);
+					steps.work.expectEnteredCreationYearNotToBe(data.creationYear);
 
-					steps.work.enterCreationYear(pastDate.year(), data);
+					data.creationYear = pastDate.year();
+					steps.work.enterCreationYear(data.creationYear);
 					steps.work.cancelCreationDateEditing();
 					steps.base.dirtyCheckContinueEditing();
-					steps.work.expectEnteredCreationYearToBe(data);
+					steps.work.expectEnteredCreationYearToBe(data.creationYear);
 
-					steps.work.enterCreationMonth(pastDate.month(), data);
+					data.creationMonth = pastDate.month();
+					steps.work.enterCreationMonth(data.creationMonth);
 
-					steps.work.enterCreationDay(pastDate.date(), data);
+					data.creationDay = pastDate.date();
+					steps.work.enterCreationDay(data.creationDay);
 				})();
-
 				steps.work.saveCreationDate();
 			}
 
 			if(!more.skip.deliveryDate) {
 				steps.work.hoverDeliveryDateContainerLabel();
 				steps.work.editDeliveryDate();
-
 				(function() {
 					var daysAgo = _.random(1, 30 * 12 * 2);
 					var pastDate = random.moment(moment().subtract(daysAgo, "day"));
 
-					steps.work.enterDifferentDeliveryYear(data);
+					data.deliveryYear = steps.work.enterDifferentDeliveryYear();
 					steps.work.cancelDeliveryDateEditing();
 					steps.base.dirtyCheckConfirmCancellation();
 					steps.work.hoverDeliveryDateContainerLabel();
 					steps.work.editDeliveryDate();
-					steps.work.expectEnteredDeliveryYearNotToBe(data);
+					steps.work.expectEnteredDeliveryYearNotToBe(data.deliveryYear);
 
-					steps.work.enterDeliveryYear(pastDate.year(), data);
+					data.deliveryYear = pastDate.year();
+					steps.work.enterDeliveryYear(data.deliveryYear);
 					steps.work.cancelDeliveryDateEditing();
 					steps.base.dirtyCheckContinueEditing();
-					steps.work.expectEnteredDeliveryYearToBe(data);
+					steps.work.expectEnteredDeliveryYearToBe(data.deliveryYear);
 
-					steps.work.enterDeliveryMonth(pastDate.month(), data);
+					data.deliveryMonth = pastDate.month();
+					steps.work.enterDeliveryMonth(data.deliveryMonth);
 
-					steps.work.enterDeliveryDay(pastDate.date(), data);
+					data.deliveryDay = pastDate.date();
+					steps.work.enterDeliveryDay(data.deliveryDay);
 				})();
-
 				steps.work.saveDeliveryDate();
 			}
 
 			if(!more.skip.assetType) {
 				steps.work.hoverAssetTypeContainer();
 				steps.work.editAssetType();
-				steps.work.selectDifferentRandomMusicalDistributionCategory(data);
+				data.musicalDistributionCategory = (
+					steps.work.selectDifferentRandomMusicalDistributionCategory()
+				);
 				steps.work.cancelAssetTypeEditing();
 				steps.base.dirtyCheckConfirmCancellation();
 				steps.work.hoverAssetTypeContainer();
 				steps.work.editAssetType();
-				steps.work.expectMusicalDistributionCategoryNotToBe(data);
+				steps.work.expectMusicalDistributionCategoryNotToBe(
+					data.musicalDistributionCategory
+				);
 
-				steps.work.selectDifferentRandomMusicalDistributionCategory(data);
+				data.musicalDistributionCategory = (
+					steps.work.selectDifferentRandomMusicalDistributionCategory()
+				);
 				steps.work.cancelAssetTypeEditing();
 				steps.base.dirtyCheckContinueEditing();
-				steps.work.expectMusicalDistributionCategoryToBe(data);
+				steps.work.expectMusicalDistributionCategoryToBe(
+					data.musicalDistributionCategory
+				);
 
-				steps.work.selectDifferentRandomTextMusicRelationship(data)
-				steps.work.selectDifferentRandomExcerptType(data);
-				steps.work.selectDifferentRandomVersionType(data);
-				steps.work.selectDifferentRandomLyricAdaptation(data);
-				steps.work.selectDifferentRandomMusicArrangement(data);
+				data.textMusicRelationship = (
+					steps.work.selectDifferentRandomTextMusicRelationship()
+				);
+				data.excerptType = steps.work.selectDifferentRandomExcerptType();
+				data.versionType = steps.work.selectDifferentRandomVersionType();
+				data.lyricAdaptation = steps.work.selectDifferentRandomLyricAdaptation();
+				data.musicArrangement = steps.work.selectDifferentRandomMusicArrangement();
 
 				steps.work.saveAssetType();
 			}
@@ -1070,21 +924,21 @@ module.exports.editBasicWork = function(data, more) {
 			if(!more.skip.workOrigin) {
 				steps.work.hoverWorkOriginContainer();
 				steps.work.editWorkOrigin();
-				steps.work.selectDifferentRandomIntendedPurpose(data);
+				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
 				steps.work.cancelWorkOriginEditing();
 				steps.base.dirtyCheckConfirmCancellation();
 				steps.work.hoverWorkOriginContainer();
 				steps.work.editWorkOrigin();
-				steps.work.expectIntendedPurposeNotToBe(data);
+				steps.work.expectIntendedPurposeNotToBe(data.intendedPurpose);
 
-				steps.work.selectDifferentRandomIntendedPurpose(data);
+				data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
 				steps.work.cancelWorkOriginEditing();
 				steps.base.dirtyCheckContinueEditing();
-				steps.work.expectIntendedPurposeToBe(data);
+				steps.work.expectIntendedPurposeToBe(data.intendedPurpose);
 
-				steps.work.enterRandomProductionTitle(data);
-				steps.work.selectDifferentRandomBltvr(data);
-				steps.work.selectDifferentRandomMusicLibrary(data);
+				data.productionTitle = steps.work.enterRandomProductionTitle();
+				data.bltvr = steps.work.selectDifferentRandomBltvr();
+				data.musicLibrary = steps.work.selectDifferentRandomMusicLibrary();
 
 				steps.work.saveWorkOrigin();
 			}
@@ -1092,17 +946,17 @@ module.exports.editBasicWork = function(data, more) {
 			if(!more.skip.inclusionOnWebsite) {
 				steps.work.hoverWorkInclusionOnWebsiteIndicator();
 				steps.work.editWorkInclusionOnWebsite();
-				steps.work.toggleWorkInclusionOnWebsite(data);
+				data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
 				steps.work.cancelWorkInclusionOnWebsiteEditing();
 				steps.base.dirtyCheckConfirmCancellation();
 				steps.work.hoverWorkInclusionOnWebsiteIndicator();
 				steps.work.editWorkInclusionOnWebsite();
-				steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data);
+				steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data.includeOnWebsite);
 
-				steps.work.toggleWorkInclusionOnWebsite(data);
+				data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
 				steps.work.cancelWorkInclusionOnWebsiteEditing();
 				steps.base.dirtyCheckContinueEditing();
-				steps.work.expectWorkInclusionOnWebsiteOptionToBe(data);
+				steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
 
 				steps.work.saveWorkInclusionOnWebsite();
 			}
@@ -1129,42 +983,66 @@ module.exports.validateWork = function(data, more) {
 			}
 
 			if(!more.skip.workTitles) {
-				steps.work.validatePrimaryWorkTitle(data);
-				steps.work.validateAlternateWorkTitles(data);
+				steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
+
+				if(data.alternateWorkTitles) {
+					data.alternateWorkTitles.forEach (
+						function(alternateWorkTitle) {
+							steps.work.validateAlternateWorkTitle(alternateWorkTitle);
+						}
+					);
+				}
 			}
 
 			if(!more.skip.creationDate) {
-				steps.work.validateCreationDate(data);
+				steps.work.validateCreationDate(
+					data.creationYear,
+					data.creationMonth,
+					data.creationDay
+				);
 			}
 
 			if(!more.skip.deliveryDate) {
-				steps.work.validateDeliveryDate(data);
+				steps.work.validateDeliveryDate(
+					data.deliveryYear,
+					data.deliveryMonth,
+					data.deliveryDay
+				);
 			}
 
 			if(!more.skip.assetType) {
-				steps.work.validateMusicalDistributionCategory(data);
-				steps.work.validateTextMusicRelationship(data);
-				steps.work.validateExcerptType(data);
-				steps.work.validateVersionType(data);
-				steps.work.validateLyricAdaptation(data);
-				steps.work.validateMusicArrangement(data);
+				steps.work.validateMusicalDistributionCategory(data.musicalDistributionCategory);
+				steps.work.validateTextMusicRelationship(data.textMusicRelationship);
+				steps.work.validateExcerptType(data.excerptType);
+				steps.work.validateVersionType(data.versionType);
+				steps.work.validateLyricAdaptation(data.lyricAdaptation);
+				steps.work.validateMusicArrangement(data.musicArrangement);
 			}
 
 			if(!more.skip.workOrigin) {
-				steps.work.validateIntendedPurpose(data);
-				steps.work.validateProductionTitle(data);
-				steps.work.validateBltvr(data);
-				steps.work.validateMusicLibrary(data);
+				steps.work.validateIntendedPurpose(data.intendedPurpose);
+				steps.work.validateProductionTitle(data.productionTitle);
+				steps.work.validateBltvr(data.bltvr);
+				steps.work.validateMusicLibrary(data.musicLibrary);
 			}
 
 			if(!more.skip.inclusionOnWebsite) {
-				steps.work.validateIncludeWorkOnWebsite(data);
+				steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
 			}
 
-			if(!more.skip.creators) {
+			if(!more.skip.creators && data.creators && data.creators.length !== 0) {
 				steps.work.goToScopeDelivery();
-				steps.work.validateCreatorNames(data);
-				steps.work.validateCreatorContributions(data);
+
+				data.creators.forEach (
+					function(creator, i) {
+						describe (
+							"Validate creator #" + (i + 1), function() {
+								steps.work.validateCreatorName(creator.name);
+								steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
+							}
+						);
+					}
+				);
 			}
 		}
 	);

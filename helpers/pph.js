@@ -68,16 +68,6 @@ pph.allInArray = function(array, values) {
 		}
 	);
 };
-pph.spread = function(values, fn, fnThis) {
-	promise.when(values).then(function(values) {
-		values = values.map(function(value) {
-			return promise.when(value);
-		});
-		promise.all(values).then(function(values) {
-			fn.apply(fnThis, values);
-		});
-	});
-};
 pph.toString = function(value) {
 	return promise.when(value).then(function(value) {
 		return value.toString();
