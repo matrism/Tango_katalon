@@ -1,7 +1,6 @@
 "use strict";
 var steps_path = _tf_config._system_.path_to_steps;
 var pages_path = _tf_config._system_.path_to_pages;
-var randomId = require("../helpers/randomId");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 //require(steps_path + "deal");

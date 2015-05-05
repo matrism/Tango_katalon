@@ -1,7 +1,6 @@
 "use strict";
 var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
-var randomId = require("../helpers/randomId");
 var pages_path = _tf_config._system_.path_to_pages;
 require(pages_path + "base");
 module.exports = pages.create_deal_contract_period = new ftf.pageObject({});
