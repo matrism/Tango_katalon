@@ -26,6 +26,8 @@ require(steps_path + "organisation");
 require(pages_path + "searchSection");
 require(steps_path + "searchSection");
 
+require(steps_path + "login");
+
 var beforeFeature = function () {
         steps.login.itLogin();
         steps.searchSection.accessSavedOrganisationByName("BMI");

@@ -20,6 +20,8 @@ require(steps_path + "create_deal_scope");
 //require(pages_path + "incomeProvider");
 require(steps_path + "incomeProvider");
 
+require(steps_path + "login");
+
 var beforeFeature = function () {
         steps.login.itLogin();
         steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();

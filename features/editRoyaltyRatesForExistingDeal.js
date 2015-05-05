@@ -24,6 +24,7 @@ require(steps_path + "create_deal_scope");
 require(pages_path + "searchSection");
 require(steps_path + "searchSection");
 
+require(steps_path + "login");
 
 
 var beforeFeature = function () {

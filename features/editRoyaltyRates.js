@@ -21,6 +21,8 @@ require(steps_path + "create_deal_contract_period");
 require(pages_path + "create_deal_scope");
 require(steps_path + "create_deal_scope");
 
+require(steps_path + "login");
+
 var beforeFeature = function () {
         steps.login.itLogin();
         steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();

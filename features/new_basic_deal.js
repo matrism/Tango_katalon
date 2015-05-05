@@ -9,6 +9,7 @@ require(pages_path + "create_deal_contract_period");
 require(steps_path + "create_deal_contract_period");
 require(pages_path + "create_deal_scope");
 require(steps_path + "create_deal_scope");
+require(steps_path + "login");
 require(steps_path + "base");
 
 
