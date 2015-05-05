@@ -4,7 +4,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.organisation === undefined) {
 
 
-    pages.editRoyaltyRates = new ftf.pageObject({
+    pages.organisation = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
 
@@ -12,6 +12,35 @@ if (pages.organisation === undefined) {
 
         },
 
+        incomeProviderControls:function()
+        {
+
+           return element(by.css(".income-provider-section>div>.CONTROLS"));
+        }
+,
+        fileTypeIncomeInput:function()
+        {
+          return element(by.css(".default"));
+
+        }
+,
+
+        incomeProvidersEditView:function()
+        {
+
+          return element(by.css(".EDITOR.income-provider-section>.edit-view"));
+        },
+        fileTypeIncomeBlank:function()
+        {
+
+          return element(by.css(".default"));
+        },
+
+        fileTypeIncomeInputDropdown:function()
+        {
+
+          return element(by.css(".active-result.highlighted"));
+        },
         generalOrganisationSection:function()
         {
             return element(by.css("#editor-general"));
@@ -46,24 +75,26 @@ if (pages.organisation === undefined) {
         },
 
 
-        inboundIncomeTypeInput:function()
+        inboundIncomeTypeInput:function(tableLine)
         {
 
-            return element(by.css(" .table.input-table>tbody>tr:last-child>td:nth-child(1)"));
+            return element(by.css(".table.input-table>tbody>tr:nth-child("+tableLine+")>td:nth-child(1)>input"));
+
+
 
 
         },
-        inboundIncomeTypeDescriptionInput:function()
+        inboundIncomeTypeDescriptionInput:function(tableLine)
         {
-            return element(by.css(" .table.input-table>tbody>tr:last-child>td:nth-child(2)"));
+            return element(by.css(".table.input-table>tbody>tr:nth-child("+tableLine+")>td:nth-child(2)>input"));
         },
-        incomeFileTypeInput:function()
+        incomeFileTypeInput:function(tableLine)
         {
-            return element(by.css(" .table.input-table>tbody>tr:last-child>td:nth-child(3)"));
+            return element(by.css(".table.input-table>tbody>tr:nth-child("+tableLine+")>td:nth-child(3)>input"));
         },
-        tangoIncomeTypeInput:function()
+        tangoIncomeTypeInput:function(tableLine)
         {
-            return element(by.css(" .table.input-table>tbody>tr:last-child>td:nth-child(4)"));
+            return element(by.css(".table.input-table>tbody>tr:nth-child("+tableLine+")>td:nth-child(4)>input"));
         },
         saveIncomeProviderButton:function()
         {
@@ -93,20 +124,20 @@ if (pages.organisation === undefined) {
 
          //  ftf.helper.waitForElement(this.incomeProviderSection(), 30000);
 
-         //  browser.wait(ExpectedConditions.visibilityOf(pages.organisation.incomeProviderSection()));
+         browser.wait(ExpectedConditions.visibilityOf(pages.organisation.incomeProviderSection()));
            //browser.wait(ExpectedConditions.visibilityOf(this.generalOrganisationSection()));
 
         //    this.scopeHeading().click();
 
-         //   pages.base.scrollIntoView( this.incomeProviderSection());
-        //   this.incomeProviderSection().click();
+            pages.base.scrollIntoView( this.incomeProviderSection());
+           this.incomeProviderSection().click();
         }
 ,
 
         clickincomeProviderSectionEdit:function()
         {
 
-          browser.wait(ExpectedConditions.visibilityOf(this.incomeProviderSectionEdit()));
+          //browser.wait(ExpectedConditions.visibilityOf(this.incomeProviderSectionEdit()));
 
            // ftf.helper.waitForElement(this.incomeProviderSectionEdit(), 30000);
 
@@ -115,38 +146,55 @@ if (pages.organisation === undefined) {
         ,
 
 
-        typeIntoInboundIncomeTypeInput:function(text)
+        typeIntoInboundIncomeTypeInput:function(text,tableLine)
         {
-            this.inboundIncomeTypeInput().sendKeys(text);
+
+
+            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.inboundIncomeTypeInput(tableLine)));
+            this.inboundIncomeTypeInput(tableLine).sendKeys(text);
+          //  pages.base.scrollIntoView(  this.inboundIncomeTypeInput);
 
 
 
         },
-        typeIntoInboundIncomeTypeDescriptionInput:function(text)
+        typeIntoInboundIncomeTypeDescriptionInput:function(text,tableLine)
         {
-            this.inboundIncomeTypeDescriptionInput().sendKeys(text);
+            this.inboundIncomeTypeDescriptionInput(tableLine).sendKeys(text);
         },
-        typeIntoIncomeFileTypeInput:function(text)
+        typeIntoIncomeFileTypeInput:function(text,tableLine)
         {
-            this.incomeFileTypeInput().sendKeys(text);
+            this.incomeFileTypeInput(tableLine).sendKeys(text);
             browser.wait(ExpectedConditions.visibilityOf(this.typeaheadInput()));
-            this.incomeFileTypeInput().sendKeys(protractor.Key.ENTER);
+            this.incomeFileTypeInput(tableLine).sendKeys(protractor.Key.ENTER);
         },
-        typeIntoTangoIncomeTypeInput:function(text)
+        typeIntoTangoIncomeTypeInput:function(text,tableLine)
         {
-            this.tangoIncomeTypeInput().sendKeys(text);
+            this.tangoIncomeTypeInput(tableLine).sendKeys(text);
             browser.wait(ExpectedConditions.visibilityOf(this.typeaheadInput()));
-            this.tangoIncomeTypeInput().sendKeys(protractor.Key.ENTER);
+            this.tangoIncomeTypeInput(tableLine).sendKeys(protractor.Key.ENTER);
         },
      clickSaveIncomeProviderButton:function()
         {
 
 
 
+            browser.wait(ExpectedConditions.visibilityOf(this.saveIncomeProviderButton()));
           this.saveIncomeProviderButton().click();
         }
         ,
+        waitForSaveToComplete:function()
+        {
 
+         //   browser.isElemenetPresent(by.css('element'));
+
+
+
+            browser.wait(ExpectedConditions.invisibilityOf (    this.incomeProvidersEditView()));
+            //browser.pause();
+
+        }
+
+        ,
 
 
 
@@ -167,6 +215,26 @@ if (pages.organisation === undefined) {
 
 
         }
+
+
+
+        ,
+
+
+        selectIncomeFileType:function(fileType)
+        {
+
+            this.fileTypeIncomeInput().click();
+            this.fileTypeIncomeInput().sendKeys(fileType);
+
+         //   browser.wait(ExpectedConditions.visibilityOf(this.fileTypeIncomeInputDropdown()));
+           this.fileTypeIncomeInput().sendKeys(protractor.Key.ENTER);
+
+
+
+
+        }
+        ,
 
 
 
