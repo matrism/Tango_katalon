@@ -237,3 +237,4 @@ module.exports.selectedTgDropdownOption = function(element) {
 			.getText()
 	);
 };
+

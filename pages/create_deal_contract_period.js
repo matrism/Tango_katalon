@@ -289,7 +289,20 @@ module.exports.fillIntoMdrcEveryWeeks = function () {
     pages.create_deal_contract_period.mdrcEveryWeeks().sendKeys(value);
 };
 
-module.exports.fillIntoDateCompleted = function () {
-    //var dateCompleted = moment('20151023').format("yyyy-mm-dd");
-  pages.create_deal_contract_period.mdrcDateCompleted().sendKeys("2015-08-12");
+module.exports.fillIntoMdrcDateCompleted = function () {
+    //var dateCompleted = new Date(Math.random()* 12).format("yyy-mm-dd");
+    pages.create_deal_contract_period.mdrcDateCompleted().sendKeys("2015-03-09");
+};
+
+module.exports.fillIntoMdrcShortfallAmount = function () {
+    var value = Math.floor(Math.random() * 100) + 1;
+    pages.create_deal_contract_period.mdrcShortfallAmount().sendKeys(value);
+};
+
+module.exports.clickOnMdrcForgivenShortfallActionButton = function(){
+    pages.create_deal_contract_period.mdrcForgivenShortfallButton().click();
+};
+
+module.exports.clickOnMdrcCarriedForwardShortfallActionButton = function(){
+    pages.create_deal_contract_period.mdrcCarriedForwardShortfallButton().click();
 };

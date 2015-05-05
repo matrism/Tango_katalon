@@ -33,6 +33,7 @@ module.exports.chooseIncompleteMdrcOption = function () {
 module.exports.chooseDeemedCompleteMdrcOption = function () {
     it("Choose deemed complete MDRC option", function () {
         pages.create_deal_contract_period.clickOnDeemedCompleteOption();
+        browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.mdrcDateCompleted()));
     });
 };
 
@@ -232,6 +233,39 @@ module.exports.fillMdrcEveryWeeks = function () {
     });
 };
 
+module.exports.fillDateCompleted = function () {
+    it("Fill into date completed field ", function () {
+        pages.create_deal_contract_period.fillIntoDateCompleted();
+    });
+};
+
+module.exports.clickMdrcForgivenShortfallAction = function () {
+    it("Click on MDRC Forgiven shortfall action button", function () {
+        pages.create_deal_contract_period.clickOnMdrcForgivenShortfallActionButton();
+    });
+};
+
+module.exports.checkMdrcForgivenShortfallActionOptionIsSelected = function () {
+    it("Check MDRC forgiven shortfall action option is selected ", function () {
+        var test = pages.create_deal_contract_period.mdrcForgivenShortfallButton().getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+module.exports.clickMdrcCarriedForwardShortfallAction = function () {
+    it("Click on MDRC carried forward shortfall action button", function () {
+        pages.create_deal_contract_period.clickOnMdrcCarriedForwardShortfallActionButton();
+    });
+};
+
+module.exports.checkMdrcCarriedForwardShortfallActionOptionIsSelected = function () {
+    it("Check MDRC carried forward shortfall action option is selected ", function () {
+        var test = pages.create_deal_contract_period.mdrcCarriedForwardShortfallButton().getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+
 module.exports.saveMdrcForm = function () {
     it("Save mdrc form ", function () {
         pages.create_deal_contract_period.clickOnSaveMdrcForm();
@@ -270,6 +304,7 @@ module.exports.itAddDeemedCompleteMdrcContractPeriod = function () {
         steps.create_deal_contract_period.checkIncompleteMdrcOptionIsSelected();
         steps.create_deal_contract_period.chooseDeemedCompleteMdrcOption();
         steps.create_deal_contract_period.checkDeemedCompleteMdrcOptionIsSelected();
+        steps.create_deal_contract_period.fillDateCompleted();
         steps.create_deal_contract_period.fillMdrcQuantity();
         steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
         steps.create_deal_contract_period.addMdrcTerritory();
