@@ -8,24 +8,24 @@ require(steps_path + "royaltyRates");
 require(pages_path + "deal");
 require(steps_path + "deal");
 
-require(pages_path + "deal_general");
-require(steps_path + "deal_general");
+require(pages_path + "create_deal_general");
+require(steps_path + "create_deal_general");
 
-require(pages_path + "deal_contract_period");
-require(steps_path + "deal_contract_period");
+require(pages_path + "create_deal_contract_period");
+require(steps_path + "create_deal_contract_period");
 
-require(pages_path + "deal_scope");
-require(steps_path + "deal_scope");
+require(pages_path + "create_deal_scope");
+require(steps_path + "create_deal_scope");
 
 //require(pages_path + "incomeProvider");
 require(steps_path + "incomeProvider");
 
 var beforeFeature = function () {
         steps.login.itLogin();
-        steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
+        steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
         steps.deal.itContinueToNextPage();
-        steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-        steps.deal_scope.itAddSimpleScope();
+        steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+        steps.create_deal_scope.itAddSimpleScope();
     },
 
     feature = [{
