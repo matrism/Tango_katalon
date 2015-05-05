@@ -133,6 +133,45 @@ if (pages.royaltyRates === undefined) {
 
 
         },
+        selectIncomeProviderByPartialMatch: function (sentKeys) {
+
+
+            var incomeProviderInput;
+
+            incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+
+            incomeProviderInput.sendKeys(sentKeys);
+            incomeProviderInput.click();
+
+            var suggestion = $(".ng-scope.ng-binding>strong");
+            browser.wait(ExpectedConditions.visibilityOf(suggestion));
+            expect(suggestion.getText()).not.toContain("No results");
+
+
+            var desiredOption;
+            browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
+                .then(function findMatchingOption(options) {
+                    options.some(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+
+
+                                if( text.search(sentKeys) > -1){
+
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+
+
+        },
         getIncomeProviderInputValue: function () {
 
             var incomeProviderInput;
@@ -354,16 +393,6 @@ if (pages.royaltyRates === undefined) {
 
 
             browser.wait(ExpectedConditions.visibilityOf(this.scopeHeading()));
-
-
-          //  browser.driver.sleep(5000);
-
-
-          //  var element;
-          //  element = browser.driver.findElement(by.css(".scope-heading.clearfix.relative"));
-
-
-
             this.scopeHeading().click();
 
 

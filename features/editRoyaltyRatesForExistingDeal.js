@@ -21,9 +21,14 @@ require(steps_path + "deal_contract_period");
 require(pages_path + "deal_scope");
 require(steps_path + "deal_scope");
 
+require(pages_path + "searchSection");
+require(steps_path + "searchSection");
+
+
+
 var beforeFeature = function () {
         steps.login.itLogin();
-        steps.editRoyaltyRates.accessSavedDealByNumber("205622");
+        steps.searchSection.accessSavedDealByNumber("205622");
 
 
 
@@ -115,6 +120,8 @@ var beforeFeature = function () {
                 steps.editRoyaltyRates.confirmChangingRateApplicationMethod();
                 steps.editRoyaltyRates.saveRateSet();
                 steps.editRoyaltyRates.rateSetSavedSuccesfully();
+
+                //TODO calculation of new payout is succesfull
 
 
 

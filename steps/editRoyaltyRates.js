@@ -174,7 +174,7 @@ if (steps.editRoyaltyRates === undefined) {
                     expect(pages.royaltyRates.effectiveStartDateInputFieldIsPresent()).toBeTruthy();
                     expect(pages.royaltyRates.effectiveStartDateCalendarIconIsPresent()).toBeTruthy();
                     expect(pages.royaltyRates.getEffectiveStartDateContextualHelp()).toBe("Effective Date is based on time + Territory that is processing the royalty + Income Received Date. For rates to become active, Royalty Processing needs to know the date (when known) the Rate Set begins");
-                    expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe("2015-03-12")
+                   // expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe("2015-03-12")
 
 
                 }
@@ -318,24 +318,8 @@ if (steps.editRoyaltyRates === undefined) {
 
         },
 
-        accessSavedDealByNumber:function(dealContractNumber)
-        {
-
-            it("User accesses deal with number "+ dealContractNumber,function(){
-
-                pages.editRoyaltyRates.clickDropdownMenu();
-                pages.editRoyaltyRates.selectOptionFromSearchDropDown("Deals");
-                pages.editRoyaltyRates.typeDealNumberIntoInput(dealContractNumber);
-                pages.editRoyaltyRates.selectValueFromDropdown();
 
 
-            })
-
-
-
-
-        }
-        ,
 
 
         test: function () {
