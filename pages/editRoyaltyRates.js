@@ -33,20 +33,11 @@ if (pages.editRoyaltyRates === undefined) {
             return element(by.css(".rate-set-summary-table>button"));
         }
         ,
-        searchDropdown: function () {
 
-            return element(by.css(".btn.dropdown-toggle"));
-
-
-        },
         royaltyRateName: function () {
             return element(by.css(".ng-scope>td>strong"));
         },
-        searchDropdownOptions: function () {
 
-            return element.all(by.css("#DSP-SEARCH-DROP>.dropdown-menu>li"));
-        }
-        ,
         searchInput: function () {
 
             return element(by.css(".tg-typeahead__input"));
@@ -429,20 +420,8 @@ if (pages.editRoyaltyRates === undefined) {
 
         ,
 
-        clickDropdownMenu: function () {
-            this.searchDropdown().click();
-
-        }
-        ,
-        selectOptionFromSearchDropDown: function (option) {
-
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("#DSP-SEARCH-DROP>.dropdown-menu"))));
-
-            element(by.css('#SEARCH-DEAL')).click();
 
 
-
-        },
         typeDealNumberIntoInput: function (dealContractNumber) {
 
             this.searchInput().sendKeys(dealContractNumber);

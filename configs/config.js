@@ -27,8 +27,13 @@ var configer = ftf.configer,
         localhost: {
             urls: {
                 sso: configer.getEnvVarByKey("URL_SSO"),
-                app_url: " http://tango.tango-qa-aws.dspdev.wmg.com",
-                service_url: "http://tango.tango-qa-aws.dspdev.wmg.com"
+
+
+
+                app_url: "https://musicpublishing.staging.dsp.wmg.com",
+                service_url: "https://musicpublishing.staging.dsp.wmg.com"
+                //app_url: " http://tango.tango-qa-aws.dspdev.wmg.com",
+                //service_url: "http://tango.tango-qa-aws.dspdev.wmg.com"
                 //app_url:  "http://tango.e2e-tango.dspdev.wmg.com",
                 //service_url: "http://tango.e2e-tango.dspdev.wmg.com"
 

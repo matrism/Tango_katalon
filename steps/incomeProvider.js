@@ -29,15 +29,15 @@ if (steps.incomeProvider === undefined) {
                         pages.royaltyRates.clickNewRoyaltySetButton();
                         pages.royaltyRates.typeIntoEffectiveStartDateInput(Date_1);
                         pages.royaltyRates.addPercentageToContractualRateInput("10");
-                        pages.royaltyRates.selectIncomeProvider(Income_Provider_1);
+                        pages.royaltyRates.selectIncomeProviderByPartialMatch(Income_Provider_1);
                         pages.royaltyRates.clickOnReceiptApplicationMethod();
                         pages.royaltyRates.clickYesOnRateMethodModal();
                         pages.royaltyRates.clickDoneButtonForRRSet();
 
                         pages.royaltyRates.clickNewRoyaltySetButton();
-                        pages.royaltyRates.typeIntoEffectiveStartDateInput(Date_1);
-                        pages.royaltyRates.addPercentageToContractualRateInput("10");
-                        pages.royaltyRates.selectIncomeProvider(Income_Provider_1);
+                        pages.royaltyRates.typeIntoEffectiveStartDateInput(Date_2);
+                        pages.royaltyRates.addPercentageToContractualRateInput("13");
+                        pages.royaltyRates.selectIncomeProviderByPartialMatch(Income_Provider_2);
                         pages.royaltyRates.clickOnReceiptApplicationMethod();
                         pages.royaltyRates.clickYesOnRateMethodModal();
                         pages.royaltyRates.clickDoneButtonForRRSet();
