@@ -31,7 +31,7 @@ module.exports.completeMdrc = function () {
 };
 
 module.exports.mdrcQuantity = function () {
-    return element(By.name("quantity"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input#quantity"));
 };
 
 module.exports.mdrcMinimumWorkContribution = function () {
@@ -154,6 +154,7 @@ module.exports.fillTargetEndMonths = function () {
 
 module.exports.clickOnAddMdrcLink = function () {
     pages.create_deal_contract_period.addMdrcLink().click();
+    browser.sleep(1000);
 };
 
 module.exports.clickOnIncompleteOption = function () {
