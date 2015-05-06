@@ -39,6 +39,7 @@ module.exports.chooseDeemedCompleteMdrcOption = function () {
 module.exports.chooseCompleteMdrcOption = function () {
     it("Choose complete MDRC option", function () {
         pages.create_deal_contract_period.clickOnCompleteOption();
+        browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.mdrcDateCompleted()));
     });
 };
 

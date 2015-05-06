@@ -10,7 +10,7 @@ var configer = ftf.configer,
             client_secret: "appclientsecret"
         },
         _system_: {
-            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "firefox"),
+            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
             resolution: {
                 width: 1600,
                 height: 900
@@ -19,7 +19,7 @@ var configer = ftf.configer,
             path_to_features: "./features/",
             path_to_steps: "../steps/",
             path_to_pages: "../pages/",
-            wait_timeout: 15000,
+            wait_timeout: 40000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false
         },
@@ -30,10 +30,10 @@ var configer = ftf.configer,
 
 
 
-                app_url: "https://musicpublishing.staging.dsp.wmg.com",
-                service_url: "https://musicpublishing.staging.dsp.wmg.com"
-                //app_url: " http://tango.tango-qa-aws.dspdev.wmg.com",
-                //service_url: "http://tango.tango-qa-aws.dspdev.wmg.com"
+                //app_url: "https://musicpublishing.staging.dsp.wmg.com",
+                //service_url: "https://musicpublishing.staging.dsp.wmg.com"
+                app_url: " http://tango.tango-qa-aws.dspdev.wmg.com",
+                service_url: "http://tango.tango-qa-aws.dspdev.wmg.com"
                 //app_url:  "http://tango.e2e-tango.dspdev.wmg.com",
                 //service_url: "http://tango.e2e-tango.dspdev.wmg.com"
             },

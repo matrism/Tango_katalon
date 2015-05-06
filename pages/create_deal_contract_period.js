@@ -169,7 +169,7 @@ module.exports.clickOnCompleteOption = function () {
 };
 
 module.exports.fillIntoMdrcQuantity = function () {
-    var number = Math.floor(Math.random() * 50) + 1;
+    var number = Math.floor(Math.random() * 50) + 30;
     pages.create_deal_contract_period.mdrcQuantity().sendKeys(number);
 };
 
