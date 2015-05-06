@@ -39,7 +39,7 @@ module.exports.mdrcMinimumWorkContribution = function () {
 };
 
 module.exports.mdrcQuantityForCommercialRelease = function () {
-    return element(By.model("mdrc.com_release_major_territory"));
+    return element(By.model("mdrc.commercial_release_quantity"));
 };
 
 module.exports.mdrcMajorTerritoriesForCommercialRelease = function () {
@@ -66,7 +66,7 @@ module.exports.mdrcNoCommercialReleaseByMajorLabel = function () {
     return element(By.css("button[data-ng-model='mdrc.release_label']:nth-child(2)"));
 };
 
-module.exports.mdrcLabels = function () {
+module.exports.mdrcLabelsElement = function () {
     return element(By.css("div[data-ng-model='mdrc.labels'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
@@ -169,7 +169,7 @@ module.exports.clickOnCompleteOption = function () {
 };
 
 module.exports.fillIntoMdrcQuantity = function () {
-    var number = Math.floor(Math.random() * 20) + 1;
+    var number = Math.floor(Math.random() * 50) + 1;
     pages.create_deal_contract_period.mdrcQuantity().sendKeys(number);
 };
 
@@ -180,7 +180,7 @@ module.exports.fillIntoMdrcMinimumWorkContribution = function () {
 };
 
 module.exports.fillIntoMdrcQuantityForCommercialRelease = function () {
-    var number = Math.floor(Math.random() * 20) + 1;
+    var number = Math.floor(Math.random() * 10) + 1;
     pages.create_deal_contract_period.mdrcQuantityForCommercialRelease().sendKeys(number);
 };
 
@@ -213,7 +213,7 @@ module.exports.clickOnMdrcNoCommercialReleaseByMajorLabel = function () {
 };
 
 module.exports.fillIntoMdrcLabelsField = function () {
-    pages.create_deal_contract_period.mdrcLabels().sendKeys("ty");
+    pages.create_deal_contract_period.mdrcLabelsElement().sendKeys("ty");
 };
 
 module.exports.selectMdrcRandomValueFromLabel = function () {
@@ -294,7 +294,7 @@ module.exports.fillIntoMdrcDateCompleted = function () {
 };
 
 module.exports.fillIntoMdrcShortfallAmount = function () {
-    var value = Math.floor(Math.random() * 100) + 1;
+    var value = Math.floor(Math.random() * 80) + 1;
     pages.create_deal_contract_period.mdrcShortfallAmount().sendKeys(value);
 };
 
