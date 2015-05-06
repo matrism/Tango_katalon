@@ -17,7 +17,7 @@ var beforeFeature = function () {
     },
 
     feature = [{
-        name: "Create a deal with MDRC",
+        name: "Create a deal with incomplete MDRC",
         tags: ["create_incomplete_deal_mdrc"],
         steps: function () {
 
@@ -33,7 +33,7 @@ var beforeFeature = function () {
         }
     },
         {
-            name: "Create a deal with MDRC",
+            name: "Create a deal with deemed complete MDRC",
             tags: ["create_deemed_complete_deal_mdrc"],
             steps: function () {
 
@@ -42,10 +42,26 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
                 steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.addMdrcLink());
                 steps.create_deal_contract_period.itAddDeemedCompleteMdrcContractPeriod();
-                //steps.deal.itContinueToNextPage();
-                //steps.deal.saveDeal();
-                //steps.deal.waitForDealToBeSaved();
-                //steps.deal.returnDealNumber();
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.waitForDealToBeSaved();
+                steps.deal.returnDealNumber();
+            }
+        },
+        {
+            name: "Create a deal with complete MDRC",
+            tags: ["create_complete_deal_mdrc"],
+            steps: function () {
+
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.addMdrcLink());
+                steps.create_deal_contract_period.itAddCompleteMdrcContractPeriod();
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.waitForDealToBeSaved();
+                steps.deal.returnDealNumber();
             }
         }];
 

@@ -235,7 +235,13 @@ module.exports.fillMdrcEveryWeeks = function () {
 
 module.exports.fillDateCompleted = function () {
     it("Fill into date completed field ", function () {
-        pages.create_deal_contract_period.fillIntoDateCompleted();
+        pages.create_deal_contract_period.fillIntoMdrcDateCompleted();
+    });
+};
+
+module.exports.fillMdrcShortfallAmount = function () {
+    it("Fill into MDRC shortfall amount field ", function () {
+        pages.create_deal_contract_period.fillIntoMdrcShortfallAmount();
     });
 };
 
@@ -284,6 +290,7 @@ module.exports.itAddIncompleteMdrcContractPeriod = function () {
         steps.create_deal_contract_period.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
         steps.create_deal_contract_period.clickMdrcNoCommercialReleaseByMajorLabel();
         steps.create_deal_contract_period.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.base.scrollIntoView("Label section", pages.create_deal_contract_period.mdrcLabelsElement());
         steps.create_deal_contract_period.selectMdrcRandomLabel();
         steps.create_deal_contract_period.checkMdrcNoSelfRecordOptionIsSelected();
         steps.create_deal_contract_period.fillMdrcPercentOfMinStatutoryRate();
@@ -299,11 +306,41 @@ module.exports.itAddIncompleteMdrcContractPeriod = function () {
 
 
 module.exports.itAddDeemedCompleteMdrcContractPeriod = function () {
-    describe("Add incomplete MDRC on  contract period screen", function () {
+    describe("Add deemed complete MDRC on  contract period screen", function () {
         steps.create_deal_contract_period.clickOnAddMdrc();
         steps.create_deal_contract_period.checkIncompleteMdrcOptionIsSelected();
         steps.create_deal_contract_period.chooseDeemedCompleteMdrcOption();
         steps.create_deal_contract_period.checkDeemedCompleteMdrcOptionIsSelected();
+        steps.create_deal_contract_period.fillDateCompleted();
+        steps.create_deal_contract_period.fillMdrcShortfallAmount();
+        steps.create_deal_contract_period.checkMdrcForgivenShortfallActionOptionIsSelected();
+        steps.create_deal_contract_period.fillMdrcQuantity();
+        steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
+        steps.create_deal_contract_period.addMdrcTerritory();
+        steps.create_deal_contract_period.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.create_deal_contract_period.clickMdrcNoCommercialReleaseByMajorLabel();
+        steps.create_deal_contract_period.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.base.scrollIntoView("Label section", pages.create_deal_contract_period.mdrcLabelsElement());
+        steps.create_deal_contract_period.selectMdrcRandomLabel();
+        steps.create_deal_contract_period.checkMdrcNoSelfRecordOptionIsSelected();
+        steps.create_deal_contract_period.fillMdrcPercentOfMinStatutoryRate();
+        steps.create_deal_contract_period.fillMdrcInNoEventLessThan();
+        steps.create_deal_contract_period.checkMdrcNoProportionalRecoupmentAllowedOptionIsSelected();
+        steps.create_deal_contract_period.checkMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected();
+        steps.create_deal_contract_period.fillMdrcDeliverySchedule();
+        steps.create_deal_contract_period.fillMdrcEveryWeeks();
+        steps.base.scrollIntoView("Save MDRC button", pages.create_deal_contract_period.mdrcSaveButton());
+        steps.create_deal_contract_period.saveMdrcForm();
+    });
+};
+
+
+module.exports.itAddCompleteMdrcContractPeriod = function () {
+    describe("Add complete MDRC on  contract period screen", function () {
+        steps.create_deal_contract_period.clickOnAddMdrc();
+        steps.create_deal_contract_period.checkIncompleteMdrcOptionIsSelected();
+        steps.create_deal_contract_period.chooseCompleteMdrcOption();
+        steps.create_deal_contract_period.checkCompleteMdrcOptionIsSelected();
         steps.create_deal_contract_period.fillDateCompleted();
         steps.create_deal_contract_period.fillMdrcQuantity();
         steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
@@ -311,6 +348,7 @@ module.exports.itAddDeemedCompleteMdrcContractPeriod = function () {
         steps.create_deal_contract_period.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
         steps.create_deal_contract_period.clickMdrcNoCommercialReleaseByMajorLabel();
         steps.create_deal_contract_period.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.base.scrollIntoView("Label section", pages.create_deal_contract_period.mdrcLabelsElement());
         steps.create_deal_contract_period.selectMdrcRandomLabel();
         steps.create_deal_contract_period.checkMdrcNoSelfRecordOptionIsSelected();
         steps.create_deal_contract_period.fillMdrcPercentOfMinStatutoryRate();
