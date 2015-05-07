@@ -19,15 +19,15 @@ module.exports.addMdrcLink = function () {
 };
 
 module.exports.incompleteMdrc = function () {
-    return element(By.css("button[data-ng-class='{ active: !mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: !mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"));
 };
 
 module.exports.deemedCompleteMdrc = function () {
-    return element(By.css("button[data-ng-class='{ active: mdrc.is_completed && mdrc.showDeemedCompleteDetails }']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: mdrc.is_completed && mdrc.showDeemedCompleteDetails }']"));
 };
 
 module.exports.completeMdrc = function () {
-    return element(By.css("button[data-ng-class='{ active: mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"));
 };
 
 module.exports.mdrcQuantity = function () {
@@ -35,103 +35,103 @@ module.exports.mdrcQuantity = function () {
 };
 
 module.exports.mdrcMinimumWorkContribution = function () {
-    return element(By.model("mdrc.work_percent"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input#workPercent]"));
 };
 
 module.exports.mdrcQuantityForCommercialRelease = function () {
-    return element(By.model("mdrc.commercial_release_quantity"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input#commercialReleaseQuantity"));
 };
 
 module.exports.mdrcMajorTerritoriesForCommercialRelease = function () {
-    return element(By.id("territories"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input#territories"));
 };
 
 module.exports.mdrcTerritoriesField = function () {
-    return element(By.css("#mdrcTerritories0 div.territoriesStaticView"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem div.default.territoryControl.popup-left.territoryPicker.ng-isolate-scope div.territoriesStaticView"));
 };
 
 module.exports.mdrcTerritoriesInputField = function () {
-    return element(By.css("#mdrcTerritories0 div.territoriesContainer  input[ng-model='typeaheadQuery']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem div.default.territoryControl.popup-left.territoryPicker.ng-isolate-scope div.territoriesContainer  input[ng-model='typeaheadQuery']"));
 };
 
 module.exports.mdrcTerritoriesDropDown = function () {
-    return element(By.css("div.typeaheadDropdown div.item.ng-scope"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem div.typeaheadDropdown div.item.ng-scope"));
 };
 
 module.exports.mdrcYesCommercialReleaseByMajorLabel = function () {
-    return element(By.css("button[data-ng-model='mdrc.release_label']:nth-child(1)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.release_label']:nth-child(1)"));
 };
 
 module.exports.mdrcNoCommercialReleaseByMajorLabel = function () {
-    return element(By.css("button[data-ng-model='mdrc.release_label']:nth-child(2)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.release_label']:nth-child(2)"));
 };
 
 module.exports.mdrcLabelsElement = function () {
-    return element(By.css("div[data-ng-model='mdrc.labels'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem div[data-ng-model='mdrc.labels'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
 
 module.exports.mdrcLabelsDropDownData = function () {
-    return element(By.css("ul.tg-typeahead__suggestions.ng-scope"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem ul.tg-typeahead__suggestions.ng-scope"));
 };
 
 module.exports.mdrcYesSelfRecord = function () {
-    return element(By.css("button[data-ng-model='mdrc.self_record']:nth-child(1)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.self_record']:nth-child(1)"));
 };
 
 module.exports.mdrcNoSelfRecord = function () {
-    return element(By.css("button[data-ng-model='mdrc.self_record']:nth-child(2)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.self_record']:nth-child(2)"));
 };
 
 module.exports.mdrcPercentOfMinStatutoryRate = function () {
-    return element(By.model("mdrc.min_stat_mech_rate_percent"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input#minMechanicalRate"));
 };
 
 module.exports.mdrcInNoEventLessThan = function () {
-    return element(By.model("mdrc.no_less_than"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input[data-ng-model='mdrc.no_less_than']"));
 };
 
 module.exports.mdrcYesProportionalRecoupmentAllowed = function () {
-    return element(By.css("button[data-ng-model='mdrc.proportional_recoupment']:nth-child(1)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.proportional_recoupment']:nth-child(1)"));
 };
 
 module.exports.mdrcNoProportionalRecoupmentAllowed = function () {
-    return element(By.css("button[data-ng-model='mdrc.proportional_recoupment']:nth-child(2)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.proportional_recoupment']:nth-child(2)"));
 };
 
 module.exports.mdrcYesSeeContractForAdditionalMdrcComplexities = function () {
-    return element(By.css("button[data-ng-model='mdrc.additional_complexity']:nth-child(1)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.additional_complexity']:nth-child(1)"));
 };
 
 module.exports.mdrcNoSeeContractForAdditionalMdrcComplexities = function () {
-    return element(By.css("button[data-ng-model='mdrc.additional_complexity']:nth-child(2)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.additional_complexity']:nth-child(2)"));
 };
 
 module.exports.mdrcDeliverySchedule = function () {
-    return element(By.model("mdrc.delivery_schedule.quantity"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input[data-ng-model='mdrc.delivery_schedule.quantity']"));
 };
 
 module.exports.mdrcEveryWeeks = function () {
-    return element(By.model("mdrc.delivery_schedule.frequency"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input[data-ng-model='mdrc.delivery_schedule.frequency']"));
 };
 
 module.exports.mdrcDateCompleted = function () {
-    return element(By.css("#dateCompleted input[data-ng-model='date']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem div#dateCompleted input[data-ng-model='date']"));
 };
 
 module.exports.mdrcShortfallAmount = function () {
-    return element(By.id("shortfall"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem input#shortfall"));
 };
 
 module.exports.mdrcForgivenShortfallButton = function () {
-    return element(By.css("div.btn-group.shortfall-action button:nth-child(1)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem div.btn-group.shortfall-action button:nth-child(1)"));
 };
 
 module.exports.mdrcCarriedForwardShortfallButton = function () {
-    return element(By.css("div.btn-group.shortfall-action button:nth-child(2)"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem div.btn-group.shortfall-action button:nth-child(2)"));
 };
 
 module.exports.mdrcSaveButton = function () {
-    return element(By.css("button[data-ng-click='activeContractPeriod.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='activeContractPeriod.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"));
 };
 
 module.exports.mdrcCancelLink = function () {
@@ -139,7 +139,7 @@ module.exports.mdrcCancelLink = function () {
 };
 
 module.exports.mdrcDeleteButton = function () {
-    return element(By.css("button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"));
+    return element(By.css("div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"));
 };
 
 
