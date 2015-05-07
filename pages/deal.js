@@ -6,7 +6,11 @@ if (pages.deal === undefined) {
         locators: {
             dealBriefNumber: {xpath: "//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']"},
             continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
-            saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"}
+            saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
+            generalHeader: {css: "li[data-heading='General']"},
+            termsHeader: {css: "li[data-heading='Terms']"},
+            dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
+            dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"}
         },
 
         continueToNextPage: function () {
@@ -18,10 +22,16 @@ if (pages.deal === undefined) {
         },
 
         expectContinueButtonEnabled: function () {
-            it("Expect continue button to be enabled", function () {
-                expect(pages.deal.elems.continueButton.isEnabled());
-            });
+            expect(pages.deal.elems.continueButton.isEnabled());
+        },
+
+        goToGeneralDealDetails: function () {
+            pages.deal.elems.generalHeader.click();
+        },
+
+        goToTermsDealDetails: function () {
+            pages.deal.elems.termsHeader.click();
         }
 
-});
+    });
 }

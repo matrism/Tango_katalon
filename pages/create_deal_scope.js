@@ -4,9 +4,8 @@ var ExpectedConditions = protractor.ExpectedConditions;
 var randomId = require("../helpers/randomId");
 var pages_path = _tf_config._system_.path_to_pages;
 require(pages_path + "base");
-if (pages.deal_scope === undefined) {
-    pages.deal_scope = new ftf.pageObject({
-        //url: _tf_config.urls.app_url + "#/create/deal",
+if (pages.create_deal_scope === undefined) {
+    pages.create_deal_scope = new ftf.pageObject({
         locators: {
             addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
@@ -19,7 +18,7 @@ if (pages.deal_scope === undefined) {
         },
 
         addScopeForm: function () {
-            pages.deal_scope.elems.addScopeIcon.click();
+            pages.create_deal_scope.elems.addScopeIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.contractTypeDropDown));
         },
 
@@ -47,9 +46,9 @@ if (pages.deal_scope === undefined) {
 
 
         addTerritoryByTypingToScope: function () {
-            pages.deal_scope.elems.territoryField.click();
+            pages.create_deal_scope.elems.territoryField.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryInput));
-            pages.deal_scope.elems.territoryInput.sendKeys("a");
+            pages.create_deal_scope.elems.territoryInput.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryDropDown));
         },
 
@@ -64,11 +63,11 @@ if (pages.deal_scope === undefined) {
         },
 
         clickOnAddPublisherShareSetLink: function () {
-            pages.deal_scope.elems.addPublisherShareSetLink.click();
+            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
         },
 
         fillInFirstPublisherNameField: function () {
-            pages.deal_scope.elems.firstPublisherNameField.sendKeys("test");
+            pages.create_deal_scope.elems.firstPublisherNameField.sendKeys("test");
         },
 
         selectRandomPublisherNameDropDown: function () {

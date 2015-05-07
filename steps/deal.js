@@ -42,18 +42,36 @@ if (steps.deal === undefined) {
                         console.log("Deal number is: " + promise);
                     });
 
-                return pages.deal.elems.dealBriefNumber;
+                //return pages.deal.elems.dealBriefNumber;
+            });
+        },
+
+        itContinueToNextPage: function () {
+            describe("Check continue button enabled and go to next page", function () {
+                    //steps.deal.waitContinueButtonEnabled();
+                    steps.deal.goToNextPage();
+                }
+            );
+        },
+
+        goToGeneralDealTabDetails: function () {
+            it("Click on general header and go to general deal tab details ", function () {
+                pages.deal.goToGeneralDealDetails();
+                browser.wait(ExpectedConditions.visibilityOf(pages.deal.dealGeneralSummaryHeader()));
+            });
+        },
+
+        goToTermsDealTabDetails: function () {
+            it("Click on terms header and go to terms deal tab details ", function () {
+                pages.deal.goToTermsDealDetails();
+            });
+        },
+
+        expectTermsDetailsAreOk: function () {
+            it("Expect terms tab is opened successfully ", function () {
+                browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealTermsSummaryHeader));
             });
         }
-
-        //scrollIntoView : function(elName, el) {
-        //    it (
-        //        "Scroll '" + elName + "' into view", function() {
-        //            steps.deal.scrollIntoView(el);
-        //            expect(el.isDisplayed()).toBeTruthy();
-        //        }
-        //    );
-        //}
 
     };
 }
