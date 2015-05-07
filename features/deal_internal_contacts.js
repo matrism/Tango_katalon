@@ -24,7 +24,7 @@ var beforeFeature = function () {
 
             //var i=2;
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-            steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.internalContactsInputField());
+            steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
             steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
             for (var i = 2; i <= 4; i++) {
                 steps.create_deal_general.itAddInternalContactsRowIToDealGeneralTab(i);
@@ -36,7 +36,7 @@ var beforeFeature = function () {
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
             steps.deal.goToGeneralDealTabDetails();
-            steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.internalContactsArea());
+            steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.elems.internalContactsArea);
             steps.edit_deal_general.returnAndCheckInternalContactsTitle();
             steps.edit_deal_general.returnAndCheckInternalContactsHeaderTable();
             steps.edit_deal_general.returnAndCheckAddInternalContactsLinkPresent();
@@ -72,7 +72,7 @@ var beforeFeature = function () {
                 var j = 2;
                 //create a deal with 1 internal contact
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.internalContactsInputField());
+                steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
                 steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
@@ -82,7 +82,7 @@ var beforeFeature = function () {
                 steps.deal.returnDealNumber();
                 steps.deal.goToGeneralDealTabDetails();
                 //edit internal contacts -- add 1 internal contact with 2 roles
-                steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.internalContactsArea());
+                steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.elems.internalContactsArea);
                 steps.edit_deal_general.returnAndCheckInternalContactsTitle();
                 steps.edit_deal_general.returnAndCheckInternalContactsHeaderTable();
                 steps.edit_deal_general.returnAndCheckAddInternalContactsLinkPresent();
@@ -123,7 +123,7 @@ var beforeFeature = function () {
             tags: ["dirty_check_internal_contacts"],
             steps: function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.internalContactsInputField());
+                steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
                 steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
@@ -132,7 +132,7 @@ var beforeFeature = function () {
                 steps.deal.waitForDealToBeSaved();
                 steps.deal.returnDealNumber();
                 steps.deal.goToGeneralDealTabDetails();
-                steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.internalContactsArea());
+                steps.base.scrollIntoView("Edit Internal contacts area", pages.edit_deal_general.elems.internalContactsArea);
                 steps.edit_deal_general.returnAndCheckInternalContactsTitle();
                 steps.edit_deal_general.returnAndCheckInternalContactsHeaderTable();
                 steps.edit_deal_general.returnAndCheckAddInternalContactsLinkPresent();
@@ -144,7 +144,7 @@ var beforeFeature = function () {
                 steps.deal.goToTermsDealTabDetails();
                 steps.edit_deal_general.cancelModalDialog();
                 steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("test");
-                steps.base.scrollIntoView("Top of page ", pages.deal.generalHeader());
+                steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
                 steps.deal.goToTermsDealTabDetails();
                 steps.edit_deal_general.confirmModalDialog();
                 steps.deal.expectTermsDetailsAreOk();

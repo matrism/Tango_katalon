@@ -25,7 +25,7 @@ var beforeFeature = function () {
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-            steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.addMdrcLink());
+            steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.elems.addMdrcLink);
             steps.create_deal_contract_period.itAddIncompleteMdrcContractPeriod();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -41,7 +41,7 @@ var beforeFeature = function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.addMdrcLink());
+                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.elems.addMdrcLink);
                 steps.create_deal_contract_period.itAddDeemedCompleteMdrcContractPeriod();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
@@ -57,7 +57,7 @@ var beforeFeature = function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.addMdrcLink());
+                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.elems.addMdrcLink);
                 steps.create_deal_contract_period.itAddCompleteMdrcContractPeriod();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
@@ -73,7 +73,7 @@ var beforeFeature = function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.addMdrcLink());
+                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.elems.addMdrcLink);
                 steps.create_deal_contract_period.itAddIncompleteMdrcContractPeriod();
                 steps.create_deal_contract_period.itAddDeemedCompleteMdrcContractPeriod();
                 steps.create_deal_contract_period.itAddCompleteMdrcContractPeriod();

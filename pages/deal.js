@@ -1,59 +1,37 @@
 "use strict";
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
-module.exports = pages.deal = new ftf.pageObject();
+if (pages.deal === undefined) {
+    pages.deal = new ftf.pageObject({
+        locators: {
+            dealBriefNumber: {xpath: "//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']"},
+            continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
+            saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
+            generalHeader: {css: "li[data-heading='General']"},
+            termsHeader: {css: "li[data-heading='Terms']"},
+            dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
+            dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"}
+        },
 
-//locators
-module.exports.dealBriefNumber = function () {
-    return element(By.xpath("//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']"))
-};
+        continueToNextPage: function () {
+            pages.deal.elems.continueButton.click();
+        },
 
-module.exports.continueButton = function () {
-    return element(by.css("div.page-footer button[data-ng-click='next()']"));
-};
+        saveNewDeal: function () {
+            pages.deal.elems.saveDealButton.click();
+        },
 
-module.exports.saveDealButton = function () {
-    return element(by.css("div.page-footer button[data-ng-click='done()']"));
-};
+        expectContinueButtonEnabled: function () {
+            expect(pages.deal.elems.continueButton.isEnabled());
+        },
 
-module.exports.generalHeader = function () {
-    return element(by.css("li[data-heading='General']"))
-};
+        goToGeneralDealDetails: function () {
+            pages.deal.elems.generalHeader.click();
+        },
 
-module.exports.termsHeader = function () {
-    return element(by.css("li[data-heading='Terms']"))
-};
+        goToTermsDealDetails: function () {
+            pages.deal.elems.termsHeader.click();
+        }
 
-module.exports.dealGeneralSummaryHeader = function () {
-    return element(by.css("a[data-ng-click='showDealSummaryPage()']"))
-};
-
-module.exports.dealTermsSummaryHeader = function () {
-    return element(by.css("a[data-ng-class='{ active: form.show.section.cps }']"))
-};
-
-//methods
-module.exports.continueToNextPage = function () {
-    pages.deal.continueButton().click();
-};
-
-module.exports.saveNewDeal = function () {
-    pages.deal.saveDealButton().click();
-};
-
-
-module.exports.expectContinueButtonEnabled = function () {
-    it("Expect continue button to be enabled", function () {
-        expect(pages.deal.continueButton().isEnabled());
     });
-};
-
-module.exports.goToGeneralDealDetails = function () {
-    pages.deal.generalHeader().click();
-};
-
-module.exports.goToTermsDealDetails = function () {
-    pages.deal.termsHeader().click();
-};
-
+}
