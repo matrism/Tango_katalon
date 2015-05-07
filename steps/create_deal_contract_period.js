@@ -300,7 +300,7 @@ if (steps.create_deal_contract_period === undefined) {
                 steps.create_deal_contract_period.checkMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected();
                 steps.create_deal_contract_period.fillMdrcDeliverySchedule();
                 steps.create_deal_contract_period.fillMdrcEveryWeeks();
-                steps.base.scrollIntoView("Save MDRC button", pages.create_deal_contract_period.elemd.mdrcSaveButton);
+                steps.base.scrollIntoView("Save MDRC button", pages.create_deal_contract_period.elems.mdrcSaveButton);
                 steps.create_deal_contract_period.saveMdrcForm();
             });
         },
