@@ -8,7 +8,6 @@ require(pages_path + "new_work");
 require(steps_path + "base");
 require(steps_path + "work");
 steps.new_work = exports;
-// Navigation.
 module.exports.goToNewWorkPage = function() {
 	it (
 		"Go to New Work page", function() {
@@ -16,7 +15,6 @@ module.exports.goToNewWorkPage = function() {
 		}
 	);
 };
-// Validation.
 module.exports.validateDefaultPrimaryWorkLanguage = function() {
 	it (
 		"Validate default primary work title language", function() {
@@ -158,7 +156,6 @@ module.exports.validateDefaultMusicLibrary = function() {
 		});
 	});
 };
-// Data input.
 module.exports.enterPrimaryWorkTitle = function(value) {
     it('Enter primary work title', function() {
         pages.new_work.enterPrimaryWorkTitle(value);
@@ -507,7 +504,6 @@ exports.saveWork = function() {
 exports.validateSaveWorkRedirection = function() {
      steps.base.validateRedirection("created work page", "/metadata");
 };
-// Flow.
 module.exports.createBasicWork = function(data, more) {
     more = more || {};
 

@@ -8,7 +8,6 @@ exports = module.exports = pages.base = new ftf.pageObject ({
 		logout_link: { id: "DSP-LOGOUT" }
 	}
 });
-// Locators.
 exports.modalHeading = function() {
     return $('.modal-header h3');
 };
@@ -25,7 +24,6 @@ module.exports.dirtyCheckConfirmCancellationButton = function() {
         by.cssContainingText("button", "CONFIRM CANCELLATION")
     );
 };
-// Interaction.
 module.exports.isPresentAndDisplayed = function(element) {
 	return element.isPresent().then(function(isPresent) {
 		if(!isPresent) {

@@ -7,7 +7,6 @@ var random = require("../helpers/random");
 var promise = protractor.promise;
 require(pages_path + "work");
 module.exports = steps.work = {};
-// Navigation.
 module.exports.goToWorkPage = function(workId) {
 	it (
 		"Go to work page", function() {
@@ -22,7 +21,6 @@ module.exports.goToScopeDelivery = function() {
 		}
 	);
 };
-// Data fetching.
 module.exports.findCurrentlyOpenWorkId = function() {
 	var deferred = promise.defer();
 	it (
@@ -41,7 +39,6 @@ module.exports.workInclusionOnWebsite = function() {
 	);
 	return deferred.promise;
 };
-// Interaction.
 module.exports.hoverPrimaryWorkTitleHeading = function() {
 	steps.base.hoverElement (
 		"primary work title heading", pages.work.primaryWorkTitleHeading()
@@ -443,7 +440,6 @@ module.exports.saveWorkInclusionOnWebsite = function() {
 		pages.work.saveWorkInclusionOnWebsiteButton()
 	);
 };
-// Validation.
 module.exports.validateDefaultAlternateWorkTitleLanguage = function() {
 	it (
 		"Validate default alternate work title language", function() {
@@ -749,7 +745,6 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 		}
 	);
 };
-// Flow.
 module.exports.editBasicWork = function(data, more) {
 	more = more || {};
 

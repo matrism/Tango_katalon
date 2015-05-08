@@ -2,7 +2,6 @@
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 exports = module.exports = pages.work = new ftf.pageObject();
-// Navigation.
 module.exports.open = function(workId) {
 	if(!workId) {
 		return ftf.pageObject.prototype.open.call(this);
@@ -14,7 +13,6 @@ module.exports.open = function(workId) {
 		}
 	);
 };
-// Locator.
 module.exports.workIdBinding = function() {
 	return element(by.binding("getWorkFullCode(work.pristine)"));
 };
@@ -375,7 +373,6 @@ module.exports.saveWorkInclusionOnWebsiteButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
-// Navigation.
 module.exports.goToScopeDelivery = function() {
 	return browser.executeScript (
 		function() {
@@ -383,7 +380,6 @@ module.exports.goToScopeDelivery = function() {
 		}
 	);
 };
-// Data fetching.
 module.exports.workId = function() {
 	return pages.work.workIdBinding().getText();
 };
@@ -614,7 +610,6 @@ module.exports.editFirstCreatorContributionFieldValue = function() {
 		return element(by.cssContainingText(buttonCssSelector, "No"));
 	};
 })();
-// Data input.
 module.exports.enterPrimaryWorkTitle = function(title) {
 	var element = pages.work.editPrimaryWorkTitleField();
 	pages.base.scrollIntoView(element);

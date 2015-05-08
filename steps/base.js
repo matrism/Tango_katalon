@@ -5,7 +5,6 @@ var ExpectedConditions = protractor.ExpectedConditions;
 if(steps.base === undefined) {
 	module.exports = steps.base = {};
 }
-// Interaction.
 module.exports.scrollIntoView = function(elName, el) {
 	it (
 		"Scroll '" + elName + "' into view", function() {
@@ -101,7 +100,6 @@ module.exports.dirtyCheckConfirmCancellation = function() {
 		pages.base.dirtyCheckConfirmCancellationButton()
 	);
 };
-// Validation.
 module.exports.validateRedirection = function(pageName, expUrl) {
 	it ("User should be redirected to " + pageName, function() {
 		browser.getCurrentUrl().then(function(url) {

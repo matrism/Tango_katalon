@@ -6,7 +6,6 @@ require(pages_path + "base");
 exports = module.exports = pages.new_work = new ftf.pageObject({
 	url: _tf_config.urls.app_url + "#/create/work"
 });
-// Locator.
 module.exports.primaryWorkTitleLanguageDropdown = function() {
 	return element(by.model("work.primary_title.language_code"));
 };
@@ -166,7 +165,6 @@ module.exports.includeWorkOnWebsiteButtons = function() {
 module.exports.saveWorkButton = function() {
 	return $(".page-footer [type='submit']:nth-child(4):not(.disabled)");
 };
-// Data fetching.
 module.exports.selectedPrimaryWorkTitleLanguage = function() {
 	var element = pages.new_work.primaryWorkTitleLanguageDropdown();
 	pages.base.scrollIntoView(element);
@@ -312,7 +310,6 @@ module.exports.enteredDeliveryDay = function() {
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
-// Data input.
 module.exports.enterPrimaryWorkTitle = function(title) {
 	var element = pages.new_work.primaryWorkTitleInput();
 	pages.base.scrollIntoView(element);
