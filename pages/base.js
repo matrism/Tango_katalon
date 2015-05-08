@@ -3,7 +3,7 @@ var _ = require("lodash");
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-module.exports = pages.base = new ftf.pageObject ({
+exports = module.exports = pages.base = new ftf.pageObject ({
 	locators: {
 		logout_link: { id: "DSP-LOGOUT" }
 	}
@@ -153,6 +153,42 @@ module.exports.selectRandomDropdownOption.tg = function(element, more) {
 			})();
 		});
 	});
+};
+exports.expectTypeaheadSuggestionsDropdownToBeDisplayed = function(more) {
+    more = more || {};
+    if(more.timeout === undefined) {
+        more.timeout = _tf_config._system_.wait_timeout;
+    }
+    browser.wait(
+        ExpectedConditions.visibilityOf($('.typeahead-result')),
+        more.timeout
+    );
+};
+exports.enterRandomLetterOnField = function(element) {
+    var randomLetter = random.letter();
+
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+    element.sendKeys(randomLetter);
+
+    return randomLetter;
+};
+exports.enterNewRandomLetterOnField = function(element) {
+    pages.base.scrollIntoView(element);
+
+    return element.getAttribute("value").then(function(currentValue) {
+        var randomLetter;
+
+        do {
+            randomLetter = random.letter();
+        } while(currentValue.indexOf(randomLetter) !== -1);
+
+        element.clear();
+        element.sendKeys(randomLetter);
+
+        return randomLetter;
+    });
 };
 module.exports.selectRandomTypeaheadValue = function(element, more) {
 	more = more || {};

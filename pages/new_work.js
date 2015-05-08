@@ -1,8 +1,9 @@
 "use strict";
 var _ = require("lodash");
 var pages_path = _tf_config._system_.path_to_pages;
+var random = require('../helpers/random');
 require(pages_path + "base");
-module.exports = pages.new_work = new ftf.pageObject ({
+exports = module.exports = pages.new_work = new ftf.pageObject({
 	url: _tf_config.urls.app_url + "#/create/work"
 });
 // Locator.
@@ -318,6 +319,40 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
+};
+exports.enterCreatorSearchTerms = function(i, name) {
+    var element = pages.new_work.creatorNameInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(name);
+};
+exports.enterRandomLetterOnCreatorNameField = function(i) {
+    exports.enterCreatorSearchTerms(i, random.letter());
+};
+exports.expectCreatorSuggestionsToBeDisplayed = function() {
+    pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
+};
+exports.selectRandomCreatorSuggestion = function() {
+    return $$(".typeahead-result").then(function(suggestions) {
+        var randomSuggestion = _.sample(suggestions);
+        var result = {};
+
+        result.name = randomSuggestion.getAttribute('value');
+
+        result.ipiNumber = (
+            randomSuggestion.$('.typeahead-result-right').getText().then(function(value) {
+                if(/^\(.*\)$/.test(value)) {
+                    value = value.slice(1, -1);
+                }
+
+                return value;
+            })
+        );
+
+        randomSuggestion.click();
+
+        return result;
+    });
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);

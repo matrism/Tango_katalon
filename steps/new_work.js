@@ -7,7 +7,7 @@ var promise = protractor.promise;
 require(pages_path + "new_work");
 require(steps_path + "base");
 require(steps_path + "work");
-module.exports = steps.new_work = {};
+steps.new_work = exports;
 // Navigation.
 module.exports.goToNewWorkPage = function() {
 	it (
@@ -159,6 +159,11 @@ module.exports.validateDefaultMusicLibrary = function() {
 	});
 };
 // Data input.
+module.exports.enterPrimaryWorkTitle = function(value) {
+    it('Enter primary work title', function() {
+        pages.new_work.enterPrimaryWorkTitle(value);
+    });
+};
 module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
@@ -169,6 +174,11 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 		}
 	);
 	return deferred.promise;
+};
+module.exports.enterAlternateWorkTitle = function(i, value) {
+    it('Enter alternate work title #' + (i + 1), function() {
+        pages.new_work.enterAlternateWorkTitle(i, value);
+    });
 };
 module.exports.enterRandomAlternateWorkTitle = function(i) {
 	var deferred = promise.defer();
@@ -181,18 +191,34 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	);
 	return deferred.promise;
 };
-module.exports.selectRandomCreator = function(i) {
-	var deferred = promise.defer();
-	describe (
-		"Select random creator #" + (i + 1), function() {
-			deferred.fulfill (
-				pages.base.selectRandomTypeaheadValue (
-					pages.new_work.creatorNameInput(i)
-				)
-			);
-		}
-	);
-	return deferred.promise;
+exports.selectRandomCreator = function(i, data, key) {
+    var deferred = promise.defer();
+    var creator;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'creators';
+    data[key] = data[key] || [];
+    creator = data[key][i] = data[key][i] || {};
+
+    it('Type a random letter on creator name field #' + (i + 1), function() {
+        pages.new_work.enterRandomLetterOnCreatorNameField();
+    });
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.new_work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
+           creator.name = selected.name;
+           creator.ipiNumber = selected.ipiNumber;
+           selected.ipiNumber.then(function(value) {
+               console.log("SELECTED:", value);
+           });
+        });
+    });
+
+    return deferred.promise;
 };
 module.exports.enterMaximumCreatorContribution = function(i) {
 	it (
@@ -445,131 +471,137 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 		}
 	);
 };
+exports.saveWork = function() {
+     steps.base.clickElement("Save Work", pages.new_work.saveWorkButton());
+};
+exports.validateSaveWorkRedirection = function() {
+     steps.base.validateRedirection("created work page", "/metadata");
+};
 // Flow.
 module.exports.createBasicWork = function(data, more) {
-	more = more || {};
+    more = more || {};
 
-	more.skip = more.skip || {};
-	//more.skip.alternateWorkTitles = true;
-	//more.skip.assetType = true;
-	//more.skip.workOrigin = true;
-	//more.skip.creationDate = true;
-	//more.skip.deliveryDate = true;
+    more.skip = more.skip || {};
+    //more.skip.alternateWorkTitles = true;
+    //more.skip.assetType = true;
+    //more.skip.workOrigin = true;
+    //more.skip.creationDate = true;
+    //more.skip.deliveryDate = true;
 
-	describe (
-		"Create basic work", function() {
-			steps.new_work.goToNewWorkPage();
+    describe (
+        "Create basic work", function() {
+            steps.new_work.goToNewWorkPage();
 
-			steps.new_work.validateDefaultPrimaryWorkLanguage();
-			data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
+            steps.new_work.validateDefaultPrimaryWorkLanguage();
+            data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
 
-			if(!more.skip.alternateWorkTitles) {
-				data.alternateWorkTitles = _.times (
-					2, function(i) {
-						steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
-						return steps.new_work.enterRandomAlternateWorkTitle(i);
-					}
-				);
-			}
+            if(!more.skip.alternateWorkTitles) {
+                data.alternateWorkTitles = _.times (
+                    2, function(i) {
+                        steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
+                        return steps.new_work.enterRandomAlternateWorkTitle(i);
+                    }
+                );
+            }
 
-			data.creators = (function() {
-				var howMany = 2;
-				var creators = _.times (
-					howMany, function(i) {
-						var creator = {};
-						var firstOne = (i === 0);
-						var lastOne = (i === howMany - 1);
-						steps.new_work.validateDefaultCreatorRole(i);
-						creator.name = steps.new_work.selectRandomCreator(i);
-						steps.new_work.ensureContributionRequiredMessageIsDisplayed();
-						steps.new_work.validateCreatorContributionInputMask(i);
-						if(firstOne) {
-							steps.new_work.enterMediumCreatorContribution(i);
-							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
-						}
-						if(howMany > 1 && lastOne) {
-							steps.new_work.enterMaximumCreatorContribution(i);
-							steps.new_work.ensureTotalContributionTooHighMessageIsDisplayed();
-						}
-						creator.contribution = 100 / howMany;
-						steps.new_work.enterCreatorContribution(i, creator.contribution);
-						if(howMany > 1 && !firstOne && !lastOne) {
-							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
-						}
-						return creator;
-					}
-				);
-				steps.new_work.validateTotalContribution();
-				return creators;
-			})();
+            data.creators = (function() {
+                var howMany = 2;
+                var creators = _.times (
+                    howMany, function(i) {
+                        var creator = {};
+                        var firstOne = (i === 0);
+                        var lastOne = (i === howMany - 1);
+                        steps.new_work.validateDefaultCreatorRole(i);
+                        creator.name = steps.new_work.selectRandomCreator(i);
+                        steps.new_work.ensureContributionRequiredMessageIsDisplayed();
+                        steps.new_work.validateCreatorContributionInputMask(i);
+                        if(firstOne) {
+                            steps.new_work.enterMediumCreatorContribution(i);
+                            steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+                        }
+                        if(howMany > 1 && lastOne) {
+                            steps.new_work.enterMaximumCreatorContribution(i);
+                            steps.new_work.ensureTotalContributionTooHighMessageIsDisplayed();
+                        }
+                        creator.contribution = 100 / howMany;
+                        steps.new_work.enterCreatorContribution(i, creator.contribution);
+                        if(howMany > 1 && !firstOne && !lastOne) {
+                            steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+                        }
+                        return creator;
+                    }
+                );
+                steps.new_work.validateTotalContribution();
+                return creators;
+            })();
 
-			if(!more.skip.assetType) {
-				steps.new_work.validateDefaultMusicalDistributionCategory();
-				data.musicalDistributionCategory = (
-					steps.new_work.selectRandomMusicalDistributionCategory()
-				);
+            if(!more.skip.assetType) {
+                steps.new_work.validateDefaultMusicalDistributionCategory();
+                data.musicalDistributionCategory = (
+                    steps.new_work.selectRandomMusicalDistributionCategory()
+                );
 
-				steps.new_work.validateDefaultTextMusicRelationship();
-				data.textMusicRelationship = steps.new_work.selectRandomTextMusicRelationship();
+                steps.new_work.validateDefaultTextMusicRelationship();
+                data.textMusicRelationship = steps.new_work.selectRandomTextMusicRelationship();
 
-				steps.new_work.validateDefaultExcerptType();
-				data.excerptType = steps.new_work.selectRandomExcerptType();
+                steps.new_work.validateDefaultExcerptType();
+                data.excerptType = steps.new_work.selectRandomExcerptType();
 
-				steps.new_work.validateDefaultVersionType();
-				data.versionType = steps.new_work.selectRandomVersionType();
+                steps.new_work.validateDefaultVersionType();
+                data.versionType = steps.new_work.selectRandomVersionType();
 
-				steps.new_work.validateDefaultLyricAdaptation();
-				data.lyricAdaptation = steps.new_work.selectRandomLyricAdaptation();
+                steps.new_work.validateDefaultLyricAdaptation();
+                data.lyricAdaptation = steps.new_work.selectRandomLyricAdaptation();
 
-				steps.new_work.validateDefaultMusicArrangement();
-				data.musicArrangement = steps.new_work.selectRandomMusicArrangement();
-			}
+                steps.new_work.validateDefaultMusicArrangement();
+                data.musicArrangement = steps.new_work.selectRandomMusicArrangement();
+            }
 
-			if(!more.skip.workOrigin) {
-				steps.new_work.validateDefaultIntendedPurpose();
-				data.intendedPurpose = steps.new_work.selectRandomIntendedPurpose();
+            if(!more.skip.workOrigin) {
+                steps.new_work.validateDefaultIntendedPurpose();
+                data.intendedPurpose = steps.new_work.selectRandomIntendedPurpose();
 
-				data.productionTitle = steps.new_work.enterRandomProductionTitle();
+                data.productionTitle = steps.new_work.enterRandomProductionTitle();
 
-				steps.new_work.validateDefaultBltvr();
-				data.bltvr = steps.new_work.selectRandomBltvr();
+                steps.new_work.validateDefaultBltvr();
+                data.bltvr = steps.new_work.selectRandomBltvr();
 
-				steps.new_work.validateDefaultMusicLibrary();
-				data.musicLibrary = steps.new_work.selectRandomMusicLibrary();
-			}
+                steps.new_work.validateDefaultMusicLibrary();
+                data.musicLibrary = steps.new_work.selectRandomMusicLibrary();
+            }
 
-			if(!more.skip.creationDate) {
-				steps.new_work.validateDefaultCreationYear();
-				steps.new_work.validateDefaultCreationMonth();
-				steps.new_work.validateDefaultCreationDay();
+            if(!more.skip.creationDate) {
+                steps.new_work.validateDefaultCreationYear();
+                steps.new_work.validateDefaultCreationMonth();
+                steps.new_work.validateDefaultCreationDay();
 
-				data.creationYear = steps.new_work.enterTwoYearsAgoAsCreationYear();
-				data.creationMonth = steps.new_work.enterThisMonthAsCreationMonth();
-				data.creationDay = steps.new_work.enterTodayAsCreationDay();
-			}
+                data.creationYear = steps.new_work.enterTwoYearsAgoAsCreationYear();
+                data.creationMonth = steps.new_work.enterThisMonthAsCreationMonth();
+                data.creationDay = steps.new_work.enterTodayAsCreationDay();
+            }
 
-			if(!more.skip.deliveryDate) {
-				steps.new_work.validateDefaultDeliveryYear();
-				steps.new_work.validateDefaultDeliveryMonth();
-				steps.new_work.validateDefaultDeliveryDay();
+            if(!more.skip.deliveryDate) {
+                steps.new_work.validateDefaultDeliveryYear();
+                steps.new_work.validateDefaultDeliveryMonth();
+                steps.new_work.validateDefaultDeliveryDay();
 
-				data.deliveryYear = steps.new_work.enterLastYearAsDeliveryYear();
-				data.deliveryMonth = steps.new_work.enterThisMonthAsDeliveryMonth();
-				data.deliveryDay = steps.new_work.enterTodayAsDeliveryDay();
-			}
+                data.deliveryYear = steps.new_work.enterLastYearAsDeliveryYear();
+                data.deliveryMonth = steps.new_work.enterThisMonthAsDeliveryMonth();
+                data.deliveryDay = steps.new_work.enterTodayAsDeliveryDay();
+            }
 
-			if(!more.skip.inclusionOnWebsite) {
-				data.includeOnWebsite = (function() {
-					var include = _.sample([true, false]);
-					steps.new_work.optToIncludeWorkOnWebsite(include);
-					return include;
-				})();
-			}
+            if(!more.skip.inclusionOnWebsite) {
+                data.includeOnWebsite = (function() {
+                    var include = _.sample([true, false]);
+                    steps.new_work.optToIncludeWorkOnWebsite(include);
+                    return include;
+                })();
+            }
 
-			steps.base.clickElement("Save Work", pages.new_work.saveWorkButton());
-			steps.base.validateRedirection("created work page", "/metadata");
+            steps.new_work.saveWork();
+            steps.new_work.validateSaveWorkRedirection();
 
-			data.workId = steps.work.findCurrentlyOpenWorkId();
-		}
-	);
+            data.workId = steps.work.findCurrentlyOpenWorkId();
+        }
+    );
 };
