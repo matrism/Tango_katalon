@@ -11,6 +11,21 @@ pph.arrayMethod = function(methodName, array, callback) {
 			return values[methodName](callback);
 		});
 };
+pph.arraySome = function(array, predicate) {
+    return promise.when(array).then(function(array) {
+        if(array.length === 0) {
+            return true;
+        }
+        return promise.when(array[0]).then(function(value) {
+            if(!predicate(value) && array.length === 1) {
+                return false;
+            }
+            else {
+                return pph.arraySome(array.slice(1), predicate);
+            }
+        });
+    });
+};
 pph.not = function(value) {
 	return promise.when(value).then(function(value) {
 		return !value;
