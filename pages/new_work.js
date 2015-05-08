@@ -200,6 +200,11 @@ module.exports.totalContribution = function() {
 		}
 	);
 };
+exports.expectDuplicateWorksPopUpToBeDisplayed = function() {
+    var modalHeading = pages.base.modalHeading();
+    pages.base.expectDuplicateWorksPopUpToBeDisplayed();
+    expect(modalHeading.getText()).toContain('SIMILAR WORKS ARE FOUND');
+};
 module.exports.selectedMusicalDistributionCategory = function() {
 	var element = pages.new_work.musicalDistributionCategoryDropdown();
 	pages.base.scrollIntoView(element);
@@ -353,6 +358,9 @@ exports.selectRandomCreatorSuggestion = function() {
 
         return result;
     });
+};
+exports.selectFirstCreatorSuggestion = function() {
+    $$('.typeahead-result').first().click();
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);

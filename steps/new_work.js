@@ -220,6 +220,36 @@ exports.selectRandomCreator = function(i, data, key) {
 
     return deferred.promise;
 };
+exports.selectPreviouslySelectedCreator = function(i, data, key) {
+    var deferred = promise.defer();
+    var creator;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'creators';
+    data[key] = data[key] || [];
+    creator = data[key][i] = data[key][i] || {};
+
+    it(
+        'Enter previously selected creator #' + (i + 1) +
+        ' IPI number in the search field', function() {
+            expect(creator.ipiNumber).toBeTruthy();
+            pages.new_work.enterCreatorSearchTerms(i, creator.ipiNumber);
+            promise.when(creator.ipiNumber).then(function(value) {
+                console.log("SELECTED AGAIN:", value);
+            });
+        }
+    );
+
+    it('Expect creator suggestions to be displayed', function() {
+        pages.new_work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select first creator suggestion', function() {
+        pages.new_work.selectFirstCreatorSuggestion();
+    });
+
+    return deferred.promise;
+};
 module.exports.enterMaximumCreatorContribution = function(i) {
 	it (
 		"Enter 100% contribution percentage for creator #" + (i + 1), function() {

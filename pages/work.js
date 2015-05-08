@@ -1,7 +1,7 @@
 "use strict";
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
-module.exports = pages.work = new ftf.pageObject();
+exports = module.exports = pages.work = new ftf.pageObject();
 // Navigation.
 module.exports.open = function(workId) {
 	if(!workId) {
@@ -129,6 +129,11 @@ module.exports.saveCreatorsButton = function() {
 		pages.work.editCreatorsContainer()
 			.element(by.cssContainingText("button", "Save"))
 	);
+};
+exports.ignoreSimilarWorksButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Ignore and continue to enter new work')
+    );
 };
 module.exports.creationDateContainerLabel = function() {
 	return element(by.cssContainingText(".metadata-label", "CREATION"));
@@ -684,6 +689,9 @@ module.exports.enterProductionTitle = function(title, more) {
 		element.sendKeys(title);
 		return title;
 	});
+};
+exports.ignoreSimilarWorksWarning = function() {
+    exports.ignoreSimilarWorksButton().click();
 };
 module.exports.optToIncludeWorkOnWebsite = function(include) {
 	promise.when(include).then (

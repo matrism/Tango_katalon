@@ -9,11 +9,21 @@ exports = module.exports = pages.base = new ftf.pageObject ({
 	}
 });
 // Locators.
+exports.modalHeading = function() {
+    return $('.modal-header h3');
+};
+exports.modalFooter = function() {
+    return $('.modal-footer');
+};
 module.exports.dirtyCheckContinueEditingButton = function() {
-	return $(".modal-footer").element(by.cssContainingText("button", "Continue Editing"));
+    return exports.modalFooter().element(
+        by.cssContainingText("button", "Continue Editing")
+    );
 };
 module.exports.dirtyCheckConfirmCancellationButton = function() {
-	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
+    return exports.modalFooter().element(
+        by.cssContainingText("button", "CONFIRM CANCELLATION")
+    );
 };
 // Interaction.
 module.exports.isPresentAndDisplayed = function(element) {
@@ -189,6 +199,16 @@ exports.enterNewRandomLetterOnField = function(element) {
 
         return randomLetter;
     });
+};
+exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
+    more = more || {};
+    if(more.timeout === undefined) {
+        more.timeout = _tf_config._system_.wait_timeout;
+    }
+    browser.wait(
+        ExpectedConditions.visibilityOf(pages.base.modalHeading()),
+        more.timeout
+    );
 };
 module.exports.selectRandomTypeaheadValue = function(element, more) {
 	more = more || {};
