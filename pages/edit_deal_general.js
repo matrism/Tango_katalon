@@ -2,15 +2,14 @@
 var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
 var pages_path = _tf_config._system_.path_to_pages;
-module.exports = pages.edit_deal_general = new ftf.pageObject({});
-
+require(pages_path + "base");
 if (pages.edit_deal_general === undefined) {
     pages.edit_deal_general = new ftf.pageObject({
 
         locators: {
             internalContactTitle: {xpath: "//*[@data-ng-show='showSummary']//h2[contains(text(), 'Internal Contacts')]"},
             internalContactsArea: {css: "div[data-tg-modular-edit='internalContacts']"},
-            internalContactTableData: {css: "table.view-internal-contact ng-scope tbody tr"},
+            internalContactTableData: {css: "table.view-internal-contact.ng-scope tbody tr"},
             internalContactsEditIcon: {xpath: "//*[@data-tg-modular-edit='internalContacts']//div//button/i[@class='fa fa-pencil']"},
             internalContactsEditInputField: {css: "div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             addInternalContactsLink: {css: "div.add-new-button.ng-scope button.btn.btn-link"},
@@ -23,8 +22,7 @@ if (pages.edit_deal_general === undefined) {
             removeInternalContactsElement: {css: "div[data-tg-modular-edit='internalContacts'] div div div:nth-child(1) button[data-ng-click='removeInternalContact(internalContacts.contacts, internalContact)']"},
             modalDialog: {css: "div.modal-dialog ng-scope"},
             yesModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
-            noModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
-            internalContactRoleRowIRequiredErrorIcon: {css: "div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div.internal-contact__col.m-role i.internal-contact__error.fa.fa-exclamation-triangle.ng-scope"}
+            noModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
         },
 
 

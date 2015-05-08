@@ -2,6 +2,7 @@
 var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
 var pages_path = _tf_config._system_.path_to_pages;
+require(pages_path + "base");
 if (pages.create_deal_general === undefined) {
     pages.create_deal_general = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
@@ -11,7 +12,7 @@ if (pages.create_deal_general === undefined) {
             dealSigningTerritoryDropDownData: {css: "div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"},
             contractingPartiesInput: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             contractingPartiesField: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
-            internalContactsInputField: {css: "div[data-ng-model='internalContact.contacts'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            internalContactsInputField: {css: "div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             internalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"}
         },
