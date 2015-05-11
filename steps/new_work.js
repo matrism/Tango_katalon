@@ -209,9 +209,6 @@ exports.selectRandomCreator = function(i, data, key) {
         pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
            creator.name = selected.name;
            creator.ipiNumber = selected.ipiNumber;
-           selected.ipiNumber.then(function(value) {
-               console.log("SELECTED:", value);
-           });
         });
     });
 
@@ -231,9 +228,6 @@ exports.selectPreviouslySelectedCreator = function(i, data, key) {
         ' IPI number in the search field', function() {
             expect(creator.ipiNumber).toBeTruthy();
             pages.new_work.enterCreatorSearchTerms(i, creator.ipiNumber);
-            promise.when(creator.ipiNumber).then(function(value) {
-                console.log("SELECTED AGAIN:", value);
-            });
         }
     );
 
