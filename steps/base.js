@@ -105,3 +105,8 @@ module.exports.validateRedirection = function(pageName, expUrl) {
 		});
 	});
 };
+exports.sleep = function(time) {
+    it('Sleep for ' + time + 'ms', function() {
+        browser.sleep(time);
+    });
+};
