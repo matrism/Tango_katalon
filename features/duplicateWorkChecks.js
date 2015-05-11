@@ -36,6 +36,27 @@ var beforeFeature = [
                 [steps.new_work.validateSaveWorkRedirection],
             ]
         },
+        {
+            name: 'Check for duplicate works during work editing',
+            tags: ['edit'],
+            steps: [
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.enterPrimaryWorkTitle, ['Euphoria']],
+                [steps.new_work.selectPreviouslySelectedCreator, [0]],
+                [steps.new_work.enterMaximumCreatorContribution, [0]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.sleep, [100]],
+                [steps.work.hoverPrimaryWorkTitleHeading],
+                [steps.work.editWorkTitles],
+                [steps.work.enterPrimaryWorkTitle, ['Grinch']],
+                [steps.work.waitTitleEditorCheckForDuplicates],
+                [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
+                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
+                [steps.work.saveWorkTitles],
+            ]
+        },
     ];
 
 module.exports = {
