@@ -2,9 +2,7 @@
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-if(steps.base === undefined) {
-	module.exports = steps.base = {};
-}
+steps.base = exports;
 module.exports.scrollIntoView = function(elName, el) {
 	it (
 		"Scroll '" + elName + "' into view", function() {
