@@ -198,11 +198,6 @@ module.exports.totalContribution = function() {
 		}
 	);
 };
-exports.expectDuplicateWorksPopUpToBeDisplayed = function() {
-    var modalHeading = pages.base.modalHeading();
-    pages.base.expectDuplicateWorksPopUpToBeDisplayed();
-    expect(modalHeading.getText()).toContain('SIMILAR WORKS ARE FOUND');
-};
 module.exports.selectedMusicalDistributionCategory = function() {
 	var element = pages.new_work.musicalDistributionCategoryDropdown();
 	pages.base.scrollIntoView(element);

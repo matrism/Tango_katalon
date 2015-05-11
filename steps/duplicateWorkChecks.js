@@ -3,8 +3,8 @@
 steps.duplicateWorkChecks = exports;
 
 exports.expectDuplicateWorksPopUpToBeDisplayed = function() {
-    it("Expect duplicate works pop-up to be displayed", function() {
-        pages.new_work.expectDuplicateWorksPopUpToBeDisplayed();
+    it('Expect duplicate works pop-up to be displayed', function() {
+        pages.work.expectDuplicateWorksPopUpToBeDisplayed();
     });
 };
 

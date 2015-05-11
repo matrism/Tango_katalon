@@ -1,6 +1,7 @@
 "use strict";
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 exports = module.exports = pages.work = new ftf.pageObject();
 module.exports.open = function(workId) {
 	if(!workId) {
@@ -633,6 +634,19 @@ module.exports.enterCreatorContribution = function(i, value) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
+};
+exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
+    var modalHeading;
+    more = more || {};
+    if(more.timeout === undefined) {
+        more.timeout = _tf_config._system_.wait_timeout;
+    }
+    modalHeading = pages.base.modalHeading();
+    browser.wait(
+        ExpectedConditions.visibilityOf(modalHeading),
+        more.timeout
+    );
+    expect(modalHeading.getText()).toContain('SIMILAR WORKS ARE FOUND');
 };
 module.exports.enterCreationYear = function(value) {
 	var element = pages.work.creationYearInput();

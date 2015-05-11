@@ -198,16 +198,6 @@ exports.enterNewRandomLetterOnField = function(element) {
         return randomLetter;
     });
 };
-exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
-    more = more || {};
-    if(more.timeout === undefined) {
-        more.timeout = _tf_config._system_.wait_timeout;
-    }
-    browser.wait(
-        ExpectedConditions.visibilityOf(pages.base.modalHeading()),
-        more.timeout
-    );
-};
 module.exports.selectRandomTypeaheadValue = function(element, more) {
 	more = more || {};
 	var deferred = promise.defer();
