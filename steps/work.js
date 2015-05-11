@@ -51,6 +51,11 @@ module.exports.editWorkTitles = function() {
 		"edit work titles button", pages.work.editWorkTitlesButton()
 	);
 };
+module.exports.enterPrimaryWorkTitle = function(value) {
+    it("Enter primary work title", function() {
+        pages.work.enterPrimaryWorkTitle(value);
+    });
+};
 module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
