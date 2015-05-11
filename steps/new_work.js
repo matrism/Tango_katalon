@@ -214,18 +214,18 @@ exports.selectRandomCreator = function(i, data, key) {
 
     return deferred.promise;
 };
-exports.selectPreviouslySelectedCreator = function(i, data, key) {
+exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
     var deferred = promise.defer();
     var creator;
 
     data = data || hash.subjectWorkData || {};
     key = key || 'creators';
     data[key] = data[key] || [];
-    creator = data[key][i] = data[key][i] || {};
+    creator = data[key][j] = data[key][j] || {};
 
     it(
-        'Enter previously selected creator #' + (i + 1) +
-        ' IPI number in the search field', function() {
+        'Enter previously selected creator #' + (j + 1) +
+        ' IPI number in search field #' + (i + 1), function() {
             expect(creator.ipiNumber).toBeTruthy();
             pages.new_work.enterCreatorSearchTerms(i, creator.ipiNumber);
         }
