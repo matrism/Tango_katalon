@@ -198,7 +198,7 @@ exports.selectRandomCreator = function(i, data, key) {
     creator = data[key][i] = data[key][i] || {};
 
     it('Type a random letter on creator name field #' + (i + 1), function() {
-        pages.new_work.enterRandomLetterOnCreatorNameField();
+        pages.new_work.enterRandomLetterOnCreatorNameField(i);
     });
 
     it('Expect creator suggestions dropdown to be displayed', function() {
