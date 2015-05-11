@@ -7,12 +7,14 @@ var random = require("../helpers/random");
 var promise = protractor.promise;
 require(pages_path + "work");
 module.exports = steps.work = {};
-module.exports.goToWorkPage = function(workId) {
-	it (
-		"Go to work page", function() {
-			pages.work.open(workId);
-		}
-	);
+module.exports.goToWorkPage = function(data, key) {
+    var workId;
+    data = data || hash.subjectWorkData || {};
+    key = key || 'workId';
+    workId = data[key];
+    it('Go to work page', function() {
+        pages.work.open(workId);
+    });
 };
 module.exports.goToScopeDelivery = function() {
 	it (
@@ -761,7 +763,7 @@ module.exports.editBasicWork = function(data, more) {
 	describe (
 		"Edit basic work", function() {
 			if(!more.skip.navigation && data.workId) {
-				steps.work.goToWorkPage(data.workId);
+				steps.work.goToWorkPage(data);
 			}
 
 			if(!more.skip.workTitles) {
