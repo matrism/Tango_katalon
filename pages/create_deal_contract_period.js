@@ -13,7 +13,7 @@ if (pages.create_deal_contract_period === undefined) {
             deemedCompleteMdrc: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: mdrc.is_completed && mdrc.showDeemedCompleteDetails }']"},
             completeMdrc: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"},
             mdrcQuantity: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#quantity"},
-            mdrcMinimumWorkContribution: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#workPercent]"},
+            mdrcMinimumWorkContribution: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#workPercent"},
             mdrcQuantityForCommercialRelease: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#commercialReleaseQuantity"},
             mdrcMajorTerritoriesForCommercialRelease: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#territories"},
             mdrcTerritoriesField: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.default.territoryControl.popup-left.territoryPicker.ng-isolate-scope div.territoriesStaticView"},
@@ -144,7 +144,7 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         clickOnMdrcNoSelfRecord: function () {
-            pages.create_deal_contract_period.mdrcNoSelfRecord().click();
+            pages.create_deal_contract_period.elems.mdrcNoSelfRecord().click();
         },
 
         fillIntoMdrcPercentOfMinStatutoryRate: function () {
