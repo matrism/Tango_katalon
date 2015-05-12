@@ -16,8 +16,8 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Check for duplicate works during work creation',
-            tags: ['create'],
+            name: 'Duplicate work checks',
+            tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectRandomCreator, [0]],
@@ -54,12 +54,7 @@ var beforeFeature = [
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
-            ]
-        },
-        {
-            name: 'Check for duplicate works during work editing',
-            tags: ['edit'],
-            steps: [
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 1]],
                 [steps.new_work.enterMaximumCreatorContribution, [0]],
@@ -67,6 +62,7 @@ var beforeFeature = [
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
+
                 [steps.base.sleep, [100]],
                 [steps.work.hoverPrimaryWorkTitleHeading],
                 [steps.work.editWorkTitles],
