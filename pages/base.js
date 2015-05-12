@@ -11,6 +11,9 @@ exports = module.exports = pages.base = new ftf.pageObject ({
 exports.modalHeading = function() {
     return $('.modal-header h3');
 };
+exports.modalDialog = function() {
+    return $('.modal-dialog');
+};
 exports.modalFooter = function() {
     return $('.modal-footer');
 };
