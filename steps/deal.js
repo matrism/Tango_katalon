@@ -53,6 +53,8 @@ if (steps.deal === undefined) {
             );
         },
 
+
+
         goToGeneralDealTabDetails: function () {
             it("Click on general header and go to general deal tab details ", function () {
                 pages.deal.goToGeneralDealDetails();
