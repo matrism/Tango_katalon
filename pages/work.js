@@ -129,6 +129,9 @@ module.exports.saveCreatorsButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
+exports.similarWorksPopUpScrollArea = function() {
+    return pages.base.modalDialog().$('[style*="max-height"]');
+};
 exports.similarWorkTitleBindings = function() {
     return pages.base.modalDialog().$$('.work-name');
 };
@@ -653,6 +656,11 @@ exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
         more.timeout
     );
     expect(modalHeading.getText()).toContain('SIMILAR WORKS ARE FOUND');
+};
+exports.expectSimilarWorksPopUpToHaveScrollbar = function() {
+    expect(pages.base.elementHasVerticalScrollbar(
+        exports.similarWorksPopUpScrollArea()
+    )).toBeTruthy();
 };
 module.exports.enterCreationYear = function(value) {
 	var element = pages.work.creationYearInput();

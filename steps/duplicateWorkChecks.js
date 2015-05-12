@@ -8,6 +8,12 @@ exports.expectDuplicateWorksPopUpToBeDisplayed = function() {
     });
 };
 
+exports.expectSimilarWorksPopUpToHaveScrollbar = function() {
+    it('Expect similar works pop-up to have a scrollbar', function() {
+        pages.work.expectSimilarWorksPopUpToHaveScrollbar();
+    });
+};
+
 exports.clickFirstSimilarWorkTitle = function() {
     it('Click first similar work title', function() {
         pages.work.clickFirstSimilarWorkTitle();

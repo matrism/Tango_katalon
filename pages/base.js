@@ -38,6 +38,14 @@ module.exports.isPresentAndDisplayed = function(element) {
 module.exports.isNotPresentOrDisplayed = function(element) {
 	return pph.not(pages.base.isPresentAndDisplayed(element));
 };
+exports.elementHasVerticalScrollbar = function(element) {
+    if(!(element instanceof protractor.WebElement)) {
+        element = element.getWebElement();
+    }
+    return browser.executeScript(function(element) {
+        return element.scrollHeight > $(element).innerHeight();
+    }, element);
+};
 module.exports.selectRandomDropdownOption = function(element, more) {
 	more = more || {};
 	more.dropdownType = more.dropdownType || "standard";
