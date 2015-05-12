@@ -35,7 +35,12 @@ var beforeFeature = [
                 [steps.new_work.enterMaximumCreatorContribution, [0]],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
                 [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
-                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
+                [steps.duplicateWorkChecks.clickFirstSimilarWorkTitle],
+                [steps.duplicateWorkChecks.validateSimilarWorkLinkDestination],
+
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
+                [steps.new_work.enterMaximumCreatorContribution, [0]],
                 [steps.new_work.enterPrimaryWorkTitle, ['A TEST WORK WONDERLAND ' + randomId]],
                 [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
                 [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],

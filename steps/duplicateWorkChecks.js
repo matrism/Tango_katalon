@@ -8,6 +8,16 @@ exports.expectDuplicateWorksPopUpToBeDisplayed = function() {
     });
 };
 
+exports.clickFirstSimilarWorkTitle = function() {
+    it('Click first similar work title', function() {
+        pages.work.clickFirstSimilarWorkTitle();
+    });
+};
+
+exports.validateSimilarWorkLinkDestination = function() {
+     steps.base.validateRedirection("similar work page", "/metadata");
+};
+
 exports.ignoreSimilarWorksWarning = function() {
     it('Ignore similar works warning', function() {
         pages.work.ignoreSimilarWorksWarning();

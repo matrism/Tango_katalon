@@ -129,6 +129,12 @@ module.exports.saveCreatorsButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
+exports.similarWorkTitleBindings = function() {
+    return pages.base.modalDialog().$$('.work-name');
+};
+exports.firstSimilarWorkTitleBinding = function() {
+    return exports.similarWorkTitleBindings().first();
+};
 exports.ignoreSimilarWorksButton = function() {
     return pages.base.modalFooter().element(
         by.cssContainingText('button', 'Ignore and continue to enter new work')
@@ -698,6 +704,10 @@ module.exports.enterProductionTitle = function(title, more) {
 		element.sendKeys(title);
 		return title;
 	});
+};
+exports.clickFirstSimilarWorkTitle = function() {
+    exports.firstSimilarWorkTitleBinding().click();
+    pages.base.waitForAjax();
 };
 exports.ignoreSimilarWorksWarning = function() {
     exports.ignoreSimilarWorksButton().click();
