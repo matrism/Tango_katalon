@@ -14,9 +14,6 @@ global.hash = {};
 require("../helpers/services_helper");
 
 config = {
-    // chromeOnly: true,
-    // chromeDriver: '../node_modules/protractor/selenium/chromedriver',
-    seleniumAddress: 'http://localhost:4444/wd/hub',
     capabilities: {
         "browserName": _tf_config._system_.browser, //firefox, ie
         'chromeOptions': {
@@ -71,5 +68,13 @@ config = {
         defaultTimeoutInterval: 600000
     }
 };
+
+if(_tf_config._system_.seleniumAddress) {
+    config.seleniumAddress = _tf_config._system_.seleniumAddress;
+}
+else {
+    config.chromeOnly = true;
+    config.chromeDriver = '../node_modules/protractor/selenium/chromedriver';
+}
 
 exports.config = config;
