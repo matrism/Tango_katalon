@@ -17,4 +17,14 @@ if (pages.login === undefined) {
 
 }
 
+pages.login.injectCookies = function(cookies) {
+    browser.driver.get(_tf_config.urls.app_url + '/blank');
+    browser.executeScript(function(cookies) {
+        for(var key in cookies) {
+            document.cookie=key + '=' + cookies[key];
+        }
+    }, cookies);
+    browser.get(_tf_config.urls.app_url);
+};
+
 module.exports = pages.login;

@@ -5,7 +5,13 @@ if (steps.login === undefined) {
     steps.login = {
         itLogin: function() {
             it("User is logged in", function() {
-                pages.login.login();
+                var cookies = _tf_config._system_.cookies;
+                if(!cookies || cookies.length === 0) {
+                    pages.login.login();
+                }
+                else {
+                    pages.login.injectCookies(cookies);
+                }
                 pages.login.waitForAjax();
                 pages.login.check();
             });
