@@ -366,7 +366,6 @@ if (pages.edit_deal_contract_period === undefined) {
 
         editClickOnSaveMdrcForm: function () {
             pages.edit_deal_contract_period.elems.editMdrcSaveButton.click();
-            browser.sleep(2000);
         },
 
         editTheMdrcDeliverySchedule: function () {

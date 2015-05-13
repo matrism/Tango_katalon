@@ -40,8 +40,6 @@ if (steps.deal === undefined) {
                     then(function (promise) {
                         console.log("Deal number is: " + promise);
                     });
-
-                //return pages.deal.elems.dealBriefNumber;
             });
         },
 

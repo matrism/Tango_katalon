@@ -399,8 +399,8 @@ if (steps.edit_deal_contract_period === undefined) {
         editSaveMdrcFormButton: function () {
             it("Edit Save mdrc form ", function () {
                 pages.edit_deal_contract_period.editClickOnSaveMdrcForm();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_contract_period.elems.editMdrcDeliverySchedule));
-            });
+                pages.edit_deal_contract_period.waitForAngularRequests();
+             });
         },
 
         editRemoveMdrcTerritory: function () {
@@ -415,9 +415,9 @@ if (steps.edit_deal_contract_period === undefined) {
             });
         },
 
-        itEditIncompleteMdrcContractPeriod: function () {
+        itEditIncompleteMdrcContractPeriod: function (i) {
             describe("Edit incomplete MDRC on  contract period screen", function () {
-                steps.edit_deal_contract_period.editMdrcFormI(1);
+                steps.edit_deal_contract_period.editMdrcFormI(i);
                 steps.edit_deal_contract_period.editChooseIncompleteMdrcOption();
                 steps.edit_deal_contract_period.editCheckIncompleteMdrcOptionIsSelected();
                 steps.edit_deal_contract_period.editMdrcQuantityField();
@@ -441,9 +441,9 @@ if (steps.edit_deal_contract_period === undefined) {
             })
         },
 
-        itEditDeemedCompleteMdrcContractPeriod: function () {
+        itEditDeemedCompleteMdrcContractPeriod: function (i) {
             describe("Edit incomplete MDRC on  contract period screen", function () {
-                steps.edit_deal_contract_period.editMdrcFormI(1);
+                steps.edit_deal_contract_period.editMdrcFormI(i);
                 steps.edit_deal_contract_period.editChooseDeemedCompleteMdrcOption();
                 steps.edit_deal_contract_period.editCheckDeemedCompleteMdrcOptionIsSelected();
                 steps.edit_deal_contract_period.editDateCompletedField();
@@ -469,9 +469,9 @@ if (steps.edit_deal_contract_period === undefined) {
             })
         },
 
-        itEditCompleteMdrcContractPeriod: function () {
+        itEditCompleteMdrcContractPeriod: function (i) {
             describe("Edit incomplete MDRC on  contract period screen", function () {
-                steps.edit_deal_contract_period.editMdrcFormI(1);
+                steps.edit_deal_contract_period.editMdrcFormI(i);
                 steps.edit_deal_contract_period.editChooseCompleteMdrcOption();
                 steps.edit_deal_contract_period.editCheckCompleteMdrcOptionIsSelected();
                 steps.edit_deal_contract_period.editDateCompletedField();
