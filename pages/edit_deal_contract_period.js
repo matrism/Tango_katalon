@@ -58,7 +58,9 @@ if (pages.edit_deal_contract_period === undefined) {
             editMdrcCarriedForwardShortfallButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.btn-group.shortfall-action button:nth-child(2)"},
             editMdrcSaveButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-click='activeContractPeriod.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"},
             editMdrcCancelLink: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) a[data-ng-click='cancelCommitmentChanges(form.terms.activeCp.id, mdrc.id);']"},
-            editMdrcDeleteButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"}
+            editMdrcDeleteButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"},
+            editMdrcRemoveFirstTerritoryIcon: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.territoriesContainer div:nth-child(1) button[ng-click='removeSelectedTerritory(item.id)']"},
+            editMdrcRemoveFirstLabelIcon: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div[ng-class='tgTypeaheadWrapClass'] div.ng-scope:nth-child(1) span[ng-click='!$isDisabled() && $removeTag($tag)']"}
         },
 
         validateTheFirstIncompleteMdrcTitle: function () {
@@ -236,21 +238,15 @@ if (pages.edit_deal_contract_period === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_contract_period.elems.editMdrcQuantity));
         },
 
-
-
-
-
-
-
-        clickOnEditIncompleteOption: function () {
+        editClickOnIncompleteOption: function () {
             pages.edit_deal_contract_period.elems.editIncompleteMdrc.click();
         },
 
-        clickOnEditDeemedCompleteOption: function () {
+        editClickOnDeemedCompleteOption: function () {
             pages.edit_deal_contract_period.elems.editDeemedCompleteMdrc.click();
         },
 
-        clickOnEditCompleteOption: function () {
+        editClickOnCompleteOption: function () {
             pages.edit_deal_contract_period.elems.editCompleteMdrc.click();
         },
 
@@ -276,6 +272,10 @@ if (pages.edit_deal_contract_period === undefined) {
             var number = Math.floor(Math.random() * 5) + 1;
             pages.edit_deal_contract_period.elems.editMdrcMajorTerritoriesForCommercialRelease.clear();
             pages.edit_deal_contract_period.elems.editMdrcMajorTerritoriesForCommercialRelease.sendKeys(number);
+        },
+
+        editTheFirstTerritoriesFieldLetter: function () {
+            pages.edit_deal_contract_period.elems.editMdrcTerritoriesInputField.sendKeys("a");
         },
 
         editTheTerritoriesFieldLetter: function () {
@@ -366,6 +366,7 @@ if (pages.edit_deal_contract_period === undefined) {
 
         editClickOnSaveMdrcForm: function () {
             pages.edit_deal_contract_period.elems.editMdrcSaveButton.click();
+            browser.sleep(2000);
         },
 
         editTheMdrcDeliverySchedule: function () {
@@ -397,8 +398,15 @@ if (pages.edit_deal_contract_period === undefined) {
 
         editClickOnMdrcCarriedForwardShortfallActionButton: function () {
             pages.edit_deal_contract_period.elems.editMdrcCarriedForwardShortfallButton.click();
+        },
+
+        editRemoveTheFirstMdrcTerritory : function () {
+            pages.edit_deal_contract_period.elems.editMdrcTerritoriesField.click();
+            pages.edit_deal_contract_period.elems.editMdrcRemoveFirstTerritoryIcon.click();
+        },
+
+        editRemoveTheFirstMdrcLabel : function () {
+            pages.edit_deal_contract_period.elems.editMdrcRemoveFirstLabelIcon.click();
         }
-
-
     });
 }
