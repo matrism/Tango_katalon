@@ -22,10 +22,10 @@ require(steps_path + "incomeProvider");
 
 var beforeFeature = function () {
         steps.login.itLogin();
-        steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
-        steps.deal.itContinueToNextPage();
-        steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-        steps.deal_scope.itAddSimpleScope();
+        //steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
+        //steps.deal.itContinueToNextPage();
+        //steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+
     },
 
     feature = [{
@@ -36,18 +36,18 @@ var beforeFeature = function () {
             steps.incomeProvider.createValidRoyaltySetPair(
                 [
                     ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
-                    ["HFA,ASCAP        ","01.01.2014 ","                 ","01.01.2014"],
-                    ["HFA              ","           ","                 ","          "],
-                    ["                 ","           ","                 ","          "],
-                    ["                 ","01.01.2014 ","                 ","          "],
-                    ["                 ","01.01.2014 ","                 ","03.01.2014"],
-                    ["HFA              ","01.01.2014 ","HFA              ","03.01.2014"]
+                    ["HFA,ASCAP        ","2017-01-01","                 ","2017-01-01"],
+                    ["HFA              ","           ","                 ","          "]
+                    //["                 ","           ","                 ","          "],
+                    //["                 ","2017-01-01 ","                 ","          "],
+                    //["                 ","2017-01-01 ","                 ","2017-01-03"],
+                    //["HFA              ","2017-01-01 ","HFA              ","2017-01-03"]
 
 
                 ],
 
 
-                "Check that income provider pair $Income_Provider_1 -%Date_1 and %Income_Provider_2 - %Date_2  is valid"
+                "Check that income provider pair %Income_Provider_1% -%Date_1% and %Income_Provider_2% - %Date_2%  is valid"
             );
 
 
@@ -63,9 +63,9 @@ var beforeFeature = function () {
                 steps.incomeProvider.createInvalidRoyaltySetPair(
                     [
                         ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
-                        ["HFA,ASCAP        ","01.01.2014 ","HFA              ","01.01.2014"],
-                        ["HFA              ","01.01.2014 ","HFA              ","01.01.2014"],
-                        ["                 ","01.01.2014 ","                 ","01.01.2014"]
+                        ["HFA,ASCAP        ","2017-01-01","HFA              ","2017-01-01"],
+                        ["HFA              ","2017-01-01","HFA              ","02017-01-01"],
+                        ["                 ","2017-01-01","                 ","2017-01-01"]
 
 
                     ],

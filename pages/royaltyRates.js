@@ -27,6 +27,41 @@ if (pages.royaltyRates === undefined) {
 
 
         },
+
+
+
+        errorMessageRR:function()
+        {
+
+          return element(by.css("div>div>div>.validation-message-text"));
+        },
+
+        closeErrorModalHeader:function()
+        {
+
+       return $(".fa.fa-times.pull-right");
+        }
+,
+    payout:function()
+    {
+
+        return  element.all(by.css(".tg-selectize-contractual-rate__ul>li:first-child")).get(0);
+    },
+
+    contractualRateInput :function()
+    {
+
+        return element(by.model("set.rate_percentage"));
+
+    }
+,
+    effectiveStartDateInput :function()
+    {
+
+        return element(by.css(".rate-set-calendar>div>.date-picker-input"));
+    }
+
+    ,
         newRoyaltyRateSetButton:function()
         {
             return element(by.css(".ng-scope.ng-warn.ng-dirty>div>a"));
@@ -135,61 +170,67 @@ if (pages.royaltyRates === undefined) {
         },
         selectIncomeProviderByPartialMatch: function (sentKeys) {
 
-            if(sentKeys === "")
-            {
-                throw "err";
-            }
-console.log(sentKeys);
+            var rateSetTab = $(".rate-sets-top-toolbar");
+            browser.wait(ExpectedConditions.visibilityOf(rateSetTab));
 
             sentKeys = sentKeys.trim();
 
+            if(sentKeys != "") {
+
             var table = sentKeys.split(",");
-            console.log(table);
 
 
-            _.each(table, function (row, index) {
-                //console.log(table);
-                //console.log(index[0]);
-                //console.log(row[1]);
 
-                sentKeys = row[0];
+            _.each(table, function (element) {
+                console.log(element);
+
+
+                sentKeys = element;
 
             var incomeProviderInput;
+                incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+                var suggestion = $(".ng-scope.ng-binding>strong");
 
-            incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+                browser.wait(ExpectedConditions.invisibilityOf(suggestion));
+
 
             incomeProviderInput.sendKeys(sentKeys);
             incomeProviderInput.click();
 
-            var suggestion = $(".ng-scope.ng-binding>strong");
+
             browser.wait(ExpectedConditions.visibilityOf(suggestion));
             expect(suggestion.getText()).not.toContain("No results");
 
 
+                incomeProviderInput.sendKeys(protractor.Key.ENTER);
             var desiredOption;
-            browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
+            //
+            //browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
+            //    .then(function findMatchingOption(options) {
+            //        options.some(function (option) {
+            //            option.getText().then(function doesOptionMatch(text) {
+            //
+            //
+            //                    if( text.search(sentKeys) > -1){
+            //
+            //                        desiredOption = option;
+            //                        return true;
+            //                    }
+            //                }
+            //            )
+            //        });
+            //    })
+            //    .then(function clickOption() {
+            //        if (desiredOption) {
+            //
+            //            console.log("MAtch");
+            //           // desiredOption.click();
+            //            incomeProviderInput.sendKeys(protractor.Key.ENTER);
+            //        }
+            //    });
 
 
-                                if( text.search(sentKeys) > -1){
-
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
-                    }
-                });
-
-
-        })},
+        })}},
         getIncomeProviderInputValue: function () {
 
             var incomeProviderInput;
@@ -332,21 +373,25 @@ console.log(sentKeys);
 
         },
         getEffectiveStartDateInputValue: function () {
-            var effectiveStartDateInput;
-            effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
+            //var effectiveStartDateInput;
+            //effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
 
 
-            return effectiveStartDateInput.getAttribute('value');
+            return this.effectiveStartDateInput().getAttribute('value');
 
         },
 
         typeIntoEffectiveStartDateInput: function (date) {
 
-            var effectiveStartDateInput;
-            effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
-            effectiveStartDateInput.clear();
-            effectiveStartDateInput.sendKeys(date);
+            date = date.trim();
+            if(date!="")
+            {
+            //var effectiveStartDateInput;
+            //effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
+            this.effectiveStartDateInput().clear();
+            this.effectiveStartDateInput().sendKeys(date);
             browser.driver.sleep(2000);
+            }
 
         },
         getEffectiveStartDateErrorMessage: function () {
@@ -367,13 +412,18 @@ console.log(sentKeys);
 
         addPercentageToContractualRateInput: function (percentage) {
 
-            var contractualRateInput;
-            contractualRateInput = element(by.model("set.rate_percentage"));
-            contractualRateInput.sendKeys(percentage);
-            contractualRateInput.click();
-            var payout;
-            payout = element(by.css(".tg-selectize-contractual-rate__ul>li:first-child"));
-            payout.click();
+            //var contractualRateInput;
+            //contractualRateInput = element(by.model("set.rate_percentage"));
+
+            browser.wait(ExpectedConditions.visibilityOf(this.contractualRateInput()));
+
+
+
+            this.contractualRateInput().sendKeys(percentage);
+            this.contractualRateInput().click();
+            //var payout;
+            //payout = element(by.css(".tg-selectize-contractual-rate__ul>li:first-child"));
+            this.payout().click();
             browser.driver.sleep(2000);
             element(by.css(".tg-selectize-contractual-rate>ul:nth-child(2)>li:nth-child(2)")).click();
 
@@ -414,6 +464,22 @@ console.log(sentKeys);
             this.scopeHeading().click();
 
 
+
+
+        },
+
+        errorMessageIsDisplayed :function()
+        {
+
+
+
+
+            try {
+                return this.errorMessageRR().isPresent();
+            }
+            catch(err) {
+               return false;
+            }
 
 
         }
