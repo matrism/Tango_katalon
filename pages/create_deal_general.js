@@ -8,11 +8,11 @@ if (pages.create_deal_general === undefined) {
         url: _tf_config.urls.app_url + "#/create/deal",
 
         locators: {
-            dealSigningTerritoryPopup: {css: "button.openPopupButton"},
-            dealSigningTerritoryDropDownData: {css: "div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"},
+            dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},
+            dealSigningTerritoryDropDownData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
             contractingPartiesInput: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             contractingPartiesField: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
-            internalContactsInputField: {css: "div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            internalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             internalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"}
         },
@@ -22,7 +22,7 @@ if (pages.create_deal_general === undefined) {
             pages.create_deal_general.elems.dealSigningTerritoryPopup.click();
             expect(pages.create_deal_general.elems.dealSigningTerritoryDropDownData.isDisplayed);
             var desiredOption;
-            browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
+            browser.driver.findElements(by.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {

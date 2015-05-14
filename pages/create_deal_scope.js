@@ -7,10 +7,11 @@ if (pages.create_deal_scope === undefined) {
     pages.create_deal_scope = new ftf.pageObject({
         locators: {
             addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
+            descriptionField: {css: "input[name='scopeDescription']"},
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
-            territoryField: {xpath: "//*[@class='territoriesStaticView']"},
-            territoryInput: {css: "div#scopeTerritory input#searchQueryInput"},
-            territoryDropDown: {css: "div.typeaheadDropdown div.item.ng-scope"},
+            territoryField: {css: "div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
+            territoryInput: {css: "div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            territoryDropDown: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             addPublisherShareSetLink: {xpath: "//*[@data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"},
             firstPublisherNameField: {css: "#deal-publisher div.ng-scope:first-child input[name='acquirer']"},
             publisherNameDropDownData: {xpath: "//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"}
@@ -21,6 +22,9 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.contractTypeDropDown));
         },
 
+        fillScopeDescriptionField: function () {
+          pages.create_deal_scope.elems.descriptionField.sendKeys("description");
+        },
 
         selectContractTypeScope: function (element, specific_value) {
             var desiredOption;
@@ -54,7 +58,7 @@ if (pages.create_deal_scope === undefined) {
 
         selectRandomCountry: function () {
             var desiredOption;
-            browser.driver.findElements(By.css("div.typeaheadDropdown div"))
+            browser.driver.findElements(By.css("div.tg-territory__clusters i[ng-click='$event.stopPropagation(); $toggleClusterSelection(cluster);']"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();

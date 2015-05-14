@@ -8,7 +8,7 @@ if (pages.edit_deal_general === undefined) {
 
         locators: {
             internalContactTitle: {xpath: "//*[@data-ng-show='showSummary']//h2[contains(text(), 'Internal Contacts')]"},
-            internalContactsArea: {css: "div[data-tg-modular-edit='internalContacts']"},
+            internalContactsArea: {css: "div[data-ng-form='general'] div.span12.nomargins:nth-child(3)"},
             internalContactTableData: {css: "table.view-internal-contact.ng-scope tbody tr"},
             internalContactsEditIcon: {xpath: "//*[@data-tg-modular-edit='internalContacts']//div//button/i[@class='fa fa-pencil']"},
             internalContactsEditInputField: {css: "div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},

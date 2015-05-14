@@ -50,7 +50,7 @@ if (steps.create_deal_general === undefined) {
         fillIntoInternalContactField: function (internal_contact) {
             it("Fill into internal contact field", function () {
                     pages.create_deal_general.fillIntoInternalContactsField(internal_contact);
-                    browser.sleep(2000);
+                    pages.create_deal_general.waitForAngularRequests();
                 }
             );
         },
@@ -58,7 +58,7 @@ if (steps.create_deal_general === undefined) {
         fillIntoInternalContactsFieldRowI: function (i) {
             it("Fill into internal contact row i ", function () {
                     pages.create_deal_general.fillIntoTheIRowInternalContactField(i);
-                    browser.sleep(2000);
+                    pages.create_deal_general.waitForAngularRequests();
                 }
             );
         },
@@ -66,7 +66,6 @@ if (steps.create_deal_general === undefined) {
         selectRandomInternalContactDropDown: function () {
             it("Select random value from internal contact drop down", function () {
                     pages.create_deal_general.selectRandomInternalContactsFromDropDown();
-                    browser.sleep(1000);
                 }
             );
         },
