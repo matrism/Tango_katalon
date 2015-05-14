@@ -135,6 +135,24 @@ if (pages.royaltyRates === undefined) {
         },
         selectIncomeProviderByPartialMatch: function (sentKeys) {
 
+            if(sentKeys === "")
+            {
+                throw "err";
+            }
+console.log(sentKeys);
+
+            sentKeys = sentKeys.trim();
+
+            var table = sentKeys.split(",");
+            console.log(table);
+
+
+            _.each(table, function (row, index) {
+                //console.log(table);
+                //console.log(index[0]);
+                //console.log(row[1]);
+
+                sentKeys = row[0];
 
             var incomeProviderInput;
 
@@ -171,7 +189,7 @@ if (pages.royaltyRates === undefined) {
                 });
 
 
-        },
+        })},
         getIncomeProviderInputValue: function () {
 
             var incomeProviderInput;

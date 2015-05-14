@@ -13,10 +13,12 @@ if (steps.incomeProvider === undefined) {
             _.each(table, function (row, index) {
                 var Income_Provider_1 = row[0],
                     Date_1 = row[1],
-                    Income_Provider_2 = row[3],
-                    Date_2 = row[4]
+                    Income_Provider_2 = row[2],
+                    Date_2 = row[3]
 
                     ;
+             //console.log("Income Provider 1",Income_Provider_1);
+             //   console.log("Date_1",Date_1);
                 var consoleMessage;
 
                 consoleMessage = message.replace("%Income_Provider_1%", Income_Provider_1);
@@ -57,8 +59,8 @@ if (steps.incomeProvider === undefined) {
             _.each(table, function (row, index) {
                 var Income_Provider_1 = row[0],
                     Date_1 = row[1],
-                    Income_Provider_2 = row[3],
-                    Date_2 = row[4]
+                    Income_Provider_2 = row[2],
+                    Date_2 = row[3]
 
                     ;
                 var consoleMessage;
