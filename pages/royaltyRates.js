@@ -182,7 +182,7 @@ if (pages.royaltyRates === undefined) {
 
 
             _.each(table, function (element) {
-                console.log(element);
+                //console.log(element);
 
 
                 sentKeys = element;
@@ -474,12 +474,9 @@ if (pages.royaltyRates === undefined) {
 
 
 
-            try {
+
                 return this.errorMessageRR().isPresent();
-            }
-            catch(err) {
-               return false;
-            }
+
 
 
         }

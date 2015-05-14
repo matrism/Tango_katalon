@@ -81,9 +81,10 @@ if (steps.incomeProvider === undefined) {
 
                         pages.royaltyRates.clickOnReceiptApplicationMethod();
                         pages.royaltyRates.clickYesOnRateMethodModal();
+                        expect(pages.royaltyRates.errorMessageIsDisplayed()).toBeFalsy();
                         pages.royaltyRates.clickDoneButtonForRRSet();
 
-                       expect(pages.royaltyRates.errorMessageIsDisplayed()).toBeFalsy();
+
 
 
 
@@ -170,9 +171,12 @@ if (steps.incomeProvider === undefined) {
 
                         pages.royaltyRates.clickOnReceiptApplicationMethod();
                         pages.royaltyRates.clickYesOnRateMethodModal();
+                        expect(pages.royaltyRates.errorMessageIsDisplayed()).toBeTruthy();
+
+
+
                         pages.royaltyRates.clickDoneButtonForRRSet();
 
-                        expect(pages.royaltyRates.errorMessageIsDisplayed()).toBeTruthy();
 
 
 

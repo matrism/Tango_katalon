@@ -37,17 +37,17 @@ var beforeFeature = function () {
                 [
                     ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
                     ["HFA,ASCAP        ","2017-01-01","                 ","2017-01-01"],
-                    ["HFA              ","           ","                 ","          "]
-                    //["                 ","           ","                 ","          "],
-                    //["                 ","2017-01-01 ","                 ","          "],
-                    //["                 ","2017-01-01 ","                 ","2017-01-03"],
-                    //["HFA              ","2017-01-01 ","HFA              ","2017-01-03"]
+                    ["HFA              ","           ","                 ","          "],
+                    ["                 ","           ","                 ","          "],
+                    ["                 ","2017-01-01 ","                 ","          "],
+                    ["                 ","2017-01-01 ","                 ","2017-01-03"],
+                    ["HFA              ","2017-01-01 ","HFA              ","2017-01-03"]
 
 
                 ],
 
 
-                "Check that income provider pair %Income_Provider_1% -%Date_1% and %Income_Provider_2% - %Date_2%  is valid"
+                "Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is valid"
             );
 
 
@@ -64,13 +64,14 @@ var beforeFeature = function () {
                     [
                         ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
                         ["HFA,ASCAP        ","2017-01-01","HFA              ","2017-01-01"],
-                        ["HFA              ","2017-01-01","HFA              ","02017-01-01"],
+                        ["HFA              ","2017-01-01","HFA              ","2017-01-01"],
                         ["                 ","2017-01-01","                 ","2017-01-01"]
 
 
                     ],
 
-                    "Check that  %errorMessage% is displayed for date: %date% "
+
+                    "Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is invalid"
                 );
 
 
