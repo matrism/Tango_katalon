@@ -35,9 +35,9 @@ if (pages.edit_deal_contract_period === undefined) {
             editMdrcMinimumWorkContribution: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) input#workPercent"},
             editMdrcQuantityForCommercialRelease: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) input#commercialReleaseQuantity"},
             editMdrcMajorTerritoriesForCommercialRelease: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) input#territories"},
-            editMdrcTerritoriesField: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.default.territoryControl.popup-left.territoryPicker.ng-isolate-scope div.territoriesStaticView"},
-            editMdrcTerritoriesInputField: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.default.territoryControl.popup-left.territoryPicker.ng-isolate-scope div.territoriesContainer  input[ng-model='typeaheadQuery']"},
-            editMdrcTerritoriesDropDown: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.typeaheadDropdown div.item.ng-scope"},
+            editMdrcTerritoriesField: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            editMdrcTerritoriesInputField: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.tg-territory input[ng-model='$term']"},
+            editMdrcTerritoriesDropDown: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             editMdrcYesCommercialReleaseByMajorLabel: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-model='mdrc.release_label']:nth-child(1)"},
             editMdrcNoCommercialReleaseByMajorLabel: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-model='mdrc.release_label']:nth-child(2)"},
             editMdrcLabelsElement: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div[data-ng-model='mdrc.labels'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -56,7 +56,7 @@ if (pages.edit_deal_contract_period === undefined) {
             editMdrcShortfallAmount: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) input#shortfall"},
             editMdrcForgivenShortfallButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.btn-group.shortfall-action button:nth-child(1)"},
             editMdrcCarriedForwardShortfallButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.btn-group.shortfall-action button:nth-child(2)"},
-            editMdrcSaveButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-click='activeContractPeriod.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"},
+            editMdrcSaveButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-click='form.terms.activeCp.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"},
             editMdrcCancelLink: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) a[data-ng-click='cancelCommitmentChanges(form.terms.activeCp.id, mdrc.id);']"},
             editMdrcDeleteButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"},
             editMdrcRemoveFirstTerritoryIcon: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.territoriesContainer div:nth-child(1) button[ng-click='removeSelectedTerritory(item.id)']"},
@@ -142,10 +142,10 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         validateTheMdrcTerritoriesListTextCommercialReleaseTextValueI: function (i) {
-            browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.release_territories.territories != 0']")).getText().
+            browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div.tg-territory-label")).getText().
                 then(function (promise) {
                     console.log("MDRC territories list Commercial Release right text value is " + promise);
-                    expect(promise).toContain("Countries");
+                    expect(promise).toContain("Countr");
                 });
         },
 
@@ -285,7 +285,7 @@ if (pages.edit_deal_contract_period === undefined) {
 
         editSelectRandomTerritory: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_contract_period.elems.editMdrcTerritoriesDropDown));
-            browser.driver.findElements(By.css("div.typeaheadDropdown div.item.ng-scope"))
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();

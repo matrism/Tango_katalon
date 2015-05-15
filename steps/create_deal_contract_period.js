@@ -275,7 +275,7 @@ if (steps.create_deal_contract_period === undefined) {
         saveMdrcForm: function () {
             it("Save mdrc form ", function () {
                 pages.create_deal_contract_period.clickOnSaveMdrcForm();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.mdrcPercentOfMinStatutoryRate));
+                pages.create_deal_contract_period.waitForAjax();
             });
         },
 

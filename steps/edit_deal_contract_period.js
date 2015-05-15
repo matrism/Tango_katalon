@@ -399,7 +399,7 @@ if (steps.edit_deal_contract_period === undefined) {
         editSaveMdrcFormButton: function () {
             it("Edit Save mdrc form ", function () {
                 pages.edit_deal_contract_period.editClickOnSaveMdrcForm();
-                pages.edit_deal_contract_period.waitForAngularRequests();
+                pages.edit_deal_contract_period.waitForAjax();
              });
         },
 

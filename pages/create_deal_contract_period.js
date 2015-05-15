@@ -16,9 +16,9 @@ if (pages.create_deal_contract_period === undefined) {
             mdrcMinimumWorkContribution: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#workPercent"},
             mdrcQuantityForCommercialRelease: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#commercialReleaseQuantity"},
             mdrcMajorTerritoriesForCommercialRelease: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#territories"},
-            mdrcTerritoriesField: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.default.territoryControl.popup-left.territoryPicker.ng-isolate-scope div.territoriesStaticView"},
-            mdrcTerritoriesInputField: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.default.territoryControl.popup-left.territoryPicker.ng-isolate-scope div.territoriesContainer  input[ng-model='typeaheadQuery']"},
-            mdrcTerritoriesDropDown: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.typeaheadDropdown div.item.ng-scope"},
+            mdrcTerritoriesField: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            mdrcTerritoriesInputField: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.tg-territory input[ng-model='$term']"},
+            mdrcTerritoriesDropDown: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             mdrcYesCommercialReleaseByMajorLabel: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.release_label']:nth-child(1)"},
             mdrcNoCommercialReleaseByMajorLabel: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-model='mdrc.release_label']:nth-child(2)"},
             mdrcLabelsElement: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div[data-ng-model='mdrc.labels'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -37,7 +37,7 @@ if (pages.create_deal_contract_period === undefined) {
             mdrcShortfallAmount: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem input#shortfall"},
             mdrcForgivenShortfallButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.btn-group.shortfall-action button:nth-child(1)"},
             mdrcCarriedForwardShortfallButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem div.btn-group.shortfall-action button:nth-child(2)"},
-            mdrcSaveButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='activeContractPeriod.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"},
+            mdrcSaveButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='form.terms.activeCp.freshlyAdded ? saveCommitment(form.terms.activeCp.id, mdrc.id, mdrcForm.$valid) : updateDeal(mdrcForm.$valid, form.deal, activeForm, dealUpdateCallbackFunction)']"},
             mdrcCancelLink: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem a[data-ng-click='cancelCommitmentChanges(form.terms.activeCp.id, mdrc.id);']"},
             mdrcDeleteButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"}
         },
@@ -97,7 +97,7 @@ if (pages.create_deal_contract_period === undefined) {
 
         selectRandomTerritory: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.mdrcTerritoriesDropDown));
-            browser.driver.findElements(By.css("div.typeaheadDropdown div.item.ng-scope"))
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
