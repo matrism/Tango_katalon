@@ -50,7 +50,7 @@ if (steps.create_deal_general === undefined) {
         fillIntoInternalContactField: function (internal_contact) {
             it("Fill into internal contact field", function () {
                     pages.create_deal_general.fillIntoInternalContactsField(internal_contact);
-                    pages.create_deal_general.waitForAngularRequests();
+                    pages.create_deal_general.waitForAjax();
                 }
             );
         },
@@ -58,7 +58,7 @@ if (steps.create_deal_general === undefined) {
         fillIntoInternalContactsFieldRowI: function (i) {
             it("Fill into internal contact row i ", function () {
                     pages.create_deal_general.fillIntoTheIRowInternalContactField(i);
-                    pages.create_deal_general.waitForAngularRequests();
+                    pages.create_deal_general.waitForAjax();
                 }
             );
         },

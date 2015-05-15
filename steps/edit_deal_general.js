@@ -12,7 +12,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsTitle: function () {
             it("Return internal contacts ", function () {
-                element(By.xpath("//*[@data-ng-show='showSummary']//h2[contains(text(), 'Internal Contacts')]")).getText().
+                element(By.css("div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2")).getText().
                     then(function (promise) {
                         console.log("Internal Contacts title is: " + promise);
                         expect(promise).toEqual("INTERNAL CONTACTS");
@@ -31,7 +31,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsHeaderTable: function () {
             it("Return internal contacts table header ", function () {
-                element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[1]")).getText().
+                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[1]")).getText().
                     then(function (promise) {
                         console.log("Internal Contacts header table is: " + promise);
                         expect(promise).toEqual("Contact Name Role Email");
@@ -42,7 +42,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckFirstInternalContactsValues: function () {
             it("Return first internal contacts values added ", function () {
-                element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[2]")).getText().
+                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[2]")).getText().
                     then(function (promise) {
                         //console.log("First internal Contacts values added: " + promise);
                         expect(promise).not.toEqual("");
@@ -53,9 +53,9 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsValues: function (i) {
             it("Return second third... the rest of internal contacts values added ", function () {
-                element(By.xpath("//*[@class='view-internal-contact ng-scope']//tbody//tr[" + (i + 1) + "]")).getText().
+                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[" + (i + 1) + "]")).getText().
                     then(function (promise) {
-                        //console.log("Internal Contacts values added: " + promise);
+                        console.log("Internal Contacts values added: " + promise);
                         expect(promise).not.toEqual("");
                         internalContacts[i] = promise + "\n";
                     });
@@ -64,7 +64,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckAddInternalContactsLinkPresent: function () {
             it("Return add internal contacts link text ", function () {
-                element(By.css("div.add-new-button.ng-scope button.btn.btn-link")).getText().
+                element(By.css("div.add-new-button button.btn.btn-link")).getText().
                     then(function (promise) {
                         //console.log("Add Internal Contacts list is present and it's name is: " + promise);
                         expect(promise).toEqual("Add External Contact");
@@ -95,6 +95,7 @@ if (steps.edit_deal_general === undefined) {
         editInternalContactsFieldRowI: function (i) {
             it("Edit internal contact row i ", function () {
                     pages.edit_deal_general.editTheIRowInternalContactField(i);
+                    pages.edit_deal_general.waitForAjax();
                 }
             );
         },
@@ -102,6 +103,7 @@ if (steps.edit_deal_general === undefined) {
         selectEditRandomInternalContactDropDown: function () {
             it("Select edit random value from internal contact drop down", function () {
                     pages.edit_deal_general.selectEditRandomInternalContactsFromDropDown();
+                    pages.edit_deal_general.waitForAjax();
                 }
             );
         },
@@ -128,9 +130,7 @@ if (steps.edit_deal_general === undefined) {
         removeInternalContactsRoleRowI: function (i) {
             it("Remove internal contact role row i", function () {
                 pages.edit_deal_general.removeEditInternalContactsRoleRowI(i);
-                //browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div.internal-contact__col.m-role i.internal-contact__error.fa.fa-exclamation-triangle.ng-scope"))));
-                browser.wait(ExpectedConditions.elementToBeClickable(element(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div div[data-ng-model='internalContact.roles'] div div div div div input[ng-model='$term']"))));
-            });
+           });
         },
 
         removeInternalContactsRow: function () {
@@ -170,7 +170,7 @@ if (steps.edit_deal_general === undefined) {
         itSaveInternalContactsChanges: function () {
             it("Save internal contacts changes after editing them", function () {
                 pages.edit_deal_general.clickOnSaveEditInternalContacts();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.elems.internalContactsEditInputField));
+                pages.edit_deal_general.waitForAjax();
             })
         },
 

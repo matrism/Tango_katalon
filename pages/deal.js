@@ -7,8 +7,8 @@ if (pages.deal === undefined) {
             dealBriefNumber: {xpath: "//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']"},
             continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
             saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
-            generalHeader: {css: "li[data-heading='General']"},
-            termsHeader: {css: "li[data-heading='Terms']"},
+            generalHeader: {css: "li.ng-scope:nth-child(1) a[data-ng-click='setActiveTab($tab);']"},
+            termsHeader: {css: "li.ng-scope:nth-child(2) a[data-ng-click='setActiveTab($tab);']"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"}
         },
@@ -32,6 +32,5 @@ if (pages.deal === undefined) {
         goToTermsDealDetails: function () {
             pages.deal.elems.termsHeader.click();
         }
-
     });
 }

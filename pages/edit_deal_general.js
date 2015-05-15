@@ -7,19 +7,19 @@ if (pages.edit_deal_general === undefined) {
     pages.edit_deal_general = new ftf.pageObject({
 
         locators: {
-            internalContactTitle: {xpath: "//*[@data-ng-show='showSummary']//h2[contains(text(), 'Internal Contacts')]"},
-            internalContactsArea: {css: "div[data-ng-form='general'] div.span12.nomargins:nth-child(3)"},
-            internalContactTableData: {css: "table.view-internal-contact.ng-scope tbody tr"},
-            internalContactsEditIcon: {xpath: "//*[@data-tg-modular-edit='internalContacts']//div//button/i[@class='fa fa-pencil']"},
-            internalContactsEditInputField: {css: "div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            internalContactTitle: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2"},
+            internalContactsArea: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3)"},
+            internalContactTableData: {css: "table.view-internal-contact tbody"},
+            internalContactsEditIcon: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) button i.fa.fa-pencil"},
+            internalContactsEditInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             addInternalContactsLink: {css: "div.add-new-button.ng-scope button.btn.btn-link"},
-            saveEditInternalContactsButton: {xpath: "//*[@data-tg-modular-edit='internalContacts']//button[@data-ng-click='save()']"},
-            cancelEditInternalContactsButton: {css: "div[data-tg-modular-edit='internalContacts'] div div div button.btn.btn-cancel.ng-binding"},
-            editInternalContactsInputField: {css: "div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            saveEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button[data-ng-click='tgModularViewMethods.save();']"},
+            cancelEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button.btn.btn-cancel.ng-binding"},
+            editInternalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editInternalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             editInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             removeInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
-            removeInternalContactsElement: {css: "div[data-tg-modular-edit='internalContacts'] div div div:nth-child(1) button[data-ng-click='removeInternalContact(internalContacts.contacts, internalContact)']"},
+            removeInternalContactsElement: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"},
             modalDialog: {css: "div.modal-dialog ng-scope"},
             yesModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
             noModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
@@ -56,7 +56,6 @@ if (pages.edit_deal_general === undefined) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.editInternalContactsDropDownData));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                //browser.driver.findElements(By.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -68,18 +67,18 @@ if (pages.edit_deal_general === undefined) {
         },
 
         editTheIRowInternalContactField: function (i) {
-            var element = browser.findElement(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div div[data-ng-model='internalContact.contact'] div div div div div input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
             element.clear();
             element.sendKeys("a");
         },
 
         clickEditInternalContactsRoleRowI: function (i) {
-            var element = browser.findElement(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div div[data-ng-model='internalContact.roles'] div div div div div input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] input[ng-model='$term']"));
             element.click();
         },
 
         removeEditInternalContactsRoleRowI: function (i) {
-            var element = browser.findElement(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") div div[data-ng-model='internalContact.roles'] div div div div div div div span[ng-click='!$isDisabled() && $removeTag($tag)']"));
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] span[ng-click='!$isDisabled() && $removeTag($tag)']"));
             element.click();
         },
 
@@ -92,7 +91,7 @@ if (pages.edit_deal_general === undefined) {
         },
 
         removeEditInternalContactsRowI: function (i) {
-            var element = browser.findElement(By.css("div[data-tg-modular-edit='internalContacts'] div div div:nth-child(" + i + ") button[data-ng-click='removeInternalContact(internalContacts.contacts, internalContact)']"));
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"));
             element.click();
         },
 

@@ -12,9 +12,9 @@ if (pages.create_deal_general === undefined) {
             dealSigningTerritoryDropDownData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
             contractingPartiesInput: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             contractingPartiesField: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
-            internalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            internalContactsInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.model'] input[ng-model='$term']"},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
-            internalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"}
+            internalContactRoleInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.roles'] input[ng-model='$term']"}
         },
 
 
@@ -86,13 +86,13 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillIntoTheIRowInternalContactField: function (i) {
-            var element = browser.findElement(By.css("div.span7.nomargins div:nth-child(" + i + ") div div[data-ng-model='internalContact.contact'] div div div div div input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
             element.sendKeys("test");
         },
 
 
         clickIntoInternalContactsRoleRowI: function (i) {
-            var element = browser.findElement(By.css("div.span7.nomargins div:nth-child(" + i + ") div div[data-ng-model='internalContact.roles'] div div div div div input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child("+ i + ") div[data-ng-model='internalContact.roles'] input[ng-model='$term']"));
             element.click();
         }
 
