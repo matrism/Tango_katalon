@@ -994,6 +994,8 @@ module.exports.editBasicWork = function(data, more) {
 	);
 };
 module.exports.validateWork = function(data, more) {
+	data = data || hash.subjectWorkData;
+
 	more = more || {};
 
 	more.skip = more.skip || {};
