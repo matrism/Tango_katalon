@@ -99,6 +99,9 @@ module.exports.editCreatorsButton = function() {
 			"contributionEditForm)']"
 	);
 };
+exports.compositeWorkTypeDropdown = function() {
+    return element(by.model('work.contribution.composite_type'));
+};
 module.exports.editCreatorNameInputs = function() {
 	return element.all(by.model("creator.person_name"));
 };
@@ -116,6 +119,25 @@ module.exports.editFirstCreatorContributionInput = function(i) {
 };
 module.exports.creatorsEditorCheckingForDuplicatesMessage = function() {
 	return $(".creators-edit [data-ng-show='show.requests.checkDuplicates']");
+};
+exports.componentWorkRows = function() {
+    return element.all(by.repeater('component in work.contribution.components'));
+};
+exports.componentWorkNameBindings = function() {
+    return exports.componentWorkRows().all(
+        by.binding('{{ getWorkName(component.model) }}')
+    );
+};
+exports.componentWorkNameBinding = function(i) {
+    return exports.componentWorkNameBindings().get(i);
+};
+exports.componentWorkAllocationInputs = function() {
+    return exports.componentWorkRows().all(
+        by.model('component.allocation_percentage')
+    );
+};
+exports.componentWorkAllocationInput = function(i) {
+    return exports.componentWorkAllocationInputs().get(i);
 };
 module.exports.cancelCreatorsButton = function() {
 	return (
@@ -430,6 +452,11 @@ module.exports.calculateEvenCreatorContributions = function() {
 		return 100 / (count - 1);
 	});
 };
+exports.selectedCompositeWorkType = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    return pages.base.selectedDropdownOption(element);
+};
 module.exports.enteredCreatorContribution = function(i) {
 	var element = pages.work.editCreatorContributionInput(i);
 	pages.base.scrollIntoView(element);
@@ -439,6 +466,16 @@ module.exports.isCreatorsEditorCheckingForDuplicates = function() {
 	return pages.base.isPresentAndDisplayed(
 		pages.work.creatorsEditorCheckingForDuplicatesMessage()
 	);
+};
+exports.selectedComponentWorkName = function(i) {
+    var element = exports.componentWorkNameBinding(i);
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+exports.enteredComponentWorkAllocation = function(i) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    return element.getAttribute('value');
 };
 module.exports.enteredCreationYear = function() {
 	return pages.work.creationYearInput().getAttribute("value");
@@ -637,6 +674,26 @@ module.exports.enterNewAlternateWorkTitle = function(title) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
+};
+exports.validateCompositeWorkType = function(value) {
+    if(value.toLowerCase() === 'select type') {
+        expect(
+            pph.isElementPresentAndDisplayed(
+               exports.compositeWorkTypeDropdown()
+            )
+        ).toBeFalsy();
+    }
+    else {
+        expect(exports.selectedCompositeWorkType()).toBe(value);
+    }
+};
+exports.validateComponentWorkName = function(i, value) {
+    expect(exports.selectedComponentWorkName(i)).toEqual(value);
+};
+exports.validateComponentWorkAllocation = function(i, value) {
+    expect(exports.enteredComponentWorkAllocation(i)).toEqual(
+        pph.toFixed(value, 3)
+    );
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.work.editCreatorContributionInput(i);

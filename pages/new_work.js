@@ -30,6 +30,28 @@ module.exports.alternateWorkTitleInput = function(index) {
 			.element(by.model("altTitle.title"))
 	);
 };
+exports.compositeWorkCheckbox = function() {
+    return element(by.model('work.isCompositeWork'));
+};
+exports.compositeWorkTypeDropdown = function() {
+    return element(by.model('work.composite_type'));
+};
+exports.componentWorkRows = function() {
+    return element.all(by.repeater('component in work.components'));
+};
+exports.componentWorkSearchField = function(i) {
+    return exports.componentWorkRows().get(i).element(
+        by.model('component.selected_work')
+    );
+};
+exports.componentWorkAllocationInputs = function() {
+    return exports.componentWorkRows().all(
+        by.model('component.allocation_percentage')
+    );
+};
+exports.componentWorkAllocationInput = function(i) {
+    return exports.componentWorkAllocationInputs().get(i);
+};
 module.exports.creatorContributionRows = function() {
 	return element.all(by.repeater("creator in commonDataHolder.creatorsContributions"));
 };
@@ -317,6 +339,23 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 	element.clear();
 	element.sendKeys(title);
 };
+exports.clickCompositeWorkCheckbox = function() {
+    var element = exports.compositeWorkCheckbox();
+    pages.base.scrollIntoView(element);
+    element.click();
+    return element.getAttribute('value');
+};
+exports.selectCompositeWorkType = function(value) {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    pages.base.selectDropdownOption(element, value, { dropdownType: 'tg' });
+};
+exports.enterComponentWorkSearchTerms = function(i, value) {
+    var element = pages.new_work.componentWorkSearchField(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
+};
 exports.enterCreatorSearchTerms = function(i, name) {
     var element = pages.new_work.creatorNameInput(i);
     pages.base.scrollIntoView(element);
@@ -326,8 +365,23 @@ exports.enterCreatorSearchTerms = function(i, name) {
 exports.enterRandomLetterOnCreatorNameField = function(i) {
     exports.enterCreatorSearchTerms(i, random.letter());
 };
+exports.expectComponentWorkSuggestionsToBeDisplayed = function() {
+    pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
+};
 exports.expectCreatorSuggestionsToBeDisplayed = function() {
     pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
+};
+exports.selectFirstComponentWorkSuggestion = function() {
+    return $$(".typeahead-result").get(0).then(function(suggestion) {
+        var result = {};
+
+        result.name = suggestion.$('.typeahead-result-text').getText();
+        result.workCode = suggestion.$('.typeahead-result-right').getText();
+
+        suggestion.click();
+
+        return result;
+    });
 };
 exports.selectRandomCreatorSuggestion = function() {
     return $$(".typeahead-result").then(function(suggestions) {
@@ -359,6 +413,12 @@ module.exports.enterCreatorContribution = function(i, value) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
+};
+exports.enterComponentWorkAllocation = function(i, value) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 module.exports.enterCreationYear = function(value) {
 	var element = pages.new_work.creationYearInput();

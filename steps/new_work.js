@@ -188,6 +188,43 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	);
 	return deferred.promise;
 };
+exports.clickCompositeWorkCheckbox = function() {
+    it('Click composite work checkbox', function() {
+        pages.new_work.clickCompositeWorkCheckbox();
+    });
+};
+exports.selectCompositeWorkType = function(value, data, key) {
+    key = key || 'compositeWorkType';
+    data = data || hash.subjectWorkData || {};
+
+    it('Select composite work type', function() {
+        pages.new_work.selectCompositeWorkType(value);
+        data[key] = value;
+    });
+};
+exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
+    var component;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'components';
+    data[key] = data[key] || [];
+    component = data[key][i] = data[key][i] || {};
+
+    it('Enter search terms on component work search field #' + (i + 1), function() {
+        pages.new_work.enterComponentWorkSearchTerms(i, searchTerms);
+    });
+
+    it('Expect work suggestions dropdown to be displayed', function() {
+        pages.new_work.expectComponentWorkSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random work', function() {
+        pages.new_work.selectFirstComponentWorkSuggestion().then(function(selected) {
+           component.name = selected.name;
+           component.workCode = selected.workCode;
+        });
+    });
+};
 exports.selectRandomCreator = function(i, data, key) {
     var deferred = promise.defer();
     var creator;
@@ -261,6 +298,20 @@ module.exports.enterCreatorContribution = function(i, value) {
 			pages.new_work.enterCreatorContribution(i, value);
 		}
 	);
+};
+exports.enterMediumComponentWorkAllocation = function(i, data, key) {
+    var component;
+
+    key = key || 'components';
+    data = data || hash.subjectWorkData || {};
+    data[key] = data[key] || [];
+    component = data[key][i] = data[key][i] || {};
+
+    it('Enter 50% allocation for component work #' + (i + 1), function() {
+        var value = 50;
+        pages.new_work.enterComponentWorkAllocation(i, value);
+        component.allocation = value;
+    });
 };
 module.exports.selectRandomMusicalDistributionCategory = function() {
 	var deferred = promise.defer();

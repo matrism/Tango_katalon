@@ -506,6 +506,38 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 		}
 	);
 };
+exports.validateCompositeWorkType = function(data, key) {
+    data = data || hash.subjectWorkData || {};
+    key = key || 'compositeWorkType';
+
+    it('Validate composite work type', function() {
+        pages.work.validateCompositeWorkType(data[key]);
+    });
+};
+exports.validateComponentWorkName = function(i, data, key) {
+    var components;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'components';
+    components = data[key];
+
+    it('Validate component work name #' + (i + 1), function() {
+        var component = components[i];
+        pages.work.validateComponentWorkName(i, component.name);
+    });
+};
+exports.validateComponentWorkAllocation = function(i, data, key) {
+    var components;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'components';
+    components = data[key];
+
+    it('Validate component work allocation #' + (i + 1), function() {
+        var component = components[i];
+        pages.work.validateComponentWorkAllocation(i, component.allocation);
+    });
+};
 module.exports.validateCreatorContributionInputMask = function(i, validationTable) {
 	it("Validate creator contribution input mask", function() {
 		validationTable = validationTable || {
