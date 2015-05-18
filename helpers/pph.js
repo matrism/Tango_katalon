@@ -88,6 +88,11 @@ pph.toString = function(value) {
 		return value.toString();
 	});
 };
+pph.toFixed = function(value, precision) {
+	return promise.when(value).then(function(value) {
+		return value.toFixed(precision);
+	});
+};
 pph.parseInt = function(value) {
 	return promise.when(value).then(function(value) {
 		return parseInt(value);
