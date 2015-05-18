@@ -6,7 +6,7 @@ var pph = require("../helpers/pph");
 var random = require("../helpers/random");
 var promise = protractor.promise;
 require(pages_path + "work");
-module.exports = steps.work = {};
+steps.work = exports;
 module.exports.goToWorkPage = function(data, key) {
     var workId;
     data = data || hash.subjectWorkData || {};
