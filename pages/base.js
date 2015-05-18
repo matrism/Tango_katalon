@@ -46,6 +46,15 @@ exports.elementHasVerticalScrollbar = function(element) {
         return element.scrollHeight > $(element).innerHeight();
     }, element);
 };
+exports.selectDropdownOption = function(element, value, more) {
+    more = more || {};
+    more.dropdownType = more.dropdownType || 'standard';
+    return exports.selectDropdownOption[more.dropdownType](element, value, more);
+};
+exports.selectDropdownOption.tg = function(element, value) {
+    element.click();
+    element.element(by.cssContainingText('.ng-binding', value)).click();
+};
 module.exports.selectRandomDropdownOption = function(element, more) {
 	more = more || {};
 	more.dropdownType = more.dropdownType || "standard";
