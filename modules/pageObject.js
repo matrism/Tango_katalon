@@ -285,18 +285,23 @@ Page.prototype.open = function(is_not_angular) {
  * This is typically enough to avoid having sticky headers and footers covering the element.
  */
 Page.prototype.scrollIntoView = function(el) {
+    if(el instanceof protractor.ElementFinder) {
+        el = el.getWebElement();
+    }
+
     return browser.executeScript (
         function(el) {
             var bbox;
             var bbox_middle;
             var viewport_middle;
+
             el.scrollIntoView(false);
+
             bbox = el.getBoundingClientRect();
             bbox_middle = bbox.top + (bbox.height / 2);
             viewport_middle = window.innerHeight / 2;
             window.scrollBy(0, bbox_middle - viewport_middle);
-        },
-        el.getWebElement()
+        }, el
     );
 };
 
