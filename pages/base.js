@@ -301,4 +301,7 @@ module.exports.selectedTgDropdownOption = function(element) {
 			.getText()
 	);
 };
-
+exports.refreshPage = function() {
+    browser.refresh();
+    pages.base.waitForAjax();
+};

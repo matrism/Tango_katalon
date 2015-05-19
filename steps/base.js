@@ -110,3 +110,8 @@ exports.sleep = function(time) {
         browser.sleep(time);
     });
 };
+exports.refreshPage = function() {
+    it('Refresh the page', function() {
+        pages.base.refreshPage();
+    });
+};
