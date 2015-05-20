@@ -1,7 +1,21 @@
 "use strict";
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 module.exports = pages.deal = new ftf.pageObject();
+
+
+
+
+
+module.exports.contractPeriodHeader = function(){
+    return element(By.css(".overview-header>h3"));
+};
+module.exports.scopeHeader = function(){
+    return element(By.css(".scope-heading"));
+};
+
+
 
 
 module.exports.dealBriefNumber = function(){
@@ -23,6 +37,15 @@ module.exports.continueToNextPage = function () {
 module.exports.saveNewDeal = function(){
     pages.deal.saveDealButton().click();
 };
+
+module.exports.clickScopeHeader = function(){
+
+    browser.wait(ExpectedConditions.visibilityOf( pages.deal.scopeHeader()));
+   pages.deal.scopeHeader().click();
+
+};
+
+
 
 
 module.exports.expectContinueButtonEnabled = function () {

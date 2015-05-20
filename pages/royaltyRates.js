@@ -4,6 +4,9 @@ var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.royaltyRates === undefined) {
 
 
+    var pages_path = _tf_config._system_.path_to_pages;
+    require(pages_path + "base");
+
     pages.royaltyRates = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
@@ -64,7 +67,7 @@ if (pages.royaltyRates === undefined) {
     ,
         newRoyaltyRateSetButton:function()
         {
-            return element(by.css(".ng-scope.ng-warn.ng-dirty>div>a"));
+            return element(by.css(" .ng-warn.ng-warn-check-publisher-share-set>div:not(.view-header)>a"));
 
         },
 
@@ -96,6 +99,7 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
 
 
+            pages.base.scrollIntoView(  this.newRoyaltyRateSetButton());
             this.newRoyaltyRateSetButton().click();
         }
         ,
@@ -182,13 +186,16 @@ if (pages.royaltyRates === undefined) {
 
 
             _.each(table, function (element) {
-                //console.log(element);
+
 
 
                 sentKeys = element;
 
             var incomeProviderInput;
                 incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+
+                pages.base.scrollIntoView($(".ux-multiselect-li>input"));
+
                 var suggestion = $(".ng-scope.ng-binding>strong");
 
                 browser.wait(ExpectedConditions.invisibilityOf(suggestion));
