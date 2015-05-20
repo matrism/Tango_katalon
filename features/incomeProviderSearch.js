@@ -20,6 +20,9 @@ require(steps_path + "create_deal_scope");
 //require(pages_path + "incomeProvider");
 require(steps_path + "incomeProvider");
 
+require(pages_path + "deal_general");
+
+
 var beforeFeature = function () {
         steps.login.itLogin();
         //steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -86,9 +89,9 @@ var beforeFeature = function () {
                 steps.incomeProvider.editValidRoyaltySetPair(
                     [
                         ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
-                        ["HFA,ASCAP        ","2017-01-01","                 ","2017-01-01"],
                         ["HFA              ","           ","                 ","          "],
                         ["                 ","           ","                 ","          "],
+                        ["HFA,ASCAP        ","2017-01-01","                 ","2017-01-01"],
                         ["                 ","2017-01-01 ","                 ","          "],
                         ["                 ","2017-01-01 ","                 ","2017-01-03"],
                         ["HFA              ","2017-01-01 ","HFA              ","2017-01-03"]

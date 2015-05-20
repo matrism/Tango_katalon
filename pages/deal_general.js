@@ -1,7 +1,7 @@
 "use strict";
 var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
-var randomId = require("../helpers/randomId");
+var randomId = require("../helpers/random");
 var pages_path = _tf_config._system_.path_to_pages;
 module.exports = pages.deal_general = new ftf.pageObject({
     url: _tf_config.urls.app_url + "#/create/deal"
@@ -35,6 +35,17 @@ module.exports.internalContactsDropDownData = function(){
 module.exports.internalContactRoleInputField = function() {
     return element(by.css("div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
 };
+
+module.exports.warnerLogo = function() {
+    return element(by.css("#DSP-LOGO"));
+};
+
+module.exports.clickWarnerLogo = function(){
+    pages.deal_general.warnerLogo().click();
+
+};
+
+
 
 module.exports.selectDesiredSigningTerritory = function (specific_country) {
     pages.deal_general.dealSigningTerritoryPopup().click();

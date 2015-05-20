@@ -192,24 +192,30 @@ if (pages.royaltyRates === undefined) {
                 sentKeys = element;
 
             var incomeProviderInput;
-                incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+                incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
 
-                pages.base.scrollIntoView($(".ux-multiselect-li>input"));
 
-                var suggestion = $(".ng-scope.ng-binding>strong");
+
+
+                pages.base.scrollIntoView($(".flex1>.ng-valid>div>div>div>div>div>input"));
+
+                var suggestion = $(".tg-typeahead__item-left>strong");
 
                 browser.wait(ExpectedConditions.invisibilityOf(suggestion));
 
 
             incomeProviderInput.sendKeys(sentKeys);
-            incomeProviderInput.click();
+         //   incomeProviderInput.click();
 
 
+                 suggestion = $(".tg-typeahead__item-left>strong");
             browser.wait(ExpectedConditions.visibilityOf(suggestion));
-            expect(suggestion.getText()).not.toContain("No results");
+            //expect(suggestion.getText()).not.toContain("No results");
 
 
-                incomeProviderInput.sendKeys(protractor.Key.ENTER);
+               // incomeProviderInput.sendKeys(protractor.Key.ENTER);
+                suggestion.click();
+
             var desiredOption;
             //
             //browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))

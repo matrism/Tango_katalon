@@ -38,12 +38,12 @@ if (steps.incomeProvider === undefined) {
 
                         pages.deal_general.clickWarnerLogo();
                         pages.deal_general.open().waitForAjax();
-                        pages.deal_general.selectDesiredSigningTerritory("Argentina");
-                        pages.deal_general.fillContractingPartiesField("bmi");
+                        pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
+                        pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");
                         browser.wait(ExpectedConditions.visibilityOf(suggestion));
                         expect(suggestion.getText()).not.toContain("No results");
-                        pages.deal_general.selectContractingPartyValue("(021)\n BMI");
+                        pages.create_deal_general.selectContractingPartyValue("(021)\n BMI");
 
 
 
@@ -51,16 +51,17 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        browser.wait(ExpectedConditions.visibilityOf(pages.deal_contract_period.startDate()));
-                        pages.deal_contract_period.fillStartActualDate();
-                        pages.deal_contract_period.fillTargetEndMonths();
 
 
-                        pages.deal_scope.addScopeForm();
-                        pages.deal_scope.selectContractTypeScope(pages.deal_scope.contractTypeDropDown(), "Finder");
-                        pages.deal_scope.addTerritoryByTypingToScope();
+                        pages.create_deal_contract_period.fillStartActualDate();
+                        pages.create_deal_contract_period.fillTargetEndMonths();
 
-                        pages.deal_scope.selectRandomCountry();
+
+                        pages.create_deal_scope.addScopeForm();
+                        pages.create_deal_scope.selectContractTypeScope(pages.create_deal_scope.contractTypeDropDown, "Finder");
+                        pages.create_deal_scope.addTerritoryByTypingToScope();
+
+                        pages.create_deal_scope.selectRandomCountry();
 
 
 
@@ -128,12 +129,12 @@ if (steps.incomeProvider === undefined) {
 
                         pages.deal_general.clickWarnerLogo();
                         pages.deal_general.open().waitForAjax();
-                        pages.deal_general.selectDesiredSigningTerritory("Argentina");
-                        pages.deal_general.fillContractingPartiesField("bmi");
+                        pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
+                        pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");
                         browser.wait(ExpectedConditions.visibilityOf(suggestion));
                         expect(suggestion.getText()).not.toContain("No results");
-                        pages.deal_general.selectContractingPartyValue("(021)\n BMI");
+                        pages.create_deal_general.selectContractingPartyValue("(021)\n BMI");
 
 
 
@@ -141,16 +142,17 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        browser.wait(ExpectedConditions.visibilityOf(pages.deal_contract_period.startDate()));
-                        pages.deal_contract_period.fillStartActualDate();
-                        pages.deal_contract_period.fillTargetEndMonths();
 
 
-                        pages.deal_scope.addScopeForm();
-                        pages.deal_scope.selectContractTypeScope(pages.deal_scope.contractTypeDropDown(), "Finder");
-                        pages.deal_scope.addTerritoryByTypingToScope();
+                        pages.create_deal_contract_period.fillStartActualDate();
+                        pages.create_deal_contract_period.fillTargetEndMonths();
 
-                        pages.deal_scope.selectRandomCountry();
+
+                        pages.create_deal_scope.addScopeForm();
+                        pages.create_deal_scope.selectContractTypeScope(pages.create_deal_scope.contractTypeDropDown, "Finder");
+                        pages.create_deal_scope.addTerritoryByTypingToScope();
+
+                        pages.create_deal_scope.selectRandomCountry();
 
                         //Added buttons
                         pages.deal.continueToNextPage();
@@ -221,15 +223,14 @@ if (steps.incomeProvider === undefined) {
 
 
 
-
                         pages.deal_general.clickWarnerLogo();
                         pages.deal_general.open().waitForAjax();
-                        pages.deal_general.selectDesiredSigningTerritory("Argentina");
-                        pages.deal_general.fillContractingPartiesField("bmi");
+                        pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
+                        pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");
                         browser.wait(ExpectedConditions.visibilityOf(suggestion));
                         expect(suggestion.getText()).not.toContain("No results");
-                        pages.deal_general.selectContractingPartyValue("(021)\n BMI");
+                        pages.create_deal_general.selectContractingPartyValue("(021)\n BMI");
 
 
 
@@ -237,17 +238,17 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        browser.wait(ExpectedConditions.visibilityOf(pages.deal_contract_period.startDate()));
-                        pages.deal_contract_period.fillStartActualDate();
-                        pages.deal_contract_period.fillTargetEndMonths();
 
 
-                        pages.deal_scope.addScopeForm();
-                        pages.deal_scope.selectContractTypeScope(pages.deal_scope.contractTypeDropDown(), "Finder");
-                        pages.deal_scope.addTerritoryByTypingToScope();
+                        pages.create_deal_contract_period.fillStartActualDate();
+                        pages.create_deal_contract_period.fillTargetEndMonths();
 
-                        pages.deal_scope.selectRandomCountry();
 
+                        pages.create_deal_scope.addScopeForm();
+                        pages.create_deal_scope.selectContractTypeScope(pages.create_deal_scope.contractTypeDropDown, "Finder");
+                        pages.create_deal_scope.addTerritoryByTypingToScope();
+
+                        pages.create_deal_scope.selectRandomCountry();
 
 
 
@@ -317,12 +318,12 @@ if (steps.incomeProvider === undefined) {
 
                         pages.deal_general.clickWarnerLogo();
                         pages.deal_general.open().waitForAjax();
-                        pages.deal_general.selectDesiredSigningTerritory("Argentina");
-                        pages.deal_general.fillContractingPartiesField("bmi");
+                        pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
+                        pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");
                         browser.wait(ExpectedConditions.visibilityOf(suggestion));
                         expect(suggestion.getText()).not.toContain("No results");
-                        pages.deal_general.selectContractingPartyValue("(021)\n BMI");
+                        pages.create_deal_general.selectContractingPartyValue("(021)\n BMI");
 
 
 
@@ -330,16 +331,17 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        browser.wait(ExpectedConditions.visibilityOf(pages.deal_contract_period.startDate()));
-                        pages.deal_contract_period.fillStartActualDate();
-                        pages.deal_contract_period.fillTargetEndMonths();
 
 
-                        pages.deal_scope.addScopeForm();
-                        pages.deal_scope.selectContractTypeScope(pages.deal_scope.contractTypeDropDown(), "Finder");
-                        pages.deal_scope.addTerritoryByTypingToScope();
+                        pages.create_deal_contract_period.fillStartActualDate();
+                        pages.create_deal_contract_period.fillTargetEndMonths();
 
-                        pages.deal_scope.selectRandomCountry();
+
+                        pages.create_deal_scope.addScopeForm();
+                        pages.create_deal_scope.selectContractTypeScope(pages.create_deal_scope.contractTypeDropDown, "Finder");
+                        pages.create_deal_scope.addTerritoryByTypingToScope();
+
+                        pages.create_deal_scope.selectRandomCountry();
 
                         //Added buttons
                         pages.deal.continueToNextPage();

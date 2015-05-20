@@ -43,7 +43,11 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
 
+
         fillStartActualDate: function () {
+
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.startDate));
+
             pages.create_deal_contract_period.elems.startDate.sendKeys("2015-03-12");
         },
 

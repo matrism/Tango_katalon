@@ -5,7 +5,7 @@ if (steps.royaltyRates === undefined) {
     steps.royaltyRates = {
 
 
-        addNewRoyaltySet : function() {
+        addNewRoyaltySet: function () {
 
 
             it("Add new Royalty Rate Set", function () {
@@ -15,31 +15,28 @@ if (steps.royaltyRates === undefined) {
             );
         },
 
-        inspectRateSetForm :function() {
+        inspectRateSetForm: function () {
 
 
-            it("Inspect Rate Set Form",function()
-            {
+            it("Inspect Rate Set Form", function () {
 
                 expect(pages.royaltyRates.elems.RRNameLabel.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.incomeProvidesLabel.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.incomeProviderInput.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.incomeDateMethodLabel.isPresent()).toBeTruthy();
-             //   expect(pages.royaltyRates.elems.dealSigningLabel.isPresent()).toBeTruthy();
-              //  expect(pages.royaltyRates.elems.warnerChappelLabel.isPresent()).toBeTruthy();
+                //   expect(pages.royaltyRates.elems.dealSigningLabel.isPresent()).toBeTruthy();
+                //  expect(pages.royaltyRates.elems.warnerChappelLabel.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.effectiveStartDateLabel.isPresent()).toBeTruthy();
-             //   expect(pages.royaltyRates.elems.effectiveStartDateInput.isPresent()).toBeTruthy();
+                //   expect(pages.royaltyRates.elems.effectiveStartDateInput.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.contractualRateLabel.isPresent()).toBeTruthy();
                 expect(pages.royaltyRates.elems.interCompanyLabel.isPresent()).toBeTruthy();
-             //   expect(pages.royaltyRates.elems.interCompanyInput.isPresent()).toBeTruthy();
-
+                //   expect(pages.royaltyRates.elems.interCompanyInput.isPresent()).toBeTruthy();
 
 
             });
         },
-        closeRateSetForm : function (){
-            it("Close Rate Set Form",function()
-            {
+        closeRateSetForm: function () {
+            it("Close Rate Set Form", function () {
                 pages.royaltyRates.closeRoyaltySet();
 
 
@@ -47,18 +44,16 @@ if (steps.royaltyRates === undefined) {
             });
         },
 
-        clearRoyaltyRateInput: function() {
+        clearRoyaltyRateInput: function () {
 
-            it("Delete Name from name input",function()
-                {
+            it("Delete Name from name input", function () {
                     pages.royaltyRates.clearRoyaltyRateNameInput();
                 }
             );
         },
-        validateRoyaltyRateInput:function(){
+        validateRoyaltyRateInput: function () {
 
-            it("Error warning is shown for name input",function()
-            {
+            it("Error warning is shown for name input", function () {
 
                 expect(pages.royaltyRates.getRRInputBorderTopValue()).toBe('rgba(223, 74, 72, 1)');
                 expect(pages.royaltyRates.getRRInputBorderRightValue()).toBe('rgba(223, 74, 72, 1)');
@@ -67,17 +62,13 @@ if (steps.royaltyRates === undefined) {
                 expect(pages.royaltyRates.getRRInputPlaceholderValue()).toBe('Type Name..');
 
 
-
-
             });
 
         },
 
-        typeIntoRRInput: function (text)
-        {
+        typeIntoRRInput: function (text) {
 
-            it("Write Name in Rate Set Field ",function()
-            {
+            it("Write Name in Rate Set Field ", function () {
 
 
                 pages.royaltyRates.typeIntoRRInput(text);
@@ -85,45 +76,56 @@ if (steps.royaltyRates === undefined) {
 
             });
         },
-        validateRRInputText: function(text)
-        {
+        validateRRInputText: function (text) {
 
-            it("Name is succesfully added to textbox",function()
-            {
+            it("Name is succesfully added to textbox", function () {
                 expect(pages.royaltyRates.getRRInputValue()).toBe(text);
 
 
             });
         },
-                validateRRInput: function()
-                {
-                    it("Expect input to be valid",function(){
+        validateRRInput: function () {
+            it("Expect input to be valid", function () {
 
 
-                        expect(pages.royaltyRates.getRRInputBorderTopValue()).toBe('rgba(51, 170, 237, 1)');
-                        expect(pages.royaltyRates.getRRInputBorderRightValue()).toBe('rgba(51, 170, 237, 1)');
-                        expect(pages.royaltyRates.getRRInputBorderBottomValue()).toBe('rgba(51, 170, 237, 1)');
-                        expect(pages.royaltyRates.getRRInputBorderLeftValue()).toBe('rgba(51, 170, 237, 1)');
+                expect(pages.royaltyRates.getRRInputBorderTopValue()).toBe('rgba(51, 170, 237, 1)');
+                expect(pages.royaltyRates.getRRInputBorderRightValue()).toBe('rgba(51, 170, 237, 1)');
+                expect(pages.royaltyRates.getRRInputBorderBottomValue()).toBe('rgba(51, 170, 237, 1)');
+                expect(pages.royaltyRates.getRRInputBorderLeftValue()).toBe('rgba(51, 170, 237, 1)');
 
 
+            });
 
-                    });
 
+        },
+        selectAnIncomeProvider: function (provider) {
 
-                },
-                selectAnIncomeProvider: function(provider)
-                {
-
-                    it("Type in an income provider and select it from dropdown",function()
-                    {
+            it("Type in an income provider and select it from dropdown", function () {
 
 
                 pages.royaltyRates.selectIncomeProvider(provider);
 
 
-
-
             });
+        },
+
+        addEffectiveStartDate: function (date)
+        {
+          it("Type effective start date into input",function(){
+
+              pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
+          })  ;
+
+
+        },
+        selectIncomeProviderByPartialMatch:function(provider)
+        {
+          it("Add an Income Provider",function{
+
+              pages.royaltyRates.  pages.royaltyRates.selectIncomeProviderByPartialMatch(provider);
+
+        })  ;
+
         },
         incomeProviderIsPresent: function(provider)
         {

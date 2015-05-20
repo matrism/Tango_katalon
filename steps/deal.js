@@ -70,7 +70,10 @@ if (steps.deal === undefined) {
             it("Expect terms tab is opened successfully ", function () {
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealTermsSummaryHeader));
             });
-        }
+        },
+
+
+
 
     };
 }

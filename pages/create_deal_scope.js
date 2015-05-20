@@ -2,6 +2,9 @@
 var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
 var pages_path = _tf_config._system_.path_to_pages;
+var SelectWrapper  = require('../helpers/select-wrapper');
+
+
 require(pages_path + "base");
 if (pages.create_deal_scope === undefined) {
     pages.create_deal_scope = new ftf.pageObject({
@@ -17,9 +20,10 @@ if (pages.create_deal_scope === undefined) {
             publisherNameDropDownData: {xpath: "//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"}
         },
 
+
         addScopeForm: function () {
             pages.create_deal_scope.elems.addScopeIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.contractTypeDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.contractTypeDropDown));
         },
 
         fillScopeDescriptionField: function () {
@@ -45,20 +49,36 @@ if (pages.create_deal_scope === undefined) {
                         desiredOption.click();
                     }
                 });
+//
+//            var mySelect = new SelectWrapper(element);
+//
+//
+//
+//// select by visible text
+//            mySelect.selectByText(specific_value);
+
+
+          //  element(by.cssContainingText("select[name='scopeContractType'] option", specific_value)).click();
+
+          //  element(by.cssContainingText('option', specific_value)).click();
+          //  var dog = element(by.cssContainingText('.pet', 'Dog'));
         },
 
 
         addTerritoryByTypingToScope: function () {
             pages.create_deal_scope.elems.territoryField.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryInput));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryInput));
             pages.create_deal_scope.elems.territoryInput.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
         },
 
 
         selectRandomCountry: function () {
             var desiredOption;
-            browser.driver.findElements(By.css("div.tg-territory__clusters i[ng-click='$event.stopPropagation(); $toggleClusterSelection(cluster);']"))
+         //   browser.driver.findElements(By.css("div.tg-territory__clusters i[ng-click='$event.stopPropagation(); $toggleClusterSelection(cluster);']"))
+
+            browser.driver.findElements(By.css(".tg-typeahead__suggestions-group-item.ng-scope"))
+
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -75,7 +95,7 @@ if (pages.create_deal_scope === undefined) {
 
         selectRandomPublisherNameDropDown: function () {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.publisherNameDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
             browser.driver.findElements(By.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
