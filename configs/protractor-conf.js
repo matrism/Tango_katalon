@@ -9,13 +9,13 @@ SSReporter_instance = new ScreenShotReporter({baseDirectory: "reports/html"});
 
 global.pages = {};
 global.steps = {};
+global.hash = {};
 
 require("../helpers/services_helper");
 
 config = {
-    // chromeOnly: true,
-    // chromeDriver: '../node_modules/protractor/selenium/chromedriver',
-    seleniumAddress: 'http://localhost:4444/wd/hub',
+    chromeOnly: true,
+    chromeDriver: '../node_modules/protractor/selenium/chromedriver',
     capabilities: {
         "browserName": _tf_config._system_.browser, //firefox, ie
         'chromeOptions': {

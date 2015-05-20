@@ -1,4 +1,6 @@
 "use strict";
+var pph = require("../helpers/pph");
+var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if(steps.base === undefined) {
 	module.exports = steps.base = {};
@@ -24,16 +26,19 @@ module.exports.hoverElement = function(elName, el) {
 module.exports.clickElement = function(elName, el, wait) {
 	it (
 		"Click " + elName, function() {
+			var notDisabledCssSelector = ":not([disabled], .disabled)";
 			pages.base.scrollIntoView(el);
 			if(wait === true) {
 				wait = _tf_config._system_.wait_timeout;
 			}
 			if(!wait) {
-				expect(el.getAttribute("disabled")).toBeFalsy();
+				expect(pph.matchesCssSelector(el, notDisabledCssSelector)).toBe(true);
 			}
 			else {
 				browser.wait (
-					ExpectedConditions.elementToBeClickable(el),
+					function() {
+						return pph.matchesCssSelector(el, notDisabledCssSelector);
+					},
 					wait
 				);
 			}
@@ -54,7 +59,7 @@ module.exports.waitForElementToBeDisplayed = function(elName, el, wait) {
 };
 module.exports.waitForElementToBeClickable = function(elName, el, wait) {
 	it (
-		"Wait for " + elName + " to be displayed", function() {
+		"Wait for " + elName + " to be clickable", function() {
 			browser.wait (
 				ExpectedConditions.elementToBeClickable(el),
 				wait || _tf_config._system_.wait_timeout
@@ -62,12 +67,27 @@ module.exports.waitForElementToBeClickable = function(elName, el, wait) {
 		}
 	);
 };
-module.exports.selectDifferentRandomOption = function(elName, el) {
+module.exports.selectRandomDropdownOption = function(elName, el, more) {
+	var deferred = promise.defer();
+	var notes = [];
+	if(more.skipIfNotPresent) {
+		notes.push("if present");
+	}
+	if(more.skipIfNotDisplayed) {
+		notes.push("if displayed");
+	}
+	if(notes.length === 0) {
+		notes = "";
+	}
+	else {
+		notes = " (" + notes.join(", ") + ")";
+	}
 	it (
-		"Select a different random " + elName, function() {
-			pages.base.selectDifferentRandomOption(el);
+		"Select a different random " + elName + notes, function() {
+			pages.base.selectRandomDropdownOption(el, more);
 		}
 	);
+	return deferred.promise;
 };
 module.exports.dirtyCheckContinueEditing = function() {
 	steps.base.clickElement (

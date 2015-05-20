@@ -8,12 +8,6 @@ module.exports = pages.deal_general = new ftf.pageObject({
 });
 
 // Locator.
-
-module.exports.warnerLogo = function () {
-    return element(by.css('#DSP-LOGO'));
-};
-
-
 module.exports.dealSigningTerritoryPopup = function () {
     return element(by.css('button.openPopupButton'));
 };
@@ -43,34 +37,26 @@ module.exports.internalContactRoleInputField = function() {
 };
 
 module.exports.selectDesiredSigningTerritory = function (specific_country) {
-  //  pages.deal_general.dealSigningTerritoryPopup().click();
-  //  expect(pages.deal_general.dealSigningTerritoryDropDownData().isDisplayed);
-  //
-  //
-    $(".territoriesContainer>input").sendKeys(specific_country);
-    browser.wait(ExpectedConditions.visibilityOf($("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']")));
-
-    $(".territoriesContainer>input").sendKeys(protractor.Key.ENTER);
-  //
-  //
-  //  var desiredOption;
-  //  browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
-  //      .then(function findMatchingOption(options) {
-  //          options.forEach(function (option) {
-  //              option.getText().then(function doesOptionMatch(text) {
-  //                      if (text.indexOf(specific_country) != -1) {
-  //                          desiredOption = option;
-  //                          return true;
-  //                      }
-  //                  }
-  //              )
-  //          });
-  //      })
-  //      .then(function clickOption() {
-  //          if (desiredOption) {
-  //              desiredOption.click();
-  //          }
-  //      });
+    pages.deal_general.dealSigningTerritoryPopup().click();
+    expect(pages.deal_general.dealSigningTerritoryDropDownData().isDisplayed);
+    var desiredOption;
+    browser.driver.findElements(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"))
+        .then(function findMatchingOption(options) {
+            options.forEach(function (option) {
+                option.getText().then(function doesOptionMatch(text) {
+                        if (text.indexOf(specific_country) != -1) {
+                            desiredOption = option;
+                            return true;
+                        }
+                    }
+                )
+            });
+        })
+        .then(function clickOption() {
+            if (desiredOption) {
+                desiredOption.click();
+            }
+        });
 };
 
 module.exports.fillContractingPartiesField = function (field) {
@@ -116,9 +102,3 @@ module.exports.selectRandomInternalContactsFromDropDown = function(){
 module.exports.clickOnInternalContactsRole = function(){
     pages.deal_general.internalContactRoleInputField().click();
 };
-
-module.exports.clickWarnerLogo = function(){
-    pages.deal_general.warnerLogo().click();
-};
-
-
