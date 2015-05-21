@@ -20,6 +20,18 @@ exports.modalDialog = function() {
 exports.modalFooter = function() {
     return $('.modal-footer');
 };
+exports.expectModalPopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    if(more.timeout === undefined) {
+        more.timeout = _tf_config._system_.wait_timeout;
+    }
+
+    browser.wait(
+        ExpectedConditions.visibilityOf(exports.modalHeading()),
+        more.timeout
+    );
+};
 module.exports.dirtyCheckContinueEditingButton = function() {
     return exports.modalFooter().element(
         by.cssContainingText("button", "Continue Editing")
