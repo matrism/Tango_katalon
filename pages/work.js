@@ -123,6 +123,9 @@ module.exports.creatorsEditorCheckingForDuplicatesMessage = function() {
 exports.componentWorkRows = function() {
     return element.all(by.repeater('component in work.contribution.components'));
 };
+exports.componentWorkRow = function(i) {
+    return exports.componentWorkRows().get(i);
+};
 exports.componentWorkNameBindings = function() {
     return exports.componentWorkRows().all(
         by.binding('{{ getWorkName(component.model) }}')
@@ -131,6 +134,11 @@ exports.componentWorkNameBindings = function() {
 exports.componentWorkNameBinding = function(i) {
     return exports.componentWorkNameBindings().get(i);
 };
+exports.componentWorkSearchTermsField = function(i) {
+    return exports.componentWorkRow(i).element(
+        by.model('component.selected_work')
+    );
+};
 exports.componentWorkAllocationInputs = function() {
     return exports.componentWorkRows().all(
         by.model('component.allocation_percentage')
@@ -138,6 +146,17 @@ exports.componentWorkAllocationInputs = function() {
 };
 exports.componentWorkAllocationInput = function(i) {
     return exports.componentWorkAllocationInputs().get(i);
+};
+exports.deleteComponentWorkButtons = function() {
+    return exports.componentWorkRows().$$('.delete-button');
+};
+exports.deleteComponentWorkButton = function(i) {
+    return exports.deleteComponentWorkButtons().get(i);
+};
+exports.confirmComponentWorkDeletionButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Yes')
+    );
 };
 module.exports.cancelCreatorsButton = function() {
 	return (
@@ -714,6 +733,50 @@ exports.expectSimilarWorksPopUpToHaveScrollbar = function() {
     expect(pages.base.elementHasVerticalScrollbar(
         exports.similarWorksPopUpScrollArea()
     )).toBeTruthy();
+};
+exports.enterComponentWorkSearchTerms = function(i, value) {
+    var element = exports.componentWorkSearchTermsField(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
+};
+exports.expectComponentWorkSuggestionsToBeDisplayed = function() {
+    pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
+};
+exports.enterComponentWorkAllocation = function(i, value) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
+};
+exports.selectFirstComponentWorkSuggestion = function() {
+    return $$('.typeahead-result').get(0).then(function(suggestion) {
+        var result = {};
+
+        result.name = suggestion.$('.typeahead-result-text').getText();
+        result.workCode = suggestion.$('.typeahead-result-right').getText();
+
+        suggestion.click();
+
+        return result;
+    });
+};
+exports.deleteComponentWork = function(i) {
+    var element = exports.deleteComponentWorkButton(i);
+    pages.base.scrollIntoView(element);
+    element.click();
+};
+exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'DELETE COMPONENT & ALLOCATION'
+    );
+};
+exports.confirmComponentWorkDeletion = function() {
+    exports.confirmComponentWorkDeletionButton().click();
 };
 module.exports.enterCreationYear = function(value) {
 	var element = pages.work.creationYearInput();

@@ -172,6 +172,62 @@ module.exports.waitCreatorsEditorCheckForDuplicates = function() {
 		);
 	});
 };
+exports.deleteComponentWork = function(i, data, key) {
+    var components;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'components';
+    components = data[key] = data[key] || [];
+
+    it('Delete component work #' + (i + 1), function() {
+        pages.work.deleteComponentWork(i);
+        components.splice(i, 1);
+    });
+};
+exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function() {
+    it('Expect component work deletion confirmation pop-up to be displayed', function() {
+        pages.work.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed();
+    });
+};
+exports.confirmComponentWorkDeletion = function() {
+    it('Confirm component work deletion', function() {
+        pages.work.confirmComponentWorkDeletion();
+    });
+};
+exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
+    var component;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'components';
+    data[key] = data[key] || [];
+
+    it('Enter search terms on component work search field #' + (i + 1), function() {
+        component = data[key][i] = data[key][i] || {};
+        pages.work.enterComponentWorkSearchTerms(i, value);
+    });
+
+    it('Expect work suggestions dropdown to be displayed', function() {
+        pages.work.expectComponentWorkSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random work', function() {
+        pages.work.selectFirstComponentWorkSuggestion().then(function(selected) {
+           component.name = selected.name;
+           component.workCode = selected.workCode;
+        });
+    });
+};
+exports.enterMediumComponentWorkAllocation = function(i, data, key) {
+    data = data || hash.subjectWorkData || {};
+    key = key || 'components';
+    data[key] = data[key] || [];
+
+    it('Enter component work allocation #' + (i + 1), function() {
+        var component = data[key][i] = data[key][i] || {};
+        component.allocation = 50;
+        pages.work.enterComponentWorkAllocation(i, component.allocation);
+    });
+};
 module.exports.cancelCreatorsEditing = function() {
 	steps.base.clickElement (
 		"cancel creators button",

@@ -15,7 +15,7 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Define COS, POT, and UCO composite works',
+            name: 'Define and edit COS, POT, and UCO composite works.',
             tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
@@ -33,6 +33,18 @@ var beforeFeature = [
                 [steps.work.hoverCreatorNamesContainer],
                 [steps.work.editCreators],
                 [steps.work.validateCompositeWorkType],
+                [steps.work.validateComponentWorkName, [0]],
+                [steps.work.validateComponentWorkAllocation, [0]],
+
+                [steps.work.deleteComponentWork, [0]],
+                [steps.work.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed],
+                [steps.work.confirmComponentWorkDeletion],
+                [steps.work.selectFirstComponentWorkMatching, [0, 'AAA']],
+                [steps.work.enterMediumComponentWorkAllocation, [0]],
+                [steps.work.saveCreators],
+                [steps.base.refreshPage],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
                 [steps.work.validateComponentWorkName, [0]],
                 [steps.work.validateComponentWorkAllocation, [0]],
 

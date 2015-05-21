@@ -372,7 +372,7 @@ exports.expectCreatorSuggestionsToBeDisplayed = function() {
     pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
 };
 exports.selectFirstComponentWorkSuggestion = function() {
-    return $$(".typeahead-result").get(0).then(function(suggestion) {
+    return $$('.typeahead-result').get(0).then(function(suggestion) {
         var result = {};
 
         result.name = suggestion.$('.typeahead-result-text').getText();
