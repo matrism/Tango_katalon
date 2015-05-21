@@ -173,13 +173,13 @@ module.exports.waitCreatorsEditorCheckForDuplicates = function() {
 	});
 };
 exports.deleteComponentWork = function(i, data, key) {
-    var components;
-
-    data = data || hash.subjectWorkData || {};
-    key = key || 'components';
-    components = data[key] = data[key] || [];
-
     it('Delete component work #' + (i + 1), function() {
+        var components;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        components = data[key] = data[key] || [];
+
         pages.work.deleteComponentWork(i);
         components.splice(i, 1);
     });
@@ -195,14 +195,7 @@ exports.confirmComponentWorkDeletion = function() {
     });
 };
 exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
-    var component;
-
-    data = data || hash.subjectWorkData || {};
-    key = key || 'components';
-    data[key] = data[key] || [];
-
     it('Enter search terms on component work search field #' + (i + 1), function() {
-        component = data[key][i] = data[key][i] || {};
         pages.work.enterComponentWorkSearchTerms(i, value);
     });
 
@@ -212,18 +205,27 @@ exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
 
     it('Select a random work', function() {
         pages.work.selectFirstComponentWorkSuggestion().then(function(selected) {
-           component.name = selected.name;
-           component.workCode = selected.workCode;
+            var component;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.name = selected.name;
+            component.workCode = selected.workCode;
         });
     });
 };
 exports.enterMediumComponentWorkAllocation = function(i, data, key) {
-    data = data || hash.subjectWorkData || {};
-    key = key || 'components';
-    data[key] = data[key] || [];
-
     it('Enter component work allocation #' + (i + 1), function() {
-        var component = data[key][i] = data[key][i] || {};
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
         component.allocation = 50;
         pages.work.enterComponentWorkAllocation(i, component.allocation);
     });
@@ -571,26 +573,24 @@ exports.validateCompositeWorkType = function(data, key) {
     });
 };
 exports.validateComponentWorkName = function(i, data, key) {
-    var components;
-
-    data = data || hash.subjectWorkData || {};
-    key = key || 'components';
-    components = data[key];
-
     it('Validate component work name #' + (i + 1), function() {
-        var component = components[i];
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        component = data[key][i];
+
         pages.work.validateComponentWorkName(i, component.name);
     });
 };
 exports.validateComponentWorkAllocation = function(i, data, key) {
-    var components;
-
-    data = data || hash.subjectWorkData || {};
-    key = key || 'components';
-    components = data[key];
-
     it('Validate component work allocation #' + (i + 1), function() {
-        var component = components[i];
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        component = data[key][i];
+
         pages.work.validateComponentWorkAllocation(i, component.allocation);
     });
 };

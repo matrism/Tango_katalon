@@ -203,13 +203,6 @@ exports.selectCompositeWorkType = function(value, data, key) {
     });
 };
 exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
-    var component;
-
-    data = data || hash.subjectWorkData || {};
-    key = key || 'components';
-    data[key] = data[key] || [];
-    component = data[key][i] = data[key][i] || {};
-
     it('Enter search terms on component work search field #' + (i + 1), function() {
         pages.new_work.enterComponentWorkSearchTerms(i, searchTerms);
     });
@@ -220,8 +213,16 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
 
     it('Select a random work', function() {
         pages.new_work.selectFirstComponentWorkSuggestion().then(function(selected) {
-           component.name = selected.name;
-           component.workCode = selected.workCode;
+            var component;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.name = selected.name;
+            component.workCode = selected.workCode;
         });
     });
 };
@@ -300,17 +301,17 @@ module.exports.enterCreatorContribution = function(i, value) {
 	);
 };
 exports.enterMediumComponentWorkAllocation = function(i, data, key) {
-    var component;
-
-    key = key || 'components';
-    data = data || hash.subjectWorkData || {};
-    data[key] = data[key] || [];
-    component = data[key][i] = data[key][i] || {};
-
     it('Enter 50% allocation for component work #' + (i + 1), function() {
-        var value = 50;
-        pages.new_work.enterComponentWorkAllocation(i, value);
-        component.allocation = value;
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        component.allocation = 50;
+        pages.new_work.enterComponentWorkAllocation(i, component.allocation);
     });
 };
 module.exports.selectRandomMusicalDistributionCategory = function() {
