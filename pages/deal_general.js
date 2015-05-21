@@ -41,6 +41,7 @@ module.exports.warnerLogo = function() {
 };
 
 module.exports.clickWarnerLogo = function(){
+    browser.refresh();
     pages.deal_general.warnerLogo().click();
 
 };

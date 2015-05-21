@@ -114,9 +114,10 @@ var beforeFeature = function () {
                 steps.incomeProvider.editInvalidRoyaltySetPair(
                     [
                         ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
+                        ["                 ","2017-01-01","                 ","2017-01-01"],
                         ["HFA,ASCAP        ","2017-01-01","HFA              ","2017-01-01"],
-                        ["HFA              ","2017-01-01","HFA              ","2017-01-01"],
-                        ["                 ","2017-01-01","                 ","2017-01-01"]
+                        ["HFA              ","2017-01-01","HFA              ","2017-01-01"]
+
 
 
                     ],

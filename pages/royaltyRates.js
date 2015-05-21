@@ -32,41 +32,48 @@ if (pages.royaltyRates === undefined) {
         },
 
 
+        lastSavedRRName: function () {
 
-        errorMessageRR:function()
-        {
 
-          return element(by.css("div>div>div>.validation-message-text"));
+            return element(by.css(".rate-set-summary-table>table>tbody>tr:last-child>td:nth-child(1)"));
+        },
+        lastSaveRRIncomeProvider: function () {
+            return element(by.css(".rate-set-summary-table>table>tbody>tr:last-child>td:nth-child(3)"));
+        },
+        lastSavedRRStartDate: function () {
+
+            return element(by.css(".rate-set-summary-table>table>tbody>tr:last-child>td:nth-child(4)"));
         },
 
-        closeErrorModalHeader:function()
-        {
 
-       return $(".fa.fa-times.pull-right");
+        errorMessageRR: function () {
+
+            return element(by.css("div>div>div>.validation-message-text"));
+        },
+
+        closeErrorModalHeader: function () {
+
+            return $(".fa.fa-times.pull-right");
         }
-,
-    payout:function()
-    {
+        ,
+        payout: function () {
 
-        return  element.all(by.css(".tg-selectize-contractual-rate__ul>li:first-child")).get(0);
-    },
+            return element.all(by.css(".tg-selectize-contractual-rate__ul>li:first-child")).get(0);
+        },
 
-    contractualRateInput :function()
-    {
+        contractualRateInput: function () {
 
-        return element(by.model("set.rate_percentage"));
+            return element(by.model("set.rate_percentage"));
 
-    }
-,
-    effectiveStartDateInput :function()
-    {
+        }
+        ,
+        effectiveStartDateInput: function () {
 
-        return element(by.css(".rate-set-calendar>div>.date-picker-input"));
-    }
+            return element(by.css(".rate-set-calendar>div>.date-picker-input"));
+        }
 
-    ,
-        newRoyaltyRateSetButton:function()
-        {
+        ,
+        newRoyaltyRateSetButton: function () {
             return element(by.css(" .ng-warn.ng-warn-check-publisher-share-set>div:not(.view-header)>a"));
 
         },
@@ -81,13 +88,12 @@ if (pages.royaltyRates === undefined) {
             return element(by.css(".scope-heading.clearfix.relative"));
         }
         ,
-        onReceiptMethodButton:function()
-        {
+        onReceiptMethodButton: function () {
             return element(by.css(".rate-set-rate-ram>.btn-group")).element(by.buttonText("On Receipt"));
 
 
         }
-,
+        ,
 
 
         //LOCATORS END
@@ -99,7 +105,7 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
 
 
-            pages.base.scrollIntoView(  this.newRoyaltyRateSetButton());
+            pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
             this.newRoyaltyRateSetButton().click();
         }
         ,
@@ -179,76 +185,74 @@ if (pages.royaltyRates === undefined) {
 
             sentKeys = sentKeys.trim();
 
-            if(sentKeys != "") {
+            if (sentKeys != "") {
 
-            var table = sentKeys.split(",");
-
-
-
-            _.each(table, function (element) {
+                var table = sentKeys.split(",");
 
 
-
-                sentKeys = element;
-
-            var incomeProviderInput;
-                incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
+                _.each(table, function (element) {
 
 
+                    sentKeys = element;
+
+                    var incomeProviderInput;
+                    incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
 
 
-                pages.base.scrollIntoView($(".flex1>.ng-valid>div>div>div>div>div>input"));
+                    pages.base.scrollIntoView($(".flex1>.ng-valid>div>div>div>div>div>input"));
 
-                var suggestion = $(".tg-typeahead__item-left>strong");
+                    var suggestion = $(".tg-typeahead__item-left>strong");
 
-                browser.wait(ExpectedConditions.invisibilityOf(suggestion));
-
-
-            incomeProviderInput.sendKeys(sentKeys);
-         //   incomeProviderInput.click();
+                    browser.wait(ExpectedConditions.invisibilityOf(suggestion));
 
 
-                 suggestion = $(".tg-typeahead__item-left>strong");
-            browser.wait(ExpectedConditions.visibilityOf(suggestion));
-            //expect(suggestion.getText()).not.toContain("No results");
+                    incomeProviderInput.sendKeys(sentKeys);
+                    //   incomeProviderInput.click();
 
 
-               // incomeProviderInput.sendKeys(protractor.Key.ENTER);
-                suggestion.click();
-
-            var desiredOption;
-            //
-            //browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
-            //    .then(function findMatchingOption(options) {
-            //        options.some(function (option) {
-            //            option.getText().then(function doesOptionMatch(text) {
-            //
-            //
-            //                    if( text.search(sentKeys) > -1){
-            //
-            //                        desiredOption = option;
-            //                        return true;
-            //                    }
-            //                }
-            //            )
-            //        });
-            //    })
-            //    .then(function clickOption() {
-            //        if (desiredOption) {
-            //
-            //            console.log("MAtch");
-            //           // desiredOption.click();
-            //            incomeProviderInput.sendKeys(protractor.Key.ENTER);
-            //        }
-            //    });
+                    suggestion = $(".tg-typeahead__item-left>strong");
+                    browser.wait(ExpectedConditions.visibilityOf(suggestion));
+                    //expect(suggestion.getText()).not.toContain("No results");
 
 
-        })}},
+                    // incomeProviderInput.sendKeys(protractor.Key.ENTER);
+                    suggestion.click();
+
+                    var desiredOption;
+                    //
+                    //browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
+                    //    .then(function findMatchingOption(options) {
+                    //        options.some(function (option) {
+                    //            option.getText().then(function doesOptionMatch(text) {
+                    //
+                    //
+                    //                    if( text.search(sentKeys) > -1){
+                    //
+                    //                        desiredOption = option;
+                    //                        return true;
+                    //                    }
+                    //                }
+                    //            )
+                    //        });
+                    //    })
+                    //    .then(function clickOption() {
+                    //        if (desiredOption) {
+                    //
+                    //            console.log("MAtch");
+                    //           // desiredOption.click();
+                    //            incomeProviderInput.sendKeys(protractor.Key.ENTER);
+                    //        }
+                    //    });
+
+
+                })
+            }
+        },
         getIncomeProviderInputValue: function () {
 
             var incomeProviderInput;
 
-            incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li.ux-multiselect-item.ng-scope.ng-binding"));
+            incomeProviderInput = element.all(by.css(".tg-typeahead__tag-name.ng-binding")).get(2);
 
             return incomeProviderInput.getText();
 
@@ -377,11 +381,9 @@ if (pages.royaltyRates === undefined) {
             effectiveStartDateContextualHelp = element(by.css(".tooltip"));
 
 
-
             browser.wait(ExpectedConditions.visibilityOf(effectiveStartDateContextualHelp), 10000);
 
             return effectiveStartDateContextualHelp.getText();
-
 
 
         },
@@ -397,13 +399,12 @@ if (pages.royaltyRates === undefined) {
         typeIntoEffectiveStartDateInput: function (date) {
 
             date = date.trim();
-            if(date!="")
-            {
-            //var effectiveStartDateInput;
-            //effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
-            this.effectiveStartDateInput().clear();
-            this.effectiveStartDateInput().sendKeys(date);
-            browser.driver.sleep(2000);
+            if (date != "") {
+                //var effectiveStartDateInput;
+                //effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
+                this.effectiveStartDateInput().clear();
+                this.effectiveStartDateInput().sendKeys(date);
+                browser.driver.sleep(2000);
             }
 
         },
@@ -431,7 +432,6 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.contractualRateInput()));
 
 
-
             this.contractualRateInput().sendKeys(percentage);
             this.contractualRateInput().click();
             //var payout;
@@ -444,9 +444,6 @@ if (pages.royaltyRates === undefined) {
         }
         ,
         clickOnReceiptApplicationMethod: function () {
-
-
-
 
 
             this.onReceiptMethodButton().click();
@@ -477,19 +474,12 @@ if (pages.royaltyRates === undefined) {
             this.scopeHeading().click();
 
 
-
-
         },
 
-        errorMessageIsDisplayed :function()
-        {
+        errorMessageIsDisplayed: function () {
 
 
-
-
-
-                return this.errorMessageRR().isPresent();
-
+            return this.errorMessageRR().isPresent();
 
 
         }

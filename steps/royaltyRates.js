@@ -1,5 +1,6 @@
 var _ = require("lodash");
 var promise = protractor.promise;
+hash.royaltyRates = {};
 var ExpectedConditions = protractor.ExpectedConditions;
 if (steps.royaltyRates === undefined) {
     steps.royaltyRates = {
@@ -109,32 +110,26 @@ if (steps.royaltyRates === undefined) {
             });
         },
 
-        addEffectiveStartDate: function (date)
-        {
-          it("Type effective start date into input",function(){
+        addEffectiveStartDate: function (date) {
+            it("Type effective start date into input", function () {
 
-              pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
-          })  ;
+                pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
+            });
 
 
         },
-        selectIncomeProviderByPartialMatch:function(provider)
-        {
-          it("Add an Income Provider",function{
+        addIncomeProviderByPartialMatch: function (provider) {
+            it("Add an Income Provider", function () {
 
-              pages.royaltyRates.  pages.royaltyRates.selectIncomeProviderByPartialMatch(provider);
+                pages.royaltyRates.selectIncomeProviderByPartialMatch(provider);
 
-        })  ;
+            });
 
         },
-        incomeProviderIsPresent: function(provider)
-        {
+        incomeProviderIsPresent: function (provider) {
 
-            it("The Income Provider is succesfully added",function()
-            {
-                expect( pages.royaltyRates.getIncomeProviderInputValue()).toBe(provider);
-
-
+            it("The Income Provider is succesfully added", function () {
+                expect(pages.royaltyRates.getIncomeProviderInputValue()).toBe(provider);
 
 
             });
@@ -142,20 +137,18 @@ if (steps.royaltyRates === undefined) {
 
         ,
 
-        incomeDateMethodToggleIsDisplayed: function()
-        {
+        incomeDateMethodToggleIsDisplayed: function () {
 
-            it("Income Date Method Toggle Is Displayed  ",function() {
+            it("Income Date Method Toggle Is Displayed  ", function () {
 
                 expect(pages.royaltyRates.isIncomeDateMethodToggleVisible()).toBeTruthy();
 
 
             });
         },
-        dealSigningTerritoryIsSelected:function()
-        {
+        dealSigningTerritoryIsSelected: function () {
 
-            it("Deal Signing Territory - is selected",function() {
+            it("Deal Signing Territory - is selected", function () {
 
 
                 expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Deal Signing Territory');
@@ -164,10 +157,9 @@ if (steps.royaltyRates === undefined) {
 
 
         },
-        selectDealSigningTerritoryToggle:function()
-        {
+        selectDealSigningTerritoryToggle: function () {
 
-            it("Select Deal Signing Territory ",function() {
+            it("Select Deal Signing Territory ", function () {
 
 
                 pages.royaltyRates.clickDealSigningTerritoryToggle();
@@ -176,10 +168,9 @@ if (steps.royaltyRates === undefined) {
 
 
         },
-        selectWarnerChappellToggle:function()
-        {
+        selectWarnerChappellToggle: function () {
 
-            it("Select Warner Chappell Toggle",function() {
+            it("Select Warner Chappell Toggle", function () {
 
 
                 pages.royaltyRates.clickWarnerChappellToggle();
@@ -188,10 +179,9 @@ if (steps.royaltyRates === undefined) {
 
 
         },
-        warnerChappellToggleIsSelected:function()
-        {
+        warnerChappellToggleIsSelected: function () {
 
-            it("Warner Chappell - is selected",function() {
+            it("Warner Chappell - is selected", function () {
 
 
                 expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Warner Chappell');
@@ -201,11 +191,8 @@ if (steps.royaltyRates === undefined) {
 
         },
 
-        inspectEffectiveStartDateArea: function()
-
-        {
-            it("Inspect Effective Start Date Area ",function()
-                {
+        inspectEffectiveStartDateArea: function () {
+            it("Inspect Effective Start Date Area ", function () {
 
                     expect(pages.royaltyRates.effectiveStartDateLabelIsPresent()).toBeTruthy();
                     expect(pages.royaltyRates.effectiveStartDateInputFieldIsPresent()).toBeTruthy();
@@ -214,14 +201,12 @@ if (steps.royaltyRates === undefined) {
                     expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe("2015-03-12")
 
 
-
-
                 }
             );
 
         },
 
-        checkEffectiveStartDateErrorMessages:function(table, message) {
+        checkEffectiveStartDateErrorMessages: function (table, message) {
 
             console.log("Inspect Effective Start Date Error Messages")
 
@@ -233,10 +218,9 @@ if (steps.royaltyRates === undefined) {
                 var consoleMessage;
 
                 consoleMessage = message.replace("%errorMessage%", errorMessage);
-                consoleMessage =  consoleMessage.replace("%date%", date);
+                consoleMessage = consoleMessage.replace("%date%", date);
 
-                it(consoleMessage,function()
-                    {
+                it(consoleMessage, function () {
 
                         //it(message.replace("%name%", name), function() {
                         //    var real_trade = helper.getTradeByName(name);
@@ -248,33 +232,29 @@ if (steps.royaltyRates === undefined) {
 
 
                         pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
-                        expect(  pages.royaltyRates.getEffectiveStartDateErrorMessage()).toBe(errorMessage);
-
+                        expect(pages.royaltyRates.getEffectiveStartDateErrorMessage()).toBe(errorMessage);
 
 
                     }
                 );
 
 
-            })},
+            })
+        },
 
-        setEffectiveStartDate: function(date)
-        {
-            it("Set Effective Start Date",function()
-            {
+        setEffectiveStartDate: function (date) {
+            it("Set Effective Start Date", function () {
 
                 pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
 
-               // pages.royaltyRates.clickGeneric(element);
+                // pages.royaltyRates.clickGeneric(element);
 
             });
 
         },
 
-        openEffectiveStartDateCalender: function()
-        {
-            it("Open Effective start date calender",function()
-            {
+        openEffectiveStartDateCalender: function () {
+            it("Open Effective start date calender", function () {
 
 
                 pages.royaltyRates.clickEffectiveStartDateCalendarIcon();
@@ -285,66 +265,57 @@ if (steps.royaltyRates === undefined) {
 
         },
 
-        addRatePercentageToContractualField: function(percentage)
-        {
-            it("Add Percentage to Contractual Rate Field",function(){
+        addRatePercentageToContractualField: function (percentage) {
+            it("Add Percentage to Contractual Rate Field", function () {
 
                 pages.royaltyRates.addPercentageToContractualRateInput(percentage);
 
             });
 
         },
-        clickOnReceiptApplicationMethod:function()
-        {
-            it("Change Rate Application Method to On Receipt",function(){
+        clickOnReceiptApplicationMethod: function () {
+            it("Change Rate Application Method to On Receipt", function () {
 
                 pages.royaltyRates.clickOnReceiptApplicationMethod();
 
             });
 
         },
-        rejectChangingRateApplicationMethod: function()
-        {
-            it("Reject Changing the Rate Application Method to On Receipt",function(){
+        rejectChangingRateApplicationMethod: function () {
+            it("Reject Changing the Rate Application Method to On Receipt", function () {
 
 
             });
         },
-        confirmChangingRateApplicationMethod:function()
-        {
-            it("Confirm Changing the Rate Application Method to On Receipt",function(){
+        confirmChangingRateApplicationMethod: function () {
+            it("Confirm Changing the Rate Application Method to On Receipt", function () {
 
                 pages.royaltyRates.clickYesOnRateMethodModal();
 
             });
         },
-        saveRateSet:function()
-        {
-            it("Save current Rate Set",function(){
+        saveRateSet: function () {
+            it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
             });
         },
-        closeRateSet:function()
-        {
-            it("Close current Rate Set ",function(){
+        closeRateSet: function () {
+            it("Close current Rate Set ", function () {
 
 
             });
         },
 
-        openRateSetPanel:function()
-        {
-            it("  ",function(){
+        openRateSetPanel: function () {
+            it("  ", function () {
 
 
             });
         },
 
-        openSavedScope:function()
-        {
-            it("Click Scope Heading",function()
-            {
+        openSavedScope: function () {
+            it("Click Scope Heading", function () {
 
                 pages.royaltyRates.clickScopeHeading();
 
@@ -353,11 +324,59 @@ if (steps.royaltyRates === undefined) {
 
         },
 
-        pause: function(){
-
-
-            it("Pause Step",function()
+        storeRRData:function()
+        {
+            it("Save Data Contained in RR Set",function()
             {
+
+                hash.royaltyRates.RRName = pages.royaltyRates.getRRInputValue();
+                hash.royaltyRates.RRIncomeProvider = pages.royaltyRates.getIncomeProviderInputValue();
+                hash.royaltyRates.StartDate = pages.royaltyRates.getEffectiveStartDateInputValue();
+
+
+
+
+
+
+
+            })
+
+
+
+
+        }
+,
+
+        verifyRateSetSavedData:function()
+        {
+
+            it("Check that RR data was saved succsefully",function(){
+
+
+                browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.lastSavedRRName()));
+
+                pages.base.scrollIntoView(pages.royaltyRates.lastSavedRRName());
+
+
+                expect(hash.royaltyRates.RRName).toEqual(pages.royaltyRates.lastSavedRRName().getText());
+                expect(hash.royaltyRates.RRIncomeProvider).toEqual(pages.royaltyRates.lastSaveRRIncomeProvider().getText());
+                expect(hash.royaltyRates.StartDate).toEqual(pages.royaltyRates.lastSavedRRStartDate().getText());
+
+
+
+
+
+            })
+
+
+
+
+        },
+
+        pause: function () {
+
+
+            it("Pause Step", function () {
                 browser.manage().timeouts().pageLoadTimeout(10000);
 
             });
@@ -366,29 +385,18 @@ if (steps.royaltyRates === undefined) {
 
 
 
+        test: function () {
 
 
-
-
-
-
-
-
-
-
-
-    test: function(){
-
-
-            it("Test Step",function()
-            {
+            it("Test Step", function () {
                 browser.pause();
 
             });
 
         }
 
-    };
+
+    }
 }
 
 module.exports = steps.royaltyRates;

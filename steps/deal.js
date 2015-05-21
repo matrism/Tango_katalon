@@ -27,6 +27,18 @@ if (steps.deal === undefined) {
             });
         },
 
+        clickFirstScopeHeader:function()
+        {
+            it("Click the first scope header",function(){
+
+          pages.deal.clickScopeHeader();
+
+
+            });
+
+
+        },
+
         waitForDealToBeSaved: function () {
             it("Expect deal screen to be loaded and brief number displayed ", function () {
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));

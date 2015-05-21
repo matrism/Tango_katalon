@@ -15,6 +15,14 @@ if (pages.deal === undefined) {
             scopeHeader : {css: ".scope-heading"}
         },
 
+
+        //TODO DSP locators are bad , dom can change between wait calls and locators keep a cached version
+        scopeHeaderElement:function()
+        {
+            return element(by.css(".scope-heading"));
+
+        },
+
         continueToNextPage: function () {
             pages.deal.elems.continueButton.click();
         },
@@ -37,8 +45,13 @@ if (pages.deal === undefined) {
 
         clickScopeHeader:function(){
 
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.scopeHeader));
-            pages.deal.elems.scopeHeader.click();
+            // browser.waitForAngular();
+            browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
+        //    browser.driver.sleep(10000);
+
+         //  ftf.helper.waitForElement(pages.deal.scopeHeaderElement(),30000);
+          //  browser.waitForAngular();
+            pages.deal.scopeHeaderElement().click();
         }
     });
 }

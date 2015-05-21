@@ -21,20 +21,38 @@ require(steps_path + "login");
 
 var beforeFeature = function () {
         steps.login.itLogin();
-        steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-        steps.deal.itContinueToNextPage();
-        steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-        steps.create_deal_scope.itAddSimpleScope();
+
     },
 
     feature = [{
         name: "As a user I want to assign single rate to Scope on creation",
-        tags: ["ratesToSCope1"],
+        tags: ["rateToScope1"],
         steps: function () {
 
+            steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+            steps.create_deal_scope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.selectIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRData();
+
+
+
+
+            steps.royaltyRates.saveRateSet();
+
+
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.clickFirstScopeHeader();
+            steps.royaltyRates.verifyRateSetSavedData();
+
 
 
 
@@ -51,9 +69,9 @@ var beforeFeature = function () {
 
 
             }
-        },
+        }
 
-
+];
 
 
 
