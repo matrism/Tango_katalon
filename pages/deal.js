@@ -25,6 +25,7 @@ if (pages.deal === undefined) {
 
         continueToNextPage: function () {
             pages.deal.elems.continueButton.click();
+
         },
 
         saveNewDeal: function () {
@@ -46,8 +47,11 @@ if (pages.deal === undefined) {
         clickScopeHeader:function(){
 
             // browser.waitForAngular();
+            pages.base.waitForAjax();
+         //   browser.driver.sleep(10000);
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
-        //    browser.driver.sleep(10000);
+
+
 
          //  ftf.helper.waitForElement(pages.deal.scopeHeaderElement(),30000);
           //  browser.waitForAngular();

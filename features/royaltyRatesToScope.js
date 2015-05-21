@@ -63,9 +63,34 @@ var beforeFeature = function () {
             tags: ["ratesToSCope2"],
             steps: function () {
 
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
                 steps.royaltyRates.addNewRoyaltySet();
-                steps.royaltyRates.inspectRateSetForm();
-                steps.royaltyRates.closeRateSetForm();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                //Have an array of displayed
+
+
+
+
+
+                steps.royaltyRates.saveRateSet();
+
+
+
+                steps.royaltyRates.storeAllRRData();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+                steps.royaltyRates.verifyAllRateSetSavedData();
 
 
             }

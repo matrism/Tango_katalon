@@ -347,6 +347,10 @@ if (steps.incomeProvider === undefined) {
                         pages.deal.continueToNextPage();
                         pages.deal.saveNewDeal();
 
+
+
+                        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+
                         pages.deal.clickScopeHeader();
 
 
