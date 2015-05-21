@@ -702,17 +702,13 @@ module.exports.enterCreatorContribution = function(i, value) {
 	element.sendKeys(value);
 };
 exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
-    var modalHeading;
     more = more || {};
-    if(more.timeout === undefined) {
-        more.timeout = _tf_config._system_.wait_timeout;
-    }
-    modalHeading = pages.base.modalHeading();
-    browser.wait(
-        ExpectedConditions.visibilityOf(modalHeading),
-        more.timeout
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'SIMILAR WORKS ARE FOUND'
     );
-    expect(modalHeading.getText()).toContain('SIMILAR WORKS ARE FOUND');
 };
 exports.expectSimilarWorksPopUpToHaveScrollbar = function() {
     expect(pages.base.elementHasVerticalScrollbar(
