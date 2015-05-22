@@ -105,6 +105,11 @@ exports.compositeWorkCheckbox = function() {
 exports.compositeWorkTypeDropdown = function() {
     return element(by.model('work.contribution.composite_type'));
 };
+exports.confirmMakingIntoMedleyButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Yes')
+    );
+};
 module.exports.editCreatorNameInputs = function() {
 	return element.all(by.model("creator.person_name"));
 };
@@ -746,6 +751,18 @@ exports.selectCompositeWorkType = function(value) {
     var element = exports.compositeWorkTypeDropdown();
     pages.base.scrollIntoView(element);
     pages.base.selectDropdownOption(element, value);
+};
+exports.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'ARE YOU SURE YOU WANT TO MAKE THIS WORK AS MEDLEY COMPOSITE WORK?'
+    );
+};
+exports.confirmMakingIntoMedley = function() {
+    exports.confirmMakingIntoMedleyButton().click();
 };
 exports.enterComponentWorkSearchTerms = function(i, value) {
     var element = exports.componentWorkSearchTermsField(i);

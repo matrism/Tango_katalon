@@ -138,6 +138,20 @@ exports.selectCompositeWorkType = function(value, data, key) {
         data[key] = value;
     });
 };
+exports.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed = function() {
+    it('Expect making into Medley confirmation pop-up to be displayed', function() {
+        pages.work.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed();
+    });
+};
+exports.confirmMakingIntoMedley = function(data, key) {
+    it('Confirm making work into a Medley', function() {
+        pages.work.confirmMakingIntoMedley();
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'creators';
+        data[key] = [];
+    });
+};
 module.exports.calculateEvenCreatorContributions = function() {
 	var deferred = promise.defer();
 	it("Calculate even creator contributions", function() {
