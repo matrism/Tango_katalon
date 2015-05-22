@@ -29,6 +29,7 @@ if (pages.deal === undefined) {
 
         saveNewDeal: function () {
             pages.deal.elems.saveDealButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
         },
 
         expectContinueButtonEnabled: function () {
