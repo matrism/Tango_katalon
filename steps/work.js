@@ -124,6 +124,20 @@ module.exports.editCreators = function() {
 		pages.work.editCreatorsButton()
 	);
 };
+exports.clickCompositeWorkCheckbox = function() {
+    it('Click composite work checkbox', function() {
+        pages.work.clickCompositeWorkCheckbox();
+    });
+};
+exports.selectCompositeWorkType = function(value, data, key) {
+    key = key || 'compositeWorkType';
+    data = data || hash.subjectWorkData || {};
+
+    it('Select composite work type', function() {
+        pages.work.selectCompositeWorkType(value);
+        data[key] = value;
+    });
+};
 module.exports.calculateEvenCreatorContributions = function() {
 	var deferred = promise.defer();
 	it("Calculate even creator contributions", function() {
@@ -140,6 +154,19 @@ module.exports.selectDifferentRandomCreator = function(i) {
 		));
 	});
 	return deferred.promise;
+};
+exports.enterMediumCreatorContribution = function(i, contribution, data, key) {
+    it('Enter medium creator contribution #' + (i + 1), function() {
+        var creator;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'creators';
+        data[key] = data[key] || [];
+        creator = data[key][i] = data[key][i] || {};
+
+        creator.contribution = 50;
+        pages.work.enterCreatorContribution(i, creator.contribution);
+    });
 };
 exports.enterCreatorContribution = function(i, contribution, data, key) {
     it("Enter creator contribution #" + (i + 1), function() {

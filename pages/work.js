@@ -99,6 +99,9 @@ module.exports.editCreatorsButton = function() {
 			"contributionEditForm)']"
 	);
 };
+exports.compositeWorkCheckbox = function() {
+    return element(by.model('work.contribution.isCompositeWork'));
+};
 exports.compositeWorkTypeDropdown = function() {
     return element(by.model('work.contribution.composite_type'));
 };
@@ -733,6 +736,16 @@ exports.expectSimilarWorksPopUpToHaveScrollbar = function() {
     expect(pages.base.elementHasVerticalScrollbar(
         exports.similarWorksPopUpScrollArea()
     )).toBeTruthy();
+};
+exports.clickCompositeWorkCheckbox = function() {
+    var element = exports.compositeWorkCheckbox();
+    pages.base.scrollIntoView(element);
+    element.click();
+};
+exports.selectCompositeWorkType = function(value) {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    pages.base.selectDropdownOption(element, value);
 };
 exports.enterComponentWorkSearchTerms = function(i, value) {
     var element = exports.componentWorkSearchTermsField(i);
