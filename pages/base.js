@@ -66,6 +66,10 @@ exports.selectDropdownOption = function(element, value, more) {
     more.dropdownType = more.dropdownType || 'standard';
     return exports.selectDropdownOption[more.dropdownType](element, value, more);
 };
+exports.selectDropdownOption.standard = function(element, value) {
+    element.click();
+    element.element(by.cssContainingText('option', value)).click();
+};
 exports.selectDropdownOption.tg = function(element, value) {
     element.click();
     element.element(by.cssContainingText('.ng-binding', value)).click();
