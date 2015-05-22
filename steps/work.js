@@ -141,10 +141,18 @@ module.exports.selectDifferentRandomCreator = function(i) {
 	});
 	return deferred.promise;
 };
-module.exports.enterCreatorContribution = function(i, contribution) {
-	it("Enter creator contribution #" + (i + 1), function() {
-		pages.work.enterCreatorContribution(i, contribution);
-	});
+exports.enterCreatorContribution = function(i, contribution, data, key) {
+    it("Enter creator contribution #" + (i + 1), function() {
+        var creator;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'creators';
+        data[key] = data[key] || [];
+        creator = data[key][i] = data[key][i] || {};
+
+        pages.work.enterCreatorContribution(i, contribution);
+        creator.contribution = contribution;
+    });
 };
 module.exports.expectFirstCreatorContributionFieldValueToBe = function(value) {
 	it("Validate creator contribution #1", function() {
