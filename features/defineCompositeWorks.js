@@ -3,7 +3,7 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
     random = require('../helpers/random'),
-    randomIds = _.times(5, random.id);
+    randomIds = _.times(6, random.id);
 
 require(steps_path + 'login');
 require(steps_path + 'new_work');
@@ -152,6 +152,39 @@ var beforeFeature = [
                 [steps.work.confirmMakingIntoMedley],
                 [steps.work.selectFirstComponentWorkMatching, [0, 'TEST']],
                 [steps.work.enterMediumComponentWorkAllocation, [0]],
+                [steps.work.selectFirstComponentWorkMatching, [1, 'AAA']],
+                [steps.work.enterMediumComponentWorkAllocation, [1]],
+                [steps.work.saveCreators],
+                [steps.base.refreshPage],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.validateComponentWorkName, [0]],
+                [steps.work.validateComponentWorkAllocation, [0]],
+                [steps.work.validateComponentWorkName, [1]],
+                [steps.work.validateComponentWorkAllocation, [1]],
+            ]
+        },
+        {
+            name: 'Change a Composite of Samples work into a Medley',
+            tags: [],
+            steps: [
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomIds[5]]],
+                [steps.new_work.clickCompositeWorkCheckbox],
+                [steps.new_work.selectCompositeWorkType, ['Composite of Samples']],
+                [steps.new_work.selectRandomCreator, [0]],
+                [steps.new_work.enterMediumCreatorContribution, [0]],
+                [steps.new_work.selectFirstComponentWorkMatching, [0, 'TEST']],
+                [steps.new_work.enterMediumComponentWorkAllocation, [0]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.sleep, [100]],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.selectCompositeWorkType, ['Medley']],
+                [steps.work.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed],
+                [steps.work.confirmMakingIntoMedley],
                 [steps.work.selectFirstComponentWorkMatching, [1, 'AAA']],
                 [steps.work.enterMediumComponentWorkAllocation, [1]],
                 [steps.work.saveCreators],
