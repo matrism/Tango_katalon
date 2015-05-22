@@ -9,7 +9,7 @@ exports = module.exports = pages.base = new ftf.pageObject ({
 	}
 });
 exports.modalHeading = function() {
-    return $('.modal-header h3');
+    return $('.modal-header h3, .modal-header h4');
 };
 exports.modalHeadingText = function() {
     return exports.modalHeading().getText();
