@@ -28,10 +28,10 @@ var beforeFeature = function () {
             steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
             steps.create_deal_scope.itAddSimpleScope();
             steps.create_deal_scope.itAddPublisherShare();
-            steps.deal.itContinueToNextPage();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+            //steps.deal.itContinueToNextPage();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
         }
     }];
 

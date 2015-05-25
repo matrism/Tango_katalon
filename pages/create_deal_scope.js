@@ -20,7 +20,8 @@ if (pages.create_deal_scope === undefined) {
             firstPublisherNameAMCollectPercent: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"},
             publisherNameDropDownData: {css: "ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"},
             firstPublisherTypeEOrPAArrow: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-caret.fa.fa-caret-down"},
-            firstPublisherTypeEOrPADropDown: {css: "ul.typeahead.dropdown-menu.ng-scope li.ng-scope"},
+            firstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
+            firstPublisherTypeValue: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
             savePublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             cancelPublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"}
         },
@@ -145,16 +146,17 @@ if (pages.create_deal_scope === undefined) {
 
         clickOnPublisherTypeEOrPAArrow: function () {
             pages.create_deal_scope.elems.firstPublisherTypeEOrPAArrow.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherTypeEOrPADropDown));
         },
 
-        selectSpecificOptionEOrPAPublisherType: function (publisherType) {
+        selectSpecificOptionEOrPAPublisherType: function(publisher){
             var desiredOption;
-            browser.wait(pages.create_deal_scope.elems.firstPublisherTypeEOrPADropDown);
-            browser.driver.findElements(by.css("ul.typeahead.dropdown-menu.ng-scope li.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherTypeEOrPADropDown));
+            browser.driver.findElements(by.css("#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"))
                 .then(function findMatchingOption(options) {
-                    options.forEach(function (option) {
+                    options.some(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(publisherType) != -1) {
+                                if (text.indexOf(publisher) != -1) {
                                     desiredOption = option;
                                     return true;
                                 }

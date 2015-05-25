@@ -85,18 +85,47 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        selectDesiredPublisherTypeEOrPADropDown: function () {
+            it("Select desired publisher type E or PA from drop down", function () {
+                pages.create_deal_scope.clickOnPublisherTypeEOrPAArrow();
+                pages.create_deal_scope.selectSpecificOptionEOrPAPublisherType("PA");
+            });
+        },
+
+        fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA: function () {
+            it("Fill first publisher name fields based on publisher type E or PA", function () {
+                pages.create_deal_scope.elems.firstPublisherTypeValue.getText()
+                    .then(function (promise) {
+                        console.log("Publisher type is: " + promise);
+                        switch (promise) {
+                            case "E":
+                                console.log("We are on the E case");
+                                pages.create_deal_scope.fillInFirstPublisherNameField();
+                                pages.create_deal_scope.selectRandomPublisherNameDropDown();
+                                pages.create_deal_scope.fillInFirstPublisherNameOwnPercent();
+                                pages.create_deal_scope.fillInFirstPublisherNameCollectPercent();
+                                break;
+                            case "PA":
+                                console.log("We are on the PA case");
+                                pages.create_deal_scope.fillInFirstPublisherNameField();
+                                pages.create_deal_scope.selectRandomPublisherNameDropDown();
+                                pages.create_deal_scope.fillInFirstPublisherNameCollectPercent();
+                                break;
+                        }
+                    });
+            });
+        },
+
         itAddPublisherShare: function () {
             describe("Add publisher share set", function () {
                     steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
                     steps.create_deal_scope.clickOnAddPublisherShareSet();
-                    steps.create_deal_scope.fillIntoFirstPublisherNameField();
-                    steps.create_deal_scope.selectRandomPublisherNameDropDownValue();
-                    steps.create_deal_scope.fillIntoFirstPublisherNameOwnField();
-                    steps.create_deal_scope.fillIntoFirstPublisherNameCollectField();
-                    steps.create_deal_scope.fillIntoFirstPublisherNameAMField();
-                    steps.create_deal_scope.selectSpecificPublisherNameDropDown();
-                    steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
-                    steps.create_deal_scope.saveThePublisherShareSet();
+                    steps.create_deal_scope.selectDesiredPublisherTypeEOrPADropDown();
+                    steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+                    //steps.create_deal_scope.fillIntoFirstPublisherNameAMField();
+                    //steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+                    //steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
+                    //steps.create_deal_scope.saveThePublisherShareSet();
                 }
             );
         },
