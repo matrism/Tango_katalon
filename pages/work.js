@@ -142,6 +142,14 @@ exports.componentWorkNameBindings = function() {
 exports.componentWorkNameBinding = function(i) {
     return exports.componentWorkNameBindings().get(i);
 };
+exports.componentWorkSearchFilterDropdowns = function() {
+    return exports.componentWorkRows().all(
+        by.model('component.filter')
+    );
+};
+exports.componentWorkSearchFilterDropdown = function(i) {
+    return exports.componentWorkSearchFilterDropdowns().get(i);
+};
 exports.componentWorkSearchTermsField = function(i) {
     return exports.componentWorkRow(i).element(
         by.model('component.selected_work')
@@ -764,6 +772,26 @@ exports.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed = function(more) {
 exports.confirmMakingIntoMedley = function() {
     exports.confirmMakingIntoMedleyButton().click();
 };
+exports.validateRequiredCompositeWorkTypeField = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
+};
+exports.validateDefaultCompositeWorkType = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    expect(pages.base.selectedDropdownOption(element)).toBe('Select type');
+};
+exports.validateDefaultComponentWorkSearchFilter = function(i) {
+    var element = exports.componentWorkSearchFilterDropdown(i);
+    pages.base.scrollIntoView(element);
+    expect(pages.base.selectedDropdownOption(element)).toBe('Title');
+};
+exports.validateRequiredComponentWorkSearchField = function(i) {
+    var element = exports.componentWorkSearchTermsField(i);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
+};
 exports.enterComponentWorkSearchTerms = function(i, value) {
     var element = exports.componentWorkSearchTermsField(i);
     pages.base.scrollIntoView(element);
@@ -772,6 +800,11 @@ exports.enterComponentWorkSearchTerms = function(i, value) {
 };
 exports.expectComponentWorkSuggestionsToBeDisplayed = function() {
     pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
+};
+exports.validateRequiredComponentWorkAllocationField = function(i) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.enterComponentWorkAllocation = function(i, value) {
     var element = exports.componentWorkAllocationInput(i);

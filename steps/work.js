@@ -129,6 +129,16 @@ exports.clickCompositeWorkCheckbox = function() {
         pages.work.clickCompositeWorkCheckbox();
     });
 };
+exports.validateRequiredCompositeWorkTypeField = function() {
+    it('Validate required composite work type field', function() {
+        pages.work.validateRequiredCompositeWorkTypeField();
+    });
+};
+exports.validateDefaultCompositeWorkType = function() {
+    it('Validate default composite work type', function() {
+        pages.work.validateDefaultCompositeWorkType();
+    });
+};
 exports.selectCompositeWorkType = function(value, data, key) {
     key = key || 'compositeWorkType';
     data = data || hash.subjectWorkData || {};
@@ -243,6 +253,16 @@ exports.confirmComponentWorkDeletion = function() {
         pages.work.confirmComponentWorkDeletion();
     });
 };
+exports.validateDefaultComponentWorkSearchFilter = function(i) {
+    it('Validate default component work search filter', function() {
+        pages.work.validateDefaultComponentWorkSearchFilter(i);
+    });
+};
+exports.validateRequiredComponentWorkSearchField = function(i) {
+    it('Validate required component work search field', function() {
+        pages.work.validateRequiredComponentWorkSearchField(i);
+    });
+};
 exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
     it('Enter search terms on component work search field #' + (i + 1), function() {
         pages.work.enterComponentWorkSearchTerms(i, value);
@@ -264,6 +284,11 @@ exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
             component.name = selected.name;
             component.workCode = selected.workCode;
         });
+    });
+};
+exports.validateRequiredComponentWorkAllocationField = function(i) {
+    it('Validate required component work allocation field', function() {
+        pages.work.validateRequiredComponentWorkAllocationField(i);
     });
 };
 exports.enterMediumComponentWorkAllocation = function(i, data, key) {

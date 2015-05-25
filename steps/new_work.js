@@ -188,9 +188,24 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	);
 	return deferred.promise;
 };
+exports.validateDefaultCompositeWorkCheckboxState = function() {
+    it('Validate default composite work checkbox state', function() {
+        pages.new_work.validateDefaultCompositeWorkCheckboxState();
+    });
+};
 exports.clickCompositeWorkCheckbox = function() {
     it('Click composite work checkbox', function() {
         pages.new_work.clickCompositeWorkCheckbox();
+    });
+};
+exports.validateRequiredCompositeWorkTypeField = function() {
+    it('Validate required composite work type field', function() {
+        pages.new_work.validateRequiredCompositeWorkTypeField();
+    });
+};
+exports.validateDefaultCompositeWorkType = function() {
+    it('Validate default composite work type', function() {
+        pages.new_work.validateDefaultCompositeWorkType();
     });
 };
 exports.selectCompositeWorkType = function(value, data, key) {
@@ -200,6 +215,16 @@ exports.selectCompositeWorkType = function(value, data, key) {
     it('Select composite work type', function() {
         pages.new_work.selectCompositeWorkType(value);
         data[key] = value;
+    });
+};
+exports.validateDefaultComponentWorkSearchFilter = function(i) {
+    it('Validate default component work search filter #' + (i + 1), function() {
+        pages.new_work.validateDefaultComponentWorkSearchFilter(i);
+    });
+};
+exports.validateRequiredComponentWorkSearchField = function(i) {
+    it('Validate required component work search field #' + (i + 1), function() {
+        pages.new_work.validateRequiredComponentWorkSearchField(i);
     });
 };
 exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
@@ -299,6 +324,11 @@ module.exports.enterCreatorContribution = function(i, value) {
 			pages.new_work.enterCreatorContribution(i, value);
 		}
 	);
+};
+exports.validateRequiredComponentWorkAllocationField = function(i) {
+    it('Validate required component work allocation field #' + (i + 1), function() {
+        pages.new_work.validateRequiredComponentWorkAllocationField(i);
+    });
 };
 exports.enterMediumComponentWorkAllocation = function(i, data, key) {
     it('Enter 50% allocation for component work #' + (i + 1), function() {

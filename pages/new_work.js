@@ -1,6 +1,7 @@
 "use strict";
 var _ = require("lodash");
 var pages_path = _tf_config._system_.path_to_pages;
+var pph = require('../helpers/pph');
 var random = require('../helpers/random');
 require(pages_path + "base");
 exports = module.exports = pages.new_work = new ftf.pageObject({
@@ -38,6 +39,14 @@ exports.compositeWorkTypeDropdown = function() {
 };
 exports.componentWorkRows = function() {
     return element.all(by.repeater('component in work.components'));
+};
+exports.componentWorkSearchFilterDropdowns = function() {
+    return exports.componentWorkRows().all(
+        by.model('component.filter')
+    );
+};
+exports.componentWorkSearchFilterDropdown = function(i) {
+    return exports.componentWorkSearchFilterDropdowns().get(i);
 };
 exports.componentWorkSearchField = function(i) {
     return exports.componentWorkRows().get(i).element(
@@ -339,11 +348,26 @@ module.exports.enterAlternateWorkTitle = function(i, title) {
 	element.clear();
 	element.sendKeys(title);
 };
+exports.validateDefaultCompositeWorkCheckboxState = function() {
+    var element = exports.compositeWorkCheckbox();
+    pages.base.scrollIntoView(element);
+    expect(element.getAttribute('checked')).toBeFalsy();
+};
 exports.clickCompositeWorkCheckbox = function() {
     var element = exports.compositeWorkCheckbox();
     pages.base.scrollIntoView(element);
     element.click();
     return element.getAttribute('value');
+};
+exports.validateRequiredCompositeWorkTypeField = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
+};
+exports.validateDefaultCompositeWorkType = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    expect(pages.base.selectedTgDropdownOption(element)).toBe('Select type');
 };
 exports.selectCompositeWorkType = function(value) {
     var element = exports.compositeWorkTypeDropdown();
@@ -370,6 +394,16 @@ exports.expectComponentWorkSuggestionsToBeDisplayed = function() {
 };
 exports.expectCreatorSuggestionsToBeDisplayed = function() {
     pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
+};
+exports.validateDefaultComponentWorkSearchFilter = function(i) {
+    var element = exports.componentWorkSearchFilterDropdown(i);
+    pages.base.scrollIntoView(element);
+    expect(pages.base.selectedDropdownOption(element)).toBe('Title');
+};
+exports.validateRequiredComponentWorkSearchField = function(i) {
+    var element = exports.componentWorkSearchField(i);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.selectFirstComponentWorkSuggestion = function() {
     return $$('.typeahead-result').get(0).then(function(suggestion) {
@@ -413,6 +447,11 @@ module.exports.enterCreatorContribution = function(i, value) {
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
+};
+exports.validateRequiredComponentWorkAllocationField = function(i) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.enterComponentWorkAllocation = function(i, value) {
     var element = exports.componentWorkAllocationInput(i);
