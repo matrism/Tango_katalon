@@ -13,8 +13,7 @@ if (steps.create_deal_scope === undefined) {
         addSimpleScope: function () {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
-                pages.create_deal_scope.fillScopeDescriptionField();
-                pages.create_deal_scope.selectContractTypeScope(pages.deal_scope.elems.contractTypeDropDown, "Finder");
+                pages.create_deal_scope.selectRandomContractTypeScope();
                 pages.create_deal_scope.addTerritoryByTypingToScope();
             });
         },
@@ -25,14 +24,14 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        addPublisherShareSet: function () {
+        clickOnAddPublisherShareSet: function () {
             it("Open publisher share set form", function () {
                     pages.create_deal_scope.clickOnAddPublisherShareSetLink();
                 }
             );
         },
 
-        fillInPublisherNameFirstField: function () {
+        fillIntoFirstPublisherNameField: function () {
             it("Fill in publisher name field", function () {
                 pages.create_deal_scope.fillInFirstPublisherNameField();
             });
@@ -44,11 +43,60 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        fillIntoFirstPublisherNameCollectField: function () {
+            it("Fill into first publisher name collect field random value ", function () {
+                pages.create_deal_scope.fillInFirstPublisherNameCollectPercent();
+            });
+        },
+
+        fillIntoFirstPublisherNameAMCollectField: function () {
+            it("Fill into first publisher name AM collect percent random value", function () {
+                pages.create_deal_scope.fillInFirstPublisherNameAMOwnPercent();
+            });
+        },
+
+        fillIntoFirstPublisherNameOwnField: function () {
+            it("Fill into first publisher name own field random value", function () {
+                pages.create_deal_scope.fillInFirstPublisherNameOwnPercent();
+            });
+        },
+
+        fillIntoFirstPublisherNameAMField: function () {
+            it("Fill into first publisher name AM field", function () {
+                pages.create_deal_scope.fillInFirstPublisherNameAMField();
+            });
+        },
+
+        saveThePublisherShareSet: function () {
+            it("Save the publisher share set", function () {
+                pages.create_deal_scope.savePublisherShareSet();
+            });
+        },
+
+        cancelThePublisherShareSet: function () {
+            it("Cancel the publisher share set", function () {
+                pages.create_deal_scope.cancelPublisherShareSet();
+            });
+        },
+
+        selectSpecificPublisherNameDropDown: function () {
+            it("Select specific value publisher name drop down", function () {
+                pages.create_deal_scope.selectSpecificPublisherNameDropDown("WB MUSIC CORP. \n(53026414)")
+            });
+        },
+
         itAddPublisherShare: function () {
             describe("Add publisher share set", function () {
-                    steps.create_deal_scope.addPublisherShareSet();
-                    steps.create_deal_scope.fillInPublisherNameFirstField();
+                    steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
+                    steps.create_deal_scope.clickOnAddPublisherShareSet();
+                    steps.create_deal_scope.fillIntoFirstPublisherNameField();
                     steps.create_deal_scope.selectRandomPublisherNameDropDownValue();
+                    steps.create_deal_scope.fillIntoFirstPublisherNameOwnField();
+                    steps.create_deal_scope.fillIntoFirstPublisherNameCollectField();
+                    steps.create_deal_scope.fillIntoFirstPublisherNameAMField();
+                    steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+                    steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
+                    steps.create_deal_scope.saveThePublisherShareSet();
                 }
             );
         },
