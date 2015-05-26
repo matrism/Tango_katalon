@@ -41,7 +41,7 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("select[name='scopeContractType'] option"))));
             browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
+                    var randomNumber = Math.floor((Math.random() * (options.length-1) + 1));
                     options[randomNumber].click();
                 })
         },
