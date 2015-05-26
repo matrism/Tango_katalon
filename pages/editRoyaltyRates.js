@@ -24,6 +24,13 @@ if (pages.editRoyaltyRates === undefined) {
 
 
         },
+
+        openRRButton:function()
+        {
+            return $(".icon-chevron-down");
+
+        },
+
         rrSumarryTable: function () {
             return element(by.css(".rate-set-summary-table"));
         },
@@ -379,11 +386,19 @@ if (pages.editRoyaltyRates === undefined) {
         ,
         clickRRSumarryTable: function () {
 
+
             browser.wait(ExpectedConditions.visibilityOf(this.rrSumarryTable()));
+
             this.rrSumarryTable().click();
 
         },
-        clickeditSavedRRIcon: function () {
+        clickOpenRRButton:function(){
+
+
+            browser.wait(ExpectedConditions.visibilityOf( this.openRRButton()));
+            this.openRRButton().click();
+        },
+        clickEditSavedRRIcon: function () {
 
 
               browser.wait(ExpectedConditions.visibilityOf(this.editSavedRRIcon()));
@@ -392,6 +407,7 @@ if (pages.editRoyaltyRates === undefined) {
 
         }
         ,
+
 
         getSavedRRName: function () {
             return this.royaltyRateName().getText();

@@ -34,10 +34,13 @@ if (steps.deal === undefined) {
           pages.deal.clickScopeHeader();
 
 
+
             });
 
 
         },
+
+
 
         waitForDealToBeSaved: function () {
             it("Expect deal screen to be loaded and brief number displayed ", function () {

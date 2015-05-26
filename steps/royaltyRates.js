@@ -1,6 +1,7 @@
 var _ = require("lodash");
 var promise = protractor.promise;
 hash.royaltyRates = {};
+hash.royaltyRates.RRNames = [];
 var ExpectedConditions = protractor.ExpectedConditions;
 if (steps.royaltyRates === undefined) {
     steps.royaltyRates = {
@@ -52,6 +53,14 @@ if (steps.royaltyRates === undefined) {
                 }
             );
         },
+        waitForPanel: function () {
+
+            it("Wait for panel", function () {
+                    pages.royaltyRates.waitPanel();
+                }
+            );
+        },
+
         validateRoyaltyRateInput: function () {
 
             it("Error warning is shown for name input", function () {
@@ -77,6 +86,7 @@ if (steps.royaltyRates === undefined) {
 
             });
         },
+
         validateRRInputText: function (text) {
 
             it("Name is succesfully added to textbox", function () {
@@ -118,6 +128,16 @@ if (steps.royaltyRates === undefined) {
 
 
         },
+        cancelRateSet:function()
+        {
+            it("Cancel Rate Set", function () {
+
+                pages.royaltyRates.clickcancelRateSet();
+            });
+
+
+
+        },
         addIncomeProviderByPartialMatch: function (provider) {
             it("Add an Income Provider", function () {
 
@@ -136,6 +156,7 @@ if (steps.royaltyRates === undefined) {
         }
 
         ,
+
 
         incomeDateMethodToggleIsDisplayed: function () {
 
@@ -294,10 +315,31 @@ if (steps.royaltyRates === undefined) {
 
             });
         },
+        openAllRRFields:function()
+        {
+
+            it("Expand all RR groups", function () {
+
+                pages.royaltyRates.expandAllIncomeGroups();
+
+            });
+
+        },
+        setAllFieldValue:function(value)
+        {
+
+            it("Type in  all RR groups", function () {
+
+                pages.royaltyRates.typeInAllInputs(value);
+
+            });
+
+        },
         saveRateSet: function () {
             it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
+                pages.royaltyRates.waitForRRToBeSaved();
             });
         },
         closeRateSet: function () {
@@ -346,21 +388,43 @@ if (steps.royaltyRates === undefined) {
 
         }
 ,
+        saveRRData:function()
+        {
+            //Saves income providers !!
+            it("Save Data Contained in RR Set",function()
+            {
 
+
+                hash.royaltyRates.RRName = pages.royaltyRates.getRRInputValue();
+                hash.royaltyRates.RRIncomeProvider = pages.royaltyRates.getIncomeProviderInputValueOption();
+                hash.royaltyRates.StartDate = pages.royaltyRates.getEffectiveStartDateInputValue();
+
+
+
+
+
+
+
+            })
+
+
+        }
+,
         verifyRateSetSavedData:function()
         {
 
             it("Check that RR data was saved succsefully",function(){
 
 
-                browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.lastSavedRRName()));
 
-                pages.base.scrollIntoView(pages.royaltyRates.lastSavedRRName());
+              browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.firstSavedRRName()));
+
+              pages.base.scrollIntoView(pages.royaltyRates.firstSavedRRName());
 
 
-                expect(hash.royaltyRates.RRName).toEqual(pages.royaltyRates.lastSavedRRName().getText());
-                expect(hash.royaltyRates.RRIncomeProvider).toEqual(pages.royaltyRates.lastSaveRRIncomeProvider().getText());
-                expect(hash.royaltyRates.StartDate).toEqual(pages.royaltyRates.lastSavedRRStartDate().getText());
+                expect(hash.royaltyRates.RRName).toEqual(pages.royaltyRates.firstSavedRRName().getText());
+             //   expect(hash.royaltyRates.RRIncomeProvider).toEqual(pages.royaltyRates.lastSaveRRIncomeProvider().getText());
+              //  expect(hash.royaltyRates.StartDate).toEqual(pages.royaltyRates.lastSavedRRStartDate().getText());
 
 
 
@@ -373,6 +437,111 @@ if (steps.royaltyRates === undefined) {
 
         },
 
+        storeAllRRData:function()
+        {
+            it("Store the added RR's in hashmap",function(){
+
+
+
+                browser.driver.sleep(3000);
+          // console.log(pages.royaltyRates.savedRRNames());
+                pages.royaltyRates.savedRRNames().map(function(item) {
+                   // console.log("MEdvedka");
+                  // hash.royaltyRates.RRNames.push(item.getText());
+                 //   console.log(hash.royaltyRates.RRNames);
+                   return item.getText();
+                }).then(function(labels) {
+
+                    hash.royaltyRates.RRNames.push(labels);
+
+
+
+                });
+
+
+            });
+
+
+
+        },
+        verifyAllRateSetSavedData:function()
+        {
+
+            it("Verify that RR's were saved successfully",function(){
+
+
+
+
+                pages.royaltyRates.savedRRNames().map(function(item) {
+
+                    return item.getText();
+                }).then(function(labels) {
+
+
+                     var temp = [];
+                    temp.push(labels);
+                    expect(temp).toEqual(hash.royaltyRates.RRNames);
+                });
+
+            });
+
+
+        },
+        editIncomeProviderByPartialMatch:function(provider)
+        {
+            it("Edit income provider to "+provider, function(){
+
+                pages.royaltyRates.clearIncomeProviderInput();
+
+
+
+
+
+            pages.royaltyRates.selectIncomeProviderByPartialMatch(provider);
+
+
+            });
+
+
+
+        }
+,
+        editSingleRoyaltySet:function()
+        {
+            it("Click RR edit button",function(){
+
+                browser.wait(ExpectedConditions.visibilityOf( pages.editRoyaltyRates.rrSumarryTable()));
+                browser.wait(ExpectedConditions.elementToBeClickable( pages.editRoyaltyRates.rrSumarryTable()));
+
+
+
+         pages.editRoyaltyRates.clickRRSumarryTable();
+               pages.base.scrollIntoView(pages.editRoyaltyRates.rrSumarryTable());
+var el = pages.editRoyaltyRates.rrSumarryTable();
+
+              browser.actions().mouseMove(el).perform();
+              pages.editRoyaltyRates.clickEditSavedRRIcon();
+              //
+              //
+              //  steps.editRoyaltyRates.openRateSetPanel()
+
+            });
+
+
+        },
+        refreshPage:function()
+        {
+
+            it("Refresh Page",function(){
+
+                browser.driver.navigate().refresh();
+
+
+            });
+
+
+        }
+,
         pause: function () {
 
 

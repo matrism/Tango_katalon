@@ -1,4 +1,5 @@
 "use strict";
+var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.royaltyRates === undefined) {
@@ -31,6 +32,16 @@ if (pages.royaltyRates === undefined) {
 
         },
 
+        rateSetCancelButton:function()
+        {
+
+          return $(".btn-cancel");
+        },
+        incomeProviderDeleteButtons:function(){
+
+          return element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove"));
+
+        },
 
         lastSavedRRName: function () {
 
@@ -44,6 +55,34 @@ if (pages.royaltyRates === undefined) {
 
             return element(by.css(".rate-set-summary-table>table>tbody>tr:last-child>td:nth-child(4)"));
         },
+
+        firstSavedRRName: function () {
+
+
+            return element(by.css(".rate-set-summary-table>table>tbody>tr:first-child>td:nth-child(1)"));
+        },
+        firstSaveRRIncomeProvider: function () {
+            return element(by.css(".rate-set-summary-table>table>tbody>tr:first-child>td:nth-child(3)"));
+        },
+        firstSavedRRStartDate: function () {
+
+            return element(by.css(".rate-set-summary-table>table>tbody>tr:first-child>td:nth-child(4)"));
+        },
+
+        savedRRNames: function () {
+
+
+            return element.all(by.css(".rate-set-summary-table>table>tbody>tr>td:nth-child(1)"));
+        },
+        saveRRIncomeProviders: function () {
+            return element(by.css(".rate-set-summary-table>table>tbody>tr>td:nth-child(3)"));
+        },
+        savedRRStartDates: function () {
+
+            return element(by.css(".rate-set-summary-table>table>tbody>tr>td:nth-child(4)"));
+        },
+
+
 
 
         errorMessageRR: function () {
@@ -79,7 +118,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         royaltyRateInput: function () {
-            return browser.driver.findElement(by.css(".rate-set-name-input"));
+            return $(".rate-set-name-input");
 
         },
         scopeHeading: function () {
@@ -111,12 +150,32 @@ if (pages.royaltyRates === undefined) {
         ,
         expandAllIncomeGroups: function () {
             var i = 0;
-            browser.driver.findElements(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[3]/div/div[1]/a/i"))
+            //browser.driver.findElements(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[3]/div/div[1]/a/i"))
 
+            $$(".icon-chevron-down")
                 .then(function (result) {
 
                     for (i = 0; i < result.length; i++) {
                         result[i].click();
+                    }
+                }
+            )
+
+
+        },
+
+        typeInAllInputs:function(value){
+            var i = 0;
+            $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
+                .then(function (result) {
+
+                    for (i = 0; i < result.length; i++) {
+
+                     //   result[i].sendKeys(value);
+                      //  result[i].sendKeys('1');
+                        result[i].value = '1.2345';
+                      //  result[i].sendKeys('1.2345');
+
                     }
                 }
             )
@@ -137,8 +196,17 @@ if (pages.royaltyRates === undefined) {
             var element;
 
             element = this.royaltyRateInput();
+            browser.wait(ExpectedConditions.visibilityOf(element));
             element.clear();
 
+
+        },
+        waitPanel:function()
+        {
+            var element;
+
+            element = this.royaltyRateInput();
+            browser.wait(ExpectedConditions.visibilityOf(element));
 
         },
 
@@ -254,7 +322,24 @@ if (pages.royaltyRates === undefined) {
 
             incomeProviderInput = element.all(by.css(".tg-typeahead__tag-name.ng-binding")).get(2);
 
+           // incomeProviderInput = element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-name.ng-binding"));
+
+
             return incomeProviderInput.getText();
+
+
+        },
+        getIncomeProviderInputValueOption: function () {
+
+            var incomeProviderInput;
+            var temp = [];
+
+          //  incomeProviderInput = element.all(by.css(".tg-typeahead__tag-name.ng-binding")).get(2);
+
+            incomeProviderInput = element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-name.ng-binding"));
+
+
+            return temp.push(incomeProviderInput.getText());
 
 
         },
@@ -408,6 +493,12 @@ if (pages.royaltyRates === undefined) {
             }
 
         },
+        clickcancelRateSet:function()
+        {
+
+            this.rateSetCancelButton().click();
+
+        },
         getEffectiveStartDateErrorMessage: function () {
 
 
@@ -465,6 +556,19 @@ if (pages.royaltyRates === undefined) {
             RRDoneButton.click();
 
 
+
+
+        },
+        waitForRRToBeSaved:function()
+        {
+            browser.driver.sleep(10000);
+            //var el =  element(by.css(".pull-right.rate_set-loader"));
+            //try {
+            //    browser.wait(!ExpectedConditions.visibilityOf(el));
+            //}
+            //catch(err) {
+            //    console.log("zaza");
+            //}
         },
 
         clickScopeHeading: function () {
@@ -481,6 +585,30 @@ if (pages.royaltyRates === undefined) {
 
             return this.errorMessageRR().isPresent();
 
+
+        },
+
+        clearIncomeProviderInput:function()
+        {
+            //while(this.incomeProviderDeleteButtons().isPresent())
+            //{
+
+                this.incomeProviderDeleteButtons().click();
+          //  }
+
+            //var index;
+            //var elements = this.incomeProviderDeleteButtons();
+            //console.log( this.incomeProviderDeleteButtons().length);
+            //
+            //for (index = 0; index < elements.length; ++index) {
+            //  //  console.log(a[index]);
+            //
+            //    elements[index].click();
+            //
+            //}
+          //  elements.forEach(function(element) {
+             //   element.click();
+            //});
 
         }
 
