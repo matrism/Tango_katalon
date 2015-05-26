@@ -291,6 +291,11 @@ exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
         pages.work.expectShowComponentWorkDetailsButtonToAppear(i);
     });
 };
+exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
+    it('Expect "Same work can\'t be added as a component multiple times" message to appear', function() {
+        pages.work.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(i);
+    });
+};
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     it('Validate required component work allocation field', function() {
         pages.work.validateRequiredComponentWorkAllocationField(i);

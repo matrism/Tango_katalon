@@ -150,6 +150,14 @@ exports.showComponentWorkDetailsButtons = function() {
 exports.showComponentWorkDetailsButton = function(i) {
     return exports.showComponentWorkDetailsButtons().get(i);
 };
+exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function(i) {
+    return exports.componentWorkRow(i).element(
+        by.cssContainingText(
+            '.validation-message-text',
+            'The same work cannot be added as a component multiple times.'
+        )
+    );
+};
 exports.componentWorkSearchFilterDropdowns = function() {
     return exports.componentWorkRows().all(
         by.model('component.filter')
@@ -836,6 +844,16 @@ exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
     var element = exports.showComponentWorkDetailsButton(i);
     expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
     pages.base.scrollIntoView(element);
+};
+exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
+    var element = exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage(i);
+    var presentAndDisplayed = pages.base.isPresentAndDisplayed(element);
+    presentAndDisplayed.then(function(presentAndDisplayed) {
+        if(presentAndDisplayed) {
+            pages.base.scrollIntoView(element);
+        }
+        expect(presentAndDisplayed).toBeTruthy();
+    });
 };
 exports.deleteComponentWork = function(i) {
     var element = exports.deleteComponentWorkButton(i);

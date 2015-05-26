@@ -77,6 +77,14 @@ exports.showComponentWorkDetailsButtons = function() {
         by.cssContainingText('span', 'Show Details')
     );
 };
+exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function(i) {
+    return exports.componentWorkRow(i).element(
+        by.cssContainingText(
+            '.validation-message-text',
+            'The same work cannot be added as a component multiple times.'
+        )
+    );
+};
 exports.showComponentWorkDetailsButton = function(i) {
     return exports.showComponentWorkDetailsButtons().get(i);
 };
@@ -441,6 +449,16 @@ exports.selectFirstComponentWorkSuggestion = function() {
 };
 exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
     var element = exports.showComponentWorkDetailsButton(i);
+    var presentAndDisplayed = pages.base.isPresentAndDisplayed(element);
+    presentAndDisplayed.then(function(presentAndDisplayed) {
+        if(presentAndDisplayed) {
+            pages.base.scrollIntoView(element);
+        }
+        expect(presentAndDisplayed).toBeTruthy();
+    });
+};
+exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
+    var element = exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage(i);
     var presentAndDisplayed = pages.base.isPresentAndDisplayed(element);
     presentAndDisplayed.then(function(presentAndDisplayed) {
         if(presentAndDisplayed) {

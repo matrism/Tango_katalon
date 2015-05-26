@@ -256,6 +256,11 @@ exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
         pages.new_work.expectShowComponentWorkDetailsButtonToAppear(i);
     });
 };
+exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
+    it('Expect "Same work can\'t be added as a component multiple times" message to appear', function() {
+        pages.new_work.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(i);
+    });
+};
 exports.deleteComponentWork = function(i, data, key) {
     it('Delete component work #' + (i + 1), function() {
         var components;
