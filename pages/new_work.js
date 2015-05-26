@@ -61,6 +61,17 @@ exports.componentWorkAllocationInputs = function() {
         by.model('component.allocation_percentage')
     );
 };
+exports.deleteComponentWorkButtons = function() {
+    return exports.componentWorkRows().$$('.delete-button');
+};
+exports.deleteComponentWorkButton = function(i) {
+    return exports.deleteComponentWorkButtons().get(i);
+};
+exports.confirmComponentWorkDeletionButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Yes')
+    );
+};
 exports.showComponentWorkDetailsButtons = function() {
     return exports.componentWorkRows().all(
         by.cssContainingText('span', 'Show Details')
@@ -437,6 +448,14 @@ exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
         }
         expect(presentAndDisplayed).toBeTruthy();
     });
+};
+exports.deleteComponentWork = function(i) {
+    var element = exports.deleteComponentWorkButton(i);
+    pages.base.scrollIntoView(element);
+    element.click();
+};
+exports.confirmComponentWorkDeletion = function() {
+    exports.confirmComponentWorkDeletionButton().click();
 };
 exports.selectRandomCreatorSuggestion = function() {
     return $$(".typeahead-result").then(function(suggestions) {

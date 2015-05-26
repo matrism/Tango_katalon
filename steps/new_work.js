@@ -256,6 +256,23 @@ exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
         pages.new_work.expectShowComponentWorkDetailsButtonToAppear(i);
     });
 };
+exports.deleteComponentWork = function(i, data, key) {
+    it('Delete component work #' + (i + 1), function() {
+        var components;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        components = data[key] = data[key] || [];
+
+        pages.new_work.deleteComponentWork(i);
+        components.splice(i, 1);
+    });
+};
+exports.confirmComponentWorkDeletion = function() {
+    it('Confirm component work deletion', function() {
+        pages.new_work.confirmComponentWorkDeletion();
+    });
+};
 exports.selectRandomCreator = function(i, data, key) {
     var deferred = promise.defer();
     var creator;
