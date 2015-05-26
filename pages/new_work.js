@@ -40,6 +40,9 @@ exports.compositeWorkTypeDropdown = function() {
 exports.componentWorkRows = function() {
     return element.all(by.repeater('component in work.components'));
 };
+exports.componentWorkRow = function(i) {
+    return exports.componentWorkRows().get(i);
+};
 exports.componentWorkSearchFilterDropdowns = function() {
     return exports.componentWorkRows().all(
         by.model('component.filter')
