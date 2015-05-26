@@ -142,6 +142,14 @@ exports.componentWorkNameBindings = function() {
 exports.componentWorkNameBinding = function(i) {
     return exports.componentWorkNameBindings().get(i);
 };
+exports.showComponentWorkDetailsButtons = function() {
+    return exports.componentWorkRows().all(
+        by.cssContainingText('span', 'Show Details')
+    );
+};
+exports.showComponentWorkDetailsButton = function(i) {
+    return exports.showComponentWorkDetailsButtons().get(i);
+};
 exports.componentWorkSearchFilterDropdowns = function() {
     return exports.componentWorkRows().all(
         by.model('component.filter')
@@ -823,6 +831,11 @@ exports.selectFirstComponentWorkSuggestion = function() {
 
         return result;
     });
+};
+exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
+    var element = exports.showComponentWorkDetailsButton(i);
+    expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    pages.base.scrollIntoView(element);
 };
 exports.deleteComponentWork = function(i) {
     var element = exports.deleteComponentWorkButton(i);

@@ -58,6 +58,14 @@ exports.componentWorkAllocationInputs = function() {
         by.model('component.allocation_percentage')
     );
 };
+exports.showComponentWorkDetailsButtons = function() {
+    return exports.componentWorkRows().all(
+        by.cssContainingText('span', 'Show Details')
+    );
+};
+exports.showComponentWorkDetailsButton = function(i) {
+    return exports.showComponentWorkDetailsButtons().get(i);
+};
 exports.componentWorkAllocationInput = function(i) {
     return exports.componentWorkAllocationInputs().get(i);
 };
@@ -415,6 +423,16 @@ exports.selectFirstComponentWorkSuggestion = function() {
         suggestion.click();
 
         return result;
+    });
+};
+exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
+    var element = exports.showComponentWorkDetailsButton(i);
+    var presentAndDisplayed = pages.base.isPresentAndDisplayed(element);
+    presentAndDisplayed.then(function(presentAndDisplayed) {
+        if(presentAndDisplayed) {
+            pages.base.scrollIntoView(element);
+        }
+        expect(presentAndDisplayed).toBeTruthy();
     });
 };
 exports.selectRandomCreatorSuggestion = function() {

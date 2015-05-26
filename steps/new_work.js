@@ -251,6 +251,11 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
         });
     });
 };
+exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
+    it('Expect "Show Details" button to appear next to component work title', function() {
+        pages.new_work.expectShowComponentWorkDetailsButtonToAppear(i);
+    });
+};
 exports.selectRandomCreator = function(i, data, key) {
     var deferred = promise.defer();
     var creator;

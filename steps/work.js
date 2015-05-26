@@ -286,6 +286,11 @@ exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
         });
     });
 };
+exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
+    it('Expect "Show Details" button to appear next to component work title', function() {
+        pages.work.expectShowComponentWorkDetailsButtonToAppear(i);
+    });
+};
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     it('Validate required component work allocation field', function() {
         pages.work.validateRequiredComponentWorkAllocationField(i);
