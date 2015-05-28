@@ -770,6 +770,7 @@ exports.clickCompositeWorkCheckbox = function() {
     var element = exports.compositeWorkCheckbox();
     pages.base.scrollIntoView(element);
     element.click();
+    return element.getAttribute('checked');
 };
 exports.selectCompositeWorkType = function(value) {
     var element = exports.compositeWorkTypeDropdown();

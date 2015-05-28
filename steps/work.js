@@ -124,9 +124,14 @@ module.exports.editCreators = function() {
 		pages.work.editCreatorsButton()
 	);
 };
-exports.clickCompositeWorkCheckbox = function() {
+exports.clickCompositeWorkCheckbox = function(data, key) {
     it('Click composite work checkbox', function() {
-        pages.work.clickCompositeWorkCheckbox();
+        pages.work.clickCompositeWorkCheckbox().then(function(value) {
+            data = data || hash.subjectWorkData || {};
+            key = key || 'isCompositeWork';
+
+            data[key] = value;
+        });
     });
 };
 exports.validateRequiredCompositeWorkTypeField = function() {
