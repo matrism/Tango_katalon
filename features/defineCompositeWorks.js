@@ -35,6 +35,14 @@ var beforeFeature = [
                 [steps.new_work.validateSaveWorkRedirection],
 
                 [steps.new_work.goToNewWorkPage],
+                [steps.new_work.selectRandomCreator, [0]],
+                [steps.new_work.enterMaximumCreatorContribution, [0]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPONENT WORK ' + randomId(2)]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(0)]],
                 [steps.new_work.validateDefaultCompositeWorkCheckboxState],
                 [steps.new_work.clickCompositeWorkCheckbox],
