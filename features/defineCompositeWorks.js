@@ -141,6 +141,19 @@ var beforeFeature = [
                 [steps.work.validateComponentWorkAllocation, [0]],
                 [steps.work.validateComponentWorkName, [1]],
                 [steps.work.validateComponentWorkAllocation, [1]],
+
+                [steps.work.deleteComponentWork, [0]],
+                [steps.work.confirmComponentWorkDeletion],
+                [steps.work.selectFirstComponentWorkMatching, [1, 'TEST COMPONENT WORK ' + randomId(2)]],
+                [steps.work.enterMediumComponentWorkAllocation, [1]],
+                [steps.work.saveCreators],
+                [steps.base.refreshPage],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.validateComponentWorkName, [0]],
+                [steps.work.validateComponentWorkAllocation, [0]],
+                [steps.work.validateComponentWorkName, [1]],
+                [steps.work.validateComponentWorkAllocation, [1]],
             ]
         },
         {
