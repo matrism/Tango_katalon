@@ -21,10 +21,17 @@ if (pages.create_deal_scope === undefined) {
             publisherNameDropDownData: {css: "ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"},
             firstPublisherTypeEOrPAArrow: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-caret.fa.fa-caret-down"},
             firstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
-            firstPublisherTypeValue: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
+            firstPublisherTypeValue: {css: "#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
+            firstPublisherTypeText: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button"},
             savePublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             cancelPublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
-            addChainLink: {css: "#deal-publisher a[data-ng-click='addChain(modularEditModels.activeScope.publisher_share_set_id, modularEditModels.activeScope.id)']"}
+            addChainLink: {css: "#deal-publisher a[data-ng-click='addChain(modularEditModels.activeScope.publisher_share_set_id, modularEditModels.activeScope.id)']"},
+            noPublisherShareWarningMessage: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.ng-scope div.validation-message-error.ng-scope div.validation-message-text.ng-binding"},
+            noPublisherShareWarningIcon: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.ng-scope div.validation-message-error.ng-scope i.fa.fa-exclamation-triangle"},
+            publisherIsRequiredErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li[data-ng-if='chainForm.$error.required || chainForm.$error.typeaheadModelSelected']"},
+            modalDialog: {css: "div.modal-dialog.ng-scope"},
+            confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
+            cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"}
         },
 
         addScopeForm: function () {
@@ -41,7 +48,7 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("select[name='scopeContractType'] option"))));
             browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length-1) + 1));
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
                 })
         },
@@ -70,8 +77,8 @@ if (pages.create_deal_scope === undefined) {
 
         addTerritoryByTypingToScope: function () {
             pages.create_deal_scope.elems.territoryField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryInput));
             pages.create_deal_scope.elems.territoryInput.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
         },
 
 
@@ -83,6 +90,56 @@ if (pages.create_deal_scope === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 })
+        },
+
+        validateTheNoPublisherShareWarningMessage: function () {
+            pages.create_deal_scope.elems.noPublisherShareWarningMessage.getText().
+                then(function (promise) {
+                    console.log("No publisher share warning message is: " + promise);
+                    expect(promise).toEqual("No publisher shares have been defined on any scopes associated with this contract period.");
+                });
+        },
+
+        validateThePlaceholdersForPublisherNameE: function () {
+            pages.create_deal_scope.elems.firstPublisherNameField.getAttribute("placeholder").
+                then(function (promise) {
+                    console.log("Placeholder for firs publisher name E is : " + promise);
+                    expect(promise).toEqual("search by name or IPI number...");
+                });
+        },
+
+        validateThePlaceholdersForPublisherNameAM: function () {
+            pages.create_deal_scope.elems.firstPublisherNameAMField.getAttribute("placeholder").
+                then(function (promise) {
+                    console.log("Placeholder for firs publisher name AM is : " + promise);
+                    expect(promise).toEqual("search by name or IPI number...");
+                });
+        },
+
+        validateTheErrorMessagePublisherRequired: function () {
+            pages.create_deal_scope.elems.publisherIsRequiredErrorMessage.getText().
+                then(function (promise) {
+                    console.log("Error message for publisher required is : " + promise);
+                    expect(promise).toEqual("Publisher is required");
+                });
+        },
+
+        validateThePublisherNameTooltipEOrPAIcon: function () {
+            browser.driver.actions().mouseMove(element(by.css("#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.span1.nomargins.ng-scope"))).perform();
+            element(By.css("#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.span1.nomargins.ng-scope")).getAttribute("data-tooltip").
+                then(function (promise) {
+                    console.log("Publisher type E or PA tooltip text : " + promise);
+                    expect(promise).toEqual("Original Publisher");
+                });
+        },
+
+        validateThePublisherNameTooltipAMIcon: function () {
+            browser.driver.actions().mouseMove(element(by.css("#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div.pull-left.ps-role.ng-scope"))).perform();
+            element(By.css("#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div.pull-left.ps-role.ng-scope")).getAttribute("data-tooltip").
+                then(function (promise) {
+                    console.log("Publisher type AM tooltip text : " + promise);
+                    expect(promise).toEqual("Administrator");
+                });
         },
 
         clickOnAddPublisherShareSetLink: function () {
@@ -180,7 +237,6 @@ if (pages.create_deal_scope === undefined) {
 
         clickOnAddChainLink: function () {
             pages.create_deal_scope.elems.addChainLink.click();
-            pages.create_deal_scope.waitForAjax();
         },
 
         selectSpecificOptionEOrPAPublisherTypeChainI: function (publisher, i) {
@@ -259,11 +315,29 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        fillPublisherNameAMCollectPercentChainI: function(i){
+        fillPublisherNameAMCollectPercentChainI: function (i) {
             var percent = (Math.random() * 9 + 1).toFixed(2);
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"));
             element.sendKeys(percent);
+        },
+
+        clickOnDeleteIconChainI: function (i) {
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope"));
+            element.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.confirmDeleteModalDialog));
+        },
+
+        validateTheDeleteIconChainIPublisherShareIsPresent: function (i) {
+            expect(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")).isDisplayed).toBeTruthy();
+        },
+
+
+
+        confirmOnDeleteModalDialog: function () {
+            pages.create_deal_scope.elems.confirmDeleteModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_scope.elems.confirmDeleteModalDialog));
         }
+
 
     });
 }

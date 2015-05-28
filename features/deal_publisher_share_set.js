@@ -28,12 +28,32 @@ var beforeFeature = function () {
             steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
             steps.create_deal_scope.itAddSimpleScope();
             steps.create_deal_scope.itAddPublisherShare();
+            for(var i=2; i<=3; i++){
+                steps.create_deal_scope.itAddPublisherShareWithMultipleThreeChains(i);
+                steps.create_deal_scope.validateDeleteChainIIconPublisherShare(i);
+            }
+            steps.base.scrollIntoView("Delete chain icon publisher share set", element(By.css("#deal-publisher div.ng-scope:nth-child(1) div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")));
+            steps.create_deal_scope.deleteChainIPublisherShare(1);
+            steps.create_deal_scope.saveThePublisherShareSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
         }
-    }];
+    },
+        {
+            name: "Check the visual design for publisher shares",
+            tags: ["check_design_deal_pss"],
+            steps: function () {
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.create_deal_scope.itCheckVisualDesignPublisherShare();
+                steps.create_deal_scope.saveThePublisherShareSet();
+
+            }
+        }];
 
 
 module.exports = {
