@@ -124,7 +124,7 @@ var beforeFeature = [
                 [steps.work.validateComponentWorkAllocation, [0]],
 
                 [steps.new_work.goToNewWorkPage],
-                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(2)]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(3)]],
                 [steps.new_work.clickCompositeWorkCheckbox],
                 [steps.new_work.selectCompositeWorkType, ['Medley']],
                 [steps.new_work.selectFirstComponentWorkMatching, [0, 'TEST COMPONENT WORK ' + randomId(0)]],
@@ -166,7 +166,7 @@ var beforeFeature = [
             tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
-                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(3)]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(4)]],
                 [steps.new_work.selectRandomCreator, [0]],
                 [steps.new_work.enterMaximumCreatorContribution, [0]],
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
@@ -196,7 +196,7 @@ var beforeFeature = [
             tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
-                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(4)]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(5)]],
                 [steps.new_work.selectRandomCreator, [0]],
                 [steps.new_work.enterMaximumCreatorContribution, [0]],
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
@@ -233,7 +233,7 @@ var beforeFeature = [
             tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
-                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(5)]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(6)]],
                 [steps.new_work.clickCompositeWorkCheckbox],
                 [steps.new_work.selectCompositeWorkType, ['Composite of Samples']],
                 [steps.new_work.selectRandomCreator, [0]],
