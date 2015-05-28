@@ -261,6 +261,36 @@ var beforeFeature = [
                 [steps.work.validateComponentWorkAllocation, [1]],
             ]
         },
+        {
+            name: 'Change a Medley into a Composite of Samples',
+            tags: [],
+            steps: [
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(7)]],
+                [steps.new_work.clickCompositeWorkCheckbox],
+                [steps.new_work.selectCompositeWorkType, ['Medley']],
+                [steps.new_work.selectFirstComponentWorkMatching, [0, 'TEST COMPONENT WORK ' + randomId(0)]],
+                [steps.new_work.enterMediumComponentWorkAllocation, [0]],
+                [steps.new_work.selectFirstComponentWorkMatching, [1, 'TEST COMPONENT WORK ' + randomId(1)]],
+                [steps.new_work.enterMediumComponentWorkAllocation, [1]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.sleep, [100]],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.selectCompositeWorkType, ['Composite of Samples']],
+                [steps.work.enterComponentWorkAllocation, [0, 25]],
+                [steps.work.enterComponentWorkAllocation, [1, 25]],
+                [steps.work.selectDifferentRandomCreator, [0]],
+                [steps.work.enterMediumCreatorContribution, [0]],
+                [steps.work.saveCreators],
+                [steps.base.refreshPage],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.validateCompositeWorkType],
+            ]
+        },
     ];
 
 module.exports = {
