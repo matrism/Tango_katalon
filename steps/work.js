@@ -301,6 +301,19 @@ exports.validateRequiredComponentWorkAllocationField = function(i) {
         pages.work.validateRequiredComponentWorkAllocationField(i);
     });
 };
+exports.enterComponentWorkAllocation = function(i, value, data, key) {
+    it('Enter component work allocation #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        pages.work.enterComponentWorkAllocation(i, value);
+        component.allocation = value;
+    });
+};
 exports.enterMediumComponentWorkAllocation = function(i, data, key) {
     it('Enter component work allocation #' + (i + 1), function() {
         var component;
