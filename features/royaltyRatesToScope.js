@@ -350,28 +350,74 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
                 steps.create_deal_scope.itAddSimpleScope();
                 steps.royaltyRates.addNewRoyaltySet();
-                //steps.royaltyRates.addRatePercentageToContractualField("10");
-                //steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
-                //steps.royaltyRates.setEffectiveStartDate("2017-01-01");
-                //steps.royaltyRates.clickOnReceiptApplicationMethod();
-                //steps.royaltyRates.confirmChangingRateApplicationMethod();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+                steps.royaltyRates.setEffectiveStartDate("2017-01-01");
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
                 steps.royaltyRates.openAllRRFields();
                 steps.royaltyRates.setAllFieldValue("1.2345");
                 steps.royaltyRates.saveRateSet();
-
-                //.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input
-
-
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.royaltyRates.openAllRRFields();
-             //   steps.royaltyRates.checkThatInputHasCorrectDecimalNumber();
+               steps.royaltyRates.checkThatInputHasCorrectDecimalNumber();
 
 
             }
+        },
+        {
+            name: "As a user I want to validate decimal places on create",
+            tags: ["decimalEdit"],
+            steps: function () {
+
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+                steps.royaltyRates.setEffectiveStartDate("2017-01-01");
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+                steps.royaltyRates.openAllRRFields();
+                steps.royaltyRates.setAllFieldValue("1.2345");
+                steps.royaltyRates.saveRateSet();
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+                steps.royaltyRates.editSingleRoyaltySet();
+                steps.royaltyRates.openAllRRFields();
+                steps.royaltyRates.openAllRRFields();
+                steps.royaltyRates.setFieldsValue("5.5555");
+                steps.royaltyRates.checkThatInputHasCorrectNumber("5.55512");
+
+
+            }
+        },
+
+        {
+            name:"test input fields",
+            tags:["inputsTest"],
+            steps:function()
+            {
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.openAllRRFields();
+                steps.royaltyRates.setFieldsValueTest("5.5555");
+                steps.royaltyRates.test();
+
+            }
+
         }
+
+
 
 ];
 

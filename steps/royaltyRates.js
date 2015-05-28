@@ -325,12 +325,60 @@ if (steps.royaltyRates === undefined) {
             });
 
         },
+        checkThatInputHasCorrectDecimalNumber:function(number)
+        {
+            it("Verify correct number of decimal places", function () {
+
+
+
+                pages.royaltyRates.checkDecimalPlaces();
+
+
+            });
+
+        },
+        checkThatInputHasCorrectNumber:function(number)
+        {
+            it("Verify correct number of decimal places", function () {
+
+
+
+
+
+
+                expect(   pages.royaltyRates.checkDecimalNumber(number)).toBeTruthy();
+
+
+
+            });
+
+        },
         setAllFieldValue:function(value)
         {
 
             it("Type in  all RR groups", function () {
 
                 pages.royaltyRates.typeInAllInputs(value);
+
+            });
+
+        },
+        setFieldsValue:function(value)
+        {
+
+            it("Type in  all RR groups", function () {
+
+                pages.royaltyRates.typeAllInputs(value);
+
+            });
+
+        },
+        setFieldsValueTest:function(value)
+        {
+
+            it("Type in  all RR groups", function () {
+
+                pages.royaltyRates.typeAllInputsTest(value);
 
             });
 
@@ -558,7 +606,7 @@ var el = pages.editRoyaltyRates.rrSumarryTable();
 
 
             it("Test Step", function () {
-                browser.pause();
+                              browser.pause();
 
             });
 

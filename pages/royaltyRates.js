@@ -149,8 +149,9 @@ if (pages.royaltyRates === undefined) {
         }
         ,
         expandAllIncomeGroups: function () {
+
+            browser.driver.sleep(5000);
             var i = 0;
-            //browser.driver.findElements(by.xpath(".//*[@id='VIEW-CREATE-DEAL']/div[2]/form/div[1]/div[2]/div/div/div[3]/div[2]/div[2]/div/div[6]/div/div/div[2]/div/div[7]/div[3]/div/div[1]/a/i"))
 
             $$(".icon-chevron-down")
                 .then(function (result) {
@@ -166,24 +167,157 @@ if (pages.royaltyRates === undefined) {
 
         typeInAllInputs:function(value){
             var i = 0;
-            $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
+
+
+
+            browser.driver.executeScript(
+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
+                "   for (var i=0; i < els.length; i++) {"+
+                "       els[i].value = '1.23'; }"
+
+
+
+            );
+           browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
+
                 .then(function (result) {
 
                     for (i = 0; i < result.length; i++) {
 
-                     //   result[i].sendKeys(value);
-                      //  result[i].sendKeys('1');
-                        result[i].value = '1.2345';
-                      //  result[i].sendKeys('1.2345');
+                      result[i].sendKeys("45");
+
 
                     }
-                }
-            )
 
 
+
+
+                    })
+                },
+        typeAllInputs:function(value){
+            var i = 0;
+
+
+
+            browser.driver.executeScript(
+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
+                "   for (var i=0; i < els.length; i++) {"+
+                "       els[i].value = '5.55'; }"
+
+
+
+            );
+          $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
+
+                .then(function (result) {
+
+                    console.log("Inputs to type in : "+ result.length);
+                    for (i = 0; i < result.length; i++) {
+
+                        result[i].sendKeys("55");
+
+
+                    }
+
+
+
+
+                })
         },
+        typeAllInputsTest:function(value){
+            var i = 0;
 
-        closeRoyaltySet: function () {
+
+
+            //browser.driver.executeScript(
+            //
+            //    " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
+            //    "   for (var i=0; i < els.length; i++) {"+
+            //    "       els[i].value = '5.55'; }"
+            //
+            //
+            //
+            //);
+            $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
+
+                .then(function (result) {
+
+                    console.log("Inputs to type in : "+ result.length);
+                    for (i = 0; i < result.length; i++) {
+
+                        result[i].sendKeys(value);
+
+
+                    }
+
+
+
+
+                })
+        },
+        checkDecimalNumber:function(number)
+        {
+
+
+
+            console.log("Check Decimal Number : "+number);
+            browser.driver.sleep(10000);
+            var i ;
+            var bool = true;
+            browser.driver.executeScript(
+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
+                "  console.log( els.length);  "
+
+
+
+            );
+            $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
+
+
+                .then(function (result) {
+
+
+                    for (i = 0; i < result.length; i++) {
+                        console.log("NUmber of inputs"+i);
+                        if(bool)
+
+                        {
+
+
+                            bool =  result[i].getAttribute('value') == number;
+                            console.log( result[i].getAttribute('value'));
+
+
+                        }
+                    }
+
+
+                });
+
+
+            return bool;
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+        ,
+
+        closeRoyaltySet : function () {
             pages.royaltyRates.elems.closeRateSetButton.click();
 
             ftf.helper.waitForElement(pages.royaltyRates.elems.confirmCancelButton, 30000);
@@ -280,37 +414,9 @@ if (pages.royaltyRates === undefined) {
 
                     suggestion = $(".tg-typeahead__item-left>strong");
                     browser.wait(ExpectedConditions.visibilityOf(suggestion));
-                    //expect(suggestion.getText()).not.toContain("No results");
 
-
-                    // incomeProviderInput.sendKeys(protractor.Key.ENTER);
                     suggestion.click();
 
-                    var desiredOption;
-                    //
-                    //browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
-                    //    .then(function findMatchingOption(options) {
-                    //        options.some(function (option) {
-                    //            option.getText().then(function doesOptionMatch(text) {
-                    //
-                    //
-                    //                    if( text.search(sentKeys) > -1){
-                    //
-                    //                        desiredOption = option;
-                    //                        return true;
-                    //                    }
-                    //                }
-                    //            )
-                    //        });
-                    //    })
-                    //    .then(function clickOption() {
-                    //        if (desiredOption) {
-                    //
-                    //            console.log("MAtch");
-                    //           // desiredOption.click();
-                    //            incomeProviderInput.sendKeys(protractor.Key.ENTER);
-                    //        }
-                    //    });
 
 
                 })
@@ -322,8 +428,6 @@ if (pages.royaltyRates === undefined) {
 
             incomeProviderInput = element.all(by.css(".tg-typeahead__tag-name.ng-binding")).get(2);
 
-           // incomeProviderInput = element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-name.ng-binding"));
-
 
             return incomeProviderInput.getText();
 
@@ -334,7 +438,7 @@ if (pages.royaltyRates === undefined) {
             var incomeProviderInput;
             var temp = [];
 
-          //  incomeProviderInput = element.all(by.css(".tg-typeahead__tag-name.ng-binding")).get(2);
+
 
             incomeProviderInput = element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-name.ng-binding"));
 
@@ -473,9 +577,6 @@ if (pages.royaltyRates === undefined) {
 
         },
         getEffectiveStartDateInputValue: function () {
-            //var effectiveStartDateInput;
-            //effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
-
 
             return this.effectiveStartDateInput().getAttribute('value');
 
@@ -485,8 +586,7 @@ if (pages.royaltyRates === undefined) {
 
             date = date.trim();
             if (date != "") {
-                //var effectiveStartDateInput;
-                //effectiveStartDateInput = element(by.css(".rate-set-calendar>div>.date-picker-input"));
+
                 this.effectiveStartDateInput().clear();
                 this.effectiveStartDateInput().sendKeys(date);
                 browser.driver.sleep(2000);
@@ -517,16 +617,12 @@ if (pages.royaltyRates === undefined) {
 
         addPercentageToContractualRateInput: function (percentage) {
 
-            //var contractualRateInput;
-            //contractualRateInput = element(by.model("set.rate_percentage"));
-
             browser.wait(ExpectedConditions.visibilityOf(this.contractualRateInput()));
 
 
             this.contractualRateInput().sendKeys(percentage);
             this.contractualRateInput().click();
-            //var payout;
-            //payout = element(by.css(".tg-selectize-contractual-rate__ul>li:first-child"));
+
             this.payout().click();
             browser.driver.sleep(2000);
             element(by.css(".tg-selectize-contractual-rate>ul:nth-child(2)>li:nth-child(2)")).click();
@@ -610,7 +706,37 @@ if (pages.royaltyRates === undefined) {
              //   element.click();
             //});
 
+        },
+        checkDecimalPlaces:function()
+        {
+            browser.driver.sleep(5000);
+            var i ;
+            var bool = true;
+            browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
+
+                .then(function (result) {
+
+                    for (i = 0; i < result.length; i++) {
+
+                     //   result[i].sendKeys("45");
+
+
+                        if(bool)
+                        {
+
+                       bool =  result[i].getAttribute('value').length <= 5;
+                        }
+
+                    }
+
+
+                });
+
+
+            return bool;
         }
+
+
 
 
     });
