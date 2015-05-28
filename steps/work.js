@@ -134,6 +134,24 @@ exports.clickCompositeWorkCheckbox = function(data, key) {
         });
     });
 };
+exports.expectDisablingWorkAsCompositePopUpToBeDisplayed = function() {
+    it('Expect disabling work as a composite work pop-up to be displayed', function() {
+        pages.work.expectDisablingWorkAsCompositePopUpToBeDisplayed();
+    });
+};
+exports.confirmDisablingWorkAsComposite = function() {
+    it('Confirm disabling work as a composite work', function() {
+        pages.work.confirmDisablingWorkAsComposite();
+    });
+};
+exports.validateCompositeWorkCheckbox = function(data, key) {
+    it('Validate composite work checkbox', function() {
+        data = data || hash.subjectWorkData || {};
+        key = key || 'isCompositeWork';
+
+        expect(pages.work.compositeWorkCheckboxState()).toBe(data[key]);
+    });
+};
 exports.validateRequiredCompositeWorkTypeField = function() {
     it('Validate required composite work type field', function() {
         pages.work.validateRequiredCompositeWorkTypeField();

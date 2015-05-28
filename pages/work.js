@@ -102,6 +102,11 @@ module.exports.editCreatorsButton = function() {
 exports.compositeWorkCheckbox = function() {
     return element(by.model('work.contribution.isCompositeWork'));
 };
+exports.confirmDisablingWorkAsCompositeButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Yes')
+    );
+};
 exports.compositeWorkTypeDropdown = function() {
     return element(by.model('work.contribution.composite_type'));
 };
@@ -771,6 +776,23 @@ exports.clickCompositeWorkCheckbox = function() {
     pages.base.scrollIntoView(element);
     element.click();
     return element.getAttribute('checked');
+};
+exports.compositeWorkCheckboxState = function() {
+    var element = exports.compositeWorkCheckbox();
+    pages.base.scrollIntoView(element);
+    return element.getAttribute('checked');
+};
+exports.expectDisablingWorkAsCompositePopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'ARE YOU SURE YOU WANT TO DISABLE WORK AS COMPOSITE WORK?'
+    );
+};
+exports.confirmDisablingWorkAsComposite = function() {
+    exports.confirmDisablingWorkAsCompositeButton().click();
 };
 exports.selectCompositeWorkType = function(value) {
     var element = exports.compositeWorkTypeDropdown();
