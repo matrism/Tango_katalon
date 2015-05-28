@@ -399,6 +399,129 @@ var beforeFeature = function () {
             }
         },
 
+        //DIRTY CHECK FEATURES
+        {   name: "As a User I want to perform Dirty Check on RR Edit Pages",
+            tags: ["dirtyRRCheck3"],
+            steps:function()
+            {
+
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+
+
+
+                steps.royaltyRates.editSingleRoyaltySet();
+                steps.editRoyaltyRates.openRateSetPanel();
+
+
+                steps.royaltyRates.waitForPanel();
+                steps.royaltyRates.saveRRData();
+                steps.royaltyRates.clearRoyaltyRateInput();
+                steps.royaltyRates.typeIntoRRInput("Edited RR Set");
+                steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
+                steps.royaltyRates.addEffectiveStartDate("2019-05-26");
+
+
+                steps.royaltyRates.cancelRateSet();
+
+                steps.royaltyRates.checkErrorModal();
+                steps.royaltyRates.cancelErrorModal();
+
+                steps.royaltyRates.refreshPage();
+                steps.royaltyRates.openSavedScope();
+                steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+
+            }
+
+
+        },
+
+        {   name: "As a User I want to perform Dirty Check (by navigating)  on RR Edit Pages",
+            tags: ["dirtyRRCheck3"],
+            steps: function()
+            {
+
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+
+
+
+                steps.royaltyRates.editSingleRoyaltySet();
+                steps.editRoyaltyRates.openRateSetPanel();
+
+
+                steps.royaltyRates.waitForPanel();
+                steps.royaltyRates.saveRRData();
+                steps.royaltyRates.clearRoyaltyRateInput();
+                steps.royaltyRates.typeIntoRRInput("Edited RR Set");
+                steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
+                steps.royaltyRates.addEffectiveStartDate("2019-05-26");
+
+
+                steps.royaltyRates.navigateToDealsTab();
+
+                steps.royaltyRates.checkErrorModal();
+                steps.royaltyRates.acceptErrorModal();
+
+                steps.royaltyRates.goToScopesPage();
+
+
+                steps.royaltyRates.refreshPage();
+                steps.royaltyRates.openSavedScope();
+                steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+
+            }
+
+
+        },
+
+
+
+
+
+
+
+
+
+
         {
             name:"test input fields",
             tags:["inputsTest"],

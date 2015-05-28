@@ -229,17 +229,6 @@ if (pages.royaltyRates === undefined) {
         typeAllInputsTest:function(value){
             var i = 0;
 
-
-
-            //browser.driver.executeScript(
-            //
-            //    " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
-            //    "   for (var i=0; i < els.length; i++) {"+
-            //    "       els[i].value = '5.55'; }"
-            //
-            //
-            //
-            //);
             $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
 
                 .then(function (result) {
@@ -247,7 +236,7 @@ if (pages.royaltyRates === undefined) {
                     console.log("Inputs to type in : "+ result.length);
                     for (i = 0; i < result.length; i++) {
 
-                        result[i].sendKeys(value);
+                        result[i].sendKeys();
 
 
                     }
