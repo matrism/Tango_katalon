@@ -31,7 +31,8 @@ if (pages.create_deal_scope === undefined) {
             publisherIsRequiredErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li[data-ng-if='chainForm.$error.required || chainForm.$error.typeaheadModelSelected']"},
             modalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
-            cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"}
+            cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
+            publisherShareSetArea: {css: "div[data-tg-modular-edit-id='publisherShareSets']"}
         },
 
         addScopeForm: function () {
@@ -74,6 +75,9 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
+        clickOnPublisherShareSetArea: function () {
+            pages.create_deal_scope.elems.publisherShareSetArea.click();
+        },
 
         addTerritoryByTypingToScope: function () {
             pages.create_deal_scope.elems.territoryField.click();
@@ -147,8 +151,8 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
         },
 
-        fillInFirstPublisherNameField: function () {
-            pages.create_deal_scope.elems.firstPublisherNameField.sendKeys("test");
+        fillInFirstPublisherNameField: function (publisherName) {
+            pages.create_deal_scope.elems.firstPublisherNameField.sendKeys(publisherName);
         },
 
         fillInFirstPublisherNameOwnPercent: function () {
@@ -161,13 +165,25 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.firstPublisherCollectPercent.sendKeys(percent);
         },
 
-        fillInFirstPublisherNameAMField: function () {
-            pages.create_deal_scope.elems.firstPublisherNameAMField.sendKeys("wb music corp");
+        fillInFirstPublisherNameOwnPercentSpecificValue: function (percent) {
+            pages.create_deal_scope.elems.firstPublisherOwnPercent.sendKeys(percent);
+        },
+
+        fillInFirstPublisherNameCollectPercentSpecificValue: function (percent) {
+            pages.create_deal_scope.elems.firstPublisherCollectPercent.sendKeys(percent);
+        },
+
+        fillInFirstPublisherNameAMField: function (publisherNameAM) {
+            pages.create_deal_scope.elems.firstPublisherNameAMField.sendKeys(publisherNameAM);
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
         },
 
         fillInFirstPublisherNameAMOwnPercent: function () {
             var percent = (Math.random() * 9 + 1).toFixed(2);
+            pages.create_deal_scope.elems.firstPublisherNameAMCollectPercent.sendKeys(percent);
+        },
+
+        fillInFirstPublisherNameAMOwnPercentSpecificValue: function (percent) {
             pages.create_deal_scope.elems.firstPublisherNameAMCollectPercent.sendKeys(percent);
         },
 
@@ -178,6 +194,15 @@ if (pages.create_deal_scope === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 })
+        },
+
+        validatePublisherNameDropDownHasNoResults: function () {
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.typeahead.dropdown-menu.ng-scope li.ng-scope.active"))));
+            element(By.css("ul.typeahead.dropdown-menu.ng-scope li.ng-scope.active a")).getAttribute("title")
+                .then(function (promise) {
+                    console.log("The message for no results of publisher name drop down is: " + promise);
+                    expect(promise).toContain("No results for");
+                });
         },
 
         selectSpecificPublisherNameDropDown: function (publisherName) {
@@ -225,7 +250,8 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        savePublisherShareSet: function () {
+        saveThePublisherShareSets: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.savePublisherShareSet));
             pages.create_deal_scope.elems.savePublisherShareSet.click();
             pages.create_deal_scope.waitForAjax();
         },
@@ -332,8 +358,8 @@ if (pages.create_deal_scope === undefined) {
         },
 
 
-
         confirmOnDeleteModalDialog: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.confirmDeleteModalDialog));
             pages.create_deal_scope.elems.confirmDeleteModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_scope.elems.confirmDeleteModalDialog));
         }

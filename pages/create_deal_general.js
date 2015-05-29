@@ -10,8 +10,8 @@ if (pages.create_deal_general === undefined) {
         locators: {
             dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},
             dealSigningTerritoryDropDownData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
-            contractingPartiesInput: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            contractingPartiesField: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
+            contractingPartiesInput: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            contractingPartiesField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
             internalContactsInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.model'] input[ng-model='$term']"},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             internalContactRoleInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.roles'] input[ng-model='$term']"}

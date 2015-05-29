@@ -21,19 +21,20 @@ var beforeFeature = function () {
 
     feature = [{
         name: "Create a deal with publisher share set",
-        tags: ["create_deal_pss"],
+        tags: ["create_deal_pss_multiple_chains_delete_chain"],
         steps: function () {
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
             steps.create_deal_scope.itAddSimpleScope();
             steps.create_deal_scope.itAddPublisherShare();
-            for(var i=2; i<=3; i++){
+            for (var i = 2; i <= 3; i++) {
                 steps.create_deal_scope.itAddPublisherShareWithMultipleThreeChains(i);
                 steps.create_deal_scope.validateDeleteChainIIconPublisherShare(i);
             }
             steps.base.scrollIntoView("Delete chain icon publisher share set", element(By.css("#deal-publisher div.ng-scope:nth-child(1) div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")));
             steps.create_deal_scope.deleteChainIPublisherShare(1);
+            steps.base.scrollIntoView("Save publisher share set ", pages.create_deal_scope.elems.savePublisherShareSet);
             steps.create_deal_scope.saveThePublisherShareSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -50,7 +51,18 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
                 steps.create_deal_scope.itAddSimpleScope();
                 steps.create_deal_scope.itCheckVisualDesignPublisherShare();
-                steps.create_deal_scope.saveThePublisherShareSet();
+
+            }
+        },
+        {
+            name: "Check the invalid cases for publisher shares",
+            tags: ["check_invalid_deal_pss"],
+            steps: function () {
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.create_deal_scope.itCheckInvalidCasesPublisherShare();
 
             }
         }];
