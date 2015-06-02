@@ -63,7 +63,8 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
                 steps.create_deal_scope.itAddSimpleScope();
                 steps.create_deal_scope.itCheckInvalidCasesPublisherShare();
-
+                steps.create_deal_scope.itCheckInvalid3DecimalCasesPublisherShare();
+                steps.create_deal_scope.itCheckSubtotalValidationsCasesPublisherShare();
             }
         }];
 

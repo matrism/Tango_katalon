@@ -29,6 +29,9 @@ if (pages.create_deal_scope === undefined) {
             noPublisherShareWarningMessage: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.ng-scope div.validation-message-error.ng-scope div.validation-message-text.ng-binding"},
             noPublisherShareWarningIcon: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.ng-scope div.validation-message-error.ng-scope i.fa.fa-exclamation-triangle"},
             publisherIsRequiredErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li[data-ng-if='chainForm.$error.required || chainForm.$error.typeaheadModelSelected']"},
+            decimalPlacesPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li[data-ng-if='chainForm.$error.decimal']"},
+            subtotalOwnPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
+            chainTotalOwnPublisherShareErrorMessage: {css: "#deal-publisher  ul[role='alert'] li[data-ng-show='pubShareSetForm.$error.scopeOwnTotal']"},
             modalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
@@ -101,6 +104,38 @@ if (pages.create_deal_scope === undefined) {
                 then(function (promise) {
                     console.log("No publisher share warning message is: " + promise);
                     expect(promise).toEqual("No publisher shares have been defined on any scopes associated with this contract period.");
+                });
+        },
+
+        validateThe3DecimalsExceededPublisherShareWarningMessage: function () {
+            pages.create_deal_scope.elems.decimalPlacesPublisherShareErrorMessage.getText().
+                then(function (promise) {
+                    console.log("3 decimals exceeded error message: " + promise);
+                    expect(promise).toEqual("Shares cannot exceed 3 decimal places");
+                });
+        },
+
+        validateSubtotalOfOwnPublisherShareWarningMessage: function () {
+            pages.create_deal_scope.elems.subtotalOwnPublisherShareErrorMessage.getText().
+                then(function (promise) {
+                    console.log("Subtotal of own error message is : " + promise);
+                    expect(promise).toEqual("Subtotal of Own cannot be greater than 100%");
+                });
+        },
+
+        validateSubtotalOfOwnLessThanCollectPublisherShareWarningMessage: function () {
+            pages.create_deal_scope.elems.subtotalOwnPublisherShareErrorMessage.getText().
+                then(function (promise) {
+                    console.log("Subtotal of own less than collect error message is : " + promise);
+                    expect(promise).toEqual("Subtotal of Collect cannot be greater than Own");
+                });
+        },
+
+        validateChainTotalOfOwnPublisherShareWarningMessage: function () {
+            pages.create_deal_scope.elems.chainTotalOwnPublisherShareErrorMessage.getText().
+                then(function (promise) {
+                    console.log("Chain total of own error message is : " + promise);
+                    expect(promise).toEqual("Chain total of Own cannot be greater than 100%");
                 });
         },
 
@@ -183,8 +218,20 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.firstPublisherNameAMCollectPercent.sendKeys(percent);
         },
 
-        fillInFirstPublisherNameAMOwnPercentSpecificValue: function (percent) {
+        fillInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
             pages.create_deal_scope.elems.firstPublisherNameAMCollectPercent.sendKeys(percent);
+        },
+
+        clearInFirstPublisherNameOwnPercent: function () {
+            pages.create_deal_scope.elems.firstPublisherOwnPercent.clear();
+        },
+
+        clearInFirstPublisherNameCollectPercent: function () {
+            pages.create_deal_scope.elems.firstPublisherCollectPercent.clear();
+        },
+
+        clearFirstPublisherNameAMCollectPercent: function () {
+            pages.create_deal_scope.elems.firstPublisherNameAMCollectPercent.clear();
         },
 
         selectRandomPublisherNameDropDown: function () {
