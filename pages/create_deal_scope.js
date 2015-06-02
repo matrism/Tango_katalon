@@ -32,6 +32,7 @@ if (pages.create_deal_scope === undefined) {
             decimalPlacesPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li[data-ng-if='chainForm.$error.decimal']"},
             subtotalOwnPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
             chainTotalOwnPublisherShareErrorMessage: {css: "#deal-publisher  ul[role='alert'] li[data-ng-show='pubShareSetForm.$error.scopeOwnTotal']"},
+            chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
             modalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
@@ -136,6 +137,14 @@ if (pages.create_deal_scope === undefined) {
                 then(function (promise) {
                     console.log("Chain total of own error message is : " + promise);
                     expect(promise).toEqual("Chain total of Own cannot be greater than 100%");
+                });
+        },
+
+        validateChainTotalOfOwnPublisherCannotBeLessThanCollectShareWarningMessage: function () {
+            pages.create_deal_scope.elems.chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage.getText().
+                then(function (promise) {
+                    console.log("Chain total of own less than collect error message is : " + promise);
+                    expect(promise).toEqual("Subtotal of Collect cannot be greater than Own");
                 });
         },
 

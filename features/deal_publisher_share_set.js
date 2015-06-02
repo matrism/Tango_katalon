@@ -51,7 +51,10 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
                 steps.create_deal_scope.itAddSimpleScope();
                 steps.create_deal_scope.itCheckVisualDesignPublisherShare();
-
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.waitForDealToBeSaved();
+                steps.deal.returnDealNumber();
             }
         },
         {
@@ -65,6 +68,11 @@ var beforeFeature = function () {
                 steps.create_deal_scope.itCheckInvalidCasesPublisherShare();
                 steps.create_deal_scope.itCheckInvalid3DecimalCasesPublisherShare();
                 steps.create_deal_scope.itCheckSubtotalValidationsCasesPublisherShare();
+                steps.create_deal_scope.itCheckTotalsValidationsCasesPublisherShare();
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.waitForDealToBeSaved();
+                steps.deal.returnDealNumber();
             }
         }];
 

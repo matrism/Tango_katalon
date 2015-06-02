@@ -61,6 +61,12 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        validateChainTotalOfOwnLessThanCollectPublisherShareErrorIsDisplayed: function () {
+            it("Validate that chain total of own cannot be less than collect publisher share error message is correctly displayed ", function () {
+                expect(pages.create_deal_scope.elems.chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage.isDisplayed);
+                pages.create_deal_scope.validateChainTotalOfOwnPublisherCannotBeLessThanCollectShareWarningMessage();
+            });
+        },
 
         validate3DecimalsExceededPublisherShareWarningIsNotDisplayed: function () {
             it("Validate that 3 decimals exceeded publisher share warning message is not displayed ", function () {
@@ -431,6 +437,26 @@ if (steps.create_deal_scope === undefined) {
                 steps.create_deal_scope.validateSubtotalOfOwnLessThanCollectPublisherShareErrorMessageIsDisplayed();
                 steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
                 steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
+            });
+        },
+
+        itCheckTotalsValidationsCasesPublisherShare: function () {
+            describe("Check validation for totals publisher shares set", function () {
+                steps.base.scrollIntoView("First publisher name field", pages.create_deal_scope.elems.firstPublisherNameField);
+                steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("120");
+                steps.create_deal_scope.validateChainTotalOfOwnPublisherShareErrorIsDisplayed();
+                steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+                steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("75");
+                steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("55");
+                steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("25");
+                steps.create_deal_scope.validateChainTotalOfOwnLessThanCollectPublisherShareErrorIsDisplayed();
+                steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+                steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
+                steps.create_deal_scope.clearIntoFirstPublisherNameAMCollectField();
+                steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("88");
+                steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("55");
+                steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("25");
+                steps.create_deal_scope.saveThePublisherShareSet();
             });
         }
 
