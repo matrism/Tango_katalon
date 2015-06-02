@@ -14,6 +14,8 @@ global.hash = {};
 require("../helpers/services_helper");
 
 config = {
+
+
     // chromeOnly: true,
     // chromeDriver: '../node_modules/protractor/selenium/chromedriver',
     seleniumAddress: 'http://localhost:4444/wd/hub',

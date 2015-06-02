@@ -87,6 +87,20 @@ if (steps.deal === undefined) {
             });
         },
 
+        goToIncomeRatesPage:function()
+        {
+            it("Go to Income Rates Summary Page",function()
+            {
+
+
+                pages.deal.clickIncomeRatesLink();
+
+            });
+
+
+
+        }
+
 
 
 

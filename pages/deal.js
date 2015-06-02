@@ -12,7 +12,8 @@ if (pages.deal === undefined) {
             termsHeader: {css: "li.ng-scope:nth-child(2) a[data-ng-click='setActiveTab($tab);']"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
-            scopeHeader : {css: ".scope-heading"}
+            scopeHeader : {css: ".scope-heading"},
+            incomeRates:{css:".nav-tabs>li:nth-child(5)>a"}
         },
 
 
@@ -47,16 +48,23 @@ if (pages.deal === undefined) {
 
         clickScopeHeader:function(){
 
-            // browser.waitForAngular();
+
             pages.base.waitForAjax();
-         //   browser.driver.sleep(10000);
+
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
 
 
 
-         //  ftf.helper.waitForElement(pages.deal.scopeHeaderElement(),30000);
-          //  browser.waitForAngular();
             pages.deal.scopeHeaderElement().click();
+        },
+
+        clickIncomeRatesLink:function()
+        {
+
+            browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
+            pages.deal.elems.incomeRates.click();
+
+
         }
     });
 }

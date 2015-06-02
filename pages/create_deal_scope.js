@@ -17,8 +17,34 @@ if (pages.create_deal_scope === undefined) {
             territoryDropDown: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             addPublisherShareSetLink: {xpath: "//*[@data-ng-click='addChain(pubShareSetEdit.model.id, pubShareSetEdit.activeScope.id);']"},
             firstPublisherNameField: {css: "#deal-publisher div.ng-scope:first-child input[name='acquirer']"},
-            publisherNameDropDownData: {xpath: "//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"}
+            publisherNameDropDownData: {xpath: "//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"},
+            emptyScopeDiv:{css:".text-warning>.validation-message-error>.validation-message-text"},
+            newContractPeriodButton:{css:""}
         },
+        //LOCATORS
+        emptyScopeDiv:function()
+        {
+          return $(".ps-container>.text-warning>.validation-message-error>.validation-message-text");
+
+        },
+        newContractPeriodButton:function()
+        {
+            return $$(".column-add-button-icon").first();
+
+        },
+
+        clickNewContractPeriodButton:function(){
+
+            this.newContractPeriodButton().click();
+
+        },
+        waitForContractPeriodToBeCreated:function()
+        {
+            browser.wait(ExpectedConditions.visibilityOf(this.emptyScopeDiv()));
+
+        }
+,
+
 
 
         addScopeForm: function () {

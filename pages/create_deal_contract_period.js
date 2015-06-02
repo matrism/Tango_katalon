@@ -52,6 +52,8 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         fillTargetEndMonths: function () {
+
+            browser.wait(ExpectedConditions.visibilityOf( pages.create_deal_contract_period.elems.endTargetMonths));
             pages.create_deal_contract_period.elems.endTargetMonths.sendKeys("3");
         },
 

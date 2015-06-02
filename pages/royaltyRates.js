@@ -113,7 +113,7 @@ if (pages.royaltyRates === undefined) {
 
         ,
         newRoyaltyRateSetButton: function () {
-            return element(by.css(" .ng-warn.ng-warn-check-publisher-share-set>div:not(.view-header)>a"));
+            return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
 
         },
 

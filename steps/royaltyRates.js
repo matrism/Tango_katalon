@@ -2,6 +2,7 @@ var _ = require("lodash");
 var promise = protractor.promise;
 hash.royaltyRates = {};
 hash.royaltyRates.RRNames = [];
+hash.royaltyRates.royaltyRateObjectsList = [];
 var ExpectedConditions = protractor.ExpectedConditions;
 if (steps.royaltyRates === undefined) {
     steps.royaltyRates = {
@@ -424,18 +425,32 @@ if (steps.royaltyRates === undefined) {
                 hash.royaltyRates.StartDate = pages.royaltyRates.getEffectiveStartDateInputValue();
 
 
-
-
-
-
-
             })
-
-
-
 
         }
 ,
+        storeRRObject:function()
+        {
+          it("Store RR's data",function()
+            {
+                var royaltyRate = {
+                    name:pages.royaltyRates.getRRInputValue(),
+                    contractualRate:pages.royaltyRates.getContractualRate(),
+                    interCompanyRate:pages.royaltyRates.getInterCompanyRate(),
+                    incomeProvider:pages.royaltyRates.getIncomeProviderInputValue(),
+                    effectiveDate:pages.royaltyRates.getEffectiveStartDateInputValue(),
+                    rateAppMethod:pages.royaltyRates.getRateAppMethod(),
+                    contractPeriod:pages.royaltyRates.getContractPeriod()
+
+                };
+
+                hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
+
+
+            });
+
+
+        },
         saveRRData:function()
         {
             //Saves income providers !!

@@ -10,7 +10,7 @@ if (pages.create_deal_general === undefined) {
         locators: {
             dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},
             dealSigningTerritoryDropDownData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
-            contractingPartiesInput: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            contractingPartiesInput: {css: '.tg-typeahead__input[placeholder="Search by Name or IPI Number"]'},
             contractingPartiesField: {css: "div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
             internalContactsInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.model'] input[ng-model='$term']"},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
@@ -42,7 +42,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillContractingPartiesField: function (field) {
-            pages.create_deal_general.elems.contractingPartiesField.click();
+          //  pages.create_deal_general.elems.contractingPartiesField.click();
             pages.create_deal_general.elems.contractingPartiesInput.sendKeys(field);
         },
 
