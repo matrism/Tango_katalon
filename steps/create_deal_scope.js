@@ -125,7 +125,7 @@ if (steps.create_deal_scope === undefined) {
 
         fillIntoFirstPublisherNameAMCollectField: function () {
             it("Fill into first publisher name AM collect percent random value", function () {
-                pages.create_deal_scope.fillInFirstPublisherNameAMOwnPercent();
+                pages.create_deal_scope.fillInFirstPublisherNameAMCollectPercent();
             });
         },
 

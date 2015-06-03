@@ -14,7 +14,7 @@ global.hash = {};
 require("../helpers/services_helper");
 
 config = {
-    chromeOnly: true,
+    directConnect: true,
     chromeDriver: '../node_modules/protractor/selenium/chromedriver',
     capabilities: {
         "browserName": _tf_config._system_.browser, //firefox, ie

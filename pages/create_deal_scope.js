@@ -222,7 +222,7 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
         },
 
-        fillInFirstPublisherNameAMOwnPercent: function () {
+        fillInFirstPublisherNameAMCollectPercent: function () {
             var percent = (Math.random() * 9 + 1).toFixed(2);
             pages.create_deal_scope.elems.firstPublisherNameAMCollectPercent.sendKeys(percent);
         },
