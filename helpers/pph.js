@@ -83,6 +83,11 @@ pph.allInArray = function(array, values) {
 		}
 	);
 };
+pph.trim = function(value) {
+    return promise.when(value).then(function(value) {
+        return value.trim();
+    });
+};
 pph.toString = function(value) {
 	return promise.when(value).then(function(value) {
 		return value.toString();
