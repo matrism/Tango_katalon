@@ -147,13 +147,8 @@ exports.componentWorkNameBindings = function() {
 exports.componentWorkNameBinding = function(i) {
     return exports.componentWorkNameBindings().get(i);
 };
-exports.showComponentWorkDetailsButtons = function() {
-    return exports.componentWorkRows().all(
-        by.cssContainingText('span', 'Show Details')
-    );
-};
 exports.showComponentWorkDetailsButton = function(i) {
-    return exports.showComponentWorkDetailsButtons().get(i);
+    return exports.componentWorkRows().get(i).$('.show-hide-ca');
 };
 exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function(i) {
     return exports.componentWorkRow(i).element(
