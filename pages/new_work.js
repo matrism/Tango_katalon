@@ -529,7 +529,24 @@ exports.selectRandomCreatorSuggestion = function() {
     });
 };
 exports.selectFirstCreatorSuggestion = function() {
-    $$('.typeahead-result').first().click();
+    var suggestion = $$('.typeahead-result').first();
+    var result = {};
+
+    result.name = pph.trim(suggestion.$('.typeahead-result-text').getText());
+
+    result.ipiNumber = (
+        suggestion.$('.typeahead-result-right').getText().then(function(value) {
+            if(/^\(.*\)$/.test(value)) {
+                value = value.slice(1, -1);
+            }
+
+            return value;
+        })
+    );
+
+    return suggestion.click().then(function() {
+        return result;
+    });
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
