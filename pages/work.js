@@ -147,8 +147,24 @@ exports.componentWorkNameBindings = function() {
 exports.componentWorkNameBinding = function(i) {
     return exports.componentWorkNameBindings().get(i);
 };
+exports.componentWorkIdLabel = function(i) {
+    return exports.componentWorkRows().get(i).element(
+        by.binding('getWorkFullCode(component.model)')
+    );
+};
 exports.showComponentWorkDetailsButton = function(i) {
     return exports.componentWorkRows().get(i).$('.show-hide-ca');
+};
+exports.shellWorkCreatorRows = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.repeater('creator in component.model.creatorsOrderedList')
+    );
+};
+exports.shellWorkCreatorNameLabel = function(i, j) {
+    return exports.componentWorkRows().get(i).$$('.show-ca_name').get(j);
+};
+exports.shellWorkCreatorContributionLabel = function(i, j) {
+    return exports.componentWorkRows().get(i).$$('.show-ca_percenrage').get(j);
 };
 exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function(i) {
     return exports.componentWorkRow(i).element(
@@ -738,6 +754,11 @@ exports.validateCompositeWorkType = function(value) {
         expect(exports.selectedCompositeWorkType()).toBe(value);
     }
 };
+exports.validateComponentWorkId = function(i, value) {
+    var element = exports.componentWorkIdLabel(i);
+    pages.base.scrollIntoView(element);
+    expect(element.getText()).toBe(value);
+};
 exports.validateComponentWorkName = function(i, value) {
     expect(exports.selectedComponentWorkName(i)).toEqual(value);
 };
@@ -745,6 +766,21 @@ exports.validateComponentWorkAllocation = function(i, value) {
     expect(exports.enteredComponentWorkAllocation(i)).toEqual(
         pph.toFixed(value, 3)
     );
+};
+exports.clickShowComponentWorkDetailsButton = function(i) {
+    var element = exports.showComponentWorkDetailsButton(i);
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+exports.validateShellWorkCreatorName = function(i, j, value) {
+    var element = exports.shellWorkCreatorNameLabel(i, j);
+    pages.base.scrollIntoView(element);
+    expect(element.getText()).toContain(value);
+};
+exports.validateShellWorkCreatorContribution = function(i, j, value) {
+    var element = exports.shellWorkCreatorContributionLabel(i, j);
+    pages.base.scrollIntoView(element);
+    expect(pph.parseFloat(element.getText())).toBe(value);
 };
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.work.editCreatorContributionInput(i);

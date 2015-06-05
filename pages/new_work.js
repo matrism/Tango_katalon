@@ -61,6 +61,25 @@ exports.componentWorkAllocationInputs = function() {
         by.model('component.allocation_percentage')
     );
 };
+exports.enterAsNewWorkSuggestion = function() {
+    return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
+};
+exports.shellWorkCreatorNameInputs = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.model('creator.person_name')
+    );
+};
+exports.shellWorkCreatorNameInput = function(i, j) {
+    return exports.shellWorkCreatorNameInputs(i).get(j);
+};
+exports.shellWorkCreatorContributionInputs = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.model('creator.contribution')
+    );
+};
+exports.shellWorkCreatorContributionInput = function(i, j) {
+    return exports.shellWorkCreatorContributionInputs(i).get(j);
+};
 exports.deleteComponentWorkButtons = function() {
     return exports.componentWorkRows().$$('.delete-button');
 };
@@ -418,6 +437,21 @@ exports.enterCreatorSearchTerms = function(i, name) {
 };
 exports.enterRandomLetterOnCreatorNameField = function(i) {
     exports.enterCreatorSearchTerms(i, random.letter());
+};
+exports.selectEnterAsNewWorkSuggestion = function() {
+    return exports.enterAsNewWorkSuggestion().click();
+};
+exports.enterRandomLetterOnShellWorkCreatorNameField = function(i, j) {
+    var element = exports.shellWorkCreatorNameInput(i, j);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(random.letter());
+};
+exports.enterShellWorkCreatorContribution = function(i, j, value) {
+    var element = exports.shellWorkCreatorContributionInput(i, j);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
 };
 exports.validateDefaultComponentWorkSearchFilter = function(i) {
     var element = exports.componentWorkSearchFilterDropdown(i);

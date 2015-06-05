@@ -692,6 +692,19 @@ exports.validateCompositeWorkType = function(data, key) {
         pages.work.validateCompositeWorkType(data[key]);
     });
 };
+exports.validateComponentWorkId = function(i, data, key) {
+    it('Validate component work ID', function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        pages.work.validateComponentWorkId(i, component.workCode);
+    });
+};
 exports.validateComponentWorkName = function(i, data, key) {
     it('Validate component work name #' + (i + 1), function() {
         var component;
@@ -729,6 +742,53 @@ module.exports.validateCreatorContributionInputMask = function(i, validationTabl
 		});
 		pages.work.enterCreatorContribution(i, "");
 	});
+};
+exports.clickShowComponentWorkDetailsButton = function(i) {
+    it('Click "Show Details" button of component work #' + (i + 1), function() {
+        pages.work.clickShowComponentWorkDetailsButton(i);
+    });
+};
+exports.validateShellWorkCreatorName = function(i, j, data, key) {
+    it(
+        'Validate creator name #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            var component;
+            var creator;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            pages.work.validateShellWorkCreatorName(i, j, creator.name);
+        }
+    );
+};
+exports.validateShellWorkCreatorContribution = function(i, j, data, key) {
+    it(
+        'Validate creator contribution #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            var component;
+            var creator;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            pages.work.validateShellWorkCreatorContribution(
+                i, j, creator.contributionToCompositeWork
+            );
+        }
+    );
 };
 module.exports.validateCreationDate = function(year, month, day) {
 	it("Validate creation date (if first validation value is not empty)", function() {

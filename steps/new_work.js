@@ -357,6 +357,20 @@ exports.validateRequiredComponentWorkAllocationField = function(i) {
         pages.new_work.validateRequiredComponentWorkAllocationField(i);
     });
 };
+exports.enterComponentWorkAllocation = function(i, value, data, key) {
+    it('Enter allocation for component work #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        pages.new_work.enterComponentWorkAllocation(i, value);
+        component.allocation = value;
+    });
+};
 exports.enterMediumComponentWorkAllocation = function(i, data, key) {
     it('Enter 50% allocation for component work #' + (i + 1), function() {
         var component;
@@ -370,6 +384,85 @@ exports.enterMediumComponentWorkAllocation = function(i, data, key) {
         component.allocation = 50;
         pages.new_work.enterComponentWorkAllocation(i, component.allocation);
     });
+};
+exports.enterNewShellWork = function(i, title, data, key) {
+    it('Enter new shell work title as component work #' + (i + 1), function() {
+        pages.new_work.enterComponentWorkSearchTerms(i, title);
+    });
+
+    it('Wait for work suggestions to load', function() {
+        pages.base.waitForAjax();
+    });
+
+    it('Select "Enter as a new work" suggestion', function() {
+        pages.new_work.selectEnterAsNewWorkSuggestion().then(function() {
+            var component;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.name = title;
+            component.workCode = 'WW 000000000 00';
+            component.shellWork = true;
+        });
+    });
+};
+exports.selectRandomShellWorkCreator = function(i, j, data, key) {
+    it(
+        'Type a random letter on creator name field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.new_work.enterRandomLetterOnShellWorkCreatorNameField(i, j);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
+            var component;
+            var creator;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.enterShellWorkCreatorContribution = function(i, j, value, data, key) {
+    it(
+        'Enter creator contribution #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.new_work.enterShellWorkCreatorContribution(i, j, value).then(function() {
+                var component;
+                var creator;
+
+                data = data || hash.subjectWorkData || {};
+                key = key || 'components';
+
+                data[key] = data[key] || [];
+                component = data[key][i] = data[key][i] || {};
+
+                component.creators = component.creators || [];
+                creator = component.creators[j] = component.creators[j] || {};
+
+                creator.contribution = value;
+                creator.contributionToCompositeWork = (value / 100) * component.allocation;
+            });
+        }
+    );
 };
 module.exports.selectRandomMusicalDistributionCategory = function() {
 	var deferred = promise.defer();
