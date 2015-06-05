@@ -441,11 +441,14 @@ exports.enterRandomLetterOnCreatorNameField = function(i) {
 exports.selectEnterAsNewWorkSuggestion = function() {
     return exports.enterAsNewWorkSuggestion().click();
 };
-exports.enterRandomLetterOnShellWorkCreatorNameField = function(i, j) {
+exports.enterShellWorkCreatorSearchTerms = function(i, j, value) {
     var element = exports.shellWorkCreatorNameInput(i, j);
     pages.base.scrollIntoView(element);
     element.clear();
-    return element.sendKeys(random.letter());
+    return element.sendKeys(value);
+};
+exports.enterRandomLetterOnShellWorkCreatorNameField = function(i, j) {
+    return exports.enterShellWorkCreatorSearchTerms(i, j, random.letter());
 };
 exports.enterShellWorkCreatorContribution = function(i, j, value) {
     var element = exports.shellWorkCreatorContributionInput(i, j);
