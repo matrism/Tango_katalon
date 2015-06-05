@@ -191,7 +191,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectSpecificPublisherNameDropDown: function () {
             it("Select specific value publisher name drop down", function () {
-                pages.create_deal_scope.selectSpecificPublisherNameDropDown("WB MUSIC CORP. \n(53026414)");
+                pages.create_deal_scope.selectSpecificPublisherNameDropDown("(53026414)\nWB MUSIC CORP.");
             });
         },
 
@@ -246,7 +246,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectSpecificPublisherNameDropDownChainI: function (i) {
             it("Select specific value publisher name drop down chain i", function () {
-                pages.create_deal_scope.selectSpecificPublisherNameDropDownChainI("WB MUSIC CORP. \n(53026414)", i);
+                pages.create_deal_scope.selectSpecificPublisherNameDropDownChainI("(53026414)\nWB MUSIC CORP.", i);
             });
         },
 
@@ -317,6 +317,16 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        itAddPublisherSharePATypeWithMultipleThreeChains: function (i) {
+            describe("Add publisher share set with three chains", function () {
+                steps.create_deal_scope.clickAddChainLink();
+                steps.create_deal_scope.selectDesiredPublisherTypeEOrPADropDownChainI("PA", i);
+                steps.create_deal_scope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
+                steps.create_deal_scope.fillIntoPublisherNameAMFieldChainI(i);
+                steps.create_deal_scope.selectSpecificPublisherNameDropDownChainI(i);
+                steps.create_deal_scope.fillIntoPublisherNameAMCollectFieldChainI(i);
+            });
+        },
 
         itAddPublisherShareWithMultipleThreeChains: function (i) {
             describe("Add publisher share set with three chains", function () {

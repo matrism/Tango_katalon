@@ -23,10 +23,9 @@ if (steps.create_deal_general === undefined) {
             );
         },
 
-
         fillContractingPartyField: function () {
             it("Fill contracting party field", function () {
-                    pages.create_deal_general.fillContractingPartiesField("bmi");
+                    pages.create_deal_general.fillContractingPartiesField("ascap");
                 }
             );
         },
@@ -46,6 +45,14 @@ if (steps.create_deal_general === undefined) {
                 }
             );
         },
+
+        selectRandomContractingParty: function () {
+            it("Select random suggestion", function () {
+                    pages.create_deal_general.selectRandomContractingPartyValueFromDropDown();
+                }
+            );
+        },
+
 
         fillIntoInternalContactField: function (internal_contact) {
             it("Fill into internal contact field", function () {
@@ -89,7 +96,7 @@ if (steps.create_deal_general === undefined) {
                     steps.create_deal_general.selectDealSigningTerritory();
                     steps.create_deal_general.fillContractingPartyField();
                     steps.create_deal_general.waitForContractingPartyDropDown();
-                    steps.create_deal_general.selectContractingParty();
+                    steps.create_deal_general.selectRandomContractingParty();
                 }
             );
         },
