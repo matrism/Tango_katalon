@@ -480,7 +480,7 @@ exports.selectRandomCreatorSuggestion = function() {
         var randomSuggestion = _.sample(suggestions);
         var result = {};
 
-        result.name = randomSuggestion.getAttribute('value');
+        result.name = pph.trim(randomSuggestion.$('.typeahead-result-text').getText());
 
         result.ipiNumber = (
             randomSuggestion.$('.typeahead-result-right').getText().then(function(value) {
