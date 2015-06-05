@@ -98,6 +98,42 @@ var beforeFeature = [
                 [steps.work.validateShellWorkCreatorContribution, [0, 0]],
             ]
         },
+        {
+            name: 'Define a MED composite work with shell works',
+            tags: [],
+            steps: [
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(3)]],
+                [steps.new_work.clickCompositeWorkCheckbox],
+                [steps.new_work.selectCompositeWorkType, ['Medley']],
+                [steps.new_work.enterNewShellWork, [0, 'TEST SHELL WORK ' + randomId(3.1)]],
+                [steps.new_work.enterComponentWorkAllocation, [0, 50]],
+                [steps.new_work.selectRandomShellWorkCreator, [0, 0]],
+                [steps.new_work.enterShellWorkCreatorContribution, [0, 0, 100]],
+                [steps.new_work.enterNewShellWork, [1, 'TEST SHELL WORK ' + randomId(3.2)]],
+                [steps.new_work.enterComponentWorkAllocation, [1, 50]],
+                [steps.new_work.selectRandomShellWorkCreator, [1, 0]],
+                [steps.new_work.enterShellWorkCreatorContribution, [1, 0, 100]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.sleep, [100]],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.validateComponentWorkId, [0]],
+                [steps.work.validateComponentWorkName, [0]],
+                [steps.work.validateComponentWorkAllocation, [0]],
+                [steps.work.clickShowComponentWorkDetailsButton, [0]],
+                [steps.work.validateShellWorkCreatorName, [0, 0]],
+                [steps.work.validateShellWorkCreatorContribution, [0, 0]],
+                [steps.work.validateComponentWorkId, [1]],
+                [steps.work.validateComponentWorkName, [1]],
+                [steps.work.validateComponentWorkAllocation, [1]],
+                [steps.work.clickShowComponentWorkDetailsButton, [1]],
+                [steps.work.validateShellWorkCreatorName, [1, 0]],
+                [steps.work.validateShellWorkCreatorContribution, [1, 0]],
+            ]
+        },
     ];
 
 module.exports = {
