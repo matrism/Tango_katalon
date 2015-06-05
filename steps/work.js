@@ -291,8 +291,8 @@ exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
         pages.work.enterComponentWorkSearchTerms(i, value);
     });
 
-    it('Expect work suggestions dropdown to be displayed', function() {
-        pages.work.expectComponentWorkSuggestionsToBeDisplayed();
+    it('Wait for component work suggestions to load', function() {
+        pages.base.waitForAjax();
     });
 
     it('Select a random work', function() {
