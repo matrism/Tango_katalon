@@ -441,6 +441,45 @@ exports.selectRandomShellWorkCreator = function(i, j, data, key) {
         });
     });
 };
+exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, key) {
+    var previousComponent;
+    var previousCreator;
+
+    it(
+        'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            previousComponent = data[key][k] || {};
+
+            previousComponent.creators = previousComponent.creators || [];
+            previousCreator = previousComponent.creators[l] || {};
+
+            pages.new_work.enterShellWorkCreatorSearchTerms(i, j, previousCreator.ipiNumber);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select first creator suggestion', function() {
+        pages.new_work.selectFirstCreatorSuggestion().then(function(selected) {
+            var component;
+            var creator;
+
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
 exports.enterShellWorkCreatorContribution = function(i, j, value, data, key) {
     it(
         'Enter creator contribution #' + (j + 1) +
