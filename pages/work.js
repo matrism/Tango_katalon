@@ -832,8 +832,17 @@ exports.enterComponentWorkSearchTerms = function(i, value) {
     element.clear();
     element.sendKeys(value);
 };
+exports.expectCreatorSuggestionsToBeDisplayed = function() {
+    browser.wait(
+        ExpectedConditions.visibilityOf($('.typeahead-result')),
+        _tf_config._system_.wait_timeout
+    );
+};
 exports.expectComponentWorkSuggestionsToBeDisplayed = function() {
-    pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
+    browser.wait(
+        ExpectedConditions.visibilityOf($('.typeahead-result')),
+        _tf_config._system_.wait_timeout
+    );
 };
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     var element = exports.componentWorkAllocationInput(i);

@@ -419,12 +419,6 @@ exports.enterCreatorSearchTerms = function(i, name) {
 exports.enterRandomLetterOnCreatorNameField = function(i) {
     exports.enterCreatorSearchTerms(i, random.letter());
 };
-exports.expectComponentWorkSuggestionsToBeDisplayed = function() {
-    pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
-};
-exports.expectCreatorSuggestionsToBeDisplayed = function() {
-    pages.base.expectTypeaheadSuggestionsDropdownToBeDisplayed();
-};
 exports.validateDefaultComponentWorkSearchFilter = function(i) {
     var element = exports.componentWorkSearchFilterDropdown(i);
     pages.base.scrollIntoView(element);

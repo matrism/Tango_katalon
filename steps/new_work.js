@@ -233,7 +233,7 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
     });
 
     it('Expect work suggestions dropdown to be displayed', function() {
-        pages.new_work.expectComponentWorkSuggestionsToBeDisplayed();
+        pages.work.expectComponentWorkSuggestionsToBeDisplayed();
     });
 
     it('Select a random work', function() {
@@ -292,7 +292,7 @@ exports.selectRandomCreator = function(i, data, key) {
     });
 
     it('Expect creator suggestions dropdown to be displayed', function() {
-        pages.new_work.expectCreatorSuggestionsToBeDisplayed();
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
     });
 
     it('Select a random creator', function() {

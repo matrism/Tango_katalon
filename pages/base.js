@@ -201,16 +201,6 @@ module.exports.selectRandomDropdownOption.tg = function(element, more) {
 		});
 	});
 };
-exports.expectTypeaheadSuggestionsDropdownToBeDisplayed = function(more) {
-    more = more || {};
-    if(more.timeout === undefined) {
-        more.timeout = _tf_config._system_.wait_timeout;
-    }
-    browser.wait(
-        ExpectedConditions.visibilityOf($('.typeahead-result')),
-        more.timeout
-    );
-};
 exports.enterRandomLetterOnField = function(element) {
     var randomLetter = random.letter();
 
