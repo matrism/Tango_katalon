@@ -64,6 +64,27 @@ exports.componentWorkAllocationInputs = function() {
 exports.enterAsNewWorkSuggestion = function() {
     return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
 };
+exports.shellWorkTitleLanguageDropdown = function(i) {
+    return exports.componentWorkRows().get(i).element(
+        by.model('component.shell.primary_title.language_code')
+    );
+};
+exports.shellWorkTitleInput = function(i) {
+    return exports.componentWorkRows().get(i).element(
+        by.model('component.shell.primary_title.title')
+    );
+};
+exports.shellWorkCreatorRows = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.repeater('creator in component.shell.tmpCreators')
+    );
+};
+exports.shellWorkCreatorRoleDropdown = function(i, j) {
+    return (
+        exports.componentWorkRows().get(i)
+            .all(by.model('creator.role')).get(j)
+   );
+};
 exports.shellWorkCreatorNameInputs = function(i) {
     return exports.componentWorkRows().get(i).all(
         by.model('creator.person_name')
@@ -441,6 +462,32 @@ exports.enterRandomLetterOnCreatorNameField = function(i) {
 exports.selectEnterAsNewWorkSuggestion = function() {
     return exports.enterAsNewWorkSuggestion().click();
 };
+exports.validateSelectedShellWorkTitleLanguage = function(i, value) {
+    var element = exports.shellWorkTitleLanguageDropdown(i);
+    pages.base.scrollIntoView(element);
+    expect(pages.base.selectedTgDropdownOption(element)).toBe(value);
+};
+exports.enteredShellWorkTitle = function(i) {
+    var element = exports.shellWorkTitleInput(i);
+    pages.base.scrollIntoView(element);
+    return element.getAttribute('value');
+};
+exports.validateEnteredShellWorkTitle = function(i, value) {
+    expect(exports.enteredShellWorkTitle(i)).toBe(value);
+};
+exports.selectedShellWorkCreatorRole = function(i, j) {
+    var element = exports.shellWorkCreatorRoleDropdown(i, j);
+    pages.base.scrollIntoView(element);
+    return pages.base.selectedTgDropdownOption(element);
+};
+exports.validateSelectedShellWorkCreatorRole = function(i, j, value) {
+    expect(exports.selectedShellWorkCreatorRole(i, j)).toBe(value);
+};
+exports.validateRequiredShellWorkCreatorNameField = function(i, j) {
+    var element = exports.shellWorkCreatorNameInput(i, j);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
+};
 exports.enterShellWorkCreatorSearchTerms = function(i, j, value) {
     var element = exports.shellWorkCreatorNameInput(i, j);
     pages.base.scrollIntoView(element);
@@ -449,6 +496,11 @@ exports.enterShellWorkCreatorSearchTerms = function(i, j, value) {
 };
 exports.enterRandomLetterOnShellWorkCreatorNameField = function(i, j) {
     return exports.enterShellWorkCreatorSearchTerms(i, j, random.letter());
+};
+exports.validateRequiredShellWorkCreatorContributionField = function(i, j) {
+    var element = exports.shellWorkCreatorContributionInput(i, j);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.enterShellWorkCreatorContribution = function(i, j, value) {
     var element = exports.shellWorkCreatorContributionInput(i, j);
