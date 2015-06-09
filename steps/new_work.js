@@ -416,7 +416,7 @@ exports.validateDefaultShellWorkTitleLanguage = function(i) {
     });
 };
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
-    it('Expect shell work title #' + (i + 1) + 'to match entered one', function() {
+    it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
         var components = hash.subjectWorkData.components || [];
         var shellWork = components[i] || {};
 
