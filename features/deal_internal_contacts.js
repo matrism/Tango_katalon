@@ -140,6 +140,7 @@ var beforeFeature = function () {
                 steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("a");
                 steps.edit_deal_general.itCancelInternalContactsChanges();
                 steps.edit_deal_general.cancelModalDialog();
+                steps.base.scrollIntoView("Term header link", pages.deal.elems.termsHeader);
                 steps.deal.goToTermsDealTabDetails();
                 steps.edit_deal_general.cancelModalDialog();
                 steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("test");

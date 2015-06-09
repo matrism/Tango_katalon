@@ -219,7 +219,6 @@ if (pages.create_deal_scope === undefined) {
 
         fillInFirstPublisherNameAMField: function (publisherNameAM) {
             pages.create_deal_scope.elems.firstPublisherNameAMField.sendKeys(publisherNameAM);
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
         },
 
         fillInFirstPublisherNameAMCollectPercent: function () {
@@ -230,6 +229,15 @@ if (pages.create_deal_scope === undefined) {
         fillInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
             pages.create_deal_scope.elems.firstPublisherNameAMCollectPercent.sendKeys(percent);
         },
+
+        clearFirstPublisherNameField: function () {
+            pages.create_deal_scope.elems.firstPublisherNameField.clear();
+        },
+
+        clearFirstPublisherNameAMField: function () {
+            pages.create_deal_scope.elems.firstPublisherNameAMField.clear();
+        },
+
 
         clearInFirstPublisherNameOwnPercent: function () {
             pages.create_deal_scope.elems.firstPublisherOwnPercent.clear();
@@ -253,8 +261,8 @@ if (pages.create_deal_scope === undefined) {
         },
 
         validatePublisherNameDropDownHasNoResults: function () {
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.typeahead.dropdown-menu.ng-scope li.ng-scope.active"))));
-            element(By.css("ul.typeahead.dropdown-menu.ng-scope li.ng-scope.active a")).getAttribute("title")
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer"))));
+            element(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer")).getText()
                 .then(function (promise) {
                     console.log("The message for no results of publisher name drop down is: " + promise);
                     expect(promise).toContain("No results for");

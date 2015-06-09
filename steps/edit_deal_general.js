@@ -118,6 +118,7 @@ if (steps.edit_deal_general === undefined) {
         clickEditInternalContactRoleRowI: function (i) {
             it("Click edit internal contact role row i", function () {
                 pages.edit_deal_general.clickEditInternalContactsRoleRowI(i);
+                pages.edit_deal_general.waitForAjax();
             });
         },
 

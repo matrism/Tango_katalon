@@ -159,6 +159,18 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        clearIntoFirstPublisherNameField: function () {
+            it("Clear into first publisher name field", function () {
+                pages.create_deal_scope.clearFirstPublisherNameField();
+            });
+        },
+
+        clearIntoFirstPublisherNameAMField: function () {
+            it("Clear into first publisher name AM field", function () {
+                pages.create_deal_scope.clearFirstPublisherNameAMField();
+            });
+        },
+
         clearIntoFirstPublisherNameAMCollectField: function () {
             it("Clear into first publisher name AM collect percent", function () {
                 pages.create_deal_scope.clearFirstPublisherNameAMCollectPercent();
@@ -371,16 +383,16 @@ if (steps.create_deal_scope === undefined) {
                 //check validation for invalid publisher name and invalid IPI number
                 steps.create_deal_scope.fillIntoFirstPublisherNameField("lkjhg");
                 steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
-                steps.create_deal_scope.clickPublisherSharesSetArea();
+                steps.create_deal_scope.clearIntoFirstPublisherNameField();
                 steps.create_deal_scope.fillIntoFirstPublisherNameField("59684");
                 steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
-                steps.create_deal_scope.clickPublisherSharesSetArea();
+                steps.create_deal_scope.clearIntoFirstPublisherNameField();
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMField("poi");
                 steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
-                steps.create_deal_scope.clickPublisherSharesSetArea();
+                steps.create_deal_scope.clearIntoFirstPublisherNameAMField();
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMField("6985");
                 steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
-                steps.create_deal_scope.clickPublisherSharesSetArea();
+                steps.create_deal_scope.clearIntoFirstPublisherNameAMField();
                 //add valid publisher name E and AM searched by IPI number
                 steps.create_deal_scope.fillIntoFirstPublisherNameField("1234");
                 steps.create_deal_scope.selectRandomPublisherNameDropDownValue();
