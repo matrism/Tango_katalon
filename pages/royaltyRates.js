@@ -38,8 +38,9 @@ if (pages.royaltyRates === undefined) {
           return $(".btn-cancel");
         },
         incomeProviderDeleteButtons:function(){
-
-          return element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove"));
+var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
+          //return element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove"));
+            return temp.$("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove");
 
         },
 
@@ -72,7 +73,7 @@ if (pages.royaltyRates === undefined) {
         savedRRNames: function () {
 
 
-            return element.all(by.css(".rate-set-summary-table>table>tbody>tr>td:nth-child(1)"));
+            return $$(".rate-set-summary-table>table>tbody>tr>td:nth-child(1)");
         },
         saveRRIncomeProviders: function () {
             return element(by.css(".rate-set-summary-table>table>tbody>tr>td:nth-child(3)"));
@@ -102,13 +103,13 @@ if (pages.royaltyRates === undefined) {
 
         contractualRateInput: function () {
 
-            return element(by.model("set.rate_percentage"));
+            return element.all(by.model("set.rate_percentage")).last();
 
         }
         ,
         effectiveStartDateInput: function () {
 
-            return element(by.css(".rate-set-calendar>div>.date-picker-input"));
+            return element.all(by.css(".rate-set-calendar>div>.date-picker-input")).last();
         }
 
         ,
@@ -118,7 +119,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         royaltyRateInput: function () {
-            return $(".rate-set-name-input");
+            return $$(".rate-set-name-input").last();
 
         },
         scopeHeading: function () {
@@ -128,7 +129,7 @@ if (pages.royaltyRates === undefined) {
         }
         ,
         onReceiptMethodButton: function () {
-            return element(by.css(".rate-set-rate-ram>.btn-group")).element(by.buttonText("On Receipt"));
+            return $$(".rate-set-rate-ram>.btn-group").last().element(by.buttonText("On Receipt"));
 
 
         }
@@ -328,7 +329,7 @@ if (pages.royaltyRates === undefined) {
         {
             var element;
 
-            element = this.royaltyRateInput();
+            element = $(".rate-set-name-input");
             browser.wait(ExpectedConditions.visibilityOf(element));
 
         },
@@ -387,7 +388,9 @@ if (pages.royaltyRates === undefined) {
                     sentKeys = element;
 
                     var incomeProviderInput;
-                    incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
+                  // incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
+
+                   incomeProviderInput = $$(".flex1>.ng-valid>div>div>div>div>div>input").last();
 
 
                     pages.base.scrollIntoView($(".flex1>.ng-valid>div>div>div>div>div>input"));

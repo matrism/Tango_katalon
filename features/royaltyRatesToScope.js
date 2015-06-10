@@ -9,6 +9,10 @@ require(steps_path + "royaltyRates");
 require(pages_path + "deal");
 require(steps_path + "deal");
 
+require(pages_path + "modal");
+require(steps_path + "modal");
+
+
 require(pages_path + "create_deal_general");
 require(steps_path + "create_deal_general");
 
@@ -17,6 +21,10 @@ require(steps_path + "create_deal_contract_period");
 
 require(pages_path + "create_deal_scope");
 require(steps_path + "create_deal_scope");
+
+require(pages_path + "editRoyaltyRates");
+require(steps_path + "editRoyaltyRates");
+
 
 require(steps_path + "login");
 
@@ -227,7 +235,7 @@ var beforeFeature = function () {
             }
         },
         {
-            name: "As a user I want to dirty check  single rate edit from Scope ",
+            name: "As a user I want to dirty check  multiple  rate edit from Scope ",
             tags: ["dirtyCheckRR2"],
             steps: function () {
 
@@ -285,6 +293,146 @@ var beforeFeature = function () {
 
 
                 steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+            }
+        },
+        {
+            name: "As a user I want to dirty check  single rate edit from Scope by navigating away",
+            tags: ["dirtyCheckRR3"],
+            steps: function () {
+
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+
+
+
+                steps.royaltyRates.editSingleRoyaltySet();
+                steps.editRoyaltyRates.openRateSetPanel();
+
+
+                steps.royaltyRates.waitForPanel();
+                steps.royaltyRates.saveRRData();
+                steps.royaltyRates.clearRoyaltyRateInput();
+                steps.royaltyRates.typeIntoRRInput("Edited RR Set");
+                steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
+                steps.royaltyRates.addEffectiveStartDate("2019-05-26");
+
+
+                steps.deal.goToIncomeRatesPage();
+
+
+                steps.modal.clickYesOnPopupModal();
+
+
+
+
+
+                steps.royaltyRates.refreshPage();
+
+                steps.deal.goToTermsDealTabDetails();
+
+                steps.royaltyRates.openSavedScope();
+
+
+
+                steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+            }
+        },
+
+        {
+            name: "As a user I want to dirty check  multiple rate edit from Scope by navigatint away",
+            tags: ["dirtyCheckRR4"],
+            steps: function () {
+
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                steps.royaltyRates.saveRateSet();
+
+
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+                steps.royaltyRates.setEffectiveStartDate("2017-01-02");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+
+
+                        steps.royaltyRates.storeAllRRData();
+
+
+                steps.royaltyRates.editSingleRoyaltySet();
+
+
+                steps.royaltyRates.openAllRRFields();
+
+                steps.royaltyRates.waitForPanel();
+                steps.royaltyRates.saveRRData();
+                steps.royaltyRates.clearRoyaltyRateInput();
+                steps.royaltyRates.typeIntoRRInput("Edited RR Set");
+                steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
+                steps.royaltyRates.addEffectiveStartDate("2019-05-26");
+
+
+
+
+
+                steps.deal.goToIncomeRatesPage();
+
+
+                steps.modal.clickYesOnPopupModal();
+
+
+
+
+
+                steps.royaltyRates.refreshPage();
+
+                steps.deal.goToTermsDealTabDetails();
+
+                steps.royaltyRates.openSavedScope();
+
+
+
+                //steps.royaltyRates.test();
+                steps.royaltyRates.verifyAllRateSetSavedData();
 
 
 

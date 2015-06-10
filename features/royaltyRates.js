@@ -114,6 +114,67 @@ var beforeFeature = function () {
             }
 
 
+        },
+
+        {
+
+            name: "Royalty Rate Set save deal mode",
+            tags: ["rr5"],
+            steps: function () {
+
+
+
+
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+                steps.royaltyRates.storeRRData();
+
+                //steps.royaltyRates.saveRateSet();
+                //
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+                steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+            }
+        },
+
+        {
+
+            name: "Royalty Rate Set cam be saved with errors",
+            tags: ["rr6"],
+            steps: function () {
+
+
+
+
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+                steps.royaltyRates.addEffectiveStartDate("2-2-2");
+
+                // steps.royaltyRates.clickOnReceiptApplicationMethod();
+                //steps.royaltyRates.confirmChangingRateApplicationMethod();
+                steps.royaltyRates.storeRRData();
+
+                steps.royaltyRates.saveRateSet();
+                //
+                //steps.deal.itContinueToNextPage();
+                //steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+                steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+            }
         }
 
     ];

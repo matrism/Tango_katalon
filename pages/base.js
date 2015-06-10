@@ -15,7 +15,9 @@ module.exports.dirtyCheckContinueEditingButton = function() {
 module.exports.dirtyCheckConfirmCancellationButton = function() {
 	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
 };
-// Interaction.
+
+
+
 module.exports.isPresentAndDisplayed = function(element) {
 	return element.isPresent().then(function(isPresent) {
 		if(!isPresent) {

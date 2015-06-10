@@ -19,7 +19,7 @@ if (pages.create_deal_scope === undefined) {
 
         addScopeForm: function () {
             pages.create_deal_scope.elems.addScopeIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.contractTypeDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.contractTypeDropDown));
         },
 
         fillScopeDescriptionField: function () {
@@ -50,9 +50,9 @@ if (pages.create_deal_scope === undefined) {
 
         addTerritoryByTypingToScope: function () {
             pages.create_deal_scope.elems.territoryField.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryInput));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryInput));
             pages.create_deal_scope.elems.territoryInput.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.territoryDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
         },
 
 
@@ -78,7 +78,7 @@ if (pages.create_deal_scope === undefined) {
 
         selectRandomPublisherNameDropDown: function () {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal_scope.elems.publisherNameDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
             browser.driver.findElements(By.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));

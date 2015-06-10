@@ -435,12 +435,12 @@ if (steps.royaltyRates === undefined) {
             {
                 var royaltyRate = {
                     name:pages.royaltyRates.getRRInputValue(),
-                    contractualRate:pages.royaltyRates.getContractualRate(),
-                    interCompanyRate:pages.royaltyRates.getInterCompanyRate(),
+                    //contractualRate:pages.royaltyRates.getContractualRate(),
+                    //interCompanyRate:pages.royaltyRates.getInterCompanyRate(),
                     incomeProvider:pages.royaltyRates.getIncomeProviderInputValue(),
                     effectiveDate:pages.royaltyRates.getEffectiveStartDateInputValue(),
-                    rateAppMethod:pages.royaltyRates.getRateAppMethod(),
-                    contractPeriod:pages.royaltyRates.getContractPeriod()
+                    //rateAppMethod:pages.royaltyRates.getRateAppMethod(),
+                    //contractPeriod:pages.royaltyRates.getContractPeriod()
 
                 };
 
@@ -504,7 +504,7 @@ if (steps.royaltyRates === undefined) {
         {
             it("Store the added RR's in hashmap",function(){
 
-
+               // browser.wait(ExpectedConditions.visibilityOf(   pages.royaltyRates.savedRRNames()));
 
                 browser.driver.sleep(3000);
           // console.log(pages.royaltyRates.savedRRNames());
@@ -532,8 +532,7 @@ if (steps.royaltyRates === undefined) {
 
             it("Verify that RR's were saved successfully",function(){
 
-
-
+                browser.driver.sleep(3000);
 
                 pages.royaltyRates.savedRRNames().map(function(item) {
 
