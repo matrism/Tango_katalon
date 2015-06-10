@@ -441,12 +441,14 @@ if (steps.royaltyRates === undefined) {
                 {
                     hash.royaltyRates = {};
                 }
-
+                var royaltyRate = {};
                 pages.royaltyRates.getRRInputValue().then(function(value) {
-                    hash.royaltyRates.RRName = value;
+                    //hash.royaltyRates.RRName = value;
+                    //console.log("Try value"+value);
+                    royaltyRate.name= value;
                 });
-                var royaltyRate = {
-                    name:  hash.royaltyRates.RRName
+
+                //    name:  hash.royaltyRates.RRName
                     //incomeProvider:pages.royaltyRates.getIncomeProviderInputValue(),
                    // effectiveDate:pages.royaltyRates.getEffectiveStartDateInputValue()
                     //contractualRate:pages.royaltyRates.getContractualRate(),
@@ -455,7 +457,7 @@ if (steps.royaltyRates === undefined) {
                     //rateAppMethod:pages.royaltyRates.getRateAppMe"trap"thod(),
                     //contractPeriod:pages.royaltyRates.getContractPeriod()
 
-                };
+              //  };
 
               //  console.log(pages.royaltyRates.getRRInputValue().getText());
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);

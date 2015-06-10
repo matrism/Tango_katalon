@@ -50,10 +50,11 @@ if (steps.RRSummaryTable === undefined) {
                 {
                     console.log(RRArray);
                     console.log(hash.royaltyRates.royaltyRateObjectsList)
+                    expect(RRArray).toEqual(hash.royaltyRates.royaltyRateObjectsList);
                 });
 
 
-                 expect(RRArray).toBe(hash.royaltyRates.royaltyRateObjectsList);
+
 
 
 

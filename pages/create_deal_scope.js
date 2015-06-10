@@ -19,7 +19,7 @@ if (pages.create_deal_scope === undefined) {
 
         addContractPeriodIcon:function()
         {
-          return $(".column-add-button-icon").first();
+          return $$(".column-add-button-icon").first();
 
         },
         addContractPeriodButton:function()

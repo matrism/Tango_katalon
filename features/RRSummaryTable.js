@@ -48,82 +48,82 @@ var beforeFeature = function () {
 
 
 
-            //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("10");
-            //steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
-            //steps.royaltyRates.addEffectiveStartDate("2023-06-17");
-            //steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //steps.royaltyRates.storeRRObject();
-            //steps.royaltyRates.saveRateSet();
-            //
-            //steps.create_deal_scope.itAddSimpleScope();
-            //
-            //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("10");
-            //steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
-            //steps.royaltyRates.addEffectiveStartDate("2043-06-17");
-            //steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //steps.royaltyRates.storeRRObject();
-            //steps.royaltyRates.saveRateSet();
-            //
-            //
-            //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("12");
-            //steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
-            //steps.royaltyRates.addEffectiveStartDate("2034-06-17");
-            //steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //steps.royaltyRates.storeRRObject();
-            //steps.royaltyRates.saveRateSet();
-            //
-            //
-            //steps.create_deal_scope.itAddNewContractPeriod();
-            //
-            //steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriodEndDate();
-            //
-            //
-            //steps.create_deal_scope.itAddSimpleScope();
-            //
-            //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("12");
-            //steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
-            //steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //steps.royaltyRates.storeRRObject();
-            //steps.royaltyRates.saveRateSet();
-            //
-            //
-            //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("34");
-            //steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
-            //steps.royaltyRates.addEffectiveStartDate("2056-06-17");
-            //steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //steps.royaltyRates.storeRRObject();
-            //steps.royaltyRates.saveRateSet();
-            //
-            //steps.create_deal_scope.itAddSimpleScope();
-            //
-            //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("18");
-            //steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
-            //steps.royaltyRates.addEffectiveStartDate("2078-06-17");
-            //steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //steps.royaltyRates.storeRRObject();
-            //steps.royaltyRates.saveRateSet();
-            //
-            //
-            //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("21");
-            //steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
-            //steps.royaltyRates.addEffectiveStartDate("2096-06-17");
-            //steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //steps.royaltyRates.storeRRObject();
-            //steps.royaltyRates.saveRateSet();
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addRatePercentageToContractualField("10");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
+            steps.royaltyRates.addEffectiveStartDate("2023-06-17");
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRObject();
+            steps.royaltyRates.saveRateSet();
+
+            steps.create_deal_scope.itAddSimpleScope();
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addRatePercentageToContractualField("10");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addEffectiveStartDate("2043-06-17");
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRObject();
+            steps.royaltyRates.saveRateSet();
+
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addRatePercentageToContractualField("12");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
+            steps.royaltyRates.addEffectiveStartDate("2034-06-17");
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRObject();
+            steps.royaltyRates.saveRateSet();
+
+
+            steps.create_deal_scope.itAddNewContractPeriod();
+
+            steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriodEndDate();
+
+
+            steps.create_deal_scope.itAddSimpleScope();
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addRatePercentageToContractualField("12");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRObject();
+            steps.royaltyRates.saveRateSet();
+
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addRatePercentageToContractualField("34");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
+            steps.royaltyRates.addEffectiveStartDate("2056-06-17");
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRObject();
+            steps.royaltyRates.saveRateSet();
+
+            steps.create_deal_scope.itAddSimpleScope();
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addRatePercentageToContractualField("18");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addEffectiveStartDate("2078-06-17");
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRObject();
+            steps.royaltyRates.saveRateSet();
+
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addRatePercentageToContractualField("21");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
+            steps.royaltyRates.addEffectiveStartDate("2096-06-17");
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.storeRRObject();
+            steps.royaltyRates.saveRateSet();
 
 
 
