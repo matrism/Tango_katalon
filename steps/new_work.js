@@ -410,17 +410,17 @@ exports.enterNewShellWork = function(i, title, data, key) {
         });
     });
 };
-exports.validateDefaultShellWorkTitleLanguage = function(i) {
-    it('Validate default shell work title language #' + (i + 1), function() {
-        pages.new_work.validateSelectedShellWorkTitleLanguage(i, 'English');
-    });
-};
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
         var components = hash.subjectWorkData.components || [];
         var shellWork = components[i] || {};
 
         pages.new_work.validateEnteredShellWorkTitle(i, shellWork.name);
+    });
+};
+exports.validateDefaultShellWorkTitleLanguage = function(i) {
+    it('Validate default shell work title language #' + (i + 1), function() {
+        pages.new_work.validateSelectedShellWorkTitleLanguage(i, 'English');
     });
 };
 exports.validateDefaultShellWorkCreatorRole = function(i, j) {

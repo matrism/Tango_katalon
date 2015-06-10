@@ -350,6 +350,98 @@ exports.enterMediumComponentWorkAllocation = function(i, data, key) {
         pages.work.enterComponentWorkAllocation(i, component.allocation);
     });
 };
+exports.enterNewShellWork = function(i, value) {
+    it('Enter new shell work title as component work #' + (i + 1), function() {
+        pages.work.enterComponentWorkSearchTerms(i, value);
+    });
+
+    it('Wait for work suggestions to load', function() {
+        pages.base.waitForAjax();
+    });
+
+    it('Select "Enter as a new work" suggestion', function() {
+        pages.work.selectEnterAsNewWorkSuggestion().then(function() {
+            var data;
+            var components;
+            var component;
+
+            data = hash.subjectWorkData;
+
+            components = data.components = data.components || [];
+            component = components[i] = components[i] || {};
+
+            component.name = value;
+            component.workCode = 'WW 000000000 00';
+            component.shellWork = true;
+        });
+    });
+};
+exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
+    it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
+        var components = hash.subjectWorkData.components || [];
+        var shellWork = components[i] || {};
+
+        pages.work.validateEnteredShellWorkTitle(i, shellWork.name);
+    });
+};
+exports.selectRandomShellWorkCreator = function(i, j) {
+    it(
+        'Type a random letter on creator name field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.work.enterRandomLetterOnShellWorkCreatorNameField(i, j);
+        }
+    );
+
+    it('Expect creator suggestions to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        pages.work.selectRandomCreatorSuggestion().then(function(selected) {
+            var data;
+            var components;
+            var component;
+            var creators;
+            var creator;
+
+            data = hash.subjectWorkData;
+
+            components = data.components = data.components || [];
+            component = components[i] = components[i] || {};
+
+            creators = component.creators = component.creators || [];
+            creator = creators[j] = creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.enterShellWorkCreatorContribution = function(i, j, value) {
+    it(
+        'Enter creator contribution #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.work.enterShellWorkCreatorContribution(i, j, value).then(function() {
+                var data;
+                var components;
+                var component;
+                var creators;
+                var creator;
+
+                data = hash.subjectWorkData;
+
+                components = data.components = data.components || [];
+                component = components[i] = components[i] || {};
+
+                creators = component.creators = component.creators || [];
+                creator = creators[j] = creators[j] || {};
+
+                creator.contribution = value;
+                creator.contributionToCompositeWork = (value / 100) * component.allocation;
+            });
+        }
+    );
+};
 module.exports.cancelCreatorsEditing = function() {
 	steps.base.clickElement (
 		"cancel creators button",

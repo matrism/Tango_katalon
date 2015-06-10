@@ -1,5 +1,6 @@
 "use strict";
 var pph = require("../helpers/pph");
+var random = require('../helpers/random');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 exports = module.exports = pages.work = new ftf.pageObject();
@@ -194,6 +195,30 @@ exports.componentWorkAllocationInputs = function() {
 };
 exports.componentWorkAllocationInput = function(i) {
     return exports.componentWorkAllocationInputs().get(i);
+};
+exports.enterAsNewWorkSuggestion = function() {
+    return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
+};
+exports.shellWorkTitleInput = function(i) {
+    return exports.componentWorkRows().get(i).element(
+        by.model('component.shell.primary_title.title')
+    );
+};
+exports.shellWorkCreatorNameInputs = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.model('creator.person_name')
+    );
+};
+exports.shellWorkCreatorNameInput = function(i, j) {
+    return exports.shellWorkCreatorNameInputs(i).get(j);
+};
+exports.shellWorkCreatorContributionInputs = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.model('creator.contribution')
+    );
+};
+exports.shellWorkCreatorContributionInput = function(i, j) {
+    return exports.shellWorkCreatorContributionInputs(i).get(j);
 };
 exports.deleteComponentWorkButtons = function() {
     return exports.componentWorkRows().$$('.delete-button');
@@ -868,6 +893,32 @@ exports.enterComponentWorkSearchTerms = function(i, value) {
     element.clear();
     element.sendKeys(value);
 };
+exports.enteredShellWorkTitle = function(i) {
+    var element = exports.shellWorkTitleInput(i);
+    pages.base.scrollIntoView(element);
+    return element.getAttribute('value');
+};
+exports.selectEnterAsNewWorkSuggestion = function() {
+    return exports.enterAsNewWorkSuggestion().click();
+};
+exports.validateEnteredShellWorkTitle = function(i, value) {
+    expect(exports.enteredShellWorkTitle(i)).toBe(value);
+};
+exports.enterShellWorkCreatorSearchTerms = function(i, j, value) {
+    var element = exports.shellWorkCreatorNameInput(i, j);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.enterRandomLetterOnShellWorkCreatorNameField = function(i, j) {
+    return exports.enterShellWorkCreatorSearchTerms(i, j, random.letter());
+};
+exports.enterShellWorkCreatorContribution = function(i, j, value) {
+    var element = exports.shellWorkCreatorContributionInput(i, j);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
 exports.expectCreatorSuggestionsToBeDisplayed = function() {
     browser.wait(
         ExpectedConditions.visibilityOf($('.typeahead-result')),
@@ -928,6 +979,40 @@ exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function(mor
 };
 exports.confirmComponentWorkDeletion = function() {
     exports.confirmComponentWorkDeletionButton().click();
+};
+exports.selectRandomCreatorSuggestion = function() {
+    return $$(".typeahead-result").then(function(suggestions) {
+        var randomSuggestion = _.sample(suggestions);
+        var randomSuggestionResultRight;
+        var deferredIpiNumber;
+        var result = {};
+
+        result.name = pph.trim(randomSuggestion.$('.typeahead-result-text').getText());
+
+        deferredIpiNumber = promise.defer();
+        result.ipiNumber = deferredIpiNumber.promise;
+
+        randomSuggestionResultRight = randomSuggestion.$('.typeahead-result-right');
+
+        randomSuggestionResultRight.isPresent().then(function(hasResultRight) {
+            if(!hasResultRight) {
+                deferredIpiNumber.fulfill(null);
+                return;
+            }
+
+            randomSuggestionResultRight.getText().then(function(value) {
+                if(/^\(.*\)$/.test(value)) {
+                    value = value.slice(1, -1);
+                }
+
+                deferredIpiNumber.fulfill(value);
+            })
+        });
+
+        randomSuggestion.click();
+
+        return result;
+    });
 };
 module.exports.enterCreationYear = function(value) {
 	var element = pages.work.creationYearInput();

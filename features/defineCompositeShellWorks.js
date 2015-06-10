@@ -309,6 +309,47 @@ var beforeFeature = [
                 [steps.work.validateShellWorkCreatorContribution, [2, 0]],
             ]
         },
+        {
+            name: 'Edit a COS composite work with shell works',
+            tags: [],
+            steps: [
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(7)]],
+                [steps.new_work.clickCompositeWorkCheckbox],
+                [steps.new_work.selectCompositeWorkType, ['Composite of Samples']],
+                [steps.new_work.selectRandomCreator, [0]],
+                [steps.new_work.enterCreatorContribution, [0, 50]],
+                [steps.new_work.enterNewShellWork, [0, 'TEST SHELL WORK ' + randomId(7.1)]],
+                [steps.new_work.enterComponentWorkAllocation, [0, 50]],
+                [steps.new_work.expectShellWorkTitleToMatchEnteredOne, [0]],
+                [steps.new_work.selectRandomShellWorkCreator, [0, 0]],
+                [steps.new_work.enterShellWorkCreatorContribution, [0, 0, 100]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.base.sleep, [100]],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.deleteComponentWork, [0]],
+                [steps.work.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed],
+                [steps.work.confirmComponentWorkDeletion],
+                [steps.work.enterNewShellWork, [0, 'TEST SHELL WORK ' + randomId(7.2)]],
+                [steps.work.enterComponentWorkAllocation, [0, 50]],
+                [steps.work.expectShellWorkTitleToMatchEnteredOne, [0]],
+                [steps.work.selectRandomShellWorkCreator, [0, 0]],
+                [steps.work.enterShellWorkCreatorContribution, [0, 0, 100]],
+                [steps.work.saveCreators],
+
+                [steps.base.refreshPage],
+                [steps.work.hoverCreatorNamesContainer],
+                [steps.work.editCreators],
+                [steps.work.validateComponentWorkAllocation, [0]],
+                [steps.work.clickShowComponentWorkDetailsButton, [0]],
+                [steps.work.validateShellWorkCreatorName, [0, 0]],
+                [steps.work.validateShellWorkCreatorContribution, [0, 0]],
+            ]
+        },
     ];
 
 module.exports = {
