@@ -437,8 +437,16 @@ if (steps.royaltyRates === undefined) {
                 //var Kiwi = {
                 //    fruit : "kiwi"
                 //    };
+                if(!hash.royaltyRates)
+                {
+                    hash.royaltyRates = {};
+                }
+
+                pages.royaltyRates.getRRInputValue().then(function(value) {
+                    hash.royaltyRates.RRName = value;
+                });
                 var royaltyRate = {
-                    name:pages.royaltyRates.getRRInputValue()
+                    name:  hash.royaltyRates.RRName
                     //incomeProvider:pages.royaltyRates.getIncomeProviderInputValue(),
                    // effectiveDate:pages.royaltyRates.getEffectiveStartDateInputValue()
                     //contractualRate:pages.royaltyRates.getContractualRate(),
@@ -449,6 +457,7 @@ if (steps.royaltyRates === undefined) {
 
                 };
 
+              //  console.log(pages.royaltyRates.getRRInputValue().getText());
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
 
 

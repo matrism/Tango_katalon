@@ -39,7 +39,7 @@ if (pages.RRSummaryTable === undefined) {
         rateSetsNames:function()
         {
 
-            return $$(".rate-summary-table__scope-rates.ng-scope>div>div:nth-child(1)>div");
+            return element.all(by.css(".rate-summary-table__scope-rates.ng-scope>div>div:nth-child(1)>div"));
         },
         contractualRates:function()
         {

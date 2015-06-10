@@ -40,41 +40,27 @@ if (steps.RRSummaryTable === undefined) {
                 RRList.each( function(n) {
                     n.getText().then(function(text) {
                         console.log(text);
-                    });
+                        var royaltyRate = {
+
+                            name:text
+                        };
+                         RRArray.push(royaltyRate);
+                    })
+                    }).then(function()
+                {
+                    console.log(RRArray);
+                    console.log(hash.royaltyRates.royaltyRateObjectsList)
                 });
-//var i ;
-//                for (i = 0; i < RRList.length; i++) {
-//                   console.log( RRList[i].getText());
-//console.log("some text god dammit");
-//                    var royaltyRate = {
-//
-//                        name:RRList[i].getText()
-//                    };
-//                    RRArray.push(royaltyRate);
-//                }
 
 
-
-                        //var royaltyRate = {
-                        //
-                        //    name:(el.$("div>div:nth-child(1)")).getText()
-                        //};
-                  //  console.log(el.getText());
-                    //
-                    //    RRArray.push(royaltyRate);
-                    //
-                    //
-                    //
-                    //
-                    //});
-                    //
-                 //expect(RRArray).toBe(hash.royaltyRates.royaltyRateObjectsList);
+                 expect(RRArray).toBe(hash.royaltyRates.royaltyRateObjectsList);
 
 
 
 
 
             })
+
 
         }
 
