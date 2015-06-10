@@ -12,24 +12,36 @@ if (steps.RRSummaryTable === undefined) {
             it("Check that Income Rates Table displays correct data", function () {
 
                 browser.wait(ExpectedConditions.visibilityOf($(".rate-summary-table__scope")));
-                browser.wait(ExpectedConditions.visibilityOf( pages.RRSummaryTable.rateSetsNames()));
+
+                var RRList = pages.RRSummaryTable.rateSetsNames();
+                browser.wait(function() {
+                    return RRList.first().isPresent().then(function(present) {
+                        if(!present) {
+                            return false;
+                        }
+                        return RRList.first().isDisplayed();
+                    });
+                });
 
             //    browser.wait
 // console.log(pages.RRSummaryTable.rateSetsNames().length);
                 //browser.sleep(10000);
                 //
                 //
-                 var RRList = pages.RRSummaryTable.rateSetsNames();
                 //
                 var RRArray = [];
                 //
                 //
                 //
                 //
-                _.forEach(RRList, function(n) {
-                   console.log(RRList.length);
-                  console.log(n.getText());
-                 });
+                RRList.count().then(function(count) {
+                    console.log(count);
+                });
+                RRList.each( function(n) {
+                    n.getText().then(function(text) {
+                        console.log(text);
+                    });
+                });
 //var i ;
 //                for (i = 0; i < RRList.length; i++) {
 //                   console.log( RRList[i].getText());
