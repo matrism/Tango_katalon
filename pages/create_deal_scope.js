@@ -17,6 +17,19 @@ if (pages.create_deal_scope === undefined) {
             publisherNameDropDownData: {xpath: "//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"}
         },
 
+        addContractPeriodIcon:function()
+        {
+          return $(".column-add-button-icon").first();
+
+        },
+        addContractPeriodButton:function()
+        {
+          return $(".column-add-button-hint").first();
+
+        },
+
+
+
         addScopeForm: function () {
             pages.create_deal_scope.elems.addScopeIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.contractTypeDropDown));
@@ -84,6 +97,19 @@ if (pages.create_deal_scope === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 })
+        },
+
+        clickNewContractPeriodButton:function()
+        {
+
+      //      browser.actions().mouseMove(this.addContractPeriodIcon).perform();
+
+       //     browser.wait(ExpectedConditions.visibilityOf(this.addContractPeriodButton()));
+            this.addContractPeriodIcon().click();
+
+
+
+
         }
 
     });

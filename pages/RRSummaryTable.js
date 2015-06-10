@@ -20,6 +20,11 @@ if (pages.RRSummaryTable === undefined) {
 
         //PAGE OBJECT LOCATORS
 
+        rrList:function()
+        {
+
+            return $$(".rate-summary-table__scope-rates.ng-scope");
+        },
         outterCollapseTableButtons:function()
         {
 
@@ -34,7 +39,7 @@ if (pages.RRSummaryTable === undefined) {
         rateSetsNames:function()
         {
 
-            return $$(".rate-summary-table__scope-item-col:nth-child(1)");
+            return $$(".rate-summary-table__scope-rates.ng-scope>div>div:nth-child(1)>div");
         },
         contractualRates:function()
         {

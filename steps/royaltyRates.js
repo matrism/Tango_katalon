@@ -433,13 +433,18 @@ if (steps.royaltyRates === undefined) {
         {
           it("Store RR's data",function()
             {
+
+                //var Kiwi = {
+                //    fruit : "kiwi"
+                //    };
                 var royaltyRate = {
-                    name:pages.royaltyRates.getRRInputValue(),
+                    name:pages.royaltyRates.getRRInputValue()
+                    //incomeProvider:pages.royaltyRates.getIncomeProviderInputValue(),
+                   // effectiveDate:pages.royaltyRates.getEffectiveStartDateInputValue()
                     //contractualRate:pages.royaltyRates.getContractualRate(),
                     //interCompanyRate:pages.royaltyRates.getInterCompanyRate(),
-                    incomeProvider:pages.royaltyRates.getIncomeProviderInputValue(),
-                    effectiveDate:pages.royaltyRates.getEffectiveStartDateInputValue(),
-                    //rateAppMethod:pages.royaltyRates.getRateAppMethod(),
+
+                    //rateAppMethod:pages.royaltyRates.getRateAppMe"trap"thod(),
                     //contractPeriod:pages.royaltyRates.getContractPeriod()
 
                 };
@@ -602,13 +607,14 @@ var el = pages.editRoyaltyRates.rrSumarryTable();
             });
 
 
-        }
-,
+        },
+
         pause: function () {
 
 
             it("Pause Step", function () {
-                browser.manage().timeouts().pageLoadTimeout(10000);
+              //  browser.manage().timeouts().pageLoadTimeout(10000);
+                browser.sleep(5000);
 
             });
 
