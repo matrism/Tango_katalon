@@ -24,13 +24,19 @@ module.exports.goToScopeDelivery = function() {
 	);
 };
 module.exports.findCurrentlyOpenWorkId = function() {
-	var deferred = promise.defer();
-	it (
-		"Find currently open work ID", function() {
-			deferred.fulfill(pages.work.workId());
-		}
-	);
-	return deferred.promise;
+    var deferred = promise.defer();
+
+    it("Find currently open work ID", function() {
+        var workId = pages.work.workId();
+
+        workId.then(function(workId) {
+            hash.subjectWorkData.id = workId;
+        });
+
+        deferred.fulfill(workId);
+    });
+
+    return deferred.promise;
 };
 module.exports.workInclusionOnWebsite = function() {
 	var deferred = promise.defer();
