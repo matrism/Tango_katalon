@@ -529,7 +529,9 @@ module.exports.goToScopeDelivery = function() {
 	);
 };
 module.exports.workId = function() {
-	return pages.work.workIdBinding().getText();
+    var element = pages.work.workIdBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.primaryWorkTitle = function() {
 	var element = pages.work.primaryWorkTitleBinding();
