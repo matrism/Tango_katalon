@@ -442,6 +442,24 @@ exports.enterShellWorkCreatorContribution = function(i, j, value) {
         }
     );
 };
+exports.searchForPreviouslyEnteredComponentWork = function(i) {
+    it('Select "Title" work search filter tag #1', function() {
+        pages.work.selectWorkSearchFilterTag(0, 'Title');
+    });
+
+    it('Search for previously entered component work #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.components[i].name);
+    });
+
+    it('Wait for search results to load', function() {
+        pages.base.waitForAjax();
+    });
+};
+exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function() {
+    it('Expect "No results for work search" to be displayed', function() {
+        pages.work.expectNoResultsForWorkSearchMessageToBeDisplayed();
+    });
+};
 module.exports.cancelCreatorsEditing = function() {
 	steps.base.clickElement (
 		"cancel creators button",

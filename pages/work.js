@@ -15,6 +15,30 @@ module.exports.open = function(workId) {
 		}
 	);
 };
+exports.workSearchFilterTagDropdown = function(i) {
+    return pages.base.mainSearchBar().element(by.model('$filterTag.filter'));
+};
+exports.workSearchTermsInput = function() {
+    return pages.base.mainSearchBar().element(by.model('$term'));
+};
+exports.noResultsForWorkSearchMessage = function() {
+    return pages.base.mainSearchBar().$('[data-ng-if="$dataSets[0].data.noResults"]');
+};
+exports.selectWorkSearchFilterTag = function(i, value) {
+    var element = exports.workSearchFilterTagDropdown(i);
+    pages.base.scrollIntoView(element);
+    return pages.base.selectDropdownOption(element, value);
+};
+exports.enterWorkSearchTerms = function(value) {
+    var element = exports.workSearchTermsInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function() {
+    var element = exports.noResultsForWorkSearchMessage();
+    expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+};
 module.exports.workIdBinding = function() {
 	return element(by.binding("getWorkFullCode(work.pristine)"));
 };

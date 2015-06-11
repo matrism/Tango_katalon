@@ -32,6 +32,9 @@ exports.expectModalPopUpToBeDisplayed = function(more) {
         more.timeout
     );
 };
+exports.mainSearchBar = function() {
+    return $('#DSP-SEARCH');
+};
 module.exports.dirtyCheckContinueEditingButton = function() {
     return exports.modalFooter().element(
         by.cssContainingText("button", "Continue Editing")

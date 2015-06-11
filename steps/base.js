@@ -105,6 +105,11 @@ module.exports.validateRedirection = function(pageName, expUrl) {
 		});
 	});
 };
+exports.waitForAjax = function() {
+    it('Wait for AJAX requests to finish', function() {
+        pages.base.waitForAjax();
+    });
+};
 exports.sleep = function(time) {
     it('Sleep for ' + time + 'ms', function() {
         browser.sleep(time);

@@ -47,6 +47,9 @@ var beforeFeature = [
                 [steps.work.clickShowComponentWorkDetailsButton, [0]],
                 [steps.work.validateShellWorkCreatorName, [0, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [0, 0]],
+
+                [steps.work.searchForPreviouslyEnteredComponentWork, [0]],
+                [steps.work.expectNoResultsForWorkSearchMessageToBeDisplayed],
             ]
         },
         {
