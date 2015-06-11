@@ -24,6 +24,18 @@ exports.workSearchTermsInput = function() {
 exports.noResultsForWorkSearchMessage = function() {
     return pages.base.mainSearchBar().$('[data-ng-if="$dataSets[0].data.noResults"]');
 };
+exports.workSearchMatches = function() {
+    return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
+};
+exports.workSearchMatch = function(i) {
+    return exports.workSearchMatches().get(i);
+};
+exports.workSearchMatchCount = function() {
+    return exports.workSearchMatches().count();
+};
+exports.expectWorkSearchMatchCountToBe = function(value) {
+    expect(exports.workSearchMatchCount()).toBe(value);
+};
 exports.selectWorkSearchFilterTag = function(i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);
@@ -38,6 +50,9 @@ exports.enterWorkSearchTerms = function(value) {
 exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function() {
     var element = exports.noResultsForWorkSearchMessage();
     expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+};
+exports.clickWorkSearchMatch = function(i) {
+    return exports.workSearchMatch(i).click();
 };
 module.exports.workIdBinding = function() {
 	return element(by.binding("getWorkFullCode(work.pristine)"));
@@ -532,6 +547,9 @@ module.exports.workId = function() {
     var element = pages.work.workIdBinding();
     pages.base.scrollIntoView(element);
     return element.getText();
+};
+exports.validateWorkId = function(value) {
+    expect(exports.workId()).toBe(value);
 };
 module.exports.primaryWorkTitle = function() {
 	var element = pages.work.primaryWorkTitleBinding();
