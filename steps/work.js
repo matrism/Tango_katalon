@@ -493,6 +493,19 @@ exports.searchForPreviouslyEnteredWorkByPrimaryTitle = function() {
         pages.base.waitForAjax();
     });
 };
+exports.searchForPreviouslyEnteredWorkByAlternateTitle = function(i) {
+    it('Select "Title" work search filter tag', function() {
+        pages.work.selectWorkSearchFilterTag(0, 'Title');
+    });
+
+    it('Search for previously entered alternate work title #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.alternateTitles[i]);
+    });
+
+    it('Wait for search results to load', function() {
+        pages.base.waitForAjax();
+    });
+};
 exports.expectWorkSearchMatchCountToBe = function(value) {
     it('Expect work search match count to be ' + value, function() {
         pages.work.expectWorkSearchMatchCountToBe(value);

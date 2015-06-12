@@ -15,11 +15,13 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Search for a work by work ID, song code, and primary title',
+            name: 'Search for a work by work ID, song code, and primary and alternate titles',
             tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(0)]],
+                [steps.new_work.enterAlternateWorkTitle, [0, 'TEST WORK ALTERNATE TITLE ' + randomId(0.1)]],
+                [steps.new_work.enterAlternateWorkTitle, [1, 'TEST WORK ALTERNATE TITLE ' + randomId(0.2)]],
                 [steps.new_work.selectRandomCreator, [0]],
                 [steps.new_work.enterCreatorContribution, [0, 100]],
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
@@ -44,6 +46,20 @@ var beforeFeature = [
 
                 [steps.base.goToHomePage],
                 [steps.work.searchForPreviouslyEnteredWorkByPrimaryTitle],
+                [steps.work.expectWorkSearchMatchCountToBe, [1]],
+                [steps.work.clickWorkSearchMatch, [0]],
+                [steps.base.waitForAjax],
+                [steps.work.validateWorkId],
+
+                [steps.base.goToHomePage],
+                [steps.work.searchForPreviouslyEnteredWorkByAlternateTitle, [0]],
+                [steps.work.expectWorkSearchMatchCountToBe, [1]],
+                [steps.work.clickWorkSearchMatch, [0]],
+                [steps.base.waitForAjax],
+                [steps.work.validateWorkId],
+
+                [steps.base.goToHomePage],
+                [steps.work.searchForPreviouslyEnteredWorkByAlternateTitle, [1]],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
                 [steps.work.clickWorkSearchMatch, [0]],
                 [steps.base.waitForAjax],
