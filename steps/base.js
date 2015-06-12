@@ -3,6 +3,11 @@ var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 steps.base = exports;
+exports.goToHomePage = function() {
+    it('Go to home page', function() {
+        pages.base.open();
+    });
+};
 module.exports.scrollIntoView = function(elName, el) {
 	it (
 		"Scroll '" + elName + "' into view", function() {

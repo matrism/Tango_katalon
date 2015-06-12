@@ -8,6 +8,10 @@ exports = module.exports = pages.base = new ftf.pageObject ({
 		logout_link: { id: "DSP-LOGOUT" }
 	}
 });
+exports.open = function() {
+    browser.get(_tf_config.urls.app_url);
+    exports.waitForAjax();
+};
 exports.modalHeading = function() {
     return $('.modal-header h3, .modal-header h4');
 };
