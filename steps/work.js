@@ -519,6 +519,19 @@ exports.searchForWorkUsingPreviouslySelectedCreatorName = function(i) {
         pages.base.waitForAjax();
     });
 };
+exports.searchForWorkUsingPreviouslySelectedCreatorIpiNumber = function(i) {
+    it('Select "Creator" work search filter tag', function() {
+        pages.work.selectWorkSearchFilterTag(0, 'Creator');
+    });
+
+    it('Search for work using previously selected creator IPI number #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].ipiNumber);
+    });
+
+    it('Wait for search results to load', function() {
+        pages.base.waitForAjax();
+    });
+};
 exports.expectWorkSearchMatchCountToBe = function(value) {
     it('Expect work search match count to be ' + value, function() {
         pages.work.expectWorkSearchMatchCountToBe(value);

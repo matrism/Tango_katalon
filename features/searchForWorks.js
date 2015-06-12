@@ -67,7 +67,7 @@ var beforeFeature = [
             ]
         },
         {
-            name: 'Search for a work by creator name',
+            name: 'Search for a work by creator name and IPI number',
             tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
@@ -82,6 +82,10 @@ var beforeFeature = [
 
                 [steps.base.goToHomePage],
                 [steps.work.searchForWorkUsingPreviouslySelectedCreatorName, [0]],
+                [steps.work.expectWorkSearchMatchCountNotToBe, [0]],
+
+                [steps.base.goToHomePage],
+                [steps.work.searchForWorkUsingPreviouslySelectedCreatorIpiNumber, [0]],
                 [steps.work.expectWorkSearchMatchCountNotToBe, [0]],
             ]
         },
