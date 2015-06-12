@@ -158,7 +158,9 @@ module.exports.validateDefaultMusicLibrary = function() {
 };
 module.exports.enterPrimaryWorkTitle = function(value) {
     it('Enter primary work title', function() {
-        pages.new_work.enterPrimaryWorkTitle(value);
+        pages.new_work.enterPrimaryWorkTitle(value).then(function() {
+            hash.subjectWorkData.primaryTitle = value;
+        });
     });
 };
 module.exports.enterRandomPrimaryWorkTitle = function() {
