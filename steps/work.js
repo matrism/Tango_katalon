@@ -506,9 +506,27 @@ exports.searchForPreviouslyEnteredWorkByAlternateTitle = function(i) {
         pages.base.waitForAjax();
     });
 };
+exports.searchForWorkUsingPreviouslySelectedCreatorName = function(i) {
+    it('Select "Creator" work search filter tag', function() {
+        pages.work.selectWorkSearchFilterTag(0, 'Creator');
+    });
+
+    it('Search for work using previously selected creator name #' + (i + 1), function() {
+        pages.work.enterCreatorNameAsWorkSearchTerms(hash.subjectWorkData.creators[i].name);
+    });
+
+    it('Wait for search results to load', function() {
+        pages.base.waitForAjax();
+    });
+};
 exports.expectWorkSearchMatchCountToBe = function(value) {
     it('Expect work search match count to be ' + value, function() {
         pages.work.expectWorkSearchMatchCountToBe(value);
+    });
+};
+exports.expectWorkSearchMatchCountNotToBe = function(value) {
+    it('Expect work search match count not to be ' + value, function() {
+        pages.work.expectWorkSearchMatchCountNotToBe(value);
     });
 };
 exports.clickWorkSearchMatch = function(i) {

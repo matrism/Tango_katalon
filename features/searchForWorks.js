@@ -66,6 +66,25 @@ var beforeFeature = [
                 [steps.work.validateWorkId],
             ]
         },
+        {
+            name: 'Search for a work by creator name',
+            tags: [],
+            steps: [
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],
+                [steps.new_work.selectRandomCreator, [0]],
+                [steps.new_work.enterCreatorContribution, [0, 100]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.waitForAjax],
+                [steps.work.findCurrentlyOpenWorkId],
+
+                [steps.base.goToHomePage],
+                [steps.work.searchForWorkUsingPreviouslySelectedCreatorName, [0]],
+                [steps.work.expectWorkSearchMatchCountNotToBe, [0]],
+            ]
+        },
     ];
 
 module.exports = {

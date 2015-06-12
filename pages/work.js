@@ -36,6 +36,9 @@ exports.workSearchMatchCount = function() {
 exports.expectWorkSearchMatchCountToBe = function(value) {
     expect(exports.workSearchMatchCount()).toBe(value);
 };
+exports.expectWorkSearchMatchCountNotToBe = function(value) {
+    expect(exports.workSearchMatchCount()).not.toBe(value);
+};
 exports.selectWorkSearchFilterTag = function(i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);
@@ -46,6 +49,16 @@ exports.enterWorkSearchTerms = function(value) {
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
+};
+exports.enterCreatorNameAsWorkSearchTerms = function(value) {
+    return promise.when(value).then(function(value) {
+        var reResult;
+        if(value.indexOf(',') !== -1) {
+            reResult = /^(.+), ([^,]+)$/.exec(value)[1];
+            value = reResult[1] + ' ' + reResult[0];
+        }
+        return exports.enterWorkSearchTerms(value);
+    });
 };
 exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function() {
     var element = exports.noResultsForWorkSearchMessage();
