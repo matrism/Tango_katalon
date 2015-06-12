@@ -412,11 +412,11 @@ module.exports.enterPrimaryWorkTitle = function(title) {
 	element.clear();
 	return element.sendKeys(title);
 };
-module.exports.enterAlternateWorkTitle = function(i, title) {
-	var element = pages.new_work.alternateWorkTitleInput(i);
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(title);
+exports.enterAlternateWorkTitle = function(i, title) {
+    var element = pages.new_work.alternateWorkTitleInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(title);
 };
 exports.validateDefaultCompositeWorkCheckboxState = function() {
     var element = exports.compositeWorkCheckbox();
