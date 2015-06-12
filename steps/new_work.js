@@ -176,7 +176,12 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 };
 module.exports.enterAlternateWorkTitle = function(i, value) {
     it('Enter alternate work title #' + (i + 1), function() {
-        pages.new_work.enterAlternateWorkTitle(i, value);
+        pages.new_work.enterAlternateWorkTitle(i, value).then(function() {
+            var data = hash.subjectWorkData;
+            var alternateTitles = data.alternateTitles = data.alternateTitles || [];
+
+            alternateTitles[i] = value;
+        });
     });
 };
 module.exports.enterRandomAlternateWorkTitle = function(i) {
