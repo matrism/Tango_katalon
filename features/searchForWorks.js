@@ -15,7 +15,7 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Search for a work by work ID',
+            name: 'Search for a work by work ID and song code',
             tags: [],
             steps: [
                 [steps.new_work.goToNewWorkPage],
@@ -29,6 +29,13 @@ var beforeFeature = [
                 [steps.base.waitForAjax],
                 [steps.work.findCurrentlyOpenWorkId],
                 [steps.work.searchForPreviouslyEnteredWorkById, [0]],
+                [steps.work.expectWorkSearchMatchCountToBe, [1]],
+                [steps.work.clickWorkSearchMatch, [0]],
+                [steps.base.waitForAjax],
+                [steps.work.validateWorkId],
+
+                [steps.base.goToHomePage],
+                [steps.work.searchForPreviouslyEnteredWorkBySongCode, [0]],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
                 [steps.work.clickWorkSearchMatch, [0]],
                 [steps.base.waitForAjax],

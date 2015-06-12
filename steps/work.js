@@ -467,6 +467,19 @@ exports.searchForPreviouslyEnteredWorkById = function() {
         pages.base.waitForAjax();
     });
 };
+exports.searchForPreviouslyEnteredWorkBySongCode = function() {
+    it('Select "Work ID" work search filter tag', function() {
+        pages.work.selectWorkSearchFilterTag(0, 'Work ID');
+    });
+
+    it('Search for previously entered work song code', function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode);
+    });
+
+    it('Wait for search results to load', function() {
+        pages.base.waitForAjax();
+    });
+};
 exports.expectWorkSearchMatchCountToBe = function(value) {
     it('Expect work search match count to be ' + value, function() {
         pages.work.expectWorkSearchMatchCountToBe(value);
