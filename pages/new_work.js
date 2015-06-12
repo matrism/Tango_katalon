@@ -410,7 +410,7 @@ module.exports.enterPrimaryWorkTitle = function(title) {
 	var element = pages.new_work.primaryWorkTitleInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
-	element.sendKeys(title);
+	return element.sendKeys(title);
 };
 module.exports.enterAlternateWorkTitle = function(i, title) {
 	var element = pages.new_work.alternateWorkTitleInput(i);
