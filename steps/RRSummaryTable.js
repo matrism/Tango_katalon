@@ -23,17 +23,8 @@ if (steps.RRSummaryTable === undefined) {
                     });
                 });
 
-            //    browser.wait
-// console.log(pages.RRSummaryTable.rateSetsNames().length);
-                //browser.sleep(10000);
-                //
-                //
-                //
                 var RRArray = [];
-                //
-                //
-                //
-                //
+
                 RRList.count().then(function(count) {
                     console.log(count);
                 });
@@ -49,7 +40,7 @@ if (steps.RRSummaryTable === undefined) {
                     }).then(function()
                 {
                     console.log(RRArray);
-                    console.log(hash.royaltyRates.royaltyRateObjectsList)
+                    console.log(hash.royaltyRates.royaltyRateObjectsList);
                     expect(RRArray).toEqual(hash.royaltyRates.royaltyRateObjectsList);
                 });
 

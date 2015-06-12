@@ -24,6 +24,26 @@ if (pages.deal === undefined) {
 
         },
 
+        errorHeader:function()
+        {
+
+            return $$(".text-error").first();
+        }
+        ,
+        errorIcons:function()
+        {
+          return $$(".fa.fa-exclamation-triangle.error-icon");
+
+        },
+
+        errorRR:function()
+        {
+
+            return    return $$(".text-error").last();
+        },
+
+        //END OF LOCATORS
+
         continueToNextPage: function () {
             pages.deal.elems.continueButton.click();
 
@@ -67,6 +87,38 @@ if (pages.deal === undefined) {
 
             pages.deal.scopeHeaderElement().click();
         },
+
+        errorHeaderIsVisible:function()
+        {
+
+            return this.errorHeader().isDisplayed();
+        },
+
+        errorIconsAreVisible:function()
+        {
+            var bool=false;
+
+
+            this.errorIcons.each(function(el)
+            {
+                if(!bool)
+                {
+                    bool = el.isDisplayed();
+
+                }
+
+
+            });
+
+       return bool;
+
+        },
+        errorRRIsVisible:function()
+        {
+
+            return this.errorRR.isDisplayed();
+
+        }
 
 
     });

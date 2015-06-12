@@ -434,32 +434,50 @@ if (steps.royaltyRates === undefined) {
           it("Store RR's data",function()
             {
 
-                //var Kiwi = {
-                //    fruit : "kiwi"
-                //    };
+
                 if(!hash.royaltyRates)
                 {
                     hash.royaltyRates = {};
                 }
                 var royaltyRate = {};
                 pages.royaltyRates.getRRInputValue().then(function(value) {
-                    //hash.royaltyRates.RRName = value;
-                    //console.log("Try value"+value);
+
                     royaltyRate.name= value;
                 });
 
-                //    name:  hash.royaltyRates.RRName
-                    //incomeProvider:pages.royaltyRates.getIncomeProviderInputValue(),
-                   // effectiveDate:pages.royaltyRates.getEffectiveStartDateInputValue()
-                    //contractualRate:pages.royaltyRates.getContractualRate(),
-                    //interCompanyRate:pages.royaltyRates.getInterCompanyRate(),
+                //pages.royaltyRates.getIncomeProviderInputValue().then(function(value) {
+                //
+                //
+                //
+                //    royaltyRate.incomeProvider=value;
+                //});
+                //
+                //pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
+                //
+                //
+                //
+                //    royaltyRate.effectiveDate=value;
+                //});
+                //
+                //pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
+                //
+                //
+                //
+                //    royaltyRate.effectiveDate=value;
+                //});
 
-                    //rateAppMethod:pages.royaltyRates.getRateAppMe"trap"thod(),
-                    //contractPeriod:pages.royaltyRates.getContractPeriod()
+
+
+
+                 //   contractualRate:pages.royaltyRates.getContractualRate(),
+                //    interCompanyRate:pages.royaltyRates.getInterCompanyRate(),
+
+                //    rateAppMethod:pages.royaltyRates.getRateAppMe"trap"thod(),
+               //     contractPeriod:pages.royaltyRates.getContractPeriod()
 
               //  };
 
-              //  console.log(pages.royaltyRates.getRRInputValue().getText());
+
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
 
 

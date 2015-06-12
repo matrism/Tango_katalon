@@ -160,16 +160,13 @@ var beforeFeature = function () {
                 steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
                 steps.royaltyRates.addEffectiveStartDate("2-2-2");
 
-                // steps.royaltyRates.clickOnReceiptApplicationMethod();
-                //steps.royaltyRates.confirmChangingRateApplicationMethod();
                 steps.royaltyRates.storeRRData();
 
                 steps.royaltyRates.saveRateSet();
-                //
-                //steps.deal.itContinueToNextPage();
-                //steps.deal.saveDeal();
+
                 steps.deal.clickFirstScopeHeader();
                 steps.royaltyRates.verifyRateSetSavedData();
+                steps.deal.verifyErrorMessages();
 
 
 

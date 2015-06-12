@@ -99,6 +99,20 @@ if (steps.deal === undefined) {
 
 
 
+        },
+
+        verifyErrorMessages:function()
+        {it("Check that error messages are displayed correctly",function()
+            {
+                expect(pages.deal.errorHeaderIsVisible()).toBeTruthy();
+                expect(pages.deal.errorIconsAreVisible()).toBeTruthy();
+                expect(pages.deal.errorRRIsVisible()).toBeTruthy();
+
+
+            }
+        )
+
+
         }
 
 
