@@ -31,6 +31,7 @@ module.exports.findCurrentlyOpenWorkId = function() {
 
         workId.then(function(workId) {
             hash.subjectWorkData.id = workId;
+            hash.subjectWorkData.songCode = workId.slice(3, -3);
         });
 
         deferred.fulfill(workId);
