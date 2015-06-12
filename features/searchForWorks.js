@@ -25,9 +25,10 @@ var beforeFeature = [
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
-
                 [steps.base.waitForAjax],
                 [steps.work.findCurrentlyOpenWorkId],
+
+                [steps.base.goToHomePage],
                 [steps.work.searchForPreviouslyEnteredWorkById],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
                 [steps.work.clickWorkSearchMatch, [0]],
