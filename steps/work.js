@@ -480,6 +480,19 @@ exports.searchForPreviouslyEnteredWorkBySongCode = function() {
         pages.base.waitForAjax();
     });
 };
+exports.searchForPreviouslyEnteredWorkByPrimaryTitle = function() {
+    it('Select "Title" work search filter tag', function() {
+        pages.work.selectWorkSearchFilterTag(0, 'Title');
+    });
+
+    it('Search for previously entered primary work title', function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.primaryTitle);
+    });
+
+    it('Wait for search results to load', function() {
+        pages.base.waitForAjax();
+    });
+};
 exports.expectWorkSearchMatchCountToBe = function(value) {
     it('Expect work search match count to be ' + value, function() {
         pages.work.expectWorkSearchMatchCountToBe(value);
