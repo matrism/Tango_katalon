@@ -42,7 +42,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillContractingPartiesField: function (field) {
-          //  pages.create_deal_general.elems.contractingPartiesField.click();
+            pages.create_deal_general.elems.contractingPartiesField.click();
             pages.create_deal_general.elems.contractingPartiesInput.sendKeys(field);
         },
 
