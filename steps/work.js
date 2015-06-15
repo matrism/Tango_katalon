@@ -499,6 +499,16 @@ exports.expectWorkSearchMatchCountNotToBe = function(value) {
         pages.work.expectWorkSearchMatchCountNotToBe(value);
     });
 };
+exports.addAnotherWorkSearchTerm = function() {
+    it('Add another work search term', function() {
+        pages.work.addAnotherWorkSearchTerm();
+    });
+};
+exports.removeWorkSearchTerm = function(i) {
+    it('Remove work search term #' + (i + 1), function() {
+        pages.work.removeWorkSearchTerm(i);
+    });
+};
 exports.clickWorkSearchMatch = function(i) {
     it('Click work search match #' + (i + 1), function() {
         pages.work.clickWorkSearchMatch(i);

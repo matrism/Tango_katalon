@@ -24,6 +24,12 @@ exports.workSearchTermsInput = function() {
 exports.noResultsForWorkSearchMessage = function() {
     return pages.base.mainSearchBar().$('[data-ng-if="$dataSets[0].data.noResults"]');
 };
+exports.addAnotherWorkSearchTermOption = function() {
+    return pages.base.mainSearchBar().$('[data-ng-click="selectFilterMatch($term);"]');
+};
+exports.removeWorkSearchTermButton = function(i) {
+    return pages.base.mainSearchBar().$$('.tg-typeahead__tag-remove').get(i);
+};
 exports.workSearchMatches = function() {
     return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
 };
@@ -63,6 +69,12 @@ exports.enterCreatorNameAsWorkSearchTerms = function(value) {
 exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function() {
     var element = exports.noResultsForWorkSearchMessage();
     expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+};
+exports.addAnotherWorkSearchTerm = function() {
+    return exports.addAnotherWorkSearchTermOption().click();
+};
+exports.removeWorkSearchTerm = function(i) {
+    return exports.removeWorkSearchTermButton(i).click();
 };
 exports.clickWorkSearchMatch = function(i) {
     return exports.workSearchMatch(i).click();

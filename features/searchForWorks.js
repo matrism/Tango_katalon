@@ -103,6 +103,40 @@ var beforeFeature = [
                 [steps.work.expectWorkSearchMatchCountNotToBe, [0]],
             ]
         },
+        {
+            name: 'Search for a work by primary title and creator name (combination)',
+            tags: [],
+            steps: [
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],
+                [steps.new_work.selectRandomCreator, [0]],
+                [steps.new_work.enterCreatorContribution, [0, 100]],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.waitForAjax],
+
+                [steps.base.goToHomePage],
+                [steps.work.selectWorkSearchTagFilter, [0, 'Creator']],
+                [steps.work.searchForWorkUsingPreviouslySelectedCreatorName, [0]],
+                [steps.base.waitForAjax],
+                [steps.work.addAnotherWorkSearchTerm],
+                [steps.work.selectWorkSearchTagFilter, [1, 'Title']],
+                [steps.work.searchForWorkUsingPreviouslyEnteredPrimaryTitle],
+                [steps.base.waitForAjax],
+                [steps.work.expectWorkSearchMatchCountNotToBe, [0]],
+
+                [steps.work.removeWorkSearchTerm, [0]],
+                [steps.work.selectWorkSearchTagFilter, [0, 'Title']],
+                [steps.work.searchForWorkUsingPreviouslyEnteredPrimaryTitle],
+                [steps.base.waitForAjax],
+                [steps.work.addAnotherWorkSearchTerm],
+                [steps.work.selectWorkSearchTagFilter, [1, 'Creator']],
+                [steps.work.searchForWorkUsingPreviouslySelectedCreatorName, [0]],
+                [steps.base.waitForAjax],
+                [steps.work.expectWorkSearchMatchCountNotToBe, [0]],
+            ]
+        },
     ];
 
 module.exports = {
