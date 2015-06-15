@@ -454,82 +454,39 @@ exports.enterShellWorkCreatorContribution = function(i, j, value) {
         }
     );
 };
-exports.searchForPreviouslyEnteredWorkById = function() {
-    it('Select "Work ID" work search filter tag', function() {
-        pages.work.selectWorkSearchFilterTag(0, 'Work ID');
+exports.selectWorkSearchTagFilter = function(i, value) {
+    it('Select "' + value + '" work search filter tag #' + (i + 1), function() {
+        pages.work.selectWorkSearchFilterTag(i, value);
     });
-
-    it('Search for previously entered work ID', function() {
+};
+exports.searchForWorkUsingPreviouslyCreatedWorkId = function() {
+    it('Search for work using previously created work ID', function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.id);
     });
-
-    it('Wait for search results to load', function() {
-        pages.base.waitForAjax();
-    });
 };
-exports.searchForPreviouslyEnteredWorkBySongCode = function() {
-    it('Select "Work ID" work search filter tag', function() {
-        pages.work.selectWorkSearchFilterTag(0, 'Work ID');
-    });
-
-    it('Search for previously entered work song code', function() {
+exports.searchForWorkUsingPreviouslyCreatedSongCode = function() {
+    it('Search for work using previously created song code', function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode);
     });
-
-    it('Wait for search results to load', function() {
-        pages.base.waitForAjax();
-    });
 };
-exports.searchForPreviouslyEnteredWorkByPrimaryTitle = function() {
-    it('Select "Title" work search filter tag', function() {
-        pages.work.selectWorkSearchFilterTag(0, 'Title');
-    });
-
-    it('Search for previously entered primary work title', function() {
+exports.searchForWorkUsingPreviouslyEnteredPrimaryTitle = function() {
+    it('Search for work using previously entered primary work title', function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.primaryTitle);
     });
-
-    it('Wait for search results to load', function() {
-        pages.base.waitForAjax();
-    });
 };
-exports.searchForPreviouslyEnteredWorkByAlternateTitle = function(i) {
-    it('Select "Title" work search filter tag', function() {
-        pages.work.selectWorkSearchFilterTag(0, 'Title');
-    });
-
-    it('Search for previously entered alternate work title #' + (i + 1), function() {
+exports.searchForWorkUsingPreviouslyEnteredAlternateTitle = function(i) {
+    it('Search for work using previously entered alternate work title #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.alternateTitles[i]);
-    });
-
-    it('Wait for search results to load', function() {
-        pages.base.waitForAjax();
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorName = function(i) {
-    it('Select "Creator" work search filter tag', function() {
-        pages.work.selectWorkSearchFilterTag(0, 'Creator');
-    });
-
     it('Search for work using previously selected creator name #' + (i + 1), function() {
         pages.work.enterCreatorNameAsWorkSearchTerms(hash.subjectWorkData.creators[i].name);
     });
-
-    it('Wait for search results to load', function() {
-        pages.base.waitForAjax();
-    });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorIpiNumber = function(i) {
-    it('Select "Creator" work search filter tag', function() {
-        pages.work.selectWorkSearchFilterTag(0, 'Creator');
-    });
-
     it('Search for work using previously selected creator IPI number #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].ipiNumber);
-    });
-
-    it('Wait for search results to load', function() {
-        pages.base.waitForAjax();
     });
 };
 exports.expectWorkSearchMatchCountToBe = function(value) {
