@@ -123,6 +123,7 @@ var beforeFeature = function () {
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
                 steps.edit_deal_scope.editPublisherSharesSet();
+
             }
         }];
 

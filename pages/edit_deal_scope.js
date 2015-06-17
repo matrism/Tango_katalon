@@ -104,10 +104,6 @@ if (pages.edit_deal_scope === undefined) {
                 });
         },
 
-
-
-
-
         editInFirstPublisherNameField: function (publisherName) {
             pages.edit_deal_scope.elems.editFirstPublisherNameField.clear();
             pages.edit_deal_scope.elems.editFirstPublisherNameField.sendKeys(publisherName);

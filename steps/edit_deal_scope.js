@@ -63,5 +63,7 @@ if (steps.edit_deal_scope === undefined) {
                 pages.edit_deal_scope.validateThePublisherSharesSetSubtotalChainI(i);
             });
         }
+
+
     };
 }
