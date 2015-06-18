@@ -3,7 +3,7 @@ var _ = require("lodash");
 var moment = require("moment");
 var memoizeNonNullaryCalls = require('./memoizeNonNullaryCalls');
 exports.id = function() {
-	return Date.now().toString() + Math.floor(Math.random() * 1000);
+	return Math.floor(Math.random() * 1000) +  Date.now().toString();
 };
 exports.id.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.id);
 exports.letter = function() {
