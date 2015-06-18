@@ -17,13 +17,24 @@ if (pages.RRSummaryTable === undefined) {
 
         },
 
-
+        //Scope Name      .rate-summary-table__scope-details>.rate-summary-table__scope-details-scope-name
+        //TERRITORY       .rate-summary-table__scope>.rate-summary-table__scope-details>.rate-summary-table__scope-details-dl>:nth-child(1)>dd>strong>div>div
+        //Contract Period .rate-summary-table__scope>.rate-summary-table__scope-details>.rate-summary-table__scope-details-dl>:nth-child(3)>dd>ul>li
+        //RR Name         .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(1)>div
+        //Income Provider .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(4)
+        //Start Date      .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(5)
+        //Rate App Method .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(6)
         //PAGE OBJECT LOCATORS
 
+        dropDownOptions:function()
+        {
+          return $$(" .rate-summary-cp-select>:not(:nth-child(1))")  ;
+
+        },
         rrList:function()
         {
 
-            return $$(".rate-summary-table__scope-rates.ng-scope");
+            return $$(".rate-summary-table__scope");
         },
         outterCollapseTableButtons:function()
         {
@@ -85,6 +96,73 @@ if (pages.RRSummaryTable === undefined) {
         contractPeriods:function()
         {
             return $$(".rate-summary-table__scope-deal-term");
+        }
+
+        ,
+
+        storeDisplayedIncomeRates: function () {
+
+            browser.wait(ExpectedConditions.visibilityOf($(".rate-summary-table__scope")));
+            var RRList = this.rrList();
+            browser.wait(function() {
+                return RRList.first().isPresent().then(function(present) {
+                    if(!present) {
+                        return false;
+                    }
+
+                    return RRList.first().isDisplayed();
+                });
+            });
+
+            var RRArray = [];
+
+            RRList.each( function(el) {
+
+                el.$$(".rate-summary-table__scope-rates").each(function(rrSet)
+                {
+
+                    var royaltyRate = {};
+
+                    el.$(".rate-summary-table__scope-details>.rate-summary-table__scope-details-scope-name").getText().then(function (result) {
+                        royaltyRate.activeScopeName = result.toUpperCase();
+                    });
+                    el.$(".rate-summary-table__scope>.rate-summary-table__scope-details>.rate-summary-table__scope-details-dl>:nth-child(3)>dd>ul>li").getText().then(function (result) {
+                        royaltyRate.activeContractPeriod = result;
+                    });
+
+
+
+                    rrSet.$("div>div:nth-child(1)>div").getText().then(function (result) {
+
+                        royaltyRate.name = result.split('\n')[0].trim();
+
+                    });
+                    rrSet.$("div>div:nth-child(4)").getText().then(function (result) {
+                        royaltyRate.incomeProvider = result;
+                    });
+                    rrSet.$("div>div:nth-child(5)").getText().then(function (result) {
+                        royaltyRate.effectiveDate = result;
+
+                        RRArray.push(royaltyRate);
+
+                    });
+
+
+
+
+
+                });
+
+
+
+
+            }).then(function()
+            {
+                hash.royaltyRates.royaltyRateObjectsList = RRArray;
+
+
+
+            });
         }
 
 

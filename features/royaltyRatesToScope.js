@@ -362,7 +362,7 @@ var beforeFeature = function () {
         },
 
         {
-            name: "As a user I want to dirty check  multiple rate edit from Scope by navigatint away",
+            name: "As a user I want to dirty check  multiple rate edit from Scope by navigating away",
             tags: ["dirtyCheckRR4"],
             steps: function () {
 
@@ -549,7 +549,7 @@ var beforeFeature = function () {
 
         //DIRTY CHECK FEATURES
         {   name: "As a User I want to perform Dirty Check on RR Edit Pages",
-            tags: ["dirtyRRCheck3"],
+            tags: ["dirtyRRCheck5"],
             steps:function()
             {
 
@@ -585,10 +585,20 @@ var beforeFeature = function () {
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
 
-                steps.royaltyRates.cancelRateSet();
 
-                steps.royaltyRates.checkErrorModal();
-                steps.royaltyRates.cancelErrorModal();
+                steps.deal.goToIncomeRatesPage();
+
+
+                steps.modal.clickYesOnPopupModal();
+
+
+
+
+
+                steps.royaltyRates.refreshPage();
+
+                steps.deal.goToTermsDealTabDetails();
+               // steps.royaltyRates.cancelErrorModal();
 
                 steps.royaltyRates.refreshPage();
                 steps.royaltyRates.openSavedScope();
@@ -604,7 +614,7 @@ var beforeFeature = function () {
         },
 
         {   name: "As a User I want to perform Dirty Check (by navigating)  on RR Edit Pages",
-            tags: ["dirtyRRCheck3"],
+            tags: ["dirtyRRCheck6"],
             steps: function()
             {
 
@@ -640,12 +650,19 @@ var beforeFeature = function () {
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
 
-                steps.royaltyRates.navigateToDealsTab();
 
-                steps.royaltyRates.checkErrorModal();
-                steps.royaltyRates.acceptErrorModal();
+                steps.deal.goToIncomeRatesPage();
 
-                steps.royaltyRates.goToScopesPage();
+
+                steps.modal.clickYesOnPopupModal();
+
+
+
+
+
+                steps.royaltyRates.refreshPage();
+
+                steps.deal.goToTermsDealTabDetails();
 
 
                 steps.royaltyRates.refreshPage();

@@ -31,7 +31,57 @@ if (pages.royaltyRates === undefined) {
 
 
         },
+        activeContractPeriod: function () {
+          return $(".contract-period-menu-item.ng-scope.active>div>p>strong.overflow");
+        },
+        editModeActiveScopeName: function () {
+          return $(".scope-description-header");
+        },
+        createModeActiveScopeName:function()
+        {
+          return $("fieldset>.control-group>.controls>.input-addition>input").getAttribute("value");
+        },
 
+
+        sectionLoader: function () {
+          return $(".section-loader");
+        },
+
+        originalPublisherName: function () {
+return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(2)>div>.ps-name").first();
+        },
+
+            administratorName: function () {
+                return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(3)>div>.ps-name").first();
+            },
+        publisherSharesSaveButton: function () {
+            return $('.CONTROLS>div>button[data-ng-click="tgModularViewMethods.save();"]');
+        },
+        administratorInput:function()
+        {
+          return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
+
+        },
+        originalPublishersDropdownList:function()
+        {
+          return $$(".tg-typeahead__suggestions-group-item.ng-scope");
+        },
+
+
+        suggestionDropdown:function()
+        {
+            return $(".tg-typeahead__suggestions-container");
+        },
+        originalPublisherInput:function()
+        {
+
+          return $$(".publisher-share>.publisher-row>.ps-name>div>div>div>div>div>div>input").last();
+        },
+        newPublisherSharedButton:function()
+        {
+
+          return $(".publisher-share-totals>a");
+        },
         rateSetCancelButton:function()
         {
 
@@ -96,9 +146,18 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             return $(".fa.fa-times.pull-right");
         }
         ,
+        NPS: function () {
+          return   $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(1);
+        },
+        adminFee: function () {
+          return   $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(2);
+        },
         payout: function () {
 
-            return element.all(by.css(".tg-selectize-contractual-rate__ul>li:first-child")).get(0);
+            return $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").first();
+        },
+        lastPayoutFromSubmenu: function () {
+          return $$(".tg-selectize-contractual-rate>ul:nth-child(2)>li:last-child");
         },
 
         contractualRateInput: function () {
@@ -115,6 +174,10 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         ,
         newRoyaltyRateSetButton: function () {
             return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
+
+        },
+        newRoyaltyRateSetButtonEdit: function () {
+            return $(".rate-sets-container-inner>a");
 
         },
 
@@ -149,6 +212,16 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             this.newRoyaltyRateSetButton().click();
         }
         ,
+        clickNewRoyaltySetButtonEdit: function () {
+
+
+            browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButtonEdit()));
+
+
+            pages.base.scrollIntoView(this.newRoyaltyRateSetButtonEdit());
+            this.newRoyaltyRateSetButtonEdit().click();
+        },
+
         expandAllIncomeGroups: function () {
 
             browser.driver.sleep(5000);
@@ -317,11 +390,9 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
 
         clearRoyaltyRateNameInput: function () {
-            var element;
 
-            element = this.royaltyRateInput();
-            browser.wait(ExpectedConditions.visibilityOf(element));
-            element.clear();
+            browser.wait(ExpectedConditions.visibilityOf($(".rate-set-name-input")));
+            this.royaltyRateInput().clear();
 
 
         },
@@ -424,6 +495,14 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             return incomeProviderInput.getText();
 
 
+        },
+        getEditIncomeProviderInputValue: function () {
+            var incomeProviderInput;
+
+            incomeProviderInput = $$(".tg-typeahead__tag-name.ng-binding").last();
+
+
+            return incomeProviderInput.getText();
         },
         getIncomeProviderInputValueOption: function () {
 
@@ -606,22 +685,37 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             effectiveStartDateCalendarIco.click();
         }
         ,
-
-        addPercentageToContractualRateInput: function (percentage) {
+        typeIntoContractualRateInput: function (percentage) {
 
             browser.wait(ExpectedConditions.visibilityOf(this.contractualRateInput()));
 
 
             this.contractualRateInput().sendKeys(percentage);
             this.contractualRateInput().click();
+        },
+        addPercentageToContractualRateInput: function () {
+
 
             this.payout().click();
             browser.driver.sleep(2000);
-            element(by.css(".tg-selectize-contractual-rate>ul:nth-child(2)>li:nth-child(2)")).click();
+           this.lastPayoutFromSubmenu().click();
 
 
         }
         ,
+
+        addNPSToContractualRateInput: function () {
+
+            this.NPS().click();
+            browser.driver.sleep(2000);
+
+        },
+        addAdminFeeToContractualRateInput: function () {
+
+            this.adminFee().click();
+            browser.driver.sleep(2000);
+
+        },
         clickOnReceiptApplicationMethod: function () {
 
 
@@ -726,7 +820,59 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
 
             return bool;
+        },
+
+        clickAddNewPublisherSharesButton:function()
+        {
+            this.newPublisherSharedButton().click();
+
+
+        },
+       typeIntoOriginalPublisherInput:function(originalPublisher)
+        {
+            this.originalPublisherInput().sendKeys(originalPublisher);
+
+        },
+
+        selectFirstOriginalPublisher:function()
+        {
+            browser.wait(ExpectedConditions.visibilityOf(this.suggestionDropdown()));
+
+           this.originalPublisherInput().sendKeys(protractor.Key.ARROW_DOWN);
+            this.originalPublisherInput().sendKeys(protractor.Key.ENTER);
+
+
+
+        },
+        selectFirstAdministrator:function()
+        {
+
+            browser.wait(ExpectedConditions.visibilityOf(this.suggestionDropdown()));
+
+            this.administratorInput().sendKeys(protractor.Key.ARROW_DOWN);
+            this.administratorInput().sendKeys(protractor.Key.ENTER);
         }
+
+        ,
+
+        typeIntoAdministratorInput:function(administrator)
+        {
+            this.administratorInput().sendKeys(administrator);
+
+        },
+
+        clickSavePublisherSharesButton: function () {
+            this.publisherSharesSaveButton().click();
+        },
+
+        originalPublisherNameHasText:function(text)
+        {
+
+            return this.originalPublisherName().getText();
+        },
+       administratorNameHasText: function (text) {
+           return this.administratorName().getText();
+       }
 
 
 

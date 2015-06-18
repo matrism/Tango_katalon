@@ -45,10 +45,7 @@ if (pages.editRoyaltyRates === undefined) {
             return element(by.css(".ng-scope>td>strong"));
         },
 
-        searchInput: function () {
 
-            return element(by.css(".tg-typeahead__input"));
-        },
 
         searchTypeAheadDropdown: function () {
 
@@ -438,12 +435,7 @@ if (pages.editRoyaltyRates === undefined) {
 
 
 
-        typeDealNumberIntoInput: function (dealContractNumber) {
 
-            this.searchInput().sendKeys(dealContractNumber);
-
-        }
-        ,
         selectValueFromDropdown: function () {
 
 

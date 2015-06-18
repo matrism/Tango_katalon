@@ -39,7 +39,7 @@ if (pages.deal === undefined) {
         errorRR:function()
         {
 
-            return    return $$(".text-error").last();
+                return $$(".text-error").last();
         },
 
         //END OF LOCATORS

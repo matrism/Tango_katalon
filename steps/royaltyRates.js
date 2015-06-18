@@ -17,6 +17,15 @@ if (steps.royaltyRates === undefined) {
                 }
             );
         },
+        addNewRoyaltySetEdit: function () {
+
+
+            it("Add new Royalty Rate Set", function () {
+
+                    pages.royaltyRates.clickNewRoyaltySetButtonEdit();
+                }
+            );
+        },
 
         inspectRateSetForm: function () {
 
@@ -290,11 +299,32 @@ if (steps.royaltyRates === undefined) {
         addRatePercentageToContractualField: function (percentage) {
             it("Add Percentage to Contractual Rate Field", function () {
 
-                pages.royaltyRates.addPercentageToContractualRateInput(percentage);
+
+                pages.royaltyRates.typeIntoContractualRateInput(percentage);
+                pages.royaltyRates.addPercentageToContractualRateInput();
 
             });
 
         },
+        addNPSToContractualField: function (percentage) {
+            it("Add NPS to Contractual Rate Field", function () {
+
+                pages.royaltyRates.typeIntoContractualRateInput(percentage);
+                pages.royaltyRates.addNPSToContractualRateInput();
+
+            });
+
+        },
+        addAdminFeeToContractualField: function (percentage) {
+            it("Add Admin Fee to Contractual Rate Field", function () {
+
+                pages.royaltyRates.typeIntoContractualRateInput(percentage);
+                pages.royaltyRates.addAdminFeeToContractualRateInput();
+
+            });
+
+        },
+
         clickOnReceiptApplicationMethod: function () {
             it("Change Rate Application Method to On Receipt", function () {
 
@@ -445,37 +475,137 @@ if (steps.royaltyRates === undefined) {
                     royaltyRate.name= value;
                 });
 
-                //pages.royaltyRates.getIncomeProviderInputValue().then(function(value) {
-                //
-                //
-                //
-                //    royaltyRate.incomeProvider=value;
-                //});
-                //
-                //pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
-                //
-                //
-                //
-                //    royaltyRate.effectiveDate=value;
-                //});
-                //
-                //pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
-                //
-                //
-                //
-                //    royaltyRate.effectiveDate=value;
-                //});
+                pages.royaltyRates.getIncomeProviderInputValue().then(function(value) {
+
+
+
+                    royaltyRate.incomeProvider=value;
+                });
+
+                pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
+
+
+
+                    royaltyRate.effectiveDate=value;
+                });
+
+                pages.royaltyRates.activeContractPeriod().getText().then(function(value) {
+
+
+
+                    royaltyRate.activeContractPeriod=value;
+                });
+
+                pages.royaltyRates.createModeActiveScopeName().then(function(value) {
+
+
+
+                    royaltyRate.activeScopeName=value.toUpperCase();
+                });
+
+                var incomeRateTypes = {};
+
+                pages.rateSetIncomeTypes.getRateSetGroup("Cover Mechanical").then(function(rateSetGroup) {
+
+              pages.rateSetIncomeTypes.getRateSetBody(rateSetGroup).then(function (rateSetBody) {
+
+                  pages.rateSetIncomeTypes.getIncomeType(rateSetBody,"Cover Mechanical").then(function (incomeType) {
+                  //
+                  //    pages.rateSetIncomeTypes.getRateSetIncomeTypeRates(incomeType).then(function (rateSetIncomeTypeRates) {
+                  //
+                  //        pages.rateSetIncomeTypes.getRateSetRow(rateSetIncomeTypeRates).then(function (rateSetRow) {
+                  //            pages.rateSetIncomeTypes.getRateSetField(rateSetRow).then(function (rateSetField) {
+                  //                pages.rateSetIncomeTypes.getRateSetFieldInput(rateSetField).then(function (input) {
+                  //                    pages.rateSetIncomeTypes.getInputValue(input).then(function (value) {
+                                          console.log(incomeType);
+                  //                    })
+                  //                })
+                  //            })
+                  //        })
+                  //    })
+                  //
+                  })
+              });
+                    
+
+                 //   royaltyRate.activeScopeName=value.toUpperCase();
+                });
 
 
 
 
-                 //   contractualRate:pages.royaltyRates.getContractualRate(),
-                //    interCompanyRate:pages.royaltyRates.getInterCompanyRate(),
 
-                //    rateAppMethod:pages.royaltyRates.getRateAppMe"trap"thod(),
-               //     contractPeriod:pages.royaltyRates.getContractPeriod()
 
-              //  };
+
+
+
+
+
+
+
+
+
+
+                hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
+
+
+            });
+
+
+        },
+        storeRRObjectonEditPage:function()
+        {
+            it("Store RR's data",function()
+            {
+
+
+                if(!hash.royaltyRates)
+                {
+                    hash.royaltyRates = {};
+                }
+                var royaltyRate = {};
+                pages.royaltyRates.getRRInputValue().then(function(value) {
+
+                    royaltyRate.name= value;
+                });
+
+                pages.royaltyRates.getEditIncomeProviderInputValue().then(function(value) {
+
+
+
+                    royaltyRate.incomeProvider=value;
+                });
+
+                pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
+
+
+
+                    royaltyRate.effectiveDate=value;
+                });
+
+                pages.royaltyRates.activeContractPeriod().getText().then(function(value) {
+
+
+
+                    royaltyRate.activeContractPeriod=value;
+                });
+
+                pages.royaltyRates.editModeActiveScopeName().getText().then(function(value) {
+
+
+
+                    royaltyRate.activeScopeName=value.trim();
+                });
+
+
+
+
+
+
+
+
+
+
 
 
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
@@ -532,6 +662,14 @@ if (steps.royaltyRates === undefined) {
 
 
 
+        },
+        verifyPublisherShare: function () {
+
+
+            it("Verify PS saved correctly", function () {
+                expect(pages.royaltyRates.originalPublisherNameHasText("ASCAP")).toBe("ASCAP PUB ASC0");
+                expect(pages.royaltyRates.administratorNameHasText("ASCAP")).toBe("ASCAP PUB ASC0");
+            })
         },
 
         storeAllRRData:function()
@@ -637,6 +775,60 @@ var el = pages.editRoyaltyRates.rrSumarryTable();
 
 
         },
+        waitForAjaxCall:function()
+        {
+          it("", function () {
+              pages.base.waitForAjax();
+          })
+
+        },
+
+        addNewPublisherShares:function()
+        {
+          it("Click add new Publisher Shares",function(){
+
+              pages.royaltyRates.clickAddNewPublisherSharesButton();
+
+          })
+
+
+        },
+
+
+        addOriginalPublisherToPublisherShares: function (originalPublisher) {
+
+
+            it("Input Original Publisher Name", function () {
+                pages.royaltyRates.typeIntoOriginalPublisherInput(originalPublisher);
+                pages.royaltyRates.selectFirstOriginalPublisher();
+
+
+            });
+
+        },
+        addAdministratorToPublisherShares: function (administrator) {
+
+
+            it("Input Administrator Name", function () {
+
+                pages.royaltyRates.typeIntoAdministratorInput(administrator);
+                pages.royaltyRates.selectFirstAdministrator();
+
+
+
+
+            });
+
+        },
+        savePublisherShares: function () {
+          it("Click Save Publisher Shares Button", function () {
+              pages.royaltyRates.clickSavePublisherSharesButton();
+          })
+        },
+
+
+
+
 
         pause: function () {
 

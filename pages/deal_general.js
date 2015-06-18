@@ -16,13 +16,13 @@ module.exports.dealSigningTerritoryDropDownData = function () {
     return element(by.css("div.typeaheadDropdown div[ng-click='selectTypeaheadOption($index)']"));
 };
 
-module.exports.contractingPartiesInput = function () {
-    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
-};
+//module.exports.contractingPartiesInput = function () {
+//    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+//};
 
-module.exports.contractingPartiesField = function () {
-    return element(by.css("div[ng-model='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"));
-};
+//module.exports.contractingPartiesField = function () {
+//    return $('[placeholder="Search by Name or IPI Number"]');
+//};
 
 module.exports.internalContactsInputField=function(){
     return element(by.css("div[data-ng-model='internalContact.contact'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
