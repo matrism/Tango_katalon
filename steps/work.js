@@ -484,6 +484,16 @@ exports.searchForWorkUsingPreviouslySelectedCreatorName = function(i) {
         pages.work.enterCreatorNameAsWorkSearchTerms(hash.subjectWorkData.creators[i].name);
     });
 };
+exports.searchForWorkUsingPreviouslySelectedCreatorSuisaIpiNumber = function(i) {
+    it('Search for work using previously selected creator SUISA IPI number #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].suisaIpiNumber);
+    });
+};
+exports.searchForWorkUsingPreviouslySelectedCreatorInternalIpiNumber = function(i) {
+    it('Search for work using previously selected creator internal IPI number #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].internalIpiNumber);
+    });
+};
 exports.searchForWorkUsingPreviouslySelectedCreatorIpiNumber = function(i) {
     it('Search for work using previously selected creator IPI number #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].ipiNumber);

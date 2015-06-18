@@ -2,6 +2,7 @@
 
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
+    _ = require('lodash'),
     random = require('../helpers/random'),
     pph = require('../helpers/pph'),
     promise = protractor.promise;
@@ -310,6 +311,30 @@ exports.selectRandomCreator = function(i) {
         pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
            creator.name = selected.name;
            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
+    var person;
+
+    it (
+        'Type IPI number from person slot #' + (slotIndex + 1) +
+        ' on creator search field #' + (creatorRow + 1), function() {
+            person = _.merge({}, hash.personSlots[slotIndex]);
+            pages.new_work.enterCreatorSearchTerms(creatorRow, person.ipiNumber);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select first search result', function() {
+        pages.new_work.selectFirstCreatorSuggestion().then(function() {
+            var data = hash.subjectWorkData;
+
+            data.creators = data.creators || [];
+            data.creators[creatorRow] = person;
         });
     });
 };
