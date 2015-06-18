@@ -11,12 +11,12 @@ if (pages.edit_deal_scope === undefined) {
             publisherSharesSetEditIcon: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             editPublisherSharesHeaderTitles: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.clearfix.ps-heading"},
             scope1: {css: "div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
-            editFirstPublisherNameField: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='acquirer']"},
+            editFirstPublisherNameField: {css: "#deal-publisher div[data-name='dealChainsForm'] div.publisher-row.clearfix div[name='acquirer'] input"},
             editFirstPublisherOwnPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"},
             editFirstPublisherCollectPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"},
-            editFirstPublisherNameAMField: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='acquirer']"},
+            editFirstPublisherNameAMField: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"},
             editFirstPublisherNameAMCollectPercent: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"},
-            editPublisherNameDropDownData: {css: "ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"},
+            editPublisherNameDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             editFirstPublisherTypeEOrPAArrow: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-caret.fa.fa-caret-down"},
             editFirstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
             editFirstPublisherTypeValue: {css: "#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
@@ -53,6 +53,10 @@ if (pages.edit_deal_scope === undefined) {
                     expect(promise).toContain("Own");
                     expect(promise).toContain("Collect");
                 });
+        },
+
+        editClickOnPublisherShareSetArea: function () {
+            pages.edit_deal_scope.elems.publisherShareSetArea.click();
         },
 
 
@@ -133,7 +137,7 @@ if (pages.edit_deal_scope === undefined) {
 
         editInFirstPublisherNameAMField: function (publisherNameAM) {
             pages.edit_deal_scope.elems.editFirstPublisherNameAMField.clear();
-            pages.edit_deal_scope.elems.firstPublisherNameAMField.sendKeys(publisherNameAM);
+            pages.edit_deal_scope.elems.editFirstPublisherNameAMField.sendKeys(publisherNameAM);
             browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.editPublisherNameDropDownData));
         },
 
@@ -146,6 +150,14 @@ if (pages.edit_deal_scope === undefined) {
         editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
             pages.edit_deal_scope.elems.editFirstPublisherNameAMCollectPercent.clear();
             pages.edit_deal_scope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
+        },
+
+        editClearFirstPublisherNameField: function () {
+            pages.edit_deal_scope.elems.editFirstPublisherNameField.clear();
+        },
+
+        editClearFirstPublisherNameAMField: function () {
+            pages.edit_deal_scope.elems.editFirstPublisherNameAMField.clear();
         },
 
         editClearInFirstPublisherNameOwnPercent: function () {
@@ -162,17 +174,17 @@ if (pages.edit_deal_scope === undefined) {
 
         editSelectRandomPublisherNameDropDown: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.editPublisherNameDropDownData));
-            browser.driver.findElements(By.css("ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"))
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 })
         },
 
-        editSelectSpecificPublisherNameDropDown: function (publisherName) {
+        editSelectTheSpecificPublisherNameDropDown: function (publisherName) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.editPublisherNameDropDownData));
-            browser.driver.findElements(By.css("ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"))
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -253,7 +265,7 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         editPublisherNameFieldChainI: function (i) {
-            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='acquirer']"));
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input"));
             element.sendKeys("test");
         },
 
@@ -270,13 +282,13 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         editPublisherNameAMFieldChainI: function (i) {
-            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='acquirer']"));
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"));
             element.sendKeys("wb music corp");
         },
 
         editSelectRandomPublisherNameDropDownChainI: function (i) {
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"))));
-            browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -285,8 +297,8 @@ if (pages.edit_deal_scope === undefined) {
 
         editSelectSpecificPublisherNameDropDownChainI: function (publisherName, i) {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"))));
-            browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.typeahead.dropdown-menu.ng-scope li.ng-scope a"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {

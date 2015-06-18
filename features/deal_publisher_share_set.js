@@ -123,7 +123,20 @@ var beforeFeature = function () {
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
                 steps.edit_deal_scope.editPublisherSharesSet();
-
+                steps.edit_deal_scope.itEditPublisherShare();
+                steps.edit_deal_scope.editSaveThePublisherShareSet();
+                steps.edit_deal_scope.validatePublisherSharesTitle();
+                steps.edit_deal_scope.validatePublisherSharesHeaderTableTitle();
+                steps.edit_deal_scope.editPublisherSharesSet();
+                for (i = 2; i <= 3; i++) {
+                    steps.edit_deal_scope.itEditPublisherShareWithMultipleThreeChains(i);
+                }
+                steps.edit_deal_scope.editSaveThePublisherShareSet();
+                for (var i = 1; i <= 2; i++) {
+                    steps.edit_deal_scope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
+                    steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
+                    steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
+                }
             }
         }];
 

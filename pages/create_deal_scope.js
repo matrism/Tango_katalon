@@ -269,7 +269,7 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        selectSpecificPublisherNameDropDown: function (publisherName) {
+        selectTheSpecificPublisherNameDropDown: function (publisherName) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
