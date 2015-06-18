@@ -1,13 +1,17 @@
 "use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var steps_path = _tf_config._system_.path_to_steps;
-var random = require("../helpers/random");
-var pph = require("../helpers/pph");
-var promise = protractor.promise;
-require(pages_path + "new_work");
-require(steps_path + "base");
-require(steps_path + "work");
+
+var pages_path = _tf_config._system_.path_to_pages,
+    steps_path = _tf_config._system_.path_to_steps,
+    random = require('../helpers/random'),
+    pph = require('../helpers/pph'),
+    promise = protractor.promise;
+
 steps.new_work = exports;
+
+require(pages_path + 'new_work');
+require(steps_path + 'base');
+require(steps_path + 'work');
+
 module.exports.goToNewWorkPage = function() {
 	it (
 		"Go to New Work page", function() {
