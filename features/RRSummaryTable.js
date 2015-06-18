@@ -152,8 +152,8 @@ var beforeFeature = function () {
             //steps.RRSummaryTable.expandInnerRR();
             //
             //
-            //steps.RRSummaryTable.validateIncomeRatesTable();
-
+         // steps.RRSummaryTable.validateIncomeRatesTable();
+//
 
 
 

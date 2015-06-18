@@ -505,31 +505,77 @@ if (steps.royaltyRates === undefined) {
 
                 var incomeRateTypes = {};
 
-                pages.rateSetIncomeTypes.getRateSetGroup("Cover Mechanical").then(function(rateSetGroup) {
+                pages.rateSetIncomeTypes.getCoverMechanicalRateSetGroup().then(function(rateSetGroup) {
 
-              pages.rateSetIncomeTypes.getRateSetBody(rateSetGroup).then(function (rateSetBody) {
+                    incomeRateTypes.name = 'Cover Mechanical';
 
-                  pages.rateSetIncomeTypes.getIncomeType(rateSetBody,"Cover Mechanical").then(function (incomeType) {
-                  //
-                  //    pages.rateSetIncomeTypes.getRateSetIncomeTypeRates(incomeType).then(function (rateSetIncomeTypeRates) {
-                  //
-                  //        pages.rateSetIncomeTypes.getRateSetRow(rateSetIncomeTypeRates).then(function (rateSetRow) {
-                  //            pages.rateSetIncomeTypes.getRateSetField(rateSetRow).then(function (rateSetField) {
-                  //                pages.rateSetIncomeTypes.getRateSetFieldInput(rateSetField).then(function (input) {
-                  //                    pages.rateSetIncomeTypes.getInputValue(input).then(function (value) {
-                                          console.log(incomeType);
-                  //                    })
-                  //                })
-                  //            })
-                  //        })
-                  //    })
-                  //
-                  })
+
+              pages.rateSetIncomeTypes.getCoverMechanicalRateSetIncomeType(rateSetGroup).then(function (rateSetBody) {
+
+                  var rateSet={};
+                  rateSet.name = 'Cover Mechanical';
+                  var incomeRow = [];
+
+
+                 pages.rateSetIncomeTypes.getRateSetIncomeTypeRows(rateSetBody).then(function (incomeType) {
+
+
+
+                     incomeType.forEach(function (row) {
+                        // console.log(row);
+                         var tempRow = {};
+                         pages.rateSetIncomeTypes.getRowName(row).then(function (result) {
+                             tempRow.name = result;
+
+                         });
+                         pages.rateSetIncomeTypes.getRowInputRateFieldValue(row).then(function (result) {
+                             tempRow.value = result;
+
+                         }).then(function () {
+                             incomeRow.push(tempRow);
+
+                         });
+                         //
+
+                         ////
+
+                   })
+
+
+
+
+
+
+
+
+
+
+                    })
+                  .then(function () {
+                         //console.log(incomeRow);
+                         rateSet.rows= [];
+                         rateSet.rows.push(incomeRow);
+                      //   console.log(rateSet);
+
+
+                         incomeRateTypes.rateSets = [];
+                         incomeRateTypes.rateSets.push(rateSet);
+
+                 });
+
+
+
+
+
+
+                 });
+                    console.log(JSON.stringify(incomeRateTypes, null, 4));
+
               });
                     
 
                  //   royaltyRate.activeScopeName=value.toUpperCase();
-                });
+           //     });
 
 
 
