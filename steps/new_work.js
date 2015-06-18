@@ -285,15 +285,7 @@ exports.confirmComponentWorkDeletion = function() {
         pages.new_work.confirmComponentWorkDeletion();
     });
 };
-exports.selectRandomCreator = function(i, data, key) {
-    var deferred = promise.defer();
-    var creator;
-
-    data = data || hash.subjectWorkData || {};
-    key = key || 'creators';
-    data[key] = data[key] || [];
-    creator = data[key][i] = data[key][i] || {};
-
+exports.selectRandomCreator = function(i) {
     it('Type a random letter on creator name field #' + (i + 1), function() {
         pages.new_work.enterRandomLetterOnCreatorNameField(i);
     });
@@ -303,13 +295,19 @@ exports.selectRandomCreator = function(i, data, key) {
     });
 
     it('Select a random creator', function() {
+        var data = hash.subjectWorkData;
+        var creator;
+
+        data.creators = data.creators || [];
+        data.creators[i] = data.creators[i] || {};
+
+        creator = data.creators[i];
+
         pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
            creator.name = selected.name;
            creator.ipiNumber = selected.ipiNumber;
         });
     });
-
-    return deferred.promise;
 };
 exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
     var deferred = promise.defer();
