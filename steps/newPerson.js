@@ -32,6 +32,15 @@ exports.enterLastName = function(value) {
     });
 };
 
+exports.enterSuisaIpiNumber = function(value) {
+    it('Enter SUISA IPI number (' + value + ')', function() {
+        pages.newPerson.enterSuisaIpiNumber(value).then(function() {
+            hash.currentPersonSlot.ipiNumber = value;
+            hash.currentPersonSlot.suisaIpiNumber = value;
+        });
+    });
+};
+
 exports.enterAffiliatedSocietySearchTerms = function(value) {
     it('Enter affiliated society search terms (' + value + ')', function() {
         pages.newPerson.enterAffiliatedSocietySearchTerms(value).then(function() {

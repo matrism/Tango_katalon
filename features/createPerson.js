@@ -28,6 +28,21 @@ var beforeFeature = [
                 [steps.person.findInternalIpiNumber],
             ]
         },
+        {
+            name: 'Create a basic person with SUISA IPI number (without persistence validations)',
+            tags: [],
+            steps: [
+                [steps.person.useBlankPersonSlot, [0]],
+                [steps.newPerson.goToNewPersonPage],
+                [steps.newPerson.enterLastName, ['TEST PERSON ' + randomId(1)]],
+                [steps.newPerson.enterAffiliatedSocietySearchTerms, ['ASCAP']],
+                [steps.newPerson.selectAffiliatedSocietySearchResultByIndex, [0]],
+                [steps.newPerson.enterSuisaIpiNumber, [randomId(1.1).slice(0, 10)]],
+                [steps.newPerson.save],
+                [steps.newPerson.validateSaveRedirection],
+                [steps.person.findId],
+            ]
+        },
     ];
 
 module.exports = {

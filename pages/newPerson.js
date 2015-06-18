@@ -25,6 +25,17 @@ exports.enterLastName = function(value) {
     return element.sendKeys(value);
 };
 
+exports.suisaIpiNumberInput = function() {
+    return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
+};
+
+exports.enterSuisaIpiNumber = function(value) {
+    var element = exports.suisaIpiNumberInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
 exports.affiliatedSocietySearchInput = function() {
     return element(by.model('affSociety.society.name'));
 };
