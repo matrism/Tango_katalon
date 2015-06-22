@@ -47,6 +47,50 @@ exports.enterPresentationName = function(value) {
     return element.sendKeys(value);
 };
 
+exports.addAlternativeNameButton = function() {
+    return element(by.cssContainingText('button', 'Add Alternative Name'));
+};
+
+exports.addAlternativeName = function() {
+    var element = exports.addAlternativeNameButton();
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+
+exports.alternativeNameContainers = function() {
+    return element.all(by.repeater('altName in person.master_data.alternative_names'));
+};
+
+exports.alternativeNameContainer = function(i) {
+    return exports.alternativeNameContainers().get(i);
+};
+
+exports.alternativeFirstNameInput = function(i) {
+    return exports.alternativeNameContainer(i).element(
+        by.model('altName.first_name')
+    );
+};
+
+exports.enterAlternativeFirstName = function(i, value) {
+    var element = exports.alternativeFirstNameInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
+exports.alternativeLastNameInput = function(i) {
+    return exports.alternativeNameContainer(i).element(
+        by.model('altName.last_name')
+    );
+};
+
+exports.enterAlternativeLastName = function(i, value) {
+    var element = exports.alternativeLastNameInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
 exports.suisaIpiNumberInput = function() {
     return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
 };

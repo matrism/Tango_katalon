@@ -68,6 +68,54 @@ exports.enterPresentationName = function(value) {
     });
 };
 
+exports.addAlternativeName = function() {
+    it('Add alternative name', function() {
+        pages.newPerson.addAlternativeName();
+    });
+};
+
+exports.enterAlternativeFirstName = function(i, value) {
+    it('Enter alternative first name #' +  (i + 1) + ' (' + value + ')', function() {
+        pages.newPerson.enterAlternativeFirstName(i, value).then(function() {
+            var person = hash.currentPersonSlot;
+
+            person.firstName = value;
+
+            if(person.presentationName) {
+                return;
+            }
+
+            if(person.lastName) {
+                person.name = person.lastName + ', ' + value;
+            }
+            else {
+                person.name = value;
+            }
+        });
+    });
+};
+
+exports.enterAlternativeLastName = function(i, value) {
+    it('Enter alternative last name #' +  (i + 1) + ' (' + value + ')', function() {
+        pages.newPerson.enterAlternativeLastName(i, value).then(function() {
+            var person = hash.currentPersonSlot;
+
+            person.lastName = value;
+
+            if(person.presentationName) {
+                return;
+            }
+
+            if(person.firstName) {
+                person.name = value + ', ' + person.firstName;
+            }
+            else {
+                person.name = value;
+            }
+        });
+    });
+};
+
 exports.enterSuisaIpiNumber = function(value) {
     it('Enter SUISA IPI number (' + value + ')', function() {
         pages.newPerson.enterSuisaIpiNumber(value).then(function() {
