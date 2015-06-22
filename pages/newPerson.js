@@ -14,6 +14,17 @@ exports.open = function() {
     return pages.base.waitForAjax();
 };
 
+exports.firstNameInput = function() {
+    return element(by.model('person.master_data.primary_name.first_name'));
+};
+
+exports.enterFirstName = function(value) {
+    var element = exports.firstNameInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
 exports.lastNameInput = function() {
     return element(by.model('person.master_data.primary_name.last_name'));
 };

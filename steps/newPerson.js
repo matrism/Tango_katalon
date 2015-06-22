@@ -15,6 +15,23 @@ exports.goToNewPersonPage = function() {
     });
 };
 
+exports.enterFirstName = function(value) {
+    it('Enter first name (' + value + ')', function() {
+        pages.newPerson.enterFirstName(value).then(function() {
+            var person = hash.currentPersonSlot;
+
+            person.firstName = value;
+
+            if(person.lastName) {
+                person.name = person.lastName + ', ' + value;
+            }
+            else {
+                person.name = value;
+            }
+        });
+    });
+};
+
 exports.enterLastName = function(value) {
     it('Enter last name (' + value + ')', function() {
         pages.newPerson.enterLastName(value).then(function() {
