@@ -22,6 +22,10 @@ exports.enterFirstName = function(value) {
 
             person.firstName = value;
 
+            if(person.presentationName) {
+                return;
+            }
+
             if(person.lastName) {
                 person.name = person.lastName + ', ' + value;
             }
@@ -39,12 +43,27 @@ exports.enterLastName = function(value) {
 
             person.lastName = value;
 
+            if(person.presentationName) {
+                return;
+            }
+
             if(person.firstName) {
                 person.name = value + ', ' + person.firstName;
             }
             else {
                 person.name = value;
             }
+        });
+    });
+};
+
+exports.enterPresentationName = function(value) {
+    it('Enter presentation name (' + value + ')', function() {
+        pages.newPerson.enterPresentationName(value).then(function() {
+            var person = hash.currentPersonSlot;
+
+            person.name = value;
+            person.presentationName = value;
         });
     });
 };

@@ -36,6 +36,17 @@ exports.enterLastName = function(value) {
     return element.sendKeys(value);
 };
 
+exports.presentationNameInput = function() {
+    return element(by.model('person.master_data.primary_name.presentation_name'));
+};
+
+exports.enterPresentationName = function(value) {
+    var element = exports.presentationNameInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
 exports.suisaIpiNumberInput = function() {
     return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
 };
