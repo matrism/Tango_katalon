@@ -354,6 +354,7 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         editDeletePublisherSharesSet: function(){
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.editDeletePublisherShareSet));
             pages.edit_deal_scope.elems.editDeletePublisherShareSet.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
             pages.edit_deal_scope.elems.confirmDeletePssModalDialog.click();
