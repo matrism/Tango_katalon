@@ -51,7 +51,11 @@ if (steps.deal === undefined) {
             );
         },
 
-
+        goToGeneralDealTabDetail: function () {
+            it("Click on general header and go to general deal tab details ", function () {
+                pages.deal.goToGeneralDealDetails();
+            });
+        },
 
         goToGeneralDealTabDetails: function () {
             it("Click on general header and go to general deal tab details ", function () {

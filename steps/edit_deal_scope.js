@@ -152,6 +152,7 @@ if (steps.edit_deal_scope === undefined) {
         editSaveThePublisherShareSet: function () {
             it("Edit - save the publisher share set", function () {
                 pages.edit_deal_scope.editSaveThePublisherShareSets();
+                pages.edit_deal_scope.waitForAjax();
             });
         },
 
@@ -245,6 +246,24 @@ if (steps.edit_deal_scope === undefined) {
             it("Edit - click on publisher shares set area ", function () {
                 pages.edit_deal_scope.editClickOnPublisherShareSetArea();
             });
+        },
+
+        editDeleteThePublisherShareSet: function () {
+          it("Edit - delete the publisher share set ", function(){
+             pages.edit_deal_scope.editDeletePublisherSharesSet();
+          });
+        },
+
+        editConfirmModalDialogDirtyCheck: function () {
+            it("Edit confirm modal dialog dirty check", function(){
+                pages.edit_deal_scope.editConfirmModalDialog();
+            });
+        },
+
+        editCancelModalDialogDirtyCheck: function () {
+          it("Edit cancel modal dialog dirty check", function(){
+             pages.edit_deal_scope.editCancelModalDialog();
+          });
         },
 
         editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI: function (i) {

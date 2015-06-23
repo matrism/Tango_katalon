@@ -101,6 +101,65 @@ var beforeFeature = function () {
             }
         },
         {
+            name: "Dirty check publisher share set",
+            tags: ["dirty_check_pss"],
+            steps: function () {
+                var i = 1;
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.create_deal_scope.itAddPublisherShare();
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.waitForDealToBeSaved();
+                steps.deal.returnDealNumber();
+                steps.edit_deal_scope.selectScope1();
+                steps.edit_deal_scope.validatePublisherSharesTitle();
+                steps.edit_deal_scope.validatePublisherSharesHeaderTableTitle();
+                steps.edit_deal_scope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
+                steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
+                steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
+                steps.edit_deal_scope.editPublisherSharesSet();
+                steps.edit_deal_scope.itEditPublisherShare();
+                steps.edit_deal_scope.editCancelThePublisherShareSet();
+                steps.edit_deal_scope.editCancelModalDialogDirtyCheck();
+                steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
+                steps.deal.goToGeneralDealTabDetail();
+                steps.edit_deal_scope.editCancelModalDialogDirtyCheck();
+                steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
+                steps.deal.goToGeneralDealTabDetail();
+                steps.edit_deal_scope.editConfirmModalDialogDirtyCheck();
+            }
+        },
+        {
+            name: "Delete publisher share set from a deal",
+            tags: ["delete_deal_publisher_share_set"],
+            steps: function () {
+                var i = 1;
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.create_deal_scope.itAddPublisherShare();
+                steps.base.scrollIntoView("Save publisher share set ", pages.create_deal_scope.elems.savePublisherShareSet);
+                steps.create_deal_scope.saveThePublisherShareSet();
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.waitForDealToBeSaved();
+                steps.deal.returnDealNumber();
+                steps.edit_deal_scope.selectScope1();
+                steps.edit_deal_scope.validatePublisherSharesTitle();
+                steps.edit_deal_scope.validatePublisherSharesHeaderTableTitle();
+                steps.edit_deal_scope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
+                steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
+                steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
+                steps.base.scrollIntoView("Edit publisher share set ", pages.edit_deal_scope.elems.publisherSharesSetArea);
+                steps.edit_deal_scope.editPublisherSharesSet();
+                steps.edit_deal_scope.editDeleteThePublisherShareSet();
+            }
+        },
+        {
             name: "Edit a deal with publisher share set",
             tags: ["edit_deal_publisher_share_set"],
             steps: function () {
@@ -122,6 +181,7 @@ var beforeFeature = function () {
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
+                steps.base.scrollIntoView("Edit publisher share set ", pages.edit_deal_scope.elems.publisherSharesSetArea);
                 steps.edit_deal_scope.editPublisherSharesSet();
                 steps.edit_deal_scope.itEditPublisherShare();
                 steps.edit_deal_scope.editSaveThePublisherShareSet();
