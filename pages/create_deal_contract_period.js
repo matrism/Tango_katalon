@@ -6,6 +6,8 @@ require(pages_path + "base");
 if (pages.create_deal_contract_period === undefined) {
     pages.create_deal_contract_period = new ftf.pageObject({
         locators: {
+            addContractPeriodElem: {css: "a[data-ng-click='addContractPeriod()']"},
+            descriptionContractPeriod: {css: "div.input-addition #description"},
             startDate: {css: "div#actualStartDate input"},
             endTargetMonths: {name: "targetEndDuration"},
             addMdrcLink: {css: "a[data-ng-click='addCommitment()']"},
@@ -42,6 +44,14 @@ if (pages.create_deal_contract_period === undefined) {
             mdrcDeleteButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"}
         },
 
+        clickOnAddContractPeriod: function () {
+            pages.create_deal_contract_period.elems.addContractPeriodElem.click();
+        },
+
+        fillDescriptionField: function (description) {
+            pages.create_deal_contract_period.elems.descriptionContractPeriod.clear();
+            pages.create_deal_contract_period.elems.descriptionContractPeriod.sendKeys(description);
+        },
 
         fillStartActualDate: function () {
             pages.create_deal_contract_period.elems.startDate.sendKeys("2015-03-12");

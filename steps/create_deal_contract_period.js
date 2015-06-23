@@ -9,6 +9,18 @@ require(pages_path + "create_deal_contract_period");
 if (steps.create_deal_contract_period === undefined) {
     steps.create_deal_contract_period = {
 
+        addNewContractPeriod: function () {
+            it("Click on add new contract period icon ", function () {
+                pages.create_deal_contract_period.clickOnAddContractPeriod();
+                pages.create_deal_contract_period.waitForAjax();
+            });
+        },
+
+
+        fillContractPeriodDescription: function (description) {
+          pages.create_deal_contract_period.fillDescriptionField(description);
+        },
+
         fillMandatoryFieldsContractPeriod: function () {
             it("Fill mandatory fields contract period", function () {
                 browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.startDate));

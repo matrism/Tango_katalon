@@ -58,7 +58,7 @@ if (pages.create_deal_scope === undefined) {
                 })
         },
 
-        selectContractTypeScope: function (element, specific_value) {
+        selectContractTypeScope: function (specific_value) {
             var desiredOption;
             browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
                 .then(function findMatchingOption(options) {

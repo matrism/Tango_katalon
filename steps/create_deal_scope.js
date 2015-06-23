@@ -19,6 +19,15 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        addSpecificScope: function (contractType) {
+            it("Add simple scope", function () {
+                pages.create_deal_scope.addScopeForm();
+                pages.create_deal_scope.selectContractTypeScope(contractType);
+                pages.create_deal_scope.waitForAjax();
+                pages.create_deal_scope.addTerritoryByTypingToScope();
+            });
+        },
+
         selectCountry: function () {
             it("Select country", function () {
                 pages.create_deal_scope.selectRandomCountry();
