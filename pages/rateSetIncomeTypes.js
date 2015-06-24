@@ -39,10 +39,31 @@ if (pages.rateSetIncomeTypes === undefined) {
 
         getRowInputRateFieldValue: function (incomeTypeRow) {
             return incomeTypeRow.$(".rate-set-rate-field>div>input").getAttribute("value");
+        },
+
+
+
+
+
+        //GENERIC FUNCTIONS
+
+        getRateSetGroups: function () {
+            return $$('[name="groupForm"]');
         }
+        ,
+        getRateSetGroupName:function(rateSetGroup){
+            return rateSetGroup.$("div>div>.rate-set-entity-name>.rate-set-group-name").getText();
+        },
+        getRateSetIncomeType: function (rateSetGroup) {
+            return rateSetGroup.$$(".rate-set-group-body>.rate-set-income-type");
+        },
+        getRateSetIncomeTypeName: function (rateSetIncomeType) {
+            return rateSetIncomeType.$ ("div>.rate-set-entity-name>span").getText();
+        },
 
-
-
+        getElementText: function (element) {
+            return element.getText();
+        }
 
 
 

@@ -138,13 +138,11 @@ if (steps.royaltyRates === undefined) {
 
 
         },
-        cancelRateSet:function()
-        {
+        cancelRateSet: function () {
             it("Cancel Rate Set", function () {
 
                 pages.royaltyRates.clickcancelRateSet();
             });
-
 
 
         },
@@ -346,8 +344,7 @@ if (steps.royaltyRates === undefined) {
 
             });
         },
-        openAllRRFields:function()
-        {
+        openAllRRFields: function () {
 
             it("Expand all RR groups", function () {
 
@@ -356,10 +353,8 @@ if (steps.royaltyRates === undefined) {
             });
 
         },
-        checkThatInputHasCorrectDecimalNumber:function(number)
-        {
+        checkThatInputHasCorrectDecimalNumber: function (number) {
             it("Verify correct number of decimal places", function () {
-
 
 
                 pages.royaltyRates.checkDecimalPlaces();
@@ -368,24 +363,17 @@ if (steps.royaltyRates === undefined) {
             });
 
         },
-        checkThatInputHasCorrectNumber:function(number)
-        {
+        checkThatInputHasCorrectNumber: function (number) {
             it("Verify correct number of decimal places", function () {
 
 
-
-
-
-
-                expect(   pages.royaltyRates.checkDecimalNumber(number)).toBeTruthy();
-
+                expect(pages.royaltyRates.checkDecimalNumber(number)).toBeTruthy();
 
 
             });
 
         },
-        setAllFieldValue:function(value)
-        {
+        setAllFieldValue: function (value) {
 
             it("Type in  all RR groups", function () {
 
@@ -394,8 +382,7 @@ if (steps.royaltyRates === undefined) {
             });
 
         },
-        setFieldsValue:function(value)
-        {
+        setFieldsValue: function (value) {
 
             it("Type in  all RR groups", function () {
 
@@ -404,8 +391,7 @@ if (steps.royaltyRates === undefined) {
             });
 
         },
-        setFieldsValueTest:function(value)
-        {
+        setFieldsValueTest: function (value) {
 
             it("Type in  all RR groups", function () {
 
@@ -445,10 +431,8 @@ if (steps.royaltyRates === undefined) {
 
         },
 
-        storeRRData:function()
-        {
-            it("Save Data Contained in RR Set",function()
-            {
+        storeRRData: function () {
+            it("Save Data Contained in RR Set", function () {
 
                 hash.royaltyRates.RRName = pages.royaltyRates.getRRInputValue();
                 hash.royaltyRates.RRIncomeProvider = pages.royaltyRates.getIncomeProviderInputValue();
@@ -458,138 +442,178 @@ if (steps.royaltyRates === undefined) {
             })
 
         }
-,
-        storeRRObject:function()
-        {
-          it("Store RR's data",function()
-            {
+        ,
+        storeRRObject: function () {
+            it("Store RR's data", function () {
 
 
-                if(!hash.royaltyRates)
-                {
+                if (!hash.royaltyRates) {
                     hash.royaltyRates = {};
                 }
                 var royaltyRate = {};
-                pages.royaltyRates.getRRInputValue().then(function(value) {
+                pages.royaltyRates.getRRInputValue().then(function (value) {
 
-                    royaltyRate.name= value;
+                    royaltyRate.name = value;
                 });
 
-                pages.royaltyRates.getIncomeProviderInputValue().then(function(value) {
+                pages.royaltyRates.getIncomeProviderInputValue().then(function (value) {
 
 
-
-                    royaltyRate.incomeProvider=value;
+                    royaltyRate.incomeProvider = value;
                 });
 
-                pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
+                pages.royaltyRates.getEffectiveStartDateInputValue().then(function (value) {
 
 
-
-                    royaltyRate.effectiveDate=value;
+                    royaltyRate.effectiveDate = value;
                 });
 
-                pages.royaltyRates.activeContractPeriod().getText().then(function(value) {
+                pages.royaltyRates.activeContractPeriod().getText().then(function (value) {
 
 
-
-                    royaltyRate.activeContractPeriod=value;
+                    royaltyRate.activeContractPeriod = value;
                 });
 
-                pages.royaltyRates.createModeActiveScopeName().then(function(value) {
+                pages.royaltyRates.createModeActiveScopeName().then(function (value) {
 
 
-
-                    royaltyRate.activeScopeName=value.toUpperCase();
+                    royaltyRate.activeScopeName = value.toUpperCase();
                 });
 
-                var incomeRateTypes = {};
 
-                pages.rateSetIncomeTypes.getCoverMechanicalRateSetGroup().then(function(rateSetGroup) {
+                var rateSetGroupsList = [];
+                var rateSetGroupVar = {};
 
-                    incomeRateTypes.name = 'Cover Mechanical';
+                rateSetGroupVar.rateSets = [];
+                var rateSet = [];
 
+                pages.rateSetIncomeTypes.getRateSetGroups()
+                    .then(function (rateSetGroups) {
 
-              pages.rateSetIncomeTypes.getCoverMechanicalRateSetIncomeType(rateSetGroup).then(function (rateSetBody) {
+                        rateSetGroups.forEach(function (rateSetGroup) {
 
-                  var rateSet={};
-                  rateSet.name = 'Cover Mechanical';
-                  var incomeRow = [];
-
-
-                 pages.rateSetIncomeTypes.getRateSetIncomeTypeRows(rateSetBody).then(function (incomeType) {
+                            // rateSetGroupVar = {};
 
 
-
-                     incomeType.forEach(function (row) {
-                        // console.log(row);
-                         var tempRow = {};
-                         pages.rateSetIncomeTypes.getRowName(row).then(function (result) {
-                             tempRow.name = result;
-
-                         });
-                         pages.rateSetIncomeTypes.getRowInputRateFieldValue(row).then(function (result) {
-                             tempRow.value = result;
-
-                         }).then(function () {
-                             incomeRow.push(tempRow);
-
-                         });
-                         //
-
-                         ////
-
-                   })
+                            pages.rateSetIncomeTypes.getRateSetGroupName(rateSetGroup)
+                                .then(function (result) {
+                                    rateSetGroupVar.rateSetGroupName = result;
 
 
+                                });
 
 
+                            pages.rateSetIncomeTypes.getRateSetIncomeType(rateSetGroup)
+                                .then(function (rateSetBodies) {
+
+                                    //   rateSetGroupVar.rateSet.incomeRow = [];
+                                    rateSetBodies.forEach(function (rateSetBody) {
 
 
+                                        pages.rateSetIncomeTypes.getRateSetIncomeTypeName(rateSetBody)
+                                            .then(function (result) {
+                                                rateSet.rateSetName = result;
+                                                //    console.log(result);
+                                                //  rateSetGroupVar.rateSets.push(rateSet);
 
 
+                                            });
+
+                                        pages.rateSetIncomeTypes.getRateSetIncomeTypeRows(rateSetBody)
+                                            .then(function (incomeType) {
+                                                incomeType.forEach(function (row) {
+
+                                                    //       var tempRow = {};
+                                                    pages.rateSetIncomeTypes.getRowName(row)
+                                                        .then(function (result) {
+                                                            //             tempRow.name = result;
+
+                                                        });
+                                                    pages.rateSetIncomeTypes.getRowInputRateFieldValue(row)
+                                                        .then(function (result) {
+                                                            //            tempRow.value = result;
+
+                                                        }).then(function () {
+                                                            //     rateSet.incomeRow .push(tempRow);
+                                                        });
 
 
-                    })
-                  .then(function () {
-                         //console.log(incomeRow);
-                         rateSet.rows= [];
-                         rateSet.rows.push(incomeRow);
-                      //   console.log(rateSet);
+                                                })
+                                            }).then(function () {
+
+                                                //    rateSetGroupVar.rateSets.push(rateSet);
+
+                                            })
 
 
-                         incomeRateTypes.rateSets = [];
-                         incomeRateTypes.rateSets.push(rateSet);
-
-                 });
+                                    })
 
 
+                                }).then(function () {
 
 
+                                    rateSetGroupsList.push(rateSetGroupVar);
 
 
-                 });
-                    console.log(JSON.stringify(incomeRateTypes, null, 4));
+                                }).then(function () {
+                                    rateSetGroupVar = {};
+                                    rateSetGroupVar.rateSets = [];
+                                });
+                            //
+                        })
+                    }).then(function () {
+                        console.log(JSON.stringify(rateSetGroupsList, null, 4));
+                    });
 
-              });
-                    
+                hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
+                //console.log(JSON.stringify(rateSetGroups, null, 4));
+            });
 
-                 //   royaltyRate.activeScopeName=value.toUpperCase();
-           //     });
-
-
-
-
-
-
-
-
-
-
-
+            //    });
+            //
+            //});
 
 
+            //   });
 
+
+        },
+        storeRRObjectonEditPage: function () {
+            it("Store RR's data", function () {
+
+
+                if (!hash.royaltyRates) {
+                    hash.royaltyRates = {};
+                }
+                var royaltyRate = {};
+                pages.royaltyRates.getRRInputValue().then(function (value) {
+
+                    royaltyRate.name = value;
+                });
+
+                pages.royaltyRates.getEditIncomeProviderInputValue().then(function (value) {
+
+
+                    royaltyRate.incomeProvider = value;
+                });
+
+                pages.royaltyRates.getEffectiveStartDateInputValue().then(function (value) {
+
+
+                    royaltyRate.effectiveDate = value;
+                });
+
+                pages.royaltyRates.activeContractPeriod().getText().then(function (value) {
+
+
+                    royaltyRate.activeContractPeriod = value;
+                });
+
+                pages.royaltyRates.editModeActiveScopeName().getText().then(function (value) {
+
+
+                    royaltyRate.activeScopeName = value.trim();
+                });
 
 
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
@@ -599,73 +623,9 @@ if (steps.royaltyRates === undefined) {
 
 
         },
-        storeRRObjectonEditPage:function()
-        {
-            it("Store RR's data",function()
-            {
-
-
-                if(!hash.royaltyRates)
-                {
-                    hash.royaltyRates = {};
-                }
-                var royaltyRate = {};
-                pages.royaltyRates.getRRInputValue().then(function(value) {
-
-                    royaltyRate.name= value;
-                });
-
-                pages.royaltyRates.getEditIncomeProviderInputValue().then(function(value) {
-
-
-
-                    royaltyRate.incomeProvider=value;
-                });
-
-                pages.royaltyRates.getEffectiveStartDateInputValue().then(function(value) {
-
-
-
-                    royaltyRate.effectiveDate=value;
-                });
-
-                pages.royaltyRates.activeContractPeriod().getText().then(function(value) {
-
-
-
-                    royaltyRate.activeContractPeriod=value;
-                });
-
-                pages.royaltyRates.editModeActiveScopeName().getText().then(function(value) {
-
-
-
-                    royaltyRate.activeScopeName=value.trim();
-                });
-
-
-
-
-
-
-
-
-
-
-
-
-                hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
-
-
-            });
-
-
-        },
-        saveRRData:function()
-        {
+        saveRRData: function () {
             //Saves income providers !!
-            it("Save Data Contained in RR Set",function()
-            {
+            it("Save Data Contained in RR Set", function () {
 
 
                 hash.royaltyRates.RRName = pages.royaltyRates.getRRInputValue();
@@ -673,39 +633,27 @@ if (steps.royaltyRates === undefined) {
                 hash.royaltyRates.StartDate = pages.royaltyRates.getEffectiveStartDateInputValue();
 
 
-
-
-
-
-
             })
 
 
         }
-,
-        verifyRateSetSavedData:function()
-        {
+        ,
+        verifyRateSetSavedData: function () {
 
-            it("Check that RR data was saved succsefully",function(){
-
+            it("Check that RR data was saved succsefully", function () {
 
 
-              browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.firstSavedRRName()));
+                browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.firstSavedRRName()));
 
-              pages.base.scrollIntoView(pages.royaltyRates.firstSavedRRName());
+                pages.base.scrollIntoView(pages.royaltyRates.firstSavedRRName());
 
 
                 expect(hash.royaltyRates.RRName).toEqual(pages.royaltyRates.firstSavedRRName().getText());
-             //   expect(hash.royaltyRates.RRIncomeProvider).toEqual(pages.royaltyRates.lastSaveRRIncomeProvider().getText());
-              //  expect(hash.royaltyRates.StartDate).toEqual(pages.royaltyRates.lastSavedRRStartDate().getText());
-
-
-
+                //   expect(hash.royaltyRates.RRIncomeProvider).toEqual(pages.royaltyRates.lastSaveRRIncomeProvider().getText());
+                //  expect(hash.royaltyRates.StartDate).toEqual(pages.royaltyRates.lastSavedRRStartDate().getText());
 
 
             })
-
-
 
 
         },
@@ -718,23 +666,21 @@ if (steps.royaltyRates === undefined) {
             })
         },
 
-        storeAllRRData:function()
-        {
-            it("Store the added RR's in hashmap",function(){
+        storeAllRRData: function () {
+            it("Store the added RR's in hashmap", function () {
 
-               // browser.wait(ExpectedConditions.visibilityOf(   pages.royaltyRates.savedRRNames()));
+                // browser.wait(ExpectedConditions.visibilityOf(   pages.royaltyRates.savedRRNames()));
 
                 browser.driver.sleep(3000);
-          // console.log(pages.royaltyRates.savedRRNames());
-                pages.royaltyRates.savedRRNames().map(function(item) {
-                   // console.log("MEdvedka");
-                  // hash.royaltyRates.RRNames.push(item.getText());
-                 //   console.log(hash.royaltyRates.RRNames);
-                   return item.getText();
-                }).then(function(labels) {
+                // console.log(pages.royaltyRates.savedRRNames());
+                pages.royaltyRates.savedRRNames().map(function (item) {
+                    // console.log("MEdvedka");
+                    // hash.royaltyRates.RRNames.push(item.getText());
+                    //   console.log(hash.royaltyRates.RRNames);
+                    return item.getText();
+                }).then(function (labels) {
 
                     hash.royaltyRates.RRNames.push(labels);
-
 
 
                 });
@@ -743,22 +689,20 @@ if (steps.royaltyRates === undefined) {
             });
 
 
-
         },
-        verifyAllRateSetSavedData:function()
-        {
+        verifyAllRateSetSavedData: function () {
 
-            it("Verify that RR's were saved successfully",function(){
+            it("Verify that RR's were saved successfully", function () {
 
                 browser.driver.sleep(3000);
 
-                pages.royaltyRates.savedRRNames().map(function(item) {
+                pages.royaltyRates.savedRRNames().map(function (item) {
 
                     return item.getText();
-                }).then(function(labels) {
+                }).then(function (labels) {
 
 
-                     var temp = [];
+                    var temp = [];
                     temp.push(labels);
                     expect(temp).toEqual(hash.royaltyRates.RRNames);
                 });
@@ -767,52 +711,44 @@ if (steps.royaltyRates === undefined) {
 
 
         },
-        editIncomeProviderByPartialMatch:function(provider)
-        {
-            it("Edit income provider to "+provider, function(){
+        editIncomeProviderByPartialMatch: function (provider) {
+            it("Edit income provider to " + provider, function () {
 
                 pages.royaltyRates.clearIncomeProviderInput();
 
 
-
-
-
-            pages.royaltyRates.selectIncomeProviderByPartialMatch(provider);
+                pages.royaltyRates.selectIncomeProviderByPartialMatch(provider);
 
 
             });
 
 
-
         }
-,
-        editSingleRoyaltySet:function()
-        {
-            it("Click RR edit button",function(){
+        ,
+        editSingleRoyaltySet: function () {
+            it("Click RR edit button", function () {
 
-                browser.wait(ExpectedConditions.visibilityOf( pages.editRoyaltyRates.rrSumarryTable()));
-                browser.wait(ExpectedConditions.elementToBeClickable( pages.editRoyaltyRates.rrSumarryTable()));
-
+                browser.wait(ExpectedConditions.visibilityOf(pages.editRoyaltyRates.rrSumarryTable()));
+                browser.wait(ExpectedConditions.elementToBeClickable(pages.editRoyaltyRates.rrSumarryTable()));
 
 
-         pages.editRoyaltyRates.clickRRSumarryTable();
-               pages.base.scrollIntoView(pages.editRoyaltyRates.rrSumarryTable());
-var el = pages.editRoyaltyRates.rrSumarryTable();
+                pages.editRoyaltyRates.clickRRSumarryTable();
+                pages.base.scrollIntoView(pages.editRoyaltyRates.rrSumarryTable());
+                var el = pages.editRoyaltyRates.rrSumarryTable();
 
-              browser.actions().mouseMove(el).perform();
-              pages.editRoyaltyRates.clickEditSavedRRIcon();
-              //
-              //
-              //  steps.editRoyaltyRates.openRateSetPanel()
+                browser.actions().mouseMove(el).perform();
+                pages.editRoyaltyRates.clickEditSavedRRIcon();
+                //
+                //
+                //  steps.editRoyaltyRates.openRateSetPanel()
 
             });
 
 
         },
-        refreshPage:function()
-        {
+        refreshPage: function () {
 
-            it("Refresh Page",function(){
+            it("Refresh Page", function () {
 
                 browser.driver.navigate().refresh();
 
@@ -821,21 +757,19 @@ var el = pages.editRoyaltyRates.rrSumarryTable();
 
 
         },
-        waitForAjaxCall:function()
-        {
-          it("", function () {
-              pages.base.waitForAjax();
-          })
+        waitForAjaxCall: function () {
+            it("", function () {
+                pages.base.waitForAjax();
+            })
 
         },
 
-        addNewPublisherShares:function()
-        {
-          it("Click add new Publisher Shares",function(){
+        addNewPublisherShares: function () {
+            it("Click add new Publisher Shares", function () {
 
-              pages.royaltyRates.clickAddNewPublisherSharesButton();
+                pages.royaltyRates.clickAddNewPublisherSharesButton();
 
-          })
+            })
 
 
         },
@@ -861,26 +795,21 @@ var el = pages.editRoyaltyRates.rrSumarryTable();
                 pages.royaltyRates.selectFirstAdministrator();
 
 
-
-
             });
 
         },
         savePublisherShares: function () {
-          it("Click Save Publisher Shares Button", function () {
-              pages.royaltyRates.clickSavePublisherSharesButton();
-          })
+            it("Click Save Publisher Shares Button", function () {
+                pages.royaltyRates.clickSavePublisherSharesButton();
+            })
         },
-
-
-
 
 
         pause: function () {
 
 
             it("Pause Step", function () {
-              //  browser.manage().timeouts().pageLoadTimeout(10000);
+                //  browser.manage().timeouts().pageLoadTimeout(10000);
                 browser.sleep(5000);
 
             });
@@ -888,12 +817,11 @@ var el = pages.editRoyaltyRates.rrSumarryTable();
         },
 
 
-
         test: function () {
 
 
             it("Test Step", function () {
-                              browser.pause();
+                browser.pause();
 
             });
 
