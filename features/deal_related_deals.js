@@ -27,18 +27,23 @@ var beforeFeature = function () {
         steps: function () {
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
+            steps.create_deal_contract_period.fillContractPeriodDescription("Description long name name 1");
             steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-            steps.create_deal_contract_period.fillDescriptionField("");
-            steps.create_deal_contract_period.addNewContractPeriod();
-            steps.create_deal_contract_period.fillDescriptionField("");
-            steps.create_deal_scope.addSpecificScope("Finder");
-            steps.deal.itContinueToNextPage();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+            steps.create_deal_contract_period.fillActualEndDateField();
+            browser.sleep(5000);
+            //steps.create_deal_contract_period.addNewContractPeriodDialog();
+            //steps.create_deal_contract_period.addNewContractPeriod();
+            //steps.create_deal_contract_period.fillDescriptionField("Description added new ");
+            //steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+
+            //steps.create_deal_scope.addSpecificScope("Finder");
+            //steps.create_deal_scope.selectCountry();
+            //steps.deal.itContinueToNextPage();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
 
         }
-
     }];
 
 

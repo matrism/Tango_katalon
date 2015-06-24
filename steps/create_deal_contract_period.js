@@ -12,13 +12,19 @@ if (steps.create_deal_contract_period === undefined) {
         addNewContractPeriod: function () {
             it("Click on add new contract period icon ", function () {
                 pages.create_deal_contract_period.clickOnAddContractPeriod();
-                pages.create_deal_contract_period.waitForAjax();
             });
         },
 
+        fillActualEndDateField: function () {
+            it("Fill actual end date field ", function () {
+                pages.create_deal_contract_period.fillEndActualDate();
+            });
+        },
 
         fillContractPeriodDescription: function (description) {
-          pages.create_deal_contract_period.fillDescriptionField(description);
+            it("Fill in description field contract period ", function () {
+                pages.create_deal_contract_period.fillDescriptionField(description);
+            });
         },
 
         fillMandatoryFieldsContractPeriod: function () {
@@ -288,6 +294,12 @@ if (steps.create_deal_contract_period === undefined) {
             it("Save mdrc form ", function () {
                 pages.create_deal_contract_period.clickOnSaveMdrcForm();
                 pages.create_deal_contract_period.waitForAjax();
+            });
+        },
+
+        addNewContractPeriodDialog: function(){
+            it("Add new contract period from modal dialog ", function () {
+                steps.create_deal_contract_period.addTheNewContractPeriodDialog();
             });
         },
 

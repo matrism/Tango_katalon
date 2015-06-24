@@ -10,6 +10,12 @@ if (pages.create_deal_contract_period === undefined) {
             descriptionContractPeriod: {css: "div.input-addition #description"},
             startDate: {css: "div#actualStartDate input"},
             endTargetMonths: {name: "targetEndDuration"},
+            actualEndDate: {css: "div#actualEndDate input"},
+            autoRenewalNo: {css: "div.btn-group button[data-ng-model='modularEditModels.model.isAutoRenew']:nth-child(3)"},
+            contractPeriodModalDialog: {css: "div.modal-dialog.ng-scope"},
+            cancelContractPeriodModalDialog: {css: "div.modal-footer a[data-ng-click='cancel()']"},
+            newContractPeriodModalDialog: {css: "div.modal-footer button.btn"},
+            terminateDealContractPeriodModalDialog: {css: "div.modal-footer button[data-ng-click='data.terminate()']"},
             addMdrcLink: {css: "a[data-ng-click='addCommitment()']"},
             incompleteMdrc: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: !mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"},
             deemedCompleteMdrc: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: mdrc.is_completed && mdrc.showDeemedCompleteDetails }']"},
@@ -54,11 +60,22 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         fillStartActualDate: function () {
-            pages.create_deal_contract_period.elems.startDate.sendKeys("2015-03-12");
+            pages.create_deal_contract_period.elems.startDate.sendKeys("2014-03-12");
         },
 
         fillTargetEndMonths: function () {
             pages.create_deal_contract_period.elems.endTargetMonths.sendKeys("3");
+        },
+
+        fillEndActualDate: function(){
+            pages.create_deal_contract_period.elems.actualEndDate.sendKeys("2015-03-15");
+        },
+
+        addTheNewContractPeriodDialog:function(){
+            pages.create_deal_contract_period.elems.autoRenewalNo.click();
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_contract_period.elems.newContractPeriodModalDialog));
+            pages.create_deal_contract_period.elems.newContractPeriodModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.newContractPeriodModalDialog));
         },
 
         clickOnAddMdrcLink: function () {
