@@ -108,6 +108,17 @@ pph.parseFloat = function(value) {
 		return parseFloat(value);
 	});
 };
+pph.getAllText = function(element) {
+    if(element instanceof protractor.ElementFinder) {
+        element = element.getWebElement();
+    }
+    return browser.executeScript(
+        function(element) {
+            return $(element).text().trim();
+        },
+        element
+    );
+};
 pph.matchesCssSelector = function(element, selector) {
 	if(element instanceof protractor.ElementFinder) {
 		element = element.getWebElement();
