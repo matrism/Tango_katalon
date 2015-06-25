@@ -459,6 +459,11 @@ exports.selectWorkSearchTagFilter = function(i, value) {
         pages.work.selectWorkSearchFilterTag(i, value);
     });
 };
+exports.enterWorkSearchTerms = function(value) {
+    it('Search for work (' + value + ')', function() {
+        pages.work.enterWorkSearchTerms(value);
+    });
+};
 exports.searchForWorkUsingPreviouslyCreatedWorkId = function() {
     it('Search for work using previously created work ID', function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.id);
@@ -508,6 +513,24 @@ exports.expectWorkSearchMatchCountNotToBe = function(value) {
     it('Expect work search match count not to be ' + value, function() {
         pages.work.expectWorkSearchMatchCountNotToBe(value);
     });
+};
+exports.expectWorkSearchMatchTitleToBe = function(i, value) {
+    it('Expect work search match #' + (i + 1) + ' title to be "' + value + '"', function() {
+        pages.work.expectWorkSearchMatchTitleToBe(i, value);
+    });
+};
+exports.expectWorkSearchMatchAlternateTitleToBe = function(i, value) {
+    it('Expect work search match #' + (i + 1) + ' alternate title to be "' + value + '"', function() {
+        pages.work.expectWorkSearchMatchAlternateTitleToBe(i, value);
+    });
+};
+exports.expectWorkSearchMatchCreatorListToContain = function(i, value) {
+    it(
+        'Expect work search match #' + (i + 1) +
+        ' creator list to contain "' + value + '"', function() {
+            pages.work.expectWorkSearchMatchCreatorListToContain(i, value);
+        }
+    );
 };
 exports.addAnotherWorkSearchTerm = function() {
     it('Add another work search term', function() {

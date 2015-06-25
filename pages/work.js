@@ -45,6 +45,47 @@ exports.expectWorkSearchMatchCountToBe = function(value) {
 exports.expectWorkSearchMatchCountNotToBe = function(value) {
     expect(exports.workSearchMatchCount()).not.toBe(value);
 };
+exports.workSearchMatchMainLabelBinding = function(i) {
+    return exports.workSearchMatch(i).$('.tg-typeahead__item-left');
+};
+exports.workSearchMatchMainLabelParts = function(i) {
+    return (
+        pph.getAllText(exports.workSearchMatchMainLabelBinding(i)).then(
+            function(value) {
+                var reResult = /^(.+?) - \((.+?)\)( \(Alt\) (.+?))?$/.exec(value);
+                return {
+                    title: reResult[1],
+                    alternateTitle: reResult[4],
+                    creatorNames: reResult[2].split(' / '),
+                };
+            }
+        )
+    );
+};
+exports.workSearchMatchTitle = function(i) {
+    return exports.workSearchMatchMainLabelParts(i).then(function(parts) {
+        return parts.title;
+    });
+};
+exports.expectWorkSearchMatchTitleToBe = function(i, value) {
+    expect(exports.workSearchMatchTitle(i)).toBe(value);
+};
+exports.workSearchMatchAlternateTitle = function(i) {
+    return exports.workSearchMatchMainLabelParts(i).then(function(parts) {
+        return parts.alternateTitle;
+    });
+};
+exports.expectWorkSearchMatchAlternateTitleToBe = function(i, value) {
+    expect(exports.workSearchMatchAlternateTitle(i)).toBe(value);
+};
+exports.workSearchMatchCreatorNames = function(i) {
+    return exports.workSearchMatchMainLabelParts(i).then(function(parts) {
+        return parts.creatorNames;
+    });
+};
+exports.expectWorkSearchMatchCreatorListToContain = function(i, value) {
+    expect(exports.workSearchMatchCreatorNames(i)).toContain(value);
+};
 exports.selectWorkSearchFilterTag = function(i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);
