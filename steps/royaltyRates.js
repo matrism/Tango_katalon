@@ -480,92 +480,64 @@ if (steps.royaltyRates === undefined) {
                     royaltyRate.activeScopeName = value.toUpperCase();
                 });
 
-
                 var rateSetGroupsList = [];
-                var rateSetGroupVar = {};
-
-                rateSetGroupVar.rateSets = [];
-                var rateSet = [];
 
                 pages.rateSetIncomeTypes.getRateSetGroups()
                     .then(function (rateSetGroups) {
-
                         rateSetGroups.forEach(function (rateSetGroup) {
-
-                            // rateSetGroupVar = {};
-
+                            var rateSetGroupVar = {
+                                rateSets: []
+                            };
 
                             pages.rateSetIncomeTypes.getRateSetGroupName(rateSetGroup)
                                 .then(function (result) {
                                     rateSetGroupVar.rateSetGroupName = result;
-
-
                                 });
-
 
                             pages.rateSetIncomeTypes.getRateSetIncomeType(rateSetGroup)
                                 .then(function (rateSetBodies) {
-
-                                    //   rateSetGroupVar.rateSet.incomeRow = [];
                                     rateSetBodies.forEach(function (rateSetBody) {
-
+                                        var rateSet = {
+                                            incomeRow: []
+                                        };
 
                                         pages.rateSetIncomeTypes.getRateSetIncomeTypeName(rateSetBody)
                                             .then(function (result) {
                                                 rateSet.rateSetName = result;
-                                                //    console.log(result);
-                                                //  rateSetGroupVar.rateSets.push(rateSet);
-
-
                                             });
 
                                         pages.rateSetIncomeTypes.getRateSetIncomeTypeRows(rateSetBody)
                                             .then(function (incomeType) {
                                                 incomeType.forEach(function (row) {
+                                                    var tempRow = {};
 
-                                                    //       var tempRow = {};
                                                     pages.rateSetIncomeTypes.getRowName(row)
                                                         .then(function (result) {
-                                                            //             tempRow.name = result;
-
+                                                            tempRow.name = result;
                                                         });
+
                                                     pages.rateSetIncomeTypes.getRowInputRateFieldValue(row)
                                                         .then(function (result) {
-                                                            //            tempRow.value = result;
-
-                                                        }).then(function () {
-                                                            //     rateSet.incomeRow .push(tempRow);
+                                                            tempRow.value = result;
                                                         });
 
+                                                    rateSet.incomeRow.push(tempRow);
+                                                });
+                                            });
 
-                                                })
-                                            }).then(function () {
-
-                                                //    rateSetGroupVar.rateSets.push(rateSet);
-
-                                            })
-
-
+                                        rateSetGroupVar.rateSets.push(rateSet);
                                     })
-
-
-                                }).then(function () {
-
-
-                                    rateSetGroupsList.push(rateSetGroupVar);
-
-
-                                }).then(function () {
-                                    rateSetGroupVar = {};
-                                    rateSetGroupVar.rateSets = [];
                                 });
-                            //
-                        })
-                    }).then(function () {
+
+                            rateSetGroupsList.push(rateSetGroupVar);
+                        });
+                    })
+                    .then(function () {
                         console.log(JSON.stringify(rateSetGroupsList, null, 4));
                     });
 
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
+                //    console.log(JSON.stringify(rateSetGroupsList, null, 4));
                 //console.log(JSON.stringify(rateSetGroups, null, 4));
             });
 
