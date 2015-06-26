@@ -10,7 +10,9 @@ if (pages.deal === undefined) {
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
             termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
-            dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"}
+            dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
+            finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
+            finderDealsTitle: {css: "div[data-ng-form='finderDealsForm'] h3"}
         },
 
         continueToNextPage: function () {
@@ -31,6 +33,10 @@ if (pages.deal === undefined) {
 
         goToTermsDealDetails: function () {
             pages.deal.elems.termsHeader.click();
+        },
+
+        goToFinderDealTerms: function(){
+            pages.deal.elems.finderDealsHeaderLink.click();
         }
     });
 }

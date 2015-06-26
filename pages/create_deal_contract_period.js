@@ -6,15 +6,15 @@ require(pages_path + "base");
 if (pages.create_deal_contract_period === undefined) {
     pages.create_deal_contract_period = new ftf.pageObject({
         locators: {
-            addContractPeriodElem: {css: "a[data-ng-click='addContractPeriod()']"},
+            addContractPeriodElem: {css: "div.deal-terms-affix a[data-ng-click='addContractPeriod()']"},
             descriptionContractPeriod: {css: "div.input-addition #description"},
             startDate: {css: "div#actualStartDate input"},
             endTargetMonths: {name: "targetEndDuration"},
             actualEndDate: {css: "div#actualEndDate input"},
-            autoRenewalNo: {css: "div.btn-group button[data-ng-model='modularEditModels.model.isAutoRenew']:nth-child(3)"},
+            contractPeriodArea: {css: "div[data-tg-modular-edit-id='contractPeriod']"},
             contractPeriodModalDialog: {css: "div.modal-dialog.ng-scope"},
             cancelContractPeriodModalDialog: {css: "div.modal-footer a[data-ng-click='cancel()']"},
-            newContractPeriodModalDialog: {css: "div.modal-footer button.btn"},
+            newContractPeriodModalDialog: {xpath: "//*[@class='modal-footer']//button[contains(text(),'New Contract Period')]"},
             terminateDealContractPeriodModalDialog: {css: "div.modal-footer button[data-ng-click='data.terminate()']"},
             addMdrcLink: {css: "a[data-ng-click='addCommitment()']"},
             incompleteMdrc: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: !mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"},
@@ -63,17 +63,26 @@ if (pages.create_deal_contract_period === undefined) {
             pages.create_deal_contract_period.elems.startDate.sendKeys("2014-03-12");
         },
 
+        fillStartActualDateSpecificValue: function (value) {
+            pages.create_deal_contract_period.elems.startDate.sendKeys(value);
+        },
+
         fillTargetEndMonths: function () {
             pages.create_deal_contract_period.elems.endTargetMonths.sendKeys("3");
         },
 
+        fillTargetEndMonthsSpecificValue: function (months) {
+            pages.create_deal_contract_period.elems.endTargetMonths.sendKeys(months);
+        },
+
         fillEndActualDate: function(){
             pages.create_deal_contract_period.elems.actualEndDate.sendKeys("2015-03-15");
+            pages.create_deal_contract_period.elems.contractPeriodArea.click();
+            pages.create_deal_contract_period.waitForAjax();
         },
 
         addTheNewContractPeriodDialog:function(){
-            pages.create_deal_contract_period.elems.autoRenewalNo.click();
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_contract_period.elems.newContractPeriodModalDialog));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.contractPeriodModalDialog));
             pages.create_deal_contract_period.elems.newContractPeriodModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.newContractPeriodModalDialog));
         },

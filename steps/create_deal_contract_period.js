@@ -27,6 +27,20 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
+        fillEndTargetMonths: function () {
+            it("Fill end target months field ", function () {
+                pages.create_deal_contract_period.fillTargetEndMonths();
+            });
+        },
+
+        fillMandatoryFieldsContractPeriodSpecificValue: function (value) {
+            it("Fill mandatory fields contract period", function () {
+                browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.startDate));
+                pages.create_deal_contract_period.fillStartActualDateSpecificValue(value);
+                pages.create_deal_contract_period.fillTargetEndMonths();
+            });
+        },
+
         fillMandatoryFieldsContractPeriod: function () {
             it("Fill mandatory fields contract period", function () {
                 browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.startDate));
@@ -297,9 +311,9 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
-        addNewContractPeriodDialog: function(){
+        addNewContractPeriodDialog: function () {
             it("Add new contract period from modal dialog ", function () {
-                steps.create_deal_contract_period.addTheNewContractPeriodDialog();
+                pages.create_deal_contract_period.addTheNewContractPeriodDialog();
             });
         },
 

@@ -5,6 +5,7 @@ var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 require(steps_path + "deal");
 require(pages_path + "deal");
+require(pages_path + "finder_deal");
 
 if (steps.deal === undefined) {
     steps.deal = {
@@ -73,6 +74,13 @@ if (steps.deal === undefined) {
         expectTermsDetailsAreOk: function () {
             it("Expect terms tab is opened successfully ", function () {
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealTermsSummaryHeader));
+            });
+        },
+
+        goToFinderDealTermsTabDetails: function () {
+            it("Click on finder deal terms link ", function () {
+                pages.deal.goToFinderDealTerms();
+                browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.finderDealsTitle));
             });
         }
 
