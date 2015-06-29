@@ -550,78 +550,84 @@ searchDataByExactTitleAndCreator = [
 
 var beforeFeature = [
         [steps.login.itLogin],
-        [function() {
-            baseWorksData.forEach(function(workData, i) {
-                var evenCreatorContribution = 100 / workData.creators.length;
-
-                workData.creators.forEach(function(creatorData, j) {
-                    steps.person.useBlankPersonSlot(j);
-
-                    steps.newPerson.goToNewPersonPage();
-
-                    if(creatorData.firstName) {
-                        creatorData.firstName = creatorData.firstName;
-                        steps.newPerson.enterFirstName(creatorData.firstName);
-                    }
-
-                    if(creatorData.lastName) {
-                        creatorData.lastName = creatorData.lastName;
-                        steps.newPerson.enterLastName(creatorData.lastName);
-                    }
-
-                    if(creatorData.presentationName) {
-                        creatorData.presentationName = creatorData.presentationName;
-                        steps.newPerson.enterPresentationName(creatorData.presentationName);
-                    }
-
-                    if(creatorData.alternativeNames) {
-                        creatorData.alternativeNames.forEach(function(alternative, k) {
-                            steps.newPerson.addAlternativeName();
-
-                            if(alternative.firstName) {
-                                alternative.firstName = alternative.firstName;
-                                steps.newPerson.enterAlternativeFirstName(k, alternative.firstName);
-                            }
-
-                            if(alternative.lastName) {
-                                alternative.lastName = alternative.lastName;
-                                steps.newPerson.enterAlternativeLastName(k, alternative.lastName);
-                            }
-                        });
-                    }
-
-                    steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
-                    steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
-
-                    steps.newPerson.save();
-                    steps.newPerson.validateSaveRedirection();
-
-                    steps.person.findInternalIpiNumber();
-                });
-
-                steps.new_work.goToNewWorkPage();
-
-                steps.new_work.enterPrimaryWorkTitle(workData.primaryTitle);
-
-                if(workData.alternateTitles) {
-                    workData.alternateTitles.forEach(function(value, j) {
-                        steps.new_work.enterAlternateWorkTitle(j, value);
-                    });
-                }
-
-                workData.creators.forEach(function(unused, j) {
-                    steps.new_work.selectCreatorFromPersonSlot(j, j);
-                    steps.new_work.enterCreatorContribution(j, evenCreatorContribution);
-                });
-
-                steps.new_work.optToIncludeWorkOnWebsite(false);
-
-                steps.new_work.saveWork();
-                steps.new_work.validateSaveWorkRedirection();
-            });
-        }],
     ],
     feature = [
+		{
+			name: 'Create test data',
+			tags: [],
+			steps: [
+				[function() {
+					baseWorksData.forEach(function(workData, i) {
+						var evenCreatorContribution = 100 / workData.creators.length;
+
+						workData.creators.forEach(function(creatorData, j) {
+							steps.person.useBlankPersonSlot(j);
+
+							steps.newPerson.goToNewPersonPage();
+
+							if(creatorData.firstName) {
+								creatorData.firstName = creatorData.firstName;
+								steps.newPerson.enterFirstName(creatorData.firstName);
+							}
+
+							if(creatorData.lastName) {
+								creatorData.lastName = creatorData.lastName;
+								steps.newPerson.enterLastName(creatorData.lastName);
+							}
+
+							if(creatorData.presentationName) {
+								creatorData.presentationName = creatorData.presentationName;
+								steps.newPerson.enterPresentationName(creatorData.presentationName);
+							}
+
+							if(creatorData.alternativeNames) {
+								creatorData.alternativeNames.forEach(function(alternative, k) {
+									steps.newPerson.addAlternativeName();
+
+									if(alternative.firstName) {
+										alternative.firstName = alternative.firstName;
+										steps.newPerson.enterAlternativeFirstName(k, alternative.firstName);
+									}
+
+									if(alternative.lastName) {
+										alternative.lastName = alternative.lastName;
+										steps.newPerson.enterAlternativeLastName(k, alternative.lastName);
+									}
+								});
+							}
+
+							steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
+							steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
+
+							steps.newPerson.save();
+							steps.newPerson.validateSaveRedirection();
+
+							steps.person.findInternalIpiNumber();
+						});
+
+						steps.new_work.goToNewWorkPage();
+
+						steps.new_work.enterPrimaryWorkTitle(workData.primaryTitle);
+
+						if(workData.alternateTitles) {
+							workData.alternateTitles.forEach(function(value, j) {
+								steps.new_work.enterAlternateWorkTitle(j, value);
+							});
+						}
+
+						workData.creators.forEach(function(unused, j) {
+							steps.new_work.selectCreatorFromPersonSlot(j, j);
+							steps.new_work.enterCreatorContribution(j, evenCreatorContribution);
+						});
+
+						steps.new_work.optToIncludeWorkOnWebsite(false);
+
+						steps.new_work.saveWork();
+						steps.new_work.validateSaveWorkRedirection();
+					});
+				}],
+			],
+		},
         {
             name: 'Search by work title (exact match)',
             tags: [],
