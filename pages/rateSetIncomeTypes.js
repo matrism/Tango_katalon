@@ -48,6 +48,8 @@ if (pages.rateSetIncomeTypes === undefined) {
         //GENERIC FUNCTIONS
 
         getRateSetGroups: function () {
+
+
             return $$('[name="groupForm"]');
         }
         ,

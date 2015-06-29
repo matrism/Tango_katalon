@@ -57,20 +57,22 @@ var beforeFeature = function () {
             steps.royaltyRates.confirmChangingRateApplicationMethod();
             steps.royaltyRates.openAllRRFields();
             steps.royaltyRates.storeRRObject();
-        //    steps.royaltyRates.saveRateSet();
+            steps.royaltyRates.saveRateSet();
          //  steps.royaltyRates.test();
 
 
-
+            //
             //steps.royaltyRates.addNewRoyaltySet();
-            //steps.royaltyRates.addRatePercentageToContractualField("10");
+            //steps.royaltyRates.addRatePercentageToContractualField("15");
             //steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             //steps.royaltyRates.addEffectiveStartDate("2023-06-17");
             //steps.royaltyRates.clickOnReceiptApplicationMethod();
             //steps.royaltyRates.confirmChangingRateApplicationMethod();
+            //steps.royaltyRates.openAllRRFields();
+            //steps.royaltyRates.closeAllRRButTheLast();
             //steps.royaltyRates.storeRRObject();
             //steps.royaltyRates.saveRateSet();
-            //
+
             //steps.create_deal_scope.itAddSimpleScope();
             //
             //steps.royaltyRates.addNewRoyaltySet();
@@ -143,16 +145,16 @@ var beforeFeature = function () {
             //
             //
             //
-            //steps.deal.itContinueToNextPage();
-            //steps.deal.saveDeal();
-            //
-            //steps.deal.goToIncomeRatesPage();
-            //
-            //steps.RRSummaryTable.expandRR();
-            //steps.RRSummaryTable.expandInnerRR();
-            //
-            //
-         // steps.RRSummaryTable.validateIncomeRatesTable();
+          //  steps.deal.itContinueToNextPage();
+          //  steps.deal.saveDeal();
+          //
+          //  steps.deal.goToIncomeRatesPage();
+          //
+          //  steps.RRSummaryTable.expandRR();
+          //  steps.RRSummaryTable.expandInnerRR();
+          //
+          //
+          //steps.RRSummaryTable.validateIncomeRatesTable();
 //
 
 
@@ -169,9 +171,12 @@ var beforeFeature = function () {
             tags: ["filterRRSummary"],
             steps: function () {
                 steps.searchSection.accessSavedDealByNumber("209550");
+                //206988
               steps.deal.goToIncomeRatesPage();
-                steps.RRSummaryTable.saveDisplayedIncomeRates();
-               steps.RRSummaryTable.validateContractPeriodFilter();
+                  steps.RRSummaryTable.expandRR();
+                  steps.RRSummaryTable.expandInnerRR();
+              steps.RRSummaryTable.saveDisplayedIncomeRates();
+             //  steps.RRSummaryTable.validateContractPeriodFilter();
 
             }
             }

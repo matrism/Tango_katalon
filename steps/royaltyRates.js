@@ -344,6 +344,11 @@ if (steps.royaltyRates === undefined) {
 
             });
         },
+        closeAllRRButTheLast: function () {
+            it("Leave only last RR expanded", function () {
+                pages.royaltyRates.closeAllButLastIncomeGroups();
+            })
+        },
         openAllRRFields: function () {
 
             it("Expand all RR groups", function () {
@@ -533,7 +538,8 @@ if (steps.royaltyRates === undefined) {
                         });
                     })
                     .then(function () {
-                        console.log(JSON.stringify(rateSetGroupsList, null, 4));
+                     //    console.log(JSON.stringify(rateSetGroupsList, null, 4));
+                        royaltyRate.rateSetGroupsList = rateSetGroupsList;
                     });
 
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);

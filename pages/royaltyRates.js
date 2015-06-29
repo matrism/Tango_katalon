@@ -238,6 +238,22 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
 
         },
+        closeAllButLastIncomeGroups: function () {
+
+
+            browser.driver.sleep(5000);
+            var i = 0;
+
+            $$(".rate-set-row.rate-set-header>a>.icon-chevron-up")
+                .then(function (result) {
+
+                    for (i = 0; i < result.length-1; i++) {
+                        result[i].click();
+                    }
+                }
+            )
+
+        },
 
         typeInAllInputs:function(value){
             var i = 0;

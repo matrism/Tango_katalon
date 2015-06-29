@@ -17,13 +17,6 @@ if (pages.RRSummaryTable === undefined) {
 
         },
 
-        //Scope Name      .rate-summary-table__scope-details>.rate-summary-table__scope-details-scope-name
-        //TERRITORY       .rate-summary-table__scope>.rate-summary-table__scope-details>.rate-summary-table__scope-details-dl>:nth-child(1)>dd>strong>div>div
-        //Contract Period .rate-summary-table__scope>.rate-summary-table__scope-details>.rate-summary-table__scope-details-dl>:nth-child(3)>dd>ul>li
-        //RR Name         .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(1)>div
-        //Income Provider .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(4)
-        //Start Date      .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(5)
-        //Rate App Method .rate-summary-table__scope>.rate-summary-table__scope-rates>div>div:nth-child(6)
         //PAGE OBJECT LOCATORS
 
         dropDownOptions:function()
@@ -35,67 +28,6 @@ if (pages.RRSummaryTable === undefined) {
         {
 
             return $$(".rate-summary-table__scope");
-        },
-        outterCollapseTableButtons:function()
-        {
-
-            return $$(".rate-summary-table__scope-item-col>.rate-summary-table__collapse-btn");
-        },
-
-        innerCollapseTableButtons:function()
-        {
-
-            return $$(".rate-summary-table__rate-group-item-col>.rate-summary-table__collapse-btn");
-        },
-        rateSetsNames:function()
-        {
-
-            return element.all(by.css(".rate-summary-table__scope-rates.ng-scope>div>div:nth-child(1)>div"));
-        },
-        contractualRates:function()
-        {
-            return $$(".rate-summary-table__scope-item-col:nth-child(2)");
-        },
-        interCompanyRates:function()
-        {
-
-            return $$(".rate-summary-table__scope-item-col:nth-child(3)");
-
-        },
-        incomeProviders:function()
-        {
-            return $$(".rate-summary-table__scope-item-col:nth-child(4)");
-        },
-
-        effectiveStartDates:function()
-        {
-
-            return $$(".rate-summary-table__scope-item-col:nth-child(5)");
-        },
-        rateApplicationMethods:function()
-        {
-
-            return $$(".rate-summary-table__scope-item-col:nth-child(6)");
-        },
-
-        scopeNames:function()
-        {
-
-            return $$(".rate-summary-table__scope-details-scope-name");
-        },
-        territoriesList:function()
-        {
-            return $$(".tg-territory-label__list-overflow");
-        }
-        ,
-        contractTypeList:function()
-        {
-            return $$(".rate-summary-table__scope-details-dl>div:nth-child(2)>dd");
-        },
-
-        contractPeriods:function()
-        {
-            return $$(".rate-summary-table__scope-deal-term");
         }
 
         ,
@@ -164,6 +96,55 @@ if (pages.RRSummaryTable === undefined) {
 
             });
         }
+        ,
+
+
+        getRateSetIncomeTypeRows:function(rateSetIncomeType)
+        {
+            return rateSetIncomeType.$$(".rate-summary-table__rate-type-item-wrap>.rate-summary-table__rate-item");
+
+        }
+        ,
+
+        getRowName:function(incomeTypeRow)
+        {
+
+            return incomeTypeRow.$(".rate-summary-table__rate-type-item-wrap>.rate-summary-table__rate-item>:first-child").getText();
+        },
+
+        getRowInputRateFieldValue: function (incomeTypeRow) {
+            return incomeTypeRow.$(".rate-summary-table__rate-type-item-wrap>.rate-summary-table__rate-item>:nth-child(2)").getText();
+        },
+
+
+
+
+
+        //GENERIC FUNCTIONS
+
+        getRateSetGroups: function (el) {
+
+
+            return el.$$("div>div>div");
+        }
+        ,//.rate-summary-table__scope-rates
+        getRateSetGroupName:function(rateSetGroup){
+
+        //    browser.wait(ExpectedConditions.visibilityOf($("div.rate-summary-table__rate-group-item>div:first-child")));
+            return rateSetGroup.$("div.rate-summary-table__rate-group-item>div:first-child").getText();
+        },
+        getRateSetIncomeType: function (rateSetGroup) {
+            return rateSetGroup.$$(".rate-summary-table__rate-type-item-wrap");
+        },
+        getRateSetIncomeTypeName: function (rateSetIncomeType) {
+            return rateSetIncomeType.$ (".rate-summary-table__rate-type-item-wrap>.rate-summary-table__rate-type-item>:first-child").getText();
+        },
+
+        getElementText: function (element) {
+            return element.getText();
+        }
+
+
 
 
 

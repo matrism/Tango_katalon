@@ -23,7 +23,10 @@ if (steps.RRSummaryTable === undefined) {
 
                 var RRArray = [];
 
-                RRList.each( function(el) {
+
+
+                RRList.each( function(el)
+                {
 
                     el.$$(".rate-summary-table__scope-rates").each(function(rrSet)
                     {
@@ -50,26 +53,101 @@ if (steps.RRSummaryTable === undefined) {
                         rrSet.$("div>div:nth-child(5)").getText().then(function (result) {
                             royaltyRate.effectiveDate = result;
 
-                            RRArray.push(royaltyRate);
+                          //  RRArray.push(royaltyRate);
 
                         });
 
 
+                        var rateSetGroupsList = [];
+
+
+
+                        pages.RRSummaryTable.getRateSetGroups(rrSet)
+                            .then(function (rateSetGroups) {
+                                rateSetGroups.forEach(function (rateSetGroup) {
+                                    var rateSetGroupVar = {
+                                        rateSets: []
+                                    };
+
+                                 // console.log(rateSetGroup);
+                                   $$("div.rate-summary-table__rate-group-item>div:first-child").first().getText()
+                                        .then(function (result) {
+                                                    rateSetGroupVar.rateSetGroupName = result.toUpperCase();
+                                                });
+                                    //pages.RRSummaryTable.getRateSetGroupName(rateSetGroup)
+                                    //    .then(function (result) {
+                                    //        rateSetGroupVar.rateSetGroupName = result.toUpperCase();
+                                    //    });
+                                    //
+                                    //pages.RRSummaryTable.getRateSetIncomeType(rateSetGroup)
+                                    //    .then(function (rateSetBodies) {
+                                    //        rateSetBodies.forEach(function (rateSetBody) {
+                                    //            var rateSet = {
+                                    //                incomeRow: []
+                                    //            };
+                                    //
+                                    //            pages.RRSummaryTable.getRateSetIncomeTypeName(rateSetBody)
+                                    //                .then(function (result) {
+                                    //                    //   console.log("Rate Set Name",result);
+                                    //                    rateSet.rateSetName = result;
+                                    //                });
+                                    //
+                                    //            pages.RRSummaryTable.getRateSetIncomeTypeRows(rateSetBody)
+                                    //                .then(function (incomeType) {
+                                    //                    incomeType.forEach(function (row) {
+                                    //                        var tempRow = {};
+                                    //
+                                    //                        pages.RRSummaryTable.getRowName(row)
+                                    //                            .then(function (result) {
+                                    //                                tempRow.name = result;
+                                    //                            });
+                                    //
+                                    //                        pages.RRSummaryTable.getRowInputRateFieldValue(row)
+                                    //                            .then(function (result) {
+                                    //
+                                    //
+                                    //
+                                    //                                tempRow.value = result.split('.')[0];
+                                    //                            });
+                                    //
+                                    //                        rateSet.incomeRow.push(tempRow);
+                                    //                    });
+                                    //                });
+                                    //
+                                    //            rateSetGroupVar.rateSets.push(rateSet);
+                                    //        })
+                                    //    });
+
+                                    rateSetGroupsList.push(rateSetGroupVar);
+                                    //     console.log(JSON.stringify("Rate set group"+rateSetGroupVar, null, 4));
+                                });
+                            })
+                            .then(function () {
+
+                                royaltyRate.rateSetGroupsList = rateSetGroupsList;
+                            });
+
+
+                        RRArray.push(royaltyRate);
 
 
 
                     });
 
 
-
-
-                }).then(function()
+                    }).then(function()
                 {
+                    console.log(JSON.stringify(RRArray, null, 4));
                     hash.royaltyRates.royaltyRateObjectsList = RRArray;
 
                 });
 
-            });
+
+
+
+                });
+
+            //});
         },
         expandRR: function () {
             it("EXPAND RR", function () {
@@ -129,55 +207,100 @@ if (steps.RRSummaryTable === undefined) {
                     {
 
 
-
-                        //el.$(".rate-summary-table__scope-rates>div>div>.rate-summary-table__collapse-btn")
-                        //    .then(function (result) {
-                        //
-                        //        for (i = 0; i < result.length; i++) {
-                        //            result[i].click();
-                        //        }
-                        //    }
-                        //);
-
-                        //var innerArrow = $$("div:not(.rate-summary-table__scope-item-col)>.rate-summary-table__collapse-btn");
-                        //
-                        //browser.wait(ExpectedConditions.visibilityOf(innerArrow));
-                        //
-                        //innerArrow.each(function (el3) {
-                        //   el3.click();
-                        //});
-
-                       // var innterArrow = $$("div:not(.rate-summary-table__scope-item-col)>.rate-summary-table__collapse-btn");
-
-
                         var royaltyRate = {};
-
-                        el.$(".rate-summary-table__scope-details>.rate-summary-table__scope-details-scope-name").getText().then(function (result) {
-                            royaltyRate.activeScopeName = result.toUpperCase();
-                        });
-                        el.$(".rate-summary-table__scope>.rate-summary-table__scope-details>.rate-summary-table__scope-details-dl>:nth-child(3)>dd>ul>li").getText().then(function (result) {
-                            royaltyRate.activeContractPeriod = result;
-                        });
-
-
-
                         rrSet.$("div>div:nth-child(1)>div").getText().then(function (result) {
 
                             royaltyRate.name = result.split('\n')[0].trim();
 
                         });
+
                         rrSet.$("div>div:nth-child(4)").getText().then(function (result) {
                             royaltyRate.incomeProvider = result;
                         });
                         rrSet.$("div>div:nth-child(5)").getText().then(function (result) {
                             royaltyRate.effectiveDate = result;
 
-                            RRArray.push(royaltyRate);
-                         //   console.log("RRARRAY",RRArray);
+
+                        });
+                        el.$(".rate-summary-table__scope>.rate-summary-table__scope-details>.rate-summary-table__scope-details-dl>:nth-child(3)>dd>ul>li").getText().then(function (result) {
+                            royaltyRate.activeContractPeriod = result;
+                        });
+
+                        el.$(".rate-summary-table__scope-details>.rate-summary-table__scope-details-scope-name").getText().then(function (result) {
+                            royaltyRate.activeScopeName = result.toUpperCase();
                         });
 
 
 
+
+
+
+                        var rateSetGroupsList = [];
+
+
+
+                        pages.RRSummaryTable.getRateSetGroups(rrSet)
+                            .then(function (rateSetGroups) {
+                                rateSetGroups.forEach(function (rateSetGroup) {
+                                    var rateSetGroupVar = {
+                                        rateSets: []
+                                    };
+
+                                    //pages.RRSummaryTable.getRateSetGroupName(rateSetGroup)
+                                    //    .then(function (result) {
+                                    //        rateSetGroupVar.rateSetGroupName = result.toUpperCase();
+                                    //    });
+
+                                    pages.RRSummaryTable.getRateSetIncomeType(rateSetGroup)
+                                        .then(function (rateSetBodies) {
+                                            rateSetBodies.forEach(function (rateSetBody) {
+                                                var rateSet = {
+                                                    incomeRow: []
+                                                };
+
+                                                pages.RRSummaryTable.getRateSetIncomeTypeName(rateSetBody)
+                                                    .then(function (result) {
+                                                     //   console.log("Rate Set Name",result);
+                                                        rateSet.rateSetName = result;
+                                                    });
+
+                                                pages.RRSummaryTable.getRateSetIncomeTypeRows(rateSetBody)
+                                                    .then(function (incomeType) {
+                                                        incomeType.forEach(function (row) {
+                                                            var tempRow = {};
+
+                                                            pages.RRSummaryTable.getRowName(row)
+                                                                .then(function (result) {
+                                                                    tempRow.name = result;
+                                                                });
+
+                                                            pages.RRSummaryTable.getRowInputRateFieldValue(row)
+                                                                .then(function (result) {
+
+
+
+                                                                    tempRow.value = result.split('.')[0];
+                                                                });
+
+                                                            rateSet.incomeRow.push(tempRow);
+                                                        });
+                                                    });
+
+                                                rateSetGroupVar.rateSets.push(rateSet);
+                                            })
+                                        });
+
+                                    rateSetGroupsList.push(rateSetGroupVar);
+                               //     console.log(JSON.stringify("Rate set group"+rateSetGroupVar, null, 4));
+                                });
+                            })
+                            .then(function () {
+
+                                royaltyRate.rateSetGroupsList = rateSetGroupsList;
+                            });
+
+
+                        RRArray.push(royaltyRate);
 
 
 
@@ -192,7 +315,7 @@ if (steps.RRSummaryTable === undefined) {
                    //console.log("THIS IS RR SUMMARY SAVED",hash.royaltyRates.royaltyRateObjectsList);
 
 
-                   expect(RRArray).toEqual(hash.royaltyRates.royaltyRateObjectsList);
+                 expect(RRArray).toEqual(hash.royaltyRates.royaltyRateObjectsList);
                 });
 
 
