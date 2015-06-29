@@ -69,15 +69,16 @@ if (steps.RRSummaryTable === undefined) {
                                         rateSets: []
                                     };
 
-                                 // console.log(rateSetGroup);
-                                   $$("div.rate-summary-table__rate-group-item>div:first-child").first().getText()
+                             //     console.log(rateSetGroup);
+                                 //  $$("div.rate-summary-table__rate-group-item>div:first-child").first().getText()
+                                 //       .then(function (result) {
+                                 //                   rateSetGroupVar.rateSetGroupName = result.toUpperCase();
+                                 //               });
+
+                                    pages.RRSummaryTable.getRateSetGroupName(rateSetGroup)
                                         .then(function (result) {
-                                                    rateSetGroupVar.rateSetGroupName = result.toUpperCase();
-                                                });
-                                    //pages.RRSummaryTable.getRateSetGroupName(rateSetGroup)
-                                    //    .then(function (result) {
-                                    //        rateSetGroupVar.rateSetGroupName = result.toUpperCase();
-                                    //    });
+                                            rateSetGroupVar.rateSetGroupName = result.toUpperCase();
+                                        });
                                     //
                                     //pages.RRSummaryTable.getRateSetIncomeType(rateSetGroup)
                                     //    .then(function (rateSetBodies) {
