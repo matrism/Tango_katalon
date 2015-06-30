@@ -40,7 +40,7 @@ var beforeFeature = [
                 [steps.work.validateWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Work ID']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Work ID']],
                 [steps.work.searchForWorkUsingPreviouslyCreatedSongCode],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
@@ -49,7 +49,7 @@ var beforeFeature = [
                 [steps.work.validateWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Title']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Title']],
                 [steps.work.searchForWorkUsingPreviouslyEnteredPrimaryTitle],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
@@ -58,7 +58,7 @@ var beforeFeature = [
                 [steps.work.validateWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Title']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Title']],
                 [steps.work.searchForWorkUsingPreviouslyEnteredAlternateTitle, [0]],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
@@ -67,7 +67,7 @@ var beforeFeature = [
                 [steps.work.validateWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Title']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Title']],
                 [steps.work.searchForWorkUsingPreviouslyEnteredAlternateTitle, [1]],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
@@ -111,7 +111,7 @@ var beforeFeature = [
                 [steps.work.findCurrentlyOpenWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Creator']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Creator']],
                 [steps.work.searchForWorkUsingPreviouslySelectedCreatorName, [0]],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
@@ -120,7 +120,7 @@ var beforeFeature = [
                 [steps.work.validateWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Creator']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Creator']],
                 [steps.work.searchForWorkUsingPreviouslySelectedCreatorSuisaIpiNumber, [0]],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
@@ -129,7 +129,7 @@ var beforeFeature = [
                 [steps.work.validateWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Creator']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Creator']],
                 [steps.work.searchForWorkUsingPreviouslySelectedCreatorInternalIpiNumber, [1]],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],
@@ -152,21 +152,21 @@ var beforeFeature = [
                 [steps.base.waitForAjax],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Creator']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Creator']],
                 [steps.work.searchForWorkUsingPreviouslySelectedCreatorName, [0]],
                 [steps.base.waitForAjax],
                 [steps.work.addAnotherWorkSearchTerm],
-                [steps.work.selectWorkSearchTagFilter, [1, 'Title']],
+                [steps.work.selectWorkSearchFilterTag, [1, 'Title']],
                 [steps.work.searchForWorkUsingPreviouslyEnteredPrimaryTitle],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountNotToBe, [0]],
 
                 [steps.work.removeWorkSearchTerm, [0]],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Title']],
+                [steps.work.selectWorkSearchFilterTag, [0, 'Title']],
                 [steps.work.searchForWorkUsingPreviouslyEnteredPrimaryTitle],
                 [steps.base.waitForAjax],
                 [steps.work.addAnotherWorkSearchTerm],
-                [steps.work.selectWorkSearchTagFilter, [1, 'Creator']],
+                [steps.work.selectWorkSearchFilterTag, [1, 'Creator']],
                 [steps.work.searchForWorkUsingPreviouslySelectedCreatorName, [0]],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountNotToBe, [0]],

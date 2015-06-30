@@ -454,7 +454,7 @@ exports.enterShellWorkCreatorContribution = function(i, j, value) {
         }
     );
 };
-exports.selectWorkSearchTagFilter = function(i, value) {
+exports.selectWorkSearchFilterTag = function(i, value) {
     it('Select "' + value + '" work search filter tag #' + (i + 1), function() {
         pages.work.selectWorkSearchFilterTag(i, value);
     });
