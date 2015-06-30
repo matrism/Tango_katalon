@@ -481,6 +481,23 @@ exports.searchForWorkUsingPreviouslyCreatedSongCode = function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode);
     });
 };
+exports.searchForWorkUsingPreviouslyCreatedSongCodeWithNoLeadingZeroes = function() {
+    it('Search for work using previously created song code with no leading zeroes', function() {
+        pages.work.enterWorkSearchTerms(
+			hash.subjectWorkData.songCode.toString().replace(/^0*/, '')
+		);
+    });
+};
+exports.searchForWorkUsingPreviouslyCreatedSongCodeWithLeadingZeroes = function() {
+    it('Search for work using previously created song code with leading zeroes', function() {
+        pages.work.enterWorkSearchTerms('0000' + hash.subjectWorkData.songCode);
+    });
+};
+exports.searchForWorkUsingPreviouslyCreatedSongCodeWithTrailingZeroes = function() {
+    it('Search for work using previously created song code trailing zeroes', function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode + '0000');
+    });
+};
 exports.searchForWorkUsingPreviouslyEnteredPrimaryTitle = function() {
     it('Search for work using previously entered primary work title', function() {
         pages.work.enterWorkSearchTerms(hash.subjectWorkData.primaryTitle);
