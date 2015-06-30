@@ -86,6 +86,11 @@ exports.workSearchMatchCreatorNames = function(i) {
 exports.expectWorkSearchMatchCreatorListToContain = function(i, value) {
     expect(exports.workSearchMatchCreatorNames(i)).toContain(value);
 };
+exports.expectSelectedWorkSearchFilterTagToBe = function(i, value) {
+    var element = exports.workSearchFilterTagDropdown(i);
+    pages.base.scrollIntoView(element);
+	expect(pages.base.selectedDropdownOption(element)).toBe(value);
+};
 exports.selectWorkSearchFilterTag = function(i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);

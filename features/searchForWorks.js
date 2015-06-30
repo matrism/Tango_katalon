@@ -31,7 +31,7 @@ var beforeFeature = [
                 [steps.work.findCurrentlyOpenWorkId],
 
                 [steps.base.goToHomePage],
-                [steps.work.selectWorkSearchTagFilter, [0, 'Work ID']],
+                [steps.work.validateDefaultWorkSearchFilterTag, [0]],
                 [steps.work.searchForWorkUsingPreviouslyCreatedWorkId],
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchCountToBe, [1]],

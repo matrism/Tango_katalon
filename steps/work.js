@@ -454,6 +454,13 @@ exports.enterShellWorkCreatorContribution = function(i, j, value) {
         }
     );
 };
+exports.validateDefaultWorkSearchFilterTag = function() {
+	var value = 'WORK ID';
+
+	it('Validate default first work search tag filter (' + value + ')', function() {
+		pages.work.expectSelectedWorkSearchFilterTagToBe(0, value);
+	});
+};
 exports.selectWorkSearchFilterTag = function(i, value) {
     it('Select "' + value + '" work search filter tag #' + (i + 1), function() {
         pages.work.selectWorkSearchFilterTag(i, value);
