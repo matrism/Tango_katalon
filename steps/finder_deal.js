@@ -321,7 +321,88 @@ if (steps.finder_deal === undefined) {
                         expect(promise).toContain("awareness of the submitted Creator(s).");
                     });
             });
+        },
+
+        validateNotifyWithinThisNumberOfDaysTooltip: function () {
+            it("Validate the notify within this number of days tooltip ", function () {
+                pages.finder_deal.elems.notifyWithinThisNumberOfDaysTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The notify within this number of days tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates within how many days the Finder must be notified of WCM \"knowledge\" of the Creator(s).");
+                    });
+            });
+        },
+
+        validateSubmissionDecisionWithinNumberOfDaysTooltip: function () {
+            it("Validate the submission decision within number of days tooltip ", function () {
+                pages.finder_deal.elems.submissionDecisionWithinNumberOfDaysTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The submission decision within number of days tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates within how many days WCM must either Accept or Decline the Finder submission.");
+                    });
+            });
+        },
+
+        validateAssumedResponseTooltip: function () {
+            it("Validate the assumed response tooltip ", function () {
+                pages.finder_deal.elems.assumedResponseTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The assumed response tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates the default response to the Finder if WCM has not responded to a submission within the specified number of days.");
+                    });
+            });
+        },
+
+        validateWhoWillDraftDealsTooltip: function () {
+            it("Validate who will draft deals tooltip ", function () {
+                pages.finder_deal.elems.whoWillDraftDealsTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The who will draft deals tooltip is : " + promise);
+                        expect(promise).toEqual("Defines which party (WCM or Finder) is responsible for drafting the agreements for the found deals.");
+                    });
+            });
+        },
+
+        validateWhoHasControlToExerciseFutureOptionsTooltip: function () {
+            it("Validate who has control to exercise future options tooltip", function () {
+                pages.finder_deal.elems.whoHasControlToExerciseFutureOptionsTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The who has control to exercise future options tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates whether WCM or Finder will have the control over exercising the Option.");
+                    });
+            });
+        },
+
+        validateWhoIsResponsibleForAdvancesTooltip: function () {
+            it("Validate who is responsible for advances tooltip", function () {
+                pages.finder_deal.elems.whoIsResponsibleForAdvancesTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The who is responsible for advances tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates whether WCM or Finder will be responsible for Advances to the Creator(s).");
+                    });
+            });
+        },
+
+        validateFindersRightToPursueTooltip: function () {
+            it("Validate finders right to pursue tooltip", function () {
+                pages.finder_deal.elems.findersRightToPursueTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The finders right to pursue tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates that if WCM declines a submission, then the Finder has a right to pursue any found deal.");
+                    });
+            });
+        },
+
+        validateWcmRightToPursueTooltip: function () {
+            it("Validate wcms right to pursue tooltip", function () {
+                pages.finder_deal.elems.wcmRightToPursueTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The wcms right to pursue tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates WCM has a right to pursue any submission to which WCM, the Finder, and Creator(s) could not come to a three-party agreement.");
+                    });
+            });
         }
+
 
     };
 }

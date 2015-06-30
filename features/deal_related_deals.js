@@ -50,6 +50,16 @@ var beforeFeature = function () {
             steps.finder_deal.clickOnGeneralTermsFinderDeal();
             steps.finder_deal.editGeneralTermsFinderDeal();
             steps.finder_deal.validatePriorAwarenessNotificationTooltip();
+            steps.finder_deal.validateNotifyWithinThisNumberOfDaysTooltip();
+            steps.finder_deal.validateSubmissionDecisionWithinNumberOfDaysTooltip();
+            steps.finder_deal.validateAssumedResponseTooltip();
+            steps.finder_deal.validateWhoWillDraftDealsTooltip();
+            steps.finder_deal.validateWhoHasControlToExerciseFutureOptionsTooltip();
+            steps.finder_deal.validateWhoIsResponsibleForAdvancesTooltip();
+            steps.finder_deal.validateFindersRightToPursueTooltip();
+            steps.finder_deal.validateWcmRightToPursueTooltip();
+
+
             //steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
             //steps.finder_deal.editTermsByContractPeriodFinderDeal();
             //steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);

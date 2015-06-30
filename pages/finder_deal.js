@@ -59,8 +59,13 @@ if (pages.finder_deal === undefined) {
             //tooltips general terms
             priorAwarenessTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(1) i"},
             notifyWithinThisNumberOfDaysTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(2) i"},
-
-
+            submissionDecisionWithinNumberOfDaysTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(3) i"},
+            assumedResponseTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(4) i"},
+            whoWillDraftDealsTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(5) i"},
+            whoHasControlToExerciseFutureOptionsTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(6) i"},
+            whoIsResponsibleForAdvancesTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(7) i"},
+            findersRightToPursueTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(8) i"},
+            wcmRightToPursueTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(9) i"}
         },
 
         validateTheGeneralTermsTitleIsPresent: function () {
@@ -294,12 +299,12 @@ if (pages.finder_deal === undefined) {
                 })
         },
 
-        fillIntoSubmissionDateField: function(){
+        fillIntoSubmissionDateField: function () {
             var date = pages.base.randomDate(new Date(2015, 0, 1), new Date());
             pages.finder_deal.elems.submissionDateField.sendKeys(date);
         },
 
-        selectTheRandomWcmDecisionDropDown: function(){
+        selectTheRandomWcmDecisionDropDown: function () {
             pages.finder_deal.elems.wcmDecissionField.click();
             browser.wait(ExpectedConditions.visibilityOf(ExpectedConditions.visibilityOf(pages.finder_deal.elems.wcmDecisionDropDownData)));
             browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope"))
@@ -313,7 +318,7 @@ if (pages.finder_deal === undefined) {
             pages.finder_deal.elems.foundDealInputField.sendKeys("123");
         },
 
-        selectTheRandomValueFromFoundDealDropDown: function(){
+        selectTheRandomValueFromFoundDealDropDown: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.foundDealDropDownData));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
@@ -331,13 +336,13 @@ if (pages.finder_deal === undefined) {
             browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.creatorSet'] input[ng-model='$term']")).sendKeys("test");
         },
 
-        fillIntoSubmissionDateFieldNumberI: function(i){
+        fillIntoSubmissionDateFieldNumberI: function (i) {
             var date = pages.base.randomDate(new Date(2015, 0, 1), new Date());
-           browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.submission_date'] input[data-ng-model='date']")).sendKeys(date);
+            browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.submission_date'] input[data-ng-model='date']")).sendKeys(date);
         },
 
         fillIntoFoundDealInputFieldNumberI: function (i) {
-           browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.found_deal'] input[ng-model='$term']")).sendKeys("123");
+            browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.found_deal'] input[ng-model='$term']")).sendKeys("123");
         },
 
         fillIntoFindersRecoupmentResponsabilityOverrideNumberI: function (i) {
