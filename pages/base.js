@@ -16,6 +16,11 @@ module.exports.dirtyCheckConfirmCancellationButton = function() {
 	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
 };
 // Interaction.
+
+module.exports.randomDate=function(start, end) {
+	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+};
+
 module.exports.isPresentAndDisplayed = function(element) {
 	return element.isPresent().then(function(isPresent) {
 		if(!isPresent) {

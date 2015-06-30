@@ -13,6 +13,8 @@ require(pages_path + "edit_deal_general");
 require(steps_path + "edit_deal_general");
 require(pages_path + "edit_deal_scope");
 require(steps_path + "edit_deal_scope");
+require(pages_path + "finder_deal");
+require(steps_path + "finder_deal");
 require(steps_path + "login");
 require(steps_path + "base");
 
@@ -45,6 +47,14 @@ var beforeFeature = function () {
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
             steps.deal.goToFinderDealTermsTabDetails();
+            steps.finder_deal.clickOnGeneralTermsFinderDeal();
+            steps.finder_deal.editGeneralTermsFinderDeal();
+            steps.finder_deal.validatePriorAwarenessNotificationTooltip();
+            //steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
+            //steps.finder_deal.editTermsByContractPeriodFinderDeal();
+            //steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
+            //steps.finder_deal.clickOnYesPriorAwarenessNotification();
+            //steps.finder_deal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
 
         }
     }];

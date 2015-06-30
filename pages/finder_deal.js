@@ -35,7 +35,32 @@ if (pages.finder_deal === undefined) {
             leftArrowHeaderTermsByContractPeriod: {css: "div[data-ng-class='{ active : form.show.finderDeal.edit }'] div.form-horizontal.relative a.move-left.carousel-arrow"},
             rightArrowHeaderTermsByContractPeriod: {css: "div[data-ng-class='{ active : form.show.finderDeal.edit }'] div.form-horizontal.relative a.move-right.carousel-arrow"},
             //terms by contract period - found deal terms locators
-//maximumFoundAgreementsWithoutPreApproved: {css: "input[data-ng-model='cp.found_deal_terms.agreement_maximum_without_approval']"}
+            maximumFoundAgreementsWithoutPreApproval: {css: "input[data-ng-model='cp.found_deal_terms.agreement_maximum_without_approval']"},
+            maximumFoundAgreementsWithPreApproval: {css: "input[data-ng-model='cp.found_deal_terms.agreement_maximum_with_approval']"},
+            findersRecoupmentResponsability: {css: "input[data-ng-model='cp.found_deal_terms.finder_recoupment']"},
+            nonSignedArtistMaximumAdvancesPayable: {css: "input[data-ng-model='cp.found_deal_terms.max_advance_non_signed']"},
+            signedArtistMaximumAdvancesPayable: {css: "input[data-ng-model='cp.found_deal_terms.max_advance_signed']"},
+            aggregateMaximumAdvancesPayable: {css: "input[data-ng-model='cp.found_deal_terms.aggregate_max_advance']"},
+            //ownership terms locators
+            aggregateMaximumOnAdvances: {css: "input[data-ng-model='ownership.advance_maximum']"},
+            findersOwnership: {css: "input[data-ng-model='ownership.finder_own']"},
+            wcmOwnership: {css: "input[data-ng-model='ownership.wcm_own']"},
+            //found submission locators
+            creatorFoundSubmissionInputField: {css: "div[data-ng-form='cpSubmissionForm'] div[data-ng-model='submission.creatorSet'] input[ng-model='$term']"},
+            creatorFoundSubmissionDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            submissionDateField: {css: "div[data-ng-model='submission.submission_date'] input[data-ng-model='date']"},
+            wcmDecissionField: {css: "div[data-ng-model='submission.wcm_decision']"},
+            wcmDecisionDropDownData: {css: "ul.dropdown-menu li.ng-scope"},
+            foundDealInputField: {css: "div[data-ng-model='submission.found_deal'] input[ng-model='$term']"},
+            foundDealDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            findersRecoupmentResponsabilityOverride: {css: "input[data-ng-model='submission.override']"},
+            cancelTermsByContractPeriodFinderDeal: {css: "div[data-ng-form='cpsFinderDealForm'] button[data-ng-click='cancelFinderDealCpEdit()']"},
+            saveTermsByContractPeriodFinderDeal: {css: "div[data-ng-form='cpsFinderDealForm'] button[data-ng-click='updateDeal(cpsFinderDealForm.$valid, null, form.show.finderDeal, setActiveFinderDealCpTab)']"},
+            //tooltips general terms
+            priorAwarenessTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(1) i"},
+            notifyWithinThisNumberOfDaysTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(2) i"},
+
+
         },
 
         validateTheGeneralTermsTitleIsPresent: function () {
@@ -68,8 +93,9 @@ if (pages.finder_deal === undefined) {
         },
 
         editTheGeneralTermsFinderDeal: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.generalTermsAreaFinderDeal));
             pages.finder_deal.elems.generalTermsAreaFinderDeal.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.generalTermsFinderDealEditIcon));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.generalTermsFinderDealEditIcon));
             pages.finder_deal.elems.generalTermsFinderDealEditIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.notifyWithinThisNumberOfDays));
         },
@@ -180,17 +206,153 @@ if (pages.finder_deal === undefined) {
             pages.finder_deal.elems.cancelGeneralTermsFinderDeal.click();
         },
 
-
         clickOnTheTermsByContractPeriodFinderDeal: function () {
             pages.finder_deal.elems.termsByContractPeriodFinderDealTitle.click();
         },
 
+        editTheTermsByContractPeriodFinderDeal: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.termsByContractPeriodArea));
+            pages.finder_deal.elems.termsByContractPeriodArea.click();
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.termsByContractPeriodEditIcon));
+            pages.finder_deal.elems.termsByContractPeriodEditIcon.click();
+        },
 
-        clickOnContractPeriodNumberIDetailsTermsByContractPeriod:function(i){
+        clickOnContractPeriodNumberIDetailsTermsByContractPeriod: function (i) {
             browser.driver.findElement(By.css("div[data-ng-class='{ active : form.show.finderDeal.edit }'] div.form-horizontal.relative ul.nav.nav-tabs li:nth-child(" + i + ")")).click();
+        },
 
+        fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval.sendKeys(number);
+        },
+
+        fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            pages.finder_deal.elems.maximumFoundAgreementsWithPreApproval.sendKeys(number);
+        },
+
+        fillIntoFindersRecoupmentResponsability: function () {
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            pages.finder_deal.elems.findersRecoupmentResponsability.sendKeys(number);
+        },
+
+        fillIntoNonSignedArtistMaximumAdvancesPayable: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayable.sendKeys(number);
+        },
+
+        fillIntoSignedArtistMaximumAdvancesPayable: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            pages.finder_deal.elems.signedArtistMaximumAdvancesPayable.sendKeys(number);
+        },
+
+        fillIntoAggregateMaximumAdvancesPayable: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            pages.finder_deal.elems.aggregateMaximumAdvancesPayable.sendKeys(number);
+        },
+
+        fillIntoAggregateMaximumOnAdvancesField: function () {
+            var number = Math.floor(Math.random() * 300000) + 1;
+            pages.finder_deal.elems.aggregateMaximumOnAdvances.sendKeys(number);
+        },
+
+        fillIntoFindersOwnershipField: function () {
+            var percent = (Math.random() * 50 + 1).toFixed(2);
+            pages.finder_deal.elems.findersOwnership.sendKeys(percent);
+        },
+
+        fillIntoWmcsOwnershipField: function () {
+            var percent = (Math.random() * 50 + 1).toFixed(2);
+            pages.finder_deal.elems.wcmOwnership.sendKeys(percent);
+        },
+
+        fillIntoAggregateMaximumOnAdvancesFieldNumberI: function (i) {
+            var number = Math.floor(Math.random() * 300000) + 1;
+            browser.driver.findElement(By.css("div[data-ng-repeat='ownership in cp.finder_ownerships']:nth-child(" + i + ") input[data-ng-model='ownership.advance_maximum']")).sendKeys(number);
+        },
+
+        fillIntoFindersOwnershipFieldNumberI: function (i) {
+            var percent = (Math.random() * 50 + 1).toFixed(2);
+            browser.driver.findElement(By.css("div[data-ng-repeat='ownership in cp.finder_ownerships']:nth-child(" + i + ") input[data-ng-model='ownership.finder_own']")).sendKeys(percent);
+        },
+
+        fillIntoWmcsOwnershipFieldNumberI: function (i) {
+            var percent = (Math.random() * 50 + 1).toFixed(2);
+            browser.driver.findElement(By.css("div[data-ng-repeat='ownership in cp.finder_ownerships']:nth-child(" + i + ") input[data-ng-model='ownership.wcm_own']")).sendKeys(percent);
+        },
+
+        fillIntoCreatorFoundSubmissionField: function () {
+            pages.finder_deal.elems.creatorFoundSubmissionInputField.sendKeys("test");
+        },
+
+        selectRandomValueFromCreatorFoundSubmissionDropDown: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.creatorFoundSubmissionDropDownData));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
+
+        fillIntoSubmissionDateField: function(){
+            var date = pages.base.randomDate(new Date(2015, 0, 1), new Date());
+            pages.finder_deal.elems.submissionDateField.sendKeys(date);
+        },
+
+        selectTheRandomWcmDecisionDropDown: function(){
+            pages.finder_deal.elems.wcmDecissionField.click();
+            browser.wait(ExpectedConditions.visibilityOf(ExpectedConditions.visibilityOf(pages.finder_deal.elems.wcmDecisionDropDownData)));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
+
+        fillIntoFoundDealInputField: function () {
+            pages.finder_deal.elems.foundDealInputField.sendKeys("123");
+        },
+
+        selectTheRandomValueFromFoundDealDropDown: function(){
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.foundDealDropDownData));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
+
+        fillIntoFindersRecoupmentResponsabilityOverride: function () {
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            pages.finder_deal.elems.findersRecoupmentResponsabilityOverride.sendKeys(percent);
+        },
+
+        fillIntoCreatorFoundSubmissionFieldNumberI: function (i) {
+            browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.creatorSet'] input[ng-model='$term']")).sendKeys("test");
+        },
+
+        fillIntoSubmissionDateFieldNumberI: function(i){
+            var date = pages.base.randomDate(new Date(2015, 0, 1), new Date());
+           browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.submission_date'] input[data-ng-model='date']")).sendKeys(date);
+        },
+
+        fillIntoFoundDealInputFieldNumberI: function (i) {
+           browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") div[data-ng-model='submission.found_deal'] input[ng-model='$term']")).sendKeys("123");
+        },
+
+        fillIntoFindersRecoupmentResponsabilityOverrideNumberI: function (i) {
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            browser.driver.findElement(By.css("div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(" + i + ") input[data-ng-model='submission.override']")).sendKeys(percent);
+        },
+
+        clickOnTheSaveTermsByContractPeriodFinderDeal: function () {
+            pages.finder_deal.elems.saveTermsByContractPeriodFinderDeal.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval));
+        },
+
+        clickOnTheCancelTermsByContractPeriodTermsFinderDeal: function () {
+            pages.finder_deal.elems.cancelTermsByContractPeriodFinderDeal.click();
         }
-
 
     });
 }

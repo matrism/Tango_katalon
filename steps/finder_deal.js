@@ -1,0 +1,327 @@
+"use strict";
+var pages_path = _tf_config._system_.path_to_pages;
+var steps_path = _tf_config._system_.path_to_steps;
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
+require(steps_path + "finder_deal");
+require(pages_path + "finder_deal");
+
+if (steps.finder_deal === undefined) {
+    steps.finder_deal = {
+
+        validateGeneralTermsTitleIsPresent: function () {
+            it("Validate the general terms title is present ", function () {
+                pages.finder_deal.validateTheGeneralTermsTitleIsPresent();
+            });
+        },
+
+        validateTermsByContractPeriodFinderDealTitle: function () {
+            it("Validate the terms by contract period finder deal title ", function () {
+                pages.finder_deal.validateTheTermsByContractPeriodFinderDealTitle();
+            });
+        },
+
+        validateNumberOfTermsByContractPeriodFinderDealTitle: function () {
+            it("Validate the number of terms by contract period finder deal title", function () {
+                pages.finder_deal.validateTheNumberOfTermsByContractPeriodFinderDealTitle();
+            });
+        },
+
+        clickOnGeneralTermsFinderDeal: function () {
+            it("Click on the general terms finder deal ", function () {
+                pages.finder_deal.clickOnTheGeneralTermsFinderDeal();
+            });
+        },
+
+        editGeneralTermsFinderDeal: function () {
+            it("Edit the general terms finder deal ", function () {
+                pages.finder_deal.editTheGeneralTermsFinderDeal();
+            });
+        },
+
+        clickOnYesPriorAwarenessNotification: function () {
+            it("Click on the yes prior awarness notification ", function () {
+                pages.finder_deal.clickOnTheYesPriorAwarenessNotification();
+            });
+        },
+
+        clickOnNoPriorAwarenessNotification: function () {
+            it("Click on the no prior awareness notification ", function () {
+                pages.finder_deal.clickOnTheNoPriorAwarenessNotification();
+            });
+        },
+
+        clickOnTermsByContractPeriodFinderDeal: function () {
+            it("Click on the terms by Contract period finder deal ", function () {
+                pages.finder_deal.clickOnTheTermsByContractPeriodFinderDeal();
+            });
+        },
+
+        fillNotifyWithinTheNumberOfDays: function () {
+            it("Fill into notify within the number of days ", function () {
+                pages.finder_deal.fillIntoNotifyWithinTheNumberOfDays();
+            });
+        },
+
+        fillSubmissionDecisionWithinNumberOfDays: function () {
+            it("Fill into submission decision within number of days ", function () {
+                pages.finder_deal.fillIntoSubmissionDecisionWithinNumberOfDays();
+            });
+        },
+
+        clickOnAcceptAssumedResponse: function () {
+            it("Click on the accept assumed response ", function () {
+                pages.finder_deal.clickOnTheAcceptAssumedResponse();
+            });
+        },
+
+        clickOnDeclineAssumedResponse: function () {
+            it("Click on the decline assumed response ", function () {
+                pages.finder_deal.clickOnTheDeclineAssumedResponse();
+            });
+        },
+
+        clickOnNoneAssumedResponse: function () {
+            it("Click on the none assumed response ", function () {
+                pages.finder_deal.clickOnTheNoneAssumedResponse();
+            });
+        },
+
+        clickOnWcmWhoWillDraftDeals: function () {
+            it("Click on the wcm who will draft deals ", function () {
+                pages.finder_deal.clickOnTheWcmWhoWillDraftDeals();
+            })
+        },
+
+        clickOnFinderWhoWillDraftDeals: function () {
+            it("Click on the finder who will draft deals ", function () {
+                pages.finder_deal.clickOnTheFinderWhoWillDraftDeals();
+            });
+        },
+
+        clickOnWcmWhoHasControlToExerciseFutureOptions: function () {
+            it("Click on the wcm who has control to exercise future options ", function () {
+                pages.finder_deal.clickOnTheWcmWhoHasControlToExerciseFutureOptions();
+            });
+        },
+
+        clickOnFinderWhoHasControlToExerciseFutureOptions: function () {
+            it("Click on the finder who has control to exercise future options ", function () {
+                pages.finder_deal.clickOnTheFinderWhoHasControlToExerciseFutureOptions();
+            })
+        },
+
+        clickOnWcmWhoIsResponsibleForAdvances: function () {
+            it("Click on the wcm who is responsible for advances ", function () {
+                pages.finder_deal.clickOnTheWcmWhoIsResponsibleForAdvances();
+            });
+        },
+
+        clickOnFinderWhoIsResponsibleForAdvances: function () {
+            it("Click on the finder who is responsible for advances ", function () {
+                pages.finder_deal.clickOnTheFinderWhoIsResponsibleForAdvances();
+            });
+        },
+
+        selectDesiredValueFinderRightToPursueDropDown: function (value) {
+            it("Select the desired value finder right to pursue drop down ", function () {
+                pages.finder_deal.selectTheDesiredValueFinderRightToPursueDropDown();
+            });
+        },
+
+        selectTheRandomValueFinderRightToPursueDropDown: function () {
+            it("Select the random value finder right to pursue drop down ", function () {
+                pages.finder_deal.selectTheRandomValueFinderRightToPursueDropDown();
+            });
+        },
+
+        clickOnYesWcmRightToPursue: function () {
+            it("Click on the yes wcm right to pursue ", function () {
+                pages.finder_deal.clickOnTheYesWcmRightToPursue();
+            });
+        },
+
+        clickOnNoWcmRightToPursue: function () {
+            it("Click on the no wcm right to pursue ", function () {
+                pages.finder_deal.clickOnTheNoWcmRightToPursue();
+            });
+        },
+
+        clickOnSaveGeneralTermsFinderDeal: function () {
+            it("Click on the save general terms finder deal ", function () {
+                pages.finder_deal.clickOnTheSaveGeneralTermsFinderDeal();
+            });
+        },
+
+        clickOnCancelGeneralTermsFinderDeal: function () {
+            it("Click on the cancel general terms finder deal ", function () {
+                pages.finder_deal.clickOnTheCancelGeneralTermsFinderDeal();
+            });
+        },
+
+        editTermsByContractPeriodFinderDeal: function () {
+            it("Edit the terms by contract period finder deal area ", function () {
+                pages.finder_deal.editTheTermsByContractPeriodFinderDeal();
+            });
+        },
+
+        clickContractPeriodNumberIDetailsTermsByContractPeriod: function (i) {
+            it("Click on the contract period number i finder deal details terms by contract period ", function () {
+                pages.finder_deal.clickOnContractPeriodNumberIDetailsTermsByContractPeriod(i);
+            });
+        },
+
+        fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
+            it("Fill into maximum found agreements", function () {
+                pages.finder_deal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+            });
+        },
+
+        fillMaximumFoundAgreementWithPreApprovalContractPeriodI: function () {
+            it("Fill into maximum found agreement with pre approval contract period i ", function () {
+                pages.finder_deal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            });
+        },
+
+        fillFindersRecoupmentResponsability: function () {
+            it("Fill into finders recoupment responsability ", function () {
+                pages.finder_deal.fillIntoFindersRecoupmentResponsability();
+            });
+        },
+
+        fillNonSignedArtistMaximumAdvancesPayable: function () {
+            it("Fill into non signed artist maximum advances payable ", function () {
+                pages.finder_deal.fillIntoNonSignedArtistMaximumAdvancesPayable();
+            });
+        },
+
+        fillSignedArtistMaximumAdvancesPayable: function () {
+            it("Fill into signed artist maximum advances payable ", function () {
+                pages.finder_deal.fillIntoSignedArtistMaximumAdvancesPayable();
+            });
+        },
+
+        fillAggregateMaximumAdvancesPayable: function () {
+            it("Fill into aggregate maximum advances payable ", function () {
+                pages.finder_deal.fillIntoAggregateMaximumAdvancesPayable();
+            });
+        },
+
+        fillAggregateMaximumOnAdvancesField: function () {
+            it("Fill into aggregate maximum on advances field ", function () {
+                pages.finder_deal.fillIntoAggregateMaximumOnAdvancesField();
+            });
+        },
+
+        fillFindersOwnershipField: function () {
+            it("Fill into finders ownership field ", function () {
+                pages.finder_deal.fillIntoFindersOwnershipField();
+            });
+        },
+
+        fillWmcsOwnershipField: function () {
+            it("Fill into wcms ownerhip field ", function () {
+                pages.finder_deal.fillIntoWmcsOwnershipField();
+            });
+        },
+
+        fillAggregateMaximumOnAdvancesFieldNumberI: function (i) {
+            it("Fill into aggregate maximum on advances field number i ", function () {
+                pages.finder_deal.fillIntoAggregateMaximumOnAdvancesFieldNumberI(i);
+            });
+        },
+
+        fillFindersOwnershipFieldNumberI: function (i) {
+            it("Fill into finders ownership field number i ", function () {
+                pages.finder_deal.fillIntoFindersOwnershipFieldNumberI(i);
+            });
+        },
+
+        fillWmcsOwnershipFieldNumberI: function (i) {
+            it("Fill into wcm ownership field number i ", function () {
+                pages.finder_deal.fillIntoWmcsOwnershipFieldNumberI(i);
+            });
+        },
+
+        selectRandomCreatorFoundSubmissionField: function () {
+            it("Fill into creator found submission field ", function () {
+                pages.finder_deal.fillIntoCreatorFoundSubmissionField();
+                pages.finder_deal.selectRandomValueFromCreatorFoundSubmissionDropDown();
+            });
+        },
+
+        fillSubmissionDateField: function () {
+            it("Fill into submission date field ", function () {
+                pages.finder_deal.fillIntoSubmissionDateField();
+            });
+        },
+
+        selectRandomWcmDecisionDropDown: function () {
+            it("Select the random wcm decision drop down ", function () {
+                pages.finder_deal.selectTheRandomWcmDecisionDropDown();
+            });
+        },
+
+        selectRandomValueFromFoundDealDropDown: function () {
+            it("Select random value from found deal drop down ", function () {
+                pages.finder_deal.fillIntoFoundDealInputField();
+                pages.finder_deal.selectTheRandomValueFromFoundDealDropDown();
+            });
+        },
+
+        fillFindersRecoupmentResponsabilityOverride: function () {
+            it("Fill into finders recoupment responsability override ", function () {
+                pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverride();
+            });
+        },
+
+        selectRandomValueFromCreatorFoundSubmissionDropDownFieldNumberI: function (i) {
+            it("Select creator found submission field number i ", function () {
+                pages.finder_deal.fillIntoCreatorFoundSubmissionFieldNumberI(i);
+                pages.finder_deal.selectRandomValueFromCreatorFoundSubmissionDropDown();
+            })
+        },
+
+        fillIntoSubmissionDateFieldNumberI: function (i) {
+            it("Fill into submission date field number i ", function () {
+                pages.finder_deal.fillIntoSubmissionDateFieldNumberI(i);
+            });
+        },
+
+        fillIntoFoundDealInputFieldNumberI: function (i) {
+            it("Fill into found deal input field number i ", function () {
+                pages.finder_deal.fillIntoFoundDealInputFieldNumberI(i);
+            });
+        },
+
+        fillFindersRecoupmentResponsabilityOverrideNumberI: function (i) {
+            it("Fill into finders recoupment responsability override number i ", function () {
+                pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverrideNumberI(i);
+            });
+        },
+
+        clickOnSaveTermsByContractPeriodFinderDeal: function () {
+            it("Click on save terms by contract period finder deal ", function () {
+                pages.finder_deal.clickOnTheSaveTermsByContractPeriodFinderDeal();
+            });
+        },
+
+        clickOnCancelTermsByContractPeriodTermsFinderDeal: function () {
+            it("Cancel terms by contract period finder deal ", function () {
+                pages.finder_deal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
+            });
+        },
+
+        validatePriorAwarenessNotificationTooltip: function () {
+            it("Validate the prior awareness notification tooltip ", function () {
+                pages.finder_deal.elems.priorAwarenessTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The prior awareness notification tooltip is : " + promise);
+                        expect(promise).toContain("Indicates WCM's obligation to inform the Finder of prior");
+                        expect(promise).toContain("awareness of the submitted Creator(s).");
+                    });
+            });
+        }
+
+    };
+}
