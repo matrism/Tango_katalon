@@ -9,13 +9,14 @@ var pages_path = _tf_config._system_.path_to_pages,
     searchDataByPartialTitleMatch,
     searchDataByCreatorMatch1,
     searchDataByCreatorMatch2,
-    searchDataByExactTitleAndCreator;
+    searchDataByExactTitleAndCreator,
+    searchDataByPartialTitleAndCreator;
 
 require(steps_path + 'login');
 require(steps_path + 'new_work');
 
 //randomId = function() {
-    //return '3351435348937238';
+    //return '7621435785647192';
 //};
 
 hash.subjectWorkData = {};
@@ -25,35 +26,8 @@ baseWorksData = [
         primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
         creators: [
             {
-                firstName: randomId(0) + 'FILIP',
-                lastName: randomId(0) + 'ALISON',
-            },
-        ],
-    },
-    {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
-        creators: [
-            {
                 firstName: randomId(0) + 'ALBERT',
                 lastName: randomId(0) + 'KENNEDY',
-            },
-        ],
-    },
-    {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
-        creators: [
-            {
-                firstName: randomId(0) + 'ALEX',
-                lastName: randomId(0) + 'MACKINTOSH',
-            },
-        ],
-    },
-    {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
-        creators: [
-            {
-                firstName: randomId(0) + 'JEREMY',
-                lastName: randomId(0) + 'BLIETZ',
             },
         ],
     },
@@ -129,7 +103,7 @@ baseWorksData = [
     {
         primaryTitle: randomId(0) + 'OH GOD',
         alternateTitles: [
-            randomId(0) + 'OH DIAMONDS IN THE SKY',
+            randomId(0) + 'OH ' + randomId(0) + 'DIAMONDS IN THE SKY',
         ],
         creators: [
             {
@@ -154,7 +128,7 @@ baseWorksData = [
     {
         primaryTitle: randomId(0) + 'SADNESS',
         alternateTitles: [
-            randomId(0) + '(DIAMONDS IN THE SKY) SADNESS',
+            '(' + randomId(0) + 'DIAMONDS IN THE SKY) SADNESS',
         ],
         creators: [
             {
@@ -174,7 +148,7 @@ baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'DO YOU KNOW DIAMONDS IN THE SKY',
+        primaryTitle: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE SKY',
         creators: [
             {
                 firstName: randomId(0) + 'KANYE',
@@ -187,7 +161,7 @@ baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'TERE ARE IN THE SKY DIAMONDS',
+        primaryTitle: randomId(0) + 'TERE ARE IN THE SKY ' + randomId(0) + 'DIAMONDS',
         creators: [
             {
                 firstName: randomId(0) + 'FRED',
@@ -254,18 +228,6 @@ searchDataByExactTitleMatch = [
             {
                 title: randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
-                    randomId(0) + 'ALISON, ' + randomId(0) + 'FILIP',
-                ],
-            },
-            {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
-                creators: [
-                    randomId(0) + 'BLIETZ, ' + randomId(0) + 'JEREMY',
-                ],
-            },
-            {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
-                creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT',
                 ],
             },
@@ -274,12 +236,6 @@ searchDataByExactTitleMatch = [
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
                     randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY',
-                ],
-            },
-            {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
-                creators: [
-                    randomId(0) + 'MACKINTOSH, ' + randomId(0) + 'ALEX',
                 ],
             },
             {
@@ -320,18 +276,6 @@ searchDataByPartialTitleMatch = [
             {
                 title: randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
-                    randomId(0) + 'ALISON, ' + randomId(0) + 'FILIP',
-                ],
-            },
-            {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
-                creators: [
-                    randomId(0) + 'BLIETZ, ' + randomId(0) + 'JEREMY',
-                ],
-            },
-            {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
-                creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT',
                 ],
             },
@@ -340,12 +284,6 @@ searchDataByPartialTitleMatch = [
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
                     randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY',
-                ],
-            },
-            {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
-                creators: [
-                    randomId(0) + 'MACKINTOSH, ' + randomId(0) + 'ALEX',
                 ],
             },
             {
@@ -382,7 +320,7 @@ searchDataByPartialTitleMatch = [
                 ],
             },
             {
-                title: randomId(0) + 'DO YOU KNOW DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
                     randomId(0) + 'WEST, ' + randomId(0) + 'KANYE',
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'SIMON',
@@ -390,14 +328,14 @@ searchDataByPartialTitleMatch = [
             },
             {
                 title: randomId(0) + 'SADNESS',
-                alternateTitle: '(DIAMONDS IN THE SKY) SADNESS',
+                alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE SKY) SADNESS',
                 creators: [
                     randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2',
                 ],
             },
             {
                 title: randomId(0) + 'OH GOD',
-                alternateTitle: 'OH DIAMONDS IN THE SKY',
+                alternateTitle: randomId(0) + 'OH ' + randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
                     randomId(0) + 'CLARKE, ' + randomId(0) + 'VINCE',
                     randomId(0) + 'BELL, ' + randomId(0) + 'ANDY',
@@ -445,7 +383,7 @@ searchDataByCreatorMatch1 = [
                 ],
             },
             {
-                title: randomId(0) + 'DO YOU KNOW DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
                     randomId(0) + 'WEST, ' + randomId(0) + 'KANYE',
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'SIMON',
@@ -458,7 +396,7 @@ searchDataByCreatorMatch1 = [
                 ],
             },
             {
-                title: randomId(0) + 'TERE ARE IN THE SKY DIAMONDS',
+                title: randomId(0) + 'TERE ARE IN THE SKY ' + randomId(0) + 'DIAMONDS',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED',
                 ],
@@ -471,7 +409,7 @@ searchDataByCreatorMatch1 = [
             },
             {
                 title: randomId(0) + 'SADNESS',
-                alternateTitle: randomId(0) + '(DIAMONDS IN THE SKY) SADNESS',
+                alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE SKY) SADNESS',
                 creators: [
                     randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2',
                 ],
@@ -497,7 +435,7 @@ searchDataByCreatorMatch2 = [
                 ],
             },
             {
-                title: randomId(0) + 'TERE ARE IN THE SKY DIAMONDS',
+                title: randomId(0) + 'TERE ARE IN THE SKY ' + randomId(0) + 'DIAMONDS',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED',
                 ],
@@ -548,86 +486,128 @@ searchDataByExactTitleAndCreator = [
     },
 ];
 
+searchDataByPartialTitleAndCreator = [
+    {
+        titleTerms: randomId(0) + 'DIAMONDS IN THE SKY',
+        creatorTerms: randomId(0) + 'KENNEDY',
+        expectedMatches: [
+            {
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                creators: [
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT',
+                ],
+            },
+            {
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                creators: [
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
+                    randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY',
+                ],
+            },
+            {
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                creators: [
+                    randomId(0) + 'WALKER, ' + randomId(0) + 'MAX',
+                    randomId(0) + 'KENNEDY-MCDONALD, ' + randomId(0) + 'RONALD',
+                ],
+            },
+            {
+                title: randomId(0) + 'CRIMINAL',
+                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                creators: [
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'LUCY',
+                ],
+            },
+            {
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                creators: [
+                    randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2',
+                ],
+            },
+       ],
+    },
+];
+
 var beforeFeature = [
         [steps.login.itLogin],
     ],
     feature = [
-		{
-			name: 'Create test data',
-			tags: [],
-			steps: [
-				[function() {
-					baseWorksData.forEach(function(workData, i) {
-						var evenCreatorContribution = 100 / workData.creators.length;
+        {
+            name: 'Create test data',
+            tags: [],
+            steps: [
+                [function() {
+                    baseWorksData.forEach(function(workData, i) {
+                        var evenCreatorContribution = 100 / workData.creators.length;
 
-						workData.creators.forEach(function(creatorData, j) {
-							steps.person.useBlankPersonSlot(j);
+                        workData.creators.forEach(function(creatorData, j) {
+                            steps.person.useBlankPersonSlot(j);
 
-							steps.newPerson.goToNewPersonPage();
+                            steps.newPerson.goToNewPersonPage();
 
-							if(creatorData.firstName) {
-								creatorData.firstName = creatorData.firstName;
-								steps.newPerson.enterFirstName(creatorData.firstName);
-							}
+                            if(creatorData.firstName) {
+                                creatorData.firstName = creatorData.firstName;
+                                steps.newPerson.enterFirstName(creatorData.firstName);
+                            }
 
-							if(creatorData.lastName) {
-								creatorData.lastName = creatorData.lastName;
-								steps.newPerson.enterLastName(creatorData.lastName);
-							}
+                            if(creatorData.lastName) {
+                                creatorData.lastName = creatorData.lastName;
+                                steps.newPerson.enterLastName(creatorData.lastName);
+                            }
 
-							if(creatorData.presentationName) {
-								creatorData.presentationName = creatorData.presentationName;
-								steps.newPerson.enterPresentationName(creatorData.presentationName);
-							}
+                            if(creatorData.presentationName) {
+                                creatorData.presentationName = creatorData.presentationName;
+                                steps.newPerson.enterPresentationName(creatorData.presentationName);
+                            }
 
-							if(creatorData.alternativeNames) {
-								creatorData.alternativeNames.forEach(function(alternative, k) {
-									steps.newPerson.addAlternativeName();
+                            if(creatorData.alternativeNames) {
+                                creatorData.alternativeNames.forEach(function(alternative, k) {
+                                    steps.newPerson.addAlternativeName();
 
-									if(alternative.firstName) {
-										alternative.firstName = alternative.firstName;
-										steps.newPerson.enterAlternativeFirstName(k, alternative.firstName);
-									}
+                                    if(alternative.firstName) {
+                                        alternative.firstName = alternative.firstName;
+                                        steps.newPerson.enterAlternativeFirstName(k, alternative.firstName);
+                                    }
 
-									if(alternative.lastName) {
-										alternative.lastName = alternative.lastName;
-										steps.newPerson.enterAlternativeLastName(k, alternative.lastName);
-									}
-								});
-							}
+                                    if(alternative.lastName) {
+                                        alternative.lastName = alternative.lastName;
+                                        steps.newPerson.enterAlternativeLastName(k, alternative.lastName);
+                                    }
+                                });
+                            }
 
-							steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
-							steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
+                            steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
+                            steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
 
-							steps.newPerson.save();
-							steps.newPerson.validateSaveRedirection();
+                            steps.newPerson.save();
+                            steps.newPerson.validateSaveRedirection();
 
-							steps.person.findInternalIpiNumber();
-						});
+                            steps.person.findInternalIpiNumber();
+                        });
 
-						steps.new_work.goToNewWorkPage();
+                        steps.new_work.goToNewWorkPage();
 
-						steps.new_work.enterPrimaryWorkTitle(workData.primaryTitle);
+                        steps.new_work.enterPrimaryWorkTitle(workData.primaryTitle);
 
-						if(workData.alternateTitles) {
-							workData.alternateTitles.forEach(function(value, j) {
-								steps.new_work.enterAlternateWorkTitle(j, value);
-							});
-						}
+                        if(workData.alternateTitles) {
+                            workData.alternateTitles.forEach(function(value, j) {
+                                steps.new_work.enterAlternateWorkTitle(j, value);
+                            });
+                        }
 
-						workData.creators.forEach(function(unused, j) {
-							steps.new_work.selectCreatorFromPersonSlot(j, j);
-							steps.new_work.enterCreatorContribution(j, evenCreatorContribution);
-						});
+                        workData.creators.forEach(function(unused, j) {
+                            steps.new_work.selectCreatorFromPersonSlot(j, j);
+                            steps.new_work.enterCreatorContribution(j, evenCreatorContribution);
+                        });
 
-						steps.new_work.optToIncludeWorkOnWebsite(false);
+                        steps.new_work.optToIncludeWorkOnWebsite(false);
 
-						steps.new_work.saveWork();
-						steps.new_work.validateSaveWorkRedirection();
-					});
-				}],
-			],
-		},
+                        steps.new_work.saveWork();
+                        steps.new_work.validateSaveWorkRedirection();
+                    });
+                }],
+            ],
+        },
         {
             name: 'Search by work title (exact match)',
             tags: [],
@@ -635,7 +615,7 @@ var beforeFeature = [
                 [function() {
                     searchDataByExactTitleMatch.forEach(function(searchData) {
                         steps.base.goToHomePage();
-                        steps.work.selectWorkSearchTagFilter(0, 'Title');
+                        steps.work.selectWorkSearchFilterTag(0, 'Title');
                         steps.work.enterWorkSearchTerms('"' + searchData.terms + '"');
                         steps.base.waitForAjax();
                         searchData.expectedMatches.forEach(function(expectedMatch, i) {
@@ -660,7 +640,7 @@ var beforeFeature = [
                 [function() {
                     searchDataByPartialTitleMatch.forEach(function(searchData) {
                         steps.base.goToHomePage();
-                        steps.work.selectWorkSearchTagFilter(0, 'Title');
+                        steps.work.selectWorkSearchFilterTag(0, 'Title');
                         steps.work.enterWorkSearchTerms(searchData.terms);
                         steps.base.waitForAjax();
                         searchData.expectedMatches.forEach(function(expectedMatch, i) {
@@ -685,7 +665,7 @@ var beforeFeature = [
                 [function() {
                     searchDataByCreatorMatch1.forEach(function(searchData) {
                         steps.base.goToHomePage();
-                        steps.work.selectWorkSearchTagFilter(0, 'Creator');
+                        steps.work.selectWorkSearchFilterTag(0, 'Creator');
                         steps.work.enterWorkSearchTerms(searchData.terms);
                         steps.base.waitForAjax();
                         searchData.expectedMatches.forEach(function(expectedMatch, i) {
@@ -710,7 +690,7 @@ var beforeFeature = [
                 [function() {
                     searchDataByCreatorMatch2.forEach(function(searchData) {
                         steps.base.goToHomePage();
-                        steps.work.selectWorkSearchTagFilter(0, 'Creator');
+                        steps.work.selectWorkSearchFilterTag(0, 'Creator');
                         steps.work.enterWorkSearchTerms(searchData.terms);
                         steps.base.waitForAjax();
                         searchData.expectedMatches.forEach(function(expectedMatch, i) {
@@ -735,11 +715,40 @@ var beforeFeature = [
                 [function() {
                     searchDataByExactTitleAndCreator.forEach(function(searchData) {
                         steps.base.goToHomePage();
-                        steps.work.selectWorkSearchTagFilter(0, 'Title');
+                        steps.work.selectWorkSearchFilterTag(0, 'Title');
                         steps.work.enterWorkSearchTerms('"' + searchData.titleTerms + '"');
                         steps.base.waitForAjax();
                         steps.work.addAnotherWorkSearchTerm();
-                        steps.work.selectWorkSearchTagFilter(1, 'Creator');
+                        steps.work.selectWorkSearchFilterTag(1, 'Creator');
+                        steps.work.enterWorkSearchTerms(searchData.creatorTerms);
+                        steps.base.waitForAjax();
+                        searchData.expectedMatches.forEach(function(expectedMatch, i) {
+                            steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
+                            if(expectedMatch.alternateTitle) {
+                                steps.work.expectWorkSearchMatchAlternateTitleToBe(
+                                    i, expectedMatch.alternateTitle
+                                );
+                            }
+                            expectedMatch.creators.forEach(function(creatorName) {
+                                steps.work.expectWorkSearchMatchCreatorListToContain(i, creatorName);
+                            });
+                        });
+                    });
+                }],
+            ],
+        },
+        {
+            name: 'Search by partial title + creator',
+            tags: [],
+            steps: [
+                [function() {
+                    searchDataByPartialTitleAndCreator.forEach(function(searchData) {
+                        steps.base.goToHomePage();
+                        steps.work.selectWorkSearchFilterTag(0, 'Title');
+                        steps.work.enterWorkSearchTerms(searchData.titleTerms);
+                        steps.base.waitForAjax();
+                        steps.work.addAnotherWorkSearchTerm();
+                        steps.work.selectWorkSearchFilterTag(1, 'Creator');
                         steps.work.enterWorkSearchTerms(searchData.creatorTerms);
                         steps.base.waitForAjax();
                         searchData.expectedMatches.forEach(function(expectedMatch, i) {
