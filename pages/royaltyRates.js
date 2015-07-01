@@ -197,6 +197,20 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         }
         ,
+        atSourceMethodButton: function () {
+            return $$(".rate-set-rate-ram>.btn-group").last().element(by.buttonText("At Source"));
+        },
+
+        lastSetOnReceiptFromCoverMechanical: function () {
+           return  $$(".rate-set_group__coverMechanical>div>div>div>div>.rate-set-rate-ram>div").last().element(by.buttonText("On Receipt"));
+        },
+        prevailingPopup: function () {
+            return $(".prevailing-icr");
+        },
+        onReceiptMethodButtonOnPrevailingPopup: function () {
+          return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
+        },
+
 
 
         //LOCATORS END
@@ -732,11 +746,14 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             browser.driver.sleep(2000);
 
         },
-        clickOnReceiptApplicationMethod: function () {
+        clickButtonOnReceiptApplicationMethod: function () {
 
 
             this.onReceiptMethodButton().click();
 
+        },
+        clickButtonAtSourceApplicationMethod: function () {
+            this.atSourceMethodButton().click();
         },
         clickYesOnRateMethodModal: function () {
 
@@ -746,7 +763,14 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             rateMethodModalYesButton.click();
 
         },
+        clickLastOnReceiptFromCoverMechanical: function () {
+
+            this.lastSetOnReceiptFromCoverMechanical().click();
+        },
         clickDoneButtonForRRSet: function () {
+
+
+            console.log(JSON.stringify( hash.royaltyRates.royaltyRateObjectsList, null, 4));
 
             var RRDoneButton;
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
@@ -757,16 +781,17 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
 
         },
+        waitForLoadToAppear: function () {
+            browser.wait(ExpectedConditions.visibilityOf($(".pull-right.rate_set-loader")));
+        },
+        waitForLoadToFinish: function () {
+            browser.wait(ExpectedConditions.invisibilityOf($(".pull-right.rate_set-loader")));
+        },
+
         waitForRRToBeSaved:function()
         {
-            browser.driver.sleep(10000);
-            //var el =  element(by.css(".pull-right.rate_set-loader"));
-            //try {
-            //    browser.wait(!ExpectedConditions.visibilityOf(el));
-            //}
-            //catch(err) {
-            //    console.log("zaza");
-            //}
+           browser.driver.sleep(10000);
+
         },
 
         clickScopeHeading: function () {
@@ -888,7 +913,15 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         },
        administratorNameHasText: function (text) {
            return this.administratorName().getText();
-       }
+       },
+
+        prevailingPopupIsDisplayed: function () {
+            pages.base.scrollIntoView( this.prevailingPopup());
+            return this.prevailingPopup().isPresent();
+        },
+        clickOnReceiptMethodOnPrevailingPopup: function () {
+            this.onReceiptMethodButtonOnPrevailingPopup().click();
+        }
 
 
 

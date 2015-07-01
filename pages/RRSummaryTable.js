@@ -122,15 +122,13 @@ if (pages.RRSummaryTable === undefined) {
 
         //GENERIC FUNCTIONS
 
-        getRateSetGroups: function (el) {
+        getRateSetGroups: function () {
 
 
-            return el.$$("div>div>div");
+            return $$('[data-ng-repeat="(RSGroupItemKey, RSGroupItemVal) in RSScopeItem.rateSet.data"]');
         }
-        ,//.rate-summary-table__scope-rates
+        ,
         getRateSetGroupName:function(rateSetGroup){
-
-        //    browser.wait(ExpectedConditions.visibilityOf($("div.rate-summary-table__rate-group-item>div:first-child")));
             return rateSetGroup.$("div.rate-summary-table__rate-group-item>div:first-child").getText();
         },
         getRateSetIncomeType: function (rateSetGroup) {

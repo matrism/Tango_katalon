@@ -326,7 +326,15 @@ if (steps.royaltyRates === undefined) {
         clickOnReceiptApplicationMethod: function () {
             it("Change Rate Application Method to On Receipt", function () {
 
-                pages.royaltyRates.clickOnReceiptApplicationMethod();
+                pages.royaltyRates.clickButtonOnReceiptApplicationMethod();
+
+            });
+
+        },
+        clickAtSourceApplicationMethod: function () {
+            it("Change Rate Application Method to At Source", function () {
+
+                pages.royaltyRates.clickButtonAtSourceApplicationMethod();
 
             });
 
@@ -343,6 +351,24 @@ if (steps.royaltyRates === undefined) {
                 pages.royaltyRates.clickYesOnRateMethodModal();
 
             });
+        },
+        changeCoverMechanicalLastRateApplicationMethodToOnReceipt: function () {
+          it("Change Cover Mechanical Last Rate App Method to On Receipt", function () {
+              pages.royaltyRates.clickLastOnReceiptFromCoverMechanical();
+          })
+
+        },
+        checkPrevailingPopupIsPresent: function () {
+           it("Check that Prevailing Popup is Displayed", function () {
+              expect(pages.royaltyRates.prevailingPopupIsDisplayed()).toBeTruthy();
+           })
+        },
+        selectOnReceiptMethodInPrevailingPopup: function () {
+          it("Click Receipt Method on Prevailing Method Popup", function () {
+
+              pages.royaltyRates.clickOnReceiptMethodOnPrevailingPopup();
+          })
+
         },
         closeAllRRButTheLast: function () {
             it("Leave only last RR expanded", function () {
@@ -409,8 +435,14 @@ if (steps.royaltyRates === undefined) {
             it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
-                pages.royaltyRates.waitForRRToBeSaved();
+               // pages.royaltyRates.waitForRRToBeSaved();
             });
+        },
+        waitForRateSetToBeSaved: function () {
+          it("Wait for RR To Be Saved", function () {
+              pages.royaltyRates.waitForLoadToAppear();
+              pages.royaltyRates.waitForLoadToFinish();
+          })
         },
         closeRateSet: function () {
             it("Close current Rate Set ", function () {
@@ -535,10 +567,11 @@ if (steps.royaltyRates === undefined) {
                                 });
 
                             rateSetGroupsList.push(rateSetGroupVar);
+
                         });
                     })
                     .then(function () {
-                     //    console.log(JSON.stringify(rateSetGroupsList, null, 4));
+                     //  console.log(JSON.stringify(rateSetGroupsList, null, 4));
                         royaltyRate.rateSetGroupsList = rateSetGroupsList;
                     });
 
@@ -557,7 +590,7 @@ if (steps.royaltyRates === undefined) {
 
         },
         storeRRObjectonEditPage: function () {
-            it("Store RR's data", function () {
+            it("Store RR's data on edit page", function () {
 
 
                 if (!hash.royaltyRates) {
@@ -590,14 +623,78 @@ if (steps.royaltyRates === undefined) {
                 pages.royaltyRates.editModeActiveScopeName().getText().then(function (value) {
 
 
-                    royaltyRate.activeScopeName = value.trim();
+                    royaltyRate.activeScopeName = value.toUpperCase();
                 });
 
+                var rateSetGroupsList = [];
+
+                pages.rateSetIncomeTypes.getRateSetGroups()
+                    .then(function (rateSetGroups) {
+                        rateSetGroups.forEach(function (rateSetGroup) {
+                            var rateSetGroupVar = {
+                                rateSets: []
+                            };
+
+                            pages.rateSetIncomeTypes.getRateSetGroupName(rateSetGroup)
+                                .then(function (result) {
+                                    rateSetGroupVar.rateSetGroupName = result;
+                                });
+
+                            pages.rateSetIncomeTypes.getRateSetIncomeType(rateSetGroup)
+                                .then(function (rateSetBodies) {
+                                    rateSetBodies.forEach(function (rateSetBody) {
+                                        var rateSet = {
+                                            incomeRow: []
+                                        };
+
+                                        pages.rateSetIncomeTypes.getRateSetIncomeTypeName(rateSetBody)
+                                            .then(function (result) {
+                                                rateSet.rateSetName = result;
+                                            });
+
+                                        pages.rateSetIncomeTypes.getRateSetIncomeTypeRows(rateSetBody)
+                                            .then(function (incomeType) {
+                                                incomeType.forEach(function (row) {
+                                                    var tempRow = {};
+
+                                                    pages.rateSetIncomeTypes.getRowName(row)
+                                                        .then(function (result) {
+                                                            tempRow.name = result;
+                                                        });
+
+                                                    pages.rateSetIncomeTypes.getRowInputRateFieldValue(row)
+                                                        .then(function (result) {
+                                                            tempRow.value = result;
+                                                        });
+
+                                                    rateSet.incomeRow.push(tempRow);
+                                                });
+                                            });
+
+                                        rateSetGroupVar.rateSets.push(rateSet);
+                                    })
+                                });
+
+                            rateSetGroupsList.push(rateSetGroupVar);
+
+                        });
+                    })
+                    .then(function () {
+                        //  console.log(JSON.stringify(rateSetGroupsList, null, 4));
+                        royaltyRate.rateSetGroupsList = rateSetGroupsList;
+                    });
 
                 hash.royaltyRates.royaltyRateObjectsList.push(royaltyRate);
-
-
+                // console.log(JSON.stringify(royaltyRate, null, 4));
+                //console.log(JSON.stringify(rateSetGroups, null, 4));
             });
+
+            //    });
+            //
+            //});
+
+
+            //   });
 
 
         },
@@ -795,7 +892,7 @@ if (steps.royaltyRates === undefined) {
         },
 
 
-        test: function () {
+        pauseTest: function () {
 
 
             it("Test Step", function () {
