@@ -57,15 +57,15 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        fillNotifyWithinTheNumberOfDays: function () {
+        fillNotifyWithinTheNumberOfDays: function (number) {
             it("Fill into notify within the number of days ", function () {
-                pages.finder_deal.fillIntoNotifyWithinTheNumberOfDays();
+                pages.finder_deal.fillIntoNotifyWithinTheNumberOfDays(number);
             });
         },
 
-        fillSubmissionDecisionWithinNumberOfDays: function () {
+        fillSubmissionDecisionWithinNumberOfDays: function (number) {
             it("Fill into submission decision within number of days ", function () {
-                pages.finder_deal.fillIntoSubmissionDecisionWithinNumberOfDays();
+                pages.finder_deal.fillIntoSubmissionDecisionWithinNumberOfDays(number);
             });
         },
 
@@ -171,57 +171,57 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
+        fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function (number) {
             it("Fill into maximum found agreements", function () {
-                pages.finder_deal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+                pages.finder_deal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI(number);
             });
         },
 
-        fillMaximumFoundAgreementWithPreApprovalContractPeriodI: function () {
+        fillMaximumFoundAgreementWithPreApprovalContractPeriodI: function (number) {
             it("Fill into maximum found agreement with pre approval contract period i ", function () {
-                pages.finder_deal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI();
+                pages.finder_deal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI(number);
             });
         },
 
-        fillFindersRecoupmentResponsability: function () {
+        fillFindersRecoupmentResponsability: function (percent) {
             it("Fill into finders recoupment responsability ", function () {
-                pages.finder_deal.fillIntoFindersRecoupmentResponsability();
+                pages.finder_deal.fillIntoFindersRecoupmentResponsability(percent);
             });
         },
 
-        fillNonSignedArtistMaximumAdvancesPayable: function () {
+        fillNonSignedArtistMaximumAdvancesPayable: function (number) {
             it("Fill into non signed artist maximum advances payable ", function () {
-                pages.finder_deal.fillIntoNonSignedArtistMaximumAdvancesPayable();
+                pages.finder_deal.fillIntoNonSignedArtistMaximumAdvancesPayable(number);
             });
         },
 
-        fillSignedArtistMaximumAdvancesPayable: function () {
+        fillSignedArtistMaximumAdvancesPayable: function (number) {
             it("Fill into signed artist maximum advances payable ", function () {
-                pages.finder_deal.fillIntoSignedArtistMaximumAdvancesPayable();
+                pages.finder_deal.fillIntoSignedArtistMaximumAdvancesPayable(number);
             });
         },
 
-        fillAggregateMaximumAdvancesPayable: function () {
+        fillAggregateMaximumAdvancesPayable: function (number) {
             it("Fill into aggregate maximum advances payable ", function () {
-                pages.finder_deal.fillIntoAggregateMaximumAdvancesPayable();
+                pages.finder_deal.fillIntoAggregateMaximumAdvancesPayable(number);
             });
         },
 
-        fillAggregateMaximumOnAdvancesField: function () {
+        fillAggregateMaximumOnAdvancesField: function (number) {
             it("Fill into aggregate maximum on advances field ", function () {
-                pages.finder_deal.fillIntoAggregateMaximumOnAdvancesField();
+                pages.finder_deal.fillIntoAggregateMaximumOnAdvancesField(number);
             });
         },
 
-        fillFindersOwnershipField: function () {
+        fillFindersOwnershipField: function (percent) {
             it("Fill into finders ownership field ", function () {
-                pages.finder_deal.fillIntoFindersOwnershipField();
+                pages.finder_deal.fillIntoFindersOwnershipField(percent);
             });
         },
 
-        fillWmcsOwnershipField: function () {
+        fillWmcsOwnershipField: function (percent) {
             it("Fill into wcms ownerhip field ", function () {
-                pages.finder_deal.fillIntoWmcsOwnershipField();
+                pages.finder_deal.fillIntoWmcsOwnershipField(percent);
             });
         },
 
@@ -269,9 +269,9 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        fillFindersRecoupmentResponsabilityOverride: function () {
+        fillFindersRecoupmentResponsabilityOverride: function (percent) {
             it("Fill into finders recoupment responsability override ", function () {
-                pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverride();
+                pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverride(percent);
             });
         },
 
@@ -401,7 +401,34 @@ if (steps.finder_deal === undefined) {
                         expect(promise).toEqual("Indicates WCM has a right to pursue any submission to which WCM, the Finder, and Creator(s) could not come to a three-party agreement.");
                     });
             });
-        }
+        },
+
+        checkErrorMessageNotifyWithinThisNumberOfDays: function () {
+            it("Check the error message displayed for invalid notify within number of days value ", function () {
+                browser.driver.findElement(By.css("div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(2) i.fa.fa-exclamation-triangle.error-icon.consent-status.ng-scope")).getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The error message displayed for invalid notify within number of days value is : " + promise);
+                        expect(promise).toEqual("0 is not a valid value.");
+                    });
+            });
+        },
+
+        checkErrorMessageSubmissionDecisionWithinNumberOfDays: function () {
+            it("Check the error message displayed for invalid submission decision within number of days value ", function () {
+                browser.driver.findElement(By.css("div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(3) i.fa.fa-exclamation-triangle.error-icon.consent-status.ng-scope")).getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The error message displayed  for invalid submission decision within number of days value is : " + promise);
+                        expect(promise).toEqual("0 is not a valid value.");
+                    });
+            });
+        },
+
+        confirmCancelChangesGeneralTermsFinderDeal: function () {
+            it("Confirm cancel changes finder deal ", function () {
+                pages.finder_deal.clickOnTheCancelGeneralTermsFinderDeal();
+                pages.finder_deal.confirmCancelChangesModalDialog();
+            });
+        },
 
 
     };
