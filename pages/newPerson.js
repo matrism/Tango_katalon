@@ -122,6 +122,7 @@ exports.affiliatedSocietySearchResult = function(i) {
 };
 
 exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
+    browser.sleep(200);
     pages.base.waitForAjax();
     return exports.affiliatedSocietySearchResult(i).click();
 };
