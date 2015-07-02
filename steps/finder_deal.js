@@ -185,57 +185,57 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function (number) {
+        fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
             it("Fill into maximum found agreements", function () {
-                pages.finder_deal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI(number);
+                pages.finder_deal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
             });
         },
 
-        fillMaximumFoundAgreementWithPreApprovalContractPeriodI: function (number) {
+        fillMaximumFoundAgreementWithPreApprovalContractPeriodI: function () {
             it("Fill into maximum found agreement with pre approval contract period i ", function () {
-                pages.finder_deal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI(number);
+                pages.finder_deal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI();
             });
         },
 
-        fillFindersRecoupmentResponsability: function (percent) {
+        fillFindersRecoupmentResponsability: function () {
             it("Fill into finders recoupment responsability ", function () {
-                pages.finder_deal.fillIntoFindersRecoupmentResponsability(percent);
+                pages.finder_deal.fillIntoFindersRecoupmentResponsability();
             });
         },
 
-        fillNonSignedArtistMaximumAdvancesPayable: function (number) {
+        fillNonSignedArtistMaximumAdvancesPayable: function () {
             it("Fill into non signed artist maximum advances payable ", function () {
-                pages.finder_deal.fillIntoNonSignedArtistMaximumAdvancesPayable(number);
+                pages.finder_deal.fillIntoNonSignedArtistMaximumAdvancesPayable();
             });
         },
 
-        fillSignedArtistMaximumAdvancesPayable: function (number) {
+        fillSignedArtistMaximumAdvancesPayable: function () {
             it("Fill into signed artist maximum advances payable ", function () {
-                pages.finder_deal.fillIntoSignedArtistMaximumAdvancesPayable(number);
+                pages.finder_deal.fillIntoSignedArtistMaximumAdvancesPayable();
             });
         },
 
-        fillAggregateMaximumAdvancesPayable: function (number) {
+        fillAggregateMaximumAdvancesPayable: function () {
             it("Fill into aggregate maximum advances payable ", function () {
-                pages.finder_deal.fillIntoAggregateMaximumAdvancesPayable(number);
+                pages.finder_deal.fillIntoAggregateMaximumAdvancesPayable();
             });
         },
 
-        fillAggregateMaximumOnAdvancesField: function (number) {
+        fillAggregateMaximumOnAdvancesField: function () {
             it("Fill into aggregate maximum on advances field ", function () {
-                pages.finder_deal.fillIntoAggregateMaximumOnAdvancesField(number);
+                pages.finder_deal.fillIntoAggregateMaximumOnAdvancesField();
             });
         },
 
-        fillFindersOwnershipField: function (percent) {
+        fillFindersOwnershipField: function () {
             it("Fill into finders ownership field ", function () {
-                pages.finder_deal.fillIntoFindersOwnershipField(percent);
+                pages.finder_deal.fillIntoFindersOwnershipField();
             });
         },
 
-        fillWmcsOwnershipField: function (percent) {
+        fillWmcsOwnershipField: function () {
             it("Fill into wcms ownerhip field ", function () {
-                pages.finder_deal.fillIntoWmcsOwnershipField(percent);
+                pages.finder_deal.fillIntoWmcsOwnershipField();
             });
         },
 
@@ -283,9 +283,9 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        fillFindersRecoupmentResponsabilityOverride: function (percent) {
+        fillFindersRecoupmentResponsabilityOverride: function () {
             it("Fill into finders recoupment responsability override ", function () {
-                pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverride(percent);
+                pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverride();
             });
         },
 
@@ -536,11 +536,293 @@ if (steps.finder_deal === undefined) {
 
 
         validateTooltipsForTermsByContractPeriodI: function(i, type){
-            it("Validate the tooltips for terms by contract period number i of type ", function(){
+            it("Validate the tooltips for terms by contract period number " + i + " of type ", function(){
                pages.finder_deal.validateTheTooltipsForTermsByContractPeriodI(i, type);
+            });
+        },
+
+        validateMaximumFoundAgreementsWithoutPreApprovalTooltip: function () {
+            it("Validate maximum found agreements without pre approval tooltip", function () {
+                pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApprovalTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The maximum found agreements without pre approval tooltip is : " + promise);
+                        expect(promise).toEqual("Maximum number of Deals that a Finder can sign without obtaining WCM approval during a contract period.");
+                    });
+            });
+        },
+
+        validateMaximumFoundAgreementsWithPreApprovalTooltip: function () {
+            it("Validate maximum found agreements with pre approval tooltip", function () {
+                pages.finder_deal.elems.maximumFoundAgreementsWithPreApprovalTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The maximum found agreements with pre approval tooltip is : " + promise);
+                        expect(promise).toEqual("Total number of Deals that a Finder can sign with WCM during a contract period.");
+                    });
+            });
+        },
+
+        validateFindersRecoupmentResponsabilityTooltip: function () {
+            it("Validate finders recoupment responsability tooltip", function () {
+                pages.finder_deal.elems.findersRecoupmentResponsabilityTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The  finders recoupment responsabilitytooltip is : " + promise);
+                        expect(promise).toEqual("This is the generally agreed upon Finder's obligation for recoupment of Advances paid to any Found Deal.");
+                    });
+            });
+        },
+
+        validateNonSignedArtistMaximumAdvancesPayableTooltip: function () {
+            it("Validate non signed artist maximum advances payable tooltip", function () {
+                pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The non signed artist maximum advances payable tooltip is : " + promise);
+                        expect(promise).toEqual("For non-signed Creator(s) on each found Deal, the Finder can spend up to this defined dollar amount.");
+                    });
+            });
+        },
+
+        validateSignedArtistMaximumAdvancesPayableTooltip: function () {
+            it("Validate signed artist maximum advances payable tooltip", function () {
+                pages.finder_deal.elems.signedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The  signed artist maximum advances payable tooltip is : " + promise);
+                        expect(promise).toEqual("For signed Creator(s) on each found Deal, the Finder can spend up to this defined dollar amount.");
+                    });
+            });
+        },
+
+        validateAggregateMaximumAdvancesPayableTooltip: function () {
+            it("Validate aggregate maximum advances payable tooltip", function () {
+                pages.finder_deal.elems.aggregateMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The aggregate maximum advances payable tooltip is : " + promise);
+                        expect(promise).toContain("The aggregate defines the overall cap amount for all advances on Finder Deals");
+                        expect(promise).toContain("Overhead Advances are not part of this maximum.");
+                    });
+            });
+        },
+
+        validateAggregateMaximumOnAdvancesTooltip: function () {
+            it("Validate aggregate maximum on advances tooltip", function () {
+                pages.finder_deal.elems.aggregateMaximumOnAdvancesTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The  aggregate maximum on advances tooltip is : " + promise);
+                        expect(promise).toEqual("The aggregate defines the ownership percentages in relation to advance amounts paid by WCM (e.g., If aggregated advances exceed $300,000 during the Contract Period, then ownership is split 50/50.)");
+                    });
+            });
+        },
+
+
+        validateFindersOwnerhsipTooltip: function () {
+            it("Validate finders ownership tooltip", function () {
+                pages.finder_deal.elems.findersOwnershipTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The finders ownership tooltip is : " + promise);
+                        expect(promise).toEqual("This is the agreed-upon ownership percentage the Finder will have when Advances total the maximum defined.");
+                    });
+            });
+        },
+
+        validateWcmsOwnerhsipTooltip: function () {
+            it("Validate WCM's ownership tooltip", function () {
+                pages.finder_deal.elems.wcmOwnershipTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The WCM's ownership tooltip is : " + promise);
+                        expect(promise).toEqual("This is the agreed-upon ownership percentage WCM will have when Advances total the maximum defined.");
+                    });
+            });
+        },
+
+        validateCreatorsFoundSubmissionsTooltip: function () {
+            it("Validate creators found submissions tooltip", function () {
+                pages.finder_deal.elems.creatorsFoundSubmissionTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The creator found submission tooltip is : " + promise);
+                        expect(promise).toEqual("Creator(s) are the songwriter(s) submitted by the Finder.");
+                    });
+            });
+        },
+
+        validateSubmissionDateTooltip: function () {
+            it("Validate submission date tooltip", function () {
+                pages.finder_deal.elems.submissionDateTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The submission date tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates the date on which the Finder submitted Creator(s) to WCM.");
+                    });
+            });
+        },
+
+        validateWcmDecisionTooltip: function () {
+            it("Validate WCM decision tooltip", function () {
+                pages.finder_deal.elems.wcmDecisionTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The WCM decision tooltip is : " + promise);
+                        expect(promise).toEqual("Indicates whether WCM will work with the Finder to further the relationship on submitted Creator(s).");
+                    });
+            });
+        },
+
+        validateFoundDealTooltip: function () {
+            it("Validate found deal tooltip", function () {
+                pages.finder_deal.elems.foundDealTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The found deal tooltip is : " + promise);
+                        expect(promise).toEqual("Provides a reference to Deals that resulted from Finder submissions.");
+                    });
+            });
+        },
+
+        validateFindersRecoupmentResponsabilityOverrideTooltip: function () {
+            it("Validate finders recoupment responsability override tooltip", function () {
+                pages.finder_deal.elems.findersRecoupmentResponsabilityOverrideTooltip.getAttribute("data-tooltip").
+                    then(function (promise) {
+                        console.log("The finders recoupment responsability override tooltip is : " + promise);
+                        expect(promise).toEqual("Nullifies the generally agreed upon Finder's obligation for recoupment of Advances paid to this Found Deal.");
+                    });
+            });
+        },
+
+        validateMaximumFoundAgreementsWithoutPreApprovalValue: function () {
+            it("Validate maximum found agreements without pre approval value", function () {
+                pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApprovalValue.getText().
+                    then(function (promise) {
+                        console.log("The maximum found agreements without pre approval value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateMaximumFoundAgreementsWithPreApprovalValue: function () {
+            it("Validate maximum found agreements with pre approval value", function () {
+                pages.finder_deal.elems.maximumFoundAgreementsWithPreApprovalValue.getText().
+                    then(function (promise) {
+                        console.log("The maximum found agreements with pre approval value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateFindersRecoupmentResponsabilityValue: function () {
+            it("Validate finders recoupment responsability value", function () {
+                pages.finder_deal.elems.findersRecoupmentResponsabilityValue.getText().
+                    then(function (promise) {
+                        console.log("The finders recoupment responsability value is : " + promise);
+                        expect(promise).toContain("%");
+                    });
+            });
+        },
+
+        validateNonSignedArtistMaximumAdvancesPayableValue: function () {
+            it("Validate non signed artist maximum advances payable value", function () {
+                pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayableValue.getText().
+                    then(function (promise) {
+                        console.log("The non signed artist maximum advances payable value is : " + promise);
+                        expect(promise).toContain("%");
+                    });
+            });
+        },
+
+        validateSignedArtistMaximumAdvancesPayableValue: function () {
+            it("Validate  signed artist maximum advances payable value", function () {
+                pages.finder_deal.elems.signedArtistMaximumAdvancesPayableValue.getText().
+                    then(function (promise) {
+                        console.log("The non signed artist maximum advances payable value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateAggregateMaximumAdvancesPayableValue: function () {
+            it("Validate aggregate maximum advances payable value", function () {
+                pages.finder_deal.elems.aggregateMaximumOnAdvancesValue.getText().
+                    then(function (promise) {
+                        console.log("The aggregate maximum advances payable value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateAggregateMaximumOnAdvancesValue: function () {
+            it("Validate aggregate maximum advances value", function () {
+                pages.finder_deal.elems.aggregateMaximumOnAdvancesValue.getText().
+                    then(function (promise) {
+                        console.log("The aggregate maximum on advances value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateFinderOwnershipValue: function () {
+            it("Validate finders ownership value", function () {
+                pages.finder_deal.elems.findersOwnershipValue.getText().
+                    then(function (promise) {
+                        console.log("The finders ownership value is : " + promise);
+                        expect(promise).toContain("%");
+                    });
+            });
+        },
+
+        validateWcmOwnershipValue: function () {
+            it("Validate WCM ownership value", function () {
+                pages.finder_deal.elems.wcmOwnershipValue.getText().
+                    then(function (promise) {
+                        console.log("The WCM ownership value is : " + promise);
+                        expect(promise).toContain("%");
+                    });
+            });
+        },
+
+        validateCreatorFoundSubmissionValue: function () {
+            it("Validate creator found submission value", function () {
+                pages.finder_deal.elems.creatorFoundSubmissionValue.getText().
+                    then(function (promise) {
+                        console.log("The creator found submission value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateSubmissionDateValue: function () {
+            it("Validate submission date value", function () {
+                pages.finder_deal.elems.submissionDateValue.getText().
+                    then(function (promise) {
+                        console.log("The submission date value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateWcmDecisionValue: function () {
+            it("Validate WCM decision value", function () {
+                pages.finder_deal.elems.wcmDecisionValue.getText().
+                    then(function (promise) {
+                        console.log("The WCM decision value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateFoundDealValue: function () {
+            it("Validate found deal value", function () {
+                pages.finder_deal.elems.foundDealValue.getText().
+                    then(function (promise) {
+                        console.log("The found deal value is : " + promise);
+                        expect(promise).not.toEqual("");
+                    });
+            });
+        },
+
+        validateFindersRecoupmentResponsabilityOverrideValue: function () {
+            it("Validate finders recoupment responsability override value", function () {
+                pages.finder_deal.elems.findersRecoupmentResponsabilityOverrideValue.getText().
+                    then(function (promise) {
+                        console.log("The finders recoupment responsability override value is : " + promise);
+                        expect(promise).toContain("%");
+                    });
             });
         }
 
 
-    };
+};
 }

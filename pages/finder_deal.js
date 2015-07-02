@@ -49,8 +49,8 @@ if (pages.finder_deal === undefined) {
             creatorFoundSubmissionInputField: {css: "div[data-ng-form='cpSubmissionForm'] div[data-ng-model='submission.creatorSet'] input[ng-model='$term']"},
             creatorFoundSubmissionDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             submissionDateField: {css: "div[data-ng-model='submission.submission_date'] input[data-ng-model='date']"},
-            wcmDecissionField: {css: "div[data-ng-model='submission.wcm_decision']"},
-            wcmDecisionDropDownData: {css: "ul.dropdown-menu li.ng-scope"},
+            wcmDecisionField: {css: "div[data-ng-repeat='submission in cp.finder_submissions']:nth-child(1) div[data-ng-model='submission.wcm_decision'] button"},
+            wcmDecisionDropDownData: {css: "div[data-ng-model='submission.wcm_decision'] ul.dropdown-menu li.ng-scope"},
             foundDealInputField: {css: "div[data-ng-model='submission.found_deal'] input[ng-model='$term']"},
             foundDealDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             findersRecoupmentResponsabilityOverride: {css: "input[data-ng-model='submission.override']"},
@@ -78,7 +78,41 @@ if (pages.finder_deal === undefined) {
             whoHasControlToExerciseFutureOptionValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(6) span.view-info.pull-left strong"},
             whoIsResponsibleForAdvancesValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(7) span.view-info.pull-left strong"},
             finderRightToPursueValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(8) span.view-info.pull-left strong"},
-            wcmRightToPursueValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(9) span.view-info.pull-left strong"}
+            wcmRightToPursueValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(9) span.view-info.pull-left strong"},
+            //tooltips found deal terms - terms by contract period
+            maximumFoundAgreementsWithoutPreApprovalTooltip: {css: "div[data-ng-form='cpFoundDealTermsForm'] div.control-group.clearfix:nth-child(1) i"},
+            maximumFoundAgreementsWithPreApprovalTooltip: {css: "div[data-ng-form='cpFoundDealTermsForm'] div.control-group.clearfix:nth-child(2) i"},
+            findersRecoupmentResponsabilityTooltip: {css: "div[data-ng-form='cpFoundDealTermsForm'] div.control-group.clearfix:nth-child(3) i"},
+            nonSignedArtistMaximumAdvancesPayableTooltip: {css: "div[data-ng-form='cpFoundDealTermsForm'] div.control-group.clearfix:nth-child(4) i"},
+            signedArtistMaximumAdvancesPayableTooltip: {css: "div[data-ng-form='cpFoundDealTermsForm'] div.control-group.clearfix:nth-child(5) i"},
+            aggregateMaximumAdvancesPayableTooltip: {css: "div[data-ng-form='cpFoundDealTermsForm'] div.control-group.clearfix:nth-child(6) i"},
+            //tooltips ownership terms - terms by contract period
+            aggregateMaximumOnAdvancesTooltip: {css: "div[data-ng-form='cpOwnershipForm'] div.pull-left.agr-max i"},
+            findersOwnershipTooltip: {css: "div[data-ng-form='cpOwnershipForm'] div.pull-left.finder-own:nth-child(2) i"},
+            wcmOwnershipTooltip: {css: "div[data-ng-form='cpOwnershipForm'] div.pull-left.finder-own:nth-child(3) i"},
+            //tooltips found submission - terms by contract period
+            creatorsFoundSubmissionTooltip: {css: "div[data-ng-form='cpSubmissionsForm'] div.pull-left.creators i"},
+            submissionDateTooltip: {css: "div[data-ng-form='cpSubmissionsForm'] div.pull-left.finder-own i"},
+            wcmDecisionTooltip: {css: "div[data-ng-form='cpSubmissionsForm'] div.pull-left.wcm-decision i"},
+            foundDealTooltip: {css: "div[data-ng-form='cpSubmissionsForm'] div.pull-left.found-deal i"},
+            findersRecoupmentResponsabilityOverrideTooltip: {css: "div[data-ng-form='cpSubmissionsForm'] div.pull-left.recoup i"},
+            //finder deal view elements terms by contract period - found deal terms
+            maximumFoundAgreementsWithoutPreApprovalValue: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.view-row.clearfix:nth-child(1) span.view-info.pull-left strong"},
+            maximumFoundAgreementsWithPreApprovalValue: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.view-row.clearfix:nth-child(2) span.view-info.pull-left strong"},
+            findersRecoupmentResponsabilityValue: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.view-row.clearfix:nth-child(3) span.view-info.pull-left strong"},
+            nonSignedArtistMaximumAdvancesPayableValue: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.view-row.clearfix:nth-child(4) span.view-info.pull-left strong"},
+            signedArtistMaximumAdvancesPayableValue: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.view-row.clearfix:nth-child(5) span.view-info.pull-left strong"},
+            aggregateMaximumAdvancesPayableValue: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.view-row.clearfix:nth-child(6) span.view-info.pull-left strong"},
+            //finder deal view elements terms by contract period - ownership terms
+            aggregateMaximumOnAdvancesValue: {css: "div[data-ng-repeat='ownership in cp.finder_ownerships'] div.pull-left.agr-max strong"},
+            findersOwnershipValue: {css: "div[data-ng-repeat='ownership in cp.finder_ownerships'] div.pull-left.finder-own:nth-child(2) strong"},
+            wcmOwnershipValue: {css: "div[data-ng-repeat='ownership in cp.finder_ownerships'] div.pull-left.finder-own:nth-child(3) strong"},
+            //finder deal view elements terms by contract period - found submissions
+            creatorFoundSubmissionValue: {css: "div[data-ng-repeat='submission in cp.finder_submissions'] div.pull-left.creators"},
+            submissionDateValue: {css: "div[data-ng-repeat='submission in cp.finder_submissions'] div.pull-left.finder-own.ng-binding.ng-scope"},
+            wcmDecisionValue: {css: "div[data-ng-repeat='submission in cp.finder_submissions'] div.pull-left.wcm-decision.ng-binding.ng-scope"},
+            foundDealValue: {css: "div[data-ng-repeat='submission in cp.finder_submissions'] div.pull-left.found-deal.ng-scope"},
+            findersRecoupmentResponsabilityOverrideValue: {css: "div[data-ng-repeat='submission in cp.finder_submissions'] div.pull-left.recoup.ng-binding.ng-scope"}
         },
 
         validateTheGeneralTermsTitleIsPresent: function () {
@@ -231,53 +265,63 @@ if (pages.finder_deal === undefined) {
             pages.finder_deal.elems.termsByContractPeriodArea.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.termsByContractPeriodEditIcon));
             pages.finder_deal.elems.termsByContractPeriodEditIcon.click();
+            pages.finder_deal.waitForAjax();
         },
 
         clickOnContractPeriodNumberIDetailsTermsByContractPeriod: function (i) {
             browser.driver.findElement(By.css("div[data-ng-class='{ active : form.show.finderDeal.edit }'] div.form-horizontal.relative ul.nav.nav-tabs li:nth-child(" + i + ")")).click();
         },
 
-        fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function (number) {
+        fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval.clear();
             pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval.sendKeys(number);
         },
 
-        fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI: function (number) {
+        fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.maximumFoundAgreementsWithPreApproval.clear();
             pages.finder_deal.elems.maximumFoundAgreementsWithPreApproval.sendKeys(number);
         },
 
-        fillIntoFindersRecoupmentResponsability: function (percent) {
+        fillIntoFindersRecoupmentResponsability: function () {
+            var percent = (Math.random() * 100 + 1).toFixed(2);
             pages.finder_deal.elems.findersRecoupmentResponsability.clear();
             pages.finder_deal.elems.findersRecoupmentResponsability.sendKeys(percent);
         },
 
-        fillIntoNonSignedArtistMaximumAdvancesPayable: function (number) {
+        fillIntoNonSignedArtistMaximumAdvancesPayable: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayable.clear();
             pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayable.sendKeys(number);
         },
 
-        fillIntoSignedArtistMaximumAdvancesPayable: function (number) {
+        fillIntoSignedArtistMaximumAdvancesPayable: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.signedArtistMaximumAdvancesPayable.clear();
             pages.finder_deal.elems.signedArtistMaximumAdvancesPayable.sendKeys(number);
         },
 
-        fillIntoAggregateMaximumAdvancesPayable: function (number) {
+        fillIntoAggregateMaximumAdvancesPayable: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.aggregateMaximumAdvancesPayable.clear();
             pages.finder_deal.elems.aggregateMaximumAdvancesPayable.sendKeys(number);
         },
 
-        fillIntoAggregateMaximumOnAdvancesField: function (number) {
+        fillIntoAggregateMaximumOnAdvancesField: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.aggregateMaximumOnAdvances.clear();
             pages.finder_deal.elems.aggregateMaximumOnAdvances.sendKeys(number);
         },
 
-        fillIntoFindersOwnershipField: function (percent) {
+        fillIntoFindersOwnershipField: function () {
+            var percent = (Math.random() * 100 + 1).toFixed(2);
             pages.finder_deal.elems.findersOwnership.clear();
             pages.finder_deal.elems.findersOwnership.sendKeys(percent);
         },
 
-        fillIntoWmcsOwnershipField: function (percent) {
+        fillIntoWmcsOwnershipField: function () {
+            var percent = (Math.random() * 100 + 1).toFixed(2);
             pages.finder_deal.elems.wcmOwnership.clear();
             pages.finder_deal.elems.wcmOwnership.sendKeys(percent);
         },
@@ -320,13 +364,13 @@ if (pages.finder_deal === undefined) {
         fillIntoSubmissionDateField: function () {
             var date = pages.base.randomDate(new Date(2015, 0, 1), new Date());
             pages.finder_deal.elems.submissionDateField.clear();
-            pages.finder_deal.elems.submissionDateField.sendKeys(date);
+            pages.finder_deal.elems.submissionDateField.sendKeys("2015-04-15");
         },
 
         selectTheRandomWcmDecisionDropDown: function () {
-            pages.finder_deal.elems.wcmDecissionField.click();
-            browser.wait(ExpectedConditions.visibilityOf(ExpectedConditions.visibilityOf(pages.finder_deal.elems.wcmDecisionDropDownData)));
-            browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope"))
+            pages.finder_deal.elems.wcmDecisionField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.wcmDecisionDropDownData));
+            browser.driver.findElements(By.css("div[data-ng-model='submission.wcm_decision'] ul.dropdown-menu li.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -347,7 +391,8 @@ if (pages.finder_deal === undefined) {
                 })
         },
 
-        fillIntoFindersRecoupmentResponsabilityOverride: function (percent) {
+        fillIntoFindersRecoupmentResponsabilityOverride: function () {
+            var percent = (Math.random() * 50 + 1).toFixed(2);
             pages.finder_deal.elems.findersRecoupmentResponsabilityOverride.clear();
             pages.finder_deal.elems.findersRecoupmentResponsabilityOverride.sendKeys(percent);
         },
@@ -399,8 +444,8 @@ if (pages.finder_deal === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(pages.finder_deal.elems.noCancelChangesModalDialog));
         },
 
-        validateTheTooltipsForTermsByContractPeriodI : function(i, type){
-            browser.driver.findElement(By.css("ul.nav.nav-tabs li.ng-scope:nth-child(" + i + ") i:nth-child(" + (i+1) + ")")).getAttribute("data-tooltip").
+        validateTheTooltipsForTermsByContractPeriodI: function (i, type) {
+            browser.driver.findElement(By.css("ul.nav.nav-tabs li.ng-scope:nth-child(" + i + ") i:nth-child(" + (i + 1) + ")")).getAttribute("data-tooltip").
                 then(function (promise) {
                     console.log("The tooltip for terms by contract period type number i is : " + promise);
                     expect(promise).toEqual(type);
