@@ -77,8 +77,8 @@ if (pages.finder_deal === undefined) {
             whoWillDraftDealsValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(5) span.view-info.pull-left strong"},
             whoHasControlToExerciseFutureOptionValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(6) span.view-info.pull-left strong"},
             whoIsResponsibleForAdvancesValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(7) span.view-info.pull-left strong"},
-            findersRightToPursue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(8) span.view-info.pull-left strong"},
-            wcmRightToPursue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(9) span.view-info.pull-left strong"}
+            finderRightToPursueValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(8) span.view-info.pull-left strong"},
+            wcmRightToPursueValue: {css: "div[data-ng-show='form.show.finderDeal.general.detail'] div.view-row.clearfix:nth-child(9) span.view-info.pull-left strong"}
         },
 
         validateTheGeneralTermsTitleIsPresent: function () {
@@ -90,7 +90,7 @@ if (pages.finder_deal === undefined) {
         },
 
         validateTheTermsByContractPeriodFinderDealTitle: function () {
-            page.finder_deal.elems.termsByContractPeriodFinderDealTitle.getText().
+            pages.finder_deal.elems.termsByContractPeriodFinderDealTitle.getText().
                 then(function (promise) {
                     console.log("Terms by Contract period text is : " + promise);
                     expect(promise).toContain("Terms by Contract Period");
@@ -98,9 +98,9 @@ if (pages.finder_deal === undefined) {
         },
 
         validateTheNumberOfTermsByContractPeriodFinderDealTitle: function (number) {
-            page.finder_deal.elems.termsByContractPeriodFinderDealTitle.getText().
+            pages.finder_deal.elems.termsByContractPeriodFinderDealTitle.getText().
                 then(function (promise) {
-                    console.log("Terms by Contract period text is : " + promise);
+                    console.log("Terms by Contract period count is : " + promise);
                     expect(promise).toContain(number);
                 });
         },
@@ -397,6 +397,14 @@ if (pages.finder_deal === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.noCancelChangesModalDialog));
             pages.finder_deal.elems.noCancelChangesModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.finder_deal.elems.noCancelChangesModalDialog));
+        },
+
+        validateTheTooltipsForTermsByContractPeriodI : function(i, type){
+            browser.driver.findElement(By.css("ul.nav.nav-tabs li.ng-scope:nth-child(" + i + ") i:nth-child(" + (i+1) + ")")).getAttribute("data-tooltip").
+                then(function (promise) {
+                    console.log("The tooltip for terms by contract period type number i is : " + promise);
+                    expect(promise).toEqual(type);
+                });
         }
 
 

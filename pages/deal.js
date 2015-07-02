@@ -1,5 +1,6 @@
 "use strict";
 var pph = require("../helpers/pph");
+var ExpectedConditions = protractor.ExpectedConditions;
 var promise = protractor.promise;
 if (pages.deal === undefined) {
     pages.deal = new ftf.pageObject({
@@ -16,6 +17,7 @@ if (pages.deal === undefined) {
         },
 
         continueToNextPage: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.continueButton));
             pages.deal.elems.continueButton.click();
         },
 

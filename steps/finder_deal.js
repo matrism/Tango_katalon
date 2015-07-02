@@ -21,15 +21,16 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateNumberOfTermsByContractPeriodFinderDealTitle: function () {
+        validateNumberOfTermsByContractPeriodFinderDealTitle: function (number) {
             it("Validate the number of terms by contract period finder deal title", function () {
-                pages.finder_deal.validateTheNumberOfTermsByContractPeriodFinderDealTitle();
+                pages.finder_deal.validateTheNumberOfTermsByContractPeriodFinderDealTitle(number);
             });
         },
 
         clickOnGeneralTermsFinderDeal: function () {
             it("Click on the general terms finder deal ", function () {
                 pages.finder_deal.clickOnTheGeneralTermsFinderDeal();
+                pages.finder_deal.waitForAjax();
             });
         },
 
@@ -135,6 +136,18 @@ if (steps.finder_deal === undefined) {
             });
         },
 
+        clickOnYesFinderRightToPursue: function () {
+            it("Click on the yes finder right to pursue ", function () {
+                pages.finder_deal.clickOnTheYesFinderRightToPursue();
+            });
+        },
+
+        clickOnNoFinderRightToPursue: function () {
+            it("Click on the no finder right to pursue ", function () {
+                pages.finder_deal.clickOnTheNoWcmRightToPursue();
+            });
+        },
+
         clickOnYesWcmRightToPursue: function () {
             it("Click on the yes wcm right to pursue ", function () {
                 pages.finder_deal.clickOnTheYesWcmRightToPursue();
@@ -150,6 +163,7 @@ if (steps.finder_deal === undefined) {
         clickOnSaveGeneralTermsFinderDeal: function () {
             it("Click on the save general terms finder deal ", function () {
                 pages.finder_deal.clickOnTheSaveGeneralTermsFinderDeal();
+                pages.finder_deal.waitForAjax();
             });
         },
 
@@ -429,6 +443,103 @@ if (steps.finder_deal === undefined) {
                 pages.finder_deal.confirmCancelChangesModalDialog();
             });
         },
+
+        validatePriorAwarenessNotificationValue: function(value){
+            it("Validate the prior awareness notification value ", function(){
+               pages.finder_deal.elems.priorAwarenessNotificationValue.getText().
+                   then(function (promise) {
+                       console.log("The prior awareness notification value is : " + promise);
+                       expect(promise).toEqual(value);
+                   });
+            });
+        },
+
+        validateNotifyWithinThisNumberOfDaysValue: function(value){
+            it("Validate the notify within this number of days value ", function(){
+                pages.finder_deal.elems.notifyWithinThisNumberOfDaysValue.getText().
+                    then(function (promise) {
+                        console.log("The notify within this number of days value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+        validateSubmissionDecisionWithinNumberOfDaysValue: function(value){
+            it("Validate the submission decision within number of days value ", function(){
+                pages.finder_deal.elems.submissionDecisionWithinNumberOfDaysValue.getText().
+                    then(function (promise) {
+                        console.log("The submission decision within number of days value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+        validateAssumedResponseValue: function(value){
+            it("Validate the assumed response value ", function(){
+                pages.finder_deal.elems.assumedResponseValue.getText().
+                    then(function (promise) {
+                        console.log("The assumed response value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+        validateWhoWillDraftDealsValue: function(value){
+            it("Validate the who will draft deals value ", function(){
+                pages.finder_deal.elems.whoWillDraftDealsValue.getText().
+                    then(function (promise) {
+                        console.log("The who will draft deals value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+        validateWhoHasControlToExerciseFutureOptionsValue: function(value){
+            it("Validate the who has control to exercise future options value ", function(){
+                pages.finder_deal.elems.whoHasControlToExerciseFutureOptionValue.getText().
+                    then(function (promise) {
+                        console.log("The awho has control to exercise future options value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+        validateWhoIsResponsibleForAdvancesValue: function(value){
+            it("Validate the who is responsible for advances value ", function(){
+                pages.finder_deal.elems.whoIsResponsibleForAdvancesValue.getText().
+                    then(function (promise) {
+                        console.log("The  who is responsible for advances  value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+        validateFindersRightToPursueValue: function(value){
+            it("Validate the finder right to pursue value ", function(){
+                pages.finder_deal.elems.finderRightToPursueValue.getText().
+                    then(function (promise) {
+                        console.log("The finder right to pursue value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+        validateWcmRightToPursueValue: function(value){
+            it("Validate the wcm right to pursue value ", function(){
+                pages.finder_deal.elems.wcmRightToPursueValue.getText().
+                    then(function (promise) {
+                        console.log("The wcm right to pursue value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
+            });
+        },
+
+
+        validateTooltipsForTermsByContractPeriodI: function(i, type){
+            it("Validate the tooltips for terms by contract period number i of type ", function(){
+               pages.finder_deal.validateTheTooltipsForTermsByContractPeriodI(i, type);
+            });
+        }
 
 
     };
