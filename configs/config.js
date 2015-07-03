@@ -10,7 +10,7 @@ var configer = ftf.configer,
             client_secret: "appclientsecret"
         },
         _system_: {
-            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "firefox"),
+            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
             resolution: {
                 width: 1600,
                 height: 900
@@ -27,15 +27,8 @@ var configer = ftf.configer,
         localhost: {
             urls: {
                 sso: configer.getEnvVarByKey("URL_SSO"),
-
-
-
-                //app_url: "https://musicpublishing.staging.dsp.wmg.com",
-                //service_url: "https://musicpublishing.staging.dsp.wmg.com"
                 app_url: " http://tango.tango-qa-aws.dspdev.wmg.com",
                 service_url: "http://tango.tango-qa-aws.dspdev.wmg.com"
-                //app_url:  "http://tango.lad.tango-qa-aws.dspdev.wmg.com/",
-                //service_url: "http://tango.lad.tango-qa-aws.dspdev.wmg.com/"
             },
             user_name: configer.getEnvVarByKey("TEST_USERNAME") || "TangoTest1",
             user_password: configer.getEnvVarByKey("TEST_PASSWORD") || "P@ssw0rd78"
