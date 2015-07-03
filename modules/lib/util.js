@@ -87,12 +87,12 @@ function generateHTML(data) {
         encoding: "utf8"
     });
     
-    return _.template(html,{
-        table: _.template(table, {
+    return _.template(html)({
+        table: _.template(table)({
             table_contents: renderFiles(data)
         }),
         select: renderSelect(tags),
-        table_statistics: _.template(table_statistics, {
+        table_statistics: _.template(table_statistics)({
             statistics: statistics,
             totalTime: (prevStepTimeFinish / 1000)
         })
@@ -164,7 +164,7 @@ function renderFile(file, key) {
         time: time.file[key] && time.file[key].start && time.file[key].finish ? ((time.file[key].finish - time.file[key].start) / 1000) : "",
     };
     
-    array.push(_.template(template,args));
+    array.push(_.template(template)(args));
     array.push(features);
     
     return array.join("");
@@ -236,7 +236,7 @@ function renderFeature(feature, feature_id) {
         time: ((time.feature[feature_id].finish - time.feature[feature_id].start) / 1000),
     };
     
-    array.push(_.template(template, args));
+    array.push(_.template(template)(args));
     array.push(subFeatures);
     
     return array.join("");
@@ -264,7 +264,7 @@ function renderSubFeatures(features, feature_id) {
         array.push(renderSubFeature(features[key], feature_id));
     });
     
-    return array.join(_.template(template, {feature_id: feature_id}));
+    return array.join(_.template(template)({feature_id: feature_id}));
 }
 
 function renderSubFeature(feature, feature_id) {
@@ -282,7 +282,7 @@ function renderSubFeature(feature, feature_id) {
         time: ((time.feature[feature_id].finish - time.feature[feature_id].start) / 1000),
     };
     
-    array.push(_.template(template,args));
+    array.push(_.template(template)(args));
     array.push(steps);
     
     return array.join("");
@@ -313,7 +313,7 @@ function renderSteps(steps, feature_id) {
             statistics.steps_failed++;
         }
         
-        array.push(_.template(template, args));
+        array.push(_.template(template)(args));
         if (step.results.items_.length > 0) {
             array.push(renderItems(step.results.items_, step.step_id, feature_id));
         }
@@ -338,7 +338,7 @@ function renderItems(items, step_id, feature_id) {
             passed: (items[l].passed_ ? "Passed" : (items[l].skipped ? "Skipped" : "Failed"))
         };
         
-        array.push(_.template(template, args));
+        array.push(_.template(template)(args));
     }
     
     return array.join("");
@@ -360,7 +360,7 @@ function renderSelect() {
     
     tags = _.sortBy(tags, function(tag) {return tag; });
     
-    return _.template(template, {tags:tags});
+    return _.template(template)({tags:tags});
 }
 
 function addHTMLReport(jsonData, baseName){
