@@ -461,17 +461,17 @@ if (pages.finder_deal === undefined) {
 
         clickOnTheFoundDealTermsTitle: function(){
             pages.finder_deal.elems.foundDealTermsTitle.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval));
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApprovalValue));
         },
 
         clickOnTheOwnershipTermsTitle: function(){
             pages.finder_deal.elems.ownershiptTermsTitle.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.aggregateMaximumOnAdvances));
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.aggregateMaximumOnAdvancesValue));
         },
 
         clickOnTheFoundSubmissionsTitle: function(){
             pages.finder_deal.elems.foundSubmissionsTitle.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.creatorFoundSubmissionInputField));
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.creatorFoundSubmissionValue));
         }
 
 

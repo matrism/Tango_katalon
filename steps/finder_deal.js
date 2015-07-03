@@ -453,6 +453,13 @@ if (steps.finder_deal === undefined) {
             });
         },
 
+        confirmCancelChangesTermsByContractPeriodFinderDeal: function () {
+            it("Confirm cancel changes terms by contract period finder deal ", function () {
+                pages.finder_deal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
+                pages.finder_deal.confirmCancelChangesModalDialog();
+            });
+        },
+
         validatePriorAwarenessNotificationValue: function(value){
             it("Validate the prior awareness notification value ", function(){
                pages.finder_deal.elems.priorAwarenessNotificationValue.getText().
@@ -727,7 +734,7 @@ if (steps.finder_deal === undefined) {
                 pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayableValue.getText().
                     then(function (promise) {
                         console.log("The non signed artist maximum advances payable value is : " + promise);
-                        expect(promise).toContain("%");
+                        expect(promise).not.toEqual("");
                     });
             });
         },
@@ -744,7 +751,7 @@ if (steps.finder_deal === undefined) {
 
         validateAggregateMaximumAdvancesPayableValue: function () {
             it("Validate aggregate maximum advances payable value", function () {
-                pages.finder_deal.elems.aggregateMaximumOnAdvancesValue.getText().
+                pages.finder_deal.elems.aggregateMaximumAdvancesPayableValue.getText().
                     then(function (promise) {
                         console.log("The aggregate maximum advances payable value is : " + promise);
                         expect(promise).not.toEqual("");
