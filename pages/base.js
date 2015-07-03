@@ -21,9 +21,6 @@ module.exports.randomDate=function(start, end) {
 	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 };
 
-
-
-
 module.exports.isPresentAndDisplayed = function(element) {
 	return element.isPresent().then(function(isPresent) {
 		if(!isPresent) {

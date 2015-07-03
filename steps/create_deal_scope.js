@@ -13,8 +13,8 @@ if (steps.create_deal_scope === undefined) {
         addSimpleScope: function () {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
-                pages.create_deal_scope.fillScopeDescriptionField();
-                pages.create_deal_scope.selectContractTypeScope(pages.create_deal_scope.elems.contractTypeDropDown, "Finder");
+                pages.create_deal_scope.selectRandomContractTypeScope();
+                pages.create_deal_scope.waitForAjax();
                 pages.create_deal_scope.addTerritoryByTypingToScope();
             });
         },
