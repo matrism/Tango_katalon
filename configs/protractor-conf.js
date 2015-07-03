@@ -1,11 +1,15 @@
 "use strict";
 var path = require("path"),
+    moment,
     ScreenShotReporter, config, SSReporter_instance;
 
+moment = require('moment');
 global.ftf = require("../vendor/factory-testing-framework");
 global._tf_config = require("./config");
 ScreenShotReporter = ftf.htmlReporter;
-SSReporter_instance = new ScreenShotReporter({baseDirectory: "reports/html"});
+SSReporter_instance = new ScreenShotReporter({
+    baseDirectory: "reports/html/" + moment().format("YYYY-MM-DD HH-mm-ss"),
+});
 
 global.pages = {};
 global.steps = {};
