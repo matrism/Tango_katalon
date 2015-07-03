@@ -10,6 +10,7 @@ var configer = ftf.configer,
             client_secret: "appclientsecret"
         },
         _system_: {
+            //seleniumAddress: 'http://localhost:4444/wd/hub',
             browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
             resolution: {
                 width: 1600,

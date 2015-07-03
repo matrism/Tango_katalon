@@ -1,8 +1,9 @@
 "use strict";
 var pph = require("../helpers/pph");
+var random = require('../helpers/random');
 var promise = protractor.promise;
-module.exports = pages.work = new ftf.pageObject();
-// Navigation.
+var ExpectedConditions = protractor.ExpectedConditions;
+exports = module.exports = pages.work = new ftf.pageObject();
 module.exports.open = function(workId) {
 	if(!workId) {
 		return ftf.pageObject.prototype.open.call(this);
@@ -14,7 +15,116 @@ module.exports.open = function(workId) {
 		}
 	);
 };
-// Locator.
+exports.workSearchFilterTagDropdown = function(i) {
+    return pages.base.mainSearchBar().element(by.model('$filterTag.filter'));
+};
+exports.workSearchTermsInput = function() {
+    return pages.base.mainSearchBar().element(by.model('$term'));
+};
+exports.noResultsForWorkSearchMessage = function() {
+    return pages.base.mainSearchBar().$('[data-ng-if="$dataSets[0].data.noResults"]');
+};
+exports.addAnotherWorkSearchTermOption = function() {
+    return pages.base.mainSearchBar().$('[data-ng-click="selectFilterMatch($term);"]');
+};
+exports.removeWorkSearchTermButton = function(i) {
+    return pages.base.mainSearchBar().$$('.tg-typeahead__tag-remove').get(i);
+};
+exports.workSearchMatches = function() {
+    return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
+};
+exports.workSearchMatch = function(i) {
+    return exports.workSearchMatches().get(i);
+};
+exports.workSearchMatchCount = function() {
+    return exports.workSearchMatches().count();
+};
+exports.expectWorkSearchMatchCountToBe = function(value) {
+    expect(exports.workSearchMatchCount()).toBe(value);
+};
+exports.expectWorkSearchMatchCountNotToBe = function(value) {
+    expect(exports.workSearchMatchCount()).not.toBe(value);
+};
+exports.workSearchMatchMainLabelBinding = function(i) {
+    return exports.workSearchMatch(i).$('.tg-typeahead__item-left');
+};
+exports.workSearchMatchMainLabelParts = function(i) {
+    return (
+        pph.getAllText(exports.workSearchMatchMainLabelBinding(i)).then(
+            function(value) {
+                var reResult = /^(.+?) - \((.+?)\)( \(Alt\) (.+?))?$/.exec(value);
+                return {
+                    title: reResult[1],
+                    alternateTitle: reResult[4],
+                    creatorNames: reResult[2].split(' / '),
+                };
+            }
+        )
+    );
+};
+exports.workSearchMatchTitle = function(i) {
+    return exports.workSearchMatchMainLabelParts(i).then(function(parts) {
+        return parts.title;
+    });
+};
+exports.expectWorkSearchMatchTitleToBe = function(i, value) {
+    expect(exports.workSearchMatchTitle(i)).toBe(value);
+};
+exports.workSearchMatchAlternateTitle = function(i) {
+    return exports.workSearchMatchMainLabelParts(i).then(function(parts) {
+        return parts.alternateTitle;
+    });
+};
+exports.expectWorkSearchMatchAlternateTitleToBe = function(i, value) {
+    expect(exports.workSearchMatchAlternateTitle(i)).toBe(value);
+};
+exports.workSearchMatchCreatorNames = function(i) {
+    return exports.workSearchMatchMainLabelParts(i).then(function(parts) {
+        return parts.creatorNames;
+    });
+};
+exports.expectWorkSearchMatchCreatorListToContain = function(i, value) {
+    expect(exports.workSearchMatchCreatorNames(i)).toContain(value);
+};
+exports.expectSelectedWorkSearchFilterTagToBe = function(i, value) {
+    var element = exports.workSearchFilterTagDropdown(i);
+    pages.base.scrollIntoView(element);
+	expect(pages.base.selectedDropdownOption(element)).toBe(value);
+};
+exports.selectWorkSearchFilterTag = function(i, value) {
+    var element = exports.workSearchFilterTagDropdown(i);
+    pages.base.scrollIntoView(element);
+    return pages.base.selectDropdownOption(element, value);
+};
+exports.enterWorkSearchTerms = function(value) {
+    var element = exports.workSearchTermsInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.enterCreatorNameAsWorkSearchTerms = function(value) {
+    return promise.when(value).then(function(value) {
+        var reResult;
+        if(value.indexOf(',') !== -1) {
+            reResult = /^(.+), ([^,]+)$/.exec(value)[1];
+            value = reResult[1] + ' ' + reResult[0];
+        }
+        return exports.enterWorkSearchTerms(value);
+    });
+};
+exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function() {
+    var element = exports.noResultsForWorkSearchMessage();
+    expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+};
+exports.addAnotherWorkSearchTerm = function() {
+    return exports.addAnotherWorkSearchTermOption().click();
+};
+exports.removeWorkSearchTerm = function(i) {
+    return exports.removeWorkSearchTermButton(i).click();
+};
+exports.clickWorkSearchMatch = function(i) {
+    return exports.workSearchMatch(i).click();
+};
 module.exports.workIdBinding = function() {
 	return element(by.binding("getWorkFullCode(work.pristine)"));
 };
@@ -100,6 +210,22 @@ module.exports.editCreatorsButton = function() {
 			"contributionEditForm)']"
 	);
 };
+exports.compositeWorkCheckbox = function() {
+    return element(by.model('work.contribution.isCompositeWork'));
+};
+exports.confirmDisablingWorkAsCompositeButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Yes')
+    );
+};
+exports.compositeWorkTypeDropdown = function() {
+    return element(by.model('work.contribution.composite_type'));
+};
+exports.confirmMakingIntoMedleyButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Yes')
+    );
+};
 module.exports.editCreatorNameInputs = function() {
 	return element.all(by.model("creator.person_name"));
 };
@@ -118,6 +244,103 @@ module.exports.editFirstCreatorContributionInput = function(i) {
 module.exports.creatorsEditorCheckingForDuplicatesMessage = function() {
 	return $(".creators-edit [data-ng-show='show.requests.checkDuplicates']");
 };
+exports.componentWorkRows = function() {
+    return element.all(by.repeater('component in work.contribution.components'));
+};
+exports.componentWorkRow = function(i) {
+    return exports.componentWorkRows().get(i);
+};
+exports.componentWorkNameBindings = function() {
+    return exports.componentWorkRows().all(
+        by.binding('{{ getWorkName(component.model) }}')
+    );
+};
+exports.componentWorkNameBinding = function(i) {
+    return exports.componentWorkNameBindings().get(i);
+};
+exports.componentWorkIdLabel = function(i) {
+    return exports.componentWorkRows().get(i).element(
+        by.binding('getWorkFullCode(component.model)')
+    );
+};
+exports.showComponentWorkDetailsButton = function(i) {
+    return exports.componentWorkRows().get(i).$('.show-hide-ca');
+};
+exports.shellWorkCreatorRows = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.repeater('creator in component.model.creatorsOrderedList')
+    );
+};
+exports.shellWorkCreatorNameLabel = function(i, j) {
+    return exports.componentWorkRows().get(i).$$('.show-ca_name').get(j);
+};
+exports.shellWorkCreatorContributionLabel = function(i, j) {
+    return exports.componentWorkRows().get(i).$$('.show-ca_percenrage').get(j);
+};
+exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function(i) {
+    return exports.componentWorkRow(i).element(
+        by.cssContainingText(
+            '.validation-message-text',
+            'The same work cannot be added as a component multiple times.'
+        )
+    );
+};
+exports.componentWorkSearchFilterDropdowns = function() {
+    return exports.componentWorkRows().all(
+        by.model('component.filter')
+    );
+};
+exports.componentWorkSearchFilterDropdown = function(i) {
+    return exports.componentWorkSearchFilterDropdowns().get(i);
+};
+exports.componentWorkSearchTermsField = function(i) {
+    return exports.componentWorkRow(i).element(
+        by.model('component.selected_work')
+    );
+};
+exports.componentWorkAllocationInputs = function() {
+    return exports.componentWorkRows().all(
+        by.model('component.allocation_percentage')
+    );
+};
+exports.componentWorkAllocationInput = function(i) {
+    return exports.componentWorkAllocationInputs().get(i);
+};
+exports.enterAsNewWorkSuggestion = function() {
+    return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
+};
+exports.shellWorkTitleInput = function(i) {
+    return exports.componentWorkRows().get(i).element(
+        by.model('component.shell.primary_title.title')
+    );
+};
+exports.shellWorkCreatorNameInputs = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.model('creator.person_name')
+    );
+};
+exports.shellWorkCreatorNameInput = function(i, j) {
+    return exports.shellWorkCreatorNameInputs(i).get(j);
+};
+exports.shellWorkCreatorContributionInputs = function(i) {
+    return exports.componentWorkRows().get(i).all(
+        by.model('creator.contribution')
+    );
+};
+exports.shellWorkCreatorContributionInput = function(i, j) {
+    return exports.shellWorkCreatorContributionInputs(i).get(j);
+};
+exports.deleteComponentWorkButtons = function() {
+    return exports.componentWorkRows().$$('.delete-button');
+};
+exports.deleteComponentWorkButton = function(i) {
+    return exports.deleteComponentWorkButtons().get(i);
+};
+exports.confirmComponentWorkDeletionButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Yes')
+    );
+};
 module.exports.cancelCreatorsButton = function() {
 	return (
 		pages.work.editCreatorsContainer()
@@ -129,6 +352,20 @@ module.exports.saveCreatorsButton = function() {
 		pages.work.editCreatorsContainer()
 			.element(by.cssContainingText("button", "Save"))
 	);
+};
+exports.similarWorksPopUpScrollArea = function() {
+    return pages.base.modalDialog().$('[style*="max-height"]');
+};
+exports.similarWorkTitleBindings = function() {
+    return pages.base.modalDialog().$$('.work-name');
+};
+exports.firstSimilarWorkTitleBinding = function() {
+    return exports.similarWorkTitleBindings().first();
+};
+exports.ignoreSimilarWorksButton = function() {
+    return pages.base.modalFooter().element(
+        by.cssContainingText('button', 'Ignore and continue to enter new work')
+    );
 };
 module.exports.creationDateContainerLabel = function() {
 	return element(by.cssContainingText(".metadata-label", "CREATION"));
@@ -370,7 +607,6 @@ module.exports.saveWorkInclusionOnWebsiteButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
-// Navigation.
 module.exports.goToScopeDelivery = function() {
 	return browser.executeScript (
 		function() {
@@ -378,9 +614,13 @@ module.exports.goToScopeDelivery = function() {
 		}
 	);
 };
-// Data fetching.
 module.exports.workId = function() {
-	return pages.work.workIdBinding().getText();
+    var element = pages.work.workIdBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+exports.validateWorkId = function(value) {
+    expect(exports.workId()).toBe(value);
 };
 module.exports.primaryWorkTitle = function() {
 	var element = pages.work.primaryWorkTitleBinding();
@@ -419,6 +659,11 @@ module.exports.calculateEvenCreatorContributions = function() {
 		return 100 / (count - 1);
 	});
 };
+exports.selectedCompositeWorkType = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    return pages.base.selectedDropdownOption(element);
+};
 module.exports.enteredCreatorContribution = function(i) {
 	var element = pages.work.editCreatorContributionInput(i);
 	pages.base.scrollIntoView(element);
@@ -428,6 +673,16 @@ module.exports.isCreatorsEditorCheckingForDuplicates = function() {
 	return pages.base.isPresentAndDisplayed(
 		pages.work.creatorsEditorCheckingForDuplicatesMessage()
 	);
+};
+exports.selectedComponentWorkName = function(i) {
+    var element = exports.componentWorkNameBinding(i);
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+exports.enteredComponentWorkAllocation = function(i) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    return element.getAttribute('value');
 };
 module.exports.enteredCreationYear = function() {
 	return pages.work.creationYearInput().getAttribute("value");
@@ -609,7 +864,6 @@ module.exports.editFirstCreatorContributionFieldValue = function() {
 		return element(by.cssContainingText(buttonCssSelector, "No"));
 	};
 })();
-// Data input.
 module.exports.enterPrimaryWorkTitle = function(title) {
 	var element = pages.work.editPrimaryWorkTitleField();
 	pages.base.scrollIntoView(element);
@@ -628,11 +882,252 @@ module.exports.enterNewAlternateWorkTitle = function(title) {
 	element.clear();
 	element.sendKeys(title);
 };
+exports.validateCompositeWorkType = function(value) {
+    if(value.toLowerCase() === 'select type') {
+        expect(
+            pph.isElementPresentAndDisplayed(
+               exports.compositeWorkTypeDropdown()
+            )
+        ).toBeFalsy();
+    }
+    else {
+        expect(exports.selectedCompositeWorkType()).toBe(value);
+    }
+};
+exports.validateComponentWorkId = function(i, value) {
+    var element = exports.componentWorkIdLabel(i);
+    pages.base.scrollIntoView(element);
+    expect(element.getText()).toBe(value);
+};
+exports.validateComponentWorkName = function(i, value) {
+    expect(exports.selectedComponentWorkName(i)).toEqual(value);
+};
+exports.validateComponentWorkAllocation = function(i, value) {
+    expect(exports.enteredComponentWorkAllocation(i)).toEqual(
+        pph.toFixed(value, 3)
+    );
+};
+exports.clickShowComponentWorkDetailsButton = function(i) {
+    var element = exports.showComponentWorkDetailsButton(i);
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+exports.validateShellWorkCreatorName = function(i, j, value) {
+    var element = exports.shellWorkCreatorNameLabel(i, j);
+    pages.base.scrollIntoView(element);
+    expect(element.getText()).toContain(value);
+};
+exports.validateShellWorkCreatorContribution = function(i, j, value) {
+    var element = exports.shellWorkCreatorContributionLabel(i, j);
+    pages.base.scrollIntoView(element);
+    expect(pph.parseFloat(element.getText())).toBe(value);
+};
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.work.editCreatorContributionInput(i);
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
+};
+exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'SIMILAR WORKS ARE FOUND'
+    );
+};
+exports.expectSimilarWorksPopUpToHaveScrollbar = function() {
+    expect(pages.base.elementHasVerticalScrollbar(
+        exports.similarWorksPopUpScrollArea()
+    )).toBeTruthy();
+};
+exports.clickCompositeWorkCheckbox = function() {
+    var element = exports.compositeWorkCheckbox();
+    pages.base.scrollIntoView(element);
+    element.click();
+    return element.getAttribute('checked');
+};
+exports.compositeWorkCheckboxState = function() {
+    var element = exports.compositeWorkCheckbox();
+    pages.base.scrollIntoView(element);
+    return element.getAttribute('checked');
+};
+exports.expectDisablingWorkAsCompositePopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'ARE YOU SURE YOU WANT TO DISABLE WORK AS COMPOSITE WORK?'
+    );
+};
+exports.confirmDisablingWorkAsComposite = function() {
+    exports.confirmDisablingWorkAsCompositeButton().click();
+};
+exports.selectCompositeWorkType = function(value) {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    pages.base.selectDropdownOption(element, value);
+};
+exports.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'ARE YOU SURE YOU WANT TO MAKE THIS WORK AS MEDLEY COMPOSITE WORK?'
+    );
+};
+exports.confirmMakingIntoMedley = function() {
+    exports.confirmMakingIntoMedleyButton().click();
+};
+exports.validateRequiredCompositeWorkTypeField = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
+};
+exports.validateDefaultCompositeWorkType = function() {
+    var element = exports.compositeWorkTypeDropdown();
+    pages.base.scrollIntoView(element);
+    expect(pages.base.selectedDropdownOption(element)).toBe('Select type');
+};
+exports.validateDefaultComponentWorkSearchFilter = function(i) {
+    var element = exports.componentWorkSearchFilterDropdown(i);
+    pages.base.scrollIntoView(element);
+    expect(pages.base.selectedDropdownOption(element)).toBe('Title');
+};
+exports.validateRequiredComponentWorkSearchField = function(i) {
+    var element = exports.componentWorkSearchTermsField(i);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
+};
+exports.enterComponentWorkSearchTerms = function(i, value) {
+    var element = exports.componentWorkSearchTermsField(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
+};
+exports.enteredShellWorkTitle = function(i) {
+    var element = exports.shellWorkTitleInput(i);
+    pages.base.scrollIntoView(element);
+    return element.getAttribute('value');
+};
+exports.selectEnterAsNewWorkSuggestion = function() {
+    return exports.enterAsNewWorkSuggestion().click();
+};
+exports.validateEnteredShellWorkTitle = function(i, value) {
+    expect(exports.enteredShellWorkTitle(i)).toBe(value);
+};
+exports.enterShellWorkCreatorSearchTerms = function(i, j, value) {
+    var element = exports.shellWorkCreatorNameInput(i, j);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.enterRandomLetterOnShellWorkCreatorNameField = function(i, j) {
+    return exports.enterShellWorkCreatorSearchTerms(i, j, random.letter());
+};
+exports.enterShellWorkCreatorContribution = function(i, j, value) {
+    var element = exports.shellWorkCreatorContributionInput(i, j);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.expectCreatorSuggestionsToBeDisplayed = function() {
+    browser.wait(
+        ExpectedConditions.visibilityOf($('.typeahead-result')),
+        _tf_config._system_.wait_timeout
+    );
+};
+exports.validateRequiredComponentWorkAllocationField = function(i) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
+};
+exports.enterComponentWorkAllocation = function(i, value) {
+    var element = exports.componentWorkAllocationInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
+};
+exports.selectFirstComponentWorkSuggestion = function() {
+    return $$('.typeahead-result').get(0).then(function(suggestion) {
+        var result = {};
+
+        result.name = suggestion.$('.typeahead-result-text').getText();
+        result.workCode = suggestion.$('.typeahead-result-right').getText();
+
+        suggestion.click();
+
+        return result;
+    });
+};
+exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
+    var element = exports.showComponentWorkDetailsButton(i);
+    expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    pages.base.scrollIntoView(element);
+};
+exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
+    var element = exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage(i);
+    var presentAndDisplayed = pages.base.isPresentAndDisplayed(element);
+    presentAndDisplayed.then(function(presentAndDisplayed) {
+        if(presentAndDisplayed) {
+            pages.base.scrollIntoView(element);
+        }
+        expect(presentAndDisplayed).toBeTruthy();
+    });
+};
+exports.deleteComponentWork = function(i) {
+    var element = exports.deleteComponentWorkButton(i);
+    pages.base.scrollIntoView(element);
+    element.click();
+};
+exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    pages.base.expectModalPopUpToBeDisplayed({ timeout: more.timeout });
+
+    expect(pages.base.modalHeadingText()).toContain(
+        'DELETE COMPONENT & ALLOCATION'
+    );
+};
+exports.confirmComponentWorkDeletion = function() {
+    exports.confirmComponentWorkDeletionButton().click();
+};
+exports.selectRandomCreatorSuggestion = function() {
+    return $$(".typeahead-result").then(function(suggestions) {
+        var randomSuggestion = _.sample(suggestions);
+        var randomSuggestionResultRight;
+        var deferredIpiNumber;
+        var result = {};
+
+        result.name = pph.trim(randomSuggestion.$('.typeahead-result-text').getText());
+
+        deferredIpiNumber = promise.defer();
+        result.ipiNumber = deferredIpiNumber.promise;
+
+        randomSuggestionResultRight = randomSuggestion.$('.typeahead-result-right');
+
+        randomSuggestionResultRight.isPresent().then(function(hasResultRight) {
+            if(!hasResultRight) {
+                deferredIpiNumber.fulfill(null);
+                return;
+            }
+
+            randomSuggestionResultRight.getText().then(function(value) {
+                if(/^\(.*\)$/.test(value)) {
+                    value = value.slice(1, -1);
+                }
+
+                deferredIpiNumber.fulfill(value);
+            })
+        });
+
+        randomSuggestion.click();
+
+        return result;
+    });
 };
 module.exports.enterCreationYear = function(value) {
 	var element = pages.work.creationYearInput();
@@ -684,6 +1179,13 @@ module.exports.enterProductionTitle = function(title, more) {
 		element.sendKeys(title);
 		return title;
 	});
+};
+exports.clickFirstSimilarWorkTitle = function() {
+    exports.firstSimilarWorkTitleBinding().click();
+    pages.base.waitForAjax();
+};
+exports.ignoreSimilarWorksWarning = function() {
+    exports.ignoreSimilarWorksButton().click();
 };
 module.exports.optToIncludeWorkOnWebsite = function(include) {
 	promise.when(include).then (

@@ -3,19 +3,52 @@ var _ = require("lodash");
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-module.exports = pages.base = new ftf.pageObject ({
+exports = module.exports = pages.base = new ftf.pageObject ({
 	locators: {
 		logout_link: { id: "DSP-LOGOUT" }
 	}
 });
-// Locators.
+exports.open = function() {
+    browser.get(_tf_config.urls.app_url);
+    exports.waitForAjax();
+};
+exports.modalHeading = function() {
+    return $('.modal-header h3, .modal-header h4');
+};
+exports.modalHeadingText = function() {
+    return exports.modalHeading().getText();
+};
+exports.modalDialog = function() {
+    return $('.modal-dialog');
+};
+exports.modalFooter = function() {
+    return $('.modal-footer');
+};
+exports.expectModalPopUpToBeDisplayed = function(more) {
+    more = more || {};
+
+    if(more.timeout === undefined) {
+        more.timeout = _tf_config._system_.wait_timeout;
+    }
+
+    browser.wait(
+        ExpectedConditions.visibilityOf(exports.modalHeading()),
+        more.timeout
+    );
+};
+exports.mainSearchBar = function() {
+    return $('#DSP-SEARCH');
+};
 module.exports.dirtyCheckContinueEditingButton = function() {
-	return $(".modal-footer").element(by.cssContainingText("button", "Continue Editing"));
+    return exports.modalFooter().element(
+        by.cssContainingText("button", "Continue Editing")
+    );
 };
 module.exports.dirtyCheckConfirmCancellationButton = function() {
-	return $(".modal-footer").element(by.cssContainingText("button", "CONFIRM CANCELLATION"));
+    return exports.modalFooter().element(
+        by.cssContainingText("button", "CONFIRM CANCELLATION")
+    );
 };
-// Interaction.
 
 module.exports.randomDate=function(start, end) {
 	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -31,6 +64,27 @@ module.exports.isPresentAndDisplayed = function(element) {
 };
 module.exports.isNotPresentOrDisplayed = function(element) {
 	return pph.not(pages.base.isPresentAndDisplayed(element));
+};
+exports.elementHasVerticalScrollbar = function(element) {
+    if(!(element instanceof protractor.WebElement)) {
+        element = element.getWebElement();
+    }
+    return browser.executeScript(function(element) {
+        return element.scrollHeight > $(element).innerHeight();
+    }, element);
+};
+exports.selectDropdownOption = function(element, value, more) {
+    more = more || {};
+    more.dropdownType = more.dropdownType || 'standard';
+    return exports.selectDropdownOption[more.dropdownType](element, value, more);
+};
+exports.selectDropdownOption.standard = function(element, value) {
+    element.click();
+    element.element(by.cssContainingText('option', value)).click();
+};
+exports.selectDropdownOption.tg = function(element, value) {
+    element.click();
+    element.element(by.cssContainingText('.ng-binding', value)).click();
 };
 module.exports.selectRandomDropdownOption = function(element, more) {
 	more = more || {};
@@ -159,6 +213,32 @@ module.exports.selectRandomDropdownOption.tg = function(element, more) {
 		});
 	});
 };
+exports.enterRandomLetterOnField = function(element) {
+    var randomLetter = random.letter();
+
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+    element.sendKeys(randomLetter);
+
+    return randomLetter;
+};
+exports.enterNewRandomLetterOnField = function(element) {
+    pages.base.scrollIntoView(element);
+
+    return element.getAttribute("value").then(function(currentValue) {
+        var randomLetter;
+
+        do {
+            randomLetter = random.letter();
+        } while(currentValue.indexOf(randomLetter) !== -1);
+
+        element.clear();
+        element.sendKeys(randomLetter);
+
+        return randomLetter;
+    });
+};
 module.exports.selectRandomTypeaheadValue = function(element, more) {
 	more = more || {};
 	var deferred = promise.defer();
@@ -242,4 +322,7 @@ module.exports.selectedTgDropdownOption = function(element) {
 			.getText()
 	);
 };
-
+exports.refreshPage = function() {
+    browser.refresh();
+    pages.base.waitForAjax();
+};

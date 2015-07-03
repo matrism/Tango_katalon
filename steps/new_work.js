@@ -1,14 +1,18 @@
 "use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var steps_path = _tf_config._system_.path_to_steps;
-var random = require("../helpers/random");
-var pph = require("../helpers/pph");
-var promise = protractor.promise;
-require(pages_path + "new_work");
-require(steps_path + "base");
-require(steps_path + "work");
-module.exports = steps.new_work = {};
-// Navigation.
+
+var pages_path = _tf_config._system_.path_to_pages,
+    steps_path = _tf_config._system_.path_to_steps,
+    _ = require('lodash'),
+    random = require('../helpers/random'),
+    pph = require('../helpers/pph'),
+    promise = protractor.promise;
+
+steps.new_work = exports;
+
+require(pages_path + 'new_work');
+require(steps_path + 'base');
+require(steps_path + 'work');
+
 module.exports.goToNewWorkPage = function() {
 	it (
 		"Go to New Work page", function() {
@@ -16,7 +20,6 @@ module.exports.goToNewWorkPage = function() {
 		}
 	);
 };
-// Validation.
 module.exports.validateDefaultPrimaryWorkLanguage = function() {
 	it (
 		"Validate default primary work title language", function() {
@@ -158,7 +161,13 @@ module.exports.validateDefaultMusicLibrary = function() {
 		});
 	});
 };
-// Data input.
+module.exports.enterPrimaryWorkTitle = function(value) {
+    it('Enter primary work title', function() {
+        pages.new_work.enterPrimaryWorkTitle(value).then(function() {
+            hash.subjectWorkData.primaryTitle = value;
+        });
+    });
+};
 module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
 	it (
@@ -169,6 +178,16 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 		}
 	);
 	return deferred.promise;
+};
+module.exports.enterAlternateWorkTitle = function(i, value) {
+    it('Enter alternate work title #' + (i + 1), function() {
+        pages.new_work.enterAlternateWorkTitle(i, value).then(function() {
+            var data = hash.subjectWorkData;
+            var alternateTitles = data.alternateTitles = data.alternateTitles || [];
+
+            alternateTitles[i] = value;
+        });
+    });
 };
 module.exports.enterRandomAlternateWorkTitle = function(i) {
 	var deferred = promise.defer();
@@ -181,18 +200,170 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	);
 	return deferred.promise;
 };
-module.exports.selectRandomCreator = function(i) {
-	var deferred = promise.defer();
-	describe (
-		"Select random creator #" + (i + 1), function() {
-			deferred.fulfill (
-				pages.base.selectRandomTypeaheadValue (
-					pages.new_work.creatorNameInput(i)
-				)
-			);
-		}
-	);
-	return deferred.promise;
+exports.validateDefaultCompositeWorkCheckboxState = function() {
+    it('Validate default composite work checkbox state', function() {
+        pages.new_work.validateDefaultCompositeWorkCheckboxState();
+    });
+};
+exports.clickCompositeWorkCheckbox = function() {
+    it('Click composite work checkbox', function() {
+        pages.new_work.clickCompositeWorkCheckbox();
+    });
+};
+exports.validateRequiredCompositeWorkTypeField = function() {
+    it('Validate required composite work type field', function() {
+        pages.new_work.validateRequiredCompositeWorkTypeField();
+    });
+};
+exports.validateDefaultCompositeWorkType = function() {
+    it('Validate default composite work type', function() {
+        pages.new_work.validateDefaultCompositeWorkType();
+    });
+};
+exports.selectCompositeWorkType = function(value, data, key) {
+    key = key || 'compositeWorkType';
+    data = data || hash.subjectWorkData || {};
+
+    it('Select composite work type', function() {
+        pages.new_work.selectCompositeWorkType(value);
+        data[key] = value;
+    });
+};
+exports.validateDefaultComponentWorkSearchFilter = function(i) {
+    it('Validate default component work search filter #' + (i + 1), function() {
+        pages.new_work.validateDefaultComponentWorkSearchFilter(i);
+    });
+};
+exports.validateRequiredComponentWorkSearchField = function(i) {
+    it('Validate required component work search field #' + (i + 1), function() {
+        pages.new_work.validateRequiredComponentWorkSearchField(i);
+    });
+};
+exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
+    it('Enter search terms on component work search field #' + (i + 1), function() {
+        pages.new_work.enterComponentWorkSearchTerms(i, searchTerms);
+    });
+
+    it('Wait for component work suggestions to load', function() {
+        pages.base.waitForAjax();
+    });
+
+    it('Select a random work', function() {
+        pages.new_work.selectFirstComponentWorkSuggestion().then(function(selected) {
+            var component;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.name = selected.name;
+            component.workCode = selected.workCode;
+        });
+    });
+};
+exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
+    it('Expect "Show Details" button to appear next to component work title', function() {
+        pages.new_work.expectShowComponentWorkDetailsButtonToAppear(i);
+    });
+};
+exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
+    it('Expect "Same work can\'t be added as a component multiple times" message to appear', function() {
+        pages.new_work.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(i);
+    });
+};
+exports.deleteComponentWork = function(i, data, key) {
+    it('Delete component work #' + (i + 1), function() {
+        var components;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        components = data[key] = data[key] || [];
+
+        pages.new_work.deleteComponentWork(i);
+        components.splice(i, 1);
+    });
+};
+exports.confirmComponentWorkDeletion = function() {
+    it('Confirm component work deletion', function() {
+        pages.new_work.confirmComponentWorkDeletion();
+    });
+};
+exports.selectRandomCreator = function(i) {
+    it('Type a random letter on creator name field #' + (i + 1), function() {
+        pages.new_work.enterRandomLetterOnCreatorNameField(i);
+    });
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        var data = hash.subjectWorkData;
+        var creator;
+
+        data.creators = data.creators || [];
+        data.creators[i] = data.creators[i] || {};
+
+        creator = data.creators[i];
+
+        pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
+           creator.name = selected.name;
+           creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
+    var person;
+
+    it (
+        'Type IPI number from person slot #' + (slotIndex + 1) +
+        ' on creator search field #' + (creatorRow + 1), function() {
+            person = _.merge({}, hash.personSlots[slotIndex]);
+            pages.new_work.enterCreatorSearchTerms(creatorRow, person.ipiNumber);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select first search result', function() {
+        pages.new_work.selectFirstCreatorSuggestion().then(function() {
+            var data = hash.subjectWorkData;
+
+            data.creators = data.creators || [];
+            data.creators[creatorRow] = person;
+        });
+    });
+};
+exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
+    var deferred = promise.defer();
+    var creator;
+
+    data = data || hash.subjectWorkData || {};
+    key = key || 'creators';
+    data[key] = data[key] || [];
+    creator = data[key][j] = data[key][j] || {};
+
+    it(
+        'Enter previously selected creator #' + (j + 1) +
+        ' IPI number in search field #' + (i + 1), function() {
+            expect(creator.ipiNumber).toBeTruthy();
+            pages.new_work.enterCreatorSearchTerms(i, creator.ipiNumber);
+        }
+    );
+
+    it('Expect creator suggestions to be displayed', function() {
+        pages.new_work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select first creator suggestion', function() {
+        pages.new_work.selectFirstCreatorSuggestion();
+    });
+
+    return deferred.promise;
 };
 module.exports.enterMaximumCreatorContribution = function(i) {
 	it (
@@ -214,6 +385,194 @@ module.exports.enterCreatorContribution = function(i, value) {
 			pages.new_work.enterCreatorContribution(i, value);
 		}
 	);
+};
+exports.validateRequiredComponentWorkAllocationField = function(i) {
+    it('Validate required component work allocation field #' + (i + 1), function() {
+        pages.new_work.validateRequiredComponentWorkAllocationField(i);
+    });
+};
+exports.enterComponentWorkAllocation = function(i, value, data, key) {
+    it('Enter allocation for component work #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        pages.new_work.enterComponentWorkAllocation(i, value);
+        component.allocation = value;
+    });
+};
+exports.enterMediumComponentWorkAllocation = function(i, data, key) {
+    it('Enter 50% allocation for component work #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        component.allocation = 50;
+        pages.new_work.enterComponentWorkAllocation(i, component.allocation);
+    });
+};
+exports.enterNewShellWork = function(i, title, data, key) {
+    it('Enter new shell work title as component work #' + (i + 1), function() {
+        pages.new_work.enterComponentWorkSearchTerms(i, title);
+    });
+
+    it('Wait for work suggestions to load', function() {
+        pages.base.waitForAjax();
+    });
+
+    it('Select "Enter as a new work" suggestion', function() {
+        pages.new_work.selectEnterAsNewWorkSuggestion().then(function() {
+            var component;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.name = title;
+            component.workCode = 'WW 000000000 00';
+            component.shellWork = true;
+        });
+    });
+};
+exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
+    it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
+        var components = hash.subjectWorkData.components || [];
+        var shellWork = components[i] || {};
+
+        pages.new_work.validateEnteredShellWorkTitle(i, shellWork.name);
+    });
+};
+exports.validateDefaultShellWorkTitleLanguage = function(i) {
+    it('Validate default shell work title language #' + (i + 1), function() {
+        pages.new_work.validateSelectedShellWorkTitleLanguage(i, 'English');
+    });
+};
+exports.validateDefaultShellWorkCreatorRole = function(i, j) {
+    it(
+        'Validate default creator role #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.new_work.validateSelectedShellWorkCreatorRole(i, j, 'CA');
+        }
+    );
+};
+exports.validateRequiredShellWorkCreatorNameField = function(i, j) {
+    it(
+        'Validate required creator name field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.new_work.validateRequiredShellWorkCreatorNameField(i, j);
+        }
+    );
+};
+exports.selectRandomShellWorkCreator = function(i, j, data, key) {
+    it(
+        'Type a random letter on creator name field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.new_work.enterRandomLetterOnShellWorkCreatorNameField(i, j);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
+            var component;
+            var creator;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, key) {
+    var previousComponent;
+    var previousCreator;
+
+    it(
+        'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            previousComponent = data[key][k] || {};
+
+            previousComponent.creators = previousComponent.creators || [];
+            previousCreator = previousComponent.creators[l] || {};
+
+            pages.new_work.enterShellWorkCreatorSearchTerms(i, j, previousCreator.ipiNumber);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select first creator suggestion', function() {
+        pages.new_work.selectFirstCreatorSuggestion().then(function(selected) {
+            var component;
+            var creator;
+
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.validateRequiredShellWorkCreatorContributionField = function(i, j) {
+    it(
+        'Validate required creator contribution field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.new_work.validateRequiredShellWorkCreatorContributionField(i, j);
+        }
+    );
+};
+exports.enterShellWorkCreatorContribution = function(i, j, value, data, key) {
+    it(
+        'Enter creator contribution #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.new_work.enterShellWorkCreatorContribution(i, j, value).then(function() {
+                var component;
+                var creator;
+
+                data = data || hash.subjectWorkData || {};
+                key = key || 'components';
+
+                data[key] = data[key] || [];
+                component = data[key][i] = data[key][i] || {};
+
+                component.creators = component.creators || [];
+                creator = component.creators[j] = component.creators[j] || {};
+
+                creator.contribution = value;
+                creator.contributionToCompositeWork = (value / 100) * component.allocation;
+            });
+        }
+    );
 };
 module.exports.selectRandomMusicalDistributionCategory = function() {
 	var deferred = promise.defer();
@@ -445,131 +804,136 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 		}
 	);
 };
-// Flow.
+exports.saveWork = function() {
+     steps.base.clickElement("Save Work", pages.new_work.saveWorkButton());
+};
+exports.validateSaveWorkRedirection = function() {
+     steps.base.validateRedirection("created work page", "/metadata");
+};
 module.exports.createBasicWork = function(data, more) {
-	more = more || {};
+    more = more || {};
 
-	more.skip = more.skip || {};
-	//more.skip.alternateWorkTitles = true;
-	//more.skip.assetType = true;
-	//more.skip.workOrigin = true;
-	//more.skip.creationDate = true;
-	//more.skip.deliveryDate = true;
+    more.skip = more.skip || {};
+    //more.skip.alternateWorkTitles = true;
+    //more.skip.assetType = true;
+    //more.skip.workOrigin = true;
+    //more.skip.creationDate = true;
+    //more.skip.deliveryDate = true;
 
-	describe (
-		"Create basic work", function() {
-			steps.new_work.goToNewWorkPage();
+    describe (
+        "Create basic work", function() {
+            steps.new_work.goToNewWorkPage();
 
-			steps.new_work.validateDefaultPrimaryWorkLanguage();
-			data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
+            steps.new_work.validateDefaultPrimaryWorkLanguage();
+            data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
 
-			if(!more.skip.alternateWorkTitles) {
-				data.alternateWorkTitles = _.times (
-					2, function(i) {
-						steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
-						return steps.new_work.enterRandomAlternateWorkTitle(i);
-					}
-				);
-			}
+            if(!more.skip.alternateWorkTitles) {
+                data.alternateWorkTitles = _.times (
+                    2, function(i) {
+                        steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
+                        return steps.new_work.enterRandomAlternateWorkTitle(i);
+                    }
+                );
+            }
 
-			data.creators = (function() {
-				var howMany = 2;
-				var creators = _.times (
-					howMany, function(i) {
-						var creator = {};
-						var firstOne = (i === 0);
-						var lastOne = (i === howMany - 1);
-						steps.new_work.validateDefaultCreatorRole(i);
-						creator.name = steps.new_work.selectRandomCreator(i);
-						steps.new_work.ensureContributionRequiredMessageIsDisplayed();
-						steps.new_work.validateCreatorContributionInputMask(i);
-						if(firstOne) {
-							steps.new_work.enterMediumCreatorContribution(i);
-							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
-						}
-						if(howMany > 1 && lastOne) {
-							steps.new_work.enterMaximumCreatorContribution(i);
-							steps.new_work.ensureTotalContributionTooHighMessageIsDisplayed();
-						}
-						creator.contribution = 100 / howMany;
-						steps.new_work.enterCreatorContribution(i, creator.contribution);
-						if(howMany > 1 && !firstOne && !lastOne) {
-							steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
-						}
-						return creator;
-					}
-				);
-				steps.new_work.validateTotalContribution();
-				return creators;
-			})();
+            data.creators = (function() {
+                var howMany = 2;
+                var creators = _.times (
+                    howMany, function(i) {
+                        var creator = {};
+                        var firstOne = (i === 0);
+                        var lastOne = (i === howMany - 1);
+                        steps.new_work.validateDefaultCreatorRole(i);
+                        creator.name = steps.new_work.selectRandomCreator(i);
+                        steps.new_work.ensureContributionRequiredMessageIsDisplayed();
+                        steps.new_work.validateCreatorContributionInputMask(i);
+                        if(firstOne) {
+                            steps.new_work.enterMediumCreatorContribution(i);
+                            steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+                        }
+                        if(howMany > 1 && lastOne) {
+                            steps.new_work.enterMaximumCreatorContribution(i);
+                            steps.new_work.ensureTotalContributionTooHighMessageIsDisplayed();
+                        }
+                        creator.contribution = 100 / howMany;
+                        steps.new_work.enterCreatorContribution(i, creator.contribution);
+                        if(howMany > 1 && !firstOne && !lastOne) {
+                            steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+                        }
+                        return creator;
+                    }
+                );
+                steps.new_work.validateTotalContribution();
+                return creators;
+            })();
 
-			if(!more.skip.assetType) {
-				steps.new_work.validateDefaultMusicalDistributionCategory();
-				data.musicalDistributionCategory = (
-					steps.new_work.selectRandomMusicalDistributionCategory()
-				);
+            if(!more.skip.assetType) {
+                steps.new_work.validateDefaultMusicalDistributionCategory();
+                data.musicalDistributionCategory = (
+                    steps.new_work.selectRandomMusicalDistributionCategory()
+                );
 
-				steps.new_work.validateDefaultTextMusicRelationship();
-				data.textMusicRelationship = steps.new_work.selectRandomTextMusicRelationship();
+                steps.new_work.validateDefaultTextMusicRelationship();
+                data.textMusicRelationship = steps.new_work.selectRandomTextMusicRelationship();
 
-				steps.new_work.validateDefaultExcerptType();
-				data.excerptType = steps.new_work.selectRandomExcerptType();
+                steps.new_work.validateDefaultExcerptType();
+                data.excerptType = steps.new_work.selectRandomExcerptType();
 
-				steps.new_work.validateDefaultVersionType();
-				data.versionType = steps.new_work.selectRandomVersionType();
+                steps.new_work.validateDefaultVersionType();
+                data.versionType = steps.new_work.selectRandomVersionType();
 
-				steps.new_work.validateDefaultLyricAdaptation();
-				data.lyricAdaptation = steps.new_work.selectRandomLyricAdaptation();
+                steps.new_work.validateDefaultLyricAdaptation();
+                data.lyricAdaptation = steps.new_work.selectRandomLyricAdaptation();
 
-				steps.new_work.validateDefaultMusicArrangement();
-				data.musicArrangement = steps.new_work.selectRandomMusicArrangement();
-			}
+                steps.new_work.validateDefaultMusicArrangement();
+                data.musicArrangement = steps.new_work.selectRandomMusicArrangement();
+            }
 
-			if(!more.skip.workOrigin) {
-				steps.new_work.validateDefaultIntendedPurpose();
-				data.intendedPurpose = steps.new_work.selectRandomIntendedPurpose();
+            if(!more.skip.workOrigin) {
+                steps.new_work.validateDefaultIntendedPurpose();
+                data.intendedPurpose = steps.new_work.selectRandomIntendedPurpose();
 
-				data.productionTitle = steps.new_work.enterRandomProductionTitle();
+                data.productionTitle = steps.new_work.enterRandomProductionTitle();
 
-				steps.new_work.validateDefaultBltvr();
-				data.bltvr = steps.new_work.selectRandomBltvr();
+                steps.new_work.validateDefaultBltvr();
+                data.bltvr = steps.new_work.selectRandomBltvr();
 
-				steps.new_work.validateDefaultMusicLibrary();
-				data.musicLibrary = steps.new_work.selectRandomMusicLibrary();
-			}
+                steps.new_work.validateDefaultMusicLibrary();
+                data.musicLibrary = steps.new_work.selectRandomMusicLibrary();
+            }
 
-			if(!more.skip.creationDate) {
-				steps.new_work.validateDefaultCreationYear();
-				steps.new_work.validateDefaultCreationMonth();
-				steps.new_work.validateDefaultCreationDay();
+            if(!more.skip.creationDate) {
+                steps.new_work.validateDefaultCreationYear();
+                steps.new_work.validateDefaultCreationMonth();
+                steps.new_work.validateDefaultCreationDay();
 
-				data.creationYear = steps.new_work.enterTwoYearsAgoAsCreationYear();
-				data.creationMonth = steps.new_work.enterThisMonthAsCreationMonth();
-				data.creationDay = steps.new_work.enterTodayAsCreationDay();
-			}
+                data.creationYear = steps.new_work.enterTwoYearsAgoAsCreationYear();
+                data.creationMonth = steps.new_work.enterThisMonthAsCreationMonth();
+                data.creationDay = steps.new_work.enterTodayAsCreationDay();
+            }
 
-			if(!more.skip.deliveryDate) {
-				steps.new_work.validateDefaultDeliveryYear();
-				steps.new_work.validateDefaultDeliveryMonth();
-				steps.new_work.validateDefaultDeliveryDay();
+            if(!more.skip.deliveryDate) {
+                steps.new_work.validateDefaultDeliveryYear();
+                steps.new_work.validateDefaultDeliveryMonth();
+                steps.new_work.validateDefaultDeliveryDay();
 
-				data.deliveryYear = steps.new_work.enterLastYearAsDeliveryYear();
-				data.deliveryMonth = steps.new_work.enterThisMonthAsDeliveryMonth();
-				data.deliveryDay = steps.new_work.enterTodayAsDeliveryDay();
-			}
+                data.deliveryYear = steps.new_work.enterLastYearAsDeliveryYear();
+                data.deliveryMonth = steps.new_work.enterThisMonthAsDeliveryMonth();
+                data.deliveryDay = steps.new_work.enterTodayAsDeliveryDay();
+            }
 
-			if(!more.skip.inclusionOnWebsite) {
-				data.includeOnWebsite = (function() {
-					var include = _.sample([true, false]);
-					steps.new_work.optToIncludeWorkOnWebsite(include);
-					return include;
-				})();
-			}
+            if(!more.skip.inclusionOnWebsite) {
+                data.includeOnWebsite = (function() {
+                    var include = _.sample([true, false]);
+                    steps.new_work.optToIncludeWorkOnWebsite(include);
+                    return include;
+                })();
+            }
 
-			steps.base.clickElement("Save Work", pages.new_work.saveWorkButton());
-			steps.base.validateRedirection("created work page", "/metadata");
+            steps.new_work.saveWork();
+            steps.new_work.validateSaveWorkRedirection();
 
-			data.workId = steps.work.findCurrentlyOpenWorkId();
-		}
-	);
+            data.workId = steps.work.findCurrentlyOpenWorkId();
+        }
+    );
 };

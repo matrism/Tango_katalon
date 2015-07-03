@@ -11,6 +11,21 @@ pph.arrayMethod = function(methodName, array, callback) {
 			return values[methodName](callback);
 		});
 };
+pph.arraySome = function(array, predicate) {
+    return promise.when(array).then(function(array) {
+        if(array.length === 0) {
+            return true;
+        }
+        return promise.when(array[0]).then(function(value) {
+            if(!predicate(value) && array.length === 1) {
+                return false;
+            }
+            else {
+                return pph.arraySome(array.slice(1), predicate);
+            }
+        });
+    });
+};
 pph.not = function(value) {
 	return promise.when(value).then(function(value) {
 		return !value;
@@ -68,9 +83,19 @@ pph.allInArray = function(array, values) {
 		}
 	);
 };
+pph.trim = function(value) {
+    return promise.when(value).then(function(value) {
+        return value.trim();
+    });
+};
 pph.toString = function(value) {
 	return promise.when(value).then(function(value) {
 		return value.toString();
+	});
+};
+pph.toFixed = function(value, precision) {
+	return promise.when(value).then(function(value) {
+		return value.toFixed(precision);
 	});
 };
 pph.parseInt = function(value) {
@@ -82,6 +107,17 @@ pph.parseFloat = function(value) {
 	return promise.when(value).then(function(value) {
 		return parseFloat(value);
 	});
+};
+pph.getAllText = function(element) {
+    if(element instanceof protractor.ElementFinder) {
+        element = element.getWebElement();
+    }
+    return browser.executeScript(
+        function(element) {
+            return $(element).text().trim();
+        },
+        element
+    );
 };
 pph.matchesCssSelector = function(element, selector) {
 	if(element instanceof protractor.ElementFinder) {

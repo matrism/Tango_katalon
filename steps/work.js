@@ -6,14 +6,15 @@ var pph = require("../helpers/pph");
 var random = require("../helpers/random");
 var promise = protractor.promise;
 require(pages_path + "work");
-module.exports = steps.work = {};
-// Navigation.
-module.exports.goToWorkPage = function(workId) {
-	it (
-		"Go to work page", function() {
-			pages.work.open(workId);
-		}
-	);
+steps.work = exports;
+module.exports.goToWorkPage = function(data, key) {
+    var workId;
+    data = data || hash.subjectWorkData || {};
+    key = key || 'workId';
+    workId = data[key];
+    it('Go to work page', function() {
+        pages.work.open(workId);
+    });
 };
 module.exports.goToScopeDelivery = function() {
 	it (
@@ -22,15 +23,26 @@ module.exports.goToScopeDelivery = function() {
 		}
 	);
 };
-// Data fetching.
 module.exports.findCurrentlyOpenWorkId = function() {
-	var deferred = promise.defer();
-	it (
-		"Find currently open work ID", function() {
-			deferred.fulfill(pages.work.workId());
-		}
-	);
-	return deferred.promise;
+    var deferred = promise.defer();
+
+    it("Find currently open work ID", function() {
+        var workId = pages.work.workId();
+
+        workId.then(function(workId) {
+            hash.subjectWorkData.id = workId;
+            hash.subjectWorkData.songCode = workId.slice(3, -3);
+        });
+
+        deferred.fulfill(workId);
+    });
+
+    return deferred.promise;
+};
+exports.validateWorkId = function() {
+    it('Validate work ID', function() {
+        pages.work.validateWorkId(hash.subjectWorkData.id);
+    });
 };
 module.exports.workInclusionOnWebsite = function() {
 	var deferred = promise.defer();
@@ -41,7 +53,6 @@ module.exports.workInclusionOnWebsite = function() {
 	);
 	return deferred.promise;
 };
-// Interaction.
 module.exports.hoverPrimaryWorkTitleHeading = function() {
 	steps.base.hoverElement (
 		"primary work title heading", pages.work.primaryWorkTitleHeading()
@@ -51,6 +62,11 @@ module.exports.editWorkTitles = function() {
 	steps.base.clickElement (
 		"edit work titles button", pages.work.editWorkTitlesButton()
 	);
+};
+module.exports.enterPrimaryWorkTitle = function(value) {
+    it("Enter primary work title", function() {
+        pages.work.enterPrimaryWorkTitle(value);
+    });
 };
 module.exports.enterRandomPrimaryWorkTitle = function() {
 	var deferred = promise.defer();
@@ -120,6 +136,67 @@ module.exports.editCreators = function() {
 		pages.work.editCreatorsButton()
 	);
 };
+exports.clickCompositeWorkCheckbox = function(data, key) {
+    it('Click composite work checkbox', function() {
+        pages.work.clickCompositeWorkCheckbox().then(function(value) {
+            data = data || hash.subjectWorkData || {};
+            key = key || 'isCompositeWork';
+
+            data[key] = value;
+        });
+    });
+};
+exports.expectDisablingWorkAsCompositePopUpToBeDisplayed = function() {
+    it('Expect disabling work as a composite work pop-up to be displayed', function() {
+        pages.work.expectDisablingWorkAsCompositePopUpToBeDisplayed();
+    });
+};
+exports.confirmDisablingWorkAsComposite = function() {
+    it('Confirm disabling work as a composite work', function() {
+        pages.work.confirmDisablingWorkAsComposite();
+    });
+};
+exports.validateCompositeWorkCheckbox = function(data, key) {
+    it('Validate composite work checkbox', function() {
+        data = data || hash.subjectWorkData || {};
+        key = key || 'isCompositeWork';
+
+        expect(pages.work.compositeWorkCheckboxState()).toBe(data[key]);
+    });
+};
+exports.validateRequiredCompositeWorkTypeField = function() {
+    it('Validate required composite work type field', function() {
+        pages.work.validateRequiredCompositeWorkTypeField();
+    });
+};
+exports.validateDefaultCompositeWorkType = function() {
+    it('Validate default composite work type', function() {
+        pages.work.validateDefaultCompositeWorkType();
+    });
+};
+exports.selectCompositeWorkType = function(value, data, key) {
+    key = key || 'compositeWorkType';
+    data = data || hash.subjectWorkData || {};
+
+    it('Select composite work type', function() {
+        pages.work.selectCompositeWorkType(value);
+        data[key] = value;
+    });
+};
+exports.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed = function() {
+    it('Expect making into Medley confirmation pop-up to be displayed', function() {
+        pages.work.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed();
+    });
+};
+exports.confirmMakingIntoMedley = function(data, key) {
+    it('Confirm making work into a Medley', function() {
+        pages.work.confirmMakingIntoMedley();
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'creators';
+        data[key] = [];
+    });
+};
 module.exports.calculateEvenCreatorContributions = function() {
 	var deferred = promise.defer();
 	it("Calculate even creator contributions", function() {
@@ -137,10 +214,31 @@ module.exports.selectDifferentRandomCreator = function(i) {
 	});
 	return deferred.promise;
 };
-module.exports.enterCreatorContribution = function(i, contribution) {
-	it("Enter creator contribution #" + (i + 1), function() {
-		pages.work.enterCreatorContribution(i, contribution);
-	});
+exports.enterMediumCreatorContribution = function(i, contribution, data, key) {
+    it('Enter medium creator contribution #' + (i + 1), function() {
+        var creator;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'creators';
+        data[key] = data[key] || [];
+        creator = data[key][i] = data[key][i] || {};
+
+        creator.contribution = 50;
+        pages.work.enterCreatorContribution(i, creator.contribution);
+    });
+};
+exports.enterCreatorContribution = function(i, contribution, data, key) {
+    it("Enter creator contribution #" + (i + 1), function() {
+        var creator;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'creators';
+        data[key] = data[key] || [];
+        creator = data[key][i] = data[key][i] || {};
+
+        pages.work.enterCreatorContribution(i, contribution);
+        creator.contribution = contribution;
+    });
 };
 module.exports.expectFirstCreatorContributionFieldValueToBe = function(value) {
 	it("Validate creator contribution #1", function() {
@@ -167,6 +265,329 @@ module.exports.waitCreatorsEditorCheckForDuplicates = function() {
 			_tf_config._system_.wait_timeout
 		);
 	});
+};
+exports.deleteComponentWork = function(i, data, key) {
+    it('Delete component work #' + (i + 1), function() {
+        var components;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        components = data[key] = data[key] || [];
+
+        pages.work.deleteComponentWork(i);
+        components.splice(i, 1);
+    });
+};
+exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function() {
+    it('Expect component work deletion confirmation pop-up to be displayed', function() {
+        pages.work.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed();
+    });
+};
+exports.confirmComponentWorkDeletion = function() {
+    it('Confirm component work deletion', function() {
+        pages.work.confirmComponentWorkDeletion();
+    });
+};
+exports.validateDefaultComponentWorkSearchFilter = function(i) {
+    it('Validate default component work search filter', function() {
+        pages.work.validateDefaultComponentWorkSearchFilter(i);
+    });
+};
+exports.validateRequiredComponentWorkSearchField = function(i) {
+    it('Validate required component work search field', function() {
+        pages.work.validateRequiredComponentWorkSearchField(i);
+    });
+};
+exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
+    it('Enter search terms on component work search field #' + (i + 1), function() {
+        pages.work.enterComponentWorkSearchTerms(i, value);
+    });
+
+    it('Wait for component work suggestions to load', function() {
+        pages.base.waitForAjax();
+    });
+
+    it('Select a random work', function() {
+        pages.work.selectFirstComponentWorkSuggestion().then(function(selected) {
+            var component;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.name = selected.name;
+            component.workCode = selected.workCode;
+        });
+    });
+};
+exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
+    it('Expect "Show Details" button to appear next to component work title', function() {
+        pages.work.expectShowComponentWorkDetailsButtonToAppear(i);
+    });
+};
+exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
+    it('Expect "Same work can\'t be added as a component multiple times" message to appear', function() {
+        pages.work.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(i);
+    });
+};
+exports.validateRequiredComponentWorkAllocationField = function(i) {
+    it('Validate required component work allocation field', function() {
+        pages.work.validateRequiredComponentWorkAllocationField(i);
+    });
+};
+exports.enterComponentWorkAllocation = function(i, value, data, key) {
+    it('Enter component work allocation #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        pages.work.enterComponentWorkAllocation(i, value);
+        component.allocation = value;
+    });
+};
+exports.enterMediumComponentWorkAllocation = function(i, data, key) {
+    it('Enter component work allocation #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        component.allocation = 50;
+        pages.work.enterComponentWorkAllocation(i, component.allocation);
+    });
+};
+exports.enterNewShellWork = function(i, value) {
+    it('Enter new shell work title as component work #' + (i + 1), function() {
+        pages.work.enterComponentWorkSearchTerms(i, value);
+    });
+
+    it('Wait for work suggestions to load', function() {
+        pages.base.waitForAjax();
+    });
+
+    it('Select "Enter as a new work" suggestion', function() {
+        pages.work.selectEnterAsNewWorkSuggestion().then(function() {
+            var data;
+            var components;
+            var component;
+
+            data = hash.subjectWorkData;
+
+            components = data.components = data.components || [];
+            component = components[i] = components[i] || {};
+
+            component.name = value;
+            component.workCode = 'WW 000000000 00';
+            component.shellWork = true;
+        });
+    });
+};
+exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
+    it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
+        var components = hash.subjectWorkData.components || [];
+        var shellWork = components[i] || {};
+
+        pages.work.validateEnteredShellWorkTitle(i, shellWork.name);
+    });
+};
+exports.selectRandomShellWorkCreator = function(i, j) {
+    it(
+        'Type a random letter on creator name field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.work.enterRandomLetterOnShellWorkCreatorNameField(i, j);
+        }
+    );
+
+    it('Expect creator suggestions to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        pages.work.selectRandomCreatorSuggestion().then(function(selected) {
+            var data;
+            var components;
+            var component;
+            var creators;
+            var creator;
+
+            data = hash.subjectWorkData;
+
+            components = data.components = data.components || [];
+            component = components[i] = components[i] || {};
+
+            creators = component.creators = component.creators || [];
+            creator = creators[j] = creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.enterShellWorkCreatorContribution = function(i, j, value) {
+    it(
+        'Enter creator contribution #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            pages.work.enterShellWorkCreatorContribution(i, j, value).then(function() {
+                var data;
+                var components;
+                var component;
+                var creators;
+                var creator;
+
+                data = hash.subjectWorkData;
+
+                components = data.components = data.components || [];
+                component = components[i] = components[i] || {};
+
+                creators = component.creators = component.creators || [];
+                creator = creators[j] = creators[j] || {};
+
+                creator.contribution = value;
+                creator.contributionToCompositeWork = (value / 100) * component.allocation;
+            });
+        }
+    );
+};
+exports.validateDefaultWorkSearchFilterTag = function() {
+	var value = 'WORK ID';
+
+	it('Validate default first work search tag filter (' + value + ')', function() {
+		pages.work.expectSelectedWorkSearchFilterTagToBe(0, value);
+	});
+};
+exports.selectWorkSearchFilterTag = function(i, value) {
+    it('Select "' + value + '" work search filter tag #' + (i + 1), function() {
+        pages.work.selectWorkSearchFilterTag(i, value);
+    });
+};
+exports.enterWorkSearchTerms = function(value) {
+    it('Search for work (' + value + ')', function() {
+        pages.work.enterWorkSearchTerms(value);
+    });
+};
+exports.searchForWorkUsingPreviouslyCreatedWorkId = function() {
+    it('Search for work using previously created work ID', function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.id);
+    });
+};
+exports.searchForWorkUsingPreviouslyCreatedSongCode = function() {
+    it('Search for work using previously created song code', function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode);
+    });
+};
+exports.searchForWorkUsingPreviouslyCreatedSongCodeWithNoLeadingZeroes = function() {
+    it('Search for work using previously created song code with no leading zeroes', function() {
+        pages.work.enterWorkSearchTerms(
+			hash.subjectWorkData.songCode.toString().replace(/^0*/, '')
+		);
+    });
+};
+exports.searchForWorkUsingPreviouslyCreatedSongCodeWithLeadingZeroes = function() {
+    it('Search for work using previously created song code with leading zeroes', function() {
+        pages.work.enterWorkSearchTerms('0000' + hash.subjectWorkData.songCode);
+    });
+};
+exports.searchForWorkUsingPreviouslyCreatedSongCodeWithTrailingZeroes = function() {
+    it('Search for work using previously created song code trailing zeroes', function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode + '0000');
+    });
+};
+exports.searchForWorkUsingPreviouslyEnteredPrimaryTitle = function() {
+    it('Search for work using previously entered primary work title', function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.primaryTitle);
+    });
+};
+exports.searchForWorkUsingPreviouslyEnteredAlternateTitle = function(i) {
+    it('Search for work using previously entered alternate work title #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.alternateTitles[i]);
+    });
+};
+exports.searchForWorkUsingPreviouslySelectedCreatorName = function(i) {
+    it('Search for work using previously selected creator name #' + (i + 1), function() {
+        pages.work.enterCreatorNameAsWorkSearchTerms(hash.subjectWorkData.creators[i].name);
+    });
+};
+exports.searchForWorkUsingPreviouslySelectedCreatorSuisaIpiNumber = function(i) {
+    it('Search for work using previously selected creator SUISA IPI number #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].suisaIpiNumber);
+    });
+};
+exports.searchForWorkUsingPreviouslySelectedCreatorInternalIpiNumber = function(i) {
+    it('Search for work using previously selected creator internal IPI number #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].internalIpiNumber);
+    });
+};
+exports.searchForWorkUsingPreviouslySelectedCreatorIpiNumber = function(i) {
+    it('Search for work using previously selected creator IPI number #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].ipiNumber);
+    });
+};
+exports.expectWorkSearchMatchCountToBe = function(value) {
+    it('Expect work search match count to be ' + value, function() {
+        pages.work.expectWorkSearchMatchCountToBe(value);
+    });
+};
+exports.expectWorkSearchMatchCountNotToBe = function(value) {
+    it('Expect work search match count not to be ' + value, function() {
+        pages.work.expectWorkSearchMatchCountNotToBe(value);
+    });
+};
+exports.expectWorkSearchMatchTitleToBe = function(i, value) {
+    it('Expect work search match #' + (i + 1) + ' title to be "' + value + '"', function() {
+        pages.work.expectWorkSearchMatchTitleToBe(i, value);
+    });
+};
+exports.expectWorkSearchMatchAlternateTitleToBe = function(i, value) {
+    it('Expect work search match #' + (i + 1) + ' alternate title to be "' + value + '"', function() {
+        pages.work.expectWorkSearchMatchAlternateTitleToBe(i, value);
+    });
+};
+exports.expectWorkSearchMatchCreatorListToContain = function(i, value) {
+    it(
+        'Expect work search match #' + (i + 1) +
+        ' creator list to contain "' + value + '"', function() {
+            pages.work.expectWorkSearchMatchCreatorListToContain(i, value);
+        }
+    );
+};
+exports.addAnotherWorkSearchTerm = function() {
+    it('Add another work search term', function() {
+        pages.work.addAnotherWorkSearchTerm();
+    });
+};
+exports.removeWorkSearchTerm = function(i) {
+    it('Remove work search term #' + (i + 1), function() {
+        pages.work.removeWorkSearchTerm(i);
+    });
+};
+exports.clickWorkSearchMatch = function(i) {
+    it('Click work search match #' + (i + 1), function() {
+        pages.work.clickWorkSearchMatch(i);
+    });
+};
+exports.searchForPreviouslyEnteredComponentWork = function(i) {
+    it('Select "Title" work search filter tag #1', function() {
+        pages.work.selectWorkSearchFilterTag(0, 'Title');
+    });
+
+    it('Search for previously entered component work #' + (i + 1), function() {
+        pages.work.enterWorkSearchTerms(hash.subjectWorkData.components[i].name);
+    });
+
+    it('Wait for search results to load', function() {
+        pages.base.waitForAjax();
+    });
+};
+exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function() {
+    it('Expect "No results for work search" to be displayed', function() {
+        pages.work.expectNoResultsForWorkSearchMessageToBeDisplayed();
+    });
 };
 module.exports.cancelCreatorsEditing = function() {
 	steps.base.clickElement (
@@ -443,7 +864,6 @@ module.exports.saveWorkInclusionOnWebsite = function() {
 		pages.work.saveWorkInclusionOnWebsiteButton()
 	);
 };
-// Validation.
 module.exports.validateDefaultAlternateWorkTitleLanguage = function() {
 	it (
 		"Validate default alternate work title language", function() {
@@ -503,6 +923,49 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 		}
 	);
 };
+exports.validateCompositeWorkType = function(data, key) {
+    data = data || hash.subjectWorkData || {};
+    key = key || 'compositeWorkType';
+
+    it('Validate composite work type', function() {
+        pages.work.validateCompositeWorkType(data[key]);
+    });
+};
+exports.validateComponentWorkId = function(i, data, key) {
+    it('Validate component work ID', function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+
+        data[key] = data[key] || [];
+        component = data[key][i] = data[key][i] || {};
+
+        pages.work.validateComponentWorkId(i, component.workCode);
+    });
+};
+exports.validateComponentWorkName = function(i, data, key) {
+    it('Validate component work name #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        component = data[key][i];
+
+        pages.work.validateComponentWorkName(i, component.name);
+    });
+};
+exports.validateComponentWorkAllocation = function(i, data, key) {
+    it('Validate component work allocation #' + (i + 1), function() {
+        var component;
+
+        data = data || hash.subjectWorkData || {};
+        key = key || 'components';
+        component = data[key][i];
+
+        pages.work.validateComponentWorkAllocation(i, component.allocation);
+    });
+};
 module.exports.validateCreatorContributionInputMask = function(i, validationTable) {
 	it("Validate creator contribution input mask", function() {
 		validationTable = validationTable || {
@@ -518,6 +981,53 @@ module.exports.validateCreatorContributionInputMask = function(i, validationTabl
 		});
 		pages.work.enterCreatorContribution(i, "");
 	});
+};
+exports.clickShowComponentWorkDetailsButton = function(i) {
+    it('Click "Show Details" button of component work #' + (i + 1), function() {
+        pages.work.clickShowComponentWorkDetailsButton(i);
+    });
+};
+exports.validateShellWorkCreatorName = function(i, j, data, key) {
+    it(
+        'Validate creator name #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            var component;
+            var creator;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            pages.work.validateShellWorkCreatorName(i, j, creator.name);
+        }
+    );
+};
+exports.validateShellWorkCreatorContribution = function(i, j, data, key) {
+    it(
+        'Validate creator contribution #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            var component;
+            var creator;
+
+            data = data || hash.subjectWorkData || {};
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            pages.work.validateShellWorkCreatorContribution(
+                i, j, creator.contributionToCompositeWork
+            );
+        }
+    );
 };
 module.exports.validateCreationDate = function(year, month, day) {
 	it("Validate creation date (if first validation value is not empty)", function() {
@@ -749,7 +1259,6 @@ module.exports.validateIncludeWorkOnWebsite = function(include) {
 		}
 	);
 };
-// Flow.
 module.exports.editBasicWork = function(data, more) {
 	more = more || {};
 
@@ -766,7 +1275,7 @@ module.exports.editBasicWork = function(data, more) {
 	describe (
 		"Edit basic work", function() {
 			if(!more.skip.navigation && data.workId) {
-				steps.work.goToWorkPage(data.workId);
+				steps.work.goToWorkPage(data);
 			}
 
 			if(!more.skip.workTitles) {
@@ -992,6 +1501,8 @@ module.exports.editBasicWork = function(data, more) {
 	);
 };
 module.exports.validateWork = function(data, more) {
+	data = data || hash.subjectWorkData;
+
 	more = more || {};
 
 	more.skip = more.skip || {};

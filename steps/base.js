@@ -2,10 +2,12 @@
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-if(steps.base === undefined) {
-	module.exports = steps.base = {};
-}
-// Interaction.
+steps.base = exports;
+exports.goToHomePage = function() {
+    it('Go to home page', function() {
+        pages.base.open();
+    });
+};
 module.exports.scrollIntoView = function(elName, el) {
 	it (
 		"Scroll '" + elName + "' into view", function() {
@@ -101,11 +103,25 @@ module.exports.dirtyCheckConfirmCancellation = function() {
 		pages.base.dirtyCheckConfirmCancellationButton()
 	);
 };
-// Validation.
 module.exports.validateRedirection = function(pageName, expUrl) {
 	it ("User should be redirected to " + pageName, function() {
 		browser.getCurrentUrl().then(function(url) {
 			expect(url).toContain(expUrl);
 		});
 	});
+};
+exports.waitForAjax = function() {
+    it('Wait for AJAX requests to finish', function() {
+        pages.base.waitForAjax();
+    });
+};
+exports.sleep = function(time) {
+    it('Sleep for ' + time + 'ms', function() {
+        browser.sleep(time);
+    });
+};
+exports.refreshPage = function() {
+    it('Refresh the page', function() {
+        pages.base.refreshPage();
+    });
 };
