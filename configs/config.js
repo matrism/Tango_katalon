@@ -16,7 +16,7 @@ var configer = ftf.configer,
                 width: 1600,
                 height: 900
             },
-            reporting: cli.reporting in ["html", "xml", "all"] ? cli.reporting : "none",
+            reporting: cli.reporting in ["html", "xml", "all"] ? cli.reporting : "html",
             path_to_features: "./features/",
             path_to_steps: "../steps/",
             path_to_pages: "../pages/",
