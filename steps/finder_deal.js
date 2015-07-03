@@ -182,8 +182,17 @@ if (steps.finder_deal === undefined) {
         clickContractPeriodNumberIDetailsTermsByContractPeriod: function (i) {
             it("Click on the contract period number i finder deal details terms by contract period ", function () {
                 pages.finder_deal.clickOnContractPeriodNumberIDetailsTermsByContractPeriod(i);
+                pages.finder_deal.waitForAjax();
             });
         },
+
+        clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode: function (i) {
+            it("Click on the contract period number i finder deal details terms by contract period view mode", function () {
+                pages.finder_deal.clickOnContractPeriodNumberIDetailsTermsByContractPeriodViewMode(i);
+                pages.finder_deal.waitForAjax();
+            });
+        },
+
 
         fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
             it("Fill into maximum found agreements", function () {
@@ -440,6 +449,13 @@ if (steps.finder_deal === undefined) {
         confirmCancelChangesGeneralTermsFinderDeal: function () {
             it("Confirm cancel changes finder deal ", function () {
                 pages.finder_deal.clickOnTheCancelGeneralTermsFinderDeal();
+                pages.finder_deal.confirmCancelChangesModalDialog();
+            });
+        },
+
+        confirmCancelChangesTermsByContractPeriodFinderDeal: function () {
+            it("Confirm cancel changes terms by contract period finder deal ", function () {
+                pages.finder_deal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
                 pages.finder_deal.confirmCancelChangesModalDialog();
             });
         },
@@ -718,7 +734,7 @@ if (steps.finder_deal === undefined) {
                 pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayableValue.getText().
                     then(function (promise) {
                         console.log("The non signed artist maximum advances payable value is : " + promise);
-                        expect(promise).toContain("%");
+                        expect(promise).not.toEqual("");
                     });
             });
         },
@@ -735,7 +751,7 @@ if (steps.finder_deal === undefined) {
 
         validateAggregateMaximumAdvancesPayableValue: function () {
             it("Validate aggregate maximum advances payable value", function () {
-                pages.finder_deal.elems.aggregateMaximumOnAdvancesValue.getText().
+                pages.finder_deal.elems.aggregateMaximumAdvancesPayableValue.getText().
                     then(function (promise) {
                         console.log("The aggregate maximum advances payable value is : " + promise);
                         expect(promise).not.toEqual("");
@@ -820,6 +836,24 @@ if (steps.finder_deal === undefined) {
                         console.log("The finders recoupment responsability override value is : " + promise);
                         expect(promise).toContain("%");
                     });
+            });
+        },
+
+        clickOnFoundDealTermsTitle : function(){
+            it("Click on the found deal terms title ", function(){
+               pages.finder_deal.clickOnTheFoundDealTermsTitle();
+            });
+        },
+
+        clickOnOwnershipTermsTitle : function(){
+            it("Click on the ownership terms title ", function(){
+                pages.finder_deal.clickOnTheOwnershipTermsTitle();
+            });
+        },
+
+        clickOnTheFoundSubmissionsTitle : function(){
+            it("Click on the found submissions title ", function(){
+               pages.finder_deal.clickOnTheFoundSubmissionsTitle();
             });
         }
 
