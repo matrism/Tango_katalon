@@ -1,38 +1,41 @@
 {
-    "name": "protractor_tests",
-    "version": "0.0.1",
-    "description": "Look into README.md",
-    "main": "configs/protractor-conf.js",
-    "scripts": {
-        "test": "protractor configs/protractor-conf.js"
-    },
-    "keywords": [
-        "testing",
-        "e2e",
-        "protractor",
-        "angular"
-    ],
-    "devDependencies": {
-        "q": "~0.8.12",
-        "grunt": "~0.4.1",
-        "lpad": "~0.1.0",
-        "grunt-cli": "latest",
-        "grunt-parallel": "0.3.1",
-        "grunt-shell": "0.7.0",
-        "async": "0.8.0"
-    },
-    "dependencies": { 
-        "protractor"        : "1.8.0",
-        "jasmine-reporters" : "0.4.0",
-        "underscore"        : "1.6.0",
-        "mkdirp"            : "latest",
-        "path"              : "latest",
-        "qs"                : "latest"
-    },
-    "optionalDependencies": {
-        "http-sync": "0.0.4",
-        "http-sync-win": "0.0.7"
-    },
-    "author": "WMG",
-    "license": "ISC"
+  "name": "protractor_tests",
+  "version": "0.0.1",
+  "description": "Look into README.md",
+  "main": "configs/protractor-conf.js",
+  "scripts": {
+    "test": "protractor configs/protractor-conf.js"
+  },
+  "keywords": [
+    "testing",
+    "e2e",
+    "protractor",
+    "angular"
+  ],
+  "devDependencies": {
+    "async": "0.8.0",
+    "grunt": "~0.4.1",
+    "grunt-cli": "latest",
+    "grunt-parallel": "0.3.1",
+    "grunt-protractor-runner": "^2.0.0",
+    "grunt-shell": "0.7.0",
+    "lpad": "~0.1.0",
+    "q": "~0.8.12"
+  },
+  "dependencies": {
+    "jasmine-reporters": "0.4.0",
+    "lodash": "^3.6.0",
+    "mkdirp": "latest",
+    "pad": "0.0.8",
+    "path": "latest",
+    "protractor": "1.8.0",
+    "qs": "latest",
+    "underscore": "1.6.0"
+  },
+  "optionalDependencies": {
+    "http-sync": "0.0.4",
+    "http-sync-win": "0.0.7"
+  },
+  "author": "WMG",
+  "license": "ISC"
 }

@@ -5,7 +5,13 @@ if (steps.login === undefined) {
     steps.login = {
         itLogin: function() {
             it("User is logged in", function() {
-                pages.login.login();
+                var cookies = _tf_config._system_.cookies;
+                if(!cookies || cookies.length === 0) {
+                    pages.login.login();
+                }
+                else {
+                    pages.login.injectCookies(cookies);
+                }
                 pages.login.waitForAjax();
                 pages.login.check();
             });
@@ -21,8 +27,13 @@ if (steps.login === undefined) {
             it ("User should see '" + optionName + "' option", function() {
                 ftf.helper.shouldBeInArrayOfElements(pages.base.elems.user_dropdown_menu_items, optionName, false, false);
             });
-        }
+        },
+
+
     };
+
+
+
 }
 
 module.exports = steps.login;
