@@ -19,6 +19,10 @@ require(steps_path + "create_deal_scope");
 
 require(steps_path + "login");
 
+require(pages_path + "RRSummaryTable");
+require(steps_path + "RRSummaryTable");
+
+
 var beforeFeature = function () {
         steps.login.itLogin();
         steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -114,7 +118,200 @@ var beforeFeature = function () {
             }
 
 
+        },
+
+        {
+
+            name: "Royalty Rate Set save deal mode",
+            tags: ["rr5"],
+            steps: function () {
+
+
+
+
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+                steps.royaltyRates.storeRRData();
+
+                //steps.royaltyRates.saveRateSet();
+                //
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+                steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+            }
+        },
+
+        {
+
+            name: "Royalty Rate Set can be saved with errors",
+            tags: ["rr6"],
+            steps: function () {
+
+
+
+
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+                steps.royaltyRates.addEffectiveStartDate("2-2-2");
+
+                steps.royaltyRates.storeRRData();
+
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.clickFirstScopeHeader();
+                steps.royaltyRates.verifyRateSetSavedData();
+
+                steps.deal.verifyErrorMessages();
+
+
+
+
+            }
+        },
+
+
+        {
+
+            name: "Royalty Rate Set can be saved from other deal modules",
+            tags: ["saveFromRRModule"],
+            steps: function () {
+
+
+
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+
+
+
+
+
+
+                steps.royaltyRates.editSingleRoyaltySet();
+                steps.editRoyaltyRates.openRateSetPanel();
+
+
+                steps.royaltyRates.clearRoyaltyRateInput();
+                steps.royaltyRates.typeIntoRRInput("Edited RR Set");
+                steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
+                steps.royaltyRates.addEffectiveStartDate("2019-05-26");
+
+                steps.royaltyRates.saveRRData();
+
+
+
+                steps.royaltyRates.addNewPublisherShares();
+                steps.royaltyRates.addOriginalPublisherToPublisherShares("ASCAP");
+
+
+                steps.royaltyRates.addAdministratorToPublisherShares("ASCAP");
+                steps.royaltyRates.savePublisherShares();
+
+                steps.deal.clickFirstScopeHeader();
+                steps.royaltyRates.verifyRateSetSavedData();
+
+
+
+
+
+            }
+        },
+
+        {
+
+            name: "Saving RR Set Saves whole Deal",
+            tags: ["savingRRSavesDeal"],
+            steps: function () {
+
+
+
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.clickFirstScopeHeader();
+
+
+
+                steps.royaltyRates.editSingleRoyaltySet();
+                steps.editRoyaltyRates.openRateSetPanel();
+
+
+                steps.royaltyRates.clearRoyaltyRateInput();
+                steps.royaltyRates.typeIntoRRInput("Edited RR Set");
+                steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
+                steps.royaltyRates.addEffectiveStartDate("2019-05-26");
+
+                steps.royaltyRates.saveRRData();
+
+
+                steps.royaltyRates.addNewPublisherShares();
+                steps.royaltyRates.addOriginalPublisherToPublisherShares("ASCAP");
+
+
+                steps.royaltyRates.addAdministratorToPublisherShares("ASCAP");
+
+
+                steps.royaltyRates.saveRateSet();
+
+
+
+
+
+                steps.royaltyRates.waitForAjaxCall();
+                steps.royaltyRates.refreshPage();
+
+
+                steps.royaltyRates.openSavedScope();
+
+
+
+                steps.royaltyRates.verifyRateSetSavedData();
+                steps.royaltyRates.verifyPublisherShare();
+
+
+
+
+
+
+
+
+
+
+
+
+            }
         }
+
+
 
     ];
 

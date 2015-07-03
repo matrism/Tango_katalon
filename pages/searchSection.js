@@ -14,7 +14,7 @@ if (pages.searchSection === undefined) {
 
         searchDropdown: function () {
 
-            return element(by.css(".btn.dropdown-toggle"));
+            return $(".btn.dropdown-toggle")
 
 
         },
@@ -38,6 +38,9 @@ if (pages.searchSection === undefined) {
 
             return element(by.css(".tg-typeahead__suggestions-group-item-inner"));
         },
+        dealOption: function () {
+            return $("#SEARCH-DEAL");
+        },
 
 
 
@@ -55,6 +58,11 @@ if (pages.searchSection === undefined) {
 
         }
         ,
+        selectDeal:function()
+        {
+
+            this.dealOption().click();
+        },
 
 
         selectOrganisationOptionFromDropdown: function () {
@@ -81,7 +89,13 @@ if (pages.searchSection === undefined) {
             this.searchTypeAheadDropdown().click();
 
 
+        } ,
+            typeDealNumberIntoInput: function (dealContractNumber) {
+
+            this.searchInput().sendKeys(dealContractNumber);
+
         }
+
 
 
 

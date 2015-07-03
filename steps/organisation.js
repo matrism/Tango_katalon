@@ -12,15 +12,20 @@ if (steps.organisation === undefined) {
 
 
 
+
+
             var fields = table.shift();
+            var tableLine=1;
             _.each(table, function (row, index) {
+
                 var inboundIncomeType = row[0],
                     inboundIncomeTypeDescription = row[1],
-                    incomeFileType = row[3],
-                    tangoIncomeType = row[4]
+                    incomeFileType = row[2],
+                    tangoIncomeType = row[3]
 
                     ;
                 var consoleMessage;
+
 
                 consoleMessage = message.replace("%InboundIncomeType%", inboundIncomeType);
                 consoleMessage =  consoleMessage.replace("%InboundIncomeTypeDescription%", inboundIncomeTypeDescription);
@@ -32,10 +37,20 @@ if (steps.organisation === undefined) {
 
                 it(consoleMessage,function()
                     {
-                        pages.organisation.typeIntoInboundIncomeTypeInput(inboundIncomeType);
-                        pages.organisation.typeIntoInboundIncomeTypeDescriptionInput(inboundIncomeTypeDescription);
-                        pages.organisation.typeIntoIncomeFileTypeInput(incomeFileType);
-                        pages.organisation.typeIntoTangoIncomeTypeInput(tangoIncomeType);
+
+
+                      //  pages.organisation.fillIncomeProvider(inboundIncomeType,inboundIncomeTypeDescription,incomeFileType,tangoIncomeType);
+
+
+                        pages.organisation.typeIntoInboundIncomeTypeInput(inboundIncomeType,tableLine);
+
+                        pages.organisation.typeIntoInboundIncomeTypeDescriptionInput(inboundIncomeTypeDescription,tableLine);
+
+                        pages.organisation.typeIntoIncomeFileTypeInput(incomeFileType,tableLine);
+
+                        pages.organisation.typeIntoTangoIncomeTypeInput(tangoIncomeType,tableLine);
+
+                        tableLine++;
 
 
 
@@ -60,9 +75,14 @@ if (steps.organisation === undefined) {
 
 
 
+
          pages.organisation.clickIncomeProviderSection();
 
          pages.organisation.clickincomeProviderSectionEdit();
+
+
+
+
 
 
      });
@@ -78,12 +98,40 @@ if (steps.organisation === undefined) {
 
            pages.organisation.clickSaveIncomeProviderButton();
 
+
+
             })
 
         },
 
+        waitForProvidersSaveToComplete:function()
+        {
+          it("Waits for save to complete",function()
 
-        test: function () {
+          {
+
+              pages.organisation.waitForSaveToComplete();
+
+          })
+
+
+
+        },
+        chooseIncomeFileType:function(fileType)
+        {
+            it("Choose "+fileType+"Income File Type",function()
+            {
+
+                pages.organisation.selectIncomeFileType(fileType);
+
+
+            })
+
+
+        }
+,
+
+        pause: function () {
 
 
             it("Test Step", function () {

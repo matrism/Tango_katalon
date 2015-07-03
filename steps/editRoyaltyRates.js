@@ -1,5 +1,8 @@
 var _ = require("lodash");
 var promise = protractor.promise;
+hash.royaltyRates = {};
+hash.royaltyRates.RRNames = [];
+hash.royaltyRates.royaltyRateObjectsList = [];
 var ExpectedConditions = protractor.ExpectedConditions;
 if (steps.editRoyaltyRates === undefined) {
     steps.editRoyaltyRates = {
@@ -275,9 +278,9 @@ if (steps.editRoyaltyRates === undefined) {
         },
 
         openRateSetPanel: function () {
-            it("  ", function () {
+            it("Expand Saved Rate Set", function () {
 
-
+           pages.editRoyaltyRates.clickOpenRRButton();
             });
         },
 
@@ -317,6 +320,8 @@ if (steps.editRoyaltyRates === undefined) {
 
 
         },
+
+
 
 
 

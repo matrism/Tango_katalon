@@ -20,14 +20,15 @@ require(steps_path + "create_deal_scope");
 //require(pages_path + "incomeProvider");
 require(steps_path + "incomeProvider");
 
-require(steps_path + "login");
+require(pages_path + "deal_general");
+
 
 var beforeFeature = function () {
         steps.login.itLogin();
-        steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-        steps.deal.itContinueToNextPage();
-        steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-        steps.create_deal_scope.itAddSimpleScope();
+        //steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
+        //steps.deal.itContinueToNextPage();
+        //steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+
     },
 
     feature = [{
@@ -38,18 +39,18 @@ var beforeFeature = function () {
             steps.incomeProvider.createValidRoyaltySetPair(
                 [
                     ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
-                    ["HFA,ASCAP        ","01.01.2014 ","                 ","01.01.2014"],
+                    ["HFA,ASCAP        ","2017-01-01","                 ","2017-01-01"],
                     ["HFA              ","           ","                 ","          "],
                     ["                 ","           ","                 ","          "],
-                    ["                 ","01.01.2014 ","                 ","          "],
-                    ["                 ","01.01.2014 ","                 ","03.01.2014"],
-                    ["HFA              ","01.01.2014 ","HFA              ","03.01.2014"]
+                    ["                 ","2017-01-01 ","                 ","          "],
+                    ["                 ","2017-01-01 ","                 ","2017-01-03"],
+                    ["HFA              ","2017-01-01 ","HFA              ","2017-01-03"]
 
 
                 ],
 
 
-                "Check that income provider pair $Income_Provider_1 -%Date_1 and %Income_Provider_2 - %Date_2  is valid"
+                "Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is valid"
             );
 
 
@@ -65,14 +66,64 @@ var beforeFeature = function () {
                 steps.incomeProvider.createInvalidRoyaltySetPair(
                     [
                         ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
-                        ["HFA,ASCAP        ","01.01.2014 ","HFA              ","01.01.2014"],
-                        ["HFA              ","01.01.2014 ","HFA              ","01.01.2014"],
-                        ["                 ","01.01.2014 ","                 ","01.01.2014"]
+                        ["HFA,ASCAP        ","2017-01-01","HFA              ","2017-01-01"],
+                        ["HFA              ","2017-01-01","HFA              ","2017-01-01"],
+                        ["                 ","2017-01-01","                 ","2017-01-01"]
 
 
                     ],
 
-                    "Check that  %errorMessage% is displayed for date: %date% "
+
+                    "Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is invalid"
+                );
+
+
+            }
+        }
+        ,
+        {
+            name: "I would like to check positive case of income provider validation rules",
+            tags: ["IP3"],
+            steps: function () {
+
+                steps.incomeProvider.editValidRoyaltySetPair(
+                    [
+                        ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
+                        ["HFA              ","           ","                 ","          "],
+                        ["                 ","           ","                 ","          "],
+                        ["HFA,ASCAP        ","2017-01-01","                 ","2017-01-01"],
+                        ["                 ","2017-01-01 ","                 ","          "],
+                        ["                 ","2017-01-01 ","                 ","2017-01-03"],
+                        ["HFA              ","2017-01-01 ","HFA              ","2017-01-03"]
+
+
+                    ],
+
+
+                    "Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is valid"
+                );
+
+
+            }
+        },
+        {
+            name: "I would like to check negative case of income provider validation rules upon editing a deal",
+            tags: ["IP4"],
+            steps: function () {
+
+                steps.incomeProvider.editInvalidRoyaltySetPair(
+                    [
+                        ["Income_Provider_1","Date_1 "    ,"Income_Provider_2","Date_2    "],
+                        ["                 ","2017-01-01","                 ","2017-01-01"],
+                        ["HFA,ASCAP        ","2017-01-01","HFA              ","2017-01-01"],
+                        ["HFA              ","2017-01-01","HFA              ","2017-01-01"]
+
+
+
+                    ],
+
+
+                    "Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is invalid"
                 );
 
 

@@ -13,10 +13,21 @@ if (steps.create_deal_scope === undefined) {
         addSimpleScope: function () {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
-                pages.create_deal_scope.selectRandomContractTypeScope();
-                pages.create_deal_scope.waitForAjax();
+                pages.create_deal_scope.fillScopeDescriptionField();
+                pages.create_deal_scope.selectContractTypeScope(pages.create_deal_scope.elems.contractTypeDropDown, "Finder");
                 pages.create_deal_scope.addTerritoryByTypingToScope();
             });
+        },
+        itAddNewContractPeriod: function () {
+
+            it("Add new contract Period",function(){
+
+                pages.create_deal_scope.clickNewContractPeriodButton();
+             //   pages.create_deal_scope.waitForContractPeriodToBeCreated();
+
+
+            })
+
         },
 
         addSpecificScope: function (contractType) {

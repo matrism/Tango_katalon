@@ -24,6 +24,13 @@ if (pages.editRoyaltyRates === undefined) {
 
 
         },
+
+        openRRButton:function()
+        {
+            return $(".icon-chevron-down");
+
+        },
+
         rrSumarryTable: function () {
             return element(by.css(".rate-set-summary-table"));
         },
@@ -38,10 +45,7 @@ if (pages.editRoyaltyRates === undefined) {
             return element(by.css(".ng-scope>td>strong"));
         },
 
-        searchInput: function () {
 
-            return element(by.css(".tg-typeahead__input"));
-        },
 
         searchTypeAheadDropdown: function () {
 
@@ -379,11 +383,19 @@ if (pages.editRoyaltyRates === undefined) {
         ,
         clickRRSumarryTable: function () {
 
+
             browser.wait(ExpectedConditions.visibilityOf(this.rrSumarryTable()));
+
             this.rrSumarryTable().click();
 
         },
-        clickeditSavedRRIcon: function () {
+        clickOpenRRButton:function(){
+
+
+            browser.wait(ExpectedConditions.visibilityOf( this.openRRButton()));
+            this.openRRButton().click();
+        },
+        clickEditSavedRRIcon: function () {
 
 
               browser.wait(ExpectedConditions.visibilityOf(this.editSavedRRIcon()));
@@ -392,6 +404,7 @@ if (pages.editRoyaltyRates === undefined) {
 
         }
         ,
+
 
         getSavedRRName: function () {
             return this.royaltyRateName().getText();
@@ -422,12 +435,7 @@ if (pages.editRoyaltyRates === undefined) {
 
 
 
-        typeDealNumberIntoInput: function (dealContractNumber) {
 
-            this.searchInput().sendKeys(dealContractNumber);
-
-        }
-        ,
         selectValueFromDropdown: function () {
 
 

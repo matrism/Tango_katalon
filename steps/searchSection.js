@@ -66,9 +66,9 @@ if (steps.searchSection === undefined) {
         {
 
             it("User accesses deal with number "+ dealContractNumber,function(){
-
+                //
                 pages.searchSection.clickDropdownMenu();
-                pages.searchSection.selectDea("Deals");
+                pages.searchSection.selectDeal();
                 pages.searchSection.typeDealNumberIntoInput(dealContractNumber);
                 pages.searchSection.selectValueFromDropdown();
 

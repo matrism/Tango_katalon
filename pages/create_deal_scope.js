@@ -9,8 +9,8 @@ if (pages.create_deal_scope === undefined) {
             addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
             descriptionField: {css: "input[name='scopeDescription']"},
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
-            territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
-            territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            territoryField: {css: "div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
+            territoryInput: {css: "div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             territoryDropDown: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             addPublisherShareSetLink: {css: "div.publisher-share-totals a[data-ng-click='addChain(modularEditModels.model.id, form.terms.activeScope.id);']"},
             firstPublisherNameField: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input[ng-model='$term']"},
@@ -39,13 +39,26 @@ if (pages.create_deal_scope === undefined) {
             publisherShareSetArea: {css: "div[data-tg-modular-edit-id='publisherShareSets']"}
         },
 
+        addContractPeriodIcon:function()
+        {
+          return $$(".column-add-button-icon").first();
+
+        },
+        addContractPeriodButton:function()
+        {
+          return $(".column-add-button-hint").first();
+
+        },
+
+
+
         addScopeForm: function () {
             pages.create_deal_scope.elems.addScopeIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.contractTypeDropDown));
         },
 
         fillScopeDescriptionField: function () {
-            pages.create_deal_scope.elems.descriptionField.sendKeys("description");
+          pages.create_deal_scope.elems.descriptionField.sendKeys("description");
         },
 
         selectRandomContractTypeScope: function () {
@@ -87,13 +100,16 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.territoryField.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryInput));
             pages.create_deal_scope.elems.territoryInput.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
         },
 
 
         selectRandomCountry: function () {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
-            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+         //   browser.driver.findElements(By.css("div.tg-territory__clusters i[ng-click='$event.stopPropagation(); $toggleClusterSelection(cluster);']"))
+
+            browser.driver.findElements(By.css(".tg-typeahead__suggestions-group-item.ng-scope"))
+
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -272,6 +288,8 @@ if (pages.create_deal_scope === undefined) {
         selectTheSpecificPublisherNameDropDown: function (publisherName) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
+            browser.driver.findElements(By.xpath("//*[@class='typeahead dropdown-menu ng-scope']/li[@class='ng-scope']/a"))
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.publisherNameDropDownData));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -381,6 +399,19 @@ if (pages.create_deal_scope === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 })
+        },
+
+        clickNewContractPeriodButton:function()
+        {
+
+      //      browser.actions().mouseMove(this.addContractPeriodIcon).perform();
+
+       //     browser.wait(ExpectedConditions.visibilityOf(this.addContractPeriodButton()));
+            this.addContractPeriodIcon().click();
+
+
+
+
         },
 
         selectSpecificPublisherNameDropDownChainI: function (publisherName, i) {

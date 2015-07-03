@@ -10,8 +10,8 @@ if (pages.create_deal_general === undefined) {
         locators: {
             dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},
             dealSigningTerritoryDropDownData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
-            contractingPartiesInput: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            contractingPartiesField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
+            contractingPartiesInput: {css: '.tg-typeahead__input[placeholder="Search by Name or IPI Number"]'},
+            contractingPartiesField: {css: '[placeholder="Search by Name or IPI Number"]'},
             internalContactsInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.model'] input[ng-model='$term']"},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             internalContactRoleInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.roles'] input[ng-model='$term']"}
@@ -45,9 +45,8 @@ if (pages.create_deal_general === undefined) {
             pages.create_deal_general.elems.contractingPartiesField.click();
             pages.create_deal_general.elems.contractingPartiesInput.sendKeys(field);
         },
-
         selectRandomContractingPartyValueFromDropDown: function () {
-             browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
+            browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -56,7 +55,7 @@ if (pages.create_deal_general === undefined) {
 
         selectContractingPartyValue: function (specific_value) {
             var desiredOption;
-            browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
+            browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions ng-scope']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {

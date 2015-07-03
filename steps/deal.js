@@ -28,6 +28,33 @@ if (steps.deal === undefined) {
             });
         },
 
+        clickFirstScopeHeader:function()
+        {
+            it("Click the first scope header",function(){
+
+          pages.deal.clickScopeHeader();
+
+
+
+            });
+
+
+        },
+        clickLastScopeHeader:function()
+        {
+            it("Click the last scope header",function(){
+
+                pages.deal.clickScopeHeaderLast();
+
+
+
+            });
+
+
+        },
+
+
+
         waitForDealToBeSaved: function () {
             it("Expect deal screen to be loaded and brief number displayed ", function () {
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
@@ -82,6 +109,44 @@ if (steps.deal === undefined) {
                 pages.deal.goToFinderDealTerms();
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.finderDealsTitle));
             });
+        },
+
+        goToIncomeRatesPage:function()
+        {
+            it("Go to Income Rates Summary Page",function()
+            {
+
+
+                pages.deal.clickIncomeRatesLink();
+
+            });
+
+
+
+        },
+
+        verifyErrorMessages:function()
+        {it("Check that error messages are displayed correctly",function()
+            {
+               expect(pages.deal.errorHeaderIsVisible()).toBeTruthy();
+
+              //  expect(pages.deal.errorIconsAreVisible()).toBeTruthy();
+              expect(pages.deal.errorRRIsVisible()).toBeTruthy();
+
+
+            }
+        )
+
+
+        },
+        getRRIconData:function()
+        {
+            it("",function()
+            {
+                pages.deal.errorIconsAreVisible();
+
+            })
+
         }
 
     };

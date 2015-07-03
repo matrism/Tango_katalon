@@ -405,7 +405,16 @@ if (steps.create_deal_contract_period === undefined) {
                     steps.create_deal_contract_period.fillMandatoryFieldsContractPeriod();
                 }
             );
+        },
+        itFillDealMandatoryFieldsContractPeriodEndDate: function () {
+            it("Fill mandatory fields contract period screen end date", function () {
+
+                    pages.create_deal_contract_period.fillTargetEndMonths();
+                }
+            );
         }
+
+
 
     };
 }
