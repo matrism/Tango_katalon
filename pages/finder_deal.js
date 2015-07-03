@@ -30,6 +30,9 @@ if (pages.finder_deal === undefined) {
             saveGeneralTermsFinderDeal: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-click='updateDeal(finderDealsForm.$valid, null, form.show.finderDeal.general)']"},
             cancelGeneralTermsFinderDeal: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-click='cancelFinderDealGeneralEdit()']"},
             //terms by contract period locators
+            foundDealTermsTitle: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.accordion-group.ng-isolate-scope:nth-child(1)"},
+            ownershiptTermsTitle: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.accordion-group.ng-isolate-scope:nth-child(2)"},
+            foundSubmissionsTitle: {css: "div[data-ng-show='form.show.finderDeal.detail'] div.accordion-group.ng-isolate-scope:nth-child(3)"},
             termsByContractPeriodArea: {css: "div[data-ng-class='{ active : form.show.finderDeal.edit }']"},
             termsByContractPeriodEditIcon: {css: "div[data-ng-class='{ active : form.show.finderDeal.edit }'] i[data-ng-click='openFinderDealCpEdit(finderDealCpIndex);']"},
             leftArrowHeaderTermsByContractPeriod: {css: "div[data-ng-class='{ active : form.show.finderDeal.edit }'] div.form-horizontal.relative a.move-left.carousel-arrow"},
@@ -272,6 +275,10 @@ if (pages.finder_deal === undefined) {
             browser.driver.findElement(By.css("div[data-ng-class='{ active : form.show.finderDeal.edit }'] div.form-horizontal.relative ul.nav.nav-tabs li:nth-child(" + i + ")")).click();
         },
 
+        clickOnContractPeriodNumberIDetailsTermsByContractPeriodViewMode: function (i) {
+            browser.driver.findElement(By.css("div[data-ng-show='form.show.finderDeal.detail'] ul.nav.nav-tabs li:nth-child(" + i + ")")).click();
+        },
+
         fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
             var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval.clear();
@@ -450,6 +457,21 @@ if (pages.finder_deal === undefined) {
                     console.log("The tooltip for terms by contract period type number i is : " + promise);
                     expect(promise).toEqual(type);
                 });
+        },
+
+        clickOnTheFoundDealTermsTitle: function(){
+            pages.finder_deal.elems.foundDealTermsTitle.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval));
+        },
+
+        clickOnTheOwnershipTermsTitle: function(){
+            pages.finder_deal.elems.ownershiptTermsTitle.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.aggregateMaximumOnAdvances));
+        },
+
+        clickOnTheFoundSubmissionsTitle: function(){
+            pages.finder_deal.elems.foundSubmissionsTitle.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.creatorFoundSubmissionInputField));
         }
 
 
