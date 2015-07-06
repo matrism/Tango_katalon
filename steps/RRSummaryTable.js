@@ -413,6 +413,20 @@ if (steps.RRSummaryTable === undefined) {
 
                 expect(hash.royaltyRates.royaltyRateObjectsList).toEqual(hash.royaltyRates.royaltyRateObjectsList);
             })
+        },
+        verifyThatCorrectNumberOfScopesIsDisplayed: function (numberOfDisplayedScopes) {
+            it("Check that number of displayed scopes equals = "+ numberOfDisplayedScopes, function () {
+
+                pages.RRSummaryTable.waitForLoaderToDisappear();
+              //  pages.RRSummaryTable.getNumberOfDisplayedScopes();
+                expect( pages.RRSummaryTable.getNumberOfDisplayedScopes()).toBe(numberOfDisplayedScopes);
+            })
+
+        },
+        waitForRRTableToBeDisplayed: function () {
+            it("Wait for RR Summary table to load ", function () {
+                pages.RRSummaryTable.waitForTableToBeDisplayed();
+            })
         }
 
 

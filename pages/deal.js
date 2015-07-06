@@ -12,35 +12,45 @@ if (pages.deal === undefined) {
             termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
-            scopeHeader : {css: ".scope-heading"},
-            incomeRates:{css:".nav-tabs>li:nth-child(5)>a"}
+            scopeHeader: {css: ".scope-heading"},
+            incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"}
         },
 
 
         //TODO DSP locators are bad , dom can change between wait calls and locators keep a cached version
-        scopeHeaderElement:function()
-        {
+        scopeHeaderElement: function () {
             return element(by.css(".scope-heading"));
 
         },
 
-        errorHeader:function()
-        {
+        errorHeader: function () {
 
             return $$(".text-error").first();
         }
         ,
-        errorIcons:function()
-        {
-          return $$(".fa.fa-exclamation-triangle.error-icon");
+        errorIcons: function () {
+            return $$(".fa.fa-exclamation-triangle.error-icon");
 
         },
 
-        errorRR:function()
-        {
+        errorRR: function () {
 
-                return $$(".text-error").last();
+            return $$(".text-error").last();
         },
+        scopeheaderMenu: function () {
+            return $(" .scope-heading>div>.hover-menu>i")
+        },
+        copyScopeOption: function () {
+            return $('.scope-heading>div>.hover-menu>.menu-content>[data-tooltip="Copy entirety of this Scope."]');
+        },
+        numberOfCopiesInput: function () {
+
+            return $(".scope-heading+.form-horizontal>.control-group>.controls>input")
+        },
+        copyScopeButton: function () {
+            return $('.scope-heading+.form-horizontal>.CONTROLS >[type="submit"]');
+        },
+
 
         //END OF LOCATORS
 
@@ -67,8 +77,7 @@ if (pages.deal === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.termsHeader));
             pages.deal.elems.termsHeader.click();
         },
-        clickIncomeRatesLink:function()
-        {
+        clickIncomeRatesLink: function () {
 
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
             pages.deal.elems.incomeRates.click();
@@ -76,7 +85,7 @@ if (pages.deal === undefined) {
 
         },
 
-        clickScopeHeader:function(){
+        clickScopeHeader: function () {
 
 
             pages.base.waitForAjax();
@@ -84,25 +93,20 @@ if (pages.deal === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
 
 
-
             pages.deal.scopeHeaderElement().click();
         },
 
-        errorHeaderIsVisible:function()
-        {
+        errorHeaderIsVisible: function () {
 
             return this.errorHeader().isDisplayed();
         },
 
-        errorIconsAreVisible:function()
-        {
-            var bool=false;
+        errorIconsAreVisible: function () {
+            var bool = false;
 
 
-            this.errorIcons.each(function(el)
-            {
-                if(!bool)
-                {
+            this.errorIcons.each(function (el) {
+                if (!bool) {
                     bool = el.isDisplayed();
 
                 }
@@ -110,14 +114,32 @@ if (pages.deal === undefined) {
 
             });
 
-       return bool;
+            return bool;
 
         },
-        errorRRIsVisible:function()
-        {
+        errorRRIsVisible: function () {
 
             return this.errorRR.isDisplayed();
 
+        },
+
+
+        clickScopeHeaderMenu: function () {
+            var element =  this.scopeheaderMenu();
+            element.click();
+
+        },
+        selectCopyScopeOption: function () {
+            var element = this.copyScopeOption();
+            element.click();
+        },
+        inputNumberOfScopeCopies: function (numberOfCopies) {
+            var element = this.numberOfCopiesInput();
+            element.sendKeys(numberOfCopies);
+        },
+        pressCopyScopeButton: function () {
+            var element =  this.copyScopeButton();
+            element.click();
         }
 
 
