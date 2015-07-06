@@ -55,6 +55,7 @@ if (steps.finder_deal === undefined) {
         clickOnTermsByContractPeriodFinderDeal: function () {
             it("Click on the terms by Contract period finder deal ", function () {
                 pages.finder_deal.clickOnTheTermsByContractPeriodFinderDeal();
+                pages.finder_deal.waitForAjax();
             });
         },
 
@@ -176,6 +177,7 @@ if (steps.finder_deal === undefined) {
         editTermsByContractPeriodFinderDeal: function () {
             it("Edit the terms by contract period finder deal area ", function () {
                 pages.finder_deal.editTheTermsByContractPeriodFinderDeal();
+                pages.finder_deal.waitForAjax();
             });
         },
 
@@ -326,6 +328,7 @@ if (steps.finder_deal === undefined) {
         clickOnSaveTermsByContractPeriodFinderDeal: function () {
             it("Click on save terms by contract period finder deal ", function () {
                 pages.finder_deal.clickOnTheSaveTermsByContractPeriodFinderDeal();
+                pages.finder_deal.waitForAjax();
             });
         },
 
@@ -460,18 +463,18 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validatePriorAwarenessNotificationValue: function(value){
-            it("Validate the prior awareness notification value ", function(){
-               pages.finder_deal.elems.priorAwarenessNotificationValue.getText().
-                   then(function (promise) {
-                       console.log("The prior awareness notification value is : " + promise);
-                       expect(promise).toEqual(value);
-                   });
+        validatePriorAwarenessNotificationValue: function (value) {
+            it("Validate the prior awareness notification value ", function () {
+                pages.finder_deal.elems.priorAwarenessNotificationValue.getText().
+                    then(function (promise) {
+                        console.log("The prior awareness notification value is : " + promise);
+                        expect(promise).toEqual(value);
+                    });
             });
         },
 
-        validateNotifyWithinThisNumberOfDaysValue: function(value){
-            it("Validate the notify within this number of days value ", function(){
+        validateNotifyWithinThisNumberOfDaysValue: function (value) {
+            it("Validate the notify within this number of days value ", function () {
                 pages.finder_deal.elems.notifyWithinThisNumberOfDaysValue.getText().
                     then(function (promise) {
                         console.log("The notify within this number of days value is : " + promise);
@@ -480,8 +483,8 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateSubmissionDecisionWithinNumberOfDaysValue: function(value){
-            it("Validate the submission decision within number of days value ", function(){
+        validateSubmissionDecisionWithinNumberOfDaysValue: function (value) {
+            it("Validate the submission decision within number of days value ", function () {
                 pages.finder_deal.elems.submissionDecisionWithinNumberOfDaysValue.getText().
                     then(function (promise) {
                         console.log("The submission decision within number of days value is : " + promise);
@@ -490,8 +493,8 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateAssumedResponseValue: function(value){
-            it("Validate the assumed response value ", function(){
+        validateAssumedResponseValue: function (value) {
+            it("Validate the assumed response value ", function () {
                 pages.finder_deal.elems.assumedResponseValue.getText().
                     then(function (promise) {
                         console.log("The assumed response value is : " + promise);
@@ -500,8 +503,8 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateWhoWillDraftDealsValue: function(value){
-            it("Validate the who will draft deals value ", function(){
+        validateWhoWillDraftDealsValue: function (value) {
+            it("Validate the who will draft deals value ", function () {
                 pages.finder_deal.elems.whoWillDraftDealsValue.getText().
                     then(function (promise) {
                         console.log("The who will draft deals value is : " + promise);
@@ -510,8 +513,8 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateWhoHasControlToExerciseFutureOptionsValue: function(value){
-            it("Validate the who has control to exercise future options value ", function(){
+        validateWhoHasControlToExerciseFutureOptionsValue: function (value) {
+            it("Validate the who has control to exercise future options value ", function () {
                 pages.finder_deal.elems.whoHasControlToExerciseFutureOptionValue.getText().
                     then(function (promise) {
                         console.log("The awho has control to exercise future options value is : " + promise);
@@ -520,8 +523,8 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateWhoIsResponsibleForAdvancesValue: function(value){
-            it("Validate the who is responsible for advances value ", function(){
+        validateWhoIsResponsibleForAdvancesValue: function (value) {
+            it("Validate the who is responsible for advances value ", function () {
                 pages.finder_deal.elems.whoIsResponsibleForAdvancesValue.getText().
                     then(function (promise) {
                         console.log("The  who is responsible for advances  value is : " + promise);
@@ -530,8 +533,8 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateFindersRightToPursueValue: function(value){
-            it("Validate the finder right to pursue value ", function(){
+        validateFindersRightToPursueValue: function (value) {
+            it("Validate the finder right to pursue value ", function () {
                 pages.finder_deal.elems.finderRightToPursueValue.getText().
                     then(function (promise) {
                         console.log("The finder right to pursue value is : " + promise);
@@ -540,8 +543,8 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        validateWcmRightToPursueValue: function(value){
-            it("Validate the wcm right to pursue value ", function(){
+        validateWcmRightToPursueValue: function (value) {
+            it("Validate the wcm right to pursue value ", function () {
                 pages.finder_deal.elems.wcmRightToPursueValue.getText().
                     then(function (promise) {
                         console.log("The wcm right to pursue value is : " + promise);
@@ -551,9 +554,9 @@ if (steps.finder_deal === undefined) {
         },
 
 
-        validateTooltipsForTermsByContractPeriodI: function(i, type){
-            it("Validate the tooltips for terms by contract period number " + i + " of type ", function(){
-               pages.finder_deal.validateTheTooltipsForTermsByContractPeriodI(i, type);
+        validateTooltipsForTermsByContractPeriodI: function (i, type) {
+            it("Validate the tooltips for terms by contract period number " + i + " of type ", function () {
+                pages.finder_deal.validateTheTooltipsForTermsByContractPeriodI(i, type);
             });
         },
 
@@ -839,24 +842,27 @@ if (steps.finder_deal === undefined) {
             });
         },
 
-        clickOnFoundDealTermsTitle : function(){
-            it("Click on the found deal terms title ", function(){
-               pages.finder_deal.clickOnTheFoundDealTermsTitle();
+        clickOnFoundDealTermsTitle: function () {
+            it("Click on the found deal terms title ", function () {
+                pages.finder_deal.clickOnTheFoundDealTermsTitle();
+                pages.finder_deal.waitForAjax();
             });
         },
 
-        clickOnOwnershipTermsTitle : function(){
-            it("Click on the ownership terms title ", function(){
+        clickOnOwnershipTermsTitle: function () {
+            it("Click on the ownership terms title ", function () {
                 pages.finder_deal.clickOnTheOwnershipTermsTitle();
+                pages.finder_deal.waitForAjax();
             });
         },
 
-        clickOnTheFoundSubmissionsTitle : function(){
-            it("Click on the found submissions title ", function(){
-               pages.finder_deal.clickOnTheFoundSubmissionsTitle();
+        clickOnTheFoundSubmissionsTitle: function () {
+            it("Click on the found submissions title ", function () {
+                pages.finder_deal.clickOnTheFoundSubmissionsTitle();
+                pages.finder_deal.waitForAjax();
             });
         }
 
 
-};
+    };
 }

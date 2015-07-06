@@ -249,21 +249,22 @@ if (steps.edit_deal_scope === undefined) {
         },
 
         editDeleteThePublisherShareSet: function () {
-          it("Edit - delete the publisher share set ", function(){
-             pages.edit_deal_scope.editDeletePublisherSharesSet();
-          });
+            it("Edit - delete the publisher share set ", function () {
+                pages.edit_deal_scope.editDeletePublisherSharesSet();
+                pages.edit_deal_scope.waitForAjax();
+            });
         },
 
         editConfirmModalDialogDirtyCheck: function () {
-            it("Edit confirm modal dialog dirty check", function(){
+            it("Edit confirm modal dialog dirty check", function () {
                 pages.edit_deal_scope.editConfirmModalDialog();
             });
         },
 
         editCancelModalDialogDirtyCheck: function () {
-          it("Edit cancel modal dialog dirty check", function(){
-             pages.edit_deal_scope.editCancelModalDialog();
-          });
+            it("Edit cancel modal dialog dirty check", function () {
+                pages.edit_deal_scope.editCancelModalDialog();
+            });
         },
 
         editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI: function (i) {
