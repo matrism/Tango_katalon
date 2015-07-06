@@ -268,7 +268,6 @@ if (pages.finder_deal === undefined) {
             pages.finder_deal.elems.termsByContractPeriodArea.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.termsByContractPeriodEditIcon));
             pages.finder_deal.elems.termsByContractPeriodEditIcon.click();
-            pages.finder_deal.waitForAjax();
         },
 
         clickOnContractPeriodNumberIDetailsTermsByContractPeriod: function (i) {

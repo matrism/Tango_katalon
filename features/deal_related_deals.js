@@ -74,7 +74,7 @@ var beforeFeature = function () {
         }
     },
         {
-            name: "Validate negative scenarios related deals",
+            name: "Dirty check general terms related deals",
             tags: ["dirty_check_general_terms_related_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
@@ -172,7 +172,7 @@ var beforeFeature = function () {
             }
         },
         {
-            name: "Validate negative scenarios related deals",
+            name: "Create terms by contract period related deals",
             tags: ["create_terms_by_contract_period_related_deals"],
             steps: function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
