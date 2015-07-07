@@ -157,7 +157,7 @@ var beforeFeature = function () {
                 steps.royaltyRates.addRateBalanceToContractualField("Balance");
                 steps.royaltyRates.verifyICRateIs("60");
                 steps.royaltyRates.deleteLastAddedPayout();
-                steps.royaltyRates.verifyICRateIs("20");
+                steps.royaltyRates.verifyICRateIs("65");
                 steps.royaltyRates.removeAllContractualRates();
                 steps.royaltyRates.checkNoIncomeRatesPresent();
                 steps.royaltyRates.addRatePercentageToContractualField("50");
@@ -217,9 +217,9 @@ var beforeFeature = function () {
                 steps.royaltyRates.lastPayoutDeterminesIC("No");
                 steps.royaltyRates.verifyICRateIs("20");
                 steps.royaltyRates.addRateBalanceToContractualField("Balance");
-                steps.royaltyRates.verifyICRateIs("20");
+                steps.royaltyRates.verifyICRateIs("60");
                 steps.royaltyRates.deleteLastAddedPayout();
-                steps.royaltyRates.verifyICRateIs("20");
+                steps.royaltyRates.verifyICRateIs("65");
                 steps.royaltyRates.removeAllContractualRates();
                 steps.royaltyRates.checkNoIncomeRatesPresent();
                 steps.royaltyRates.addRatePercentageToContractualField("50");

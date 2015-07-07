@@ -309,7 +309,10 @@ if (steps.royaltyRates === undefined) {
 
 
                 pages.royaltyRates.typeIntoContractualRateInput(percentage);
-                pages.royaltyRates.addPercentageToContractualRateInput();
+
+                    pages.royaltyRates.addPercentageToContractualRateInput();
+
+
 
 
             });

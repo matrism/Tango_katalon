@@ -780,7 +780,20 @@ return $$(".rate-set-income-type>.rate-set-row>.rate-set-rate-field>div>span>inp
 
             this.payout().click();
             browser.driver.sleep(2000);
-           this.lastPayoutFromSubmenu().click();
+
+            var that = this;
+            this.lastPayoutFromSubmenu().isDisplayed().then(function (isVisible) {
+
+
+                if(isVisible.toString() == "true")
+                {
+
+
+                    that.lastPayoutFromSubmenu().click();
+                }
+            });
+
+
 
 
         }
@@ -999,7 +1012,7 @@ return $$(".rate-set-income-type>.rate-set-row>.rate-set-rate-field>div>span>inp
 
             pages.base.scrollIntoView(this.ICRateInput());
            // browser.wait(ExpectedConditions.invisibilityOf(this.inputLoader()));
-            browser.driver.sleep(10000);
+            browser.driver.sleep(20000);
             return this.ICRateInput().getAttribute("value");
         }
 
