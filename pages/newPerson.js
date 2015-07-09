@@ -103,7 +103,9 @@ exports.enterSuisaIpiNumber = function(value) {
 };
 
 exports.affiliatedSocietySearchInput = function() {
-    return element(by.model('affSociety.society.name'));
+    return element(by.model('affSociety.society.model')).element(
+		by.model('$term')
+	);
 };
 
 exports.enterAffiliatedSocietySearchTerms = function(value) {
@@ -114,7 +116,7 @@ exports.enterAffiliatedSocietySearchTerms = function(value) {
 };
 
 exports.affiliatedSocietySearchResults = function() {
-    return $('.typeahead.dropdown-menu').all(by.repeater('match in matches'));
+	return $$('.tg-typeahead__suggestions-group-item');
 };
 
 exports.affiliatedSocietySearchResult = function(i) {
