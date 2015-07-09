@@ -90,6 +90,171 @@ if (steps.create_deal_general === undefined) {
             });
         },
 
+
+        clickOnDraftContractStatus: function () {
+            it("Click on the draft contract status and check that it is selected ", function () {
+                pages.create_deal_general.clickOnTheDraftContractStatus();
+                var test = pages.create_deal_general.elems.draftContractStatusButton.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        clickOnExecutedContractStatus: function () {
+            it("Click on the executed contract status and check that it is selected ", function () {
+                pages.create_deal_general.clickOnTheExecutedContractStatus();
+                var test = pages.create_deal_general.elems.executedContractStatusButton.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        fillIntoExecutionDateField: function () {
+            it("Fill into execution date field ", function () {
+                pages.create_deal_general.fillIntoTheExecutionYearField();
+                pages.create_deal_general.elems.monthExecutionDate.isEnabled();
+                pages.create_deal_general.fillIntoTheExecutionMonthField();
+                pages.create_deal_general.elems.dayExecutionDate.isEnabled();
+                pages.create_deal_general.fillIntoTheExecutionDayField();
+            });
+        },
+
+        selectRandomArtistValue: function () {
+            it("Select a random value for artist field ", function () {
+                pages.create_deal_general.selectTheRandomArtist();
+            });
+        },
+
+        selectRandomValueRepresentMultipleDeals: function () {
+            it("Select random value from represent multiple deals drop down", function () {
+                pages.create_deal_general.selectTheRandomValueRepresentMultipleDeals();
+            });
+        },
+
+        clickOnExclusiveDealRights: function () {
+            it("Click on the exclusive deal rights and validate that is successfully selected ", function () {
+                pages.create_deal_general.clickOnTheExclusiveDealRights();
+                var test = pages.create_deal_general.elems.exclusiveDealRights.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        clickOnNonExclusiveDealRights: function () {
+            it("Click on the non exclusive deal rights and validate that is successfully selected ", function () {
+                pages.create_deal_general.clickOnTheNonExclusiveDealRights();
+                var test = pages.create_deal_general.elems.nonExclusiveDealRights.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        selectRandomDealKeywords: function () {
+            it("Select the random deal keywords", function () {
+                pages.create_deal_general.selectTheRandomDealKeywords();
+            });
+        },
+
+        fillIntoWampsContractBriefNumberField: function () {
+            it("Fill into wamps contract brief number field ", function () {
+                pages.create_deal_general.fillIntoTheWampsContractBriefNumberField();
+            })
+        },
+
+        fillIntoAuditPeriodField: function () {
+            it("Fill into the audit period field ", function () {
+                pages.create_deal_general.fillIntoTheAuditPeriodField();
+            });
+        },
+
+        fillIntoPeriodToFileSuitField: function () {
+            it("Fill into the period to file suit field", function () {
+                pages.create_deal_general.fillIntoThePeriodToFileSuitField();
+            });
+        },
+
+        fillIntoLegalFileReferenceCodeField: function () {
+            it("Fill into the legal file reference code field ", function () {
+                pages.create_deal_general.fillIntoTheLegalFileReferenceCodeField();
+            });
+        },
+
+        selectRandomExternalContactRoleRowI: function (i) {
+            it("Select the random external contact role row i ", function () {
+                pages.create_deal_general.selectTheRandomExternalContactRoleRowI(i);
+            });
+        },
+
+        selectSpecificExternalContactRoleRowI: function (i, role) {
+            it("Select the specific external contact role row i ", function () {
+                pages.create_deal_general.selectTheSpecificExternalContactRoleRowI(i, role);
+            });
+        },
+
+        selectRandomExternalContactNameRowI: function (i) {
+            it("Select the random external contact name row i ", function () {
+                pages.create_deal_general.selectTheRandomExternalContactNameRowI(i);
+            });
+        },
+
+        fillIntoDemoDealChargeBacksField: function () {
+            it("Fill into the demo deal charge backs field ", function () {
+                pages.create_deal_general.fillIntoTheDemoDealChargeBacksField();
+            });
+        },
+
+        fillIntoUsCopyrightCertificateDealChargeBacksField: function () {
+            it("Fill into the us copyright certificate deal charge backs field ", function () {
+                pages.create_deal_general.fillIntoTheUsCopyrightCertificateDealChargeBacksField();
+            });
+        },
+
+        fillIntoLegalFeesDealChargeBacksField: function () {
+            it("fill into the legal fees deal charge back field ", function () {
+                pages.create_deal_general.fillIntoTheLegalFeesDealChargeBacksField();
+            });
+        },
+
+        fillIntoAdvertisingAndPromotionsDealChargeBacksField: function () {
+            it("Fill into the advertising and promotions deal charge backs field ", function () {
+                pages.create_deal_general.fillIntoTheAdvertisingAndPromotionsDealChargeBacksField();
+            });
+        },
+
+        fillIntoLeadSheetsDealChargeBackField: function () {
+            it("Fill into the lead sheets deal charge backs field ", function () {
+                pages.create_deal_general.fillIntoTheLeadSheetsDealChargeBackField();
+            });
+        },
+
+        clickOnYesMechanicalNonTitleBoundIncome: function () {
+            it("Click on the yes mechanical non title bound income and check it is successfully selected ", function () {
+                pages.create_deal_general.clickOnTheYesMechanicalNonTitleBoundIncome();
+                var test = pages.create_deal_general.elems.yesMechanicalNonTitleBoundIncome.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        clickOnNoMechanicalNonTitleBoundIncome: function () {
+            it("Click on the no mechanical non title bound income and check it is successfully selected ", function () {
+                pages.create_deal_general.clickOnTheNoMechanicalNonTitleBoundIncome();
+                var test = pages.create_deal_general.elems.noMechanicalNonTitleBoundIncome.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        clickOnYesPerformanceNonTitleBoundIncome: function () {
+            it("Click on the yes performance non title bound income and check it is successfully selected ", function () {
+                pages.create_deal_general.clickOnTheYesPerformanceNonTitleBoundIncome();
+                var test = pages.create_deal_general.elems.yesPerformanceNonTitleBoundIncome.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        clickOnNoPerformanceNonTitleBoundIncome: function () {
+            it("Click on the no performance non title bound income and check it is successfully selected ", function () {
+                pages.create_deal_general.clickOnTheNoPerformanceNonTitleBoundIncome();
+                var test = pages.create_deal_general.elems.noPerformanceNonTitleBoundIncome.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
         itFillDealMandatoryFieldsGeneralTab: function () {
             describe("Fill mandatory fields in deals general tab", function () {
                     steps.create_deal_general.goToNewDealPage();
