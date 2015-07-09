@@ -24,8 +24,8 @@ var beforeFeature = function () {
     },
 
     feature = [{
-        name: "Create related deals",
-        tags: ["create_related_deals_validation_tooltip"],
+        name: "Create finder deals",
+        tags: ["create_finder_deals_validation_tooltip"],
         steps: function () {
             var number = Math.floor(Math.random() * 1000) + 1;
             var percent = (Math.random() * 100 + 1).toFixed(2);
@@ -74,8 +74,8 @@ var beforeFeature = function () {
         }
     },
         {
-            name: "Dirty check general terms related deals",
-            tags: ["dirty_check_general_terms_related_deals"],
+            name: "Dirty check general terms finder deals",
+            tags: ["dirty_check_general_terms_finder_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var percent = (Math.random() * 100 + 1).toFixed(2);
@@ -112,8 +112,8 @@ var beforeFeature = function () {
             }
         },
         {
-            name: "Validate negative scenarios related deals",
-            tags: ["create_view_edit_related_deals"],
+            name: "Validate negative scenarios finder deals",
+            tags: ["create_view_edit_finder_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var num = Math.floor(Math.random() * 500) + 1;
@@ -172,8 +172,8 @@ var beforeFeature = function () {
             }
         },
         {
-            name: "Create terms by contract period related deals",
-            tags: ["create_terms_by_contract_period_related_deals"],
+            name: "Create terms by contract period finder deals",
+            tags: ["create_terms_by_contract_period_finder_deals"],
             steps: function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -236,8 +236,8 @@ var beforeFeature = function () {
             }
         },
         {
-            name: "Create and view related deals terms by contract period",
-            tags: ["create_view_edit_terms_by_contract_period_related_deals"],
+            name: "Create and view finder deals terms by contract period",
+            tags: ["create_view_edit_terms_by_contract_period_finder_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var num = Math.floor(Math.random() * 500) + 1;
@@ -303,8 +303,8 @@ var beforeFeature = function () {
             }
             },
         {
-            name: "Dirty check related deals terms by contract period",
-            tags: ["dirty_check_terms_by_contract_period_related_deals"],
+            name: "Dirty check finder deals terms by contract period",
+            tags: ["dirty_check_terms_by_contract_period_finder_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var num = Math.floor(Math.random() * 500) + 1;
@@ -343,8 +343,8 @@ var beforeFeature = function () {
         },
 
         {
-            name: "Modular save related deals",
-            tags: ["modular_save_related_deals"],
+            name: "Modular save finder deals",
+            tags: ["modular_save_finder_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var num = Math.floor(Math.random() * 500) + 1;
@@ -447,7 +447,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["related_deals"],
+    commonFeatureTags: ["finder_deals"],
     feature: feature,
     beforeFeature: beforeFeature
 };
