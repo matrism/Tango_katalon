@@ -14,7 +14,7 @@ if (pages.create_deal_general === undefined) {
             monthExecutionDate: {css: "#deal-general input[data-ng-model='date.month']"},
             dayExecutionDate: {css: "#deal-general input[data-ng-model='date.day']"},
             dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},
-            dealSigningTerritoryDropDownData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
+            dealSigningTerritoryDropDownsData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
             contractingPartiesInput: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             contractingPartiesField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
             artistsField: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass']"},
@@ -49,7 +49,7 @@ if (pages.create_deal_general === undefined) {
 
         selectDesiredSigningTerritory: function (specific_country) {
             pages.create_deal_general.elems.dealSigningTerritoryPopup.click();
-            expect(pages.create_deal_general.elems.dealSigningTerritoryDropDownData.isDisplayed);
+            expect(pages.create_deal_general.elems.dealSigningTerritoryDropDownsData.isDisplayed);
             var desiredOption;
             browser.driver.findElements(by.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
                 .then(function findMatchingOption(options) {
