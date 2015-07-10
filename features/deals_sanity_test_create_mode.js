@@ -27,6 +27,13 @@ var beforeFeature = function () {
         steps: function () {
             //fill all general screen fields
             steps.create_deal_general.itAddAllGeneralFieldsForSanityToDealGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.create_deal_contract_period.itAddDifferentTypesOfContractPeriods();
+
+            //steps.deal.itContinueToNextPage();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
         }
     }];
 

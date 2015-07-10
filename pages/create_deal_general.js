@@ -14,13 +14,13 @@ if (pages.create_deal_general === undefined) {
             monthExecutionDate: {css: "#deal-general input[data-ng-model='date.month']"},
             dayExecutionDate: {css: "#deal-general input[data-ng-model='date.day']"},
             dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},
-            dealSigningTerritoryDropDownsData: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
+            dealSigningTerritoryDropDownData: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
             contractingPartiesInput: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             contractingPartiesField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
             artistsField: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass']"},
             artistFieldInput: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             artistsDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
-            representMultipleDealsField: {css: "div.tg-dropdown-button"},
+            representMultipleDealsField: {css: "div[data-ng-model='deal.mult_deal_reason_code'] div.tg-dropdown-button"},
             exclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(1)"},
             nonExclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(2)"},
             dealKeywordsField: {css: "div[name='dealKeywords'] div[ng-class='tgTypeaheadWrapClass']"},
@@ -42,16 +42,16 @@ if (pages.create_deal_general === undefined) {
             leadSheetsDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(5) input"},
             yesMechanicalNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(1) button[data-ng-model='bbc.intbid']:nth-child(1)"},
             noMechanicalNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(1) button[data-ng-model='bbc.intbid']:nth-child(2)"},
-            yesPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(1) button[data-ng-model='bbc.intbid']:nth-child(1)"},
-            noPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(1) button[data-ng-model='bbc.intbid']:nth-child(2)"}
+            yesPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(1)"},
+            noPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(2)"}
         },
 
 
         selectDesiredSigningTerritory: function (specific_country) {
             pages.create_deal_general.elems.dealSigningTerritoryPopup.click();
-            expect(pages.create_deal_general.elems.dealSigningTerritoryDropDownsData.isDisplayed);
+            expect(pages.create_deal_general.elems.dealSigningTerritoryDropDownData.isDisplayed);
             var desiredOption;
-            browser.driver.findElements(by.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
+            browser.driver.findElements(by.css("div[name='dealSigningTerritory'] div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -168,8 +168,8 @@ if (pages.create_deal_general === undefined) {
 
         selectTheRandomValueRepresentMultipleDeals: function () {
             pages.create_deal_general.elems.representMultipleDealsField.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.dropdown-menu li.ng-scope"))));
-            browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='deal.mult_deal_reason_code'] ul.dropdown-menu li.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='deal.mult_deal_reason_code'] ul.dropdown-menu li.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -216,7 +216,7 @@ if (pages.create_deal_general === undefined) {
 
         selectTheRandomExternalContactRoleRowI: function (i) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='externalContactsForm']:nth-child(" + i + ") select[name='role'] option"))));
-            browser.driver.findElement(By.css("div[data-ng-form='externalContact']:nth-child(" + i + ") select[name='role'] option"))
+            browser.driver.findElements(By.css("div[data-ng-form='externalContact']:nth-child(" + i + ") select[name='role'] option"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -226,7 +226,7 @@ if (pages.create_deal_general === undefined) {
         selectTheSpecificExternalContactRoleRowI: function (i, role) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='externalContactsForm']:nth-child(" + i + ") select[name='role'] option"))));
-            browser.driver.findElement(By.css("div[data-ng-form='externalContactsForm']:nth-child(" + i + ") select[name='role'] option"))
+            browser.driver.findElements(By.css("div[data-ng-form='externalContactsForm']:nth-child(" + i + ") select[name='role'] option"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -281,7 +281,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         clickOnTheYesMechanicalNonTitleBoundIncome: function(){
-            pages.create_deal_general.yesMechanicalNonTitleBoundIncome.click();
+            pages.create_deal_general.elems.yesMechanicalNonTitleBoundIncome.click();
         },
 
         clickOnTheNoMechanicalNonTitleBoundIncome: function(){
