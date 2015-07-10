@@ -285,6 +285,25 @@ if (steps.create_deal_general === undefined) {
                     steps.create_deal_general.selectRandomInternalContactDropDown();
                 }
             );
+        },
+
+        itAddAllGeneralFieldsForSanityToDealGeneralTab: function () {
+            describe("Add all fields for general tab sanity in deals general tab", function () {
+                    steps.create_deal_general.goToNewDealPage();
+                    steps.create_deal_general.clickOnDraftContractStatus();
+                    steps.create_deal_general.clickOnExecutedContractStatus();
+                    steps.create_deal_general.fillIntoExecutionDateField();
+                    steps.create_deal_general.selectDealSigningTerritory();
+                    steps.create_deal_general.fillContractingPartyField();
+                    steps.create_deal_general.waitForContractingPartyDropDown();
+                    steps.create_deal_general.selectRandomContractingParty();
+                    steps.create_deal_general.selectRandomArtistValue();
+                    steps.create_deal_general.selectRandomValueRepresentMultipleDeals();
+                    steps.create_deal_general.clickOnNonExclusiveDealRights();
+                    steps.create_deal_general.clickOnExclusiveDealRights();
+                    steps.create_deal_general.selectRandomDealKeywords();
+                }
+            );
         }
     };
 }
