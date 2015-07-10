@@ -77,7 +77,7 @@ if(_tf_config._system_.seleniumAddress) {
     config.seleniumAddress = _tf_config._system_.seleniumAddress;
 }
 else {
-    config.chromeOnly = true;
+    config.directConnect = true;
     config.chromeDriver = '../node_modules/protractor/selenium/chromedriver';
 }
 
