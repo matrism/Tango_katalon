@@ -244,6 +244,10 @@ if (pages.create_deal_contract_period === undefined) {
 
         clickOnMdrcCarriedForwardShortfallActionButton: function () {
             pages.create_deal_contract_period.elems.mdrcCarriedForwardShortfallButton.click();
+        },
+        
+        selectTheContractPeriodNumberI : function (i) {
+            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         }
     });
 }

@@ -43,7 +43,6 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.fillEndTargetMonths();
             }
             steps.create_deal_scope.addSpecificScope("Finder");
-            steps.create_deal_scope.selectCountry();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -93,7 +92,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -132,7 +130,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -189,7 +186,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -256,7 +252,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -323,7 +318,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -363,7 +357,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();

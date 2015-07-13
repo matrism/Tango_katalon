@@ -323,6 +323,11 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
+        selectContractPeriodNumberI : function(i){
+          it("Select contract period number " + i + " from list", function(){
+             pages.create_deal_contract_period.selectTheContractPeriodNumberI(i);
+          });
+        },
 
         itAddIncompleteMdrcContractPeriod: function () {
             describe("Add incomplete MDRC on  contract period screen", function () {

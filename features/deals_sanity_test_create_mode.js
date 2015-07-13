@@ -29,11 +29,14 @@ var beforeFeature = function () {
             steps.create_deal_general.itAddAllGeneralFieldsForSanityToDealGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.create_deal_contract_period.itAddDifferentTypesOfContractPeriods();
-
-            //steps.deal.itContinueToNextPage();
-            //steps.deal.saveDeal();
-            //steps.deal.waitForDealToBeSaved();
-            //steps.deal.returnDealNumber();
+            steps.create_deal_contract_period.selectContractPeriodNumberI(1);
+            steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.create_deal_scope.itAddPublisherShare();
+            steps.create_deal_scope.itOverridePublisherShare("romaniapub1", "Romania");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
         }
     }];
 
