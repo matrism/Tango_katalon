@@ -737,7 +737,7 @@ module.exports.creatorNames = function(i) {
 	var ithElement;
 	var elements = (
 		$(".scope-delivery-table")
-			.all(by.binding("creator.person_name"))
+			.all(by.binding("::creatorContribution.creator.name"))
 			.filter (
 				function(element) {
 					return element.isDisplayed();
