@@ -142,7 +142,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillIntoTheExecutionYearField: function () {
-            var year = Math.floor(Math.random() * 215) + 1801;
+            var year = Math.floor(Math.random() * 214) + 1801;
             pages.create_deal_general.elems.yearExecutionDate.sendKeys(year);
         },
 

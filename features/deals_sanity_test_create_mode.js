@@ -49,9 +49,9 @@ var beforeFeature = function () {
             steps.royaltyRates.addIncomeProviderByPartialMatch("provider");
             steps.royaltyRates.addEffectiveStartDate("2015-05-03");
             steps.royaltyRates.addNPSToContractualField('30');
-            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
             //add ret set admin fee
@@ -59,11 +59,26 @@ var beforeFeature = function () {
             steps.royaltyRates.addIncomeProviderByPartialMatch("income");
             steps.royaltyRates.addEffectiveStartDate("2015-06-15");
             steps.royaltyRates.addAdminFeeToContractualField('40');
-            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
+            //override rate set nps
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addIncomeProviderByPartialMatch("test");
+            steps.royaltyRates.addEffectiveStartDate("2015-02-03");
+            steps.royaltyRates.addNPSToContractualField('30');
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
+            steps.royaltyRates.overrideInterCompanyRateInputFieldManual();
+            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
+            steps.base.scrollIntoView("inter company rate set button", pages.royaltyRates.elems.interCompanyInputField);
+            steps.royaltyRates.overrideInterCompanyRateInputFieldByRule();
+            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
+            steps.royaltyRates.saveRateSet();
+
 
 
             steps.deal.itContinueToNextPage();

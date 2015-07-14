@@ -34,69 +34,64 @@ if (pages.royaltyRates === undefined) {
             yesInterCompanyRatePerformance: {css: "div.rate-set_group__performance button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
             yesInterCompanyRatePrint: {css: "div.rate-set_group__print button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
             yesInterCompanyRateSynch: {css: "div.rate-set_group__synch button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
-            yesInterCompanyRateTpp: {css: "div.rate-set_group__tpp button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"}
-
-
+            yesInterCompanyRateTpp: {css: "div.rate-set_group__tpp button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            interCompanyInputField: {css: "input[data-ng-model='set.ic_rate']"},
+            confirmOverrideModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
+            overrideModalDialog: {css: "div.modal-dialog.ng-scope"},
+            interCompanyArrow: {css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']"}
         },
         activeContractPeriod: function () {
-          return $(".contract-period-menu-item.ng-scope.active>div>p>strong.overflow");
+            return $(".contract-period-menu-item.ng-scope.active>div>p>strong.overflow");
         },
         editModeActiveScopeName: function () {
-          return $(".scope-description-header");
+            return $(".scope-description-header");
         },
-        createModeActiveScopeName:function()
-        {
-          return $("fieldset>.control-group>.controls>.input-addition>input").getAttribute("value");
+        createModeActiveScopeName: function () {
+            return $("fieldset>.control-group>.controls>.input-addition>input").getAttribute("value");
         },
 
 
         sectionLoader: function () {
-          return $(".section-loader");
+            return $(".section-loader");
         },
 
         originalPublisherName: function () {
-return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(2)>div>.ps-name").first();
+            return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(2)>div>.ps-name").first();
         },
 
-            administratorName: function () {
-                return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(3)>div>.ps-name").first();
-            },
+        administratorName: function () {
+            return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(3)>div>.ps-name").first();
+        },
         publisherSharesSaveButton: function () {
             return $('.CONTROLS>div>button[data-ng-click="tgModularViewMethods.save();"]');
         },
-        administratorInput:function()
-        {
-          return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
+        administratorInput: function () {
+            return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
 
         },
-        originalPublishersDropdownList:function()
-        {
-          return $$(".tg-typeahead__suggestions-group-item.ng-scope");
+        originalPublishersDropdownList: function () {
+            return $$(".tg-typeahead__suggestions-group-item.ng-scope");
         },
 
 
-        suggestionDropdown:function()
-        {
+        suggestionDropdown: function () {
             return $(".tg-typeahead__suggestions-container");
         },
-        originalPublisherInput:function()
-        {
+        originalPublisherInput: function () {
 
-          return $$(".publisher-share>.publisher-row>.ps-name>div>div>div>div>div>div>input").last();
+            return $$(".publisher-share>.publisher-row>.ps-name>div>div>div>div>div>div>input").last();
         },
-        newPublisherSharedButton:function()
-        {
+        newPublisherSharedButton: function () {
 
-          return $(".publisher-share-totals>a");
+            return $(".publisher-share-totals>a");
         },
-        rateSetCancelButton:function()
-        {
+        rateSetCancelButton: function () {
 
-          return $(".btn-cancel");
+            return $(".btn-cancel");
         },
-        incomeProviderDeleteButtons:function(){
-var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
-          //return element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove"));
+        incomeProviderDeleteButtons: function () {
+            var temp = $$('.ng-scope[ng-switch-when="false"]').last();
+            //return element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove"));
             return temp.$("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove");
 
         },
@@ -141,8 +136,6 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         },
 
 
-
-
         errorMessageRR: function () {
 
             return element(by.css("div>div>div>.validation-message-text"));
@@ -154,17 +147,17 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         }
         ,
         NPS: function () {
-          return   $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(1);
+            return $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(1);
         },
         adminFee: function () {
-          return   $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(2);
+            return $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(2);
         },
         payout: function () {
 
             return $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").first();
         },
         lastPayoutFromSubmenu: function () {
-          return $$(".tg-selectize-contractual-rate>ul:nth-child(2)>li:last-child");
+            return $$(".tg-selectize-contractual-rate>ul:nth-child(2)>li:last-child");
         },
 
         contractualRateInput: function () {
@@ -210,7 +203,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         },
 
         lastSetOnReceiptFromCoverMechanical: function () {
-           return  $$(".rate-set_group__coverMechanical>div>div>div>div>.rate-set-rate-ram>div").last().element(by.buttonText("On Receipt"));
+            return $$(".rate-set_group__coverMechanical>div>div>div>div>.rate-set-rate-ram>div").last().element(by.buttonText("On Receipt"));
         },
 
         prevailingPopup: function () {
@@ -218,9 +211,8 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         },
 
         onReceiptMethodButtonOnPrevailingPopup: function () {
-          return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
+            return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
         },
-
 
 
         //LOCATORS END
@@ -244,7 +236,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
             pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
             this.newRoyaltyRateSetButton().click();
-        } ,
+        },
 
         clickNewRoyaltySetButtonEdit: function () {
 
@@ -281,7 +273,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             $$(".rate-set-row.rate-set-header>a>.icon-chevron-up")
                 .then(function (result) {
 
-                    for (i = 0; i < result.length-1; i++) {
+                    for (i = 0; i < result.length - 1; i++) {
                         result[i].click();
                     }
                 }
@@ -289,55 +281,43 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         },
 
-        typeInAllInputs:function(value){
+        typeInAllInputs: function (value) {
             var i = 0;
 
 
-
             browser.driver.executeScript(
-
-                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
-                "   for (var i=0; i < els.length; i++) {"+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +
+                "   for (var i=0; i < els.length; i++) {" +
                 "       els[i].value = '1.23'; }"
-
-
-
             );
-           browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
+            browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
 
                 .then(function (result) {
 
                     for (i = 0; i < result.length; i++) {
 
-                      result[i].sendKeys("45");
+                        result[i].sendKeys("45");
 
 
                     }
 
 
-
-
-                    })
-                },
-        typeAllInputs:function(value){
+                })
+        },
+        typeAllInputs: function (value) {
             var i = 0;
 
 
-
             browser.driver.executeScript(
-
-                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
-                "   for (var i=0; i < els.length; i++) {"+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +
+                "   for (var i=0; i < els.length; i++) {" +
                 "       els[i].value = '5.55'; }"
-
-
-
             );
-          $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
+            $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
 
                 .then(function (result) {
 
-                    console.log("Inputs to type in : "+ result.length);
+                    console.log("Inputs to type in : " + result.length);
                     for (i = 0; i < result.length; i++) {
 
                         result[i].sendKeys("55");
@@ -346,18 +326,16 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
                     }
 
 
-
-
                 })
         },
-        typeAllInputsTest:function(value){
+        typeAllInputsTest: function (value) {
             var i = 0;
 
             $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
 
                 .then(function (result) {
 
-                    console.log("Inputs to type in : "+ result.length);
+                    console.log("Inputs to type in : " + result.length);
                     for (i = 0; i < result.length; i++) {
 
                         result[i].sendKeys();
@@ -366,26 +344,18 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
                     }
 
 
-
-
                 })
         },
-        checkDecimalNumber:function(number)
-        {
+        checkDecimalNumber: function (number) {
 
 
-
-            console.log("Check Decimal Number : "+number);
+            console.log("Check Decimal Number : " + number);
             browser.driver.sleep(10000);
-            var i ;
+            var i;
             var bool = true;
             browser.driver.executeScript(
-
-                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +
                 "  console.log( els.length);  "
-
-
-
             );
             $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
 
@@ -394,14 +364,12 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
 
                     for (i = 0; i < result.length; i++) {
-                        console.log("NUmber of inputs"+i);
-                        if(bool)
-
-                        {
+                        console.log("NUmber of inputs" + i);
+                        if (bool) {
 
 
-                            bool =  result[i].getAttribute('value') == number;
-                            console.log( result[i].getAttribute('value'));
+                            bool = result[i].getAttribute('value') == number;
+                            console.log(result[i].getAttribute('value'));
 
 
                         }
@@ -414,23 +382,12 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             return bool;
 
 
-
-
-
-
-                }
-
-
-
-
-
-
-
+        }
 
 
         ,
 
-        closeRoyaltySet : function () {
+        closeRoyaltySet: function () {
             pages.royaltyRates.elems.closeRateSetButton.click();
 
             ftf.helper.waitForElement(pages.royaltyRates.elems.confirmCancelButton, 30000);
@@ -446,8 +403,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
 
         },
-        waitPanel:function()
-        {
+        waitPanel: function () {
             var element;
 
             element = $(".rate-set-name-input");
@@ -509,9 +465,9 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
                     sentKeys = element;
 
                     var incomeProviderInput;
-                  // incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
+                    // incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
 
-                   incomeProviderInput = $$(".flex1>.ng-valid>div>div>div>div>div>input").last();
+                    incomeProviderInput = $$(".flex1>.ng-valid>div>div>div>div>div>input").last();
 
 
                     pages.base.scrollIntoView($(".flex1>.ng-valid>div>div>div>div>div>input"));
@@ -529,7 +485,6 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
                     browser.wait(ExpectedConditions.visibilityOf(suggestion));
 
                     suggestion.click();
-
 
 
                 })
@@ -558,7 +513,6 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
             var incomeProviderInput;
             var temp = [];
-
 
 
             incomeProviderInput = element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-name.ng-binding"));
@@ -640,42 +594,42 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         },
 
-        clickOnTheYesInterCompanyRateCoverMechanical : function () {
-           pages.royaltyRates.elems.yesInterCompanyRateCoverMechanical.click();
+        clickOnTheYesInterCompanyRateCoverMechanical: function () {
+            pages.royaltyRates.elems.yesInterCompanyRateCoverMechanical.click();
         },
 
 
-        clickOnTheYesInterCompanyRateMechanical : function () {
+        clickOnTheYesInterCompanyRateMechanical: function () {
             pages.royaltyRates.elems.yesInterCompanyRateMechanical.click();
         },
 
 
-        clickOnTheYesInterCompanyRateNonSocietyPerformance : function () {
+        clickOnTheYesInterCompanyRateNonSocietyPerformance: function () {
             pages.royaltyRates.elems.yesInterCompanyRateNonSocietyPerformance.click();
         },
 
 
-        clickOnTheYesInterCompanyRateOthers : function () {
+        clickOnTheYesInterCompanyRateOthers: function () {
             pages.royaltyRates.elems.yesInterCompanyRateOthers.click();
         },
 
 
-        clickOnTheYesInterCompanyRatePerformance : function () {
+        clickOnTheYesInterCompanyRatePerformance: function () {
             pages.royaltyRates.elems.yesInterCompanyRatePerformance.click();
         },
 
 
-        clickOnTheYesInterCompanyRatePrint : function () {
+        clickOnTheYesInterCompanyRatePrint: function () {
             pages.royaltyRates.elems.yesInterCompanyRatePrint.click();
         },
 
 
-        clickOnTheYesInterCompanyRateSynch : function () {
+        clickOnTheYesInterCompanyRateSynch: function () {
             pages.royaltyRates.elems.yesInterCompanyRateSynch.click();
         },
 
 
-        clickOnTheYesInterCompanyRateTpp : function () {
+        clickOnTheYesInterCompanyRateTpp: function () {
             pages.royaltyRates.elems.yesInterCompanyRateTpp.click();
         },
 
@@ -753,8 +707,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             }
 
         },
-        clickcancelRateSet:function()
-        {
+        clickcancelRateSet: function () {
 
             this.rateSetCancelButton().click();
 
@@ -787,7 +740,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
             this.payout().click();
             browser.driver.sleep(2000);
-           this.lastPayoutFromSubmenu().click();
+            this.lastPayoutFromSubmenu().click();
 
 
         }
@@ -829,7 +782,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         clickDoneButtonForRRSet: function () {
 
 
-            console.log(JSON.stringify( hash.royaltyRates.royaltyRateObjectsList, null, 4));
+            console.log(JSON.stringify(hash.royaltyRates.royaltyRateObjectsList, null, 4));
 
             var RRDoneButton;
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
@@ -844,9 +797,8 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             browser.wait(ExpectedConditions.invisibilityOf($(".pull-right.rate_set-loader")));
         },
 
-        waitForRRToBeSaved:function()
-        {
-           browser.driver.sleep(10000);
+        waitForRRToBeSaved: function () {
+            browser.driver.sleep(10000);
 
         },
 
@@ -867,13 +819,12 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         },
 
-        clearIncomeProviderInput:function()
-        {
+        clearIncomeProviderInput: function () {
             //while(this.incomeProviderDeleteButtons().isPresent())
             //{
 
-                this.incomeProviderDeleteButtons().click();
-          //  }
+            this.incomeProviderDeleteButtons().click();
+            //  }
 
             //var index;
             //var elements = this.incomeProviderDeleteButtons();
@@ -885,15 +836,14 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             //    elements[index].click();
             //
             //}
-          //  elements.forEach(function(element) {
-             //   element.click();
+            //  elements.forEach(function(element) {
+            //   element.click();
             //});
 
         },
-        checkDecimalPlaces:function()
-        {
+        checkDecimalPlaces: function () {
             browser.driver.sleep(5000);
-            var i ;
+            var i;
             var bool = true;
             browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
 
@@ -901,13 +851,12 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
                     for (i = 0; i < result.length; i++) {
 
-                     //   result[i].sendKeys("45");
+                        //   result[i].sendKeys("45");
 
 
-                        if(bool)
-                        {
+                        if (bool) {
 
-                       bool =  result[i].getAttribute('value').length <= 5;
+                            bool = result[i].getAttribute('value').length <= 5;
                         }
 
                     }
@@ -919,30 +868,25 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             return bool;
         },
 
-        clickAddNewPublisherSharesButton:function()
-        {
+        clickAddNewPublisherSharesButton: function () {
             this.newPublisherSharedButton().click();
 
 
         },
-       typeIntoOriginalPublisherInput:function(originalPublisher)
-        {
+        typeIntoOriginalPublisherInput: function (originalPublisher) {
             this.originalPublisherInput().sendKeys(originalPublisher);
 
         },
 
-        selectFirstOriginalPublisher:function()
-        {
+        selectFirstOriginalPublisher: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.suggestionDropdown()));
 
-           this.originalPublisherInput().sendKeys(protractor.Key.ARROW_DOWN);
+            this.originalPublisherInput().sendKeys(protractor.Key.ARROW_DOWN);
             this.originalPublisherInput().sendKeys(protractor.Key.ENTER);
 
 
-
         },
-        selectFirstAdministrator:function()
-        {
+        selectFirstAdministrator: function () {
 
             browser.wait(ExpectedConditions.visibilityOf(this.suggestionDropdown()));
 
@@ -952,8 +896,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         ,
 
-        typeIntoAdministratorInput:function(administrator)
-        {
+        typeIntoAdministratorInput: function (administrator) {
             this.administratorInput().sendKeys(administrator);
 
         },
@@ -962,24 +905,45 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             this.publisherSharesSaveButton().click();
         },
 
-        originalPublisherNameHasText:function(text)
-        {
+        originalPublisherNameHasText: function (text) {
 
             return this.originalPublisherName().getText();
         },
-       administratorNameHasText: function (text) {
-           return this.administratorName().getText();
-       },
+        administratorNameHasText: function (text) {
+            return this.administratorName().getText();
+        },
 
         prevailingPopupIsDisplayed: function () {
-            pages.base.scrollIntoView( this.prevailingPopup());
+            pages.base.scrollIntoView(this.prevailingPopup());
             return this.prevailingPopup().isPresent();
         },
         clickOnReceiptMethodOnPrevailingPopup: function () {
             this.onReceiptMethodButtonOnPrevailingPopup().click();
+        },
+
+        fillIntoTheInterCompanyRateInputField: function () {
+            var number = Math.floor(Math.random() * 80) + 1;
+            pages.royaltyRates.elems.interCompanyInputField.click();
+            pages.royaltyRates.elems.interCompanyInputField.clear();
+            pages.royaltyRates.elems.interCompanyInputField.sendKeys(number);
+        },
+
+        selectFromInterCompanyRateRandomValueDropDown: function () {
+            pages.royaltyRates.elems.interCompanyArrow.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.scr-ul li.sor-li.ng-scope"))));
+            browser.driver.findElements(By.css("ul.scr-ul li.sor-li.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
+
+        confirmTheOverrideRRModalDialog: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.elems.overrideModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.royaltyRates.elems.confirmOverrideModalDialog));
+            pages.royaltyRates.elems.confirmOverrideModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.royaltyRates.elems.confirmOverrideModalDialog));
         }
-
-
 
 
     });
