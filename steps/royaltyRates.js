@@ -304,6 +304,32 @@ if (steps.royaltyRates === undefined) {
             });
 
         },
+        addRateBalanceToContractualField: function (percentage) {
+            it("Add Balance to Contractual Rate Field", function () {
+
+
+                pages.royaltyRates.typeIntoContractualRateInput(percentage);
+
+                    pages.royaltyRates.addPercentageToContractualRateInput();
+
+
+
+
+            });
+        },
+        overrideCoverMechanicalInterCompanyRate: function (percentage) {
+
+            it("Override Cover Mechanical Inter Company Rate with "+ percentage + " % value", function () {
+                pages.royaltyRates.typeIntoCoverMechanicalInterCompanyRateInput(percentage);
+                pages.royaltyRates.waitForInputLoaderToAppear();
+                //pages.royaltyRates.waitForInputLoaderToDissapear();
+            })
+        },
+        setInterCompanyRateToDefault: function () {
+          it("Set Inter Company Rate To Default", function () {
+              pages.royaltyRates.getInterCompanyRateToDefaultState();
+          })
+        },
         addNPSToContractualField: function (percentage) {
             it("Add NPS to Contractual Rate Field", function () {
 
@@ -380,6 +406,7 @@ if (steps.royaltyRates === undefined) {
             it("Expand all RR groups", function () {
 
                 pages.royaltyRates.expandAllIncomeGroups();
+                browser.driver.sleep(5000);
 
             });
 
@@ -440,7 +467,7 @@ if (steps.royaltyRates === undefined) {
         },
         waitForRateSetToBeSaved: function () {
           it("Wait for RR To Be Saved", function () {
-              pages.royaltyRates.waitForLoadToAppear();
+          //    pages.royaltyRates.waitForLoadToAppear();
               pages.royaltyRates.waitForLoadToFinish();
           })
         },
@@ -877,6 +904,46 @@ if (steps.royaltyRates === undefined) {
             it("Click Save Publisher Shares Button", function () {
                 pages.royaltyRates.clickSavePublisherSharesButton();
             })
+        },
+        deleteLastAddedPayout: function () {
+            it("Delete Last Added Payout", function () {
+
+                pages.royaltyRates.deletePayoutNumberLast();
+            })
+        },
+        verifyBalancePresentOnlyOnce: function () {
+
+            it("Check that Balance is Present only Once", function () {
+                expect(pages.royaltyRates.getAllRateSetsCount()).toBe(47);
+            })
+        },
+        removeAllContractualRates: function () {
+          
+            it("Remove all contractual Rates", function () {
+                pages.royaltyRates.pressRemoveAllRatesButton();
+            })
+        },
+        lastPayoutDeterminesIC: function (value) {
+
+            it("Set Last Payout Inter Company Rates to "+value, function () {
+                if(value == "NO")
+                    pages.royaltyRates.setLastPayoutICtoNo();
+            });
+
+
+        },
+        verifyICRateIs: function (value) {
+            it("Check that Inter Company Rate equals "+value, function () {
+                expect(pages.royaltyRates.getICValue()).toBe(value);
+            });
+
+
+        },
+        checkNoIncomeRatesPresent: function () {
+            it("Verify that no Income Rates Are added", function () {
+                expect(pages.royaltyRates.getAllRateSetsCount()).toBe(0);
+            });
+
         },
 
 

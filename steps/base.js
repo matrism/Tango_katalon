@@ -16,6 +16,13 @@ module.exports.scrollIntoView = function(elName, el) {
 		}
 	);
 };
+module.exports.scrollToBottomOfPage = function() {
+	it (
+		"Scroll to the bottom of the page", function() {
+			browser.executeScript('window.scrollTo(0,10000);') ;
+		}
+	);
+};
 module.exports.hoverElement = function(elName, el) {
 	it (
 		"Hover " + elName, function() {

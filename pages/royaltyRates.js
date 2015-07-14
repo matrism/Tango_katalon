@@ -192,13 +192,13 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         }
         ,
         onReceiptMethodButton: function () {
-            return $$(".rate-set-rate-ram>.btn-group").last().element(by.buttonText("On Receipt"));
+            return $$(".rate-set-rate-ram>.btn-group").first().element(by.buttonText("On Receipt"));
 
 
         }
         ,
         atSourceMethodButton: function () {
-            return $$(".rate-set-rate-ram>.btn-group").last().element(by.buttonText("At Source"));
+            return $$(".rate-set-rate-ram>.btn-group").first().element(by.buttonText("At Source"));
         },
 
         lastSetOnReceiptFromCoverMechanical: function () {
@@ -210,6 +210,41 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         onReceiptMethodButtonOnPrevailingPopup: function () {
           return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
         },
+
+        coverMechanicalInterCompanyRateInput: function () {
+
+            return $$(".rate-set_group__coverMechanical>div>div>div>div.rate-set-rate-field>.input-append>span>input").first();
+        },
+
+        inputLoader: function () {
+
+            return $(".loader-16x16");
+        },
+        clickContractualInputChevron: function () {
+
+            return $$(".scr-input-chevron").first();
+        },
+        selectDefaultOptionFromDropdown: function () {
+
+            return $$(".flex1.ng-binding").first();
+        },
+        deleteButtonsPayoutArrayCoverMechanical: function () {
+            return $$(".rate-set_group__coverMechanical>div>.rate-set_income-type__CMEC>.rate-set-income-type-rates>.rate-set-row>.rate-set-rate-delete-btn>a")
+        },
+
+        removeAllRatesButton: function () {
+          return $('[data-ng-click="onItemClick(\'REMOVE\')"]');
+        },
+        rateSetsList: function () {
+          return $$(".rate-set-rate-name>.rate-set-view-values")
+        },
+        lastPayoutICNo: function () {
+return $$('.rate-set-income-type-rates>.rate-set-row:last-child>.btn-group>[data-btn-radio="false"]').first();
+        },
+        ICRateInput: function () {
+return $$(".rate-set-income-type>.rate-set-row>.rate-set-rate-field>div>span>input").first();
+        },
+
 
 
 
@@ -713,8 +748,18 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
             effectiveStartDateCalendarIco = element(by.css(".rate-set-calendar>.control-group>span"));
             effectiveStartDateCalendarIco.click();
+        },
+        typeIntoCoverMechanicalInterCompanyRateInput: function (percentage) {
+            this.coverMechanicalInterCompanyRateInput().clear();
+          this.coverMechanicalInterCompanyRateInput().sendKeys(percentage);
         }
         ,
+        waitForInputLoaderToAppear: function () {
+            browser.wait(ExpectedConditions.visibilityOf(this.inputLoader()));
+        },
+        waitForInputLoaderToDissapear: function () {
+            browser.wait(ExpectedConditions.invisibilityOf(this.inputLoader()));
+        },
         typeIntoContractualRateInput: function (percentage) {
 
             browser.wait(ExpectedConditions.visibilityOf(this.contractualRateInput()));
@@ -723,12 +768,32 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             this.contractualRateInput().sendKeys(percentage);
             this.contractualRateInput().click();
         },
+        getInterCompanyRateToDefaultState: function () {
+
+            this.clickContractualInputChevron().click();
+            browser.wait(ExpectedConditions.visibilityOf(this.selectDefaultOptionFromDropdown()));
+            this.selectDefaultOptionFromDropdown().click();
+
+        },
         addPercentageToContractualRateInput: function () {
 
 
             this.payout().click();
             browser.driver.sleep(2000);
-           this.lastPayoutFromSubmenu().click();
+
+            var that = this;
+            this.lastPayoutFromSubmenu().isDisplayed().then(function (isVisible) {
+
+
+                if(isVisible.toString() == "true")
+                {
+
+
+                    that.lastPayoutFromSubmenu().click();
+                }
+            });
+
+
 
 
         }
@@ -770,7 +835,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         clickDoneButtonForRRSet: function () {
 
 
-            console.log(JSON.stringify( hash.royaltyRates.royaltyRateObjectsList, null, 4));
+           // console.log(JSON.stringify( hash.royaltyRates.royaltyRateObjectsList, null, 4));
 
             var RRDoneButton;
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
@@ -921,6 +986,34 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         },
         clickOnReceiptMethodOnPrevailingPopup: function () {
             this.onReceiptMethodButtonOnPrevailingPopup().click();
+        },
+        deletePayoutNumberLast:function()
+        {
+            this.deleteButtonsPayoutArrayCoverMechanical().last().click();
+        },
+        getAllRateSetsCount: function () {
+            return this.rateSetsList().count();
+        },
+        pressRemoveAllRatesButton: function () {
+            browser.driver.sleep(2000);
+            this.contractualRateInput().clear();
+          this.contractualRateInput().click();
+
+            browser.wait(ExpectedConditions.visibilityOf(this.removeAllRatesButton()));
+
+            this.removeAllRatesButton().click();
+
+        },
+        setLastPayoutICtoNo: function () {
+            this.lastPayoutICNo().click();
+        },
+
+        getICValue: function () {
+
+            pages.base.scrollIntoView(this.ICRateInput());
+           // browser.wait(ExpectedConditions.invisibilityOf(this.inputLoader()));
+            browser.driver.sleep(20000);
+            return this.ICRateInput().getAttribute("value");
         }
 
 
