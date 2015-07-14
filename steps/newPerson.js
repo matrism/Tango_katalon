@@ -9,24 +9,24 @@ require(pages_path + 'person');
 require(steps_path + 'person');
 require(pages_path + 'newPerson');
 
-exports.goToNewPersonPage = function() {
-    it('Go to new person page', function() {
+exports.goToNewPersonPage = function () {
+    it('Go to new person page', function () {
         pages.newPerson.open();
     });
 };
 
-exports.enterFirstName = function(value) {
-    it('Enter first name (' + value + ')', function() {
-        pages.newPerson.enterFirstName(value).then(function() {
+exports.enterFirstName = function (value) {
+    it('Enter first name (' + value + ')', function () {
+        pages.newPerson.typeFirstName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.firstName = value;
 
-            if(person.presentationName) {
+            if (person.presentationName) {
                 return;
             }
 
-            if(person.lastName) {
+            if (person.lastName) {
                 person.name = person.lastName + ', ' + value;
             }
             else {
@@ -36,18 +36,18 @@ exports.enterFirstName = function(value) {
     });
 };
 
-exports.enterLastName = function(value) {
-    it('Enter last name (' + value + ')', function() {
-        pages.newPerson.enterLastName(value).then(function() {
+exports.enterLastName = function (value) {
+    it('Enter last name (' + value + ')', function () {
+        pages.newPerson.typeLastName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.lastName = value;
 
-            if(person.presentationName) {
+            if (person.presentationName) {
                 return;
             }
 
-            if(person.firstName) {
+            if (person.firstName) {
                 person.name = value + ', ' + person.firstName;
             }
             else {
@@ -57,9 +57,10 @@ exports.enterLastName = function(value) {
     });
 };
 
-exports.enterPresentationName = function(value) {
-    it('Enter presentation name (' + value + ')', function() {
-        pages.newPerson.enterPresentationName(value).then(function() {
+
+exports.enterPresentationName = function (value) {
+    it('Enter presentation name (' + value + ')', function () {
+        pages.newPerson.typePresentationName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.name = value;
@@ -68,85 +69,172 @@ exports.enterPresentationName = function(value) {
     });
 };
 
-exports.addAlternativeName = function() {
-    it('Add alternative name', function() {
-        pages.newPerson.addAlternativeName();
+exports.addAlternativeName = function () {
+    it('Add alternative name', function () {
+        pages.newPerson.clickAddAlternativeName();
     });
 };
 
-exports.enterAlternativeFirstName = function(i, value) {
-    it('Enter alternative first name #' +  (i + 1) + ' (' + value + ')', function() {
-        pages.newPerson.enterAlternativeFirstName(i, value).then(function() {
+exports.enterAlternativeFirstName = function (i, value) {
+    it('Enter alternative first name #' + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeAlternativeFirstName(i, value).then(function () {
             var person = hash.currentPersonSlot;
 
-            person.firstName = value;
+            person.alternativeFirstName = value;
 
-            if(person.presentationName) {
+            if (person.presentationName) {
                 return;
             }
 
-            if(person.lastName) {
-                person.name = person.lastName + ', ' + value;
+            if (person.alternativeLastName) {
+                person.alternativeName = person.alternativeLastName + ', ' + value;
             }
             else {
-                person.name = value;
+                person.alternativeName = value;
             }
         });
     });
 };
 
-exports.enterAlternativeLastName = function(i, value) {
-    it('Enter alternative last name #' +  (i + 1) + ' (' + value + ')', function() {
-        pages.newPerson.enterAlternativeLastName(i, value).then(function() {
+exports.enterAlternativeLastName = function (i, value) {
+    it('Enter alternative last name #' + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeAlternativeLastName(i, value).then(function () {
             var person = hash.currentPersonSlot;
 
-            person.lastName = value;
+            person.alternativeLastName = value;
 
-            if(person.presentationName) {
+            if (person.presentationName) {
                 return;
             }
 
-            if(person.firstName) {
-                person.name = value + ', ' + person.firstName;
+            if (person.alternativeFirstName) {
+                person.alternativeName = value + ', ' + person.alternativeFirstName;
             }
             else {
-                person.name = value;
+                person.alternativeName = value;
             }
         });
     });
 };
 
-exports.enterSuisaIpiNumber = function(value) {
-    it('Enter SUISA IPI number (' + value + ')', function() {
-        pages.newPerson.enterSuisaIpiNumber(value).then(function() {
+exports.enterAlternativeCreditsName = function (i,value) {
+        it('Enter alternative credits name #' + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeAlternativeCreditsName(i,value).then(function () {
+            hash.currentPersonSlot.alternativeCreditsName= value;
+        });
+    });
+};
+exports.enterAlternativeSuisaIpiNumber= function (i,value) {
+    it('Enter alternative Siosa Ipi name #' + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeAlternativeSuisaIpiNumber(i,value).then(function () {
+            hash.currentPersonSlot.alternativeSuisaIpiNumber= value;
+        });
+    });
+};
+
+
+exports.enterSuisaIpiNumber = function (value) {
+    it('Enter SUISA IPI number (' + value + ')', function () {
+        pages.newPerson.typeSuisaIpiNumber(value).then(function () {
             hash.currentPersonSlot.ipiNumber = value;
             hash.currentPersonSlot.suisaIpiNumber = value;
         });
     });
 };
 
-exports.enterAffiliatedSocietySearchTerms = function(value) {
-    it('Enter affiliated society search terms (' + value + ')', function() {
-        pages.newPerson.enterAffiliatedSocietySearchTerms(value).then(function() {
+exports.enterAffiliatedSocietySearchTerms = function (value) {
+    it('Enter affiliated society search terms (' + value + ')', function () {
+        pages.newPerson.typeAffiliatedSocietySearchTerms(value).then(function () {
             hash.currentPersonSlot.affiliatedSociety = value;
         });
     });
 };
 
-exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
-    it('Select affiliated society search result #' + (i + 1), function() {
-        pages.newPerson.selectAffiliatedSocietySearchResultByIndex(i);
+exports.selectAffiliatedSocietySearchResultByIndex = function (i) {
+    it('Select affiliated society search result #' + (i + 1), function () {
+        pages.newPerson.clickAffiliatedSocietySearchResultByIndex(i);
+    });
+};
+exports.enterAddressOne = function (value) {
+    it('Type Address One ' + value, function () {
+        pages.newPerson.typeIntoAddressOneInput(value).then(function () {
+            hash.currentPersonSlot.affiliatedSociety = value;
+        });
+    });
+};
+exports.enterCity = function (value) {
+    it('Type City ' + value, function () {
+        pages.newPerson.typeIntoCityInput(value).then(function () {
+            hash.currentPersonSlot.city = value;
+        });
     });
 };
 
-exports.save = function() {
-    it('Save person', function() {
+exports.enterRegion = function (value) {
+    it('Type Region ' + value, function () {
+        pages.newPerson.typeIntoRegionInput(value).then(function () {
+            hash.currentPersonSlot.region = value;
+        });
+    });
+};
+
+exports.enterPostalCode = function (value) {
+    it('Type Postal Code ' + value, function () {
+        pages.newPerson.typeIntoPostalCodeInput(value).then(function () {
+            hash.currentPersonSlot.postalCode = value;
+        });
+    });
+};
+
+exports.enterPhone = function (value) {
+    it('Type Phone ' + value, function () {
+        pages.newPerson.typeIntoPhoneInput(value).then(function () {
+            hash.currentPersonSlot.phone = value;
+        });
+    });
+};
+exports.enterEmail = function (value) {
+    it('Type Email ' + value, function () {
+        pages.newPerson.typeIntoEmailInput(value).then(function () {
+            hash.currentPersonSlot.email = value;
+        });
+    });
+};
+
+
+
+
+exports.save = function () {
+    it('Save person', function () {
         pages.newPerson.save();
     });
 };
 
-exports.validateSaveRedirection = function() {
-    it('Validate save redirection', function() {
+exports.validateSaveRedirection = function () {
+    it('Validate save redirection', function () {
         pages.newPerson.validateSaveRedirection();
     });
 };
+exports.enterCreditsName = function (value) {
+    it('Enter Credits Name (' + value + ')', function () {
+
+        pages.newPerson.typeCreditsName(value).then(function () {
+            hash.currentPersonSlot.creditsName = value;
+        });
+    });
+};
+
+exports.enterDateOfDeath = function (year,month,day)
+{
+    it('Enter Date of Death (' + year +"-"+month+"-"+ day+')', function () {
+
+        pages.newPerson.typeDateOfDeath(year,month,day).then(function () {
+            hash.currentPersonSlot.dateOfDeath = year +"-"+month+"-"+ day;
+        });
+
+
+    });
+
+};
+
+

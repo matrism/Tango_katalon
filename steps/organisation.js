@@ -130,7 +130,55 @@ if (steps.organisation === undefined) {
 
         }
 ,
+        executeRegistrationRun: function () {
+          it("Execute Registration Run", function () {
+              //
+              //if( == "false")
+              //{
+              //    pages.organisation.resetWork();
+              // //   pages.organisation.waitForWorkToBeInDeliverableState();
+              //   // pages.organisation.clickExecuteRegistrationRunButton();
+              //
+              //}
+              //else
+              //{
+              //   // pages.organisation.clickExecuteRegistrationRunButton();
+              //
+              //
+              //
+              //}
 
+
+              var that = this;
+              pages.organisation.registrationCanBeRun().then(function (isVisible) {
+
+
+                  if(isVisible.toString() == "true")
+                  {
+
+
+                     console.log("isVisible");
+                  }
+                  else
+                  {
+                      pages.organisation.resetWork();
+                      console.log("invisible");
+                  }
+              })
+          })
+        },
+        goToPreviewRegistrationRunTab: function () {
+            it("Go to Preview Registration Run Tab", function () {
+                pages.organisation.clickPreviewRegistrationRunTab();
+            })
+        },
+
+        selectCustomRegistrationRun: function (value) {
+        it("Select custom registration run "+value, function () {
+            pages.organisation.clickCustomWorksButton();
+            pages.organisation.selectValueFromPopupRegRun(value);
+        })
+        },
         pause: function () {
 
 

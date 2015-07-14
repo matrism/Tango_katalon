@@ -4,6 +4,8 @@ var steps_path = _tf_config._system_.path_to_steps;
 
 require(steps_path + "login");
 require(steps_path + "new_work");
+require(steps_path+"searchSection");
+require(steps_path+"organisation");
 
 var beforeFeature = [
     [steps.login.itLogin]
@@ -15,11 +17,23 @@ var workData = {};
 
 var feature = [
     {
-        name: "Validate works scheduling",
-        tags: [""],
+        name: "Validate CR Registration  scheduling",
+        tags: ["crRegistration"],
         steps: [
-            [steps.organisation.searchByName],
-            [steps.work.validateWork, [workData]],
+            [steps.searchSection.accessSavedOrganisationByName,["BMI"]],
+            [steps.organisation.goToPreviewRegistrationRunTab],
+             [steps.organisation.selectCustomRegistrationRun,["CR_2014-09-01"]],
+         //  [steps.organisation.pause]
+            [steps.organisation.executeRegistrationRun]
+            ////note critical errors and total works
+            //[steps.organisation.goToRegistrationActivityTab],
+            //[steps.organisation.verifyThatWorkIsDelivered],
+            //[steps.searchSection.accessSavedOrganisationByName,[hash.thirdPartyOrg]],
+            //[steps.organisation.goToPreviewRegistrationRunTab],
+            //[steps.organisation.verifyThatWorkIsDelivered],
+            //[steps.registrationFileActivity.goToPage],
+            //[steps.registrationFileActivity.expandLastDeliveredWork],
+            //[steps.registrationFileActivity.verifyDetails]
         ]
     }
 

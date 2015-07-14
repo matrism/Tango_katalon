@@ -1,4 +1,5 @@
 "use strict";
+var client = require('http-api-client');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.organisation === undefined) {
@@ -110,10 +111,43 @@ if (pages.organisation === undefined) {
             return element(by.css(".typeahead-result"));
         },
 
+        navigationTab: function () {
+          return $(".nav-tabs");
+        },
+        activityHeader: function () {
+          return $("#ACTIVITY-HEADER");
+        },
+        previewRegistrationRunTab: function () {
+
+            return $$(".nav-tabs>li>a").last();
+        },
+        registrationRunHeader: function () {
+            return $(".reg-run-header");
+        },
+        customWorkButton: function () {
+            return $$(".reg-run-header>span>div>div>span>a").first();
+        },
+        popupRegistrationRun: function () {
+
+            return $(".popup-reg-run");
+        },
+        popupRegistrationLinkByText: function (text) {
+//$$(".popup-reg-run>ul>li>a").
+        return element(By.linkText(text));
+
+           // return protractor.driver.findElement(protractor.By.linkText(text));
+        },
+        activeRegistrationRunButton: function () {
+
+            return $('[data-tooltip=""][data-ng-click="canExecuteStackedWorks() && executeStackedWorks();"]');
+        },
 
 
 //END OF LOCATORS ///////////////////////////////////////
 
+        executeRegistrationIsActive: function () {
+          return this.activeRegistrationRunButton().isPresent();
+        },
 
         
         clickIncomeProviderSection:function()
@@ -127,7 +161,7 @@ if (pages.organisation === undefined) {
          browser.wait(ExpectedConditions.visibilityOf(pages.organisation.incomeProviderSection()));
            //browser.wait(ExpectedConditions.visibilityOf(this.generalOrganisationSection()));
 
-        //    this.scopeHeading().click();
+        //    this.scopeHeading().click()
 
             pages.base.scrollIntoView( this.incomeProviderSection());
            this.incomeProviderSection().click();
@@ -233,10 +267,48 @@ if (pages.organisation === undefined) {
 
 
 
+        },
+        registrationCanBeRun: function () {
+            browser.wait(ExpectedConditions.visibilityOf(this.activityHeader()));
+            return this.executeRegistrationIsActive();
         }
         ,
 
+        resetWork: function (env,deliveryDate,name) {
 
+            //http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01
+var enviroinment = "http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?";
+            var recipient = "BMI";
+            var runDate = "2014-09-01";
+
+
+            client.request({
+
+                //url: enviroinment+"recipient="+recipient+"&runDate="+runDate
+                url:"http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01",
+                method: 'POST' // optional
+            }).then(function (response) {
+                //response.getStatusCode(); // returns the HTTP status code
+                console.log(response.getStatusCode()); // returns the string representation of the response body
+                //response.getBuffer(); // returns the raw response Buffer object http://nodejs.org/api/buffer.html
+               // response.getNativeResonse(); // returns the native NodeJS repsonse object
+               // response.getJSON(); // returns a JSON-parsed repsonse
+            });
+        },
+        clickPreviewRegistrationRunTab: function () {
+
+            browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
+            this.previewRegistrationRunTab().click();
+        },
+        clickCustomWorksButton: function () {
+            browser.wait(ExpectedConditions.visibilityOf(this.registrationRunHeader()));
+            this.customWorkButton().click();
+        }
+,
+        selectValueFromPopupRegRun: function (text) {
+            browser.wait(ExpectedConditions.visibilityOf(this.popupRegistrationRun()));
+            this.popupRegistrationLinkByText(text).click();
+        }
 
 
     });

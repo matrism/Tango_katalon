@@ -80,7 +80,6 @@ if (steps.searchSection === undefined) {
 
         }
         ,
-
         accessSavedOrganisationByName:function(organisationName)
         {
 
@@ -91,12 +90,12 @@ if (steps.searchSection === undefined) {
                 pages.searchSection.typeOrganisationNameIntoInput(organisationName);
                 pages.searchSection.selectValueFromDropdown();
 
-
             })
 
 
         }
         ,
+
 
 
 
