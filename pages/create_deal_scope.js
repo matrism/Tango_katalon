@@ -33,6 +33,8 @@ if (pages.create_deal_scope === undefined) {
             subtotalOwnPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
             chainTotalOwnPublisherShareErrorMessage: {css: "#deal-publisher  ul[role='alert'] li[data-ng-show='pubShareSetForm.$error.scopeOwnTotal']"},
             chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
+            yesSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(1)"},
+            noSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)"},
             modalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
@@ -419,6 +421,14 @@ if (pages.create_deal_scope === undefined) {
             element.sendKeys("wb music corp");
         },
 
+        clickOnTheYesSocietyAwardCreditPublisherShareSet: function(){
+          pages.create_deal_scope.elems.yesSocietyAwardCreditPss.click();
+        },
+
+        clickOnTheNoSocietyAwardCreditPublisherShareSet: function(){
+            pages.create_deal_scope.elems.noSocietyAwardCreditPss.click();
+        },
+
         selectRandomPublisherNameDropDownChainI: function (i) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
@@ -482,20 +492,33 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.subPublisherOverridePssInputField));
         },
 
-        selectTheSubPublisherOverridePss: function(subpublisher){
-            pages.create_deal_scope.elems.subPublisherOverridePssInputField.sendKeys(subpublisher);
+        selectTheSubPublisherOverridePss: function(subPublisherName, subPublisherSelected){
+            var desiredOption;
+            pages.create_deal_scope.elems.subPublisherOverridePssInputField.sendKeys(subPublisherName);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[name='subPublisherOverride'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(subPublisherSelected) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
                 })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         },
 
         selectTheSubPublisherOverrideTerritoryPss: function(territory){
             var desiredOption;
             pages.create_deal_scope.elems.territoryOverridePssField.click();
-            pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys("Romania");
+            pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys(territory);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {

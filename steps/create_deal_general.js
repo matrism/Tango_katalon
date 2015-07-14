@@ -4,6 +4,7 @@ var steps_path = _tf_config._system_.path_to_steps;
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 require(pages_path + "create_deal_general");
+require(steps_path + "base");
 
 if (steps.create_deal_general === undefined) {
     steps.create_deal_general = {
@@ -313,6 +314,7 @@ if (steps.create_deal_general === undefined) {
                     steps.create_deal_general.fillIntoLegalFeesDealChargeBacksField();
                     steps.create_deal_general.fillIntoAdvertisingAndPromotionsDealChargeBacksField();
                     steps.create_deal_general.fillIntoLeadSheetsDealChargeBackField();
+                    steps.base.scrollIntoView("scroll mechanical", pages.create_deal_general.elems.noMechanicalNonTitleBoundIncome);
                     steps.create_deal_general.clickOnNoMechanicalNonTitleBoundIncome();
                     steps.create_deal_general.clickOnYesMechanicalNonTitleBoundIncome();
                     steps.create_deal_general.clickOnYesPerformanceNonTitleBoundIncome();

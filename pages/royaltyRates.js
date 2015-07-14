@@ -26,8 +26,15 @@ if (pages.royaltyRates === undefined) {
             effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
             contractualRateLabel: {css: ".rate-set-rate-field>label"},
             interCompanyLabel: {css: ".rate-set-header-row:nth-child(3)>div:not([class])>label"},
-
-            scopeHeadingElement: {css: ".scope-heading"}
+            scopeHeadingElement: {css: ".scope-heading"},
+            yesInterCompanyRateCoverMechanical: {css: "div.rate-set_group__coverMechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateMechanical: {css: "div.rate-set_group__mechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateNonSocietyPerformance: {css: "div.rate-set_group__nonSocietyPerformance button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateOthers: {css: "div.rate-set_group__others button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRatePerformance: {css: "div.rate-set_group__performance button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRatePrint: {css: "div.rate-set_group__print button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateSynch: {css: "div.rate-set_group__synch button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateTpp: {css: "div.rate-set_group__tpp button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"}
 
 
         },
@@ -176,6 +183,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
 
         },
+
         newRoyaltyRateSetButtonEdit: function () {
             return $(".rate-sets-container-inner>a");
 
@@ -204,9 +212,11 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         lastSetOnReceiptFromCoverMechanical: function () {
            return  $$(".rate-set_group__coverMechanical>div>div>div>div>.rate-set-rate-ram>div").last().element(by.buttonText("On Receipt"));
         },
+
         prevailingPopup: function () {
             return $(".prevailing-icr");
         },
+
         onReceiptMethodButtonOnPrevailingPopup: function () {
           return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
         },
@@ -224,8 +234,18 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
             pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
             this.newRoyaltyRateSetButton().click();
-        }
-        ,
+        },
+
+        clickAddAnotherRoyaltySetButton: function () {
+
+
+            browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
+
+
+            pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
+            this.newRoyaltyRateSetButton().click();
+        } ,
+
         clickNewRoyaltySetButtonEdit: function () {
 
 
@@ -620,6 +640,45 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         },
 
+        clickOnTheYesInterCompanyRateCoverMechanical : function () {
+           pages.royaltyRates.elems.yesInterCompanyRateCoverMechanical.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateMechanical : function () {
+            pages.royaltyRates.elems.yesInterCompanyRateMechanical.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateNonSocietyPerformance : function () {
+            pages.royaltyRates.elems.yesInterCompanyRateNonSocietyPerformance.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateOthers : function () {
+            pages.royaltyRates.elems.yesInterCompanyRateOthers.click();
+        },
+
+
+        clickOnTheYesInterCompanyRatePerformance : function () {
+            pages.royaltyRates.elems.yesInterCompanyRatePerformance.click();
+        },
+
+
+        clickOnTheYesInterCompanyRatePrint : function () {
+            pages.royaltyRates.elems.yesInterCompanyRatePrint.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateSynch : function () {
+            pages.royaltyRates.elems.yesInterCompanyRateSynch.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateTpp : function () {
+            pages.royaltyRates.elems.yesInterCompanyRateTpp.click();
+        },
+
         getActiveIncomeToggle: function () {
 
 
@@ -756,17 +815,17 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             this.atSourceMethodButton().click();
         },
         clickYesOnRateMethodModal: function () {
-
             var rateMethodModalYesButton;
-            rateMethodModalYesButton = element(by.css(".modal-footer>.btn-primary"));
-
+            browser.wait(ExpectedConditions.elementToBeClickable(element(by.css(".modal-footer>.btn.btn-primary"))));
+            rateMethodModalYesButton = element(by.css(".modal-footer>.btn.btn-primary"));
             rateMethodModalYesButton.click();
-
         },
+
         clickLastOnReceiptFromCoverMechanical: function () {
 
             this.lastSetOnReceiptFromCoverMechanical().click();
         },
+
         clickDoneButtonForRRSet: function () {
 
 
@@ -776,9 +835,6 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
 
             RRDoneButton.click();
-
-
-
 
         },
         waitForLoadToAppear: function () {

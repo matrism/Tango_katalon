@@ -114,6 +114,22 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        clickOnYesSocietyAwardCreditPublisherShareSet: function () {
+            it("Click on the yes society award credit pss and check it is selected", function () {
+                pages.create_deal_scope.clickOnTheYesSocietyAwardCreditPublisherShareSet();
+                var test = pages.create_deal_scope.elems.yesSocietyAwardCreditPss.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        clickOnNoSocietyAwardCreditPublisherShareSet: function () {
+            it("Click on the no society award credit pss and check it is selected", function () {
+                pages.create_deal_scope.clickOnTheNoSocietyAwardCreditPublisherShareSet();
+                var test = pages.create_deal_scope.elems.noSocietyAwardCreditPss.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
         validatePlaceholdersForPublisherNameEAndAM: function () {
             it("Validate the placeholders for publisher name E and AM ", function () {
                 pages.create_deal_scope.validateThePlaceholdersForPublisherNameE();
@@ -357,9 +373,9 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        selectSubPublisherOverridePss: function (subpublisher) {
+        selectSubPublisherOverridePss: function (subPublisherName, subPublisherSelected) {
             it("Select the sub publisher override pss ", function () {
-                pages.create_deal_scope.selectTheSubPublisherOverridePss(subpublisher);
+                pages.create_deal_scope.selectTheSubPublisherOverridePss(subPublisherName, subPublisherSelected);
             });
         },
 
@@ -398,10 +414,22 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        itOverridePublisherShare: function (subpublisher, territory) {
+        itAddPublisherShareWithSocietyAwardCredit: function () {
+            describe("Add publisher share set", function () {
+                steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
+                steps.create_deal_scope.clickOnAddPublisherShareSet();
+                steps.create_deal_scope.clickOnYesSocietyAwardCreditPublisherShareSet();
+                steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+                steps.create_deal_scope.fillIntoFirstPublisherNameAMField("wb music corp");
+                steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+                steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
+            });
+        },
+
+        itOverridePublisherShare: function (subPublisherName, subPublisherSelected, territory) {
             describe("Override publisher share set", function () {
                 steps.create_deal_scope.clickOnAddOverrideIconPss();
-                steps.create_deal_scope.selectSubPublisherOverridePss(subpublisher);
+                steps.create_deal_scope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
                 steps.create_deal_scope.selectSubPublisherOverrideTerritoryPss(territory);
                 steps.base.scrollIntoView("Done override publisher share set", pages.create_deal_scope.elems.doneOverridePublisherShareSetButton);
                 steps.create_deal_scope.clickOnDoneSubPublisherOverridePss();

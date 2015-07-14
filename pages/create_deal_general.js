@@ -256,27 +256,27 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillIntoTheDemoDealChargeBacksField: function () {
-            var percent = (Math.random() * 100 + 1).toFixed(2);
+            var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.demosDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheUsCopyrightCertificateDealChargeBacksField: function(){
-            var percent = (Math.random() * 100 + 1).toFixed(2);
+            var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.usCopyrightCertificateDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheLegalFeesDealChargeBacksField: function(){
-            var percent = (Math.random() * 100 + 1).toFixed(2);
+            var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.legalFeesDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheAdvertisingAndPromotionsDealChargeBacksField: function(){
-            var percent = (Math.random() * 100 + 1).toFixed(2);
+            var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.advertisingPromotionsDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheLeadSheetsDealChargeBackField: function(){
-            var percent = (Math.random() * 100 + 1).toFixed(2);
+            var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.leadSheetsDealChargeBacksField.sendKeys(percent);
         },
 
