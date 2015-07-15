@@ -30,6 +30,13 @@ if (steps.create_deal_scope === undefined) {
 
         },
 
+        sharePublisherShareSet: function () {
+            it("Share publisher share set ", function () {
+                pages.create_deal_scope.shareThePublisherShareSet();
+                pages.create_deal_scope.saveThePublisherShareSets();
+            });
+        },
+
         addSpecificScope: function (contractType) {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
@@ -381,7 +388,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectSubPublisherOverrideTerritoryPss: function (territory) {
             it("Select the sub publisher override territory pss ", function () {
-                pages.create_deal_scope.selectTheSubPublisherOverrideTerritoryPss(territory);
+                pages.create_deal_scope.selectTheSubPublisherOverrideTerritoryPss(territory);;
             });
         },
 
@@ -431,6 +438,7 @@ if (steps.create_deal_scope === undefined) {
                 steps.create_deal_scope.clickOnAddOverrideIconPss();
                 steps.create_deal_scope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
                 steps.create_deal_scope.selectSubPublisherOverrideTerritoryPss(territory);
+                browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.doneOverridePublisherShareSetButton));
                 steps.base.scrollIntoView("Done override publisher share set", pages.create_deal_scope.elems.doneOverridePublisherShareSetButton);
                 steps.create_deal_scope.clickOnDoneSubPublisherOverridePss();
             });

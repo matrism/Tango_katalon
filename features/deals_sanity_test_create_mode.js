@@ -79,12 +79,16 @@ var beforeFeature = function () {
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
+            steps.create_deal_contract_period.selectContractPeriodNumberI(2);
+            steps.create_deal_scope.addSpecificScope("Finder");
+            steps.base.scrollIntoView("Share publisher share set", pages.create_deal_scope.elems.sharePublisherShareSetIcon);
+            steps.create_deal_scope.sharePublisherShareSet();
 
 
             steps.deal.itContinueToNextPage();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
         }
     }];
 
