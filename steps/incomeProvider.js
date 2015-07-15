@@ -36,8 +36,8 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        pages.deal_general.clickWarnerLogo();
-                        pages.deal_general.open().waitForAjax();
+                        pages.deal.clickWarnerLogo();
+                        pages.deal.open().waitForAjax();
                         pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
                         pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");
@@ -127,8 +127,8 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        pages.deal_general.clickWarnerLogo();
-                        pages.deal_general.open().waitForAjax();
+                        pages.deal.clickWarnerLogo();
+                        pages.deal.open().waitForAjax();
                         pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
                         pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");
@@ -223,8 +223,8 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        pages.deal_general.clickWarnerLogo();
-                        pages.deal_general.open().waitForAjax();
+                        pages.deal.clickWarnerLogo();
+                        pages.deal.open().waitForAjax();
                         pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
                         pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");
@@ -316,8 +316,8 @@ if (steps.incomeProvider === undefined) {
 
 
 
-                        pages.deal_general.clickWarnerLogo();
-                        pages.deal_general.open().waitForAjax();
+                        pages.deal.clickWarnerLogo();
+                        pages.deal.open().waitForAjax();
                         pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
                         pages.create_deal_general.fillContractingPartiesField("bmi");
                         var suggestion = $(".tg-typeahead__suggestions-container");

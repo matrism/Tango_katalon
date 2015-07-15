@@ -9,11 +9,16 @@ exports = module.exports = pages.newPerson = new ftf.pageObject({
 
 require(pages_path + '/base');
 
+exports.open = function() {
+    ftf.pageObject.prototype.open.call(this);
+    return pages.base.waitForAjax();
+};
 
 
 exports.firstNameInput = function() {
     return element(by.model('person.master_data.primary_name.first_name'));
 };
+
 exports.lastNameInput = function() {
     return element(by.model('person.master_data.primary_name.last_name'));
 };
@@ -58,7 +63,6 @@ exports.affiliatedSocietySearchResults = function() {
 exports.pageFooter = function() {
     return $('.page-footer');
 };
-
 exports.doneButton = function() {
     return exports.pageFooter().element(
         by.cssContainingText('button', 'Done')
@@ -121,6 +125,9 @@ exports.typeFirstName = function(value) {
     return element.sendKeys(value);
 };
 
+exports.lastNameInput = function() {
+    return element(by.model('person.master_data.primary_name.last_name'));
+};
 
 exports.typeLastName = function(value) {
     var element = exports.lastNameInput();
@@ -129,6 +136,9 @@ exports.typeLastName = function(value) {
     return element.sendKeys(value);
 };
 
+exports.presentationNameInput = function() {
+    return element(by.model('person.master_data.primary_name.presentation_name'));
+};
 
 exports.typePresentationName = function(value) {
     var element = exports.presentationNameInput();
@@ -137,6 +147,9 @@ exports.typePresentationName = function(value) {
     return element.sendKeys(value);
 };
 
+exports.addAlternativeNameButton = function() {
+    return element(by.cssContainingText('button', 'Add Alternative Name'));
+};
 
 
 exports.clickAddAlternativeName = function() {
@@ -145,11 +158,19 @@ exports.clickAddAlternativeName = function() {
     return element.click();
 };
 
+exports.alternativeNameContainers = function() {
+    return element.all(by.repeater('altName in person.master_data.alternative_names'));
+};
 
 exports.alternativeNameContainer = function(i) {
     return exports.alternativeNameContainers().get(i);
 };
 
+exports.alternativeFirstNameInput = function(i) {
+    return exports.alternativeNameContainer(i).element(
+        by.model('altName.first_name')
+    );
+};
 
 
 exports.typeAlternativeFirstName = function(i, value) {
@@ -159,6 +180,11 @@ exports.typeAlternativeFirstName = function(i, value) {
     return element.sendKeys(value);
 };
 
+exports.alternativeLastNameInput = function(i) {
+    return exports.alternativeNameContainer(i).element(
+        by.model('altName.last_name')
+    );
+};
 
 
 exports.typeAlternativeLastName = function(i, value) {
@@ -180,6 +206,10 @@ exports.typeAlternativeSuisaIpiNumber= function(i,value) {
     return element.sendKeys(value);
 };
 
+exports.suisaIpiNumberInput = function() {
+    return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
+};
+
 
 
 
@@ -194,6 +224,11 @@ exports.typeSuisaIpiNumber = function(value) {
     return element.sendKeys(value);
 };
 
+exports.affiliatedSocietySearchInput = function() {
+    return element(by.model('affSociety.society.model')).element(
+        by.model('$term')
+    );
+};
 
 
 
@@ -204,6 +239,9 @@ exports.typeAffiliatedSocietySearchTerms = function(value) {
     return element.sendKeys(value);
 };
 
+exports.affiliatedSocietySearchResults = function() {
+	return $$('.tg-typeahead__suggestions-group-item');
+};
 
 
 exports.affiliatedSocietySearchResult = function(i) {
@@ -216,6 +254,9 @@ exports.clickAffiliatedSocietySearchResultByIndex = function(i) {
     return exports.affiliatedSocietySearchResult(i).click();
 };
 
+exports.pageFooter = function() {
+    return $('.page-footer');
+};
 exports.typeIntoAddressOneInput = function(value) {
 
     return exports.addressOneInput().sendKeys(value);
@@ -223,6 +264,12 @@ exports.typeIntoAddressOneInput = function(value) {
 exports.typeIntoCityInput = function(value) {
 
     return exports.cityInput().sendKeys(value);
+};
+
+exports.doneButton = function() {
+    return exports.pageFooter().element(
+        by.cssContainingText('button', 'Done')
+    );
 };
 exports.typeIntoRegionInput = function(value) {
 
@@ -249,7 +296,7 @@ exports.expectDoneButtonToBeEnabled = function() {
 
 exports.save = function() {
 
-    console.log(JSON.stringify(hash.personSlots, null, 4));
+   // console.log(JSON.stringify(hash.personSlots, null, 4));
     exports.expectDoneButtonToBeEnabled();
     exports.doneButton().click();
     return pages.base.waitForAjax();

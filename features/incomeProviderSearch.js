@@ -20,7 +20,6 @@ require(steps_path + "create_deal_scope");
 //require(pages_path + "incomeProvider");
 require(steps_path + "incomeProvider");
 
-require(pages_path + "deal_general");
 
 
 var beforeFeature = function () {

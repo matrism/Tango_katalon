@@ -11,8 +11,8 @@ if (pages.deal === undefined) {
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
             termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
-            scopeHeader : {css: ".scope-heading"},
-            incomeRates:{css:".nav-tabs>li:nth-child(5)>a"},
+            scopeHeader: {css: ".scope-heading"},
+            incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm'] h3"}
@@ -55,7 +55,16 @@ if (pages.deal === undefined) {
         },
 
 
+        warnerLogo: function () {
+            return element(by.css("#DSP-LOGO"));
+        },
+
         //END OF LOCATORS
+
+        clickWarnerLogo: function () {
+            browser.refresh();
+            pages.deal.warnerLogo().click();
+        },
 
         continueToNextPage: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.continueButton));
@@ -78,19 +87,23 @@ if (pages.deal === undefined) {
             pages.deal.elems.termsHeader.click();
         },
         clickIncomeRatesLink: function () {
-
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
             pages.deal.elems.incomeRates.click();
 
 
         },
-
+        
+        goToFinderDealTerms: function () {
+            pages.deal.elems.finderDealsHeaderLink.click();
+        },
+        
         clickScopeHeader: function () {
 
 
             pages.base.waitForAjax();
 
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
+
 
 
             pages.deal.scopeHeaderElement().click();

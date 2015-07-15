@@ -81,6 +81,12 @@ if (pages.create_deal_contract_period === undefined) {
             pages.create_deal_contract_period.waitForAjax();
         },
 
+        fillEndActualDateSpecificValue: function(actualDate){
+            pages.create_deal_contract_period.elems.actualEndDate.sendKeys(actualDate);
+            pages.create_deal_contract_period.elems.contractPeriodArea.click();
+            pages.create_deal_contract_period.waitForAjax();
+        },
+
         addTheNewContractPeriodDialog:function(){
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.contractPeriodModalDialog));
             pages.create_deal_contract_period.elems.newContractPeriodModalDialog.click();
@@ -238,6 +244,10 @@ if (pages.create_deal_contract_period === undefined) {
 
         clickOnMdrcCarriedForwardShortfallActionButton: function () {
             pages.create_deal_contract_period.elems.mdrcCarriedForwardShortfallButton.click();
+        },
+        
+        selectTheContractPeriodNumberI : function (i) {
+            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         }
     });
 }

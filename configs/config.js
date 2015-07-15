@@ -13,8 +13,8 @@ var configer = ftf.configer,
             seleniumAddress: 'http://localhost:4444/wd/hub',
             browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "firefox"),
             resolution: {
-                width: 1600,
-                height: 900
+                width: 1280,
+                height: 720
             },
             reporting: cli.reporting in ["html", "xml", "all"] ? cli.reporting : "html",
             path_to_features: "./features/",

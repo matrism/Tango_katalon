@@ -21,6 +21,12 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
+        fillActualEndDateFieldSpecificValue: function (actualDate) {
+            it("Fill actual end date field ", function () {
+                pages.create_deal_contract_period.fillEndActualDateSpecificValue(actualDate);
+            });
+        },
+
         fillContractPeriodDescription: function (description) {
             it("Fill in description field contract period ", function () {
                 pages.create_deal_contract_period.fillDescriptionField(description);
@@ -317,6 +323,11 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
+        selectContractPeriodNumberI : function(i){
+          it("Select contract period number " + i + " from list", function(){
+             pages.create_deal_contract_period.selectTheContractPeriodNumberI(i);
+          });
+        },
 
         itAddIncompleteMdrcContractPeriod: function () {
             describe("Add incomplete MDRC on  contract period screen", function () {
@@ -398,6 +409,24 @@ if (steps.create_deal_contract_period === undefined) {
                 steps.base.scrollIntoView("Save MDRC button", pages.create_deal_contract_period.elems.mdrcSaveButton);
                 steps.create_deal_contract_period.saveMdrcForm();
             });
+        },
+
+        itAddDifferentTypesOfContractPeriods: function(){
+          describe("Add 4 different types of contract periods ", function(){
+              steps.create_deal_contract_period.fillContractPeriodDescription("Description 1");
+              steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+              steps.create_deal_contract_period.fillActualEndDateFieldSpecificValue("2015-04-04");
+              steps.create_deal_contract_period.addNewContractPeriodDialog();
+              steps.create_deal_contract_period.fillContractPeriodDescription("Description 2");
+              steps.create_deal_contract_period.fillEndTargetMonths();
+              steps.create_deal_contract_period.fillActualEndDateFieldSpecificValue("2016-02-04");
+              steps.create_deal_contract_period.addNewContractPeriodDialog();
+              steps.create_deal_contract_period.fillContractPeriodDescription("Description 3");
+              steps.create_deal_contract_period.fillEndTargetMonths();
+              steps.create_deal_contract_period.addNewContractPeriod();
+              steps.create_deal_contract_period.fillContractPeriodDescription("Description 4");
+              steps.create_deal_contract_period.fillEndTargetMonths();
+          });
         },
 
         itFillDealMandatoryFieldsContractPeriod: function () {

@@ -33,24 +33,27 @@ if (pages.create_deal_scope === undefined) {
             subtotalOwnPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
             chainTotalOwnPublisherShareErrorMessage: {css: "#deal-publisher  ul[role='alert'] li[data-ng-show='pubShareSetForm.$error.scopeOwnTotal']"},
             chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
+            yesSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(1)"},
+            noSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)"},
             modalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
-            publisherShareSetArea: {css: "div[data-tg-modular-edit-id='publisherShareSets']"}
+            publisherShareSetArea: {css: "div[data-tg-modular-edit-id='publisherShareSets']"},
+            overridePssIcon: {css: "div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] a[data-ng-click='showSubPubOverrideForm()'] i"},
+            subPublisherOverridePssInputField: {css: "div[name='subPublisherOverride'] input[ng-model='$term']"},
+            territoryOverridePssField: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
+            territoryOverridePssFieldInput: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            cancelOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='showSubPubOverrideForm()']"},
+            doneOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, false)']"},
+            addAnotherOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, true)']"},
+            sharePublisherShareSetIcon: {css: "div[data-ng-click='showSharePublisherShareSetSection(true)'] i"},
+            useThisPublisherShareSetButton: {css: "button[data-ng-click='sharePubShareSet(pss.id, modularEditModels.activeScope.id)']"}
         },
 
-        addContractPeriodIcon:function()
-        {
-          return $$(".column-add-button-icon").first();
+        addContractPeriodIcon: function () {
+            return $$(".column-add-button-icon").first();
 
         },
-        addContractPeriodButton:function()
-        {
-          return $(".column-add-button-hint").first();
-
-        },
-
-
 
         addScopeForm: function () {
             pages.create_deal_scope.elems.addScopeIcon.click();
@@ -102,6 +105,17 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.territoryInput.sendKeys("a");
         },
 
+        addTheSpecificTerritoryByTypingToScope: function (territory) {
+            pages.create_deal_scope.elems.territoryField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryInput));
+            pages.create_deal_scope.elems.territoryInput.sendKeys(territory);
+        },
+
+        addTheSpecificTerritoryOverridePssByTypingToScope: function (territory) {
+            pages.create_deal_scope.elems.territoryOverridePssField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryOverridePssFieldInput));
+            pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys(territory);
+        },
 
         selectRandomCountry: function () {
             var desiredOption;
@@ -111,6 +125,28 @@ if (pages.create_deal_scope === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 })
+        },
+
+        selectSpecificCountry: function (country) {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(country) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         },
 
         validateTheNoPublisherShareWarningMessage: function () {
@@ -387,6 +423,14 @@ if (pages.create_deal_scope === undefined) {
             element.sendKeys("wb music corp");
         },
 
+        clickOnTheYesSocietyAwardCreditPublisherShareSet: function(){
+          pages.create_deal_scope.elems.yesSocietyAwardCreditPss.click();
+        },
+
+        clickOnTheNoSocietyAwardCreditPublisherShareSet: function(){
+            pages.create_deal_scope.elems.noSocietyAwardCreditPss.click();
+        },
+
         selectRandomPublisherNameDropDownChainI: function (i) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
@@ -396,17 +440,8 @@ if (pages.create_deal_scope === undefined) {
                 })
         },
 
-        clickNewContractPeriodButton:function()
-        {
-
-      //      browser.actions().mouseMove(this.addContractPeriodIcon).perform();
-
-       //     browser.wait(ExpectedConditions.visibilityOf(this.addContractPeriodButton()));
+        clickNewContractPeriodButton: function () {
             this.addContractPeriodIcon().click();
-
-
-
-
         },
 
         selectSpecificPublisherNameDropDownChainI: function (publisherName, i) {
@@ -452,6 +487,76 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.confirmDeleteModalDialog));
             pages.create_deal_scope.elems.confirmDeleteModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_scope.elems.confirmDeleteModalDialog));
+        },
+
+        clickOnTheAddOverrideIconPss: function () {
+            pages.create_deal_scope.elems.overridePssIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.subPublisherOverridePssInputField));
+        },
+
+        selectTheSubPublisherOverridePss: function(subPublisherName, subPublisherSelected){
+            var desiredOption;
+            pages.create_deal_scope.elems.subPublisherOverridePssInputField.sendKeys(subPublisherName);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[name='subPublisherOverride'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(subPublisherSelected) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheSubPublisherOverrideTerritoryPss: function(territory){
+            var desiredOption;
+            pages.create_deal_scope.elems.territoryOverridePssField.click();
+            pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys(territory);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(territory) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        clickOnTheCancelSubPublisherOverridePss: function(){
+            pages.create_deal_scope.elems.cancelOverridePublisherShareSetButton.click();
+        },
+
+        clickOnTheAddAnotherSubPublisherOverridePss: function(){
+            pages.create_deal_scope.elems.addAnotherOverridePublisherShareSetButton.click();
+        },
+
+        clickOnTheDoneSubPublisherOverridePss: function(){
+            pages.create_deal_scope.elems.doneOverridePublisherShareSetButton.click();
+        },
+
+        shareThePublisherShareSet: function(){
+            pages.create_deal_scope.elems.sharePublisherShareSetIcon.click();
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.useThisPublisherShareSetButton));
+            pages.create_deal_scope.elems.useThisPublisherShareSetButton.click();
         }
 
 
