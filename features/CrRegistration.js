@@ -19,7 +19,7 @@ var workData = {};
 
 var feature = [
     {
-        name: "Validate CR Registration  scheduling azaza",
+        name: "Validate CR Registration  scheduling ",
         tags: ["crRegistration"],
         steps: [
             [steps.searchSection.accessSavedOrganisationByName,["BMI"]],
