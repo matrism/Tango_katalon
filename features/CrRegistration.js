@@ -6,6 +6,8 @@ require(steps_path + "login");
 require(steps_path + "new_work");
 require(steps_path+"searchSection");
 require(steps_path+"organisation");
+require(steps_path+"base");
+require(pages_path+"base");
 
 var beforeFeature = [
     [steps.login.itLogin]
@@ -24,7 +26,7 @@ var feature = [
             [steps.organisation.goToPreviewRegistrationRunTab],
              [steps.organisation.selectCustomRegistrationRun,["CR_2014-09-01"]],
          //  [steps.organisation.pause]
-            [steps.organisation.executeRegistrationRun]
+            [steps.organisation.executeRegistrationRun,["CR_2014-09-01"]]
             ////note critical errors and total works
             //[steps.organisation.goToRegistrationActivityTab],
             //[steps.organisation.verifyThatWorkIsDelivered],
