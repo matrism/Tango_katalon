@@ -1016,7 +1016,7 @@ return $$(".rate-set-income-type>.rate-set-row>.rate-set-rate-field>div>span>inp
            // browser.wait(ExpectedConditions.invisibilityOf(this.inputLoader()));
             browser.driver.sleep(20000);
             return this.ICRateInput().getAttribute("value");
-        }
+        },
 
         fillIntoTheInterCompanyRateInputField: function () {
             var number = Math.floor(Math.random() * 80) + 1;

@@ -3,7 +3,7 @@
 var pages_path = _tf_config._system_.path_to_pages,
     pph = require('../helpers/pph');
 
-exports = module.exports = pages.newPerson = new ftf.pageObject({
+ module.exports = pages.newPerson = new ftf.pageObject({
     url: _tf_config.urls.app_url + '#/create/person'
 });
 
