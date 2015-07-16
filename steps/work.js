@@ -1088,6 +1088,7 @@ module.exports.expectEnteredDeliveryYearNotToBe = function(value) {
 module.exports.validateMusicalDistributionCategory = function(value) {
 	it("Validate musical distribution category (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			value = value || hash.subjectWorkData.musicalDistributionCategory;
 			if(!value) {
 				return;
 			}
@@ -1098,6 +1099,7 @@ module.exports.validateMusicalDistributionCategory = function(value) {
 module.exports.validateTextMusicRelationship = function(value) {
 	it("Validate text music relationship (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			value = value || hash.subjectWorkData.textMusicRelationship;
 			if(!value) {
 				return;
 			}
@@ -1115,6 +1117,7 @@ module.exports.validateTextMusicRelationship = function(value) {
 module.exports.validateExcerptType = function(value) {
 	it("Validate excerpt type (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			value = value || hash.subjectWorkData.excerptType;
 			if(!value) {
 				return;
 			}
@@ -1132,6 +1135,7 @@ module.exports.validateExcerptType = function(value) {
 module.exports.validateVersionType = function(value) {
 	it("Validate version type (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			value = value || hash.subjectWorkData.versionType;
 			if(!value) {
 				return;
 			}
@@ -1142,6 +1146,7 @@ module.exports.validateVersionType = function(value) {
 module.exports.validateLyricAdaptation = function(value) {
 	it("Validate lyric adaptation (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			value = value || hash.subjectWorkData.lyricAdaptation;
 			if(!value) {
 				return;
 			}
@@ -1152,6 +1157,7 @@ module.exports.validateLyricAdaptation = function(value) {
 module.exports.validateMusicArrangement = function(value) {
 	it("Validate music arrangement (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			value = value || hash.subjectWorkData.musicArrangement;
 			if(!value) {
 				return;
 			}
