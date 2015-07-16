@@ -826,7 +826,7 @@ exports.saveWork = function() {
      steps.base.clickElement("Save Work", pages.new_work.saveWorkButton());
 };
 exports.validateSaveWorkRedirection = function() {
-     steps.base.validateRedirection("created work page", "/metadata");
+     steps.base.validateRedirection("created work page", "/rights");
 };
 module.exports.createBasicWork = function(data, more) {
     more = more || {};
