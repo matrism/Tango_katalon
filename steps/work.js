@@ -911,6 +911,15 @@ module.exports.validateCreatorName = function(name) {
 		}
 	);
 };
+exports.validateSubjectCreatorNames = function(howMany) {
+	_.times(howMany, function(i) {
+		it('Validate subject creator #' + (i + 1) + ' - name', function() {
+			expect(pages.work.creatorNames()).toContain(
+				hash.subjectWorkData.creators[i].name
+			);
+		});
+	});
+};
 module.exports.validateCreatorContributionByName = function(name, percentage) {
 	it (
 		"Validate creator contribution percentage (if validation value is not empty)", function() {
@@ -922,6 +931,16 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 			});
 		}
 	);
+};
+exports.validateSubjectCreatorContributions = function(howMany) {
+	_.times(howMany, function(i) {
+		it('Validate subject creator #' + (i + 1) + ' - contribution', function() {
+			var creator = hash.subjectWorkData.creators[i];
+			expect(pages.work.creatorContributionByName(creator.name)).toBe(
+				creator.contribution
+			);
+		});
+	});
 };
 exports.validateCompositeWorkType = function(data, key) {
     data = data || hash.subjectWorkData || {};
