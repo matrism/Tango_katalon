@@ -301,7 +301,7 @@ module.exports.randomTgDropdownSelector = function(element) {
 			"Pick a random dropdown option", function() {
 				pages.base.scrollIntoView(element);
 				element.click();
-				element.$$("[tg-dropdown-render-template='$templates.popup.item']").then (
+				element.$$("[tg-component-render-template='$templates.popup.item']").then (
 					function(optionElements) {
 						var randomOptionElement = _.sample(optionElements);
 						randomOptionElement.click();
@@ -321,7 +321,7 @@ module.exports.selectedDropdownOption = function(element) {
 module.exports.selectedTgDropdownOption = function(element) {
 	return (
 		element
-			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.$("[tg-component-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };
