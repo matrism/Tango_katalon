@@ -454,40 +454,40 @@ module.exports.deliveryDateBinding = function() {
 	return element(by.binding("work.pristine.delivery_date"));
 };
 module.exports.assetTypeContainer = function() {
-	return $("[data-tg-modular-edit='assetTypeEdit']");
+	return $("[data-tg-modular-edit-id='assetType']");
 };
 module.exports.musicalDistributionCategoryBinding = function() {
 	return element(by.binding(
 		"getAdminDataName(dataHolder.musicalDistributionCategories, " +
-		"assetTypeEdit.model.musical_work_distribution_category)"
+		"modularEditModels.model.musical_work_distribution_category)"
 	));
 };
 module.exports.textMusicRelationshipBinding = function() {
 	return element(by.binding(
 		"getAdminDataName(dataHolder.textMusicRelationships, " +
-		"assetTypeEdit.model.text_music_relationship)"
+		"modularEditModels.model.text_music_relationship)"
 	));
 };
 module.exports.excerptTypeBinding = function() {
 	return element(by.binding(
-		"getAdminDataName(dataHolder.excerptTypes, assetTypeEdit.model.excerpt_type)"
+		"getAdminDataName(dataHolder.excerptTypes, modularEditModels.model.excerpt_type)"
 	));
 };
 module.exports.versionTypeBinding = function() {
 	return element(by.binding(
-		"getAdminDataName(dataHolder.versionTypes, assetTypeEdit.model.version_type)"
+		"getAdminDataName(dataHolder.versionTypes, modularEditModels.model.version_type)"
 	));
 };
 module.exports.lyricAdaptationBinding = function() {
 	return element(by.binding(
 		"getAdminDataName(dataHolder.lyricAdaptations, " +
-		"assetTypeEdit.model.lyric_adaptation_type)"
+		"modularEditModels.model.lyric_adaptation_type)"
 	));
 };
 module.exports.musicArrangementBinding = function() {
 	return element(by.binding(
 		"getAdminDataName(dataHolder.musicArrangements, " +
-		"assetTypeEdit.model.music_arrangement_type)"
+		"modularEditModels.model.music_arrangement_type)"
 	));
 };
 module.exports.intendedPurposeBinding = function() {
@@ -518,22 +518,22 @@ module.exports.editAssetTypeButton = function() {
 	);
 };
 module.exports.editMusicalDistributionCategoryField = function() {
-	return element(by.model("assetTypeEdit.model.musical_work_distribution_category"));
+	return element(by.model("modularEditModels.model.musical_work_distribution_category"));
 };
 module.exports.editTextMusicRelationshipField = function() {
-	return element(by.model("assetTypeEdit.model.text_music_relationship"));
+	return element(by.model("modularEditModels.model.text_music_relationship"));
 };
 module.exports.editExcerptTypeField = function() {
-	return element(by.model("assetTypeEdit.model.excerpt_type"));
+	return element(by.model("modularEditModels.model.excerpt_type"));
 };
 module.exports.editVersionTypeField = function() {
-	return element(by.model("assetTypeEdit.model.version_type"));
+	return element(by.model("modularEditModels.model.version_type"));
 };
 module.exports.editLyricAdaptationField = function() {
-	return element(by.model("assetTypeEdit.model.lyric_adaptation_type"));
+	return element(by.model("modularEditModels.model.lyric_adaptation_type"));
 };
 module.exports.editMusicArrangementField = function() {
-	return element(by.model("assetTypeEdit.model.music_arrangement_type"));
+	return element(by.model("modularEditModels.model.music_arrangement_type"));
 };
 module.exports.cancelAssetTypeEditingButton = function() {
 	return (
@@ -548,7 +548,7 @@ module.exports.saveAssetTypeButton = function() {
 	);
 };
 module.exports.workOriginContainer = function() {
-	return $("[data-tg-modular-edit='workOriginEdit']");
+	return $("[data-tg-modular-edit-id='workOrigin']");
 };
 module.exports.editWorkOriginButton = function() {
 	return (
@@ -582,12 +582,12 @@ module.exports.editMusicLibraryField = function() {
 };
 module.exports.workInclusionOnWebsiteParagraph = function() {
 	return (
-		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
+		element(by.css("[data-ng-switch='!!modularEditModels.model.includeOnWebsite']"))
 			.element(by.css(".ng-scope"))
 	);
 };
 module.exports.editWorkInclusionOnWebsiteContainer = function() {
-	return $("[data-tg-modular-edit='wcmWebsiteEdit']");
+	return $("[data-tg-modular-edit-id='wcmWebsite']");
 };
 module.exports.editWorkInclusionOnWebsiteButton = function() {
 	return (
