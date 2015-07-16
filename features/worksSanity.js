@@ -18,7 +18,9 @@ var beforeFeature = [
 			steps: [
 				[steps.new_work.goToNewWorkPage],
 
-				[steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(0)]],
+				[steps.new_work.enterPrimaryWorkTitle, [
+					'TEST WORK ' + randomId('mainWork'),
+				]],
 
 				[function() {
 					var creatorCount = 2;
@@ -56,7 +58,9 @@ var beforeFeature = [
 			steps: [
 				[steps.work.goToWorkPage],
 
-				[steps.work.validatePrimaryWorkTitle, ['TEST WORK ' + randomId(0)]],
+				[steps.work.validatePrimaryWorkTitle, [
+					'TEST WORK ' + randomId('mainWork'),
+				]],
 
 				[steps.work.validateMusicalDistributionCategory],
 				[steps.work.validateTextMusicRelationship],
