@@ -175,14 +175,17 @@ module.exports.selectRandomDropdownOption.tg = function(element, more) {
 			}
 			originalOptionText = pages.base.selectedTgDropdownOption(element);
 			return (function tryAgain() {
-				var optionCssSelector = ".dropdown-menu > li .ng-binding";
 				var remainingOptions;
-				element.click();
-				return element.$$(optionCssSelector)
+				browser.executeScript(function(element) {
+					element.click();
+				}, element.$('.tg-dropdown-label').getWebElement());
+				return $$(".tg-dropdown-menu li .ng-binding")
 					.filter(function(option) {
+						var optionText = option.getText();
 						return pph.and (
-							pph.notInArray(blacklist, option.getText()),
-							pph.or(!more.different, pph.areNotEqual(option.getText(), originalOptionText))
+							pph.areNotEqual(optionText, ""),
+							pph.notInArray(blacklist, optionText),
+							pph.or(!more.different, pph.areNotEqual(optionText, originalOptionText))
 						);
 					})
 					.then(function(remainingOptions) {
