@@ -581,6 +581,9 @@ module.exports.selectRandomMusicalDistributionCategory = function() {
 			pages.new_work.musicalDistributionCategoryDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			hash.subjectWorkData.musicalDistributionCategory = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -591,6 +594,9 @@ module.exports.selectRandomTextMusicRelationship = function() {
 			pages.new_work.textMusicRelationshipDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			hash.subjectWorkData.textMusicRelationship = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -601,6 +607,9 @@ module.exports.selectRandomExcerptType = function() {
 			pages.new_work.excerptTypeDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			hash.subjectWorkData.excerptType = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -611,6 +620,9 @@ module.exports.selectRandomVersionType = function() {
 			pages.new_work.versionTypeDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			hash.subjectWorkData.versionType = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -626,6 +638,9 @@ module.exports.selectRandomLyricAdaptation = function() {
 				pages.new_work.lyricAdaptationDropdown(),
 				{ dropdownType: "tg" }
 			));
+			deferred.promise.then(function(value) {
+				hash.subjectWorkData.lyricAdaptation = value;
+			});
 		});
 	});
 	return deferred.promise;
@@ -642,6 +657,9 @@ module.exports.selectRandomMusicArrangement = function() {
 				pages.new_work.musicArrangementDropdown(),
 				{ dropdownType: "tg" }
 			));
+			deferred.promise.then(function(value) {
+				hash.subjectWorkData.musicArrangement = value;
+			});
 		});
 	});
 	return deferred.promise;
@@ -933,7 +951,9 @@ module.exports.createBasicWork = function(data, more) {
             steps.new_work.saveWork();
             steps.new_work.validateSaveWorkRedirection();
 
-            data.workId = steps.work.findCurrentlyOpenWorkId();
+            steps.work.findCurrentlyOpenWorkId().then(function(value) {
+                data.workId = value;
+            });
         }
     );
 };
