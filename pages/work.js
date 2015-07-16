@@ -252,7 +252,7 @@ exports.componentWorkRow = function(i) {
 };
 exports.componentWorkNameBindings = function() {
     return exports.componentWorkRows().all(
-        by.binding('{{ getWorkName(component.model) }}')
+        by.binding('getWorkName(component.model)')
     );
 };
 exports.componentWorkNameBinding = function(i) {
