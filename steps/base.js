@@ -3,6 +3,49 @@ var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 steps.base = exports;
+
+exports.useEntityDataSlot = function(entityType, slotId) {
+	var slotsByType = (
+		hash.entityDataSlotsByType = hash.entityDataSlotsByType || {}
+	);
+
+	var slotsOfThisType = slotsByType[entityType] = (
+		slotsByType[entityType] || {}
+	);
+
+	var targetSlot = slotsOfThisType[slotId] = (
+		slotsOfThisType[slotId] || {
+			slotId: slotId,
+		}
+	);
+
+	var currentSlotsByType = hash.currentEntityDataSlotsByType = (
+		hash.currentEntityDataSlotsByType || {}
+	);
+
+	hash.currentEntityDataSlotsByType[entityType] = targetSlot;
+};
+
+exports.clearCurrentEntityDataSlot = function(entityType) {
+	var slot = hash.currentEntityDataSlotsByType[entityType];
+
+	expect(slot).toBeTruthy();
+
+	Object.keys(slot).forEach(function(key) {
+		if(key === 'slotId') {
+			return;
+		}
+		else {
+			delete slot[key];
+		}
+	});
+};
+
+exports.useBlankEntityDataSlot = function(entityType, slotId) {
+	exports.useEntitySlot(entityType, slotId);
+	exports.clearCurrentEntitySlot(entityType);
+};
+
 exports.goToHomePage = function() {
     it('Go to home page', function() {
         pages.base.open();
