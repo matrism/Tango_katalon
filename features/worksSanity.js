@@ -76,6 +76,41 @@ var beforeFeature = [
 				[steps.work.validateSubjectCreatorContributions, [2]],
 			]
 		},
+		{
+			name: 'Create 2 basic works to use as components',
+			tags: [],
+			steps: [
+				[function() {
+					_.times(2, function(i) {
+						steps.new_work.goToNewWorkPage();
+
+						steps.new_work.enterPrimaryWorkTitle(
+							'TEST WORK ' + randomId('component' + i)
+						);
+
+						steps.new_work.selectRandomCreator(0);
+						steps.new_work.enterCreatorContribution(0, 100);
+
+						steps.new_work.selectRandomMusicalDistributionCategory();
+						steps.new_work.selectRandomTextMusicRelationship();
+						steps.new_work.selectRandomExcerptType();
+						steps.new_work.selectRandomVersionType();
+						steps.new_work.selectRandomLyricAdaptation();
+						steps.new_work.selectRandomMusicArrangement();
+
+						steps.new_work.selectRandomIntendedPurpose();
+						steps.new_work.enterRandomProductionTitle();
+						steps.new_work.selectRandomBltvr();
+						steps.new_work.selectRandomMusicLibrary();
+
+						steps.new_work.optToIncludeWorkOnWebsite(false);
+
+						steps.new_work.saveWork();
+						steps.new_work.validateSaveWorkRedirection();
+					});
+				}],
+			]
+		},
 	];
 
 module.exports = {
