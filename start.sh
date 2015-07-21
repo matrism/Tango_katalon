@@ -1,9 +1,4 @@
 #!/bin/bash
-if [[ ! -d node_modules/ ]] || [[ ! -d vendor/factory-testing-framework/ ]] || [[ ! -d vendor/factory-testing-framework/node_modules/ ]];
-then
-	echo "Missing dependencies. Please run install.sh first." >&2
-	exit -1
-fi
 usage()
 {
 cat << EOF
@@ -13,13 +8,13 @@ This script run the test1 or test2 over a machine.
 
 OPTIONS:
     -h                  Help
-    -s                  Start Selenium server before tests  
+    -s                  Start Selenium server before tests
     -u                  Use npm update and bower update before tests
     -p profilename      Profile name to run
 EOF
 }
 
-runProtr() 
+runProtr()
 {
     echo "Running ./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@"
     ./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@
@@ -67,12 +62,12 @@ then
     if [ ! -f "$FILE" ]
     then
         runProtr $PARAMS
-    else 
+    else
         PROFILELINE=$(cat $FILE)
         PROFILELINE+=$PARAMS
         echo "Running $PROFILELINE"
         command $PROFILELINE
     fi
-else 
+else
     runProtr $PARAMS
 fi
