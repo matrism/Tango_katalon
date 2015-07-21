@@ -550,6 +550,7 @@ if (pages.create_deal_scope === undefined) {
         },
 
         clickOnTheDoneSubPublisherOverridePss: function(){
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.doneOverridePublisherShareSetButton));
             pages.create_deal_scope.elems.doneOverridePublisherShareSetButton.click();
         },
 

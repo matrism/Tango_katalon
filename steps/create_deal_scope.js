@@ -438,7 +438,6 @@ if (steps.create_deal_scope === undefined) {
                 steps.create_deal_scope.clickOnAddOverrideIconPss();
                 steps.create_deal_scope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
                 steps.create_deal_scope.selectSubPublisherOverrideTerritoryPss(territory);
-                browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.doneOverridePublisherShareSetButton));
                 steps.base.scrollIntoView("Done override publisher share set", pages.create_deal_scope.elems.doneOverridePublisherShareSetButton);
                 steps.create_deal_scope.clickOnDoneSubPublisherOverridePss();
             });
