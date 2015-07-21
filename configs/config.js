@@ -10,8 +10,8 @@ var configer = ftf.configer,
             client_secret: "appclientsecret"
         },
         _system_: {
-            seleniumAddress: (cli.indirect? 'http://localhost:4444/wd/hub' : null),
-            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "firefox"),
+            //seleniumAddress: (cli.indirect? 'http://localhost:4444/wd/hub' : null),
+            browser: (cli.browser in ["chrome", "firefox", "ie"] ? cli.browser : "chrome"),
             resolution: {
                 width: 1280,
                 height: 720
