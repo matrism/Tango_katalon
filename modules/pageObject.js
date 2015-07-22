@@ -22,7 +22,7 @@ Page.prototype.index = function() {
     var locs = this.locators,
         ind_props = this.indexed_properties,
         include = this.include, i;
-        
+
     if (typeof include !== "undefined") {
         for (i in include) {
             locs = _.extend(locs, include[i].locators);
@@ -30,7 +30,7 @@ Page.prototype.index = function() {
     }
     this.elems = this.prepareLocators(locs);
     this.indexed = this.prepareIndexedProperties(ind_props);
-       
+
     if (this._url.template === "" || this._url.args.length < 1) {
         this.dynamic_url = false;
     } else {
@@ -41,12 +41,12 @@ Page.prototype.index = function() {
 Page.prototype.prepareIndexedProperties = function(props) {
     var i, page = this,
         // Creating factory of indexed_property
-        factory = function(k) {            
+        factory = function(k) {
             // This main function will return the content of indexed property
             var ret_function = function(index) {
                 var locs = {}, loc, elems, j, type, m,
                     prop = props[k];
-            
+
                 for (j in prop) {
                     loc = prop[j];
                     type = Object.keys(loc)[0];
@@ -54,7 +54,7 @@ Page.prototype.prepareIndexedProperties = function(props) {
                     locs[j][type] = loc[type].replace("%s", index);
                 }
                 elems = page.prepareLocators(locs);
-                return elems;             
+                return elems;
             };
             // This subfunction will return number of elements for the first item for indexed property
             ret_function.getLength = function(prop_name) {
@@ -71,20 +71,20 @@ Page.prototype.prepareIndexedProperties = function(props) {
             };
             return ret_function;
         };
-    
+
     for (i in props) {
         page[i] = factory(i);
     }
-    
+
     return this;
 };
 Page.prototype.prepareLocators = function(locators) {
     var loc, i, type, elems = {}, all;
-    
+
     for(i in locators) {
         loc = locators[i];
         type = Object.keys(loc)[0];
-        
+
         if (type === "custom") {
             elems[i] = loc[type]();
         } else if (typeof loc[type] === "function") {
@@ -101,7 +101,7 @@ Page.prototype.prepareLocators = function(locators) {
             };
         }
     }
-    
+
     return elems;
 };
 Page.prototype.extendLocators = function(locators) {
@@ -110,11 +110,13 @@ Page.prototype.extendLocators = function(locators) {
 };
 Page.prototype.prepare = function() {
     var page = this;
+
+    browser.wait(protractor.ExpectedConditions.presenceOf(element(By.tagName('body'))));
     element(By.tagName("body")).getText().then(function(t) {
         page.text = t;
     });
     browser.getTitle().then(function(title) {
-        page.title = title; 
+        page.title = title;
     });
     element(By.tagName("body")).getInnerHtml().then(function(html) {
         page.html = html;
@@ -148,12 +150,12 @@ Page.prototype.makeUrlDynamic = function() {
     return this;
 };
 Page.prototype.prepareUrl = function() {
-    var arg, 
+    var arg,
         _split_,
-        _url_ = this._url.template, 
+        _url_ = this._url.template,
         args = this._url.args,
         i = 0, max = args.length;
-    
+
     if (!this.dynamic_url) {
         return this.url;
     }
@@ -197,7 +199,7 @@ Page.prototype.forward = function() {
     return this;
 };
 Page.prototype.clearCookies = function() {
-    browser.manage().deleteAllCookies();  
+    browser.manage().deleteAllCookies();
     return this;
 };
 Page.prototype.saveScreen = function(name) {
@@ -238,7 +240,7 @@ Page.prototype.waitForProgressBar = function(timeout) {
         return element(By.css(".ugol-page-progress-bar .progress-bar")).getCssValue("width").then(function(width) {
             return width === "0px";
         });
-    }, timeout);  
+    }, timeout);
 };
 Page.prototype.waitForDocumentToLoad = function() {
     return browser.wait(function() {
@@ -250,7 +252,7 @@ Page.prototype.waitForDocumentToLoad = function() {
 
 /**
  * From here: https://github.com/angular/protractor/issues/610#issuecomment-37917269
- * 
+ *
  * @name waitForUrlToChangeTo
  * @description Wait until the URL changes to match a provided regex
  * @param {RegExp} urlRegex wait until the URL changes to match this regex
