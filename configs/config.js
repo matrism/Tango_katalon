@@ -20,7 +20,7 @@ var configer = ftf.configer,
             path_to_features: "./features/",
             path_to_steps: "../steps/",
             path_to_pages: "../pages/",
-            wait_timeout: 15000,
+            wait_timeout: 40000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false
         },

@@ -607,13 +607,6 @@ module.exports.saveWorkInclusionOnWebsiteButton = function() {
 			.element(by.cssContainingText("button", "Save"))
 	);
 };
-module.exports.goToScopeDelivery = function() {
-	return browser.executeScript (
-		function() {
-			jQuery(".nav-tabs span:contains('Scope Delivery')").click();
-		}
-	);
-};
 module.exports.workId = function() {
     var element = pages.work.workIdBinding();
     pages.base.scrollIntoView(element);
@@ -1201,4 +1194,28 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 			button.click();
 		}
 	);
+};
+
+exports.tabSetContainer = function() {
+	return $('[data-tg-tabset-id="workEditTabset"]');
+};
+
+exports.recordingsTab = function() {
+	return exports.tabSetContainer().element(
+		by.cssContainingText('span', 'Recordings')
+	);
+};
+
+exports.goToRecordingsTab = function() {
+	return exports.recordingsTab().click();
+};
+
+exports.scopeDeliveryTab = function() {
+	return exports.tabSetContainer().element(
+		by.cssContainingText('span', 'Scope Delivery')
+	);
+};
+
+exports.goToScopeDeliveryTab = function() {
+	return exports.scopeDeliveryTab().click();
 };

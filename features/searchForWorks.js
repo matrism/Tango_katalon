@@ -8,8 +8,6 @@ var pages_path = _tf_config._system_.path_to_pages,
 require(steps_path + 'login');
 require(steps_path + 'new_work');
 
-hash.subjectWorkData = {};
-
 var beforeFeature = [
         [steps.login.itLogin]
     ],
@@ -18,6 +16,8 @@ var beforeFeature = [
             name: 'Search for a work by work ID, song code, and primary and alternate titles',
             tags: [],
             steps: [
+				[steps.base.useBlankEntityDataSlot, ['work', 0]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(0)]],
                 [steps.new_work.enterAlternateWorkTitle, [0, 'TEST WORK ALTERNATE TITLE ' + randomId(0.1)]],
@@ -130,6 +130,8 @@ var beforeFeature = [
                 [steps.person.findId],
                 [steps.person.findInternalIpiNumber],
 
+				[steps.base.useBlankEntityDataSlot, ['work', 1]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],
                 [steps.new_work.selectCreatorFromPersonSlot, [0, 0]],
@@ -177,6 +179,8 @@ var beforeFeature = [
             name: 'Search for a work by primary title and creator name (combination)',
             tags: [],
             steps: [
+				[steps.base.useBlankEntityDataSlot, ['work', 2]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],
                 [steps.new_work.selectRandomCreator, [0]],
