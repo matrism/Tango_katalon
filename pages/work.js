@@ -1201,23 +1201,27 @@ exports.tabSetContainer = function() {
 };
 
 exports.recordingsTab = function() {
-	return exports.tabSetContainer().element(
-		by.cssContainingText('span', 'Recordings')
-	);
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Recordings')
+    );
 };
 
 exports.goToRecordingsTab = function() {
-	return exports.recordingsTab().click();
+    var element = exports.recordingsTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
 };
 
 exports.scopeDeliveryTab = function() {
-	return exports.tabSetContainer().element(
-		by.cssContainingText('span', 'Scope Delivery')
-	);
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Scope Delivery')
+    );
 };
 
 exports.goToScopeDeliveryTab = function() {
-	return exports.scopeDeliveryTab().click();
+    var element = exports.scopeDeliveryTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
 };
 
 exports.rightsTab = function() {
@@ -1227,5 +1231,7 @@ exports.rightsTab = function() {
 };
 
 exports.goToRightsTab = function() {
-    return exports.rightsTab().click();
+    var element = exports.rightsTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
 };
