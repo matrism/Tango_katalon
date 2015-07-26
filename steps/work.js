@@ -1651,3 +1651,10 @@ module.exports.validateWork = function(data, more) {
 		}
 	);
 };
+
+exports.goToRightsTab = function() {
+    it('Go to Rights tab', function() {
+        pages.work.goToRightsTab();
+        pages.base.waitForAjax();
+    });
+};

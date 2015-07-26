@@ -1219,3 +1219,13 @@ exports.scopeDeliveryTab = function() {
 exports.goToScopeDeliveryTab = function() {
 	return exports.scopeDeliveryTab().click();
 };
+
+exports.rightsTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Rights')
+    );
+};
+
+exports.goToRightsTab = function() {
+    return exports.rightsTab().click();
+};
