@@ -83,7 +83,9 @@ exports.selectDropdownOption.standard = function(element, value) {
     element.element(by.cssContainingText('option', value)).click();
 };
 exports.selectDropdownOption.tg = function(element, value) {
-    element.click();
+    browser.executeScript(function(element) {
+        element.click();
+    }, element.$('.tg-dropdown-label').getWebElement());
     element.element(by.cssContainingText('.ng-binding', value)).click();
 };
 module.exports.selectRandomDropdownOption = function(element, more) {
