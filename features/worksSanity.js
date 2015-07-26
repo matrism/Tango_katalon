@@ -60,12 +60,9 @@ var beforeFeature = [
                 ]],
 
                 [steps.new_work.selectCreatorFromPersonSlot, [0, 0]],
-                [steps.new_work.enterCreatorContribution, [0, 100]],
-
-                [steps.new_work.selectRandomCreator, [0]],
                 [steps.new_work.enterCreatorContribution, [0, 50]],
 
-                [steps.new_work.selectRandomCreator, [1]],
+                [steps.new_work.selectCreatorFromPersonSlot, [1, 0]],
                 [steps.new_work.enterCreatorContribution, [1, 50]],
 
                 [steps.new_work.selectRandomMusicalDistributionCategory],
@@ -74,12 +71,6 @@ var beforeFeature = [
                 [steps.new_work.selectRandomVersionType],
                 [steps.new_work.selectRandomLyricAdaptation],
                 [steps.new_work.selectRandomMusicArrangement],
-
-                // TODO: Avoid selecting Library work (affects Recordings tab).
-                [steps.new_work.selectRandomIntendedPurpose],
-                [steps.new_work.enterRandomProductionTitle],
-                [steps.new_work.selectRandomBltvr],
-                [steps.new_work.selectRandomMusicLibrary],
 
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
 
