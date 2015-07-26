@@ -62,7 +62,7 @@ var beforeFeature = [
                 [steps.new_work.selectCreatorFromPersonSlot, [0, 0]],
                 [steps.new_work.enterCreatorContribution, [0, 50]],
 
-                [steps.new_work.selectCreatorFromPersonSlot, [1, 0]],
+                [steps.new_work.selectRandomCreator, [1]],
                 [steps.new_work.enterCreatorContribution, [1, 50]],
 
                 [steps.new_work.selectRandomMusicalDistributionCategory],
