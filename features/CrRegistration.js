@@ -8,6 +8,8 @@ require(steps_path+"searchSection");
 require(steps_path+"organisation");
 require(steps_path+"base");
 require(pages_path+"base");
+require(steps_path+"registrationFileActivity");
+require(pages_path+"registrationFileActivity");
 
 var beforeFeature = [
     [steps.login.itLogin]
@@ -19,23 +21,38 @@ var workData = {};
 
 var feature = [
     {
-        name: "Validate CR Registration  scheduling ",
+        name: "Validate CR Registration  scheduling",
         tags: ["crRegistration"],
         steps: [
             [steps.searchSection.accessSavedOrganisationByName,["BMI"]],
+            [steps.organisation.goToGeneralTab],
+            [steps.organisation.waitForGeneralTabToBeDisplayed],
+            [steps.organisation.saveOrganisationDeliveryMethods],
+            [steps.organisation.goToRegistrationActivityTab],
+            [steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
+            [steps.organisation.saveRegActivityLastEvent],
             [steps.organisation.goToPreviewRegistrationRunTab],
-             [steps.organisation.selectCustomRegistrationRun,["CR_2014-09-01"]],
-         //  [steps.organisation.pause]
-            [steps.organisation.executeRegistrationRun,["CR_2014-09-01"]]
-            ////note critical errors and total works
-            //[steps.organisation.goToRegistrationActivityTab],
-            //[steps.organisation.verifyThatWorkIsDelivered],
-            //[steps.searchSection.accessSavedOrganisationByName,[hash.thirdPartyOrg]],
-            //[steps.organisation.goToPreviewRegistrationRunTab],
-            //[steps.organisation.verifyThatWorkIsDelivered],
-            //[steps.registrationFileActivity.goToPage],
-            //[steps.registrationFileActivity.expandLastDeliveredWork],
-            //[steps.registrationFileActivity.verifyDetails]
+            [steps.organisation.selectCustomRegistrationRun,["CR_2014-09-01"]],
+
+            [steps.organisation.executeRegistrationRun,["CR_2014-09-01"]],
+            //note critical errors and total works
+            [steps.organisation.goToRegistrationActivityTab],
+            [steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
+            [steps.organisation.verifyThatWorkIsDelivered],
+            [steps.organisation.checkThatAllDeliviriesAreDelivered],
+
+            [steps.searchSection.accessSavedOrganisationByNameInHash],
+            [steps.organisation.waitForGeneralTabToBeDisplayed],
+            [steps.organisation.goToRegistrationActivityTab],
+            [steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
+            [steps.organisation.verifyThatWorkIsDelivered],
+            [steps.organisation.checkThatAllDeliviriesAreDelivered],
+
+            [steps.registrationFileActivity.goToPage],
+            [steps.organisation.waitForOrgDisappear],
+            [steps.organisation.waitForRegActivityElement],
+            [steps.registrationFileActivity.expandLastDeliveredWork],
+            [steps.registrationFileActivity.verifyDetails]
         ]
     }
 

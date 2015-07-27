@@ -95,6 +95,22 @@ if (steps.searchSection === undefined) {
 
         }
         ,
+        accessSavedOrganisationByNameInHash:function()
+        {
+         var organisationName =   "Lyricfind";
+            it("User accesses organisation with name "+ organisationName,function(){
+
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectOrganisationOptionFromDropdown();
+                pages.searchSection.typeOrganisationNameIntoInput(organisationName);
+                pages.searchSection.selectValueFromDropdown();
+
+            })
+
+
+        }
+        ,
+
 
 
 

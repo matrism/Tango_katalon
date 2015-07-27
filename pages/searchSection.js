@@ -14,7 +14,7 @@ if (pages.searchSection === undefined) {
 
         searchDropdown: function () {
 
-            return $(".btn.dropdown-toggle")
+            return $("#DSP-SEARCH-DROP>button")
 
 
         },
