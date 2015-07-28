@@ -366,7 +366,6 @@ if (pages.create_deal_scope === undefined) {
         saveThePublisherShareSets: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.savePublisherShareSet));
             pages.create_deal_scope.elems.savePublisherShareSet.click();
-            pages.create_deal_scope.waitForAjax();
         },
 
         cancelPublisherShareSet: function () {

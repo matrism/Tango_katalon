@@ -83,7 +83,8 @@ var beforeFeature = function () {
             steps.create_deal_scope.addSpecificScope("Finder");
             steps.base.scrollIntoView("Share publisher share set", pages.create_deal_scope.elems.sharePublisherShareSetIcon);
             steps.create_deal_scope.sharePublisherShareSet();
-
+            steps.base.scrollIntoView("Save the publisher share set", pages.create_deal_scope.elems.savePublisherShareSet);
+            steps.create_deal_scope.saveSharePublisherShareSet();
 
             steps.deal.itContinueToNextPage();
             //steps.deal.saveDeal();
