@@ -2,7 +2,7 @@
 var configer = global.ftf.configer,
     cli = configer.getParamsFromCli(),
     env = {
-        ENV_TYPE: cli.ENV_TYPE || configer.getEnvVarByKey('ENV_TYPE') || 'localhost'
+        ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
     },
     config = {
         _default_: {
@@ -28,8 +28,26 @@ var configer = global.ftf.configer,
         localhost: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
+                app_url: 'http://localhost:3000',
+                service_url: 'http://localhost:3000'
+            },
+            user_name: configer.getEnvVarByKey('TEST_USERNAME') || 'TangoTest1',
+            user_password: configer.getEnvVarByKey('TEST_PASSWORD') || 'P@ssw0rd78'
+        },
+        qa: {
+            urls: {
+                sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
                 service_url: 'http://tango.tango-qa-aws.dspdev.wmg.com'
+            },
+            user_name: configer.getEnvVarByKey('TEST_USERNAME') || 'TangoTest1',
+            user_password: configer.getEnvVarByKey('TEST_PASSWORD') || 'P@ssw0rd78'
+        },
+        staging: {
+            urls: {
+                sso: configer.getEnvVarByKey('URL_SSO'),
+                app_url: 'http://musicpublishing.staging.dsp.wmg.com',
+                service_url: 'http://musicpublishing.staging.dsp.wmg.com'
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || 'TangoTest1',
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || 'P@ssw0rd78'
