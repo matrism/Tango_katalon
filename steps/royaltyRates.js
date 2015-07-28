@@ -440,7 +440,8 @@ if (steps.royaltyRates === undefined) {
             it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
-                // pages.royaltyRates.waitForRRToBeSaved();
+                pages.royaltyRates.waitForAjax();
+                 //pages.royaltyRates.waitForRRToBeSaved();
             });
         },
 
