@@ -3,7 +3,7 @@
 var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
-    now = moment().format('YYY-MM-DD HH-mm-ss'),
+    now = moment().format('YYYY-MM-DD HH-mm-ss'),
     screenShotPath = path.join(__dirname, '../reports/html/', now),
     config,
     systemConfig,
@@ -21,10 +21,12 @@ require('../helpers/services_helper');
 systemConfig = global._tf_config._system_;
 ScreenShotReporter = global.ftf.htmlReporter;
 
-mkdirp(screenShotPath);
-SSReporter_instance = new ScreenShotReporter({
-    baseDirectory: screenShotPath
-});
+if (!systemConfig.noReport) {
+  mkdirp(screenShotPath);
+  SSReporter_instance = new ScreenShotReporter({
+      baseDirectory: screenShotPath
+  });
+}
 
 config = {
     capabilities: {
@@ -51,7 +53,7 @@ config = {
             );
         }
 
-        if (reporting === 'html' || reporting === 'all') {
+        if (SSReporter_instance && (reporting === 'html' || reporting === 'all')) {
             jasmine.getEnv().addReporter(SSReporter_instance);
         }
 
@@ -67,7 +69,7 @@ config = {
 
     },
     onCleanUp: function(statusCode) {
-        if (typeof process.env.__using_grunt === 'undefined') {
+        if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
             try {
                 SSReporter_instance.compileReport();
             } catch(e) {
@@ -87,8 +89,7 @@ if (systemConfig.seleniumAddress) {
     config.seleniumAddress = systemConfig.seleniumAddress;
 }
 else {
-    config.directConnect = true;
-    //config.chromeDriver = '../node_modules/protractor/selenium/chromedriver';
+    config.directConnect = systemConfig.directConnect;
 }
 
 exports.config = config;

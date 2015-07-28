@@ -1,1 +1,0 @@
-./node_modules/protractor/bin/webdriver-manager update --out_dir ./node_modules/protractor/selenium --standalone false

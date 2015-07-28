@@ -10,16 +10,16 @@ var configer = global.ftf.configer,
             client_secret: 'appclientsecret'
         },
         _system_: {
-            //seleniumAddress: 'http://localhost:4444/wd/hub',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
+            directConnect: !cli.selenium,
             resolution: {
                 width: 1280,
                 height: 720
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
-            path_to_features: './features/',
-            path_to_steps: '../steps/',
-            path_to_pages: '../pages/',
+            path_to_features: __dirname + '/../features/',
+            path_to_steps: __dirname + '/../steps/',
+            path_to_pages: __dirname + '/../pages/',
             wait_timeout: 15000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false
@@ -44,6 +44,9 @@ var configer = global.ftf.configer,
             user_password: cli.TEST_PASSWORD
         }
     };
+
+    config._system_.noReport = cli['no-report'];
+
 config = configer.process(config);
 
 module.exports = config;
