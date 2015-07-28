@@ -36,8 +36,8 @@ var beforeFeature = [
                 [steps.base.waitForAjax],
                 [steps.work.expectWorkSearchMatchTitleToBe, [0, "BLUE SAILS UPON A SILVER SEA"]],
             ]
-        },
-        {
+          },
+          {
             name: 'Search for WAMPS works by song code',
             tags: [],
             steps: [
