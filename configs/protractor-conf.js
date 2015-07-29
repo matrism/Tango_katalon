@@ -4,7 +4,7 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
-    screenShotPath = path.join(__dirname, '../reports/html/', now),
+    screenShotPath,
     config,
     systemConfig,
     ScreenShotReporter,
@@ -22,10 +22,20 @@ systemConfig = global._tf_config._system_;
 ScreenShotReporter = global.ftf.htmlReporter;
 
 if (!systemConfig.noReport) {
-  mkdirp(screenShotPath);
-  SSReporter_instance = new ScreenShotReporter({
-      baseDirectory: screenShotPath
-  });
+    screenShotPath = path.join(__dirname, '../reports/html/');
+
+    if(systemConfig.singleReport) {
+        screenShotPath = path.join(screenShotPath, 'single/');
+    }
+    else {
+        screenShotPath = path.join(screenShotPath, now);
+    }
+
+    mkdirp(screenShotPath);
+
+    SSReporter_instance = new ScreenShotReporter({
+        baseDirectory: screenShotPath
+    });
 }
 
 config = {

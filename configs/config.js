@@ -17,6 +17,7 @@ var configer = global.ftf.configer,
                 height: 720
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
+            singleReport: cli['single-report'],
             path_to_features: __dirname + '/../features/',
             path_to_steps: __dirname + '/../steps/',
             path_to_pages: __dirname + '/../pages/',
