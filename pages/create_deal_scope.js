@@ -47,7 +47,16 @@ if (pages.create_deal_scope === undefined) {
             doneOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, false)']"},
             addAnotherOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, true)']"},
             sharePublisherShareSetIcon: {css: "div[data-ng-click='showSharePublisherShareSetSection(true)'] i"},
-            useThisPublisherShareSetButton: {css: "button[data-ng-click='sharePubShareSet(pss.id, modularEditModels.activeScope.id)']"}
+            useThisPublisherShareSetButton: {css: "button[data-ng-click='sharePubShareSet(pss.id, modularEditModels.activeScope.id)']"},
+            activeScope: {css: "li[data-ng-click='onSetActiveScope(sp.id)']"},
+            shareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
+            shareScopeLink: {css: "a[data-ng-click='showShareScopeModal(sp.id)']"},
+            unshareScopeLink: {css: "a[data-ng-click='showUnshareScopeModal(sp.id)']"},
+            shareScopeModalDialog: {css: "div.modal-dialog.large.ng-scope"},
+            cancelShareScopeModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
+            doneShareScopeModalDialog: {css: "iv.modal-footer button[data-ng-click='data.done()']"},
+            selectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.addAllAvailableContractPeriods()']"},
+            deSelectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.removeAllAvailableContractPeriods()']"}
         },
 
         addContractPeriodIcon: function () {
@@ -557,6 +566,21 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.sharePublisherShareSetIcon.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.useThisPublisherShareSetButton));
             pages.create_deal_scope.elems.useThisPublisherShareSetButton.click();
+        },
+
+        shareTheScope: function(){
+            browser.actions().mouseMove(pages.create_deal_scope.elems.activeScope).perform();
+            browser.actions().mouseMove(pages.create_deal_scope.elems.shareUnshareDeleteScopeIcon).perform();
+            pages.create_deal_scope.elems.shareScopeLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.shareScopeModalDialog));
+        },
+
+        selectAllContractPeriodsShareScopeModalDialog:function(){
+            pages.create_deal_scope.elems.selectAllContractPeriodsShareScopeModalDialog().click();
+        },
+
+        clickOnTheDoneShareScopeModalDialog: function(){
+            pages.create_deal_scope.elems.doneShareScopeModalDialog.click();
         }
 
 

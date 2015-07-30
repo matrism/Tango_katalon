@@ -298,6 +298,12 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        shareScope: function(){
+            it("Click on share scope ", function(){
+               pages.create_deal_scope.shareTheScope();
+            });
+        },
+
         clickAddChainLink: function () {
             it("Click on add chain link", function () {
                 pages.create_deal_scope.clickOnAddChainLink();
