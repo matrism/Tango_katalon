@@ -323,10 +323,139 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
-        selectContractPeriodNumberI : function(i){
-          it("Select contract period number " + i + " from list", function(){
-             pages.create_deal_contract_period.selectTheContractPeriodNumberI(i);
-          });
+        selectContractPeriodNumberI: function (i) {
+            it("Select contract period number " + i + " from list", function () {
+                pages.create_deal_contract_period.selectTheContractPeriodNumberI(i);
+            });
+        },
+
+        clickOnAddEndRulesToContractPeriod: function () {
+            it("Click on the add end rules link to contract period ", function () {
+                pages.create_deal_contract_period.clickOnTheAddEndRulesToContractPeriod();
+            });
+        },
+
+        selectEndDateEndRulesSpecificValue: function (value) {
+            it("Select end date end rules specific value ", function () {
+                pages.create_deal_contract_period.selectTheEndDateEndRulesSpecificValue(value);
+            });
+        },
+
+        selectWhenVariableLeftEndRulesSpecificValue: function (value) {
+            it("Select the when variable left end rules specific value ", function () {
+                pages.create_deal_contract_period.selectTheWhenVariableLeftEndRulesSpecificValue(value);
+            });
+        },
+
+        fillIntoAttributeLeftEndRules: function () {
+            it("Fill into the attribute left end rules field ", function () {
+                pages.create_deal_contract_period.fillIntoTheAttributeLeftEndRules();
+            });
+        },
+
+        selectRequirementEndRulesRandomValue: function (value) {
+            it("Select the requirement end rule random value ", function () {
+                pages.create_deal_contract_period.selectTheRequirementEndRulesSpecificValue(value);
+            });
+        },
+
+        selectRightVariableEndRulesSpecificValue: function (value) {
+            it("Select the right variable end rules specific value ", function () {
+                pages.create_deal_contract_period.selectTheRightVariableEndRulesSpecificValue(value);
+            });
+        },
+
+        saveEndRules: function () {
+            it("Save the end rules ", function () {
+                pages.create_deal_contract_period.saveTheEndRules();
+                pages.create_deal_contract_period.waitForAjax();
+            });
+        },
+
+        clickOnAddAdvanceAssumptionsLink: function () {
+            it("Click on the add advance assumptions link ", function () {
+                pages.create_deal_contract_period.clickOnTheAddAdvanceAssumptionsLink();
+            });
+        },
+
+        fillIntoLpControlPercentageOfWork: function () {
+            it("Fill into the lp control percentage of work ", function () {
+                pages.create_deal_contract_period.fillIntoTheLpControlPercentageOfWork();
+            });
+        },
+
+        fillIntoLpControlPercentageOfMechanicalIncome: function () {
+            it("Fill into the Lp control percentage of mechanical income ", function () {
+                pages.create_deal_contract_period.fillIntoTheLpControlPercentageOfMechanicalIncome();
+            });
+        },
+
+        fillIntoNumberOfSongs: function () {
+            it("Fill into the number of songs ", function () {
+                pages.create_deal_contract_period.fillIntoTheNumberOfSongs();
+            });
+        },
+
+        fillIntoPercentageOfStatutoryRate: function () {
+            it("Fill into the percentage of statutory rate ", function () {
+                pages.create_deal_contract_period.fillIntoThePercentageOfStatutoryRate();
+            });
+        },
+
+        fillIntoAmountNoLessThan: function () {
+            it("Fill into the amount no less than field ", function () {
+                pages.create_deal_contract_period.fillIntoTheAmountNoLessThan();
+            });
+        },
+
+        selectRandomLabelValueAssumptions: function () {
+            it("Select random label value advance assumptions ", function () {
+                pages.create_deal_contract_period.selectTheRandomLabelValueAssumptions();
+            });
+        },
+
+        saveAdvanceAssumptions: function () {
+            it("Save the advance assumptions ", function () {
+                pages.create_deal_contract_period.saveTheAdvanceAssumptions();
+                pages.create_deal_contract_period.waitForAjax();
+            });
+        },
+
+        itAddAdvanceAssumptions: function () {
+            describe("Add advance assumptions ", function () {
+                steps.create_deal_contract_period.clickOnAddAdvanceAssumptionsLink();
+                steps.create_deal_contract_period.fillIntoLpControlPercentageOfWork();
+                steps.create_deal_contract_period.fillIntoLpControlPercentageOfMechanicalIncome();
+                steps.create_deal_contract_period.fillIntoNumberOfSongs();
+                steps.create_deal_contract_period.fillIntoPercentageOfStatutoryRate();
+                steps.create_deal_contract_period.fillIntoAmountNoLessThan();
+                steps.create_deal_contract_period.selectRandomLabelValueAssumptions();
+                steps.create_deal_contract_period.saveAdvanceAssumptions();
+
+            });
+        },
+
+        itAddSimpleEndRuleToContractPeriod: function () {
+            describe("Add end rule to contract period ", function () {
+                steps.create_deal_contract_period.clickOnAddEndRulesToContractPeriod();
+                steps.create_deal_contract_period.selectEndDateEndRulesSpecificValue("Repayment Date");
+                steps.create_deal_contract_period.selectWhenVariableLeftEndRulesSpecificValue("Balance Repaid");
+                steps.create_deal_contract_period.fillIntoAttributeLeftEndRules();
+                steps.create_deal_contract_period.selectRequirementEndRulesRandomValue("<");
+                steps.create_deal_contract_period.selectRightVariableEndRulesSpecificValue("MDRC Complete");
+            });
+        },
+
+        itAddSpecificEndRuleToContractPeriod: function (endDate, whenVariableLeft, variableRight) {
+            describe("Add end rule to contract period ", function () {
+                steps.create_deal_contract_period.clickOnAddEndRulesToContractPeriod();
+                steps.create_deal_contract_period.selectEndDateEndRulesSpecificValue(endDate);
+                steps.create_deal_contract_period.selectWhenVariableLeftEndRulesSpecificValue(whenVariableLeft);
+                steps.create_deal_contract_period.fillIntoAttributeLeftEndRules();
+                steps.create_deal_contract_period.selectRequirementEndRulesRandomValue("<");
+                steps.create_deal_contract_period.selectRightVariableEndRulesSpecificValue(variableRight);
+                steps.create_deal_contract_period.saveEndRules();
+            });
         },
 
         itAddIncompleteMdrcContractPeriod: function () {
@@ -411,22 +540,22 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
-        itAddDifferentTypesOfContractPeriods: function(){
-          describe("Add 4 different types of contract periods ", function(){
-              steps.create_deal_contract_period.fillContractPeriodDescription("Description 1");
-              steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-              steps.create_deal_contract_period.fillActualEndDateFieldSpecificValue("2015-04-04");
-              steps.create_deal_contract_period.addNewContractPeriodDialog();
-              steps.create_deal_contract_period.fillContractPeriodDescription("Description 2");
-              steps.create_deal_contract_period.fillEndTargetMonths();
-              steps.create_deal_contract_period.fillActualEndDateFieldSpecificValue("2016-02-04");
-              steps.create_deal_contract_period.addNewContractPeriodDialog();
-              steps.create_deal_contract_period.fillContractPeriodDescription("Description 3");
-              steps.create_deal_contract_period.fillEndTargetMonths();
-              steps.create_deal_contract_period.addNewContractPeriod();
-              steps.create_deal_contract_period.fillContractPeriodDescription("Description 4");
-              steps.create_deal_contract_period.fillEndTargetMonths();
-          });
+        itAddDifferentTypesOfContractPeriods: function () {
+            describe("Add 4 different types of contract periods ", function () {
+                steps.create_deal_contract_period.fillContractPeriodDescription("Description 1");
+                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+                steps.create_deal_contract_period.fillActualEndDateFieldSpecificValue("2015-04-04");
+                steps.create_deal_contract_period.addNewContractPeriodDialog();
+                steps.create_deal_contract_period.fillContractPeriodDescription("Description 2");
+                steps.create_deal_contract_period.fillEndTargetMonths();
+                steps.create_deal_contract_period.fillActualEndDateFieldSpecificValue("2016-02-04");
+                steps.create_deal_contract_period.addNewContractPeriodDialog();
+                steps.create_deal_contract_period.fillContractPeriodDescription("Description 3");
+                steps.create_deal_contract_period.fillEndTargetMonths();
+                steps.create_deal_contract_period.addNewContractPeriod();
+                steps.create_deal_contract_period.fillContractPeriodDescription("Description 4");
+                steps.create_deal_contract_period.fillEndTargetMonths();
+            });
         },
 
         itFillDealMandatoryFieldsContractPeriod: function () {
@@ -442,7 +571,6 @@ if (steps.create_deal_contract_period === undefined) {
                 }
             );
         }
-
 
 
     };

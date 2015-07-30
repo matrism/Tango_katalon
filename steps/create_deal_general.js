@@ -308,7 +308,7 @@ if (steps.create_deal_general === undefined) {
                     steps.create_deal_general.fillIntoLegalFileReferenceCodeField();
                     steps.create_deal_general.selectRandomExternalContactRoleRowI(1);
                     steps.create_deal_general.selectRandomExternalContactNameRowI(1);
-                    steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+                    //steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
                     steps.create_deal_general.fillIntoDemoDealChargeBacksField();
                     steps.create_deal_general.fillIntoUsCopyrightCertificateDealChargeBacksField();
                     steps.create_deal_general.fillIntoLegalFeesDealChargeBacksField();

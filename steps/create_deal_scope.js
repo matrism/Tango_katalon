@@ -18,14 +18,12 @@ if (steps.create_deal_scope === undefined) {
                 pages.create_deal_scope.addTerritoryByTypingToScope();
             });
         },
+
         itAddNewContractPeriod: function () {
 
             it("Add new contract Period", function () {
-
                 pages.create_deal_scope.clickNewContractPeriodButton();
                 //   pages.create_deal_scope.waitForContractPeriodToBeCreated();
-
-
             })
 
         },
