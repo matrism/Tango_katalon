@@ -54,7 +54,7 @@ if (pages.create_deal_scope === undefined) {
             unshareScopeLink: {css: "a[data-ng-click='showUnshareScopeModal(sp.id)']"},
             shareScopeModalDialog: {css: "div.modal-dialog.large.ng-scope"},
             cancelShareScopeModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
-            doneShareScopeModalDialog: {css: "iv.modal-footer button[data-ng-click='data.done()']"},
+            doneShareScopeModalDialog: {css: "div.modal-footer button[data-ng-click='data.done()']"},
             selectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.addAllAvailableContractPeriods()']"},
             deSelectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.removeAllAvailableContractPeriods()']"}
         },
@@ -573,13 +573,15 @@ if (pages.create_deal_scope === undefined) {
             browser.actions().mouseMove(pages.create_deal_scope.elems.shareUnshareDeleteScopeIcon).perform();
             pages.create_deal_scope.elems.shareScopeLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.shareScopeModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.selectAllLinkShareScopeModalDialog));
         },
 
         selectAllContractPeriodsShareScopeModalDialog:function(){
-            pages.create_deal_scope.elems.selectAllContractPeriodsShareScopeModalDialog().click();
+            pages.create_deal_scope.elems.selectAllLinkShareScopeModalDialog.click();
         },
 
         clickOnTheDoneShareScopeModalDialog: function(){
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.doneShareScopeModalDialog));
             pages.create_deal_scope.elems.doneShareScopeModalDialog.click();
         }
 

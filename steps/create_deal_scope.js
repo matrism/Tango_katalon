@@ -298,9 +298,12 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        shareScope: function(){
-            it("Click on share scope ", function(){
-               pages.create_deal_scope.shareTheScope();
+        shareScopeToAllContractPeriods: function () {
+            it("Click on share scope ", function () {
+                pages.create_deal_scope.shareTheScope();
+                pages.create_deal_scope.selectAllContractPeriodsShareScopeModalDialog();
+                pages.create_deal_scope.clickOnTheDoneShareScopeModalDialog();
+                pages.create_deal_scope.waitForAjax();
             });
         },
 
