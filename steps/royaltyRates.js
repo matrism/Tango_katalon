@@ -12,10 +12,7 @@ if (steps.royaltyRates === undefined) {
 
 
         addNewRoyaltySet: function () {
-
-
-            it("Add new Royalty Rate Set", function () {
-
+           it("Add new Royalty Rate Set", function () {
                     pages.royaltyRates.clickNewRoyaltySetButton();
                 }
             );
@@ -978,6 +975,13 @@ if (steps.royaltyRates === undefined) {
                 steps.royaltyRates.clickOnYesInterCompanyRateSynch();
                 steps.royaltyRates.clickOnYesInterCompanyRateTpp();
             });
+        },
+
+        overrideRoyaltyRateSetNumberI: function (i) {
+          it("Override rate set with rate number i ", function(){
+             pages.royaltyRates.overrideTheRoyaltyRateSetNumberI(i);
+              pages.royaltyRates.waitForAjax();
+          });
         },
 
         pauseTest: function () {

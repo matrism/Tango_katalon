@@ -38,7 +38,8 @@ if (pages.royaltyRates === undefined) {
             interCompanyInputField: {css: "input[data-ng-model='set.ic_rate']"},
             confirmOverrideModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             overrideModalDialog: {css: "div.modal-dialog.ng-scope"},
-            interCompanyArrow: {css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']"}
+            interCompanyArrow: {css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']"},
+            rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"}
         },
         activeContractPeriod: function () {
             return $(".contract-period-menu-item.ng-scope.active>div>p>strong.overflow");
@@ -943,10 +944,19 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.royaltyRates.elems.confirmOverrideModalDialog));
             pages.royaltyRates.elems.confirmOverrideModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.royaltyRates.elems.confirmOverrideModalDialog));
-        }
+        },
 
+        overrideTheRoyaltyRateSetNumberI: function (i) {
+            pages.royaltyRates.elems.rateSetNameFieldIcon.click();
+            browser.wait(ExpectedConditions.elementToBeClickable(element(By.css("div.rates-set-selector.ng-scope div.rates-set-scr-row.ng-scope"))));
+            browser.driver.findElements(By.css("div.rates-set-selector.ng-scope div.rates-set-scr-row.ng-scope"))
+                .then(function (options) {
+                    options[i - 1].click();
+                });
+        }
 
     });
 }
+
 
 module.exports = pages.royaltyRates;

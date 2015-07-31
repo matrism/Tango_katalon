@@ -30,11 +30,23 @@ if (pages.edit_deal_scope === undefined) {
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             deletePssModalDialog: {css: "div.modal.fade.in div.ng-scope"},
             confirmDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='ok()']"},
-            cancelDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='cancel()']"}
+            cancelDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
+            shareIconOnScope: {css: "div[data-ng-if='isScopeShared(sp.id)'] a.icon.share-icon.ng-binding i.fa.fa-share"},
+            shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
+            shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"}
         },
 
         clickOnScope1: function () {
-          pages.edit_deal_scope.elems.scope1.click();
+            pages.edit_deal_scope.elems.scope1.click();
+        },
+
+        clickOnScopeNumberI: function (i) {
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
+        },
+
+        clickOnShareIconOnScope: function () {
+            pages.edit_deal_scope.elems.shareIconOnScope.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.shareScopesDetailsPopup));
         },
 
         validateThePublisherSharesTitle: function () {
@@ -341,19 +353,19 @@ if (pages.edit_deal_scope === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.confirmDeleteModalDialog));
         },
 
-        editConfirmModalDialog: function(){
+        editConfirmModalDialog: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
             pages.edit_deal_scope.elems.confirmDeletePssModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
         },
 
-        editCancelModalDialog: function(){
+        editCancelModalDialog: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
             pages.edit_deal_scope.elems.cancelDeletePssModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
         },
 
-        editDeletePublisherSharesSet: function(){
+        editDeletePublisherSharesSet: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.editDeletePublisherShareSet));
             pages.edit_deal_scope.elems.editDeletePublisherShareSet.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));

@@ -72,6 +72,11 @@ var beforeFeature = function () {
             steps.create_deal_scope.selectCountry();
             steps.create_deal_scope.itAddPublisherShare();
             steps.create_deal_scope.saveThePublisherShareSet();
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.base.scrollIntoView("Rate set name", pages.royaltyRates.elems.rateSetNameFieldIcon);
+            steps.royaltyRates.overrideRoyaltyRateSetNumberI(1);
+            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
+            steps.royaltyRates.saveRateSet();
 
             steps.create_deal_contract_period.selectContractPeriodNumberI(1);
             steps.create_deal_contract_period.itAddSimpleEndRuleToContractPeriod();
@@ -104,6 +109,22 @@ var beforeFeature = function () {
             steps.base.scrollIntoView("Mdrc",  pages.create_deal_contract_period.elems.addMdrcLink);
             steps.create_deal_contract_period.itAddIncompleteMdrcContractPeriod();
             steps.create_deal_contract_period.itAddAdvanceAssumptions();
+
+            steps.create_deal_contract_period.selectContractPeriodNumberI(1);
+            steps.edit_deal_scope.selectScopeNumberI(1);
+            steps.edit_deal_scope.validateShareScopesPopupDetailsContractPeriod1();
+
+            steps.create_deal_contract_period.selectContractPeriodNumberI(2);
+            steps.edit_deal_scope.selectScopeNumberI(1);
+            steps.edit_deal_scope.validateShareScopesPopupDetailsContractPeriod2();
+
+            steps.create_deal_contract_period.selectContractPeriodNumberI(3);
+            steps.edit_deal_scope.selectScopeNumberI(1);
+            steps.edit_deal_scope.validateShareScopesPopupDetailsContractPeriod3();
+
+            steps.create_deal_contract_period.selectContractPeriodNumberI(4);
+            steps.edit_deal_scope.selectScopeNumberI(1);
+            steps.edit_deal_scope.validateShareScopesPopupDetailsContractPeriod4();
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
