@@ -48,9 +48,20 @@ config = {
     specs: ['init.js'],
     onPrepare: function() {
         console.time('Tests time');
-        var reporting = systemConfig.reporting;
-        var matchers;
+        var reporting = systemConfig.reporting,
+            matchers,
+            browserWait;
+
         browser.driver.manage().timeouts().setScriptTimeout(15000);
+
+        browserWait = browser.wait;
+        browser.wait = function(testFn, timeout) {
+            if(timeout === undefined) {
+                timeout = systemConfig.wait_timeout;
+            }
+
+            browserWait.call(browser, testFn, timeout);
+        };
 
         if (systemConfig.resolution.width && systemConfig.resolution.height) {
             browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
