@@ -299,7 +299,7 @@ var beforeFeature = function () {
             },
         {
             name: "Dirty check finder deals terms by contract period",
-            tags: ["dirty_check_terms_by_contract_period_finder_deals"],
+            tags: ['dirty_check_terms_by_contract_period_finder_deals', 'broken'],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var num = Math.floor(Math.random() * 500) + 1;
