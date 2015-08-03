@@ -19,8 +19,6 @@ require(steps_path + 'new_work');
     //return '7621435785647192';
 //};
 
-hash.subjectWorkData = {};
-
 baseWorksData = [
     {
         primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
@@ -584,6 +582,8 @@ var beforeFeature = [
 
                             steps.person.findInternalIpiNumber();
                         });
+
+						steps.base.useBlankEntityDataSlot('work', i);
 
                         steps.new_work.goToNewWorkPage();
 

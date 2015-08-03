@@ -164,7 +164,7 @@ module.exports.validateDefaultMusicLibrary = function() {
 module.exports.enterPrimaryWorkTitle = function(value) {
     it('Enter primary work title', function() {
         pages.new_work.enterPrimaryWorkTitle(value).then(function() {
-            hash.subjectWorkData.primaryTitle = value;
+            hash.currentEntityDataSlotsByType.work.primaryTitle = value;
         });
     });
 };
@@ -182,7 +182,7 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 module.exports.enterAlternateWorkTitle = function(i, value) {
     it('Enter alternate work title #' + (i + 1), function() {
         pages.new_work.enterAlternateWorkTitle(i, value).then(function() {
-            var data = hash.subjectWorkData;
+            var data = hash.currentEntityDataSlotsByType.work;
             var alternateTitles = data.alternateTitles = data.alternateTitles || [];
 
             alternateTitles[i] = value;
@@ -221,11 +221,12 @@ exports.validateDefaultCompositeWorkType = function() {
     });
 };
 exports.selectCompositeWorkType = function(value, data, key) {
-    key = key || 'compositeWorkType';
-    data = data || hash.subjectWorkData || {};
-
     it('Select composite work type', function() {
+		key = key || 'compositeWorkType';
+		data = data || hash.currentEntityDataSlotsByType.work;
+
         pages.new_work.selectCompositeWorkType(value);
+
         data[key] = value;
     });
 };
@@ -252,7 +253,7 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
         pages.new_work.selectFirstComponentWorkSuggestion().then(function(selected) {
             var component;
 
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
 
             data[key] = data[key] || [];
@@ -277,7 +278,7 @@ exports.deleteComponentWork = function(i, data, key) {
     it('Delete component work #' + (i + 1), function() {
         var components;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         components = data[key] = data[key] || [];
 
@@ -300,7 +301,7 @@ exports.selectRandomCreator = function(i) {
     });
 
     it('Select a random creator', function() {
-        var data = hash.subjectWorkData;
+        var data = hash.currentEntityDataSlotsByType.work;
         var creator;
 
         data.creators = data.creators || [];
@@ -331,7 +332,7 @@ exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
 
     it('Select first search result', function() {
         pages.new_work.selectFirstCreatorSuggestion().then(function() {
-            var data = hash.subjectWorkData;
+            var data = hash.currentEntityDataSlotsByType.work;
 
             data.creators = data.creators || [];
             data.creators[creatorRow] = person;
@@ -342,7 +343,7 @@ exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
     var deferred = promise.defer();
     var creator;
 
-    data = data || hash.subjectWorkData || {};
+    data = data || hash.currentEntityDataSlotsByType.work;
     key = key || 'creators';
     data[key] = data[key] || [];
     creator = data[key][j] = data[key][j] || {};
@@ -395,7 +396,7 @@ exports.enterComponentWorkAllocation = function(i, value, data, key) {
     it('Enter allocation for component work #' + (i + 1), function() {
         var component;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
 
         data[key] = data[key] || [];
@@ -409,7 +410,7 @@ exports.enterMediumComponentWorkAllocation = function(i, data, key) {
     it('Enter 50% allocation for component work #' + (i + 1), function() {
         var component;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
 
         data[key] = data[key] || [];
@@ -432,7 +433,7 @@ exports.enterNewShellWork = function(i, title, data, key) {
         pages.new_work.selectEnterAsNewWorkSuggestion().then(function() {
             var component;
 
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
 
             data[key] = data[key] || [];
@@ -446,7 +447,8 @@ exports.enterNewShellWork = function(i, title, data, key) {
 };
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
-        var components = hash.subjectWorkData.components || [];
+		var data = hash.currentEntityDataSlotsByType.work;
+        var components = data.components || [];
         var shellWork = components[i] || {};
 
         pages.new_work.validateEnteredShellWorkTitle(i, shellWork.name);
@@ -490,7 +492,7 @@ exports.selectRandomShellWorkCreator = function(i, j, data, key) {
             var component;
             var creator;
 
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
 
             data[key] = data[key] || [];
@@ -511,7 +513,7 @@ exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, ke
     it(
         'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
 
             data[key] = data[key] || [];
@@ -559,7 +561,7 @@ exports.enterShellWorkCreatorContribution = function(i, j, value, data, key) {
                 var component;
                 var creator;
 
-                data = data || hash.subjectWorkData || {};
+                data = data || hash.currentEntityDataSlotsByType.work;
                 key = key || 'components';
 
                 data[key] = data[key] || [];
@@ -581,6 +583,10 @@ module.exports.selectRandomMusicalDistributionCategory = function() {
 			pages.new_work.musicalDistributionCategoryDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			data.musicalDistributionCategory = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -591,6 +597,10 @@ module.exports.selectRandomTextMusicRelationship = function() {
 			pages.new_work.textMusicRelationshipDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			data.textMusicRelationship = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -601,6 +611,10 @@ module.exports.selectRandomExcerptType = function() {
 			pages.new_work.excerptTypeDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			data.excerptType = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -611,6 +625,10 @@ module.exports.selectRandomVersionType = function() {
 			pages.new_work.versionTypeDropdown(),
 			{ dropdownType: "tg" }
 		));
+		deferred.promise.then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			data.versionType = value;
+		});
 	});
 	return deferred.promise;
 };
@@ -626,6 +644,10 @@ module.exports.selectRandomLyricAdaptation = function() {
 				pages.new_work.lyricAdaptationDropdown(),
 				{ dropdownType: "tg" }
 			));
+			deferred.promise.then(function(value) {
+				var data = hash.currentEntityDataSlotsByType.work;
+				data.lyricAdaptation = value;
+			});
 		});
 	});
 	return deferred.promise;
@@ -642,6 +664,10 @@ module.exports.selectRandomMusicArrangement = function() {
 				pages.new_work.musicArrangementDropdown(),
 				{ dropdownType: "tg" }
 			));
+			deferred.promise.then(function(value) {
+				var data = hash.currentEntityDataSlotsByType.work;
+				data.musicArrangement = value;
+			});
 		});
 	});
 	return deferred.promise;
@@ -804,11 +830,18 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 		}
 	);
 };
+
+exports.continueToNextTab = function() {
+	it('Continue to next work creation tab', function() {
+		pages.new_work.continueToNextTab();
+	});
+};
+
 exports.saveWork = function() {
      steps.base.clickElement("Save Work", pages.new_work.saveWorkButton());
 };
 exports.validateSaveWorkRedirection = function() {
-     steps.base.validateRedirection("created work page", "/metadata");
+     steps.base.validateRedirection("created work page", "/rights");
 };
 module.exports.createBasicWork = function(data, more) {
     more = more || {};
@@ -933,7 +966,9 @@ module.exports.createBasicWork = function(data, more) {
             steps.new_work.saveWork();
             steps.new_work.validateSaveWorkRedirection();
 
-            data.workId = steps.work.findCurrentlyOpenWorkId();
+            steps.work.findCurrentlyOpenWorkId().then(function(value) {
+                data.workId = value;
+            });
         }
     );
 };

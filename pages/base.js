@@ -83,7 +83,9 @@ exports.selectDropdownOption.standard = function(element, value) {
     element.element(by.cssContainingText('option', value)).click();
 };
 exports.selectDropdownOption.tg = function(element, value) {
-    element.click();
+    browser.executeScript(function(element) {
+        element.click();
+    }, element.$('.tg-dropdown-label').getWebElement());
     element.element(by.cssContainingText('.ng-binding', value)).click();
 };
 module.exports.selectRandomDropdownOption = function(element, more) {
@@ -175,14 +177,17 @@ module.exports.selectRandomDropdownOption.tg = function(element, more) {
 			}
 			originalOptionText = pages.base.selectedTgDropdownOption(element);
 			return (function tryAgain() {
-				var optionCssSelector = ".dropdown-menu > li .ng-binding";
 				var remainingOptions;
-				element.click();
-				return element.$$(optionCssSelector)
+				browser.executeScript(function(element) {
+					element.click();
+				}, element.$('.tg-dropdown-label').getWebElement());
+				return $$(".tg-dropdown-menu li .ng-binding")
 					.filter(function(option) {
+						var optionText = option.getText();
 						return pph.and (
-							pph.notInArray(blacklist, option.getText()),
-							pph.or(!more.different, pph.areNotEqual(option.getText(), originalOptionText))
+							pph.areNotEqual(optionText, ""),
+							pph.notInArray(blacklist, optionText),
+							pph.or(!more.different, pph.areNotEqual(optionText, originalOptionText))
 						);
 					})
 					.then(function(remainingOptions) {
@@ -298,7 +303,7 @@ module.exports.randomTgDropdownSelector = function(element) {
 			"Pick a random dropdown option", function() {
 				pages.base.scrollIntoView(element);
 				element.click();
-				element.$$("[tg-dropdown-render-template='$templates.popup.item']").then (
+				element.$$("[tg-component-render-template='$templates.popup.item']").then (
 					function(optionElements) {
 						var randomOptionElement = _.sample(optionElements);
 						randomOptionElement.click();
@@ -318,7 +323,7 @@ module.exports.selectedDropdownOption = function(element) {
 module.exports.selectedTgDropdownOption = function(element) {
 	return (
 		element
-			.$("[tg-dropdown-render-template='$templates.main.selectedItem'] .ng-binding")
+			.$("[tg-component-render-template='$templates.main.selectedItem'] .ng-binding")
 			.getText()
 	);
 };

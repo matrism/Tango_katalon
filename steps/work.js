@@ -7,22 +7,30 @@ var random = require("../helpers/random");
 var promise = protractor.promise;
 require(pages_path + "work");
 steps.work = exports;
-module.exports.goToWorkPage = function(data, key) {
-    var workId;
-    data = data || hash.subjectWorkData || {};
-    key = key || 'workId';
-    workId = data[key];
-    it('Go to work page', function() {
-        pages.work.open(workId);
+exports.goToWorkPage = function(data, key) {
+	it('Go to work page', function() {
+		var workId;
+		data = data || hash.currentEntityDataSlotsByType.work;
+		key = key || 'id';
+		workId = data[key];
+		pages.work.open(workId);
+	});
+};
+
+module.exports.goToScopeDeliveryTab = function() {
+    it('Go to Scope Delivery tab', function() {
+        pages.work.goToScopeDeliveryTab();
     });
 };
-module.exports.goToScopeDelivery = function() {
-	it (
-		"Go to Scope Delivery", function() {
-			pages.work.goToScopeDelivery();
-		}
-	);
+
+exports.goToRecordingsTab = function() {
+	it('Go to Recordings tab', function() {
+		pages.work.goToRecordingsTab();
+		browser.sleep(200);
+		pages.base.waitForAjax();
+	});
 };
+
 module.exports.findCurrentlyOpenWorkId = function() {
     var deferred = promise.defer();
 
@@ -30,8 +38,9 @@ module.exports.findCurrentlyOpenWorkId = function() {
         var workId = pages.work.workId();
 
         workId.then(function(workId) {
-            hash.subjectWorkData.id = workId;
-            hash.subjectWorkData.songCode = workId.slice(3, -3);
+			var data = hash.currentEntityDataSlotsByType.work;
+            data.id = workId;
+            data.songCode = workId.slice(3, -3);
         });
 
         deferred.fulfill(workId);
@@ -41,7 +50,9 @@ module.exports.findCurrentlyOpenWorkId = function() {
 };
 exports.validateWorkId = function() {
     it('Validate work ID', function() {
-        pages.work.validateWorkId(hash.subjectWorkData.id);
+        pages.work.validateWorkId(
+			hash.currentEntityDataSlotsByType.work.id
+		);
     });
 };
 module.exports.workInclusionOnWebsite = function() {
@@ -139,7 +150,7 @@ module.exports.editCreators = function() {
 exports.clickCompositeWorkCheckbox = function(data, key) {
     it('Click composite work checkbox', function() {
         pages.work.clickCompositeWorkCheckbox().then(function(value) {
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'isCompositeWork';
 
             data[key] = value;
@@ -158,7 +169,7 @@ exports.confirmDisablingWorkAsComposite = function() {
 };
 exports.validateCompositeWorkCheckbox = function(data, key) {
     it('Validate composite work checkbox', function() {
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'isCompositeWork';
 
         expect(pages.work.compositeWorkCheckboxState()).toBe(data[key]);
@@ -176,7 +187,7 @@ exports.validateDefaultCompositeWorkType = function() {
 };
 exports.selectCompositeWorkType = function(value, data, key) {
     key = key || 'compositeWorkType';
-    data = data || hash.subjectWorkData || {};
+    data = data || hash.currentEntityDataSlotsByType.work;
 
     it('Select composite work type', function() {
         pages.work.selectCompositeWorkType(value);
@@ -192,7 +203,7 @@ exports.confirmMakingIntoMedley = function(data, key) {
     it('Confirm making work into a Medley', function() {
         pages.work.confirmMakingIntoMedley();
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'creators';
         data[key] = [];
     });
@@ -218,7 +229,7 @@ exports.enterMediumCreatorContribution = function(i, contribution, data, key) {
     it('Enter medium creator contribution #' + (i + 1), function() {
         var creator;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'creators';
         data[key] = data[key] || [];
         creator = data[key][i] = data[key][i] || {};
@@ -231,7 +242,7 @@ exports.enterCreatorContribution = function(i, contribution, data, key) {
     it("Enter creator contribution #" + (i + 1), function() {
         var creator;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'creators';
         data[key] = data[key] || [];
         creator = data[key][i] = data[key][i] || {};
@@ -270,7 +281,7 @@ exports.deleteComponentWork = function(i, data, key) {
     it('Delete component work #' + (i + 1), function() {
         var components;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         components = data[key] = data[key] || [];
 
@@ -311,7 +322,7 @@ exports.selectFirstComponentWorkMatching = function(i, value, data, key) {
         pages.work.selectFirstComponentWorkSuggestion().then(function(selected) {
             var component;
 
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
             data[key] = data[key] || [];
             component = data[key][i] = data[key][i] || {};
@@ -340,7 +351,7 @@ exports.enterComponentWorkAllocation = function(i, value, data, key) {
     it('Enter component work allocation #' + (i + 1), function() {
         var component;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         data[key] = data[key] || [];
         component = data[key][i] = data[key][i] || {};
@@ -353,7 +364,7 @@ exports.enterMediumComponentWorkAllocation = function(i, data, key) {
     it('Enter component work allocation #' + (i + 1), function() {
         var component;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         data[key] = data[key] || [];
         component = data[key][i] = data[key][i] || {};
@@ -377,7 +388,7 @@ exports.enterNewShellWork = function(i, value) {
             var components;
             var component;
 
-            data = hash.subjectWorkData;
+            data = hash.currentEntityDataSlotsByType.work;
 
             components = data.components = data.components || [];
             component = components[i] = components[i] || {};
@@ -390,7 +401,8 @@ exports.enterNewShellWork = function(i, value) {
 };
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
-        var components = hash.subjectWorkData.components || [];
+		var data = hash.currentEntityDataSlotsByType.work;
+        var components = data.components || [];
         var shellWork = components[i] || {};
 
         pages.work.validateEnteredShellWorkTitle(i, shellWork.name);
@@ -416,7 +428,7 @@ exports.selectRandomShellWorkCreator = function(i, j) {
             var creators;
             var creator;
 
-            data = hash.subjectWorkData;
+            data = hash.currentEntityDataSlotsByType.work;
 
             components = data.components = data.components || [];
             component = components[i] = components[i] || {};
@@ -440,7 +452,7 @@ exports.enterShellWorkCreatorContribution = function(i, j, value) {
                 var creators;
                 var creator;
 
-                data = hash.subjectWorkData;
+                data = hash.currentEntityDataSlotsByType.work;
 
                 components = data.components = data.components || [];
                 component = components[i] = components[i] || {};
@@ -473,59 +485,80 @@ exports.enterWorkSearchTerms = function(value) {
 };
 exports.searchForWorkUsingPreviouslyCreatedWorkId = function() {
     it('Search for work using previously created work ID', function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.id);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.id
+		);
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCode = function() {
     it('Search for work using previously created song code', function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.songCode
+		);
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithNoLeadingZeroes = function() {
     it('Search for work using previously created song code with no leading zeroes', function() {
+		var data = hash.currentEntityDataSlotsByType.work;
         pages.work.enterWorkSearchTerms(
-			hash.subjectWorkData.songCode.toString().replace(/^0*/, '')
+			data.songCode.toString().replace(/^0*/, '')
 		);
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithLeadingZeroes = function() {
     it('Search for work using previously created song code with leading zeroes', function() {
-        pages.work.enterWorkSearchTerms('0000' + hash.subjectWorkData.songCode);
+        pages.work.enterWorkSearchTerms(
+			'0000' + hash.currentEntityDataSlotsByType.work.songCode
+		);
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithTrailingZeroes = function() {
     it('Search for work using previously created song code trailing zeroes', function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode + '0000');
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.songCode + '0000'
+		);
     });
 };
 exports.searchForWorkUsingPreviouslyEnteredPrimaryTitle = function() {
     it('Search for work using previously entered primary work title', function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.primaryTitle);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.primaryTitle
+		);
     });
 };
 exports.searchForWorkUsingPreviouslyEnteredAlternateTitle = function(i) {
     it('Search for work using previously entered alternate work title #' + (i + 1), function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.alternateTitles[i]);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.alternateTitles[i]
+		);
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorName = function(i) {
     it('Search for work using previously selected creator name #' + (i + 1), function() {
-        pages.work.enterCreatorNameAsWorkSearchTerms(hash.subjectWorkData.creators[i].name);
+        pages.work.enterCreatorNameAsWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.creators[i].name
+		);
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorSuisaIpiNumber = function(i) {
     it('Search for work using previously selected creator SUISA IPI number #' + (i + 1), function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].suisaIpiNumber);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.creators[i].suisaIpiNumber
+		);
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorInternalIpiNumber = function(i) {
     it('Search for work using previously selected creator internal IPI number #' + (i + 1), function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].internalIpiNumber);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.creators[i].internalIpiNumber
+		);
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorIpiNumber = function(i) {
     it('Search for work using previously selected creator IPI number #' + (i + 1), function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].ipiNumber);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.creators[i].ipiNumber
+		);
     });
 };
 exports.expectWorkSearchMatchCountToBe = function(value) {
@@ -577,7 +610,9 @@ exports.searchForPreviouslyEnteredComponentWork = function(i) {
     });
 
     it('Search for previously entered component work #' + (i + 1), function() {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.components[i].name);
+        pages.work.enterWorkSearchTerms(
+			hash.currentEntityDataSlotsByType.work.components[i].name
+		);
     });
 
     it('Wait for search results to load', function() {
@@ -911,6 +946,15 @@ module.exports.validateCreatorName = function(name) {
 		}
 	);
 };
+exports.validateSubjectCreatorNames = function(howMany) {
+	_.times(howMany, function(i) {
+		it('Validate subject creator #' + (i + 1) + ' - name', function() {
+			expect(pages.work.creatorNames()).toContain(
+				hash.currentEntityDataSlotsByType.work.creators[i].name
+			);
+		});
+	});
+};
 module.exports.validateCreatorContributionByName = function(name, percentage) {
 	it (
 		"Validate creator contribution percentage (if validation value is not empty)", function() {
@@ -923,11 +967,22 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 		}
 	);
 };
+exports.validateSubjectCreatorContributions = function(howMany) {
+	_.times(howMany, function(i) {
+		it('Validate subject creator #' + (i + 1) + ' - contribution', function() {
+			var data = hash.currentEntityDataSlotsByType.work;
+			var creator = data.creators[i];
+			expect(pages.work.creatorContributionByName(creator.name)).toBe(
+				creator.contribution
+			);
+		});
+	});
+};
 exports.validateCompositeWorkType = function(data, key) {
-    data = data || hash.subjectWorkData || {};
-    key = key || 'compositeWorkType';
-
     it('Validate composite work type', function() {
+		data = data || hash.currentEntityDataSlotsByType.work;
+		key = key || 'compositeWorkType';
+
         pages.work.validateCompositeWorkType(data[key]);
     });
 };
@@ -935,7 +990,7 @@ exports.validateComponentWorkId = function(i, data, key) {
     it('Validate component work ID', function() {
         var component;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
 
         data[key] = data[key] || [];
@@ -948,7 +1003,7 @@ exports.validateComponentWorkName = function(i, data, key) {
     it('Validate component work name #' + (i + 1), function() {
         var component;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         component = data[key][i];
 
@@ -959,7 +1014,7 @@ exports.validateComponentWorkAllocation = function(i, data, key) {
     it('Validate component work allocation #' + (i + 1), function() {
         var component;
 
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         component = data[key][i];
 
@@ -994,7 +1049,7 @@ exports.validateShellWorkCreatorName = function(i, j, data, key) {
             var component;
             var creator;
 
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
 
             data[key] = data[key] || [];
@@ -1014,7 +1069,7 @@ exports.validateShellWorkCreatorContribution = function(i, j, data, key) {
             var component;
             var creator;
 
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
 
             data[key] = data[key] || [];
@@ -1088,6 +1143,8 @@ module.exports.expectEnteredDeliveryYearNotToBe = function(value) {
 module.exports.validateMusicalDistributionCategory = function(value) {
 	it("Validate musical distribution category (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			value = value || data.musicalDistributionCategory;
 			if(!value) {
 				return;
 			}
@@ -1098,6 +1155,8 @@ module.exports.validateMusicalDistributionCategory = function(value) {
 module.exports.validateTextMusicRelationship = function(value) {
 	it("Validate text music relationship (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			value = value || data.textMusicRelationship;
 			if(!value) {
 				return;
 			}
@@ -1115,6 +1174,8 @@ module.exports.validateTextMusicRelationship = function(value) {
 module.exports.validateExcerptType = function(value) {
 	it("Validate excerpt type (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			value = value || data.excerptType;
 			if(!value) {
 				return;
 			}
@@ -1132,6 +1193,8 @@ module.exports.validateExcerptType = function(value) {
 module.exports.validateVersionType = function(value) {
 	it("Validate version type (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			value = value || data.versionType;
 			if(!value) {
 				return;
 			}
@@ -1142,6 +1205,8 @@ module.exports.validateVersionType = function(value) {
 module.exports.validateLyricAdaptation = function(value) {
 	it("Validate lyric adaptation (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			value = value || data.lyricAdaptation;
 			if(!value) {
 				return;
 			}
@@ -1152,6 +1217,8 @@ module.exports.validateLyricAdaptation = function(value) {
 module.exports.validateMusicArrangement = function(value) {
 	it("Validate music arrangement (if validation value is not empty)", function() {
 		promise.when(value).then(function(value) {
+			var data = hash.currentEntityDataSlotsByType.work;
+			value = value || data.musicArrangement;
 			if(!value) {
 				return;
 			}
@@ -1501,8 +1568,6 @@ module.exports.editBasicWork = function(data, more) {
 	);
 };
 module.exports.validateWork = function(data, more) {
-	data = data || hash.subjectWorkData;
-
 	more = more || {};
 
 	more.skip = more.skip || {};
@@ -1570,7 +1635,7 @@ module.exports.validateWork = function(data, more) {
 			}
 
 			if(!more.skip.creators && data.creators && data.creators.length !== 0) {
-				steps.work.goToScopeDelivery();
+				steps.work.goToScopeDeliveryTab();
 
 				data.creators.forEach (
 					function(creator, i) {
@@ -1585,4 +1650,11 @@ module.exports.validateWork = function(data, more) {
 			}
 		}
 	);
+};
+
+exports.goToRightsTab = function() {
+    it('Go to Rights tab', function() {
+        pages.work.goToRightsTab();
+        pages.base.waitForAjax();
+    });
 };

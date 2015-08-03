@@ -149,6 +149,32 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
+        enterTerritorySearchTerms: function(value) {
+            var element = pages.create_deal_scope.elems.territoryField;
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        },
+
+        territorySearchResultOptions: function() {
+            browser.wait(ExpectedConditions.visibilityOf(
+                pages.create_deal_scope.elems.territoryDropDown,
+                _tf_config._system_.wait_timeout
+            ));
+
+            return $$('.tg-typeahead__suggestions-group-item');
+        },
+
+        selectTerritorySearchResultByIndex: function(i) {
+            var element = (
+                pages.create_deal_scope.territorySearchResultOptions().get(i)
+            );
+
+            pages.base.scrollIntoView(element);
+
+            return element.click();
+        },
+
         validateTheNoPublisherShareWarningMessage: function () {
             pages.create_deal_scope.elems.noPublisherShareWarningMessage.getText().
                 then(function (promise) {
