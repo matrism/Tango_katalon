@@ -94,7 +94,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["deal_sanity_create"],
+    commonFeatureTags: ['deal_sanity_create', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };
