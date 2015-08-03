@@ -5,49 +5,49 @@ var ExpectedConditions = protractor.ExpectedConditions;
 steps.base = exports;
 
 exports.useEntityDataSlot = function(entityType, slotId) {
-	it('Use "' + entityType + '" entity data slot "' + slotId + '"', function() {
-		var slotsByType = (
-			hash.entityDataSlotsByType = hash.entityDataSlotsByType || {}
-		);
+    it('Use "' + entityType + '" entity data slot "' + slotId + '"', function() {
+        var slotsByType = (
+            hash.entityDataSlotsByType = hash.entityDataSlotsByType || {}
+        );
 
-		var slotsOfThisType = slotsByType[entityType] = (
-			slotsByType[entityType] || {}
-		);
+        var slotsOfThisType = slotsByType[entityType] = (
+            slotsByType[entityType] || {}
+        );
 
-		var targetSlot = slotsOfThisType[slotId] = (
-			slotsOfThisType[slotId] || {
-				slotId: slotId,
-			}
-		);
+        var targetSlot = slotsOfThisType[slotId] = (
+            slotsOfThisType[slotId] || {
+                slotId: slotId,
+            }
+        );
 
-		var currentSlotsByType = hash.currentEntityDataSlotsByType = (
-			hash.currentEntityDataSlotsByType || {}
-		);
+        var currentSlotsByType = hash.currentEntityDataSlotsByType = (
+            hash.currentEntityDataSlotsByType || {}
+        );
 
-		hash.currentEntityDataSlotsByType[entityType] = targetSlot;
-	});
+        hash.currentEntityDataSlotsByType[entityType] = targetSlot;
+    });
 };
 
 exports.clearCurrentEntityDataSlot = function(entityType) {
-	it('Clear current "' + entityType + '" entity data slot', function() {
-		var slot = hash.currentEntityDataSlotsByType[entityType];
+    it('Clear current "' + entityType + '" entity data slot', function() {
+        var slot = hash.currentEntityDataSlotsByType[entityType];
 
-		expect(slot).toBeTruthy();
+        expect(slot).toBeTruthy();
 
-		Object.keys(slot).forEach(function(key) {
-			if(key === 'slotId') {
-				return;
-			}
-			else {
-				delete slot[key];
-			}
-		});
-	});
+        Object.keys(slot).forEach(function(key) {
+            if(key === 'slotId') {
+                return;
+            }
+            else {
+                delete slot[key];
+            }
+        });
+    });
 };
 
 exports.useBlankEntityDataSlot = function(entityType, slotId) {
-	exports.useEntityDataSlot(entityType, slotId);
-	exports.clearCurrentEntityDataSlot(entityType);
+    exports.useEntityDataSlot(entityType, slotId);
+    exports.clearCurrentEntityDataSlot(entityType);
 };
 
 exports.goToHomePage = function() {

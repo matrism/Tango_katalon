@@ -8,13 +8,13 @@ var promise = protractor.promise;
 require(pages_path + "work");
 steps.work = exports;
 exports.goToWorkPage = function(data, key) {
-	it('Go to work page', function() {
-		var workId;
-		data = data || hash.currentEntityDataSlotsByType.work;
-		key = key || 'id';
-		workId = data[key];
-		pages.work.open(workId);
-	});
+    it('Go to work page', function() {
+        var workId;
+        data = data || hash.currentEntityDataSlotsByType.work;
+        key = key || 'id';
+        workId = data[key];
+        pages.work.open(workId);
+    });
 };
 
 module.exports.goToScopeDeliveryTab = function() {
@@ -24,11 +24,11 @@ module.exports.goToScopeDeliveryTab = function() {
 };
 
 exports.goToRecordingsTab = function() {
-	it('Go to Recordings tab', function() {
-		pages.work.goToRecordingsTab();
-		browser.sleep(200);
-		pages.base.waitForAjax();
-	});
+    it('Go to Recordings tab', function() {
+        pages.work.goToRecordingsTab();
+        browser.sleep(200);
+        pages.base.waitForAjax();
+    });
 };
 
 module.exports.findCurrentlyOpenWorkId = function() {
@@ -38,7 +38,7 @@ module.exports.findCurrentlyOpenWorkId = function() {
         var workId = pages.work.workId();
 
         workId.then(function(workId) {
-			var data = hash.currentEntityDataSlotsByType.work;
+            var data = hash.currentEntityDataSlotsByType.work;
             data.id = workId;
             data.songCode = workId.slice(3, -3);
         });
@@ -51,8 +51,8 @@ module.exports.findCurrentlyOpenWorkId = function() {
 exports.validateWorkId = function() {
     it('Validate work ID', function() {
         pages.work.validateWorkId(
-			hash.currentEntityDataSlotsByType.work.id
-		);
+            hash.currentEntityDataSlotsByType.work.id
+        );
     });
 };
 module.exports.workInclusionOnWebsite = function() {
@@ -401,7 +401,7 @@ exports.enterNewShellWork = function(i, value) {
 };
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
-		var data = hash.currentEntityDataSlotsByType.work;
+        var data = hash.currentEntityDataSlotsByType.work;
         var components = data.components || [];
         var shellWork = components[i] || {};
 
@@ -486,79 +486,79 @@ exports.enterWorkSearchTerms = function(value) {
 exports.searchForWorkUsingPreviouslyCreatedWorkId = function() {
     it('Search for work using previously created work ID', function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.id
-		);
+            hash.currentEntityDataSlotsByType.work.id
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCode = function() {
     it('Search for work using previously created song code', function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.songCode
-		);
+            hash.currentEntityDataSlotsByType.work.songCode
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithNoLeadingZeroes = function() {
     it('Search for work using previously created song code with no leading zeroes', function() {
-		var data = hash.currentEntityDataSlotsByType.work;
+        var data = hash.currentEntityDataSlotsByType.work;
         pages.work.enterWorkSearchTerms(
-			data.songCode.toString().replace(/^0*/, '')
-		);
+            data.songCode.toString().replace(/^0*/, '')
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithLeadingZeroes = function() {
     it('Search for work using previously created song code with leading zeroes', function() {
         pages.work.enterWorkSearchTerms(
-			'0000' + hash.currentEntityDataSlotsByType.work.songCode
-		);
+            '0000' + hash.currentEntityDataSlotsByType.work.songCode
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithTrailingZeroes = function() {
     it('Search for work using previously created song code trailing zeroes', function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.songCode + '0000'
-		);
+            hash.currentEntityDataSlotsByType.work.songCode + '0000'
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyEnteredPrimaryTitle = function() {
     it('Search for work using previously entered primary work title', function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.primaryTitle
-		);
+            hash.currentEntityDataSlotsByType.work.primaryTitle
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyEnteredAlternateTitle = function(i) {
     it('Search for work using previously entered alternate work title #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.alternateTitles[i]
-		);
+            hash.currentEntityDataSlotsByType.work.alternateTitles[i]
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorName = function(i) {
     it('Search for work using previously selected creator name #' + (i + 1), function() {
         pages.work.enterCreatorNameAsWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.creators[i].name
-		);
+            hash.currentEntityDataSlotsByType.work.creators[i].name
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorSuisaIpiNumber = function(i) {
     it('Search for work using previously selected creator SUISA IPI number #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.creators[i].suisaIpiNumber
-		);
+            hash.currentEntityDataSlotsByType.work.creators[i].suisaIpiNumber
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorInternalIpiNumber = function(i) {
     it('Search for work using previously selected creator internal IPI number #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.creators[i].internalIpiNumber
-		);
+            hash.currentEntityDataSlotsByType.work.creators[i].internalIpiNumber
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorIpiNumber = function(i) {
     it('Search for work using previously selected creator IPI number #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.creators[i].ipiNumber
-		);
+            hash.currentEntityDataSlotsByType.work.creators[i].ipiNumber
+        );
     });
 };
 exports.expectWorkSearchMatchCountToBe = function(value) {
@@ -611,8 +611,8 @@ exports.searchForPreviouslyEnteredComponentWork = function(i) {
 
     it('Search for previously entered component work #' + (i + 1), function() {
         pages.work.enterWorkSearchTerms(
-			hash.currentEntityDataSlotsByType.work.components[i].name
-		);
+            hash.currentEntityDataSlotsByType.work.components[i].name
+        );
     });
 
     it('Wait for search results to load', function() {
@@ -947,13 +947,13 @@ module.exports.validateCreatorName = function(name) {
 	);
 };
 exports.validateSubjectCreatorNames = function(howMany) {
-	_.times(howMany, function(i) {
-		it('Validate subject creator #' + (i + 1) + ' - name', function() {
-			expect(pages.work.creatorNames()).toContain(
-				hash.currentEntityDataSlotsByType.work.creators[i].name
-			);
-		});
-	});
+    _.times(howMany, function(i) {
+        it('Validate subject creator #' + (i + 1) + ' - name', function() {
+            expect(pages.work.creatorNames()).toContain(
+                hash.currentEntityDataSlotsByType.work.creators[i].name
+            );
+        });
+    });
 };
 module.exports.validateCreatorContributionByName = function(name, percentage) {
 	it (
@@ -968,20 +968,20 @@ module.exports.validateCreatorContributionByName = function(name, percentage) {
 	);
 };
 exports.validateSubjectCreatorContributions = function(howMany) {
-	_.times(howMany, function(i) {
-		it('Validate subject creator #' + (i + 1) + ' - contribution', function() {
-			var data = hash.currentEntityDataSlotsByType.work;
-			var creator = data.creators[i];
-			expect(pages.work.creatorContributionByName(creator.name)).toBe(
-				creator.contribution
-			);
-		});
-	});
+    _.times(howMany, function(i) {
+        it('Validate subject creator #' + (i + 1) + ' - contribution', function() {
+            var data = hash.currentEntityDataSlotsByType.work;
+            var creator = data.creators[i];
+            expect(pages.work.creatorContributionByName(creator.name)).toBe(
+                creator.contribution
+            );
+        });
+    });
 };
 exports.validateCompositeWorkType = function(data, key) {
     it('Validate composite work type', function() {
-		data = data || hash.currentEntityDataSlotsByType.work;
-		key = key || 'compositeWorkType';
+        data = data || hash.currentEntityDataSlotsByType.work;
+        key = key || 'compositeWorkType';
 
         pages.work.validateCompositeWorkType(data[key]);
     });

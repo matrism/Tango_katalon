@@ -16,7 +16,7 @@ var beforeFeature = [
             name: 'Define a COS composite work with shell works',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 0]],
+                [steps.base.useBlankEntityDataSlot, ['work', 0]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(0)]],
@@ -56,7 +56,7 @@ var beforeFeature = [
             name: 'Define a POT composite work with shell works',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 1]],
+                [steps.base.useBlankEntityDataSlot, ['work', 1]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(1)]],
@@ -86,7 +86,7 @@ var beforeFeature = [
             name: 'Define a UCO composite work with shell works',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 2]],
+                [steps.base.useBlankEntityDataSlot, ['work', 2]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(2)]],
@@ -116,7 +116,7 @@ var beforeFeature = [
             name: 'Define a MED composite work with shell works',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 3]],
+                [steps.base.useBlankEntityDataSlot, ['work', 3]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(3)]],
@@ -154,7 +154,7 @@ var beforeFeature = [
             name: 'Define COS composites with multiple shell works and different allocation combinations',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 4]],
+                [steps.base.useBlankEntityDataSlot, ['work', 4]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(4)]],
@@ -211,7 +211,7 @@ var beforeFeature = [
                 [steps.work.validateShellWorkCreatorName, [3, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [3, 0]],
 
-				[steps.base.useBlankEntityDataSlot, ['work', 5]],
+                [steps.base.useBlankEntityDataSlot, ['work', 5]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(5)]],
@@ -278,7 +278,7 @@ var beforeFeature = [
                 [steps.work.validateShellWorkCreatorName, [4, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [4, 0]],
 
-				[steps.base.useBlankEntityDataSlot, ['work', 6]],
+                [steps.base.useBlankEntityDataSlot, ['work', 6]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(6)]],
@@ -328,7 +328,7 @@ var beforeFeature = [
             name: 'Edit a COS composite work with shell works',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 7]],
+                [steps.base.useBlankEntityDataSlot, ['work', 7]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(7)]],

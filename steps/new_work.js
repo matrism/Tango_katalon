@@ -222,8 +222,8 @@ exports.validateDefaultCompositeWorkType = function() {
 };
 exports.selectCompositeWorkType = function(value, data, key) {
     it('Select composite work type', function() {
-		key = key || 'compositeWorkType';
-		data = data || hash.currentEntityDataSlotsByType.work;
+        key = key || 'compositeWorkType';
+        data = data || hash.currentEntityDataSlotsByType.work;
 
         pages.new_work.selectCompositeWorkType(value);
 
@@ -447,7 +447,7 @@ exports.enterNewShellWork = function(i, title, data, key) {
 };
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
-		var data = hash.currentEntityDataSlotsByType.work;
+        var data = hash.currentEntityDataSlotsByType.work;
         var components = data.components || [];
         var shellWork = components[i] || {};
 
@@ -832,9 +832,9 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 };
 
 exports.continueToNextTab = function() {
-	it('Continue to next work creation tab', function() {
-		pages.new_work.continueToNextTab();
-	});
+    it('Continue to next work creation tab', function() {
+        pages.new_work.continueToNextTab();
+    });
 };
 
 exports.saveWork = function() {

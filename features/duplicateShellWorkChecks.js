@@ -17,7 +17,7 @@ var beforeFeature = [
             name: 'Duplicate shell work check',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 0]],
+                [steps.base.useBlankEntityDataSlot, ['work', 0]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(0)]],
@@ -33,7 +33,7 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
-				[steps.base.useBlankEntityDataSlot, ['work', 1]],
+                [steps.base.useBlankEntityDataSlot, ['work', 1]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(1)]],
@@ -65,7 +65,7 @@ var beforeFeature = [
             name: 'Duplicate shell work check: Ignore articles, extra whitespace, and punctuation',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 2]],
+                [steps.base.useBlankEntityDataSlot, ['work', 2]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(2)]],
@@ -81,7 +81,7 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
-				[steps.base.useBlankEntityDataSlot, ['work', 3]],
+                [steps.base.useBlankEntityDataSlot, ['work', 3]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.clickCompositeWorkCheckbox],
