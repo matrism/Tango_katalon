@@ -83,15 +83,15 @@ if (steps.deal === undefined) {
             });
         },
 
-		findId: function() {
-			it('Find deal ID', function () {
-				var idBinding = element(By.xpath('//*[@id="RECORD-HEADER"]//div/div/div[6]/div/p[@class="info ng-binding"]'));
+        findId: function() {
+            it('Find deal ID', function () {
+                var idBinding = element(By.xpath('//*[@id="RECORD-HEADER"]//div/div/div[6]/div/p[@class="info ng-binding"]'));
 
-				idBinding.getText().then(function(value) {
-					hash.currentEntityDataSlotsByType.deal.id = value;
-				});
-			});
-		},
+                idBinding.getText().then(function(value) {
+                    hash.currentEntityDataSlotsByType.deal.id = value;
+                });
+            });
+        },
 
         itContinueToNextPage: function () {
             describe("Check continue button enabled and go to next page", function () {

@@ -16,7 +16,7 @@ var beforeFeature = [
             name: 'Search for a work by work ID, song code, and primary and alternate titles',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 0]],
+                [steps.base.useBlankEntityDataSlot, ['work', 0]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(0)]],
@@ -130,7 +130,7 @@ var beforeFeature = [
                 [steps.person.findId],
                 [steps.person.findInternalIpiNumber],
 
-				[steps.base.useBlankEntityDataSlot, ['work', 1]],
+                [steps.base.useBlankEntityDataSlot, ['work', 1]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],
@@ -179,7 +179,7 @@ var beforeFeature = [
             name: 'Search for a work by primary title and creator name (combination)',
             tags: [],
             steps: [
-				[steps.base.useBlankEntityDataSlot, ['work', 2]],
+                [steps.base.useBlankEntityDataSlot, ['work', 2]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],

@@ -583,7 +583,7 @@ var beforeFeature = [
                             steps.person.findInternalIpiNumber();
                         });
 
-						steps.base.useBlankEntityDataSlot('work', i);
+                        steps.base.useBlankEntityDataSlot('work', i);
 
                         steps.new_work.goToNewWorkPage();
 
