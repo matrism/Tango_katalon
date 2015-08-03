@@ -224,7 +224,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["modularSaves"],
+    commonFeatureTags: ['modularSaves', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };
