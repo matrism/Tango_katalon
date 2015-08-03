@@ -54,7 +54,7 @@ var beforeFeature = function () {
     },
         {
             name: "Check the visual design for publisher shares",
-            tags: ["check_design_deal_pss"],
+            tags: ['check_design_deal_pss', 'broken'],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -102,7 +102,7 @@ var beforeFeature = function () {
         },
         {
             name: "Dirty check publisher share set",
-            tags: ["dirty_check_pss"],
+            tags: ['dirty_check_pss', 'broken'],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -134,7 +134,7 @@ var beforeFeature = function () {
         },
         {
             name: "Delete publisher share set from a deal",
-            tags: ["delete_deal_publisher_share_set"],
+            tags: ['delete_deal_publisher_share_set', 'broken'],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -161,7 +161,7 @@ var beforeFeature = function () {
         },
         {
             name: "Edit a deal with publisher share set",
-            tags: ["edit_deal_publisher_share_set"],
+            tags: ['edit_deal_publisher_share_set', 'broken'],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -202,7 +202,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["deal_publisher_share_set"],
+    commonFeatureTags: ['deal_publisher_share_set'],
     feature: feature,
     beforeFeature: beforeFeature
 };
