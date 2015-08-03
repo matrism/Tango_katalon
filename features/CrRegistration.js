@@ -42,7 +42,7 @@ var feature = [
 ];
 
 module.exports = {
-    commonFeatureTags: [""],
+    commonFeatureTags: ['broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };
