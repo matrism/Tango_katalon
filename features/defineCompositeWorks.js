@@ -175,7 +175,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a non-composite work into a Composite of Samples',
-            tags: [],
+            tags: ['broken'],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 7]],
 
@@ -238,7 +238,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a non-composite work into a Medley',
-            tags: [],
+            tags: ['broken'],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 9]],
 
@@ -277,7 +277,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a Composite of Samples work into a Medley',
-            tags: [],
+            tags: ['broken'],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 10]],
 
@@ -312,7 +312,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a Medley into a Composite of Samples',
-            tags: [],
+            tags: ['broken'],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 11]],
 
