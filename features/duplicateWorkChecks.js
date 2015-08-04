@@ -168,7 +168,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['duplicate-work-checks'],
+    commonFeatureTags: ['duplicate-work-checks', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };
