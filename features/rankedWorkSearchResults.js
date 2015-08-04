@@ -769,7 +769,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['ranked-work-search-results'],
+    commonFeatureTags: ['ranked-work-search-results', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };
