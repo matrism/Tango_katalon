@@ -66,7 +66,7 @@ var beforeFeature = function () {
 
         {
             name: "Create edit and view simple flow internal contact",
-            tags: ["create_edit_delete_internal_contacts"],
+            tags: ['create_edit_delete_internal_contacts', 'broken'],
             steps: function () {
                 var j = 2;
                 //create a deal with 1 internal contact
