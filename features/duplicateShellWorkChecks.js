@@ -111,7 +111,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['duplicate-shell-work-checks'],
+    commonFeatureTags: ['duplicate-shell-work-checks', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };
