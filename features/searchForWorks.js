@@ -110,7 +110,7 @@ var beforeFeature = [
         },
         {
             name: 'Search for a work by creator name and SUISA and internal IPI numbers',
-            tags: [],
+            tags: ['broken'],
             steps: [
                 [steps.person.useBlankPersonSlot, [0]],
                 [steps.newPerson.goToNewPersonPage],
