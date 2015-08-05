@@ -236,7 +236,7 @@ var beforeFeature = function () {
         },
         {
             name: "As a user I want to dirty check  multiple  rate edit from Scope ",
-            tags: ['dirtyCheckRR2'],
+            tags: ['dirtyCheckRR2', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
