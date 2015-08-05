@@ -74,7 +74,7 @@ var beforeFeature = function () {
     },
         {
             name: "Dirty check general terms finder deals",
-            tags: ["dirty_check_general_terms_finder_deals"],
+            tags: ['dirty_check_general_terms_finder_deals', 'broken'],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var percent = (Math.random() * 100 + 1).toFixed(2);
