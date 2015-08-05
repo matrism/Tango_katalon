@@ -14,7 +14,7 @@ var beforeFeature = [
     feature = [
         {
             name: 'Define and edit COS, POT, and UCO composite works.',
-            tags: [],
+            tags: ['broken'],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 0]],
 
