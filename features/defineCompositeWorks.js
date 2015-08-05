@@ -14,7 +14,7 @@ var beforeFeature = [
     feature = [
         {
             name: 'Define and edit COS, POT, and UCO composite works.',
-            tags: ['broken'],
+            tags: [],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 0]],
 
@@ -175,7 +175,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a non-composite work into a Composite of Samples',
-            tags: ['broken'],
+            tags: [],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 7]],
 
@@ -238,7 +238,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a non-composite work into a Medley',
-            tags: ['broken'],
+            tags: [],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 9]],
 
@@ -277,7 +277,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a Composite of Samples work into a Medley',
-            tags: ['broken'],
+            tags: [],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 10]],
 
@@ -312,7 +312,7 @@ var beforeFeature = [
         },
         {
             name: 'Change a Medley into a Composite of Samples',
-            tags: ['broken'],
+            tags: [],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 11]],
 
@@ -345,7 +345,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['define-composite-works'],
+    commonFeatureTags: ['define-composite-works', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };
