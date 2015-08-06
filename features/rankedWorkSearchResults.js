@@ -412,12 +412,6 @@ searchDataByCreatorMatch1 = [
                     randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2',
                 ],
             },
-            {
-                title: randomId(0) + 'WINTER IS COMING',
-                creators: [
-                    randomId(0) + 'TABERNER, ' + randomId(0) + 'ELIZABETH2',
-                ],
-            },
         ],
     },
 ];
