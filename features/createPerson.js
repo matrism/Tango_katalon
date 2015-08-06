@@ -46,7 +46,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['create-person', 'broken'],
+    commonFeatureTags: ['create-person'],
     feature: feature,
     beforeFeature: beforeFeature
 };
