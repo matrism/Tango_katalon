@@ -22,37 +22,38 @@ var workData = {};
 var feature = [
     {
         name: "Validate CR Registration  scheduling",
-        tags: ["crRegistration"],
+        tags: ["crRegistration","sanity"],
         steps: [
             [steps.searchSection.accessSavedOrganisationByName,["BMI"]],
             [steps.organisation.goToGeneralTab],
             [steps.organisation.waitForGeneralTabToBeDisplayed],
-            [steps.organisation.saveOrganisationDeliveryMethods],
-            [steps.organisation.goToRegistrationActivityTab],
-            [steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
-            [steps.organisation.saveRegActivityLastEvent],
-            [steps.organisation.goToPreviewRegistrationRunTab],
-            [steps.organisation.selectCustomRegistrationRun,["CR_2014-09-01"]],
-
-            [steps.organisation.executeRegistrationRun,["CR_2014-09-01"]],
-            //note critical errors and total works
-            [steps.organisation.goToRegistrationActivityTab],
-            [steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
-            [steps.organisation.verifyThatWorkIsDelivered],
-            [steps.organisation.checkThatAllDeliviriesAreDelivered],
-
-            [steps.searchSection.accessSavedOrganisationByNameInHash],
-            [steps.organisation.waitForGeneralTabToBeDisplayed],
-            [steps.organisation.goToRegistrationActivityTab],
-            [steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
-            [steps.organisation.verifyThatWorkIsDelivered],
-            [steps.organisation.checkThatAllDeliviriesAreDelivered],
-
-            [steps.registrationFileActivity.goToPage],
-            [steps.organisation.waitForOrgDisappear],
-            [steps.organisation.waitForRegActivityElement],
-            [steps.registrationFileActivity.expandLastDeliveredWork],
-            [steps.registrationFileActivity.verifyDetails]
+            [steps.organisation.saveMultipleELemNodesTest]
+           // [steps.organisation.saveOrganisationDeliveryMethods],
+            //[steps.organisation.goToRegistrationActivityTab],
+           // [steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
+           // [steps.organisation.saveRegActivityLastEvent]
+            //[steps.organisation.goToPreviewRegistrationRunTab],
+            //[steps.organisation.selectCustomRegistrationRun,["CR_2014-09-01"]],
+            //
+            //[steps.organisation.executeRegistrationRun,["CR_2014-09-01"]],
+            ////note critical errors and total works
+            //[steps.organisation.goToRegistrationActivityTab],
+            //[steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
+            //[steps.organisation.verifyThatWorkIsDelivered],
+            //[steps.organisation.checkThatAllDeliviriesAreDelivered],
+            //
+            //[steps.searchSection.accessSavedOrganisationByNameInHash],
+            //[steps.organisation.waitForGeneralTabToBeDisplayed],
+            //[steps.organisation.goToRegistrationActivityTab],
+            //[steps.organisation.waitForRegistrationActivityTabToBeDisplayed],
+            //[steps.organisation.verifyThatWorkIsDelivered],
+            //[steps.organisation.checkThatAllDeliviriesAreDelivered],
+            //
+            //[steps.registrationFileActivity.goToPage],
+            //[steps.organisation.waitForOrgDisappear],
+            //[steps.organisation.waitForRegActivityElement],
+            //[steps.registrationFileActivity.expandLastDeliveredWork],
+            //[steps.registrationFileActivity.verifyDetails]
         ]
     }
 

@@ -211,6 +211,7 @@ if (steps.organisation === undefined) {
 
                 hash.lastEvent = {};
                 var lastEvent = pages.organisation.getLastAddedWorkEvent();
+
                 pages.organisation.getIconType(lastEvent).then(function (isPresent) {
 
 
@@ -269,6 +270,12 @@ if (steps.organisation === undefined) {
             })
 
         },
+        saveMultipleELemNodesTest: function () {
+            it("Save Elem Nodes Test", function () {
+                pages.organisation.testMultipleElements();
+            })
+
+        },
         saveOrganisationDeliveryMethods: function () {
           it("Save Organisation Delivery Methods Information", function () {
               hash.emailDeliveries = [];
@@ -276,6 +283,7 @@ if (steps.organisation === undefined) {
               hash.ftpDeliveries  = [];
               hash.thirdPartyDeliveries  = [];
               var emailDelivery = {};
+
 
               //Email
 
