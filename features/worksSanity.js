@@ -511,7 +511,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['sanity', 'works-sanity', 'broken'],
+    commonFeatureTags: ['sanity', 'works-sanity'],
     feature: feature,
     beforeFeature: beforeFeature
 };
