@@ -15,8 +15,6 @@ require(pages_path + "edit_deal_scope");
 require(steps_path + "edit_deal_scope");
 require(steps_path + "login");
 require(steps_path + "base");
-require(pages_path + "royaltyRates");
-require(steps_path + "royaltyRates");
 
 
 var beforeFeature = function () {
@@ -29,66 +27,6 @@ var beforeFeature = function () {
         steps: function () {
             //fill all general screen fields
             steps.create_deal_general.itAddAllGeneralFieldsForSanityToDealGeneralTab();
-            steps.deal.itContinueToNextPage();
-            steps.create_deal_contract_period.itAddDifferentTypesOfContractPeriods();
-            steps.create_deal_contract_period.selectContractPeriodNumberI(1);
-            steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            steps.create_deal_scope.itAddPublisherShareWithSocietyAwardCredit();
-            steps.create_deal_scope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
-            steps.create_deal_scope.saveThePublisherShareSet();
-            //add rate set payout
-            steps.royaltyRates.addNewRoyaltySet();
-            steps.royaltyRates.addIncomeProviderByPartialMatch("test");
-            steps.royaltyRates.addRatePercentageToContractualField('10');
-            steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmChangingRateApplicationMethod();
-            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
-            steps.royaltyRates.saveRateSet();
-            //add rate set nps
-            steps.royaltyRates.addNewRoyaltySet();
-            steps.royaltyRates.addIncomeProviderByPartialMatch("provider");
-            steps.royaltyRates.addEffectiveStartDate("2015-05-03");
-            steps.royaltyRates.addNPSToContractualField('30');
-            steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmChangingRateApplicationMethod();
-            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
-            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
-            steps.royaltyRates.saveRateSet();
-            //add ret set admin fee
-            steps.royaltyRates.addNewRoyaltySet();
-            steps.royaltyRates.addIncomeProviderByPartialMatch("income");
-            steps.royaltyRates.addEffectiveStartDate("2015-06-15");
-            steps.royaltyRates.addAdminFeeToContractualField('40');
-            steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmChangingRateApplicationMethod();
-            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
-            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
-            steps.royaltyRates.saveRateSet();
-            //override rate set nps
-            steps.royaltyRates.addNewRoyaltySet();
-            steps.royaltyRates.addIncomeProviderByPartialMatch("test");
-            steps.royaltyRates.addEffectiveStartDate("2015-02-03");
-            steps.royaltyRates.addNPSToContractualField('30');
-            steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmChangingRateApplicationMethod();
-            steps.royaltyRates.clickOnYesInterCompanyRateAllFields();
-            steps.royaltyRates.overrideInterCompanyRateInputFieldManual();
-            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
-            steps.base.scrollIntoView("inter company rate set button", pages.royaltyRates.elems.interCompanyInputField);
-            steps.royaltyRates.overrideInterCompanyRateInputFieldByRule();
-            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
-            steps.royaltyRates.saveRateSet();
-
-            steps.create_deal_contract_period.selectContractPeriodNumberI(2);
-            steps.create_deal_scope.addSpecificScope("Finder");
-            steps.base.scrollIntoView("Share publisher share set", pages.create_deal_scope.elems.sharePublisherShareSetIcon);
-            steps.create_deal_scope.sharePublisherShareSet();
-
-
-            steps.deal.itContinueToNextPage();
-            //steps.deal.saveDeal();
-            //steps.deal.waitForDealToBeSaved();
-            //steps.deal.returnDealNumber();
         }
     }];
 

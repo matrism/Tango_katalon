@@ -1,11 +1,8 @@
 var _ = require("lodash");
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
 var promise = protractor.promise;
 hash.royaltyRates = {};
 hash.royaltyRates.RRNames = [];
 hash.royaltyRates.royaltyRateObjectsList = [];
-require(steps_path + "base");
 var ExpectedConditions = protractor.ExpectedConditions;
 if (steps.royaltyRates === undefined) {
     steps.royaltyRates = {
@@ -20,8 +17,6 @@ if (steps.royaltyRates === undefined) {
                 }
             );
         },
-
-
         addNewRoyaltySetEdit: function () {
 
 
@@ -309,44 +304,15 @@ if (steps.royaltyRates === undefined) {
             });
 
         },
-
-        addRateBalanceToContractualField: function (percentage) {
-            it("Add Balance to Contractual Rate Field", function () {
-
-
-                pages.royaltyRates.typeIntoContractualRateInput(percentage);
-
-                    pages.royaltyRates.addPercentageToContractualRateInput();
-
-
-
-
-            });
-        },
-        overrideCoverMechanicalInterCompanyRate: function (percentage) {
-
-            it("Override Cover Mechanical Inter Company Rate with "+ percentage + " % value", function () {
-                pages.royaltyRates.typeIntoCoverMechanicalInterCompanyRateInput(percentage);
-                pages.royaltyRates.waitForInputLoaderToAppear();
-                //pages.royaltyRates.waitForInputLoaderToDissapear();
-            })
-        },
-        setInterCompanyRateToDefault: function () {
-          it("Set Inter Company Rate To Default", function () {
-              pages.royaltyRates.getInterCompanyRateToDefaultState();
-          })
-        },
         addNPSToContractualField: function (percentage) {
             it("Add NPS to Contractual Rate Field", function () {
 
                 pages.royaltyRates.typeIntoContractualRateInput(percentage);
                 pages.royaltyRates.addNPSToContractualRateInput();
-                pages.royaltyRates.waitForAjax();
 
             });
 
         },
-
         addAdminFeeToContractualField: function (percentage) {
             it("Add Admin Fee to Contractual Rate Field", function () {
 
@@ -359,7 +325,9 @@ if (steps.royaltyRates === undefined) {
 
         clickOnReceiptApplicationMethod: function () {
             it("Change Rate Application Method to On Receipt", function () {
+
                 pages.royaltyRates.clickButtonOnReceiptApplicationMethod();
+
             });
 
         },
@@ -379,26 +347,27 @@ if (steps.royaltyRates === undefined) {
         },
         confirmChangingRateApplicationMethod: function () {
             it("Confirm Changing the Rate Application Method to On Receipt", function () {
+
                 pages.royaltyRates.clickYesOnRateMethodModal();
-                pages.royaltyRates.waitForAjax();
+
             });
         },
         changeCoverMechanicalLastRateApplicationMethodToOnReceipt: function () {
-            it("Change Cover Mechanical Last Rate App Method to On Receipt", function () {
-                pages.royaltyRates.clickLastOnReceiptFromCoverMechanical();
-            })
+          it("Change Cover Mechanical Last Rate App Method to On Receipt", function () {
+              pages.royaltyRates.clickLastOnReceiptFromCoverMechanical();
+          })
 
         },
         checkPrevailingPopupIsPresent: function () {
-            it("Check that Prevailing Popup is Displayed", function () {
-                expect(pages.royaltyRates.prevailingPopupIsDisplayed()).toBeTruthy();
-            })
+           it("Check that Prevailing Popup is Displayed", function () {
+              expect(pages.royaltyRates.prevailingPopupIsDisplayed()).toBeTruthy();
+           })
         },
         selectOnReceiptMethodInPrevailingPopup: function () {
-            it("Click Receipt Method on Prevailing Method Popup", function () {
+          it("Click Receipt Method on Prevailing Method Popup", function () {
 
-                pages.royaltyRates.clickOnReceiptMethodOnPrevailingPopup();
-            })
+              pages.royaltyRates.clickOnReceiptMethodOnPrevailingPopup();
+          })
 
         },
         closeAllRRButTheLast: function () {
@@ -466,17 +435,15 @@ if (steps.royaltyRates === undefined) {
             it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
-                // pages.royaltyRates.waitForRRToBeSaved();
+               // pages.royaltyRates.waitForRRToBeSaved();
             });
         },
-
         waitForRateSetToBeSaved: function () {
-            it("Wait for RR To Be Saved", function () {
-                pages.royaltyRates.waitForLoadToAppear();
-                pages.royaltyRates.waitForLoadToFinish();
-            })
+          it("Wait for RR To Be Saved", function () {
+              pages.royaltyRates.waitForLoadToAppear();
+              pages.royaltyRates.waitForLoadToFinish();
+          })
         },
-
         closeRateSet: function () {
             it("Close current Rate Set ", function () {
 
@@ -604,7 +571,7 @@ if (steps.royaltyRates === undefined) {
                         });
                     })
                     .then(function () {
-                        //  console.log(JSON.stringify(rateSetGroupsList, null, 4));
+                     //  console.log(JSON.stringify(rateSetGroupsList, null, 4));
                         royaltyRate.rateSetGroupsList = rateSetGroupsList;
                     });
 
@@ -911,46 +878,6 @@ if (steps.royaltyRates === undefined) {
                 pages.royaltyRates.clickSavePublisherSharesButton();
             })
         },
-        deleteLastAddedPayout: function () {
-            it("Delete Last Added Payout", function () {
-
-                pages.royaltyRates.deletePayoutNumberLast();
-            })
-        },
-        verifyBalancePresentOnlyOnce: function () {
-
-            it("Check that Balance is Present only Once", function () {
-                expect(pages.royaltyRates.getAllRateSetsCount()).toBe(47);
-            })
-        },
-        removeAllContractualRates: function () {
-          
-            it("Remove all contractual Rates", function () {
-                pages.royaltyRates.pressRemoveAllRatesButton();
-            })
-        },
-        lastPayoutDeterminesIC: function (value) {
-
-            it("Set Last Payout Inter Company Rates to "+value, function () {
-                if(value == "NO")
-                    pages.royaltyRates.setLastPayoutICtoNo();
-            });
-
-
-        },
-        verifyICRateIs: function (value) {
-            it("Check that Inter Company Rate equals "+value, function () {
-                expect(pages.royaltyRates.getICValue()).toBe(value);
-            });
-
-
-        },
-        checkNoIncomeRatesPresent: function () {
-            it("Verify that no Income Rates Are added", function () {
-                expect(pages.royaltyRates.getAllRateSetsCount()).toBe(0);
-            });
-
-        },
 
 
         pause: function () {
@@ -964,86 +891,6 @@ if (steps.royaltyRates === undefined) {
 
         },
 
-        clickOnYesInterCompanyRateCoverMechanical: function () {
-            it("Click on the yes inter company rate cover mechanical", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRateCoverMechanical();
-            });
-        },
-
-        clickOnYesInterCompanyRateMechanical: function () {
-            it("Click on the yes inter company rate  mechanical", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRateMechanical();
-            });
-        },
-
-        clickOnYesInterCompanyRateNonSocietyPerformance: function () {
-            it("Click on the yes inter company rate non society performance", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRateNonSocietyPerformance();
-            });
-        },
-
-        clickOnYesInterCompanyRateOthers: function () {
-            it("Click on the yes inter company rate others", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRateOthers();
-            });
-        },
-
-        clickOnYesInterCompanyRatePerformance: function () {
-            it("Click on the yes inter company rate performance", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRatePerformance();
-            });
-        },
-
-        clickOnYesInterCompanyRatePrint: function () {
-            it("Click on the yes inter company rate print", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRatePrint();
-            });
-        },
-
-        clickOnYesInterCompanyRateSynch: function () {
-            it("Click on the yes inter company rate synch", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRateSynch();
-            });
-        },
-
-        clickOnYesInterCompanyRateTpp: function () {
-            it("Click on the yes inter company rate tpp", function () {
-                pages.royaltyRates.clickOnTheYesInterCompanyRateTpp();
-                pages.royaltyRates.waitForAjax();
-            });
-        },
-
-        overrideInterCompanyRateInputFieldManual: function () {
-            it("Override the inter company rate input field ", function () {
-                pages.royaltyRates.waitForLoadToFinish();
-                pages.royaltyRates.fillIntoTheInterCompanyRateInputField();
-                pages.royaltyRates.confirmTheOverrideRRModalDialog();
-                pages.royaltyRates.waitForAjax();
-            });
-        },
-
-        overrideInterCompanyRateInputFieldByRule: function () {
-            it("Override the inter company rate input field ", function () {
-                pages.royaltyRates.waitForLoadToFinish();
-                pages.royaltyRates.selectFromInterCompanyRateRandomValueDropDown();
-                pages.royaltyRates.waitForAjax();
-            });
-        },
-
-        clickOnYesInterCompanyRateAllFields: function () {
-            describe("Click on the yes inter company rates all fields ", function () {
-                steps.base.scrollIntoView("Scroll to others inter company", pages.royaltyRates.elems.yesInterCompanyRateCoverMechanical);
-                steps.royaltyRates.clickOnYesInterCompanyRateCoverMechanical();
-                steps.royaltyRates.clickOnYesInterCompanyRateMechanical();
-                steps.royaltyRates.clickOnYesInterCompanyRateNonSocietyPerformance();
-                steps.base.scrollIntoView("Scroll to others inter company", pages.royaltyRates.elems.yesInterCompanyRateOthers);
-                steps.royaltyRates.clickOnYesInterCompanyRateOthers();
-                steps.royaltyRates.clickOnYesInterCompanyRatePerformance();
-                steps.royaltyRates.clickOnYesInterCompanyRatePrint();
-                steps.royaltyRates.clickOnYesInterCompanyRateSynch();
-                steps.royaltyRates.clickOnYesInterCompanyRateTpp();
-            });
-        },
 
         pauseTest: function () {
 

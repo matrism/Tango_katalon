@@ -31,7 +31,7 @@ exports.clearCurrentPersonSlot = function() {
         var currentIndex = hash.currentPersonSlot.slotIndex;
 
         hash.currentPersonSlot = hash.personSlots[currentIndex] = {
-            slotIndex: currentIndex
+            slotIndex: currentIndex,
         };
     });
 };

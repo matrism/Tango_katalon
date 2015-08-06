@@ -2,6 +2,7 @@ var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps;
 
 
+
 require(pages_path + "royaltyRates");
 require(steps_path + "royaltyRates");
 
@@ -26,6 +27,7 @@ require(pages_path + "searchSection");
 require(steps_path + "searchSection");
 
 require(pages_path + "rateSetIncomeTypes");
+
 
 
 var beforeFeature = function () {
@@ -56,7 +58,8 @@ var beforeFeature = function () {
             steps.royaltyRates.openAllRRFields();
             steps.royaltyRates.storeRRObject();
             steps.royaltyRates.saveRateSet();
-            //  steps.royaltyRates.test();
+         //  steps.royaltyRates.test();
+
 
 
             steps.royaltyRates.addNewRoyaltySet();
@@ -142,17 +145,23 @@ var beforeFeature = function () {
             //
             //
             //
-            //  steps.deal.itContinueToNextPage();
-            //  steps.deal.saveDeal();
-            //
-            //  steps.deal.goToIncomeRatesPage();
-            //
-            //  steps.RRSummaryTable.expandRR();
-            //  steps.RRSummaryTable.expandInnerRR();
-            //
-            //
-            //steps.RRSummaryTable.validateIncomeRatesTable();
+          //  steps.deal.itContinueToNextPage();
+          //  steps.deal.saveDeal();
+          //
+          //  steps.deal.goToIncomeRatesPage();
+          //
+          //  steps.RRSummaryTable.expandRR();
+          //  steps.RRSummaryTable.expandInnerRR();
+          //
+          //
+          //steps.RRSummaryTable.validateIncomeRatesTable();
             steps.royaltyRates.pauseTest();
+
+
+
+
+
+
 
 
         }
@@ -163,16 +172,16 @@ var beforeFeature = function () {
             tags: ["filterRRSummary"],
             steps: function () {
 
-                //steps.searchSection.accessSavedDealByNumber("209550");
+                  //steps.searchSection.accessSavedDealByNumber("209550");
                 steps.searchSection.accessSavedDealByNumber("206988");
-                steps.deal.goToIncomeRatesPage();
-                steps.RRSummaryTable.expandRR();
-                steps.RRSummaryTable.expandInnerRR();
+              steps.deal.goToIncomeRatesPage();
+                  steps.RRSummaryTable.expandRR();
+                  steps.RRSummaryTable.expandInnerRR();
                 steps.RRSummaryTable.saveDisplayedIncomeRates();
-                steps.RRSummaryTable.validateContractPeriodFilter();
+           steps.RRSummaryTable.validateContractPeriodFilter();
 
             }
-        },
+            },
         {
 
             name: "As a user I want to view update RR Summarry",
@@ -205,13 +214,14 @@ var beforeFeature = function () {
 
                 steps.royaltyRates.saveRateSet();
 
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
+                  steps.deal.itContinueToNextPage();
+                  steps.deal.saveDeal();
 
-                steps.deal.goToIncomeRatesPage();
+                  steps.deal.goToIncomeRatesPage();
 
-                steps.RRSummaryTable.expandRR();
-                steps.RRSummaryTable.expandInnerRR();
+                  steps.RRSummaryTable.expandRR();
+                  steps.RRSummaryTable.expandInnerRR();
+
 
 
                 steps.deal.goToTermsDealTabDetails();
@@ -236,55 +246,12 @@ var beforeFeature = function () {
                 steps.RRSummaryTable.validateUpdatedTable();
 
 
-            }
-        },
-        {
-
-            name: "As a user I want to infinite scroll RR Summarry",
-            tags: ["infiniteScrollRRSummary"],
-            steps: function () {
-
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-
-
-                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-                steps.create_deal_scope.itAddSimpleScope();
-
-                steps.royaltyRates.addNewRoyaltySet();
-                steps.royaltyRates.addRatePercentageToContractualField("10");
-                steps.royaltyRates.addAdminFeeToContractualField("12");
-                steps.royaltyRates.addNPSToContractualField("2");
-
-                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
-                steps.royaltyRates.clickAtSourceApplicationMethod();
-                steps.royaltyRates.confirmChangingRateApplicationMethod();
-
-                steps.royaltyRates.addRatePercentageToContractualField("15");
-
-
-                steps.royaltyRates.saveRateSet();
-
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-
-
-                steps.deal.goToTermsDealTabDetails();
-                steps.deal.clickFirstScopeHeader();
-                steps.deal.copyScope(40);
-
-                steps.RRSummaryTable.waitForRRTableToBeDisplayed();
-                steps.deal.goToIncomeRatesPage();
-                steps.RRSummaryTable.waitForRRTableToBeDisplayed();
-                steps.RRSummaryTable.verifyThatCorrectNumberOfScopesIsDisplayed(10);
-                steps.base.scrollToBottomOfPage();
-                steps.RRSummaryTable.verifyThatCorrectNumberOfScopesIsDisplayed(20);
 
             }
         }
 
+];
 
-    ];
 
 
 module.exports = {

@@ -4,7 +4,7 @@ var steps_path = _tf_config._system_.path_to_steps;
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 require(pages_path + "create_deal_general");
-require(steps_path + "base");
+
 
 if (steps.create_deal_general === undefined) {
     steps.create_deal_general = {
@@ -302,23 +302,6 @@ if (steps.create_deal_general === undefined) {
                     steps.create_deal_general.clickOnNonExclusiveDealRights();
                     steps.create_deal_general.clickOnExclusiveDealRights();
                     steps.create_deal_general.selectRandomDealKeywords();
-                    steps.create_deal_general.fillIntoWampsContractBriefNumberField();
-                    steps.create_deal_general.fillIntoAuditPeriodField();
-                    steps.create_deal_general.fillIntoPeriodToFileSuitField();
-                    steps.create_deal_general.fillIntoLegalFileReferenceCodeField();
-                    steps.create_deal_general.selectRandomExternalContactRoleRowI(1);
-                    steps.create_deal_general.selectRandomExternalContactNameRowI(1);
-                    steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
-                    steps.create_deal_general.fillIntoDemoDealChargeBacksField();
-                    steps.create_deal_general.fillIntoUsCopyrightCertificateDealChargeBacksField();
-                    steps.create_deal_general.fillIntoLegalFeesDealChargeBacksField();
-                    steps.create_deal_general.fillIntoAdvertisingAndPromotionsDealChargeBacksField();
-                    steps.create_deal_general.fillIntoLeadSheetsDealChargeBackField();
-                    steps.base.scrollIntoView("scroll mechanical", pages.create_deal_general.elems.noMechanicalNonTitleBoundIncome);
-                    steps.create_deal_general.clickOnNoMechanicalNonTitleBoundIncome();
-                    steps.create_deal_general.clickOnYesMechanicalNonTitleBoundIncome();
-                    steps.create_deal_general.clickOnYesPerformanceNonTitleBoundIncome();
-                    steps.create_deal_general.clickOnNoPerformanceNonTitleBoundIncome();
                 }
             );
         }

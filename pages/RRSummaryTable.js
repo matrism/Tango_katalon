@@ -16,13 +16,6 @@ if (pages.RRSummaryTable === undefined) {
 
 
         },
-        loaderIcon: function () {
-          return $(".loader:not(.ng-hide)");
-        },
-        RRScopesList: function () {
-
-            return $$(".rate-summary-table__scope");
-        },
 
         //PAGE OBJECT LOCATORS
 
@@ -148,40 +141,8 @@ if (pages.RRSummaryTable === undefined) {
         getElementText: function (element) {
             return element.getText();
         }
-,
-        waitForLoaderToDisappear: function () {
-           //browser.wait(ExpectedConditions.visibilityOf(this.loaderIcon()));
-           // browser.wait(ExpectedConditions.invisibilityOf(this.loaderIcon()));
 
-            pages.base.waitForAjax();
-            browser.driver.sleep(10000);
-            
-        },
-        waitForTableToBeDisplayed: function () {
-           pages.base.waitForAjax();
-            browser.driver.sleep(10000);
-},
-        getNumberOfDisplayedScopes: function () {
-            // var elem =   this.RRScopesList();
-            return this.RRScopesList().count();
-            //hash.temp = 0;
-            //var i = 1 ;
-            //this.RRScopesList().each(function (rrSet) {
-            //
-            //
-            //    var royaltyRate = {};
-            //
-            //    rrSet.$(".rate-summary-table__scope-details>.rate-summary-table__scope-details-scope-name").getText().then(function (result) {
-            //        console.log(result);
-            //        console.log(hash.temp);
-            //
-            //        hash.temp++;
-            //    });
-            //});
-            //
-            //
-            ////Object.keys( this.RRScopesList()).length;
-        }
+
 
 
 
