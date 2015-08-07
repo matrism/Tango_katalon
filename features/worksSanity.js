@@ -25,7 +25,22 @@ var beforeFeature = [
     feature = [
         {
             name: 'Create 2 persons to use as creators',
-            tags: [],
+            tags: [
+                'works-sanity-create-persons',
+                'works-sanity-create-work',
+                'works-sanity-create-composite-works',
+                'works-sanity-validate-composite-works',
+                'works-sanity-create-cos',
+                'works-sanity-validate-cos',
+                'works-sanity-search-for-works',
+                'works-sanity-search-for-works-by-id',
+                'works-sanity-search-for-works-by-song-code',
+                'works-sanity-search-for-works-by-primary-title',
+                'works-sanity-search-for-works-by-alternate-title',
+                'works-sanity-search-for-works-by-creator-presentation-name',
+                'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
+                'works-sanity-scope-delivery',
+            ],
             steps: function() {
                 _.times(2, function(i) {
                     steps.person.useBlankPersonSlot(i);
@@ -45,7 +60,17 @@ var beforeFeature = [
         },
         {
             name: 'Create work with 2 creators',
-            tags: [],
+            tags: [
+                'works-sanity-create-work',
+                'works-sanity-search-for-works',
+                'works-sanity-search-for-works-by-id',
+                'works-sanity-search-for-works-by-song-code',
+                'works-sanity-search-for-works-by-primary-title',
+                'works-sanity-search-for-works-by-alternate-title',
+                'works-sanity-search-for-works-by-creator-presentation-name',
+                'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
+                'works-sanity-scope-delivery',
+            ],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
 
@@ -101,7 +126,10 @@ var beforeFeature = [
         },
         {
             name: 'Validate created work data',
-            tags: [],
+            tags: [
+                'works-sanity-validate-work',
+                'works-sanity-create-work',
+            ],
             steps: [
                 [steps.base.useEntityDataSlot, ['work', 'mainWork']],
 
@@ -149,7 +177,15 @@ var beforeFeature = [
         },
         {
             name: 'Create 2 basic works to use as components',
-            tags: [],
+            tags: [
+                'works-sanity-create-component-works',
+                'works-sanity-create-composite-works',
+                'works-sanity-validate-composite-works',
+                'works-sanity-create-cos',
+                'works-sanity-validate-cos',
+                'works-sanity-create-med',
+                'works-sanity-validate-med',
+            ],
             steps: [
                 [function() {
                     _.times(2, function(i) {
@@ -174,7 +210,19 @@ var beforeFeature = [
         },
         {
             name: 'Create a Composite of Samples',
-            tags: [],
+            tags: [
+                'works-sanity-create-cos',
+                'works-sanity-validate-cos',
+                'works-sanity-create-composite-works',
+                'works-sanity-validate-composite-works',
+                'works-sanity-search-for-works',
+                'works-sanity-search-for-works-by-id',
+                'works-sanity-search-for-works-by-song-code',
+                'works-sanity-search-for-works-by-primary-title',
+                'works-sanity-search-for-works-by-alternate-title',
+                'works-sanity-search-for-works-by-creator-presentation-name',
+                'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
+            ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('work', 'cosWork');
 
@@ -210,7 +258,10 @@ var beforeFeature = [
         },
         {
             name: 'Validate created Composite of Samples',
-            tags: [],
+            tags: [
+                'works-sanity-validate-cos',
+                'works-sanity-validate-composite-works',
+            ],
             steps: [
                 [steps.base.useEntityDataSlot, ['work', 'cosWork']],
 
@@ -226,7 +277,12 @@ var beforeFeature = [
         },
         {
             name: 'Create a Medley',
-            tags: [],
+            tags: [
+                'works-sanity-create-med',
+                'works-sanity-validate-med',
+                'works-sanity-create-composite-works',
+                'works-sanity-validate-composite-works',
+            ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('work', 'medWork');
 
@@ -265,7 +321,10 @@ var beforeFeature = [
         },
         {
             name: 'Validate created Medley',
-            tags: [],
+            tags: [
+                'works-sanity-validate-med',
+                'works-sanity-validate-composite-works',
+            ],
             steps: function() {
                 steps.base.useEntityDataSlot('work', 'medWork');
 
@@ -284,7 +343,10 @@ var beforeFeature = [
         },
         {
             name: 'Search for 2 previously created works by work ID',
-            tags: [],
+            tags: [
+                'works-sanity-search-for-works-by-id',
+                'works-sanity-search-for-works',
+            ],
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
@@ -308,7 +370,10 @@ var beforeFeature = [
         },
         {
             name: 'Search for 2 previously created works by song code',
-            tags: [],
+            tags: [
+                'works-sanity-search-for-works-by-song-code',
+                'works-sanity-search-for-works',
+            ],
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
@@ -332,7 +397,10 @@ var beforeFeature = [
         },
         {
             name: 'Search for 2 previously created works by primary title',
-            tags: [],
+            tags: [
+                'works-sanity-search-for-works-by-primary-title',
+                'works-sanity-search-for-works',
+            ],
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
@@ -356,7 +424,10 @@ var beforeFeature = [
         },
         {
             name: 'Search for 2 previously created works by alternate title',
-            tags: [],
+            tags: [
+                'works-sanity-search-for-works-by-alternate-title',
+                'works-sanity-search-for-works',
+            ],
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
@@ -380,7 +451,10 @@ var beforeFeature = [
         },
         {
             name: 'Search for 2 previously created works by creator presentation name',
-            tags: [],
+            tags: [
+                'works-sanity-search-for-works-by-creator-presentation-name',
+                'works-sanity-search-for-works',
+            ],
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
@@ -404,7 +478,10 @@ var beforeFeature = [
         },
         {
             name: 'Search for 2 previously created works by primary title + creator presentation name',
-            tags: [],
+            tags: [
+                'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
+                'works-sanity-search-for-works',
+            ],
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
@@ -437,7 +514,10 @@ var beforeFeature = [
         },
         {
             name: 'Create deal with 2 scopes and publisher shares',
-            tags: [],
+            tags: [
+                'works-sanity-create-deal',
+                'works-sanity-scope-delivery',
+            ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
 
@@ -478,7 +558,9 @@ var beforeFeature = [
         },
         {
             name: 'Deliver scopes to previously created work',
-            tags: [],
+            tags: [
+                'works-sanity-scope-delivery',
+            ],
             steps: function() {
                 steps.base.useEntityDataSlot('work', 'mainWork');
 
@@ -511,7 +593,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['sanity', 'works-sanity'],
+    commonFeatureTags: ['works-sanity', 'sanity'],
     feature: feature,
     beforeFeature: beforeFeature
 };
