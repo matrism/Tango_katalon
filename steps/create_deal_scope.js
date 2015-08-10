@@ -18,7 +18,6 @@ if (steps.create_deal_scope === undefined) {
                 pages.create_deal_scope.addTerritoryByTypingToScope();
             });
         },
-
         itAddNewContractPeriod: function () {
 
             it("Add new contract Period",function(){
@@ -372,54 +371,6 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        addPublisherSharesSet: function() {
-            it('Add a publisher shares set', function() {
-                pages.create_deal_scope.clickOnAddPublisherShareSetLink();
-            });
-        },
-
-        enterPublisherSharePublisherSearchTerms: function(chainIndex, i, value) {
-            it(
-                'Enter publisher #' + (i + 1) + ', publisher share chain #' + (chainIndex + 1) +
-                ' search terms (' + value + ')', function() {
-                    pages.create_deal_scope.enterPublisherShareSearchTerms(
-                        chainIndex, i, value
-                    );
-                }
-            );
-        },
-
-        selectPublisherSharePublisherSearchResultByIndex: function(i) {
-            it(
-                'Select publisher share publisher search result #' + (i + 1),
-                function() {
-                    pages.create_deal_scope.selectPublisherSharePublisherSearchResultByIndex(i);
-                }
-            );
-        },
-
-        enterPublisherOwnShare: function(chainIndex, i, value) {
-            it(
-                'Enter publisher #' + (i + 1) + ', chain #' + (chainIndex + 1) +
-                ' own share (' + value + '%)', function() {
-                    pages.create_deal_scope.enterPublisherOwnShare(
-                        chainIndex, i, value
-                    );
-                }
-            );
-        },
-
-        enterPublisherCollectShare: function(chainIndex, i, value) {
-            it(
-                'Enter publisher #' + (i + 1) + ', chain #' + (chainIndex + 1) +
-                ' collect share (' + value + '%)', function() {
-                    pages.create_deal_scope.enterPublisherCollectShare(
-                        chainIndex, i, value
-                    );
-                }
-            );
-        },
-
         itAddPublisherSharePATypeWithMultipleThreeChains: function (i) {
             describe("Add publisher share set with three chains", function () {
                 steps.create_deal_scope.clickAddChainLink();
@@ -445,30 +396,6 @@ if (steps.create_deal_scope === undefined) {
             describe("Add simple scope", function () {
                 steps.create_deal_scope.addSimpleScope();
                 steps.create_deal_scope.selectCountry();
-            });
-        },
-
-        addScopeForm: function() {
-            it('Add scope form', function() {
-                pages.create_deal_scope.addScopeForm();
-            });
-        },
-
-        selectRandomContractType: function() {
-            it('Select random contract type', function() {
-                pages.create_deal_scope.selectRandomContractTypeScope();
-            });
-        },
-
-        enterTerritorySearchTerms: function(value) {
-            it('Enter territory search terms (' + value + ')', function() {
-                pages.create_deal_scope.enterTerritorySearchTerms(value);
-            });
-        },
-
-        selectTerritorySearchResultByIndex: function(i) {
-            it('Select territory search result #' + (i + 1), function() {
-                pages.create_deal_scope.selectTerritorySearchResultByIndex(i);
             });
         },
 
