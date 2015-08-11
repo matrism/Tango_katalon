@@ -17,6 +17,8 @@ require(steps_path + 'create_deal_contract_period');
 require(steps_path + 'create_deal_scope');
 require(steps_path + 'newWorkRecordings');
 require(steps_path + 'workRecordings');
+require(steps_path + 'newWorkCopyrightCertificates');
+require(steps_path + 'workCopyrightCertificates');
 require(steps_path + 'scopeDelivery');
 
 var beforeFeature = [
@@ -93,6 +95,16 @@ var beforeFeature = [
                     });
                 }],
 
+                [steps.new_work.continueToNextTab],
+
+                [function() {
+                    _.times(4, function(i) {
+                        steps.newWorkCopyrightCertificates.enterUSLibraryCongressNumber(i, 'TEST ' + randomId('number' + i));
+                        steps.newWorkCopyrightCertificates.selectRegistrationDate(i, '2015-03-12');
+                        steps.newWorkCopyrightCertificates.selectSubmittedDate(i, '2015-06-12');
+                    });
+                }],
+
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
@@ -117,6 +129,26 @@ var beforeFeature = [
                 [steps.work.validateVersionType],
                 [steps.work.validateLyricAdaptation],
                 [steps.work.validateMusicArrangement],
+
+                [function() {
+                    steps.workCopyrightCertificates.validateUSLibraryCongressNumber(
+                        _.times(4, function() {
+                            return 'TEST ' + randomId('number' + i);
+                        })
+                    );
+
+                    steps.workCopyrightCertificates.validateRegistrationDate(
+                        _.times(4, function(i) {
+                            return '2015-03-12';
+                        })
+                    );
+
+                    steps.workCopyrightCertificates.validateSubmittedDate(
+                        _.times(4, function(i) {
+                            return '2015-06-12';
+                        })
+                    );
+                }],
 
                 [steps.work.validateIncludeWorkOnWebsite, [false]],
 
@@ -144,7 +176,7 @@ var beforeFeature = [
                             return '00 : ' + leftPad(i + 1, 2, 0) + ' : 00';
                         })
                     );
-                }],
+                }]
             ]
         },
         {
