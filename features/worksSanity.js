@@ -27,7 +27,11 @@ var beforeFeature = [
     feature = [
         {
             name: 'Create 2 persons to use as creators',
-            tags: [],
+            tags: [
+                'works-sanity-create-persons',
+                'works-sanity-create-work',
+                'works-sanity-validate-work',
+            ],
             steps: function() {
                 _.times(2, function(i) {
                     steps.person.useBlankPersonSlot(i);
@@ -47,7 +51,10 @@ var beforeFeature = [
         },
         {
             name: 'Create work with 2 creators',
-            tags: [],
+            tags: [
+                'works-sanity-create-work',
+                'works-sanity-validate-work',
+            ],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
 
@@ -99,9 +106,9 @@ var beforeFeature = [
 
                 [function() {
                     _.times(4, function(i) {
-                        steps.newWorkCopyrightCertificates.enterUSLibraryCongressNumber(i, 'TEST ' + randomId('copyrightNumber' + i));
-                        steps.newWorkCopyrightCertificates.selectRegistrationDate(i, '2015-03-12');
-                        steps.newWorkCopyrightCertificates.selectSubmittedDate(i, '2015-06-12');
+                        steps.newWorkCopyrightCertificates.enterUsLibraryOfCongressNumber(i, 'TEST ' + randomId('copyrightNumber' + i));
+                        steps.newWorkCopyrightCertificates.enterRegistrationDate(i, '2015-03-12');
+                        steps.newWorkCopyrightCertificates.enterSubmittedDate(i, '2015-06-12');
                     });
                 }],
 
@@ -113,7 +120,7 @@ var beforeFeature = [
         },
         {
             name: 'Validate created work data',
-            tags: [],
+            tags: ['works-sanity-validate-work'],
             steps: [
                 [steps.base.useEntityDataSlot, ['work', 'mainWork']],
 
@@ -131,19 +138,19 @@ var beforeFeature = [
                 [steps.work.validateMusicArrangement],
 
                 [function() {
-                    steps.workCopyrightCertificates.validateUSLibraryCongressNumber(
+                    steps.workCopyrightCertificates.validateUsLibraryOfCongressNumbers(
                         _.times(4, function(i) {
                             return 'TEST ' + randomId('copyrightNumber' + i);
                         })
                     );
 
-                    steps.workCopyrightCertificates.validateRegistrationDate(
+                    steps.workCopyrightCertificates.validateRegistrationDates(
                         _.times(4, function() {
                             return '2015 03 12';
                         })
                     );
 
-                    steps.workCopyrightCertificates.validateSubmittedDate(
+                    steps.workCopyrightCertificates.validateSubmittedDates(
                         _.times(4, function() {
                             return '2015 06 12';
                         })

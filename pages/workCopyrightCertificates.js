@@ -2,12 +2,34 @@
 
 pages.workCopyrightCertificates = exports;
 
-exports.certificatesContainers = function() {
+exports.certificateContainers = function() {
     return $$('table.table.table-certificate-section__container tr.ng-scope');
 };
 
+exports.usLibraryOfCongressNumberBindings = function() {
+    return exports.certificateContainers().all(by.css('td:nth-child(1)'));
+};
+
+exports.usLibraryOfCongressNumbers = function() {
+    var elements = exports.usLibraryOfCongressNumberBindings();
+
+    pages.base.scrollIntoView(elements.first());
+
+    return elements.map(function(element) {
+        return element.getText();
+    });
+};
+
+exports.validateUsLibraryOfCongressNumbers = function(values) {
+    var numbers = exports.usLibraryOfCongressNumbers();
+
+    values.forEach(function(value) {
+        expect(numbers).toContain(value);
+    });
+};
+
 exports.registrationDateBindings = function() {
-    return exports.certificatesContainers().all(by.css('td:nth-child(2)'));
+    return exports.certificateContainers().all(by.css('td:nth-child(2)'));
 };
 
 exports.registrationDates = function() {
@@ -20,7 +42,7 @@ exports.registrationDates = function() {
     });
 };
 
-exports.validateRegistrationDate = function(values) {
+exports.validateRegistrationDates = function(values) {
     var names = exports.registrationDates();
 
     values.forEach(function(value) {
@@ -29,7 +51,7 @@ exports.validateRegistrationDate = function(values) {
 };
 
 exports.submittedDateBindings = function() {
-    return exports.certificatesContainers().all(by.css('td:nth-child(4)'));
+    return exports.certificateContainers().all(by.css('td:nth-child(4)'));
 };
 
 exports.submittedDates = function() {
@@ -42,32 +64,10 @@ exports.submittedDates = function() {
     });
 };
 
-exports.validateSubmittedDate = function(values) {
+exports.validateSubmittedDates = function(values) {
     var dates = exports.submittedDates();
 
     values.forEach(function(value) {
-        expect(values).toContain(value);
-    });
-};
-
-exports.usLibraryCongressNumberBindings = function() {
-    return exports.certificatesContainers().all(by.css('td:nth-child(1)'));
-};
-
-exports.usLibraryCongressNumbers = function() {
-    var elements = exports.usLibraryCongressNumberBindings();
-
-    pages.base.scrollIntoView(elements.first());
-
-    return elements.map(function(element) {
-        return element.getText();
-    });
-};
-
-exports.validateUSLibraryCongressNumber = function(values) {
-    var numbers = exports.usLibraryCongressNumbers();
-
-    values.forEach(function(value) {
-        expect(numbers).toContain(value);
+        expect(dates).toContain(value);
     });
 };

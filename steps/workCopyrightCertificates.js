@@ -6,20 +6,20 @@ steps.workCopyrightCertificates = exports;
 
 require(pages_path + 'workCopyrightCertificates');
 
-exports.validateRegistrationDate = function(values) {
-    it('Validate Date of Registration', function() {
-        pages.workCopyrightCertificates.validateRegistrationDate(values);
+exports.validateUsLibraryOfCongressNumbers = function(values) {
+    it('Validate US Library of Congress numbers (' + values.join(', ') + ')', function() {
+        pages.workCopyrightCertificates.validateUsLibraryOfCongressNumbers(values);
     });
 };
 
-exports.validateSubmittedDate = function(values) {
-    it('Validate Date Submitted', function() {
-        pages.workCopyrightCertificates.validateSubmittedDate(values);
+exports.validateRegistrationDates = function(values) {
+    it('Validate registration dates (' + values.join(', ') + ')', function() {
+        pages.workCopyrightCertificates.validateRegistrationDates(values);
     });
 };
 
-exports.validateUSLibraryCongressNumber = function(values) {
-    it('Validate US Library of Congress Number', function() {
-        pages.workCopyrightCertificates.validateUSLibraryCongressNumber(values);
+exports.validateSubmittedDates = function(values) {
+    it('Validate submitted dates (' + values.join(', ') + ')', function() {
+        pages.workCopyrightCertificates.validateSubmittedDates(values);
     });
 };

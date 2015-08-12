@@ -6,23 +6,23 @@ steps.newWorkCopyrightCertificates = exports;
 
 require(pages_path + 'newWorkCopyrightCertificates');
 
-exports.selectRegistrationDate = function(i, value) {
-    it('Select Date of Registration #' + (i + 1) + ' (' + value + ')', function() {
-        pages.newWorkCopyrightCertificates.selectRegistrationDateByIndex(i, value);
+exports.enterRegistrationDate = function(i, value) {
+    it('Enter date of registration #' + (i + 1) + ' (' + value + ')', function() {
+        pages.newWorkCopyrightCertificates.enterRegistrationDate(i, value);
     });
 };
 
-exports.selectSubmittedDate = function(i, value) {
-    it('Select Date Submitted #' + (i + 1) + ' (' + value + ')', function() {
-        pages.newWorkCopyrightCertificates.selectSubmittedDateByIndex(i, value);
+exports.enterSubmittedDate = function(i, value) {
+    it('Enter date submitted #' + (i + 1) + ' (' + value + ')', function() {
+        pages.newWorkCopyrightCertificates.enterSubmittedDate(i, value);
     });
 };
 
-exports.enterUSLibraryCongressNumber = function(i, value) {
+exports.enterUsLibraryOfCongressNumber = function(i, value) {
     it(
-        'Enter US Library of Congress Number #' + (i + 1) + ' (' + value + ')',
+        'Enter US Library of Congress number #' + (i + 1) + ' (' + value + ')',
         function() {
-            pages.newWorkCopyrightCertificates.enterUSLibraryCongressNumberByIndex(i, value);
+            pages.newWorkCopyrightCertificates.enterUsLibraryOfCongressNumber(i, value);
         }
     );
 };
