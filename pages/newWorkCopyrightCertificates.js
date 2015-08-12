@@ -6,20 +6,29 @@ exports.certificatesContainers = function() {
     return $$('table.table.certificates_table tr.ng-scope');
 };
 
-exports.certificateContainer = function(i) {
-    return exports.certificatesContainers().get(i);
+exports.certificateContainers = function() {
+    return exports.certificatesContainers();
 };
 
 exports.usLibraryCongressNumberInput = function(i) {
-    return exports.certificateContainer(i).element(by.model('cert.us_library_of_congress_number'));
+    return (
+        exports.certificateContainers().get(i)
+            .element(by.model('cert.us_library_of_congress_number'))
+    );
 };
 
 exports.registrationDateField = function(i) {
-    return exports.certificateContainer(i).element(by.model('cert.registration_date'));
+    return (
+        exports.certificateContainers().get(i)
+            .element(by.model('cert.registration_date'))
+    );
 };
 
 exports.submittedDateField = function(i) {
-    return exports.certificateContainer(i).element(by.model('cert.submit_date'));
+    return (
+        exports.certificateContainers().get(i)
+            .element(by.model('cert.submit_date'))
+    );
 };
 
 exports.selectRegistrationDateByIndex = function(i, value) {
