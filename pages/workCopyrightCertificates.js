@@ -6,7 +6,7 @@ exports.certificatesContainers = function() {
     return $$('table.table.table-certificate-section__container tr.ng-scope');
 };
 
-exports.submittedDateBindings = function() {
+exports.registrationDateBindings = function() {
     return exports.certificatesContainers().all(by.css('td:nth-child(2)'));
 };
 
@@ -46,7 +46,7 @@ exports.validateSubmittedDate = function(values) {
     var dates = exports.submittedDates();
 
     values.forEach(function(value) {
-        expect(names).toContain(value);
+        expect(values).toContain(value);
     });
 };
 

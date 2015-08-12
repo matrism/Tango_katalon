@@ -43,7 +43,7 @@ var beforeFeature = [
 
                     steps.person.findInternalIpiNumber();
                 });
-            },
+            }
         },
         {
             name: 'Create work with 2 creators',
@@ -108,7 +108,7 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
-                [steps.work.findCurrentlyOpenWorkId],
+                [steps.work.findCurrentlyOpenWorkId]
             ]
         },
         {
@@ -132,20 +132,20 @@ var beforeFeature = [
 
                 [function() {
                     steps.workCopyrightCertificates.validateUSLibraryCongressNumber(
-                        _.times(4, function() {
+                        _.times(4, function(i) {
                             return 'TEST ' + randomId('number' + i);
                         })
                     );
 
                     steps.workCopyrightCertificates.validateRegistrationDate(
-                        _.times(4, function(i) {
-                            return '2015-03-12';
+                        _.times(4, function() {
+                            return '2015 03 12';
                         })
                     );
 
                     steps.workCopyrightCertificates.validateSubmittedDate(
-                        _.times(4, function(i) {
-                            return '2015-06-12';
+                        _.times(4, function() {
+                            return '2015 06 12';
                         })
                     );
                 }],
@@ -178,7 +178,7 @@ var beforeFeature = [
                     );
                 }]
             ]
-        },
+        }/*,
         {
             name: 'Create 2 basic works to use as components',
             tags: [],
@@ -201,7 +201,7 @@ var beforeFeature = [
                         steps.new_work.saveWork();
                         steps.new_work.validateSaveWorkRedirection();
                     });
-                }],
+                }]
             ]
         },
         {
@@ -238,7 +238,7 @@ var beforeFeature = [
                 steps.new_work.validateSaveWorkRedirection();
 
                 steps.work.findCurrentlyOpenWorkId();
-            },
+            }
         },
         {
             name: 'Validate created Composite of Samples',
@@ -253,7 +253,7 @@ var beforeFeature = [
 
                 [steps.work.validateCompositeWorkType],
                 [steps.work.validateComponentWorkName, [0]],
-                [steps.work.validateComponentWorkAllocation, [0]],
+                [steps.work.validateComponentWorkAllocation, [0]]
             ]
         },
         {
@@ -293,7 +293,7 @@ var beforeFeature = [
                 steps.new_work.validateSaveWorkRedirection();
 
                 steps.work.findCurrentlyOpenWorkId();
-            },
+            }
         },
         {
             name: 'Validate created Medley',
@@ -312,7 +312,7 @@ var beforeFeature = [
                     steps.work.validateComponentWorkName(i);
                     steps.work.validateComponentWorkAllocation(i);
                 });
-            },
+            }
         },
         {
             name: 'Search for 2 previously created works by work ID',
@@ -336,7 +336,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            },
+            }
         },
         {
             name: 'Search for 2 previously created works by song code',
@@ -360,7 +360,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            },
+            }
         },
         {
             name: 'Search for 2 previously created works by primary title',
@@ -384,7 +384,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            },
+            }
         },
         {
             name: 'Search for 2 previously created works by alternate title',
@@ -408,7 +408,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            },
+            }
         },
         {
             name: 'Search for 2 previously created works by creator presentation name',
@@ -432,7 +432,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            },
+            }
         },
         {
             name: 'Search for 2 previously created works by primary title + creator presentation name',
@@ -465,7 +465,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            },
+            }
         },
         {
             name: 'Create deal with 2 scopes and publisher shares',
@@ -506,7 +506,7 @@ var beforeFeature = [
                 steps.deal.waitForDealToBeSaved();
 
                 steps.deal.findId();
-            },
+            }
         },
         {
             name: 'Deliver scopes to previously created work',
@@ -538,8 +538,8 @@ var beforeFeature = [
                     steps.scopeDelivery.validateContributionDealIdFromDealSlot(i, 'mainDeal');
                     steps.scopeDelivery.validateContributionScopeName(i, 'Scope ' + (i + 1));
                 });
-            },
-        },
+            }
+        }*/
     ];
 
 module.exports = {

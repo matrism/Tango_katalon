@@ -3,7 +3,7 @@
 pages.newWorkCopyrightCertificates = exports;
 
 exports.certificatesContainers = function() {
-    return $$('table.table.certificates_table tr');
+    return $$('table.table.certificates_table tr.ng-scope');
 };
 
 exports.certificateContainer = function(i) {
