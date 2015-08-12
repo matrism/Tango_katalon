@@ -6,10 +6,6 @@ exports.certificatesContainers = function() {
     return $$('table.table.certificates_table tr.ng-scope');
 };
 
-exports.certificateContainers = function() {
-    return exports.certificatesContainers();
-};
-
 exports.usLibraryCongressNumberInput = function(i) {
     return (
         exports.certificateContainers().get(i)
