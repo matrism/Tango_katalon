@@ -226,8 +226,15 @@ if (pages.create_deal_scope === undefined) {
         },
 
         clickOnAddPublisherShareSetLink: function () {
-            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
+            var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
+
+            pages.base.scrollIntoView(element);
+
+            return element.click().then(function() {
+                return browser.wait(ExpectedConditions.visibilityOf(
+                    pages.create_deal_scope.elems.firstPublisherNameField
+                ));
+            });
         },
 
         fillInFirstPublisherNameField: function (publisherName) {
