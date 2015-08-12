@@ -22,7 +22,7 @@ require(steps_path + 'workCopyrightCertificates');
 require(steps_path + 'scopeDelivery');
 
 var beforeFeature = [
-        [steps.login.itLogin]
+        [steps.login.itLogin],
     ],
     feature = [
         {
@@ -43,7 +43,7 @@ var beforeFeature = [
 
                     steps.person.findInternalIpiNumber();
                 });
-            }
+            },
         },
         {
             name: 'Create work with 2 creators',
@@ -108,8 +108,8 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
-                [steps.work.findCurrentlyOpenWorkId]
-            ]
+                [steps.work.findCurrentlyOpenWorkId],
+            ],
         },
         {
             name: 'Validate created work data',
@@ -176,8 +176,8 @@ var beforeFeature = [
                             return '00 : ' + leftPad(i + 1, 2, 0) + ' : 00';
                         })
                     );
-                }]
-            ]
+                }],
+            ],
         },
         {
             name: 'Create 2 basic works to use as components',
@@ -201,8 +201,8 @@ var beforeFeature = [
                         steps.new_work.saveWork();
                         steps.new_work.validateSaveWorkRedirection();
                     });
-                }]
-            ]
+                }],
+            ],
         },
         {
             name: 'Create a Composite of Samples',
@@ -238,7 +238,7 @@ var beforeFeature = [
                 steps.new_work.validateSaveWorkRedirection();
 
                 steps.work.findCurrentlyOpenWorkId();
-            }
+            },
         },
         {
             name: 'Validate created Composite of Samples',
@@ -253,8 +253,8 @@ var beforeFeature = [
 
                 [steps.work.validateCompositeWorkType],
                 [steps.work.validateComponentWorkName, [0]],
-                [steps.work.validateComponentWorkAllocation, [0]]
-            ]
+                [steps.work.validateComponentWorkAllocation, [0]],
+            ],
         },
         {
             name: 'Create a Medley',
@@ -293,7 +293,7 @@ var beforeFeature = [
                 steps.new_work.validateSaveWorkRedirection();
 
                 steps.work.findCurrentlyOpenWorkId();
-            }
+            },
         },
         {
             name: 'Validate created Medley',
@@ -312,7 +312,7 @@ var beforeFeature = [
                     steps.work.validateComponentWorkName(i);
                     steps.work.validateComponentWorkAllocation(i);
                 });
-            }
+            },
         },
         {
             name: 'Search for 2 previously created works by work ID',
@@ -336,7 +336,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            }
+            },
         },
         {
             name: 'Search for 2 previously created works by song code',
@@ -360,7 +360,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            }
+            },
         },
         {
             name: 'Search for 2 previously created works by primary title',
@@ -384,7 +384,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            }
+            },
         },
         {
             name: 'Search for 2 previously created works by alternate title',
@@ -408,7 +408,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            }
+            },
         },
         {
             name: 'Search for 2 previously created works by creator presentation name',
@@ -432,7 +432,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            }
+            },
         },
         {
             name: 'Search for 2 previously created works by primary title + creator presentation name',
@@ -465,7 +465,7 @@ var beforeFeature = [
 
                     steps.work.validateWorkId();
                 });
-            }
+            },
         },
         {
             name: 'Create deal with 2 scopes and publisher shares',
@@ -506,7 +506,7 @@ var beforeFeature = [
                 steps.deal.waitForDealToBeSaved();
 
                 steps.deal.findId();
-            }
+            },
         },
         {
             name: 'Deliver scopes to previously created work',
@@ -538,8 +538,8 @@ var beforeFeature = [
                     steps.scopeDelivery.validateContributionDealIdFromDealSlot(i, 'mainDeal');
                     steps.scopeDelivery.validateContributionScopeName(i, 'Scope ' + (i + 1));
                 });
-            }
-        }
+            },
+        },
     ];
 
 module.exports = {
