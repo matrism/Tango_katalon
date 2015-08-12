@@ -99,7 +99,7 @@ var beforeFeature = [
 
                 [function() {
                     _.times(4, function(i) {
-                        steps.newWorkCopyrightCertificates.enterUSLibraryCongressNumber(i, 'TEST ' + randomId('number' + i));
+                        steps.newWorkCopyrightCertificates.enterUSLibraryCongressNumber(i, 'TEST ' + randomId('copyrightNumber' + i));
                         steps.newWorkCopyrightCertificates.selectRegistrationDate(i, '2015-03-12');
                         steps.newWorkCopyrightCertificates.selectSubmittedDate(i, '2015-06-12');
                     });
@@ -133,7 +133,7 @@ var beforeFeature = [
                 [function() {
                     steps.workCopyrightCertificates.validateUSLibraryCongressNumber(
                         _.times(4, function(i) {
-                            return 'TEST ' + randomId('number' + i);
+                            return 'TEST ' + randomId('copyrightNumber' + i);
                         })
                     );
 
