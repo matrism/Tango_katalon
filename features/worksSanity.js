@@ -178,7 +178,7 @@ var beforeFeature = [
                     );
                 }]
             ]
-        }/*,
+        },
         {
             name: 'Create 2 basic works to use as components',
             tags: [],
@@ -539,7 +539,7 @@ var beforeFeature = [
                     steps.scopeDelivery.validateContributionScopeName(i, 'Scope ' + (i + 1));
                 });
             }
-        }*/
+        }
     ];
 
 module.exports = {
