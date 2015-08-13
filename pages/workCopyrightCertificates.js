@@ -51,7 +51,7 @@ exports.validateRegistrationDates = function(values) {
 };
 
 exports.submittedDateBindings = function() {
-    return exports.certificateContainers().all(by.css('td:nth-child(4)'));
+    return exports.certificateContainers().all(by.css('td:nth-child(5)'));
 };
 
 exports.submittedDates = function() {
