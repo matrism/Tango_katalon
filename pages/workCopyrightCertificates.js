@@ -22,10 +22,7 @@ exports.usLibraryOfCongressNumbers = function() {
 
 exports.validateUsLibraryOfCongressNumbers = function(values) {
     var numbers = exports.usLibraryOfCongressNumbers();
-
-    values.forEach(function(value) {
-        expect(numbers).toContain(value);
-    });
+    expect(numbers).toEqual(values);
 };
 
 exports.registrationDateBindings = function() {
@@ -44,10 +41,7 @@ exports.registrationDates = function() {
 
 exports.validateRegistrationDates = function(values) {
     var names = exports.registrationDates();
-
-    values.forEach(function(value) {
-        expect(names).toContain(value);
-    });
+    expect(names).toEqual(values);
 };
 
 exports.submittedDateBindings = function() {
@@ -66,8 +60,5 @@ exports.submittedDates = function() {
 
 exports.validateSubmittedDates = function(values) {
     var dates = exports.submittedDates();
-
-    values.forEach(function(value) {
-        expect(dates).toContain(value);
-    });
+    expect(dates).toEqual(values);
 };
