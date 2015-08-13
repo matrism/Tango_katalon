@@ -3,6 +3,7 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
     leftPad = require('left-pad'),
+    moment = require('moment'),
     random = require('../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
@@ -521,26 +522,45 @@ var beforeFeature = [
             steps: function() {
                 steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
 
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.create_deal_general.goToNewDealPage();
+
+                steps.create_deal_general.selectDesiredSigningTerritory('Argentina');
+
+                steps.create_deal_general.enterContractingPartySearchTerms('ASCAP');
+
+                steps.create_deal_general.selectContractingPartySearchResultByIndex(0);
 
                 steps.deal.itContinueToNextPage();
 
-                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-
-                steps.create_deal_scope.itAddSimpleScope();
-
-                steps.create_deal_scope.itAddPublisherShare();
-
-                steps.create_deal_scope.itAddSimpleScope();
-
-                steps.create_deal_scope.itAddPublisherShare();
-
-                steps.base.scrollIntoView(
-                    'Save publisher share set',
-                    pages.create_deal_scope.elems.savePublisherShareSet
+                steps.create_deal_contract_period.enterActualStartDate(
+                    moment().format('YYYY-MM-DD')
                 );
 
-                steps.create_deal_scope.saveThePublisherShareSet();
+                steps.create_deal_contract_period.enterTargetEndDateInMonths(12);
+
+                _.times(2, function() {
+                    steps.create_deal_scope.openNewScopeForm();
+
+                    steps.create_deal_scope.selectContractType('Administration');
+
+                    steps.create_deal_scope.enterTerritoryOfControlSearchTerms('Brazil');
+
+                    steps.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(0);
+
+                    steps.create_deal_scope.clickOnAddPublisherShareSet();
+
+                    steps.create_deal_scope.enterPublisherSearchTerms(0, 0, '777778888');
+
+                    steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
+
+                    steps.create_deal_scope.enterOwnPublisherShare(0, 0, 100);
+
+                    steps.create_deal_scope.enterPublisherSearchTerms(0, 1, '53026414');
+
+                    steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
+
+                    steps.create_deal_scope.enterCollectPublisherShare(0, 1, 100);
+                });
 
                 steps.deal.itContinueToNextPage();
 

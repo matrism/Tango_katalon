@@ -10,6 +10,12 @@ require(steps_path + "deal");
 if (steps.create_deal_scope === undefined) {
     steps.create_deal_scope = {
 
+        openNewScopeForm: function() {
+            it('Open a new scope form', function() {
+                pages.create_deal_scope.addScopeForm();
+            });
+        },
+
         addSimpleScope: function () {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
@@ -30,12 +36,30 @@ if (steps.create_deal_scope === undefined) {
 
         },
 
+        selectContractType: function(value) {
+            it('Select contract type (' + value + ')', function() {
+                pages.create_deal_scope.selectContractTypeScope(value);
+            });
+        },
+
         addSpecificScope: function (contractType) {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
                 pages.create_deal_scope.selectContractTypeScope(contractType);
                 pages.create_deal_scope.waitForAjax();
                 pages.create_deal_scope.addTerritoryByTypingToScope();
+            });
+        },
+
+        enterTerritoryOfControlSearchTerms: function(value) {
+            it('Enter territory of control search terms (' + value + ')', function() {
+               pages.create_deal_scope.enterTerritoryOfControlSearchTerms(value);
+            });
+        },
+
+        selectTerritoryOfControlSearchResultByIndex: function(i) {
+            it('Select territory of control search result #' + (i + 1), function() {
+                pages.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(i);
             });
         },
 
@@ -125,9 +149,24 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        enterPublisherSearchTerms: function(i, j, value) {
+            it(
+                'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
+                ' - Enter search terms (' + value + ')', function() {
+                    pages.create_deal_scope.enterPublisherSearchTerms(i, j, value);
+                }
+            );
+        },
+
         fillIntoFirstPublisherNameField: function (publisherName) {
             it("Fill in first publisher name field", function () {
                 pages.create_deal_scope.fillInFirstPublisherNameField(publisherName);
+            });
+        },
+
+        selectPublisherSearchResultByIndex: function(i) {
+            it('Select publisher search result #' + (i + 1), function() {
+                pages.create_deal_scope.selectPublisherSearchResultByIndex(i);
             });
         },
 
@@ -135,6 +174,24 @@ if (steps.create_deal_scope === undefined) {
             it("Select random publisher name drop down value", function () {
                 pages.create_deal_scope.selectRandomPublisherNameDropDown();
             });
+        },
+
+        enterOwnPublisherShare: function(i, j, value) {
+            it(
+                'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
+                ' - Enter own publisher share (' + value + ')', function() {
+                    pages.create_deal_scope.enterOwnPublisherShare(i, j, value);
+                }
+            );
+        },
+
+        enterCollectPublisherShare: function(i, j, value) {
+            it(
+                'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
+                ' - Enter collect publisher share (' + value + ')', function() {
+                    pages.create_deal_scope.enterCollectPublisherShare(i, j, value);
+                }
+            );
         },
 
         fillIntoFirstPublisherNameCollectField: function () {

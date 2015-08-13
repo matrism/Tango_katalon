@@ -15,12 +15,23 @@ if (steps.create_deal_general === undefined) {
             });
         },
 
+        selectDesiredSigningTerritory: function(value) {
+            it('Select deal signing territory (' + value + ')', function() {
+                pages.create_deal_general.selectDesiredSigningTerritory(value);
+            });
+        },
 
         selectDealSigningTerritory: function () {
             it("Select deal signing territory", function () {
                     pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
                 }
             );
+        },
+
+        enterContractingPartySearchTerms: function(value) {
+            it('Enter contracting party search terms (' + value + ')', function() {
+                pages.create_deal_general.fillContractingPartiesField(value);
+            });
         },
 
         fillContractingPartyField: function () {
@@ -44,6 +55,12 @@ if (steps.create_deal_general === undefined) {
                     pages.create_deal_general.selectContractingPartyValue("(021)\n BMI");
                 }
             );
+        },
+
+        selectContractingPartySearchResultByIndex: function(i) {
+            it('Select contracting party search result #' + (i + 1), function() {
+                pages.create_deal_general.selectContractingPartySearchResultByIndex(i);
+            });
         },
 
         selectRandomContractingParty: function () {
