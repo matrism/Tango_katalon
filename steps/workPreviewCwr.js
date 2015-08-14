@@ -14,7 +14,7 @@ exports.searchForRegistrationRecipient = function(name) {
 };
 
 exports.selectRegistrationRecipientResultByIndex = function (index) {
-    it('Select Registration Recipient Result #' + index, function (){
+    it('Select Registration Recipient Result #' + (index + 1), function (){
         pages.workPreviewCwr.selectRegistrationRecipientResultByIndex(index);
     });
 };

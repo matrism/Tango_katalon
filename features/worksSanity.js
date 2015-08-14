@@ -560,9 +560,7 @@ var beforeFeature = [
                 steps.work.goToPreviewCwrTab();
 
                 steps.workPreviewCwr.searchForRegistrationRecipient(registrationRecipientName);
-                steps.base.waitForAjax();
                 steps.workPreviewCwr.selectFirstRegistrationRecipientResult();
-                steps.base.waitForAjax();
                 steps.workPreviewCwr.validateCwrLines(cwrLines);
             }
         }
