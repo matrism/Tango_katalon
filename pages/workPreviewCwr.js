@@ -28,6 +28,8 @@ exports.searchForRegistrationRecipient = function (name) {
 };
 
 exports.selectRegistrationRecipientResultByIndex = function (index) {
+    pages.base.waitForAjax();
+
     var typeaheadResult = exports.registrationRecipientSearchResults();
 
     browser.wait(ExpectedConditions.visibilityOfAny(exports.registrationRecipientSearchResults()));
@@ -35,6 +37,8 @@ exports.selectRegistrationRecipientResultByIndex = function (index) {
 };
 
 exports.validateCwrLines = function(cwrLinesTestData) {
+    pages.base.waitForAjax();
+
     var cwrLinesInPage = pages.workPreviewCwr.cwrTableLineRows().map(function(elem, idx){
        return elem.getText();
     });
