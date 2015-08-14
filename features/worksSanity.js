@@ -20,6 +20,7 @@ require(steps_path + 'workRecordings');
 require(steps_path + 'newWorkCopyrightCertificates');
 require(steps_path + 'workCopyrightCertificates');
 require(steps_path + 'scopeDelivery');
+require(steps_path + 'workPreviewCwr');
 
 var beforeFeature = [
         [steps.login.itLogin],
@@ -547,6 +548,24 @@ var beforeFeature = [
                 });
             },
         },
+        {
+            name: 'Validate CWR',
+            tags: ['works-sanity-validate-cwr', 'TAT-381'],
+            steps: function () {
+                var testWorkId = 'WW 015007750 00',
+                    registrationRecipientName = 'ABRAMUS',
+                    cwrLines = require('../data/ABRAMUS_cwr.json');
+
+                steps.work.goToWorkPageById(testWorkId);
+                steps.work.goToPreviewCwrTab();
+
+                steps.workPreviewCwr.searchForRegistrationRecipient(registrationRecipientName);
+                steps.base.waitForAjax();
+                steps.workPreviewCwr.selectFirstRegistrationRecipientResult();
+                steps.base.waitForAjax();
+                steps.workPreviewCwr.validateCwrLines(cwrLines);
+            }
+        }
     ];
 
 module.exports = {

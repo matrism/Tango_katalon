@@ -18,6 +18,12 @@ exports.goToWorkPage = function(data, key) {
     });
 };
 
+exports.goToWorkPageById = function(workId) {
+    it('Go to work page by ID (' + workId + ')', function () {
+        pages.work.open(workId);
+    });
+};
+
 module.exports.goToScopeDeliveryTab = function() {
     it('Go to Scope Delivery tab', function() {
         pages.work.goToScopeDeliveryTab();
@@ -1657,5 +1663,11 @@ exports.goToRightsTab = function() {
     it('Go to Rights tab', function() {
         pages.work.goToRightsTab();
         pages.base.waitForAjax();
+    });
+};
+
+exports.goToPreviewCwrTab = function() {
+    it('Go to Preview CWR tab', function() {
+        pages.work.goToPreviewCwrTab();
     });
 };
