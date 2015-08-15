@@ -22,7 +22,7 @@ exports.registrationRecipientSearchResults = function () {
 };
 
 exports.searchForRegistrationRecipient = function (name) {
-    var elem = pages.workCwrPreview.registrationRecipientSearch();
+    var elem = exports.registrationRecipientSearch();
 
     return elem.sendKeys(name);
 };
