@@ -1,24 +1,24 @@
 'use strict';
 
-var ExpectedConditions = protractor.ExpectedConditions, 
+var ExpectedConditions = protractor.ExpectedConditions,
     typeaheadResultRepeater = by.repeater('$match in $dataSet.queried.matches');
 
 pages.workCwrPreview = exports;
 
-exports.cwrTableLineRows = function () { 
-    return element(by.id('CWR-DATA')).all(by.repeater('record in dataHolder.currentCwr.records')); 
+exports.cwrTableLineRows = function () {
+    return element(by.id('CWR-DATA')).all(by.repeater('record in dataHolder.currentCwr.records'));
 };
 
-exports.registrationRecipientTypeahead = function () { 
-    return element(by.model('dataHolder.currentRecipient')); 
+exports.registrationRecipientTypeahead = function () {
+    return element(by.model('dataHolder.currentRecipient'));
 };
 
-exports.registrationRecipientSearch = function () { 
-    return exports.registrationRecipientTypeahead().element(by.model('$term')); 
+exports.registrationRecipientSearch = function () {
+    return exports.registrationRecipientTypeahead().element(by.model('$term'));
 };
 
-exports.registrationRecipientSearchResults = function () { 
-    return exports.registrationRecipientTypeahead().all(typeaheadResultRepeater); 
+exports.registrationRecipientSearchResults = function () {
+    return exports.registrationRecipientTypeahead().all(typeaheadResultRepeater);
 };
 
 exports.searchForRegistrationRecipient = function (name) {
