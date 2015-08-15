@@ -93,7 +93,9 @@ exports.saveButton = function() {
 };
 
 exports.save = function() {
-    return exports.saveButton().click();
+    return exports.saveButton().click().then(function() {
+        pages.base.waitForAjax();
+    });
 };
 
 exports.contributionRows = function() {
