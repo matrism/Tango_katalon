@@ -137,9 +137,17 @@ var beforeFeature = [
 
                 [function() {
                     _.times(4, function(i) {
-                        steps.newWorkCopyrightCertificates.enterUsLibraryOfCongressNumber(i, 'TEST ' + randomId('copyrightNumber' + i));
-                        steps.newWorkCopyrightCertificates.enterRegistrationDate(i, '2015-03-12');
-                        steps.newWorkCopyrightCertificates.enterSubmittedDate(i, '2015-06-12');
+                        steps.newWorkCopyrightCertificates.enterUsLibraryOfCongressNumber(
+                            i, 'TEST ' + randomId('copyrightNumber' + i)
+                        );
+
+                        steps.newWorkCopyrightCertificates.enterRegistrationDate(
+                            i, '2015-03-12'
+                        );
+
+                        steps.newWorkCopyrightCertificates.enterSubmittedDate(
+                            i, '2015-06-12'
+                        );
                     });
                 }],
 
@@ -272,7 +280,9 @@ var beforeFeature = [
 
                 steps.new_work.goToNewWorkPage();
 
-                steps.new_work.enterPrimaryWorkTitle('TEST COS WORK ' + randomId('cosWork'));
+                steps.new_work.enterPrimaryWorkTitle(
+                    'TEST COS WORK ' + randomId('cosWork')
+                );
 
                 steps.new_work.enterAlternateWorkTitle(
                     0, 'TEST COS WORK ALTERNATE TITLE ' + randomId('cosWork')
@@ -332,7 +342,9 @@ var beforeFeature = [
 
                 steps.new_work.goToNewWorkPage();
 
-                steps.new_work.enterPrimaryWorkTitle('TEST MED WORK ' + randomId('medWork'));
+                steps.new_work.enterPrimaryWorkTitle(
+                    'TEST MED WORK ' + randomId('medWork')
+                );
 
                 steps.new_work.enterAlternateWorkTitle(
                     0, 'TEST MED WORK ALTERNATE TITLE ' + randomId('medWork')
@@ -589,19 +601,25 @@ var beforeFeature = [
 
                     steps.create_deal_scope.selectContractType('Administration');
 
-                    steps.create_deal_scope.enterTerritoryOfControlSearchTerms('Brazil');
+                    steps.create_deal_scope.enterTerritoryOfControlSearchTerms(
+                        'Brazil'
+                    );
 
                     steps.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(0);
 
                     steps.create_deal_scope.clickOnAddPublisherShareSet();
 
-                    steps.create_deal_scope.enterPublisherSearchTerms(0, 0, 'WCM Publisher 1');
+                    steps.create_deal_scope.enterPublisherSearchTerms(
+                        0, 0, 'WCM Publisher 1'
+                    );
 
                     steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
 
                     steps.create_deal_scope.enterOwnPublisherShare(0, 0, 100);
 
-                    steps.create_deal_scope.enterPublisherSearchTerms(0, 1, 'WB MUSIC CORP.');
+                    steps.create_deal_scope.enterPublisherSearchTerms(
+                        0, 1, 'WB MUSIC CORP.'
+                    );
 
                     steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
 
@@ -654,8 +672,13 @@ var beforeFeature = [
                 steps.base.refreshPage();
 
                 _.times(2, function(i) {
-                    steps.scopeDelivery.validateContributionDealIdFromDealSlot(i, 'mainDeal');
-                    steps.scopeDelivery.validateContributionScopeName(i, 'Scope ' + (i + 1));
+                    steps.scopeDelivery.validateContributionDealIdFromDealSlot(
+                        i, 'mainDeal'
+                    );
+
+                    steps.scopeDelivery.validateContributionScopeName(
+                        i, 'Scope ' + (i + 1)
+                    );
                 });
             },
         },
