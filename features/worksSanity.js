@@ -25,7 +25,7 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Create 2 persons to use as creators',
+            name: 'Create 3 persons to use as creators',
             tags: [
                 'works-sanity-create-persons',
                 'works-sanity-create-work',
@@ -43,7 +43,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
             ],
             steps: function() {
-                _.times(2, function(i) {
+                _.times(3, function(i) {
                     steps.person.useBlankPersonSlot(i);
 
                     steps.newPerson.goToNewPersonPage();
@@ -88,7 +88,7 @@ var beforeFeature = [
                 [steps.new_work.selectCreatorFromPersonSlot, [0, 0]],
                 [steps.new_work.enterCreatorContribution, [0, 50]],
 
-                [steps.new_work.selectRandomCreator, [1]],
+                [steps.new_work.selectCreatorFromPersonSlot, [1, 1]],
                 [steps.new_work.enterCreatorContribution, [1, 50]],
 
                 [steps.new_work.selectRandomMusicalDistributionCategory],
@@ -240,7 +240,7 @@ var beforeFeature = [
 
                 steps.new_work.selectCompositeWorkType('Composite of Samples');
 
-                steps.new_work.selectCreatorFromPersonSlot(0, 1);
+                steps.new_work.selectCreatorFromPersonSlot(0, 2);
                 steps.new_work.enterCreatorContribution(0, 50);
 
                 steps.new_work.selectFirstComponentWorkMatching(
