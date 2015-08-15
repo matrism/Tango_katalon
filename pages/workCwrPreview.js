@@ -1,7 +1,6 @@
 'use strict';
 
-var ExpectedConditions = protractor.ExpectedConditions,
-    typeaheadResultRepeater = by.repeater('$match in $dataSet.queried.matches');
+var ExpectedConditions = protractor.ExpectedConditions;
 
 pages.workCwrPreview = exports;
 
@@ -21,7 +20,9 @@ exports.registrationRecipientSearch = function () {
 };
 
 exports.registrationRecipientSearchResults = function () {
-    return exports.registrationRecipientTypeahead().all(typeaheadResultRepeater);
+    return exports.registrationRecipientTypeahead().all(by.repeater(
+        '$match in $dataSet.queried.matches'
+    ));
 };
 
 exports.searchForRegistrationRecipient = function (name) {
