@@ -592,13 +592,13 @@ var beforeFeature = [
 
                     steps.create_deal_scope.clickOnAddPublisherShareSet();
 
-                    steps.create_deal_scope.enterPublisherSearchTerms(0, 0, '777778888');
+                    steps.create_deal_scope.enterPublisherSearchTerms(0, 0, 'WCM Publisher 1');
 
                     steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
 
                     steps.create_deal_scope.enterOwnPublisherShare(0, 0, 100);
 
-                    steps.create_deal_scope.enterPublisherSearchTerms(0, 1, '53026414');
+                    steps.create_deal_scope.enterPublisherSearchTerms(0, 1, 'WB MUSIC CORP.');
 
                     steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
 
