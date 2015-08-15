@@ -22,9 +22,3 @@ exports.selectRegistrationRecipientResultByIndex = function (index) {
 exports.selectFirstRegistrationRecipientResult = function() {
     exports.selectRegistrationRecipientResultByIndex(0);
 };
-
-exports.validateCwrLines = function(cwrLines) {
-    it('Validate CWR lines', function() {
-        pages.workPreviewCwr.validateCwrLines(cwrLines);
-    });
-};

@@ -788,15 +788,13 @@ var beforeFeature = [
             ],
             steps: function () {
                 var testWorkId = 'WW 015007750 00',
-                    registrationRecipientName = 'ABRAMUS',
-                    cwrLines = require('../data/ABRAMUS_cwr.json');
+                    registrationRecipientName = 'ABRAMUS';
 
                 steps.work.goToWorkPageById(testWorkId);
                 steps.work.goToPreviewCwrTab();
 
                 steps.workPreviewCwr.searchForRegistrationRecipient(registrationRecipientName);
                 steps.workPreviewCwr.selectFirstRegistrationRecipientResult();
-                steps.workPreviewCwr.validateCwrLines(cwrLines);
             }
         },
     ];

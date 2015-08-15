@@ -35,13 +35,3 @@ exports.selectRegistrationRecipientResultByIndex = function (index) {
     browser.wait(ExpectedConditions.visibilityOfAny(exports.registrationRecipientSearchResults()));
     return typeaheadResult.click();
 };
-
-exports.validateCwrLines = function(cwrLinesTestData) {
-    pages.base.waitForAjax();
-
-    var cwrLinesInPage = pages.workPreviewCwr.cwrTableLineRows().map(function(elem, idx){
-       return elem.getText();
-    });
-
-    expect(cwrLinesInPage).toEqual(cwrLinesTestData);
-};
