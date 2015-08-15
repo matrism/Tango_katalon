@@ -19,6 +19,7 @@ require(steps_path + 'create_deal_scope');
 require(steps_path + 'newWorkRecordings');
 require(steps_path + 'workRecordings');
 require(steps_path + 'scopeDelivery');
+require(steps_path + 'workRights');
 
 var beforeFeature = [
         [steps.login.itLogin]
@@ -41,6 +42,8 @@ var beforeFeature = [
                 'works-sanity-search-for-works-by-creator-presentation-name',
                 'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
                 'works-sanity-scope-delivery',
+                'works-sanity-generate-work-rights',
+                'works-sanity-validate-work-rights',
             ],
             steps: function() {
                 _.times(3, function(i) {
@@ -73,6 +76,8 @@ var beforeFeature = [
                 'works-sanity-search-for-works-by-creator-presentation-name',
                 'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
                 'works-sanity-scope-delivery',
+                'works-sanity-generate-work-rights',
+                'works-sanity-validate-work-rights',
             ],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
@@ -520,6 +525,8 @@ var beforeFeature = [
             tags: [
                 'works-sanity-create-deal',
                 'works-sanity-scope-delivery',
+                'works-sanity-generate-work-rights',
+                'works-sanity-validate-work-rights',
             ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
@@ -582,6 +589,8 @@ var beforeFeature = [
             name: 'Deliver scopes to previously created work',
             tags: [
                 'works-sanity-scope-delivery',
+                'works-sanity-generate-work-rights',
+                'works-sanity-validate-work-rights',
             ],
             steps: function() {
                 steps.base.useEntityDataSlot('work', 'mainWork');
@@ -610,6 +619,131 @@ var beforeFeature = [
                     steps.scopeDelivery.validateContributionDealIdFromDealSlot(i, 'mainDeal');
                     steps.scopeDelivery.validateContributionScopeName(i, 'Scope ' + (i + 1));
                 });
+            },
+        },
+        {
+            name: 'Generate and validate work rights',
+            tags: [
+                'works-sanity-generate-work-rights',
+                'works-sanity-validate-work-rights',
+            ],
+            steps: function() {
+                var creatorRightsData = [
+                        {
+                            row: 0,
+                            nameFromPersonSlot: 0,
+                            societies: ['ASCAP'],
+                        },
+                        {
+                            row: 4,
+                            nameFromPersonSlot: 1,
+                            societies: ['ASCAP'],
+                        },
+                    ],
+                    publisherRightsData = [
+                        {
+                            row: 1,
+                            role: 'E',
+                            name: 'WCM Publisher 1',
+                            societies: [],
+                            shares: ['25.000', '–', '–', '–', '–'],
+                        },
+                        {
+                            row: 2,
+                            role: 'AM',
+                            name: 'WB MUSIC CORP.',
+                            societies: ['BMI'],
+                            shares: ['–', '–', '–', '–', '–'],
+                        },
+                        {
+                            row: 3,
+                            role: 'SE',
+                            name: 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA',
+                            societies: ['ABRAMUS'],
+                            shares: ['–', '25.000', '50.000', '50.000', '50.000'],
+                        },
+                        {
+                            row: 5,
+                            role: 'E',
+                            name: 'WCM Publisher 1',
+                            societies: [],
+                            shares: ['25.000', '–', '–', '–', '–'],
+                        },
+                        {
+                            row: 6,
+                            role: 'AM',
+                            name: 'WB MUSIC CORP.',
+                            societies: ['BMI'],
+                            shares: ['–', '–', '–', '–', '–'],
+                        },
+                        {
+                            row: 7,
+                            role: 'SE',
+                            name: 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA',
+                            societies: ['ABRAMUS'],
+                            shares: ['–', '25.000', '50.000', '50.000', '50.000'],
+                        },
+                    ];
+
+                steps.base.useEntityDataSlot('work', 'mainWork');
+
+                steps.work.goToWorkPage();
+
+                steps.work.goToRightsTab();
+
+                steps.workRights.validateSigningTerritoryCode(0, 'AR');
+
+                steps.workRights.validateControlTerritories(0, ['Brazil']);
+
+                steps.workRights.validateSharesSummary(
+                    0, ['100.000', '50.000', '100.000', '100.000', '100.000']
+                );
+
+                steps.workRights.toggleRightsGroupContainer(0);
+
+                steps.workRights.validateCreatorRole(0, 0, 'CA');
+
+                creatorRightsData.forEach(function(creator) {
+                    steps.workRights.validateCreatorRole(0, creator.row, 'CA');
+
+                    steps.workRights.validateCreatorNameUsingPersonSlot(
+                        0, creator.row, creator.nameFromPersonSlot
+                    );
+
+                    steps.workRights.validateCreatorSocieties(
+                        0, creator.row, creator.societies
+                    );
+
+                    steps.workRights.validateCreatorContribution(
+                        0, creator.row, '50.000'
+                    );
+
+                    steps.workRights.validatePartyShares(
+                        0, creator.row, ['25.000', '25.000', '–', '–', '–']
+                    );
+                });
+
+                publisherRightsData.forEach(function(publisher) {
+                    steps.workRights.validatePublisherRole(
+                        0, publisher.row, publisher.role
+                    );
+
+                    steps.workRights.validatePublisherName(
+                        0, publisher.row, publisher.name
+                    );
+
+                    steps.workRights.validatePublisherSocieties(
+                        0, publisher.row, publisher.societies
+                    );
+
+                    steps.workRights.validatePartyShares(
+                        0, publisher.row, publisher.shares
+                    );
+                });
+
+                steps.workRights.validateWcmTotalShares(
+                    0, ['100.000', '50.000', '100.000', '100.000', '100.000']
+                );
             },
         },
     ];
