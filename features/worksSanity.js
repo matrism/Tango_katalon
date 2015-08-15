@@ -787,13 +787,12 @@ var beforeFeature = [
                 'works-sanity-validate-cwr',
             ],
             steps: function () {
-                var testWorkId = 'WW 015007750 00',
-                    registrationRecipientName = 'ABRAMUS';
+                steps.work.goToWorkPageById('WW 015009561 00');
 
-                steps.work.goToWorkPageById(testWorkId);
                 steps.work.goToPreviewCwrTab();
 
-                steps.workPreviewCwr.searchForRegistrationRecipient(registrationRecipientName);
+                steps.workPreviewCwr.searchForRegistrationRecipient('ABRAMUS');
+
                 steps.workPreviewCwr.selectFirstRegistrationRecipientResult();
             }
         },
