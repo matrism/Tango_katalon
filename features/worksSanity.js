@@ -794,6 +794,90 @@ var beforeFeature = [
                 steps.workCwrPreview.searchForRegistrationRecipient('ABRAMUS');
 
                 steps.workCwrPreview.selectFirstRegistrationRecipientResult();
+
+                steps.workCwrPreview.validateRecordType(0, 'NWR');
+                steps.workCwrPreview.validateRecordNumber(0);
+
+                steps.workCwrPreview.validateWorkTitle(
+                    0, 'TEST WORK 4671439617111048'
+                );
+
+                steps.workCwrPreview.validateSubmitterWorkNumberAsWorkId(
+                    0, 'WW 015009561 00'
+                );
+
+                steps.workCwrPreview.validateRecordType(1, 'SPU');
+                steps.workCwrPreview.validateRecordNumber(1);
+                steps.workCwrPreview.validatePublisherName(1, 'WCM PUBLISHER  1');
+                steps.workCwrPreview.validatePublisherRole(1, 'E');
+
+                steps.workCwrPreview.validateRecordType(2, 'SPU');
+                steps.workCwrPreview.validateRecordNumber(2);
+                steps.workCwrPreview.validatePublisherName(2, 'WB MUSIC CORP.');
+                steps.workCwrPreview.validatePublisherRole(2, 'AM');
+
+                steps.workCwrPreview.validateRecordType(3, 'SPU');
+                steps.workCwrPreview.validateRecordNumber(3);
+
+                steps.workCwrPreview.validatePublisherName(
+                    3, 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA'
+                );
+
+                steps.workCwrPreview.validatePublisherRole(3, 'SE');
+
+                steps.workCwrPreview.validateRecordType(4, 'SPT');
+                steps.workCwrPreview.validateRecordNumber(4);
+
+                steps.workCwrPreview.validateRecordType(5, 'SPU');
+                steps.workCwrPreview.validateRecordNumber(5);
+                steps.workCwrPreview.validatePublisherName(5, 'WCM PUBLISHER  1');
+                steps.workCwrPreview.validatePublisherRole(5, 'E');
+
+                steps.workCwrPreview.validateRecordType(6, 'SPU');
+                steps.workCwrPreview.validateRecordNumber(6);
+                steps.workCwrPreview.validatePublisherName(6, 'WB MUSIC CORP.');
+                steps.workCwrPreview.validatePublisherRole(6, 'AM');
+
+                steps.workCwrPreview.validateRecordType(7, 'SPU');
+                steps.workCwrPreview.validateRecordNumber(7);
+
+                steps.workCwrPreview.validatePublisherName(
+                    7, 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA'
+                );
+
+                steps.workCwrPreview.validatePublisherRole(7, 'SE');
+
+                steps.workCwrPreview.validateRecordType(8, 'SPT');
+                steps.workCwrPreview.validateRecordNumber(8);
+
+                steps.workCwrPreview.validateRecordType(9, 'SWR');
+                steps.workCwrPreview.validateRecordNumber(9);
+                steps.workCwrPreview.validateWriterDesignationCode(9, 'CA');
+
+                steps.workCwrPreview.validateRecordType(10, 'SWT');
+                steps.workCwrPreview.validateRecordNumber(10);
+
+                steps.workCwrPreview.validateRecordType(11, 'PWR');
+                steps.workCwrPreview.validateRecordNumber(11);
+                steps.workCwrPreview.validatePublisherName(11, 'WCM PUBLISHER  1');
+
+                steps.workCwrPreview.validateRecordType(12, 'SWR');
+                steps.workCwrPreview.validateRecordNumber(12);
+                steps.workCwrPreview.validateWriterDesignationCode(12, 'CA');
+
+                steps.workCwrPreview.validateRecordType(13, 'SWT');
+                steps.workCwrPreview.validateRecordNumber(13);
+
+                steps.workCwrPreview.validateRecordType(14, 'PWR');
+                steps.workCwrPreview.validateRecordNumber(14);
+                steps.workCwrPreview.validatePublisherName(14, 'WCM PUBLISHER  1');
+
+                steps.workCwrPreview.validateRecordType(15, 'ALT');
+                steps.workCwrPreview.validateRecordNumber(15);
+
+                steps.workCwrPreview.validateWorkTitle(
+                    15, 'TEST WORK ALTERNATE TITLE 4671439617111048'
+                );
             }
         },
     ];
