@@ -34,5 +34,8 @@ exports.selectRegistrationRecipientResultByIndex = function (index) {
     var typeaheadResult = exports.registrationRecipientSearchResults();
 
     browser.wait(ExpectedConditions.visibilityOfAny(exports.registrationRecipientSearchResults()));
-    return typeaheadResult.click();
+
+    return typeaheadResult.click().then(function() {
+        pages.base.waitForAjax();
+    });
 };
