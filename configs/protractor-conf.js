@@ -49,6 +49,7 @@ config = {
     onPrepare: function() {
         console.time('Tests time');
         var reporting = systemConfig.reporting,
+            pph = require('../helpers/pph'),
             matchers,
             browserWait;
 
@@ -87,6 +88,22 @@ config = {
         }
         matchers = new global.ftf.matchers();
         jasmine.Matchers.prototype.shouldBePresent = matchers.create('ShouldBePresent');
+
+        protractor.ExpectedConditions.presenceOfAny = function (elems) {
+            return function () {
+                return elems.count();
+            };
+        };
+
+        protractor.ExpectedConditions.visibilityOfAny = function (elems) {
+            return function () {
+                return protractor.ExpectedConditions.presenceOfAny(elems)().then(function (count) {
+                    return count && pph.arraySome(elems, function(element){
+                        return protractor.ExpectedConditions.visibilityOf(element)
+                    });
+                });
+            };
+        };
 
     },
     onCleanUp: function(statusCode) {

@@ -18,11 +18,14 @@ require(steps_path + 'create_deal_contract_period');
 require(steps_path + 'create_deal_scope');
 require(steps_path + 'newWorkRecordings');
 require(steps_path + 'workRecordings');
+require(steps_path + 'newWorkCopyrightCertificates');
+require(steps_path + 'workCopyrightCertificates');
 require(steps_path + 'scopeDelivery');
 require(steps_path + 'workRights');
+require(steps_path + 'workPreviewCwr');
 
 var beforeFeature = [
-        [steps.login.itLogin]
+        [steps.login.itLogin],
     ],
     feature = [
         {
@@ -30,6 +33,7 @@ var beforeFeature = [
             tags: [
                 'works-sanity-create-persons',
                 'works-sanity-create-work',
+                'works-sanity-validate-work',
                 'works-sanity-create-composite-works',
                 'works-sanity-validate-composite-works',
                 'works-sanity-create-cos',
@@ -68,6 +72,7 @@ var beforeFeature = [
             name: 'Create work with 2 creators',
             tags: [
                 'works-sanity-create-work',
+                'works-sanity-validate-work',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -126,17 +131,26 @@ var beforeFeature = [
                     });
                 }],
 
+                [steps.new_work.continueToNextTab],
+
+                [function() {
+                    _.times(4, function(i) {
+                        steps.newWorkCopyrightCertificates.enterUsLibraryOfCongressNumber(i, 'TEST ' + randomId('copyrightNumber' + i));
+                        steps.newWorkCopyrightCertificates.enterRegistrationDate(i, '2015-03-12');
+                        steps.newWorkCopyrightCertificates.enterSubmittedDate(i, '2015-06-12');
+                    });
+                }],
+
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
                 [steps.work.findCurrentlyOpenWorkId],
-            ]
+            ],
         },
         {
             name: 'Validate created work data',
             tags: [
                 'works-sanity-validate-work',
-                'works-sanity-create-work',
             ],
             steps: [
                 [steps.base.useEntityDataSlot, ['work', 'mainWork']],
@@ -153,6 +167,26 @@ var beforeFeature = [
                 [steps.work.validateVersionType],
                 [steps.work.validateLyricAdaptation],
                 [steps.work.validateMusicArrangement],
+
+                [function() {
+                    steps.workCopyrightCertificates.validateUsLibraryOfCongressNumbers(
+                        _.times(4, function(i) {
+                            return 'TEST ' + randomId('copyrightNumber' + i);
+                        })
+                    );
+
+                    steps.workCopyrightCertificates.validateRegistrationDates(
+                        _.times(4, function() {
+                            return '2015 03 12';
+                        })
+                    );
+
+                    steps.workCopyrightCertificates.validateSubmittedDates(
+                        _.times(4, function() {
+                            return '2015 06 12';
+                        })
+                    );
+                }],
 
                 [steps.work.validateIncludeWorkOnWebsite, [false]],
 
@@ -181,7 +215,7 @@ var beforeFeature = [
                         })
                     );
                 }],
-            ]
+            ],
         },
         {
             name: 'Create 2 basic works to use as components',
@@ -214,7 +248,7 @@ var beforeFeature = [
                         steps.new_work.validateSaveWorkRedirection();
                     });
                 }],
-            ]
+            ],
         },
         {
             name: 'Create a Composite of Samples',
@@ -281,7 +315,7 @@ var beforeFeature = [
                 [steps.work.validateCompositeWorkType],
                 [steps.work.validateComponentWorkName, [0]],
                 [steps.work.validateComponentWorkAllocation, [0]],
-            ]
+            ],
         },
         {
             name: 'Create a Medley',
@@ -745,6 +779,25 @@ var beforeFeature = [
                     0, ['100.000', '50.000', '100.000', '100.000', '100.000']
                 );
             },
+        },
+        {
+            name: 'Validate CWR',
+            tags: [
+                'TAT-381',
+                'works-sanity-validate-cwr',
+            ],
+            steps: function () {
+                var testWorkId = 'WW 015007750 00',
+                    registrationRecipientName = 'ABRAMUS',
+                    cwrLines = require('../data/ABRAMUS_cwr.json');
+
+                steps.work.goToWorkPageById(testWorkId);
+                steps.work.goToPreviewCwrTab();
+
+                steps.workPreviewCwr.searchForRegistrationRecipient(registrationRecipientName);
+                steps.workPreviewCwr.selectFirstRegistrationRecipientResult();
+                steps.workPreviewCwr.validateCwrLines(cwrLines);
+            }
         },
     ];
 
