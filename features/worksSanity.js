@@ -22,7 +22,7 @@ require(steps_path + 'newWorkCopyrightCertificates');
 require(steps_path + 'workCopyrightCertificates');
 require(steps_path + 'scopeDelivery');
 require(steps_path + 'workRights');
-require(steps_path + 'workPreviewCwr');
+require(steps_path + 'workCwrPreview');
 
 var beforeFeature = [
         [steps.login.itLogin],
@@ -791,9 +791,9 @@ var beforeFeature = [
 
                 steps.work.goToPreviewCwrTab();
 
-                steps.workPreviewCwr.searchForRegistrationRecipient('ABRAMUS');
+                steps.workCwrPreview.searchForRegistrationRecipient('ABRAMUS');
 
-                steps.workPreviewCwr.selectFirstRegistrationRecipientResult();
+                steps.workCwrPreview.selectFirstRegistrationRecipientResult();
             }
         },
     ];

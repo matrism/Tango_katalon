@@ -3,7 +3,7 @@
 var ExpectedConditions = protractor.ExpectedConditions, 
     typeaheadResultRepeater = by.repeater('$match in $dataSet.queried.matches');
 
-pages.workPreviewCwr = exports;
+pages.workCwrPreview = exports;
 
 exports.cwrTableLineRows = function () { 
     return element(by.id('CWR-DATA')).all(by.repeater('record in dataHolder.currentCwr.records')); 
@@ -22,7 +22,7 @@ exports.registrationRecipientSearchResults = function () {
 };
 
 exports.searchForRegistrationRecipient = function (name) {
-    var elem = pages.workPreviewCwr.registrationRecipientSearch();
+    var elem = pages.workCwrPreview.registrationRecipientSearch();
 
     return elem.sendKeys(name);
 };
