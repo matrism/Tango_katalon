@@ -48,6 +48,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-cwr',
             ],
             steps: function() {
                 _.times(3, function(i) {
@@ -83,6 +84,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-cwr',
             ],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
@@ -561,6 +563,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-cwr',
             ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
@@ -625,6 +628,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-cwr',
             ],
             steps: function() {
                 steps.base.useEntityDataSlot('work', 'mainWork');
@@ -660,6 +664,7 @@ var beforeFeature = [
             tags: [
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-cwr',
             ],
             steps: function() {
                 var creatorRightsData = [
@@ -787,7 +792,9 @@ var beforeFeature = [
                 'works-sanity-validate-cwr',
             ],
             steps: function () {
-                steps.work.goToWorkPageById('WW 015009561 00');
+                steps.base.useEntityDataSlot('work', 'mainWork');
+
+                steps.work.goToWorkPage();
 
                 steps.work.goToPreviewCwrTab();
 
@@ -796,15 +803,14 @@ var beforeFeature = [
                 steps.workCwrPreview.selectFirstRegistrationRecipientResult();
 
                 steps.workCwrPreview.validateRecordType(0, 'NWR');
+
                 steps.workCwrPreview.validateRecordNumber(0);
 
                 steps.workCwrPreview.validateWorkTitle(
-                    0, 'TEST WORK 4671439617111048'
+                    0, 'TEST WORK ' + randomId('mainWork')
                 );
 
-                steps.workCwrPreview.validateSubmitterWorkNumberAsWorkId(
-                    0, 'WW 015009561 00'
-                );
+                steps.workCwrPreview.validateSubmitterWorkNumberUsingWorkIdFromCurrentWorkSlot(0);
 
                 steps.workCwrPreview.validateRecordType(1, 'SPU');
                 steps.workCwrPreview.validateRecordNumber(1);
@@ -873,10 +879,11 @@ var beforeFeature = [
                 steps.workCwrPreview.validatePublisherName(14, 'WCM PUBLISHER  1');
 
                 steps.workCwrPreview.validateRecordType(15, 'ALT');
+
                 steps.workCwrPreview.validateRecordNumber(15);
 
                 steps.workCwrPreview.validateWorkTitle(
-                    15, 'TEST WORK ALTERNATE TITLE 4671439617111048'
+                    15, 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork')
                 );
             }
         },

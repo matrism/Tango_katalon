@@ -58,6 +58,18 @@ exports.validateSubmitterWorkNumberAsWorkId = function(i, value) {
     );
 };
 
+exports.validateSubmitterWorkNumberUsingWorkIdFromCurrentWorkSlot = function(i) {
+    it(
+        'Record #' + (i + 1) + ' - ' +
+        'Validate submitter work number using work ID from current work slot',
+        function() {
+            pages.workCwrPreview.validateSubmitterWorkNumberAsWorkId(
+                i, hash.currentEntityDataSlotsByType.work.id
+            );
+        }
+    );
+};
+
 exports.validatePublisherName = function(i, value) {
     it(
         'Record #' + (i + 1) + ' - ' +
