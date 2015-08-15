@@ -48,7 +48,9 @@ var beforeFeature = [
 
                     steps.newPerson.goToNewPersonPage();
 
-                    steps.newPerson.enterLastName('TEST PERSON ' + randomId('person' + i));
+                    steps.newPerson.enterLastName(
+                        'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
+                    );
 
                     steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
                     steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
