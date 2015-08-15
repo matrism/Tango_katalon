@@ -5,10 +5,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 pages.workCwrPreview = exports;
 
 exports.recordBindings = function() {
-    return (
-        element.all(by.repeater('record in dataHolder.currentCwr.records'))
-            .$$('.ng-binding')
-    );
+    return $('#CWR-DATA').$$('.ng-binding');
 };
 
 exports.registrationRecipientTypeahead = function () {
