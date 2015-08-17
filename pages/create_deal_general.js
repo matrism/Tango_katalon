@@ -195,8 +195,8 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillIntoTheWampsContractBriefNumberField: function () {
-            var timestamp = new Date().getUTCMilliseconds();
-            pages.create_deal_general.elems.wampsContractBriefNumberField.sendKeys("W" + timestamp);
+            var time = new Date().getTime();
+            pages.create_deal_general.elems.wampsContractBriefNumberField.sendKeys("W" + time);
         },
 
         fillIntoTheAuditPeriodField: function () {
