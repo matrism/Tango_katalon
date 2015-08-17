@@ -19,8 +19,6 @@ require(steps_path + 'new_work');
     //return '7621435785647192';
 //};
 
-hash.subjectWorkData = {};
-
 baseWorksData = [
     {
         primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
@@ -414,12 +412,6 @@ searchDataByCreatorMatch1 = [
                     randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2',
                 ],
             },
-            {
-                title: randomId(0) + 'WINTER IS COMING',
-                creators: [
-                    randomId(0) + 'TABERNER, ' + randomId(0) + 'ELIZABETH2',
-                ],
-            },
         ],
     },
 ];
@@ -584,6 +576,8 @@ var beforeFeature = [
 
                             steps.person.findInternalIpiNumber();
                         });
+
+                        steps.base.useBlankEntityDataSlot('work', i);
 
                         steps.new_work.goToNewWorkPage();
 

@@ -42,57 +42,64 @@ if (pages.royaltyRates === undefined) {
             rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"}
         },
         activeContractPeriod: function () {
-            return $(".contract-period-menu-item.ng-scope.active>div>p>strong.overflow");
+          return $(".contract-period-menu-item.ng-scope.active>div>p>strong.overflow");
         },
         editModeActiveScopeName: function () {
-            return $(".scope-description-header");
+          return $(".scope-description-header");
         },
-        createModeActiveScopeName: function () {
-            return $("fieldset>.control-group>.controls>.input-addition>input").getAttribute("value");
+        createModeActiveScopeName:function()
+        {
+          return $("fieldset>.control-group>.controls>.input-addition>input").getAttribute("value");
         },
 
 
         sectionLoader: function () {
-            return $(".section-loader");
+          return $(".section-loader");
         },
 
         originalPublisherName: function () {
-            return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(2)>div>.ps-name").first();
+return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(2)>div>.ps-name").first();
         },
 
-        administratorName: function () {
-            return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(3)>div>.ps-name").first();
-        },
+            administratorName: function () {
+                return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(3)>div>.ps-name").first();
+            },
         publisherSharesSaveButton: function () {
             return $('.CONTROLS>div>button[data-ng-click="tgModularViewMethods.save();"]');
         },
-        administratorInput: function () {
-            return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
+        administratorInput:function()
+        {
+          return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
 
         },
-        originalPublishersDropdownList: function () {
-            return $$(".tg-typeahead__suggestions-group-item.ng-scope");
+        originalPublishersDropdownList:function()
+        {
+          return $$(".tg-typeahead__suggestions-group-item.ng-scope");
         },
 
 
-        suggestionDropdown: function () {
+        suggestionDropdown:function()
+        {
             return $(".tg-typeahead__suggestions-container");
         },
-        originalPublisherInput: function () {
+        originalPublisherInput:function()
+        {
 
-            return $$(".publisher-share>.publisher-row>.ps-name>div>div>div>div>div>div>input").last();
+          return $$(".publisher-share>.publisher-row>.ps-name>div>div>div>div>div>div>input").last();
         },
-        newPublisherSharedButton: function () {
+        newPublisherSharedButton:function()
+        {
 
-            return $(".publisher-share-totals>a");
+          return $(".publisher-share-totals>a");
         },
-        rateSetCancelButton: function () {
+        rateSetCancelButton:function()
+        {
 
-            return $(".btn-cancel");
+          return $(".btn-cancel");
         },
-        incomeProviderDeleteButtons: function () {
-            var temp = $$('.ng-scope[ng-switch-when="false"]').last();
-            //return element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove"));
+        incomeProviderDeleteButtons:function(){
+var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
+          //return element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove"));
             return temp.$("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-remove");
 
         },
@@ -137,6 +144,8 @@ if (pages.royaltyRates === undefined) {
         },
 
 
+
+
         errorMessageRR: function () {
 
             return element(by.css("div>div>div>.validation-message-text"));
@@ -148,17 +157,17 @@ if (pages.royaltyRates === undefined) {
         }
         ,
         NPS: function () {
-            return $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(1);
+          return   $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(1);
         },
         adminFee: function () {
-            return $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(2);
+          return   $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").get(2);
         },
         payout: function () {
 
             return $$(".tg-selectize-contractual-rate>ul>li:not(.m-submenu)").first();
         },
         lastPayoutFromSubmenu: function () {
-            return $$(".tg-selectize-contractual-rate>ul:nth-child(2)>li:last-child");
+          return $$(".tg-selectize-contractual-rate>ul:nth-child(2)>li:last-child");
         },
 
         contractualRateInput: function () {
@@ -177,7 +186,6 @@ if (pages.royaltyRates === undefined) {
             return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
 
         },
-
         newRoyaltyRateSetButtonEdit: function () {
             return $(".rate-sets-container-inner>a");
 
@@ -204,16 +212,15 @@ if (pages.royaltyRates === undefined) {
         },
 
         lastSetOnReceiptFromCoverMechanical: function () {
-            return $$(".rate-set_group__coverMechanical>div>div>div>div>.rate-set-rate-ram>div").last().element(by.buttonText("On Receipt"));
+           return  $$(".rate-set_group__coverMechanical>div>div>div>div>.rate-set-rate-ram>div").last().element(by.buttonText("On Receipt"));
         },
-
         prevailingPopup: function () {
             return $(".prevailing-icr");
         },
-
         onReceiptMethodButtonOnPrevailingPopup: function () {
-            return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
+          return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
         },
+
 
 
         //LOCATORS END
@@ -227,18 +234,8 @@ if (pages.royaltyRates === undefined) {
 
             pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
             this.newRoyaltyRateSetButton().click();
-        },
-
-        clickAddAnotherRoyaltySetButton: function () {
-
-
-            browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
-
-
-            pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
-            this.newRoyaltyRateSetButton().click();
-        },
-
+        }
+        ,
         clickNewRoyaltySetButtonEdit: function () {
 
 
@@ -274,7 +271,7 @@ if (pages.royaltyRates === undefined) {
             $$(".rate-set-row.rate-set-header>a>.icon-chevron-up")
                 .then(function (result) {
 
-                    for (i = 0; i < result.length - 1; i++) {
+                    for (i = 0; i < result.length-1; i++) {
                         result[i].click();
                     }
                 }
@@ -282,43 +279,55 @@ if (pages.royaltyRates === undefined) {
 
         },
 
-        typeInAllInputs: function (value) {
+        typeInAllInputs:function(value){
             var i = 0;
 
 
+
             browser.driver.executeScript(
-                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +
-                "   for (var i=0; i < els.length; i++) {" +
+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
+                "   for (var i=0; i < els.length; i++) {"+
                 "       els[i].value = '1.23'; }"
+
+
+
             );
-            browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
+           browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
 
                 .then(function (result) {
 
                     for (i = 0; i < result.length; i++) {
 
-                        result[i].sendKeys("45");
+                      result[i].sendKeys("45");
 
 
                     }
 
 
-                })
-        },
-        typeAllInputs: function (value) {
+
+
+                    })
+                },
+        typeAllInputs:function(value){
             var i = 0;
 
 
+
             browser.driver.executeScript(
-                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +
-                "   for (var i=0; i < els.length; i++) {" +
+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
+                "   for (var i=0; i < els.length; i++) {"+
                 "       els[i].value = '5.55'; }"
+
+
+
             );
-            $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
+          $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
 
                 .then(function (result) {
 
-                    console.log("Inputs to type in : " + result.length);
+                    console.log("Inputs to type in : "+ result.length);
                     for (i = 0; i < result.length; i++) {
 
                         result[i].sendKeys("55");
@@ -327,16 +336,18 @@ if (pages.royaltyRates === undefined) {
                     }
 
 
+
+
                 })
         },
-        typeAllInputsTest: function (value) {
+        typeAllInputsTest:function(value){
             var i = 0;
 
             $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
 
                 .then(function (result) {
 
-                    console.log("Inputs to type in : " + result.length);
+                    console.log("Inputs to type in : "+ result.length);
                     for (i = 0; i < result.length; i++) {
 
                         result[i].sendKeys();
@@ -345,18 +356,26 @@ if (pages.royaltyRates === undefined) {
                     }
 
 
+
+
                 })
         },
-        checkDecimalNumber: function (number) {
+        checkDecimalNumber:function(number)
+        {
 
 
-            console.log("Check Decimal Number : " + number);
+
+            console.log("Check Decimal Number : "+number);
             browser.driver.sleep(10000);
-            var i;
+            var i ;
             var bool = true;
             browser.driver.executeScript(
-                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +
+
+                " var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');"+
                 "  console.log( els.length);  "
+
+
+
             );
             $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
 
@@ -365,12 +384,14 @@ if (pages.royaltyRates === undefined) {
 
 
                     for (i = 0; i < result.length; i++) {
-                        console.log("NUmber of inputs" + i);
-                        if (bool) {
+                        console.log("NUmber of inputs"+i);
+                        if(bool)
+
+                        {
 
 
-                            bool = result[i].getAttribute('value') == number;
-                            console.log(result[i].getAttribute('value'));
+                            bool =  result[i].getAttribute('value') == number;
+                            console.log( result[i].getAttribute('value'));
 
 
                         }
@@ -383,12 +404,23 @@ if (pages.royaltyRates === undefined) {
             return bool;
 
 
-        }
+
+
+
+
+                }
+
+
+
+
+
+
+
 
 
         ,
 
-        closeRoyaltySet: function () {
+        closeRoyaltySet : function () {
             pages.royaltyRates.elems.closeRateSetButton.click();
 
             ftf.helper.waitForElement(pages.royaltyRates.elems.confirmCancelButton, 30000);
@@ -404,7 +436,8 @@ if (pages.royaltyRates === undefined) {
 
 
         },
-        waitPanel: function () {
+        waitPanel:function()
+        {
             var element;
 
             element = $(".rate-set-name-input");
@@ -466,9 +499,9 @@ if (pages.royaltyRates === undefined) {
                     sentKeys = element;
 
                     var incomeProviderInput;
-                    // incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
+                  // incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
 
-                    incomeProviderInput = $$(".flex1>.ng-valid>div>div>div>div>div>input").last();
+                   incomeProviderInput = $$(".flex1>.ng-valid>div>div>div>div>div>input").last();
 
 
                     pages.base.scrollIntoView($(".flex1>.ng-valid>div>div>div>div>div>input"));
@@ -486,6 +519,7 @@ if (pages.royaltyRates === undefined) {
                     browser.wait(ExpectedConditions.visibilityOf(suggestion));
 
                     suggestion.click();
+
 
 
                 })
@@ -514,6 +548,7 @@ if (pages.royaltyRates === undefined) {
 
             var incomeProviderInput;
             var temp = [];
+
 
 
             incomeProviderInput = element.all(by.css("div:not(.tg-typeahead__tag-wrap)>div>.tg-typeahead__tag-name.ng-binding"));
@@ -595,45 +630,6 @@ if (pages.royaltyRates === undefined) {
 
         },
 
-        clickOnTheYesInterCompanyRateCoverMechanical: function () {
-            pages.royaltyRates.elems.yesInterCompanyRateCoverMechanical.click();
-        },
-
-
-        clickOnTheYesInterCompanyRateMechanical: function () {
-            pages.royaltyRates.elems.yesInterCompanyRateMechanical.click();
-        },
-
-
-        clickOnTheYesInterCompanyRateNonSocietyPerformance: function () {
-            pages.royaltyRates.elems.yesInterCompanyRateNonSocietyPerformance.click();
-        },
-
-
-        clickOnTheYesInterCompanyRateOthers: function () {
-            pages.royaltyRates.elems.yesInterCompanyRateOthers.click();
-        },
-
-
-        clickOnTheYesInterCompanyRatePerformance: function () {
-            pages.royaltyRates.elems.yesInterCompanyRatePerformance.click();
-        },
-
-
-        clickOnTheYesInterCompanyRatePrint: function () {
-            pages.royaltyRates.elems.yesInterCompanyRatePrint.click();
-        },
-
-
-        clickOnTheYesInterCompanyRateSynch: function () {
-            pages.royaltyRates.elems.yesInterCompanyRateSynch.click();
-        },
-
-
-        clickOnTheYesInterCompanyRateTpp: function () {
-            pages.royaltyRates.elems.yesInterCompanyRateTpp.click();
-        },
-
         getActiveIncomeToggle: function () {
 
 
@@ -708,7 +704,8 @@ if (pages.royaltyRates === undefined) {
             }
 
         },
-        clickcancelRateSet: function () {
+        clickcancelRateSet:function()
+        {
 
             this.rateSetCancelButton().click();
 
@@ -741,7 +738,7 @@ if (pages.royaltyRates === undefined) {
 
             this.payout().click();
             browser.driver.sleep(2000);
-            this.lastPayoutFromSubmenu().click();
+           this.lastPayoutFromSubmenu().click();
 
 
         }
@@ -769,26 +766,29 @@ if (pages.royaltyRates === undefined) {
             this.atSourceMethodButton().click();
         },
         clickYesOnRateMethodModal: function () {
-            var rateMethodModalYesButton;
-            browser.wait(ExpectedConditions.elementToBeClickable(element(by.css(".modal-footer>.btn.btn-primary"))));
-            rateMethodModalYesButton = element(by.css(".modal-footer>.btn.btn-primary"));
-            rateMethodModalYesButton.click();
-        },
 
+            var rateMethodModalYesButton;
+            rateMethodModalYesButton = element(by.css(".modal-footer>.btn-primary"));
+
+            rateMethodModalYesButton.click();
+
+        },
         clickLastOnReceiptFromCoverMechanical: function () {
 
             this.lastSetOnReceiptFromCoverMechanical().click();
         },
-
         clickDoneButtonForRRSet: function () {
 
 
-            console.log(JSON.stringify(hash.royaltyRates.royaltyRateObjectsList, null, 4));
+            console.log(JSON.stringify( hash.royaltyRates.royaltyRateObjectsList, null, 4));
 
             var RRDoneButton;
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
 
             RRDoneButton.click();
+
+
+
 
         },
         waitForLoadToAppear: function () {
@@ -798,8 +798,9 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf($(".pull-right.rate_set-loader")));
         },
 
-        waitForRRToBeSaved: function () {
-            browser.driver.sleep(10000);
+        waitForRRToBeSaved:function()
+        {
+           browser.driver.sleep(10000);
 
         },
 
@@ -820,12 +821,13 @@ if (pages.royaltyRates === undefined) {
 
         },
 
-        clearIncomeProviderInput: function () {
+        clearIncomeProviderInput:function()
+        {
             //while(this.incomeProviderDeleteButtons().isPresent())
             //{
 
-            this.incomeProviderDeleteButtons().click();
-            //  }
+                this.incomeProviderDeleteButtons().click();
+          //  }
 
             //var index;
             //var elements = this.incomeProviderDeleteButtons();
@@ -837,14 +839,15 @@ if (pages.royaltyRates === undefined) {
             //    elements[index].click();
             //
             //}
-            //  elements.forEach(function(element) {
-            //   element.click();
+          //  elements.forEach(function(element) {
+             //   element.click();
             //});
 
         },
-        checkDecimalPlaces: function () {
+        checkDecimalPlaces:function()
+        {
             browser.driver.sleep(5000);
-            var i;
+            var i ;
             var bool = true;
             browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
 
@@ -852,12 +855,13 @@ if (pages.royaltyRates === undefined) {
 
                     for (i = 0; i < result.length; i++) {
 
-                        //   result[i].sendKeys("45");
+                     //   result[i].sendKeys("45");
 
 
-                        if (bool) {
+                        if(bool)
+                        {
 
-                            bool = result[i].getAttribute('value').length <= 5;
+                       bool =  result[i].getAttribute('value').length <= 5;
                         }
 
                     }
@@ -869,25 +873,30 @@ if (pages.royaltyRates === undefined) {
             return bool;
         },
 
-        clickAddNewPublisherSharesButton: function () {
+        clickAddNewPublisherSharesButton:function()
+        {
             this.newPublisherSharedButton().click();
 
 
         },
-        typeIntoOriginalPublisherInput: function (originalPublisher) {
+       typeIntoOriginalPublisherInput:function(originalPublisher)
+        {
             this.originalPublisherInput().sendKeys(originalPublisher);
 
         },
 
-        selectFirstOriginalPublisher: function () {
+        selectFirstOriginalPublisher:function()
+        {
             browser.wait(ExpectedConditions.visibilityOf(this.suggestionDropdown()));
 
-            this.originalPublisherInput().sendKeys(protractor.Key.ARROW_DOWN);
+           this.originalPublisherInput().sendKeys(protractor.Key.ARROW_DOWN);
             this.originalPublisherInput().sendKeys(protractor.Key.ENTER);
 
 
+
         },
-        selectFirstAdministrator: function () {
+        selectFirstAdministrator:function()
+        {
 
             browser.wait(ExpectedConditions.visibilityOf(this.suggestionDropdown()));
 
@@ -897,7 +906,8 @@ if (pages.royaltyRates === undefined) {
 
         ,
 
-        typeIntoAdministratorInput: function (administrator) {
+        typeIntoAdministratorInput:function(administrator)
+        {
             this.administratorInput().sendKeys(administrator);
 
         },
@@ -906,38 +916,23 @@ if (pages.royaltyRates === undefined) {
             this.publisherSharesSaveButton().click();
         },
 
-        originalPublisherNameHasText: function (text) {
+        originalPublisherNameHasText:function(text)
+        {
 
             return this.originalPublisherName().getText();
         },
-        administratorNameHasText: function (text) {
-            return this.administratorName().getText();
-        },
+       administratorNameHasText: function (text) {
+           return this.administratorName().getText();
+       },
 
         prevailingPopupIsDisplayed: function () {
-            pages.base.scrollIntoView(this.prevailingPopup());
+            pages.base.scrollIntoView( this.prevailingPopup());
             return this.prevailingPopup().isPresent();
         },
         clickOnReceiptMethodOnPrevailingPopup: function () {
             this.onReceiptMethodButtonOnPrevailingPopup().click();
-        },
+        }
 
-        fillIntoTheInterCompanyRateInputField: function () {
-            var number = Math.floor(Math.random() * 80) + 1;
-            pages.royaltyRates.elems.interCompanyInputField.click();
-            pages.royaltyRates.elems.interCompanyInputField.clear();
-            pages.royaltyRates.elems.interCompanyInputField.sendKeys(number);
-        },
-
-        selectFromInterCompanyRateRandomValueDropDown: function () {
-            pages.royaltyRates.elems.interCompanyArrow.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.scr-ul li.sor-li.ng-scope"))));
-            browser.driver.findElements(By.css("ul.scr-ul li.sor-li.ng-scope"))
-                .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
-                })
-        },
 
         confirmTheOverrideRRModalDialog: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.elems.overrideModalDialog));
