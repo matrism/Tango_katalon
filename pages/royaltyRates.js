@@ -931,7 +931,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         },
         clickOnReceiptMethodOnPrevailingPopup: function () {
             this.onReceiptMethodButtonOnPrevailingPopup().click();
-        }
+        },
 
 
         confirmTheOverrideRRModalDialog: function () {
