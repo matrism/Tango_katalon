@@ -1250,3 +1250,15 @@ exports.goToPreviewCwrTab = function() {
         pages.base.waitForAjax();
     });
 };
+
+exports.registrationActivityTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Registration Activity')
+    );
+};
+
+exports.goToRegistrationActivityTab = function() {
+    var element = exports.registrationActivityTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
