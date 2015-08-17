@@ -15,6 +15,18 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
+        enterActualStartDate: function(value) {
+            it('Enter actual contract period start date (' + value + ')', function() {
+                pages.create_deal_contract_period.fillStartActualDateSpecificValue(value);
+            });
+        },
+
+        enterTargetEndDateInMonths: function(value) {
+            it('Enter target contract period end date (' + value + ')', function() {
+                pages.create_deal_contract_period.fillTargetEndMonthsSpecificValue(value);
+            });
+        },
+
         fillActualEndDateField: function () {
             it("Fill actual end date field ", function () {
                 pages.create_deal_contract_period.fillEndActualDate();
