@@ -1586,3 +1586,9 @@ module.exports.validateWork = function(data, more) {
 		}
 	);
 };
+
+exports.goToRegistrationActivityTab = function() {
+    it('Go to Registration Activity tab', function() {
+        pages.work.goToRegistrationActivityTab();
+    });
+};

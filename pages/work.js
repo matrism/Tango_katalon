@@ -5,15 +5,15 @@ var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 exports = module.exports = pages.work = new ftf.pageObject();
 module.exports.open = function(workId) {
-	if(!workId) {
-		return ftf.pageObject.prototype.open.call(this);
-	}
-	promise.when(workId).then (
-		function(workId) {
-			browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
-			pages.base.waitForAjax();
-		}
-	);
+    if(!workId) {
+        return ftf.pageObject.prototype.open.call(this);
+    }
+    promise.when(workId).then (
+        function(workId) {
+            browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
+            pages.base.waitForAjax();
+        }
+    );
 };
 exports.workSearchFilterTagDropdown = function(i) {
     return pages.base.mainSearchBar().element(by.model('$filterTag.filter'));
@@ -89,7 +89,7 @@ exports.expectWorkSearchMatchCreatorListToContain = function(i, value) {
 exports.expectSelectedWorkSearchFilterTagToBe = function(i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);
-	expect(pages.base.selectedDropdownOption(element)).toBe(value);
+    expect(pages.base.selectedDropdownOption(element)).toBe(value);
 };
 exports.selectWorkSearchFilterTag = function(i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
@@ -126,89 +126,89 @@ exports.clickWorkSearchMatch = function(i) {
     return exports.workSearchMatch(i).click();
 };
 module.exports.workIdBinding = function() {
-	return element(by.binding("getWorkFullCode(work.pristine)"));
+    return element(by.binding("getWorkFullCode(work.pristine)"));
 };
 module.exports.primaryWorkTitleBinding = function() {
-	return element(by.binding("getWorkName(workPristine)"));
+    return element(by.binding("getWorkName(workPristine)"));
 };
 module.exports.headerAlternateWorkTitleRows = function() {
-	return (
-		element.all(by.repeater("altTitle in altTitles | limitTo:workHeaderLimits.altTitles"))
-	);
+    return (
+        element.all(by.repeater("altTitle in altTitles | limitTo:workHeaderLimits.altTitles"))
+    );
 };
 module.exports.alternateWorkTitleBindings = function() {
-	return (
-		element.all(by.repeater("altTitle in altTitles")).all(by.binding("altTitle.title"))
-	);
+    return (
+        element.all(by.repeater("altTitle in altTitles")).all(by.binding("altTitle.title"))
+    );
 };
 module.exports.primaryWorkTitleHeading = function() {
-	return $("[data-ng-show='workHeader.title.detail']");
+    return $("[data-ng-show='workHeader.title.detail']");
 };
 module.exports.editWorkTitlesButton = function() {
-	return $(".title-edit [data-ng-click='showEdit(workHeader.title, titleEditForm)']");
+    return $(".title-edit [data-ng-click='showEdit(workHeader.title, titleEditForm)']");
 };
 module.exports.editWorkTitlesContainer = function() {
-	return $("[data-ng-show='workHeader.title.edit']");
+    return $("[data-ng-show='workHeader.title.edit']");
 };
 module.exports.editPrimaryWorkTitleField = function() {
-	return (
-		pages.work.editWorkTitlesContainer()
-			.element(by.model("work.title.primary_title.title"))
-	);
+    return (
+        pages.work.editWorkTitlesContainer()
+            .element(by.model("work.title.primary_title.title"))
+    );
 };
 module.exports.alternateWorkTitleEditRows = function() {
-	return (
-		pages.work.editWorkTitlesContainer()
-			.all(by.repeater("altTitle in work.title.alternative_titles"))
-	);
+    return (
+        pages.work.editWorkTitlesContainer()
+            .all(by.repeater("altTitle in work.title.alternative_titles"))
+    );
 };
 module.exports.alternateWorkTitleEditRow = function(i) {
-	return pages.work.alternateWorkTitleEditRows().get(i);
+    return pages.work.alternateWorkTitleEditRows().get(i);
 };
 module.exports.defaultAlternateWorkTitleLanguage = function(i) {
-	return pages.base.selectedDropdownOption (
-		pages.work.alternateWorkTitleEditRows().last()
-			.element(by.model("altTitle.language_code"))
-	);
+    return pages.base.selectedDropdownOption (
+        pages.work.alternateWorkTitleEditRows().last()
+            .element(by.model("altTitle.language_code"))
+    );
 };
 module.exports.editAlternateWorkTitleField = function(i) {
-	return (
-		pages.work.alternateWorkTitleEditRow(i)
-			.element(by.model("altTitle.title"))
-	);
+    return (
+        pages.work.alternateWorkTitleEditRow(i)
+            .element(by.model("altTitle.title"))
+    );
 };
 module.exports.newAlternateWorkTitleField = function() {
-	return (
-		pages.work.alternateWorkTitleEditRows().last()
-			.element(by.model("altTitle.title"))
-	);
+    return (
+        pages.work.alternateWorkTitleEditRows().last()
+            .element(by.model("altTitle.title"))
+    );
 };
 module.exports.titleEditorCheckingForDuplicatesMessage = function() {
-	return $(".title-edit [data-ng-show='show.requests.checkDuplicates']");
+    return $(".title-edit [data-ng-show='show.requests.checkDuplicates']");
 };
 module.exports.cancelWorkTitlesEditingButton = function() {
-	return (
-		pages.work.editWorkTitlesContainer()
-			.element(by.cssContainingText("button", "Cancel"))
-	);
+    return (
+        pages.work.editWorkTitlesContainer()
+            .element(by.cssContainingText("button", "Cancel"))
+    );
 };
 module.exports.saveWorkTitlesButton = function() {
-	return (
-		pages.work.editWorkTitlesContainer()
-			.element(by.cssContainingText("button", "Save"))
-	);
+    return (
+        pages.work.editWorkTitlesContainer()
+            .element(by.cssContainingText("button", "Save"))
+    );
 };
 module.exports.creatorNamesContainer = function() {
-	return $(".EDITOR.creators-edit");
+    return $(".EDITOR.creators-edit");
 };
 module.exports.editCreatorsContainer = function() {
-	return $("[data-ng-show='workHeader.creators.edit'");
+    return $("[data-ng-show='workHeader.creators.edit'");
 };
 module.exports.editCreatorsButton = function() {
-	return $(
-		"[data-ng-click='showEdit(workHeader.creators, " +
-			"contributionEditForm)']"
-	);
+    return $(
+        "[data-ng-click='showEdit(workHeader.creators, " +
+            "contributionEditForm)']"
+    );
 };
 exports.compositeWorkCheckbox = function() {
     return element(by.model('work.contribution.isCompositeWork'));
@@ -227,22 +227,22 @@ exports.confirmMakingIntoMedleyButton = function() {
     );
 };
 module.exports.editCreatorNameInputs = function() {
-	return element.all(by.model("creator.person_name"));
+    return element.all(by.model("creator.person_name"));
 };
 module.exports.editCreatorNameInput = function(i) {
-	return pages.work.editCreatorNameInputs().get(i);
+    return pages.work.editCreatorNameInputs().get(i);
 };
 module.exports.editCreatorContributionInputs = function() {
-	return element.all(by.model("creator.contribution"));
+    return element.all(by.model("creator.contribution"));
 };
 module.exports.editCreatorContributionInput = function(i) {
-	return pages.work.editCreatorContributionInputs().get(i);
+    return pages.work.editCreatorContributionInputs().get(i);
 };
 module.exports.editFirstCreatorContributionInput = function(i) {
-	return pages.work.editCreatorContributionInputs().first();
+    return pages.work.editCreatorContributionInputs().first();
 };
 module.exports.creatorsEditorCheckingForDuplicatesMessage = function() {
-	return $(".creators-edit [data-ng-show='show.requests.checkDuplicates']");
+    return $(".creators-edit [data-ng-show='show.requests.checkDuplicates']");
 };
 exports.componentWorkRows = function() {
     return element.all(by.repeater('component in work.contribution.components'));
@@ -252,7 +252,7 @@ exports.componentWorkRow = function(i) {
 };
 exports.componentWorkNameBindings = function() {
     return exports.componentWorkRows().all(
-        by.binding('{{ getWorkName(component.model) }}')
+        by.binding('getWorkName(component.model)')
     );
 };
 exports.componentWorkNameBinding = function(i) {
@@ -342,16 +342,16 @@ exports.confirmComponentWorkDeletionButton = function() {
     );
 };
 module.exports.cancelCreatorsButton = function() {
-	return (
-		pages.work.editCreatorsContainer()
-			.element(by.cssContainingText("button", "Cancel"))
-	);
+    return (
+        pages.work.editCreatorsContainer()
+            .element(by.cssContainingText("button", "Cancel"))
+    );
 };
 module.exports.saveCreatorsButton = function() {
-	return (
-		pages.work.editCreatorsContainer()
-			.element(by.cssContainingText("button", "Save"))
-	);
+    return (
+        pages.work.editCreatorsContainer()
+            .element(by.cssContainingText("button", "Save"))
+    );
 };
 exports.similarWorksPopUpScrollArea = function() {
     return pages.base.modalDialog().$('[style*="max-height"]');
@@ -368,251 +368,244 @@ exports.ignoreSimilarWorksButton = function() {
     );
 };
 module.exports.creationDateContainerLabel = function() {
-	return element(by.cssContainingText(".metadata-label", "CREATION"));
+    return element(by.cssContainingText(".metadata-label", "CREATION"));
 };
 module.exports.editCreationDateButton = function() {
-	return $(
-		"[data-ng-click='showEdit(workHeader.creationDate, " +
-		"creationDateEditForm)']"
-	);
+    return $(
+        "[data-ng-click='showEdit(workHeader.creationDate, " +
+        "creationDateEditForm)']"
+    );
 };
 module.exports.editCreationDateContainer = function() {
-	return $("[data-ng-show='workHeader.creationDate.edit']");
+    return $("[data-ng-show='workHeader.creationDate.edit']");
 };
 module.exports.creationYearInput = function() {
-	return (
-		pages.work.editCreationDateContainer()
-			.element(by.model("date.year"))
-	);
+    return (
+        pages.work.editCreationDateContainer()
+            .element(by.model("date.year"))
+    );
 };
 module.exports.creationMonthInput = function() {
-	return (
-		pages.work.editCreationDateContainer()
-			.element(by.model("date.month"))
-	);
+    return (
+        pages.work.editCreationDateContainer()
+            .element(by.model("date.month"))
+    );
 };
 module.exports.creationDayInput = function() {
-	return (
-		pages.work.editCreationDateContainer()
-			.element(by.model("date.day"))
-	);
+    return (
+        pages.work.editCreationDateContainer()
+            .element(by.model("date.day"))
+    );
 };
 module.exports.cancelCreationDateEditingButton = function() {
-	return pages.work.editCreationDateContainer().element(
-		by.cssContainingText("button", "Cancel")
-	);
+    return pages.work.editCreationDateContainer().element(
+        by.cssContainingText("button", "Cancel")
+    );
 };
 module.exports.saveCreationDateButton = function() {
-	return pages.work.editCreationDateContainer().element(
-		by.cssContainingText("button", "Save")
-	);
+    return pages.work.editCreationDateContainer().element(
+        by.cssContainingText("button", "Save")
+    );
 };
 module.exports.creationDateBinding = function() {
-	return element(by.binding("work.pristine.creation_date"));
+    return element(by.binding("work.pristine.creation_date"));
 };
 module.exports.deliveryDateContainerLabel = function() {
-	return element(by.cssContainingText(".metadata-label", "DELIVERY"));
+    return element(by.cssContainingText(".metadata-label", "DELIVERY"));
 };
 module.exports.editDeliveryDateButton = function() {
-	return $(
-		"[data-ng-click='showEdit(workHeader.deliveryDate, " +
-		"deliveryDateEditForm)']"
-	);
+    return $(
+        "[data-ng-click='showEdit(workHeader.deliveryDate, " +
+        "deliveryDateEditForm)']"
+    );
 };
 module.exports.editDeliveryDateContainer = function() {
-	return $("[data-ng-show='workHeader.deliveryDate.edit']");
+    return $("[data-ng-show='workHeader.deliveryDate.edit']");
 };
 module.exports.deliveryYearInput = function() {
-	return (
-		pages.work.editDeliveryDateContainer()
-			.element(by.model("date.year"))
-	);
+    return (
+        pages.work.editDeliveryDateContainer()
+            .element(by.model("date.year"))
+    );
 };
 module.exports.deliveryMonthInput = function() {
-	return (
-		pages.work.editDeliveryDateContainer()
-			.element(by.model("date.month"))
-	);
+    return (
+        pages.work.editDeliveryDateContainer()
+            .element(by.model("date.month"))
+    );
 };
 module.exports.deliveryDayInput = function() {
-	return (
-		pages.work.editDeliveryDateContainer()
-			.element(by.model("date.day"))
-	);
+    return (
+        pages.work.editDeliveryDateContainer()
+            .element(by.model("date.day"))
+    );
 };
 module.exports.cancelDeliveryDateEditingButton = function() {
-	return pages.work.editDeliveryDateContainer().element(
-		by.cssContainingText("button", "Cancel")
-	);
+    return pages.work.editDeliveryDateContainer().element(
+        by.cssContainingText("button", "Cancel")
+    );
 };
 module.exports.saveDeliveryDateButton = function() {
-	return pages.work.editDeliveryDateContainer().element(
-		by.cssContainingText("button", "Save")
-	);
+    return pages.work.editDeliveryDateContainer().element(
+        by.cssContainingText("button", "Save")
+    );
 };
 module.exports.deliveryDateBinding = function() {
-	return element(by.binding("work.pristine.delivery_date"));
+    return element(by.binding("work.pristine.delivery_date"));
 };
 module.exports.assetTypeContainer = function() {
-	return $("[data-tg-modular-edit='assetTypeEdit']");
+    return $("[data-tg-modular-edit-id='assetType']");
 };
 module.exports.musicalDistributionCategoryBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.musicalDistributionCategories, " +
-		"assetTypeEdit.model.musical_work_distribution_category)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.musicalDistributionCategories, " +
+        "modularEditModels.model.musical_work_distribution_category)"
+    ));
 };
 module.exports.textMusicRelationshipBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.textMusicRelationships, " +
-		"assetTypeEdit.model.text_music_relationship)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.textMusicRelationships, " +
+        "modularEditModels.model.text_music_relationship)"
+    ));
 };
 module.exports.excerptTypeBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.excerptTypes, assetTypeEdit.model.excerpt_type)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.excerptTypes, modularEditModels.model.excerpt_type)"
+    ));
 };
 module.exports.versionTypeBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.versionTypes, assetTypeEdit.model.version_type)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.versionTypes, modularEditModels.model.version_type)"
+    ));
 };
 module.exports.lyricAdaptationBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.lyricAdaptations, " +
-		"assetTypeEdit.model.lyric_adaptation_type)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.lyricAdaptations, " +
+        "modularEditModels.model.lyric_adaptation_type)"
+    ));
 };
 module.exports.musicArrangementBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.musicArrangements, " +
-		"assetTypeEdit.model.music_arrangement_type)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.musicArrangements, " +
+        "modularEditModels.model.music_arrangement_type)"
+    ));
 };
 module.exports.intendedPurposeBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.intendedPurposes, " +
-		"workOriginEdit.model.intended_purpose)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.intendedPurposes, " +
+        "workOriginEdit.model.intended_purpose)"
+    ));
 };
 module.exports.productionTitleBinding = function() {
-	return element(by.binding("workOriginEdit.model.production_title.title"));
+    return element(by.binding("workOriginEdit.model.production_title.title"));
 };
 module.exports.bltvrBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.bltvrs, " +
-		"workOriginEdit.model.bltvr)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.bltvrs, " +
+        "workOriginEdit.model.bltvr)"
+    ));
 };
 module.exports.musicLibraryBinding = function() {
-	return element(by.binding(
-		"getAdminDataName(dataHolder.musicLibrarys, " +
-		"workOriginEdit.model.library_code)"
-	));
+    return element(by.binding(
+        "getAdminDataName(dataHolder.musicLibrarys, " +
+        "workOriginEdit.model.library_code)"
+    ));
 };
 module.exports.editAssetTypeButton = function() {
-	return (
-		pages.work.assetTypeContainer()
-			.$("[data-ng-click='$$modularScope.showEdit()']")
-	);
+    return (
+        pages.work.assetTypeContainer()
+            .$("[data-ng-click='$$modularScope.showEdit()']")
+    );
 };
 module.exports.editMusicalDistributionCategoryField = function() {
-	return element(by.model("assetTypeEdit.model.musical_work_distribution_category"));
+    return element(by.model("modularEditModels.model.musical_work_distribution_category"));
 };
 module.exports.editTextMusicRelationshipField = function() {
-	return element(by.model("assetTypeEdit.model.text_music_relationship"));
+    return element(by.model("modularEditModels.model.text_music_relationship"));
 };
 module.exports.editExcerptTypeField = function() {
-	return element(by.model("assetTypeEdit.model.excerpt_type"));
+    return element(by.model("modularEditModels.model.excerpt_type"));
 };
 module.exports.editVersionTypeField = function() {
-	return element(by.model("assetTypeEdit.model.version_type"));
+    return element(by.model("modularEditModels.model.version_type"));
 };
 module.exports.editLyricAdaptationField = function() {
-	return element(by.model("assetTypeEdit.model.lyric_adaptation_type"));
+    return element(by.model("modularEditModels.model.lyric_adaptation_type"));
 };
 module.exports.editMusicArrangementField = function() {
-	return element(by.model("assetTypeEdit.model.music_arrangement_type"));
+    return element(by.model("modularEditModels.model.music_arrangement_type"));
 };
 module.exports.cancelAssetTypeEditingButton = function() {
-	return (
-		pages.work.assetTypeContainer()
-			.element(by.cssContainingText("button", "Cancel"))
-	);
+    return (
+        pages.work.assetTypeContainer()
+            .element(by.cssContainingText("button", "Cancel"))
+    );
 };
 module.exports.saveAssetTypeButton = function() {
-	return (
-		pages.work.assetTypeContainer()
-			.element(by.cssContainingText("button", "Save"))
-	);
+    return (
+        pages.work.assetTypeContainer()
+            .element(by.cssContainingText("button", "Save"))
+    );
 };
 module.exports.workOriginContainer = function() {
-	return $("[data-tg-modular-edit='workOriginEdit']");
+    return $("[data-tg-modular-edit-id='workOrigin']");
 };
 module.exports.editWorkOriginButton = function() {
-	return (
-		pages.work.workOriginContainer()
-			.$("[data-ng-click='$$modularScope.showEdit()']")
-	);
+    return (
+        pages.work.workOriginContainer()
+            .$("[data-ng-click='$$modularScope.showEdit()']")
+    );
 };
 module.exports.cancelWorkOriginEditingButton = function() {
-	return (
-		pages.work.workOriginContainer()
-			.element(by.cssContainingText("button", "Cancel"))
-	);
+    return (
+        pages.work.workOriginContainer()
+            .element(by.cssContainingText("button", "Cancel"))
+    );
 };
 module.exports.saveWorkOriginButton = function() {
-	return (
-		pages.work.workOriginContainer()
-			.element(by.cssContainingText("button", "Save"))
-	);
+    return (
+        pages.work.workOriginContainer()
+            .element(by.cssContainingText("button", "Save"))
+    );
 };
 module.exports.editIntendedPurposeField = function() {
-	return element(by.model("workOriginEdit.model.intended_purpose"));
+    return element(by.model("workOriginEdit.model.intended_purpose"));
 };
 module.exports.editProductionTitleField = function() {
-	return element(by.model("workOriginEdit.model.production_title.title"));
+    return element(by.model("workOriginEdit.model.production_title.title"));
 };
 module.exports.editBltvrField = function() {
-	return element(by.model("workOriginEdit.model.bltvr"));
+    return element(by.model("workOriginEdit.model.bltvr"));
 };
 module.exports.editMusicLibraryField = function() {
-	return element(by.model("workOriginEdit.model.library_code"));
+    return element(by.model("workOriginEdit.model.library_code"));
 };
 module.exports.workInclusionOnWebsiteParagraph = function() {
-	return (
-		element(by.css("[data-ng-switch='!!wcmWebsiteEdit.model.includeOnWebsite']"))
-			.element(by.css(".ng-scope"))
-	);
+    return (
+        element(by.css("[data-ng-switch='!!modularEditModels.model.includeOnWebsite']"))
+            .element(by.css(".ng-scope"))
+    );
 };
 module.exports.editWorkInclusionOnWebsiteContainer = function() {
-	return $("[data-tg-modular-edit='wcmWebsiteEdit']");
+    return $("[data-tg-modular-edit-id='wcmWebsite']");
 };
 module.exports.editWorkInclusionOnWebsiteButton = function() {
-	return (
-		pages.work.editWorkInclusionOnWebsiteContainer()
-			.$("[data-ng-click='$$modularScope.showEdit()']")
-	);
+    return (
+        pages.work.editWorkInclusionOnWebsiteContainer()
+            .$("[data-ng-click='$$modularScope.showEdit()']")
+    );
 };
 module.exports.cancelWorkInclusionOnWebsiteButton = function() {
-	return (
-		pages.work.editWorkInclusionOnWebsiteContainer()
-			.element(by.cssContainingText("button", "Cancel"))
-	);
+    return (
+        pages.work.editWorkInclusionOnWebsiteContainer()
+            .element(by.cssContainingText("button", "Cancel"))
+    );
 };
 module.exports.saveWorkInclusionOnWebsiteButton = function() {
-	return (
-		pages.work.editWorkInclusionOnWebsiteContainer()
-			.element(by.cssContainingText("button", "Save"))
-	);
-};
-module.exports.goToScopeDelivery = function() {
-	return browser.executeScript (
-		function() {
-			jQuery(".nav-tabs span:contains('Scope Delivery')").click();
-		}
-	);
+    return (
+        pages.work.editWorkInclusionOnWebsiteContainer()
+            .element(by.cssContainingText("button", "Save"))
+    );
 };
 module.exports.workId = function() {
     var element = pages.work.workIdBinding();
@@ -623,41 +616,41 @@ exports.validateWorkId = function(value) {
     expect(exports.workId()).toBe(value);
 };
 module.exports.primaryWorkTitle = function() {
-	var element = pages.work.primaryWorkTitleBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.primaryWorkTitleBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.alternateWorkTitles = function() {
-	var deferred = promise.defer();
-	pages.work.headerAlternateWorkTitleRows().then (
-		function(headerAlternateWorkTitleRows) {
-			if(headerAlternateWorkTitleRows.length === 0) {
-				return [];
-			}
-			pages.base.scrollIntoView(headerAlternateWorkTitleRows[0]);
-			browser.actions().mouseMove(headerAlternateWorkTitleRows[0]).perform();
-			deferred.fulfill (
-				pages.work.alternateWorkTitleBindings().map (
-					function(element) {
-						return element.getText();
-					}
-				)
-			);
-		}
-	);
-	return deferred.promise;
+    var deferred = promise.defer();
+    pages.work.headerAlternateWorkTitleRows().then (
+        function(headerAlternateWorkTitleRows) {
+            if(headerAlternateWorkTitleRows.length === 0) {
+                return [];
+            }
+            pages.base.scrollIntoView(headerAlternateWorkTitleRows[0]);
+            browser.actions().mouseMove(headerAlternateWorkTitleRows[0]).perform();
+            deferred.fulfill (
+                pages.work.alternateWorkTitleBindings().map (
+                    function(element) {
+                        return element.getText();
+                    }
+                )
+            );
+        }
+    );
+    return deferred.promise;
 };
 module.exports.isTitleEditorCheckingForDuplicates = function() {
-	return pages.base.isPresentAndDisplayed(
-		pages.work.titleEditorCheckingForDuplicatesMessage()
-	);
+    return pages.base.isPresentAndDisplayed(
+        pages.work.titleEditorCheckingForDuplicatesMessage()
+    );
 };
 module.exports.calculateEvenCreatorContributions = function() {
-	var rows = pages.work.editCreatorContributionInputs();
-	pages.base.scrollIntoView(rows.first());
-	return rows.count().then(function(count) {
-		return 100 / (count - 1);
-	});
+    var rows = pages.work.editCreatorContributionInputs();
+    pages.base.scrollIntoView(rows.first());
+    return rows.count().then(function(count) {
+        return 100 / (count - 1);
+    });
 };
 exports.selectedCompositeWorkType = function() {
     var element = exports.compositeWorkTypeDropdown();
@@ -665,14 +658,14 @@ exports.selectedCompositeWorkType = function() {
     return pages.base.selectedDropdownOption(element);
 };
 module.exports.enteredCreatorContribution = function(i) {
-	var element = pages.work.editCreatorContributionInput(i);
-	pages.base.scrollIntoView(element);
-	return element.getAttribute("value");
+    var element = pages.work.editCreatorContributionInput(i);
+    pages.base.scrollIntoView(element);
+    return element.getAttribute("value");
 };
 module.exports.isCreatorsEditorCheckingForDuplicates = function() {
-	return pages.base.isPresentAndDisplayed(
-		pages.work.creatorsEditorCheckingForDuplicatesMessage()
-	);
+    return pages.base.isPresentAndDisplayed(
+        pages.work.creatorsEditorCheckingForDuplicatesMessage()
+    );
 };
 exports.selectedComponentWorkName = function(i) {
     var element = exports.componentWorkNameBinding(i);
@@ -685,202 +678,202 @@ exports.enteredComponentWorkAllocation = function(i) {
     return element.getAttribute('value');
 };
 module.exports.enteredCreationYear = function() {
-	return pages.work.creationYearInput().getAttribute("value");
+    return pages.work.creationYearInput().getAttribute("value");
 };
 module.exports.creationDate = function() {
-	var element = pages.work.creationDateBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.creationDateBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.enteredDeliveryYear = function() {
-	return pages.work.deliveryYearInput().getAttribute("value");
+    return pages.work.deliveryYearInput().getAttribute("value");
 };
 module.exports.deliveryDate = function() {
-	var element = pages.work.deliveryDateBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.deliveryDateBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.workInclusionOnWebsite = function() {
-	var element = pages.work.workInclusionOnWebsiteParagraph();
-	pages.base.scrollIntoView(element);
-	return element.getText().then (
-		function(text) {
-			return (text.indexOf("is included") !== -1);
-		}
-	);
+    var element = pages.work.workInclusionOnWebsiteParagraph();
+    pages.base.scrollIntoView(element);
+    return element.getText().then (
+        function(text) {
+            return (text.indexOf("is included") !== -1);
+        }
+    );
 };
 module.exports.selectedMusicalDistributionCategory = function() {
-	return pages.base.selectedDropdownOption(
-		pages.work.editMusicalDistributionCategoryField()
-	);
+    return pages.base.selectedDropdownOption(
+        pages.work.editMusicalDistributionCategoryField()
+    );
 };
 module.exports.selectedIntendedPurpose = function() {
-	return pages.base.selectedTgDropdownOption(
-		pages.work.editIntendedPurposeField()
-	);
+    return pages.base.selectedTgDropdownOption(
+        pages.work.editIntendedPurposeField()
+    );
 };
 module.exports.selectedWorkInclusionOnWebsiteOption = function() {
-	return pages.work.activeIncludeWorkOnWebsiteButton().getText().then (
-		function(text) {
-			switch(text.toLowerCase()) {
-				case "yes":
-					return true;
-				case "no":
-					return false;
-				default:
-					return text;
-			}
-		}
-	);
+    return pages.work.activeIncludeWorkOnWebsiteButton().getText().then (
+        function(text) {
+            switch(text.toLowerCase()) {
+                case "yes":
+                    return true;
+                case "no":
+                    return false;
+                default:
+                    return text;
+            }
+        }
+    );
 };
 module.exports.creatorNames = function(i) {
-	var ithElement;
-	var elements = (
-		$(".scope-delivery-table")
-			.all(by.binding("creator.person_name"))
-			.filter (
-				function(element) {
-					return element.isDisplayed();
-				}
-			)
-	);
-	function handleElement(el) {
-		pages.base.scrollIntoView(el);
-		return el.getText();
-	}
-	if(i !== undefined) {
-		return handleElement(elements.get(i));
-	}
-	else {
-		return elements.map(handleElement);
-	}
+    var ithElement;
+    var elements = (
+        $(".scope-delivery-table")
+            .all(by.binding("::creatorContribution.creator.name"))
+            .filter (
+                function(element) {
+                    return element.isDisplayed();
+                }
+            )
+    );
+    function handleElement(el) {
+        pages.base.scrollIntoView(el);
+        return el.getText();
+    }
+    if(i !== undefined) {
+        return handleElement(elements.get(i));
+    }
+    else {
+        return elements.map(handleElement);
+    }
 };
 module.exports.creatorContributions = function(i) {
-	var ithElement;
-	// FIXME: Move this into its own locator.
-	var elements = (
-		$(".scope-delivery-table")
-			.all(by.binding("creator.contribution"))
-			.filter (
-				function(element) {
-					return element.isDisplayed();
-				}
-			)
-	);
-	function handleElement(el) {
-		pages.base.scrollIntoView(el);
-		return el.getText();
-	}
-	if(i !== undefined) {
-		return handleElement(elements.get(i));
-	}
-	else {
-		return elements.map(handleElement);
-	}
+    var ithElement;
+    // FIXME: Move this into its own locator.
+    var elements = (
+        $(".scope-delivery-table")
+            .all(by.binding("creator.contribution"))
+            .filter (
+                function(element) {
+                    return element.isDisplayed();
+                }
+            )
+    );
+    function handleElement(el) {
+        pages.base.scrollIntoView(el);
+        return el.getText();
+    }
+    if(i !== undefined) {
+        return handleElement(elements.get(i));
+    }
+    else {
+        return elements.map(handleElement);
+    }
 };
 module.exports.creatorContributionByName = function(name) {
-	return pph.indexOf(pages.work.creatorNames(), name).then (
-		function(creatorIndex) {
-			if(creatorIndex === -1) {
-				return null;
-			}
-			return pages.work.creatorContributions(creatorIndex).then (
-				function(text) {
-					if(!/^\d+\.\d+%$/.test(text)) {
-						return text;
-					}
-					return parseFloat(text);
-				}
-			);
-		}
-	);
+    return pph.indexOf(pages.work.creatorNames(), name).then (
+        function(creatorIndex) {
+            if(creatorIndex === -1) {
+                return null;
+            }
+            return pages.work.creatorContributions(creatorIndex).then (
+                function(text) {
+                    if(!/^\d+\.\d+%$/.test(text)) {
+                        return text;
+                    }
+                    return parseFloat(text);
+                }
+            );
+        }
+    );
 };
 module.exports.musicalDistributionCategory = function() {
-	var element = pages.work.musicalDistributionCategoryBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.musicalDistributionCategoryBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.textMusicRelationship = function() {
-	var element = pages.work.textMusicRelationshipBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.textMusicRelationshipBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.excerptType = function() {
-	var element = pages.work.excerptTypeBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.excerptTypeBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.versionType = function() {
-	var element = pages.work.versionTypeBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.versionTypeBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.lyricAdaptation = function() {
-	var element = pages.work.lyricAdaptationBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.lyricAdaptationBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.musicArrangement = function() {
-	var element = pages.work.musicArrangementBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.musicArrangementBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.intendedPurpose = function() {
-	var element = pages.work.intendedPurposeBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.intendedPurposeBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.productionTitle = function() {
-	var element = pages.work.productionTitleBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.productionTitleBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.bltvr = function() {
-	var element = pages.work.bltvrBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.bltvrBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.musicLibrary = function() {
-	var element = pages.work.musicLibraryBinding();
-	pages.base.scrollIntoView(element);
-	return element.getText();
+    var element = pages.work.musicLibraryBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
 };
 module.exports.editPrimaryWorkTitleFieldValue = function() {
-	return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
+    return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
 };
 module.exports.editFirstCreatorContributionFieldValue = function() {
-	return pages.work.editFirstCreatorContributionInput().getAttribute("value"); 
+    return pages.work.editFirstCreatorContributionInput().getAttribute("value"); 
 };
 (function() {
-	var buttonCssSelector = "button[data-ng-model='wcmWebsiteEdit.model.includeOnWebsite']";
-	var activeButtonCssSelector = buttonCssSelector + ".active";
-	module.exports.activeIncludeWorkOnWebsiteButton = function() {
-		return $(activeButtonCssSelector);
-	};
-	module.exports.includeWorkOnWebsiteButton = function() {
-		return element(by.cssContainingText(buttonCssSelector, "Yes"));
-	};
-	module.exports.excludeWorkFromWebsiteButton = function() {
-		return element(by.cssContainingText(buttonCssSelector, "No"));
-	};
+    var buttonCssSelector = "button[data-ng-model='wcmWebsiteEdit.model.includeOnWebsite']";
+    var activeButtonCssSelector = buttonCssSelector + ".active";
+    module.exports.activeIncludeWorkOnWebsiteButton = function() {
+        return $(activeButtonCssSelector);
+    };
+    module.exports.includeWorkOnWebsiteButton = function() {
+        return element(by.cssContainingText(buttonCssSelector, "Yes"));
+    };
+    module.exports.excludeWorkFromWebsiteButton = function() {
+        return element(by.cssContainingText(buttonCssSelector, "No"));
+    };
 })();
 module.exports.enterPrimaryWorkTitle = function(title) {
-	var element = pages.work.editPrimaryWorkTitleField();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(title);
+    var element = pages.work.editPrimaryWorkTitleField();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(title);
 };
 module.exports.enterAlternateWorkTitle = function(i, title) {
-	var element = pages.work.editAlternateWorkTitleField(i);
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(title);
+    var element = pages.work.editAlternateWorkTitleField(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(title);
 };
 module.exports.enterNewAlternateWorkTitle = function(title) {
-	var element = pages.work.newAlternateWorkTitleField();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(title);
+    var element = pages.work.newAlternateWorkTitleField();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(title);
 };
 exports.validateCompositeWorkType = function(value) {
     if(value.toLowerCase() === 'select type') {
@@ -923,10 +916,10 @@ exports.validateShellWorkCreatorContribution = function(i, j, value) {
     expect(pph.parseFloat(element.getText())).toBe(value);
 };
 module.exports.enterCreatorContribution = function(i, value) {
-	var element = pages.work.editCreatorContributionInput(i);
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(value);
+    var element = pages.work.editCreatorContributionInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
     more = more || {};
@@ -1130,55 +1123,55 @@ exports.selectRandomCreatorSuggestion = function() {
     });
 };
 module.exports.enterCreationYear = function(value) {
-	var element = pages.work.creationYearInput();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(value);
+    var element = pages.work.creationYearInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 module.exports.enterCreationMonth = function(value) {
-	var element = pages.work.creationMonthInput();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(value);
+    var element = pages.work.creationMonthInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 module.exports.enterCreationDay = function(value) {
-	var element = pages.work.creationDayInput();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(value);
+    var element = pages.work.creationDayInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 module.exports.enterDeliveryYear = function(value) {
-	var element = pages.work.deliveryYearInput();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(value);
+    var element = pages.work.deliveryYearInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 module.exports.enterDeliveryMonth = function(value) {
-	var element = pages.work.deliveryMonthInput();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(value);
+    var element = pages.work.deliveryMonthInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 module.exports.enterDeliveryDay = function(value) {
-	var element = pages.work.deliveryDayInput();
-	pages.base.scrollIntoView(element);
-	element.clear();
-	element.sendKeys(value);
+    var element = pages.work.deliveryDayInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(value);
 };
 module.exports.enterProductionTitle = function(title, more) {
-	var element;
-	more = more || {};
-	element = pages.work.editProductionTitleField();
-	return element.isPresent().then(function(elementPresent) {
-		expect(more.skipIfNotPresent || elementPresent).toBeTruthy();
-		if(!elementPresent) {
-			return;
-		}
-		pages.base.scrollIntoView(element);
-		element.clear();
-		element.sendKeys(title);
-		return title;
-	});
+    var element;
+    more = more || {};
+    element = pages.work.editProductionTitleField();
+    return element.isPresent().then(function(elementPresent) {
+        expect(more.skipIfNotPresent || elementPresent).toBeTruthy();
+        if(!elementPresent) {
+            return;
+        }
+        pages.base.scrollIntoView(element);
+        element.clear();
+        element.sendKeys(title);
+        return title;
+    });
 };
 exports.clickFirstSimilarWorkTitle = function() {
     exports.firstSimilarWorkTitleBinding().click();
@@ -1188,17 +1181,84 @@ exports.ignoreSimilarWorksWarning = function() {
     exports.ignoreSimilarWorksButton().click();
 };
 module.exports.optToIncludeWorkOnWebsite = function(include) {
-	promise.when(include).then (
-		function(include) {
-			var button;
-			if(include) {
-				button = pages.work.includeWorkOnWebsiteButton();
-			}
-			else {
-				button = pages.work.excludeWorkFromWebsiteButton();
-			}
-			pages.base.scrollIntoView(button);
-			button.click();
-		}
-	);
+    promise.when(include).then (
+        function(include) {
+            var button;
+            if(include) {
+                button = pages.work.includeWorkOnWebsiteButton();
+            }
+            else {
+                button = pages.work.excludeWorkFromWebsiteButton();
+            }
+            pages.base.scrollIntoView(button);
+            button.click();
+        }
+    );
+};
+
+exports.tabSetContainer = function() {
+    return $('[data-tg-tabset-id="workEditTabset"]');
+};
+
+exports.recordingsTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Recordings')
+    );
+};
+
+exports.goToRecordingsTab = function() {
+    var element = exports.recordingsTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+
+exports.scopeDeliveryTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Scope Delivery')
+    );
+};
+
+exports.goToScopeDeliveryTab = function() {
+    var element = exports.scopeDeliveryTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+
+exports.rightsTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Rights')
+    );
+};
+
+exports.goToRightsTab = function() {
+    var element = exports.rightsTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+
+exports.previewCwrTab = function () {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Preview CWR')
+    );
+};
+
+exports.goToPreviewCwrTab = function() {
+    var element = exports.previewCwrTab();
+    pages.base.scrollIntoView(element);
+
+    return element.click().then(function(){
+        pages.base.waitForAjax();
+    });
+};
+
+exports.registrationActivityTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Registration Activity')
+    );
+};
+
+exports.goToRegistrationActivityTab = function() {
+    var element = exports.registrationActivityTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
 };
