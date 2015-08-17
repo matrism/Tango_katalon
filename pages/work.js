@@ -1230,16 +1230,16 @@ exports.rightsTab = function() {
     );
 };
 
-exports.previewCwrTab = function () {
-    return exports.tabSetContainer().element(
-        by.cssContainingText('span', 'Preview CWR')
-    );
-};
-
 exports.goToRightsTab = function() {
     var element = exports.rightsTab();
     pages.base.scrollIntoView(element);
     return element.click();
+};
+
+exports.previewCwrTab = function () {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Preview CWR')
+    );
 };
 
 exports.goToPreviewCwrTab = function() {
