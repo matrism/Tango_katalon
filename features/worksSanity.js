@@ -22,6 +22,7 @@ require(steps_path + 'newWorkCopyrightCertificates');
 require(steps_path + 'workCopyrightCertificates');
 require(steps_path + 'scopeDelivery');
 require(steps_path + 'workRights');
+require(steps_path + 'workRegistrationActivity');
 require(steps_path + 'workCwrPreview');
 
 var beforeFeature = [
@@ -48,6 +49,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
             ],
             steps: function() {
@@ -84,6 +86,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
             ],
             steps: [
@@ -575,6 +578,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
             ],
             steps: function() {
@@ -646,6 +650,7 @@ var beforeFeature = [
                 'works-sanity-scope-delivery',
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
             ],
             steps: function() {
@@ -687,6 +692,7 @@ var beforeFeature = [
             tags: [
                 'works-sanity-generate-work-rights',
                 'works-sanity-validate-work-rights',
+                'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
             ],
             steps: function() {
@@ -806,6 +812,28 @@ var beforeFeature = [
                 steps.workRights.validateWcmTotalShares(
                     0, ['100.000', '50.000', '100.000', '100.000', '100.000']
                 );
+            },
+        },
+        {
+            name: 'Validate Registration Activity',
+            tags: [
+                'TAT-400',
+                'works-sanity-validate-registration-activity',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+
+                steps.work.goToWorkPage();
+
+                steps.work.goToRegistrationActivityTab();
+
+                steps.workRegistrationActivity.validateActivitiesGroupRegistrationName(
+                    0, 'ABRAMUS'
+                );
+
+                steps.workRegistrationActivity.toggleActivitiesGroupContainer(0);
+
+                steps.workRegistrationActivity.expectActivityToBeScheduled(0, 0);
             },
         },
         {
