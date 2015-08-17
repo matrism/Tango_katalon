@@ -325,7 +325,7 @@ var beforeFeature = function () {
                 steps.deal.goToFinderDealTermsTabDetails();
                 steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
                 steps.finder_deal.editTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(3);
+                //steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(3);
                 steps.finder_deal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
                 steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
                 steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
