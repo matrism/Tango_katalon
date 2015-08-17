@@ -360,6 +360,7 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         editCancelModalDialog: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
             pages.edit_deal_scope.elems.cancelDeletePssModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
@@ -368,6 +369,7 @@ if (pages.edit_deal_scope === undefined) {
         editDeletePublisherSharesSet: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.editDeletePublisherShareSet));
             pages.edit_deal_scope.elems.editDeletePublisherShareSet.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
             pages.edit_deal_scope.elems.confirmDeletePssModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));

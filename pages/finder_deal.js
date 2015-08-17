@@ -439,6 +439,7 @@ if (pages.finder_deal === undefined) {
         },
 
         confirmCancelChangesModalDialog: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.yesCancelChangesModalDialog));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.yesCancelChangesModalDialog));
             pages.finder_deal.elems.yesCancelChangesModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.finder_deal.elems.yesCancelChangesModalDialog));
