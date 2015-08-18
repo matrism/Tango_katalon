@@ -57,12 +57,12 @@ var configer = global.ftf.configer,
         },
         custom: {
             urls: {
-                sso: cli.URL_SSO,
-                app_url: cli.URL,
-                service_url: cli.URL_SERVICE
+                sso: cli['sso-url'] || configer.getEnvVarByKey('URL_SSO'),
+                app_url: cli['app-url'],
+                service_url: cli['service-url'] || cli['app-url']
             },
-            user_name: cli.TEST_USERNAME,
-            user_password: cli.TEST_PASSWORD
+            user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
+            user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
         }
     };
 
