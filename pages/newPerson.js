@@ -1,110 +1,108 @@
-'use strict';
+//
+//var pages_path = _tf_config._system_.path_to_pages,
 
-var pages_path = _tf_config._system_.path_to_pages,
+//
+
+//
+//require(pages_path + '/base');
+//"use strict";
+//var _ = require("lodash");
+//var promise = protractor.promise;
+//var ExpectedConditions = protractor.ExpectedConditions;
+//pages.royaltyRates = new ftf.pageObject({
+//    url: _tf_config.urls.app_url + "#/create/deal",
+//    locators: {},
+"use strict";
+var _ = require("lodash"),
     pph = require('../helpers/pph');
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
+if (pages.newPerson === undefined) {
 
- module.exports = pages.newPerson = new ftf.pageObject({
-    url: _tf_config.urls.app_url + '#/create/person'
-});
 
-require(pages_path + '/base');
+    var pages_path = _tf_config._system_.path_to_pages;
+    require(pages_path + "base");
 
-exports.open = function() {
+    pages.newPerson = new ftf.pageObject({
+        url: _tf_config.urls.app_url + "#/create/person",
+        locators: {
+
+        },
+
+    waitForPageToBeShown: function () {
+
+
+        browser.wait(ExpectedConditions.visibilityOf(this.lastNameInput()));
+    },
+    open : function() {
     ftf.pageObject.prototype.open.call(this);
     return pages.base.waitForAjax();
-};
+    },
 
 
-exports.firstNameInput = function() {
+firstNameInput : function() {
     return element(by.model('person.master_data.primary_name.first_name'));
-};
+},
 
-exports.lastNameInput = function() {
+lastNameInput : function() {
     return element(by.model('person.master_data.primary_name.last_name'));
-};
-exports.presentationNameInput = function() {
-    return element(by.model('person.master_data.primary_name.presentation_name'));
-};
-exports.addAlternativeNameButton = function() {
-    return element(by.cssContainingText('button', 'Add Alternative Name'));
-};
-exports.alternativeNameContainers = function() {
-    return element.all(by.repeater('altName in person.master_data.alternative_names'));
-};
-exports.alternativeFirstNameInput = function(i) {
-    return exports.alternativeNameContainer(i).element(
-        by.model('altName.first_name')
-    );
-};
-exports.alternativeLastNameInput = function(i) {
-    return exports.alternativeNameContainer(i).element(
+},
+
+
+
+alternativeLastNameInput : function(i) {
+    return this.alternativeNameContainer(i).element(
         by.model('altName.last_name')
     );
-};
-exports.alternativeCreditsNameInput = function(i) {
-    return exports.alternativeNameContainer(i).element(
+},
+alternativeCreditsNameInput : function(i) {
+    return this.alternativeNameContainer(i).element(
         by.model('altName.credits_name')
     );
-};
-exports.alternativeSuisaIpiInput= function(i) {
-    return exports.alternativeNameContainer(i).element(
+},
+alternativeSuisaIpiInput: function(i) {
+    return this.alternativeNameContainer(i).element(
         by.model('altName.suisa_ipi_number')
     );
-};
-exports.suisaIpiNumberInput = function() {
-    return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
-};
-exports.affiliatedSocietySearchInput = function() {
-    return element(by.model('affSociety.society.name'));
-};
-exports.affiliatedSocietySearchResults = function() {
-    return $('.typeahead.dropdown-menu').all(by.repeater('match in matches'));
-};
-exports.pageFooter = function() {
-    return $('.page-footer');
-};
-exports.doneButton = function() {
-    return exports.pageFooter().element(
-        by.cssContainingText('button', 'Done')
-    );
-};
+},
 
-exports.creditsNameInput = function() {
-   return $("#primaryCreditsName");
-};
 
-exports.dateOfDeathYear = function() {
+creditsNameInput : function() {
+    return $("#primaryCreditsName");
+},
+
+dateOfDeathYear : function() {
     return element(by.model('date.year'));
-};
-exports.dateOfDeathMonth = function() {
+},
+dateOfDeathMonth : function() {
     return element(by.model('date.month'));
-};
-exports.dateOfDeathDay = function() {
+},
+dateOfDeathDay : function() {
     return element(by.model('date.day'));
-};
+},
 
-exports.addressOneInput = function () {
+addressOneInput : function () {
 
     return $("#address1-0");
-};
-exports.cityInput = function () {
-return $("#city-0");
-};
-exports.regionInput = function () {
+},
+cityInput : function () {
+    return $("#city-0");
+},
+regionInput : function () {
 
     return $("#region-0");
-};
-exports.postalCodeInput = function () {
+},
+postalCodeInput : function () {
 
     return $("#zipCode-0");
-};
-exports.phoneInput = function () {
+},
+phoneInput : function () {
 
     return element(by.model('phone.number'));
-};
-exports.emailInput = function () {
+},
+emailInput : function () {
     return element(by.model('email.address'));
-};
+},
 
 
 
@@ -114,101 +112,96 @@ exports.emailInput = function () {
 
 
 
-exports.open = function() {
-    ftf.pageObject.prototype.open.call(this);
-    return pages.base.waitForAjax();
-};
-exports.typeFirstName = function(value) {
-    var element = exports.firstNameInput();
+
+typeFirstName : function(value) {
+
+    var element = this.firstNameInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
+},
 
-exports.lastNameInput = function() {
-    return element(by.model('person.master_data.primary_name.last_name'));
-};
 
-exports.typeLastName = function(value) {
-    var element = exports.lastNameInput();
+
+typeLastName : function(value) {
+//console.log("ATATA");
+//    return "atata";
+    var element = this.lastNameInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
+},
 
-exports.presentationNameInput = function() {
+
+presentationNameInput : function() {
     return element(by.model('person.master_data.primary_name.presentation_name'));
-};
+},
 
-exports.typePresentationName = function(value) {
-    var element = exports.presentationNameInput();
+typePresentationName : function(value) {
+    var element = this.presentationNameInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
+},
 
-exports.addAlternativeNameButton = function() {
+addAlternativeNameButton : function() {
     return element(by.cssContainingText('button', 'Add Alternative Name'));
-};
+},
 
 
-exports.clickAddAlternativeName = function() {
-    var element = exports.addAlternativeNameButton();
+clickAddAlternativeName : function() {
+    var element = this.addAlternativeNameButton();
     pages.base.scrollIntoView(element);
     return element.click();
-};
+},
 
-exports.alternativeNameContainers = function() {
+alternativeNameContainers : function() {
     return element.all(by.repeater('altName in person.master_data.alternative_names'));
-};
+},
 
-exports.alternativeNameContainer = function(i) {
-    return exports.alternativeNameContainers().get(i);
-};
+alternativeNameContainer : function(i) {
+    return this.alternativeNameContainers().get(i);
+},
 
-exports.alternativeFirstNameInput = function(i) {
-    return exports.alternativeNameContainer(i).element(
+alternativeFirstNameInput : function(i) {
+    return this.alternativeNameContainer(i).element(
         by.model('altName.first_name')
     );
-};
+},
 
 
-exports.typeAlternativeFirstName = function(i, value) {
-    var element = exports.alternativeFirstNameInput(i);
+typeAlternativeFirstName : function(i, value) {
+    var element = this.alternativeFirstNameInput(i);
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
-
-exports.alternativeLastNameInput = function(i) {
-    return exports.alternativeNameContainer(i).element(
-        by.model('altName.last_name')
-    );
-};
+},
 
 
-exports.typeAlternativeLastName = function(i, value) {
-    var element = exports.alternativeLastNameInput(i);
+
+
+typeAlternativeLastName : function(i, value) {
+    var element = this.alternativeLastNameInput(i);
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
-exports.typeAlternativeCreditsName = function(i,value) {
-    var element = exports.alternativeCreditsNameInput(i);
+},
+typeAlternativeCreditsName : function(i,value) {
+    var element = this.alternativeCreditsNameInput(i);
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
-exports.typeAlternativeSuisaIpiNumber= function(i,value) {
-    var element = exports.alternativeSuisaIpiInput(i);
+},
+typeAlternativeSuisaIpiNumber: function(i,value) {
+    var element = this.alternativeSuisaIpiInput(i);
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
+},
 
-exports.suisaIpiNumberInput = function() {
+suisaIpiNumberInput : function() {
     return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
-};
+},
 
 
 
@@ -217,104 +210,108 @@ exports.suisaIpiNumberInput = function() {
 
 
 
-exports.typeSuisaIpiNumber = function(value) {
-    var element = exports.suisaIpiNumberInput();
+typeSuisaIpiNumber : function(value) {
+    var element = this.suisaIpiNumberInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
+},
 
-exports.affiliatedSocietySearchInput = function() {
+affiliatedSocietySearchInput : function() {
     return element(by.model('affSociety.society.model')).element(
         by.model('$term')
     );
-};
+},
 
 
 
-exports.typeAffiliatedSocietySearchTerms = function(value) {
-    var element = exports.affiliatedSocietySearchInput();
+typeAffiliatedSocietySearchTerms : function(value) {
+    var element = this.affiliatedSocietySearchInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
+},
 
-exports.affiliatedSocietySearchResults = function() {
-	return $$('.tg-typeahead__suggestions-group-item');
-};
+affiliatedSocietySearchResults : function() {
+    return $$('.tg-typeahead__suggestions-group-item');
+},
 
 
-exports.affiliatedSocietySearchResult = function(i) {
-    return exports.affiliatedSocietySearchResults().get(i);
-};
+affiliatedSocietySearchResult : function(i) {
+    return this.affiliatedSocietySearchResults().get(i);
+},
 
-exports.clickAffiliatedSocietySearchResultByIndex = function(i) {
+clickAffiliatedSocietySearchResultByIndex : function(i) {
     browser.sleep(200);
     pages.base.waitForAjax();
-    return exports.affiliatedSocietySearchResult(i).click();
-};
+    return this.affiliatedSocietySearchResult(i).click();
+},
 
-exports.pageFooter = function() {
+pageFooter : function() {
     return $('.page-footer');
-};
-exports.typeIntoAddressOneInput = function(value) {
+},
+typeIntoAddressOneInput : function(value) {
 
-    return exports.addressOneInput().sendKeys(value);
-};
-exports.typeIntoCityInput = function(value) {
+    return this.addressOneInput().sendKeys(value);
+},
+typeIntoCityInput : function(value) {
 
-    return exports.cityInput().sendKeys(value);
-};
+    return this.cityInput().sendKeys(value);
+},
 
-exports.doneButton = function() {
-    return exports.pageFooter().element(
+doneButton : function() {
+    return this.pageFooter().element(
         by.cssContainingText('button', 'Done')
     );
-};
-exports.typeIntoRegionInput = function(value) {
+},
+typeIntoRegionInput : function(value) {
 
-    return exports.regionInput().sendKeys(value);
-};
-exports.typeIntoPostalCodeInput = function(value) {
+    return this.regionInput().sendKeys(value);
+},
+typeIntoPostalCodeInput : function(value) {
 
-    return exports.postalCodeInput().sendKeys(value);
-};
-exports.typeIntoPhoneInput = function(value) {
+    return this.postalCodeInput().sendKeys(value);
+},
+typeIntoPhoneInput : function(value) {
 
-    return exports.phoneInput().sendKeys(value);
-};
-exports.typeIntoEmailInput = function(value) {
+    return this.phoneInput().sendKeys(value);
+},
+typeIntoEmailInput : function(value) {
 
-    return exports.emailInput().sendKeys(value);
-};
+    return this.emailInput().sendKeys(value);
+},
 
 
 
-exports.expectDoneButtonToBeEnabled = function() {
-    expect(pph.matchesCssSelector(exports.doneButton(), '.disabled')).toBeFalsy();
-};
+expectDoneButtonToBeEnabled : function() {
+    expect(pph.matchesCssSelector(this.doneButton(), '.disabled')).toBeFalsy();
+},
 
-exports.save = function() {
+save : function() {
 
-   // console.log(JSON.stringify(hash.personSlots, null, 4));
-    exports.expectDoneButtonToBeEnabled();
-    exports.doneButton().click();
+    // console.log(JSON.stringify(hash.personSlots, null, 4));
+    this.expectDoneButtonToBeEnabled();
+    this.doneButton().click();
     return pages.base.waitForAjax();
-};
+},
 
-exports.validateSaveRedirection = function() {
+validateSaveRedirection : function() {
     expect(browser.getCurrentUrl()).toMatch(/#\/person\/.+$/);
-};
+},
 
-exports.typeCreditsName = function(value) {
-  return exports.creditsNameInput().sendKeys(value);
-};
+typeCreditsName : function(value) {
+    return this.creditsNameInput().sendKeys(value);
+},
 
-exports.typeDateOfDeath = function(year,month,day)
+typeDateOfDeath : function(year,month,day)
 {
-    exports.dateOfDeathYear().sendKeys(year);
-   exports.dateOfDeathMonth().sendKeys(month);
- return   exports.dateOfDeathDay().sendKeys(day);
+    this.dateOfDeathYear().sendKeys(year);
+    this.dateOfDeathMonth().sendKeys(month);
+    return   this.dateOfDeathDay().sendKeys(day);
 
-};
+}
 
+    });
+}
+
+module.exports = pages.newPerson;

@@ -78,6 +78,23 @@ if (steps.searchSection === undefined) {
 
 
 
+        },
+        accessSavedWorkById:function(workID)
+        {
+
+            it("User accesses work with number "+ workID,function(){
+                //
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectWork();
+                pages.searchSection.typeDealNumberIntoInput(workID);
+                pages.searchSection.selectValueFromDropdown();
+
+
+            })
+
+
+
+
         }
         ,
         accessSavedOrganisationByName:function(organisationName)
@@ -95,6 +112,16 @@ if (steps.searchSection === undefined) {
 
         }
         ,
+        accessSavedPersonByName: function (personName) {
+            it("User accesses person  with name "+ personName,function(){
+
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectPersonOptionFromDropdown();
+                pages.searchSection.typeIntoSearchInput(personName);
+                pages.searchSection.selectValueFromDropdown();
+
+            })
+        },
         accessSavedOrganisationByNameInHash:function()
         {
          var organisationName =   "Lyricfind";

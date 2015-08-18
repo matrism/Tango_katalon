@@ -29,6 +29,9 @@ if (pages.searchSection === undefined) {
 
             return element(by.css("#SEARCH-ORG"));
         },
+        personOption: function () {
+          return $("#SEARCH-PERSON");
+        },
         searchInput: function () {
 
             return element(by.css(".tg-typeahead__input"));
@@ -40,6 +43,9 @@ if (pages.searchSection === undefined) {
         },
         dealOption: function () {
             return $("#SEARCH-DEAL");
+        },
+        workOption: function () {
+          return $("#SEARCH-WORK");
         },
 
 
@@ -63,6 +69,9 @@ if (pages.searchSection === undefined) {
 
             this.dealOption().click();
         },
+        selectWork: function () {
+            this.workOption().click();
+        },
 
 
         selectOrganisationOptionFromDropdown: function () {
@@ -75,10 +84,26 @@ if (pages.searchSection === undefined) {
 
         },
 
+        selectPersonOptionFromDropdown: function () {
+
+
+            browser.wait(ExpectedConditions.visibilityOf(this.dropdownMenu()));
+            this.personOption().click();
+
+
+
+        },
+
         typeOrganisationNameIntoInput:function(organisationName)
         {
 
             this.searchInput().sendKeys(organisationName);
+
+        },
+        typeIntoSearchInput:function(value)
+        {
+
+            this.searchInput().sendKeys(value);
 
         },
 

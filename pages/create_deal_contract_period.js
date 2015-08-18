@@ -249,5 +249,12 @@ if (pages.create_deal_contract_period === undefined) {
         selectTheContractPeriodNumberI : function (i) {
             browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         }
+        ,
+        dealHeader: function () {
+          return $(".header-info");
+        },
+        waitForDealLoadToFinish: function () {
+            browser.wait(ExpectedConditions.visibilityOf(this.dealHeader()));
+        }
     });
 }

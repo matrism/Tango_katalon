@@ -1,6 +1,7 @@
 'use strict';
 
 var pages_path = _tf_config._system_.path_to_pages;
+var ExpectedConditions = protractor.ExpectedConditions;
 
 exports = module.exports = pages.person = new ftf.pageObject();
 
@@ -27,9 +28,29 @@ exports.findId = function() {
 exports.internalIpiNumberBinding = function() {
     return element(by.binding('person.pristine.master_data.primary_name.internal_ipi_number'));
 };
+exports.suisaIPINumber = function() {
+    return element(by.binding('person.pristine.master_data.primary_name.suisa_ipi_number'));
+};
+exports.alternativeNameElement = function() {
+    return $$(".EDITOR.span6>div>.row.span6>.span3").first();
+};
+
 
 exports.internalIpiNumber = function() {
     var element = exports.internalIpiNumberBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
+exports.getSuisaIPI = function() {
+    browser.wait(ExpectedConditions.visibilityOf(exports.suisaIPINumber()));
+    var element = exports.suisaIPINumber();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
+exports.getAlternativeName = function() {
+    var element = exports.alternativeNameElement();
     pages.base.scrollIntoView(element);
     return element.getText();
 };

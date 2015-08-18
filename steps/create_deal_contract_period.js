@@ -322,7 +322,11 @@ if (steps.create_deal_contract_period === undefined) {
                 pages.create_deal_contract_period.addTheNewContractPeriodDialog();
             });
         },
-
+        waitForDealToLoad: function () {
+            it("Wait for deal to load", function(){
+                pages.create_deal_contract_period.waitForDealLoadToFinish();
+            });
+        },
         selectContractPeriodNumberI : function(i){
           it("Select contract period number " + i + " from list", function(){
              pages.create_deal_contract_period.selectTheContractPeriodNumberI(i);

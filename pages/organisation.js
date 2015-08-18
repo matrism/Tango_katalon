@@ -6,8 +6,39 @@ if (pages.organisation === undefined) {
 
 
     pages.organisation = new ftf.pageObject({
-            url: _tf_config.urls.app_url + "#/create/deal",
+            url: _tf_config.urls.app_url + "#/create/org",
             locators: {},
+        organisationNameInput: function () {
+return $("#name");
+        },
+        territoryOfOperationIcon: function () {
+
+            return $(".tg-territory__globe-button");
+        },
+        selectAllCountriesButton: function () {
+          return $$(".tg-territory__btn.ng-scope").last();
+        },
+            suisaIPINumberInput: function () {
+return $(".pull-left.ng-valid-maxlength");
+        },
+        affiliatedSocietyInput: function () {
+return $(".span4");
+        },
+        WCMPublisherButton: function () {
+return $$(".btn.ng-scope").get(3);
+        },
+        saveOrganisationButton: function () {
+          return $("#CREATE-ORG-SUBMIT")
+        },
+        summaryTable: function () {
+            return $(".span3.header-right");
+        },
+        cisacCode: function () {
+          return $('#editor-general>div>div:last-child>[data-ng-show="orgEdit.pristine.masterData.type === orgTypes.society || orgEdit.pristine.masterData.type === orgTypes.copyright"]>.controls');
+        },
+        firstSubPublisher: function () {
+          return $(".EDITOR.span6.modular-edit:first-child>div>div>div>div>div:first-child");
+        },
 
 
             incomeProviderControls: function () {
@@ -26,6 +57,9 @@ if (pages.organisation === undefined) {
             editorGeneral: function () {
                 return $("#editor-general");
             },
+        regRunHeader: function () {
+            return $(".reg-run-header");
+        },
 
 
             incomeProvidersEditView: function () {
@@ -424,6 +458,10 @@ return $(".text-highlight");
 
             }
             ,
+        waitForRegRunHeader: function () {
+            browser.wait(ExpectedConditions.visibilityOf(this.regRunHeader()));
+
+        },
         waitForElementWork: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.elementWork()));
         },
@@ -616,6 +654,68 @@ return $(".text-highlight");
 
 
 
+            },
+            typeOrganisationName: function (value) {
+                browser.wait(ExpectedConditions.visibilityOf(  this.organisationNameInput()));
+                this.organisationNameInput().sendKeys(value);
+                
+            },
+            setTerritoryOfOperationToWorldWide: function () {
+                this.territoryOfOperationIcon().click();
+                browser.wait(ExpectedConditions.visibilityOf(  this.selectAllCountriesButton()));
+                    this.selectAllCountriesButton().click();
+
+
+            },
+            typeRandomSuisaIPINumber: function (value) {
+
+                this.suisaIPINumberInput().sendKeys(value);
+            },
+            randomIPINumberBasedOnDate: function () {
+               // var currentdate = new Date();
+                return "" + new Date().getDate() +
+                    + (new Date().getMonth()+1)  +
+                    + new Date().getFullYear() +
+                    + new Date().getHours() +
+                    + new Date().getMinutes() +
+                    + new Date().getSeconds();
+
+            },
+
+            selectAffiliatedSocietyNumber: function (value) {
+                this.affiliatedSocietyInput().sendKeys(value);
+                browser.wait(ExpectedConditions.visibilityOf(  this.typeaheadInput()));
+
+
+                    this.typeaheadInput().click();
+
+
+            },
+            clickPublisherType: function (value) {
+                if(value == "WCM")
+                {
+                    this.WCMPublisherButton().click();
+                }
+            }
+            ,
+            clickSaveOrganisationButton: function () {
+                this.saveOrganisationButton().click();
+            },
+            isSavedPageDisplayed: function () {
+                browser.wait(ExpectedConditions.visibilityOf(  this.summaryTable()));
+                return this.summaryTable().isDisplayed();
+
+            },
+
+            getCisacNumber: function () {
+                browser.wait(ExpectedConditions.visibilityOf(  this.cisacCode()));
+
+                return this.cisacCode().getText();
+            },
+            getFirstSubPublisherData: function () {
+                browser.wait(ExpectedConditions.visibilityOf(  this.firstSubPublisher()));
+
+                return this.firstSubPublisher().getText();
             }
 
 
