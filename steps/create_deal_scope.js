@@ -24,6 +24,7 @@ if (steps.create_deal_scope === undefined) {
                 pages.create_deal_scope.addTerritoryByTypingToScope();
             });
         },
+
         itAddNewContractPeriod: function () {
 
             it("Add new contract Period", function () {
@@ -58,6 +59,8 @@ if (steps.create_deal_scope === undefined) {
                 pages.create_deal_scope.selectContractTypeScope(contractType);
                 pages.create_deal_scope.waitForAjax();
                 pages.create_deal_scope.addTerritoryByTypingToScope();
+                pages.create_deal_scope.selectRandomCountry();
+                pages.create_deal_scope.waitForAjax();
             });
         },
 
@@ -67,9 +70,14 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        selectTerritoryOfControlSearchResultByIndex: function(i) {
-            it('Select territory of control search result #' + (i + 1), function() {
-                pages.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(i);
+        addSpecificScopeTypeAndTerritory: function (contractType, territory) {
+            it("Add simple scope", function () {
+                pages.create_deal_scope.addScopeForm();
+                pages.create_deal_scope.selectContractTypeScope(contractType);
+                pages.create_deal_scope.waitForAjax();
+                pages.create_deal_scope.addTheSpecificTerritoryByTypingToScope(territory);
+                pages.create_deal_scope.selectSpecificCountry(territory);
+                pages.create_deal_scope.waitForAjax();
             });
         },
 
@@ -131,6 +139,22 @@ if (steps.create_deal_scope === undefined) {
         clickOnAddPublisherShareSet: function () {
             it("Open publisher share set form", function () {
                 pages.create_deal_scope.clickOnAddPublisherShareSetLink();
+            });
+        },
+
+        clickOnYesSocietyAwardCreditPublisherShareSet: function () {
+            it("Click on the yes society award credit pss and check it is selected", function () {
+                pages.create_deal_scope.clickOnTheYesSocietyAwardCreditPublisherShareSet();
+                var test = pages.create_deal_scope.elems.yesSocietyAwardCreditPss.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
+            });
+        },
+
+        clickOnNoSocietyAwardCreditPublisherShareSet: function () {
+            it("Click on the no society award credit pss and check it is selected", function () {
+                pages.create_deal_scope.clickOnTheNoSocietyAwardCreditPublisherShareSet();
+                var test = pages.create_deal_scope.elems.noSocietyAwardCreditPss.getAttribute("class").toString();
+                expect(test.indexOf("active") != -1);
             });
         },
 

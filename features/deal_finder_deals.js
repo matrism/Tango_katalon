@@ -43,7 +43,6 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.fillEndTargetMonths();
             }
             steps.create_deal_scope.addSpecificScope("Finder");
-            steps.create_deal_scope.selectCountry();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -75,7 +74,7 @@ var beforeFeature = function () {
     },
         {
             name: "Dirty check general terms finder deals",
-            tags: ['dirty_check_general_terms_finder_deals', 'broken'],
+            tags: ["dirty_check_general_terms_finder_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var percent = (Math.random() * 100 + 1).toFixed(2);
@@ -93,7 +92,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -132,7 +130,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -189,7 +186,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -256,7 +252,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -304,7 +299,7 @@ var beforeFeature = function () {
             },
         {
             name: "Dirty check finder deals terms by contract period",
-            tags: ['dirty_check_terms_by_contract_period_finder_deals', 'broken'],
+            tags: ["dirty_check_terms_by_contract_period_finder_deals"],
             steps: function () {
                 var number = Math.floor(Math.random() * 1000) + 1;
                 var num = Math.floor(Math.random() * 500) + 1;
@@ -323,7 +318,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();
@@ -363,7 +357,6 @@ var beforeFeature = function () {
                     steps.create_deal_contract_period.fillEndTargetMonths();
                 }
                 steps.create_deal_scope.addSpecificScope("Finder");
-                steps.create_deal_scope.selectCountry();
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.waitForDealToBeSaved();

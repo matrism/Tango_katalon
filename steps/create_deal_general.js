@@ -4,7 +4,7 @@ var steps_path = _tf_config._system_.path_to_steps;
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 require(pages_path + "create_deal_general");
-
+require(steps_path + "base");
 
 if (steps.create_deal_general === undefined) {
     steps.create_deal_general = {

@@ -33,6 +33,12 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
+        fillActualEndDateFieldSpecificValue: function (actualDate) {
+            it("Fill actual end date field ", function () {
+                pages.create_deal_contract_period.fillEndActualDateSpecificValue(actualDate);
+            });
+        },
+
         fillContractPeriodDescription: function (description) {
             it("Fill in description field contract period ", function () {
                 pages.create_deal_contract_period.fillDescriptionField(description);

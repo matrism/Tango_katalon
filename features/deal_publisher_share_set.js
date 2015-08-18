@@ -23,7 +23,7 @@ var beforeFeature = function () {
 
     feature = [{
         name: "Create a deal with publisher share set",
-        tags: ['create_deal_pss_multiple_chains_delete_chain', 'broken'],
+        tags: ["create_deal_pss_multiple_chains_delete_chain"],
         steps: function () {
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -54,7 +54,7 @@ var beforeFeature = function () {
     },
         {
             name: "Check the visual design for publisher shares",
-            tags: ['check_design_deal_pss', 'broken'],
+            tags: ["check_design_deal_pss"],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -102,7 +102,7 @@ var beforeFeature = function () {
         },
         {
             name: "Dirty check publisher share set",
-            tags: ['dirty_check_pss', 'broken'],
+            tags: ["dirty_check_pss"],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -134,7 +134,7 @@ var beforeFeature = function () {
         },
         {
             name: "Delete publisher share set from a deal",
-            tags: ['delete_deal_publisher_share_set', 'broken'],
+            tags: ["delete_deal_publisher_share_set"],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -161,7 +161,7 @@ var beforeFeature = function () {
         },
         {
             name: "Edit a deal with publisher share set",
-            tags: ['edit_deal_publisher_share_set', 'broken'],
+            tags: ["edit_deal_publisher_share_set"],
             steps: function () {
                 var i = 1;
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -202,7 +202,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ['deal_publisher_share_set'],
+    commonFeatureTags: ["deal_publisher_share_set"],
     feature: feature,
     beforeFeature: beforeFeature
 };

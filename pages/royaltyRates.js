@@ -234,8 +234,18 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
             pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
             this.newRoyaltyRateSetButton().click();
-        }
-        ,
+        },
+
+        clickAddAnotherRoyaltySetButton: function () {
+
+
+            browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
+
+
+            pages.base.scrollIntoView(this.newRoyaltyRateSetButton());
+            this.newRoyaltyRateSetButton().click();
+        },
+
         clickNewRoyaltySetButtonEdit: function () {
 
 
@@ -630,6 +640,45 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         },
 
+        clickOnTheYesInterCompanyRateCoverMechanical: function () {
+            pages.royaltyRates.elems.yesInterCompanyRateCoverMechanical.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateMechanical: function () {
+            pages.royaltyRates.elems.yesInterCompanyRateMechanical.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateNonSocietyPerformance: function () {
+            pages.royaltyRates.elems.yesInterCompanyRateNonSocietyPerformance.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateOthers: function () {
+            pages.royaltyRates.elems.yesInterCompanyRateOthers.click();
+        },
+
+
+        clickOnTheYesInterCompanyRatePerformance: function () {
+            pages.royaltyRates.elems.yesInterCompanyRatePerformance.click();
+        },
+
+
+        clickOnTheYesInterCompanyRatePrint: function () {
+            pages.royaltyRates.elems.yesInterCompanyRatePrint.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateSynch: function () {
+            pages.royaltyRates.elems.yesInterCompanyRateSynch.click();
+        },
+
+
+        clickOnTheYesInterCompanyRateTpp: function () {
+            pages.royaltyRates.elems.yesInterCompanyRateTpp.click();
+        },
+
         getActiveIncomeToggle: function () {
 
 
@@ -766,13 +815,12 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             this.atSourceMethodButton().click();
         },
         clickYesOnRateMethodModal: function () {
-
             var rateMethodModalYesButton;
-            rateMethodModalYesButton = element(by.css(".modal-footer>.btn-primary"));
-
+            browser.wait(ExpectedConditions.elementToBeClickable(element(by.css(".modal-footer>.btn.btn-primary"))));
+            rateMethodModalYesButton = element(by.css(".modal-footer>.btn.btn-primary"));
             rateMethodModalYesButton.click();
-
         },
+
         clickLastOnReceiptFromCoverMechanical: function () {
 
             this.lastSetOnReceiptFromCoverMechanical().click();
@@ -933,6 +981,22 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             this.onReceiptMethodButtonOnPrevailingPopup().click();
         },
 
+        fillIntoTheInterCompanyRateInputField: function () {
+            var number = Math.floor(Math.random() * 80) + 1;
+            pages.royaltyRates.elems.interCompanyInputField.click();
+            pages.royaltyRates.elems.interCompanyInputField.clear();
+            pages.royaltyRates.elems.interCompanyInputField.sendKeys(number);
+        },
+
+        selectFromInterCompanyRateRandomValueDropDown: function () {
+            pages.royaltyRates.elems.interCompanyArrow.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.scr-ul li.sor-li.ng-scope"))));
+            browser.driver.findElements(By.css("ul.scr-ul li.sor-li.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
 
         confirmTheOverrideRRModalDialog: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.elems.overrideModalDialog));

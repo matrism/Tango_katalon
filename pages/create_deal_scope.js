@@ -33,6 +33,8 @@ if (pages.create_deal_scope === undefined) {
             subtotalOwnPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
             chainTotalOwnPublisherShareErrorMessage: {css: "#deal-publisher  ul[role='alert'] li[data-ng-show='pubShareSetForm.$error.scopeOwnTotal']"},
             chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
+            yesSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(1)"},
+            noSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)"},
             modalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
@@ -57,9 +59,8 @@ if (pages.create_deal_scope === undefined) {
             deSelectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.removeAllAvailableContractPeriods()']"}
         },
 
-        addContractPeriodIcon:function()
-        {
-          return $$(".column-add-button-icon").first();
+        addContractPeriodIcon: function () {
+            return $$(".column-add-button-icon").first();
 
         },
         addContractPeriodButton:function()
@@ -133,16 +134,16 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.territoryInput.sendKeys("a");
         },
 
-        territoryOfControlSearchResultLabels: function() {
-            var selector = '.tg-typeahead__suggestions-group-item';
-            browser.wait(ExpectedConditions.visibilityOf($(selector)));
-            return $$(selector);
+        addTheSpecificTerritoryByTypingToScope: function (territory) {
+            pages.create_deal_scope.elems.territoryField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryInput));
+            pages.create_deal_scope.elems.territoryInput.sendKeys(territory);
         },
 
-        selectTerritoryOfControlSearchResultByIndex: function(i) {
-            var element = pages.create_deal_scope.territoryOfControlSearchResultLabels().get(i);
-            pages.base.scrollIntoView(element);
-            return element.click();
+        addTheSpecificTerritoryOverridePssByTypingToScope: function (territory) {
+            pages.create_deal_scope.elems.territoryOverridePssField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryOverridePssFieldInput));
+            pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys(territory);
         },
 
         selectRandomCountry: function () {
@@ -268,84 +269,8 @@ if (pages.create_deal_scope === undefined) {
         },
 
         clickOnAddPublisherShareSetLink: function () {
-            var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
-
-            pages.base.scrollIntoView(element);
-
-            return element.click().then(function() {
-                return browser.wait(ExpectedConditions.visibilityOf(
-                    pages.create_deal_scope.elems.firstPublisherNameField
-                ));
-            });
-        },
-
-        publisherShareChainContainers: function() {
-            return element.all(
-                by.repeater('chain in modularEditModels.model._chains track by chain.id')
-            );
-        },
-
-        publisherShareRows: function(i) {
-            return (
-                pages.create_deal_scope.publisherShareChainContainers().get(i)
-                    .$$('.publisher-row, .am-share').filter(function(element) {
-                        return element.isDisplayed();
-                    })
-            );
-        },
-
-        publisherSearchTermsInput: function(i, j) {
-            return (
-                pages.create_deal_scope.publisherShareRows(i)
-                    .get(j).$('[name="acquirer"] input')
-            );
-        },
-
-        enterPublisherSearchTerms: function(i, j, value) {
-            var element = pages.create_deal_scope.publisherSearchTermsInput(i, j);
-            pages.base.scrollIntoView(element);
-            element.clear();
-            return element.sendKeys(value);
-        },
-
-        publisherSearchResultLabels: function() {
-            var selector = '.tg-typeahead__suggestions-group-item';
-            browser.wait(ExpectedConditions.visibilityOf($(selector)));
-            return $$(selector);
-        },
-
-        selectPublisherSearchResultByIndex: function(i) {
-            var element = pages.create_deal_scope.publisherSearchResultLabels().get(i);
-            pages.base.scrollIntoView(element);
-            return element.click();
-        },
-
-        ownPublisherShareInput: function(i, j) {
-            return (
-                pages.create_deal_scope.publisherShareRows(i)
-                    .get(j).$('[name="ownShare"]')
-            );
-        },
-
-        enterOwnPublisherShare: function(i, j, value) {
-            var element = pages.create_deal_scope.ownPublisherShareInput(i, j);
-            pages.base.scrollIntoView(element);
-            element.clear();
-            return element.sendKeys(value);
-        },
-
-        collectPublisherShareInput: function(i, j) {
-            return (
-                pages.create_deal_scope.publisherShareRows(i)
-                    .get(j).$('[name="collectShare"]')
-            );
-        },
-
-        enterCollectPublisherShare: function(i, j, value) {
-            var element = pages.create_deal_scope.collectPublisherShareInput(i, j);
-            pages.base.scrollIntoView(element);
-            element.clear();
-            return element.sendKeys(value);
+            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
         },
 
         fillInFirstPublisherNameField: function (publisherName) {
@@ -526,6 +451,14 @@ if (pages.create_deal_scope === undefined) {
             element.sendKeys("wb music corp");
         },
 
+        clickOnTheYesSocietyAwardCreditPublisherShareSet: function(){
+          pages.create_deal_scope.elems.yesSocietyAwardCreditPss.click();
+        },
+
+        clickOnTheNoSocietyAwardCreditPublisherShareSet: function(){
+            pages.create_deal_scope.elems.noSocietyAwardCreditPss.click();
+        },
+
         selectRandomPublisherNameDropDownChainI: function (i) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
@@ -535,17 +468,8 @@ if (pages.create_deal_scope === undefined) {
                 })
         },
 
-        clickNewContractPeriodButton:function()
-        {
-
-      //      browser.actions().mouseMove(this.addContractPeriodIcon).perform();
-
-       //     browser.wait(ExpectedConditions.visibilityOf(this.addContractPeriodButton()));
+        clickNewContractPeriodButton: function () {
             this.addContractPeriodIcon().click();
-
-
-
-
         },
 
         selectSpecificPublisherNameDropDownChainI: function (publisherName, i) {

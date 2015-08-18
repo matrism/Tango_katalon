@@ -41,7 +41,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ['deal_pss' ,'broken'],
+    commonFeatureTags: ["deal_pss"],
     feature: feature,
     beforeFeature: beforeFeature
 };
