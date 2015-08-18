@@ -146,6 +146,18 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys(territory);
         },
 
+        territoryOfControlSearchResultLabels: function() {
+            var selector = '.tg-typeahead__suggestions-group-item';
+            browser.wait(ExpectedConditions.visibilityOf($(selector)));
+            return $$(selector);
+        },
+
+        selectTerritoryOfControlSearchResultByIndex: function(i) {
+            var element = pages.create_deal_scope.territoryOfControlSearchResultLabels().get(i);
+            pages.base.scrollIntoView(element);
+            return element.click();
+        },
+
         selectRandomCountry: function () {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
@@ -269,8 +281,84 @@ if (pages.create_deal_scope === undefined) {
         },
 
         clickOnAddPublisherShareSetLink: function () {
-            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
+            var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
+
+            pages.base.scrollIntoView(element);
+
+            return element.click().then(function() {
+                return browser.wait(ExpectedConditions.visibilityOf(
+                    pages.create_deal_scope.elems.firstPublisherNameField
+                ));
+            });
+        },
+
+        publisherShareChainContainers: function() {
+            return element.all(
+                by.repeater('chain in modularEditModels.model._chains track by chain.id')
+            );
+        },
+
+        publisherShareRows: function(i) {
+            return (
+                pages.create_deal_scope.publisherShareChainContainers().get(i)
+                    .$$('.publisher-row, .am-share').filter(function(element) {
+                        return element.isDisplayed();
+                    })
+            );
+        },
+
+        publisherSearchTermsInput: function(i, j) {
+            return (
+                pages.create_deal_scope.publisherShareRows(i)
+                    .get(j).$('[name="acquirer"] input')
+            );
+        },
+
+        enterPublisherSearchTerms: function(i, j, value) {
+            var element = pages.create_deal_scope.publisherSearchTermsInput(i, j);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        },
+
+        publisherSearchResultLabels: function() {
+            var selector = '.tg-typeahead__suggestions-group-item';
+            browser.wait(ExpectedConditions.visibilityOf($(selector)));
+            return $$(selector);
+        },
+
+        selectPublisherSearchResultByIndex: function(i) {
+            var element = pages.create_deal_scope.publisherSearchResultLabels().get(i);
+            pages.base.scrollIntoView(element);
+            return element.click();
+        },
+
+        ownPublisherShareInput: function(i, j) {
+            return (
+                pages.create_deal_scope.publisherShareRows(i)
+                    .get(j).$('[name="ownShare"]')
+            );
+        },
+
+        enterOwnPublisherShare: function(i, j, value) {
+            var element = pages.create_deal_scope.ownPublisherShareInput(i, j);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        },
+
+        collectPublisherShareInput: function(i, j) {
+            return (
+                pages.create_deal_scope.publisherShareRows(i)
+                    .get(j).$('[name="collectShare"]')
+            );
+        },
+
+        enterCollectPublisherShare: function(i, j, value) {
+            var element = pages.create_deal_scope.collectPublisherShareInput(i, j);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
         },
 
         fillInFirstPublisherNameField: function (publisherName) {

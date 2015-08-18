@@ -16,7 +16,6 @@ require(steps_path + "edit_deal_scope");
 require(steps_path + "login");
 require(steps_path + "base");
 require(pages_path + "royaltyRates");
-require(steps_path + "royaltyRates");
 
 
 var beforeFeature = function () {

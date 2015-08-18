@@ -70,6 +70,12 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        selectTerritoryOfControlSearchResultByIndex: function(i) {
+            it('Select territory of control search result #' + (i + 1), function() {
+                pages.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(i);
+            });
+        },
+
         addSpecificScopeTypeAndTerritory: function (contractType, territory) {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
