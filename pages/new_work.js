@@ -263,6 +263,9 @@ module.exports.deliveryDayInput = function() {
 module.exports.includeWorkOnWebsiteButtons = function() {
 	return element.all(by.model("work.include_on_website"));
 };
+module.exports.continueToNextTabButton = function() {
+    return $('.page-footer').element(by.cssContainingText('button', 'Continue'));
+};
 module.exports.saveWorkButton = function() {
 	return $(".page-footer [type='submit']:nth-child(4):not(.disabled)");
 };
@@ -661,4 +664,7 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 	element = elements.get(elementIndex);
 	pages.base.scrollIntoView(element);
 	element.click();
+};
+exports.continueToNextTab = function() {
+    return exports.continueToNextTabButton().click();
 };

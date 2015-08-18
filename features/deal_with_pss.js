@@ -23,7 +23,7 @@ var beforeFeature = function () {
 
     feature = [{
         name: "Create a deal with publisher share set",
-        tags: ["create_deal_pss_multiple_chains_delete_chain"],
+        tags: ["create_deal_pss"],
         steps: function () {
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();

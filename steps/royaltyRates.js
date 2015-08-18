@@ -12,10 +12,7 @@ if (steps.royaltyRates === undefined) {
 
 
         addNewRoyaltySet: function () {
-
-
-            it("Add new Royalty Rate Set", function () {
-
+           it("Add new Royalty Rate Set", function () {
                     pages.royaltyRates.clickNewRoyaltySetButton();
                 }
             );
@@ -310,32 +307,6 @@ if (steps.royaltyRates === undefined) {
 
         },
 
-        addRateBalanceToContractualField: function (percentage) {
-            it("Add Balance to Contractual Rate Field", function () {
-
-
-                pages.royaltyRates.typeIntoContractualRateInput(percentage);
-
-                    pages.royaltyRates.addPercentageToContractualRateInput();
-
-
-
-
-            });
-        },
-        overrideCoverMechanicalInterCompanyRate: function (percentage) {
-
-            it("Override Cover Mechanical Inter Company Rate with "+ percentage + " % value", function () {
-                pages.royaltyRates.typeIntoCoverMechanicalInterCompanyRateInput(percentage);
-                pages.royaltyRates.waitForInputLoaderToAppear();
-                //pages.royaltyRates.waitForInputLoaderToDissapear();
-            })
-        },
-        setInterCompanyRateToDefault: function () {
-          it("Set Inter Company Rate To Default", function () {
-              pages.royaltyRates.getInterCompanyRateToDefaultState();
-          })
-        },
         addNPSToContractualField: function (percentage) {
             it("Add NPS to Contractual Rate Field", function () {
 
@@ -384,21 +355,21 @@ if (steps.royaltyRates === undefined) {
             });
         },
         changeCoverMechanicalLastRateApplicationMethodToOnReceipt: function () {
-            it("Change Cover Mechanical Last Rate App Method to On Receipt", function () {
-                pages.royaltyRates.clickLastOnReceiptFromCoverMechanical();
-            })
+          it("Change Cover Mechanical Last Rate App Method to On Receipt", function () {
+              pages.royaltyRates.clickLastOnReceiptFromCoverMechanical();
+          })
 
         },
         checkPrevailingPopupIsPresent: function () {
-            it("Check that Prevailing Popup is Displayed", function () {
-                expect(pages.royaltyRates.prevailingPopupIsDisplayed()).toBeTruthy();
-            })
+           it("Check that Prevailing Popup is Displayed", function () {
+              expect(pages.royaltyRates.prevailingPopupIsDisplayed()).toBeTruthy();
+           })
         },
         selectOnReceiptMethodInPrevailingPopup: function () {
-            it("Click Receipt Method on Prevailing Method Popup", function () {
+          it("Click Receipt Method on Prevailing Method Popup", function () {
 
-                pages.royaltyRates.clickOnReceiptMethodOnPrevailingPopup();
-            })
+              pages.royaltyRates.clickOnReceiptMethodOnPrevailingPopup();
+          })
 
         },
         closeAllRRButTheLast: function () {
@@ -466,17 +437,16 @@ if (steps.royaltyRates === undefined) {
             it("Save current Rate Set", function () {
 
                 pages.royaltyRates.clickDoneButtonForRRSet();
-                // pages.royaltyRates.waitForRRToBeSaved();
+                pages.royaltyRates.waitForAjax();
+                 //pages.royaltyRates.waitForRRToBeSaved();
             });
         },
-
         waitForRateSetToBeSaved: function () {
-            it("Wait for RR To Be Saved", function () {
-                pages.royaltyRates.waitForLoadToAppear();
-                pages.royaltyRates.waitForLoadToFinish();
-            })
+          it("Wait for RR To Be Saved", function () {
+              pages.royaltyRates.waitForLoadToAppear();
+              pages.royaltyRates.waitForLoadToFinish();
+          })
         },
-
         closeRateSet: function () {
             it("Close current Rate Set ", function () {
 
@@ -604,7 +574,7 @@ if (steps.royaltyRates === undefined) {
                         });
                     })
                     .then(function () {
-                        //  console.log(JSON.stringify(rateSetGroupsList, null, 4));
+                     //  console.log(JSON.stringify(rateSetGroupsList, null, 4));
                         royaltyRate.rateSetGroupsList = rateSetGroupsList;
                     });
 
@@ -911,46 +881,6 @@ if (steps.royaltyRates === undefined) {
                 pages.royaltyRates.clickSavePublisherSharesButton();
             })
         },
-        deleteLastAddedPayout: function () {
-            it("Delete Last Added Payout", function () {
-
-                pages.royaltyRates.deletePayoutNumberLast();
-            })
-        },
-        verifyBalancePresentOnlyOnce: function () {
-
-            it("Check that Balance is Present only Once", function () {
-                expect(pages.royaltyRates.getAllRateSetsCount()).toBe(47);
-            })
-        },
-        removeAllContractualRates: function () {
-          
-            it("Remove all contractual Rates", function () {
-                pages.royaltyRates.pressRemoveAllRatesButton();
-            })
-        },
-        lastPayoutDeterminesIC: function (value) {
-
-            it("Set Last Payout Inter Company Rates to "+value, function () {
-                if(value == "NO")
-                    pages.royaltyRates.setLastPayoutICtoNo();
-            });
-
-
-        },
-        verifyICRateIs: function (value) {
-            it("Check that Inter Company Rate equals "+value, function () {
-                expect(pages.royaltyRates.getICValue()).toBe(value);
-            });
-
-
-        },
-        checkNoIncomeRatesPresent: function () {
-            it("Verify that no Income Rates Are added", function () {
-                expect(pages.royaltyRates.getAllRateSetsCount()).toBe(0);
-            });
-
-        },
 
 
         pause: function () {
@@ -1045,6 +975,13 @@ if (steps.royaltyRates === undefined) {
             });
         },
 
+        overrideRoyaltyRateSetNumberI: function (i) {
+          it("Override rate set with rate number i ", function(){
+             pages.royaltyRates.overrideTheRoyaltyRateSetNumberI(i);
+              pages.royaltyRates.waitForAjax();
+          });
+        },
+
         pauseTest: function () {
 
 
@@ -1056,7 +993,6 @@ if (steps.royaltyRates === undefined) {
         }
 
 
-    }
+    };
 }
 
-module.exports = steps.royaltyRates;

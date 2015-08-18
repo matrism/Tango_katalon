@@ -197,13 +197,13 @@ if (steps.finder_deal === undefined) {
 
 
         fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
-            it("Fill into maximum found agreements", function () {
+            it("Fill into maximum found agreements without pre approval", function () {
                 pages.finder_deal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
             });
         },
 
         fillMaximumFoundAgreementWithPreApprovalContractPeriodI: function () {
-            it("Fill into maximum found agreement with pre approval contract period i ", function () {
+            it("Fill into maximum found agreement with pre approval contract period  ", function () {
                 pages.finder_deal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI();
             });
         },

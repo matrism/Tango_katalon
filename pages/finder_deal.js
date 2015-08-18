@@ -272,19 +272,21 @@ if (pages.finder_deal === undefined) {
 
         clickOnContractPeriodNumberIDetailsTermsByContractPeriod: function (i) {
             browser.driver.findElement(By.css("div[data-ng-class='{ active : form.show.finderDeal.edit }'] div.form-horizontal.relative ul.nav.nav-tabs li:nth-child(" + i + ")")).click();
+
         },
 
         clickOnContractPeriodNumberIDetailsTermsByContractPeriodViewMode: function (i) {
             browser.driver.findElement(By.css("div[data-ng-show='form.show.finderDeal.detail'] ul.nav.nav-tabs li:nth-child(" + i + ")")).click();
         },
 
-        fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function () {
+
+        fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI: function (i) {
             var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval.clear();
             pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApproval.sendKeys(number);
         },
 
-        fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI: function () {
+        fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI: function (i) {
             var number = Math.floor(Math.random() * 1000) + 1;
             pages.finder_deal.elems.maximumFoundAgreementsWithPreApproval.clear();
             pages.finder_deal.elems.maximumFoundAgreementsWithPreApproval.sendKeys(number);
@@ -439,6 +441,7 @@ if (pages.finder_deal === undefined) {
         },
 
         confirmCancelChangesModalDialog: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.yesCancelChangesModalDialog));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.finder_deal.elems.yesCancelChangesModalDialog));
             pages.finder_deal.elems.yesCancelChangesModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.finder_deal.elems.yesCancelChangesModalDialog));
@@ -458,17 +461,17 @@ if (pages.finder_deal === undefined) {
                 });
         },
 
-        clickOnTheFoundDealTermsTitle: function(){
+        clickOnTheFoundDealTermsTitle: function () {
             pages.finder_deal.elems.foundDealTermsTitle.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApprovalValue));
         },
 
-        clickOnTheOwnershipTermsTitle: function(){
+        clickOnTheOwnershipTermsTitle: function () {
             pages.finder_deal.elems.ownershiptTermsTitle.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.aggregateMaximumOnAdvancesValue));
         },
 
-        clickOnTheFoundSubmissionsTitle: function(){
+        clickOnTheFoundSubmissionsTitle: function () {
             pages.finder_deal.elems.foundSubmissionsTitle.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.finder_deal.elems.creatorFoundSubmissionValue));
         }

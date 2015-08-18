@@ -16,7 +16,6 @@ if (pages.deal === undefined) {
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm'] h3"}
-    
         },
 
 
@@ -40,20 +39,6 @@ if (pages.deal === undefined) {
 
             return $$(".text-error").last();
         },
-        scopeheaderMenu: function () {
-            return $(" .scope-heading>div>.hover-menu>i")
-        },
-        copyScopeOption: function () {
-            return $('.scope-heading>div>.hover-menu>.menu-content>[data-tooltip="Copy entirety of this Scope."]');
-        },
-        numberOfCopiesInput: function () {
-
-            return $(".scope-heading+.form-horizontal>.control-group>.controls>input")
-        },
-        copyScopeButton: function () {
-            return $('.scope-heading+.form-horizontal>.CONTROLS >[type="submit"]');
-        },
-
 
         warnerLogo: function () {
             return element(by.css("#DSP-LOGO"));
@@ -86,24 +71,25 @@ if (pages.deal === undefined) {
         goToTermsDealDetails: function () {
             pages.deal.elems.termsHeader.click();
         },
+
+        goToFinderDealTerms: function () {
+            pages.deal.elems.finderDealsHeaderLink.click();
+        },
+
         clickIncomeRatesLink: function () {
+
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
             pages.deal.elems.incomeRates.click();
 
 
         },
-        
-        goToFinderDealTerms: function () {
-            pages.deal.elems.finderDealsHeaderLink.click();
-        },
-        
+
         clickScopeHeader: function () {
 
 
             pages.base.waitForAjax();
 
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
-
 
 
             pages.deal.scopeHeaderElement().click();

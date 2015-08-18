@@ -1,71 +1,121 @@
-"use strict";
-var path = require("path"),
-    moment,
-    ScreenShotReporter, config, SSReporter_instance;
+'use strict';
 
-moment = require('moment');
-global.ftf = require("../vendor/factory-testing-framework");
-global._tf_config = require("./config");
-ScreenShotReporter = ftf.htmlReporter;
-SSReporter_instance = new ScreenShotReporter({
-    baseDirectory: "reports/html/" + moment().format("YYYY-MM-DD HH-mm-ss"),
-});
+var path = require('path'),
+    mkdirp = require ('mkdirp'),
+    moment = require('moment'),
+    now = moment().format('YYYY-MM-DD HH-mm-ss'),
+    screenShotPath,
+    config,
+    systemConfig,
+    ScreenShotReporter,
+    SSReporter_instance;
 
+global.ftf = require('factory-testing-framework');
+global._tf_config = require('./config');
 global.pages = {};
 global.steps = {};
 global.hash = {};
 
-require("../helpers/services_helper");
+require('../helpers/services_helper');
+
+systemConfig = global._tf_config._system_;
+ScreenShotReporter = global.ftf.htmlReporter;
+
+if (!systemConfig.noReport) {
+    screenShotPath = path.join(__dirname, '../reports/html/');
+
+    if(systemConfig.singleReport) {
+        screenShotPath = path.join(screenShotPath, 'single/');
+    }
+    else {
+        screenShotPath = path.join(screenShotPath, now);
+    }
+
+    mkdirp(screenShotPath);
+
+    SSReporter_instance = new ScreenShotReporter({
+        baseDirectory: screenShotPath
+    });
+}
 
 config = {
     capabilities: {
-        "browserName": _tf_config._system_.browser, //firefox, ie
-        'chromeOptions': {
+        browserName: global._tf_config._system_.browser, //firefox, ie
+        chromeOptions: {
             args: ['--test-type']
         }
     },
-    specs: ["init.js"],
+    specs: ['init.js'],
     onPrepare: function() {
-        console.time("Tests time");
-        var reporting = _tf_config._system_.reporting;
-        var matchers;
+        console.time('Tests time');
+        var reporting = systemConfig.reporting,
+            pph = require('../helpers/pph'),
+            matchers,
+            browserWait;
+
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
-        if (_tf_config._system_.resolution.width && _tf_config._system_.resolution.height)
-            browser.driver.manage().window().setSize(_tf_config._system_.resolution.width, _tf_config._system_.resolution.height);
+        browserWait = browser.wait;
+        browser.wait = function(testFn, timeout) {
+            if(timeout === undefined) {
+                timeout = systemConfig.wait_timeout;
+            }
 
-        if (reporting === "xml" || reporting === "all") {
-            require("jasmine-reporters");
+            browserWait.call(browser, testFn, timeout);
+        };
+
+        if (systemConfig.resolution.width && systemConfig.resolution.height) {
+            browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+        }
+
+        if (reporting === 'xml' || reporting === 'all') {
+            require('jasmine-reporters');
             jasmine.getEnv().addReporter(
-                new jasmine.JUnitXmlReporter("reports/xml", true, true)
+                new jasmine.JUnitXmlReporter('reports/xml', true, true)
             );
         }
 
-        if (reporting === "html" || reporting === "all") {
+        if (SSReporter_instance && (reporting === 'html' || reporting === 'all')) {
             jasmine.getEnv().addReporter(SSReporter_instance);
         }
 
-        if (typeof process.env.__using_grunt === "undefined") {
-            var spawn = require('child_process').spawn
-            var child = spawn("bash", ["grunt","clearReports"]);
+        if (typeof process.env.__using_grunt === 'undefined') {
+//            var spawn = require('child_process').spawn;
+//            var child = spawn('bash', ['grunt','clearReports']);
 //            child.stdout.on('data', function (data) { console.log(data.toString()); });
 //            child.stderr.on('data', function (data) { console.log(data.toString()); });
 //            child.on('error', function() { console.log(arguments); });
         }
-        matchers = new ftf.matchers();
-        jasmine.Matchers.prototype.shouldBePresent = matchers.create("ShouldBePresent");
+        matchers = new global.ftf.matchers();
+        jasmine.Matchers.prototype.shouldBePresent = matchers.create('ShouldBePresent');
+
+        protractor.ExpectedConditions.presenceOfAny = function (elems) {
+            return function () {
+                return elems.count();
+            };
+        };
+
+        protractor.ExpectedConditions.visibilityOfAny = function (elems) {
+            return function () {
+                return protractor.ExpectedConditions.presenceOfAny(elems)().then(function (count) {
+                    return count && pph.arraySome(elems, function(element){
+                        return protractor.ExpectedConditions.visibilityOf(element)
+                    });
+                });
+            };
+        };
 
     },
     onCleanUp: function(statusCode) {
-        if (typeof process.env.__using_grunt === "undefined") {
+        if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
             try {
                 SSReporter_instance.compileReport();
             } catch(e) {
-                console.error("Error on compileReport", e.stack);
+                console.error('Error on compileReport', e.stack);
             }
         }
-        console.log("Finished with code:", statusCode);
-        console.timeEnd("Tests time");
+        console.log('Finished with code:', statusCode);
+        console.timeEnd('Tests time');
     },
     jasmineNodeOpts: {
         showColors: true,
@@ -73,12 +123,11 @@ config = {
     }
 };
 
-if(_tf_config._system_.seleniumAddress) {
-    config.seleniumAddress = _tf_config._system_.seleniumAddress;
+if (systemConfig.seleniumAddress) {
+    config.seleniumAddress = systemConfig.seleniumAddress;
 }
 else {
-    config.directConnect = true;
-    config.chromeDriver = '../node_modules/protractor/selenium/chromedriver';
+    config.directConnect = systemConfig.directConnect;
 }
 
 exports.config = config;

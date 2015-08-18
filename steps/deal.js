@@ -40,18 +40,6 @@ if (steps.deal === undefined) {
 
 
         },
-        copyScope: function (numberOfCopies) {
-
-            it("Create "+numberOfCopies+ " copies of scope",function() {
-                pages.deal.clickScopeHeaderMenu();
-                pages.deal.selectCopyScopeOption();
-                pages.deal.inputNumberOfScopeCopies(numberOfCopies);
-                pages.deal.pressCopyScopeButton();
-
-
-
-            });
-        },
         clickLastScopeHeader:function()
         {
             it("Click the last scope header",function(){
@@ -80,6 +68,16 @@ if (steps.deal === undefined) {
                     then(function (promise) {
                         console.log("Deal number is: " + promise);
                     });
+            });
+        },
+
+        findId: function() {
+            it('Find deal ID', function () {
+                var idBinding = element(By.xpath('//*[@id="RECORD-HEADER"]//div/div/div[6]/div/p[@class="info ng-binding"]'));
+
+                idBinding.getText().then(function(value) {
+                    hash.currentEntityDataSlotsByType.deal.id = value;
+                });
             });
         },
 

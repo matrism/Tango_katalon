@@ -20,7 +20,7 @@ var beforeFeature = [
     }];
 
 module.exports = {
-    commonFeatureTags: ["login"],
+    commonFeatureTags: ['login', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };

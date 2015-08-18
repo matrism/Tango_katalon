@@ -15,6 +15,68 @@ if (steps.edit_deal_scope === undefined) {
             });
         },
 
+        selectScopeNumberI: function (i) {
+            it("Select scope number  " + i, function () {
+                pages.edit_deal_scope.clickOnScopeNumberI(i);
+                pages.edit_deal_scope.waitForAjax();
+            });
+        },
+
+        validateShareScopesPopupDetailsContractPeriod1: function () {
+            it("Validate share scopes pop up details contract period 1 ", function () {
+                pages.edit_deal_scope.clickOnShareIconOnScope();
+                pages.edit_deal_scope.elems.shareScopesDetailsPopup.getText().
+                    then(function (promise) {
+                        console.log("Shares scopes details popup contract periods: " + promise);
+                        expect(promise).toContain("Description 2");
+                        expect(promise).toContain("Description 3");
+                        expect(promise).toContain("Description 4");
+                    });
+            });
+        },
+
+        validateShareScopesPopupDetailsContractPeriod2: function () {
+            it("Validate share scopes pop up details contract period 2 ", function () {
+                pages.edit_deal_scope.clickOnShareIconOnScope();
+
+                pages.edit_deal_scope.elems.shareScopesDetailsPopup.getText().
+                    then(function (promise) {
+                        console.log("Shares scopes details popup contract periods: " + promise);
+                        expect(promise).toContain("Description 1");
+                        expect(promise).toContain("Description 3");
+                        expect(promise).toContain("Description 4");
+                    });
+            });
+        },
+
+        validateShareScopesPopupDetailsContractPeriod3: function () {
+            it("Validate share scopes pop up details contract period 3 ", function () {
+                pages.edit_deal_scope.clickOnShareIconOnScope();
+
+                pages.edit_deal_scope.elems.shareScopesDetailsPopup.getText().
+                    then(function (promise) {
+                        console.log("Shares scopes details popup contract periods: " + promise);
+                        expect(promise).toContain("Description 1");
+                        expect(promise).toContain("Description 2");
+                        expect(promise).toContain("Description 4");
+                    });
+            });
+        },
+
+        validateShareScopesPopupDetailsContractPeriod4: function () {
+            it("Validate share scopes pop up details contract period i ", function () {
+                pages.edit_deal_scope.clickOnShareIconOnScope();
+
+                pages.edit_deal_scope.elems.shareScopesDetailsPopup.getText().
+                    then(function (promise) {
+                        console.log("Shares scopes details popup contract periods: " + promise);
+                        expect(promise).toContain("Description 1");
+                        expect(promise).toContain("Description 2");
+                        expect(promise).toContain("Description 3");
+                    });
+            });
+        },
+
         validatePublisherSharesTitle: function () {
             it("Validate the publisher shares set title ", function () {
                 pages.edit_deal_scope.validateThePublisherSharesTitle();

@@ -9,8 +9,6 @@ require(steps_path + 'login');
 require(steps_path + 'new_work');
 require(steps_path + 'duplicateWorkChecks');
 
-hash.subjectWorkData = {};
-
 var beforeFeature = [
         [steps.login.itLogin]
     ],
@@ -19,6 +17,8 @@ var beforeFeature = [
             name: 'Duplicate shell work check',
             tags: [],
             steps: [
+                [steps.base.useBlankEntityDataSlot, ['work', 0]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(0)]],
                 [steps.new_work.clickCompositeWorkCheckbox],
@@ -32,6 +32,8 @@ var beforeFeature = [
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.base.useBlankEntityDataSlot, ['work', 1]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(1)]],
@@ -63,6 +65,8 @@ var beforeFeature = [
             name: 'Duplicate shell work check: Ignore articles, extra whitespace, and punctuation',
             tags: [],
             steps: [
+                [steps.base.useBlankEntityDataSlot, ['work', 2]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(2)]],
                 [steps.new_work.clickCompositeWorkCheckbox],
@@ -76,6 +80,8 @@ var beforeFeature = [
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.base.useBlankEntityDataSlot, ['work', 3]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.clickCompositeWorkCheckbox],
@@ -105,7 +111,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['duplicate-shell-work-checks'],
+    commonFeatureTags: ['duplicate-shell-work-checks', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };

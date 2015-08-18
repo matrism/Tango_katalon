@@ -35,7 +35,7 @@ var beforeFeature = function () {
 
     feature = [{
         name: "As a user I want to assign single rate to Scope on creation",
-        tags: ["rateToScope1"],
+        tags: ['rateToScope1'],
         steps: function () {
 
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -64,7 +64,7 @@ var beforeFeature = function () {
     },
         {
             name: "As a user I want to edit single rate from Scope ",
-            tags: ["rateToScopeEdit"],
+            tags: ['rateToScopeEdit', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -118,7 +118,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to edit multiple  rate from Scope ",
-            tags: ["rateToScopeEdit2"],
+            tags: ['rateToScopeEdit2', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -181,7 +181,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to dirty check  single rate edit from Scope ",
-            tags: ["dirtyCheckRR1"],
+            tags: ['dirtyCheckRR1', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -236,7 +236,7 @@ var beforeFeature = function () {
         },
         {
             name: "As a user I want to dirty check  multiple  rate edit from Scope ",
-            tags: ["dirtyCheckRR2"],
+            tags: ['dirtyCheckRR2', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -301,7 +301,7 @@ var beforeFeature = function () {
         },
         {
             name: "As a user I want to dirty check  single rate edit from Scope by navigating away",
-            tags: ["dirtyCheckRR3"],
+            tags: ['dirtyCheckRR3', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -363,7 +363,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to dirty check  multiple rate edit from Scope by navigating away",
-            tags: ["dirtyCheckRR4"],
+            tags: ['dirtyCheckRR4', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -442,7 +442,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to assign multiple rates to Scope on creation",
-            tags: ["ratesToScope2"],
+            tags: ['ratesToScope2', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -490,7 +490,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to validate decimal places on create",
-            tags: ["decimal"],
+            tags: ['decimal', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -518,7 +518,7 @@ var beforeFeature = function () {
         },
         {
             name: "As a user I want to validate decimal places on create",
-            tags: ["decimalEdit"],
+            tags: ['decimalEdit', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -549,7 +549,7 @@ var beforeFeature = function () {
 
         //DIRTY CHECK FEATURES
         {   name: "As a User I want to perform Dirty Check on RR Edit Pages",
-            tags: ["dirtyRRCheck5"],
+            tags: ['dirtyRRCheck5', 'broken'],
             steps:function()
             {
 
@@ -614,7 +614,7 @@ var beforeFeature = function () {
         },
 
         {   name: "As a User I want to perform Dirty Check (by navigating)  on RR Edit Pages",
-            tags: ["dirtyRRCheck6"],
+            tags: ['dirtyRRCheck6', 'broken'],
             steps: function()
             {
 
@@ -689,7 +689,7 @@ var beforeFeature = function () {
 
         {
             name:"test input fields",
-            tags:["inputsTest"],
+            tags:['inputsTest', 'broken'],
             steps:function()
             {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -712,7 +712,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["royalty"],
+    commonFeatureTags: ['royalty'],
     feature: feature,
     beforeFeature: beforeFeature
 };

@@ -135,7 +135,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["edit_existing_deal_royalty"],
+    commonFeatureTags: ['edit_existing_deal_royalty', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };

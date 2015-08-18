@@ -10,6 +10,12 @@ require(steps_path + "deal");
 if (steps.create_deal_scope === undefined) {
     steps.create_deal_scope = {
 
+        openNewScopeForm: function() {
+            it('Open a new scope form', function() {
+                pages.create_deal_scope.addScopeForm();
+            });
+        },
+
         addSimpleScope: function () {
             it("Add simple scope", function () {
                 pages.create_deal_scope.addScopeForm();
@@ -18,14 +24,12 @@ if (steps.create_deal_scope === undefined) {
                 pages.create_deal_scope.addTerritoryByTypingToScope();
             });
         },
+
         itAddNewContractPeriod: function () {
 
             it("Add new contract Period", function () {
-
                 pages.create_deal_scope.clickNewContractPeriodButton();
                 //   pages.create_deal_scope.waitForContractPeriodToBeCreated();
-
-
             })
 
         },
@@ -33,7 +37,19 @@ if (steps.create_deal_scope === undefined) {
         sharePublisherShareSet: function () {
             it("Share publisher share set ", function () {
                 pages.create_deal_scope.shareThePublisherShareSet();
+            });
+        },
+
+        saveSharePublisherShareSet: function () {
+            it("Save the share publisher share set ", function () {
                 pages.create_deal_scope.saveThePublisherShareSets();
+                pages.create_deal_scope.waitForAjax();
+            });
+        },
+
+        selectContractType: function(value) {
+            it('Select contract type (' + value + ')', function() {
+                pages.create_deal_scope.selectContractTypeScope(value);
             });
         },
 
@@ -48,6 +64,17 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        enterTerritoryOfControlSearchTerms: function(value) {
+            it('Enter territory of control search terms (' + value + ')', function() {
+               pages.create_deal_scope.enterTerritoryOfControlSearchTerms(value);
+            });
+        },
+
+        selectTerritoryOfControlSearchResultByIndex: function(i) {
+            it('Select territory of control search result #' + (i + 1), function() {
+                pages.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(i);
+            });
+        },
 
         addSpecificScopeTypeAndTerritory: function (contractType, territory) {
             it("Add simple scope", function () {
@@ -162,9 +189,24 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        enterPublisherSearchTerms: function(i, j, value) {
+            it(
+                'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
+                ' - Enter search terms (' + value + ')', function() {
+                    pages.create_deal_scope.enterPublisherSearchTerms(i, j, value);
+                }
+            );
+        },
+
         fillIntoFirstPublisherNameField: function (publisherName) {
             it("Fill in first publisher name field", function () {
                 pages.create_deal_scope.fillInFirstPublisherNameField(publisherName);
+            });
+        },
+
+        selectPublisherSearchResultByIndex: function(i) {
+            it('Select publisher search result #' + (i + 1), function() {
+                pages.create_deal_scope.selectPublisherSearchResultByIndex(i);
             });
         },
 
@@ -172,6 +214,24 @@ if (steps.create_deal_scope === undefined) {
             it("Select random publisher name drop down value", function () {
                 pages.create_deal_scope.selectRandomPublisherNameDropDown();
             });
+        },
+
+        enterOwnPublisherShare: function(i, j, value) {
+            it(
+                'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
+                ' - Enter own publisher share (' + value + ')', function() {
+                    pages.create_deal_scope.enterOwnPublisherShare(i, j, value);
+                }
+            );
+        },
+
+        enterCollectPublisherShare: function(i, j, value) {
+            it(
+                'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
+                ' - Enter collect publisher share (' + value + ')', function() {
+                    pages.create_deal_scope.enterCollectPublisherShare(i, j, value);
+                }
+            );
         },
 
         fillIntoFirstPublisherNameCollectField: function () {
@@ -294,6 +354,15 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        shareScopeToAllContractPeriods: function () {
+            it("Click on share scope ", function () {
+                pages.create_deal_scope.shareTheScope();
+                pages.create_deal_scope.selectAllContractPeriodsShareScopeModalDialog();
+                pages.create_deal_scope.clickOnTheDoneShareScopeModalDialog();
+                pages.create_deal_scope.waitForAjax();
+            });
+        },
+
         clickAddChainLink: function () {
             it("Click on add chain link", function () {
                 pages.create_deal_scope.clickOnAddChainLink();
@@ -388,7 +457,8 @@ if (steps.create_deal_scope === undefined) {
 
         selectSubPublisherOverrideTerritoryPss: function (territory) {
             it("Select the sub publisher override territory pss ", function () {
-                pages.create_deal_scope.selectTheSubPublisherOverrideTerritoryPss(territory);;
+                pages.create_deal_scope.selectTheSubPublisherOverrideTerritoryPss(territory);
+                ;
             });
         },
 
@@ -438,12 +508,10 @@ if (steps.create_deal_scope === undefined) {
                 steps.create_deal_scope.clickOnAddOverrideIconPss();
                 steps.create_deal_scope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
                 steps.create_deal_scope.selectSubPublisherOverrideTerritoryPss(territory);
-                browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.doneOverridePublisherShareSetButton));
                 steps.base.scrollIntoView("Done override publisher share set", pages.create_deal_scope.elems.doneOverridePublisherShareSetButton);
                 steps.create_deal_scope.clickOnDoneSubPublisherOverridePss();
             });
         },
-
 
         itAddPublisherSharePATypeWithMultipleThreeChains: function (i) {
             describe("Add publisher share set with three chains", function () {

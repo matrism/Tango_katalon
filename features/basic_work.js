@@ -57,7 +57,7 @@ var feature = [
 ];
 
 module.exports = {
-    commonFeatureTags: ["basic-work"],
+    commonFeatureTags: ['basic-work', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };

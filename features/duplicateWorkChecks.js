@@ -9,8 +9,6 @@ require(steps_path + 'login');
 require(steps_path + 'new_work');
 require(steps_path + 'duplicateWorkChecks');
 
-hash.subjectWorkData = {};
-
 var beforeFeature = [
         [steps.login.itLogin]
     ],
@@ -19,6 +17,8 @@ var beforeFeature = [
             name: 'Duplicate work checks',
             tags: [],
             steps: [
+                [steps.base.useBlankEntityDataSlot, ['work', 0]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectRandomCreator, [0]],
                 [steps.new_work.enterMediumCreatorContribution, [0]],
@@ -30,6 +30,8 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
+                [steps.base.useBlankEntityDataSlot, ['work', 1]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
                 [steps.new_work.enterMaximumCreatorContribution, [0]],
@@ -38,15 +40,7 @@ var beforeFeature = [
                 [steps.duplicateWorkChecks.clickFirstSimilarWorkTitle],
                 [steps.duplicateWorkChecks.validateSimilarWorkLinkDestination],
 
-                [steps.new_work.goToNewWorkPage],
-                [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
-                [steps.new_work.enterMaximumCreatorContribution, [0]],
-                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
-                [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
-                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
-                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
-                [steps.new_work.saveWork],
-                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.useBlankEntityDataSlot, ['work', 2]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
@@ -58,15 +52,7 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
-                [steps.new_work.goToNewWorkPage],
-                [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
-                [steps.new_work.enterMaximumCreatorContribution, [0]],
-                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
-                [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
-                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
-                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
-                [steps.new_work.saveWork],
-                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.useBlankEntityDataSlot, ['work', 3]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
@@ -78,15 +64,7 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
-                [steps.new_work.goToNewWorkPage],
-                [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
-                [steps.new_work.enterMaximumCreatorContribution, [0]],
-                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
-                [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
-                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
-                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
-                [steps.new_work.saveWork],
-                [steps.new_work.validateSaveWorkRedirection],
+                [steps.base.useBlankEntityDataSlot, ['work', 4]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
@@ -97,6 +75,44 @@ var beforeFeature = [
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.base.useBlankEntityDataSlot, ['work', 5]],
+
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
+                [steps.new_work.enterMaximumCreatorContribution, [0]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
+                [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
+                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.base.useBlankEntityDataSlot, ['work', 6]],
+
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
+                [steps.new_work.enterMaximumCreatorContribution, [0]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
+                [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
+                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.base.useBlankEntityDataSlot, ['work', 7]],
+
+                [steps.new_work.goToNewWorkPage],
+                [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
+                [steps.new_work.enterMaximumCreatorContribution, [0]],
+                [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
+                [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
+                [steps.duplicateWorkChecks.ignoreSimilarWorksWarning],
+                [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+                [steps.new_work.saveWork],
+                [steps.new_work.validateSaveWorkRedirection],
+
+                [steps.base.useBlankEntityDataSlot, ['work', 8]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
@@ -104,6 +120,8 @@ var beforeFeature = [
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK WONDERLAND ' + randomId]],
                 [steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed],
                 [steps.duplicateWorkChecks.expectSimilarWorksPopUpToHaveScrollbar],
+
+                [steps.base.useBlankEntityDataSlot, ['work', 9]],
 
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 0]],
@@ -127,6 +145,8 @@ var beforeFeature = [
                 [steps.new_work.saveWork],
                 [steps.new_work.validateSaveWorkRedirection],
 
+                [steps.base.useBlankEntityDataSlot, ['work', 10]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.selectPreviouslySelectedCreator, [0, 1]],
                 [steps.new_work.enterMaximumCreatorContribution, [0]],
@@ -148,7 +168,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['duplicate-work-checks'],
+    commonFeatureTags: ['duplicate-work-checks', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };

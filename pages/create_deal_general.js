@@ -83,6 +83,19 @@ if (pages.create_deal_general === undefined) {
                 })
         },
 
+        contractingPartySearchResultLabels: function() {
+            var selector = '.tg-typeahead__suggestions-group-item';
+            var elements = $$(selector);
+            browser.wait(protractor.ExpectedConditions.visibilityOf($(selector)));
+            return elements;
+        },
+
+        selectContractingPartySearchResultByIndex: function(i) {
+            var element = pages.create_deal_general.contractingPartySearchResultLabels().get(i);
+            pages.base.scrollIntoView(element);
+            return element.click();
+        },
+
         selectContractingPartyValue: function (specific_value) {
             var desiredOption;
             browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
@@ -195,8 +208,8 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillIntoTheWampsContractBriefNumberField: function () {
-            var timestamp = new Date().getUTCMilliseconds();
-            pages.create_deal_general.elems.wampsContractBriefNumberField.sendKeys("W" + timestamp);
+            var time = new Date().getTime();
+            pages.create_deal_general.elems.wampsContractBriefNumberField.sendKeys("W" + time);
         },
 
         fillIntoTheAuditPeriodField: function () {

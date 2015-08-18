@@ -28,7 +28,7 @@ var beforeFeature = function () {
         tags: ["create_finder_deals_validation_tooltip"],
         steps: function () {
             var number = Math.floor(Math.random() * 1000) + 1;
-            var percent = (Math.random() * 100 + 1).toFixed(2);
+            var percent = (Math.random() * 99 + 1).toFixed(2);
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
@@ -325,7 +325,7 @@ var beforeFeature = function () {
                 steps.deal.goToFinderDealTermsTabDetails();
                 steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
                 steps.finder_deal.editTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(3);
+                //steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(3);
                 steps.finder_deal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
                 steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
                 steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
