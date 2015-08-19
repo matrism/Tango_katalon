@@ -93,6 +93,8 @@ if (pages.deal === undefined) {
 
 
             pages.deal.scopeHeaderElement().click();
+            browser.sleep(1000);
+            pages.deal.scopeHeaderElement().click();
         },
 
         errorHeaderIsVisible: function () {

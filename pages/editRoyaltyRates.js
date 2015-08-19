@@ -393,6 +393,42 @@ if (pages.editRoyaltyRates === undefined) {
 
 
             browser.wait(ExpectedConditions.visibilityOf( this.openRRButton()));
+
+
+
+
+          ///  WebElement elementToClick = driver.findElement(By.xpath("Your xpath"));
+            var elementToClick =  this.openRRButton();
+            elementToClick.getLocation().then(function (navLocation) {
+               var initTop = navLocation.y;
+               var  initLeft = navLocation.x;
+                console.log(initLeft);
+                console.log(initTop);
+                    browser.actions()
+                        .mouseMove(elementToClick
+                        , {x: 3, y: 0}
+                    )
+                        .click()
+                        .perform();
+
+            });
+            //var canvas = element(by.id("canvas"));
+            //
+            //elementToClick = function (toRight, toBottom) {
+            //    browser.actions()
+            //        .mouseMove(elementToClick, {x: toRight, y: toBottom})
+            //        .click()
+            //        .perform();
+            //};
+
+
+          //  ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
+         //   browser.executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
+
+
+           // elementToClick.click();
+
+
             this.openRRButton().click();
         },
         clickEditSavedRRIcon: function () {

@@ -857,6 +857,8 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
             browser.wait(ExpectedConditions.visibilityOf(this.scopeHeading()));
             this.scopeHeading().click();
+            browser.driver.sleep(2000);
+            this.scopeHeading().click();
 
 
         },
