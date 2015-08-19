@@ -811,10 +811,10 @@ if (steps.royaltyRates === undefined) {
 
 
                 pages.editRoyaltyRates.clickRRSumarryTable();
-                //pages.base.scrollIntoView(pages.editRoyaltyRates.rrSumarryTable());
-                //var el = pages.editRoyaltyRates.rrSumarryTable();
-                //
-                //browser.actions().mouseMove(el).perform();
+                pages.base.scrollIntoView(pages.editRoyaltyRates.rrSumarryTable());
+                var el = pages.editRoyaltyRates.rrSumarryTable();
+
+                browser.actions().mouseMove(el).perform();
                 pages.editRoyaltyRates.clickEditSavedRRIcon();
                 //
                 //
