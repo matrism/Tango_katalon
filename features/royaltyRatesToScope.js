@@ -699,7 +699,7 @@ var beforeFeature = function () {
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.openAllRRFields();
                 steps.royaltyRates.setFieldsValueTest("5.5555");
-                steps.royaltyRates.test();
+
 
             }
 

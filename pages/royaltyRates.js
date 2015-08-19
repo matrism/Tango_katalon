@@ -190,6 +190,9 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             return $(".rate-sets-container-inner>a");
 
         },
+        openRRButton: function () {
+            return $$(".icon-chevron-down").first();
+        },
 
         royaltyRateInput: function () {
             return $$(".rate-set-name-input").last();
@@ -258,13 +261,22 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
 
         expandAllIncomeGroups: function () {
 
-            browser.driver.sleep(5000);
+            browser.sleep(5000);
             var i = 0;
+            pages.base.scrollIntoView(this.openRRButton());
+            browser.wait(ExpectedConditions.visibilityOf(this.openRRButton()));
+            browser.wait(ExpectedConditions.elementToBeClickable(this.openRRButton()));
+
+
+
 
             $$(".icon-chevron-down")
                 .then(function (result) {
 
                     for (i = 0; i < result.length; i++) {
+                        pages.base.scrollIntoView(result[i]);
+                        browser.wait(ExpectedConditions.visibilityOf(result[i]));
+                        browser.wait(ExpectedConditions.elementToBeClickable(result[i]));
                         result[i].click();
                     }
                 }

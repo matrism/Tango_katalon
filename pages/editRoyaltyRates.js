@@ -26,8 +26,8 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         openRRButton: function () {
-            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) a i.icon.icon-chevron-down"));
-
+            //return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) a i.icon.icon-chevron-down"));
+return $(".icon-chevron-down");
         },
 
         rrSumarryTable: function () {
