@@ -390,7 +390,6 @@ if (pages.editRoyaltyRates === undefined) {
             this.openRRButton().click();
 
 
-
             ///  WebElement elementToClick = driver.findElement(By.xpath("Your xpath"));
             //  var elementToClick =  this.openRRButton();
             //  elementToClick.getLocation().then(function (navLocation) {

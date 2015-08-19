@@ -67,24 +67,22 @@ var beforeFeature = function () {
             tags: ['rateToScopeEdit', 'broken'],
             steps: function () {
 
-                //steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                //steps.deal.itContinueToNextPage();
-                //steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-                //steps.create_deal_scope.itAddSimpleScope();
-                //steps.royaltyRates.addNewRoyaltySet();
-                //steps.royaltyRates.addRatePercentageToContractualField("10");
-                //steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
-                //
-                //steps.royaltyRates.clickOnReceiptApplicationMethod();
-                //steps.royaltyRates.confirmChangingRateApplicationMethod();
-                //
-                //
-                //steps.royaltyRates.saveRateSet();
-                //
-                //steps.deal.itContinueToNextPage();
-                //steps.deal.saveDeal();
-                steps.searchSection.accessSavedDealByNumber("205622");
-                //steps.royaltyRates.openSavedScope();
+                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
+                steps.deal.itContinueToNextPage();
+                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+                steps.create_deal_scope.itAddSimpleScope();
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+
+                steps.royaltyRates.saveRateSet();
+
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
 
 
@@ -92,25 +90,25 @@ var beforeFeature = function () {
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
 
-                //
-                //steps.royaltyRates.clearRoyaltyRateInput();
-                //steps.royaltyRates.typeIntoRRInput("Edited RR Set");
-                //steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
-                //steps.royaltyRates.addEffectiveStartDate("2019-05-26");
-                //
-                //steps.royaltyRates.saveRRData();
-                //steps.royaltyRates.saveRateSet();
-                //
-                //
-                //
-                //
-                //steps.royaltyRates.refreshPage();
-                //
-                //steps.royaltyRates.openSavedScope();
-                //
-                //
-                //
-                //steps.royaltyRates.verifyRateSetSavedData();
+
+                steps.royaltyRates.clearRoyaltyRateInput();
+                steps.royaltyRates.typeIntoRRInput("Edited RR Set");
+                steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
+                steps.royaltyRates.addEffectiveStartDate("2019-05-26");
+
+                steps.royaltyRates.saveRRData();
+                steps.royaltyRates.saveRateSet();
+
+
+
+
+                steps.royaltyRates.refreshPage();
+
+                steps.royaltyRates.openSavedScope();
+
+
+
+                steps.royaltyRates.verifyRateSetSavedData();
 
 
 
