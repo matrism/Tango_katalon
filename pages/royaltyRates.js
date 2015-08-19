@@ -833,6 +833,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
             var RRDoneButton;
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
 
+            pages.base.scrollIntoView(RRDoneButton);
             RRDoneButton.click();
 
 
