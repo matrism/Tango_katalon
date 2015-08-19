@@ -25,9 +25,8 @@ if (pages.editRoyaltyRates === undefined) {
 
         },
 
-        openRRButton:function()
-        {
-            return $(".icon-chevron-down");
+        openRRButton: function () {
+            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) a i.icon.icon-chevron-down"));
 
         },
 
@@ -44,7 +43,6 @@ if (pages.editRoyaltyRates === undefined) {
         royaltyRateName: function () {
             return element(by.css(".ng-scope>td>strong"));
         },
-
 
 
         searchTypeAheadDropdown: function () {
@@ -71,13 +69,12 @@ if (pages.editRoyaltyRates === undefined) {
 
         },
 
-        newRoyaltySetButton:function()
-        {
+        newRoyaltySetButton: function () {
 
-            return  element(by.css(".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"));
+            return element(by.css(".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"));
 
         }
-,
+        ,
 
         royaltyRateInput: function () {
             return element(by.css(".rate-set-name-input"));
@@ -91,9 +88,9 @@ if (pages.editRoyaltyRates === undefined) {
         ,
 
 
-       incomeProviderInput:function() {
-          return  element(by.css(".ux-multiselect-li.ux-multiselect-item.ng-scope.ng-binding"));
-       },
+        incomeProviderInput: function () {
+            return element(by.css(".ux-multiselect-li.ux-multiselect-item.ng-scope.ng-binding"));
+        },
         ///END OF LOCATORS
 
 
@@ -120,7 +117,6 @@ if (pages.editRoyaltyRates === undefined) {
         clearRoyaltyRateNameInput: function () {
 
             this.royaltyRateInput().clear();
-
 
 
         },
@@ -162,7 +158,6 @@ if (pages.editRoyaltyRates === undefined) {
 
         },
         getIncomeProviderInputValue: function () {
-
 
 
             return this.incomeProviderInput().getText();
@@ -372,10 +367,7 @@ if (pages.editRoyaltyRates === undefined) {
             browser.driver.sleep(5000);
 
 
-
             this.scopeHeading.click();
-
-
 
 
         }
@@ -389,48 +381,49 @@ if (pages.editRoyaltyRates === undefined) {
             this.rrSumarryTable().click();
 
         },
-        clickOpenRRButton:function(){
-
-
-            browser.wait(ExpectedConditions.visibilityOf( this.openRRButton()));
-
+        clickOpenRRButton: function () {
 
             pages.base.scrollIntoView(this.openRRButton());
+            browser.wait(ExpectedConditions.visibilityOf(this.openRRButton()));
+            browser.wait(ExpectedConditions.elementToBeClickable(this.openRRButton()));
+
+            this.openRRButton().click();
 
 
-          ///  WebElement elementToClick = driver.findElement(By.xpath("Your xpath"));
-          //  var elementToClick =  this.openRRButton();
-          //  elementToClick.getLocation().then(function (navLocation) {
-          //     var initTop = navLocation.y;
-          //     var  initLeft = navLocation.x;
-          //      console.log(initLeft);
-          //      console.log(initTop);
-          //          browser.executeScript('window.scrollTo(' + navLocation.x + ',' + navLocation.y + ');').then(function () {
-           // browser.actions().mouseMove($('.icon-chevron-down').find()).perform().click();
+
+            ///  WebElement elementToClick = driver.findElement(By.xpath("Your xpath"));
+            //  var elementToClick =  this.openRRButton();
+            //  elementToClick.getLocation().then(function (navLocation) {
+            //     var initTop = navLocation.y;
+            //     var  initLeft = navLocation.x;
+            //      console.log(initLeft);
+            //      console.log(initTop);
+            //          browser.executeScript('window.scrollTo(' + navLocation.x + ',' + navLocation.y + ');').then(function () {
+            // browser.actions().mouseMove($('.icon-chevron-down').find()).perform().click();
             //browser.actions().click(this.openRRButton()).perform();
-           // browser.pause();
-            this.openRRButton().getLocation().then(function (navLocation) {
-                     var initTop = navLocation.y;
-                     var  initLeft = navLocation.x;
-                      console.log(initLeft);
-                      console.log(initTop);
-            });
-           // browser.actions().click({x:0,y:3},this.openRRButton()).perform();
+            // browser.pause();
+            // this.openRRButton().getLocation().then(function (navLocation) {
+            //          var initTop = navLocation.y;
+            //          var  initLeft = navLocation.x;
+            //           console.log(initLeft);
+            //           console.log(initTop);
+            // });
+            // browser.actions().click({x:0,y:3},this.openRRButton()).perform();
 
-            browser.actions().mouseMove({x: 0, y: 5},this.openRRButton()).click().perform();
-            browser.pause();
+            //browser.actions().mouseMove({x: 0, y: 5},this.openRRButton()).click().perform();
+            //browser.pause();
 
-          //  browser.action().mouseMove($('.icon-chevron-down').find()).perform().click();
-          //                  .click()
-          //                  .perform();
-          //          })
-          //          ;
-          //
-          //
-          //
-          //
-          //  });
-           // this.openRRButton().click();
+            //  browser.action().mouseMove($('.icon-chevron-down').find()).perform().click();
+            //                  .click()
+            //                  .perform();
+            //          })
+            //          ;
+            //
+            //
+            //
+            //
+            //  });
+            // this.openRRButton().click();
             //var canvas = element(by.id("canvas"));
             //
             //elementToClick = function (toRight, toBottom) {
@@ -441,20 +434,19 @@ if (pages.editRoyaltyRates === undefined) {
             //};
 
 
-          //  ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
-         //   browser.executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
+            //  ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
+            //   browser.executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
 
 
-           // elementToClick.click();
-
+            // elementToClick.click();
 
 
         },
         clickEditSavedRRIcon: function () {
 
 
-              browser.wait(ExpectedConditions.visibilityOf(this.editSavedRRIcon()));
-               this.editSavedRRIcon().click();
+            browser.wait(ExpectedConditions.visibilityOf(this.editSavedRRIcon()));
+            this.editSavedRRIcon().click();
 
 
         }
@@ -487,8 +479,6 @@ if (pages.editRoyaltyRates === undefined) {
         }
 
         ,
-
-
 
 
         selectValueFromDropdown: function () {
