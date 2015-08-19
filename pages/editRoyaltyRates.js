@@ -404,14 +404,21 @@ if (pages.editRoyaltyRates === undefined) {
                var  initLeft = navLocation.x;
                 console.log(initLeft);
                 console.log(initTop);
-                    browser.actions()
-                        .mouseMove(elementToClick
-                        , {x: 3, y: 0}
-                    )
-                        .click()
-                        .perform();
+                    browser.executeScript('window.scrollTo(' + navLocation.x + ',' + navLocation.y + ');').then(function () {
+                        browser.actions()
+                            .mouseMove(elementToClick
+                            , {x: 0, y: 0}
+                        )
+                            .click()
+                            .perform();
+                    })
+                    ;
+
+
+
 
             });
+            this.openRRButton().click();
             //var canvas = element(by.id("canvas"));
             //
             //elementToClick = function (toRight, toBottom) {
@@ -429,7 +436,7 @@ if (pages.editRoyaltyRates === undefined) {
            // elementToClick.click();
 
 
-            this.openRRButton().click();
+
         },
         clickEditSavedRRIcon: function () {
 
