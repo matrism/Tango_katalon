@@ -395,30 +395,42 @@ if (pages.editRoyaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf( this.openRRButton()));
 
 
+            pages.base.scrollIntoView(this.openRRButton());
 
 
           ///  WebElement elementToClick = driver.findElement(By.xpath("Your xpath"));
-            var elementToClick =  this.openRRButton();
-            elementToClick.getLocation().then(function (navLocation) {
-               var initTop = navLocation.y;
-               var  initLeft = navLocation.x;
-                console.log(initLeft);
-                console.log(initTop);
-                    browser.executeScript('window.scrollTo(' + navLocation.x + ',' + navLocation.y + ');').then(function () {
-                        browser.actions()
-                            .mouseMove(elementToClick
-                            , {x: 0, y: 0}
-                        )
-                            .click()
-                            .perform();
-                    })
-                    ;
-
-
-
-
+          //  var elementToClick =  this.openRRButton();
+          //  elementToClick.getLocation().then(function (navLocation) {
+          //     var initTop = navLocation.y;
+          //     var  initLeft = navLocation.x;
+          //      console.log(initLeft);
+          //      console.log(initTop);
+          //          browser.executeScript('window.scrollTo(' + navLocation.x + ',' + navLocation.y + ');').then(function () {
+           // browser.actions().mouseMove($('.icon-chevron-down').find()).perform().click();
+            //browser.actions().click(this.openRRButton()).perform();
+           // browser.pause();
+            this.openRRButton().getLocation().then(function (navLocation) {
+                     var initTop = navLocation.y;
+                     var  initLeft = navLocation.x;
+                      console.log(initLeft);
+                      console.log(initTop);
             });
-            this.openRRButton().click();
+           // browser.actions().click({x:0,y:3},this.openRRButton()).perform();
+
+            browser.actions().mouseMove({x: 0, y: 5},this.openRRButton()).click().perform();
+            browser.pause();
+
+          //  browser.action().mouseMove($('.icon-chevron-down').find()).perform().click();
+          //                  .click()
+          //                  .perform();
+          //          })
+          //          ;
+          //
+          //
+          //
+          //
+          //  });
+           // this.openRRButton().click();
             //var canvas = element(by.id("canvas"));
             //
             //elementToClick = function (toRight, toBottom) {
