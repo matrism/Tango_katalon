@@ -8,22 +8,36 @@ var _ = require('lodash');
 var promise = protractor.promise;
 require(pages_path + "work");
 steps.work = exports;
-module.exports.goToWorkPage = function (data, key) {
-    var workId;
-    data = data || hash.subjectWorkData || {};
-    key = key || 'workId';
-    workId = data[key];
+exports.goToWorkPage = function (data, key) {
     it('Go to work page', function () {
+        var workId;
+        data = data || hash.currentEntityDataSlotsByType.work;
+        key = key || 'id';
+        workId = data[key];
         pages.work.open(workId);
     });
 };
-module.exports.goToScopeDelivery = function () {
-    it(
-        "Go to Scope Delivery", function () {
-            pages.work.goToScopeDelivery();
-        }
-    );
+
+exports.goToWorkPageById = function(workId) {
+    it('Go to work page by ID (' + workId + ')', function () {
+        pages.work.open(workId);
+    });
 };
+
+module.exports.goToScopeDeliveryTab = function() {
+    it('Go to Scope Delivery tab', function() {
+        pages.work.goToScopeDeliveryTab();
+    });
+};
+
+exports.goToRecordingsTab = function() {
+    it('Go to Recordings tab', function() {
+        pages.work.goToRecordingsTab();
+        browser.sleep(200);
+        pages.base.waitForAjax();
+    });
+};
+
 module.exports.findCurrentlyOpenWorkId = function () {
     var deferred = promise.defer();
 
@@ -31,8 +45,9 @@ module.exports.findCurrentlyOpenWorkId = function () {
         var workId = pages.work.workId();
 
         workId.then(function (workId) {
-            hash.subjectWorkData.id = workId;
-            hash.subjectWorkData.songCode = workId.slice(3, -3);
+            var data = hash.currentEntityDataSlotsByType.work;
+            data.id = workId;
+            data.songCode = workId.slice(3, -3);
         });
 
         deferred.fulfill(workId);
@@ -42,7 +57,9 @@ module.exports.findCurrentlyOpenWorkId = function () {
 };
 exports.validateWorkId = function () {
     it('Validate work ID', function () {
-        pages.work.validateWorkId(hash.subjectWorkData.id);
+        pages.work.validateWorkId(
+            hash.currentEntityDataSlotsByType.work.id
+        );
     });
 };
 module.exports.workInclusionOnWebsite = function () {
@@ -140,7 +157,7 @@ module.exports.editCreators = function () {
 exports.clickCompositeWorkCheckbox = function (data, key) {
     it('Click composite work checkbox', function () {
         pages.work.clickCompositeWorkCheckbox().then(function (value) {
-            data = data || hash.subjectWorkData || {};
+            data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'isCompositeWork';
 
             data[key] = value;
@@ -159,7 +176,7 @@ exports.confirmDisablingWorkAsComposite = function () {
 };
 exports.validateCompositeWorkCheckbox = function (data, key) {
     it('Validate composite work checkbox', function () {
-        data = data || hash.subjectWorkData || {};
+        data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'isCompositeWork';
 
         expect(pages.work.compositeWorkCheckboxState()).toBe(data[key]);
@@ -391,7 +408,8 @@ exports.enterNewShellWork = function (i, value) {
 };
 exports.expectShellWorkTitleToMatchEnteredOne = function (i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function () {
-        var components = hash.subjectWorkData.components || [];
+        var data = hash.currentEntityDataSlotsByType.work;
+        var components = data.components || [];
         var shellWork = components[i] || {};
 
         pages.work.validateEnteredShellWorkTitle(i, shellWork.name);
@@ -474,59 +492,80 @@ exports.enterWorkSearchTerms = function (value) {
 };
 exports.searchForWorkUsingPreviouslyCreatedWorkId = function () {
     it('Search for work using previously created work ID', function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.id);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.id
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCode = function () {
     it('Search for work using previously created song code', function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.songCode
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithNoLeadingZeroes = function () {
     it('Search for work using previously created song code with no leading zeroes', function () {
+        var data = hash.currentEntityDataSlotsByType.work;
         pages.work.enterWorkSearchTerms(
-            hash.subjectWorkData.songCode.toString().replace(/^0*/, '')
+            data.songCode.toString().replace(/^0*/, '')
         );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithLeadingZeroes = function () {
     it('Search for work using previously created song code with leading zeroes', function () {
-        pages.work.enterWorkSearchTerms('0000' + hash.subjectWorkData.songCode);
+        pages.work.enterWorkSearchTerms(
+            '0000' + hash.currentEntityDataSlotsByType.work.songCode
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyCreatedSongCodeWithTrailingZeroes = function () {
     it('Search for work using previously created song code trailing zeroes', function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.songCode + '0000');
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.songCode + '0000'
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyEnteredPrimaryTitle = function () {
     it('Search for work using previously entered primary work title', function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.primaryTitle);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.primaryTitle
+        );
     });
 };
 exports.searchForWorkUsingPreviouslyEnteredAlternateTitle = function (i) {
     it('Search for work using previously entered alternate work title #' + (i + 1), function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.alternateTitles[i]);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.alternateTitles[i]
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorName = function (i) {
     it('Search for work using previously selected creator name #' + (i + 1), function () {
-        pages.work.enterCreatorNameAsWorkSearchTerms(hash.subjectWorkData.creators[i].name);
+        pages.work.enterCreatorNameAsWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.creators[i].name
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorSuisaIpiNumber = function (i) {
     it('Search for work using previously selected creator SUISA IPI number #' + (i + 1), function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].suisaIpiNumber);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.creators[i].suisaIpiNumber
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorInternalIpiNumber = function (i) {
     it('Search for work using previously selected creator internal IPI number #' + (i + 1), function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].internalIpiNumber);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.creators[i].internalIpiNumber
+        );
     });
 };
 exports.searchForWorkUsingPreviouslySelectedCreatorIpiNumber = function (i) {
     it('Search for work using previously selected creator IPI number #' + (i + 1), function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.creators[i].ipiNumber);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.creators[i].ipiNumber
+        );
     });
 };
 exports.expectWorkSearchMatchCountToBe = function (value) {
@@ -578,7 +617,9 @@ exports.searchForPreviouslyEnteredComponentWork = function (i) {
     });
 
     it('Search for previously entered component work #' + (i + 1), function () {
-        pages.work.enterWorkSearchTerms(hash.subjectWorkData.components[i].name);
+        pages.work.enterWorkSearchTerms(
+            hash.currentEntityDataSlotsByType.work.components[i].name
+        );
     });
 
     it('Wait for search results to load', function () {
@@ -945,10 +986,10 @@ exports.validateSubjectCreatorContributions = function(howMany) {
     });
 };
 exports.validateCompositeWorkType = function (data, key) {
-    data = data || hash.subjectWorkData || {};
-    key = key || 'compositeWorkType';
-
     it('Validate composite work type', function () {
+        data = data || hash.currentEntityDataSlotsByType.work;
+        key = key || 'compositeWorkType';
+
         pages.work.validateCompositeWorkType(data[key]);
     });
 };
@@ -1061,7 +1102,7 @@ module.exports.validateCreationDate = function (year, month, day) {
                 return;
             }
             _.times(2, function (i) {
-                values[i + 1] = pad(2, values[i + 1], "0");
+                values[i + 1] = pad(values[i + 1], 2, 0);
             });
             date = values.join("-");
             expect(pages.work.creationDate()).toBe(date);
@@ -1089,7 +1130,7 @@ module.exports.validateDeliveryDate = function (year, month, day) {
                 return;
             }
             _.times(2, function (i) {
-                values[i + 1] = pad(2, values[i + 1], "0");
+                values[i + 1] = pad(values[i + 1], 2, 0);
             });
             date = values.join("-");
             expect(pages.work.deliveryDate()).toBe(date);
@@ -1129,7 +1170,9 @@ module.exports.expectEnteredDeliveryYearNotToBe = function (value) {
 module.exports.validateMusicalDistributionCategory = function (value) {
     it("Validate musical distribution category (if validation value is not empty)", function () {
         promise.when(value).then(function (value) {
-            if (!value) {
+            var data = hash.currentEntityDataSlotsByType.work;
+            value = value || data.musicalDistributionCategory;
+            if(!value) {
                 return;
             }
             expect(pages.work.musicalDistributionCategory()).toBe(value);
@@ -1138,8 +1181,10 @@ module.exports.validateMusicalDistributionCategory = function (value) {
 };
 module.exports.validateTextMusicRelationship = function (value) {
     it("Validate text music relationship (if validation value is not empty)", function () {
-        promise.when(value).then(function (value) {
-            if (!value) {
+        promise.when(value).then(function(value) {
+            var data = hash.currentEntityDataSlotsByType.work;
+            value = value || data.textMusicRelationship;
+            if(!value) {
                 return;
             }
             if (value.toLowerCase() === "select type") {
@@ -1156,7 +1201,9 @@ module.exports.validateTextMusicRelationship = function (value) {
 module.exports.validateExcerptType = function (value) {
     it("Validate excerpt type (if validation value is not empty)", function () {
         promise.when(value).then(function (value) {
-            if (!value) {
+            var data = hash.currentEntityDataSlotsByType.work;
+            value = value || data.excerptType;
+            if(!value) {
                 return;
             }
             if (value.toLowerCase() === "select type") {
@@ -1173,7 +1220,9 @@ module.exports.validateExcerptType = function (value) {
 module.exports.validateVersionType = function (value) {
     it("Validate version type (if validation value is not empty)", function () {
         promise.when(value).then(function (value) {
-            if (!value) {
+            var data = hash.currentEntityDataSlotsByType.work;
+            value = value || data.versionType;
+            if(!value) {
                 return;
             }
             expect(pages.work.versionType()).toBe(value);
@@ -1183,7 +1232,9 @@ module.exports.validateVersionType = function (value) {
 module.exports.validateLyricAdaptation = function (value) {
     it("Validate lyric adaptation (if validation value is not empty)", function () {
         promise.when(value).then(function (value) {
-            if (!value) {
+            var data = hash.currentEntityDataSlotsByType.work;
+            value = value || data.lyricAdaptation;
+            if(!value) {
                 return;
             }
             expect(pages.work.lyricAdaptation()).toBe(value);
@@ -1193,7 +1244,9 @@ module.exports.validateLyricAdaptation = function (value) {
 module.exports.validateMusicArrangement = function (value) {
     it("Validate music arrangement (if validation value is not empty)", function () {
         promise.when(value).then(function (value) {
-            if (!value) {
+            var data = hash.currentEntityDataSlotsByType.work;
+            value = value || data.musicArrangement;
+            if(!value) {
                 return;
             }
             expect(pages.work.musicArrangement()).toBe(value);
@@ -1544,20 +1597,19 @@ module.exports.editBasicWork = function (data, more) {
 
 
 module.exports.validateWork = function (data, more) {
-    data = data || hash.subjectWorkData;
+    data = data || hash.currentEntityDataSlotsByType.work;
 
     more = more || {};
 
     more.skip = more.skip || {};
-    more.skip.navigation = true;
-    more.skip.workTitles = true;
-    more.skip.creators = true;
-    more.skip.creationDate = true;
-    more.skip.deliveryDate = true;
-    more.skip.assetType = true;
-    more.skip.workOrigin = true;
-    more.skip.inclusionOnWebsite = true;
-    more.skip.inclusionOnWebsite = true;
+    //more.skip.navigation = true;
+    //more.skip.workTitles = true;
+    //more.skip.creators = true;
+    //more.skip.creationDate = true;
+    //more.skip.deliveryDate = true;
+    //more.skip.assetType = true;
+    //more.skip.workOrigin = true;
+    //more.skip.inclusionOnWebsite = true;
 
     describe(
         "Validate work data", function () {
@@ -1614,7 +1666,7 @@ module.exports.validateWork = function (data, more) {
             }
 
             if (!more.skip.creators && data.creators && data.creators.length !== 0) {
-                steps.work.goToScopeDelivery();
+                steps.work.goToScopeDeliveryTab();
 
                 data.creators.forEach(
                     function (creator, i) {
