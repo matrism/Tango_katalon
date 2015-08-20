@@ -26,6 +26,8 @@ require(steps_path + "new_work");
 require(steps_path + "organisation");
 require(pages_path + "organisation");
 require(steps_path + "searchSection");
+require(steps_path + 'workCwrPreview');
+require(steps_path + 'workRights');
 
 
 
@@ -120,9 +122,10 @@ var beforeFeature = function () {
             tags: ["smokeWorkProd","smokeProd"],
             steps: function () {
                 steps.searchSection.accessSavedWorkById("10083789");
-                steps.work.goToPreviewCWRTab();
-                steps.work.selectRegistrationRecipient("KODA");
-                steps.work.validateGeneratedOutput();
+                steps.work.goToPreviewCwrTab();
+                steps.workCwrPreview.searchForRegistrationRecipient("KODA");
+                steps.workCwrPreview.selectRegistrationRecipientResultByIndex(0);
+                steps.workCwrPreview.expectCwrDataToBeDisplayed();
 
 
 
@@ -135,7 +138,7 @@ var beforeFeature = function () {
                 steps.searchSection.accessSavedWorkById("015000163");
                 steps.work.goToRightsTab();
 
-                steps.work.validateRightsDisplayed();
+                steps.workRights.expectRightsDataToBeDisplayed();
 
 
 

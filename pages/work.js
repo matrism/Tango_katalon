@@ -1077,29 +1077,6 @@ exports.deleteComponentWork = function(i) {
     pages.base.scrollIntoView(element);
     element.click();
 };
-
-exports.rightsTab = function () {
-	return $(".nav-tabs>li:nth-child(2)>a>span");
-};
-
-exports.previewCWRTab = function () {
-	return $(".nav-tabs>li:last-child>a>span");
-};
-exports.registrationRecipientInput = function () {
-return $(".record-header-filters>div>div>div>div>div>div>input");
-};
-exports.searchTypeAheadDropdown = function () {
-	return $(".tg-typeahead__suggestions-group-item");
-	};
-exports.CWRTable = function () {
-	return $("#CWR-RECORD");
-};
-exports.rightsTable = function () {
-	return $(".accordion-group");
-};
-
-
-
 exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function(more) {
     more = more || {};
 
@@ -1285,45 +1262,4 @@ exports.goToRegistrationActivityTab = function() {
     var element = exports.registrationActivityTab();
     pages.base.scrollIntoView(element);
     return element.click();
-};
-
-module.exports.clickPreviewCWRTab = function () {
-
-	browser.wait(ExpectedConditions.visibilityOf(exports.previewCWRTab()));
-	var element = exports.previewCWRTab();
-	pages.base.scrollIntoView(element);
-	element.click();
-
-};
-module.exports.clickRightsTab = function () {
-
-	browser.wait(ExpectedConditions.visibilityOf(exports.rightsTab()));
-	var element = exports.rightsTab();
-	pages.base.scrollIntoView(element);
-	element.click();
-
-};
-
-
-module.exports.typeRegistrationRecipientIntoInput = function (value) {
-	browser.wait(ExpectedConditions.visibilityOf(exports.registrationRecipientInput()));
-	exports.registrationRecipientInput().sendKeys(value);
-
-};
-module.exports.selectValueFromDropdown = function () {
-	browser.wait(ExpectedConditions.visibilityOf(exports.searchTypeAheadDropdown()));
-	exports.searchTypeAheadDropdown().click();
-
-};
-module.exports.CWRTableIsDisplayed = function () {
-
-
-	browser.wait(ExpectedConditions.visibilityOf(exports.CWRTable()));
-	return exports.CWRTable().isDisplayed();
-};
-module.exports.rightsTableIsDisplayed = function () {
-
-
-	browser.wait(ExpectedConditions.visibilityOf(exports.rightsTable()));
-	return exports.rightsTable().isDisplayed();
 };
