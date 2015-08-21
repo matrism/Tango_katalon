@@ -410,6 +410,8 @@ var beforeFeature = [
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
 
+                    steps.searchSection.selectEntityType('Works');
+
                     steps.work.selectWorkSearchFilterTag(0, 'Work ID');
 
                     steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
@@ -436,6 +438,8 @@ var beforeFeature = [
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
+
+                    steps.searchSection.selectEntityType('Works');
 
                     steps.work.selectWorkSearchFilterTag(0, 'Work ID');
 
@@ -464,6 +468,8 @@ var beforeFeature = [
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
 
+                    steps.searchSection.selectEntityType('Works');
+
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
 
                     steps.work.searchForWorkUsingPreviouslyEnteredPrimaryTitle();
@@ -490,6 +496,8 @@ var beforeFeature = [
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
+
+                    steps.searchSection.selectEntityType('Works');
 
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
 
@@ -518,6 +526,8 @@ var beforeFeature = [
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
 
+                    steps.searchSection.selectEntityType('Works');
+
                     steps.work.selectWorkSearchFilterTag(0, 'Creator');
 
                     steps.work.searchForWorkUsingPreviouslySelectedCreatorName(0);
@@ -544,6 +554,8 @@ var beforeFeature = [
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
+
+                    steps.searchSection.selectEntityType('Works');
 
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
 

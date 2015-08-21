@@ -62,6 +62,13 @@ if (steps.searchSection === undefined) {
         }
         ,
 
+        selectEntityType: function(value) {
+            it('Select entity type "' + value + '" for search', function() {
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectEntityTypeOption(value);
+            });
+        },
+
         accessSavedDealByNumber:function(dealContractNumber)
         {
 

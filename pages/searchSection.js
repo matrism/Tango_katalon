@@ -41,6 +41,13 @@ if (pages.searchSection === undefined) {
 
             return element(by.css(".tg-typeahead__suggestions-group-item-inner"));
         },
+
+        entityTypeOption: function(value) {
+            return this.dropdownMenu().element(by.cssContainingText(
+                'a', value
+            ));
+        },
+
         dealOption: function () {
             return $("#SEARCH-DEAL");
         },
@@ -64,6 +71,11 @@ if (pages.searchSection === undefined) {
 
         }
         ,
+
+        selectEntityTypeOption: function(value) {
+            return this.entityTypeOption(value).click();
+        },
+
         selectDeal:function()
         {
 
