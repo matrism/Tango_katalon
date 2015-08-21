@@ -96,7 +96,7 @@ var beforeFeature = function () {
         },
         {
             name: "New basic work",
-            tags: ["smokeWork","smokeQA"],
+            tags: ['smokeWork', 'smokeQA', 'broken'],
             steps: function () {
                 steps.new_work.createBasicWork(workData);
                 steps.work.validateWork(workData);
