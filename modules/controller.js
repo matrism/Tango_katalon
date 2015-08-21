@@ -1,5 +1,3 @@
-global.hash = {};
-
 var _ = require("underscore"),
     feature,
     step,
@@ -78,8 +76,6 @@ var _ = require("underscore"),
         processFeature: function(feature, beforeFeature, afterFeature, commonFeatureTags) {
             var runContext = {};
             if (controller.checkTags(feature, commonFeatureTags)) {
-                global.hash = {};
-
                 describe(feature.name + ". Tags: '" + feature.tags.join("', '") + "'.", function() {
                     if (typeof beforeFeature !== "undefined") {
                         describe("Pre-feature steps: ", function() {
