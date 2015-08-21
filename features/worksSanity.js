@@ -240,6 +240,13 @@ var beforeFeature = [
                 'works-sanity-validate-cos',
                 'works-sanity-create-med',
                 'works-sanity-validate-med',
+                'works-sanity-search-for-works',
+                'works-sanity-search-for-works-by-id',
+                'works-sanity-search-for-works-by-song-code',
+                'works-sanity-search-for-works-by-primary-title',
+                'works-sanity-search-for-works-by-alternate-title',
+                'works-sanity-search-for-works-by-creator-presentation-name',
+                'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
             ],
             steps: [
                 [function() {
