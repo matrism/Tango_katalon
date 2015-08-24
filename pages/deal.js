@@ -9,7 +9,7 @@ if (pages.deal === undefined) {
             continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
             saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
-            termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
+            termsHeader: {css: ".nav-tabs>li:nth-child(2)>a>span"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
             scopeHeader: {css: ".scope-heading"},
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
@@ -65,21 +65,46 @@ if (pages.deal === undefined) {
         },
 
         goToGeneralDealDetails: function () {
-            pages.deal.elems.generalHeader.click();
+var element =     pages.deal.elems.generalHeader;
+            pages.base.scrollIntoView(element);
+            browser.wait(ExpectedConditions.visibilityOf(element));
+            browser.wait(ExpectedConditions.elementToBeClickable(element));
+
+            element.click();
+
         },
 
         goToTermsDealDetails: function () {
-            pages.deal.elems.termsHeader.click();
+
+
+            var element =     pages.deal.elems.termsHeader;
+
+            browser.wait(ExpectedConditions.visibilityOf(element));
+            browser.wait(ExpectedConditions.elementToBeClickable(element));
+            pages.base.scrollIntoView(element);
+            element.click();
         },
 
         goToFinderDealTerms: function () {
-            pages.deal.elems.finderDealsHeaderLink.click();
+
+            var element =     pages.deal.elems.finderDealsHeaderLink;
+            pages.base.scrollIntoView(element);
+            browser.wait(ExpectedConditions.visibilityOf(element));
+            browser.wait(ExpectedConditions.elementToBeClickable(element));
+
+            element.click();
         },
 
         clickIncomeRatesLink: function () {
-
+            pages.base.scrollIntoView(    pages.deal.elems.incomeRates);
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.incomeRates));
             pages.deal.elems.incomeRates.click();
+
+
+
+
+
 
 
         },
@@ -92,6 +117,8 @@ if (pages.deal === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
 
 
+            pages.deal.scopeHeaderElement().click();
+            browser.sleep(1000);
             pages.deal.scopeHeaderElement().click();
         },
 

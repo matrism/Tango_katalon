@@ -3,6 +3,7 @@ var pph = require("../helpers/pph");
 var random = require('../helpers/random');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
+
 exports = module.exports = pages.work = new ftf.pageObject();
 module.exports.open = function(workId) {
     if(!workId) {
@@ -202,7 +203,7 @@ module.exports.creatorNamesContainer = function() {
     return $(".EDITOR.creators-edit");
 };
 module.exports.editCreatorsContainer = function() {
-    return $("[data-ng-show='workHeader.creators.edit'");
+	return $("[data-ng-show='workHeader.creators.edit']");
 };
 module.exports.editCreatorsButton = function() {
     return $(

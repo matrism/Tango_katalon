@@ -7,6 +7,12 @@ steps.workRights = exports;
 
 require(pages_path + 'workRights');
 
+exports.expectRightsDataToBeDisplayed = function() {
+    it('Expect Rights data to be displayed', function() {
+        pages.workRights.expectRightsDataToBeDisplayed();
+    });
+};
+
 exports.validateSigningTerritoryCode = function(groupIndex, value) {
     it(
         'Rights group #' + (groupIndex + 1) + ' - ' +

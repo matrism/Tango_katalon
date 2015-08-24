@@ -62,6 +62,13 @@ if (steps.searchSection === undefined) {
         }
         ,
 
+        selectEntityType: function(value) {
+            it('Select entity type "' + value + '" for search', function() {
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectEntityTypeOption(value);
+            });
+        },
+
         accessSavedDealByNumber:function(dealContractNumber)
         {
 
@@ -70,6 +77,23 @@ if (steps.searchSection === undefined) {
                 pages.searchSection.clickDropdownMenu();
                 pages.searchSection.selectDeal();
                 pages.searchSection.typeDealNumberIntoInput(dealContractNumber);
+                pages.searchSection.selectValueFromDropdown();
+
+
+            })
+
+
+
+
+        },
+        accessSavedWorkById:function(workID)
+        {
+
+            it("User accesses work with number "+ workID,function(){
+                //
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectWork();
+                pages.searchSection.typeDealNumberIntoInput(workID);
                 pages.searchSection.selectValueFromDropdown();
 
 
@@ -97,6 +121,32 @@ if (steps.searchSection === undefined) {
 
         }
         ,
+        accessSavedPersonByName: function (personName) {
+            it("User accesses person  with name "+ personName,function(){
+
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectPersonOptionFromDropdown();
+                pages.searchSection.typeIntoSearchInput(personName);
+                pages.searchSection.selectValueFromDropdown();
+
+            })
+        },
+        accessSavedOrganisationByNameInHash:function()
+        {
+         var organisationName =   "Lyricfind";
+            it("User accesses organisation with name "+ organisationName,function(){
+
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectOrganisationOptionFromDropdown();
+                pages.searchSection.typeOrganisationNameIntoInput(organisationName);
+                pages.searchSection.selectValueFromDropdown();
+
+            })
+
+
+        }
+        ,
+
 
 
 

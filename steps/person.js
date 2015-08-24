@@ -56,4 +56,20 @@ exports.findInternalIpiNumber = function() {
             hash.currentPersonSlot.internalIpiNumber = value;
         });
     });
+
+
 };
+exports.validateIPI = function(ipi)
+{ it('Validate IPI Number', function() {
+
+    expect(pages.person.getSuisaIPI()).toBe(ipi)
+});
+};
+
+exports.validateAlternativeName = function(alternativeName)
+{ it('Validate Alternative Name', function() {
+    expect(pages.person.getAlternativeName()).toBe(alternativeName)
+});
+};
+
+

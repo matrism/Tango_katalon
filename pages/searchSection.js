@@ -14,7 +14,7 @@ if (pages.searchSection === undefined) {
 
         searchDropdown: function () {
 
-            return $(".btn.dropdown-toggle")
+            return $("#DSP-SEARCH-DROP>button")
 
 
         },
@@ -29,6 +29,9 @@ if (pages.searchSection === undefined) {
 
             return element(by.css("#SEARCH-ORG"));
         },
+        personOption: function () {
+          return $("#SEARCH-PERSON");
+        },
         searchInput: function () {
 
             return element(by.css(".tg-typeahead__input"));
@@ -38,8 +41,18 @@ if (pages.searchSection === undefined) {
 
             return element(by.css(".tg-typeahead__suggestions-group-item-inner"));
         },
+
+        entityTypeOption: function(value) {
+            return this.dropdownMenu().element(by.cssContainingText(
+                'a', value
+            ));
+        },
+
         dealOption: function () {
             return $("#SEARCH-DEAL");
+        },
+        workOption: function () {
+          return $("#SEARCH-WORK");
         },
 
 
@@ -58,10 +71,18 @@ if (pages.searchSection === undefined) {
 
         }
         ,
+
+        selectEntityTypeOption: function(value) {
+            return this.entityTypeOption(value).click();
+        },
+
         selectDeal:function()
         {
 
             this.dealOption().click();
+        },
+        selectWork: function () {
+            this.workOption().click();
         },
 
 
@@ -75,10 +96,26 @@ if (pages.searchSection === undefined) {
 
         },
 
+        selectPersonOptionFromDropdown: function () {
+
+
+            browser.wait(ExpectedConditions.visibilityOf(this.dropdownMenu()));
+            this.personOption().click();
+
+
+
+        },
+
         typeOrganisationNameIntoInput:function(organisationName)
         {
 
             this.searchInput().sendKeys(organisationName);
+
+        },
+        typeIntoSearchInput:function(value)
+        {
+
+            this.searchInput().sendKeys(value);
 
         },
 

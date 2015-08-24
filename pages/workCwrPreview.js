@@ -77,8 +77,16 @@ function parseRecordField(value, regExp, fieldIndex) {
     return record && record[fieldIndex + 1].trim();
 }
 
+exports.cwrDataContainer = function() {
+    return $('#CWR-DATA');
+};
+
 exports.recordBindings = function() {
-    return $('#CWR-DATA').$$('.ng-binding');
+    return exports.cwrDataContainer().$$('.ng-binding');
+};
+
+exports.expectCwrDataToBeDisplayed = function() {
+    expect(exports.cwrDataContainer().isDisplayed()).toBeTruthy();
 };
 
 exports.rawRecord = function(i) {
