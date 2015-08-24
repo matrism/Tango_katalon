@@ -151,7 +151,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["smokeTestsProd"],
+    commonFeatureTags: ['smokeTestsProd', 'productionTest'],
     feature: feature,
     beforeFeature: beforeFeature
 };
