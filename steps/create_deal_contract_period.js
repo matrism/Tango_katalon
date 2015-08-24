@@ -384,6 +384,13 @@ if (steps.create_deal_contract_period === undefined) {
             });
         },
 
+        doneEndRules: function () {
+            it("Save the end rules ", function () {
+                pages.create_deal_contract_period.doneTheEndRules();
+                pages.create_deal_contract_period.waitForAjax();
+            });
+        },
+
         clickOnAddAdvanceAssumptionsLink: function () {
             it("Click on the add advance assumptions link ", function () {
                 pages.create_deal_contract_period.clickOnTheAddAdvanceAssumptionsLink();
@@ -455,6 +462,17 @@ if (steps.create_deal_contract_period === undefined) {
                 steps.create_deal_contract_period.fillIntoAttributeLeftEndRules();
                 steps.create_deal_contract_period.selectRequirementEndRulesRandomValue("<");
                 steps.create_deal_contract_period.selectRightVariableEndRulesSpecificValue("MDRC Complete");
+            });
+        },
+
+        itAddSimpleEndRuleToRtp: function () {
+            describe("Add end rule to contract period ", function () {
+                steps.create_deal_contract_period.selectEndDateEndRulesSpecificValue("Repayment Date");
+                steps.create_deal_contract_period.selectWhenVariableLeftEndRulesSpecificValue("Balance Repaid");
+                steps.create_deal_contract_period.fillIntoAttributeLeftEndRules();
+                steps.create_deal_contract_period.selectRequirementEndRulesRandomValue("<");
+                steps.create_deal_contract_period.selectRightVariableEndRulesSpecificValue("Retention Period Minimum");
+                steps.create_deal_contract_period.doneEndRules();
             });
         },
 

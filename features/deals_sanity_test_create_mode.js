@@ -170,6 +170,7 @@ var beforeFeature = function () {
 
             steps.deal.itContinueToNextPage();
             steps.create_deal_rtp.selectRtpAllContractPeriods();
+            steps.create_deal_rtp.fillIntoAcquisitionDescription(1);
             steps.create_deal_rtp.selectSpecificScopeNumberIRtpAcquisition(1);
             steps.create_deal_rtp.fillIntoAcquisitionEndDateField();
             //add first retention from acquisition
@@ -182,6 +183,9 @@ var beforeFeature = function () {
             steps.create_deal_rtp.fillIntoRetentionPeriodDescriptionFromAcquisitionNumberI(2);
             steps.create_deal_rtp.selectSpecificScopeNumberJFromAcquisitionNumberI(2, 2);
             steps.create_deal_rtp.selectRandomDurationTypeRetentionFromAcquisitionNumberI(2, "Conditional Duration");
+            steps.base.scrollIntoView("Add end rules to retention", pages.create_deal_rtp.elems.addEndRulesLinkRtpRetention2FromAcquisition);
+            steps.create_deal_rtp.clickOnAddEndRulesRetentionPeriodFromAcquisitionNumberI(2);
+            steps.create_deal_contract_period.itAddSimpleEndRuleToRtp();
             //add post term period 1 from retention 1
             steps.create_deal_rtp.clickOnAddPostTermPeriodFromRetentionNumberI(1);
             steps.create_deal_rtp.fillIntoDescriptionPostTermPeriodNumberJFromRetentionNumberI(1, 1);
@@ -197,12 +201,26 @@ var beforeFeature = function () {
             steps.create_deal_rtp.clickOnAddPostTermPeriodFromAcquisition();
             steps.base.scrollIntoView("Post term period from acquisition ", pages.create_deal_rtp.elems.postTermPeriodDescriptionFromAcquisition);
             steps.create_deal_rtp.fillIntoDescriptionPostTermPeriodNumberIFromAcquisition(1);
-            //steps.create_deal_rtp.selectSpecificScopeNumberJForPostTermNumberI(3,1);
-            //steps.create_deal_rtp.fillIntoDurationPostTermPeriodNumberIFromAcquisition(1);
+            steps.create_deal_rtp.selectSpecificScopeNumberJForPostTermNumberI(1, 3);
+            steps.create_deal_rtp.fillIntoDurationPostTermPeriodNumberIFromAcquisition(1);
+            //add post term period 2 from acquisition
+            steps.base.scrollIntoView("Add post term period from acquisition ", pages.create_deal_rtp.elems.addPostTermPeriodLinkFromAcquisition);
+            steps.create_deal_rtp.clickOnAddPostTermPeriodFromAcquisition();
+            steps.base.scrollIntoView("Post term period from acquisition ", pages.create_deal_rtp.elems.postTermPeriodDescriptionFromAcquisition);
+            steps.create_deal_rtp.fillIntoDescriptionPostTermPeriodNumberIFromAcquisition(2);
+            steps.create_deal_rtp.selectSpecificScopeNumberJForPostTermNumberI(2, 3);
+            steps.create_deal_rtp.fillIntoDurationPostTermPeriodNumberIFromAcquisition(2);
+            // add another rtp set
+            steps.base.scrollIntoView("Add another rtp set ", pages.create_deal_rtp.elems.addAnotherRtpSetLink);
+            steps.create_deal_rtp.clickOnAddAnotherAcquisitionPeriodLink();
+            steps.create_deal_rtp.fillIntoAcquisitionDescription(2);
+            //add first retention from acquisition
+            steps.create_deal_rtp.clickOnAddRetentionPeriodFromAcquisition();
+            steps.create_deal_rtp.fillIntoRetentionPeriodDescriptionFromAcquisitionNumberI(1);
+            steps.create_deal_rtp.selectRandomDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
+            steps.deal.itContinueToNextPage();
 
 
-
-            //steps.deal.itContinueToNextPage();
             //steps.deal.itContinueToNextPage();
             //steps.deal.itContinueToNextPage();
             //steps.deal.saveDeal();

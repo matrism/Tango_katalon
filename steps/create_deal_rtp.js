@@ -45,6 +45,12 @@ if (steps.create_deal_rtp === undefined) {
             });
         },
 
+        clickOnAddEndRulesRetentionPeriodFromAcquisitionNumberI: function (i) {
+            it("Click on the add end rules retention period from acquisition number " + i, function () {
+                pages.create_deal_rtp.clickOnTheAddEndRulesRetentionPeriodFromAcquisitionNumberI(i);
+            });
+        },
+
         selectRandomScopeFromAcquisitionNumberI: function (i) {
             it("Select random scope from acquisition number " + i, function () {
                 pages.create_deal_rtp.selectTheRandomScopeFromAcquisitionNumberI(i);
@@ -106,8 +112,20 @@ if (steps.create_deal_rtp === undefined) {
         },
 
         fillIntoDurationPostTermPeriodNumberIFromAcquisition: function (i) {
-            it("Fill into the duration post term period number " + i + " from acquisition", function(){
-               pages.create_deal_rtp.fillIntoTheDurationPostTermPeriodNumberIFromAcquisition(i);
+            it("Fill into the duration post term period number " + i + " from acquisition", function () {
+                pages.create_deal_rtp.fillIntoTheDurationPostTermPeriodNumberIFromAcquisition(i);
+            });
+        },
+
+        clickOnAddAnotherAcquisitionPeriodLink: function () {
+            it("Click on add another acquisition period link ", function () {
+                pages.create_deal_rtp.clickOnTheAddAnotherAcquisitionPeriodLink();
+            });
+        },
+
+        fillIntoAcquisitionDescription: function (i) {
+            it("Fill into acquisition description number " +i,function() {
+                pages.create_deal_rtp.fillIntoTheAcquisitionDescription(i);
             });
         }
 

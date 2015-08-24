@@ -60,6 +60,7 @@ if (pages.create_deal_contract_period === undefined) {
             variableRightFieldButtonEndRules: {css: "div[data-ng-model='condition.right_value'] div.tg-dropdown-button"},
             variableRightDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             saveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
+            doneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
             deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
             cancelButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
             //assumptions
@@ -388,6 +389,13 @@ if (pages.create_deal_contract_period === undefined) {
             pages.create_deal_contract_period.elems.saveButtonEndRules.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.whenVariableLeftButtonEndRules));
         },
+
+        doneTheEndRules: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_contract_period.elems.doneButtonEndRules));
+            pages.create_deal_contract_period.elems.doneButtonEndRules.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.whenVariableLeftButtonEndRules));
+        },
+
 
         clickOnTheAddAdvanceAssumptionsLink: function () {
           pages.create_deal_contract_period.elems.addAssumptionLink.click();
