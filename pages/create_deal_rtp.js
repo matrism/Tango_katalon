@@ -17,7 +17,8 @@ if (pages.create_deal_rtp === undefined) {
             applyScopeAcquisitionButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
             acquisitionActualEndDate: {css: "div[name='acquisitionEndDate'] input"},
             addRetentionPeriodLinkFromAcquisition: {css: "a[data-ng-click='addRetentionRightsTermPeriod(rtps.id)']"},
-            addPostTermPeriodLinkFromAcquisition: {css: "a[data-ng-click='addPostTermCollectionRightsTermPeriod(rtps.id)']"}
+            addPostTermPeriodLinkFromAcquisition: {css: "a[data-ng-click='addPostTermCollectionRightsTermPeriod(rtps.id)']"},
+            postTermPeriodDescriptionFromAcquisition: {css: "div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(6) div[data-name='postTermRtpForm'] input[data-ng-model='rtp.description']"}
         },
 
 
@@ -200,6 +201,47 @@ if (pages.create_deal_rtp === undefined) {
         clickOnTheAddPostTermPeriodFromAcquisition: function () {
             pages.create_deal_rtp.elems.addPostTermPeriodLinkFromAcquisition.click();
             pages.create_deal_rtp.waitForAjax();
+        },
+
+
+        fillIntoTheDescriptionPostTermPeriodNumberIFromAcquisition: function (i) {
+            var element = browser.driver.findElement(by.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] input[data-ng-model='rtp.description']"));
+            element.sendKeys("Description post term period " + i + " from acquisition ");
+        },
+
+
+        selectTheSpecificScopeNumberJForPostTermNumberI: function (i, j) {
+            var scopeField = browser.driver.findElement(by.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] "));
+            scopeField.click();
+            var desiredOption;
+            var desiredScope = "Scope " + j;
+            var scopeInputField = browser.driver.findElement(by.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
+            scopeInputField.sendKeys("Scope");
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(desiredScope) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+            browser.driver.findElement(by.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']")).click();
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] ul.tg-typeahead__suggestions ng-scope"))));
+        },
+
+        fillIntoTheDurationPostTermPeriodNumberIFromAcquisition: function (i) {
+            var element = browser.driver.findElement(by.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i+5) + ") div[data-name='postTermRtpForm'] input[data-ng-model='postTermDuration']"));
+            element.sendKeys("Duration post term period " + i + " from acquisition ");
         }
 
 

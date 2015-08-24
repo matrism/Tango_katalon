@@ -195,6 +195,12 @@ var beforeFeature = function () {
             //add post term period 1 from acquisition
             steps.base.scrollIntoView("Add post term period from acquisition ", pages.create_deal_rtp.elems.addPostTermPeriodLinkFromAcquisition);
             steps.create_deal_rtp.clickOnAddPostTermPeriodFromAcquisition();
+            steps.base.scrollIntoView("Post term period from acquisition ", pages.create_deal_rtp.elems.postTermPeriodDescriptionFromAcquisition);
+            steps.create_deal_rtp.fillIntoDescriptionPostTermPeriodNumberIFromAcquisition(1);
+            //steps.create_deal_rtp.selectSpecificScopeNumberJForPostTermNumberI(3,1);
+            //steps.create_deal_rtp.fillIntoDurationPostTermPeriodNumberIFromAcquisition(1);
+
+
 
             //steps.deal.itContinueToNextPage();
             //steps.deal.itContinueToNextPage();
