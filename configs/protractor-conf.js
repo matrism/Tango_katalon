@@ -105,6 +105,9 @@ config = {
             };
         };
 
+        global.Typeahead = require('../helpers/typeahead.js');
+        global.TgDropdown = require('../helpers/tgDropdown.js');
+
     },
     onCleanUp: function(statusCode) {
         if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
