@@ -320,7 +320,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectSpecificPublisherNameDropDown: function () {
             it("Select specific value publisher name drop down", function () {
-                pages.create_deal_scope.selectTheSpecificPublisherNameDropDown("(53026414)\nWB MUSIC CORP.");
+                pages.create_deal_scope.selectTheSpecificPublisherNameDropDown("(53026414)\nWB Music Corp.");
             });
         },
 
