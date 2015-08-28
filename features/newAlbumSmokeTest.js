@@ -11,6 +11,8 @@ require(steps_path + 'person');
 require(steps_path + 'newPerson');
 require(steps_path + 'work');
 require(steps_path + 'new_work');
+require(steps_path + 'newAlbum');
+require(steps_path + 'album');
 
 var beforeFeature = [
         [steps.login.itLogin],
@@ -21,6 +23,7 @@ var beforeFeature = [
             tags: [
                 'new-album-smoke-test-create-person',
                 'new-album-smoke-test-create-work',
+                'new-album-smoke-test-create-commercial-album',
             ],
             steps: function() {
                 steps.person.useBlankPersonSlot(0);
@@ -43,6 +46,7 @@ var beforeFeature = [
             name: 'Create work',
             tags: [
                 'new-album-smoke-test-create-work',
+                'new-album-smoke-test-create-commercial-album',
             ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('work', 'mainWork');
@@ -63,6 +67,51 @@ var beforeFeature = [
                 });
 
                 steps.work.findCurrentlyOpenWorkId();
+            },
+        },
+        {
+            name: 'Create commercial album',
+            tags: [
+                'new-album-smoke-test-create-commercial-album',
+            ],
+            steps: function() {
+                using(steps.newAlbum, function() {
+                    this.goToNewAlbumPage();
+
+                    this.enterTitle('TEST ALBUM ' + randomId('commercialAlbum'));
+
+                    this.selectReleaseType('Commercial');
+
+                    this.enterArtistSearchTerms(
+                        'TEST ARTIST ' + randomId('commercialAlbumArtist')
+                    );
+
+                    this.createEnteredArtist();
+
+                    this.enterAlbumCode(
+                        'TEST ALBUM CODE ' + randomId('commercialAlbumCode')
+                    );
+
+                    this.enterRecordingSearchTerms(
+                        0, 'TEST RECORDING ' + randomId('commercialAlbumRecording')
+                    );
+
+                    this.createEnteredRecording();
+
+                    this.enterWorkIdFromWorkSlotAsWorkSearchTerms(0, 'mainWork');
+
+                    this.selectRecordingWorkSearchResultByIndex(0);
+
+                    this.enterRecordingArtistSearchTerms(
+                        0, 'TEST ARTIST ' + randomId('commercialAlbumArtist')
+                    );
+
+                    this.selectRecordingArtistSearchResultByIndex(0);
+
+                    this.save();
+                });
+
+                steps.album.expectAlbumHeaderToBeVisible();
             },
         },
     ];
