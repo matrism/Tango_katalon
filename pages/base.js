@@ -331,3 +331,7 @@ exports.refreshPage = function() {
     browser.refresh();
     pages.base.waitForAjax();
 };
+
+exports.hitEscape = function() {
+    return $('body').sendKeys(protractor.Key.ESCAPE);
+};
