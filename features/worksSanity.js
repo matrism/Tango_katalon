@@ -5,7 +5,10 @@ var pages_path = _tf_config._system_.path_to_pages,
     leftPad = require('left-pad'),
     moment = require('moment'),
     random = require('../helpers/random'),
-    randomId = random.id.makeMemoizedGenerator();
+    randomId = random.id.makeMemoizedGenerator(),
+    fnutils = require('../helpers/fnutils'),
+    bind = fnutils.bind,
+    using = fnutils.using;
 
 require(steps_path + 'login');
 require(steps_path + 'person');
@@ -39,6 +42,8 @@ var beforeFeature = [
                 'works-sanity-validate-composite-works',
                 'works-sanity-create-cos',
                 'works-sanity-validate-cos',
+                'worksSanityCreateLibraryWork',
+                'worksSanityValidateLibraryWork',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -405,6 +410,46 @@ var beforeFeature = [
                     steps.work.validateComponentWorkName(i);
                     steps.work.validateComponentWorkAllocation(i);
                 });
+            },
+        },
+        {
+            name: 'Create library work',
+            tags: [
+                'worksSanityCreateLibraryWork',
+                'worksSanityValidateLibraryWork',
+            ],
+            steps: function() {
+                steps.base.useBlankEntityDataSlot('work', 'libraryWork');
+
+                using(steps.new_work, function() {
+                    this.goToNewWorkPage();
+
+                    this.enterPrimaryWorkTitle(
+                        'TEST LIBRARY WORK ' + randomId('libraryWork')
+                    );
+
+                    this.selectCreatorFromPersonSlot(0, 2);
+                    this.enterCreatorContribution(0, 100);
+
+                    this.selectIntendedPurpose('Library Work');
+                    this.selectMusicLibrary('AUDIOMACHINE');
+
+                    this.optToIncludeWorkOnWebsite(false);
+
+                    this.continueToNextTab();
+
+                    _.times(3, bind(steps.newWorkRecordings, function(i) {
+                        this.clickRecordingNameField(i);
+                        this.selectRecordingNameSuggestionByIndex(i);
+
+                        this.validateLibraryName(i);
+                    }));
+
+                    this.saveWork();
+                    this.validateSaveWorkRedirection();
+                });
+
+                steps.work.findCurrentlyOpenWorkId();
             },
         },
         {

@@ -688,6 +688,11 @@ module.exports.selectRandomIntendedPurpose = function() {
 	});
 	return deferred.promise;
 };
+exports.selectIntendedPurpose = function(value) {
+    it('Select Intended Purpose (' + value + ')', function() {
+        pages.new_work.selectIntendedPurpose(value);
+    });
+};
 module.exports.enterRandomProductionTitle = function() {
 	var deferred = promise.defer();
 	it("Enter a random production title (if displayed)", function() {
@@ -735,6 +740,12 @@ module.exports.selectRandomMusicLibrary = function() {
 		});
 	});
 	return deferred.promise;
+};
+exports.selectMusicLibrary = function(value) {
+    it('Select music library (' + value + ')', function() {
+        pages.new_work.selectMusicLibrary(value);
+        hash.currentEntityDataSlotsByType.work.musicLibrary = value;
+    });
 };
 module.exports.validateDefaultCreationYear = function() {
 	it("Validate default creation year", function() {
