@@ -63,10 +63,20 @@ exports.createEnteredArtistOption = function() {
     ));
 };
 
+exports.expectNewArtistOptionToBeVisible = function() {
+    var element = exports.createEnteredArtistOption();
+    pages.base.scrollIntoView(element);
+    expect(element.isDisplayed()).toBeTruthy();
+};
+
 exports.createEnteredArtist = function() {
     var element = exports.createEnteredArtistOption();
     pages.base.scrollIntoView(element);
     return element.click();
+};
+
+exports.cancelArtistSearch = function() {
+    return pages.base.hitEscape();
 };
 
 exports.albumCodeInput = function() {
@@ -112,10 +122,20 @@ exports.createEnteredRecordingOption = function() {
     );
 };
 
+exports.expectNewRecordingOptionToBeVisible = function() {
+    var element = exports.createEnteredRecordingOption();
+    pages.base.scrollIntoView(element);
+    expect(element.isDisplayed()).toBeTruthy();
+};
+
 exports.createEnteredRecording = function() {
     var element = exports.createEnteredRecordingOption();
     pages.base.scrollIntoView(element);
     return element.click();
+};
+
+exports.cancelRecordingSearch = function() {
+    return pages.base.hitEscape();
 };
 
 exports.recordingWorkSearchTermsTypeahead = function(i) {

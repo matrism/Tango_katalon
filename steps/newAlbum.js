@@ -32,9 +32,21 @@ exports.enterArtistSearchTerms = function(value) {
     });
 };
 
+exports.expectNewArtistOptionToBeVisible = function() {
+    it('Expect "Create New Artist" option to be visible', function() {
+        pages.newAlbum.expectNewArtistOptionToBeVisible();
+    });
+};
+
 exports.createEnteredArtist = function() {
     it('Create entered artist', function() {
         pages.newAlbum.createEnteredArtist();
+    });
+};
+
+exports.cancelArtistSearch = function() {
+    it('Cancel artist search', function() {
+        pages.newAlbum.cancelArtistSearch();
     });
 };
 
@@ -53,9 +65,21 @@ exports.enterRecordingSearchTerms = function(i, value) {
     );
 };
 
+exports.expectNewRecordingOptionToBeVisible = function() {
+    it('Expect "Create New Recording" option to be visible', function() {
+        pages.newAlbum.expectNewRecordingOptionToBeVisible();
+    });
+};
+
 exports.createEnteredRecording = function() {
     it('Create entered recording', function() {
         pages.newAlbum.createEnteredRecording();
+    });
+};
+
+exports.cancelRecordingSearch = function() {
+    it('Cancel recording search', function() {
+        pages.newAlbum.cancelRecordingSearch();
     });
 };
 
