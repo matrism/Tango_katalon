@@ -214,9 +214,9 @@ var beforeFeature = function () {
             steps.create_deal_advances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(1);
             steps.create_deal_advances.selectRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI(1);
             steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(1);
-            //steps.create_deal_advances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(2);
-            //steps.create_deal_advances.selectRandomPersonPaymentRecipientDistributionRulesAdvanceDetailsNumberI(2);
-            //steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(2);
+            steps.create_deal_advances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(2);
+            steps.create_deal_advances.selectRandomPersonPaymentRecipientDistributionRulesAdvanceDetailsNumberI(2);
+            steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(2);
 
             //steps.deal.saveDeal();
             //steps.deal.waitForDealToBeSaved();
