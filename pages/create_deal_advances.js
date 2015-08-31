@@ -36,6 +36,13 @@ if (pages.create_deal_advances === undefined) {
             defineDigitalTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories a"},
             definPrintTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories a"},
             defineOtherTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories a"},
+            defineSynchTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            defineMechTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            definePerfTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            defineGrandTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            defineDigitalTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            definePrintTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
+            defineOtherTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
             defineSynchTerritoriesInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             defineMechTerritoriesInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             definePerfTerritoriesInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -50,6 +57,13 @@ if (pages.create_deal_advances === undefined) {
             defineDigitalLabelsAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels a"},
             definePrintLabelsAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels a"},
             defineOtherLabelsAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(7) td.advance-ea-labels.pipeline-labels a"},
+            defineSynchLabelsFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass']"},
+            defineMechLabelsFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass']"},
+            definePerfLabelsFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass']"},
+            defineGrandLabelsFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass']"},
+            defineDigitalLabelsFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass']"},
+            definePrintLabelsFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass']"},
+            defineOthersLabelsFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(7) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass']"},
             defineSynchLabelsInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             defineMechLabelsInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             definePerfLabelsInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -223,7 +237,336 @@ if (pages.create_deal_advances === undefined) {
         fillIntoTheOtherRightsPercentFieldAdvanceApplicableEarnings: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_advances.elems.otherRightsPercentAdvanceApplicableEarnings.sendKeys(percent);
+        },
+
+        clickOnTheSynchPipelineCheckBoxAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.synchPipelineCheckBoxAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        clickOnTheMechPipelineCheckBoxAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.mechPipelineCheckBoxAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        clickOnThePerfPipelineCheckBoxAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.perfPipelineCheckBoxAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        clickOnTheGrandPipelineCheckBoxAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.grandPipelineCheckBoxAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        clickOnTheDigitalPipelineCheckBoxAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.digitalPipelineCheckBoxAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        clickOnThePrintPipelineCheckBoxAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.printPipelineCheckBoxAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        clickOnTheOtherPipelineCheckBoxAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.otherPipelineCheckBoxAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        selectTheRandomDefineSynchTerritoryAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.defineSynchTerritoriesAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineSynchTerritoriesFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineSynchTerritoriesFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineSynchTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    options[randomNumber].click();
+                })
+        },
+
+
+        selectTheRandomDefineMechTerritoryAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.defineMechTerritoriesAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineMechTerritoriesFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineMechTerritoriesFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineMechTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    options[randomNumber].click();
+                })
+        },
+
+        selectTheRandomDefinePerfTerritoryAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.definePerfTerritoriesAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePerfTerritoriesFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.definePerfTerritoriesFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.definePerfTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    options[randomNumber].click();
+                })
+        },
+
+        selectTheRandomDefineGrandTerritoryAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.defineGrandTerritoriesAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineGrandTerritoriesFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineGrandTerritoriesFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineGrandTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    options[randomNumber].click();
+                })
+        },
+
+
+        selectTheRandomDefineDigitalTerritoryAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.defineDigitalTerritoriesAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineDigitalTerritoriesFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineDigitalTerritoriesFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineDigitalTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    options[randomNumber].click();
+                })
+        },
+
+        selectTheRandomDefinePrintTerritoryAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.definePrintTerritoriesAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePrintTerritoriesFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.definePrintTerritoriesFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.definePrintTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    options[randomNumber].click();
+                })
+        },
+
+        selectTheRandomDefineOtherTerritoryAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.defineOtherTerritoriesAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineOtherTerritoriesFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineOtherTerritoriesFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineOtherTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    options[randomNumber].click();
+                })
+        },
+
+        selectTheRandomDefineSynchLabelAdvanceApplicableEarnings: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_advances.elems.defineSynchLabelsAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineSynchLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+
+            element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
+        },
+
+        selectTheRandomDefineMechLabelAdvanceApplicableEarnings: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_advances.elems.defineMechLabelsAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineMechLabelsFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineMechLabelsFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineMechLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+
+            element(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
+        },
+
+        selectTheRandomDefinePerfLabelAdvanceApplicableEarnings: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_advances.elems.definePerfLabelsAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePerfLabelsFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.definePerfLabelsFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.definePerfLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+
+            element(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
+        },
+
+
+        selectTheRandomDefineGrandLabelAdvanceApplicableEarnings: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_advances.elems.defineGrandLabelsAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineGrandLabelsFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineGrandLabelsFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineGrandLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+
+            element(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
+        },
+
+        selectTheRandomDefineDigitalLabelAdvanceApplicableEarnings: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_advances.elems.defineDigitalLabelsAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineDigitalLabelsFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineDigitalLabelsFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineDigitalLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+
+            element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
+        },
+
+        selectTheRandomDefinePrintLabelAdvanceApplicableEarnings: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_advances.elems.definePrintLabelsAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePrintLabelsFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.definePrintLabelsFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.definePrintLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+
+            element(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
+        },
+
+        selectTheRandomDefineOtherLabelAdvanceApplicableEarnings: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_advances.elems.defineOtherLabelsAdvanceApplicableEarnings.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineOthersLabelsFieldAdvanceApplicableEarnings));
+            pages.create_deal_advances.elems.defineOthersLabelsFieldAdvanceApplicableEarnings.click();
+            pages.create_deal_advances.elems.defineOthersLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+
+            element(By.css("table tbody tr:nth-child(7) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(7) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(7) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
+        },
+
+        clickOnTheDoneAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.doneAdvanceApplicableEarningsButton.click();
+            pages.create_deal_advances.waitForAjax();
+        },
+
+        clickOnTheCancelAdvanceApplicableEarnings: function () {
+            pages.create_deal_advances.elems.cancelAdvanceApplicableEarningsButton.click();
+            pages.create_deal_advances.waitForAjax();
         }
+
 
     })
 

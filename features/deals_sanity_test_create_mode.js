@@ -195,9 +195,9 @@ var beforeFeature = function () {
             //steps.deal.itContinueToNextPage();
             //steps.create_deal_approval_restrictions.clickOnAddExternalContactOnMissingApprovalModalDialog();
             //steps.base.scrollIntoView("External contacts", pages.create_deal_general.elems.externalContactNameFieldInput);
-            //steps.create_deal_general.selectRandomExternalContactRoleRowI(1);
+            //steps.create_deal_general.selectSpecificExternalContactRoleRowI(1, "Approval");
             //steps.create_deal_general.selectRandomExternalContactNameRowI(1);
-
+            //
             //steps.deal.itContinueToNextPage();
             steps.deal.itContinueToNextPage();
             steps.deal.itContinueToNextPage();

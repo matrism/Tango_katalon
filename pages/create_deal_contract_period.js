@@ -78,6 +78,7 @@ if (pages.create_deal_contract_period === undefined) {
 
         clickOnAddContractPeriod: function () {
             pages.create_deal_contract_period.elems.addContractPeriodElem.click();
+            pages.create_deal_contract_period.waitForAjax();
         },
 
         fillDescriptionField: function (description) {

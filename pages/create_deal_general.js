@@ -124,7 +124,8 @@ if (pages.create_deal_general === undefined) {
         selectRandomInternalContactsFromDropDown: function () {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
-            browser.driver.findElements(By.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            //browser.driver.findElements(By.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
