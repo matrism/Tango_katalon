@@ -31,3 +31,15 @@ exports.navigateBreadcrumb = function(name) {
         pages.dataUtilities.navigateBreadcrumb(name);
     });
 };
+
+exports.expectFormControlLabelToBeVisible = function(i) {
+    it('Expect form control label #' + (i + 1) + ' to be visible', function() {
+        pages.dataUtilities.expectFormControlLabelToBeVisible(i);
+    });
+};
+
+exports.expectFormControlGroupDataNotToBeBlank = function(i) {
+    it('Expect form control group data #' + (i + 1) + ' not to be blank', function() {
+        pages.dataUtilities.expectFormControlGroupDataNotToBeBlank(i);
+    });
+};

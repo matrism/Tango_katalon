@@ -75,3 +75,35 @@ exports.navigateBreadcrumb = function(name) {
         pages.base.waitForAjax();
     });
 };
+
+exports.formContainer = function() {
+    return $('.menu-board.menu-EDIT');
+};
+
+exports.formControlGroupContainers = function() {
+    return exports.formContainer().$$('.control-group');
+};
+
+exports.formControlLabelBinding = function(i) {
+    return exports.formControlGroupContainers().get(i).$('.control-label');
+};
+
+exports.expectFormControlLabelToBeVisible = function(i) {
+    var element = exports.formControlLabelBinding(i);
+    pages.base.scrollIntoView(element);
+    expect(element.isDisplayed()).toBeTruthy();
+};
+
+exports.formControlGroupControlsContainer = function(i) {
+    return exports.formControlGroupContainers().get(i).$('.controls');
+};
+
+exports.formControlGroupData = function(i) {
+    var element = exports.formControlGroupControlsContainer(i);
+    pages.base.scrollIntoView(element);
+    return pph.getAllText(element);
+};
+
+exports.expectFormControlGroupDataNotToBeBlank = function(i) {
+    expect(exports.formControlGroupData(i)).not.toBe('');
+};

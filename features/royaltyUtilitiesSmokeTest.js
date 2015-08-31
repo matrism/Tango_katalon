@@ -2,9 +2,7 @@
 
 var steps_path = _tf_config._system_.path_to_steps,
     fnutils = require('../helpers/fnutils'),
-    using = fnutils.using,
-    random = require('../helpers/random'),
-    randomId = random.id.makeMemoizedGenerator();
+    using = fnutils.using;
 
 require(steps_path + 'login');
 require(steps_path + 'dataUtilities');
@@ -14,7 +12,7 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Navigate across every royalty utility menu item',
+            name: 'Navigate across every royalty utility menu item and check first form fields',
             tags: [
                 'royalty-utilities-smoke-test-navigation',
             ],
@@ -30,11 +28,17 @@ var beforeFeature = [
 
                     this.openMenuBoardItemByIndex(3, 0);
 
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
+
                     this.navigateBreadcrumb('Royalty Utilities');
 
                     this.openMenuBoardItem(1, 'Statement Group');
 
                     this.openMenuBoardItemByIndex(2, 0);
+
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
 
                     this.navigateBreadcrumb('Royalty Utilities');
 
@@ -42,11 +46,17 @@ var beforeFeature = [
 
                     this.openMenuBoardItemByIndex(2, 0);
 
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
+
                     this.navigateBreadcrumb('Royalty Utilities');
 
                     this.openMenuBoardItem(1, 'Royalty Processing Territory');
 
                     this.openMenuBoardItemByIndex(2, 0);
+
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
 
                     this.navigateBreadcrumb('Royalty Utilities');
 
@@ -54,23 +64,26 @@ var beforeFeature = [
 
                     this.openMenuBoardItemByIndex(2, 0);
 
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
+
                     this.navigateBreadcrumb('Royalty Utilities');
 
                     this.openMenuBoardItem(1, 'Income File Type');
 
                     this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
-
-                    this.openMenuBoardItem(1, 'Nordic Processing');
-
-                    this.openMenuBoardItemByIndex(2, 0);
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
 
                     this.navigateBreadcrumb('Royalty Utilities');
 
                     this.openMenuBoardItem(1, 'Nordic Processing');
 
                     this.openMenuBoardItemByIndex(2, 0);
+
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
 
                     this.navigateBreadcrumb('Royalty Utilities');
 
@@ -78,11 +91,17 @@ var beforeFeature = [
 
                     this.openMenuBoardItemByIndex(2, 0);
 
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
+
                     this.navigateBreadcrumb('Royalty Utilities');
 
                     this.openMenuBoardItem(1, 'Company Set');
 
                     this.openMenuBoardItemByIndex(2, 0);
+
+                    this.expectFormControlLabelToBeVisible(0);
+                    this.expectFormControlGroupDataNotToBeBlank(0);
 
                     this.navigateBreadcrumb('Royalty Utilities');
                 });
