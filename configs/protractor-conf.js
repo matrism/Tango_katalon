@@ -99,7 +99,7 @@ config = {
             return function () {
                 return protractor.ExpectedConditions.presenceOfAny(elems)().then(function (count) {
                     return count && pph.arraySome(elems, function(element){
-                        return protractor.ExpectedConditions.visibilityOf(element)
+                        return protractor.ExpectedConditions.visibilityOf(element);
                     });
                 });
             };

@@ -41,7 +41,7 @@ exports.societyTypeahead = function () {
 };
 
 exports.selectSociety = function (name) {
-    var typeahead = exports.societyTypeahead
+    var typeahead = exports.societyTypeahead;
     typeahead.sendKeys(name);
     typeahead.results().filter(pph.matchTextExact(name));
 };
@@ -69,7 +69,7 @@ exports.selectPublisherType = function (type) {
 
 exports.deliveryMethodPanels = function () {
     return element.all(by.repeater('dm in getDeliveryMethods()'));
-}
+};
 
 exports.addDeliveryMethodButton = function () {
     return element(by.buttonText('+ Add Delivery Method'));
@@ -150,7 +150,7 @@ exports.addSubpublisherButton = function () {
 };
 
 exports.subpublisherTypeahead = function () {
-    var elem = exports.subpublisherForm().element(by.model('spEdit.sub_publisher.name'));
+    var elem = exports.subpublishersRepeater().last().element(by.model('spEdit.sub_publisher.name'));
 
     elem.results = function () { 
         return exports.subpublisherForm().$$('.SUB_PUBLISHER .typeahead.dropdown-menu > li > a');
@@ -159,24 +159,24 @@ exports.subpublisherTypeahead = function () {
     return elem;
 };
 
-exports.fillSubpublisherFields = function () {
+exports.fillRequiredFieldsForLastSubpublisher = function (name, territory) {
     var subpublisherTypeahead = exports.subpublisherTypeahead(),
-        territoryOfControl = exports.subpublisherForm().element(by.model('spEdit.territories')),
+        territoryOfControl = exports.subpublishersRepeater().last().element(by.model('spEdit.territories')),
         territoryTypeahead = Typeahead(territoryOfControl.element(by.model('$dataHolder.internalModel')), true),
         results;
 
     pages.base.scrollIntoView(subpublisherTypeahead);
-    subpublisherTypeahead.sendKeys('ASCAP Publisher');
+    subpublisherTypeahead.sendKeys(name);
 
     results = subpublisherTypeahead.results();
     browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
 
-    results.filter(pph.matchText('ASCAP Publisher')).first().click();
+    results.filter(pph.matchText(name)).first().click();
 
     territoryOfControl.$('.tg-typeahead__tags-text').click();
-    territoryTypeahead.sendKeys('United States');
+    territoryTypeahead.sendKeys(territory);
     pages.base.waitForAjax();
-    territoryTypeahead.results().filter(pph.matchTextExact('United States')).first().click();
+    territoryTypeahead.results().filter(pph.matchTextExact(territory)).first().click();
 };
 
 exports.clickAddSubpublisherButton = function () {
@@ -250,8 +250,9 @@ exports.addIncomeTypeMapping = function (incomeType, description, fileType, tang
 
         elem.element(by.model('incomeType.internalIncomeType')).sendKeys(tangoIncomeType);
         browser.wait(protractor.ExpectedConditions.visibilityOfAny(formatResults));
+
         formatResults.first().click();
-    });;
+    });
 
 
 };
@@ -291,5 +292,19 @@ exports.setStatementRecipientData = function (option, subOption) {
     browser.wait(protractor.ExpectedConditions.visibilityOfAny(subOptions));
 
     subOptions.filter(pph.matchText(subOption)).first().click();
+};
+
+exports.doneButton = function () {
+    return $('#CREATE-ORG-SUBMIT');
+};
+
+exports.expectFormToBeValid = function () {
+    var button = exports.doneButton();
+    expect(button.evaluate('form.$error')).toEqual({});
+};
+
+exports.expectDoneButtonToBeClickable = function () {
+    var button = exports.doneButton();
+    expect(button.getAttribute('class')).toBe('btn btn-primary ng-scope');
 };
 

@@ -17,7 +17,7 @@ pageStep('Fill required fields for delivery method');
 pageStep('Select Acknowledgement Process');
 pageStep('Select Acknowledgement Process Delivery Method');
 pageStep('Click Subpublisher Relationship button');
-pageStep('Fill Subpublisher fields');
+pageStep('Fill required fields for last Subpublisher');
 pageStep('Click Add Subpublisher button');
 pageStep('Make Org Income Provider');
 pageStep('Set default Income Provider currency');
@@ -26,4 +26,6 @@ pageStep('Add Income Type Mapping');
 pageStep('Make Org Payee');
 pageStep('Make Org Statement Recipient');
 pageStep('Set statement recipient data');
+pageStep('Expect form to be valid');
+pageStep('Expect Done button to be clickable');
 

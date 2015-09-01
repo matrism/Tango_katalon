@@ -34,20 +34,23 @@ var beforeFeature = function () {
                 steps.organisationSmokeTests.fillRequiredFieldsForDeliveryMethod(deliveryMethod);
 
                 steps.organisationSmokeTests.clickSubpublisherRelationshipButton('Yes');
-                steps.organisationSmokeTests.fillSubpublisherFields();
+                steps.organisationSmokeTests.fillRequiredFieldsForLastSubpublisher('WARNER CHAPPELL MUSIC FINLAND OY', 'Finland');
                 steps.organisationSmokeTests.clickAddSubpublisherButton();
+                steps.organisationSmokeTests.fillRequiredFieldsForLastSubpublisher('WARNER CHAPPELL MUSIC FINLAND OY', 'Sweden');
 
                 steps.organisationSmokeTests.makeOrgIncomeProvider();
                 steps.organisationSmokeTests.setDefaultIncomeProviderCurrency('USD');
                 steps.organisationSmokeTests.setIncomeFileType('ASCAP Domestic');
-                steps.organisationSmokeTests.addIncomeTypeMapping(20, 'description', '', 'Mechanical');
+                /*steps.organisationSmokeTests.addIncomeTypeMapping(20, 'description', '', 'Mechanical');
                 steps.organisationSmokeTests.addIncomeTypeMapping(25, 'different description', 'ASCAP Domestic', 'Mechanical');
-                steps.organisationSmokeTests.addIncomeTypeMapping(30, 'description', 'ASCAP Domestic', 'Digital Mechanical');
+                steps.organisationSmokeTests.addIncomeTypeMapping(30, 'description', 'ASCAP Domestic', 'Digital Mechanical');*/
+
                 steps.organisationSmokeTests.makeOrgPayee();
                 steps.organisationSmokeTests.makeOrgStatementRecipient();
                 steps.organisationSmokeTests.setStatementRecipientData('Excel', 'Email with Attachment');
 
-                steps.base.sleep(5000);
+                steps.organisationSmokeTests.expectFormToBeValid();
+                steps.organisationSmokeTests.expectDoneButtonToBeClickable();
             }
         }
 
