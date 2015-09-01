@@ -1,7 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
+var pageStep = require('../helpers/pageStep')();
 
 steps.mainHeader = exports;
 
@@ -19,4 +18,6 @@ exports.goToSubLink = function (link, subLink) {
         pages.base.waitForAjax();
     });
 };
+
+pageStep('Create new record');
 

@@ -137,3 +137,35 @@ pph.makeCssSelectorPredicate = function(selector) {
     };
 };
 
+pph.matchText = function(text, isExact) {
+    text = text.toLowerCase();
+    return function(elem) {
+        return elem.getText().then(function(elemText){
+            elemText = elemText.toLowerCase();
+
+            var comparison = (elemText.indexOf(text) > -1);
+
+            if (isExact) {
+                comparison = (elemText === text);
+            }
+
+            return comparison;
+        });
+    };
+};
+
+pph.matchTextExact = function (text) {
+    return pph.matchText(text, true);
+};
+
+pph.jsClick = function(element) {
+    if(element instanceof protractor.ElementFinder) {
+        element = element.getWebElement();
+    }
+
+    return browser.executeScript(
+        function(element) {
+            return $(element).click();
+        }, element
+    );
+};
