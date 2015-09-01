@@ -65,7 +65,7 @@ var beforeFeature = function () {
 
     feature = [{
         name: "Create a deal with publisher share set",
-        tags: ["smokeDeal","smokeQA"],
+        tags: ['newDealSmokeTest'],
         steps: function () {
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -79,7 +79,7 @@ var beforeFeature = function () {
     },
         {
             name: 'Create a basic person (without persistence validations)',
-            tags: ["smokePerson","smokeQA"],
+            tags: ['newPersonSmokeTest'],
             steps: function () {
                 steps.person.useBlankPersonSlot(0);
                 steps.newPerson.goToNewPersonPage();
@@ -96,7 +96,7 @@ var beforeFeature = function () {
         },
         {
             name: "New basic work",
-            tags: ['smokeWork', 'smokeQA', 'broken'],
+            tags: ['newWorkSmokeTest'],
             steps: function () {
                 steps.new_work.createBasicWork(workData);
                 steps.work.validateWork(workData);
@@ -104,7 +104,7 @@ var beforeFeature = function () {
         },
         {
             name: "New basic organisation",
-            tags: ["smokeOrganisation","smokeQA"],
+            tags: ['newOrganisationSmokeTest'],
             steps: function () {
                 steps.organisation.goToNewOrganisationPage();
                 steps.organisation.setOrganisationName("TestOrganisationName");
@@ -117,8 +117,8 @@ var beforeFeature = function () {
             }
         },
         {
-            name: "View mode of  organisation",
-            tags: ["smokeOrganisationView","smokeQA"],
+            name: 'View mode of organisation',
+            tags: ['viewOrganisationSmokeTest'],
             steps: function () {
                 steps.searchSection.accessSavedOrganisationByName("BMI");
                 steps.organisation.validateCISACCode("021");
@@ -134,7 +134,7 @@ var beforeFeature = function () {
         },
         {
             name: "View mode of person",
-            tags: ["smokePersonView","smokeQA"],
+            tags: ['viewPersonSmokeTest'],
             steps: function () {
                 steps.searchSection.accessSavedPersonByName("katy perry");
                 steps.person.validateIPI("292555933");
@@ -149,7 +149,7 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ["smokeTestsQA"],
+    commonFeatureTags: ['smokeTest'],
     feature: feature,
     beforeFeature: beforeFeature
 };

@@ -21,9 +21,9 @@ var beforeFeature = [
         {
             name: 'Create person',
             tags: [
-                'new-album-smoke-test-create-person',
-                'new-album-smoke-test-create-work',
-                'new-album-smoke-test-create-commercial-album',
+                'newAlbumSmokeTestCreatePerson',
+                'newAlbumSmokeTestCreateWork',
+                'newAlbumSmokeCreateCommercialAlbum',
             ],
             steps: function() {
                 steps.person.useBlankPersonSlot(0);
@@ -45,8 +45,8 @@ var beforeFeature = [
         {
             name: 'Create work',
             tags: [
-                'new-album-smoke-test-create-work',
-                'new-album-smoke-test-create-commercial-album',
+                'newAlbumSmokeTestCreateWork',
+                'newAlbumSmokeCreateCommercialAlbum',
             ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('work', 'mainWork');
@@ -71,9 +71,7 @@ var beforeFeature = [
         },
         {
             name: 'Create commercial album',
-            tags: [
-                'new-album-smoke-test-create-commercial-album',
-            ],
+            tags: ['newAlbumSmokeCreateCommercialAlbum'],
             steps: function() {
                 using(steps.newAlbum, function() {
                     this.goToNewAlbumPage();
@@ -118,9 +116,9 @@ var beforeFeature = [
 
 module.exports = {
     commonFeatureTags: [
-        'new-album-smoke-test',
+        'newAlbumSmokeTest',
         'albums',
-        'smoke-test',
+        'smokeTest',
     ],
     feature: feature,
     beforeFeature: beforeFeature

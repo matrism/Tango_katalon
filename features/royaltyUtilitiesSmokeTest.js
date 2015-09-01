@@ -14,7 +14,8 @@ var beforeFeature = [
         {
             name: 'Navigate across every royalty utility menu item and check first form fields',
             tags: [
-                'royalty-utilities-smoke-test-navigation',
+                'royaltyUtilitiesSmokeTestNavigation',
+                'royaltyUtilitiesSmokeTestDataLoading',
             ],
             steps: function() {
                 using(steps.dataUtilities, function() {
@@ -111,9 +112,9 @@ var beforeFeature = [
 
 module.exports = {
     commonFeatureTags: [
-        'royalty-utilities-smoke-test',
-        'royalty-utilities',
-        'smoke-test',
+        'royaltyUtilitiesSmokeTest',
+        'royaltyUtilities',
+        'smokeTest',
     ],
     feature: feature,
     beforeFeature: beforeFeature
