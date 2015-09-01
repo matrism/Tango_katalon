@@ -107,6 +107,8 @@ config = {
 
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
+        global.pages_path = _tf_config._system_.path_to_pages;
+        global.steps_path = _tf_config._system_.path_to_steps;
 
     },
     onCleanUp: function(statusCode) {
