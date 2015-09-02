@@ -26,10 +26,10 @@ exports.findId = function() {
 };
 
 exports.internalIpiNumberBinding = function() {
-    return element(by.binding('person.pristine.master_data.primary_name.internal_ipi_number'));
+    return element(by.binding(' modularEditModels.model.internalIpiNumber '));
 };
 exports.suisaIPINumber = function() {
-    return element(by.binding('person.pristine.master_data.primary_name.suisa_ipi_number'));
+    return element(by.binding(' modularEditModels.model.suisaIpiNumber '));
 };
 exports.alternativeNameElement = function() {
     return $$(".EDITOR.span6>div>.row.span6>.span3").first();
