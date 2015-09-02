@@ -68,8 +68,8 @@ var beforeFeature = function () {
 
     feature = [
         {
-            name: "View mode of  organisation",
-            tags: ["smokeOrganisationViewProd","smokeProd"],
+            name: 'View mode of organisation',
+            tags: ['viewOrganisationProductionTest'],
             steps: function () {
                 steps.searchSection.accessSavedOrganisationByName("BMI");
                 steps.organisation.validateCISACCode("021");
@@ -85,7 +85,9 @@ var beforeFeature = function () {
         },
         {
             name: "View mode of person",
-            tags: ["smokePersonViewProd","smokeProd"],
+            tags: [
+                'viewPersonProductionSmokeTest',
+            ],
             steps: function () {
                 steps.searchSection.accessSavedPersonByName("katy perry");
                 steps.person.validateIPI("292555933");
@@ -96,7 +98,7 @@ var beforeFeature = function () {
         },
         {
             name: "Basic deal add scope",
-            tags: ["smokeScopeToDeal","smokeProd"],
+            tags: ['addDealScopeProductionSmokeTest'],
             steps: function () {
                 steps.searchSection.accessSavedDealByNumber("3");
                 steps.create_deal_contract_period.waitForDealToLoad();
@@ -119,7 +121,10 @@ var beforeFeature = function () {
         },
         {
             name: "Basic work and CWR",
-            tags: ["smokeWorkProd","smokeProd"],
+            tags: [
+                'viewWorkProductionSmokeTest',
+                'workPreviewCwrProductionSmokeTest',
+            ],
             steps: function () {
                 steps.searchSection.accessSavedWorkById("10083789");
                 steps.work.goToPreviewCwrTab();
@@ -133,7 +138,7 @@ var beforeFeature = function () {
         },
         {
             name: "Basic work and rights",
-            tags: ["smokeWorkRightsProd","smokeProd"],
+            tags: ['workRightsProductionSmokeTest'],
             steps: function () {
                 steps.searchSection.accessSavedWorkById("015000163");
                 steps.work.goToRightsTab();
@@ -151,7 +156,10 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ['smokeTestsProd', 'productionTest'],
+    commonFeatureTags: [
+        'productionSmokeTest',
+        'productionTest',
+    ],
     feature: feature,
     beforeFeature: beforeFeature
 };

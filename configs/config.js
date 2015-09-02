@@ -23,7 +23,7 @@ var configer = global.ftf.configer,
             path_to_features: __dirname + '/../features/',
             path_to_steps: __dirname + '/../steps/',
             path_to_pages: __dirname + '/../pages/',
-            wait_timeout: 60000 * 5,
+            wait_timeout: cli.timeout || 60000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false
         },
