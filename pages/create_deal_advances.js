@@ -279,8 +279,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineSynchTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineSynchTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineSynchTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -293,8 +293,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineMechTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineMechTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineMechTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -306,8 +306,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePerfTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.definePerfTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.definePerfTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -319,8 +319,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineGrandTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineGrandTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineGrandTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -333,8 +333,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineDigitalTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineDigitalTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineDigitalTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -346,8 +346,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePrintTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.definePrintTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.definePrintTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -359,8 +359,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineOtherTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineOtherTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineOtherTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions ng-scope li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     options[randomNumber].click();
@@ -373,8 +373,9 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineSynchLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li"))));
 
-            element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
+            element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li")).getText().
                 then(function (promise) {
                     console.log("Text from label is : " + promise);
                     if (promise.indexOf("Create New Label") != -1) {
