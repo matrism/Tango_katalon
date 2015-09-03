@@ -134,7 +134,7 @@ typeLastName : function(value) {
 
 
 presentationNameInput : function() {
-    return element(by.model('person.master_data.primary_name.presentation_name'));
+    return element(by.model('modularEditModels.model.fullName'));
 },
 
 typePresentationName : function(value) {
