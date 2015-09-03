@@ -34,7 +34,7 @@ if (pages.create_deal_advances === undefined) {
             definePerfTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories a"},
             defineGrandTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories a"},
             defineDigitalTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories a"},
-            definPrintTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories a"},
+            definePrintTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories a"},
             defineOtherTerritoriesAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories a"},
             defineSynchTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
             defineMechTerritoriesFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories div.tg-territory div[ng-class='tgTypeaheadWrapClass']"},
@@ -186,6 +186,7 @@ if (pages.create_deal_advances === undefined) {
 
         clickOnTheAddViewAdvanceApplicableEarningsLink: function () {
             pages.create_deal_advances.elems.addAdvanceApplicableEarningsLink.click();
+            pages.create_deal_advances.waitForAjax();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.synchronisationPercentAdvanceApplicableEarnings));
         },
 
@@ -276,7 +277,7 @@ if (pages.create_deal_advances === undefined) {
 
         selectTheRandomDefineSynchTerritoryAdvanceApplicableEarnings: function () {
             pages.create_deal_advances.elems.defineSynchTerritoriesAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineSynchTerritoriesFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineSynchTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineSynchTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineSynchTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -290,7 +291,7 @@ if (pages.create_deal_advances === undefined) {
 
         selectTheRandomDefineMechTerritoryAdvanceApplicableEarnings: function () {
             pages.create_deal_advances.elems.defineMechTerritoriesAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineMechTerritoriesFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineMechTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineMechTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineMechTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -303,7 +304,7 @@ if (pages.create_deal_advances === undefined) {
 
         selectTheRandomDefinePerfTerritoryAdvanceApplicableEarnings: function () {
             pages.create_deal_advances.elems.definePerfTerritoriesAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePerfTerritoriesFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.definePerfTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.definePerfTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.definePerfTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -316,7 +317,7 @@ if (pages.create_deal_advances === undefined) {
 
         selectTheRandomDefineGrandTerritoryAdvanceApplicableEarnings: function () {
             pages.create_deal_advances.elems.defineGrandTerritoriesAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineGrandTerritoriesFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineGrandTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineGrandTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineGrandTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -330,7 +331,7 @@ if (pages.create_deal_advances === undefined) {
 
         selectTheRandomDefineDigitalTerritoryAdvanceApplicableEarnings: function () {
             pages.create_deal_advances.elems.defineDigitalTerritoriesAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineDigitalTerritoriesFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineDigitalTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineDigitalTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineDigitalTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -343,7 +344,7 @@ if (pages.create_deal_advances === undefined) {
 
         selectTheRandomDefinePrintTerritoryAdvanceApplicableEarnings: function () {
             pages.create_deal_advances.elems.definePrintTerritoriesAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePrintTerritoriesFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.definePrintTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.definePrintTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.definePrintTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -356,7 +357,7 @@ if (pages.create_deal_advances === undefined) {
 
         selectTheRandomDefineOtherTerritoryAdvanceApplicableEarnings: function () {
             pages.create_deal_advances.elems.defineOtherTerritoriesAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineOtherTerritoriesFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineOtherTerritoriesFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineOtherTerritoriesFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineOtherTerritoriesInputFieldAdvanceApplicableEarnings.sendKeys("a");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -368,14 +369,15 @@ if (pages.create_deal_advances === undefined) {
         },
 
         selectTheRandomDefineSynchLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            //var value = Math.random().toString(36).substr(2, 3);
+            var value ="a";
             pages.create_deal_advances.elems.defineSynchLabelsAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineSynchLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li")).getText().
+            element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
                     console.log("Text from label is : " + promise);
                     if (promise.indexOf("Create New Label") != -1) {
@@ -395,12 +397,14 @@ if (pages.create_deal_advances === undefined) {
                 });
         },
 
+
         selectTheRandomDefineMechLabelAdvanceApplicableEarnings: function () {
             var value = Math.random().toString(36).substr(2, 3);
             pages.create_deal_advances.elems.defineMechLabelsAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineMechLabelsFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineMechLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineMechLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineMechLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
@@ -425,15 +429,16 @@ if (pages.create_deal_advances === undefined) {
         selectTheRandomDefinePerfLabelAdvanceApplicableEarnings: function () {
             var value = Math.random().toString(36).substr(2, 3);
             pages.create_deal_advances.elems.definePerfLabelsAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePerfLabelsFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.definePerfLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.definePerfLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.definePerfLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
                     console.log("Text from label is : " + promise);
                     if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
                                 options[randomNumber].click();
@@ -453,9 +458,10 @@ if (pages.create_deal_advances === undefined) {
         selectTheRandomDefineGrandLabelAdvanceApplicableEarnings: function () {
             var value = Math.random().toString(36).substr(2, 3);
             pages.create_deal_advances.elems.defineGrandLabelsAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineGrandLabelsFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineGrandLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineGrandLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineGrandLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
@@ -480,9 +486,10 @@ if (pages.create_deal_advances === undefined) {
         selectTheRandomDefineDigitalLabelAdvanceApplicableEarnings: function () {
             var value = Math.random().toString(36).substr(2, 3);
             pages.create_deal_advances.elems.defineDigitalLabelsAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineDigitalLabelsFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineDigitalLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineDigitalLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineDigitalLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
@@ -507,9 +514,10 @@ if (pages.create_deal_advances === undefined) {
         selectTheRandomDefinePrintLabelAdvanceApplicableEarnings: function () {
             var value = Math.random().toString(36).substr(2, 3);
             pages.create_deal_advances.elems.definePrintLabelsAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.definePrintLabelsFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.definePrintLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.definePrintLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.definePrintLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
@@ -534,9 +542,10 @@ if (pages.create_deal_advances === undefined) {
         selectTheRandomDefineOtherLabelAdvanceApplicableEarnings: function () {
             var value = Math.random().toString(36).substr(2, 3);
             pages.create_deal_advances.elems.defineOtherLabelsAdvanceApplicableEarnings.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_advances.elems.defineOthersLabelsFieldAdvanceApplicableEarnings));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_advances.elems.defineOthersLabelsFieldAdvanceApplicableEarnings));
             pages.create_deal_advances.elems.defineOthersLabelsFieldAdvanceApplicableEarnings.click();
             pages.create_deal_advances.elems.defineOthersLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(7) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("table tbody tr:nth-child(7) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {

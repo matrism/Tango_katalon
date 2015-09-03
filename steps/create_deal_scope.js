@@ -21,7 +21,6 @@ if (steps.create_deal_scope === undefined) {
                 pages.create_deal_scope.addScopeForm();
                 pages.create_deal_scope.selectRandomContractTypeScope();
                 pages.create_deal_scope.waitForAjax();
-                pages.create_deal_scope.addTerritoryByTypingToScope();
             });
         },
 
@@ -89,6 +88,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectCountry: function () {
             it("Select country", function () {
+                pages.create_deal_scope.addTerritoryByTypingToScope();
                 pages.create_deal_scope.selectRandomCountry();
                 pages.create_deal_scope.waitForAjax();
             });
@@ -145,12 +145,14 @@ if (steps.create_deal_scope === undefined) {
         clickOnAddPublisherShareSet: function () {
             it("Open publisher share set form", function () {
                 pages.create_deal_scope.clickOnAddPublisherShareSetLink();
+                pages.create_deal_scope.waitForAjax();
             });
         },
 
         clickOnYesSocietyAwardCreditPublisherShareSet: function () {
             it("Click on the yes society award credit pss and check it is selected", function () {
                 pages.create_deal_scope.clickOnTheYesSocietyAwardCreditPublisherShareSet();
+                pages.create_deal_scope.waitForAjax();
                 var test = pages.create_deal_scope.elems.yesSocietyAwardCreditPss.getAttribute("class").toString();
                 expect(test.indexOf("active") != -1);
             });
@@ -320,7 +322,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectSpecificPublisherNameDropDown: function () {
             it("Select specific value publisher name drop down", function () {
-                pages.create_deal_scope.selectTheSpecificPublisherNameDropDown("(53026414)\nWB Music Corp.");
+                pages.create_deal_scope.selectTheSpecificPublisherNameDropDown("(53026414)\nWB MUSIC CORP.");
             });
         },
 
@@ -458,7 +460,6 @@ if (steps.create_deal_scope === undefined) {
         selectSubPublisherOverrideTerritoryPss: function (territory) {
             it("Select the sub publisher override territory pss ", function () {
                 pages.create_deal_scope.selectTheSubPublisherOverrideTerritoryPss(territory);
-                ;
             });
         },
 
@@ -495,17 +496,20 @@ if (steps.create_deal_scope === undefined) {
             describe("Add publisher share set", function () {
                 steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
                 steps.create_deal_scope.clickOnAddPublisherShareSet();
-                steps.create_deal_scope.clickOnYesSocietyAwardCreditPublisherShareSet();
                 steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMField("wb music corp");
                 steps.create_deal_scope.selectSpecificPublisherNameDropDown();
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
+                steps.base.scrollIntoView("Yes society award credits", pages.create_deal_scope.elems.yesSocietyAwardCreditPss);
+                steps.create_deal_scope.clickOnYesSocietyAwardCreditPublisherShareSet();
             });
         },
 
         itOverridePublisherShare: function (subPublisherName, subPublisherSelected, territory) {
             describe("Override publisher share set", function () {
+                steps.base.scrollIntoView("Override pss icon ", pages.create_deal_scope.elems.overridePssIcon);
                 steps.create_deal_scope.clickOnAddOverrideIconPss();
+                steps.base.scrollIntoView("Override pss ",pages.create_deal_scope.elems.subPublisherOverridePssInputField );
                 steps.create_deal_scope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
                 steps.create_deal_scope.selectSubPublisherOverrideTerritoryPss(territory);
                 steps.base.scrollIntoView("Done override publisher share set", pages.create_deal_scope.elems.doneOverridePublisherShareSetButton);

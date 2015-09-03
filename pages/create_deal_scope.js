@@ -40,6 +40,7 @@ if (pages.create_deal_scope === undefined) {
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             publisherShareSetArea: {css: "div[data-tg-modular-edit-id='publisherShareSets']"},
             overridePssIcon: {css: "div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] a[data-ng-click='showSubPubOverrideForm()'] i"},
+            subPublisherOverridePssField: {css: "div[name='subPublisherOverride'] div[ng-class='tgTypeaheadWrapClass']"},
             subPublisherOverridePssInputField: {css: "div[name='subPublisherOverride'] input[ng-model='$term']"},
             territoryOverridePssField: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
             territoryOverridePssFieldInput: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -609,11 +610,13 @@ if (pages.create_deal_scope === undefined) {
 
         clickOnTheAddOverrideIconPss: function () {
             pages.create_deal_scope.elems.overridePssIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.subPublisherOverridePssInputField));
+            pages.create_deal_advances.waitForAjax();
         },
 
         selectTheSubPublisherOverridePss: function(subPublisherName, subPublisherSelected){
             var desiredOption;
+            pages.create_deal_scope.elems.subPublisherOverridePssField.click();
+            pages.create_deal_scope.elems.subPublisherOverridePssInputField.clear();
             pages.create_deal_scope.elems.subPublisherOverridePssInputField.sendKeys(subPublisherName);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[name='subPublisherOverride'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))

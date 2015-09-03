@@ -83,6 +83,7 @@ if (steps.create_deal_contract_period === undefined) {
         chooseDeemedCompleteMdrcOption: function () {
             it("Choose deemed complete MDRC option", function () {
                 pages.create_deal_contract_period.clickOnDeemedCompleteOption();
+                pages.create_deal_advances.waitForAjax();
                 browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.mdrcDateCompleted));
             });
         },
@@ -90,6 +91,7 @@ if (steps.create_deal_contract_period === undefined) {
         chooseCompleteMdrcOption: function () {
             it("Choose complete MDRC option", function () {
                 pages.create_deal_contract_period.clickOnCompleteOption();
+                pages.create_deal_advances.waitForAjax();
                 browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.mdrcDateCompleted));
             });
         },
@@ -494,6 +496,7 @@ if (steps.create_deal_contract_period === undefined) {
                 steps.create_deal_contract_period.checkIncompleteMdrcOptionIsSelected();
                 steps.create_deal_contract_period.fillMdrcQuantity();
                 steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
+                steps.base.scrollIntoView("Add mdrc territory", pages.create_deal_contract_period.elems.mdrcTerritoriesField);
                 steps.create_deal_contract_period.addMdrcTerritory();
                 steps.create_deal_contract_period.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
                 steps.create_deal_contract_period.clickMdrcNoCommercialReleaseByMajorLabel();
@@ -516,6 +519,7 @@ if (steps.create_deal_contract_period === undefined) {
         itAddDeemedCompleteMdrcContractPeriod: function () {
             describe("Add deemed complete MDRC on  contract period screen", function () {
                 steps.create_deal_contract_period.clickOnAddMdrc();
+                steps.base.scrollIntoView("Label section", pages.create_deal_contract_period.elems.deemedCompleteMdrc);
                 steps.create_deal_contract_period.checkIncompleteMdrcOptionIsSelected();
                 steps.create_deal_contract_period.chooseDeemedCompleteMdrcOption();
                 steps.create_deal_contract_period.checkDeemedCompleteMdrcOptionIsSelected();
@@ -524,6 +528,7 @@ if (steps.create_deal_contract_period === undefined) {
                 steps.create_deal_contract_period.checkMdrcForgivenShortfallActionOptionIsSelected();
                 steps.create_deal_contract_period.fillMdrcQuantity();
                 steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
+                steps.base.scrollIntoView("Add mdrc territory", pages.create_deal_contract_period.elems.mdrcTerritoriesField);
                 steps.create_deal_contract_period.addMdrcTerritory();
                 steps.create_deal_contract_period.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
                 steps.create_deal_contract_period.clickMdrcNoCommercialReleaseByMajorLabel();
@@ -546,12 +551,14 @@ if (steps.create_deal_contract_period === undefined) {
         itAddCompleteMdrcContractPeriod: function () {
             describe("Add complete MDRC on  contract period screen", function () {
                 steps.create_deal_contract_period.clickOnAddMdrc();
+                steps.base.scrollIntoView("Label section", pages.create_deal_contract_period.elems.completeMdrc);
                 steps.create_deal_contract_period.checkIncompleteMdrcOptionIsSelected();
                 steps.create_deal_contract_period.chooseCompleteMdrcOption();
                 steps.create_deal_contract_period.checkCompleteMdrcOptionIsSelected();
                 steps.create_deal_contract_period.fillDateCompleted();
                 steps.create_deal_contract_period.fillMdrcQuantity();
                 steps.create_deal_contract_period.fillMdrcQuantityForCommercialRelease();
+                steps.base.scrollIntoView("Add mdrc territory", pages.create_deal_contract_period.elems.mdrcTerritoriesField);
                 steps.create_deal_contract_period.addMdrcTerritory();
                 steps.create_deal_contract_period.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
                 steps.create_deal_contract_period.clickMdrcNoCommercialReleaseByMajorLabel();
@@ -578,10 +585,12 @@ if (steps.create_deal_contract_period === undefined) {
                 steps.create_deal_contract_period.addNewContractPeriodDialog();
                 steps.create_deal_contract_period.fillContractPeriodDescription("Description 2");
                 steps.create_deal_contract_period.fillEndTargetMonths();
+                steps.base.scrollIntoView("Add actual end date", pages.create_deal_contract_period.elems.actualEndDate);
                 steps.create_deal_contract_period.fillActualEndDateFieldSpecificValue("2016-02-04");
                 steps.create_deal_contract_period.addNewContractPeriodDialog();
                 steps.create_deal_contract_period.fillContractPeriodDescription("Description 3");
                 steps.create_deal_contract_period.fillEndTargetMonths();
+                steps.base.scrollIntoView("Add new contract period", pages.create_deal_contract_period.elems.addContractPeriodElem);
                 steps.create_deal_contract_period.addNewContractPeriod();
                 steps.create_deal_contract_period.fillContractPeriodDescription("Description 4");
                 steps.create_deal_contract_period.fillEndTargetMonths();

@@ -172,7 +172,7 @@ if (pages.create_deal_general === undefined) {
 
         selectTheRandomArtist: function () {
             pages.create_deal_general.elems.artistFieldInput.sendKeys("test");
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.artistsDropDownData));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_general.elems.artistsDropDownData));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));

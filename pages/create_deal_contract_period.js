@@ -277,7 +277,7 @@ if (pages.create_deal_contract_period === undefined) {
             browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         },
 
-        clickOnTheAddEndRulesToContractPeriod: function(){
+        clickOnTheAddEndRulesToContractPeriod: function () {
             pages.create_deal_contract_period.elems.addEndRulesLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.endDateFieldButtonEndRules));
         },
@@ -399,21 +399,21 @@ if (pages.create_deal_contract_period === undefined) {
 
 
         clickOnTheAddAdvanceAssumptionsLink: function () {
-          pages.create_deal_contract_period.elems.addAssumptionLink.click();
+            pages.create_deal_contract_period.elems.addAssumptionLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.lpControlPercentageOfWorkAssumptions));
         },
 
-        fillIntoTheLpControlPercentageOfWork: function(){
+        fillIntoTheLpControlPercentageOfWork: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_contract_period.elems.lpControlPercentageOfWorkAssumptions.sendKeys(percent);
         },
 
-        fillIntoTheLpControlPercentageOfMechanicalIncome: function(){
+        fillIntoTheLpControlPercentageOfMechanicalIncome: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_contract_period.elems.lpControlPercentageOfMechanicalIncomeAsumptions.sendKeys(percent);
         },
 
-        fillIntoTheNumberOfSongs: function(){
+        fillIntoTheNumberOfSongs: function () {
             var number = Math.floor(Math.random() * 100) + 1;
             pages.create_deal_contract_period.elems.numberOfSongsAssumptions.sendKeys(number);
         },
@@ -423,12 +423,12 @@ if (pages.create_deal_contract_period === undefined) {
             pages.create_deal_contract_period.elems.percentageOfStatutoryRateAssumptions.sendKeys(percent);
         },
 
-        fillIntoTheAmountNoLessThan : function(){
+        fillIntoTheAmountNoLessThan: function () {
             var number = Math.floor(Math.random() * 1000) + 1;
             pages.create_deal_contract_period.elems.amountNotLessThanAssumptions.sendKeys(number);
         },
 
-        selectTheRandomLabelValueAssumptions: function(){
+        selectTheRandomLabelValueAssumptions: function () {
             pages.create_deal_contract_period.elems.labelsAssumptionsInputField.sendKeys("test");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
@@ -438,7 +438,7 @@ if (pages.create_deal_contract_period === undefined) {
                 });
         },
 
-        saveTheAdvanceAssumptions: function(){
+        saveTheAdvanceAssumptions: function () {
             pages.create_deal_contract_period.elems.saveAssumptionsButton.click();
         }
 

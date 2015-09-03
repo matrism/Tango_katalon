@@ -311,9 +311,11 @@ if (steps.create_deal_general === undefined) {
                     steps.create_deal_general.clickOnExecutedContractStatus();
                     steps.create_deal_general.fillIntoExecutionDateField();
                     steps.create_deal_general.selectDealSigningTerritory();
+                    steps.base.scrollIntoView("scroll contracting party",  pages.create_deal_general.elems.contractingPartiesField);
                     steps.create_deal_general.fillContractingPartyField();
                     steps.create_deal_general.waitForContractingPartyDropDown();
                     steps.create_deal_general.selectRandomContractingParty();
+                    steps.base.scrollIntoView("scroll artist", pages.create_deal_general.elems.artistFieldInput);
                     steps.create_deal_general.selectRandomArtistValue();
                     steps.create_deal_general.selectRandomValueRepresentMultipleDeals();
                     steps.create_deal_general.clickOnNonExclusiveDealRights();
@@ -325,8 +327,8 @@ if (steps.create_deal_general === undefined) {
                     steps.create_deal_general.fillIntoLegalFileReferenceCodeField();
                     //steps.create_deal_general.selectRandomExternalContactRoleRowI(1);
                     //steps.create_deal_general.selectRandomExternalContactNameRowI(1);
-                    steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
-                    steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+                    //steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
+                    //steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
                     steps.create_deal_general.fillIntoDemoDealChargeBacksField();
                     steps.create_deal_general.fillIntoUsCopyrightCertificateDealChargeBacksField();
                     steps.create_deal_general.fillIntoLegalFeesDealChargeBacksField();

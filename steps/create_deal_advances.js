@@ -183,84 +183,98 @@ if (steps.create_deal_advances === undefined) {
         selectRandomDefineSynchTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define synch territory advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineSynchTerritoryAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineMechTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define mech territory advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineMechTerritoryAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefinePerfTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define perf territory advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefinePerfTerritoryAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineGrandTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define grand territory advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineGrandTerritoryAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineDigitalTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define digital territory advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineDigitalTerritoryAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefinePrintTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define print territory advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefinePrintTerritoryAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineOtherTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define other territory advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineOtherTerritoryAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineSynchLabelAdvanceApplicableEarnings: function () {
             it("Select the random define synch label advance applicable earnings", function () {
                 pages.create_deal_advances.selectTheRandomDefineSynchLabelAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineMechLabelAdvanceApplicableEarnings: function () {
             it("Select the random define mech label advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineMechLabelAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefinePerfLabelAdvanceApplicableEarnings: function () {
             it("Select the random define perf label advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefinePerfLabelAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineGrandLabelAdvanceApplicableEarnings: function () {
             it("Select the random define grand label advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineGrandLabelAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineDigitalLabelAdvanceApplicableEarnings: function () {
             it("Select the random define digital label advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineDigitalLabelAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefinePrintLabelAdvanceApplicableEarnings: function () {
             it("Select the random define print label advance applicable earnings", function () {
                 pages.create_deal_advances.selectTheRandomDefinePrintLabelAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
         selectRandomDefineOtherLabelAdvanceApplicableEarnings: function () {
             it("Select the random define other label advance applicable earnings ", function () {
                 pages.create_deal_advances.selectTheRandomDefineOtherLabelAdvanceApplicableEarnings();
+                pages.create_deal_advances.waitForAjax();
             });
         },
 
@@ -300,6 +314,8 @@ if (steps.create_deal_advances === undefined) {
                 steps.create_deal_advances.selectRandomDefineGrandTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineGrandLabelAdvanceApplicableEarnings();
 
+                steps.base.scrollIntoView("Digital rights", pages.create_deal_advances.elems.digitalRightsPercentAdvanceApplicableEarnings);
+
                 steps.create_deal_advances.fillIntoDigitalRightsPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnDigitalPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineDigitalTerritoryAdvanceApplicableEarnings();
@@ -314,6 +330,8 @@ if (steps.create_deal_advances === undefined) {
                 steps.create_deal_advances.clickOnOtherPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineOtherTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineOtherLabelAdvanceApplicableEarnings();
+
+                steps.create_deal_advances.clickOnDoneAdvanceApplicableEarnings();
 
             });
         }

@@ -173,7 +173,7 @@ if (pages.create_deal_rtp === undefined) {
 
 
         selectTheSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ: function (i, j, k) {
-            var scopeField = browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + i + ") div[data-ng-repeat='postTermCollectionRTP in rtp.post_term_collection_rights_terms']:nth-child(" + j + ") div[data-ng-model='postTermCollectionRTP.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] "));
+            var scopeField = browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + i + ") div[data-ng-repeat='postTermCollectionRTP in rtp.post_term_collection_rights_terms']:nth-child(" + j + ") div[data-ng-model='postTermCollectionRTP.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass']"));
             scopeField.click();
             var desiredOption;
             var desiredScope = "Scope " + k;
