@@ -142,9 +142,9 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        clickOnAddPublisherShareSet: function () {
-            it("Open publisher share set form", function () {
-                pages.create_deal_scope.clickOnAddPublisherShareSetLink();
+        clickOnAddPublisherShareSet: function(more) {
+            it("Open publisher share set form", function() {
+                pages.create_deal_scope.clickOnAddPublisherShareSetLink(more);
             });
         },
 

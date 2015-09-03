@@ -630,7 +630,9 @@ var beforeFeature = [
 
                     steps.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(0);
 
-                    steps.create_deal_scope.clickOnAddPublisherShareSet();
+                    steps.create_deal_scope.clickOnAddPublisherShareSet({
+                        scrollIntoView: true,
+                    });
 
                     steps.create_deal_scope.enterPublisherSearchTerms(
                         0, 0, 'WCM Publisher 1'
