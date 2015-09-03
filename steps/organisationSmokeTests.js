@@ -34,3 +34,8 @@ pageStep('Set statement recipient data');
 pageStep('Expect form to be valid');
 pageStep('Expect Done button to be clickable');
 
+exports.save = function() {
+    it('Save organisation', function() {
+        pages.organisationSmokeTests.save();
+    });
+};
