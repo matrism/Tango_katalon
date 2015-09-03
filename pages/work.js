@@ -1260,6 +1260,10 @@ exports.registrationActivityTab = function() {
 
 exports.goToRegistrationActivityTab = function() {
     var element = exports.registrationActivityTab();
+
     pages.base.scrollIntoView(element);
-    return element.click();
+
+    return element.click().then(function() {
+        pages.base.waitForAjax();
+    });
 };
