@@ -563,7 +563,7 @@ exports.confirmComponentWorkDeletion = function() {
 };
 exports.selectRandomCreatorSuggestion = function() {
     return $$(".typeahead-result").then(function(suggestions) {
-        var randomSuggestion = _.sample(suggestions);
+        var randomSuggestion = _.sample(suggestions.slice(0, 3));
         var result = {};
 
         result.name = pph.trim(randomSuggestion.$('.typeahead-result-text').getText());

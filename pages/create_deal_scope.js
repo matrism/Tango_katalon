@@ -163,8 +163,7 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    _.sample(options.slice(0, 3)).click();
                 })
         },
 
