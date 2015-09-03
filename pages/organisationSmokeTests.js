@@ -5,7 +5,7 @@ var pph = require('../helpers/pph.js');
 pages.organisationSmokeTests = exports;
 
 exports.nameField = function () {
-    return element(by.model('org.masterData.name'));
+    return element(by.model('modularEditModels.model.name'));
 };
 
 exports.populateName = function (name) {
@@ -13,7 +13,7 @@ exports.populateName = function (name) {
 };
 
 exports.orgTypeButtons = function () {
-    return element.all(by.model('org.masterData.type'));
+    return element(by.model('modularEditModels.model.type')).$$('button');
 };
 
 exports.selectOrgType = function (type) {
@@ -23,7 +23,7 @@ exports.selectOrgType = function (type) {
 };
 
 exports.territoryOfOperationField = function () {
-    return element(by.model('org.territory_of_operation'));
+    return element(by.model('modularEditModels.model.territoriesOfOperation'));
 };
 
 exports.selectTerritoryOfOperation = function (name) {
@@ -37,7 +37,7 @@ exports.selectTerritoryOfOperation = function (name) {
 };
 
 exports.societyTypeahead = function () {
-    return Typeahead(element(by.model('org.masterData.typeDetails.affiliatedSociety.name')), true);
+    return Typeahead(element(by.model('modularEditModels.model.typeModel.affiliatedSociety')), true);
 };
 
 exports.selectSociety = function (name) {
@@ -58,13 +58,16 @@ exports.makeOrgRegistrationRecipient = function () {
 };
 
 exports.publisherTypeButtons = function () {
-    return element.all(by.repeater('publisher in adminData.publisherRelationshipTypes'));
+    return element.all(by.repeater('publisher in ::dataHolder.publisherRelationshipTypes'));
 };
 
 exports.selectPublisherType = function (type) {
-    var buttons = exports.publisherTypeButtons(); 
+    var buttons = exports.publisherTypeButtons(),
+        button = buttons.filter(pph.matchTextExact(type)).first();
 
-    buttons.filter(pph.matchTextExact(type)).first().click();
+    pages.base.scrollIntoView(button);
+
+    button.click();
 };
 
 exports.deliveryMethodPanels = function () {
@@ -191,7 +194,7 @@ exports.clickAddSubpublisherButton = function () {
 };
 
 exports.incomeProviderButtons = function () {
-    return element.all(by.model('modularEditModels.isIncomeProvider'));
+    return element(by.model('modularEditModels.model.isIncomeProvider')).$$('button');
 };
 
 exports.makeOrgIncomeProvider = function () {
@@ -200,7 +203,7 @@ exports.makeOrgIncomeProvider = function () {
 };
 
 exports.incomeProviderDefaultCurrencySelect = function () {
-    return element(by.model('modularEditModels.org.income_provider.currency_code'));
+    return element(by.model('modularEditModels.model.currencyCode'));
 };
 
 exports.setDefaultIncomeProviderCurrency = function (value) {
@@ -208,53 +211,130 @@ exports.setDefaultIncomeProviderCurrency = function (value) {
 
     pages.base.scrollIntoView(select);
     select.click();
-    select.$$('option').filter(pph.matchTextExact(value)).first().click();
+    select.element(by.cssContainingText('li a', value)).click();
 };
 
 exports.incomeFileTypeSelect = function (){
-    return $('.income-file-types-chosen');
+    return element(by.model('modularEditModels.model.incomeFileTypes'));
 };
 
 exports.setIncomeFileType = function(type) {
     var select = exports.incomeFileTypeSelect(),
-        results = select.$$('.chosen-results li.active-result');
+        results = select.$$('.tg-typeahead__suggestions-group-item');
     pages.base.scrollIntoView(select);
 
-    select.$('.search-field input').sendKeys(type);
+    select.element(by.model('$term')).sendKeys(type);
 
     browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
     results.first().click();
 };
 
-
-exports.incomeTypeMappingsRepeater = function () {
-    return element.all(by.repeater('incomeType in modularEditModels.incomeTypeMapping'));
+exports.incomeTypeMappingRows = function() {
+    return $$('.e2e-income-provider-mapping');
 };
 
-exports.addIncomeTypeMapping = function (incomeType, description, fileType, tangoIncomeType) {
-    exports.incomeTypeMappingsRepeater().count().then(function(index){
-        var elem = exports.incomeTypeMappingsRepeater().get(index-1),
-            fileTypeResults = elem.$$('[data-tg-name="fileFormat"] + ul a.typeahead-result'),
-            formatResults = elem.$$('[data-tg-name="incomeType"] + ul a.typeahead-result');
+exports.incomeTypeMappingTypeInput = function(i) {
+    return exports.incomeTypeMappingRows().get(i).$('.e2e-mapping-type input');
+};
 
-        pages.base.scrollIntoView(elem);
-        elem.element(by.model('incomeType.fileIncomeType')).sendKeys(incomeType);
-        elem.element(by.model('incomeType.fileIncomeDesc')).sendKeys(description);
+exports.enterIncomeTypeMappingType = function(i, value) {
+    var element = exports.incomeTypeMappingTypeInput(i);
 
-        if (fileType) {
-            elem.element(by.model('incomeType.fileFormat')).sendKeys(fileType);
-            browser.wait(protractor.ExpectedConditions.visibilityOfAny(fileTypeResults));
-            fileTypeResults.first().click();
-        }
+    pages.base.scrollIntoView(element);
 
+    element.clear();
 
-        elem.element(by.model('incomeType.internalIncomeType')).sendKeys(tangoIncomeType);
-        browser.wait(protractor.ExpectedConditions.visibilityOfAny(formatResults));
+    return element.sendKeys(value);
+};
 
-        formatResults.first().click();
-    });
+exports.incomeTypeMappingDescriptionInput = function(i) {
+    return exports.incomeTypeMappingRows().get(i).$('.e2e-mapping-description input');
+};
 
+exports.enterIncomeTypeMappingDescription = function(i, value) {
+    var element = exports.incomeTypeMappingDescriptionInput(i);
 
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+
+    return element.sendKeys(value);
+};
+
+exports.incomeTypeMappingFileTypeTypeahead = function(i) {
+    return exports.incomeTypeMappingRows().get(i).element(
+        by.model('incomeType.fileFormat')
+    );
+};
+
+exports.incomeTypeMappingFileTypeInput = function(i) {
+    return exports.incomeTypeMappingFileTypeTypeahead(i).element(by.model('$term'));
+};
+
+exports.enterIncomeTypeMappingFileTypeSearchTerms = function(i, value) {
+    var element = exports.incomeTypeMappingFileTypeInput(i);
+
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+
+    return element.sendKeys(value);
+};
+
+exports.incomeTypeMappingFileTypeSearchResults = function() {
+    return $$('.tg-typeahead__suggestions-group-item');
+};
+
+exports.selectIncomeTypeMappingFileTypeSearchResultByIndex = function(i) {
+    var elements = exports.incomeTypeMappingFileTypeSearchResults(),
+        element;
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(elements));
+
+    element = elements.get(i);
+
+    pages.base.scrollIntoView(element);
+
+    return element.click();
+};
+
+exports.incomeTypeMappingInternalTypeTypeahead = function(i) {
+    return exports.incomeTypeMappingRows().get(i).element(by.model(
+        'incomeType.internalIncomeType'
+    ));
+};
+
+exports.incomeTypeMappingInternalTypeInput = function(i) {
+    return exports.incomeTypeMappingInternalTypeTypeahead(i).element(by.model(
+        '$term'
+    ));
+};
+
+exports.enterIncomeTypeMappingInternalTypeSearchTerms = function(i, value) {
+    var element = exports.incomeTypeMappingInternalTypeInput(i);
+
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+
+    return element.sendKeys(value);
+};
+
+exports.incomeTypeMappingInternalTypeSearchResults = function() {
+    return $$('.tg-typeahead__suggestions-group-item');
+};
+
+exports.selectIncomeTypeMappingInternalTypeSearchResultByIndex = function(i) {
+    var elements = exports.incomeTypeMappingInternalTypeSearchResults(),
+        element;
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(elements));
+
+    element = elements.get(i);
+
+    pages.base.scrollIntoView(element);
+
+    return element.click();
 };
 
 exports.payeeYesButton = function () {
@@ -295,7 +375,7 @@ exports.setStatementRecipientData = function (option, subOption) {
 };
 
 exports.doneButton = function () {
-    return $('#CREATE-ORG-SUBMIT');
+    return $('#FORM-CONTROLS').element(by.cssContainingText('button', 'Done'));
 };
 
 exports.expectFormToBeValid = function () {
