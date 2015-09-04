@@ -459,6 +459,7 @@ if (steps.create_deal_contract_period === undefined) {
         itAddSimpleEndRuleToContractPeriod: function () {
             describe("Add end rule to contract period ", function () {
                 steps.create_deal_contract_period.clickOnAddEndRulesToContractPeriod();
+                steps.base.scrollIntoView("End rules details ", pages.create_deal_contract_period.elems.endDateFieldButtonEndRules);
                 steps.create_deal_contract_period.selectEndDateEndRulesSpecificValue("Repayment Date");
                 steps.create_deal_contract_period.selectWhenVariableLeftEndRulesSpecificValue("Balance Repaid");
                 steps.create_deal_contract_period.fillIntoAttributeLeftEndRules();

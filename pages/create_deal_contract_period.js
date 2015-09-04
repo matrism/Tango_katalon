@@ -182,27 +182,30 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         fillIntoMdrcLabelsField: function () {
-            pages.create_deal_contract_period.elems.mdrcLabelsElement.sendKeys("ty");
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_contract_period.elems.mdrcLabelsElement.sendKeys(value);
         },
 
         selectMdrcRandomValueFromLabel: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.mdrcLabelsDropDownData));
 
-            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
+            element(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
                     console.log("Text from label is : " + promise);
                     if (promise.indexOf("Create New Label") != -1) {
                         browser.driver.findElements(By.css("li.tg-typeahead__suggestions-footer div a"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
-                                options[randomNumber].click();
+                                var element = options[randomNumber].click();
+                                browser.actions().mouseMove(element).click().perform();
                             })
                     }
                     else {
                         browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
-                                options[randomNumber].click();
+                                var element =options[randomNumber].click();
+                                browser.actions().mouseMove(element).click().perform();
                             })
                     }
                 });
