@@ -56,7 +56,7 @@ exports.feature = [
                     this.selectIncomeTypeMappingInternalTypeSearchResultByIndex(0);
                 }, this);
 
-                this.save();
+                this.saveOrganisation();
             });
         },
     },

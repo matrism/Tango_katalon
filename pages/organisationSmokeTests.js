@@ -412,7 +412,7 @@ exports.expectDoneButtonToBeClickable = function () {
     expect(button.getAttribute('class')).toBe('btn btn-primary ng-scope');
 };
 
-exports.save = function() {
+exports.saveOrganisation = function() {
     return exports.doneButton().click().then(function() {
         pages.base.waitForAjax();
     });

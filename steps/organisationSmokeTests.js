@@ -34,9 +34,4 @@ pageStep('Make Org Statement Recipient');
 pageStep('Set statement recipient data');
 pageStep('Expect form to be valid');
 pageStep('Expect Done button to be clickable');
-
-exports.save = function() {
-    it('Save organisation', function() {
-        pages.organisationSmokeTests.save();
-    });
-};
+pageStep('Save organisation');
