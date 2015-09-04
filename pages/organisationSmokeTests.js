@@ -30,7 +30,12 @@ exports.selectTerritoryOfOperation = function (name) {
     var elem = exports.territoryOfOperationField(),
         typeahead = Typeahead(elem.element(by.model('$dataHolder.internalModel')), true);
 
-    typeahead.$('.tg-typeahead__tags-text').click();
+    typeahead.$$('.tg-typeahead__tags-text').then(function(elements) {
+        if(elements.length !== 0) {
+            elements[0].click();
+        }
+    });
+
     typeahead.sendKeys(name);
     pages.base.waitForAjax();
     typeahead.results().filter(pph.matchTextExact(name)).first().click();
