@@ -33,11 +33,16 @@ exports.feature = [
                 );
 
                 this.selectTerritoryOfOperation('United States');
+                this.selectTerritoryOfOperation('Argentina');
 
                 this.selectOrgType('Publisher');
                 this.selectPublisherType('WCM');
 
                 this.makeOrgIncomeProvider();
+
+                this.selectPrimaryIncomeProviderTerritoryOfOperation(
+                    'Argentina'
+                );
 
                 this.setDefaultIncomeProviderCurrency('USD');
                 this.setIncomeFileType('ASCAP Domestic');

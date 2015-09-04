@@ -207,6 +207,25 @@ exports.makeOrgIncomeProvider = function () {
     exports.incomeProviderButtons().filter(pph.matchTextExact('Yes')).first().click();
 };
 
+exports.primaryIncomeProviderTerritoryOfOperationDropdown = function() {
+    return element(by.model('modularEditModels.model.primaryTerritoryOfOperation'));
+};
+
+exports.primaryIncomeProviderTerritoryOfOperationOptions = function() {
+    return exports.primaryIncomeProviderTerritoryOfOperationDropdown().$$('li a');
+};
+
+exports.selectPrimaryIncomeProviderTerritoryOfOperation = function(value) {
+    var element = exports.primaryIncomeProviderTerritoryOfOperationDropdown(),
+        elements = exports.primaryIncomeProviderTerritoryOfOperationOptions();
+
+    pages.base.scrollIntoView(element);
+
+    element.click();
+
+    return elements.first().click();
+};
+
 exports.incomeProviderDefaultCurrencySelect = function () {
     return element(by.model('modularEditModels.model.currencyCode'));
 };

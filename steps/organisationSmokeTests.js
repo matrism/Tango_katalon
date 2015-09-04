@@ -20,6 +20,7 @@ pageStep('Click Subpublisher Relationship button');
 pageStep('Fill required fields for last Subpublisher');
 pageStep('Click Add Subpublisher button');
 pageStep('Make Org Income Provider');
+pageStep('Select primary income provider territory of operation');
 pageStep('Set default Income Provider currency');
 pageStep('Set Income File Type');
 pageStep('Enter income type mapping type');
