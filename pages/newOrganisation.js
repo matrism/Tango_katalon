@@ -2,7 +2,7 @@
 
 var pph = require('../helpers/pph.js');
 
-pages.organisationSmokeTests = exports;
+pages.newOrganisation = exports;
 
 exports.nameField = function () {
     return element(by.model('modularEditModels.model.name'));

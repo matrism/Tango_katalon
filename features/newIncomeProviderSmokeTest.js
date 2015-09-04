@@ -8,7 +8,7 @@ var steps_path = _tf_config._system_.path_to_steps,
 
 require(steps_path + 'login');
 require(steps_path + 'mainHeader');
-require(steps_path + 'organisationSmokeTests');
+require(steps_path + 'newOrganisation');
 
 exports.commonFeatureTags = [
     'newIncomeProviderSmokeTest',
@@ -27,7 +27,7 @@ exports.feature = [
         steps: function() {
             steps.mainHeader.createNewRecord('Organisation');
 
-            using(steps.organisationSmokeTests, function() {
+            using(steps.newOrganisation, function() {
                 this.populateName(
                     'TEST INCOME PROVIDER ' + randomId('incomeProvider')
                 );

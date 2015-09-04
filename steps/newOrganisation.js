@@ -2,9 +2,9 @@
 
 var pageStep = require('../helpers/pageStep')();
 
-require(pages_path + 'organisationSmokeTests');
+require(pages_path + 'newOrganisation');
 
-steps.organisationSmokeTests = exports;
+steps.newOrganisation = exports;
 
 pageStep('Populate name');
 pageStep('Select Org type');
