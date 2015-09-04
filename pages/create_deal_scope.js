@@ -165,7 +165,8 @@ if (pages.create_deal_scope === undefined) {
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    var element = options[randomNumber];
+                    browser.actions().mouseMove(element).click().perform();
                 })
         },
 

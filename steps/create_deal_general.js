@@ -36,7 +36,7 @@ if (steps.create_deal_general === undefined) {
 
         fillContractingPartyField: function () {
             it("Fill contracting party field", function () {
-                    pages.create_deal_general.fillContractingPartiesField("ascap");
+                    pages.create_deal_general.fillContractingPartiesField("bmi");
                 }
             );
         },
@@ -314,7 +314,7 @@ if (steps.create_deal_general === undefined) {
                     steps.base.scrollIntoView("scroll contracting party",  pages.create_deal_general.elems.contractingPartiesField);
                     steps.create_deal_general.fillContractingPartyField();
                     steps.create_deal_general.waitForContractingPartyDropDown();
-                    steps.create_deal_general.selectRandomContractingParty();
+                    steps.create_deal_general.selectContractingParty();
                     steps.base.scrollIntoView("scroll artist", pages.create_deal_general.elems.artistFieldInput);
                     steps.create_deal_general.selectRandomArtistValue();
                     steps.create_deal_general.selectRandomValueRepresentMultipleDeals();

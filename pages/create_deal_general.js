@@ -79,7 +79,8 @@ if (pages.create_deal_general === undefined) {
             browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    var element = options[randomNumber].click();
+                    browser.actions.mouseMove(element).click().perform();
                 })
         },
 
@@ -176,7 +177,8 @@ if (pages.create_deal_general === undefined) {
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    var element = options[randomNumber];
+                    browser.actions().mouseMove(element).click().perform();
                 })
         },
 
