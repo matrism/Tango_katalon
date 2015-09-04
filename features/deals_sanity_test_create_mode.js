@@ -216,22 +216,24 @@ var beforeFeature = function () {
             steps.deal.itContinueToNextPage();
 
             //add advances
-            //steps.create_deal_advances.clickOnAddFirstAdvanceLink();
-            //steps.create_deal_advances.selectRandomContractPeriodAdvanceDetails();
-            //steps.create_deal_advances.fillIntoAmountAdvanceDetails();
-            //steps.create_deal_advances.selectRandomCurrencyAdvanceDetails();
-            //steps.create_deal_advances.selectPaymentStructureAdvanceDetails("Lump Sum");
-            //steps.create_deal_advances.selectWhenDistributionRulesAdvanceDetails("Contract Execution");
-            //steps.create_deal_advances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(1);
-            //steps.create_deal_advances.selectRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI(1);
-            //steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(1);
-            //steps.create_deal_advances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(2);
-            //steps.create_deal_advances.selectRandomPersonPaymentRecipientDistributionRulesAdvanceDetailsNumberI(2);
-            //steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(2);
-            //steps.create_deal_advances.itAddCompleteAdvanceApplicableEarnings();
-            //steps.deal.saveDeal();
-            //steps.deal.waitForDealToBeSaved();
-            //steps.deal.returnDealNumber();
+            steps.create_deal_advances.clickOnAddFirstAdvanceLink();
+            steps.create_deal_advances.selectRandomContractPeriodAdvanceDetails();
+            steps.create_deal_advances.fillIntoAmountAdvanceDetails();
+            steps.create_deal_advances.selectRandomCurrencyAdvanceDetails();
+            steps.create_deal_advances.selectPaymentStructureAdvanceDetails("Lump Sum");
+            steps.create_deal_advances.selectWhenDistributionRulesAdvanceDetails("Contract Execution");
+            steps.base.scrollIntoView("second line", element(by.css("table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(1) input[data-ng-model='apd.percent']")));
+            steps.create_deal_advances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(1);
+            steps.create_deal_advances.selectRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI(1);
+            steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(1);
+            steps.create_deal_advances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(2);
+            steps.base.scrollIntoView("second line", element(by.css("table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(2) div[data-ng-model='apd.payee']")));
+            steps.create_deal_advances.selectRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI(2);
+            steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(2);
+            steps.create_deal_advances.itAddCompleteAdvanceApplicableEarnings();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
         }
     }];
 

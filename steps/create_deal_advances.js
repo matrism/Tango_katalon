@@ -294,6 +294,7 @@ if (steps.create_deal_advances === undefined) {
             describe("Add complete advance applicable earnings ", function () {
                 steps.base.scrollIntoView("Add advance applicable earnings ", pages.create_deal_advances.elems.addAdvanceApplicableEarningsLink);
                 steps.create_deal_advances.clickOnAddViewAdvanceApplicableEarningsLink();
+
                 steps.create_deal_advances.fillIntoSynchronisationPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnSynchPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineSynchTerritoryAdvanceApplicableEarnings();
@@ -301,16 +302,19 @@ if (steps.create_deal_advances === undefined) {
 
                 steps.create_deal_advances.fillIntoMechanicalPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnMechPipelineCheckBoxAdvanceApplicableEarnings();
+                steps.base.scrollIntoView("Territory",pages.create_deal_advances.elems.defineMechTerritoriesAdvanceApplicableEarnings);
                 steps.create_deal_advances.selectRandomDefineMechTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineMechLabelAdvanceApplicableEarnings();
 
                 steps.create_deal_advances.fillIntoPublicPerformancePercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnPerfPipelineCheckBoxAdvanceApplicableEarnings();
+                steps.base.scrollIntoView("Territory",pages.create_deal_advances.elems.definePerfTerritoriesAdvanceApplicableEarnings);
                 steps.create_deal_advances.selectRandomDefinePerfTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefinePerfLabelAdvanceApplicableEarnings();
 
                 steps.create_deal_advances.fillIntoGrandRightsPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnGrandPipelineCheckBoxAdvanceApplicableEarnings();
+                steps.base.scrollIntoView("Territory",pages.create_deal_advances.elems.defineGrandTerritoriesAdvanceApplicableEarnings);
                 steps.create_deal_advances.selectRandomDefineGrandTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineGrandLabelAdvanceApplicableEarnings();
 
