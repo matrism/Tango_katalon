@@ -2,11 +2,11 @@
 
 var changeCase = require('change-case');
 
-function recursivelyAccess(object, propertyNames, create) {
+function recursivelyAccess(object, propertyNames, options) {
     return propertyNames.reduce(function(object, propertyName) {
         var property = object[propertyName];
 
-        if(!property) {
+        if(!property && options && options.create) {
             property = object[propertyName] = {};
         }
 
@@ -21,9 +21,12 @@ module.exports = function(options) {
 
         description = options.name.join(' > '),
 
-        where = recursivelyAccess(options.where, firstPropertyNames, true),
+        where = recursivelyAccess(
+            options.where, firstPropertyNames, { create: true }
+        ),
 
-        pageFnContext = recursivelyAccess(options.page, firstPropertyNames, true),
+        pageFnContext = recursivelyAccess(options.page, firstPropertyNames),
+
         pageFn = pageFnContext[lastPropertyName];
 
     where[lastPropertyName] = function() {
