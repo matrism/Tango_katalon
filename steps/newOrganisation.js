@@ -1,6 +1,6 @@
 'use strict';
 
-var pageStep = require('../helpers/pageStep')();
+var pageStep = require('../helpers/basicPageStep');
 
 require(pages_path + 'newOrganisation');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var pageStep = require('../helpers/pageStep')();
+var pageStep = require('../helpers/basicPageStep');
 
 steps.mainHeader = exports;
 
@@ -20,4 +20,3 @@ exports.goToSubLink = function (link, subLink) {
 };
 
 pageStep('Create new record');
-
