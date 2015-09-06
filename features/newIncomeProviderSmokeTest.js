@@ -45,12 +45,12 @@ exports.feature = [
                 );
 
                 this.setDefaultIncomeProviderCurrency('USD');
-                this.setIncomeFileType('ASCAP Domestic');
+                this.setIncomeFileType('ASCAP DOMESTIC');
 
                 _.times(3, function(i) {
-                    this.enterIncomeTypeMappingType(i, 'Type ' + (i + 1));
-                    this.enterIncomeTypeMappingDescription(i, 'Description ' + (i + 1));
-                    this.enterIncomeTypeMappingFileTypeSearchTerms(i, 'ASCAP Domestic');
+                    this.enterIncomeTypeMappingType(i, 'T' + (i + 1));
+                    this.enterIncomeTypeMappingDescription(i, 'D' + (i + 1));
+                    this.enterIncomeTypeMappingFileTypeSearchTerms(i, 'ASCAP DOMESTIC');
                     this.selectIncomeTypeMappingFileTypeSearchResultByIndex(0);
                     this.enterIncomeTypeMappingInternalTypeSearchTerms(i, 'Mechanical');
                     this.selectIncomeTypeMappingInternalTypeSearchResultByIndex(0);
