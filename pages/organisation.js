@@ -1,11 +1,16 @@
 "use strict";
+
+var pph = require('../helpers/pph');
+
+require(pages_path + 'base');
+
 var client = require('http-api-client');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.organisation === undefined) {
 
 
-    pages.organisation = new ftf.pageObject({
+    pages.organisation = exports = new ftf.pageObject({
             url: _tf_config.urls.app_url + "#/create/org",
             locators: {},
         organisationNameInput: function () {
@@ -727,3 +732,402 @@ return $(".text-highlight");
 }
 
 module.exports = pages.organisation;
+
+exports.general = (function() {
+    var general = {};
+
+    general.sectionContainer = function() {
+        return $('.organisation__general_block');
+    };
+
+    general.editSectionButton = function() {
+        return general.sectionContainer().$(
+            '[data-ng-click="tgModularViewMethods.switchToEditView()"]'
+        );
+    };
+
+    general.editSection = function() {
+        var element = general.editSectionButton();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    general.nameInput = function() {
+        return element(by.model('modularEditModels.model.name'));
+    };
+
+    general.enterName = function(value) {
+        var element = general.nameInput();
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    general.territoriesOfOperationSelector = function() {
+        return element(by.model('modularEditModels.model.territoriesOfOperation'));
+    };
+
+    general.editTerritoriesOfOperation = function() {
+        var element = general.territoriesOfOperationSelector();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    general.territoryOfOperationTypeaheadTag = function(value) {
+        return general.territoriesOfOperationSelector().element(
+            by.cssContainingText('.tg-typeahead__tag', value)
+        );
+    };
+
+    general.deleteTerritoryOfOperationTypeaheadTagButton = function(element) {
+        return element.$('.tg-typeahead__tag-remove');
+    };
+
+    general.deleteTerritoryOfOperation = function(value) {
+        var element = general.deleteTerritoryOfOperationTypeaheadTagButton(
+            general.territoryOfOperationTypeaheadTag(value)
+        );
+
+        pages.base.scrollIntoView(element);
+
+        return element.click();
+    };
+
+    general.territoryOfOperationSearchTermsInput = function() {
+        return general.territoriesOfOperationSelector().element(by.model('$term'));
+    };
+
+    general.enterTerritoryOfOperationSearchTerms = function(value) {
+        var element = general.territoryOfOperationSearchTermsInput();
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    general.territoryOfOperationSearchResults = function() {
+        return general.territoriesOfOperationSelector().$$(
+            '.tg-typeahead__suggestions-group-item'
+        );
+    };
+
+    general.selectTerritoryOfOperationSearchResultByIndex = function(i) {
+        var elements = general.territoryOfOperationSearchResults(),
+            element;
+
+        browser.wait(ExpectedConditions.visibilityOfAny(elements));
+        element = elements.get(i);
+
+        pages.base.scrollIntoView(element);
+
+        return element.click();
+    };
+
+    general.organisationTypeButtons = function() {
+        return element(by.model('modularEditModels.model.type')).$$('button');
+    };
+
+    general.selectOrganisationType = function(value) {
+        var element = general.organisationTypeButtons().filter(
+            pph.matchTextExact(value)
+        ).first();
+
+        pages.base.scrollIntoView(element);
+
+        return element.click();
+    };
+
+    general.publisherTypeButtons = function() {
+        return element(by.model('modularEditModels.model.typeModel.publisherType')).$$(
+            'button'
+        );
+    };
+
+    general.selectPublisherType = function(value) {
+        var element = general.publisherTypeButtons().filter(
+            pph.matchTextExact(value)
+        ).first();
+
+        pages.base.scrollIntoView(element);
+
+        return element.click();
+    };
+
+    general.saveSectionButton = function() {
+        return general.sectionContainer().element(by.cssContainingText(
+            '.CONTROLS button', 'Save'
+        ));
+    };
+
+    general.saveSection = function() {
+        var element = general.saveSectionButton();
+
+        pages.base.scrollIntoView(element);
+
+        return element.click().then(function() {
+            pages.base.waitForAjax();
+        });
+    };
+
+    general.sectionActive = function() {
+        var element = general.sectionContainer();
+        pages.base.scrollIntoView(element);
+        return pph.matchesCssSelector(element, '.active');
+    };
+
+    general.expectSectionToBeInViewMode = function() {
+        expect(general.sectionActive()).toBeFalsy();
+    };
+
+    return general;
+})();
+
+exports.incomeProvider = (function() {
+    var incomeProvider = {};
+
+    incomeProvider.sectionContainer = function() {
+        return $('.organisation__income-provider_block');
+    };
+
+    incomeProvider.editSectionButton = function() {
+        return incomeProvider.sectionContainer().$(
+            '[data-ng-click="tgModularViewMethods.switchToEditView()"]'
+        );
+    };
+
+    incomeProvider.editSection = function() {
+        var element = incomeProvider.editSectionButton();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    incomeProvider.primaryTerritoryOfOperationDropdown = function() {
+        return element(by.model(
+            'modularEditModels.model.primaryTerritoryOfOperation'
+        ));
+    };
+
+    incomeProvider.primaryTerritoryOfOperationOption = function(value) {
+        return element(by.cssContainingText('.dropdown-menu li', value));
+    };
+
+    incomeProvider.selectPrimaryTerritoryOfOperation = function(value) {
+        var dropdown = incomeProvider.primaryTerritoryOfOperationDropdown();
+        var option = incomeProvider.primaryTerritoryOfOperationOption(value);
+
+        dropdown.click();
+
+        pages.base.scrollIntoView(option);
+
+        return option.click();
+    };
+
+    incomeProvider.defaultCurrencyDropdown = function() {
+        return element(by.model('modularEditModels.model.currencyCode'));
+    };
+
+    incomeProvider.defaultCurrencyOption = function(value) {
+        return element(by.cssContainingText('.dropdown-menu li', value));
+    };
+
+    incomeProvider.selectDefaultCurrency = function(value) {
+        var dropdown = incomeProvider.defaultCurrencyDropdown();
+        var option = incomeProvider.defaultCurrencyOption(value);
+
+        dropdown.click();
+
+        pages.base.scrollIntoView(option);
+
+        return option.click();
+    };
+
+    incomeProvider.incomeFileTypeTypeahead = function() {
+        return element(by.model('modularEditModels.model.incomeFileTypes'));
+    };
+
+    incomeProvider.incomeFileTypeTypeaheadTag = function(value) {
+        return incomeProvider.incomeFileTypeTypeahead().element(
+            by.cssContainingText('.tg-typeahead__tag', value)
+        );
+    };
+
+    incomeProvider.deleteIncomeFileTypeButton = function(element) {
+        return element.$('.tg-typeahead__tag-remove');
+    };
+
+    incomeProvider.deleteIncomeFileType = function(value) {
+        var element = incomeProvider.deleteIncomeFileTypeButton(
+            incomeProvider.incomeFileTypeTypeaheadTag(value)
+        );
+
+        pages.base.scrollIntoView(element);
+
+        return element.click();
+    };
+
+    incomeProvider.incomeFileTypeSearchTermsInput = function() {
+        return incomeProvider.incomeFileTypeTypeahead().element(by.model('$term'));
+    };
+
+    incomeProvider.enterIncomeFileTypeSearchTerms = function(value) {
+        var element = incomeProvider.incomeFileTypeSearchTermsInput();
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    incomeProvider.incomeFileTypeSearchResults = function(more) {
+        var elements = $$('.tg-typeahead__suggestions-group-item');
+
+        if(!more || !more.dontWait) {
+            browser.wait(ExpectedConditions.visibilityOfAny(elements));
+        }
+
+        return elements;
+    };
+
+    incomeProvider.selectIncomeFileTypeSearchResultByIndex = function(i) {
+        var element = incomeProvider.incomeFileTypeSearchResults().get(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    incomeProvider.incomeTypeMapping = (function() {
+        var mapping = {};
+
+        mapping.rows = function() {
+            return $$('.e2e-income-provider-mapping');
+        };
+
+        mapping.deleteRowButton = function(i) {
+            return mapping.rows().get(i).$('.e2e-mapping-remove');
+        };
+
+        mapping.deleteRow = function(i) {
+            var element = mapping.deleteRowButton(i);
+            pages.base.scrollIntoView(element);
+            return element.click();
+        };
+
+        mapping.inboundIncomeTypeInput = function(i) {
+            return mapping.rows().get(i).element(by.model(
+                'incomeType.fileIncomeType'
+            ));
+        };
+
+        mapping.enterInboundIncomeType = function(i, value) {
+            var element = mapping.inboundIncomeTypeInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+
+        mapping.inboundIncomeTypeDescriptionInput = function(i) {
+            return mapping.rows().get(i).element(by.model(
+                'incomeType.fileIncomeDesc'
+            ));
+        };
+
+        mapping.enterInboundIncomeTypeDescription = function(i, value) {
+            var element = mapping.inboundIncomeTypeDescriptionInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+
+        mapping.incomeFileTypeTypeahead = function(i) {
+            return mapping.rows().get(i).element(by.model(
+                'incomeType.fileFormat'
+            ));
+        };
+
+        mapping.incomeFileTypeSearchTermsInput = function(i) {
+            return mapping.incomeFileTypeTypeahead(i).element(by.model('$term'));
+        };
+
+        mapping.enterIncomeFileTypeSearchTerms = function(i, value) {
+            var element = mapping.incomeFileTypeSearchTermsInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+
+        mapping.incomeFileTypeSearchResults = function(more) {
+            var elements = $$('.tg-typeahead__suggestions-group-item');
+
+            if(!more || !more.dontWait) {
+                browser.wait(ExpectedConditions.visibilityOfAny(elements));
+            }
+
+            return elements;
+        };
+
+        mapping.selectIncomeFileTypeSearchResultByIndex = function(i) {
+            var element = mapping.incomeFileTypeSearchResults().get(i);
+            pages.base.scrollIntoView(element);
+            return element.click();
+        };
+
+        mapping.tangoIncomeTypeTypeahead = function(i) {
+            return mapping.rows().get(i).element(by.model(
+                'incomeType.internalIncomeType'
+            ));
+        };
+
+        mapping.tangoIncomeTypeSearchTermsInput = function(i) {
+            return mapping.tangoIncomeTypeTypeahead(i).element(by.model('$term'));
+        };
+
+        mapping.enterTangoIncomeTypeSearchTerms = function(i, value) {
+            var element = mapping.tangoIncomeTypeSearchTermsInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+
+        mapping.tangoIncomeTypeSearchResults = function(more) {
+            var elements = $$('.tg-typeahead__suggestions-group-item');
+
+            if(!more || !more.dontWait) {
+                browser.wait(ExpectedConditions.visibilityOfAny(elements));
+            }
+
+            return elements;
+        };
+
+        mapping.selectTangoIncomeTypeSearchResultByIndex = function(i) {
+            var element = mapping.tangoIncomeTypeSearchResults().get(i);
+            pages.base.scrollIntoView(element);
+            return element.click();
+        };
+
+        return mapping;
+    })();
+
+    incomeProvider.saveSectionButton = function() {
+        return incomeProvider.sectionContainer().element(by.cssContainingText(
+            '.CONTROLS button', 'Save'
+        ));
+    };
+
+    incomeProvider.saveSection = function() {
+        var element = incomeProvider.saveSectionButton();
+
+        pages.base.scrollIntoView(element);
+
+        return element.click().then(function() {
+            pages.base.waitForAjax();
+        });
+    };
+
+    incomeProvider.sectionActive = function() {
+        var element = incomeProvider.sectionContainer();
+        pages.base.scrollIntoView(element);
+        return pph.matchesCssSelector(element, '.active');
+    };
+
+    incomeProvider.expectSectionToBeInViewMode = function() {
+        expect(incomeProvider.sectionActive()).toBeFalsy();
+    };
+
+    return incomeProvider;
+})();
