@@ -66,6 +66,7 @@ config = {
 
         if (systemConfig.resolution.width && systemConfig.resolution.height) {
             browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+            browser.driver.manage().window().maximize();
         }
 
         if (reporting === 'xml' || reporting === 'all') {

@@ -64,7 +64,7 @@ if (steps.create_deal_scope === undefined) {
         },
 
         addRandomScope: function () {
-            it("Add simple scope", function () {
+            it("Add random scope", function () {
                 pages.create_deal_scope.addScopeForm();
                 pages.create_deal_scope.selectRandomContractTypeScope();
                 pages.create_deal_scope.waitForAjax();

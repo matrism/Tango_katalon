@@ -178,7 +178,7 @@ if (steps.create_deal_contract_period === undefined) {
             it("Select random mdrc label ", function () {
                 pages.create_deal_contract_period.fillIntoMdrcLabelsField();
                 pages.create_deal_contract_period.selectMdrcRandomValueFromLabel();
-            })
+            });
         },
 
 

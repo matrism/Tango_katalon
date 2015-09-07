@@ -70,7 +70,7 @@ if (steps.create_deal_rtp === undefined) {
         },
 
         clickOnAddPostTermPeriodFromRetentionNumberI: function (i) {
-            it("Click on the add post term period from retention number i ", function () {
+            it("Click on the add post term period from retention number " +i, function () {
                 pages.create_deal_rtp.clickOnTheAddPostTermPeriodFromRetentionNumberI(i);
             });
         },
@@ -82,7 +82,7 @@ if (steps.create_deal_rtp === undefined) {
         },
 
         selectSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ: function (i, j, k) {
-            it("Select the specific scope number " + k + " from acquisition number " + i + "and retention number " + j, function () {
+            it("Select the specific scope number " + k + " from acquisition number " + i + " and retention number " + j, function () {
                 pages.create_deal_rtp.selectTheSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ(i, j, k);
             });
         },

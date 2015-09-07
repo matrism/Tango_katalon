@@ -161,7 +161,7 @@ if (pages.create_deal_contract_period === undefined) {
 
         fillIntoTerritoriesFieldLetter: function () {
             pages.create_deal_contract_period.elems.mdrcTerritoriesField.click();
-            pages.create_deal_contract_period.elems.mdrcTerritoriesInputField.sendKeys("a");
+            pages.create_deal_contract_period.elems.mdrcTerritoriesInputField.sendKeys("africa");
         },
 
         selectRandomTerritory: function () {
@@ -189,14 +189,14 @@ if (pages.create_deal_contract_period === undefined) {
         selectMdrcRandomValueFromLabel: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.mdrcLabelsDropDownData));
 
-            element(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer")).getText().
+            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
                     console.log("Text from label is : " + promise);
                     if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("li.tg-typeahead__suggestions-footer div a"))
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber].click();
+                                var element = options[randomNumber];
                                 browser.actions().mouseMove(element).click().perform();
                             })
                     }
@@ -204,7 +204,7 @@ if (pages.create_deal_contract_period === undefined) {
                         browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
-                                var element =options[randomNumber].click();
+                                var element =options[randomNumber];
                                 browser.actions().mouseMove(element).click().perform();
                             })
                     }
@@ -432,12 +432,31 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         selectTheRandomLabelValueAssumptions: function () {
-            pages.create_deal_contract_period.elems.labelsAssumptionsInputField.sendKeys("test");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_contract_period.elems.labelsAssumptionsInputField.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope"))));
+
+            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                var element = options[randomNumber];
+                                pages.base.scrollIntoView(element);
+                                browser.actions().mouseMove(element).click().perform();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                var element = options[randomNumber];
+                                pages.base.scrollIntoView(element);
+                                browser.actions().mouseMove(element).click().perform();
+                            })
+                    }
                 });
         },
 
