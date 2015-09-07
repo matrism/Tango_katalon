@@ -2,7 +2,8 @@
 
 pages.mainHeader = exports;
 
-var navbarLinkSelector = '.nav > li > a';
+var navbarLinkSelector = '.nav > li > a',
+    ExpectedConditions = protractor.ExpectedConditions;
 
 exports.container = function () {
     return $('#DSP-NAVBAR');
@@ -56,3 +57,86 @@ exports.createNewRecord = function (type) {
     });
 };
 
+exports.search = (function() {
+    var search = {};
+
+    search.typeahead = function() {
+        return $('#DSP-SEARCH');
+    };
+
+    search.entityTypeDropdown = function() {
+        return $('#DSP-SEARCH-DROP');
+    };
+
+    search.entityTypeOption = function(value) {
+        return search.entityTypeDropdown().element(by.cssContainingText(
+            'li a', value
+        ));
+    };
+
+    search.selectEntityType = function(value) {
+        var dropdown = search.entityTypeDropdown(),
+            option = search.entityTypeOption(value);
+
+        pages.base.scrollIntoView(dropdown);
+
+        dropdown.click();
+
+        return option.click();
+    };
+
+    search.filterTagDropdown = function() {
+        return search.typeahead().$$('.tg-typeahead__tag-filter').last();
+    };
+
+    search.selectFilterTag = function(value) {
+        var element = search.filterTagDropdown();
+        pages.base.scrollIntoView(element);
+        return pages.base.selectDropdownOption(element, value);
+    };
+
+    search.termsInput = function() {
+        return search.typeahead().element(by.model('$term'));
+    };
+
+    search.enterTerms = function(value) {
+        var element = search.termsInput();
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    search.resultsContainer = function() {
+        var element = $('.tg-typeahead__suggestions');
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element;
+    };
+
+    search.results = function() {
+        return search.resultsContainer().$$('.tg-typeahead__suggestions-group-item');
+    };
+
+    search.selectResultByIndex = function(i) {
+        var element = search.results().get(i);
+
+        pages.base.scrollIntoView(element);
+
+        return element.click().then(function() {
+            pages.base.waitForAjax();
+        });
+    };
+
+    search.addAnotherTermOption = function() {
+        return search.resultsContainer().$(
+            '[data-ng-click="selectFilterMatch($term);"]'
+        );
+    };
+
+    search.addAnotherTerm = function() {
+        var element = search.addAnotherTermOption();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    return search;
+})();

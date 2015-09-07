@@ -19,4 +19,14 @@ exports.goToSubLink = function (link, subLink) {
     });
 };
 
-pageStep('Create new record');
+pageStep([
+    ['Search', [
+        'Select entity type',
+        'Select filter tag',
+        'Enter terms',
+        'Select result by index',
+        'Add another term',
+    ]],
+
+    'Create new record',
+]);

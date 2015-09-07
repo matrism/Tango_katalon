@@ -48,6 +48,12 @@ var beforeFeature = [
                 'worksSanityValidateCommercialAlbum',
                 'worksSanityCreateLibraryAlbum',
                 'worksSanityValidateLibraryAlbum',
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByTitle',
+                'worksSanitySearchForAlbumsByArtist',
+                'worksSanitySearchForAlbumsByCatalog',
+                'worksSanitySearchForAlbumsByLabel',
+                'worksSanitySearchForAlbumsByTitlePlusArtist',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -89,6 +95,12 @@ var beforeFeature = [
                 'worksSanityValidateCommercialAlbum',
                 'worksSanityCreateLibraryAlbum',
                 'worksSanityValidateLibraryAlbum',
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByTitle',
+                'worksSanitySearchForAlbumsByArtist',
+                'worksSanitySearchForAlbumsByCatalog',
+                'worksSanitySearchForAlbumsByLabel',
+                'worksSanitySearchForAlbumsByTitlePlusArtist',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -494,6 +506,12 @@ var beforeFeature = [
             tags: [
                 'worksSanityCreateCommercialAlbum',
                 'worksSanityValidateCommercialAlbum',
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByTitle',
+                'worksSanitySearchForAlbumsByArtist',
+                'worksSanitySearchForAlbumsByCatalog',
+                'worksSanitySearchForAlbumsByLabel',
+                'worksSanitySearchForAlbumsByTitlePlusArtist',
             ],
             steps: function() {
                 steps.base.useEntityDataSlot('album', 'commercialAlbum');
@@ -718,6 +736,134 @@ var beforeFeature = [
                 _.times(3, bind(steps.album.recordings, function(i) {
                     this.validateLibraryName(i, 'AUDIOMACHINE');
                 }));
+            },
+        },
+        {
+            name: 'Search for previously created commercial album by title',
+            tags: [
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByTitle',
+            ],
+            steps: function() {
+                using(steps.mainHeader.search, function() {
+                    this.selectEntityType('Albums');
+
+                    this.selectFilterTag('Title');
+
+                    this.enterTerms(
+                        'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                    );
+
+                    this.selectResultByIndex(0);
+                });
+
+                steps.album.header.validateTitle(
+                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                );
+            },
+        },
+        {
+            name: 'Search for previously created commercial album by artist',
+            tags: [
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByArtist',
+            ],
+            steps: function() {
+                using(steps.mainHeader.search, function() {
+                    this.selectEntityType('Albums');
+
+                    this.selectFilterTag('Artist');
+
+                    this.enterTerms(
+                        'TEST ARTIST ' + randomId('commercialAlbum')
+                    );
+
+                    this.selectResultByIndex(0);
+                });
+
+                steps.album.header.validateTitle(
+                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                );
+            },
+        },
+        {
+            name: 'Search for previously created commercial album by catalog',
+            tags: [
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByCatalog',
+            ],
+            steps: function() {
+                using(steps.mainHeader.search, function() {
+                    this.selectEntityType('Albums');
+
+                    this.selectFilterTag('Catalog');
+
+                    this.enterTerms(
+                        randomId('commercialAlbumCatalogueNumber')
+                    );
+
+                    this.selectResultByIndex(0);
+                });
+
+                steps.album.header.validateTitle(
+                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                );
+            },
+        },
+        {
+            name: 'Search for previously created commercial album by label',
+            tags: [
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByLabel',
+            ],
+            steps: function() {
+                using(steps.mainHeader.search, function() {
+                    this.selectEntityType('Albums');
+
+                    this.selectFilterTag('Label');
+
+                    this.enterTerms(
+                        'TEST LABEL ' + randomId('commercialAlbumLabel')
+                    );
+
+                    this.selectResultByIndex(0);
+                });
+
+                steps.album.header.validateTitle(
+                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                );
+            },
+        },
+        {
+            name: 'Search for previously created commercial album by title + artist',
+            tags: [
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByTitlePlusArtist',
+            ],
+            steps: function() {
+                using(steps.mainHeader.search, function() {
+                    this.selectEntityType('Albums');
+
+                    this.selectFilterTag('Title');
+
+                    this.enterTerms(
+                        'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                    );
+
+                    this.addAnotherTerm();
+
+                    this.selectFilterTag('Artist');
+
+                    this.enterTerms(
+                        'TEST ARTIST ' + randomId('commercialAlbum')
+                    );
+
+                    this.selectResultByIndex(0);
+                });
+
+                steps.album.header.validateTitle(
+                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                );
             },
         },
         {
