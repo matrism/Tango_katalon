@@ -44,6 +44,8 @@ var beforeFeature = [
                 'works-sanity-validate-cos',
                 'worksSanityCreateLibraryWork',
                 'worksSanityValidateLibraryWork',
+                'worksSanityCreateCommercialAlbum',
+                'worksSanityValidateCommercialAlbum',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -81,6 +83,8 @@ var beforeFeature = [
             tags: [
                 'works-sanity-create-work',
                 'works-sanity-validate-work',
+                'worksSanityCreateCommercialAlbum',
+                'worksSanityValidateCommercialAlbum',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -479,6 +483,89 @@ var beforeFeature = [
                         this.validateLibraryName(i, 'AUDIOMACHINE');
                     }, this);
                 });
+            },
+        },
+        {
+            name: 'Create commercial album',
+            tags: [
+                'worksSanityCreateCommercialAlbum',
+                'worksSanityValidateCommercialAlbum',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('album', 'commercialAlbum');
+
+                using(steps.newAlbum, function() {
+                    this.goToNewAlbumPage();
+
+                    this.enterTitle(
+                        'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                    );
+
+                    this.selectReleaseType('Commercial');
+
+                    this.enterArtistSearchTerms(
+                        'TEST ARTIST ' + randomId('commercialAlbum')
+                    );
+
+                    this.createEnteredArtist();
+
+                    this.enterAlbumCode(
+                        'TEST ALBUM CODE ' + randomId('commercialAlbum')
+                    );
+
+                    _.times(3, function(i) {
+                        this.selectRecordingSearchType(i, 'Title');
+
+                        this.enterRecordingSearchTerms(
+                            i, 'TEST RECORDING ' + randomId(
+                                'commercialAlbumRecording' + i
+                            )
+                        );
+
+                        this.createEnteredRecording();
+
+                        this.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
+
+                        this.selectRecordingWorkSearchResultByIndex(0);
+
+                        this.enterRecordingArtistSearchTerms(
+                            i, 'TEST ARTIST ' + randomId('commercialAlbum')
+                        );
+
+                        this.selectRecordingArtistSearchResultByIndex(0);
+                    }, this);
+
+                    this.goToTab('Release Details');
+                });
+
+                using(steps.newAlbum.releaseDetails, function() {
+                    this.waitForTerritoriesSelectorToBeReady(0);
+                    this.editTerritories(0);
+                    this.enterTerritorySearchTerms(0, 'United States');
+                    this.selectTerritorySearchResultByIndex(0);
+
+                    this.enterReleaseDate(0, moment().format('YYYY-MM-DD'));
+
+                    this.selectConfiguration(0, 'CD');
+
+                    this.enterLabelSearchTerms(
+                        0, 'TEST LABEL ' + randomId('commercialAlbumLabel')
+                    );
+
+                    this.createEnteredLabel();
+
+                    this.enterCatalogueNumber(
+                        0, randomId('commercialAlbumCatalogueNumber')
+                    );
+
+                    this.enterLicenseCode(
+                        0, 'TEST LICENSE CODE ' + randomId(
+                            'commercialAlbumLicenseCode'
+                        )
+                    );
+                });
+
+                steps.newAlbum.save();
             },
         },
         {

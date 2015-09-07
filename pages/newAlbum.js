@@ -98,6 +98,18 @@ exports.recordingSearchTermsTypeahead = function(i) {
     return exports.trackContainers().get(i).$('.create-album__track-recording');
 };
 
+exports.recordingSearchTypeDropdown = function(i) {
+    return exports.recordingSearchTermsTypeahead(i).$(
+        '.tg-typeahead__tag-filter'
+    );
+};
+
+exports.selectRecordingSearchType = function(i, value) {
+    var element = exports.recordingSearchTypeDropdown(i);
+    pages.base.scrollIntoView(element);
+    return pages.base.selectDropdownOption(element, value);
+};
+
 exports.recordingSearchTermsInput = function(i) {
     return exports.recordingSearchTermsTypeahead(i).element(by.model('$term'));
 };
@@ -211,6 +223,184 @@ exports.selectRecordingArtistSearchResultByIndex = function(i) {
     pages.base.scrollIntoView(element);
     return element.click();
 };
+
+exports.tabSetContainer = function() {
+    return $('.nav-tabs');
+};
+
+exports.tab = function(value) {
+    return exports.tabSetContainer().element(by.cssContainingText(
+        'a', value
+    ));
+};
+
+exports.goToTab = function(value) {
+    var element = exports.tab(value);
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+
+exports.releaseDetails = (function() {
+    var exports = {};
+
+    exports.rows = function() {
+        return element.all(by.repeater('albumRelease in dataHolder.albumReleases'));
+    };
+
+    exports.territoriesSelector = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.territory_code'
+        ));
+    };
+
+    exports.territoriesSelectorGlobeButton = function(i) {
+        return exports.territoriesSelector(i).$('.tg-territory__globe-button');
+    };
+
+    exports.waitForTerritoriesSelectorToBeReady = function(i) {
+        var element = exports.territoriesSelectorGlobeButton(i);
+
+        pages.base.scrollIntoView(element);
+
+        return browser.wait(function() {
+            return pph.matchesCssSelector(
+                element, ':not(.tg-territory__loading-button)'
+            );
+        });
+    };
+
+    exports.editTerritories = function(i) {
+        var element = exports.territoriesSelector(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.territorySearchTermsInput = function(i) {
+        return exports.territoriesSelector(i).element(by.model('$term'));
+    };
+
+    exports.enterTerritorySearchTerms = function(i, value) {
+        var element = exports.territorySearchTermsInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.territorySearchResults = function() {
+        var elements = $$('.tg-typeahead__suggestions-group-item');
+        browser.wait(ExpectedConditions.visibilityOfAny(elements));
+        return elements;
+    };
+
+    exports.selectTerritorySearchResultByIndex = function(i) {
+        var element = exports.territorySearchResults().get(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.releaseDateInput = function(i) {
+        return exports.rows().get(i).element(by.model('date'));
+    };
+
+    exports.enterReleaseDate = function(i, value) {
+        var element = exports.releaseDateInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.configurationDropdown = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.configuration'
+        ));
+    };
+
+    exports.selectConfiguration = function(i, value) {
+        var element = exports.configurationDropdown(i);
+
+        pages.base.scrollIntoView(element);
+
+        return pages.base.selectDropdownOption(element, value, {
+            dropdownType: 'tg',
+        });
+    };
+
+    exports.labelTypeahead = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.label'
+        ));
+    };
+
+    exports.labelSearchTermsInput = function(i) {
+        return exports.labelTypeahead(i).element(by.model('$term'));
+    };
+
+    exports.enterLabelSearchTerms = function(i, value) {
+        var element = exports.labelSearchTermsInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.labelSearchResultsContainer = function() {
+        var element = $('.tg-typeahead__suggestions');
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element;
+    };
+
+    exports.createEnteredLabelOption = function() {
+        return exports.labelSearchResultsContainer().element(by.cssContainingText(
+            'a', 'Create New Label'
+        ));
+    };
+
+    exports.createEnteredLabel = function() {
+        var element = exports.createEnteredLabelOption();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.labelSearchResults = function() {
+        var elements = $$('.tg-typeahead__suggestions-group-item');
+        browser.wait(ExpectedConditions.visibilityOfAny(elements));
+        return elements;
+    };
+
+    exports.selectLabelSearchResultByIndex = function(i) {
+        var element = exports.labelSearchResults().get(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.catalogueNumberInput = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.catalog_number'
+        ));
+    };
+
+    exports.enterCatalogueNumber = function(i, value) {
+        var element = exports.catalogueNumberInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.licenseCodeInput = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.license_code'
+        ));
+    };
+
+    exports.enterLicenseCode = function(i, value) {
+        var element = exports.licenseCodeInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    return exports;
+})();
+
 
 exports.saveButton = function() {
     return $('.page-footer').element(by.cssContainingText('button', 'Create'));

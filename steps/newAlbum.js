@@ -1,6 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
+var pageStep = require('../helpers/basicPageStep');
 
 steps.newAlbum = exports;
 
@@ -56,6 +56,8 @@ exports.enterAlbumCode = function(value) {
     });
 };
 
+pageStep('Select recording search type');
+
 exports.enterRecordingSearchTerms = function(i, value) {
     it(
         'Track #' + (i + 1) + ' - ' +
@@ -89,7 +91,7 @@ exports.enterWorkIdFromWorkSlotAsWorkSearchTerms = function(i, slotName) {
         'Enter work ID from work slot "' + slotName + '" as work search terms',
         function() {
             pages.newAlbum.enterRecordingWorkSearchTerms(
-                i, hash.currentEntityDataSlotsByType.work.id
+                i, hash.entityDataSlotsByType.work[slotName].id
             );
         }
     );
@@ -115,6 +117,24 @@ exports.selectRecordingArtistSearchResultByIndex = function(i) {
         pages.newAlbum.selectRecordingArtistSearchResultByIndex(i);
     });
 };
+
+pageStep([
+    'Go to tab',
+
+    ['Release Details', [
+        'Wait for territories selector to be ready',
+        'Edit territories',
+        'Enter territory search terms',
+        'Select territory search result by index',
+        'Enter release date',
+        'Select configuration',
+        'Enter label search terms',
+        'Create entered label',
+        'Select label search result by index',
+        'Enter catalogue number',
+        'Enter license code',
+    ]],
+]);
 
 exports.save = function() {
     it('Save album', function() {
