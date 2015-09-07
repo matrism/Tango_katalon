@@ -11,18 +11,18 @@ exports.goToAlbumPage = function(value) {
     pages.base.waitForAjax();
 };
 
-exports.albumHeader = function() {
-    return $('.edit-album__header');
-};
-
-exports.expectAlbumHeaderToBeVisible = function() {
-    var element = exports.albumHeader();
-    pages.base.scrollIntoView(element);
-    expect(element.isDisplayed()).toBeTruthy();
-};
-
 exports.header = (function() {
     var exports = {};
+
+    exports.container = function() {
+        return $('.edit-album__header');
+    };
+
+    exports.expectHeaderToBeVisible = function() {
+        var element = exports.container();
+        pages.base.scrollIntoView(element);
+        expect(element.isDisplayed()).toBeTruthy();
+    };
 
     exports.titleBinding = function() {
         return element(by.binding(' modularEditModels.model.title '));
@@ -50,6 +50,22 @@ exports.header = (function() {
 
     exports.validateArtistName = function(value) {
         expect(exports.artistName()).toBe(value);
+    };
+
+    exports.libraryNameBinding = function() {
+        return exports.container().element(by.binding(
+            ' modularEditModels.model.library.libraryName '
+        ));
+    };
+
+    exports.libraryName = function() {
+        var element = exports.libraryNameBinding();
+        pages.base.scrollIntoView(element);
+        return pph.trim(element.getText());
+    };
+
+    exports.validateLibraryName = function(value) {
+        expect(exports.libraryName()).toBe(value);
     };
 
     exports.trackCountBinding = function() {
@@ -178,6 +194,22 @@ exports.recordings = (function() {
 
     exports.validateArtistName = function(i, value) {
         expect(exports.artistName(i)).toBe(value);
+    };
+
+    exports.libraryNameBinding = function(i) {
+        return exports.rows().get(i).element(by.binding(
+            ' modularEditModels.model.library.libraryName '
+        ));
+    };
+
+    exports.libraryName = function(i) {
+        var element = exports.libraryNameBinding(i);
+        pages.base.scrollIntoView(element);
+        return pph.trim(element.getText());
+    };
+
+    exports.validateLibraryName = function(i, value) {
+        expect(exports.libraryName(i)).toBe(value);
     };
 
     exports.durationBinding = function(i) {

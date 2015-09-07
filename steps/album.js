@@ -5,12 +5,6 @@ var pageStep = require('../helpers/basicPageStep'),
 
 steps.album = exports;
 
-exports.expectAlbumHeaderToBeVisible = function() {
-    it('Expect album header to be visible', function() {
-        pages.album.expectAlbumHeaderToBeVisible();
-    });
-};
-
 exports.goToAlbumPage = function() {
     it('Go to album page', function() {
         page.goToAlbumPage(
@@ -21,8 +15,10 @@ exports.goToAlbumPage = function() {
 
 pageStep([
     ['Header', [
+        'Expect header to be visible',
         'Validate title',
         'Validate artist name',
+        'Validate library name',
         'Validate track count',
         'Validate duration',
         'Validate configurations',
@@ -35,6 +31,7 @@ pageStep([
     ['Recordings', [
         'Validate title',
         'Validate artist name',
+        'Validate library name',
         'Validate duration',
     ]],
 

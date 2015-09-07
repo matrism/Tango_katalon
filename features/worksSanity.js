@@ -690,9 +690,34 @@ var beforeFeature = [
 
                         this.validateRecordingLibraryName(i, 'AUDIOMACHINE');
                     }, this);
+
+                    this.save();
+
+                    this.findAlbumUuid();
+                });
+            },
+        },
+        {
+            name: 'Validate created library album',
+            tags: [
+                'worksSanityValidateLibraryAlbum',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('album', 'libraryAlbum');
+
+                steps.album.goToAlbumPage();
+
+                using(steps.album.header, function() {
+                    this.validateTitle(
+                        'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
+                    );
+
+                    this.validateLibraryName('AUDIOMACHINE');
                 });
 
-                steps.newAlbum.save();
+                _.times(3, bind(steps.album.recordings, function(i) {
+                    this.validateLibraryName(i, 'AUDIOMACHINE');
+                }));
             },
         },
         {

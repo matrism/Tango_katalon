@@ -109,7 +109,7 @@ var beforeFeature = [
                     this.save();
                 });
 
-                steps.album.expectAlbumHeaderToBeVisible();
+                steps.album.header.expectHeaderToBeVisible();
             },
         },
     ];
