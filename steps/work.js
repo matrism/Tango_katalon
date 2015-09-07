@@ -1,11 +1,13 @@
 "use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var moment = require("moment");
-var pad = require("left-pad");
-var pph = require("../helpers/pph");
-var random = require("../helpers/random");
-var _ = require('lodash');
-var promise = protractor.promise;
+
+var moment = require('moment'),
+    pad = require('left-pad'),
+    pph = require('../helpers/pph'),
+    random = require('../helpers/random'),
+    _ = require('lodash'),
+    promise = protractor.promise,
+    pageStep = require('../helpers/basicPageStep');
+
 require(pages_path + "work");
 steps.work = exports;
 exports.goToWorkPage = function (data, key) {
@@ -1297,16 +1299,9 @@ module.exports.validateBltvr = function (value) {
         });
     });
 };
-module.exports.validateMusicLibrary = function (value) {
-    it("Validate music library (if validation value is not empty)", function () {
-        promise.when(value).then(function (value) {
-            if (!value) {
-                return;
-            }
-            expect(pages.work.musicLibrary()).toBe(value);
-        });
-    });
-};
+
+pageStep('Validate music library');
+
 module.exports.expectMusicalDistributionCategoryToBe = function (value) {
     it("Validate selected musical distribution category", function () {
         expect(pages.work.selectedMusicalDistributionCategory()).toBe(value);

@@ -453,6 +453,35 @@ var beforeFeature = [
             },
         },
         {
+            name: 'Validate created library work',
+            tags: [
+                'worksSanityValidateLibraryWork',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('work', 'libraryWork');
+
+                using(steps.work, function() {
+                    this.goToWorkPage();
+
+                    this.validateMusicLibrary('AUDIOMACHINE');
+
+                    this.goToRecordingsTab();
+                });
+
+                using(steps.workRecordings, function() {
+                    this.validateRecordingNames(
+                        _.times(3, function() {
+                            return 'TEST LIBRARY WORK ' + randomId('libraryWork');
+                        })
+                    );
+
+                    _.times(3, function(i) {
+                        this.validateLibraryName(i, 'AUDIOMACHINE');
+                    }, this);
+                });
+            },
+        },
+        {
             name: 'Search for 2 previously created works by work ID',
             tags: [
                 'works-sanity-search-for-works-by-id',
