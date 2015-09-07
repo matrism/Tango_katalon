@@ -569,7 +569,84 @@ var beforeFeature = [
                     );
                 });
 
-                steps.newAlbum.save();
+                using(steps.newAlbum, function() {
+                    this.save();
+
+                    this.findAlbumUuid();
+                });
+            },
+        },
+        {
+            name: 'Validate created commercial album',
+            tags: [
+                'worksSanityValidateCommercialAlbum',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('album', 'commercialAlbum');
+
+                steps.album.goToAlbumPage();
+
+                using(steps.album.header, function() {
+                    this.validateTitle(
+                        'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                    );
+
+                    this.validateArtistName(
+                        'TEST ARTIST ' + randomId('commercialAlbum')
+                    );
+
+                    this.validateTrackCount(3);
+
+                    this.validateDuration('00:00:00');
+
+                    this.validateConfigurations(['CD']);
+
+                    this.validateTerritoryCount(1);
+
+                    this.validateAlbumCode(
+                        'TEST ALBUM CODE ' + randomId('commercialAlbum')
+                    );
+                });
+
+                _.times(3, bind(steps.album.recordings, function(i) {
+                    this.validateTitle(
+                        i, 'TEST RECORDING ' + randomId(
+                            'commercialAlbumRecording' + i
+                        )
+                    );
+
+                    this.validateArtistName(
+                        i, 'TEST ARTIST ' + randomId('commercialAlbum')
+                    );
+
+                    this.validateDuration(i, '00:00:00');
+
+                    this.validateWorkIdUsingWorkSlot(i, 'mainWork');
+                }));
+
+                steps.album.goToTab('Release Details');
+
+                using(steps.album.releaseDetails, function() {
+                    this.validateTerritories(0, ['United States']);
+
+                    this.validateReleaseDate(0, moment().format('YYYY-MM-DD'));
+
+                    this.validateConfiguration(0, 'CD');
+
+                    this.validateLabelName(
+                        0, 'TEST LABEL ' + randomId('commercialAlbumLabel')
+                    );
+
+                    this.validateCatalogueNumber(
+                        0, randomId('commercialAlbumCatalogueNumber')
+                    );
+
+                    this.validateLicenseCode(
+                        0, 'TEST LICENSE CODE ' + randomId(
+                            'commercialAlbumLicenseCode'
+                        )
+                    );
+                });
             },
         },
         {

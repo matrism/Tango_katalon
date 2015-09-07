@@ -447,3 +447,20 @@ exports.save = function() {
         pages.base.waitForAjax();
     });
 };
+
+exports.albumUuid = function() {
+    return browser.getCurrentUrl().then(function(value) {
+        var regExp = /\/#\/album\/([a-z0-9-]+)/,
+            reResults;
+
+        expect(value).toMatch(regExp);
+
+        reResults = regExp.exec(value);
+
+        if(!reResults) {
+            return null;
+        }
+
+        return reResults[1];
+    });
+};

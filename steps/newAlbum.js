@@ -1,11 +1,11 @@
 'use strict';
 
-var pageStep = require('../helpers/basicPageStep');
+var pageStep = require('../helpers/basicPageStep'),
+    page = require(pages_path + 'newAlbum');
 
 steps.newAlbum = exports;
 
 require(pages_path + 'base');
-require(pages_path + 'newAlbum');
 
 exports.goToNewAlbumPage = function() {
 	it('Go to new album page', function() {
@@ -143,5 +143,13 @@ pageStep([
 exports.save = function() {
     it('Save album', function() {
         pages.newAlbum.save();
+    });
+};
+
+exports.findAlbumUuid = function() {
+    it('Find album UUID', function() {
+        page.albumUuid().then(function(value) {
+            hash.currentEntityDataSlotsByType.album.uuid = value;
+        });
     });
 };
