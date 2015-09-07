@@ -46,6 +46,8 @@ var beforeFeature = [
                 'worksSanityValidateLibraryWork',
                 'worksSanityCreateCommercialAlbum',
                 'worksSanityValidateCommercialAlbum',
+                'worksSanityCreateLibraryAlbum',
+                'worksSanityValidateLibraryAlbum',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -85,6 +87,8 @@ var beforeFeature = [
                 'works-sanity-validate-work',
                 'worksSanityCreateCommercialAlbum',
                 'worksSanityValidateCommercialAlbum',
+                'worksSanityCreateLibraryAlbum',
+                'worksSanityValidateLibraryAlbum',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -563,6 +567,52 @@ var beforeFeature = [
                             'commercialAlbumLicenseCode'
                         )
                     );
+                });
+
+                steps.newAlbum.save();
+            },
+        },
+        {
+            name: 'Create library album',
+            tags: [
+                'worksSanityCreateLibraryAlbum',
+                'worksSanityValidateLibraryAlbum',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('album', 'libraryAlbum');
+
+                using(steps.newAlbum, function() {
+                    this.goToNewAlbumPage();
+
+                    this.enterTitle(
+                        'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
+                    );
+
+                    this.selectReleaseType('Library');
+
+                    this.selectLibrary('AUDIOMACHINE');
+
+                    this.enterAlbumCode(
+                        'TEST ALBUM CODE ' + randomId('libraryAlbum')
+                    );
+
+                    _.times(3, function(i) {
+                        this.selectRecordingSearchType(i, 'Title');
+
+                        this.enterRecordingSearchTerms(
+                            i, 'TEST RECORDING ' + randomId(
+                                'commercialAlbumRecording' + i
+                            )
+                        );
+
+                        this.createEnteredRecording();
+
+                        this.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
+
+                        this.selectRecordingWorkSearchResultByIndex(0);
+
+                        this.validateRecordingLibraryName(i, 'AUDIOMACHINE');
+                    }, this);
                 });
 
                 steps.newAlbum.save();

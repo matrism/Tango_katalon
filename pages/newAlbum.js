@@ -79,6 +79,20 @@ exports.cancelArtistSearch = function() {
     return pages.base.hitEscape();
 };
 
+exports.libraryDropdown = function() {
+    return element(by.model('dataHolder.newAlbum.library'));
+};
+
+exports.selectLibrary = function(value) {
+    var element = exports.libraryDropdown();
+
+    pages.base.scrollIntoView(element);
+
+    return pages.base.selectDropdownOption(element, value, {
+        dropdownType: 'tg',
+    });
+};
+
 exports.albumCodeInput = function() {
     return element(by.model('dataHolder.newAlbum.album_code'));
 };
@@ -222,6 +236,22 @@ exports.selectRecordingArtistSearchResultByIndex = function(i) {
     var element = exports.recordingArtistSearchResults().get(i);
     pages.base.scrollIntoView(element);
     return element.click();
+};
+
+exports.recordingLibraryNameBinding = function(i) {
+    return exports.trackContainers().get(i).element(by.binding(
+        ' dataHolder.newAlbum.library.libraryName '
+    ));
+};
+
+exports.recordingLibraryName = function(i) {
+    var element = exports.recordingLibraryNameBinding(i);
+    pages.base.scrollIntoView(element);
+    return pph.trim(element.getText());
+};
+
+exports.validateRecordingLibraryName = function(i, value) {
+    expect(exports.recordingLibraryName(i)).toBe(value);
 };
 
 exports.tabSetContainer = function() {

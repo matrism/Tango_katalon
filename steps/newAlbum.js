@@ -50,6 +50,8 @@ exports.cancelArtistSearch = function() {
     });
 };
 
+pageStep('Select library');
+
 exports.enterAlbumCode = function(value) {
     it('Enter album code (' + value + ')', function() {
         pages.newAlbum.enterAlbumCode(value);
@@ -119,6 +121,8 @@ exports.selectRecordingArtistSearchResultByIndex = function(i) {
 };
 
 pageStep([
+    'Validate recording library name',
+
     'Go to tab',
 
     ['Release Details', [
