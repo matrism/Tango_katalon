@@ -99,8 +99,9 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-validation-class='advanceCurrency'] ul.dropdown-menu.advance-currency-dropdown li.ng-scope"))));
             browser.driver.findElements(By.css("div[data-validation-class='advanceCurrency'] ul.dropdown-menu.advance-currency-dropdown li.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
-                    options[randomNumber].click();
+                    var randomNumber = Math.floor((Math.random() * 4) + 1);
+                    var element = options[randomNumber];
+                    element.click();
                 })
         },
 
@@ -290,9 +291,10 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * 5 + 1));
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).click().perform();
+                    browser.sleep(2000);
                 })
         },
 
@@ -306,8 +308,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
-                    //var randomNumber = Math.floor((Math.random() * 5 + 1));
+                    //var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * 5 + 1));
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).click().perform();
                 })
@@ -322,8 +324,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
-                    //var randomNumber = Math.floor((Math.random() * 5 + 1));
+                    //var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * 5 + 1));
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).click().perform();
                 })
@@ -338,7 +340,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    //var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * 5 + 1));
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).click().perform();
                 })
@@ -354,7 +357,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    //var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * 5 + 1));
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).click().perform();
                 })
@@ -369,7 +373,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * 5 + 1));
+                    //var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).click().perform();
                 })
@@ -384,7 +389,8 @@ if (pages.create_deal_advances === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("table tbody tr:nth-child(7) td.advance-ea-territories.pipeline-territories ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * 5 + 1));
+                    //var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).click().perform();
                 })

@@ -295,41 +295,43 @@ if (steps.create_deal_advances === undefined) {
                 steps.base.scrollIntoView("Add advance applicable earnings ", pages.create_deal_advances.elems.addAdvanceApplicableEarningsLink);
                 steps.create_deal_advances.clickOnAddViewAdvanceApplicableEarningsLink();
 
+                steps.base.scrollIntoView("synch ", pages.create_deal_advances.elems.synchronisationPercentAdvanceApplicableEarnings);
                 steps.create_deal_advances.fillIntoSynchronisationPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnSynchPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineSynchTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineSynchLabelAdvanceApplicableEarnings();
 
+                steps.base.scrollIntoView("mech ", pages.create_deal_advances.elems.mechanicalPercentAdvanceApplicableEarnings);
                 steps.create_deal_advances.fillIntoMechanicalPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnMechPipelineCheckBoxAdvanceApplicableEarnings();
-                steps.base.scrollIntoView("Territory",pages.create_deal_advances.elems.defineMechTerritoriesAdvanceApplicableEarnings);
                 steps.create_deal_advances.selectRandomDefineMechTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineMechLabelAdvanceApplicableEarnings();
 
+                steps.base.scrollIntoView("perf ", pages.create_deal_advances.elems.publicPerformancePercentAdvanceApplicableEarnings);
                 steps.create_deal_advances.fillIntoPublicPerformancePercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnPerfPipelineCheckBoxAdvanceApplicableEarnings();
-                steps.base.scrollIntoView("Territory",pages.create_deal_advances.elems.definePerfTerritoriesAdvanceApplicableEarnings);
                 steps.create_deal_advances.selectRandomDefinePerfTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefinePerfLabelAdvanceApplicableEarnings();
 
+                steps.base.scrollIntoView("grand ", pages.create_deal_advances.elems.grandRightsPercentAdvanceApplicableEarnings);
                 steps.create_deal_advances.fillIntoGrandRightsPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnGrandPipelineCheckBoxAdvanceApplicableEarnings();
-                steps.base.scrollIntoView("Territory",pages.create_deal_advances.elems.defineGrandTerritoriesAdvanceApplicableEarnings);
                 steps.create_deal_advances.selectRandomDefineGrandTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineGrandLabelAdvanceApplicableEarnings();
 
                 steps.base.scrollIntoView("Digital rights", pages.create_deal_advances.elems.digitalRightsPercentAdvanceApplicableEarnings);
-
                 steps.create_deal_advances.fillIntoDigitalRightsPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnDigitalPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineDigitalTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineDigitalLabelAdvanceApplicableEarnings();
 
+                steps.base.scrollIntoView("print ", pages.create_deal_advances.elems.printRightsPercentAdvanceApplicableEarnings);
                 steps.create_deal_advances.fillIntoPrintRightsPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnPrintPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefinePrintTerritoryAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefinePrintLabelAdvanceApplicableEarnings();
 
+                steps.base.scrollIntoView("other ", pages.create_deal_advances.elems.otherRightsPercentAdvanceApplicableEarnings);
                 steps.create_deal_advances.fillIntoOtherRightsPercentFieldAdvanceApplicableEarnings();
                 steps.create_deal_advances.clickOnOtherPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.create_deal_advances.selectRandomDefineOtherTerritoryAdvanceApplicableEarnings();
