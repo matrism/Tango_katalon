@@ -2,7 +2,7 @@
 
 var pph = require('../helpers/pph.js');
 
-pages.organisationSmokeTests = exports;
+pages.newOrganisation = exports;
 
 exports.nameField = function () {
     return element(by.model('modularEditModels.model.name'));
@@ -412,7 +412,7 @@ exports.expectDoneButtonToBeClickable = function () {
     expect(button.getAttribute('class')).toBe('btn btn-primary ng-scope');
 };
 
-exports.save = function() {
+exports.saveOrganisation = function() {
     return exports.doneButton().click().then(function() {
         pages.base.waitForAjax();
     });

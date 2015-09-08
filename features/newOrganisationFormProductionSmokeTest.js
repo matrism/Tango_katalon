@@ -4,7 +4,7 @@ var pages_path = _tf_config._system_.path_to_pages,
     randomId = random.id.makeMemoizedGenerator();
 
 require(steps_path + 'mainHeader');
-require(steps_path + 'organisationSmokeTests');
+require(steps_path + 'newOrganisation');
 
 var beforeFeature = function () {
         steps.login.itLogin();
@@ -16,41 +16,44 @@ var beforeFeature = function () {
             tags: ['newOrganisationFormProductionSmokeTest','smokeProd'],
             steps: function () {
                 steps.mainHeader.createNewRecord('Organisation');
-                steps.organisationSmokeTests.populateName('Org smoke test');
-                steps.organisationSmokeTests.selectTerritoryOfOperation('United States');
-                steps.organisationSmokeTests.selectOrgType('Publisher');
-                steps.organisationSmokeTests.selectPublisherType('WCM');
-                steps.organisationSmokeTests.makeOrgRegistrationRecipient();
 
-                var deliveryMethod = 'FTP';
-                steps.organisationSmokeTests.addDeliveryMethod(deliveryMethod);
-                steps.organisationSmokeTests.fillRequiredFieldsForDeliveryMethod(deliveryMethod);
+                using(steps.newOrganisation, function() {
+                    this.populateName('Org smoke test');
+                    this.selectTerritoryOfOperation('United States');
+                    this.selectOrgType('Publisher');
+                    this.selectPublisherType('WCM');
+                    this.makeOrgRegistrationRecipient();
 
-                steps.organisationSmokeTests.selectAcknowledgementProcess('Single');
-                steps.organisationSmokeTests.selectAcknowledgementProcessDeliveryMethod('Email');
+                    var deliveryMethod = 'FTP';
+                    this.addDeliveryMethod(deliveryMethod);
+                    this.fillRequiredFieldsForDeliveryMethod(deliveryMethod);
 
-                //make sure we can add a second delivery method
-                steps.organisationSmokeTests.addDeliveryMethod(deliveryMethod);
-                steps.organisationSmokeTests.fillRequiredFieldsForDeliveryMethod(deliveryMethod);
+                    this.selectAcknowledgementProcess('Single');
+                    this.selectAcknowledgementProcessDeliveryMethod('Email');
 
-                steps.organisationSmokeTests.clickSubpublisherRelationshipButton('Yes');
-                steps.organisationSmokeTests.fillRequiredFieldsForLastSubpublisher('WARNER CHAPPELL MUSIC FINLAND OY', 'Finland');
-                steps.organisationSmokeTests.clickAddSubpublisherButton();
-                steps.organisationSmokeTests.fillRequiredFieldsForLastSubpublisher('WARNER CHAPPELL MUSIC FINLAND OY', 'Sweden');
+                    //make sure we can add a second delivery method
+                    this.addDeliveryMethod(deliveryMethod);
+                    this.fillRequiredFieldsForDeliveryMethod(deliveryMethod);
 
-                steps.organisationSmokeTests.makeOrgIncomeProvider();
-                steps.organisationSmokeTests.setDefaultIncomeProviderCurrency('USD');
-                steps.organisationSmokeTests.setIncomeFileType('ASCAP Domestic');
-                /*steps.organisationSmokeTests.addIncomeTypeMapping(20, 'description', '', 'Mechanical');
-                steps.organisationSmokeTests.addIncomeTypeMapping(25, 'different description', 'ASCAP Domestic', 'Mechanical');
-                steps.organisationSmokeTests.addIncomeTypeMapping(30, 'description', 'ASCAP Domestic', 'Digital Mechanical');*/
+                    this.clickSubpublisherRelationshipButton('Yes');
+                    this.fillRequiredFieldsForLastSubpublisher('WARNER CHAPPELL MUSIC FINLAND OY', 'Finland');
+                    this.clickAddSubpublisherButton();
+                    this.fillRequiredFieldsForLastSubpublisher('WARNER CHAPPELL MUSIC FINLAND OY', 'Sweden');
 
-                steps.organisationSmokeTests.makeOrgPayee();
-                steps.organisationSmokeTests.makeOrgStatementRecipient();
-                steps.organisationSmokeTests.setStatementRecipientData('Excel', 'Email with Attachment');
+                    this.makeOrgIncomeProvider();
+                    this.setDefaultIncomeProviderCurrency('USD');
+                    this.setIncomeFileType('ASCAP Domestic');
+                    /*this.addIncomeTypeMapping(20, 'description', '', 'Mechanical');
+                    this.addIncomeTypeMapping(25, 'different description', 'ASCAP Domestic', 'Mechanical');
+                    this.addIncomeTypeMapping(30, 'description', 'ASCAP Domestic', 'Digital Mechanical');*/
 
-                steps.organisationSmokeTests.expectFormToBeValid();
-                steps.organisationSmokeTests.expectDoneButtonToBeClickable();
+                    this.makeOrgPayee();
+                    this.makeOrgStatementRecipient();
+                    this.setStatementRecipientData('Excel', 'Email with Attachment');
+
+                    this.expectFormToBeValid();
+                    this.expectDoneButtonToBeClickable();
+                });
             }
         }
 
