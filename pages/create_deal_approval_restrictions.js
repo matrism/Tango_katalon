@@ -11,12 +11,14 @@ if (pages.create_deal_approval_restrictions === undefined) {
         },
 
         clickOnTheFinancialNoApprovalRequired: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_approval_restrictions.elems.financialNoApprovalRequired));
             pages.create_deal_approval_restrictions.elems.financialNoApprovalRequired.click();
             pages.create_deal_approval_restrictions.waitForAjax();
         },
 
 
         clickOnTheLicensingRestricted: function(){
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_approval_restrictions.elems.licensingRestricted));
             pages.create_deal_approval_restrictions.elems.licensingRestricted.click();
             pages.create_deal_approval_restrictions.waitForAjax();
         },

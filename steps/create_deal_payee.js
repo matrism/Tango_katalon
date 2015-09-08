@@ -26,12 +26,19 @@ if (steps.create_deal_payee === undefined) {
         selectRandomValueForPayeeCompanyNameCode: function () {
             it("Select the random value for payee company name/code ", function () {
                 pages.create_deal_payee.selectTheRandomValueForPayeeCompanyNameCode();
+                pages.create_deal_payee.waitForAjax();
             });
         },
 
         associateRandomScopeToPayee: function () {
             it("Associate random scope to payee ", function () {
                 pages.create_deal_payee.associateTheRandomScopeToPayee();
+            });
+        },
+
+        associateSpecificScopeNumberIToPayee: function (i) {
+            it("Associate specific  scope to payee number " + i, function () {
+                pages.create_deal_payee.associateTheSpecificScopeNumberIToPayee(i);
             });
         },
 
@@ -63,7 +70,8 @@ if (steps.create_deal_payee === undefined) {
             describe("Add payee as organisation and associate random scope ", function () {
                 steps.create_deal_payee.selectRandomPayeeOrganisationFromDropDown();
                 steps.create_deal_payee.selectRandomValueForPayeeCompanyNameCode();
-                steps.create_deal_payee.associateRandomScopeToPayee();
+                steps.base.scrollIntoView("Scope", pages.create_deal_payee.elems.scopePayeeInputField);
+                steps.create_deal_payee.associateSpecificScopeNumberIToPayee(1);
                 steps.create_deal_payee.fillIntoPayeeLegalRightInputField();
                 steps.create_deal_payee.fillIntoPayeeDistributionInputField();
                 steps.base.scrollIntoView("Save ", pages.create_deal_payee.elems.savePayeeFormButton);
@@ -75,9 +83,11 @@ if (steps.create_deal_payee === undefined) {
             describe("Add payee as person and associate random scope ", function () {
                 steps.create_deal_payee.selectRandomPayeePersonFromDropDown();
                 steps.create_deal_payee.selectRandomValueForPayeeCompanyNameCode();
-                steps.create_deal_payee.associateRandomScopeToPayee();
+                steps.base.scrollIntoView("Scope", pages.create_deal_payee.elems.scopePayeeInputField);
+                steps.create_deal_payee.associateSpecificScopeNumberIToPayee(2);
                 steps.create_deal_payee.fillIntoPayeeLegalRightInputField();
                 steps.create_deal_payee.fillIntoPayeeDistributionInputField();
+                steps.base.scrollIntoView("Save ", pages.create_deal_payee.elems.savePayeeFormButton);
                 steps.create_deal_payee.savePayeeForm();
             });
         }

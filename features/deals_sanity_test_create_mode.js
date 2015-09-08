@@ -43,7 +43,7 @@ var beforeFeature = function () {
             steps.create_deal_contract_period.selectContractPeriodNumberI(1);
             steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.create_deal_scope.itAddPublisherShareWithSocietyAwardCredit();
-            steps.create_deal_scope.itOverridePublisherShare("ffrance", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.create_deal_scope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.create_deal_scope.saveThePublisherShareSet();
             //add rate set payout, nps and admin fee
             steps.royaltyRates.addNewRoyaltySet();
@@ -206,9 +206,11 @@ var beforeFeature = function () {
             steps.create_deal_rtp.fillIntoRetentionPeriodDescriptionFromAcquisitionNumberI(1);
             steps.create_deal_rtp.selectRandomDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
             steps.deal.itContinueToNextPage();
-            //steps.create_deal_payee.itAddPayeeOrganisationAndAssociateScope();
-            //steps.create_deal_payee.itAddPayeePersonAndAssociateScope();
+            steps.create_deal_payee.itAddPayeeOrganisationAndAssociateScope();
+            steps.base.scrollIntoView("Add new Payee", pages.create_deal_payee.elems.addNewPayeeField);
+            steps.create_deal_payee.itAddPayeePersonAndAssociateScope();
             steps.deal.itContinueToNextPage();
+            steps.base.scrollIntoView("Financial ", pages.create_deal_approval_restrictions.elems.financialNoApprovalRequired);
             steps.create_deal_approval_restrictions.clickOnFinancialNoApprovalRequired();
             steps.base.scrollIntoView("Licensing ", pages.create_deal_approval_restrictions.elems.licensingRestricted);
             steps.create_deal_approval_restrictions.clickOnLicensingRestricted();

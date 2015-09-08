@@ -79,8 +79,8 @@ if (pages.create_deal_general === undefined) {
             browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    var element = options[randomNumber].click();
-                    browser.actions.mouseMove(element).click().perform();
+                    var element = options[randomNumber];
+                    element.click();
                 })
         },
 
