@@ -204,7 +204,8 @@ exports.expectUploadedFileToBeListed = function () {
 };
 
 function normalizeAmount (amount) {
-    return amount.split(',').join('');
+    var returnAmount = amount.split(',').join('');
+    return returnAmount;
 }
 
 exports.uploadedFileBlind = function () {
@@ -218,10 +219,12 @@ exports.openUploadedFileBlind = function () {
     browser.sleep(300);
 };
 
-exports.expectUploadedFileToHaveCorrectExpectedAmount = function () {
+exports.expectUploadedFileToHaveCorrectExpectedAmount = function (amount) {
     var fileBlind = exports.uploadedFileBlind();
 
-    expect(fileBlind.$('.amount-nr span[data-ng-hide]').getText().then(normalizeAmount)).toBe(testData.fileAmount);
+    amount = amount || testData.fileAmount;
+
+    expect(fileBlind.$('.amount-nr span[data-ng-hide]').getText()).toBe(amount);
 };
 
 function checkFileStatus (status) {

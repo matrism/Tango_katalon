@@ -38,7 +38,7 @@ var beforeFeature = [
                 steps.uploadEdiFile.expectUploadedFileToBeListed();
                 steps.uploadEdiFile.openUploadedFileBlind();
 
-                steps.uploadEdiFile.expectUploadedFileToHaveCorrectExpectedAmount();
+                steps.uploadEdiFile.expectUploadedFileToHaveCorrectExpectedAmount(fileAmount);
                 steps.uploadEdiFile.waitForFileToBeProcessed();
 
                 steps.uploadEdiFile.expectFileReadInAmountToBe(fileAmount + ' GBP');
