@@ -2,7 +2,7 @@
 
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
-    pageStep = require('../helpers/pageStep')();
+    pageStep = require('../helpers/basicPageStep');
 
 steps.uploadEdiFile = exports;
 require(pages_path + 'uploadEdiFile');
