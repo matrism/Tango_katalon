@@ -69,6 +69,7 @@ if (steps.create_deal_payee === undefined) {
         itAddPayeeOrganisationAndAssociateScope: function () {
             describe("Add payee as organisation and associate random scope ", function () {
                 steps.create_deal_payee.selectRandomPayeeOrganisationFromDropDown();
+                steps.base.scrollIntoView("Company", pages.create_deal_payee.elems.payeeCompanyNameCodeInputField);
                 steps.create_deal_payee.selectRandomValueForPayeeCompanyNameCode();
                 steps.base.scrollIntoView("Scope", pages.create_deal_payee.elems.scopePayeeInputField);
                 steps.create_deal_payee.associateSpecificScopeNumberIToPayee(1);
@@ -82,6 +83,7 @@ if (steps.create_deal_payee === undefined) {
         itAddPayeePersonAndAssociateScope: function () {
             describe("Add payee as person and associate random scope ", function () {
                 steps.create_deal_payee.selectRandomPayeePersonFromDropDown();
+                steps.base.scrollIntoView("Company code", element(by.css("div[data-ng-model='payee.company'] div[ng-class='tgTypeaheadWrapClass']")));
                 steps.create_deal_payee.selectRandomValueForPayeeCompanyNameCode();
                 steps.base.scrollIntoView("Scope", pages.create_deal_payee.elems.scopePayeeInputField);
                 steps.create_deal_payee.associateSpecificScopeNumberIToPayee(2);

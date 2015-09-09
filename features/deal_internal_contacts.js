@@ -25,9 +25,9 @@ var beforeFeature = function () {
             //var i=2;
             steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
-            steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+            steps.create_deal_general.itAddInternalContactsToDealGeneralTab("shilpa");
             for (var i = 2; i <= 4; i++) {
-                steps.create_deal_general.itAddInternalContactsRowIToDealGeneralTab(i);
+               steps.create_deal_general.itAddInternalContactsRowIToDealGeneralTab(i);
             }
             steps.deal.itContinueToNextPage();
             steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
@@ -72,7 +72,7 @@ var beforeFeature = function () {
                 //create a deal with 1 internal contact
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
-                steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+                steps.create_deal_general.itAddInternalContactsToDealGeneralTab("shilpa");
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
                 steps.deal.itContinueToNextPage();
@@ -123,7 +123,7 @@ var beforeFeature = function () {
             steps: function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
-                steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+                steps.create_deal_general.itAddInternalContactsToDealGeneralTab("shilpa");
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
                 steps.deal.itContinueToNextPage();
@@ -143,7 +143,7 @@ var beforeFeature = function () {
                 steps.base.scrollIntoView("Term header link", pages.deal.elems.termsHeader);
                 steps.deal.goToTermsDealTabDetails();
                 steps.edit_deal_general.cancelModalDialog();
-                steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("test");
+                steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("shilpa");
                 steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
                 steps.deal.goToTermsDealTabDetails();
                 steps.edit_deal_general.confirmModalDialog();

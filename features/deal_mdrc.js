@@ -358,6 +358,7 @@ var beforeFeature = function () {
                 steps.base.scrollIntoView("Mdrc", pages.edit_deal_contract_period.elems.mdrcTitle);
 
                 //validate incomplete MDRC
+                steps.base.scrollIntoView("Edit first MDRC form ", element(by.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(1)")));
                 steps.edit_deal_contract_period.validateITypeOfMdrcTitle(i, "Incomplete");
                 steps.edit_deal_contract_period.validateMdrcIMinimumLabelValue(i);
                 steps.edit_deal_contract_period.validateMdrcIMinimumTextValue(i);
@@ -373,6 +374,7 @@ var beforeFeature = function () {
                 steps.edit_deal_contract_period.validateMdrcDeliveryScheduleTextValueI(i);
 
                 //validate deemed complete MDRC
+                steps.base.scrollIntoView("Second MDRC form", element(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(2)")));
                 steps.edit_deal_contract_period.validateITypeOfMdrcTitle(j, "Deemed Complete");
                 steps.edit_deal_contract_period.validateMdrcDateCompletedLabelValueI(j);
                 steps.edit_deal_contract_period.validateMdrcDateCompletedTextValueI(j);
@@ -392,6 +394,7 @@ var beforeFeature = function () {
                 steps.edit_deal_contract_period.validateMdrcDeliveryScheduleTextValueI(j);
 
                 //validate complete MDRC
+                steps.base.scrollIntoView("Third MDRC form", element(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(3)")));
                 steps.edit_deal_contract_period.validateITypeOfMdrcTitle(k, "Complete");
                 steps.edit_deal_contract_period.validateMdrcDateCompletedLabelValueI(k);
                 steps.edit_deal_contract_period.validateMdrcDateCompletedTextValueI(k);
@@ -409,6 +412,7 @@ var beforeFeature = function () {
                 steps.edit_deal_contract_period.validateMdrcDeliveryScheduleTextValueI(k);
 
                 //edit incomplete MDRC first form into complete MDRC
+                steps.base.scrollIntoView("MDRC title", pages.edit_deal_contract_period.elems.mdrcTitle);
                 steps.edit_deal_contract_period.itEditCompleteMdrcContractPeriod(i);
                 steps.edit_deal_contract_period.validateITypeOfMdrcTitle(i, "Complete");
                 steps.edit_deal_contract_period.validateMdrcDateCompletedLabelValueI(i);
@@ -428,7 +432,7 @@ var beforeFeature = function () {
 
 
                 //edit deemed complete MDRC second form into incomplete MDRC
-                steps.base.scrollIntoView("Second MDRC form", element(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(2)")));
+                steps.base.scrollIntoView("Second MDRC form", element(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(2) h3.contract-period-header.ng-binding")));
                 steps.edit_deal_contract_period.itEditIncompleteMdrcContractPeriod(j);
                 steps.edit_deal_contract_period.validateITypeOfMdrcTitle(j, "Incomplete");
                 steps.edit_deal_contract_period.validateMdrcIMinimumLabelValue(j);
@@ -446,7 +450,7 @@ var beforeFeature = function () {
 
 
                 //edit complete MDRC third form into deemed complete MDRC
-                steps.base.scrollIntoView("Third MDRC form", element(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(3)")));
+                steps.base.scrollIntoView("Third MDRC form", element(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(3) h3.contract-period-header.ng-binding")));
                 steps.edit_deal_contract_period.itEditDeemedCompleteMdrcContractPeriod(k);
                 steps.edit_deal_contract_period.validateITypeOfMdrcTitle(k, "Deemed Complete");
                 steps.edit_deal_contract_period.validateMdrcDateCompletedLabelValueI(k);

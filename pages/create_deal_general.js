@@ -84,14 +84,14 @@ if (pages.create_deal_general === undefined) {
                 })
         },
 
-        contractingPartySearchResultLabels: function() {
+        contractingPartySearchResultLabels: function () {
             var selector = '.tg-typeahead__suggestions-group-item';
             var elements = $$(selector);
             browser.wait(protractor.ExpectedConditions.visibilityOf($(selector)));
             return elements;
         },
 
-        selectContractingPartySearchResultByIndex: function(i) {
+        selectContractingPartySearchResultByIndex: function (i) {
             var element = pages.create_deal_general.contractingPartySearchResultLabels().get(i);
             pages.base.scrollIntoView(element);
             return element.click();
@@ -101,7 +101,7 @@ if (pages.create_deal_general === undefined) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='contractingParties'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("div[name='contractingParties'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-            //browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
+                //browser.driver.findElements(by.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']/div"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -126,14 +126,15 @@ if (pages.create_deal_general === undefined) {
 
         selectRandomInternalContactsFromDropDown: function () {
             var desiredOption;
-            //browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-            //browser.driver.findElements(By.xpath("//*[@class='ng-scope']//ul[@class='tg-typeahead__suggestions-group']//li[@class='tg-typeahead__suggestions-group-item ng-scope']"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    var element = options[randomNumber].click();
-                    browser.actions.mouseMove(element).click().perform();
-                })
+                    var randomNumber = Math.floor(Math.random() * options.length);
+                    var element = options[randomNumber];
+                    element.click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
+
         },
 
         clickOnInternalContactsRole: function () {
@@ -142,7 +143,7 @@ if (pages.create_deal_general === undefined) {
 
         fillIntoTheIRowInternalContactField: function (i) {
             var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
-            element.sendKeys("test");
+            element.sendKeys("shilpa");
         },
 
 
@@ -175,7 +176,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         selectTheRandomArtist: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable( pages.create_deal_general.elems.artistsField));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_general.elems.artistsField));
             pages.create_deal_general.elems.artistsField.click();
             pages.create_deal_general.elems.artistFieldInput.sendKeys("test");
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.artistsDropDownData));
@@ -285,31 +286,31 @@ if (pages.create_deal_general === undefined) {
             pages.create_deal_general.elems.demosDealChargeBacksField.sendKeys(percent);
         },
 
-        fillIntoTheUsCopyrightCertificateDealChargeBacksField: function(){
+        fillIntoTheUsCopyrightCertificateDealChargeBacksField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.usCopyrightCertificateDealChargeBacksField.sendKeys(percent);
         },
 
-        fillIntoTheLegalFeesDealChargeBacksField: function(){
+        fillIntoTheLegalFeesDealChargeBacksField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.legalFeesDealChargeBacksField.sendKeys(percent);
         },
 
-        fillIntoTheAdvertisingAndPromotionsDealChargeBacksField: function(){
+        fillIntoTheAdvertisingAndPromotionsDealChargeBacksField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.advertisingPromotionsDealChargeBacksField.sendKeys(percent);
         },
 
-        fillIntoTheLeadSheetsDealChargeBackField: function(){
+        fillIntoTheLeadSheetsDealChargeBackField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_general.elems.leadSheetsDealChargeBacksField.sendKeys(percent);
         },
 
-        clickOnTheYesMechanicalNonTitleBoundIncome: function(){
+        clickOnTheYesMechanicalNonTitleBoundIncome: function () {
             pages.create_deal_general.elems.yesMechanicalNonTitleBoundIncome.click();
         },
 
-        clickOnTheNoMechanicalNonTitleBoundIncome: function(){
+        clickOnTheNoMechanicalNonTitleBoundIncome: function () {
             pages.create_deal_general.elems.noMechanicalNonTitleBoundIncome.click();
         },
 
@@ -317,7 +318,7 @@ if (pages.create_deal_general === undefined) {
             pages.create_deal_general.elems.yesPerformanceNonTitleBoundIncome.click();
         },
 
-        clickOnTheNoPerformanceNonTitleBoundIncome: function(){
+        clickOnTheNoPerformanceNonTitleBoundIncome: function () {
             pages.create_deal_general.elems.noPerformanceNonTitleBoundIncome.click();
         }
 

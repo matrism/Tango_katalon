@@ -164,9 +164,9 @@ if (pages.create_deal_scope === undefined) {
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     var element = options[randomNumber];
-                    pages.base.scrollIntoView(element);
-                    browser.actions.mouseMove(element).click();
-                })
+                    element.click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_scope.elems.territoryDropDown));
         },
 
         selectSpecificCountry: function (country) {

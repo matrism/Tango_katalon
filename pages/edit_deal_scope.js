@@ -73,7 +73,7 @@ if (pages.edit_deal_scope === undefined) {
 
 
         editThePublisherSharesSet: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.publisherSharesSetArea));
+            //browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.publisherSharesSetArea));
             pages.edit_deal_scope.elems.publisherSharesSetArea.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.publisherSharesSetEditIcon));
             pages.edit_deal_scope.elems.publisherSharesSetEditIcon.click();

@@ -154,7 +154,7 @@ var beforeFeature = function () {
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
-                steps.base.scrollIntoView("Edit publisher share set ", pages.edit_deal_scope.elems.publisherSharesSetArea);
+                steps.base.scrollIntoView("Edit publisher share set ", element(by.css("div[name='scopeForm']")));
                 steps.edit_deal_scope.editPublisherSharesSet();
                 steps.edit_deal_scope.editDeleteThePublisherShareSet();
             }
@@ -176,12 +176,13 @@ var beforeFeature = function () {
                 steps.deal.waitForDealToBeSaved();
                 steps.deal.returnDealNumber();
                 steps.edit_deal_scope.selectScope1();
+                steps.base.scrollIntoView("Edit publisher share set area ", pages.edit_deal_scope.elems.publisherSharesTitle);
                 steps.edit_deal_scope.validatePublisherSharesTitle();
                 steps.edit_deal_scope.validatePublisherSharesHeaderTableTitle();
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.edit_deal_scope.validatePublisherSharesSetSubtotalChainI(i);
-                steps.base.scrollIntoView("Edit publisher share set ", pages.edit_deal_scope.elems.publisherSharesSetArea);
+                steps.base.scrollIntoView("Edit publisher share set ", element(by.css("div[name='scopeForm']")));
                 steps.edit_deal_scope.editPublisherSharesSet();
                 steps.edit_deal_scope.itEditPublisherShare();
                 steps.edit_deal_scope.editSaveThePublisherShareSet();

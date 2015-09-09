@@ -59,7 +59,8 @@ if (pages.edit_deal_general === undefined) {
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
-                })
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.elems.editInternalContactsDropDownData));
         },
 
         clickEditInternalContactsRole: function () {
