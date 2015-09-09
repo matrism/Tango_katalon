@@ -54,6 +54,7 @@ var beforeFeature = [
                 'worksSanitySearchForAlbumsByCatalog',
                 'worksSanitySearchForAlbumsByLabel',
                 'worksSanitySearchForAlbumsByTitlePlusArtist',
+                'worksSanitySearchForAlbumsByLibraryPlusTitle',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -101,6 +102,7 @@ var beforeFeature = [
                 'worksSanitySearchForAlbumsByCatalog',
                 'worksSanitySearchForAlbumsByLabel',
                 'worksSanitySearchForAlbumsByTitlePlusArtist',
+                'worksSanitySearchForAlbumsByLibraryPlusTitle',
                 'works-sanity-search-for-works',
                 'works-sanity-search-for-works-by-id',
                 'works-sanity-search-for-works-by-song-code',
@@ -863,6 +865,36 @@ var beforeFeature = [
 
                 steps.album.header.validateTitle(
                     'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+                );
+            },
+        },
+        {
+            name: 'Search for previously created library album by library + title',
+            tags: [
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByLibraryPlusTitle',
+            ],
+            steps: function() {
+                using(steps.mainHeader.search, function() {
+                    this.selectEntityType('Albums');
+
+                    this.selectFilterTag('Library');
+
+                    this.enterTerms('AUDM');
+
+                    this.addAnotherTerm();
+
+                    this.selectFilterTag('Title');
+
+                    this.enterTerms(
+                        'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
+                    );
+
+                    this.selectResultByIndex(0);
+                });
+
+                steps.album.header.validateTitle(
+                    'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
                 );
             },
         },
