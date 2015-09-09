@@ -158,6 +158,18 @@ pph.matchTextExact = function (text) {
     return pph.matchText(text, true);
 };
 
+pph.stringConcat = function() {
+    return pph.arrayMethod('reduce', arguments, function(value, next) {
+        return value + next;
+    });
+};
+
+pph.collapseWhitespace = function(value) {
+    return promise.when(value).then(function(value) {
+        return value.replace(/ +/g, ' ').replace(/(\r\n|\r|\n| ){2,}/g, '\n\n');
+    });
+};
+
 pph.jsClick = function(element) {
     if(element instanceof protractor.ElementFinder) {
         element = element.getWebElement();

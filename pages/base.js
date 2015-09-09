@@ -12,12 +12,22 @@ exports.open = function() {
     browser.get(_tf_config.urls.app_url);
     exports.waitForAjax();
 };
+
+exports.modalHeader = function() {
+    return $('.modal-header');
+};
+
 exports.modalHeading = function() {
     return $('.modal-header h3, .modal-header h4');
 };
 exports.modalHeadingText = function() {
     return exports.modalHeading().getText();
 };
+
+exports.modalBody = function() {
+	return $('.modal-body');
+};
+
 exports.modalDialog = function() {
     return $('.modal-dialog');
 };
@@ -334,4 +344,23 @@ exports.refreshPage = function() {
 
 exports.hitEscape = function() {
     return $('body').sendKeys(protractor.Key.ESCAPE);
+};
+
+exports.dialogError = function() {
+    return exports.modalHeader().isPresent().then(function(modalOpen) {
+        if(!modalOpen) {
+            return null;
+        }
+
+        return pph.trim(exports.modalHeading().getText()).then(function(heading) {
+            if(!/error/i.test(heading)) {
+                return null;
+            }
+
+            return pph.stringConcat(
+                heading, '\n\n',
+                pph.collapseWhitespace(pph.trim(pph.getAllText(exports.modalBody())))
+            );
+        });
+    });
 };

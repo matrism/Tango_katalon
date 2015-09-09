@@ -56,12 +56,30 @@ config = {
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
         browserWait = browser.wait;
-        browser.wait = function(testFn, timeout) {
-            if(timeout === undefined) {
+        browser.wait = function(testFn, timeout, options) {
+            if(timeout === undefined || timeout === null) {
                 timeout = systemConfig.wait_timeout;
             }
 
-            browserWait.call(browser, testFn, timeout);
+            options = options || {};
+
+            return browserWait.call(browser, function() {
+                var testFnResult = testFn.apply(this, arguments);
+
+                if(options.dontThrowOnError) {
+                    return testFnResult;
+                }
+
+                return pph.and(
+                    testFnResult, pages.base.dialogError().then(function(errorMessage) {
+                        if(!errorMessage) {
+                            return true;
+                        }
+
+                        throw new Error(errorMessage);
+                    })
+                );
+            }, timeout);
         };
 
         if (systemConfig.resolution.width && systemConfig.resolution.height) {
