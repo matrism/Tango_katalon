@@ -13,13 +13,13 @@ exports.open = function() {
     exports.waitForAjax();
 };
 
-exports.modalHeader = function() {
-    return $('.modal-header');
+exports.modalHeading = function() {
+    return $(
+        '.modal-header h1, .modal-header h2, .modal-header h3, ' +
+        '.modal-header h4, .modal-header h5, .modal-header h6'
+    );
 };
 
-exports.modalHeading = function() {
-    return $('.modal-header h3, .modal-header h4');
-};
 exports.modalHeadingText = function() {
     return exports.modalHeading().getText();
 };
@@ -347,7 +347,7 @@ exports.hitEscape = function() {
 };
 
 exports.dialogError = function() {
-    return exports.modalHeader().isPresent().then(function(modalOpen) {
+    return exports.modalHeading().isPresent().then(function(modalOpen) {
         if(!modalOpen) {
             return null;
         }
