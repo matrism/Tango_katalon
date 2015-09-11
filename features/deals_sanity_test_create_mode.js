@@ -244,9 +244,9 @@ var beforeFeature = function () {
             steps.create_deal_advances.selectRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI(2);
             steps.create_deal_advances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(2);
             steps.create_deal_advances.itAddCompleteAdvanceApplicableEarnings();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
         }
     }];
 
