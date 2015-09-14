@@ -124,7 +124,7 @@ config = {
 
             jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
                 consolidateAll: true,
-                savePath: 'reports/xml',
+                savePath: 'tests/e2e/reports/xml',
                 useDotNotation: true
             }));
         }
