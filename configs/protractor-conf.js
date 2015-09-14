@@ -52,7 +52,8 @@ config = {
             matchers,
             browserWait,
             SpecReporter = require('jasmine-spec-reporter'),
-            jasmineReporters;
+            jasmineReporters,
+            asciiPrefixes;
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
@@ -87,7 +88,16 @@ config = {
             browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
         }
 
-        jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
+        asciiPrefixes = {
+            success: '[Pass] ',
+            failure: '[Fail] ',
+            pending: '[Pending] ',
+        };
+
+        jasmine.getEnv().addReporter(new SpecReporter({
+            displayStacktrace: 'all',
+            prefixes: systemConfig.noUnicode? asciiPrefixes : null,
+        }));
 
         if (reporting === 'xml' || reporting === 'all') {
             jasmineReporters = require('jasmine-reporters');
