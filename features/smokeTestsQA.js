@@ -175,7 +175,7 @@ var beforeFeature = function () {
             steps: function () {
 
 
-                //steps.organisation.clearDownloadFolder('E:/Work/tango-app/tests/e2e/downloads');
+
                 steps.organisation.clearDownloadFolder(config.config.capabilities.chromeOptions.prefs.download.default_directory);
                 steps.searchSection.accessSavedOrganisationByName("BMI");
                 steps.organisation.goToPreviewRegistrationRunTab();
