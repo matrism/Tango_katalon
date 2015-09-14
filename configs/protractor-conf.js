@@ -4,7 +4,7 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
-    HtmlReporter = require('protractor-jasmine2-html-reporter'),
+    HtmlReporter = require('protractor-jasmine2-screenshot-reporter'),
     screenShotPath,
     config,
     systemConfig,
@@ -33,7 +33,8 @@ if (!systemConfig.noReport) {
     //mkdirp(screenShotPath);
 
     SSReporter_instance = new HtmlReporter({
-        savePath: screenShotPath + '/',
+        dest: screenShotPath + '/',
+        filename: 'reporter.htm',
     });
 }
 
