@@ -1,35 +1,33 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
-    random = require('../helpers/random'),
+    random = require('../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
-require(pages_path + "deal");
-require(steps_path + "deal");
-require(pages_path + "create_deal_general");
-require(steps_path + "create_deal_general");
-require(pages_path + "create_deal_scope");
-require(steps_path + "create_deal_scope");
-require(pages_path + "create_deal_contract_period");
-require(steps_path + "create_deal_contract_period");
-require(pages_path + "edit_deal_general");
-require(steps_path + "edit_deal_general");
-require(pages_path + "edit_deal_scope");
-require(steps_path + "edit_deal_scope");
+require(pages_path + "deals/deal");
+require(steps_path + "deals/deal");
+require(pages_path + "deals/createGeneral");
+require(steps_path + "deals/createGeneral");
+require(pages_path + "deals/createScope");
+require(steps_path + "deals/createScope");
+require(pages_path + "deals/createContractPeriod");
+require(steps_path + "deals/createContractPeriod");
+require(pages_path + "deals/editGeneral");
+require(steps_path + "deals/editGeneral");
+require(pages_path + "deals/editScope");
+require(steps_path + "deals/editScope");
 require(steps_path + "login");
 require(steps_path + "base");
-require(steps_path + "newPerson");
-require(pages_path + "newPerson");
-require(steps_path + "person");
-require(pages_path + "person");
-require(steps_path + "login");
-require(steps_path + "new_work");
-require(steps_path + "organisation");
-require(pages_path + "organisation");
+require(steps_path + "person/newPerson");
+require(pages_path + "person/newPerson");
+require(steps_path + "person/person");
+require(pages_path + "person/person");
+
+require(steps_path + "works/newWork");
+require(steps_path + 'works/workCwrPreview');
+require(steps_path + 'works/workRights');
+require(steps_path + "orgs/organisation");
+require(pages_path + "orgs/organisation");
 require(steps_path + "searchSection");
-require(steps_path + 'workCwrPreview');
-require(steps_path + 'workRights');
-
-
 
 var workData = {};
 
@@ -58,7 +56,7 @@ workData = {
     productionTitle: "TEST PRODUCTION TITLE 1429744413589291",
     includeOnWebsite: false
 };
-var firstPublisherDate = 'Sub-Publisher:\n'+
+var firstPublisherDate = 'Sub-Publisher:\n' +
     'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.';
 
 
@@ -80,7 +78,6 @@ var beforeFeature = function () {
 
                 steps.searchSection.accessSavedOrganisationByName("WB MUSIC CORP.");
                 steps.organisation.validatePublisherSubRelationships(firstPublisherDate);
-
             }
         },
         {
@@ -92,8 +89,6 @@ var beforeFeature = function () {
                 steps.searchSection.accessSavedPersonByName("katy perry");
                 steps.person.validateIPI("292555933");
                 steps.person.validateAlternativeName("Katy Perry")
-
-
             }
         },
         {
@@ -105,7 +100,7 @@ var beforeFeature = function () {
                 steps.create_deal_contract_period.selectContractPeriodNumberI(1);
                 steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
                 steps.create_deal_scope.itAddPublisherShareWithSocietyAwardCredit();
-               // steps.create_deal_scope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+                // steps.create_deal_scope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
                 steps.create_deal_scope.saveThePublisherShareSet();
 
                 steps.royaltyRates.addNewRoyaltySet();
@@ -115,8 +110,6 @@ var beforeFeature = function () {
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
                 steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
                 steps.royaltyRates.saveRateSet();
-
-
             }
         },
         {
@@ -131,9 +124,6 @@ var beforeFeature = function () {
                 steps.workCwrPreview.searchForRegistrationRecipient("KODA");
                 steps.workCwrPreview.selectRegistrationRecipientResultByIndex(0);
                 steps.workCwrPreview.expectCwrDataToBeDisplayed();
-
-
-
             }
         },
         {
@@ -144,22 +134,12 @@ var beforeFeature = function () {
                 steps.work.goToRightsTab();
 
                 steps.workRights.expectRightsDataToBeDisplayed();
-
-
-
             }
         }
-
-
-
     ];
 
-
 module.exports = {
-    commonFeatureTags: [
-        'productionSmokeTest',
-        'productionTest',
-    ],
+    commonFeatureTags: ['productionSmokeTest', 'productionTest'],
     feature: feature,
     beforeFeature: beforeFeature
 };

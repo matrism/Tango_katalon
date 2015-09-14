@@ -56,10 +56,6 @@ config = {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
                     'default_directory': 'E:/Work/tango-app/tests/e2e/downloads/'
-
-
-
-
                 }
             }
         }
