@@ -64,7 +64,7 @@ if (steps.deal === undefined) {
 
         returnDealNumber: function () {
             it("Return deal number ", function () {
-                element(By.xpath("//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']")).getText().
+                pages.deal.elems.dealBriefNumber.getText().
                     then(function (promise) {
                         console.log("Deal number is: " + promise);
                     });

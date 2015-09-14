@@ -1,6 +1,7 @@
 var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
+
 beforeEach(function () {
     var matchers = {
         toEqualBecause: function (value, message) {
@@ -172,6 +173,33 @@ if (steps.organisation === undefined) {
         }
 
         ,
+        viewValidationErrors: function () {
+            it("View validation errors", function () {
+                pages.organisation.clickValidationErrorsButton();
+            })
+        },
+        clearDownloadFolder: function (downloadFilepath) {
+            it("Clear Download Folder", function () {
+                pages.organisation.deleteFilesFromDownloadFolder(downloadFilepath);
+
+
+            })
+        },
+        downloadFile:function()
+        {
+            it("Download File", function () {
+                pages.organisation.clickDownloadFileButton();
+                pages.organisation.waitForFileToDownload();
+
+            })
+
+        },
+        validateFilesDownloaded: function (downloadFilepath) {
+            it("Files Downloaded Successfully", function () {
+
+                expect(pages.organisation.fileDownloadedSuccesfully(downloadFilepath)).toBeTruthy();
+            })
+        },
         goToRegistrationActivityTab: function () {
             it("Go to Registration ActivityTab", function () {
                 pages.organisation.clickRegistrationActivityTab();

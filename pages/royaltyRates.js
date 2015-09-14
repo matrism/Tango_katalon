@@ -72,9 +72,9 @@ return $$(".EDITOR.ps-editor>.DETAIL>div>div>div>.ps-section>div:nth-child(2)>di
           return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
 
         },
-        originalPublishersDropdownList:function()
+             originalPublishersDropdownList:function()
         {
-          return $$(".tg-typeahead__suggestions-group-item.ng-scope");
+            return $$(".tg-typeahead__suggestions-group-item.ng-scope");
         },
 
 
@@ -223,9 +223,75 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
         onReceiptMethodButtonOnPrevailingPopup: function () {
           return $$(".prevailing-icr.ng-scope>div:not(.prevailing-label)>button").last();
         },
+        
+        //ROYALTY PROCESSING
+        royaltyProcessingLink: function () {
+            return $(".nav>li:nth-child(2)>a")
+        },
+        royaltyStatementsLink: function () {
+            return $(".nav>li:nth-child(2)>ul>li:first-child>a");
+        },
+        createManualStatementButton: function () {
+          return $(".upper>a:last-child");
+        },
+        royaltyStatementsTable: function () {
+            return $(".clearfix.accordion-filters.columnhead-filters");
+        },
 
-
-
+        startYearInput: function () {
+          return $$(".input-mini.ng-pristine.ng-untouched.ng-valid-ng-max.ng-valid-ng-min.ng-invalid.ng-invalid-required").first();
+        },
+        startMonthDropdown: function () {
+return $$(".input-mini.ng-pristine.ng-untouched.ng-invalid.ng-invalid-required").first();
+        },
+        endYearInput: function () {
+            return $$(".input-mini.ng-pristine.ng-untouched.ng-valid-ng-max.ng-valid-ng-min.ng-invalid.ng-invalid-required").last();
+        },
+        endMonthDropdown: function () {
+            return $$(".input-mini.ng-pristine.ng-untouched.ng-invalid.ng-invalid-required").last();
+        },
+        statementAmountInput: function () {
+          return $(".span3.ng-pristine.ng-untouched.ng-invalid.ng-invalid-required");
+        },
+        exchangeRateInput: function () {
+            return $(".ng-pristine.ng-untouched.ng-invalid.ng-invalid-required");
+        },
+        createManualStatementInnerButton: function () {
+          return $(".btn.btn-primary.pull-right.ng-scope.ng-binding");
+        },
+        batchAmountInput: function () {
+           return $(".active>.batch-input>input");
+        },
+        batchDefaultsettings: function () {
+          return $(".pull-left>a");
+        },
+        dropdownMenu: function () {
+          return $$(".tg-dropdown-menu>.dropdown-menu").first();
+        },
+        exploitationDropdownMenu: function () {
+            return $$(".tg-dropdown-menu>.dropdown-menu").last();
+        },
+        incomeTypeDropdown: function () {
+return $$(".tg-dropdown-caret.fa.fa-caret-down").first();
+        },
+        exploitationTerritoryDropdown: function () {
+            return $$(".tg-dropdown-caret.fa.fa-caret-down").last();
+        },
+        workSearchOptionsDropdown: function () {
+            return $('[ng-switch="!!$filterTag.match"]>select');
+        },
+        workInput: function () {
+return $('.tg-typeahead__input.ng-pristine.ng-untouched.ng-valid[placeholder="Search by Title, Creator or Work ID"]');
+        },
+        amountRecievedInput: function () {
+return $(".clearfix.table-row.ng-scope>.amount>input");
+        },
+        manualStatementDoneButton: function () {
+          return $(".btn.btn-primary.pull-right.ng-scope.ng-binding");
+        },
+        expandManualStatementButton: function () {
+return $(".accordion>div:first-child>div>a>div>div.caret-acc");
+        },
         //LOCATORS END
 
 
@@ -521,7 +587,7 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
                     sentKeys = element;
 
                     var incomeProviderInput;
-                  // incomeProviderInput = browser.driver.findElement(by.css(".flex1>.ng-valid>div>div>div>div>div>input"));
+
 
                    incomeProviderInput = $$(".flex1>.ng-valid>div>div>div>div>div>input").last();
 
@@ -1027,6 +1093,143 @@ var temp =  $$('.ng-scope[ng-switch-when="false"]').last();
                 .then(function (options) {
                     options[i - 1].click();
                 });
+        },
+//ROYALTY PROCESSING
+        clickRoyaltyProcessing: function () {
+           this.royaltyProcessingLink().click();
+        },
+        clickRoyaltyStatements: function () {
+            browser.wait(ExpectedConditions.visibilityOf( this.royaltyStatementsLink()));
+          this.royaltyStatementsLink().click();
+        },
+        clickCreateManualStatementButton: function () {
+            browser.wait(ExpectedConditions.visibilityOf( this.royaltyStatementsTable()));
+            browser.driver.sleep(3000);
+            this.createManualStatementButton().click();
+
+        },
+        typeInIncomeProvider: function (sentKeys) {
+            var incomeProviderInput;
+
+            incomeProviderInput = $$(".tg-typeahead__input.ng-pristine.ng-untouched.ng-valid").last();
+
+          var rateSetTab = $('[data-close-others="oneAtATime"]');
+            browser.driver.sleep(5000);
+
+            if (sentKeys != "") {
+
+                    var suggestion = $(".tg-typeahead__item-left>strong");
+                    browser.wait(ExpectedConditions.invisibilityOf(suggestion));
+                    incomeProviderInput.sendKeys(sentKeys);
+                    suggestion = $(".tg-typeahead__item-left>strong");
+                    browser.wait(ExpectedConditions.visibilityOf(suggestion));
+                    suggestion.click();
+
+
+            }
+        },
+        typeStartYear: function (value) {
+            this.startYearInput().sendKeys(value);
+        },
+        selectStartMonth: function (value) {
+            this.startMonthDropdown().element(by.cssContainingText('option',value)).click()
+        },
+        typeEndYear: function (value) {
+            this.endYearInput().sendKeys(value);
+        },
+        selectEndMonth: function (value) {
+            this.endMonthDropdown().element(by.cssContainingText('option',value)).click()
+        },
+        typeInStatementAmount: function (value) {
+          this.statementAmountInput().sendKeys(value)  ;
+        },
+        typeInExchangeRate: function (value) {
+          this.exchangeRateInput().sendKeys(value)  ;
+        },
+        createManualStatementClick: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(this.createManualStatementInnerButton()));
+          this.createManualStatementInnerButton().click();
+        },
+        typeInBatchAmount: function (value) {
+            browser.wait(ExpectedConditions.visibilityOf(this.batchAmountInput()));
+this.batchAmountInput().sendKeys(value);
+
+        },
+        expandBatchDefaultSettings: function () {
+
+            this.batchDefaultsettings().click();
+        },
+        selectIncomeTypeForBatchFromDropdown: function (value) {
+            this.incomeTypeDropdown().click();
+
+            browser.wait(ExpectedConditions.visibilityOf(this.dropdownMenu()));
+            this.dropdownMenu().element(by.cssContainingText('li>a',value)).click()
+
+
+        },
+        selectExploitationTerritoryForBatchFromDropdown: function (value) {
+
+
+            this.exploitationTerritoryDropdown().click();
+
+            browser.wait(ExpectedConditions.visibilityOf(this.exploitationDropdownMenu()));
+            this.exploitationDropdownMenu().element(by.cssContainingText('li>a>span',value)).click()
+        },
+        selectAddByTitleOption: function () {
+
+            this.workSearchOptionsDropdown().element(by.cssContainingText('option','Title')).click()
+        },
+        addWorkByTitleFromTypeAhead: function (sentKeys) {
+            var workInput;
+
+            workInput =this.workInput();
+
+            var rateSetTab = $('[data-close-others="oneAtATime"]');
+            browser.driver.sleep(5000);
+
+            if (sentKeys != "") {
+
+                var suggestion = $(".tg-typeahead__item-left>strong");
+                browser.wait(ExpectedConditions.invisibilityOf(suggestion));
+                workInput.sendKeys(sentKeys);
+                suggestion = $(".tg-typeahead__item-left>strong");
+                browser.wait(ExpectedConditions.visibilityOf(suggestion));
+                suggestion.click();
+
+
+            }
+
+        },
+        inputAmountRecievedForWork: function (value) {
+            browser.wait(ExpectedConditions.visibilityOf( this.amountRecievedInput()));
+
+            pages.base.scrollIntoView(this.amountRecievedInput());
+
+            browser.wait(ExpectedConditions.elementToBeClickable(this.amountRecievedInput()));
+            this.amountRecievedInput().click();
+            this.amountRecievedInput().sendKeys(value);
+
+        },
+        clickManualStatementDoneButton: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(this.manualStatementDoneButton()));
+            pages.base.scrollIntoView(this.manualStatementDoneButton());
+            this.manualStatementDoneButton().click();
+        },
+        manualStatementSavePageIsDisplayed: function () {
+            browser.sleep(3000);
+          ////  browser.wait(ExpectedConditions.invisibilityOf( this.manualStatementDoneButton()));
+            //return this.manualStatementDoneButton().isPresent();
+
+            return true;
+        },
+        clickExpandManualStatement: function () {
+            browser.sleep(5000);
+            browser.wait(ExpectedConditions.visibilityOf( this.expandManualStatementButton()));
+            this.expandManualStatementButton().click()
+        },
+        validateManualStatementData: function () {
+            browser.sleep(3000);
+            return true;
         }
 
     });

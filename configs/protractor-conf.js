@@ -40,9 +40,28 @@ if (!systemConfig.noReport) {
 
 config = {
     capabilities: {
+
+        platform: 'ANY',
+        version: 'ANY',
+
+        // No way around for Firefox until https://code.google.com/p/selenium/issues/detail?id=7978
+        // 'profile.browser.helperApps.neverAsk.saveToDisk': mimeTypes.join(', '),
+        // 'profile.browser.download.dir': '/e2e/downloads/',
         browserName: global._tf_config._system_.browser, //firefox, ie
         chromeOptions: {
-            args: ['--test-type']
+          //  args: ['--test-type']
+            args: ['--no-sandbox', '--test-type=browser'],
+            prefs: {
+                'download': {
+                    'prompt_for_download': false,
+                    'directory_upgrade': true,
+                    'default_directory': 'E:/Work/tango-app/tests/e2e/downloads/'
+
+
+
+
+                }
+            }
         }
     },
     specs: ['init.js'],
@@ -128,6 +147,7 @@ config = {
 
 if (systemConfig.seleniumAddress) {
     config.seleniumAddress = systemConfig.seleniumAddress;
+
 }
 else {
     config.directConnect = systemConfig.directConnect;

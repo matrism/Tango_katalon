@@ -5,7 +5,7 @@ var promise = protractor.promise;
 if (pages.deal === undefined) {
     pages.deal = new ftf.pageObject({
         locators: {
-            dealBriefNumber: {xpath: "//*[@id='RECORD-HEADER']//div/div/div[6]/div/p[@class='info ng-binding']"},
+            dealBriefNumber: {xpath: "//*[@id='RECORD-HEADER']/div[1]/div[6]/div[1]/p[@class='info ng-binding']"},
             continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
             saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
@@ -16,6 +16,13 @@ if (pages.deal === undefined) {
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm'] h3"}
+        },
+
+        dealBriefNumber: function () {
+            return element(by.xpath("//*[@id='RECORD-HEADER']/div[1]/div[6]/div[1]/p[@class='info ng-binding']"));
+        },
+        getDealBriefNumberText: function () {
+          this.dealBriefNumber().getText();
         },
 
 

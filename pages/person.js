@@ -26,13 +26,13 @@ exports.findId = function() {
 };
 
 exports.internalIpiNumberBinding = function() {
-    return element(by.binding('person.pristine.master_data.primary_name.internal_ipi_number'));
+    return $(".e2e-primary-name-internal-ipi>div>strong");
 };
 exports.suisaIPINumber = function() {
-    return element(by.binding('person.pristine.master_data.primary_name.suisa_ipi_number'));
+    return $(".e2e-primary-name-suisa-ipi>div>strong");
 };
 exports.alternativeNameElement = function() {
-    return $$(".EDITOR.span6>div>.row.span6>.span3").first();
+    return $(".e2e-alternative-name-full>div>strong");
 };
 
 

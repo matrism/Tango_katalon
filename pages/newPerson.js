@@ -45,7 +45,8 @@ firstNameInput : function() {
 },
 
 lastNameInput : function() {
-    return element(by.model('person.master_data.primary_name.last_name'));
+
+    return element(by.model('modularEditModels.model.lastName'));
 },
 
 
@@ -218,7 +219,7 @@ typeSuisaIpiNumber : function(value) {
 },
 
 affiliatedSocietySearchInput : function() {
-    return element(by.model('affSociety.society.model')).element(
+    return element(by.model('modularEditModels.model.society')).element(
         by.model('$term')
     );
 },
@@ -260,9 +261,7 @@ typeIntoCityInput : function(value) {
 },
 
 doneButton : function() {
-    return this.pageFooter().element(
-        by.cssContainingText('button', 'Done')
-    );
+    return $(".btn.btn-primary.ng-scope");
 },
 typeIntoRegionInput : function(value) {
 

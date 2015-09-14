@@ -990,7 +990,141 @@ if (steps.royaltyRates === undefined) {
 
             });
 
+        },
+        //ROYALTY PROCCESSING
+        goToRoyaltyStatements: function () {
+            it("Go to Royalty Statements Page", function () {
+                pages.royaltyRates.clickRoyaltyProcessing();
+                pages.royaltyRates.clickRoyaltyStatements();
+
+            });
+        },
+        clickCreateManualStatement: function () {
+            it("Click Create Manual Statement", function () {
+                pages.royaltyRates.clickCreateManualStatementButton();
+
+
+            });
+        },
+        typeIncomeProvider: function (value) {
+            it("Type in Income Provider", function () {
+                pages.royaltyRates.typeInIncomeProvider(value);
+
+
+            });
+        },
+        setStatementDistributionPeriod: function (startYear,startMonth,endYear,endMonth) {
+            it("Type in Statement Distribution Period", function () {
+                pages.royaltyRates.typeStartYear(startYear);
+                pages.royaltyRates.selectStartMonth(startMonth);
+                pages.royaltyRates.typeEndYear(endYear);
+                pages.royaltyRates.selectEndMonth(endMonth);
+
+
+            });
+        },
+        setStatementAmount: function (value) {
+            it("Type in Statement Amount", function () {
+                pages.royaltyRates.typeInStatementAmount(value);
+
+
+            });
+        },
+        setExchangeRate: function (value) {
+            it("Type in Exchange Rate", function () {
+                pages.royaltyRates.typeInExchangeRate(value);
+
+
+            });
+        },
+        createManualStatement: function () {
+            it("Create manual statement", function () {
+                pages.royaltyRates.createManualStatementClick();
+
+
+            });
+        },
+        enterBatchAmmount: function (value) {
+            it("Enter batch amount", function () {
+                pages.royaltyRates.typeInBatchAmount(value);
+
+
+            });
+        },
+        clickDefaultSettingsOnBatch: function () {
+            it("Click Default Setting on Batch", function () {
+                pages.royaltyRates.expandBatchDefaultSettings();
+
+
+            });
+        },
+        selectIncomeTypeForBatch: function (value) {
+            it("Select Income Type For Batch", function () {
+                pages.royaltyRates.selectIncomeTypeForBatchFromDropdown(value);
+
+
+            });
+        },
+        selectExploitationTerritoryForBatch: function (value) {
+            it("Select Exploitation Territory For Batch", function () {
+                pages.royaltyRates.selectExploitationTerritoryForBatchFromDropdown(value);
+
+
+            });
+        },
+        addWorkByTitle: function (value) {
+            it("Add work by title", function () {
+                pages.searchSection.clickDropdownMenu();
+                pages.searchSection.selectOrganisationOptionFromDropdown();
+                pages.royaltyRates.selectAddByTitleOption();
+                pages.royaltyRates.addWorkByTitleFromTypeAhead(value);
+
+
+            });
+        },
+        setAmountRecievedForWork: function (value) {
+            it("Set Amount Recieved For Work", function () {
+                pages.royaltyRates.inputAmountRecievedForWork(value);
+
+
+
+            });
+        },
+        clickDoneButtonForManualStatement: function () {
+            it("Click Done Button For Manual Statement", function () {
+
+                pages.royaltyRates.clickManualStatementDoneButton();
+
+
+
+            });
+        },
+        manualStatementIsSaved: function () {
+            it("Manual Statement is Saved", function () {
+                expect(pages.royaltyRates.manualStatementSavePageIsDisplayed()).toBeTruthy();
+
+
+
+            });
+        },
+        expandSavedManualStatement: function () {
+            it("Expand Saved Manual Statement", function () {
+                pages.royaltyRates.clickExpandManualStatement();
+
+
+
+            });
+        },
+        validateManualStatement: function () {
+            it("Validate Manual Statement", function () {
+                expect(pages.royaltyRates.validateManualStatementData()).toBeTruthy();
+
+
+
+            });
         }
+
+
 
 
     };

@@ -1,5 +1,6 @@
 "use strict";
 var client = require('http-api-client');
+var fs = require('fs');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.organisation === undefined) {
@@ -9,7 +10,7 @@ if (pages.organisation === undefined) {
             url: _tf_config.urls.app_url + "#/create/org",
             locators: {},
         organisationNameInput: function () {
-return $("#name");
+return $(".e2e-general-name>div>input");
         },
         territoryOfOperationIcon: function () {
 
@@ -19,26 +20,28 @@ return $("#name");
           return $$(".tg-territory__btn.ng-scope").last();
         },
             suisaIPINumberInput: function () {
-return $(".pull-left.ng-valid-maxlength");
+return $(".e2e-general-suisa-ipi>div>div>input");
         },
         affiliatedSocietyInput: function () {
-return $(".span4");
+return $('[placeholder="Search by CISAC Code or Abbreviation"]');
         },
         WCMPublisherButton: function () {
-return $$(".btn.ng-scope").get(3);
+return $('[tooltip="Warner/Chappell Music"]');
         },
         saveOrganisationButton: function () {
-          return $("#CREATE-ORG-SUBMIT")
+          return $('[type="submit"]');
         },
         summaryTable: function () {
             return $(".span3.header-right");
         },
         cisacCode: function () {
-          return $('#editor-general>div>div:last-child>[data-ng-show="orgEdit.pristine.masterData.type === orgTypes.society || orgEdit.pristine.masterData.type === orgTypes.copyright"]>.controls');
+          return $('.e2e-general-cisac-code>div');
         },
         firstSubPublisher: function () {
-          return $(".EDITOR.span6.modular-edit:first-child>div>div>div>div>div:first-child");
+
+          return $(".span6.e2e-sub-publisher.ng-scope:first-child>div>.EDITOR.modular-edit>div>div>div>div>.e2e-sub-publisher-def>div>strong>a");
         },
+
 
 
             incomeProviderControls: function () {
@@ -127,12 +130,22 @@ return $$(".btn.ng-scope").get(3);
             ,
             typeaheadInput: function () {
 
-                return element(by.css(".typeahead-result"));
+                return $$(".tg-typeahead__suggestions-group-item").first();
+            },
+            typeaheadContainer: function () {
+              return $(".tg-typeahead__suggestions-container");
             },
 
             navigationTab: function () {
                 return $(".nav-tabs");
             },
+        downloadFileButton: function () {
+return $(".icon-download-alt.ng-scope");
+        },
+
+        validationErrorsButton: function () {
+          return $$(".btn.btn-primary.ng-scope").first();
+        },
             activityHeader: function () {
                 return $("#ACTIVITY-HEADER");
             },
@@ -557,6 +570,49 @@ return $(".text-highlight");
                 this.previewRegistrationRunTab().click();
             }
             ,
+
+        clickDownloadFileButton: function () {
+            browser.wait(ExpectedConditions.visibilityOf(this.downloadFileButton()));
+            this.downloadFileButton().click();
+        },
+        waitForFileToDownload: function () {
+          browser.sleep(5000);
+        },
+        clickValidationErrorsButton: function () {
+            this.validationErrorsButton().click();
+        },
+            rmDir: function (dirPath) {
+                var that = this;
+                try { var files = fs.readdirSync(dirPath);
+                console.log(files);}
+                catch(e) {
+                    console.log(e);
+                    return; }
+                if (files.length > 0)
+                    for (var i = 0; i < files.length; i++) {
+                        var filePath = dirPath + '/' + files[i];
+                        if (fs.statSync(filePath).isFile())
+                            fs.unlinkSync(filePath);
+                        else
+                            that.rmDir(filePath);
+                    }
+
+            },
+        deleteFilesFromDownloadFolder: function (downloadFilepath) {
+
+
+            this.rmDir(downloadFilepath);
+        },
+        fileDownloadedSuccesfully: function (dirPath) {
+            browser.sleep(5000);
+            var that = this;
+            try { var files = fs.readdirSync(dirPath);
+                console.log(files);}
+            catch(e) {
+                console.log(e);
+                return; }
+            return files.length == 2;
+        },
             clickRegistrationActivityTab: function () {
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
                 this.registrationActivityTab().click();
@@ -684,7 +740,7 @@ return $(".text-highlight");
 
             selectAffiliatedSocietyNumber: function (value) {
                 this.affiliatedSocietyInput().sendKeys(value);
-                browser.wait(ExpectedConditions.visibilityOf(  this.typeaheadInput()));
+                browser.wait(ExpectedConditions.visibilityOf(  this.typeaheadContainer()));
 
 
                     this.typeaheadInput().click();
@@ -713,8 +769,10 @@ return $(".text-highlight");
                 return this.cisacCode().getText();
             },
             getFirstSubPublisherData: function () {
-                browser.wait(ExpectedConditions.visibilityOf(  this.firstSubPublisher()));
 
+                browser.wait(ExpectedConditions.visibilityOf(  this.firstSubPublisher()));
+                pages.base.waitForAjax();
+                pages.base.scrollIntoView(this.firstSubPublisher());
                 return this.firstSubPublisher().getText();
             }
 
