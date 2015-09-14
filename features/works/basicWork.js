@@ -5,9 +5,7 @@ var steps_path = _tf_config._system_.path_to_steps;
 require(steps_path + "login");
 require(steps_path + "works/newWork");
 
-workData = {};
-
-workData = {
+var workData = {
     workId: "WW 015006249 00",
     primaryWorkTitle: "TEST WORK TITLE 142792447241860",
     alternateWorkTitles: [

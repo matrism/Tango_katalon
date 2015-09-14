@@ -55,7 +55,7 @@ config = {
                 'download': {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
-                    'default_directory': 'E:/Work/tango-app/tests/e2e/downloads/'
+                    'default_directory': _tf_config._system_.path_to_workspace
                 }
             }
         }

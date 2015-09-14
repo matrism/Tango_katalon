@@ -1,8 +1,8 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
-    random = require('../../helpers/random'),
+    random = require('../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
-     config = require('../../configs/protractor-conf');
+    config = require('../configs/protractor-conf');
 
 require(pages_path + "deals/deal");
 require(steps_path + "deals/deal");

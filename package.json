@@ -12,8 +12,13 @@
     "protractor",
     "angular"
   ],
-  "devDependencies": {},
+  "devDependencies": {
+  },
   "dependencies": {
+    "change-case": "^2.3.0",
+    "fs-extra": "^0.24.0",
+    "http-api-client": "^0.1.8",
+    "tmp": "0.0.27",
     "factory-testing-framework": "git+ssh://git@github.com:wmgdsp/factory-testing-framework#tango",
     "jasmine-reporters": "~2.0.5",
     "jasmine-spec-reporter": "^2.4.0",

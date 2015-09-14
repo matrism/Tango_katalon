@@ -12,7 +12,7 @@ require(steps_path + "deals/createContractPeriod");
 require(pages_path + "deals/createScope");
 require(steps_path + "deals/createScope");
 //require(pages_path + "incomeProvider");
-require(steps_path + "incomeProvider");
+require(steps_path + "royalties/incomeProvider");
 
 var beforeFeature = function () {
         steps.login.itLogin();
