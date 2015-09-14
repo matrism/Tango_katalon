@@ -20,6 +20,7 @@ var configer = global.ftf.configer,
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
             singleReport: cli['single-report'],
+            noUnicode: cli['no-unicode'],
             path_to_features: [ __dirname + '/../features/albums/',
                 __dirname + '/../features/common/',
                 __dirname + '/../features/deals/',
@@ -72,7 +73,7 @@ var configer = global.ftf.configer,
         }
     };
 
-    config._system_.noReport = cli['no-report'];
+config._system_.noReport = cli['no-report'];
 
 config = configer.process(config);
 

@@ -16,6 +16,7 @@
   "dependencies": {
     "factory-testing-framework": "git+ssh://git@github.com:wmgdsp/factory-testing-framework#tango",
     "jasmine-reporters": "~2.0.5",
+    "jasmine-spec-reporter": "^2.4.0",
     "lodash": "^2.4.1",
     "mkdirp": "latest",
     "karma": "~0.12",
@@ -27,6 +28,7 @@
     "moment": "^2.10.3",
     "path": "latest",
     "protractor": "1.8",
+    "protractor-jasmine2-screenshot-reporter": "^0.1.7",
     "phantomjs": "~1.9",
     "qs": "latest",
     "underscore": "1.6.0"

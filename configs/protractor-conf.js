@@ -4,10 +4,10 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
+    HtmlReporter = require('protractor-jasmine2-screenshot-reporter'),
     screenShotPath,
     config,
     systemConfig,
-    ScreenShotReporter,
     SSReporter_instance;
 
 global.ftf = require('factory-testing-framework');
@@ -19,7 +19,6 @@ global.hash = {};
 require('../helpers/services_helper');
 
 systemConfig = global._tf_config._system_;
-ScreenShotReporter = global.ftf.htmlReporter;
 
 if (!systemConfig.noReport) {
     screenShotPath = path.join(__dirname, '../reports/html/');
@@ -31,10 +30,11 @@ if (!systemConfig.noReport) {
         screenShotPath = path.join(screenShotPath, now);
     }
 
-    mkdirp(screenShotPath);
+    //mkdirp(screenShotPath);
 
-    SSReporter_instance = new ScreenShotReporter({
-        baseDirectory: screenShotPath
+    SSReporter_instance = new HtmlReporter({
+        dest: screenShotPath + '/',
+        filename: 'reporter.htm',
     });
 }
 
@@ -66,7 +66,10 @@ config = {
         var reporting = systemConfig.reporting,
             pph = require('../helpers/pph'),
             matchers,
-            browserWait;
+            browserWait,
+            SpecReporter = require('jasmine-spec-reporter'),
+            jasmineReporters,
+            asciiPrefixes;
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
@@ -101,11 +104,25 @@ config = {
             browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
         }
 
+        asciiPrefixes = {
+            success: '[Pass] ',
+            failure: '[Fail] ',
+            pending: '[Pending] ',
+        };
+
+        jasmine.getEnv().addReporter(new SpecReporter({
+            displayStacktrace: 'all',
+            prefixes: systemConfig.noUnicode? asciiPrefixes : null,
+        }));
+
         if (reporting === 'xml' || reporting === 'all') {
-            require('jasmine-reporters');
-            jasmine.getEnv().addReporter(
-                new jasmine.JUnitXmlReporter('reports/xml', true, true)
-            );
+            jasmineReporters = require('jasmine-reporters');
+
+            jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+                consolidateAll: true,
+                savePath: 'reports/xml',
+                useDotNotation: true
+            }));
         }
 
         if (SSReporter_instance && (reporting === 'html' || reporting === 'all')) {
@@ -120,7 +137,7 @@ config = {
 //            child.on('error', function() { console.log(arguments); });
         }
         matchers = new global.ftf.matchers();
-        jasmine.Matchers.prototype.shouldBePresent = matchers.create('ShouldBePresent');
+        //jasmine.Matchers.prototype.shouldBePresent = matchers.create('ShouldBePresent');
 
         protractor.ExpectedConditions.presenceOfAny = function (elems) {
             return function () {
@@ -145,19 +162,21 @@ config = {
 
     },
     onCleanUp: function(statusCode) {
-        if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
+        /*if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
             try {
-                SSReporter_instance.compileReport();
+                //SSReporter_instance.compileReport();
             } catch(e) {
-                console.error('Error on compileReport', e.stack);
+                //console.error('Error on compileReport: ', e.stack);
             }
-        }
+        }*/
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
     },
+    framework: 'jasmine2',
     jasmineNodeOpts: {
         showColors: true,
-        defaultTimeoutInterval: 600000
+        defaultTimeoutInterval: 600000,
+        print: function(){}
     }
 };
 
