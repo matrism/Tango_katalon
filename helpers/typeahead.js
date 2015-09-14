@@ -1,7 +1,11 @@
 'use strict';
 
-function Typeahead (locator) {
-    var typeahead = element(locator);
+function Typeahead (target, isElement) {
+    var typeahead = target; 
+
+    if (!isElement) {
+        typeahead = element(target);
+    }
 
     typeahead.sendKeys = function (keys) {
         return typeahead.element(by.model('$term')).sendKeys(keys);
@@ -18,6 +22,7 @@ function Typeahead (locator) {
             });
         }
 
+        browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
         return results;
     };
 

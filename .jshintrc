@@ -19,7 +19,15 @@
   "smarttabs": true,
   "white": true,
   "multistr": true,
+  "jasmine": true,
   "globals": {
-    "steps": true
+    "steps": true,
+    "pages": true,
+    "element": true,
+    "browser": true,
+    "protractor": true,
+    "by": true,
+    "$": true,
+    "$$": true
   }
 }

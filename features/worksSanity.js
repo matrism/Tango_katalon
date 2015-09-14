@@ -630,7 +630,9 @@ var beforeFeature = [
 
                     steps.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(0);
 
-                    steps.create_deal_scope.clickOnAddPublisherShareSet();
+                    steps.create_deal_scope.clickOnAddPublisherShareSet({
+                        scrollIntoView: true,
+                    });
 
                     steps.create_deal_scope.enterPublisherSearchTerms(
                         0, 0, 'WCM Publisher 1'
@@ -733,7 +735,7 @@ var beforeFeature = [
                             role: 'E',
                             name: 'WCM Publisher 1',
                             societies: [],
-                            shares: ['25.000', '–', '–', '–', '–'],
+                            shares: ['25.000', '–', '50.000', '–', '50.000'],
                         },
                         {
                             row: 2,
@@ -747,14 +749,14 @@ var beforeFeature = [
                             role: 'SE',
                             name: 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA',
                             societies: ['ABRAMUS'],
-                            shares: ['–', '25.000', '50.000', '50.000', '50.000'],
+                            shares: ['–', '25.000', '–', '50.000', '–'],
                         },
                         {
                             row: 5,
                             role: 'E',
                             name: 'WCM Publisher 1',
                             societies: [],
-                            shares: ['25.000', '–', '–', '–', '–'],
+                            shares: ['25.000', '–', '50.000', '–', '50.000'],
                         },
                         {
                             row: 6,
@@ -768,7 +770,7 @@ var beforeFeature = [
                             role: 'SE',
                             name: 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA',
                             societies: ['ABRAMUS'],
-                            shares: ['–', '25.000', '50.000', '50.000', '50.000'],
+                            shares: ['–', '25.000', '–', '50.000', '–'],
                         },
                     ];
 

@@ -163,8 +163,7 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    _.sample(options.slice(0, 3)).click();
                 })
         },
 
@@ -280,18 +279,22 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        clickOnAddPublisherShareSetLink: function () {
-            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
-            //var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
-            //
-            //pages.base.scrollIntoView(element);
-            //
-            //return element.click().then(function() {
-            //    return browser.wait(ExpectedConditions.visibilityOf(
-            //        pages.create_deal_scope.elems.firstPublisherNameField
-            //    ));
-            //});
+        clickOnAddPublisherShareSetLink: function(more) {
+            more = more || {};
+
+            var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
+
+            // TODO: Remove this once this situation is resolved:
+            // https://github.com/wmgdsp/tango-app/commit/8b348611b3da7d7c0bb2b5b3dab444cad5d31b1e#commitcomment-12891620
+            if(more.scrollIntoView) {
+                pages.base.scrollIntoView(element);
+            }
+
+            return element.click().then(function() {
+                return browser.wait(ExpectedConditions.visibilityOf(
+                    pages.create_deal_scope.elems.firstPublisherNameField
+                ));
+            });
         },
 
         publisherShareChainContainers: function() {

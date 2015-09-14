@@ -41,7 +41,7 @@ if (pages.newPerson === undefined) {
 
 
 firstNameInput : function() {
-    return element(by.model('person.master_data.primary_name.first_name'));
+    return element(by.model('modularEditModels.model.firstName'));
 },
 
 lastNameInput : function() {
@@ -53,17 +53,17 @@ lastNameInput : function() {
 
 alternativeLastNameInput : function(i) {
     return this.alternativeNameContainer(i).element(
-        by.model('altName.last_name')
+        by.model('modularEditModels.model.lastName')
     );
 },
 alternativeCreditsNameInput : function(i) {
     return this.alternativeNameContainer(i).element(
-        by.model('altName.credits_name')
+        by.model('modularEditModels.model.creditsName')
     );
 },
 alternativeSuisaIpiInput: function(i) {
     return this.alternativeNameContainer(i).element(
-        by.model('altName.suisa_ipi_number')
+        by.model('modularEditModels.model.suisaIpiNumber')
     );
 },
 
@@ -135,7 +135,7 @@ typeLastName : function(value) {
 
 
 presentationNameInput : function() {
-    return element(by.model('person.master_data.primary_name.presentation_name'));
+    return element(by.model('modularEditModels.model.fullName'));
 },
 
 typePresentationName : function(value) {
@@ -157,7 +157,9 @@ clickAddAlternativeName : function() {
 },
 
 alternativeNameContainers : function() {
-    return element.all(by.repeater('altName in person.master_data.alternative_names'));
+    return element.all(by.repeater(
+        'alternativeName in dataHolder.person.alternativeNames.getAll()'
+    ));
 },
 
 alternativeNameContainer : function(i) {
@@ -166,7 +168,7 @@ alternativeNameContainer : function(i) {
 
 alternativeFirstNameInput : function(i) {
     return this.alternativeNameContainer(i).element(
-        by.model('altName.first_name')
+        by.model('modularEditModels.model.firstName')
     );
 },
 
@@ -201,7 +203,7 @@ typeAlternativeSuisaIpiNumber: function(i,value) {
 },
 
 suisaIpiNumberInput : function() {
-    return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
+    return element(by.model('modularEditModels.model.suisaIpiNumber'));
 },
 
 
@@ -249,7 +251,7 @@ clickAffiliatedSocietySearchResultByIndex : function(i) {
 },
 
 pageFooter : function() {
-    return $('.page-footer');
+    return $('#FORM-CONTROLS');
 },
 typeIntoAddressOneInput : function(value) {
 

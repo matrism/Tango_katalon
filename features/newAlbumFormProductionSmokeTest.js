@@ -48,9 +48,10 @@ var beforeFeature = [
 
 module.exports = {
     commonFeatureTags: [
-        'new-album-form-production-smoke-test',
-        'albums',
-        'production-test',
+        'newAlbumFormProductionSmokeTest',
+        'productionAlbums',
+        'productionSmokeTest',
+        'productionTest',
     ],
     feature: feature,
     beforeFeature: beforeFeature

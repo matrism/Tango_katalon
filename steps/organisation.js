@@ -1,3 +1,8 @@
+'use strict';
+
+var pageStep = require('../helpers/basicPageStep'),
+    page = require(pages_path + 'organisation');
+
 var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
@@ -16,7 +21,7 @@ beforeEach(function () {
     this.addMatchers(matchers);
 });
 if (steps.organisation === undefined) {
-    steps.organisation = {
+    steps.organisation = exports = {
 
 
         addIncomeProvidersToOrganisation: function (table, message) {
@@ -570,3 +575,45 @@ if (steps.organisation === undefined) {
 }
 
 module.exports = steps.organisation;
+
+pageStep([
+    ['General', [
+        'Edit section',
+
+        'Enter name',
+
+        'Edit territories of operation',
+        'Delete territory of operation',
+        'Enter territory of operation search terms',
+        'Select territory of operation search result by index',
+
+        'Select organisation type',
+
+        'Select publisher type',
+
+        'Save section',
+        'Expect section to be in view mode',
+    ]],
+
+    ['Income Provider', [
+        'Edit section',
+        'Select primary territory of operation',
+        'Select default currency',
+        'Delete income file type',
+        'Enter income file type search terms',
+        'Select income file type search result by index',
+
+        ['Income Type Mapping', [
+            'Delete row',
+            'Enter inbound income type',
+            'Enter inbound income type description',
+            'Enter income file type search terms',
+            'Select income file type search result by index',
+            'Enter Tango income type search terms',
+            'Select Tango income type search result by index',
+        ]],
+
+        'Save section',
+        'Expect section to be in view mode',
+    ]],
+]);

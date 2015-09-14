@@ -75,12 +75,30 @@ config = {
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
         browserWait = browser.wait;
-        browser.wait = function(testFn, timeout) {
-            if(timeout === undefined) {
+        browser.wait = function(testFn, timeout, options) {
+            if(timeout === undefined || timeout === null) {
                 timeout = systemConfig.wait_timeout;
             }
 
-            browserWait.call(browser, testFn, timeout);
+            options = options || {};
+
+            return browserWait.call(browser, function() {
+                var testFnResult = testFn.apply(this, arguments);
+
+                if(options.dontThrowOnError) {
+                    return testFnResult;
+                }
+
+                return pph.and(
+                    testFnResult, pages.base.dialogError().then(function(errorMessage) {
+                        if(!errorMessage) {
+                            return true;
+                        }
+
+                        throw new Error(errorMessage);
+                    })
+                );
+            }, timeout);
         };
 
         if (systemConfig.resolution.width && systemConfig.resolution.height) {
@@ -118,7 +136,7 @@ config = {
             return function () {
                 return protractor.ExpectedConditions.presenceOfAny(elems)().then(function (count) {
                     return count && pph.arraySome(elems, function(element){
-                        return protractor.ExpectedConditions.visibilityOf(element)
+                        return protractor.ExpectedConditions.visibilityOf(element);
                     });
                 });
             };
@@ -126,6 +144,8 @@ config = {
 
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
+        global.pages_path = _tf_config._system_.path_to_pages;
+        global.steps_path = _tf_config._system_.path_to_steps;
 
     },
     onCleanUp: function(statusCode) {
