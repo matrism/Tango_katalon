@@ -28,7 +28,7 @@ exports.waitForPageToLoad = function () {
     });
 };
 
-enterFirstName = function (value) {
+exports.enterFirstName = function (value) {
     it('Enter first name (' + value + ')', function () {
         pages.newPerson.typeFirstName(value).then(function () {
             var person = hash.currentPersonSlot;

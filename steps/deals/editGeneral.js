@@ -170,7 +170,7 @@ exports.itSaveInternalContactsChanges = function () {
     })
 };
 
-itCancelInternalContactsChanges = function () {
+exports.itCancelInternalContactsChanges = function () {
     it("Cancel internal contacts changes after editing them", function () {
         pages.edit_deal_general.clickOnCancelEditInternalContacts();
         browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.yesModalDialog));

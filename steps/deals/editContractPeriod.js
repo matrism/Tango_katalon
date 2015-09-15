@@ -212,14 +212,14 @@ exports.editAddFirstMdrcTerritoryField = function () {
     });
 };
 
-exports,editAddMdrcTerritoryField = function () {
+exports.editAddMdrcTerritoryField = function () {
     it("Edit - Add MDRC territory ", function () {
         pages.edit_deal_contract_period.editTheTerritoriesFieldLetter();
         pages.edit_deal_contract_period.editSelectRandomTerritory();
     });
 };
 
-exports,editClickMdrcYesCommercialReleaseByMajorLabelButton = function () {
+exports.editClickMdrcYesCommercialReleaseByMajorLabelButton = function () {
     it("Edit - Click on MDRC yes commercial release by major label ", function () {
         pages.edit_deal_contract_period.editClickOnMdrcYesCommercialReleaseByMajorLabel();
     });
