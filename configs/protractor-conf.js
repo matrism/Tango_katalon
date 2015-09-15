@@ -6,6 +6,7 @@ var path = require('path'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
     HtmlReporter = require('protractor-jasmine2-screenshot-reporter'),
     screenShotPath,
+    tmp = require('tmp'),
     config,
     systemConfig,
     SSReporter_instance;
@@ -55,12 +56,8 @@ config = {
                 'download': {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
-                    'default_directory': 'E:/Work/tango-app/tests/e2e/downloads/'
-
-
-
-
-                }
+                    'default_directory': tmp.dirSync().name,
+                },
             }
         }
     },
