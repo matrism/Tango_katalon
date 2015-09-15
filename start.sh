@@ -54,6 +54,7 @@ FILE="./profiles/$PROFILE.yml"
 
 if [ ! -z "$UPDATE" ]
 then
+    echo "UPDATING: $UPDATE"
     npm update
     bower update
 fi
