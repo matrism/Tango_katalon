@@ -6,27 +6,10 @@ var ExpectedConditions = protractor.ExpectedConditions;
 require(steps_path + "modal");
 require(pages_path + "modal");
 
-if (steps.modal === undefined) {
-    steps.modal = {
+steps.modal = exports;
 
-clickYesOnPopupModal:function()
-{
-    it("Confirm Popup Modal",function()
-    {
-
-
+exports.clickYesOnPopupModal = function () {
+    it("Confirm Popup Modal", function () {
         pages.modal.clickOnYesButton();
-
-
-
-    })
-
-
-}
-
-
-
-    };
-}
-
-
+    });
+};

@@ -31,31 +31,27 @@ var workData = {
     includeOnWebsite: false,
 };
 
-var beforeFeature = [
-	    [steps.login.itLogin]
-    ],
+exports.beforeFeature = [
+	[steps.login.itLogin]
+];
 
-    feature = [
-        {
-            name: "New basic work",
-            tags: ['create_work'],
-            steps: [
-                [steps.new_work.createBasicWork, [workData]],
-                [steps.work.validateWork, [workData]]
-            ]
-        },
-        {
-            name: "Edit basic work",
-            tags: ['edit_work'],
-            steps: [
-                [steps.work.editBasicWork, [workData]],
-                [steps.work.validateWork, [workData]],
-            ]
-        }
-    ];
+module.commonFeatureTags = ['works', 'broken'];
 
-module.exports = {
-    commonFeatureTags: ['works', 'broken'],
-    feature: feature,
-    beforeFeature: beforeFeature
-};
+exports.feature = [
+    {
+        name: "New basic work",
+        tags: ['create'],
+        steps: [
+            [steps.new_work.createBasicWork, [workData]],
+            [steps.work.validateWork, [workData]]
+        ]
+    },
+    {
+        name: "Edit basic work",
+        tags: ['edit'],
+        steps: [
+            [steps.work.editBasicWork, [workData]],
+            [steps.work.validateWork, [workData]],
+        ]
+    }
+];

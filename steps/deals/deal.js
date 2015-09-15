@@ -7,163 +7,119 @@ require(steps_path + "deals/deal");
 require(pages_path + "deals/deal");
 require(pages_path + "deals/finderDeal");
 
-if (steps.deal === undefined) {
-    steps.deal = {
+steps.deal = exports;
 
-        goToNextPage: function () {
-            it("Click on continue to next page button", function () {
-                pages.deal.continueToNextPage();
+exports.goToNextPage = function () {
+    it("Click on continue to next page button", function () {
+        pages.deal.continueToNextPage();
+    });
+};
+
+exports.waitContinueButtonEnabled = function () {
+    it("Check continue button to be enabled", function () {
+        pages.deal.expectContinueButtonEnabled();
+    });
+};
+
+exports.saveDeal = function () {
+    it("Click on save deal button", function () {
+        pages.deal.saveNewDeal();
+    });
+};
+
+exports.clickFirstScopeHeader =function() {
+    it("Click the first scope header",function(){
+        pages.deal.clickScopeHeader();
+    });
+};
+
+exports.clickLastScopeHeader = function () {
+    it("Click the last scope header",function(){
+        pages.deal.clickScopeHeaderLast();
+    });
+};
+
+exports.waitForDealToBeSaved = function () {
+    it("Expect deal screen to be loaded and brief number displayed ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+    });
+};
+
+exports.returnDealNumber = function () {
+    it("Return deal number ", function () {
+        pages.deal.elems.dealBriefNumber.getText().
+            then(function (promise) {
+                console.log("Deal number is: " + promise);
             });
-        },
+    });
+};
 
-        waitContinueButtonEnabled: function () {
-            it("Check continue button to be enabled", function () {
-                pages.deal.expectContinueButtonEnabled();
-            });
-        },
+exports.findId = function () {
+    it('Find deal ID', function () {
+        var idBinding = element(By.xpath('//*[@id="RECORD-HEADER"]//div/div/div[6]/div/p[@class="info ng-binding"]'));
 
-        saveDeal: function () {
-            it("Click on save deal button", function () {
-                pages.deal.saveNewDeal();
-            });
-        },
+        idBinding.getText().then(function(value) {
+            hash.currentEntityDataSlotsByType.deal.id = value;
+        });
+    });
+};
 
-        clickFirstScopeHeader:function()
-        {
-            it("Click the first scope header",function(){
+exports.itContinueToNextPage = function () {
+    describe("Check continue button enabled and go to next page", function () {
+        //steps.deal.waitContinueButtonEnabled();
+        steps.deal.goToNextPage();
+    });
+};
 
-          pages.deal.clickScopeHeader();
+exports.goToGeneralDealTabDetail = function () {
+    it("Click on general header and go to general deal tab details ", function () {
+        pages.deal.goToGeneralDealDetails();
+    });
+};
 
+exports.goToGeneralDealTabDetails = function () {
+    it("Click on general header and go to general deal tab details ", function () {
+        pages.deal.goToGeneralDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealGeneralSummaryHeader));
+    });
+};
 
+exports.goToTermsDealTabDetails = function () {
+    it("Click on terms header and go to terms deal tab details ", function () {
+        pages.deal.goToTermsDealDetails();
+    });
+};
 
-            });
+exports.expectTermsDetailsAreOk = function () {
+    it("Expect terms tab is opened successfully ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealTermsSummaryHeader));
+    });
+};
 
+exports.goToFinderDealTermsTabDetails = function () {
+    it("Click on finder deal terms link ", function () {
+        pages.deal.goToFinderDealTerms();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.finderDealsTitle));
+    });
+};
 
-        },
-        clickLastScopeHeader:function()
-        {
-            it("Click the last scope header",function(){
+exports.goToIncomeRatesPage = function () {
+    it("Go to Income Rates Summary Page",function() {
+        pages.deal.clickIncomeRatesLink();
+    });
+};
 
-                pages.deal.clickScopeHeaderLast();
+exports.verifyErrorMessages = function () {
+    it("Check that error messages are displayed correctly",function() {
+        expect(pages.deal.errorHeaderIsVisible()).toBeTruthy();
 
-
-
-            });
-
-
-        },
-
-
-
-        waitForDealToBeSaved: function () {
-            it("Expect deal screen to be loaded and brief number displayed ", function () {
-                browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
-            });
-        },
-
-
-        returnDealNumber: function () {
-            it("Return deal number ", function () {
-                pages.deal.elems.dealBriefNumber.getText().
-                    then(function (promise) {
-                        console.log("Deal number is: " + promise);
-                    });
-            });
-        },
-
-        findId: function() {
-            it('Find deal ID', function () {
-                var idBinding = element(By.xpath('//*[@id="RECORD-HEADER"]//div/div/div[6]/div/p[@class="info ng-binding"]'));
-
-                idBinding.getText().then(function(value) {
-                    hash.currentEntityDataSlotsByType.deal.id = value;
-                });
-            });
-        },
-
-        itContinueToNextPage: function () {
-            describe("Check continue button enabled and go to next page", function () {
-                    //steps.deal.waitContinueButtonEnabled();
-                    steps.deal.goToNextPage();
-                }
-            );
-        },
-
-        goToGeneralDealTabDetail: function () {
-            it("Click on general header and go to general deal tab details ", function () {
-                pages.deal.goToGeneralDealDetails();
-            });
-        },
-
-        goToGeneralDealTabDetails: function () {
-            it("Click on general header and go to general deal tab details ", function () {
-                pages.deal.goToGeneralDealDetails();
-                browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealGeneralSummaryHeader));
-            });
-        },
-
-        goToTermsDealTabDetails: function () {
-            it("Click on terms header and go to terms deal tab details ", function () {
-                pages.deal.goToTermsDealDetails();
-            });
-        },
-
-        expectTermsDetailsAreOk: function () {
-            it("Expect terms tab is opened successfully ", function () {
-                browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealTermsSummaryHeader));
-            });
-        },
-
-        goToFinderDealTermsTabDetails: function () {
-            it("Click on finder deal terms link ", function () {
-                pages.deal.goToFinderDealTerms();
-                browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.finderDealsTitle));
-            });
-        },
-
-        goToIncomeRatesPage:function()
-        {
-            it("Go to Income Rates Summary Page",function()
-            {
-
-
-                pages.deal.clickIncomeRatesLink();
-
-            });
-
-
-
-        },
-
-        verifyErrorMessages:function()
-        {it("Check that error messages are displayed correctly",function()
-            {
-               expect(pages.deal.errorHeaderIsVisible()).toBeTruthy();
-
-              //  expect(pages.deal.errorIconsAreVisible()).toBeTruthy();
-              expect(pages.deal.errorRRIsVisible()).toBeTruthy();
-
-
-            }
-        )
-
-
-        },
-        getRRIconData:function()
-        {
-            it("",function()
-            {
-                pages.deal.errorIconsAreVisible();
-
-            })
-
-        }
-
-    };
-}
-
-
-
-
-
-
+        //  expect(pages.deal.errorIconsAreVisible()).toBeTruthy();
+        expect(pages.deal.errorRRIsVisible()).toBeTruthy();
+    });
+};
+        
+exports.getRRIconData = function () {
+    it("", function () {
+        pages.deal.errorIconsAreVisible();
+    });
+};

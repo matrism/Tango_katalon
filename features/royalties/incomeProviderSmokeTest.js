@@ -11,11 +11,13 @@ require(steps_path + 'mainHeader');
 require(steps_path + 'orgs/organisation');
 require(steps_path + 'orgs/newOrganisation');
 
-var beforeFeature = [
+exports.beforeFeature = [
     [steps.login.itLogin],
-],
+];
 
-    feature = [
+exports.commonFeatureTags = ['royalties', 'incomeProvider', 'smokeTest'];
+
+exports.feature = [
     {
         name: 'Create an organisation with an income provider role and then edit it',
         tags: [],
@@ -109,12 +111,6 @@ var beforeFeature = [
                 this.saveSection();
                 this.expectSectionToBeInViewMode();
             });
-        },
-    },
-    ];
-
-module.exports = {
-    commonFeatureTags: ['royalties', 'incomeProvider', 'smokeTest'],
-    feature: feature,
-    beforeFeature: beforeFeature
-};
+       }
+    }
+];

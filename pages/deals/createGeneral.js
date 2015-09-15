@@ -308,7 +308,5 @@ if (pages.create_deal_general === undefined) {
         clickOnTheNoPerformanceNonTitleBoundIncome: function(){
             pages.create_deal_general.elems.noPerformanceNonTitleBoundIncome.click();
         }
-
-
     });
 }

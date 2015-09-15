@@ -25,12 +25,15 @@ require(steps_path + "searchSection");
 
 require(steps_path + "login");
 
-var beforeFeature = function () {
+exports.beforeFeature = function () {
     steps.login.itLogin();
     steps.searchSection.accessSavedOrganisationByName("BMI");
-},
+};
 
-    feature = [{
+exports.commonFeatureTags = ['orgs', 'regression', 'broken'];
+
+exports.feature = [
+    {
         name: "I would like to add multiple Income Providers to Organisation",
         tags: ["manual"],
         steps: function () {
@@ -329,10 +332,4 @@ var beforeFeature = function () {
             steps.organisation.waitForProvidersSaveToComplete();
         }
     }
-    ];
-
-module.exports = {
-    commonFeatureTags: ['orgs', 'broken'],
-    feature: feature,
-    beforeFeature: beforeFeature
-};
+];

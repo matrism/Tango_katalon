@@ -18,428 +18,423 @@ require(steps_path + "deals/finderDeal");
 require(steps_path + "login");
 require(steps_path + "base");
 
-var beforeFeature = function () {
-        steps.login.itLogin();
-    },
-
-    feature = [
-        {
-            name: "Create finder deals",
-            tags: ["create_finder_deals_validation_tooltip"],
-            steps: function () {
-                var number = Math.floor(Math.random() * 1000) + 1;
-                var percent = (Math.random() * 99 + 1).toFixed(2);
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
-                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-                steps.create_deal_contract_period.fillActualEndDateField();
-                steps.create_deal_contract_period.addNewContractPeriodDialog();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                steps.create_deal_contract_period.fillEndTargetMonths();
-                for (var i = 3; i <= 6; i++) {
-                    steps.create_deal_contract_period.addNewContractPeriod();
-                    steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                    steps.create_deal_contract_period.fillEndTargetMonths();
-                }
-                steps.create_deal_scope.addSpecificScope("Finder");
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.deal.goToFinderDealTermsTabDetails();
-                steps.finder_deal.clickOnGeneralTermsFinderDeal();
-                steps.finder_deal.editGeneralTermsFinderDeal();
-                steps.finder_deal.validatePriorAwarenessNotificationTooltip();
-                steps.finder_deal.validateNotifyWithinThisNumberOfDaysTooltip();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays("0");
-                steps.finder_deal.checkErrorMessageNotifyWithinThisNumberOfDays();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays(number);
-                steps.finder_deal.validateSubmissionDecisionWithinNumberOfDaysTooltip();
-                steps.finder_deal.fillSubmissionDecisionWithinNumberOfDays("0");
-                steps.finder_deal.checkErrorMessageSubmissionDecisionWithinNumberOfDays();
-                steps.finder_deal.fillSubmissionDecisionWithinNumberOfDays(number);
-                steps.finder_deal.validateAssumedResponseTooltip();
-                steps.finder_deal.clickOnNoneAssumedResponse();
-                steps.finder_deal.validateWhoWillDraftDealsTooltip();
-                steps.finder_deal.clickOnFinderWhoWillDraftDeals();
-                steps.finder_deal.validateWhoHasControlToExerciseFutureOptionsTooltip();
-                steps.finder_deal.clickOnWcmWhoHasControlToExerciseFutureOptions();
-                steps.finder_deal.validateWhoIsResponsibleForAdvancesTooltip();
-                steps.finder_deal.clickOnFinderWhoIsResponsibleForAdvances();
-                steps.finder_deal.validateFindersRightToPursueTooltip();
-                steps.finder_deal.validateWcmRightToPursueTooltip();
-                steps.finder_deal.clickOnSaveGeneralTermsFinderDeal();
-            }
-        },
-        {
-            name: "Dirty check general terms finder deals",
-            tags: ["dirty_check_general_terms_finder_deals"],
-            steps: function () {
-                var number = Math.floor(Math.random() * 1000) + 1;
-                var percent = (Math.random() * 100 + 1).toFixed(2);
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
-                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-                steps.create_deal_contract_period.fillActualEndDateField();
-                steps.create_deal_contract_period.addNewContractPeriodDialog();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                steps.create_deal_contract_period.fillEndTargetMonths();
-                for (var i = 3; i <= 6; i++) {
-                    steps.create_deal_contract_period.addNewContractPeriod();
-                    steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                    steps.create_deal_contract_period.fillEndTargetMonths();
-                }
-                steps.create_deal_scope.addSpecificScope("Finder");
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.deal.goToFinderDealTermsTabDetails();
-                steps.finder_deal.clickOnGeneralTermsFinderDeal();
-                steps.finder_deal.editGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnNoPriorAwarenessNotification();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays(number);
-                steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
-                steps.deal.goToGeneralDealTabDetail();
-                steps.edit_deal_scope.editCancelModalDialogDirtyCheck();
-                steps.finder_deal.clickOnNoPriorAwarenessNotification();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays(number);
-                steps.finder_deal.confirmCancelChangesGeneralTermsFinderDeal();
-            }
-        },
-        {
-            name: "Validate negative scenarios finder deals",
-            tags: ["create_view_edit_finder_deals"],
-            steps: function () {
-                var number = Math.floor(Math.random() * 1000) + 1;
-                var num = Math.floor(Math.random() * 500) + 1;
-                var percent = (Math.random() * 100 + 1).toFixed(2);
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
-                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-                steps.create_deal_contract_period.fillActualEndDateField();
-                steps.create_deal_contract_period.addNewContractPeriodDialog();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                steps.create_deal_contract_period.fillEndTargetMonths();
-                for (var i = 3; i <= 6; i++) {
-                    steps.create_deal_contract_period.addNewContractPeriod();
-                    steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                    steps.create_deal_contract_period.fillEndTargetMonths();
-                }
-                steps.create_deal_scope.addSpecificScope("Finder");
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.deal.goToFinderDealTermsTabDetails();
-                steps.finder_deal.clickOnGeneralTermsFinderDeal();
-                steps.finder_deal.editGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnYesPriorAwarenessNotification();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays(num);
-                steps.finder_deal.fillSubmissionDecisionWithinNumberOfDays(num);
-                steps.finder_deal.clickOnAcceptAssumedResponse();
-                steps.finder_deal.clickOnFinderWhoWillDraftDeals();
-                steps.finder_deal.clickOnWcmWhoHasControlToExerciseFutureOptions();
-                steps.finder_deal.clickOnFinderWhoIsResponsibleForAdvances();
-                steps.finder_deal.clickOnNoWcmRightToPursue();
-                steps.finder_deal.clickOnSaveGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnGeneralTermsFinderDeal();
-                steps.finder_deal.editGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnNoPriorAwarenessNotification();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays(number);
-                steps.finder_deal.fillSubmissionDecisionWithinNumberOfDays(number);
-                steps.finder_deal.clickOnNoneAssumedResponse();
-                steps.finder_deal.clickOnWcmWhoWillDraftDeals();
-                steps.finder_deal.clickOnFinderWhoHasControlToExerciseFutureOptions();
-                steps.finder_deal.clickOnWcmWhoIsResponsibleForAdvances();
-                steps.finder_deal.clickOnYesWcmRightToPursue();
-                steps.finder_deal.clickOnSaveGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnGeneralTermsFinderDeal();
-                steps.finder_deal.validatePriorAwarenessNotificationValue("No");
-                steps.finder_deal.validateNotifyWithinThisNumberOfDaysValue(number + " Days");
-                steps.finder_deal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Days");
-                steps.finder_deal.validateAssumedResponseValue("None");
-                steps.finder_deal.validateWhoWillDraftDealsValue("WCM");
-                steps.finder_deal.validateWhoHasControlToExerciseFutureOptionsValue("Finder");
-                steps.finder_deal.validateWhoIsResponsibleForAdvancesValue("WCM");
-                steps.finder_deal.validateWcmRightToPursueValue("Yes");
-            }
-        },
-        {
-            name: "Create terms by contract period finder deals",
-            tags: ["create_terms_by_contract_period_finder_deals"],
-            steps: function () {
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
-                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-                steps.create_deal_contract_period.fillActualEndDateField();
-                steps.create_deal_contract_period.addNewContractPeriodDialog();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                steps.create_deal_contract_period.fillEndTargetMonths();
-                for (var i = 3; i <= 6; i++) {
-                    steps.create_deal_contract_period.addNewContractPeriod();
-                    steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                    steps.create_deal_contract_period.fillEndTargetMonths();
-                }
-                steps.create_deal_scope.addSpecificScope("Finder");
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.deal.goToFinderDealTermsTabDetails();
-                steps.finder_deal.validateTermsByContractPeriodFinderDealTitle();
-                steps.finder_deal.validateNumberOfTermsByContractPeriodFinderDealTitle("6");
-                steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
-                steps.finder_deal.validateTooltipsForTermsByContractPeriodI(1, "Past");
-                steps.finder_deal.validateTooltipsForTermsByContractPeriodI(2, "Current");
-                steps.finder_deal.validateTooltipsForTermsByContractPeriodI(3, "Future Exercised");
-                steps.finder_deal.validateTooltipsForTermsByContractPeriodI(4, "Future Unexercised");
-                steps.finder_deal.editTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
-                steps.finder_deal.validateMaximumFoundAgreementsWithoutPreApprovalTooltip();
-                steps.finder_deal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
-                steps.finder_deal.validateMaximumFoundAgreementsWithPreApprovalTooltip();
-                steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
-                steps.finder_deal.validateFindersRecoupmentResponsabilityTooltip();
-                steps.finder_deal.fillFindersRecoupmentResponsability();
-                steps.finder_deal.validateNonSignedArtistMaximumAdvancesPayableTooltip();
-                steps.finder_deal.fillNonSignedArtistMaximumAdvancesPayable();
-                steps.finder_deal.validateSignedArtistMaximumAdvancesPayableTooltip();
-                steps.finder_deal.fillSignedArtistMaximumAdvancesPayable();
-                steps.finder_deal.validateAggregateMaximumAdvancesPayableTooltip();
-                steps.finder_deal.fillAggregateMaximumAdvancesPayable();
-                steps.finder_deal.validateAggregateMaximumOnAdvancesTooltip();
-                steps.finder_deal.fillAggregateMaximumOnAdvancesField();
-                steps.finder_deal.validateFindersOwnerhsipTooltip();
-                steps.finder_deal.fillFindersOwnershipField();
-                steps.finder_deal.validateWcmsOwnerhsipTooltip();
-                steps.finder_deal.fillWmcsOwnershipField();
-                steps.finder_deal.validateCreatorsFoundSubmissionsTooltip();
-                steps.finder_deal.selectRandomCreatorFoundSubmissionField();
-                steps.finder_deal.validateSubmissionDateTooltip();
-                steps.finder_deal.fillSubmissionDateField();
-                steps.finder_deal.validateWcmDecisionTooltip();
-                steps.finder_deal.selectRandomWcmDecisionDropDown();
-                steps.finder_deal.validateFoundDealTooltip();
-                steps.finder_deal.selectRandomValueFromFoundDealDropDown();
-                steps.finder_deal.validateFindersRecoupmentResponsabilityOverrideTooltip();
-                steps.finder_deal.fillFindersRecoupmentResponsabilityOverride();
-                steps.finder_deal.clickOnSaveTermsByContractPeriodFinderDeal();
-            }
-        },
-        {
-            name: "Create and view finder deals terms by contract period",
-            tags: ["create_view_edit_terms_by_contract_period_finder_deals"],
-            steps: function () {
-                var number = Math.floor(Math.random() * 1000) + 1;
-                var num = Math.floor(Math.random() * 500) + 1;
-                var percent = (Math.random() * 100 + 1).toFixed(2);
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
-                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-                steps.create_deal_contract_period.fillActualEndDateField();
-                steps.create_deal_contract_period.addNewContractPeriodDialog();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                steps.create_deal_contract_period.fillEndTargetMonths();
-                for (var i = 3; i <= 6; i++) {
-                    steps.create_deal_contract_period.addNewContractPeriod();
-                    steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                    steps.create_deal_contract_period.fillEndTargetMonths();
-                }
-                steps.create_deal_scope.addSpecificScope("Finder");
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.deal.goToFinderDealTermsTabDetails();
-                steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
-                steps.finder_deal.editTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
-                steps.finder_deal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
-                steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
-                steps.finder_deal.fillFindersRecoupmentResponsability();
-                steps.finder_deal.fillNonSignedArtistMaximumAdvancesPayable();
-                steps.finder_deal.fillSignedArtistMaximumAdvancesPayable();
-                steps.finder_deal.fillAggregateMaximumAdvancesPayable();
-                steps.finder_deal.fillAggregateMaximumOnAdvancesField();
-                steps.finder_deal.fillFindersOwnershipField();
-                steps.finder_deal.fillWmcsOwnershipField();
-                steps.finder_deal.selectRandomCreatorFoundSubmissionField();
-                steps.finder_deal.fillSubmissionDateField();
-                steps.finder_deal.selectRandomWcmDecisionDropDown();
-                steps.finder_deal.selectRandomValueFromFoundDealDropDown();
-                steps.finder_deal.fillFindersRecoupmentResponsabilityOverride();
-                steps.finder_deal.clickOnSaveTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode(2);
-                steps.finder_deal.clickOnFoundDealTermsTitle();
-                steps.finder_deal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
-                steps.finder_deal.validateMaximumFoundAgreementsWithPreApprovalValue();
-                steps.finder_deal.validateFindersRecoupmentResponsabilityValue();
-                steps.finder_deal.validateNonSignedArtistMaximumAdvancesPayableValue();
-                steps.finder_deal.validateSignedArtistMaximumAdvancesPayableValue();
-                steps.finder_deal.validateAggregateMaximumAdvancesPayableValue();
-                steps.finder_deal.clickOnOwnershipTermsTitle();
-                steps.finder_deal.validateAggregateMaximumOnAdvancesValue();
-                steps.finder_deal.validateFinderOwnershipValue();
-                steps.finder_deal.validateWcmOwnershipValue();
-                steps.finder_deal.clickOnTheFoundSubmissionsTitle();
-                steps.finder_deal.validateCreatorFoundSubmissionValue();
-                steps.finder_deal.validateSubmissionDateValue();
-                steps.finder_deal.validateWcmDecisionValue();
-                steps.finder_deal.validateWcmDecisionValue();
-                steps.finder_deal.validateFoundDealValue();
-                steps.finder_deal.validateFindersRecoupmentResponsabilityOverrideValue();
-            }
-        },
-        {
-            name: "Dirty check finder deals terms by contract period",
-            tags: ["dirty_check_terms_by_contract_period_finder_deals"],
-            steps: function () {
-                var number = Math.floor(Math.random() * 1000) + 1;
-                var num = Math.floor(Math.random() * 500) + 1;
-                var percent = (Math.random() * 100 + 1).toFixed(2);
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
-                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-                steps.create_deal_contract_period.fillActualEndDateField();
-                steps.create_deal_contract_period.addNewContractPeriodDialog();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                steps.create_deal_contract_period.fillEndTargetMonths();
-                for (var i = 3; i <= 6; i++) {
-                    steps.create_deal_contract_period.addNewContractPeriod();
-                    steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                    steps.create_deal_contract_period.fillEndTargetMonths();
-                }
-                steps.create_deal_scope.addSpecificScope("Finder");
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.deal.goToFinderDealTermsTabDetails();
-                steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
-                steps.finder_deal.editTermsByContractPeriodFinderDeal();
-                //steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(3);
-                steps.finder_deal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
-                steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
-                steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
-                steps.deal.goToGeneralDealTabDetail();
-                steps.edit_deal_scope.editCancelModalDialogDirtyCheck();
-                steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
-                steps.finder_deal.confirmCancelChangesTermsByContractPeriodFinderDeal();
-            }
-        },
-
-        {
-            name: "Modular save finder deals",
-            tags: ["modular_save_finder_deals"],
-            steps: function () {
-                var number = Math.floor(Math.random() * 1000) + 1;
-                var num = Math.floor(Math.random() * 500) + 1;
-                var percent = (Math.random() * 100 + 1).toFixed(2);
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
-                steps.create_deal_contract_period.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-                steps.create_deal_contract_period.fillActualEndDateField();
-                steps.create_deal_contract_period.addNewContractPeriodDialog();
-                steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                steps.create_deal_contract_period.fillEndTargetMonths();
-                for (var i = 3; i <= 6; i++) {
-                    steps.create_deal_contract_period.addNewContractPeriod();
-                    steps.create_deal_contract_period.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
-                    steps.create_deal_contract_period.fillEndTargetMonths();
-                }
-                steps.create_deal_scope.addSpecificScope("Finder");
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.deal.goToFinderDealTermsTabDetails();
-                //general terms addition
-                steps.finder_deal.clickOnGeneralTermsFinderDeal();
-                steps.finder_deal.editGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnYesPriorAwarenessNotification();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays(num);
-                steps.finder_deal.fillSubmissionDecisionWithinNumberOfDays(num);
-                steps.finder_deal.clickOnAcceptAssumedResponse();
-                steps.finder_deal.clickOnFinderWhoWillDraftDeals();
-                steps.finder_deal.clickOnWcmWhoHasControlToExerciseFutureOptions();
-                steps.finder_deal.clickOnFinderWhoIsResponsibleForAdvances();
-                steps.finder_deal.clickOnNoWcmRightToPursue();
-                steps.finder_deal.clickOnSaveGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnGeneralTermsFinderDeal();
-                steps.finder_deal.editGeneralTermsFinderDeal();
-                steps.finder_deal.clickOnNoPriorAwarenessNotification();
-                steps.finder_deal.fillNotifyWithinTheNumberOfDays(number);
-                steps.finder_deal.fillSubmissionDecisionWithinNumberOfDays(number);
-                steps.finder_deal.clickOnNoneAssumedResponse();
-                steps.finder_deal.clickOnWcmWhoWillDraftDeals();
-                steps.finder_deal.clickOnFinderWhoHasControlToExerciseFutureOptions();
-                steps.finder_deal.clickOnWcmWhoIsResponsibleForAdvances();
-                steps.finder_deal.clickOnYesWcmRightToPursue();
-                //terms by contract period addition
-                steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
-                steps.finder_deal.editTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
-                steps.finder_deal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
-                steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
-                steps.finder_deal.fillFindersRecoupmentResponsability();
-                steps.finder_deal.fillNonSignedArtistMaximumAdvancesPayable();
-                steps.finder_deal.fillSignedArtistMaximumAdvancesPayable();
-                steps.finder_deal.fillAggregateMaximumAdvancesPayable();
-                steps.finder_deal.fillAggregateMaximumOnAdvancesField();
-                steps.finder_deal.fillFindersOwnershipField();
-                steps.finder_deal.fillWmcsOwnershipField();
-                steps.finder_deal.selectRandomCreatorFoundSubmissionField();
-                steps.finder_deal.fillSubmissionDateField();
-                steps.finder_deal.selectRandomWcmDecisionDropDown();
-                steps.finder_deal.selectRandomValueFromFoundDealDropDown();
-                steps.finder_deal.fillFindersRecoupmentResponsabilityOverride();
-                //modular save
-                steps.finder_deal.clickOnSaveTermsByContractPeriodFinderDeal();
-                //validations general terms
-                steps.finder_deal.validatePriorAwarenessNotificationValue("No");
-                steps.finder_deal.validateNotifyWithinThisNumberOfDaysValue(number + " Days");
-                steps.finder_deal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Days");
-                steps.finder_deal.validateAssumedResponseValue("None");
-                steps.finder_deal.validateWhoWillDraftDealsValue("WCM");
-                steps.finder_deal.validateWhoHasControlToExerciseFutureOptionsValue("Finder");
-                steps.finder_deal.validateWhoIsResponsibleForAdvancesValue("WCM");
-                steps.finder_deal.validateWcmRightToPursueValue("Yes");
-                //validations terms by contract period
-                steps.finder_deal.clickOnTermsByContractPeriodFinderDeal();
-                steps.finder_deal.clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode(2);
-                steps.finder_deal.clickOnFoundDealTermsTitle();
-                steps.finder_deal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
-                steps.finder_deal.validateMaximumFoundAgreementsWithPreApprovalValue();
-                steps.finder_deal.validateFindersRecoupmentResponsabilityValue();
-                steps.finder_deal.validateNonSignedArtistMaximumAdvancesPayableValue();
-                steps.finder_deal.validateSignedArtistMaximumAdvancesPayableValue();
-                steps.finder_deal.validateAggregateMaximumAdvancesPayableValue();
-                steps.finder_deal.clickOnOwnershipTermsTitle();
-                steps.finder_deal.validateAggregateMaximumOnAdvancesValue();
-                steps.finder_deal.validateFinderOwnershipValue();
-                steps.finder_deal.validateWcmOwnershipValue();
-                steps.finder_deal.clickOnTheFoundSubmissionsTitle();
-                steps.finder_deal.validateCreatorFoundSubmissionValue();
-                steps.finder_deal.validateSubmissionDateValue();
-                steps.finder_deal.validateWcmDecisionValue();
-                steps.finder_deal.validateWcmDecisionValue();
-                steps.finder_deal.validateFoundDealValue();
-                steps.finder_deal.validateFindersRecoupmentResponsabilityOverrideValue();
-            }
-        }
-    ];
-
-module.exports = {
-    commonFeatureTags: ['deals', "dealFinder"],
-    feature: feature,
-    beforeFeature: beforeFeature
+exports.beforeFeature = function () {
+    steps.login.itLogin();
 };
+
+exports.commonFeatureTags = ['deals', "finder"];
+
+exports.feature = [
+    {
+        name: "Create finder deals",
+        tags: ["create"],
+        steps: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            var percent = (Math.random() * 99 + 1).toFixed(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.deal.goToFinderDealTermsTabDetails();
+            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            steps.finderDeal.editGeneralTermsFinderDeal();
+            steps.finderDeal.validatePriorAwarenessNotificationTooltip();
+            steps.finderDeal.validateNotifyWithinThisNumberOfDaysTooltip();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays("0");
+            steps.finderDeal.checkErrorMessageNotifyWithinThisNumberOfDays();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays(number);
+            steps.finderDeal.validateSubmissionDecisionWithinNumberOfDaysTooltip();
+            steps.finderDeal.fillSubmissionDecisionWithinNumberOfDays("0");
+            steps.finderDeal.checkErrorMessageSubmissionDecisionWithinNumberOfDays();
+            steps.finderDeal.fillSubmissionDecisionWithinNumberOfDays(number);
+            steps.finderDeal.validateAssumedResponseTooltip();
+            steps.finderDeal.clickOnNoneAssumedResponse();
+            steps.finderDeal.validateWhoWillDraftDealsTooltip();
+            steps.finderDeal.clickOnFinderWhoWillDraftDeals();
+            steps.finderDeal.validateWhoHasControlToExerciseFutureOptionsTooltip();
+            steps.finderDeal.clickOnWcmWhoHasControlToExerciseFutureOptions();
+            steps.finderDeal.validateWhoIsResponsibleForAdvancesTooltip();
+            steps.finderDeal.clickOnFinderWhoIsResponsibleForAdvances();
+            steps.finderDeal.validateFindersRightToPursueTooltip();
+            steps.finderDeal.validateWcmRightToPursueTooltip();
+            steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
+        }
+    },
+    {
+        name: "Dirty check general terms finder deals",
+        tags: ["view"],
+        steps: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.deal.goToFinderDealTermsTabDetails();
+            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            steps.finderDeal.editGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnNoPriorAwarenessNotification();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays(number);
+            steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
+            steps.deal.goToGeneralDealTabDetail();
+            steps.editDealScope.editCancelModalDialogDirtyCheck();
+            steps.finderDeal.clickOnNoPriorAwarenessNotification();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays(number);
+            steps.finderDeal.confirmCancelChangesGeneralTermsFinderDeal();
+        }
+    },
+    {
+        name: "Validate negative scenarios finder deals",
+        tags: ["view"],
+        steps: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            var num = Math.floor(Math.random() * 500) + 1;
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.deal.goToFinderDealTermsTabDetails();
+            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            steps.finderDeal.editGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnYesPriorAwarenessNotification();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays(num);
+            steps.finderDeal.fillSubmissionDecisionWithinNumberOfDays(num);
+            steps.finderDeal.clickOnAcceptAssumedResponse();
+            steps.finderDeal.clickOnFinderWhoWillDraftDeals();
+            steps.finderDeal.clickOnWcmWhoHasControlToExerciseFutureOptions();
+            steps.finderDeal.clickOnFinderWhoIsResponsibleForAdvances();
+            steps.finderDeal.clickOnNoWcmRightToPursue();
+            steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            steps.finderDeal.editGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnNoPriorAwarenessNotification();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays(number);
+            steps.finderDeal.fillSubmissionDecisionWithinNumberOfDays(number);
+            steps.finderDeal.clickOnNoneAssumedResponse();
+            steps.finderDeal.clickOnWcmWhoWillDraftDeals();
+            steps.finderDeal.clickOnFinderWhoHasControlToExerciseFutureOptions();
+            steps.finderDeal.clickOnWcmWhoIsResponsibleForAdvances();
+            steps.finderDeal.clickOnYesWcmRightToPursue();
+            steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            steps.finderDeal.validatePriorAwarenessNotificationValue("No");
+            steps.finderDeal.validateNotifyWithinThisNumberOfDaysValue(number + " Days");
+            steps.finderDeal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Days");
+            steps.finderDeal.validateAssumedResponseValue("None");
+            steps.finderDeal.validateWhoWillDraftDealsValue("WCM");
+            steps.finderDeal.validateWhoHasControlToExerciseFutureOptionsValue("Finder");
+            steps.finderDeal.validateWhoIsResponsibleForAdvancesValue("WCM");
+            steps.finderDeal.validateWcmRightToPursueValue("Yes");
+        }
+    },
+    {
+        name: "Create terms by contract period finder deals",
+        tags: ["create"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.deal.goToFinderDealTermsTabDetails();
+            steps.finderDeal.validateTermsByContractPeriodFinderDealTitle();
+            steps.finderDeal.validateNumberOfTermsByContractPeriodFinderDealTitle("6");
+            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            steps.finderDeal.validateTooltipsForTermsByContractPeriodI(1, "Past");
+            steps.finderDeal.validateTooltipsForTermsByContractPeriodI(2, "Current");
+            steps.finderDeal.validateTooltipsForTermsByContractPeriodI(3, "Future Exercised");
+            steps.finderDeal.validateTooltipsForTermsByContractPeriodI(4, "Future Unexercised");
+            steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
+            steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalTooltip();
+            steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+            steps.finderDeal.validateMaximumFoundAgreementsWithPreApprovalTooltip();
+            steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            steps.finderDeal.validateFindersRecoupmentResponsabilityTooltip();
+            steps.finderDeal.fillFindersRecoupmentResponsability();
+            steps.finderDeal.validateNonSignedArtistMaximumAdvancesPayableTooltip();
+            steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
+            steps.finderDeal.validateSignedArtistMaximumAdvancesPayableTooltip();
+            steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
+            steps.finderDeal.validateAggregateMaximumAdvancesPayableTooltip();
+            steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            steps.finderDeal.validateAggregateMaximumOnAdvancesTooltip();
+            steps.finderDeal.fillAggregateMaximumOnAdvancesField();
+            steps.finderDeal.validateFindersOwnerhsipTooltip();
+            steps.finderDeal.fillFindersOwnershipField();
+            steps.finderDeal.validateWcmsOwnerhsipTooltip();
+            steps.finderDeal.fillWmcsOwnershipField();
+            steps.finderDeal.validateCreatorsFoundSubmissionsTooltip();
+            steps.finderDeal.selectRandomCreatorFoundSubmissionField();
+            steps.finderDeal.validateSubmissionDateTooltip();
+            steps.finderDeal.fillSubmissionDateField();
+            steps.finderDeal.validateWcmDecisionTooltip();
+            steps.finderDeal.selectRandomWcmDecisionDropDown();
+            steps.finderDeal.validateFoundDealTooltip();
+            steps.finderDeal.selectRandomValueFromFoundDealDropDown();
+            steps.finderDeal.validateFindersRecoupmentResponsabilityOverrideTooltip();
+            steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
+            steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
+        }
+    },
+    {
+        name: "Create and view finder deals terms by contract period",
+        tags: ["create"],
+        steps: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            var num = Math.floor(Math.random() * 500) + 1;
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.deal.goToFinderDealTermsTabDetails();
+            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
+            steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+            steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            steps.finderDeal.fillFindersRecoupmentResponsability();
+            steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
+            steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
+            steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            steps.finderDeal.fillAggregateMaximumOnAdvancesField();
+            steps.finderDeal.fillFindersOwnershipField();
+            steps.finderDeal.fillWmcsOwnershipField();
+            steps.finderDeal.selectRandomCreatorFoundSubmissionField();
+            steps.finderDeal.fillSubmissionDateField();
+            steps.finderDeal.selectRandomWcmDecisionDropDown();
+            steps.finderDeal.selectRandomValueFromFoundDealDropDown();
+            steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
+            steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode(2);
+            steps.finderDeal.clickOnFoundDealTermsTitle();
+            steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
+            steps.finderDeal.validateMaximumFoundAgreementsWithPreApprovalValue();
+            steps.finderDeal.validateFindersRecoupmentResponsabilityValue();
+            steps.finderDeal.validateNonSignedArtistMaximumAdvancesPayableValue();
+            steps.finderDeal.validateSignedArtistMaximumAdvancesPayableValue();
+            steps.finderDeal.validateAggregateMaximumAdvancesPayableValue();
+            steps.finderDeal.clickOnOwnershipTermsTitle();
+            steps.finderDeal.validateAggregateMaximumOnAdvancesValue();
+            steps.finderDeal.validateFinderOwnershipValue();
+            steps.finderDeal.validateWcmOwnershipValue();
+            steps.finderDeal.clickOnTheFoundSubmissionsTitle();
+            steps.finderDeal.validateCreatorFoundSubmissionValue();
+            steps.finderDeal.validateSubmissionDateValue();
+            steps.finderDeal.validateWcmDecisionValue();
+            steps.finderDeal.validateWcmDecisionValue();
+            steps.finderDeal.validateFoundDealValue();
+            steps.finderDeal.validateFindersRecoupmentResponsabilityOverrideValue();
+        }
+    },
+    {
+        name: "Dirty check finder deals terms by contract period",
+        tags: ["edit"],
+        steps: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            var num = Math.floor(Math.random() * 500) + 1;
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.deal.goToFinderDealTermsTabDetails();
+            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(3);
+            steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+            steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
+            steps.deal.goToGeneralDealTabDetail();
+            steps.editDealScope.editCancelModalDialogDirtyCheck();
+            steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            steps.finderDeal.confirmCancelChangesTermsByContractPeriodFinderDeal();
+        }
+    },
+    {
+        name: "Modular save finder deals",
+        tags: ["edit"],
+        steps: function () {
+            var number = Math.floor(Math.random() * 1000) + 1;
+            var num = Math.floor(Math.random() * 500) + 1;
+            var percent = (Math.random() * 100 + 1).toFixed(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1 " + i);
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.deal.goToFinderDealTermsTabDetails();
+            //general terms addition
+            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            steps.finderDeal.editGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnYesPriorAwarenessNotification();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays(num);
+            steps.finderDeal.fillSubmissionDecisionWithinNumberOfDays(num);
+            steps.finderDeal.clickOnAcceptAssumedResponse();
+            steps.finderDeal.clickOnFinderWhoWillDraftDeals();
+            steps.finderDeal.clickOnWcmWhoHasControlToExerciseFutureOptions();
+            steps.finderDeal.clickOnFinderWhoIsResponsibleForAdvances();
+            steps.finderDeal.clickOnNoWcmRightToPursue();
+            steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            steps.finderDeal.editGeneralTermsFinderDeal();
+            steps.finderDeal.clickOnNoPriorAwarenessNotification();
+            steps.finderDeal.fillNotifyWithinTheNumberOfDays(number);
+            steps.finderDeal.fillSubmissionDecisionWithinNumberOfDays(number);
+            steps.finderDeal.clickOnNoneAssumedResponse();
+            steps.finderDeal.clickOnWcmWhoWillDraftDeals();
+            steps.finderDeal.clickOnFinderWhoHasControlToExerciseFutureOptions();
+            steps.finderDeal.clickOnWcmWhoIsResponsibleForAdvances();
+            steps.finderDeal.clickOnYesWcmRightToPursue();
+            //terms by contract period addition
+            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
+            steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+            steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            steps.finderDeal.fillFindersRecoupmentResponsability();
+            steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
+            steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
+            steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            steps.finderDeal.fillAggregateMaximumOnAdvancesField();
+            steps.finderDeal.fillFindersOwnershipField();
+            steps.finderDeal.fillWmcsOwnershipField();
+            steps.finderDeal.selectRandomCreatorFoundSubmissionField();
+            steps.finderDeal.fillSubmissionDateField();
+            steps.finderDeal.selectRandomWcmDecisionDropDown();
+            steps.finderDeal.selectRandomValueFromFoundDealDropDown();
+            steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
+            //modular save
+            steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
+            //validations general terms
+            steps.finderDeal.validatePriorAwarenessNotificationValue("No");
+            steps.finderDeal.validateNotifyWithinThisNumberOfDaysValue(number + " Days");
+            steps.finderDeal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Days");
+            steps.finderDeal.validateAssumedResponseValue("None");
+            steps.finderDeal.validateWhoWillDraftDealsValue("WCM");
+            steps.finderDeal.validateWhoHasControlToExerciseFutureOptionsValue("Finder");
+            steps.finderDeal.validateWhoIsResponsibleForAdvancesValue("WCM");
+            steps.finderDeal.validateWcmRightToPursueValue("Yes");
+            //validations terms by contract period
+            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode(2);
+            steps.finderDeal.clickOnFoundDealTermsTitle();
+            steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
+            steps.finderDeal.validateMaximumFoundAgreementsWithPreApprovalValue();
+            steps.finderDeal.validateFindersRecoupmentResponsabilityValue();
+            steps.finderDeal.validateNonSignedArtistMaximumAdvancesPayableValue();
+            steps.finderDeal.validateSignedArtistMaximumAdvancesPayableValue();
+            steps.finderDeal.validateAggregateMaximumAdvancesPayableValue();
+            steps.finderDeal.clickOnOwnershipTermsTitle();
+            steps.finderDeal.validateAggregateMaximumOnAdvancesValue();
+            steps.finderDeal.validateFinderOwnershipValue();
+            steps.finderDeal.validateWcmOwnershipValue();
+            steps.finderDeal.clickOnTheFoundSubmissionsTitle();
+            steps.finderDeal.validateCreatorFoundSubmissionValue();
+            steps.finderDeal.validateSubmissionDateValue();
+            steps.finderDeal.validateWcmDecisionValue();
+            steps.finderDeal.validateWcmDecisionValue();
+            steps.finderDeal.validateFoundDealValue();
+            steps.finderDeal.validateFindersRecoupmentResponsabilityOverrideValue();
+        }
+    }
+];

@@ -7,109 +7,105 @@ var steps_path = _tf_config._system_.path_to_steps,
 require(steps_path + 'login');
 require(steps_path + 'dataUtilities');
 
-var beforeFeature = [
-            [steps.login.itLogin],
-    ],
+exports.beforeFeature = [
+    [steps.login.itLogin],
+];
 
-    feature = [
-        {
-            name: 'Navigate across every royalty utility menu item and check first form fields',
-            tags: ['royaltyUtilitiesSmokeTestNavigation', 'royaltyUtilitiesSmokeTestDataLoading', ],
-            steps: function () {
-                using(steps.dataUtilities, function () {
-                    this.go();
+exports.commonFeatureTags = ['royalties', 'royaltyUtilities', 'smokeTest'];
 
-                    this.openMenuBoardItem(0, 'Royalty Utilities');
+exports.feature = [
+    {
+        name: 'Navigate across every royalty utility menu item and check first form fields',
+        tags: ['royaltyUtilitiesSmokeTestNavigation', 'royaltyUtilitiesSmokeTestDataLoading', ],
+        steps: function () {
+            using(steps.dataUtilities, function () {
+                this.go();
 
-                    this.openMenuBoardItem(1, 'Company Code');
+                this.openMenuBoardItem(0, 'Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Company Code');
 
-                    this.openMenuBoardItemByIndex(3, 0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(3, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Statement Group');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Statement Group');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Royalty Period Data');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Royalty Period Data');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Royalty Processing Territory');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Royalty Processing Territory');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Society Royalty Allocation');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Society Royalty Allocation');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Income File Type');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Income File Type');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Nordic Processing');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Nordic Processing');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Deal Signing Territory');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Deal Signing Territory');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
 
-                    this.openMenuBoardItem(1, 'Company Set');
+                this.navigateBreadcrumb('Royalty Utilities');
 
-                    this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItem(1, 'Company Set');
 
-                    this.expectFormControlLabelToBeVisible(0);
-                    this.expectFormControlGroupDataNotToBeBlank(0);
+                this.openMenuBoardItemByIndex(2, 0);
 
-                    this.navigateBreadcrumb('Royalty Utilities');
-                });
-            }
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
+
+                this.navigateBreadcrumb('Royalty Utilities');
+            });
         }
-    ];
-
-module.exports = {
-    commonFeatureTags: ['royalties', 'royaltyUtilities', 'smokeTest'],
-    feature: feature,
-    beforeFeature: beforeFeature
-};
+    }
+];
