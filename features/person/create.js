@@ -1,13 +1,7 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../../helpers/random'),
+var random = require('../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
-
-require(steps_path + 'login');
-require(steps_path + 'person/person');
-require(steps_path + 'person/newPerson');
 
 exports.beforeFeature = [
     [steps.login.itLogin]

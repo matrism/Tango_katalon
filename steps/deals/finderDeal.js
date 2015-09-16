@@ -1,10 +1,7 @@
-"use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var steps_path = _tf_config._system_.path_to_steps;
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
-require(steps_path + "deals/finderDeal");
-require(pages_path + "deals/finderDeal");
+'use strict';
+
+var promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 steps.finderDeal = exports;
 

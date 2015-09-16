@@ -1,9 +1,4 @@
-"use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var steps_path = _tf_config._system_.path_to_steps;
-
-require(steps_path + "login");
-require(steps_path + "works/newWork");
+'use strict';
 
 var workData = {
     workId: "WW 015006249 00",

@@ -1,10 +1,7 @@
-"use strict";
-var steps_path = _tf_config._system_.path_to_steps;
-var pages_path = _tf_config._system_.path_to_pages;
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
-require(steps_path + "modal");
-require(pages_path + "modal");
+'use strict';
+
+var promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 steps.modal = exports;
 

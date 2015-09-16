@@ -1,18 +1,9 @@
 'use strict';
 
-var steps_path = '/..' + _tf_config._system_.path_to_steps,
-    fnutils = require('../../helpers/fnutils'),
+var fnutils = require('../../helpers/fnutils'),
     using = fnutils.using,
     random = require('../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
-
-require(steps_path + 'login');
-require(steps_path + 'person/person');
-require(steps_path + 'person/newPerson');
-require(steps_path + 'works/work');
-require(steps_path + 'works/newWork');
-require(steps_path + 'albums/newAlbum');
-require(steps_path + 'albums/album');
 
 exports.beforeFeature = [
     [steps.login.itLogin],

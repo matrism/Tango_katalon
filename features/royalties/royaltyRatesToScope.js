@@ -1,22 +1,4 @@
 'use strict';
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
-require(pages_path + "royalties/royaltyRates");
-require(steps_path + "royalties/royaltyRates");
-require(pages_path + "deals/deal");
-require(steps_path + "deals/deal");
-require(pages_path + "deals/createGeneral");
-require(steps_path + "deals/createGeneral");
-require(pages_path + "deals/createContractPeriod");
-require(steps_path + "deals/createContractPeriod");
-require(pages_path + "deals/createScope");
-require(steps_path + "deals/createScope");
-require(pages_path + "royalties/editRoyaltyRates");
-require(steps_path + "royalties/editRoyaltyRates");
-require(pages_path + "modal");
-require(steps_path + "modal");
-require(steps_path + "login");
 
 exports.beforeFeature = function () {
     steps.login.itLogin();

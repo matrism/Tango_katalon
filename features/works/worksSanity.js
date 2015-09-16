@@ -1,29 +1,9 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    leftPad = require('left-pad'),
+var leftPad = require('left-pad'),
     moment = require('moment'),
     random = require('../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
-
-require(steps_path + 'login');
-require(steps_path + 'person/person');
-require(steps_path + 'person/newPerson');
-require(steps_path + 'works/work');
-require(steps_path + 'works/newWork');
-require(steps_path + 'deals/dealRtp');
-require(steps_path + 'deals/deal');
-require(steps_path + 'deals/createContractPeriod');
-require(steps_path + 'deals/createScope');
-require(steps_path + 'works/newWorkRecordings');
-require(steps_path + 'works/workRecordings');
-require(steps_path + 'works/newWorkCopyrightCertificates');
-require(steps_path + 'works/workCopyrightCertificates');
-require(steps_path + 'deals/scopeDelivery');
-require(steps_path + 'works/workRights');
-require(steps_path + 'works/workRegistrationActivity');
-require(steps_path + 'works/workCwrPreview');
 
 exports.beforeFeature = [
     [steps.login.itLogin],

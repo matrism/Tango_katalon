@@ -1,6 +1,4 @@
-"use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-require(pages_path + "login");
+'use strict';
 
 steps.login = exports;
 

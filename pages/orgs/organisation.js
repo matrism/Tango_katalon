@@ -1,13 +1,11 @@
 "use strict";
 
-var pph = require('../../helpers/pph');
+var fs = require('fs'),
+    client = require('http-api-client'),
+    pph = require('../../helpers/pph'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
-require(pages_path + 'base');
-
-var client = require('http-api-client');
-var fs = require('fs');
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.organisation === undefined) {
 
 

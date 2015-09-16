@@ -1,11 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
-
 steps.newAlbum = exports;
-
-require(pages_path + 'base');
-require(pages_path + 'albums/newAlbum');
 
 exports.goToNewAlbumPage = function() {
 	it('Go to new album page', function() {

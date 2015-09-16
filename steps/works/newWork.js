@@ -1,17 +1,11 @@
 "use strict";
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    _ = require('lodash'),
+var _ = require('lodash'),
     random = require('../../helpers/random'),
     pph = require('../../helpers/pph'),
     promise = protractor.promise;
 
 steps.new_work = exports;
-
-require(pages_path + 'works/newWork');
-require(steps_path + 'works/work');
-require(steps_path + 'base');
 
 module.exports.goToNewWorkPage = function() {
 	it (

@@ -1,10 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
-
 steps.workCopyrightCertificates = exports;
-
-require(pages_path + 'works/workCopyrightCertificates');
 
 exports.validateUsLibraryOfCongressNumbers = function(values) {
     it('Validate US Library of Congress numbers (' + values.join(', ') + ')', function() {

@@ -1,9 +1,9 @@
-"use strict";
-var _ = require("lodash");
-var pages_path = _tf_config._system_.path_to_pages;
-var pph = require('../../helpers/pph');
-var random = require('../../helpers/random');
-require(pages_path + "base");
+'use strict';
+
+var _ = require('lodash'),
+    pph = require('../../helpers/pph'),
+    random = require('../../helpers/random');
+
 exports = module.exports = pages.new_work = new ftf.pageObject({
 	url: _tf_config.urls.app_url + "#/create/work"
 });

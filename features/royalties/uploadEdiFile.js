@@ -1,12 +1,5 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
-require(steps_path + 'login');
-require(steps_path + 'mainHeader');
-require(steps_path + 'royalties/uploadEdiFile');
-
 exports.beforeFeature = [
     [steps.login.itLogin],
 ];

@@ -1,8 +1,9 @@
-"use strict";
-var pph = require("../../helpers/pph");
-var random = require('../../helpers/random');
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+'use strict';
+
+var pph = require('../../helpers/pph'),
+    random = require('../../helpers/random'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 exports = module.exports = pages.work = new ftf.pageObject();
 module.exports.open = function(workId) {

@@ -1,8 +1,8 @@
-"use strict";
-var _ = require("lodash");
-var ExpectedConditions = protractor.ExpectedConditions;
-var pages_path = _tf_config._system_.path_to_pages;
-require(pages_path + "base");
+'use strict';
+
+var _ = require('lodash'),
+    ExpectedConditions = protractor.ExpectedConditions;
+
 if (pages.edit_deal_contract_period === undefined) {
     pages.edit_deal_contract_period = new ftf.pageObject({
 

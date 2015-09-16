@@ -1,11 +1,10 @@
 'use strict';
 
-var pageStep = require('../../helpers/basicPageStep'),
-    page = require(pages_path + 'orgs/organisation');
-
-var _ = require("lodash");
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+var _ = require('lodash'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions,
+    pageStep = require('../../helpers/basicPageStep'),
+    page = pages.organisation;
 
 steps.organisation = exports;
 

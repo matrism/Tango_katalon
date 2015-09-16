@@ -1,11 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
 steps.workRegistrationActivity = exports;
-
-require(pages_path + 'works/workRegistrationActivity');
 
 exports.validateActivitiesGroupRegistrationName = function(i, value) {
     it(

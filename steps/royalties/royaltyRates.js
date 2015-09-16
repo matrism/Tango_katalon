@@ -1,14 +1,10 @@
-var _ = require("lodash");
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-var promise = protractor.promise;
+var _ = require('lodash'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 hash.royaltyRates = {};
 hash.royaltyRates.RRNames = [];
 hash.royaltyRates.royaltyRateObjectsList = [];
-require(steps_path + "base");
-
-var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.royaltyRates = exports;
 

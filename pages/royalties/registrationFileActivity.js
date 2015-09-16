@@ -1,13 +1,10 @@
-"use strict";
+'use strict';
 
-var _ = require("lodash");
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+var _ = require('lodash'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 if (pages.registrationFileActivity === undefined) {
-    var pages_path = _tf_config._system_.path_to_pages;
-    require(pages_path + "base");
-
     pages.registrationFileActivity = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {

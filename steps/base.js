@@ -1,7 +1,9 @@
-"use strict";
-var pph = require("../helpers/pph");
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+'use strict';
+
+var pph = require('../helpers/pph'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
+
 steps.base = exports;
 
 exports.useEntityDataSlot = function(entityType, slotId) {

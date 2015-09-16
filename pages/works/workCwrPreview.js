@@ -1,8 +1,8 @@
 'use strict';
 
-var ExpectedConditions = protractor.ExpectedConditions,
-    leftPad = require('left-pad'),
+var leftPad = require('left-pad'),
     pph = require('../../helpers/pph'),
+    ExpectedConditions = protractor.ExpectedConditions,
     publisherRecordType = {
         regExp: /^(SPU|OPU)([0-9]{16})(.{2})(.{9})(.{40})(.{9})/,
         fields: [

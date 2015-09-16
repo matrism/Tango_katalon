@@ -2,8 +2,6 @@
 
 var pageStep = require('../../helpers/basicPageStep');
 
-require(pages_path + 'orgs/newOrganisation');
-
 steps.newOrganisation = exports;
 
 pageStep('Populate name');

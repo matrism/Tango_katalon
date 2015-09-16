@@ -1,7 +1,9 @@
-"use strict";
-var pph = require("../../helpers/pph");
-var ExpectedConditions = protractor.ExpectedConditions;
-var promise = protractor.promise;
+'use strict';
+
+var pph = require('../../helpers/pph'),
+    ExpectedConditions = protractor.ExpectedConditions,
+    promise = protractor.promise;
+
 if (pages.deal === undefined) {
     pages.deal = new ftf.pageObject({
         locators: {

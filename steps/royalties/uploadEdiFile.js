@@ -1,11 +1,8 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    pageStep = require('../../helpers/basicPageStep');
+var pageStep = require('../../helpers/basicPageStep');
 
 steps.uploadEdiFile = exports;
-require(pages_path + 'royalties/uploadEdiFile');
 
 pageStep('Select Processing Territory');
 pageStep('Select first royalty period');

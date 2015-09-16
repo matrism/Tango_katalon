@@ -1,30 +1,3 @@
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
-require(pages_path + "royalties/royaltyRates");
-require(steps_path + "royalties/royaltyRates");
-require(pages_path + "deals/deal");
-require(steps_path + "deals/deal");
-require(pages_path + "deals/createGeneral");
-require(steps_path + "deals/createGeneral");
-require(pages_path + "deals/createScope");
-require(steps_path + "deals/createScope");
-require(pages_path + "deals/createContractPeriod");
-require(steps_path + "deals/createContractPeriod");
-require(pages_path + "deals/editGeneral");
-require(steps_path + "deals/editGeneral");
-
-//require(pages_path + "incomeProvider");
-require(steps_path + "royalties/incomeProvider");
-
-require(pages_path + "orgs/organisation");
-require(steps_path + "orgs/organisation");
-
-require(pages_path + "searchSection");
-require(steps_path + "searchSection");
-
-require(steps_path + "login");
-
 exports.beforeFeature = function () {
     steps.login.itLogin();
     steps.searchSection.accessSavedOrganisationByName("BMI");

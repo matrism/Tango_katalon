@@ -1,11 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
 steps.newWorkRecordings = exports;
-
-require(pages_path + 'works/newWorkRecordings');
 
 exports.clickRecordingNameField = function(i) {
     it('Click recording name field for recording #' + (i + 1), function() {

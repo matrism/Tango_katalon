@@ -1,8 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../../helpers/random'),
+var random = require('../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
     baseWorksData,
     searchDataByExactTitleMatch,
@@ -11,9 +9,6 @@ var pages_path = _tf_config._system_.path_to_pages,
     searchDataByCreatorMatch2,
     searchDataByExactTitleAndCreator,
     searchDataByPartialTitleAndCreator;
-
-require(steps_path + 'login');
-require(steps_path + 'works/newWork');
 
 //randomId = function() {
 //return '7621435785647192';

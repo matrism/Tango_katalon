@@ -1,11 +1,7 @@
 'use strict';
 
-var steps_path = _tf_config._system_.path_to_steps,
-    fnutils = require('../../helpers/fnutils'),
+var fnutils = require('../../helpers/fnutils'),
     using = fnutils.using;
-
-require(steps_path + 'login');
-require(steps_path + 'dataUtilities');
 
 exports.beforeFeature = [
     [steps.login.itLogin],

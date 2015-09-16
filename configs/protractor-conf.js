@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path'),
+    glob = require('glob'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
@@ -17,6 +18,16 @@ global.steps = {};
 global.hash = {};
 
 require('../helpers/services_helper');
+
+setTimeout(function() {
+    glob.sync(__dirname + '/../pages/**/*.js').forEach(function(modulePath) {
+        require(modulePath);
+    });
+
+    glob.sync(__dirname + '/../steps/**/*.js').forEach(function(modulePath) {
+        require(modulePath);
+    });
+});
 
 systemConfig = global._tf_config._system_;
 
