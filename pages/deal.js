@@ -78,8 +78,9 @@ if (pages.deal === undefined) {
         },
 
         clickIncomeRatesLink: function () {
-
+            pages.base.scrollIntoView(    pages.deal.elems.incomeRates);
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.incomeRates));
             pages.deal.elems.incomeRates.click();
 
 

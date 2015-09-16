@@ -12,6 +12,10 @@ exports.rightsGroupContainers = function() {
     ));
 };
 
+exports.expectRightsDataToBeDisplayed = function() {
+    expect(exports.rightsGroupContainers().first().isDisplayed()).toBeGreaterThan(0);
+};
+
 exports.signingTerritoryCodeBinding = function(groupIndex) {
     return exports.rightsGroupContainers().get(groupIndex).element(by.binding(
         'signingTerritoryGroup.alphanumeric_code'

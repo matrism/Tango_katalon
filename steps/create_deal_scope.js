@@ -99,7 +99,6 @@ if (steps.create_deal_scope === undefined) {
 
         selectCountry: function () {
             it("Select country", function () {
-                pages.create_deal_scope.addTerritoryByTypingToScope();
                 pages.create_deal_scope.selectRandomCountry();
                 pages.create_deal_scope.waitForAjax();
             });
@@ -471,6 +470,7 @@ if (steps.create_deal_scope === undefined) {
         selectSubPublisherOverrideTerritoryPss: function (territory) {
             it("Select the sub publisher override territory pss ", function () {
                 pages.create_deal_scope.selectTheSubPublisherOverrideTerritoryPss(territory);
+                ;
             });
         },
 

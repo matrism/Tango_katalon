@@ -463,7 +463,13 @@ if (pages.create_deal_contract_period === undefined) {
         saveTheAdvanceAssumptions: function () {
             pages.create_deal_contract_period.elems.saveAssumptionsButton.click();
         }
-
+        ,
+        dealHeader: function () {
+          return $(".header-info");
+        },
+        waitForDealLoadToFinish: function () {
+            browser.wait(ExpectedConditions.visibilityOf(this.dealHeader()));
+        }
     });
 }
 

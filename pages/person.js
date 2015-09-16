@@ -1,6 +1,7 @@
 'use strict';
 
 var pages_path = _tf_config._system_.path_to_pages;
+var ExpectedConditions = protractor.ExpectedConditions;
 
 exports = module.exports = pages.person = new ftf.pageObject();
 
@@ -25,11 +26,31 @@ exports.findId = function() {
 };
 
 exports.internalIpiNumberBinding = function() {
-    return element(by.binding('person.pristine.master_data.primary_name.internal_ipi_number'));
+    return $(".e2e-primary-name-internal-ipi>div>strong");
 };
+exports.suisaIPINumber = function() {
+    return $(".e2e-primary-name-suisa-ipi>div>strong");
+};
+exports.alternativeNameElement = function() {
+    return $(".e2e-alternative-name-full>div>strong");
+};
+
 
 exports.internalIpiNumber = function() {
     var element = exports.internalIpiNumberBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
+exports.getSuisaIPI = function() {
+    browser.wait(ExpectedConditions.visibilityOf(exports.suisaIPINumber()));
+    var element = exports.suisaIPINumber();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
+exports.getAlternativeName = function() {
+    var element = exports.alternativeNameElement();
     pages.base.scrollIntoView(element);
     return element.getText();
 };

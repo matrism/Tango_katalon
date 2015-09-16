@@ -7,6 +7,12 @@ steps.workCwrPreview = exports;
 
 require(pages_path + 'workCwrPreview');
 
+exports.expectCwrDataToBeDisplayed = function() {
+    it('Expect CWR data to be displayed', function() {
+        pages.workCwrPreview.expectCwrDataToBeDisplayed();
+    });
+};
+
 exports.searchForRegistrationRecipient = function(name) {
     it('Search for Registration Recipient (' + name + ')', function() {
         pages.workCwrPreview.searchForRegistrationRecipient(name);

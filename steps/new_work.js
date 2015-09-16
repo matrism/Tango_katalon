@@ -847,11 +847,11 @@ module.exports.createBasicWork = function(data, more) {
     more = more || {};
 
     more.skip = more.skip || {};
-    //more.skip.alternateWorkTitles = true;
-    //more.skip.assetType = true;
-    //more.skip.workOrigin = true;
-    //more.skip.creationDate = true;
-    //more.skip.deliveryDate = true;
+    more.skip.alternateWorkTitles = true;
+    more.skip.assetType = true;
+    more.skip.workOrigin = true;
+    more.skip.creationDate = true;
+    more.skip.deliveryDate = true;
 
     describe (
         "Create basic work", function() {

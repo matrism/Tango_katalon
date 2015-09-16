@@ -266,7 +266,9 @@ if (steps.editRoyaltyRates === undefined) {
         saveRateSet: function () {
             it("Save current Rate Set", function () {
 
+
                 pages.royaltyRates.clickDoneButtonForRRSet();
+                pages.royaltyRates.waitForAjax();
                // browser.pause();
             });
         },

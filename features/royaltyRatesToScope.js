@@ -64,7 +64,7 @@ var beforeFeature = function () {
     },
         {
             name: "As a user I want to edit single rate from Scope ",
-            tags: ['rateToScopeEdit', 'broken'],
+            tags: ['rateToScopeEdit'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -118,7 +118,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to edit multiple  rate from Scope ",
-            tags: ['rateToScopeEdit2', 'broken'],
+            tags: ['rateToScopeEdit2'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -181,7 +181,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to dirty check  single rate edit from Scope ",
-            tags: ['dirtyCheckRR1', 'broken'],
+            tags: ['dirtyCheckRR1'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -236,7 +236,7 @@ var beforeFeature = function () {
         },
         {
             name: "As a user I want to dirty check  multiple  rate edit from Scope ",
-            tags: ['dirtyCheckRR2', 'broken'],
+            tags: ['dirtyCheckRR2'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -301,7 +301,7 @@ var beforeFeature = function () {
         },
         {
             name: "As a user I want to dirty check  single rate edit from Scope by navigating away",
-            tags: ['dirtyCheckRR3', 'broken'],
+            tags: ['dirtyCheckRR3'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -363,7 +363,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to dirty check  multiple rate edit from Scope by navigating away",
-            tags: ['dirtyCheckRR4', 'broken'],
+            tags: ['dirtyCheckRR4'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -490,7 +490,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to validate decimal places on create",
-            tags: ['decimal', 'broken'],
+            tags: ['decimal'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -518,7 +518,7 @@ var beforeFeature = function () {
         },
         {
             name: "As a user I want to validate decimal places on create",
-            tags: ['decimalEdit', 'broken'],
+            tags: ['decimalEdit'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -549,7 +549,7 @@ var beforeFeature = function () {
 
         //DIRTY CHECK FEATURES
         {   name: "As a User I want to perform Dirty Check on RR Edit Pages",
-            tags: ['dirtyRRCheck5', 'broken'],
+            tags: ['dirtyRRCheck5'],
             steps:function()
             {
 
@@ -614,7 +614,7 @@ var beforeFeature = function () {
         },
 
         {   name: "As a User I want to perform Dirty Check (by navigating)  on RR Edit Pages",
-            tags: ['dirtyRRCheck6', 'broken'],
+            tags: ['dirtyRRCheck6'],
             steps: function()
             {
 
@@ -689,7 +689,7 @@ var beforeFeature = function () {
 
         {
             name:"test input fields",
-            tags:['inputsTest', 'broken'],
+            tags:['inputsTest'],
             steps:function()
             {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -699,7 +699,7 @@ var beforeFeature = function () {
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.openAllRRFields();
                 steps.royaltyRates.setFieldsValueTest("5.5555");
-                steps.royaltyRates.test();
+
 
             }
 
