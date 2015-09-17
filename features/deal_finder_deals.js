@@ -330,6 +330,7 @@ var beforeFeature = function () {
                 steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
                 steps.base.scrollIntoView("General header ", pages.deal.elems.generalHeader);
                 steps.deal.goToGeneralDealTabDetail();
+                steps.base.scrollIntoView("Cancel modal ", pages.edit_deal_scope.elems.cancelDeletePssModalDialog);
                 steps.edit_deal_scope.editCancelModalDialogDirtyCheck();
                 steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
                 steps.finder_deal.confirmCancelChangesTermsByContractPeriodFinderDeal();
