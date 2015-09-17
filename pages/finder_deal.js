@@ -438,6 +438,7 @@ if (pages.finder_deal === undefined) {
 
         clickOnTheCancelTermsByContractPeriodTermsFinderDeal: function () {
             pages.finder_deal.elems.cancelTermsByContractPeriodFinderDeal.click();
+            pages.finder_deal.waitForAjax();
         },
 
         confirmCancelChangesModalDialog: function () {
