@@ -20,9 +20,7 @@ var beforeFeature = [
                 steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
                 steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
 
-                steps.uploadEdiFile.selectProcessingTerritory('Brazil');
-                steps.uploadEdiFile.selectFirstRoyaltyPeriod();
-                steps.base.waitForAjax();
+                steps.uploadEdiFile.selectProcessingTerritory('Chile');
 
                 steps.uploadEdiFile.selectIncomeProvider('FABER MUSIC LTD');
                 steps.uploadEdiFile.selectFileFormat('FABER SALES');
@@ -33,7 +31,7 @@ var beforeFeature = [
                 steps.uploadEdiFile.setExpectedFileAmountCurrency('GBP');
                 steps.uploadEdiFile.setExchangeRate(1);
                 steps.uploadEdiFile.clickCreateButton();
-                steps.uploadEdiFile.waitForUploadToComplete();
+
                 steps.uploadEdiFile.expectToBeRedirectedToFileUploadHistory();
                 steps.uploadEdiFile.expectUploadedFileToBeListed();
                 steps.uploadEdiFile.openUploadedFileBlind();
