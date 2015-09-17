@@ -459,7 +459,6 @@ if (steps.finder_deal === undefined) {
         confirmCancelChangesTermsByContractPeriodFinderDeal: function () {
             it("Confirm cancel changes terms by contract period finder deal ", function () {
                 pages.finder_deal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
-                steps.base.scrollIntoView("Confirm cancel ", pages.finder_deal.elems.yesCancelChangesModalDialog);
                 pages.finder_deal.confirmCancelChangesModalDialog();
             });
         },
