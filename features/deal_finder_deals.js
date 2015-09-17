@@ -332,6 +332,7 @@ var beforeFeature = function () {
                 steps.deal.goToGeneralDealTabDetail();
                 steps.edit_deal_scope.editCancelModalDialogDirtyCheck();
                 steps.finder_deal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+                steps.base.scrollIntoView("Cancel changes ", pages.finder_deal.elems.cancelTermsByContractPeriodFinderDeal);
                 steps.finder_deal.confirmCancelChangesTermsByContractPeriodFinderDeal();
             }
         },
