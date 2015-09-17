@@ -99,6 +99,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectCountry: function () {
             it("Select country", function () {
+                pages.create_deal_scope.addTerritoryByTypingToScope();
                 pages.create_deal_scope.selectRandomCountry();
                 pages.create_deal_scope.waitForAjax();
             });
