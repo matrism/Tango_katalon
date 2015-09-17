@@ -19,9 +19,6 @@ global.hash = {};
 
 require('../helpers/services_helper');
 
-setTimeout(function() {
-});
-
 systemConfig = global._tf_config._system_;
 
 if (!systemConfig.noReport) {
