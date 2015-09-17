@@ -15,7 +15,7 @@ if (pages.deal === undefined) {
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
-            finderDealsTitle: {css: "div[data-ng-form='finderDealsForm'] h3"}
+            finderDealsTitle: {css: "div[data-ng-form='finderDealsForm']"}
         },
 
 
