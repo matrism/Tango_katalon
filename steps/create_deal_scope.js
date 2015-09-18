@@ -153,9 +153,9 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        clickOnAddPublisherShareSet: function () {
+        clickOnAddPublisherShareSet: function(options) {
             it("Open publisher share set form", function () {
-                pages.create_deal_scope.clickOnAddPublisherShareSetLink();
+                pages.create_deal_scope.clickOnAddPublisherShareSetLink(options);
                 pages.create_deal_scope.waitForAjax();
             });
         },

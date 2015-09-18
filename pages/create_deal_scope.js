@@ -281,18 +281,18 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        clickOnAddPublisherShareSetLink: function () {
-            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
+        clickOnAddPublisherShareSetLink: function(options) {
+            var linkElement = pages.create_deal_scope.elems.addPublisherShareSetLink;
+
+            options = options || {};
+
+            if(options.scrollIntoView) {
+                pages.base.scrollIntoView(linkElement);
+            }
+
+            linkElement.click();
+
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
-            //var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
-            //
-            //pages.base.scrollIntoView(element);
-            //
-            //return element.click().then(function() {
-            //    return browser.wait(ExpectedConditions.visibilityOf(
-            //        pages.create_deal_scope.elems.firstPublisherNameField
-            //    ));
-            //});
         },
 
         publisherShareChainContainers: function () {
