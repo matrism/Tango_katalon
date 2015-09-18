@@ -1,10 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
-
 steps.album = exports;
-
-require(pages_path + 'albums/album');
 
 exports.expectAlbumHeaderToBeVisible = function() {
     it('Expect album header to be visible', function() {

@@ -1,8 +1,8 @@
-"use strict";
-var _ = require("lodash");
-var ExpectedConditions = protractor.ExpectedConditions;
-var pages_path = _tf_config._system_.path_to_pages;
-require(pages_path + "base");
+'use strict';
+
+var _ = require('lodash'),
+    ExpectedConditions = protractor.ExpectedConditions;
+
 if (pages.create_deal_general === undefined) {
     pages.create_deal_general = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",

@@ -1,11 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
 steps.workRecordings = exports;
-
-require(pages_path + 'works/workRecordings');
 
 exports.validateRecordingNames = function(values) {
     it('Validate recording names', function() {

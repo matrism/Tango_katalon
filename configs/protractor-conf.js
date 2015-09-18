@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path'),
+    glob = require('glob'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
@@ -157,9 +158,14 @@ config = {
 
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
-        global.pages_path = _tf_config._system_.path_to_pages;
-        global.steps_path = _tf_config._system_.path_to_steps;
 
+        glob.sync(__dirname + '/../pages/**/*.js').forEach(function(modulePath) {
+            require(modulePath);
+        });
+
+        glob.sync(__dirname + '/../steps/**/*.js').forEach(function(modulePath) {
+            require(modulePath);
+        });
     },
     onCleanUp: function(statusCode) {
         /*if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {

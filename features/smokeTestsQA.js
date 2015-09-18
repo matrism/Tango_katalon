@@ -1,31 +1,6 @@
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../helpers/random'),
+var random = require('../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
     config = require('../configs/protractor-conf');
-
-require(pages_path + "deals/deal");
-require(steps_path + "deals/deal");
-require(pages_path + "deals/createGeneral");
-require(steps_path + "deals/createGeneral");
-require(pages_path + "deals/createScope");
-require(steps_path + "deals/createScope");
-require(pages_path + "deals/createContractPeriod");
-require(steps_path + "deals/createContractPeriod");
-require(pages_path + "deals/editGeneral");
-require(steps_path + "deals/editGeneral");
-require(pages_path + "deals/editScope");
-require(steps_path + "deals/editScope");
-require(steps_path + "login");
-require(steps_path + "base");
-require(steps_path + "person/newPerson");
-require(pages_path + "person/newPerson");
-require(steps_path + "person/person");
-require(pages_path + "person/person");
-require(steps_path + "works/newWork");
-require(steps_path + "orgs/organisation");
-require(pages_path + "orgs/organisation");
-require(steps_path + "searchSection");
 
 var workData = {
     workId: "WW 015006249 00",

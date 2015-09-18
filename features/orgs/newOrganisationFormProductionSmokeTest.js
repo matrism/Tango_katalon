@@ -1,10 +1,5 @@
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../../helpers/random'),
+var random = require('../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
-
-require(steps_path + 'mainHeader');
-require(steps_path + 'orgs/newOrganisation');
 
 exports.beforeFeature = function () {
     steps.login.itLogin();

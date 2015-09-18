@@ -1,11 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
 steps.scopeDelivery = exports;
-
-require(pages_path + 'deals/scopeDelivery');
 
 exports.deliverWork = function() {
     it('Click "Deliver Work to Deal / Scope" button', function() {

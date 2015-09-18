@@ -1,14 +1,9 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
 steps.person = exports;
 
 hash.personSlots = {};
 hash.currentPersonSlot = null;
-
-require(pages_path + 'person/person');
 
 exports.usePersonSlot = function (i) {
     it('Use person slot #' + (i + 1), function () {

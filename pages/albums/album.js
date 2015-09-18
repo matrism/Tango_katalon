@@ -1,9 +1,5 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
-
-require(pages_path + 'base');
-
 pages.album = exports;
 
 exports.albumHeader = function() {

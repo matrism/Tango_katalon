@@ -1,14 +1,8 @@
 'use strict';
 
-var _ = require("lodash"); var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    ExpectedConditions = protractor.ExpectedConditions,
-    promise = protractor.promise;
-
-require(pages_path + "person/newPerson");
-require(steps_path + "person/newPerson");
-require(pages_path + "person/person");
-require(steps_path + "base");
+var _ = require('lodash'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 hash.royaltyRates = {};
 hash.royaltyRates.RRNames = [];

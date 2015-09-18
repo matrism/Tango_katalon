@@ -1,8 +1,8 @@
-"use strict";
-var _ = require("lodash");
-var ExpectedConditions = protractor.ExpectedConditions;
-var pages_path = _tf_config._system_.path_to_pages;
-require(pages_path + "base");
+'use strict';
+
+var _ = require('lodash'),
+    ExpectedConditions = protractor.ExpectedConditions;
+
 if (pages.edit_deal_scope === undefined) {
     pages.edit_deal_scope = new ftf.pageObject({
         locators: {

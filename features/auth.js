@@ -1,11 +1,4 @@
-"use strict";
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
-
-require(pages_path + "login");
-require(pages_path + "base");
-require(steps_path + "login");
-require(steps_path + "base");
+'use strict';
 
 exports.beforeFeature = [
     [steps.login.itLogin]

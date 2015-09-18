@@ -1,6 +1,6 @@
-var _ = require("lodash");
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+var _ = require('lodash'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 steps.searchSection = exports;
 

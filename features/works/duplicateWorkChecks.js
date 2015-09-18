@@ -1,13 +1,7 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../../helpers/random'),
+var random = require('../../helpers/random'),
     randomId = random.id();
-
-require(steps_path + 'login');
-require(steps_path + 'works/newWork');
-require(steps_path + 'works/duplicateWorkChecks');
 
 exports.beforeFeature = [
     [steps.login.itLogin]

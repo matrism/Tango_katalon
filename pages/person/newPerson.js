@@ -12,16 +12,15 @@
 //pages.royaltyRates = new ftf.pageObject({
 //    url: _tf_config.urls.app_url + "#/create/deal",
 //    locators: {},
-"use strict";
-var _ = require("lodash"),
-    pph = require('../../helpers/pph');
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+'use strict';
+
+var _ = require('lodash'),
+    pph = require('../../helpers/pph'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
+
 if (pages.newPerson === undefined) {
 
-
-    var pages_path = _tf_config._system_.path_to_pages;
-    require(pages_path + "base");
 
     pages.newPerson = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/person",

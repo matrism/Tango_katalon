@@ -1,13 +1,12 @@
-"use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var moment = require("moment");
-var pad = require("left-pad");
-var pph = require("../../helpers/pph");
-var random = require("../../helpers/random");
-var _ = require('lodash');
-var promise = protractor.promise;
+'use strict';
 
-require(pages_path + "works/work");
+var _ = require('lodash'),
+    pad = require('left-pad'),
+    moment = require('moment'),
+    pph = require('../../helpers/pph'),
+    random = require('../../helpers/random'),
+    promise = protractor.promise;
+
 steps.work = exports;
 
 exports.goToWorkPage = function (data, key) {

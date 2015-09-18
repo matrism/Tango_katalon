@@ -1,10 +1,10 @@
 'use strict';
 
-var ExpectedConditions = protractor.ExpectedConditions,
-    path = require('path'),
+var path = require('path'),
     fs = require('fs-extra'),
     random = require('../../helpers/random'),
     tmp = require('tmp'),
+    ExpectedConditions = protractor.ExpectedConditions,
     testData = {};
 
 function PageElement(locator) {

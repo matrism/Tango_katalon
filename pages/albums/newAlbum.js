@@ -1,10 +1,7 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    pph = require('../../helpers/pph'),
+var pph = require('../../helpers/pph'),
     ExpectedConditions = protractor.ExpectedConditions;
-
-require(pages_path + 'base');
 
 exports = module.exports = new ftf.pageObject({
     url: _tf_config.urls.app_url + "#/create/album"

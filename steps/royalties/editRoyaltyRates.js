@@ -1,9 +1,10 @@
-var _ = require("lodash");
-var promise = protractor.promise;
+var _ = require('lodash'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
+
 hash.royaltyRates = {};
 hash.royaltyRates.RRNames = [];
 hash.royaltyRates.royaltyRateObjectsList = [];
-var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.editRoyaltyRates = exports;
 

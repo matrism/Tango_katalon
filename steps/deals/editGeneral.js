@@ -1,11 +1,8 @@
-"use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var steps_path = _tf_config._system_.path_to_steps;
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
-require(pages_path + "deals/editGeneral");
+'use strict';
 
-var internalContacts = [];
+var promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions,
+    internalContacts = [];
 
 steps.editDealGeneral = exports;
 

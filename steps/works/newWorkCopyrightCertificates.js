@@ -1,10 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
-
 steps.newWorkCopyrightCertificates = exports;
-
-require(pages_path + 'works/newWorkCopyrightCertificates');
 
 exports.enterRegistrationDate = function(i, value) {
     it('Enter date of registration #' + (i + 1) + ' (' + value + ')', function() {

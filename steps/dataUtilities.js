@@ -1,11 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
-
 steps.dataUtilities = exports;
-
-require(pages_path + 'base');
-require(pages_path + 'dataUtilities');
 
 exports.go = function() {
 	it('Go to data utilities page', function() {

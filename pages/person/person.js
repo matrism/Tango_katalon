@@ -1,11 +1,8 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages;
 var ExpectedConditions = protractor.ExpectedConditions;
 
 exports = module.exports = pages.person = new ftf.pageObject();
-
-require(pages_path + 'base');
 
 exports.open = function(personId) {
     if(!personId) {

@@ -1,8 +1,10 @@
-"use strict";
-var _ = require("lodash");
-var pph = require("../helpers/pph");
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+'use strict';
+
+var _ = require('lodash'),
+    pph = require('../helpers/pph'),
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
+
 exports = module.exports = pages.base = new ftf.pageObject ({
 	locators: {
 		logout_link: { id: "DSP-LOGOUT" }

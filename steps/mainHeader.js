@@ -4,8 +4,6 @@ var pageStep = require('../helpers/basicPageStep');
 
 steps.mainHeader = exports;
 
-require(pages_path + 'mainHeader');
-
 exports.goToLink = function (link) {
     it('Go to link in main header (' + link + ')', function() {
         pages.mainHeader.goToLink(link);

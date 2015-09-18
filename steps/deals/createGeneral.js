@@ -1,13 +1,9 @@
-"use strict";
-var pages_path = _tf_config._system_.path_to_pages;
-var steps_path = _tf_config._system_.path_to_steps;
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+'use strict';
+
+var promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 steps.createDealGeneral = exports;
-
-require(pages_path + "deals/createGeneral");
-require(steps_path + "base");
 
 exports.goToNewDealPage = function () {
     it("Go to New Deal page", function () {
