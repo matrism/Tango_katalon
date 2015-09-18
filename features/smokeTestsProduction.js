@@ -101,7 +101,6 @@ var beforeFeature = function () {
             tags: ['addDealScopeProductionSmokeTest'],
             steps: function () {
                 steps.searchSection.accessSavedDealByNumber("3");
-                steps.create_deal_contract_period.waitForDealToLoad();
                 steps.create_deal_contract_period.selectContractPeriodNumberI(1);
                 steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
                 steps.create_deal_scope.itAddPublisherShareWithSocietyAwardCredit();
