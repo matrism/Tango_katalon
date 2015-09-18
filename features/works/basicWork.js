@@ -35,7 +35,7 @@ exports.beforeFeature = [
 	[steps.login.itLogin]
 ];
 
-module.commonFeatureTags = ['works', 'broken'];
+module.commonFeatureTags = ['works', 'broken', 'smoke'];
 
 exports.feature = [
     {

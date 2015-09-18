@@ -11,12 +11,12 @@ exports.beforeFeature = [
     [steps.login.itLogin],
 ];
 
-exports.commonFeatureTags = ['royalties', 'royaltyUtilities', 'smokeTest'];
+exports.commonFeatureTags = ['royalties', 'royaltyUtilities', 'smoke'];
 
 exports.feature = [
     {
         name: 'Navigate across every royalty utility menu item and check first form fields',
-        tags: ['royaltyUtilitiesSmokeTestNavigation', 'royaltyUtilitiesSmokeTestDataLoading', ],
+        tags: [],
         steps: function () {
             using(steps.dataUtilities, function () {
                 this.go();

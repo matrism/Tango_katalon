@@ -13,7 +13,7 @@ exports.beforeFeature = [
     [steps.login.itLogin]
 ];
 
-exports.commonFeatureTags = ['works', 'workDuplicateChecks', 'broken'];
+exports.commonFeatureTags = ['works', 'workDuplicateChecks', 'regression', 'broken'];
 
 exports.feature = [
     {

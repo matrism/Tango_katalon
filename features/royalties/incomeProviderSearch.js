@@ -21,7 +21,7 @@ exports.beforeFeature = function () {
     //steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
 };
 
-exports.commonFeatureTags = ['royalties', 'incomeProvider', 'broken'];
+exports.commonFeatureTags = ['royalties', 'incomeProvider', 'sanity', 'broken'];
 
 exports.feature = [
     {
@@ -59,7 +59,7 @@ exports.feature = [
     },
     {
         name: "I would like to check positive case of income provider validation rules",
-        tags: ["IP3"],
+        tags: ["validation"],
         steps: function () {
             steps.incomeProvider.editValidRoyaltySetPair(
                 [
@@ -77,7 +77,7 @@ exports.feature = [
     },
     {
         name: "I would like to check negative case of income provider validation rules upon editing a deal",
-        tags: ["IP4"],
+        tags: ["validation"],
         steps: function () {
             steps.incomeProvider.editInvalidRoyaltySetPair(
                 [

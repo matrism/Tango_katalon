@@ -15,12 +15,12 @@ exports.beforeFeature = [
     [steps.login.itLogin],
 ];
 
-exports.commonFeatureTags = ['royalties', 'incomeProvider', 'smokeTest'];
+exports.commonFeatureTags = ['royalties', 'incomeProvider', 'smoke'];
 
 exports.feature = [
     {
         name: 'Create an organisation with an income provider role and then edit it',
-        tags: [],
+        tags: ['create', 'edit'],
         steps: function () {
             steps.mainHeader.createNewRecord('Organisation');
 

@@ -12,7 +12,7 @@ exports.beforeFeature = [
     [steps.login.itLogin]
 ];
 
-exports.commonFeatureTags = ['works', 'workDefineCompositeShell'];
+exports.commonFeatureTags = ['works', 'workCompositeShell', 'regression'];
 
 exports.feature = [
     {

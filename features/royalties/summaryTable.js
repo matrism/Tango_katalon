@@ -26,8 +26,8 @@ exports.commonFeatureTags = ['royalties', 'royaltySummary', 'broken'];
 
 exports.feature = [
     {
-        name: "As a user I want to view RR summary Table",
-        tags: ["RRSummary"],
+        name: "View Royalty Rates summary table",
+        tags: ['view'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -139,8 +139,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to view filtered RR summary Table",
-        tags: ["filterRRSummary"],
+        name: "View filtered Royalty Rates summary table",
+        tags: ["'view'"],
         steps: function () {
             //steps.searchSection.accessSavedDealByNumber("209550");
             steps.searchSection.accessSavedDealByNumber("206988");
@@ -152,8 +152,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to view update RR Summarry",
-        tags: ["updateRRSummary"],
+        name: "View update Royalty Rates Summarry",
+        tags: ["view"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();

@@ -22,12 +22,12 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['royalties'];
+exports.commonFeatureTags = ['royalties', 'sanity'];
 
 exports.feature = [
     {
-        name: "As a user I want to assign single rate to Scope on creation",
-        tags: ['rateToScope1'],
+        name: "Assign single rate to Scope on creation",
+        tags: ['create'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -50,8 +50,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to edit single rate from Scope ",
-        tags: ['rateToScopeEdit'],
+        name: "Edit single rate from Scope ",
+        tags: ['edit'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -89,8 +89,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to edit multiple  rate from Scope ",
-        tags: ['rateToScopeEdit2'],
+        name: "Edit multiple  rate from Scope ",
+        tags: ['edit'],
         steps: function () {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -138,8 +138,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to dirty check  single rate edit from Scope ",
-        tags: ['dirtyCheckRR1'],
+        name: "Dirty check  single rate edit from Scope ",
+        tags: ['validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -175,8 +175,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to dirty check  multiple  rate edit from Scope ",
-        tags: ['dirtyCheckRR2'],
+        name: "Dirty check  multiple  rate edit from Scope ",
+        tags: ['validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -224,8 +224,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to dirty check  single rate edit from Scope by navigating away",
-        tags: ['dirtyCheckRR3'],
+        name: "Dirty check  single rate edit from Scope by navigating away",
+        tags: ['edit', 'validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -268,8 +268,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to dirty check  multiple rate edit from Scope by navigating away",
-        tags: ['dirtyCheckRR4'],
+        name: "Dirty check multiple rate edit from Scope by navigating away",
+        tags: ['edit', 'validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -325,8 +325,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to assign multiple rates to Scope on creation",
-        tags: ['ratesToScope2', 'broken'],
+        name: "Assign multiple rates to Scope on creation",
+        tags: ['create', 'broken'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -367,8 +367,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to validate decimal places on create",
-        tags: ['decimal'],
+        name: "Validate decimal places on create",
+        tags: ['create', 'validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -392,8 +392,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a user I want to validate decimal places on create",
-        tags: ['decimalEdit'],
+        name: "Validate decimal places on create",
+        tags: ['validation', 'edit'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -420,8 +420,8 @@ exports.feature = [
     },
     {
         //DIRTY CHECK FEATURES
-        name: "As a User I want to perform Dirty Check on RR Edit Pages",
-        tags: ['dirtyRRCheck5'],
+        name: "Perform Dirty Check on RR Edit Pages",
+        tags: ['edit', 'validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -465,8 +465,8 @@ exports.feature = [
         }
     },
     {
-        name: "As a User I want to perform Dirty Check (by navigating)  on RR Edit Pages",
-        tags: ['dirtyRRCheck6'],
+        name: "Dirty Check (by navigating) on RR Edit Pages",
+        tags: ['edit', 'validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -509,8 +509,8 @@ exports.feature = [
         }
     },
     {
-        name: "test input fields",
-        tags: ['inputsTest'],
+        name: "Test royalty input fields",
+        tags: ['create', 'validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();

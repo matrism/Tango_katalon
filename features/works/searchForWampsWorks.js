@@ -10,7 +10,7 @@ exports.beforeFeature = [
     [steps.login.itLogin]
 ];
 
-exports.commonFeatureTags = ['works', 'search-for-wamps-works'];
+exports.commonFeatureTags = ['works', 'smoke'];
 
 exports.feature = [
     {

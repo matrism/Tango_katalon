@@ -24,11 +24,11 @@ exports.beforeFeature = function () {
     steps.createDealScope.itAddSimpleScope();
 };
 
-exports.commonFeatureTags = ['royalties', 'broken'];
+exports.commonFeatureTags = ['royalties', 'smoke', 'broken'];
 
 exports.feature = [
     {
-        name: "Create Royalty Rates Set within a deal",
+        name: "Create Royalty Rates Set",
         tags: ['create'],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
@@ -37,8 +37,8 @@ exports.feature = [
         }
     },
     {
-        name: "Royalty Rate Set fields",
-        tags: ["rr2"],
+        name: "Create a complex Royalty Rate Set",
+        tags: ["create", 'validation'],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.clearRoyaltyRateInput();
@@ -60,8 +60,8 @@ exports.feature = [
         }
     },
     {
-        name: "Royalty Rate Set fields",
-        tags: ["rr3"],
+        name: "Check Royalty Rate Set Effective Start Date Validation",
+        tags: ["validation"],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.inspectEffectiveStartDateArea();
@@ -79,8 +79,8 @@ exports.feature = [
         }
     },
     {
-        name: "Royalty Rate Set fields",
-        tags: ["rr4"],
+        name: "Check Royalty Rate Set Rate Applicaiton Method Change",
+        tags: ["validaiton"],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.inspectEffectiveStartDateArea();
@@ -93,8 +93,8 @@ exports.feature = [
         }
     },
     {
-        name: "Royalty Rate Set save deal mode",
-        tags: ["rr5"],
+        name: "Royalty Rate Set save deal",
+        tags: ["create", 'edit'],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
@@ -114,7 +114,7 @@ exports.feature = [
     },
     {
         name: "Royalty Rate Set can be saved with errors",
-        tags: ["rr6"],
+        tags: ['create', 'validation'],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
@@ -133,7 +133,7 @@ exports.feature = [
     },
     {
         name: "Royalty Rate Set can be saved from other deal modules",
-        tags: ["saveFromRRModule"],
+        tags: ['create', 'edit', 'validation'],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
@@ -170,7 +170,7 @@ exports.feature = [
     },
     {
         name: "Saving RR Set Saves whole Deal",
-        tags: ["savingRRSavesDeal"],
+        tags: ['create', 'edit', 'validation'],
         steps: function () {
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");

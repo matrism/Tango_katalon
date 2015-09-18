@@ -11,7 +11,7 @@ exports.beforeFeature = [
     [steps.login.itLogin],
 ];
 
-exports.commonFeatureTags = ['royalties', 'royaltyProcessing', 'smokeTest'];
+exports.commonFeatureTags = ['royalties', 'royaltyProcessing', 'smoke'];
 
 exports.feature = [
     {
