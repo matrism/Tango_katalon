@@ -1,7 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
+var pageStep = require('../helpers/basicPageStep');
 
 steps.workRecordings = exports;
 
@@ -24,3 +23,5 @@ exports.validateRecordingDurations = function(values) {
         pages.workRecordings.validateRecordingDurations(values);
     });
 };
+
+pageStep('Validate library name');

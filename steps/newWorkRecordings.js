@@ -42,3 +42,14 @@ exports.enterRecordingDuration = function(i, value) {
         }
     );
 };
+
+exports.validateLibraryName = function(i) {
+    it(
+        'Recording row #' + (i + 1) + ' - ' +
+        'Validate previously selected library name', function() {
+            pages.newWorkRecordings.validateLibraryName(
+                i, hash.currentEntityDataSlotsByType.work.musicLibrary
+            );
+        }
+    );
+};

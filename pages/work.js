@@ -508,8 +508,8 @@ module.exports.bltvrBinding = function() {
 };
 module.exports.musicLibraryBinding = function() {
     return element(by.binding(
-        "getAdminDataName(dataHolder.musicLibrarys, " +
-        "workOriginEdit.model.library_code)"
+        ' getAdminDataName(dataHolder.musicLibrarys, ' +
+        'modularEditModels.model.library_code) '
     ));
 };
 module.exports.editAssetTypeButton = function() {
@@ -839,6 +839,11 @@ module.exports.musicLibrary = function() {
     pages.base.scrollIntoView(element);
     return element.getText();
 };
+
+exports.validateMusicLibrary = function(value) {
+    expect(exports.musicLibrary()).toBe(value);
+};
+
 module.exports.editPrimaryWorkTitleFieldValue = function() {
     return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
 };

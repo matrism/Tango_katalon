@@ -620,6 +620,20 @@ exports.enterComponentWorkAllocation = function(i, value) {
     element.clear();
     element.sendKeys(value);
 };
+exports.selectIntendedPurpose = function(value) {
+    var element = exports.intendedPurposeDropdown();
+    pages.base.scrollIntoView(element);
+    return pages.base.selectDropdownOption(element, value, {
+        dropdownType: 'tg'
+    });
+};
+exports.selectMusicLibrary = function(value) {
+    var element = exports.musicLibraryDropdown();
+    pages.base.scrollIntoView(element);
+    return pages.base.selectDropdownOption(element, value, {
+        dropdownType: 'tg'
+    });
+};
 module.exports.enterCreationYear = function(value) {
 	var element = pages.new_work.creationYearInput();
 	pages.base.scrollIntoView(element);
