@@ -27,7 +27,27 @@ module.exports = function (grunt) {
         var tasks = [];
         var cmd = {
             cmd: "bash",
-            args: ["start.sh"] // "--tags", "orgs", "--@tags", "production,common,albums,deals,person,royalties,works,broken,wip", "--reporting", "all"]
+            args: ["start.sh", "--reporting", "all"]
+        };
+
+        if (grunt.option('xvfb')) {
+            cmd.args.unshift(grunt.option('xvfb'))
+        }
+
+        if (grunt.option('env')) {
+            cmd.args.push('--env ' + grunt.option('env'));
+        };
+
+        if (grunt.option('app-url')) {
+            cmd.args.push('--app-url ' + grunt.option('app-url'));
+        }
+
+        if (grunt.option('single-report')) {
+            cmd.args.push('--single-report');
+        };
+
+        if (grunt.option('timeout')) {
+            cmd.args.push('--timeout ' + grunt.option('timeout'));
         };
 
         if (grunt.option('tags')) {
@@ -41,10 +61,16 @@ module.exports = function (grunt) {
         for (var i = 0; i < tags.length; i++) {
             var copiedCmd = _.cloneDeep(cmd);
             var copiedTags = _.cloneDeep(tags);
+            var tagsToPush = tags[i];
             copiedTags.splice(i, 1)
 
             copiedCmd.args.push('--tags');
-            copiedCmd.args.push(tags[i]);
+
+            if (grunt.option('test-type')) {
+                tagsToPush += ',' + grunt.option('test-type');
+            };
+
+            copiedCmd.args.push(tagsToPush);
 
             copiedCmd.args.push('--@tags');
             copiedCmd.args.push(excludedTags + (excludedTags.length > 0 ? ',' : '') + copiedTags);
@@ -69,4 +95,5 @@ module.exports = function (grunt) {
     // registering timer and tasks for running. 
     console.time(">>Total time");
     grunt.registerTask('default', ['preapreParallel', 'parallel', 'check']);
+    grunt.registerTask('e2e', ['preapreParallel']);
 };
