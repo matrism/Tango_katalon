@@ -35,7 +35,7 @@ module.exports = function (grunt) {
             //cmd.cmd = grunt.option('xvfb');
 
             if (grunt.option('screen')) {
-                cmd.args.unshift('-screen 0' + grunt.option('screen'));
+                cmd.args.unshift('-screen 0 ' + grunt.option('screen'));
             }
 
             cmd.args.unshift('-s');
