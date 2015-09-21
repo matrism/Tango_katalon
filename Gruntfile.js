@@ -27,11 +27,13 @@ module.exports = function (grunt) {
         var tasks = [];
         var cmd = {
             cmd: "bash",
-            args: ["start.sh", "--reporting", "all"]
+            args: ["./start.sh", "--reporting", "all"]
         };
 
         if (grunt.option('xvfb')) {
-            cmd.args.unshift(grunt.option('xvfb'))
+            cmd.cmd = grunt.option('xvfb');
+
+            //cmd.args.unshift()
         }
 
         if (grunt.option('env')) {
