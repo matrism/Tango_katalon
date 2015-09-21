@@ -35,11 +35,13 @@ module.exports = function (grunt) {
         }
 
         if (grunt.option('env')) {
-            cmd.args.push('--env ' + grunt.option('env'));
+            cmd.args.push('--env');
+            cmd.args.push(grunt.option('env'));
         };
 
         if (grunt.option('app-url')) {
-            cmd.args.push('--app-url ' + grunt.option('app-url'));
+            cmd.args.push('--app-url');
+            cmd.args.push(grunt.option('app-url'))
         }
 
         if (grunt.option('single-report')) {
@@ -47,7 +49,8 @@ module.exports = function (grunt) {
         };
 
         if (grunt.option('timeout')) {
-            cmd.args.push('--timeout ' + grunt.option('timeout'));
+            cmd.args.push('--timeout ');
+            cmd.args.push(grunt.option('timeout'));
         };
 
         if (grunt.option('tags')) {
