@@ -1,3 +1,5 @@
+'use strict';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
     steps.searchSection.accessSavedDealByNumber("205622");

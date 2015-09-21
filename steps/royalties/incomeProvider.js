@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash'),
     promise = protractor.promise,
     ExpectedConditions = protractor.ExpectedConditions;

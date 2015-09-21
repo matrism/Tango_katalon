@@ -1,3 +1,5 @@
+'use strict';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
     //steps.deal_general.itFillDealMandatoryFieldsGeneralTab();

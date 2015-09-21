@@ -1,4 +1,5 @@
 "use strict";
+
 if (pages.login === undefined) {
     pages.login = new ftf.loginPage(_tf_config, element(By.css(".brand .navbar-brand")));
 	pages.login.check = function(options) {
@@ -11,10 +12,6 @@ if (pages.login === undefined) {
 		pages.login.scrollIntoView(el);
 		expect(el.isPresent()).toBe(options.should_be_logged_in);
 	};
-
-
-
-
 }
 
 pages.login.injectCookies = function(cookies) {
