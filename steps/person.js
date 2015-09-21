@@ -1,7 +1,8 @@
 'use strict';
 
 var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
+    steps_path = _tf_config._system_.path_to_steps,
+    pph = require('../helpers/pph');
 
 steps.person = exports;
 
@@ -66,10 +67,12 @@ exports.validateIPI = function(ipi)
 });
 };
 
-exports.validateAlternativeName = function(alternativeName)
-{ it('Validate Alternative Name', function() {
-    expect(pages.person.getAlternativeName()).toBe(alternativeName)
-});
+exports.validateAlternativeName = function(value) {
+    it('Validate Alternative Name', function() {
+        expect(pph.toLowerCase(pages.person.getAlternativeName())).toBe(
+            value.toLowerCase()
+        );
+    });
 };
 
 
