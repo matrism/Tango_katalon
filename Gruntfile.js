@@ -35,7 +35,7 @@ module.exports = function (grunt) {
             //cmd.cmd = grunt.option('xvfb');
 
             if (grunt.option('screen')) {
-                cmd.args.unshift('-screen 0 ' + grunt.option('screen'));
+                cmd.args.unshift('-screen 0' + grunt.option('screen'));
             }
 
             cmd.args.unshift('-s');
@@ -94,13 +94,13 @@ module.exports = function (grunt) {
 
         console.log(tasks);
 
-        //grunt.initConfig({
-        //    parallel: {
-        //        shell: {
-        //            tasks: tasks
-        //        }
-        //    }
-        //});
+        grunt.initConfig({
+            parallel: {
+                shell: {
+                    tasks: tasks
+                }
+            }
+        });
     });
 
     // registering timer and tasks for running. 
