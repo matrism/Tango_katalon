@@ -26,8 +26,7 @@ if (!systemConfig.noReport) {
 
     if(systemConfig.singleReport) {
         screenShotPath = path.join(screenShotPath, 'single/');
-    }
-    else {
+    } else {
         screenShotPath = path.join(screenShotPath, now);
     }
 
@@ -120,7 +119,7 @@ config = {
             jasmineReporters = require('jasmine-reporters');
 
             jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
-                consolidateAll: true,
+                consolidateAll: false,
                 savePath: 'reports/xml',
                 useDotNotation: true
             }));
