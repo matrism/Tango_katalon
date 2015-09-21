@@ -1,5 +1,7 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
+    fnutils = require('../helpers/fnutils'),
+    using = fnutils.using,
     random = require('../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
@@ -23,8 +25,8 @@ require(steps_path + "person");
 require(pages_path + "person");
 require(steps_path + "login");
 require(steps_path + "new_work");
-require(steps_path + "organisation");
-require(pages_path + "organisation");
+require(steps_path + "organisationProduction");
+require(pages_path + "organisationProduction");
 require(steps_path + "searchSection");
 require(steps_path + 'workCwrPreview');
 require(steps_path + 'workRights');
@@ -58,9 +60,6 @@ workData = {
     productionTitle: "TEST PRODUCTION TITLE 1429744413589291",
     includeOnWebsite: false
 };
-var firstPublisherDate = 'Sub-Publisher:\n'+
-    'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.';
-
 
 var beforeFeature = function () {
         steps.login.itLogin();
@@ -72,14 +71,20 @@ var beforeFeature = function () {
             tags: ['viewOrganisationProductionTest'],
             steps: function () {
                 steps.searchSection.accessSavedOrganisationByName("BMI");
-                steps.organisation.validateCISACCode("021");
-                steps.organisation.goToPreviewRegistrationRunTab();
-                steps.organisation.waitForPreviewRegistrationRunTabToBeDisplayed();
-                steps.organisation.goToRegistrationActivityTab();
-                steps.organisation.waitForRegistrationActivityTabToBeDisplayed();
+
+                using(steps.organisationProduction, function() {
+                    this.validateCISACCode('021');
+                    this.goToPreviewRegistrationRunTab();
+                    this.waitForPreviewRegistrationRunTabToBeDisplayed();
+                    this.goToRegistrationActivityTab();
+                    this.waitForRegistrationActivityTabToBeDisplayed();
+                });
 
                 steps.searchSection.accessSavedOrganisationByName("WB MUSIC CORP.");
-                steps.organisation.validatePublisherSubRelationships(firstPublisherDate);
+
+                steps.organisationProduction.validateSubPublisherName(
+                    0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
+                );
 
             }
         },

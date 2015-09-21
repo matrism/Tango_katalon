@@ -1,7 +1,7 @@
 'use strict';
 
 var pageStep = require('../helpers/basicPageStep'),
-    page = require(pages_path + 'organisation');
+    page = require(pages_path + 'organisationProduction');
 
 var _ = require("lodash");
 var promise = protractor.promise;
@@ -20,8 +20,8 @@ beforeEach(function () {
 
     this.addMatchers(matchers);
 });
-if (steps.organisation === undefined) {
-    steps.organisation = exports = {
+if (steps.organisationProduction === undefined) {
+    steps.organisationProduction = exports = {
 
 
         addIncomeProvidersToOrganisation: function (table, message) {
@@ -49,16 +49,16 @@ if (steps.organisation === undefined) {
                     it(consoleMessage, function () {
 
 
-                            //  pages.organisation.fillIncomeProvider(inboundIncomeType,inboundIncomeTypeDescription,incomeFileType,tangoIncomeType);
+                            //  pages.organisationProduction.fillIncomeProvider(inboundIncomeType,inboundIncomeTypeDescription,incomeFileType,tangoIncomeType);
 
 
-                            pages.organisation.typeIntoInboundIncomeTypeInput(inboundIncomeType, tableLine);
+                            pages.organisationProduction.typeIntoInboundIncomeTypeInput(inboundIncomeType, tableLine);
 
-                            pages.organisation.typeIntoInboundIncomeTypeDescriptionInput(inboundIncomeTypeDescription, tableLine);
+                            pages.organisationProduction.typeIntoInboundIncomeTypeDescriptionInput(inboundIncomeTypeDescription, tableLine);
 
-                            pages.organisation.typeIntoIncomeFileTypeInput(incomeFileType, tableLine);
+                            pages.organisationProduction.typeIntoIncomeFileTypeInput(incomeFileType, tableLine);
 
-                            pages.organisation.typeIntoTangoIncomeTypeInput(tangoIncomeType, tableLine);
+                            pages.organisationProduction.typeIntoTangoIncomeTypeInput(tangoIncomeType, tableLine);
 
                             tableLine++;
 
@@ -77,9 +77,9 @@ if (steps.organisation === undefined) {
             it("Open Income Provider Section for Editing", function () {
 
 
-                pages.organisation.clickIncomeProviderSection();
+                pages.organisationProduction.clickIncomeProviderSection();
 
-                pages.organisation.clickincomeProviderSectionEdit();
+                pages.organisationProduction.clickincomeProviderSectionEdit();
 
 
             });
@@ -91,7 +91,7 @@ if (steps.organisation === undefined) {
 
             it("Save edited Income Providers", function () {
 
-                pages.organisation.clickSaveIncomeProviderButton();
+                pages.organisationProduction.clickSaveIncomeProviderButton();
 
 
             })
@@ -101,7 +101,7 @@ if (steps.organisation === undefined) {
         waitForProvidersSaveToComplete: function () {
             it("Waits for save to complete", function () {
 
-                pages.organisation.waitForSaveToComplete();
+                pages.organisationProduction.waitForSaveToComplete();
 
             })
 
@@ -110,7 +110,7 @@ if (steps.organisation === undefined) {
         chooseIncomeFileType: function (fileType) {
             it("Choose " + fileType + "Income File Type", function () {
 
-                pages.organisation.selectIncomeFileType(fileType);
+                pages.organisationProduction.selectIncomeFileType(fileType);
 
 
             })
@@ -120,47 +120,47 @@ if (steps.organisation === undefined) {
         ,
         executeRegistrationRun: function (value) {
             it("Execute Registration Run", function () {
-                pages.organisation.registrationCanBeRun().then(function (isVisible) {
+                pages.organisationProduction.registrationCanBeRun().then(function (isVisible) {
                     //  console.log("Is visible"+isVisible);
 
 
                     if (isVisible.toString() == "true") {
 
 
-                        pages.organisation.clickExecuteRegistrationRunButton();
+                        pages.organisationProduction.clickExecuteRegistrationRunButton();
 
-                        pages.organisation.confirmModalDialog().then(function () {
-                            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
-                            pages.organisation.confirmSuccessModal();
-                            //    expect(pages.organisation.successDialogIsPresent()).toBeTruthy();
+                        pages.organisationProduction.confirmModalDialog().then(function () {
+                            browser.wait(ExpectedConditions.visibilityOf(pages.organisationProduction.successModalMessage()));
+                            pages.organisationProduction.confirmSuccessModal();
+                            //    expect(pages.organisationProduction.successDialogIsPresent()).toBeTruthy();
                         });
 
-                        // expect(pages.organisation.successDialogIsPresent()).toBeTruthy();
+                        // expect(pages.organisationProduction.successDialogIsPresent()).toBeTruthy();
                     }
                     else {
-                        // console.log(pages.organisation.registrationCanBeRun().toString());
-                        //while (pages.organisation.resetWork() == "202" &&
-                        //pages.organisation.registrationCanBeRun().then(function (isVisible) {
+                        // console.log(pages.organisationProduction.registrationCanBeRun().toString());
+                        //while (pages.organisationProduction.resetWork() == "202" &&
+                        //pages.organisationProduction.registrationCanBeRun().then(function (isVisible) {
                         //    console.log(isVisible.toString());
                         //    return isVisible.toString() == "false";
                         //
                         //}))
                         {
-                            //  expect(pages.organisation.resetWork()).toBe("");
-                            pages.organisation.resetWork();
+                            //  expect(pages.organisationProduction.resetWork()).toBe("");
+                            pages.organisationProduction.resetWork();
 
 
                             browser.driver.sleep(15000);
                             pages.base.refresh();
-                            pages.organisation.clickCustomWorksButton();
-                            pages.organisation.selectValueFromPopupRegRun(value);
-                            pages.organisation.clickExecuteRegistrationRunButton();
-                            pages.organisation.confirmModalDialog().then(function () {
-                                browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
-                                pages.organisation.confirmSuccessModal();
+                            pages.organisationProduction.clickCustomWorksButton();
+                            pages.organisationProduction.selectValueFromPopupRegRun(value);
+                            pages.organisationProduction.clickExecuteRegistrationRunButton();
+                            pages.organisationProduction.confirmModalDialog().then(function () {
+                                browser.wait(ExpectedConditions.visibilityOf(pages.organisationProduction.successModalMessage()));
+                                pages.organisationProduction.confirmSuccessModal();
                                 browser.driver.sleep(5000);
 
-                                //      expect(pages.organisation.successDialogIsPresent()).toBeTruthy();
+                                //      expect(pages.organisationProduction.successDialogIsPresent()).toBeTruthy();
                             });
 
                         }
@@ -173,19 +173,19 @@ if (steps.organisation === undefined) {
         ,
         goToPreviewRegistrationRunTab: function () {
             it("Go to Preview Registration Run Tab", function () {
-                pages.organisation.clickPreviewRegistrationRunTab();
+                pages.organisationProduction.clickPreviewRegistrationRunTab();
             })
         }
 
         ,
         viewValidationErrors: function () {
             it("View validation errors", function () {
-                pages.organisation.clickValidationErrorsButton();
+                pages.organisationProduction.clickValidationErrorsButton();
             })
         },
         clearDownloadFolder: function (downloadFilepath) {
             it("Clear Download Folder", function () {
-                pages.organisation.deleteFilesFromDownloadFolder(downloadFilepath);
+                pages.organisationProduction.deleteFilesFromDownloadFolder(downloadFilepath);
 
 
             })
@@ -193,8 +193,8 @@ if (steps.organisation === undefined) {
         downloadFile:function()
         {
             it("Download File", function () {
-                pages.organisation.clickDownloadFileButton();
-                pages.organisation.waitForFileToDownload();
+                pages.organisationProduction.clickDownloadFileButton();
+                pages.organisationProduction.waitForFileToDownload();
 
             })
 
@@ -202,43 +202,43 @@ if (steps.organisation === undefined) {
         validateFilesDownloaded: function (downloadFilepath) {
             it("Files Downloaded Successfully", function () {
 
-                expect(pages.organisation.fileDownloadedSuccesfully(downloadFilepath)).toBeTruthy();
+                expect(pages.organisationProduction.fileDownloadedSuccesfully(downloadFilepath)).toBeTruthy();
             })
         },
         goToRegistrationActivityTab: function () {
             it("Go to Registration ActivityTab", function () {
-                pages.organisation.clickRegistrationActivityTab();
+                pages.organisationProduction.clickRegistrationActivityTab();
             })
 
         },
         goToGeneralTab: function () {
             it("Go to General Tab on Organization", function () {
-                pages.organisation.clickGeneralTab();
+                pages.organisationProduction.clickGeneralTab();
             })
         },
         waitForRegistrationActivityTabToBeDisplayed: function () {
             it("Wait For Reg Tab Header To be Displayed", function () {
-                pages.organisation.waitForActivityRecordsTableHeader();
+                pages.organisationProduction.waitForActivityRecordsTableHeader();
             })
         },
         waitForGeneralTabToBeDisplayed: function () {
             it("Wait For General Tab To be Displayed", function () {
-                pages.organisation.waitForEditorGeneral();
+                pages.organisationProduction.waitForEditorGeneral();
             })
         },
         waitForPreviewRegistrationRunTabToBeDisplayed: function () {
             it("Wait For Registration Run Tab To be Displayed", function () {
-                pages.organisation.waitForRegRunHeader();
+                pages.organisationProduction.waitForRegRunHeader();
             })
         },
         waitForRegActivityElement: function () {
             it("Wait For General Tab To be Displayed", function () {
-                pages.organisation.waitForElementWork();
+                pages.organisationProduction.waitForElementWork();
             })
         },
         waitForOrgDisappear: function () {
             it("Wait For Org to disappear", function () {
-                pages.organisation.waitForOrgToBeInvisible();
+                pages.organisationProduction.waitForOrgToBeInvisible();
             })
         },
         saveRegActivityLastEvent: function () {
@@ -246,9 +246,9 @@ if (steps.organisation === undefined) {
 
 
                 hash.lastEvent = {};
-                var lastEvent = pages.organisation.getLastAddedWorkEvent();
+                var lastEvent = pages.organisationProduction.getLastAddedWorkEvent();
 
-                pages.organisation.getIconType(lastEvent).then(function (isPresent) {
+                pages.organisationProduction.getIconType(lastEvent).then(function (isPresent) {
 
 
                     if (isPresent.toString() == "true") {
@@ -264,14 +264,14 @@ if (steps.organisation === undefined) {
                 });
 
 
-                pages.organisation.getWorksText(lastEvent).then(function (value) {
+                pages.organisationProduction.getWorksText(lastEvent).then(function (value) {
 
                         hash.lastEvent.totalWorks = parseInt(value.replace(/[^\d.]/g, ''), 10);
 
 
                     }
                 );
-                pages.organisation.getWorkIDNumber(lastEvent).then(function (value) {
+                pages.organisationProduction.getWorkIDNumber(lastEvent).then(function (value) {
 
 
                         hash.lastEvent.workID = parseInt(value.replace(/[^\d.]/g, ''), 10);
@@ -279,19 +279,19 @@ if (steps.organisation === undefined) {
 
                     }
                 );
-                pages.organisation.getRunDate(lastEvent).then(function (value) {
+                pages.organisationProduction.getRunDate(lastEvent).then(function (value) {
 
                         hash.lastEvent.runDate = value;
 
                     }
                 );
-                pages.organisation.getStatus(lastEvent).then(function (value) {
+                pages.organisationProduction.getStatus(lastEvent).then(function (value) {
 
                         hash.lastEvent.status = value;
 
                     }
                 );
-                pages.organisation.getEventRunDate(lastEvent).then(
+                pages.organisationProduction.getEventRunDate(lastEvent).then(
                     function (value) {
                         hash.lastEvent.eventRunDate = value;
                         //    console.log(hash.lastEvent)
@@ -304,7 +304,7 @@ if (steps.organisation === undefined) {
         },
         saveMultipleELemNodesTest: function () {
             it("Save Elem Nodes Test", function () {
-                pages.organisation.testMultipleElements();
+                pages.organisationProduction.testMultipleElements();
             })
 
         },
@@ -319,21 +319,21 @@ if (steps.organisation === undefined) {
 
                 //Email
 
-                pages.organisation.getEmailDeliveryMethods()
+                pages.organisationProduction.getEmailDeliveryMethods()
                     .then(function (emailDeliveryMethods) {
                         emailDeliveryMethods.forEach(function (deliveryMethod) {
                             var emailDelivery = {};
                             pages.base.scrollIntoView(deliveryMethod);
-                            pages.organisation.getEmailDeliveryMethodEmail(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getEmailDeliveryMethodEmail(deliveryMethod).then(function (result) {
                                 emailDelivery.email = result;
                             });
-                            pages.organisation.getEmailDeliveryMethodCC(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getEmailDeliveryMethodCC(deliveryMethod).then(function (result) {
                                 emailDelivery.CC = result;
                             });
-                            pages.organisation.getEmailDeliveryMethodFileFormat(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getEmailDeliveryMethodFileFormat(deliveryMethod).then(function (result) {
                                 emailDelivery.fileFormat = result;
                             });
-                            pages.organisation.getEmailDeliveryMethodNotification(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getEmailDeliveryMethodNotification(deliveryMethod).then(function (result) {
                                 emailDelivery.deliveryNotification = result;
                             }).then(function () {
                                 hash.emailDeliveries.push(emailDelivery);
@@ -344,44 +344,44 @@ if (steps.organisation === undefined) {
                     });
 
                 //SFTP
-                pages.organisation.getSFTPDeliveryMethods()
+                pages.organisationProduction.getSFTPDeliveryMethods()
                     .then(function (sftpDeliveryMethods) {
                         sftpDeliveryMethods.forEach(function (deliveryMethod) {
                             var sftpDelivery = {};
                             pages.base.scrollIntoView(deliveryMethod);
 
-                            pages.organisation.getSFTPDeliveryMethodName(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryMethodName(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodName = result;
                             });
-                            pages.organisation.getSFTPDelivetyMehodAddress(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDelivetyMehodAddress(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodAddress = result;
                             });
-                            pages.organisation.getSFTPDeliveryMethodPort(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryMethodPort(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodPort = result;
                             });
 
-                            pages.organisation.clickUnmaskPasswordButton(deliveryMethod).then(function () {
-                                pages.organisation.getSFTPPassword(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.clickUnmaskPasswordButton(deliveryMethod).then(function () {
+                                pages.organisationProduction.getSFTPPassword(deliveryMethod).then(function (result) {
                                     sftpDelivery.password = result;
                                 });
                             });
 
-                            pages.organisation.getSFTPFileFormat(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPFileFormat(deliveryMethod).then(function (result) {
                                 sftpDelivery.fileFormat = result;
                             });
-                            pages.organisation.getSFTPFileFormatStatus(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPFileFormatStatus(deliveryMethod).then(function (result) {
                                 sftpDelivery.fileFormatStatus = result;
                             });
-                            pages.organisation.getSFTPDeliveryNotificationStatus(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryNotificationStatus(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryNotificationStatus = result;
                             });
-                            pages.organisation.getSFTPDeliveryNotificationStatusEmail(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryNotificationStatusEmail(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryNotificationEmail = result;
                             });
-                            pages.organisation.getSFTPDeliveryNotificationStatusCC(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryNotificationStatusCC(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryNotificationCC = result;
                             });
-                            pages.organisation.getSFTPUsername(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPUsername(deliveryMethod).then(function (result) {
                                 sftpDelivery.username = result;
                             }).then(function () {
                                 hash.sftpDeliveries.push(sftpDelivery);
@@ -392,44 +392,44 @@ if (steps.organisation === undefined) {
                     });
                 //FTP
 
-                pages.organisation.getFTPDeliveryMethods()
+                pages.organisationProduction.getFTPDeliveryMethods()
                     .then(function (ftpDeliveryMethods) {
                         ftpDeliveryMethods.forEach(function (deliveryMethod) {
                             var sftpDelivery = {};
                             pages.base.scrollIntoView(deliveryMethod);
 
-                            pages.organisation.getSFTPDeliveryMethodName(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryMethodName(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodName = result;
                             });
-                            pages.organisation.getSFTPDelivetyMehodAddress(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDelivetyMehodAddress(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodAddress = result;
                             });
-                            pages.organisation.getSFTPDeliveryMethodPort(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryMethodPort(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodPort = result;
                             });
 
-                            pages.organisation.clickUnmaskPasswordButton(deliveryMethod).then(function () {
-                                pages.organisation.getSFTPPassword(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.clickUnmaskPasswordButton(deliveryMethod).then(function () {
+                                pages.organisationProduction.getSFTPPassword(deliveryMethod).then(function (result) {
                                     sftpDelivery.password = result;
                                 });
                             });
 
-                            pages.organisation.getSFTPFileFormat(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPFileFormat(deliveryMethod).then(function (result) {
                                 sftpDelivery.fileFormat = result;
                             });
-                            pages.organisation.getSFTPFileFormatStatus(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPFileFormatStatus(deliveryMethod).then(function (result) {
                                 sftpDelivery.fileFormatStatus = result;
                             });
-                            pages.organisation.getSFTPDeliveryNotificationStatus(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryNotificationStatus(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryNotificationStatus = result;
                             });
-                            pages.organisation.getSFTPDeliveryNotificationStatusEmail(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryNotificationStatusEmail(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryNotificationEmail = result;
                             });
-                            pages.organisation.getSFTPDeliveryNotificationStatusCC(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPDeliveryNotificationStatusCC(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryNotificationCC = result;
                             });
-                            pages.organisation.getSFTPUsername(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getSFTPUsername(deliveryMethod).then(function (result) {
                                 sftpDelivery.username = result;
                             }).then(function () {
                                 hash.sftpDeliveries.push(sftpDelivery);
@@ -440,14 +440,14 @@ if (steps.organisation === undefined) {
                     });
                 //THIRD PARTY
 
-                pages.organisation.getThirdPartyDeliveryMethods()
+                pages.organisationProduction.getThirdPartyDeliveryMethods()
                     .then(function (thirdPartyDeliveryMethods) {
                         thirdPartyDeliveryMethods.forEach(function (deliveryMethod) {
                             var thirdPartyDelivery = {};
                             pages.base.scrollIntoView(deliveryMethod);
 
 
-                            pages.organisation.getThirdPartyName(deliveryMethod).then(function (result) {
+                            pages.organisationProduction.getThirdPartyName(deliveryMethod).then(function (result) {
                                 thirdPartyDelivery.name = result;
                             }).then(function () {
                                 hash.thirdPartyDeliveries.push(thirdPartyDelivery);
@@ -462,20 +462,20 @@ if (steps.organisation === undefined) {
         },
         verifyThatWorkIsDelivered: function () {
             it("Verify Work has delivered status", function () {
-                expect(pages.organisation.workHasDeliveredStatus()).toBe("Delivered");
+                expect(pages.organisationProduction.workHasDeliveredStatus()).toBe("Delivered");
             })
         },
         checkThatAllDeliviriesAreDelivered: function () {
             it("Verify That All inner deliviries are delivered", function () {
-                pages.organisation.clickLatestWork();
-                expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
+                pages.organisationProduction.clickLatestWork();
+                expect(pages.organisationProduction.workHasDeliveredStatus()).toBeTruthy();
             })
         },
 
         selectCustomRegistrationRun: function (value) {
             it("Select custom registration run " + value, function () {
-                pages.organisation.clickCustomWorksButton();
-                pages.organisation.selectValueFromPopupRegRun(value);
+                pages.organisationProduction.clickCustomWorksButton();
+                pages.organisationProduction.selectValueFromPopupRegRun(value);
             })
         }
         ,
@@ -491,21 +491,21 @@ if (steps.organisation === undefined) {
 
         goToNewOrganisationPage: function () {
             it("Go to new organisation page", function () {
-                pages.organisation.open();
+                pages.organisationProduction.open();
 
             })
         },
         setOrganisationName: function (value) {
             it("Set organisation name to " + value, function () {
 
-                pages.organisation.typeOrganisationName(value);
+                pages.organisationProduction.typeOrganisationName(value);
             })
         },
         setTerritoryOfOperation: function (value) {
             it("Set territory of operation to " + value, function () {
 
                 if (value == "Worldwide") {
-                    pages.organisation.setTerritoryOfOperationToWorldWide();
+                    pages.organisationProduction.setTerritoryOfOperationToWorldWide();
 
                 }
 
@@ -513,9 +513,9 @@ if (steps.organisation === undefined) {
         },
         setRandomSuisaIPI: function () {
             it("Set random suisa IPI ", function () {
-                // pages.organisation.randomIPINumberBasedOnDate().then(function (value) {
+                // pages.organisationProduction.randomIPINumberBasedOnDate().then(function (value) {
 
-                pages.organisation.typeRandomSuisaIPINumber(pages.organisation.randomIPINumberBasedOnDate());
+                pages.organisationProduction.typeRandomSuisaIPINumber(pages.organisationProduction.randomIPINumberBasedOnDate());
                 //   console.log(value);
                 //  });
 
@@ -525,14 +525,14 @@ if (steps.organisation === undefined) {
         setAffiliatedSociety: function (value) {
             it("Set affiliated society  to " + value, function () {
 
-                pages.organisation.selectAffiliatedSocietyNumber(value);
+                pages.organisationProduction.selectAffiliatedSocietyNumber(value);
 
             })
         },
         setPublisherType: function (value) {
             it("Set publisher type to  " + value, function () {
 
-                pages.organisation.clickPublisherType(value);
+                pages.organisationProduction.clickPublisherType(value);
 
             })
 
@@ -540,7 +540,7 @@ if (steps.organisation === undefined) {
         saveOrganisation: function () {
             it("Save organisation ", function () {
 
-                pages.organisation.clickSaveOrganisationButton();
+                pages.organisationProduction.clickSaveOrganisationButton();
 
             })
         },
@@ -548,7 +548,7 @@ if (steps.organisation === undefined) {
             it("Validate Saved Organisation Is Displayed ", function () {
 
 
-                expect(pages.organisation.isSavedPageDisplayed()).toBeTruthy();
+                expect(pages.organisationProduction.isSavedPageDisplayed()).toBeTruthy();
 
             });
 
@@ -556,7 +556,7 @@ if (steps.organisation === undefined) {
         validateCISACCode: function (value) {
             it("Validate Cisac Code is " + value, function () {
 
-                expect(pages.organisation.getCisacNumber()).toBe(value);
+                expect(pages.organisationProduction.getCisacNumber()).toBe(value);
 
             });
         },
@@ -564,16 +564,18 @@ if (steps.organisation === undefined) {
         validateSubPublisherName: function(i, value) {
             it(
                 'Validate sub-publisher name ' +
-                '(' + (i + 1) + ', ' + value + ')', function() {
-                    expect(pages.organisation.subPublisherName(i)).toBe(value);
+                '(' + (i + 1) + ', ' + value + ')', function () {
+                    expect(pages.organisationProduction.subPublisherName(i)).toBe(
+                        value
+                    );
                 }
             );
-        },
+        }
     }
     ;
 }
 
-module.exports = steps.organisation;
+module.exports = steps.organisationProduction;
 
 pageStep([
     ['General', [

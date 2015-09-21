@@ -8,10 +8,10 @@ var client = require('http-api-client');
 var fs = require('fs');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-if (pages.organisation === undefined) {
+if (pages.organisationProduction === undefined) {
 
 
-    pages.organisation = exports = new ftf.pageObject({
+    pages.organisationProduction = exports = new ftf.pageObject({
             url: _tf_config.urls.app_url + "#/create/org",
             locators: {},
         organisationNameInput: function () {
@@ -39,23 +39,29 @@ return $('[tooltip="Warner/Chappell Music"]');
         summaryTable: function () {
             return $(".span3.header-right");
         },
+
         cisacCode: function () {
-          return $('.e2e-general-cisac-code>div');
+            return $(
+                '[data-ng-show="orgEdit.pristine.masterData.type === ' +
+                'orgTypes.society || orgEdit.pristine.masterData.type === ' +
+                'orgTypes.copyright"] .ng-binding'
+            );
         },
 
         subPublisherRelationshipContainers: function() {
             return element.all(by.repeater(
-                'subPublisherData in dataHolder.subPublishers.data track by subPublisherData._uid'
+                'subPublisherData in dataHolder.subPublishers.data track ' +
+                'by subPublisherData._uid'
             ));
         },
 
         subPublisherNameBinding: function(i) {
             return this.subPublisherRelationshipContainers().get(i).$(
-                '[data-ui-sref="orgView({orgId:modularEditModels.subPublisher.publisherId})"]'
+                '[data-ui-sref="orgView({' +
+                    'orgId:modularEditModels.subPublisher.publisherId' +
+                '})"]'
             );
         },
-
-
 
             incomeProviderControls: function () {
 
@@ -404,7 +410,9 @@ return $(".text-highlight");
 
                 //  ftf.helper.waitForElement(this.incomeProviderSection(), 30000);
 
-                browser.wait(ExpectedConditions.visibilityOf(pages.organisation.incomeProviderSection()));
+                browser.wait(ExpectedConditions.visibilityOf(
+                    pages.organisationProduction.incomeProviderSection()
+                ));
                 //browser.wait(ExpectedConditions.visibilityOf(this.generalOrganisationSection()));
 
                 //    this.scopeHeading().click()
@@ -428,7 +436,10 @@ return $(".text-highlight");
             typeIntoInboundIncomeTypeInput: function (text, tableLine) {
 
 
-                browser.wait(ExpectedConditions.visibilityOf(pages.organisation.inboundIncomeTypeInput(tableLine)));
+                browser.wait(ExpectedConditions.visibilityOf(
+                    pages.organisationProduction.inboundIncomeTypeInput(tableLine)
+                ));
+
                 this.inboundIncomeTypeInput(tableLine).sendKeys(text);
                 //  pages.base.scrollIntoView(  this.inboundIncomeTypeInput);
 
@@ -777,16 +788,12 @@ return $(".text-highlight");
             },
 
             getCisacNumber: function () {
-                browser.wait(ExpectedConditions.visibilityOf(  this.cisacCode()));
-
                 return this.cisacCode().getText();
             },
 
             subPublisherName: function(i) {
-                var nameElement = this.subPublisherNameBinding(0);
-
+                var nameElement = this.subPublisherNameBinding(i);
                 pages.base.scrollIntoView(nameElement);
-
                 return nameElement.getText();
             }
         }
@@ -796,7 +803,7 @@ return $(".text-highlight");
 
 }
 
-module.exports = pages.organisation;
+module.exports = pages.organisationProduction;
 
 exports.general = (function() {
     var general = {};
