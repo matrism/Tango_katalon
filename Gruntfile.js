@@ -26,14 +26,20 @@ module.exports = function (grunt) {
         var excludedTags = [];
         var tasks = [];
         var cmd = {
-            cmd: "bash",
+            cmd: "shell",
             args: ["./start.sh", "--reporting", "all"]
         };
 
         if (grunt.option('xvfb')) {
-            cmd.cmd = grunt.option('xvfb');
+            cmd.cmd = 'xvfb-run'
+            //cmd.cmd = grunt.option('xvfb');
 
-            //cmd.args.unshift()
+            if (grunt.option('screen')) {
+                cmd.args.unshift('-screen 0 ' + grunt.option('screen'));
+            }
+
+            cmd.args.unshift('-s');
+            cmd.args.unshift('-a');
         }
 
         if (grunt.option('env')) {
@@ -88,13 +94,13 @@ module.exports = function (grunt) {
 
         console.log(tasks);
 
-        grunt.initConfig({
-            parallel: {
-                shell: {
-                    tasks: tasks
-                }
-            }
-        });
+        //grunt.initConfig({
+        //    parallel: {
+        //        shell: {
+        //            tasks: tasks
+        //        }
+        //    }
+        //});
     });
 
     // registering timer and tasks for running. 
