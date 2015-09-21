@@ -95,5 +95,5 @@ module.exports = function (grunt) {
     // registering timer and tasks for running. 
     console.time(">>Total time");
     grunt.registerTask('default', ['preapreParallel', 'parallel', 'check']);
-    grunt.registerTask('e2e', ['preapreParallel']);
+    grunt.registerTask('e2e', ['preapreParallel', 'parallel', 'check']);
 };
