@@ -19,10 +19,7 @@ require(pages_path + "edit_deal_scope");
 require(steps_path + "edit_deal_scope");
 require(steps_path + "login");
 require(steps_path + "base");
-require(steps_path + "newPerson");
-require(pages_path + "newPerson");
-require(steps_path + "person");
-require(pages_path + "person");
+require(steps_path + "personProduction");
 require(steps_path + "login");
 require(steps_path + "new_work");
 require(steps_path + "organisationProduction");
@@ -89,16 +86,14 @@ var beforeFeature = function () {
             }
         },
         {
-            name: "View mode of person",
+            name: 'View mode of person',
             tags: [
                 'viewPersonProductionSmokeTest',
             ],
             steps: function () {
-                steps.searchSection.accessSavedPersonByName("katy perry");
-                steps.person.validateIPI("292555933");
-                steps.person.validateAlternativeName("Katy Perry")
-
-
+                steps.searchSection.accessSavedPersonByName('katy perry');
+                steps.personProduction.validateSuisaIpiNumber('292555933');
+                steps.personProduction.validateAlternativeName(0, 'katy perry')
             }
         },
         {
