@@ -65,25 +65,26 @@ var beforeFeature = function () {
     feature = [
         {
             name: 'View mode of organisation',
-            tags: ['viewOrganisationProductionTest'],
+            tags: [
+                'viewOrganisationProductionTest'
+            ],
             steps: function () {
-                steps.searchSection.accessSavedOrganisationByName("BMI");
+                steps.searchSection.accessSavedOrganisationByName('BMI');
 
                 using(steps.organisationProduction, function() {
-                    this.validateCISACCode('021');
+                    this.validateCisacCode('021');
                     this.goToPreviewRegistrationRunTab();
-                    this.waitForPreviewRegistrationRunTabToBeDisplayed();
+                    this.waitForPreviewRegistrationRunHeaderToBeDisplayed();
                     this.goToRegistrationActivityTab();
-                    this.waitForRegistrationActivityTabToBeDisplayed();
+                    this.waitForRegistrationActivityRecordsTableToBeDisplayed();
                 });
 
-                steps.searchSection.accessSavedOrganisationByName("WB MUSIC CORP.");
+                steps.searchSection.accessSavedOrganisationByName('WB MUSIC CORP.');
 
                 steps.organisationProduction.validateSubPublisherName(
                     0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
                 );
-
-            }
+            },
         },
         {
             name: 'View mode of person',
