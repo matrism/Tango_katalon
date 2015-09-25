@@ -44,14 +44,12 @@ return $('[tooltip="Warner/Chappell Music"]');
         },
 
         subPublisherRelationshipContainers: function() {
-            return element.all(by.repeater(
-                'subPublisherData in dataHolder.subPublishers.data track by subPublisherData._uid'
-            ));
+            return $$('.e2e-sub-publisher');
         },
 
         subPublisherNameBinding: function(i) {
             return this.subPublisherRelationshipContainers().get(i).$(
-                '[data-ui-sref="orgView({orgId:modularEditModels.subPublisher.publisherId})"]'
+                '.e2e-sub-publisher-def .ng-binding'
             );
         },
 
