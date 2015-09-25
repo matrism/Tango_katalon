@@ -331,6 +331,12 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
+        selectPubliserSearchResultByIndex: function(i) {
+            it('Select publisher search result by index (' + i + ')', function() {
+                pages.create_deal_scope.selectPublisherSearchResultByIndex(i);
+            });
+        },
+
         selectSpecificPublisherNameDropDown: function () {
             it("Select specific value publisher name drop down", function () {
                 pages.create_deal_scope.selectTheSpecificPublisherNameDropDown("(53026414)\nWB MUSIC CORP.");
@@ -510,7 +516,7 @@ if (steps.create_deal_scope === undefined) {
                 steps.create_deal_scope.clickOnAddPublisherShareSet();
                 steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMField("wb music corp");
-                steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+                steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
                 steps.base.scrollIntoView("Yes society award credits", pages.create_deal_scope.elems.yesSocietyAwardCreditPss);
                 steps.create_deal_scope.clickOnYesSocietyAwardCreditPublisherShareSet();

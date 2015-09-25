@@ -325,9 +325,9 @@ if (pages.create_deal_scope === undefined) {
         },
 
         publisherSearchResultLabels: function () {
-            var selector = '.tg-typeahead__suggestions-group-item';
-            browser.wait(ExpectedConditions.visibilityOf($(selector)));
-            return $$(selector);
+            var labelElements = $$('.tg-typeahead__suggestions-group-item');
+            browser.wait(ExpectedConditions.visibilityOfAny(labelElements));
+            return labelElements;
         },
 
         selectPublisherSearchResultByIndex: function (i) {
@@ -484,8 +484,13 @@ if (pages.create_deal_scope === undefined) {
         },
 
         saveThePublisherShareSets: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.savePublisherShareSet));
-            pages.create_deal_scope.elems.savePublisherShareSet.click();
+            var saveButton = pages.create_deal_scope.elems.savePublisherShareSet;
+
+            pages.base.scrollIntoView(saveButton);
+
+            browser.wait(ExpectedConditions.elementToBeClickable(saveButton));
+
+            return saveButton.click();
         },
 
         cancelPublisherShareSet: function () {
