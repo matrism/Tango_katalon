@@ -6,7 +6,7 @@ var pages_path = _tf_config._system_.path_to_pages,
     randomId = random.id.makeMemoizedGenerator();
 
 require(steps_path + 'mainHeader');
-require(steps_path + 'newOrganisation');
+require(steps_path + 'newOrganisationProduction');
 
 var beforeFeature = function () {
         steps.login.itLogin();
@@ -19,7 +19,7 @@ var beforeFeature = function () {
             steps: function () {
                 steps.mainHeader.createNewRecord('Organisation');
 
-                using(steps.newOrganisation, function() {
+                using(steps.newOrganisationProduction, function() {
                     this.populateName('Org smoke test');
                     this.selectTerritoryOfOperation('United States');
                     this.selectOrgType('Publisher');
@@ -63,7 +63,11 @@ var beforeFeature = function () {
 
 
 module.exports = {
-    commonFeatureTags: ['smokeTestsProd', 'productionTest', 'organisationSmokeTests'],
+    commonFeatureTags: [
+        'productionSmokeTest',
+        'productionTest',
+        'organisationSmokeTests',
+    ],
     feature: feature,
     beforeFeature: beforeFeature
 };
