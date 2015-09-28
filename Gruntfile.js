@@ -21,12 +21,12 @@ module.exports = function (grunt) {
         console.timeEnd(">>Total time");
     })
 
-    grunt.registerTask('preapreParallel', function () {
+    grunt.registerTask('prepareParallel', function () {
         var tags = [];
         var excludedTags = [];
         var tasks = [];
         var cmd = {
-            cmd: "shell",
+            cmd: "bash",
             args: ["./start.sh", "--reporting", "all"]
         };
 
@@ -69,6 +69,7 @@ module.exports = function (grunt) {
             excludedTags = grunt.option('@tags').split(',');
         };
 
+        // loop through tags, creating a task per each tag, excluding all other tags that were passed in
         for (var i = 0; i < tags.length; i++) {
             var copiedCmd = _.cloneDeep(cmd);
             var copiedTags = _.cloneDeep(tags);
@@ -86,9 +87,6 @@ module.exports = function (grunt) {
             copiedCmd.args.push('--@tags');
             copiedCmd.args.push(excludedTags + (excludedTags.length > 0 ? ',' : '') + copiedTags);
 
-            copiedCmd.args.push('--reporting');
-            copiedCmd.args.push('all');
-
             tasks.push(copiedCmd);
         }
 
@@ -105,6 +103,6 @@ module.exports = function (grunt) {
 
     // registering timer and tasks for running. 
     console.time(">>Total time");
-    grunt.registerTask('default', ['preapreParallel', 'parallel', 'check']);
-    grunt.registerTask('e2e', ['preapreParallel', 'parallel', 'check']);
+    grunt.registerTask('default', ['prepareParallel', 'parallel', 'check']);
+    grunt.registerTask('e2e', ['prepareParallel', 'parallel', 'check']);
 };
