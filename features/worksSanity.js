@@ -8,11 +8,16 @@ var pages_path = _tf_config._system_.path_to_pages,
     randomId = random.id.makeMemoizedGenerator(),
     fnutils = require('../helpers/fnutils'),
     bind = fnutils.bind,
-    using = fnutils.using;
+    using = fnutils.using,
+    systemConfig = global._tf_config._system_,
+    newPersonSteps,
+    personSteps;
 
 require(steps_path + 'login');
 require(steps_path + 'person');
 require(steps_path + 'newPerson');
+require(steps_path + 'personProduction');
+require(steps_path + 'newPersonProduction');
 require(steps_path + 'work');
 require(steps_path + 'new_work');
 require(steps_path + 'dealRtp');
@@ -27,6 +32,16 @@ require(steps_path + 'scopeDelivery');
 require(steps_path + 'workRights');
 require(steps_path + 'workRegistrationActivity');
 require(steps_path + 'workCwrPreview');
+
+// TODO: Quick and dirty fix for some staging testing...
+if(systemConfig.env_name === 'qa') {
+    newPersonSteps = steps.newPerson;
+    personSteps = steps.person;
+}
+else {
+    newPersonSteps = steps.newPersonProduction;
+    personSteps = steps.personProduction;
+}
 
 var beforeFeature = [
         [steps.login.itLogin],
@@ -70,20 +85,24 @@ var beforeFeature = [
             ],
             steps: function() {
                 _.times(3, function(i) {
-                    steps.person.useBlankPersonSlot(i);
+                    personSteps.useBlankPersonSlot(i);
 
-                    steps.newPerson.goToNewPersonPage();
+                    using(newPersonSteps, function() {
+                        this.goToNewPersonPage();
 
-                    steps.newPerson.enterLastName(
-                        'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
-                    );
+                        this.enterLastName(
+                            'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
+                        );
+                    });
 
-                    steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
-                    steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
+                    using(newPersonSteps, function() {
+                        this.enterAffiliatedSocietySearchTerms('ASCAP');
+                        this.selectAffiliatedSocietySearchResultByIndex(0);
 
-                    steps.newPerson.save();
+                        this.save();
+                    });
 
-                    steps.person.findInternalIpiNumber();
+                    personSteps.findInternalIpiNumber();
                 });
             },
         },
@@ -534,7 +553,7 @@ var beforeFeature = [
                     this.createEnteredArtist();
 
                     this.enterAlbumCode(
-                        'TEST ALBUM CODE ' + randomId('commercialAlbum')
+                        'TESTALBUMCODE' + randomId('commercialAlbum')
                     );
 
                     _.times(3, function(i) {
@@ -624,7 +643,7 @@ var beforeFeature = [
                     this.validateTerritoryCount(1);
 
                     this.validateAlbumCode(
-                        'TEST ALBUM CODE ' + randomId('commercialAlbum')
+                        'TESTALBUMCODE' + randomId('commercialAlbum')
                     );
                 });
 
@@ -690,7 +709,7 @@ var beforeFeature = [
                     this.selectLibrary('AUDIOMACHINE');
 
                     this.enterAlbumCode(
-                        'TEST ALBUM CODE ' + randomId('libraryAlbum')
+                        'TESTALBUMCODE' + randomId('libraryAlbum')
                     );
 
                     _.times(3, function(i) {

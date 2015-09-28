@@ -6,6 +6,21 @@ pages.personProduction = exports;
 
 require(pages_path + 'base');
 
+exports.internalIpiNumberBinding = function() {
+    return $(
+        '[data-ng-if="person.creator && ' +
+        '!person.pristine.master_data.primary_name.suisa_ipi_number"] .ng-binding'
+    );
+};
+
+exports.internalIpiNumber = function() {
+    var binding = exports.internalIpiNumberBinding();
+
+    pages.base.scrollIntoView(binding);
+
+    return pph.trim(binding.getText());
+};
+
 exports.suisaIpiNumberBinding = function() {
     return $(
         '[data-ng-if="person.pristine.master_data.primary_name.suisa_ipi_number"] ' +
