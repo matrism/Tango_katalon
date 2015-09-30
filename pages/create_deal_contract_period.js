@@ -160,6 +160,7 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         fillIntoTerritoriesFieldLetter: function () {
+            pages.base.scrollIntoView(pages.create_deal_contract_period.elems.mdrcTerritoriesField);
             pages.create_deal_contract_period.elems.mdrcTerritoriesField.click();
             pages.create_deal_contract_period.elems.mdrcTerritoriesInputField.sendKeys("africa");
         },
@@ -178,6 +179,7 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         clickOnMdrcNoCommercialReleaseByMajorLabel: function () {
+            pages.base.scrollIntoView(pages.create_deal_contract_period.elems.mdrcNoCommercialReleaseByMajorLabel);
             pages.create_deal_contract_period.elems.mdrcNoCommercialReleaseByMajorLabel.click();
         },
 

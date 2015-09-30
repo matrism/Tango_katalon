@@ -4,7 +4,7 @@ var steps_path = _tf_config._system_.path_to_steps;
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 require(pages_path + "edit_deal_contract_period");
-
+require(steps_path + "base");
 
 if (steps.edit_deal_contract_period === undefined) {
     steps.edit_deal_contract_period = {
@@ -426,7 +426,7 @@ if (steps.edit_deal_contract_period === undefined) {
                 steps.edit_deal_contract_period.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton();
                 steps.edit_deal_contract_period.editClickMdrcNoCommercialReleaseByMajorLabelButton();
                 steps.edit_deal_contract_period.editCheckMdrcNoCommercialReleaseByMajorLabelOptionIsSelectedButton();
-                steps.base.scrollIntoView("Label section", pages.edit_deal_contract_period.elems.editMdrcLabelsElement);
+                //steps.base.scrollIntoView("Label section", pages.edit_deal_contract_period.elems.mdrcLabelsElement);
                 steps.edit_deal_contract_period.editRemoveMdrcLabel();
                 steps.edit_deal_contract_period.editSelectMdrcRandomLabelOption();
                 steps.edit_deal_contract_period.editCheckMdrcNoSelfRecordOptionIsSelectedOption();
@@ -436,13 +436,13 @@ if (steps.edit_deal_contract_period === undefined) {
                 steps.edit_deal_contract_period.editCheckMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelectedOption();
                 steps.edit_deal_contract_period.editMdrcDeliveryScheduleField();
                 steps.edit_deal_contract_period.editMdrcEveryWeeksField();
-                steps.base.scrollIntoView("Save MDRC button", pages.edit_deal_contract_period.elems.editMdrcSaveButton);
+                //steps.base.scrollIntoView("Save MDRC button", pages.edit_deal_contract_period.elems.editMdrcSaveButton);
                 steps.edit_deal_contract_period.editSaveMdrcFormButton();
             })
         },
 
         itEditDeemedCompleteMdrcContractPeriod: function (i) {
-            describe("Edit incomplete MDRC on  contract period screen", function () {
+            describe("Edit deemed complete MDRC on  contract period screen", function () {
                 steps.edit_deal_contract_period.editMdrcFormI(i);
                 steps.edit_deal_contract_period.editChooseDeemedCompleteMdrcOption();
                 steps.edit_deal_contract_period.editCheckDeemedCompleteMdrcOptionIsSelected();
@@ -454,7 +454,7 @@ if (steps.edit_deal_contract_period === undefined) {
                 steps.edit_deal_contract_period.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton();
                 steps.edit_deal_contract_period.editClickMdrcNoCommercialReleaseByMajorLabelButton();
                 steps.edit_deal_contract_period.editCheckMdrcNoCommercialReleaseByMajorLabelOptionIsSelectedButton();
-                steps.base.scrollIntoView("Label section", pages.edit_deal_contract_period.elems.editMdrcLabelsElement);
+                //steps.base.scrollIntoView("Label section", pages.edit_deal_contract_period.elems.mdrcLabelsElement);
                 steps.edit_deal_contract_period.editRemoveMdrcLabel();
                 steps.edit_deal_contract_period.editSelectMdrcRandomLabelOption();
                 steps.edit_deal_contract_period.editCheckMdrcNoSelfRecordOptionIsSelectedOption();
@@ -464,13 +464,13 @@ if (steps.edit_deal_contract_period === undefined) {
                 steps.edit_deal_contract_period.editCheckMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelectedOption();
                 steps.edit_deal_contract_period.editMdrcDeliveryScheduleField();
                 steps.edit_deal_contract_period.editMdrcEveryWeeksField();
-                steps.base.scrollIntoView("Save MDRC button", pages.edit_deal_contract_period.elems.editMdrcSaveButton);
+                //steps.base.scrollIntoView("Save MDRC button", pages.edit_deal_contract_period.elems.mdrcLabelsElement);
                 steps.edit_deal_contract_period.editSaveMdrcFormButton();
             })
         },
 
         itEditCompleteMdrcContractPeriod: function (i) {
-            describe("Edit incomplete MDRC on  contract period screen", function () {
+            describe("Edit complete MDRC on  contract period screen", function () {
                 steps.edit_deal_contract_period.editMdrcFormI(i);
                 steps.edit_deal_contract_period.editChooseCompleteMdrcOption();
                 steps.edit_deal_contract_period.editCheckCompleteMdrcOptionIsSelected();
@@ -481,7 +481,7 @@ if (steps.edit_deal_contract_period === undefined) {
                 steps.edit_deal_contract_period.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton();
                 steps.edit_deal_contract_period.editClickMdrcNoCommercialReleaseByMajorLabelButton();
                 steps.edit_deal_contract_period.editCheckMdrcNoCommercialReleaseByMajorLabelOptionIsSelectedButton();
-                steps.base.scrollIntoView("Label section", pages.edit_deal_contract_period.elems.editMdrcLabelsElement);
+                //steps.base.scrollIntoView("Label section", pages.edit_deal_contract_period.elems.mdrcLabels);
                 steps.edit_deal_contract_period.editRemoveMdrcLabel();
                 steps.edit_deal_contract_period.editSelectMdrcRandomLabelOption();
                 steps.edit_deal_contract_period.editCheckMdrcNoSelfRecordOptionIsSelectedOption();
@@ -491,7 +491,7 @@ if (steps.edit_deal_contract_period === undefined) {
                 steps.edit_deal_contract_period.editCheckMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelectedOption();
                 steps.edit_deal_contract_period.editMdrcDeliveryScheduleField();
                 steps.edit_deal_contract_period.editMdrcEveryWeeksField();
-                steps.base.scrollIntoView("Save MDRC button", pages.edit_deal_contract_period.elems.editMdrcSaveButton);
+                //steps.base.scrollIntoView("Save MDRC button", pages.edit_deal_contract_period.elems.editMdrcSaveButton);
                 steps.edit_deal_contract_period.editSaveMdrcFormButton();
             })
         }
