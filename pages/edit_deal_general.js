@@ -63,6 +63,18 @@ if (pages.edit_deal_general === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.elems.editInternalContactsDropDownData));
         },
 
+        selectEditRandomInternalContactsFromDropDownRoleI: function (i) {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            pages.edit_deal_general.waitForAjax();
+        },
+
         clickEditInternalContactsRole: function () {
             pages.edit_deal_general.elems.editInternalContactRoleInputField.click();
         },
@@ -70,7 +82,8 @@ if (pages.edit_deal_general === undefined) {
         editTheIRowInternalContactField: function (i) {
             var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
             element.clear();
-            element.sendKeys("a");
+            element.sendKeys("test");
+            browser.sleep(1000);
         },
 
         clickEditInternalContactsRoleRowI: function (i) {

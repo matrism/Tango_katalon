@@ -45,7 +45,6 @@ var beforeFeature = function () {
             }
             steps.edit_deal_general.printInternalContactList();
             steps.edit_deal_general.editInternalContactsArea();
-
             steps.edit_deal_general.itEditInternalContactsToDealGeneralTab("a");
             for (var i = 2; i <= 4; i++) {
                 //steps.edit_deal_general.itEditAddInternalContactsRowIToDealGeneralTab(i);

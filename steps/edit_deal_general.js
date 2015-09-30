@@ -31,7 +31,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsHeaderTable: function () {
             it("Return internal contacts table header ", function () {
-                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[1]")).getText().
+                element(By.css("table.view-internal-contact tbody tr:nth-child(1)")).getText().
                     then(function (promise) {
                         console.log("Internal Contacts header table is: " + promise);
                         expect(promise).toEqual("Contact Name Role Email");
@@ -42,8 +42,8 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckFirstInternalContactsValues: function () {
             it("Return first internal contacts values added ", function () {
-                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[2]")).getText().
-                    then(function (promise) {
+                element(By.css("table.view-internal-contact tbody tr:nth-child(2)")).getText().
+                      then(function (promise) {
                         //console.log("First internal Contacts values added: " + promise);
                         expect(promise).not.toEqual("");
                         internalContacts[1] = promise + "\n";
@@ -53,7 +53,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsValues: function (i) {
             it("Return second third... the rest of internal contacts values added ", function () {
-                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[" + (i + 1) + "]")).getText().
+                element(By.css("table.view-internal-contact tbody tr:nth-child(" + (i + 1) + ")")).getText().
                     then(function (promise) {
                         console.log("Internal Contacts values added: " + promise);
                         expect(promise).not.toEqual("");
@@ -95,7 +95,6 @@ if (steps.edit_deal_general === undefined) {
         editInternalContactsFieldRowI: function (i) {
             it("Edit internal contact row i ", function () {
                     pages.edit_deal_general.editTheIRowInternalContactField(i);
-                    pages.edit_deal_general.waitForAjax();
                 }
             );
         },
