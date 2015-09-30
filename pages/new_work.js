@@ -583,7 +583,7 @@ exports.selectRandomCreatorSuggestion = function() {
         return result;
     });
 };
-exports.selectFirstCreatorSuggestion = function() {
+exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
     var suggestion = $$('.typeahead-result').first();
     var result = {};
 
@@ -594,6 +594,8 @@ exports.selectFirstCreatorSuggestion = function() {
             if(/^\(.*\)$/.test(value)) {
                 value = value.slice(1, -1);
             }
+
+            expect(value).toEqual(ipiNumber);
 
             return value;
         })

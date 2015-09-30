@@ -330,8 +330,8 @@ exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
         pages.work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first search result', function() {
-        pages.new_work.selectFirstCreatorSuggestion().then(function() {
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function() {
             var data = hash.currentEntityDataSlotsByType.work;
 
             data.creators = data.creators || [];
@@ -360,8 +360,8 @@ exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
         pages.new_work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first creator suggestion', function() {
-        pages.new_work.selectFirstCreatorSuggestion();
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(creator.ipiNumber);
     });
 
     return deferred.promise;
@@ -530,8 +530,8 @@ exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, ke
         pages.work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first creator suggestion', function() {
-        pages.new_work.selectFirstCreatorSuggestion().then(function(selected) {
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(previousCreator.ipiNumber).then(function(selected) {
             var component;
             var creator;
 
