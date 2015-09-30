@@ -31,6 +31,9 @@ exports.addAnotherWorkSearchTermOption = function() {
 exports.removeWorkSearchTermButton = function(i) {
     return pages.base.mainSearchBar().$$('.tg-typeahead__tag-remove').get(i);
 };
+exports.workSearchResult = function() {
+    return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions');
+};
 exports.workSearchMatches = function() {
     return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
 };
@@ -1036,6 +1039,12 @@ exports.enterShellWorkCreatorContribution = function(i, j, value) {
 exports.expectCreatorSuggestionsToBeDisplayed = function() {
     browser.wait(
         ExpectedConditions.visibilityOf($('.typeahead-result')),
+        _tf_config._system_.wait_timeout
+    );
+};
+exports.waitForWorkSearchResultToBeDisplayed = function() {
+    browser.wait(
+        ExpectedConditions.visibilityOf($('.tg-typeahead__suggestions')),
         _tf_config._system_.wait_timeout
     );
 };

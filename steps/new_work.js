@@ -425,8 +425,8 @@ exports.enterNewShellWork = function(i, title, data, key) {
         pages.new_work.enterComponentWorkSearchTerms(i, title);
     });
 
-    it('Wait for work suggestions to load', function() {
-        pages.base.waitForAjax();
+    it('Wait for "Enter as a new work" suggestion', function() {
+        pages.new_work.waitForEnterAsNewWorkToBeDisplayed();
     });
 
     it('Select "Enter as a new work" suggestion', function() {
@@ -489,6 +489,40 @@ exports.selectRandomShellWorkCreator = function(i, j, data, key) {
 
     it('Select a random creator', function() {
         pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
+            var component;
+            var creator;
+
+            data = data || hash.currentEntityDataSlotsByType.work;
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+exports.selectShellWorkCreatorFromPersonSlot = function(i, j, slotIndex, data, key) {
+    var person;
+
+    it(
+        'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            person = _.merge({}, hash.personSlots[slotIndex]);
+            pages.new_work.enterShellWorkCreatorSearchTerms(i, j, person.ipiNumber);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function(selected) {
             var component;
             var creator;
 

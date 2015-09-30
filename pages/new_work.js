@@ -3,6 +3,7 @@ var _ = require("lodash");
 var pages_path = _tf_config._system_.path_to_pages;
 var pph = require('../helpers/pph');
 var random = require('../helpers/random');
+var ExpectedConditions = protractor.ExpectedConditions;
 require(pages_path + "base");
 exports = module.exports = pages.new_work = new ftf.pageObject({
 	url: _tf_config.urls.app_url + "#/create/work"
@@ -63,6 +64,12 @@ exports.componentWorkAllocationInputs = function() {
 };
 exports.enterAsNewWorkSuggestion = function() {
     return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
+};
+exports.waitForEnterAsNewWorkToBeDisplayed = function() {
+    browser.wait(
+        ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()),
+        _tf_config._system_.wait_timeout
+    );
 };
 exports.shellWorkTitleLanguageDropdown = function(i) {
     return exports.componentWorkRows().get(i).element(
@@ -605,6 +612,13 @@ exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
         return result;
     });
 };
+/*
+exports.selectSpecifyedCreator = function(name) {
+    var suggestion = $$('.typeahead-result[title="'+ name +'"]');
+
+    return suggestion.click();
+};
+*/
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
