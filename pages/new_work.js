@@ -612,13 +612,6 @@ exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
         return result;
     });
 };
-/*
-exports.selectSpecifyedCreator = function(name) {
-    var suggestion = $$('.typeahead-result[title="'+ name +'"]');
-
-    return suggestion.click();
-};
-*/
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);

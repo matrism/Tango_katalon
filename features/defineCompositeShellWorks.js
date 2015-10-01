@@ -17,7 +17,7 @@ var beforeFeature = [
             tags: [],
             steps: [
                 [function() {
-                  _.times(1, function(i) {
+                  _.times(3, function(i) {
                       steps.person.useBlankPersonSlot(i);
 
                       steps.newPerson.goToNewPersonPage();
@@ -147,11 +147,11 @@ var beforeFeature = [
                 [steps.new_work.selectCompositeWorkType, ['Medley']],
                 [steps.new_work.enterNewShellWork, [0, 'TEST SHELL WORK ' + randomId(3.1)]],
                 [steps.new_work.enterComponentWorkAllocation, [0, 50]],
-                [steps.new_work.selectRandomShellWorkCreator, [0, 0]],
+                [steps.new_work.selectShellWorkCreatorFromPersonSlot, [0, 0, 0]],
                 [steps.new_work.enterShellWorkCreatorContribution, [0, 0, 100]],
                 [steps.new_work.enterNewShellWork, [1, 'TEST SHELL WORK ' + randomId(3.2)]],
                 [steps.new_work.enterComponentWorkAllocation, [1, 50]],
-                [steps.new_work.selectRandomShellWorkCreator, [1, 0]],
+                [steps.new_work.selectShellWorkCreatorFromPersonSlot, [1, 0, 1]],
                 [steps.new_work.enterShellWorkCreatorContribution, [1, 0, 100]],
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],
