@@ -297,6 +297,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editClickOnMdrcNoCommercialReleaseByMajorLabel: function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcNoCommercialReleaseByMajorLabel);
             pages.edit_deal_contract_period.elems.editMdrcNoCommercialReleaseByMajorLabel.click();
         },
 
@@ -365,6 +366,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editClickOnSaveMdrcForm: function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcSaveButton);
             pages.edit_deal_contract_period.elems.editMdrcSaveButton.click();
         },
 
@@ -405,6 +407,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editRemoveTheFirstMdrcLabel : function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcRemoveFirstLabelIcon);
             pages.edit_deal_contract_period.elems.editMdrcRemoveFirstLabelIcon.click();
         }
     });

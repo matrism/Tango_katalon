@@ -56,7 +56,7 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['royaltyProcessing', 'smokeTest'],
+    commonFeatureTags: ['royaltyProcessing', 'smokeTest', 'broken'],
     feature: feature,
     beforeFeature: beforeFeature
 };

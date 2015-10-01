@@ -95,6 +95,13 @@ if (steps.create_deal_general === undefined) {
             );
         },
 
+        selectRandomInternalContactDropDownRowI: function (i) {
+            it("Select random value from internal contact drop down", function () {
+                    pages.create_deal_general.selectRandomInternalContactsFromDropDownRowI(i);
+                }
+            );
+        },
+
         clickOnInternalContactRole: function () {
             it("Click on internal contact role field", function () {
                     pages.create_deal_general.clickOnInternalContactsRole();

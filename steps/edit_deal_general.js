@@ -3,7 +3,6 @@ var pages_path = _tf_config._system_.path_to_pages;
 var steps_path = _tf_config._system_.path_to_steps;
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-require(pages_path + "edit_deal_general");
 
 var internalContacts = [];
 
@@ -31,7 +30,8 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsHeaderTable: function () {
             it("Return internal contacts table header ", function () {
-                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[1]")).getText().
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("table.view-internal-contact tbody tr:nth-child(1)"))));
+                element(By.css("table.view-internal-contact tbody tr:nth-child(1)")).getText().
                     then(function (promise) {
                         console.log("Internal Contacts header table is: " + promise);
                         expect(promise).toEqual("Contact Name Role Email");
@@ -42,8 +42,8 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckFirstInternalContactsValues: function () {
             it("Return first internal contacts values added ", function () {
-                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[2]")).getText().
-                    then(function (promise) {
+                element(By.css("table.view-internal-contact tbody tr:nth-child(2)")).getText().
+                      then(function (promise) {
                         //console.log("First internal Contacts values added: " + promise);
                         expect(promise).not.toEqual("");
                         internalContacts[1] = promise + "\n";
@@ -53,7 +53,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsValues: function (i) {
             it("Return second third... the rest of internal contacts values added ", function () {
-                element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[" + (i + 1) + "]")).getText().
+                element(By.css("table.view-internal-contact tbody tr:nth-child(" + (i + 1) + ")")).getText().
                     then(function (promise) {
                         console.log("Internal Contacts values added: " + promise);
                         expect(promise).not.toEqual("");
@@ -95,7 +95,6 @@ if (steps.edit_deal_general === undefined) {
         editInternalContactsFieldRowI: function (i) {
             it("Edit internal contact row i ", function () {
                     pages.edit_deal_general.editTheIRowInternalContactField(i);
-                    pages.edit_deal_general.waitForAjax();
                 }
             );
         },
@@ -103,7 +102,6 @@ if (steps.edit_deal_general === undefined) {
         selectEditRandomInternalContactDropDown: function () {
             it("Select edit random value from internal contact drop down", function () {
                     pages.edit_deal_general.selectEditRandomInternalContactsFromDropDown();
-                    pages.edit_deal_general.waitForAjax();
                 }
             );
         },
@@ -118,7 +116,6 @@ if (steps.edit_deal_general === undefined) {
         clickEditInternalContactRoleRowI: function (i) {
             it("Click edit internal contact role row i", function () {
                 pages.edit_deal_general.clickEditInternalContactsRoleRowI(i);
-                pages.edit_deal_general.waitForAjax();
             });
         },
 
@@ -171,8 +168,7 @@ if (steps.edit_deal_general === undefined) {
         itSaveInternalContactsChanges: function () {
             it("Save internal contacts changes after editing them", function () {
                 pages.edit_deal_general.clickOnSaveEditInternalContacts();
-                pages.edit_deal_general.waitForAjax();
-            })
+            });
         },
 
         itCancelInternalContactsChanges: function () {

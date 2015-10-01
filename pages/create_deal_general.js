@@ -152,6 +152,19 @@ if (pages.create_deal_general === undefined) {
             element.click();
         },
 
+        selectRandomInternalContactsFromDropDownRowI: function (i) {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor(Math.random() * options.length);
+                    var element = options[randomNumber];
+                    element.click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
+
+        },
+
         clickOnTheDraftContractStatus: function () {
             pages.create_deal_general.elems.draftContractStatusButton.click();
         },
