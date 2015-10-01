@@ -397,7 +397,7 @@ if (steps.create_deal_scope === undefined) {
 
         selectSpecificPublisherNameDropDownChainI: function (i) {
             it("Select specific value publisher name drop down chain i", function () {
-                pages.create_deal_scope.selectSpecificPublisherNameDropDownChainI("(53026414)\nWB MUSIC CORP.", i);
+                pages.create_deal_scope.selectSpecificPublisherNameDropDownChainI("(53026414)\nwb music corp.", i);
             });
         },
 

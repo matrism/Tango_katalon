@@ -226,7 +226,7 @@ if (steps.edit_deal_scope === undefined) {
 
         editSelectSpecificPublisherNameDropDown: function () {
             it("Edit - select specific value publisher name drop down", function () {
-                pages.edit_deal_scope.editSelectTheSpecificPublisherNameDropDown("(53026414)\nWB MUSIC CORP.");
+                pages.edit_deal_scope.editSelectTheSpecificPublisherNameDropDown("(53026414)\nwb music corp.");
             });
         },
 
@@ -281,7 +281,7 @@ if (steps.edit_deal_scope === undefined) {
 
         editSelectSpecificPublisherNameDropDownChainI: function (i) {
             it("Edit - select specific value publisher name drop down chain i", function () {
-                pages.edit_deal_scope.editSelectSpecificPublisherNameDropDownChainI("(53026414)\nWB MUSIC CORP.", i);
+                pages.edit_deal_scope.editSelectSpecificPublisherNameDropDownChainI("(53026414)\nwb music corp.", i);
             });
         },
 
