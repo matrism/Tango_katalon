@@ -14,27 +14,25 @@ var beforeFeature = [
     feature = [
         {
             name: 'Create persons to use as creators for COS and MED composite work',
-            tags: [],
-            steps: [
-                [function() {
-                  _.times(3, function(i) {
-                      steps.person.useBlankPersonSlot(i);
+            tags: ['dbg'],
+            steps: function() {
+                _.times(3, function(i) {
+                    steps.person.useBlankPersonSlot(i);
 
-                      steps.newPerson.goToNewPersonPage();
+                    steps.newPerson.goToNewPersonPage();
 
-                      steps.newPerson.enterLastName(
-                          'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
-                      );
+                    steps.newPerson.enterLastName(
+                        'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
+                    );
 
-                      steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
-                      steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
+                    steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
+                    steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
 
-                      steps.newPerson.save();
+                    steps.newPerson.save();
 
-                      steps.person.findInternalIpiNumber();
-                  });
-                }]
-            ]
+                    steps.person.findInternalIpiNumber();
+               });
+            }
         },
         {
             name: 'Define a COS composite work with shell works',
