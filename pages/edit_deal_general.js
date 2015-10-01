@@ -3,6 +3,7 @@ var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
 var pages_path = _tf_config._system_.path_to_pages;
 require(pages_path + "base");
+require(pages_path + "edit_deal_general");
 if (pages.edit_deal_general === undefined) {
     pages.edit_deal_general = new ftf.pageObject({
 
@@ -12,7 +13,7 @@ if (pages.edit_deal_general === undefined) {
             internalContactTableData: {css: "table.view-internal-contact tbody"},
             internalContactsEditIcon: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) button i.fa.fa-pencil"},
             internalContactsEditInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            addInternalContactsLink: {css: "div.add-new-button.ng-scope button.btn.btn-link"},
+            addInternalContactsLink: {css: "div.add-new-button button.btn.btn-link"},
             saveEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button[data-ng-click='tgModularViewMethods.save();']"},
             cancelEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button.btn.btn-cancel.ng-binding"},
             editInternalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -40,8 +41,9 @@ if (pages.edit_deal_general === undefined) {
         },
 
         clickOnSaveEditInternalContacts: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.elems.saveEditInternalContactsButton));
             pages.edit_deal_general.elems.saveEditInternalContactsButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("table.view-internal-contact tbody tr:nth-child(1)"))));
+            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.addInternalContactsLink));
         },
 
         clickOnCancelEditInternalContacts: function () {
