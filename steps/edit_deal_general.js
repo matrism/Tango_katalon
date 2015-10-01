@@ -3,7 +3,6 @@ var pages_path = _tf_config._system_.path_to_pages;
 var steps_path = _tf_config._system_.path_to_steps;
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-require(pages_path + "edit_deal_general");
 
 var internalContacts = [];
 
@@ -31,6 +30,7 @@ if (steps.edit_deal_general === undefined) {
 
         returnAndCheckInternalContactsHeaderTable: function () {
             it("Return internal contacts table header ", function () {
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("table.view-internal-contact tbody tr:nth-child(1)"))));
                 element(By.css("table.view-internal-contact tbody tr:nth-child(1)")).getText().
                     then(function (promise) {
                         console.log("Internal Contacts header table is: " + promise);
@@ -102,7 +102,6 @@ if (steps.edit_deal_general === undefined) {
         selectEditRandomInternalContactDropDown: function () {
             it("Select edit random value from internal contact drop down", function () {
                     pages.edit_deal_general.selectEditRandomInternalContactsFromDropDown();
-                    pages.edit_deal_general.waitForAjax();
                 }
             );
         },
@@ -117,7 +116,6 @@ if (steps.edit_deal_general === undefined) {
         clickEditInternalContactRoleRowI: function (i) {
             it("Click edit internal contact role row i", function () {
                 pages.edit_deal_general.clickEditInternalContactsRoleRowI(i);
-                pages.edit_deal_general.waitForAjax();
             });
         },
 
@@ -170,8 +168,7 @@ if (steps.edit_deal_general === undefined) {
         itSaveInternalContactsChanges: function () {
             it("Save internal contacts changes after editing them", function () {
                 pages.edit_deal_general.clickOnSaveEditInternalContacts();
-                pages.edit_deal_general.waitForAjax();
-            })
+            });
         },
 
         itCancelInternalContactsChanges: function () {
