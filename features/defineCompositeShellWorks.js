@@ -13,7 +13,7 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Create persons',
+            name: 'Create persons to use as creators for COS and MED composite work',
             tags: [],
             steps: [
                 [function() {
