@@ -41,6 +41,7 @@ var beforeFeature = [
             tags: [],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 0]],
+
                 [steps.new_work.goToNewWorkPage],
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(0)]],
                 [steps.new_work.clickCompositeWorkCheckbox],
