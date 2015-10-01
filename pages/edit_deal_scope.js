@@ -201,7 +201,7 @@ if (pages.edit_deal_scope === undefined) {
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(publisherName) != -1) {
+                                if (text.toLowerCase().indexOf(publisherName) != -1) {
                                     desiredOption = option;
                                     return true;
                                 }
@@ -315,7 +315,7 @@ if (pages.edit_deal_scope === undefined) {
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(publisherName) != -1) {
+                                if (text.toLowerCase().indexOf(publisherName) != -1) {
                                     desiredOption = option;
                                     return true;
                                 }
