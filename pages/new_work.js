@@ -66,10 +66,7 @@ exports.enterAsNewWorkSuggestion = function() {
     return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
 };
 exports.waitForEnterAsNewWorkToBeDisplayed = function() {
-    browser.wait(
-        ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()),
-        _tf_config._system_.wait_timeout
-    );
+    browser.wait(ExpectedConditions.visibilityOfAny(exports.enterAsNewWorkSuggestion()));
 };
 exports.shellWorkTitleLanguageDropdown = function(i) {
     return exports.componentWorkRows().get(i).element(
