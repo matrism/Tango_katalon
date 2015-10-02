@@ -598,7 +598,7 @@ var beforeFeature = [
                     this.createEnteredLabel();
 
                     this.enterCatalogueNumber(
-                        0, randomId('commercialAlbumCatalogueNumber')
+                        0, randomId('commercialAlbumCatalogueNumber').slice(0, 16)
                     );
 
                     this.enterLicenseCode(
@@ -677,7 +677,7 @@ var beforeFeature = [
                     );
 
                     this.validateCatalogueNumber(
-                        0, randomId('commercialAlbumCatalogueNumber')
+                        0, randomId('commercialAlbumCatalogueNumber').slice(0, 16)
                     );
 
                     this.validateLicenseCode(
@@ -820,7 +820,7 @@ var beforeFeature = [
                     this.selectFilterTag('Catalog');
 
                     this.enterTerms(
-                        randomId('commercialAlbumCatalogueNumber')
+                        randomId('commercialAlbumCatalogueNumber').slice(0, 16)
                     );
 
                     this.selectResultByIndex(0);
