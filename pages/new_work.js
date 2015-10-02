@@ -607,7 +607,7 @@ module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
 	element.clear();
-	element.sendKeys(value);
+	return element.sendKeys(value);
 };
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     var element = exports.componentWorkAllocationInput(i);

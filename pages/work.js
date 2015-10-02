@@ -753,8 +753,8 @@ module.exports.creatorContributions = function(i) {
     var ithElement;
     // FIXME: Move this into its own locator.
     var elements = (
-        $(".scope-delivery-table")
-            .all(by.binding("creator.contribution"))
+        $('.scope-delivery-table')
+            .all(by.binding(' ::(creatorContribution.contribution.value | number:3) '))
             .filter (
                 function(element) {
                     return element.isDisplayed();

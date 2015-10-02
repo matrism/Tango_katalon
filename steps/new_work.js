@@ -366,27 +366,29 @@ exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
 
     return deferred.promise;
 };
-module.exports.enterMaximumCreatorContribution = function(i) {
-	it (
-		"Enter 100% contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterCreatorContribution(i, 100);
-		}
-	);
+
+exports.enterMaximumCreatorContribution = function(i) {
+    exports.enterCreatorContribution(i, 100);
 };
-module.exports.enterMediumCreatorContribution = function(i) {
-	it (
-		"Enter 50% contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterCreatorContribution(i, 50);
-		}
-	);
+
+exports.enterMediumCreatorContribution = function(i) {
+    exports.enterCreatorContribution(i, 50);
 };
-module.exports.enterCreatorContribution = function(i, value) {
-	it (
-		"Enter contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterCreatorContribution(i, value);
-		}
-	);
+
+exports.enterCreatorContribution = function(i, value) {
+    it (
+        "Enter contribution percentage for creator #" + (i + 1) + '(' + value + ')', function() {
+            pages.new_work.enterCreatorContribution(i, value).then(function() {
+                var workSlot = hash.currentEntityDataSlotsByType.work,
+                    creators = workSlot.creators = (workSlot.creators || []),
+                    creator = creators[i] = (creators[i] || {});
+
+                creator.contribution = value;
+            });
+        }
+    );
 };
+
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     it('Validate required component work allocation field #' + (i + 1), function() {
         pages.new_work.validateRequiredComponentWorkAllocationField(i);
