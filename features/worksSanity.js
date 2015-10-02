@@ -693,6 +693,8 @@ var beforeFeature = [
             tags: [
                 'worksSanityCreateLibraryAlbum',
                 'worksSanityValidateLibraryAlbum',
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByLibraryPlusTitle',
             ],
             steps: function() {
                 steps.base.useEntityDataSlot('album', 'libraryAlbum');
