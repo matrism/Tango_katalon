@@ -523,8 +523,8 @@ exports.selectShellWorkCreatorFromPersonSlot = function(i, j, slotIndex, data, k
 
     it('Select result by IPI number', function() {
         pages.new_work.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function(selected) {
-            var component;
-            var creator;
+            var component,
+                creator;
 
             data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
