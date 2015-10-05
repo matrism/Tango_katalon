@@ -179,7 +179,7 @@ config = {
         }*/
         
         // Append the script improvements to the html report
-        reportImprovementFilePath = path.join(__dirname, '../tools/improve-report.js');
+        reportImprovementFilePath = path.join(__dirname, '../tools/improve-html-reports.js');
         fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
 
         console.log('Finished with code:', statusCode);
