@@ -625,7 +625,7 @@ exports.searchForPreviouslyEnteredComponentWork = function (i) {
     });
 
     it('Wait for search results to load', function () {
-        pages.base.waitForAjax();
+        pages.work.waitForWorkSearchResultToBeDisplayed();
     });
 };
 exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function () {

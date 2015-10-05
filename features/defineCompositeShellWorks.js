@@ -13,6 +13,28 @@ var beforeFeature = [
     ],
     feature = [
         {
+            name: 'Create persons to use as creators for COS and MED composite work',
+            tags: [],
+            steps: function() {
+                _.times(3, function(i) {
+                    steps.person.useBlankPersonSlot(i);
+
+                    steps.newPerson.goToNewPersonPage();
+
+                    steps.newPerson.enterLastName(
+                        'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
+                    );
+
+                    steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
+                    steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
+
+                    steps.newPerson.save();
+
+                    steps.person.findInternalIpiNumber();
+               });
+            }
+        },
+        {
             name: 'Define a COS composite work with shell works',
             tags: [],
             steps: [
@@ -22,7 +44,7 @@ var beforeFeature = [
                 [steps.new_work.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomId(0)]],
                 [steps.new_work.clickCompositeWorkCheckbox],
                 [steps.new_work.selectCompositeWorkType, ['Composite of Samples']],
-                [steps.new_work.selectRandomCreator, [0]],
+                [steps.new_work.selectCreatorFromPersonSlot, [0, 0]],
                 [steps.new_work.enterCreatorContribution, [0, 50]],
                 [steps.new_work.enterNewShellWork, [0, 'TEST SHELL WORK ' + randomId(0)]],
                 [steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed],
@@ -32,7 +54,7 @@ var beforeFeature = [
                 [steps.new_work.expectShellWorkTitleToMatchEnteredOne, [0]],
                 [steps.new_work.validateDefaultShellWorkCreatorRole, [0, 0]],
                 [steps.new_work.validateRequiredShellWorkCreatorNameField, [0, 0]],
-                [steps.new_work.selectRandomShellWorkCreator, [0, 0]],
+                [steps.new_work.selectShellWorkCreatorFromPersonSlot, [0, 0, 0]],
                 [steps.new_work.validateRequiredShellWorkCreatorContributionField, [0, 0]],
                 [steps.new_work.enterShellWorkCreatorContribution, [0, 0, 100]],
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
@@ -124,11 +146,11 @@ var beforeFeature = [
                 [steps.new_work.selectCompositeWorkType, ['Medley']],
                 [steps.new_work.enterNewShellWork, [0, 'TEST SHELL WORK ' + randomId(3.1)]],
                 [steps.new_work.enterComponentWorkAllocation, [0, 50]],
-                [steps.new_work.selectRandomShellWorkCreator, [0, 0]],
+                [steps.new_work.selectShellWorkCreatorFromPersonSlot, [0, 0, 0]],
                 [steps.new_work.enterShellWorkCreatorContribution, [0, 0, 100]],
                 [steps.new_work.enterNewShellWork, [1, 'TEST SHELL WORK ' + randomId(3.2)]],
                 [steps.new_work.enterComponentWorkAllocation, [1, 50]],
-                [steps.new_work.selectRandomShellWorkCreator, [1, 0]],
+                [steps.new_work.selectShellWorkCreatorFromPersonSlot, [1, 0, 1]],
                 [steps.new_work.enterShellWorkCreatorContribution, [1, 0, 100]],
                 [steps.new_work.optToIncludeWorkOnWebsite, [false]],
                 [steps.new_work.saveWork],

@@ -40,6 +40,9 @@ exports.workSearchMatch = function(i) {
 exports.workSearchMatchCount = function() {
     return exports.workSearchMatches().count();
 };
+exports.workSearchResult = function() {
+    return $$('.tg-typeahead__suggestions');
+};
 exports.expectWorkSearchMatchCountToBe = function(value) {
     expect(exports.workSearchMatchCount()).toBe(value);
 };
@@ -1038,6 +1041,9 @@ exports.expectCreatorSuggestionsToBeDisplayed = function() {
         ExpectedConditions.visibilityOf($('.typeahead-result')),
         _tf_config._system_.wait_timeout
     );
+};
+exports.waitForWorkSearchResultToBeDisplayed = function() {
+    browser.wait(ExpectedConditions.visibilityOfAny(exports.workSearchResult()));
 };
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     var element = exports.componentWorkAllocationInput(i);
