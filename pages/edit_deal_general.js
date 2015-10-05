@@ -43,8 +43,7 @@ if (pages.edit_deal_general === undefined) {
         clickOnSaveEditInternalContacts: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.elems.saveEditInternalContactsButton));
             pages.edit_deal_general.elems.saveEditInternalContactsButton.click();
-            browser.sleep(5000);
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.addInternalContactsLink));
+            browser.sleep(10000);
         },
 
         clickOnCancelEditInternalContacts: function () {
