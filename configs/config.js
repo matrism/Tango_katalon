@@ -43,7 +43,12 @@ var configer = global.ftf.configer,
             show_skipped_tests: false,
             screenshot_only_on_fail: false,
             tags: tags,
-            legacyOverrides: {},
+            legacyOverrides: {
+                legacyPerson: {
+                    newPerson: 'newPersonProduction',
+                    person: 'personProduction',
+                },
+            },
         },
         _env_: env,
         localhost: {
