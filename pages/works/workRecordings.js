@@ -1,5 +1,7 @@
 'use strict';
 
+var pph = require('../helpers/pph');
+
 pages.workRecordings = exports;
 
 exports.recordingContainers = function() {
@@ -80,4 +82,18 @@ exports.validateRecordingDurations = function(values) {
     values.forEach(function(value) {
         expect(durations).toContain(value);
     });
+};
+
+exports.libraryNameBinding = function(i) {
+    return $$('[data-ng-switch="commonDataHolder.isLibrary"] .ng-binding').first();
+};
+
+exports.libraryName = function(i) {
+    var element = exports.libraryNameBinding(i);
+    pages.base.scrollIntoView(element);
+    return pph.trim(element.getText());
+};
+
+exports.validateLibraryName = function(i, value) {
+    expect(exports.libraryName(i)).toBe(value);
 };

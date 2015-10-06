@@ -11,7 +11,7 @@ if (pages.create_deal_scope === undefined) {
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
             territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
             territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            territoryDropDown: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             addPublisherShareSetLink: {css: "div.publisher-share-totals a[data-ng-click='addChain(modularEditModels.model.id, form.terms.activeScope.id);']"},
             firstPublisherNameField: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input[ng-model='$term']"},
             firstPublisherOwnPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"},
@@ -40,6 +40,7 @@ if (pages.create_deal_scope === undefined) {
             cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             publisherShareSetArea: {css: "div[data-tg-modular-edit-id='publisherShareSets']"},
             overridePssIcon: {css: "div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] a[data-ng-click='showSubPubOverrideForm()'] i"},
+            subPublisherOverridePssField: {css: "div[name='subPublisherOverride'] div[ng-class='tgTypeaheadWrapClass']"},
             subPublisherOverridePssInputField: {css: "div[name='subPublisherOverride'] input[ng-model='$term']"},
             territoryOverridePssField: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
             territoryOverridePssFieldInput: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -63,12 +64,10 @@ if (pages.create_deal_scope === undefined) {
             return $$(".column-add-button-icon").first();
 
         },
-        addContractPeriodButton:function()
-        {
-          return $(".column-add-button-hint").first();
+        addContractPeriodButton: function () {
+            return $(".column-add-button-hint").first();
 
         },
-
 
 
         addScopeForm: function () {
@@ -115,7 +114,7 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.publisherShareSetArea.click();
         },
 
-        enterTerritoryOfControlSearchTerms: function(value) {
+        enterTerritoryOfControlSearchTerms: function (value) {
             var field = pages.create_deal_scope.elems.territoryField;
             var input = pages.create_deal_scope.elems.territoryInput;
 
@@ -131,7 +130,7 @@ if (pages.create_deal_scope === undefined) {
         addTerritoryByTypingToScope: function () {
             pages.create_deal_scope.elems.territoryField.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryInput));
-            pages.create_deal_scope.elems.territoryInput.sendKeys("a");
+            pages.create_deal_scope.elems.territoryInput.sendKeys("asia");
         },
 
         addTheSpecificTerritoryByTypingToScope: function (territory) {
@@ -146,13 +145,13 @@ if (pages.create_deal_scope === undefined) {
             pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys(territory);
         },
 
-        territoryOfControlSearchResultLabels: function() {
+        territoryOfControlSearchResultLabels: function () {
             var selector = '.tg-typeahead__suggestions-group-item';
             browser.wait(ExpectedConditions.visibilityOf($(selector)));
             return $$(selector);
         },
 
-        selectTerritoryOfControlSearchResultByIndex: function(i) {
+        selectTerritoryOfControlSearchResultByIndex: function (i) {
             var element = pages.create_deal_scope.territoryOfControlSearchResultLabels().get(i);
             pages.base.scrollIntoView(element);
             return element.click();
@@ -161,10 +160,13 @@ if (pages.create_deal_scope === undefined) {
         selectRandomCountry: function () {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.territoryDropDown));
-            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.driver.findElements(By.css("div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    _.sample(options.slice(0, 3)).click();
-                })
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    var element = options[randomNumber];
+                    element.click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_scope.elems.territoryDropDown));
         },
 
         selectSpecificCountry: function (country) {
@@ -279,87 +281,83 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        clickOnAddPublisherShareSetLink: function(more) {
-            more = more || {};
-
-            var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
-
-            // TODO: Remove this once this situation is resolved:
-            // https://github.com/wmgdsp/tango-app/commit/8b348611b3da7d7c0bb2b5b3dab444cad5d31b1e#commitcomment-12891620
-            if(more.scrollIntoView) {
-                pages.base.scrollIntoView(element);
-            }
-
-            return element.click().then(function() {
-                return browser.wait(ExpectedConditions.visibilityOf(
-                    pages.create_deal_scope.elems.firstPublisherNameField
-                ));
-            });
+        clickOnAddPublisherShareSetLink: function () {
+            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
+            //var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
+            //
+            //pages.base.scrollIntoView(element);
+            //
+            //return element.click().then(function() {
+            //    return browser.wait(ExpectedConditions.visibilityOf(
+            //        pages.create_deal_scope.elems.firstPublisherNameField
+            //    ));
+            //});
         },
 
-        publisherShareChainContainers: function() {
+        publisherShareChainContainers: function () {
             return element.all(
                 by.repeater('chain in modularEditModels.model._chains track by chain.id')
             );
         },
 
-        publisherShareRows: function(i) {
+        publisherShareRows: function (i) {
             return (
                 pages.create_deal_scope.publisherShareChainContainers().get(i)
-                    .$$('.publisher-row, .am-share').filter(function(element) {
+                    .$$('.publisher-row, .am-share').filter(function (element) {
                         return element.isDisplayed();
                     })
             );
         },
 
-        publisherSearchTermsInput: function(i, j) {
+        publisherSearchTermsInput: function (i, j) {
             return (
                 pages.create_deal_scope.publisherShareRows(i)
                     .get(j).$('[name="acquirer"] input')
             );
         },
 
-        enterPublisherSearchTerms: function(i, j, value) {
+        enterPublisherSearchTerms: function (i, j, value) {
             var element = pages.create_deal_scope.publisherSearchTermsInput(i, j);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
         },
 
-        publisherSearchResultLabels: function() {
+        publisherSearchResultLabels: function () {
             var selector = '.tg-typeahead__suggestions-group-item';
             browser.wait(ExpectedConditions.visibilityOf($(selector)));
             return $$(selector);
         },
 
-        selectPublisherSearchResultByIndex: function(i) {
+        selectPublisherSearchResultByIndex: function (i) {
             var element = pages.create_deal_scope.publisherSearchResultLabels().get(i);
             pages.base.scrollIntoView(element);
             return element.click();
         },
 
-        ownPublisherShareInput: function(i, j) {
+        ownPublisherShareInput: function (i, j) {
             return (
                 pages.create_deal_scope.publisherShareRows(i)
                     .get(j).$('[name="ownShare"]')
             );
         },
 
-        enterOwnPublisherShare: function(i, j, value) {
+        enterOwnPublisherShare: function (i, j, value) {
             var element = pages.create_deal_scope.ownPublisherShareInput(i, j);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
         },
 
-        collectPublisherShareInput: function(i, j) {
+        collectPublisherShareInput: function (i, j) {
             return (
                 pages.create_deal_scope.publisherShareRows(i)
                     .get(j).$('[name="collectShare"]')
             );
         },
 
-        enterCollectPublisherShare: function(i, j, value) {
+        enterCollectPublisherShare: function (i, j, value) {
             var element = pages.create_deal_scope.collectPublisherShareInput(i, j);
             pages.base.scrollIntoView(element);
             element.clear();
@@ -436,7 +434,7 @@ if (pages.create_deal_scope === undefined) {
             element(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer")).getText()
                 .then(function (promise) {
                     console.log("The message for no results of publisher name drop down is: " + promise);
-                    expect(promise).toContain("No results for");
+                    //expect(promise).toContain("No results for");
                 });
         },
 
@@ -447,7 +445,7 @@ if (pages.create_deal_scope === undefined) {
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(publisherName) != -1) {
+                                if (text.toLowerCase().indexOf(publisherName) != -1) {
                                     desiredOption = option;
                                     return true;
                                 }
@@ -544,11 +542,11 @@ if (pages.create_deal_scope === undefined) {
             element.sendKeys("wb music corp");
         },
 
-        clickOnTheYesSocietyAwardCreditPublisherShareSet: function(){
-          pages.create_deal_scope.elems.yesSocietyAwardCreditPss.click();
+        clickOnTheYesSocietyAwardCreditPublisherShareSet: function () {
+            pages.create_deal_scope.elems.yesSocietyAwardCreditPss.click();
         },
 
-        clickOnTheNoSocietyAwardCreditPublisherShareSet: function(){
+        clickOnTheNoSocietyAwardCreditPublisherShareSet: function () {
             pages.create_deal_scope.elems.noSocietyAwardCreditPss.click();
         },
 
@@ -572,7 +570,7 @@ if (pages.create_deal_scope === undefined) {
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(publisherName) != -1) {
+                                if (text.toLowerCase().indexOf(publisherName) != -1) {
                                     desiredOption = option;
                                     return true;
                                 }
@@ -612,11 +610,13 @@ if (pages.create_deal_scope === undefined) {
 
         clickOnTheAddOverrideIconPss: function () {
             pages.create_deal_scope.elems.overridePssIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.subPublisherOverridePssInputField));
+            pages.create_deal_advances.waitForAjax();
         },
 
-        selectTheSubPublisherOverridePss: function(subPublisherName, subPublisherSelected){
+        selectTheSubPublisherOverridePss: function (subPublisherName, subPublisherSelected) {
             var desiredOption;
+            pages.create_deal_scope.elems.subPublisherOverridePssField.click();
+            pages.create_deal_scope.elems.subPublisherOverridePssInputField.clear();
             pages.create_deal_scope.elems.subPublisherOverridePssInputField.sendKeys(subPublisherName);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[name='subPublisherOverride'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
@@ -638,7 +638,7 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        selectTheSubPublisherOverrideTerritoryPss: function(territory){
+        selectTheSubPublisherOverrideTerritoryPss: function (territory) {
             var desiredOption;
             pages.create_deal_scope.elems.territoryOverridePssField.click();
             pages.create_deal_scope.elems.territoryOverridePssFieldInput.sendKeys(territory);
@@ -662,26 +662,26 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        clickOnTheCancelSubPublisherOverridePss: function(){
+        clickOnTheCancelSubPublisherOverridePss: function () {
             pages.create_deal_scope.elems.cancelOverridePublisherShareSetButton.click();
         },
 
-        clickOnTheAddAnotherSubPublisherOverridePss: function(){
+        clickOnTheAddAnotherSubPublisherOverridePss: function () {
             pages.create_deal_scope.elems.addAnotherOverridePublisherShareSetButton.click();
         },
 
-        clickOnTheDoneSubPublisherOverridePss: function(){
+        clickOnTheDoneSubPublisherOverridePss: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.doneOverridePublisherShareSetButton));
             pages.create_deal_scope.elems.doneOverridePublisherShareSetButton.click();
         },
 
-        shareThePublisherShareSet: function(){
+        shareThePublisherShareSet: function () {
             pages.create_deal_scope.elems.sharePublisherShareSetIcon.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.useThisPublisherShareSetButton));
             pages.create_deal_scope.elems.useThisPublisherShareSetButton.click();
         },
 
-        shareTheScope: function(){
+        shareTheScope: function () {
             browser.actions().mouseMove(pages.create_deal_scope.elems.activeScope).perform();
             browser.actions().mouseMove(pages.create_deal_scope.elems.shareUnshareDeleteScopeIcon).perform();
             pages.create_deal_scope.elems.shareScopeLink.click();
@@ -689,11 +689,11 @@ if (pages.create_deal_scope === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.selectAllLinkShareScopeModalDialog));
         },
 
-        selectAllContractPeriodsShareScopeModalDialog:function(){
+        selectAllContractPeriodsShareScopeModalDialog: function () {
             pages.create_deal_scope.elems.selectAllLinkShareScopeModalDialog.click();
         },
 
-        clickOnTheDoneShareScopeModalDialog: function(){
+        clickOnTheDoneShareScopeModalDialog: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.doneShareScopeModalDialog));
             pages.create_deal_scope.elems.doneShareScopeModalDialog.click();
         }

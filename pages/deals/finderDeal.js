@@ -59,8 +59,8 @@ if (pages.finder_deal === undefined) {
             foundDealInputField: {css: "div[data-ng-model='submission.found_deal'] input[ng-model='$term']"},
             foundDealDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             findersRecoupmentResponsabilityOverride: {css: "input[data-ng-model='submission.override']"},
-            cancelTermsByContractPeriodFinderDeal: {css: "div[data-ng-form='cpsFinderDealForm'] button[data-ng-click='cancelFinderDealCpEdit()']"},
-            saveTermsByContractPeriodFinderDeal: {css: "div[data-ng-form='cpsFinderDealForm'] button[data-ng-click='updateDeal(cpsFinderDealForm.$valid, null, form.show.finderDeal, setActiveFinderDealCpTab)']"},
+            cancelTermsByContractPeriodFinderDeal: {css: "div[data-ng-form='cpsFinderDealForm'] div.CONTROLS.clearfix button[data-ng-click='cancelFinderDealCpEdit()']"},
+            saveTermsByContractPeriodFinderDeal: {css: "div[data-ng-form='cpsFinderDealForm'] div.CONTROLS.clearfix button[data-ng-click='updateDeal(cpsFinderDealForm.$valid, null, form.show.finderDeal, setActiveFinderDealCpTab)']"},
             //tooltips general terms
             priorAwarenessTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(1) i"},
             notifyWithinThisNumberOfDaysTooltip: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(2) i"},
@@ -440,6 +440,7 @@ if (pages.finder_deal === undefined) {
 
         clickOnTheCancelTermsByContractPeriodTermsFinderDeal: function () {
             pages.finder_deal.elems.cancelTermsByContractPeriodFinderDeal.click();
+            pages.finder_deal.waitForAjax();
         },
 
         confirmCancelChangesModalDialog: function () {

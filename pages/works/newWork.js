@@ -1,9 +1,19 @@
+<<<<<<< HEAD:tests/e2e/pages/works/newWork.js
 'use strict';
 
 var _ = require('lodash'),
     pph = require('../../helpers/pph'),
     random = require('../../helpers/random');
 
+=======
+"use strict";
+var _ = require("lodash");
+var pages_path = _tf_config._system_.path_to_pages;
+var pph = require('../helpers/pph');
+var random = require('../helpers/random');
+var ExpectedConditions = protractor.ExpectedConditions;
+require(pages_path + "base");
+>>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/pages/new_work.js
 exports = module.exports = pages.new_work = new ftf.pageObject({
 	url: _tf_config.urls.app_url + "#/create/work"
 });
@@ -63,6 +73,9 @@ exports.componentWorkAllocationInputs = function() {
 };
 exports.enterAsNewWorkSuggestion = function() {
     return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
+};
+exports.waitForEnterAsNewWorkToBeDisplayed = function() {
+    browser.wait(ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()));
 };
 exports.shellWorkTitleLanguageDropdown = function(i) {
     return exports.componentWorkRows().get(i).element(
@@ -583,7 +596,7 @@ exports.selectRandomCreatorSuggestion = function() {
         return result;
     });
 };
-exports.selectFirstCreatorSuggestion = function() {
+exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
     var suggestion = $$('.typeahead-result').first();
     var result = {};
 
@@ -594,6 +607,8 @@ exports.selectFirstCreatorSuggestion = function() {
             if(/^\(.*\)$/.test(value)) {
                 value = value.slice(1, -1);
             }
+
+            expect(value).toEqual(ipiNumber);
 
             return value;
         })
@@ -607,7 +622,7 @@ module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.new_work.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
 	element.clear();
-	element.sendKeys(value);
+	return element.sendKeys(value);
 };
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     var element = exports.componentWorkAllocationInput(i);
@@ -619,6 +634,20 @@ exports.enterComponentWorkAllocation = function(i, value) {
     pages.base.scrollIntoView(element);
     element.clear();
     element.sendKeys(value);
+};
+exports.selectIntendedPurpose = function(value) {
+    var element = exports.intendedPurposeDropdown();
+    pages.base.scrollIntoView(element);
+    return pages.base.selectDropdownOption(element, value, {
+        dropdownType: 'tg'
+    });
+};
+exports.selectMusicLibrary = function(value) {
+    var element = exports.musicLibraryDropdown();
+    pages.base.scrollIntoView(element);
+    return pages.base.selectDropdownOption(element, value, {
+        dropdownType: 'tg'
+    });
 };
 module.exports.enterCreationYear = function(value) {
 	var element = pages.new_work.creationYearInput();

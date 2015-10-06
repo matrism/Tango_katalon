@@ -7,24 +7,17 @@ var pph = require('../../helpers/pph'),
 if (pages.deal === undefined) {
     pages.deal = new ftf.pageObject({
         locators: {
-            dealBriefNumber: {xpath: "//*[@id='RECORD-HEADER']/div[1]/div[6]/div[1]/p[@class='info ng-binding']"},
+            dealBriefNumber: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) p.info.ng-binding"},
             continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
             saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
-            termsHeader: {css: ".nav-tabs>li:nth-child(2)>a>span"},
+            termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
             scopeHeader: {css: ".scope-heading"},
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
-            finderDealsTitle: {css: "div[data-ng-form='finderDealsForm'] h3"}
-        },
-
-        dealBriefNumber: function () {
-            return element(by.xpath("//*[@id='RECORD-HEADER']/div[1]/div[6]/div[1]/p[@class='info ng-binding']"));
-        },
-        getDealBriefNumberText: function () {
-          this.dealBriefNumber().getText();
+            finderDealsTitle: {css: "div[data-ng-form='finderDealsForm']"}
         },
 
 
@@ -63,6 +56,7 @@ if (pages.deal === undefined) {
         continueToNextPage: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.continueButton));
             pages.deal.elems.continueButton.click();
+            pages.deal.waitForAjax();
         },
 
         saveNewDeal: function () {
@@ -74,34 +68,15 @@ if (pages.deal === undefined) {
         },
 
         goToGeneralDealDetails: function () {
-var element =     pages.deal.elems.generalHeader;
-            pages.base.scrollIntoView(element);
-            browser.wait(ExpectedConditions.visibilityOf(element));
-            browser.wait(ExpectedConditions.elementToBeClickable(element));
-
-            element.click();
-
+            pages.deal.elems.generalHeader.click();
         },
 
         goToTermsDealDetails: function () {
-
-
-            var element =     pages.deal.elems.termsHeader;
-
-            browser.wait(ExpectedConditions.visibilityOf(element));
-            browser.wait(ExpectedConditions.elementToBeClickable(element));
-            pages.base.scrollIntoView(element);
-            element.click();
+            pages.deal.elems.termsHeader.click();
         },
 
         goToFinderDealTerms: function () {
-
-            var element =     pages.deal.elems.finderDealsHeaderLink;
-            pages.base.scrollIntoView(element);
-            browser.wait(ExpectedConditions.visibilityOf(element));
-            browser.wait(ExpectedConditions.elementToBeClickable(element));
-
-            element.click();
+            pages.deal.elems.finderDealsHeaderLink.click();
         },
 
         clickIncomeRatesLink: function () {
@@ -109,11 +84,6 @@ var element =     pages.deal.elems.generalHeader;
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.incomeRates));
             pages.deal.elems.incomeRates.click();
-
-
-
-
-
 
 
         },
@@ -126,8 +96,6 @@ var element =     pages.deal.elems.generalHeader;
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
 
 
-            pages.deal.scopeHeaderElement().click();
-            browser.sleep(1000);
             pages.deal.scopeHeaderElement().click();
         },
 

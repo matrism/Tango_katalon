@@ -27,16 +27,18 @@ exports.selectProcessingTerritory = function (territoryName) {
     var dropdown = exports.processingTerritoryDropdown();
 
     return dropdown.click().then(function(){
-        return dropdown.element(by.cssContainingText('[tg-component-render-template="$templates.popup.item"]', territoryName)).click();
+        dropdown.element(by.cssContainingText('[tg-component-render-template="$templates.popup.item"]', territoryName)).click();
+        pages.base.waitForAjax();
     });
 };
 
 exports.selectFirstRoyaltyPeriod = function () {
     var dropdown = exports.royaltyPeriodDropdown();
 
-    return dropdown.$('button.ng-binding').click().then(function(){
-        return dropdown.$$('.dropdown-menu > li > a').first().click();
-    });
+    dropdown.$('button.ng-binding').click();
+
+    pages.base.waitForAjax();
+    return dropdown.$$('.dropdown-menu > li > a').first().click();
 };
 
 exports.incomeProviderTypeahead = function () {
@@ -46,10 +48,10 @@ exports.incomeProviderTypeahead = function () {
 exports.selectIncomeProvider = function (name) {
     var typeahead = exports.incomeProviderTypeahead();
 
-    typeahead.sendKeys(name).then(function(){
-        browser.wait(ExpectedConditions.visibilityOfAny(typeahead.results()));
-        typeahead.results(name).first().click();
-    });
+    typeahead.sendKeys(name);
+
+    browser.wait(ExpectedConditions.visibilityOfAny(typeahead.results()));
+    typeahead.results(name).first().click();
 };
 
 exports.fileFormatDropdown = function () {
@@ -176,6 +178,7 @@ exports.expectToBeRedirectedToFileUploadHistory = function () {
     pages.base.waitForAjax();
 
     browser.wait(ExpectedConditions.visibilityOf(uploadHistoryTitle));
+    pages.base.waitForAjax();
 };
 
 exports.filesRepeater = function () {
@@ -199,6 +202,7 @@ exports.expectUploadedFileToBeListed = function () {
         fileBlinds = exports.fileBlindsByFileName(uploadedFile),
         fileBlind;
 
+    browser.wait(ExpectedConditions.visibilityOfAny(fileBlinds));
     expect(fileBlinds.count()).toBe(1);
     testData.fileBlind = fileBlind = fileBlinds.first();
 };
@@ -216,15 +220,20 @@ exports.openUploadedFileBlind = function () {
     var fileBlind = exports.uploadedFileBlind();
 
     fileBlind.$('.accordion-toggle').click();
-    browser.sleep(300);
 };
 
 exports.expectUploadedFileToHaveCorrectExpectedAmount = function (amount) {
-    var fileBlind = exports.uploadedFileBlind();
+    var fileBlind = exports.uploadedFileBlind(), amountElem = fileBlind.$('.amount-nr span[data-ng-hide]');
 
     amount = amount || testData.fileAmount;
 
-    expect(fileBlind.$('.amount-nr span[data-ng-hide]').getText()).toBe(amount);
+    browser.wait(function(){
+        return amountElem.getInnerHtml().then(function(text){
+            return !!text;
+        });
+    });
+
+    expect(amountElem.getInnerHtml()).toBe(amount);
 };
 
 function checkFileStatus (status) {

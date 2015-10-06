@@ -252,6 +252,7 @@ if (pages.edit_deal_contract_period === undefined) {
 
         editTheMdrcQuantity: function () {
             var number = Math.floor(Math.random() * 50) + 30;
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcQuantity);
             pages.edit_deal_contract_period.elems.editMdrcQuantity.clear();
             pages.edit_deal_contract_period.elems.editMdrcQuantity.sendKeys(number);
         },
@@ -279,6 +280,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editTheTerritoriesFieldLetter: function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcTerritoriesField);
             pages.edit_deal_contract_period.elems.editMdrcTerritoriesField.click();
             pages.edit_deal_contract_period.elems.editMdrcTerritoriesInputField.sendKeys("a");
         },
@@ -293,10 +295,12 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editClickOnMdrcYesCommercialReleaseByMajorLabel: function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcYesCommercialReleaseByMajorLabel);
             pages.edit_deal_contract_period.elems.editMdrcYesCommercialReleaseByMajorLabel.click();
         },
 
         editClickOnMdrcNoCommercialReleaseByMajorLabel: function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcNoCommercialReleaseByMajorLabel);
             pages.edit_deal_contract_period.elems.editMdrcNoCommercialReleaseByMajorLabel.click();
         },
 
@@ -365,6 +369,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editClickOnSaveMdrcForm: function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcSaveButton);
             pages.edit_deal_contract_period.elems.editMdrcSaveButton.click();
         },
 
@@ -405,6 +410,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editRemoveTheFirstMdrcLabel : function () {
+            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcRemoveFirstLabelIcon);
             pages.edit_deal_contract_period.elems.editMdrcRemoveFirstLabelIcon.click();
         }
     });

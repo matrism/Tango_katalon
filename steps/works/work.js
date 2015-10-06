@@ -1,3 +1,4 @@
+<<<<<<< HEAD:tests/e2e/steps/works/work.js
 'use strict';
 
 var _ = require('lodash'),
@@ -7,6 +8,19 @@ var _ = require('lodash'),
     random = require('../../helpers/random'),
     promise = protractor.promise;
 
+=======
+"use strict";
+
+var moment = require('moment'),
+    pad = require('left-pad'),
+    pph = require('../helpers/pph'),
+    random = require('../helpers/random'),
+    _ = require('lodash'),
+    promise = protractor.promise,
+    pageStep = require('../helpers/basicPageStep');
+
+require(pages_path + "work");
+>>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/steps/work.js
 steps.work = exports;
 
 exports.goToWorkPage = function (data, key) {
@@ -624,7 +638,7 @@ exports.searchForPreviouslyEnteredComponentWork = function (i) {
     });
 
     it('Wait for search results to load', function () {
-        pages.base.waitForAjax();
+        pages.work.waitForWorkSearchResultToBeDisplayed();
     });
 };
 exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function () {
@@ -1298,16 +1312,9 @@ module.exports.validateBltvr = function (value) {
         });
     });
 };
-module.exports.validateMusicLibrary = function (value) {
-    it("Validate music library (if validation value is not empty)", function () {
-        promise.when(value).then(function (value) {
-            if (!value) {
-                return;
-            }
-            expect(pages.work.musicLibrary()).toBe(value);
-        });
-    });
-};
+
+pageStep('Validate music library');
+
 module.exports.expectMusicalDistributionCategoryToBe = function (value) {
     it("Validate selected musical distribution category", function () {
         expect(pages.work.selectedMusicalDistributionCategory()).toBe(value);

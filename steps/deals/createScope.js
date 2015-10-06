@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-var promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.createDealScope = exports;
 
-exports.openNewScopeForm = function () {
+exports.openNewScopeForm = function() {
     it('Open a new scope form', function() {
         pages.create_deal_scope.addScopeForm();
     });
@@ -16,15 +16,16 @@ exports.addSimpleScope = function () {
         pages.create_deal_scope.addScopeForm();
         pages.create_deal_scope.selectRandomContractTypeScope();
         pages.create_deal_scope.waitForAjax();
-        pages.create_deal_scope.addTerritoryByTypingToScope();
     });
 };
 
 exports.itAddNewContractPeriod = function () {
+
     it("Add new contract Period", function () {
         pages.create_deal_scope.clickNewContractPeriodButton();
         //   pages.create_deal_scope.waitForContractPeriodToBeCreated();
     })
+
 };
 
 exports.sharePublisherShareSet = function () {
@@ -57,6 +58,17 @@ exports.addSpecificScope = function (contractType) {
     });
 };
 
+exports.addRandomScope = function () {
+    it("Add random scope", function () {
+        pages.create_deal_scope.addScopeForm();
+        pages.create_deal_scope.selectRandomContractTypeScope();
+        pages.create_deal_scope.waitForAjax();
+        pages.create_deal_scope.addTerritoryByTypingToScope();
+        pages.create_deal_scope.selectRandomCountry();
+        pages.create_deal_scope.waitForAjax();
+    });
+};
+
 exports.enterTerritoryOfControlSearchTerms = function (value) {
     it('Enter territory of control search terms (' + value + ')', function() {
         pages.create_deal_scope.enterTerritoryOfControlSearchTerms(value);
@@ -82,6 +94,7 @@ exports.addSpecificScopeTypeAndTerritory = function (contractType, territory) {
 
 exports.selectCountry = function () {
     it("Select country", function () {
+        pages.create_deal_scope.addTerritoryByTypingToScope();
         pages.create_deal_scope.selectRandomCountry();
         pages.create_deal_scope.waitForAjax();
     });
@@ -135,21 +148,23 @@ exports.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed = function 
     });
 };
 
-exports.clickOnAddPublisherShareSet = function (more) {
-    it("Open publisher share set form", function() {
-        pages.create_deal_scope.clickOnAddPublisherShareSetLink(more);
+exports.clickOnAddPublisherShareSet = function () {
+    it("Open publisher share set form", function () {
+        pages.create_deal_scope.clickOnAddPublisherShareSetLink();
+        pages.create_deal_scope.waitForAjax();
     });
 };
 
 exports.clickOnYesSocietyAwardCreditPublisherShareSet = function () {
     it("Click on the yes society award credit pss and check it is selected", function () {
         pages.create_deal_scope.clickOnTheYesSocietyAwardCreditPublisherShareSet();
+        pages.create_deal_scope.waitForAjax();
         var test = pages.create_deal_scope.elems.yesSocietyAwardCreditPss.getAttribute("class").toString();
         expect(test.indexOf("active") != -1);
     });
 };
 
-exports.clickOnNoSocietyAwardCreditPublisherShareSet = function () {
+cexports.lickOnNoSocietyAwardCreditPublisherShareSet = function () {
     it("Click on the no society award credit pss and check it is selected", function () {
         pages.create_deal_scope.clickOnTheNoSocietyAwardCreditPublisherShareSet();
         var test = pages.create_deal_scope.elems.noSocietyAwardCreditPss.getAttribute("class").toString();
@@ -313,7 +328,7 @@ exports.cancelThePublisherShareSet = function () {
 
 exports.selectSpecificPublisherNameDropDown = function () {
     it("Select specific value publisher name drop down", function () {
-        pages.create_deal_scope.selectTheSpecificPublisherNameDropDown("(53026414)\nWB MUSIC CORP.");
+        pages.create_deal_scope.selectTheSpecificPublisherNameDropDown("(53026414)\nwb music corp.");
     });
 };
 
@@ -377,7 +392,7 @@ exports.fillIntoPublisherNameAMFieldChainI = function (i) {
 
 exports.selectSpecificPublisherNameDropDownChainI = function (i) {
     it("Select specific value publisher name drop down chain i", function () {
-        pages.create_deal_scope.selectSpecificPublisherNameDropDownChainI("(53026414)\nWB MUSIC CORP.", i);
+        pages.create_deal_scope.selectSpecificPublisherNameDropDownChainI("(53026414)\nwb music corp.", i);
     });
 };
 
@@ -451,6 +466,7 @@ exports.selectSubPublisherOverridePss = function (subPublisherName, subPublisher
 exports.selectSubPublisherOverrideTerritoryPss = function (territory) {
     it("Select the sub publisher override territory pss ", function () {
         pages.create_deal_scope.selectTheSubPublisherOverrideTerritoryPss(territory);
+        ;
     });
 };
 
@@ -475,78 +491,81 @@ exports.clickOnAddAnotherSubPublisherOverridePss = function () {
 exports.itAddPublisherShare = function () {
     describe("Add publisher share set", function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
-        steps.createDealScope.clickOnAddPublisherShareSet();
-        steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
-        steps.createDealScope.selectSpecificPublisherNameDropDown();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.clickOnAddPublisherShareSet();
+        steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMField("wb music corp");
+        steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
     });
 };
 
 exports.itAddPublisherShareWithSocietyAwardCredit = function () {
     describe("Add publisher share set", function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
-        steps.createDealScope.clickOnAddPublisherShareSet();
-        steps.createDealScope.clickOnYesSocietyAwardCreditPublisherShareSet();
-        steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
-        steps.createDealScope.selectSpecificPublisherNameDropDown();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.clickOnAddPublisherShareSet();
+        steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMField("wb music corp");
+        steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
+        steps.base.scrollIntoView("Yes society award credits", pages.create_deal_scope.elems.yesSocietyAwardCreditPss);
+        steps.create_deal_scope.clickOnYesSocietyAwardCreditPublisherShareSet();
     });
 };
 
 exports.itOverridePublisherShare = function (subPublisherName, subPublisherSelected, territory) {
     describe("Override publisher share set", function () {
-        steps.createDealScope.clickOnAddOverrideIconPss();
-        steps.createDealScope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
-        steps.createDealScope.selectSubPublisherOverrideTerritoryPss(territory);
+        steps.base.scrollIntoView("Override pss icon ", pages.create_deal_scope.elems.overridePssIcon);
+        steps.create_deal_scope.clickOnAddOverrideIconPss();
+        steps.base.scrollIntoView("Override pss ",pages.create_deal_scope.elems.subPublisherOverridePssInputField );
+        steps.create_deal_scope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
+        steps.create_deal_scope.selectSubPublisherOverrideTerritoryPss(territory);
         steps.base.scrollIntoView("Done override publisher share set", pages.create_deal_scope.elems.doneOverridePublisherShareSetButton);
-        steps.createDealScope.clickOnDoneSubPublisherOverridePss();
+        steps.create_deal_scope.clickOnDoneSubPublisherOverridePss();
     });
 };
 
 exports.itAddPublisherSharePATypeWithMultipleThreeChains = function (i) {
     describe("Add publisher share set with three chains", function () {
-        steps.createDealScope.clickAddChainLink();
-        steps.createDealScope.selectDesiredPublisherTypeEOrPADropDownChainI("PA", i);
-        steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
-        steps.createDealScope.fillIntoPublisherNameAMFieldChainI(i);
-        steps.createDealScope.selectSpecificPublisherNameDropDownChainI(i);
-        steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(i);
+        steps.create_deal_scope.clickAddChainLink();
+        steps.create_deal_scope.selectDesiredPublisherTypeEOrPADropDownChainI("PA", i);
+        steps.create_deal_scope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
+        steps.create_deal_scope.fillIntoPublisherNameAMFieldChainI(i);
+        steps.create_deal_scope.selectSpecificPublisherNameDropDownChainI(i);
+        steps.create_deal_scope.fillIntoPublisherNameAMCollectFieldChainI(i);
     });
 };
 
 exports.itAddPublisherShareWithMultipleThreeChains = function (i) {
     describe("Add publisher share set with three chains", function () {
-        steps.createDealScope.clickAddChainLink();
-        steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
-        steps.createDealScope.fillIntoPublisherNameAMFieldChainI(i);
-        steps.createDealScope.selectSpecificPublisherNameDropDownChainI(i);
-        steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(i);
+        steps.create_deal_scope.clickAddChainLink();
+        steps.create_deal_scope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
+        steps.create_deal_scope.fillIntoPublisherNameAMFieldChainI(i);
+        steps.create_deal_scope.selectSpecificPublisherNameDropDownChainI(i);
+        steps.create_deal_scope.fillIntoPublisherNameAMCollectFieldChainI(i);
     });
 };
 
 exports.itAddSimpleScope = function () {
     describe("Add simple scope", function () {
-        steps.createDealScope.addSimpleScope();
-        steps.createDealScope.selectCountry();
+        steps.create_deal_scope.addSimpleScope();
+        steps.create_deal_scope.selectCountry();
     });
 };
 
 exports.itCheckVisualDesignPublisherShare = function () {
     describe("Check visual design for publsiher share set", function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
-        steps.createDealScope.validateNoPublisherShareWarningIsDisplayed();
-        steps.createDealScope.clickOnAddPublisherShareSet();
-        steps.createDealScope.validatePlaceholdersForPublisherNameEAndAM();
-        steps.createDealScope.validateErrorMessagePublisherRequired();
-        steps.createDealScope.validatePublisherNameTooltipEOrPAIcon();
-        steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.createDealScope.validatePublisherNameTooltipAMIcon();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
-        steps.createDealScope.selectSpecificPublisherNameDropDown();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
-        steps.createDealScope.saveThePublisherShareSet();
+        steps.create_deal_scope.validateNoPublisherShareWarningIsDisplayed();
+        steps.create_deal_scope.clickOnAddPublisherShareSet();
+        steps.create_deal_scope.validatePlaceholdersForPublisherNameEAndAM();
+        steps.create_deal_scope.validateErrorMessagePublisherRequired();
+        steps.create_deal_scope.validatePublisherNameTooltipEOrPAIcon();
+        steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.create_deal_scope.validatePublisherNameTooltipAMIcon();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMField("wb music corp");
+        steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.saveThePublisherShareSet();
     });
 };
 
@@ -554,26 +573,26 @@ exports.itCheckInvalidCasesPublisherShare = function () {
     describe("Check invalid cases for no publisher and invalid publisher name and IPI share set", function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
         //check validation error - publisher is required
-        steps.createDealScope.validateNoPublisherShareWarningIsDisplayed();
-        steps.createDealScope.clickOnAddPublisherShareSet();
+        steps.create_deal_scope.validateNoPublisherShareWarningIsDisplayed();
+        steps.create_deal_scope.clickOnAddPublisherShareSet();
         //check validation for invalid publisher name and invalid IPI number
-        steps.createDealScope.fillIntoFirstPublisherNameField("lkjhg");
-        steps.createDealScope.validateThePublisherNameDropDownHasNoResults();
-        steps.createDealScope.clearIntoFirstPublisherNameField();
-        steps.createDealScope.fillIntoFirstPublisherNameField("59684");
-        steps.createDealScope.validateThePublisherNameDropDownHasNoResults();
-        steps.createDealScope.clearIntoFirstPublisherNameField();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("poi");
-        steps.createDealScope.validateThePublisherNameDropDownHasNoResults();
-        steps.createDealScope.clearIntoFirstPublisherNameAMField();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("6985");
-        steps.createDealScope.validateThePublisherNameDropDownHasNoResults();
-        steps.createDealScope.clearIntoFirstPublisherNameAMField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameField("lkjhg");
+        steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
+        steps.create_deal_scope.clearIntoFirstPublisherNameField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameField("59684");
+        steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
+        steps.create_deal_scope.clearIntoFirstPublisherNameField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMField("poi");
+        steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
+        steps.create_deal_scope.clearIntoFirstPublisherNameAMField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMField("6985");
+        steps.create_deal_scope.validateThePublisherNameDropDownHasNoResults();
+        steps.create_deal_scope.clearIntoFirstPublisherNameAMField();
         //add valid publisher name E and AM searched by IPI number
-        steps.createDealScope.fillIntoFirstPublisherNameField("1234");
-        steps.createDealScope.selectRandomPublisherNameDropDownValue();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("4567");
-        steps.createDealScope.selectRandomPublisherNameDropDownValue();
+        steps.create_deal_scope.fillIntoFirstPublisherNameField("1234");
+        steps.create_deal_scope.selectRandomPublisherNameDropDownValue();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMField("4567");
+        steps.create_deal_scope.selectRandomPublisherNameDropDownValue();
     });
 };
 
@@ -582,78 +601,78 @@ exports.itCheckInvalid3DecimalCasesPublisherShare = function () {
     describe("Check validation 3 decimal places publisher shares set", function () {
         //check validation for decimal shares >3
         steps.base.scrollIntoView("First publisher name field", pages.create_deal_scope.elems.firstPublisherNameField);
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("3.3454");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.5785");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameCollectField();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.5986");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("3.3454");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.5785");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.5986");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameAMCollectField();
         //fill exact 3 decimals and check it is ok
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("33.345");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.123");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameCollectField();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.324");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("33.345");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.123");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.324");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameAMCollectField();
         //fill exact 2 decimals and check it is ok
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("33.34");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.12");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameCollectField();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.39");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("33.34");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.12");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.39");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameAMCollectField();
         //fill exact 1 decimals and check it is ok
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("33.3");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.3");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameCollectField();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.4");
-        steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("33.3");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("3.3");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.4");
+        steps.create_deal_scope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameAMCollectField();
     });
 };
 
 exports.itCheckSubtotalValidationsCasesPublisherShare = function () {
     describe("Check validation for subtotals publisher shares set", function () {
         steps.base.scrollIntoView("First publisher name field", pages.create_deal_scope.elems.firstPublisherNameField);
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("120");
-        steps.createDealScope.validateSubtotalOfOwnPublisherShareErrorMessageIsDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("40");
-        steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("50");
-        steps.createDealScope.validateSubtotalOfOwnLessThanCollectPublisherShareErrorMessageIsDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.clearIntoFirstPublisherNameCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("120");
+        steps.create_deal_scope.validateSubtotalOfOwnPublisherShareErrorMessageIsDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("40");
+        steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("50");
+        steps.create_deal_scope.validateSubtotalOfOwnLessThanCollectPublisherShareErrorMessageIsDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
     });
 };
 
 exports.itCheckTotalsValidationsCasesPublisherShare = function () {
     describe("Check validation for totals publisher shares set", function () {
         steps.base.scrollIntoView("First publisher name field", pages.create_deal_scope.elems.firstPublisherNameField);
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("120");
-        steps.createDealScope.validateChainTotalOfOwnPublisherShareErrorIsDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("75");
-        steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("55");
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("25");
-        steps.createDealScope.validateChainTotalOfOwnLessThanCollectPublisherShareErrorIsDisplayed();
-        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
-        steps.createDealScope.clearIntoFirstPublisherNameCollectField();
-        steps.createDealScope.clearIntoFirstPublisherNameAMCollectField();
-        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("88");
-        steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("55");
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("25");
-        steps.createDealScope.saveThePublisherShareSet();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("120");
+        steps.create_deal_scope.validateChainTotalOfOwnPublisherShareErrorIsDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("75");
+        steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("55");
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("25");
+        steps.create_deal_scope.validateChainTotalOfOwnLessThanCollectPublisherShareErrorIsDisplayed();
+        steps.create_deal_scope.clearIntoFirstPublisherNameOwnField();
+        steps.create_deal_scope.clearIntoFirstPublisherNameCollectField();
+        steps.create_deal_scope.clearIntoFirstPublisherNameAMCollectField();
+        steps.create_deal_scope.fillIntoFirstPublisherNameOwnFieldSpecificValue("88");
+        steps.create_deal_scope.fillIntoFirstPublisherNameCollectFieldSpecificValue("55");
+        steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("25");
+        steps.create_deal_scope.saveThePublisherShareSet();
     });
 };

@@ -1,8 +1,17 @@
+<<<<<<< HEAD:tests/e2e/pages/deals/editGeneral.js
 'use strict';
 
 var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
+=======
+"use strict";
+var _ = require("lodash");
+var ExpectedConditions = protractor.ExpectedConditions;
+var pages_path = _tf_config._system_.path_to_pages;
+require(pages_path + "base");
+require(pages_path + "edit_deal_general");
+>>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/pages/edit_deal_general.js
 if (pages.edit_deal_general === undefined) {
     pages.edit_deal_general = new ftf.pageObject({
 
@@ -12,7 +21,7 @@ if (pages.edit_deal_general === undefined) {
             internalContactTableData: {css: "table.view-internal-contact tbody"},
             internalContactsEditIcon: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) button i.fa.fa-pencil"},
             internalContactsEditInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            addInternalContactsLink: {css: "div.add-new-button.ng-scope button.btn.btn-link"},
+            addInternalContactsLink: {css: "div.add-new-button button.btn.btn-link"},
             saveEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button[data-ng-click='tgModularViewMethods.save();']"},
             cancelEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button.btn.btn-cancel.ng-binding"},
             editInternalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -40,7 +49,9 @@ if (pages.edit_deal_general === undefined) {
         },
 
         clickOnSaveEditInternalContacts: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.elems.saveEditInternalContactsButton));
             pages.edit_deal_general.elems.saveEditInternalContactsButton.click();
+            browser.sleep(10000);
         },
 
         clickOnCancelEditInternalContacts: function () {
@@ -59,7 +70,20 @@ if (pages.edit_deal_general === undefined) {
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
-                })
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.elems.editInternalContactsDropDownData));
+        },
+
+        selectEditRandomInternalContactsFromDropDownRoleI: function (i) {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            pages.edit_deal_general.waitForAjax();
         },
 
         clickEditInternalContactsRole: function () {
@@ -69,7 +93,8 @@ if (pages.edit_deal_general === undefined) {
         editTheIRowInternalContactField: function (i) {
             var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
             element.clear();
-            element.sendKeys("a");
+            element.sendKeys("test");
+            browser.sleep(1000);
         },
 
         clickEditInternalContactsRoleRowI: function (i) {

@@ -60,6 +60,7 @@ if (pages.create_deal_contract_period === undefined) {
             variableRightFieldButtonEndRules: {css: "div[data-ng-model='condition.right_value'] div.tg-dropdown-button"},
             variableRightDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             saveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
+            doneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
             deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
             cancelButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
             //assumptions
@@ -77,6 +78,7 @@ if (pages.create_deal_contract_period === undefined) {
 
         clickOnAddContractPeriod: function () {
             pages.create_deal_contract_period.elems.addContractPeriodElem.click();
+            pages.create_deal_contract_period.waitForAjax();
         },
 
         fillDescriptionField: function (description) {
@@ -158,8 +160,9 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         fillIntoTerritoriesFieldLetter: function () {
+            pages.base.scrollIntoView(pages.create_deal_contract_period.elems.mdrcTerritoriesField);
             pages.create_deal_contract_period.elems.mdrcTerritoriesField.click();
-            pages.create_deal_contract_period.elems.mdrcTerritoriesInputField.sendKeys("a");
+            pages.create_deal_contract_period.elems.mdrcTerritoriesInputField.sendKeys("africa");
         },
 
         selectRandomTerritory: function () {
@@ -176,11 +179,13 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         clickOnMdrcNoCommercialReleaseByMajorLabel: function () {
+            pages.base.scrollIntoView(pages.create_deal_contract_period.elems.mdrcNoCommercialReleaseByMajorLabel);
             pages.create_deal_contract_period.elems.mdrcNoCommercialReleaseByMajorLabel.click();
         },
 
         fillIntoMdrcLabelsField: function () {
-            pages.create_deal_contract_period.elems.mdrcLabelsElement.sendKeys("ty");
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_contract_period.elems.mdrcLabelsElement.sendKeys(value);
         },
 
         selectMdrcRandomValueFromLabel: function () {
@@ -190,17 +195,19 @@ if (pages.create_deal_contract_period === undefined) {
                 then(function (promise) {
                     console.log("Text from label is : " + promise);
                     if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("li.tg-typeahead__suggestions-footer div a"))
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
-                                options[randomNumber].click();
+                                var element = options[randomNumber];
+                                browser.actions().mouseMove(element).click().perform();
                             })
                     }
                     else {
                         browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
-                                options[randomNumber].click();
+                                var element =options[randomNumber];
+                                browser.actions().mouseMove(element).click().perform();
                             })
                     }
                 });
@@ -275,7 +282,7 @@ if (pages.create_deal_contract_period === undefined) {
             browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         },
 
-        clickOnTheAddEndRulesToContractPeriod: function(){
+        clickOnTheAddEndRulesToContractPeriod: function () {
             pages.create_deal_contract_period.elems.addEndRulesLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.endDateFieldButtonEndRules));
         },
@@ -389,22 +396,29 @@ if (pages.create_deal_contract_period === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.whenVariableLeftButtonEndRules));
         },
 
+        doneTheEndRules: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_contract_period.elems.doneButtonEndRules));
+            pages.create_deal_contract_period.elems.doneButtonEndRules.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.whenVariableLeftButtonEndRules));
+        },
+
+
         clickOnTheAddAdvanceAssumptionsLink: function () {
-          pages.create_deal_contract_period.elems.addAssumptionLink.click();
+            pages.create_deal_contract_period.elems.addAssumptionLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.lpControlPercentageOfWorkAssumptions));
         },
 
-        fillIntoTheLpControlPercentageOfWork: function(){
+        fillIntoTheLpControlPercentageOfWork: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_contract_period.elems.lpControlPercentageOfWorkAssumptions.sendKeys(percent);
         },
 
-        fillIntoTheLpControlPercentageOfMechanicalIncome: function(){
+        fillIntoTheLpControlPercentageOfMechanicalIncome: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             pages.create_deal_contract_period.elems.lpControlPercentageOfMechanicalIncomeAsumptions.sendKeys(percent);
         },
 
-        fillIntoTheNumberOfSongs: function(){
+        fillIntoTheNumberOfSongs: function () {
             var number = Math.floor(Math.random() * 100) + 1;
             pages.create_deal_contract_period.elems.numberOfSongsAssumptions.sendKeys(number);
         },
@@ -414,22 +428,41 @@ if (pages.create_deal_contract_period === undefined) {
             pages.create_deal_contract_period.elems.percentageOfStatutoryRateAssumptions.sendKeys(percent);
         },
 
-        fillIntoTheAmountNoLessThan : function(){
+        fillIntoTheAmountNoLessThan: function () {
             var number = Math.floor(Math.random() * 1000) + 1;
             pages.create_deal_contract_period.elems.amountNotLessThanAssumptions.sendKeys(number);
         },
 
-        selectTheRandomLabelValueAssumptions: function(){
-            pages.create_deal_contract_period.elems.labelsAssumptionsInputField.sendKeys("test");
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+        selectTheRandomLabelValueAssumptions: function () {
+            var value = Math.random().toString(36).substr(2, 3);
+            pages.create_deal_contract_period.elems.labelsAssumptionsInputField.sendKeys(value);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope"))));
+
+            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                var element = options[randomNumber];
+                                pages.base.scrollIntoView(element);
+                                browser.actions().mouseMove(element).click().perform();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                var element = options[randomNumber];
+                                pages.base.scrollIntoView(element);
+                                browser.actions().mouseMove(element).click().perform();
+                            })
+                    }
                 });
         },
 
-        saveTheAdvanceAssumptions: function(){
+        saveTheAdvanceAssumptions: function () {
             pages.create_deal_contract_period.elems.saveAssumptionsButton.click();
         }
         ,

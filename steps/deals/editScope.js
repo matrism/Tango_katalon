@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.editDealScope = exports;
 
@@ -222,7 +222,7 @@ exports.editCancelThePublisherShareSet = function () {
 
 exports.editSelectSpecificPublisherNameDropDown = function () {
     it("Edit - select specific value publisher name drop down", function () {
-        pages.edit_deal_scope.editSelectTheSpecificPublisherNameDropDown("(53026414)\nWB MUSIC CORP.");
+        pages.edit_deal_scope.editSelectTheSpecificPublisherNameDropDown("(53026414)\nwb music corp.");
     });
 };
 
@@ -277,7 +277,7 @@ exports.editIntoPublisherNameAMFieldChainI = function (i) {
 
 exports.editSelectSpecificPublisherNameDropDownChainI = function (i) {
     it("Edit - select specific value publisher name drop down chain i", function () {
-        pages.edit_deal_scope.editSelectSpecificPublisherNameDropDownChainI("(53026414)\nWB MUSIC CORP.", i);
+        pages.edit_deal_scope.editSelectSpecificPublisherNameDropDownChainI("(53026414)\nwb music corp.", i);
     });
 };
 
@@ -351,30 +351,30 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
 
 exports.itEditPublisherShare = function () {
     describe("Edit publisher share set", function () {
-        steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.editDealScope.editIntoFirstPublisherNameAMField("wb music corp");
-        steps.editDealScope.editSelectSpecificPublisherNameDropDown();
-        steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
+        steps.edit_deal_scope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.edit_deal_scope.editIntoFirstPublisherNameAMField("wb music corp");
+        steps.edit_deal_scope.editSelectSpecificPublisherNameDropDown();
+        steps.edit_deal_scope.editIntoFirstPublisherNameAMCollectField();
     });
 };
 
 exports.itEditPublisherSharePATypeWithMultipleThreeChains = function (i) {
     describe("Edit publisher share set with three chains", function () {
-        steps.editDealScope.editClickAddChainLink();
-        steps.editDealScope.editSelectDesiredPublisherTypeEOrPADropDownChainI("PA", i);
-        steps.editDealScope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
-        steps.editDealScope.editIntoPublisherNameAMFieldChainI(i);
-        steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
-        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
+        steps.edit_deal_scope.editClickAddChainLink();
+        steps.edit_deal_scope.editSelectDesiredPublisherTypeEOrPADropDownChainI("PA", i);
+        steps.edit_deal_scope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
+        steps.edit_deal_scope.editIntoPublisherNameAMFieldChainI(i);
+        steps.edit_deal_scope.editSelectSpecificPublisherNameDropDownChainI(i);
+        steps.edit_deal_scope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
 };
 
 exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
     describe("Edit publisher share set with three chains", function () {
-        steps.editDealScope.editClickAddChainLink();
-        steps.editDealScope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
-        steps.editDealScope.editIntoPublisherNameAMFieldChainI(i);
-        steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
-        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
+        steps.edit_deal_scope.editClickAddChainLink();
+        steps.edit_deal_scope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
+        steps.edit_deal_scope.editIntoPublisherNameAMFieldChainI(i);
+        steps.edit_deal_scope.editSelectSpecificPublisherNameDropDownChainI(i);
+        steps.edit_deal_scope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
 };

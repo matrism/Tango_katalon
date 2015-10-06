@@ -1,7 +1,17 @@
 'use strict';
 
+<<<<<<< HEAD:tests/e2e/steps/albums/newAlbum.js
 steps.newAlbum = exports;
 
+=======
+var pageStep = require('../helpers/basicPageStep'),
+    page = require(pages_path + 'newAlbum');
+
+steps.newAlbum = exports;
+
+require(pages_path + 'base');
+
+>>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/steps/newAlbum.js
 exports.goToNewAlbumPage = function() {
 	it('Go to new album page', function() {
         pages.newAlbum.open();
@@ -45,11 +55,15 @@ exports.cancelArtistSearch = function() {
     });
 };
 
+pageStep('Select library');
+
 exports.enterAlbumCode = function(value) {
     it('Enter album code (' + value + ')', function() {
         pages.newAlbum.enterAlbumCode(value);
     });
 };
+
+pageStep('Select recording search type');
 
 exports.enterRecordingSearchTerms = function(i, value) {
     it(
@@ -84,7 +98,7 @@ exports.enterWorkIdFromWorkSlotAsWorkSearchTerms = function(i, slotName) {
         'Enter work ID from work slot "' + slotName + '" as work search terms',
         function() {
             pages.newAlbum.enterRecordingWorkSearchTerms(
-                i, hash.currentEntityDataSlotsByType.work.id
+                i, hash.entityDataSlotsByType.work[slotName].id
             );
         }
     );
@@ -111,8 +125,36 @@ exports.selectRecordingArtistSearchResultByIndex = function(i) {
     });
 };
 
+pageStep([
+    'Validate recording library name',
+
+    'Go to tab',
+
+    ['Release Details', [
+        'Wait for territories selector to be ready',
+        'Edit territories',
+        'Enter territory search terms',
+        'Select territory search result by index',
+        'Enter release date',
+        'Select configuration',
+        'Enter label search terms',
+        'Create entered label',
+        'Select label search result by index',
+        'Enter catalogue number',
+        'Enter license code',
+    ]],
+]);
+
 exports.save = function() {
     it('Save album', function() {
         pages.newAlbum.save();
+    });
+};
+
+exports.findAlbumUuid = function() {
+    it('Find album UUID', function() {
+        page.albumUuid().then(function(value) {
+            hash.currentEntityDataSlotsByType.album.uuid = value;
+        });
     });
 };

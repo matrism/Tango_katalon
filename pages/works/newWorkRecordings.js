@@ -1,7 +1,12 @@
 'use strict';
 
 var leftPad = require('left-pad'),
+<<<<<<< HEAD:tests/e2e/pages/works/newWorkRecordings.js
     random = require('../../helpers/random');
+=======
+    pph = require('../helpers/pph'),
+    random = require('../helpers/random');
+>>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/pages/newWorkRecordings.js
 
 pages.newWorkRecordings = exports;
 
@@ -81,4 +86,21 @@ exports.enterRecordingDuration = function(i, value) {
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
+};
+
+exports.libraryNameBinding = function(i) {
+    return exports.recordingContainer(i).element(by.binding(
+        ' getAdminDataName(commonDataHolder.musicLibraries, ' +
+        'commonDataHolder.work.library_code) '
+    ));
+};
+
+exports.libraryName = function(i) {
+    var element = exports.libraryNameBinding(i);
+    pages.base.scrollIntoView(element);
+    return pph.trim(element.getText());
+};
+
+exports.validateLibraryName = function(i, value) {
+    expect(exports.libraryName(i)).toBe(value);
 };

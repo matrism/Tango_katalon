@@ -6,10 +6,15 @@ var path = require('path'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
     HtmlReporter = require('protractor-jasmine2-screenshot-reporter'),
+    fs = require('fs'),
     screenShotPath,
+    tmp = require('tmp'),
     config,
     systemConfig,
-    SSReporter_instance;
+    SSReporter_instance,
+    reporterFilePath,
+    reporterFileName = 'reporter.htm', 
+    reportImprovementFilePath;
 
 global.ftf = require('factory-testing-framework');
 global._tf_config = require('./config');
@@ -30,11 +35,13 @@ if (!systemConfig.noReport) {
         screenShotPath = path.join(screenShotPath, now);
     }
 
+    reporterFilePath = screenShotPath + '/' + reporterFileName;
+
     //mkdirp(screenShotPath);
 
     SSReporter_instance = new HtmlReporter({
         dest: screenShotPath + '/',
-        filename: 'reporter.htm',
+        filename: reporterFileName,
     });
 }
 
@@ -55,8 +62,13 @@ config = {
                 'download': {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
+<<<<<<< HEAD
                     'default_directory': _tf_config._system_.path_to_workspace
                 }
+=======
+                    'default_directory': tmp.dirSync().name,
+                },
+>>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609
             }
         }
     },
@@ -102,6 +114,7 @@ config = {
 
         if (systemConfig.resolution.width && systemConfig.resolution.height) {
             browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+            browser.driver.manage().window().maximize();
         }
 
         asciiPrefixes = {
@@ -174,6 +187,11 @@ config = {
                 //console.error('Error on compileReport: ', e.stack);
             }
         }*/
+        
+        // Append the script improvements to the html report
+        reportImprovementFilePath = path.join(__dirname, '../tools/improve-report.js');
+        fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
+
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
     },

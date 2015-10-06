@@ -41,6 +41,9 @@ exports.workSearchMatch = function(i) {
 exports.workSearchMatchCount = function() {
     return exports.workSearchMatches().count();
 };
+exports.workSearchResult = function() {
+    return $$('.tg-typeahead__suggestions');
+};
 exports.expectWorkSearchMatchCountToBe = function(value) {
     expect(exports.workSearchMatchCount()).toBe(value);
 };
@@ -509,8 +512,8 @@ module.exports.bltvrBinding = function() {
 };
 module.exports.musicLibraryBinding = function() {
     return element(by.binding(
-        "getAdminDataName(dataHolder.musicLibrarys, " +
-        "workOriginEdit.model.library_code)"
+        ' getAdminDataName(dataHolder.musicLibrarys, ' +
+        'modularEditModels.model.library_code) '
     ));
 };
 module.exports.editAssetTypeButton = function() {
@@ -754,8 +757,8 @@ module.exports.creatorContributions = function(i) {
     var ithElement;
     // FIXME: Move this into its own locator.
     var elements = (
-        $(".scope-delivery-table")
-            .all(by.binding("creator.contribution"))
+        $('.scope-delivery-table')
+            .all(by.binding(' ::(creatorContribution.contribution.value | number:3) '))
             .filter (
                 function(element) {
                     return element.isDisplayed();
@@ -840,6 +843,11 @@ module.exports.musicLibrary = function() {
     pages.base.scrollIntoView(element);
     return element.getText();
 };
+
+exports.validateMusicLibrary = function(value) {
+    expect(exports.musicLibrary()).toBe(value);
+};
+
 module.exports.editPrimaryWorkTitleFieldValue = function() {
     return pages.work.editPrimaryWorkTitleField().getAttribute("value"); 
 };
@@ -1034,6 +1042,9 @@ exports.expectCreatorSuggestionsToBeDisplayed = function() {
         ExpectedConditions.visibilityOf($('.typeahead-result')),
         _tf_config._system_.wait_timeout
     );
+};
+exports.waitForWorkSearchResultToBeDisplayed = function() {
+    browser.wait(ExpectedConditions.visibilityOfAny(exports.workSearchResult()));
 };
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     var element = exports.componentWorkAllocationInput(i);

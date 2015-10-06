@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.createDealGeneral = exports;
 
@@ -11,7 +11,7 @@ exports.goToNewDealPage = function () {
     });
 };
 
-exports.selectDesiredSigningTerritory = function (value) {
+exports.selectDesiredSigningTerritory = function(value) {
     it('Select deal signing territory (' + value + ')', function() {
         pages.create_deal_general.selectDesiredSigningTerritory(value);
     });
@@ -20,10 +20,11 @@ exports.selectDesiredSigningTerritory = function (value) {
 exports.selectDealSigningTerritory = function () {
     it("Select deal signing territory", function () {
         pages.create_deal_general.selectDesiredSigningTerritory("Argentina");
-    });
+    }
+    );
 };
 
-exports.enterContractingPartySearchTerms = function (value) {
+exports.enterContractingPartySearchTerms = function(value) {
     it('Enter contracting party search terms (' + value + ')', function() {
         pages.create_deal_general.fillContractingPartiesField(value);
     });
@@ -31,8 +32,9 @@ exports.enterContractingPartySearchTerms = function (value) {
 
 exports.fillContractingPartyField = function () {
     it("Fill contracting party field", function () {
-        pages.create_deal_general.fillContractingPartiesField("ascap");
-    });
+        pages.create_deal_general.fillContractingPartiesField("bmi");
+    }
+    );
 };
 
 exports.waitForContractingPartyDropDown = function () {
@@ -46,10 +48,11 @@ exports.waitForContractingPartyDropDown = function () {
 exports.selectContractingParty = function () {
     it("Select specific suggestion", function () {
         pages.create_deal_general.selectContractingPartyValue("(021)\n BMI");
+        pages.create_deal_general.waitForAjax();
     });
 };
 
-exports.selectContractingPartySearchResultByIndex = function (i) {
+exports.selectContractingPartySearchResultByIndex = function(i) {
     it('Select contracting party search result #' + (i + 1), function() {
         pages.create_deal_general.selectContractingPartySearchResultByIndex(i);
     });
@@ -78,6 +81,12 @@ exports.fillIntoInternalContactsFieldRowI = function (i) {
 exports.selectRandomInternalContactDropDown = function () {
     it("Select random value from internal contact drop down", function () {
         pages.create_deal_general.selectRandomInternalContactsFromDropDown();
+    });
+};
+
+exports.selectRandomInternalContactDropDownRowI = function (i) {
+    it("Select random value from internal contact drop down", function () {
+        pages.create_deal_general.selectRandomInternalContactsFromDropDownRowI(i);
     });
 };
 
@@ -259,63 +268,65 @@ exports.clickOnNoPerformanceNonTitleBoundIncome = function () {
 
 exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
-        steps.createDealGeneral.goToNewDealPage();
-        steps.createDealGeneral.selectDealSigningTerritory();
-        steps.createDealGeneral.fillContractingPartyField();
-        steps.createDealGeneral.waitForContractingPartyDropDown();
-        steps.createDealGeneral.selectRandomContractingParty();
+        steps.create_deal_general.goToNewDealPage();
+        steps.create_deal_general.selectDealSigningTerritory();
+        steps.create_deal_general.fillContractingPartyField();
+        steps.create_deal_general.waitForContractingPartyDropDown();
+        steps.create_deal_general.selectRandomContractingParty();
     });
 };
 
 exports.itAddInternalContactsToDealGeneralTab = function (internal_contact) {
     describe("Add first internal contacts in deals general tab", function () {
-        steps.createDealGeneral.fillIntoInternalContactField(internal_contact);
-        steps.createDealGeneral.selectRandomInternalContactDropDown();
-        steps.createDealGeneral.clickOnInternalContactRole();
-        steps.createDealGeneral.selectRandomInternalContactDropDown();
+        steps.create_deal_general.fillIntoInternalContactField(internal_contact);
+        steps.create_deal_general.selectRandomInternalContactDropDown();
+        steps.create_deal_general.clickOnInternalContactRole();
+        steps.create_deal_general.selectRandomInternalContactDropDown();
     });
 };
 
 exports.itAddInternalContactsRowIToDealGeneralTab = function (i) {
     describe("Add internal contacts in deals general tab", function () {
-        steps.createDealGeneral.fillIntoInternalContactsFieldRowI(i);
-        steps.createDealGeneral.selectRandomInternalContactDropDown();
-        steps.createDealGeneral.clickOnInternalContactsRoleRowI(i);
-        steps.createDealGeneral.selectRandomInternalContactDropDown();
+        steps.create_deal_general.fillIntoInternalContactsFieldRowI(i);
+        steps.create_deal_general.selectRandomInternalContactDropDown();
+        steps.create_deal_general.clickOnInternalContactsRoleRowI(i);
+        steps.create_deal_general.selectRandomInternalContactDropDown();
     });
 };
 
 exports.itAddAllGeneralFieldsForSanityToDealGeneralTab = function () {
     describe("Add all fields for general tab sanity in deals general tab", function () {
-        steps.createDealGeneral.goToNewDealPage();
-        steps.createDealGeneral.clickOnDraftContractStatus();
-        steps.createDealGeneral.clickOnExecutedContractStatus();
-        steps.createDealGeneral.fillIntoExecutionDateField();
-        steps.createDealGeneral.selectDealSigningTerritory();
-        steps.createDealGeneral.fillContractingPartyField();
-        steps.createDealGeneral.waitForContractingPartyDropDown();
-        steps.createDealGeneral.selectRandomContractingParty();
-        steps.createDealGeneral.selectRandomArtistValue();
-        steps.createDealGeneral.selectRandomValueRepresentMultipleDeals();
-        steps.createDealGeneral.clickOnNonExclusiveDealRights();
-        steps.createDealGeneral.clickOnExclusiveDealRights();
-        steps.createDealGeneral.selectRandomDealKeywords();
-        steps.createDealGeneral.fillIntoWampsContractBriefNumberField();
-        steps.createDealGeneral.fillIntoAuditPeriodField();
-        steps.createDealGeneral.fillIntoPeriodToFileSuitField();
-        steps.createDealGeneral.fillIntoLegalFileReferenceCodeField();
-        steps.createDealGeneral.selectRandomExternalContactRoleRowI(1);
-        steps.createDealGeneral.selectRandomExternalContactNameRowI(1);
-        //steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("test");
-        steps.createDealGeneral.fillIntoDemoDealChargeBacksField();
-        steps.createDealGeneral.fillIntoUsCopyrightCertificateDealChargeBacksField();
-        steps.createDealGeneral.fillIntoLegalFeesDealChargeBacksField();
-        steps.createDealGeneral.fillIntoAdvertisingAndPromotionsDealChargeBacksField();
-        steps.createDealGeneral.fillIntoLeadSheetsDealChargeBackField();
+        steps.create_deal_general.goToNewDealPage();
+        steps.create_deal_general.clickOnDraftContractStatus();
+        steps.create_deal_general.clickOnExecutedContractStatus();
+        steps.create_deal_general.fillIntoExecutionDateField();
+        steps.create_deal_general.selectDealSigningTerritory();
+        steps.create_deal_general.fillContractingPartyField();
+        steps.create_deal_general.waitForContractingPartyDropDown();
+        steps.create_deal_general.selectContractingPartySearchResultByIndex(1);
+        steps.create_deal_general.selectRandomArtistValue();
+        steps.create_deal_general.selectRandomValueRepresentMultipleDeals();
+        steps.create_deal_general.clickOnNonExclusiveDealRights();
+        steps.create_deal_general.clickOnExclusiveDealRights();
+        steps.base.scrollIntoView("Deal keywords ", pages.create_deal_general.elems.dealKeywordsField);
+        steps.create_deal_general.selectRandomDealKeywords();
+        steps.create_deal_general.fillIntoWampsContractBriefNumberField();
+        steps.create_deal_general.fillIntoAuditPeriodField();
+        steps.create_deal_general.fillIntoPeriodToFileSuitField();
+        steps.create_deal_general.fillIntoLegalFileReferenceCodeField();
+        //steps.create_deal_general.selectRandomExternalContactRoleRowI(1);
+        //steps.create_deal_general.selectRandomExternalContactNameRowI(1);
+        //steps.base.scrollIntoView("Internal contacts", pages.create_deal_general.elems.internalContactsInputField);
+        //steps.create_deal_general.itAddInternalContactsToDealGeneralTab("test");
+        steps.create_deal_general.fillIntoDemoDealChargeBacksField();
+        steps.create_deal_general.fillIntoUsCopyrightCertificateDealChargeBacksField();
+        steps.create_deal_general.fillIntoLegalFeesDealChargeBacksField();
+        steps.create_deal_general.fillIntoAdvertisingAndPromotionsDealChargeBacksField();
+        steps.create_deal_general.fillIntoLeadSheetsDealChargeBackField();
         steps.base.scrollIntoView("scroll mechanical", pages.create_deal_general.elems.noMechanicalNonTitleBoundIncome);
-        steps.createDealGeneral.clickOnNoMechanicalNonTitleBoundIncome();
-        steps.createDealGeneral.clickOnYesMechanicalNonTitleBoundIncome();
-        steps.createDealGeneral.clickOnYesPerformanceNonTitleBoundIncome();
-        steps.createDealGeneral.clickOnNoPerformanceNonTitleBoundIncome();
+        steps.create_deal_general.clickOnNoMechanicalNonTitleBoundIncome();
+        steps.create_deal_general.clickOnYesMechanicalNonTitleBoundIncome();
+        steps.create_deal_general.clickOnYesPerformanceNonTitleBoundIncome();
+        steps.create_deal_general.clickOnNoPerformanceNonTitleBoundIncome();
     });
-};
+}
