@@ -378,7 +378,6 @@ var beforeFeature = [
                 [steps.work.expectShellWorkTitleToMatchEnteredOne, [0]],
                 [steps.work.selectRandomShellWorkCreator, [0, 0]],
                 [steps.work.enterShellWorkCreatorContribution, [0, 0, 100]],
-                [steps.base.sleep, [100]],
                 [steps.work.saveCreators],
 
                 [steps.base.refreshPage],

@@ -642,7 +642,8 @@ module.exports.cancelCreatorsEditing = function () {
 module.exports.saveCreators = function () {
     steps.base.clickElement(
         "save creators button",
-        pages.work.saveCreatorsButton()
+        pages.work.saveCreatorsButton(),
+        true
     );
 };
 module.exports.hoverCreationDateContainerLabel = function () {
