@@ -1,17 +1,9 @@
 'use strict';
 
-<<<<<<< HEAD:tests/e2e/steps/albums/newAlbum.js
-steps.newAlbum = exports;
-
-=======
-var pageStep = require('../helpers/basicPageStep'),
-    page = require(pages_path + 'newAlbum');
+var pageStep = require('../../helpers/basicPageStep');
 
 steps.newAlbum = exports;
 
-require(pages_path + 'base');
-
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/steps/newAlbum.js
 exports.goToNewAlbumPage = function() {
 	it('Go to new album page', function() {
         pages.newAlbum.open();

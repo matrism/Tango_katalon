@@ -1,17 +1,8 @@
-<<<<<<< HEAD:tests/e2e/pages/deals/editGeneral.js
 'use strict';
 
 var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-=======
-"use strict";
-var _ = require("lodash");
-var ExpectedConditions = protractor.ExpectedConditions;
-var pages_path = _tf_config._system_.path_to_pages;
-require(pages_path + "base");
-require(pages_path + "edit_deal_general");
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/pages/edit_deal_general.js
 if (pages.edit_deal_general === undefined) {
     pages.edit_deal_general = new ftf.pageObject({
 

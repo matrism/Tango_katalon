@@ -1,26 +1,13 @@
-<<<<<<< HEAD:tests/e2e/steps/works/work.js
-'use strict';
-
-var _ = require('lodash'),
-    pad = require('left-pad'),
-    moment = require('moment'),
-    pph = require('../../helpers/pph'),
-    random = require('../../helpers/random'),
-    promise = protractor.promise;
-
-=======
 "use strict";
 
 var moment = require('moment'),
     pad = require('left-pad'),
-    pph = require('../helpers/pph'),
-    random = require('../helpers/random'),
+    pph = require('../../helpers/pph'),
+    random = require('../../helpers/random'),
     _ = require('lodash'),
     promise = protractor.promise,
-    pageStep = require('../helpers/basicPageStep');
+    pageStep = require('../../helpers/basicPageStep');
 
-require(pages_path + "work");
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/steps/work.js
 steps.work = exports;
 
 exports.goToWorkPage = function (data, key) {

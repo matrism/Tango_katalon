@@ -1,12 +1,7 @@
 'use strict';
 
-<<<<<<< HEAD:tests/e2e/pages/albums/album.js
-=======
-var pph = require('../helpers/pph');
+var pph = require('../../helpers/pph');
 
-require(pages_path + 'base');
-
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/pages/album.js
 pages.album = exports;
 
 exports.goToAlbumPage = function(value) {

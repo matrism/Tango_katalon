@@ -1,14 +1,6 @@
 'use strict';
 
-<<<<<<< HEAD:tests/e2e/steps/albums/album.js
-steps.album = exports;
-
-exports.expectAlbumHeaderToBeVisible = function() {
-    it('Expect album header to be visible', function() {
-        pages.album.expectAlbumHeaderToBeVisible();
-=======
-var pageStep = require('../helpers/basicPageStep'),
-    page = require(pages_path + 'album');
+var pageStep = require('../../helpers/basicPageStep');
 
 steps.album = exports;
 
@@ -17,7 +9,6 @@ exports.goToAlbumPage = function() {
         page.goToAlbumPage(
             hash.currentEntityDataSlotsByType.album.uuid
         );
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/steps/album.js
     });
 };
 

@@ -84,13 +84,13 @@ exports.clickOnClearAllLinkAdvanceApplicableEarnings = function () {
     });
 };
 
-exports.clickOnIncludesPipelineCheckBoxHeader: function () {
+exports.clickOnIncludesPipelineCheckBoxHeader = function () {
     it("Click on the includes pipeline check box header ", function () {
         pages.createDealAdvances.clickOnTheIncludesPipelineCheckBoxHeader();
     });
 };
 
-exports.fillIntoSynchronisationPercentFieldAdvanceApplicableEarnings: function () {
+exports.fillIntoSynchronisationPercentFieldAdvanceApplicableEarnings = function () {
     it("Fill into the synchronisation percent field advance applicable earnings ", function () {
         pages.createDealAdvances.fillIntoTheSynchronisationPercentFieldAdvanceApplicableEarnings();
     });

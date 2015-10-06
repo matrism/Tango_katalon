@@ -1,16 +1,12 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps;
+exports.beforeFeature = function () {
+    steps.login.itLogin();
+};
 
-require(steps_path + 'login');
-require(steps_path + 'mainHeader');
-require(steps_path + 'uploadEdiFile');
+exports.commonFeatureTags = ['royalties', 'smoke', 'broken'];
 
-var beforeFeature = [
-        [steps.login.itLogin],
-    ],
-    feature = [
+exports.feature = [
         {
             name: 'Upload EDI file',
             tags: ['uploadEDIFile'],
@@ -52,11 +48,5 @@ var beforeFeature = [
 
                 steps.uploadEdiFile.rollBackUploadedFile();
             },
-        },
+        }
     ];
-
-module.exports = {
-    commonFeatureTags: ['royaltyProcessing', 'smokeTest', 'broken'],
-    feature: feature,
-    beforeFeature: beforeFeature
-};

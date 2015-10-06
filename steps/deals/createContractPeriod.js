@@ -400,7 +400,7 @@ exports.fillIntoLpControlPercentageOfWork = function () {
     });
 };
 
-fillIntoLpControlPercentageOfMechanicalIncome = function () {
+exports.fillIntoLpControlPercentageOfMechanicalIncome = function () {
     it("Fill into the Lp control percentage of mechanical income ", function () {
         pages.createDealContractPeriod.fillIntoTheLpControlPercentageOfMechanicalIncome();
     });

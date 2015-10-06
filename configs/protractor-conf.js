@@ -62,13 +62,8 @@ config = {
                 'download': {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
-<<<<<<< HEAD
-                    'default_directory': _tf_config._system_.path_to_workspace
-                }
-=======
                     'default_directory': tmp.dirSync().name,
                 },
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609
             }
         }
     },

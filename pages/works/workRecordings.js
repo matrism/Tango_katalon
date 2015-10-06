@@ -1,6 +1,6 @@
 'use strict';
 
-var pph = require('../helpers/pph');
+var pph = require('../../helpers/pph');
 
 pages.workRecordings = exports;
 

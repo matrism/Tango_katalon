@@ -164,7 +164,7 @@ exports.clickOnYesSocietyAwardCreditPublisherShareSet = function () {
     });
 };
 
-cexports.lickOnNoSocietyAwardCreditPublisherShareSet = function () {
+exports.lickOnNoSocietyAwardCreditPublisherShareSet = function () {
     it("Click on the no society award credit pss and check it is selected", function () {
         pages.create_deal_scope.clickOnTheNoSocietyAwardCreditPublisherShareSet();
         var test = pages.create_deal_scope.elems.noSocietyAwardCreditPss.getAttribute("class").toString();

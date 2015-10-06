@@ -1,19 +1,10 @@
-<<<<<<< HEAD:tests/e2e/pages/works/newWork.js
 'use strict';
 
 var _ = require('lodash'),
     pph = require('../../helpers/pph'),
-    random = require('../../helpers/random');
+    random = require('../../helpers/random'),
+    ExpectedConditions = protractor.ExpectedConditions;
 
-=======
-"use strict";
-var _ = require("lodash");
-var pages_path = _tf_config._system_.path_to_pages;
-var pph = require('../helpers/pph');
-var random = require('../helpers/random');
-var ExpectedConditions = protractor.ExpectedConditions;
-require(pages_path + "base");
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/pages/new_work.js
 exports = module.exports = pages.new_work = new ftf.pageObject({
 	url: _tf_config.urls.app_url + "#/create/work"
 });

@@ -1,12 +1,8 @@
 'use strict';
 
 var leftPad = require('left-pad'),
-<<<<<<< HEAD:tests/e2e/pages/works/newWorkRecordings.js
+    pph = require('../../helpers/pph'),
     random = require('../../helpers/random');
-=======
-    pph = require('../helpers/pph'),
-    random = require('../helpers/random');
->>>>>>> 907d1323703d599726a1cdf810d0c7b1acd8e609:tests/e2e/pages/newWorkRecordings.js
 
 pages.newWorkRecordings = exports;
 
