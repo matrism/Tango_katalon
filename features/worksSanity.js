@@ -540,7 +540,7 @@ var beforeFeature = [
                     this.createEnteredArtist();
 
                     this.enterAlbumCode(
-                        'TESTALBUMCODE' + randomId('commercialAlbum')
+                        'TEST ALBUM CODE ' + randomId('commercialAlbum')
                     );
 
                     _.times(3, function(i) {
@@ -630,7 +630,7 @@ var beforeFeature = [
                     this.validateTerritoryCount(1);
 
                     this.validateAlbumCode(
-                        'TESTALBUMCODE' + randomId('commercialAlbum')
+                        'TEST ALBUM CODE ' + randomId('commercialAlbum')
                     );
                 });
 
@@ -698,7 +698,7 @@ var beforeFeature = [
                     this.selectLibrary('AUDIOMACHINE');
 
                     this.enterAlbumCode(
-                        'TESTALBUMCODE' + randomId('libraryAlbum')
+                        'TEST ALBUM CODE ' + randomId('libraryAlbum')
                     );
 
                     _.times(3, function(i) {
