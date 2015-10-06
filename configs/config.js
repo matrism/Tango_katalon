@@ -43,6 +43,7 @@ var configer = global.ftf.configer,
             show_skipped_tests: false,
             screenshot_only_on_fail: false,
             tags: tags,
+            legacyOverrides: {},
         },
         _env_: env,
         localhost: {
