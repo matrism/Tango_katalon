@@ -8,10 +8,7 @@ var pages_path = _tf_config._system_.path_to_pages,
     randomId = random.id.makeMemoizedGenerator(),
     fnutils = require('../helpers/fnutils'),
     bind = fnutils.bind,
-    using = fnutils.using,
-    systemConfig = global._tf_config._system_,
-    newPersonSteps,
-    personSteps;
+    using = fnutils.using;
 
 require(steps_path + 'login');
 require(steps_path + 'person');
@@ -32,16 +29,6 @@ require(steps_path + 'scopeDelivery');
 require(steps_path + 'workRights');
 require(steps_path + 'workRegistrationActivity');
 require(steps_path + 'workCwrPreview');
-
-// TODO: Quick and dirty fix for some staging testing...
-if(systemConfig.env_name === 'qa') {
-    newPersonSteps = steps.newPerson;
-    personSteps = steps.person;
-}
-else {
-    newPersonSteps = steps.newPersonProduction;
-    personSteps = steps.personProduction;
-}
 
 var beforeFeature = [
         [steps.login.itLogin],
@@ -85,9 +72,9 @@ var beforeFeature = [
             ],
             steps: function() {
                 _.times(3, function(i) {
-                    personSteps.useBlankPersonSlot(i);
+                    steps.person.useBlankPersonSlot(i);
 
-                    using(newPersonSteps, function() {
+                    using(steps.newPerson, function() {
                         this.goToNewPersonPage();
 
                         this.enterLastName(
@@ -95,14 +82,14 @@ var beforeFeature = [
                         );
                     });
 
-                    using(newPersonSteps, function() {
+                    using(steps.newPerson, function() {
                         this.enterAffiliatedSocietySearchTerms('ASCAP');
                         this.selectAffiliatedSocietySearchResultByIndex(0);
 
                         this.save();
                     });
 
-                    personSteps.findInternalIpiNumber();
+                    steps.person.findInternalIpiNumber();
                 });
             },
         },
