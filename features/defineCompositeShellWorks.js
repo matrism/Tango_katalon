@@ -376,7 +376,7 @@ var beforeFeature = [
                 [steps.work.enterNewShellWork, [0, 'TEST SHELL WORK ' + randomId(7.2)]],
                 [steps.work.enterComponentWorkAllocation, [0, 50]],
                 [steps.work.expectShellWorkTitleToMatchEnteredOne, [0]],
-                [steps.work.selectRandomShellWorkCreator, [0, 0]],
+                [steps.work.selectShellWorkCreatorFromPersonSlot, [0, 0, 0]],
                 [steps.work.enterShellWorkCreatorContribution, [0, 0, 100]],
                 [steps.work.saveCreators],
 

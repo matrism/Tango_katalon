@@ -313,6 +313,9 @@ exports.componentWorkAllocationInput = function(i) {
 exports.enterAsNewWorkSuggestion = function() {
     return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
 };
+exports.waitForEnterAsNewWorkToBeDisplayed = function() {
+    browser.wait(ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()));
+};
 exports.shellWorkTitleInput = function(i) {
     return exports.componentWorkRows().get(i).element(
         by.model('component.shell.primary_title.title')
@@ -1061,10 +1064,19 @@ exports.selectFirstComponentWorkSuggestion = function() {
         var result = {};
 
         result.name = suggestion.$('.typeahead-result-text').getText();
-        result.workCode = suggestion.$('.typeahead-result-right').getText();
 
-        suggestion.click();
-
+        suggestion.click().then(function() {
+            return result;
+        });
+    });
+};
+exports.selectFirstCreatorSuggestion = function() {
+    var suggestion = $$('.typeahead-result').first();
+    var result = {};
+ 
+    result.name = pph.trim(suggestion.$('.typeahead-result-text').getText());
+ 
+    return suggestion.click().then(function() {
         return result;
     });
 };
