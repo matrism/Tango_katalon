@@ -330,8 +330,8 @@ exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
         pages.work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first search result', function() {
-        pages.new_work.selectFirstCreatorSuggestion().then(function() {
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function() {
             var data = hash.currentEntityDataSlotsByType.work;
 
             data.creators = data.creators || [];
@@ -360,33 +360,35 @@ exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
         pages.new_work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first creator suggestion', function() {
-        pages.new_work.selectFirstCreatorSuggestion();
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(creator.ipiNumber);
     });
 
     return deferred.promise;
 };
-module.exports.enterMaximumCreatorContribution = function(i) {
-	it (
-		"Enter 100% contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterCreatorContribution(i, 100);
-		}
-	);
+
+exports.enterMaximumCreatorContribution = function(i) {
+    exports.enterCreatorContribution(i, 100);
 };
-module.exports.enterMediumCreatorContribution = function(i) {
-	it (
-		"Enter 50% contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterCreatorContribution(i, 50);
-		}
-	);
+
+exports.enterMediumCreatorContribution = function(i) {
+    exports.enterCreatorContribution(i, 50);
 };
-module.exports.enterCreatorContribution = function(i, value) {
-	it (
-		"Enter contribution percentage for creator #" + (i + 1), function() {
-			pages.new_work.enterCreatorContribution(i, value);
-		}
-	);
+
+exports.enterCreatorContribution = function(i, value) {
+    it (
+        "Enter contribution percentage for creator #" + (i + 1) + '(' + value + ')', function() {
+            pages.new_work.enterCreatorContribution(i, value).then(function() {
+                var workSlot = hash.currentEntityDataSlotsByType.work,
+                    creators = workSlot.creators = (workSlot.creators || []),
+                    creator = creators[i] = (creators[i] || {});
+
+                creator.contribution = value;
+            });
+        }
+    );
 };
+
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     it('Validate required component work allocation field #' + (i + 1), function() {
         pages.new_work.validateRequiredComponentWorkAllocationField(i);
@@ -425,8 +427,8 @@ exports.enterNewShellWork = function(i, title, data, key) {
         pages.new_work.enterComponentWorkSearchTerms(i, title);
     });
 
-    it('Wait for work suggestions to load', function() {
-        pages.base.waitForAjax();
+    it('Wait for "Enter as a new work" suggestion', function() {
+        pages.new_work.waitForEnterAsNewWorkToBeDisplayed();
     });
 
     it('Select "Enter as a new work" suggestion', function() {
@@ -506,6 +508,40 @@ exports.selectRandomShellWorkCreator = function(i, j, data, key) {
         });
     });
 };
+exports.selectShellWorkCreatorFromPersonSlot = function(i, j, slotIndex, data, key) {
+    var person;
+
+    it(
+        'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
+        ' of (shell) component work #' + (i + 1), function() {
+            person = _.merge({}, hash.personSlots[slotIndex]);
+            pages.new_work.enterShellWorkCreatorSearchTerms(i, j, person.ipiNumber);
+        }
+    );
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function(selected) {
+            var component,
+                creator;
+
+            data = data || hash.currentEntityDataSlotsByType.work;
+            key = key || 'components';
+
+            data[key] = data[key] || [];
+            component = data[key][i] = data[key][i] || {};
+
+            component.creators = component.creators || [];
+            creator = component.creators[j] = component.creators[j] || {};
+
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
 exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, key) {
     var previousComponent;
     var previousCreator;
@@ -530,8 +566,8 @@ exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, ke
         pages.work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first creator suggestion', function() {
-        pages.new_work.selectFirstCreatorSuggestion().then(function(selected) {
+    it('Select result by IPI number', function() {
+        pages.new_work.selectCreatorSuggestionByIpiNumber(previousCreator.ipiNumber).then(function(selected) {
             var component;
             var creator;
 

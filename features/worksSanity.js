@@ -44,6 +44,12 @@ var beforeFeature = [
                 'works-sanity-validate-composite-works',
                 'works-sanity-create-cos',
                 'works-sanity-validate-cos',
+                'works-sanity-create-cos-with-shell',
+                'works-sanity-validate-cos-with-shell',
+                'works-sanity-create-med',
+                'works-sanity-validate-med',
+                'works-sanity-create-med-with-shell',
+                'works-sanity-validate-med-with-shell',
                 'worksSanityCreateLibraryWork',
                 'worksSanityValidateLibraryWork',
                 'worksSanityCreateCommercialAlbum',
@@ -747,6 +753,115 @@ var beforeFeature = [
                     this.validateLibraryName(i, 'AUDIOMACHINE');
                 }));
             },
+        },
+        {
+            name: 'Create a Composite of Samples with shell works',
+            tags: [
+                'works-sanity-create-cos-with-shell',
+                'works-sanity-validate-cos-with-shell',
+                'works-sanity-create-composite-works',
+                'works-sanity-validate-composite-works',
+            ],
+            steps: function() {
+                steps.base.useBlankEntityDataSlot('work', 'cosShellWork');
+
+                steps.new_work.goToNewWorkPage(),
+                steps.new_work.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(0));
+                steps.new_work.clickCompositeWorkCheckbox();
+                steps.new_work.selectCompositeWorkType('Composite of Samples');
+                steps.new_work.selectCreatorFromPersonSlot(0, 0);
+                steps.new_work.enterCreatorContribution(0, 50);
+                steps.new_work.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(0));
+                steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+                steps.new_work.enterComponentWorkAllocation(0, 50);
+                steps.new_work.validateTotalContribution();
+                steps.new_work.validateDefaultShellWorkTitleLanguage(0);
+                steps.new_work.expectShellWorkTitleToMatchEnteredOne(0);
+                steps.new_work.validateDefaultShellWorkCreatorRole(0, 0);
+                steps.new_work.validateRequiredShellWorkCreatorNameField(0, 0);
+                steps.new_work.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+                steps.new_work.validateRequiredShellWorkCreatorContributionField(0, 0);
+                steps.new_work.enterShellWorkCreatorContribution(0, 0, 100);
+                steps.new_work.optToIncludeWorkOnWebsite(false);
+                steps.new_work.saveWork();
+                steps.new_work.validateSaveWorkRedirection();
+                steps.work.findCurrentlyOpenWorkId();
+            }
+        },
+        {
+            name: 'Validate created Composite of Samples with shell works',
+            tags: [
+                'works-sanity-validate-cos-with-shell',
+                'works-sanity-validate-composite-works-with-shell',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('work', 'cosShellWork');
+
+                steps.work.goToWorkPage();
+                steps.work.hoverCreatorNamesContainer();
+                steps.work.editCreators();
+                steps.work.validateComponentWorkId(0);
+                steps.work.validateComponentWorkName(0);
+                steps.work.validateComponentWorkAllocation(0);
+                steps.work.clickShowComponentWorkDetailsButton(0);
+                steps.work.validateShellWorkCreatorName(0, 0);
+                steps.work.validateShellWorkCreatorContribution(0, 0);
+            }
+        },
+        {
+            name: 'Create a Medley with shell works',
+            tags: [
+                'works-sanity-create-med-with-shell',
+                'works-sanity-validate-med-with-shell',
+                'works-sanity-create-composite-works',
+                'works-sanity-validate-composite-works',
+            ],
+            steps: function() {
+                steps.base.useBlankEntityDataSlot('work', 'medShellWork');
+
+                steps.new_work.goToNewWorkPage();
+                steps.new_work.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(3));
+                steps.new_work.clickCompositeWorkCheckbox();
+                steps.new_work.selectCompositeWorkType('Medley');
+                steps.new_work.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(3.1));
+                steps.new_work.enterComponentWorkAllocation(0, 50);
+                steps.new_work.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+                steps.new_work.enterShellWorkCreatorContribution(0, 0, 100);
+                steps.new_work.enterNewShellWork(1, 'TEST SHELL WORK ' + randomId(3.2));
+                steps.new_work.enterComponentWorkAllocation(1, 50);
+                steps.new_work.selectShellWorkCreatorFromPersonSlot(1, 0, 1);
+                steps.new_work.enterShellWorkCreatorContribution(1, 0, 100);
+                steps.new_work.optToIncludeWorkOnWebsite(false);
+                steps.new_work.saveWork();
+                steps.new_work.validateSaveWorkRedirection();
+                steps.work.findCurrentlyOpenWorkId();
+            }
+        },
+        {
+            name: 'Validate created Medley with shell works',
+            tags: [
+                'works-sanity-validate-med-with-shell',
+                'works-sanity-validate-composite-works-with-shell',
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('work', 'medShellWork');
+
+                steps.work.goToWorkPage();
+                steps.work.hoverCreatorNamesContainer();
+                steps.work.editCreators();
+                steps.work.validateComponentWorkId(0);
+                steps.work.validateComponentWorkName(0);
+                steps.work.validateComponentWorkAllocation(0);
+                steps.work.clickShowComponentWorkDetailsButton(0);
+                steps.work.validateShellWorkCreatorName(0, 0);
+                steps.work.validateShellWorkCreatorContribution(0, 0);
+                steps.work.validateComponentWorkId(1);
+                steps.work.validateComponentWorkName(1);
+                steps.work.validateComponentWorkAllocation(1);
+                steps.work.clickShowComponentWorkDetailsButton(1);
+                steps.work.validateShellWorkCreatorName(1, 0);
+                steps.work.validateShellWorkCreatorContribution(1, 0);
+            }
         },
         {
             name: 'Search for previously created commercial album by title',
