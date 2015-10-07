@@ -35,7 +35,7 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Create 3 persons to use as creators',
+            name: 'Create 4 persons to use as creators',
             tags: [
                 'works-sanity-create-persons',
                 'works-sanity-create-work',
@@ -77,7 +77,7 @@ var beforeFeature = [
                 'works-sanity-validate-cwr',
             ],
             steps: function() {
-                _.times(3, function(i) {
+                _.times(4, function(i) {
                     steps.person.useBlankPersonSlot(i);
 
                     using(steps.newPerson, function() {
@@ -462,7 +462,7 @@ var beforeFeature = [
                         'TEST LIBRARY WORK ' + randomId('libraryWork')
                     );
 
-                    this.selectCreatorFromPersonSlot(0, 2);
+                    this.selectCreatorFromPersonSlot(0, 3);
                     this.enterCreatorContribution(0, 100);
 
                     this.selectIntendedPurpose('Library Work');
