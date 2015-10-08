@@ -769,7 +769,7 @@ var beforeFeature = [
                 steps.new_work.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(0));
                 steps.new_work.clickCompositeWorkCheckbox();
                 steps.new_work.selectCompositeWorkType('Composite of Samples');
-                steps.new_work.selectCreatorFromPersonSlot(0, 0);
+                steps.new_work.selectCreatorFromPersonSlot(0, 3);
                 steps.new_work.enterCreatorContribution(0, 50);
                 steps.new_work.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(0));
                 steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
