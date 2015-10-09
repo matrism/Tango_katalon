@@ -10,7 +10,6 @@ var path = require('path'),
     screenShotPath,
     tmp = require('tmp'),
     config,
-    systemConfig,
     SSReporter_instance,
     reporterFilePath,
     reporterFileName = 'reporter.htm', 
@@ -24,7 +23,7 @@ global.hash = {};
 
 require('../helpers/services_helper');
 
-systemConfig = global._tf_config._system_;
+global.systemConfig = global._tf_config._system_;
 
 if (!systemConfig.noReport) {
     screenShotPath = path.join(__dirname, '../reports/html/');
