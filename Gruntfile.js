@@ -26,21 +26,21 @@ module.exports = function (grunt) {
         var excludedTags = [];
         var tasks = [];
         var cmd = {
-            cmd: "bash",
-            args: ["./start.sh", "--reporting", "all"]
+            cmd: 'bash',
+            args: ['./start.sh']
         };
 
-        if (grunt.option('xvfb')) {
-            cmd.cmd = 'xvfb-run'
-            //cmd.cmd = grunt.option('xvfb');
+        //if (grunt.option('xvfb')) {
+        //    cmd.cmd = 'xvfb-run'
+        //    //cmd.cmd = grunt.option('xvfb');
 
-            if (grunt.option('screen')) {
-                cmd.args.unshift('-screen 0 ' + grunt.option('screen'));
-            }
+        //    if (grunt.option('screen')) {
+        //        cmd.args.unshift('-screen 0 ' + grunt.option('screen'));
+        //    }
 
-            cmd.args.unshift('-s');
-            cmd.args.unshift('-a');
-        }
+        //    cmd.args.unshift('-s');
+        //    cmd.args.unshift('-a');
+        //}
 
         if (grunt.option('env')) {
             cmd.args.push('--env');
@@ -68,6 +68,10 @@ module.exports = function (grunt) {
         if (grunt.option('@tags')) {
             excludedTags = grunt.option('@tags').split(',');
         };
+
+        // add reporting
+        cmd.args.push('--reporting');
+        cmd.args.push('all');
 
         // loop through tags, creating a task per each tag, excluding all other tags that were passed in
         for (var i = 0; i < tags.length; i++) {
