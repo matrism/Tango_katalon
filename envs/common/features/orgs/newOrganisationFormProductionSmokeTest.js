@@ -1,6 +1,8 @@
 'use strict';
 
-var random = require('../../../../helpers/random'),
+var fnutils = require('../../../../helpers/fnutils'),
+    using = fnutils.using,
+    random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
 exports.beforeFeature = function () {
