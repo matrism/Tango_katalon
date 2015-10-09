@@ -70,8 +70,8 @@ module.exports = function (grunt) {
         };
 
         // add reporting
-        cmd.args.push('--reporting');
-        cmd.args.push('all');
+        //cmd.args.push('--reporting');
+        //cmd.args.push('all');
 
         // loop through tags, creating a task per each tag, excluding all other tags that were passed in
         for (var i = 0; i < tags.length; i++) {
