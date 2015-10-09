@@ -72,11 +72,20 @@ config = {
         console.time('Tests time');
         var reporting = systemConfig.reporting,
             pph = require('../helpers/pph'),
+            testFiles = require('./files.js'),
             matchers,
             browserWait,
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes;
+
+        // set path to features in config
+        systemConfig.path_to_features = testFiles.features;
+
+        // require all pages and steps files
+        testFiles.pages.concat(testFiles.steps).forEach(function (filePath) {
+            require(filePath);
+        });
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
@@ -165,14 +174,6 @@ config = {
 
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
-
-        var testFiles = require('./files.js')
-
-        systemConfig.path_to_features = testFiles.features;
-
-        testFiles.pages.concat(testFiles.steps).forEach(function (filePath) {
-            require(filePath);
-        });
     },
     onCleanUp: function(statusCode) {
         /*if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
