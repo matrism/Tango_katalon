@@ -166,12 +166,12 @@ config = {
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
 
-        glob.sync(__dirname + '/../pages/**/*.js').forEach(function(modulePath) {
-            require(modulePath);
-        });
+        var testFiles = require('./files.js')
 
-        glob.sync(__dirname + '/../steps/**/*.js').forEach(function(modulePath) {
-            require(modulePath);
+        systemConfig.path_to_features = testFiles.features;
+
+        testFiles.pages.concat(testFiles.steps).forEach(function (filePath) {
+            require(filePath);
         });
     },
     onCleanUp: function(statusCode) {
