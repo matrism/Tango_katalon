@@ -41,18 +41,25 @@ var _ = require("underscore"),
         },
         readFeatures: function(path) {
             var fs = require('fs'),
+				nPath = require('path'),
                 route = fs.realpathSync(path),
+				stats = fs.lstatSync(path),
                 feature,
                 files;
 
-            files = fs.readdirSync(route);
-            for (var i in files) {
-                if (!files[i].endsWith(".js")) {
-                    continue;
-                }
-                feature = require(route + "/" + files[i]);
-                controller.prepareFeatures(feature, controller.stringUCFirst(files[i]));
-            };
+			if (stats.isFile()) {
+				feature = require(route);
+				controller.prepareFeatures(feature, controller.stringUCFirst(nPath.basename(route)));
+			} else if (stats.isDirectory()) {
+				files = fs.readdirSync(route);
+				for (var i in files) {
+					if (!files[i].endsWith(".js")) {
+						continue;
+					}
+					feature = require(route + "/" + files[i]);
+					controller.prepareFeatures(feature, controller.stringUCFirst(files[i]));
+				};
+			}
         },
         processArrayFeatures: function(features, feature_name, beforeFeature, afterFeature, globalBeforeEach, globalAfterEach, commonFeatureTags) {
             describe(feature_name, function() {
