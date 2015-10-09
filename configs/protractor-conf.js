@@ -176,7 +176,8 @@ config = {
             }
 
             _.each(overrides, function(legacyVersion, target) {
-                console.log("Override", target, "with", legacyVersion + ".");
+                console.log('Override', target, 'with', legacyVersion + '.');
+
                 require('../steps/' + target);
                 require('../steps/' + legacyVersion);
 

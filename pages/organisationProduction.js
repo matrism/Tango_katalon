@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var ExpectedConditions = protractor.ExpectedConditions;
 

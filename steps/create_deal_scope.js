@@ -515,7 +515,7 @@ if (steps.create_deal_scope === undefined) {
                 steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
                 steps.create_deal_scope.clickOnAddPublisherShareSet();
                 steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-                steps.create_deal_scope.fillIntoFirstPublisherNameAMField("53026414");
+                steps.create_deal_scope.fillIntoFirstPublisherNameAMField('53026414');
                 steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
                 steps.base.scrollIntoView("Yes society award credits", pages.create_deal_scope.elems.yesSocietyAwardCreditPss);
