@@ -53,6 +53,7 @@ var configer = global.ftf.configer,
                     organisation: 'organisationProduction',
                 },
             },
+            dontSkipBroken: cli['dont-skip-broken'],
         },
         _env_: env,
         localhost: {
