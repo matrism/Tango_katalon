@@ -2,6 +2,7 @@
 
 var path = require('path'),
     _ = require('lodash'),
+    glob = require('glob'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
@@ -183,6 +184,48 @@ config = {
                 steps[target] = steps[legacyVersion];
             });
         });
+
+        function makeBrokenTestSteps(description) {
+            return function() {
+                steps.base.fail(
+                    description || 'Broken for unknown or unspecified reasons.'
+                );
+            };
+        }
+
+        if(!systemConfig.dontSkipBroken) {
+            glob.sync(__dirname + '/../features/*.js').forEach(
+                function(featureModulePath) {
+                    var featureModule = require(featureModulePath),
+                        feature;
+
+                    if(featureModule.commonFeatureTags.indexOf('broken') !== -1) {
+                        delete featureModule.beforeFeature;
+
+                        feature = featureModule.feature[0];
+                        featureModule.feature = [feature];
+
+                        feature.name = 'Broken feature test';
+
+                        feature.steps = makeBrokenTestSteps(
+                            featureModule.breakageDescription
+                        );
+
+                        return;
+                    }
+
+                    featureModule.feature.forEach(function(feature) {
+                        if(feature.tags.indexOf('broken') === -1) {
+                            return;
+                        }
+
+                        feature.steps = makeBrokenTestSteps(
+                            feature.breakageDescription
+                        );
+                    });
+                }
+            );
+        }
     },
     onCleanUp: function(statusCode) {
         /*if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
