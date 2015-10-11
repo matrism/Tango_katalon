@@ -30,7 +30,7 @@ exports.selectTerritoryOfOperation = function (name) {
     var elem = exports.territoryOfOperationField(),
         typeahead = Typeahead(elem.element(by.model('$dataHolder.internalModel')), true);
 
-    typeahead.$('.tg-typeahead__tags-text').click();
+    typeahead.click();
     typeahead.sendKeys(name);
     pages.base.waitForAjax();
     typeahead.results().filter(pph.matchTextExact(name)).first().click();
@@ -55,6 +55,25 @@ exports.makeOrgRegistrationRecipient = function () {
     pages.base.scrollIntoView(buttons.first());
 
     buttons.filter(pph.matchTextExact('Yes')).first().click();
+};
+
+exports.primaryIncomeProviderTerritoryOfOperationDropdown = function() {
+    return element(by.model('modularEditModels.org.primary_territory_of_operation'));
+};
+
+exports.primaryIncomeProviderTerritoryOfOperationOptions = function() {
+    return exports.primaryIncomeProviderTerritoryOfOperationDropdown().$$('li a');
+};
+
+exports.selectPrimaryIncomeProviderTerritoryOfOperation = function(value) {
+    var element = exports.primaryIncomeProviderTerritoryOfOperationDropdown(),
+        elements = exports.primaryIncomeProviderTerritoryOfOperationOptions();
+
+    pages.base.scrollIntoView(element);
+
+    element.click();
+
+    return elements.first().click();
 };
 
 exports.publisherTypeButtons = function () {
@@ -228,34 +247,106 @@ exports.setIncomeFileType = function(type) {
 };
 
 
-exports.incomeTypeMappingsRepeater = function () {
+exports.incomeTypeMappingRows = function () {
     return element.all(by.repeater('incomeType in modularEditModels.incomeTypeMapping'));
 };
 
-exports.addIncomeTypeMapping = function (incomeType, description, fileType, tangoIncomeType) {
-    exports.incomeTypeMappingsRepeater().count().then(function(index){
-        var elem = exports.incomeTypeMappingsRepeater().get(index-1),
-            fileTypeResults = elem.$$('[data-tg-name="fileFormat"] + ul a.typeahead-result'),
-            formatResults = elem.$$('[data-tg-name="incomeType"] + ul a.typeahead-result');
+exports.incomeTypeMappingTypeInput = function(i) {
+    return exports.incomeTypeMappingRows().get(i).element(by.model(
+        'incomeType.fileIncomeType'
+    ));
+};
 
-        pages.base.scrollIntoView(elem);
-        elem.element(by.model('incomeType.fileIncomeType')).sendKeys(incomeType);
-        elem.element(by.model('incomeType.fileIncomeDesc')).sendKeys(description);
+exports.enterIncomeTypeMappingType = function(i, value) {
+    var element = exports.incomeTypeMappingTypeInput(i);
 
-        if (fileType) {
-            elem.element(by.model('incomeType.fileFormat')).sendKeys(fileType);
-            browser.wait(protractor.ExpectedConditions.visibilityOfAny(fileTypeResults));
-            fileTypeResults.first().click();
-        }
+    pages.base.scrollIntoView(element);
 
+    element.clear();
 
-        elem.element(by.model('incomeType.internalIncomeType')).sendKeys(tangoIncomeType);
-        browser.wait(protractor.ExpectedConditions.visibilityOfAny(formatResults));
+    return element.sendKeys(value);
+};
 
-        formatResults.first().click();
-    });
+exports.incomeTypeMappingDescriptionInput = function(i) {
+    return exports.incomeTypeMappingRows().get(i).element(by.model(
+        'incomeType.fileIncomeDesc'
+    ));
+};
 
+exports.enterIncomeTypeMappingDescription = function(i, value) {
+    var element = exports.incomeTypeMappingDescriptionInput(i);
 
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+
+    return element.sendKeys(value);
+};
+
+exports.incomeTypeMappingFileTypeInput = function(i) {
+    return exports.incomeTypeMappingRows().get(i).element(by.model(
+        'incomeType.fileFormat'
+    ));
+};
+
+exports.enterIncomeTypeMappingFileTypeSearchTerms = function(i, value) {
+    var element = exports.incomeTypeMappingFileTypeInput(i);
+
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+
+    return element.sendKeys(value);
+};
+
+exports.incomeTypeMappingFileTypeSearchResults = function() {
+    return $$('.typeahead-result');
+};
+
+exports.selectIncomeTypeMappingFileTypeSearchResultByIndex = function(i) {
+    var elements = exports.incomeTypeMappingFileTypeSearchResults(),
+        element;
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(elements));
+
+    element = elements.get(i);
+
+    pages.base.scrollIntoView(element);
+
+    return element.click();
+};
+
+exports.incomeTypeMappingInternalTypeInput = function(i) {
+    return exports.incomeTypeMappingRows().get(i).element(by.model(
+        'incomeType.internalIncomeType'
+    ));
+};
+
+exports.enterIncomeTypeMappingInternalTypeSearchTerms = function(i, value) {
+    var element = exports.incomeTypeMappingInternalTypeInput(i);
+
+    pages.base.scrollIntoView(element);
+
+    element.clear();
+
+    return element.sendKeys(value);
+};
+
+exports.incomeTypeMappingInternalTypeSearchResults = function() {
+    return $$('.typeahead-result');
+};
+
+exports.selectIncomeTypeMappingInternalTypeSearchResultByIndex = function(i) {
+    var elements = exports.incomeTypeMappingInternalTypeSearchResults(),
+        element;
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(elements));
+
+    element = elements.get(i);
+
+    pages.base.scrollIntoView(element);
+
+    return element.click();
 };
 
 exports.payeeYesButton = function () {
@@ -306,6 +397,20 @@ exports.expectFormToBeValid = function () {
 
 exports.expectDoneButtonToBeClickable = function () {
     var button = exports.doneButton();
-    expect(button.getAttribute('class')).toBe('btn btn-primary ng-scope');
+
+    pages.base.scrollIntoView(button);
+
+    expect(pph.matchesCssSelector(button, '.disabled')).toBeFalsy();
 };
 
+exports.saveOrganisation = function() {
+    var button = exports.doneButton();
+
+    pages.base.scrollIntoView(button);
+
+    exports.expectDoneButtonToBeClickable();
+
+    return button.click().then(function() {
+        pages.base.waitForAjax();
+    });
+};
