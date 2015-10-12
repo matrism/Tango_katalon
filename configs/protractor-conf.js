@@ -218,9 +218,7 @@ config = {
 
 if (systemConfig.seleniumAddress) {
     config.seleniumAddress = systemConfig.seleniumAddress;
-
-}
-else {
+} else {
     config.directConnect = systemConfig.directConnect;
 }
 

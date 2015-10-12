@@ -16,36 +16,38 @@
 
   // run jquery code
   checkReady(function($) {
-
+      console.log('check ready called');
     // to be able to paste this script on the console 
     var iframe = document.getElementById('myframe'); 
     var doc = (iframe) ? iframe.contentWindow.document : document;
     $ul = $(doc).find('ul');
     $h4 = $(doc).find('h4');
 
-    // add the result status on each title
-    $ul.each(function() {
-      var $this = $(this);
-      if ($this.find('.failed').length) {
-        $this.children('h4').prepend('<span class="failed">✗</span>');
-      } else {
-        $this.children('h4').prepend('<span class="passed">✓</span>');
-      }
-    });
+    if ($h4.find('button').length === 0) {
+      // add the result status on each title
+      $ul.each(function() {
+          var $this = $(this);
+          if ($this.find('.failed').length) {
+              $this.children('h4').prepend('<span class="failed">✗</span>');
+          } else {
+              $this.children('h4').prepend('<span class="passed">✓</span>');
+          }
+      });
 
-    // add the button and the collapse action
-    $h4.prepend($('<button>').addClass('toggle').html('–'));
-    $toggle = $h4.find('.toggle');
-    $toggle.click(function() {
-      var $this = $(this);
-      if ($this.html() == '+') {
-        $this.html('–').closest('ul').children('li, ul').show();
-      } else {
-        $this.html('+').closest('ul').children('li, ul').hide();
-      }
-    });
+      // add the button and the collapse action
+      $h4.prepend($('<button>').addClass('toggle').html('–'));
+      $toggle = $h4.find('.toggle');
+      $toggle.click(function() {
+          var $this = $(this);
+          if ($this.html() == '+') {
+              $this.html('–').closest('ul').children('li, ul').show();
+          } else {
+              $this.html('+').closest('ul').children('li, ul').hide();
+          }
+      });
 
-    $toggle.click();
+      $toggle.click();
+    }
   });
 })();
 </script>
