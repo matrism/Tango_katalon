@@ -86,8 +86,10 @@ if (pages.searchSection === undefined) {
         selectValueFromDropdown: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.searchTypeAheadDropdown()));
             this.searchTypeAheadDropdown().click();
+            pages.base.waitForAjax();
         },
-            typeDealNumberIntoInput: function (dealContractNumber) {
+
+        typeDealNumberIntoInput: function (dealContractNumber) {
             this.searchInput().sendKeys(dealContractNumber);
         }
     });

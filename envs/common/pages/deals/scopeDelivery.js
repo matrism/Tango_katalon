@@ -33,7 +33,9 @@ exports.dealSearchResults = function() {
 };
 
 exports.dealSearchResult = function(i) {
-    return exports.dealSearchResults().get(i);
+    var elements = exports.dealSearchResults();
+    browser.wait(ExpectedConditions.visibilityOfAny(elements));
+    return elements.get(i);
 };
 
 exports.selectDealSearchResultByIndex = function(i) {
@@ -53,7 +55,9 @@ exports.editModeContributionRows = function() {
 };
 
 exports.editModeContributionRow = function(i) {
-    return exports.editModeContributionRows().get(i);
+    var elements = exports.editModeContributionRows();
+    browser.wait(ExpectedConditions.visibilityOfAny(elements));
+    return elements.get(i);
 };
 
 exports.scopeDeliveryCheckboxes = function(i) {

@@ -281,18 +281,18 @@ if (pages.create_deal_scope === undefined) {
                 });
         },
 
-        clickOnAddPublisherShareSetLink: function () {
-            pages.create_deal_scope.elems.addPublisherShareSetLink.click();
+        clickOnAddPublisherShareSetLink: function(options) {
+            var linkElement = pages.create_deal_scope.elems.addPublisherShareSetLink;
+
+            options = options || {};
+
+            if(options.scrollIntoView) {
+                pages.base.scrollIntoView(linkElement);
+            }
+
+            linkElement.click();
+
             browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_scope.elems.firstPublisherNameField));
-            //var element = pages.create_deal_scope.elems.addPublisherShareSetLink;
-            //
-            //pages.base.scrollIntoView(element);
-            //
-            //return element.click().then(function() {
-            //    return browser.wait(ExpectedConditions.visibilityOf(
-            //        pages.create_deal_scope.elems.firstPublisherNameField
-            //    ));
-            //});
         },
 
         publisherShareChainContainers: function () {
@@ -325,9 +325,9 @@ if (pages.create_deal_scope === undefined) {
         },
 
         publisherSearchResultLabels: function () {
-            var selector = '.tg-typeahead__suggestions-group-item';
-            browser.wait(ExpectedConditions.visibilityOf($(selector)));
-            return $$(selector);
+            var labelElements = $$('.tg-typeahead__suggestions-group-item');
+            browser.wait(ExpectedConditions.visibilityOfAny(labelElements));
+            return labelElements;
         },
 
         selectPublisherSearchResultByIndex: function (i) {
@@ -484,8 +484,13 @@ if (pages.create_deal_scope === undefined) {
         },
 
         saveThePublisherShareSets: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.savePublisherShareSet));
-            pages.create_deal_scope.elems.savePublisherShareSet.click();
+            var saveButton = pages.create_deal_scope.elems.savePublisherShareSet;
+
+            pages.base.scrollIntoView(saveButton);
+
+            browser.wait(ExpectedConditions.elementToBeClickable(saveButton));
+
+            return saveButton.click();
         },
 
         cancelPublisherShareSet: function () {

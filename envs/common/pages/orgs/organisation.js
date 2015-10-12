@@ -1,474 +1,484 @@
 "use strict";
 
-var fs = require('fs'),
-    client = require('http-api-client'),
-    pph = require('../../../../helpers/pph'),
-    promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+var pph = require('../../../../helpers/pph');
 
+var client = require('http-api-client');
+var fs = require('fs');
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.organisation === undefined) {
 
 
     pages.organisation = exports = new ftf.pageObject({
-        url: _tf_config.urls.app_url + "#/create/org",
-        locators: {},
+            url: _tf_config.urls.app_url + "#/create/org",
+            locators: {},
         organisationNameInput: function () {
-            return $(".e2e-general-name>div>input");
+return $(".e2e-general-name>div>input");
         },
         territoryOfOperationIcon: function () {
 
             return $(".tg-territory__globe-button");
         },
         selectAllCountriesButton: function () {
-            return $$(".tg-territory__btn.ng-scope").last();
+          return $$(".tg-territory__btn.ng-scope").last();
         },
-        suisaIPINumberInput: function () {
-            return $(".e2e-general-suisa-ipi>div>div>input");
+            suisaIPINumberInput: function () {
+return $(".e2e-general-suisa-ipi>div>div>input");
         },
         affiliatedSocietyInput: function () {
-            return $('[placeholder="Search by CISAC Code or Abbreviation"]');
+return $('[placeholder="Search by CISAC Code or Abbreviation"]');
         },
         WCMPublisherButton: function () {
-            return $('[tooltip="Warner/Chappell Music"]');
+return $('[tooltip="Warner/Chappell Music"]');
         },
         saveOrganisationButton: function () {
-            return $('[type="submit"]');
+          return $('[type="submit"]');
         },
         summaryTable: function () {
             return $(".span3.header-right");
         },
         cisacCode: function () {
-            return $('.e2e-general-cisac-code>div');
-        },
-        firstSubPublisher: function () {
-
-            return $(".span6.e2e-sub-publisher.ng-scope:first-child>div>.EDITOR.modular-edit>div>div>div>div>.e2e-sub-publisher-def>div>strong>a");
+          return $('.e2e-general-cisac-code>div');
         },
 
+        subPublisherRelationshipContainers: function() {
+            return $$('.e2e-sub-publisher');
+        },
+
+        subPublisherNameBinding: function(i) {
+            return this.subPublisherRelationshipContainers().get(i).$(
+                '.e2e-sub-publisher-def .ng-binding'
+            );
+        },
 
 
-        incomeProviderControls: function () {
 
-            return element(by.css(".e2e-income-provider>div>.CONTROLS"));
-        }
+            incomeProviderControls: function () {
+
+                return element(by.css(".income-provider-section>div>.CONTROLS"));
+            }
             ,
-        fileTypeIncomeInput: function () {
-            return element(by.css(".default"));
+            fileTypeIncomeInput: function () {
+                return element(by.css(".default"));
 
-        }
+            }
             ,
-        activityRecordsTable: function () {
-            return $("#ACTIVITY-RECORDS");
-        },
-        editorGeneral: function () {
-            return $("#editor-general");
-        },
+            activityRecordsTable: function () {
+                return $("#ACTIVITY-RECORDS");
+            },
+            editorGeneral: function () {
+                return $("#editor-general");
+            },
         regRunHeader: function () {
             return $(".reg-run-header");
         },
 
 
-        incomeProvidersEditView: function () {
+            incomeProvidersEditView: function () {
 
-            return element(by.css(".EDITOR.e2e-income-provider>.edit-view"));
-        },
-        fileTypeIncomeBlank: function () {
+                return element(by.css(".EDITOR.income-provider-section>.edit-view"));
+            },
+            fileTypeIncomeBlank: function () {
 
-            return element(by.css(".default"));
-        },
+                return element(by.css(".default"));
+            },
 
-        fileTypeIncomeInputDropdown: function () {
+            fileTypeIncomeInputDropdown: function () {
 
-            return element(by.css(".active-result.highlighted"));
-        },
-        generalOrganisationSection: function () {
-            return element(by.css("#editor-general"));
-        },
-        incomeProviderSection: function () {
+                return element(by.css(".active-result.highlighted"));
+            },
+            generalOrganisationSection: function () {
+                return element(by.css("#editor-general"));
+            },
 
-            return element(by.css(".e2e-income-provider"));
-        },
-        incomeProviderSectionEdit: function () {
-            return element(by.css(".e2e-income-provider>div>button"));
-        },
-        organisationOption: function () {
+            incomeProviderSection: function () {
 
-            return element(by.css("#SEARCH-ORG"));
-        },
-        searchInput: function () {
+                return element(by.css(".income-provider-section"));
+            },
+            incomeProviderSectionEdit: function () {
+                return element(by.css(" .income-provider-section>div>button"));
 
-            return element(by.css(".tg-typeahead__input"));
-        },
-
-        searchTypeAheadDropdown: function () {
-
-            return element(by.css(".tg-typeahead__suggestions-group-item-inner"));
-        },
+            },
 
 
-        inboundIncomeTypeInput: function (tableLine) {
+            organisationOption: function () {
 
-            return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(1)>input"));
+                return element(by.css("#SEARCH-ORG"));
+            },
+            searchInput: function () {
 
+                return element(by.css(".tg-typeahead__input"));
+            },
 
-        },
-        inboundIncomeTypeDescriptionInput: function (tableLine) {
-            return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(2)>input"));
-        },
-        incomeFileTypeInput: function (tableLine) {
-            return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(3)>input"));
-        },
-        tangoIncomeTypeInput: function (tableLine) {
-            return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(4)>input"));
-        },
-        saveIncomeProviderButton: function () {
+            searchTypeAheadDropdown: function () {
+
+                return element(by.css(".tg-typeahead__suggestions-group-item-inner"));
+            },
 
 
-            return element(by.css(".e2e-income-provider>.edit-view>.CONTROLS>div:first-child>button:first-child"));
-        }
+            inboundIncomeTypeInput: function (tableLine) {
+
+                return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(1)>input"));
+
+
+            },
+            inboundIncomeTypeDescriptionInput: function (tableLine) {
+                return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(2)>input"));
+            },
+            incomeFileTypeInput: function (tableLine) {
+                return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(3)>input"));
+            },
+            tangoIncomeTypeInput: function (tableLine) {
+                return element(by.css(".table.input-table>tbody>tr:nth-child(" + tableLine + ")>td:nth-child(4)>input"));
+            },
+            saveIncomeProviderButton: function () {
+
+
+                return element(by.css(".income-provider-section>.edit-view>.CONTROLS>div:first-child>button:first-child"));
+            }
             ,
-        typeaheadInput: function () {
+            typeaheadInput: function () {
 
-            return $$(".tg-typeahead__suggestions-group-item").first();
-        },
-        typeaheadContainer: function () {
-            return $(".tg-typeahead__suggestions-container");
-        },
+                return $$(".tg-typeahead__suggestions-group-item").first();
+            },
+            typeaheadContainer: function () {
+              return $(".tg-typeahead__suggestions-container");
+            },
 
-        navigationTab: function () {
-            return $(".nav-tabs");
-        },
+            navigationTab: function () {
+                return $(".nav-tabs");
+            },
         downloadFileButton: function () {
-            return $(".icon-download-alt.ng-scope");
+return $(".icon-download-alt.ng-scope");
         },
 
         validationErrorsButton: function () {
-            return $$(".btn.btn-primary.ng-scope").first();
+          return $$(".btn.btn-primary.ng-scope").first();
         },
-        activityHeader: function () {
-            return $("#ACTIVITY-HEADER");
-        },
+            activityHeader: function () {
+                return $("#ACTIVITY-HEADER");
+            },
         elementWork: function () {
-            return $(".DATA-ROW.DATA-CHILD:first-child");
+           return $(".DATA-ROW.DATA-CHILD:first-child");
         },
         orgTypeHeader: function () {
-            return $(".text-highlight");
+return $(".text-highlight");
         },
-        iconDownloadAlt: function () {
-            return $(".icon-download-alt");
-        },
-        successModalMessage: function () {
-            return $(".modal-success");
-        },
-        previewRegistrationRunTab: function () {
+            iconDownloadAlt: function () {
+                return $(".icon-download-alt");
+            },
+            successModalMessage: function () {
+                return $(".modal-success");
+            },
+            previewRegistrationRunTab: function () {
 
-            return $$(".nav-tabs>li>a").last();
-        },
-        registrationActivityTab: function () {
-            return $$(".nav-tabs>li>a").first();
-        },
-        generalTab: function () {
-            return $$(".nav-tabs>li>a").get(1);
-        },
-        registrationRunHeader: function () {
-            return $(".reg-run-header");
-        },
-        customWorkButton: function () {
-            return $$(".reg-run-header>span>div>div>span>a").first();
-        },
-        popupRegistrationRun: function () {
+                return $$(".nav-tabs>li>a").last();
+            },
+            registrationActivityTab: function () {
+                return $$(".nav-tabs>li>a").first();
+            },
+            generalTab: function () {
+                return $$(".nav-tabs>li>a").get(1);
+            },
+            registrationRunHeader: function () {
+                return $(".reg-run-header");
+            },
+            customWorkButton: function () {
+                return $$(".reg-run-header>span>div>div>span>a").first();
+            },
+            popupRegistrationRun: function () {
 
-            return $(".popup-reg-run");
-        },
-        getLastAddedWorkEvent: function () {
-            return $$(".row-header").first();
+                return $(".popup-reg-run");
+            },
+            getLastAddedWorkEvent: function () {
+                return $$(".row-header").first();
 
-        },
-        getIconType: function (event) {
-            return event.$("div>div>span>.icon-exchange").isPresent();
-
-
-        },
-        getWorksText: function (event) {
-
-            pages.base.scrollIntoView(event);
-            return event.$("div>div:nth-child(2)>p>span").getText();
-
-        },
-
-        getWorkIDNumber: function (event) {
-            return event.$(".row-header>div>div:nth-child(2)>div").getText();
-
-        },
-        getRunDate: function (event) {
-
-            return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time').getText();
-        },
-        getStatus: function (event) {
-            return event.$$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>span').first().getText();
+            },
+            getIconType: function (event) {
+                return event.$("div>div>span>.icon-exchange").isPresent();
 
 
+            },
+            getWorksText: function (event) {
 
-        },
-        getEventRunDate: function (event) {
-            return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
-        },
-        popupRegistrationLinkByText: function (text) {
-            //$$(".popup-reg-run>ul>li>a").
-            return element(By.linkText(text));
+                pages.base.scrollIntoView(event);
+                return event.$("div>div:nth-child(2)>p>span").getText();
 
-            // return protractor.driver.findElement(protractor.By.linkText(text));
-        },
-        activeRegistrationRunButton: function () {
+            },
 
-            return $('[data-tooltip=""][data-ng-click="canExecuteStackedWorks() && executeStackedWorks();"]');
-        },
-        registrationRunButton: function () {
-            return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
-        },
-        modalConfirmButton: function () {
+            getWorkIDNumber: function (event) {
+                return event.$(".row-header>div>div:nth-child(2)>div").getText();
 
-            // return element.all(by.css(".modal-footer>button")).element(by.buttonText("OK"));
-            return $('[data-ng-click="(data.show.cancel) ? data.apply() : ok()" ]');
-        },
-        modalSuccessConfirmButton: function () {
-            return $(".btn.btn-primary.pull-right");
-        },
-        modalFooter: function () {
-            return $('.modal-footer');
+            },
+            getRunDate: function (event) {
 
-        },
-        textWithTotalWorksNumber: function () {
+                return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time').getText();
+            },
+            getStatus: function (event) {
+                return    event.$$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>span').first().getText();
 
 
-            $('.modal-prompt').getText().then(function (text) {
-                //  console.log("whole text" + text);
-                return text;
-            })
-        },
-        getEmailDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-EMAIL");
-        },
-        getSFTPDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-SFTP");
-        },
-        getFTPDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-FTP");
-        },
-        getThirdPartyDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-THIRDPARTY");
-        },
 
-        sfptDeliveryMethodName: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").first();
-        },
-        sftpDeliveryMethodAddress: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.host"]');
-        },
-        sftpDeliveryMethodPort: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.port"]');
-        },
-        sftpDeliveryMethodUsername: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").get(1);
-        },
-        sftpUnmaskPasswordButton: function (deliveryMethod) {
-            return deliveryMethod.$(".control-group>.controls>.mask-input-password");
-        },
-        sftpPassword: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.showPassword"]');
-        },
-        sftpFileFormat: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").get(2);
-        },
-        sftpFileFormatStatus: function (deliveryMethod) {
-            return deliveryMethod.$(".control-group>.controls>span.compress-file");
-        },
-        sftpDeliveryNotificationStatus: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").last();
-        },
-        sfptDeliveryStatusEmail: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.primary_emails"]');
-        },
-        sftpDeliveryStatusCC: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.cc_emails"]');
-        },
+            },
+            getEventRunDate: function (event) {
+                return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
+            },
+            popupRegistrationLinkByText: function (text) {
+//$$(".popup-reg-run>ul>li>a").
+                return element(By.linkText(text));
+
+                // return protractor.driver.findElement(protractor.By.linkText(text));
+            },
+            activeRegistrationRunButton: function () {
+
+                return $('[data-tooltip=""][data-ng-click="canExecuteStackedWorks() && executeStackedWorks();"]');
+            },
+            registrationRunButton: function () {
+              return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
+            },
+            modalConfirmButton: function () {
+
+                // return element.all(by.css(".modal-footer>button")).element(by.buttonText("OK"));
+                return $('[data-ng-click="(data.show.cancel) ? data.apply() : ok()" ]');
+            },
+            modalSuccessConfirmButton: function () {
+              return $(".btn.btn-primary.pull-right");
+            },
+            modalFooter: function () {
+                return $('.modal-footer');
+
+            },
+            textWithTotalWorksNumber: function () {
+
+
+                $('.modal-prompt').getText().then(function (text) {
+                  //  console.log("whole text" + text);
+                    return text;
+                })
+            },
+            getEmailDeliveryMethods: function () {
+                return $$(".e2e-delivery-method-EMAIL");
+            },
+            getSFTPDeliveryMethods: function () {
+                return $$(".e2e-delivery-method-SFTP");
+            },
+            getFTPDeliveryMethods: function () {
+                return $$(".e2e-delivery-method-FTP");
+            },
+            getThirdPartyDeliveryMethods: function () {
+                return $$(".e2e-delivery-method-THIRDPARTY");
+            },
+
+            sfptDeliveryMethodName: function (deliveryMethod) {
+                return deliveryMethod.$$(".control-group>.controls>strong").first();
+            },
+            sftpDeliveryMethodAddress: function (deliveryMethod) {
+                return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.host"]');
+            },
+            sftpDeliveryMethodPort: function (deliveryMethod) {
+                return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.port"]');
+            },
+            sftpDeliveryMethodUsername: function (deliveryMethod) {
+                return deliveryMethod.$$(".control-group>.controls>strong").get(1);
+            },
+            sftpUnmaskPasswordButton: function (deliveryMethod) {
+                return deliveryMethod.$(".control-group>.controls>.mask-input-password");
+            },
+            sftpPassword: function (deliveryMethod) {
+                return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.showPassword"]');
+            },
+            sftpFileFormat: function (deliveryMethod) {
+                return deliveryMethod.$$(".control-group>.controls>strong").get(2);
+            },
+            sftpFileFormatStatus: function (deliveryMethod) {
+                return deliveryMethod.$(".control-group>.controls>span.compress-file");
+            },
+            sftpDeliveryNotificationStatus: function (deliveryMethod) {
+                return deliveryMethod.$$(".control-group>.controls>strong").last();
+            },
+            sfptDeliveryStatusEmail: function (deliveryMethod) {
+                return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.primary_emails"]');
+            },
+            sftpDeliveryStatusCC: function (deliveryMethod) {
+                return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.cc_emails"]');
+            },
         thirdPartyName: function (deliveryMethod) {
             return deliveryMethod.$('[ data-ng-if="dm.delivery_mechanism_type === \'THIRDPARTY\'"]>div>strong');
         },
 
 
 
-        //END OF LOCATORS ///////////////////////////////////////
+//END OF LOCATORS ///////////////////////////////////////
         getThirdPartyName: function (deliveryMethod) {
-            return this.thirdPartyName(deliveryMethod).getText();
+          return this.thirdPartyName(deliveryMethod).getText();
         },
-        getSFTPDeliveryMethodName: function (deliveryMethod) {
+            getSFTPDeliveryMethodName: function (deliveryMethod) {
 
-            return this.sfptDeliveryMethodName(deliveryMethod).getText();
-        },
-        getSFTPDelivetyMehodAddress: function (deliveryMethod) {
-            return this.sftpDeliveryMethodAddress(deliveryMethod).getText();
-        },
-        getSFTPDeliveryMethodPort: function (deliveryMethod) {
-            return this.sftpDeliveryMethodPort(deliveryMethod).getText();
-        },
+                return this.sfptDeliveryMethodName(deliveryMethod).getText();
+            },
+            getSFTPDelivetyMehodAddress: function (deliveryMethod) {
+                return this.sftpDeliveryMethodAddress(deliveryMethod).getText();
+            },
+            getSFTPDeliveryMethodPort: function (deliveryMethod) {
+                return this.sftpDeliveryMethodPort(deliveryMethod).getText();
+            },
 
 
-        getSFTPUsername: function (deliveryMethod) {
+            getSFTPUsername: function (deliveryMethod) {
 
-            return this.sftpDeliveryMethodUsername(deliveryMethod).getText();
-        }
+                return this.sftpDeliveryMethodUsername(deliveryMethod).getText();
+            }
             ,
-        clickUnmaskPasswordButton: function (deliveryMethod) {
-            return this.sftpUnmaskPasswordButton(deliveryMethod).click();
-        },
-        getSFTPPassword: function (deliveryMethod) {
+            clickUnmaskPasswordButton: function (deliveryMethod) {
+                return this.sftpUnmaskPasswordButton(deliveryMethod).click();
+            },
+            getSFTPPassword: function (deliveryMethod) {
 
 
-            return this.sftpPassword(deliveryMethod).getText();
+                    return this.sftpPassword(deliveryMethod).getText();
 
 
-        }
+            }
             ,
-        getSFTPFileFormat: function (deliveryMethod) {
+            getSFTPFileFormat: function (deliveryMethod) {
 
-            return this.sftpFileFormat(deliveryMethod).getText();
+                return this.sftpFileFormat(deliveryMethod).getText();
 
-        },
-        getSFTPFileFormatStatus: function (deliveryMethod) {
-            return this.sftpFileFormatStatus(deliveryMethod).getText();
-        }
+            },
+            getSFTPFileFormatStatus: function (deliveryMethod) {
+                return this.sftpFileFormatStatus(deliveryMethod).getText();
+            }
             ,
-        getSFTPDeliveryNotificationStatus: function (deliveryMethod) {
-            return this.sftpDeliveryNotificationStatus(deliveryMethod).getText();
-        },
-        getSFTPDeliveryNotificationStatusEmail: function (deliveryMethod) {
-            return this.sfptDeliveryStatusEmail(deliveryMethod).getText();
+            getSFTPDeliveryNotificationStatus: function (deliveryMethod) {
+                return this.sftpDeliveryNotificationStatus(deliveryMethod).getText();
+            },
+            getSFTPDeliveryNotificationStatusEmail: function (deliveryMethod) {
+                return this.sfptDeliveryStatusEmail(deliveryMethod).getText();
 
-        },
-        getSFTPDeliveryNotificationStatusCC: function (deliveryMethod) {
-            return this.sftpDeliveryStatusCC(deliveryMethod).getText();
+            },
+            getSFTPDeliveryNotificationStatusCC: function (deliveryMethod) {
+                return this.sftpDeliveryStatusCC(deliveryMethod).getText();
 
-        }
+            }
             ,
-        getEmailDeliveryMethodEmail: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(1)>.controls>strong').getText();
+            getEmailDeliveryMethodEmail: function (deliveryMethod) {
+                return deliveryMethod.$('div:nth-child(1)>.controls>strong').getText();
 
-        }
+            }
             ,
-        getEmailDeliveryMethodCC: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(1)>div>[data-ng-show="dm.delivery_mechanism.cc_emails"]').getText();
-        }
+            getEmailDeliveryMethodCC: function (deliveryMethod) {
+                return deliveryMethod.$('div:nth-child(1)>div>[data-ng-show="dm.delivery_mechanism.cc_emails"]').getText();
+            }
             ,
-        getEmailDeliveryMethodFileFormat: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(3)>.controls>strong').getText();
-        }
+            getEmailDeliveryMethodFileFormat: function (deliveryMethod) {
+                return deliveryMethod.$('div:nth-child(3)>.controls>strong').getText();
+            }
             ,
-        getEmailDeliveryMethodNotification: function (deliveryMethod) {
-            return deliveryMethod.$$('div:nth-child(5)>.controls >span').first().getText();
-        }
+            getEmailDeliveryMethodNotification: function (deliveryMethod) {
+                return deliveryMethod.$$('div:nth-child(5)>.controls >span').first().getText();
+            }
             ,
-        numberOfWorks: function () {
-            var number = parseInt(this.textWithTotalWorksNumber(), 10);
-            // console.log("Number of works" + this.textWithTotalWorksNumber());
-            return number;
+            numberOfWorks: function () {
+                var number = parseInt(this.textWithTotalWorksNumber(), 10);
+              // console.log("Number of works" + this.textWithTotalWorksNumber());
+                return number;
 
 
-        }
-            ,
-
-        executeRegistrationIsActive: function () {
-            return this.activeRegistrationRunButton().isPresent();
-        }
+            }
             ,
 
-
-        clickIncomeProviderSection: function () {
-
-
-
-
-            //  ftf.helper.waitForElement(this.incomeProviderSection(), 30000);
-
-            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.incomeProviderSection()));
-            //browser.wait(ExpectedConditions.visibilityOf(this.generalOrganisationSection()));
-
-            //    this.scopeHeading().click()
-
-            pages.base.scrollIntoView(this.incomeProviderSection());
-            this.incomeProviderSection().click();
-        }
-            ,
-
-        clickincomeProviderSectionEdit: function () {
-
-            //browser.wait(ExpectedConditions.visibilityOf(this.incomeProviderSectionEdit()));
-
-            // ftf.helper.waitForElement(this.incomeProviderSectionEdit(), 30000);
-
-            this.incomeProviderSectionEdit().click();
-        }
+            executeRegistrationIsActive: function () {
+                return this.activeRegistrationRunButton().isPresent();
+            }
             ,
 
 
-        typeIntoInboundIncomeTypeInput: function (text, tableLine) {
+            clickIncomeProviderSection: function () {
 
 
-            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.inboundIncomeTypeInput(tableLine)));
-            this.inboundIncomeTypeInput(tableLine).sendKeys(text);
-            //  pages.base.scrollIntoView(  this.inboundIncomeTypeInput);
 
 
-        }
+                //  ftf.helper.waitForElement(this.incomeProviderSection(), 30000);
+
+                browser.wait(ExpectedConditions.visibilityOf(pages.organisation.incomeProviderSection()));
+                //browser.wait(ExpectedConditions.visibilityOf(this.generalOrganisationSection()));
+
+                //    this.scopeHeading().click()
+
+                pages.base.scrollIntoView(this.incomeProviderSection());
+                this.incomeProviderSection().click();
+            }
             ,
-        typeIntoInboundIncomeTypeDescriptionInput: function (text, tableLine) {
-            this.inboundIncomeTypeDescriptionInput(tableLine).sendKeys(text);
-        }
+
+            clickincomeProviderSectionEdit: function () {
+
+                //browser.wait(ExpectedConditions.visibilityOf(this.incomeProviderSectionEdit()));
+
+                // ftf.helper.waitForElement(this.incomeProviderSectionEdit(), 30000);
+
+                this.incomeProviderSectionEdit().click();
+            }
             ,
-        typeIntoIncomeFileTypeInput: function (text, tableLine) {
-            this.incomeFileTypeInput(tableLine).sendKeys(text);
-            browser.wait(ExpectedConditions.visibilityOf(this.typeaheadInput()));
-            this.incomeFileTypeInput(tableLine).sendKeys(protractor.Key.ENTER);
-        }
+
+
+            typeIntoInboundIncomeTypeInput: function (text, tableLine) {
+
+
+                browser.wait(ExpectedConditions.visibilityOf(pages.organisation.inboundIncomeTypeInput(tableLine)));
+                this.inboundIncomeTypeInput(tableLine).sendKeys(text);
+                //  pages.base.scrollIntoView(  this.inboundIncomeTypeInput);
+
+
+            }
             ,
-        typeIntoTangoIncomeTypeInput: function (text, tableLine) {
-            this.tangoIncomeTypeInput(tableLine).sendKeys(text);
-            browser.wait(ExpectedConditions.visibilityOf(this.typeaheadInput()));
-            this.tangoIncomeTypeInput(tableLine).sendKeys(protractor.Key.ENTER);
-        }
+            typeIntoInboundIncomeTypeDescriptionInput: function (text, tableLine) {
+                this.inboundIncomeTypeDescriptionInput(tableLine).sendKeys(text);
+            }
             ,
-        clickSaveIncomeProviderButton: function () {
-
-
-            browser.wait(ExpectedConditions.visibilityOf(this.saveIncomeProviderButton()));
-            this.saveIncomeProviderButton().click();
-        }
+            typeIntoIncomeFileTypeInput: function (text, tableLine) {
+                this.incomeFileTypeInput(tableLine).sendKeys(text);
+                browser.wait(ExpectedConditions.visibilityOf(this.typeaheadInput()));
+                this.incomeFileTypeInput(tableLine).sendKeys(protractor.Key.ENTER);
+            }
             ,
-        waitForSaveToComplete: function () {
+            typeIntoTangoIncomeTypeInput: function (text, tableLine) {
+                this.tangoIncomeTypeInput(tableLine).sendKeys(text);
+                browser.wait(ExpectedConditions.visibilityOf(this.typeaheadInput()));
+                this.tangoIncomeTypeInput(tableLine).sendKeys(protractor.Key.ENTER);
+            }
+            ,
+            clickSaveIncomeProviderButton: function () {
 
-            //   browser.isElemenetPresent(by.css('element'));
+
+                browser.wait(ExpectedConditions.visibilityOf(this.saveIncomeProviderButton()));
+                this.saveIncomeProviderButton().click();
+            }
+            ,
+            waitForSaveToComplete: function () {
+
+                //   browser.isElemenetPresent(by.css('element'));
 
 
-            browser.wait(ExpectedConditions.invisibilityOf(this.incomeProvidersEditView()));
-            //browser.pause();
+                browser.wait(ExpectedConditions.invisibilityOf(this.incomeProvidersEditView()));
+                //browser.pause();
 
-        }
+            }
 
             ,
-        waitForActivityRecordsTable: function () {
+            waitForActivityRecordsTable: function () {
 
-            browser.wait(ExpectedConditions.visibilityOf(this.activityRecordsTable()));
-        }
+                browser.wait(ExpectedConditions.visibilityOf(this.activityRecordsTable()));
+            }
             ,
-        waitForActivityRecordsTableHeader: function () {
+            waitForActivityRecordsTableHeader: function () {
 
-            browser.wait(ExpectedConditions.visibilityOf(this.activityHeader()));
-        }
+                browser.wait(ExpectedConditions.visibilityOf(this.activityHeader()));
+            }
             ,
-        waitForEditorGeneral: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.editorGeneral()));
+            waitForEditorGeneral: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.editorGeneral()));
 
-        }
+            }
             ,
         waitForRegRunHeader: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.regRunHeader()));
@@ -482,92 +492,92 @@ if (pages.organisation === undefined) {
         },
 
 
-        typeOrganisationNameIntoInput: function (organisationName) {
+            typeOrganisationNameIntoInput: function (organisationName) {
 
-            this.searchInput().sendKeys(organisationName);
+                this.searchInput().sendKeys(organisationName);
 
-        }
+            }
             ,
 
-        selectValueFromDropdown: function () {
+            selectValueFromDropdown: function () {
 
 
-            browser.wait(ExpectedConditions.visibilityOf(this.searchTypeAheadDropdown()));
-            this.searchTypeAheadDropdown().click();
+                browser.wait(ExpectedConditions.visibilityOf(this.searchTypeAheadDropdown()));
+                this.searchTypeAheadDropdown().click();
 
 
-        }
+            }
 
 
             ,
 
 
-        selectIncomeFileType: function (fileType) {
+            selectIncomeFileType: function (fileType) {
 
-            this.fileTypeIncomeInput().click();
-            this.fileTypeIncomeInput().sendKeys(fileType);
+                this.fileTypeIncomeInput().click();
+                this.fileTypeIncomeInput().sendKeys(fileType);
 
-            //   browser.wait(ExpectedConditions.visibilityOf(this.fileTypeIncomeInputDropdown()));
-            this.fileTypeIncomeInput().sendKeys(protractor.Key.ENTER);
+                //   browser.wait(ExpectedConditions.visibilityOf(this.fileTypeIncomeInputDropdown()));
+                this.fileTypeIncomeInput().sendKeys(protractor.Key.ENTER);
 
 
-        }
+            }
             ,
-        clickExecuteRegistrationRunButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
-            return this.activeRegistrationRunButton().click();
-        }
+            clickExecuteRegistrationRunButton: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
+             return   this.activeRegistrationRunButton().click();
+            }
             ,
-        confirmModalDialog: function () {
+            confirmModalDialog: function () {
 
-            browser.wait(ExpectedConditions.visibilityOf(this.modalFooter()));
-            //  console.log("TOTAL WORK "+this.numberOfWorks());
-            hash.totalNumberOfWorks = this.numberOfWorks();
-            return this.modalConfirmButton().click();
-        },
-        confirmSuccessModal: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.modalSuccessConfirmButton()));
-            this.modalSuccessConfirmButton().click();
-        }
+                browser.wait(ExpectedConditions.visibilityOf(this.modalFooter()));
+              //  console.log("TOTAL WORK "+this.numberOfWorks());
+                hash.totalNumberOfWorks = this.numberOfWorks();
+                  return this.modalConfirmButton().click();
+            },
+            confirmSuccessModal: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.modalSuccessConfirmButton()));
+                this.modalSuccessConfirmButton().click();
+            }
             ,
-        registrationCanBeRun: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.registrationRunButton()));
-            return this.executeRegistrationIsActive();
-        }
+            registrationCanBeRun: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.registrationRunButton()));
+                return this.executeRegistrationIsActive();
+            }
             ,
-        successDialogIsPresent: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.successModalMessage()));
-            return this.successModalMessage().isPresent();
-        }
+            successDialogIsPresent: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.successModalMessage()));
+                return this.successModalMessage().isPresent();
+            }
             ,
 
-        resetWork: function (env, deliveryDate, name) {
-            console.log("Resetting Work ");
+            resetWork: function (env, deliveryDate, name) {
+                console.log("Resetting Work ");
 
-            //http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01
-            var enviroinment = "http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?";
-            var recipient = "BMI";
-            var runDate = "2014-09-01";
+                //http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01
+                var enviroinment = "http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?";
+                var recipient = "BMI";
+                var runDate = "2014-09-01";
 
 
-            client.request({
+                client.request({
 
-                url: enviroinment + "recipient=" + recipient + "&runDate=" + runDate,
-                // url:"http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01",
-                method: 'POST' // optional
-            }).then(function (response) {
+                    url: enviroinment + "recipient=" + recipient + "&runDate=" + runDate,
+                    // url:"http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01",
+                    method: 'POST' // optional
+                }).then(function (response) {
 
-                // console.log(response.getStatusCode());
-                return response.getStatusCode();
+                   // console.log(response.getStatusCode());
+                    return response.getStatusCode();
 
-            });
-        }
+                });
+            }
             ,
-        clickPreviewRegistrationRunTab: function () {
+            clickPreviewRegistrationRunTab: function () {
 
-            browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
-            this.previewRegistrationRunTab().click();
-        }
+                browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
+                this.previewRegistrationRunTab().click();
+            }
             ,
 
         clickDownloadFileButton: function () {
@@ -575,31 +585,28 @@ if (pages.organisation === undefined) {
             this.downloadFileButton().click();
         },
         waitForFileToDownload: function () {
-            browser.sleep(5000);
+          browser.sleep(5000);
         },
         clickValidationErrorsButton: function () {
             this.validationErrorsButton().click();
         },
-        rmDir: function (dirPath) {
-            var that = this;
-            try {
-                var files = fs.readdirSync(dirPath);
-                console.log(files);
-            }
-            catch (e) {
-                console.log(e);
-                return;
-            }
-            if (files.length > 0)
-                for (var i = 0; i < files.length; i++) {
-                    var filePath = dirPath + '/' + files[i];
-                    if (fs.statSync(filePath).isFile())
-                        fs.unlinkSync(filePath);
-                    else
-                        that.rmDir(filePath);
-                }
+            rmDir: function (dirPath) {
+                var that = this;
+                try { var files = fs.readdirSync(dirPath);
+                console.log(files);}
+                catch(e) {
+                    console.log(e);
+                    return; }
+                if (files.length > 0)
+                    for (var i = 0; i < files.length; i++) {
+                        var filePath = dirPath + '/' + files[i];
+                        if (fs.statSync(filePath).isFile())
+                            fs.unlinkSync(filePath);
+                        else
+                            that.rmDir(filePath);
+                    }
 
-        },
+            },
         deleteFilesFromDownloadFolder: function (downloadFilepath) {
 
 
@@ -608,180 +615,177 @@ if (pages.organisation === undefined) {
         fileDownloadedSuccesfully: function (dirPath) {
             browser.sleep(5000);
             var that = this;
-            try {
-                var files = fs.readdirSync(dirPath);
-                console.log(files);
-            }
-            catch (e) {
+            try { var files = fs.readdirSync(dirPath);
+                console.log(files);}
+            catch(e) {
                 console.log(e);
-                return;
-            }
+                return; }
             return files.length == 2;
         },
-        clickRegistrationActivityTab: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
-            this.registrationActivityTab().click();
-        }
+            clickRegistrationActivityTab: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
+                this.registrationActivityTab().click();
+            }
             ,
-        clickGeneralTab: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
-            this.generalTab().click();
-        }
+            clickGeneralTab: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
+                this.generalTab().click();
+            }
             ,
-        clickCustomWorksButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.registrationRunHeader()));
-            this.customWorkButton().click();
-        }
+            clickCustomWorksButton: function () {
+                browser.wait(ExpectedConditions.visibilityOf(this.registrationRunHeader()));
+                this.customWorkButton().click();
+            }
             ,
-        selectValueFromPopupRegRun: function (text) {
-            browser.wait(ExpectedConditions.visibilityOf(this.popupRegistrationRun()));
-            this.popupRegistrationLinkByText(text).click();
-        }
+            selectValueFromPopupRegRun: function (text) {
+                browser.wait(ExpectedConditions.visibilityOf(this.popupRegistrationRun()));
+                this.popupRegistrationLinkByText(text).click();
+            }
             ,
 
-        workHasDeliveredStatus: function () {
+            workHasDeliveredStatus: function () {
 
 
-            return this.getStatus(this.getLastAddedWorkEvent());
+                return this.getStatus(this.getLastAddedWorkEvent());
 
-            //.row-header>div>div>span>.icon-exchange  ICON
-            //.row-header>div>div:nth-child(2)>p>span TOTAL WORKS TEXT
-            //.row-header>div>div:nth-child(2)>div CW text
-            //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time delivered date
-            //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time RUN DATE
+                //.row-header>div>div>span>.icon-exchange  ICON
+                //.row-header>div>div:nth-child(2)>p>span TOTAL WORKS TEXT
+                //.row-header>div>div:nth-child(2)>div CW text
+                //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time delivered date
+                //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time RUN DATE
 
-        }
+            }
             ,
-        clickLatestWork: function () {
-            return this.getLastAddedWorkEvent().click();
-        }
+            clickLatestWork: function () {
+              return   this.getLastAddedWorkEvent().click();
+            }
             ,
-        getLatestWorkEvent: function () {
-            this.getLastAddedWorkEvent();
-        },
-        testMultipleElements: function () {
-            //  //*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::node()
+            getLatestWorkEvent: function () {
+                this.getLastAddedWorkEvent();
+            },
+            testMultipleElements: function () {
+              //  //*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::node()
 
-            this.getLastAddedWorkEvent();
-            //.DATA-CHILD
-            // var list = browser.driver.findElements(By.xpath(".//*[@id='ACTIVITY-RECORDS']"));
-            //for(WebElement element: list){
-            //    //print text if text not empty
-            //    String text = element.getText();
-            //    if(!text.isEmpty){
-            //        S.O.P("Result :"+text);
-            //    }
-            //}
-            //browser.driver.findElements(By.xpath('//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]'))
-            this.getEmailDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
+                this.getLastAddedWorkEvent();
+//.DATA-CHILD
+               // var list = browser.driver.findElements(By.xpath(".//*[@id='ACTIVITY-RECORDS']"));
+                //for(WebElement element: list){
+                //    //print text if text not empty
+                //    String text = element.getText();
+                //    if(!text.isEmpty){
+                //        S.O.P("Result :"+text);
+                //    }
+                //}
+                //browser.driver.findElements(By.xpath('//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]'))
+                this.getEmailDeliveryMethods().then(function (result) {
+                    result.forEach(function(entry) {
+                        entry.getText().then(function (value) {
+                            console.log(value);
+                        })
+                    });
                 });
-            });
-            this.getThirdPartyDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
+                this.getThirdPartyDeliveryMethods().then(function (result) {
+                    result.forEach(function(entry) {
+                        entry.getText().then(function (value) {
+                            console.log(value);
+                        })
+                    });
                 });
-            });
-            this.getSFTPDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
+                this.getSFTPDeliveryMethods().then(function (result) {
+                    result.forEach(function(entry) {
+                        entry.getText().then(function (value) {
+                            console.log(value);
+                        })
+                    });
                 });
-            });
-            this.getFTPDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
+                this.getFTPDeliveryMethods().then(function (result) {
+                    result.forEach(function(entry) {
+                        entry.getText().then(function (value) {
+                            console.log(value);
+                        })
+                    });
                 });
-            });
 
 
-            //var element = document.evaluate( '//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::*/text()' ,document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            //
-            //element.forEach(function (entry) {
-            //    console.log(entry.stringValue);
-            //
-            //});
-            //alert( 'This document contains ' + element.stringValue + ' paragraph elements' );
-
-
+                //var element = document.evaluate( '//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::*/text()' ,document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                //
+                //element.forEach(function (entry) {
+                //    console.log(entry.stringValue);
+                //
+                //});
+                //alert( 'This document contains ' + element.stringValue + ' paragraph elements' );
 
 
 
-        },
-        typeOrganisationName: function (value) {
-            browser.wait(ExpectedConditions.visibilityOf(this.organisationNameInput()));
-            this.organisationNameInput().sendKeys(value);
-
-        },
-        setTerritoryOfOperationToWorldWide: function () {
-            this.territoryOfOperationIcon().click();
-            browser.wait(ExpectedConditions.visibilityOf(this.selectAllCountriesButton()));
-            this.selectAllCountriesButton().click();
 
 
-        },
-        typeRandomSuisaIPINumber: function (value) {
-
-            this.suisaIPINumberInput().sendKeys(value);
-        },
-        randomIPINumberBasedOnDate: function () {
-            // var currentdate = new Date();
-            return "" + new Date().getDate() +
-                +(new Date().getMonth() + 1) +
-                +new Date().getFullYear() +
-                +new Date().getHours() +
-                +new Date().getMinutes() +
-                +new Date().getSeconds();
-
-        },
-
-        selectAffiliatedSocietyNumber: function (value) {
-            this.affiliatedSocietyInput().sendKeys(value);
-            browser.wait(ExpectedConditions.visibilityOf(this.typeaheadContainer()));
+            },
+            typeOrganisationName: function (value) {
+                browser.wait(ExpectedConditions.visibilityOf(  this.organisationNameInput()));
+                this.organisationNameInput().sendKeys(value);
+                
+            },
+            setTerritoryOfOperationToWorldWide: function () {
+                this.territoryOfOperationIcon().click();
+                browser.wait(ExpectedConditions.visibilityOf(  this.selectAllCountriesButton()));
+                    this.selectAllCountriesButton().click();
 
 
-            this.typeaheadInput().click();
+            },
+            typeRandomSuisaIPINumber: function (value) {
+
+                this.suisaIPINumberInput().sendKeys(value);
+            },
+            randomIPINumberBasedOnDate: function () {
+               // var currentdate = new Date();
+                return "" + new Date().getDate() +
+                    + (new Date().getMonth()+1)  +
+                    + new Date().getFullYear() +
+                    + new Date().getHours() +
+                    + new Date().getMinutes() +
+                    + new Date().getSeconds();
+
+            },
+
+            selectAffiliatedSocietyNumber: function (value) {
+                this.affiliatedSocietyInput().sendKeys(value);
+                browser.wait(ExpectedConditions.visibilityOf(  this.typeaheadContainer()));
 
 
-        },
-        clickPublisherType: function (value) {
-            if (value == "WCM") {
-                this.WCMPublisherButton().click();
+                    this.typeaheadInput().click();
+
+
+            },
+            clickPublisherType: function (value) {
+                if(value == "WCM")
+                {
+                    this.WCMPublisherButton().click();
+                }
+            }
+            ,
+            clickSaveOrganisationButton: function () {
+                this.saveOrganisationButton().click();
+            },
+            isSavedPageDisplayed: function () {
+                browser.wait(ExpectedConditions.visibilityOf(  this.summaryTable()));
+                return this.summaryTable().isDisplayed();
+
+            },
+
+            getCisacNumber: function () {
+                browser.wait(ExpectedConditions.visibilityOf(  this.cisacCode()));
+
+                return this.cisacCode().getText();
+            },
+
+            subPublisherName: function(i) {
+                var nameElement = this.subPublisherNameBinding(0);
+
+                pages.base.scrollIntoView(nameElement);
+
+                return nameElement.getText();
             }
         }
-            ,
-        clickSaveOrganisationButton: function () {
-            this.saveOrganisationButton().click();
-        },
-        isSavedPageDisplayed: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.summaryTable()));
-            return this.summaryTable().isDisplayed();
-
-        },
-
-        getCisacNumber: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.cisacCode()));
-
-            return this.cisacCode().getText();
-        },
-        getFirstSubPublisherData: function () {
-
-            browser.wait(ExpectedConditions.visibilityOf(this.firstSubPublisher()));
-            pages.base.waitForAjax();
-            pages.base.scrollIntoView(this.firstSubPublisher());
-            return this.firstSubPublisher().getText();
-        }
-
-
-    }
     )
     ;
 
@@ -790,57 +794,57 @@ if (pages.organisation === undefined) {
 
 module.exports = pages.organisation;
 
-exports.general = (function () {
+exports.general = (function() {
     var general = {};
 
-    general.sectionContainer = function () {
+    general.sectionContainer = function() {
         return $('.organisation__general_block');
     };
 
-    general.editSectionButton = function () {
+    general.editSectionButton = function() {
         return general.sectionContainer().$(
             '[data-ng-click="tgModularViewMethods.switchToEditView()"]'
         );
     };
 
-    general.editSection = function () {
+    general.editSection = function() {
         var element = general.editSectionButton();
         pages.base.scrollIntoView(element);
         return element.click();
     };
 
-    general.nameInput = function () {
+    general.nameInput = function() {
         return element(by.model('modularEditModels.model.name'));
     };
 
-    general.enterName = function (value) {
+    general.enterName = function(value) {
         var element = general.nameInput();
         pages.base.scrollIntoView(element);
         element.clear();
         return element.sendKeys(value);
     };
 
-    general.territoriesOfOperationSelector = function () {
+    general.territoriesOfOperationSelector = function() {
         return element(by.model('modularEditModels.model.territoriesOfOperation'));
     };
 
-    general.editTerritoriesOfOperation = function () {
+    general.editTerritoriesOfOperation = function() {
         var element = general.territoriesOfOperationSelector();
         pages.base.scrollIntoView(element);
         return element.click();
     };
 
-    general.territoryOfOperationTypeaheadTag = function (value) {
+    general.territoryOfOperationTypeaheadTag = function(value) {
         return general.territoriesOfOperationSelector().element(
             by.cssContainingText('.tg-typeahead__tag', value)
         );
     };
 
-    general.deleteTerritoryOfOperationTypeaheadTagButton = function (element) {
+    general.deleteTerritoryOfOperationTypeaheadTagButton = function(element) {
         return element.$('.tg-typeahead__tag-remove');
     };
 
-    general.deleteTerritoryOfOperation = function (value) {
+    general.deleteTerritoryOfOperation = function(value) {
         var element = general.deleteTerritoryOfOperationTypeaheadTagButton(
             general.territoryOfOperationTypeaheadTag(value)
         );
@@ -850,24 +854,24 @@ exports.general = (function () {
         return element.click();
     };
 
-    general.territoryOfOperationSearchTermsInput = function () {
+    general.territoryOfOperationSearchTermsInput = function() {
         return general.territoriesOfOperationSelector().element(by.model('$term'));
     };
 
-    general.enterTerritoryOfOperationSearchTerms = function (value) {
+    general.enterTerritoryOfOperationSearchTerms = function(value) {
         var element = general.territoryOfOperationSearchTermsInput();
         pages.base.scrollIntoView(element);
         element.clear();
         return element.sendKeys(value);
     };
 
-    general.territoryOfOperationSearchResults = function () {
+    general.territoryOfOperationSearchResults = function() {
         return general.territoriesOfOperationSelector().$$(
             '.tg-typeahead__suggestions-group-item'
         );
     };
 
-    general.selectTerritoryOfOperationSearchResultByIndex = function (i) {
+    general.selectTerritoryOfOperationSearchResultByIndex = function(i) {
         var elements = general.territoryOfOperationSearchResults(),
             element;
 
@@ -879,11 +883,11 @@ exports.general = (function () {
         return element.click();
     };
 
-    general.organisationTypeButtons = function () {
+    general.organisationTypeButtons = function() {
         return element(by.model('modularEditModels.model.type')).$$('button');
     };
 
-    general.selectOrganisationType = function (value) {
+    general.selectOrganisationType = function(value) {
         var element = general.organisationTypeButtons().filter(
             pph.matchTextExact(value)
         ).first();
@@ -893,13 +897,13 @@ exports.general = (function () {
         return element.click();
     };
 
-    general.publisherTypeButtons = function () {
+    general.publisherTypeButtons = function() {
         return element(by.model('modularEditModels.model.typeModel.publisherType')).$$(
             'button'
         );
     };
 
-    general.selectPublisherType = function (value) {
+    general.selectPublisherType = function(value) {
         var element = general.publisherTypeButtons().filter(
             pph.matchTextExact(value)
         ).first();
@@ -909,65 +913,65 @@ exports.general = (function () {
         return element.click();
     };
 
-    general.saveSectionButton = function () {
+    general.saveSectionButton = function() {
         return general.sectionContainer().element(by.cssContainingText(
             '.CONTROLS button', 'Save'
         ));
     };
 
-    general.saveSection = function () {
+    general.saveSection = function() {
         var element = general.saveSectionButton();
 
         pages.base.scrollIntoView(element);
 
-        return element.click().then(function () {
+        return element.click().then(function() {
             pages.base.waitForAjax();
         });
     };
 
-    general.sectionActive = function () {
+    general.sectionActive = function() {
         var element = general.sectionContainer();
         pages.base.scrollIntoView(element);
         return pph.matchesCssSelector(element, '.active');
     };
 
-    general.expectSectionToBeInViewMode = function () {
+    general.expectSectionToBeInViewMode = function() {
         expect(general.sectionActive()).toBeFalsy();
     };
 
     return general;
 })();
 
-exports.incomeProvider = (function () {
+exports.incomeProvider = (function() {
     var incomeProvider = {};
 
-    incomeProvider.sectionContainer = function () {
+    incomeProvider.sectionContainer = function() {
         return $('.organisation__income-provider_block');
     };
 
-    incomeProvider.editSectionButton = function () {
+    incomeProvider.editSectionButton = function() {
         return incomeProvider.sectionContainer().$(
             '[data-ng-click="tgModularViewMethods.switchToEditView()"]'
         );
     };
 
-    incomeProvider.editSection = function () {
+    incomeProvider.editSection = function() {
         var element = incomeProvider.editSectionButton();
         pages.base.scrollIntoView(element);
         return element.click();
     };
 
-    incomeProvider.primaryTerritoryOfOperationDropdown = function () {
+    incomeProvider.primaryTerritoryOfOperationDropdown = function() {
         return element(by.model(
             'modularEditModels.model.primaryTerritoryOfOperation'
         ));
     };
 
-    incomeProvider.primaryTerritoryOfOperationOption = function (value) {
+    incomeProvider.primaryTerritoryOfOperationOption = function(value) {
         return element(by.cssContainingText('.dropdown-menu li', value));
     };
 
-    incomeProvider.selectPrimaryTerritoryOfOperation = function (value) {
+    incomeProvider.selectPrimaryTerritoryOfOperation = function(value) {
         var dropdown = incomeProvider.primaryTerritoryOfOperationDropdown();
         var option = incomeProvider.primaryTerritoryOfOperationOption(value);
 
@@ -978,15 +982,15 @@ exports.incomeProvider = (function () {
         return option.click();
     };
 
-    incomeProvider.defaultCurrencyDropdown = function () {
+    incomeProvider.defaultCurrencyDropdown = function() {
         return element(by.model('modularEditModels.model.currencyCode'));
     };
 
-    incomeProvider.defaultCurrencyOption = function (value) {
+    incomeProvider.defaultCurrencyOption = function(value) {
         return element(by.cssContainingText('.dropdown-menu li', value));
     };
 
-    incomeProvider.selectDefaultCurrency = function (value) {
+    incomeProvider.selectDefaultCurrency = function(value) {
         var dropdown = incomeProvider.defaultCurrencyDropdown();
         var option = incomeProvider.defaultCurrencyOption(value);
 
@@ -997,21 +1001,21 @@ exports.incomeProvider = (function () {
         return option.click();
     };
 
-    incomeProvider.incomeFileTypeTypeahead = function () {
+    incomeProvider.incomeFileTypeTypeahead = function() {
         return element(by.model('modularEditModels.model.incomeFileTypes'));
     };
 
-    incomeProvider.incomeFileTypeTypeaheadTag = function (value) {
+    incomeProvider.incomeFileTypeTypeaheadTag = function(value) {
         return incomeProvider.incomeFileTypeTypeahead().element(
             by.cssContainingText('.tg-typeahead__tag', value)
         );
     };
 
-    incomeProvider.deleteIncomeFileTypeButton = function (element) {
+    incomeProvider.deleteIncomeFileTypeButton = function(element) {
         return element.$('.tg-typeahead__tag-remove');
     };
 
-    incomeProvider.deleteIncomeFileType = function (value) {
+    incomeProvider.deleteIncomeFileType = function(value) {
         var element = incomeProvider.deleteIncomeFileTypeButton(
             incomeProvider.incomeFileTypeTypeaheadTag(value)
         );
@@ -1021,137 +1025,137 @@ exports.incomeProvider = (function () {
         return element.click();
     };
 
-    incomeProvider.incomeFileTypeSearchTermsInput = function () {
+    incomeProvider.incomeFileTypeSearchTermsInput = function() {
         return incomeProvider.incomeFileTypeTypeahead().element(by.model('$term'));
     };
 
-    incomeProvider.enterIncomeFileTypeSearchTerms = function (value) {
+    incomeProvider.enterIncomeFileTypeSearchTerms = function(value) {
         var element = incomeProvider.incomeFileTypeSearchTermsInput();
         pages.base.scrollIntoView(element);
         element.clear();
         return element.sendKeys(value);
     };
 
-    incomeProvider.incomeFileTypeSearchResults = function (more) {
+    incomeProvider.incomeFileTypeSearchResults = function(more) {
         var elements = $$('.tg-typeahead__suggestions-group-item');
 
-        if (!more || !more.dontWait) {
+        if(!more || !more.dontWait) {
             browser.wait(ExpectedConditions.visibilityOfAny(elements));
         }
 
         return elements;
     };
 
-    incomeProvider.selectIncomeFileTypeSearchResultByIndex = function (i) {
+    incomeProvider.selectIncomeFileTypeSearchResultByIndex = function(i) {
         var element = incomeProvider.incomeFileTypeSearchResults().get(i);
         pages.base.scrollIntoView(element);
         return element.click();
     };
 
-    incomeProvider.incomeTypeMapping = (function () {
+    incomeProvider.incomeTypeMapping = (function() {
         var mapping = {};
 
-        mapping.rows = function () {
+        mapping.rows = function() {
             return $$('.e2e-income-provider-mapping');
         };
 
-        mapping.deleteRowButton = function (i) {
+        mapping.deleteRowButton = function(i) {
             return mapping.rows().get(i).$('.e2e-mapping-remove');
         };
 
-        mapping.deleteRow = function (i) {
+        mapping.deleteRow = function(i) {
             var element = mapping.deleteRowButton(i);
             pages.base.scrollIntoView(element);
             return element.click();
         };
 
-        mapping.inboundIncomeTypeInput = function (i) {
+        mapping.inboundIncomeTypeInput = function(i) {
             return mapping.rows().get(i).element(by.model(
                 'incomeType.fileIncomeType'
             ));
         };
 
-        mapping.enterInboundIncomeType = function (i, value) {
+        mapping.enterInboundIncomeType = function(i, value) {
             var element = mapping.inboundIncomeTypeInput(i);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
         };
 
-        mapping.inboundIncomeTypeDescriptionInput = function (i) {
+        mapping.inboundIncomeTypeDescriptionInput = function(i) {
             return mapping.rows().get(i).element(by.model(
                 'incomeType.fileIncomeDesc'
             ));
         };
 
-        mapping.enterInboundIncomeTypeDescription = function (i, value) {
+        mapping.enterInboundIncomeTypeDescription = function(i, value) {
             var element = mapping.inboundIncomeTypeDescriptionInput(i);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
         };
 
-        mapping.incomeFileTypeTypeahead = function (i) {
+        mapping.incomeFileTypeTypeahead = function(i) {
             return mapping.rows().get(i).element(by.model(
                 'incomeType.fileFormat'
             ));
         };
 
-        mapping.incomeFileTypeSearchTermsInput = function (i) {
+        mapping.incomeFileTypeSearchTermsInput = function(i) {
             return mapping.incomeFileTypeTypeahead(i).element(by.model('$term'));
         };
 
-        mapping.enterIncomeFileTypeSearchTerms = function (i, value) {
+        mapping.enterIncomeFileTypeSearchTerms = function(i, value) {
             var element = mapping.incomeFileTypeSearchTermsInput(i);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
         };
 
-        mapping.incomeFileTypeSearchResults = function (more) {
+        mapping.incomeFileTypeSearchResults = function(more) {
             var elements = $$('.tg-typeahead__suggestions-group-item');
 
-            if (!more || !more.dontWait) {
+            if(!more || !more.dontWait) {
                 browser.wait(ExpectedConditions.visibilityOfAny(elements));
             }
 
             return elements;
         };
 
-        mapping.selectIncomeFileTypeSearchResultByIndex = function (i) {
+        mapping.selectIncomeFileTypeSearchResultByIndex = function(i) {
             var element = mapping.incomeFileTypeSearchResults().get(i);
             pages.base.scrollIntoView(element);
             return element.click();
         };
 
-        mapping.tangoIncomeTypeTypeahead = function (i) {
+        mapping.tangoIncomeTypeTypeahead = function(i) {
             return mapping.rows().get(i).element(by.model(
                 'incomeType.internalIncomeType'
             ));
         };
 
-        mapping.tangoIncomeTypeSearchTermsInput = function (i) {
+        mapping.tangoIncomeTypeSearchTermsInput = function(i) {
             return mapping.tangoIncomeTypeTypeahead(i).element(by.model('$term'));
         };
 
-        mapping.enterTangoIncomeTypeSearchTerms = function (i, value) {
+        mapping.enterTangoIncomeTypeSearchTerms = function(i, value) {
             var element = mapping.tangoIncomeTypeSearchTermsInput(i);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
         };
 
-        mapping.tangoIncomeTypeSearchResults = function (more) {
+        mapping.tangoIncomeTypeSearchResults = function(more) {
             var elements = $$('.tg-typeahead__suggestions-group-item');
 
-            if (!more || !more.dontWait) {
+            if(!more || !more.dontWait) {
                 browser.wait(ExpectedConditions.visibilityOfAny(elements));
             }
 
             return elements;
         };
 
-        mapping.selectTangoIncomeTypeSearchResultByIndex = function (i) {
+        mapping.selectTangoIncomeTypeSearchResultByIndex = function(i) {
             var element = mapping.tangoIncomeTypeSearchResults().get(i);
             pages.base.scrollIntoView(element);
             return element.click();
@@ -1160,29 +1164,29 @@ exports.incomeProvider = (function () {
         return mapping;
     })();
 
-    incomeProvider.saveSectionButton = function () {
+    incomeProvider.saveSectionButton = function() {
         return incomeProvider.sectionContainer().element(by.cssContainingText(
             '.CONTROLS button', 'Save'
         ));
     };
 
-    incomeProvider.saveSection = function () {
+    incomeProvider.saveSection = function() {
         var element = incomeProvider.saveSectionButton();
 
         pages.base.scrollIntoView(element);
 
-        return element.click().then(function () {
+        return element.click().then(function() {
             pages.base.waitForAjax();
         });
     };
 
-    incomeProvider.sectionActive = function () {
+    incomeProvider.sectionActive = function() {
         var element = incomeProvider.sectionContainer();
         pages.base.scrollIntoView(element);
         return pph.matchesCssSelector(element, '.active');
     };
 
-    incomeProvider.expectSectionToBeInViewMode = function () {
+    incomeProvider.expectSectionToBeInViewMode = function() {
         expect(incomeProvider.sectionActive()).toBeFalsy();
     };
 

@@ -38,12 +38,15 @@ exports.feature = [
                 this.setDefaultIncomeProviderCurrency('USD');
                 this.setIncomeFileType('ASCAP DOMESTIC');
 
-                _.times(2, function (i) {
+                _.each([
+                    'Mechanical',
+                    'Performance',
+                ], function(internalType, i) {
                     this.enterIncomeTypeMappingType(i, 'T' + (i + 1));
                     this.enterIncomeTypeMappingDescription(i, 'D' + (i + 1));
                     this.enterIncomeTypeMappingFileTypeSearchTerms(i, 'ASCAP DOMESTIC');
                     this.selectIncomeTypeMappingFileTypeSearchResultByIndex(0);
-                    this.enterIncomeTypeMappingInternalTypeSearchTerms(i, 'Mechanical');
+                    this.enterIncomeTypeMappingInternalTypeSearchTerms(i, internalType);
                     this.selectIncomeTypeMappingInternalTypeSearchResultByIndex(0);
                 }, this);
 
@@ -96,7 +99,7 @@ exports.feature = [
                     this.enterIncomeFileTypeSearchTerms(1, 'ABRAMUS');
                     this.selectIncomeFileTypeSearchResultByIndex(0);
 
-                    this.enterTangoIncomeTypeSearchTerms(1, 'Mechanical');
+                    this.enterTangoIncomeTypeSearchTerms(1, 'Synchronisation');
                     this.selectTangoIncomeTypeSearchResultByIndex(0);
                 }
             );

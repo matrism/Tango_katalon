@@ -1,6 +1,6 @@
 'use strict';
 
-var random = require('../../../helpers/random'),
+var random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
 var workData = {

@@ -19,7 +19,11 @@ exports.acquisitionPeriodScopesInput = function(i) {
 };
 
 exports.clickAcquisitionPeriodScopesInput = function(i) {
-    return exports.acquisitionPeriodScopesInput(i).click();
+    var inputElement = exports.acquisitionPeriodScopesInput(i);
+
+    pages.base.scrollIntoView(inputElement);
+
+    return inputElement.click();
 };
 
 exports.acquisitionPeriodScopesTypeaheadContainer = function(i) {
@@ -36,7 +40,11 @@ exports.selectAllSuggestedAcquisitionPeriodScopesOption = function(i) {
 };
 
 exports.selectAllSuggestedAcquisitionPeriodScopes = function(i) {
-    return exports.selectAllSuggestedAcquisitionPeriodScopesOption(i).click();
+    var optionElement = exports.selectAllSuggestedAcquisitionPeriodScopesOption(i);
+
+    pages.base.scrollIntoView(optionElement);
+
+    return optionElement.click();
 };
 
 exports.applyAcquisitionPeriodScopeChangesButton = function(i) {
@@ -46,5 +54,9 @@ exports.applyAcquisitionPeriodScopeChangesButton = function(i) {
 };
 
 exports.applyAcquisitionPeriodScopeChanges = function(i) {
-    return exports.applyAcquisitionPeriodScopeChangesButton(i).click();
+    var buttonElement = exports.applyAcquisitionPeriodScopeChangesButton(i);
+
+    pages.base.scrollIntoView(buttonElement);
+
+    return buttonElement.click();
 };
