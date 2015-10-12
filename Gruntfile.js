@@ -36,6 +36,8 @@ module.exports = function (grunt) {
 
             if (grunt.option('screen')) {
                 cmd.args.unshift('-screen 0 ' + grunt.option('screen'));
+            } else {
+                cmd.args.unshift('-screen 0 1920x1080x24');
             }
 
             cmd.args.unshift('-s');
