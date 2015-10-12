@@ -54,10 +54,6 @@ module.exports = function (grunt) {
             cmd.args.push(grunt.option('app-url'))
         }
 
-        if (grunt.option('single-report')) {
-            cmd.args.push('--single-report');
-        };
-
         if (grunt.option('timeout')) {
             cmd.args.push('--timeout ');
             cmd.args.push(grunt.option('timeout'));
@@ -72,6 +68,8 @@ module.exports = function (grunt) {
         };
 
         // add reporting
+        cmd.args.push('--single-report');
+        cmd.args.push('true');
         cmd.args.push('--reporting');
         cmd.args.push('all');
 
