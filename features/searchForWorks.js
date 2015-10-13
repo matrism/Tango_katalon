@@ -218,7 +218,12 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['search-for-works'],
+    commonFeatureTags: ['search-for-works', 'broken', 'unstable'],
+    breakageDescription: (
+        'This test is unstable. When it fails, it causes the whole test suite ' +
+        'to fail and not produce an HTML report. That\'s why it\'s tagged ' +
+        'as broken too.'
+    ),
     feature: feature,
     beforeFeature: beforeFeature
 };
