@@ -139,7 +139,8 @@ config = {
             jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
                 consolidateAll: false,
                 savePath: 'reports/xml',
-                useDotNotation: true
+                useDotNotation: true,
+                filePrefix: (new Date).getTime() + '-'  // makes it unique when running tests in parallel
             }));
         }
 
