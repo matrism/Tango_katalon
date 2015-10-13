@@ -181,3 +181,9 @@ pph.jsClick = function(element) {
         }, element
     );
 };
+
+pph.waitForAsync = function () {
+    var noop = function () {};
+
+    return browser.executeScript(noop);
+};

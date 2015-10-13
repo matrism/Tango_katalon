@@ -15,8 +15,8 @@ var configer = global.ftf.configer,
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1600,
-                height: 900
+                width: 1200,
+                height: 600
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
             singleReport: cli['single-report'],

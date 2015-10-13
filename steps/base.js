@@ -2,6 +2,7 @@
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
+var pageStep = require('../helpers/basicPageStep');
 steps.base = exports;
 
 exports.useEntityDataSlot = function(entityType, slotId) {
@@ -172,3 +173,9 @@ exports.refreshPage = function() {
         pages.base.refreshPage();
     });
 };
+
+pageStep('Open new tab');
+pageStep('Duplicate tab');
+pageStep('Switch to tab by index');
+pageStep('Close tab by index');
+
