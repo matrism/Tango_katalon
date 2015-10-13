@@ -23,31 +23,33 @@
     $ul = $(doc).find('ul');
     $h4 = $(doc).find('h4');
 
-    if ($h4.find('button').length === 0) {
-      // add the result status on each title
-      $ul.each(function() {
-          var $this = $(this);
+    // add the result status on each title
+    $ul.each(function() {
+        var $this = $(this);
+        var h4 = $this.children('h4');
+
+        if (h4.find('button').length === 0) {
           if ($this.find('.failed').length) {
-              $this.children('h4').prepend('<span class="failed">✗</span>');
+            $this.children('h4').prepend('<span class="failed">✗</span>');
           } else {
-              $this.children('h4').prepend('<span class="passed">✓</span>');
+            $this.children('h4').prepend('<span class="passed">✓</span>');
           }
-      });
 
-      // add the button and the collapse action
-      $h4.prepend($('<button>').addClass('toggle').html('–'));
-      $toggle = $h4.find('.toggle');
-      $toggle.click(function() {
-          var $this = $(this);
-          if ($this.html() == '+') {
+          // add the button and the collapse action
+          h4.prepend($('<button>').addClass('toggle').html('–'));
+          $toggle = h4.find('.toggle');
+          $toggle.click(function() {
+            var $this = $(this);
+            if ($this.html() == '+') {
               $this.html('–').closest('ul').children('li, ul').show();
-          } else {
+            } else {
               $this.html('+').closest('ul').children('li, ul').hide();
-          }
-      });
+            }
+          });
 
-      $toggle.click();
-    }
+          $toggle.click();
+        }
+    });
   });
 })();
 </script>
