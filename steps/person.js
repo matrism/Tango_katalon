@@ -60,16 +60,16 @@ exports.findInternalIpiNumber = function() {
 
 
 };
-exports.validateIPI = function(ipi)
-{ it('Validate IPI Number', function() {
+exports.validateSuisaIpiNumber = function(ipi)
+{ it('Validate SUISA IPI number (' + ipi + ')', function() {
 
     expect(pages.person.getSuisaIPI()).toBe(ipi)
 });
 };
 
-exports.validateAlternativeName = function(value) {
-    it('Validate Alternative Name', function() {
-        expect(pph.toLowerCase(pages.person.getAlternativeName())).toBe(
+exports.validateAlternativeName = function(i, value) {
+    it('Validate alternative name (' + i + ', ' + value + ')', function() {
+        expect(pph.toLowerCase(pages.person.getAlternativeName(i))).toBe(
             value.toLowerCase()
         );
     });

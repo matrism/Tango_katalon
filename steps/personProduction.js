@@ -46,6 +46,14 @@ pageStep([
     'Validate alternative name',
 ]);
 
+exports.findId = function() {
+    it('Find the person ID', function() {
+        pages.person.findId().then(function(value) {
+            hash.currentPersonSlot.id = value;
+        });
+    });
+};
+
 exports.findInternalIpiNumber = function() {
     it('Find internal IPI number', function() {
         page.internalIpiNumber().then(function(value) {

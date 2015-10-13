@@ -582,47 +582,14 @@ return $(".text-highlight");
             }
             ,
 
-        clickDownloadFileButton: function () {
+        downloadCrFile: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.downloadFileButton()));
-            this.downloadFileButton().click();
-        },
-        waitForFileToDownload: function () {
-          browser.sleep(5000);
+            this.downloadFileButton().click().then(function() {
+                browser.sleep(5000);
+            });
         },
         clickValidationErrorsButton: function () {
             this.validationErrorsButton().click();
-        },
-            rmDir: function (dirPath) {
-                var that = this;
-                try { var files = fs.readdirSync(dirPath);
-                console.log(files);}
-                catch(e) {
-                    console.log(e);
-                    return; }
-                if (files.length > 0)
-                    for (var i = 0; i < files.length; i++) {
-                        var filePath = dirPath + '/' + files[i];
-                        if (fs.statSync(filePath).isFile())
-                            fs.unlinkSync(filePath);
-                        else
-                            that.rmDir(filePath);
-                    }
-
-            },
-        deleteFilesFromDownloadFolder: function (downloadFilepath) {
-
-
-            this.rmDir(downloadFilepath);
-        },
-        fileDownloadedSuccesfully: function (dirPath) {
-            browser.sleep(5000);
-            var that = this;
-            try { var files = fs.readdirSync(dirPath);
-                console.log(files);}
-            catch(e) {
-                console.log(e);
-                return; }
-            return files.length == 2;
         },
             clickRegistrationActivityTab: function () {
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
@@ -781,7 +748,7 @@ return $(".text-highlight");
             },
 
             subPublisherName: function(i) {
-                var nameElement = this.subPublisherNameBinding(0);
+                var nameElement = this.subPublisherNameBinding(i);
 
                 pages.base.scrollIntoView(nameElement);
 
@@ -1193,4 +1160,14 @@ exports.incomeProvider = (function() {
     };
 
     return incomeProvider;
+})();
+
+exports.subPublishers = (function() {
+    var subPublishers = {};
+
+    subPublishers.expectNameToBeEither = function(i, values) {
+        expect(values).toContain(exports.subPublisherName(i));
+    };
+
+    return subPublishers;
 })();

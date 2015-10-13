@@ -41,10 +41,16 @@ pageStep([
         'Expect section to be in view mode',
     ]],
 
+    ['Sub-Publishers', [
+        'Expect name to be either',
+    ]],
+
     'Validate CISAC code',
     'Go to Preview Registration Run tab',
     'Wait for Preview Registration Run header to be displayed',
     'Go to Registration Activity tab',
     'Wait for Registration Activity records table to be displayed',
-    'Validate sub-publisher name',
+
+    'Download CR file',
+    'View validation errors',
 ]);

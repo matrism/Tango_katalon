@@ -15,6 +15,7 @@ pageStep([
     'Enter affiliated society search terms',
     'Select affiliated society search result by index',
     'Save',
+    'Validate save redirection',
 ]);
 
 exports.enterLastName = function(value) {

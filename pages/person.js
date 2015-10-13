@@ -31,8 +31,8 @@ exports.internalIpiNumberBinding = function() {
 exports.suisaIPINumber = function() {
     return $(".e2e-primary-name-suisa-ipi>div>strong");
 };
-exports.alternativeNameElement = function() {
-    return $(".e2e-alternative-name-full>div>strong");
+exports.alternativeNameElement = function(i) {
+    return $$(".e2e-alternative-name-full>div>strong").get(i);
 };
 
 
@@ -49,8 +49,8 @@ exports.getSuisaIPI = function() {
     return element.getText();
 };
 
-exports.getAlternativeName = function() {
-    var element = exports.alternativeNameElement();
+exports.getAlternativeName = function(i) {
+    var element = exports.alternativeNameElement(i);
     pages.base.scrollIntoView(element);
     return element.getText();
 };

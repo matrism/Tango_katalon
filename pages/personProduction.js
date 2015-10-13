@@ -59,3 +59,11 @@ exports.alternativeName = function(i) {
 exports.validateAlternativeName = function(i, value) {
     expect(pph.toUpperCase(exports.alternativeName(i))).toBe(value.toUpperCase());
 };
+
+exports.findId = function() {
+    return browser.getCurrentUrl().then(function(value) {
+        var regExp = /#\/person\/(.+)$/;
+        expect(value).toMatch(regExp);
+        return regExp.exec(value)[1];
+    });
+};

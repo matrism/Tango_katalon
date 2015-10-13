@@ -22,6 +22,20 @@ exports.selectOrgType = function (type) {
     buttons.filter(pph.matchTextExact(type)).first().click();
 };
 
+exports.suisaIpiNumberInput = function() {
+    return element(by.model('org.masterData.typeDetails.suisaIpiNumber'));
+};
+
+exports.enterSuisaIpiNumber = function(value) {
+    var input = exports.suisaIpiNumberInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
 exports.territoryOfOperationField = function () {
     return element(by.model('org.territory_of_operation'));
 };
@@ -386,6 +400,32 @@ exports.setStatementRecipientData = function (option, subOption) {
     subOptions.filter(pph.matchText(subOption)).first().click();
 };
 
+exports.affiliatedSocietySearchTermsInput = function() {
+    return element(by.model('org.masterData.typeDetails.affiliatedSociety.name'));
+};
+
+exports.enterAffiliatedSocietySearchTerms = function(value) {
+    var input = exports.affiliatedSocietySearchTermsInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
+exports.affiliatedSocietySearchResultOptions = function() {
+    var options = $$('.typeahead-result');
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
+
+    return options;
+};
+
+exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
+    return exports.affiliatedSocietySearchResultOptions().get(i).click();
+};
+
 exports.doneButton = function () {
     return $('#CREATE-ORG-SUBMIT');
 };
@@ -396,21 +436,14 @@ exports.expectFormToBeValid = function () {
 };
 
 exports.expectDoneButtonToBeClickable = function () {
-    var button = exports.doneButton();
-
-    pages.base.scrollIntoView(button);
-
-    expect(pph.matchesCssSelector(button, '.disabled')).toBeFalsy();
+    expect(pph.matchesCssSelector(exports.doneButton(), '.disabled')).toBeFalsy();
 };
 
 exports.saveOrganisation = function() {
-    var button = exports.doneButton();
-
-    pages.base.scrollIntoView(button);
-
     exports.expectDoneButtonToBeClickable();
 
-    return button.click().then(function() {
+    return exports.doneButton().click().then(function() {
         pages.base.waitForAjax();
+        expect(browser.getCurrentUrl()).toMatch(/#\/org\/.+$/);
     });
 };

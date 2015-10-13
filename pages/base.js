@@ -1,8 +1,11 @@
 "use strict";
 var _ = require("lodash");
+var fs = require('fs-extra');
+var glob = require('glob');
 var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
+var config = require('../configs/protractor-conf');
 exports = module.exports = pages.base = new ftf.pageObject ({
 	locators: {
 		logout_link: { id: "DSP-LOGOUT" }
@@ -363,4 +366,22 @@ exports.dialogError = function() {
             );
         });
     });
+};
+
+exports.clearDownloadsDirectory = function() {
+    var path = (
+        config.config.capabilities.chromeOptions.prefs.download.default_directory
+    );
+
+    glob.sync(path + '/*').forEach(function(path) {
+        fs.rmrfSync(path);
+    });
+};
+
+exports.validateDownloadFileCount = function(value) {
+    var path = (
+        config.config.capabilities.chromeOptions.prefs.download.default_directory
+    );
+
+    expect(glob.sync(path + '/*').length).toBe(value);
 };

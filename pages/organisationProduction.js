@@ -520,3 +520,41 @@ exports.incomeProvider = (function() {
 
     return incomeProvider;
 })();
+
+exports.subPublishers = (function() {
+    var subPublishers = {};
+
+    subPublishers.expectNameToBeEither = function(i, values) {
+        expect(values).toContain(exports.subPublisherName(i));
+    };
+
+    return subPublishers;
+})();
+
+exports.crFileDownloadButton = function() {
+    return $('.icon-download-alt.ng-scope');
+};
+
+exports.downloadCrFile = function() {
+    var button = exports.crFileDownloadButton();
+
+    browser.wait(protractor.ExpectedConditions.visibilityOf(button));
+
+    pages.base.scrollIntoView(button);
+
+    return button.click().then(function() {
+        browser.sleep(5000);
+    });
+};
+
+exports.validationErrorsButton = function() {
+    return $$('.btn.btn-primary.ng-scope').first();
+};
+
+exports.viewValidationErrors = function() {
+    var button = exports.validationErrorsButton();
+
+    pages.base.scrollIntoView(button);
+
+    return button.click();
+};

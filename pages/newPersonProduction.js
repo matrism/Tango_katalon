@@ -88,3 +88,7 @@ exports.save = function() {
         pages.base.waitForAjax();
     });
 };
+
+exports.validateSaveRedirection = function() {
+    expect(browser.getCurrentUrl()).toMatch(/#\/person\/.+$/);
+};
