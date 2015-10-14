@@ -2,7 +2,6 @@ var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps;
 
 
-
 require(pages_path + "royaltyRates");
 require(steps_path + "royaltyRates");
 
@@ -58,8 +57,6 @@ var beforeFeature = function () {
             steps.royaltyRates.verifyRateSetSavedData();
 
 
-
-
         }
     },
         {
@@ -86,7 +83,6 @@ var beforeFeature = function () {
                 steps.deal.clickFirstScopeHeader();
 
 
-
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
 
@@ -100,17 +96,12 @@ var beforeFeature = function () {
                 steps.royaltyRates.saveRateSet();
 
 
-
-
                 steps.royaltyRates.refreshPage();
 
                 steps.royaltyRates.openSavedScope();
 
 
-
                 steps.royaltyRates.verifyRateSetSavedData();
-
-
 
 
             }
@@ -140,7 +131,6 @@ var beforeFeature = function () {
                 steps.deal.clickFirstScopeHeader();
 
 
-
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
 
@@ -163,17 +153,12 @@ var beforeFeature = function () {
                 steps.royaltyRates.saveRateSet();
 
 
-
-
                 steps.royaltyRates.refreshPage();
 
                 steps.royaltyRates.openSavedScope();
 
 
-
                 steps.royaltyRates.verifyRateSetSavedData();
-
-
 
 
             }
@@ -195,18 +180,14 @@ var beforeFeature = function () {
                 steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
 
-
                 steps.royaltyRates.saveRateSet();
 
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
 
-
-
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
-
 
                 steps.royaltyRates.waitForPanel();
                 steps.royaltyRates.saveRRData();
@@ -215,21 +196,13 @@ var beforeFeature = function () {
                 steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
-
                 steps.royaltyRates.cancelRateSet();
-
-
-
 
                 steps.royaltyRates.refreshPage();
 
                 steps.royaltyRates.openSavedScope();
 
-
-
                 steps.royaltyRates.verifyRateSetSavedData();
-
-
 
 
             }
@@ -250,9 +223,7 @@ var beforeFeature = function () {
                 steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
 
-
                 steps.royaltyRates.saveRateSet();
-
 
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.addRatePercentageToContractualField("10");
@@ -267,11 +238,8 @@ var beforeFeature = function () {
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
 
-
-
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
-
 
                 steps.royaltyRates.waitForPanel();
                 steps.royaltyRates.saveRRData();
@@ -280,21 +248,13 @@ var beforeFeature = function () {
                 steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
-
                 steps.royaltyRates.cancelRateSet();
-
-
-
 
                 steps.royaltyRates.refreshPage();
 
                 steps.royaltyRates.openSavedScope();
 
-
-
                 steps.royaltyRates.verifyRateSetSavedData();
-
-
 
 
             }
@@ -315,14 +275,11 @@ var beforeFeature = function () {
                 steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
 
-
                 steps.royaltyRates.saveRateSet();
 
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
-
-
 
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
@@ -335,27 +292,15 @@ var beforeFeature = function () {
                 steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
-
                 steps.deal.goToIncomeRatesPage();
 
-
                 steps.modal.clickYesOnPopupModal();
-
-
-
-
-
-                steps.royaltyRates.refreshPage();
 
                 steps.deal.goToTermsDealTabDetails();
 
                 steps.royaltyRates.openSavedScope();
 
-
-
                 steps.royaltyRates.verifyRateSetSavedData();
-
-
 
 
             }
@@ -377,15 +322,12 @@ var beforeFeature = function () {
                 steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
 
-
                 steps.royaltyRates.saveRateSet();
-
 
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.addRatePercentageToContractualField("10");
                 steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
                 steps.royaltyRates.setEffectiveStartDate("2017-01-02");
-
                 steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
                 steps.royaltyRates.saveRateSet();
@@ -394,9 +336,7 @@ var beforeFeature = function () {
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
 
-
-                        steps.royaltyRates.storeAllRRData();
-
+                steps.royaltyRates.storeAllRRData();
 
                 steps.royaltyRates.editSingleRoyaltySet();
 
@@ -410,39 +350,22 @@ var beforeFeature = function () {
                 steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
-
-
-
-
                 steps.deal.goToIncomeRatesPage();
 
-
                 steps.modal.clickYesOnPopupModal();
-
-
-
-
-
-                steps.royaltyRates.refreshPage();
 
                 steps.deal.goToTermsDealTabDetails();
 
                 steps.royaltyRates.openSavedScope();
 
-
-
-                //steps.royaltyRates.test();
                 steps.royaltyRates.verifyAllRateSetSavedData();
-
-
-
 
             }
         },
 
         {
             name: "As a user I want to assign multiple rates to Scope on creation",
-            tags: ['ratesToScope2', 'broken'],
+            tags: ['ratesToScope2'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
@@ -466,7 +389,6 @@ var beforeFeature = function () {
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
                 steps.royaltyRates.saveRateSet();
 
-
                 steps.royaltyRates.addNewRoyaltySet();
                 steps.royaltyRates.addRatePercentageToContractualField("10");
                 steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
@@ -476,15 +398,12 @@ var beforeFeature = function () {
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
                 steps.royaltyRates.saveRateSet();
 
-
                 steps.royaltyRates.storeAllRRData();
 
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
                 steps.royaltyRates.verifyAllRateSetSavedData();
-
-
             }
         },
 
@@ -511,7 +430,7 @@ var beforeFeature = function () {
                 steps.deal.clickFirstScopeHeader();
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.royaltyRates.openAllRRFields();
-               steps.royaltyRates.checkThatInputHasCorrectDecimalNumber();
+                steps.royaltyRates.checkThatInputHasCorrectDecimalNumber();
 
 
             }
@@ -548,10 +467,10 @@ var beforeFeature = function () {
         },
 
         //DIRTY CHECK FEATURES
-        {   name: "As a User I want to perform Dirty Check on RR Edit Pages",
+        {
+            name: "As a User I want to perform Dirty Check on RR Edit Pages",
             tags: ['dirtyRRCheck5'],
-            steps:function()
-            {
+            steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -564,18 +483,14 @@ var beforeFeature = function () {
                 steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
 
-
                 steps.royaltyRates.saveRateSet();
 
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
 
-
-
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
-
 
                 steps.royaltyRates.waitForPanel();
                 steps.royaltyRates.saveRRData();
@@ -584,39 +499,24 @@ var beforeFeature = function () {
                 steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
-
-
                 steps.deal.goToIncomeRatesPage();
-
 
                 steps.modal.clickYesOnPopupModal();
 
-
-
-
-
-                steps.royaltyRates.refreshPage();
-
                 steps.deal.goToTermsDealTabDetails();
-               // steps.royaltyRates.cancelErrorModal();
 
                 steps.royaltyRates.refreshPage();
                 steps.royaltyRates.openSavedScope();
                 steps.royaltyRates.verifyRateSetSavedData();
-
-
-
-
-
             }
 
 
         },
 
-        {   name: "As a User I want to perform Dirty Check (by navigating)  on RR Edit Pages",
+        {
+            name: "As a User I want to perform Dirty Check (by navigating)  on RR Edit Pages",
             tags: ['dirtyRRCheck6'],
-            steps: function()
-            {
+            steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -629,18 +529,14 @@ var beforeFeature = function () {
                 steps.royaltyRates.clickOnReceiptApplicationMethod();
                 steps.royaltyRates.confirmChangingRateApplicationMethod();
 
-
                 steps.royaltyRates.saveRateSet();
 
                 steps.deal.itContinueToNextPage();
                 steps.deal.saveDeal();
                 steps.deal.clickFirstScopeHeader();
 
-
-
                 steps.royaltyRates.editSingleRoyaltySet();
                 steps.editRoyaltyRates.openRateSetPanel();
-
 
                 steps.royaltyRates.waitForPanel();
                 steps.royaltyRates.saveRRData();
@@ -649,49 +545,22 @@ var beforeFeature = function () {
                 steps.royaltyRates.editIncomeProviderByPartialMatch("ASCAP");
                 steps.royaltyRates.addEffectiveStartDate("2019-05-26");
 
-
-
                 steps.deal.goToIncomeRatesPage();
-
 
                 steps.modal.clickYesOnPopupModal();
 
-
-
-
-
-                steps.royaltyRates.refreshPage();
-
                 steps.deal.goToTermsDealTabDetails();
 
-
-                steps.royaltyRates.refreshPage();
                 steps.royaltyRates.openSavedScope();
                 steps.royaltyRates.verifyRateSetSavedData();
-
-
-
-
-
             }
-
-
         },
-
-
-
-
-
-
-
-
 
 
         {
-            name:"test input fields",
-            tags:['inputsTest'],
-            steps:function()
-            {
+            name: "test input fields",
+            tags: ['inputsTest'],
+            steps: function () {
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
                 steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
@@ -704,11 +573,7 @@ var beforeFeature = function () {
             }
 
         }
-
-
-
-];
-
+    ];
 
 
 module.exports = {
