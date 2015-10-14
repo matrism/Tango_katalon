@@ -56,7 +56,13 @@ var beforeFeature = [
     ];
 
 module.exports = {
-    commonFeatureTags: ['royaltyProcessing', 'smokeTest', 'broken'],
+    commonFeatureTags: ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'],
+    breakageDescription: (
+        'Though only unstable, this test takes a long time to run and may hang ' +
+        'indefinitely waiting for files to be processed. This affects smoke ' +
+        'test runs, so it\'s tagged broken to be skipped until it\'s stable ' +
+        '(fixed). Tracking issue: TAT-461.'
+    ),
     feature: feature,
     beforeFeature: beforeFeature
 };
