@@ -3,12 +3,12 @@
 var pageStep = require('../helpers/basicPageStep'),
     page;
 
-steps.personProduction = exports;
+steps.personStaging = exports;
 
 hash.personSlots = {};
 hash.currentPersonSlot = null;
 
-page = require(pages_path + 'personProduction');
+page = require(pages_path + 'personStaging');
 
 exports.usePersonSlot = function(i) {
     it('Use person slot #' + (i + 1), function() {

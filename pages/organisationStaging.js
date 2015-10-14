@@ -5,7 +5,7 @@ var pph = require('../helpers/pph'),
 
 require(pages_path + 'base');
 
-pages.organisationProduction = exports;
+pages.organisationStaging = exports;
 
 exports.cisacCodeBinding = function() {
     return $(

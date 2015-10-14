@@ -1,9 +1,9 @@
 'use strict';
 
 var pageStep = require('../helpers/basicPageStep'),
-    page = require(pages_path + 'organisationProduction');
+    page = require(pages_path + 'organisationStaging');
 
-steps.organisationProduction = exports;
+steps.organisationStaging = exports;
 
 pageStep([
     ['General', [

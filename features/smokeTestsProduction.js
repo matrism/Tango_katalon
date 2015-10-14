@@ -19,11 +19,11 @@ require(pages_path + "edit_deal_scope");
 require(steps_path + "edit_deal_scope");
 require(steps_path + "login");
 require(steps_path + "base");
-require(steps_path + 'personProduction');
+require(steps_path + 'personStaging');
 require(steps_path + "login");
 require(steps_path + "new_work");
-require(steps_path + 'organisationProduction');
-require(pages_path + 'organisationProduction');
+require(steps_path + 'organisationStaging');
+require(pages_path + 'organisationStaging');
 require(steps_path + "searchSection");
 require(steps_path + 'workCwrPreview');
 require(steps_path + 'workRights');
@@ -71,7 +71,7 @@ var beforeFeature = function () {
             steps: function () {
                 steps.searchSection.accessSavedOrganisationByName('BMI');
 
-                using(steps.organisationProduction, function() {
+                using(steps.organisationStaging, function() {
                     this.validateCisacCode('021');
                     this.goToPreviewRegistrationRunTab();
                     this.waitForPreviewRegistrationRunHeaderToBeDisplayed();
@@ -81,7 +81,7 @@ var beforeFeature = function () {
 
                 steps.searchSection.accessSavedOrganisationByName('WB MUSIC CORP.');
 
-                steps.organisationProduction.validateSubPublisherName(
+                steps.organisationStaging.validateSubPublisherName(
                     0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
                 );
             },
@@ -93,8 +93,8 @@ var beforeFeature = function () {
             ],
             steps: function () {
                 steps.searchSection.accessSavedPersonByName('katy perry');
-                steps.personProduction.validateSuisaIpiNumber('292555933');
-                steps.personProduction.validateAlternativeName(0, 'katy perry')
+                steps.personStaging.validateSuisaIpiNumber('292555933');
+                steps.personStaging.validateAlternativeName(0, 'katy perry')
             }
         },
         {

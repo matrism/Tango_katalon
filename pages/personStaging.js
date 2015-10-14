@@ -2,7 +2,7 @@
 
 var pph = require('../helpers/pph');
 
-pages.personProduction = exports;
+pages.personStaging = exports;
 
 require(pages_path + 'base');
 

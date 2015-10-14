@@ -2,9 +2,9 @@
 
 var pageStep = require('../helpers/basicPageStep');
 
-require(pages_path + 'newOrganisationProduction');
+require(pages_path + 'newOrganisationStaging');
 
-steps.newOrganisationProduction = exports;
+steps.newOrganisationStaging = exports;
 
 pageStep('Populate name');
 pageStep('Select Org type');

@@ -44,13 +44,13 @@ var configer = global.ftf.configer,
             screenshot_only_on_fail: false,
             tags: tags,
             legacyOverrides: {
-                legacyPerson: {
-                    newPerson: 'newPersonProduction',
-                    person: 'personProduction',
+                stagingPerson: {
+                    newPerson: 'newPersonStaging',
+                    person: 'personStaging',
                 },
-                legacyOrganisation: {
-                    newOrganisation: 'newOrganisationProduction',
-                    organisation: 'organisationProduction',
+                stagingOrganisation: {
+                    newOrganisation: 'newOrganisationStaging',
+                    organisation: 'organisationStaging',
                 },
             },
             dontSkipBroken: cli['dont-skip-broken'],

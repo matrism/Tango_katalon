@@ -6,9 +6,9 @@ var _ = require('lodash'),
     promise = protractor.promise,
     page;
 
-steps.newPersonProduction = exports;
+steps.newPersonStaging = exports;
 
-page = require(pages_path + 'newPersonProduction');
+page = require(pages_path + 'newPersonStaging');
 
 pageStep([
     'Go to new person page',

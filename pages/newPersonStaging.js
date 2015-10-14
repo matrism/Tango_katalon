@@ -5,10 +5,10 @@ var _ = require('lodash'),
     promise = protractor.promise,
     ExpectedConditions = protractor.ExpectedConditions;
 
-pages.newPersonProduction = exports;
+pages.newPersonStaging = exports;
 
 require(pages_path + 'base');
-require(pages_path + 'newPersonProduction');
+require(pages_path + 'newPersonStaging');
 
 exports.goToNewPersonPage = function() {
     browser.get(_tf_config.urls.app_url + '#/create/person');
