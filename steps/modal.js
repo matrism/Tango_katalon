@@ -9,21 +9,17 @@ require(pages_path + "modal");
 if (steps.modal === undefined) {
     steps.modal = {
 
-clickYesOnPopupModal:function()
-{
-    it("Confirm Popup Modal",function()
-    {
+        clickYesOnPopupModal: function () {
+            it("Confirm Popup Modal", function () {
 
 
-        pages.modal.clickOnYesButton();
+                pages.modal.clickOnYesButton();
 
 
+            })
 
-    })
 
-
-}
-
+        }
 
 
     };

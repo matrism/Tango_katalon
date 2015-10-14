@@ -389,12 +389,7 @@ return $(".accordion>div:first-child>div>a>div>div.caret-acc");
 
                       result[i].sendKeys("45");
 
-
                     }
-
-
-
-
                     })
                 },
         typeAllInputs:function(value){
