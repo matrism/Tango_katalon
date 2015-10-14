@@ -8,8 +8,6 @@ require(steps_path + 'deal');
 require(steps_path + 'create_deal_general');
 require(steps_path + 'create_deal_scope');
 require(steps_path + 'create_deal_contract_period');
-require(steps_path + 'edit_deal_general');
-require(steps_path + 'edit_deal_scope');
 require(steps_path + 'login');
 require(steps_path + 'base');
 require(steps_path + 'newPerson');
@@ -20,11 +18,9 @@ require(steps_path + 'newOrganisation');
 require(steps_path + 'organisation');
 require(steps_path + 'searchSection');
 
-exports.commonFeatureTags = [
-    'smokeTest',
-];
+exports.commonFeatureTags = ['smokeTest'];
 
-exports.beforeFeature = function () {
+exports.beforeFeature = function() {
     steps.login.itLogin();
 };
 
@@ -63,36 +59,51 @@ exports.feature = [
     {
         name: 'New basic work',
         tags: ['smokeWork'],
-        steps:  [
-            [steps.base.useBlankEntityDataSlot, ['work', 0]],
+        steps: function() {
+            steps.base.useBlankEntityDataSlot('work', 0);
 
-            [steps.new_work.goToNewWorkPage],
-            [steps.new_work.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(0)]],
-            [steps.new_work.enterAlternateWorkTitle, [0, 'TEST WORK ALTERNATE TITLE ' + randomId(0.1)]],
-            [steps.new_work.enterAlternateWorkTitle, [1, 'TEST WORK ALTERNATE TITLE ' + randomId(0.2)]],
-            [steps.new_work.selectRandomCreator, [0]],
-            [steps.new_work.enterCreatorContribution, [0, 100]],
-            [steps.new_work.optToIncludeWorkOnWebsite, [false]],
-            [steps.new_work.saveWork],
-            [steps.new_work.validateSaveWorkRedirection],
-            [steps.base.waitForAjax],
-            [steps.work.findCurrentlyOpenWorkId],
+            steps.new_work.goToNewWorkPage();
 
-            [steps.base.goToHomePage],
-            [steps.work.validateDefaultWorkSearchFilterTag, [0]],
-            [steps.work.searchForWorkUsingPreviouslyCreatedWorkId],
-            [steps.base.sleep, [200]],
-            [steps.base.waitForAjax],
-            [steps.work.expectWorkSearchMatchCountToBe, [1]],
-            [steps.work.clickWorkSearchMatch, [0]],
-            [steps.base.waitForAjax],
-            [steps.work.validateWorkId]
-       ]
+            steps.new_work.enterPrimaryWorkTitle('TEST WORK ' + randomId(0));
+
+            steps.new_work.enterAlternateWorkTitle(
+                0, 'TEST WORK ALTERNATE TITLE ' + randomId(0.1)
+            );
+
+            steps.new_work.enterAlternateWorkTitle(
+                1, 'TEST WORK ALTERNATE TITLE ' + randomId(0.2)
+            );
+
+            steps.new_work.selectRandomCreator(0);
+
+            steps.new_work.enterCreatorContribution(0, 100);
+
+            steps.new_work.optToIncludeWorkOnWebsite(false);
+
+            steps.new_work.saveWork();
+            steps.new_work.validateSaveWorkRedirection();
+
+            steps.work.findCurrentlyOpenWorkId();
+
+            steps.base.goToHomePage();
+
+            steps.work.validateDefaultWorkSearchFilterTag(0);
+            steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
+            steps.base.sleep(200);
+            steps.base.waitForAjax();
+
+            steps.work.expectWorkSearchMatchCountToBe(1);
+
+            steps.work.clickWorkSearchMatch(0);
+            steps.base.waitForAjax();
+
+            steps.work.validateWorkId();
+       }
     },
     {
         name: 'New basic organisation',
         tags: ['smokeOrganisation'],
-        steps: function () {
+        steps: function() {
             steps.mainHeader.createNewRecord('Organisation');
 
             using(steps.newOrganisation, function() {
@@ -109,7 +120,7 @@ exports.feature = [
     {
         name: 'View mode of  organisation',
         tags: ['smokeOrganisationView', 'smokeOrganisation'],
-        steps: function () {
+        steps: function() {
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.validateCisacCode('021');
             steps.organisation.goToPreviewRegistrationRunTab();
@@ -130,7 +141,7 @@ exports.feature = [
     {
         name: 'View mode of person',
         tags: ['smokePersonView', 'smokePerson'],
-        steps: function () {
+        steps: function() {
             steps.searchSection.accessSavedPersonByName('katy perry');
             steps.person.validateSuisaIpiNumber('292555933');
             steps.person.validateAlternativeName(0, 'KATY PERRY')
@@ -140,7 +151,7 @@ exports.feature = [
     {
         name: 'CR file downloads',
         tags: ['smokeCrFileDownloads', 'smokeOrganisation'],
-        steps: function () {
+        steps: function() {
             steps.base.clearDownloadsDirectory();
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.goToPreviewRegistrationRunTab();
@@ -149,5 +160,5 @@ exports.feature = [
             steps.organisation.downloadCrFile();
             steps.base.validateDownloadFileCount(2);
         }
-    },
+    }
 ];
