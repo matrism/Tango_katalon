@@ -92,6 +92,25 @@ if (steps.newPerson === undefined) {
             });
         },
 
+        addAddress: function () {
+            it('Add address', function () {
+                pages.newPerson.clickAddAddress();
+            });
+        },
+
+        addPhone: function () {
+            it('Add phone', function () {
+                pages.newPerson.clickAddPhone();
+            });
+        },
+
+        addEmail: function () {
+            it('Add email', function () {
+                pages.newPerson.clickAddEmail();
+            });
+        },
+ 
+
         enterAlternativeFirstName: function (i, value) {
             it('Enter alternative first name #' + (i + 1) + ' (' + value + ')', function () {
                 pages.newPerson.typeAlternativeFirstName(i, value).then(function () {
@@ -172,10 +191,12 @@ if (steps.newPerson === undefined) {
                 pages.newPerson.clickAffiliatedSocietySearchResultByIndex(i);
             });
         },
-        enterAddressOne: function (value) {
-            it('Type Address One ' + value, function () {
-                pages.newPerson.typeIntoAddressOneInput(value).then(function () {
-                    hash.currentPersonSlot.affiliatedSociety = value;
+
+        enterAddressOne: function (i, value) {
+            it('Enter Address One #' + (i + 1) + ' (' + value + ')', function () {
+                pages.newPerson.typeIntoAddressOneInput(i, value).then(function () {
+                    hash.currentPersonSlot.addressOne = hash.currentPersonSlot.addressOne || [];
+                    hash.currentPersonSlot.addressOne[i] = value;
                 });
             });
         },
@@ -203,20 +224,32 @@ if (steps.newPerson === undefined) {
             });
         },
 
-        enterPhone: function (value) {
-            it('Type Phone ' + value, function () {
-                pages.newPerson.typeIntoPhoneInput(value).then(function () {
-                    hash.currentPersonSlot.phone = value;
+        enterPhone: function (i, value) {
+            it('Enter Phone #' + (i + 1) + ' (' + value + ')', function () {
+                pages.newPerson.typeIntoPhoneInput(i, value).then(function () {
+                    hash.currentPersonSlot.phone = hash.currentPersonSlot.phone || [];
+                    hash.currentPersonSlot.phone[i] = value;
                 });
             });
         },
-        enterEmail: function (value) {
-            it('Type Email ' + value, function () {
-                pages.newPerson.typeIntoEmailInput(value).then(function () {
-                    hash.currentPersonSlot.email = value;
+        enterEmail: function (i, value) {
+            it('Enter Email #' + (i + 1) + ' (' + value + ')', function () {
+                pages.newPerson.typeIntoEmailInput(i, value).then(function () {
+                    hash.currentPersonSlot.email = hash.currentPersonSlot.email || [];
+                    hash.currentPersonSlot.email[i] = value;
                 });
             });
         },
+
+        clickOnPayee: function (value) {
+            it('Click on the Payee Toggle (' + value + ')', function () {
+                pages.newPerson.clickPayee(value).then(function () {
+                    hash.currentPersonSlot.payee = value;
+                });
+            });
+        },
+
+
 
 
         save: function () {

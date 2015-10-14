@@ -81,11 +81,13 @@ dateOfDeathMonth : function() {
 dateOfDeathDay : function() {
     return element(by.model('date.day'));
 },
-
-addressOneInput : function () {
-
-    return $("#address1-0");
+    
+addressOneInput : function (i) {
+    return this.addressContainer(i).element(
+        by.model('modularEditModels.model.address1')
+    );
 },
+
 cityInput : function () {
     return $("#city-0");
 },
@@ -97,12 +99,25 @@ postalCodeInput : function () {
 
     return $("#zipCode-0");
 },
-phoneInput : function () {
-
-    return element(by.model('phone.number'));
+phoneInput : function (i) {
+    return this.phoneContainer(i).element(
+        by.model('modularEditModels.model.number')
+    );
 },
-emailInput : function () {
-    return element(by.model('email.address'));
+emailInput : function (i) {
+    return this.emailContainer(i).element(
+        by.model('modularEditModels.model.address')
+    );
+},
+payeeToggle : function() {
+    var payee = element(by.model('modularEditModels.model.isPayee'));
+    pages.base.scrollIntoView(payee);
+    return payee;
+},
+payeeOption : function(value) {
+    return this.payeeToggle().element(
+        by.cssContainingText('button', value)
+    );
 },
 
 
@@ -149,11 +164,73 @@ addAlternativeNameButton : function() {
     return element(by.cssContainingText('button', 'Add Alternative Name'));
 },
 
+addAddress : function() {
+    return element(by.cssContainingText('button', 'Add Address'));
+},
+
+addPhone : function() {
+    return element(by.cssContainingText('button', 'Add Phone'));
+},
+
+addEmail : function() {
+    return element(by.cssContainingText('button', 'Add Email'));
+},
+
 
 clickAddAlternativeName : function() {
     var element = this.addAlternativeNameButton();
     pages.base.scrollIntoView(element);
     return element.click();
+},
+
+
+clickAddAddress : function() {
+    var element = this.addAddress();
+    pages.base.scrollIntoView(element);
+    return element.click();
+},
+
+clickAddPhone : function() {
+    var element = this.addPhone();
+    pages.base.scrollIntoView(element);
+    return element.click();
+},
+
+clickAddEmail : function() {
+    var element = this.addEmail();
+    pages.base.scrollIntoView(element);
+    return element.click();
+},
+
+
+addressContainers : function() {
+    return element.all(by.repeater(
+        'contactAddress in dataHolder.person.contactAddresses.getAll()'
+    ));
+},
+
+addressContainer : function(i) {
+    return this.addressContainers().get(i);
+},
+
+phoneContainers : function() {
+    return element.all(by.repeater(
+        'contactPhone in dataHolder.person.contactPhones.getAll()'
+    ));
+},
+
+phoneContainer : function(i) {
+    return this.phoneContainers().get(i);
+},
+
+emailContainers : function() {
+    return element.all(by.repeater(
+        'contactEmail in dataHolder.person.contactEmails.getAll()'
+    ));
+},
+
+emailContainer : function(i) {
+    return this.emailContainers().get(i);
 },
 
 alternativeNameContainers : function() {
@@ -253,10 +330,13 @@ clickAffiliatedSocietySearchResultByIndex : function(i) {
 pageFooter : function() {
     return $('#FORM-CONTROLS');
 },
-typeIntoAddressOneInput : function(value) {
-
-    return this.addressOneInput().sendKeys(value);
+typeIntoAddressOneInput : function(i, value) {
+    var element = this.addressOneInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
 },
+
 typeIntoCityInput : function(value) {
 
     return this.cityInput().sendKeys(value);
@@ -273,13 +353,21 @@ typeIntoPostalCodeInput : function(value) {
 
     return this.postalCodeInput().sendKeys(value);
 },
-typeIntoPhoneInput : function(value) {
-
-    return this.phoneInput().sendKeys(value);
+typeIntoPhoneInput : function(i, value) {
+    var element = this.phoneInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
 },
-typeIntoEmailInput : function(value) {
+typeIntoEmailInput : function(i, value) {
+    var element = this.emailInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+},
 
-    return this.emailInput().sendKeys(value);
+clickPayee: function (value) {
+    return this.payeeOption(value).click();
 },
 
 
