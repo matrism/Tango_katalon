@@ -49,6 +49,7 @@ var defaultUserName = 'TangoTest1',
                     person: 'personProduction',
                 },
             },
+            dontSkipBroken: cli['dont-skip-broken'],
         },
         _env_: env,
         localhost: {

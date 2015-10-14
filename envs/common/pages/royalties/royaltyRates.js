@@ -355,12 +355,11 @@ if (pages.royaltyRates === undefined) {
             browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
                 .then(function (result) {
                     for (i = 0; i < result.length; i++) {
-                        result[i].sendKeys("45");
-                    }
-                });
-        },
-
-        typeAllInputs: function (value) {
+                      result[i].sendKeys("45");
+                    }}
+                    )
+                },
+        typeAllInputs:function(value){
             var i = 0;
 
             browser.driver.executeScript(" var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +

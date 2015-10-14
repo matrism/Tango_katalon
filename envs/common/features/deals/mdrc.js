@@ -274,57 +274,6 @@ exports.feature = [
             }
         },
         {
-            name: "Edit a deal with deemed_complete MDRC into a complete MDRC",
-            tags: ['edit'],
-            steps: function () {
-                var i = 1;
-                steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
-                steps.deal.itContinueToNextPage();
-                steps.create_deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
-                steps.base.scrollIntoView("Add MDRC link", pages.create_deal_contract_period.elems.addMdrcLink);
-                steps.create_deal_contract_period.itAddDeemedCompleteMdrcContractPeriod();
-                steps.deal.itContinueToNextPage();
-                steps.deal.saveDeal();
-                steps.deal.waitForDealToBeSaved();
-                steps.deal.returnDealNumber();
-                steps.edit_deal_contract_period.waitForMdrcToBeLoaded();
-                steps.base.scrollIntoView("Mdrc", pages.edit_deal_contract_period.elems.mdrcTitle);
-                steps.edit_deal_contract_period.validateFirstDeemedCompleteMdrcTitle();
-                steps.edit_deal_contract_period.validateMdrcDateCompletedLabelValueI(i);
-                steps.edit_deal_contract_period.validateMdrcDateCompletedTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcShortfallLabelValueI(i);
-                steps.edit_deal_contract_period.validateTheMdrcShortfallTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcIMinimumLabelValue(i);
-                steps.edit_deal_contract_period.validateMdrcIMinimumTextValue(i);
-                steps.edit_deal_contract_period.validateMdrcICommercialReleaseLabelValue(i);
-                steps.edit_deal_contract_period.validateMdrcQuantityForCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcMajorTerritoryTextCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcTerritoriesListTextCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcLabelsTextCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcMinimumStatutoryMechanicalRateLabelValueI(i);
-                steps.edit_deal_contract_period.validateMdrcMinimumStatutoryTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcInNoEventLessThanTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcDeliveryScheduleLabelValueI(i);
-                steps.edit_deal_contract_period.validateMdrcDeliveryScheduleTextValueI(i);
-                steps.edit_deal_contract_period.itEditCompleteMdrcContractPeriod(i);
-                steps.edit_deal_contract_period.validateFirstCompleteMdrcTitle();
-                steps.edit_deal_contract_period.validateMdrcDateCompletedLabelValueI(i);
-                steps.edit_deal_contract_period.validateMdrcDateCompletedTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcIMinimumLabelValue(i);
-                steps.edit_deal_contract_period.validateMdrcIMinimumTextValue(i);
-                steps.edit_deal_contract_period.validateMdrcICommercialReleaseLabelValue(i);
-                steps.edit_deal_contract_period.validateMdrcQuantityForCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcMajorTerritoryTextCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcTerritoriesListTextCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcLabelsTextCommercialReleaseTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcMinimumStatutoryMechanicalRateLabelValueI(i);
-                steps.edit_deal_contract_period.validateMdrcMinimumStatutoryTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcInNoEventLessThanTextValueI(i);
-                steps.edit_deal_contract_period.validateMdrcDeliveryScheduleLabelValueI(i);
-                steps.edit_deal_contract_period.validateMdrcDeliveryScheduleTextValueI(i);
-            }
-        },
-        {
             name: "Edit a deal with multiple types of MDRC",
             tags: ['edit'],
             steps: function () {

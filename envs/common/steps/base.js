@@ -174,3 +174,9 @@ exports.refreshPage = function() {
         pages.base.refreshPage();
     });
 };
+
+exports.fail = function(description) {
+    it(description, function() {
+        throw new Error("This is a forced failure step.");
+    });
+};
