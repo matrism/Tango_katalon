@@ -365,7 +365,7 @@ var beforeFeature = function () {
 
         {
             name: "As a user I want to assign multiple rates to Scope on creation",
-            tags: ['ratesToScope2'],
+            tags: ['ratesToScope2', 'broken'],
             steps: function () {
 
                 steps.create_deal_general.itFillDealMandatoryFieldsGeneralTab();
