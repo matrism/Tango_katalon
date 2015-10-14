@@ -49,6 +49,7 @@ var configer = global.ftf.configer,
                     person: 'personProduction',
                 },
             },
+            dontSkipBroken: cli['dont-skip-broken'],
         },
         _env_: env,
         localhost: {
