@@ -25,38 +25,85 @@ exports.findId = function() {
     });
 };
 
+exports.firstNameInput = function() {
+    return element(by.model('modularEditModels.model.firstName'));
+};
+exports.lastNameInput = function() {
+    return element(by.model('modularEditModels.model.lastName'));
+};
+exports.alternativeLastNameInput = function(i) {
+    return this.alternativeNameContainer(i).element(
+        by.model('modularEditModels.model.lastName')
+    );
+};
+exports.alternativeCreditsNameInput = function(i) {
+    return this.alternativeNameContainer(i).element(
+        by.model('modularEditModels.model.creditsName')
+    );
+};
+exports.alternativeSuisaIpiInput = function(i) {
+    return this.alternativeNameContainer(i).element(
+        by.model('modularEditModels.model.suisaIpiNumber')
+    );
+};
+exports.addressOneInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('modularEditModels.model.address1')
+    );
+};
+exports.phoneInput = function (i) {
+    return this.phoneContainer(i).element(
+        by.model('modularEditModels.model.number')
+    );
+};
+exports.emailInput = function (i) {
+    return this.emailContainer(i).element(
+        by.model('modularEditModels.model.address')
+    );
+};
+exports.payeeToggle = function() {
+    var payee = element(by.model('modularEditModels.model.isPayee'));
+    pages.base.scrollIntoView(payee);
+    return payee;
+};
+exports.payeeOption = function(value) {
+    return this.payeeToggle().element(
+        by.cssContainingText('button', value)
+    );
+};
+
 exports.internalIpiNumberBinding = function() {
-    return $(".e2e-primary-name-internal-ipi>div>strong");
+    return $(".e2e-primary-name-internal-ipi .controls");
 };
 exports.suisaIPINumber = function() {
-    return $(".e2e-primary-name-suisa-ipi>div>strong");
+    return $(".e2e-primary-name-suisa-ipi .controls");
 };
 exports.nameElement = function() {
-    return $('.e2e-primary-name-full>div>strong');
+    return $('.e2e-primary-name-full .controls');
 };
 exports.firstNameElement = function() {
-    return $('.e2e-primary-name-first>div>strong');
+    return $('.e2e-primary-name-first .controls');
 };
 exports.alternativeNameElement = function() {
-    return $('.e2e-alternative-name-full>div>strong');
+    return $('.e2e-alternative-name-full .controls');
 };
 exports.alternativeFirstNameElement = function() {
-    return $('.e2e-alternative-name-first>div>strong');
+    return $('.e2e-alternative-name-first .controls');
 };
 exports.affiliatedSocietyElement = function() {
-    return $('.e2e-society-affiliation-society>div>strong');
+    return $('.e2e-society-affiliation-society .controls');
 };
 exports.addressOneElement = function() {
-    return $$('.e2e-contact-address-1>div>strong');
+    return $$('.e2e-contact-address-1 .controls');
 };
 exports.phoneElement = function() {
-    return $$('.e2e-contact-phone-number>div>strong');
+    return $$('.e2e-contact-phone-number .controls');
 };
 exports.emailElement = function() {
-    return $$('.e2e-contact-email-address>div>strong');
+    return $$('.e2e-contact-email-address .controls');
 };
 exports.payeeElement = function() {
-    return $('.e2e-payee-is>div>strong');
+    return $('.e2e-payee-is .controls');
 };
 
 exports.getEditButton = function(section) {
@@ -108,7 +155,6 @@ exports.editPaymentInfo = function() {
 exports.savePaymentInfo = function() {
     return exports.getSaveButton($('.e2e-payee'));
 };
-
 
 exports.internalIpiNumber = function() {
     var element = exports.internalIpiNumberBinding();
@@ -167,12 +213,12 @@ exports.getPayee = function() {
     return element.getText();
 };
 
-exports.clickOnEditName = function() {
+exports.clickOnEditPrimaryName = function() {
     var element = exports.editNameElement();
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnSaveName = function() {
+exports.clickOnSavePrimaryName = function() {
     var element = exports.saveNameElement();
     pages.base.scrollIntoView(element);
     return element.click();
@@ -227,15 +273,141 @@ exports.clickOnSaveEmail = function(i) {
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnEditPaymentInfo = function() {
+exports.clickOnEditPaymentInformation = function() {
     var element = exports.editPaymentInfo();
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnSavePaymentInfo = function() {
+exports.clickOnSavePaymentInformation = function() {
     var element = exports.savePaymentInfo();
     pages.base.scrollIntoView(element);
     return element.click();
+};
+
+exports.addressContainers = function() {
+    return element.all(by.repeater(
+        'contactAddress in dataHolder.person.contactAddresses.getAll()'
+    ));
+};
+exports.addressContainer = function(i) {
+    return this.addressContainers().get(i);
+};
+exports.phoneContainers = function() {
+    return element.all(by.repeater(
+        'contactPhone in dataHolder.person.contactPhones.getAll()'
+    ));
+};
+exports.phoneContainer = function(i) {
+    return this.phoneContainers().get(i);
+};
+exports.emailContainers = function() {
+    return element.all(by.repeater(
+        'contactEmail in dataHolder.person.contactEmails.getAll()'
+    ));
+};
+exports.emailContainer = function(i) {
+    return this.emailContainers().get(i);
+};
+exports.alternativeNameContainers = function() {
+    return element.all(by.repeater(
+        'alternativeName in dataHolder.person.alternativeNames.getAll()'
+    ));
+};
+exports.alternativeNameContainer = function(i) {
+    return this.alternativeNameContainers().get(i);
+};
+exports.alternativeFirstNameInput = function(i) {
+    return this.alternativeNameContainer(i).element(
+        by.model('modularEditModels.model.firstName')
+    );
+};
+exports.typeFirstName = function(value) {
+    var element = this.firstNameInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeLastName = function(value) {
+    var element = this.lastNameInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeAlternativeFirstName = function(i, value) {
+    var element = this.alternativeFirstNameInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeAlternativeLastName = function(i, value) {
+    var element = this.alternativeLastNameInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeAlternativeCreditsName = function(i,value) {
+    var element = this.alternativeCreditsNameInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeAlternativeSuisaIpiNumber = function(i,value) {
+    var element = this.alternativeSuisaIpiInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.suisaIpiNumberInput = function() {
+    return element(by.model('modularEditModels.model.suisaIpiNumber'));
+};
+exports.typeSuisaIpiNumber = function(value) {
+    var element = this.suisaIpiNumberInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.affiliatedSocietySearchInput = function() {
+    return element(by.model('modularEditModels.model.society')).element(
+        by.model('$term')
+    );
+};
+exports.typeAffiliatedSocietySearchTerms = function(value) {
+    var element = this.affiliatedSocietySearchInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.affiliatedSocietySearchResults = function() {
+    return $$('.tg-typeahead__suggestions-group-item');
+};
+exports.affiliatedSocietySearchResult = function(i) {
+    return this.affiliatedSocietySearchResults().get(i);
+};
+exports.clickAffiliatedSocietySearchResultByIndex = function(i) {
+    browser.sleep(200);
+    pages.base.waitForAjax();
+    return this.affiliatedSocietySearchResult(i).click();
+};
+exports.typeIntoAddressOneInput = function(i, value) {
+    var element = this.addressOneInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoPhoneInput = function(i, value) {
+    var element = this.phoneInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoEmailInput = function(i, value) {
+    var element = this.emailInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.clickPayee = function (value) {
+    return this.payeeOption(value).click();
 };
 
 exports.validateIpiNumber = function(value) {
@@ -261,3 +433,4 @@ exports.personSearchMatch = function(i) {
 exports.clickPersonSearchMatch = function(i) {
     return exports.personSearchMatch(i).click();
 };
+

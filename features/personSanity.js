@@ -1,144 +1,149 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../helpers/random'),
-    randomString = random.string.makeMemoizedGenerator();
+var random = require('../helpers/random'),
+    randomString = random.string.makeMemoizedGenerator(),
+    fnutils = require('../helpers/fnutils'),
+    using = fnutils.using;
 
 require(steps_path + 'login');
 require(steps_path + 'person');
 require(steps_path + 'newPerson');
 
-var beforeFeature = [
-        [steps.login.itLogin]
-    ],
-    feature = [
-        {
-            name: 'Create a person',
-            tags: [],
-            steps: function() { 
-                steps.person.useBlankPersonSlot('person', 0);
-                steps.newPerson.goToNewPersonPage();
-                steps.newPerson.enterFirstName('TEST ' + randomString(0));
-                steps.newPerson.enterLastName('PERSON ' + randomString(0));
-                steps.newPerson.addAlternativeName();
-                steps.newPerson.enterAlternativeFirstName(0, 'TEST ' + randomString(0.1));
-                steps.newPerson.enterAlternativeLastName(0, 'PERSON ' + randomString(0.1));
-                steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
-                steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
-                steps.newPerson.addAddress();
-                steps.newPerson.enterAddressOne(0, 'Abbey Road');
-                steps.newPerson.addAddress();
-                steps.newPerson.enterAddressOne(1, 'Alternative Abbey Road');
-                steps.newPerson.addPhone();
-                steps.newPerson.enterPhone(0, '12345678');
-                steps.newPerson.addPhone();
-                steps.newPerson.enterPhone(1, '98765432');
-                steps.newPerson.addEmail();
-                steps.newPerson.enterEmail(0, randomString(0.2).toLowerCase() + '@email.com');
-                steps.newPerson.addEmail();
-                steps.newPerson.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
-                steps.newPerson.clickOnPayee('Yes');
-                steps.newPerson.save();
-                steps.newPerson.validateSaveRedirection();
-                steps.person.findId();
-                steps.person.findInternalIpiNumber();
-            }
-        },
-        {
-            name: 'Search for previously created person',
-            tags: [],
-            steps: function() {
-                steps.base.useEntityDataSlot('person', 0);
-                steps.searchSection.selectEntityType('Persons');
-                steps.person.searchForPersonUsingPreviouslyCreatedIpiNumber(); 
-                steps.base.waitForAjax();
-                steps.person.clickPersonSearchMatch(0);
-                steps.base.waitForAjax();
-                steps.person.validateIpiNumber();
-            },
-        },
-        {
-            name: 'Validate created person',
-            tags: [],
-            steps: function() {
-                steps.base.useEntityDataSlot('person', 0);
-                steps.person.goToPersonPage();
-                steps.person.validateName();
-                steps.person.validateAlternativeName();
-                steps.person.validateAffiliatedSociety();
-                steps.person.validateAddressOne(0);
-                steps.person.validateAddressOne(1);
-                steps.person.validatePhone(0);
-                steps.person.validatePhone(1);
-                steps.person.validateEmail(0);
-                steps.person.validateEmail(1);
-                steps.person.validatePayee()
-            },
-        },
-        {
-            name: 'Edit created person',
-            tags: [],
-            steps: function() {
-                steps.base.useEntityDataSlot('person', 0);
-                steps.person.goToPersonPage();
+exports.commonFeatureTags = ['personSanity'],
 
-                steps.person.editName();
-                steps.newPerson.enterFirstName('TEST ' + randomString(1));
-                steps.newPerson.enterLastName('PERSON ' + randomString(1));
-                steps.person.saveName();
-                steps.base.waitForAjax();
-                steps.person.validateFirstName();
+exports.beforeFeature = [
+    [steps.login.itLogin]
+];
 
-                steps.person.editAlternativeName();
-                steps.newPerson.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
-                steps.newPerson.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
-                steps.person.saveAlternativeName();
-                steps.base.waitForAjax();
-                steps.person.validateAlternativeFirstName();
+exports.feature = [
+    {
+        name: 'Create a person',
+        tags: ['DBG'],
+        steps: function() { 
+            steps.person.useBlankPersonSlot('person', 0);
 
-                steps.person.editSocietyAffiliation();
-                steps.newPerson.enterAffiliatedSocietySearchTerms('ZAIKS');
-                steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
-                steps.person.saveSocietyAffiliation();
-                steps.base.waitForAjax();
-                steps.person.validateAffiliatedSociety();
+            using(steps.newPerson, function() {
+                this.goToNewPersonPage();
+                this.enterFirstName('TEST ' + randomString(0));
+                this.enterLastName('PERSON ' + randomString(0));
+                this.addAlternativeName();
+                this.enterAlternativeFirstName(0, 'TEST ' + randomString(0.1));
+                this.enterAlternativeLastName(0, 'PERSON ' + randomString(0.1));
+                this.enterAffiliatedSocietySearchTerms('ASCAP');
+                this.selectAffiliatedSocietySearchResultByIndex(0);
+                this.addAddress();
+                this.enterAddressOne(0, 'Abbey Road');
+                this.addAddress();
+                this.enterAddressOne(1, 'Alternative Abbey Road');
+                this.addPhone();
+                this.enterPhone(0, '12345678');
+                this.addPhone();
+                this.enterPhone(1, '98765432');
+                this.addEmail();
+                this.enterEmail(0, randomString(0.2).toLowerCase() + '@email.com');
+                this.addEmail();
+                this.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
+                this.clickOnPayee('Yes');
+                this.save();
+                this.validateSaveRedirection();
+            });
 
-                steps.person.editAddress(0);
-                steps.newPerson.enterAddressOne(0, 'Abbey Road Updated');
-                steps.person.saveAddress(0);
-                steps.base.waitForAjax();
-                steps.person.validateAddressOne(0);
-
-                steps.person.editAddress(1);
-                steps.newPerson.enterAddressOne(1, 'Alternative Abbey Road Updated');
-                steps.person.saveAddress(1);
-                steps.base.waitForAjax();
-                steps.person.validateAddressOne(1);
-
-                steps.person.editPhone(0);
-                steps.newPerson.enterPhone(0, '23456789');
-                steps.person.savePhone(0);
-                steps.base.waitForAjax();
-                steps.person.validatePhone(0);
-
-                steps.person.editEmail(0);
-                steps.newPerson.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
-                steps.person.saveEmail(0);
-                steps.base.waitForAjax();
-                steps.person.validateEmail(0);
-
-                steps.person.editPaymentInfo();
-                steps.newPerson.clickOnPayee('No');
-                steps.person.savePaymentInfo();
-                steps.base.waitForAjax();
-                steps.person.validatePayee();
-            },
+            steps.person.findId();
+            steps.person.findInternalIpiNumber();
         }
-    ];
+    },
+    {
+        name: 'Search for previously created person',
+        tags: [],
+        steps: function() {
+            steps.base.useEntityDataSlot('person', 0);
+            steps.searchSection.selectEntityType('Persons');
+            steps.person.searchForPersonUsingPreviouslyCreatedIpiNumber(); 
+            steps.base.waitForAjax();
+            steps.person.clickPersonSearchMatch(0);
+            steps.base.waitForAjax();
+            steps.person.validateIpiNumber();
+        },
+    },
+    {
+        name: 'Validate created person',
+        tags: [],
+        steps: function() {
+            steps.base.useEntityDataSlot('person', 0);
 
-module.exports = {
-    commonFeatureTags: ['personSanity'],
-    feature: feature,
-    beforeFeature: beforeFeature
-};
+            using(steps.person, function() {
+                this.goToPersonPage();
+                this.validateName();
+                this.validateAlternativeName();
+                this.validateAffiliatedSociety();
+                this.validateAddressOne(0);
+                this.validateAddressOne(1);
+                this.validatePhone(0);
+                this.validatePhone(1);
+                this.validateEmail(0);
+                this.validateEmail(1);
+                this.validatePayee()
+            });
+        },
+    },
+    {
+        name: 'Edit created person',
+        tags: ['DBG'],
+        steps: function() {
+            steps.base.useEntityDataSlot('person', 0);
+            steps.person.goToPersonPage();
+
+            steps.person.clickOnEditPrimaryName();
+            steps.person.enterFirstName('TEST ' + randomString(1));
+            steps.person.enterLastName('PERSON ' + randomString(1));
+            steps.person.clickOnSavePrimaryName();
+            steps.base.waitForAjax();
+            steps.person.validateFirstName();
+
+            steps.person.clickOnEditAlternativeName();
+            steps.person.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
+            steps.person.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
+            steps.person.clickOnSaveAlternativeName();
+            steps.base.waitForAjax();
+            steps.person.validateAlternativeFirstName();
+
+            steps.person.clickOnEditSocietyAffiliation();
+            steps.person.enterAffiliatedSocietySearchTerms('ZAIKS');
+            steps.person.selectAffiliatedSocietySearchResultByIndex(0);
+            steps.person.clickOnSaveSocietyAffiliation();
+            steps.base.waitForAjax();
+            steps.person.validateAffiliatedSociety();
+
+            steps.person.clickOnEditAddress(0);
+            steps.person.enterAddressOne(0, 'Abbey Road Updated');
+            steps.person.clickOnSaveAddress(0);
+            steps.base.waitForAjax();
+            steps.person.validateAddressOne(0);
+
+            steps.person.clickOnEditAddress(1);
+            steps.person.enterAddressOne(1, 'Alternative Abbey Road Updated');
+            steps.person.clickOnSaveAddress(1);
+            steps.base.waitForAjax();
+            steps.person.validateAddressOne(1);
+
+            steps.person.clickOnEditPhone(0);
+            steps.person.enterPhone(0, '23456789');
+            steps.person.clickOnSavePhone(0);
+            steps.base.waitForAjax();
+            steps.person.validatePhone(0);
+
+            steps.person.clickOnEditEmail(0);
+            steps.person.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
+            steps.person.clickOnSaveEmail(0);
+            steps.base.waitForAjax();
+            steps.person.validateEmail(0);
+
+            steps.person.clickOnEditPaymentInformation();
+            steps.person.clickOnPayee('No');
+            steps.person.clickOnSavePaymentInformation();
+            steps.base.waitForAjax();
+            steps.person.validatePayee();
+        },
+    }
+];
+
