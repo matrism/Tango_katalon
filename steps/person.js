@@ -181,14 +181,14 @@ exports.saveEmail = function(i) {
         pages.person.clickOnSaveEmail(i);
     });
 };
-exports.editPaymentInfo = function(i) {
-    it('Click on edit payment information #' + i, function () {
-        pages.person.clickOnEditPaymentInfo(i);
+exports.editPaymentInfo = function() {
+    it('Click on edit payment information', function () {
+        pages.person.clickOnEditPaymentInfo();
     });
 };
-exports.savePaymentInfo = function(i) {
-    it('Click on save payment information #' + i, function () {
-        pages.person.clickOnSavePaymentInfo(i);
+exports.savePaymentInfo = function() {
+    it('Click on save payment information', function () {
+        pages.person.clickOnSavePaymentInfo();
     });
 };
 

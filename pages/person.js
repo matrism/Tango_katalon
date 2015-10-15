@@ -228,13 +228,13 @@ exports.clickOnSaveEmail = function(i) {
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnEditPaymentInfo = function(i) {
-    var element = exports.editPaymentInfo(i);
+exports.clickOnEditPaymentInfo = function() {
+    var element = exports.editPaymentInfo();
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnSavePaymentInfo = function(i) {
-    var element = exports.savePaymentInfo(i);
+exports.clickOnSavePaymentInfo = function() {
+    var element = exports.savePaymentInfo();
     pages.base.scrollIntoView(element);
     return element.click();
 };
