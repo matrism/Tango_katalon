@@ -368,20 +368,16 @@ exports.dialogError = function() {
     });
 };
 
-exports.clearDownloadsDirectory = function() {
-    var path = (
-        config.config.capabilities.chromeOptions.prefs.download.default_directory
-    );
+exports.downloadDirectoryEntries = function() {
+    return glob.sync(systemConfig.downloadsDirectoryPath + '/*');
+};
 
-    glob.sync(path + '/*').forEach(function(path) {
+exports.clearDownloadsDirectory = function() {
+    exports.downloadDirectoryEntries().forEach(function(path) {
         fs.rmrfSync(path);
     });
 };
 
 exports.validateDownloadFileCount = function(value) {
-    var path = (
-        config.config.capabilities.chromeOptions.prefs.download.default_directory
-    );
-
-    expect(glob.sync(path + '/*').length).toBe(value);
+    expect(exports.downloadDirectoryEntries().length).toBe(value);
 };

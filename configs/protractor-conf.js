@@ -46,6 +46,8 @@ if (!systemConfig.noReport) {
     });
 }
 
+systemConfig.downloadsDirectoryPath = tmp.dirSync().name;
+
 config = {
     capabilities: {
 
@@ -63,7 +65,7 @@ config = {
                 'download': {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
-                    'default_directory': tmp.dirSync().name,
+                    'default_directory': systemConfig.downloadsDirectoryPath
                 },
             }
         }
