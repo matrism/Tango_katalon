@@ -192,7 +192,6 @@ exports.savePaymentInfo = function() {
     });
 };
 
-
 exports.enterPersonSearchTerms = function (value) {
     it('Search for person (' + value + ')', function () {
         pages.person.enterPersonSearchTerms(value);
@@ -217,5 +216,4 @@ exports.validateIpiNumber = function () {
         );
     });
 };
-
 

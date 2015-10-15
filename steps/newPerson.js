@@ -109,7 +109,6 @@ if (steps.newPerson === undefined) {
                 pages.newPerson.clickAddEmail();
             });
         },
- 
 
         enterAlternativeFirstName: function (i, value) {
             it('Enter alternative first name #' + (i + 1) + ' (' + value + ')', function () {
@@ -248,8 +247,6 @@ if (steps.newPerson === undefined) {
                 });
             });
         },
-
-
 
 
         save: function () {

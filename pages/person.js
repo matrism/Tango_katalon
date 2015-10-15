@@ -167,7 +167,6 @@ exports.getPayee = function() {
     return element.getText();
 };
 
-
 exports.clickOnEditName = function() {
     var element = exports.editNameElement();
     pages.base.scrollIntoView(element);
@@ -238,8 +237,6 @@ exports.clickOnSavePaymentInfo = function() {
     pages.base.scrollIntoView(element);
     return element.click();
 };
-
-
 
 exports.validateIpiNumber = function(value) {
     expect(exports.internalIpiNumber()).toBe(value);
