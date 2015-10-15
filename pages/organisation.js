@@ -576,16 +576,22 @@ return $(".text-highlight");
             }
             ,
             clickPreviewRegistrationRunTab: function () {
-
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
                 this.previewRegistrationRunTab().click();
             }
             ,
 
         downloadCrFile: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.downloadFileButton()));
-            this.downloadFileButton().click().then(function() {
-                browser.sleep(5000);
+            var button = this.downloadFileButton(),
+                fileCountThen = pages.base.downloadDirectoryEntries().length;
+
+            browser.wait(ExpectedConditions.visibilityOf(button));
+
+            button.click();
+
+            browser.wait(function() {
+                var fileCountNow = pages.base.downloadDirectoryEntries().length;
+                return fileCountNow > fileCountThen;
             });
         },
         previewRegistrationRunValidationErrorsPanel: function() {
