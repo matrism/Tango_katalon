@@ -51,6 +51,19 @@ pph.areEqual = function() {
 pph.areNotEqual = function() {
     return pph.not(pph.areEqual.apply(null, arguments));
 };
+
+pph.toLowerCase = function(value) {
+    return promise.when(value).then(function(value) {
+        return value.toLowerCase();
+    });
+};
+
+pph.toUpperCase = function(value) {
+    return promise.when(value).then(function(value) {
+        return value.toUpperCase();
+    });
+};
+
 pph.indexOf = function(array, value) {
     return promise
         .all([promise.when(array), promise.when(value)])

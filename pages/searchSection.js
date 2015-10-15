@@ -124,6 +124,7 @@ if (pages.searchSection === undefined) {
 
             browser.wait(ExpectedConditions.visibilityOf(this.searchTypeAheadDropdown()));
             this.searchTypeAheadDropdown().click();
+            pages.base.waitForAjax();
 
 
         } ,

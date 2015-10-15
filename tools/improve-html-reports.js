@@ -45,9 +45,7 @@
       }
     });
 
-    // uncollapse all except the first one
     $toggle.click();
-    $toggle.first().click();
   });
 })();
 </script>

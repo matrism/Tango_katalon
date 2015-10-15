@@ -561,15 +561,14 @@ if (steps.organisation === undefined) {
             });
         },
 
-        validatePublisherSubRelationships: function (firstPublisherDate) {
-
-            it("Validate Publisher Sub Relationships", function () {
-
-
-                expect(pages.organisation.getFirstSubPublisherData()).toBe(firstPublisherDate);
-
-            });
-        }
+        validateSubPublisherName: function(i, value) {
+            it(
+                'Validate sub-publisher name ' +
+                '(' + (i + 1) + ', ' + value + ')', function() {
+                    expect(pages.organisation.subPublisherName(i)).toBe(value);
+                }
+            );
+        },
     }
     ;
 }

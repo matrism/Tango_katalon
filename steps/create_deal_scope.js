@@ -153,9 +153,9 @@ if (steps.create_deal_scope === undefined) {
             });
         },
 
-        clickOnAddPublisherShareSet: function () {
+        clickOnAddPublisherShareSet: function(options) {
             it("Open publisher share set form", function () {
-                pages.create_deal_scope.clickOnAddPublisherShareSetLink();
+                pages.create_deal_scope.clickOnAddPublisherShareSetLink(options);
                 pages.create_deal_scope.waitForAjax();
             });
         },
@@ -328,6 +328,12 @@ if (steps.create_deal_scope === undefined) {
         cancelThePublisherShareSet: function () {
             it("Cancel the publisher share set", function () {
                 pages.create_deal_scope.cancelPublisherShareSet();
+            });
+        },
+
+        selectPubliserSearchResultByIndex: function(i) {
+            it('Select publisher search result by index (' + i + ')', function() {
+                pages.create_deal_scope.selectPublisherSearchResultByIndex(i);
             });
         },
 
@@ -509,8 +515,8 @@ if (steps.create_deal_scope === undefined) {
                 steps.base.scrollIntoView("Add publisher shares set link", pages.create_deal_scope.elems.addPublisherShareSetLink);
                 steps.create_deal_scope.clickOnAddPublisherShareSet();
                 steps.create_deal_scope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-                steps.create_deal_scope.fillIntoFirstPublisherNameAMField("wb music corp");
-                steps.create_deal_scope.selectSpecificPublisherNameDropDown();
+                steps.create_deal_scope.fillIntoFirstPublisherNameAMField('53026414');
+                steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
                 steps.create_deal_scope.fillIntoFirstPublisherNameAMCollectField();
                 steps.base.scrollIntoView("Yes society award credits", pages.create_deal_scope.elems.yesSocietyAwardCreditPss);
                 steps.create_deal_scope.clickOnYesSocietyAwardCreditPublisherShareSet();

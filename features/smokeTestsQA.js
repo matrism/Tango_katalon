@@ -57,7 +57,6 @@ workData = {
     productionTitle: "TEST PRODUCTION TITLE 1429744413589291",
     includeOnWebsite: false
 };
-var firstPublisherDate = 'JAWARA PUSTAKA MUZIK';
 
 var beforeFeature = function () {
         steps.login.itLogin();
@@ -152,9 +151,10 @@ var beforeFeature = function () {
                 steps.organisation.waitForRegistrationActivityTabToBeDisplayed();
 
                 steps.searchSection.accessSavedOrganisationByName("WB MUSIC CORP.");
-                steps.organisation.validatePublisherSubRelationships(firstPublisherDate);
 
-
+                steps.organisation.validateSubPublisherName(
+                    0, 'JAWARA PUSTAKA MUZIK'
+                );
             }
         },
         {

@@ -1,5 +1,7 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
+    fnutils = require('../helpers/fnutils'),
+    using = fnutils.using,
     random = require('../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
@@ -17,14 +19,11 @@ require(pages_path + "edit_deal_scope");
 require(steps_path + "edit_deal_scope");
 require(steps_path + "login");
 require(steps_path + "base");
-require(steps_path + "newPerson");
-require(pages_path + "newPerson");
-require(steps_path + "person");
-require(pages_path + "person");
+require(steps_path + 'personProduction');
 require(steps_path + "login");
 require(steps_path + "new_work");
-require(steps_path + "organisation");
-require(pages_path + "organisation");
+require(steps_path + 'organisationProduction');
+require(pages_path + 'organisationProduction');
 require(steps_path + "searchSection");
 require(steps_path + 'workCwrPreview');
 require(steps_path + 'workRights');
@@ -58,9 +57,6 @@ workData = {
     productionTitle: "TEST PRODUCTION TITLE 1429744413589291",
     includeOnWebsite: false
 };
-var firstPublisherDate = 'Sub-Publisher:\n'+
-    'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.';
-
 
 var beforeFeature = function () {
         steps.login.itLogin();
@@ -69,31 +65,36 @@ var beforeFeature = function () {
     feature = [
         {
             name: 'View mode of organisation',
-            tags: ['viewOrganisationProductionTest'],
+            tags: [
+                'viewOrganisationProductionTest'
+            ],
             steps: function () {
-                steps.searchSection.accessSavedOrganisationByName("BMI");
-                steps.organisation.validateCISACCode("021");
-                steps.organisation.goToPreviewRegistrationRunTab();
-                steps.organisation.waitForPreviewRegistrationRunTabToBeDisplayed();
-                steps.organisation.goToRegistrationActivityTab();
-                steps.organisation.waitForRegistrationActivityTabToBeDisplayed();
+                steps.searchSection.accessSavedOrganisationByName('BMI');
 
-                steps.searchSection.accessSavedOrganisationByName("WB MUSIC CORP.");
-                steps.organisation.validatePublisherSubRelationships(firstPublisherDate);
+                using(steps.organisationProduction, function() {
+                    this.validateCisacCode('021');
+                    this.goToPreviewRegistrationRunTab();
+                    this.waitForPreviewRegistrationRunHeaderToBeDisplayed();
+                    this.goToRegistrationActivityTab();
+                    this.waitForRegistrationActivityRecordsTableToBeDisplayed();
+                });
 
-            }
+                steps.searchSection.accessSavedOrganisationByName('WB MUSIC CORP.');
+
+                steps.organisationProduction.validateSubPublisherName(
+                    0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
+                );
+            },
         },
         {
-            name: "View mode of person",
+            name: 'View mode of person',
             tags: [
                 'viewPersonProductionSmokeTest',
             ],
             steps: function () {
-                steps.searchSection.accessSavedPersonByName("katy perry");
-                steps.person.validateIPI("292555933");
-                steps.person.validateAlternativeName("Katy Perry")
-
-
+                steps.searchSection.accessSavedPersonByName('katy perry');
+                steps.personProduction.validateSuisaIpiNumber('292555933');
+                steps.personProduction.validateAlternativeName(0, 'katy perry')
             }
         },
         {
@@ -101,7 +102,6 @@ var beforeFeature = function () {
             tags: ['addDealScopeProductionSmokeTest'],
             steps: function () {
                 steps.searchSection.accessSavedDealByNumber("3");
-                steps.create_deal_contract_period.waitForDealToLoad();
                 steps.create_deal_contract_period.selectContractPeriodNumberI(1);
                 steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
                 steps.create_deal_scope.itAddPublisherShareWithSocietyAwardCredit();

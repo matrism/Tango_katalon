@@ -13,6 +13,8 @@ var pages_path = _tf_config._system_.path_to_pages,
 require(steps_path + 'login');
 require(steps_path + 'person');
 require(steps_path + 'newPerson');
+require(steps_path + 'personProduction');
+require(steps_path + 'newPersonProduction');
 require(steps_path + 'work');
 require(steps_path + 'new_work');
 require(steps_path + 'dealRtp');
@@ -33,7 +35,7 @@ var beforeFeature = [
     ],
     feature = [
         {
-            name: 'Create 3 persons to use as creators',
+            name: 'Create 4 persons to use as creators',
             tags: [
                 'works-sanity-create-persons',
                 'works-sanity-create-work',
@@ -75,19 +77,23 @@ var beforeFeature = [
                 'works-sanity-validate-cwr',
             ],
             steps: function() {
-                _.times(3, function(i) {
+                _.times(4, function(i) {
                     steps.person.useBlankPersonSlot(i);
 
-                    steps.newPerson.goToNewPersonPage();
+                    using(steps.newPerson, function() {
+                        this.goToNewPersonPage();
 
-                    steps.newPerson.enterLastName(
-                        'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
-                    );
+                        this.enterLastName(
+                            'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
+                        );
+                    });
 
-                    steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
-                    steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
+                    using(steps.newPerson, function() {
+                        this.enterAffiliatedSocietySearchTerms('ASCAP');
+                        this.selectAffiliatedSocietySearchResultByIndex(0);
 
-                    steps.newPerson.save();
+                        this.save();
+                    });
 
                     steps.person.findInternalIpiNumber();
                 });
@@ -456,7 +462,7 @@ var beforeFeature = [
                         'TEST LIBRARY WORK ' + randomId('libraryWork')
                     );
 
-                    this.selectCreatorFromPersonSlot(0, 2);
+                    this.selectCreatorFromPersonSlot(0, 3);
                     this.enterCreatorContribution(0, 100);
 
                     this.selectIntendedPurpose('Library Work');
@@ -585,7 +591,7 @@ var beforeFeature = [
                     this.createEnteredLabel();
 
                     this.enterCatalogueNumber(
-                        0, randomId('commercialAlbumCatalogueNumber')
+                        0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
                     );
 
                     this.enterLicenseCode(
@@ -664,7 +670,7 @@ var beforeFeature = [
                     );
 
                     this.validateCatalogueNumber(
-                        0, randomId('commercialAlbumCatalogueNumber')
+                        0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
                     );
 
                     this.validateLicenseCode(
@@ -680,6 +686,8 @@ var beforeFeature = [
             tags: [
                 'worksSanityCreateLibraryAlbum',
                 'worksSanityValidateLibraryAlbum',
+                'worksSanitySearchForAlbums',
+                'worksSanitySearchForAlbumsByLibraryPlusTitle',
             ],
             steps: function() {
                 steps.base.useEntityDataSlot('album', 'libraryAlbum');
@@ -761,7 +769,7 @@ var beforeFeature = [
                 steps.new_work.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(0));
                 steps.new_work.clickCompositeWorkCheckbox();
                 steps.new_work.selectCompositeWorkType('Composite of Samples');
-                steps.new_work.selectCreatorFromPersonSlot(0, 0);
+                steps.new_work.selectCreatorFromPersonSlot(0, 3);
                 steps.new_work.enterCreatorContribution(0, 50);
                 steps.new_work.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(0));
                 steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
@@ -916,7 +924,7 @@ var beforeFeature = [
                     this.selectFilterTag('Catalog');
 
                     this.enterTerms(
-                        randomId('commercialAlbumCatalogueNumber')
+                        randomId('commercialAlbumCatalogueNumber').slice(0, 15)
                     );
 
                     this.selectResultByIndex(0);
@@ -1341,7 +1349,7 @@ var beforeFeature = [
                             role: 'E',
                             name: 'WCM Publisher 1',
                             societies: [],
-                            shares: ['25.000', '–', '50.000', '–', '50.000'],
+                            shares: ['25.000', '–', '–', '–', '–'],
                         },
                         {
                             row: 2,
@@ -1355,14 +1363,14 @@ var beforeFeature = [
                             role: 'SE',
                             name: 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA',
                             societies: ['ABRAMUS'],
-                            shares: ['–', '25.000', '–', '50.000', '–'],
+                            shares: ['–', '25.000', '50.000', '50.000', '50.000'],
                         },
                         {
                             row: 5,
                             role: 'E',
                             name: 'WCM Publisher 1',
                             societies: [],
-                            shares: ['25.000', '–', '50.000', '–', '50.000'],
+                            shares: ['25.000', '–', '–', '–', '–'],
                         },
                         {
                             row: 6,
@@ -1376,7 +1384,7 @@ var beforeFeature = [
                             role: 'SE',
                             name: 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA',
                             societies: ['ABRAMUS'],
-                            shares: ['–', '25.000', '–', '50.000', '–'],
+                            shares: ['–', '25.000', '50.000', '50.000', '50.000'],
                         },
                     ];
 

@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path'),
+    _ = require('lodash'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
@@ -168,6 +169,21 @@ config = {
         global.pages_path = _tf_config._system_.path_to_pages;
         global.steps_path = _tf_config._system_.path_to_steps;
 
+        // TODO: Use new overrides structure when it's ready.
+        _.each(systemConfig.legacyOverrides, function(overrides, name) {
+            if(systemConfig.tags.indexOf(name) === -1) {
+                return;
+            }
+
+            _.each(overrides, function(legacyVersion, target) {
+                console.log('Override', target, 'with', legacyVersion + '.');
+
+                require('../steps/' + target);
+                require('../steps/' + legacyVersion);
+
+                steps[target] = steps[legacyVersion];
+            });
+        });
     },
     onCleanUp: function(statusCode) {
         /*if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
@@ -179,7 +195,7 @@ config = {
         }*/
         
         // Append the script improvements to the html report
-        reportImprovementFilePath = path.join(__dirname, '../tools/improve-report.js');
+        reportImprovementFilePath = path.join(__dirname, '../tools/improve-html-reports.js');
         fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
 
         console.log('Finished with code:', statusCode);

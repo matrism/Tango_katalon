@@ -98,7 +98,7 @@ var beforeFeature = [
                 steps.person.validateAlternativeFirstName();
 
                 steps.person.editSocietyAffiliation();
-                steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
+                steps.newPerson.enterAffiliatedSocietySearchTerms('ZAIKS');
                 steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
                 steps.person.saveSocietyAffiliation();
                 steps.base.waitForAjax();

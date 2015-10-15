@@ -42,9 +42,15 @@ return $('[tooltip="Warner/Chappell Music"]');
         cisacCode: function () {
           return $('.e2e-general-cisac-code>div');
         },
-        firstSubPublisher: function () {
 
-          return $(".span6.e2e-sub-publisher.ng-scope:first-child>div>.EDITOR.modular-edit>div>div>div>div>.e2e-sub-publisher-def>div>strong>a");
+        subPublisherRelationshipContainers: function() {
+            return $$('.e2e-sub-publisher');
+        },
+
+        subPublisherNameBinding: function(i) {
+            return this.subPublisherRelationshipContainers().get(i).$(
+                '.e2e-sub-publisher-def .ng-binding'
+            );
         },
 
 
@@ -773,15 +779,14 @@ return $(".text-highlight");
 
                 return this.cisacCode().getText();
             },
-            getFirstSubPublisherData: function () {
 
-                browser.wait(ExpectedConditions.visibilityOf(  this.firstSubPublisher()));
-                pages.base.waitForAjax();
-                pages.base.scrollIntoView(this.firstSubPublisher());
-                return this.firstSubPublisher().getText();
+            subPublisherName: function(i) {
+                var nameElement = this.subPublisherNameBinding(0);
+
+                pages.base.scrollIntoView(nameElement);
+
+                return nameElement.getText();
             }
-
-
         }
     )
     ;

@@ -2,7 +2,8 @@
 
 var leftPad = require('left-pad'),
     pph = require('../helpers/pph'),
-    random = require('../helpers/random');
+    random = require('../helpers/random'),
+    ExpectedConditions = protractor.ExpectedConditions;
 
 pages.newWorkRecordings = exports;
 
@@ -55,8 +56,9 @@ exports.enterArtistName = function(i, value) {
 };
 
 exports.artistSearchResultsContainer = function() {
-    pages.base.waitForAjax();
-    return $('.tg-typeahead__suggestions');
+    var containerElement = $('.tg-typeahead__suggestions');
+    browser.wait(ExpectedConditions.visibilityOf(containerElement));
+    return containerElement;
 };
 
 exports.createEnteredArtistOption = function() {

@@ -1,6 +1,20 @@
 'use strict';
 var configer = global.ftf.configer,
     cli = configer.getParamsFromCli(),
+    tags = (function() {
+        var tags = (cli.tags || '').toString().split(',');
+        var negatedTags = (cli['@tags'] || '').toString().split(',');
+
+        [tags, negatedTags].forEach(function(tags) {
+            if(tags.length === 1 && tags[0] === '') {
+                tags.length = 0;
+            }
+        });
+
+        tags.negated = negatedTags;
+
+        return tags;
+    })(),
     env = {
         ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
     },
@@ -24,9 +38,17 @@ var configer = global.ftf.configer,
             path_to_features: __dirname + '/../features/',
             path_to_steps: __dirname + '/../steps/',
             path_to_pages: __dirname + '/../pages/',
+            env_name: env.ENV_TYPE,
             wait_timeout: cli.timeout || 60000,
             show_skipped_tests: false,
-            screenshot_only_on_fail: false
+            screenshot_only_on_fail: false,
+            tags: tags,
+            legacyOverrides: {
+                legacyPerson: {
+                    newPerson: 'newPersonProduction',
+                    person: 'personProduction',
+                },
+            },
         },
         _env_: env,
         localhost: {
