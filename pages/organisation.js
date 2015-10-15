@@ -588,8 +588,21 @@ return $(".text-highlight");
                 browser.sleep(5000);
             });
         },
+        previewRegistrationRunValidationErrorsPanel: function() {
+            return $('[data-ng-switch-when="VALIDATIONS"]');
+        },
         clickValidationErrorsButton: function () {
+            var panel = exports.previewRegistrationRunValidationErrorsPanel();
+
             this.validationErrorsButton().click();
+
+            browser.wait(ExpectedConditions.visibilityOf(panel));
+
+            browser.wait(function() {
+                return browser.executeScript(function(el) {
+                    return (parseFloat(el.style.left || 0) === 0);
+                }, panel.getWebElement());
+            });
         },
             clickRegistrationActivityTab: function () {
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
