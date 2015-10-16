@@ -264,9 +264,19 @@ exports.validateFirstName = function() {
         expect(pages.person.getFirstName()).toBe(hash.currentPersonSlot.firstName);
     });
 };
+exports.validateLastName = function() {
+    it('Validate Last Name', function () {
+        expect(pages.person.getLastName()).toBe(hash.currentPersonSlot.lastName);
+    });
+};
 exports.validateAlternativeFirstName = function() {
-    it('Validate First Name', function () {
+    it('Validate Alternative First Name', function () {
         expect(pages.person.getAlternativeFirstName()).toBe(hash.currentPersonSlot.alternativeFirstName);
+    });
+};
+exports.validateAlternativeLastName = function() {
+    it('Validate Alternative Last Name', function () {
+        expect(pages.person.getAlternativeLastName()).toBe(hash.currentPersonSlot.alternativeLastName);
     });
 };
 exports.validateAffiliatedSociety = function() {

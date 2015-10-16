@@ -35,13 +35,21 @@ exports.feature = [
                 this.enterAddressOne(0, 'Abbey Road');
                 this.addAddress();
                 this.enterAddressOne(1, 'Alternative Abbey Road');
-                this.addPhone();
+                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                    this.addPhone();
+                }
                 this.enterPhone(0, '12345678');
-                this.addPhone();
+                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                    this.addPhone();
+                }
                 this.enterPhone(1, '98765432');
-                this.addEmail();
+                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                    this.addEmail();
+                }
                 this.enterEmail(0, randomString(0.2).toLowerCase() + '@email.com');
-                this.addEmail();
+                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                    this.addEmail();
+                }
                 this.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
                 this.clickOnPayee('Yes');
                 this.save();
@@ -73,8 +81,10 @@ exports.feature = [
 
             using(steps.person, function() {
                 this.goToPersonPage();
-                this.validateName();
-                this.validateAlternativeName(0);
+                this.validateFirstName();
+                this.validateLastName();
+                this.validateAlternativeFirstName(0);
+                this.validateAlternativeLastName(0);
                 this.validateAffiliatedSociety();
                 this.validateAddressOne(0);
                 this.validateAddressOne(1);
@@ -100,12 +110,14 @@ exports.feature = [
             steps.base.waitForAjax();
             steps.person.validateFirstName();
 
-            steps.person.clickOnEditAlternativeName();
-            steps.person.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
-            steps.person.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
-            steps.person.clickOnSaveAlternativeName();
-            steps.base.waitForAjax();
-            steps.person.validateAlternativeFirstName();
+            if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                steps.person.clickOnEditAlternativeName();
+                steps.person.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
+                steps.person.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
+                steps.person.clickOnSaveAlternativeName();
+                steps.base.waitForAjax();
+                steps.person.validateAlternativeFirstName();
+            }
 
             steps.person.clickOnEditSocietyAffiliation();
             steps.person.enterAffiliatedSocietySearchTerms('ZAIKS');

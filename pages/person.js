@@ -31,6 +31,11 @@ exports.firstNameInput = function() {
 exports.lastNameInput = function() {
     return element(by.model('modularEditModels.model.lastName'));
 };
+exports.alternativeFirstNameInput = function(i) {
+    return this.alternativeNameContainer(i).element(
+        by.model('modularEditModels.model.firstName')
+    );
+};
 exports.alternativeLastNameInput = function(i) {
     return this.alternativeNameContainer(i).element(
         by.model('modularEditModels.model.lastName')
@@ -84,11 +89,17 @@ exports.nameElement = function() {
 exports.firstNameElement = function() {
     return $('.e2e-primary-name-first .controls');
 };
+exports.lastNameElement = function() {
+    return $('.e2e-primary-name-last .controls');
+};
 exports.alternativeNameElement = function(i) {
     return $$('.e2e-alternative-name-full .controls').get(i);
 };
 exports.alternativeFirstNameElement = function() {
     return $('.e2e-alternative-name-first .controls');
+};
+exports.alternativeLastNameElement = function() {
+    return $('.e2e-alternative-name-last .controls');
 };
 exports.affiliatedSocietyElement = function() {
     return $('.e2e-society-affiliation-society .controls');
@@ -177,6 +188,11 @@ exports.getFirstName = function() {
     pages.base.scrollIntoView(element);
     return element.getText();
 };
+exports.getLastName = function() {
+    var element = exports.lastNameElement();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
 exports.getAlternativeName = function(i) {
     var element = exports.alternativeNameElement(i);
     pages.base.scrollIntoView(element);
@@ -184,6 +200,11 @@ exports.getAlternativeName = function(i) {
 };
 exports.getAlternativeFirstName = function() {
     var element = exports.alternativeFirstNameElement();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+exports.getAlternativeLastName = function() {
+    var element = exports.alternativeLastNameElement();
     pages.base.scrollIntoView(element);
     return element.getText();
 };
@@ -316,11 +337,7 @@ exports.alternativeNameContainers = function() {
 exports.alternativeNameContainer = function(i) {
     return this.alternativeNameContainers().get(i);
 };
-exports.alternativeFirstNameInput = function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.firstName')
-    );
-};
+
 exports.typeFirstName = function(value) {
     var element = this.firstNameInput();
     pages.base.scrollIntoView(element);

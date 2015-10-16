@@ -8,6 +8,7 @@ var _ = require("lodash"),
 require(pages_path + "newPerson");
 require(steps_path + "newPerson");
 require(pages_path + "person");
+require(steps_path + "person");
 require(steps_path + "base");
 
 hash.royaltyRates = {};
