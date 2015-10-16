@@ -194,3 +194,13 @@ pph.jsClick = function(element) {
         }, element
     );
 };
+
+pph.saferSendKeys = function(el, value) {
+    var last = promise.when(null);
+
+    for(var i = 0; i < value.length; ++i) {
+        last = el.sendKeys(value[i]);
+    }
+
+    return last;
+};
