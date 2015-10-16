@@ -18,7 +18,7 @@ exports.beforeFeature = [
 exports.feature = [
     {
         name: 'Create a person',
-        tags: ['DBG'],
+        tags: [],
         steps: function() { 
             steps.person.useBlankPersonSlot('person', 0);
 
@@ -88,7 +88,7 @@ exports.feature = [
     },
     {
         name: 'Edit created person',
-        tags: ['DBG'],
+        tags: [],
         steps: function() {
             steps.base.useEntityDataSlot('person', 0);
             steps.person.goToPersonPage();
