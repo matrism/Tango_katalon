@@ -254,7 +254,7 @@ exports.setIncomeFileType = function(type) {
 
     pages.base.scrollIntoView(select);
 
-    pph.saferSendKeys(select.$('.search-field input'), type);
+    pph.saferSendKeys(select.$('.search-field input'), '  ' + type);
 
     browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
     results.first().click();
