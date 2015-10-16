@@ -576,53 +576,39 @@ return $(".text-highlight");
             }
             ,
             clickPreviewRegistrationRunTab: function () {
-
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
                 this.previewRegistrationRunTab().click();
             }
             ,
 
-        clickDownloadFileButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.downloadFileButton()));
-            this.downloadFileButton().click();
+        downloadCrFile: function () {
+            var button = this.downloadFileButton(),
+                fileCountThen = pages.base.downloadDirectoryEntries().length;
+
+            browser.wait(ExpectedConditions.visibilityOf(button));
+
+            button.click();
+
+            browser.wait(function() {
+                var fileCountNow = pages.base.downloadDirectoryEntries().length;
+                return fileCountNow > fileCountThen;
+            });
         },
-        waitForFileToDownload: function () {
-          browser.sleep(5000);
+        previewRegistrationRunValidationErrorsPanel: function() {
+            return $('[data-ng-switch-when="VALIDATIONS"]');
         },
         clickValidationErrorsButton: function () {
+            var panel = exports.previewRegistrationRunValidationErrorsPanel();
+
             this.validationErrorsButton().click();
-        },
-            rmDir: function (dirPath) {
-                var that = this;
-                try { var files = fs.readdirSync(dirPath);
-                console.log(files);}
-                catch(e) {
-                    console.log(e);
-                    return; }
-                if (files.length > 0)
-                    for (var i = 0; i < files.length; i++) {
-                        var filePath = dirPath + '/' + files[i];
-                        if (fs.statSync(filePath).isFile())
-                            fs.unlinkSync(filePath);
-                        else
-                            that.rmDir(filePath);
-                    }
 
-            },
-        deleteFilesFromDownloadFolder: function (downloadFilepath) {
+            browser.wait(ExpectedConditions.visibilityOf(panel));
 
-
-            this.rmDir(downloadFilepath);
-        },
-        fileDownloadedSuccesfully: function (dirPath) {
-            browser.sleep(5000);
-            var that = this;
-            try { var files = fs.readdirSync(dirPath);
-                console.log(files);}
-            catch(e) {
-                console.log(e);
-                return; }
-            return files.length == 2;
+            browser.wait(function() {
+                return browser.executeScript(function(el) {
+                    return (parseFloat(el.style.left || 0) === 0);
+                }, panel.getWebElement());
+            });
         },
             clickRegistrationActivityTab: function () {
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
@@ -781,7 +767,7 @@ return $(".text-highlight");
             },
 
             subPublisherName: function(i) {
-                var nameElement = this.subPublisherNameBinding(0);
+                var nameElement = this.subPublisherNameBinding(i);
 
                 pages.base.scrollIntoView(nameElement);
 
@@ -1193,4 +1179,14 @@ exports.incomeProvider = (function() {
     };
 
     return incomeProvider;
+})();
+
+exports.subPublishers = (function() {
+    var subPublishers = {};
+
+    subPublishers.expectNameToBeEither = function(i, values) {
+        expect(values).toContain(exports.subPublisherName(i));
+    };
+
+    return subPublishers;
 })();

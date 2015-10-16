@@ -172,3 +172,21 @@ exports.refreshPage = function() {
         pages.base.refreshPage();
     });
 };
+
+exports.fail = function(description) {
+    it(description, function() {
+        throw new Error("This is a forced failure step.");
+    });
+};
+
+exports.clearDownloadsDirectory = function() {
+    it('Clear downloads directory', function() {
+        pages.base.clearDownloadsDirectory();
+    });
+};
+
+exports.validateDownloadFileCount = function(value) {
+    it('Validate download file count (' + value + ')', function() {
+        pages.base.validateDownloadFileCount(value);
+    });
+};

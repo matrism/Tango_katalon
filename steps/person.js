@@ -245,7 +245,8 @@ exports.validateSuisaIpiNumber = function(ipi)
 };
 
 exports.validateAlternativeName = function(i, value) {
-    it('Validate alternative name (' + i + ')', function() {
+    var parms = _.toArray(arguments).join(', ');
+    it('Validate alternative name (' + parms + ')', function() {
         value = value || hash.currentPersonSlot.alternativeName;
         expect(pph.toLowerCase(pages.person.getAlternativeName(i))).toBe(
             value.toLowerCase()

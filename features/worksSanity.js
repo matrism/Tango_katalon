@@ -13,8 +13,8 @@ var pages_path = _tf_config._system_.path_to_pages,
 require(steps_path + 'login');
 require(steps_path + 'person');
 require(steps_path + 'newPerson');
-require(steps_path + 'personProduction');
-require(steps_path + 'newPersonProduction');
+require(steps_path + 'personStaging');
+require(steps_path + 'newPersonStaging');
 require(steps_path + 'work');
 require(steps_path + 'new_work');
 require(steps_path + 'dealRtp');

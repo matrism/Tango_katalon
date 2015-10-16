@@ -183,27 +183,12 @@ if (steps.organisation === undefined) {
                 pages.organisation.clickValidationErrorsButton();
             })
         },
-        clearDownloadFolder: function (downloadFilepath) {
-            it("Clear Download Folder", function () {
-                pages.organisation.deleteFilesFromDownloadFolder(downloadFilepath);
-
-
-            })
-        },
-        downloadFile:function()
+        downloadCrFile:function()
         {
-            it("Download File", function () {
-                pages.organisation.clickDownloadFileButton();
-                pages.organisation.waitForFileToDownload();
+            it('Download CR file', function() {
+                pages.organisation.downloadCrFile();
+            });
 
-            })
-
-        },
-        validateFilesDownloaded: function (downloadFilepath) {
-            it("Files Downloaded Successfully", function () {
-
-                expect(pages.organisation.fileDownloadedSuccesfully(downloadFilepath)).toBeTruthy();
-            })
         },
         goToRegistrationActivityTab: function () {
             it("Go to Registration ActivityTab", function () {
@@ -216,7 +201,7 @@ if (steps.organisation === undefined) {
                 pages.organisation.clickGeneralTab();
             })
         },
-        waitForRegistrationActivityTabToBeDisplayed: function () {
+        waitForRegistrationActivityRecordsTableToBeDisplayed: function () {
             it("Wait For Reg Tab Header To be Displayed", function () {
                 pages.organisation.waitForActivityRecordsTableHeader();
             })
@@ -226,7 +211,7 @@ if (steps.organisation === undefined) {
                 pages.organisation.waitForEditorGeneral();
             })
         },
-        waitForPreviewRegistrationRunTabToBeDisplayed: function () {
+        waitForPreviewRegistrationRunHeaderToBeDisplayed: function () {
             it("Wait For Registration Run Tab To be Displayed", function () {
                 pages.organisation.waitForRegRunHeader();
             })
@@ -553,21 +538,12 @@ if (steps.organisation === undefined) {
             });
 
         },
-        validateCISACCode: function (value) {
+        validateCisacCode: function (value) {
             it("Validate Cisac Code is " + value, function () {
 
                 expect(pages.organisation.getCisacNumber()).toBe(value);
 
             });
-        },
-
-        validateSubPublisherName: function(i, value) {
-            it(
-                'Validate sub-publisher name ' +
-                '(' + (i + 1) + ', ' + value + ')', function() {
-                    expect(pages.organisation.subPublisherName(i)).toBe(value);
-                }
-            );
         },
     }
     ;
@@ -614,5 +590,9 @@ pageStep([
 
         'Save section',
         'Expect section to be in view mode',
+    ]],
+
+    ['Sub-Publishers', [
+        'Expect name to be either',
     ]],
 ]);
