@@ -84,8 +84,8 @@ exports.nameElement = function() {
 exports.firstNameElement = function() {
     return $('.e2e-primary-name-first .controls');
 };
-exports.alternativeNameElement = function() {
-    return $('.e2e-alternative-name-full .controls');
+exports.alternativeNameElement = function(i) {
+    return $$('.e2e-alternative-name-full .controls').get(i);
 };
 exports.alternativeFirstNameElement = function() {
     return $('.e2e-alternative-name-first .controls');
@@ -177,8 +177,8 @@ exports.getFirstName = function() {
     pages.base.scrollIntoView(element);
     return element.getText();
 };
-exports.getAlternativeName = function() {
-    var element = exports.alternativeNameElement();
+exports.getAlternativeName = function(i) {
+    var element = exports.alternativeNameElement(i);
     pages.base.scrollIntoView(element);
     return element.getText();
 };

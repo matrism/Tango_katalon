@@ -74,7 +74,7 @@ exports.feature = [
             using(steps.person, function() {
                 this.goToPersonPage();
                 this.validateName();
-                this.validateAlternativeName();
+                this.validateAlternativeName(0);
                 this.validateAffiliatedSociety();
                 this.validateAddressOne(0);
                 this.validateAddressOne(1);
