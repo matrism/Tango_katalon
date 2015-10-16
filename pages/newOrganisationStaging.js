@@ -251,10 +251,10 @@ exports.incomeFileTypeSelect = function (){
 exports.setIncomeFileType = function(type) {
     var select = exports.incomeFileTypeSelect(),
         results = select.$$('.chosen-results li.active-result');
+
     pages.base.scrollIntoView(select);
 
-    // TODO: Remove whitespace prefix.
-    select.$('.search-field input').sendKeys('  ' + type);
+    pph.saferSendKeys(select.$('.search-field input'), type);
 
     browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
     results.first().click();
