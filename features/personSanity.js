@@ -15,6 +15,8 @@ exports.beforeFeature = [
     [steps.login.itLogin]
 ];
 
+var stagingPerson = (systemConfig.tags.indexOf('stagingPerson') !== -1);
+
 exports.feature = [
     {
         name: 'Create a person',
@@ -35,19 +37,19 @@ exports.feature = [
                 this.enterAddressOne(0, 'Abbey Road');
                 this.addAddress();
                 this.enterAddressOne(1, 'Alternative Abbey Road');
-                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                if(!stagingPerson) {
                     this.addPhone();
                 }
                 this.enterPhone(0, '12345678');
-                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                if(!stagingPerson) {
                     this.addPhone();
                 }
                 this.enterPhone(1, '98765432');
-                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                if(!stagingPerson) {
                     this.addEmail();
                 }
                 this.enterEmail(0, randomString(0.2).toLowerCase() + '@email.com');
-                if(systemConfig.tags.indexOf('stagingPerson') === -1) {
+                if(!stagingPerson) {
                     this.addEmail();
                 }
                 this.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
@@ -101,60 +103,63 @@ exports.feature = [
         tags: [],
         steps: function() {
             steps.base.useEntityDataSlot('person', 0);
-            steps.person.goToPersonPage();
 
-            steps.person.clickOnEditPrimaryName();
-            steps.person.enterFirstName('TEST ' + randomString(1));
-            steps.person.enterLastName('PERSON ' + randomString(1));
-            steps.person.clickOnSavePrimaryName();
-            steps.base.waitForAjax();
-            steps.person.validateFirstName();
+            using(steps.person, function() {
+                this.goToPersonPage();
 
-            if(systemConfig.tags.indexOf('stagingPerson') === -1) {
-                steps.person.clickOnEditAlternativeName();
-                steps.person.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
-                steps.person.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
-                steps.person.clickOnSaveAlternativeName();
+                this.clickOnEditPrimaryName();
+                this.enterFirstName('TEST ' + randomString(1));
+                this.enterLastName('PERSON ' + randomString(1));
+                this.clickOnSavePrimaryName();
                 steps.base.waitForAjax();
-                steps.person.validateAlternativeFirstName();
-            }
+                this.validateFirstName();
 
-            steps.person.clickOnEditSocietyAffiliation();
-            steps.person.enterAffiliatedSocietySearchTerms('ZAIKS');
-            steps.person.selectAffiliatedSocietySearchResultByIndex(0);
-            steps.person.clickOnSaveSocietyAffiliation();
-            steps.base.waitForAjax();
-            steps.person.validateAffiliatedSociety();
+                if(!stagingPerson) {
+                    this.clickOnEditAlternativeName();
+                    this.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
+                    this.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
+                    this.clickOnSaveAlternativeName();
+                    steps.base.waitForAjax();
+                    this.validateAlternativeFirstName();
+                }
 
-            steps.person.clickOnEditAddress(0);
-            steps.person.enterAddressOne(0, 'Abbey Road Updated');
-            steps.person.clickOnSaveAddress(0);
-            steps.base.waitForAjax();
-            steps.person.validateAddressOne(0);
+                this.clickOnEditSocietyAffiliation();
+                this.enterAffiliatedSocietySearchTerms('ZAIKS');
+                this.selectAffiliatedSocietySearchResultByIndex(0);
+                this.clickOnSaveSocietyAffiliation();
+                steps.base.waitForAjax();
+                this.validateAffiliatedSociety();
 
-            steps.person.clickOnEditAddress(1);
-            steps.person.enterAddressOne(1, 'Alternative Abbey Road Updated');
-            steps.person.clickOnSaveAddress(1);
-            steps.base.waitForAjax();
-            steps.person.validateAddressOne(1);
+                this.clickOnEditAddress(0);
+                this.enterAddressOne(0, 'Abbey Road Updated');
+                this.clickOnSaveAddress(0);
+                steps.base.waitForAjax();
+                this.validateAddressOne(0);
 
-            steps.person.clickOnEditPhone(0);
-            steps.person.enterPhone(0, '23456789');
-            steps.person.clickOnSavePhone(0);
-            steps.base.waitForAjax();
-            steps.person.validatePhone(0);
+                this.clickOnEditAddress(1);
+                this.enterAddressOne(1, 'Alternative Abbey Road Updated');
+                this.clickOnSaveAddress(1);
+                steps.base.waitForAjax();
+                this.validateAddressOne(1);
 
-            steps.person.clickOnEditEmail(0);
-            steps.person.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
-            steps.person.clickOnSaveEmail(0);
-            steps.base.waitForAjax();
-            steps.person.validateEmail(0);
+                this.clickOnEditPhone(0);
+                this.enterPhone(0, '23456789');
+                this.clickOnSavePhone(0);
+                steps.base.waitForAjax();
+                this.validatePhone(0);
 
-            steps.person.clickOnEditPaymentInformation();
-            steps.person.clickOnPayee('No');
-            steps.person.clickOnSavePaymentInformation();
-            steps.base.waitForAjax();
-            steps.person.validatePayee();
+                this.clickOnEditEmail(0);
+                this.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
+                this.clickOnSaveEmail(0);
+                steps.base.waitForAjax();
+                this.validateEmail(0);
+
+                this.clickOnEditPaymentInformation();
+                this.clickOnPayee('No');
+                this.clickOnSavePaymentInformation();
+                steps.base.waitForAjax();
+                this.validatePayee();
+            });
         },
     }
 ];

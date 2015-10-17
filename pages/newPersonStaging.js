@@ -179,7 +179,7 @@ exports.typeAlternativeSuisaIpiNumber = function(i,value) {
     return element.sendKeys(value);
 };
 exports.suisaIpiNumberInput = function() {
-    return element(by.model('modularEditModels.model.suisaIpiNumber'));
+    return element(by.model('person.master_data.primary_name.suisa_ipi_number'));
 };
 exports.typeSuisaIpiNumber = function(value) {
     var element = this.suisaIpiNumberInput();
