@@ -1458,17 +1458,24 @@ var beforeFeature = [
             steps: function() {
                 steps.base.useEntityDataSlot('work', 'mainWork');
 
-                steps.work.goToWorkPage();
+                using(steps.work, function() {
+                    this.goToWorkPage();
+                    this.goToRegistrationActivityTab();
+                });
 
-                steps.work.goToRegistrationActivityTab();
+                using(steps.workRegistrationActivity.activityGroup, function() {
+                    this.find('first');
 
-                steps.workRegistrationActivity.validateActivitiesGroupRegistrationName(
-                    0, 'ABRAMUS'
-                );
+                    this.validateRecipientName('ABRAMUS');
 
-                steps.workRegistrationActivity.toggleActivitiesGroupContainer(0);
+                    this.toggleBlind();
 
-                steps.workRegistrationActivity.expectActivityToBeScheduled(0, 0);
+                    using(this.event, function() {
+                        this.find('latest');
+
+                        this.validateStatus('Scheduled');
+                    });
+                });
             },
         },
         {

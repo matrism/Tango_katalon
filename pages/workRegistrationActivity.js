@@ -1,54 +1,138 @@
 'use strict';
 
-var pph = require('../helpers/pph');
+var pph = require('../helpers/pph'),
+    methodSpecifierCall = require('../helpers/methodSpecifierCall');
 
 pages.workRegistrationActivity = exports;
 
-exports.activitiesGroupContainers = function() {
-    return element.all(by.repeater(
-        'activitiesGroup in dataHolder.groupedActivities'
-    ));
-};
+exports.activityGroup = (function() {
+    var activityGroup = {};
 
-exports.activitiesGroupRegistrationNameBinding = function(i) {
-    return exports.activitiesGroupContainers().get(i).element(by.binding(
-        ' activitiesGroup.registration.name '
-    ));
-};
+    activityGroup.targets = {};
 
-exports.activitiesGroupRegistrationName = function(i) {
-    var element = exports.activitiesGroupRegistrationNameBinding(i);
-    pages.base.scrollIntoView(element);
-    return pph.trim(element.getText());
-};
+    activityGroup.container = function(methodSpecifier) {
+        return methodSpecifierCall(
+            activityGroup.container, methodSpecifier || 'all'
+        );
+    };
 
-exports.validateActivitiesGroupRegistrationName = function(i, value) {
-    expect(exports.activitiesGroupRegistrationName(i)).toBe(value);
-};
+    activityGroup.container.all = function() {
+        return element.all(by.repeater(
+            'activitiesGroup in dataHolder.groupedActivities'
+        ));
+    };
 
-exports.toggleActivitiesGroupContainer = function(i) {
-    var element = exports.activitiesGroupContainers().get(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
+    activityGroup.container.first = function() {
+        return activityGroup.container().first();
+    };
 
-exports.activityRows = function(groupIndex) {
-    return exports.activitiesGroupContainers().get(groupIndex).all(by.repeater(
-        'activity in activitiesGroup.activities'
-    ));
-};
+    activityGroup.find = function(methodSpecifier, targetGroupName) {
+        var container = activityGroup.container(methodSpecifier),
+            resultPromise = pages.base.scrollIntoView(container);
 
-exports.scheduledActivityStatusLabel = function(groupIndex, i) {
-    return exports.activityRows(groupIndex).get(i).element(by.cssContainingText(
-        '.label', 'Scheduled'
-    ));
-};
+        activityGroup.targets.latest = {
+            methodSpecifier: methodSpecifier,
+            container: container
+        };
 
-exports.expectActivityToBeScheduled = function(groupIndex, i) {
-    var elementRow = exports.activityRows(groupIndex).get(i),
-        element = exports.scheduledActivityStatusLabel(groupIndex, i);
+        if(targetGroupName) {
+            activityGroup.targets[targetGroupName] = activityGroup.targets.latest;
+        }
 
-    pages.base.scrollIntoView(elementRow);
+        return resultPromise;
+    };
 
-    expect(element.isDisplayed()).toBeTruthy();
-};
+    activityGroup.recipientNameElement = function(targetGroupName) {
+        var target = activityGroup.targets[targetGroupName || 'latest'];
+
+        return target.container.element(by.binding(
+            ' activitiesGroup.registration.name '
+        ));
+    };
+
+    activityGroup.recipientName = function(targetGroupName) {
+        var nameElement = activityGroup.recipientNameElement(targetGroupName);
+
+        pages.base.scrollIntoView(nameElement);
+
+        return pph.trim(nameElement.getText());
+    };
+
+    activityGroup.validateRecipientName = function(name, targetGroupName) {
+        expect(activityGroup.recipientName(targetGroupName)).toBe(name);
+    };
+
+    activityGroup.goToRecipientPage = function(targetGroupName) {
+        var nameElement = activityGroup.recipientNameElement(targetGroupName);
+
+        pages.base.scrollIntoView(nameElement);
+
+        return nameElement.click();
+    };
+
+    activityGroup.toggleBlind = function(targetGroupName) {
+        var target = activityGroup.targets[targetGroupName || 'latest'];
+
+        pages.base.scrollIntoView(target.container);
+
+        return target.container.click();
+    };
+
+    return activityGroup;
+})();
+
+exports.activityGroup.event = (function() {
+    var event = {};
+
+    event.targets = {};
+
+    event.container = function(methodSpecifier) {
+        return methodSpecifierCall(event.container, methodSpecifier || 'all');
+    };
+
+    event.container.all = function() {
+        var groupContainer = exports.activityGroup.targets.latest.container;
+
+        return groupContainer.all(by.repeater(
+            'activity in activitiesGroup.activities'
+        )).filter(function(container) {
+            return container.isDisplayed();
+        });
+    };
+
+    event.container.latest = function() {
+        return event.container().last();
+    };
+
+    event.find = function(methodSpecifier, targetEventName) {
+        var container = event.container(methodSpecifier),
+            resultPromise = pages.base.scrollIntoView(container);
+
+        event.targets.latest = {
+            methodSpecifier: methodSpecifier,
+            container: container
+        };
+
+        if(targetEventName) {
+            event.targets[targetEventName] = event.targets.latest;
+        }
+
+        return resultPromise;
+    };
+
+    event.statusElement = function(status, targetEventName) {
+        var targetEvent = event.targets[targetEventName || 'latest'];
+
+        return targetEvent.container.element(by.cssContainingText('.label', status));
+    };
+
+    event.validateStatus = function(status, targetEventName) {
+        var statusElement = event.statusElement(status, targetEventName);
+
+        pages.base.scrollIntoView(statusElement);
+
+        expect(statusElement.isDisplayed()).toBeTruthy();
+    };
+
+    return event;
+})();
