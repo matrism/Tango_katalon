@@ -204,3 +204,9 @@ pph.saferSendKeys = function(el, value) {
 
     return last;
 };
+
+pph.waitForAsync = function () {
+    var noop = function () {};
+
+    return browser.executeScript(noop);
+};

@@ -37,8 +37,19 @@ exports.selectFirstRoyaltyPeriod = function () {
 
     dropdown.$('button.ng-binding').click();
 
-    pages.base.waitForAjax();
+    browser.wait(function(){
+        dropdown.$$('.dropdown-menu > li').count() > 2;
+    });
+
     return dropdown.$$('.dropdown-menu > li > a').first().click();
+};
+
+exports.selectWcmCommonFormat = function () {
+    return element(by.cssContainingText('.nav-tabs li a', 'WCM Common Format')).click();
+};
+
+exports.checkMultipleIncomeProvidersBox = function () {
+    return $('.control-group[data-ng-show="ediFile._isWcmCommonFormatTab"] input[type="checkbox"]').click();
 };
 
 exports.incomeProviderTypeahead = function () {
@@ -173,6 +184,21 @@ exports.waitForUploadToComplete = function () {
     browser.wait(ExpectedConditions.invisibilityOf(modal));
 };
 
+exports.fillUploadEdiFileForm = function (data) {
+    steps.uploadEdiFile.selectProcessingTerritory('Chile');
+
+    steps.uploadEdiFile.selectIncomeProvider('FABER MUSIC LTD');
+    steps.uploadEdiFile.selectFileFormat('FABER SALES');
+    steps.uploadEdiFile.selectFile('../data/fabersales_tiny_TAT.txt');
+    steps.uploadEdiFile.setStatementDistributionPeriodStart('2014', '09');
+    steps.uploadEdiFile.setStatementDistributionPeriodEnd('2014', '09');
+    steps.uploadEdiFile.setExpectedFileAmount(fileAmount);
+    steps.uploadEdiFile.setExpectedFileAmountCurrency('GBP');
+    steps.uploadEdiFile.setExchangeRate(1);
+};
+
+// upload history
+
 exports.expectToBeRedirectedToFileUploadHistory = function () {
     var uploadHistoryTitle = element(by.cssContainingText('#RECORD-HEADER h1', 'HISTORY OF FILE UPLOAD'));
     pages.base.waitForAjax();
@@ -212,8 +238,12 @@ function normalizeAmount (amount) {
     return returnAmount;
 }
 
+exports.fileBlindsByUploadedFilename = function () {
+    return exports.fileBlindsByFileName(path.basename(testData.tempFileName));
+};
+
 exports.uploadedFileBlind = function () {
-    return exports.fileBlindsByFileName(path.basename(testData.tempFileName)).first();
+    return exports.fileBlindsByUploadedFilename().first();
 };
 
 exports.openUploadedFileBlind = function () {
@@ -249,7 +279,7 @@ exports.waitForFileToBeProcessed = function () {
             pages.base.waitForAjax();
             return checkFileStatus('Processed');
         });
-    }, 600000)
+    }, 600000);
 };
 
 exports.fileReadInAmountElement = function () {
@@ -257,7 +287,7 @@ exports.fileReadInAmountElement = function () {
 };
 
 exports.expectFileReadInAmountToBe = function (value) {
-    expect(exports.fileReadInAmountElement().getText()).toBe(value);
+    expect(exports.fileReadInAmountElement().getText().then(normalizeAmount)).toBe(value);
 };
 
 exports.fileGrossAmountElement = function () {
@@ -269,11 +299,11 @@ exports.fileNetAmountElement = function () {
 };
 
 exports.expectFileGrossAmountToBe = function (value) {
-    expect(exports.fileGrossAmountElement().getText()).toBe(value);
+    expect(exports.fileGrossAmountElement().getText().then(normalizeAmount)).toBe(value);
 };
 
 exports.expectFileNetAmountToBe = function (value) {
-    expect(exports.fileNetAmountElement().getText()).toBe(value);
+    expect(exports.fileNetAmountElement().getText().then(normalizeAmount)).toBe(value);
 };
 
 exports.generatedStatements = function () {
@@ -282,6 +312,18 @@ exports.generatedStatements = function () {
 
 exports.openFirstGeneratedStatement = function () {
     exports.generatedStatements().first().$('a').click();
+};
+
+exports.expectNumberOfStatementsToBe = function (num) {
+    var statements = exports.generatedStatements();
+    expect(statements.count()).toBe(num);
+};
+
+exports.expectStatementValuesToBe = function () {
+    var args = _.toArray(arguments),
+        statements = exports.generatedStatements();
+
+    expect(statements.$$('.pull-right').getText()).toEqual(args);
 };
 
 exports.switchToTabByIndex = function (index) {
@@ -314,7 +356,15 @@ exports.expectSummaryByTypeToBe = function (title, value) {
         valueElem = elem.element(by.binding('type.amount'));
 
     expect(titleElem.getText()).toBe(title);
-    expect(valueElem.getText()).toBe(value);
+    expect(valueElem.getText().then(normalizeAmount)).toBe(value);
+};
+
+exports.expectStatementFieldToBe = function (title, value) {
+    var elem = $('.accordion-inner .form-horizontal'),
+        titleElem = elem.element(by.cssContainingText('.control-group .pull-left', title)),
+        valueElem = titleElem.element(by.xpath('..')).$('.pull-right');
+
+    expect(valueElem.getText().then(normalizeAmount)).toBe(value);
 };
 
 exports.rollBackLink = function () {
@@ -334,4 +384,114 @@ exports.rollBackUploadedFile = function () {
     expect(modal.$('.modal-header h3').getText()).toBe(' ROLL BACK FILE');
     modal.$('.modal-footer .btn-primary').click();
     pages.base.waitForAjax();
+};
+
+exports.editUploadedFile = function () {
+    return exports.uploadedFileBlind().$('.btn-toggle').click();
+};
+
+exports.assumeUploadedFile = function (fileName) {
+    testData.tempFileName = fileName;
+};
+
+exports.uploadedExpectedFileAmountField = function () {
+    var field = exports.uploadedFileBlind().element(by.model('file.expected_file_amount'));
+    return field;
+};
+
+exports.expectUploadedExpectedFileAmountFieldToBeVisible = function () {
+    var field = exports.uploadedExpectedFileAmountField();
+
+    expect(field.isDisplayed()).toBeTruthy();
+};
+
+exports.expectUploadedExpectedFileAmountFieldToBeHidden = function () {
+    var field = exports.uploadedExpectedFileAmountField();
+
+    expect(field.isPresent()).toBe(false);
+};
+
+exports.saveButton = function () {
+    var button = $('.accordion-body.collapse.in .btn-primary');
+    return button;
+};
+
+exports.loader = function () {
+    return $('.accordion-body.collapse.in .control-buttons .loader');
+};
+
+exports.expectSaveButtonToBeDisabled = function () {
+    var button = exports.saveButton();
+    expect(button.isEnabled()).toBeFalsy();
+};
+
+exports.expectSaveButtonToBeEnabled = function () {
+    var button = exports.saveButton();
+    expect(button.isEnabled()).toBeTruthy();
+};
+
+exports.clickSaveButton = function () {
+    exports.saveButton().click();
+    browser.sleep(200);
+    browser.wait(ExpectedConditions.invisibilityOf(exports.loader()), 5000);
+};
+
+exports.changeUploadedExpectedFileAmountField = function (value) {
+    var field = exports.uploadedExpectedFileAmountField();
+
+    field.clear();
+    field.sendKeys(value);
+};
+
+exports.cancelLink = function () {
+    var link = element(by.cssContainingText('.accordion-body.collapse.in .control-buttons a', 'Cancel'));
+    return link;
+};
+
+exports.clickCancelLink = function () {
+    return exports.cancelLink().click();
+};
+
+exports.unsavedStatementModal = function () {
+    return $('.modal');
+};
+
+exports.expectUnsavedStatementModalToBeVisible = function () {
+    var modal = exports.unsavedStatementModal();
+
+    browser.wait(ExpectedConditions.visibilityOf(modal));
+    expect(modal.$('.modal-header h3').getText()).toBe(' UNSAVED STATEMENT');
+};
+
+exports.continueEditingLink = function () {
+    var modal = exports.unsavedStatementModal();
+
+    return modal.element(by.cssContainingText('.btn-link', 'Continue Editing'));
+};
+
+exports.clickContinueEditingLink = function () {
+    return exports.continueEditingLink().click();
+};
+
+exports.confirmCancellationButton = function () {
+    var modal = exports.unsavedStatementModal();
+    return modal.$('.btn-primary');
+};
+
+exports.clickConfirmCancellationButton = function () {
+    return exports.confirmCancellationButton().click();
+};
+
+exports.editStatement = function () {
+    return $('.edit-state-toggler .btn-toggle').click();
+};
+
+exports.accountsReferenceField = function () {
+    return element(by.model('statement.account_reference'));
+};
+
+exports.changeAccountsReferenceField = function (val) {
+    var field = exports.accountsReferenceField();
+    field.clear();
+    field.sendKeys(val);
 };

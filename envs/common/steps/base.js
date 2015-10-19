@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var pph = require('../../../helpers/pph'),
-    promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
-
+var pph = require("../../../helpers/pph");
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
+var pageStep = require('../../../helpers/basicPageStep');
 steps.base = exports;
 
 exports.useEntityDataSlot = function(entityType, slotId) {
@@ -192,3 +192,8 @@ exports.validateDownloadFileCount = function(value) {
         pages.base.validateDownloadFileCount(value);
     });
 };
+
+pageStep('Open new tab');
+pageStep('Duplicate tab');
+pageStep('Switch to tab by index');
+pageStep('Close tab by index');

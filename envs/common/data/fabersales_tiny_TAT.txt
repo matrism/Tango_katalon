@@ -1,0 +1,8 @@
+w:\royalties\Statements Dec 2013\Extracts\100001.txt|Royalty statement from Faber Music Ltd|00000000|25/02/2014||100001|WARNER CHAPPELL MUSIC LTD|2013|9|01/10/2013|31/12/2013|GBP
+1|0571529658|||0571529658|Bert Weedon's Play in a Day (guitar)|GBP|9.99|1128|1|15|100|100|(1/1)|1690.31|0|338.06|2028.37
+2|10001030|Ain't Talkin' 'Bout Love|E Van Halen,A Van Halen,M Anthony and D Lee Roth|0571525210|Rifftionary, The (chord songbook)|GBP|11.99|155|1|15|100|.76|(1/132)|2.11|0|.42|2.53
+3|10001030|Ain't Talkin' 'Bout Love|E Van Halen,A Van Halen,M Anthony and D Lee Roth|0571525210|Rifftionary, The (chord songbook)|GBP|11.99|3|1|15|100|.76|(1/132)|.04|0|.01|.05
+4|10001030|Ain't Talkin' 'Bout Love|E Van Halen,A Van Halen,M Anthony and D Lee Roth|0571525210|Rifftionary, The (chord songbook)|EUR|14.99|1|1.2|15|100|.76|(1/132)|.02|0|0|.02
+5|10001030|Ain't Talkin' 'Bout Love|E Van Halen,A Van Halen,M Anthony and D Lee Roth|0571526659|Essential Rock Playlist (GTAB)|GBP|16.99|96|1|15|100|4.55|(1/22)|11.12|0|2.22|13.34
+6|12301180|Cars And Trains|Jonathan Douglas and George Michael|0571529968|Twenty-Five: For the Loyal (PVG)|GBP|9.99|5|1|15|100|6.67|(1/15)|.5|0|.1|.6
+w:\royalties\Statements Dec 2013\Extracts\100001.txt|17109|26179.7|0|5238.08|31417.78

@@ -24,6 +24,7 @@ pageStep([
         'Enter terms',
         'Select result by index',
         'Add another term',
+        'Search for',
     ]],
 
     'Create new record',
