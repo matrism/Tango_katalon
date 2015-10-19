@@ -67,7 +67,11 @@ exports.activityGroup = (function() {
 
         pages.base.scrollIntoView(nameElement);
 
-        return nameElement.click();
+        nameElement.click();
+
+        pages.base.closeCurrentTabAndSwitchTo(0);
+
+        return pages.base.waitForAjax();
     };
 
     activityGroup.toggleBlind = function(targetGroupName) {
@@ -78,61 +82,35 @@ exports.activityGroup = (function() {
         return target.container.click();
     };
 
-    return activityGroup;
-})();
-
-exports.activityGroup.event = (function() {
-    var event = {};
-
-    event.targets = {};
-
-    event.container = function(methodSpecifier) {
-        return methodSpecifierCall(event.container, methodSpecifier || 'all');
+    activityGroup.eventContainer = function(methodSpecifier) {
+        methodSpecifierCall(activityGroup.eventContainer, methodSpecifier || 'all');
     };
 
-    event.container.all = function() {
-        var groupContainer = exports.activityGroup.targets.latest.container;
+    activityGroup.eventContainer.all = function() {
+        var target = activityGroup.targets.latest;
 
-        return groupContainer.all(by.repeater(
+        return target.container.element(by.repeater(
             'activity in activitiesGroup.activities'
-        )).filter(function(container) {
-            return container.isDisplayed();
-        });
+        ));
     };
 
-    event.container.latest = function() {
-        return event.container().last();
+    activityGroup.validateEventCount = function(count) {
+        expect(activityGroup.eventContainer().count()).toBe(count);
     };
 
-    event.find = function(methodSpecifier, targetEventName) {
-        var container = event.container(methodSpecifier),
-            resultPromise = pages.base.scrollIntoView(container);
+    activityGroup.anyEventStatusElement = function(status) {
+        var target = activityGroup.targets.latest;
 
-        event.targets.latest = {
-            methodSpecifier: methodSpecifier,
-            container: container
-        };
-
-        if(targetEventName) {
-            event.targets[targetEventName] = event.targets.latest;
-        }
-
-        return resultPromise;
+        return target.container.element(by.cssContainingText('.label', status));
     };
 
-    event.statusElement = function(status, targetEventName) {
-        var targetEvent = event.targets[targetEventName || 'latest'];
-
-        return targetEvent.container.element(by.cssContainingText('.label', status));
-    };
-
-    event.validateStatus = function(status, targetEventName) {
-        var statusElement = event.statusElement(status, targetEventName);
+    activityGroup.expectAnyEventStatusToBe = function(status) {
+        var statusElement = activityGroup.anyEventStatusElement(status);
 
         pages.base.scrollIntoView(statusElement);
 
         expect(statusElement.isDisplayed()).toBeTruthy();
     };
 
-    return event;
+    return activityGroup;
 })();

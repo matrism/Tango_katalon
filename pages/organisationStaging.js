@@ -37,6 +37,8 @@ exports.previewRegistrationRunTab = function() {
 
 exports.goToPreviewRegistrationRunTab = function() {
     exports.previewRegistrationRunTab().click();
+
+    return pages.base.waitForAjax();
 };
 
 exports.previewRegistrationRunHeader = function() {
@@ -57,6 +59,8 @@ exports.registrationActivityTab = function() {
 
 exports.goToRegistrationActivityTab = function() {
     exports.registrationActivityTab().click();
+
+    return pages.base.waitForAjax();
 };
 
 exports.registrationActivityRecordsTable = function() {

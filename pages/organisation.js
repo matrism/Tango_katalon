@@ -578,6 +578,7 @@ return $(".text-highlight");
             clickPreviewRegistrationRunTab: function () {
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
                 this.previewRegistrationRunTab().click();
+                return pages.base.waitForAjax();
             }
             ,
 
@@ -613,6 +614,8 @@ return $(".text-highlight");
             clickRegistrationActivityTab: function () {
                 browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
                 this.registrationActivityTab().click();
+
+                return pages.base.waitForAjax();
             }
             ,
             clickGeneralTab: function () {

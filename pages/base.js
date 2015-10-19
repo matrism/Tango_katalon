@@ -6,6 +6,7 @@ var pph = require("../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 var config = require('../configs/protractor-conf');
+var methodSpecifierCall = require('../helpers/methodSpecifierCall');
 exports = module.exports = pages.base = new ftf.pageObject ({
 	locators: {
 		logout_link: { id: "DSP-LOGOUT" }
@@ -14,6 +15,21 @@ exports = module.exports = pages.base = new ftf.pageObject ({
 exports.open = function() {
     browser.get(_tf_config.urls.app_url);
     exports.waitForAjax();
+};
+
+exports.modalContainer = function() {
+    return $('body > .modal');
+};
+
+exports.waitUntilModalAnimationFinishes = function() {
+    var container = exports.modalContainer();
+
+    browser.wait(function() {
+        return pph.and(
+            container.isPresent(),
+            pph.matchesCssSelector(container, ':not(.animate)')
+        );
+    });
 };
 
 exports.modalHeading = function() {
@@ -380,4 +396,28 @@ exports.clearDownloadsDirectory = function() {
 
 exports.validateDownloadFileCount = function(value) {
     expect(exports.downloadDirectoryEntries().length).toBe(value);
+};
+
+exports.switchToTab = function(methodSpecifier) {
+    return methodSpecifierCall(exports.switchToTab, methodSpecifier);
+};
+
+exports.switchToTab.index = function(i) {
+    return browser.getAllWindowHandles().then(function(handles) {
+        browser.switchTo().window(handles[i]);
+    }).then(function() {
+        return browser.wait(protractor.ExpectedConditions.visibilityOf($('body')));
+    });
+};
+
+exports.closeCurrentTabAndSwitchTo = function(methodSpecifier) {
+    var tabCountThen;
+
+    browser.getAllWindowHandles().then(function(handles) {
+        tabCountThen = handles.length;
+    });
+
+    browser.driver.close();
+
+    return exports.switchToTab(methodSpecifier);
 };

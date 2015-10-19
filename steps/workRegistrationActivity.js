@@ -10,12 +10,9 @@ pageStep([
     ['Activity Group', [
         'Find',
         'Validate recipient name',
-        'Go to registration recipient name',
+        'Go to recipient page',
         'Toggle blind',
-
-        ['Event', [
-            'Find',
-            'Validate status'
-        ]]
+        'Validate event count',
+        'Expect any event status to be'
     ]],
 ]);

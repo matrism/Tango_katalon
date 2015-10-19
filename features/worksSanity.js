@@ -29,6 +29,8 @@ require(steps_path + 'scopeDelivery');
 require(steps_path + 'workRights');
 require(steps_path + 'workRegistrationActivity');
 require(steps_path + 'workCwrPreview');
+require(steps_path + 'organisationRegistrationStack');
+require(steps_path + 'organisationRegistrationActivity');
 
 var beforeFeature = [
         [steps.login.itLogin],
@@ -75,6 +77,7 @@ var beforeFeature = [
                 'works-sanity-validate-work-rights',
                 'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
+                'worksSanityExecuteRegistrationRun'
             ],
             steps: function() {
                 _.times(4, function(i) {
@@ -127,6 +130,7 @@ var beforeFeature = [
                 'works-sanity-validate-work-rights',
                 'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
+                'worksSanityExecuteRegistrationRun'
             ],
             steps: [
                 [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
@@ -1213,6 +1217,7 @@ var beforeFeature = [
                 'works-sanity-validate-work-rights',
                 'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
+                'worksSanityExecuteRegistrationRun'
             ],
             steps: function() {
                 steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
@@ -1287,6 +1292,7 @@ var beforeFeature = [
                 'works-sanity-validate-work-rights',
                 'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
+                'worksSanityExecuteRegistrationRun'
             ],
             steps: function() {
                 steps.base.useEntityDataSlot('work', 'mainWork');
@@ -1323,12 +1329,25 @@ var beforeFeature = [
             },
         },
         {
-            name: 'Generate and validate work rights',
+            name: 'Generate work rights',
             tags: [
                 'works-sanity-generate-work-rights',
-                'works-sanity-validate-work-rights',
                 'works-sanity-validate-registration-activity',
                 'works-sanity-validate-cwr',
+                'worksSanityExecuteRegistrationRun'
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+
+                steps.work.goToWorkPage();
+
+                steps.work.goToRightsTab();
+            }
+        },
+        {
+            name: 'Validate work rights',
+            tags: [
+                'works-sanity-validate-work-rights'
             ],
             steps: function() {
                 var creatorRightsData = [
@@ -1447,7 +1466,7 @@ var beforeFeature = [
                 steps.workRights.validateWcmTotalShares(
                     0, ['100.000', '50.000', '100.000', '100.000', '100.000']
                 );
-            },
+            }
         },
         {
             name: 'Validate Registration Activity',
@@ -1470,11 +1489,9 @@ var beforeFeature = [
 
                     this.toggleBlind();
 
-                    using(this.event, function() {
-                        this.find('latest');
+                    this.validateEventCount(1);
 
-                        this.validateStatus('Scheduled');
-                    });
+                    this.expectAnyEventStatusToBe('Scheduled');
                 });
             },
         },
@@ -1580,6 +1597,81 @@ var beforeFeature = [
                 );
             }
         },
+        {
+            name: 'Execute registration run',
+            tags: [
+                'worksSanityExecuteRegistrationRun'
+            ],
+            steps: function() {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+
+                using(steps.work, function() {
+                    this.goToWorkPage();
+
+                    this.goToRegistrationActivityTab();
+                });
+
+                using(steps.workRegistrationActivity.activityGroup, function() {
+                    this.find('first');
+
+                    this.goToRecipientPage();
+                });
+
+                steps.organisation.goToPreviewRegistrationRunTab();
+
+                using(steps.organisationRegistrationStack, function() {
+                    using(this.works, function() {
+                        this.find({ title: 'TEST WORK ' + randomId('mainWork') });
+
+                        this.validateErrors('none');
+
+                        this.validateStatus('Scheduled');
+                    });
+
+                    using(this.registrationRun, function() {
+                        this.execute();
+
+                        this.proceed();
+
+                        using(this.startSuccessMessage, function() {
+                            this.waitUntilDisplayed();
+
+                            this.dismiss();
+                        });
+                    });
+                });
+
+                steps.organisation.goToRegistrationActivityTab();
+
+                using(steps.organisationRegistrationActivity.events, function() {
+                    this.find({ latestInitiatedBy: 'Tango Test1' });
+
+                    this.toggleBlind();
+
+                    this.waitUntilStatusBecomes('Delivered');
+                });
+
+                steps.organisation.goToPreviewRegistrationRunTab();
+
+                using(steps.organisationRegistrationStack.works, function() {
+                    this.validateAbsence({ title: 'TEST WORK ' + randomId('mainWork') });
+                });
+
+                using(steps.work, function() {
+                    this.goToWorkPage();
+
+                    this.goToRegistrationActivityTab();
+                });
+
+                using(steps.workRegistrationActivity.activityGroup, function() {
+                    this.find('first');
+
+                    this.toggleBlind();
+
+                    this.expectAnyEventStatusToBe('Delivered');
+                });
+            }
+        }
     ];
 
 module.exports = {
