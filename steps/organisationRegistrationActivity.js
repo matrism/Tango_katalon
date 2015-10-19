@@ -10,6 +10,6 @@ pageStep([
     ['Events', [
         'Find',
         'Toggle blind',
-        'Wait until status becomes'
+        'Validate status'
     ]]
 ]);

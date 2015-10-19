@@ -82,35 +82,128 @@ exports.activityGroup = (function() {
         return target.container.click();
     };
 
-    activityGroup.eventContainer = function(methodSpecifier) {
-        methodSpecifierCall(activityGroup.eventContainer, methodSpecifier || 'all');
-    };
+    return activityGroup;
+})();
 
-    activityGroup.eventContainer.all = function() {
-        var target = activityGroup.targets.latest;
+exports.activityGroup.events = (function() {
+    var events = {};
 
-        return target.container.element(by.repeater(
-            'activity in activitiesGroup.activities'
+    events.targets = {};
+
+    events.containerFromChild = function(childElement) {
+        return childElement.element(by.xpath(
+            'ancestor::*[@data-ng-repeat-start="' +
+                'activity in activitiesGroup.activities' +
+            '"][1]'
         ));
     };
 
-    activityGroup.validateEventCount = function(count) {
-        expect(activityGroup.eventContainer().count()).toBe(count);
+    events.container = function(methodSpecifier) {
+        return methodSpecifierCall(events.container, methodSpecifier || 'all');
     };
 
-    activityGroup.anyEventStatusElement = function(status) {
-        var target = activityGroup.targets.latest;
+    events.container.all = function() {
+        var target = exports.activityGroup.targets.latest;
+
+        return target.container.all(by.repeater(
+            'activity in activitiesGroup.activities'
+        )).filter(function(containerElement) {
+            return containerElement.isDisplayed();
+        });
+    };
+
+    events.container.first = function() {
+        return events.container().first();
+    };
+
+    events.container.firstWithStatus = function(status) {
+        return events.containerFromChild(
+            events.container().all(by.cssContainingText(
+                '.label', status
+            )).first()
+        );
+    };
+
+    events.detailsContainerOf = function(primaryContainer) {
+        return primaryContainer.element(by.xpath('following-sibling::tr[1]'));
+    };
+
+    events.find = function(methodSpecifier) {
+        var container = events.container(methodSpecifier),
+            resultPromise = pages.base.scrollIntoView(container);
+
+        events.targets.latest = {
+            methodSpecifier: methodSpecifier,
+            container: container,
+            detailsContainer: events.detailsContainerOf(container)
+        };
+
+        return resultPromise;
+    };
+
+    events.validateEventCount = function(count) {
+        expect(events.container().count()).toBe(count);
+    };
+
+    events.statusElement = function(status) {
+        var target = events.targets.latest;
 
         return target.container.element(by.cssContainingText('.label', status));
     };
 
-    activityGroup.expectAnyEventStatusToBe = function(status) {
-        var statusElement = activityGroup.anyEventStatusElement(status);
+    events.validateStatus = function(status) {
+        var statusElement = events.statusElement(status);
 
         pages.base.scrollIntoView(statusElement);
 
         expect(statusElement.isDisplayed()).toBeTruthy();
     };
 
-    return activityGroup;
+    events.anyEventStatusElement = function(status) {
+        var target = exports.activityGroup.targets.latest;
+
+        return target.container.element(by.cssContainingText('.label', status));
+    };
+
+    events.waitUntilAnyEventStatusBecomes = function(status) {
+        var statusElement = events.anyEventStatusElement(status);
+
+        browser.wait(function() {
+            pages.base.scrollIntoView(statusElement);
+
+            return pph.trim(statusElement.getText()).then(function(text) {
+                if(text === status) {
+                    return true;
+                }
+
+                pages.base.refreshPage();
+
+                activityGroup.toggleBlind();
+
+                return false;
+            });
+        });
+    };
+
+    events.toggleBlind = function() {
+        return events.targets.latest.container.click();
+    };
+
+    events.fileNameElement = function() {
+        var target = events.targets.latest;
+
+        return target.detailsContainer.$('[data-ng-bind="activity.file_name"]');
+    };
+
+    events.storeFileNameInTestVariable = function(variableName) {
+        var fileNameElement = events.fileNameElement();
+
+        pages.base.scrollIntoView(fileNameElement);
+
+        return pph.trim(fileNameElement.getText()).then(function(text) {
+            hash.testVariables[variableName] = text;
+        });
+    };
+
+    return events;
 })();

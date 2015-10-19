@@ -6,6 +6,7 @@ var pages_path = _tf_config._system_.path_to_pages,
     moment = require('moment'),
     random = require('../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
+    fromTestVariable = require('../helpers/fromTestVariable'),
     fnutils = require('../helpers/fnutils'),
     bind = fnutils.bind,
     using = fnutils.using;
@@ -1489,9 +1490,13 @@ var beforeFeature = [
 
                     this.toggleBlind();
 
-                    this.validateEventCount(1);
+                    using(this.events, function() {
+                        this.validateEventCount(1);
 
-                    this.expectAnyEventStatusToBe('Scheduled');
+                        this.find('first');
+
+                        this.validateStatus('Scheduled');
+                    });
                 });
             },
         },
@@ -1641,22 +1646,6 @@ var beforeFeature = [
                     });
                 });
 
-                steps.organisation.goToRegistrationActivityTab();
-
-                using(steps.organisationRegistrationActivity.events, function() {
-                    this.find({ latestInitiatedBy: 'Tango Test1' });
-
-                    this.toggleBlind();
-
-                    this.waitUntilStatusBecomes('Delivered');
-                });
-
-                steps.organisation.goToPreviewRegistrationRunTab();
-
-                using(steps.organisationRegistrationStack.works, function() {
-                    this.validateAbsence({ title: 'TEST WORK ' + randomId('mainWork') });
-                });
-
                 using(steps.work, function() {
                     this.goToWorkPage();
 
@@ -1668,7 +1657,33 @@ var beforeFeature = [
 
                     this.toggleBlind();
 
-                    this.expectAnyEventStatusToBe('Delivered');
+                    using(this.events, function() {
+                        this.waitUntilAnyEventStatusBecomes('Delivered');
+
+                        this.find({ firstWithStatus: 'Delivered' });
+
+                        this.toggleBlind();
+
+                        this.storeFileNameInTestVariable('registration run file name');
+                    });
+
+                    this.goToRecipientPage();
+                });
+
+                steps.organisation.goToRegistrationActivityTab();
+
+                using(steps.organisationRegistrationActivity.events, function() {
+                    this.find({
+                        fileName: fromTestVariable('registration run file name')
+                    });
+
+                    this.validateStatus('Delivered');
+                });
+
+                steps.organisation.goToPreviewRegistrationRunTab();
+
+                using(steps.organisationRegistrationStack.works, function() {
+                    this.validateAbsence({ title: 'TEST WORK ' + randomId('mainWork') });
                 });
             }
         }

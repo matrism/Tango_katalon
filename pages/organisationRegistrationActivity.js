@@ -1,7 +1,8 @@
 'use strict';
 
 var pph = require('../helpers/pph'),
-    methodSpecifierCall = require('../helpers/methodSpecifierCall');
+    methodSpecifierCall = require('../helpers/methodSpecifierCall'),
+    callResultOrValue = require('../helpers/callResultOrValue');
 
 pages.organisationRegistrationActivity = exports;
 
@@ -9,6 +10,14 @@ exports.events = (function() {
     var events = {};
 
     events.targets = {};
+
+    events.containerFromChild = function(childElement) {
+        return childElement.element(by.xpath(
+            'ancestor::li[contains(' +
+                'concat(" ", normalize-space(@class), " "), " DATA-CHILD "' +
+            ')][1]'
+        ));
+    };
 
     events.container = function(methodSpecifier) {
         return methodSpecifierCall(events.container, methodSpecifier || 'all');
@@ -19,13 +28,21 @@ exports.events = (function() {
     };
 
     events.container.latestInitiatedBy = function(whom) {
-        return events.container().all(by.cssContainingText(
-            '[data-ng-show="activity.initiated_by != null"]', whom
-        )).first().element(by.xpath(
-            'ancestor::li[contains(' +
-                'concat(" ", normalize-space(@class), " "), " DATA-CHILD "' +
-            ')][1]'
-        ));
+        return events.containerFromChild(
+            events.container().all(by.cssContainingText(
+                '[data-ng-show="activity.initiated_by != null"]', whom
+            )).first()
+        );
+    };
+
+    events.container.fileName = function(fileName) {
+        fileName = callResultOrValue(fileName);
+
+        return events.containerFromChild(
+            events.container().all(by.cssContainingText(
+                '[data-ng-if="activity.file_name"]', fileName
+            )).first()
+        );
     };
 
     events.find = function(methodSpecifier) {
@@ -57,22 +74,12 @@ exports.events = (function() {
         }).first();
     };
 
-    events.waitUntilStatusBecomes = function(status) {
+    events.validateStatus = function(status) {
         var statusElement = events.statusElement();
 
-        browser.wait(function() {
-            pages.base.scrollIntoView(statusElement);
+        pages.base.scrollIntoView(statusElement);
 
-            return pph.trim(statusElement.getText()).then(function(text) {
-                if(text === status) {
-                    return true;
-                }
-
-                pages.base.refreshPage();
-
-                return false;
-            });
-        });
+        expect(pph.trim(statusElement.getText())).toBe(status);
     };
 
     return events;

@@ -12,7 +12,14 @@ pageStep([
         'Validate recipient name',
         'Go to recipient page',
         'Toggle blind',
-        'Validate event count',
-        'Expect any event status to be'
+
+        ['Events', [
+            'Validate event count',
+            'Find',
+            'Validate status',
+            'Wait until any event status becomes',
+            'Toggle blind',
+            'Store file name in test variable'
+        ]]
     ]],
 ]);
