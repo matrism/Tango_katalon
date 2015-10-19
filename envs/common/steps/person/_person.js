@@ -1,8 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    pph = require('../../../../helpers/pph'),
+var pph = require('../../../../helpers/pph'),
     pageStep = require('../../../../helpers/basicPageStep');
 
 steps.person = exports;

@@ -1,7 +1,6 @@
 'use strict';
 
-var pageStep = require('../../../../helpers/basicPageStep'),
-    page = require(pages_path + 'organisation');
+var pageStep = require('../../../../helpers/basicPageStep');
 
 var _ = require("lodash");
 var promise = protractor.promise;
@@ -58,21 +57,11 @@ if (steps.organisation === undefined) {
                     tableLine++;
 
 
-                }
-                );
-
-
-<<<<<<< HEAD:tests/e2e/envs/common/steps/orgs/organisation.js
-            }
-            )
-        }
-        ,
-=======
+                });
                 }
             );
         },
 
->>>>>>> 6eb126b7ed1fdae1c079d430495a46fed3852366:tests/e2e/steps/organisation.js
         openIncomeProviderEdit: function () {
 
 

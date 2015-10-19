@@ -1,6 +1,6 @@
 "use strict";
 
-var pph = require('../../../../../helpers/pph');
+var pph = require('../../../../helpers/pph');
 
 var client = require('http-api-client');
 var fs = require('fs');
