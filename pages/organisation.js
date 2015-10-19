@@ -523,8 +523,8 @@ return $(".text-highlight");
                 this.fileTypeIncomeInput().sendKeys(protractor.Key.ENTER);
 
 
-            }
-            ,
+            },
+
             clickExecuteRegistrationRunButton: function () {
                 browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
              return   this.activeRegistrationRunButton().click();
@@ -1149,6 +1149,56 @@ exports.incomeProvider = (function() {
             return element.click();
         };
 
+        mapping.toArray = function() {
+            var rows = mapping.rows();
+
+            return rows.map(function(row){
+                return {
+                    inboundIncomeType: row.$('.e2e-mapping-type input').getAttribute('value'),
+                    description: row.$('.e2e-mapping-description input').getAttribute('value'),
+                    fileType: row.$('.e2e-mapping-file-type input').getAttribute('value'),
+                    internalIncomeType: row.$('.e2e-mapping-internal-type input').getAttribute('value'),
+                }
+            });
+        };
+
+        mapping.addFromObject = function(obj) {
+            var rows = mapping.rows();
+
+            rows.count().then(function(num){
+                var lastRow = num-1;
+
+                mapping.enterInboundIncomeType(lastRow, obj.inboundIncomeType);
+                mapping.enterInboundIncomeTypeDescription(lastRow, obj.description);
+
+                mapping.enterIncomeFileTypeSearchTerms(lastRow, obj.fileType);
+                mapping.selectIncomeFileTypeSearchResultByIndex(0);
+
+                mapping.enterTangoIncomeTypeSearchTerms(lastRow, obj.internalIncomeType);
+                mapping.selectTangoIncomeTypeSearchResultByIndex(0);
+            });
+        };
+
+        mapping.addIfNotPresent = function (data) {
+            mapping.addIfNoneMatch(data, data);
+        };
+
+        mapping.addIfNoneMatch = function(matchObj, data) {
+            if (!_.isArray(data)) {
+                data = [data];
+            }
+
+            mapping.toArray().then(function(rows){
+                _.each(data, function(obj){
+                    var isMappingPresent = _.find(rows, matchObj);
+
+                    if (!isMappingPresent) {
+                        mapping.addFromObject(obj);
+                    }
+                });
+            });
+        };
+
         return mapping;
     })();
 
@@ -1176,6 +1226,23 @@ exports.incomeProvider = (function() {
 
     incomeProvider.expectSectionToBeInViewMode = function() {
         expect(incomeProvider.sectionActive()).toBeFalsy();
+    };
+
+    incomeProvider.checkOrAddIncomeFileType = function (fileType) {
+        var typeahead = incomeProvider.incomeFileTypeTypeahead();
+
+        typeahead.all(by.cssContainingText('.tg-typeahead__tag', fileType)).count().then(function(num){
+            if (!num) {
+                incomeProvider.enterIncomeFileTypeSearchTerms(fileType);
+                incomeProvider.selectIncomeFileTypeSearchResultByIndex(0);
+            }
+        });
+    };
+
+    incomeProvider.expectIncomeTypeMappingsToBeValid = function () {
+        var validationMessage = incomeProvider.sectionContainer().$$('.validation-message-text');
+
+        expect(validationMessage.count()).toBeFalsy();
     };
 
     return incomeProvider;

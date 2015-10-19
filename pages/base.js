@@ -381,3 +381,36 @@ exports.clearDownloadsDirectory = function() {
 exports.validateDownloadFileCount = function(value) {
     expect(exports.downloadDirectoryEntries().length).toBe(value);
 };
+
+exports.openNewTab = function (url) {
+    function ptorOpenNewTab(url) {
+        function openTab() {
+            $('#TAT_TEMP_ELEMENT').remove();
+            window.open(url);
+        };
+
+        $('<div id="TAT_TEMP_ELEMENT">.</div>').appendTo('body').on('click', openTab);
+    };
+
+    browser.executeScript(ptorOpenNewTab, url);
+    $('#TAT_TEMP_ELEMENT').click();
+};
+
+exports.duplicateTab = function () {
+    browser.getCurrentUrl().then(function(url){
+        exports.openNewTab(url);
+    });
+};
+
+exports.switchToTabByIndex = function (index) {
+    browser.getAllWindowHandles().then(function (handles) {
+        var newWindowHandle = handles[index];
+        browser.switchTo().window(newWindowHandle);
+    });
+};
+
+exports.closeTabByIndex = function (index) {
+    exports.switchToTabByIndex(index);
+    browser.driver.close();
+    exports.switchToTabByIndex(index-1);
+};

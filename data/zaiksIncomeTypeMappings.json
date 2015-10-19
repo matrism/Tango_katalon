@@ -1,0 +1,44 @@
+[
+    {
+        "inboundIncomeType": "20",
+        "description": "Radio",
+        "fileType": "CISAC E4",
+        "internalIncomeType": "Radio Performance"
+    },
+    {
+        "inboundIncomeType": "21",
+        "description": "Television",
+        "fileType": "CISAC E4",
+        "internalIncomeType": "TV Performance"
+    },
+    {
+        "inboundIncomeType": "21",
+        "description": "Television",
+        "fileType": "CISAC F2",
+        "internalIncomeType": "TV Performance"
+    },
+    {
+        "inboundIncomeType": "50",
+        "description": "Live",
+        "fileType": "CISAC E4",
+        "internalIncomeType": "Live Performance"
+    },
+    {
+        "inboundIncomeType": "60",
+        "description": "Disco",
+        "fileType": "CISAC E4",
+        "internalIncomeType": "Performance"
+    },
+    {
+        "inboundIncomeType": "90",
+        "description": "Others",
+        "fileType": "CISAC F2",
+        "internalIncomeType": "Performance"
+    },
+    {
+        "inboundIncomeType": "90",
+        "description": "Others",
+        "fileType": "CISAC E4",
+        "internalIncomeType": "Performance"
+    }
+]
