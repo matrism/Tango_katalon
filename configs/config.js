@@ -44,9 +44,13 @@ var defaultUserName = 'TangoTest1',
             screenshot_only_on_fail: false,
             tags: tags,
             legacyOverrides: {
-                legacyPerson: {
-                    newPerson: 'newPersonProduction',
-                    person: 'personProduction',
+                stagingPerson: {
+                    newPerson: 'newPersonStaging',
+                    person: 'personStaging',
+                },
+                stagingOrganisation: {
+                    newOrganisation: 'newOrganisationStaging',
+                    organisation: 'organisationStaging',
                 },
             },
             dontSkipBroken: cli['dont-skip-broken'],

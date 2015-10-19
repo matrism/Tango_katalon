@@ -1,13 +1,13 @@
 "use strict";
 
-var pph = require('../../../../helpers/pph');
+var pph = require('../../../../../helpers/pph');
 
 var client = require('http-api-client');
 var fs = require('fs');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-if (pages.organisation === undefined) {
 
+if (pages.organisation === undefined) {
 
     pages.organisation = exports = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/org",
@@ -40,20 +40,29 @@ if (pages.organisation === undefined) {
         cisacCode: function () {
             return $('.e2e-general-cisac-code>div');
         },
+
         subPublisherRelationshipContainers: function () {
             return $$('.e2e-sub-publisher');
         },
+
         subPublisherNameBinding: function (i) {
             return this.subPublisherRelationshipContainers().get(i).$(
                 '.e2e-sub-publisher-def .ng-binding'
             );
         },
+
+
+
         incomeProviderControls: function () {
+
             return element(by.css(".income-provider-section>div>.CONTROLS"));
-        },
+        }
+            ,
         fileTypeIncomeInput: function () {
             return element(by.css(".default"));
-        },
+
+        }
+            ,
         activityRecordsTable: function () {
             return $("#ACTIVITY-RECORDS");
         },
@@ -63,7 +72,10 @@ if (pages.organisation === undefined) {
         regRunHeader: function () {
             return $(".reg-run-header");
         },
+
+
         incomeProvidersEditView: function () {
+
             return element(by.css(".EDITOR.income-provider-section>.edit-view"));
         },
         fileTypeIncomeBlank: function () {
@@ -562,59 +574,39 @@ if (pages.organisation === undefined) {
         }
             ,
         clickPreviewRegistrationRunTab: function () {
-
             browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
             this.previewRegistrationRunTab().click();
         }
             ,
 
-        clickDownloadFileButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.downloadFileButton()));
-            this.downloadFileButton().click();
+        downloadCrFile: function () {
+            var button = this.downloadFileButton(),
+                fileCountThen = pages.base.downloadDirectoryEntries().length;
+
+            browser.wait(ExpectedConditions.visibilityOf(button));
+
+            button.click();
+
+            browser.wait(function () {
+                var fileCountNow = pages.base.downloadDirectoryEntries().length;
+                return fileCountNow > fileCountThen;
+            });
         },
-        waitForFileToDownload: function () {
-            browser.sleep(5000);
+        previewRegistrationRunValidationErrorsPanel: function () {
+            return $('[data-ng-switch-when="VALIDATIONS"]');
         },
         clickValidationErrorsButton: function () {
+            var panel = exports.previewRegistrationRunValidationErrorsPanel();
+
             this.validationErrorsButton().click();
-        },
-        rmDir: function (dirPath) {
-            var that = this;
-            try {
-                var files = fs.readdirSync(dirPath);
-                console.log(files);
-            }
-            catch (e) {
-                console.log(e);
-                return;
-            }
-            if (files.length > 0)
-                for (var i = 0; i < files.length; i++) {
-                    var filePath = dirPath + '/' + files[i];
-                    if (fs.statSync(filePath).isFile())
-                        fs.unlinkSync(filePath);
-                    else
-                        that.rmDir(filePath);
-                }
 
-        },
-        deleteFilesFromDownloadFolder: function (downloadFilepath) {
+            browser.wait(ExpectedConditions.visibilityOf(panel));
 
-
-            this.rmDir(downloadFilepath);
-        },
-        fileDownloadedSuccesfully: function (dirPath) {
-            browser.sleep(5000);
-            var that = this;
-            try {
-                var files = fs.readdirSync(dirPath);
-                console.log(files);
-            }
-            catch (e) {
-                console.log(e);
-                return;
-            }
-            return files.length == 2;
+            browser.wait(function () {
+                return browser.executeScript(function (el) {
+                    return (parseFloat(el.style.left || 0) === 0);
+                }, panel.getWebElement());
+            });
         },
         clickRegistrationActivityTab: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
@@ -772,13 +764,17 @@ if (pages.organisation === undefined) {
         },
 
         subPublisherName: function (i) {
-            var nameElement = this.subPublisherNameBinding(0);
+            var nameElement = this.subPublisherNameBinding(i);
 
             pages.base.scrollIntoView(nameElement);
 
             return nameElement.getText();
         }
-    });
+    }
+    )
+    ;
+
+
 }
 
 module.exports = pages.organisation;
@@ -1180,4 +1176,14 @@ exports.incomeProvider = (function () {
     };
 
     return incomeProvider;
+})();
+
+exports.subPublishers = (function () {
+    var subPublishers = {};
+
+    subPublishers.expectNameToBeEither = function (i, values) {
+        expect(values).toContain(exports.subPublisherName(i));
+    };
+
+    return subPublishers;
 })();

@@ -1,9 +1,11 @@
-'use strict';
-
-var _ = require('lodash'),
-    pph = require('../../../helpers/pph'),
-    promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+"use strict";
+var _ = require("lodash");
+var fs = require('fs-extra');
+var glob = require('glob');
+var pph = require("../../../helpers/pph");
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
+var config = require('../../../configs/protractor-conf');
 
 exports = module.exports = pages.base = new ftf.pageObject ({
 	locators: {
@@ -365,4 +367,18 @@ exports.dialogError = function() {
             );
         });
     });
+};
+
+exports.downloadDirectoryEntries = function() {
+    return glob.sync(systemConfig.downloadsDirectoryPath + '/*');
+};
+
+exports.clearDownloadsDirectory = function() {
+    exports.downloadDirectoryEntries().forEach(function(path) {
+        fs.rmrfSync(path);
+    });
+};
+
+exports.validateDownloadFileCount = function(value) {
+    expect(exports.downloadDirectoryEntries().length).toBe(value);
 };

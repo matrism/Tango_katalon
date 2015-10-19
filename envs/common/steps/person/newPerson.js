@@ -1,8 +1,9 @@
 'use strict';
 
-var _ = require('lodash'),
+var _ = require("lodash"),
     promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+    ExpectedConditions = protractor.ExpectedConditions,
+    pageStep = require('../../../../helpers/basicPageStep');
 
 hash.royaltyRates = {};
 hash.royaltyRates.RRNames = [];
@@ -18,154 +19,38 @@ exports.goToNewPersonPage = function () {
 
 exports.waitForPageToLoad = function () {
     it('Wait for page to load', function () {
-        pages.newPerson.waitForPageToBeShown();
+           pages.newPerson.waitForPageToBeShown();
+
     });
 };
 
-exports.enterFirstName = function (value) {
-    it('Enter first name (' + value + ')', function () {
-        pages.newPerson.typeFirstName(value).then(function () {
-            var person = hash.currentPersonSlot;
+exports.enterFirstName = steps.person.enterFirstName;
 
-            person.firstName = value;
+exports.enterLastName = steps.person.enterLastName;
 
-            if (person.presentationName) {
-                return;
-            }
+exports.enterPresentationName = steps.person.enterPresentationName;
 
-            if (person.lastName) {
-                person.name = person.lastName + ', ' + value;
-            } else {
-                person.name = value;
-            }
-        });
-    });
-};
+exports.enterAlternativeFirstName = steps.person.enterAlternativeFirstName;
 
-exports.enterLastName = function (value) {
-    it('Enter last name (' + value + ')', function () {
-        pages.newPerson.typeLastName(value).then(function () {
-            var person = hash.currentPersonSlot;
+exports.enterAlternativeLastName = steps.person.enterAlternativeLastName;
 
-            person.lastName = value;
+exports.enterAlternativeCreditsName = steps.person.enterAlternativeCreditsName;
 
-            if (person.presentationName) {
-                return;
-            }
+exports.enterAlternativeSuisaIpiNumber = steps.person.enterAlternativeSuisaIpiNumber;
 
-            if (person.firstName) {
-                person.name = value + ', ' + person.firstName;
-            } else {
-                person.name = value;
-            }
-        });
-    });
-};
+exports.enterSuisaIpiNumber = steps.person.enterSuisaIpiNumber;
 
-exports.enterPresentationName = function (value) {
-    it('Enter presentation name (' + value + ')', function () {
-        pages.newPerson.typePresentationName(value).then(function () {
-            var person = hash.currentPersonSlot;
+exports.enterAffiliatedSocietySearchTerms = steps.person.enterAffiliatedSocietySearchTerms;
 
-            person.name = value;
-            person.presentationName = value;
-        });
-    });
-};
+exports.selectAffiliatedSocietySearchResultByIndex = steps.person.selectAffiliatedSocietySearchResultByIndex;
 
-exports.addAlternativeName = function () {
-    it('Add alternative name', function () {
-        pages.newPerson.clickAddAlternativeName();
-    });
-};
+exports.enterAddressOne = steps.person.enterAddressOne;
 
-exports.enterAlternativeFirstName = function (i, value) {
-    it('Enter alternative first name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.newPerson.typeAlternativeFirstName(i, value).then(function () {
-            var person = hash.currentPersonSlot;
+exports.enterPhone = steps.person.enterPhone;
 
-            person.alternativeFirstName = value;
+exports.enterEmail = steps.person.enterEmail;
 
-            if (person.presentationName) {
-                return;
-            }
-
-            if (person.alternativeLastName) {
-                person.alternativeName = person.alternativeLastName + ', ' + value;
-            }
-            else {
-                person.alternativeName = value;
-            }
-        });
-    });
-};
-
-exports.enterAlternativeLastName = function (i, value) {
-    it('Enter alternative last name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.newPerson.typeAlternativeLastName(i, value).then(function () {
-            var person = hash.currentPersonSlot;
-
-            person.alternativeLastName = value;
-
-            if (person.presentationName) {
-                return;
-            }
-
-            if (person.alternativeFirstName) {
-                person.alternativeName = value + ', ' + person.alternativeFirstName;
-            } else {
-                person.alternativeName = value;
-            }
-        });
-    });
-};
-
-exports.enterAlternativeCreditsName = function (i, value) {
-    it('Enter alternative credits name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.newPerson.typeAlternativeCreditsName(i, value).then(function () {
-            hash.currentPersonSlot.alternativeCreditsName = value;
-        });
-    });
-};
-
-exports.enterAlternativeSuisaIpiNumber = function (i, value) {
-    it('Enter alternative Siosa Ipi name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.newPerson.typeAlternativeSuisaIpiNumber(i, value).then(function () {
-            hash.currentPersonSlot.alternativeSuisaIpiNumber = value;
-        });
-    });
-};
-
-exports.enterSuisaIpiNumber = function (value) {
-    it('Enter SUISA IPI number (' + value + ')', function () {
-        pages.newPerson.typeSuisaIpiNumber(value).then(function () {
-            hash.currentPersonSlot.ipiNumber = value;
-            hash.currentPersonSlot.suisaIpiNumber = value;
-        });
-    });
-};
-
-exports.enterAffiliatedSocietySearchTerms = function (value) {
-    it('Enter affiliated society search terms (' + value + ')', function () {
-        pages.newPerson.typeAffiliatedSocietySearchTerms(value).then(function () {
-            hash.currentPersonSlot.affiliatedSociety = value;
-        });
-    });
-};
-
-exports.selectAffiliatedSocietySearchResultByIndex = function (i) {
-    it('Select affiliated society search result #' + (i + 1), function () {
-        pages.newPerson.clickAffiliatedSocietySearchResultByIndex(i);
-    });
-};
-
-exports.enterAddressOne = function (value) {
-    it('Type Address One ' + value, function () {
-        pages.newPerson.typeIntoAddressOneInput(value).then(function () {
-            hash.currentPersonSlot.affiliatedSociety = value;
-        });
-    });
-};
+exports.clickOnPayee = steps.person.clickOnPayee;
 
 exports.enterCity = function (value) {
     it('Type City ' + value, function () {
@@ -187,22 +72,6 @@ exports.enterPostalCode = function (value) {
     it('Type Postal Code ' + value, function () {
         pages.newPerson.typeIntoPostalCodeInput(value).then(function () {
             hash.currentPersonSlot.postalCode = value;
-        });
-    });
-};
-
-exports.enterPhone = function (value) {
-    it('Type Phone ' + value, function () {
-        pages.newPerson.typeIntoPhoneInput(value).then(function () {
-            hash.currentPersonSlot.phone = value;
-        });
-    });
-};
-
-exports.enterEmail = function (value) {
-    it('Type Email ' + value, function () {
-        pages.newPerson.typeIntoEmailInput(value).then(function () {
-            hash.currentPersonSlot.email = value;
         });
     });
 };
@@ -234,3 +103,10 @@ exports.enterDateOfDeath = function (year, month, day) {
         });
     });
 };
+    
+pageStep([
+    'Add alternative name',
+    'Add address',
+    'Add phone',
+    'Add email'
+]);

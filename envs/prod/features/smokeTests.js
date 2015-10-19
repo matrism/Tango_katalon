@@ -28,8 +28,6 @@ var workData = {
     productionTitle: "TEST PRODUCTION TITLE 1429744413589291",
     includeOnWebsite: false
 };
-var firstPublisherDate = 'Sub-Publisher:\n' +
-    'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.';
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
@@ -40,39 +38,48 @@ exports.commonFeatureTags = ["smoke", "production"];
 exports.feature = [
     {
         name: 'View mode of organisation',
-        tags: ["orgs", 'view'],
+        tags: [
+            'viewOrganisationProductionTest'
+        ],
         steps: function () {
-            steps.searchSection.accessSavedOrganisationByName("BMI");
-            steps.organisation.validateCISACCode("021");
-            steps.organisation.goToPreviewRegistrationRunTab();
-            steps.organisation.waitForPreviewRegistrationRunTabToBeDisplayed();
-            steps.organisation.goToRegistrationActivityTab();
-            steps.organisation.waitForRegistrationActivityTabToBeDisplayed();
+            steps.searchSection.accessSavedOrganisationByName('BMI');
 
-            steps.searchSection.accessSavedOrganisationByName("WB MUSIC CORP.");
-            steps.organisation.validatePublisherSubRelationships(firstPublisherDate);
-        }
+            using(steps.organisationStaging, function () {
+                this.validateCisacCode('021');
+                this.goToPreviewRegistrationRunTab();
+                this.waitForPreviewRegistrationRunHeaderToBeDisplayed();
+                this.goToRegistrationActivityTab();
+                this.waitForRegistrationActivityRecordsTableToBeDisplayed();
+            });
+
+            steps.searchSection.accessSavedOrganisationByName('WB MUSIC CORP.');
+
+            steps.organisationStaging.validateSubPublisherName(
+                0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
+            );
+        },
     },
     {
-        name: "View mode of person",
-        tags: ["person", "view"],
+        name: 'View mode of person',
+        tags: [
+            'viewPersonProductionSmokeTest',
+        ],
         steps: function () {
-            steps.searchSection.accessSavedPersonByName("katy perry");
-            steps.person.validateIPI("292555933");
-            steps.person.validateAlternativeName("Katy Perry")
+            steps.searchSection.accessSavedPersonByName('katy perry');
+            steps.personStaging.validateSuisaIpiNumber('292555933');
+            steps.personStaging.validateAlternativeName(0, 'katy perry')
         }
     },
     {
         name: "Basic deal add scope",
-        tags: ["deals", "add", "scope"],
+        tags: ['addDealScopeProductionSmokeTest'],
         steps: function () {
             steps.searchSection.accessSavedDealByNumber("3");
-            steps.createDealContractPeriod.waitForDealToLoad();
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            steps.createDealScope.itAddPublisherShareWithSocietyAwardCredit();
-            // steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
-            steps.createDealScope.saveThePublisherShareSet();
+            steps.create_deal_contract_period.selectContractPeriodNumberI(1);
+            steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.create_deal_scope.itAddPublisherShareWithSocietyAwardCredit();
+            // steps.create_deal_scope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.create_deal_scope.saveThePublisherShareSet();
 
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
@@ -85,7 +92,10 @@ exports.feature = [
     },
     {
         name: "Basic work and CWR",
-        tags: ["works", "view"],
+        tags: [
+            'viewWorkProductionSmokeTest',
+            'workPreviewCwrProductionSmokeTest',
+        ],
         steps: function () {
             steps.searchSection.accessSavedWorkById("10083789");
             steps.work.goToPreviewCwrTab();
@@ -96,7 +106,7 @@ exports.feature = [
     },
     {
         name: "Basic work and rights",
-        tags: ["works", "view"],
+        tags: ['workRightsProductionSmokeTest'],
         steps: function () {
             steps.searchSection.accessSavedWorkById("015000163");
             steps.work.goToRightsTab();

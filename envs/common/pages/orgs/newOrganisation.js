@@ -22,6 +22,20 @@ exports.selectOrgType = function (type) {
     buttons.filter(pph.matchTextExact(type)).first().click();
 };
 
+exports.suisaIpiNumberInput = function() {
+    return element(by.model('modularEditModels.model.typeModel.suisaIpiNumber'));
+};
+
+exports.enterSuisaIpiNumber = function(value) {
+    var input = exports.suisaIpiNumberInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
 exports.territoryOfOperationField = function () {
     return element(by.model('modularEditModels.model.territoriesOfOperation'));
 };
@@ -398,6 +412,36 @@ exports.setStatementRecipientData = function (option, subOption) {
     subOptions.filter(pph.matchText(subOption)).first().click();
 };
 
+exports.affiliatedSocietyTypeahead = function() {
+    return element(by.model('modularEditModels.model.typeModel.affiliatedSociety'));
+};
+
+exports.affiliatedSocietySearchTermsInput = function() {
+    return exports.affiliatedSocietyTypeahead().element(by.model('$term'));
+};
+
+exports.enterAffiliatedSocietySearchTerms = function(value) {
+    var input = exports.affiliatedSocietySearchTermsInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
+exports.affiliatedSocietySearchResultOptions = function() {
+    var options = $$('.tg-typeahead__suggestions-group-item');
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
+
+    return options;
+};
+
+exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
+    return exports.affiliatedSocietySearchResultOptions().get(i).click();
+};
+
 exports.doneButton = function () {
     return $('#FORM-CONTROLS').element(by.cssContainingText('button', 'Done'));
 };
@@ -408,12 +452,14 @@ exports.expectFormToBeValid = function () {
 };
 
 exports.expectDoneButtonToBeClickable = function () {
-    var button = exports.doneButton();
-    expect(button.getAttribute('class')).toBe('btn btn-primary ng-scope');
+    expect(pph.matchesCssSelector(exports.doneButton(), '.disabled')).toBeFalsy();
 };
 
 exports.saveOrganisation = function() {
+    exports.expectDoneButtonToBeClickable();
+
     return exports.doneButton().click().then(function() {
         pages.base.waitForAjax();
+        expect(browser.getCurrentUrl()).toMatch(/#\/org\/.+$/);
     });
 };

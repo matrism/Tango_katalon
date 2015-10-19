@@ -39,38 +39,11 @@ if (pages.newPerson === undefined) {
     },
 
 
-firstNameInput : function() {
-    return element(by.model('modularEditModels.model.firstName'));
-},
-
-lastNameInput : function() {
-
-    return element(by.model('modularEditModels.model.lastName'));
-},
-
-
-
-alternativeLastNameInput : function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.lastName')
-    );
-},
-alternativeCreditsNameInput : function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.creditsName')
-    );
-},
-alternativeSuisaIpiInput: function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.suisaIpiNumber')
-    );
-},
 
 
 creditsNameInput : function() {
     return $("#primaryCreditsName");
 },
-
 dateOfDeathYear : function() {
     return element(by.model('date.year'));
 },
@@ -80,208 +53,58 @@ dateOfDeathMonth : function() {
 dateOfDeathDay : function() {
     return element(by.model('date.day'));
 },
-
-addressOneInput : function () {
-
-    return $("#address1-0");
-},
 cityInput : function () {
     return $("#city-0");
 },
 regionInput : function () {
-
     return $("#region-0");
 },
 postalCodeInput : function () {
-
     return $("#zipCode-0");
-},
-phoneInput : function () {
-
-    return element(by.model('phone.number'));
-},
-emailInput : function () {
-    return element(by.model('email.address'));
-},
-
-
-
-
-
-
-
-
-
-
-typeFirstName : function(value) {
-
-    var element = this.firstNameInput();
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-},
-
-
-
-typeLastName : function(value) {
-//console.log("ATATA");
-//    return "atata";
-    var element = this.lastNameInput();
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-},
-
-
-presentationNameInput : function() {
-    return element(by.model('modularEditModels.model.fullName'));
-},
-
-typePresentationName : function(value) {
-    var element = this.presentationNameInput();
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
 },
 
 addAlternativeNameButton : function() {
     return element(by.cssContainingText('button', 'Add Alternative Name'));
 },
-
-
-clickAddAlternativeName : function() {
+addAddressButton : function() {
+    return element(by.cssContainingText('button', 'Add Address'));
+},
+addPhoneButton : function() {
+    return element(by.cssContainingText('button', 'Add Phone'));
+},
+addEmailButton : function() {
+    return element(by.cssContainingText('button', 'Add Email'));
+},
+addAlternativeName : function() {
     var element = this.addAlternativeNameButton();
     pages.base.scrollIntoView(element);
     return element.click();
 },
-
-alternativeNameContainers : function() {
-    return element.all(by.repeater(
-        'alternativeName in dataHolder.person.alternativeNames.getAll()'
-    ));
-},
-
-alternativeNameContainer : function(i) {
-    return this.alternativeNameContainers().get(i);
-},
-
-alternativeFirstNameInput : function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.firstName')
-    );
-},
-
-
-typeAlternativeFirstName : function(i, value) {
-    var element = this.alternativeFirstNameInput(i);
+addAddress : function() {
+    var element = this.addAddressButton();
     pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
+    return element.click();
 },
-
-
-
-
-typeAlternativeLastName : function(i, value) {
-    var element = this.alternativeLastNameInput(i);
+addPhone : function() {
+    var element = this.addPhoneButton();
     pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
+    return element.click();
 },
-typeAlternativeCreditsName : function(i,value) {
-    var element = this.alternativeCreditsNameInput(i);
+addEmail : function() {
+    var element = this.addEmailButton();
     pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-},
-typeAlternativeSuisaIpiNumber: function(i,value) {
-    var element = this.alternativeSuisaIpiInput(i);
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-},
-
-suisaIpiNumberInput : function() {
-    return element(by.model('modularEditModels.model.suisaIpiNumber'));
+    return element.click();
 },
 
 
 
-
-
-
-
-
-typeSuisaIpiNumber : function(value) {
-    var element = this.suisaIpiNumberInput();
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-},
-
-affiliatedSocietySearchInput : function() {
-    return element(by.model('modularEditModels.model.society')).element(
-        by.model('$term')
-    );
-},
-
-
-
-typeAffiliatedSocietySearchTerms : function(value) {
-    var element = this.affiliatedSocietySearchInput();
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-},
-
-affiliatedSocietySearchResults : function() {
-    return $$('.tg-typeahead__suggestions-group-item');
-},
-
-
-affiliatedSocietySearchResult : function(i) {
-    return this.affiliatedSocietySearchResults().get(i);
-},
-
-clickAffiliatedSocietySearchResultByIndex : function(i) {
-    browser.sleep(200);
-    pages.base.waitForAjax();
-    return this.affiliatedSocietySearchResult(i).click();
-},
 
 pageFooter : function() {
     return $('#FORM-CONTROLS');
 },
-typeIntoAddressOneInput : function(value) {
-
-    return this.addressOneInput().sendKeys(value);
-},
-typeIntoCityInput : function(value) {
-
-    return this.cityInput().sendKeys(value);
-},
-
 doneButton : function() {
     return $(".btn.btn-primary.ng-scope");
 },
-typeIntoRegionInput : function(value) {
-
-    return this.regionInput().sendKeys(value);
-},
-typeIntoPostalCodeInput : function(value) {
-
-    return this.postalCodeInput().sendKeys(value);
-},
-typeIntoPhoneInput : function(value) {
-
-    return this.phoneInput().sendKeys(value);
-},
-typeIntoEmailInput : function(value) {
-
-    return this.emailInput().sendKeys(value);
-},
-
-
 
 expectDoneButtonToBeEnabled : function() {
     expect(pph.matchesCssSelector(this.doneButton(), '.disabled')).toBeFalsy();
@@ -299,6 +122,18 @@ validateSaveRedirection : function() {
     expect(browser.getCurrentUrl()).toMatch(/#\/person\/.+$/);
 },
 
+typeIntoRegionInput : function(value) {
+
+    return this.regionInput().sendKeys(value);
+},
+typeIntoPostalCodeInput : function(value) {
+
+    return this.postalCodeInput().sendKeys(value);
+},
+typeIntoCityInput : function(value) {
+
+    return this.cityInput().sendKeys(value);
+},
 typeCreditsName : function(value) {
     return this.creditsNameInput().sendKeys(value);
 },
