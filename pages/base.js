@@ -398,6 +398,26 @@ exports.validateDownloadFileCount = function(value) {
     expect(exports.downloadDirectoryEntries().length).toBe(value);
 };
 
+exports.openNewTab = function (url) {
+    function ptorOpenNewTab(url) {
+        function openTab() {
+            $('#TAT_TEMP_ELEMENT').remove();
+            window.open(url);
+        };
+
+        $('<div id="TAT_TEMP_ELEMENT">.</div>').appendTo('body').on('click', openTab);
+    };
+
+    browser.executeScript(ptorOpenNewTab, url);
+    $('#TAT_TEMP_ELEMENT').click();
+};
+
+exports.duplicateTab = function () {
+    browser.getCurrentUrl().then(function(url){
+        exports.openNewTab(url);
+    });
+};
+
 exports.switchToTab = function(methodSpecifier) {
     return methodSpecifierCall(exports.switchToTab, methodSpecifier);
 };
@@ -406,18 +426,18 @@ exports.switchToTab.index = function(i) {
     return browser.getAllWindowHandles().then(function(handles) {
         browser.switchTo().window(handles[i]);
     }).then(function() {
-        return browser.wait(protractor.ExpectedConditions.visibilityOf($('body')));
+        return browser.wait(ExpectedConditions.visibilityOf($('body')));
     });
 };
 
 exports.closeCurrentTabAndSwitchTo = function(methodSpecifier) {
-    var tabCountThen;
-
-    browser.getAllWindowHandles().then(function(handles) {
-        tabCountThen = handles.length;
-    });
-
     browser.driver.close();
 
     return exports.switchToTab(methodSpecifier);
+};
+
+exports.closeTabByIndex = function (index) {
+    exports.switchToTab(index);
+    browser.driver.close();
+    exports.switchToTab(index-1);
 };

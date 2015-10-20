@@ -68,9 +68,9 @@ if (steps.organisation === undefined) {
 
 
                 }
-            )
-        }
-        ,
+            );
+        },
+
         openIncomeProviderEdit: function () {
 
 
@@ -85,8 +85,8 @@ if (steps.organisation === undefined) {
             });
 
 
-        }
-        ,
+        },
+
         saveIncomeProviders: function () {
 
             it("Save edited Income Providers", function () {
@@ -94,7 +94,7 @@ if (steps.organisation === undefined) {
                 pages.organisation.clickSaveIncomeProviderButton();
 
 
-            })
+            });
 
         },
 
@@ -103,7 +103,7 @@ if (steps.organisation === undefined) {
 
                 pages.organisation.waitForSaveToComplete();
 
-            })
+            });
 
 
         },
@@ -113,18 +113,16 @@ if (steps.organisation === undefined) {
                 pages.organisation.selectIncomeFileType(fileType);
 
 
-            })
+            });
+        },
 
-
-        }
-        ,
         executeRegistrationRun: function (value) {
             it("Execute Registration Run", function () {
                 pages.organisation.registrationCanBeRun().then(function (isVisible) {
                     //  console.log("Is visible"+isVisible);
 
 
-                    if (isVisible.toString() == "true") {
+                    if (isVisible.toString() == 'true') {
 
 
                         pages.organisation.clickExecuteRegistrationRunButton();
@@ -167,21 +165,20 @@ if (steps.organisation === undefined) {
                     }
 
 
-                })
-            })
-        }
-        ,
+                });
+            });
+        },
+
         goToPreviewRegistrationRunTab: function () {
             it("Go to Preview Registration Run Tab", function () {
                 pages.organisation.clickPreviewRegistrationRunTab();
-            })
-        }
+            });
+        },
 
-        ,
         viewValidationErrors: function () {
             it("View validation errors", function () {
                 pages.organisation.clickValidationErrorsButton();
-            })
+            });
         },
         downloadCrFile:function()
         {
@@ -190,41 +187,61 @@ if (steps.organisation === undefined) {
             });
 
         },
+
+        clearDownloadFolder: function (downloadFilepath) {
+            it("Clear Download Folder", function () {
+                pages.organisation.deleteFilesFromDownloadFolder(downloadFilepath);
+            });
+        },
+
+        downloadFile:function() {
+            it("Download File", function () {
+                pages.organisation.clickDownloadFileButton();
+                pages.organisation.waitForFileToDownload();
+
+            });
+        },
+        validateFilesDownloaded: function (downloadFilepath) {
+            it("Files Downloaded Successfully", function () {
+
+                expect(pages.organisation.fileDownloadedSuccesfully(downloadFilepath)).toBeTruthy();
+            });
+        },
         goToRegistrationActivityTab: function () {
             it("Go to Registration ActivityTab", function () {
                 pages.organisation.clickRegistrationActivityTab();
-            })
+            });
 
         },
         goToGeneralTab: function () {
             it("Go to General Tab on Organization", function () {
                 pages.organisation.clickGeneralTab();
-            })
+            });
         },
         waitForRegistrationActivityRecordsTableToBeDisplayed: function () {
             it("Wait For Reg Tab Header To be Displayed", function () {
                 pages.organisation.waitForActivityRecordsTableHeader();
-            })
+            });
         },
         waitForGeneralTabToBeDisplayed: function () {
             it("Wait For General Tab To be Displayed", function () {
                 pages.organisation.waitForEditorGeneral();
-            })
+            });
         },
         waitForPreviewRegistrationRunHeaderToBeDisplayed: function () {
             it("Wait For Registration Run Tab To be Displayed", function () {
                 pages.organisation.waitForRegRunHeader();
-            })
+            });
         },
         waitForRegActivityElement: function () {
             it("Wait For General Tab To be Displayed", function () {
                 pages.organisation.waitForElementWork();
-            })
+            });
         },
         waitForOrgDisappear: function () {
             it("Wait For Org to disappear", function () {
                 pages.organisation.waitForOrgToBeInvisible();
-            })
+            });
         },
         saveRegActivityLastEvent: function () {
             it("Save Last Event Displayed On Registration Activity Page", function () {
@@ -284,13 +301,13 @@ if (steps.organisation === undefined) {
                 );
 
 
-            })
+            });
 
         },
         saveMultipleELemNodesTest: function () {
             it("Save Elem Nodes Test", function () {
                 pages.organisation.testMultipleElements();
-            })
+            });
 
         },
         saveOrganisationDeliveryMethods: function () {
@@ -443,27 +460,27 @@ if (steps.organisation === undefined) {
                     });
 
 
-            })
+            });
         },
         verifyThatWorkIsDelivered: function () {
             it("Verify Work has delivered status", function () {
                 expect(pages.organisation.workHasDeliveredStatus()).toBe("Delivered");
-            })
+            });
         },
         checkThatAllDeliviriesAreDelivered: function () {
             it("Verify That All inner deliviries are delivered", function () {
                 pages.organisation.clickLatestWork();
                 expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
-            })
+            });
         },
 
         selectCustomRegistrationRun: function (value) {
             it("Select custom registration run " + value, function () {
                 pages.organisation.clickCustomWorksButton();
                 pages.organisation.selectValueFromPopupRegRun(value);
-            })
-        }
-        ,
+            });
+        },
+
         pause: function () {
 
 
@@ -478,13 +495,13 @@ if (steps.organisation === undefined) {
             it("Go to new organisation page", function () {
                 pages.organisation.open();
 
-            })
+            });
         },
         setOrganisationName: function (value) {
             it("Set organisation name to " + value, function () {
 
                 pages.organisation.typeOrganisationName(value);
-            })
+            });
         },
         setTerritoryOfOperation: function (value) {
             it("Set territory of operation to " + value, function () {
@@ -494,7 +511,7 @@ if (steps.organisation === undefined) {
 
                 }
 
-            })
+            });
         },
         setRandomSuisaIPI: function () {
             it("Set random suisa IPI ", function () {
@@ -505,21 +522,21 @@ if (steps.organisation === undefined) {
                 //  });
 
 
-            })
+            });
         },
         setAffiliatedSociety: function (value) {
             it("Set affiliated society  to " + value, function () {
 
                 pages.organisation.selectAffiliatedSocietyNumber(value);
 
-            })
+            });
         },
         setPublisherType: function (value) {
             it("Set publisher type to  " + value, function () {
 
                 pages.organisation.clickPublisherType(value);
 
-            })
+            });
 
         },
         saveOrganisation: function () {
@@ -527,7 +544,7 @@ if (steps.organisation === undefined) {
 
                 pages.organisation.clickSaveOrganisationButton();
 
-            })
+            });
         },
         validateSavedOrganisationIsDisplayed: function () {
             it("Validate Saved Organisation Is Displayed ", function () {
@@ -545,8 +562,17 @@ if (steps.organisation === undefined) {
 
             });
         },
-    }
-    ;
+
+        validatePublisherSubRelationships: function (firstPublisherDate) {
+
+            it("Validate Publisher Sub Relationships", function () {
+
+
+                expect(pages.organisation.getFirstSubPublisherData()).toBe(firstPublisherDate);
+
+            });
+        }
+    };
 }
 
 module.exports = steps.organisation;
@@ -577,6 +603,8 @@ pageStep([
         'Delete income file type',
         'Enter income file type search terms',
         'Select income file type search result by index',
+        'Check or add income file type',
+        'Expect income type mappings to be valid',
 
         ['Income Type Mapping', [
             'Delete row',
@@ -586,6 +614,8 @@ pageStep([
             'Select income file type search result by index',
             'Enter Tango income type search terms',
             'Select Tango income type search result by index',
+            'Add if not present',
+            'Add if none match'
         ]],
 
         'Save section',
