@@ -3,11 +3,11 @@
 var using = require('../../../../helpers/fnutils').using,
     _ = require('lodash');
 
-exports.beforeFeature = [
-    [steps.login.itLogin]
-];
+exports.commonFeatureTags = ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'];
 
-exports.commonFeatureTags = ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'],
+exports.beforeFeature = function () {
+    steps.login.itLogin();
+};
 
 exports.breakageDescription = (
     'Though only unstable, this test takes a long time to run and may hang ' +
@@ -30,7 +30,7 @@ exports.feature = [
                 this.selectProcessingTerritory('Chile');
                 this.selectIncomeProvider('FABER MUSIC LTD');
                 this.selectFileFormat('FABER SALES');
-                this.selectFile('../../data/fabersales_tiny_TAT.txt');
+                this.selectFile('../data/fabersales_tiny_TAT.txt');
                 this.setStatementDistributionPeriodStart('2014', '09');
                 this.setStatementDistributionPeriodEnd('2014', '09');
                 this.setExpectedFileAmount(fileAmount);
@@ -51,7 +51,7 @@ exports.feature = [
                 this.expectFileNetAmountToBe(fileAmount);
 
                 this.openFirstGeneratedStatement();
-                steps.base.switchToTabByIndex(1);
+                steps.base.switchToTab(1);
                 this.expectToBeRedirectedToRoyaltyStatements();
                 this.expectSummaryByTypeToBe('Folio Sales', fileAmount);
                 steps.base.closeTabByIndex(1);
@@ -65,7 +65,7 @@ exports.feature = [
         name: 'Upload EDI file - Sanity Test',
         tags: ['uploadEDIFile', 'sanityTest', 'uploadEDIFileSanity'],
         steps: function(){
-            var files = require('../../data/ediFileSanity.json'),
+            var files = require('../data/ediFileSanity.json'),
                 incomeProviders,
                 fileDefaults = {
                     currency: 'GBP',
@@ -158,7 +158,7 @@ exports.feature = [
                     this.expectFileNetAmountToBe(file.amount);
 
                     this.openFirstGeneratedStatement();
-                    this.switchToTabByIndex(1);
+                    steps.base.switchToTab(1);
                     this.expectToBeRedirectedToRoyaltyStatements();
                     this.expectStatementFieldToBe('Statement Distribution Period', '2014-02 to 2014-02');
                     this.expectStatementFieldToBe('Exchange Rate', '1 CZK to 1 CZK');
@@ -202,7 +202,7 @@ exports.feature = [
                     this.expectFileNetAmountToBe(file.amount);
 
                     this.openFirstGeneratedStatement();
-                    this.switchToTabByIndex(1);
+                    steps.base.switchToTab(1);
                     this.expectToBeRedirectedToRoyaltyStatements();
                     this.expectStatementFieldToBe('Statement Distribution Period', '2014-02 to 2014-02');
                     this.expectStatementFieldToBe('Exchange Rate', '1 USD to 1 USD');
@@ -287,7 +287,7 @@ exports.feature = [
                     this.clickSaveButton();
 
                     this.openFirstGeneratedStatement();
-                    this.switchToTabByIndex(1);
+                    steps.base.switchToTab(1);
 
                     // STATEMENT
                     this.expectToBeRedirectedToRoyaltyStatements();
@@ -422,6 +422,5 @@ exports.feature = [
 
             steps.base.sleep(10000);
         }
-
     }
 ];

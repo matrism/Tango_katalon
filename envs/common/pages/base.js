@@ -6,6 +6,7 @@ var pph = require("../../../helpers/pph");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 var config = require('../../../configs/protractor-conf');
+var methodSpecifierCall = require('../../../helpers/methodSpecifierCall');
 
 exports = module.exports = pages.base = new ftf.pageObject ({
 	locators: {
@@ -15,6 +16,21 @@ exports = module.exports = pages.base = new ftf.pageObject ({
 exports.open = function() {
     browser.get(_tf_config.urls.app_url);
     exports.waitForAjax();
+};
+
+exports.modalContainer = function() {
+    return $('body > .modal');
+};
+
+exports.waitUntilModalAnimationFinishes = function() {
+    var container = exports.modalContainer();
+
+    browser.wait(function() {
+        return pph.and(
+            container.isPresent(),
+            pph.matchesCssSelector(container, ':not(.animate)')
+        );
+    });
 };
 
 exports.modalHeading = function() {
@@ -403,15 +419,26 @@ exports.duplicateTab = function () {
     });
 };
 
-exports.switchToTabByIndex = function (index) {
-    browser.getAllWindowHandles().then(function (handles) {
-        var newWindowHandle = handles[index];
-        browser.switchTo().window(newWindowHandle);
+exports.switchToTab = function(methodSpecifier) {
+    return methodSpecifierCall(exports.switchToTab, methodSpecifier);
+};
+
+exports.switchToTab.index = function(i) {
+    return browser.getAllWindowHandles().then(function(handles) {
+        browser.switchTo().window(handles[i]);
+    }).then(function() {
+        return browser.wait(ExpectedConditions.visibilityOf($('body')));
     });
 };
 
-exports.closeTabByIndex = function (index) {
-    exports.switchToTabByIndex(index);
+exports.closeCurrentTabAndSwitchTo = function(methodSpecifier) {
     browser.driver.close();
-    exports.switchToTabByIndex(index-1);
+
+    return exports.switchToTab(methodSpecifier);
+};
+
+exports.closeTabByIndex = function (index) {
+    exports.switchToTab(index);
+    browser.driver.close();
+    exports.switchToTab(index-1);
 };

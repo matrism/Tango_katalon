@@ -326,19 +326,6 @@ exports.expectStatementValuesToBe = function () {
     expect(statements.$$('.pull-right').getText()).toEqual(args);
 };
 
-exports.switchToTabByIndex = function (index) {
-    browser.getAllWindowHandles().then(function (handles) {
-        var newWindowHandle = handles[index];
-        browser.switchTo().window(newWindowHandle);
-    });
-};
-
-exports.closeTabByIndex = function (index) {
-    exports.switchToTabByIndex(index);
-    browser.driver.close();
-    exports.switchToTabByIndex(index-1);
-};
-
 exports.expectToBeRedirectedToRoyaltyStatements = function () {
     var uploadHistoryTitle = element(by.cssContainingText('#RECORD-HEADER h1', 'ROYALTY STATEMENTS'));
     pages.base.waitForAjax();

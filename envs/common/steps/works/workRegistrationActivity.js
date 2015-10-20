@@ -1,29 +1,23 @@
 'use strict';
 
+var pageStep = require('../../../../helpers/basicPageStep');
+
 steps.workRegistrationActivity = exports;
 
-exports.validateActivitiesGroupRegistrationName = function(i, value) {
-    it(
-        'Activities group #' + (i + 1) + ' - ' +
-        'Validate registration name (' + value + ')', function() {
-            pages.workRegistrationActivity.validateActivitiesGroupRegistrationName(
-                i, value
-            );
-        }
-    );
-};
+pageStep([
+    ['Activity Group', [
+        'Find',
+        'Validate recipient name',
+        'Go to recipient page',
+        'Toggle blind',
 
-exports.toggleActivitiesGroupContainer = function(i) {
-    it('Activities group #' + (i + 1) + ' - Toggle container', function() {
-        pages.workRegistrationActivity.toggleActivitiesGroupContainer(i);
-    });
-};
-
-exports.expectActivityToBeScheduled = function(groupIndex, i) {
-    it(
-        'Activities group #' + (groupIndex + 1) + ', activity #' + (i + 1) + ' - ' +
-        'Expect activity to be scheduled', function() {
-            pages.workRegistrationActivity.expectActivityToBeScheduled(groupIndex, i);
-        }
-    );
-};
+        ['Events', [
+            'Validate event count',
+            'Find',
+            'Validate status',
+            'Wait until any event status becomes',
+            'Toggle blind',
+            'Store file name in test variable'
+        ]]
+    ]],
+]);

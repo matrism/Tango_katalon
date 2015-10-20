@@ -23,6 +23,8 @@ global.pages = {};
 global.steps = {};
 global.hash = {};
 
+hash.testVariables = {};
+
 require('../helpers/services_helper');
 
 global.systemConfig = global._tf_config._system_;

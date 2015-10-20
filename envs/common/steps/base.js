@@ -195,5 +195,5 @@ exports.validateDownloadFileCount = function(value) {
 
 pageStep('Open new tab');
 pageStep('Duplicate tab');
-pageStep('Switch to tab by index');
+pageStep('Switch to tab');
 pageStep('Close tab by index');
