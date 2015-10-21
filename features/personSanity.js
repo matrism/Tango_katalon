@@ -35,8 +35,20 @@ exports.feature = [
                 this.selectAffiliatedSocietySearchResultByIndex(0);
                 this.addAddress();
                 this.enterAddressOne(0, 'Abbey Road');
+                this.enterAddressTwo(0, 'Abbey Road 2');
+                this.enterAddressThree(0, 'Abbey Road 3');
+                this.enterCity(0, 'London');
+                this.enterRegion(0, 'Utah');
+                this.enterPostalCode(0, '13323');
+                this.selectCountry(0, 'United Kingdom');
                 this.addAddress();
                 this.enterAddressOne(1, 'Alternative Abbey Road');
+                this.enterAddressTwo(1, 'Alternative Abbey Road 2');
+                this.enterAddressThree(1, 'Alternative Abbey Road 3');
+                this.enterCity(1, 'London');
+                this.enterRegion(1, 'Utah');
+                this.enterPostalCode(1, '13323');
+                this.selectCountry(1, 'United Kingdom');
                 if(!stagingPerson) {
                     this.addPhone();
                 }

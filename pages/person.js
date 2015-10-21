@@ -56,6 +56,45 @@ exports.addressOneInput = function (i) {
         by.model('modularEditModels.model.address1')
     );
 };
+exports.addressTwoInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('modularEditModels.model.address2')
+    );
+};
+exports.addressThreeInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('modularEditModels.model.address3')
+    );
+};
+exports.cityInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('modularEditModels.model.cityTown')
+    );
+};
+exports.regionInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('modularEditModels.model.region')
+    );
+};
+exports.postalCodeInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('modularEditModels.model.postalCode')
+    );
+};
+exports.countrySelector = function (i) {
+    return this.addressContainer(i).$('.e2e-contact-address-country');
+};
+exports.countryDropdownButton = function (i) {
+    return exports.countrySelector(i).$$('button').get(0); 
+};
+exports.countryDropdown = function (i) {
+    return exports.countrySelector(i).$('ul'); 
+};
+exports.countryOption = function (i, value) {
+    return exports.countryDropdown(i).element(
+        by.cssContainingText('span', value)
+    );
+};
 exports.phoneInput = function (i) {
     return this.phoneContainer(i).element(
         by.model('modularEditModels.model.number')
@@ -371,6 +410,45 @@ exports.typeIntoAddressOneInput = function(i, value) {
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
+};
+exports.typeIntoAddressTwoInput = function(i, value) {
+    var element = this.addressTwoInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoAddressThreeInput = function(i, value) {
+    var element = this.addressThreeInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoCityInput = function(i, value) {
+    var element = this.cityInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoRegionInput = function(i, value) {
+    var element = this.regionInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoPostalCodeInput = function(i, value) {
+    var element = this.postalCodeInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.clickOnCountryDropdownButton = function(i) {
+    var dropdownButton = this.countryDropdownButton(i);
+    pages.base.scrollIntoView(dropdownButton);
+    return dropdownButton.click();
+};
+exports.selectCountry = function(i, value) {
+    exports.clickOnCountryDropdownButton(i);
+    return this.countryOption(i, value).click();
 };
 exports.typeIntoPhoneInput = function(i, value) {
     var element = this.phoneInput(i);

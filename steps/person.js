@@ -189,6 +189,60 @@ exports.enterAddressOne = function (i, value) {
     });
 };
 
+exports.enterAddressTwo = function (i, value) {
+    it('Enter Address Two #' + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoAddressTwoInput(i, value).then(function () {
+            hash.currentPersonSlot.addressTwo = hash.currentPersonSlot.addressTwo || [];
+            hash.currentPersonSlot.addressTwo[i] = value;
+        });
+    });
+};
+
+exports.enterAddressThree = function (i, value) {
+    it('Enter Address Three #' + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoAddressThreeInput(i, value).then(function () {
+            hash.currentPersonSlot.addressThree = hash.currentPersonSlot.addressThree || [];
+            hash.currentPersonSlot.addressThree[i] = value;
+        });
+    });
+};
+
+exports.enterCity = function (i, value) {
+    it('Enter City #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoCityInput(i, value).then(function () {
+            hash.currentPersonSlot.city = hash.currentPersonSlot.city || [];
+            hash.currentPersonSlot.city = value;
+        });
+    });
+};
+
+exports.enterRegion = function (i, value) {
+    it('Enter Region #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoRegionInput(i, value).then(function () {
+            hash.currentPersonSlot.region = hash.currentPersonSlot.region || [];
+            hash.currentPersonSlot.region = value;
+        });
+    });
+};
+
+exports.enterPostalCode = function (i, value) {
+    it('Enter Postal Code #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoPostalCodeInput(i, value).then(function () {
+            hash.currentPersonSlot.postalCode = hash.currentPersonSlot.postalCode || [];
+            hash.currentPersonSlot.postalCode = value;
+        });
+    });
+};
+
+exports.selectCountry = function (i, value) {
+    it('Select Country #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.selectCountry(i, value).then(function () {
+            hash.currentPersonSlot.country = hash.currentPersonSlot.country || [];
+            hash.currentPersonSlot.country = value;
+        });
+    });
+};
+
 exports.enterPhone = function (i, value) {
     it('Enter Phone #' + (i + 1) + ' (' + value + ')', function () {
         pages.person.typeIntoPhoneInput(i, value).then(function () {
@@ -329,7 +383,6 @@ exports.clickOnEnterPersonSearchTerms = function (value) {
     });
 };
 exports.searchForPersonUsingPreviouslyCreated = function (field) {
-    console.log(changeCase.camelCase);
     it('Search for person using previously created ' + field, function () {
         pages.person.enterPersonSearchTerms(
             hash.currentPersonSlot[[field].map(changeCase.camelCase)]

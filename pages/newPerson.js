@@ -54,15 +54,6 @@ dateOfDeathMonth : function() {
 dateOfDeathDay : function() {
     return element(by.model('date.day'));
 },
-cityInput : function () {
-    return $("#city-0");
-},
-regionInput : function () {
-    return $("#region-0");
-},
-postalCodeInput : function () {
-    return $("#zipCode-0");
-},
 
 addAlternativeNameButton : function() {
     return element(by.cssContainingText('button', 'Add Alternative Name'));
@@ -123,18 +114,6 @@ validateSaveRedirection : function() {
     expect(browser.getCurrentUrl()).toMatch(/#\/person\/.+$/);
 },
 
-typeIntoRegionInput : function(value) {
-
-    return this.regionInput().sendKeys(value);
-},
-typeIntoPostalCodeInput : function(value) {
-
-    return this.postalCodeInput().sendKeys(value);
-},
-typeIntoCityInput : function(value) {
-
-    return this.cityInput().sendKeys(value);
-},
 typeCreditsName : function(value) {
     return this.creditsNameInput().sendKeys(value);
 },
