@@ -3,6 +3,7 @@
 var pages_path = _tf_config._system_.path_to_pages,
     steps_path = _tf_config._system_.path_to_steps,
     pph = require('../helpers/pph'),
+    changeCase = require('change-case'),
     pageStep = require('../helpers/basicPageStep');
 
 steps.person = exports;
@@ -327,16 +328,19 @@ exports.clickOnEnterPersonSearchTerms = function (value) {
         pages.person.enterPersonSearchTerms(value);
     });
 };
-exports.searchForPersonUsingPreviouslyCreatedIpiNumber = function () {
-    it('Search for person using previously created IPI Number', function () {
+exports.searchForPersonUsingPreviouslyCreated = function (field) {
+    console.log(changeCase.camelCase);
+    it('Search for person using previously created ' + field, function () {
         pages.person.enterPersonSearchTerms(
-            hash.currentPersonSlot.ipiNumber
+            hash.currentPersonSlot[[field].map(changeCase.camelCase)]
         );
+        pages.base.waitForAjax();
     });
 };
 exports.clickPersonSearchMatch = function (i) {
     it('Click person search match #' + (i + 1), function () {
         pages.person.clickPersonSearchMatch(i);
+        pages.base.waitForAjax();
     });
 };
 exports.validateIpiNumber = function () {

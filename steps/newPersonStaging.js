@@ -228,13 +228,6 @@ exports.clickOnEnterPersonSearchTerms = function (value) {
         page.enterPersonSearchTerms(value);
     });
 };
-exports.searchForPersonUsingPreviouslyCreatedIpiNumber = function () {
-    it('Search for person using previously created IPI Number', function () {
-        page.enterPersonSearchTerms(
-            hash.currentPersonSlot.ipiNumber
-        );
-    });
-};
 exports.clickPersonSearchMatch = function (i) {
     it('Click person search match #' + (i + 1), function () {
         page.clickPersonSearchMatch(i);

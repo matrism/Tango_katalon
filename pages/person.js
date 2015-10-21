@@ -167,10 +167,12 @@ exports.savePaymentInfo = function() {
     return exports.getSaveButton($('.e2e-payee'));
 };
 
-exports.internalIpiNumber = function() {
-    var element = exports.internalIpiNumberBinding();
+exports.getBindingElementText = function(element) {
     pages.base.scrollIntoView(element);
     return element.getText();
+};
+exports.internalIpiNumber = function() {
+    return exports.getBindingElementText(exports.internalIpiNumberBinding());
 };
 exports.getSuisaIPI = function() {
     browser.wait(ExpectedConditions.visibilityOf(exports.suisaIPINumber()));
@@ -179,130 +181,89 @@ exports.getSuisaIPI = function() {
     return element.getText();
 };
 exports.getName = function() {
-    var element = exports.nameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.nameElement());
 };
 exports.getFirstName = function() {
-    var element = exports.firstNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.firstNameElement());
 };
 exports.getLastName = function() {
-    var element = exports.lastNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.lastNameElement());
 };
 exports.getAlternativeName = function(i) {
-    var element = exports.alternativeNameElement(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.alternativeNameElement(i));
 };
 exports.getAlternativeFirstName = function() {
-    var element = exports.alternativeFirstNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.alternativeFirstNameElement());
 };
 exports.getAlternativeLastName = function() {
-    var element = exports.alternativeLastNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.alternativeLastNameElement());
 };
 exports.getAffiliatedSociety = function() {
-    var element = exports.affiliatedSocietyElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.affiliatedSocietyElement());
 };
 exports.getAddressOne = function(i) {
-    var element = exports.addressOneElement().get(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.addressOneElement().get(i));
 };
 exports.getPhone = function(i) {
-    var element = exports.phoneElement().get(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.phoneElement().get(i));
 };
 exports.getEmail = function(i) {
-    var element = exports.emailElement().get(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.emailElement().get(i));
 };
 exports.getPayee = function() {
-    var element = exports.payeeElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingElementText(exports.payeeElement());
 };
 
-exports.clickOnEditPrimaryName = function() {
-    var element = exports.editNameElement();
+exports.clickOnModularEditButton = function(element) {
     pages.base.scrollIntoView(element);
     return element.click();
+};
+exports.clickOnModularSaveButton = function(element) {
+    pages.base.scrollIntoView(element);
+    element.click();
+    pages.base.waitForAjax();
+};
+exports.clickOnEditPrimaryName = function() {
+    return exports.clickOnModularEditButton(exports.editNameElement());
 };
 exports.clickOnSavePrimaryName = function() {
-    var element = exports.saveNameElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularSaveButton(exports.saveNameElement());
 };
 exports.clickOnEditAlternativeName = function() {
-    var element = exports.editAlternativeNameElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularEditButton(exports.editAlternativeNameElement());
 };
 exports.clickOnSaveAlternativeName = function() {
-    var element = exports.saveAlternativeNameElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularSaveButton(exports.saveAlternativeNameElement());
 };
 exports.clickOnEditSocietyAffiliation = function() {
-    var element = exports.editSocietyAffiliationElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularEditButton(exports.editSocietyAffiliationElement());
 };
 exports.clickOnSaveSocietyAffiliation = function() {
-    var element = exports.saveSocietyAffiliationElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularSaveButton(exports.saveSocietyAffiliationElement());
 };
 exports.clickOnEditAddress = function(i) {
-    var element = exports.editAddressElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularEditButton(exports.editAddressElement(i));
 };
 exports.clickOnSaveAddress = function(i) {
-    var element = exports.saveAddressElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularSaveButton(exports.saveAddressElement(i));
 };
 exports.clickOnEditPhone = function(i) {
-    var element = exports.editPhoneElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularEditButton(exports.editPhoneElement(i));
 };
 exports.clickOnSavePhone = function(i) {
-    var element = exports.savePhoneElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularSaveButton(exports.savePhoneElement(i));
 };
 exports.clickOnEditEmail = function(i) {
-    var element = exports.editEmailElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularEditButton(exports.editEmailElement(i));
 };
 exports.clickOnSaveEmail = function(i) {
-    var element = exports.saveEmailElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularSaveButton(exports.saveEmailElement(i));
 };
 exports.clickOnEditPaymentInformation = function() {
-    var element = exports.editPaymentInfo();
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularEditButton(exports.editPaymentInfo());
 };
 exports.clickOnSavePaymentInformation = function() {
-    var element = exports.savePaymentInfo();
-    pages.base.scrollIntoView(element);
-    return element.click();
+    return exports.clickOnModularSaveButton(exports.savePaymentInfo());
 };
 
 exports.addressContainers = function() {

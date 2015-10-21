@@ -26,8 +26,8 @@ exports.feature = [
 
             using(steps.newPerson, function() {
                 this.goToNewPersonPage();
-                this.enterFirstName('TEST ' + randomString(0));
-                this.enterLastName('PERSON ' + randomString(0));
+                this.enterFirstName(randomString(0) + ' FIRST');
+                this.enterLastName(randomString(0) + ' LAST');
                 this.addAlternativeName();
                 this.enterAlternativeFirstName(0, 'TEST ' + randomString(0.1));
                 this.enterAlternativeLastName(0, 'PERSON ' + randomString(0.1));
@@ -67,12 +67,14 @@ exports.feature = [
         tags: [],
         steps: function() {
             steps.base.useEntityDataSlot('person', 0);
-            steps.searchSection.selectEntityType('Persons');
-            steps.person.searchForPersonUsingPreviouslyCreatedIpiNumber(); 
-            steps.base.waitForAjax();
-            steps.person.clickPersonSearchMatch(0);
-            steps.base.waitForAjax();
-            steps.person.validateIpiNumber();
+
+            ['Ipi Number', 'First Name', 'Last Name', 'Name'].forEach(function(field) {
+                steps.base.goToHomePage();
+                steps.searchSection.selectEntityType('Persons');
+                steps.person.searchForPersonUsingPreviouslyCreated(field); 
+                steps.person.clickPersonSearchMatch(0);
+                steps.person.validateIpiNumber();
+            });
         },
     },
     {
@@ -111,7 +113,6 @@ exports.feature = [
                 this.enterFirstName('TEST ' + randomString(1));
                 this.enterLastName('PERSON ' + randomString(1));
                 this.clickOnSavePrimaryName();
-                steps.base.waitForAjax();
                 this.validateFirstName();
 
                 if(!stagingPerson) {
@@ -119,7 +120,6 @@ exports.feature = [
                     this.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
                     this.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
                     this.clickOnSaveAlternativeName();
-                    steps.base.waitForAjax();
                     this.validateAlternativeFirstName();
                 }
 
@@ -127,37 +127,31 @@ exports.feature = [
                 this.enterAffiliatedSocietySearchTerms('ZAIKS');
                 this.selectAffiliatedSocietySearchResultByIndex(0);
                 this.clickOnSaveSocietyAffiliation();
-                steps.base.waitForAjax();
                 this.validateAffiliatedSociety();
 
                 this.clickOnEditAddress(0);
                 this.enterAddressOne(0, 'Abbey Road Updated');
                 this.clickOnSaveAddress(0);
-                steps.base.waitForAjax();
                 this.validateAddressOne(0);
 
                 this.clickOnEditAddress(1);
                 this.enterAddressOne(1, 'Alternative Abbey Road Updated');
                 this.clickOnSaveAddress(1);
-                steps.base.waitForAjax();
                 this.validateAddressOne(1);
 
                 this.clickOnEditPhone(0);
                 this.enterPhone(0, '23456789');
                 this.clickOnSavePhone(0);
-                steps.base.waitForAjax();
                 this.validatePhone(0);
 
                 this.clickOnEditEmail(0);
                 this.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
                 this.clickOnSaveEmail(0);
-                steps.base.waitForAjax();
                 this.validateEmail(0);
 
                 this.clickOnEditPaymentInformation();
                 this.clickOnPayee('No');
                 this.clickOnSavePaymentInformation();
-                steps.base.waitForAjax();
                 this.validatePayee();
             });
         },

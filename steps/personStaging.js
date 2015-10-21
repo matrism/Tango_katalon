@@ -1,6 +1,7 @@
 'use strict';
 
 var pageStep = require('../helpers/basicPageStep'),
+    changeCase = require('change-case'),
     page;
 
 steps.personStaging = exports;
@@ -315,16 +316,19 @@ exports.clickOnEnterPersonSearchTerms = function (value) {
         page.enterPersonSearchTerms(value);
     });
 };
-exports.searchForPersonUsingPreviouslyCreatedIpiNumber = function () {
-    it('Search for person using previously created IPI Number', function () {
-        page.enterPersonSearchTerms(
-            hash.currentPersonSlot.ipiNumber
+exports.searchForPersonUsingPreviouslyCreated = function (field) {
+    console.log(changeCase.camelCase);
+    it('Search for person using previously created ' + field, function () {
+        pages.person.enterPersonSearchTerms(
+            hash.currentPersonSlot[[field].map(changeCase.camelCase)]
         );
+        pages.base.waitForAjax();
     });
 };
 exports.clickPersonSearchMatch = function (i) {
     it('Click person search match #' + (i + 1), function () {
-        page.clickPersonSearchMatch(i);
+        pages.person.clickPersonSearchMatch(i);
+        pages.base.waitForAjax();
     });
 };
 exports.validateIpiNumber = function () {
