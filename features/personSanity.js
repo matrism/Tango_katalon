@@ -45,10 +45,10 @@ exports.feature = [
                 this.enterAddressOne(1, 'Alternative Abbey Road');
                 this.enterAddressTwo(1, 'Alternative Abbey Road 2');
                 this.enterAddressThree(1, 'Alternative Abbey Road 3');
-                this.enterCity(1, 'London');
-                this.enterRegion(1, 'Utah');
-                this.enterPostalCode(1, '13323');
-                this.selectCountry(1, 'United Kingdom');
+                this.enterCity(1, 'Alternative London');
+                this.enterRegion(1, 'Alternative Utah');
+                this.enterPostalCode(1, '13324');
+                this.selectCountry(1, 'United States');
                 if(!stagingPerson) {
                     this.addPhone();
                 }

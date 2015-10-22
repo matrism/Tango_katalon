@@ -415,17 +415,17 @@ exports.validatePayee = function() {
 };
 exports.validatePrimaryAddress = function(i) {
     it('Validate Primary Address #' + i, function () {
-        expect(pages.base.isPresentAndDisplayed(page.getPrimaryAddress(i))).toBeTruthy();
+        expect(pages.base.isPresentAndDisplayed(pages.person.getPrimaryAddress(i))).toBeTruthy();
     });
 };
 exports.validatePrimaryPhone = function(i) {
     it('Validate Primary Phone #' + i, function () {
-        expect(pages.base.isPresentAndDisplayed(page.getPrimaryPhone(i))).toBeTruthy();
+        expect(pages.base.isPresentAndDisplayed(pages.person.getPrimaryPhone(i))).toBeTruthy();
     });
 };
 exports.validatePrimaryEmail = function(i) {
     it('Validate Primary Email #' + i, function () {
-        expect(pages.base.isPresentAndDisplayed(page.getPrimaryEmail(i))).toBeTruthy();
+        expect(pages.base.isPresentAndDisplayed(pages.person.getPrimaryEmail(i))).toBeTruthy();
     });
 };
 
