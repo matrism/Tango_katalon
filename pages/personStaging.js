@@ -100,6 +100,15 @@ exports.addressOneInput = function (i) {
         by.model('address.address_1')
     );
 };
+exports.primaryAddressCheckbox = function (i) {
+    return exports.addressContainer(i).$('[ng-click="setPrimaryAddress(address);"]');
+};
+exports.primaryPhoneCheckbox = function (i) {
+    return exports.phoneContainer(i).$('[ng-click="setPrimaryPhone(phoneEdit)"]');
+};
+exports.primaryEmailCheckbox = function (i) {
+    return exports.emailContainer(i).$('[ng-click="setPrimaryEmail(emailEdit)"]');
+};
 exports.phoneInput = function (i) {
     return this.phoneContainer(i).element(
         by.model('phoneEdit.number')
@@ -147,6 +156,24 @@ exports.affiliatedSocietyElement = function() {
 };
 exports.addressOneElement = function() {
     return $$('[data-ng-if="addr.address_1"] .ng-binding');
+};
+exports.addressTwoElement = function() {
+    return $$('[data-ng-if="addr.address_2"] .ng-binding');
+};
+exports.addressThreeElement = function() {
+    return $$('[data-ng-if="addr.address_3"] .ng-binding');
+};
+exports.cityElement = function() {
+    return $$('[data-ng-if="addr.city_town"] .ng-binding');
+};
+exports.regionElement = function() {
+    return $$('[data-ng-if="addr.region"]');
+};
+exports.postalCodeElement = function() {
+    return $$('[data-ng-if="addr.postal_code"]');
+};
+exports.countryElement = function() {
+    return $$('[data-ng-if="addr.territory_ids"] .ng-binding');
 };
 exports.phoneElement = function() {
     return $$('[data-ng-repeat="phone in person.pristine.master_data.contact.phones"] .break-word');
@@ -242,6 +269,24 @@ exports.getAffiliatedSociety = function() {
 exports.getAddressOne = function(i) {
     return exports.getBindingElementText(exports.addressOneElement().get(i));
 };
+exports.getAddressTwo = function(i) {
+    return exports.getBindingElementText(exports.addressTwoElement().get(i));
+};
+exports.getAddressThree = function(i) {
+    return exports.getBindingElementText(exports.addressThreeElement().get(i));
+};
+exports.getCity = function(i) {
+    return exports.getBindingElementText(exports.cityElement().get(i));
+};
+exports.getRegion = function(i) {
+    return exports.getBindingElementText(exports.regionElement().get(i));
+};
+exports.getPostalCode = function(i) {
+    return exports.getBindingElementText(exports.postalCodeElement().get(i));
+};
+exports.getCountry = function(i) {
+    return exports.getBindingElementText(exports.countryElement().get(i));
+};
 exports.getPhone = function(i) {
     return exports.getBindingElementText(exports.phoneElement().get(i));
 };
@@ -250,6 +295,21 @@ exports.getEmail = function(i) {
 };
 exports.getPayee = function() {
     return exports.getBindingElementText(exports.payeeElement());
+};
+exports.getPrimaryAddress = function(i) {
+    var element = exports.primaryAddressLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
+};
+exports.getPrimaryPhone = function(i) {
+    var element = exports.primaryPhoneLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
+};
+exports.getPrimaryEmail = function(i) {
+    var element = exports.primaryEmailLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
 };
 
 exports.clickOnModularEditButton = function(element) {
@@ -327,6 +387,16 @@ exports.emailContainers = function() {
 };
 exports.emailContainer = function(i) {
     return this.emailContainers().get(i);
+};
+exports.phoneViewContainer = function(i) {
+    return element.all(by.repeater(
+        'phone in person.pristine.master_data.contact.phones'
+    )).get(i);
+};
+exports.emailViewContainer = function(i) {
+    return element.all(by.repeater(
+        'email in person.pristine.master_data.contact.emails'
+    )).get(i);
 };
 exports.alternativeNameContainers = function() {
     return element.all($$('[name="altName"]'));
@@ -408,6 +478,31 @@ exports.typeIntoAddressOneInput = function(i, value) {
     element.clear();
     return element.sendKeys(value);
 };
+exports.setPrimaryAddress = function(i) {
+    return exports.primaryAddressCheckbox(i).click();
+};
+exports.setPrimaryPhone = function(i) {
+    return exports.primaryPhoneCheckbox(i).click();
+};
+exports.setPrimaryEmail = function(i) {
+    return exports.primaryEmailCheckbox(i).click();
+};
+exports.primaryAddressLabel = function (i) {
+    return exports.addressContainer(i).element(
+	    by.cssContainingText('div.label-success', 'Primary')
+    );
+};
+exports.primaryPhoneLabel = function (i) {
+    return exports.phoneViewContainer(i).element(
+	    by.cssContainingText('div.label-success', 'Primary')
+    );
+};
+exports.primaryEmailLabel = function (i) {
+    return exports.emailViewContainer(i).element(
+	    by.cssContainingText('div.label-success', 'Primary')
+    );
+};
+
 exports.typeIntoPhoneInput = function(i, value) {
     var element = this.phoneInput(i);
     pages.base.scrollIntoView(element);

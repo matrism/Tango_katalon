@@ -119,6 +119,15 @@ exports.countryOption = function (i, value) {
         by.cssContainingText('span', value)
     );
 };
+exports.primaryAddressCheckbox = function (i) {
+    return exports.addressContainer(i).$('[ng-click="setPrimary(address, addresses, \'is_primary_address\');"]');
+};
+exports.primaryPhoneCheckbox = function (i) {
+    return exports.phoneContainer(i).$('[ng-click="setPrimary(phone, person.master_data.contact.phones, \'is_primary_phone\')"]');
+};
+exports.primaryEmailCheckbox = function (i) {
+    return exports.emailContainer(i).$('[ng-click="setPrimary(email, person.master_data.contact.emails, \'is_primary_email\')"]');
+};
 exports.phoneInput = function (i) {
     return this.phoneContainer(i).element(
         by.model('phone.number')
@@ -322,6 +331,15 @@ exports.clickOnCountryDropdownButton = function(i) {
 exports.selectCountry = function(i, value) {
     exports.clickOnCountryDropdownButton(i);
     return this.countryOption(i, value).click();
+};
+exports.setPrimaryAddress = function(i) {
+    return exports.primaryAddressCheckbox(i).click();
+};
+exports.setPrimaryPhone = function(i) {
+    return exports.primaryPhoneCheckbox(i).click();
+};
+exports.setPrimaryEmail = function(i) {
+    return exports.primaryEmailCheckbox(i).click();
 };
 exports.typeIntoPhoneInput = function(i, value) {
     var element = this.phoneInput(i);

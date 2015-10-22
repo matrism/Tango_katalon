@@ -57,6 +57,7 @@ exports.feature = [
                     this.addPhone();
                 }
                 this.enterPhone(1, '98765432');
+                this.setPrimaryPhone(1);
                 if(!stagingPerson) {
                     this.addEmail();
                 }
@@ -65,6 +66,7 @@ exports.feature = [
                     this.addEmail();
                 }
                 this.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
+                this.setPrimaryEmail(1);
                 this.clickOnPayee('Yes');
                 this.save();
                 this.validateSaveRedirection();
@@ -103,11 +105,26 @@ exports.feature = [
                 this.validateAlternativeLastName(0);
                 this.validateAffiliatedSociety();
                 this.validateAddressOne(0);
+                this.validateAddressTwo(0);
+                this.validateAddressThree(0);
+                this.validateCity(0);
+                this.validateRegion(0);
+                this.validatePostalCode(0);
+                this.validateCountry(0);
+                this.validatePrimaryAddress(0);
                 this.validateAddressOne(1);
+                this.validateAddressTwo(1);
+                this.validateAddressThree(1);
+                this.validateCity(1);
+                this.validateRegion(1);
+                this.validatePostalCode(1);
+                this.validateCountry(1);
                 this.validatePhone(0);
                 this.validatePhone(1);
+                this.validatePrimaryPhone(1);
                 this.validateEmail(0);
                 this.validateEmail(1);
+                this.validatePrimaryEmail(1);
                 this.validatePayee()
             });
         },
@@ -127,14 +144,6 @@ exports.feature = [
                 this.clickOnSavePrimaryName();
                 this.validateFirstName();
 
-                if(!stagingPerson) {
-                    this.clickOnEditAlternativeName();
-                    this.enterAlternativeFirstName(0, 'TEST ' + randomString(1.1));
-                    this.enterAlternativeLastName(0, 'PERSON ' + randomString(1.1));
-                    this.clickOnSaveAlternativeName();
-                    this.validateAlternativeFirstName();
-                }
-
                 this.clickOnEditSocietyAffiliation();
                 this.enterAffiliatedSocietySearchTerms('ZAIKS');
                 this.selectAffiliatedSocietySearchResultByIndex(0);
@@ -145,21 +154,28 @@ exports.feature = [
                 this.enterAddressOne(0, 'Abbey Road Updated');
                 this.clickOnSaveAddress(0);
                 this.validateAddressOne(0);
+                this.validatePrimaryAddress(0);
 
                 this.clickOnEditAddress(1);
                 this.enterAddressOne(1, 'Alternative Abbey Road Updated');
+                this.setPrimaryAddress(1);
                 this.clickOnSaveAddress(1);
                 this.validateAddressOne(1);
+                this.validatePrimaryAddress(1);
 
                 this.clickOnEditPhone(0);
                 this.enterPhone(0, '23456789');
+                this.setPrimaryPhone(0);
                 this.clickOnSavePhone(0);
                 this.validatePhone(0);
+                this.validatePrimaryPhone(0);
 
                 this.clickOnEditEmail(0);
                 this.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
+                this.setPrimaryEmail(0);
                 this.clickOnSaveEmail(0);
                 this.validateEmail(0);
+                this.validatePrimaryEmail(0);
 
                 this.clickOnEditPaymentInformation();
                 this.clickOnPayee('No');

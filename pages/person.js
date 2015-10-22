@@ -95,6 +95,31 @@ exports.countryOption = function (i, value) {
         by.cssContainingText('span', value)
     );
 };
+exports.primaryAddressCheckbox = function (i) {
+    return exports.addressContainer(i).$('.e2e-contact-address-set-primary .ng-binding');
+};
+exports.primaryPhoneCheckbox = function (i) {
+    return exports.addressContainer(i).$('.e2e-contact-phone-set-primary .ng-binding');
+};
+exports.primaryEmailCheckbox = function (i) {
+    return exports.addressContainer(i).$('.e2e-contact-email-set-primary .ng-binding');
+};
+exports.primaryAddressLabel = function (i) {
+    return exports.addressContainer(i).element(
+	    by.cssContainingText('div', 'Primary')
+    );
+};
+exports.primaryPhoneLabel = function (i) {
+    return exports.phoneContainer(i).element(
+	    by.cssContainingText('div', 'Primary')
+    );
+};
+exports.primaryEmailLabel = function (i) {
+    return exports.emailContainer(i).element(
+	    by.cssContainingText('div', 'Primary')
+    );
+};
+
 exports.phoneInput = function (i) {
     return this.phoneContainer(i).element(
         by.model('modularEditModels.model.number')
@@ -145,6 +170,24 @@ exports.affiliatedSocietyElement = function() {
 };
 exports.addressOneElement = function() {
     return $$('.e2e-contact-address-1 .controls');
+};
+exports.addressTwoElement = function() {
+    return $$('.e2e-contact-address-2 .controls');
+};
+exports.addressThreeElement = function() {
+    return $$('.e2e-contact-address-3 .controls');
+};
+exports.cityElement = function() {
+    return $$('.e2e-contact-address-city .controls');
+};
+exports.regionElement = function() {
+    return $$('.e2e-contact-address-region .controls');
+};
+exports.postalCodeElement = function() {
+    return $$('.e2e-contact-address-postal-code .controls');
+};
+exports.countryElement = function() {
+    return $$('.e2e-contact-address-country .controls');
 };
 exports.phoneElement = function() {
     return $$('.e2e-contact-phone-number .controls');
@@ -243,6 +286,24 @@ exports.getAffiliatedSociety = function() {
 exports.getAddressOne = function(i) {
     return exports.getBindingElementText(exports.addressOneElement().get(i));
 };
+exports.getAddressTwo = function(i) {
+    return exports.getBindingElementText(exports.addressTwoElement().get(i));
+};
+exports.getAddressThree = function(i) {
+    return exports.getBindingElementText(exports.addressThreeElement().get(i));
+};
+exports.getCity = function(i) {
+    return exports.getBindingElementText(exports.cityElement().get(i));
+};
+exports.getRegion = function(i) {
+    return exports.getBindingElementText(exports.regionElement().get(i));
+};
+exports.getPostalCode = function(i) {
+    return exports.getBindingElementText(exports.postalCodeElement().get(i));
+};
+exports.getCountry = function(i) {
+    return exports.getBindingElementText(exports.countryElement().get(i));
+};
 exports.getPhone = function(i) {
     return exports.getBindingElementText(exports.phoneElement().get(i));
 };
@@ -251,6 +312,21 @@ exports.getEmail = function(i) {
 };
 exports.getPayee = function() {
     return exports.getBindingElementText(exports.payeeElement());
+};
+exports.getPrimaryAddress = function(i) {
+    var element = exports.primaryAddressLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
+};
+exports.getPrimaryPhone = function(i) {
+    var element = exports.primaryPhoneLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
+};
+exports.getPrimaryEmail = function(i) {
+    var element = exports.primaryEmailLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
 };
 
 exports.clickOnModularEditButton = function(element) {
@@ -449,6 +525,15 @@ exports.clickOnCountryDropdownButton = function(i) {
 exports.selectCountry = function(i, value) {
     exports.clickOnCountryDropdownButton(i);
     return this.countryOption(i, value).click();
+};
+exports.setPrimaryAddress = function(i) {
+    return exports.primaryAddressCheckbox(i).click();
+};
+exports.setPrimaryPhone = function(i) {
+    return exports.primaryPhoneCheckbox(i).click();
+};
+exports.setPrimaryEmail = function(i) {
+    return exports.primaryEmailCheckbox(i).click();
 };
 exports.typeIntoPhoneInput = function(i, value) {
     var element = this.phoneInput(i);

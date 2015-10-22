@@ -179,7 +179,7 @@ exports.enterCity = function (i, value) {
     it('Enter City #'  + (i + 1) + ' (' + value + ')', function () {
         page.typeIntoCityInput(i, value).then(function () {
             hash.currentPersonSlot.city = hash.currentPersonSlot.city || [];
-            hash.currentPersonSlot.city = value;
+            hash.currentPersonSlot.city[i] = value;
         });
     });
 };
@@ -188,7 +188,7 @@ exports.enterRegion = function (i, value) {
     it('Enter Region #'  + (i + 1) + ' (' + value + ')', function () {
         page.typeIntoRegionInput(i, value).then(function () {
             hash.currentPersonSlot.region = hash.currentPersonSlot.region || [];
-            hash.currentPersonSlot.region = value;
+            hash.currentPersonSlot.region[i] = value;
         });
     });
 };
@@ -197,7 +197,7 @@ exports.enterPostalCode = function (i, value) {
     it('Enter Postal Code #'  + (i + 1) + ' (' + value + ')', function () {
         page.typeIntoPostalCodeInput(i, value).then(function () {
             hash.currentPersonSlot.postalCode = hash.currentPersonSlot.postalCode || [];
-            hash.currentPersonSlot.postalCode = value;
+            hash.currentPersonSlot.postalCode[i] = value;
         });
     });
 };
@@ -206,7 +206,31 @@ exports.selectCountry = function (i, value) {
     it('Select Country #'  + (i + 1) + ' (' + value + ')', function () {
         page.selectCountry(i, value).then(function () {
             hash.currentPersonSlot.country = hash.currentPersonSlot.country || [];
-            hash.currentPersonSlot.country = value;
+            hash.currentPersonSlot.country[i] = value;
+        });
+    });
+};
+
+exports.setPrimaryAddress = function (i) {
+    it('Set as Primary Address #'  + (i + 1), function () {
+        page.setPrimaryAddress(i).then(function () {
+            hash.currentPersonSlot.primaryAddress = i;
+        });
+    });
+};
+
+exports.setPrimaryPhone = function (i) {
+    it('Set as Primary Phone #'  + (i + 1), function () {
+        page.setPrimaryPhone(i).then(function () {
+            hash.currentPersonSlot.primaryPhone = i;
+        });
+    });
+};
+
+exports.setPrimaryEmail = function (i) {
+    it('Set as Primary Email #'  + (i + 1), function () {
+        page.setPrimaryEmail(i).then(function () {
+            hash.currentPersonSlot.primaryEmail = i;
         });
     });
 };

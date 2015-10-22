@@ -64,6 +64,12 @@ exports.enterPostalCode = steps.person.enterPostalCode;
 
 exports.selectCountry = steps.person.selectCountry;
 
+exports.setPrimaryAddress = steps.person.setPrimaryAddress;
+
+exports.setPrimaryPhone = steps.person.setPrimaryPhone;
+
+exports.setPrimaryEmail = steps.person.setPrimaryEmail;
+
 exports.enterPhone = steps.person.enterPhone;
 
 exports.enterEmail = steps.person.enterEmail;

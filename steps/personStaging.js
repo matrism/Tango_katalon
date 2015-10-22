@@ -271,6 +271,30 @@ exports.selectCountry = function (i, value) {
     });
 };
 
+exports.setPrimaryAddress = function (i) {
+    it('Set as Primary Address #'  + (i + 1), function () {
+        page.setPrimaryAddress(i).then(function () {
+            hash.currentPersonSlot.primaryAddress = i;
+        });
+    });
+};
+
+exports.setPrimaryPhone = function (i) {
+    it('Set as Primary Phone #'  + (i + 1), function () {
+        page.setPrimaryPhone(i).then(function () {
+            hash.currentPersonSlot.primaryPhone = i;
+        });
+    });
+};
+
+exports.setPrimaryEmail = function (i) {
+    it('Set as Primary Email #'  + (i + 1), function () {
+        page.setPrimaryEmail(i).then(function () {
+            hash.currentPersonSlot.primaryEmail = i;
+        });
+    });
+};
+
 exports.enterPhone = function (i, value) {
     it('Enter Phone #' + (i + 1) + ' (' + value + ')', function () {
         page.typeIntoPhoneInput(i, value).then(function () {
@@ -328,8 +352,38 @@ exports.validateAffiliatedSociety = function() {
     });
 };
 exports.validateAddressOne = function(i) {
-    it('Validate Address One', function () {
+    it('Validate Address One #' + i, function () {
         expect(page.getAddressOne(i)).toBe(hash.currentPersonSlot.addressOne[i]);
+    });
+};
+exports.validateAddressTwo = function(i) {
+    it('Validate Address Two #' + i, function () {
+        expect(page.getAddressTwo(i)).toBe(hash.currentPersonSlot.addressTwo[i]);
+    });
+};
+exports.validateAddressThree = function(i) {
+    it('Validate Address Three #' + i, function () {
+        expect(page.getAddressThree(i)).toBe(hash.currentPersonSlot.addressThree[i]);
+    });
+};
+exports.validateCity = function(i) {
+    it('Validate City #' + i, function () {
+        expect(page.getCity(i)).toBe(hash.currentPersonSlot.city[i]);
+    });
+};
+exports.validateRegion = function(i) {
+    it('Validate Region #' + i, function () {
+        expect(page.getRegion(i)).toBe(hash.currentPersonSlot.region[i]);
+    });
+};
+exports.validatePostalCode = function(i) {
+    it('Validate Postal Code #' + i, function () {
+        expect(page.getPostalCode(i)).toBe(hash.currentPersonSlot.postalCode[i]);
+    });
+};
+exports.validateCountry = function(i) {
+    it('Validate Country #' + i, function () {
+        expect(page.getCountry(i)).toBe(hash.currentPersonSlot.country[i]);
     });
 };
 exports.validatePhone = function(i) {
@@ -345,6 +399,21 @@ exports.validateEmail = function(i) {
 exports.validatePayee = function() {
     it('Validate Payee', function () {
         expect(page.getPayee()).toBe(hash.currentPersonSlot.payee);
+    });
+};
+exports.validatePrimaryAddress = function(i) {
+    it('Validate Primary Address #' + i, function () {
+        expect(pages.base.isPresentAndDisplayed(page.getPrimaryAddress(i))).toBeTruthy();
+    });
+};
+exports.validatePrimaryPhone = function(i) {
+    it('Validate Primary Phone #' + i, function () {
+        expect(pages.base.isPresentAndDisplayed(page.getPrimaryPhone(i))).toBeTruthy();
+    });
+};
+exports.validatePrimaryEmail = function(i) {
+    it('Validate Primary Email #' + i, function () {
+        expect(pages.base.isPresentAndDisplayed(page.getPrimaryEmail(i))).toBeTruthy();
     });
 };
 
