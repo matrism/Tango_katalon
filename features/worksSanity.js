@@ -1183,7 +1183,8 @@ var beforeFeature = [
                 'An error (TypeError: Cannot call method indexOf of undefined) ' +
                 'in this test has caused Protractor to crash twice. ' +
                 'Only recently (as of 2015-10-23) has this started happening, ' +
-                'and it\'s unclear what\'s causing it.'
+                'and it\'s unclear what\'s causing it. ' +
+                'Sample: http://54.84.154.80:8080/view/Tango/job/TAT%20Tests/690/console.'
             ),
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
