@@ -31,7 +31,7 @@ exports.goToSubLink = function (link, subLink) {
     });
 };
 
-exports.clickOnLogoutLink = function () {
+exports.logout = function () {
     pages.mainHeader.elems.logoutLink.click();
 };
 
