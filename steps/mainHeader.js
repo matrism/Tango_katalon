@@ -30,4 +30,6 @@ pageStep([
     ]],
 
     'Create new record',
+    'Click on logout link',
+    'Validate logout redirection'
 ]);

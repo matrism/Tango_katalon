@@ -1,6 +1,10 @@
 'use strict';
 
-pages.mainHeader = exports;
+exports = module.exports = pages.mainHeader = new ftf.pageObject ({
+	locators: {
+		logoutLink: { id: "DSP-LOGOUT" }
+	}
+});
 
 var navbarLinkSelector = '.nav > li > a',
     ExpectedConditions = protractor.ExpectedConditions;
@@ -26,6 +30,14 @@ exports.goToSubLink = function (link, subLink) {
         return exports.container().element(by.cssContainingText('.dropdown.open a', subLink)).click();
     });
 };
+
+exports.clickOnLogoutLink = function () {
+    pages.mainHeader.elems.logoutLink.click();
+};
+
+exports.validateLogoutRedirection = function () {
+    expect(browser.getCurrentUrl()).toMatch(/\/login.+$/);
+},
 
 exports.newRecordButton = function () {
     var button = exports.container().$('#DSP-RECORD-CREATE');
