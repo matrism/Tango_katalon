@@ -1176,7 +1176,15 @@ var beforeFeature = [
             tags: [
                 'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
                 'works-sanity-search-for-works',
+                'broken',
+                'unstable'
             ],
+            breakageDescription: (
+                'An error (TypeError: Cannot call method indexOf of undefined) ' +
+                'in this test has caused Protractor to crash twice. ' +
+                'Only recently (as of 2015-10-23) has this started happening, ' +
+                'and it\'s unclear what\'s causing it.'
+            ),
             steps: function() {
                 ['mainWork', 'cosWork'].forEach(function(workSlotId) {
                     steps.base.useEntityDataSlot('work', workSlotId);
