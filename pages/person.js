@@ -233,10 +233,10 @@ exports.editEmailButton = function(i) {
 exports.saveEmailButton = function(i) {
     return exports.getSaveButton(exports.emailContainer(i));
 };
-exports.editPaymentInfo = function() {
+exports.editPaymentButton = function() {
     return exports.getEditButton($('.e2e-payee'));
 };
-exports.savePaymentInfo = function() {
+exports.savePaymentButton = function() {
     return exports.getSaveButton($('.e2e-payee'));
 };
 
@@ -320,56 +320,56 @@ exports.getPrimaryEmail = function(i) {
     return element;
 };
 
-exports.clickOnModularEditButton = function(element) {
+exports.clickOnEditButton = function(element) {
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnModularSaveButton = function(element) {
+exports.clickOnEditButton = function(element) {
     pages.base.scrollIntoView(element);
     element.click();
     pages.base.waitForAjax();
 };
-exports.clickOnEditPrimaryName = function() {
-    return exports.clickOnModularEditButton(exports.editNameButton());
+exports.editPrimaryName = function() {
+    return exports.clickOnEditButton(exports.editNameButton());
 };
-exports.clickOnSavePrimaryName = function() {
-    return exports.clickOnModularSaveButton(exports.saveNameButton());
+exports.savePrimaryName = function() {
+    return exports.clickOnEditButton(exports.saveNameButton());
 };
-exports.clickOnEditAlternativeName = function() {
-    return exports.clickOnModularEditButton(exports.editAlternativeNameButton());
+exports.editAlternativeName = function() {
+    return exports.clickOnEditButton(exports.editAlternativeNameButton());
 };
-exports.clickOnSaveAlternativeName = function() {
-    return exports.clickOnModularSaveButton(exports.saveAlternativeNameButton());
+exports.saveAlternativeName = function() {
+    return exports.clickOnEditButton(exports.saveAlternativeNameButton());
 };
-exports.clickOnEditSocietyAffiliation = function() {
-    return exports.clickOnModularEditButton(exports.editSocietyAffiliationButton());
+exports.editSocietyAffiliation = function() {
+    return exports.clickOnEditButton(exports.editSocietyAffiliationButton());
 };
-exports.clickOnSaveSocietyAffiliation = function() {
-    return exports.clickOnModularSaveButton(exports.saveSocietyAffiliationButton());
+exports.saveSocietyAffiliation = function() {
+    return exports.clickOnEditButton(exports.saveSocietyAffiliationButton());
 };
-exports.clickOnEditAddress = function(i) {
-    return exports.clickOnModularEditButton(exports.editAddressButton(i));
+exports.editAddress = function(i) {
+    return exports.clickOnEditButton(exports.editAddressButton(i));
 };
-exports.clickOnSaveAddress = function(i) {
-    return exports.clickOnModularSaveButton(exports.saveAddressButton(i));
+exports.saveAddress = function(i) {
+    return exports.clickOnEditButton(exports.saveAddressButton(i));
 };
-exports.clickOnEditPhone = function(i) {
-    return exports.clickOnModularEditButton(exports.editPhoneButton(i));
+exports.editPhone = function(i) {
+    return exports.clickOnEditButton(exports.editPhoneButton(i));
 };
-exports.clickOnSavePhone = function(i) {
-    return exports.clickOnModularSaveButton(exports.savePhoneButton(i));
+exports.savePhone = function(i) {
+    return exports.clickOnEditButton(exports.savePhoneButton(i));
 };
-exports.clickOnEditEmail = function(i) {
-    return exports.clickOnModularEditButton(exports.editEmailButton(i));
+exports.editEmail = function(i) {
+    return exports.clickOnEditButton(exports.editEmailButton(i));
 };
-exports.clickOnSaveEmail = function(i) {
-    return exports.clickOnModularSaveButton(exports.saveEmailButton(i));
+exports.saveEmail = function(i) {
+    return exports.clickOnEditButton(exports.saveEmailButton(i));
 };
-exports.clickOnEditPaymentInformation = function() {
-    return exports.clickOnModularEditButton(exports.editPaymentInfo());
+exports.editPayment = function() {
+    return exports.clickOnEditButton(exports.editPaymentButton());
 };
-exports.clickOnSavePaymentInformation = function() {
-    return exports.clickOnModularSaveButton(exports.savePaymentInfo());
+exports.savePayment = function() {
+    return exports.clickOnEditButton(exports.savePaymentButton());
 };
 
 exports.typeFirstName = function(value) {

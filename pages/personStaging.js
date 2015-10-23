@@ -133,55 +133,55 @@ exports.payeeOption = function(value) {
 exports.suisaIPINumber = function() {
     return $(".e2e-primary-name-suisa-ipi .controls");
 };
-exports.nameElement = function() {
+exports.nameBinding = function() {
     return $('.e2e-primary-name-full .ng-binding');
 };
-exports.firstNameElement = function() {
+exports.firstNameBinding = function() {
     return $('[data-ng-if="person.pristine.master_data.primary_name.first_name"] .ng-binding');
 };
-exports.lastNameElement = function() {
+exports.lastNameBinding = function() {
     return $('[data-ng-if="person.pristine.master_data.primary_name.last_name"] .ng-binding');
 };
-exports.alternativeNameElement = function(i) {
+exports.alternativeNameBinding = function(i) {
     return $$('.e2e-alternative-name-full .controls').get(i);
 };
-exports.alternativeFirstNameElement = function() {
+exports.alternativeFirstNameBinding = function() {
     return $('[data-ng-if="name.first_name"] .ng-binding');
 };
-exports.alternativeLastNameElement = function() {
+exports.alternativeLastNameBinding = function() {
     return $('[data-ng-if="name.last_name"] .ng-binding');
 };
-exports.affiliatedSocietyElement = function() {
+exports.affiliatedSocietyBinding = function() {
     return $('[data-ng-show="show.form.society.creatorSociety[$index].detail"]>div>div:first-child .ng-binding');
 };
-exports.addressOneElement = function() {
+exports.addressOneBinding = function() {
     return $$('[data-ng-if="addr.address_1"] .ng-binding');
 };
-exports.addressTwoElement = function() {
+exports.addressTwoBinding = function() {
     return $$('[data-ng-if="addr.address_2"] .ng-binding');
 };
-exports.addressThreeElement = function() {
+exports.addressThreeBinding = function() {
     return $$('[data-ng-if="addr.address_3"] .ng-binding');
 };
-exports.cityElement = function() {
+exports.cityBinding = function() {
     return $$('[data-ng-if="addr.city_town"] .ng-binding');
 };
-exports.regionElement = function() {
+exports.regionBinding = function() {
     return $$('[data-ng-if="addr.region"]');
 };
-exports.postalCodeElement = function() {
+exports.postalCodeBinding = function() {
     return $$('[data-ng-if="addr.postal_code"]');
 };
-exports.countryElement = function() {
+exports.countryBinding = function() {
     return $$('[data-ng-if="addr.territory_ids"] .ng-binding');
 };
-exports.phoneElement = function() {
+exports.phoneBinding = function() {
     return $$('[data-ng-repeat="phone in person.pristine.master_data.contact.phones"] .break-word');
 };
-exports.emailElement = function() {
+exports.emailBinding = function() {
     return $$('[data-ng-repeat="email in person.pristine.master_data.contact.emails"] .break-word');
 };
-exports.payeeElement = function() {
+exports.payeeBinding = function() {
     return $('[data-tg-modular-actions="PAY.modularEdit.payees"] .control-group strong:not(.ng-hide)');
 };
 
@@ -189,55 +189,55 @@ exports.getSaveButton = function(section) {
     return section.element(by.cssContainingText('button', 'Save'));
 };
 
-exports.editNameElement = function() {
+exports.editNameButton = function() {
     return $('[data-ng-click="showEdit(show.form.name.primary)"]');
 };
-exports.saveNameElement = function() {
+exports.saveNameButton = function() {
     return exports.getSaveButton($('[data-ng-if="show.form.name.primary.edit"]'));
 };
-exports.editAlternativeNameElement = function() {
+exports.editAlternativeNameButton = function() {
     return $('[data-ng-click="showEdit(show.form.name.alt[$index])"]');
 };
-exports.saveAlternativeNameElement = function() {
+exports.saveAlternativeNameButton = function() {
     return exports.getSaveButton($('[data-ng-show="show.form.name.alt[$index].edit"]'));
 };
-exports.editSocietyAffiliationElement = function() {
+exports.editSocietyAffiliationButton = function() {
     return $('[data-ng-click="showEdit(show.form.society.creatorSociety[$index])"]');
 };
-exports.saveSocietyAffiliationElement = function() {
+exports.saveSocietyAffiliationButton = function() {
     return exports.getSaveButton($('[data-ng-show="show.form.society.creatorSociety[$index].edit"]'));
 };
-exports.editAddressElement = function(i) {
+exports.editAddressButton = function(i) {
     return $$('[data-ng-click="showEdit(sectionAddress)"]').get(i);
 };
-exports.saveAddressElement = function(i) {
+exports.saveAddressButton = function(i) {
     return exports.getSaveButton($$('[data-ng-show="sectionAddress.edit"]').get(i));
 };
-exports.editPhoneElement = function(i) {
+exports.editPhoneButton = function(i) {
     return $$('[data-ng-click="showEdit(sectionPhone)"]').get(i);
 };
-exports.savePhoneElement = function(i) {
+exports.savePhoneButton = function(i) {
     return exports.getSaveButton($$('[data-ng-show="sectionPhone.edit"]').get(i));
 };
-exports.editEmailElement = function(i) {
+exports.editEmailButton = function(i) {
     return $$('[data-ng-click="showEdit(sectionEmail)"]').get(i);
 };
-exports.saveEmailElement = function(i) {
+exports.saveEmailButton = function(i) {
     return exports.getSaveButton($$('[data-ng-show="sectionEmail.edit"]').get(i));
 };
-exports.editPaymentInfo = function() {
+exports.editPaymentButton = function() {
     return $('[data-tg-modular-actions="PAY.modularEdit.payees"] button');
 };
-exports.savePaymentInfo = function() {
+exports.savePaymentButton = function() {
     return exports.getSaveButton($('[data-tg-modular-actions="PAY.modularEdit.payees"]'));
 };
 
-exports.getBindingElementText = function(element) {
+exports.getBindingText = function(element) {
     pages.base.scrollIntoView(element);
     return element.getText();
 };
 exports.internalIpiNumber = function() {
-    return exports.getBindingElementText(exports.internalIpiNumberBinding());
+    return exports.getBindingText(exports.internalIpiNumberBinding());
 };
 exports.getSuisaIPI = function() {
     browser.wait(ExpectedConditions.visibilityOf(exports.suisaIPINumber()));
@@ -246,55 +246,55 @@ exports.getSuisaIPI = function() {
     return element.getText();
 };
 exports.getName = function() {
-    return exports.getBindingElementText(exports.nameElement());
+    return exports.getBindingText(exports.nameBinding());
 };
 exports.getFirstName = function() {
-    return exports.getBindingElementText(exports.firstNameElement());
+    return exports.getBindingText(exports.firstNameBinding());
 };
 exports.getLastName = function() {
-    return exports.getBindingElementText(exports.lastNameElement());
+    return exports.getBindingText(exports.lastNameBinding());
 };
 exports.getAlternativeName = function(i) {
-    return exports.getBindingElementText(exports.alternativeNameElement(i));
+    return exports.getBindingText(exports.alternativeNameBinding(i));
 };
 exports.getAlternativeFirstName = function() {
-    return exports.getBindingElementText(exports.alternativeFirstNameElement());
+    return exports.getBindingText(exports.alternativeFirstNameBinding());
 };
 exports.getAlternativeLastName = function() {
-    return exports.getBindingElementText(exports.alternativeLastNameElement());
+    return exports.getBindingText(exports.alternativeLastNameBinding());
 };
 exports.getAffiliatedSociety = function() {
-    return exports.getBindingElementText(exports.affiliatedSocietyElement());
+    return exports.getBindingText(exports.affiliatedSocietyBinding());
 };
 exports.getAddressOne = function(i) {
-    return exports.getBindingElementText(exports.addressOneElement().get(i));
+    return exports.getBindingText(exports.addressOneBinding().get(i));
 };
 exports.getAddressTwo = function(i) {
-    return exports.getBindingElementText(exports.addressTwoElement().get(i));
+    return exports.getBindingText(exports.addressTwoBinding().get(i));
 };
 exports.getAddressThree = function(i) {
-    return exports.getBindingElementText(exports.addressThreeElement().get(i));
+    return exports.getBindingText(exports.addressThreeBinding().get(i));
 };
 exports.getCity = function(i) {
-    return exports.getBindingElementText(exports.cityElement().get(i));
+    return exports.getBindingText(exports.cityBinding().get(i));
 };
 exports.getRegion = function(i) {
-    return exports.getBindingElementText(exports.regionElement().get(i));
+    return exports.getBindingText(exports.regionBinding().get(i));
 };
 exports.getPostalCode = function(i) {
-    return exports.getBindingElementText(exports.postalCodeElement().get(i));
+    return exports.getBindingText(exports.postalCodeBinding().get(i));
 };
 exports.getCountry = function(i) {
-    return exports.getBindingElementText(exports.countryElement().get(i));
+    return exports.getBindingText(exports.countryBinding().get(i));
 };
 exports.getPhone = function(i) {
-    return exports.getBindingElementText(exports.phoneElement().get(i));
+    return exports.getBindingText(exports.phoneBinding().get(i));
 };
 exports.getEmail = function(i) {
-    return exports.getBindingElementText(exports.emailElement().get(i));
+    return exports.getBindingText(exports.emailBinding().get(i));
 };
 exports.getPayee = function() {
-    return exports.getBindingElementText(exports.payeeElement());
+    return exports.getBindingText(exports.payeeBinding());
 };
 exports.getPrimaryAddress = function(i) {
     var element = exports.primaryAddressLabel(i);
@@ -312,56 +312,56 @@ exports.getPrimaryEmail = function(i) {
     return element;
 };
 
-exports.clickOnModularEditButton = function(element) {
+exports.clickOnEditButton = function(element) {
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnModularSaveButton = function(element) {
+exports.clickOnEditButton = function(element) {
     pages.base.scrollIntoView(element);
     element.click();
     pages.base.waitForAjax();
 };
-exports.clickOnEditPrimaryName = function() {
-    return exports.clickOnModularEditButton(exports.editNameElement());
+exports.editPrimaryName = function() {
+    return exports.clickOnEditButton(exports.editNameButton());
 };
-exports.clickOnSavePrimaryName = function() {
-    return exports.clickOnModularSaveButton(exports.saveNameElement());
+exports.savePrimaryName = function() {
+    return exports.clickOnEditButton(exports.saveNameButton());
 };
-exports.clickOnEditAlternativeName = function() {
-    return exports.clickOnModularEditButton(exports.editAlternativeNameElement());
+exports.editAlternativeName = function() {
+    return exports.clickOnEditButton(exports.editAlternativeNameButton());
 };
-exports.clickOnSaveAlternativeName = function() {
-    return exports.clickOnModularSaveButton(exports.saveAlternativeNameElement());
+exports.saveAlternativeName = function() {
+    return exports.clickOnEditButton(exports.saveAlternativeNameButton());
 };
-exports.clickOnEditSocietyAffiliation = function() {
-    return exports.clickOnModularEditButton(exports.editSocietyAffiliationElement());
+exports.editSocietyAffiliation = function() {
+    return exports.clickOnEditButton(exports.editSocietyAffiliationButton());
 };
-exports.clickOnSaveSocietyAffiliation = function() {
-    return exports.clickOnModularSaveButton(exports.saveSocietyAffiliationElement());
+exports.saveSocietyAffiliation = function() {
+    return exports.clickOnEditButton(exports.saveSocietyAffiliationButton());
 };
-exports.clickOnEditAddress = function(i) {
-    return exports.clickOnModularEditButton(exports.editAddressElement(i));
+exports.editAddress = function(i) {
+    return exports.clickOnEditButton(exports.editAddressButton(i));
 };
-exports.clickOnSaveAddress = function(i) {
-    return exports.clickOnModularSaveButton(exports.saveAddressElement(i));
+exports.saveAddress = function(i) {
+    return exports.clickOnEditButton(exports.saveAddressButton(i));
 };
-exports.clickOnEditPhone = function(i) {
-    return exports.clickOnModularEditButton(exports.editPhoneElement(i));
+exports.editPhone = function(i) {
+    return exports.clickOnEditButton(exports.editPhoneButton(i));
 };
-exports.clickOnSavePhone = function(i) {
-    return exports.clickOnModularSaveButton(exports.savePhoneElement(i));
+exports.savePhone = function(i) {
+    return exports.clickOnEditButton(exports.savePhoneButton(i));
 };
-exports.clickOnEditEmail = function(i) {
-    return exports.clickOnModularEditButton(exports.editEmailElement(i));
+exports.editEmail = function(i) {
+    return exports.clickOnEditButton(exports.editEmailButton(i));
 };
-exports.clickOnSaveEmail = function(i) {
-    return exports.clickOnModularSaveButton(exports.saveEmailElement(i));
+exports.saveEmail = function(i) {
+    return exports.clickOnEditButton(exports.saveEmailButton(i));
 };
-exports.clickOnEditPaymentInformation = function() {
-    return exports.clickOnModularEditButton(exports.editPaymentInfo());
+exports.editPayment = function() {
+    return exports.clickOnEditButton(exports.editPaymentButton());
 };
-exports.clickOnSavePaymentInformation = function() {
-    return exports.clickOnModularSaveButton(exports.savePaymentInfo());
+exports.savePayment = function() {
+    return exports.clickOnEditButton(exports.savePaymentButton());
 };
 
 exports.addressContainers = function() {

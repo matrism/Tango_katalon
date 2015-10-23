@@ -430,20 +430,20 @@ exports.validatePrimaryEmail = function(i) {
 };
 
 pageStep([
-    'Click on edit primary name',
-    'Click on save primary name',
-    'Click on edit alternative name',
-    'Click on save alternative name',
-    'Click on edit society affiliation',
-    'Click on save society affiliation',
-    'Click on edit address',
-    'Click on save address',
-    'Click on edit phone',
-    'Click on save phone',
-    'Click on edit email',
-    'Click on save email',
-    'Click on edit payment information',
-    'Click on save payment information'
+    'Edit primary name',
+    'Save primary name',
+    'Edit alternative name',
+    'Save alternative name',
+    'Edit society affiliation',
+    'Save society affiliation',
+    'Edit address',
+    'Save address',
+    'Edit phone',
+    'Save phone',
+    'Edit email',
+    'Save email',
+    'Edit payment',
+    'Save payment'
 ]);
 
 exports.clickOnEnterPersonSearchTerms = function (value) {

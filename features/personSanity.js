@@ -138,48 +138,48 @@ exports.feature = [
             using(steps.person, function() {
                 this.goToPersonPage();
 
-                this.clickOnEditPrimaryName();
+                this.editPrimaryName();
                 this.enterFirstName('TEST ' + randomString(1));
                 this.enterLastName('PERSON ' + randomString(1));
-                this.clickOnSavePrimaryName();
+                this.savePrimaryName();
                 this.validateFirstName();
 
-                this.clickOnEditSocietyAffiliation();
+                this.editSocietyAffiliation();
                 this.enterAffiliatedSocietySearchTerms('ZAIKS');
                 this.selectAffiliatedSocietySearchResultByIndex(0);
-                this.clickOnSaveSocietyAffiliation();
+                this.saveSocietyAffiliation();
                 this.validateAffiliatedSociety();
 
-                this.clickOnEditAddress(0);
+                this.editAddress(0);
                 this.enterAddressOne(0, 'Abbey Road Updated');
-                this.clickOnSaveAddress(0);
+                this.saveAddress(0);
                 this.validateAddressOne(0);
                 this.validatePrimaryAddress(0);
 
-                this.clickOnEditAddress(1);
+                this.editAddress(1);
                 this.enterAddressOne(1, 'Alternative Abbey Road Updated');
                 this.setPrimaryAddress(1);
-                this.clickOnSaveAddress(1);
+                this.saveAddress(1);
                 this.validateAddressOne(1);
                 this.validatePrimaryAddress(1);
 
-                this.clickOnEditPhone(0);
+                this.editPhone(0);
                 this.enterPhone(0, '23456789');
                 this.setPrimaryPhone(0);
-                this.clickOnSavePhone(0);
+                this.savePhone(0);
                 this.validatePhone(0);
                 this.validatePrimaryPhone(0);
 
-                this.clickOnEditEmail(0);
+                this.editEmail(0);
                 this.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
                 this.setPrimaryEmail(0);
-                this.clickOnSaveEmail(0);
+                this.saveEmail(0);
                 this.validateEmail(0);
                 this.validatePrimaryEmail(0);
 
-                this.clickOnEditPaymentInformation();
+                this.editPayment();
                 this.clickOnPayee('No');
-                this.clickOnSavePaymentInformation();
+                this.savePayment();
                 this.validatePayee();
             });
         },
