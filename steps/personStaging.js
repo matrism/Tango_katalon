@@ -424,12 +424,12 @@ pageStep([
     'Click on save alternative name',
     'Click on edit society affiliation',
     'Click on save society affiliation',
-    'Click on edit address #',
-    'Click on save address #',
-    'Click on edit phone #',
-    'Click on save phone #',
-    'Click on edit email #',
-    'Click on save email #',
+    'Click on edit address',
+    'Click on save address',
+    'Click on edit phone',
+    'Click on save phone',
+    'Click on edit email',
+    'Click on save email',
     'Click on edit payment information',
     'Click on save payment information'
 ]);
