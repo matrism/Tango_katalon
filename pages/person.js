@@ -31,6 +31,27 @@ exports.firstNameInput = function() {
 exports.lastNameInput = function() {
     return $('.e2e-primary-name-last input');
 };
+exports.suisaIpiNumberInput = function() {
+    return $('.e2e-primary-name-suisa-ipi input');
+};
+exports.affiliatedSocietySearchInput = function() {
+    return $('.e2e-society-affiliation-society input');
+};
+exports.affiliatedSocietySearchResults = function() {
+    return $$('.tg-typeahead__suggestions-group-item');
+};
+exports.addressContainer = function(i) {
+    return $$('.e2e-contact-address').get(i);
+};
+exports.phoneContainer = function(i) {
+    return $$('.e2e-contact-phone').get(i);
+};
+exports.emailContainer = function(i) {
+    return $$('.e2e-contact-email').get(i);
+};
+exports.alternativeNameContainer = function(i) {
+    return $$('.e2e-alternative-name').get(i);
+};
 exports.alternativeFirstNameInput = function(i) {
     return this.alternativeNameContainer(i).$('.e2e-alternative-name-fisrt input');
 };
@@ -138,32 +159,32 @@ exports.alternativeLastNameBinding = function() {
 exports.affiliatedSocietyBinding = function() {
     return $('.e2e-society-affiliation-society .controls');
 };
-exports.addressOneBinding = function() {
-    return $$('.e2e-contact-address-1 .controls');
+exports.addressOneBinding = function(i) {
+    return $$('.e2e-contact-address-1 .controls').get(i);
 };
-exports.addressTwoBinding = function() {
-    return $$('.e2e-contact-address-2 .controls');
+exports.addressTwoBinding = function(i) {
+    return $$('.e2e-contact-address-2 .controls').get(i);
 };
-exports.addressThreeBinding = function() {
-    return $$('.e2e-contact-address-3 .controls');
+exports.addressThreeBinding = function(i) {
+    return $$('.e2e-contact-address-3 .controls').get(i);
 };
-exports.cityBinding = function() {
-    return $$('.e2e-contact-address-city .controls');
+exports.cityBinding = function(i) {
+    return $$('.e2e-contact-address-city .controls').get(i);
 };
-exports.regionBinding = function() {
-    return $$('.e2e-contact-address-region .controls');
+exports.regionBinding = function(i) {
+    return $$('.e2e-contact-address-region .controls').get(i);
 };
-exports.postalCodeBinding = function() {
-    return $$('.e2e-contact-address-postal-code .controls');
+exports.postalCodeBinding = function(i) {
+    return $$('.e2e-contact-address-postal-code .controls').get(i);
 };
-exports.countryBinding = function() {
-    return $$('.e2e-contact-address-country .controls');
+exports.countryBinding = function(i) {
+    return $$('.e2e-contact-address-country .controls').get(i);
 };
-exports.phoneBinding = function() {
-    return $$('.e2e-contact-phone-number .controls');
+exports.phoneBinding = function(i) {
+    return $$('.e2e-contact-phone-number .controls').get(i);
 };
-exports.emailBinding = function() {
-    return $$('.e2e-contact-email-address .controls');
+exports.emailBinding = function(i) {
+    return $$('.e2e-contact-email-address .controls').get(i);
 };
 exports.payeeBinding = function() {
     return $('.e2e-payee-is .controls');
@@ -254,31 +275,31 @@ exports.getAffiliatedSociety = function() {
     return exports.getBindingText(exports.affiliatedSocietyBinding());
 };
 exports.getAddressOne = function(i) {
-    return exports.getBindingText(exports.addressOneBinding().get(i));
+    return exports.getBindingText(exports.addressOneBinding(i));
 };
 exports.getAddressTwo = function(i) {
-    return exports.getBindingText(exports.addressTwoBinding().get(i));
+    return exports.getBindingText(exports.addressTwoBinding(i));
 };
 exports.getAddressThree = function(i) {
-    return exports.getBindingText(exports.addressThreeBinding().get(i));
+    return exports.getBindingText(exports.addressThreeBinding(i));
 };
 exports.getCity = function(i) {
-    return exports.getBindingText(exports.cityBinding().get(i));
+    return exports.getBindingText(exports.cityBinding(i));
 };
 exports.getRegion = function(i) {
-    return exports.getBindingText(exports.regionBinding().get(i));
+    return exports.getBindingText(exports.regionBinding(i));
 };
 exports.getPostalCode = function(i) {
-    return exports.getBindingText(exports.postalCodeBinding().get(i));
+    return exports.getBindingText(exports.postalCodeBinding(i));
 };
 exports.getCountry = function(i) {
-    return exports.getBindingText(exports.countryBinding().get(i));
+    return exports.getBindingText(exports.countryBinding(i));
 };
 exports.getPhone = function(i) {
-    return exports.getBindingText(exports.phoneBinding().get(i));
+    return exports.getBindingText(exports.phoneBinding(i));
 };
 exports.getEmail = function(i) {
-    return exports.getBindingText(exports.emailBinding().get(i));
+    return exports.getBindingText(exports.emailBinding(i));
 };
 exports.getPayee = function() {
     return exports.getBindingText(exports.payeeBinding());
@@ -351,19 +372,6 @@ exports.clickOnSavePaymentInformation = function() {
     return exports.clickOnModularSaveButton(exports.savePaymentInfo());
 };
 
-exports.addressContainer = function(i) {
-    return $$('.e2e-contact-address').get(i);
-};
-exports.phoneContainer = function(i) {
-    return $$('.e2e-contact-phone').get(i);
-};
-exports.emailContainer = function(i) {
-    return $$('.e2e-contact-email').get(i);
-};
-exports.alternativeNameContainer = function(i) {
-    return $$('.e2e-alternative-name').get(i);
-};
-
 exports.typeFirstName = function(value) {
     var element = this.firstNameInput();
     pages.base.scrollIntoView(element);
@@ -400,26 +408,17 @@ exports.typeAlternativeSuisaIpiNumber = function(i,value) {
     element.clear();
     return element.sendKeys(value);
 };
-exports.suisaIpiNumberInput = function() {
-    return $('.e2e-primary-name-suisa-ipi input');
-};
 exports.typeSuisaIpiNumber = function(value) {
     var element = this.suisaIpiNumberInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
 };
-exports.affiliatedSocietySearchInput = function() {
-    return $('.e2e-society-affiliation-society input');
-};
 exports.typeAffiliatedSocietySearchTerms = function(value) {
     var element = this.affiliatedSocietySearchInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
-exports.affiliatedSocietySearchResults = function() {
-    return $$('.tg-typeahead__suggestions-group-item');
 };
 exports.affiliatedSocietySearchResult = function(i) {
     return this.affiliatedSocietySearchResults().get(i);
