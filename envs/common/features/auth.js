@@ -1,17 +1,17 @@
-'use strict';
+"use strict";
+
+exports.commonFeatureTags = ['login', 'broken'];
 
 exports.beforeFeature = [
     [steps.login.itLogin]
 ];
 
-exports.commonFeatureTags = ['login', 'broken'];
-
 exports.feature = [
     {
         name: "Verify menu contains Logout option and functionality",
-        tags: ["smoke"],
+        tags: [],
         steps: [
-            [steps.base.itClickOnElement, ["'Log Out' link", pages.base.elems.logout_link]],
+            [steps.base.itClickOnElement, [pages.base.elems.logout_link, "'Log Out' link"]],
             [steps.base.itCheckIsRedirectToPage, ["logout page", "login"]]
         ]
     }

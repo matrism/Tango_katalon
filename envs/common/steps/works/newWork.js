@@ -5,40 +5,40 @@ var _ = require('lodash'),
     pph = require('../../../../helpers/pph'),
     promise = protractor.promise;
 
-steps.new_work = exports;
+steps.newWork = exports;
 
 module.exports.goToNewWorkPage = function() {
 	it (
 		"Go to New Work page", function() {
-			pages.new_work.open().waitForAjax();
+			pages.newWork.open().waitForAjax();
 		}
 	);
 };
 module.exports.validateDefaultPrimaryWorkLanguage = function() {
 	it (
 		"Validate default primary work title language", function() {
-			expect(pages.new_work.selectedPrimaryWorkTitleLanguage()).toBe("English");
+			expect(pages.newWork.selectedPrimaryWorkTitleLanguage()).toBe("English");
 		}
 	);
 };
 module.exports.validateDefaultAlternateWorkTitleLanguage = function(i) {
 	it (
 		"Validate default alternate work title language #" + (i + 1), function() {
-			expect(pages.new_work.selectedAlternateWorkTitleLanguage(i)).toBe("English");
+			expect(pages.newWork.selectedAlternateWorkTitleLanguage(i)).toBe("English");
 		}
 	);
 };
 module.exports.validateDefaultCreatorRole = function(i) {
 	it (
 		"Validate default creator role #" + (i + 1), function() {
-			expect(pages.new_work.selectedCreatorRole(i)).toBe("CA");
+			expect(pages.newWork.selectedCreatorRole(i)).toBe("CA");
 		}
 	);
 };
 module.exports.ensureContributionRequiredMessageIsDisplayed = function(i) {
 	it("Ensure contribution required message is displayed", function() {
 		expect(pages.base.isPresentAndDisplayed(
-			pages.new_work.contributionRequiredMessage(i)
+			pages.newWork.contributionRequiredMessage(i)
 		)).toBeTruthy();
 	});
 };
@@ -52,78 +52,78 @@ module.exports.validateCreatorContributionInputMask = function(i, validationTabl
 			"1.0": "1.0",
 		};
 		_.each(validationTable, function(expectedValue, input) {
-			pages.new_work.enterCreatorContribution(i, input);
-			expect(pages.new_work.enteredCreatorContribution(i)).toBe(expectedValue);
+			pages.newWork.enterCreatorContribution(i, input);
+			expect(pages.newWork.enteredCreatorContribution(i)).toBe(expectedValue);
 		});
-		pages.new_work.enterCreatorContribution(i, "");
+		pages.newWork.enterCreatorContribution(i, "");
 	});
 };
 module.exports.ensureTotalContributionTooLowMessageIsDisplayed = function() {
 	it("Ensure 'Total contribution is less than 100%' message is displayed", function() {
 		expect(pages.base.isPresentAndDisplayed(
-			pages.new_work.totalContributionTooLowMessage()
+			pages.newWork.totalContributionTooLowMessage()
 		)).toBeTruthy();
 	});
 };
 module.exports.ensureTotalContributionTooHighMessageIsDisplayed = function() {
 	it("Ensure 'Total contribution is more than 100%' message is displayed", function() {
 		expect(pages.base.isPresentAndDisplayed(
-			pages.new_work.totalContributionTooHighMessage()
+			pages.newWork.totalContributionTooHighMessage()
 		)).toBeTruthy();
 	});
 };
 module.exports.validateTotalContribution = function() {
 	it (
 		"Validate total contribution", function() {
-			expect(pages.new_work.totalContribution()).toBe(100);
+			expect(pages.newWork.totalContribution()).toBe(100);
 		}
 	);
 };
 module.exports.validateDefaultMusicalDistributionCategory = function() {
 	it (
 		"Validate default musical distribution category", function() {
-			expect(pages.new_work.selectedMusicalDistributionCategory()).toBe("Popular");
+			expect(pages.newWork.selectedMusicalDistributionCategory()).toBe("Popular");
 		}
 	);
 };
 module.exports.validateDefaultTextMusicRelationship = function() {
 	it (
 		"Validate default text music relationship", function() {
-			expect(pages.new_work.selectedTextMusicRelationship()).toBe("Select type");
+			expect(pages.newWork.selectedTextMusicRelationship()).toBe("Select type");
 		}
 	);
 };
 module.exports.validateDefaultExcerptType = function() {
 	it (
 		"Validate default excerpt type", function() {
-			expect(pages.new_work.selectedExcerptType()).toBe("Select type");
+			expect(pages.newWork.selectedExcerptType()).toBe("Select type");
 		}
 	);
 };
 module.exports.validateDefaultVersionType = function() {
 	it (
 		"Validate default version type", function() {
-			expect(pages.new_work.selectedVersionType()).toBe("Original Work");
+			expect(pages.newWork.selectedVersionType()).toBe("Original Work");
 		}
 	);
 };
 module.exports.validateDefaultLyricAdaptation = function() {
 	it("Validate default lyric adaptation (if displayed)", function() {
-		pages.new_work.isLyricAdaptationFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isLyricAdaptationFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				return;
 			}
-			expect(pages.new_work.selectedLyricAdaptation()).toBe("Unspecified");
+			expect(pages.newWork.selectedLyricAdaptation()).toBe("Unspecified");
 		});
 	});
 };
 module.exports.validateDefaultMusicArrangement = function() {
 	it("Validate default music arrangement (if displayed)", function() {
-		pages.new_work.isMusicArrangementFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isMusicArrangementFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				return;
 			}
-			expect(pages.new_work.selectedMusicArrangement())
+			expect(pages.newWork.selectedMusicArrangement())
 				.toBe("Unspecified arrangement");
 		});
 	});
@@ -131,33 +131,33 @@ module.exports.validateDefaultMusicArrangement = function() {
 module.exports.validateDefaultIntendedPurpose = function() {
 	it (
 		"Validate default intended purpose", function() {
-			expect(pages.new_work.selectedIntendedPurpose()).toBe("Select type");
+			expect(pages.newWork.selectedIntendedPurpose()).toBe("Select type");
 		}
 	);
 };
 module.exports.validateDefaultBltvr = function() {
 	it("Validate default BLTVR (if displayed)", function() {
-		pages.new_work.isBltvrFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isBltvrFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				return;
 			}
-			expect(pages.new_work.selectedBltvr()).toBe("Select type");
+			expect(pages.newWork.selectedBltvr()).toBe("Select type");
 		});
 	});
 };
 module.exports.validateDefaultMusicLibrary = function() {
 	it("Validate default music library (if displayed)", function() {
-		pages.new_work.isMusicLibraryFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isMusicLibraryFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				return;
 			}
-			expect(pages.new_work.selectedMusicLibrary()).toBe("Select Library");
+			expect(pages.newWork.selectedMusicLibrary()).toBe("Select Library");
 		});
 	});
 };
 module.exports.enterPrimaryWorkTitle = function(value) {
     it('Enter primary work title', function() {
-        pages.new_work.enterPrimaryWorkTitle(value).then(function() {
+        pages.newWork.enterPrimaryWorkTitle(value).then(function() {
             hash.currentEntityDataSlotsByType.work.primaryTitle = value;
         });
     });
@@ -167,7 +167,7 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 	it (
 		"Enter random primary work title", function() {
 			var title = "TEST WORK TITLE " + random.id();
-			pages.new_work.enterPrimaryWorkTitle(title);
+			pages.newWork.enterPrimaryWorkTitle(title);
 			deferred.fulfill(title);
 		}
 	);
@@ -175,7 +175,7 @@ module.exports.enterRandomPrimaryWorkTitle = function() {
 };
 module.exports.enterAlternateWorkTitle = function(i, value) {
     it('Enter alternate work title #' + (i + 1), function() {
-        pages.new_work.enterAlternateWorkTitle(i, value).then(function() {
+        pages.newWork.enterAlternateWorkTitle(i, value).then(function() {
             var data = hash.currentEntityDataSlotsByType.work;
             var alternateTitles = data.alternateTitles = data.alternateTitles || [];
 
@@ -188,7 +188,7 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 	it (
 		"Enter a random alternate work title #" + (i + 1), function() {
 			var title = "TEST ALTERNATE WORK TITLE " + random.id();
-			pages.new_work.enterAlternateWorkTitle(i, title);
+			pages.newWork.enterAlternateWorkTitle(i, title);
 			deferred.fulfill(title);
 		}
 	);
@@ -196,22 +196,22 @@ module.exports.enterRandomAlternateWorkTitle = function(i) {
 };
 exports.validateDefaultCompositeWorkCheckboxState = function() {
     it('Validate default composite work checkbox state', function() {
-        pages.new_work.validateDefaultCompositeWorkCheckboxState();
+        pages.newWork.validateDefaultCompositeWorkCheckboxState();
     });
 };
 exports.clickCompositeWorkCheckbox = function() {
     it('Click composite work checkbox', function() {
-        pages.new_work.clickCompositeWorkCheckbox();
+        pages.newWork.clickCompositeWorkCheckbox();
     });
 };
 exports.validateRequiredCompositeWorkTypeField = function() {
     it('Validate required composite work type field', function() {
-        pages.new_work.validateRequiredCompositeWorkTypeField();
+        pages.newWork.validateRequiredCompositeWorkTypeField();
     });
 };
 exports.validateDefaultCompositeWorkType = function() {
     it('Validate default composite work type', function() {
-        pages.new_work.validateDefaultCompositeWorkType();
+        pages.newWork.validateDefaultCompositeWorkType();
     });
 };
 exports.selectCompositeWorkType = function(value, data, key) {
@@ -219,24 +219,24 @@ exports.selectCompositeWorkType = function(value, data, key) {
         key = key || 'compositeWorkType';
         data = data || hash.currentEntityDataSlotsByType.work;
 
-        pages.new_work.selectCompositeWorkType(value);
+        pages.newWork.selectCompositeWorkType(value);
 
         data[key] = value;
     });
 };
 exports.validateDefaultComponentWorkSearchFilter = function(i) {
     it('Validate default component work search filter #' + (i + 1), function() {
-        pages.new_work.validateDefaultComponentWorkSearchFilter(i);
+        pages.newWork.validateDefaultComponentWorkSearchFilter(i);
     });
 };
 exports.validateRequiredComponentWorkSearchField = function(i) {
     it('Validate required component work search field #' + (i + 1), function() {
-        pages.new_work.validateRequiredComponentWorkSearchField(i);
+        pages.newWork.validateRequiredComponentWorkSearchField(i);
     });
 };
 exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
     it('Enter search terms on component work search field #' + (i + 1), function() {
-        pages.new_work.enterComponentWorkSearchTerms(i, searchTerms);
+        pages.newWork.enterComponentWorkSearchTerms(i, searchTerms);
     });
 
     it('Wait for component work suggestions to load', function() {
@@ -244,7 +244,7 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
     });
 
     it('Select a random work', function() {
-        pages.new_work.selectFirstComponentWorkSuggestion().then(function(selected) {
+        pages.newWork.selectFirstComponentWorkSuggestion().then(function(selected) {
             var component;
 
             data = data || hash.currentEntityDataSlotsByType.work;
@@ -260,12 +260,12 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
 };
 exports.expectShowComponentWorkDetailsButtonToAppear = function(i) {
     it('Expect "Show Details" button to appear next to component work title', function() {
-        pages.new_work.expectShowComponentWorkDetailsButtonToAppear(i);
+        pages.newWork.expectShowComponentWorkDetailsButtonToAppear(i);
     });
 };
 exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = function(i) {
     it('Expect "Same work can\'t be added as a component multiple times" message to appear', function() {
-        pages.new_work.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(i);
+        pages.newWork.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(i);
     });
 };
 exports.deleteComponentWork = function(i, data, key) {
@@ -276,18 +276,18 @@ exports.deleteComponentWork = function(i, data, key) {
         key = key || 'components';
         components = data[key] = data[key] || [];
 
-        pages.new_work.deleteComponentWork(i);
+        pages.newWork.deleteComponentWork(i);
         components.splice(i, 1);
     });
 };
 exports.confirmComponentWorkDeletion = function() {
     it('Confirm component work deletion', function() {
-        pages.new_work.confirmComponentWorkDeletion();
+        pages.newWork.confirmComponentWorkDeletion();
     });
 };
 exports.selectRandomCreator = function(i) {
     it('Type a random letter on creator name field #' + (i + 1), function() {
-        pages.new_work.enterRandomLetterOnCreatorNameField(i);
+        pages.newWork.enterRandomLetterOnCreatorNameField(i);
     });
 
     it('Expect creator suggestions dropdown to be displayed', function() {
@@ -303,7 +303,7 @@ exports.selectRandomCreator = function(i) {
 
         creator = data.creators[i];
 
-        pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
+        pages.newWork.selectRandomCreatorSuggestion().then(function(selected) {
            creator.name = selected.name;
            creator.ipiNumber = selected.ipiNumber;
         });
@@ -316,7 +316,7 @@ exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
         'Type IPI number from person slot #' + (slotIndex + 1) +
         ' on creator search field #' + (creatorRow + 1), function() {
             person = _.merge({}, hash.personSlots[slotIndex]);
-            pages.new_work.enterCreatorSearchTerms(creatorRow, person.ipiNumber);
+            pages.newWork.enterCreatorSearchTerms(creatorRow, person.ipiNumber);
         }
     );
 
@@ -325,7 +325,7 @@ exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
     });
 
     it('Select result by IPI number', function() {
-        pages.new_work.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function() {
+        pages.newWork.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function() {
             var data = hash.currentEntityDataSlotsByType.work;
 
             data.creators = data.creators || [];
@@ -346,16 +346,16 @@ exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
         'Enter previously selected creator #' + (j + 1) +
         ' IPI number in search field #' + (i + 1), function() {
             expect(creator.ipiNumber).toBeTruthy();
-            pages.new_work.enterCreatorSearchTerms(i, creator.ipiNumber);
+            pages.newWork.enterCreatorSearchTerms(i, creator.ipiNumber);
         }
     );
 
     it('Expect creator suggestions to be displayed', function() {
-        pages.new_work.expectCreatorSuggestionsToBeDisplayed();
+        pages.newWork.expectCreatorSuggestionsToBeDisplayed();
     });
 
     it('Select result by IPI number', function() {
-        pages.new_work.selectCreatorSuggestionByIpiNumber(creator.ipiNumber);
+        pages.newWork.selectCreatorSuggestionByIpiNumber(creator.ipiNumber);
     });
 
     return deferred.promise;
@@ -372,7 +372,7 @@ exports.enterMediumCreatorContribution = function(i) {
 exports.enterCreatorContribution = function(i, value) {
     it (
         "Enter contribution percentage for creator #" + (i + 1) + '(' + value + ')', function() {
-            pages.new_work.enterCreatorContribution(i, value).then(function() {
+            pages.newWork.enterCreatorContribution(i, value).then(function() {
                 var workSlot = hash.currentEntityDataSlotsByType.work,
                     creators = workSlot.creators = (workSlot.creators || []),
                     creator = creators[i] = (creators[i] || {});
@@ -385,7 +385,7 @@ exports.enterCreatorContribution = function(i, value) {
 
 exports.validateRequiredComponentWorkAllocationField = function(i) {
     it('Validate required component work allocation field #' + (i + 1), function() {
-        pages.new_work.validateRequiredComponentWorkAllocationField(i);
+        pages.newWork.validateRequiredComponentWorkAllocationField(i);
     });
 };
 exports.enterComponentWorkAllocation = function(i, value, data, key) {
@@ -398,7 +398,7 @@ exports.enterComponentWorkAllocation = function(i, value, data, key) {
         data[key] = data[key] || [];
         component = data[key][i] = data[key][i] || {};
 
-        pages.new_work.enterComponentWorkAllocation(i, value);
+        pages.newWork.enterComponentWorkAllocation(i, value);
         component.allocation = value;
     });
 };
@@ -413,20 +413,20 @@ exports.enterMediumComponentWorkAllocation = function(i, data, key) {
         component = data[key][i] = data[key][i] || {};
 
         component.allocation = 50;
-        pages.new_work.enterComponentWorkAllocation(i, component.allocation);
+        pages.newWork.enterComponentWorkAllocation(i, component.allocation);
     });
 };
 exports.enterNewShellWork = function(i, title, data, key) {
     it('Enter new shell work title as component work #' + (i + 1), function() {
-        pages.new_work.enterComponentWorkSearchTerms(i, title);
+        pages.newWork.enterComponentWorkSearchTerms(i, title);
     });
 
     it('Wait for "Enter as a new work" suggestion', function() {
-        pages.new_work.waitForEnterAsNewWorkToBeDisplayed();
+        pages.newWork.waitForEnterAsNewWorkToBeDisplayed();
     });
 
     it('Select "Enter as a new work" suggestion', function() {
-        pages.new_work.selectEnterAsNewWorkSuggestion().then(function() {
+        pages.newWork.selectEnterAsNewWorkSuggestion().then(function() {
             var component;
 
             data = data || hash.currentEntityDataSlotsByType.work;
@@ -447,19 +447,19 @@ exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
         var components = data.components || [];
         var shellWork = components[i] || {};
 
-        pages.new_work.validateEnteredShellWorkTitle(i, shellWork.name);
+        pages.newWork.validateEnteredShellWorkTitle(i, shellWork.name);
     });
 };
 exports.validateDefaultShellWorkTitleLanguage = function(i) {
     it('Validate default shell work title language #' + (i + 1), function() {
-        pages.new_work.validateSelectedShellWorkTitleLanguage(i, 'English');
+        pages.newWork.validateSelectedShellWorkTitleLanguage(i, 'English');
     });
 };
 exports.validateDefaultShellWorkCreatorRole = function(i, j) {
     it(
         'Validate default creator role #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            pages.new_work.validateSelectedShellWorkCreatorRole(i, j, 'CA');
+            pages.newWork.validateSelectedShellWorkCreatorRole(i, j, 'CA');
         }
     );
 };
@@ -467,7 +467,7 @@ exports.validateRequiredShellWorkCreatorNameField = function(i, j) {
     it(
         'Validate required creator name field #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            pages.new_work.validateRequiredShellWorkCreatorNameField(i, j);
+            pages.newWork.validateRequiredShellWorkCreatorNameField(i, j);
         }
     );
 };
@@ -475,7 +475,7 @@ exports.selectRandomShellWorkCreator = function(i, j, data, key) {
     it(
         'Type a random letter on creator name field #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            pages.new_work.enterRandomLetterOnShellWorkCreatorNameField(i, j);
+            pages.newWork.enterRandomLetterOnShellWorkCreatorNameField(i, j);
         }
     );
 
@@ -484,7 +484,7 @@ exports.selectRandomShellWorkCreator = function(i, j, data, key) {
     });
 
     it('Select a random creator', function() {
-        pages.new_work.selectRandomCreatorSuggestion().then(function(selected) {
+        pages.newWork.selectRandomCreatorSuggestion().then(function(selected) {
             var component;
             var creator;
 
@@ -509,7 +509,7 @@ exports.selectShellWorkCreatorFromPersonSlot = function(i, j, slotIndex, data, k
         'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
             person = _.merge({}, hash.personSlots[slotIndex]);
-            pages.new_work.enterShellWorkCreatorSearchTerms(i, j, person.ipiNumber);
+            pages.newWork.enterShellWorkCreatorSearchTerms(i, j, person.ipiNumber);
         }
     );
 
@@ -518,7 +518,7 @@ exports.selectShellWorkCreatorFromPersonSlot = function(i, j, slotIndex, data, k
     });
 
     it('Select result by IPI number', function() {
-        pages.new_work.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function(selected) {
+        pages.newWork.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function(selected) {
             var component,
                 creator;
 
@@ -552,7 +552,7 @@ exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, ke
             previousComponent.creators = previousComponent.creators || [];
             previousCreator = previousComponent.creators[l] || {};
 
-            pages.new_work.enterShellWorkCreatorSearchTerms(i, j, previousCreator.ipiNumber);
+            pages.newWork.enterShellWorkCreatorSearchTerms(i, j, previousCreator.ipiNumber);
         }
     );
 
@@ -561,7 +561,7 @@ exports.selectPreviouslySelectedShellWorkCreator = function(i, j, k, l, data, ke
     });
 
     it('Select result by IPI number', function() {
-        pages.new_work.selectCreatorSuggestionByIpiNumber(previousCreator.ipiNumber).then(function(selected) {
+        pages.newWork.selectCreatorSuggestionByIpiNumber(previousCreator.ipiNumber).then(function(selected) {
             var component;
             var creator;
 
@@ -579,7 +579,7 @@ exports.validateRequiredShellWorkCreatorContributionField = function(i, j) {
     it(
         'Validate required creator contribution field #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            pages.new_work.validateRequiredShellWorkCreatorContributionField(i, j);
+            pages.newWork.validateRequiredShellWorkCreatorContributionField(i, j);
         }
     );
 };
@@ -587,7 +587,7 @@ exports.enterShellWorkCreatorContribution = function(i, j, value, data, key) {
     it(
         'Enter creator contribution #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            pages.new_work.enterShellWorkCreatorContribution(i, j, value).then(function() {
+            pages.newWork.enterShellWorkCreatorContribution(i, j, value).then(function() {
                 var component;
                 var creator;
 
@@ -610,7 +610,7 @@ module.exports.selectRandomMusicalDistributionCategory = function() {
 	var deferred = promise.defer();
 	it("Select a random musical distribution category", function() {
 		deferred.fulfill(pages.base.selectRandomDropdownOption(
-			pages.new_work.musicalDistributionCategoryDropdown(),
+			pages.newWork.musicalDistributionCategoryDropdown(),
 			{ dropdownType: "tg" }
 		));
 		deferred.promise.then(function(value) {
@@ -624,7 +624,7 @@ module.exports.selectRandomTextMusicRelationship = function() {
 	var deferred = promise.defer();
 	it("Select a random text music relationship", function() {
 		deferred.fulfill(pages.base.selectRandomDropdownOption(
-			pages.new_work.textMusicRelationshipDropdown(),
+			pages.newWork.textMusicRelationshipDropdown(),
 			{ dropdownType: "tg" }
 		));
 		deferred.promise.then(function(value) {
@@ -638,7 +638,7 @@ module.exports.selectRandomExcerptType = function() {
 	var deferred = promise.defer();
 	it("Select a random excerpt type", function() {
 		deferred.fulfill(pages.base.selectRandomDropdownOption(
-			pages.new_work.excerptTypeDropdown(),
+			pages.newWork.excerptTypeDropdown(),
 			{ dropdownType: "tg" }
 		));
 		deferred.promise.then(function(value) {
@@ -652,7 +652,7 @@ module.exports.selectRandomVersionType = function() {
 	var deferred = promise.defer();
 	it("Select a random version type", function() {
 		deferred.fulfill(pages.base.selectRandomDropdownOption(
-			pages.new_work.versionTypeDropdown(),
+			pages.newWork.versionTypeDropdown(),
 			{ dropdownType: "tg" }
 		));
 		deferred.promise.then(function(value) {
@@ -665,13 +665,13 @@ module.exports.selectRandomVersionType = function() {
 module.exports.selectRandomLyricAdaptation = function() {
 	var deferred = promise.defer();
 	it("Select a random lyric adaptation (if displayed)", function() {
-		pages.new_work.isLyricAdaptationFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isLyricAdaptationFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				deferred.fulfill(null);
 				return;
 			}
 			deferred.fulfill(pages.base.selectRandomDropdownOption(
-				pages.new_work.lyricAdaptationDropdown(),
+				pages.newWork.lyricAdaptationDropdown(),
 				{ dropdownType: "tg" }
 			));
 			deferred.promise.then(function(value) {
@@ -685,13 +685,13 @@ module.exports.selectRandomLyricAdaptation = function() {
 module.exports.selectRandomMusicArrangement = function() {
 	var deferred = promise.defer();
 	it("Select a random music arrangement (if displayed)", function() {
-		pages.new_work.isMusicArrangementFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isMusicArrangementFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				deferred.fulfill(null);
 				return;
 			}
 			deferred.fulfill(pages.base.selectRandomDropdownOption(
-				pages.new_work.musicArrangementDropdown(),
+				pages.newWork.musicArrangementDropdown(),
 				{ dropdownType: "tg" }
 			));
 			deferred.promise.then(function(value) {
@@ -705,13 +705,13 @@ module.exports.selectRandomMusicArrangement = function() {
 module.exports.selectRandomIntendedPurpose = function() {
 	var deferred = promise.defer();
 	it("Select a random music arrangement (if displayed)", function() {
-		pages.new_work.isIntendedPurposeFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isIntendedPurposeFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				deferred.fulfill(null);
 				return;
 			}
 			deferred.fulfill(pages.base.selectRandomDropdownOption(
-				pages.new_work.intendedPurposeDropdown(),
+				pages.newWork.intendedPurposeDropdown(),
 				{ dropdownType: "tg" }
 			));
 		});
@@ -720,20 +720,20 @@ module.exports.selectRandomIntendedPurpose = function() {
 };
 exports.selectIntendedPurpose = function(value) {
     it('Select Intended Purpose (' + value + ')', function() {
-        pages.new_work.selectIntendedPurpose(value);
+        pages.newWork.selectIntendedPurpose(value);
     });
 };
 module.exports.enterRandomProductionTitle = function() {
 	var deferred = promise.defer();
 	it("Enter a random production title (if displayed)", function() {
-		pages.new_work.isProductionTitleFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isProductionTitleFieldDisplayed().then(function(isDisplayed) {
 			var title;
 			if(!isDisplayed) {
 				deferred.fulfill(null);
 				return;
 			}
 			title = "TEST PRODUCTION TITLE " + random.id();
-			pages.new_work.enterProductionTitle(title);
+			pages.newWork.enterProductionTitle(title);
 			deferred.fulfill(title);
 		});
 	});
@@ -742,13 +742,13 @@ module.exports.enterRandomProductionTitle = function() {
 module.exports.selectRandomBltvr = function() {
 	var deferred = promise.defer();
 	it("Select a random music arrangement (if displayed)", function() {
-		pages.new_work.isBltvrFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isBltvrFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				deferred.fulfill(null);
 				return;
 			}
 			deferred.fulfill(pages.base.selectRandomDropdownOption(
-				pages.new_work.bltvrDropdown(),
+				pages.newWork.bltvrDropdown(),
 				{ dropdownType: "tg" }
 			));
 		});
@@ -758,13 +758,13 @@ module.exports.selectRandomBltvr = function() {
 module.exports.selectRandomMusicLibrary = function() {
 	var deferred = promise.defer();
 	it("Select a random music library (if displayed)", function() {
-		pages.new_work.isMusicLibraryFieldDisplayed().then(function(isDisplayed) {
+		pages.newWork.isMusicLibraryFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				deferred.fulfill(null);
 				return;
 			}
 			deferred.fulfill(pages.base.selectRandomDropdownOption(
-				pages.new_work.musicLibraryDropdown(),
+				pages.newWork.musicLibraryDropdown(),
 				{ dropdownType: "tg" }
 			));
 		});
@@ -773,48 +773,48 @@ module.exports.selectRandomMusicLibrary = function() {
 };
 exports.selectMusicLibrary = function(value) {
     it('Select music library (' + value + ')', function() {
-        pages.new_work.selectMusicLibrary(value);
+        pages.newWork.selectMusicLibrary(value);
         hash.currentEntityDataSlotsByType.work.musicLibrary = value;
     });
 };
 module.exports.validateDefaultCreationYear = function() {
 	it("Validate default creation year", function() {
-		expect(pages.new_work.enteredCreationYear()).toBe("");
+		expect(pages.newWork.enteredCreationYear()).toBe("");
 	});
 };
 module.exports.enterTwoYearsAgoAsCreationYear = function() {
 	var deferred = promise.defer();
 	it("Enter two years ago as creation year", function() {
 		var twoYearsAgo = new Date().getFullYear() - 2;
-		pages.new_work.enterCreationYear(twoYearsAgo);
+		pages.newWork.enterCreationYear(twoYearsAgo);
 		deferred.fulfill(twoYearsAgo);
 	});
 	return deferred.promise;
 };
 module.exports.validateDefaultCreationMonth = function() {
 	it("Validate default creation month", function() {
-		expect(pages.new_work.enteredCreationMonth()).toBe("");
+		expect(pages.newWork.enteredCreationMonth()).toBe("");
 	});
 };
 module.exports.enterThisMonthAsCreationMonth = function() {
 	var deferred = promise.defer();
 	it("Enter this month as creation month", function() {
 		var thisMonth = new Date().getMonth() + 1;
-		pages.new_work.enterCreationMonth(thisMonth);
+		pages.newWork.enterCreationMonth(thisMonth);
 		deferred.fulfill(thisMonth);
 	});
 	return deferred.promise;
 };
 module.exports.validateDefaultCreationDay = function() {
 	it("Validate default creation day", function() {
-		expect(pages.new_work.enteredCreationDay()).toBe("");
+		expect(pages.newWork.enteredCreationDay()).toBe("");
 	});
 };
 module.exports.enterTodayAsCreationDay = function() {
 	var deferred = promise.defer();
 	it("Enter today as creation day", function() {
 		var today = new Date().getDate();
-		pages.new_work.enterCreationDay(today);
+		pages.newWork.enterCreationDay(today);
 		deferred.fulfill(today);
 	});
 	return deferred.promise;
@@ -822,14 +822,14 @@ module.exports.enterTodayAsCreationDay = function() {
 module.exports.validateDefaultDeliveryYear = function() {
 	it("Validate default delivery year", function() {
 		var thisYear = new Date().getFullYear();
-		expect(pph.parseInt(pages.new_work.enteredDeliveryYear())).toBe(thisYear);
+		expect(pph.parseInt(pages.newWork.enteredDeliveryYear())).toBe(thisYear);
 	});
 };
 module.exports.enterLastYearAsDeliveryYear = function() {
 	var deferred = promise.defer();
 	it("Enter last year as delivery year", function() {
 		var lastYear = new Date().getFullYear() - 1;
-		pages.new_work.enterDeliveryYear(lastYear);
+		pages.newWork.enterDeliveryYear(lastYear);
 		deferred.fulfill(lastYear);
 	});
 	return deferred.promise;
@@ -837,14 +837,14 @@ module.exports.enterLastYearAsDeliveryYear = function() {
 module.exports.validateDefaultDeliveryMonth = function() {
 	it("Validate default delivery month", function() {
 		var thisMonth = new Date().getMonth() + 1;
-		expect(pph.parseInt(pages.new_work.enteredDeliveryMonth())).toBe(thisMonth);
+		expect(pph.parseInt(pages.newWork.enteredDeliveryMonth())).toBe(thisMonth);
 	});
 };
 module.exports.enterThisMonthAsDeliveryMonth = function() {
 	var deferred = promise.defer();
 	it("Enter this month as delivery month", function() {
 		var thisMonth = new Date().getMonth() + 1;
-		pages.new_work.enterDeliveryMonth(thisMonth);
+		pages.newWork.enterDeliveryMonth(thisMonth);
 		deferred.fulfill(thisMonth);
 	});
 	return deferred.promise;
@@ -852,14 +852,14 @@ module.exports.enterThisMonthAsDeliveryMonth = function() {
 module.exports.validateDefaultDeliveryDay = function() {
 	it("Validate default delivery day", function() {
 		var today = new Date().getDate();
-		expect(pph.parseInt(pages.new_work.enteredDeliveryDay())).toBe(today);
+		expect(pph.parseInt(pages.newWork.enteredDeliveryDay())).toBe(today);
 	});
 };
 module.exports.enterTodayAsDeliveryDay = function() {
 	var deferred = promise.defer();
 	it("Enter today as delivery day", function() {
 		var today = new Date().getDate();
-		pages.new_work.enterDeliveryDay(today);
+		pages.newWork.enterDeliveryDay(today);
 		deferred.fulfill(today);
 	});
 	return deferred.promise;
@@ -867,19 +867,19 @@ module.exports.enterTodayAsDeliveryDay = function() {
 module.exports.optToIncludeWorkOnWebsite = function(include) {
 	it (
 		"Opt whether to include work on WarnerChappell.com or not", function() {
-			pages.new_work.optToIncludeWorkOnWebsite(include);
+			pages.newWork.optToIncludeWorkOnWebsite(include);
 		}
 	);
 };
 
 exports.continueToNextTab = function() {
     it('Continue to next work creation tab', function() {
-        pages.new_work.continueToNextTab();
+        pages.newWork.continueToNextTab();
     });
 };
 
 exports.saveWork = function() {
-     steps.base.clickElement("Save Work", pages.new_work.saveWorkButton());
+     steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
 };
 exports.validateSaveWorkRedirection = function() {
      steps.base.validateRedirection("created work page", "/rights");
@@ -896,16 +896,16 @@ module.exports.createBasicWork = function(data, more) {
 
     describe (
         "Create basic work", function() {
-            steps.new_work.goToNewWorkPage();
+            steps.newWork.goToNewWorkPage();
 
-            steps.new_work.validateDefaultPrimaryWorkLanguage();
-            data.primaryWorkTitle = steps.new_work.enterRandomPrimaryWorkTitle();
+            steps.newWork.validateDefaultPrimaryWorkLanguage();
+            data.primaryWorkTitle = steps.newWork.enterRandomPrimaryWorkTitle();
 
             if(!more.skip.alternateWorkTitles) {
                 data.alternateWorkTitles = _.times (
                     2, function(i) {
-                        steps.new_work.validateDefaultAlternateWorkTitleLanguage(i);
-                        return steps.new_work.enterRandomAlternateWorkTitle(i);
+                        steps.newWork.validateDefaultAlternateWorkTitleLanguage(i);
+                        return steps.newWork.enterRandomAlternateWorkTitle(i);
                     }
                 );
             }
@@ -917,95 +917,95 @@ module.exports.createBasicWork = function(data, more) {
                         var creator = {};
                         var firstOne = (i === 0);
                         var lastOne = (i === howMany - 1);
-                        steps.new_work.validateDefaultCreatorRole(i);
-                        creator.name = steps.new_work.selectRandomCreator(i);
-                        steps.new_work.ensureContributionRequiredMessageIsDisplayed();
-                        steps.new_work.validateCreatorContributionInputMask(i);
+                        steps.newWork.validateDefaultCreatorRole(i);
+                        creator.name = steps.newWork.selectRandomCreator(i);
+                        steps.newWork.ensureContributionRequiredMessageIsDisplayed();
+                        steps.newWork.validateCreatorContributionInputMask(i);
                         if(firstOne) {
-                            steps.new_work.enterMediumCreatorContribution(i);
-                            steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+                            steps.newWork.enterMediumCreatorContribution(i);
+                            steps.newWork.ensureTotalContributionTooLowMessageIsDisplayed();
                         }
                         if(howMany > 1 && lastOne) {
-                            steps.new_work.enterMaximumCreatorContribution(i);
-                            steps.new_work.ensureTotalContributionTooHighMessageIsDisplayed();
+                            steps.newWork.enterMaximumCreatorContribution(i);
+                            steps.newWork.ensureTotalContributionTooHighMessageIsDisplayed();
                         }
                         creator.contribution = 100 / howMany;
-                        steps.new_work.enterCreatorContribution(i, creator.contribution);
+                        steps.newWork.enterCreatorContribution(i, creator.contribution);
                         if(howMany > 1 && !firstOne && !lastOne) {
-                            steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
+                            steps.newWork.ensureTotalContributionTooLowMessageIsDisplayed();
                         }
                         return creator;
                     }
                 );
-                steps.new_work.validateTotalContribution();
+                steps.newWork.validateTotalContribution();
                 return creators;
             })();
 
             if(!more.skip.assetType) {
-                steps.new_work.validateDefaultMusicalDistributionCategory();
+                steps.newWork.validateDefaultMusicalDistributionCategory();
                 data.musicalDistributionCategory = (
-                    steps.new_work.selectRandomMusicalDistributionCategory()
+                    steps.newWork.selectRandomMusicalDistributionCategory()
                 );
 
-                steps.new_work.validateDefaultTextMusicRelationship();
-                data.textMusicRelationship = steps.new_work.selectRandomTextMusicRelationship();
+                steps.newWork.validateDefaultTextMusicRelationship();
+                data.textMusicRelationship = steps.newWork.selectRandomTextMusicRelationship();
 
-                steps.new_work.validateDefaultExcerptType();
-                data.excerptType = steps.new_work.selectRandomExcerptType();
+                steps.newWork.validateDefaultExcerptType();
+                data.excerptType = steps.newWork.selectRandomExcerptType();
 
-                steps.new_work.validateDefaultVersionType();
-                data.versionType = steps.new_work.selectRandomVersionType();
+                steps.newWork.validateDefaultVersionType();
+                data.versionType = steps.newWork.selectRandomVersionType();
 
-                steps.new_work.validateDefaultLyricAdaptation();
-                data.lyricAdaptation = steps.new_work.selectRandomLyricAdaptation();
+                steps.newWork.validateDefaultLyricAdaptation();
+                data.lyricAdaptation = steps.newWork.selectRandomLyricAdaptation();
 
-                steps.new_work.validateDefaultMusicArrangement();
-                data.musicArrangement = steps.new_work.selectRandomMusicArrangement();
+                steps.newWork.validateDefaultMusicArrangement();
+                data.musicArrangement = steps.newWork.selectRandomMusicArrangement();
             }
 
             if(!more.skip.workOrigin) {
-                steps.new_work.validateDefaultIntendedPurpose();
-                data.intendedPurpose = steps.new_work.selectRandomIntendedPurpose();
+                steps.newWork.validateDefaultIntendedPurpose();
+                data.intendedPurpose = steps.newWork.selectRandomIntendedPurpose();
 
-                data.productionTitle = steps.new_work.enterRandomProductionTitle();
+                data.productionTitle = steps.newWork.enterRandomProductionTitle();
 
-                steps.new_work.validateDefaultBltvr();
-                data.bltvr = steps.new_work.selectRandomBltvr();
+                steps.newWork.validateDefaultBltvr();
+                data.bltvr = steps.newWork.selectRandomBltvr();
 
-                steps.new_work.validateDefaultMusicLibrary();
-                data.musicLibrary = steps.new_work.selectRandomMusicLibrary();
+                steps.newWork.validateDefaultMusicLibrary();
+                data.musicLibrary = steps.newWork.selectRandomMusicLibrary();
             }
 
             if(!more.skip.creationDate) {
-                steps.new_work.validateDefaultCreationYear();
-                steps.new_work.validateDefaultCreationMonth();
-                steps.new_work.validateDefaultCreationDay();
+                steps.newWork.validateDefaultCreationYear();
+                steps.newWork.validateDefaultCreationMonth();
+                steps.newWork.validateDefaultCreationDay();
 
-                data.creationYear = steps.new_work.enterTwoYearsAgoAsCreationYear();
-                data.creationMonth = steps.new_work.enterThisMonthAsCreationMonth();
-                data.creationDay = steps.new_work.enterTodayAsCreationDay();
+                data.creationYear = steps.newWork.enterTwoYearsAgoAsCreationYear();
+                data.creationMonth = steps.newWork.enterThisMonthAsCreationMonth();
+                data.creationDay = steps.newWork.enterTodayAsCreationDay();
             }
 
             if(!more.skip.deliveryDate) {
-                steps.new_work.validateDefaultDeliveryYear();
-                steps.new_work.validateDefaultDeliveryMonth();
-                steps.new_work.validateDefaultDeliveryDay();
+                steps.newWork.validateDefaultDeliveryYear();
+                steps.newWork.validateDefaultDeliveryMonth();
+                steps.newWork.validateDefaultDeliveryDay();
 
-                data.deliveryYear = steps.new_work.enterLastYearAsDeliveryYear();
-                data.deliveryMonth = steps.new_work.enterThisMonthAsDeliveryMonth();
-                data.deliveryDay = steps.new_work.enterTodayAsDeliveryDay();
+                data.deliveryYear = steps.newWork.enterLastYearAsDeliveryYear();
+                data.deliveryMonth = steps.newWork.enterThisMonthAsDeliveryMonth();
+                data.deliveryDay = steps.newWork.enterTodayAsDeliveryDay();
             }
 
             if(!more.skip.inclusionOnWebsite) {
                 data.includeOnWebsite = (function() {
                     var include = _.sample([true, false]);
-                    steps.new_work.optToIncludeWorkOnWebsite(include);
+                    steps.newWork.optToIncludeWorkOnWebsite(include);
                     return include;
                 })();
             }
 
-            steps.new_work.saveWork();
-            steps.new_work.validateSaveWorkRedirection();
+            steps.newWork.saveWork();
+            steps.newWork.validateSaveWorkRedirection();
 
             steps.work.findCurrentlyOpenWorkId().then(function(value) {
                 data.workId = value;

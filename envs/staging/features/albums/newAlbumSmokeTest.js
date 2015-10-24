@@ -43,7 +43,7 @@ var beforeFeature = [
             steps: function() {
                 steps.base.useBlankEntityDataSlot('work', 'mainWork');
 
-                using(steps.new_work, function() {
+                using(steps.newWork, function() {
                     this.goToNewWorkPage();
 
                     this.enterPrimaryWorkTitle(

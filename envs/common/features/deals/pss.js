@@ -22,7 +22,7 @@ exports.feature = [
             }
             steps.base.scrollIntoView("Delete chain icon publisher share set", element(By.css("#deal-publisher div.ng-scope:nth-child(1) div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")));
             steps.createDealScope.deleteChainIPublisherShare(1);
-            steps.base.scrollIntoView("Save publisher share set ", pages.create_deal_scope.elems.savePublisherShareSet);
+            steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -128,7 +128,7 @@ exports.feature = [
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.createDealScope.itAddSimpleScope();
             steps.createDealScope.itAddPublisherShare();
-            steps.base.scrollIntoView("Save publisher share set ", pages.create_deal_scope.elems.savePublisherShareSet);
+            steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -140,7 +140,7 @@ exports.feature = [
             steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
             steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
             steps.editDealScope.validatePublisherSharesSetSubtotalChainI(i);
-            steps.base.scrollIntoView("Edit publisher share set ", pages.edit_deal_scope.elems.publisherSharesSetArea);
+            steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
         }
@@ -155,7 +155,7 @@ exports.feature = [
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.createDealScope.itAddSimpleScope();
             steps.createDealScope.itAddPublisherShare();
-            steps.base.scrollIntoView("Save publisher share set ", pages.create_deal_scope.elems.savePublisherShareSet);
+            steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -167,7 +167,7 @@ exports.feature = [
             steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
             steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
             steps.editDealScope.validatePublisherSharesSetSubtotalChainI(i);
-            steps.base.scrollIntoView("Edit publisher share set ", pages.edit_deal_scope.elems.publisherSharesSetArea);
+            steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.itEditPublisherShare();
             steps.editDealScope.editSaveThePublisherShareSet();

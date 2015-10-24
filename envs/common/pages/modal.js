@@ -1,20 +1,20 @@
-'use strict';
+"use strict";
 
-var pph = require('../../../helpers/pph'),
-    promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+var ExpectedConditions = protractor.ExpectedConditions;
+var pph = require("../../../helpers/pph");
+var promise = protractor.promise;
 
 if (pages.modal === undefined) {
     pages.modal = new ftf.pageObject({
         locators: {
         },
-          yesButttonOnModal:function(){
 
-              return $(".modal-footer>.btn-primary");
-          },
+        yesButttonOnModal: function () {
+            return $(".modal-footer>.btn-primary");
+        },
+
         //Methods
-        clickOnYesButton:function()
-        {
+        clickOnYesButton: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.yesButttonOnModal()));
             this.yesButttonOnModal().click();
         }

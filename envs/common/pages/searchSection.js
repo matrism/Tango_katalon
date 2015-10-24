@@ -1,9 +1,8 @@
 "use strict";
+
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
-
 if (pages.searchSection === undefined) {
-
     pages.searchSection = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
@@ -13,15 +12,16 @@ if (pages.searchSection === undefined) {
             return $("#DSP-SEARCH-DROP>button")
         },
 
-        dropdownMenu:function() {
+        dropdownMenu: function () {
             return element(by.css("#DSP-SEARCH-DROP>.dropdown-menu"));
         },
 
-        organisationOption:function() {
+        organisationOption: function () {
             return element(by.css("#SEARCH-ORG"));
         },
+
         personOption: function () {
-          return $("#SEARCH-PERSON");
+            return $("#SEARCH-PERSON");
         },
 
         searchInput: function () {
@@ -32,7 +32,7 @@ if (pages.searchSection === undefined) {
             return element(by.css(".tg-typeahead__suggestions-group-item-inner"));
         },
 
-        entityTypeOption: function(value) {
+        entityTypeOption: function (value) {
             return this.dropdownMenu().element(by.cssContainingText(
                 'a', value
             ));
@@ -43,19 +43,20 @@ if (pages.searchSection === undefined) {
         },
 
         workOption: function () {
-          return $("#SEARCH-WORK");
+            return $("#SEARCH-WORK");
         },
+
+        //END OF LOCATORS ///////////////////////////////////////
 
         clickDropdownMenu: function () {
             this.searchDropdown().click();
         },
 
-        selectEntityTypeOption: function(value) {
+        selectEntityTypeOption: function (value) {
             return this.entityTypeOption(value).click();
         },
 
-        selectDeal:function()
-        {
+        selectDeal: function () {
             this.dealOption().click();
         },
 
@@ -73,13 +74,11 @@ if (pages.searchSection === undefined) {
             this.personOption().click();
         },
 
-        typeOrganisationNameIntoInput:function(organisationName)
-        {
+        typeOrganisationNameIntoInput: function (organisationName) {
             this.searchInput().sendKeys(organisationName);
         },
 
-        typeIntoSearchInput:function(value)
-        {
+        typeIntoSearchInput: function (value) {
             this.searchInput().sendKeys(value);
         },
 

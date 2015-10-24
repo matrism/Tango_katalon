@@ -79,7 +79,7 @@ exports.chooseIncompleteMdrcOption = function () {
 exports.chooseDeemedCompleteMdrcOption = function () {
     it("Choose deemed complete MDRC option", function () {
         pages.createDealContractPeriod.clickOnDeemedCompleteOption();
-        pages.create_deal_advances.waitForAjax();
+        pages.createDealAdvances.waitForAjax();
         browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.mdrcDateCompleted));
     });
 };
@@ -87,7 +87,7 @@ exports.chooseDeemedCompleteMdrcOption = function () {
 exports.chooseCompleteMdrcOption = function () {
     it("Choose complete MDRC option", function () {
         pages.createDealContractPeriod.clickOnCompleteOption();
-        pages.create_deal_advances.waitForAjax();
+        pages.createDealAdvances.waitForAjax();
         browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.mdrcDateCompleted));
     });
 };

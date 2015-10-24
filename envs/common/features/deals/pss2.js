@@ -16,7 +16,7 @@ exports.feature = [
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.createDealScope.itAddSimpleScope();
             steps.createDealScope.itAddPublisherShare();
-            steps.base.scrollIntoView("Save publisher share set ", pages.create_deal_scope.elems.savePublisherShareSet);
+            steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();

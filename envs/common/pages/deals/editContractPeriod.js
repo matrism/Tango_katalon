@@ -3,8 +3,8 @@
 var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-if (pages.edit_deal_contract_period === undefined) {
-    pages.edit_deal_contract_period = new ftf.pageObject({
+if (pages.editDealContractPeriod === undefined) {
+    pages.editDealContractPeriod = new ftf.pageObject({
 
         locators: {
             //mdrc
@@ -64,7 +64,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         validateTheFirstIncompleteMdrcTitle: function () {
-            pages.edit_deal_contract_period.elems.firstMdrcTitle.getText().
+            pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
                 then(function (promise) {
                     console.log("Mdrc title  is: " + promise);
                     expect(promise).toContain("Works");
@@ -73,7 +73,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         validateTheFirstDeemedCompleteMdrcTitle: function () {
-            pages.edit_deal_contract_period.elems.firstMdrcTitle.getText().
+            pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
                 then(function (promise) {
                     console.log("Mdrc title  is: " + promise);
                     expect(promise).toContain("Works");
@@ -82,7 +82,7 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         validateTheFirstCompleteMdrcTitle: function () {
-            pages.edit_deal_contract_period.elems.firstMdrcTitle.getText().
+            pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
                 then(function (promise) {
                     console.log("Mdrc title  is: " + promise);
                     expect(promise).toContain("Works");
@@ -235,58 +235,58 @@ if (pages.edit_deal_contract_period === undefined) {
             browser.driver.findElement(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ")")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") button.mdrc-edit-pencil i.fa.fa-pencil"))));
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") button.mdrc-edit-pencil i.fa.fa-pencil")).click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_contract_period.elems.editMdrcQuantity));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editMdrcQuantity));
         },
 
         editClickOnIncompleteOption: function () {
-            pages.edit_deal_contract_period.elems.editIncompleteMdrc.click();
+            pages.editDealContractPeriod.elems.editIncompleteMdrc.click();
         },
 
         editClickOnDeemedCompleteOption: function () {
-            pages.edit_deal_contract_period.elems.editDeemedCompleteMdrc.click();
+            pages.editDealContractPeriod.elems.editDeemedCompleteMdrc.click();
         },
 
         editClickOnCompleteOption: function () {
-            pages.edit_deal_contract_period.elems.editCompleteMdrc.click();
+            pages.editDealContractPeriod.elems.editCompleteMdrc.click();
         },
 
         editTheMdrcQuantity: function () {
             var number = Math.floor(Math.random() * 50) + 30;
-            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcQuantity);
-            pages.edit_deal_contract_period.elems.editMdrcQuantity.clear();
-            pages.edit_deal_contract_period.elems.editMdrcQuantity.sendKeys(number);
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcQuantity);
+            pages.editDealContractPeriod.elems.editMdrcQuantity.clear();
+            pages.editDealContractPeriod.elems.editMdrcQuantity.sendKeys(number);
         },
 
         editTheMdrcMinimumWorkContribution: function () {
             var number = Math.floor(Math.random() * 100) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcMinimumWorkContribution.clear();
-            pages.edit_deal_contract_period.elems.editMdrcMinimumWorkContribution.sendKeys(number);
+            pages.editDealContractPeriod.elems.editMdrcMinimumWorkContribution.clear();
+            pages.editDealContractPeriod.elems.editMdrcMinimumWorkContribution.sendKeys(number);
         },
 
         editTheMdrcQuantityForCommercialRelease: function () {
             var number = Math.floor(Math.random() * 10) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcQuantityForCommercialRelease.clear();
-            pages.edit_deal_contract_period.elems.editMdrcQuantityForCommercialRelease.sendKeys(number);
+            pages.editDealContractPeriod.elems.editMdrcQuantityForCommercialRelease.clear();
+            pages.editDealContractPeriod.elems.editMdrcQuantityForCommercialRelease.sendKeys(number);
         },
 
         editTheMdrcMajorTerritoriesForCommercialeRelease: function () {
             var number = Math.floor(Math.random() * 5) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcMajorTerritoriesForCommercialRelease.clear();
-            pages.edit_deal_contract_period.elems.editMdrcMajorTerritoriesForCommercialRelease.sendKeys(number);
+            pages.editDealContractPeriod.elems.editMdrcMajorTerritoriesForCommercialRelease.clear();
+            pages.editDealContractPeriod.elems.editMdrcMajorTerritoriesForCommercialRelease.sendKeys(number);
         },
 
         editTheFirstTerritoriesFieldLetter: function () {
-            pages.edit_deal_contract_period.elems.editMdrcTerritoriesInputField.sendKeys("a");
+            pages.editDealContractPeriod.elems.editMdrcTerritoriesInputField.sendKeys("a");
         },
 
         editTheTerritoriesFieldLetter: function () {
-            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcTerritoriesField);
-            pages.edit_deal_contract_period.elems.editMdrcTerritoriesField.click();
-            pages.edit_deal_contract_period.elems.editMdrcTerritoriesInputField.sendKeys("a");
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcTerritoriesField);
+            pages.editDealContractPeriod.elems.editMdrcTerritoriesField.click();
+            pages.editDealContractPeriod.elems.editMdrcTerritoriesInputField.sendKeys("a");
         },
 
         editSelectRandomTerritory: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_contract_period.elems.editMdrcTerritoriesDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editMdrcTerritoriesDropDown));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -295,22 +295,22 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editClickOnMdrcYesCommercialReleaseByMajorLabel: function () {
-            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcYesCommercialReleaseByMajorLabel);
-            pages.edit_deal_contract_period.elems.editMdrcYesCommercialReleaseByMajorLabel.click();
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel);
+            pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel.click();
         },
 
         editClickOnMdrcNoCommercialReleaseByMajorLabel: function () {
-            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcNoCommercialReleaseByMajorLabel);
-            pages.edit_deal_contract_period.elems.editMdrcNoCommercialReleaseByMajorLabel.click();
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcNoCommercialReleaseByMajorLabel);
+            pages.editDealContractPeriod.elems.editMdrcNoCommercialReleaseByMajorLabel.click();
         },
 
         editTheMdrcLabelsField: function () {
-            pages.edit_deal_contract_period.elems.editMdrcLabelsElement.clear();
-            pages.edit_deal_contract_period.elems.editMdrcLabelsElement.sendKeys("a");
+            pages.editDealContractPeriod.elems.editMdrcLabelsElement.clear();
+            pages.editDealContractPeriod.elems.editMdrcLabelsElement.sendKeys("a");
         },
 
         editSelectMdrcRandomValueFromLabel: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_contract_period.elems.editMdrcLabelsDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editMdrcLabelsDropDownData));
 
             element(By.css("li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
@@ -333,85 +333,85 @@ if (pages.edit_deal_contract_period === undefined) {
         },
 
         editClickOnMdrcYesSelfRecord: function () {
-            pages.edit_deal_contract_period.elems.editMdrcYesSelfRecord.click();
+            pages.editDealContractPeriod.elems.editMdrcYesSelfRecord.click();
         },
 
         editClickOnMdrcNoSelfRecord: function () {
-            pages.edit_deal_contract_period.elems.editMdrcNoSelfRecord().click();
+            pages.editDealContractPeriod.elems.editMdrcNoSelfRecord().click();
         },
 
         editTheMdrcPercentOfMinStatutoryRate: function () {
             var percent = Math.floor(Math.random() * 100) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcPercentOfMinStatutoryRate.clear();
-            pages.edit_deal_contract_period.elems.editMdrcPercentOfMinStatutoryRate.sendKeys(percent);
+            pages.editDealContractPeriod.elems.editMdrcPercentOfMinStatutoryRate.clear();
+            pages.editDealContractPeriod.elems.editMdrcPercentOfMinStatutoryRate.sendKeys(percent);
         },
 
         editTheMdrcInNoEventLessThan: function () {
             var value = Math.floor(Math.random() * 20) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcInNoEventLessThan.clear();
-            pages.edit_deal_contract_period.elems.editMdrcInNoEventLessThan.sendKeys(value);
+            pages.editDealContractPeriod.elems.editMdrcInNoEventLessThan.clear();
+            pages.editDealContractPeriod.elems.editMdrcInNoEventLessThan.sendKeys(value);
         },
 
         editClickOnMdrcYesProportionalRecoupmentAllowed: function () {
-            pages.edit_deal_contract_period.elems.editMdrcYesProportionalRecoupmentAllowed.click();
+            pages.editDealContractPeriod.elems.editMdrcYesProportionalRecoupmentAllowed.click();
         },
 
         editClickOnMdrcNoProportionalRecoupmentAllowed: function () {
-            pages.edit_deal_contract_period.elems.editMdrcNoProportionalRecoupmentAllowed.click();
+            pages.editDealContractPeriod.elems.editMdrcNoProportionalRecoupmentAllowed.click();
         },
 
         editClickOnMdrcYesSeeContractForAdditionalMdrcComplexities: function () {
-            pages.edit_deal_contract_period.elems.editMdrcYesSeeContractForAdditionalMdrcComplexities.click();
+            pages.editDealContractPeriod.elems.editMdrcYesSeeContractForAdditionalMdrcComplexities.click();
         },
 
         editClickOnMdrcNoSeeContractForAdditionalMdrcComplexities: function () {
-            pages.edit_deal_contract_period.elems.editMdrcNoSeeContractForAdditionalMdrcComplexities.click();
+            pages.editDealContractPeriod.elems.editMdrcNoSeeContractForAdditionalMdrcComplexities.click();
         },
 
         editClickOnSaveMdrcForm: function () {
-            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcSaveButton);
-            pages.edit_deal_contract_period.elems.editMdrcSaveButton.click();
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcSaveButton);
+            pages.editDealContractPeriod.elems.editMdrcSaveButton.click();
         },
 
         editTheMdrcDeliverySchedule: function () {
             var value = Math.floor(Math.random() * 20) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcDeliverySchedule.clear();
-            pages.edit_deal_contract_period.elems.editMdrcDeliverySchedule.sendKeys(value);
+            pages.editDealContractPeriod.elems.editMdrcDeliverySchedule.clear();
+            pages.editDealContractPeriod.elems.editMdrcDeliverySchedule.sendKeys(value);
         },
 
         editTheMdrcEveryWeeks: function () {
             var value = Math.floor(Math.random() * 10) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcEveryWeeks.clear();
-            pages.edit_deal_contract_period.elems.editMdrcEveryWeeks.sendKeys(value);
+            pages.editDealContractPeriod.elems.editMdrcEveryWeeks.clear();
+            pages.editDealContractPeriod.elems.editMdrcEveryWeeks.sendKeys(value);
         },
 
         editTheMdrcDateCompleted: function () {
-            pages.edit_deal_contract_period.elems.editMdrcDateCompleted.clear();
-            pages.edit_deal_contract_period.elems.editMdrcDateCompleted.sendKeys("2015-03-09");
+            pages.editDealContractPeriod.elems.editMdrcDateCompleted.clear();
+            pages.editDealContractPeriod.elems.editMdrcDateCompleted.sendKeys("2015-03-09");
         },
 
         editTheMdrcShortfallAmount: function () {
             var value = Math.floor(Math.random() * 80) + 1;
-            pages.edit_deal_contract_period.elems.editMdrcShortfallAmount.clear();
-            pages.edit_deal_contract_period.elems.editMdrcShortfallAmount.sendKeys(value);
+            pages.editDealContractPeriod.elems.editMdrcShortfallAmount.clear();
+            pages.editDealContractPeriod.elems.editMdrcShortfallAmount.sendKeys(value);
         },
 
         editClickOnMdrcForgivenShortfallActionButton: function () {
-            pages.edit_deal_contract_period.elems.editMdrcForgivenShortfallButton.click();
+            pages.editDealContractPeriod.elems.editMdrcForgivenShortfallButton.click();
         },
 
         editClickOnMdrcCarriedForwardShortfallActionButton: function () {
-            pages.edit_deal_contract_period.elems.editMdrcCarriedForwardShortfallButton.click();
+            pages.editDealContractPeriod.elems.editMdrcCarriedForwardShortfallButton.click();
         },
 
         editRemoveTheFirstMdrcTerritory : function () {
-            pages.edit_deal_contract_period.elems.editMdrcTerritoriesField.click();
-            pages.edit_deal_contract_period.elems.editMdrcRemoveFirstTerritoryIcon.click();
+            pages.editDealContractPeriod.elems.editMdrcTerritoriesField.click();
+            pages.editDealContractPeriod.elems.editMdrcRemoveFirstTerritoryIcon.click();
         },
 
         editRemoveTheFirstMdrcLabel : function () {
-            pages.base.scrollIntoView(pages.edit_deal_contract_period.elems.editMdrcRemoveFirstLabelIcon);
-            pages.edit_deal_contract_period.elems.editMdrcRemoveFirstLabelIcon.click();
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon);
+            pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon.click();
         }
     });
 }

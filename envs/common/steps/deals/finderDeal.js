@@ -7,335 +7,335 @@ steps.finderDeal = exports;
 
 exports.validateGeneralTermsTitleIsPresent = function () {
     it("Validate the general terms title is present ", function () {
-        pages.finder_deal.validateTheGeneralTermsTitleIsPresent();
+        pages.finderDeal.validateTheGeneralTermsTitleIsPresent();
     });
 };
 
 exports.validateTermsByContractPeriodFinderDealTitle = function () {
     it("Validate the terms by contract period finder deal title ", function () {
-        pages.finder_deal.validateTheTermsByContractPeriodFinderDealTitle();
+        pages.finderDeal.validateTheTermsByContractPeriodFinderDealTitle();
     });
 };
 
 exports.validateNumberOfTermsByContractPeriodFinderDealTitle = function (number) {
     it("Validate the number of terms by contract period finder deal title", function () {
-        pages.finder_deal.validateTheNumberOfTermsByContractPeriodFinderDealTitle(number);
+        pages.finderDeal.validateTheNumberOfTermsByContractPeriodFinderDealTitle(number);
     });
 };
 
 exports.clickOnGeneralTermsFinderDeal = function () {
     it("Click on the general terms finder deal ", function () {
-        pages.finder_deal.clickOnTheGeneralTermsFinderDeal();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnTheGeneralTermsFinderDeal();
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.editGeneralTermsFinderDeal = function () {
     it("Edit the general terms finder deal ", function () {
-        pages.finder_deal.editTheGeneralTermsFinderDeal();
+        pages.finderDeal.editTheGeneralTermsFinderDeal();
     });
 };
 
 exports.clickOnYesPriorAwarenessNotification = function () {
     it("Click on the yes prior awarness notification ", function () {
-        pages.finder_deal.clickOnTheYesPriorAwarenessNotification();
+        pages.finderDeal.clickOnTheYesPriorAwarenessNotification();
     });
 };
 
 exports.clickOnNoPriorAwarenessNotification = function () {
     it("Click on the no prior awareness notification ", function () {
-        pages.finder_deal.clickOnTheNoPriorAwarenessNotification();
+        pages.finderDeal.clickOnTheNoPriorAwarenessNotification();
     });
 };
 
 exports.clickOnTermsByContractPeriodFinderDeal = function () {
     it("Click on the terms by Contract period finder deal ", function () {
-        pages.finder_deal.clickOnTheTermsByContractPeriodFinderDeal();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnTheTermsByContractPeriodFinderDeal();
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.fillNotifyWithinTheNumberOfDays = function (number) {
     it("Fill into notify within the number of days ", function () {
-        pages.finder_deal.fillIntoNotifyWithinTheNumberOfDays(number);
+        pages.finderDeal.fillIntoNotifyWithinTheNumberOfDays(number);
     });
 };
 
 exports.fillSubmissionDecisionWithinNumberOfDays = function (number) {
     it("Fill into submission decision within number of days ", function () {
-        pages.finder_deal.fillIntoSubmissionDecisionWithinNumberOfDays(number);
+        pages.finderDeal.fillIntoSubmissionDecisionWithinNumberOfDays(number);
     });
 };
 
 exports.clickOnAcceptAssumedResponse = function () {
     it("Click on the accept assumed response ", function () {
-        pages.finder_deal.clickOnTheAcceptAssumedResponse();
+        pages.finderDeal.clickOnTheAcceptAssumedResponse();
     });
 };
 
 exports.clickOnDeclineAssumedResponse = function () {
     it("Click on the decline assumed response ", function () {
-        pages.finder_deal.clickOnTheDeclineAssumedResponse();
+        pages.finderDeal.clickOnTheDeclineAssumedResponse();
     });
 };
 
 exports.clickOnNoneAssumedResponse = function () {
     it("Click on the none assumed response ", function () {
-        pages.finder_deal.clickOnTheNoneAssumedResponse();
+        pages.finderDeal.clickOnTheNoneAssumedResponse();
     });
 };
 
 exports.clickOnWcmWhoWillDraftDeals = function () {
     it("Click on the wcm who will draft deals ", function () {
-        pages.finder_deal.clickOnTheWcmWhoWillDraftDeals();
+        pages.finderDeal.clickOnTheWcmWhoWillDraftDeals();
     })
 };
 
 exports.clickOnFinderWhoWillDraftDeals = function () {
     it("Click on the finder who will draft deals ", function () {
-        pages.finder_deal.clickOnTheFinderWhoWillDraftDeals();
+        pages.finderDeal.clickOnTheFinderWhoWillDraftDeals();
     });
 };
 
 exports.clickOnWcmWhoHasControlToExerciseFutureOptions = function () {
     it("Click on the wcm who has control to exercise future options ", function () {
-        pages.finder_deal.clickOnTheWcmWhoHasControlToExerciseFutureOptions();
+        pages.finderDeal.clickOnTheWcmWhoHasControlToExerciseFutureOptions();
     });
 };
 
 exports.clickOnFinderWhoHasControlToExerciseFutureOptions = function () {
     it("Click on the finder who has control to exercise future options ", function () {
-        pages.finder_deal.clickOnTheFinderWhoHasControlToExerciseFutureOptions();
+        pages.finderDeal.clickOnTheFinderWhoHasControlToExerciseFutureOptions();
     })
 };
 
 exports.clickOnWcmWhoIsResponsibleForAdvances = function () {
     it("Click on the wcm who is responsible for advances ", function () {
-        pages.finder_deal.clickOnTheWcmWhoIsResponsibleForAdvances();
+        pages.finderDeal.clickOnTheWcmWhoIsResponsibleForAdvances();
     });
 };
 
 exports.clickOnFinderWhoIsResponsibleForAdvances = function () {
     it("Click on the finder who is responsible for advances ", function () {
-        pages.finder_deal.clickOnTheFinderWhoIsResponsibleForAdvances();
+        pages.finderDeal.clickOnTheFinderWhoIsResponsibleForAdvances();
     });
 };
 
 exports.selectDesiredValueFinderRightToPursueDropDown = function (value) {
     it("Select the desired value finder right to pursue drop down ", function () {
-        pages.finder_deal.selectTheDesiredValueFinderRightToPursueDropDown();
+        pages.finderDeal.selectTheDesiredValueFinderRightToPursueDropDown();
     });
 };
 
 exports.selectTheRandomValueFinderRightToPursueDropDown = function () {
     it("Select the random value finder right to pursue drop down ", function () {
-        pages.finder_deal.selectTheRandomValueFinderRightToPursueDropDown();
+        pages.finderDeal.selectTheRandomValueFinderRightToPursueDropDown();
     });
 };
 
 exports.clickOnYesFinderRightToPursue = function () {
     it("Click on the yes finder right to pursue ", function () {
-        pages.finder_deal.clickOnTheYesFinderRightToPursue();
+        pages.finderDeal.clickOnTheYesFinderRightToPursue();
     });
 };
 
 exports.clickOnNoFinderRightToPursue = function () {
     it("Click on the no finder right to pursue ", function () {
-        pages.finder_deal.clickOnTheNoWcmRightToPursue();
+        pages.finderDeal.clickOnTheNoWcmRightToPursue();
     });
 };
 
 exports.clickOnYesWcmRightToPursue = function () {
     it("Click on the yes wcm right to pursue ", function () {
-        pages.finder_deal.clickOnTheYesWcmRightToPursue();
+        pages.finderDeal.clickOnTheYesWcmRightToPursue();
     });
 };
 
 exports.clickOnNoWcmRightToPursue = function () {
     it("Click on the no wcm right to pursue ", function () {
-        pages.finder_deal.clickOnTheNoWcmRightToPursue();
+        pages.finderDeal.clickOnTheNoWcmRightToPursue();
     });
 };
 
 exports.clickOnSaveGeneralTermsFinderDeal = function () {
     it("Click on the save general terms finder deal ", function () {
-        pages.finder_deal.clickOnTheSaveGeneralTermsFinderDeal();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnTheSaveGeneralTermsFinderDeal();
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.clickOnCancelGeneralTermsFinderDeal = function () {
     it("Click on the cancel general terms finder deal ", function () {
-        pages.finder_deal.clickOnTheCancelGeneralTermsFinderDeal();
+        pages.finderDeal.clickOnTheCancelGeneralTermsFinderDeal();
     });
 };
 
 exports.editTermsByContractPeriodFinderDeal = function () {
     it("Edit the terms by contract period finder deal area ", function () {
-        pages.finder_deal.editTheTermsByContractPeriodFinderDeal();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.editTheTermsByContractPeriodFinderDeal();
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.clickContractPeriodNumberIDetailsTermsByContractPeriod = function (i) {
     it("Click on the contract period number i finder deal details terms by contract period ", function () {
-        pages.finder_deal.clickOnContractPeriodNumberIDetailsTermsByContractPeriod(i);
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnContractPeriodNumberIDetailsTermsByContractPeriod(i);
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode = function (i) {
     it("Click on the contract period number i finder deal details terms by contract period view mode", function () {
-        pages.finder_deal.clickOnContractPeriodNumberIDetailsTermsByContractPeriodViewMode(i);
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnContractPeriodNumberIDetailsTermsByContractPeriodViewMode(i);
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI = function () {
     it("Fill into maximum found agreements without pre approval", function () {
-        pages.finder_deal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+        pages.finderDeal.fillIntoMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
     });
 };
 
 exports.fillMaximumFoundAgreementWithPreApprovalContractPeriodI = function () {
     it("Fill into maximum found agreement with pre approval contract period  ", function () {
-        pages.finder_deal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI();
+        pages.finderDeal.fillIntoMaximumFoundAgreementWithPreApprovalContractPeriodI();
     });
 };
 
 exports.fillFindersRecoupmentResponsability = function () {
     it("Fill into finders recoupment responsability ", function () {
-        pages.finder_deal.fillIntoFindersRecoupmentResponsability();
+        pages.finderDeal.fillIntoFindersRecoupmentResponsability();
     });
 };
 
 exports.fillNonSignedArtistMaximumAdvancesPayable = function () {
     it("Fill into non signed artist maximum advances payable ", function () {
-        pages.finder_deal.fillIntoNonSignedArtistMaximumAdvancesPayable();
+        pages.finderDeal.fillIntoNonSignedArtistMaximumAdvancesPayable();
     });
 };
 
 exports.fillSignedArtistMaximumAdvancesPayable = function () {
     it("Fill into signed artist maximum advances payable ", function () {
-        pages.finder_deal.fillIntoSignedArtistMaximumAdvancesPayable();
+        pages.finderDeal.fillIntoSignedArtistMaximumAdvancesPayable();
     });
 };
 
 exports.fillAggregateMaximumAdvancesPayable = function () {
     it("Fill into aggregate maximum advances payable ", function () {
-        pages.finder_deal.fillIntoAggregateMaximumAdvancesPayable();
+        pages.finderDeal.fillIntoAggregateMaximumAdvancesPayable();
     });
 };
 
 exports.fillAggregateMaximumOnAdvancesField = function () {
     it("Fill into aggregate maximum on advances field ", function () {
-        pages.finder_deal.fillIntoAggregateMaximumOnAdvancesField();
+        pages.finderDeal.fillIntoAggregateMaximumOnAdvancesField();
     });
 };
 
 exports.fillFindersOwnershipField = function () {
     it("Fill into finders ownership field ", function () {
-        pages.finder_deal.fillIntoFindersOwnershipField();
+        pages.finderDeal.fillIntoFindersOwnershipField();
     });
 };
 
 exports.fillWmcsOwnershipField = function () {
     it("Fill into wcms ownerhip field ", function () {
-        pages.finder_deal.fillIntoWmcsOwnershipField();
+        pages.finderDeal.fillIntoWmcsOwnershipField();
     });
 };
 
 exports.fillAggregateMaximumOnAdvancesFieldNumberI = function (i) {
     it("Fill into aggregate maximum on advances field number i ", function () {
-        pages.finder_deal.fillIntoAggregateMaximumOnAdvancesFieldNumberI(i);
+        pages.finderDeal.fillIntoAggregateMaximumOnAdvancesFieldNumberI(i);
     });
 };
 
 exports.fillFindersOwnershipFieldNumberI = function (i) {
     it("Fill into finders ownership field number i ", function () {
-        pages.finder_deal.fillIntoFindersOwnershipFieldNumberI(i);
+        pages.finderDeal.fillIntoFindersOwnershipFieldNumberI(i);
     });
 };
 
 exports.fillWmcsOwnershipFieldNumberI = function (i) {
     it("Fill into wcm ownership field number i ", function () {
-        pages.finder_deal.fillIntoWmcsOwnershipFieldNumberI(i);
+        pages.finderDeal.fillIntoWmcsOwnershipFieldNumberI(i);
     });
 };
 
 exports.selectRandomCreatorFoundSubmissionField = function () {
     it("Fill into creator found submission field ", function () {
-        pages.finder_deal.fillIntoCreatorFoundSubmissionField();
-        pages.finder_deal.selectRandomValueFromCreatorFoundSubmissionDropDown();
+        pages.finderDeal.fillIntoCreatorFoundSubmissionField();
+        pages.finderDeal.selectRandomValueFromCreatorFoundSubmissionDropDown();
     });
 };
 
 exports.fillSubmissionDateField = function () {
     it("Fill into submission date field ", function () {
-        pages.finder_deal.fillIntoSubmissionDateField();
+        pages.finderDeal.fillIntoSubmissionDateField();
     });
 };
 
 exports.selectRandomWcmDecisionDropDown = function () {
     it("Select the random wcm decision drop down ", function () {
-        pages.finder_deal.selectTheRandomWcmDecisionDropDown();
+        pages.finderDeal.selectTheRandomWcmDecisionDropDown();
     });
 };
 
 exports.selectRandomValueFromFoundDealDropDown = function () {
     it("Select random value from found deal drop down ", function () {
-        pages.finder_deal.fillIntoFoundDealInputField();
-        pages.finder_deal.selectTheRandomValueFromFoundDealDropDown();
+        pages.finderDeal.fillIntoFoundDealInputField();
+        pages.finderDeal.selectTheRandomValueFromFoundDealDropDown();
     });
 };
 
 exports.fillFindersRecoupmentResponsabilityOverride = function () {
     it("Fill into finders recoupment responsability override ", function () {
-        pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverride();
+        pages.finderDeal.fillIntoFindersRecoupmentResponsabilityOverride();
     });
 };
 
 exports.selectRandomValueFromCreatorFoundSubmissionDropDownFieldNumberI = function (i) {
     it("Select creator found submission field number i ", function () {
-        pages.finder_deal.fillIntoCreatorFoundSubmissionFieldNumberI(i);
-        pages.finder_deal.selectRandomValueFromCreatorFoundSubmissionDropDown();
+        pages.finderDeal.fillIntoCreatorFoundSubmissionFieldNumberI(i);
+        pages.finderDeal.selectRandomValueFromCreatorFoundSubmissionDropDown();
     })
 };
 
 exports.fillIntoSubmissionDateFieldNumberI = function (i) {
     it("Fill into submission date field number i ", function () {
-        pages.finder_deal.fillIntoSubmissionDateFieldNumberI(i);
+        pages.finderDeal.fillIntoSubmissionDateFieldNumberI(i);
     });
 };
 
 exports.fillIntoFoundDealInputFieldNumberI = function (i) {
     it("Fill into found deal input field number i ", function () {
-        pages.finder_deal.fillIntoFoundDealInputFieldNumberI(i);
+        pages.finderDeal.fillIntoFoundDealInputFieldNumberI(i);
     });
 };
 
 exports.fillFindersRecoupmentResponsabilityOverrideNumberI = function (i) {
     it("Fill into finders recoupment responsability override number i ", function () {
-        pages.finder_deal.fillIntoFindersRecoupmentResponsabilityOverrideNumberI(i);
+        pages.finderDeal.fillIntoFindersRecoupmentResponsabilityOverrideNumberI(i);
     });
 };
 
 exports.clickOnSaveTermsByContractPeriodFinderDeal = function () {
     it("Click on save terms by contract period finder deal ", function () {
-        pages.finder_deal.clickOnTheSaveTermsByContractPeriodFinderDeal();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnTheSaveTermsByContractPeriodFinderDeal();
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.clickOnCancelTermsByContractPeriodTermsFinderDeal = function () {
     it("Cancel terms by contract period finder deal ", function () {
-        pages.finder_deal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
+        pages.finderDeal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
     });
 };
 
 exports.validatePriorAwarenessNotificationTooltip = function () {
     it("Validate the prior awareness notification tooltip ", function () {
-        pages.finder_deal.elems.priorAwarenessTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.priorAwarenessTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The prior awareness notification tooltip is : " + promise);
                 expect(promise).toContain("Indicates WCM's obligation to inform the Finder of prior");
@@ -346,7 +346,7 @@ exports.validatePriorAwarenessNotificationTooltip = function () {
 
 exports.validateNotifyWithinThisNumberOfDaysTooltip = function () {
     it("Validate the notify within this number of days tooltip ", function () {
-        pages.finder_deal.elems.notifyWithinThisNumberOfDaysTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.notifyWithinThisNumberOfDaysTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The notify within this number of days tooltip is : " + promise);
                 expect(promise).toEqual("Indicates within how many days the Finder must be notified of WCM \"knowledge\" of the Creator(s).");
@@ -356,7 +356,7 @@ exports.validateNotifyWithinThisNumberOfDaysTooltip = function () {
 
 exports.validateSubmissionDecisionWithinNumberOfDaysTooltip = function () {
     it("Validate the submission decision within number of days tooltip ", function () {
-        pages.finder_deal.elems.submissionDecisionWithinNumberOfDaysTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.submissionDecisionWithinNumberOfDaysTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The submission decision within number of days tooltip is : " + promise);
                 expect(promise).toEqual("Indicates within how many days WCM must either Accept or Decline the Finder submission.");
@@ -366,7 +366,7 @@ exports.validateSubmissionDecisionWithinNumberOfDaysTooltip = function () {
 
 exports.validateAssumedResponseTooltip = function () {
     it("Validate the assumed response tooltip ", function () {
-        pages.finder_deal.elems.assumedResponseTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.assumedResponseTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The assumed response tooltip is : " + promise);
                 expect(promise).toEqual("Indicates the default response to the Finder if WCM has not responded to a submission within the specified number of days.");
@@ -376,7 +376,7 @@ exports.validateAssumedResponseTooltip = function () {
 
 exports.validateWhoWillDraftDealsTooltip = function () {
     it("Validate who will draft deals tooltip ", function () {
-        pages.finder_deal.elems.whoWillDraftDealsTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.whoWillDraftDealsTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The who will draft deals tooltip is : " + promise);
                 expect(promise).toEqual("Defines which party (WCM or Finder) is responsible for drafting the agreements for the found deals.");
@@ -386,7 +386,7 @@ exports.validateWhoWillDraftDealsTooltip = function () {
 
 exports.validateWhoHasControlToExerciseFutureOptionsTooltip = function () {
     it("Validate who has control to exercise future options tooltip", function () {
-        pages.finder_deal.elems.whoHasControlToExerciseFutureOptionsTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.whoHasControlToExerciseFutureOptionsTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The who has control to exercise future options tooltip is : " + promise);
                 expect(promise).toEqual("Indicates whether WCM or Finder will have the control over exercising the Option.");
@@ -396,7 +396,7 @@ exports.validateWhoHasControlToExerciseFutureOptionsTooltip = function () {
 
 exports.validateWhoIsResponsibleForAdvancesTooltip = function () {
     it("Validate who is responsible for advances tooltip", function () {
-        pages.finder_deal.elems.whoIsResponsibleForAdvancesTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.whoIsResponsibleForAdvancesTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The who is responsible for advances tooltip is : " + promise);
                 expect(promise).toEqual("Indicates whether WCM or Finder will be responsible for Advances to the Creator(s).");
@@ -406,7 +406,7 @@ exports.validateWhoIsResponsibleForAdvancesTooltip = function () {
 
 exports.validateFindersRightToPursueTooltip = function () {
     it("Validate finders right to pursue tooltip", function () {
-        pages.finder_deal.elems.findersRightToPursueTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersRightToPursueTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The finders right to pursue tooltip is : " + promise);
                 expect(promise).toEqual("Indicates that if WCM declines a submission, then the Finder has a right to pursue any found deal.");
@@ -416,7 +416,7 @@ exports.validateFindersRightToPursueTooltip = function () {
 
 exports.validateWcmRightToPursueTooltip = function () {
     it("Validate wcms right to pursue tooltip", function () {
-        pages.finder_deal.elems.wcmRightToPursueTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.wcmRightToPursueTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The wcms right to pursue tooltip is : " + promise);
                 expect(promise).toEqual("Indicates WCM has a right to pursue any submission to which WCM, the Finder, and Creator(s) could not come to a three-party agreement.");
@@ -446,21 +446,21 @@ exports.checkErrorMessageSubmissionDecisionWithinNumberOfDays = function () {
 
 exports.confirmCancelChangesGeneralTermsFinderDeal = function () {
     it("Confirm cancel changes finder deal ", function () {
-        pages.finder_deal.clickOnTheCancelGeneralTermsFinderDeal();
-        pages.finder_deal.confirmCancelChangesModalDialog();
+        pages.finderDeal.clickOnTheCancelGeneralTermsFinderDeal();
+        pages.finderDeal.confirmCancelChangesModalDialog();
     });
 };
 
 exports.confirmCancelChangesTermsByContractPeriodFinderDeal = function () {
     it("Confirm cancel changes terms by contract period finder deal ", function () {
-        pages.finder_deal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
-        pages.finder_deal.confirmCancelChangesModalDialog();
+        pages.finderDeal.clickOnTheCancelTermsByContractPeriodTermsFinderDeal();
+        pages.finderDeal.confirmCancelChangesModalDialog();
     });
 };
 
 exports.validatePriorAwarenessNotificationValue = function (value) {
     it("Validate the prior awareness notification value ", function () {
-        pages.finder_deal.elems.priorAwarenessNotificationValue.getText().
+        pages.finderDeal.elems.priorAwarenessNotificationValue.getText().
             then(function (promise) {
                 console.log("The prior awareness notification value is : " + promise);
                 expect(promise).toEqual(value);
@@ -470,7 +470,7 @@ exports.validatePriorAwarenessNotificationValue = function (value) {
 
 exports.validateNotifyWithinThisNumberOfDaysValue = function (value) {
     it("Validate the notify within this number of days value ", function () {
-        pages.finder_deal.elems.notifyWithinThisNumberOfDaysValue.getText().
+        pages.finderDeal.elems.notifyWithinThisNumberOfDaysValue.getText().
             then(function (promise) {
                 console.log("The notify within this number of days value is : " + promise);
                 expect(promise).toEqual(value);
@@ -480,7 +480,7 @@ exports.validateNotifyWithinThisNumberOfDaysValue = function (value) {
 
 exports.validateSubmissionDecisionWithinNumberOfDaysValue = function (value) {
     it("Validate the submission decision within number of days value ", function () {
-        pages.finder_deal.elems.submissionDecisionWithinNumberOfDaysValue.getText().
+        pages.finderDeal.elems.submissionDecisionWithinNumberOfDaysValue.getText().
             then(function (promise) {
                 console.log("The submission decision within number of days value is : " + promise);
                 expect(promise).toEqual(value);
@@ -490,7 +490,7 @@ exports.validateSubmissionDecisionWithinNumberOfDaysValue = function (value) {
 
 exports.validateAssumedResponseValue = function (value) {
     it("Validate the assumed response value ", function () {
-        pages.finder_deal.elems.assumedResponseValue.getText().
+        pages.finderDeal.elems.assumedResponseValue.getText().
             then(function (promise) {
                 console.log("The assumed response value is : " + promise);
                 expect(promise).toEqual(value);
@@ -500,7 +500,7 @@ exports.validateAssumedResponseValue = function (value) {
 
 exports.validateWhoWillDraftDealsValue = function (value) {
     it("Validate the who will draft deals value ", function () {
-        pages.finder_deal.elems.whoWillDraftDealsValue.getText().
+        pages.finderDeal.elems.whoWillDraftDealsValue.getText().
             then(function (promise) {
                 console.log("The who will draft deals value is : " + promise);
                 expect(promise).toEqual(value);
@@ -510,7 +510,7 @@ exports.validateWhoWillDraftDealsValue = function (value) {
 
 exports.validateWhoHasControlToExerciseFutureOptionsValue = function (value) {
     it("Validate the who has control to exercise future options value ", function () {
-        pages.finder_deal.elems.whoHasControlToExerciseFutureOptionValue.getText().
+        pages.finderDeal.elems.whoHasControlToExerciseFutureOptionValue.getText().
             then(function (promise) {
                 console.log("The awho has control to exercise future options value is : " + promise);
                 expect(promise).toEqual(value);
@@ -520,7 +520,7 @@ exports.validateWhoHasControlToExerciseFutureOptionsValue = function (value) {
 
 exports.validateWhoIsResponsibleForAdvancesValue = function (value) {
     it("Validate the who is responsible for advances value ", function () {
-        pages.finder_deal.elems.whoIsResponsibleForAdvancesValue.getText().
+        pages.finderDeal.elems.whoIsResponsibleForAdvancesValue.getText().
             then(function (promise) {
                 console.log("The  who is responsible for advances  value is : " + promise);
                 expect(promise).toEqual(value);
@@ -530,7 +530,7 @@ exports.validateWhoIsResponsibleForAdvancesValue = function (value) {
 
 exports.validateFindersRightToPursueValue = function (value) {
     it("Validate the finder right to pursue value ", function () {
-        pages.finder_deal.elems.finderRightToPursueValue.getText().
+        pages.finderDeal.elems.finderRightToPursueValue.getText().
             then(function (promise) {
                 console.log("The finder right to pursue value is : " + promise);
                 expect(promise).toEqual(value);
@@ -540,7 +540,7 @@ exports.validateFindersRightToPursueValue = function (value) {
 
 exports.validateWcmRightToPursueValue = function (value) {
     it("Validate the wcm right to pursue value ", function () {
-        pages.finder_deal.elems.wcmRightToPursueValue.getText().
+        pages.finderDeal.elems.wcmRightToPursueValue.getText().
             then(function (promise) {
                 console.log("The wcm right to pursue value is : " + promise);
                 expect(promise).toEqual(value);
@@ -550,13 +550,13 @@ exports.validateWcmRightToPursueValue = function (value) {
 
 exports.validateTooltipsForTermsByContractPeriodI = function (i, type) {
     it("Validate the tooltips for terms by contract period number " + i + " of type ", function () {
-        pages.finder_deal.validateTheTooltipsForTermsByContractPeriodI(i, type);
+        pages.finderDeal.validateTheTooltipsForTermsByContractPeriodI(i, type);
     });
 };
 
 exports.validateMaximumFoundAgreementsWithoutPreApprovalTooltip = function () {
     it("Validate maximum found agreements without pre approval tooltip", function () {
-        pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApprovalTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.maximumFoundAgreementsWithoutPreApprovalTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The maximum found agreements without pre approval tooltip is : " + promise);
                 expect(promise).toEqual("Maximum number of Deals that a Finder can sign without obtaining WCM approval during a contract period.");
@@ -566,7 +566,7 @@ exports.validateMaximumFoundAgreementsWithoutPreApprovalTooltip = function () {
 
 exports.validateMaximumFoundAgreementsWithPreApprovalTooltip = function () {
     it("Validate maximum found agreements with pre approval tooltip", function () {
-        pages.finder_deal.elems.maximumFoundAgreementsWithPreApprovalTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.maximumFoundAgreementsWithPreApprovalTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The maximum found agreements with pre approval tooltip is : " + promise);
                 expect(promise).toEqual("Total number of Deals that a Finder can sign with WCM during a contract period.");
@@ -576,7 +576,7 @@ exports.validateMaximumFoundAgreementsWithPreApprovalTooltip = function () {
 
 exports.validateFindersRecoupmentResponsabilityTooltip = function () {
     it("Validate finders recoupment responsability tooltip", function () {
-        pages.finder_deal.elems.findersRecoupmentResponsabilityTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersRecoupmentResponsabilityTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The  finders recoupment responsabilitytooltip is : " + promise);
                 expect(promise).toEqual("This is the generally agreed upon Finder's obligation for recoupment of Advances paid to any Found Deal.");
@@ -586,7 +586,7 @@ exports.validateFindersRecoupmentResponsabilityTooltip = function () {
 
 exports.validateNonSignedArtistMaximumAdvancesPayableTooltip = function () {
     it("Validate non signed artist maximum advances payable tooltip", function () {
-        pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.nonSignedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The non signed artist maximum advances payable tooltip is : " + promise);
                 expect(promise).toEqual("For non-signed Creator(s) on each found Deal, the Finder can spend up to this defined dollar amount.");
@@ -596,7 +596,7 @@ exports.validateNonSignedArtistMaximumAdvancesPayableTooltip = function () {
 
 exports.validateSignedArtistMaximumAdvancesPayableTooltip = function () {
     it("Validate signed artist maximum advances payable tooltip", function () {
-        pages.finder_deal.elems.signedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.signedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The  signed artist maximum advances payable tooltip is : " + promise);
                 expect(promise).toEqual("For signed Creator(s) on each found Deal, the Finder can spend up to this defined dollar amount.");
@@ -606,7 +606,7 @@ exports.validateSignedArtistMaximumAdvancesPayableTooltip = function () {
 
 exports.validateAggregateMaximumAdvancesPayableTooltip = function () {
     it("Validate aggregate maximum advances payable tooltip", function () {
-        pages.finder_deal.elems.aggregateMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.aggregateMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The aggregate maximum advances payable tooltip is : " + promise);
                 expect(promise).toContain("The aggregate defines the overall cap amount for all advances on Finder Deals");
@@ -617,7 +617,7 @@ exports.validateAggregateMaximumAdvancesPayableTooltip = function () {
 
 exports.validateAggregateMaximumOnAdvancesTooltip = function () {
     it("Validate aggregate maximum on advances tooltip", function () {
-        pages.finder_deal.elems.aggregateMaximumOnAdvancesTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.aggregateMaximumOnAdvancesTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The  aggregate maximum on advances tooltip is : " + promise);
                 expect(promise).toEqual("The aggregate defines the ownership percentages in relation to advance amounts paid by WCM (e.g., If aggregated advances exceed $300,000 during the Contract Period, then ownership is split 50/50.)");
@@ -627,7 +627,7 @@ exports.validateAggregateMaximumOnAdvancesTooltip = function () {
 
 exports.validateFindersOwnerhsipTooltip = function () {
     it("Validate finders ownership tooltip", function () {
-        pages.finder_deal.elems.findersOwnershipTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersOwnershipTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The finders ownership tooltip is : " + promise);
                 expect(promise).toEqual("This is the agreed-upon ownership percentage the Finder will have when Advances total the maximum defined.");
@@ -637,7 +637,7 @@ exports.validateFindersOwnerhsipTooltip = function () {
 
 exports.validateWcmsOwnerhsipTooltip = function () {
     it("Validate WCM's ownership tooltip", function () {
-        pages.finder_deal.elems.wcmOwnershipTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.wcmOwnershipTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The WCM's ownership tooltip is : " + promise);
                 expect(promise).toEqual("This is the agreed-upon ownership percentage WCM will have when Advances total the maximum defined.");
@@ -647,7 +647,7 @@ exports.validateWcmsOwnerhsipTooltip = function () {
 
 exports.validateCreatorsFoundSubmissionsTooltip = function () {
     it("Validate creators found submissions tooltip", function () {
-        pages.finder_deal.elems.creatorsFoundSubmissionTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.creatorsFoundSubmissionTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The creator found submission tooltip is : " + promise);
                 expect(promise).toEqual("Creator(s) are the songwriter(s) submitted by the Finder.");
@@ -657,7 +657,7 @@ exports.validateCreatorsFoundSubmissionsTooltip = function () {
 
 exports.validateSubmissionDateTooltip = function () {
     it("Validate submission date tooltip", function () {
-        pages.finder_deal.elems.submissionDateTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.submissionDateTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The submission date tooltip is : " + promise);
                 expect(promise).toEqual("Indicates the date on which the Finder submitted Creator(s) to WCM.");
@@ -667,7 +667,7 @@ exports.validateSubmissionDateTooltip = function () {
 
 exports.validateWcmDecisionTooltip = function () {
     it("Validate WCM decision tooltip", function () {
-        pages.finder_deal.elems.wcmDecisionTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.wcmDecisionTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The WCM decision tooltip is : " + promise);
                 expect(promise).toEqual("Indicates whether WCM will work with the Finder to further the relationship on submitted Creator(s).");
@@ -677,7 +677,7 @@ exports.validateWcmDecisionTooltip = function () {
 
 exports.validateFoundDealTooltip = function () {
     it("Validate found deal tooltip", function () {
-        pages.finder_deal.elems.foundDealTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.foundDealTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The found deal tooltip is : " + promise);
                 expect(promise).toEqual("Provides a reference to Deals that resulted from Finder submissions.");
@@ -687,7 +687,7 @@ exports.validateFoundDealTooltip = function () {
 
 exports.validateFindersRecoupmentResponsabilityOverrideTooltip = function () {
     it("Validate finders recoupment responsability override tooltip", function () {
-        pages.finder_deal.elems.findersRecoupmentResponsabilityOverrideTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersRecoupmentResponsabilityOverrideTooltip.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("The finders recoupment responsability override tooltip is : " + promise);
                 expect(promise).toEqual("Nullifies the generally agreed upon Finder's obligation for recoupment of Advances paid to this Found Deal.");
@@ -697,7 +697,7 @@ exports.validateFindersRecoupmentResponsabilityOverrideTooltip = function () {
 
 exports.validateMaximumFoundAgreementsWithoutPreApprovalValue = function () {
     it("Validate maximum found agreements without pre approval value", function () {
-        pages.finder_deal.elems.maximumFoundAgreementsWithoutPreApprovalValue.getText().
+        pages.finderDeal.elems.maximumFoundAgreementsWithoutPreApprovalValue.getText().
             then(function (promise) {
                 console.log("The maximum found agreements without pre approval value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -707,7 +707,7 @@ exports.validateMaximumFoundAgreementsWithoutPreApprovalValue = function () {
 
 exports.validateMaximumFoundAgreementsWithPreApprovalValue = function () {
     it("Validate maximum found agreements with pre approval value", function () {
-        pages.finder_deal.elems.maximumFoundAgreementsWithPreApprovalValue.getText().
+        pages.finderDeal.elems.maximumFoundAgreementsWithPreApprovalValue.getText().
             then(function (promise) {
                 console.log("The maximum found agreements with pre approval value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -717,7 +717,7 @@ exports.validateMaximumFoundAgreementsWithPreApprovalValue = function () {
 
 exports.validateFindersRecoupmentResponsabilityValue = function () {
     it("Validate finders recoupment responsability value", function () {
-        pages.finder_deal.elems.findersRecoupmentResponsabilityValue.getText().
+        pages.finderDeal.elems.findersRecoupmentResponsabilityValue.getText().
             then(function (promise) {
                 console.log("The finders recoupment responsability value is : " + promise);
                 expect(promise).toContain("%");
@@ -727,7 +727,7 @@ exports.validateFindersRecoupmentResponsabilityValue = function () {
 
 exports.validateNonSignedArtistMaximumAdvancesPayableValue = function () {
     it("Validate non signed artist maximum advances payable value", function () {
-        pages.finder_deal.elems.nonSignedArtistMaximumAdvancesPayableValue.getText().
+        pages.finderDeal.elems.nonSignedArtistMaximumAdvancesPayableValue.getText().
             then(function (promise) {
                 console.log("The non signed artist maximum advances payable value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -737,7 +737,7 @@ exports.validateNonSignedArtistMaximumAdvancesPayableValue = function () {
 
 exports.validateSignedArtistMaximumAdvancesPayableValue = function () {
     it("Validate  signed artist maximum advances payable value", function () {
-        pages.finder_deal.elems.signedArtistMaximumAdvancesPayableValue.getText().
+        pages.finderDeal.elems.signedArtistMaximumAdvancesPayableValue.getText().
             then(function (promise) {
                 console.log("The non signed artist maximum advances payable value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -747,7 +747,7 @@ exports.validateSignedArtistMaximumAdvancesPayableValue = function () {
 
 exports.validateAggregateMaximumAdvancesPayableValue = function () {
     it("Validate aggregate maximum advances payable value", function () {
-        pages.finder_deal.elems.aggregateMaximumAdvancesPayableValue.getText().
+        pages.finderDeal.elems.aggregateMaximumAdvancesPayableValue.getText().
             then(function (promise) {
                 console.log("The aggregate maximum advances payable value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -757,7 +757,7 @@ exports.validateAggregateMaximumAdvancesPayableValue = function () {
 
 exports.validateAggregateMaximumOnAdvancesValue = function () {
     it("Validate aggregate maximum advances value", function () {
-        pages.finder_deal.elems.aggregateMaximumOnAdvancesValue.getText().
+        pages.finderDeal.elems.aggregateMaximumOnAdvancesValue.getText().
             then(function (promise) {
                 console.log("The aggregate maximum on advances value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -767,7 +767,7 @@ exports.validateAggregateMaximumOnAdvancesValue = function () {
 
 exports.validateFinderOwnershipValue = function () {
     it("Validate finders ownership value", function () {
-        pages.finder_deal.elems.findersOwnershipValue.getText().
+        pages.finderDeal.elems.findersOwnershipValue.getText().
             then(function (promise) {
                 console.log("The finders ownership value is : " + promise);
                 expect(promise).toContain("%");
@@ -777,7 +777,7 @@ exports.validateFinderOwnershipValue = function () {
 
 exports.validateWcmOwnershipValue = function () {
     it("Validate WCM ownership value", function () {
-        pages.finder_deal.elems.wcmOwnershipValue.getText().
+        pages.finderDeal.elems.wcmOwnershipValue.getText().
             then(function (promise) {
                 console.log("The WCM ownership value is : " + promise);
                 expect(promise).toContain("%");
@@ -787,7 +787,7 @@ exports.validateWcmOwnershipValue = function () {
 
 exports.validateCreatorFoundSubmissionValue = function () {
     it("Validate creator found submission value", function () {
-        pages.finder_deal.elems.creatorFoundSubmissionValue.getText().
+        pages.finderDeal.elems.creatorFoundSubmissionValue.getText().
             then(function (promise) {
                 console.log("The creator found submission value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -797,7 +797,7 @@ exports.validateCreatorFoundSubmissionValue = function () {
 
 exports.validateSubmissionDateValue = function () {
     it("Validate submission date value", function () {
-        pages.finder_deal.elems.submissionDateValue.getText().
+        pages.finderDeal.elems.submissionDateValue.getText().
             then(function (promise) {
                 console.log("The submission date value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -807,7 +807,7 @@ exports.validateSubmissionDateValue = function () {
 
 exports.validateWcmDecisionValue = function () {
     it("Validate WCM decision value", function () {
-        pages.finder_deal.elems.wcmDecisionValue.getText().
+        pages.finderDeal.elems.wcmDecisionValue.getText().
             then(function (promise) {
                 console.log("The WCM decision value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -817,7 +817,7 @@ exports.validateWcmDecisionValue = function () {
 
 exports.validateFoundDealValue = function () {
     it("Validate found deal value", function () {
-        pages.finder_deal.elems.foundDealValue.getText().
+        pages.finderDeal.elems.foundDealValue.getText().
             then(function (promise) {
                 console.log("The found deal value is : " + promise);
                 expect(promise).not.toEqual("");
@@ -827,7 +827,7 @@ exports.validateFoundDealValue = function () {
 
 exports.validateFindersRecoupmentResponsabilityOverrideValue = function () {
     it("Validate finders recoupment responsability override value", function () {
-        pages.finder_deal.elems.findersRecoupmentResponsabilityOverrideValue.getText().
+        pages.finderDeal.elems.findersRecoupmentResponsabilityOverrideValue.getText().
             then(function (promise) {
                 console.log("The finders recoupment responsability override value is : " + promise);
                 expect(promise).toContain("%");
@@ -837,21 +837,21 @@ exports.validateFindersRecoupmentResponsabilityOverrideValue = function () {
 
 exports.clickOnFoundDealTermsTitle = function () {
     it("Click on the found deal terms title ", function () {
-        pages.finder_deal.clickOnTheFoundDealTermsTitle();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnTheFoundDealTermsTitle();
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.clickOnOwnershipTermsTitle = function () {
     it("Click on the ownership terms title ", function () {
-        pages.finder_deal.clickOnTheOwnershipTermsTitle();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnTheOwnershipTermsTitle();
+        pages.finderDeal.waitForAjax();
     });
 };
 
 exports.clickOnTheFoundSubmissionsTitle = function () {
     it("Click on the found submissions title ", function () {
-        pages.finder_deal.clickOnTheFoundSubmissionsTitle();
-        pages.finder_deal.waitForAjax();
+        pages.finderDeal.clickOnTheFoundSubmissionsTitle();
+        pages.finderDeal.waitForAjax();
     });
 };

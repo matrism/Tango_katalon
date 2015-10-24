@@ -18,10 +18,10 @@ exports.returnAndCheckInternalContactsTitle = function () {
 
 exports.editInternalContactsArea = function () {
     it("Edit internal contacts area ", function () {
-        pages.edit_deal_general.clickOnEditInternalContactsArea();
-        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.internalContactsEditIcon));
-        pages.edit_deal_general.clickOnEditIconInternalContacts();
-        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.internalContactsEditInputField));
+        pages.editDealGeneral.clickOnEditInternalContactsArea();
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.internalContactsEditIcon));
+        pages.editDealGeneral.clickOnEditIconInternalContacts();
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.internalContactsEditInputField));
     });
 };
 
@@ -70,8 +70,8 @@ exports.returnAndCheckAddInternalContactsLinkPresent = function () {
 
 exports.addInternalContactLink = function () {
     it("Add internal contacts on edit mode", function () {
-        pages.edit_deal_general.clickOnAddInternalContactsLink();
-        //browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.internalContactsEditInputField()));
+        pages.editDealGeneral.clickOnAddInternalContactsLink();
+        //browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.internalContactsEditInputField()));
     });
 };
 
@@ -83,94 +83,94 @@ exports.printInternalContactList = function () {
 
 exports.editInternalContactField = function (internal_contact) {
     it("Edit internal contact field", function () {
-        pages.edit_deal_general.editInternalContactsField(internal_contact);
+        pages.editDealGeneral.editInternalContactsField(internal_contact);
     });
 };
 
 exports.editInternalContactsFieldRowI = function (i) {
     it("Edit internal contact row i ", function () {
-        pages.edit_deal_general.editTheIRowInternalContactField(i);
-        pages.edit_deal_general.waitForAjax();
+        pages.editDealGeneral.editTheIRowInternalContactField(i);
+        pages.editDealGeneral.waitForAjax();
     });
 };
 
 exports.selectEditRandomInternalContactDropDown = function () {
     it("Select edit random value from internal contact drop down", function () {
-        pages.edit_deal_general.selectEditRandomInternalContactsFromDropDown();
-        pages.edit_deal_general.waitForAjax();
+        pages.editDealGeneral.selectEditRandomInternalContactsFromDropDown();
+        pages.editDealGeneral.waitForAjax();
     });
 };
 
 exports.clickEditInternalContactRole = function () {
     it("Click edit internal contact role field", function () {
-        pages.edit_deal_general.clickEditInternalContactsRole();
+        pages.editDealGeneral.clickEditInternalContactsRole();
     });
 },
 
 exports.clickEditInternalContactRoleRowI = function (i) {
     it("Click edit internal contact role row i", function () {
-        pages.edit_deal_general.clickEditInternalContactsRoleRowI(i);
-        pages.edit_deal_general.waitForAjax();
+        pages.editDealGeneral.clickEditInternalContactsRoleRowI(i);
+        pages.editDealGeneral.waitForAjax();
     });
 };
 
 exports.removeInternalContactsRole = function () {
     it("Remove first internal contact role", function () {
-        pages.edit_deal_general.removeEditInternalContactRole();
+        pages.editDealGeneral.removeEditInternalContactRole();
     });
 };
 
 exports.removeInternalContactsRoleRowI = function (i) {
     it("Remove internal contact role row i", function () {
-        pages.edit_deal_general.removeEditInternalContactsRoleRowI(i);
+        pages.editDealGeneral.removeEditInternalContactsRoleRowI(i);
     });
 };
 
 exports.removeInternalContactsRow = function () {
     it("Remove internal contact row", function () {
-        pages.edit_deal_general.removeEditInternalContactsRow();
+        pages.editDealGeneral.removeEditInternalContactsRow();
     });
 };
 
 exports.removeInternalContactsRowI = function (i) {
     it("Remove internal contact row i", function () {
-        pages.edit_deal_general.removeEditInternalContactsRowI(i);
+        pages.editDealGeneral.removeEditInternalContactsRowI(i);
     });
 };
 
 exports.confirmModalDialog = function () {
     it("Confirm modal dialog action", function () {
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.elems.yesModalDialog));
-        pages.edit_deal_general.clickOnYesModalDialog();
-        browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.elems.yesModalDialog));
+        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
+        pages.editDealGeneral.clickOnYesModalDialog();
+        browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.yesModalDialog));
     });
 };
 
 exports.expectSaveEditInternalContactButtonPresent = function () {
     it("Expect save edit internal contact button present", function () {
-        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.saveEditInternalContactsButton));
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.saveEditInternalContactsButton));
     });
 };
 
 exports.cancelModalDialog = function () {
     it("Cancel modal dialog action", function () {
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.elems.noModalDialog));
-        pages.edit_deal_general.clickOnNoModalDialog();
-        browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.elems.modalDialog));
+        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.noModalDialog));
+        pages.editDealGeneral.clickOnNoModalDialog();
+        browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.modalDialog));
     });
 };
 
 exports.itSaveInternalContactsChanges = function () {
     it("Save internal contacts changes after editing them", function () {
-        pages.edit_deal_general.clickOnSaveEditInternalContacts();
-        pages.edit_deal_general.waitForAjax();
+        pages.editDealGeneral.clickOnSaveEditInternalContacts();
+        pages.editDealGeneral.waitForAjax();
     })
 };
 
 exports.itCancelInternalContactsChanges = function () {
     it("Cancel internal contacts changes after editing them", function () {
-        pages.edit_deal_general.clickOnCancelEditInternalContacts();
-        browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.yesModalDialog));
+        pages.editDealGeneral.clickOnCancelEditInternalContacts();
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
     })
 };
 

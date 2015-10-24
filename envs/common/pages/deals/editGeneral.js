@@ -3,8 +3,8 @@
 var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-if (pages.edit_deal_general === undefined) {
-    pages.edit_deal_general = new ftf.pageObject({
+if (pages.editDealGeneral === undefined) {
+    pages.editDealGeneral = new ftf.pageObject({
 
         locators: {
             internalContactTitle: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2"},
@@ -27,42 +27,42 @@ if (pages.edit_deal_general === undefined) {
 
 
         clickOnEditInternalContactsArea: function () {
-            pages.edit_deal_general.elems.internalContactsArea.click();
+            pages.editDealGeneral.elems.internalContactsArea.click();
         },
 
         clickOnEditIconInternalContacts: function () {
-            pages.edit_deal_general.elems.internalContactsEditIcon.click();
+            pages.editDealGeneral.elems.internalContactsEditIcon.click();
         },
 
 
         clickOnAddInternalContactsLink: function () {
-            pages.edit_deal_general.elems.addInternalContactsLink.click();
+            pages.editDealGeneral.elems.addInternalContactsLink.click();
         },
 
         clickOnSaveEditInternalContacts: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_general.elems.saveEditInternalContactsButton));
-            pages.edit_deal_general.elems.saveEditInternalContactsButton.click();
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.saveEditInternalContactsButton));
+            pages.editDealGeneral.elems.saveEditInternalContactsButton.click();
             browser.sleep(10000);
         },
 
         clickOnCancelEditInternalContacts: function () {
-            pages.edit_deal_general.elems.cancelEditInternalContactsButton.click();
+            pages.editDealGeneral.elems.cancelEditInternalContactsButton.click();
         },
 
         editInternalContactsField: function (internal_contact) {
-            pages.edit_deal_general.elems.editInternalContactsInputField.clear();
-            pages.edit_deal_general.elems.editInternalContactsInputField.sendKeys(internal_contact);
+            pages.editDealGeneral.elems.editInternalContactsInputField.clear();
+            pages.editDealGeneral.elems.editInternalContactsInputField.sendKeys(internal_contact);
         },
 
         selectEditRandomInternalContactsFromDropDown: function () {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_general.elems.editInternalContactsDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 });
-            browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_general.elems.editInternalContactsDropDownData));
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
         },
 
         selectEditRandomInternalContactsFromDropDownRoleI: function (i) {
@@ -74,11 +74,11 @@ if (pages.edit_deal_general === undefined) {
                     options[randomNumber].click();
                 });
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            pages.edit_deal_general.waitForAjax();
+            pages.editDealGeneral.waitForAjax();
         },
 
         clickEditInternalContactsRole: function () {
-            pages.edit_deal_general.elems.editInternalContactRoleInputField.click();
+            pages.editDealGeneral.elems.editInternalContactRoleInputField.click();
         },
 
         editTheIRowInternalContactField: function (i) {
@@ -99,11 +99,11 @@ if (pages.edit_deal_general === undefined) {
         },
 
         removeEditInternalContactRole: function () {
-            pages.edit_deal_general.elems.removeInternalContactRoleInputField.click();
+            pages.editDealGeneral.elems.removeInternalContactRoleInputField.click();
         },
 
         removeEditInternalContactsRow: function () {
-            pages.edit_deal_general.elems.removeInternalContactsElement.click();
+            pages.editDealGeneral.elems.removeInternalContactsElement.click();
         },
 
         removeEditInternalContactsRowI: function (i) {
@@ -112,11 +112,11 @@ if (pages.edit_deal_general === undefined) {
         },
 
         clickOnYesModalDialog: function () {
-            pages.edit_deal_general.elems.yesModalDialog.click();
+            pages.editDealGeneral.elems.yesModalDialog.click();
         },
 
         clickOnNoModalDialog: function () {
-            pages.edit_deal_general.elems.noModalDialog.click();
+            pages.editDealGeneral.elems.noModalDialog.click();
         }
 
     });

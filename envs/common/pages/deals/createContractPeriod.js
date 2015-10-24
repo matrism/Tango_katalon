@@ -3,8 +3,8 @@
 var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-if (pages.create_deal_contract_period === undefined) {
-    pages.create_deal_contract_period = new ftf.pageObject({
+if (pages.createDealContractPeriod === undefined) {
+    pages.createDealContractPeriod = new ftf.pageObject({
         locators: {
             addContractPeriodElem: {css: "div.deal-terms-affix a[data-ng-click='addContractPeriod()']"},
             descriptionContractPeriod: {css: "div.input-addition #description"},
@@ -77,96 +77,96 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         clickOnAddContractPeriod: function () {
-            pages.create_deal_contract_period.elems.addContractPeriodElem.click();
-            pages.create_deal_contract_period.waitForAjax();
+            pages.createDealContractPeriod.elems.addContractPeriodElem.click();
+            pages.createDealContractPeriod.waitForAjax();
         },
 
         fillDescriptionField: function (description) {
-            pages.create_deal_contract_period.elems.descriptionContractPeriod.clear();
-            pages.create_deal_contract_period.elems.descriptionContractPeriod.sendKeys(description);
+            pages.createDealContractPeriod.elems.descriptionContractPeriod.clear();
+            pages.createDealContractPeriod.elems.descriptionContractPeriod.sendKeys(description);
         },
 
         fillStartActualDate: function () {
-            pages.create_deal_contract_period.elems.startDate.sendKeys("2014-03-12");
+            pages.createDealContractPeriod.elems.startDate.sendKeys("2014-03-12");
         },
 
         fillStartActualDateSpecificValue: function (value) {
-            pages.create_deal_contract_period.elems.startDate.sendKeys(value);
+            pages.createDealContractPeriod.elems.startDate.sendKeys(value);
         },
 
         fillTargetEndMonths: function () {
-            pages.create_deal_contract_period.elems.endTargetMonths.sendKeys("3");
+            pages.createDealContractPeriod.elems.endTargetMonths.sendKeys("3");
         },
 
         fillTargetEndMonthsSpecificValue: function (months) {
-            pages.create_deal_contract_period.elems.endTargetMonths.sendKeys(months);
+            pages.createDealContractPeriod.elems.endTargetMonths.sendKeys(months);
         },
 
         fillEndActualDate: function () {
-            pages.create_deal_contract_period.elems.actualEndDate.sendKeys("2015-03-15");
-            pages.create_deal_contract_period.elems.contractPeriodArea.click();
-            pages.create_deal_contract_period.waitForAjax();
+            pages.createDealContractPeriod.elems.actualEndDate.sendKeys("2015-03-15");
+            pages.createDealContractPeriod.elems.contractPeriodArea.click();
+            pages.createDealContractPeriod.waitForAjax();
         },
 
         fillEndActualDateSpecificValue: function (actualDate) {
-            pages.create_deal_contract_period.elems.actualEndDate.sendKeys(actualDate);
-            pages.create_deal_contract_period.elems.contractPeriodArea.click();
-            pages.create_deal_contract_period.waitForAjax();
+            pages.createDealContractPeriod.elems.actualEndDate.sendKeys(actualDate);
+            pages.createDealContractPeriod.elems.contractPeriodArea.click();
+            pages.createDealContractPeriod.waitForAjax();
         },
 
         addTheNewContractPeriodDialog: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.contractPeriodModalDialog));
-            pages.create_deal_contract_period.elems.newContractPeriodModalDialog.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.newContractPeriodModalDialog));
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.contractPeriodModalDialog));
+            pages.createDealContractPeriod.elems.newContractPeriodModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.createDealContractPeriod.elems.newContractPeriodModalDialog));
         },
 
         clickOnAddMdrcLink: function () {
-            pages.create_deal_contract_period.elems.addMdrcLink.click();
+            pages.createDealContractPeriod.elems.addMdrcLink.click();
             browser.sleep(1000);
         },
 
         clickOnIncompleteOption: function () {
-            pages.create_deal_contract_period.elems.incompleteMdrc.click();
+            pages.createDealContractPeriod.elems.incompleteMdrc.click();
         },
 
         clickOnDeemedCompleteOption: function () {
-            pages.create_deal_contract_period.elems.deemedCompleteMdrc.click();
+            pages.createDealContractPeriod.elems.deemedCompleteMdrc.click();
         },
 
         clickOnCompleteOption: function () {
-            pages.create_deal_contract_period.elems.completeMdrc.click();
+            pages.createDealContractPeriod.elems.completeMdrc.click();
         },
 
         fillIntoMdrcQuantity: function () {
             var number = Math.floor(Math.random() * 50) + 30;
-            pages.create_deal_contract_period.elems.mdrcQuantity.sendKeys(number);
+            pages.createDealContractPeriod.elems.mdrcQuantity.sendKeys(number);
         },
 
         fillIntoMdrcMinimumWorkContribution: function () {
             var number = Math.floor(Math.random() * 100) + 1;
-            pages.create_deal_contract_period.elems.mdrcMinimumWorkContribution.clear();
-            pages.create_deal_contract_period.elems.mdrcMinimumWorkContribution.sendKeys(number);
+            pages.createDealContractPeriod.elems.mdrcMinimumWorkContribution.clear();
+            pages.createDealContractPeriod.elems.mdrcMinimumWorkContribution.sendKeys(number);
         },
 
         fillIntoMdrcQuantityForCommercialRelease: function () {
             var number = Math.floor(Math.random() * 10) + 1;
-            pages.create_deal_contract_period.elems.mdrcQuantityForCommercialRelease.sendKeys(number);
+            pages.createDealContractPeriod.elems.mdrcQuantityForCommercialRelease.sendKeys(number);
         },
 
         fillIntoMdrcMajorTerritoriesForCommercialeRelease: function () {
             var number = Math.floor(Math.random() * 5) + 1;
-            pages.create_deal_contract_period.elems.mdrcMajorTerritoriesForCommercialRelease.clear();
-            pages.create_deal_contract_period.elems.mdrcMajorTerritoriesForCommercialRelease.sendKeys(number);
+            pages.createDealContractPeriod.elems.mdrcMajorTerritoriesForCommercialRelease.clear();
+            pages.createDealContractPeriod.elems.mdrcMajorTerritoriesForCommercialRelease.sendKeys(number);
         },
 
         fillIntoTerritoriesFieldLetter: function () {
-            pages.base.scrollIntoView(pages.create_deal_contract_period.elems.mdrcTerritoriesField);
-            pages.create_deal_contract_period.elems.mdrcTerritoriesField.click();
-            pages.create_deal_contract_period.elems.mdrcTerritoriesInputField.sendKeys("africa");
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.mdrcTerritoriesField);
+            pages.createDealContractPeriod.elems.mdrcTerritoriesField.click();
+            pages.createDealContractPeriod.elems.mdrcTerritoriesInputField.sendKeys("africa");
         },
 
         selectRandomTerritory: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.mdrcTerritoriesDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.mdrcTerritoriesDropDown));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -175,21 +175,21 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         clickOnMdrcYesCommercialReleaseByMajorLabel: function () {
-            pages.create_deal_contract_period.elems.mdrcYesCommercialReleaseByMajorLabel.click();
+            pages.createDealContractPeriod.elems.mdrcYesCommercialReleaseByMajorLabel.click();
         },
 
         clickOnMdrcNoCommercialReleaseByMajorLabel: function () {
-            pages.base.scrollIntoView(pages.create_deal_contract_period.elems.mdrcNoCommercialReleaseByMajorLabel);
-            pages.create_deal_contract_period.elems.mdrcNoCommercialReleaseByMajorLabel.click();
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.mdrcNoCommercialReleaseByMajorLabel);
+            pages.createDealContractPeriod.elems.mdrcNoCommercialReleaseByMajorLabel.click();
         },
 
         fillIntoMdrcLabelsField: function () {
             var value = Math.random().toString(36).substr(2, 3);
-            pages.create_deal_contract_period.elems.mdrcLabelsElement.sendKeys(value);
+            pages.createDealContractPeriod.elems.mdrcLabelsElement.sendKeys(value);
         },
 
         selectMdrcRandomValueFromLabel: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.mdrcLabelsDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.mdrcLabelsDropDownData));
 
             element(By.css("li.tg-typeahead__suggestions-footer")).getText().
                 then(function (promise) {
@@ -214,68 +214,68 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         clickOnMdrcYesSelfRecord: function () {
-            pages.create_deal_contract_period.elems.mdrcYesSelfRecord.click();
+            pages.createDealContractPeriod.elems.mdrcYesSelfRecord.click();
         },
 
         clickOnMdrcNoSelfRecord: function () {
-            pages.create_deal_contract_period.elems.mdrcNoSelfRecord().click();
+            pages.createDealContractPeriod.elems.mdrcNoSelfRecord().click();
         },
 
         fillIntoMdrcPercentOfMinStatutoryRate: function () {
             var percent = Math.floor(Math.random() * 100) + 1;
-            pages.create_deal_contract_period.elems.mdrcPercentOfMinStatutoryRate.sendKeys(percent);
+            pages.createDealContractPeriod.elems.mdrcPercentOfMinStatutoryRate.sendKeys(percent);
         },
 
         fillIntoMdrcInNoEventLessThan: function () {
             var value = Math.floor(Math.random() * 20) + 1;
-            pages.create_deal_contract_period.elems.mdrcInNoEventLessThan.sendKeys(value);
+            pages.createDealContractPeriod.elems.mdrcInNoEventLessThan.sendKeys(value);
         },
 
         clickOnMdrcYesProportionalRecoupmentAllowed: function () {
-            pages.create_deal_contract_period.elems.mdrcYesProportionalRecoupmentAllowed.click();
+            pages.createDealContractPeriod.elems.mdrcYesProportionalRecoupmentAllowed.click();
         },
 
         clickOnMdrcNoProportionalRecoupmentAllowed: function () {
-            pages.create_deal_contract_period.elems.mdrcNoProportionalRecoupmentAllowed.click();
+            pages.createDealContractPeriod.elems.mdrcNoProportionalRecoupmentAllowed.click();
         },
 
         clickOnMdrcYesSeeContractForAdditionalMdrcComplexities: function () {
-            pages.create_deal_contract_period.elems.mdrcYesSeeContractForAdditionalMdrcComplexities.click();
+            pages.createDealContractPeriod.elems.mdrcYesSeeContractForAdditionalMdrcComplexities.click();
         },
 
         clickOnMdrcNoSeeContractForAdditionalMdrcComplexities: function () {
-            pages.create_deal_contract_period.elems.mdrcNoSeeContractForAdditionalMdrcComplexities.click();
+            pages.createDealContractPeriod.elems.mdrcNoSeeContractForAdditionalMdrcComplexities.click();
         },
 
         clickOnSaveMdrcForm: function () {
-            pages.create_deal_contract_period.elems.mdrcSaveButton.click();
+            pages.createDealContractPeriod.elems.mdrcSaveButton.click();
         },
 
         fillIntoMdrcDeliverySchedule: function () {
             var value = Math.floor(Math.random() * 20) + 1;
-            pages.create_deal_contract_period.elems.mdrcDeliverySchedule.sendKeys(value);
+            pages.createDealContractPeriod.elems.mdrcDeliverySchedule.sendKeys(value);
         },
 
         fillIntoMdrcEveryWeeks: function () {
             var value = Math.floor(Math.random() * 10) + 1;
-            pages.create_deal_contract_period.elems.mdrcEveryWeeks.sendKeys(value);
+            pages.createDealContractPeriod.elems.mdrcEveryWeeks.sendKeys(value);
         },
 
         fillIntoMdrcDateCompleted: function () {
-            pages.create_deal_contract_period.elems.mdrcDateCompleted.sendKeys("2015-03-09");
+            pages.createDealContractPeriod.elems.mdrcDateCompleted.sendKeys("2015-03-09");
         },
 
         fillIntoMdrcShortfallAmount: function () {
             var value = Math.floor(Math.random() * 80) + 1;
-            pages.create_deal_contract_period.elems.mdrcShortfallAmount.sendKeys(value);
+            pages.createDealContractPeriod.elems.mdrcShortfallAmount.sendKeys(value);
         },
 
         clickOnMdrcForgivenShortfallActionButton: function () {
-            pages.create_deal_contract_period.elems.mdrcForgivenShortfallButton.click();
+            pages.createDealContractPeriod.elems.mdrcForgivenShortfallButton.click();
         },
 
         clickOnMdrcCarriedForwardShortfallActionButton: function () {
-            pages.create_deal_contract_period.elems.mdrcCarriedForwardShortfallButton.click();
+            pages.createDealContractPeriod.elems.mdrcCarriedForwardShortfallButton.click();
         },
 
         selectTheContractPeriodNumberI: function (i) {
@@ -283,13 +283,13 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         clickOnTheAddEndRulesToContractPeriod: function () {
-            pages.create_deal_contract_period.elems.addEndRulesLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.endDateFieldButtonEndRules));
+            pages.createDealContractPeriod.elems.addEndRulesLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.endDateFieldButtonEndRules));
         },
 
         selectTheEndDateEndRulesSpecificValue: function (value) {
             var desiredOption;
-            pages.create_deal_contract_period.elems.endDateFieldButtonEndRules.click();
+            pages.createDealContractPeriod.elems.endDateFieldButtonEndRules.click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -312,7 +312,7 @@ if (pages.create_deal_contract_period === undefined) {
 
         selectTheWhenVariableLeftEndRulesSpecificValue: function (value) {
             var desiredOption;
-            pages.create_deal_contract_period.elems.whenVariableLeftButtonEndRules.click();
+            pages.createDealContractPeriod.elems.whenVariableLeftButtonEndRules.click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -334,11 +334,11 @@ if (pages.create_deal_contract_period === undefined) {
 
         fillIntoTheAttributeLeftEndRules: function () {
             var percent = (Math.random() * 100 + 1).toFixed(2);
-            pages.create_deal_contract_period.elems.attributeLeftFieldEndRules.sendKeys(percent);
+            pages.createDealContractPeriod.elems.attributeLeftFieldEndRules.sendKeys(percent);
         },
 
         selectTheRequirementEndRulesRandomValue: function () {
-            pages.create_deal_contract_period.elems.requirementFieldButtonEndRules.click();
+            pages.createDealContractPeriod.elems.requirementFieldButtonEndRules.click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -348,7 +348,7 @@ if (pages.create_deal_contract_period === undefined) {
 
         selectTheRequirementEndRulesSpecificValue: function (value) {
             var desiredOption;
-            pages.create_deal_contract_period.elems.requirementFieldButtonEndRules.click();
+            pages.createDealContractPeriod.elems.requirementFieldButtonEndRules.click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -370,7 +370,7 @@ if (pages.create_deal_contract_period === undefined) {
 
         selectTheRightVariableEndRulesSpecificValue: function (value) {
             var desiredOption;
-            pages.create_deal_contract_period.elems.variableRightFieldButtonEndRules.click();
+            pages.createDealContractPeriod.elems.variableRightFieldButtonEndRules.click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -391,51 +391,51 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         saveTheEndRules: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_contract_period.elems.saveButtonEndRules));
-            pages.create_deal_contract_period.elems.saveButtonEndRules.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.whenVariableLeftButtonEndRules));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealContractPeriod.elems.saveButtonEndRules));
+            pages.createDealContractPeriod.elems.saveButtonEndRules.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.createDealContractPeriod.elems.whenVariableLeftButtonEndRules));
         },
 
         doneTheEndRules: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_contract_period.elems.doneButtonEndRules));
-            pages.create_deal_contract_period.elems.doneButtonEndRules.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_contract_period.elems.whenVariableLeftButtonEndRules));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealContractPeriod.elems.doneButtonEndRules));
+            pages.createDealContractPeriod.elems.doneButtonEndRules.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.createDealContractPeriod.elems.whenVariableLeftButtonEndRules));
         },
 
 
         clickOnTheAddAdvanceAssumptionsLink: function () {
-            pages.create_deal_contract_period.elems.addAssumptionLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_contract_period.elems.lpControlPercentageOfWorkAssumptions));
+            pages.createDealContractPeriod.elems.addAssumptionLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.lpControlPercentageOfWorkAssumptions));
         },
 
         fillIntoTheLpControlPercentageOfWork: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_contract_period.elems.lpControlPercentageOfWorkAssumptions.sendKeys(percent);
+            pages.createDealContractPeriod.elems.lpControlPercentageOfWorkAssumptions.sendKeys(percent);
         },
 
         fillIntoTheLpControlPercentageOfMechanicalIncome: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_contract_period.elems.lpControlPercentageOfMechanicalIncomeAsumptions.sendKeys(percent);
+            pages.createDealContractPeriod.elems.lpControlPercentageOfMechanicalIncomeAsumptions.sendKeys(percent);
         },
 
         fillIntoTheNumberOfSongs: function () {
             var number = Math.floor(Math.random() * 100) + 1;
-            pages.create_deal_contract_period.elems.numberOfSongsAssumptions.sendKeys(number);
+            pages.createDealContractPeriod.elems.numberOfSongsAssumptions.sendKeys(number);
         },
 
         fillIntoThePercentageOfStatutoryRate: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_contract_period.elems.percentageOfStatutoryRateAssumptions.sendKeys(percent);
+            pages.createDealContractPeriod.elems.percentageOfStatutoryRateAssumptions.sendKeys(percent);
         },
 
         fillIntoTheAmountNoLessThan: function () {
             var number = Math.floor(Math.random() * 1000) + 1;
-            pages.create_deal_contract_period.elems.amountNotLessThanAssumptions.sendKeys(number);
+            pages.createDealContractPeriod.elems.amountNotLessThanAssumptions.sendKeys(number);
         },
 
         selectTheRandomLabelValueAssumptions: function () {
             var value = Math.random().toString(36).substr(2, 3);
-            pages.create_deal_contract_period.elems.labelsAssumptionsInputField.sendKeys(value);
+            pages.createDealContractPeriod.elems.labelsAssumptionsInputField.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("li.tg-typeahead__suggestions-footer")).getText().
@@ -463,7 +463,7 @@ if (pages.create_deal_contract_period === undefined) {
         },
 
         saveTheAdvanceAssumptions: function () {
-            pages.create_deal_contract_period.elems.saveAssumptionsButton.click();
+            pages.createDealContractPeriod.elems.saveAssumptionsButton.click();
         }
         ,
         dealHeader: function () {

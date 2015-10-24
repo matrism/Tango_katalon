@@ -3,8 +3,8 @@
 var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-if (pages.create_deal_general === undefined) {
-    pages.create_deal_general = new ftf.pageObject({
+if (pages.createDealGeneral === undefined) {
+    pages.createDealGeneral = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
 
         locators: {
@@ -48,8 +48,8 @@ if (pages.create_deal_general === undefined) {
 
 
         selectDesiredSigningTerritory: function (specific_country) {
-            pages.create_deal_general.elems.dealSigningTerritoryPopup.click();
-            expect(pages.create_deal_general.elems.dealSigningTerritoryDropDownData.isDisplayed);
+            pages.createDealGeneral.elems.dealSigningTerritoryPopup.click();
+            expect(pages.createDealGeneral.elems.dealSigningTerritoryDropDownData.isDisplayed);
             var desiredOption;
             browser.driver.findElements(by.css("div[name='dealSigningTerritory'] div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
                 .then(function findMatchingOption(options) {
@@ -71,8 +71,8 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillContractingPartiesField: function (field) {
-            pages.create_deal_general.elems.contractingPartiesField.click();
-            pages.create_deal_general.elems.contractingPartiesInput.sendKeys(field);
+            pages.createDealGeneral.elems.contractingPartiesField.click();
+            pages.createDealGeneral.elems.contractingPartiesInput.sendKeys(field);
         },
 
         selectRandomContractingPartyValueFromDropDown: function () {
@@ -92,7 +92,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         selectContractingPartySearchResultByIndex: function (i) {
-            var element = pages.create_deal_general.contractingPartySearchResultLabels().get(i);
+            var element = pages.createDealGeneral.contractingPartySearchResultLabels().get(i);
             pages.base.scrollIntoView(element);
             return element.click();
         },
@@ -121,24 +121,24 @@ if (pages.create_deal_general === undefined) {
         },
 
         fillIntoInternalContactsField: function (internal_contact) {
-            pages.create_deal_general.elems.internalContactsInputField.sendKeys(internal_contact);
+            pages.createDealGeneral.elems.internalContactsInputField.sendKeys(internal_contact);
         },
 
         selectRandomInternalContactsFromDropDown: function () {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.internalContactsDropDownData));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor(Math.random() * options.length);
                     var element = options[randomNumber];
                     element.click();
                 });
-            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
+            browser.wait(ExpectedConditions.invisibilityOf(pages.createDealGeneral.elems.internalContactsDropDownData));
 
         },
 
         clickOnInternalContactsRole: function () {
-            pages.create_deal_general.elems.internalContactRoleInputField.click();
+            pages.createDealGeneral.elems.internalContactRoleInputField.click();
         },
 
         fillIntoTheIRowInternalContactField: function (i) {
@@ -161,38 +161,38 @@ if (pages.create_deal_general === undefined) {
                     var element = options[randomNumber];
                     element.click();
                 });
-            browser.wait(ExpectedConditions.invisibilityOf(pages.create_deal_general.elems.internalContactsDropDownData));
+            browser.wait(ExpectedConditions.invisibilityOf(pages.createDealGeneral.elems.internalContactsDropDownData));
 
         },
 
         clickOnTheDraftContractStatus: function () {
-            pages.create_deal_general.elems.draftContractStatusButton.click();
+            pages.createDealGeneral.elems.draftContractStatusButton.click();
         },
 
         clickOnTheExecutedContractStatus: function () {
-            pages.create_deal_general.elems.executedContractStatusButton.click();
+            pages.createDealGeneral.elems.executedContractStatusButton.click();
         },
 
         fillIntoTheExecutionYearField: function () {
             var year = Math.floor(Math.random() * 214) + 1801;
-            pages.create_deal_general.elems.yearExecutionDate.sendKeys(year);
+            pages.createDealGeneral.elems.yearExecutionDate.sendKeys(year);
         },
 
         fillIntoTheExecutionMonthField: function () {
             var month = Math.floor(Math.random() * 12) + 1;
-            pages.create_deal_general.elems.monthExecutionDate.sendKeys(month);
+            pages.createDealGeneral.elems.monthExecutionDate.sendKeys(month);
         },
 
         fillIntoTheExecutionDayField: function () {
             var day = Math.floor(Math.random() * 28) + 1;
-            pages.create_deal_general.elems.dayExecutionDate.sendKeys(day);
+            pages.createDealGeneral.elems.dayExecutionDate.sendKeys(day);
         },
 
         selectTheRandomArtist: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_general.elems.artistsField));
-            pages.create_deal_general.elems.artistsField.click();
-            pages.create_deal_general.elems.artistFieldInput.sendKeys("test");
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.artistsDropDownData));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
+            pages.createDealGeneral.elems.artistsField.click();
+            pages.createDealGeneral.elems.artistFieldInput.sendKeys("test");
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
             browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -202,7 +202,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         selectTheRandomValueRepresentMultipleDeals: function () {
-            pages.create_deal_general.elems.representMultipleDealsField.click();
+            pages.createDealGeneral.elems.representMultipleDealsField.click();
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='deal.mult_deal_reason_code'] ul.dropdown-menu li.ng-scope"))));
             browser.driver.findElements(By.css("div[data-ng-model='deal.mult_deal_reason_code'] ul.dropdown-menu li.ng-scope"))
                 .then(function (options) {
@@ -212,18 +212,18 @@ if (pages.create_deal_general === undefined) {
         },
 
         clickOnTheExclusiveDealRights: function () {
-            pages.create_deal_general.elems.exclusiveDealRights.click();
+            pages.createDealGeneral.elems.exclusiveDealRights.click();
         },
 
         clickOnTheNonExclusiveDealRights: function () {
-            pages.create_deal_general.elems.nonExclusiveDealRights.click();
+            pages.createDealGeneral.elems.nonExclusiveDealRights.click();
         },
 
         selectTheRandomDealKeywords: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_general.elems.dealKeywordsField));
-            pages.create_deal_general.elems.dealKeywordsField.click();
-            pages.create_deal_general.elems.dealKeywordsFieldInput.sendKeys("test");
-            browser.wait(ExpectedConditions.visibilityOf(pages.create_deal_general.elems.dealKeywordsDropDownData));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.dealKeywordsField));
+            pages.createDealGeneral.elems.dealKeywordsField.click();
+            pages.createDealGeneral.elems.dealKeywordsFieldInput.sendKeys("test");
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.dealKeywordsDropDownData));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -235,22 +235,22 @@ if (pages.create_deal_general === undefined) {
 
         fillIntoTheWampsContractBriefNumberField: function () {
             var time = new Date().getTime();
-            pages.create_deal_general.elems.wampsContractBriefNumberField.sendKeys("W" + time);
+            pages.createDealGeneral.elems.wampsContractBriefNumberField.sendKeys("W" + time);
         },
 
         fillIntoTheAuditPeriodField: function () {
             var months = Math.floor(Math.random() * 50) + 1;
-            pages.create_deal_general.elems.auditPeriodField.sendKeys(months);
+            pages.createDealGeneral.elems.auditPeriodField.sendKeys(months);
         },
 
         fillIntoThePeriodToFileSuitField: function () {
             var months = Math.floor(Math.random() * 50) + 1;
-            pages.create_deal_general.elems.periodFileSuitField.sendKeys(months);
+            pages.createDealGeneral.elems.periodFileSuitField.sendKeys(months);
         },
 
         fillIntoTheLegalFileReferenceCodeField: function () {
             var number = new Date().getUTCMilliseconds();
-            pages.create_deal_general.elems.legalFileReferenceCodeField.sendKeys(number);
+            pages.createDealGeneral.elems.legalFileReferenceCodeField.sendKeys(number);
         },
 
         selectTheRandomExternalContactRoleRowI: function (i) {
@@ -285,7 +285,7 @@ if (pages.create_deal_general === undefined) {
         },
 
         selectTheRandomExternalContactNameRowI: function (i) {
-            pages.create_deal_general.elems.externalContactNameFieldInput.sendKeys("Shilpa");
+            pages.createDealGeneral.elems.externalContactNameFieldInput.sendKeys("Shilpa");
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='externalContactsForm']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("div[data-ng-form='externalContactsForm']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
@@ -296,43 +296,43 @@ if (pages.create_deal_general === undefined) {
 
         fillIntoTheDemoDealChargeBacksField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_general.elems.demosDealChargeBacksField.sendKeys(percent);
+            pages.createDealGeneral.elems.demosDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheUsCopyrightCertificateDealChargeBacksField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_general.elems.usCopyrightCertificateDealChargeBacksField.sendKeys(percent);
+            pages.createDealGeneral.elems.usCopyrightCertificateDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheLegalFeesDealChargeBacksField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_general.elems.legalFeesDealChargeBacksField.sendKeys(percent);
+            pages.createDealGeneral.elems.legalFeesDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheAdvertisingAndPromotionsDealChargeBacksField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_general.elems.advertisingPromotionsDealChargeBacksField.sendKeys(percent);
+            pages.createDealGeneral.elems.advertisingPromotionsDealChargeBacksField.sendKeys(percent);
         },
 
         fillIntoTheLeadSheetsDealChargeBackField: function () {
             var percent = (Math.random() * 99 + 1).toFixed(2);
-            pages.create_deal_general.elems.leadSheetsDealChargeBacksField.sendKeys(percent);
+            pages.createDealGeneral.elems.leadSheetsDealChargeBacksField.sendKeys(percent);
         },
 
         clickOnTheYesMechanicalNonTitleBoundIncome: function () {
-            pages.create_deal_general.elems.yesMechanicalNonTitleBoundIncome.click();
+            pages.createDealGeneral.elems.yesMechanicalNonTitleBoundIncome.click();
         },
 
         clickOnTheNoMechanicalNonTitleBoundIncome: function () {
-            pages.create_deal_general.elems.noMechanicalNonTitleBoundIncome.click();
+            pages.createDealGeneral.elems.noMechanicalNonTitleBoundIncome.click();
         },
 
         clickOnTheYesPerformanceNonTitleBoundIncome: function () {
-            pages.create_deal_general.elems.yesPerformanceNonTitleBoundIncome.click();
+            pages.createDealGeneral.elems.yesPerformanceNonTitleBoundIncome.click();
         },
 
         clickOnTheNoPerformanceNonTitleBoundIncome: function () {
-            pages.create_deal_general.elems.noPerformanceNonTitleBoundIncome.click();
+            pages.createDealGeneral.elems.noPerformanceNonTitleBoundIncome.click();
         }
     });
 }

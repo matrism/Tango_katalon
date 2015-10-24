@@ -577,25 +577,25 @@ exports.feature = [
 
                     steps.base.useBlankEntityDataSlot('work', i);
 
-                    steps.new_work.goToNewWorkPage();
+                    steps.newWork.goToNewWorkPage();
 
-                    steps.new_work.enterPrimaryWorkTitle(workData.primaryTitle);
+                    steps.newWork.enterPrimaryWorkTitle(workData.primaryTitle);
 
                     if (workData.alternateTitles) {
                         workData.alternateTitles.forEach(function (value, j) {
-                            steps.new_work.enterAlternateWorkTitle(j, value);
+                            steps.newWork.enterAlternateWorkTitle(j, value);
                         });
                     }
 
                     workData.creators.forEach(function (unused, j) {
-                        steps.new_work.selectCreatorFromPersonSlot(j, j);
-                        steps.new_work.enterCreatorContribution(j, evenCreatorContribution);
+                        steps.newWork.selectCreatorFromPersonSlot(j, j);
+                        steps.newWork.enterCreatorContribution(j, evenCreatorContribution);
                     });
 
-                    steps.new_work.optToIncludeWorkOnWebsite(false);
+                    steps.newWork.optToIncludeWorkOnWebsite(false);
 
-                    steps.new_work.saveWork();
-                    steps.new_work.validateSaveWorkRedirection();
+                    steps.newWork.saveWork();
+                    steps.newWork.validateSaveWorkRedirection();
                 });
             }],
         ],

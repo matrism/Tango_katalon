@@ -75,11 +75,11 @@ exports.feature = [
         tags: ['addDealScopeProductionSmokeTest'],
         steps: function () {
             steps.searchSection.accessSavedDealByNumber("3");
-            steps.create_deal_contract_period.selectContractPeriodNumberI(1);
-            steps.create_deal_scope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            steps.create_deal_scope.itAddPublisherShareWithSocietyAwardCredit();
-            // steps.create_deal_scope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
-            steps.create_deal_scope.saveThePublisherShareSet();
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.createDealScope.itAddPublisherShareWithSocietyAwardCredit();
+            // steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.createDealScope.saveThePublisherShareSet();
 
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");

@@ -1,12 +1,14 @@
-'use strict';
+"use strict";
 
-var promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 
-steps.modal = exports;
-
-exports.clickYesOnPopupModal = function () {
-    it("Confirm Popup Modal", function () {
-        pages.modal.clickOnYesButton();
-    });
-};
+if (steps.modal === undefined) {
+    steps.modal = {
+        clickYesOnPopupModal: function () {
+            it("Confirm Popup Modal", function () {
+                pages.modal.clickOnYesButton();
+            })
+        }
+    };
+}

@@ -3,8 +3,8 @@
 var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-if (pages.edit_deal_scope === undefined) {
-    pages.edit_deal_scope = new ftf.pageObject({
+if (pages.editDealScope === undefined) {
+    pages.editDealScope = new ftf.pageObject({
         locators: {
             publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
             publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets']"},
@@ -37,7 +37,7 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         clickOnScope1: function () {
-            pages.edit_deal_scope.elems.scope1.click();
+            pages.editDealScope.elems.scope1.click();
         },
 
         clickOnScopeNumberI: function (i) {
@@ -45,12 +45,12 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         clickOnShareIconOnScope: function () {
-            pages.edit_deal_scope.elems.shareIconOnScope.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.shareScopesDetailsPopup));
+            pages.editDealScope.elems.shareIconOnScope.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.shareScopesDetailsPopup));
         },
 
         validateThePublisherSharesTitle: function () {
-            pages.edit_deal_scope.elems.publisherSharesTitle.getText().
+            pages.editDealScope.elems.publisherSharesTitle.getText().
                 then(function (promise) {
                     console.log("Publisher shares set title is : " + promise);
                     expect(promise).toEqual("PUBLISHER SHARES");
@@ -58,7 +58,7 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         validateThePublisherSharesHeaderTableTitle: function () {
-            pages.edit_deal_scope.elems.editPublisherSharesHeaderTitles.getText().
+            pages.editDealScope.elems.editPublisherSharesHeaderTitles.getText().
                 then(function (promise) {
                     console.log("Publisher shares header titles are : " + promise);
                     expect(promise).toContain("Publisher Role / Name");
@@ -68,15 +68,15 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         editClickOnPublisherShareSetArea: function () {
-            pages.edit_deal_scope.elems.publisherShareSetArea.click();
+            pages.editDealScope.elems.publisherShareSetArea.click();
         },
 
 
         editThePublisherSharesSet: function () {
-            //browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.publisherSharesSetArea));
-            pages.edit_deal_scope.elems.publisherSharesSetArea.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.publisherSharesSetEditIcon));
-            pages.edit_deal_scope.elems.publisherSharesSetEditIcon.click();
+            //browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.publisherSharesSetArea));
+            pages.editDealScope.elems.publisherSharesSetArea.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.publisherSharesSetEditIcon));
+            pages.editDealScope.elems.publisherSharesSetEditIcon.click();
         },
 
         clickOnAddSocietyAgreementNumberLinkPublisherSharesSetChainI: function (i) {
@@ -122,71 +122,71 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         editInFirstPublisherNameField: function (publisherName) {
-            pages.edit_deal_scope.elems.editFirstPublisherNameField.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherNameField.sendKeys(publisherName);
+            pages.editDealScope.elems.editFirstPublisherNameField.clear();
+            pages.editDealScope.elems.editFirstPublisherNameField.sendKeys(publisherName);
         },
 
         editInFirstPublisherNameOwnPercent: function () {
             var percent = (Math.random() * 3 + 30).toFixed(2);
-            pages.edit_deal_scope.elems.editFirstPublisherOwnPercent.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherOwnPercent.sendKeys(percent);
+            pages.editDealScope.elems.editFirstPublisherOwnPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherOwnPercent.sendKeys(percent);
         },
 
         editInFirstPublisherNameCollectPercent: function () {
             var percent = (Math.random() * 9 + 1).toFixed(2);
-            pages.edit_deal_scope.elems.editFirstPublisherCollectPercent.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherCollectPercent.sendKeys(percent);
+            pages.editDealScope.elems.editFirstPublisherCollectPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherCollectPercent.sendKeys(percent);
         },
 
         editInFirstPublisherNameOwnPercentSpecificValue: function (percent) {
-            pages.edit_deal_scope.elems.editFirstPublisherOwnPercent.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherOwnPercent.sendKeys(percent);
+            pages.editDealScope.elems.editFirstPublisherOwnPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherOwnPercent.sendKeys(percent);
         },
 
         editInFirstPublisherNameCollectPercentSpecificValue: function (percent) {
-            pages.edit_deal_scope.elems.editFirstPublisherCollectPercent.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherCollectPercent.sendKeys(percent);
+            pages.editDealScope.elems.editFirstPublisherCollectPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherCollectPercent.sendKeys(percent);
         },
 
         editInFirstPublisherNameAMField: function (publisherNameAM) {
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMField.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMField.sendKeys(publisherNameAM);
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.editPublisherNameDropDownData));
+            pages.editDealScope.elems.editFirstPublisherNameAMField.clear();
+            pages.editDealScope.elems.editFirstPublisherNameAMField.sendKeys(publisherNameAM);
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editPublisherNameDropDownData));
         },
 
         editInFirstPublisherNameAMCollectPercent: function () {
             var percent = (Math.random() * 9 + 1).toFixed(2);
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMCollectPercent.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
+            pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
         },
 
         editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMCollectPercent.clear();
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
+            pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
         },
 
         editClearFirstPublisherNameField: function () {
-            pages.edit_deal_scope.elems.editFirstPublisherNameField.clear();
+            pages.editDealScope.elems.editFirstPublisherNameField.clear();
         },
 
         editClearFirstPublisherNameAMField: function () {
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMField.clear();
+            pages.editDealScope.elems.editFirstPublisherNameAMField.clear();
         },
 
         editClearInFirstPublisherNameOwnPercent: function () {
-            pages.edit_deal_scope.elems.editFirstPublisherOwnPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherOwnPercent.clear();
         },
 
         editClearInFirstPublisherNameCollectPercent: function () {
-            pages.edit_deal_scope.elems.editFirstPublisherCollectPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherCollectPercent.clear();
         },
 
         editClearFirstPublisherNameAMCollectPercent: function () {
-            pages.edit_deal_scope.elems.editFirstPublisherNameAMCollectPercent.clear();
+            pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.clear();
         },
 
         editSelectRandomPublisherNameDropDown: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.editPublisherNameDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editPublisherNameDropDownData));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -196,7 +196,7 @@ if (pages.edit_deal_scope === undefined) {
 
         editSelectTheSpecificPublisherNameDropDown: function (publisherName) {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.editPublisherNameDropDownData));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editPublisherNameDropDownData));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -218,8 +218,8 @@ if (pages.edit_deal_scope === undefined) {
 
         editSelectSpecificOptionEOrPAPublisherType: function (publisher) {
             var desiredOption;
-            pages.edit_deal_scope.elems.editFirstPublisherTypeEOrPAArrow.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.editFirstPublisherTypeEOrPADropDown));
+            pages.editDealScope.elems.editFirstPublisherTypeEOrPAArrow.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editFirstPublisherTypeEOrPADropDown));
             browser.driver.findElements(by.css("#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"))
                 .then(function findMatchingOption(options) {
                     options.some(function (option) {
@@ -240,18 +240,18 @@ if (pages.edit_deal_scope === undefined) {
         },
 
         editSaveThePublisherShareSets: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.editSavePublisherShareSet));
-            pages.edit_deal_scope.elems.editSavePublisherShareSet.click();
-            pages.edit_deal_scope.waitForAjax();
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editSavePublisherShareSet));
+            pages.editDealScope.elems.editSavePublisherShareSet.click();
+            pages.editDealScope.waitForAjax();
         },
 
         editCancelPublisherShareSets: function () {
-            pages.edit_deal_scope.elems.editCancelPublisherShareSet.click();
-            pages.edit_deal_scope.waitForAjax();
+            pages.editDealScope.elems.editCancelPublisherShareSet.click();
+            pages.editDealScope.waitForAjax();
         },
 
         editClickOnAddChainLink: function () {
-            pages.edit_deal_scope.elems.editAddChainLink.click();
+            pages.editDealScope.elems.editAddChainLink.click();
         },
 
         editSelectSpecificOptionEOrPAPublisherTypeChainI: function (publisher, i) {
@@ -339,7 +339,7 @@ if (pages.edit_deal_scope === undefined) {
         editClickOnDeleteIconChainI: function (i) {
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope"));
             element.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.confirmDeleteModalDialog));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.confirmDeleteModalDialog));
         },
 
         editValidateTheDeleteIconChainIPublisherShareIsPresent: function (i) {
@@ -348,31 +348,31 @@ if (pages.edit_deal_scope === undefined) {
 
 
         editConfirmOnDeleteModalDialog: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.create_deal_scope.elems.confirmDeleteModalDialog));
-            pages.edit_deal_scope.elems.confirmDeleteModalDialog.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.confirmDeleteModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.confirmDeleteModalDialog));
+            pages.editDealScope.elems.confirmDeleteModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.confirmDeleteModalDialog));
         },
 
         editConfirmModalDialog: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
-            pages.edit_deal_scope.elems.confirmDeletePssModalDialog.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.confirmDeletePssModalDialog));
+            pages.editDealScope.elems.confirmDeletePssModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.confirmDeletePssModalDialog));
         },
 
         editCancelModalDialog: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
-            pages.edit_deal_scope.elems.cancelDeletePssModalDialog.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.cancelDeletePssModalDialog));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.cancelDeletePssModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.cancelDeletePssModalDialog));
+            pages.editDealScope.elems.cancelDeletePssModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.cancelDeletePssModalDialog));
         },
 
         editDeletePublisherSharesSet: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.editDeletePublisherShareSet));
-            pages.edit_deal_scope.elems.editDeletePublisherShareSet.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
-            pages.edit_deal_scope.elems.confirmDeletePssModalDialog.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.edit_deal_scope.elems.confirmDeletePssModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editDeletePublisherShareSet));
+            pages.editDealScope.elems.editDeletePublisherShareSet.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.confirmDeletePssModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.confirmDeletePssModalDialog));
+            pages.editDealScope.elems.confirmDeletePssModalDialog.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.confirmDeletePssModalDialog));
         }
     });
 }

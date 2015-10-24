@@ -115,32 +115,32 @@ exports.feature = [
         steps: [
             [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
 
-            [steps.new_work.goToNewWorkPage],
+            [steps.newWork.goToNewWorkPage],
 
-            [steps.new_work.enterPrimaryWorkTitle, [
+            [steps.newWork.enterPrimaryWorkTitle, [
                 'TEST WORK ' + randomId('mainWork'),
             ]],
 
-            [steps.new_work.enterAlternateWorkTitle, [
+            [steps.newWork.enterAlternateWorkTitle, [
                 0, 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork'),
             ]],
 
-            [steps.new_work.selectCreatorFromPersonSlot, [0, 0]],
-            [steps.new_work.enterCreatorContribution, [0, 50]],
+            [steps.newWork.selectCreatorFromPersonSlot, [0, 0]],
+            [steps.newWork.enterCreatorContribution, [0, 50]],
 
-            [steps.new_work.selectCreatorFromPersonSlot, [1, 1]],
-            [steps.new_work.enterCreatorContribution, [1, 50]],
+            [steps.newWork.selectCreatorFromPersonSlot, [1, 1]],
+            [steps.newWork.enterCreatorContribution, [1, 50]],
 
-            [steps.new_work.selectRandomMusicalDistributionCategory],
-            [steps.new_work.selectRandomTextMusicRelationship],
-            [steps.new_work.selectRandomExcerptType],
-            [steps.new_work.selectRandomVersionType],
-            [steps.new_work.selectRandomLyricAdaptation],
-            [steps.new_work.selectRandomMusicArrangement],
+            [steps.newWork.selectRandomMusicalDistributionCategory],
+            [steps.newWork.selectRandomTextMusicRelationship],
+            [steps.newWork.selectRandomExcerptType],
+            [steps.newWork.selectRandomVersionType],
+            [steps.newWork.selectRandomLyricAdaptation],
+            [steps.newWork.selectRandomMusicArrangement],
 
-            [steps.new_work.optToIncludeWorkOnWebsite, [false]],
+            [steps.newWork.optToIncludeWorkOnWebsite, [false]],
 
-            [steps.new_work.continueToNextTab],
+            [steps.newWork.continueToNextTab],
 
             [function () {
                 _.times(3, function (i) {
@@ -159,7 +159,7 @@ exports.feature = [
                 });
             }],
 
-            [steps.new_work.continueToNextTab],
+            [steps.newWork.continueToNextTab],
 
             [function () {
                 _.times(4, function (i) {
@@ -177,8 +177,8 @@ exports.feature = [
                 });
             }],
 
-            [steps.new_work.saveWork],
-            [steps.new_work.validateSaveWorkRedirection],
+            [steps.newWork.saveWork],
+            [steps.newWork.validateSaveWorkRedirection],
 
             [steps.work.findCurrentlyOpenWorkId],
         ],
@@ -276,19 +276,19 @@ exports.feature = [
                 _.times(2, function (i) {
                     steps.base.useBlankEntityDataSlot('work', 'component' + i);
 
-                    steps.new_work.goToNewWorkPage();
+                    steps.newWork.goToNewWorkPage();
 
-                    steps.new_work.enterPrimaryWorkTitle(
+                    steps.newWork.enterPrimaryWorkTitle(
                         'TEST COMPONENT ' + randomId('component' + i)
                     );
 
-                    steps.new_work.selectRandomCreator(0);
-                    steps.new_work.enterCreatorContribution(0, 100);
+                    steps.newWork.selectRandomCreator(0);
+                    steps.newWork.enterCreatorContribution(0, 100);
 
-                    steps.new_work.optToIncludeWorkOnWebsite(false);
+                    steps.newWork.optToIncludeWorkOnWebsite(false);
 
-                    steps.new_work.saveWork();
-                    steps.new_work.validateSaveWorkRedirection();
+                    steps.newWork.saveWork();
+                    steps.newWork.validateSaveWorkRedirection();
                 });
             }],
         ],
@@ -311,34 +311,34 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'cosWork');
 
-            steps.new_work.goToNewWorkPage();
+            steps.newWork.goToNewWorkPage();
 
-            steps.new_work.enterPrimaryWorkTitle(
+            steps.newWork.enterPrimaryWorkTitle(
                 'TEST COS WORK ' + randomId('cosWork')
             );
 
-            steps.new_work.enterAlternateWorkTitle(
+            steps.newWork.enterAlternateWorkTitle(
                 0, 'TEST COS WORK ALTERNATE TITLE ' + randomId('cosWork')
             );
 
-            steps.new_work.validateDefaultCompositeWorkCheckboxState();
-            steps.new_work.clickCompositeWorkCheckbox();
+            steps.newWork.validateDefaultCompositeWorkCheckboxState();
+            steps.newWork.clickCompositeWorkCheckbox();
 
-            steps.new_work.selectCompositeWorkType('Composite of Samples');
+            steps.newWork.selectCompositeWorkType('Composite of Samples');
 
-            steps.new_work.selectCreatorFromPersonSlot(0, 2);
-            steps.new_work.enterCreatorContribution(0, 50);
+            steps.newWork.selectCreatorFromPersonSlot(0, 2);
+            steps.newWork.enterCreatorContribution(0, 50);
 
-            steps.new_work.selectFirstComponentWorkMatching(
+            steps.newWork.selectFirstComponentWorkMatching(
                 0, 'TEST COMPONENT ' + randomId('component1')
             );
 
-            steps.new_work.enterComponentWorkAllocation(0, 50);
+            steps.newWork.enterComponentWorkAllocation(0, 50);
 
-            steps.new_work.optToIncludeWorkOnWebsite(false);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
 
-            steps.new_work.saveWork();
-            steps.new_work.validateSaveWorkRedirection();
+            steps.newWork.saveWork();
+            steps.newWork.validateSaveWorkRedirection();
 
             steps.work.findCurrentlyOpenWorkId();
         },
@@ -373,37 +373,37 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'medWork');
 
-            steps.new_work.goToNewWorkPage();
+            steps.newWork.goToNewWorkPage();
 
-            steps.new_work.enterPrimaryWorkTitle(
+            steps.newWork.enterPrimaryWorkTitle(
                 'TEST MED WORK ' + randomId('medWork')
             );
 
-            steps.new_work.enterAlternateWorkTitle(
+            steps.newWork.enterAlternateWorkTitle(
                 0, 'TEST MED WORK ALTERNATE TITLE ' + randomId('medWork')
             );
 
-            steps.new_work.validateDefaultCompositeWorkCheckboxState();
-            steps.new_work.clickCompositeWorkCheckbox();
+            steps.newWork.validateDefaultCompositeWorkCheckboxState();
+            steps.newWork.clickCompositeWorkCheckbox();
 
-            steps.new_work.selectCompositeWorkType('Medley');
+            steps.newWork.selectCompositeWorkType('Medley');
 
-            steps.new_work.selectFirstComponentWorkMatching(
+            steps.newWork.selectFirstComponentWorkMatching(
                 0, 'TEST COMPONENT ' + randomId('component0')
             );
 
-            steps.new_work.enterComponentWorkAllocation(0, 50);
+            steps.newWork.enterComponentWorkAllocation(0, 50);
 
-            steps.new_work.selectFirstComponentWorkMatching(
+            steps.newWork.selectFirstComponentWorkMatching(
                 1, 'TEST COMPONENT ' + randomId('component1')
             );
 
-            steps.new_work.enterComponentWorkAllocation(1, 50);
+            steps.newWork.enterComponentWorkAllocation(1, 50);
 
-            steps.new_work.optToIncludeWorkOnWebsite(false);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
 
-            steps.new_work.saveWork();
-            steps.new_work.validateSaveWorkRedirection();
+            steps.newWork.saveWork();
+            steps.newWork.validateSaveWorkRedirection();
 
             steps.work.findCurrentlyOpenWorkId();
         },
@@ -439,7 +439,7 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'libraryWork');
 
-            using(steps.new_work, function () {
+            using(steps.newWork, function () {
                 this.goToNewWorkPage();
 
                 this.enterPrimaryWorkTitle(
@@ -749,26 +749,26 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'cosShellWork');
 
-            steps.new_work.goToNewWorkPage(),
-            steps.new_work.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(0));
-            steps.new_work.clickCompositeWorkCheckbox();
-            steps.new_work.selectCompositeWorkType('Composite of Samples');
-            steps.new_work.selectCreatorFromPersonSlot(0, 3);
-            steps.new_work.enterCreatorContribution(0, 50);
-            steps.new_work.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(0));
-            steps.new_work.ensureTotalContributionTooLowMessageIsDisplayed();
-            steps.new_work.enterComponentWorkAllocation(0, 50);
-            steps.new_work.validateTotalContribution();
-            steps.new_work.validateDefaultShellWorkTitleLanguage(0);
-            steps.new_work.expectShellWorkTitleToMatchEnteredOne(0);
-            steps.new_work.validateDefaultShellWorkCreatorRole(0, 0);
-            steps.new_work.validateRequiredShellWorkCreatorNameField(0, 0);
-            steps.new_work.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
-            steps.new_work.validateRequiredShellWorkCreatorContributionField(0, 0);
-            steps.new_work.enterShellWorkCreatorContribution(0, 0, 100);
-            steps.new_work.optToIncludeWorkOnWebsite(false);
-            steps.new_work.saveWork();
-            steps.new_work.validateSaveWorkRedirection();
+            steps.newWork.goToNewWorkPage(),
+            steps.newWork.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(0));
+            steps.newWork.clickCompositeWorkCheckbox();
+            steps.newWork.selectCompositeWorkType('Composite of Samples');
+            steps.newWork.selectCreatorFromPersonSlot(0, 3);
+            steps.newWork.enterCreatorContribution(0, 50);
+            steps.newWork.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(0));
+            steps.newWork.ensureTotalContributionTooLowMessageIsDisplayed();
+            steps.newWork.enterComponentWorkAllocation(0, 50);
+            steps.newWork.validateTotalContribution();
+            steps.newWork.validateDefaultShellWorkTitleLanguage(0);
+            steps.newWork.expectShellWorkTitleToMatchEnteredOne(0);
+            steps.newWork.validateDefaultShellWorkCreatorRole(0, 0);
+            steps.newWork.validateRequiredShellWorkCreatorNameField(0, 0);
+            steps.newWork.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+            steps.newWork.validateRequiredShellWorkCreatorContributionField(0, 0);
+            steps.newWork.enterShellWorkCreatorContribution(0, 0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.newWork.validateSaveWorkRedirection();
             steps.work.findCurrentlyOpenWorkId();
         }
     },
@@ -803,21 +803,21 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'medShellWork');
 
-            steps.new_work.goToNewWorkPage();
-            steps.new_work.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(3));
-            steps.new_work.clickCompositeWorkCheckbox();
-            steps.new_work.selectCompositeWorkType('Medley');
-            steps.new_work.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(3.1));
-            steps.new_work.enterComponentWorkAllocation(0, 50);
-            steps.new_work.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
-            steps.new_work.enterShellWorkCreatorContribution(0, 0, 100);
-            steps.new_work.enterNewShellWork(1, 'TEST SHELL WORK ' + randomId(3.2));
-            steps.new_work.enterComponentWorkAllocation(1, 50);
-            steps.new_work.selectShellWorkCreatorFromPersonSlot(1, 0, 1);
-            steps.new_work.enterShellWorkCreatorContribution(1, 0, 100);
-            steps.new_work.optToIncludeWorkOnWebsite(false);
-            steps.new_work.saveWork();
-            steps.new_work.validateSaveWorkRedirection();
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(3));
+            steps.newWork.clickCompositeWorkCheckbox();
+            steps.newWork.selectCompositeWorkType('Medley');
+            steps.newWork.enterNewShellWork(0, 'TEST SHELL WORK ' + randomId(3.1));
+            steps.newWork.enterComponentWorkAllocation(0, 50);
+            steps.newWork.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+            steps.newWork.enterShellWorkCreatorContribution(0, 0, 100);
+            steps.newWork.enterNewShellWork(1, 'TEST SHELL WORK ' + randomId(3.2));
+            steps.newWork.enterComponentWorkAllocation(1, 50);
+            steps.newWork.selectShellWorkCreatorFromPersonSlot(1, 0, 1);
+            steps.newWork.enterShellWorkCreatorContribution(1, 0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.newWork.validateSaveWorkRedirection();
             steps.work.findCurrentlyOpenWorkId();
         }
     },
@@ -1202,52 +1202,52 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
 
-            steps.create_deal_general.goToNewDealPage();
+            steps.createDealGeneral.goToNewDealPage();
 
-            steps.create_deal_general.selectDesiredSigningTerritory('Argentina');
+            steps.createDealGeneral.selectDesiredSigningTerritory('Argentina');
 
-            steps.create_deal_general.enterContractingPartySearchTerms('ASCAP');
+            steps.createDealGeneral.enterContractingPartySearchTerms('ASCAP');
 
-            steps.create_deal_general.selectContractingPartySearchResultByIndex(0);
+            steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
 
             steps.deal.itContinueToNextPage();
 
-            steps.create_deal_contract_period.enterActualStartDate(
+            steps.createDealContractPeriod.enterActualStartDate(
                 moment().format('YYYY-MM-DD')
             );
 
-            steps.create_deal_contract_period.enterTargetEndDateInMonths(12);
+            steps.createDealContractPeriod.enterTargetEndDateInMonths(12);
 
             _.times(2, function () {
-                steps.create_deal_scope.openNewScopeForm();
+                steps.createDealScope.openNewScopeForm();
 
-                steps.create_deal_scope.selectContractType('Administration');
+                steps.createDealScope.selectContractType('Administration');
 
-                steps.create_deal_scope.enterTerritoryOfControlSearchTerms(
+                steps.createDealScope.enterTerritoryOfControlSearchTerms(
                     'Brazil'
                 );
 
-                steps.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(0);
+                steps.createDealScope.selectTerritoryOfControlSearchResultByIndex(0);
 
-                steps.create_deal_scope.clickOnAddPublisherShareSet({
+                steps.createDealScope.clickOnAddPublisherShareSet({
                     scrollIntoView: true,
                 });
 
-                steps.create_deal_scope.enterPublisherSearchTerms(
+                steps.createDealScope.enterPublisherSearchTerms(
                     0, 0, 'WCM Publisher 1'
                 );
 
-                steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
+                steps.createDealScope.selectPublisherSearchResultByIndex(0);
 
-                steps.create_deal_scope.enterOwnPublisherShare(0, 0, 100);
+                steps.createDealScope.enterOwnPublisherShare(0, 0, 100);
 
-                steps.create_deal_scope.enterPublisherSearchTerms(
+                steps.createDealScope.enterPublisherSearchTerms(
                     0, 1, 'WB MUSIC CORP.'
                 );
 
-                steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
+                steps.createDealScope.selectPublisherSearchResultByIndex(0);
 
-                steps.create_deal_scope.enterCollectPublisherShare(0, 1, 100);
+                steps.createDealScope.enterCollectPublisherShare(0, 1, 100);
             });
 
             steps.deal.itContinueToNextPage();

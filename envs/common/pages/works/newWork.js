@@ -5,7 +5,7 @@ var _ = require('lodash'),
     random = require('../../../../helpers/random'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-exports = module.exports = pages.new_work = new ftf.pageObject({
+exports = module.exports = pages.newWork = new ftf.pageObject({
 	url: _tf_config.urls.app_url + "#/create/work"
 });
 module.exports.primaryWorkTitleLanguageDropdown = function() {
@@ -18,17 +18,17 @@ module.exports.alternateWorkTitleRows = function() {
 	return element.all(by.repeater("altTitle in work.alternative_titles"));
 };
 module.exports.alternateWorkTitleRow = function(index) {
-	return pages.new_work.alternateWorkTitleRows().get(index);
+	return pages.newWork.alternateWorkTitleRows().get(index);
 };
 module.exports.alternateWorkTitleLanguageDropdown = function(index) {
 	return (
-		pages.new_work.alternateWorkTitleRow(index)
+		pages.newWork.alternateWorkTitleRow(index)
 			.$("[tg-typeahead-render-template='$templates.main.wrapper']")
 	);
 };
 module.exports.alternateWorkTitleInput = function(index) {
 	return (
-		pages.new_work.alternateWorkTitleRow(index)
+		pages.newWork.alternateWorkTitleRow(index)
 			.element(by.model("altTitle.title"))
 	);
 };
@@ -139,29 +139,29 @@ module.exports.creatorContributionRows = function() {
 	return element.all(by.repeater("creator in commonDataHolder.creatorsContributions"));
 };
 module.exports.creatorContributionRow = function(index) {
-	return pages.new_work.creatorContributionRows().get(index);
+	return pages.newWork.creatorContributionRows().get(index);
 };
 module.exports.creatorRoleDropdown = function(index) {
 	return (
-		pages.new_work.creatorContributionRow(index)
+		pages.newWork.creatorContributionRow(index)
 			.element(by.model("creator.role"))
 	);
 };
 module.exports.creatorNameInput = function(index) {
 	return (
-		pages.new_work.creatorContributionRow(index)
+		pages.newWork.creatorContributionRow(index)
 			.element(by.model("creator.person_name"))
 	);
 };
 module.exports.creatorContributionInput = function(index) {
 	return (
-		pages.new_work.creatorContributionRow(index)
+		pages.newWork.creatorContributionRow(index)
 			.element(by.model("creator.contribution"))
 	);
 };
 module.exports.contributionRequiredMessage = function(i) {
 	return (
-		pages.new_work.creatorContributionRow(i)
+		pages.newWork.creatorContributionRow(i)
 			.element(by.cssContainingText(
 				".validation-message-text", "Contribution is required"
 			))
@@ -215,25 +215,25 @@ module.exports.creationDateContainer = function() {
 };
 module.exports.creationDatePickerIcon = function() {
 	return (
-		pages.new_work.creationDateContainer()
+		pages.newWork.creationDateContainer()
 			.$(".date .add-on")
 	);
 };
 module.exports.creationYearInput = function() {
 	return (
-		pages.new_work.creationDateContainer()
+		pages.newWork.creationDateContainer()
 			.element(by.model("date.year"))
 	);
 };
 module.exports.creationMonthInput = function() {
 	return (
-		pages.new_work.creationDateContainer()
+		pages.newWork.creationDateContainer()
 			.element(by.model("date.month"))
 	);
 };
 module.exports.creationDayInput = function() {
 	return (
-		pages.new_work.creationDateContainer()
+		pages.newWork.creationDateContainer()
 			.element(by.model("date.day"))
 	);
 };
@@ -242,25 +242,25 @@ module.exports.deliveryDateContainer = function() {
 };
 module.exports.deliveryDatePickerIcon = function() {
 	return (
-		pages.new_work.deliveryDateContainer()
+		pages.newWork.deliveryDateContainer()
 			.$(".date .add-on")
 	);
 };
 module.exports.deliveryYearInput = function() {
 	return (
-		pages.new_work.deliveryDateContainer()
+		pages.newWork.deliveryDateContainer()
 			.element(by.model("date.year"))
 	);
 };
 module.exports.deliveryMonthInput = function() {
 	return (
-		pages.new_work.deliveryDateContainer()
+		pages.newWork.deliveryDateContainer()
 			.element(by.model("date.month"))
 	);
 };
 module.exports.deliveryDayInput = function() {
 	return (
-		pages.new_work.deliveryDateContainer()
+		pages.newWork.deliveryDateContainer()
 			.element(by.model("date.day"))
 	);
 };
@@ -274,27 +274,27 @@ module.exports.saveWorkButton = function() {
 	return $(".page-footer [type='submit']:nth-child(4):not(.disabled)");
 };
 module.exports.selectedPrimaryWorkTitleLanguage = function() {
-	var element = pages.new_work.primaryWorkTitleLanguageDropdown();
+	var element = pages.newWork.primaryWorkTitleLanguageDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.selectedAlternateWorkTitleLanguage = function(i) {
-	var element = pages.new_work.alternateWorkTitleLanguageDropdown(i);
+	var element = pages.newWork.alternateWorkTitleLanguageDropdown(i);
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.selectedCreatorRole = function(i) {
-	var element = pages.new_work.creatorRoleDropdown(i);
+	var element = pages.newWork.creatorRoleDropdown(i);
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.enteredCreatorContribution = function(i) {
-	var element = pages.new_work.creatorContributionInput(i);
+	var element = pages.newWork.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
 module.exports.totalContribution = function() {
-	var element = pages.new_work.contributionTotalBinding();
+	var element = pages.newWork.contributionTotalBinding();
 	pages.base.scrollIntoView(element);
 	return element.getText().then (
 		function(text) {
@@ -307,120 +307,120 @@ module.exports.totalContribution = function() {
 	);
 };
 module.exports.selectedMusicalDistributionCategory = function() {
-	var element = pages.new_work.musicalDistributionCategoryDropdown();
+	var element = pages.newWork.musicalDistributionCategoryDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.selectedTextMusicRelationship = function() {
-	var element = pages.new_work.textMusicRelationshipDropdown();
+	var element = pages.newWork.textMusicRelationshipDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.selectedExcerptType = function() {
-	var element = pages.new_work.excerptTypeDropdown();
+	var element = pages.newWork.excerptTypeDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.selectedVersionType = function() {
-	var element = pages.new_work.versionTypeDropdown();
+	var element = pages.newWork.versionTypeDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.isLyricAdaptationFieldDisplayed = function() {
 	return pages.base.isPresentAndDisplayed(
-		pages.new_work.lyricAdaptationDropdown()
+		pages.newWork.lyricAdaptationDropdown()
 	);
 };
 module.exports.selectedLyricAdaptation = function() {
 	return pages.base.selectedTgDropdownOption(
-		pages.new_work.lyricAdaptationDropdown()
+		pages.newWork.lyricAdaptationDropdown()
 	);
 };
 module.exports.isMusicArrangementFieldDisplayed = function() {
 	return pages.base.isPresentAndDisplayed(
-		pages.new_work.musicArrangementDropdown()
+		pages.newWork.musicArrangementDropdown()
 	);
 };
 module.exports.selectedMusicArrangement = function() {
 	return pages.base.selectedTgDropdownOption(
-		pages.new_work.musicArrangementDropdown()
+		pages.newWork.musicArrangementDropdown()
 	);
 };
 module.exports.isIntendedPurposeFieldDisplayed = function() {
 	return pages.base.isPresentAndDisplayed(
-		pages.new_work.intendedPurposeDropdown()
+		pages.newWork.intendedPurposeDropdown()
 	);
 };
 module.exports.selectedIntendedPurpose = function() {
-	var element = pages.new_work.intendedPurposeDropdown();
+	var element = pages.newWork.intendedPurposeDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.isProductionTitleFieldDisplayed = function() {
 	return pages.base.isPresentAndDisplayed(
-		pages.new_work.productionTitleInput()
+		pages.newWork.productionTitleInput()
 	);
 };
 module.exports.enterProductionTitle = function(title) {
-	var element = pages.new_work.productionTitleInput();
+	var element = pages.newWork.productionTitleInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(title);
 };
 module.exports.isBltvrFieldDisplayed = function() {
-	return pages.base.isPresentAndDisplayed(pages.new_work.bltvrDropdown());
+	return pages.base.isPresentAndDisplayed(pages.newWork.bltvrDropdown());
 };
 module.exports.selectedBltvr = function() {
-	var element = pages.new_work.bltvrDropdown();
+	var element = pages.newWork.bltvrDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.isMusicLibraryFieldDisplayed = function() {
-	return pages.base.isPresentAndDisplayed(pages.new_work.musicLibraryDropdown());
+	return pages.base.isPresentAndDisplayed(pages.newWork.musicLibraryDropdown());
 };
 module.exports.selectedMusicLibrary = function() {
-	var element = pages.new_work.musicLibraryDropdown();
+	var element = pages.newWork.musicLibraryDropdown();
 	pages.base.scrollIntoView(element);
 	return pages.base.selectedTgDropdownOption(element);
 };
 module.exports.enteredCreationYear = function() {
-	var element = pages.new_work.creationYearInput();
+	var element = pages.newWork.creationYearInput();
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
 module.exports.enteredCreationMonth = function() {
-	var element = pages.new_work.creationMonthInput();
+	var element = pages.newWork.creationMonthInput();
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
 module.exports.enteredCreationDay = function() {
-	var element = pages.new_work.creationDayInput();
+	var element = pages.newWork.creationDayInput();
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
 module.exports.enteredDeliveryYear = function() {
-	var element = pages.new_work.deliveryYearInput();
+	var element = pages.newWork.deliveryYearInput();
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
 module.exports.enteredDeliveryMonth = function() {
-	var element = pages.new_work.deliveryMonthInput();
+	var element = pages.newWork.deliveryMonthInput();
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
 module.exports.enteredDeliveryDay = function() {
-	var element = pages.new_work.deliveryDayInput();
+	var element = pages.newWork.deliveryDayInput();
 	pages.base.scrollIntoView(element);
 	return element.getAttribute("value");
 };
 module.exports.enterPrimaryWorkTitle = function(title) {
-	var element = pages.new_work.primaryWorkTitleInput();
+	var element = pages.newWork.primaryWorkTitleInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	return element.sendKeys(title);
 };
 exports.enterAlternateWorkTitle = function(i, title) {
-    var element = pages.new_work.alternateWorkTitleInput(i);
+    var element = pages.newWork.alternateWorkTitleInput(i);
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(title);
@@ -452,13 +452,13 @@ exports.selectCompositeWorkType = function(value) {
     pages.base.selectDropdownOption(element, value, { dropdownType: 'tg' });
 };
 exports.enterComponentWorkSearchTerms = function(i, value) {
-    var element = pages.new_work.componentWorkSearchField(i);
+    var element = pages.newWork.componentWorkSearchField(i);
     pages.base.scrollIntoView(element);
     element.clear();
     element.sendKeys(value);
 };
 exports.enterCreatorSearchTerms = function(i, name) {
-    var element = pages.new_work.creatorNameInput(i);
+    var element = pages.newWork.creatorNameInput(i);
     pages.base.scrollIntoView(element);
     element.clear();
     element.sendKeys(name);
@@ -610,7 +610,7 @@ exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
     });
 };
 module.exports.enterCreatorContribution = function(i, value) {
-	var element = pages.new_work.creatorContributionInput(i);
+	var element = pages.newWork.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
 	element.clear();
 	return element.sendKeys(value);
@@ -641,43 +641,43 @@ exports.selectMusicLibrary = function(value) {
     });
 };
 module.exports.enterCreationYear = function(value) {
-	var element = pages.new_work.creationYearInput();
+	var element = pages.newWork.creationYearInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
 };
 module.exports.enterCreationMonth = function(value) {
-	var element = pages.new_work.creationMonthInput();
+	var element = pages.newWork.creationMonthInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
 };
 module.exports.enterCreationDay = function(value) {
-	var element = pages.new_work.creationDayInput();
+	var element = pages.newWork.creationDayInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
 };
 module.exports.enterDeliveryYear = function(value) {
-	var element = pages.new_work.deliveryYearInput();
+	var element = pages.newWork.deliveryYearInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
 };
 module.exports.enterDeliveryMonth = function(value) {
-	var element = pages.new_work.deliveryMonthInput();
+	var element = pages.newWork.deliveryMonthInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
 };
 module.exports.enterDeliveryDay = function(value) {
-	var element = pages.new_work.deliveryDayInput();
+	var element = pages.newWork.deliveryDayInput();
 	pages.base.scrollIntoView(element);
 	element.clear();
 	element.sendKeys(value);
 };
 module.exports.optToIncludeWorkOnWebsite = function(include) {
-	var elements = pages.new_work.includeWorkOnWebsiteButtons();
+	var elements = pages.newWork.includeWorkOnWebsiteButtons();
 	var elementIndex;
 	var element;
 	elementIndex = { "true": 0, "false": 1 }[!!include];

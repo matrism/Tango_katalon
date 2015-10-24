@@ -37,7 +37,7 @@ exports.feature = [
         name: "New basic work",
         tags: ['create'],
         steps: [
-            [steps.new_work.createBasicWork, [workData]],
+            [steps.newWork.createBasicWork, [workData]],
             [steps.work.validateWork, [workData]]
         ]
     },
