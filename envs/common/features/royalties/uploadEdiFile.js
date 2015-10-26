@@ -30,7 +30,7 @@ exports.feature = [
                 this.selectProcessingTerritory('Chile');
                 this.selectIncomeProvider('FABER MUSIC LTD');
                 this.selectFileFormat('FABER SALES');
-                this.selectFile('../data/fabersales_tiny_TAT.txt');
+                this.selectFile('./data/fabersales_tiny_TAT.txt');
                 this.setStatementDistributionPeriodStart('2014', '09');
                 this.setStatementDistributionPeriodEnd('2014', '09');
                 this.setExpectedFileAmount(fileAmount);
@@ -65,7 +65,7 @@ exports.feature = [
         name: 'Upload EDI file - Sanity Test',
         tags: ['uploadEDIFile', 'sanityTest', 'uploadEDIFileSanity'],
         steps: function(){
-            var files = require('../data/ediFileSanity.json'),
+            var files = require('./data/ediFileSanity.json'),
                 incomeProviders,
                 fileDefaults = {
                     currency: 'GBP',

@@ -2,11 +2,10 @@
 
 var pageStep = require('../../../../helpers/basicPageStep');
 
-var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 
-beforeEach(function () {
+/*beforeEach(function () {
     var matchers = {
         toEqualBecause: function (value, message) {
             this.message = function () {
@@ -18,7 +17,7 @@ beforeEach(function () {
     };
 
     this.addMatchers(matchers);
-});
+});*/
 
 if (steps.organisation === undefined) {
     steps.organisation = exports = {

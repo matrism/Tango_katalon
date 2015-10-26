@@ -82,7 +82,10 @@ config = {
             browserWait,
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
-            asciiPrefixes;
+            asciiPrefixes,
+            failFast = require('jasmine-fail-fast');
+
+        jasmine.getEnv().addReporter(failFast.init());
 
         // set path to features in config
         systemConfig.path_to_features = testFiles.features;
@@ -121,10 +124,14 @@ config = {
             }, timeout);
         };
 
-        if (systemConfig.resolution.width && systemConfig.resolution.height) {
-            browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
-            browser.driver.manage().window().maximize();
-        }
+        setTimeout(function(){
+            if (systemConfig.resolution.width && systemConfig.resolution.height) {
+
+                    browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+            } else {
+                browser.driver.manage().window().maximize();
+            }
+        });
 
         asciiPrefixes = {
             success: '[Pass] ',

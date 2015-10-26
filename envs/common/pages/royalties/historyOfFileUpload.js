@@ -5,8 +5,7 @@ var path = require('path'),
     random = require('../../../../helpers/random'),
     tmp = require('tmp'),
     ExpectedConditions = protractor.ExpectedConditions,
-    testVariables = hash.testVariables,
-    fromTestVariable = require('../../../../helpers/fromTestVariable');
+    testData = {};
 
 pages.uploadEdiFile = exports;
 
@@ -78,13 +77,13 @@ exports.fileInput = function () {
 
 
 function generateTempFile(fileName) {
-    var tmpDir = tmp.dirSync();
-    testVariables.tempFileName = path.join(tmpDir.name, 'TAT' + random.id() + '.edi');
+    testData.tmpDir = tmp.dirSync();
+    testData.tempFileName = path.join(testData.tmpDir.name, 'TAT' + random.id() + '.edi');
 
     fileName = path.resolve(__dirname, fileName);
 
-    fs.copySync(fileName, testVariables.tempFileName);
-    return testVariables.tempFileName;
+    fs.copySync(fileName, testData.tempFileName);
+    return testData.tempFileName;
 }
 
 exports.selectFile = function (fileName) {
@@ -133,7 +132,7 @@ exports.expectedFileAmountField = function () {
 };
 
 exports.setExpectedFileAmount = function (amount) {
-    testVariables.fileAmount = amount;
+    testData.fileAmount = amount;
     exports.expectedFileAmountField().sendKeys(amount);
 };
 
@@ -219,13 +218,13 @@ exports.fileBlindsByFileName = function (filename) {
 };
 
 exports.expectUploadedFileToBeListed = function () {
-    var uploadedFile = path.basename(testVariables.tempFileName),
+    var uploadedFile = path.basename(testData.tempFileName),
         fileBlinds = exports.fileBlindsByFileName(uploadedFile),
         fileBlind;
 
     browser.wait(ExpectedConditions.visibilityOfAny(fileBlinds));
     expect(fileBlinds.count()).toBe(1);
-    testVariables.fileBlind = fileBlind = fileBlinds.first();
+    testData.fileBlind = fileBlind = fileBlinds.first();
 };
 
 function normalizeAmount (amount) {
@@ -234,7 +233,7 @@ function normalizeAmount (amount) {
 }
 
 exports.fileBlindsByUploadedFilename = function () {
-    return exports.fileBlindsByFileName(path.basename(testVariables.tempFileName));
+    return exports.fileBlindsByFileName(path.basename(testData.tempFileName));
 };
 
 exports.uploadedFileBlind = function () {
@@ -250,7 +249,7 @@ exports.openUploadedFileBlind = function () {
 exports.expectUploadedFileToHaveCorrectExpectedAmount = function (amount) {
     var fileBlind = exports.uploadedFileBlind(), amountElem = fileBlind.$('.amount-nr span[data-ng-hide]');
 
-    amount = amount || testVariables.fileAmount;
+    amount = amount || testData.fileAmount;
 
     browser.wait(function(){
         return amountElem.getInnerHtml().then(function(text){
@@ -262,7 +261,7 @@ exports.expectUploadedFileToHaveCorrectExpectedAmount = function (amount) {
 };
 
 function checkFileStatus (status) {
-    var file = exports.fileBlindsByFileName(path.basename(testVariables.tempFileName)).first();
+    var file = exports.fileBlindsByFileName(path.basename(testData.tempFileName)).first();
     return file.$('.file-status').getText().then(function(text){
         return text === status;
     });
@@ -373,7 +372,7 @@ exports.editUploadedFile = function () {
 };
 
 exports.assumeUploadedFile = function (fileName) {
-    testVariables.tempFileName = fileName;
+    testData.tempFileName = fileName;
 };
 
 exports.uploadedExpectedFileAmountField = function () {
@@ -476,4 +475,4 @@ exports.changeAccountsReferenceField = function (val) {
     var field = exports.accountsReferenceField();
     field.clear();
     field.sendKeys(val);
-};
+}
