@@ -17,7 +17,7 @@ pageStep([
 
 exports.enterLastName = function(value) {
     it('Enter last name (' + value + ')', function() {
-        page.enterLastName(value).then(function() {
+        pages.newPerson.enterLastName(value).then(function() {
             var person = hash.currentPersonSlot;
 
             person.lastName = value;

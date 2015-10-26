@@ -6,7 +6,7 @@ steps.album = exports;
 
 exports.goToAlbumPage = function() {
     it('Go to album page', function() {
-        page.goToAlbumPage(
+        pages.album.goToAlbumPage(
             hash.currentEntityDataSlotsByType.album.uuid
         );
     });
@@ -50,7 +50,7 @@ exports.recordings.validateWorkIdUsingWorkSlot = function(i, value) {
     it(
         'Recordings > Validate work ID using work slot ' +
         '(' + argumentListString + ')', function() {
-            page.recordings.validateWorkId(
+            pages.workRecordings.recordings.validateWorkId(
                 i, hash.entityDataSlotsByType.work[value].id
             );
         }

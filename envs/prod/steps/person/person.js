@@ -46,7 +46,7 @@ pageStep([
 
 exports.findInternalIpiNumber = function() {
     it('Find internal IPI number', function() {
-        page.internalIpiNumber().then(function(value) {
+        pages.person.internalIpiNumber().then(function (value) {
             hash.currentPersonSlot.ipiNumber = value;
             hash.currentPersonSlot.internalIpiNumber = value;
         });

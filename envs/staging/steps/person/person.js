@@ -54,7 +54,7 @@ pageStep([
 
 exports.findId = function() {
     it('Find the person ID', function() {
-        page.findId().then(function(value) {
+        pages.personStaging.findId().then(function(value) {
             hash.currentPersonSlot.id = value;
         });
     });
@@ -62,7 +62,7 @@ exports.findId = function() {
 
 exports.findInternalIpiNumber = function() {
     it('Find internal IPI number', function() {
-        page.internalIpiNumber().then(function(value) {
+        pages.personStaging.internalIpiNumber().then(function(value) {
             hash.currentPersonSlot.ipiNumber = value;
             hash.currentPersonSlot.internalIpiNumber = value;
         });
@@ -75,7 +75,7 @@ exports.findInternalIpiNumber = function() {
 
 exports.enterFirstName = function (value) {
     it('Enter first name (' + value + ')', function () {
-        page.typeFirstName(value).then(function () {
+        pages.personStaging.typeFirstName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.firstName = value;
@@ -96,7 +96,7 @@ exports.enterFirstName = function (value) {
 
 exports.enterLastName = function (value) {
     it('Enter last name (' + value + ')', function () {
-       page.typeLastName(value).then(function () {
+       pages.personStaging.typeLastName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.lastName = value;
@@ -117,7 +117,7 @@ exports.enterLastName = function (value) {
 
 exports.enterPresentationName = function (value) {
     it('Enter presentation name (' + value + ')', function () {
-        page.typePresentationName(value).then(function () {
+        pages.personStaging.typePresentationName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.name = value;
@@ -128,7 +128,7 @@ exports.enterPresentationName = function (value) {
 
 exports.enterAlternativeFirstName = function (i, value) {
     it('Enter alternative first name #' + (i + 1) + ' (' + value + ')', function () {
-        page.typeAlternativeFirstName(i, value).then(function () {
+        pages.personStaging.typeAlternativeFirstName(i, value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.alternativeFirstName = value;
@@ -149,7 +149,7 @@ exports.enterAlternativeFirstName = function (i, value) {
 
 exports.enterAlternativeLastName = function (i, value) {
     it('Enter alternative last name #' + (i + 1) + ' (' + value + ')', function () {
-        page.typeAlternativeLastName(i, value).then(function () {
+        pages.personStaging.typeAlternativeLastName(i, value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.alternativeLastName = value;
@@ -170,7 +170,7 @@ exports.enterAlternativeLastName = function (i, value) {
 
 exports.enterAlternativeCreditsName = function (i, value) {
     it('Enter alternative credits name #' + (i + 1) + ' (' + value + ')', function () {
-        page.typeAlternativeCreditsName(i, value).then(function () {
+        pages.personStaging.typeAlternativeCreditsName(i, value).then(function () {
             hash.currentPersonSlot.alternativeCreditsName = value;
         });
     });
@@ -178,7 +178,7 @@ exports.enterAlternativeCreditsName = function (i, value) {
 
 exports.enterAlternativeSuisaIpiNumber = function (i, value) {
     it('Enter alternative Siosa Ipi name #' + (i + 1) + ' (' + value + ')', function () {
-        page.typeAlternativeSuisaIpiNumber(i, value).then(function () {
+        pages.personStaging.typeAlternativeSuisaIpiNumber(i, value).then(function () {
             hash.currentPersonSlot.alternativeSuisaIpiNumber = value;
         });
     });
@@ -186,7 +186,7 @@ exports.enterAlternativeSuisaIpiNumber = function (i, value) {
 
 exports.enterSuisaIpiNumber = function (value) {
     it('Enter SUISA IPI number (' + value + ')', function () {
-        page.typeSuisaIpiNumber(value).then(function () {
+        pages.personStaging.typeSuisaIpiNumber(value).then(function () {
             hash.currentPersonSlot.ipiNumber = value;
             hash.currentPersonSlot.suisaIpiNumber = value;
         });
@@ -195,7 +195,7 @@ exports.enterSuisaIpiNumber = function (value) {
 
 exports.enterAffiliatedSocietySearchTerms = function (value) {
     it('Enter affiliated society search terms (' + value + ')', function () {
-        page.typeAffiliatedSocietySearchTerms(value).then(function () {
+        pages.personStaging.typeAffiliatedSocietySearchTerms(value).then(function () {
             hash.currentPersonSlot.affiliatedSociety = value;
         });
     });
@@ -203,13 +203,13 @@ exports.enterAffiliatedSocietySearchTerms = function (value) {
 
 exports.selectAffiliatedSocietySearchResultByIndex = function (i) {
     it('Select affiliated society search result #' + (i + 1), function () {
-        page.clickAffiliatedSocietySearchResultByIndex(i);
+        pages.personStaging.clickAffiliatedSocietySearchResultByIndex(i);
     });
 };
 
 exports.enterAddressOne = function (i, value) {
     it('Enter Address One #' + (i + 1) + ' (' + value + ')', function () {
-        page.typeIntoAddressOneInput(i, value).then(function () {
+        pages.personStaging.typeIntoAddressOneInput(i, value).then(function () {
             hash.currentPersonSlot.addressOne = hash.currentPersonSlot.addressOne || [];
             hash.currentPersonSlot.addressOne[i] = value;
         });
@@ -218,7 +218,7 @@ exports.enterAddressOne = function (i, value) {
 
 exports.enterPhone = function (i, value) {
     it('Enter Phone #' + (i + 1) + ' (' + value + ')', function () {
-        page.typeIntoPhoneInput(i, value).then(function () {
+        pages.personStaging.typeIntoPhoneInput(i, value).then(function () {
             hash.currentPersonSlot.phone = hash.currentPersonSlot.phone || [];
             hash.currentPersonSlot.phone[i] = value;
         });
@@ -227,7 +227,7 @@ exports.enterPhone = function (i, value) {
 
 exports.enterEmail = function (i, value) {
     it('Enter Email #' + (i + 1) + ' (' + value + ')', function () {
-        page.typeIntoEmailInput(i, value).then(function () {
+        pages.personStaging.typeIntoEmailInput(i, value).then(function () {
             hash.currentPersonSlot.email = hash.currentPersonSlot.email || [];
             hash.currentPersonSlot.email[i] = value;
         });
@@ -236,7 +236,7 @@ exports.enterEmail = function (i, value) {
 
 exports.clickOnPayee = function (value) {
     it('Click on the Payee Toggle (' + value + ')', function () {
-        page.clickPayee(value).then(function () {
+        pages.personStaging.clickPayee(value).then(function () {
             hash.currentPersonSlot.payee = value;
         });
     });
@@ -244,52 +244,52 @@ exports.clickOnPayee = function (value) {
 
 exports.validateName = function() {
     it('Validate Name', function () {
-        expect(page.getName()).toBe(hash.currentPersonSlot.name);
+        expect(pages.personStaging.getName()).toBe(hash.currentPersonSlot.name);
     });
 };
 exports.validateFirstName = function() {
     it('Validate First Name', function () {
-        expect(page.getFirstName()).toBe(hash.currentPersonSlot.firstName);
+        expect(pages.personStaging.getFirstName()).toBe(hash.currentPersonSlot.firstName);
     });
 };
 exports.validateLastName = function() {
     it('Validate Last Name', function () {
-        expect(page.getLastName()).toBe(hash.currentPersonSlot.lastName);
+        expect(pages.personStaging.getLastName()).toBe(hash.currentPersonSlot.lastName);
     });
 };
 exports.validateAlternativeFirstName = function() {
     it('Validate Alternative First Name', function () {
-        expect(page.getAlternativeFirstName()).toBe(hash.currentPersonSlot.alternativeFirstName);
+        expect(pages.personStaging.getAlternativeFirstName()).toBe(hash.currentPersonSlot.alternativeFirstName);
     });
 };
 exports.validateAlternativeLastName = function() {
     it('Validate Alternative Last Name', function () {
-        expect(page.getAlternativeLastName()).toBe(hash.currentPersonSlot.alternativeLastName);
+        expect(pages.personStaging.getAlternativeLastName()).toBe(hash.currentPersonSlot.alternativeLastName);
     });
 };
 exports.validateAffiliatedSociety = function() {
     it('Validate Affiliated Society', function () {
-        expect(page.getAffiliatedSociety()).toBe(hash.currentPersonSlot.affiliatedSociety);
+        expect(pages.personStaging.getAffiliatedSociety()).toBe(hash.currentPersonSlot.affiliatedSociety);
     });
 };
 exports.validateAddressOne = function(i) {
     it('Validate Address One', function () {
-        expect(page.getAddressOne(i)).toBe(hash.currentPersonSlot.addressOne[i]);
+        expect(pages.personStaging.getAddressOne(i)).toBe(hash.currentPersonSlot.addressOne[i]);
     });
 };
 exports.validatePhone = function(i) {
     it('Validate Phone #' + i, function () {
-        expect(page.getPhone(i)).toBe(hash.currentPersonSlot.phone[i]);
+        expect(pages.personStaging.getPhone(i)).toBe(hash.currentPersonSlot.phone[i]);
     });
 };
 exports.validateEmail = function(i) {
     it('Validate Email #' + i, function () {
-        expect(page.getEmail(i)).toBe(hash.currentPersonSlot.email[i]);
+        expect(pages.personStaging.getEmail(i)).toBe(hash.currentPersonSlot.email[i]);
     });
 };
 exports.validatePayee = function() {
     it('Validate Payee', function () {
-        expect(page.getPayee()).toBe(hash.currentPersonSlot.payee);
+        expect(pages.personStaging.getPayee()).toBe(hash.currentPersonSlot.payee);
     });
 };
 
@@ -312,24 +312,24 @@ pageStep([
 
 exports.clickOnEnterPersonSearchTerms = function (value) {
     it('Search for person (' + value + ')', function () {
-        page.enterPersonSearchTerms(value);
+        pages.personStaging.enterPersonSearchTerms(value);
     });
 };
 exports.searchForPersonUsingPreviouslyCreatedIpiNumber = function () {
     it('Search for person using previously created IPI Number', function () {
-        page.enterPersonSearchTerms(
+        pages.personStaging.enterPersonSearchTerms(
             hash.currentPersonSlot.ipiNumber
         );
     });
 };
 exports.clickPersonSearchMatch = function (i) {
     it('Click person search match #' + (i + 1), function () {
-        page.clickPersonSearchMatch(i);
+        pages.personStaging.clickPersonSearchMatch(i);
     });
 };
 exports.validateIpiNumber = function () {
     it('Validate IPI Number', function () {
-        page.validateIpiNumber(
+        pages.personStaging.validateIpiNumber(
             hash.currentPersonSlot.ipiNumber
         );
     });

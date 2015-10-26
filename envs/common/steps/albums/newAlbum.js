@@ -145,7 +145,7 @@ exports.save = function() {
 
 exports.findAlbumUuid = function() {
     it('Find album UUID', function() {
-        page.albumUuid().then(function(value) {
+        pages.newAlbum.albumUuid().then(function (value) {
             hash.currentEntityDataSlotsByType.album.uuid = value;
         });
     });
