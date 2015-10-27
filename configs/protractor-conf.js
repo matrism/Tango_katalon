@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path'),
+    glob = require('glob'),
     _ = require('lodash'),
     glob = require('glob'),
     mkdirp = require ('mkdirp'),
@@ -33,8 +34,7 @@ if (!systemConfig.noReport) {
 
     if(systemConfig.singleReport) {
         screenShotPath = path.join(screenShotPath, 'single/');
-    }
-    else {
+    } else {
         screenShotPath = path.join(screenShotPath, now);
     }
 
@@ -77,11 +77,20 @@ config = {
         console.time('Tests time');
         var reporting = systemConfig.reporting,
             pph = require('../helpers/pph'),
+            testFiles = require('./files.js'),
             matchers,
             browserWait,
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes;
+
+        // set path to features in config
+        systemConfig.path_to_features = testFiles.features;
+
+        // require all pages and steps files
+        testFiles.pages.concat(testFiles.steps).forEach(function (filePath) {
+            require(filePath);
+        });
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
@@ -132,9 +141,10 @@ config = {
             jasmineReporters = require('jasmine-reporters');
 
             jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
-                consolidateAll: true,
-                savePath: 'tests/e2e/reports/xml',
-                useDotNotation: true
+                consolidateAll: false,
+                savePath: 'reports/xml',
+                useDotNotation: true,
+                filePrefix: (new Date).getTime() + '-'  // makes it unique when running tests in parallel
             }));
         }
 
@@ -170,8 +180,6 @@ config = {
 
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
-        global.pages_path = _tf_config._system_.path_to_pages;
-        global.steps_path = _tf_config._system_.path_to_steps;
 
         // TODO: Use new overrides structure when it's ready.
         _.each(systemConfig.legacyOverrides, function(overrides, name) {
@@ -257,9 +265,7 @@ config = {
 
 if (systemConfig.seleniumAddress) {
     config.seleniumAddress = systemConfig.seleniumAddress;
-
-}
-else {
+} else {
     config.directConnect = systemConfig.directConnect;
 }
 

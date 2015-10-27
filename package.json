@@ -1,0 +1,52 @@
+{
+  "name": "TangoAutomatedTests",
+  "version": "0.0.5",
+  "description": "",
+  "main": "configs/protractor-conf.js",
+  "scripts": {
+    "test": "./start.sh"
+  },
+  "keywords": [
+    "testing",
+    "e2e",
+    "protractor",
+    "angular"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "async": "0.8.0",
+    "change-case": "^2.3.0",
+    "factory-testing-framework": "git+ssh://git@github.com:wmgdsp/factory-testing-framework#tango",
+    "fs-extra": "^0.24.0",
+    "glob": "^5.0.14",
+    "grunt-parallel": "^0.3.1",
+    "http-api-client": "^0.1.8",
+    "jasmine-reporters": "~2.0.5",
+    "jasmine-spec-reporter": "^2.4.0",
+    "karma": "~0.12",
+    "karma-coverage": "~0.2",
+    "karma-jasmine": "~0.1",
+    "karma-junit-reporter": "~0.2",
+    "karma-phantomjs-launcher": "~0.1",
+    "left-pad": "0.0.4",
+    "lpad": "~0.1.0",
+    "lodash": "^2.4.1",
+    "mkdirp": "latest",
+    "moment": "^2.10.3",
+    "randomstring": "~1.1.0",
+    "path": "latest",
+    "phantomjs": "~1.9",
+    "protractor": "1.8",
+    "protractor-jasmine2-screenshot-reporter": "^0.1.7",
+    "q": "~0.8.12",
+    "qs": "latest",
+    "tmp": "0.0.27",
+    "underscore": "1.6.0"
+  },
+  "optionalDependencies": {
+    "http-sync": "latest",
+    "http-sync-win": "latest"
+  },
+  "author": "WMG",
+  "license": "ISC"
+}
