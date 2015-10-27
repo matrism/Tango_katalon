@@ -31,7 +31,7 @@ var defaultUserName = 'TangoTest1',
             directConnect: !cli.selenium,
             resolution: {
                 width: 1200,
-                height: 800
+                height: 900
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
             singleReport: cli['single-report'],
@@ -54,6 +54,7 @@ var defaultUserName = 'TangoTest1',
                 },
             },
             dontSkipBroken: cli['dont-skip-broken'],
+            failFast: cli['fail-fast'],
         },
         _env_: env,
         localhost: {

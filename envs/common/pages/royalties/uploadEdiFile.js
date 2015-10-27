@@ -306,7 +306,10 @@ exports.generatedStatements = function () {
 };
 
 exports.openFirstGeneratedStatement = function () {
-    exports.generatedStatements().first().$('a').click();
+    var statements = exports.generatedStatements();
+
+    browser.wait(ExpectedConditions.visibilityOfAny(statements));
+    statements.first().$('a').click();
 };
 
 exports.expectNumberOfStatementsToBe = function (num) {
@@ -369,7 +372,9 @@ exports.rollBackUploadedFile = function () {
 };
 
 exports.editUploadedFile = function () {
-    return exports.uploadedFileBlind().$('.btn-toggle').click();
+    var button = exports.uploadedFileBlind().$('.btn-toggle');
+    browser.wait(ExpectedConditions.presenceOf(button));
+    return button.click();
 };
 
 exports.assumeUploadedFile = function (fileName) {
@@ -415,7 +420,7 @@ exports.expectSaveButtonToBeEnabled = function () {
 exports.clickSaveButton = function () {
     exports.saveButton().click();
     browser.sleep(200);
-    browser.wait(ExpectedConditions.invisibilityOf(exports.loader()), 5000);
+    browser.wait(ExpectedConditions.stalenessOf(exports.loader()), 5000);
 };
 
 exports.changeUploadedExpectedFileAmountField = function (value) {
@@ -435,6 +440,7 @@ exports.clickCancelLink = function () {
 };
 
 exports.unsavedStatementModal = function () {
+    pages.base.waitUntilModalAnimationFinishes();
     return $('.modal');
 };
 
@@ -461,7 +467,8 @@ exports.confirmCancellationButton = function () {
 };
 
 exports.clickConfirmCancellationButton = function () {
-    return exports.confirmCancellationButton().click();
+    var button = exports.confirmCancellationButton();
+    return button.click();
 };
 
 exports.editStatement = function () {

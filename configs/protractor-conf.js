@@ -85,7 +85,9 @@ config = {
             asciiPrefixes,
             failFast = require('jasmine-fail-fast');
 
-        jasmine.getEnv().addReporter(failFast.init());
+        if (systemConfig.failFast) {
+            jasmine.getEnv().addReporter(failFast.init());
+        }
 
         // set path to features in config
         systemConfig.path_to_features = testFiles.features;
