@@ -500,16 +500,16 @@ module.exports.musicArrangementBinding = function() {
 module.exports.intendedPurposeBinding = function() {
     return element(by.binding(
         "getAdminDataName(dataHolder.intendedPurposes, " +
-        "workOriginEdit.model.intended_purpose)"
+        "modularEditModels.model.intended_purpose)"
     ));
 };
 module.exports.productionTitleBinding = function() {
-    return element(by.binding("workOriginEdit.model.production_title.title"));
+    return element(by.binding("modularEditModels.model.production_title.title"));
 };
 module.exports.bltvrBinding = function() {
     return element(by.binding(
         "getAdminDataName(dataHolder.bltvrs, " +
-        "workOriginEdit.model.bltvr)"
+        "modularEditModels.model.bltvr)"
     ));
 };
 module.exports.musicLibraryBinding = function() {
