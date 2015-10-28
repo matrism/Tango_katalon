@@ -4,13 +4,14 @@ exports.beforeFeature = [
     [steps.login.itLogin]
 ];
 
-exports.commonFeatureTags = ['works', 'smoke'];
+exports.commonFeatureTags = ['works', 'smoke', 'searchForWampsWorks'];
 
 exports.feature = [
     {
         name: 'Search for WAMPS works by full work ID',
         tags: [],
         steps: [
+            [steps.base.fail],
             [steps.work.selectWorkSearchFilterTag, [0, 'Work ID']],
 
             [steps.work.enterWorkSearchTerms, ['WW 008918634 00']],
