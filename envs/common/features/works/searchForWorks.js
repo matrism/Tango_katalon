@@ -1,6 +1,7 @@
 'use strict';
 
 var random = require('../../../../helpers/random'),
+    randomString = random.string.makeMemoizedGenerator(),
     randomId = random.id.makeMemoizedGenerator();
 
 exports.beforeFeature = [
@@ -16,11 +17,20 @@ exports.feature = [
          steps: [
              [steps.base.useBlankEntityDataSlot, ['work', 0]],
 
+            [steps.person.useBlankPersonSlot, [0]],
+            [steps.newPerson.goToNewPersonPage],
+            [steps.newPerson.enterLastName, ['TEST PERSON ' + randomString(1)]],
+            [steps.newPerson.enterAffiliatedSocietySearchTerms, ['ASCAP']],
+            [steps.newPerson.selectAffiliatedSocietySearchResultByIndex, [0]],
+            [steps.newPerson.save],
+            [steps.person.findId],
+            [steps.person.findInternalIpiNumber],
+
              [steps.newWork.goToNewWorkPage],
-             [steps.newWork.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(0)]],
-             [steps.newWork.enterAlternateWorkTitle, [0, 'TEST WORK ALTERNATE TITLE ' + randomId(0.1)]],
-             [steps.newWork.enterAlternateWorkTitle, [1, 'TEST WORK ALTERNATE TITLE ' + randomId(0.2)]],
-             [steps.newWork.selectRandomCreator, [0]],
+             [steps.newWork.enterPrimaryWorkTitle, ['TEST WORK ' + randomString(0)]],
+             [steps.newWork.enterAlternateWorkTitle, [0, 'TEST WORK ALTERNATE TITLE ' + randomString(0.1)]],
+             [steps.newWork.enterAlternateWorkTitle, [1, 'TEST WORK ALTERNATE TITLE ' + randomString(0.2)]],
+             [steps.newWork.selectCreatorFromPersonSlot, [0, 0]],
              [steps.newWork.enterCreatorContribution, [0, 100]],
              [steps.newWork.optToIncludeWorkOnWebsite, [false]],
              [steps.newWork.saveWork],
@@ -110,18 +120,18 @@ exports.feature = [
         name: 'Search for a work by creator name and SUISA and internal IPI numbers',
         tags: [],
         steps: [
-            [steps.person.useBlankPersonSlot, [0]],
+            [steps.person.useBlankPersonSlot, [1]],
             [steps.newPerson.goToNewPersonPage],
-            [steps.newPerson.enterLastName, ['TEST PERSON ' + randomId(0)]],
+            [steps.newPerson.enterLastName, ['TEST PERSON ' + randomString(0)]],
             [steps.newPerson.enterSuisaIpiNumber, [randomId(0.1).slice(0, 10)]],
             [steps.newPerson.enterAffiliatedSocietySearchTerms, ['ASCAP']],
             [steps.newPerson.selectAffiliatedSocietySearchResultByIndex, [0]],
             [steps.newPerson.save],
             [steps.person.findId],
 
-            [steps.person.useBlankPersonSlot, [1]],
+            [steps.person.useBlankPersonSlot, [2]],
             [steps.newPerson.goToNewPersonPage],
-            [steps.newPerson.enterLastName, ['TEST PERSON ' + randomId(1)]],
+            [steps.newPerson.enterLastName, ['TEST PERSON ' + randomString(1)]],
             [steps.newPerson.enterAffiliatedSocietySearchTerms, ['ASCAP']],
             [steps.newPerson.selectAffiliatedSocietySearchResultByIndex, [0]],
             [steps.newPerson.save],
@@ -131,10 +141,10 @@ exports.feature = [
             [steps.base.useBlankEntityDataSlot, ['work', 1]],
 
             [steps.newWork.goToNewWorkPage],
-            [steps.newWork.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],
-            [steps.newWork.selectCreatorFromPersonSlot, [0, 0]],
+            [steps.newWork.enterPrimaryWorkTitle, ['TEST WORK ' + randomString(1)]],
+            [steps.newWork.selectCreatorFromPersonSlot, [0, 1]],
             [steps.newWork.enterCreatorContribution, [0, 50]],
-            [steps.newWork.selectCreatorFromPersonSlot, [1, 1]],
+            [steps.newWork.selectCreatorFromPersonSlot, [1, 2]],
             [steps.newWork.enterCreatorContribution, [1, 50]],
             [steps.newWork.optToIncludeWorkOnWebsite, [false]],
             [steps.newWork.saveWork],
@@ -179,9 +189,18 @@ exports.feature = [
         steps: [
             [steps.base.useBlankEntityDataSlot, ['work', 2]],
 
+            [steps.person.useBlankPersonSlot, [3]],
+            [steps.newPerson.goToNewPersonPage],
+            [steps.newPerson.enterLastName, ['TEST PERSON ' + randomString(1)]],
+            [steps.newPerson.enterAffiliatedSocietySearchTerms, ['ASCAP']],
+            [steps.newPerson.selectAffiliatedSocietySearchResultByIndex, [0]],
+            [steps.newPerson.save],
+            [steps.person.findId],
+            [steps.person.findInternalIpiNumber],
+
             [steps.newWork.goToNewWorkPage],
-            [steps.newWork.enterPrimaryWorkTitle, ['TEST WORK ' + randomId(1)]],
-            [steps.newWork.selectRandomCreator, [0]],
+            [steps.newWork.enterPrimaryWorkTitle, ['TEST WORK ' + randomString(1)]],
+            [steps.newWork.selectCreatorFromPersonSlot, [0, 3]],
             [steps.newWork.enterCreatorContribution, [0, 100]],
             [steps.newWork.optToIncludeWorkOnWebsite, [false]],
             [steps.newWork.saveWork],
