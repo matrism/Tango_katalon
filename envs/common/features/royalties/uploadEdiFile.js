@@ -1,7 +1,8 @@
 'use strict';
 
 var using = require('../../../../helpers/fnutils').using,
-    _ = require('lodash');
+    _ = require('lodash'),
+    path = require('path');
 
 exports.commonFeatureTags = ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'];
 
@@ -102,7 +103,7 @@ exports.feature = [
 
             function goToUploadPage() {
                 steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
-                //steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
+                steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
             }
 
             function fillFormWithFileData(file) {
@@ -119,7 +120,7 @@ exports.feature = [
                     //this.selectProcessingTerritory(file.royaltyPeriod);
                     this.selectIncomeProvider(file.incomeProvider);
                     this.selectFileFormat(file.fileFormat);
-                    this.selectFile(file.fileName);
+                    this.selectFile(path.resolve(__dirname, file.fileName));
                     this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
                     this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
                     this.setExpectedFileAmount(file.amount);
@@ -128,20 +129,20 @@ exports.feature = [
                 });
             }
 
-            xdescribe('Load a file - Custom Format - OSA', function(){
+            describe('Load a file - Custom Format - OSA', function(){
                 goToUploadPage();
                 using(steps.uploadEdiFile, function(){
                     var file = files[0];
 
                 /* MOCKING */
-                    //fillFormWithFileData(file);
-                    //this.clickCreateButton();
+                    fillFormWithFileData(file);
+                    this.clickCreateButton();
 
-                    this.selectProcessingTerritory(file.processingTerritory);
+                    //this.selectProcessingTerritory(file.processingTerritory);
                     file.expectedAmount = file.expectedAmount || file.amount;
 
-                    file.name = 'TAT5771445229874713.edi';
-                    this.assumeUploadedFile(file.name);
+                    //file.name = 'TAT5771445229874713.edi';
+                    //this.assumeUploadedFile(file.name);
 
                     //this.expectToBeRedirectedToFileUploadHistory();
 
@@ -150,10 +151,10 @@ exports.feature = [
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                    //this.waitForFileToBeProcessed();
+                    this.waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    //this.openUploadedFileBlind();
+                    this.openUploadedFileBlind();
                     this.expectFileGrossAmountToBe(file.amount);
                     this.expectFileNetAmountToBe(file.amount);
 
@@ -170,23 +171,23 @@ exports.feature = [
                 });
             });
 
-            xdescribe('Load a file - Custom Format - FOX', function(){
+            describe('Load a file - Custom Format - FOX', function(){
                 goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
                     var file = files[1];
 
                 /* MOCKING */
-                    //fillFormWithFileData(file);
-                    //this.clickCreateButton();
+                    fillFormWithFileData(file);
+                    this.clickCreateButton();
 
-                    this.selectProcessingTerritory(file.processingTerritory);
-                    file.expectedAmount = file.expectedAmount || file.amount;
+                    //this.selectProcessingTerritory(file.processingTerritory);
+                    //file.expectedAmount = file.expectedAmount || file.amount;
 
-                    file.name = 'TAT8741445259285502.edi';
-                    this.assumeUploadedFile(file.name);
+                    //file.name = 'TAT8741445259285502.edi';
+                    //this.assumeUploadedFile(file.name);
 
-                    //this.expectToBeRedirectedToFileUploadHistory();
+                    this.expectToBeRedirectedToFileUploadHistory();
 
                 /* END MOCKING */
 
@@ -194,10 +195,10 @@ exports.feature = [
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                    //this.waitForFileToBeProcessed();
+                    this.waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    //this.openUploadedFileBlind();
+                    this.openUploadedFileBlind();
                     this.expectFileGrossAmountToBe(file.amount);
                     this.expectFileNetAmountToBe(file.amount);
 
@@ -227,16 +228,16 @@ exports.feature = [
                     //fillFormWithFileData(file);
                     //this.clickCreateButton();
 
-                    this.selectProcessingTerritory(file.processingTerritory);
+                    //this.selectProcessingTerritory(file.processingTerritory);
                     file.expectedAmount = file.expectedAmount || file.amount;
 
-                    file.name = 'TAT4651444832084292.edi';
-                    this.assumeUploadedFile(file.name);
+                    //file.name = 'TAT4651444832084292.edi';
+                    //this.assumeUploadedFile(file.name);
 
                     //this.expectToBeRedirectedToFileUploadHistory();
                 /* END MOCKING */
 
-                    /*this.selectWcmCommonFormat();
+                    this.selectWcmCommonFormat();
                     this.checkMultipleIncomeProvidersBox();
 
                     this.selectProcessingTerritory(file.processingTerritory);
@@ -249,17 +250,17 @@ exports.feature = [
                     this.setExpectedFileAmountCurrency(file.currency);
                     this.setExchangeRate(file.exchangeRate);
 
-                    this.clickCreateButton();*/
+                    this.clickCreateButton();
 
                     this.expectToBeRedirectedToFileUploadHistory();
                     this.expectUploadedFileToBeListed();
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.expectedAmount);
-                    //this.waitForFileToBeProcessed();
+                    this.waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    //this.openUploadedFileBlind();
+                    this.openUploadedFileBlind();
                     this.expectNumberOfStatementsToBe(2);
                     this.expectStatementValuesToBe('99.5900', '6,241.5200');
                     this.expectFileGrossAmountToBe(file.amount);
@@ -295,7 +296,7 @@ exports.feature = [
 
                     this.expectStatementFieldToBe('Statement Format', 'COMMON XLS');
                     this.expectStatementFieldToBe('Statement Distribution Period', '2014-02 to 2014-02');
-                    //this.expectStatementFieldToBe('File Name', file.name + '   1 of 2');
+                    this.expectStatementFieldToBe('File Name', file.name + '   1 of 2');
                     this.expectStatementFieldToBe('Exchange Rate', '1 EUR to 1 EUR');
                     this.expectStatementFieldToBe('Statement Amount', '99.5900 EUR');
                     this.expectStatementFieldToBe('Converted Amount', '99.5900  EUR');
@@ -420,8 +421,6 @@ exports.feature = [
                     steps.royaltyStatements.selectFirstRoyaltyPeriod();
                 });
             });*/
-
-            steps.base.sleep(10000);
         }
     }
 ];

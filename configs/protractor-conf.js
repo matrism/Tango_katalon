@@ -83,11 +83,14 @@ config = {
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes,
-            failFast = require('jasmine-fail-fast');
+            failFast = require('jasmine-fail-fast'),
+            beforeReporter = require('../helpers/beforeReporter');
 
         if (systemConfig.failFast) {
             jasmine.getEnv().addReporter(failFast.init());
         }
+
+        //jasmine.getEnv().addReporter(beforeReporter);
 
         // set path to features in config
         systemConfig.path_to_features = testFiles.features;
@@ -104,6 +107,8 @@ config = {
             if(timeout === undefined || timeout === null) {
                 timeout = systemConfig.wait_timeout;
             }
+
+            timeout = parseInt(timeout);
 
             options = options || {};
 
@@ -191,7 +196,7 @@ config = {
         global.TgDropdown = require('../helpers/tgDropdown.js');
 
         // TODO: Use new overrides structure when it's ready.
-        _.each(systemConfig.legacyOverrides, function(overrides, name) {
+        /*_.each(systemConfig.legacyOverrides, function(overrides, name) {
             if(systemConfig.tags.indexOf(name) === -1) {
                 return;
             }
@@ -204,7 +209,7 @@ config = {
 
                 steps[target] = steps[legacyVersion];
             });
-        });
+        });*/
 
         function makeBrokenTestSteps(description) {
             return function() {
@@ -256,10 +261,12 @@ config = {
                 //console.error('Error on compileReport: ', e.stack);
             }
         }*/
-        
-        // Append the script improvements to the html report
-        reportImprovementFilePath = path.join(__dirname, '../tools/improve-html-reports.js');
-        fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
+
+        if (!systemConfig.noReport) {
+            // Append the script improvements to the html report
+            reportImprovementFilePath = path.join(__dirname, '../tools/improve-html-reports.js');
+            fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
+        }
 
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
