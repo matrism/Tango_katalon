@@ -147,7 +147,9 @@ config = {
         };
 
         jasmine.getEnv().addReporter(new SpecReporter({
-            displayStacktrace: 'all',
+            displayStacktrace: 'specs',
+            displayFailuresSummary: false,
+            displaySpecDuration: true,
             prefixes: systemConfig.noUnicode? asciiPrefixes : null,
         }));
 
