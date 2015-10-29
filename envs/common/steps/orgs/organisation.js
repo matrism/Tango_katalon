@@ -5,20 +5,6 @@ var pageStep = require('../../../../helpers/basicPageStep');
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
 
-/*beforeEach(function () {
-    var matchers = {
-        toEqualBecause: function (value, message) {
-            this.message = function () {
-                return "Expected '" + this.actual + "' to equal '" + value + "' because " + message;
-            };
-
-            return this.actual === value;
-        }
-    };
-
-    this.addMatchers(matchers);
-});*/
-
 if (steps.organisation === undefined) {
     steps.organisation = exports = {
 

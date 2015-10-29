@@ -195,22 +195,6 @@ config = {
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
 
-        // TODO: Use new overrides structure when it's ready.
-        /*_.each(systemConfig.legacyOverrides, function(overrides, name) {
-            if(systemConfig.tags.indexOf(name) === -1) {
-                return;
-            }
-
-            _.each(overrides, function(legacyVersion, target) {
-                console.log('Override', target, 'with', legacyVersion + '.');
-
-                require('../steps/' + target);
-                require('../steps/' + legacyVersion);
-
-                steps[target] = steps[legacyVersion];
-            });
-        });*/
-
         function makeBrokenTestSteps(description) {
             return function() {
                 steps.base.fail(
