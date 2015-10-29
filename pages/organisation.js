@@ -232,16 +232,17 @@ return $(".text-highlight");
                 // return protractor.driver.findElement(protractor.By.linkText(text));
             },
             activeRegistrationRunButton: function () {
-
-                return $('[data-tooltip=""][data-ng-click="canExecuteStackedWorks() && executeStackedWorks();"]');
+                return element(by.cssContainingText(
+                    '#ACTIVITY-HEADER button:not(.disabled)', 'Execute Registration Run'
+                ));
             },
             registrationRunButton: function () {
               return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
             },
             modalConfirmButton: function () {
-
-                // return element.all(by.css(".modal-footer>button")).element(by.buttonText("OK"));
-                return $('[data-ng-click="(data.show.cancel) ? data.apply() : ok()" ]');
+                return element(by.cssContainingText(
+                    '.modal-footer button', 'OK'
+                ));
             },
             modalSuccessConfirmButton: function () {
               return $(".btn.btn-primary.pull-right");
@@ -489,10 +490,6 @@ return $(".text-highlight");
         waitForElementWork: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.elementWork()));
         },
-        waitForOrgToBeInvisible: function () {
-            browser.wait(ExpectedConditions.invisibilityOf(this.orgTypeHeader()));
-        },
-
 
             typeOrganisationNameIntoInput: function (organisationName) {
 

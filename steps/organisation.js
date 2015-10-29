@@ -1,11 +1,14 @@
 'use strict';
 
-var pageStep = require('../helpers/basicPageStep'),
+var pph = require('../helpers/pph'),
+    pageStep = require('../helpers/basicPageStep'),
     page = require(pages_path + 'organisation');
 
 var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
+
+require(pages_path + 'organisationRegistrationActivity');
 
 beforeEach(function () {
     var matchers = {
@@ -223,11 +226,6 @@ if (steps.organisation === undefined) {
                 pages.organisation.waitForActivityRecordsTableHeader();
             });
         },
-        waitForGeneralTabToBeDisplayed: function () {
-            it("Wait For General Tab To be Displayed", function () {
-                pages.organisation.waitForEditorGeneral();
-            });
-        },
         waitForPreviewRegistrationRunHeaderToBeDisplayed: function () {
             it("Wait For Registration Run Tab To be Displayed", function () {
                 pages.organisation.waitForRegRunHeader();
@@ -238,17 +236,15 @@ if (steps.organisation === undefined) {
                 pages.organisation.waitForElementWork();
             });
         },
-        waitForOrgDisappear: function () {
-            it("Wait For Org to disappear", function () {
-                pages.organisation.waitForOrgToBeInvisible();
-            });
-        },
+
         saveRegActivityLastEvent: function () {
             it("Save Last Event Displayed On Registration Activity Page", function () {
 
 
                 hash.lastEvent = {};
-                var lastEvent = pages.organisation.getLastAddedWorkEvent();
+                var lastEvent = pages.organisationRegistrationActivity.events.container(
+                    'latestStarted'
+                );
 
                 pages.organisation.getIconType(lastEvent).then(function (isPresent) {
 
@@ -464,7 +460,17 @@ if (steps.organisation === undefined) {
         },
         verifyThatWorkIsDelivered: function () {
             it("Verify Work has delivered status", function () {
-                expect(pages.organisation.workHasDeliveredStatus()).toBe("Delivered");
+                browser.wait(function() {
+                    return pph.areEqual(
+                        pages.organisation.workHasDeliveredStatus(), 'Delivered'
+                    ).then(function(isDelivered) {
+                        if(!isDelivered) {
+                            pages.base.refreshPage();
+                        }
+
+                        return isDelivered;
+                    });
+                });
             });
         },
         checkThatAllDeliviriesAreDelivered: function () {
