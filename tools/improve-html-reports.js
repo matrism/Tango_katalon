@@ -23,6 +23,9 @@
     $ul = $(doc).find('ul');
     $h4 = $(doc).find('h4');
 
+    // Open screenshots in a new tab
+    $('li>a').attr('target','_blank');
+
     // add the result status on each title
     $ul.each(function() {
         var $this = $(this);
