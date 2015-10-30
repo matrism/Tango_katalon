@@ -182,7 +182,7 @@ module.exports.selectRandomDropdownOption.standard = function(element, more) {
 				}
 				return options.then (
 					function(options) {
-                        pages.base.scrollIntoView(element);
+						pages.base.scrollIntoView(element);
 						element.click();
 						return _.sample(options).click().getText();
 					}
