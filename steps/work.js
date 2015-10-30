@@ -151,10 +151,19 @@ module.exports.hoverCreatorNamesContainer = function () {
     );
 };
 module.exports.editCreators = function () {
-    steps.base.clickElement(
-        "edit creators button",
-        pages.work.editCreatorsButton()
-    );
+    var el = pages.work.editCreatorsButton(),
+        notDisabledCssSelector = ":not([disabled], .disabled)";
+
+    it ("Click edit creators button", function() {
+        browser.wait (
+            function() {
+                return pph.matchesCssSelector(el, notDisabledCssSelector);
+            },
+            _tf_config._system_.wait_timeout
+        );
+        el.click();
+        pages.base.waitForAjax();
+    });
 };
 exports.clickCompositeWorkCheckbox = function (data, key) {
     it('Click composite work checkbox', function () {
