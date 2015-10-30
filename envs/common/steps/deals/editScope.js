@@ -147,6 +147,13 @@ exports.editIntoFirstPublisherNameAMCollectField = function () {
     });
 };
 
+exports.editSaveTheChangesDealScope = function () {
+    it("Edit save the changes ", function () {
+        pages.editDealScope.editSaveTheChangesPage();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
 exports.editIntoFirstPublisherNameOwnField = function () {
     it("Edit into first publisher name own field random value", function () {
         pages.editDealScope.editInFirstPublisherNameOwnPercent();
@@ -349,6 +356,45 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
     });
 };
 
+exports.editClickOnAddPublisherShareSet = function () {
+    it("Open publisher share set form", function () {
+        pages.editDealScope.editClickOnAddPublisherShareSetLink();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editClickOnYesSocietyAwardCreditPublisherShareSet = function () {
+    it("Click on the yes society award credit pss and check it is selected", function () {
+        pages.editDealScope.editClickOnTheYesSocietyAwardCreditPublisherShareSet();
+        pages.editDealScope.waitForAjax();
+        var test = pages.editDealScope.elems.editYesSocietyAwardCreditPss.getAttribute("class").toString();
+        expect(test.indexOf("active") != -1);
+    });
+};
+
+exports.editAddSpecificScopeTypeAndTerritory = function (contractType, territory) {
+    it("Add simple scope", function () {
+        pages.editDealScope.addScopeForm();
+        pages.editDealScope.selectContractTypeScope(contractType);
+        pages.editDealScope.waitForAjax();
+        pages.editDealScope.addTheSpecificTerritoryByTypingToScope(territory);
+        pages.editDealScope.selectSpecificCountry(territory);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.itEditAddPublisherShareWithSocietyAwardCredit = function () {
+    describe("Add publisher share set", function () {
+        steps.base.scrollIntoView("Add publisher shares set link", pages.editDealScope.elems.editAddPublisherShareSetLink);
+        steps.editDealScope.editClickOnAddPublisherShareSet();
+        steps.editDealScope.editClickOnYesSocietyAwardCreditPublisherShareSet();
+        steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.editDealScope.editIntoFirstPublisherNameAMField("wb music corp");
+        steps.editDealScope.editSelectSpecificPublisherNameDropDown();
+        steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
+    });
+};
+
 exports.itEditPublisherShare = function () {
     describe("Edit publisher share set", function () {
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
@@ -377,4 +423,5 @@ exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
         steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
         steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
+
 };

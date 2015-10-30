@@ -75,19 +75,24 @@ exports.feature = [
         tags: ['addDealScopeProductionSmokeTest'],
         steps: function () {
             steps.searchSection.accessSavedDealByNumber("3");
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            steps.createDealScope.itAddPublisherShareWithSocietyAwardCredit();
-            // steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
-            steps.createDealScope.saveThePublisherShareSet();
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.editDealScope.itEditAddPublisherShareWithSocietyAwardCredit();
 
             steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addEffectiveStartDate("2015-09-08");
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
+            steps.editDealScope.editSaveTheChangesDealScope();
+
+            steps.editDealPayee.clickOnPayeesHeader();
+            steps.editDealPayee.editPayeeArea();
+            steps.editDealPayee.itEditAddPayeeOrganisationAndAssociateScope();
+            steps.editDealPayee.editSavePayeePage();
         }
     },
     {

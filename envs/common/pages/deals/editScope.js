@@ -6,11 +6,19 @@ var _ = require('lodash'),
 if (pages.editDealScope === undefined) {
     pages.editDealScope = new ftf.pageObject({
         locators: {
+            addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
+            contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
+            territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
+            territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
             publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets']"},
             publisherSharesSetEditIcon: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             editPublisherSharesHeaderTitles: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.clearfix.ps-heading"},
             scope1: {css: "div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
+            editAddPublisherShareSetLink: {css: "div.publisher-share-totals a[data-ng-click='addChain(modularEditModels.model.id, form.terms.activeScope.id);']"},
+            editYesSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(1)"},
+            editNoSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)"},
             editFirstPublisherNameField: {css: "#deal-publisher div[data-name='dealChainsForm'] div.publisher-row.clearfix div[name='acquirer'] input"},
             editFirstPublisherOwnPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"},
             editFirstPublisherCollectPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"},
@@ -33,7 +41,72 @@ if (pages.editDealScope === undefined) {
             cancelDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             shareIconOnScope: {css: "div[data-ng-if='isScopeShared(sp.id)'] a.icon.share-icon.ng-binding i.fa.fa-share"},
             shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
-            shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"}
+            shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
+            saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"}
+        },
+
+        addScopeForm: function () {
+            pages.editDealScope.elems.addScopeIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.contractTypeDropDown));
+        },
+
+        selectContractTypeScope: function (specific_value) {
+            var desiredOption;
+            browser.driver.findElements(By.css("select[name='scopeContractType'] option"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(specific_value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        addTheSpecificTerritoryByTypingToScope: function (territory) {
+            pages.editDealScope.elems.territoryField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.territoryInput));
+            pages.editDealScope.elems.territoryInput.sendKeys(territory);
+        },
+
+        selectSpecificCountry: function (country) {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.territoryDropDown));
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(country) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        editClickOnAddPublisherShareSetLink: function () {
+            pages.editDealScope.elems.editAddPublisherShareSetLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editFirstPublisherNameField));
+        },
+
+        editClickOnTheYesSocietyAwardCreditPublisherShareSet: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.editYesSocietyAwardCreditPss);
+            pages.editDealScope.elems.editYesSocietyAwardCreditPss.click();
         },
 
         clickOnScope1: function () {
@@ -160,6 +233,11 @@ if (pages.editDealScope === undefined) {
             pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
         },
 
+        editSaveTheChangesPage: function(){
+            pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
+            pages.editDealScope.elems.saveChanges.click();
+        },
+
         editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
             pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.clear();
             pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
@@ -189,8 +267,10 @@ if (pages.editDealScope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editPublisherNameDropDownData));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    var randomNumber = Math.floor((Math.random() * 10));
+                    var element = options[randomNumber];
+                    pages.base.scrollIntoView(element);
+                    element.click();
                 })
         },
 
@@ -240,7 +320,7 @@ if (pages.editDealScope === undefined) {
         },
 
         editSaveThePublisherShareSets: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editSavePublisherShareSet));
+            pages.base.scrollIntoView(pages.editDealScope.elems.editSavePublisherShareSet);
             pages.editDealScope.elems.editSavePublisherShareSet.click();
             pages.editDealScope.waitForAjax();
         },
