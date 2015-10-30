@@ -258,7 +258,7 @@ exports.expectUploadedFileToHaveCorrectExpectedAmount = function (amount) {
         });
     });
 
-    expect(amountElem.getInnerHtml()).toBe(amount);
+    expect(amountElem.getInnerHtml().then(normalizeAmount)).toBe(amount);
 };
 
 function checkFileStatus (status) {
