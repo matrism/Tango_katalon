@@ -42,7 +42,14 @@ if (pages.editDealScope === undefined) {
             shareIconOnScope: {css: "div[data-ng-if='isScopeShared(sp.id)'] a.icon.share-icon.ng-binding i.fa.fa-share"},
             shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
             shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
-            saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"}
+            saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
+            editShareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
+            editFirstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
+            editDeleteScopeIcon: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)'] div.ng-scope i.fa.fa-times.ng-scope"},
+            editShareScopeLink: {css: "a[data-ng-click='showShareScopeModal(sp.id)']"},
+            editUnshareScopeLink: {css: "a[data-ng-click='showUnshareScopeModal(sp.id)']"},
+            editDeleteScopeLink: {css: "a[data-ng-click='showDeleteScopeModal(sp.id, canScopeBeDeleted(sp.id))']"},
+            editCopyScopeLink: {css:"a[data-ng-click='showScopeCopySection(sp.id)']"}
         },
 
         addScopeForm: function () {
@@ -427,6 +434,15 @@ if (pages.editDealScope === undefined) {
             expect(element(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")).isDisplayed).toBeTruthy();
         },
 
+        editCheckTheDeleteScopeIconIsPresent: function () {
+            browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+            expect(pages.editDealScope.elems.editDeleteScopeIcon.isDisplayed);
+        },
+
+        editCheckTheShareUnshareDeleteIconIsPresent: function () {
+            browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+            expect(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon.isDisplayed);
+        },
 
         editConfirmOnDeleteModalDialog: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.confirmDeleteModalDialog));

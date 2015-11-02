@@ -383,6 +383,92 @@ exports.editAddSpecificScopeTypeAndTerritory = function (contractType, territory
     });
 };
 
+exports.editCheckDeleteScopeIconIsPresent = function () {
+    it("Edit check delete scope icon is displayed", function () {
+        pages.editDealScope.editCheckTheDeleteScopeIconIsPresent();
+    });
+};
+
+exports.editCheckShareUnshareDeleteScopeIconIsPresent = function () {
+    it("Edit check share unshare scope icon is displayed", function () {
+        pages.editDealScope.editCheckTheShareUnshareDeleteIconIsPresent();
+    });
+};
+
+exports.editCheckShareScopeLinkIsEnabled = function () {
+    it("Edit check share link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        expect(pages.editDealScope.elems.editShareScopeLink.isDisplayed());
+    });
+};
+
+exports.editCheckUnshareScopeLinkIsDisabled = function () {
+    it("Edit check unshare link is disabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        pages.editDealScope.elems.editUnshareScopeLink.getAttribute("class").
+            then(function (promise) {
+                console.log("Unshare scope link class is : " + promise);
+                expect(promise).toContain("disabled");
+            });
+    });
+};
+
+exports.editCheckCopyScopeLinkIsDisabled = function () {
+    it("Edit check copy link is disabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("class").
+            then(function (promise) {
+                console.log("Unshare scope link class is : " + promise);
+                expect(promise).toContain("disabled");
+            });
+    });
+};
+
+exports.editCheckCopyScopeDisabledDataTooltip = function () {
+    it("Edit check copy link disabled data tooltip share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).perform();
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Copy scope disabled tooltip is : " + promise);
+                expect(promise).toEqual("Cannot Copy: Editing in progress.");
+            });
+    });
+};
+
+exports.editCheckCopyScopeLinkIsEnabled = function () {
+    it("Edit check copy link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        expect(pages.editDealScope.elems.editCopyScopeLink.isDisplayed());
+    });
+};
+
+exports.editCheckCopyScopeEnabledDataTooltip = function () {
+    it("Edit check copy link enabled data tooltip share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).perform();
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Copy scope enabled tooltip is : " + promise);
+                expect(promise).toEqual("Copy entirety of this Scope.");
+            });
+    });
+};
+
+exports.editCheckDeleteScopeLinkIsEnabled = function () {
+    it("Edit check delete link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        expect(pages.editDealScope.elems.editDeleteScopeLink.isDisplayed());
+    });
+};
+
 exports.itEditAddPublisherShareWithSocietyAwardCredit = function () {
     describe("Add publisher share set", function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.editDealScope.elems.editAddPublisherShareSetLink);

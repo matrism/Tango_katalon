@@ -31,18 +31,20 @@ exports.feature = [
             steps.deal.returnDealNumber();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
-            steps.createDealScope.checkShareScopeLinkIsEnabled();
-            steps.createDealScope.checkUnshareScopeLinkIsDisabled();
-            steps.createDealScope.checkCopyScopeLinkIsEnabled();
-            steps.createDealScope.checkCopyScopeEnabledDataTooltip();
-            steps.createDealScope.checkDeleteScopeLinkIsEnabled();
+            steps.editDealScope.editCheckShareScopeLinkIsEnabled();
+            steps.editDealScope.editCheckUnshareScopeLinkIsDisabled();
+            steps.editDealScope.editCheckCopyScopeLinkIsEnabled();
+            steps.editDealScope.editCheckCopyScopeEnabledDataTooltip();
+            steps.editDealScope.editCheckDeleteScopeLinkIsEnabled();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
             steps.editDealContractPeriod.checkDeleteIconContractPeriodNumberIIsDisplayed(2);
             steps.editDealContractPeriod.deleteContractPeriodNumberI(2);
             steps.editDealScope.selectScopeNumberI(1);
-            steps.createDealScope.checkCopyScopeLinkIsEnabled();
-            steps.createDealScope.checkDeleteScopeLinkIsEnabled();
-            steps.createDealScope.checkCopyScopeEnabledDataTooltip();
+            steps.editDealScope.editCheckCopyScopeLinkIsEnabled();
+            steps.editDealScope.editCheckDeleteScopeLinkIsEnabled();
+            steps.editDealScope.editCheckCopyScopeEnabledDataTooltip();
+
+
         }
     }
 ];
