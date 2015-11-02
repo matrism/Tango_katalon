@@ -53,11 +53,15 @@ if (pages.createDealScope === undefined) {
             shareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
             shareScopeLink: {css: "a[data-ng-click='showShareScopeModal(sp.id)']"},
             unshareScopeLink: {css: "a[data-ng-click='showUnshareScopeModal(sp.id)']"},
+            deleteScopeLink: {css: "a[data-ng-click='showDeleteScopeModal(sp.id, canScopeBeDeleted(sp.id))']"},
+            copyScopeLink: {css:"a[data-ng-click='showScopeCopySection(sp.id)']"},
             shareScopeModalDialog: {css: "div.modal-dialog.large.ng-scope"},
             cancelShareScopeModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
             doneShareScopeModalDialog: {css: "div.modal-footer button[data-ng-click='data.done()']"},
             selectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.addAllAvailableContractPeriods()']"},
-            deSelectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.removeAllAvailableContractPeriods()']"}
+            deSelectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.removeAllAvailableContractPeriods()']"},
+            firstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
+            deleteScopeIcon: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)'] div.ng-scope i.fa.fa-times.ng-scope"}
         },
 
         addContractPeriodIcon: function () {
@@ -281,12 +285,12 @@ if (pages.createDealScope === undefined) {
                 });
         },
 
-        clickOnAddPublisherShareSetLink: function(options) {
+        clickOnAddPublisherShareSetLink: function (options) {
             var linkElement = pages.createDealScope.elems.addPublisherShareSetLink;
 
             options = options || {};
 
-            if(options.scrollIntoView) {
+            if (options.scrollIntoView) {
                 pages.base.scrollIntoView(linkElement);
             }
 
@@ -701,6 +705,16 @@ if (pages.createDealScope === undefined) {
         clickOnTheDoneShareScopeModalDialog: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.doneShareScopeModalDialog));
             pages.createDealScope.elems.doneShareScopeModalDialog.click();
+        },
+
+        checkTheDeleteScopeIconIsPresent: function () {
+            browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+            expect(pages.createDealScope.elems.deleteScopeIcon.isDisplayed);
+        },
+
+        checkTheShareUnshareDeleteIconIsPresent: function () {
+            browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+            expect(pages.createDealScope.elems.shareUnshareDeleteScopeIcon.isDisplayed);
         }
 
 
