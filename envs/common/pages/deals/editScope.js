@@ -236,6 +236,7 @@ if (pages.editDealScope === undefined) {
         editSaveTheChangesPage: function(){
             pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
             pages.editDealScope.elems.saveChanges.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='scopeForm'] div.rate-set-summary-table"))));
         },
 
         editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {

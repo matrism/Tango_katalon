@@ -7,7 +7,7 @@ var pages_path = _tf_config._system_.path_to_pages;
 if (pages.editDealPayee === undefined) {
     pages.editDealPayee = new ftf.pageObject({
         locators: {
-            payeeHeaderTitleLink: {css: "ul.nav.nav-tabs.tg-sticky-header li.ng-scope:nth-child(3) a"},
+            payeeHeaderTitleLink: {css: "ul.nav.nav-tabs li.ng-scope:nth-child(3) a"},
             payeeArea: {css: "div[data-tg-modular-edit-id='payees'] "},
             editPayeeIcon: {css: "div[data-tg-modular-edit-id='payees'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             editAddNewPayeeField: {css: "div[data-ng-model='DPAY.filteredPayees'] div[ng-class='tgTypeaheadWrapClass']"},
@@ -24,7 +24,7 @@ if (pages.editDealPayee === undefined) {
         clickOnThePayeeHeaderLink: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.payeeHeaderTitleLink);
             pages.editDealPayee.elems.payeeHeaderTitleLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-if='DPAY.payeeNames'] tg-sticky-header-collect.clearfix.view-header a:nth-child(2)"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-if='DPAY.payeeNames'] a:nth-child(2)"))));
         },
 
         editThePayeeArea: function () {

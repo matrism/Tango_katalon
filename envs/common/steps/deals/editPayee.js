@@ -17,16 +17,16 @@ exports.editPayeeArea = function () {
     });
 };
 
-exports.editSelectRandomPayeeOrganisationFromDropDown = function () {
+exports.editSelectRandomPayeeOrganisationFromDropDown = function (payee_name) {
     it("Edit select the random payee organisation from drop down ", function () {
-        pages.editDealPayee.editFillIntoAddNewPayeeFieldSpecificValue("payee");
+        pages.editDealPayee.editFillIntoAddNewPayeeFieldSpecificValue(payee_name);
         pages.editDealPayee.editSelectTheRandomPayeeOrganisationFromDropDown();
     });
 };
 
-exports.editSelectRandomPayeePersonFromDropDown = function () {
+exports.editSelectRandomPayeePersonFromDropDown = function (payee_name) {
     it("Edit select the random payee person from drop down ", function () {
-        pages.editDealPayee.editFillIntoAddNewPayeeFieldSpecificValue("payee");
+        pages.editDealPayee.editFillIntoAddNewPayeeFieldSpecificValue(payee_name);
         pages.editDealPayee.editSelectTheRandomPayeePersonFromDropDown();
     });
 };
@@ -83,9 +83,9 @@ exports.editFillIntoPayeeDistributionInputField = function () {
     });
 };
 
-exports.itEditAddPayeeOrganisationAndAssociateScope = function () {
+exports.itEditAddPayeeOrganisationAndAssociateScope = function (payee_name) {
     describe("Edit add payee as organisation and associate random scope ", function () {
-        steps.editDealPayee.editSelectRandomPayeeOrganisationFromDropDown();
+        steps.editDealPayee.editSelectRandomPayeeOrganisationFromDropDown(payee_name);
         steps.base.scrollIntoView("Company", pages.editDealPayee.elems.editPayeeCompanyNameCodeInputField);
         steps.editDealPayee.editSelectRandomValueForPayeeCompanyNameCode();
         steps.base.scrollIntoView("Scope", pages.editDealPayee.elems.editScopePayeeInputField);
@@ -96,16 +96,15 @@ exports.itEditAddPayeeOrganisationAndAssociateScope = function () {
     });
 };
 
-exports.itAddPayeePersonAndAssociateScope = function () {
-    describe("Add payee as person and associate random scope ", function () {
-        steps.createDealPayee.selectRandomPayeePersonFromDropDown();
-        steps.base.scrollIntoView("Company code", element(by.css("div[data-ng-model='payee.company'] div[ng-class='tgTypeaheadWrapClass']")));
-        steps.createDealPayee.selectRandomValueForPayeeCompanyNameCode();
-        steps.base.scrollIntoView("Scope", pages.createDealPayee.elems.scopePayeeInputField);
-        steps.createDealPayee.associateSpecificScopeNumberIToPayee(2);
-        steps.createDealPayee.fillIntoPayeeLegalRightInputField();
-        steps.createDealPayee.fillIntoPayeeDistributionInputField();
-        steps.base.scrollIntoView("Save ", pages.createDealPayee.elems.savePayeeFormButton);
-        steps.createDealPayee.savePayeeForm();
+exports.itEditAddPayeePersonAndAssociateScope = function (payee_name) {
+    describe("Edit add payee as person and associate random scope ", function () {
+        steps.editDealPayee.editSelectRandomPayeePersonFromDropDown(payee_name);
+        steps.base.scrollIntoView("Company", pages.editDealPayee.elems.editPayeeCompanyNameCodeInputField);
+        steps.editDealPayee.editSelectRandomValueForPayeeCompanyNameCode();
+        steps.base.scrollIntoView("Scope", pages.editDealPayee.elems.editScopePayeeInputField);
+        steps.editDealPayee.editAssociateSpecificScopeNumberIToPayee(1);
+        steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
+        steps.editDealPayee.editFillIntoPayeeDistributionInputField();
+        steps.editDealPayee.editSavePayeeForm();
     });
 };

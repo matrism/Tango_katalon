@@ -91,7 +91,7 @@ exports.feature = [
 
             steps.editDealPayee.clickOnPayeesHeader();
             steps.editDealPayee.editPayeeArea();
-            steps.editDealPayee.itEditAddPayeeOrganisationAndAssociateScope();
+            steps.editDealPayee.itEditAddPayeePersonAndAssociateScope("paul");
             steps.editDealPayee.editSavePayeePage();
         }
     },
