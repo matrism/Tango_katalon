@@ -149,9 +149,6 @@ exports.firstNameBinding = function() {
 exports.lastNameBinding = function() {
     return $('[data-ng-if="person.pristine.master_data.primary_name.last_name"] .ng-binding');
 };
-exports.alternativeNameBinding = function(i) {
-    return $$('.e2e-alternative-name-full .controls').get(i);
-};
 exports.alternativeFirstNameBinding = function() {
     return $('[data-ng-if="name.first_name"] .ng-binding');
 };

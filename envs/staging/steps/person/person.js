@@ -1,8 +1,8 @@
 'use strict';
 
-var pageStep = require('../../../../helpers/basicPageStep'),
+var pph = require('../../../../helpers/pph'),
     changeCase = require('change-case'),
-    page;
+    pageStep = require('../../../../helpers/basicPageStep');
 
 steps.person = exports;
 
@@ -316,6 +316,16 @@ exports.clickOnPayee = function (value) {
         pages.person.clickPayee(value).then(function () {
             hash.currentPersonSlot.payee = value;
         });
+    });
+};
+
+exports.validateAlternativeName = function (i, value) {
+    var parms = _.toArray(arguments).join(', ');
+    it('Validate alternative name (' + parms + ')', function () {
+        value = value || hash.currentPersonSlot.alternativeName;
+        expect(pph.toLowerCase(pages.person.getAlternativeName(i))).toBe(
+            value.toLowerCase()
+        );
     });
 };
 
