@@ -28,6 +28,11 @@ module.exports = function() {
     else {
         moduleName = path.basename(module.parent.filename, '.js');
 
+        // add a check for _ as first part of filename, we use to to load a page first, but is not the actual module name
+        if (moduleName.charAt(0) === '_') {
+            moduleName = moduleName.substring(1, moduleName.length);
+        }
+
         isomorphicPageStep({
             name: [].slice.call(arguments),
             where: module.parent.exports,

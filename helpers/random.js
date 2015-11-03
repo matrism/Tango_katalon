@@ -7,6 +7,7 @@ var _ = require("lodash"),
 exports.id = function() {
 	return Math.floor(Math.random() * 1000) +  Date.now().toString();
 };
+
 exports.id.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.id);
 
 exports.string = function() {
@@ -17,6 +18,7 @@ exports.string.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exp
 exports.letter = function() {
     return String.fromCharCode("A".charCodeAt(0) + Math.round(Math.random() * 25));
 };
+
 exports.letter.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.letter);
 
 exports.moment = function(a, b) {
