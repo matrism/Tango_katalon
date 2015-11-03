@@ -5,6 +5,12 @@ var promise = protractor.promise,
 
 steps.editDealContractPeriod = exports;
 
+exports.editSelectContractPeriodNumberI = function (i) {
+    it("Select contract period number " + i + " from list", function () {
+        pages.editDealContractPeriod.selectTheContractPeriodNumberI(i);
+    });
+};
+
 exports.waitForMdrcToBeLoaded = function () {
     it("Wait for MDRC to be loaded", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.mdrcTitle));
@@ -229,12 +235,12 @@ exports.editClickMdrcNoCommercialReleaseByMajorLabelButton = function () {
     });
 },
 
-exports.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton = function () {
-    it("Edit - Check MDRC yes commercial release by major label option is selected ", function () {
-        var test = pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel.getAttribute("class").toString();
-        expect(test.indexOf("active") != -1);
-    });
-};
+    exports.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton = function () {
+        it("Edit - Check MDRC yes commercial release by major label option is selected ", function () {
+            var test = pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel.getAttribute("class").toString();
+            expect(test.indexOf("active") != -1);
+        });
+    };
 
 exports.editCheckMdrcNoCommercialReleaseByMajorLabelOptionIsSelectedButton = function () {
     it("Edit - Check MDRC no commercial release by major label option is selected ", function () {
