@@ -17,8 +17,9 @@ var configer = global.ftf.configer,
     })(),
     env = {
         ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
-    },
-    defaultUserName = 'TangoTest1',
+    };
+
+var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
     config = {
         _default_: {
@@ -30,16 +31,15 @@ var configer = global.ftf.configer,
             directConnect: !cli.selenium,
             resolution: {
                 width: 1200,
-                height: 600
+                height: 900
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
             singleReport: cli['single-report'],
             noUnicode: cli['no-unicode'],
-            path_to_features: __dirname + '/../features/',
-            path_to_steps: __dirname + '/../steps/',
-            path_to_pages: __dirname + '/../pages/',
-            env_name: env.ENV_TYPE,
-            wait_timeout: cli.timeout || 60000,
+            path_to_features: [],
+            path_to_steps: [],
+            path_to_pages: [],
+            wait_timeout: cli.timeout || 20000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false,
             tags: tags,
@@ -54,6 +54,8 @@ var configer = global.ftf.configer,
                 },
             },
             dontSkipBroken: cli['dont-skip-broken'],
+            failFast: cli['fail-fast'],
+            noUpload: cli['no-upload'],
         },
         _env_: env,
         localhost: {
@@ -94,7 +96,7 @@ var configer = global.ftf.configer,
         }
     };
 
-    config._system_.noReport = cli['no-report'];
+config._system_.noReport = cli['no-report'];
 
 config = configer.process(config);
 

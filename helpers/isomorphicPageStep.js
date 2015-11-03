@@ -34,7 +34,15 @@ module.exports = function(options) {
             descriptionWithArguments = description;
 
         if(stepArguments.length !== 0) {
-            descriptionWithArguments += ' (' + stepArguments.join(', ') + ')';
+            descriptionWithArguments += ' (' + stepArguments.map(function(argument) {
+                if(typeof argument !== 'object') {
+                    return argument;
+                }
+
+                return _.map(argument, function(value, key) {
+                    return key + ': ' + value;
+                }).join('; ');
+            }).join(', ') + ')';
         }
 
         it(descriptionWithArguments, function() {
