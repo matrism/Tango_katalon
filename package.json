@@ -40,6 +40,7 @@
     "protractor-jasmine2-screenshot-reporter": "^0.1.7",
     "q": "~0.8.12",
     "qs": "^5.2.0",
+    "handlebars": "^4.0.2",
     "randomstring": "~1.1.0",
     "tmp": "0.0.27",
     "underscore": "1.6.0"
