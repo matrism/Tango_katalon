@@ -14,7 +14,7 @@ exports.feature = [
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
-            steps.createDealScope.itAddSimpleScope();
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.createDealScope.checkDeleteScopeIconIsPresent();
             steps.createDealContractPeriod.addNewContractPeriod();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriodEndDate();
@@ -43,8 +43,28 @@ exports.feature = [
             steps.editDealScope.editCheckCopyScopeLinkIsEnabled();
             steps.editDealScope.editCheckDeleteScopeLinkIsEnabled();
             steps.editDealScope.editCheckCopyScopeEnabledDataTooltip();
-
-
+            steps.editDealScope.editCopySpecificNumberOfScopes(5);
+            steps.editDealScope.checkScopeNumberIText(2);
+            steps.editDealScope.checkScopeNumberIText(3);
+            steps.editDealScope.checkScopeNumberIText(4);
+            steps.editDealScope.checkScopeNumberIText(5);
+            steps.editDealScope.checkScopeNumberIText(6);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.itEditAddPublisherShare();
+            steps.editDealScope.editSaveThePublisherShareSet();
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopes(5);
+            steps.editDealScope.checkScopeNumberINameAndPss(7);
+            steps.editDealScope.checkScopeNumberINameAndPss(8);
+            steps.editDealScope.checkScopeNumberINameAndPss(9);
+            steps.editDealScope.checkScopeNumberINameAndPss(10);
+            steps.editDealScope.checkScopeNumberINameAndPss(11);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.itEditOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.editDealScope.editSaveThePublisherShareSet();
+            steps.editDealScope.selectScopeNumberI(7);
+            steps.editDealScope.selectScopeNumberI(8);
         }
     }
 ];

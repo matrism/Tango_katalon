@@ -19,6 +19,18 @@ exports.selectScopeNumberI = function (i) {
     });
 };
 
+exports.checkScopeNumberIText = function (i) {
+    it("Check text for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberITextValue(i);
+    });
+};
+
+exports.checkScopeNumberINameAndPss = function (i) {
+    it("Check name and pss for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINamePssValue(i);
+    });
+};
+
 exports.validateShareScopesPopupDetailsContractPeriod1 = function () {
     it("Validate share scopes pop up details contract period 1 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
@@ -236,6 +248,14 @@ exports.editSelectSpecificPublisherNameDropDown = function () {
 exports.editSelectDesiredPublisherTypeEOrPADropDown = function (publisherType) {
     it("Edit - select desired publisher type E or PA from drop down", function () {
         pages.editDealScope.editSelectSpecificOptionEOrPAPublisherType(publisherType);
+    });
+};
+
+exports.editCopySpecificNumberOfScopes = function (number) {
+    it("Edit - copy specific number of scopes " + number, function () {
+        pages.editDealScope.editClickOnCopyScopeOption();
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeSpecificValue(number);
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScope();
     });
 };
 
@@ -469,6 +489,53 @@ exports.editCheckDeleteScopeLinkIsEnabled = function () {
     });
 };
 
+exports.editClickOnAddOverrideIconPss = function () {
+    it("Edit click on add override icon publisher share set ", function () {
+        pages.editDealScope.editClickOnTheAddOverrideIconPss();
+    });
+};
+
+exports.editSelectSubPublisherOverridePss = function (subPublisherName, subPublisherSelected) {
+    it("Edit select the sub publisher override pss ", function () {
+        pages.editDealScope.editSelectTheSubPublisherOverridePss(subPublisherName, subPublisherSelected);
+    });
+};
+
+exports.editSelectSubPublisherOverrideTerritoryPss = function (territory) {
+    it("Edit select the sub publisher override territory pss ", function () {
+        pages.editDealScope.editSelectTheSubPublisherOverrideTerritoryPss(territory);
+    });
+};
+
+exports.editClickOnDoneSubPublisherOverridePss = function () {
+    it("Edit click on the done sub publisher override pss ", function () {
+        pages.editDealScope.editClickOnTheDoneSubPublisherOverridePss();
+    });
+};
+
+exports.editClickOnCancelSubPublisherOverridePss = function () {
+    it("Edit click on the cancel sub publisher override pss ", function () {
+        pages.editDealScope.editClickOnTheCancelSubPublisherOverridePss();
+    });
+};
+
+exports.editClickOnAddAnotherSubPublisherOverridePss = function () {
+    it("Edit click on the add anothe sub publisher override pss ", function () {
+        pages.editDealScope.editClickOnTheAddAnotherSubPublisherOverridePss();
+    });
+};
+
+exports.itEditAddPublisherShare = function () {
+    describe("Add publisher share set", function () {
+        steps.base.scrollIntoView("Add publisher shares set link", pages.editDealScope.elems.editAddPublisherShareSetLink);
+        steps.editDealScope.editClickOnAddPublisherShareSet();
+        steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.editDealScope.editIntoFirstPublisherNameAMField("wb music corp");
+        steps.editDealScope.editSelectSpecificPublisherNameDropDown();
+        steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
+    });
+};
+
 exports.itEditAddPublisherShareWithSocietyAwardCredit = function () {
     describe("Add publisher share set", function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.editDealScope.elems.editAddPublisherShareSetLink);
@@ -509,5 +576,16 @@ exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
         steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
         steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
+};
 
+exports.itEditOverridePublisherShare = function (subPublisherName, subPublisherSelected, territory) {
+    describe("Edit override publisher share set", function () {
+        steps.base.scrollIntoView("Override pss icon ", pages.editDealScope.elems.editOverridePssIcon);
+        steps.editDealScope.editClickOnAddOverrideIconPss();
+        steps.base.scrollIntoView("Override pss ", pages.editDealScope.elems.editSubPublisherOverridePssInputField);
+        steps.editDealScope.editSelectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
+        steps.editDealScope.editSelectSubPublisherOverrideTerritoryPss(territory);
+        steps.base.scrollIntoView("Done override publisher share set", pages.editDealScope.elems.editDoneOverridePublisherShareSetButton);
+        steps.editDealScope.editClickOnDoneSubPublisherOverridePss();
+    });
 };

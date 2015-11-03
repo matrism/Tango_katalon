@@ -49,7 +49,23 @@ if (pages.editDealScope === undefined) {
             editShareScopeLink: {css: "a[data-ng-click='showShareScopeModal(sp.id)']"},
             editUnshareScopeLink: {css: "a[data-ng-click='showUnshareScopeModal(sp.id)']"},
             editDeleteScopeLink: {css: "a[data-ng-click='showDeleteScopeModal(sp.id, canScopeBeDeleted(sp.id))']"},
-            editCopyScopeLink: {css:"a[data-ng-click='showScopeCopySection(sp.id)']"}
+            editCopyScopeLink: {css: "a[data-ng-click='showScopeCopySection(sp.id)']"},
+            copyScopeText: {css: "div[data-ng-form='scopeCopyForm'] p.title"},
+            numberOfCopiesTooltip: {css: "div[data-ng-form='scopeCopyForm'] label.control-label i.fa.fa-info-circle.ng-scope"},
+            numberOfCopiesInputField: {css: "div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"},
+            numberOfCopiesErrorTriangle: {css: "div[data-ng-form='scopeCopyForm'] i.fa.fa-exclamation-triangle.error-text.ng-scope"},
+            editCopyScopeButtonLink: {css: "div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"},
+            cancelCopyScopeButton: {css: "div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left"},
+            editOverridePssIcon: {css: "div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] a[data-ng-click='showSubPubOverrideForm()'] i"},
+            editSubPublisherOverridePssField: {css: "div[name='subPublisherOverride'] div[ng-class='tgTypeaheadWrapClass']"},
+            editSubPublisherOverridePssInputField: {css: "div[name='subPublisherOverride'] input[ng-model='$term']"},
+            editTerritoryOverridePssField: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
+            editTerritoryOverridePssFieldInput: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editCancelOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='showSubPubOverrideForm()']"},
+            editDoneOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, false)']"},
+            editAddAnotherOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, true)']"},
+            editSharePublisherShareSetIcon: {css: "div[data-ng-click='showSharePublisherShareSetSection(true)'] i"},
+            editUseThisPublisherShareSetButton: {css: "button[data-ng-click='sharePubShareSet(pss.id, modularEditModels.activeScope.id)']"}
         },
 
         addScopeForm: function () {
@@ -124,6 +140,23 @@ if (pages.editDealScope === undefined) {
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
         },
 
+        checkTheScopeNumberITextValue: function (i) {
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise);
+                    expect(promise).toContain("Scope " + i);
+                });
+        },
+
+        checkTheScopeNumberINamePssValue: function (i) {
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise);
+                    expect(promise).toContain("Scope " + i);
+                    expect(promise).toContain("Pub Shares");
+                });
+        },
+
         clickOnShareIconOnScope: function () {
             pages.editDealScope.elems.shareIconOnScope.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.shareScopesDetailsPopup));
@@ -154,6 +187,7 @@ if (pages.editDealScope === undefined) {
 
         editThePublisherSharesSet: function () {
             //browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.publisherSharesSetArea));
+            pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesSetArea);
             pages.editDealScope.elems.publisherSharesSetArea.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.publisherSharesSetEditIcon));
             pages.editDealScope.elems.publisherSharesSetEditIcon.click();
@@ -240,7 +274,7 @@ if (pages.editDealScope === undefined) {
             pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
         },
 
-        editSaveTheChangesPage: function(){
+        editSaveTheChangesPage: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
             pages.editDealScope.elems.saveChanges.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='scopeForm'] div.rate-set-summary-table"))));
@@ -470,6 +504,95 @@ if (pages.editDealScope === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.confirmDeletePssModalDialog));
             pages.editDealScope.elems.confirmDeletePssModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.confirmDeletePssModalDialog));
+        },
+
+        editClickOnCopyScopeOption: function () {
+            browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+            browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+            pages.editDealScope.elems.editCopyScopeLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.numberOfCopiesInputField));
+        },
+
+
+        editFillInTheNumberOfCopiesForScopeSpecificValue: function (value) {
+            pages.editDealScope.elems.numberOfCopiesInputField.sendKeys(value);
+        },
+
+        editClickOnTheCancelButtonNumberOfCopiesScope: function () {
+            pages.editDealScope.elems.cancelCopyScopeButton.click();
+        },
+
+        editClickOnTheCopyScopeButtonNumberOfCopiesScope: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.editCopyScopeButtonLink);
+            pages.editDealScope.elems.editCopyScopeButtonLink.click();
+            pages.editDealScope.waitForAjax();
+        },
+
+        editClickOnTheAddOverrideIconPss: function () {
+            pages.editDealScope.elems.editOverridePssIcon.click();
+            pages.editDealScope.waitForAjax();
+        },
+
+        editSelectTheSubPublisherOverridePss: function (subPublisherName, subPublisherSelected) {
+            var desiredOption;
+            pages.editDealScope.elems.editSubPublisherOverridePssField.click();
+            pages.editDealScope.elems.editSubPublisherOverridePssInputField.clear();
+            pages.editDealScope.elems.editSubPublisherOverridePssInputField.sendKeys(subPublisherName);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[name='subPublisherOverride'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(subPublisherSelected) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        editSelectTheSubPublisherOverrideTerritoryPss: function (territory) {
+            var desiredOption;
+            pages.editDealScope.elems.editTerritoryOverridePssField.click();
+            pages.editDealScope.elems.editTerritoryOverridePssFieldInput.sendKeys(territory);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(territory) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        editClickOnTheCancelSubPublisherOverridePss: function () {
+            pages.editDealScope.elems.editCancelOverridePublisherShareSetButton.click();
+        },
+
+        editClickOnTheAddAnotherSubPublisherOverridePss: function () {
+            pages.editDealScope.elems.editAddAnotherOverridePublisherShareSetButton.click();
+        },
+
+        editClickOnTheDoneSubPublisherOverridePss: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editDoneOverridePublisherShareSetButton));
+            pages.editDealScope.elems.editDoneOverridePublisherShareSetButton.click();
         }
     });
 }
