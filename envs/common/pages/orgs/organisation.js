@@ -1045,6 +1045,31 @@ exports.incomeProvider = (function () {
             });
         };
 
+        var INVALID_TAG = '_TAT_INVALID';
+
+        mapping.changeInboundIncomeType = function (code, newCode) {
+            code = code.toString();
+
+            var rows = mapping.rows().$$('.e2e-mapping-type input').filter(function(row){
+                return row.getAttribute('value').then(function(value){
+                    return (value === code) || (value === code + INVALID_TAG);
+                });
+            });
+
+            rows.each(function(input){
+                input.clear();
+                input.sendKeys(newCode);
+            });
+        };
+
+        mapping.makeIncomeTypeMappingBeInvalid = function (code){
+            mapping.changeInboundIncomeType(code, code + INVALID_TAG);
+        };
+
+        mapping.makeIncomeTypeMappingBeValid = function (code){
+            mapping.changeInboundIncomeType(code + INVALID_TAG, code);
+        };
+
         return mapping;
     })();
 

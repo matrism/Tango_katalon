@@ -261,21 +261,41 @@ exports.expectUploadedFileToHaveCorrectExpectedAmount = function (amount) {
     expect(amountElem.getInnerHtml().then(normalizeAmount)).toBe(amount);
 };
 
-function checkFileStatus (status) {
+function checkFileStatus (statuses) {
     var file = exports.fileBlindsByFileName(path.basename(testVariables.tempFileName)).first();
+
+    if (!_.isArray(statuses)) {
+        statuses = [statuses]
+    }
+
     return file.$('.file-status').getText().then(function(text){
-        return text === status;
+        return statuses.indexOf(text) > -1;
     });
 };
 
+exports.waitForFileStatusToBe = function () {
+    var statuses = _.toArray(arguments);
+
+    browser.wait(function(){
+        return browser.refresh().then(function(){
+            pages.base.waitForAjax();
+            return checkFileStatus(statuses);
+        });
+    }, 600000);
+};
+
 exports.waitForFileToBeProcessed = function () {
+    exports.waitForFileStatusToBe('Processed');
+};
+
+/*exports.waitForFileToBeProcessed = function () {
     browser.wait(function(){
         return browser.refresh().then(function(){
             pages.base.waitForAjax();
             return checkFileStatus('Processed');
         });
     }, 600000);
-};
+};*/
 
 exports.fileReadInAmountElement = function () {
     return exports.uploadedFileBlind().$('.statement-amount');

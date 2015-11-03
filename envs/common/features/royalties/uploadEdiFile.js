@@ -42,7 +42,7 @@ function goToUploadPage() {
     }
 }
 
-function fillFormWithFileData(file) {
+function fillFormWithFileData(file, clickCreate) {
     file = _.defaultsDeep(file, fileDefaults);
     file.fileName = path.resolve(__dirname, file.fileName)
 
@@ -77,8 +77,17 @@ function fillFormWithFileData(file) {
         this.setExpectedFileAmount(file.amount);
         this.setExpectedFileAmountCurrency(file.currency);
         this.setExchangeRate(file.exchangeRate);
-        this.clickCreateButton();
+
+        if (clickCreate !== false) { 
+            this.clickCreateButton();
+        };
     });
+}
+
+function waitForFileStatusToBe() {
+    //if (noUpload) { return };
+
+    steps.uploadEdiFile.waitForFileStatusToBe.apply(this, arguments);
 }
 
 function waitForFileToBeProcessed() {
@@ -143,7 +152,7 @@ exports.feature = [
                 'OSA': {
                     name: 'OSA',
                     requiredFileType: 'CISAC F2',
-                    requiredInboundIncomeType: '20'
+                    requiredInboundIncomeType: '21'
                 },
 
                 'FOX': {
@@ -153,7 +162,7 @@ exports.feature = [
                 }
             };
 
-            describe('Load a file - Custom Format - OSA', function(){
+            xdescribe('Load a file - Custom Format - OSA', function(){
                 goToUploadPage();
                 using(steps.uploadEdiFile, function(){
                     var file = files[0];
@@ -186,7 +195,7 @@ exports.feature = [
                 });
             });
 
-            describe('Load a file - Custom Format - FOX', function(){
+            xdescribe('Load a file - Custom Format - FOX', function(){
                 goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
@@ -223,7 +232,7 @@ exports.feature = [
 
             });
 
-            describe('Load a file - Multiple Providers', function() {
+            xdescribe('Load a file - Multiple Providers', function() {
                 goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
@@ -309,6 +318,71 @@ exports.feature = [
                 });
             });
 
+            describe('Identify files when income type mappings are added/updated', function(){
+                goToUploadPage();
+
+                using(steps.uploadEdiFile, function(){
+                    var file = files[0],
+                        org = incomeProviders.OSA;
+
+                    fillFormWithFileData(file, false);
+                    steps.base.duplicateTab();
+                    steps.base.switchToTab(1);
+
+                    //check mappings
+                    using(steps.mainHeader.search, function (){
+                        this.selectEntityType('Organisation');
+                        this.enterTerms(org.name);
+                        this.selectResultByIndex(0);
+                    });
+
+                    using(steps.organisation.incomeProvider, function(){
+                        this.editSection();
+
+                        this.checkOrAddIncomeFileType(org.requiredFileType);
+                        this.incomeTypeMapping.addIfNoneMatch({ inboundIncomeType: org.requiredInboundIncomeType }, {
+                            inboundIncomeType: org.requiredInboundIncomeType,
+                            description: 'TAT INCOME TYPE TEST',
+                            fileType: org.requiredFileType,
+                            internalIncomeType: 'Mechanical'
+                        });
+
+                        this.expectIncomeTypeMappingsToBeValid();
+                        this.incomeTypeMapping.makeIncomeTypeMappingBeInvalid(org.requiredInboundIncomeType);
+                        this.saveSection();
+                    });
+
+                    //Income Mapping Updating
+                    //Income Type Mapping Error
+
+                    steps.base.switchToTab(0);
+
+                    if (!noUpload) {
+                        this.clickCreateButton();
+                    }
+
+                    this.expectToBeRedirectedToFileUploadHistory();
+
+                    this.expectUploadedFileToBeListed();
+                    this.openUploadedFileBlind();
+
+                    waitForFileStatusToBe('Income Type Mapping Error');
+
+                    if (!noUpload) { this.openUploadedFileBlind(); }
+
+                    steps.base.switchToTab(1);
+                    using(steps.organisation.incomeProvider, function(){
+                        this.editSection();
+
+                        this.incomeTypeMapping.makeIncomeTypeMappingBeValid(org.requiredInboundIncomeType);
+                        this.saveSection();
+                    });
+
+                    //this.rollBackUploadedFile();
+                });
+            });
+
+
             xdescribe('Check Income Type Mappings for OSA', function(){
                 var org = incomeProviders.OSA;
 
@@ -365,7 +439,7 @@ exports.feature = [
 
             //goToUploadPage();
 
-            describe('View/List/Filter Statement headers', function(){
+            xdescribe('View/List/Filter Statement headers', function(){
                 steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
 
                 using(steps.royaltyStatements, function(){
@@ -394,14 +468,6 @@ exports.feature = [
                 });
             });
 
-            /*xdescribe('View File Upload History/Filter the results', function (){
-                steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
-
-                using(steps.uploadEdiFile, function() {
-                    this.selectProcessingTerritory('United States');
-                    steps.royaltyStatements.selectFirstRoyaltyPeriod();
-                });
-            });*/
         }
     }
 ];

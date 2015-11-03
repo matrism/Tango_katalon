@@ -590,7 +590,10 @@ pageStep([
             'Enter Tango income type search terms',
             'Select Tango income type search result by index',
             'Add if not present',
-            'Add if none match'
+            'Add if none match',
+            'Change inbound income type',
+            'Make income type mapping be invalid',
+            'Make income type mapping be valid'
         ]],
 
         'Save section',
