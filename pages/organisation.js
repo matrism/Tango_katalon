@@ -651,63 +651,7 @@ return $(".text-highlight");
             getLatestWorkEvent: function () {
                 this.getLastAddedWorkEvent();
             },
-            testMultipleElements: function () {
-              //  //*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::node()
 
-                this.getLastAddedWorkEvent();
-//.DATA-CHILD
-               // var list = browser.driver.findElements(By.xpath(".//*[@id='ACTIVITY-RECORDS']"));
-                //for(WebElement element: list){
-                //    //print text if text not empty
-                //    String text = element.getText();
-                //    if(!text.isEmpty){
-                //        S.O.P("Result :"+text);
-                //    }
-                //}
-                //browser.driver.findElements(By.xpath('//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]'))
-                this.getEmailDeliveryMethods().then(function (result) {
-                    result.forEach(function(entry) {
-                        entry.getText().then(function (value) {
-                            console.log(value);
-                        })
-                    });
-                });
-                this.getThirdPartyDeliveryMethods().then(function (result) {
-                    result.forEach(function(entry) {
-                        entry.getText().then(function (value) {
-                            console.log(value);
-                        })
-                    });
-                });
-                this.getSFTPDeliveryMethods().then(function (result) {
-                    result.forEach(function(entry) {
-                        entry.getText().then(function (value) {
-                            console.log(value);
-                        })
-                    });
-                });
-                this.getFTPDeliveryMethods().then(function (result) {
-                    result.forEach(function(entry) {
-                        entry.getText().then(function (value) {
-                            console.log(value);
-                        })
-                    });
-                });
-
-
-                //var element = document.evaluate( '//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::*/text()' ,document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                //
-                //element.forEach(function (entry) {
-                //    console.log(entry.stringValue);
-                //
-                //});
-                //alert( 'This document contains ' + element.stringValue + ' paragraph elements' );
-
-
-
-
-
-            },
             typeOrganisationName: function (value) {
                 browser.wait(ExpectedConditions.visibilityOf(  this.organisationNameInput()));
                 this.organisationNameInput().sendKeys(value);

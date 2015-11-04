@@ -300,12 +300,7 @@ if (steps.organisation === undefined) {
             });
 
         },
-        saveMultipleELemNodesTest: function () {
-            it("Save Elem Nodes Test", function () {
-                pages.organisation.testMultipleElements();
-            });
 
-        },
         saveOrganisationDeliveryMethods: function () {
             it("Save Organisation Delivery Methods Information", function () {
                 hash.emailDeliveries = [];

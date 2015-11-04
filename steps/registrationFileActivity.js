@@ -1,6 +1,9 @@
 var _ = require("lodash");
 var promise = protractor.promise;
 var ExpectedConditions = protractor.ExpectedConditions;
+
+require(pages_path + 'base');
+
 if (steps.registrationFileActivity === undefined) {
     steps.registrationFileActivity = {
 
@@ -8,6 +11,7 @@ if (steps.registrationFileActivity === undefined) {
             it("Go to Registration File Activity Page", function () {
                 pages.registrationFileActivity.clickRegActivityHeader().then(function () {
                     pages.registrationFileActivity.clickRegActivityDropDown();
+                    pages.base.waitForAjax();
                 });
 
             })

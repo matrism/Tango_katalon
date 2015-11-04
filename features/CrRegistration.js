@@ -26,7 +26,6 @@ var feature = [
         steps: [
             [steps.searchSection.accessSavedOrganisationByName,["BMI"]],
             [steps.organisation.goToGeneralTab],
-            [steps.organisation.saveMultipleELemNodesTest],
             [steps.organisation.saveOrganisationDeliveryMethods],
             [steps.organisation.goToRegistrationActivityTab],
             [steps.organisation.saveRegActivityLastEvent],

@@ -29,6 +29,18 @@ exports.tabSetContainer = function() {
     return $('.nav-tabs');
 };
 
+exports.generalTab = function() {
+    return exports.tabSetContainer().element(by.cssContainingText(
+        'a', 'General'
+    ));
+};
+
+exports.goToGeneralTab = function() {
+    exports.generalTab().click();
+
+    return pages.base.waitForAjax();
+};
+
 exports.previewRegistrationRunTab = function() {
     return exports.tabSetContainer().element(by.cssContainingText(
         'a', 'Preview Registration Run'
@@ -561,4 +573,69 @@ exports.viewValidationErrors = function() {
     pages.base.scrollIntoView(button);
 
     return button.click();
+};
+
+// TODO: Refactor (TAT-364).
+exports.getEmailDeliveryMethods = function() {
+    return $$(".e2e-delivery-method-EMAIL");
+};
+
+exports.getSFTPDeliveryMethods = function() {
+    return $$(".e2e-delivery-method-SFTP");
+};
+
+exports.getFTPDeliveryMethods = function() {
+    return $$(".e2e-delivery-method-FTP");
+};
+
+exports.getThirdPartyDeliveryMethods = function() {
+    return $$(".e2e-delivery-method-THIRDPARTY");
+};
+
+exports.sfptDeliveryMethodName = function(deliveryMethod) {
+    return deliveryMethod.$$(".control-group>.controls>strong").first();
+};
+
+exports.sftpDeliveryMethodAddress = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.host"]');
+};
+
+exports.sftpDeliveryMethodPort = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.port"]');
+};
+
+exports.sftpDeliveryMethodUsername = function(deliveryMethod) {
+    return deliveryMethod.$$(".control-group>.controls>strong").get(1);
+};
+
+exports.sftpUnmaskPasswordButton = function(deliveryMethod) {
+    return deliveryMethod.$(".control-group>.controls>.mask-input-password");
+};
+
+exports.sftpPassword = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.showPassword"]');
+};
+
+exports.sftpFileFormat = function(deliveryMethod) {
+    return deliveryMethod.$$(".control-group>.controls>strong").get(2);
+};
+
+exports.sftpFileFormatStatus = function(deliveryMethod) {
+    return deliveryMethod.$(".control-group>.controls>span.compress-file");
+};
+
+exports.sftpDeliveryNotificationStatus = function(deliveryMethod) {
+    return deliveryMethod.$$(".control-group>.controls>strong").last();
+};
+
+exports.sfptDeliveryStatusEmail = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.primary_emails"]');
+};
+
+exports.sftpDeliveryStatusCC = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.cc_emails"]');
+};
+
+exports.thirdPartyName = function(deliveryMethod) {
+return deliveryMethod.$('[ data-ng-if="dm.delivery_mechanism_type === \'THIRDPARTY\'"]>div>strong');
 };
