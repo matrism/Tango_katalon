@@ -1,14 +1,9 @@
 'use strict';
 
 var _ = require('lodash'),
-    pageStep = require('../../../../helpers/basicPageStep'),
-    ExpectedConditions = protractor.ExpectedConditions,
-    promise = protractor.promise,
-    page;
+    pageStep = require('../../../../helpers/basicPageStep');
 
-steps.newPersonStaging = exports;
-
-page = require(pages_path + 'newPerson');
+steps.newPerson = exports;
 
 pageStep([
     'Go to new person page',
@@ -25,7 +20,7 @@ pageStep([
 
 exports.enterFirstName = function (value) {
     it('Enter first name (' + value + ')', function () {
-        pages.person.typeFirstName(value).then(function () {
+        pages.newPerson.typeFirstName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.firstName = value;
@@ -46,7 +41,7 @@ exports.enterFirstName = function (value) {
 
 exports.enterLastName = function(value) {
     it('Enter last name (' + value + ')', function() {
-        pages.person.enterLastName(value).then(function() {
+        pages.newPerson.enterLastName(value).then(function() {
             var person = hash.currentPersonSlot;
 
             person.lastName = value;
@@ -58,7 +53,7 @@ exports.enterLastName = function(value) {
 
 exports.enterPresentationName = function (value) {
     it('Enter presentation name (' + value + ')', function () {
-        pages.person.typePresentationName(value).then(function () {
+        pages.newPerson.typePresentationName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.name = value;
@@ -69,7 +64,7 @@ exports.enterPresentationName = function (value) {
 
 exports.enterAlternativeFirstName = function (i, value) {
     it('Enter alternative first name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.person.typeAlternativeFirstName(i, value).then(function () {
+        pages.newPerson.typeAlternativeFirstName(i, value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.alternativeFirstName = value;
@@ -90,7 +85,7 @@ exports.enterAlternativeFirstName = function (i, value) {
 
 exports.enterAlternativeLastName = function (i, value) {
     it('Enter alternative last name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.person.typeAlternativeLastName(i, value).then(function () {
+        pages.newPerson.typeAlternativeLastName(i, value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.alternativeLastName = value;
@@ -111,7 +106,7 @@ exports.enterAlternativeLastName = function (i, value) {
 
 exports.enterAlternativeCreditsName = function (i, value) {
     it('Enter alternative credits name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.person.typeAlternativeCreditsName(i, value).then(function () {
+        pages.newPerson.typeAlternativeCreditsName(i, value).then(function () {
             hash.currentPersonSlot.alternativeCreditsName = value;
         });
     });
@@ -119,7 +114,7 @@ exports.enterAlternativeCreditsName = function (i, value) {
 
 exports.enterAlternativeSuisaIpiNumber = function (i, value) {
     it('Enter alternative Siosa Ipi name #' + (i + 1) + ' (' + value + ')', function () {
-        pages.person.typeAlternativeSuisaIpiNumber(i, value).then(function () {
+        pages.newPerson.typeAlternativeSuisaIpiNumber(i, value).then(function () {
             hash.currentPersonSlot.alternativeSuisaIpiNumber = value;
         });
     });
@@ -127,7 +122,7 @@ exports.enterAlternativeSuisaIpiNumber = function (i, value) {
 
 exports.enterSuisaIpiNumber = function (value) {
     it('Enter SUISA IPI number (' + value + ')', function () {
-        pages.person.typeSuisaIpiNumber(value).then(function () {
+        pages.newPerson.typeSuisaIpiNumber(value).then(function () {
             hash.currentPersonSlot.ipiNumber = value;
             hash.currentPersonSlot.suisaIpiNumber = value;
         });
@@ -136,7 +131,7 @@ exports.enterSuisaIpiNumber = function (value) {
 
 exports.enterAffiliatedSocietySearchTerms = function (value) {
     it('Enter affiliated society search terms (' + value + ')', function () {
-        pages.person.typeAffiliatedSocietySearchTerms(value).then(function () {
+        pages.newPerson.typeAffiliatedSocietySearchTerms(value).then(function () {
             hash.currentPersonSlot.affiliatedSociety = value;
         });
     });
@@ -144,22 +139,100 @@ exports.enterAffiliatedSocietySearchTerms = function (value) {
 
 exports.selectAffiliatedSocietySearchResultByIndex = function (i) {
     it('Select affiliated society search result #' + (i + 1), function () {
-        pages.person.clickAffiliatedSocietySearchResultByIndex(i);
+        pages.newPerson.clickAffiliatedSocietySearchResultByIndex(i);
     });
 };
 
 exports.enterAddressOne = function (i, value) {
     it('Enter Address One #' + (i + 1) + ' (' + value + ')', function () {
-        pages.person.typeIntoAddressOneInput(i, value).then(function () {
+        pages.newPerson.typeIntoAddressOneInput(i, value).then(function () {
             hash.currentPersonSlot.addressOne = hash.currentPersonSlot.addressOne || [];
             hash.currentPersonSlot.addressOne[i] = value;
         });
     });
 };
 
+exports.enterAddressTwo = function (i, value) {
+    it('Enter Address Two #' + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeIntoAddressTwoInput(i, value).then(function () {
+            hash.currentPersonSlot.addressTwo = hash.currentPersonSlot.addressTwo || [];
+            hash.currentPersonSlot.addressTwo[i] = value;
+        });
+    });
+};
+
+exports.enterAddressThree = function (i, value) {
+    it('Enter Address Three #' + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeIntoAddressThreeInput(i, value).then(function () {
+            hash.currentPersonSlot.addressThree = hash.currentPersonSlot.addressThree || [];
+            hash.currentPersonSlot.addressThree[i] = value;
+        });
+    });
+};
+
+exports.enterCity = function (i, value) {
+    it('Enter City #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeIntoCityInput(i, value).then(function () {
+            hash.currentPersonSlot.city = hash.currentPersonSlot.city || [];
+            hash.currentPersonSlot.city[i] = value;
+        });
+    });
+};
+
+exports.enterRegion = function (i, value) {
+    it('Enter Region #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeIntoRegionInput(i, value).then(function () {
+            hash.currentPersonSlot.region = hash.currentPersonSlot.region || [];
+            hash.currentPersonSlot.region[i] = value;
+        });
+    });
+};
+
+exports.enterPostalCode = function (i, value) {
+    it('Enter Postal Code #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.typeIntoPostalCodeInput(i, value).then(function () {
+            hash.currentPersonSlot.postalCode = hash.currentPersonSlot.postalCode || [];
+            hash.currentPersonSlot.postalCode[i] = value;
+        });
+    });
+};
+
+exports.selectCountry = function (i, value) {
+    it('Select Country #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.newPerson.selectCountry(i, value).then(function () {
+            hash.currentPersonSlot.country = hash.currentPersonSlot.country || [];
+            hash.currentPersonSlot.country[i] = value;
+        });
+    });
+};
+
+exports.setPrimaryAddress = function (i) {
+    it('Set as Primary Address #'  + (i + 1), function () {
+        pages.newPerson.setPrimaryAddress(i).then(function () {
+            hash.currentPersonSlot.primaryAddress = i;
+        });
+    });
+};
+
+exports.setPrimaryPhone = function (i) {
+    it('Set as Primary Phone #'  + (i + 1), function () {
+        pages.newPerson.setPrimaryPhone(i).then(function () {
+            hash.currentPersonSlot.primaryPhone = i;
+        });
+    });
+};
+
+exports.setPrimaryEmail = function (i) {
+    it('Set as Primary Email #'  + (i + 1), function () {
+        pages.newPerson.setPrimaryEmail(i).then(function () {
+            hash.currentPersonSlot.primaryEmail = i;
+        });
+    });
+};
+
 exports.enterPhone = function (i, value) {
     it('Enter Phone #' + (i + 1) + ' (' + value + ')', function () {
-        pages.person.typeIntoPhoneInput(i, value).then(function () {
+        pages.newPerson.typeIntoPhoneInput(i, value).then(function () {
             hash.currentPersonSlot.phone = hash.currentPersonSlot.phone || [];
             hash.currentPersonSlot.phone[i] = value;
         });
@@ -168,7 +241,7 @@ exports.enterPhone = function (i, value) {
 
 exports.enterEmail = function (i, value) {
     it('Enter Email #' + (i + 1) + ' (' + value + ')', function () {
-        pages.person.typeIntoEmailInput(i, value).then(function () {
+        pages.newPerson.typeIntoEmailInput(i, value).then(function () {
             hash.currentPersonSlot.email = hash.currentPersonSlot.email || [];
             hash.currentPersonSlot.email[i] = value;
         });
@@ -177,7 +250,7 @@ exports.enterEmail = function (i, value) {
 
 exports.clickOnPayee = function (value) {
     it('Click on the Payee Toggle (' + value + ')', function () {
-        pages.person.clickPayee(value).then(function () {
+        pages.newPerson.clickPayee(value).then(function () {
             hash.currentPersonSlot.payee = value;
         });
     });
@@ -226,13 +299,6 @@ exports.validateAlternativeName = function(i, value) {
 exports.clickOnEnterPersonSearchTerms = function (value) {
     it('Search for person (' + value + ')', function () {
         pages.person.enterPersonSearchTerms(value);
-    });
-};
-exports.searchForPersonUsingPreviouslyCreatedIpiNumber = function () {
-    it('Search for person using previously created IPI Number', function () {
-        pages.person.enterPersonSearchTerms(
-            hash.currentPersonSlot.ipiNumber
-        );
     });
 };
 exports.clickPersonSearchMatch = function (i) {

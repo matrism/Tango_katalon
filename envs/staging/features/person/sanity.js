@@ -45,14 +45,10 @@ exports.feature = [
                 this.enterRegion(1, 'Alternative Utah');
                 this.enterPostalCode(1, '13324');
                 this.selectCountry(1, 'United States');
-                this.addPhone();
                 this.enterPhone(0, '12345678');
-                this.addPhone();
                 this.enterPhone(1, '98765432');
                 this.setPrimaryPhone(1);
-                this.addEmail();
                 this.enterEmail(0, randomString(0.2).toLowerCase() + '@email.com');
-                this.addEmail();
                 this.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
                 this.setPrimaryEmail(1);
                 this.clickOnPayee('Yes');
