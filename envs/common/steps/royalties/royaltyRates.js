@@ -18,8 +18,8 @@ exports.addNewRoyaltySet = function () {
 
 exports.addNewRoyaltySetEdit = function () {
     it("Add new Royalty Rate Set", function () {
-        pages.royaltyRates.clickNewRoyaltySetButtonEdit();
-    }
+            pages.royaltyRates.clickNewRoyaltySetButtonEdit();
+        }
     );
 };
 
@@ -190,6 +190,12 @@ exports.setEffectiveStartDate = function (date) {
         pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
 
         // pages.royaltyRates.clickGeneric(element);
+    });
+};
+
+exports.editRoyaltyRate = function () {
+    it("Edit the royalty rate ", function () {
+        pages.royaltyRates.editRoyaltyRateSet();
     });
 };
 

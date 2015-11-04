@@ -137,7 +137,17 @@ if (pages.editDealScope === undefined) {
         },
 
         clickOnScopeNumberI: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
+        },
+
+        checkOverrideNumbersAddedOnScope: function (i) {
+            pages.base.scrollIntoView(element(by.css("div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] div.pull-left.ng-binding")));
+            browser.driver.findElement(by.css("div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] div.pull-left.ng-binding")).getText().
+                then(function (promise) {
+                    console.log("Number of overrides and text is : " + promise);
+                    expect(promise).toEqual("Override (" + i + ")");
+                });
         },
 
         checkTheScopeNumberITextValue: function (i) {
@@ -149,11 +159,50 @@ if (pages.editDealScope === undefined) {
         },
 
         checkTheScopeNumberINamePssValue: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
                 then(function (promise) {
                     console.log("Scope text is : " + promise);
                     expect(promise).toContain("Scope " + i);
                     expect(promise).toContain("Pub Shares");
+                });
+        },
+
+        checkTheScopeNumberINameRatesValue: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise);
+                    expect(promise).toContain("Scope " + i);
+                    expect(promise).toContain("Rates");
+                });
+        },
+
+        checkTheScopeNumberINameRatesNotValue: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise);
+                    expect(promise).toContain("Scope " + i);
+                    expect(promise).not.toContain("Rates");
+                });
+        },
+
+        checkTheScopeRateSetDate: function (date) {
+            pages.base.scrollIntoView(element(by.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")));
+            browser.driver.findElement(By.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")).getText().
+                then(function (promise) {
+                    console.log("Effective date is : " + promise);
+                    expect(promise).toEqual(date);
+                });
+        },
+
+        checkTheScopeRateSetDateNotEqual: function (date) {
+            pages.base.scrollIntoView(element(by.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")));
+            browser.driver.findElement(By.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")).getText().
+                then(function (promise) {
+                    console.log("Effective date is : " + promise);
+                    expect(promise).toEqual(date);
                 });
         },
 
@@ -370,10 +419,12 @@ if (pages.editDealScope === undefined) {
         editSaveThePublisherShareSetsWithModal: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.editSavePublisherShareSet);
             pages.editDealScope.elems.editSavePublisherShareSet.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+            browser.sleep(1000);
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal.fade.in div.ng-scope"))));
             pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='ok()']")));
+            //browser.actions().mouseMove(element(by.css("div.modal-footer button[data-ng-click='ok()']"))).click();
             browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='ok()']")).click();
-            pages.editDealScope.waitForAjax();
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal.fade.in div.ng-scope"))));
         },
 
 
@@ -531,7 +582,7 @@ if (pages.editDealScope === undefined) {
         },
 
         editFillInTheNumberOfCopiesForScopeNumberISpecificValue: function (i, value) {
-           browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']")).sendKeys(value);
+            browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']")).sendKeys(value);
         },
 
         editFillInTheNumberOfCopiesForScopeSpecificValue: function (value) {

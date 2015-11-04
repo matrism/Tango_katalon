@@ -19,6 +19,13 @@ exports.selectScopeNumberI = function (i) {
     });
 };
 
+exports.checkOverrideTitleAndNumber = function (i) {
+    it("Check overrider title and numbers of overrides added " + i, function () {
+        pages.editDealScope.checkOverrideNumbersAddedOnScope(i);
+    });
+
+};
+
 exports.checkScopeNumberIText = function (i) {
     it("Check text for  scope number  " + i, function () {
         pages.editDealScope.checkTheScopeNumberITextValue(i);
@@ -28,6 +35,30 @@ exports.checkScopeNumberIText = function (i) {
 exports.checkScopeNumberINameAndPss = function (i) {
     it("Check name and pss for  scope number  " + i, function () {
         pages.editDealScope.checkTheScopeNumberINamePssValue(i);
+    });
+};
+
+exports.checkTheScopeRateSetDateValue = function (date) {
+    it("Check the royalty rate set effective start date is equal to " + date, function () {
+        pages.editDealScope.checkTheScopeRateSetDateValue(date);
+    });
+};
+
+exports.checkTheScopeRateSetDateValueNotEqual = function (date) {
+    it("Check the royalty rate set effective start date is not equal to " + date, function () {
+        pages.editDealScope.checkTheScopeRateSetDateValueNotEqual(date);
+    });
+};
+
+exports.checkScopeNumberINameAndRates = function (i) {
+    it("Check name and rates for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINameRatesValue(i);
+    });
+};
+
+exports.checkScopeNumberINameAndNotRates = function (i) {
+    it("Check name and not rates for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINameRatesNotValue(i);
     });
 };
 
@@ -267,8 +298,8 @@ exports.editCopySpecificNumberOfScopes = function (number) {
     });
 };
 
-exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i,number) {
-    it("Edit - copy specific number of scopes " + number  + " from scope number " + i, function () {
+exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
+    it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
         pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
         pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
         pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);

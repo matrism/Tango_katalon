@@ -75,7 +75,8 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         clickOnTheDeleteContractPeriodNumberI: function (i) {
-            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope")).click();
+            browser.actions().mouseMove(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")"))).perform();
+            browser.driver.findElement(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope")).click();
         },
 
         confirmDeleteContractPeriodModalDialog: function () {
