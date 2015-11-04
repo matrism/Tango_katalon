@@ -5,7 +5,7 @@ var _ = require('lodash'),
     promise = protractor.promise,
     ExpectedConditions = protractor.ExpectedConditions;
 
-pages.newPersonStaging = exports;
+pages.newPerson = exports;
 
 exports.goToNewPersonPage = function() {
     browser.get(_tf_config.urls.app_url + '#/create/person');
@@ -75,6 +75,54 @@ exports.addressOneInput = function (i) {
     return this.addressContainer(i).element(
         by.model('address.address_1')
     );
+};
+exports.addressTwoInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('address.address_2')
+    );
+};
+exports.addressThreeInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('address.address_3')
+    );
+};
+exports.cityInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('address.city_town')
+    );
+};
+exports.regionInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('address.region')
+    );
+};
+exports.postalCodeInput = function (i) {
+    return this.addressContainer(i).element(
+        by.model('address.postal_code')
+    );
+};
+exports.countrySelector = function (i) {
+    return this.addressContainer(i).$('[name="country"]');
+};
+exports.countryDropdownButton = function (i) {
+    return exports.countrySelector(i).$$('button').get(0);
+};
+exports.countryDropdown = function (i) {
+    return exports.countrySelector(i).$('ul'); 
+};
+exports.countryOption = function (i, value) {
+    return exports.countryDropdown(i).element(
+        by.cssContainingText('span', value)
+    );
+};
+exports.primaryAddressCheckbox = function (i) {
+    return exports.addressContainer(i).$('[ng-click="setPrimary(address, addresses, \'is_primary_address\');"]');
+};
+exports.primaryPhoneCheckbox = function (i) {
+    return exports.phoneContainer(i).$('[ng-click="setPrimary(phone, person.master_data.contact.phones, \'is_primary_phone\')"]');
+};
+exports.primaryEmailCheckbox = function (i) {
+    return exports.emailContainer(i).$('[ng-click="setPrimary(email, person.master_data.contact.emails, \'is_primary_email\')"]');
 };
 exports.phoneInput = function (i) {
     return this.phoneContainer(i).element(
@@ -240,6 +288,54 @@ exports.typeIntoAddressOneInput = function(i, value) {
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
+};
+exports.typeIntoAddressTwoInput = function(i, value) {
+    var element = this.addressTwoInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoAddressThreeInput = function(i, value) {
+    var element = this.addressThreeInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoCityInput = function(i, value) {
+    var element = this.cityInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoRegionInput = function(i, value) {
+    var element = this.regionInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoPostalCodeInput = function(i, value) {
+    var element = this.postalCodeInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.clickOnCountryDropdownButton = function(i) {
+    var dropdownButton = this.countryDropdownButton(i);
+    pages.base.scrollIntoView(dropdownButton);
+    return dropdownButton.click();
+};
+exports.selectCountry = function(i, value) {
+    exports.clickOnCountryDropdownButton(i);
+    return this.countryOption(i, value).click();
+};
+exports.setPrimaryAddress = function(i) {
+    return exports.primaryAddressCheckbox(i).click();
+};
+exports.setPrimaryPhone = function(i) {
+    return exports.primaryPhoneCheckbox(i).click();
+};
+exports.setPrimaryEmail = function(i) {
+    return exports.primaryEmailCheckbox(i).click();
 };
 exports.typeIntoPhoneInput = function(i, value) {
     var element = this.phoneInput(i);

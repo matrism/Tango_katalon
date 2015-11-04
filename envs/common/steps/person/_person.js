@@ -1,6 +1,7 @@
 'use strict';
 
 var pph = require('../../../../helpers/pph'),
+    changeCase = require('change-case'),
     pageStep = require('../../../../helpers/basicPageStep');
 
 steps.person = exports;
@@ -183,6 +184,84 @@ exports.enterAddressOne = function (i, value) {
     });
 };
 
+exports.enterAddressTwo = function (i, value) {
+    it('Enter Address Two #' + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoAddressTwoInput(i, value).then(function () {
+            hash.currentPersonSlot.addressTwo = hash.currentPersonSlot.addressTwo || [];
+            hash.currentPersonSlot.addressTwo[i] = value;
+        });
+    });
+};
+
+exports.enterAddressThree = function (i, value) {
+    it('Enter Address Three #' + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoAddressThreeInput(i, value).then(function () {
+            hash.currentPersonSlot.addressThree = hash.currentPersonSlot.addressThree || [];
+            hash.currentPersonSlot.addressThree[i] = value;
+        });
+    });
+};
+
+exports.enterCity = function (i, value) {
+    it('Enter City #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoCityInput(i, value).then(function () {
+            hash.currentPersonSlot.city = hash.currentPersonSlot.city || [];
+            hash.currentPersonSlot.city[i] = value;
+        });
+    });
+};
+
+exports.enterRegion = function (i, value) {
+    it('Enter Region #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoRegionInput(i, value).then(function () {
+            hash.currentPersonSlot.region = hash.currentPersonSlot.region || [];
+            hash.currentPersonSlot.region[i] = value;
+        });
+    });
+};
+
+exports.enterPostalCode = function (i, value) {
+    it('Enter Postal Code #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.typeIntoPostalCodeInput(i, value).then(function () {
+            hash.currentPersonSlot.postalCode = hash.currentPersonSlot.postalCode || [];
+            hash.currentPersonSlot.postalCode[i] = value;
+        });
+    });
+};
+
+exports.selectCountry = function (i, value) {
+    it('Select Country #'  + (i + 1) + ' (' + value + ')', function () {
+        pages.person.selectCountry(i, value).then(function () {
+            hash.currentPersonSlot.country = hash.currentPersonSlot.country || [];
+            hash.currentPersonSlot.country[i] = value;
+        });
+    });
+};
+
+exports.setPrimaryAddress = function (i) {
+    it('Set as Primary Address #'  + (i + 1), function () {
+        pages.person.setPrimaryAddress(i).then(function () {
+            hash.currentPersonSlot.primaryAddress = i;
+        });
+    });
+};
+
+exports.setPrimaryPhone = function (i) {
+    it('Set as Primary Phone #'  + (i + 1), function () {
+        pages.person.setPrimaryPhone(i).then(function () {
+            hash.currentPersonSlot.primaryPhone = i;
+        });
+    });
+};
+
+exports.setPrimaryEmail = function (i) {
+    it('Set as Primary Email #'  + (i + 1), function () {
+        pages.person.setPrimaryEmail(i).then(function () {
+            hash.currentPersonSlot.primaryEmail = i;
+        });
+    });
+};
+
 exports.enterPhone = function (i, value) {
     it('Enter Phone #' + (i + 1) + ' (' + value + ')', function () {
         pages.person.typeIntoPhoneInput(i, value).then(function () {
@@ -279,12 +358,42 @@ exports.validateAffiliatedSociety = function () {
         expect(pages.person.getAffiliatedSociety()).toBe(hash.currentPersonSlot.affiliatedSociety);
     });
 };
-exports.validateAddressOne = function (i) {
-    it('Validate Address One', function () {
+exports.validateAddressOne = function(i) {
+    it('Validate Address One #' + i, function () {
         expect(pages.person.getAddressOne(i)).toBe(hash.currentPersonSlot.addressOne[i]);
     });
 };
-exports.validatePhone = function (i) {
+exports.validateAddressTwo = function(i) {
+    it('Validate Address Two #' + i, function () {
+        expect(pages.person.getAddressTwo(i)).toBe(hash.currentPersonSlot.addressTwo[i]);
+    });
+};
+exports.validateAddressThree = function(i) {
+    it('Validate Address Three #' + i, function () {
+        expect(pages.person.getAddressThree(i)).toBe(hash.currentPersonSlot.addressThree[i]);
+    });
+};
+exports.validateCity = function(i) {
+    it('Validate City #' + i, function () {
+        expect(pages.person.getCity(i)).toBe(hash.currentPersonSlot.city[i]);
+    });
+};
+exports.validateRegion = function(i) {
+    it('Validate Region #' + i, function () {
+        expect(pages.person.getRegion(i)).toBe(hash.currentPersonSlot.region[i]);
+    });
+};
+exports.validatePostalCode = function(i) {
+    it('Validate Postal Code #' + i, function () {
+        expect(pages.person.getPostalCode(i)).toBe(hash.currentPersonSlot.postalCode[i]);
+    });
+};
+exports.validateCountry = function(i) {
+    it('Validate Country #' + i, function () {
+        expect(pages.person.getCountry(i)).toBe(hash.currentPersonSlot.country[i]);
+    });
+};
+exports.validatePhone = function(i) {
     it('Validate Phone #' + i, function () {
         expect(pages.person.getPhone(i)).toBe(hash.currentPersonSlot.phone[i]);
     });
@@ -299,22 +408,37 @@ exports.validatePayee = function () {
         expect(pages.person.getPayee()).toBe(hash.currentPersonSlot.payee);
     });
 };
+exports.validatePrimaryAddress = function(i) {
+    it('Validate Primary Address #' + i, function () {
+        expect(pages.base.isPresentAndDisplayed(pages.person.getPrimaryAddress(i))).toBeTruthy();
+    });
+};
+exports.validatePrimaryPhone = function(i) {
+    it('Validate Primary Phone #' + i, function () {
+        expect(pages.base.isPresentAndDisplayed(pages.person.getPrimaryPhone(i))).toBeTruthy();
+    });
+};
+exports.validatePrimaryEmail = function(i) {
+    it('Validate Primary Email #' + i, function () {
+        expect(pages.base.isPresentAndDisplayed(pages.person.getPrimaryEmail(i))).toBeTruthy();
+    });
+};
 
 pageStep([
-    'Click on edit primary name',
-    'Click on save primary name',
-    'Click on edit alternative name',
-    'Click on save alternative name',
-    'Click on edit society affiliation',
-    'Click on save society affiliation',
-    'Click on edit address #',
-    'Click on save address #',
-    'Click on edit phone #',
-    'Click on save phone #',
-    'Click on edit email #',
-    'Click on save email #',
-    'Click on edit payment information',
-    'Click on save payment information'
+    'Edit primary name',
+    'Save primary name',
+    'Edit alternative name',
+    'Save alternative name',
+    'Edit society affiliation',
+    'Save society affiliation',
+    'Edit address',
+    'Save address',
+    'Edit phone',
+    'Save phone',
+    'Edit email',
+    'Save email',
+    'Edit payment',
+    'Save payment'
 ]);
 
 exports.clickOnEnterPersonSearchTerms = function (value) {
@@ -322,16 +446,18 @@ exports.clickOnEnterPersonSearchTerms = function (value) {
         pages.person.enterPersonSearchTerms(value);
     });
 };
-exports.searchForPersonUsingPreviouslyCreatedIpiNumber = function () {
-    it('Search for person using previously created IPI Number', function () {
+exports.searchForPersonUsingPreviouslyCreated = function (field) {
+    it('Search for person using previously created ' + field, function () {
         pages.person.enterPersonSearchTerms(
-            hash.currentPersonSlot.ipiNumber
+            hash.currentPersonSlot[[field].map(changeCase.camelCase)]
         );
+        pages.base.waitForAjax();
     });
 };
 exports.clickPersonSearchMatch = function (i) {
     it('Click person search match #' + (i + 1), function () {
         pages.person.clickPersonSearchMatch(i);
+        pages.base.waitForAjax();
     });
 };
 exports.validateIpiNumber = function () {

@@ -46,35 +46,29 @@ exports.selectAffiliatedSocietySearchResultByIndex = steps.person.selectAffiliat
 
 exports.enterAddressOne = steps.person.enterAddressOne;
 
+exports.enterAddressTwo = steps.person.enterAddressTwo;
+
+exports.enterAddressThree = steps.person.enterAddressThree;
+
+exports.enterCity = steps.person.enterCity;
+
+exports.enterRegion = steps.person.enterRegion;
+
+exports.enterPostalCode = steps.person.enterPostalCode;
+
+exports.selectCountry = steps.person.selectCountry;
+
+exports.setPrimaryAddress = steps.person.setPrimaryAddress;
+
+exports.setPrimaryPhone = steps.person.setPrimaryPhone;
+
+exports.setPrimaryEmail = steps.person.setPrimaryEmail;
+
 exports.enterPhone = steps.person.enterPhone;
 
 exports.enterEmail = steps.person.enterEmail;
 
 exports.clickOnPayee = steps.person.clickOnPayee;
-
-exports.enterCity = function (value) {
-    it('Type City ' + value, function () {
-        pages.newPerson.typeIntoCityInput(value).then(function () {
-            hash.currentPersonSlot.city = value;
-        });
-    });
-};
-
-exports.enterRegion = function (value) {
-    it('Type Region ' + value, function () {
-        pages.newPerson.typeIntoRegionInput(value).then(function () {
-            hash.currentPersonSlot.region = value;
-        });
-    });
-};
-
-exports.enterPostalCode = function (value) {
-    it('Type Postal Code ' + value, function () {
-        pages.newPerson.typeIntoPostalCodeInput(value).then(function () {
-            hash.currentPersonSlot.postalCode = value;
-        });
-    });
-};
 
 exports.save = function () {
     it('Save person', function () {
