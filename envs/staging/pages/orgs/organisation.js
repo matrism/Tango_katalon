@@ -3,7 +3,7 @@
 var pph = require('../../../../helpers/pph'),
     ExpectedConditions = protractor.ExpectedConditions;
 
-pages.organisationStaging = exports;
+pages.organisation = exports;
 
 exports.cisacCodeBinding = function() {
     return $(

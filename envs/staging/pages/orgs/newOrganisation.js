@@ -2,7 +2,7 @@
 
 var pph = require('../../../../helpers/pph.js');
 
-pages.newOrganisationStaging = exports;
+pages.newOrganisation = exports;
 
 exports.nameField = function () {
     return element(by.model('org.masterData.name'));
