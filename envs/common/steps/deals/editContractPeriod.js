@@ -20,6 +20,7 @@ exports.checkDeleteIconContractPeriodNumberIIsDisplayed = function (i) {
 exports.deleteContractPeriodNumberI = function (i) {
     it("Delete contract period number " + i, function () {
         pages.editDealContractPeriod.clickOnTheDeleteContractPeriodNumberI(i);
+        pages.editDealContractPeriod.waitForAjax();
         pages.editDealContractPeriod.confirmDeleteContractPeriodModalDialog();
     });
 };

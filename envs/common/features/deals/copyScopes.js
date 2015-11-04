@@ -53,7 +53,7 @@ exports.feature = [
             steps.editDealScope.itEditAddPublisherShare();
             steps.editDealScope.editSaveThePublisherShareSet();
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopes(5);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1,5);
             steps.editDealScope.checkScopeNumberINameAndPss(7);
             steps.editDealScope.checkScopeNumberINameAndPss(8);
             steps.editDealScope.checkScopeNumberINameAndPss(9);
@@ -62,7 +62,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.itEditOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
-            steps.editDealScope.editSaveThePublisherShareSet();
+            steps.editDealScope.editSaveThePublisherShareSetWithModal();
             steps.editDealScope.selectScopeNumberI(7);
             steps.editDealScope.selectScopeNumberI(8);
         }

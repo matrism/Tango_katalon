@@ -535,7 +535,7 @@ exports.checkCopyScopeDisabledDataTooltip = function () {
     it("Check copy link disabled data tooltip share scope", function () {
         browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
-        browser.actions().mouseMove(pages.createDealScope.elems.copyScopeLink).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.copyScopeLink).click();
         pages.createDealScope.elems.copyScopeLink.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Copy scope disabled tooltip is : " + promise);

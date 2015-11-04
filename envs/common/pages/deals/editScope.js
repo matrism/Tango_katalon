@@ -367,6 +367,16 @@ if (pages.editDealScope === undefined) {
             pages.editDealScope.waitForAjax();
         },
 
+        editSaveThePublisherShareSetsWithModal: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.editSavePublisherShareSet);
+            pages.editDealScope.elems.editSavePublisherShareSet.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+            pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='ok()']")));
+            browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='ok()']")).click();
+            pages.editDealScope.waitForAjax();
+        },
+
+
         editCancelPublisherShareSets: function () {
             pages.editDealScope.elems.editCancelPublisherShareSet.click();
             pages.editDealScope.waitForAjax();
@@ -513,6 +523,16 @@ if (pages.editDealScope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.numberOfCopiesInputField));
         },
 
+        editClickOnCopyScopeOptionNumberI: function (i) {
+            browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+            browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-click='$event.preventDefault()'] i"))).perform();
+            browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"))));
+        },
+
+        editFillInTheNumberOfCopiesForScopeNumberISpecificValue: function (i, value) {
+           browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']")).sendKeys(value);
+        },
 
         editFillInTheNumberOfCopiesForScopeSpecificValue: function (value) {
             pages.editDealScope.elems.numberOfCopiesInputField.sendKeys(value);
@@ -525,6 +545,12 @@ if (pages.editDealScope === undefined) {
         editClickOnTheCopyScopeButtonNumberOfCopiesScope: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.editCopyScopeButtonLink);
             pages.editDealScope.elems.editCopyScopeButtonLink.click();
+            pages.editDealScope.waitForAjax();
+        },
+
+        editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI: function (i) {
+            pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
+            browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
             pages.editDealScope.waitForAjax();
         },
 

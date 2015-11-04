@@ -233,6 +233,14 @@ exports.editSaveThePublisherShareSet = function () {
     });
 };
 
+exports.editSaveThePublisherShareSetWithModal = function () {
+    it("Edit - save the publisher share set with modal", function () {
+        pages.editDealScope.editSaveThePublisherShareSetsWithModal();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+
 exports.editCancelThePublisherShareSet = function () {
     it("Edit - cancel the publisher share set", function () {
         pages.editDealScope.editCancelPublisherShareSets();
@@ -256,6 +264,14 @@ exports.editCopySpecificNumberOfScopes = function (number) {
         pages.editDealScope.editClickOnCopyScopeOption();
         pages.editDealScope.editFillInTheNumberOfCopiesForScopeSpecificValue(number);
         pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScope();
+    });
+};
+
+exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i,number) {
+    it("Edit - copy specific number of scopes " + number  + " from scope number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
     });
 };
 
@@ -472,7 +488,7 @@ exports.editCheckCopyScopeEnabledDataTooltip = function () {
     it("Edit check copy link enabled data tooltip share scope", function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
-        browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).click();
         pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Copy scope enabled tooltip is : " + promise);

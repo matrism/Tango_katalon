@@ -63,7 +63,7 @@ if (pages.editDealContractPeriod === undefined) {
             editMdrcRemoveFirstLabelIcon: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div[ng-class='tgTypeaheadWrapClass'] div.ng-scope:nth-child(1) span[ng-click='!$isDisabled() && $removeTag($tag)']"},
             deleteContractPeriodModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='data.deleteCp()']"},
             cancelDeleteContractPeriodModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
-            modalDialogCp:{css: "div.modal-dialog.ng-scope"}
+            modalDialogCp: {css: "div.modal-dialog.ng-scope"}
         },
 
         selectTheContractPeriodNumberI: function (i) {
@@ -79,12 +79,10 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         confirmDeleteContractPeriodModalDialog: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.modalDialogCp));
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog);
             pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog.click();
             pages.editDealContractPeriod.waitForAjax();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.modalDialogCp));
-        },
+          },
 
         validateTheFirstIncompleteMdrcTitle: function () {
             pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
