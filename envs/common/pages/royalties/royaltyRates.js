@@ -31,16 +31,7 @@ if (pages.royaltyRates === undefined) {
             confirmOverrideModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             overrideModalDialog: {css: "div.modal-dialog.ng-scope"},
             interCompanyArrow: {css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']"},
-            rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"},
-            editRoyaltyRateArea: {css: "div.rate-set-summary-table"},
-            editRoyaltyRateIcon: {css: "div.rate-set-summary-table button[data-ng-click='CR.onAddContractualRateSet(activeScope, false)']"}
-        },
-
-        editRoyaltyRateSet: function () {
-            pages.base.scrollIntoView(pages.royaltyRates.elems.editRoyaltyRateArea);
-            pages.royaltyRates.elems.editRoyaltyRateArea.click();
-            pages.royaltyRates.elems.editRoyaltyRateIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.royaltyRates.elems.effectiveStartDateLabel));
+            rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"}
         },
 
         activeContractPeriod: function () {

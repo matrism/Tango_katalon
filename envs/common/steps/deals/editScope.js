@@ -23,7 +23,6 @@ exports.checkOverrideTitleAndNumber = function (i) {
     it("Check overrider title and numbers of overrides added " + i, function () {
         pages.editDealScope.checkOverrideNumbersAddedOnScope(i);
     });
-
 };
 
 exports.checkScopeNumberIText = function (i) {
@@ -40,13 +39,13 @@ exports.checkScopeNumberINameAndPss = function (i) {
 
 exports.checkTheScopeRateSetDateValue = function (date) {
     it("Check the royalty rate set effective start date is equal to " + date, function () {
-        pages.editDealScope.checkTheScopeRateSetDateValue(date);
+        pages.editDealScope.checkTheScopeRateSetDate(date);
     });
 };
 
 exports.checkTheScopeRateSetDateValueNotEqual = function (date) {
     it("Check the royalty rate set effective start date is not equal to " + date, function () {
-        pages.editDealScope.checkTheScopeRateSetDateValueNotEqual(date);
+        pages.editDealScope.checkTheScopeRateSetDateNotEqual(date);
     });
 };
 
@@ -567,8 +566,69 @@ exports.editClickOnCancelSubPublisherOverridePss = function () {
 };
 
 exports.editClickOnAddAnotherSubPublisherOverridePss = function () {
-    it("Edit click on the add anothe sub publisher override pss ", function () {
+    it("Edit click on the add another sub publisher override pss ", function () {
         pages.editDealScope.editClickOnTheAddAnotherSubPublisherOverridePss();
+    });
+};
+
+exports.clickOnAddSocietyAgreementNumbersLink = function () {
+    it("Edit click on the add society agreement numbers link ", function () {
+        pages.editDealScope.clickOnTheAddSocietyAgreementNumbersLink();
+    });
+};
+
+exports.fillIntoPublisherChainAgreementNumberFieldNumberI = function (i) {
+    it("Fill into the publisher chain agreement number field number " + i, function () {
+        pages.editDealScope.fillIntoThePublisherChainAgreementNumberFieldNumberI(i);
+    });
+};
+
+exports.selectPublisherChainAgreementNumberSocietyFieldNumberI = function (society, i) {
+    it("Select the publisher chain agreement number society field number " + i, function () {
+        pages.editDealScope.fillIntoThePublisherChainAgreementSocietyNameNumberI(society, i);
+        pages.editDealScope.selectTheSpecificValueFromSocietyDropDownSocietyAgreementNumbers();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.selectRandomCreatorToPublisherCreatorNameNumberI = function (i) {
+    it("Select random creator name from creator to publisher number " + i, function () {
+        pages.editDealScope.fillIntoTheCreatorToPublisherSocietyAgreementFieldNumberI("shilpa", i);
+        pages.editDealScope.selectTheRandomValueFromCreatorDropDownSocietyAgreementNumbers();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.fillIntoCreatorAgreementNumberFieldNumberI = function (i) {
+    it("Fill into the creator to publisher agreement number value for field number " + i, function () {
+        pages.editDealScope.fillIntoTheCreatorAgreementNumberFieldNumberI(i);
+    });
+};
+
+exports.selectSocietyForCreatorToPublisherAgreementNumberFieldNumberI = function (society, i) {
+    it("Select society for creator to publisher agreement number field number " + i, function () {
+        pages.editDealScope.fillIntoTheCreatorToPublisherSocietyFieldNumberI(society, i);
+        pages.editDealScope.selectTheSpecificValueFromSocietyDropDownSocietyAgreementNumbers();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.saveSocietyAgreementNumberForm = function () {
+    it("Save the society agreement number form ", function () {
+        pages.editDealScope.saveTheSocietyAgreementNumbersChanges();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.itAddSimpleSocietyAgreementNumbers = function () {
+    describe("Add a simple society agreement number ", function () {
+        steps.editDealScope.clickOnAddSocietyAgreementNumbersLink();
+        steps.editDealScope.fillIntoPublisherChainAgreementNumberFieldNumberI(1);
+        steps.editDealScope.selectPublisherChainAgreementNumberSocietyFieldNumberI("ascap",1);
+        steps.editDealScope.selectRandomCreatorToPublisherCreatorNameNumberI(1);
+        steps.editDealScope.fillIntoCreatorAgreementNumberFieldNumberI(1);
+        steps.editDealScope.selectSocietyForCreatorToPublisherAgreementNumberFieldNumberI("mcps",1);
+        steps.editDealScope.saveSocietyAgreementNumberForm();
     });
 };
 

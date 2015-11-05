@@ -193,12 +193,6 @@ exports.setEffectiveStartDate = function (date) {
     });
 };
 
-exports.editRoyaltyRate = function () {
-    it("Edit the royalty rate ", function () {
-        pages.royaltyRates.editRoyaltyRateSet();
-    });
-};
-
 exports.openEffectiveStartDateCalender = function () {
     it("Open Effective start date calender", function () {
         pages.royaltyRates.clickEffectiveStartDateCalendarIcon();
