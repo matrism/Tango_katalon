@@ -66,7 +66,7 @@ if (pages.editDealScope === undefined) {
             editAddAnotherOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, true)']"},
             editSharePublisherShareSetIcon: {css: "div[data-ng-click='showSharePublisherShareSetSection(true)'] i"},
             editUseThisPublisherShareSetButton: {css: "button[data-ng-click='sharePubShareSet(pss.id, modularEditModels.activeScope.id)']"},
-            addSocietyAgreementNumberLink: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id'] a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"},
+            addSocietyAgreementNumberLink: {css: "a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"},
             saveChangesSocietyAgreementNumber: {css: "button[data-ng-click='data.save(data.isAgreementsNumbersValid)']"}
         },
 
@@ -606,6 +606,7 @@ if (pages.editDealScope === undefined) {
         editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI: function (i) {
             pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
             browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
+            browser.sleep(1000);
             pages.editDealScope.waitForAjax();
         },
 
@@ -717,18 +718,36 @@ if (pages.editDealScope === undefined) {
 
         fillIntoTheCreatorAgreementNumberFieldNumberI: function (i) {
             var number = Math.floor(Math.random() * 999999999) + 1;
-            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i+1) + ") input[data-ng-model='societyAgreementCreator.agreement_number']")).clear();
-            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i+1) + ") input[data-ng-model='societyAgreementCreator.agreement_number']")).sendKeys(number);
+            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i + 1) + ") input[data-ng-model='societyAgreementCreator.agreement_number']")).clear();
+            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i + 1) + ") input[data-ng-model='societyAgreementCreator.agreement_number']")).sendKeys(number);
         },
 
         fillIntoTheCreatorToPublisherSocietyFieldNumberI: function (society, i) {
-            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i+1) + ")  input[data-ng-model='societyAgreementCreator.society_model']")).clear();
-            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i+1) + ")  input[data-ng-model='societyAgreementCreator.society_model']")).sendKeys(society);
+            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i + 1) + ")  input[data-ng-model='societyAgreementCreator.society_model']")).clear();
+            browser.driver.findElement(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (i + 1) + ")  input[data-ng-model='societyAgreementCreator.society_model']")).sendKeys(society);
         },
 
-        saveTheSocietyAgreementNumbersChanges: function(){
+        saveTheSocietyAgreementNumbersChanges: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.saveChangesSocietyAgreementNumber);
             pages.editDealScope.elems.saveChangesSocietyAgreementNumber.click();
+        },
+
+        checkTheSocietyAgreementAddedOnScope: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.addSocietyAgreementNumberLink);
+            pages.editDealScope.elems.addSocietyAgreementNumberLink.getText().
+                then(function (promise) {
+                    console.log("Society agreement numbers added - view mode : " + promise);
+                    expect(promise).toEqual("View Society Agreement Numbers");
+                });
+        },
+
+        checkTheSocietyAgreementNotAddedOnScope: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.addSocietyAgreementNumberLink);
+            pages.editDealScope.elems.addSocietyAgreementNumberLink.getText().
+                then(function (promise) {
+                    console.log("Society agreement numbers added - view mode : " + promise);
+                    expect(promise).toEqual("Add Society Agreement Numbers");
+                });
         }
 
     })

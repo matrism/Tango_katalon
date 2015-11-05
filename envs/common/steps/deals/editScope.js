@@ -620,6 +620,19 @@ exports.saveSocietyAgreementNumberForm = function () {
     });
 };
 
+exports.checkSocietyAgreementAddedOnScope=function(){
+    it("Check the society agreement added on scope ", function(){
+        pages.editDealScope.checkTheSocietyAgreementAddedOnScope();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkSocietyAgreementNotAddedOnScope=function(){
+    it("Check the society agreement not added on scope ", function(){
+        pages.editDealScope.checkTheSocietyAgreementNotAddedOnScope();
+    });
+};
+
 exports.itAddSimpleSocietyAgreementNumbers = function () {
     describe("Add a simple society agreement number ", function () {
         steps.editDealScope.clickOnAddSocietyAgreementNumbersLink();
