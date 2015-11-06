@@ -1,7 +1,9 @@
 'use strict';
 
 var using = require('../../../../helpers/fnutils').using,
-    _ = require('lodash');
+    _ = require('lodash'),
+    path = require('path'),
+    noUpload = systemConfig.noUpload;
 
 exports.commonFeatureTags = ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'];
 
@@ -30,7 +32,7 @@ exports.feature = [
                 this.selectProcessingTerritory('Chile');
                 this.selectIncomeProvider('FABER MUSIC LTD');
                 this.selectFileFormat('FABER SALES');
-                this.selectFile('../data/fabersales_tiny_TAT.txt');
+                this.selectFile('./data/fabersales_tiny_TAT.txt');
                 this.setStatementDistributionPeriodStart('2014', '09');
                 this.setStatementDistributionPeriodEnd('2014', '09');
                 this.setExpectedFileAmount(fileAmount);
@@ -65,7 +67,7 @@ exports.feature = [
         name: 'Upload EDI file - Sanity Test',
         tags: ['uploadEDIFile', 'sanityTest', 'uploadEDIFileSanity'],
         steps: function(){
-            var files = require('../data/ediFileSanity.json'),
+            var files = require('./data/ediFileSanity.json'),
                 incomeProviders,
                 fileDefaults = {
                     currency: 'GBP',
@@ -83,7 +85,9 @@ exports.feature = [
                 };
 
             files = _.map(files, function(item){
-                return _.defaultsDeep(item, fileDefaults);
+                var file = _.defaultsDeep(item, fileDefaults);
+                file.fileName = path.resolve(__dirname, file.fileName)
+                return file;
             });
 
             incomeProviders = {
@@ -102,30 +106,52 @@ exports.feature = [
 
             function goToUploadPage() {
                 steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
-                //steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
+
+                if (!noUpload){
+                    steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
+                }
             }
 
             function fillFormWithFileData(file) {
                 using(steps.uploadEdiFile, function() {
+                    file.expectedAmount = file.expectedAmount || file.amount;
+
+                    if (noUpload) {
+                        file.name = file.mockedFileName;
+                        this.assumeUploadedFile(file.name);
+                        this.selectProcessingTerritory(file.processingTerritory);
+
+                        return;
+                    }
+
                     if (file.customFormat === false) {
                         this.selectWcmCommonFormat();
+                    }
 
-                        if (file.multipleProviders) {
-                            this.checkMultipleIncomeProvidersBox();
-                        }
+                    if (file.multipleProviders) {
+                        this.checkMultipleIncomeProvidersBox();
+                    } else {
+                        this.selectIncomeProvider(file.incomeProvider);
+                        this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
+                        this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
                     }
 
                     this.selectProcessingTerritory(file.processingTerritory);
                     //this.selectProcessingTerritory(file.royaltyPeriod);
-                    this.selectIncomeProvider(file.incomeProvider);
                     this.selectFileFormat(file.fileFormat);
                     this.selectFile(file.fileName);
-                    this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
-                    this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
+
                     this.setExpectedFileAmount(file.amount);
                     this.setExpectedFileAmountCurrency(file.currency);
                     this.setExchangeRate(file.exchangeRate);
+                    this.clickCreateButton();
                 });
+            }
+
+            function waitForFileToBeProcessed() {
+                if (noUpload) { return };
+
+                steps.uploadEdiFile.waitForFileToBeProcessed();
             }
 
             describe('Load a file - Custom Format - OSA', function(){
@@ -133,27 +159,18 @@ exports.feature = [
                 using(steps.uploadEdiFile, function(){
                     var file = files[0];
 
-                /* MOCKING */
-                    //fillFormWithFileData(file);
-                    //this.clickCreateButton();
+                    fillFormWithFileData(file);
 
-                    this.selectProcessingTerritory(file.processingTerritory);
-                    file.expectedAmount = file.expectedAmount || file.amount;
+                    this.expectToBeRedirectedToFileUploadHistory();
 
-                    file.name = 'TAT5771445229874713.edi';
-                    this.assumeUploadedFile(file.name);
-
-                    //this.expectToBeRedirectedToFileUploadHistory();
-
-                /* END MOCKING */
                     this.expectUploadedFileToBeListed();
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                    //this.waitForFileToBeProcessed();
+                    this.waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    //this.openUploadedFileBlind();
+                    this.openUploadedFileBlind();
                     this.expectFileGrossAmountToBe(file.amount);
                     this.expectFileNetAmountToBe(file.amount);
 
@@ -164,7 +181,7 @@ exports.feature = [
                     this.expectStatementFieldToBe('Exchange Rate', '1 CZK to 1 CZK');
                     this.expectStatementFieldToBe('Statement Amount', '42.3900 CZK');
                     this.expectSummaryByTypeToBe('Digital Mechanical', file.amount);
-                    this.closeTabByIndex(1);
+                    steps.base.closeTabByIndex(1);
 
                     //this.rollBackUploadedFile();
                 });
@@ -176,28 +193,20 @@ exports.feature = [
                 using(steps.uploadEdiFile, function(){
                     var file = files[1];
 
-                /* MOCKING */
-                    //fillFormWithFileData(file);
-                    //this.clickCreateButton();
+                    fillFormWithFileData(file);
 
-                    this.selectProcessingTerritory(file.processingTerritory);
-                    file.expectedAmount = file.expectedAmount || file.amount;
-
-                    file.name = 'TAT8741445259285502.edi';
-                    this.assumeUploadedFile(file.name);
-
-                    //this.expectToBeRedirectedToFileUploadHistory();
-
-                /* END MOCKING */
+                    this.expectToBeRedirectedToFileUploadHistory();
 
                     this.expectUploadedFileToBeListed();
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                    //this.waitForFileToBeProcessed();
+                    waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    //this.openUploadedFileBlind();
+
+                    if (!noUpload) { this.openUploadedFileBlind(); }
+
                     this.expectFileGrossAmountToBe(file.amount);
                     this.expectFileNetAmountToBe(file.amount);
 
@@ -208,7 +217,7 @@ exports.feature = [
                     this.expectStatementFieldToBe('Exchange Rate', '1 USD to 1 USD');
                     this.expectStatementFieldToBe('Statement Amount', '1.1900 USD');
                     this.expectSummaryByTypeToBe('Others', file.amount);
-                    this.closeTabByIndex(1);
+                    steps.base.closeTabByIndex(1);
 
                     //this.rollBackUploadedFile();
                 });
@@ -221,45 +230,17 @@ exports.feature = [
                 using(steps.uploadEdiFile, function(){
                     var file = files[2];
 
-                    file.expectedAmount = file.expectedAmount || file.amount;
-
-                /* MOCKING */
-                    //fillFormWithFileData(file);
-                    //this.clickCreateButton();
-
-                    this.selectProcessingTerritory(file.processingTerritory);
-                    file.expectedAmount = file.expectedAmount || file.amount;
-
-                    file.name = 'TAT4651444832084292.edi';
-                    this.assumeUploadedFile(file.name);
-
-                    //this.expectToBeRedirectedToFileUploadHistory();
-                /* END MOCKING */
-
-                    /*this.selectWcmCommonFormat();
-                    this.checkMultipleIncomeProvidersBox();
-
-                    this.selectProcessingTerritory(file.processingTerritory);
-                    //this.selectProcessingTerritory(file.royaltyPeriod);
-
-                    this.selectFileFormat(file.fileFormat);
-                    this.selectFile(file.fileName);
-
-                    this.setExpectedFileAmount(file.amount);
-                    this.setExpectedFileAmountCurrency(file.currency);
-                    this.setExchangeRate(file.exchangeRate);
-
-                    this.clickCreateButton();*/
+                    fillFormWithFileData(file);
 
                     this.expectToBeRedirectedToFileUploadHistory();
                     this.expectUploadedFileToBeListed();
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.expectedAmount);
-                    //this.waitForFileToBeProcessed();
+                    this.waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    //this.openUploadedFileBlind();
+                    this.openUploadedFileBlind();
                     this.expectNumberOfStatementsToBe(2);
                     this.expectStatementValuesToBe('99.5900', '6,241.5200');
                     this.expectFileGrossAmountToBe(file.amount);
@@ -287,6 +268,7 @@ exports.feature = [
                     this.clickSaveButton();
 
                     this.openFirstGeneratedStatement();
+                    //steps.base.sleep(10000);
                     steps.base.switchToTab(1);
 
                     // STATEMENT
@@ -320,7 +302,7 @@ exports.feature = [
                     this.changeAccountsReferenceField('TEST');
                     this.clickSaveButton();
 
-                    this.closeTabByIndex(1);
+                    steps.base.closeTabByIndex(1);
 
                     //this.rollBackUploadedFile();
                 });
@@ -419,8 +401,6 @@ exports.feature = [
                     steps.royaltyStatements.selectFirstRoyaltyPeriod();
                 });
             });*/
-
-            steps.base.sleep(10000);
         }
     }
 ];

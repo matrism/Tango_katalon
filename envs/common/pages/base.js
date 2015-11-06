@@ -9,11 +9,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 var config = require('../../../configs/protractor-conf');
 var methodSpecifierCall = require('../../../helpers/methodSpecifierCall');
 
-exports = module.exports = pages.base = new ftf.pageObject({
-    locators: {
-        logout_link: { id: "DSP-LOGOUT" }
-    }
-});
+exports = module.exports = pages.base = new ftf.pageObject();
 
 exports.open = function () {
     browser.get(_tf_config.urls.app_url);

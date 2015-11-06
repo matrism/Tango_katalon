@@ -71,7 +71,6 @@ exports.itAddPayeeOrganisationAndAssociateScope = function () {
         steps.createDealPayee.associateSpecificScopeNumberIToPayee(1);
         steps.createDealPayee.fillIntoPayeeLegalRightInputField();
         steps.createDealPayee.fillIntoPayeeDistributionInputField();
-        steps.base.scrollIntoView("Save ", pages.createDealPayee.elems.savePayeeFormButton);
         steps.createDealPayee.savePayeeForm();
     });
 };
@@ -85,7 +84,6 @@ exports.itAddPayeePersonAndAssociateScope = function () {
         steps.createDealPayee.associateSpecificScopeNumberIToPayee(2);
         steps.createDealPayee.fillIntoPayeeLegalRightInputField();
         steps.createDealPayee.fillIntoPayeeDistributionInputField();
-        steps.base.scrollIntoView("Save ", pages.createDealPayee.elems.savePayeeFormButton);
         steps.createDealPayee.savePayeeForm();
     });
 };

@@ -23,48 +23,103 @@ exports.findId = function() {
 };
 
 exports.firstNameInput = function() {
-    return element(by.model('modularEditModels.model.firstName'));
+    return $('.e2e-primary-name-first input');
 };
 exports.lastNameInput = function() {
-    return element(by.model('modularEditModels.model.lastName'));
+    return $('.e2e-primary-name-last input');
+};
+exports.suisaIpiNumberInput = function() {
+    return $('.e2e-primary-name-suisa-ipi input');
+};
+exports.affiliatedSocietySearchInput = function() {
+    return $('.e2e-society-affiliation-society input');
+};
+exports.affiliatedSocietySearchResults = function() {
+    return $$('.tg-typeahead__suggestions-group-item');
+};
+exports.addressContainer = function(i) {
+    return $$('.e2e-contact-address').get(i);
+};
+exports.phoneContainer = function(i) {
+    return $$('.e2e-contact-phone').get(i);
+};
+exports.emailContainer = function(i) {
+    return $$('.e2e-contact-email').get(i);
+};
+exports.alternativeNameContainer = function(i) {
+    return $$('.e2e-alternative-name').get(i);
 };
 exports.alternativeFirstNameInput = function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.firstName')
-    );
+    return this.alternativeNameContainer(i).$('.e2e-alternative-name-fisrt input');
 };
 exports.alternativeLastNameInput = function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.lastName')
-    );
+    return this.alternativeNameContainer(i).$('.e2e-alternative-name-last input');
 };
 exports.alternativeCreditsNameInput = function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.creditsName')
-    );
+    return this.alternativeNameContainer(i).$('.e2e-primary-name-credits input');
 };
 exports.alternativeSuisaIpiInput = function(i) {
-    return this.alternativeNameContainer(i).element(
-        by.model('modularEditModels.model.suisaIpiNumber')
-    );
+    return this.alternativeNameContainer(i).$('.e2e-primary-name-suisa-ipi input');
 };
 exports.addressOneInput = function (i) {
-    return this.addressContainer(i).element(
-        by.model('modularEditModels.model.address1')
+    return this.addressContainer(i).$('.e2e-contact-address-1 input');
+};
+exports.addressTwoInput = function (i) {
+    return this.addressContainer(i).$('.e2e-contact-address-2 input');
+};
+exports.addressThreeInput = function (i) {
+    return this.addressContainer(i).$('.e2e-contact-address-3 input');
+};
+exports.cityInput = function (i) {
+    return this.addressContainer(i).$('.e2e-contact-address-city input');
+};
+exports.regionInput = function (i) {
+    return this.addressContainer(i).$('.e2e-contact-address-region input');
+};
+exports.postalCodeInput = function (i) {
+    return this.addressContainer(i).$('.e2e-contact-address-postal-code input');
+};
+exports.countrySelector = function (i) {
+    return this.addressContainer(i).$('.e2e-contact-address-country');
+};
+exports.countryDropdownButton = function (i) {
+    return exports.countrySelector(i).$$('button').get(0); 
+};
+exports.countryDropdown = function (i) {
+    return exports.countrySelector(i).$('ul'); 
+};
+exports.countryOption = function (i, value) {
+    return exports.countryDropdown(i).element(
+        by.cssContainingText('span', value)
     );
 };
+exports.primaryAddressCheckbox = function (i) {
+    return exports.addressContainer(i).$('.e2e-contact-address-set-primary .ng-binding');
+};
+exports.primaryPhoneCheckbox = function (i) {
+    return exports.phoneContainer(i).$('.e2e-contact-phone-set-primary .ng-binding');
+};
+exports.primaryEmailCheckbox = function (i) {
+    return exports.emailContainer(i).$('.e2e-contact-email-set-primary .ng-binding');
+};
+exports.primaryAddressLabel = function (i) {
+    return exports.addressContainer(i).$('.e2e-contact-address-is-primary');
+};
+exports.primaryPhoneLabel = function (i) {
+    return exports.phoneContainer(i).$('.e2e-contact-phone-is-primary');
+};
+exports.primaryEmailLabel = function (i) {
+    return exports.emailContainer(i).$('.e2e-contact-email-is-primary');
+};
+
 exports.phoneInput = function (i) {
-    return this.phoneContainer(i).element(
-        by.model('modularEditModels.model.number')
-    );
+    return this.phoneContainer(i).$('.e2e-contact-phone-number>input');
 };
 exports.emailInput = function (i) {
-    return this.emailContainer(i).element(
-        by.model('modularEditModels.model.address')
-    );
+    return this.emailContainer(i).$('.e2e-contact-email-address>input');
 };
 exports.payeeToggle = function() {
-    var payee = element(by.model('modularEditModels.model.isPayee'));
+    var payee = $('.e2e-payee-is');
     pages.base.scrollIntoView(payee);
     return payee;
 };
@@ -80,94 +135,114 @@ exports.internalIpiNumberBinding = function() {
 exports.suisaIPINumber = function() {
     return $(".e2e-primary-name-suisa-ipi .controls");
 };
-exports.nameElement = function() {
+exports.nameBinding = function() {
     return $('.e2e-primary-name-full .controls');
 };
-exports.firstNameElement = function() {
+exports.firstNameBinding = function() {
     return $('.e2e-primary-name-first .controls');
 };
-exports.lastNameElement = function() {
+exports.lastNameBinding = function() {
     return $('.e2e-primary-name-last .controls');
 };
-exports.alternativeNameElement = function(i) {
+exports.alternativeNameBinding = function(i) {
     return $$('.e2e-alternative-name-full .controls').get(i);
 };
-exports.alternativeFirstNameElement = function() {
+exports.alternativeFirstNameBinding = function() {
     return $('.e2e-alternative-name-first .controls');
 };
-exports.alternativeLastNameElement = function() {
+exports.alternativeLastNameBinding = function() {
     return $('.e2e-alternative-name-last .controls');
 };
-exports.affiliatedSocietyElement = function() {
+exports.affiliatedSocietyBinding = function() {
     return $('.e2e-society-affiliation-society .controls');
 };
-exports.addressOneElement = function() {
-    return $$('.e2e-contact-address-1 .controls');
+exports.addressOneBinding = function(i) {
+    return $$('.e2e-contact-address-1 .controls').get(i);
 };
-exports.phoneElement = function() {
-    return $$('.e2e-contact-phone-number .controls');
+exports.addressTwoBinding = function(i) {
+    return $$('.e2e-contact-address-2 .controls').get(i);
 };
-exports.emailElement = function() {
-    return $$('.e2e-contact-email-address .controls');
+exports.addressThreeBinding = function(i) {
+    return $$('.e2e-contact-address-3 .controls').get(i);
 };
-exports.payeeElement = function() {
+exports.cityBinding = function(i) {
+    return $$('.e2e-contact-address-city .controls').get(i);
+};
+exports.regionBinding = function(i) {
+    return $$('.e2e-contact-address-region .controls').get(i);
+};
+exports.postalCodeBinding = function(i) {
+    return $$('.e2e-contact-address-postal-code .controls').get(i);
+};
+exports.countryBinding = function(i) {
+    return $$('.e2e-contact-address-country .controls').get(i);
+};
+exports.phoneBinding = function(i) {
+    return $$('.e2e-contact-phone-number .controls').get(i);
+};
+exports.emailBinding = function(i) {
+    return $$('.e2e-contact-email-address .controls').get(i);
+};
+exports.payeeBinding = function() {
     return $('.e2e-payee-is .controls');
 };
 
 exports.getEditButton = function(section) {
-    return section.$('button[data-ng-click*="switchToEditView()"]');
+    return section.$('[data-ng-click*="switchToEditView()"]');
 };
 exports.getSaveButton = function(section) {
-    return section.$('button[data-ng-click*="save()"]');
+    return section.$('[data-ng-click*="save()"]');
 };
 
-exports.editNameElement = function() {
+exports.editNameButton = function() {
     return exports.getEditButton($('.e2e-primary-name'));
 };
-exports.saveNameElement = function() {
+exports.saveNameButton = function() {
     return exports.getSaveButton($('.e2e-primary-name'));
 };
-exports.editAlternativeNameElement = function() {
+exports.editAlternativeNameButton = function() {
     return exports.getEditButton($('.e2e-alternative-name'));
 };
-exports.saveAlternativeNameElement = function() {
+exports.saveAlternativeNameButton = function() {
     return exports.getSaveButton($('.e2e-alternative-name'));
 };
-exports.editSocietyAffiliationElement = function() {
+exports.editSocietyAffiliationButton = function() {
     return exports.getEditButton($('.e2e-society-affiliation'));
 };
-exports.saveSocietyAffiliationElement = function() {
+exports.saveSocietyAffiliationButton = function() {
     return exports.getSaveButton($('.e2e-society-affiliation'));
 };
-exports.editAddressElement = function(i) {
-    return exports.getEditButton($$('.e2e-contact-address').get(i));
+exports.editAddressButton = function(i) {
+    return exports.getEditButton(exports.addressContainer(i));
 };
-exports.saveAddressElement = function(i) {
-    return exports.getSaveButton($$('.e2e-contact-address').get(i));
+exports.saveAddressButton = function(i) {
+    return exports.getSaveButton(exports.addressContainer(i));
 };
-exports.editPhoneElement = function(i) {
-    return exports.getEditButton($$('.e2e-contact-phone').get(i));
+exports.editPhoneButton = function(i) {
+    return exports.getEditButton(exports.phoneContainer(i));
 };
-exports.savePhoneElement = function(i) {
-    return exports.getSaveButton($$('.e2e-contact-phone').get(i));
+exports.savePhoneButton = function(i) {
+    return exports.getSaveButton(exports.phoneContainer(i));
 };
-exports.editEmailElement = function(i) {
-    return exports.getEditButton($$('.e2e-contact-email').get(i));
+exports.editEmailButton = function(i) {
+    return exports.getEditButton(exports.emailContainer(i));
 };
-exports.saveEmailElement = function(i) {
-    return exports.getSaveButton($$('.e2e-contact-email').get(i));
+exports.saveEmailButton = function(i) {
+    return exports.getSaveButton(exports.emailContainer(i));
 };
-exports.editPaymentInfo = function() {
+exports.editPaymentButton = function() {
     return exports.getEditButton($('.e2e-payee'));
 };
-exports.savePaymentInfo = function() {
+exports.savePaymentButton = function() {
     return exports.getSaveButton($('.e2e-payee'));
 };
 
-exports.internalIpiNumber = function() {
-    var element = exports.internalIpiNumberBinding();
+exports.getBindingText = function(element) {
     pages.base.scrollIntoView(element);
     return element.getText();
+};
+exports.internalIpiNumber = function() {
+    return exports.getBindingText(exports.internalIpiNumberBinding());
 };
 exports.getSuisaIPI = function() {
     browser.wait(ExpectedConditions.visibilityOf(exports.suisaIPINumber()));
@@ -176,163 +251,122 @@ exports.getSuisaIPI = function() {
     return element.getText();
 };
 exports.getName = function() {
-    var element = exports.nameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.nameBinding());
 };
 exports.getFirstName = function() {
-    var element = exports.firstNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.firstNameBinding());
 };
 exports.getLastName = function() {
-    var element = exports.lastNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.lastNameBinding());
 };
 exports.getAlternativeName = function(i) {
-    var element = exports.alternativeNameElement(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.alternativeNameBinding(i));
 };
 exports.getAlternativeFirstName = function() {
-    var element = exports.alternativeFirstNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.alternativeFirstNameBinding());
 };
 exports.getAlternativeLastName = function() {
-    var element = exports.alternativeLastNameElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.alternativeLastNameBinding());
 };
 exports.getAffiliatedSociety = function() {
-    var element = exports.affiliatedSocietyElement();
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.affiliatedSocietyBinding());
 };
 exports.getAddressOne = function(i) {
-    var element = exports.addressOneElement().get(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.addressOneBinding(i));
+};
+exports.getAddressTwo = function(i) {
+    return exports.getBindingText(exports.addressTwoBinding(i));
+};
+exports.getAddressThree = function(i) {
+    return exports.getBindingText(exports.addressThreeBinding(i));
+};
+exports.getCity = function(i) {
+    return exports.getBindingText(exports.cityBinding(i));
+};
+exports.getRegion = function(i) {
+    return exports.getBindingText(exports.regionBinding(i));
+};
+exports.getPostalCode = function(i) {
+    return exports.getBindingText(exports.postalCodeBinding(i));
+};
+exports.getCountry = function(i) {
+    return exports.getBindingText(exports.countryBinding(i));
 };
 exports.getPhone = function(i) {
-    var element = exports.phoneElement().get(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.phoneBinding(i));
 };
 exports.getEmail = function(i) {
-    var element = exports.emailElement().get(i);
-    pages.base.scrollIntoView(element);
-    return element.getText();
+    return exports.getBindingText(exports.emailBinding(i));
 };
 exports.getPayee = function() {
-    var element = exports.payeeElement();
+    return exports.getBindingText(exports.payeeBinding());
+};
+exports.getPrimaryAddress = function(i) {
+    var element = exports.primaryAddressLabel(i);
     pages.base.scrollIntoView(element);
-    return element.getText();
+    return element;
+};
+exports.getPrimaryPhone = function(i) {
+    var element = exports.primaryPhoneLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
+};
+exports.getPrimaryEmail = function(i) {
+    var element = exports.primaryEmailLabel(i);
+    pages.base.scrollIntoView(element);
+    return element;
 };
 
-exports.clickOnEditPrimaryName = function() {
-    var element = exports.editNameElement();
+exports.clickOnEditButton = function(element) {
     pages.base.scrollIntoView(element);
     return element.click();
 };
-exports.clickOnSavePrimaryName = function() {
-    var element = exports.saveNameElement();
+exports.clickOnEditButton = function(element) {
     pages.base.scrollIntoView(element);
-    return element.click();
+    element.click();
+    pages.base.waitForAjax();
 };
-exports.clickOnEditAlternativeName = function() {
-    var element = exports.editAlternativeNameElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.editPrimaryName = function() {
+    return exports.clickOnEditButton(exports.editNameButton());
 };
-exports.clickOnSaveAlternativeName = function() {
-    var element = exports.saveAlternativeNameElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.savePrimaryName = function() {
+    return exports.clickOnEditButton(exports.saveNameButton());
 };
-exports.clickOnEditSocietyAffiliation = function() {
-    var element = exports.editSocietyAffiliationElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.editAlternativeName = function() {
+    return exports.clickOnEditButton(exports.editAlternativeNameButton());
 };
-exports.clickOnSaveSocietyAffiliation = function() {
-    var element = exports.saveSocietyAffiliationElement();
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.saveAlternativeName = function() {
+    return exports.clickOnEditButton(exports.saveAlternativeNameButton());
 };
-exports.clickOnEditAddress = function(i) {
-    var element = exports.editAddressElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.editSocietyAffiliation = function() {
+    return exports.clickOnEditButton(exports.editSocietyAffiliationButton());
 };
-exports.clickOnSaveAddress = function(i) {
-    var element = exports.saveAddressElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.saveSocietyAffiliation = function() {
+    return exports.clickOnEditButton(exports.saveSocietyAffiliationButton());
 };
-exports.clickOnEditPhone = function(i) {
-    var element = exports.editPhoneElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.editAddress = function(i) {
+    return exports.clickOnEditButton(exports.editAddressButton(i));
 };
-exports.clickOnSavePhone = function(i) {
-    var element = exports.savePhoneElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.saveAddress = function(i) {
+    return exports.clickOnEditButton(exports.saveAddressButton(i));
 };
-exports.clickOnEditEmail = function(i) {
-    var element = exports.editEmailElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.editPhone = function(i) {
+    return exports.clickOnEditButton(exports.editPhoneButton(i));
 };
-exports.clickOnSaveEmail = function(i) {
-    var element = exports.saveEmailElement(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.savePhone = function(i) {
+    return exports.clickOnEditButton(exports.savePhoneButton(i));
 };
-exports.clickOnEditPaymentInformation = function() {
-    var element = exports.editPaymentInfo();
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.editEmail = function(i) {
+    return exports.clickOnEditButton(exports.editEmailButton(i));
 };
-exports.clickOnSavePaymentInformation = function() {
-    var element = exports.savePaymentInfo();
-    pages.base.scrollIntoView(element);
-    return element.click();
+exports.saveEmail = function(i) {
+    return exports.clickOnEditButton(exports.saveEmailButton(i));
 };
-
-exports.addressContainers = function() {
-    return element.all(by.repeater(
-        'contactAddress in dataHolder.person.contactAddresses.getAll()'
-    ));
+exports.editPayment = function() {
+    return exports.clickOnEditButton(exports.editPaymentButton());
 };
-exports.addressContainer = function(i) {
-    return this.addressContainers().get(i);
-};
-exports.phoneContainers = function() {
-    return element.all(by.repeater(
-        'contactPhone in dataHolder.person.contactPhones.getAll()'
-    ));
-};
-exports.phoneContainer = function(i) {
-    return this.phoneContainers().get(i);
-};
-exports.emailContainers = function() {
-    return element.all(by.repeater(
-        'contactEmail in dataHolder.person.contactEmails.getAll()'
-    ));
-};
-exports.emailContainer = function(i) {
-    return this.emailContainers().get(i);
-};
-exports.alternativeNameContainers = function() {
-    return element.all(by.repeater(
-        'alternativeName in dataHolder.person.alternativeNames.getAll()'
-    ));
-};
-exports.alternativeNameContainer = function(i) {
-    return this.alternativeNameContainers().get(i);
+exports.savePayment = function() {
+    return exports.clickOnEditButton(exports.savePaymentButton());
 };
 
 exports.typeFirstName = function(value) {
@@ -371,28 +405,17 @@ exports.typeAlternativeSuisaIpiNumber = function(i,value) {
     element.clear();
     return element.sendKeys(value);
 };
-exports.suisaIpiNumberInput = function() {
-    return element(by.model('modularEditModels.model.suisaIpiNumber'));
-};
 exports.typeSuisaIpiNumber = function(value) {
     var element = this.suisaIpiNumberInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
 };
-exports.affiliatedSocietySearchInput = function() {
-    return element(by.model('modularEditModels.model.society')).element(
-        by.model('$term')
-    );
-};
 exports.typeAffiliatedSocietySearchTerms = function(value) {
     var element = this.affiliatedSocietySearchInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
-};
-exports.affiliatedSocietySearchResults = function() {
-    return $$('.tg-typeahead__suggestions-group-item');
 };
 exports.affiliatedSocietySearchResult = function(i) {
     return this.affiliatedSocietySearchResults().get(i);
@@ -407,6 +430,54 @@ exports.typeIntoAddressOneInput = function(i, value) {
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
+};
+exports.typeIntoAddressTwoInput = function(i, value) {
+    var element = this.addressTwoInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoAddressThreeInput = function(i, value) {
+    var element = this.addressThreeInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoCityInput = function(i, value) {
+    var element = this.cityInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoRegionInput = function(i, value) {
+    var element = this.regionInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typeIntoPostalCodeInput = function(i, value) {
+    var element = this.postalCodeInput(i);
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.clickOnCountryDropdownButton = function(i) {
+    var dropdownButton = this.countryDropdownButton(i);
+    pages.base.scrollIntoView(dropdownButton);
+    return dropdownButton.click();
+};
+exports.selectCountry = function(i, value) {
+    exports.clickOnCountryDropdownButton(i);
+    return this.countryOption(i, value).click();
+};
+exports.setPrimaryAddress = function(i) {
+    return exports.primaryAddressCheckbox(i).click();
+};
+exports.setPrimaryPhone = function(i) {
+    return exports.primaryPhoneCheckbox(i).click();
+};
+exports.setPrimaryEmail = function(i) {
+    return exports.primaryEmailCheckbox(i).click();
 };
 exports.typeIntoPhoneInput = function(i, value) {
     var element = this.phoneInput(i);
