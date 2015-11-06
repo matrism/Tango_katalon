@@ -31,6 +31,18 @@ exports.checkScopeNumberIText = function (i) {
     });
 };
 
+exports.checkScopeNumberINoPss = function (i) {
+    it("Check scope number  " + i + " hasn't PSS", function () {
+        pages.editDealScope.checkTheScopeNumberITextValueHasNotPss(i);
+    });
+};
+
+exports.checkScopeNumberINoRr = function (i) {
+    it("Check scope number  " + i + " hasn't RR", function () {
+        pages.editDealScope.checkTheScopeNumberITextValueHasNotRr(i);
+    });
+};
+
 exports.checkScopeNumberINameAndPss = function (i) {
     it("Check name and pss for  scope number  " + i, function () {
         pages.editDealScope.checkTheScopeNumberINamePssValue(i);
@@ -52,6 +64,12 @@ exports.checkTheScopeRateSetDateValueNotEqual = function (date) {
 exports.checkScopeNumberINameAndRates = function (i) {
     it("Check name and rates for  scope number  " + i, function () {
         pages.editDealScope.checkTheScopeNumberINameRatesValue(i);
+    });
+};
+
+exports.checkScopeNumberINameAndPayees = function (i) {
+    it("Check name and payees present for scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINamePayeesValue(i);
     });
 };
 
@@ -297,6 +315,30 @@ exports.editCopySpecificNumberOfScopes = function (number) {
     });
 };
 
+exports.editClickOnTheCopyScopeOptionNumberI = function (i) {
+    it("Edit - click on the copy scope option number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+    });
+};
+
+exports.editFillInNumberOfCopiesForScope = function (i, number) {
+    it("Edit - fill specific number of scopes " + number + " from scope number " + i, function () {
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+    });
+};
+
+exports.editClickOnCopyButtonCopySpecificNumberOfScopesFromScopeNumberI = function (i) {
+    it("Edit -click on copy button from scope number " + i, function () {
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+    });
+};
+
+exports.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI = function (i) {
+    it("Edit -click on cancel copy button from scope number " + i, function () {
+        pages.editDealScope.editClickOnTheCancelCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+    });
+};
+
 exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
     it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
         pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
@@ -304,6 +346,60 @@ exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
         pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
     });
 };
+
+exports.checkPayeesPresentInCopyScopeModal = function(){
+    it("Check payees text present in copy scope modal ", function () {
+        pages.base.scrollIntoView(pages.editDealScope.elems.payeesCopyScopeModal);
+        pages.editDealScope.elems.payeesCopyScopeModal.getText().
+            then(function (promise) {
+                console.log("Payees text in copy scope modal is  : " + promise);
+                expect(promise).toContain("Payees");
+                expect(promise).toContain("Will be copied");
+            });
+    });
+};
+
+exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR = function (i, number) {
+    it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+        pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+        pages.editDealScope.clickOnTheCopyRoyaltyRatesInCopyScopeModal();
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+    });
+};
+
+exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss = function (i, number) {
+    it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+        pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+    });
+};
+
+exports.checkSharePublisherShareSetIconPresent = function () {
+    it("Check no share publisher share set icon present ", function () {
+        pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
+        pages.editDealScope.elems.publisherSharesTitle.getText().
+            then(function (promise) {
+                console.log("Unshare text is : " + promise);
+                expect(promise).toContain("Unshare");
+            });
+    });
+};
+
+exports.checkNoSharePublisherShareSetIconPresent = function () {
+    it("Check no share publisher share set icon present ", function () {
+        pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
+        pages.editDealScope.elems.publisherSharesTitle.getText().
+            then(function (promise) {
+                console.log("Publisher share title text is : " + promise);
+                expect(promise).not.toContain("Unshare");
+            });
+    });
+};
+
 
 exports.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () {
     it("Edit -fill first publisher name fields based on publisher type E or PA", function () {
@@ -620,16 +716,40 @@ exports.saveSocietyAgreementNumberForm = function () {
     });
 };
 
-exports.checkSocietyAgreementAddedOnScope=function(){
-    it("Check the society agreement added on scope ", function(){
+exports.checkSocietyAgreementAddedOnScope = function () {
+    it("Check the society agreement added on scope ", function () {
         pages.editDealScope.checkTheSocietyAgreementAddedOnScope();
         pages.editDealScope.waitForAjax();
     });
 };
 
-exports.checkSocietyAgreementNotAddedOnScope=function(){
-    it("Check the society agreement not added on scope ", function(){
+exports.checkSocietyAgreementNotAddedOnScope = function () {
+    it("Check the society agreement not added on scope ", function () {
         pages.editDealScope.checkTheSocietyAgreementNotAddedOnScope();
+    });
+};
+
+exports.clickOnCopyPublisherShareInCopyScopeModal = function () {
+    it("Click on the copy publisher shares in copy scope modal dialog and check it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+    });
+};
+
+exports.clickOnSharePublisherShareInCopyScopeModal = function () {
+    it("Click on the share publisher share button in copy scopal modal and checked it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheSharePublisherShareInCopyScopeModal();
+    });
+};
+
+exports.clickOnCopyRoyaltyRatesInCopyScopeModal = function () {
+    it("Click on the copy royalty rates button in copy scope modal and check it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheCopyRoyaltyRatesInCopyScopeModal();
+    });
+};
+
+exports.clickOnShareRoyaltyRatesInCopyScopeModal = function () {
+    it("Click on the share royalty rates button in copy scope modal and check it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheShareRoyaltyRatesInCopyScopeModal();
     });
 };
 
@@ -637,10 +757,10 @@ exports.itAddSimpleSocietyAgreementNumbers = function () {
     describe("Add a simple society agreement number ", function () {
         steps.editDealScope.clickOnAddSocietyAgreementNumbersLink();
         steps.editDealScope.fillIntoPublisherChainAgreementNumberFieldNumberI(1);
-        steps.editDealScope.selectPublisherChainAgreementNumberSocietyFieldNumberI("ascap",1);
+        steps.editDealScope.selectPublisherChainAgreementNumberSocietyFieldNumberI("ascap", 1);
         steps.editDealScope.selectRandomCreatorToPublisherCreatorNameNumberI(1);
         steps.editDealScope.fillIntoCreatorAgreementNumberFieldNumberI(1);
-        steps.editDealScope.selectSocietyForCreatorToPublisherAgreementNumberFieldNumberI("mcps",1);
+        steps.editDealScope.selectSocietyForCreatorToPublisherAgreementNumberFieldNumberI("mcps", 1);
         steps.editDealScope.saveSocietyAgreementNumberForm();
     });
 };

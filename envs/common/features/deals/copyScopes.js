@@ -135,8 +135,174 @@ exports.feature = [
             steps.editDealScope.checkTheScopeRateSetDateValueNotEqual("2016-08-09");
             //steps.editDealScope.selectScopeNumberI(11);
             //steps.editDealScope.checkTheScopeRateSetDateValue("2016-08-09");
+        }
+    },
+    {
+        name: "Check copy scopes not available in create mode",
+        tags: ["noShares"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
 
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.itEditAddPublisherShare();
+            steps.editDealScope.editSaveThePublisherShareSet();
 
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss(1, 2);
+
+            steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.itEditOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.editDealScope.editSaveThePublisherShareSet();
+
+            steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(0);
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(0);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss(1, 2);
+
+            steps.editDealScope.selectScopeNumberI(4);
+            steps.editDealScope.checkScopeNumberINameAndPss(4);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(1);
+            steps.editDealScope.selectScopeNumberI(5);
+            steps.editDealScope.checkScopeNumberINameAndPss(5);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(1);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.itAddSimpleSocietyAgreementNumbers();
+            steps.editDealScope.checkSocietyAgreementAddedOnScope();
+
+            steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkSocietyAgreementNotAddedOnScope();
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkSocietyAgreementNotAddedOnScope();
+            steps.editDealScope.selectScopeNumberI(4);
+            steps.editDealScope.checkSocietyAgreementNotAddedOnScope();
+            steps.editDealScope.selectScopeNumberI(5);
+            steps.editDealScope.checkSocietyAgreementNotAddedOnScope();
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss(1, 2);
+
+            steps.editDealScope.selectScopeNumberI(6);
+            steps.editDealScope.checkScopeNumberINameAndPss(6);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(1);
+            steps.editDealScope.checkSocietyAgreementAddedOnScope();
+            steps.editDealScope.selectScopeNumberI(7);
+            steps.editDealScope.checkScopeNumberINameAndPss(7);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(1);
+            steps.editDealScope.checkSocietyAgreementAddedOnScope();
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
+            steps.royaltyRates.addRatePercentageToContractualField('10');
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
+            steps.royaltyRates.saveRateSet();
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkScopeNumberINameAndRates(1);
+            steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkScopeNumberINameAndNotRates(2);
+            steps.editDealScope.checkScopeNumberINoRr(2);
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkScopeNumberINameAndNotRates(3);
+            steps.editDealScope.checkScopeNumberINoRr(3);
+            steps.editDealScope.selectScopeNumberI(4);
+            steps.editDealScope.checkScopeNumberINameAndNotRates(4);
+            steps.editDealScope.checkScopeNumberINoRr(4);
+            steps.editDealScope.selectScopeNumberI(5);
+            steps.editDealScope.checkScopeNumberINameAndNotRates(5);
+            steps.editDealScope.checkScopeNumberINoRr(5);
+            steps.editDealScope.selectScopeNumberI(6);
+            steps.editDealScope.checkScopeNumberINameAndNotRates(6);
+            steps.editDealScope.checkScopeNumberINoRr(6);
+            steps.editDealScope.selectScopeNumberI(7);
+            steps.editDealScope.checkScopeNumberINameAndNotRates(7);
+            steps.editDealScope.checkScopeNumberINoRr(7);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 2);
+
+            steps.editDealScope.selectScopeNumberI(8);
+            steps.editDealScope.checkScopeNumberINameAndPss(8);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(1);
+            steps.editDealScope.checkSocietyAgreementAddedOnScope();
+            steps.editDealScope.checkScopeNumberINameAndRates(8);
+            steps.editDealScope.selectScopeNumberI(9);
+            steps.editDealScope.checkScopeNumberINameAndPss(9);
+            steps.editDealScope.checkNoSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(1);
+            steps.editDealScope.checkSocietyAgreementAddedOnScope();
+            steps.editDealScope.checkScopeNumberINameAndRates(9);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.royaltyRates.editSingleRoyaltySet();
+            steps.editRoyaltyRates.openRateSetPanel();
+            steps.royaltyRates.addEffectiveStartDate("2016-08-09");
+            steps.royaltyRates.saveRRData();
+            steps.royaltyRates.saveRateSet();
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkTheScopeRateSetDateValue("2016-08-09");
+            steps.editDealScope.selectScopeNumberI(8);
+            steps.editDealScope.checkTheScopeRateSetDateValueNotEqual("2016-08-09");
+            steps.editDealScope.selectScopeNumberI(9);
+            steps.editDealScope.checkTheScopeRateSetDateValueNotEqual("2016-08-09");
+
+            steps.editDealPayee.clickOnPayeesHeader();
+            steps.editDealPayee.editPayeeArea();
+            steps.editDealPayee.itEditAddPayeePersonAndAssociateScope("payee");
+            steps.editDealPayee.editSavePayeePage();
+
+            steps.deal.goToTermsDealTabDetails();
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillInNumberOfCopiesForScope(1,1);
+            //steps.editDealScope.checkPayeesPresentInCopyScopeModal();
+            //steps.editDealScope.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI(1);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 1);
+
+            steps.editDealScope.selectScopeNumberI(10);
+            steps.editDealScope.checkScopeNumberINameAndPss(10);
+            steps.editDealScope.checkSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkOverrideTitleAndNumber(1);
+            steps.editDealScope.checkSocietyAgreementAddedOnScope();
+            steps.editDealScope.checkScopeNumberINameAndRates(10);
+            steps.editDealScope.checkScopeNumberINameAndPayees(10);
+
+            //steps.editDealScope.selectScopeNumberI(11);
+            //steps.editDealScope.checkScopeNumberINameAndPss(11);
+            //steps.editDealScope.checkSharePublisherShareSetIconPresent();
+            //steps.editDealScope.checkOverrideTitleAndNumber(1);
+            //steps.editDealScope.checkSocietyAgreementAddedOnScope();
+            //steps.editDealScope.checkScopeNumberINameAndRates(11);
+            //steps.editDealScope.checkScopeNumberINameAndPayees(11);
 
         }
     }

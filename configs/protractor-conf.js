@@ -101,6 +101,7 @@ config = {
         });
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
+        browser.driver.manage().window().maximize();
 
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {

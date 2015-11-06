@@ -12,7 +12,7 @@ if (pages.editDealScope === undefined) {
             territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
-            publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets']"},
+            publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.DETAIL.ng-scope"},
             publisherSharesSetEditIcon: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             editPublisherSharesHeaderTitles: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.clearfix.ps-heading"},
             scope1: {css: "div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
@@ -40,6 +40,7 @@ if (pages.editDealScope === undefined) {
             confirmDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             cancelDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             shareIconOnScope: {css: "div[data-ng-if='isScopeShared(sp.id)'] a.icon.share-icon.ng-binding i.fa.fa-share"},
+            shareScopeTextIcons: {css: "div[data-ng-show='isPublisherShareSetShared(form.terms.activePublisherShareSet.id)']"},
             shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
             shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
             saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
@@ -54,6 +55,11 @@ if (pages.editDealScope === undefined) {
             numberOfCopiesTooltip: {css: "div[data-ng-form='scopeCopyForm'] label.control-label i.fa.fa-info-circle.ng-scope"},
             numberOfCopiesInputField: {css: "div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"},
             numberOfCopiesErrorTriangle: {css: "div[data-ng-form='scopeCopyForm'] i.fa.fa-exclamation-triangle.error-text.ng-scope"},
+            copyPublisherShareInCopyScopeModalButton: {css: "div[data-ng-form='scopeCopyForm'] div[data-ng-if='copyScopeHas.PubShares'] button[data-ng-model='sp.copy.pubShare']:nth-child(2)"},
+            sharePublisherShareInCopyScopeModalButton: {css: "div[data-ng-form='scopeCopyForm'] div[data-ng-if='copyScopeHas.PubShares'] button[data-ng-model='sp.copy.pubShare']:nth-child(1)"},
+            copyRoyaltyRatesInCopyScopeModalButton: {css: "div[data-ng-form='scopeCopyForm'] div[data-ng-if='copyScopeHas.Rates'] button[data-ng-model='sp.copy.rates']:nth-child(2)"},
+            shareRoyaltyRatesInCopyScopeModalButton: {css: "div[data-ng-form='scopeCopyForm'] div[data-ng-if='copyScopeHas.Rates'] button[data-ng-model='sp.copy.rates']:nth-child(1)"},
+            payeesCopyScopeModal: {css: "div[data-ng-form='scopeCopyForm'] div[data-ng-if='copyScopeHas.Payees']"},
             editCopyScopeButtonLink: {css: "div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"},
             cancelCopyScopeButton: {css: "div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left"},
             editOverridePssIcon: {css: "div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] a[data-ng-click='showSubPubOverrideForm()'] i"},
@@ -160,6 +166,22 @@ if (pages.editDealScope === undefined) {
                 });
         },
 
+        checkTheScopeNumberITextValueHasNotPss: function (i) {
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise + " and it doesn't have Pss");
+                    expect(promise).not.toContain("Pub Shares");
+                });
+        },
+
+        checkTheScopeNumberITextValueHasNotRr: function (i) {
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise + " and it doesn't have Rr");
+                    expect(promise).not.toContain("Rates");
+                });
+        },
+
         checkTheScopeNumberINamePssValue: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
@@ -177,6 +199,16 @@ if (pages.editDealScope === undefined) {
                     console.log("Scope text is : " + promise);
                     expect(promise).toContain("Scope " + i);
                     expect(promise).toContain("Rates");
+                });
+        },
+
+        checkTheScopeNumberINamePayeesValue: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise);
+                    expect(promise).toContain("Scope " + i);
+                    expect(promise).toContain("Payees");
                 });
         },
 
@@ -241,6 +273,7 @@ if (pages.editDealScope === undefined) {
             pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesSetArea);
             pages.editDealScope.elems.publisherSharesSetArea.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.publisherSharesSetEditIcon));
+            pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesSetEditIcon);
             pages.editDealScope.elems.publisherSharesSetEditIcon.click();
         },
 
@@ -610,6 +643,13 @@ if (pages.editDealScope === undefined) {
             pages.editDealScope.waitForAjax();
         },
 
+        editClickOnTheCancelCopyScopeButtonNumberOfCopiesScopeNumberI: function (i) {
+            pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left")));
+            browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left")).click();
+            browser.sleep(1000);
+            pages.editDealScope.waitForAjax();
+        },
+
         editClickOnTheAddOverrideIconPss: function () {
             pages.editDealScope.elems.editOverridePssIcon.click();
             pages.editDealScope.waitForAjax();
@@ -747,6 +787,46 @@ if (pages.editDealScope === undefined) {
                 then(function (promise) {
                     console.log("Society agreement numbers added - view mode : " + promise);
                     expect(promise).toEqual("Add Society Agreement Numbers");
+                });
+        },
+
+        clickOnTheCopyPublisherShareInCopyScopeModal: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton);
+            pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton.click();
+            pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton.getAttribute("class").
+                then(function (promise) {
+                    console.log("Copy scope button for publisher shares is selected and it class name is : " + promise);
+                    expect(promise).toContain("active");
+                });
+        },
+
+        clickOnTheSharePublisherShareInCopyScopeModal: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton);
+            pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.click();
+            pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.getAttribute("class").
+                then(function (promise) {
+                    console.log("Share scope button for publisher shares is selected and it class name is : " + promise);
+                    expect(promise).toContain("active");
+                });
+        },
+
+        clickOnTheCopyRoyaltyRatesInCopyScopeModal: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton);
+            pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.click();
+            pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.getAttribute("class").
+                then(function (promise) {
+                    console.log("Copy scope button for royalty rates is selected and it class name is : " + promise);
+                    expect(promise).toContain("active");
+                });
+        },
+
+        clickOnTheShareRoyaltyRatesInCopyScopeModal: function () {
+            pages.base.scrollIntoView(pages.editDealScope.elems.shareRoyaltyRatesInCopyScopeModalButton);
+            pages.editDealScope.elems.shareRoyaltyRatesInCopyScopeModalButton.click();
+            pages.editDealScope.elems.shareRoyaltyRatesInCopyScopeModalButton.getAttribute("class").
+                then(function (promise) {
+                    console.log("Share scope button for royalty rates is selected and it class name is : " + promise);
+                    expect(promise).toContain("active");
                 });
         }
 
