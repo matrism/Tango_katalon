@@ -26,6 +26,14 @@ exports.activityGroup = (function() {
         return activityGroup.container().first();
     };
 
+    activityGroup.container.firstWithRecipientName = function(name) {
+        return activityGroup.container.all(
+            by.cssContainingText(
+                '[data-ng-repeat="activitiesGroup in dataHolder.groupedActivities"]', name
+            )
+         ).first();
+    };
+
     activityGroup.find = function(methodSpecifier, targetGroupName) {
         var container = activityGroup.container(methodSpecifier),
             resultPromise = pages.base.scrollIntoView(container);
@@ -123,6 +131,18 @@ exports.activityGroup.events = (function() {
             )).first()
         );
     };
+
+    events.container.firstWithAckFileName = function() {
+        return events.containerOfDetails(
+            element.all(by.cssContainingText(
+                '[data-ng-repeat-start="activity in activitiesGroup.activities"]+tr', hash.currentAckFile
+            )).first()
+        );
+    };
+
+    events.containerOfDetails  = function(detailsElement) {
+        return detailsElement.element(by.xpath('preceding-sibling::tr[1]'));
+    }
 
     events.detailsContainerOf = function(primaryContainer) {
         return primaryContainer.element(by.xpath('following-sibling::tr[1]'));
