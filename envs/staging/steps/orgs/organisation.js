@@ -2,7 +2,7 @@
 
 var pageStep = require('../../../../helpers/basicPageStep');
 
-steps.organisationStaging = exports;
+steps.organisation = exports;
 
 pageStep([
     ['General', [

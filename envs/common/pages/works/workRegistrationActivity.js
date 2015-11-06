@@ -27,7 +27,7 @@ exports.activityGroup = (function() {
     };
 
     activityGroup.container.firstWithRecipientName = function(name) {
-        return activityGroup.container.all(
+        return element.all(
             by.cssContainingText(
                 '[data-ng-repeat="activitiesGroup in dataHolder.groupedActivities"]', name
             )
@@ -179,6 +179,72 @@ exports.activityGroup.events = (function() {
         expect(statusElement.isDisplayed()).toBeTruthy();
     };
 
+    events.getAckCreationDate = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('activity.created_date | tgIsoDate')
+        ).getText();
+    };
+
+    events.getInitiatedBy = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('activity.initiated_by')
+        ).getText();
+    };
+
+    events.getMessage = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::message.message_text')
+        ).getText();
+    };
+
+    events.getRecordType = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::message.record_type')
+        ).getText();
+    };
+
+    events.getMessageLevel = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::getMessageLevelLabel(message.message_level)')
+        ).getText();
+    };
+
+    events.getValidationNumber = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::message.validation_number')
+        ).getText();
+    };
+
+    events.validateAckCreationDate = function(date) {
+        expect(events.getAckCreationDate()).toBe(date);
+    };
+
+    events.validateInitiatedBy = function(value) {
+        expect(events.getInitiatedBy()).not.toBe(null);
+    };
+
+    events.validateMessage = function(value) {
+        expect(events.getMessage()).toBe(value);
+    };
+
+    events.validateRecordType = function(value) {
+        expect(events.getRecordType()).toBe(value);
+    };
+
+    events.validateMessageLevel = function(value) {
+        expect(events.getMessageLevel()).toBe(value);
+    };
+
+    events.validateValidationNumber = function(value) {
+        expect(events.getValidationNumber()).toBe(value);
+    };
+
     events.anyEventStatusElement = function(status) {
         var target = exports.activityGroup.targets.latest;
 
@@ -206,7 +272,9 @@ exports.activityGroup.events = (function() {
     };
 
     events.toggleBlind = function() {
-        return events.targets.latest.container.click();
+        var element = events.targets.latest.container;
+        pages.base.scrollIntoView(element);
+        return element.click();
     };
 
     events.fileNameElement = function() {

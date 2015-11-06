@@ -11,5 +11,11 @@ pageStep([
     'Unmask password',
     'Get FTP options',
     'Submit Load Ack',
-    'Wait Until Event Status Becomes'
+    'Wait Until Event Status Becomes',
+    'Validate Ack Creation Date',
+    'Validate Total Accepted',
+    'Validate Total Rejected',
+    'Validate Initiated By',
+    'Validate Accepted Values',
+    'Validate Rejected Values'
 ]);
