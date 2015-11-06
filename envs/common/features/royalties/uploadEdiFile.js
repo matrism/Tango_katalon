@@ -86,7 +86,7 @@ function fillFormWithFileData(file, clickCreate, useOriginalName) {
 }
 
 function waitForFileStatusToBe() {
-    steps.uploadEdiFile.waitForFileStatusToBe.apply(null, []);
+    steps.uploadEdiFile.waitForFileStatusToBe.apply(null, arguments);
 }
 
 function waitForFileToBeProcessed() {
@@ -161,7 +161,7 @@ exports.feature = [
                 }
             };
 
-            xdescribe('Load a file - Custom Format - OSA', function(){
+            describe('Load a file - Custom Format - OSA', function(){
                 goToUploadPage();
                 using(steps.uploadEdiFile, function(){
                     var file = files[0];
@@ -194,7 +194,7 @@ exports.feature = [
                 });
             });
 
-            xdescribe('Load a file - Custom Format - FOX', function(){
+            describe('Load a file - Custom Format - FOX', function(){
                 goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
@@ -231,7 +231,7 @@ exports.feature = [
 
             });
 
-            xdescribe('Load a file - Multiple Providers', function() {
+            describe('Load a file - Multiple Providers', function() {
                 goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
@@ -318,15 +318,14 @@ exports.feature = [
             });
 
             describe('Identify files when income type mappings are added/updated', function(){
-                goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
                     var file = files[0],
                         org = incomeProviders.OSA;
 
-                    fillFormWithFileData(file, false);
+                    /*fillFormWithFileData(file, false);
                     steps.base.duplicateTab();
-                    steps.base.switchToTab(1);
+                    steps.base.switchToTab(1);*/
 
                     //check mappings
                     using(steps.mainHeader.search, function (){
@@ -354,11 +353,13 @@ exports.feature = [
                     //Income Mapping Updating
                     //Income Type Mapping Error
 
-                    steps.base.switchToTab(0);
+                    //steps.base.switchToTab(0);
+                    goToUploadPage();
+                    fillFormWithFileData(file);
 
-                    if (!noUpload) {
+                    /*if (!noUpload) {
                         this.clickCreateButton();
-                    }
+                    }*/
 
                     this.expectToBeRedirectedToFileUploadHistory();
 
@@ -369,13 +370,27 @@ exports.feature = [
 
                     if (!noUpload) { this.openUploadedFileBlind(); }
 
-                    steps.base.switchToTab(1);
+                    //steps.base.switchToTab(1);
+
+                    using(steps.mainHeader.search, function (){
+                        this.selectEntityType('Organisation');
+                        this.enterTerms(org.name);
+                        this.selectResultByIndex(0);
+                    });
+
                     using(steps.organisation.incomeProvider, function(){
                         this.editSection();
 
                         this.incomeTypeMapping.makeIncomeTypeMappingBeValid(org.requiredInboundIncomeType);
                         this.saveSection();
                     });
+
+                    steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
+
+                    this.expectToBeRedirectedToFileUploadHistory();
+
+                    this.expectUploadedFileToBeListed();
+                    waitForFileToBeProcessed();
 
                     //this.rollBackUploadedFile();
                 });
@@ -438,7 +453,7 @@ exports.feature = [
 
             //goToUploadPage();
 
-            xdescribe('View/List/Filter Statement headers', function(){
+            describe('View/List/Filter Statement headers', function(){
                 steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
 
                 using(steps.royaltyStatements, function(){

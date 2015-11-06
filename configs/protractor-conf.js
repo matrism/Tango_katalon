@@ -104,7 +104,7 @@ config = {
 
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {
-            if(timeout === undefined || timeout === null) {
+            if (timeout === undefined || timeout === null) {
                 timeout = systemConfig.wait_timeout;
             }
 
