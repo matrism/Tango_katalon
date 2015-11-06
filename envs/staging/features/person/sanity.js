@@ -5,7 +5,7 @@ var random = require('../../../../helpers/random'),
     fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
-exports.commonFeatureTags = ['person', 'sanity', 'personSanity', 'data-utilities'],
+exports.commonFeatureTags = ['person', 'sanity', 'personSanity', 'dataUtilities'],
 
 exports.beforeFeature = [
     [steps.login.itLogin]
