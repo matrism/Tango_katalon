@@ -4,7 +4,7 @@ exports.commonFeatureTags = ['smoke', 'login', 'logout'];
 
 exports.feature = [
     {
-        name: "Log in and out",
+        name: 'Log in and out',
         tags: [],
         steps: function() {
             steps.login.itLogin();

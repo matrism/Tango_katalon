@@ -2,7 +2,7 @@
 
 exports = module.exports = pages.mainHeader = new ftf.pageObject ({
 	locators: {
-		logoutLink: { id: "DSP-LOGOUT" }
+		logoutLink: { id: 'DSP-LOGOUT' }
 	}
 });
 
