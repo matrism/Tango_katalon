@@ -4,6 +4,7 @@ var using = require('../../../../helpers/fnutils').using,
     _ = require('lodash'),
     path = require('path'),
     noUpload = systemConfig.noUpload,
+    YAML = require('yamljs'),
     fileDefaults;
 
 exports.commonFeatureTags = ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'];
@@ -42,9 +43,9 @@ function goToUploadPage() {
     }
 }
 
-function fillFormWithFileData(file, clickCreate) {
+function fillFormWithFileData(file, clickCreate, useOriginalName) {
     file = _.defaultsDeep(file, fileDefaults);
-    file.fileName = path.resolve(__dirname, file.fileName)
+    file.fileName = path.resolve(__dirname, file.fileName);
 
     using(steps.uploadEdiFile, function() {
         file.expectedAmount = file.expectedAmount || file.amount;
@@ -72,7 +73,7 @@ function fillFormWithFileData(file, clickCreate) {
         this.selectProcessingTerritory(file.processingTerritory);
         //this.selectProcessingTerritory(file.royaltyPeriod);
         this.selectFileFormat(file.fileFormat);
-        this.selectFile(file.fileName);
+        this.selectFile(file.fileName, useOriginalName);
 
         this.setExpectedFileAmount(file.amount);
         this.setExpectedFileAmountCurrency(file.currency);
@@ -80,18 +81,16 @@ function fillFormWithFileData(file, clickCreate) {
 
         if (clickCreate !== false) { 
             this.clickCreateButton();
-        };
+        }
     });
 }
 
 function waitForFileStatusToBe() {
-    //if (noUpload) { return };
-
-    steps.uploadEdiFile.waitForFileStatusToBe.apply(this, arguments);
+    steps.uploadEdiFile.waitForFileStatusToBe.apply(null, []);
 }
 
 function waitForFileToBeProcessed() {
-    if (noUpload) { return };
+    if (noUpload) { return; }
 
     steps.uploadEdiFile.waitForFileToBeProcessed();
 }
@@ -145,7 +144,7 @@ exports.feature = [
         name: 'Upload EDI file - Sanity Test',
         tags: ['uploadEDIFile', 'sanityTest', 'uploadEDIFileSanity'],
         steps: function(){
-            var files = require('./data/ediFileSanity.json'),
+            var files = YAML.load(path.resolve(__dirname, './data/ediFileSanity.yml')),
                 incomeProviders;
 
             incomeProviders = {
@@ -468,6 +467,19 @@ exports.feature = [
                 });
             });
 
+        }
+    },
+    {
+        name: 'Upload multiple EDI files',
+        tags: ['uploadMultipleEDIFiles'],
+        steps: function() {
+            var files = YAML.load(path.resolve(__dirname, './data/batchUpload.yml'));
+
+            _.each(files, function(file){
+                goToUploadPage();
+                fillFormWithFileData(file, true, true);
+                steps.uploadEdiFile.expectToBeRedirectedToFileUploadHistory();
+            });
         }
     }
 ];

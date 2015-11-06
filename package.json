@@ -42,7 +42,8 @@
     "qs": "latest",
     "randomstring": "~1.1.0",
     "tmp": "0.0.27",
-    "underscore": "1.6.0"
+    "underscore": "1.6.0",
+    "yamljs": "^0.2.4"
   },
   "optionalDependencies": {
     "http-sync": "latest",

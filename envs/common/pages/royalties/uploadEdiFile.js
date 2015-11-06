@@ -87,8 +87,11 @@ function generateTempFile(fileName) {
     return testVariables.tempFileName;
 }
 
-exports.selectFile = function (fileName) {
-    fileName = generateTempFile(fileName);
+exports.selectFile = function (fileName, useOriginalName) {
+    if (!useOriginalName) {
+        fileName = generateTempFile(fileName);
+    }
+
     exports.fileInput().sendKeys(fileName);
 };
 
