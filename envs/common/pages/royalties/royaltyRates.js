@@ -713,8 +713,20 @@ if (pages.royaltyRates === undefined) {
             this.lastSetOnReceiptFromCoverMechanical().click();
         },
 
+        clickDeleteButtonForRRSet: function () {
+            var RRDoneButton;
+            RRDoneButton = element(by.css("button[data-ng-click='CR.onRatesSetDelete(set, activeScope)']"));
+            pages.base.scrollIntoView(RRDoneButton);
+            RRDoneButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
+            browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
+            pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.delete()']")));
+            browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.delete()']")).click();
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+        },
+
+
         clickDoneButtonForRRSet: function () {
-            console.log(JSON.stringify(hash.royaltyRates.royaltyRateObjectsList, null, 4));
 
             var RRDoneButton;
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));
