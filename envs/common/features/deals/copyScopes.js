@@ -362,7 +362,154 @@ exports.feature = [
             steps.editDealScope.checkScopeNumberINameAndPayees(11);
 
             steps.editDealPayee.clickOnPayeesHeader();
+        }
+    },
+        {
+        name: "Check copy scope for payees with shares pusblishers and rates",
+        tags: ["copyPayees"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.itEditAddPublisherShare();
+            steps.editDealScope.editSaveThePublisherShareSet();
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
+            steps.royaltyRates.addRatePercentageToContractualField('10');
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
+            steps.royaltyRates.saveRateSet();
+
+            steps.editDealPayee.clickOnPayeesHeader();
+            steps.editDealPayee.editPayeeArea();
+            steps.editDealPayee.itEditAddPayeePersonAndAssociateScope("payee");
+            steps.editDealPayee.editSavePayeePage();
+
+            steps.deal.goToTermsDealTabDetails();
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillInNumberOfCopiesForScope(1, 1);
+            steps.editDealScope.checkPayeesPresentInCopyScopeModal();
+            steps.editDealScope.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI(1);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 2);
+
+            steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkScopeNumberINameAndPss(2);
+            steps.editDealScope.checkSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkScopeNumberINameAndRates(2);
+            steps.editDealScope.checkScopeNumberINameAndPayees(2);
+
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkScopeNumberINameAndPss(3);
+            steps.editDealScope.checkSharePublisherShareSetIconPresent();
+            steps.editDealScope.checkScopeNumberINameAndRates(3);
+            steps.editDealScope.checkScopeNumberINameAndPayees(3);
+
+            steps.editDealPayee.clickOnPayeesHeader();
+            steps.editDealPayee.editCheckScopesAssociatedToPayee(1);
+            steps.editDealPayee.editCheckScopesAssociatedToPayee(2);
+            steps.editDealPayee.editCheckScopesAssociatedToPayee(3);
+
+            //cancel and dirty check
+            steps.deal.goToTermsDealTabDetails();
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillInNumberOfCopiesForScope(1, 1);
+            steps.editDealScope.checkPayeesPresentInCopyScopeModal();
+            steps.editDealScope.selectScopeNumberI(2);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillInNumberOfCopiesForScope(1, 1);
+            steps.editDealScope.checkPayeesPresentInCopyScopeModal();
+            steps.editDealScope.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI(1);
+
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillInNumberOfCopiesForScope(1, 1);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.checkPayeesPresentInCopyScopeModal();
+            steps.editDealScope.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI(1);
+        }
+    },
+
+    {
+        name: "Check copy scope performance test with pss and rates",
+        tags: ["copyPerformance"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.itEditAddPublisherShare();
+            steps.editDealScope.editSaveThePublisherShareSet();
+
+            steps.royaltyRates.addNewRoyaltySet();
+            steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
+            steps.royaltyRates.addRatePercentageToContractualField('10');
+            steps.royaltyRates.clickOnReceiptApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
+            steps.royaltyRates.saveRateSet();
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+
+            steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");
+
 
         }
     }
+
+
 ];

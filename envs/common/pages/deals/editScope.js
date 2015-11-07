@@ -73,7 +73,8 @@ if (pages.editDealScope === undefined) {
             editSharePublisherShareSetIcon: {css: "div[data-ng-click='showSharePublisherShareSetSection(true)'] i"},
             editUseThisPublisherShareSetButton: {css: "button[data-ng-click='sharePubShareSet(pss.id, modularEditModels.activeScope.id)']"},
             addSocietyAgreementNumberLink: {css: "a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"},
-            saveChangesSocietyAgreementNumber: {css: "button[data-ng-click='data.save(data.isAgreementsNumbersValid)']"}
+            saveChangesSocietyAgreementNumber: {css: "button[data-ng-click='data.save(data.isAgreementsNumbersValid)']"},
+            numberOfScopesPerDeal: {css: "div.deal-terms-affix.m-view h3 span[data-ng-show='form.terms.scopeSearchTags.length === 0'] span[data-ng-bind='form.terms.numberOfScopesUnderActiveCp']"}
         },
 
         addScopeForm: function () {
@@ -147,7 +148,9 @@ if (pages.editDealScope === undefined) {
         clickOnScopeNumberI: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
             //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
-            browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).click();
+            browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+            //browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).click();
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
         },
 
         checkOverrideNumbersAddedOnScope: function (i) {

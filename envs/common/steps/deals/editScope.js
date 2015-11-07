@@ -347,7 +347,17 @@ exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
     });
 };
 
-exports.checkPayeesPresentInCopyScopeModal = function(){
+exports.checkTheNumberOfScopesPerDeal = function (i) {
+    it("Check that the number of scopes per deal it is equal with " + i, function () {
+        pages.editDealScope.elems.numberOfScopesPerDeal.getText().
+            then(function (promise) {
+                console.log("Number of scopes per deal is  : " + promise);
+                expect(promise).toEqual(i);
+            });
+    });
+};
+
+exports.checkPayeesPresentInCopyScopeModal = function () {
     it("Check payees text present in copy scope modal ", function () {
         pages.base.scrollIntoView(pages.editDealScope.elems.payeesCopyScopeModal);
         pages.editDealScope.elems.payeesCopyScopeModal.getText().
@@ -670,6 +680,7 @@ exports.editClickOnAddAnotherSubPublisherOverridePss = function () {
 exports.clickOnAddSocietyAgreementNumbersLink = function () {
     it("Edit click on the add society agreement numbers link ", function () {
         pages.editDealScope.clickOnTheAddSocietyAgreementNumbersLink();
+        pages.editDealScop.waitForAjax();
     });
 };
 

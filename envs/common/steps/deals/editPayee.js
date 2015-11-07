@@ -8,6 +8,7 @@ steps.editDealPayee = exports;
 exports.clickOnPayeesHeader = function () {
     it("Click on payees header", function () {
         pages.editDealPayee.clickOnThePayeeHeaderLink();
+        pages.editDealPayee.waitForAjax();
     });
 };
 
@@ -80,6 +81,12 @@ exports.editFillIntoPayeeLegalRightInputField = function () {
 exports.editFillIntoPayeeDistributionInputField = function () {
     it("Edit fill into payee distribution input field", function () {
         pages.editDealPayee.editFillIntoThePayeeDistributionInputField();
+    });
+};
+
+exports.editCheckScopesAssociatedToPayee = function (i) {
+    it("Check the scope number " + i + "  is associated to payee ", function () {
+        pages.editDealPayee.editCheckScopeNumberIAssociatedToPayee(i);
     });
 };
 
