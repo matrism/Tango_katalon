@@ -174,6 +174,10 @@ exports.activityGroup.events = (function() {
         var statusElement = events.anyEventStatusElement(status);
 
         browser.wait(function() {
+            browser.wait(function() {
+                return statusElement.isPresent();
+            });
+
             pages.base.scrollIntoView(statusElement);
 
             return pph.trim(statusElement.getText()).then(function(text) {
