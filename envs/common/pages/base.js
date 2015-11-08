@@ -203,6 +203,9 @@ module.exports.selectRandomDropdownOption.tg = function (element, more) {
             if (!elementDisplayed) {
                 return;
             }
+
+            pages.base.scrollIntoView(element);
+
             originalOptionText = pages.base.selectedTgDropdownOption(element);
             return (function tryAgain() {
                 var remainingOptions;
@@ -229,6 +232,9 @@ module.exports.selectRandomDropdownOption.tg = function (element, more) {
 					    }
 					    randomOption = _.sample(remainingOptions);
 					    randomOptionText = randomOption.getText();
+
+					    pages.base.scrollIntoView(randomOption);
+
 					    randomOption.click();
 					    return pph.matchesCssSelector(element, ".ng-invalid").then(function (invalidOption) {
 					        if (invalidOption) {
