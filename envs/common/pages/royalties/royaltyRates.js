@@ -720,12 +720,14 @@ if (pages.royaltyRates === undefined) {
             RRDoneButton = element(by.css("button[data-ng-click='CR.onRatesSetDelete(set, activeScope)']"));
             pages.base.scrollIntoView(RRDoneButton);
             RRDoneButton.click();
+
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
             browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
-            pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.delete()']")));
+            //pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.delete()']")));
             browser.actions().mouseMove(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
+            //browser.actions().click(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
             browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.delete()']")).click();
-            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+            //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
         },
 
 

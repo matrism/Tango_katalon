@@ -338,13 +338,13 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINoPss(1);
             steps.editDealScope.selectScopeNumberI(4);
-            steps.editDealScope.checkScopeNumberINoPss(4);
+            steps.editDealScope.checkScopeNumberINameAndPss(4);
             steps.editDealScope.selectScopeNumberI(5);
-            steps.editDealScope.checkScopeNumberINoPss(5);
+            steps.editDealScope.checkScopeNumberINameAndPss(5);
             steps.editDealScope.selectScopeNumberI(6);
-            steps.editDealScope.checkScopeNumberINoPss(6);
+            steps.editDealScope.checkScopeNumberINameAndPss(6);
             steps.editDealScope.selectScopeNumberI(7);
-            steps.editDealScope.checkScopeNumberINoPss(7);
+            steps.editDealScope.checkScopeNumberINameAndPss(7);
             steps.editDealScope.selectScopeNumberI(8);
             steps.editDealScope.checkScopeNumberINameAndPss(8);
             steps.editDealScope.selectScopeNumberI(9);
@@ -466,7 +466,7 @@ exports.feature = [
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.confirmTheChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
