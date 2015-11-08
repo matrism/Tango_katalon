@@ -1,7 +1,8 @@
 'use strict';
 
 var pph = require('../../../../helpers/pph'),
-    methodSpecifierCall = require('../../../../helpers/methodSpecifierCall');
+    methodSpecifierCall = require('../../../../helpers/methodSpecifierCall'),
+    ExpectedConditions = protractor.ExpectedConditions;
 
 pages.workRegistrationActivity = exports;
 
@@ -79,7 +80,11 @@ exports.activityGroup = (function() {
 
         pages.base.scrollIntoView(target.container);
 
-        return target.container.click();
+        target.container.click();
+
+        return browser.wait(ExpectedConditions.visibilityOfAny(
+            activityGroup.events.container()
+        ));
     };
 
     return activityGroup;
