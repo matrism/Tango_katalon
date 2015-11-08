@@ -224,6 +224,7 @@ exports.addAdminFeeToContractualField = function (percentage) {
 exports.clickOnReceiptApplicationMethod = function () {
     it("Change Rate Application Method to On Receipt", function () {
         pages.royaltyRates.clickButtonOnReceiptApplicationMethod();
+        pages.royaltyRates.waitForAjax();
     });
 };
 
@@ -238,7 +239,7 @@ exports.rejectChangingRateApplicationMethod = function () {
     });
 };
 
-exports.confirmChangingRateApplicationMethod = function () {
+exports.confirmTheChangingRateApplicationMethod = function () {
     it("Confirm Changing the Rate Application Method to On Receipt", function () {
         pages.royaltyRates.clickYesOnRateMethodModal();
         pages.royaltyRates.waitForAjax();
@@ -620,6 +621,8 @@ exports.editSingleRoyaltySet = function () {
 
         browser.actions().mouseMove(el).perform();
         pages.editRoyaltyRates.clickEditSavedRRIcon();
+
+        pages.editRoyaltyRates.waitForAjax();
         //
         //
         //  steps.editRoyaltyRates.openRateSetPanel()

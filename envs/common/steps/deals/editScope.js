@@ -19,6 +19,13 @@ exports.selectScopeNumberI = function (i) {
     });
 };
 
+exports.editSelectScopeNumberI = function (i) {
+    it("Edit select scope number  " + i, function () {
+        pages.editDealScope.editClickOnScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
 exports.checkOverrideTitleAndNumber = function (i) {
     it("Check overrider title and numbers of overrides added " + i, function () {
         pages.editDealScope.checkOverrideNumbersAddedOnScope(i);
@@ -680,7 +687,7 @@ exports.editClickOnAddAnotherSubPublisherOverridePss = function () {
 exports.clickOnAddSocietyAgreementNumbersLink = function () {
     it("Edit click on the add society agreement numbers link ", function () {
         pages.editDealScope.clickOnTheAddSocietyAgreementNumbersLink();
-        pages.editDealScop.waitForAjax();
+        pages.editDealScope.waitForAjax();
     });
 };
 

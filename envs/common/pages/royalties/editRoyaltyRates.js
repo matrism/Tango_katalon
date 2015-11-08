@@ -7,23 +7,23 @@ if (pages.editRoyaltyRates === undefined) {
     pages.editRoyaltyRates = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
-            newRoyaltyRate: { css: ".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a" },
-            newRoyaltyRateSetButton: { css: ".ng-scope.ng-warn.ng-dirty>div>a" },
-            closeRateSetButton: { css: ".rate-set-footer>.btn-cancel" },
-            confirmCancelButton: { css: ".modal-footer>.btn-primary" },
-            RRNameLabel: { css: ".rate-set-entity-name>div>label" },
-            incomeProvidesLabel: { css: ".flex1>label" },
-            incomeProviderInput: { css: ".ux-multiselect-type" },
-            incomeDateMethodLabel: { css: ".flex1>div:nth-child(2)>div:not([class])>label" },
-            effectiveStartDateLabel: { css: ".rate-set-calendar>label" },
-            contractualRateLabel: { css: ".rate-set-rate-field>label" },
-            interCompanyLabel: { css: ".rate-set-header-row:nth-child(3)>div:not([class])>label" },
-            scopeHeadingElement: { css: ".scope-heading" }
+            newRoyaltyRate: {css: ".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"},
+            newRoyaltyRateSetButton: {css: ".ng-scope.ng-warn.ng-dirty>div>a"},
+            closeRateSetButton: {css: ".rate-set-footer>.btn-cancel"},
+            confirmCancelButton: {css: ".modal-footer>.btn-primary"},
+            RRNameLabel: {css: ".rate-set-entity-name>div>label"},
+            incomeProvidesLabel: {css: ".flex1>label"},
+            incomeProviderInput: {css: ".ux-multiselect-type"},
+            incomeDateMethodLabel: {css: ".flex1>div:nth-child(2)>div:not([class])>label"},
+            effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
+            contractualRateLabel: {css: ".rate-set-rate-field>label"},
+            interCompanyLabel: {css: ".rate-set-header-row:nth-child(3)>div:not([class])>label"},
+            scopeHeadingElement: {css: ".scope-heading"}
         },
 
         openRRButton: function () {
-            //return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) a i.icon.icon-chevron-down"));
-            return $(".icon-chevron-down");
+            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) a i.icon.icon-chevron-down"));
+            //return $(".icon-chevron-down");
         },
 
         rrSumarryTable: function () {
@@ -103,11 +103,11 @@ if (pages.editRoyaltyRates === undefined) {
                 .then(function findMatchingOption(options) {
                     options.some(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                            if (text.indexOf(sentKeys) != -1) {
-                                desiredOption = option;
-                                return true;
+                                if (text.indexOf(sentKeys) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
                             }
-                        }
                         )
                     });
                 })
@@ -297,54 +297,6 @@ if (pages.editRoyaltyRates === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(this.openRRButton()));
 
             this.openRRButton().click();
-
-            ///  WebElement elementToClick = driver.findElement(By.xpath("Your xpath"));
-            //  var elementToClick =  this.openRRButton();
-            //  elementToClick.getLocation().then(function (navLocation) {
-            //     var initTop = navLocation.y;
-            //     var  initLeft = navLocation.x;
-            //      console.log(initLeft);
-            //      console.log(initTop);
-            //          browser.executeScript('window.scrollTo(' + navLocation.x + ',' + navLocation.y + ');').then(function () {
-            // browser.actions().mouseMove($('.icon-chevron-down').find()).perform().click();
-            //browser.actions().click(this.openRRButton()).perform();
-            // browser.pause();
-            // this.openRRButton().getLocation().then(function (navLocation) {
-            //          var initTop = navLocation.y;
-            //          var  initLeft = navLocation.x;
-            //           console.log(initLeft);
-            //           console.log(initTop);
-            // });
-            // browser.actions().click({x:0,y:3},this.openRRButton()).perform();
-
-            //browser.actions().mouseMove({x: 0, y: 5},this.openRRButton()).click().perform();
-            //browser.pause();
-
-            //  browser.action().mouseMove($('.icon-chevron-down').find()).perform().click();
-            //                  .click()
-            //                  .perform();
-            //          })
-            //          ;
-            //
-            //
-            //
-            //
-            //  });
-            // this.openRRButton().click();
-            //var canvas = element(by.id("canvas"));
-            //
-            //elementToClick = function (toRight, toBottom) {
-            //    browser.actions()
-            //        .mouseMove(elementToClick, {x: toRight, y: toBottom})
-            //        .click()
-            //        .perform();
-            //};
-
-
-            //  ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
-            //   browser.executeScript("window.scrollTo(0,"+elementToClick.getLocation().y+")");
-
-            // elementToClick.click();
         },
 
         clickEditSavedRRIcon: function () {

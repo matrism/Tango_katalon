@@ -158,7 +158,8 @@ if (pages.royaltyRates === undefined) {
         },
 
         effectiveStartDateInput: function () {
-            return element.all(by.css(".rate-set-calendar>div>.date-picker-input")).last();
+            //return element.all(by.css(".rate-set-calendar>div>.date-picker-input")).last();
+            return element(by.css("div.rate-set-calendar div[name='effectiveDate'] input.date-picker-input"));
         },
 
         newRoyaltyRateSetButton: function () {
@@ -704,8 +705,9 @@ if (pages.royaltyRates === undefined) {
 
         clickYesOnRateMethodModal: function () {
             var rateMethodModalYesButton;
-            browser.wait(ExpectedConditions.elementToBeClickable(element(by.css(".modal-footer>.btn.btn-primary"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css(".modal-footer>.btn.btn-primary"))));
             rateMethodModalYesButton = element(by.css(".modal-footer>.btn.btn-primary"));
+            pages.base.scrollIntoView(rateMethodModalYesButton);
             rateMethodModalYesButton.click();
         },
 
@@ -721,6 +723,7 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
             browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
             pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.delete()']")));
+            browser.actions().mouseMove(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
             browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.delete()']")).click();
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
         },
