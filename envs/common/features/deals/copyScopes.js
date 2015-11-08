@@ -207,7 +207,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.editSelectScopeNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.itEditAddPublisherShare();
             steps.editDealScope.editSaveThePublisherShareSet();
 
@@ -377,15 +377,16 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.editSelectScopeNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.itEditAddPublisherShare();
             steps.editDealScope.editSaveThePublisherShareSet();
 
+            steps.editDealScope.selectScopeNumberI(1);
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.royaltyRates.confirmTheChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
@@ -427,7 +428,7 @@ exports.feature = [
             steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             steps.editDealScope.editFillInNumberOfCopiesForScope(1, 1);
             steps.editDealScope.checkPayeesPresentInCopyScopeModal();
-            steps.editDealScope.editSelectScopeNumberI(2);
+            steps.editDealScope.selectScopeNumberI(2);
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
@@ -457,7 +458,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.editSelectScopeNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.itEditAddPublisherShare();
             steps.editDealScope.editSaveThePublisherShareSet();
 
