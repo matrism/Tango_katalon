@@ -77,9 +77,13 @@ exports.clickScopeDeliveryCheckbox = function(contributionIndex, scopeIndex) {
 
     pages.base.scrollIntoView(element);
 
+    pages.base.waitForAjax();
+
     browser.wait(ExpectedConditions.elementToBeClickable(element));
 
-    return element.click();
+    return element.click().then(function() {
+        pages.base.waitForAjax();
+    });
 };
 
 exports.modularEditContainer = function() {
