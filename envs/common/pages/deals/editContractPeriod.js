@@ -79,13 +79,15 @@ if (pages.editDealContractPeriod === undefined) {
             browser.actions().mouseMove(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")"))).perform();
             browser.actions().mouseMove(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope"))).perform();
             //browser.actions().click(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")"))).perform();
-            browser.driver.findElement(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope")).click();
+            browser.actions().click(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope"))).perform();
+            //browser.driver.findElement(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope")).click();
         },
 
         confirmDeleteContractPeriodModalDialog: function () {
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog);
-            pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog.click();
-            pages.editDealContractPeriod.waitForAjax();
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
+            browser.actions().click(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
+            //pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog.click();
           },
 
         validateTheFirstIncompleteMdrcTitle: function () {

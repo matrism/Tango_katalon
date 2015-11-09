@@ -19,12 +19,13 @@ exports.selectScopeNumberI = function (i) {
     });
 };
 
-//exports.editSelectScopeNumberI = function (i) {
-//    it("Edit select scope number  " + i, function () {
-//        pages.editDealScope.editClickOnScopeNumberI(i);
-//        pages.editDealScope.waitForAjax();
-//    });
-//};
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+        pages.editDealScope.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+    });
+};
 
 exports.checkOverrideTitleAndNumber = function (i) {
     it("Check overrider title and numbers of overrides added " + i, function () {

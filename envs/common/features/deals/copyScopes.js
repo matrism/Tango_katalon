@@ -9,7 +9,7 @@ exports.commonFeatureTags = ['deals', 'copyScopes', 'regression'];
 exports.feature = [
     {
         name: "Check copy scopes not available in create mode",
-        tags: ["check_copy"],
+        tags: ["copy_shares"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -107,7 +107,7 @@ exports.feature = [
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmTheChangingRateApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
@@ -148,6 +148,7 @@ exports.feature = [
             steps.royaltyRates.saveRRData();
             steps.royaltyRates.saveRateSet();
 
+            steps.editDealScope.refreshThePage();
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkTheScopeRateSetDateValue("2016-08-09");
 
@@ -195,7 +196,7 @@ exports.feature = [
     },
     {
         name: "Check copy scopes not available in create mode",
-        tags: ["noShares"],
+        tags: ["copy_unshares"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -276,7 +277,7 @@ exports.feature = [
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmTheChangingRateApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
@@ -324,8 +325,10 @@ exports.feature = [
             steps.royaltyRates.saveRRData();
             steps.royaltyRates.saveRateSet();
 
+            steps.editDealScope.refreshThePage();
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkTheScopeRateSetDateValue("2016-08-09");
+
             steps.editDealScope.selectScopeNumberI(8);
             steps.editDealScope.checkTheScopeRateSetDateValueNotEqual("2016-08-09");
             steps.editDealScope.selectScopeNumberI(9);
@@ -365,7 +368,7 @@ exports.feature = [
     },
         {
         name: "Check copy scope for payees with shares pusblishers and rates",
-        tags: ["copyPayees"],
+        tags: ["copy_payees"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -386,13 +389,13 @@ exports.feature = [
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmTheChangingRateApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
             steps.editDealPayee.clickOnPayeesHeader();
             steps.editDealPayee.editPayeeArea();
-            steps.editDealPayee.itEditAddPayeePersonAndAssociateScope("payee");
+            steps.editDealPayee.itEditAddPayeePersonAndAssociateScope("payee", 1);
             steps.editDealPayee.editSavePayeePage();
 
             steps.deal.goToTermsDealTabDetails();
@@ -446,7 +449,7 @@ exports.feature = [
 
     {
         name: "Check copy scope performance test with pss and rates",
-        tags: ["copyPerformance"],
+        tags: ["copy_performance"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -466,7 +469,7 @@ exports.feature = [
             steps.royaltyRates.addIncomeProviderByPartialMatch("ASCAP");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
-            steps.royaltyRates.confirmTheChangingRateApplicationMethod();
+            steps.royaltyRates.confirmChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 

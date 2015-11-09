@@ -22,6 +22,7 @@ exports.deleteContractPeriodNumberI = function (i) {
         pages.editDealContractPeriod.clickOnTheDeleteContractPeriodNumberI(i);
         pages.editDealContractPeriod.waitForAjax();
         pages.editDealContractPeriod.confirmDeleteContractPeriodModalDialog();
+        pages.editDealContractPeriod.waitForAjax();
     });
 };
 

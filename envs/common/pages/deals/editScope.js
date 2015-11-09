@@ -154,14 +154,6 @@ if (pages.editDealScope === undefined) {
             browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
         },
 
-        //editClickOnScopeNumberI: function (i) {
-        //    pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
-        //    //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
-        //    browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
-        //    //browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).click();
-        //    browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
-        //},
-
         checkOverrideNumbersAddedOnScope: function (i) {
             pages.base.scrollIntoView(element(by.css("div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] div.pull-left.ng-binding")));
             browser.driver.findElement(by.css("div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] div.pull-left.ng-binding")).getText().

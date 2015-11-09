@@ -103,13 +103,13 @@ exports.itEditAddPayeeOrganisationAndAssociateScope = function (payee_name) {
     });
 };
 
-exports.itEditAddPayeePersonAndAssociateScope = function (payee_name) {
+exports.itEditAddPayeePersonAndAssociateScope = function (payee_name,i) {
     describe("Edit add payee as person and associate random scope ", function () {
         steps.editDealPayee.editSelectRandomPayeePersonFromDropDown(payee_name);
         steps.base.scrollIntoView("Company", pages.editDealPayee.elems.editPayeeCompanyNameCodeInputField);
         steps.editDealPayee.editSelectRandomValueForPayeeCompanyNameCode();
         steps.base.scrollIntoView("Scope", pages.editDealPayee.elems.editScopePayeeInputField);
-        steps.editDealPayee.editAssociateSpecificScopeNumberIToPayee(1);
+        steps.editDealPayee.editAssociateSpecificScopeNumberIToPayee(i);
         steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
         steps.editDealPayee.editFillIntoPayeeDistributionInputField();
         steps.editDealPayee.editSavePayeeForm();

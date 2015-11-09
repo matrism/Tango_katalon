@@ -239,7 +239,7 @@ exports.rejectChangingRateApplicationMethod = function () {
     });
 };
 
-exports.confirmTheChangingRateApplicationMethod = function () {
+exports.confirmChangingRateApplicationMethod = function () {
     it("Confirm Changing the Rate Application Method to On Receipt", function () {
         pages.royaltyRates.clickYesOnRateMethodModal();
         pages.royaltyRates.waitForAjax();
