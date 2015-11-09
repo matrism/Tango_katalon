@@ -2,6 +2,7 @@
 
 var pph = require('../../../../helpers/pph'),
     callResultOrValue = require('../../../../helpers/callResultOrValue'),
+    methodSpecifierCall = require('../../../../helpers/methodSpecifierCall'), 
     ExpectedConditions = protractor.ExpectedConditions;
 
 pages.workRegistrationActivity = exports;
