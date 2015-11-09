@@ -703,20 +703,24 @@ module.exports.selectRandomMusicArrangement = function() {
 	return deferred.promise;
 };
 module.exports.selectRandomIntendedPurpose = function() {
-	var deferred = promise.defer();
-	it("Select a random music arrangement (if displayed)", function() {
-		pages.newWork.isIntendedPurposeFieldDisplayed().then(function(isDisplayed) {
-			if(!isDisplayed) {
-				deferred.fulfill(null);
-				return;
-			}
-			deferred.fulfill(pages.base.selectRandomDropdownOption(
-				pages.newWork.intendedPurposeDropdown(),
-				{ dropdownType: "tg" }
-			));
-		});
-	});
-	return deferred.promise;
+    var deferred = promise.defer();
+
+    it("Select a random intended purpose (if displayed)", function() {
+        setTimeout(function () {
+            deferred.fulfill(true)
+        }, _tf_config._system_.wait_timeout);
+        pages.newWork.isIntendedPurposeFieldDisplayed().then(function(isDisplayed) {
+            if(!isDisplayed) {
+                deferred.fulfill(null);
+                return;
+            }
+            deferred.fulfill(pages.base.selectRandomDropdownOption(
+                pages.newWork.intendedPurposeDropdown(),
+                { dropdownType: "tg" }
+            ));
+        });
+    });
+    return deferred.promise;
 };
 exports.selectIntendedPurpose = function(value) {
     it('Select Intended Purpose (' + value + ')', function() {
