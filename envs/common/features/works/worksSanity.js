@@ -1211,52 +1211,52 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
 
-            steps.create_deal_general.goToNewDealPage();
+            steps.createDealGeneral.goToNewDealPage();
 
-            steps.create_deal_general.selectDesiredSigningTerritory('Argentina');
+            steps.createDealGeneral.selectDesiredSigningTerritory('Argentina');
 
-            steps.create_deal_general.enterContractingPartySearchTerms('ASCAP');
+            steps.createDealGeneral.enterContractingPartySearchTerms('ASCAP');
 
-            steps.create_deal_general.selectContractingPartySearchResultByIndex(0);
+            steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
 
             steps.deal.itContinueToNextPage();
 
-            steps.create_deal_contract_period.enterActualStartDate(
+            steps.createDealContractPeriod.enterActualStartDate(
                 moment().format('YYYY-MM-DD')
             );
 
-            steps.create_deal_contract_period.enterTargetEndDateInMonths(12);
+            steps.createDealContractPeriod.enterTargetEndDateInMonths(12);
 
             _.times(2, function () {
-                steps.create_deal_scope.openNewScopeForm();
+                steps.createDealScope.openNewScopeForm();
 
-                steps.create_deal_scope.selectContractType('Administration');
+                steps.createDealScope.selectContractType('Administration');
 
-                steps.create_deal_scope.enterTerritoryOfControlSearchTerms(
+                steps.createDealScope.enterTerritoryOfControlSearchTerms(
                     'Brazil'
                 );
 
-                steps.create_deal_scope.selectTerritoryOfControlSearchResultByIndex(0);
+                steps.createDealScope.selectTerritoryOfControlSearchResultByIndex(0);
 
-                steps.create_deal_scope.clickOnAddPublisherShareSet({
+                steps.createDealScope.clickOnAddPublisherShareSet({
                     scrollIntoView: true,
                 });
 
-                steps.create_deal_scope.enterPublisherSearchTerms(
+                steps.createDealScope.enterPublisherSearchTerms(
                     0, 0, 'WCM Publisher 1'
                 );
 
-                steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
+                steps.createDealScope.selectPublisherSearchResultByIndex(0);
 
-                steps.create_deal_scope.enterOwnPublisherShare(0, 0, 100);
+                steps.createDealScope.enterOwnPublisherShare(0, 0, 100);
 
-                steps.create_deal_scope.enterPublisherSearchTerms(
+                steps.createDealScope.enterPublisherSearchTerms(
                     0, 1, 'WB MUSIC CORP.'
                 );
 
-                steps.create_deal_scope.selectPublisherSearchResultByIndex(0);
+                steps.createDealScope.selectPublisherSearchResultByIndex(0);
 
-                steps.create_deal_scope.enterCollectPublisherShare(0, 1, 100);
+                steps.createDealScope.enterCollectPublisherShare(0, 1, 100);
             });
 
             steps.deal.itContinueToNextPage();

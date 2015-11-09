@@ -11,6 +11,7 @@ if (pages.createDealScope === undefined) {
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
             territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
             territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            territoryActivator: {css: 'div[ng-model="modularEditModels.model.deal_scope_territories.territories"] .tg-typeahead__tags-text'},
             territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             addPublisherShareSetLink: {css: "div.publisher-share-totals a[data-ng-click='addChain(modularEditModels.model.id, form.terms.activeScope.id);']"},
             firstPublisherNameField: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input[ng-model='$term']"},
@@ -115,12 +116,12 @@ if (pages.createDealScope === undefined) {
         },
 
         enterTerritoryOfControlSearchTerms: function (value) {
-            var field = pages.createDealScope.elems.territoryField;
+            var activator = pages.createDealScope.elems.territoryActivator;
             var input = pages.createDealScope.elems.territoryInput;
 
-            pages.base.scrollIntoView(field);
+            pages.base.scrollIntoView(activator);
 
-            field.click();
+            activator.click();
 
             browser.wait(ExpectedConditions.visibilityOf(input));
 

@@ -12,23 +12,23 @@ if (pages.finderDeal === undefined) {
             termsByContractPeriodFinderDealTitle: {css: "div[data-ng-form='enclosingCpFinderDealForm'] a.accordion-toggle.ng-binding span"},
             generalTermsAreaFinderDeal: {css: "div[data-ng-class='{ active : form.show.finderDeal.general.edit }']"},
             generalTermsFinderDealEditIcon: {css: "div[data-ng-class='{ active : form.show.finderDeal.general.edit }'] i[data-ng-click='openFinderDealGeneralEdit()']"},
-            yesPriorAwarenessNotification: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.must_notify']:nth-child(1)"},
-            noPriorAwarenessNotification: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.must_notify']:nth-child(2)"},
+            yesPriorAwarenessNotification: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.must_notify']:nth-child(1)"},
+            noPriorAwarenessNotification: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.must_notify']:nth-child(2)"},
             notifyWithinThisNumberOfDays: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] input[name='priorAwareDays']"},
             submissionDecisionWithinNumberOfDays: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] input[name='decisionDays']"},
-            acceptAssumedResponse: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.assumed_response']:nth-child(1)"},
-            declineAssumedResponse: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.assumed_response']:nth-child(2)"},
-            noneAssumedResponse: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.assumed_response']:nth-child(3)"},
-            wcmWhoWillDraftDeals: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.drafts_agreements']:nth-child(1)"},
-            finderWhoWillDraftDeals: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.drafts_agreements']:nth-child(2)"},
-            wcmWhoHasControlToExerciseFutureOptions: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.option']:nth-child(1)"},
-            finderWhoHasControlToExerciseFutureOptions: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.option']:nth-child(2)"},
-            wcmWhoIsResponsibleForAdvances: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.resp_for_advances']:nth-child(1)"},
-            finderWhoIsResponsibleForAdvances: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.resp_for_advances']:nth-child(2)"},
+            acceptAssumedResponse: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.assumed_response']:nth-child(1)"},
+            declineAssumedResponse: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.assumed_response']:nth-child(2)"},
+            noneAssumedResponse: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.assumed_response']:nth-child(3)"},
+            wcmWhoWillDraftDeals: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.drafts_agreements']:nth-child(1)"},
+            finderWhoWillDraftDeals: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.drafts_agreements']:nth-child(2)"},
+            wcmWhoHasControlToExerciseFutureOptions: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.option']:nth-child(1)"},
+            finderWhoHasControlToExerciseFutureOptions: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.option']:nth-child(2)"},
+            wcmWhoIsResponsibleForAdvances: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.resp_for_advances']:nth-child(1)"},
+            finderWhoIsResponsibleForAdvances: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.resp_for_advances']:nth-child(2)"},
             finderRightToPursue: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] div.tg-dropdown-button"},
             finderRightToPursueDropDown: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] ul.dropdown-menu li.ng-scope"},
-            yesWcmRightToPursue: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.WCM_right_to_pursue']:nth-child(1)"},
-            noWcmRightToPursue: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finderDeal_properties.WCM_right_to_pursue']:nth-child(2)"},
+            yesWcmRightToPursue: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.WCM_right_to_pursue']:nth-child(1)"},
+            noWcmRightToPursue: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-model='form.deal.finder_deal_properties.WCM_right_to_pursue']:nth-child(2)"},
             saveGeneralTermsFinderDeal: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-click='updateDeal(finderDealsForm.$valid, null, form.show.finderDeal.general)']"},
             cancelGeneralTermsFinderDeal: {css: "div[data-ng-show='form.show.finderDeal.general.edit'] button[data-ng-click='cancelFinderDealGeneralEdit()']"},
             //terms by contract period locators
@@ -444,6 +444,7 @@ if (pages.finderDeal === undefined) {
         },
 
         confirmCancelChangesModalDialog: function () {
+            pages.base.waitUntilModalAnimationFinishes();
             browser.wait(ExpectedConditions.visibilityOf(pages.finderDeal.elems.yesCancelChangesModalDialog));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.finderDeal.elems.yesCancelChangesModalDialog));
             pages.finderDeal.elems.yesCancelChangesModalDialog.click();

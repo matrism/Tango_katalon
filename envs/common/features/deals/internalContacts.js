@@ -93,7 +93,7 @@ exports.feature = [
             steps.editDealGeneral.returnAndCheckInternalContactsTitle();
             //add 2 internal contacts
             steps.editDealGeneral.editInternalContactsArea();
-            for (k = 1; k <= 2; k++) {
+            for (var k = 1; k <= 2; k++) {
                 steps.editDealGeneral.itEditAddInternalContactsRowIToDealGeneralTab(k);
             }
             steps.editDealGeneral.itSaveInternalContactsChanges();

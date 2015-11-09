@@ -52,7 +52,9 @@ exports.returnDealNumber = function () {
 
 exports.findId = function () {
     it('Find deal ID', function () {
-        var idBinding = element(By.xpath('//*[@id="RECORD-HEADER"]//div/div/div[6]/div/p[@class="info ng-binding"]'));
+        var idBinding = element(by.binding(
+            ' getPristineDeal().deal_header.contract_brief_number '
+        ));
 
         idBinding.getText().then(function(value) {
             hash.currentEntityDataSlotsByType.deal.id = value;

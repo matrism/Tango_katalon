@@ -2,7 +2,7 @@
 
 var pph = require('../../../../helpers/pph'),
     callResultOrValue = require('../../../../helpers/callResultOrValue'),
-    methodSpecifierCall = require('../../../../helpers/methodSpecifierCall');
+    ExpectedConditions = protractor.ExpectedConditions;
 
 pages.workRegistrationActivity = exports;
 
@@ -88,7 +88,11 @@ exports.activityGroup = (function() {
 
         pages.base.scrollIntoView(target.container);
 
-        return target.container.click();
+        target.container.click();
+
+        return browser.wait(ExpectedConditions.visibilityOfAny(
+            activityGroup.events.container()
+        ));
     };
 
     return activityGroup;
@@ -257,6 +261,10 @@ exports.activityGroup.events = (function() {
         var statusElement = events.anyEventStatusElement(status);
 
         browser.wait(function() {
+            browser.wait(function() {
+                return statusElement.isPresent();
+            });
+
             pages.base.scrollIntoView(statusElement);
 
             return pph.trim(statusElement.getText()).then(function(text) {
