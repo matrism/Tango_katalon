@@ -6,8 +6,6 @@ var JSFtp = require('jsftp'),
 
 pages.ftp = exports;
 
-hash.currentAckFile = null;
-
 exports.uploadAckFile = function() {
 
     var ftp,
@@ -55,7 +53,7 @@ exports.uploadAckFile = function() {
                         if (putError) {
                             console.error(putError);
                         } else {
-                            hash.currentAckFile = ackNewFile;
+                            hash.testVariables['current ACK file name'] = ackNewFile;
                             deferred.fulfill(ackNewFile);
                         }
                     });

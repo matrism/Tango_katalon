@@ -1,6 +1,7 @@
 'use strict';
 
 var pph = require('../../../../helpers/pph'),
+    callResultOrValue = require('../../../../helpers/callResultOrValue'),
     methodSpecifierCall = require('../../../../helpers/methodSpecifierCall');
 
 pages.workRegistrationActivity = exports;
@@ -132,10 +133,11 @@ exports.activityGroup.events = (function() {
         );
     };
 
-    events.container.firstWithAckFileName = function() {
+    events.container.firstWithFileName = function(name) {
+        name = callResultOrValue(name);
         return events.containerOfDetails(
             element.all(by.cssContainingText(
-                '[data-ng-repeat-start="activity in activitiesGroup.activities"]+tr', hash.currentAckFile
+                '[data-ng-repeat-start="activity in activitiesGroup.activities"]+tr', name
             )).first()
         );
     };

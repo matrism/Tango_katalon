@@ -1,7 +1,8 @@
-"use strict";
+'use strict';
 
 var fnutils = require('../../../../helpers/fnutils'),
-    using = fnutils.using;
+    using = fnutils.using,
+    fromTestVariable = require('../../../../helpers/fromTestVariable');
 
 exports.commonFeatureTags = ['sanity', 'acknowledgements', 'cr', 'copyrightRegistration'];
 
@@ -44,7 +45,6 @@ exports.feature = [
         name: 'Load Ack File',
         tags: [],
         steps: function () {
-
             steps.searchSection.selectEntityType('Organisations');
             steps.searchSection.accessSavedOrganisationByName(data.org);
             steps.organisation.goToRegistrationActivityTab();
@@ -55,7 +55,7 @@ exports.feature = [
                 this.unmaskPassword();
                 this.getFtpOptions();
                 steps.ftp.uploadAckFile();
-                this.enterFileName();
+                this.enterFileName(fromTestVariable('current ACK file name'));
                 this.submitLoadAck();
                 this.waitUntilEventStatusBecomes(data.event.status);
                 this.validateTotalAccepted(data.event.totalAccepted);
@@ -79,7 +79,6 @@ exports.feature = [
         name: 'Validate Work Registration Activity',
         tags: [],
         steps: function () {
-
             steps.work.goToWorkPageById(data.workEvent.workId);
             steps.work.goToRegistrationActivityTab();
 
@@ -88,7 +87,7 @@ exports.feature = [
                 this.toggleBlind();
 
                 using(this.events, function() {
-                    this.find({ firstWithAckFileName: 'stored-file' });
+                    this.find({ firstWithFileName: fromTestVariable('current ACK file name') });
                     this.toggleBlind();
                     this.validateStatus(data.workEvent.status);
                     this.validateAckCreationDate(data.event.creationDate);
