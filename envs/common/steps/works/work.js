@@ -122,6 +122,7 @@ module.exports.enterNewRandomAlternateWorkTitle = function () {
     return deferred.promise;
 };
 module.exports.waitTitleEditorCheckForDuplicates = function () {
+    steps.base.sleep(100);
     it("Wait title editor check for duplicates", function () {
         browser.wait(
             function () {
