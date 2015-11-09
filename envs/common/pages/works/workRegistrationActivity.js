@@ -1,7 +1,9 @@
 'use strict';
 
 var pph = require('../../../../helpers/pph'),
-    methodSpecifierCall = require('../../../../helpers/methodSpecifierCall');
+    callResultOrValue = require('../../../../helpers/callResultOrValue'),
+    methodSpecifierCall = require('../../../../helpers/methodSpecifierCall'), 
+    ExpectedConditions = protractor.ExpectedConditions;
 
 pages.workRegistrationActivity = exports;
 
@@ -24,6 +26,14 @@ exports.activityGroup = (function() {
 
     activityGroup.container.first = function() {
         return activityGroup.container().first();
+    };
+
+    activityGroup.container.firstWithRecipientName = function(name) {
+        return element.all(
+            by.cssContainingText(
+                '[data-ng-repeat="activitiesGroup in dataHolder.groupedActivities"]', name
+            )
+         ).first();
     };
 
     activityGroup.find = function(methodSpecifier, targetGroupName) {
@@ -79,7 +89,11 @@ exports.activityGroup = (function() {
 
         pages.base.scrollIntoView(target.container);
 
-        return target.container.click();
+        target.container.click();
+
+        return browser.wait(ExpectedConditions.visibilityOfAny(
+            activityGroup.events.container()
+        ));
     };
 
     return activityGroup;
@@ -124,6 +138,19 @@ exports.activityGroup.events = (function() {
         );
     };
 
+    events.container.firstWithFileName = function(name) {
+        name = callResultOrValue(name);
+        return events.containerOfDetails(
+            element.all(by.cssContainingText(
+                '[data-ng-repeat-start="activity in activitiesGroup.activities"]+tr', name
+            )).first()
+        );
+    };
+
+    events.containerOfDetails  = function(detailsElement) {
+        return detailsElement.element(by.xpath('preceding-sibling::tr[1]'));
+    }
+
     events.detailsContainerOf = function(primaryContainer) {
         return primaryContainer.element(by.xpath('following-sibling::tr[1]'));
     };
@@ -159,6 +186,72 @@ exports.activityGroup.events = (function() {
         expect(statusElement.isDisplayed()).toBeTruthy();
     };
 
+    events.getAckCreationDate = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('activity.created_date | tgIsoDate')
+        ).getText();
+    };
+
+    events.getInitiatedBy = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('activity.initiated_by')
+        ).getText();
+    };
+
+    events.getMessage = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::message.message_text')
+        ).getText();
+    };
+
+    events.getRecordType = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::message.record_type')
+        ).getText();
+    };
+
+    events.getMessageLevel = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::getMessageLevelLabel(message.message_level)')
+        ).getText();
+    };
+
+    events.getValidationNumber = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('::message.validation_number')
+        ).getText();
+    };
+
+    events.validateAckCreationDate = function(date) {
+        expect(events.getAckCreationDate()).toBe(date);
+    };
+
+    events.validateInitiatedBy = function(value) {
+        expect(events.getInitiatedBy()).not.toBe(null);
+    };
+
+    events.validateMessage = function(value) {
+        expect(events.getMessage()).toBe(value);
+    };
+
+    events.validateRecordType = function(value) {
+        expect(events.getRecordType()).toBe(value);
+    };
+
+    events.validateMessageLevel = function(value) {
+        expect(events.getMessageLevel()).toBe(value);
+    };
+
+    events.validateValidationNumber = function(value) {
+        expect(events.getValidationNumber()).toBe(value);
+    };
+
     events.anyEventStatusElement = function(status) {
         var target = exports.activityGroup.targets.latest;
 
@@ -169,6 +262,10 @@ exports.activityGroup.events = (function() {
         var statusElement = events.anyEventStatusElement(status);
 
         browser.wait(function() {
+            browser.wait(function() {
+                return statusElement.isPresent();
+            });
+
             pages.base.scrollIntoView(statusElement);
 
             return pph.trim(statusElement.getText()).then(function(text) {
@@ -186,7 +283,9 @@ exports.activityGroup.events = (function() {
     };
 
     events.toggleBlind = function() {
-        return events.targets.latest.container.click();
+        var element = events.targets.latest.container;
+        pages.base.scrollIntoView(element);
+        return element.click();
     };
 
     events.fileNameElement = function() {

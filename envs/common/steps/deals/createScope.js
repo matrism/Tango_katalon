@@ -148,9 +148,9 @@ exports.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed = function 
     });
 };
 
-exports.clickOnAddPublisherShareSet = function () {
+exports.clickOnAddPublisherShareSet = function (options) {
     it("Open publisher share set form", function () {
-        pages.createDealScope.clickOnAddPublisherShareSetLink();
+        pages.createDealScope.clickOnAddPublisherShareSetLink(options);
         pages.createDealScope.waitForAjax();
     });
 };

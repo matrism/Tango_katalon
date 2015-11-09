@@ -9,11 +9,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 var config = require('../../../configs/protractor-conf');
 var methodSpecifierCall = require('../../../helpers/methodSpecifierCall');
 
-exports = module.exports = pages.base = new ftf.pageObject({
-    locators: {
-        logout_link: { id: "DSP-LOGOUT" }
-    }
-});
+exports = module.exports = pages.base = new ftf.pageObject();
 
 exports.open = function () {
     browser.get(_tf_config.urls.app_url);
@@ -128,71 +124,71 @@ module.exports.selectRandomDropdownOption = function (element, more) {
 module.exports.selectRandomDropdownOption.standard = function (element, more) {
     more = more || {};
     return (
-		element.isPresent().then(
-			function (elementPresent) {
-			    expect(elementPresent || more.skipIfNotPresent).toBeTruthy();
-			    if (elementPresent) {
-			        return promise.all([
-						element,
-						element.isDisplayed(),
-						pph.matchesCssSelector(element, "[required]"),
-			        ]);
-			    }
-			}
-		)
-		.then(
-			function (values) {
-			    var element;
-			    var elementDisplayed;
-			    var valueRequired;
-			    var options;
-			    var previousOptions;
-			    if (values === undefined) {
-			        return;
-			    }
-			    element = values[0];
-			    elementDisplayed = values[1];
-			    valueRequired = values[2];
-			    if (!elementDisplayed && more.skipIfNotDisplayed) {
-			        return null;
-			    }
-			    options = element.$$("option");
-			    if (valueRequired) {
-			        options = options.filter(
-						function (option) {
-						    return option.getAttribute("value").then(
-								function (value) {
-								    return value !== "";
-								}
-							);
-						}
-					);
-			    }
-			    if (more.different) {
-			        previousOptions = options;
-			        options = options.count().then(
-						function (optionCount) {
-						    if (optionCount < 2) {
-						        return options;
-						    }
-						    return previousOptions.filter(
-								function (option) {
-								    return pph.matchesCssSelector(option, ":not(:checked)");
-								}
-							);
-						}
-					);
-			    }
-			    return options.then(
-					function (options) {
+        element.isPresent().then(
+            function (elementPresent) {
+                expect(elementPresent || more.skipIfNotPresent).toBeTruthy();
+                if (elementPresent) {
+                    return promise.all([
+                        element,
+                        element.isDisplayed(),
+                        pph.matchesCssSelector(element, "[required]"),
+                    ]);
+                }
+            }
+        )
+        .then(
+            function (values) {
+                var element;
+                var elementDisplayed;
+                var valueRequired;
+                var options;
+                var previousOptions;
+                if (values === undefined) {
+                    return;
+                }
+                element = values[0];
+                elementDisplayed = values[1];
+                valueRequired = values[2];
+                if (!elementDisplayed && more.skipIfNotDisplayed) {
+                    return null;
+                }
+                options = element.$$("option");
+                if (valueRequired) {
+                    options = options.filter(
+                        function (option) {
+                            return option.getAttribute("value").then(
+                                function (value) {
+                                    return value !== "";
+                                }
+                            );
+                        }
+                    );
+                }
+                if (more.different) {
+                    previousOptions = options;
+                    options = options.count().then(
+                        function (optionCount) {
+                            if (optionCount < 2) {
+                                return options;
+                            }
+                            return previousOptions.filter(
+                                function (option) {
+                                    return pph.matchesCssSelector(option, ":not(:checked)");
+                                }
+                            );
+                        }
+                    );
+                }
+                return options.then(
+                    function (options) {
                         pages.base.scrollIntoView(element);
-					    element.click();
-					    return _.sample(options).click().getText();
-					}
-				);
-			}
-		)
-	);
+                        element.click();
+                        return _.sample(options).click().getText();
+                    }
+                );
+            }
+        )
+    );
 };
 module.exports.selectRandomDropdownOption.tg = function (element, more) {
     more = more || {};
@@ -208,6 +204,9 @@ module.exports.selectRandomDropdownOption.tg = function (element, more) {
             if (!elementDisplayed) {
                 return;
             }
+
+            pages.base.scrollIntoView(element);
+
             originalOptionText = pages.base.selectedTgDropdownOption(element);
             return (function tryAgain() {
                 var remainingOptions;
@@ -215,38 +214,41 @@ module.exports.selectRandomDropdownOption.tg = function (element, more) {
                     element.click();
                 }, element.$('.tg-dropdown-label').getWebElement());
                 return $$(".tg-dropdown-menu li .ng-binding")
-					.filter(function (option) {
-					    var optionText = option.getText();
-					    return pph.and(
-							pph.areNotEqual(optionText, ""),
-							pph.notInArray(blacklist, optionText),
-							pph.or(!more.different, pph.areNotEqual(optionText, originalOptionText))
-						);
-					})
-					.then(function (remainingOptions) {
-					    var randomOption;
-					    var randomOptionText;
-					    expect(remainingOptions.length).toBeGreaterThan(0);
-					    if (remainingOptions.length === 0) {
-					        console.log("WARNING - TG dropdown options exhausted");
-					        element.element(by.cssContainingText(optionCssSelector, originalOptionText)).click();
-					        return originalOptionText;
-					    }
-					    randomOption = _.sample(remainingOptions);
-					    randomOptionText = randomOption.getText();
-					    randomOption.click();
-					    return pph.matchesCssSelector(element, ".ng-invalid").then(function (invalidOption) {
-					        if (invalidOption) {
-					            console.log("WARNING - Selected an invalid option; will retry");
-					            blacklist.push(randomOptionText);
-					            return tryAgain();
-					        }
-					        else {
-					            expect(pph.or(!more.different, pph.areNotEqual(randomOptionText, originalOptionText))).toBeTruthy();
-					            return randomOptionText;
-					        }
-					    });
-					});
+                    .filter(function (option) {
+                        var optionText = option.getText();
+                        return pph.and(
+                            pph.areNotEqual(optionText, ""),
+                            pph.notInArray(blacklist, optionText),
+                            pph.or(!more.different, pph.areNotEqual(optionText, originalOptionText))
+                        );
+                    })
+                    .then(function (remainingOptions) {
+                        var randomOption;
+                        var randomOptionText;
+                        expect(remainingOptions.length).toBeGreaterThan(0);
+                        if (remainingOptions.length === 0) {
+                            console.log("WARNING - TG dropdown options exhausted");
+                            element.element(by.cssContainingText(optionCssSelector, originalOptionText)).click();
+                            return originalOptionText;
+                        }
+                        randomOption = _.sample(remainingOptions);
+                        randomOptionText = randomOption.getText();
+
+                        pages.base.scrollIntoView(randomOption);
+
+                        randomOption.click();
+                        return pph.matchesCssSelector(element, ".ng-invalid").then(function (invalidOption) {
+                            if (invalidOption) {
+                                console.log("WARNING - Selected an invalid option; will retry");
+                                blacklist.push(randomOptionText);
+                                return tryAgain();
+                            }
+                            else {
+                                expect(pph.or(!more.different, pph.areNotEqual(randomOptionText, originalOptionText))).toBeTruthy();
+                                return randomOptionText;
+                            }
+                        });
+                    });
             })();
         });
     });
@@ -289,8 +291,8 @@ module.exports.selectRandomTypeaheadValue = function (element, more) {
 
                 do {
                     randomLetter = (
-						String.fromCharCode("A".charCodeAt(0) + Math.round(Math.random() * 25))
-					);
+                        String.fromCharCode("A".charCodeAt(0) + Math.round(Math.random() * 25))
+                    );
                 } while (currentValue.indexOf(randomLetter) !== -1);
 
                 element.clear();
@@ -307,44 +309,44 @@ module.exports.selectRandomTypeaheadValue = function (element, more) {
         });
     }
     it(
-		"Wait for suggestions dropdown to appear", function () {
-		    var suggestion = $(".typeahead-result");
-		    browser.wait(
-				ExpectedConditions.visibilityOf(suggestion),
-				_tf_config._system_.wait_timeout
-			);
-		    expect(suggestion.getText()).not.toContain("No results");
-		}
-	);
+        "Wait for suggestions dropdown to appear", function () {
+            var suggestion = $(".typeahead-result");
+            browser.wait(
+                ExpectedConditions.visibilityOf(suggestion),
+                _tf_config._system_.wait_timeout
+            );
+            expect(suggestion.getText()).not.toContain("No results");
+        }
+    );
     it(
-		"Pick a random suggestion", function () {
-		    $$(".typeahead-result").then(
-				function (suggestions) {
-				    var randomSuggestion = _.sample(suggestions);
-				    randomSuggestion.click();
-				    deferred.fulfill(element.getAttribute("value"));
-				}
-			);
-		}
-	);
+        "Pick a random suggestion", function () {
+            $$(".typeahead-result").then(
+                function (suggestions) {
+                    var randomSuggestion = _.sample(suggestions);
+                    randomSuggestion.click();
+                    deferred.fulfill(element.getAttribute("value"));
+                }
+            );
+        }
+    );
     return deferred.promise;
 };
 module.exports.randomTgDropdownSelector = function (element) {
     var deferred = promise.defer();
     var fn = function () {
         it(
-			"Pick a random dropdown option", function () {
-			    pages.base.scrollIntoView(element);
-			    element.click();
-			    element.$$("[tg-component-render-template='$templates.popup.item']").then(
-					function (optionElements) {
-					    var randomOptionElement = _.sample(optionElements);
-					    randomOptionElement.click();
-					    deferred.fulfill(pages.base.selectedTgDropdownOption(element));
-					}
-				);
-			}
-		);
+            "Pick a random dropdown option", function () {
+                pages.base.scrollIntoView(element);
+                element.click();
+                element.$$("[tg-component-render-template='$templates.popup.item']").then(
+                    function (optionElements) {
+                        var randomOptionElement = _.sample(optionElements);
+                        randomOptionElement.click();
+                        deferred.fulfill(pages.base.selectedTgDropdownOption(element));
+                    }
+                );
+            }
+        );
         return deferred.promise;
     };
     fn.then = deferred.promise.then.bind(deferred.promise);
@@ -355,10 +357,10 @@ module.exports.selectedDropdownOption = function (element) {
 };
 module.exports.selectedTgDropdownOption = function (element) {
     return (
-		element
-			.$('[tg-component-render-template="$templates.main.selectedItem"]>span')
-			.getText()
-	);
+        element
+            .$('[tg-component-render-template="$templates.main.selectedItem"]>span')
+            .getText()
+    );
 };
 exports.refreshPage = function () {
     browser.refresh();

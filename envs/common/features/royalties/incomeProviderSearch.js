@@ -2,9 +2,9 @@
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
-    //steps.deal_general.itFillDealMandatoryFieldsGeneralTab();
+    //steps.dealGeneral.itFillDealMandatoryFieldsGeneralTab();
     //steps.deal.itContinueToNextPage();
-    //steps.deal_contract_period.itFillDealMandatoryFieldsContractPeriod();
+    //steps.dealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
 };
 
 exports.commonFeatureTags = ['royalties', 'incomeProvider', 'sanity', 'broken'];

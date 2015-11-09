@@ -68,7 +68,9 @@ exports.createEnteredArtistOption = function() {
 };
 
 exports.createEnteredArtist = function() {
-    return exports.createEnteredArtistOption().click();
+    return exports.createEnteredArtistOption().click().then(function() {
+        pages.base.waitForAjax();
+    });
 };
 
 exports.recordingDurationInput = function(i) {

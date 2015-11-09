@@ -17,7 +17,13 @@ pageStep([
             'Validate status',
             'Wait until any event status becomes',
             'Toggle blind',
-            'Store file name in test variable'
+            'Store file name in test variable',
+            'Validate Ack Creation Date',
+            'Validate InitiatedBy',
+            'Validate Message',
+            'Validate Record Type',
+            'Validate Message Level',
+            'Validate Validation Number'
         ]]
     ]],
 ]);

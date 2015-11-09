@@ -268,7 +268,9 @@ module.exports.includeWorkOnWebsiteButtons = function() {
 	return element.all(by.model("work.include_on_website"));
 };
 module.exports.continueToNextTabButton = function() {
-    return $('.page-footer').element(by.cssContainingText('button', 'Continue'));
+    return $('.page-footer').element(by.cssContainingText(
+        'button:not(.disabled)', 'Continue'
+    ));
 };
 module.exports.saveWorkButton = function() {
 	return $(".page-footer [type='submit']:nth-child(4):not(.disabled)");
