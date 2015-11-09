@@ -200,7 +200,7 @@ exports.feature = [
             more.skip = more.skip || {};
             //more.skip.alternateWorkTitles = true;
             //more.skip.assetType = true;
-            more.skip.workOrigin = true;
+            //more.skip.workOrigin = true;
             //more.skip.creationDate = true;
             //more.skip.deliveryDate = true;
 
@@ -278,7 +278,7 @@ exports.feature = [
             //more.skip.creationDate = true;
             //more.skip.deliveryDate = true;
             //more.skip.assetType = true;
-            more.skip.workOrigin = true;
+            //more.skip.workOrigin = true;
             //more.skip.inclusionOnWebsite = true;
 
             if (!more.skip.navigation) {
@@ -441,20 +441,18 @@ exports.feature = [
                 steps.base.dirtyCheckConfirmCancellation();
                 steps.work.hoverAssetTypeContainer();
                 steps.work.editAssetType();
-                //TODO: Getting timeout here
-                //steps.work.expectMusicalDistributionCategoryNotToBe(
-                //    data.musicalDistributionCategory
-                //);
+                steps.work.expectMusicalDistributionCategoryNotToBe(
+                    data.musicalDistributionCategory
+                );
 
                 data.musicalDistributionCategory = (
                     steps.work.selectDifferentRandomMusicalDistributionCategory()
                 );
                 steps.work.cancelAssetTypeEditing();
                 steps.base.dirtyCheckContinueEditing();
-                //TODO: Getting timeout here
-                //steps.work.expectMusicalDistributionCategoryToBe(
-                //    data.musicalDistributionCategory
-                //);
+                steps.work.expectMusicalDistributionCategoryToBe(
+                    data.musicalDistributionCategory
+                );
 
                 data.textMusicRelationship = (
                     steps.work.selectDifferentRandomTextMusicRelationship()
