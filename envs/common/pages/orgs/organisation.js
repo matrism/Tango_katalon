@@ -381,73 +381,58 @@ if (pages.organisation === undefined) {
                 return pages.base.waitForAjax();
             });
         },
-
         getBackValidationErrors: function () {
             this.backValidationErrors().click();
             pages.base.waitForAjax();
         },
-
         getCriticalErrors: function () {
             return this.listErrorStatus();
         },
-
         getNonCriticalErrors: function () {
             return this.listNonErrorStatus();
         },
-
         getPreviewRegRunWorks: function() {
             return pages.organisation.scrollPageDataRow();
         },
-
         scrollValidationErrorsPage: function() {
             browser.executeScript('window.scrollTo(0,document.body.scrollHeight)').then(function() {
                 return pages.base.waitForAjax();
             });
         },
-
         getValidationErrorsWorks: function() {
             return pages.organisation.scrollPageDataErrors();
         },
-
         listWorkTitleRegRun: function () {
             return this.listWorkTitle();
         },
         listErrorWorkTitleRegRun: function () {
             return this.listErrorWorkTitle();
         },
-
         listWorkCreatorsRegRun: function () {
             return this.listWorkCreators();
         },
-
         listWorkIdNumberRegRun: function () {
             return this.listWorkIdNumber();
         },
-
         listErrorWorkIdNumberRegRun: function () {
             return this.listErrorWorkIdNumber();
         },
-
         clickStatusFilter: function(item) {
             this.getStatusFilter(item).click();
             pages.base.waitForAjax();
         },
-
         clickErrorTypeFilter: function(item) {
             this.getErrorTypeFilter(item).click();
             pages.base.waitForAjax();
         },
-
         clickValidationFilter: function(item) {
             this.getPanelFilter(item).click();
             pages.base.waitForAjax();
         },
-
         clickRunFilter: function(item) {
             this.getRunTypeFilter(item).click();
             pages.base.waitForAjax();
         },
-
         validateCrFile: function (workNumber, stepValue, period) {
 
             var dir = 'C:\\Users\\constantin.crismaru\\Downloads\\';
@@ -499,7 +484,6 @@ if (pages.organisation === undefined) {
             });
 
         },
-
         getThirdPartyName: function (deliveryMethod) {
             return this.thirdPartyName(deliveryMethod).getText();
         },
