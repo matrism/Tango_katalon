@@ -146,7 +146,6 @@ module.exports.saveWorkTitles = function () {
     );
 };
 module.exports.hoverCreatorNamesContainer = function () {
-    browser.executeScript('window.scrollTo(0,0)');
     steps.base.hoverElement(
         "creator names container",
         pages.work.creatorNamesContainer()
