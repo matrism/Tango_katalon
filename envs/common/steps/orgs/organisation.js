@@ -151,16 +151,553 @@ if (steps.organisation === undefined) {
             });
         },
 
+        scrollPreviewRegRun: function () {
+            it("Scroll registration run page " , function () {
+                if(hash.statusNumber > 100) {
+                    pages.organisation.scrollPreviewRegRun();
+                }
+            });
+        },
+
+        checkPreviewRegRunWorks: function (value) {
+            it("Check registration run page works " + value , function () {
+                if(hash.statusNumber > 100) {
+                    pages.organisation.getPreviewRegRunWorks().then( function (response) {
+                        expect(response).toBe(value);
+                    });
+                }
+            });
+        },
+
+        scrollValidationErrorsPage: function () {
+            it("Scroll validation errors page " , function () {
+                pages.organisation.scrollValidationErrorsPage();
+            });
+        },
+
+        checkValidationErrorWorks: function (value) {
+            it("Check validation error works " + value, function () {
+                pages.organisation.getValidationErrorsWorks(function (response) {
+                    expect(response).toBe(value);
+                });
+            });
+        },
+
+        scrollRegRunPage: function() {
+            describe("Verify list of registration run works after scroll ", function () {
+                steps.organisation.scrollPreviewRegRun();
+                steps.organisation.checkPreviewRegRunWorks(200);
+            });
+        },
+
+        scrollValidationPage: function() {
+            describe("Verify list of validation errors works after scroll ", function () {
+                if(hash.validationErrors) {
+                    steps.organisation.scrollValidationErrorsPage();
+                    steps.organisation.checkValidationErrorWorks(200);
+                }
+            });
+        },
+
+        scrollPrimaryValidationPage: function() {
+            describe("Verify list of validation errors works after scroll ", function () {
+                steps.organisation.scrollValidationErrorsPage();
+                steps.organisation.checkValidationErrorWorks(200);
+            });
+        },
+
+        listWorkTitleRegRun: function () {
+            it("Verify That list work title is delivered", function () {
+                pages.organisation.listWorkTitleRegRun().then( function (workName) {
+                    hash.workName = workName;
+                    expect(workName).toBeTruthy();
+                });
+            });
+        },
+
+        listErrorWorkTitleRegRun: function () {
+            it("Verify That error validation work title is delivered", function () {
+                pages.organisation.listErrorWorkTitleRegRun().then( function (workName) {
+                    hash.workName = workName;
+                    expect(workName).toBeTruthy();
+                });
+            });
+        },
+
+        listWorkCreatorsRegRun: function () {
+            it("Verify That list work creators are delivered", function () {
+                pages.organisation.listWorkCreatorsRegRun().then( function (creators) {
+                    hash.creators = creators;
+                    expect(creators).toBeTruthy();
+                });
+            });
+        },
+
+        listWorkIdNumberRegRun: function () {
+            it("Verify That list work id is delivered", function () {
+                pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
+                    hash.workNumber = workNumber;
+                    expect(workNumber).toBeTruthy();
+                });
+            });
+        },
+
+        listErrorWorkIdNumberRegRun: function () {
+            it("Verify That error validation work id is delivered", function () {
+                pages.organisation.listErrorWorkIdNumberRegRun().then( function (workNumber) {
+                    hash.workNumber = workNumber;
+                    expect(workNumber).toBeTruthy();
+                });
+            });
+        },
+
+        listWorkDetails: function () {
+            describe("Verify That list details are delivered ", function () {
+                steps.organisation.listWorkTitleRegRun();
+                steps.organisation.listWorkCreatorsRegRun();
+                steps.organisation.listWorkIdNumberRegRun();
+            });
+        },
+
+        listErrorValidationDetails: function () {
+            describe("Verify That error validation details are delivered ", function () {
+                if(hash.validationErrors) {
+                    steps.organisation.listErrorWorkTitleRegRun();
+                    steps.organisation.listErrorWorkIdNumberRegRun();
+                }
+            });
+        },
+
+        listErrorPrimaryValidationDetails: function () {
+            describe("Verify That error validation details are delivered ", function () {
+                steps.organisation.listErrorWorkTitleRegRun();
+                steps.organisation.listErrorWorkIdNumberRegRun();
+            });
+        },
+
+        selectStatusPanel: function() {
+            it("Select status panel", function () {
+                var i;
+
+                hash.statusFilter = 0;
+
+                pages.organisation.getStatusPanel().then(function (value) {
+                    for(i = 0; i < value; i++) {
+                        pages.organisation.clickStatusFilter(i);
+
+                        pages.organisation.getStatusFilterNumber(i).then(function (item) {
+                            hash.statusFilter = hash.statusFilter + parseInt(item.replace(/,/g, ""));
+                        });
+
+                        hash.filterCount = i;
+                    }
+                });
+            });
+        },
+
+        selectErrorsTypePanel: function() {
+            it("Select error type panel", function () {
+                var i;
+
+                hash.errorTypeFilter = 0;
+
+                pages.organisation.getErrorTypePanel().then(function (value) {
+                    for(i = 0; i < value; i++) {
+                        pages.organisation.clickErrorTypeFilter(i);
+
+                        pages.organisation.getStatusFilterNumber(i).then(function (item) {
+                            hash.errorTypeFilter = hash.errorTypeFilter + parseInt(item.replace(/,/g, ""));
+                        });
+
+                        hash.filterCount = i;
+                    }
+                });
+            });
+        },
+
+        selectValidationPanel: function() {
+            it("Select validation panel", function () {
+
+                hash.validationFilter = 0;
+
+                pages.organisation.getValidationPanel().then(function (value) {
+                    for(var i = 0; i < value; i++) {
+                        var index = hash.filterCount + i + 1;
+                        pages.organisation.clickValidationFilter(i);
+
+                        pages.organisation.getValidationFilterNumber(index).then(function (item) {
+                            hash.validationFilter = hash.validationFilter + parseInt(item.replace(/,/g, ""));
+                        });
+                    }
+                    hash.filterCount = i;
+                });
+            });
+        },
+
+        selectErrorsStatusPanel: function() {
+            it("Select status panel from validation errors page", function () {
+
+                hash.statusErrorsFilter = 0;
+
+                pages.organisation.getValidationPanel().then(function (value) {
+                    for(var i = 0; i < value; i++) {
+                        var index = hash.filterCount + i + 1;
+                        pages.organisation.clickValidationFilter(i);
+
+                        pages.organisation.getValidationFilterNumber(index).then(function (item) {
+                            hash.statusErrorsFilter = hash.statusErrorsFilter + parseInt(item.replace(/,/g, ""));
+                        });
+                    }
+                });
+            });
+        },
+
+        checkFilters: function () {
+            describe("Check filters ", function () {
+                steps.organisation.selectStatusPanel();
+                steps.organisation.checkStatusFilters();
+                steps.organisation.selectValidationPanel();
+                steps.organisation.checkValidationFilters();
+            });
+        },
+
+        checkRunTypeFilters: function () {
+            describe("Check run type filters ", function () {
+                steps.organisation.selectRunTypePanel();
+                //steps.organisation.checkTypeFilters();
+            });
+        },
+
+        selectRunTypePanel: function() {
+            it("Select run type panel", function () {
+                hash.runTypeFilter = 0;
+
+                pages.organisation.getRunTypePanel().then(function (value) {
+                    for(var i = 0; i < value; i++) {
+                        var index = hash.filterCount + i + 1;
+                        pages.organisation.clickRunFilter(i);
+
+                        pages.organisation.getValidationFilterNumber(index).then(function (item) {
+                            hash.runTypeFilter = hash.runTypeFilter + parseInt(item.replace(/,/g, ""));
+                        });
+                    }
+                });
+            });
+        },
+
+        checkValidationErrorsFilters: function () {
+            describe("Check validation errors page filters ", function () {
+                if(hash.validationErrors) {
+                    steps.organisation.selectErrorsTypePanel();
+                    steps.organisation.checkErrorTypeFilters();
+                    steps.organisation.selectErrorsStatusPanel();
+                    steps.organisation.checkErrorsValidationFilters();
+                }
+            });
+        },
+
+        checkPrimaryValidationErrorsFilters: function () {
+            describe("Check validation errors page filters ", function () {
+                steps.organisation.selectErrorsTypePanel();
+                steps.organisation.checkErrorTypeFilters();
+                steps.organisation.selectErrorsStatusPanel();
+                steps.organisation.checkErrorsValidationFilters();
+            });
+        },
+
+        checkErrorTypeFilters: function () {
+            it("Check error type filters ", function () {
+                pages.organisation.activityHeaderErrorCount().then(function (value){
+                    var statusNumber = parseInt(value);
+
+                    expect(hash.errorTypeFilter).toBe(statusNumber);
+                });
+            });
+        },
+
+        checkErrorsValidationFilters: function () {
+            it("Check status validation error filters ", function () {
+                pages.organisation.activityHeaderErrorCount().then(function (value){
+                    var statusNumber = parseInt(value);
+
+                    expect(hash.statusErrorsFilter).toBe(statusNumber);
+                });
+            });
+        },
+
+        checkStatusFilters: function () {
+            it("Check status filters ", function () {
+                pages.organisation.activityHeaderCount().then(function (value){
+                    var headerText = value.split("("),
+                        subPart = headerText[1],
+                        count = subPart.substring(0, subPart.length-1),
+                        statusNumber = parseInt(count.replace(/,/g, ""));
+
+                    hash.statusPeriod = headerText[0];
+                    expect(hash.statusFilter).toBe(statusNumber);
+                });
+            });
+        },
+
+        checkStatusNumber: function () {
+            it("Check status number ", function () {
+                hash.statusNumber = 0;
+                if(hash.scheduledWorks) {
+                    pages.organisation.activityHeaderCount().then(function (value){
+                        var headerText = value.split("("),
+                            subPart = headerText[1],
+                            count = subPart.substring(0, subPart.length-1),
+                            statusNumber = parseInt(count.replace(/,/g, ""));
+
+                        hash.statusNumber = statusNumber;
+
+                        expect(hash.statusNumber).toBeTruthy();
+                    });
+                }
+            });
+        },
+
+        checkValidationFilters: function () {
+            it("Check validation filters ", function () {
+                pages.organisation.activityHeaderCount().then(function (value){
+                    var headerText = value.split("("),
+                        subPart = headerText[1],
+                        count = subPart.substring(0, subPart.length-1),
+                        statusNumber = parseInt(count.replace(/,/g, ""));
+
+                    expect(hash.validationFilter).toBe(statusNumber);
+                });
+            });
+        },
+
         viewValidationErrors: function () {
+            it("View validation errors", function () {
+                if(hash.validationErrors) {
+                    pages.organisation.clickValidationErrorsButton();
+                }
+            });
+        },
+
+        viewPrimaryValidationErrors: function () {
             it("View validation errors", function () {
                 pages.organisation.clickValidationErrorsButton();
             });
         },
-        downloadCrFile: function () {
-            it('Download CR file', function () {
-                pages.organisation.downloadCrFile();
-            });
 
+        checkDateScheduledWorks: function (value) {
+            it('Check date for scheduled works', function () {
+                var currentDate = new Date(),
+                    subStr = value.split('_'),
+                    dateStr = subStr[1].replace('-', '/'),
+                    regDate = new Date(dateStr);
+
+                hash.dateScheduledWorks = false;
+
+                if( regDate > currentDate ) {
+                    hash.dateScheduledWorks = true;
+                    expect(pages.organisation.executeRegistrationFutureIsActive()).toBeTruthy();
+                } else {
+                    if(!hash.scheduledWorks) {
+                        expect(pages.organisation.registrationRunButtonNoWorksIsActive()).toBeTruthy();
+                    }
+                }
+
+            });
+        },
+
+        checkValidationErrorsButton: function (value) {
+            it('Check validation errors button', function () {
+                hash.validationErrors = true;
+                if((!hash.scheduledWorks) || ((hash.nonCriticalErrors == 0) && (hash.criticalErrors == 0))) {
+                    hash.validationErrors = false;
+                    expect(pages.organisation.validationErrorsButtonDisabled()).toBeTruthy();
+                }
+            });
+        },
+
+        checkScheduledWorksPresent: function (value) {
+            it('Check scheduled button', function () {
+                hash.scheduledWorks = false;
+
+                pages.organisation.getStatusPanel().then(function (value) {
+                    for(var i = 0; i < value; i++) {
+                        pages.organisation.getStatusFilterText(i).then(function (item) {
+                            if(item == 'Scheduled') {
+                                hash.scheduledWorks = true;
+                            }
+                        });
+                    }
+                });
+            });
+        },
+
+        scrollScheduledWorks: function () {
+            it('Scroll scheduled works', function () {
+                if(hash.scheduledWorks) {
+                    var pagesNumber = hash.statusNumber / 100;
+
+                    if(pagesNumber >= 1) {
+                        for(var i = 0; i < pagesNumber; i++) {
+                            pages.organisation.scrollPreviewRegRun();
+                        }
+                    }
+                }
+            });
+        },
+
+        getCriticalErrors: function () {
+            it('Get critical errors for scheduled works', function () {
+                hash.criticalErrors = 0;
+
+                if(hash.scheduledWorks) {
+                    pages.organisation.getCriticalErrors().then(function (value) {
+                        hash.criticalErrors = value;
+                    });
+                }
+            });
+        },
+
+        getNonCriticalErrors: function () {
+            it('Get non critical errors for scheduled works', function () {
+                hash.nonCriticalErrors = 0;
+
+                if(hash.scheduledWorks) {
+                    pages.organisation.getNonCriticalErrors().then(function (value) {
+                        hash.nonCriticalErrors = value;
+                    });
+                }
+            });
+        },
+
+        checkExecuteRegButtonStatus: function () {
+            it('Check execute registration run button status', function () {
+                if(hash.scheduledWorks) {
+                    if(hash.statusNumber > hash.criticalErrors) {
+                        expect(pages.organisation.executeRegistrationIsActive()).toBeTruthy();
+                    } else {
+                        expect(pages.organisation.registrationRunButtonNoValidWorksIsActive()).toBeTruthy();
+                    }
+                }
+            });
+        },
+
+        backValidationErrors: function (stepValue) {
+            it('Get back from validation errors page', function () {
+                if(stepValue == 'custom') {
+                    if(hash.validationErrors) {
+                        pages.organisation.getBackValidationErrors();
+                    }
+                } else {
+                    pages.organisation.getBackValidationErrors();
+                }
+            });
+        },
+
+        executeRegistrationRunValidation: function (value) {
+            describe("Validate Execute Registration Run button", function () {
+                steps.organisation.selectCustomRegistrationRun(value);
+                steps.organisation.checkScheduledWorksPresent(value);
+                steps.organisation.checkDateScheduledWorks(value);
+                steps.organisation.checkStatusNumber();
+                steps.organisation.scrollScheduledWorks();
+                steps.organisation.getCriticalErrors();
+                steps.organisation.getNonCriticalErrors();
+                steps.organisation.checkExecuteRegButtonStatus();
+            });
+        },
+
+        downloadCrFile: function (stepValue) {
+            it('Download CR file', function () {
+                if(stepValue == 'error') {
+                    if(hash.validationErrors) {
+                        pages.organisation.downloadCrFile();
+                    }
+                } else {
+                    pages.organisation.downloadCrFile();
+                }
+            });
+        },
+
+        validateWorkNumberCrFile: function () {
+            it('Check work number ' , function () {
+                expect(hash.crFileInformation.workNumber).toBe(hash.workNumber);
+            });
+        },
+
+        validateWorkNameCrFile: function () {
+            it('Check work name ', function () {
+                expect(hash.crFileInformation.workName).toBe(hash.workName);
+            });
+        },
+
+        validateCreatorsCrFile: function () {
+            it('Check creators ', function () {
+                expect(hash.crFileInformation.creator).toBe(hash.creators);
+            });
+        },
+
+        validateSizeCrFile: function () {
+            it('Check file size ', function () {
+                pages.organisation.activityHeaderCount().then(function (value){
+                    var headerText = value.split("("),
+                        subPart = headerText[1],
+                        count = subPart.substring(0, subPart.length-1),
+                        statusNumber = parseInt(count.replace(/,/g, "")) + 3;
+
+                    expect(hash.crFileInformation.fileSize).toBe(statusNumber);
+                });
+            });
+        },
+
+        validateErrorSizeCrFile: function () {
+            it('Check error validation file size ', function () {
+                pages.organisation.activityHeaderErrorCount().then(function (value){
+                    var statusNumber = parseInt(value),
+                        fileSize = hash.crFileInformation.fileSize - 3;
+
+                    expect(fileSize).toBe(statusNumber);
+                });
+            });
+        },
+
+        getCrFileInformation: function (stepValue) {
+            it('Get CR file information ', function () {
+                hash.crFileInformation = {};
+
+                pages.organisation.validateCrFile(hash.workNumber, stepValue, hash.statusPeriod).then(function (value) {
+                    hash.crFileInformation = value;
+                });
+            });
+        },
+
+        validateCrFile: function (stepValue) {
+            describe("Check CR file", function () {
+                steps.organisation.getCrFileInformation(stepValue);
+                steps.organisation.validateWorkNumberCrFile();
+                steps.organisation.validateWorkNameCrFile();
+                steps.organisation.validateCreatorsCrFile();
+                steps.organisation.validateSizeCrFile();
+            });
+        },
+
+        validateErrorCrFile: function (stepValue) {
+            describe("Check validation errors CR file", function () {
+                if(hash.validationErrors) {
+                    steps.organisation.getCrFileInformation(stepValue);
+                    steps.organisation.validateWorkNumberCrFile();
+                    steps.organisation.validateWorkNameCrFile();
+                    steps.organisation.validateErrorSizeCrFile();
+                }
+            });
+        },
+
+        validatePrimaryErrorCrFile: function (stepValue) {
+            describe("Check validation errors CR file", function () {
+                steps.organisation.getCrFileInformation(stepValue);
+                steps.organisation.validateWorkNumberCrFile();
+                steps.organisation.validateWorkNameCrFile();
+                steps.organisation.validateErrorSizeCrFile();
+            });
         },
 
         clearDownloadFolder: function (downloadFilepath) {
