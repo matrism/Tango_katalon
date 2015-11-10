@@ -4,52 +4,54 @@ var pageStep = require('../../../../helpers/basicPageStep');
 
 steps.uploadEdiFile = exports;
 
-pageStep('Select Processing Territory');
-pageStep('Select first royalty period');
-pageStep('Select Wcm Common Format');
-pageStep('Check multiple income providers box');
-pageStep('Select income provider');
-pageStep('Select file format');
-pageStep('Select file');
-pageStep('Set statement distribution period start');
-pageStep('Set statement distribution period end');
-pageStep('Set expected file amount');
-pageStep('Set expected file amount currency');
-pageStep('Set exchange rate');
-pageStep('Click Create button');
-pageStep('Wait for upload to complete');
-pageStep('Expect to be redirected to File Upload History');
-pageStep('Expect uploaded file to be listed');
-pageStep('Open uploaded file blind');
-pageStep('Expect uploaded file to have correct expected amount');
-pageStep('Wait for file to be processed');
-pageStep('Expect File Read in Amount to be');
-pageStep('Expect File Gross Amount to be');
-pageStep('Expect File Net Amount to be');
-pageStep('Open first generated statement');
-pageStep('Expect number of statements to be');
-pageStep('Expect statement values to be');
-pageStep('Switch to tab by index');
-pageStep('Close tab by index');
-pageStep('Expect to be redirected to Royalty Statements');
-pageStep('Expect Summary By Type to be');
-pageStep('Expect Statement field to be');
-pageStep('Roll back uploaded file');
-pageStep('Expect modal window to be visible');
-pageStep('Edit uploaded file');
-pageStep('Assume uploaded file');
-pageStep('Expect uploaded expected file amount field to be visible');
-pageStep('Expect uploaded expected file amount field to be hidden');
-pageStep('Expect save button to be disabled');
-pageStep('Expect save button to be enabled');
-pageStep('Click Save button');
-pageStep('Change uploaded expected file amount field');
-pageStep('Click Cancel link');
-pageStep('Expect unsaved statement modal to be visible');
-pageStep('Click continue editing link');
-pageStep('Click confirm cancellation button');
+pageStep([
+    'Select Processing Territory',
+    'Select first royalty period',
+    'Select Wcm Common Format',
+    'Check multiple income providers box',
+    'Select income provider',
+    'Select file format',
+    'Select file',
+    'Set statement distribution period start',
+    'Set statement distribution period end',
+    'Set expected file amount',
+    'Set expected file amount currency',
+    'Set exchange rate',
+    'Click Create button',
+    'Wait for upload to complete',
+    'Expect to be redirected to File Upload History',
+    'Expect uploaded file to be listed',
+    'Open uploaded file blind',
+    'Expect uploaded file to have correct expected amount',
+    'Wait for file to be processed',
+    'Wait for file status to be',
+    'Expect File Read in Amount to be',
+    'Expect File Gross Amount to be',
+    'Expect File Net Amount to be',
+    'Open first generated statement',
+    'Expect number of statements to be',
+    'Expect statement values to be',
+    'Switch to tab by index',
+    'Close tab by index',
+    'Expect to be redirected to Royalty Statements',
+    'Expect Summary By Type to be',
+    'Expect Statement field to be',
+    'Roll back uploaded file',
+    'Expect modal window to be visible',
+    'Edit uploaded file',
+    'Assume uploaded file',
+    'Expect uploaded expected file amount field to be visible',
+    'Expect uploaded expected file amount field to be hidden',
+    'Expect save button to be disabled',
+    'Expect save button to be enabled',
+    'Click Save button',
+    'Change uploaded expected file amount field',
+    'Click Cancel link',
+    'Expect unsaved statement modal to be visible',
+    'Click continue editing link',
+    'Click confirm cancellation button',
 
-pageStep('Edit statement');
-pageStep('Change accounts reference field');
-
+    'Edit statement',
+    'Change accounts reference field'
+]);
 

@@ -3,7 +3,9 @@
 var using = require('../../../../helpers/fnutils').using,
     _ = require('lodash'),
     path = require('path'),
-    noUpload = systemConfig.noUpload;
+    noUpload = systemConfig.noUpload,
+    YAML = require('yamljs'),
+    fileDefaults;
 
 exports.commonFeatureTags = ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'];
 
@@ -18,44 +20,119 @@ exports.breakageDescription = (
     '(fixed). Tracking issue: TAT-461.'
 );
 
+fileDefaults = {
+    currency: 'GBP',
+    exchangeRate: '1',
+    distributionPeriod: {
+        start: {
+            year: '2014',
+            month: '02'
+        },
+        end: {
+            year: '2014',
+            month: '02'
+        }
+    }
+};
+
+function goToUploadPage() {
+    steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
+
+    if (!noUpload){
+        steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
+    }
+}
+
+function fillFormWithFileData(file, clickCreate, useOriginalName) {
+    file = _.defaultsDeep(file, fileDefaults);
+    file.fileName = path.resolve(__dirname, file.fileName);
+
+    using(steps.uploadEdiFile, function() {
+        file.expectedAmount = file.expectedAmount || file.amount;
+
+        if (noUpload) {
+            file.name = file.mockedFileName;
+            this.assumeUploadedFile(file.name);
+            this.selectProcessingTerritory(file.processingTerritory);
+
+            return;
+        }
+
+        if (file.customFormat === false) {
+            this.selectWcmCommonFormat();
+        }
+
+        if (file.multipleProviders) {
+            this.checkMultipleIncomeProvidersBox();
+        } else {
+            this.selectIncomeProvider(file.incomeProvider);
+            this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
+            this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
+        }
+
+        this.selectProcessingTerritory(file.processingTerritory);
+        //this.selectProcessingTerritory(file.royaltyPeriod);
+        this.selectFileFormat(file.fileFormat);
+        this.selectFile(file.fileName, useOriginalName);
+
+        this.setExpectedFileAmount(file.amount);
+        this.setExpectedFileAmountCurrency(file.currency);
+        this.setExchangeRate(file.exchangeRate);
+
+        if (clickCreate !== false) { 
+            this.clickCreateButton();
+        }
+    });
+}
+
+function waitForFileStatusToBe() {
+    steps.uploadEdiFile.waitForFileStatusToBe.apply(null, arguments);
+}
+
+function waitForFileToBeProcessed() {
+    if (noUpload) { return; }
+
+    steps.uploadEdiFile.waitForFileToBeProcessed();
+}
+
 exports.feature = [
     {
         name: 'Upload EDI file - Smoke Test',
         tags: ['uploadEDIFile', 'smokeTest', 'uploadEDIFileSmoke'],
         steps: function() {
-            var fileAmount = '2,044.9100';
+            var file = {
+                    "processingTerritory": "Chile",
+                    "incomeProvider": "FABER MUSIC LTD",
+                    "fileFormat": "FABER SALES",
+                    "fileName": "./data/fabersales_tiny_TAT.txt",
+                    "mockedFileName": "TAT501445970278941.edi",
+                    "amount": "2044.9100",
+                    "currency": "GBP",
+                    "summaryByType": {
+                        "Folio Sales": "2,044.9100"
+                    }
+                };
 
-            steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
-            steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
-
+            goToUploadPage();
             using(steps.uploadEdiFile, function(){
-                this.selectProcessingTerritory('Chile');
-                this.selectIncomeProvider('FABER MUSIC LTD');
-                this.selectFileFormat('FABER SALES');
-                this.selectFile('./data/fabersales_tiny_TAT.txt');
-                this.setStatementDistributionPeriodStart('2014', '09');
-                this.setStatementDistributionPeriodEnd('2014', '09');
-                this.setExpectedFileAmount(fileAmount);
-                this.setExpectedFileAmountCurrency('GBP');
-                this.setExchangeRate(1);
-                this.clickCreateButton();
 
+                fillFormWithFileData(file);
                 this.expectToBeRedirectedToFileUploadHistory();
                 this.expectUploadedFileToBeListed();
                 this.openUploadedFileBlind();
 
-                this.expectUploadedFileToHaveCorrectExpectedAmount(fileAmount);
-                this.waitForFileToBeProcessed();
+                this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
+                waitForFileToBeProcessed();
 
-                this.expectFileReadInAmountToBe(fileAmount + ' GBP');
-                this.openUploadedFileBlind();
-                this.expectFileGrossAmountToBe(fileAmount);
-                this.expectFileNetAmountToBe(fileAmount);
+                this.expectFileReadInAmountToBe(file.amount + ' GBP');
+                if (!noUpload) { this.openUploadedFileBlind(); }
+                this.expectFileGrossAmountToBe(file.amount);
+                this.expectFileNetAmountToBe(file.amount);
 
                 this.openFirstGeneratedStatement();
                 steps.base.switchToTab(1);
                 this.expectToBeRedirectedToRoyaltyStatements();
-                this.expectSummaryByTypeToBe('Folio Sales', fileAmount);
+                this.expectSummaryByTypeToBe('Folio Sales', file.amount);
                 steps.base.closeTabByIndex(1);
 
                 this.rollBackUploadedFile();
@@ -67,34 +144,14 @@ exports.feature = [
         name: 'Upload EDI file - Sanity Test',
         tags: ['uploadEDIFile', 'sanityTest', 'uploadEDIFileSanity'],
         steps: function(){
-            var files = require('./data/ediFileSanity.json'),
-                incomeProviders,
-                fileDefaults = {
-                    currency: 'GBP',
-                    exchangeRate: '1',
-                    distributionPeriod: {
-                        start: {
-                            year: '2014',
-                            month: '02'
-                        },
-                        end: {
-                            year: '2014',
-                            month: '02'
-                        }
-                    }
-                };
-
-            files = _.map(files, function(item){
-                var file = _.defaultsDeep(item, fileDefaults);
-                file.fileName = path.resolve(__dirname, file.fileName)
-                return file;
-            });
+            var files = YAML.load(path.resolve(__dirname, './data/ediFileSanity.yml')),
+                incomeProviders;
 
             incomeProviders = {
                 'OSA': {
                     name: 'OSA',
                     requiredFileType: 'CISAC F2',
-                    requiredInboundIncomeType: '20'
+                    requiredInboundIncomeType: '21'
                 },
 
                 'FOX': {
@@ -103,56 +160,6 @@ exports.feature = [
                     requiredInboundIncomeType: 'MECHANICALMC'
                 }
             };
-
-            function goToUploadPage() {
-                steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
-
-                if (!noUpload){
-                    steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
-                }
-            }
-
-            function fillFormWithFileData(file) {
-                using(steps.uploadEdiFile, function() {
-                    file.expectedAmount = file.expectedAmount || file.amount;
-
-                    if (noUpload) {
-                        file.name = file.mockedFileName;
-                        this.assumeUploadedFile(file.name);
-                        this.selectProcessingTerritory(file.processingTerritory);
-
-                        return;
-                    }
-
-                    if (file.customFormat === false) {
-                        this.selectWcmCommonFormat();
-                    }
-
-                    if (file.multipleProviders) {
-                        this.checkMultipleIncomeProvidersBox();
-                    } else {
-                        this.selectIncomeProvider(file.incomeProvider);
-                        this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
-                        this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
-                    }
-
-                    this.selectProcessingTerritory(file.processingTerritory);
-                    //this.selectProcessingTerritory(file.royaltyPeriod);
-                    this.selectFileFormat(file.fileFormat);
-                    this.selectFile(file.fileName);
-
-                    this.setExpectedFileAmount(file.amount);
-                    this.setExpectedFileAmountCurrency(file.currency);
-                    this.setExchangeRate(file.exchangeRate);
-                    this.clickCreateButton();
-                });
-            }
-
-            function waitForFileToBeProcessed() {
-                if (noUpload) { return };
-
-                steps.uploadEdiFile.waitForFileToBeProcessed();
-            }
 
             describe('Load a file - Custom Format - OSA', function(){
                 goToUploadPage();
@@ -167,10 +174,10 @@ exports.feature = [
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                    this.waitForFileToBeProcessed();
+                    waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    this.openUploadedFileBlind();
+                    if (!noUpload) { this.openUploadedFileBlind(); }
                     this.expectFileGrossAmountToBe(file.amount);
                     this.expectFileNetAmountToBe(file.amount);
 
@@ -237,10 +244,12 @@ exports.feature = [
                     this.openUploadedFileBlind();
 
                     this.expectUploadedFileToHaveCorrectExpectedAmount(file.expectedAmount);
-                    this.waitForFileToBeProcessed();
+                    waitForFileToBeProcessed();
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
-                    this.openUploadedFileBlind();
+
+                    if (!noUpload) { this.openUploadedFileBlind(); }
+
                     this.expectNumberOfStatementsToBe(2);
                     this.expectStatementValuesToBe('99.5900', '6,241.5200');
                     this.expectFileGrossAmountToBe(file.amount);
@@ -307,6 +316,86 @@ exports.feature = [
                     //this.rollBackUploadedFile();
                 });
             });
+
+            describe('Identify files when income type mappings are added/updated', function(){
+
+                using(steps.uploadEdiFile, function(){
+                    var file = files[0],
+                        org = incomeProviders.OSA;
+
+                    /*fillFormWithFileData(file, false);
+                    steps.base.duplicateTab();
+                    steps.base.switchToTab(1);*/
+
+                    //check mappings
+                    using(steps.mainHeader.search, function (){
+                        this.selectEntityType('Organisation');
+                        this.enterTerms(org.name);
+                        this.selectResultByIndex(0);
+                    });
+
+                    using(steps.organisation.incomeProvider, function(){
+                        this.editSection();
+
+                        this.checkOrAddIncomeFileType(org.requiredFileType);
+                        this.incomeTypeMapping.addIfNoneMatch({ inboundIncomeType: org.requiredInboundIncomeType }, {
+                            inboundIncomeType: org.requiredInboundIncomeType,
+                            description: 'TAT INCOME TYPE TEST',
+                            fileType: org.requiredFileType,
+                            internalIncomeType: 'Mechanical'
+                        });
+
+                        this.expectIncomeTypeMappingsToBeValid();
+                        this.incomeTypeMapping.makeIncomeTypeMappingBeInvalid(org.requiredInboundIncomeType);
+                        this.saveSection();
+                    });
+
+                    //Income Mapping Updating
+                    //Income Type Mapping Error
+
+                    //steps.base.switchToTab(0);
+                    goToUploadPage();
+                    fillFormWithFileData(file);
+
+                    /*if (!noUpload) {
+                        this.clickCreateButton();
+                    }*/
+
+                    this.expectToBeRedirectedToFileUploadHistory();
+
+                    this.expectUploadedFileToBeListed();
+                    this.openUploadedFileBlind();
+
+                    waitForFileStatusToBe('Income Type Mapping Error');
+
+                    if (!noUpload) { this.openUploadedFileBlind(); }
+
+                    //steps.base.switchToTab(1);
+
+                    using(steps.mainHeader.search, function (){
+                        this.selectEntityType('Organisation');
+                        this.enterTerms(org.name);
+                        this.selectResultByIndex(0);
+                    });
+
+                    using(steps.organisation.incomeProvider, function(){
+                        this.editSection();
+
+                        this.incomeTypeMapping.makeIncomeTypeMappingBeValid(org.requiredInboundIncomeType);
+                        this.saveSection();
+                    });
+
+                    steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
+
+                    this.expectToBeRedirectedToFileUploadHistory();
+
+                    this.expectUploadedFileToBeListed();
+                    waitForFileToBeProcessed();
+
+                    //this.rollBackUploadedFile();
+                });
+            });
+
 
             xdescribe('Check Income Type Mappings for OSA', function(){
                 var org = incomeProviders.OSA;
@@ -393,14 +482,19 @@ exports.feature = [
                 });
             });
 
-            /*xdescribe('View File Upload History/Filter the results', function (){
-                steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
+        }
+    },
+    {
+        name: 'Upload multiple EDI files',
+        tags: ['uploadMultipleEDIFiles'],
+        steps: function() {
+            var files = YAML.load(path.resolve(__dirname, './data/batchUpload.yml'));
 
-                using(steps.uploadEdiFile, function() {
-                    this.selectProcessingTerritory('United States');
-                    steps.royaltyStatements.selectFirstRoyaltyPeriod();
-                });
-            });*/
+            _.each(files, function(file){
+                goToUploadPage();
+                fillFormWithFileData(file, true, true);
+                steps.uploadEdiFile.expectToBeRedirectedToFileUploadHistory();
+            });
         }
     }
 ];

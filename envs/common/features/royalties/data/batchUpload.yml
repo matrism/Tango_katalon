@@ -1,0 +1,61 @@
+-
+  processingTerritory: Czech Republic
+  incomeProvider: OSA
+  fileFormat: CISAC F2
+  fileName: ./data/batch/file01_OSA.dat
+  amount: '42.3900'
+  currency: CZK
+  exchangeRate: 1
+  distributionPeriod:
+    start: 
+      year: 2014
+      month: '02'
+    end: 
+      year: 2014
+      month: '02'
+-
+  processingTerritory: United States
+  incomeProvider: FOX
+  fileFormat: HARRY FOX
+  fileName: ./data/batch/file02_FOX.dat
+  amount: '1.1900'
+  currency: USD
+  exchangeRate: 1
+  distributionPeriod:
+    start: 
+      year: 2014
+      month: '02'
+    end: 
+      year: 2014
+      month: '02'
+-
+  processingTerritory: Czech Republic
+  incomeProvider: OSA
+  fileFormat: CISAC F2
+  fileName: ./data/batch/file03_OSA.dat
+  amount: '42.3900'
+  currency: CZK
+  exchangeRate: 1
+  distributionPeriod:
+    start: 
+      year: 2014
+      month: '02'
+    end: 
+      year: 2014
+      month: '02'
+-
+  processingTerritory: United States
+  incomeProvider: FOX
+  fileFormat: HARRY FOX
+  fileName: ./data/batch/file04_FOX.dat
+  amount: '1.1900'
+  currency: USD
+  exchangeRate: 1
+  distributionPeriod:
+    start: 
+      year: 2014
+      month: '02'
+    end: 
+      year: 2014
+      month: '02'
+

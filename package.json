@@ -44,7 +44,8 @@
     "qs": "^5.2.0",
     "randomstring": "~1.1.0",
     "tmp": "0.0.27",
-    "underscore": "1.6.0"
+    "underscore": "1.6.0",
+    "yamljs": "^0.2.4"
   },
   "optionalDependencies": {
     "http-sync": "^0.1.2",
