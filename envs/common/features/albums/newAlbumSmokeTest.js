@@ -66,7 +66,7 @@ exports.feature = [
     },
     {
         name: 'Create commercial album',
-        tags: ['newAlbumSmokeCreateCommercialAlbumE'],
+        tags: ['newAlbumSmokeCreateCommercialAlbum'],
         steps: function() {
             using(steps.newAlbum, function() {
                 this.goToNewAlbumPage();

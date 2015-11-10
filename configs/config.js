@@ -30,7 +30,7 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1200,
+                width: 1215,
                 height: 1080
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
