@@ -435,7 +435,7 @@ if (pages.organisation === undefined) {
         },
         validateCrFile: function (workNumber, stepValue, period) {
 
-            var dir = 'C:\\Users\\constantin.crismaru\\Downloads\\';
+            //var dir = 'C:\\Users\\constantin.crismaru\\Downloads\\';
 
             return pages.organisation.activityHeaderCount().then(function (header) {
                 var parts = header.split(' '),
@@ -459,8 +459,7 @@ if (pages.organisation === undefined) {
                     default: break;
                 };
 
-                var f = fs.readFileSync(dir + filename, {encoding: 'utf-8'},
-                    function(err){console.log(err);});
+                var f = fs.readFileSync(systemConfig.downloadsDirectoryPath + filename, {encoding: 'utf-8'});
 
                 // Split on row
                 f = f.split('\n');
