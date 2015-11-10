@@ -144,13 +144,11 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         goToPreviewRegistrationRunTab: function () {
             it("Go to Preview Registration Run Tab", function () {
                 pages.organisation.clickPreviewRegistrationRunTab();
             });
         },
-
         scrollPreviewRegRun: function () {
             it("Scroll registration run page " , function () {
                 if(hash.statusNumber > 100) {
@@ -158,7 +156,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         checkPreviewRegRunWorks: function (value) {
             it("Check registration run page works " + value , function () {
                 if(hash.statusNumber > 100) {
@@ -168,13 +165,11 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         scrollValidationErrorsPage: function () {
             it("Scroll validation errors page " , function () {
                 pages.organisation.scrollValidationErrorsPage();
             });
         },
-
         checkValidationErrorWorks: function (value) {
             it("Check validation error works " + value, function () {
                 pages.organisation.getValidationErrorsWorks(function (response) {
@@ -182,14 +177,12 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         scrollRegRunPage: function() {
             describe("Verify list of registration run works after scroll ", function () {
                 steps.organisation.scrollPreviewRegRun();
                 steps.organisation.checkPreviewRegRunWorks(200);
             });
         },
-
         scrollValidationPage: function() {
             describe("Verify list of validation errors works after scroll ", function () {
                 if(hash.validationErrors) {
@@ -198,14 +191,12 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         scrollPrimaryValidationPage: function() {
             describe("Verify list of validation errors works after scroll ", function () {
                 steps.organisation.scrollValidationErrorsPage();
                 steps.organisation.checkValidationErrorWorks(200);
             });
         },
-
         listWorkTitleRegRun: function () {
             it("Verify That list work title is delivered", function () {
                 pages.organisation.listWorkTitleRegRun().then( function (workName) {
@@ -214,7 +205,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         listErrorWorkTitleRegRun: function () {
             it("Verify That error validation work title is delivered", function () {
                 pages.organisation.listErrorWorkTitleRegRun().then( function (workName) {
@@ -223,7 +213,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         listWorkCreatorsRegRun: function () {
             it("Verify That list work creators are delivered", function () {
                 pages.organisation.listWorkCreatorsRegRun().then( function (creators) {
@@ -232,7 +221,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         listWorkIdNumberRegRun: function () {
             it("Verify That list work id is delivered", function () {
                 pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
@@ -241,7 +229,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         listErrorWorkIdNumberRegRun: function () {
             it("Verify That error validation work id is delivered", function () {
                 pages.organisation.listErrorWorkIdNumberRegRun().then( function (workNumber) {
@@ -250,7 +237,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         listWorkDetails: function () {
             describe("Verify That list details are delivered ", function () {
                 steps.organisation.listWorkTitleRegRun();
@@ -258,7 +244,6 @@ if (steps.organisation === undefined) {
                 steps.organisation.listWorkIdNumberRegRun();
             });
         },
-
         listErrorValidationDetails: function () {
             describe("Verify That error validation details are delivered ", function () {
                 if(hash.validationErrors) {
@@ -267,14 +252,12 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         listErrorPrimaryValidationDetails: function () {
             describe("Verify That error validation details are delivered ", function () {
                 steps.organisation.listErrorWorkTitleRegRun();
                 steps.organisation.listErrorWorkIdNumberRegRun();
             });
         },
-
         selectStatusPanel: function() {
             it("Select status panel", function () {
                 var i;
@@ -294,7 +277,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         selectErrorsTypePanel: function() {
             it("Select error type panel", function () {
                 var i;
@@ -314,7 +296,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         selectValidationPanel: function() {
             it("Select validation panel", function () {
 
@@ -333,7 +314,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         selectErrorsStatusPanel: function() {
             it("Select status panel from validation errors page", function () {
 
@@ -351,7 +331,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         checkFilters: function () {
             describe("Check filters ", function () {
                 steps.organisation.selectStatusPanel();
@@ -360,14 +339,12 @@ if (steps.organisation === undefined) {
                 steps.organisation.checkValidationFilters();
             });
         },
-
         checkRunTypeFilters: function () {
             describe("Check run type filters ", function () {
                 steps.organisation.selectRunTypePanel();
                 //steps.organisation.checkTypeFilters();
             });
         },
-
         selectRunTypePanel: function() {
             it("Select run type panel", function () {
                 hash.runTypeFilter = 0;
@@ -384,7 +361,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         checkValidationErrorsFilters: function () {
             describe("Check validation errors page filters ", function () {
                 if(hash.validationErrors) {
@@ -395,7 +371,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         checkPrimaryValidationErrorsFilters: function () {
             describe("Check validation errors page filters ", function () {
                 steps.organisation.selectErrorsTypePanel();
@@ -404,7 +379,6 @@ if (steps.organisation === undefined) {
                 steps.organisation.checkErrorsValidationFilters();
             });
         },
-
         checkErrorTypeFilters: function () {
             it("Check error type filters ", function () {
                 pages.organisation.activityHeaderErrorCount().then(function (value){
@@ -414,7 +388,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         checkErrorsValidationFilters: function () {
             it("Check status validation error filters ", function () {
                 pages.organisation.activityHeaderErrorCount().then(function (value){
@@ -424,7 +397,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         checkStatusFilters: function () {
             it("Check status filters ", function () {
                 pages.organisation.activityHeaderCount().then(function (value){
@@ -438,7 +410,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         checkStatusNumber: function () {
             it("Check status number ", function () {
                 hash.statusNumber = 0;
@@ -456,7 +427,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         checkValidationFilters: function () {
             it("Check validation filters ", function () {
                 pages.organisation.activityHeaderCount().then(function (value){
@@ -469,7 +439,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         viewValidationErrors: function () {
             it("View validation errors", function () {
                 if(hash.validationErrors) {
@@ -477,13 +446,11 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         viewPrimaryValidationErrors: function () {
             it("View validation errors", function () {
                 pages.organisation.clickValidationErrorsButton();
             });
         },
-
         checkDateScheduledWorks: function (value) {
             it('Check date for scheduled works', function () {
                 var currentDate = new Date(),
@@ -504,7 +471,6 @@ if (steps.organisation === undefined) {
 
             });
         },
-
         checkValidationErrorsButton: function (value) {
             it('Check validation errors button', function () {
                 hash.validationErrors = true;
@@ -514,7 +480,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         checkScheduledWorksPresent: function (value) {
             it('Check scheduled button', function () {
                 hash.scheduledWorks = false;
@@ -530,7 +495,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         scrollScheduledWorks: function () {
             it('Scroll scheduled works', function () {
                 if(hash.scheduledWorks) {
@@ -544,7 +508,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         getCriticalErrors: function () {
             it('Get critical errors for scheduled works', function () {
                 hash.criticalErrors = 0;
@@ -556,7 +519,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         getNonCriticalErrors: function () {
             it('Get non critical errors for scheduled works', function () {
                 hash.nonCriticalErrors = 0;
@@ -568,7 +530,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         checkExecuteRegButtonStatus: function () {
             it('Check execute registration run button status', function () {
                 if(hash.scheduledWorks) {
@@ -580,7 +541,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         backValidationErrors: function (stepValue) {
             it('Get back from validation errors page', function () {
                 if(stepValue == 'custom') {
@@ -592,7 +552,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         executeRegistrationRunValidation: function (value) {
             describe("Validate Execute Registration Run button", function () {
                 steps.organisation.selectCustomRegistrationRun(value);
@@ -605,7 +564,6 @@ if (steps.organisation === undefined) {
                 steps.organisation.checkExecuteRegButtonStatus();
             });
         },
-
         downloadCrFile: function (stepValue) {
             it('Download CR file', function () {
                 if(stepValue == 'error') {
@@ -617,25 +575,21 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         validateWorkNumberCrFile: function () {
             it('Check work number ' , function () {
                 expect(hash.crFileInformation.workNumber).toBe(hash.workNumber);
             });
         },
-
         validateWorkNameCrFile: function () {
             it('Check work name ', function () {
                 expect(hash.crFileInformation.workName).toBe(hash.workName);
             });
         },
-
         validateCreatorsCrFile: function () {
             it('Check creators ', function () {
                 expect(hash.crFileInformation.creator).toBe(hash.creators);
             });
         },
-
         validateSizeCrFile: function () {
             it('Check file size ', function () {
                 pages.organisation.activityHeaderCount().then(function (value){
@@ -649,7 +603,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         validateErrorSizeCrFile: function () {
             it('Check error validation file size ', function () {
                 pages.organisation.activityHeaderErrorCount().then(function (value){
@@ -660,7 +613,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         getCrFileInformation: function (stepValue) {
             it('Get CR file information ', function () {
                 hash.crFileInformation = {};
@@ -670,7 +622,6 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-
         validateCrFile: function (stepValue) {
             describe("Check CR file", function () {
                 steps.organisation.getCrFileInformation(stepValue);
@@ -680,7 +631,6 @@ if (steps.organisation === undefined) {
                 steps.organisation.validateSizeCrFile();
             });
         },
-
         validateErrorCrFile: function (stepValue) {
             describe("Check validation errors CR file", function () {
                 if(hash.validationErrors) {
@@ -691,7 +641,6 @@ if (steps.organisation === undefined) {
                 }
             });
         },
-
         validatePrimaryErrorCrFile: function (stepValue) {
             describe("Check validation errors CR file", function () {
                 steps.organisation.getCrFileInformation(stepValue);
@@ -700,13 +649,11 @@ if (steps.organisation === undefined) {
                 steps.organisation.validateErrorSizeCrFile();
             });
         },
-
         clearDownloadFolder: function (downloadFilepath) {
             it("Clear Download Folder", function () {
                 pages.organisation.deleteFilesFromDownloadFolder(downloadFilepath);
             });
         },
-
         downloadFile:function() {
             it("Download File", function () {
                 pages.organisation.clickDownloadFileButton();
