@@ -11,6 +11,24 @@ if (pages.organisation === undefined) {
     pages.organisation = exports = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/org",
         locators: {},
+        futureRegistrationRunButton: function () {
+            return $('[data-tooltip="Cannot execute runs scheduled for the future."]');
+        },
+        registrationRunButtonNoWorks: function () {
+            return $('[data-tooltip="There are no scheduled works."]');
+        },
+        validationErrorsNoButton: function () {
+            return $('[data-tooltip="There are no scheduled works with Validation errors to review."]');
+        },
+        registrationRunButtonNoValidWorks: function () {
+            return $('[data-tooltip="There are no valid scheduled works. Please make sure at least one work is valid."]');
+        },
+        activityHeaderCount: function () {
+            return $(".ACTIVITY-HEADER .count").getText();
+        },
+        activityHeaderErrorCount: function () {
+            return $$(".ACTIVITY-HEADER .count>span").first().getText();
+        },
         scrollPageDataRow: function () {
             return $$(".DATA-ROW").count();
         },
@@ -346,6 +364,18 @@ if (pages.organisation === undefined) {
         },
 
         //END OF LOCATORS ///////////////////////////////////////
+        executeRegistrationFutureIsActive: function () {
+            return this.futureRegistrationRunButton().isPresent();
+        },
+        registrationRunButtonNoWorksIsActive: function () {
+            return this.registrationRunButtonNoWorks().isPresent();
+        },
+        validationErrorsButtonDisabled: function () {
+            return this.validationErrorsNoButton().isPresent();
+        },
+        registrationRunButtonNoValidWorksIsActive: function () {
+            return this.registrationRunButtonNoValidWorks().isPresent();
+        },
         scrollPreviewRegRun: function () {
             browser.executeScript('window.scrollTo(0,document.body.scrollHeight)').then(function() {
                 return pages.base.waitForAjax();

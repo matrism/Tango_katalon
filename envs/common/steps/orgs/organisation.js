@@ -639,6 +639,7 @@ if (steps.organisation === undefined) {
         validateSizeCrFile: function () {
             it('Check file size ', function () {
                 pages.organisation.activityHeaderCount().then(function (value){
+                    console.log(value);
                     var headerText = value.split("("),
                         subPart = headerText[1],
                         count = subPart.substring(0, subPart.length-1),
