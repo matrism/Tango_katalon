@@ -134,6 +134,14 @@ if (pages.editDealPayee === undefined) {
             pages.editDealPayee.elems.editDistributionPayeeInputField.sendKeys("100");
         },
 
+        editCheckNoScopeAssociatedToPayee: function(){
+            browser.driver.findElement(By.css("div[data-ng-form='allPayeesForm']")).getText().
+                then(function (promise) {
+                    console.log("Check that no scope is associated to payee " + promise);
+                    expect(promise).not.toContain("Scope");
+                });
+        },
+
         editCheckScopeNumberIAssociatedToPayee: function(i){
             browser.driver.findElement(By.css("div[data-ng-if='::DPAY.isPayeeAssociated(payee)'] div[data-ng-repeat='payeeScope in payee.deal_scopes | filter: scopeFilter(scope) track by payeeScope.id']:nth-child(" + (i+3) + ")  strong[data-ng-bind='::payeeScope.description']")).getText().
             then(function (promise) {

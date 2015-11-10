@@ -217,6 +217,16 @@ if (pages.editDealScope === undefined) {
                 });
         },
 
+        checkTheScopeNumberINameNotPayeesValue: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
+            browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
+                then(function (promise) {
+                    console.log("Scope text is : " + promise);
+                    expect(promise).toContain("Scope " + i);
+                    expect(promise).not.toContain("Payees");
+                });
+        },
+
         checkTheScopeNumberINameRatesNotValue: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().

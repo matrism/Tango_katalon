@@ -90,6 +90,12 @@ exports.editCheckScopesAssociatedToPayee = function (i) {
     });
 };
 
+exports.editCheckNoScopesOnPayeeScreen = function () {
+    it("Check there is no scope to  payee screen ", function () {
+        pages.editDealPayee.editCheckNoScopeAssociatedToPayee();
+    });
+};
+
 exports.itEditAddPayeeOrganisationAndAssociateScope = function (payee_name) {
     describe("Edit add payee as organisation and associate random scope ", function () {
         steps.editDealPayee.editSelectRandomPayeeOrganisationFromDropDown(payee_name);

@@ -81,6 +81,12 @@ exports.checkScopeNumberINameAndPayees = function (i) {
     });
 };
 
+exports.checkScopeNumberINameAndNotPayees = function (i) {
+    it("Check name and not payees present for scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINameNotPayeesValue(i);
+    });
+};
+
 exports.checkScopeNumberINameAndNotRates = function (i) {
     it("Check name and not rates for  scope number  " + i, function () {
         pages.editDealScope.checkTheScopeNumberINameRatesNotValue(i);

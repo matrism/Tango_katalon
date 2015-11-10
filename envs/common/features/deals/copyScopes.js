@@ -425,24 +425,34 @@ exports.feature = [
             steps.editDealPayee.editCheckScopesAssociatedToPayee(2);
             steps.editDealPayee.editCheckScopesAssociatedToPayee(3);
 
+            steps.deal.goToTermsDealTabDetails();
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.royaltyRates.editSingleRoyaltySet();
+            steps.editRoyaltyRates.openRateSetPanel();
+            steps.royaltyRates.deleteRateSet();
+
+            steps.editDealScope.checkScopeNumberINameAndNotPayees(1);
+            steps.editDealScope.checkScopeNumberINameAndNotPayees(2);
+            steps.editDealScope.checkScopeNumberINameAndNotPayees(3);
+
+            steps.editDealPayee.clickOnPayeesHeader();
+            steps.editDealPayee.editCheckNoScopesOnPayeeScreen();
+
             //cancel and dirty check
             steps.deal.goToTermsDealTabDetails();
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             steps.editDealScope.editFillInNumberOfCopiesForScope(1, 1);
-            steps.editDealScope.checkPayeesPresentInCopyScopeModal();
             steps.editDealScope.selectScopeNumberI(2);
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             steps.editDealScope.editFillInNumberOfCopiesForScope(1,1);
-            steps.editDealScope.checkPayeesPresentInCopyScopeModal();
             steps.editDealScope.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI(1);
 
             steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             steps.editDealScope.editFillInNumberOfCopiesForScope(1, 1);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
-            steps.editDealScope.checkPayeesPresentInCopyScopeModal();
             steps.editDealScope.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI(1);
         }
     },
@@ -474,37 +484,37 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 100);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");
 
