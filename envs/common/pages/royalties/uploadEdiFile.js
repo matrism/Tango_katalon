@@ -279,9 +279,7 @@ function checkFileStatus (statuses) {
 exports.waitForFileStatusToBe = function () {
     var statuses = _.toArray(arguments);
 
-    console.log('WAIT');
     browser.wait(function(){
-        console.log('WAIT2');
         return browser.refresh().then(function(){
             pages.base.waitForAjax();
             return checkFileStatus(statuses);
