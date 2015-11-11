@@ -19,6 +19,80 @@ exports.selectScopeNumberI = function (i) {
     });
 };
 
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+        pages.editDealScope.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+    });
+};
+
+exports.checkOverrideTitleAndNumber = function (i) {
+    it("Check overrider title and numbers of overrides added " + i, function () {
+        pages.editDealScope.checkOverrideNumbersAddedOnScope(i);
+    });
+};
+
+exports.checkScopeNumberIText = function (i) {
+    it("Check text for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberITextValue(i);
+    });
+};
+
+exports.checkScopeNumberINoPss = function (i) {
+    it("Check scope number  " + i + " hasn't PSS", function () {
+        pages.editDealScope.checkTheScopeNumberITextValueHasNotPss(i);
+    });
+};
+
+exports.checkScopeNumberINoRr = function (i) {
+    it("Check scope number  " + i + " hasn't RR", function () {
+        pages.editDealScope.checkTheScopeNumberITextValueHasNotRr(i);
+    });
+};
+
+exports.checkScopeNumberINameAndPss = function (i) {
+    it("Check name and pss for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINamePssValue(i);
+    });
+};
+
+exports.checkTheScopeRateSetDateValue = function (date) {
+    it("Check the royalty rate set effective start date is equal to " + date, function () {
+        pages.editDealScope.checkTheScopeRateSetDate(date);
+    });
+};
+
+exports.checkTheScopeRateSetDateValueNotEqual = function (date) {
+    it("Check the royalty rate set effective start date is not equal to " + date, function () {
+        pages.editDealScope.checkTheScopeRateSetDateNotEqual(date);
+    });
+};
+
+exports.checkScopeNumberINameAndRates = function (i) {
+    it("Check name and rates for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINameRatesValue(i);
+    });
+};
+
+exports.checkScopeNumberINameAndPayees = function (i) {
+    it("Check name and payees present for scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINamePayeesValue(i);
+    });
+};
+
+exports.checkScopeNumberINameAndNotPayees = function (i) {
+    it("Check name and not payees present for scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINameNotPayeesValue(i);
+    });
+};
+
+exports.checkScopeNumberINameAndNotRates = function (i) {
+    it("Check name and not rates for  scope number  " + i, function () {
+        pages.editDealScope.checkTheScopeNumberINameRatesNotValue(i);
+    });
+};
+
 exports.validateShareScopesPopupDetailsContractPeriod1 = function () {
     it("Validate share scopes pop up details contract period 1 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
@@ -221,6 +295,14 @@ exports.editSaveThePublisherShareSet = function () {
     });
 };
 
+exports.editSaveThePublisherShareSetWithModal = function () {
+    it("Edit - save the publisher share set with modal", function () {
+        pages.editDealScope.editSaveThePublisherShareSetsWithModal();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+
 exports.editCancelThePublisherShareSet = function () {
     it("Edit - cancel the publisher share set", function () {
         pages.editDealScope.editCancelPublisherShareSets();
@@ -238,6 +320,120 @@ exports.editSelectDesiredPublisherTypeEOrPADropDown = function (publisherType) {
         pages.editDealScope.editSelectSpecificOptionEOrPAPublisherType(publisherType);
     });
 };
+
+exports.editCopySpecificNumberOfScopes = function (number) {
+    it("Edit - copy specific number of scopes " + number, function () {
+        pages.editDealScope.editClickOnCopyScopeOption();
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeSpecificValue(number);
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScope();
+    });
+};
+
+exports.editClickOnTheCopyScopeOptionNumberI = function (i) {
+    it("Edit - click on the copy scope option number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+    });
+};
+
+exports.editFillInNumberOfCopiesForScope = function (i, number) {
+    it("Edit - fill specific number of scopes " + number + " from scope number " + i, function () {
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+    });
+};
+
+exports.editClickOnCopyButtonCopySpecificNumberOfScopesFromScopeNumberI = function (i) {
+    it("Edit -click on copy button from scope number " + i, function () {
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+    });
+};
+
+exports.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI = function (i) {
+    it("Edit -click on cancel copy button from scope number " + i, function () {
+        pages.editDealScope.editClickOnTheCancelCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
+    it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.waitForAjax();
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkTheNumberOfScopesPerDeal = function (i) {
+    it("Check that the number of scopes per deal it is equal with " + i, function () {
+        pages.editDealScope.elems.numberOfScopesPerDeal.getText().
+            then(function (promise) {
+                console.log("Number of scopes per deal is  : " + promise);
+                expect(promise).toEqual(i);
+            });
+    });
+};
+
+exports.checkPayeesPresentInCopyScopeModal = function () {
+    it("Check payees text present in copy scope modal ", function () {
+        pages.base.scrollIntoView(pages.editDealScope.elems.payeesCopyScopeModal);
+        pages.editDealScope.elems.payeesCopyScopeModal.getText().
+            then(function (promise) {
+                console.log("Payees text in copy scope modal is  : " + promise);
+                expect(promise).toContain("Payees");
+                expect(promise).toContain("Will be copied");
+            });
+    });
+};
+
+exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR = function (i, number) {
+    it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.waitForAjax();
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+        pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+        pages.editDealScope.waitForAjax();
+        pages.editDealScope.clickOnTheCopyRoyaltyRatesInCopyScopeModal();
+        pages.editDealScope.waitForAjax();
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss = function (i, number) {
+    it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
+        pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.waitForAjax();
+        pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
+        pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+        pages.editDealScope.waitForAjax();
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkSharePublisherShareSetIconPresent = function () {
+    it("Check no share publisher share set icon present ", function () {
+        pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
+        pages.editDealScope.elems.publisherSharesTitle.getText().
+            then(function (promise) {
+                console.log("Unshare text is : " + promise);
+                expect(promise).toContain("Unshare");
+            });
+    });
+};
+
+exports.checkNoSharePublisherShareSetIconPresent = function () {
+    it("Check no share publisher share set icon present ", function () {
+        pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
+        pages.editDealScope.elems.publisherSharesTitle.getText().
+            then(function (promise) {
+                console.log("Publisher share title text is : " + promise);
+                expect(promise).not.toContain("Unshare");
+            });
+    });
+};
+
 
 exports.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () {
     it("Edit -fill first publisher name fields based on publisher type E or PA", function () {
@@ -383,6 +579,238 @@ exports.editAddSpecificScopeTypeAndTerritory = function (contractType, territory
     });
 };
 
+exports.editCheckDeleteScopeIconIsPresent = function () {
+    it("Edit check delete scope icon is displayed", function () {
+        pages.editDealScope.editCheckTheDeleteScopeIconIsPresent();
+    });
+};
+
+exports.editCheckShareUnshareDeleteScopeIconIsPresent = function () {
+    it("Edit check share unshare scope icon is displayed", function () {
+        pages.editDealScope.editCheckTheShareUnshareDeleteIconIsPresent();
+    });
+};
+
+exports.editCheckShareScopeLinkIsEnabled = function () {
+    it("Edit check share link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        expect(pages.editDealScope.elems.editShareScopeLink.isDisplayed());
+    });
+};
+
+exports.editCheckUnshareScopeLinkIsDisabled = function () {
+    it("Edit check unshare link is disabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        pages.editDealScope.elems.editUnshareScopeLink.getAttribute("class").
+            then(function (promise) {
+                console.log("Unshare scope link class is : " + promise);
+                expect(promise).toContain("disabled");
+            });
+    });
+};
+
+exports.editCheckCopyScopeLinkIsDisabled = function () {
+    it("Edit check copy link is disabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("class").
+            then(function (promise) {
+                console.log("Unshare scope link class is : " + promise);
+                expect(promise).toContain("disabled");
+            });
+    });
+};
+
+exports.editCheckCopyScopeDisabledDataTooltip = function () {
+    it("Edit check copy link disabled data tooltip share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).perform();
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Copy scope disabled tooltip is : " + promise);
+                expect(promise).toEqual("Cannot Copy: Editing in progress.");
+            });
+    });
+};
+
+exports.editCheckCopyScopeLinkIsEnabled = function () {
+    it("Edit check copy link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        expect(pages.editDealScope.elems.editCopyScopeLink.isDisplayed());
+    });
+};
+
+exports.editCheckCopyScopeEnabledDataTooltip = function () {
+    it("Edit check copy link enabled data tooltip share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).click();
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Copy scope enabled tooltip is : " + promise);
+                expect(promise).toEqual("Copy entirety of this Scope.");
+            });
+    });
+};
+
+exports.editCheckDeleteScopeLinkIsEnabled = function () {
+    it("Edit check delete link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+        browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+        expect(pages.editDealScope.elems.editDeleteScopeLink.isDisplayed());
+    });
+};
+
+exports.editClickOnAddOverrideIconPss = function () {
+    it("Edit click on add override icon publisher share set ", function () {
+        pages.editDealScope.editClickOnTheAddOverrideIconPss();
+    });
+};
+
+exports.editSelectSubPublisherOverridePss = function (subPublisherName, subPublisherSelected) {
+    it("Edit select the sub publisher override pss ", function () {
+        pages.editDealScope.editSelectTheSubPublisherOverridePss(subPublisherName, subPublisherSelected);
+    });
+};
+
+exports.editSelectSubPublisherOverrideTerritoryPss = function (territory) {
+    it("Edit select the sub publisher override territory pss ", function () {
+        pages.editDealScope.editSelectTheSubPublisherOverrideTerritoryPss(territory);
+    });
+};
+
+exports.editClickOnDoneSubPublisherOverridePss = function () {
+    it("Edit click on the done sub publisher override pss ", function () {
+        pages.editDealScope.editClickOnTheDoneSubPublisherOverridePss();
+    });
+};
+
+exports.editClickOnCancelSubPublisherOverridePss = function () {
+    it("Edit click on the cancel sub publisher override pss ", function () {
+        pages.editDealScope.editClickOnTheCancelSubPublisherOverridePss();
+    });
+};
+
+exports.editClickOnAddAnotherSubPublisherOverridePss = function () {
+    it("Edit click on the add another sub publisher override pss ", function () {
+        pages.editDealScope.editClickOnTheAddAnotherSubPublisherOverridePss();
+    });
+};
+
+exports.clickOnAddSocietyAgreementNumbersLink = function () {
+    it("Edit click on the add society agreement numbers link ", function () {
+        pages.editDealScope.clickOnTheAddSocietyAgreementNumbersLink();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.fillIntoPublisherChainAgreementNumberFieldNumberI = function (i) {
+    it("Fill into the publisher chain agreement number field number " + i, function () {
+        pages.editDealScope.fillIntoThePublisherChainAgreementNumberFieldNumberI(i);
+    });
+};
+
+exports.selectPublisherChainAgreementNumberSocietyFieldNumberI = function (society, i) {
+    it("Select the publisher chain agreement number society field number " + i, function () {
+        pages.editDealScope.fillIntoThePublisherChainAgreementSocietyNameNumberI(society, i);
+        pages.editDealScope.selectTheSpecificValueFromSocietyDropDownSocietyAgreementNumbers();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.selectRandomCreatorToPublisherCreatorNameNumberI = function (i) {
+    it("Select random creator name from creator to publisher number " + i, function () {
+        pages.editDealScope.fillIntoTheCreatorToPublisherSocietyAgreementFieldNumberI("shilpa", i);
+        pages.editDealScope.selectTheRandomValueFromCreatorDropDownSocietyAgreementNumbers();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.fillIntoCreatorAgreementNumberFieldNumberI = function (i) {
+    it("Fill into the creator to publisher agreement number value for field number " + i, function () {
+        pages.editDealScope.fillIntoTheCreatorAgreementNumberFieldNumberI(i);
+    });
+};
+
+exports.selectSocietyForCreatorToPublisherAgreementNumberFieldNumberI = function (society, i) {
+    it("Select society for creator to publisher agreement number field number " + i, function () {
+        pages.editDealScope.fillIntoTheCreatorToPublisherSocietyFieldNumberI(society, i);
+        pages.editDealScope.selectTheSpecificValueFromSocietyDropDownSocietyAgreementNumbers();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.saveSocietyAgreementNumberForm = function () {
+    it("Save the society agreement number form ", function () {
+        pages.editDealScope.saveTheSocietyAgreementNumbersChanges();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkSocietyAgreementAddedOnScope = function () {
+    it("Check the society agreement added on scope ", function () {
+        pages.editDealScope.checkTheSocietyAgreementAddedOnScope();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkSocietyAgreementNotAddedOnScope = function () {
+    it("Check the society agreement not added on scope ", function () {
+        pages.editDealScope.checkTheSocietyAgreementNotAddedOnScope();
+    });
+};
+
+exports.clickOnCopyPublisherShareInCopyScopeModal = function () {
+    it("Click on the copy publisher shares in copy scope modal dialog and check it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+    });
+};
+
+exports.clickOnSharePublisherShareInCopyScopeModal = function () {
+    it("Click on the share publisher share button in copy scopal modal and checked it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheSharePublisherShareInCopyScopeModal();
+    });
+};
+
+exports.clickOnCopyRoyaltyRatesInCopyScopeModal = function () {
+    it("Click on the copy royalty rates button in copy scope modal and check it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheCopyRoyaltyRatesInCopyScopeModal();
+    });
+};
+
+exports.clickOnShareRoyaltyRatesInCopyScopeModal = function () {
+    it("Click on the share royalty rates button in copy scope modal and check it is clicked ok ", function () {
+        pages.editDealScope.clickOnTheShareRoyaltyRatesInCopyScopeModal();
+    });
+};
+
+exports.itAddSimpleSocietyAgreementNumbers = function () {
+    describe("Add a simple society agreement number ", function () {
+        steps.editDealScope.clickOnAddSocietyAgreementNumbersLink();
+        steps.editDealScope.fillIntoPublisherChainAgreementNumberFieldNumberI(1);
+        steps.editDealScope.selectPublisherChainAgreementNumberSocietyFieldNumberI("ascap", 1);
+        steps.editDealScope.selectRandomCreatorToPublisherCreatorNameNumberI(1);
+        steps.editDealScope.fillIntoCreatorAgreementNumberFieldNumberI(1);
+        steps.editDealScope.selectSocietyForCreatorToPublisherAgreementNumberFieldNumberI("mcps", 1);
+        steps.editDealScope.saveSocietyAgreementNumberForm();
+    });
+};
+
+exports.itEditAddPublisherShare = function () {
+    describe("Add publisher share set", function () {
+        steps.base.scrollIntoView("Add publisher shares set link", pages.editDealScope.elems.editAddPublisherShareSetLink);
+        steps.editDealScope.editClickOnAddPublisherShareSet();
+        steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.editDealScope.editIntoFirstPublisherNameAMField("wb music corp");
+        steps.editDealScope.editSelectSpecificPublisherNameDropDown();
+        steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
+    });
+};
+
 exports.itEditAddPublisherShareWithSocietyAwardCredit = function () {
     describe("Add publisher share set", function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.editDealScope.elems.editAddPublisherShareSetLink);
@@ -423,5 +851,16 @@ exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
         steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
         steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
+};
 
+exports.itEditOverridePublisherShare = function (subPublisherName, subPublisherSelected, territory) {
+    describe("Edit override publisher share set", function () {
+        steps.base.scrollIntoView("Override pss icon ", pages.editDealScope.elems.editOverridePssIcon);
+        steps.editDealScope.editClickOnAddOverrideIconPss();
+        steps.base.scrollIntoView("Override pss ", pages.editDealScope.elems.editSubPublisherOverridePssInputField);
+        steps.editDealScope.editSelectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
+        steps.editDealScope.editSelectSubPublisherOverrideTerritoryPss(territory);
+        steps.base.scrollIntoView("Done override publisher share set", pages.editDealScope.elems.editDoneOverridePublisherShareSetButton);
+        steps.editDealScope.editClickOnDoneSubPublisherOverridePss();
+    });
 };

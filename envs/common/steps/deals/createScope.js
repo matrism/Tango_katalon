@@ -5,8 +5,8 @@ var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.createDealScope = exports;
 
-exports.openNewScopeForm = function() {
-    it('Open a new scope form', function() {
+exports.openNewScopeForm = function () {
+    it('Open a new scope form', function () {
         pages.createDealScope.addScopeForm();
     });
 };
@@ -42,7 +42,7 @@ exports.saveSharePublisherShareSet = function () {
 };
 
 exports.selectContractType = function (value) {
-    it('Select contract type (' + value + ')', function() {
+    it('Select contract type (' + value + ')', function () {
         pages.createDealScope.selectContractTypeScope(value);
     });
 };
@@ -70,13 +70,13 @@ exports.addRandomScope = function () {
 };
 
 exports.enterTerritoryOfControlSearchTerms = function (value) {
-    it('Enter territory of control search terms (' + value + ')', function() {
+    it('Enter territory of control search terms (' + value + ')', function () {
         pages.createDealScope.enterTerritoryOfControlSearchTerms(value);
     });
 };
 
 exports.selectTerritoryOfControlSearchResultByIndex = function (i) {
-    it('Select territory of control search result #' + (i + 1), function() {
+    it('Select territory of control search result #' + (i + 1), function () {
         pages.createDealScope.selectTerritoryOfControlSearchResultByIndex(i);
     });
 };
@@ -200,7 +200,7 @@ exports.validateErrorMessagePublisherRequired = function () {
 exports.enterPublisherSearchTerms = function (i, j, value) {
     it(
         'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
-        ' - Enter search terms (' + value + ')', function() {
+        ' - Enter search terms (' + value + ')', function () {
             pages.createDealScope.enterPublisherSearchTerms(i, j, value);
         }
     );
@@ -213,7 +213,7 @@ exports.fillIntoFirstPublisherNameField = function (publisherName) {
 };
 
 exports.selectPublisherSearchResultByIndex = function (i) {
-    it('Select publisher search result #' + (i + 1), function() {
+    it('Select publisher search result #' + (i + 1), function () {
         pages.createDealScope.selectPublisherSearchResultByIndex(i);
     });
 };
@@ -227,7 +227,7 @@ exports.selectRandomPublisherNameDropDownValue = function () {
 exports.enterOwnPublisherShare = function (i, j, value) {
     it(
         'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
-        ' - Enter own publisher share (' + value + ')', function() {
+        ' - Enter own publisher share (' + value + ')', function () {
             pages.createDealScope.enterOwnPublisherShare(i, j, value);
         }
     );
@@ -236,7 +236,7 @@ exports.enterOwnPublisherShare = function (i, j, value) {
 exports.enterCollectPublisherShare = function (i, j, value) {
     it(
         'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
-        ' - Enter collect publisher share (' + value + ')', function() {
+        ' - Enter collect publisher share (' + value + ')', function () {
             pages.createDealScope.enterCollectPublisherShare(i, j, value);
         }
     );
@@ -466,7 +466,6 @@ exports.selectSubPublisherOverridePss = function (subPublisherName, subPublisher
 exports.selectSubPublisherOverrideTerritoryPss = function (territory) {
     it("Select the sub publisher override territory pss ", function () {
         pages.createDealScope.selectTheSubPublisherOverrideTerritoryPss(territory);
-        ;
     });
 };
 
@@ -485,6 +484,92 @@ exports.clickOnCancelSubPublisherOverridePss = function () {
 exports.clickOnAddAnotherSubPublisherOverridePss = function () {
     it("Click on the add anothe sub publisher override pss ", function () {
         pages.createDealScope.clickOnTheAddAnotherSubPublisherOverridePss();
+    });
+};
+
+exports.checkDeleteScopeIconIsPresent = function () {
+    it("Check delete scope icon is displayed", function () {
+        pages.createDealScope.checkTheDeleteScopeIconIsPresent();
+    });
+};
+
+exports.checkShareUnshareDeleteScopeIconIsPresent = function () {
+    it("Check share unshare scope icon is displayed", function () {
+        pages.createDealScope.checkTheShareUnshareDeleteIconIsPresent();
+    });
+};
+
+exports.checkShareScopeLinkIsEnabled = function () {
+    it("Check share link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
+        expect(pages.createDealScope.elems.shareScopeLink.isDisplayed());
+    });
+};
+
+exports.checkUnshareScopeLinkIsDisabled = function () {
+    it("Check unshare link is disabled on share scope", function () {
+        browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
+        pages.createDealScope.elems.unshareScopeLink.getAttribute("class").
+            then(function (promise) {
+                console.log("Unshare scope link class is : " + promise);
+                expect(promise).toContain("disabled");
+            });
+    });
+};
+
+exports.checkCopyScopeLinkIsDisabled = function () {
+    it("Check copy link is disabled on share scope", function () {
+        browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
+        pages.createDealScope.elems.copyScopeLink.getAttribute("class").
+            then(function (promise) {
+                console.log("Unshare scope link class is : " + promise);
+                expect(promise).toContain("disabled");
+            });
+    });
+};
+
+exports.checkCopyScopeDisabledDataTooltip = function () {
+    it("Check copy link disabled data tooltip share scope", function () {
+        browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.copyScopeLink).click();
+        pages.createDealScope.elems.copyScopeLink.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Copy scope disabled tooltip is : " + promise);
+                expect(promise).toEqual("Cannot Copy: Editing in progress.");
+            });
+    });
+};
+
+exports.checkCopyScopeLinkIsEnabled = function () {
+    it("Check copy link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
+        expect(pages.createDealScope.elems.copyScopeLink.isDisplayed());
+    });
+};
+
+exports.checkCopyScopeEnabledDataTooltip = function () {
+    it("Check copy link enabled data tooltip share scope", function () {
+        browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.copyScopeLink).perform();
+        pages.createDealScope.elems.copyScopeLink.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Copy scope enabled tooltip is : " + promise);
+                expect(promise).toEqual("Copy entirety of this Scope.");
+            });
+    });
+};
+
+exports.checkDeleteScopeLinkIsEnabled = function () {
+    it("Check delete link is enabled on share scope", function () {
+        browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
+        browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
+        expect(pages.createDealScope.elems.deleteScopeLink.isDisplayed());
     });
 };
 
@@ -516,7 +601,7 @@ exports.itOverridePublisherShare = function (subPublisherName, subPublisherSelec
     describe("Override publisher share set", function () {
         steps.base.scrollIntoView("Override pss icon ", pages.createDealScope.elems.overridePssIcon);
         steps.createDealScope.clickOnAddOverrideIconPss();
-        steps.base.scrollIntoView("Override pss ",pages.createDealScope.elems.subPublisherOverridePssInputField );
+        steps.base.scrollIntoView("Override pss ", pages.createDealScope.elems.subPublisherOverridePssInputField);
         steps.createDealScope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
         steps.createDealScope.selectSubPublisherOverrideTerritoryPss(territory);
         steps.base.scrollIntoView("Done override publisher share set", pages.createDealScope.elems.doneOverridePublisherShareSetButton);

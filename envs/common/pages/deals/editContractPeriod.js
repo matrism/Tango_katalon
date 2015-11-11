@@ -60,12 +60,35 @@ if (pages.editDealContractPeriod === undefined) {
             editMdrcCancelLink: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) a[data-ng-click='cancelCommitmentChanges(form.terms.activeCp.id, mdrc.id);']"},
             editMdrcDeleteButton: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"},
             editMdrcRemoveFirstTerritoryIcon: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div.territoriesContainer div:nth-child(1) button[ng-click='removeSelectedTerritory(item.id)']"},
-            editMdrcRemoveFirstLabelIcon: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div[ng-class='tgTypeaheadWrapClass'] div.ng-scope:nth-child(1) span[ng-click='!$isDisabled() && $removeTag($tag)']"}
+            editMdrcRemoveFirstLabelIcon: {css: "div.mdrc-list.minimum-delivery div[class*='mdrc-form']:not([class*='active']) div[ng-class='tgTypeaheadWrapClass'] div.ng-scope:nth-child(1) span[ng-click='!$isDisabled() && $removeTag($tag)']"},
+            deleteContractPeriodModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='data.deleteCp()']"},
+            cancelDeleteContractPeriodModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
+            modalDialogCp: {css: "div.modal-dialog.ng-scope"}
         },
 
         selectTheContractPeriodNumberI: function (i) {
             browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         },
+
+        checkTheContractPeriodNumberIIsDisplayed: function (i) {
+            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope")).isDisplayed();
+        },
+
+        clickOnTheDeleteContractPeriodNumberI: function (i) {
+            pages.base.scrollIntoView(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")));
+            browser.actions().mouseMove(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")"))).perform();
+            browser.actions().mouseMove(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope"))).perform();
+            //browser.actions().click(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")"))).perform();
+            browser.actions().click(element(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope"))).perform();
+            //browser.driver.findElement(by.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ") i.fa.fa-times.ng-scope")).click();
+        },
+
+        confirmDeleteContractPeriodModalDialog: function () {
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog);
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
+            browser.actions().click(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
+            //pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog.click();
+          },
 
         validateTheFirstIncompleteMdrcTitle: function () {
             pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
@@ -408,12 +431,12 @@ if (pages.editDealContractPeriod === undefined) {
             pages.editDealContractPeriod.elems.editMdrcCarriedForwardShortfallButton.click();
         },
 
-        editRemoveTheFirstMdrcTerritory : function () {
+        editRemoveTheFirstMdrcTerritory: function () {
             pages.editDealContractPeriod.elems.editMdrcTerritoriesField.click();
             pages.editDealContractPeriod.elems.editMdrcRemoveFirstTerritoryIcon.click();
         },
 
-        editRemoveTheFirstMdrcLabel : function () {
+        editRemoveTheFirstMdrcLabel: function () {
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon);
             pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon.click();
         }

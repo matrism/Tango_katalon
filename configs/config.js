@@ -1,12 +1,12 @@
 'use strict';
 var configer = global.ftf.configer,
     cli = configer.getParamsFromCli(),
-    tags = (function() {
+    tags = (function () {
         var tags = (cli.tags || '').toString().split(',');
         var negatedTags = (cli['@tags'] || '').toString().split(',');
 
-        [tags, negatedTags].forEach(function(tags) {
-            if(tags.length === 1 && tags[0] === '') {
+        [tags, negatedTags].forEach(function (tags) {
+            if (tags.length === 1 && tags[0] === '') {
                 tags.length = 0;
             }
         });

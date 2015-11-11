@@ -11,6 +11,21 @@ exports.editSelectContractPeriodNumberI = function (i) {
     });
 };
 
+exports.checkDeleteIconContractPeriodNumberIIsDisplayed = function (i) {
+    it("Check delete icon contract period number " + i + " is displayed", function () {
+        pages.editDealContractPeriod.checkTheContractPeriodNumberIIsDisplayed(i);
+    });
+};
+
+exports.deleteContractPeriodNumberI = function (i) {
+    it("Delete contract period number " + i, function () {
+        pages.editDealContractPeriod.clickOnTheDeleteContractPeriodNumberI(i);
+        pages.editDealContractPeriod.waitForAjax();
+        pages.editDealContractPeriod.confirmDeleteContractPeriodModalDialog();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
 exports.waitForMdrcToBeLoaded = function () {
     it("Wait for MDRC to be loaded", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.mdrcTitle));

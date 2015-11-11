@@ -8,6 +8,7 @@ steps.editDealPayee = exports;
 exports.clickOnPayeesHeader = function () {
     it("Click on payees header", function () {
         pages.editDealPayee.clickOnThePayeeHeaderLink();
+        pages.editDealPayee.waitForAjax();
     });
 };
 
@@ -83,6 +84,18 @@ exports.editFillIntoPayeeDistributionInputField = function () {
     });
 };
 
+exports.editCheckScopesAssociatedToPayee = function (i) {
+    it("Check the scope number " + i + "  is associated to payee ", function () {
+        pages.editDealPayee.editCheckScopeNumberIAssociatedToPayee(i);
+    });
+};
+
+exports.editCheckNoScopesOnPayeeScreen = function () {
+    it("Check there is no scope to  payee screen ", function () {
+        pages.editDealPayee.editCheckNoScopeAssociatedToPayee();
+    });
+};
+
 exports.itEditAddPayeeOrganisationAndAssociateScope = function (payee_name) {
     describe("Edit add payee as organisation and associate random scope ", function () {
         steps.editDealPayee.editSelectRandomPayeeOrganisationFromDropDown(payee_name);
@@ -96,13 +109,13 @@ exports.itEditAddPayeeOrganisationAndAssociateScope = function (payee_name) {
     });
 };
 
-exports.itEditAddPayeePersonAndAssociateScope = function (payee_name) {
+exports.itEditAddPayeePersonAndAssociateScope = function (payee_name,i) {
     describe("Edit add payee as person and associate random scope ", function () {
         steps.editDealPayee.editSelectRandomPayeePersonFromDropDown(payee_name);
         steps.base.scrollIntoView("Company", pages.editDealPayee.elems.editPayeeCompanyNameCodeInputField);
         steps.editDealPayee.editSelectRandomValueForPayeeCompanyNameCode();
         steps.base.scrollIntoView("Scope", pages.editDealPayee.elems.editScopePayeeInputField);
-        steps.editDealPayee.editAssociateSpecificScopeNumberIToPayee(1);
+        steps.editDealPayee.editAssociateSpecificScopeNumberIToPayee(i);
         steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
         steps.editDealPayee.editFillIntoPayeeDistributionInputField();
         steps.editDealPayee.editSavePayeeForm();

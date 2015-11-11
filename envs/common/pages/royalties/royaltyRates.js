@@ -8,30 +8,30 @@ if (pages.royaltyRates === undefined) {
     pages.royaltyRates = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
-            newRoyaltyRateSetButton: { css: ".ng-scope.ng-warn.ng-dirty>div>a" },
-            closeRateSetButton: { css: ".btn-cancel" },
-            confirmCancelButton: { css: ".modal-footer>.btn-primary" },
-            RRNameLabel: { css: ".rate-set-entity-name>div>label" },
-            incomeProvidesLabel: { css: ".flex1>label" },
-            incomeProviderInput: { css: ".ux-multiselect-type" },
-            incomeDateMethodLabel: { css: ".flex1>div:nth-child(2)>div:not([class])>label" },
-            effectiveStartDateLabel: { css: ".rate-set-calendar>label" },
-            contractualRateLabel: { css: ".rate-set-rate-field>label" },
-            interCompanyLabel: { css: ".rate-set-header-row:nth-child(3)>div:not([class])>label" },
-            scopeHeadingElement: { css: ".scope-heading" },
-            yesInterCompanyRateCoverMechanical: { css: "div.rate-set_group__coverMechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            yesInterCompanyRateMechanical: { css: "div.rate-set_group__mechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            yesInterCompanyRateNonSocietyPerformance: { css: "div.rate-set_group__nonSocietyPerformance button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            yesInterCompanyRateOthers: { css: "div.rate-set_group__others button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            yesInterCompanyRatePerformance: { css: "div.rate-set_group__performance button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            yesInterCompanyRatePrint: { css: "div.rate-set_group__print button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            yesInterCompanyRateSynch: { css: "div.rate-set_group__synch button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            yesInterCompanyRateTpp: { css: "div.rate-set_group__tpp button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)" },
-            interCompanyInputField: { css: "input[data-ng-model='set.ic_rate']" },
-            confirmOverrideModalDialog: { css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']" },
-            overrideModalDialog: { css: "div.modal-dialog.ng-scope" },
-            interCompanyArrow: { css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']" },
-            rateSetNameFieldIcon: { css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']" }
+            newRoyaltyRateSetButton: {css: ".ng-scope.ng-warn.ng-dirty>div>a"},
+            closeRateSetButton: {css: ".btn-cancel"},
+            confirmCancelButton: {css: ".modal-footer>.btn-primary"},
+            RRNameLabel: {css: ".rate-set-entity-name>div>label"},
+            incomeProvidesLabel: {css: ".flex1>label"},
+            incomeProviderInput: {css: ".ux-multiselect-type"},
+            incomeDateMethodLabel: {css: ".flex1>div:nth-child(2)>div:not([class])>label"},
+            effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
+            contractualRateLabel: {css: ".rate-set-rate-field>label"},
+            interCompanyLabel: {css: ".rate-set-header-row:nth-child(3)>div:not([class])>label"},
+            scopeHeadingElement: {css: ".scope-heading"},
+            yesInterCompanyRateCoverMechanical: {css: "div.rate-set_group__coverMechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateMechanical: {css: "div.rate-set_group__mechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateNonSocietyPerformance: {css: "div.rate-set_group__nonSocietyPerformance button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateOthers: {css: "div.rate-set_group__others button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRatePerformance: {css: "div.rate-set_group__performance button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRatePrint: {css: "div.rate-set_group__print button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateSynch: {css: "div.rate-set_group__synch button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            yesInterCompanyRateTpp: {css: "div.rate-set_group__tpp button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
+            interCompanyInputField: {css: "input[data-ng-model='set.ic_rate']"},
+            confirmOverrideModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
+            overrideModalDialog: {css: "div.modal-dialog.ng-scope"},
+            interCompanyArrow: {css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']"},
+            rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"}
         },
 
         activeContractPeriod: function () {
@@ -158,7 +158,8 @@ if (pages.royaltyRates === undefined) {
         },
 
         effectiveStartDateInput: function () {
-            return element.all(by.css(".rate-set-calendar>div>.date-picker-input")).last();
+            //return element.all(by.css(".rate-set-calendar>div>.date-picker-input")).last();
+            return element(by.css("div.rate-set-calendar div[name='effectiveDate'] input.date-picker-input"));
         },
 
         newRoyaltyRateSetButton: function () {
@@ -355,23 +356,24 @@ if (pages.royaltyRates === undefined) {
             browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
                 .then(function (result) {
                     for (i = 0; i < result.length; i++) {
-                      result[i].sendKeys("45");
-                    }}
-                    )
-                },
-        typeAllInputs:function(value){
+                        result[i].sendKeys("45");
+                    }
+                }
+            )
+        },
+        typeAllInputs: function (value) {
             var i = 0;
 
             browser.driver.executeScript(" var els = document.querySelectorAll('.rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input');" +
                 "   for (var i=0; i < els.length; i++) {" +
                 "       els[i].value = '5.55'; }");
             $$(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input")
-                  .then(function (result) {
-                      console.log("Inputs to type in : " + result.length);
-                      for (i = 0; i < result.length; i++) {
-                          result[i].sendKeys("55");
-                      }
-                  });
+                .then(function (result) {
+                    console.log("Inputs to type in : " + result.length);
+                    for (i = 0; i < result.length; i++) {
+                        result[i].sendKeys("55");
+                    }
+                });
         },
 
         typeAllInputsTest: function (value) {
@@ -446,11 +448,11 @@ if (pages.royaltyRates === undefined) {
                 .then(function findMatchingOption(options) {
                     options.some(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                            if (text.indexOf(sentKeys) != -1) {
-                                desiredOption = option;
-                                return true;
+                                if (text.indexOf(sentKeys) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
                             }
-                        }
                         )
                     });
                 })
@@ -703,8 +705,9 @@ if (pages.royaltyRates === undefined) {
 
         clickYesOnRateMethodModal: function () {
             var rateMethodModalYesButton;
-            browser.wait(ExpectedConditions.elementToBeClickable(element(by.css(".modal-footer>.btn.btn-primary"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css(".modal-footer>.btn.btn-primary"))));
             rateMethodModalYesButton = element(by.css(".modal-footer>.btn.btn-primary"));
+            pages.base.scrollIntoView(rateMethodModalYesButton);
             rateMethodModalYesButton.click();
         },
 
@@ -712,8 +715,23 @@ if (pages.royaltyRates === undefined) {
             this.lastSetOnReceiptFromCoverMechanical().click();
         },
 
+        clickDeleteButtonForRRSet: function () {
+            var RRDoneButton;
+            RRDoneButton = element(by.css("button[data-ng-click='CR.onRatesSetDelete(set, activeScope)']"));
+            pages.base.scrollIntoView(RRDoneButton);
+            RRDoneButton.click();
+
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
+            browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
+            //pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.delete()']")));
+            browser.actions().mouseMove(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
+            //browser.actions().click(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
+            browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.delete()']")).click();
+            //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+        },
+
+
         clickDoneButtonForRRSet: function () {
-            console.log(JSON.stringify(hash.royaltyRates.royaltyRateObjectsList, null, 4));
 
             var RRDoneButton;
             RRDoneButton = element(by.css(".rate-sets-top-toolbar>button"));

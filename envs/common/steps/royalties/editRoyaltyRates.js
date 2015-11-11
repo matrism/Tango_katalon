@@ -194,6 +194,7 @@ exports.closeRateSet = function () {
 exports.openRateSetPanel = function () {
     it("Expand Saved Rate Set", function () {
         pages.editRoyaltyRates.clickOpenRRButton();
+        pages.editRoyaltyRates.waitForAjax();
     });
 };
 

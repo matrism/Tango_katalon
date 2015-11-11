@@ -603,4 +603,4 @@ exports.itFillDealMandatoryFieldsContractPeriodEndDate = function () {
     it("Fill mandatory fields contract period screen end date", function () {
         pages.createDealContractPeriod.fillTargetEndMonths();
     });
-}
+};

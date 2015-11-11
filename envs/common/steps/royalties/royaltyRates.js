@@ -18,8 +18,8 @@ exports.addNewRoyaltySet = function () {
 
 exports.addNewRoyaltySetEdit = function () {
     it("Add new Royalty Rate Set", function () {
-        pages.royaltyRates.clickNewRoyaltySetButtonEdit();
-    }
+            pages.royaltyRates.clickNewRoyaltySetButtonEdit();
+        }
     );
 };
 
@@ -224,6 +224,7 @@ exports.addAdminFeeToContractualField = function (percentage) {
 exports.clickOnReceiptApplicationMethod = function () {
     it("Change Rate Application Method to On Receipt", function () {
         pages.royaltyRates.clickButtonOnReceiptApplicationMethod();
+        pages.royaltyRates.waitForAjax();
     });
 };
 
@@ -310,6 +311,13 @@ exports.saveRateSet = function () {
         pages.royaltyRates.clickDoneButtonForRRSet();
         pages.royaltyRates.waitForAjax();
         //pages.royaltyRates.waitForRRToBeSaved();
+    });
+};
+
+exports.deleteRateSet = function () {
+    it("Delete current Rate Set", function () {
+        pages.royaltyRates.clickDeleteButtonForRRSet();
+        pages.royaltyRates.waitForAjax();
     });
 };
 
@@ -613,6 +621,8 @@ exports.editSingleRoyaltySet = function () {
 
         browser.actions().mouseMove(el).perform();
         pages.editRoyaltyRates.clickEditSavedRRIcon();
+
+        pages.editRoyaltyRates.waitForAjax();
         //
         //
         //  steps.editRoyaltyRates.openRateSetPanel()
