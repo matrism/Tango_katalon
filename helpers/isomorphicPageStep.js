@@ -1,18 +1,7 @@
 'use strict';
 
-var changeCase = require('change-case');
-
-function recursivelyAccess(object, propertyNames, options) {
-    return propertyNames.reduce(function(object, propertyName) {
-        var property = object[propertyName];
-
-        if(!property && options && options.create) {
-            property = object[propertyName] = {};
-        }
-
-        return property;
-    }, object);
-}
+var changeCase = require('change-case'),
+    recursivelyAccess = require('./recursivelyAccess');
 
 module.exports = function(options) {
     var propertyNames = options.name.map(changeCase.camelCase),
