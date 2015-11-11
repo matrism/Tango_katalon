@@ -25,7 +25,7 @@ global.hash = {};
 
 hash.testVariables = {};
 
-require('../helpers/services_helper');
+require('../helpers');
 
 global.systemConfig = global._tf_config._system_;
 
