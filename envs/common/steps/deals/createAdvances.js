@@ -114,12 +114,6 @@ if (steps.createDealAdvances === undefined) {
             });
         },
 
-        fillIntoDigitalRightsPercentFieldAdvanceApplicableEarnings: function () {
-            it("Fill into the digital rights percent field advance applicable earnings ", function () {
-                pages.createDealAdvances.fillIntoTheDigitalRightsPercentFieldAdvanceApplicableEarnings();
-            });
-        },
-
         fillIntoPrintRightsPercentFieldAdvanceApplicableEarnings: function () {
             it("Fill into the print rights percent field advance applicable earnings ", function () {
                 pages.createDealAdvances.fillIntoThePrintRightsPercentFieldAdvanceApplicableEarnings();
@@ -153,12 +147,6 @@ if (steps.createDealAdvances === undefined) {
         clickOnGrandPipelineCheckBoxAdvanceApplicableEarnings: function () {
             it("Click on the grand pipeline check box advance applicable earnings ", function () {
                 pages.createDealAdvances.clickOnTheGrandPipelineCheckBoxAdvanceApplicableEarnings();
-            });
-        },
-
-        clickOnDigitalPipelineCheckBoxAdvanceApplicableEarnings: function () {
-            it("Click on the digital pipeline check box advance applicable earnings ", function () {
-                pages.createDealAdvances.clickOnTheDigitalPipelineCheckBoxAdvanceApplicableEarnings();
             });
         },
 
@@ -202,13 +190,6 @@ if (steps.createDealAdvances === undefined) {
             });
         },
 
-        selectRandomDefineDigitalTerritoryAdvanceApplicableEarnings: function () {
-            it("Select the random define digital territory advance applicable earnings ", function () {
-                pages.createDealAdvances.selectTheRandomDefineDigitalTerritoryAdvanceApplicableEarnings();
-                pages.createDealAdvances.waitForAjax();
-            });
-        },
-
         selectRandomDefinePrintTerritoryAdvanceApplicableEarnings: function () {
             it("Select the random define print territory advance applicable earnings ", function () {
                 pages.createDealAdvances.selectTheRandomDefinePrintTerritoryAdvanceApplicableEarnings();
@@ -247,13 +228,6 @@ if (steps.createDealAdvances === undefined) {
         selectRandomDefineGrandLabelAdvanceApplicableEarnings: function () {
             it("Select the random define grand label advance applicable earnings ", function () {
                 pages.createDealAdvances.selectTheRandomDefineGrandLabelAdvanceApplicableEarnings();
-                pages.createDealAdvances.waitForAjax();
-            });
-        },
-
-        selectRandomDefineDigitalLabelAdvanceApplicableEarnings: function () {
-            it("Select the random define digital label advance applicable earnings ", function () {
-                pages.createDealAdvances.selectTheRandomDefineDigitalLabelAdvanceApplicableEarnings();
                 pages.createDealAdvances.waitForAjax();
             });
         },
@@ -312,12 +286,6 @@ if (steps.createDealAdvances === undefined) {
                 steps.createDealAdvances.clickOnGrandPipelineCheckBoxAdvanceApplicableEarnings();
                 steps.createDealAdvances.selectRandomDefineGrandTerritoryAdvanceApplicableEarnings();
                 steps.createDealAdvances.selectRandomDefineGrandLabelAdvanceApplicableEarnings();
-
-                steps.base.scrollIntoView("Digital rights", pages.createDealAdvances.elems.digitalRightsPercentAdvanceApplicableEarnings);
-                steps.createDealAdvances.fillIntoDigitalRightsPercentFieldAdvanceApplicableEarnings();
-                steps.createDealAdvances.clickOnDigitalPipelineCheckBoxAdvanceApplicableEarnings();
-                steps.createDealAdvances.selectRandomDefineDigitalTerritoryAdvanceApplicableEarnings();
-                steps.createDealAdvances.selectRandomDefineDigitalLabelAdvanceApplicableEarnings();
 
                 steps.base.scrollIntoView("print ", pages.createDealAdvances.elems.printRightsPercentAdvanceApplicableEarnings);
                 steps.createDealAdvances.fillIntoPrintRightsPercentFieldAdvanceApplicableEarnings();
