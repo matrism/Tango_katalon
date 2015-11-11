@@ -86,6 +86,10 @@ config = {
             failFast = require('jasmine-fail-fast'),
             beforeReporter = require('../helpers/beforeReporter');
 
+        global.promise = protractor.promise;
+        global.ExpectedConditions = protractor.ExpectedConditions;
+        global.EC = ExpectedConditions;
+
         if (systemConfig.failFast) {
             jasmine.getEnv().addReporter(failFast.init());
         }
