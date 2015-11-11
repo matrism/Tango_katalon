@@ -654,15 +654,11 @@ if (pages.editDealScope === undefined) {
         editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI: function (i) {
             pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
             browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
-            browser.sleep(1000);
-            pages.editDealScope.waitForAjax();
         },
 
         editClickOnTheCancelCopyScopeButtonNumberOfCopiesScopeNumberI: function (i) {
             pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left")));
             browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left")).click();
-            browser.sleep(1000);
-            pages.editDealScope.waitForAjax();
         },
 
         editClickOnTheAddOverrideIconPss: function () {

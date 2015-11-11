@@ -350,14 +350,17 @@ exports.editClickOnCopyButtonCopySpecificNumberOfScopesFromScopeNumberI = functi
 exports.editClickOnCancelButtonCopySpecificNumberOfScopesFromScopeNumberI = function (i) {
     it("Edit -click on cancel copy button from scope number " + i, function () {
         pages.editDealScope.editClickOnTheCancelCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
 exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
     it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
         pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.waitForAjax();
         pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
         pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -386,19 +389,26 @@ exports.checkPayeesPresentInCopyScopeModal = function () {
 exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR = function (i, number) {
     it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
         pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.waitForAjax();
         pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
         pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+        pages.editDealScope.waitForAjax();
         pages.editDealScope.clickOnTheCopyRoyaltyRatesInCopyScopeModal();
+        pages.editDealScope.waitForAjax();
         pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
 exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss = function (i, number) {
     it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
         pages.editDealScope.editClickOnCopyScopeOptionNumberI(i);
+        pages.editDealScope.waitForAjax();
         pages.editDealScope.editFillInTheNumberOfCopiesForScopeNumberISpecificValue(i, number);
         pages.editDealScope.clickOnTheCopyPublisherShareInCopyScopeModal();
+        pages.editDealScope.waitForAjax();
         pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
