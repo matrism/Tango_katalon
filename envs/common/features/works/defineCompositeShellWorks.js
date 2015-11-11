@@ -16,22 +16,15 @@ exports.feature = [
             name: 'Create persons to use as creators for COS and MED composite work',
             tags: [],
             steps: function () {
-                _.times(3, function (i) {
-                    steps.person.useBlankPersonSlot(i);
-
-                    steps.newPerson.goToNewPersonPage();
-
-                    steps.newPerson.enterLastName(
-                        'TEST PERSON ' + (i + 1) + ' ' + randomString('person' + i)
-                    );
-
-                    steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
-                    steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
-
-                    steps.newPerson.save();
-
-                    steps.person.findInternalIpiNumber();
-                });
+                steps.person.useBlankPersonSlot(0);
+                steps.newPerson.goToNewPersonPage();
+                steps.newPerson.enterLastName(
+                    'TEST PERSON 1 ' + randomString('person' + 0)
+                );
+                steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
+                steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
+                steps.newPerson.save();
+                steps.person.findInternalIpiNumber();
             }
         },
         {
