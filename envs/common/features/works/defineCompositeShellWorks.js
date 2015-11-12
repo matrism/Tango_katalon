@@ -16,7 +16,7 @@ exports.feature = [
             name: 'Create persons to use as creators for COS and MED composite work',
             tags: [],
             steps: function () {
-                _.times(3, function (i) {
+                _.times(2, function (i) {
                     steps.person.useBlankPersonSlot(i);
 
                     steps.newPerson.goToNewPersonPage();
