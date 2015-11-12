@@ -11,6 +11,114 @@ if (pages.organisation === undefined) {
     pages.organisation = exports = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/org",
         locators: {},
+        futureRegistrationRunButton: function () {
+            return $('[data-tooltip="Cannot execute runs scheduled for the future."]');
+        },
+        registrationRunButtonNoWorks: function () {
+            return $('[data-tooltip="There are no scheduled works."]');
+        },
+        validationErrorsNoButton: function () {
+            return $('[data-tooltip="There are no scheduled works with Validation errors to review."]');
+        },
+        registrationRunButtonNoValidWorks: function () {
+            return $('[data-tooltip="There are no valid scheduled works. Please make sure at least one work is valid."]');
+        },
+        activityHeaderCount: function () {
+            return $(".ACTIVITY-HEADER .count").getText();
+        },
+        activityHeaderErrorCount: function () {
+            return $$(".ACTIVITY-HEADER .count>span").first().getText();
+        },
+        scrollPageDataRow: function () {
+            return $$(".DATA-ROW").count();
+        },
+        scrollPageDataErrors: function () {
+            return $$(".DATA-CHILD .DATA-ROW").count();
+        },
+        listErrorStatus: function () {
+            return $$(".row-header>div:nth-child(2)>span .icon-minus-sign").count();
+        },
+        listNonErrorStatus: function () {
+            return $$(".row-header>div:nth-child(2)>span .icon-minus").count();
+        },
+        listWorkTitle: function () {
+            return $$(".row-header>div:nth-child(3)>h4").get(1).getText();
+        },
+        listErrorWorkTitle: function () {
+            return $$(".row-header>div>div:nth-child(2)>h4").first().getText();
+        },
+        listWorkCreators: function () {
+            return $$(".row-header>div:nth-child(3)>div>div").get(1).getText();
+        },
+        listWorkIdNumber: function () {
+            return $$(".row-header>div:nth-child(4)>div:nth-child(2)>a").get(1).getText();
+        },
+        listErrorWorkIdNumber: function () {
+            return $$(".row-header>div>div:nth-child(3)>a").first().getText();
+        },
+        getScheduledStatus: function () {
+            return $$('.filter-item').first();
+        },
+        scheduledStatusNumber: function () {
+            return $$('.filter-item>div:nth-child(2)').first().getText();
+        },
+        getNotScheduledStatus: function () {
+            return $$('.filter-item').get(1);
+        },
+        notScheduledStatusNumber: function () {
+            return $$('.filter-item>div:nth-child(2)').get(1).getText();
+        },
+        noErrorsStatus: function () {
+            return $$('.filter-item').get(2);
+        },
+        noErrorsStatusNumber: function () {
+            return $$('.filter-item>div:nth-child(2)').get(2).getText();
+        },
+        nonCriticalErrorsStatus: function () {
+            return $$('.filter-item').get(3);
+        },
+        nonCriticalErrorsStatusNumber: function () {
+            return $$('.filter-item>div:nth-child(2)').get(3).getText();
+        },
+        getStatusPanel: function() {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="status"]').count();
+        },
+        getErrorTypePanel: function() {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="error_type"]').count();
+        },
+        getValidationPanel: function() {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="validation_status"]').count();
+        },
+        getRunTypePanel: function() {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="run_type"]').count();
+        },
+        getStatusFilter: function(item) {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="status"]').get(item);
+        },
+        getErrorTypeFilter: function(item) {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="error_type"]').get(item);
+        },
+        getPanelFilter: function(item) {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="validation_status"]').get(item);
+        },
+        getRunTypeFilter: function(item) {
+            return $$('.filter-item .filter-text span[data-ng-switch-when="run_type"]').get(item);
+        },
+        getFilter: function(item) {
+            return $$('.filter-item .filter-text span').get(item);
+        },
+        getStatusFilterNumber: function(item) {
+            return $$('.filter-item>div:nth-child(2)').get(item).getText();
+        },
+        getStatusFilterText: function(item) {
+            return $$('.filter-item>div:nth-child(3)>span').get(item).getText();
+        },
+        getValidationFilterNumber: function(item) {
+            return $$('.filter-item>div:nth-child(2)').get(item).getText();
+        },
+        backValidationErrors: function () {
+            return $$(".ACTIVITY-HEADER a").first();
+        },
         organisationNameInput: function () {
             return $(".e2e-general-name>div>input");
         },
@@ -256,6 +364,125 @@ if (pages.organisation === undefined) {
         },
 
         //END OF LOCATORS ///////////////////////////////////////
+        executeRegistrationFutureIsActive: function () {
+            return this.futureRegistrationRunButton().isPresent();
+        },
+        registrationRunButtonNoWorksIsActive: function () {
+            return this.registrationRunButtonNoWorks().isPresent();
+        },
+        validationErrorsButtonDisabled: function () {
+            return this.validationErrorsNoButton().isPresent();
+        },
+        registrationRunButtonNoValidWorksIsActive: function () {
+            return this.registrationRunButtonNoValidWorks().isPresent();
+        },
+        scrollPreviewRegRun: function () {
+            browser.executeScript('window.scrollTo(0,document.body.scrollHeight)').then(function() {
+                return pages.base.waitForAjax();
+            });
+        },
+        getBackValidationErrors: function () {
+            this.backValidationErrors().click();
+            pages.base.waitForAjax();
+        },
+        getCriticalErrors: function () {
+            return this.listErrorStatus();
+        },
+        getNonCriticalErrors: function () {
+            return this.listNonErrorStatus();
+        },
+        getPreviewRegRunWorks: function() {
+            return pages.organisation.scrollPageDataRow();
+        },
+        scrollValidationErrorsPage: function() {
+            browser.executeScript('window.scrollTo(0,document.body.scrollHeight)').then(function() {
+                return pages.base.waitForAjax();
+            });
+        },
+        getValidationErrorsWorks: function() {
+            return pages.organisation.scrollPageDataErrors();
+        },
+        listWorkTitleRegRun: function () {
+            return this.listWorkTitle();
+        },
+        listErrorWorkTitleRegRun: function () {
+            return this.listErrorWorkTitle();
+        },
+        listWorkCreatorsRegRun: function () {
+            return this.listWorkCreators();
+        },
+        listWorkIdNumberRegRun: function () {
+            return this.listWorkIdNumber();
+        },
+        listErrorWorkIdNumberRegRun: function () {
+            return this.listErrorWorkIdNumber();
+        },
+        clickStatusFilter: function(item) {
+            this.getStatusFilter(item).click();
+            pages.base.waitForAjax();
+        },
+        clickErrorTypeFilter: function(item) {
+            this.getErrorTypeFilter(item).click();
+            pages.base.waitForAjax();
+        },
+        clickValidationFilter: function(item) {
+            this.getPanelFilter(item).click();
+            pages.base.waitForAjax();
+        },
+        clickRunFilter: function(item) {
+            this.getRunTypeFilter(item).click();
+            pages.base.waitForAjax();
+        },
+        validateCrFile: function (workNumber, stepValue, period) {
+
+            //var dir = 'C:\\Users\\constantin.crismaru\\Downloads\\';
+
+            return pages.organisation.activityHeaderCount().then(function (header) {
+                var parts = header.split(' '),
+                    myDate = new Date(),
+                    currentDay = ( myDate.getDate().toString().length == 1) ? '0' + myDate.getDate() : myDate.getDate(),
+                    filename = '',
+                    periodSize = period.length - 1,
+                    returnObj ={};
+
+                period = period.substr(0,periodSize);
+
+                switch(stepValue){
+                    case 'primary': filename  = '_PRIMARY_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                        break;
+                    case 'custom': filename  = '_' + parts[0] + '_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                        break;
+                    case 'error_custom': filename  = '_' + period + '_ERR_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                        break;
+                    case 'error': filename  = '_PRIMARY_ERR_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                        break;
+                    default: break;
+                };
+
+                var f = fs.readFileSync(systemConfig.downloadsDirectoryPath + filename, {encoding: 'utf-8'});
+
+                // Split on row
+                f = f.split('\n');
+
+                f.forEach(function (row) {
+                    if(row.indexOf(workNumber) > -1) {
+                        var creatorPart = row.split('"'),
+                            workPart = creatorPart[0].split(',');
+
+                        returnObj = {
+                            workName: workPart[1],
+                            creator: creatorPart[1],
+                            workNumber: workNumber
+                        };
+                    }
+                });
+
+                returnObj.fileSize = f.length;
+
+                return returnObj;
+            });
+
+        },
         getThirdPartyName: function (deliveryMethod) {
             return this.thirdPartyName(deliveryMethod).getText();
         },
