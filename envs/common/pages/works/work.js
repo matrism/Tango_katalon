@@ -207,7 +207,7 @@ module.exports.creatorNamesContainer = function() {
     return $(".EDITOR.creators-edit");
 };
 module.exports.editCreatorsContainer = function() {
-	return $("div[data-ng-show='workHeader.creators.edit']");
+	return $('div[data-ng-show="workHeader.creators.edit"]');
 };
 module.exports.editCreatorsButton = function() {
     return $(
