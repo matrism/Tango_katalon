@@ -31,7 +31,7 @@ var data = {
 };
 
 exports.beforeFeature = function () {
-	steps.login.itLogin();
+    steps.login.itLogin();
 };
 
 exports.feature = [
@@ -52,10 +52,10 @@ exports.feature = [
            });
         }
     },
-	{
-		name: 'New basic work',
-		tags: ['create'],
-		steps: function () {
+    {
+        name: 'New basic work',
+        tags: ['create'],
+        steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
 
             steps.newWork.goToNewWorkPage();
@@ -156,11 +156,11 @@ exports.feature = [
             });
 
         }
-	},
-	{
-		name: 'Validate basic work',
-		tags: ['validate'],
-		steps: function () {
+    },
+    {
+        name: 'Validate basic work',
+        tags: ['validate'],
+        steps: function () {
             steps.work.goToWorkPage();
 
             steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
@@ -200,12 +200,12 @@ exports.feature = [
 
             steps.work.validateSubjectCreatorNames(data.creators.length);
             steps.work.validateSubjectCreatorContributions(data.creators.length);
-		}
-	},
-	{
-		name: 'Edit basic work',
-		tags: ['edit'],
-		steps: function () {
+        }
+    },
+    {
+        name: 'Edit basic work',
+        tags: ['edit'],
+        steps: function () {
             steps.work.goToWorkPage();
 
             // Creation Date
@@ -397,12 +397,12 @@ exports.feature = [
             steps.base.dirtyCheckContinueEditing();
             steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
             steps.work.saveWorkInclusionOnWebsite();
-		}
-	},
-	{
-		name: 'Validate basic work',
-		tags: ['validate'],
-		steps: function () {
+        }
+    },
+    {
+        name: 'Validate basic work',
+        tags: ['validate'],
+        steps: function () {
             steps.work.goToWorkPage();
 
             steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
@@ -442,7 +442,7 @@ exports.feature = [
 
             steps.work.validateSubjectCreatorNames(data.creators.length);
             steps.work.validateSubjectCreatorContributions(data.creators.length);
-		}
-	}
+        }
+    }
 ];
 
