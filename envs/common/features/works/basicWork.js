@@ -402,35 +402,6 @@ exports.feature = [
                 steps.work.saveCreators();
             }
 
-            if (!more.skip.deliveryDate) {
-                steps.work.hoverDeliveryDateContainerLabel();
-                steps.work.editDeliveryDate();
-                (function () {
-                    var daysAgo = _.random(1, 30 * 12 * 2);
-                    var pastDate = random.moment(moment().subtract(daysAgo, "day"));
-
-                    data.deliveryYear = steps.work.enterDifferentDeliveryYear();
-                    steps.work.cancelDeliveryDateEditing();
-                    steps.base.dirtyCheckConfirmCancellation();
-                    steps.work.hoverDeliveryDateContainerLabel();
-                    steps.work.editDeliveryDate();
-                    steps.work.expectEnteredDeliveryYearNotToBe(data.deliveryYear);
-
-                    data.deliveryYear = pastDate.year();
-                    steps.work.enterDeliveryYear(data.deliveryYear);
-                    steps.work.cancelDeliveryDateEditing();
-                    steps.base.dirtyCheckContinueEditing();
-                    steps.work.expectEnteredDeliveryYearToBe(data.deliveryYear);
-
-                    data.deliveryMonth = pastDate.month();
-                    steps.work.enterDeliveryMonth(data.deliveryMonth);
-
-                    data.deliveryDay = pastDate.date();
-                    steps.work.enterDeliveryDay(data.deliveryDay);
-                })();
-                steps.work.saveDeliveryDate();
-            }
-
             if (!more.skip.assetType) {
                 steps.work.hoverAssetTypeContainer();
                 steps.work.editAssetType();
@@ -490,6 +461,35 @@ exports.feature = [
                 steps.work.saveWorkOrigin();
             }
 
+            if (!more.skip.deliveryDate) {
+                steps.work.hoverDeliveryDateContainerLabel();
+                steps.work.editDeliveryDate();
+                (function () {
+                    var daysAgo = _.random(1, 30 * 12 * 2);
+                    var pastDate = random.moment(moment().subtract(daysAgo, "day"));
+
+                    data.deliveryYear = steps.work.enterDifferentDeliveryYear();
+                    steps.work.cancelDeliveryDateEditing();
+                    steps.base.dirtyCheckConfirmCancellation();
+                    steps.work.hoverDeliveryDateContainerLabel();
+                    steps.work.editDeliveryDate();
+                    steps.work.expectEnteredDeliveryYearNotToBe(data.deliveryYear);
+
+                    data.deliveryYear = pastDate.year();
+                    steps.work.enterDeliveryYear(data.deliveryYear);
+                    steps.work.cancelDeliveryDateEditing();
+                    steps.base.dirtyCheckContinueEditing();
+                    steps.work.expectEnteredDeliveryYearToBe(data.deliveryYear);
+
+                    data.deliveryMonth = pastDate.month();
+                    steps.work.enterDeliveryMonth(data.deliveryMonth);
+
+                    data.deliveryDay = pastDate.date();
+                    steps.work.enterDeliveryDay(data.deliveryDay);
+                })();
+                steps.work.saveDeliveryDate();
+            }
+
             if (!more.skip.inclusionOnWebsite) {
                 steps.work.hoverWorkInclusionOnWebsiteIndicator();
                 steps.work.editWorkInclusionOnWebsite();
@@ -519,7 +519,7 @@ exports.feature = [
             more.skip = more.skip || {};
             //more.skip.alternateWorkTitles = true;
             //more.skip.assetType = true;
-            more.skip.workOrigin = true;
+            //more.skip.workOrigin = true;
             //more.skip.creationDate = true;
             //more.skip.deliveryDate = true;
 
