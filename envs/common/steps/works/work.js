@@ -690,14 +690,9 @@ module.exports.saveCreators = function () {
     );
 };
 module.exports.hoverCreationDateContainerLabel = function () {
-    it(
-        "Hover creation date container label", function () {
-            var element = pages.work.creationDateContainerLabel();
-            pages.base.scrollIntoView(element);
-            browser.executeScript('window.scrollTo(0,0)');
-            expect(element.isDisplayed()).toBeTruthy();
-            browser.actions().mouseMove(element).perform();
-        }
+    steps.base.hoverElement(
+        "creation date container label",
+        pages.work.creationDateContainerLabel()
     );
 };
 module.exports.editCreationDate = function () {

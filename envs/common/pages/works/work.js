@@ -500,17 +500,17 @@ module.exports.musicArrangementBinding = function() {
 };
 module.exports.intendedPurposeBinding = function() {
     return element(by.binding(
-        "getAdminDataName(dataHolder.intendedPurposes, " +
-        "modularEditModels.model.intended_purpose)"
+        'getAdminDataName(dataHolder.intendedPurposes, ' +
+        'modularEditModels.model.intended_purpose)'
     ));
 };
 module.exports.productionTitleBinding = function() {
-    return element(by.binding("modularEditModels.model.production_title.title"));
+    return element(by.binding('modularEditModels.model.production_title.title'));
 };
 module.exports.bltvrBinding = function() {
     return element(by.binding(
-        "getAdminDataName(dataHolder.bltvrs, " +
-        "modularEditModels.model.bltvr)"
+        'getAdminDataName(dataHolder.bltvrs, ' +
+        'modularEditModels.model.bltvr)'
     ));
 };
 module.exports.musicLibraryBinding = function() {
@@ -577,7 +577,7 @@ module.exports.saveWorkOriginButton = function() {
     );
 };
 module.exports.editIntendedPurposeField = function() {
-    return $("[data-ng-model='modularEditModels.model.intended_purpose']>div");
+    return $('[data-ng-model="modularEditModels.model.intended_purpose"]>div');
 };
 module.exports.editProductionTitleField = function() {
     return element(by.model("workOriginEdit.model.production_title.title"));
@@ -600,7 +600,7 @@ module.exports.editWorkInclusionOnWebsiteContainer = function() {
 module.exports.editWorkInclusionOnWebsiteButton = function() {
     return (
         pages.work.editWorkInclusionOnWebsiteContainer()
-            .$("[data-ng-click='tgModularViewMethods.switchToEditView()']")
+            .$('[data-ng-click="tgModularViewMethods.switchToEditView()"]')
     );
 };
 module.exports.cancelWorkInclusionOnWebsiteButton = function() {
