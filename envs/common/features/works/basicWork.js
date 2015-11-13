@@ -440,7 +440,6 @@ exports.feature = [
                 steps.work.hoverWorkOriginContainer();
                 steps.work.editWorkOrigin();
 
-                //TODO: This step is not opening the dropdown
                 data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
 
                 steps.work.cancelWorkOriginEditing();
