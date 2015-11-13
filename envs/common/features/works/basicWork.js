@@ -285,6 +285,35 @@ exports.feature = [
                 steps.work.goToWorkPage();
             }
 
+            if (!more.skip.creationDate) {
+                steps.work.hoverCreationDateContainerLabel();
+                steps.work.editCreationDate();
+                (function () {
+                    var daysAgo = _.random(1, 30 * 12 * 2);
+                    var pastDate = random.moment(moment().subtract(daysAgo, "day"));
+
+                    data.creationYear = steps.work.enterDifferentCreationYear();
+                    steps.work.cancelCreationDateEditing();
+                    steps.base.dirtyCheckConfirmCancellation();
+                    steps.work.hoverCreationDateContainerLabel();
+                    steps.work.editCreationDate();
+                    steps.work.expectEnteredCreationYearNotToBe(data.creationYear);
+
+                    data.creationYear = pastDate.year();
+                    steps.work.enterCreationYear(data.creationYear);
+                    steps.work.cancelCreationDateEditing();
+                    steps.base.dirtyCheckContinueEditing();
+                    steps.work.expectEnteredCreationYearToBe(data.creationYear);
+
+                    data.creationMonth = pastDate.month();
+                    steps.work.enterCreationMonth(data.creationMonth);
+
+                    data.creationDay = pastDate.date();
+                    steps.work.enterCreationDay(data.creationDay);
+                })();
+                steps.work.saveCreationDate();
+            }
+
             if (!more.skip.workTitles) {
                 steps.work.hoverPrimaryWorkTitleHeading();
                 steps.work.editWorkTitles();
@@ -371,35 +400,6 @@ exports.feature = [
                 })();
 
                 steps.work.saveCreators();
-            }
-
-            if (!more.skip.creationDate) {
-                steps.work.hoverCreationDateContainerLabel();
-                steps.work.editCreationDate();
-                (function () {
-                    var daysAgo = _.random(1, 30 * 12 * 2);
-                    var pastDate = random.moment(moment().subtract(daysAgo, "day"));
-
-                    data.creationYear = steps.work.enterDifferentCreationYear();
-                    steps.work.cancelCreationDateEditing();
-                    steps.base.dirtyCheckConfirmCancellation();
-                    steps.work.hoverCreationDateContainerLabel();
-                    steps.work.editCreationDate();
-                    steps.work.expectEnteredCreationYearNotToBe(data.creationYear);
-
-                    data.creationYear = pastDate.year();
-                    steps.work.enterCreationYear(data.creationYear);
-                    steps.work.cancelCreationDateEditing();
-                    steps.base.dirtyCheckContinueEditing();
-                    steps.work.expectEnteredCreationYearToBe(data.creationYear);
-
-                    data.creationMonth = pastDate.month();
-                    steps.work.enterCreationMonth(data.creationMonth);
-
-                    data.creationDay = pastDate.date();
-                    steps.work.enterCreationDay(data.creationDay);
-                })();
-                steps.work.saveCreationDate();
             }
 
             if (!more.skip.deliveryDate) {
