@@ -1348,9 +1348,23 @@ module.exports.validateBltvr = function (value) {
         });
     });
 };
-
-pageStep('Validate music library');
-
+module.exports.validateMusicLibrary = function (value) {
+    it("Validate music library (if validation value is not empty)", function () {
+        promise.when(value).then(function (value) {
+            if (!value) {
+                return;
+            }
+            if (value.toLowerCase() === "select type") {
+                expect(pages.base.isPresentAndDisplayed(
+                    pages.work.musicLibraryBinding()
+                )).toBeFalsy();
+            }
+            else {
+                expect(pages.work.musicLibrary()).toBe(value);
+            }
+        });
+    });
+};
 module.exports.expectMusicalDistributionCategoryToBe = function (value) {
     it("Validate selected musical distribution category", function () {
         expect(pages.work.selectedMusicalDistributionCategory()).toBe(value);
