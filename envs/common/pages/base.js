@@ -358,7 +358,7 @@ module.exports.selectedDropdownOption = function (element) {
 module.exports.selectedTgDropdownOption = function (element) {
     return (
         element
-            .$('[tg-component-render-template="$templates.main.selectedItem"]>span')
+            .$('[tg-component-render-template="$templates.main.selectedItem"]')
             .getText()
     );
 };
