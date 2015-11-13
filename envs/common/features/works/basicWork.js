@@ -7,27 +7,27 @@ var random = require('../../../../helpers/random'),
 exports.commonFeatureTags = ['basicWork', 'regression'];
 
 var data = {
-	workId: 'WW 015006249 00',
-	primaryWorkTitle: 'TEST WORK TITLE 142792447241860',
-	alternateWorkTitles: [
-		'TEST ALTERNATE WORK TITLE 1427924474205725',
-		'TEST ALTERNATE WORK TITLE 1427924476582667'
-	],
-	creators: [
-		{
-			contribution: 50
-		},
-		{
-			contribution: 50
-		}
-	],
-	musicalDistributionCategory: 'Jazz',
-	textMusicRelationship: 'Music and Text',
-	excerptType: 'Movement',
-	versionType: 'Original Work',
-	intendedPurpose: 'Theatre',
-	productionTitle: 'TEST PRODUCTION TITLE 1429744413589291',
-	includeOnWebsite: false,
+    workId: 'WW 015006249 00',
+    primaryWorkTitle: 'TEST WORK TITLE 142792447241860',
+    alternateWorkTitles: [
+        'TEST ALTERNATE WORK TITLE 1427924474205725',
+        'TEST ALTERNATE WORK TITLE 1427924476582667'
+    ],
+    creators: [
+        {
+            contribution: 50
+        },
+        {
+            contribution: 50
+        }
+    ],
+    musicalDistributionCategory: 'Jazz',
+    textMusicRelationship: 'Music and Text',
+    excerptType: 'Movement',
+    versionType: 'Original Work',
+    intendedPurpose: 'Theatre',
+    productionTitle: 'TEST PRODUCTION TITLE 1429744413589291',
+    includeOnWebsite: false,
 };
 
 exports.beforeFeature = function () {
