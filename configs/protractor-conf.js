@@ -251,7 +251,8 @@ config = {
 
         if(!systemConfig.noReport) {
             enhanceHtmlReport(reporterFilePath, {
-                startDate: now
+                startDate: now,
+                env: systemConfig.env
             });
         }
 
