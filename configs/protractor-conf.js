@@ -250,7 +250,9 @@ config = {
         }*/
 
         if(!systemConfig.noReport) {
-            enhanceHtmlReport(reporterFilePath);
+            enhanceHtmlReport(reporterFilePath, {
+                startDate: now
+            });
         }
 
         console.log('Finished with code:', statusCode);
