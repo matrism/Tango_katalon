@@ -38,8 +38,18 @@
             none.
         {{/if}}
     </p>
+    <p>
+        Total steps:
+        <span class="tatTotalSteps"></span>
+        (<span class="tatTotalPassed passed"></span>
+        / <span class="tatTotalFailed failed"></span>).
+    </p>
 </div>
 <style>
+    .tatTotalPassed, .tatTotalFailed {
+        padding: 0;
+    }
+
     h4 {
         display: inline-block;
     }
@@ -224,5 +234,18 @@
 
         // Collapse all lists.
         $('.toggle').click();
+
+        // Count total steps.
+        (function() {
+            $('.tatTotalSteps').text($('li > a').length);
+
+            $('.tatTotalPassed').text(
+                $('li > .passed ~ a').length + ' ✓'
+            );
+
+            $('.tatTotalFailed').text(
+                $('li > .failed ~ a').length + ' ✗'
+            );
+        })();
     }
 </script>
