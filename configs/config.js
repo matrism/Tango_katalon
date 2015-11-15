@@ -96,6 +96,11 @@ var defaultUserName = 'TangoTest1',
         }
     };
 
+config._system_.env = {
+    name: env.ENV_TYPE,
+    url: config[env.ENV_TYPE].urls.app_url
+};
+
 config._system_.noReport = cli['no-report'];
 
 config = configer.process(config);
