@@ -42,6 +42,7 @@ var defaultUserName = 'TangoTest1',
             wait_timeout: cli.timeout || 60000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false,
+            branch: cli.branch,
             tags: tags,
             legacyOverrides: {
                 stagingPerson: {

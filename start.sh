@@ -16,9 +16,16 @@ EOF
 
 runProtr() 
 {
+   if [ -d ../../.git ];
+   then
+       branch_option="--branch $(git rev-parse --abbrev-ref HEAD)"
+   fi
+
+   cmd="./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@ $branch_option"
+
    echo $@
-    echo "Running ./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@"
-    ./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@
+    echo "Running $cmd"
+    eval "$cmd"
 }
 
 ./node_modules/protractor/bin/webdriver-manager update --out_dir ./node_modules/protractor/selenium --standalone false

@@ -8,6 +8,14 @@
         (<a href="{{env.url}}">{{env.url}}</a>).
     </p>
     <p>
+        Source branch:
+        {{#if branch}}
+            {{branch}}.
+        {{else}}
+            unknown.
+        {{/if}}
+    </p>
+    <p>
         Included tags:
         {{#if includedTagsString}}
             {{includedTagsString}}.
