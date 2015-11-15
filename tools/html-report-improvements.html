@@ -1,0 +1,99 @@
+<style>
+    h4 {
+        display: inline-block;
+    }
+
+    h4:before {
+        padding-left: 16px;
+        padding-right: 12px;
+    }
+
+    ul.passed, ul.failed {
+        color: inherit;
+    }
+
+    ul.passed > h4:before {
+        content: '✓';
+        color: green;
+    }
+
+    ul.failed > h4:before {
+        content: '✗';
+        color: red;
+    }
+
+    .toggle {
+        position: relative;
+        top: -2px;
+        width: 32px;
+    }
+
+    .toggle:before {
+        content: '+';
+    }
+
+    .toggle.active:before {
+        content: '–';
+    }
+</style>
+<script>
+    'use strict';
+
+    // Load jQuery.
+    document.querySelector('head').appendChild(function() {
+        var script = document.createElement('script');
+
+        script.type = 'text/javascript';
+        script.src = 'http://code.jquery.com/jquery-1.11.3.min.js';
+
+        return script;
+    }());
+
+    // Wait for it to load.
+    (function() {
+        var interval = setInterval(function() {
+            if(window.jQuery) {
+                clearInterval(interval);
+                jQueryLoaded();
+            }
+        }, 50);
+    })();
+
+    // This is called when it's loaded.
+    function jQueryLoaded() {
+        // Open screenshots in new tabs.
+        $('li > a').attr('target', '_blank');
+
+        $('ul').each(function() {
+            var $this = $(this);
+
+            // Add list status (passed or failed) class.
+            $this.addClass(
+                $this.find('.failed').length === 0
+                    ? 'passed'
+                    : 'failed'
+            );
+
+            // Add list expand / collapse toggle.
+            $this.prepend($('<button>').addClass('toggle active'));
+        });
+
+        // Setup list toggles click handler.
+        $('body').on('click', '.toggle', function() {
+            var $this = $(this),
+                $listItems = $this.closest('ul').children('ul, li');
+
+            $this.toggleClass('active');
+
+            if($this.hasClass('active')) {
+                $listItems.show();
+            }
+            else {
+                $listItems.hide();
+            }
+        });
+
+        // Collapse all lists.
+        $('.toggle').click();
+    }
+</script>

@@ -251,7 +251,7 @@ config = {
 
         if (!systemConfig.noReport) {
             // Append the script improvements to the html report
-            reportImprovementFilePath = path.join(__dirname, '../tools/improve-html-reports.js');
+            reportImprovementFilePath = path.join(__dirname, '../tools/html-report-improvements.html');
             fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
         }
 
