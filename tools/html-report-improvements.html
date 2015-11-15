@@ -64,6 +64,32 @@
         // Open screenshots in new tabs.
         $('li > a').attr('target', '_blank');
 
+        // Add classes from test tags.
+        $('ul').each(function() {
+            var $this = $(this);
+
+            $this.addClass(function() {
+                var listDescription = $this.children('h4').text(),
+                    reResults = /Tags: '(.+)'\. \(.+\)$/.exec(listDescription),
+                    tags;
+
+                if(!reResults) {
+                    return '';
+                }
+
+                tags = (
+                    reResults[1]
+                        .replace(/[ ']/g, '')
+                        .split(',')
+                        .map(function(tag) {
+                            return 'tatTag__' + tag;
+                        })
+                );
+
+                return tags.join(' ');
+            }());
+        });
+
         $('ul').each(function() {
             var $this = $(this);
 
