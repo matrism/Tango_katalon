@@ -252,7 +252,9 @@ config = {
         if(!systemConfig.noReport) {
             enhanceHtmlReport(reporterFilePath, {
                 startDate: now,
-                env: systemConfig.env
+                env: systemConfig.env,
+                includedTagsString: systemConfig.tags.join(', '),
+                excludedTagsString: systemConfig.tags.negated.join(', ')
             });
         }
 

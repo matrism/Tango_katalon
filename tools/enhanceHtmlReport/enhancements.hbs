@@ -7,6 +7,22 @@
         Target environment: {{env.name}}
         (<a href="{{env.url}}">{{env.url}}</a>).
     </p>
+    <p>
+        Included tags:
+        {{#if includedTagsString}}
+            {{includedTagsString}}.
+        {{else}}
+            all.
+        {{/if}}
+    </p>
+    <p>
+        Excluded tags:
+        {{#if excludedTagsString}}
+            {{excludedTagsString}}.
+        {{else}}
+            none.
+        {{/if}}
+    </p>
 </div>
 <style>
     h4 {
