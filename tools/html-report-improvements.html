@@ -90,6 +90,68 @@
             }());
         });
 
+        // Group lists by component tags.
+        (function() {
+            var componentTags = {
+                    copyrightRegistration: 'Copyright Registration',
+                    dataUtilities: 'Data Utilities',
+                    deals: 'Deals',
+                    financialInterfaces: 'Financial Interfaces',
+                    incomeManagement: 'incomeManagement',
+                    payees: 'Payees',
+                    royaltyProcessing: 'Royalty Processing',
+                    royaltyRates: 'Royalty Rates',
+                    works: 'Works',
+                    unknown: 'Unknown'
+                },
+
+                componentTagNames = Object.keys(componentTags),
+
+                $newBody = $('<div>');
+
+            componentTagNames.forEach(function(name) {
+                var tagData = {
+                        description: componentTags[name]
+                    },
+
+                    $ul = $('<ul>');
+
+                $ul.append($('<h4>').text(tagData.description));
+
+                tagData.$ul = $ul;
+
+                componentTags[name] = tagData;
+            });
+
+            $('body > ul').each(function() {
+                var $this = $(this);
+
+                componentTagNames.some(function(name) {
+                    var tagData = componentTags[name],
+                        $ul = tagData.$ul;
+
+                    if(
+                        name === 'unknown' ||
+                        $this.find('.tatTag__' + name).length !== 0
+                    ) {
+                        $ul.append($this);
+                        return true;
+                    }
+                });
+            });
+
+            componentTagNames.forEach(function(name) {
+                var tagData = componentTags[name],
+                    $ul = tagData.$ul;
+
+                if($ul.children('ul').length === 0) {
+                    return;
+                }
+
+                $('body').append(tagData.$ul);
+            });
+        })();
+
         $('ul').each(function() {
             var $this = $(this);
 
