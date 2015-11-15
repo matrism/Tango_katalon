@@ -13,9 +13,9 @@ var path = require('path'),
     tmp = require('tmp'),
     config,
     SSReporter_instance,
+    enhanceHtmlReport = require('../tools/enhanceHtmlReport'),
     reporterFilePath,
-    reporterFileName = 'reporter.htm', 
-    reportImprovementFilePath;
+    reporterFileName = 'reporter.htm';
 
 global.ftf = require('factory-testing-framework');
 global._tf_config = require('./config');
@@ -249,10 +249,8 @@ config = {
             }
         }*/
 
-        if (!systemConfig.noReport) {
-            // Append the script improvements to the html report
-            reportImprovementFilePath = path.join(__dirname, '../tools/html-report-improvements.html');
-            fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
+        if(!systemConfig.noReport) {
+            enhanceHtmlReport(reporterFilePath);
         }
 
         console.log('Finished with code:', statusCode);
