@@ -18,10 +18,11 @@ runProtr()
 {
    if [ -d ../../.git ];
    then
-       branch_option="--branch $(git rev-parse --abbrev-ref HEAD)"
+       repo_info_options+=" --branch $(git rev-parse --abbrev-ref HEAD)"
+       repo_info_options+=" --commit $(git rev-parse HEAD)"
    fi
 
-   cmd="./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@ $branch_option"
+   cmd="./node_modules/protractor/bin/protractor configs/protractor-conf.js --verbose $@ $repo_info_options"
 
    echo $@
     echo "Running $cmd"

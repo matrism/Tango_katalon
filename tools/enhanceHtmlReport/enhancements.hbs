@@ -26,7 +26,8 @@
     <p>
         Source branch:
         {{#if branch}}
-            {{branch}}.
+            {{branch}}
+            (<a href="https://github.com/wmgdsp/tango-app/commit/{{commit.hash}}">{{commit.shortHash}}</a>).
         {{else}}
             unknown.
         {{/if}}

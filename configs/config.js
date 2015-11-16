@@ -44,6 +44,7 @@ var defaultUserName = 'TangoTest1',
             screenshot_only_on_fail: false,
             buildNumber: cli.build,
             branch: cli.branch,
+            commitHash: cli.commit,
             tags: tags,
             legacyOverrides: {
                 stagingPerson: {
