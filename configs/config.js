@@ -42,6 +42,9 @@ var defaultUserName = 'TangoTest1',
             wait_timeout: cli.timeout || 60000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false,
+            buildNumber: cli.build,
+            branch: cli.branch,
+            commitHash: cli.commit,
             tags: tags,
             legacyOverrides: {
                 stagingPerson: {
@@ -95,6 +98,11 @@ var defaultUserName = 'TangoTest1',
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
         }
     };
+
+config._system_.env = {
+    name: env.ENV_TYPE,
+    url: config[env.ENV_TYPE].urls.app_url
+};
 
 config._system_.noReport = cli['no-report'];
 

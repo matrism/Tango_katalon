@@ -1,0 +1,309 @@
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<div class="tatHeader">
+    {{#if buildNumber}}
+        <p>
+            Build number:
+            <select id="tatBuildNumber">
+                <option>{{buildNumber}}</option>
+            </select>
+            (<a id="tatGoToNextReport" target="_top">Next</a>).
+        </p>
+    {{/if}}
+    <p>
+        Start date:
+        <time id="tatStartDate" datetime="{{isoStartDate}}">{{startDate}} {{timezone}}</time>.
+    </p>
+    <p>
+        End date:
+        <time datetime="{{isoEndDate}}">{{endDate}} {{timezone}}</time>.
+    </p>
+    <p>
+        Total time: {{duration}}.
+    </p>
+    <p>
+        Target environment: {{env.name}}
+        (<a href="{{env.url}}">{{env.url}}</a>).
+    </p>
+    <p>
+        Source branch:
+        {{#if branch}}
+            {{branch}}
+            (<a href="https://github.com/wmgdsp/tango-app/commit/{{commit.hash}}">{{commit.shortHash}}</a>).
+        {{else}}
+            unknown.
+        {{/if}}
+    </p>
+    <p>
+        Included tags:
+        {{#if includedTagsString}}
+            {{includedTagsString}}.
+        {{else}}
+            all.
+        {{/if}}
+    </p>
+    <p>
+        Excluded tags:
+        {{#if excludedTagsString}}
+            {{excludedTagsString}}.
+        {{else}}
+            none.
+        {{/if}}
+    </p>
+    <p>
+        Total steps:
+        <span class="tatTotalSteps"></span>
+        (<span class="tatTotalPassed passed"></span>
+        / <span class="tatTotalFailed failed"></span>).
+    </p>
+</div>
+<style>
+    .tatTotalPassed, .tatTotalFailed {
+        padding: 0;
+    }
+
+    h4 {
+        display: inline-block;
+    }
+
+    h4:before {
+        padding-left: 16px;
+        padding-right: 12px;
+    }
+
+    ul.passed, ul.failed {
+        color: inherit;
+    }
+
+    ul.passed > h4:before {
+        content: '✓';
+        color: green;
+    }
+
+    ul.failed > h4:before {
+        content: '✗';
+        color: red;
+    }
+
+    .toggle {
+        position: relative;
+        top: -2px;
+        width: 32px;
+    }
+
+    .toggle:before {
+        content: '+';
+    }
+
+    .toggle.active:before {
+        content: '–';
+    }
+</style>
+<script>
+    'use strict';
+
+    window.tat = {};
+
+    tat.buildNumber = parseInt($('#tatBuildNumber').val());
+</script>
+<script>
+    'use strict';
+
+    // Allow navigation to previous reports and to the next one.
+    var $select;
+
+    function reportUrlFromBuildNumber(number) {
+        return top.location.href.replace(
+            /(\/[0-9]+)?\/HTML_Report\//, '/' + number + '/HTML_Report/'
+        );
+    }
+
+    $('#tatGoToNextReport').attr(
+        'href', reportUrlFromBuildNumber(tat.buildNumber + 1)
+    );
+
+    $select = $('#tatBuildNumber');
+
+    for(var i = tat.buildNumber - 1; i > 0; --i) {
+        $select.append($('<option>').text(i));
+    }
+
+    $select.change(function() {
+        var $this = $(this);
+
+        top.location.href = reportUrlFromBuildNumber($this.val());
+    });
+</script>
+<script>
+    'use strict';
+
+    // Open screenshots in new tabs.
+    $('li > a').attr('target', '_blank');
+</script>
+<script>
+    'use strict';
+
+    // Remove repeated list description prefixes.
+    $('ul > h4').each(function() {
+        var $this = $(this),
+            prefix = $this.text().replace(/\(.+\)$/, ''),
+
+            $list = $this.closest('ul');
+
+        $list.find('ul > h4').each(function() {
+            var $this = $(this),
+                text = $this.text();
+
+            if(text.startsWith(prefix)) {
+                $this.text(text.slice(prefix.length));
+            }
+        });
+    });
+</script>
+<script>
+    'use strict';
+
+    // Add classes from test tags.
+    $('ul').each(function() {
+        var $this = $(this);
+
+        $this.addClass(function() {
+            var listDescription = $this.children('h4').text(),
+                reResults = /Tags: '(.+)'\. \(.+\)$/.exec(listDescription),
+                tags;
+
+            if(!reResults) {
+                return '';
+            }
+
+            tags = (
+                reResults[1]
+                    .replace(/[ ']/g, '')
+                    .split(',')
+                    .map(function(tag) {
+                        return 'tatTag__' + tag;
+                    })
+            );
+
+            return tags.join(' ');
+        }());
+    });
+</script>
+<script>
+    'use strict';
+
+    // Group lists by component tags.
+    var componentTags = {
+            copyrightRegistration: 'Copyright Registration',
+            dataUtilities: 'Data Utilities',
+            deals: 'Deals',
+            financialInterfaces: 'Financial Interfaces',
+            incomeManagement: 'incomeManagement',
+            payees: 'Payees',
+            royaltyProcessing: 'Royalty Processing',
+            royaltyRates: 'Royalty Rates',
+            works: 'Works',
+            unknown: 'Unknown'
+        },
+
+        componentTagNames = Object.keys(componentTags),
+
+        $newBody = $('<div>');
+
+    componentTagNames.forEach(function(name) {
+        var tagData = {
+                description: componentTags[name]
+            },
+
+            $ul = $('<ul>');
+
+        $ul.append($('<h4>').text(tagData.description));
+
+        tagData.$ul = $ul;
+
+        componentTags[name] = tagData;
+    });
+
+    $('body > ul').each(function() {
+        var $this = $(this);
+
+        componentTagNames.some(function(name) {
+            var tagData = componentTags[name],
+                $ul = tagData.$ul;
+
+            if(
+                name === 'unknown' ||
+                $this.find('.tatTag__' + name).length !== 0
+            ) {
+                $ul.append($this);
+                return true;
+            }
+        });
+    });
+
+    componentTagNames.forEach(function(name) {
+        var tagData = componentTags[name],
+            $ul = tagData.$ul;
+
+        if($ul.children('ul').length === 0) {
+            return;
+        }
+
+        $('body').append(tagData.$ul);
+    });
+</script>
+<script>
+    'use strict';
+
+    // Add list status (passed or failed) class.
+    $('ul').each(function() {
+        var $this = $(this);
+
+        $this.addClass(
+            $this.find('.failed').length === 0
+                ? 'passed'
+                : 'failed'
+        );
+    });
+</script>
+<script>
+    'use strict';
+
+    // Add list expand / collapse toggle.
+    $('ul').each(function() {
+        var $this = $(this);
+
+        $this.prepend($('<button>').addClass('toggle active'));
+    });
+
+    // Setup list toggles click handler.
+    $('body').on('click', '.toggle', function() {
+        var $this = $(this),
+            $listItems = $this.closest('ul').children('ul, li');
+
+        $this.toggleClass('active');
+
+        if($this.hasClass('active')) {
+            $listItems.show();
+        }
+        else {
+            $listItems.hide();
+        }
+    });
+
+    // Collapse all lists.
+    $('.toggle').click();
+</script>
+<script>
+    'use strict';
+
+    // Count total steps.
+    $('.tatTotalSteps').text($('li > a').length);
+
+    $('.tatTotalPassed').text(
+        $('li > .passed ~ a').length + ' ✓'
+    );
+
+    $('.tatTotalFailed').text(
+        $('li > .failed ~ a').length + ' ✗'
+    );
+</script>
