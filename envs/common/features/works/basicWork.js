@@ -438,9 +438,8 @@ exports.feature = [
 
             steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
 
-            steps.work.goToScopeDeliveryTab();
-
             if (data.creators && data.creators.length !== 0) {
+                steps.work.goToScopeDeliveryTab();
                 steps.work.validateSubjectCreatorNames(data.creators.length);
                 steps.work.validateSubjectCreatorContributions(data.creators.length);
             }
