@@ -143,23 +143,19 @@
     'use strict';
 
     // Remove repeated list description prefixes.
-    $('li:first-of-type > a').each(function() {
+    $('ul > h4').each(function() {
         var $this = $(this),
-            $parentLists = $this.parents('ul'),
-            $parentListDescriptions = $parentLists.children('h4');
+            prefix = $this.text().replace(/\(.+\)$/, ''),
 
-        $parentListDescriptions.each(function() {
+            $list = $this.closest('ul');
+
+        $list.find('ul > h4').each(function() {
             var $this = $(this),
-                text = $this.text(),
+                text = $this.text();
 
-                $parentListDescription = $($this.parents('ul')[1]).children('h4'),
-                reResults = /(.+) \(.+\)$/.exec($parentListDescription.text());
-
-            if(reResults && text.startsWith(reResults[1])) {
-                text = text.slice(reResults[1].length + 1);
+            if(text.startsWith(prefix)) {
+                $this.text(text.slice(prefix.length));
             }
-
-            $this.text(text);
         });
     });
 </script>
