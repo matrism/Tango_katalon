@@ -6,6 +6,7 @@
             <select id="tatBuildNumber">
                 <option>{{buildNumber}}</option>
             </select>
+            (<a id="tatGoToNextReport" target="_top">Next</a>).
         </p>
     {{/if}}
     <p>
@@ -103,15 +104,21 @@
     var reportDate = new Date($('#tatStartDate').attr('datetime')),
         buildNumber = parseInt($('#tatBuildNumber').val());
 
-    // Allow navigation to previous reports.
+    // Allow navigation to previous reports and to the next one.
     (function() {
+        var $select;
+
         function reportUrlFromBuildNumber(number) {
             return top.location.href.replace(
                 /(\/[0-9]+)?\/HTML_Report\//, '/' + number + '/HTML_Report/'
             );
         }
 
-        var $select = $('#tatBuildNumber');
+        $('#tatGoToNextReport').attr(
+            'href', reportUrlFromBuildNumber(buildNumber + 1)
+        );
+
+        $select = $('#tatBuildNumber');
 
         for(var i = buildNumber - 1; i > 0; --i) {
             $select.append($('<option>').text(i));
