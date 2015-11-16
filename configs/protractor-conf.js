@@ -253,6 +253,7 @@ config = {
             enhanceHtmlReport(reporterFilePath, {
                 startDate: now,
                 env: systemConfig.env,
+                buildNumber: systemConfig.buildNumber,
                 branch: systemConfig.branch,
                 includedTagsString: systemConfig.tags.join(', '),
                 excludedTagsString: systemConfig.tags.negated.join(', ')

@@ -1,8 +1,16 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <div class="tatHeader">
+    {{#if buildNumber}}
+        <p>
+            Build number:
+            <select id="tatBuildNumber">
+                <option>{{buildNumber}}</option>
+            </select>
+        </p>
+    {{/if}}
     <p>
         Start date:
-        <time datetime="{{isoStartDate}}">{{startDate}}</time>.
+        <time id="tatStartDate" datetime="{{isoStartDate}}">{{startDate}}</time>.
     </p>
     <p>
         End date:
@@ -90,6 +98,30 @@
 </style>
 <script>
     'use strict';
+
+    var reportDate = new Date($('#tatStartDate').attr('datetime')),
+        buildNumber = parseInt($('#tatBuildNumber').val());
+
+    // Allow navigation to previous reports.
+    (function() {
+        function reportUrlFromBuildNumber(number) {
+            return top.location.href.replace(
+                /(\/[0-9]+)?\/HTML_Report\//, '/' + number + '/HTML_Report/'
+            );
+        }
+
+        var $select = $('#tatBuildNumber');
+
+        for(var i = buildNumber - 1; i > 0; --i) {
+            $select.append($('<option>').text(i));
+        }
+
+        $select.change(function() {
+            var $this = $(this);
+
+            top.location.href = reportUrlFromBuildNumber($this.val());
+        });
+    })();
 
     // Open screenshots in new tabs.
     $('li > a').attr('target', '_blank');
