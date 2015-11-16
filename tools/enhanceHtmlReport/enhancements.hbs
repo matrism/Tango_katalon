@@ -101,38 +101,46 @@
 <script>
     'use strict';
 
-    var reportDate = new Date($('#tatStartDate').attr('datetime')),
-        buildNumber = parseInt($('#tatBuildNumber').val());
+    window.tat = {};
+
+    tat.buildNumber = parseInt($('#tatBuildNumber').val());
+</script>
+<script>
+    'use strict';
 
     // Allow navigation to previous reports and to the next one.
-    (function() {
-        var $select;
+    var $select;
 
-        function reportUrlFromBuildNumber(number) {
-            return top.location.href.replace(
-                /(\/[0-9]+)?\/HTML_Report\//, '/' + number + '/HTML_Report/'
-            );
-        }
-
-        $('#tatGoToNextReport').attr(
-            'href', reportUrlFromBuildNumber(buildNumber + 1)
+    function reportUrlFromBuildNumber(number) {
+        return top.location.href.replace(
+            /(\/[0-9]+)?\/HTML_Report\//, '/' + number + '/HTML_Report/'
         );
+    }
 
-        $select = $('#tatBuildNumber');
+    $('#tatGoToNextReport').attr(
+        'href', reportUrlFromBuildNumber(tat.buildNumber + 1)
+    );
 
-        for(var i = buildNumber - 1; i > 0; --i) {
-            $select.append($('<option>').text(i));
-        }
+    $select = $('#tatBuildNumber');
 
-        $select.change(function() {
-            var $this = $(this);
+    for(var i = tat.buildNumber - 1; i > 0; --i) {
+        $select.append($('<option>').text(i));
+    }
 
-            top.location.href = reportUrlFromBuildNumber($this.val());
-        });
-    })();
+    $select.change(function() {
+        var $this = $(this);
+
+        top.location.href = reportUrlFromBuildNumber($this.val());
+    });
+</script>
+<script>
+    'use strict';
 
     // Open screenshots in new tabs.
     $('li > a').attr('target', '_blank');
+</script>
+<script>
+    'use strict';
 
     // Remove repeated list description prefixes.
     $('li:first-of-type > a').each(function() {
@@ -154,6 +162,9 @@
             $this.text(text);
         });
     });
+</script>
+<script>
+    'use strict';
 
     // Add classes from test tags.
     $('ul').each(function() {
@@ -180,80 +191,91 @@
             return tags.join(' ');
         }());
     });
+</script>
+<script>
+    'use strict';
 
     // Group lists by component tags.
-    (function() {
-        var componentTags = {
-                copyrightRegistration: 'Copyright Registration',
-                dataUtilities: 'Data Utilities',
-                deals: 'Deals',
-                financialInterfaces: 'Financial Interfaces',
-                incomeManagement: 'incomeManagement',
-                payees: 'Payees',
-                royaltyProcessing: 'Royalty Processing',
-                royaltyRates: 'Royalty Rates',
-                works: 'Works',
-                unknown: 'Unknown'
+    var componentTags = {
+            copyrightRegistration: 'Copyright Registration',
+            dataUtilities: 'Data Utilities',
+            deals: 'Deals',
+            financialInterfaces: 'Financial Interfaces',
+            incomeManagement: 'incomeManagement',
+            payees: 'Payees',
+            royaltyProcessing: 'Royalty Processing',
+            royaltyRates: 'Royalty Rates',
+            works: 'Works',
+            unknown: 'Unknown'
+        },
+
+        componentTagNames = Object.keys(componentTags),
+
+        $newBody = $('<div>');
+
+    componentTagNames.forEach(function(name) {
+        var tagData = {
+                description: componentTags[name]
             },
 
-            componentTagNames = Object.keys(componentTags),
+            $ul = $('<ul>');
 
-            $newBody = $('<div>');
+        $ul.append($('<h4>').text(tagData.description));
 
-        componentTagNames.forEach(function(name) {
-            var tagData = {
-                    description: componentTags[name]
-                },
+        tagData.$ul = $ul;
 
-                $ul = $('<ul>');
+        componentTags[name] = tagData;
+    });
 
-            $ul.append($('<h4>').text(tagData.description));
+    $('body > ul').each(function() {
+        var $this = $(this);
 
-            tagData.$ul = $ul;
-
-            componentTags[name] = tagData;
-        });
-
-        $('body > ul').each(function() {
-            var $this = $(this);
-
-            componentTagNames.some(function(name) {
-                var tagData = componentTags[name],
-                    $ul = tagData.$ul;
-
-                if(
-                    name === 'unknown' ||
-                    $this.find('.tatTag__' + name).length !== 0
-                ) {
-                    $ul.append($this);
-                    return true;
-                }
-            });
-        });
-
-        componentTagNames.forEach(function(name) {
+        componentTagNames.some(function(name) {
             var tagData = componentTags[name],
                 $ul = tagData.$ul;
 
-            if($ul.children('ul').length === 0) {
-                return;
+            if(
+                name === 'unknown' ||
+                $this.find('.tatTag__' + name).length !== 0
+            ) {
+                $ul.append($this);
+                return true;
             }
-
-            $('body').append(tagData.$ul);
         });
-    })();
+    });
 
+    componentTagNames.forEach(function(name) {
+        var tagData = componentTags[name],
+            $ul = tagData.$ul;
+
+        if($ul.children('ul').length === 0) {
+            return;
+        }
+
+        $('body').append(tagData.$ul);
+    });
+</script>
+<script>
+    'use strict';
+
+    // Add list status (passed or failed) class.
     $('ul').each(function() {
         var $this = $(this);
 
-        // Add list status (passed or failed) class.
         $this.addClass(
             $this.find('.failed').length === 0
                 ? 'passed'
                 : 'failed'
         );
+    });
+</script>
+<script>
+    'use strict';
 
-        // Add list expand / collapse toggle.
+    // Add list expand / collapse toggle.
+    $('ul').each(function() {
+        var $this = $(this);
+
         $this.prepend($('<button>').addClass('toggle active'));
     });
 
@@ -274,17 +296,18 @@
 
     // Collapse all lists.
     $('.toggle').click();
+</script>
+<script>
+    'use strict';
 
     // Count total steps.
-    (function() {
-        $('.tatTotalSteps').text($('li > a').length);
+    $('.tatTotalSteps').text($('li > a').length);
 
-        $('.tatTotalPassed').text(
-            $('li > .passed ~ a').length + ' ✓'
-        );
+    $('.tatTotalPassed').text(
+        $('li > .passed ~ a').length + ' ✓'
+    );
 
-        $('.tatTotalFailed').text(
-            $('li > .failed ~ a').length + ' ✗'
-        );
-    })();
+    $('.tatTotalFailed').text(
+        $('li > .failed ~ a').length + ' ✗'
+    );
 </script>
