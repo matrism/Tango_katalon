@@ -440,8 +440,10 @@ exports.feature = [
 
             steps.work.goToScopeDeliveryTab();
 
-            steps.work.validateSubjectCreatorNames(data.creators.length);
-            steps.work.validateSubjectCreatorContributions(data.creators.length);
+            if (data.creators && data.creators.length !== 0) {
+                steps.work.validateSubjectCreatorNames(data.creators.length);
+                steps.work.validateSubjectCreatorContributions(data.creators.length);
+            }
         }
     }
 ];
