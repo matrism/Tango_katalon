@@ -1,3 +1,4 @@
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <div class="tatHeader">
     <p>
         Start date:
@@ -90,183 +91,160 @@
 <script>
     'use strict';
 
-    // Load jQuery.
-    document.querySelector('head').appendChild(function() {
-        var script = document.createElement('script');
+    // Open screenshots in new tabs.
+    $('li > a').attr('target', '_blank');
 
-        script.type = 'text/javascript';
-        script.src = 'http://code.jquery.com/jquery-1.11.3.min.js';
+    // Remove repeated list description prefixes.
+    $('li:first-of-type > a').each(function() {
+        var $this = $(this),
+            $parentLists = $this.parents('ul'),
+            $parentListDescriptions = $parentLists.children('h4');
 
-        return script;
-    }());
-
-    // Wait for it to load.
-    (function() {
-        var interval = setInterval(function() {
-            if(window.jQuery) {
-                clearInterval(interval);
-                jQueryLoaded();
-            }
-        }, 50);
-    })();
-
-    // This is called when it's loaded.
-    function jQueryLoaded() {
-        // Open screenshots in new tabs.
-        $('li > a').attr('target', '_blank');
-
-        // Remove repeated list description prefixes.
-        $('li:first-of-type > a').each(function() {
+        $parentListDescriptions.each(function() {
             var $this = $(this),
-                $parentLists = $this.parents('ul'),
-                $parentListDescriptions = $parentLists.children('h4');
+                text = $this.text(),
 
-            $parentListDescriptions.each(function() {
-                var $this = $(this),
-                    text = $this.text(),
+                $parentListDescription = $($this.parents('ul')[1]).children('h4'),
+                reResults = /(.+) \(.+\)$/.exec($parentListDescription.text());
 
-                    $parentListDescription = $($this.parents('ul')[1]).children('h4'),
-                    reResults = /(.+) \(.+\)$/.exec($parentListDescription.text());
+            if(reResults && text.startsWith(reResults[1])) {
+                text = text.slice(reResults[1].length + 1);
+            }
 
-                if(reResults && text.startsWith(reResults[1])) {
-                    text = text.slice(reResults[1].length + 1);
-                }
-
-                $this.text(text);
-            });
+            $this.text(text);
         });
+    });
 
-        // Add classes from test tags.
-        $('ul').each(function() {
-            var $this = $(this);
+    // Add classes from test tags.
+    $('ul').each(function() {
+        var $this = $(this);
 
-            $this.addClass(function() {
-                var listDescription = $this.children('h4').text(),
-                    reResults = /Tags: '(.+)'\. \(.+\)$/.exec(listDescription),
-                    tags;
+        $this.addClass(function() {
+            var listDescription = $this.children('h4').text(),
+                reResults = /Tags: '(.+)'\. \(.+\)$/.exec(listDescription),
+                tags;
 
-                if(!reResults) {
-                    return '';
-                }
+            if(!reResults) {
+                return '';
+            }
 
-                tags = (
-                    reResults[1]
-                        .replace(/[ ']/g, '')
-                        .split(',')
-                        .map(function(tag) {
-                            return 'tatTag__' + tag;
-                        })
-                );
+            tags = (
+                reResults[1]
+                    .replace(/[ ']/g, '')
+                    .split(',')
+                    .map(function(tag) {
+                        return 'tatTag__' + tag;
+                    })
+            );
 
-                return tags.join(' ');
-            }());
-        });
+            return tags.join(' ');
+        }());
+    });
 
-        // Group lists by component tags.
-        (function() {
-            var componentTags = {
-                    copyrightRegistration: 'Copyright Registration',
-                    dataUtilities: 'Data Utilities',
-                    deals: 'Deals',
-                    financialInterfaces: 'Financial Interfaces',
-                    incomeManagement: 'incomeManagement',
-                    payees: 'Payees',
-                    royaltyProcessing: 'Royalty Processing',
-                    royaltyRates: 'Royalty Rates',
-                    works: 'Works',
-                    unknown: 'Unknown'
+    // Group lists by component tags.
+    (function() {
+        var componentTags = {
+                copyrightRegistration: 'Copyright Registration',
+                dataUtilities: 'Data Utilities',
+                deals: 'Deals',
+                financialInterfaces: 'Financial Interfaces',
+                incomeManagement: 'incomeManagement',
+                payees: 'Payees',
+                royaltyProcessing: 'Royalty Processing',
+                royaltyRates: 'Royalty Rates',
+                works: 'Works',
+                unknown: 'Unknown'
+            },
+
+            componentTagNames = Object.keys(componentTags),
+
+            $newBody = $('<div>');
+
+        componentTagNames.forEach(function(name) {
+            var tagData = {
+                    description: componentTags[name]
                 },
 
-                componentTagNames = Object.keys(componentTags),
+                $ul = $('<ul>');
 
-                $newBody = $('<div>');
+            $ul.append($('<h4>').text(tagData.description));
 
-            componentTagNames.forEach(function(name) {
-                var tagData = {
-                        description: componentTags[name]
-                    },
+            tagData.$ul = $ul;
 
-                    $ul = $('<ul>');
+            componentTags[name] = tagData;
+        });
 
-                $ul.append($('<h4>').text(tagData.description));
+        $('body > ul').each(function() {
+            var $this = $(this);
 
-                tagData.$ul = $ul;
-
-                componentTags[name] = tagData;
-            });
-
-            $('body > ul').each(function() {
-                var $this = $(this);
-
-                componentTagNames.some(function(name) {
-                    var tagData = componentTags[name],
-                        $ul = tagData.$ul;
-
-                    if(
-                        name === 'unknown' ||
-                        $this.find('.tatTag__' + name).length !== 0
-                    ) {
-                        $ul.append($this);
-                        return true;
-                    }
-                });
-            });
-
-            componentTagNames.forEach(function(name) {
+            componentTagNames.some(function(name) {
                 var tagData = componentTags[name],
                     $ul = tagData.$ul;
 
-                if($ul.children('ul').length === 0) {
-                    return;
+                if(
+                    name === 'unknown' ||
+                    $this.find('.tatTag__' + name).length !== 0
+                ) {
+                    $ul.append($this);
+                    return true;
                 }
-
-                $('body').append(tagData.$ul);
             });
-        })();
-
-        $('ul').each(function() {
-            var $this = $(this);
-
-            // Add list status (passed or failed) class.
-            $this.addClass(
-                $this.find('.failed').length === 0
-                    ? 'passed'
-                    : 'failed'
-            );
-
-            // Add list expand / collapse toggle.
-            $this.prepend($('<button>').addClass('toggle active'));
         });
 
-        // Setup list toggles click handler.
-        $('body').on('click', '.toggle', function() {
-            var $this = $(this),
-                $listItems = $this.closest('ul').children('ul, li');
+        componentTagNames.forEach(function(name) {
+            var tagData = componentTags[name],
+                $ul = tagData.$ul;
 
-            $this.toggleClass('active');
+            if($ul.children('ul').length === 0) {
+                return;
+            }
 
-            if($this.hasClass('active')) {
-                $listItems.show();
-            }
-            else {
-                $listItems.hide();
-            }
+            $('body').append(tagData.$ul);
         });
+    })();
 
-        // Collapse all lists.
-        $('.toggle').click();
+    $('ul').each(function() {
+        var $this = $(this);
 
-        // Count total steps.
-        (function() {
-            $('.tatTotalSteps').text($('li > a').length);
+        // Add list status (passed or failed) class.
+        $this.addClass(
+            $this.find('.failed').length === 0
+                ? 'passed'
+                : 'failed'
+        );
 
-            $('.tatTotalPassed').text(
-                $('li > .passed ~ a').length + ' ✓'
-            );
+        // Add list expand / collapse toggle.
+        $this.prepend($('<button>').addClass('toggle active'));
+    });
 
-            $('.tatTotalFailed').text(
-                $('li > .failed ~ a').length + ' ✗'
-            );
-        })();
-    }
+    // Setup list toggles click handler.
+    $('body').on('click', '.toggle', function() {
+        var $this = $(this),
+            $listItems = $this.closest('ul').children('ul, li');
+
+        $this.toggleClass('active');
+
+        if($this.hasClass('active')) {
+            $listItems.show();
+        }
+        else {
+            $listItems.hide();
+        }
+    });
+
+    // Collapse all lists.
+    $('.toggle').click();
+
+    // Count total steps.
+    (function() {
+        $('.tatTotalSteps').text($('li > a').length);
+
+        $('.tatTotalPassed').text(
+            $('li > .passed ~ a').length + ' ✓'
+        );
+
+        $('.tatTotalFailed').text(
+            $('li > .failed ~ a').length + ' ✗'
+        );
+    })();
 </script>
