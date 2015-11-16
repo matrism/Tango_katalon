@@ -5,6 +5,7 @@ var fs = require('fs'),
     path = require('path'),
     resolvePath = path.resolve,
 
+    time = require('time'),
     moment = require('moment'),
 
     hbs = require('handlebars'),
@@ -23,6 +24,8 @@ module.exports = function(path, data) {
 
     data.endDate = endMoment.format('YYYY-MM-DD HH-mm-ss');
     data.isoEndDate = endMoment.toISOString();
+
+    data.timezone = new time.Date().getTimezoneAbbr();
 
     data.duration = moment.duration(endMoment.diff(startMoment)).humanize();
 
