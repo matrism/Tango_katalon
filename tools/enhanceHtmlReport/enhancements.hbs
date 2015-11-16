@@ -115,6 +115,27 @@
         // Open screenshots in new tabs.
         $('li > a').attr('target', '_blank');
 
+        // Remove repeated list description prefixes.
+        $('li:first-of-type > a').each(function() {
+            var $this = $(this),
+                $parentLists = $this.parents('ul'),
+                $parentListDescriptions = $parentLists.children('h4');
+
+            $parentListDescriptions.each(function() {
+                var $this = $(this),
+                    text = $this.text(),
+
+                    $parentListDescription = $($this.parents('ul')[1]).children('h4'),
+                    reResults = /(.+) \(.+\)$/.exec($parentListDescription.text());
+
+                if(reResults && text.startsWith(reResults[1])) {
+                    text = text.slice(reResults[1].length + 1);
+                }
+
+                $this.text(text);
+            });
+        });
+
         // Add classes from test tags.
         $('ul').each(function() {
             var $this = $(this);
