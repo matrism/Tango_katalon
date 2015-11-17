@@ -57,6 +57,7 @@ exports.feature = [
                 steps.ftp.uploadAckFile();
                 this.enterFileName(fromTestVariable('current ACK file name'));
                 this.submitLoadAck();
+                this.findEventByFileName(fromTestVariable('current ACK file name'));
                 this.waitUntilEventStatusBecomes(data.event.status);
                 this.validateTotalAccepted(data.event.totalAccepted);
                 this.validateTotalRejected(data.event.totalRejected);
@@ -95,6 +96,31 @@ exports.feature = [
                 });
             });
         }
+    },
+    {
+        name: 'Validate event on Registration File Activity page',
+        tags: ['DBG'],
+        steps: function () {
+            using(steps.registrationFileActivity, function() {
+                this.goToRegistrationFileActivityPage();
+                this.findEventByFileName(fromTestVariable('current ACK file name'));
+                this.toggleBlind();
+                this.validateStatus(data.event.status);
+                this.validateTotalAccepted(data.event.totalAccepted);
+                this.validateTotalRejected(data.event.totalRejected);
+                this.validateAcceptedValues({
+                    ra: data.event.acceptedValues.ra,
+                    as: data.event.acceptedValues.as,
+                    ac: data.event.acceptedValues.ac
+                });
+                this.validateRejectedValues({
+                    rj: data.event.rejectedValues.rj,
+                    rc: data.event.rejectedValues.rc,
+                    co: data.event.rejectedValues.co
+                });
+                this.validateReceivedDate(data.event.creationDate);
+                this.validateInitiatedBy();
+            });
+        }
     }
-
 ];

@@ -2,10 +2,7 @@
 
 var ExpectedConditions = protractor.ExpectedConditions,
     callResultOrValue = require('../../../../helpers/callResultOrValue'),
-    fromTestVariable = require('../../../../helpers/fromTestVariable'),
     pph = require('../../../../helpers/pph');
-
-exports = module.exports = pages.person = new ftf.pageObject();
 
 pages.organisationRegistration = exports;
 
@@ -90,7 +87,8 @@ exports.loadAck = function () {
 };
 
 exports.submitLoadAck = function () {
-    return exports.loadAckSubmitButton().click();
+    var element = exports.loadAckSubmitButton().click();
+    pages.base.waitForAjax();
 };
 
 exports.refreshEvents = function () {
@@ -124,19 +122,14 @@ exports.getFtpOptions = function () {
     };
 };
 
-exports.submitLoadAck = function () {
-    return exports.loadAckSubmitButton().click();
-};
-
-exports.submitLoadAck = function () {
-    return exports.loadAckSubmitButton().click();
+exports.findEventByFileName = function (name) {
+    exports.targetEvent = exports.getEventByFileName(name);
+    return pages.base.scrollIntoView(exports.targetEvent);
 };
 
 exports.waitUntilEventStatusBecomes = function(status) {
-    pages.base.waitForAjax();
-    var event = exports.getEventByFileName(fromTestVariable('current ACK file name'));
-    pages.base.scrollIntoView(event);
-    var statusElement = exports.getStatus(event);
+    var event = exports.targetEvent,
+        statusElement = exports.getStatus(event);
 
     browser.wait(function() {
         pages.base.scrollIntoView(statusElement);
@@ -153,36 +146,29 @@ exports.waitUntilEventStatusBecomes = function(status) {
 };
 
 exports.validateAckCreationDate = function(date) {
-    var event = exports.getEventByFileName(fromTestVariable('current ACK file name'));
-    expect(exports.getAckCreationDate(event)).toBe(date)
+    expect(exports.getAckCreationDate(exports.targetEvent)).toBe(date)
 };
 
 exports.validateTotalAccepted = function(value) {
-    var event = exports.getEventByFileName(fromTestVariable('current ACK file name'));
-    expect(exports.getTotalAccepted(event)).toBe(value)
+    expect(exports.getTotalAccepted(exports.targetEvent)).toBe(value)
 };
 
 exports.validateTotalRejected = function(value) {
-    var event = exports.getEventByFileName(fromTestVariable('current ACK file name'));
-    expect(exports.getTotalRejected(event)).toBe(value)
+    expect(exports.getTotalRejected(exports.targetEvent)).toBe(value)
 };
 
 exports.validateInitiatedBy = function() {
-    var event = exports.getEventByFileName(fromTestVariable('current ACK file name'));
-    expect(exports.getInitiatedBy(event)).not.toBe(null);
+    expect(exports.getInitiatedBy(exports.targetEvent)).not.toBe(null);
 };
 
 exports.validateAcceptedValues = function(values) {
-    var event = exports.getEventByFileName(fromTestVariable('current ACK file name'));
-    expect(exports.getAcceptedValue(event, 'ra')).toBe(values.ra);
-    expect(exports.getAcceptedValue(event, 'as')).toBe(values.as);
-    expect(exports.getAcceptedValue(event, 'ac')).toBe(values.ac);
+    expect(exports.getAcceptedValue(exports.targetEvent, 'ra')).toBe(values.ra);
+    expect(exports.getAcceptedValue(exports.targetEvent, 'as')).toBe(values.as);
+    expect(exports.getAcceptedValue(exports.targetEvent, 'ac')).toBe(values.ac);
 };
 
 exports.validateRejectedValues = function(values) {
-    var event = exports.getEventByFileName(fromTestVariable('current ACK file name'));
-    expect(exports.getRejectedValue(event, 'rj')).toBe(values.rj);
-    expect(exports.getRejectedValue(event, 'rc')).toBe(values.rc);
-    expect(exports.getRejectedValue(event, 'co')).toBe(values.co);
+    expect(exports.getRejectedValue(exports.targetEvent, 'rj')).toBe(values.rj);
+    expect(exports.getRejectedValue(exports.targetEvent, 'rc')).toBe(values.rc);
+    expect(exports.getRejectedValue(exports.targetEvent, 'co')).toBe(values.co);
 };
-
