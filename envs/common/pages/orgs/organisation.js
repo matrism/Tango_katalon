@@ -1003,6 +1003,117 @@ exports.general = (function () {
     return general;
 })();
 
+exports.registration = (function () {
+    var registration = {};
+
+    registration.sectionContainer = function () {
+        return $('.e2e-reg-delivery');
+    };
+
+    registration.editSectionButton = function () {
+        return registration.sectionContainer().$(
+            '[data-ng-click="tgModularViewMethods.switchToEditView()"]'
+        );
+    };
+
+    registration.editSection = function () {
+        var element = registration.editSectionButton();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    registration.isRegistrationRecipientSelect = function () {
+        return $('.e2e-reg-delivery-is');
+    };
+    registration.acknowledgementTypeSelect = function () {
+        return $('.e2e-acknowledgement-type');
+    };
+    registration.deliveryMethodSelect = function (i) {
+        return element.all(by.model('ackMethod.type')).get(i);
+    };
+    registration.addressInput = function (i) {
+        return $$('.e2e-acknowledgement-address input').get(i);
+    };
+    registration.portInput = function (i) {
+        return $$('.e2e-acknowledgement-port input').get(i);
+    };
+    registration.usernameInput = function (i) {
+        return $$('.e2e-acknowledgement-username input').get(i);
+    };
+    registration.passwordInput = function (i) {
+        return $$('.e2e-acknowledgement-password input').get(i);
+    };
+
+    registration.selectIsRegistrationRecipient = function (value) {
+        var element = registration.isRegistrationRecipientSelect();
+        return element.element(
+            by.cssContainingText('button', value)
+        );
+    };
+    registration.selectAcknowledgementType = function (value) {
+        var element = registration.acknowledgementTypeSelect();
+        return element.element(
+            by.cssContainingText('button', value)
+        );
+    };
+    registration.selectDeliveryMethod = function (i, value) {
+        var element = registration.deliveryMethodSelect(i);
+        return element.element(
+            by.cssContainingText('button', value)
+        );
+    };
+    registration.enterAddress = function (i, value) {
+        var element = registration.addressInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+    registration.enterPort = function (i, value) {
+        var element = registration.portInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+    registration.enterUsername = function (i, value) {
+        var element = registration.usernameInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+    registration.enterPassword = function (i, value) {
+        var element = registration.passwordInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    registration.saveSectionButton = function () {
+        return registration.sectionContainer().element(by.cssContainingText(
+            '.CONTROLS button', 'Save'
+        ));
+    };
+
+    registration.saveSection = function () {
+        var element = registration.saveSectionButton();
+        pages.base.scrollIntoView(element);
+        return element.click().then(function () {
+            pages.base.waitForAjax();
+        });
+    };
+
+    registration.sectionActive = function () {
+        var element = registration.sectionContainer();
+        pages.base.scrollIntoView(element);
+        return pph.matchesCssSelector(element, '.active');
+    };
+
+    registration.expectSectionToBeInViewMode = function () {
+        expect(registration.sectionActive()).toBeFalsy();
+    };
+
+    return registration;
+})();
+
 exports.incomeProvider = (function () {
     var incomeProvider = {};
 

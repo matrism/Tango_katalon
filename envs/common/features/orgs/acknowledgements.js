@@ -12,6 +12,18 @@ exports.beforeFeature = function() {
 
 var data = {
     org: 'BMI',
+    sftp: {
+        address: 'sftp.wmg.com',
+        port: '22',
+        username: 'ddharman',
+        password: 'welcome1'
+    },
+    ftp: {
+        address: '54.88.249.193',
+        port: '21',
+        username: 'Tango_Test',
+        password: 'St@rwar1$'
+    },
     ftpMethod: ' FTP',
     event: {
         status: 'File Loaded',
@@ -47,8 +59,26 @@ exports.feature = [
         steps: function () {
             steps.searchSection.selectEntityType('Organisations');
             steps.searchSection.accessSavedOrganisationByName(data.org);
-            steps.organisation.goToRegistrationActivityTab();
 
+            steps.organisation.goToGeneralTab();
+            using(steps.organisation.registration, function() {
+                this.editSection();
+                this.selectIsRegistrationRecipient('Yes');
+                this.selectAcknowledgementType('Multiple');
+                this.selectDeliveryMethod(0, 'SFTP');
+                this.enterAddress(0, data.sftp.address);
+                this.enterPort(0, data.sftp.port);
+                this.enterUsername(0, data.sftp.username);
+                this.enterPassword(0, data.sftp.password);
+                this.selectDeliveryMethod(1, 'FTP');
+                this.enterAddress(1, data.ftp.address);
+                this.enterPort(1, data.ftp.port);
+                this.enterUsername(1, data.ftp.username);
+                this.enterPassword(1, data.ftp.password);
+                this.saveSection();
+            });
+
+            steps.organisation.goToRegistrationActivityTab();
             using(steps.organisationRegistration, function() {
                 this.loadAck();
                 this.selectFtpMethod(data.ftpMethod);
