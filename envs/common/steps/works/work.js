@@ -153,9 +153,9 @@ module.exports.hoverCreatorNamesContainer = function () {
 };
 module.exports.editCreators = function () {
     var el = pages.work.editCreatorsButton(),
-        notDisabledCssSelector = ":not([disabled], .disabled)";
+        notDisabledCssSelector = ':not([disabled], .disabled)';
 
-    it ("Click edit creators button", function() {
+    it ('Click edit creators button', function() {
         browser.wait (
             function() {
                 return pph.matchesCssSelector(el, notDisabledCssSelector);
@@ -1344,12 +1344,12 @@ module.exports.validateBltvr = function (value) {
     });
 };
 module.exports.validateMusicLibrary = function (value) {
-    it("Validate music library (if validation value is not empty)", function () {
+    it('Validate music library (if validation value is not empty)', function () {
         promise.when(value).then(function (value) {
             if (!value) {
                 return;
             }
-            if (value.toLowerCase() === "select type") {
+            if (value.toLowerCase() === 'select type') {
                 expect(pages.base.isPresentAndDisplayed(
                     pages.work.musicLibraryBinding()
                 )).toBeFalsy();
