@@ -80,6 +80,7 @@ config = {
             testFiles = require('./files.js'),
             matchers,
             browserWait,
+            jasmineTimeout,
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes,
@@ -111,6 +112,10 @@ config = {
 
             timeout = parseInt(timeout);
 
+            if (timeout > jasmineTimeout) {
+                jasmine.DEFAULT_TIMEOUT_INTERVAL = timeout + jasmineTimeout;
+            }
+
             options = options || {};
 
             return browserWait.call(browser, function() {
@@ -132,7 +137,15 @@ config = {
             }, timeout);
         };
 
+        afterEach(function(){
+            if (jasmine.DEFAULT_TIMEOUT_INTERVAL != jasmineTimeout) {
+                jasmine.DEFAULT_TIMEOUT_INTERVAL = jasmineTimeout;
+            }
+        });
+
         setTimeout(function(){
+            jasmineTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+
             if (systemConfig.resolution.width && systemConfig.resolution.height) {
 
                     browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);

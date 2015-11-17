@@ -122,6 +122,7 @@ module.exports.enterNewRandomAlternateWorkTitle = function () {
     return deferred.promise;
 };
 module.exports.waitTitleEditorCheckForDuplicates = function () {
+    steps.base.sleep(100);
     it("Wait title editor check for duplicates", function () {
         browser.wait(
             function () {
@@ -151,10 +152,18 @@ module.exports.hoverCreatorNamesContainer = function () {
     );
 };
 module.exports.editCreators = function () {
-    steps.base.clickElement(
-        "edit creators button",
-        pages.work.editCreatorsButton()
-    );
+    var el = pages.work.editCreatorsButton(),
+        notDisabledCssSelector = ':not([disabled], .disabled)';
+
+    it ('Click edit creators button', function() {
+        browser.wait (
+            function() {
+                return pph.matchesCssSelector(el, notDisabledCssSelector);
+            }
+        );
+        el.click();
+        pages.base.waitForAjax();
+    });
 };
 exports.clickCompositeWorkCheckbox = function (data, key) {
     it('Click composite work checkbox', function () {
@@ -1333,9 +1342,23 @@ module.exports.validateBltvr = function (value) {
         });
     });
 };
-
-pageStep('Validate music library');
-
+module.exports.validateMusicLibrary = function (value) {
+    it('Validate music library (if validation value is not empty)', function () {
+        promise.when(value).then(function (value) {
+            if (!value) {
+                return;
+            }
+            if (value.toLowerCase() === 'select type') {
+                expect(pages.base.isPresentAndDisplayed(
+                    pages.work.musicLibraryBinding()
+                )).toBeFalsy();
+            }
+            else {
+                expect(pages.work.musicLibrary()).toBe(value);
+            }
+        });
+    });
+};
 module.exports.expectMusicalDistributionCategoryToBe = function (value) {
     it("Validate selected musical distribution category", function () {
         expect(pages.work.selectedMusicalDistributionCategory()).toBe(value);
@@ -1379,335 +1402,6 @@ module.exports.validateIncludeWorkOnWebsite = function (include) {
                 }
                 expect(pages.work.workInclusionOnWebsite()).toBe(include);
             });
-        }
-    );
-};
-module.exports.editBasicWork = function (data, more) {
-    more = more || {};
-
-    more.skip = more.skip || {};
-    //more.skip.navigation = true;
-    //more.skip.workTitles = true;
-    //more.skip.creators = true;
-    //more.skip.creationDate = true;
-    //more.skip.deliveryDate = true;
-    //more.skip.assetType = true;
-    //more.skip.workOrigin = true;
-    //more.skip.inclusionOnWebsite = true;
-
-    describe(
-        "Edit basic work", function () {
-            if (!more.skip.navigation && data.workId) {
-                steps.work.goToWorkPage(data);
-            }
-
-            if (!more.skip.workTitles) {
-                steps.work.hoverPrimaryWorkTitleHeading();
-                steps.work.editWorkTitles();
-                data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
-                steps.work.waitTitleEditorCheckForDuplicates();
-                steps.work.cancelWorkTitlesEditing();
-                steps.base.dirtyCheckConfirmCancellation();
-                steps.work.hoverPrimaryWorkTitleHeading();
-                steps.work.editWorkTitles();
-                steps.work.expectPrimaryWorkTitleFieldValueNotToBe(data.primaryWorkTitle);
-
-                data.primaryWorkTitle = steps.work.enterRandomPrimaryWorkTitle();
-                steps.work.waitTitleEditorCheckForDuplicates();
-                steps.work.cancelWorkTitlesEditing();
-                steps.base.dirtyCheckContinueEditing();
-                steps.work.expectPrimaryWorkTitleFieldValueToBe(data.primaryWorkTitle);
-
-                steps.work.validateDefaultAlternateWorkTitleLanguage();
-
-                data.alternateWorkTitles = _.times(
-                    2, function (i) {
-                        return steps.work.enterRandomAlternateWorkTitle(i);
-                    }
-                );
-
-                data.alternateWorkTitles.push(
-                    steps.work.enterNewRandomAlternateWorkTitle()
-                );
-
-                steps.work.saveWorkTitles();
-            }
-
-            if (!more.skip.creators) {
-                steps.work.hoverCreatorNamesContainer();
-                steps.work.editCreators();
-
-                data.creators = (function () {
-                    var creators;
-                    var howMany = 2;
-                    var evenContribution = steps.work.calculateEvenCreatorContributions();
-
-                    creators = _.times(
-                        howMany, function (i) {
-                            var creator = {};
-                            var firstOne = (i === 0);
-
-                            if (firstOne) {
-                                creator.contribution = 0;
-                                steps.work.enterCreatorContribution(i, creator.contribution);
-
-                                steps.work.cancelCreatorsEditing();
-                                steps.base.dirtyCheckConfirmCancellation();
-
-                                steps.work.hoverCreatorNamesContainer();
-                                steps.work.editCreators();
-
-                                steps.work.expectFirstCreatorContributionFieldValueNotToBe(
-                                    creator.contribution
-                                );
-                            }
-
-                            creator.name = steps.work.selectDifferentRandomCreator(i);
-
-                            if (firstOne) {
-                                steps.work.waitCreatorsEditorCheckForDuplicates();
-                            }
-
-                            creator.contribution = evenContribution;
-                            steps.work.validateCreatorContributionInputMask(i);
-                            steps.work.enterCreatorContribution(i, creator.contribution);
-
-                            if (firstOne) {
-                                steps.work.cancelCreatorsEditing();
-                                steps.base.dirtyCheckContinueEditing();
-
-                                steps.work.expectFirstCreatorContributionFieldValueToBe(
-                                    creator.contribution
-                                );
-                            }
-
-                            return creator;
-                        }
-                    );
-                })();
-
-                steps.work.saveCreators();
-            }
-
-            if (!more.skip.creationDate) {
-                steps.work.hoverCreationDateContainerLabel();
-                steps.work.editCreationDate();
-                (function () {
-                    var daysAgo = _.random(1, 30 * 12 * 2);
-                    var pastDate = random.moment(moment().subtract(daysAgo, "day"));
-
-                    data.creationYear = steps.work.enterDifferentCreationYear();
-                    steps.work.cancelCreationDateEditing();
-                    steps.base.dirtyCheckConfirmCancellation();
-                    steps.work.hoverCreationDateContainerLabel();
-                    steps.work.editCreationDate();
-                    steps.work.expectEnteredCreationYearNotToBe(data.creationYear);
-
-                    data.creationYear = pastDate.year();
-                    steps.work.enterCreationYear(data.creationYear);
-                    steps.work.cancelCreationDateEditing();
-                    steps.base.dirtyCheckContinueEditing();
-                    steps.work.expectEnteredCreationYearToBe(data.creationYear);
-
-                    data.creationMonth = pastDate.month();
-                    steps.work.enterCreationMonth(data.creationMonth);
-
-                    data.creationDay = pastDate.date();
-                    steps.work.enterCreationDay(data.creationDay);
-                })();
-                steps.work.saveCreationDate();
-            }
-
-            if (!more.skip.deliveryDate) {
-                steps.work.hoverDeliveryDateContainerLabel();
-                steps.work.editDeliveryDate();
-                (function () {
-                    var daysAgo = _.random(1, 30 * 12 * 2);
-                    var pastDate = random.moment(moment().subtract(daysAgo, "day"));
-
-                    data.deliveryYear = steps.work.enterDifferentDeliveryYear();
-                    steps.work.cancelDeliveryDateEditing();
-                    steps.base.dirtyCheckConfirmCancellation();
-                    steps.work.hoverDeliveryDateContainerLabel();
-                    steps.work.editDeliveryDate();
-                    steps.work.expectEnteredDeliveryYearNotToBe(data.deliveryYear);
-
-                    data.deliveryYear = pastDate.year();
-                    steps.work.enterDeliveryYear(data.deliveryYear);
-                    steps.work.cancelDeliveryDateEditing();
-                    steps.base.dirtyCheckContinueEditing();
-                    steps.work.expectEnteredDeliveryYearToBe(data.deliveryYear);
-
-                    data.deliveryMonth = pastDate.month();
-                    steps.work.enterDeliveryMonth(data.deliveryMonth);
-
-                    data.deliveryDay = pastDate.date();
-                    steps.work.enterDeliveryDay(data.deliveryDay);
-                })();
-                steps.work.saveDeliveryDate();
-            }
-
-            if (!more.skip.assetType) {
-                steps.work.hoverAssetTypeContainer();
-                steps.work.editAssetType();
-                data.musicalDistributionCategory = (
-                    steps.work.selectDifferentRandomMusicalDistributionCategory()
-                );
-                steps.work.cancelAssetTypeEditing();
-                steps.base.dirtyCheckConfirmCancellation();
-                steps.work.hoverAssetTypeContainer();
-                steps.work.editAssetType();
-                steps.work.expectMusicalDistributionCategoryNotToBe(
-                    data.musicalDistributionCategory
-                );
-
-                data.musicalDistributionCategory = (
-                    steps.work.selectDifferentRandomMusicalDistributionCategory()
-                );
-                steps.work.cancelAssetTypeEditing();
-                steps.base.dirtyCheckContinueEditing();
-                steps.work.expectMusicalDistributionCategoryToBe(
-                    data.musicalDistributionCategory
-                );
-
-                data.textMusicRelationship = (
-                    steps.work.selectDifferentRandomTextMusicRelationship()
-                );
-                data.excerptType = steps.work.selectDifferentRandomExcerptType();
-                data.versionType = steps.work.selectDifferentRandomVersionType();
-                data.lyricAdaptation = steps.work.selectDifferentRandomLyricAdaptation();
-                data.musicArrangement = steps.work.selectDifferentRandomMusicArrangement();
-
-                steps.work.saveAssetType();
-            }
-
-            if (!more.skip.workOrigin) {
-                steps.work.hoverWorkOriginContainer();
-                steps.work.editWorkOrigin();
-                data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
-                steps.work.cancelWorkOriginEditing();
-                steps.base.dirtyCheckConfirmCancellation();
-                steps.work.hoverWorkOriginContainer();
-                steps.work.editWorkOrigin();
-                steps.work.expectIntendedPurposeNotToBe(data.intendedPurpose);
-
-                data.intendedPurpose = steps.work.selectDifferentRandomIntendedPurpose();
-                steps.work.cancelWorkOriginEditing();
-                steps.base.dirtyCheckContinueEditing();
-                steps.work.expectIntendedPurposeToBe(data.intendedPurpose);
-
-                data.productionTitle = steps.work.enterRandomProductionTitle();
-                data.bltvr = steps.work.selectDifferentRandomBltvr();
-                data.musicLibrary = steps.work.selectDifferentRandomMusicLibrary();
-
-                steps.work.saveWorkOrigin();
-            }
-
-            if (!more.skip.inclusionOnWebsite) {
-                steps.work.hoverWorkInclusionOnWebsiteIndicator();
-                steps.work.editWorkInclusionOnWebsite();
-                data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
-                steps.work.cancelWorkInclusionOnWebsiteEditing();
-                steps.base.dirtyCheckConfirmCancellation();
-                steps.work.hoverWorkInclusionOnWebsiteIndicator();
-                steps.work.editWorkInclusionOnWebsite();
-                steps.work.expectWorkInclusionOnWebsiteOptionNotToBe(data.includeOnWebsite);
-
-                data.includeOnWebsite = steps.work.toggleWorkInclusionOnWebsite();
-                steps.work.cancelWorkInclusionOnWebsiteEditing();
-                steps.base.dirtyCheckContinueEditing();
-                steps.work.expectWorkInclusionOnWebsiteOptionToBe(data.includeOnWebsite);
-
-                steps.work.saveWorkInclusionOnWebsite();
-            }
-        }
-    );
-};
-
-
-module.exports.validateWork = function (data, more) {
-    data = data || hash.currentEntityDataSlotsByType.work;
-
-    more = more || {};
-
-    more.skip = more.skip || {};
-    //more.skip.navigation = true;
-    //more.skip.workTitles = true;
-    //more.skip.creators = true;
-    //more.skip.creationDate = true;
-    //more.skip.deliveryDate = true;
-    //more.skip.assetType = true;
-    //more.skip.workOrigin = true;
-    //more.skip.inclusionOnWebsite = true;
-
-    describe(
-        "Validate work data", function () {
-            if (!more.skip.navigation && data.workId) {
-                steps.work.goToWorkPage(data.workId);
-            }
-
-            if (!more.skip.workTitles) {
-                steps.work.validatePrimaryWorkTitle(data.primaryWorkTitle);
-
-                if (data.alternateWorkTitles) {
-                    data.alternateWorkTitles.forEach(
-                        function (alternateWorkTitle) {
-                            steps.work.validateAlternateWorkTitle(alternateWorkTitle);
-                        }
-                    );
-                }
-            }
-
-            if (!more.skip.creationDate) {
-                steps.work.validateCreationDate(
-                    data.creationYear,
-                    data.creationMonth,
-                    data.creationDay
-                );
-            }
-
-            if (!more.skip.deliveryDate) {
-                steps.work.validateDeliveryDate(
-                    data.deliveryYear,
-                    data.deliveryMonth,
-                    data.deliveryDay
-                );
-            }
-
-            if (!more.skip.assetType) {
-                steps.work.validateMusicalDistributionCategory(data.musicalDistributionCategory);
-                steps.work.validateTextMusicRelationship(data.textMusicRelationship);
-                steps.work.validateExcerptType(data.excerptType);
-                steps.work.validateVersionType(data.versionType);
-                steps.work.validateLyricAdaptation(data.lyricAdaptation);
-                steps.work.validateMusicArrangement(data.musicArrangement);
-            }
-
-            if (!more.skip.workOrigin) {
-                steps.work.validateIntendedPurpose(data.intendedPurpose);
-                steps.work.validateProductionTitle(data.productionTitle);
-                steps.work.validateBltvr(data.bltvr);
-                steps.work.validateMusicLibrary(data.musicLibrary);
-            }
-
-            if (!more.skip.inclusionOnWebsite) {
-                steps.work.validateIncludeWorkOnWebsite(data.includeOnWebsite);
-            }
-
-            if (!more.skip.creators && data.creators && data.creators.length !== 0) {
-                steps.work.goToScopeDeliveryTab();
-
-                data.creators.forEach(
-                    function (creator, i) {
-                        describe(
-                            "Validate creator #" + (i + 1), function () {
-                                steps.work.validateCreatorName(creator.name);
-                                steps.work.validateCreatorContributionByName(creator.name, creator.contribution);
-                            }
-                        );
-                    }
-                );
-            }
         }
     );
 };

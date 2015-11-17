@@ -11,11 +11,11 @@
     {{/if}}
     <p>
         Start date:
-        <time id="tatStartDate" datetime="{{isoStartDate}}">{{startDate}} {{timezone}}</time>.
+        <time id="tatStartDate" datetime="{{isoStartDate}}">{{startDate}}{{#if timezone}} {{timezone}}{{/if}}</time>.
     </p>
     <p>
         End date:
-        <time datetime="{{isoEndDate}}">{{endDate}} {{timezone}}</time>.
+        <time datetime="{{isoEndDate}}">{{endDate}}{{#if timezone}} {{timezone}}{{/if}}</time>.
     </p>
     <p>
         Total time: {{duration}}.

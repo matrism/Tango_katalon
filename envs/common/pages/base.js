@@ -181,6 +181,7 @@ module.exports.selectRandomDropdownOption.standard = function (element, more) {
                 }
                 return options.then(
                     function (options) {
+                        pages.base.scrollIntoView(element);
                         element.click();
                         return _.sample(options).click().getText();
                     }
@@ -357,7 +358,7 @@ module.exports.selectedDropdownOption = function (element) {
 module.exports.selectedTgDropdownOption = function (element) {
     return (
         element
-            .$('[tg-component-render-template="$templates.main.selectedItem"]>span')
+            .$('[tg-component-render-template="$templates.main.selectedItem"]')
             .getText()
     );
 };
