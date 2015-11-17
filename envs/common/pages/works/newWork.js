@@ -23,7 +23,7 @@ module.exports.alternateWorkTitleRow = function(index) {
 module.exports.alternateWorkTitleLanguageDropdown = function(index) {
 	return (
 		pages.newWork.alternateWorkTitleRow(index)
-			.$("[tg-typeahead-render-template='$templates.main.wrapper']")
+			.$('[tg-component-render-template="$templates.main.wrapper"]')
 	);
 };
 module.exports.alternateWorkTitleInput = function(index) {
