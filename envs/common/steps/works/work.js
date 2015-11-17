@@ -159,8 +159,7 @@ module.exports.editCreators = function () {
         browser.wait (
             function() {
                 return pph.matchesCssSelector(el, notDisabledCssSelector);
-            },
-            _tf_config._system_.wait_timeout
+            }
         );
         el.click();
         pages.base.waitForAjax();
