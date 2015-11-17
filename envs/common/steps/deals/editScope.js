@@ -641,6 +641,7 @@ exports.editCheckCopyScopeLinkIsEnabled = function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
         expect(pages.editDealScope.elems.editCopyScopeLink.isDisplayed());
+        browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).click();
     });
 };
 
