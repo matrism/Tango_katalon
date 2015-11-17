@@ -43,14 +43,14 @@
     "q": "~0.8.12",
     "qs": "^5.2.0",
     "randomstring": "~1.1.0",
-    "time": "^0.11.4",
     "tmp": "0.0.27",
     "underscore": "1.6.0",
     "yamljs": "^0.2.4"
   },
   "optionalDependencies": {
     "http-sync": "^0.1.2",
-    "http-sync-win": "^0.0.7"
+    "http-sync-win": "^0.0.7",
+    "time": "^0.11.4"
   },
   "author": "WMG",
   "license": "ISC"
