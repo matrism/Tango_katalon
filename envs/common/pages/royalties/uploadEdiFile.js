@@ -2,7 +2,6 @@
 
 var path = require('path'),
     fs = require('fs-extra'),
-    random = require('../../../../helpers/random'),
     tmp = require('tmp'),
     ExpectedConditions = protractor.ExpectedConditions,
     testVariables = hash.testVariables,
@@ -78,8 +77,11 @@ exports.fileInput = function () {
 
 
 function generateTempFile(fileName) {
-    var tmpDir = tmp.dirSync();
-    testVariables.tempFileName = path.join(tmpDir.name, 'TAT' + random.id() + '.edi');
+    var tmpDir = tmp.dirSync(),
+        date = new Date(),
+        dateStr = date.toISOString().split(':').join('_');
+
+    testVariables.tempFileName = path.join(tmpDir.name, 'TAT_' + dateStr + '.edi');
 
     fileName = path.resolve(__dirname, fileName);
 
@@ -277,28 +279,21 @@ function checkFileStatus (statuses) {
 };
 
 exports.waitForFileStatusToBe = function () {
-    var statuses = _.toArray(arguments);
+    var statuses = _.toArray(arguments),
+        waitTimeout = (30 * 60 * 1000);
+
 
     browser.wait(function(){
         return browser.refresh().then(function(){
             pages.base.waitForAjax();
             return checkFileStatus(statuses);
         });
-    }, 600000);
+    }, waitTimeout);
 };
 
 exports.waitForFileToBeProcessed = function () {
     exports.waitForFileStatusToBe('Processed');
 };
-
-/*exports.waitForFileToBeProcessed = function () {
-    browser.wait(function(){
-        return browser.refresh().then(function(){
-            pages.base.waitForAjax();
-            return checkFileStatus('Processed');
-        });
-    }, 600000);
-};*/
 
 exports.fileReadInAmountElement = function () {
     return exports.uploadedFileBlind().$('.statement-amount');
