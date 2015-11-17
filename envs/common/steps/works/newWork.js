@@ -704,7 +704,7 @@ module.exports.selectRandomMusicArrangement = function() {
 };
 module.exports.selectRandomIntendedPurpose = function() {
 	var deferred = promise.defer();
-	it("Select a random music arrangement (if displayed)", function() {
+	it('Select a random Intended Purpose (if displayed)', function() {
 		pages.newWork.isIntendedPurposeFieldDisplayed().then(function(isDisplayed) {
 			if(!isDisplayed) {
 				deferred.fulfill(null);
