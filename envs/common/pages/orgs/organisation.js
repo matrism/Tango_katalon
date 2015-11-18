@@ -1058,9 +1058,9 @@ exports.registration = (function () {
     };
     registration.selectDeliveryMethod = function (i, value) {
         var element = registration.deliveryMethodSelect(i);
-        return element.element(
+        return element.all(
             by.cssContainingText('button', value)
-        );
+        ).get(0).click();
     };
     registration.enterAddress = function (i, value) {
         var element = registration.addressInput(i);

@@ -1,8 +1,8 @@
 'use strict';
 
-var ExpectedConditions = protractor.ExpectedConditions,
-    callResultOrValue = require('../../../../helpers/callResultOrValue'),
-    pph = require('../../../../helpers/pph');
+var callResultOrValue = require('../../../../helpers/callResultOrValue'),
+    pph = require('../../../../helpers/pph'),
+    ExpectedConditions = protractor.ExpectedConditions;
 
 pages.registrationFileActivity = exports;
 
@@ -56,11 +56,6 @@ exports.validateLastDelivery = function () {
 exports.workHasDeliveredStatus = function () {
     return this.getStatus(this.lastDelivery());
 };
-
-
-
-
-
 
 exports.getReceivedDate = function (event) {
     return event.element(by.binding('::activity.transmission_date | tgIsoDate')).getText();

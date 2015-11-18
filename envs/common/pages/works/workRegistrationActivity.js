@@ -202,16 +202,12 @@ exports.activityGroup.events = (function() {
 
     events.getMessage = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.element(
-            by.binding('::message.message_text')
-        ).getText();
+        return target.detailsContainer.$('[data-ng-bind$="message.message_text"]').getText();
     };
 
     events.getRecordType = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.element(
-            by.binding('::message.record_type')
-        ).getText();
+        return target.detailsContainer.$('[data-ng-bind$="message.record_type"]').getText();
     };
 
     events.getMessageLevel = function() {
@@ -223,9 +219,7 @@ exports.activityGroup.events = (function() {
 
     events.getValidationNumber = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.element(
-            by.binding('::message.validation_number')
-        ).getText();
+        return target.detailsContainer.$('[data-ng-bind$="message.validation_number"]').getText();
     };
 
     events.validateAckCreationDate = function(date) {

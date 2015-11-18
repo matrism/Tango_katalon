@@ -123,13 +123,14 @@ exports.feature = [
                     this.validateStatus(data.workEvent.status);
                     this.validateAckCreationDate(data.event.creationDate);
                     this.validateInitiatedBy();
+                    this.validateMessage(data.workEvent.message);
                 });
             });
         }
     },
     {
         name: 'Validate event on Registration File Activity page',
-        tags: ['DBG'],
+        tags: [],
         steps: function () {
             using(steps.registrationFileActivity, function() {
                 this.goToRegistrationFileActivityPage();
