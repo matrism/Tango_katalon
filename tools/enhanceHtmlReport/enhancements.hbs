@@ -201,10 +201,10 @@
     });
 
     // add feature class to feature level uls
-    $('h4:contains("Feature steps")').each(function() {
+    $('h4:contains("eature steps")').each(function () {
         var $this = $(this);
 
-        $this.parent('ul').addClass('feature');
+        $this.parent('ul').parent('ul').addClass('feature');
     });
 </script>
 </script>
@@ -331,7 +331,7 @@
     'use strict';
 
     // ul check to hide parent ul's with no visible children ul
-    function checkUls() {
+    function checkLists() {
         $('ul.feature').each(function () {
             var $this = $(this).parent('ul');
 
@@ -351,7 +351,6 @@
                 $parents.removeClass('hide');
             }
         })
-    }
     }
 
     // tag search
