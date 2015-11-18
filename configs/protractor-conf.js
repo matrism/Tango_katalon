@@ -270,7 +270,7 @@ config = {
                 branch: systemConfig.branch,
                 commit: {
                     hash: systemConfig.commitHash,
-                    shortHash: systemConfig.commitHash.slice(0, 7)
+                    shortHash: systemConfig.commitHash ? systemConfig.commitHash.slice(0, 7) : ''
                 },
                 includedTagsString: systemConfig.tags.join(', '),
                 excludedTagsString: systemConfig.tags.negated.join(', ')
