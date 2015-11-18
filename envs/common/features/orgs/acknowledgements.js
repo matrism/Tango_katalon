@@ -57,7 +57,6 @@ exports.feature = [
         name: 'Load Ack File',
         tags: [],
         steps: function () {
-            steps.searchSection.selectEntityType('Organisations');
             steps.searchSection.accessSavedOrganisationByName(data.org);
 
             steps.organisation.goToGeneralTab();
@@ -108,8 +107,9 @@ exports.feature = [
     },
     {
         name: 'Validate Work Registration Activity',
-        tags: [],
+        tags: ['DBG'],
         steps: function () {
+             hash.testVariables['current ACK file name'] = 'CW131231021_536-WB.V21';
             steps.work.goToWorkPageById(data.workEvent.workId);
             steps.work.goToRegistrationActivityTab();
 

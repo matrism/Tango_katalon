@@ -1048,13 +1048,13 @@ exports.registration = (function () {
         var element = registration.isRegistrationRecipientSelect();
         return element.element(
             by.cssContainingText('button', value)
-        );
+        ).click();
     };
     registration.selectAcknowledgementType = function (value) {
         var element = registration.acknowledgementTypeSelect();
         return element.element(
             by.cssContainingText('button', value)
-        );
+        ).click();
     };
     registration.selectDeliveryMethod = function (i, value) {
         var element = registration.deliveryMethodSelect(i);
@@ -1099,16 +1099,6 @@ exports.registration = (function () {
         return element.click().then(function () {
             pages.base.waitForAjax();
         });
-    };
-
-    registration.sectionActive = function () {
-        var element = registration.sectionContainer();
-        pages.base.scrollIntoView(element);
-        return pph.matchesCssSelector(element, '.active');
-    };
-
-    registration.expectSectionToBeInViewMode = function () {
-        expect(registration.sectionActive()).toBeFalsy();
     };
 
     return registration;

@@ -89,11 +89,11 @@ exports.activityGroup = (function() {
 
         pages.base.scrollIntoView(target.container);
 
-        target.container.click();
-
-        return browser.wait(ExpectedConditions.visibilityOfAny(
-            activityGroup.events.container()
+        browser.wait(ExpectedConditions.elementToBeClickable(
+            activityGroup.container.all().last()
         ));
+
+        return target.container.click();
     };
 
     return activityGroup;

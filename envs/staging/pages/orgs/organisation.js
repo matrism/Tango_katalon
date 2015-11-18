@@ -282,10 +282,10 @@ exports.registration = (function () {
     };
 
     registration.isRegistrationRecipientSelect = function () {
-        return element(by.model('orgIs.recipient'));
+        return $$('[data-ng-form="registration"] .btn-group').get(0);
     };
     registration.acknowledgementTypeSelect = function () {
-        return element(by.model('ack.type'));
+        return $$('[data-ng-form="ackForm"] .btn-group').get(0);
     };
     registration.deliveryMethodSelect = function (i) {
         return $$('.DELIVERY_ACKNOWLEDGEMENT div.btn-group').get(i);
@@ -311,13 +311,13 @@ exports.registration = (function () {
         var element = registration.isRegistrationRecipientSelect();
         return element.element(
             by.cssContainingText('button', value)
-        );
+        ).click();
     };
     registration.selectAcknowledgementType = function (value) {
         var element = registration.acknowledgementTypeSelect();
         return element.element(
             by.cssContainingText('button', value)
-        );
+        ).click();
     };
     registration.selectDeliveryMethod = function (i, value) {
         var element = registration.deliveryMethodSelect(i);
@@ -362,16 +362,6 @@ exports.registration = (function () {
         return element.click().then(function () {
             pages.base.waitForAjax();
         });
-    };
-
-    registration.sectionActive = function () {
-        var element = registration.sectionContainer();
-        pages.base.scrollIntoView(element);
-        return pph.matchesCssSelector(element, '.active');
-    };
-
-    registration.expectSectionToBeInViewMode = function () {
-        expect(registration.sectionActive()).toBeFalsy();
     };
 
     return registration;
