@@ -107,9 +107,8 @@ exports.feature = [
     },
     {
         name: 'Validate Work Registration Activity',
-        tags: ['DBG'],
+        tags: [],
         steps: function () {
-             hash.testVariables['current ACK file name'] = 'CW131231021_536-WB.V21';
             steps.work.goToWorkPageById(data.workEvent.workId);
             steps.work.goToRegistrationActivityTab();
 
