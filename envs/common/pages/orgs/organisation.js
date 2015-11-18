@@ -1256,6 +1256,8 @@ exports.incomeProvider = (function () {
             mapping.addIfNoneMatch(data, data);
         };
 
+        var INVALID_TAG = '_TAT_INVALID';
+
         mapping.addIfNoneMatch = function (matchObj, data) {
             if (!_.isArray(data)) {
                 data = [data];
@@ -1265,14 +1267,18 @@ exports.incomeProvider = (function () {
                 _.each(data, function (obj) {
                     var isMappingPresent = _.find(rows, matchObj);
 
+                    if (matchObj.hasOwnProperty('inboundIncomeType')) {
+                        matchObj.inboundIncomeType = matchObj.inboundIncomeType + INVALID_TAG;
+
+                        isMappingPresent = isMappingPresent || _.find(rows, matchObj);
+                    }
+
                     if (!isMappingPresent) {
                         mapping.addFromObject(obj);
                     }
                 });
             });
         };
-
-        var INVALID_TAG = '_TAT_INVALID';
 
         mapping.changeInboundIncomeType = function (code, newCode) {
             code = code.toString();
