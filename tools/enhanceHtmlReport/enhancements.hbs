@@ -316,16 +316,20 @@
 <script>
     'use strict';
 
-    // Count total steps.
-    $('.tatTotalSteps').text($('li > a').length);
+    function calculateTotals() {
+        // Count total steps
+        $('.tatTotalSteps').text($('ul.feature:not(.searchhide) ul li > a').length);
 
-    $('.tatTotalPassed').text(
-        $('li > .passed ~ a').length + ' ✓'
-    );
+        $('.tatTotalPassed').text(
+            $('ul.feature:not(.searchhide) ul li > .passed ~ a').length + ' ✓'
+        );
 
-    $('.tatTotalFailed').text(
-        $('li > .failed ~ a').length + ' ✗'
-    );
+        $('.tatTotalFailed').text(
+            $('ul.feature:not(.searchhide) ul li > .failed ~ a').length + ' ✗'
+        );
+    }
+
+    calculateTotals();
 </script>
 <script>
     'use strict';
@@ -365,6 +369,7 @@
         }
 
         checkLists();
+        calculateTotals();
     });
 
     // Filter passing/failing tests
