@@ -222,6 +222,20 @@ exports.activityGroup.events = (function() {
         return target.detailsContainer.$('[data-ng-bind$="message.validation_number"]').getText();
     };
 
+    events.getSocietyCode = function() {
+        var target = events.targets.latest;
+        return target.detailsContainer.element(
+            by.binding('activity.society_code')
+        ).getText();
+    };
+
+    events.getProcessedDate = function() {
+        var target = events.targets.latest;
+        return target.container.element(
+            by.binding('activity.run_date | tgIsoDate')
+        ).getText();
+    };
+
     events.validateAckCreationDate = function(date) {
         expect(events.getAckCreationDate()).toBe(date);
     };
@@ -244,6 +258,14 @@ exports.activityGroup.events = (function() {
 
     events.validateValidationNumber = function(value) {
         expect(events.getValidationNumber()).toBe(value);
+    };
+
+    events.validateSocietyCode = function(value) {
+        expect(events.getSocietyCode()).toBe(value);
+    };
+
+    events.validateProcessedDate = function(value) {
+        expect(events.getProcessedDate()).toBe(value);
     };
 
     events.anyEventStatusElement = function(status) {

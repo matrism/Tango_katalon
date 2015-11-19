@@ -48,7 +48,9 @@ var data = {
             'publisher is administered by another BMI publisher.',
         recordType: 'NWR',
         messageLevel: 'Transaction',
-        validationNumber: '270'
+        validationNumber: '270',
+        societyCode: '021',
+        processedDate: '2013-05-01'
     }
 };
 
@@ -123,6 +125,8 @@ exports.feature = [
                     this.validateAckCreationDate(data.event.creationDate);
                     this.validateInitiatedBy();
                     this.validateMessage(data.workEvent.message);
+                    this.validateSocietyCode(data.workEvent.societyCode);
+                    this.validateProcessedDate(data.workEvent.processedDate);
                 });
             });
         }
