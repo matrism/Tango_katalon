@@ -1,4 +1,5 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <div class="tatHeader">
     {{#if buildNumber}}
         <p>
@@ -55,6 +56,13 @@
         (<span class="tatTotalPassed passed"></span>
         / <span class="tatTotalFailed failed"></span>).
     </p>
+    <p>
+        <input type="text" id="tagSearch" placeholder="tag search" />
+    </p>
+    <p>
+        <input type="checkbox" id="showOnlyPassing" /> <span style="color: green;">✓</span> Show Only Passing
+        <input type="checkbox" id="showOnlyFailing" /> <span style="color: red;">✗</span> Show Only Failing
+    </p>
 </div>
 <style>
     .tatTotalPassed, .tatTotalFailed {
@@ -96,6 +104,10 @@
 
     .toggle.active:before {
         content: '–';
+    }
+
+    ul.hide, .feature.checkhide, .feature.searchhide {
+        display: none !important;
     }
 </style>
 <script>
@@ -187,6 +199,14 @@
             return tags.join(' ');
         }());
     });
+
+    // add feature class to feature level uls
+    $('h4:contains("eature steps")').each(function () {
+        var $this = $(this);
+
+        $this.parent('ul').parent('ul').addClass('feature');
+    });
+</script>
 </script>
 <script>
     'use strict';
@@ -296,14 +316,100 @@
 <script>
     'use strict';
 
-    // Count total steps.
-    $('.tatTotalSteps').text($('li > a').length);
+    function calculateTotals() {
+        // Count total steps
+        $('.tatTotalSteps').text($('ul.feature:not(.searchhide) ul li > a').length);
 
-    $('.tatTotalPassed').text(
-        $('li > .passed ~ a').length + ' ✓'
-    );
+        $('.tatTotalPassed').text(
+            $('ul.feature:not(.searchhide) ul li > .passed ~ a').length + ' ✓'
+        );
 
-    $('.tatTotalFailed').text(
-        $('li > .failed ~ a').length + ' ✗'
-    );
+        $('.tatTotalFailed').text(
+            $('ul.feature:not(.searchhide) ul li > .failed ~ a').length + ' ✗'
+        );
+    }
+
+    calculateTotals();
+</script>
+<script>
+    'use strict';
+
+    // ul check to hide parent ul's with no visible children ul
+    function checkLists() {
+        $('ul.feature').each(function () {
+            var $this = $(this).parent('ul');
+
+            // checks # of hidden features from either search or check filters
+            if ($this.children('ul').length === $this.children('.searchhide, .checkhide').length) {
+                $this.addClass('hide');
+            } else {
+                $this.removeClass('hide');
+            }
+
+            var $parents = $this.parent('ul');
+
+            // checks number of sub ul's that are hidden
+            if ($parents.children('ul').length === $parents.children('.hide').length) {
+                $parents.addClass('hide');
+            } else {
+                $parents.removeClass('hide');
+            }
+        })
+    }
+
+    // tag search
+    $('#tagSearch').on('input', function () {
+        var val = $('#tagSearch').val();
+
+        if (val) {
+            $('ul.feature').addClass('searchhide');
+            $('ul[class*="tatTag__' + val + '"]').removeClass('searchhide');
+        } else {
+            $('ul.feature').removeClass('searchhide');
+        }
+
+        checkLists();
+        calculateTotals();
+    });
+
+    // Filter passing/failing tests
+    $("#showOnlyFailing").click(function () {
+        if ($('#showOnlyPassing:checkbox:checked').length > 0) {
+            $('#showOnlyPassing').prop('checked', false);
+        }
+
+        var isChecked = $('#showOnlyFailing:checkbox:checked').length > 0;
+        $('ul').each(function () {
+            var $this = $(this);
+
+            if (isChecked) {
+                $this.find('.feature.failed').removeClass('checkhide');
+                $this.find('.feature.passed').addClass('checkhide');
+            } else {
+                $this.find('.feature.passed').removeClass('checkhide');
+            }
+        });
+
+        checkLists();
+    });
+
+    $("#showOnlyPassing").click(function () {
+        if ($('#showOnlyFailing:checkbox:checked').length > 0) {
+            $('#showOnlyFailing').prop('checked', false);
+        }
+
+        var isChecked = $('#showOnlyPassing:checkbox:checked').length > 0;
+        $('ul').each(function () {
+            var $this = $(this);
+
+            if (isChecked) {
+                $this.find('.feature.passed').removeClass('checkhide');
+                $this.find('.feature.failed').addClass('checkhide');
+            } else {
+                $this.find('.feature.failed').removeClass('checkhide');
+            }
+        });
+
+        checkLists();
+    });
 </script>

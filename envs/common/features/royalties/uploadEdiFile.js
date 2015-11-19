@@ -5,20 +5,26 @@ var using = require('../../../../helpers/fnutils').using,
     path = require('path'),
     noUpload = systemConfig.noUpload,
     YAML = require('yamljs'),
-    fileDefaults;
+    fileDefaults,
+    originalTimeout,
+    PROCESSING_TIMEOUT = 60 * 60 * 1000;
 
-exports.commonFeatureTags = ['royaltyProcessing', 'smokeTest', 'broken', 'unstable'];
+function setTestTimeout(time) {
+    beforeEach(function(){
+        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = time;
+    });
+
+    afterEach(function(){
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+    });
+}
+
+exports.commonFeatureTags = ['royaltyProcessing'];
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };
-
-exports.breakageDescription = (
-    'Though only unstable, this test takes a long time to run and may hang ' +
-    'indefinitely waiting for files to be processed. This affects smoke ' +
-    'test runs, so it\'s tagged broken to be skipped until it\'s stable ' +
-    '(fixed). Tracking issue: TAT-461.'
-);
 
 fileDefaults = {
     currency: 'GBP',
@@ -75,7 +81,7 @@ function fillFormWithFileData(file, clickCreate, useOriginalName) {
         this.selectFileFormat(file.fileFormat);
         this.selectFile(file.fileName, useOriginalName);
 
-        this.setExpectedFileAmount(file.amount);
+        this.setExpectedFileAmount(file.expectedAmount);
         this.setExpectedFileAmountCurrency(file.currency);
         this.setExchangeRate(file.exchangeRate);
 
@@ -113,6 +119,8 @@ exports.feature = [
                     }
                 };
 
+            setTestTimeout(PROCESSING_TIMEOUT);
+
             goToUploadPage();
             using(steps.uploadEdiFile, function(){
 
@@ -148,18 +156,14 @@ exports.feature = [
                 incomeProviders;
 
             incomeProviders = {
-                'OSA': {
-                    name: 'OSA',
+                TATIP: {
+                    name: 'TATIP',
                     requiredFileType: 'CISAC F2',
                     requiredInboundIncomeType: '21'
-                },
-
-                'FOX': {
-                    name: 'FOX',
-                    requiredFileType: 'HARRY FOX',
-                    requiredInboundIncomeType: 'MECHANICALMC'
                 }
             };
+
+            setTestTimeout(PROCESSING_TIMEOUT);
 
             describe('Load a file - Custom Format - OSA', function(){
                 goToUploadPage();
@@ -195,6 +199,7 @@ exports.feature = [
             });
 
             describe('Load a file - Custom Format - FOX', function(){
+
                 goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
@@ -284,7 +289,7 @@ exports.feature = [
                     this.expectToBeRedirectedToRoyaltyStatements();
 
                     this.expectStatementFieldToBe('Statement Format', 'COMMON XLS');
-                    this.expectStatementFieldToBe('Statement Distribution Period', '2014-02 to 2014-02');
+                    this.expectStatementFieldToBe('Statement Distribution Period', '2013-01 to 2013-06');
                     this.expectStatementFieldToBe('File Name', file.name + '   1 of 2');
                     this.expectStatementFieldToBe('Exchange Rate', '1 EUR to 1 EUR');
                     this.expectStatementFieldToBe('Statement Amount', '99.5900 EUR');
@@ -321,7 +326,7 @@ exports.feature = [
 
                 using(steps.uploadEdiFile, function(){
                     var file = files[0],
-                        org = incomeProviders.OSA;
+                        org = incomeProviders.TATIP;
 
                     /*fillFormWithFileData(file, false);
                     steps.base.duplicateTab();
@@ -395,63 +400,6 @@ exports.feature = [
                     //this.rollBackUploadedFile();
                 });
             });
-
-
-            xdescribe('Check Income Type Mappings for OSA', function(){
-                var org = incomeProviders.OSA;
-
-                using(steps.mainHeader.search, function (){
-                    this.selectEntityType('Organisation');
-                    this.enterTerms(org.name);
-                    this.selectResultByIndex(0);
-                });
-
-                using(steps.organisation.incomeProvider, function(){
-                    this.editSection();
-
-                    this.checkOrAddIncomeFileType(org.requiredFileTypes);
-                    this.incomeTypeMapping.addIfNoneMatch({ inboundIncomeType: org.requiredInboundIncomeType }, {
-                        inboundIncomeType: org.requiredInboundIncomeType,
-                        description: 'TAT INCOME TYPE TEST',
-                        fileType: org.requiredFileType,
-                        internalIncomeType: 'Mechanical'
-                    });
-
-                    this.expectIncomeTypeMappingsToBeValid();
-                    this.saveSection();
-                });
-            });
-
-            //goToUploadPage();
-
-            xdescribe('Check Income Type Mappings for FOX', function(){
-                var org = incomeProviders.FOX;
-
-                using(steps.mainHeader.search, function (){
-                    this.selectEntityType('Organisation');
-                    this.enterTerms(org.name);
-                    this.selectResultByIndex(0);
-                });
-
-                using(steps.organisation.incomeProvider, function(){
-                    this.editSection();
-
-                    this.checkOrAddIncomeFileType(org.requiredFileTypes);
-                    this.incomeTypeMapping.addIfNoneMatch({ inboundIncomeType: org.requiredInboundIncomeType }, {
-                        inboundIncomeType: org.requiredInboundIncomeType,
-                        description: 'TAT INCOME TYPE TEST',
-                        fileType: org.requiredFileType,
-                        internalIncomeType: 'Mechanical'
-                    });
-
-                    this.expectIncomeTypeMappingsToBeValid();
-                    this.saveSection();
-                });
-            });
-
-            // inspect income provider, MECHANICALMC, Mechanical
-
-            //goToUploadPage();
 
             describe('View/List/Filter Statement headers', function(){
                 steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');

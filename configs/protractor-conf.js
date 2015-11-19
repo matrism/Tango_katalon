@@ -25,7 +25,7 @@ global.hash = {};
 
 hash.testVariables = {};
 
-require('../helpers/services_helper');
+require('../helpers');
 
 global.systemConfig = global._tf_config._system_;
 
@@ -80,12 +80,15 @@ config = {
             testFiles = require('./files.js'),
             matchers,
             browserWait,
-            jasmineTimeout,
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes,
             failFast = require('jasmine-fail-fast'),
             beforeReporter = require('../helpers/beforeReporter');
+
+        global.promise = protractor.promise;
+        global.ExpectedConditions = protractor.ExpectedConditions;
+        global.EC = ExpectedConditions;
 
         if (systemConfig.failFast) {
             jasmine.getEnv().addReporter(failFast.init());
@@ -112,10 +115,6 @@ config = {
 
             timeout = parseInt(timeout);
 
-            if (timeout > jasmineTimeout) {
-                jasmine.DEFAULT_TIMEOUT_INTERVAL = timeout + jasmineTimeout;
-            }
-
             options = options || {};
 
             return browserWait.call(browser, function() {
@@ -137,18 +136,9 @@ config = {
             }, timeout);
         };
 
-        afterEach(function(){
-            if (jasmine.DEFAULT_TIMEOUT_INTERVAL != jasmineTimeout) {
-                jasmine.DEFAULT_TIMEOUT_INTERVAL = jasmineTimeout;
-            }
-        });
-
         setTimeout(function(){
-            jasmineTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-
             if (systemConfig.resolution.width && systemConfig.resolution.height) {
-
-                    browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+                browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
             } else {
                 browser.driver.manage().window().maximize();
             }
@@ -270,7 +260,7 @@ config = {
                 branch: systemConfig.branch,
                 commit: {
                     hash: systemConfig.commitHash,
-                    shortHash: systemConfig.commitHash.slice(0, 7)
+                    shortHash: systemConfig.commitHash ? systemConfig.commitHash.slice(0, 7) : ''
                 },
                 includedTagsString: systemConfig.tags.join(', '),
                 excludedTagsString: systemConfig.tags.negated.join(', ')
@@ -283,7 +273,7 @@ config = {
     framework: 'jasmine2',
     jasmineNodeOpts: {
         showColors: true,
-        defaultTimeoutInterval: 600000,
+        defaultTimeoutInterval: 10 * 60 * 1000,
         print: function(){}
     }
 };
