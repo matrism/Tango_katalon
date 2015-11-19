@@ -25,7 +25,7 @@ global.hash = {};
 
 hash.testVariables = {};
 
-require('../helpers/services_helper');
+require('../helpers');
 
 global.systemConfig = global._tf_config._system_;
 
@@ -85,6 +85,10 @@ config = {
             asciiPrefixes,
             failFast = require('jasmine-fail-fast'),
             beforeReporter = require('../helpers/beforeReporter');
+
+        global.promise = protractor.promise;
+        global.ExpectedConditions = protractor.ExpectedConditions;
+        global.EC = ExpectedConditions;
 
         if (systemConfig.failFast) {
             jasmine.getEnv().addReporter(failFast.init());

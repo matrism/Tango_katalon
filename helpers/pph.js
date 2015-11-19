@@ -1,6 +1,6 @@
 "use strict";
 var pph = module.exports = {};
-var promise = protractor.promise;
+
 pph.arrayMethod = function(methodName, array, callback) {
     array = [].slice.call(array, 0);
     return promise
