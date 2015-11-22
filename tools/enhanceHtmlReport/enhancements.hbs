@@ -357,6 +357,14 @@
         })
     }
 
+    function updateLocationHash() {
+        top.location.hash = [
+            $('#tagSearch').val(),
+            $('#showOnlyPassing').prop('checked')? 'passing' : '',
+            $('#showOnlyFailing').prop('checked')? 'failing' : ''
+        ].join(',');
+    }
+
     // tag search
     $('#tagSearch').on('input', function () {
         var val = $('#tagSearch').val();
@@ -370,6 +378,7 @@
 
         checkLists();
         calculateTotals();
+        updateLocationHash();
     });
 
     // Filter passing/failing tests
@@ -391,6 +400,7 @@
         });
 
         checkLists();
+        updateLocationHash();
     });
 
     $("#showOnlyPassing").click(function () {
@@ -411,5 +421,34 @@
         });
 
         checkLists();
+        updateLocationHash();
     });
+
+    // Parse location hash once
+    (function() {
+        var hashSlices,
+            searchTerms = '',
+            onlyPassing = false,
+            onlyFailing = false;
+
+        if(!top.location.hash) {
+            return;
+        }
+
+        hashSlices = top.location.hash.slice(1).split(',');
+
+        searchTerms = hashSlices[0];
+        onlyPassing = hashSlices[1];
+        onlyFailing = hashSlices[2];
+
+        $('#tagSearch').val(searchTerms).trigger('input');
+
+        if(onlyPassing) {
+            $('#showOnlyPassing').click();
+        }
+
+        if(onlyFailing) {
+            $('#showOnlyFailing').click();
+        }
+    })();
 </script>
