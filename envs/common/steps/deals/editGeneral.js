@@ -101,6 +101,13 @@ exports.selectEditRandomInternalContactDropDown = function () {
     });
 };
 
+exports.selectEditSpecificInternalContactDropDown = function (role) {
+    it("Select edit random value from internal contact drop down", function () {
+        pages.editDealGeneral.selectEditSpecificInternalContactsFromDropDown(role);
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
 exports.clickEditInternalContactRole = function () {
     it("Click edit internal contact role field", function () {
         pages.editDealGeneral.clickEditInternalContactsRole();
@@ -140,9 +147,19 @@ exports.removeInternalContactsRowI = function (i) {
 
 exports.confirmModalDialog = function () {
     it("Confirm modal dialog action", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.confirmationModalDialog));
         browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
         pages.editDealGeneral.clickOnYesModalDialog();
         browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.yesModalDialog));
+    });
+};
+
+exports.confirmTheCancelModalDialog = function () {
+    it("Confirm modal dialog action", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
+        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
+        pages.editDealGeneral.clickOnYesModalDialog();
+        browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
     });
 };
 
@@ -152,11 +169,12 @@ exports.expectSaveEditInternalContactButtonPresent = function () {
     });
 };
 
-exports.cancelModalDialog = function () {
+exports.cancelTheModalDialog = function () {
     it("Cancel modal dialog action", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
         browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.noModalDialog));
         pages.editDealGeneral.clickOnNoModalDialog();
-        browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.modalDialog));
+        browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
     });
 };
 
@@ -170,7 +188,6 @@ exports.itSaveInternalContactsChanges = function () {
 exports.itCancelInternalContactsChanges = function () {
     it("Cancel internal contacts changes after editing them", function () {
         pages.editDealGeneral.clickOnCancelEditInternalContacts();
-        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
     })
 };
 
@@ -207,6 +224,13 @@ exports.itEditAddInternalContactsRoleRowIToDealGeneralTab = function (i) {
     describe("Edit - internal contacts edit roles in deals general tab", function () {
         steps.editDealGeneral.clickEditInternalContactRoleRowI(i);
         steps.editDealGeneral.selectEditRandomInternalContactDropDown();
+    });
+};
+
+exports.itEditAddInternalContactsSpecificRoleRowIToDealGeneralTab = function (i, role) {
+    describe("Edit - internal contacts edit specific roles in deals general tab", function () {
+        steps.editDealGeneral.clickEditInternalContactRoleRowI(i);
+        steps.editDealGeneral.selectEditSpecificInternalContactDropDown(role);
     });
 };
 

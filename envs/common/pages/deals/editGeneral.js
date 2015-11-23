@@ -20,7 +20,8 @@ if (pages.editDealGeneral === undefined) {
             editInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             removeInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
             removeInternalContactsElement: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"},
-            modalDialog: {css: "div.modal-dialog ng-scope"},
+            confirmationModalDialog: {css: "div.modal-dialog.ng-scope"},
+            cancelModalDialogElement: {css: "div.modal.fade.in div.ng-scope"},
             yesModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
             noModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
         },
@@ -61,6 +62,29 @@ if (pages.editDealGeneral === undefined) {
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
+        },
+
+        selectEditSpecificInternalContactsFromDropDown: function (internalRole) {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
+            var desiredOption;
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(internalRole) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
                 });
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
         },
