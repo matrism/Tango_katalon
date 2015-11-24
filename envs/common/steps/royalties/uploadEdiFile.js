@@ -50,6 +50,7 @@ pageStep([
     'Expect unsaved statement modal to be visible',
     'Click continue editing link',
     'Click confirm cancellation button',
+    'Expect file errors to contain',
 
     'Edit statement',
     'Change accounts reference field'

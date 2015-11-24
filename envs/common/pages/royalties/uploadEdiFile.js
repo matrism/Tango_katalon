@@ -502,3 +502,18 @@ exports.changeAccountsReferenceField = function (val) {
     field.clear();
     field.sendKeys(val);
 };
+
+exports.fileErrors = function () {
+    return exports.uploadedFileBlind().$$('.error-messages .error-text');
+};
+
+exports.expectFileErrorsToContain = function (err) {
+    var errorList = exports.fileErrors(),
+        expectedErrors = errorList.filter(function(error){
+            return error.getText().then(function(text){
+                return text.indexOf(err);
+            });
+        });
+
+    expect(expectedErrors.count()).not.toBe(-1);
+};

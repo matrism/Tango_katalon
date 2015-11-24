@@ -324,6 +324,7 @@ exports.feature = [
 
             describe('Identify files when income type mappings are added/updated', function(){
 
+                setTestTimeout(PROCESSING_TIMEOUT);
                 using(steps.uploadEdiFile, function(){
                     var file = files[0],
                         org = incomeProviders.TATIP;
@@ -369,11 +370,17 @@ exports.feature = [
                     this.expectToBeRedirectedToFileUploadHistory();
 
                     this.expectUploadedFileToBeListed();
-                    this.openUploadedFileBlind();
 
                     waitForFileStatusToBe('Income Type Mapping Error');
 
-                    if (!noUpload) { this.openUploadedFileBlind(); }
+                    this.openUploadedFileBlind();
+                    this.expectFileErrorsToContain('Invalid income type \'21\' for statement');
+                    this.openFirstGeneratedStatement();
+
+                    steps.base.switchToTab(1);
+                    this.expectToBeRedirectedToRoyaltyStatements();
+                    this.expectSummaryByTypeToBe('Unmapped Income Type', file.amount);
+                    steps.base.closeTabByIndex(1);
 
                     //steps.base.switchToTab(1);
 
@@ -396,6 +403,13 @@ exports.feature = [
 
                     this.expectUploadedFileToBeListed();
                     waitForFileToBeProcessed();
+                    this.openUploadedFileBlind();
+                    this.openFirstGeneratedStatement();
+
+                    steps.base.switchToTab(1);
+                    this.expectToBeRedirectedToRoyaltyStatements();
+                    this.expectSummaryByTypeToBe('Digital Mechanical', file.amount);
+                    steps.base.closeTabByIndex(1);
 
                     //this.rollBackUploadedFile();
                 });
