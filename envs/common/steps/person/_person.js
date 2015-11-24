@@ -85,7 +85,7 @@ exports.enterLastName = function (value) {
 
 exports.enterPresentationName = function (value) {
     it('Enter presentation name (' + value + ')', function () {
-        pages.newPerson.typePresentationName(value).then(function () {
+        pages.person.typePresentationName(value).then(function () {
             var person = hash.currentPersonSlot;
 
             person.name = value;

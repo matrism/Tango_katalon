@@ -524,7 +524,7 @@ exports.commonFeatureTags = ['works', 'workRankedSearchResults', 'smoke'];
 exports.feature = [
     {
         name: 'Create test data',
-        tags: [],
+        tags: ['blah'],
         steps: [
             [function () {
                 baseWorksData.forEach(function (workData, i) {

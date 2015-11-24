@@ -31,6 +31,9 @@ exports.lastNameInput = function() {
 exports.suisaIpiNumberInput = function() {
     return $('.e2e-primary-name-suisa-ipi input');
 };
+exports.presentationNameInput = function () {
+    return element(by.model('modularEditModels.model.fullName'));
+};
 exports.affiliatedSocietySearchInput = function() {
     return $('.e2e-society-affiliation-society input');
 };
@@ -377,6 +380,12 @@ exports.typeFirstName = function(value) {
 };
 exports.typeLastName = function(value) {
     var element = this.lastNameInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+exports.typePresentationName = function (value) {
+    var element = this.presentationNameInput();
     pages.base.scrollIntoView(element);
     element.clear();
     return element.sendKeys(value);
