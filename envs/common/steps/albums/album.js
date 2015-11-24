@@ -50,7 +50,7 @@ exports.recordings.validateWorkIdUsingWorkSlot = function(i, value) {
     it(
         'Recordings > Validate work ID using work slot ' +
         '(' + argumentListString + ')', function() {
-            pages.workRecordings.recordings.validateWorkId(
+            pages.album.recordings.validateWorkId(
                 i, hash.entityDataSlotsByType.work[value].id
             );
         }
