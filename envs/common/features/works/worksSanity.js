@@ -1755,8 +1755,7 @@ exports.feature = [
         steps: function () {
             using(steps.work, function () {
                 steps.base.useEntityDataSlot('work', 'mainWork');
-                //this.goToWorkPage();
-                this.goToWorkPageById('WW 015018778 00');
+                this.goToWorkPage();
                 this.goToGeneralTab();
                 using(this.copy, function () {
                     this.copyWork();
@@ -1765,7 +1764,7 @@ exports.feature = [
                 });
                 steps.newWork.saveWork();
                 this.goToGeneralTab();
-                this.validateVersionTypeId('WW 015018778 00');
+                this.validateVersionTypeId();
             });
         }
     }
