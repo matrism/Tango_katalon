@@ -1209,6 +1209,18 @@ exports.tabSetContainer = function() {
     return $('[data-tg-tabset-id="workEditTabset"]');
 };
 
+exports.generalTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'General')
+    );
+};
+
+exports.goToGeneralTab = function() {
+    var element = exports.generalTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+
 exports.recordingsTab = function() {
     return exports.tabSetContainer().element(
         by.cssContainingText('span', 'Recordings')
@@ -1275,3 +1287,132 @@ exports.goToRegistrationActivityTab = function() {
         pages.base.waitForAjax();
     });
 };
+
+exports.copy = (function () {
+    var copy = {};
+
+    copy.copyWorkButton = function() {
+        return element(by.cssContainingText('a', 'Copy Work'));
+    };
+
+    copy.continueButton = function() {
+        return pages.base.modalFooter().element(
+            by.cssContainingText('button', 'Continue')
+        );
+    };
+
+    copy.originalSelect = function() {
+        return $('#copy_original');
+    };
+
+    copy.adaptationSelect = function() {
+        return $('#copy_adaptation_or_arrangement');
+    };
+
+    copy.primaryWorkTitleInput = function() {
+        return element(by.model("work.primary_title.title"));
+    };
+
+    copy.saveWorkButton = function() {
+        return element(by.cssContainingText('button', 'Create Work'));
+    };
+
+    copy.successMessage = function() {
+        return element(by.cssContainingText(
+            'p', '1 Work(s) are created successfully.'
+        ));
+    };
+
+    copy.enterPrimaryWorkTitle = function(value) {
+        var element = copy.primaryWorkTitleInput();
+        return element.sendKeys(value);
+    };
+
+    copy.copyWork = function() {
+        var element = copy.copyWorkButton();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    copy.continue = function() {
+        copy.continueButton().click();
+        pages.base.waitForAjax();
+    };
+
+    copy.selectOriginal = function() {
+        var element = copy.originalSelect();
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element.click();
+    };
+
+    copy.selectAdaptation = function() {
+        var element = copy.adaptationSelect();
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element.click();
+    };
+
+    copy.saveWork = function() {
+        var element = copy.saveWorkButton();
+        element.click();
+        pages.base.waitForAjax();
+    };
+
+    copy.validateSuccessMessage = function() {
+        var element = copy.successMessage();
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    };
+
+    return copy;
+})();
+
+exports.merge = (function () {
+    var merge = {};
+
+    merge.mergeWorkButton = function() {
+        return element(by.cssContainingText('a', 'Merge Work'));
+    };
+
+    merge.findWorkInput = function() {
+        return element(by.model('data.workSearch.selected_work'));
+    };
+
+    merge.enterFindWorkUsingPreviouslyEnteredPrimaryTitle = function() {
+        merge.enterFindWork(hash.currentEntityDataSlotsByType.work.primaryTitle);
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+        pages.work.selectFirstComponentWorkSuggestion();
+    };
+
+    merge.continueButton = function() {
+        return element(by.cssContainingText('button', 'Quick Merge'));
+    };
+
+    merge.confirmButton = function() {
+        return pages.base.modalFooter().element(
+            by.cssContainingText('button', 'Confirm')
+        );
+    };
+
+    merge.mergeWork = function() {
+        var element = merge.mergeWorkButton();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    merge.enterFindWork = function(value) {
+        var element = merge.findWorkInput();
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element.sendKeys(value);
+    };
+
+    merge.continue = function() {
+        merge.continueButton().click();
+    };
+
+    merge.confirm = function() {
+        var element = merge.confirmButton();
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element.click();
+    };
+
+    return merge;
+})();

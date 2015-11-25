@@ -26,6 +26,12 @@ exports.goToWorkPageById = function(workId) {
     });
 };
 
+module.exports.goToGeneralTab = function() {
+    it('Go to General tab', function() {
+        pages.work.goToGeneralTab();
+    });
+};
+
 module.exports.goToScopeDeliveryTab = function() {
     it('Go to Scope Delivery tab', function() {
         pages.work.goToScopeDeliveryTab();
@@ -1405,3 +1411,21 @@ module.exports.validateIncludeWorkOnWebsite = function (include) {
         }
     );
 };
+
+pageStep([
+    ['Merge', [
+        'Merge Work',
+        'Enter find work using previously entered primary title',
+        'Continue',
+        'Confirm'
+    ]],
+    ['Copy', [
+        'Copy Work',
+        'Continue',
+        'Select Original',
+        'Select Adaptation',
+        'Enter Primary Work Title',
+        'Save work',
+        'Validate Success Message'
+    ]]
+]);

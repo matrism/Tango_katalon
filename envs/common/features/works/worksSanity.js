@@ -4,6 +4,7 @@ var leftPad = require('left-pad'),
     moment = require('moment'),
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
+    randomString = random.string.makeMemoizedGenerator(),
     fromTestVariable = require('../../../../helpers/fromTestVariable'),
     fnutils = require('../../../../helpers/fnutils'),
     bind = fnutils.bind,
@@ -289,6 +290,7 @@ exports.feature = [
 
                     steps.newWork.saveWork();
                     steps.newWork.validateSaveWorkRedirection();
+                    steps.work.findCurrentlyOpenWorkId();
                 });
             }],
         ],
@@ -1672,6 +1674,101 @@ exports.feature = [
 
             using(steps.organisationRegistrationStack.works, function () {
                 this.validateAbsence({ title: 'TEST WORK ' + randomId('mainWork') });
+            });
+        }
+    },
+    {
+        name: 'Merge work',
+        tags: [
+            'worksSanityMerge',
+            'DBG'
+        ],
+        steps: function () {
+            steps.base.useEntityDataSlot('work', 'mainWork');
+            steps.work.goToWorkPage();
+            steps.work.goToGeneralTab();
+            using(steps.work.merge, function () {
+                this.mergeWork();
+                steps.base.useEntityDataSlot('work', 'component0');
+                this.enterFindWorkUsingPreviouslyEnteredPrimaryTitle();
+                this.continue();
+                this.confirm();
+            });
+        }
+    },
+    {
+        name: 'Search for the merged works',
+        tags: [
+            'worksSanitySearchForMergedWorks',
+            'worksSanityMerge',
+            'DBG'
+        ],
+        steps: function () {
+            steps.base.useEntityDataSlot('work', 'mainWork');
+            steps.searchSection.selectEntityType('Works');
+            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
+            steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
+            steps.base.sleep(200);
+            steps.base.waitForAjax();
+            steps.work.expectWorkSearchMatchCountToBe(1);
+            steps.work.clickWorkSearchMatch(0);
+            steps.base.waitForAjax();
+            steps.work.validateWorkId();
+
+            steps.base.useEntityDataSlot('work', 'component0');
+            steps.searchSection.selectEntityType('Works');
+            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
+            steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
+            steps.base.sleep(200);
+            steps.base.waitForAjax();
+            steps.work.expectWorkSearchMatchCountToBe(0);
+        }
+    },
+    {
+        name: 'Copy work - Original',
+        tags: [
+            'worksSanityCopyWorkOriginal',
+            'worksSanityCopy',
+            'DBG'
+        ],
+        steps: function () {
+            using(steps.work, function () {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+                this.goToWorkPage();
+                this.goToGeneralTab();
+                using(this.copy, function () {
+                    this.copyWork();
+                    this.selectOriginal();
+                    this.continue();
+                    this.enterPrimaryWorkTitle(
+                        'TEST WORK ' + randomString('copyWork')
+                    );
+                    this.saveWork();
+                    this.validateSuccessMessage();
+                });
+            });
+        }
+    },
+    {
+        name: 'Copy work - Adaptation',
+        tags: [
+            'worksSanityCopyWorkAdaptation',
+            'worksSanityCopy',
+            'DBG'
+        ],
+        steps: function () {
+            using(steps.work, function () {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+                this.goToWorkPage();
+                this.goToGeneralTab();
+                using(this.copy, function () {
+                    this.copyWork();
+                    this.selectAdaptation();
+                    this.continue();
+                });
+                steps.newWork.saveWork();
+                this.goToGeneralTab();
+                this.validateVersionType('Modified Version of a musical work');
             });
         }
     }
