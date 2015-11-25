@@ -1341,13 +1341,13 @@ exports.copy = (function () {
 
     copy.selectOriginal = function() {
         var element = copy.originalSelect();
-        browser.wait(ExpectedConditions.visibilityOf(element));
+        browser.wait(ExpectedConditions.elementToBeClickable(element));
         return element.click();
     };
 
     copy.selectAdaptation = function() {
         var element = copy.adaptationSelect();
-        browser.wait(ExpectedConditions.visibilityOf(element));
+        browser.wait(ExpectedConditions.elementToBeClickable(element));
         return element.click();
     };
 
@@ -1379,7 +1379,7 @@ exports.merge = (function () {
     merge.enterFindWorkUsingPreviouslyEnteredPrimaryTitle = function() {
         merge.enterFindWork(hash.currentEntityDataSlotsByType.work.primaryTitle);
         pages.work.expectCreatorSuggestionsToBeDisplayed();
-        pages.work.selectFirstComponentWorkSuggestion();
+        pages.work.selectFirstCreatorSuggestion();
     };
 
     merge.continueButton = function() {
