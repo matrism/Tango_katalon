@@ -1302,11 +1302,11 @@ exports.copy = (function () {
     };
 
     copy.originalSelect = function() {
-        return $('#copy_original');
+        return $('#copy_original+label');
     };
 
     copy.adaptationSelect = function() {
-        return $('#copy_adaptation_or_arrangement');
+        return $('#copy_adaptation_or_arrangement+label');
     };
 
     copy.primaryWorkTitleInput = function() {
