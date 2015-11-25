@@ -1345,7 +1345,7 @@ exports.copy = (function () {
         var element = copy.copyWorkButton();
         pages.base.scrollIntoView(element);
         return element.click().then(function() {
-            pages.base.sleep(200);
+            browser.sleep(200);
         });
     };
 
