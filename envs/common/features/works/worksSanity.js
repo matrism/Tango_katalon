@@ -1681,7 +1681,6 @@ exports.feature = [
         name: 'Merge work',
         tags: [
             'worksSanityMerge',
-            'DBG'
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
@@ -1701,7 +1700,6 @@ exports.feature = [
         tags: [
             'worksSanitySearchForMergedWorks',
             'worksSanityMerge',
-            'DBG'
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
@@ -1729,7 +1727,6 @@ exports.feature = [
         tags: [
             'worksSanityCopyWorkOriginal',
             'worksSanityCopy',
-            'DBG'
         ],
         steps: function () {
             using(steps.work, function () {
@@ -1754,12 +1751,12 @@ exports.feature = [
         tags: [
             'worksSanityCopyWorkAdaptation',
             'worksSanityCopy',
-            'DBG'
         ],
         steps: function () {
             using(steps.work, function () {
                 steps.base.useEntityDataSlot('work', 'mainWork');
-                this.goToWorkPage();
+                //this.goToWorkPage();
+                this.goToWorkPageById('WW 015018778 00');
                 this.goToGeneralTab();
                 using(this.copy, function () {
                     this.copyWork();
@@ -1768,7 +1765,7 @@ exports.feature = [
                 });
                 steps.newWork.saveWork();
                 this.goToGeneralTab();
-                this.validateVersionTypeId();
+                this.validateVersionTypeId('WW 015018778 00');
             });
         }
     }

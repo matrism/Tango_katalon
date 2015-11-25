@@ -1229,7 +1229,6 @@ exports.generalTab = function() {
 exports.goToGeneralTab = function() {
     var element = exports.generalTab();
     pages.base.scrollIntoView(element);
-
     return element.click().then(function(){
         pages.base.waitForAjax();
     });
@@ -1345,7 +1344,9 @@ exports.copy = (function () {
     copy.copyWork = function() {
         var element = copy.copyWorkButton();
         pages.base.scrollIntoView(element);
-        return element.click();
+        return element.click().then(function() {
+            pages.base.sleep(200);
+        });
     };
 
     copy.continue = function() {
