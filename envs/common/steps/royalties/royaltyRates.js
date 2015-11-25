@@ -632,6 +632,7 @@ exports.editSingleRoyaltySet = function () {
 exports.refreshPage = function () {
     it("Refresh Page", function () {
         browser.driver.navigate().refresh();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
     });
 };
 
