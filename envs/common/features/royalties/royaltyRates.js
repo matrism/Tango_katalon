@@ -8,7 +8,7 @@ exports.beforeFeature = function () {
     steps.createDealScope.itAddSimpleScope();
 };
 
-exports.commonFeatureTags = ['royalties', 'smoke', 'broken'];
+exports.commonFeatureTags = ['royaltyRates', 'smoke', 'broken'];
 
 exports.feature = [
     {
