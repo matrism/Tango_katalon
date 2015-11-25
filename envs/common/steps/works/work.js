@@ -1280,6 +1280,13 @@ module.exports.validateVersionType = function (value) {
         });
     });
 };
+module.exports.validateVersionTypeId = function (value) {
+    it("Validate version type work ID", function () {
+        var data = hash.currentEntityDataSlotsByType.work;
+        value = value || data.id;
+        expect(pages.work.versionTypeId()).toBe(value);
+    });
+};
 module.exports.validateLyricAdaptation = function (value) {
     it("Validate lyric adaptation (if validation value is not empty)", function () {
         promise.when(value).then(function (value) {

@@ -1768,7 +1768,7 @@ exports.feature = [
                 });
                 steps.newWork.saveWork();
                 this.goToGeneralTab();
-                this.validateVersionType('Modified Version of a musical work');
+                this.validateVersionTypeId();
             });
         }
     }

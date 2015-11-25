@@ -486,6 +486,11 @@ module.exports.versionTypeBinding = function() {
         "getAdminDataName(dataHolder.versionTypes, modularEditModels.model.version_type)"
     ));
 };
+module.exports.versionTypeIdBinding = function() {
+    return element(by.binding(
+        "getWorkFullCode(dataHolder.modifiedWork)"
+    ));
+};
 module.exports.lyricAdaptationBinding = function() {
     return element(by.binding(
         "getAdminDataName(dataHolder.lyricAdaptations, " +
@@ -797,6 +802,12 @@ module.exports.excerptType = function() {
 };
 module.exports.versionType = function() {
     var element = pages.work.versionTypeBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+module.exports.versionTypeId = function() {
+    var element = pages.work.versionTypeIdBinding();
+    pages.base.waitForAjax();
     pages.base.scrollIntoView(element);
     return element.getText();
 };
@@ -1218,7 +1229,10 @@ exports.generalTab = function() {
 exports.goToGeneralTab = function() {
     var element = exports.generalTab();
     pages.base.scrollIntoView(element);
-    return element.click();
+
+    return element.click().then(function(){
+        pages.base.waitForAjax();
+    });
 };
 
 exports.recordingsTab = function() {
