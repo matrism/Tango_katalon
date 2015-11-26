@@ -1737,13 +1737,35 @@ exports.feature = [
                     this.copyWork();
                     this.selectOriginal();
                     this.continue();
-                    this.enterPrimaryWorkTitle(
-                        'TEST WORK ' + randomString('copyWork')
-                    );
+                    this.enterPrimaryWorkTitle(0, 'TEST WORK ' + randomString('copy0'));
+                    this.enterPrimaryWorkTitle(1, 'TEST WORK ' + randomString('copy1'));
+                    this.enterPrimaryWorkTitle(2, 'TEST WORK ' + randomString('copy2'));
                     this.saveWork();
                     this.validateSuccessMessage();
                 });
             });
+        }
+    },
+    {
+        name: 'Search for the copied works',
+        tags: [
+            'worksSanitySearchForCopiedWorks',
+            'worksSanityCopy',
+        ],
+        steps: function () {
+            steps.searchSection.selectEntityType('Works');
+            steps.work.selectWorkSearchFilterTag(0, 'Title');
+            steps.work.enterWorkSearchTerms('TEST WORK ' + randomString('copy1'));
+            steps.base.sleep(200);
+            steps.base.waitForAjax();
+            steps.work.expectWorkSearchMatchCountToBe(1);
+
+            steps.searchSection.selectEntityType('Works');
+            steps.work.selectWorkSearchFilterTag(0, 'Title');
+            steps.work.enterWorkSearchTerms('TEST WORK ' + randomString('copy2'));
+            steps.base.sleep(200);
+            steps.base.waitForAjax();
+            steps.work.expectWorkSearchMatchCountToBe(1);
         }
     },
     {

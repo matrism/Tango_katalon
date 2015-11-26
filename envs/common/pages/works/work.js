@@ -1322,8 +1322,8 @@ exports.copy = (function () {
         return $('#copy_adaptation_or_arrangement+label');
     };
 
-    copy.primaryWorkTitleInput = function() {
-        return element(by.model("work.primary_title.title"));
+    copy.primaryWorkTitleInput = function(i) {
+        return element.all(by.model("work.primary_title.title")).get(i);
     };
 
     copy.saveWorkButton = function() {
@@ -1332,12 +1332,12 @@ exports.copy = (function () {
 
     copy.successMessage = function() {
         return element(by.cssContainingText(
-            'p', '1 Work(s) are created successfully.'
+            'p', 'Work(s) are created successfully.'
         ));
     };
 
-    copy.enterPrimaryWorkTitle = function(value) {
-        var element = copy.primaryWorkTitleInput();
+    copy.enterPrimaryWorkTitle = function(i, value) {
+        var element = copy.primaryWorkTitleInput(i);
         return element.sendKeys(value);
     };
 
@@ -1368,6 +1368,7 @@ exports.copy = (function () {
 
     copy.saveWork = function() {
         var element = copy.saveWorkButton();
+        browser.wait(ExpectedConditions.elementToBeClickable(element));
         element.click();
         pages.base.waitForAjax();
     };
