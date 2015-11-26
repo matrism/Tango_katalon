@@ -3,7 +3,7 @@
   incomeProvider: TATIP
   fileFormat: CISAC F2
   fileName: ./data/J9140050_4_tiny.WAR.dat
-  mockedFileName: TAT6861446666914811.edi
+  mockedFileName: TAT_2015-11-24T19_10_04.662Z.edi
   oldamount: '404,416.6401'
   amount: '42.3900'
   currency: CZK
