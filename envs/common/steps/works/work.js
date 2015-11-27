@@ -26,11 +26,7 @@ exports.goToWorkPageById = function(workId) {
     });
 };
 
-module.exports.goToGeneralTab = function() {
-    it('Go to General tab', function() {
-        pages.work.goToGeneralTab();
-    });
-};
+pageStep('Go to General tab');
 
 module.exports.goToScopeDeliveryTab = function() {
     it('Go to Scope Delivery tab', function() {
