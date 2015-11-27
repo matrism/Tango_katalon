@@ -3,7 +3,9 @@
 var fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
-exports.commonFeatureTags = ['albums', 'smoke', 'albumsSmoke'],
+exports.commonFeatureTags = [
+    'albums', 'smoke', 'albumsSmoke', 'searchForAlbum', 'production', 'productionSmoke'
+];
 
 exports.beforeFeature = function() {
     steps.login.itLogin();
@@ -12,7 +14,7 @@ exports.beforeFeature = function() {
 exports.feature = [
     {
         name: 'Search for an album by title',
-        tags: ['searchForAlbum'],
+        tags: [],
         steps: function() {
 
             using(steps.mainHeader.search, function () {
