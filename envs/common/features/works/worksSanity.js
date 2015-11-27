@@ -1702,24 +1702,26 @@ exports.feature = [
             'worksSanityMerge',
         ],
         steps: function () {
-            steps.base.useEntityDataSlot('work', 'mainWork');
-            steps.searchSection.selectEntityType('Works');
-            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
-            steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
-            steps.base.sleep(200);
-            steps.base.waitForAjax();
-            steps.work.expectWorkSearchMatchCountToBe(1);
-            steps.work.clickWorkSearchMatch(0);
-            steps.base.waitForAjax();
-            steps.work.validateWorkId();
+            using(steps.work, function() {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Work ID');
+                this.searchForWorkUsingPreviouslyCreatedWorkId();
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(1);
+                this.clickWorkSearchMatch(0);
+                steps.base.waitForAjax();
+                this.validateWorkId();
 
-            steps.base.useEntityDataSlot('work', 'component0');
-            steps.searchSection.selectEntityType('Works');
-            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
-            steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
-            steps.base.sleep(200);
-            steps.base.waitForAjax();
-            steps.work.expectWorkSearchMatchCountToBe(0);
+                steps.base.useEntityDataSlot('work', 'component0');
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Work ID');
+                this.searchForWorkUsingPreviouslyCreatedWorkId();
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(0);
+            });
         }
     },
     {
@@ -1753,19 +1755,21 @@ exports.feature = [
             'worksSanityCopy',
         ],
         steps: function () {
-            steps.searchSection.selectEntityType('Works');
-            steps.work.selectWorkSearchFilterTag(0, 'Title');
-            steps.work.enterWorkSearchTerms('TEST WORK ' + randomString('copy1'));
-            steps.base.sleep(200);
-            steps.base.waitForAjax();
-            steps.work.expectWorkSearchMatchCountToBe(1);
+            using(steps.work, function() {
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Title');
+                this.enterWorkSearchTerms('TEST WORK ' + randomString('copy1'));
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(1);
 
-            steps.searchSection.selectEntityType('Works');
-            steps.work.selectWorkSearchFilterTag(0, 'Title');
-            steps.work.enterWorkSearchTerms('TEST WORK ' + randomString('copy2'));
-            steps.base.sleep(200);
-            steps.base.waitForAjax();
-            steps.work.expectWorkSearchMatchCountToBe(1);
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Title');
+                this.enterWorkSearchTerms('TEST WORK ' + randomString('copy2'));
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(1);
+            });
         }
     },
     {
