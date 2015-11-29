@@ -204,10 +204,10 @@ exports.validateDefaultCompositeWorkType = function () {
     });
 };
 exports.selectCompositeWorkType = function (value, data, key) {
-    key = key || 'compositeWorkType';
-    data = data || hash.currentEntityDataSlotsByType.work;
-
     it('Select composite work type', function () {
+        key = key || 'compositeWorkType';
+        data = data || hash.currentEntityDataSlotsByType.work;
+
         pages.work.selectCompositeWorkType(value);
         data[key] = value;
     });
@@ -333,7 +333,7 @@ exports.selectFirstComponentWorkMatching = function (i, value, data, key) {
     });
 
     it('Wait for component work suggestions to load', function () {
-        pages.base.waitForAjax();
+        pages.newWork.waitForEnterAsNewWorkToBeDisplayed();
     });
 
     it('Select a random work', function () {

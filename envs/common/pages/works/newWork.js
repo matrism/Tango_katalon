@@ -528,14 +528,13 @@ exports.validateRequiredComponentWorkSearchField = function(i) {
     expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.selectFirstComponentWorkSuggestion = function() {
-    return $$('.typeahead-result').get(0).then(function(suggestion) {
-        var result = {};
+    var suggestion = $$('.typeahead-result').get(0),
+        result = {};
 
-        result.name = suggestion.$('.typeahead-result-text').getText();
-        result.workCode = suggestion.$('.typeahead-result-right').getText();
+    result.name = suggestion.$('.typeahead-result-text').getText();
+    result.workCode = suggestion.$('.typeahead-result-right').getText();
 
-        suggestion.click();
-
+    return suggestion.click().then(function() {
         return result;
     });
 };
@@ -565,7 +564,9 @@ exports.deleteComponentWork = function(i) {
     element.click();
 };
 exports.confirmComponentWorkDeletion = function() {
-    exports.confirmComponentWorkDeletionButton().click();
+    pages.base.waitUntilModalAnimationFinishes();
+
+    return exports.confirmComponentWorkDeletionButton().click();
 };
 exports.selectRandomCreatorSuggestion = function() {
     return $$(".typeahead-result").then(function(suggestions) {

@@ -240,7 +240,7 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
     });
 
     it('Wait for component work suggestions to load', function() {
-        pages.base.waitForAjax();
+        pages.newWork.waitForEnterAsNewWorkToBeDisplayed();
     });
 
     it('Select a random work', function() {
@@ -337,14 +337,14 @@ exports.selectPreviouslySelectedCreator = function(i, j, data, key) {
     var deferred = promise.defer();
     var creator;
 
-    data = data || hash.currentEntityDataSlotsByType.work;
-    key = key || 'creators';
-    data[key] = data[key] || [];
-    creator = data[key][j] = data[key][j] || {};
-
     it(
         'Enter previously selected creator #' + (j + 1) +
         ' IPI number in search field #' + (i + 1), function() {
+            data = data || hash.currentEntityDataSlotsByType.work;
+            key = key || 'creators';
+            data[key] = data[key] || [];
+            creator = data[key][j] = data[key][j] || {};
+
             expect(creator.ipiNumber).toBeTruthy();
             pages.newWork.enterCreatorSearchTerms(i, creator.ipiNumber);
         }

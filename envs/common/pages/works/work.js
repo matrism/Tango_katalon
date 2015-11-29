@@ -1045,19 +1045,18 @@ exports.enterComponentWorkAllocation = function(i, value) {
     element.sendKeys(value);
 };
 exports.selectFirstComponentWorkSuggestion = function() {
-    return $$('.typeahead-result').get(0).then(function(suggestion) {
-        var result = {};
+    var suggestion = $$('.typeahead-result').get(0),
+        result = {};
 
-        result.name = suggestion.$('.typeahead-result-text').getText();
+    result.name = suggestion.$('.typeahead-result-text').getText();
 
-        suggestion.click().then(function() {
-            return result;
-        });
+    return suggestion.click().then(function() {
+        return result;
     });
 };
 exports.selectFirstCreatorSuggestion = function() {
-    var suggestion = $$('.typeahead-result').first();
-    var result = {};
+    var suggestion = $$('.typeahead-result').first(),
+        result = {};
  
     result.name = pph.trim(suggestion.$('.typeahead-result-text').getText());
  
@@ -1095,7 +1094,9 @@ exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function(mor
     );
 };
 exports.confirmComponentWorkDeletion = function() {
-    exports.confirmComponentWorkDeletionButton().click();
+    pages.base.waitUntilModalAnimationFinishes();
+
+    return exports.confirmComponentWorkDeletionButton().click();
 };
 exports.selectRandomCreatorSuggestion = function() {
     return $$(".typeahead-result").then(function(suggestions) {
