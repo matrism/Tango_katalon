@@ -679,7 +679,11 @@ if (pages.royaltyRates === undefined) {
             this.contractualRateInput().click();
         },
 
-        addPercentageToContractualRateInput: function () {
+        addPercentageToContractualRateInput: function (percentage) {
+            var input = this.contractualRateInput();
+            pages.base.scrollIntoView(input);
+            input.click();
+            input.sendKeys(percentage);
             this.payout().click();
             browser.driver.sleep(2000);
             this.lastPayoutFromSubmenu().click();
@@ -760,7 +764,18 @@ if (pages.royaltyRates === undefined) {
         },
 
         errorMessageIsDisplayed: function () {
-            return this.errorMessageRR().isPresent();
+            var messageEl = this.errorMessageRR(),
+                isPresent = messageEl.isPresent();
+
+            isPresent.then(function(isPresent) {
+                if(!isPresent) {
+                    return;
+                }
+
+                pages.base.scrollIntoView(messageEl);
+            });
+
+            return isPresent;
         },
 
         clearIncomeProviderInput: function () {

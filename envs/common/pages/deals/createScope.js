@@ -133,6 +133,7 @@ if (pages.createDealScope === undefined) {
         },
 
         addTerritoryByTypingToScope: function () {
+            pages.base.waitForAjax();
             pages.createDealScope.elems.territoryField.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealScope.elems.territoryInput));
             pages.createDealScope.elems.territoryInput.sendKeys("asia");

@@ -7,7 +7,7 @@ exports.beforeFeature = function () {
     //steps.dealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
 };
 
-exports.commonFeatureTags = ['royalties', 'incomeProvider', 'sanity', 'broken'];
+exports.commonFeatureTags = ['incomeProviderSearchRegression', 'royalties', 'incomeProvider', 'regression'];
 
 exports.feature = [
     {
