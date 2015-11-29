@@ -447,3 +447,36 @@ exports.closeTabByIndex = function (index) {
     browser.driver.close();
     exports.switchToTab(index - 1);
 };
+
+exports.pause = function() {
+    browser.executeScript(function() {
+        window.tatDbgActive = true;
+
+        if(window.tatDbgAttached) {
+            return;
+        }
+
+        document.body.addEventListener('keydown', function(event) {
+            if(!tatDbgActive || event.keyCode !== 120) {
+                return;
+            }
+
+            window.tatDbgDone = true;
+        });
+
+        window.tatDbgAttached = true;
+    });
+
+    return browser.wait(function() {
+        return browser.executeScript(function() {
+            if(window.tatDbgDone) {
+                delete window.tatDbgDone;
+                tatDbgActive = false;
+
+                return true;
+            }
+
+            return false;
+        });
+    }, 99999999);
+};
