@@ -13,7 +13,7 @@ exports.beforeFeature = function () {
     steps.royaltyRates.openSavedScope();
 };
 
-exports.commonFeatureTags = ['royalties', 'sanity', 'broken'];
+exports.commonFeatureTags = ['royaltyRates', 'sanity', 'broken'];
 
 exports.feature = [
     {

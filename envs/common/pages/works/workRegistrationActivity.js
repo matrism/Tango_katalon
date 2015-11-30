@@ -89,11 +89,11 @@ exports.activityGroup = (function() {
 
         pages.base.scrollIntoView(target.container);
 
-        target.container.click();
-
-        return browser.wait(ExpectedConditions.visibilityOfAny(
-            activityGroup.events.container()
+        browser.wait(ExpectedConditions.elementToBeClickable(
+            activityGroup.container.all().last()
         ));
+
+        return target.container.click();
     };
 
     return activityGroup;
@@ -202,16 +202,12 @@ exports.activityGroup.events = (function() {
 
     events.getMessage = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.element(
-            by.binding('::message.message_text')
-        ).getText();
+        return target.detailsContainer.$('[data-ng-bind$="message.message_text"]').getText();
     };
 
     events.getRecordType = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.element(
-            by.binding('::message.record_type')
-        ).getText();
+        return target.detailsContainer.$('[data-ng-bind$="message.record_type"]').getText();
     };
 
     events.getMessageLevel = function() {
@@ -223,8 +219,20 @@ exports.activityGroup.events = (function() {
 
     events.getValidationNumber = function() {
         var target = events.targets.latest;
+        return target.detailsContainer.$('[data-ng-bind$="message.validation_number"]').getText();
+    };
+
+    events.getSocietyCode = function() {
+        var target = events.targets.latest;
         return target.detailsContainer.element(
-            by.binding('::message.validation_number')
+            by.binding('activity.society_code')
+        ).getText();
+    };
+
+    events.getProcessedDate = function() {
+        var target = events.targets.latest;
+        return target.container.element(
+            by.binding('activity.run_date | tgIsoDate')
         ).getText();
     };
 
@@ -250,6 +258,14 @@ exports.activityGroup.events = (function() {
 
     events.validateValidationNumber = function(value) {
         expect(events.getValidationNumber()).toBe(value);
+    };
+
+    events.validateSocietyCode = function(value) {
+        expect(events.getSocietyCode()).toBe(value);
+    };
+
+    events.validateProcessedDate = function(value) {
+        expect(events.getProcessedDate()).toBe(value);
     };
 
     events.anyEventStatusElement = function(status) {

@@ -1,8 +1,6 @@
 'use strict';
 
-var _ = require('lodash'),
-    promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+var pageStep = require('../../../../helpers/basicPageStep');
 
 steps.registrationFileActivity = exports;
 
@@ -25,3 +23,16 @@ exports.verifyDetails = function () {
         expect(pages.registrationFileActivity.workHasDeliveredStatus()).toBe("Delivered");
     })
 };
+
+pageStep([
+    'Go to Registration File Activity Page',
+    'Find Event by File Name',
+    'Toggle blind',
+    'Validate Status',
+    'Validate Received Date',
+    'Validate Total Accepted',
+    'Validate Total Rejected',
+    'Validate Initiated By',
+    'Validate Accepted Values',
+    'Validate Rejected Values'
+]);

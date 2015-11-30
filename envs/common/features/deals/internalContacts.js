@@ -46,9 +46,9 @@ exports.feature = [
              steps.editDealGeneral.returnAndCheckInternalContactsHeaderTable();
              steps.editDealGeneral.returnAndCheckAddInternalContactsLinkPresent();
              steps.editDealGeneral.returnAndCheckFirstInternalContactsValues();
-             for (var i = 2; i <= 4; i++) {
-                 steps.editDealGeneral.returnAndCheckInternalContactsValues(i);
-             }
+             //for (var i = 2; i <= 4; i++) {
+             //    steps.editDealGeneral.returnAndCheckInternalContactsValues(i);
+             //}
              steps.editDealGeneral.printInternalContactList();
          }
      },
@@ -76,7 +76,8 @@ exports.feature = [
             steps.editDealGeneral.printInternalContactList();
             steps.editDealGeneral.editInternalContactsArea();
             steps.editDealGeneral.itEditAddInternalContactsRowIToDealGeneralTab(j);
-            steps.editDealGeneral.itEditAddInternalContactsRoleRowIToDealGeneralTab(j);
+            steps.editDealGeneral.itEditAddInternalContactsSpecificRoleRowIToDealGeneralTab(j, 'Attorney');
+            steps.editDealGeneral.itEditAddInternalContactsSpecificRoleRowIToDealGeneralTab(j, 'Product Manager');
             //save internal contacts and check on view mode
             steps.editDealGeneral.itSaveInternalContactsChanges();
             steps.editDealGeneral.returnAndCheckInternalContactsTitle();
@@ -126,14 +127,14 @@ exports.feature = [
             steps.editDealGeneral.editInternalContactsArea();
             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("a");
             steps.editDealGeneral.itCancelInternalContactsChanges();
-            steps.editDealGeneral.cancelModalDialog();
+            steps.editDealGeneral.cancelTheModalDialog();
             steps.base.scrollIntoView("Term header link", pages.deal.elems.termsHeader);
             steps.deal.goToTermsDealTabDetails();
-            steps.editDealGeneral.cancelModalDialog();
+            steps.editDealGeneral.cancelTheModalDialog();
             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("shilpa");
             steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
             steps.deal.goToTermsDealTabDetails();
-            steps.editDealGeneral.confirmModalDialog();
+            steps.editDealGeneral.confirmTheCancelModalDialog();
             steps.deal.expectTermsDetailsAreOk();
         }
     }

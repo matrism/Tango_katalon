@@ -1056,6 +1056,20 @@ pageStep([
         'Expect section to be in view mode',
     ]],
 
+    ['Registration', [
+        'Edit section',
+
+        'Select is registration recipient',
+        'Select acknowledgement type',
+        'Select delivery method',
+        'Enter Address',
+        'Enter Port',
+        'Enter Username',
+        'Enter Password',
+
+        'Save section'
+    ]],
+
     ['Income Provider', [
         'Edit section',
         'Select primary territory of operation',

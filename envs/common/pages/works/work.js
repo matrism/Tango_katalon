@@ -486,6 +486,11 @@ module.exports.versionTypeBinding = function() {
         "getAdminDataName(dataHolder.versionTypes, modularEditModels.model.version_type)"
     ));
 };
+module.exports.versionTypeIdBinding = function() {
+    return element(by.binding(
+        "getWorkFullCode(dataHolder.modifiedWork)"
+    ));
+};
 module.exports.lyricAdaptationBinding = function() {
     return element(by.binding(
         "getAdminDataName(dataHolder.lyricAdaptations, " +
@@ -797,6 +802,12 @@ module.exports.excerptType = function() {
 };
 module.exports.versionType = function() {
     var element = pages.work.versionTypeBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+module.exports.versionTypeId = function() {
+    var element = pages.work.versionTypeIdBinding();
+    pages.base.waitForAjax();
     pages.base.scrollIntoView(element);
     return element.getText();
 };
@@ -1210,6 +1221,20 @@ exports.tabSetContainer = function() {
     return $('[data-tg-tabset-id="workEditTabset"]');
 };
 
+exports.generalTab = function() {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'General')
+    );
+};
+
+exports.goToGeneralTab = function() {
+    var element = exports.generalTab();
+    pages.base.scrollIntoView(element);
+    return element.click().then(function(){
+        pages.base.waitForAjax();
+    });
+};
+
 exports.recordingsTab = function() {
     return exports.tabSetContainer().element(
         by.cssContainingText('span', 'Recordings')
@@ -1276,3 +1301,135 @@ exports.goToRegistrationActivityTab = function() {
         pages.base.waitForAjax();
     });
 };
+
+exports.copy = (function () {
+    var copy = {};
+
+    copy.copyWorkButton = function() {
+        return element(by.cssContainingText('a', 'Copy Work'));
+    };
+
+    copy.continueButton = function() {
+        return pages.base.modalFooter().element(
+            by.cssContainingText('button', 'Continue')
+        );
+    };
+
+    copy.originalSelect = function() {
+        return $('#copy_original+label');
+    };
+
+    copy.adaptationSelect = function() {
+        return $('#copy_adaptation_or_arrangement+label');
+    };
+
+    copy.primaryWorkTitleInput = function(i) {
+        return element.all(by.model("work.primary_title.title")).get(i);
+    };
+
+    copy.saveWorkButton = function() {
+        return element(by.cssContainingText('button', 'Create Work'));
+    };
+
+    copy.successMessage = function() {
+        return element(by.cssContainingText(
+            'p', 'Work(s) are created successfully.'
+        ));
+    };
+
+    copy.enterPrimaryWorkTitle = function(i, value) {
+        var element = copy.primaryWorkTitleInput(i);
+        return element.sendKeys(value);
+    };
+
+    copy.copyWork = function() {
+        var element = copy.copyWorkButton();
+        pages.base.scrollIntoView(element);
+        return element.click().then(function() {
+            browser.sleep(200);
+        });
+    };
+
+    copy.continue = function() {
+        copy.continueButton().click();
+        pages.base.waitForAjax();
+    };
+
+    copy.selectOriginal = function() {
+        var element = copy.originalSelect();
+        browser.wait(ExpectedConditions.elementToBeClickable(element));
+        return element.click();
+    };
+
+    copy.selectAdaptation = function() {
+        var element = copy.adaptationSelect();
+        browser.wait(ExpectedConditions.elementToBeClickable(element));
+        return element.click();
+    };
+
+    copy.saveWork = function() {
+        var element = copy.saveWorkButton();
+        browser.wait(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+        pages.base.waitForAjax();
+    };
+
+    copy.validateSuccessMessage = function() {
+        var element = copy.successMessage();
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    };
+
+    return copy;
+})();
+
+exports.merge = (function () {
+    var merge = {};
+
+    merge.mergeWorkButton = function() {
+        return element(by.cssContainingText('a', 'Merge Work'));
+    };
+
+    merge.findWorkInput = function() {
+        return element(by.model('data.workSearch.selected_work'));
+    };
+
+    merge.enterFindWorkUsingPreviouslyEnteredPrimaryTitle = function() {
+        merge.enterFindWork(hash.currentEntityDataSlotsByType.work.primaryTitle);
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+        pages.work.selectFirstCreatorSuggestion();
+    };
+
+    merge.continueButton = function() {
+        return element(by.cssContainingText('button', 'Quick Merge'));
+    };
+
+    merge.confirmButton = function() {
+        return pages.base.modalFooter().element(
+            by.cssContainingText('button', 'Confirm')
+        );
+    };
+
+    merge.mergeWork = function() {
+        var element = merge.mergeWorkButton();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    merge.enterFindWork = function(value) {
+        var element = merge.findWorkInput();
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element.sendKeys(value);
+    };
+
+    merge.continue = function() {
+        merge.continueButton().click();
+    };
+
+    merge.confirm = function() {
+        var element = merge.confirmButton();
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element.click();
+    };
+
+    return merge;
+})();

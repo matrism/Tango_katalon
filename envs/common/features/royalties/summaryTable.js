@@ -4,7 +4,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['royalties', 'royaltySummary', 'broken'];
+exports.commonFeatureTags = ['royaltyRates', 'royaltySummary', 'broken'];
 
 exports.feature = [
     {

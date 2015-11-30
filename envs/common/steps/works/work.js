@@ -26,6 +26,8 @@ exports.goToWorkPageById = function(workId) {
     });
 };
 
+pageStep('Go to General tab');
+
 module.exports.goToScopeDeliveryTab = function() {
     it('Go to Scope Delivery tab', function() {
         pages.work.goToScopeDeliveryTab();
@@ -1274,6 +1276,13 @@ module.exports.validateVersionType = function (value) {
         });
     });
 };
+module.exports.validateVersionTypeId = function (value) {
+    it("Validate version type work ID", function () {
+        var data = hash.currentEntityDataSlotsByType.work;
+        value = value || data.id;
+        expect(pages.work.versionTypeId()).toBe(value);
+    });
+};
 module.exports.validateLyricAdaptation = function (value) {
     it("Validate lyric adaptation (if validation value is not empty)", function () {
         promise.when(value).then(function (value) {
@@ -1405,3 +1414,21 @@ module.exports.validateIncludeWorkOnWebsite = function (include) {
         }
     );
 };
+
+pageStep([
+    ['Merge', [
+        'Merge Work',
+        'Enter find work using previously entered primary title',
+        'Continue',
+        'Confirm'
+    ]],
+    ['Copy', [
+        'Copy Work',
+        'Continue',
+        'Select Original',
+        'Select Adaptation',
+        'Enter Primary Work Title',
+        'Save work',
+        'Validate Success Message'
+    ]]
+]);

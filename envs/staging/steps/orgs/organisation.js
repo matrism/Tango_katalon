@@ -4,6 +4,12 @@ var pageStep = require('../../../../helpers/basicPageStep');
 
 steps.organisation = exports;
 
+exports.goToGeneralTab = function () {
+    it("Go to General Tab on Organization", function () {
+        pages.organisation.clickGeneralTab();
+    });
+};
+
 pageStep([
     ['General', [
         'Edit section',
@@ -16,6 +22,20 @@ pageStep([
         'Select publisher type',
         'Save section',
         'Expect section to be in view mode',
+    ]],
+
+    ['Registration', [
+        'Edit section',
+
+        'Select is registration recipient',
+        'Select acknowledgement type',
+        'Select delivery method',
+        'Enter Address',
+        'Enter Port',
+        'Enter Username',
+        'Enter Password',
+
+        'Save section'
     ]],
 
     ['Income Provider', [

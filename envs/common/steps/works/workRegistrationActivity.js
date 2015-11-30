@@ -23,7 +23,9 @@ pageStep([
             'Validate Message',
             'Validate Record Type',
             'Validate Message Level',
-            'Validate Validation Number'
+            'Validate Validation Number',
+            'Validate Society Code',
+            'Validate Processed Date'
         ]]
     ]],
 ]);

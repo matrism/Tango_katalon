@@ -4,6 +4,7 @@ var leftPad = require('left-pad'),
     moment = require('moment'),
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
+    randomString = random.string.makeMemoizedGenerator(),
     fromTestVariable = require('../../../../helpers/fromTestVariable'),
     fnutils = require('../../../../helpers/fnutils'),
     bind = fnutils.bind,
@@ -289,6 +290,7 @@ exports.feature = [
 
                     steps.newWork.saveWork();
                     steps.newWork.validateSaveWorkRedirection();
+                    steps.work.findCurrentlyOpenWorkId();
                 });
             }],
         ],
@@ -1672,6 +1674,123 @@ exports.feature = [
 
             using(steps.organisationRegistrationStack.works, function () {
                 this.validateAbsence({ title: 'TEST WORK ' + randomId('mainWork') });
+            });
+        }
+    },
+    {
+        name: 'Merge work',
+        tags: [
+            'worksSanityMerge',
+        ],
+        steps: function () {
+            steps.base.useEntityDataSlot('work', 'mainWork');
+            steps.work.goToWorkPage();
+            steps.work.goToGeneralTab();
+            using(steps.work.merge, function () {
+                this.mergeWork();
+                steps.base.useEntityDataSlot('work', 'component0');
+                this.enterFindWorkUsingPreviouslyEnteredPrimaryTitle();
+                this.continue();
+                this.confirm();
+            });
+        }
+    },
+    {
+        name: 'Search for the merged works',
+        tags: [
+            'worksSanitySearchForMergedWorks',
+            'worksSanityMerge',
+        ],
+        steps: function () {
+            using(steps.work, function() {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Work ID');
+                this.searchForWorkUsingPreviouslyCreatedWorkId();
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(1);
+                this.clickWorkSearchMatch(0);
+                steps.base.waitForAjax();
+                this.validateWorkId();
+
+                steps.base.useEntityDataSlot('work', 'component0');
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Work ID');
+                this.searchForWorkUsingPreviouslyCreatedWorkId();
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(0);
+            });
+        }
+    },
+    {
+        name: 'Copy work - Original',
+        tags: [
+            'worksSanityCopyWorkOriginal',
+            'worksSanityCopy',
+        ],
+        steps: function () {
+            using(steps.work, function () {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+                this.goToWorkPage();
+                this.goToGeneralTab();
+                using(this.copy, function () {
+                    this.copyWork();
+                    this.selectOriginal();
+                    this.continue();
+                    this.enterPrimaryWorkTitle(0, 'TEST WORK ' + randomString('copy0'));
+                    this.enterPrimaryWorkTitle(1, 'TEST WORK ' + randomString('copy1'));
+                    this.enterPrimaryWorkTitle(2, 'TEST WORK ' + randomString('copy2'));
+                    this.saveWork();
+                    this.validateSuccessMessage();
+                });
+            });
+        }
+    },
+    {
+        name: 'Search for the copied works',
+        tags: [
+            'worksSanitySearchForCopiedWorks',
+            'worksSanityCopy',
+        ],
+        steps: function () {
+            using(steps.work, function() {
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Title');
+                this.enterWorkSearchTerms('TEST WORK ' + randomString('copy1'));
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(1);
+
+                steps.searchSection.selectEntityType('Works');
+                this.selectWorkSearchFilterTag(0, 'Title');
+                this.enterWorkSearchTerms('TEST WORK ' + randomString('copy2'));
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.expectWorkSearchMatchCountToBe(1);
+            });
+        }
+    },
+    {
+        name: 'Copy work - Adaptation',
+        tags: [
+            'worksSanityCopyWorkAdaptation',
+            'worksSanityCopy',
+        ],
+        steps: function () {
+            using(steps.work, function () {
+                steps.base.useEntityDataSlot('work', 'mainWork');
+                this.goToWorkPage();
+                this.goToGeneralTab();
+                using(this.copy, function () {
+                    this.copyWork();
+                    this.selectAdaptation();
+                    this.continue();
+                });
+                steps.newWork.saveWork();
+                this.goToGeneralTab();
+                this.validateVersionTypeId();
             });
         }
     }
