@@ -429,9 +429,7 @@ exports.incomeProvider = (function() {
     };
 
     incomeProvider.incomeFileTypeTypeahead = function() {
-        return element(by.model(
-            'modularEditModels.org.income_provider.income_file_types'
-        ));
+        return $('.income-file-types-chosen');
     };
 
     incomeProvider.incomeFileTypeTypeaheadTag = function(value) {
@@ -465,7 +463,7 @@ exports.incomeProvider = (function() {
 
         element.clear();
 
-        return element.sendKeys(value);
+        return pph.saferSendKeys(element, value);
     };
 
     incomeProvider.incomeFileTypeSearchResults = function(more) {
