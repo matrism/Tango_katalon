@@ -14,6 +14,7 @@ var path = require('path'),
     config,
     SSReporter_instance,
     enhanceHtmlReport = require('../tools/enhanceHtmlReport'),
+    orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     reporterFilePath,
     reporterFileName = 'reporter.htm';
 
@@ -170,6 +171,10 @@ config = {
 
         if (SSReporter_instance && (reporting === 'html' || reporting === 'all')) {
             jasmine.getEnv().addReporter(SSReporter_instance);
+        }
+
+        if(systemConfig.orphanOnError) {
+            jasmine.getEnv().addReporter(orphanOnErrorReporter);
         }
 
         if (typeof process.env.__using_grunt === 'undefined') {

@@ -59,6 +59,7 @@ var defaultUserName = 'TangoTest1',
             dontSkipBroken: cli['dont-skip-broken'],
             failFast: cli['fail-fast'],
             noUpload: cli['no-upload'],
+            orphanOnError: cli['orphan-on-error']
         },
         _env_: env,
         localhost: {
