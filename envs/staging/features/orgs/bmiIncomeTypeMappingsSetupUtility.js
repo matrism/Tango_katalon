@@ -16,7 +16,11 @@ exports.beforeFeature = function () {
     steps.searchSection.accessSavedOrganisationByName('BMI');
 };
 
-exports.commonFeatureTags = ['bmiIncomeTypeMappingsSetupUtility', 'orgs', 'utility'];
+exports.commonFeatureTags = [
+    'bmiIncomeTypeMappingsSetupUtility',
+    'orgs',
+    'utility'
+];
 
 exports.feature = [
     {

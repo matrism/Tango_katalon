@@ -7,13 +7,17 @@ exports.beforeFeature = function() {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['duplicateShellWorkChecksRegression', 'works', 'regression'];
+exports.commonFeatureTags = [
+    'duplicateShellWorkChecksRegression',
+    'works',
+    'regression'
+];
 
 exports.feature = [
     {
         name: 'Create 2 people',
         tags: [],
-        steps: function () {
+        steps: function() {
             steps.person.useBlankPersonSlot(0);
 
             using(steps.newPerson, function() {
@@ -34,95 +38,122 @@ exports.feature = [
         name: 'Duplicate shell work check',
         tags: [],
         steps: function() {
-            steps.base.useBlankEntityDataSlot('work', 0);
+            using(steps.newWork, function() {
+                steps.base.useBlankEntityDataSlot('work', 0);
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(0));
-            steps.newWork.clickCompositeWorkCheckbox();
-            steps.newWork.selectCompositeWorkType('Composite of Samples');
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterCreatorContribution(0, 50);
-            steps.newWork.enterNewShellWork(0, 'TEST SHELL WORK ' + randomString(0));
-            steps.newWork.enterComponentWorkAllocation(0, 50);
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
-            steps.newWork.enterShellWorkCreatorContribution(0, 0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                this.goToNewWorkPage();
 
-            steps.base.useBlankEntityDataSlot('work', 1);
+                this.enterPrimaryWorkTitle(
+                    'TEST COMPOSITE WORK ' + randomString(0)
+                );
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(1));
-            steps.newWork.clickCompositeWorkCheckbox();
-            steps.newWork.selectCompositeWorkType('Composite of Samples');
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterCreatorContribution(0, 50);
-            steps.newWork.enterNewShellWork(0, 'TEST SHELL WORK ' + randomString(0));
-            steps.newWork.enterComponentWorkAllocation(0, 50);
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterShellWorkCreatorContribution(0, 0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                this.clickCompositeWorkCheckbox();
+                this.selectCompositeWorkType('Composite of Samples');
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterCreatorContribution(0, 50);
+                this.enterNewShellWork(0, 'TEST SHELL WORK ' + randomString(0));
+                this.enterComponentWorkAllocation(0, 50);
+                this.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+                this.enterShellWorkCreatorContribution(0, 0, 100);
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+
+                steps.base.useBlankEntityDataSlot('work', 1);
+
+                this.goToNewWorkPage();
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(1));
+                this.clickCompositeWorkCheckbox();
+                this.selectCompositeWorkType('Composite of Samples');
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterCreatorContribution(0, 50);
+                this.enterNewShellWork(0, 'TEST SHELL WORK ' + randomString(0));
+                this.enterComponentWorkAllocation(0, 50);
+                this.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterShellWorkCreatorContribution(0, 0, 100);
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+            });
+
             steps.base.sleep(100);
-            steps.work.hoverCreatorNamesContainer();
-            steps.work.editCreators();
-            steps.work.validateComponentWorkId(0);
-            steps.work.validateComponentWorkName(0);
-            steps.work.validateComponentWorkAllocation(0);
-            steps.work.clickShowComponentWorkDetailsButton(0);
-            steps.work.validateShellWorkCreatorName(0, 0);
-            steps.work.validateShellWorkCreatorContribution(0, 0);
+
+            using(steps.work, function() {
+                this.hoverCreatorNamesContainer();
+                this.editCreators();
+                this.validateComponentWorkId(0);
+                this.validateComponentWorkName(0);
+                this.validateComponentWorkAllocation(0);
+                this.clickShowComponentWorkDetailsButton(0);
+                this.validateShellWorkCreatorName(0, 0);
+                this.validateShellWorkCreatorContribution(0, 0);
+            });
         }
     },
     {
         name: 'Duplicate shell work check: Ignore articles, extra whitespace, and punctuation',
         tags: [],
         steps: function() {
-            steps.base.useBlankEntityDataSlot('work', 2);
+            using(steps.newWork, function() {
+                steps.base.useBlankEntityDataSlot('work', 2);
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(2));
-            steps.newWork.clickCompositeWorkCheckbox();
-            steps.newWork.selectCompositeWorkType('Composite of Samples');
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterCreatorContribution(0, 50);
-            steps.newWork.enterNewShellWork(0, 'TEST SHELL WORK ' + randomString(1));
-            steps.newWork.enterComponentWorkAllocation(0, 50);
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
-            steps.newWork.enterShellWorkCreatorContribution(0, 0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                this.goToNewWorkPage();
 
-            steps.base.useBlankEntityDataSlot('work', 3);
+                this.enterPrimaryWorkTitle(
+                    'TEST COMPOSITE WORK ' + randomString(2)
+                );
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.clickCompositeWorkCheckbox();
-            steps.newWork.selectCompositeWorkType('Composite of Samples');
-            steps.newWork.enterNewShellWork(0, 'A TEST SHELL WORK ' + randomString(1));
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterNewShellWork(1, 'AN TEST SHELL WORK ' + randomString(1));
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(1, 0, 0);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterNewShellWork(2, 'THE TEST SHELL WORK ' + randomString(1));
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(2, 0, 0);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterNewShellWork(3, 'TEST  SHELL   WORK     ' + randomString(1));
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(3, 0, 0);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterNewShellWork(4, ':TEST.SHELL,WORK;' + randomString(1));
-            steps.newWork.selectShellWorkCreatorFromPersonSlot(4, 0, 0);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+                this.clickCompositeWorkCheckbox();
+                this.selectCompositeWorkType('Composite of Samples');
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterCreatorContribution(0, 50);
+                this.enterNewShellWork(0, 'TEST SHELL WORK ' + randomString(1));
+                this.enterComponentWorkAllocation(0, 50);
+                this.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+                this.enterShellWorkCreatorContribution(0, 0, 100);
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+
+                steps.base.useBlankEntityDataSlot('work', 3);
+
+                this.goToNewWorkPage();
+                this.clickCompositeWorkCheckbox();
+                this.selectCompositeWorkType('Composite of Samples');
+                this.enterNewShellWork(0, 'A TEST SHELL WORK ' + randomString(1));
+                this.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterNewShellWork(1, 'AN TEST SHELL WORK ' + randomString(1));
+                this.selectShellWorkCreatorFromPersonSlot(1, 0, 0);
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterNewShellWork(2, 'THE TEST SHELL WORK ' + randomString(1));
+                this.selectShellWorkCreatorFromPersonSlot(2, 0, 0);
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterNewShellWork(3, 'TEST  SHELL   WORK     ' + randomString(1));
+                this.selectShellWorkCreatorFromPersonSlot(3, 0, 0);
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterNewShellWork(4, ':TEST.SHELL,WORK;' + randomString(1));
+                this.selectShellWorkCreatorFromPersonSlot(4, 0, 0);
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+            });
         }
     }
 ];

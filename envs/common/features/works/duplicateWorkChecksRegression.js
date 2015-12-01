@@ -4,17 +4,21 @@ var using = fnutils.using,
     randomString = random.string.makeMemoizedGenerator(),
     randomWorkString = randomString();
 
-exports.beforeFeature = [
-    [steps.login.itLogin]
-];
+exports.beforeFeature = function() {
+    steps.login.itLogin();
+};
 
-exports.commonFeatureTags = ['duplicateWorkChecksRegression', 'works', 'regression'];
+exports.commonFeatureTags = [
+    'duplicateWorkChecksRegression',
+    'works',
+    'regression'
+];
 
 exports.feature = [
     {
         name: 'Create 2 people',
         tags: [],
-        steps: function () {
+        steps: function() {
             _.times(2, function(i) {
                 steps.person.useBlankPersonSlot(i);
 
@@ -41,150 +45,224 @@ exports.feature = [
         steps: function() {
             steps.base.useBlankEntityDataSlot('work', 0);
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMediumCreatorContribution(0);
-            steps.newWork.selectCreatorFromPersonSlot(1, 1);
-            steps.newWork.enterMediumCreatorContribution(1);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomWorkString);
-            steps.newWork.enterAlternateWorkTitle(0, 'THE TEST WORK WONDERLAND ' + randomWorkString);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+            using(steps.newWork, function() {
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMediumCreatorContribution(0);
+                this.selectCreatorFromPersonSlot(1, 1);
+                this.enterMediumCreatorContribution(1);
+                this.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomWorkString);
 
-            steps.base.useBlankEntityDataSlot('work', 1);
+                this.enterAlternateWorkTitle(
+                    0, 'THE TEST WORK WONDERLAND ' + randomWorkString
+                );
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.clickFirstSimilarWorkTitle();
-            steps.duplicateWorkChecks.validateSimilarWorkLinkDestination();
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
 
-            steps.base.useBlankEntityDataSlot('work', 2);
+                steps.base.useBlankEntityDataSlot('work', 1);
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
 
-            steps.base.useBlankEntityDataSlot('work', 3);
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.clickFirstSimilarWorkTitle();
+                steps.duplicateWorkChecks.validateSimilarWorkLinkDestination();
 
-            steps.base.useBlankEntityDataSlot('work', 4);
+                steps.base.useBlankEntityDataSlot('work', 2);
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
 
-            steps.base.useBlankEntityDataSlot('work', 5);
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
-            steps.base.useBlankEntityDataSlot('work', 6);
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                steps.base.useBlankEntityDataSlot('work', 3);
 
-            steps.base.useBlankEntityDataSlot('work', 7);
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
 
-            steps.base.useBlankEntityDataSlot('work', 8);
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.expectSimilarWorksPopUpToHaveScrollbar();
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
 
-            steps.base.useBlankEntityDataSlot('work', 9);
+                steps.base.useBlankEntityDataSlot('work', 4);
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 0);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('A TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterPrimaryWorkTitle('AN TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterPrimaryWorkTitle('THE TEST WORK WONDERLAND ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterPrimaryWorkTitle('TEST  WORK   WONDERLAND    ' + randomWorkString);
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.enterPrimaryWorkTitle(':TEST.WORK,WONDERLAND;' + randomWorkString + '?');
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
 
-            steps.base.useBlankEntityDataSlot('work', 10);
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
 
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.selectCreatorFromPersonSlot(0, 1);
-            steps.newWork.enterMaximumCreatorContribution(0);
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK EUPHORIA ' + randomWorkString);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.newWork.validateSaveWorkRedirection();
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+
+                steps.base.useBlankEntityDataSlot('work', 5);
+
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
+
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+
+                steps.base.useBlankEntityDataSlot('work', 6);
+
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
+
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+
+                steps.base.useBlankEntityDataSlot('work', 7);
+
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
+
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+
+                steps.base.useBlankEntityDataSlot('work', 8);
+
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
+
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK WONDERLAND ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.expectSimilarWorksPopUpToHaveScrollbar();
+
+                steps.base.useBlankEntityDataSlot('work', 9);
+
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
+
+                this.enterPrimaryWorkTitle(
+                    'A TEST WORK WONDERLAND ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterPrimaryWorkTitle(
+                    'AN TEST WORK WONDERLAND ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterPrimaryWorkTitle(
+                    'THE TEST WORK WONDERLAND ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterPrimaryWorkTitle(
+                    'TEST  WORK   WONDERLAND    ' + randomWorkString
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.enterPrimaryWorkTitle(
+                    ':TEST.WORK,WONDERLAND;' + randomWorkString + '?'
+                );
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+
+                steps.base.useBlankEntityDataSlot('work', 10);
+
+                this.goToNewWorkPage();
+                this.selectCreatorFromPersonSlot(0, 1);
+                this.enterMaximumCreatorContribution(0);
+
+                this.enterPrimaryWorkTitle(
+                    'TEST WORK EUPHORIA ' + randomWorkString
+                );
+
+                this.optToIncludeWorkOnWebsite(false);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+            });
 
             steps.base.sleep(100);
-            steps.work.hoverPrimaryWorkTitleHeading();
-            steps.work.editWorkTitles();
-            steps.work.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomWorkString);
-            steps.work.waitTitleEditorCheckForDuplicates();
-            steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-            steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-            steps.work.saveWorkTitles();
+
+            using(steps.work, function() {
+                this.hoverPrimaryWorkTitleHeading();
+                this.editWorkTitles();
+                this.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomWorkString);
+                this.waitTitleEditorCheckForDuplicates();
+
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+
+                this.saveWorkTitles();
+            });
         }
     }
 ];
