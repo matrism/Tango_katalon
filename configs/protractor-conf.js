@@ -14,6 +14,7 @@ var path = require('path'),
     config,
     SSReporter_instance,
     enhanceHtmlReport = require('../tools/enhanceHtmlReport'),
+    SnapbackReporter = require('../tools/enhanceHtmlReport/SnapbackReporter'),
     orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     demoReporter = require('../tools/demoReporter'),
     reporterFilePath,
@@ -176,6 +177,10 @@ config = {
 
         if (SSReporter_instance && (reporting === 'html' || reporting === 'all')) {
             jasmine.getEnv().addReporter(SSReporter_instance);
+
+            jasmine.getEnv().addReporter(new SnapbackReporter({
+                dest: screenShotPath
+            }));
         }
 
         if(systemConfig.orphanOnError) {

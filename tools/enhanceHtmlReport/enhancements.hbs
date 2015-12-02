@@ -154,6 +154,17 @@
 <script>
     'use strict';
 
+    // Add links to HTML snapshots.
+    $('li > a').each(function(i) {
+        var $this = $(this);
+
+        $this.after(
+            document.createTextNode(' ('),
+            $('<a>').attr('href', i + '.html').text('HTML'),
+            document.createTextNode(')')
+        );
+    });
+
     // Remove repeated list description prefixes.
     $('ul > h4').each(function() {
         var $this = $(this),
