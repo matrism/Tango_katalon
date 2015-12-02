@@ -1,17 +1,33 @@
 'use strict';
 
-exports.specStarted = function(result) {
-    browser.executeScript(function(result){
+exports.specStarted = function(spec) {
+    browser.executeScript(function(spec){
+        var $overlay;
+
         if (!window.$) { return; }
-        var $reportWindow = $('body > #TAT_REPORTER');
 
-        if (!$reportWindow.length) {
-            $reportWindow = $('<div id="TAT_REPORTER" style="pointer-events: none; width: 200px; padding:30px 10px; color:#FFF; background:rgba(0,0,0,0.3); text-align:center; position:fixed; top:0;right:0; z-index: 9999;"></div>');
+        $overlay = $('body > #TAT_REPORTER_OVERLAY');
 
-            $('body').prepend($reportWindow);
+        if (!$overlay.length) {
+            $overlay = (
+                $('<div>')
+                    .attr('id', 'TAT_REPORTER_OVERLAY')
+                    .css('pointer-events', 'none')
+                    .css('position', 'fixed')
+                    .css('top', 0)
+                    .css('right', 0)
+                    .css('z-index', 9999)
+                    .css('width', '200px')
+                    .css('padding', '30px 10px')
+                    .css('text-align', 'center')
+                    .css('color', 'white')
+                    .css('background-color', 'rgba(0, 0, 0, 0.3)')
+            );
+
+            $('body').prepend($overlay);
         }
 
-        $reportWindow.text(result.description);
+        $overlay.text(spec.description);
 
-    }, result);
+    }, spec);
 };
