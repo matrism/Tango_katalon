@@ -479,4 +479,25 @@ exports.pause = function() {
             return false;
         });
     }, 99999999);
+}
+
+exports.clickElement = function (elName, el, wait) {
+    var notDisabledCssSelector = ':not([disabled], .disabled)';
+    pages.base.scrollIntoView(el);
+    if (wait === true) {
+        wait = _tf_config._system_.wait_timeout;
+    }
+    if (!wait) {
+        expect(pph.matchesCssSelector(el, notDisabledCssSelector)).toBe(true);
+    }
+    else {
+        browser.wait(
+            function () {
+                return pph.matchesCssSelector(el, notDisabledCssSelector);
+            },
+            wait
+        );
+    }
+    el.click();
+    pages.base.waitForAjax();
 };
