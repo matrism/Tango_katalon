@@ -49,11 +49,14 @@ function goToUploadPage() {
     }
 }
 
-function fillFormWithFileData(file, clickCreate, useOriginalName) {
-    file = _.defaultsDeep(file, fileDefaults);
+function fillFormWithFileData(file, fileDefaults, clickCreate, useOriginalName) {
+    if (fileDefaults) {
+        file = _.defaultsDeep(file, fileDefaults);
+    }
+
     file.fileName = path.resolve(__dirname, file.fileName);
 
-    using(steps.uploadEdiFile, function() {
+    using(pages.uploadEdiFile, function() {
         file.expectedAmount = file.expectedAmount || file.amount;
 
         if (noUpload) {
@@ -124,7 +127,7 @@ exports.feature = [
             goToUploadPage();
             using(steps.uploadEdiFile, function(){
 
-                fillFormWithFileData(file);
+                fillFormWithFileData(file, fileDefaults);
                 this.expectToBeRedirectedToFileUploadHistory();
                 this.expectUploadedFileToBeListed();
                 this.openUploadedFileBlind();
@@ -170,7 +173,7 @@ exports.feature = [
                 using(steps.uploadEdiFile, function(){
                     var file = files[0];
 
-                    fillFormWithFileData(file);
+                    fillFormWithFileData(file, fileDefaults);
 
                     this.expectToBeRedirectedToFileUploadHistory();
 
@@ -205,7 +208,7 @@ exports.feature = [
                 using(steps.uploadEdiFile, function(){
                     var file = files[1];
 
-                    fillFormWithFileData(file);
+                    fillFormWithFileData(file, fileDefaults);
 
                     this.expectToBeRedirectedToFileUploadHistory();
 
@@ -242,7 +245,7 @@ exports.feature = [
                 using(steps.uploadEdiFile, function(){
                     var file = files[2];
 
-                    fillFormWithFileData(file);
+                    fillFormWithFileData(file, fileDefaults);
 
                     this.expectToBeRedirectedToFileUploadHistory();
                     this.expectUploadedFileToBeListed();
@@ -361,7 +364,7 @@ exports.feature = [
 
                     //steps.base.switchToTab(0);
                     goToUploadPage();
-                    fillFormWithFileData(file);
+                    fillFormWithFileData(file, fileDefaults);
 
                     /*if (!noUpload) {
                         this.clickCreateButton();
@@ -448,15 +451,151 @@ exports.feature = [
     },
     {
         name: 'Upload multiple EDI files',
-        tags: ['uploadMultipleEDIFiles'],
+        tags: ['uploadMultipleEDIFiles', 'utility'],
         steps: function() {
-            var files = YAML.load(path.resolve(__dirname, './data/batchUpload.yml'));
+            var files;
 
-            _.each(files, function(file){
-                goToUploadPage();
-                fillFormWithFileData(file, true, true);
-                steps.uploadEdiFile.expectToBeRedirectedToFileUploadHistory();
+            function readFilesFromExcel(dataFile) {
+                var xlsx = require('xlsx'),
+                    workbook = xlsx.readFileSync(path.resolve(__dirname, dataFile)),
+                    sheet = workbook.Sheets[workbook.SheetNames[0]],
+                    files = xlsx.utils.sheet_to_json(sheet);
+
+                function parsePeriod(periodStr) {
+                    var period = periodStr.split('-');
+
+                    return {
+                        year: period[0],
+                        month: period[1]
+                    }
+                }
+
+                files.forEach(function(item){
+                    item.distributionPeriod = {
+                        start: parsePeriod(item.distributionPeriodStart),
+                        end: parsePeriod(item.distributionPeriodEnd)
+                    }
+                });
+
+                return files;
+            }
+
+            function fillFormWithFileData(file, fileDefaults, clickCreate, useOriginalName) {
+                if (fileDefaults) {
+                    file = _.defaultsDeep(file, fileDefaults);
+                }
+
+                file.fileName = path.resolve(__dirname, file.fileName);
+
+                using(pages.uploadEdiFile, function() {
+                    file.expectedAmount = file.expectedAmount || file.amount;
+
+                    if (file.customFormat === false) {
+                        this.selectWcmCommonFormat();
+                    }
+
+                    if (file.multipleProviders) {
+                        this.checkMultipleIncomeProvidersBox();
+                    } else {
+                        this.selectIncomeProvider(file.incomeProvider);
+                        this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
+                        this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
+                    }
+
+                    this.selectProcessingTerritory(file.processingTerritory);
+                    //this.selectProcessingTerritory(file.royaltyPeriod);
+                    this.selectFileFormat(file.fileFormat);
+                    this.selectFile(file.fileName, useOriginalName);
+
+                    this.setExpectedFileAmount(file.expectedAmount);
+                    this.setExpectedFileAmountCurrency(file.currency);
+                    this.setExchangeRate(file.exchangeRate);
+
+                    if (clickCreate !== false) { 
+                        this.clickCreateButton();
+                    }
+                });
+            }
+
+            function parsePeriod(periodStr) {
+                var period = periodStr.split('-');
+
+                return {
+                    year: period[0],
+                    month: period[1]
+                }
+            }
+
+            function downloadS3Dir(dirname, doneFn) {
+                var s3 = require('s3'),
+                    tmp = require('tmp'),
+                    tmpDir = tmp.dirSync(),
+                    client = s3.createClient({
+                        s3Options: {
+                            accessKeyId: 'AKIAJLYXFFIIDM7HB37Q',
+                            secretAccessKey: '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'
+                        }
+                    }),
+                    downloader;
+
+                    downloader = client.downloadDir({
+                        localDir: tmpDir.name,
+                        s3Params: {
+                            Bucket: 'wcm-tango-testdatafiles',
+                            Key: dirname
+                        }
+                    });
+                doneFn = doneFn || function(){};
+
+                function log() {
+                    var msg = _.toArray(arguments).join(' ');
+                    process.stdout.write(msg);
+                }
+
+                downloader.on('error', function(err) {
+                    console.error('Unable to download:', err.stack);
+                });
+
+                downloader.on('progress', function() {
+                    var prog = downloader.progressAmount,
+                        total = downloader.progressTotal;
+
+                    if (downloader.progressTotal) {
+                        var pct = Math.ceil((prog/total * 100)) + '%';
+
+                        process.stdout.clearLine();
+                        process.stdout.cursorTo(0);
+                        log('Downloading files from S3...', pct);
+                    }
+
+                });
+
+                downloader.on('end', function() {
+                    log('\n');
+                    console.log('Done.');
+
+                    files = readFilesFromExcel(path.resolve(tmpDir.name, dirname, 'files.xlsx'));
+                    console.log('Found metadata for', files.length, 'files.');
+                    doneFn();
+                });
+            }
+
+            it('Download files from S3', function(done){
+                downloadS3Dir('TAT', done);
             });
+
+            it('Upload files', function(){
+                _.each(files, function(file){
+                    pages.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
+                    pages.base.waitForAjax();
+                    pages.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
+                    pages.base.waitForAjax();
+
+                    fillFormWithFileData(file, undefined, true, true);
+                    pages.uploadEdiFile.expectToBeRedirectedToFileUploadHistory();
+                });
+            });
+
         }
     }
 ];
