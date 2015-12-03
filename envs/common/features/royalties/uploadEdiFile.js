@@ -451,7 +451,7 @@ exports.feature = [
     },
     {
         name: 'Upload multiple EDI files',
-        tags: ['uploadMultipleEDIFiles'],
+        tags: ['uploadMultipleEDIFiles', 'utility'],
         steps: function() {
             var files;
 
