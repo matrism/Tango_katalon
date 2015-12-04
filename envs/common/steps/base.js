@@ -174,7 +174,7 @@ exports.refreshPage = function () {
 };
 
 exports.fail = function (description) {
-    it(description, function () {
+    it(description || "This is a forced failure step", function () {
         throw new Error("This is a forced failure step.");
     });
 };
