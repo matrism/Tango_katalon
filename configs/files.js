@@ -62,7 +62,7 @@ var features = [],
 selectedModulePaths.forEach(function (info) {
     var fullPath = info.fullPath;
 
-    if (fullPath.indexOf('/features/') > -1) {
+    if (fullPath.indexOf('/features/') > -1 && fullPath.indexOf('/data/') === -1) {
         features.push(fullPath);
     } else if (fullPath.indexOf('/pages/') > -1) {
         pages.push(fullPath);
