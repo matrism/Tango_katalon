@@ -23,14 +23,14 @@ exports.saveDeal = function () {
     });
 };
 
-exports.clickFirstScopeHeader =function() {
-    it("Click the first scope header",function(){
+exports.clickFirstScopeHeader = function () {
+    it("Click the first scope header", function () {
         pages.deal.clickScopeHeader();
     });
 };
 
 exports.clickLastScopeHeader = function () {
-    it("Click the last scope header",function(){
+    it("Click the last scope header", function () {
         pages.deal.clickScopeHeaderLast();
     });
 };
@@ -44,9 +44,9 @@ exports.waitForDealToBeSaved = function () {
 exports.returnDealNumber = function () {
     it("Return deal number ", function () {
         pages.deal.elems.dealBriefNumber.getText().
-            then(function (promise) {
-                console.log("Deal number is: " + promise);
-            });
+        then(function (promise) {
+            console.log("Deal number is: " + promise);
+        });
     });
 };
 
@@ -56,7 +56,7 @@ exports.findId = function () {
             ' getPristineDeal().deal_header.contract_brief_number '
         ));
 
-        idBinding.getText().then(function(value) {
+        idBinding.getText().then(function (value) {
             hash.currentEntityDataSlotsByType.deal.id = value;
         });
     });
@@ -102,8 +102,15 @@ exports.goToFinderDealTermsTabDetails = function () {
     });
 };
 
+exports.goToRelatedDealsGeneralTabDetails = function () {
+    it("Click on related deals general link ", function () {
+        pages.deal.goToRelatedDealsGeneral();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.relatedDealsTitle));
+    });
+};
+
 exports.goToIncomeRatesPage = function () {
-    it("Go to Income Rates Summary Page",function() {
+    it("Go to Income Rates Summary Page", function () {
         pages.deal.clickIncomeRatesLink();
     });
 };
