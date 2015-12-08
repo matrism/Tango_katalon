@@ -17,7 +17,10 @@ module.exports.open = function(workId) {
         }
     );
 };
-exports.workSearchFilterTagDropdown = function(i) {
+exports.workSearchFilterTagDropdown = function (i) {
+    pages.searchSection.clickDropdownMenu();
+    pages.searchSection.selectWork();
+
     return pages.base.mainSearchBar().element(by.model('$filterTag.filter'));
 };
 exports.workSearchTermsInput = function() {
