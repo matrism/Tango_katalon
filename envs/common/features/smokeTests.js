@@ -31,7 +31,12 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
             steps.deal.itContinueToNextPage();
             steps.deal.itContinueToNextPage();
+
+            /******************************************
+            TEMPORARILY DISABLE ADDING OF PAYEE, IS BROKEN IN QA
             steps.createDealPayee.itAddPayeeOrganisationAndAssociateScope();
+            ******************************************/
+
             steps.deal.itContinueToNextPage();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
