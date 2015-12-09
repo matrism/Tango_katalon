@@ -359,8 +359,12 @@
 <script>
     'use strict';
 
-    function searchHiddenElementPredicate() {
-        return ($(this).closest('.searchhide').length === 0);
+    function searchOrCheckHiddenElementPredicate() {
+        var selector = '.searchhide, .checkhide';
+
+        return (
+            $(this).closest(selector).addBack(selector).length === 0
+        );
     }
 
     function siblingMatchesPredicate(selector) {
@@ -371,11 +375,17 @@
 
     function calculateTotals() {
         // Count total steps
-        var featureLists = $('body > ul > ul').filter(searchHiddenElementPredicate),
+        var featureLists = $('body > ul > ul').filter(
+                searchOrCheckHiddenElementPredicate
+            ),
 
-            scenarioLists = featureLists.children('ul'),
+            scenarioLists = featureLists.children('ul').filter(
+                searchOrCheckHiddenElementPredicate
+            ),
 
-            stepLinks = $('li > a:first-of-type').filter(searchHiddenElementPredicate);
+            stepLinks = $('li > a:first-of-type').filter(
+                searchOrCheckHiddenElementPredicate
+            );
 
         $('.tatTotalFeatures').text(featureLists.length);
 
@@ -479,6 +489,7 @@
         });
 
         checkLists();
+        calculateTotals();
         updateLocationHash();
     });
 
@@ -500,6 +511,7 @@
         });
 
         checkLists();
+        calculateTotals();
         updateLocationHash();
     });
 
