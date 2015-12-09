@@ -137,3 +137,12 @@ exports.getRRIconData = function () {
         pages.deal.errorIconsAreVisible();
     });
 };
+
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+        pages.deal.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+    });
+};
+

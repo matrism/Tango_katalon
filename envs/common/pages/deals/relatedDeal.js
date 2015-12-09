@@ -112,7 +112,26 @@ if (pages.relatedDeal === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 });
+        },
+
+        selectTheRandomValueFromRelationshipDropDownRowNumberI: function (i) {
+            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.relationship div.tg-dropdown-button")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))));
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                });
+        },
+
+        clickOnTheSaveRelatedDeal: function () {
+            pages.relatedDeal.elems.saveRelatedDealButton.click();
+        },
+
+        clickOnTheCancelRelatedDeal: function () {
+            pages.relatedDeal.elems.cancelRelatedDealButton.click();
         }
+
 
     });
 }

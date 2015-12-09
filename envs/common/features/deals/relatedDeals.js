@@ -61,7 +61,33 @@ exports.feature = [
             steps.relatedDeal.checkContractingPartyDropDownWithNoResult();
             steps.relatedDeal.clearIntoContractingPartiesField();
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals();
+            steps.relatedDeal.checkContractTypeValueRowNumberI("--", 1);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+            steps.relatedDeal.checkRelationshipValueRowNumberI("Select One", 1);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
 
+            steps.relatedDeal.checkContractTypeValueRowNumberI("—", 2);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("—", 2);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("—", 2);
+            steps.relatedDeal.checkRelationshipValueRowNumberI("—", 2);
+
+            steps.relatedDeal.checkDeleteRelationshipTooltipRowNumberI(1);
+            steps.relatedDeal.deleteRelationshipRowNumberI(1);
+
+            steps.relatedDeal.clickOnCancelRelatedDeal();
+            steps.deal.refreshThePage();
+
+            steps.deal.goToRelatedDealsGeneralTabDetails();
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.relatedDeal.checkContractTypeValueRowNumberI("—", 1);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("—", 1);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("—", 1);
+            steps.relatedDeal.checkRelationshipValueRowNumberI("—", 1);
+
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals();
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
         }
     }
 ];

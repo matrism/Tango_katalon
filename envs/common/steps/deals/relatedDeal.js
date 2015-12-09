@@ -99,11 +99,11 @@ exports.selectSpecificContractingPartyCreatedDealRelatedDeals = function () {
 
 exports.checkContractTypeValueRowNumberI = function (value, i) {
     it("Check the contract type value row number " + i, function () {
-       browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.contract-type")).getText().
-           then(function (promise) {
-           console.log("Contract type value is " + promise);
-           expect(promise).toEqual(value);
-       });
+        browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.contract-type")).getText().
+        then(function (promise) {
+            console.log("Contract type value is " + promise);
+            expect(promise).toEqual(value);
+        });
     });
 };
 
@@ -114,5 +114,64 @@ exports.checkDealStatusValueRowNumberI = function (value, i) {
             console.log("Deal status value is " + promise);
             expect(promise).toEqual(value);
         });
+    });
+};
+
+exports.checkContractExecutionDateValueRowNumberI = function (value, i) {
+    it("Check the contract execution date value row number " + i, function () {
+        browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.execution-date")).getText().
+        then(function (promise) {
+            console.log("Contract execution date value is " + promise);
+            expect(promise).toEqual(value);
+        });
+    });
+};
+
+
+exports.checkRelationshipValueRowNumberI = function (value, i) {
+    it("Check the relationship value row number " + i, function () {
+        browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.relationship")).getText().
+        then(function (promise) {
+            console.log("Relationship value is " + promise);
+            expect(promise).toEqual(value);
+        });
+    });
+};
+
+exports.selectRandomValueFromRelationshipDropDown = function (i) {
+    it("Select the random value from relationship drop down ", function () {
+        pages.relatedDeal.selectTheRandomValueFromRelationshipDropDownRowNumberI(i);
+        pages.relatedDeal.waitForAjax();
+    });
+};
+
+exports.checkDeleteRelationshipTooltipRowNumberI = function (i) {
+    it("Check the relationship value row number " + i, function () {
+        browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.relationship a.remove-btn.pull-right i")).getAttribute("data-tooltip").
+        then(function (promise) {
+            console.log("Relationship remove tooltip value is " + promise);
+            expect(promise).toEqual("Delete Relationship.");
+        });
+    });
+};
+
+
+exports.deleteRelationshipRowNumberI = function (i) {
+    it("Delete the relationship row number " + i, function () {
+        browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.relationship a.remove-btn.pull-right i")).click();
+    });
+};
+
+exports.clickOnSaveRelatedDeal = function () {
+    it("Click on the save related deal button ", function () {
+        pages.relatedDeal.clickOnTheSaveRelatedDeal();
+        pages.relatedDeal.waitForAjax();
+    });
+};
+
+exports.clickOnCancelRelatedDeal = function () {
+    it("Click on the cancel related deal button ", function () {
+        pages.relatedDeal.clickOnTheCancelRelatedDeal();
+        pages.relatedDeal.waitForAjax();
     });
 };
