@@ -17,9 +17,11 @@ module.exports.open = function(workId) {
         }
     );
 };
-exports.workSearchFilterTagDropdown = function (i) {
-    pages.searchSection.clickDropdownMenu();
-    pages.searchSection.selectWork();
+exports.workSearchFilterTagDropdown = function (i, selectEntityType) {
+    if (selectEntityType) {
+        pages.searchSection.clickDropdownMenu();
+        pages.searchSection.selectWork();
+    }
 
     return pages.base.mainSearchBar().element(by.model('$filterTag.filter'));
 };
@@ -99,8 +101,8 @@ exports.expectSelectedWorkSearchFilterTagToBe = function(i, value) {
     pages.base.scrollIntoView(element);
     expect(pages.base.selectedDropdownOption(element)).toBe(value);
 };
-exports.selectWorkSearchFilterTag = function(i, value) {
-    var element = exports.workSearchFilterTagDropdown(i);
+exports.selectWorkSearchFilterTag = function(i, value, selectEntityType) {
+    var element = exports.workSearchFilterTagDropdown(i, selectEntityType || true);
     pages.base.scrollIntoView(element);
     return pages.base.selectDropdownOption(element, value);
 };

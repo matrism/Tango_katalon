@@ -89,7 +89,7 @@ exports.feature = [
     },
     {
         name: 'Search by work title (exact match)',
-        tags: ['blah'],
+        tags: [],
         steps: [
             [function () {
                 data.searchDataByExactTitleMatch.forEach(function (searchData) {
@@ -227,7 +227,7 @@ exports.feature = [
                     steps.work.enterWorkSearchTerms(searchData.titleTerms);
                     steps.base.waitForAjax();
                     steps.work.addAnotherWorkSearchTerm();
-                    steps.work.selectWorkSearchFilterTag(1, 'Creator');
+                    steps.work.selectWorkSearchFilterTag(1, 'Creator', false);
                     steps.work.enterWorkSearchTerms(searchData.creatorTerms);
                     steps.base.waitForAjax();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
