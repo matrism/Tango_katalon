@@ -154,7 +154,7 @@ if (pages.deal === undefined) {
         },
         errorRRIsVisible: function () {
 
-            return this.errorRR.isDisplayed();
+            return this.errorRR().isDisplayed();
 
         }
 });

@@ -83,10 +83,7 @@ exports.validateRRInputText = function (text) {
 
 exports.validateRRInput = function () {
     it("Expect input to be valid", function () {
-        expect(pages.royaltyRates.getRRInputBorderTopValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderRightValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderBottomValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderLeftValue()).toBe('rgba(51, 170, 237, 1)');
+        pages.royaltyRates.validateRRInput();
     });
 };
 
@@ -116,7 +113,9 @@ exports.addIncomeProviderByPartialMatch = function (provider) {
 
 exports.incomeProviderIsPresent = function (provider) {
     it("The Income Provider is succesfully added", function () {
-        expect(pages.royaltyRates.getIncomeProviderInputValue()).toBe(provider);
+        expect(pph.toLowerCase(
+            pages.royaltyRates.getIncomeProviderInputValue())
+        ).toBe(provider.toLowerCase());
     });
 };
 
@@ -128,7 +127,7 @@ exports.incomeDateMethodToggleIsDisplayed = function () {
 
 exports.dealSigningTerritoryIsSelected = function () {
     it("Deal Signing Territory - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Deal Signing Territory');
+        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('DST');
     });
 };
 
@@ -146,17 +145,18 @@ exports.selectWarnerChappellToggle = function () {
 
 exports.warnerChappellToggleIsSelected = function () {
     it("Warner Chappell - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Warner Chappell');
+        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('WCM');
     });
 };
 
 exports.inspectEffectiveStartDateArea = function () {
     it("Inspect Effective Start Date Area ", function () {
+        pages.base.scrollIntoView(pages.royaltyRates.elems.effectiveStartDateLabel);
         expect(pages.royaltyRates.effectiveStartDateLabelIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateInputFieldIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateCalendarIconIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.getEffectiveStartDateContextualHelp()).toBe("Effective Date is based on time + Territory that is processing the royalty + Income Received Date. For rates to become active, Royalty Processing needs to know the date (when known) the Rate Set begins");
-        expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe("2015-03-12")
+        expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe('2014-03-12')
     });
 };
 

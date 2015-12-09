@@ -431,36 +431,32 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element));
         },
 
-        selectIncomeProvider: function (sentKeys) {
-            var incomeProviderInput;
+        incomeProviderTypeahead: function () {
+            return element(by.model('set.income_providers'));
+        },
 
-            incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+        incomeProviderInput: function () {
+            return this.incomeProviderTypeahead().element(by.model('$term'));
+        },
 
-            incomeProviderInput.sendKeys(sentKeys);
-            incomeProviderInput.click();
+        incomeProviderSearchResultsContainer: function () {
+            return $('.tg-typeahead__suggestions');
+        },
 
-            var suggestion = $(".ng-scope.ng-binding>strong");
-            browser.wait(ExpectedConditions.visibilityOf(suggestion));
-            expect(suggestion.getText()).not.toContain("No results");
+        waitForIncomeProviderSearchResults: function () {
+            browser.wait(EC.visibilityOf(
+                this.incomeProviderSearchResultsContainer()
+            ));
+        },
 
-            var desiredOption;
-            browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(sentKeys) != -1) {
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
-                    }
-                });
+        incomeProviderSearchResultElements: function() {
+            this.waitForIncomeProviderSearchResults();
+            return $$('.tg-typeahead__suggestions-group-item');
+        },
+
+        selectIncomeProvider: function (value) {
+            this.incomeProviderInput().sendKeys(value);
+            this.incomeProviderSearchResultElements().first().click();
         },
 
         selectIncomeProviderByPartialMatch: function (sentKeys) {
@@ -560,6 +556,13 @@ if (pages.royaltyRates === undefined) {
             return element.getAttribute('value');
         },
 
+        validateRRInput: function() {
+            var input = this.royaltyRateInput();
+
+            pages.base.scrollIntoView(input);
+            expect(pph.matchesCssSelector(input, '.ng-valid')).toBeTruthy();
+        },
+
         isIncomeDateMethodToggleVisible: function () {
             var dateIncomeToggle;
             dateIncomeToggle = element(by.model('set.income_date_method_code'));
@@ -603,13 +606,13 @@ if (pages.royaltyRates === undefined) {
         },
 
         clickDealSigningTerritoryToggle: function () {
-            var dealSigningTerritoryToggle = element.all(by.model('set.income_date_method_code')).get(0);
+            var dealSigningTerritoryToggle = element.all(by.model('set.income_date_method_code')).get(1);
             dealSigningTerritoryToggle.click();
             browser.driver.sleep(5000);
         },
 
         clickWarnerChappellToggle: function () {
-            var warnerChappellToggle = element.all(by.model('set.income_date_method_code')).get(1);
+            var warnerChappellToggle = element.all(by.model('set.income_date_method_code')).get(0);
             warnerChappellToggle.click();
             browser.driver.sleep(5000);
         },
@@ -819,7 +822,11 @@ if (pages.royaltyRates === undefined) {
         },
 
         clickAddNewPublisherSharesButton: function () {
-            this.newPublisherSharedButton().click();
+            var button = this.newPublisherSharedButton();
+
+            pages.base.scrollIntoView(button);
+
+            return button.click();
         },
 
         typeIntoOriginalPublisherInput: function (originalPublisher) {
