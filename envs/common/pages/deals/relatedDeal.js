@@ -85,32 +85,31 @@ if (pages.relatedDeal === undefined) {
             });
         },
 
-        clickOnTheAddRelatedDealLink: function(){
+        clickOnTheAddRelatedDealLink: function () {
             pages.relatedDeal.elems.addRelatedDealLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.relatedDeal.elems.saveRelatedDealButton));
         },
 
-        fillIntoTheContractingPartiesField : function(){
+        fillIntoTheContractingPartiesField: function () {
             pages.relatedDeal.elems.contractingPartiesField.click();
             pages.relatedDeal.elems.contractingPartiesInputField.sendKeys("a");
         },
 
-        fillIntoTheContractingPartiesFieldSpecificValue : function(contracting){
+        fillIntoTheContractingPartiesFieldSpecificValue: function (contracting) {
             pages.relatedDeal.elems.contractingPartiesField.click();
             pages.relatedDeal.elems.contractingPartiesInputField.sendKeys(contracting);
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 
-        clearIntoTheContractingPartiesField : function(ocntracting){
+        clearIntoTheContractingPartiesField: function (ocntracting) {
             pages.relatedDeal.elems.contractingPartiesField.click();
             pages.relatedDeal.elems.contractingPartiesInputField.clear();
         },
 
-        selectTheRandomContractingPartyRelatedDeal : function(){
-             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+        selectTheRandomContractingPartyRelatedDeal: function () {
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * (options.length - 1) + 1));
+                    var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 });
         }

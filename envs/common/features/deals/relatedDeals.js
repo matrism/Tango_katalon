@@ -29,6 +29,7 @@ exports.feature = [
             steps.relatedDeal.checkRelatedDealsTitle();
             steps.relatedDeal.checkRelatedDealsTooltipTitle();
             steps.relatedDeal.checkTheHeaderTableTitlesRelatedDeals();
+            steps.relatedDeal.checkNoRelatedDealsDefined();
         }
     },
 
@@ -36,13 +37,16 @@ exports.feature = [
         name: "Create related deals",
         tags: ["relatedDeals"],
         steps: function () {
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
-            steps.deal.itContinueToNextPage();
-            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
-            steps.deal.itContinueToNextPage();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+            //steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            //steps.deal.itContinueToNextPage();
+            //steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            //steps.deal.itContinueToNextPage();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
+            //steps.deal.printDealNumber();
+            steps.searchSection.accessSavedDealByNumber("245971");
+
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
             steps.relatedDeal.checkNoRelatedDealsDefined();
@@ -50,7 +54,14 @@ exports.feature = [
             steps.relatedDeal.fillIntoContractingPartiesFieldRelatedDealsSpecificValue("a");
             steps.relatedDeal.checkContractingPartyDropDownIsPopulated();
             steps.relatedDeal.clearIntoContractingPartiesField();
-            steps.relatedDeal.selectRandomContractingPartyRelatedDeals();
+            steps.relatedDeal.fillIntoContractingPartiesFieldRelatedDealsSpecificValue("bmi");
+            steps.relatedDeal.checkContractingPartyDropDownIsPopulated();
+            steps.relatedDeal.clearIntoContractingPartiesField();
+            steps.relatedDeal.fillIntoContractingPartiesFieldRelatedDealsSpecificValue("qwz");
+            steps.relatedDeal.checkContractingPartyDropDownWithNoResult();
+            steps.relatedDeal.clearIntoContractingPartiesField();
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals();
+
         }
     }
 ];

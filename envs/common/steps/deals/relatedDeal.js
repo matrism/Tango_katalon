@@ -53,8 +53,20 @@ exports.clearIntoContractingPartiesField = function () {
 
 exports.checkContractingPartyDropDownIsPopulated = function () {
     it("Check that contracting party drop down is populated", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         var myElement = browser.driver.findElement(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"));
         expect(myElement.isDisplayed());
+    });
+};
+
+exports.checkContractingPartyDropDownWithNoResult = function () {
+    it("Check that contracting party drop down is with no results", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer"))));
+        browser.driver.findElement(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer")).getText().
+        then(function (promise) {
+            console.log("No results in the drop down : " + promise);
+            expect(promise).toContain("No results for");
+        });
     });
 };
 
@@ -63,5 +75,44 @@ exports.selectRandomContractingPartyRelatedDeals = function () {
         pages.relatedDeal.fillIntoTheContractingPartiesField();
         pages.relatedDeal.selectTheRandomContractingPartyRelatedDeal();
         pages.relatedDeal.waitForAjax();
+    });
+};
+
+exports.selectSpecificContractingPartyRelatedDeals = function (contracting) {
+    it("Select random value for contracting party related deals ", function () {
+        pages.relatedDeal.fillIntoTheContractingPartiesFieldSpecificValue(contracting);
+        pages.relatedDeal.selectTheRandomContractingPartyRelatedDeal();
+        pages.relatedDeal.waitForAjax();
+    });
+};
+
+exports.selectSpecificContractingPartyCreatedDealRelatedDeals = function () {
+    it("Select random value for contracting party related deals ", function () {
+        pages.deal.elems.dealBriefNumber.getText().
+        then(function (promise) {
+            pages.relatedDeal.fillIntoTheContractingPartiesFieldSpecificValue(promise);
+        });
+        pages.relatedDeal.selectTheRandomContractingPartyRelatedDeal();
+        pages.relatedDeal.waitForAjax();
+    });
+};
+
+exports.checkContractTypeValueRowNumberI = function (value, i) {
+    it("Check the contract type value row number " + i, function () {
+       browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.contract-type")).getText().
+           then(function (promise) {
+           console.log("Contract type value is " + promise);
+           expect(promise).toEqual(value);
+       });
+    });
+};
+
+exports.checkDealStatusValueRowNumberI = function (value, i) {
+    it("Check the deal status value row number " + i, function () {
+        browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.deal-status")).getText().
+        then(function (promise) {
+            console.log("Deal status value is " + promise);
+            expect(promise).toEqual(value);
+        });
     });
 };

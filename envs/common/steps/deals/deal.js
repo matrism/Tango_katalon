@@ -45,7 +45,15 @@ exports.returnDealNumber = function () {
     it("Return deal number ", function () {
         pages.deal.elems.dealBriefNumber.getText().
         then(function (promise) {
-            console.log("Deal number is: " + promise);
+        });
+    });
+};
+
+exports.printDealNumber = function () {
+    it("Return deal number ", function () {
+        pages.deal.elems.dealBriefNumber.getText().
+        then(function (promise) {
+            console.log("Deal number is " + promise);
         });
     });
 };
@@ -116,14 +124,14 @@ exports.goToIncomeRatesPage = function () {
 };
 
 exports.verifyErrorMessages = function () {
-    it("Check that error messages are displayed correctly",function() {
+    it("Check that error messages are displayed correctly", function () {
         expect(pages.deal.errorHeaderIsVisible()).toBeTruthy();
 
         //  expect(pages.deal.errorIconsAreVisible()).toBeTruthy();
         expect(pages.deal.errorRRIsVisible()).toBeTruthy();
     });
 };
-        
+
 exports.getRRIconData = function () {
     it("", function () {
         pages.deal.errorIconsAreVisible();
