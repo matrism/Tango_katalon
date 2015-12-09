@@ -379,6 +379,23 @@ if (steps.organisation === undefined) {
                 steps.organisation.checkErrorsValidationFilters();
             });
         },
+        getValidationErrorsWorkIds: function () {
+            it("Get validation error works filter ", function () {
+                 pages.organisation.getValidationErrorsWorkId(0).then(function (value){
+                    hash.validationErrorsFirstWorkId = parseInt(value.substr(3));
+                 });
+
+                 pages.organisation.getValidationErrorsWorkId(1).then(function (value){
+                    hash.validationErrorsSecondWorkId = parseInt(value.substr(3));
+                 });
+            });
+        },
+        checkWorksFilter: function () {
+            it("Check error works filter ", function () {
+                var workId = hash.validationErrorsSecondWorkId - hash.validationErrorsFirstWorkId;
+                expect(workId >= 0).toBeTruthy();
+            });
+        },
         checkErrorTypeFilters: function () {
             it("Check error type filters ", function () {
                 pages.organisation.activityHeaderErrorCount().then(function (value){

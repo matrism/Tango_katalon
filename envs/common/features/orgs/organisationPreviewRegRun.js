@@ -20,22 +20,24 @@ exports.feature = [
             using(steps.organisation, function() {
                 //primary
                 this.checkStatusNumber();
-                this.scrollRegRunPage();
-                this.listWorkDetails();
-                this.checkFilters();
-                this.checkRunTypeFilters();
-                this.downloadCrFile();
-                this.validateCrFile('primary');
+                //this.scrollRegRunPage();
+                //this.listWorkDetails();
+                //this.checkFilters();
+                //this.checkRunTypeFilters();
+                //this.downloadCrFile();
+                //this.validateCrFile('primary');
                 // validation errors
                 this.viewPrimaryValidationErrors();
-                this.scrollPrimaryValidationPage();
-                this.listErrorPrimaryValidationDetails();
-                this.checkPrimaryValidationErrorsFilters();
-                this.downloadCrFile();
+                //this.scrollPrimaryValidationPage();
+               // this.listErrorPrimaryValidationDetails();
+                //this.checkPrimaryValidationErrorsFilters();
+                this.getValidationErrorsWorkIds();
+                this.checkWorksFilter();
+/*                this.downloadCrFile();
                 this.validatePrimaryErrorCrFile('error');
-                this.backValidationErrors();
+                this.backValidationErrors();*/
                 //custom   CR_2013-09-15 CR_2013-10-01 CR_2013-06-15 CR_2013-10-15
-                this.selectCustomRegistrationRun('CR_2200-05-15');
+/*                this.selectCustomRegistrationRun('CR_2200-05-15');
                 this.executeRegistrationRunValidation('CR_2200-05-15');
                 this.selectCustomRegistrationRun('CR_2013-09-15');
                 this.checkStatusNumber();
@@ -53,7 +55,7 @@ exports.feature = [
                 this.checkValidationErrorsFilters();
                 this.downloadCrFile('error');
                 this.validateErrorCrFile('error_custom');
-                this.backValidationErrors('custom');
+                this.backValidationErrors('custom');*/
             });
         }
     }

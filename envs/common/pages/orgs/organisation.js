@@ -32,6 +32,12 @@ if (pages.organisation === undefined) {
         scrollPageDataRow: function () {
             return $$(".DATA-ROW").count();
         },
+        validationErrorsFilterContainer: function () {
+            return $$('[data-ng-repeat="valError in groupedValidations.items"]');
+        },
+        validationErrorsWorkId: function (i) {
+            return this.validationErrorsFilterContainer().$$('a').get(i).getText();
+        },
         scrollPageDataErrors: function () {
             return $$(".DATA-CHILD .DATA-ROW").count();
         },
@@ -364,6 +370,9 @@ if (pages.organisation === undefined) {
         },
 
         //END OF LOCATORS ///////////////////////////////////////
+        getValidationErrorsWorkId: function (index) {
+            return this.validationErrorsWorkId(index);
+        },
         executeRegistrationFutureIsActive: function () {
             return this.futureRegistrationRunButton().isPresent();
         },
