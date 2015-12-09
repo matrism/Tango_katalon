@@ -205,46 +205,48 @@ exports.baseWorksData = [
 
 exports.searchDataByExactTitleMatch = [
     {
-        terms: 'DIAMONDS IN THE SKY',
+        terms: randomId(0) + 'DIAMONDS IN THE SKY',
         expectedMatches: [
             {
-                title: 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
-                    'ALISON, FILIP'
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT',
                 ],
             },
             {
-                title: 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
-                    'BLIETZ, JEREMY'
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
+                    randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY',
                 ],
             },
             {
-                title: 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
-                    'KENNEDY, ALBERT'
+                    randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2',
                 ],
             },
             {
-                title: 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE SKY',
                 creators: [
-                    'KENNEDY, ALBERT'
+                    randomId(0) + 'WALKER, ' + randomId(0) + 'MAX',
+                    randomId(0) + 'KENNEDY-MCDONALD, ' + randomId(0) + 'RONALD',
                 ],
             },
-            //{
-            //    title: 'CRIMINAL',
-            //    alternateTitle: 'DIAMONDS IN THE SKY',
-            //    creators: [
-            //        'BONDI, GUISEPPE',
-            //    ],
-            //},
-            //{
-            //    title: 'CRIMINAL',
-            //    alternateTitle: 'DIAMONDS IN THE SKY',
-            //    creators: [
-            //        'KENNEDY, LUCY',
-            //    ],
-            //},
+            {
+                title: randomId(0) + 'CRIMINAL',
+                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                creators: [
+                    randomId(0) + 'BONDI, ' + randomId(0) + 'GUISEPPE',
+                ],
+            },
+            {
+                title: randomId(0) + 'CRIMINAL',
+                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                creators: [
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'LUCY',
+                ],
+            },
         ],
     },
 ];
