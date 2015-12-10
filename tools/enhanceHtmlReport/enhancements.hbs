@@ -45,6 +45,14 @@
                     <input type="checkbox" id="showOnlyPassing" /> <span style="color: green;">✓</span> Show Only Passing
                     <input type="checkbox" id="showOnlyFailing" /> <span style="color: red;">✗</span> Show Only Failing
                 </p>
+                <p>
+                    <button id="tatExpandAll">
+                        Expand all
+                    </button>
+                    <button id="tatCollapseAll">
+                        Collapse all
+                    </button>
+                </p>
             </td>
             <td>
                 {{#if buildNumber}}
@@ -356,6 +364,15 @@
         else {
             $listItems.hide();
         }
+    });
+
+    // Setup expand / collapse all click handlers.
+    $('#tatExpandAll').click(function() {
+        $('.toggle').removeClass('active').click();
+    });
+
+    $('#tatCollapseAll').click(function() {
+        $('.toggle').addClass('active').click();
     });
 
     // Collapse all lists.
