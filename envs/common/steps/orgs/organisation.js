@@ -991,7 +991,35 @@ if (steps.organisation === undefined) {
 
 module.exports = steps.organisation;
 
+exports.expectValue = function(section, labelName, isExact){
+    var itLabel = 'Expect value "'+ section +' > '+ labelName +'"',
+        expectValue = function () {
+            return pages.organisation.expectValue(section, labelName, isExact)
+        };
+
+    return {
+        toEqual: function (value) {
+            itLabel += ' to equal "'+ value +'"';
+            it(itLabel, function (){
+                expectValue().toEqual(value);
+            });
+        },
+        toContain: function (value) {
+            itLabel += ' to contain "'+ value +'"';
+            it(itLabel, function (){
+                expectValue().toContain(value);
+            });
+        }
+    }
+};
+
+exports.expectValueExact = function (section, labelName) {
+    return exports.expectValue(section, labelName, true);
+};
+
 pageStep([
+    'Get value by label',
+    'Expect internal IPI number to be unique',
     ['General', [
         'Edit section',
 
@@ -1048,6 +1076,9 @@ pageStep([
         'Select income file type search result by index',
         'Check or add income file type',
         'Expect income type mappings to be valid',
+        'Expect number of mappings to be',
+        'View Income Type Mapping details',
+        'Expect mapping to be',
 
         ['Income Type Mapping', [
             'Delete row',

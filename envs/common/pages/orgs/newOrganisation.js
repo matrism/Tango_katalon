@@ -66,7 +66,7 @@ exports.selectSociety = function (name) {
 };
 
 exports.isRegistrationRecipientButtons = function () {
-    return element.all(by.model('orgIs.recipient'));
+    return $$('.e2e-reg-delivery-is button');
 };
 
 exports.makeOrgRegistrationRecipient = function () {
@@ -74,6 +74,29 @@ exports.makeOrgRegistrationRecipient = function () {
     pages.base.scrollIntoView(buttons.first());
 
     buttons.filter(pph.matchTextExact('Yes')).first().click();
+};
+
+exports.makeOrgHaveRegistrationRecipients = function () {
+    var buttons = $$('.e2e-reg-recipient-has button');
+    pages.base.scrollIntoView(buttons.first());
+
+    buttons.filter(pph.matchTextExact('Yes')).first().click();
+};
+
+exports.clickAddRecipientButton = function () {
+    return $('.e2e-reg-recipient-add').click();
+};
+
+exports.typeRecipientName = function (name) {
+    var elem = Typeahead(element(by.model('recipient.model')), true);
+    elem.sendKeys(name);
+    pages.base.waitForAjax();
+    elem.results(name).click();
+};
+
+exports.addRecipient = function (name) {
+    exports.clickAddRecipientButton();
+    exports.typeRecipientName(name);
 };
 
 exports.publisherTypeButtons = function () {
@@ -89,16 +112,46 @@ exports.selectPublisherType = function (type) {
     button.click();
 };
 
+exports.fillContactAddressLines = function (lines) {
+    _.each(lines, function(line, i){
+        $('.e2e-contact-address-' + (i+1)).$('input').sendKeys(line);
+    });
+};
+
+function sendKeysToElement(elem) {
+    return function (val) {
+        elem.sendKeys(val);
+    };
+};
+
+exports.fillContactCity = sendKeysToElement($('.e2e-contact-address-city input'));
+exports.fillContactState = sendKeysToElement($('.e2e-contact-address-region input'));
+exports.fillContactZipCode = sendKeysToElement($('.e2e-contact-address-postal-code input'));
+
+exports.setContactCountry = function (name) {
+    var elem = $('.e2e-contact-address-country'),
+        countryElem = elem.element(by.cssContainingText('.dropdown-menu li', name));
+
+    pages.base.scrollIntoView(elem);
+    elem.$('.tg-dropdown-button').click();
+    countryElem.click();
+};
+
+exports.fillContactZipCode = sendKeysToElement($('.e2e-contact-address-postal-code input'));
+exports.fillContactPhoneNumber = sendKeysToElement($('.e2e-contact-phone-number input'));
+exports.fillContactFaxNumber = sendKeysToElement($('.e2e-contact-phone-fax input'));
+exports.fillContactEmail = sendKeysToElement($('.e2e-contact-phone-email input'));
+
 exports.deliveryMethodPanels = function () {
-    return element.all(by.repeater('dm in getDeliveryMethods()'));
+    return $$('.e2e-reg-delivery-method');
 };
 
 exports.addDeliveryMethodButton = function () {
-    return element(by.buttonText('+ Add Delivery Method'));
+    return $('.e2e-method-add');
 };
 
 exports.deliveryMethodButtons = function () {
-    return exports.deliveryMethodPanels().last().all(by.model('dm.delivery_mechanism_type'));
+    return exports.deliveryMethodPanels().last().$$('.e2e-method-type button');
 };
 
 exports.addDeliveryMethod = function (type) {
@@ -113,13 +166,13 @@ exports.addDeliveryMethod = function (type) {
 };
 
 exports.fillRequiredFieldsForDeliveryMethod = function (type) {
-    var elem = exports.deliveryMethodPanels().last().$('[data-ng-show="dm.delivery_mechanism_type === \'' + type + '\'"]'),
+    var elem = exports.deliveryMethodPanels().last().$('.e2e-method-' + type.toLowerCase()),
 
     options = {
         FTP: function () {
-            elem.element(by.model('dm.delivery_mechanism.host')).sendKeys('ftp.tango.testing');
-            elem.element(by.model('dm.delivery_mechanism.port')).sendKeys('80');
-            elem.element(by.model('dm.delivery_mechanism.username')).sendKeys('testUsername');
+            elem.element(by.model('deliveryMethod.model.host')).sendKeys('ftp.tango.testing');
+            elem.element(by.model('deliveryMethod.model.port')).sendKeys('80');
+            elem.element(by.model('deliveryMethod.model.username')).sendKeys('testUsername');
             elem.$('.password-field').sendKeys('testPassword');
         }
     };
@@ -128,7 +181,7 @@ exports.fillRequiredFieldsForDeliveryMethod = function (type) {
 };
 
 exports.acknowledgementProcessButtons = function () {
-    return element.all(by.model('ack.type'));
+    return $$('.e2e-acknowledgement-type button');
 };
 
 exports.selectAcknowledgementProcess = function (type) {
@@ -138,7 +191,7 @@ exports.selectAcknowledgementProcess = function (type) {
 };
 
 exports.acknowledgementProcessDeliveryMethodButtons = function () {
-    return element.all(by.model('ack.firstAcknowledgementMechanisms.type'));
+    return $$('.e2e-acknowledgement-type button');
 };
 
 exports.selectAcknowledgementProcessDeliveryMethod = function (type) {
@@ -148,7 +201,7 @@ exports.selectAcknowledgementProcessDeliveryMethod = function (type) {
 };
 
 exports.subpublisherRelationshipButtons = function () {
-    return element.all(by.model('orgHas.subPublishers'));
+    return $$('.e2e-sub-publishers-has button');
 };
 
 exports.clickSubpublisherRelationshipButton = function (type) {
@@ -160,22 +213,32 @@ exports.clickSubpublisherRelationshipButton = function (type) {
 };
 
 exports.subpublisherForm = function () {
-    return $('[data-ng-form="subPublishers"]');
+    return $('.e2e-sub-publishers + .row');
 };
 
 exports.subpublishersRepeater = function () {
-    return exports.subpublisherForm().all(by.repeater('spEdit in (_subPublishers = getSubPublishers())'));
+    return exports.subpublisherForm().$$('.e2e-sub-publisher');
 };
 
 exports.addSubpublisherButton = function () {
-    return exports.subpublisherForm().element(by.buttonText('+ Add Sub-Publisher'));
+    return $('.e2e-sub-publisher-add');
+};
+
+exports.removeSubpublisherButton = function () {
+    return $('.e2e-sub-publisher-remove');
+};
+
+exports.removeLastSubpublisher = function () {
+    var modalButton = $('.modal-dialog .btn-primary');
+
+    return exports.removeSubpublisherButton().click();
 };
 
 exports.subpublisherTypeahead = function () {
-    var elem = exports.subpublishersRepeater().last().element(by.model('spEdit.sub_publisher.name'));
+    var elem = exports.subpublishersRepeater().last().element(by.model('modularEditModels.model.publisher'));
 
     elem.results = function () { 
-        return exports.subpublisherForm().$$('.SUB_PUBLISHER .typeahead.dropdown-menu > li > a');
+        return exports.subpublisherForm().$$('.e2e-sub-publisher-def .tg-typeahead__suggestions-group-item');
     };
 
     return elem;
@@ -183,22 +246,36 @@ exports.subpublisherTypeahead = function () {
 
 exports.fillRequiredFieldsForLastSubpublisher = function (name, territory) {
     var subpublisherTypeahead = exports.subpublisherTypeahead(),
-        territoryOfControl = exports.subpublishersRepeater().last().element(by.model('spEdit.territories')),
+        territoryOfControl = exports.subpublishersRepeater().last().element(by.model('modularEditModels.model.territoryOfControl')),
         territoryTypeahead = Typeahead(territoryOfControl.element(by.model('$dataHolder.internalModel')), true),
-        results;
+        results, firstResult;
 
     pages.base.scrollIntoView(subpublisherTypeahead);
-    subpublisherTypeahead.sendKeys(name);
+    subpublisherTypeahead.element(by.model('$term')).sendKeys(name);
 
     results = subpublisherTypeahead.results();
     browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
 
-    results.filter(pph.matchText(name)).first().click();
+    //firstResult = results.filter(pph.matchText(name)).first()
+    firstResult = results.first()
+    browser.driver.actions().mouseMove(firstResult).perform();
+    firstResult.click();
 
     territoryOfControl.$('.tg-typeahead__tags-text').click();
     territoryTypeahead.sendKeys(territory);
     pages.base.waitForAjax();
     territoryTypeahead.results().filter(pph.matchTextExact(territory)).first().click();
+};
+
+exports.fillSubpublisherSocietyAgreementNumber = function (number) {
+    return $('.e2e-sub-publisher-agreement-number input').sendKeys(number);
+};
+
+exports.selectSubpublisherSociety = function (name) {
+    var elem = Typeahead(element(by.model('modularEditModels.model.agreement.society')), true);
+    elem.sendKeys(name);
+    pages.base.waitForAjax();
+    elem.results().filter(pph.matchTextExact(name)).first().click();
 };
 
 exports.clickAddSubpublisherButton = function () {
@@ -375,8 +452,21 @@ exports.selectIncomeTypeMappingInternalTypeSearchResultByIndex = function(i) {
     return element.click();
 };
 
+exports.addIncomeTypeMapping = function (index, type, desc, fileFormat, internalType) {
+    exports.enterIncomeTypeMappingType(index, type);
+    exports.enterIncomeTypeMappingDescription(index, desc);
+
+    if (fileFormat) {
+        exports.enterIncomeTypeMappingFileTypeSearchTerms(fileFormat);
+        exports.selectIncomeTypeMappingFileTypeSearchResultByIndex(0);
+    }
+
+    exports.enterIncomeTypeMappingInternalTypeSearchTerms(index, internalType);
+    exports.selectIncomeTypeMappingInternalTypeSearchResultByIndex(0);
+};
+
 exports.payeeYesButton = function () {
-    return $('[data-ng-click="PAY.onSetRolePayee(true)"]');
+    return $$('.e2e-payee-is button').first();
 };
 
 exports.makeOrgPayee = function () {
@@ -448,7 +538,7 @@ exports.doneButton = function () {
 
 exports.expectFormToBeValid = function () {
     var button = exports.doneButton();
-    expect(button.evaluate('form.$error')).toEqual({});
+    expect(button.evaluate('OrganisationCreateForm.$valid')).toBeTruthy();
 };
 
 exports.expectDoneButtonToBeClickable = function () {
