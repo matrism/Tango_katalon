@@ -175,3 +175,9 @@ exports.clickOnCancelRelatedDeal = function () {
         pages.relatedDeal.waitForAjax();
     });
 };
+
+exports.editRelatedDealForm = function () {
+    it("Edit the related deal form ", function () {
+       pages.relatedDeal.editTheRelatedDealForm();
+    });
+};

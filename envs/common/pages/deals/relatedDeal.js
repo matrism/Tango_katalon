@@ -17,6 +17,8 @@ if (pages.relatedDeal === undefined) {
             addRelatedDealLink: {css: "p.add-related-deal a"},
             contractingPartiesField: {css: "#related_deal_typeahead div[ng-class='tgTypeaheadWrapClass']"},
             contractingPartiesInputField: {css: "#related_deal_typeahead div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editRelatedDealArea: {css: "div[data-tg-modular-edit-id='relatedDeals']"},
+            editRelatedDealIcon: {css: "div[data-tg-modular-edit-id='relatedDeals'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             saveRelatedDealButton: {css: "div[data-tg-modular-edit-id='relatedDeals'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             cancelRelatedDealButton: {css: "div[data-tg-modular-edit-id='relatedDeals'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"}
         },
@@ -130,6 +132,12 @@ if (pages.relatedDeal === undefined) {
 
         clickOnTheCancelRelatedDeal: function () {
             pages.relatedDeal.elems.cancelRelatedDealButton.click();
+        },
+
+        editTheRelatedDealForm : function(){
+            pages.relatedDeal.elems.editRelatedDealArea.click();
+            pages.relatedDeal.elems.editRelatedDealIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.relatedDeal.elems.saveRelatedDealButton));
         }
 
 

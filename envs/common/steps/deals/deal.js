@@ -45,6 +45,7 @@ exports.returnDealNumber = function () {
     it("Return deal number ", function () {
         pages.deal.elems.dealBriefNumber.getText().
         then(function (promise) {
+            console.log("Deal number is " + promise);
         });
     });
 };
@@ -145,4 +146,20 @@ exports.refreshThePage = function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
     });
 };
+
+exports.openNewTabApp = function (i) {
+    it("Open a new tab", function () {
+        browser.actions().keyDown(protractor.Key.CONTROL).sendKeys('t').perform();
+        return browser.getAllWindowHandles().then(function (handles) {
+            browser.switchTo().window(handles[i]);
+        }).then(function () {
+            return browser.wait(ExpectedConditions.visibilityOf($('body')));
+            expect(browser.getCurrentUrl()).toMatch(/https:\/\/tango.tango-qa-aws.dspdev.wmg.com/);
+        });
+
+    });
+};
+
+
+
 
