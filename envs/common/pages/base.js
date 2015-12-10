@@ -487,7 +487,12 @@ exports.pause = function() {
             return false;
         });
     }, 99999999);
-}
+};
+
+exports.orphanBrowser = function() {
+    console.log('Orphaning browser...');
+    process.exit(-1);
+};
 
 exports.clickElement = function (elName, el, wait) {
     var notDisabledCssSelector = ':not([disabled], .disabled)';

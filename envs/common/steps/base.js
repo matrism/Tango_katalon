@@ -179,6 +179,8 @@ exports.fail = function (description) {
     });
 };
 
+pageStep('Orphan browser');
+
 exports.clearDownloadsDirectory = function () {
     it('Clear downloads directory', function () {
         pages.base.clearDownloadsDirectory();
