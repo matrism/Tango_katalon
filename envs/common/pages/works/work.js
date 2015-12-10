@@ -102,7 +102,7 @@ exports.expectSelectedWorkSearchFilterTagToBe = function(i, value) {
     expect(pages.base.selectedDropdownOption(element)).toBe(value);
 };
 exports.selectWorkSearchFilterTag = function(i, value, selectEntityType) {
-    var element = exports.workSearchFilterTagDropdown(i, selectEntityType || true);
+    var element = exports.workSearchFilterTagDropdown(i, (selectEntityType === undefined ? true : selectEntityType));
     pages.base.scrollIntoView(element);
     return pages.base.selectDropdownOption(element, value);
 };
