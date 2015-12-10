@@ -179,6 +179,7 @@ exports.fail = function (description) {
     });
 };
 
+pageStep('Pause');
 pageStep('Orphan browser');
 
 exports.clearDownloadsDirectory = function () {
