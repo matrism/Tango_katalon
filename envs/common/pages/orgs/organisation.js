@@ -304,6 +304,27 @@ if (pages.organisation === undefined) {
         registrationRunButton: function () {
             return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
         },
+        validationErrorsSortFilter: function () {
+            return $$(".ACTIVITY-HEADER>div.text-right a.dropdown-toggle").first().getText();
+        },
+        errorsFilterSortContainer: function () {
+            return $$('[data-ng-repeat="validationSortType in dataHolder.validationSortTypes"]');
+        },
+        errorTypeGroupedValidationsContainer: function () {
+            return $$('[data-ng-repeat="groupedValidations in activeContext.groupedValidations"]');
+        },
+        getErrorTypeHeader: function (i) {
+            return this.errorTypeGroupedValidationsContainer().$$('[data-ng-click="!isExpandableValidationBlind() || (groupedValidations.isExpandedGroup = !groupedValidations.isExpandedGroup)"] h3').get(i).getText();
+        },
+        affectedPartyGroupedValidationsContainer: function () {
+            return $$('[data-ng-if="stateHolder.validationSort.type === \'affected_party\' && !!groupedValidations.items[0].affected_party"]');
+        },
+        getAffectedPartyHeader: function () {
+            return this.affectedPartyGroupedValidationsContainer().$$('.pull-right .text-right').first().getText();
+        },
+        selectValidationErrorsFilter: function (i) {
+            return this.errorsFilterSortContainer().$$('[data-ng-click="setValidationSort(validationSortType)"]').get(i);
+        },
         modalConfirmButton: function () {
             // return element.all(by.css(".modal-footer>button")).element(by.buttonText("OK"));
             return $('[data-ng-click="(data.show.cancel) ? data.apply() : ok()" ]');
@@ -437,6 +458,23 @@ if (pages.organisation === undefined) {
         clickValidationFilter: function(item) {
             this.getPanelFilter(item).click();
             pages.base.waitForAjax();
+        },
+        clickValidationErrorsSortFilter: function() {
+            browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
+            this.validationErrorsSortFilter().click();
+            pages.base.waitForAjax();
+        },
+        selectValidationErrorsSortFilter: function(index) {
+            this.selectValidationErrorsFilter(index).click();
+            pages.base.waitForAjax();
+        },
+        getErrorTypeValidationErrorsHeader: function(index) {
+            for(var i=0; i < (index+1); i++) {
+                expect(this.getErrorTypeHeader(i)).toBeTruthy();
+            }
+        },
+        validateAffectedPartyHeader: function() {
+            expect(this.getAffectedPartyHeader()).toBeTruthy();
         },
         clickRunFilter: function(item) {
             this.getRunTypeFilter(item).click();

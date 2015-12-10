@@ -314,6 +314,27 @@ if (steps.organisation === undefined) {
                 });
             });
         },
+        clickValidationErrorsSortFilter: function() {
+            it("Click validation errors sort filter", function () {
+                pages.organisation.clickValidationErrorsSortFilter();
+            });
+        },
+        selectValidationErrorsSortFilter: function(i) {
+            it("Select validation errors sort filter", function () {
+                pages.organisation.selectValidationErrorsSortFilter(i);
+            });
+        },
+        validateErrorTypeHeader: function() {
+            it("Validate Error Type Header", function () {
+                pages.organisation.getErrorTypeValidationErrorsHeader(hash.filterCount);
+            });
+        },
+        validateAffectedPartyHeader: function() {
+            it("Validate Affected Party Header", function () {
+                //getAffectedPartyHeader
+                pages.organisation.validateAffectedPartyHeader();
+            });
+        },
         selectErrorsStatusPanel: function() {
             it("Select status panel from validation errors page", function () {
 
@@ -329,6 +350,18 @@ if (steps.organisation === undefined) {
                         });
                     }
                 });
+            });
+        },
+        validateErrorSortFilters: function () {
+            describe("Validate Sort Filters ", function () {
+                steps.organisation.getValidationErrorsWorkIds();
+                steps.organisation.checkWorksFilter();
+                steps.organisation.clickValidationErrorsSortFilter();
+                steps.organisation.selectValidationErrorsSortFilter(1);
+                steps.organisation.validateErrorTypeHeader();
+                steps.organisation.clickValidationErrorsSortFilter();
+                steps.organisation.selectValidationErrorsSortFilter(2);
+                steps.organisation.validateAffectedPartyHeader();
             });
         },
         checkFilters: function () {
