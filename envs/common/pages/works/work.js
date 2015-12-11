@@ -17,12 +17,7 @@ module.exports.open = function(workId) {
         }
     );
 };
-exports.workSearchFilterTagDropdown = function (i, selectEntityType) {
-    if (selectEntityType) {
-        pages.searchSection.clickDropdownMenu();
-        pages.searchSection.selectWork();
-    }
-
+exports.workSearchFilterTagDropdown = function(i) {
     return pages.base.mainSearchBar().element(by.model('$filterTag.filter'));
 };
 exports.workSearchTermsInput = function() {
@@ -101,8 +96,8 @@ exports.expectSelectedWorkSearchFilterTagToBe = function(i, value) {
     pages.base.scrollIntoView(element);
     expect(pages.base.selectedDropdownOption(element)).toBe(value);
 };
-exports.selectWorkSearchFilterTag = function(i, value, selectEntityType) {
-    var element = exports.workSearchFilterTagDropdown(i, selectEntityType);
+exports.selectWorkSearchFilterTag = function(i, value) {
+    var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);
     return pages.base.selectDropdownOption(element, value);
 };
