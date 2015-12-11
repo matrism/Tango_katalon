@@ -191,6 +191,33 @@ exports.validateDownloadFileCount = function (value) {
     });
 };
 
+exports.openTheNewTab = function(url) {
+    it("Open a new tab with url", function() {
+        browser.driver.executeScript(function () {
+            (function (a) {
+                document.body.appendChild(a);
+                a.setAttribute('href', location.href);
+                a.dispatchEvent((function (e) {
+                    e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
+                    return e;
+                }(document.createEvent('MouseEvents'))))
+            }(document.createElement('a')));
+        });
+    });
+};
+
+exports.focusOnNewOpenedTab = function(i){
+    it("Focus on the new opened tab ", function(){
+        pages.base.focusOnTheNewOpenedTab(i);
+        //return browser.getAllWindowHandles().then(function (handles) {
+        //    browser.switchTo().window(handles[i]);
+        //}).then(function () {
+        //    return browser.wait(ExpectedConditions.visibilityOf($('body')));
+        //});
+    });
+};
+
+
 pageStep('Open new tab');
 pageStep('Duplicate tab');
 pageStep('Switch to tab');

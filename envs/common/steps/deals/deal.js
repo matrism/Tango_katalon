@@ -127,7 +127,6 @@ exports.goToIncomeRatesPage = function () {
 exports.verifyErrorMessages = function () {
     it("Check that error messages are displayed correctly", function () {
         expect(pages.deal.errorHeaderIsVisible()).toBeTruthy();
-
         //  expect(pages.deal.errorIconsAreVisible()).toBeTruthy();
         expect(pages.deal.errorRRIsVisible()).toBeTruthy();
     });
@@ -147,18 +146,7 @@ exports.refreshThePage = function () {
     });
 };
 
-exports.openNewTabApp = function (i) {
-    it("Open a new tab", function () {
-        browser.actions().keyDown(protractor.Key.CONTROL).sendKeys('t').perform();
-        return browser.getAllWindowHandles().then(function (handles) {
-            browser.switchTo().window(handles[i]);
-        }).then(function () {
-            return browser.wait(ExpectedConditions.visibilityOf($('body')));
-            expect(browser.getCurrentUrl()).toMatch(/https:\/\/tango.tango-qa-aws.dspdev.wmg.com/);
-        });
 
-    });
-};
 
 
 

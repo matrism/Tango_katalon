@@ -85,6 +85,13 @@ if (pages.deal === undefined) {
             pages.deal.elems.relatedDealsHeaderLink.click();
         },
 
+        printTheDealNumber: function(){
+            pages.deal.elems.dealBriefNumber.getText().
+            then(function (promise) {
+                console.log("Deal number printed is " + promise);
+            });
+        },
+
         clickIncomeRatesLink: function () {
             pages.base.scrollIntoView(    pages.deal.elems.incomeRates);
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));

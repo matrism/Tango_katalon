@@ -86,10 +86,14 @@ exports.selectSpecificContractingPartyRelatedDeals = function (contracting) {
     });
 };
 
-exports.selectSpecificContractingPartyCreatedDealRelatedDeals = function () {
+exports.selectSpecificContractingPartyCreatedDealRelatedDeals = function (i) {
     it("Select random value for contracting party related deals ", function () {
         pages.deal.elems.dealBriefNumber.getText().
         then(function (promise) {
+            console.log("Contract brief number promise is " + promise);
+            pages.deal.printTheDealNumber();
+            pages.base.focusOnTheNewOpenedTab(i);
+            pages.deal.printTheDealNumber();
             pages.relatedDeal.fillIntoTheContractingPartiesFieldSpecificValue(promise);
         });
         pages.relatedDeal.selectTheRandomContractingPartyRelatedDeal();
