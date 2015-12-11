@@ -326,7 +326,9 @@ if (steps.organisation === undefined) {
         },
         validateErrorTypeHeader: function() {
             it("Validate Error Type Header", function () {
-                pages.organisation.getErrorTypeValidationErrorsHeader(hash.filterCount);
+                pages.organisation.getErrorTypeSortFilters().then(function (value){
+                    pages.organisation.getErrorTypeValidationErrorsHeader(value);
+                });
             });
         },
         validateAffectedPartyHeader: function() {
@@ -339,14 +341,29 @@ if (steps.organisation === undefined) {
             it("Select status panel from validation errors page", function () {
 
                 hash.statusErrorsFilter = 0;
+                hash.errorValidationFilters = {
+                    critical: false,
+                    nonCritical: false
+                };
 
                 pages.organisation.getValidationPanel().then(function (value) {
                     for(var i = 0; i < value; i++) {
                         var index = hash.filterCount + i + 1;
+
                         pages.organisation.clickValidationFilter(i);
 
                         pages.organisation.getValidationFilterNumber(index).then(function (item) {
                             hash.statusErrorsFilter = hash.statusErrorsFilter + parseInt(item.replace(/,/g, ""));
+                        });
+
+                        pages.organisation.getValidationFilterText(index).then(function (text){
+                            if(text == 'Critical Errors') {
+                                hash.errorValidationFilters.critical = true;
+                            }
+
+                            if(text == 'Non-Critical Errors') {
+                                hash.errorValidationFilters.nonCritical = true;
+                            }
                         });
                     }
                 });
@@ -394,14 +411,34 @@ if (steps.organisation === undefined) {
                 });
             });
         },
+        validateErrorsFilters: function() {
+            it("Verify error type and status filters equality ", function () {
+                expect(hash.errorTypeFilter).toBe(hash.statusErrorsFilter);
+            });
+        },
+        validateCriticalErrorsFilter: function() {
+            it("Validate Critical Errors Filter ", function () {
+                if(hash.errorValidationFilters.critical) {
+                    expect(pages.organisation.getValidationCriticalErrors()).toBeGreaterThan(0);
+                }
+            });
+        },
+        validateNonCriticalErrorsFilter: function() {
+            it("Validate Non-Critical Errors Filter ", function () {
+                if(hash.errorValidationFilters.nonCritical) {
+                    expect(pages.organisation.getValidationNonCriticalErrors()).toBeGreaterThan(0);
+                }
+            });
+        },
         checkValidationErrorsFilters: function () {
             describe("Check validation errors page filters ", function () {
-                if(hash.validationErrors) {
+                //if(hash.validationErrors) {
                     steps.organisation.selectErrorsTypePanel();
                     steps.organisation.checkErrorTypeFilters();
                     steps.organisation.selectErrorsStatusPanel();
                     steps.organisation.checkErrorsValidationFilters();
-                }
+                    steps.organisation.validateErrorsFilters();
+               // }
             });
         },
         checkPrimaryValidationErrorsFilters: function () {
@@ -410,6 +447,7 @@ if (steps.organisation === undefined) {
                 steps.organisation.checkErrorTypeFilters();
                 steps.organisation.selectErrorsStatusPanel();
                 steps.organisation.checkErrorsValidationFilters();
+                steps.organisation.validateErrorsFilters();
             });
         },
         getValidationErrorsWorkIds: function () {
@@ -643,7 +681,6 @@ if (steps.organisation === undefined) {
         validateSizeCrFile: function () {
             it('Check file size ', function () {
                 pages.organisation.activityHeaderCount().then(function (value){
-                    console.log(value);
                     var headerText = value.split("("),
                         subPart = headerText[1],
                         count = subPart.substring(0, subPart.length-1),
@@ -708,7 +745,6 @@ if (steps.organisation === undefined) {
             it("Download File", function () {
                 pages.organisation.clickDownloadFileButton();
                 pages.organisation.waitForFileToDownload();
-
             });
         },
         validateFilesDownloaded: function (downloadFilepath) {
