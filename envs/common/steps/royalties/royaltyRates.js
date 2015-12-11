@@ -25,6 +25,7 @@ exports.addNewRoyaltySetEdit = function () {
 
 exports.inspectRateSetForm = function () {
     it("Inspect Rate Set Form", function () {
+        pages.base.scrollIntoView(pages.royaltyRates.elems.RRNameLabel);
         expect(pages.royaltyRates.elems.RRNameLabel.isPresent()).toBeTruthy();
         expect(pages.royaltyRates.elems.incomeProvidesLabel.isPresent()).toBeTruthy();
         expect(pages.royaltyRates.elems.incomeProviderInput.isPresent()).toBeTruthy();

@@ -11,7 +11,7 @@ exports.feature = [
         name: 'Search for WAMPS works by full work ID',
         tags: [],
         steps: [
-            [steps.base.fail],
+            [steps.mainHeader.search.selectEntityType, ['Works']],
             [steps.work.selectWorkSearchFilterTag, [0, 'Work ID']],
 
             [steps.work.enterWorkSearchTerms, ['WW 008918634 00']],
@@ -39,6 +39,7 @@ exports.feature = [
         name: 'Search for WAMPS works by song code',
         tags: [],
         steps: [
+            [steps.mainHeader.search.selectEntityType, ['Works']],
             [steps.work.selectWorkSearchFilterTag, [0, 'Work ID']],
 
             [steps.work.enterWorkSearchTerms, ['008918634']],
