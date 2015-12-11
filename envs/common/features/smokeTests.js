@@ -107,7 +107,7 @@ exports.feature = [
     },
     {
         name: 'New basic organisation',
-        tags: ['orgs'],
+        tags: ['orgCreationSmoke', 'orgs'],
         steps: function () {
             steps.mainHeader.createNewRecord('Organisation');
 
