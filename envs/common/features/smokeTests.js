@@ -124,7 +124,7 @@ exports.feature = [
     },
     {
         name: 'View mode of  organisation',
-        tags: ['orgs', 'view'],
+        tags: ['viewOrgSmoke', 'orgs', 'view'],
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.validateCisacCode('021');
