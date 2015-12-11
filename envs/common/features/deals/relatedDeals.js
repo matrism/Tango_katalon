@@ -233,8 +233,13 @@ exports.feature = [
             steps.relatedDeal.checkRelatedDealsTooltipTitle();
             steps.relatedDeal.checkTheHeaderTableTitlesRelatedDeals();
 
-            //steps.base.focusOnNewOpenedTab(0);
-            //steps.searchSection.accessSavedDealByNumber("245971");
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Administration", 1);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.goToDealSummaryGeneralTabDetails();
+            steps.editDealGeneral.editExistingContractingParty();
         }
     }
 ];

@@ -19,7 +19,9 @@ if (pages.deal === undefined) {
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm']"},
             relatedDealsHeaderLink: {css: "a[data-ng-click='showRelatedDealsPage()']"},
-            relatedDealsTitle: {css: "div.related-section.ng-scope h2"}
+            relatedDealsTitle: {css: "div.related-section.ng-scope h2"},
+            dealSummaryHeaderLink: {css: "a[data-ng-click='showDealSummaryPage()']"},
+            dealSummaryTitle: {css: "div.FORM.summary-section.clearfix.ng-scope h2"}
         },
 
 
@@ -83,6 +85,10 @@ if (pages.deal === undefined) {
 
         goToRelatedDealsGeneral: function () {
             pages.deal.elems.relatedDealsHeaderLink.click();
+        },
+
+        goToDealSummaryGeneral: function () {
+            pages.deal.elems.dealSummaryHeaderLink.click();
         },
 
         printTheDealNumber: function(){

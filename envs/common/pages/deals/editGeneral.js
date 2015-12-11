@@ -7,6 +7,15 @@ if (pages.editDealGeneral === undefined) {
     pages.editDealGeneral = new ftf.pageObject({
 
         locators: {
+            editGeneralLeftFirstFourFieldsArea: {css: "div[data-tg-modular-edit-id='generalLeft']"},
+            editGeneralLeftFirstFourFieldsEditorIcon: {css: "div[data-tg-modular-edit-id='generalLeft'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
+            removeExistingContractPartyIcon: {css: "span[ng-click='!$isDisabled() && $removeTag($tag)']"},
+            contractingPartyElement: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
+            contractingPartyInputField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editExecutionDateYearElement: {css: "input[data-ng-model='date.year']"},
+            saveEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+
+
             internalContactTitle: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2"},
             internalContactsArea: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3)"},
             internalContactTableData: {css: "table.view-internal-contact tbody"},
@@ -141,7 +150,36 @@ if (pages.editDealGeneral === undefined) {
 
         clickOnNoModalDialog: function () {
             pages.editDealGeneral.elems.noModalDialog.click();
-        }
+        },
 
+        editTheGeneralTabFirstLeftElements: function () {
+            pages.base.scrollIntoView(pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea);
+            pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea.click();
+            pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsEditorIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editExecutionDateYearElement));
+        },
+
+        editRemoveTheExistingContractingParty: function () {
+            pages.editDealGeneral.elems.removeExistingContractPartyIcon.click();
+        },
+
+        editFillIntoTheContractingParty: function (contracting) {
+            pages.editDealGeneral.elems. contractingPartyElement.click();
+            pages.editDealGeneral.elems. contractingPartyInputField.sendKeys(contracting);
+        },
+
+        editSelectRandomValueDropDownContractingParty: function(){
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
+
+        clickOnTheSaveEditGeneralLeftTabArea: function(){
+            pages.editDealGeneral.elems. saveEditLeftGeneralTabArea.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
+        }
     });
 }

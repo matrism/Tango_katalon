@@ -118,6 +118,13 @@ exports.goToRelatedDealsGeneralTabDetails = function () {
     });
 };
 
+exports.goToDealSummaryGeneralTabDetails = function () {
+    it("Click on deal summary general link ", function () {
+        pages.deal.goToDealSummaryGeneral();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealSummaryTitle));
+    });
+};
+
 exports.goToIncomeRatesPage = function () {
     it("Go to Income Rates Summary Page", function () {
         pages.deal.clickIncomeRatesLink();

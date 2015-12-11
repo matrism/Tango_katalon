@@ -209,11 +209,6 @@ exports.openTheNewTab = function(url) {
 exports.focusOnNewOpenedTab = function(i){
     it("Focus on the new opened tab ", function(){
         pages.base.focusOnTheNewOpenedTab(i);
-        //return browser.getAllWindowHandles().then(function (handles) {
-        //    browser.switchTo().window(handles[i]);
-        //}).then(function () {
-        //    return browser.wait(ExpectedConditions.visibilityOf($('body')));
-        //});
     });
 };
 
