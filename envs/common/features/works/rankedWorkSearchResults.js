@@ -89,11 +89,12 @@ exports.feature = [
     },
     {
         name: 'Search by work title (exact match)',
-        tags: ['blah'],
+        tags: [],
         steps: [
             [function () {
                 data.searchDataByExactTitleMatch.forEach(function (searchData) {
                     steps.base.goToHomePage();
+                    steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms('"' + searchData.terms + '"');
                     steps.base.waitForAjax();
@@ -119,6 +120,7 @@ exports.feature = [
             [function () {
                 data.searchDataByPartialTitleMatch.forEach(function (searchData) {
                     steps.base.goToHomePage();
+                    steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms(searchData.terms);
                     steps.base.waitForAjax();
@@ -144,6 +146,7 @@ exports.feature = [
             [function () {
                 data.searchDataByCreatorMatch1.forEach(function (searchData) {
                     steps.base.goToHomePage();
+                    steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Creator');
                     steps.work.enterWorkSearchTerms(searchData.terms);
                     steps.base.waitForAjax();
@@ -169,6 +172,7 @@ exports.feature = [
             [function () {
                 data.searchDataByCreatorMatch2.forEach(function (searchData) {
                     steps.base.goToHomePage();
+                    steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Creator');
                     steps.work.enterWorkSearchTerms(searchData.terms);
                     steps.base.waitForAjax();
@@ -194,6 +198,7 @@ exports.feature = [
             [function () {
                 data.searchDataByExactTitleAndCreator.forEach(function (searchData) {
                     steps.base.goToHomePage();
+                    steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms('"' + searchData.titleTerms + '"');
                     steps.base.waitForAjax();
@@ -223,6 +228,7 @@ exports.feature = [
             [function () {
                 data.searchDataByPartialTitleAndCreator.forEach(function (searchData) {
                     steps.base.goToHomePage();
+                    steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms(searchData.titleTerms);
                     steps.base.waitForAjax();
