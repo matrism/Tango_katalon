@@ -13,7 +13,7 @@ if (pages.royaltyRates === undefined) {
             confirmCancelButton: {css: ".modal-footer>.btn-primary"},
             RRNameLabel: {css: ".rate-set-entity-name>div>label"},
             incomeProvidesLabel: {css: ".flex1>label"},
-            incomeProviderInput: {css: ".ux-multiselect-type"},
+            incomeProviderInput: { css: ".tg-typeahead__input" },
             incomeDateMethodLabel: {css: ".flex1>div:nth-child(2)>div:not([class])>label"},
             effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
             contractualRateLabel: {css: ".rate-set-rate-field>label"},
@@ -414,9 +414,9 @@ if (pages.royaltyRates === undefined) {
 
         closeRoyaltySet: function () {
             pages.royaltyRates.elems.closeRateSetButton.click();
-
-            ftf.helper.waitForElement(pages.royaltyRates.elems.confirmCancelButton, 30000);
-            pages.royaltyRates.elems.confirmCancelButton.click();
+            // on create, if closing, then no confirm comes up
+            //ftf.helper.waitForElement(pages.royaltyRates.elems.confirmCancelButton, 30000);
+            //pages.royaltyRates.elems.confirmCancelButton.click();
         },
 
         clearRoyaltyRateNameInput: function () {
