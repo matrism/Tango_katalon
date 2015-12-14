@@ -5,6 +5,12 @@ var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.editDealScope = exports;
 
+exports.editScopeArea = function(){
+  it("Edit the scope area ", function(){
+     pages.editDealScope.editTheScopeArea();
+  });
+};
+
 exports.selectScope1 = function () {
     it("Select scope 1", function () {
         pages.editDealScope.clickOnScope1();
@@ -565,6 +571,13 @@ exports.editClickOnYesSocietyAwardCreditPublisherShareSet = function () {
         pages.editDealScope.waitForAjax();
         var test = pages.editDealScope.elems.editYesSocietyAwardCreditPss.getAttribute("class").toString();
         expect(test.indexOf("active") != -1);
+    });
+};
+
+exports.editSpecificScopeType = function (contractType) {
+    it("Add simple scope", function () {
+        pages.editDealScope.selectContractTypeScope(contractType);
+        pages.editDealScope.waitForAjax();
     });
 };
 

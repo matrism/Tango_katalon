@@ -98,6 +98,20 @@ exports.goToTermsDealTabDetails = function () {
     });
 };
 
+exports.goToContractPeriodsAndScopesTermsTabDetails = function () {
+    it("Click on contract periods and scopes terms link ", function () {
+        pages.deal.goToTheContractPeriodsAndScopesHeaderLink();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.contractPeriodsTitle));
+    });
+};
+
+exports.goToRightsTermPeriodsTermsTabDetails = function () {
+    it("Click on rights term periods terms link ", function () {
+        pages.deal.goToTheRightsTermPeriodsHeaderLink();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.addAnotherRightsTermPeriodLink));
+    });
+};
+
 exports.expectTermsDetailsAreOk = function () {
     it("Expect terms tab is opened successfully ", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealTermsSummaryHeader));
