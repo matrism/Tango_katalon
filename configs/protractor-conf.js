@@ -86,16 +86,16 @@ config = {
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes,
-            failFast = require('jasmine-fail-fast'),
+            //failFast = require('jasmine-fail-fast'),
             beforeReporter = require('../helpers/beforeReporter');
 
         global.promise = protractor.promise;
         global.ExpectedConditions = protractor.ExpectedConditions;
         global.EC = ExpectedConditions;
 
-        if (systemConfig.failFast) {
-            jasmine.getEnv().addReporter(failFast.init());
-        }
+        //if (systemConfig.failFast) {
+        //    jasmine.getEnv().addReporter(failFast.init());
+        //}
 
         //jasmine.getEnv().addReporter(beforeReporter);
 
