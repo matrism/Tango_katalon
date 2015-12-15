@@ -255,7 +255,7 @@ function Jasmine2ScreenShotReporter(opts) {
                 });
             });
         }, function(error) {
-            console.error('Caught screenshot taking exception, ignoring:', error);
+            console.error('Caught screenshot taking exception, ignoring:', error.message);
         });
     };
 
