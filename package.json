@@ -5,7 +5,7 @@
     "main": "configs/protractor-conf.js",
     "scripts": {
         "test": "./start.sh",
-        "postinstall": "cd custom-deps && install.sh"
+        "postinstall": "cd custom-deps && ./install.sh"
     },
     "keywords": [
         "testing",
