@@ -108,6 +108,7 @@ exports.goToContractPeriodsAndScopesTermsTabDetails = function () {
 exports.goToRightsTermPeriodsTermsTabDetails = function () {
     it("Click on rights term periods terms link ", function () {
         pages.deal.goToTheRightsTermPeriodsHeaderLink();
+        pages.deal.waitForAjax();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.addAnotherRightsTermPeriodLink));
     });
 };

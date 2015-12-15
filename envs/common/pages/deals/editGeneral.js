@@ -153,7 +153,8 @@ if (pages.editDealGeneral === undefined) {
             },
 
             editTheGeneralTabFirstLeftElements: function () {
-                pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea.click();
+                browser.actions().mouseMove(pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea).perform();
+                //pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea.click();
                 pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsEditorIcon.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editExecutionDateYearElement));
             },
@@ -184,17 +185,18 @@ if (pages.editDealGeneral === undefined) {
             editFillIntoTheValidExecutionDateMonth: function () {
                 var number = Math.floor(Math.random() * 12) + 1;
                 pages.editDealGeneral.elems.editExecutionDateMonthElement.clear();
-                pages.editDealGeneral.elems.editExecutionDateMonthElement.sendKeys(number);
+                pages.editDealGeneral.elems.editExecutionDateMonthElement.sendKeys("07");
             },
 
             editFillIntoTheValidExecutionDateDay: function () {
                 var number = Math.floor(Math.random() * 28) + 1;
                 pages.editDealGeneral.elems.editExecutionDateDayElement.clear();
-                pages.editDealGeneral.elems.editExecutionDateDayElement.sendKeys(number);
+                pages.editDealGeneral.elems.editExecutionDateDayElement.sendKeys("07");
             },
 
             clickOnTheSaveEditGeneralLeftTabArea: function () {
                 pages.editDealGeneral.elems. saveEditLeftGeneralTabArea.click();
+                pages.editDealGeneral.waitForAjax();
                 browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.contractingPartyElement));
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
             }

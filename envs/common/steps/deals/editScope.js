@@ -565,6 +565,12 @@ exports.editClickOnAddPublisherShareSet = function () {
     });
 };
 
+exports.editSaveScopeChanges = function(){
+    it("Edit save the scope changes ", function () {
+       pages.editDealScope.editSaveTheScopeChanges();
+    });
+};
+
 exports.editClickOnYesSocietyAwardCreditPublisherShareSet = function () {
     it("Click on the yes society award credit pss and check it is selected", function () {
         pages.editDealScope.editClickOnTheYesSocietyAwardCreditPublisherShareSet();

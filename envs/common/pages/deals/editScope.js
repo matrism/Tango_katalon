@@ -10,9 +10,9 @@ if (pages.editDealScope === undefined) {
             editScopeIcon: {css: "div[data-tg-modular-edit-id='dealScope'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
-            territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
-            territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            editTerritoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
+            editTerritoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editTerritoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
             publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.DETAIL.ng-scope"},
             publisherSharesSetEditIcon: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
@@ -45,6 +45,7 @@ if (pages.editDealScope === undefined) {
             shareScopeTextIcons: {css: "div[data-ng-show='isPublisherShareSetShared(form.terms.activePublisherShareSet.id)']"},
             shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
             shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
+            saveEditScope: {css: "div[data-tg-modular-edit-id ='dealScope'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
             editShareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
             editFirstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
@@ -82,7 +83,7 @@ if (pages.editDealScope === undefined) {
         editTheScopeArea: function () {
             pages.editDealScope.elems.editScopeAreaElement.click();
             pages.editDealScope.elems.editScopeIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.territoryField))
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryField))
         },
 
         addScopeForm: function () {
@@ -112,14 +113,14 @@ if (pages.editDealScope === undefined) {
         },
 
         addTheSpecificTerritoryByTypingToScope: function (territory) {
-            pages.editDealScope.elems.territoryField.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.territoryInput));
-            pages.editDealScope.elems.territoryInput.sendKeys(territory);
+            pages.editDealScope.elems.editTerritoryField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryInput));
+            pages.editDealScope.elems.editTerritoryInput.sendKeys(territory);
         },
 
         selectSpecificCountry: function (country) {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.territoryDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryDropDown));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -151,6 +152,12 @@ if (pages.editDealScope === undefined) {
 
         clickOnScope1: function () {
             pages.editDealScope.elems.scope1.click();
+        },
+
+        editSaveTheScopeChanges: function () {
+            pages.editDealScope.elems.saveEditScope.click();
+            pages.editDealScope.waitForAjax();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
         },
 
         clickOnScopeNumberI: function (i) {

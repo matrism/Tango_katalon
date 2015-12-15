@@ -199,25 +199,31 @@ exports.editContractExecutionDate = function () {
     });
 };
 
-exports.editGeneralTabFirstElementsLeftArea = function(){
-  it("Edit the general tab first elements left area ", function () {
-      pages.editDealGeneral.editTheGeneralTabFirstLeftElements();
-  });
+exports.editGeneralTabFirstElementsLeftArea = function () {
+    it("Edit the general tab first elements left area ", function () {
+        pages.editDealGeneral.editTheGeneralTabFirstLeftElements();
+    });
 };
 
-exports.editExistingContractingParty = function () {
-    it("Edit existing contracting party - remove and add new one ", function editRemoveTheExistingContractingParty() {
+exports.editRemoveTheExistingContractingParty = function () {
+    it("Edit remove existing contracting party", function () {
         pages.editDealGeneral.editRemoveTheExistingContractingParty();
-        pages.editDealGeneral.editFillIntoTheContractingParty("music");
+    });
+};
+
+exports.editExistingContractingParty = function (contracting) {
+    it("Edit existing contracting party -  add new one ", function () {
+        pages.editDealGeneral.editFillIntoTheContractingParty(contracting);
         pages.editDealGeneral.editSelectRandomValueDropDownContractingParty();
+        pages.editDealGeneral.waitForAjax();
     });
 };
 
 exports.saveEditGeneralTabFirstElementsLeftArea = function () {
-  it("Save edit general tab first elements left area ", function(){
-      pages.editDealGeneral.clickOnTheSaveEditGeneralLeftTabArea();
-      pages.editDealGeneral.waitForAjax();
-  });
+    it("Save edit general tab first elements left area ", function () {
+        pages.editDealGeneral.clickOnTheSaveEditGeneralLeftTabArea();
+        pages.editDealGeneral.waitForAjax();
+    });
 };
 
 exports.itEditInternalContactsToDealGeneralTab = function (internal_contact) {
