@@ -24,6 +24,7 @@
         "jsftp": "^1.5.2",
         "jasmine-reporters": "~2.0.5",
         "jasmine-spec-reporter": "^2.4.0",
+        "protractor-jasmine2-screenshot-reporter": "^0.1.7",
         "karma": "~0.12",
         "karma-coverage": "~0.2",
         "karma-jasmine": "~0.1",
