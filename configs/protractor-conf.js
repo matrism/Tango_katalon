@@ -110,6 +110,10 @@ config = {
         browser.driver.manage().timeouts().setScriptTimeout(15000);
         browser.driver.manage().window().maximize();
 
+        browser.driver.manage().window().getSize().then(function (size) {
+            console.log('Browser window size:' + JSON.stringify(size));
+        });
+
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {
             if (timeout === undefined || timeout === null) {
@@ -139,17 +143,18 @@ config = {
             }, timeout);
         };
 
-        setTimeout(function () {
-            console.log('Current Browser Resolution: ' + browser.driver.manage().window().size);
+        //setTimeout(function () {
+        //    if (systemConfig.resolution.width && systemConfig.resolution.height) {
+        //        browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+        //    } else {
+        //        browser.driver.manage().window().maximize();
+        //    }
 
-            if (systemConfig.resolution.width && systemConfig.resolution.height) {
-                console.log('Reset Browser Resolution: ' + JSON.stringify(systemConfig.resolution));
-                browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
-            } else {
-                console.log('Maximized Browser Window');
-                browser.driver.manage().window().maximize();
-            }
-        });
+        //    browser.driver.manage().window().getSize().then(function (size) {
+        //        console.log('')
+        //        console.log('Browser size:' + JSON.stringify(size));
+        //    });
+        //});
 
         asciiPrefixes = {
             success: '[Pass] ',
