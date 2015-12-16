@@ -93,9 +93,9 @@ config = {
         global.ExpectedConditions = protractor.ExpectedConditions;
         global.EC = ExpectedConditions;
 
-        //if (systemConfig.failFast) {
-        //    jasmine.getEnv().addReporter(failFast.init());
-        //}
+        if (systemConfig.failFast) {
+            jasmine.getEnv().addReporter(failFast.init());
+        }
 
         //jasmine.getEnv().addReporter(beforeReporter);
 
