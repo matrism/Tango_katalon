@@ -23,6 +23,7 @@
     "handlebars": "^4.0.2",
     "http-api-client": "^0.1.8",
     "jsftp": "^1.5.2",
+    "jasmine-fail-fast": "^2.0.0",
     "jasmine-reporters": "~2.0.5",
     "jasmine-spec-reporter": "^2.4.0",
     "karma": "~0.12",
@@ -43,12 +44,13 @@
     "randomstring": "~1.1.0",
     "request": "^2.65.0",
     "tmp": "0.0.27",
-    nderscore": "1.6.0",
+    "underscore": "1.6.0",
     "yamljs": "^0.2.4"
   },
   "optionalDependencies": {
     "http-sync": "latest",
-    "http-sync-win": "latest"
+    "http-sync-win": "latest",
+    "time": "^0.11.4"
   },
   "author": "WMG",
   "license": "ISC"

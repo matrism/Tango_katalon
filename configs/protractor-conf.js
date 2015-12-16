@@ -86,7 +86,7 @@ config = {
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes,
-            //failFast = require('jasmine-fail-fast'),
+            failFast = require('jasmine-fail-fast'),
             beforeReporter = require('../helpers/beforeReporter');
 
         global.promise = protractor.promise;
