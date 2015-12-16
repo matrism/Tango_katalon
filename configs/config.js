@@ -1,12 +1,12 @@
 'use strict';
 var configer = global.ftf.configer,
     cli = configer.getParamsFromCli(),
-    tags = (function() {
+    tags = (function () {
         var tags = (cli.tags || '').toString().split(',');
         var negatedTags = (cli['@tags'] || '').toString().split(',');
 
-        [tags, negatedTags].forEach(function(tags) {
-            if(tags.length === 1 && tags[0] === '') {
+        [tags, negatedTags].forEach(function (tags) {
+            if (tags.length === 1 && tags[0] === '') {
                 tags.length = 0;
             }
         });
@@ -17,8 +17,9 @@ var configer = global.ftf.configer,
     })(),
     env = {
         ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
-    },
-    defaultUserName = 'TangoTest1',
+    };
+
+var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
     config = {
         _default_: {
@@ -29,19 +30,21 @@ var configer = global.ftf.configer,
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1200,
-                height: 600
+                width: 1300,
+                height: 1080
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
             singleReport: cli['single-report'],
             noUnicode: cli['no-unicode'],
-            path_to_features: __dirname + '/../features/',
-            path_to_steps: __dirname + '/../steps/',
-            path_to_pages: __dirname + '/../pages/',
-            env_name: env.ENV_TYPE,
+            path_to_features: [],
+            path_to_steps: [],
+            path_to_pages: [],
             wait_timeout: cli.timeout || 60000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false,
+            buildNumber: cli.build,
+            branch: cli.branch,
+            commitHash: cli.commit,
             tags: tags,
             legacyOverrides: {
                 stagingPerson: {
@@ -54,6 +57,10 @@ var configer = global.ftf.configer,
                 },
             },
             dontSkipBroken: cli['dont-skip-broken'],
+            failFast: cli['fail-fast'],
+            noUpload: cli['no-upload'],
+            orphanOnError: cli['orphan-on-error'],
+            demoReporter: cli['demo-reporter']
         },
         _env_: env,
         localhost: {
@@ -94,7 +101,12 @@ var configer = global.ftf.configer,
         }
     };
 
-    config._system_.noReport = cli['no-report'];
+config._system_.env = {
+    name: env.ENV_TYPE,
+    url: config[env.ENV_TYPE].urls.app_url
+};
+
+config._system_.noReport = cli['no-report'];
 
 config = configer.process(config);
 

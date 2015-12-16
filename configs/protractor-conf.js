@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path'),
+    glob = require('glob'),
     _ = require('lodash'),
     glob = require('glob'),
     mkdirp = require ('mkdirp'),
@@ -12,9 +13,12 @@ var path = require('path'),
     tmp = require('tmp'),
     config,
     SSReporter_instance,
+    enhanceHtmlReport = require('../tools/enhanceHtmlReport'),
+    SnapbackReporter = require('../tools/enhanceHtmlReport/SnapbackReporter'),
+    orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
+    demoReporter = require('../tools/demoReporter'),
     reporterFilePath,
-    reporterFileName = 'reporter.htm', 
-    reportImprovementFilePath;
+    reporterFileName = 'reporter.htm';
 
 global.ftf = require('factory-testing-framework');
 global._tf_config = require('./config');
@@ -24,7 +28,7 @@ global.hash = {};
 
 hash.testVariables = {};
 
-require('../helpers/services_helper');
+require('../helpers');
 
 global.systemConfig = global._tf_config._system_;
 
@@ -33,8 +37,7 @@ if (!systemConfig.noReport) {
 
     if(systemConfig.singleReport) {
         screenShotPath = path.join(screenShotPath, 'single/');
-    }
-    else {
+    } else {
         screenShotPath = path.join(screenShotPath, now);
     }
 
@@ -77,19 +80,43 @@ config = {
         console.time('Tests time');
         var reporting = systemConfig.reporting,
             pph = require('../helpers/pph'),
+            testFiles = require('./files.js'),
             matchers,
             browserWait,
             SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
-            asciiPrefixes;
+            asciiPrefixes,
+            failFast = require('jasmine-fail-fast'),
+            beforeReporter = require('../helpers/beforeReporter');
+
+        global.promise = protractor.promise;
+        global.ExpectedConditions = protractor.ExpectedConditions;
+        global.EC = ExpectedConditions;
+
+        if (systemConfig.failFast) {
+            jasmine.getEnv().addReporter(failFast.init());
+        }
+
+        //jasmine.getEnv().addReporter(beforeReporter);
+
+        // set path to features in config
+        systemConfig.path_to_features = testFiles.features;
+
+        // require all pages and steps files
+        testFiles.pages.concat(testFiles.steps).forEach(function (filePath) {
+            require(filePath);
+        });
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
+        browser.driver.manage().window().maximize();
 
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {
-            if(timeout === undefined || timeout === null) {
+            if (timeout === undefined || timeout === null) {
                 timeout = systemConfig.wait_timeout;
             }
+
+            timeout = parseInt(timeout);
 
             options = options || {};
 
@@ -112,10 +139,13 @@ config = {
             }, timeout);
         };
 
-        if (systemConfig.resolution.width && systemConfig.resolution.height) {
-            browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
-            browser.driver.manage().window().maximize();
-        }
+        setTimeout(function(){
+            if (systemConfig.resolution.width && systemConfig.resolution.height) {
+                browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+            } else {
+                browser.driver.manage().window().maximize();
+            }
+        });
 
         asciiPrefixes = {
             success: '[Pass] ',
@@ -124,22 +154,37 @@ config = {
         };
 
         jasmine.getEnv().addReporter(new SpecReporter({
-            displayStacktrace: 'all',
+            displayStacktrace: 'specs',
+            displayFailuresSummary: false,
+            displaySpecDuration: true,
             prefixes: systemConfig.noUnicode? asciiPrefixes : null,
         }));
+
+        if (systemConfig.demoReporter) {
+            jasmine.getEnv().addReporter(demoReporter);
+        }
 
         if (reporting === 'xml' || reporting === 'all') {
             jasmineReporters = require('jasmine-reporters');
 
             jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
-                consolidateAll: true,
-                savePath: 'tests/e2e/reports/xml',
-                useDotNotation: true
+                consolidateAll: false,
+                savePath: 'reports/xml',
+                useDotNotation: true,
+                filePrefix: (new Date).getTime() + '-'  // makes it unique when running tests in parallel
             }));
         }
 
         if (SSReporter_instance && (reporting === 'html' || reporting === 'all')) {
             jasmine.getEnv().addReporter(SSReporter_instance);
+
+            jasmine.getEnv().addReporter(new SnapbackReporter({
+                dest: screenShotPath
+            }));
+        }
+
+        if(systemConfig.orphanOnError) {
+            jasmine.getEnv().addReporter(orphanOnErrorReporter);
         }
 
         if (typeof process.env.__using_grunt === 'undefined') {
@@ -170,24 +215,6 @@ config = {
 
         global.Typeahead = require('../helpers/typeahead.js');
         global.TgDropdown = require('../helpers/tgDropdown.js');
-        global.pages_path = _tf_config._system_.path_to_pages;
-        global.steps_path = _tf_config._system_.path_to_steps;
-
-        // TODO: Use new overrides structure when it's ready.
-        _.each(systemConfig.legacyOverrides, function(overrides, name) {
-            if(systemConfig.tags.indexOf(name) === -1) {
-                return;
-            }
-
-            _.each(overrides, function(legacyVersion, target) {
-                console.log('Override', target, 'with', legacyVersion + '.');
-
-                require('../steps/' + target);
-                require('../steps/' + legacyVersion);
-
-                steps[target] = steps[legacyVersion];
-            });
-        });
 
         function makeBrokenTestSteps(description) {
             return function() {
@@ -239,10 +266,21 @@ config = {
                 //console.error('Error on compileReport: ', e.stack);
             }
         }*/
-        
-        // Append the script improvements to the html report
-        reportImprovementFilePath = path.join(__dirname, '../tools/improve-html-reports.js');
-        fs.appendFileSync(reporterFilePath, fs.readFileSync(reportImprovementFilePath));
+
+        if(!systemConfig.noReport) {
+            enhanceHtmlReport(reporterFilePath, {
+                startDate: now,
+                env: systemConfig.env,
+                buildNumber: systemConfig.buildNumber,
+                branch: systemConfig.branch,
+                commit: {
+                    hash: systemConfig.commitHash,
+                    shortHash: systemConfig.commitHash ? systemConfig.commitHash.slice(0, 7) : ''
+                },
+                includedTagsString: systemConfig.tags.join(', '),
+                excludedTagsString: systemConfig.tags.negated.join(', ')
+            });
+        }
 
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
@@ -250,16 +288,14 @@ config = {
     framework: 'jasmine2',
     jasmineNodeOpts: {
         showColors: true,
-        defaultTimeoutInterval: 600000,
+        defaultTimeoutInterval: 10 * 60 * 1000,
         print: function(){}
     }
 };
 
 if (systemConfig.seleniumAddress) {
     config.seleniumAddress = systemConfig.seleniumAddress;
-
-}
-else {
+} else {
     config.directConnect = systemConfig.directConnect;
 }
 
