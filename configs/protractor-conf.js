@@ -140,13 +140,13 @@ config = {
         };
 
         setTimeout(function () {
-            console.log(systemConfig.resolution);
+            console.log('Current Browser Resolution: ' + browser.driver.manage().window().size);
 
             if (systemConfig.resolution.width && systemConfig.resolution.height) {
-                console.log('resetting window');
+                console.log('Reset Browser Resolution: ' + JSON.stringify(systemConfig.resolution));
                 browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
             } else {
-                console.log('maximizing window');
+                console.log('Maximized Browser Window');
                 browser.driver.manage().window().maximize();
             }
         });
