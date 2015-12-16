@@ -174,7 +174,8 @@ if (pages.editDealGeneral === undefined) {
                     .then(function (options) {
                         var randomNumber = Math.floor((Math.random() * options.length));
                         options[randomNumber].click();
-                    })
+                    });
+                pages.editDealGeneral.waitForAjax();
             },
 
             editFillIntoTheValidExecutionDateYear: function () {

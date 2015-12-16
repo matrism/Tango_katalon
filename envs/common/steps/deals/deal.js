@@ -94,6 +94,7 @@ exports.goToGeneralDealTabDetails = function () {
 exports.goToTermsDealTabDetails = function () {
     it("Click on terms header and go to terms deal tab details ", function () {
         pages.deal.goToTermsDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.contractPeriodsScopesHeaderLink));
         pages.deal.waitForAjax();
     });
 };

@@ -102,6 +102,12 @@ if (pages.relatedDeal === undefined) {
             pages.relatedDeal.elems.contractingPartiesInputField.sendKeys(contracting);
         },
 
+        fillIntoTheContractingPartiesFieldSpecificValueRowNumberI: function (contracting, i) {
+
+            pages.relatedDeal.elems.contractingPartiesField.click();
+            pages.relatedDeal.elems.contractingPartiesInputField.sendKeys(contracting);
+        },
+
         clearIntoTheContractingPartiesField: function (ocntracting) {
             pages.relatedDeal.elems.contractingPartiesField.click();
             pages.relatedDeal.elems.contractingPartiesInputField.clear();
