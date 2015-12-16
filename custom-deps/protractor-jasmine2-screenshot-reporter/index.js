@@ -228,34 +228,36 @@ function Jasmine2ScreenShotReporter(opts) {
         spec.filename = file + '.png';
         spec = getSpecClone(spec);
 
-        browser.takeScreenshot().then(function (png) {
-            browser.getCapabilities().then(function (capabilities) {
-                var screenshotPath,
-                    metadataPath,
-                    metadata;
+        return retryPromise(function() {
+            return browser.takeScreenshot().then(function (png) {
+                browser.getCapabilities().then(function (capabilities) {
+                    var screenshotPath,
+                        metadataPath,
+                        metadata;
 
-                screenshotPath = path.join(opts.dest, spec.filename);
-                metadata       = opts.metadataBuilder(spec, suites, capabilities);
+                    screenshotPath = path.join(opts.dest, spec.filename);
+                    metadata       = opts.metadataBuilder(spec, suites, capabilities);
 
-                if (metadata) {
-                    metadataPath = path.join(opts.dest, file + '.json');
-                    mkdirp(path.dirname(metadataPath), function(err) {
-                        if(err) {
-                            throw new Error('Could not create directory for ' + metadataPath);
-                        }
-                        writeMetadata(metadata, metadataPath);
-                    });
-                }
-
-                mkdirp(path.dirname(screenshotPath), function(err) {
-                    if(err) {
-                        throw new Error('Could not create directory for ' + screenshotPath);
+                    if (metadata) {
+                        metadataPath = path.join(opts.dest, file + '.json');
+                        mkdirp(path.dirname(metadataPath), function(err) {
+                            if(err) {
+                                throw new Error('Could not create directory for ' + metadataPath);
+                            }
+                            writeMetadata(metadata, metadataPath);
+                        });
                     }
-                    writeScreenshot(png, spec.filename);
+
+                    mkdirp(path.dirname(screenshotPath), function(err) {
+                        if(err) {
+                            throw new Error('Could not create directory for ' + screenshotPath);
+                        }
+                        writeScreenshot(png, spec.filename);
+                    });
                 });
             });
-        }, function(error) {
-            console.error('Caught screenshot taking exception, ignoring:', error.message);
+        }, 3, 'Screenshot taking for report').then(null, function(error) {
+            console.error('Non-critical errors ignored:', error.message);
         });
     };
 
@@ -342,6 +344,36 @@ function Jasmine2ScreenShotReporter(opts) {
       }
 
       return reasonsTemplate({ reasons: spec.failedExpectations });
+    }
+
+    function retryPromise(fn, maxRetries, description, errors) {
+      errors = errors || [];
+
+      description = description || 'Promise';
+
+      return promise.when(fn()).then(null, function(error) {
+        var compositeErrorMsg;
+
+        errors.push(error);
+
+        if(errors.length >= maxRetries) {
+          compositeErrorMsg = 'Maximum number of retries exhausted (' + maxRetries + '):';
+
+          errors.forEach(function(error, i) {
+            compositeErrorMsg += '\n#' + i + ': ' + error.message;
+          });
+
+          throw new Error(compositeErrorMsg);
+        }
+        else {
+            console.error(
+                description,
+                'has failed: Retrying (' + errors.length + ' of ' + maxRetries + ').'
+            );
+
+          return retryPromise(fn, maxRetries, description, errors);
+        }
+      });
     }
 
     return this;
