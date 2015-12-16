@@ -111,7 +111,15 @@ config = {
         browser.driver.manage().window().maximize();
 
         browser.driver.manage().window().getSize().then(function (size) {
-            console.log('Browser window size:' + JSON.stringify(size));
+            if (systemConfig.resolution.width && systemConfig.resolution.height && (size.width < systemConfig.resolution.width || size.height < systemConfig.resolution.height)) {
+                browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+
+                browser.driver.manage().window().getSize().then(function (size) {
+                    console.log('Browser window size:' + JSON.stringify(size));
+                });
+            } else {
+                console.log('Browser window size:' + JSON.stringify(size));
+            }
         });
 
         browserWait = browser.wait;
