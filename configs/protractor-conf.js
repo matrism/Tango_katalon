@@ -139,10 +139,14 @@ config = {
             }, timeout);
         };
 
-        setTimeout(function(){
+        setTimeout(function () {
+            console.log(systemConfig.resolution);
+
             if (systemConfig.resolution.width && systemConfig.resolution.height) {
+                console.log('resetting window');
                 browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
             } else {
+                console.log('maximizing window');
                 browser.driver.manage().window().maximize();
             }
         });
