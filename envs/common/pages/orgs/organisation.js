@@ -708,12 +708,14 @@ if (pages.organisation === undefined) {
         resetWork: function (runDate, recipient) {
             console.log('Resetting Work');
 
-            var enviroinment = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works';
+            var url = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works?recipient=' + recipient + '&runDate=' + runDate;
+            console.log(url);
 
             return client.request({
-                url: enviroinment + '?recipient=' + recipient + '&runDate=' + runDate,
+                url: url,
                 method: 'POST'
             }).then(function (response) {
+                console.log(response.getStatusCode());
                 return response.getStatusCode();
             });
         },

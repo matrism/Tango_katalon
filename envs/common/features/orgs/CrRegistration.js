@@ -1,10 +1,10 @@
 "use strict";
 
+exports.commonFeatureTags = [""];
+
 exports.beforeFeature = function() {
     steps.login.itLogin();
 };
-
-exports.commonFeatureTags = [""];
 
 exports.feature = [
     {
@@ -36,5 +36,4 @@ exports.feature = [
             steps.registrationFileActivity.verifyDetails();
         }
     }
-
 ];
