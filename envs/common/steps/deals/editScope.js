@@ -808,6 +808,12 @@ exports.clickOnShareRoyaltyRatesInCopyScopeModal = function () {
     });
 };
 
+exports.editSaveAllChanges = function(){
+    it("Edit save all changes ", function () {
+        pages.editDealScope.editSaveTheChangesPage();
+    });
+};
+
 exports.itAddSimpleSocietyAgreementNumbers = function () {
     describe("Add a simple society agreement number ", function () {
         steps.editDealScope.clickOnAddSocietyAgreementNumbersLink();

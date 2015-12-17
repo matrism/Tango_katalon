@@ -103,9 +103,8 @@ if (pages.relatedDeal === undefined) {
         },
 
         fillIntoTheContractingPartiesFieldSpecificValueRowNumberI: function (contracting, i) {
-
-            pages.relatedDeal.elems.contractingPartiesField.click();
-            pages.relatedDeal.elems.contractingPartiesInputField.sendKeys(contracting);
+            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") #related_deal_typeahead div[ng-class='tgTypeaheadWrapClass']")).click();
+            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") #related_deal_typeahead div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']")).sendKeys(contracting);
         },
 
         clearIntoTheContractingPartiesField: function (ocntracting) {
@@ -140,7 +139,7 @@ if (pages.relatedDeal === undefined) {
             pages.relatedDeal.elems.cancelRelatedDealButton.click();
         },
 
-        editTheRelatedDealForm : function(){
+        editTheRelatedDealForm: function () {
             pages.relatedDeal.elems.editRelatedDealArea.click();
             pages.relatedDeal.elems.editRelatedDealIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.relatedDeal.elems.saveRelatedDealButton));

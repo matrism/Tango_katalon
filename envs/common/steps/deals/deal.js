@@ -169,7 +169,23 @@ exports.refreshThePage = function () {
     });
 };
 
+exports.checkContractPeriodsAndScopesHeaderTitlePresent = function(){
+ it("Check that contract periods and scopes header title is present ", function(){
+     expect(pages.deal.elems.contractPeriodsScopesHeaderLink.isDisplayed()).toBeTruthy();
+ });
+};
 
+exports.checkRightsTermPeriodsHeaderTitlePresent = function(){
+    it("Check that rights term periods header title is present ", function(){
+        expect(pages.deal.elems.rightsTermPeriodsHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};
+
+exports.checkFinderDealsHeaderTitlePresent = function(){
+    it("Check that finder deals header title is present ", function(){
+        expect(pages.deal.elems.finderDealsHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};
 
 
 

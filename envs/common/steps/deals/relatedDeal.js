@@ -78,6 +78,14 @@ exports.selectRandomContractingPartyRelatedDeals = function () {
     });
 };
 
+exports.selectSpecificContractingPartyRelatedDealsTowNumberI = function (contracting, i) {
+    it("Select random value for contracting party related dealsnumber " + i, function () {
+        pages.relatedDeal.fillIntoTheContractingPartiesFieldSpecificValueRowNumberI(contracting, i);
+        pages.relatedDeal.selectTheRandomContractingPartyRelatedDeal();
+        pages.relatedDeal.waitForAjax();
+    });
+};
+
 exports.selectSpecificContractingPartyRelatedDeals = function (contracting) {
     it("Select random value for contracting party related deals ", function () {
         pages.relatedDeal.fillIntoTheContractingPartiesFieldSpecificValue(contracting);
