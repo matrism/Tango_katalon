@@ -709,7 +709,6 @@ if (pages.organisation === undefined) {
             console.log('Resetting Work');
 
             var url = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works?recipient=' + recipient + '&runDate=' + runDate;
-            console.log(url);
 
             return client.request({
                 url: url,

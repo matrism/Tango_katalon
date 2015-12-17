@@ -41,7 +41,7 @@ exports.goToGeneralTab = function() {
 };
 
 exports.navigationTab = function () {
-    return $(".nav-tabs");
+    return $('.nav-tabs');
 };
 
 exports.previewRegistrationRunTab = function() {
@@ -687,19 +687,19 @@ exports.viewValidationErrors = function() {
 };
 
 exports.getEmailDeliveryMethods = function() {
-    return $$(".e2e-delivery-method-EMAIL");
+    return $$('.e2e-delivery-method-EMAIL');
 };
 exports.getSFTPDeliveryMethods = function() {
-    return $$(".e2e-delivery-method-SFTP");
+    return $$('.e2e-delivery-method-SFTP');
 };
 exports.getFTPDeliveryMethods = function() {
-    return $$(".e2e-delivery-method-FTP");
+    return $$('.e2e-delivery-method-FTP');
 };
 exports.getThirdPartyDeliveryMethods = function() {
-    return $$(".e2e-delivery-method-THIRDPARTY");
+    return $$('.e2e-delivery-method-THIRDPARTY');
 };
 exports.sfptDeliveryMethodName = function(deliveryMethod) {
-    return deliveryMethod.$$(".control-group>.controls>strong").first();
+    return deliveryMethod.$$('.control-group>.controls>strong').first();
 };
 exports.sftpDeliveryMethodAddress = function(deliveryMethod) {
     return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.host"]');
@@ -708,22 +708,22 @@ exports.sftpDeliveryMethodPort = function(deliveryMethod) {
     return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.port"]');
 };
 exports.sftpDeliveryMethodUsername = function(deliveryMethod) {
-    return deliveryMethod.$$(".control-group>.controls>strong").get(1);
+    return deliveryMethod.$$('.control-group>.controls>strong').get(1);
 };
 exports.sftpUnmaskPasswordButton = function(deliveryMethod) {
-    return deliveryMethod.$(".control-group>.controls>.mask-input-password");
+    return deliveryMethod.$('.control-group>.controls>.mask-input-password');
 };
 exports.sftpPassword = function(deliveryMethod) {
     return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.showPassword"]');
 };
 exports.sftpFileFormat = function(deliveryMethod) {
-    return deliveryMethod.$$(".control-group>.controls>strong").get(2);
+    return deliveryMethod.$$('.control-group>.controls>strong').get(2);
 };
 exports.sftpFileFormatStatus = function(deliveryMethod) {
-    return deliveryMethod.$(".control-group>.controls>span.compress-file");
+    return deliveryMethod.$('.control-group>.controls>span.compress-file');
 };
 exports.sftpDeliveryNotificationStatus = function(deliveryMethod) {
-    return deliveryMethod.$$(".control-group>.controls>strong").last();
+    return deliveryMethod.$$('.control-group>.controls>strong').last();
 };
 exports.sfptDeliveryStatusEmail = function(deliveryMethod) {
     return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.primary_emails"]');
@@ -747,14 +747,14 @@ exports.getEmailDeliveryMethodNotification = function (deliveryMethod) {
     return deliveryMethod.$$('div:nth-child(5)>.controls >span').first().getText();
 };
 exports.getIconType = function (event) {
-    return event.$("div>div>span>.icon-exchange").isPresent();
+    return event.$('div>div>span>.icon-exchange').isPresent();
 };
 exports.getWorksText = function (event) {
     pages.base.scrollIntoView(event);
-    return event.$("div>div:nth-child(2)>p>span").getText();
+    return event.$('div>div:nth-child(2)>p>span').getText();
 };
 exports.getWorkIDNumber = function (event) {
-    return event.$(".row-header>div>div:nth-child(2)>div").getText();
+    return event.$('.row-header>div>div:nth-child(2)>div').getText();
 };
 exports.getRunDate = function (event) {
     return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time').getText();
@@ -766,19 +766,19 @@ exports.getEventRunDate = function (event) {
     return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
 };
 exports.registrationRunButton = function () {
-    return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
+    return $('#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child');
 };
 exports.registrationRunHeader = function () {
-    return $(".reg-run-header");
+    return $('.reg-run-header');
 };
 exports.customWorkButton = function () {
-    return $$(".reg-run-header>span>div>div>span>a").first();
+    return $$('.reg-run-header>span>div>div>span>a').first();
 };
 exports.popupRegistrationRun = function () {
-    return $(".popup-reg-run");
+    return $('.popup-reg-run');
 };
 exports.getLastAddedWorkEvent = function () {
-    return $$(".row-header").first();
+    return $$('.row-header').first();
 };
 exports.activeRegistrationRunButton = function () {
     return element(by.cssContainingText(
@@ -786,7 +786,7 @@ exports.activeRegistrationRunButton = function () {
     ));
 };
 exports.iconDownloadAlt = function () {
-    return $(".icon-download-alt");
+    return $('.icon-download-alt');
 };
 exports.modalFooter = function () {
     return $('.modal-footer');
@@ -797,10 +797,10 @@ exports.modalConfirmButton = function () {
     ));
 };
 exports.modalSuccessConfirmButton = function () {
-    return $(".btn.btn-primary.pull-right");
+    return $('.btn.btn-primary.pull-right');
 };
 exports.successModalMessage = function () {
-    return $(".modal-success");
+    return $('.modal-success');
 };
 exports.textWithTotalWorksNumber = function () {
     $('.modal-prompt').getText().then(function (text) {
@@ -808,7 +808,7 @@ exports.textWithTotalWorksNumber = function () {
     })
 };
 exports.elementWork = function () {
-    return $(".DATA-ROW.DATA-CHILD:first-child");
+    return $('.DATA-ROW.DATA-CHILD:first-child');
 };
 exports.executeRegistrationIsActive = function () {
     return this.activeRegistrationRunButton().isPresent();
@@ -888,10 +888,10 @@ exports.successDialogIsPresent = function () {
 exports.resetWork = function (runDate, recipient) {
     console.log('Resetting Work');
 
-    var enviroinment = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works';
+    var url = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works?recipient=' + recipient + '&runDate=' + runDate;
 
     return client.request({
-        url: enviroinment + '?recipient=' + recipient + '&runDate=' + runDate,
+        url: url,
         method: 'POST'
     }).then(function (response) {
         return response.getStatusCode();

@@ -19,8 +19,8 @@ exports.expandLastDeliveredWork = function () {
 };
 
 exports.verifyDetails = function () {
-    it("Verify Delivery Details on Registration File Activity Page", function () {
-        expect(pages.registrationFileActivity.workHasDeliveredStatus()).toBe("Delivered");
+    it('Verify Delivery Details on Registration File Activity Page', function () {
+        expect(pages.registrationFileActivity.workHasDeliveredStatus()).toBe('Delivered');
     })
 };
 
