@@ -861,7 +861,7 @@ exports.popupRegistrationLinkByText = function (text) {
     return element(By.linkText(text));
 };
 exports.clickExecuteRegistrationRunButton = function () {
-    browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
+    browser.wait(ExpectedConditions.elementToBeClickable(this.activeRegistrationRunButton()));
     return this.activeRegistrationRunButton().click();
 };
 exports.numberOfWorks = function () {

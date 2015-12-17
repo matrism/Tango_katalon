@@ -306,10 +306,6 @@ exports.executeRegistrationRun = function (value) {
         pages.organisation.registrationCanBeRun().then(function (isVisible) {
             if (isVisible.toString() == 'true') {
                 pages.organisation.clickExecuteRegistrationRunButton();
-                pages.organisation.confirmModalDialog().then(function () {
-                    browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
-                    pages.organisation.confirmSuccessModal();
-                });
             }
             else {
                 expect(pages.organisation.resetWork('2014-09-01', 'BMI')).toBe(202);
@@ -317,11 +313,16 @@ exports.executeRegistrationRun = function (value) {
                 pages.organisation.clickCustomWorksButton();
                 pages.organisation.selectValueFromPopupRegRun(value);
                 pages.organisation.clickExecuteRegistrationRunButton();
-                pages.organisation.confirmModalDialog().then(function () {
-                    browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
-                    pages.organisation.confirmSuccessModal();
-                });
             }
+        });
+    });
+};
+
+exports.confirmRegistrationRun = function (value) {
+    it('Confirm Registration Run', function () {
+        pages.organisation.confirmModalDialog().then(function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
+            pages.organisation.confirmSuccessModal();
         });
     });
 };
