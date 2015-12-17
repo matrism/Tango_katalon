@@ -714,7 +714,6 @@ if (pages.organisation === undefined) {
                 url: url,
                 method: 'POST'
             }).then(function (response) {
-                console.log(response.getStatusCode());
                 return response.getStatusCode();
             });
         },
