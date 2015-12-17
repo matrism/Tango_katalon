@@ -31,7 +31,7 @@ var defaultUserName = 'TangoTest1',
             directConnect: !cli.selenium,
             resolution: {
                 width: 1360,
-                height: 768
+                height: 1024
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
             singleReport: cli['single-report'],
