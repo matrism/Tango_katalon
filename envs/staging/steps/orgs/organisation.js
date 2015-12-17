@@ -70,7 +70,6 @@ pageStep([
     'Go to Registration Activity tab',
     'Wait for Registration Activity records table to be displayed',
 
-    // TODO: Refactor (TAT-364).
     'Go to General tab',
     'Save organisation delivery methods',
     'Save reg activity last event',
@@ -84,7 +83,6 @@ pageStep([
     'View validation errors',
 ]);
 
-// TODO: Refactor (TAT-386).
 exports.saveOrganisationDeliveryMethods = function() {
     it("Save Organisation Delivery Methods Information", function() {
         hash.emailDeliveries = [];
@@ -93,9 +91,7 @@ exports.saveOrganisationDeliveryMethods = function() {
         hash.thirdPartyDeliveries = [];
         var emailDelivery = {};
 
-
         //Email
-
         pages.organisation.getEmailDeliveryMethods()
             .then(function (emailDeliveryMethods) {
                 emailDeliveryMethods.forEach(function (deliveryMethod) {
@@ -114,7 +110,6 @@ exports.saveOrganisationDeliveryMethods = function() {
                         emailDelivery.deliveryNotification = result;
                     }).then(function () {
                         hash.emailDeliveries.push(emailDelivery);
-                        //    console.log(emailDelivery);
                     });
 
                 });
@@ -162,13 +157,12 @@ exports.saveOrganisationDeliveryMethods = function() {
                         sftpDelivery.username = result;
                     }).then(function () {
                         hash.sftpDeliveries.push(sftpDelivery);
-                        //    console.log(sftpDelivery);
                     });
 
                 });
             });
-        //FTP
 
+        //FTP
         pages.organisation.getFTPDeliveryMethods()
             .then(function (ftpDeliveryMethods) {
                 ftpDeliveryMethods.forEach(function (deliveryMethod) {
@@ -210,13 +204,12 @@ exports.saveOrganisationDeliveryMethods = function() {
                         sftpDelivery.username = result;
                     }).then(function () {
                         hash.sftpDeliveries.push(sftpDelivery);
-                        //   console.log(sftpDelivery);
                     });
 
                 });
             });
-        //THIRD PARTY
 
+        //THIRD PARTY
         pages.organisation.getThirdPartyDeliveryMethods()
             .then(function (thirdPartyDeliveryMethods) {
                 thirdPartyDeliveryMethods.forEach(function (deliveryMethod) {
@@ -228,7 +221,6 @@ exports.saveOrganisationDeliveryMethods = function() {
                         thirdPartyDelivery.name = result;
                     }).then(function () {
                         hash.thirdPartyDeliveries.push(thirdPartyDelivery);
-                        //    console.log(thirdPartyDelivery);
                     });
                 });
             });

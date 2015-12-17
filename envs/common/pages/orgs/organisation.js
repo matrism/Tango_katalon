@@ -308,7 +308,6 @@ if (pages.organisation === undefined) {
             // return protractor.driver.findElement(protractor.By.linkText(text));
         },
         activeRegistrationRunButton: function () {
-            //return $('[data-tooltip=""][data-ng-click="canExecuteStackedWorks() && executeStackedWorks();"]');
             return element(by.cssContainingText(
                 '#ACTIVITY-HEADER button:not(.disabled)', 'Execute Registration Run'
             ));
