@@ -44,6 +44,7 @@ exports.selectTerritoryOfOperation = function (name) {
     var elem = exports.territoryOfOperationField(),
         typeahead = Typeahead(elem.element(by.model('$dataHolder.internalModel')), true);
 
+    pages.base.scrollIntoView(elem);
     typeahead.$$('.tg-typeahead__tags-text').then(function(elements) {
         if(elements.length !== 0) {
             elements[0].click();
@@ -113,9 +114,16 @@ exports.selectPublisherType = function (type) {
 };
 
 exports.fillContactAddressLines = function (lines) {
-    _.each(lines, function(line, i){
-        $('.e2e-contact-address-' + (i+1)).$('input').sendKeys(line);
-    });
+    var secondInput = $('.e2e-contact-address-2').$('input'),
+        firstInput = $('.e2e-contact-address-1').$('input'),
+        thirdInput = $('.e2e-contact-address-3').$('input');
+
+    secondInput.sendKeys(lines[1]);
+    expect(firstInput.getAttribute('class')).toContain('ng-invalid-required ');
+    thirdInput.sendKeys(lines[2]);
+    firstInput.sendKeys(lines[0]);
+
+    expect(firstInput.getAttribute('class')).not.toContain('ng-invalid-required ');
 };
 
 function sendKeysToElement(elem) {
@@ -154,15 +162,35 @@ exports.deliveryMethodButtons = function () {
     return exports.deliveryMethodPanels().last().$$('.e2e-method-type button');
 };
 
+exports.clickDeliveryMethodButton = function (type) {
+    var methods = exports.deliveryMethodButtons();
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(methods));
+    methods.filter(pph.matchTextExact(type)).first().click();
+};
+
+exports.expectFtpAndSftpToHaveDifferentLabels = function () {
+    var panel = exports.deliveryMethodPanels().last();
+
+    exports.clickDeliveryMethodButton('FTP');
+    expect(panel.$('.e2e-method-host label').getText()).toEqual('FTP Address:');
+    exports.clickDeliveryMethodButton('SFTP');
+    expect(panel.$('.e2e-method-host label').getText()).toEqual('SFTP Address:');
+    exports.clickDeliveryMethodButton('Email');
+    exports.clickDeliveryMethodButton('SFTP');
+    expect(panel.$('.e2e-method-host label').getText()).toEqual('SFTP Address:');
+};
+
 exports.addDeliveryMethod = function (type) {
-    var button = exports.addDeliveryMethodButton(), 
+    var button = exports.addDeliveryMethodButton(),
         methods = exports.deliveryMethodButtons();
 
     pages.base.scrollIntoView(button);
     button.click();
 
-    browser.wait(protractor.ExpectedConditions.visibilityOfAny(methods));
-    methods.filter(pph.matchTextExact(type)).first().click();
+    exports.expectFtpAndSftpToHaveDifferentLabels();
+
+    exports.clickDeliveryMethodButton(type);
 };
 
 exports.fillRequiredFieldsForDeliveryMethod = function (type) {
@@ -296,6 +324,24 @@ exports.incomeProviderButtons = function () {
 exports.makeOrgIncomeProvider = function () {
     pages.base.scrollIntoView(exports.incomeProviderButtons().first());
     exports.incomeProviderButtons().filter(pph.matchTextExact('Yes')).first().click();
+};
+
+exports.territoryErrorMessage = function () {
+    var error = $('.e2e-income-provider div + div + .help-inline .validation-message-error');
+    return error;
+};
+
+exports.expectTerritoryErrorMessageToBeVisible = function () {
+    var error = exports.territoryErrorMessage();
+
+    expect(error.isPresent()).toBeTruthy();
+    expect(error.isDisplayed()).toBeTruthy();
+};
+
+exports.expectTerritoryErrorMessageToNotBePresent = function () {
+    var error = exports.territoryErrorMessage();
+
+    expect(error.isPresent()).toBeFalsy();
 };
 
 exports.primaryIncomeProviderTerritoryOfOperationDropdown = function() {
@@ -474,6 +520,16 @@ exports.makeOrgPayee = function () {
     pages.base.scrollIntoView(elem);
 
     elem.click();
+};
+
+exports.expectPayeeAccountNameToBeIfPresent = function (val) {
+    var elem = element(by.model('payeeAccount.account_name'));
+
+    elem.isPresent().then(function(isPresent){
+        if (isPresent) {
+            expect(elem.getAttribute('value')).toEqual(val);
+        };
+    });
 };
 
 exports.statementRecipientYesButton = function () {

@@ -49,7 +49,7 @@ exports.feature = [
 
                 describe('General', function() {
                     newOrg.populateName(org.name);
-                    newOrg.selectTerritoryOfOperation(org.territoryOfOperation);
+                    //newOrg.selectTerritoryOfOperation(org.territoryOfOperation);
                     newOrg.selectOrgType(org.organisationType);
                     newOrg.selectPublisherType(org.publisherType);
                 });
@@ -95,6 +95,10 @@ exports.feature = [
 
                 describe('Income Provider', function () {
                     newOrg.makeOrgIncomeProvider();
+                    newOrg.expectTerritoryErrorMessageToBeVisible();
+                    newOrg.selectTerritoryOfOperation(org.territoryOfOperation);
+                    newOrg.expectTerritoryErrorMessageToNotBePresent();
+
                     newOrg.setDefaultIncomeProviderCurrency(org.incomeProvider.currency);
                     newOrg.setIncomeFileType(org.incomeProvider.incomeFileType);
 
@@ -103,12 +107,13 @@ exports.feature = [
 
                 describe('Payment/Statement Info', function () {
                     newOrg.makeOrgPayee();
+                    newOrg.expectPayeeAccountNameToBeIfPresent(org.name);
                     /*this.makeOrgStatementRecipient();
                     this.setStatementRecipientData('Excel', 'Email with Attachment');*/
                 });
 
                 newOrg.expectFormToBeValid();
-                newOrg.saveOrganisation();
+                //newOrg.saveOrganisation();
             });
 
             xdescribe('Use previously saved Org', function () {
