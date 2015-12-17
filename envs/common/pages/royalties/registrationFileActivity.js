@@ -54,7 +54,8 @@ exports.validateLastDelivery = function () {
 };
 
 exports.workHasDeliveredStatus = function () {
-    return this.getStatus(this.lastDelivery());
+    exports.targetEvent = exports.targetEvent || this.lastDelivery();
+    return this.getStatus(exports.targetEvent);
 };
 
 exports.getReceivedDate = function (event) {
@@ -78,6 +79,17 @@ exports.getAcceptedValue = function (event, type) {
 
 exports.getRejectedValue = function (event, type) {
     return event.element(by.binding('activity.file_event_facet.rejected.' + type + '_works | tgZero')).getText();
+};
+
+exports.getEventByRecipient = function (name) {
+    return element.all(
+        by.cssContainingText('[data-ng-repeat="activity in fileActivities.data"]', name)
+    ).first();
+};
+
+exports.findEventByRecipient = function (name) {
+    exports.targetEvent = exports.getEventByRecipient(name);
+    return pages.base.scrollIntoView(exports.targetEvent);
 };
 
 exports.getEventByFileName = function (name) {

@@ -273,3 +273,63 @@ exports.saveRegActivityLastEvent = function() {
         });
     });
 };
+
+exports.checkThatAllDeliviriesAreDelivered = function () {
+    it("Verify That All inner deliviries are delivered", function () {
+        pages.organisation.clickLatestWork();
+        expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
+    });
+};
+
+exports.selectCustomRegistrationRun = function (value) {
+    it("Select custom registration run " + value, function () {
+        pages.organisation.clickCustomWorksButton();
+        pages.organisation.selectValueFromPopupRegRun(value);
+    });
+};
+
+exports.waitForRegActivityElement = function () {
+    it("Wait For General Tab To be Displayed", function () {
+        pages.organisation.waitForElementWork();
+    });
+};
+
+exports.verifyThatWorkIsDelivered = function () {
+    it("Verify Work has delivered status", function () {
+        browser.wait(function() {
+            return pph.areEqual(
+                pages.organisation.workHasDeliveredStatus(), 'Delivered'
+            ).then(function(isDelivered) {
+                if(!isDelivered) {
+                    pages.base.refreshPage();
+                }
+                return isDelivered;
+            });
+        });
+    });
+};
+
+exports.executeRegistrationRun = function (value) {
+    it("Execute Registration Run", function () {
+        pages.organisation.registrationCanBeRun().then(function (isVisible) {
+            if (isVisible.toString() == 'true') {
+                pages.organisation.clickExecuteRegistrationRunButton();
+                pages.organisation.confirmModalDialog().then(function () {
+                    browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
+                    pages.organisation.confirmSuccessModal();
+                });
+            }
+            else {
+                expect(pages.organisation.resetWork('2014-09-01', 'BMI')).toBe(202);
+                pages.base.refresh();
+                pages.organisation.clickCustomWorksButton();
+                pages.organisation.selectValueFromPopupRegRun(value);
+                pages.organisation.clickExecuteRegistrationRunButton();
+                pages.organisation.confirmModalDialog().then(function () {
+                    browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
+                    pages.organisation.confirmSuccessModal();
+                });
+            }
+        });
+    });
+};

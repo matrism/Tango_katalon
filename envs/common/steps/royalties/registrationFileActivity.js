@@ -19,7 +19,7 @@ exports.expandLastDeliveredWork = function () {
 };
 
 exports.verifyDetails = function () {
-    it("Verify last Delivery Details on Registration File Activity Page", function () {
+    it("Verify Delivery Details on Registration File Activity Page", function () {
         expect(pages.registrationFileActivity.workHasDeliveredStatus()).toBe("Delivered");
     })
 };
@@ -27,6 +27,7 @@ exports.verifyDetails = function () {
 pageStep([
     'Go to Registration File Activity Page',
     'Find Event by File Name',
+    'Find Event by Recipient',
     'Toggle blind',
     'Validate Status',
     'Validate Received Date',

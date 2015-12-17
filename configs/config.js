@@ -76,7 +76,8 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
-                service_url: 'http://tango.tango-qa-aws.dspdev.wmg.com'
+                service_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
+                cr_url: 'http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80'
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
@@ -85,7 +86,8 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: 'http://musicpublishing.staging.dsp.wmg.com',
-                service_url: 'http://musicpublishing.staging.dsp.wmg.com'
+                service_url: 'http://musicpublishing.staging.dsp.wmg.com',
+                cr_url: 'http://tancrsrv.east.ipaas.staging.dsp.wmg.com:80'
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
@@ -94,7 +96,8 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: cli['sso-url'] || configer.getEnvVarByKey('URL_SSO'),
                 app_url: cli['app-url'],
-                service_url: cli['service-url'] || cli['app-url']
+                service_url: cli['service-url'] || cli['app-url'],
+                cr_url: cli['cr-url']
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
@@ -103,7 +106,8 @@ var defaultUserName = 'TangoTest1',
 
 config._system_.env = {
     name: env.ENV_TYPE,
-    url: config[env.ENV_TYPE].urls.app_url
+    url: config[env.ENV_TYPE].urls.app_url,
+    cr_url: config[env.ENV_TYPE].urls.cr_url
 };
 
 config._system_.noReport = cli['no-report'];

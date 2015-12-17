@@ -706,25 +706,16 @@ if (pages.organisation === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.successModalMessage()));
             return this.successModalMessage().isPresent();
         },
-        resetWork: function (env, deliveryDate, name) {
-            console.log("Resetting Work ");
+        resetWork: function (runDate, recipient) {
+            console.log('Resetting Work');
 
-            //http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01
-            var enviroinment = "http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?";
-            var recipient = "BMI";
-            var runDate = "2014-09-01";
+            var enviroinment = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works';
 
-
-            client.request({
-
-                url: enviroinment + "recipient=" + recipient + "&runDate=" + runDate,
-                // url:"http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01",
-                method: 'POST' // optional
+            return client.request({
+                url: enviroinment + '?recipient=' + recipient + '&runDate=' + runDate,
+                method: 'POST'
             }).then(function (response) {
-
-                // console.log(response.getStatusCode());
                 return response.getStatusCode();
-
             });
         },
         clickPreviewRegistrationRunTab: function () {

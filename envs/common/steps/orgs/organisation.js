@@ -91,56 +91,27 @@ if (steps.organisation === undefined) {
 
             });
         },
-
         executeRegistrationRun: function (value) {
             it("Execute Registration Run", function () {
                 pages.organisation.registrationCanBeRun().then(function (isVisible) {
-                    //  console.log("Is visible"+isVisible);
-
-
                     if (isVisible.toString() == 'true') {
-
-
                         pages.organisation.clickExecuteRegistrationRunButton();
-
                         pages.organisation.confirmModalDialog().then(function () {
                             browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
                             pages.organisation.confirmSuccessModal();
-                            //    expect(pages.organisation.successDialogIsPresent()).toBeTruthy();
                         });
-
-                        // expect(pages.organisation.successDialogIsPresent()).toBeTruthy();
                     }
                     else {
-                        // console.log(pages.organisation.registrationCanBeRun().toString());
-                        //while (pages.organisation.resetWork() == "202" &&
-                        //pages.organisation.registrationCanBeRun().then(function (isVisible) {
-                        //    console.log(isVisible.toString());
-                        //    return isVisible.toString() == "false";
-                        //
-                        //}))
-                        {
-                            //  expect(pages.organisation.resetWork()).toBe("");
-                            pages.organisation.resetWork();
-
-
-                            browser.driver.sleep(15000);
-                            pages.base.refresh();
-                            pages.organisation.clickCustomWorksButton();
-                            pages.organisation.selectValueFromPopupRegRun(value);
-                            pages.organisation.clickExecuteRegistrationRunButton();
-                            pages.organisation.confirmModalDialog().then(function () {
-                                browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
-                                pages.organisation.confirmSuccessModal();
-                                browser.driver.sleep(5000);
-
-                                //      expect(pages.organisation.successDialogIsPresent()).toBeTruthy();
-                            });
-
-                        }
+                        expect(pages.organisation.resetWork('2014-09-01', 'BMI')).toBe(202);
+                        pages.base.refresh();
+                        pages.organisation.clickCustomWorksButton();
+                        pages.organisation.selectValueFromPopupRegRun(value);
+                        pages.organisation.clickExecuteRegistrationRunButton();
+                        pages.organisation.confirmModalDialog().then(function () {
+                            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
+                            pages.organisation.confirmSuccessModal();
+                        });
                     }
-
-
                 });
             });
         },
@@ -996,8 +967,6 @@ if (steps.organisation === undefined) {
         },
         verifyThatWorkIsDelivered: function () {
             it("Verify Work has delivered status", function () {
-                expect(pages.organisation.workHasDeliveredStatus()).toBe("Delivered");
-
                 browser.wait(function() {
                     return pph.areEqual(
                         pages.organisation.workHasDeliveredStatus(), 'Delivered'
@@ -1005,7 +974,6 @@ if (steps.organisation === undefined) {
                         if(!isDelivered) {
                             pages.base.refreshPage();
                         }
-
                         return isDelivered;
                     });
                 });
