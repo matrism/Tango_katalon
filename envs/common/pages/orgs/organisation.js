@@ -308,7 +308,9 @@ if (pages.organisation === undefined) {
             // return protractor.driver.findElement(protractor.By.linkText(text));
         },
         activeRegistrationRunButton: function () {
-            return $('[data-tooltip=""][data-ng-click="canExecuteStackedWorks() && executeStackedWorks();"]');
+            return element(by.cssContainingText(
+                '#ACTIVITY-HEADER button:not(.disabled)', 'Execute Registration Run'
+            ));
         },
         registrationRunButton: function () {
             return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
@@ -338,8 +340,9 @@ if (pages.organisation === undefined) {
             return this.errorsFilterSortContainer().$$('[data-ng-click="setValidationSort(validationSortType)"]').get(i);
         },
         modalConfirmButton: function () {
-            // return element.all(by.css(".modal-footer>button")).element(by.buttonText("OK"));
-            return $('[data-ng-click="(data.show.cancel) ? data.apply() : ok()" ]');
+            return element(by.cssContainingText(
+                '.modal-footer button', 'OK'
+            ));
         },
         modalSuccessConfirmButton: function () {
             return $(".btn.btn-primary.pull-right");
@@ -666,9 +669,6 @@ if (pages.organisation === undefined) {
         waitForElementWork: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.elementWork()));
         },
-        waitForOrgToBeInvisible: function () {
-            browser.wait(ExpectedConditions.invisibilityOf(this.orgTypeHeader()));
-        },
         typeOrganisationNameIntoInput: function (organisationName) {
             this.searchInput().sendKeys(organisationName);
         },
@@ -684,7 +684,7 @@ if (pages.organisation === undefined) {
             this.fileTypeIncomeInput().sendKeys(protractor.Key.ENTER);
         },
         clickExecuteRegistrationRunButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
+            browser.wait(ExpectedConditions.elementToBeClickable(this.activeRegistrationRunButton()));
             return this.activeRegistrationRunButton().click();
         },
         confirmModalDialog: function () {
@@ -705,25 +705,16 @@ if (pages.organisation === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.successModalMessage()));
             return this.successModalMessage().isPresent();
         },
-        resetWork: function (env, deliveryDate, name) {
-            console.log("Resetting Work ");
+        resetWork: function (runDate, recipient) {
+            console.log('Resetting Work');
 
-            //http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01
-            var enviroinment = "http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?";
-            var recipient = "BMI";
-            var runDate = "2014-09-01";
+            var url = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works?recipient=' + recipient + '&runDate=' + runDate;
 
-
-            client.request({
-
-                url: enviroinment + "recipient=" + recipient + "&runDate=" + runDate,
-                // url:"http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01",
-                method: 'POST' // optional
+            return client.request({
+                url: url,
+                method: 'POST'
             }).then(function (response) {
-
-                // console.log(response.getStatusCode());
                 return response.getStatusCode();
-
             });
         },
         clickPreviewRegistrationRunTab: function () {
@@ -792,63 +783,6 @@ if (pages.organisation === undefined) {
         },
         getLatestWorkEvent: function () {
             this.getLastAddedWorkEvent();
-        },
-        testMultipleElements: function () {
-            //  //*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::node()
-
-            this.getLastAddedWorkEvent();
-            //.DATA-CHILD
-            // var list = browser.driver.findElements(By.xpath(".//*[@id='ACTIVITY-RECORDS']"));
-            //for(WebElement element: list){
-            //    //print text if text not empty
-            //    String text = element.getText();
-            //    if(!text.isEmpty){
-            //        S.O.P("Result :"+text);
-            //    }
-            //}
-            //browser.driver.findElements(By.xpath('//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]'))
-            this.getEmailDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-            this.getThirdPartyDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-            this.getSFTPDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-            this.getFTPDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-
-
-            //var element = document.evaluate( '//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::*/text()' ,document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            //
-            //element.forEach(function (entry) {
-            //    console.log(entry.stringValue);
-            //
-            //});
-            //alert( 'This document contains ' + element.stringValue + ' paragraph elements' );
-
-
-
-
-
         },
         typeOrganisationName: function (value) {
             browser.wait(ExpectedConditions.visibilityOf(this.organisationNameInput()));

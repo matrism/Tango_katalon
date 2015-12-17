@@ -45,6 +45,12 @@ exports.events = (function() {
         );
     };
 
+    events.container.latestStarted = function() {
+        return events.containerFromChild(
+            events.container().$$('[data-ng-if="activity.file_name"]').first()
+        );
+    };
+
     events.find = function(methodSpecifier) {
         var container = events.container(methodSpecifier);
 
