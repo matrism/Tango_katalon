@@ -20,6 +20,7 @@ exports.feature = [
             steps.organisation.selectCustomRegistrationRun('CR_2014-09-01');
 
             steps.organisation.executeRegistrationRun('CR_2014-09-01');
+            steps.organisation.confirmRegistrationRun();
             steps.organisation.goToRegistrationActivityTab();
             steps.organisation.verifyThatWorkIsDelivered();
             steps.organisation.checkThatAllDeliviriesAreDelivered();

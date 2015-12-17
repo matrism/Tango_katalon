@@ -92,14 +92,10 @@ if (steps.organisation === undefined) {
             });
         },
         executeRegistrationRun: function (value) {
-            it("Execute Registration Run", function () {
+            it('Execute Registration Run', function () {
                 pages.organisation.registrationCanBeRun().then(function (isVisible) {
                     if (isVisible.toString() == 'true') {
                         pages.organisation.clickExecuteRegistrationRunButton();
-                        pages.organisation.confirmModalDialog().then(function () {
-                            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
-                            pages.organisation.confirmSuccessModal();
-                        });
                     }
                     else {
                         expect(pages.organisation.resetWork('2014-09-01', 'BMI')).toBe(202);
@@ -107,11 +103,15 @@ if (steps.organisation === undefined) {
                         pages.organisation.clickCustomWorksButton();
                         pages.organisation.selectValueFromPopupRegRun(value);
                         pages.organisation.clickExecuteRegistrationRunButton();
-                        pages.organisation.confirmModalDialog().then(function () {
-                            browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
-                            pages.organisation.confirmSuccessModal();
-                        });
                     }
+                });
+            });
+        },
+        confirmRegistrationRun: function (value) {
+            it('Confirm Registration Run', function () {
+                pages.organisation.confirmModalDialog().then(function () {
+                    browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
+                    pages.organisation.confirmSuccessModal();
                 });
             });
         },
