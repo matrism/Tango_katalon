@@ -228,7 +228,7 @@ exports.saveOrganisationDeliveryMethods = function() {
 };
 
 exports.saveRegActivityLastEvent = function() {
-    it("Save Last Event Displayed On Registration Activity Page", function() {
+    it('Save Last Event Displayed On Registration Activity Page', function() {
         hash.lastEvent = {};
 
         var lastEvent = pages.organisationRegistrationActivity.events.container(
@@ -236,11 +236,11 @@ exports.saveRegActivityLastEvent = function() {
         );
 
         pages.organisation.getIconType(lastEvent).then(function(isPresent) {
-            if (isPresent.toString() == "true") {
-                hash.lastEvent.icon = "exchange";
+            if (isPresent.toString() == 'true') {
+                hash.lastEvent.icon = 'exchange';
             }
             else {
-                hash.lastEvent.icon = "arrowDown";
+                hash.lastEvent.icon = 'arrowDown';
             }
         });
 
@@ -267,27 +267,27 @@ exports.saveRegActivityLastEvent = function() {
 };
 
 exports.checkThatAllDeliviriesAreDelivered = function () {
-    it("Verify That All inner deliviries are delivered", function () {
+    it('Verify That All inner deliviries are delivered', function () {
         pages.organisation.clickLatestWork();
         expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
     });
 };
 
 exports.selectCustomRegistrationRun = function (value) {
-    it("Select custom registration run " + value, function () {
+    it('Select custom registration run ' + value, function () {
         pages.organisation.clickCustomWorksButton();
         pages.organisation.selectValueFromPopupRegRun(value);
     });
 };
 
 exports.waitForRegActivityElement = function () {
-    it("Wait For General Tab To be Displayed", function () {
+    it('Wait For General Tab To be Displayed', function () {
         pages.organisation.waitForElementWork();
     });
 };
 
 exports.verifyThatWorkIsDelivered = function () {
-    it("Verify Work has delivered status", function () {
+    it('Verify Work has delivered status', function () {
         browser.wait(function() {
             return pph.areEqual(
                 pages.organisation.workHasDeliveredStatus(), 'Delivered'
@@ -302,7 +302,7 @@ exports.verifyThatWorkIsDelivered = function () {
 };
 
 exports.executeRegistrationRun = function (value) {
-    it("Execute Registration Run", function () {
+    it('Execute Registration Run', function () {
         pages.organisation.registrationCanBeRun().then(function (isVisible) {
             if (isVisible.toString() == 'true') {
                 pages.organisation.clickExecuteRegistrationRunButton();

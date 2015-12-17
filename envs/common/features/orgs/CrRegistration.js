@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-exports.commonFeatureTags = [""];
+exports.commonFeatureTags = [''];
 
 exports.beforeFeature = function() {
     steps.login.itLogin();

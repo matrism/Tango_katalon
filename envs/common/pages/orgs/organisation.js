@@ -684,7 +684,7 @@ if (pages.organisation === undefined) {
             this.fileTypeIncomeInput().sendKeys(protractor.Key.ENTER);
         },
         clickExecuteRegistrationRunButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
+            browser.wait(ExpectedConditions.elementToBeClickable(this.activeRegistrationRunButton()));
             return this.activeRegistrationRunButton().click();
         },
         confirmModalDialog: function () {
