@@ -59,6 +59,10 @@ exports.modalBodyText = function () {
     return pph.collapseWhitespace(pph.trim(pph.getAllText(exports.modalBody())))
 };
 
+exports.validateModalMessageBody = function (value) {
+    expect(exports.modalBodyText()).toBe(value);
+};
+
 exports.modalDialog = function () {
     return $('.modal-dialog');
 };
