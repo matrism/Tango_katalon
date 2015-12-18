@@ -382,12 +382,12 @@ exports.feature = [
             steps.finderDeal.fillAggregateMaximumAdvancesPayable();
             steps.finderDeal.fillAggregateMaximumOnAdvancesField();
             steps.finderDeal.fillFindersOwnershipField();
-            //steps.finderDeal.fillWmcsOwnershipField();
-            //steps.finderDeal.selectRandomCreatorFoundSubmissionField();
-            //steps.finderDeal.fillSubmissionDateField();
-            //steps.finderDeal.selectRandomWcmDecisionDropDown();
-            //steps.finderDeal.selectRandomValueFromFoundDealDropDown();
-            //steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
+            steps.finderDeal.fillWmcsOwnershipField();
+            steps.finderDeal.selectRandomCreatorFoundSubmissionField();
+            steps.finderDeal.fillSubmissionDateField();
+            steps.finderDeal.selectRandomWcmDecisionDropDown();
+            steps.finderDeal.selectRandomValueFromFoundDealDropDown();
+            steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
             steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
 
             steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
