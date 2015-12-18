@@ -42,14 +42,28 @@ exports.feature = [
                 this.typeIntoRRInput('Really really really really really really really really long rate set name');
                 this.validateRRInputText('Really really really really really really really really long rate set name');
                 this.validateRRInput();
-                this.selectAnIncomeProvider('TEST');
-                this.incomeProviderIsPresent('TEST');
+                this.selectAnIncomeProvider('ASCAP');
+                this.incomeProviderIsPresent('ASCAP');
                 this.incomeDateMethodToggleIsDisplayed();
-                this.warnerChappellToggleIsSelected();
-                this.selectDealSigningTerritoryToggle();
-                this.dealSigningTerritoryIsSelected();
-                this.selectWarnerChappellToggle();
-                this.warnerChappellToggleIsSelected();
+
+                if(systemConfig.env.name === 'qa') {
+                    this.warnerChappellToggleIsSelected();
+
+                    this.selectDealSigningTerritoryToggle();
+                    this.dealSigningTerritoryIsSelected();
+
+                    this.selectWarnerChappellToggle();
+                    this.warnerChappellToggleIsSelected();
+                }
+                else {
+                    this.dealSigningTerritoryIsSelected();
+
+                    this.selectWarnerChappellToggle();
+                    this.warnerChappellToggleIsSelected();
+
+                    this.selectDealSigningTerritoryToggle();
+                    this.dealSigningTerritoryIsSelected();
+                }
             });
         }
     },

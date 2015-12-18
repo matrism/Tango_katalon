@@ -605,15 +605,29 @@ if (pages.royaltyRates === undefined) {
             return element.all(by.css('.btn.rate-set-toggle-btn.ng-valid.active')).get(0).getText();
         },
 
+        incomeDateMethodButtonsContainer: function () {
+            return element.all(by.model(
+                'set.income_date_method_code'
+            )).first().element(by.xpath('..'));
+        },
+
         clickDealSigningTerritoryToggle: function () {
-            var dealSigningTerritoryToggle = element.all(by.model('set.income_date_method_code')).get(1);
+            var dealSigningTerritoryToggle = this.incomeDateMethodButtonsContainer().$(
+                '[data-btn-radio="\\"DRDST\\""]'
+            );
+
             dealSigningTerritoryToggle.click();
+
             browser.driver.sleep(5000);
         },
 
         clickWarnerChappellToggle: function () {
-            var warnerChappellToggle = element.all(by.model('set.income_date_method_code')).get(0);
+            var warnerChappellToggle = this.incomeDateMethodButtonsContainer().$(
+                '[data-btn-radio="\\"DRWC\\""]'
+            );
+
             warnerChappellToggle.click();
+
             browser.driver.sleep(5000);
         },
 
@@ -855,11 +869,11 @@ if (pages.royaltyRates === undefined) {
             this.publisherSharesSaveButton().click();
         },
 
-        originalPublisherNameHasText: function (text) {
+        originalPublisherNameHasText: function () {
             return this.originalPublisherName().getText();
         },
 
-        administratorNameHasText: function (text) {
+        administratorNameHasText: function () {
             return this.administratorName().getText();
         },
 

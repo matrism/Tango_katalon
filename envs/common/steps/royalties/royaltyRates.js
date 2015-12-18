@@ -127,7 +127,9 @@ exports.incomeDateMethodToggleIsDisplayed = function () {
 
 exports.dealSigningTerritoryIsSelected = function () {
     it("Deal Signing Territory - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('DST');
+        expect(['DST', 'Deal Signing Territory']).toContain(
+            pages.royaltyRates.getActiveIncomeToggle()
+        );
     });
 };
 
@@ -145,7 +147,9 @@ exports.selectWarnerChappellToggle = function () {
 
 exports.warnerChappellToggleIsSelected = function () {
     it("Warner Chappell - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('WCM');
+        expect(['WCM', 'Warner Chappell']).toContain(
+            pages.royaltyRates.getActiveIncomeToggle()
+        );
     });
 };
 
@@ -566,8 +570,8 @@ exports.verifyRateSetSavedData = function () {
 
 exports.verifyPublisherShare = function () {
     it("Verify PS saved correctly", function () {
-        expect(pages.royaltyRates.originalPublisherNameHasText("ASCAP")).toBe("ASCAP PUB ASC0");
-        expect(pages.royaltyRates.administratorNameHasText("ASCAP")).toBe("ASCAP PUB ASC0");
+        expect(pages.royaltyRates.originalPublisherNameHasText()).toContain('ASCAP');
+        expect(pages.royaltyRates.administratorNameHasText()).toContain('ASCAP');
     })
 };
 
