@@ -31,11 +31,12 @@ exports.waitForModal = function () {
     });
 };
 
+exports.modalHeader = function () {
+    return $('.modal-header');
+};
+
 exports.modalHeading = function () {
-    return $(
-        '.modal-header h1, .modal-header h2, .modal-header h3, ' +
-        '.modal-header h4, .modal-header h5, .modal-header h6'
-    );
+    return exports.modalHeader().$('h1, h2, h3, h4, h5, h6');
 };
 
 exports.modalHeadingText = function () {
@@ -44,6 +45,10 @@ exports.modalHeadingText = function () {
 
 exports.modalBody = function () {
     return $('.modal-body');
+};
+
+exports.modalBodyText = function () {
+    return pph.collapseWhitespace(pph.trim(pph.getAllText(exports.modalBody())))
 };
 
 exports.modalDialog = function () {
@@ -382,10 +387,7 @@ exports.dialogError = function () {
                 return null;
             }
 
-            return pph.stringConcat(
-                heading, '\n\n',
-                pph.collapseWhitespace(pph.trim(pph.getAllText(exports.modalBody())))
-            );
+            return pph.stringConcat(heading, '\n\n', exports.modalBodyText());
         });
     });
 };
