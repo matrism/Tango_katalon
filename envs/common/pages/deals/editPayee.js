@@ -8,14 +8,16 @@ if (pages.editDealPayee === undefined) {
     pages.editDealPayee = new ftf.pageObject({
         locators: {
             payeeHeaderTitleLink: {css: "ul.nav.nav-tabs li.ng-scope:nth-child(3) a"},
-            payeeArea: {css: "div[data-tg-modular-edit-id='payees'] "},
-            editPayeeIcon: {css: "div[data-tg-modular-edit-id='payees'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
-            editAddNewPayeeField: {css: "div[data-ng-model='DPAY.filteredPayees'] div[ng-class='tgTypeaheadWrapClass']"},
-            editAddNewPayeeInputField: {css: "div[data-ng-model='DPAY.filteredPayees'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='payee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editScopePayeeInputField: {css: "div[data-ng-model='payee.selectedScope'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editSavePayeeFormButton: {css: "div[data-tg-modular-edit-id='newPayee'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
-            editCancelPayeeFormButton: {css: "div[data-tg-modular-edit-id='newPayee'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
+            payeeArea: {css: "div[tg-modular-edit-id='payeeByScopeName']"},
+            editPayeeIcon: { css: "div[tg-modular-edit-id='payeeByScopeName'] button[data-ng-click='tgModularViewMethods.switchToEditView()']" },
+            editPayeeEditAreaButton: { css: 'button[data-ng-click="tgModularViewMethods.switchToEditView()"]'},
+            editAddNewPayeeField: { css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']" },
+            editAddNewPayeeInputField: { css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']" },
+            editPayeeCompanyNameCodeInputField: { css: "div[data-ng-model='newPayee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']" },
+            editScopePayeeSelectAllScopes: { model: 'newPayee._all_scopes'},
+            editScopePayeeInputField: { css: "div[data-ng-model='newPayee._selected_scopes'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']" },
+            editSavePayeeFormButton: { css: "div[data-tg-modular-edit-id='payeeByScopeName'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']" },
+            editCancelPayeeFormButton: { css: "div[data-tg-modular-edit-id='payeeByScopeName'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left" },
             editLegalRightPayeeInputField: {css: "input[data-ng-model='payeeDistribution.legal_right']"},
             editDistributionPayeeInputField: {css: "input[data-ng-model='payeeDistribution.distribution']"},
             editSavePayeeFooterButton: {css: "div.CONTROLS.ng-scope.page-footer button[data-ng-click='tgModularViewMethods.save();']"}
@@ -24,7 +26,7 @@ if (pages.editDealPayee === undefined) {
         clickOnThePayeeHeaderLink: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.payeeHeaderTitleLink);
             pages.editDealPayee.elems.payeeHeaderTitleLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-if='DPAY.payeeNames'] a:nth-child(2)"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css(".deal-payee.deal-payee-tab"))));
         },
 
         editThePayeeArea: function () {
@@ -38,6 +40,20 @@ if (pages.editDealPayee === undefined) {
         editFillIntoAddNewPayeeFieldSpecificValue: function (payee) {
             pages.editDealPayee.elems.editAddNewPayeeField.click();
             pages.editDealPayee.elems.editAddNewPayeeInputField.sendKeys(payee);
+        },
+
+        setPayeeSelectAllScopes: function (selectAllScopes) {
+            it("Set Payee Select All Scopes to " + selectAllScopes, function () {
+                var cb = pages.editDealPayee.elems.editScopePayeeSelectAllScopes;
+
+                cb.getAttribute('checked').then(function (val) {
+                    if (val !== selectAllScopes) {
+                        cb.click();
+                    }
+
+                    expect(cb.getAttribute('checked')).toBe(selectAllScopes);
+                }); 
+            });
         },
 
         editSelectTheRandomPayeeOrganisationFromDropDown: function () {

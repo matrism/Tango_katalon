@@ -114,8 +114,9 @@ exports.itEditAddPayeePersonAndAssociateScope = function (payee_name,i) {
         steps.editDealPayee.editSelectRandomPayeePersonFromDropDown(payee_name);
         steps.base.scrollIntoView("Company", pages.editDealPayee.elems.editPayeeCompanyNameCodeInputField);
         steps.editDealPayee.editSelectRandomValueForPayeeCompanyNameCode();
-        steps.base.scrollIntoView("Scope", pages.editDealPayee.elems.editScopePayeeInputField);
-        steps.editDealPayee.editAssociateSpecificScopeNumberIToPayee(i);
+        steps.base.scrollIntoView("Scope", pages.editDealPayee.elems.editScopePayeeSelectAllScopes);
+        //steps.editDealPayee.editAssociateSpecificScopeNumberIToPayee(i);
+        pages.editDealPayee.setPayeeSelectAllScopes(false);
         steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
         steps.editDealPayee.editFillIntoPayeeDistributionInputField();
         steps.editDealPayee.editSavePayeeForm();

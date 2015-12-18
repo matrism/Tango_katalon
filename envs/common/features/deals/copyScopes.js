@@ -368,7 +368,7 @@ exports.feature = [
     },
         {
         name: "Check copy scope for payees with shares pusblishers and rates",
-        tags: ["copy_payees"],
+        tags: ["copy_payees", 'broken', 'tango_broken'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
