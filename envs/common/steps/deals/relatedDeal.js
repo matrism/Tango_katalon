@@ -109,6 +109,21 @@ exports.selectSpecificContractingPartyCreatedDealRelatedDeals = function (i) {
     });
 };
 
+exports.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ = function (i, j) {
+    it("Select random value for contracting party related deals ", function () {
+        pages.deal.elems.dealBriefNumber.getText().
+        then(function (promise) {
+            console.log("Contract brief number promise is " + promise);
+            pages.deal.printTheDealNumber();
+            pages.base.focusOnTheNewOpenedTab(i);
+            pages.deal.printTheDealNumber();
+            pages.relatedDeal.fillIntoTheContractingPartiesFieldSpecificValueRowNumberI(promise, j);
+        });
+        pages.relatedDeal.selectTheRandomContractingPartyRelatedDeal();
+        pages.relatedDeal.waitForAjax();
+    });
+};
+
 exports.checkContractTypeValueRowNumberI = function (value, i) {
     it("Check the contract type value row number " + i, function () {
         browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.contract-type")).getText().

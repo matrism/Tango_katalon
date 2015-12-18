@@ -231,6 +231,7 @@ exports.feature = [
             steps.deal.checkRightsTermPeriodsHeaderTitlePresent();
             steps.deal.checkFinderDealsHeaderTitlePresent();
 
+
             steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
             steps.base.focusOnNewOpenedTab(1);
 
@@ -249,12 +250,298 @@ exports.feature = [
 
             steps.base.focusOnNewOpenedTab(0);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
             steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
-            steps.relatedDeal.checkRelationshipValueRowNumberI("Select One", 1);
-            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
 
+
+            //steps.deal.goToFinderDealTermsTabDetails();
+            //steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+            //steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            //steps.finderDeal.fillFindersRecoupmentResponsability();
+            //steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
+            //steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
+            //steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            //steps.finderDeal.fillAggregateMaximumOnAdvancesField();
+            //steps.finderDeal.fillFindersOwnershipField();
+            //steps.finderDeal.fillWmcsOwnershipField();
+            //steps.finderDeal.selectRandomCreatorFoundSubmissionField();
+            //steps.finderDeal.fillSubmissionDateField();
+            //steps.finderDeal.selectRandomWcmDecisionDropDown();
+            //steps.finderDeal.selectRandomValueFromFoundDealDropDown();
+            //steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
+            //steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
+
+
+        }
+    },
+
+
+    {
+        name: "Create related deals",
+        tags: ["multipleRelated"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("2004");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.createDealScope.addSpecificScope("Finder");
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(1);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(3);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
+            steps.createDealGeneral.itFillDealGeneralMonthExecutionDateValue("01");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(4);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
+            steps.createDealGeneral.itFillDealGeneralMonthExecutionDateValue("07");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(5);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
+            steps.createDealGeneral.itFillDealGeneralMonthExecutionDateValue("07");
+            steps.createDealGeneral.itFillDealGeneralDayExecutionDateValue("15");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(6);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
+            steps.createDealGeneral.itFillDealGeneralMonthExecutionDateValue("08");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(7);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1983");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(8);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1983");
+            steps.createDealGeneral.itFillDealGeneralMonthExecutionDateValue("04");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(9);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1983");
+            steps.createDealGeneral.itFillDealGeneralMonthExecutionDateValue("04");
+            steps.createDealGeneral.itFillDealGeneralDayExecutionDateValue("01");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(10);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1983");
+            steps.createDealGeneral.itFillDealGeneralMonthExecutionDateValue("04");
+            steps.createDealGeneral.itFillDealGeneralDayExecutionDateValue("11");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(11);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.goToGeneralDealTabDetail();
+            steps.deal.goToRelatedDealsGeneralTabDetails();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(4);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 1);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(11);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 2);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(2);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(1);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 3);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(3);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(6);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 4);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(4);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(2);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 5);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(5);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(3);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 6);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(6);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(8);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 7);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(7);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(5);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 8);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(8);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(7);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 9);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(9);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(10);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 10);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(10);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            steps.base.focusOnNewOpenedTab(9);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 11);
+            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(11);
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982", 1);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 2);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982", 2);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 3);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982-01", 3);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 4);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982-07", 4);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 5);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982-07-15", 5);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 6);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982-08", 6);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 7);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1983", 7);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 8);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1983-04", 8);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 9);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1983-04-01", 9);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 10);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1983-04-11", 10);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 11);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 11);
         }
     }
 ];
