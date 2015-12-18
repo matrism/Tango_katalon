@@ -35,6 +35,14 @@ exports.modalHeader = function () {
     return $('.modal-header');
 };
 
+exports.modalCloseButton = function () {
+    return exports.modalHeader().$('[data-ng-click="cancel()"]');
+};
+
+exports.closeModal = function () {
+    return exports.modalCloseButton().click();
+};
+
 exports.modalHeading = function () {
     return exports.modalHeader().$('h1, h2, h3, h4, h5, h6');
 };

@@ -221,4 +221,5 @@ pageStep('Duplicate tab');
 pageStep('Switch to tab');
 pageStep('Close tab by index');
 pageStep('Wait for modal');
+pageStep('Close modal');
 
