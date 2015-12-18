@@ -20,7 +20,7 @@ exports.modalContainer = function () {
     return $('body > .modal');
 };
 
-exports.waitUntilModalAnimationFinishes = function () {
+exports.waitForModal = function () {
     var container = exports.modalContainer();
 
     browser.wait(function () {

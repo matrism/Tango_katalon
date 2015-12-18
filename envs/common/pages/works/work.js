@@ -1105,7 +1105,7 @@ exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function(mor
     );
 };
 exports.confirmComponentWorkDeletion = function() {
-    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.waitForModal();
 
     return exports.confirmComponentWorkDeletionButton().click();
 };

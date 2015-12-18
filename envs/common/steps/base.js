@@ -220,4 +220,5 @@ pageStep('Open new tab');
 pageStep('Duplicate tab');
 pageStep('Switch to tab');
 pageStep('Close tab by index');
+pageStep('Wait for modal');
 
