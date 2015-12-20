@@ -143,6 +143,11 @@ if (pages.relatedDeal === undefined) {
             pages.relatedDeal.elems.editRelatedDealArea.click();
             pages.relatedDeal.elems.editRelatedDealIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.relatedDeal.elems.saveRelatedDealButton));
+        },
+
+        clickOnTheContractingPartyRelatedDealRowNumberI: function (i) {
+            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.contracting-parties a")).click();
+            pages.relatedDeal.waitForAjax();
         }
 
 

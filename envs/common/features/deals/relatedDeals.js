@@ -359,6 +359,13 @@ exports.feature = [
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Sub-Publishing", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
 
+            steps.deal.goToRightsTermPeriodsTermsTabDetails();
+            steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
+            steps.editDealRtp.editFillRetentionDescriptionFromAcquisition("Retention test");
+            steps.editDealRtp.editSelectSpecificScopeNumberIRtpAcquisition(1);
+            steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
+            steps.editDealRtp.saveRetentionFromAcquisition();
+
 
             steps.base.focusOnNewOpenedTab(1);
             steps.deal.refreshThePage();
@@ -404,6 +411,9 @@ exports.feature = [
             steps.deal.refreshThePage();
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
+
+            steps.relatedDeal.clickOnContractingPartyRelatedDealLink(1);
+            steps.base.focusOnNewOpenedTab(3);
 
 
         }

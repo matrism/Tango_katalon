@@ -208,3 +208,9 @@ exports.editRelatedDealForm = function () {
        pages.relatedDeal.editTheRelatedDealForm();
     });
 };
+
+exports.clickOnContractingPartyRelatedDealLink = function (i) {
+  it("Click on the contracting party related deal link ", function(){
+     pages.relatedDeal.clickOnTheContractingPartyRelatedDealRowNumberI(i);
+  });
+};
