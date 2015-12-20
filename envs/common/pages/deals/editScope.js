@@ -463,7 +463,7 @@ if (pages.editDealScope === undefined) {
         editSaveThePublisherShareSets: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.editSavePublisherShareSet);
             pages.editDealScope.elems.editSavePublisherShareSet.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div.DETAIL.ng-scope label.control-label"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-tg-modular-view='detail']"))));
         },
 
         editSaveThePublisherShareSetsWithModal: function () {
