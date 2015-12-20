@@ -26,11 +26,7 @@ if (steps.organisation === undefined) {
                 consoleMessage = consoleMessage.replace("%TangoIncomeType%", tangoIncomeType);
 
                 it(consoleMessage, function () {
-
-
                     //  pages.organisation.fillIncomeProvider(inboundIncomeType,inboundIncomeTypeDescription,incomeFileType,tangoIncomeType);
-
-
                     pages.organisation.typeIntoInboundIncomeTypeInput(inboundIncomeType, tableLine);
 
                     pages.organisation.typeIntoInboundIncomeTypeDescriptionInput(inboundIncomeTypeDescription, tableLine);
@@ -40,55 +36,29 @@ if (steps.organisation === undefined) {
                     pages.organisation.typeIntoTangoIncomeTypeInput(tangoIncomeType, tableLine);
 
                     tableLine++;
-
-
                 });
                 }
             );
         },
-
         openIncomeProviderEdit: function () {
-
-
             it("Open Income Provider Section for Editing", function () {
-
-
                 pages.organisation.clickIncomeProviderSection();
-
                 pages.organisation.clickincomeProviderSectionEdit();
-
-
             });
-
-
         },
-
         saveIncomeProviders: function () {
-
             it("Save edited Income Providers", function () {
-
                 pages.organisation.clickSaveIncomeProviderButton();
-
-
             });
-
         },
-
         waitForProvidersSaveToComplete: function () {
             it("Waits for save to complete", function () {
-
                 pages.organisation.waitForSaveToComplete();
-
             });
-
-
         },
         chooseIncomeFileType: function (fileType) {
             it("Choose " + fileType + "Income File Type", function () {
-
                 pages.organisation.selectIncomeFileType(fileType);
-
-
             });
         },
         executeRegistrationRun: function (value) {

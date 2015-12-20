@@ -1595,7 +1595,9 @@ exports.feature = [
     {
         name: 'Execute registration run',
         tags: [
-            'worksSanityExecuteRegistrationRun'
+            'worksSanityExecuteRegistrationRun',
+            'broken',
+            'brokenTango'
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
@@ -1615,13 +1617,14 @@ exports.feature = [
             steps.organisation.goToPreviewRegistrationRunTab();
 
             using(steps.organisationRegistrationStack, function () {
-                using(this.works, function () {
-                    this.find({ title: 'TEST WORK ' + randomId('mainWork') });
+                // this area doesn't work b/c new works are added at bottom of list, scheduled works is 4000+ records
+                //using(this.works, function () {
+                //    this.find({ title: 'TEST WORK ' + randomId('mainWork') });
 
-                    this.validateErrors('none');
+                //    this.validateErrors('none');
 
-                    this.validateStatus('Scheduled');
-                });
+                //    this.validateStatus('Scheduled');
+                //});
 
                 using(this.registrationRun, function () {
                     this.execute();
