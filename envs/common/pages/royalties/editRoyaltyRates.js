@@ -54,7 +54,7 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         newRoyaltySetButton: function () {
-            return element(by.css(".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"));
+            return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
         },
 
         royaltyRateInput: function () {
