@@ -92,6 +92,9 @@ exports.feature = [
 
             steps.base.goToHomePage();
 
+            steps.mainHeader.search.selectEntityType('Works');
+            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
+
             steps.work.validateDefaultWorkSearchFilterTag(0);
             steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
             steps.base.sleep(200);

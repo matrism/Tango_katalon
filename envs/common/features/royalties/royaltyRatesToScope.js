@@ -32,7 +32,7 @@ exports.feature = [
         }
     },
     {
-        name: "Edit single rate from Scope ",
+        name: "Edit single rate from Scope",
         tags: ['edit'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -251,7 +251,7 @@ exports.feature = [
     },
     {
         name: "Dirty check multiple rate edit from Scope by navigating away",
-        tags: ['edit', 'validation', 'blah'],
+        tags: ['edit', 'validation'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
