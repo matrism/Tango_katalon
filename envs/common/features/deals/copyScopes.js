@@ -486,37 +486,37 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.selectScopeNumberI(1);
-            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            //steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");
+            steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");
         }
     }
 ];
