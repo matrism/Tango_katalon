@@ -459,7 +459,7 @@ exports.feature = [
 
     {
         name: "Check copy scope performance test with pss and rates",
-        tags: ["copy_performance"],
+        tags: ['copy_performance', 'blah'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -486,41 +486,37 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");
-
-
+            //steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");
         }
     }
-
-
 ];
