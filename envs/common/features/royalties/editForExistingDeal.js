@@ -10,7 +10,11 @@ exports.commonFeatureTags = [
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
-    steps.searchSection.accessSavedDealByNumber('205622');
+
+    steps.searchSection.accessSavedDealByNumber(
+        systemConfig.env.name === 'staging' ? '17277' : '205622'
+    );
+
     steps.royaltyRates.openSavedScope();
 };
 
