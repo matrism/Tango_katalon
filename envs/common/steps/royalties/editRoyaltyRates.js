@@ -120,6 +120,7 @@ exports.warnerChappellToggleIsSelected = function () {
 exports.inspectEffectiveStartDateArea = function () {
     it("Inspect Effective Start Date Area ", function () {
         pages.base.scrollIntoView(pages.royaltyRates.elems.effectiveStartDateLabel);
+        browser.sleep(2000);
         expect(pages.royaltyRates.effectiveStartDateLabelIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateInputFieldIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateCalendarIconIsPresent()).toBeTruthy();
