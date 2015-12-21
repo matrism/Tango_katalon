@@ -65,10 +65,6 @@ if (pages.editRoyaltyRates === undefined) {
             return element(by.css(".scope-heading.clearfix.relative"));
         },
 
-        incomeProviderInput: function () {
-            return element(by.css(".ux-multiselect-li.ux-multiselect-item.ng-scope.ng-binding"));
-        },
-
         ///END OF LOCATORS
         clickNewRoyaltySetButton: function () {
             browser.driver.sleep(5000);
@@ -86,36 +82,32 @@ if (pages.editRoyaltyRates === undefined) {
             this.royaltyRateInput().clear();
         },
 
-        selectIncomeProvider: function (sentKeys) {
-            var incomeProviderInput;
+        incomeProviderTypeahead: function () {
+            return element(by.model('set.income_providers'));
+        },
 
-            incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+        incomeProviderInput: function () {
+            return this.incomeProviderTypeahead().element(by.model('$term'));
+        },
 
-            incomeProviderInput.sendKeys(sentKeys);
-            incomeProviderInput.click();
+        incomeProviderSearchResultsContainer: function () {
+            return $('.tg-typeahead__suggestions');
+        },
 
-            var suggestion = $(".ng-scope.ng-binding>strong");
-            browser.wait(ExpectedConditions.visibilityOf(suggestion));
-            expect(suggestion.getText()).not.toContain("No results");
+        waitForIncomeProviderSearchResults: function () {
+            browser.wait(EC.visibilityOf(
+                this.incomeProviderSearchResultsContainer()
+            ));
+        },
 
-            var desiredOption;
-            browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(sentKeys) != -1) {
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
-                    }
-                });
+        incomeProviderSearchResultElements: function() {
+            this.waitForIncomeProviderSearchResults();
+            return $$('.tg-typeahead__suggestions-group-item');
+        },
+
+        selectIncomeProvider: function (value) {
+            this.incomeProviderInput().sendKeys(value);
+            this.incomeProviderSearchResultElements().first().click();
         },
 
         getIncomeProviderInputValue: function () {
@@ -167,6 +159,13 @@ if (pages.editRoyaltyRates === undefined) {
             return element.getAttribute('value');
         },
 
+        validateRRInput: function() {
+            var input = this.royaltyRateInput();
+
+            pages.base.scrollIntoView(input);
+            expect(pph.matchesCssSelector(input, '.ng-valid')).toBeTruthy();
+        },
+
         isIncomeDateMethodToggleVisible: function () {
             var dateIncomeToggle;
             dateIncomeToggle = element(by.model('set.income_date_method_code'));
@@ -178,15 +177,29 @@ if (pages.editRoyaltyRates === undefined) {
             return element.all(by.css('.btn.rate-set-toggle-btn.ng-valid.active')).get(0).getText();
         },
 
+        incomeDateMethodButtonsContainer: function () {
+            return element.all(by.model(
+                'set.income_date_method_code'
+            )).first().element(by.xpath('..'));
+        },
+
         clickDealSigningTerritoryToggle: function () {
-            var dealSigningTerritoryToggle = element.all(by.model('set.income_date_method_code')).get(0);
+            var dealSigningTerritoryToggle = this.incomeDateMethodButtonsContainer().$(
+                '[data-btn-radio="\\"DRDST\\""]'
+            );
+
             dealSigningTerritoryToggle.click();
+
             browser.driver.sleep(5000);
         },
 
         clickWarnerChappellToggle: function () {
-            var warnerChappellToggle = element.all(by.model('set.income_date_method_code')).get(1);
+            var warnerChappellToggle = this.incomeDateMethodButtonsContainer().$(
+                '[data-btn-radio="\\"DRWC\\""]'
+            );
+
             warnerChappellToggle.click();
+
             browser.driver.sleep(5000);
         },
 
