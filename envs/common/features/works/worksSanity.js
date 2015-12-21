@@ -1595,9 +1595,7 @@ exports.feature = [
     {
         name: 'Execute registration run',
         tags: [
-            'worksSanityExecuteRegistrationRun',
-            'broken',
-            'brokenTango'
+            'worksSanityExecuteRegistrationRun'
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
