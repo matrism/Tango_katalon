@@ -71,11 +71,20 @@ if (pages.editRoyaltyRates === undefined) {
             this.newRoyaltySetButton().click();
         },
 
-        closeRoyaltySet: function () {
-            pages.editRoyaltyRates.elems.closeRateSetButton.click();
+        closeRoyaltySet: function (options) {
+            options = options || {};
 
-            ftf.helper.waitForElement(pages.editRoyaltyRates.elems.confirmCancelButton, 30000);
-            pages.editRoyaltyRates.elems.confirmCancelButton.click();
+            var cancelBtn = pages.editRoyaltyRates.elems.closeRateSetButton,
+                confirmBtn = pages.editRoyaltyRates.elems.confirmCancelButton;
+
+            pages.base.scrollIntoView(cancelBtn);
+
+            cancelBtn.click();
+
+            if(options.confirm || options.confirm === undefined) {
+                ftf.helper.waitForElement(confirmBtn, 30000);
+                confirmBtn.click();
+            }
         },
 
         clearRoyaltyRateNameInput: function () {

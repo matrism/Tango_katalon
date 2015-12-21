@@ -435,6 +435,10 @@ if (pages.royaltyRates === undefined) {
             return element(by.model('set.income_providers'));
         },
 
+        incomeProviderTypeaheadTags: function () {
+            return this.incomeProviderTypeahead().$$('.tg-typeahead__tag');
+        },
+
         incomeProviderInput: function () {
             return this.incomeProviderTypeahead().element(by.model('$term'));
         },
@@ -493,9 +497,11 @@ if (pages.royaltyRates === undefined) {
         },
 
         getIncomeProviderInputValue: function () {
-            var incomeProviderInput;
-            incomeProviderInput = element.all(by.css(".tg-typeahead__tag-name.ng-binding")).get(2);
-            return incomeProviderInput.getText();
+            var tag = this.incomeProviderTypeaheadTags().first();
+
+            pages.base.scrollIntoView(tag);
+
+            return pph.trim(pph.getAllText(tag));
         },
 
         getEditIncomeProviderInputValue: function () {

@@ -28,9 +28,9 @@ exports.inspectRateSetForm = function () {
     });
 };
 
-exports.closeRateSetForm = function () {
+exports.closeRateSetForm = function (options) {
     it("Close Rate Set Form", function () {
-        pages.editRoyaltyRates.closeRoyaltySet();
+        pages.editRoyaltyRates.closeRoyaltySet(options);
         expect(pages.royaltyRates.elems.RRNameLabel.isPresent()).toBeFalsy();
     });
 };
@@ -167,7 +167,7 @@ exports.addRatePercentageToContractualField = function (percentage) {
 
 exports.clickOnReceiptApplicationMethod = function () {
     it("Change Rate Application Method to On Receipt", function () {
-        pages.royaltyRates.clickOnReceiptApplicationMethod();
+        pages.royaltyRates.clickButtonOnReceiptApplicationMethod();
     });
 };
 
@@ -217,7 +217,7 @@ exports.pause = function () {
 exports.rateSetSavedSuccesfully = function () {
     it("Rate Set Was Saved ", function () {
         pages.editRoyaltyRates.clickRRSumarryTable();
-        pages.editRoyaltyRates.clickeditSavedRRIcon();
+        pages.editRoyaltyRates.clickEditSavedRRIcon();
 
         expect(pages.editRoyaltyRates.getSavedRRName()).toBe("Rate Set 1");
         expect(pages.editRoyaltyRates.getSavedRRDate()).toBe("2015-11-11");
