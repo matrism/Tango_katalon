@@ -819,11 +819,8 @@ if (steps.organisation === undefined) {
                 hash.sftpDeliveries = [];
                 hash.ftpDeliveries = [];
                 hash.thirdPartyDeliveries = [];
-                var emailDelivery = {};
-
 
                 //Email
-
                 pages.organisation.getEmailDeliveryMethods()
                     .then(function (emailDeliveryMethods) {
                         emailDeliveryMethods.forEach(function (deliveryMethod) {
@@ -832,9 +829,6 @@ if (steps.organisation === undefined) {
                             pages.organisation.getEmailDeliveryMethodEmail(deliveryMethod).then(function (result) {
                                 emailDelivery.email = result;
                             });
-                            pages.organisation.getEmailDeliveryMethodCC(deliveryMethod).then(function (result) {
-                                emailDelivery.CC = result;
-                            });
                             pages.organisation.getEmailDeliveryMethodFileFormat(deliveryMethod).then(function (result) {
                                 emailDelivery.fileFormat = result;
                             });
@@ -842,61 +836,11 @@ if (steps.organisation === undefined) {
                                 emailDelivery.deliveryNotification = result;
                             }).then(function () {
                                 hash.emailDeliveries.push(emailDelivery);
-                                //    console.log(emailDelivery);
                             });
-
                         });
                     });
 
-                //SFTP
-                pages.organisation.getSFTPDeliveryMethods()
-                    .then(function (sftpDeliveryMethods) {
-                        sftpDeliveryMethods.forEach(function (deliveryMethod) {
-                            var sftpDelivery = {};
-                            pages.base.scrollIntoView(deliveryMethod);
-
-                            pages.organisation.getSFTPDeliveryMethodName(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryMethodName = result;
-                            });
-                            pages.organisation.getSFTPDelivetyMehodAddress(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryMethodAddress = result;
-                            });
-                            pages.organisation.getSFTPDeliveryMethodPort(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryMethodPort = result;
-                            });
-
-                            pages.organisation.clickUnmaskPasswordButton(deliveryMethod).then(function () {
-                                pages.organisation.getSFTPPassword(deliveryMethod).then(function (result) {
-                                    sftpDelivery.password = result;
-                                });
-                            });
-
-                            pages.organisation.getSFTPFileFormat(deliveryMethod).then(function (result) {
-                                sftpDelivery.fileFormat = result;
-                            });
-                            pages.organisation.getSFTPFileFormatStatus(deliveryMethod).then(function (result) {
-                                sftpDelivery.fileFormatStatus = result;
-                            });
-                            pages.organisation.getSFTPDeliveryNotificationStatus(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryNotificationStatus = result;
-                            });
-                            pages.organisation.getSFTPDeliveryNotificationStatusEmail(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryNotificationEmail = result;
-                            });
-                            pages.organisation.getSFTPDeliveryNotificationStatusCC(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryNotificationCC = result;
-                            });
-                            pages.organisation.getSFTPUsername(deliveryMethod).then(function (result) {
-                                sftpDelivery.username = result;
-                            }).then(function () {
-                                hash.sftpDeliveries.push(sftpDelivery);
-                                //    console.log(sftpDelivery);
-                            });
-
-                        });
-                    });
                 //FTP
-
                 pages.organisation.getFTPDeliveryMethods()
                     .then(function (ftpDeliveryMethods) {
                         ftpDeliveryMethods.forEach(function (deliveryMethod) {
@@ -910,7 +854,7 @@ if (steps.organisation === undefined) {
                                 sftpDelivery.deliveryMethodAddress = result;
                             });
                             pages.organisation.getSFTPDeliveryMethodPort(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryMethodPort = result;
+                                sftpDelivery.deliveryMethodPort = result.replace('Port:', '');
                             });
 
                             pages.organisation.clickUnmaskPasswordButton(deliveryMethod).then(function () {
@@ -922,46 +866,31 @@ if (steps.organisation === undefined) {
                             pages.organisation.getSFTPFileFormat(deliveryMethod).then(function (result) {
                                 sftpDelivery.fileFormat = result;
                             });
-                            pages.organisation.getSFTPFileFormatStatus(deliveryMethod).then(function (result) {
-                                sftpDelivery.fileFormatStatus = result;
-                            });
                             pages.organisation.getSFTPDeliveryNotificationStatus(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryNotificationStatus = result;
-                            });
-                            pages.organisation.getSFTPDeliveryNotificationStatusEmail(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryNotificationEmail = result;
-                            });
-                            pages.organisation.getSFTPDeliveryNotificationStatusCC(deliveryMethod).then(function (result) {
-                                sftpDelivery.deliveryNotificationCC = result;
                             });
                             pages.organisation.getSFTPUsername(deliveryMethod).then(function (result) {
                                 sftpDelivery.username = result;
                             }).then(function () {
-                                hash.sftpDeliveries.push(sftpDelivery);
-                                //   console.log(sftpDelivery);
+                                hash.ftpDeliveries.push(sftpDelivery);
                             });
-
                         });
                     });
-                //THIRD PARTY
 
+                //THIRD PARTY
                 pages.organisation.getThirdPartyDeliveryMethods()
                     .then(function (thirdPartyDeliveryMethods) {
                         thirdPartyDeliveryMethods.forEach(function (deliveryMethod) {
                             var thirdPartyDelivery = {};
                             pages.base.scrollIntoView(deliveryMethod);
 
-
                             pages.organisation.getThirdPartyName(deliveryMethod).then(function (result) {
                                 thirdPartyDelivery.name = result;
                             }).then(function () {
                                 hash.thirdPartyDeliveries.push(thirdPartyDelivery);
-                                //    console.log(thirdPartyDelivery);
                             });
                         });
-
                     });
-
 
             });
         },
@@ -979,8 +908,8 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-        checkThatAllDeliviriesAreDelivered: function () {
-            it("Verify That All inner deliviries are delivered", function () {
+        checkThatAllDeliveriesAreDelivered: function () {
+            it("Verify That All inner deliveries are delivered", function () {
                 pages.organisation.clickLatestWork();
                 expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
             });

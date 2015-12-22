@@ -11,10 +11,6 @@ exports.goToRegistrationFileActivityPage = function () {
     pages.base.waitForAjax();
 };
 
-exports.lastDelivery = function () {
-    return $$(".row-header").first();
-};
-
 exports.activityRecordsTable = function () {
     return $("#ACTIVITY-RECORDS");
 };
@@ -31,10 +27,6 @@ exports.getStatus = function (event) {
     return event.all(by.binding('activity.sub_status')).first().getText();
 };
 
-exports.lastDisplayedDeliveredWork = function () {
-
-};
-
 exports.clickRegActivityHeader = function () {
     return this.regActivityHeader().click();
 };
@@ -42,20 +34,6 @@ exports.clickRegActivityHeader = function () {
 exports.clickRegActivityDropDown = function () {
     browser.wait(ExpectedConditions.visibilityOf(this.regActivityDropdown()));
     this.regActivityDropdown().click();
-};
-
-exports.clickOnLastDisplayedDeliveredWork = function () {
-    browser.wait(ExpectedConditions.visibilityOf(this.activityRecordsTable()));
-    this.lastDelivery().click();
-};
-
-exports.validateLastDelivery = function () {
-    return true;
-};
-
-exports.workHasDeliveredStatus = function () {
-    exports.targetEvent = exports.targetEvent || this.lastDelivery();
-    return this.getStatus(exports.targetEvent);
 };
 
 exports.getReceivedDate = function (event) {
@@ -138,4 +116,60 @@ exports.validateRejectedValues = function(values) {
     expect(exports.getRejectedValue(exports.targetEvent, 'rj')).toBe(values.rj);
     expect(exports.getRejectedValue(exports.targetEvent, 'rc')).toBe(values.rc);
     expect(exports.getRejectedValue(exports.targetEvent, 'co')).toBe(values.co);
+};
+
+exports.getEmailMethod = function (i) {
+    return exports.targetEvent.all(by.cssContainingText(
+        '[data-ng-repeat="event in ::activity.delivery_events"]', 'Email to'
+    )).get(i);
+};
+
+exports.getFtpMethod = function (i) {
+    return exports.targetEvent.all(by.cssContainingText(
+        '[data-ng-repeat="event in ::activity.delivery_events"]', 'FTP'
+    )).get(i);
+};
+
+exports.getDeliveryEmail = function (deliveryMethod) {
+    return deliveryMethod.$(
+        '[data-ng-show="event.file_delivery_email_address"] a'
+    ).getText();
+};
+
+exports.getDeliveryFileFormat = function (deliveryMethod) {
+    return deliveryMethod.element(
+        by.binding('translateServerConstant(event.registration_files[0].registration_method)')
+    ).getText();
+};
+
+exports.getDeliveryAddress = function (deliveryMethod) {
+    return deliveryMethod.element(
+        by.binding('event.file_delivery_ftp_address.split(":")[0]')
+    ).getText();
+};
+
+exports.getDeliveryPort = function (deliveryMethod) {
+    return deliveryMethod.element(
+        by.binding('event.file_delivery_ftp_address.split(":")[1]')
+    ).getText();
+};
+
+exports.getEmailMethodEmail = function (i) {
+    return exports.getDeliveryEmail(exports.getEmailMethod(i));
+};
+
+exports.getEmailMethodFileFormat = function (i) {
+    return exports.getDeliveryFileFormat(exports.getEmailMethod(i));
+};
+
+exports.getFtpMethodFileFormat = function (i) {
+    return exports.getDeliveryFileFormat(exports.getFtpMethod(i));
+};
+
+exports.getFtpMethodAddress = function (i) {
+    return exports.getDeliveryAddress(exports.getFtpMethod(i));
+};
+
+exports.getFtpMethodPort = function (i) {
+    return exports.getDeliveryPort(exports.getFtpMethod(i));
 };

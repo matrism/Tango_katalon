@@ -158,7 +158,6 @@ exports.saveOrganisationDeliveryMethods = function() {
                     }).then(function () {
                         hash.sftpDeliveries.push(sftpDelivery);
                     });
-
                 });
             });
 
@@ -266,8 +265,8 @@ exports.saveRegActivityLastEvent = function() {
     });
 };
 
-exports.checkThatAllDeliviriesAreDelivered = function () {
-    it('Verify That All inner deliviries are delivered', function () {
+exports.checkThatAllDeliveriesAreDelivered = function () {
+    it('Verify That All inner deliveries are delivered', function () {
         pages.organisation.clickLatestWork();
         expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
     });

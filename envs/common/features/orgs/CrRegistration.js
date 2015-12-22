@@ -23,18 +23,19 @@ exports.feature = [
             steps.organisation.confirmRegistrationRun();
             steps.organisation.goToRegistrationActivityTab();
             steps.organisation.verifyThatWorkIsDelivered();
-            steps.organisation.checkThatAllDeliviriesAreDelivered();
+            steps.organisation.checkThatAllDeliveriesAreDelivered();
 
             steps.searchSection.accessSavedOrganisationByNameInHash();
             steps.organisation.goToRegistrationActivityTab();
             steps.organisation.verifyThatWorkIsDelivered();
-            steps.organisation.checkThatAllDeliviriesAreDelivered();
+            steps.organisation.checkThatAllDeliveriesAreDelivered();
 
             steps.registrationFileActivity.goToPage();
             steps.organisation.waitForRegActivityElement();
             steps.registrationFileActivity.findEventByRecipient('BMI');
             steps.registrationFileActivity.toggleBlind();
-            steps.registrationFileActivity.verifyDetails();
+            steps.registrationFileActivity.validateStatus('Delivered');
+            steps.registrationFileActivity.checkThatAllDeliveriesAreDelivered();
         }
     }
 ];
