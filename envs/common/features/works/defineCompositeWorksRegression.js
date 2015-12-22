@@ -450,13 +450,13 @@ exports.feature = [
                 this.selectCompositeWorkType('Medley');
 
                 this.selectFirstComponentWorkMatching(
-                    'TEST COMPONENT WORK ' + randomId(0)
+                    0, 'TEST COMPONENT WORK ' + randomId(0)
                 );
 
                 this.enterMediumComponentWorkAllocation(0);
 
                 this.selectFirstComponentWorkMatching(
-                    'TEST COMPONENT WORK ' + randomId(0)
+                    1, 'TEST COMPONENT WORK ' + randomId(1)
                 );
 
                 this.enterMediumComponentWorkAllocation(1);
