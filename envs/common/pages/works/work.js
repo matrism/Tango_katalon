@@ -237,6 +237,12 @@ module.exports.editCreatorNameInputs = function() {
 module.exports.editCreatorNameInput = function(i) {
     return pages.work.editCreatorNameInputs().get(i);
 };
+module.exports.editCreatorRoles = function () {
+    return element.all(by.model("creator.role"));
+};
+module.exports.editCreatorRole = function (i) {
+    return pages.work.editCreatorRoles().get(i);
+};
 module.exports.editCreatorContributionInputs = function() {
     return element.all(by.model("creator.contribution"));
 };
@@ -928,6 +934,11 @@ module.exports.enterCreatorContribution = function(i, value) {
     pages.base.scrollIntoView(element);
     element.clear();
     element.sendKeys(value);
+};
+module.exports.selectCreatorRole = function (i, value) {
+    var element = pages.work.editCreatorRole(i);
+    pages.base.scrollIntoView(element);
+    pages.base.selectDropdownOption(element, value, { dropdownType: 'tg' });
 };
 exports.expectDuplicateWorksPopUpToBeDisplayed = function(more) {
     more = more || {};

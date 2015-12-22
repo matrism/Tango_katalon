@@ -450,13 +450,13 @@ exports.feature = [
                 this.selectCompositeWorkType('Medley');
 
                 this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
+                    'TEST COMPONENT WORK ' + randomId(0)
                 );
 
                 this.enterMediumComponentWorkAllocation(0);
 
                 this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(1)
+                    'TEST COMPONENT WORK ' + randomId(0)
                 );
 
                 this.enterMediumComponentWorkAllocation(1);
@@ -473,8 +473,10 @@ exports.feature = [
                 this.selectCompositeWorkType('Composite of Samples');
                 this.enterComponentWorkAllocation(0, 25);
                 this.enterComponentWorkAllocation(1, 25);
-                this.selectDifferentRandomCreator(0);
                 this.enterMediumCreatorContribution(0);
+                this.selectDifferentRandomCreator(0);
+                this.selectCreatorRole(0, 'PA');
+                this.selectCreatorRole(0, 'CA');              
                 this.saveCreators();
                 steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();

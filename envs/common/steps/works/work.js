@@ -245,6 +245,11 @@ module.exports.selectDifferentRandomCreator = function (i) {
     });
     return deferred.promise;
 };
+module.exports.selectCreatorRole = function (i, role) {
+    it("Select creator role #" + (i + 1) + ' and set to ' + role, function () {
+        pages.work.selectCreatorRole(i, role);
+    });
+};
 exports.enterMediumCreatorContribution = function (i, contribution, data, key) {
     it('Enter medium creator contribution #' + (i + 1), function () {
         var creator;
