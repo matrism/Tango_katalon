@@ -765,6 +765,9 @@ exports.getStatus = function (event) {
 exports.getEventRunDate = function (event) {
     return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
 };
+exports.getFileName = function (event) {
+    return event.$('[data-ng-if="activity.file_name"]').getText();
+};
 exports.registrationRunButton = function () {
     return $('#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child');
 };

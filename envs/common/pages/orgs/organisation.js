@@ -301,6 +301,9 @@ if (pages.organisation === undefined) {
         getEventRunDate: function (event) {
             return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
         },
+        getFileName: function (event) {
+            return event.$('[data-ng-if="activity.file_name"]').getText();
+        },
         popupRegistrationLinkByText: function (text) {
             //$$(".popup-reg-run>ul>li>a").
             return element(By.linkText(text));

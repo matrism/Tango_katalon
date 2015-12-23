@@ -1,5 +1,9 @@
 'use strict';
 
+var fnutils = require('../../../../helpers/fnutils'),
+    using = fnutils.using,
+    fromTestVariable = require('../../../../helpers/fromTestVariable');
+
 exports.commonFeatureTags = [''];
 
 exports.beforeFeature = function() {
@@ -12,30 +16,52 @@ exports.feature = [
         tags: ['crRegistration', 'sanity', 'copyrightRegistration'],
         steps: function() {
             steps.searchSection.accessSavedOrganisationByName('BMI');
-            steps.organisation.goToGeneralTab();
-            steps.organisation.saveOrganisationDeliveryMethods();
-            steps.organisation.goToRegistrationActivityTab();
-            steps.organisation.saveRegActivityLastEvent();
-            steps.organisation.goToPreviewRegistrationRunTab();
-            steps.organisation.selectCustomRegistrationRun('CR_2014-09-01');
+            using(steps.organisation, function () {
+                this.goToGeneralTab();
+                this.saveOrganisationDeliveryMethods();
+                this.goToRegistrationActivityTab();
+                this.saveRegActivityLastEvent();
+                this.goToPreviewRegistrationRunTab();
+                this.selectCustomRegistrationRun('CR_2014-09-01');
 
-            steps.organisation.executeRegistrationRun('CR_2014-09-01');
-            steps.organisation.confirmRegistrationRun();
-            steps.organisation.goToRegistrationActivityTab();
-            steps.organisation.verifyThatWorkIsDelivered();
-            steps.organisation.checkThatAllDeliveriesAreDelivered();
+                this.executeRegistrationRun('CR_2014-09-01');
+                this.confirmRegistrationRun();
+                this.listWorkIdNumberRegRun();
+                this.goToRegistrationActivityTab();
+                this.verifyThatWorkIsDelivered();
+                this.checkThatAllDeliveriesAreDelivered();
 
-            steps.searchSection.accessSavedOrganisationByNameInHash();
-            steps.organisation.goToRegistrationActivityTab();
-            steps.organisation.verifyThatWorkIsDelivered();
-            steps.organisation.checkThatAllDeliveriesAreDelivered();
+                steps.searchSection.accessSavedOrganisationByNameInHash();
+                this.goToRegistrationActivityTab();
+                this.verifyThatWorkIsDelivered();
+                this.checkThatAllDeliveriesAreDelivered();
+            });
 
-            steps.registrationFileActivity.goToPage();
-            steps.organisation.waitForRegActivityElement();
-            steps.registrationFileActivity.findEventByRecipient('BMI');
-            steps.registrationFileActivity.toggleBlind();
-            steps.registrationFileActivity.validateStatus('Delivered');
-            steps.registrationFileActivity.checkThatAllDeliveriesAreDelivered();
+            using(steps.registrationFileActivity, function () {
+                this.goToPage();
+                steps.organisation.waitForRegActivityElement();
+                this.findEventByRecipient('BMI');
+                this.toggleBlind();
+                this.validateStatus('Delivered');
+                this.checkThatAllDeliveriesAreDelivered();
+            });
+
+            steps.work.goToWorkPageById(fromTestVariable('work id'));
+            steps.work.goToRegistrationActivityTab();
+
+            using(steps.workRegistrationActivity.activityGroup, function() {
+                this.find({ firstWithRecipientName: 'BMI' });
+                this.toggleBlind();
+
+                using(this.events, function() {
+                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
+                    this.toggleBlind();
+                    this.validateStatus('Delivered');
+                   // this.validateInitiatedBy();
+                   // this.validateSocietyCode(data.workEvent.societyCode);
+                   // this.validateProcessedDate(data.workEvent.processedDate);
+                });
+            });
         }
     }
 ];

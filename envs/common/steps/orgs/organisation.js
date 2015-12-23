@@ -195,7 +195,7 @@ if (steps.organisation === undefined) {
         listWorkIdNumberRegRun: function () {
             it("Verify That list work id is delivered", function () {
                 pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
-                    hash.workNumber = workNumber;
+                    hash.testVariables['work id'] = workNumber;
                     expect(workNumber).toBeTruthy();
                 });
             });
@@ -808,7 +808,9 @@ if (steps.organisation === undefined) {
                         //    console.log(hash.lastEvent)
                     }
                 );
-
+                pages.organisation.getFileName(lastEvent).then(function (value) {
+                    hash.testVariables['last event file name'] = value;
+                });
 
             });
 

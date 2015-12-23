@@ -262,6 +262,19 @@ exports.saveRegActivityLastEvent = function() {
         pages.organisation.getEventRunDate(lastEvent).then(function(value) {
             hash.lastEvent.eventRunDate = value;
         });
+        pages.organisation.getFileName(lastEvent).then(function (value) {
+            hash.lastEvent.fileName = value
+        });
+    });
+};
+
+exports.listWorkIdNumberRegRun = function () {
+    it("Verify That list work id is delivered", function () {
+        pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
+            hash.workNumber = workNumber;
+            console.log(hash.workNumber);
+            expect(workNumber).toBeTruthy();
+        });
     });
 };
 
