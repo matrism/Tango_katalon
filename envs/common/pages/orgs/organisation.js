@@ -860,6 +860,12 @@ exports.expectValue = function (section, labelName, isExact) {
     return expect(exports.getValueByLabel(section, labelName, isExact));
 };
 
+/*exports.expectModalPopUpToBeDisplayed = function () {}:
+exports.confirmModalDialog = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.modalFooter()));
+    return this.modalConfirmButton().click();
+};*/
+
 exports.expectInternalIpiNumberToBeUnique = function () {
     exports.getValueByLabel('General', 'Internal IPI Number').then(function(text){
         pages.mainHeader.search.selectEntityType('Organisation');
@@ -871,6 +877,44 @@ exports.expectInternalIpiNumberToBeUnique = function () {
         expect($$('#DSP-SEARCH .tg-typeahead__suggestions-group-item-inner').count()).toEqual(1);
     });
 };
+
+exports.expectOrgResultsToContain = function (name) {
+    pages.base.waitForAjax();
+    browser.wait(protractor.ExpectedConditions.presenceOf($('#DSP-SEARCH .tg-typeahead__suggestions-group-item-inner')));
+
+    expect($$('#DSP-SEARCH .tg-typeahead__suggestions-group-item-inner').count()).toBeGreaterThan(0);
+};
+
+exports.editSection = function (section) {
+    exports.editSectionPart(section, 0);
+};
+
+exports.editSectionPart = function(section, part) {
+    var parentElem = element(by.cssContainingText('.page-header', section)).element(by.xpath('..')),
+        buttons = parentElem.$$('[data-ng-click="tgModularViewMethods.switchToEditView()"]');
+
+    buttons.get(part).click();
+};
+
+exports.saveSectionPart = function (section, part) {
+    var parentElem = element(by.cssContainingText('.page-header', section)).element(by.xpath('..')),
+        forms = parentElem.$$('.EDITOR');
+
+    forms.get(part).$('.CONTROLS .btn-primary').click();
+    pages.base.waitForAjax();
+};
+
+exports.cancelSectionPart = function (section, part) {
+    var parentElem = element(by.cssContainingText('.page-header', section)).element(by.xpath('..')),
+        forms = parentElem.$$('.EDITOR');
+
+    forms.get(part).$('.CONTROLS .btn-cancel').click();
+
+    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.expectModalPopUpToBeDisplayed();
+    pages.base.clickModalPrimaryButton();
+};
+
 
 exports.general = (function () {
     var general = {};
@@ -1018,6 +1062,14 @@ exports.general = (function () {
     };
 
     return general;
+})();
+
+exports.contactInformation = (function () {
+    var contact = {};
+
+    contact.editAddress = function(){};
+
+    return contact;
 })();
 
 exports.registration = (function () {

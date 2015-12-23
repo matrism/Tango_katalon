@@ -1020,6 +1020,11 @@ exports.expectValueExact = function (section, labelName) {
 pageStep([
     'Get value by label',
     'Expect internal IPI number to be unique',
+    'Edit section',
+    'Edit section part',
+    'Save section part',
+    'Cancel section part',
+    'Expect Org results to contain',
     ['General', [
         'Edit section',
 
