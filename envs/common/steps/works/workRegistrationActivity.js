@@ -34,21 +34,6 @@ pageStep([
 
 exports.activityGroup.events.validateDeliveries = function () {
     it('Verify That All inner deliveries are delivered', function () {
-        hash.emailDeliveries = [{ 
-            email: 'shilpa.gunna@wmg.com',
-            //email: 'sgunna@axispoint.com',
-        }];
-        hash.ftpDeliveries = [{ 
-            deliveryMethodName: 'FTP',
-            deliveryMethodAddress: '54.88.249.193',
-            deliveryMethodPort: '21',
-            password: 'St@rwar1$',
-            fileFormat: 'CWR',
-            deliveryNotificationStatus: 'Yes',
-            username: 'Tango_Test' 
-        }];
-        /*
-        */
         using(pages.workRegistrationActivity.activityGroup.events, function () {
             var self = this;
             if (hash.emailDeliveries) {
