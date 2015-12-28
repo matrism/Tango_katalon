@@ -44,18 +44,18 @@ exports.feature = [
                 this.toggleBlind();
                 this.validateStatus('Delivered');
                 this.validateDeliveries();
+
+                this.findEventByRecipient('Lyricfind');
+                this.toggleBlind();
+                this.validateStatus('Delivered');
             });
 
             steps.work.goToWorkPageById(fromTestVariable('work id'));
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
-
-                this.validateThirdPartyDelivery();
-
                 this.find({ firstWithRecipientName: 'BMI' });
                 this.toggleBlind();
-
                 using(this.events, function() {
                     this.find({ firstWithFileName: fromTestVariable('last event file name') });
                     this.toggleBlind();
@@ -64,6 +64,16 @@ exports.feature = [
                     this.validateSocietyCode('021');
                     this.validateProcessedDate('2014-09-01');
                     this.validateDeliveries();
+                });
+
+                this.find({ firstWithRecipientName: 'Lyricfind' });
+                this.toggleBlind();
+                using(this.events, function() {
+                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
+                    this.toggleBlind();
+                    this.validateStatus('Delivered');
+                    this.validateInitiatedBy();
+                    this.validateProcessedDate('2014-09-01');
                 });
             });
         }

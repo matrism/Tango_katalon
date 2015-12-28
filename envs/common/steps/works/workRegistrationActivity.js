@@ -50,25 +50,3 @@ exports.activityGroup.events.validateDeliveries = function () {
         });
     });
 };
-
-exports.activityGroup.validateThirdPartyDelivery = function () {
-    describe('Validate third party delivery (if present)', function () {
-        if (hash.thirdPartyDeliveries) {
-            hash.thirdPartyDeliveries.forEach(function (thirdPartyDelivery, i) {
-                using(steps.workRegistrationActivity.activityGroup, function() {
-                    steps.base.sleep(20000);
-                    this.find({ firstWithRecipientName: hash.thirdPartyDelivery.name });
-                    this.toggleBlind();
-
-                    using(this.events, function() {
-                        this.find({ firstWithFileName: fromTestVariable('last event file name') });
-                        this.toggleBlind();
-                        this.validateStatus('Delivered');
-                        this.validateInitiatedBy();
-                        this.validateProcessedDate('2014-09-01');
-                    });
-                });
-            });
-        }
-    });
-};
