@@ -43,7 +43,7 @@ exports.feature = [
                 this.findEventByRecipient('BMI');
                 this.toggleBlind();
                 this.validateStatus('Delivered');
-                this.checkThatAllDeliveriesAreDelivered();
+                this.validateDeliveries();
             });
 
             steps.work.goToWorkPageById(fromTestVariable('work id'));
@@ -57,9 +57,10 @@ exports.feature = [
                     this.find({ firstWithFileName: fromTestVariable('last event file name') });
                     this.toggleBlind();
                     this.validateStatus('Delivered');
-                   // this.validateInitiatedBy();
-                   // this.validateSocietyCode(data.workEvent.societyCode);
-                   // this.validateProcessedDate(data.workEvent.processedDate);
+                    this.validateInitiatedBy();
+                    this.validateSocietyCode('021');
+                    this.validateProcessedDate('2014-09-01');
+                    this.validateDeliveries();
                 });
             });
         }

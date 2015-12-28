@@ -14,7 +14,7 @@ exports.goToPage = function () {
     })
 };
 
-exports.checkThatAllDeliveriesAreDelivered = function () {
+exports.validateDeliveries = function () {
     it('Verify That All inner deliveries are delivered', function () {
         using(pages.registrationFileActivity, function () {
             var self = this;

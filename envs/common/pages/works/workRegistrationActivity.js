@@ -320,5 +320,49 @@ exports.activityGroup.events = (function() {
         });
     };
 
+    events.getEmailMethod = function (i) {
+        var target = events.targets.latest;
+        return target.detailsContainer.all(by.cssContainingText(
+            '[data-ng-repeat="event in activity.delivery_events"]', 'Email to'
+        )).get(i);
+    };
+
+    events.getFtpMethod = function (i) {
+        var target = events.targets.latest;
+        return target.detailsContainer.all(by.cssContainingText(
+            '[data-ng-repeat="event in activity.delivery_events"]', 'FTP'
+        )).get(i);
+    };
+
+    events.getDeliveryEmail = function (deliveryMethod) {
+        return deliveryMethod.$(
+            '[data-ng-show="event.file_delivery_email_address"] a'
+        ).getText();
+    };
+
+    events.getDeliveryAddress = function (deliveryMethod) {
+        return deliveryMethod.element(
+            by.binding('event.file_delivery_ftp_address.split(":")[0]')
+        ).getText();
+    };
+
+    events.getDeliveryPort = function (deliveryMethod) {
+        return deliveryMethod.element(
+            by.binding('event.file_delivery_ftp_address.split(":")[1]')
+        ).getText();
+    };
+
+    events.getEmailMethodEmail = function (i) {
+        return events.getDeliveryEmail(events.getEmailMethod(i));
+    };
+
+    events.getFtpMethodAddress = function (i) {
+        return events.getDeliveryAddress(events.getFtpMethod(i));
+    };
+
+    events.getFtpMethodPort = function (i) {
+        return events.getDeliveryPort(events.getFtpMethod(i));
+    };
+
     return events;
 })();

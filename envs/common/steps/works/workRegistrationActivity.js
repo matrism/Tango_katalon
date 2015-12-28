@@ -1,6 +1,8 @@
 'use strict';
 
-var pageStep = require('../../../../helpers/basicPageStep');
+var pageStep = require('../../../../helpers/basicPageStep'),
+    fnutils = require('../../../../helpers/fnutils'),
+    using = fnutils.using;
 
 steps.workRegistrationActivity = exports;
 
@@ -29,3 +31,37 @@ pageStep([
         ]]
     ]],
 ]);
+
+exports.activityGroup.events.validateDeliveries = function () {
+    it('Verify That All inner deliveries are delivered', function () {
+        hash.emailDeliveries = [{ 
+            email: 'shilpa.gunna@wmg.com',
+            //email: 'sgunna@axispoint.com',
+        }];
+        hash.ftpDeliveries = [{ 
+            deliveryMethodName: 'FTP',
+            deliveryMethodAddress: '54.88.249.193',
+            deliveryMethodPort: '21',
+            password: 'St@rwar1$',
+            fileFormat: 'CWR',
+            deliveryNotificationStatus: 'Yes',
+            username: 'Tango_Test' 
+        }];
+        /*
+        */
+        using(pages.workRegistrationActivity.activityGroup.events, function () {
+            var self = this;
+            if (hash.emailDeliveries) {
+                hash.emailDeliveries.forEach(function (emailDelivery, i) {
+                    expect(self.getEmailMethodEmail(i)).toBe(emailDelivery.email);
+                });
+            }
+            if (hash.ftpDeliveries) {
+                hash.ftpDeliveries.forEach(function (ftpDelivery, i) {
+                    expect(self.getFtpMethodAddress(i)).toBe(ftpDelivery.deliveryMethodAddress);
+                    expect(self.getFtpMethodPort(i)).toContain(ftpDelivery.deliveryMethodPort);
+                });
+            }
+        });
+    });
+};
