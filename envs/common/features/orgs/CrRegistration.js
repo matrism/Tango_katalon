@@ -50,6 +50,9 @@ exports.feature = [
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
+
+                this.validateThirdPartyDelivery();
+
                 this.find({ firstWithRecipientName: 'BMI' });
                 this.toggleBlind();
 
