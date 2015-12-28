@@ -155,6 +155,12 @@ function payload() {
             if(el.classList.contains('m-is-sticky') || el.getAttribute('data-tg-affix') !== null) {
                 clone.style.position = 'static';
             }
+
+            var bindings = angular.element(el).data().$binding;
+
+            if(bindings && bindings.length !== 0) {
+                clone.setAttribute('data-binding-expr', bindings[0]);
+            }
         });
 
         var cloneRoot = els[0].sbClone;
