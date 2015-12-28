@@ -151,6 +151,10 @@ function payload() {
                     clone.appendChild(node.cloneNode());
                 });
             }
+
+            if(el.classList.contains('m-is-sticky') || el.getAttribute('data-tg-affix') !== null) {
+                clone.style.position = 'static';
+            }
         });
 
         var cloneRoot = els[0].sbClone;
