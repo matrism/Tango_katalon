@@ -55,7 +55,6 @@ exports.feature = [
 
             using(steps.workRegistrationActivity.activityGroup, function() {
                 this.find({ firstWithRecipientName: 'BMI' });
-                steps.base.sleep(5000);
                 this.toggleBlind();
                 using(this.events, function() {
                     this.find({ firstWithFileName: fromTestVariable('last event file name') });
