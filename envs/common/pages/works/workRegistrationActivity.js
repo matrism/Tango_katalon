@@ -307,6 +307,8 @@ exports.activityGroup.events = (function() {
     events.toggleBlind = function() {
         var element = events.targets.latest.container;
         pages.base.scrollIntoView(element);
+        browser.sleep(200);
+        pages.base.waitForAjax();
         browser.wait(ExpectedConditions.visibilityOf(
             element
         ));
