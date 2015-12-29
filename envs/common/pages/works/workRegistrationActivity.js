@@ -88,6 +88,7 @@ exports.activityGroup = (function() {
         var target = activityGroup.targets[targetGroupName || 'latest'];
 
         pages.base.scrollIntoView(target.container);
+        browser.sleep(200);
         pages.base.waitForAjax();
 
         browser.wait(ExpectedConditions.elementToBeClickable(
