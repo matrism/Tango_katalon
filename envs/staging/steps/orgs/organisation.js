@@ -312,7 +312,7 @@ exports.verifyThatWorkIsDelivered = function () {
     });
 };
 
-executeRegistrationRun: function (value, date, org) {
+exports.executeRegistrationRun = function (value, date, org) {
     it('Execute Registration Run', function () {
         pages.organisation.registrationCanBeRun().then(function (isVisible) {
             if (isVisible.toString() == 'true') {

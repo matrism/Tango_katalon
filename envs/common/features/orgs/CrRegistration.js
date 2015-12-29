@@ -22,9 +22,9 @@ exports.feature = [
                 this.goToRegistrationActivityTab();
                 this.saveRegActivityLastEvent();
                 this.goToPreviewRegistrationRunTab();
-                this.selectCustomRegistrationRun('CR_2013-11-15');
+                this.selectCustomRegistrationRun('CR_2013-08-15');
 
-                this.executeRegistrationRun('CR_2013-11-15', '2013-11-15', 'BMI');
+                this.executeRegistrationRun('CR_2013-08-15', '2013-08-15', 'BMI');
                 this.confirmRegistrationRun();
                 this.listWorkIdNumberRegRun();
                 this.goToRegistrationActivityTab();
