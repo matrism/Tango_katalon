@@ -301,7 +301,7 @@ exports.activityGroup.events = (function() {
     events.toggleBlind = function() {
         var element = events.targets.latest.container;
         pages.base.scrollIntoView(element);
-        browser.wait(ExpectedConditions.elementToBeClickable(
+        browser.wait(ExpectedConditions.visibilityOf(
             element
         ));
         return element.click();
