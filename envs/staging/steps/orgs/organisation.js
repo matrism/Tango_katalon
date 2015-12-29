@@ -312,14 +312,14 @@ exports.verifyThatWorkIsDelivered = function () {
     });
 };
 
-exports.executeRegistrationRun = function (value) {
+executeRegistrationRun: function (value, date, org) {
     it('Execute Registration Run', function () {
         pages.organisation.registrationCanBeRun().then(function (isVisible) {
             if (isVisible.toString() == 'true') {
                 pages.organisation.clickExecuteRegistrationRunButton();
             }
             else {
-                expect(pages.organisation.resetWork('2014-09-01', 'BMI')).toBe(202);
+                expect(pages.organisation.resetWork(date, org)).toBe(202);
                 pages.base.refresh();
                 pages.organisation.clickCustomWorksButton();
                 pages.organisation.selectValueFromPopupRegRun(value);
