@@ -40,6 +40,9 @@ exports.activityGroup = (function() {
         var container = activityGroup.container(methodSpecifier),
             resultPromise = pages.base.scrollIntoView(container);
 
+        browser.sleep(200);
+        pages.base.waitForAjax();
+
         activityGroup.targets.latest = {
             methodSpecifier: methodSpecifier,
             container: container
@@ -87,6 +90,8 @@ exports.activityGroup = (function() {
     activityGroup.toggleBlind = function(targetGroupName) {
         var target = activityGroup.targets[targetGroupName || 'latest'];
 
+        pages.base.scrollIntoView(target.container);
+        browser.sleep(200);
         pages.base.waitForAjax();
 
         browser.wait(ExpectedConditions.elementToBeClickable(
