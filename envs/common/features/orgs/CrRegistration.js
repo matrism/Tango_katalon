@@ -54,16 +54,6 @@ exports.feature = [
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
-                this.find({ firstWithRecipientName: 'Lyricfind' });
-                this.toggleBlind();
-                using(this.events, function() {
-                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
-                    this.toggleBlind();
-                    this.validateStatus('Delivered');
-                    this.validateInitiatedBy();
-                    this.validateProcessedDate('2014-09-01');
-                });
-
                 this.find({ firstWithRecipientName: 'BMI' });
                 this.toggleBlind();
                 using(this.events, function() {
@@ -74,6 +64,16 @@ exports.feature = [
                     this.validateSocietyCode('021');
                     this.validateProcessedDate('2014-09-01');
                     this.validateDeliveries();
+                });
+
+                this.find({ firstWithRecipientName: 'Lyricfind' });
+                this.toggleBlind();
+                using(this.events, function() {
+                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
+                    this.toggleBlind();
+                    this.validateStatus('Delivered');
+                    this.validateInitiatedBy();
+                    this.validateProcessedDate('2014-09-01');
                 });
             });
         }
