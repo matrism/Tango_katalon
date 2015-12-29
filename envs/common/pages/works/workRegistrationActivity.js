@@ -93,7 +93,8 @@ exports.activityGroup = (function() {
             activityGroup.container.all().last()
         ));
 
-        return target.container.click();
+        target.container.click();
+        return pages.base.waitForAjax();
     };
 
     return activityGroup;
@@ -304,7 +305,8 @@ exports.activityGroup.events = (function() {
         browser.wait(ExpectedConditions.visibilityOf(
             element
         ));
-        return element.click();
+        element.click();
+        return pages.base.waitForAjax();
     };
 
     events.fileNameElement = function() {
