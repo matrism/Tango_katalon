@@ -10,21 +10,27 @@ exports.beforeFeature = function() {
     steps.login.itLogin();
 };
 
+var data = {
+    org: 'BMI',
+    date: '2013-08-15',
+    view: 'CR_2013-08-15'
+};
+
 exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
         tags: ['crRegistration', 'sanity', 'copyrightRegistration'],
         steps: function() {
-            steps.searchSection.accessSavedOrganisationByName('BMI');
+            steps.searchSection.accessSavedOrganisationByName(data.org);
             using(steps.organisation, function () {
                 this.goToGeneralTab();
                 this.saveOrganisationDeliveryMethods();
                 this.goToRegistrationActivityTab();
                 this.saveRegActivityLastEvent();
                 this.goToPreviewRegistrationRunTab();
-                this.selectCustomRegistrationRun('CR_2013-08-15');
+                this.selectCustomRegistrationRun(data.view);
 
-                this.executeRegistrationRun('CR_2013-08-15', '2013-08-15', 'BMI');
+                this.executeRegistrationRun(data.view, data.date, data.org);
                 this.confirmRegistrationRun();
                 this.listWorkIdNumberRegRun();
                 this.goToRegistrationActivityTab();
@@ -40,7 +46,7 @@ exports.feature = [
             using(steps.registrationFileActivity, function () {
                 this.goToPage();
                 steps.organisation.waitForRegActivityElement();
-                this.findEventByRecipient('BMI');
+                this.findEventByRecipient(data.org);
                 this.toggleBlind();
                 this.validateStatus('Delivered');
                 this.validateDeliveries();
@@ -54,7 +60,7 @@ exports.feature = [
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
-                this.find({ firstWithRecipientName: 'BMI' });
+                this.find({ firstWithRecipientName: data.org });
                 this.toggleBlind();
                 using(this.events, function() {
                     this.find({ firstWithFileName: fromTestVariable('last event file name') });
@@ -62,7 +68,7 @@ exports.feature = [
                     this.validateStatus('Delivered');
                     this.validateInitiatedBy();
                     this.validateSocietyCode('021');
-                    this.validateProcessedDate('2014-09-01');
+                    this.validateProcessedDate(data.date);
                     this.validateDeliveries();
                 });
 
@@ -73,7 +79,7 @@ exports.feature = [
                     this.toggleBlind();
                     this.validateStatus('Delivered');
                     this.validateInitiatedBy();
-                    this.validateProcessedDate('2014-09-01');
+                    this.validateProcessedDate(data.date);
                 });
             });
         }
