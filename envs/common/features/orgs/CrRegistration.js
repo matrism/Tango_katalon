@@ -1,36 +1,29 @@
 'use strict';
 
-var fnutils = require('../../../../helpers/fnutils'),
-    using = fnutils.using,
-    fromTestVariable = require('../../../../helpers/fromTestVariable');
+var using = fnutils.using,
+    data = require('../../../' + systemConfig.env.name + '/features/orgs/data/CrRegistration.js');
 
-exports.commonFeatureTags = [''];
+exports.commonFeatureTags = [];
 
 exports.beforeFeature = function() {
     steps.login.itLogin();
 };
 
-var data = {
-    org: 'BMI',
-    date: '2013-08-15',
-    view: 'CR_2013-08-15'
-};
-
 exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
-        tags: ['crRegistration', 'sanity', 'copyrightRegistration'],
+        tags: ['crRegistration', 'sanity', 'copyrightRegistration', 'org'],
         steps: function() {
-            steps.searchSection.accessSavedOrganisationByName(data.org);
+            steps.searchSection.accessSavedOrganisationByName(data.cr.org);
             using(steps.organisation, function () {
                 this.goToGeneralTab();
                 this.saveOrganisationDeliveryMethods();
                 this.goToRegistrationActivityTab();
                 this.saveRegActivityLastEvent();
                 this.goToPreviewRegistrationRunTab();
-                this.selectCustomRegistrationRun(data.view);
+                this.selectCustomRegistrationRun(data.cr.view);
 
-                this.executeRegistrationRun(data.view, data.date, data.org);
+                this.executeRegistrationRun(data.cr.view, data.cr.date, data.cr.org);
                 this.confirmRegistrationRun();
                 this.listWorkIdNumberRegRun();
                 this.goToRegistrationActivityTab();
@@ -46,7 +39,7 @@ exports.feature = [
             using(steps.registrationFileActivity, function () {
                 this.goToPage();
                 steps.organisation.waitForRegActivityElement();
-                this.findEventByRecipient(data.org);
+                this.findEventByRecipient(data.cr.org);
                 this.toggleBlind();
                 this.validateStatus('Delivered');
                 this.validateDeliveries();
@@ -60,7 +53,7 @@ exports.feature = [
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
-                this.find({ firstWithRecipientName: data.org });
+                this.find({ firstWithRecipientName: data.cr.org });
                 this.toggleBlind();
                 using(this.events, function() {
                     this.find({ firstWithFileName: fromTestVariable('last event file name') });
@@ -68,7 +61,7 @@ exports.feature = [
                     this.validateStatus('Delivered');
                     this.validateInitiatedBy();
                     this.validateSocietyCode('021');
-                    this.validateProcessedDate(data.date);
+                    this.validateProcessedDate(data.cr.date);
                     this.validateDeliveries();
                 });
 
@@ -79,7 +72,7 @@ exports.feature = [
                     this.toggleBlind();
                     this.validateStatus('Delivered');
                     this.validateInitiatedBy();
-                    this.validateProcessedDate(data.date);
+                    this.validateProcessedDate(data.cr.date);
                 });
             });
         }
