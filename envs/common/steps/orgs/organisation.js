@@ -911,7 +911,7 @@ if (steps.organisation === undefined) {
             });
         },
         checkThatAllDeliveriesAreDelivered: function () {
-            it("Verify That All inner deliveries are delivered", function () {
+            it('Verify That All inner deliveries are delivered', function () {
                 pages.organisation.clickLatestWork();
                 expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
             });

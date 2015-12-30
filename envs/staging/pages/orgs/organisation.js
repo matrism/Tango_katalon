@@ -814,7 +814,7 @@ exports.elementWork = function () {
     return $('.DATA-ROW.DATA-CHILD:first-child');
 };
 exports.listWorkIdNumber = function () {
-    return $$(".row-header>div:nth-child(4)>div:nth-child(2)>a").get(1).getText();
+    return $$('.row-header>div:nth-child(4)>div:nth-child(2)>a').get(1).getText();
 };
 exports.executeRegistrationIsActive = function () {
     return this.activeRegistrationRunButton().isPresent();

@@ -269,7 +269,7 @@ exports.saveRegActivityLastEvent = function() {
 };
 
 exports.listWorkIdNumberRegRun = function () {
-    it("Verify That list work id is delivered", function () {
+    it('Verify That list work id is delivered', function () {
         pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
             hash.testVariables['work id'] = workNumber;
             expect(workNumber).toBeTruthy();
