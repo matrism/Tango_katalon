@@ -158,7 +158,6 @@ exports.saveOrganisationDeliveryMethods = function() {
                     }).then(function () {
                         hash.sftpDeliveries.push(sftpDelivery);
                     });
-
                 });
             });
 
@@ -263,11 +262,23 @@ exports.saveRegActivityLastEvent = function() {
         pages.organisation.getEventRunDate(lastEvent).then(function(value) {
             hash.lastEvent.eventRunDate = value;
         });
+        pages.organisation.getFileName(lastEvent).then(function (value) {
+            hash.testVariables['last event file name'] = value;
+        });
     });
 };
 
-exports.checkThatAllDeliviriesAreDelivered = function () {
-    it('Verify That All inner deliviries are delivered', function () {
+exports.listWorkIdNumberRegRun = function () {
+    it('Verify That list work id is delivered', function () {
+        pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
+            hash.testVariables['work id'] = workNumber;
+            expect(workNumber).toBeTruthy();
+        });
+    });
+};
+
+exports.checkThatAllDeliveriesAreDelivered = function () {
+    it('Verify That All inner deliveries are delivered', function () {
         pages.organisation.clickLatestWork();
         expect(pages.organisation.workHasDeliveredStatus()).toBeTruthy();
     });
@@ -301,14 +312,14 @@ exports.verifyThatWorkIsDelivered = function () {
     });
 };
 
-exports.executeRegistrationRun = function (value) {
+exports.executeRegistrationRun = function (value, date, org) {
     it('Execute Registration Run', function () {
         pages.organisation.registrationCanBeRun().then(function (isVisible) {
             if (isVisible.toString() == 'true') {
                 pages.organisation.clickExecuteRegistrationRunButton();
             }
             else {
-                expect(pages.organisation.resetWork('2014-09-01', 'BMI')).toBe(202);
+                expect(pages.organisation.resetWork(date, org)).toBe(202);
                 pages.base.refresh();
                 pages.organisation.clickCustomWorksButton();
                 pages.organisation.selectValueFromPopupRegRun(value);

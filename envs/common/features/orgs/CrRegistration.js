@@ -1,6 +1,10 @@
 'use strict';
 
-exports.commonFeatureTags = [''];
+var using = fnutils.using,
+    env = (systemConfig.env.name == 'qa') ? 'common' : systemConfig.env.name,
+    data = require('../../../' + env + '/features/orgs/data/CrRegistration.js');
+
+exports.commonFeatureTags = [];
 
 exports.beforeFeature = function() {
     steps.login.itLogin();
@@ -9,32 +13,69 @@ exports.beforeFeature = function() {
 exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
-        tags: ['crRegistration', 'sanity', 'copyrightRegistration'],
+        tags: ['crRegistration', 'sanity', 'copyrightRegistration', 'orgs'],
         steps: function() {
-            steps.searchSection.accessSavedOrganisationByName('BMI');
-            steps.organisation.goToGeneralTab();
-            steps.organisation.saveOrganisationDeliveryMethods();
-            steps.organisation.goToRegistrationActivityTab();
-            steps.organisation.saveRegActivityLastEvent();
-            steps.organisation.goToPreviewRegistrationRunTab();
-            steps.organisation.selectCustomRegistrationRun('CR_2014-09-01');
+            steps.searchSection.accessSavedOrganisationByName(data.cr.org);
+            using(steps.organisation, function () {
+                this.goToGeneralTab();
+                this.saveOrganisationDeliveryMethods();
+                this.goToRegistrationActivityTab();
+                this.saveRegActivityLastEvent();
+                this.goToPreviewRegistrationRunTab();
+                this.selectCustomRegistrationRun(data.cr.view);
 
-            steps.organisation.executeRegistrationRun('CR_2014-09-01');
-            steps.organisation.confirmRegistrationRun();
-            steps.organisation.goToRegistrationActivityTab();
-            steps.organisation.verifyThatWorkIsDelivered();
-            steps.organisation.checkThatAllDeliviriesAreDelivered();
+                this.executeRegistrationRun(data.cr.view, data.cr.date, data.cr.org);
+                this.confirmRegistrationRun();
+                this.listWorkIdNumberRegRun();
+                this.goToRegistrationActivityTab();
+                this.verifyThatWorkIsDelivered();
+                this.checkThatAllDeliveriesAreDelivered();
 
-            steps.searchSection.accessSavedOrganisationByNameInHash();
-            steps.organisation.goToRegistrationActivityTab();
-            steps.organisation.verifyThatWorkIsDelivered();
-            steps.organisation.checkThatAllDeliviriesAreDelivered();
+                steps.searchSection.accessSavedOrganisationByNameInHash();
+                this.goToRegistrationActivityTab();
+                this.verifyThatWorkIsDelivered();
+                this.checkThatAllDeliveriesAreDelivered();
+            });
 
-            steps.registrationFileActivity.goToPage();
-            steps.organisation.waitForRegActivityElement();
-            steps.registrationFileActivity.findEventByRecipient('BMI');
-            steps.registrationFileActivity.toggleBlind();
-            steps.registrationFileActivity.verifyDetails();
+            using(steps.registrationFileActivity, function () {
+                this.goToPage();
+                steps.organisation.waitForRegActivityElement();
+                this.findEventByRecipient(data.cr.org);
+                this.toggleBlind();
+                this.validateStatus('Delivered');
+                this.validateDeliveries();
+
+                this.findEventByRecipient('Lyricfind');
+                this.toggleBlind();
+                this.validateStatus('Delivered');
+            });
+
+            steps.work.goToWorkPageById(fromTestVariable('work id'));
+            steps.work.goToRegistrationActivityTab();
+
+            using(steps.workRegistrationActivity.activityGroup, function() {
+                this.find({ firstWithRecipientName: data.cr.org });
+                this.toggleBlind();
+                using(this.events, function() {
+                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
+                    this.toggleBlind();
+                    this.validateStatus('Delivered');
+                    this.validateInitiatedBy();
+                    this.validateSocietyCode('021');
+                    this.validateProcessedDate(data.cr.date);
+                    this.validateDeliveries();
+                });
+
+                this.find({ firstWithRecipientName: 'Lyricfind' });
+                this.toggleBlind();
+                using(this.events, function() {
+                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
+                    this.toggleBlind();
+                    this.validateStatus('Delivered');
+                    this.validateInitiatedBy();
+                    this.validateProcessedDate(data.cr.date);
+                });
+            });
         }
     }
 ];
