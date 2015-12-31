@@ -13,7 +13,7 @@ exports.beforeFeature = function() {
 exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
-        tags: ['crRegistration', 'sanity', 'copyrightRegistration', 'org'],
+        tags: ['crRegistration', 'sanity', 'copyrightRegistration', 'orgs'],
         steps: function() {
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
             using(steps.organisation, function () {
