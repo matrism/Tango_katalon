@@ -301,6 +301,9 @@ if (pages.organisation === undefined) {
         getEventRunDate: function (event) {
             return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
         },
+        getFileName: function (event) {
+            return event.$('[data-ng-if="activity.file_name"]').getText();
+        },
         popupRegistrationLinkByText: function (text) {
             //$$(".popup-reg-run>ul>li>a").
             return element(By.linkText(text));
@@ -356,53 +359,41 @@ if (pages.organisation === undefined) {
                 return text;
             })
         },
-        getEmailDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-EMAIL");
+        getEmailDeliveryMethods: function() {
+            return $$('.e2e-method-email'); 
         },
-        getSFTPDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-SFTP");
+        getFTPDeliveryMethods: function() {
+            return $$('.e2e-reg-delivery-method .e2e-method-ftp'); 
         },
-        getFTPDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-FTP");
-        },
-        getThirdPartyDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-THIRDPARTY");
+        getThirdPartyDeliveryMethods: function() {
+            return $$('.e2e-method-3rd-party'); 
         },
         sfptDeliveryMethodName: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").first();
+            return deliveryMethod.$('.e2e-method-delivery strong.ng-binding');
         },
         sftpDeliveryMethodAddress: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.host"]');
+            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.model.host"]');
         },
         sftpDeliveryMethodPort: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.port"]');
+            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.model.port"]');;
         },
         sftpDeliveryMethodUsername: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").get(1);
+            return deliveryMethod.$('.e2e-method-username .ng-binding');
         },
         sftpUnmaskPasswordButton: function (deliveryMethod) {
-            return deliveryMethod.$(".control-group>.controls>.mask-input-password");
+            return deliveryMethod.$('.e2e-method-password a');
         },
         sftpPassword: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.showPassword"]');
+            return deliveryMethod.$('.e2e-method-password span');
         },
         sftpFileFormat: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").get(2);
-        },
-        sftpFileFormatStatus: function (deliveryMethod) {
-            return deliveryMethod.$(".control-group>.controls>span.compress-file");
+            return deliveryMethod.$('.e2e-method-file-format strong.ng-binding');
         },
         sftpDeliveryNotificationStatus: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").last();
-        },
-        sfptDeliveryStatusEmail: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.primary_emails"]');
-        },
-        sftpDeliveryStatusCC: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.cc_emails"]');
+            return deliveryMethod.$('.e2e-method-notification .ng-binding');
         },
         thirdPartyName: function (deliveryMethod) {
-            return deliveryMethod.$('[ data-ng-if="dm.delivery_mechanism_type === \'THIRDPARTY\'"]>div>strong');
+            return deliveryMethod.$('.e2e-method-recipient .ng-binding');
         },
 
         //END OF LOCATORS ///////////////////////////////////////
@@ -558,7 +549,6 @@ if (pages.organisation === undefined) {
             return this.thirdPartyName(deliveryMethod).getText();
         },
         getSFTPDeliveryMethodName: function (deliveryMethod) {
-
             return this.sfptDeliveryMethodName(deliveryMethod).getText();
         },
         getSFTPDelivetyMehodAddress: function (deliveryMethod) {
@@ -592,16 +582,13 @@ if (pages.organisation === undefined) {
             return this.sftpDeliveryStatusCC(deliveryMethod).getText();
         },
         getEmailDeliveryMethodEmail: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(1)>.controls>strong').getText();
-        },
-        getEmailDeliveryMethodCC: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(1)>div>[data-ng-show="dm.delivery_mechanism.cc_emails"]').getText();
+            return deliveryMethod.$$('.e2e-method-delivery .ng-binding').first().getText();
         },
         getEmailDeliveryMethodFileFormat: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(3)>.controls>strong').getText();
+            return deliveryMethod.$('.e2e-method-file-format .ng-binding').getText();
         },
         getEmailDeliveryMethodNotification: function (deliveryMethod) {
-            return deliveryMethod.$$('div:nth-child(5)>.controls >span').first().getText();
+            return deliveryMethod.$('.e2e-method-notification .ng-binding').getText();
         },
         numberOfWorks: function () {
             var number = parseInt(this.textWithTotalWorksNumber(), 10);
@@ -771,12 +758,6 @@ if (pages.organisation === undefined) {
         },
         workHasDeliveredStatus: function () {
             return this.getStatus(this.getLastAddedWorkEvent());
-
-            //.row-header>div>div>span>.icon-exchange  ICON
-            //.row-header>div>div:nth-child(2)>p>span TOTAL WORKS TEXT
-            //.row-header>div>div:nth-child(2)>div CW text
-            //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time delivered date
-            //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time RUN DATE
         },
         clickLatestWork: function () {
             return this.getLastAddedWorkEvent().click();

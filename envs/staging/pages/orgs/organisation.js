@@ -765,6 +765,9 @@ exports.getStatus = function (event) {
 exports.getEventRunDate = function (event) {
     return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
 };
+exports.getFileName = function (event) {
+    return event.$('[data-ng-if="activity.file_name"]').getText();
+};
 exports.registrationRunButton = function () {
     return $('#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child');
 };
@@ -809,6 +812,9 @@ exports.textWithTotalWorksNumber = function () {
 };
 exports.elementWork = function () {
     return $('.DATA-ROW.DATA-CHILD:first-child');
+};
+exports.listWorkIdNumber = function () {
+    return $$('.row-header>div:nth-child(4)>div:nth-child(2)>a').get(1).getText();
 };
 exports.executeRegistrationIsActive = function () {
     return this.activeRegistrationRunButton().isPresent();
@@ -913,4 +919,7 @@ exports.getLatestWorkEvent = function () {
 };
 exports.waitForElementWork = function () {
     browser.wait(ExpectedConditions.visibilityOf(this.elementWork()));
+};
+exports.listWorkIdNumberRegRun = function () {
+    return this.listWorkIdNumber();
 };

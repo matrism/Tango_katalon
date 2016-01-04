@@ -6,6 +6,7 @@ var moment = require('moment'),
     random = require('../../../../helpers/random'),
     _ = require('lodash'),
     promise = protractor.promise,
+    callResultOrValue = require('../../../../helpers/callResultOrValue'),
     pageStep = require('../../../../helpers/basicPageStep');
 
 steps.work = exports;
@@ -22,6 +23,7 @@ exports.goToWorkPage = function (data, key) {
 
 exports.goToWorkPageById = function(workId) {
     it('Go to work page by ID (' + workId + ')', function () {
+        workId = callResultOrValue(workId);
         pages.work.open(workId);
     });
 };
