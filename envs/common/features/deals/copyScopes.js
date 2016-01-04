@@ -459,7 +459,7 @@ exports.feature = [
 
     {
         name: "Check copy scope performance test with pss and rates",
-        tags: ['copy_performance', 'blah'],
+        tags: ['copy_performance'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -489,6 +489,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
+            steps.editDealScope.selectScopeNumberI(9);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
