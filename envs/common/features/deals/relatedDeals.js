@@ -10,7 +10,7 @@ exports.feature = [
 
     {
         name: "Create related deals",
-        tags: ["relatedDeals"],
+        tags: ["create_related_deals"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -56,6 +56,21 @@ exports.feature = [
             steps.relatedDeal.fillIntoContractingPartiesFieldRelatedDealsSpecificValue("qwz");
             steps.relatedDeal.checkContractingPartyDropDownWithNoResult();
             steps.relatedDeal.clearIntoContractingPartiesField();
+
+
+
+            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.focusOnNewOpenedTab(2);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
 
             steps.base.focusOnNewOpenedTab(0);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
@@ -180,7 +195,12 @@ exports.feature = [
             steps.deal.goToRelatedDealsGeneralTabDetails();
             steps.relatedDeal.editRelatedDealForm();
 
-            steps.relatedDeal.selectSpecificContractingPartyRelatedDealsTowNumberI("249060", 2);
+            //steps.relatedDeal.selectSpecificContractingPartyRelatedDealsTowNumberI("249060", 2);
+            //steps.relatedDeal.selectRandomValueFromRelationshipDropDown(2);
+            //steps.relatedDeal.clickOnSaveRelatedDeal();
+
+            steps.base.focusOnNewOpenedTab(2);
+            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(1, 2);
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(2);
             steps.relatedDeal.clickOnSaveRelatedDeal();
 
@@ -207,7 +227,7 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / Settlement, Co-Publishing, Assignment, Production Music Miscellaneous Services, Sub-Publishing", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / SettlementCo-PublishingAssignmentProduction Music Miscellaneous ServicesSub-Publishing", 2);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 2);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 2);
 
@@ -215,8 +235,8 @@ exports.feature = [
     },
 
     {
-        name: "Create related deals",
-        tags: ["relatedFinder"],
+        name: "Create related finder deals",
+        tags: ["related_finder_deal"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -422,7 +442,7 @@ exports.feature = [
 
     {
         name: "Create related deals",
-        tags: ["multipleRelated"],
+        tags: ["multiple_related_deal"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("2004");
