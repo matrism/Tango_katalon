@@ -99,6 +99,10 @@ exports.addEffectiveStartDate = function (date) {
     });
 };
 
+addBasicStep(
+    exports, pages.royaltyRates, 'Enter effective start date for last rate set'
+);
+
 exports.cancelRateSet = function () {
     it("Cancel Rate Set", function () {
         pages.royaltyRates.clickcancelRateSet();
@@ -640,12 +644,6 @@ exports.refreshPage = function () {
         browser.driver.navigate().refresh();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
     });
-};
-
-exports.waitForAjaxCall = function () {
-    it("", function () {
-        pages.base.waitForAjax();
-    })
 };
 
 exports.addNewPublisherShares = function () {

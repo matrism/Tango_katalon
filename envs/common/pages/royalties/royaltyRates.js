@@ -162,6 +162,13 @@ if (pages.royaltyRates === undefined) {
             return element(by.css("div.rate-set-calendar div[name='effectiveDate'] input.date-picker-input"));
         },
 
+        effectiveStartDateInputForLastRateSet: function () {
+            return $$(
+                'div.rate-set-calendar div[name=\'effectiveDate\'] ' +
+                'input.date-picker-input'
+            ).last();
+        },
+
         newRoyaltyRateSetButton: function () {
             return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
         },
@@ -677,6 +684,18 @@ if (pages.royaltyRates === undefined) {
             if (date != "") {
                 this.effectiveStartDateInput().clear();
                 this.effectiveStartDateInput().sendKeys(date);
+                browser.driver.sleep(2000);
+            }
+        },
+
+        enterEffectiveStartDateForLastRateSet: function (val) {
+            var el = this.effectiveStartDateInputForLastRateSet();
+
+            val = val.trim();
+
+            if(val) {
+                el.clear();
+                el.sendKeys(val);
                 browser.driver.sleep(2000);
             }
         },

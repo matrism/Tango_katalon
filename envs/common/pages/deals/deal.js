@@ -30,8 +30,8 @@ if (pages.deal === undefined) {
 
 
         //TODO DSP locators are bad , dom can change between wait calls and locators keep a cached version
-        scopeHeaderElement: function () {
-            return element(by.css(".scope-heading"));
+        scopeHeaderElements: function () {
+            return $$('.scope-heading');
 
         },
 
@@ -119,15 +119,28 @@ if (pages.deal === undefined) {
 
         },
 
-        clickScopeHeader: function () {
+        clickFirstScopeHeader: function () {
+            var el = pages.deal.scopeHeaderElements().first();
 
+            browser.wait(EC.visibilityOf(el));
 
-            pages.base.waitForAjax();
+            pages.base.scrollTo('top');
 
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
+            pages.base.scrollIntoView(el);
 
+            return el.click();
+        },
 
-            pages.deal.scopeHeaderElement().click();
+        clickLastScopeHeader: function () {
+            var el = pages.deal.scopeHeaderElements().last();
+
+            browser.wait(EC.visibilityOf(el));
+
+            pages.base.scrollTo('top');
+
+            pages.base.scrollIntoView(el);
+
+            return el.click();
         },
 
         errorHeaderIsVisible: function () {

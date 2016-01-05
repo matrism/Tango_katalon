@@ -25,13 +25,13 @@ exports.saveDeal = function () {
 
 exports.clickFirstScopeHeader = function () {
     it("Click the first scope header", function () {
-        pages.deal.clickScopeHeader();
+        pages.deal.clickFirstScopeHeader();
     });
 };
 
 exports.clickLastScopeHeader = function () {
     it("Click the last scope header", function () {
-        pages.deal.clickScopeHeaderLast();
+        pages.deal.clickLastScopeHeader();
     });
 };
 
