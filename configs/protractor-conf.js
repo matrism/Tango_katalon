@@ -198,6 +198,10 @@ config = {
 
         jasmine.getEnv().addReporter(stepByStepReporter);
 
+        if (systemConfig.stepByStep) {
+            stepByStepReporter.enable();
+        }
+
         if (typeof process.env.__using_grunt === 'undefined') {
 //            var spawn = require('child_process').spawn;
 //            var child = spawn('bash', ['grunt','clearReports']);
