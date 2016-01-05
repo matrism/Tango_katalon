@@ -5,6 +5,12 @@ var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.editDealScope = exports;
 
+exports.editScopeArea = function(){
+  it("Edit the scope area ", function(){
+     pages.editDealScope.editTheScopeArea();
+  });
+};
+
 exports.selectScope1 = function () {
     it("Select scope 1", function () {
         pages.editDealScope.clickOnScope1();
@@ -559,12 +565,25 @@ exports.editClickOnAddPublisherShareSet = function () {
     });
 };
 
+exports.editSaveScopeChanges = function(){
+    it("Edit save the scope changes ", function () {
+       pages.editDealScope.editSaveTheScopeChanges();
+    });
+};
+
 exports.editClickOnYesSocietyAwardCreditPublisherShareSet = function () {
     it("Click on the yes society award credit pss and check it is selected", function () {
         pages.editDealScope.editClickOnTheYesSocietyAwardCreditPublisherShareSet();
         pages.editDealScope.waitForAjax();
         var test = pages.editDealScope.elems.editYesSocietyAwardCreditPss.getAttribute("class").toString();
         expect(test.indexOf("active") != -1);
+    });
+};
+
+exports.editSpecificScopeType = function (contractType) {
+    it("Add simple scope", function () {
+        pages.editDealScope.selectContractTypeScope(contractType);
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -786,6 +805,12 @@ exports.clickOnCopyRoyaltyRatesInCopyScopeModal = function () {
 exports.clickOnShareRoyaltyRatesInCopyScopeModal = function () {
     it("Click on the share royalty rates button in copy scope modal and check it is clicked ok ", function () {
         pages.editDealScope.clickOnTheShareRoyaltyRatesInCopyScopeModal();
+    });
+};
+
+exports.editSaveAllChanges = function(){
+    it("Edit save all changes ", function () {
+        pages.editDealScope.editSaveTheChangesPage();
     });
 };
 

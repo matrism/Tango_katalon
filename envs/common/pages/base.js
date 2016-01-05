@@ -418,6 +418,14 @@ exports.openNewTab = function (url) {
     $('#TAT_TEMP_ELEMENT').click();
 };
 
+exports.focusOnTheNewOpenedTab = function(i){
+   return browser.getAllWindowHandles().then(function (handles) {
+            browser.switchTo().window(handles[i]);
+        }).then(function () {
+            return browser.wait(ExpectedConditions.visibilityOf($('body')));
+        });
+};
+
 exports.duplicateTab = function () {
     browser.getCurrentUrl().then(function (url) {
         exports.openNewTab(url);
