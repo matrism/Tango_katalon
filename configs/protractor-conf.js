@@ -17,6 +17,7 @@ var path = require('path'),
     SnapbackReporter = require('../tools/enhanceHtmlReport/SnapbackReporter'),
     orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     demoReporter = require('../tools/demoReporter'),
+    stepByStepReporter = require('../tools/stepByStepReporter'),
     reporterFilePath,
     reporterFileName = 'reporter.htm';
 
@@ -194,6 +195,8 @@ config = {
         if(systemConfig.orphanOnError) {
             jasmine.getEnv().addReporter(orphanOnErrorReporter);
         }
+
+        jasmine.getEnv().addReporter(stepByStepReporter);
 
         if (typeof process.env.__using_grunt === 'undefined') {
 //            var spawn = require('child_process').spawn;
