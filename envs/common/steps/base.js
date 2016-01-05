@@ -223,4 +223,4 @@ pageStep('Close tab by index');
 pageStep('Wait for modal');
 pageStep('Validate modal message body');
 pageStep('Close modal');
-
+pageStep('Scroll to');

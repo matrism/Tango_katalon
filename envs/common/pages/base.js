@@ -528,3 +528,28 @@ exports.clickElement = function (elName, el, wait) {
     el.click();
     pages.base.waitForAjax();
 };
+
+exports.scrollTo = function() {
+    var args = overloaded(arguments, {
+        1: ['y'],
+        2: ['x', 'y']
+    });
+
+    if(args.x === undefined) {
+        args.x = 0;
+    }
+
+    return browser.executeScript(function(x, y) {
+        switch(y) {
+            case 'top':
+                y = 0;
+                break;
+
+            case 'bottom':
+                y = document.body.scrollHeight;
+                break;
+        }
+
+        window.scrollTo(x, y);
+    }, args.x, args.y);
+};
