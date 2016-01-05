@@ -130,8 +130,6 @@ exports.inspectEffectiveStartDateArea = function () {
 };
 
 exports.checkEffectiveStartDateErrorMessages = function (table, message) {
-    console.log("Inspect Effective Start Date Error Messages")
-
     var fields = table.shift();
     _.each(table, function (row, index) {
         var date = row[0],

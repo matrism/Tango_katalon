@@ -11,7 +11,6 @@ exports.ratesSummaryLink = function () {
 };
 
 exports.goToRatesSummary = function () {
-    console.log('pages.dealIncomeRates.goToRatesSummary');
     exports.ratesSummaryLink().click();
 
     return rst.waitLoader();
