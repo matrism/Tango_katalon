@@ -45,9 +45,6 @@ exports.returnDealNumber = function () {
     it("Return deal number ", function () {
         pages.deal.elems.dealBriefNumber.getText().
         then(function (promise) {
-            console.log("Deal number is: " + promise);
-        });
-        then(function (promise) {
             console.log("Deal number is " + promise);
         });
     });
