@@ -4,7 +4,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 },
 
-exports.commonFeatureTags = ['deals', 'header', 'regression'];
+    exports.commonFeatureTags = ['deals', 'header', 'regression'];
 
 exports.feature = [
     {
@@ -18,6 +18,10 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.editDealScope.editSaveAllChanges();
+
+
         }
     }
 ];
