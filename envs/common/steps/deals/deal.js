@@ -25,13 +25,13 @@ exports.saveDeal = function () {
 
 exports.clickFirstScopeHeader = function () {
     it("Click the first scope header", function () {
-        pages.deal.clickScopeHeader();
+        pages.deal.clickFirstScopeHeader();
     });
 };
 
 exports.clickLastScopeHeader = function () {
     it("Click the last scope header", function () {
-        pages.deal.clickScopeHeaderLast();
+        pages.deal.clickLastScopeHeader();
     });
 };
 
@@ -45,7 +45,16 @@ exports.returnDealNumber = function () {
     it("Return deal number ", function () {
         pages.deal.elems.dealBriefNumber.getText().
         then(function (promise) {
-            console.log("Deal number is: " + promise);
+            console.log("Deal number is " + promise);
+        });
+    });
+};
+
+exports.printDealNumber = function () {
+    it("Return deal number ", function () {
+        pages.deal.elems.dealBriefNumber.getText().
+        then(function (promise) {
+            console.log("Deal number is " + promise);
         });
     });
 };
@@ -85,7 +94,23 @@ exports.goToGeneralDealTabDetails = function () {
 exports.goToTermsDealTabDetails = function () {
     it("Click on terms header and go to terms deal tab details ", function () {
         pages.deal.goToTermsDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.contractPeriodsScopesHeaderLink));
         pages.deal.waitForAjax();
+    });
+};
+
+exports.goToContractPeriodsAndScopesTermsTabDetails = function () {
+    it("Click on contract periods and scopes terms link ", function () {
+        pages.deal.goToTheContractPeriodsAndScopesHeaderLink();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.contractPeriodsTitle));
+    });
+};
+
+exports.goToRightsTermPeriodsTermsTabDetails = function () {
+    it("Click on rights term periods terms link ", function () {
+        pages.deal.goToTheRightsTermPeriodsHeaderLink();
+        pages.deal.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.addAnotherRightsTermPeriodLink));
     });
 };
 
@@ -106,6 +131,13 @@ exports.goToRelatedDealsGeneralTabDetails = function () {
     it("Click on related deals general link ", function () {
         pages.deal.goToRelatedDealsGeneral();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.relatedDealsTitle));
+    });
+};
+
+exports.goToDealSummaryGeneralTabDetails = function () {
+    it("Click on deal summary general link ", function () {
+        pages.deal.goToDealSummaryGeneral();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealSummaryTitle));
     });
 };
 

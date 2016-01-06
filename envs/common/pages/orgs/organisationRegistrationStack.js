@@ -157,7 +157,7 @@ exports.registrationRun = (function() {
         pages.base.scrollIntoView(button);
 
         return button.click().then(function() {
-            pages.base.waitUntilModalAnimationFinishes();
+            pages.base.waitForModal();
         });
     };
 

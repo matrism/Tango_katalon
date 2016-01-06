@@ -6,11 +6,13 @@ var _ = require('lodash'),
 if (pages.editDealScope === undefined) {
     pages.editDealScope = new ftf.pageObject({
         locators: {
+            editScopeAreaElement: {css: "div[data-tg-modular-edit-id='dealScope'] div.DETAIL.ng-scope"},
+            editScopeIcon: {css: "div[data-tg-modular-edit-id='dealScope'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
-            territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
-            territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            editTerritoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
+            editTerritoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editTerritoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
             publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.DETAIL.ng-scope"},
             publisherSharesSetEditIcon: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
@@ -43,6 +45,7 @@ if (pages.editDealScope === undefined) {
             shareScopeTextIcons: {css: "div[data-ng-show='isPublisherShareSetShared(form.terms.activePublisherShareSet.id)']"},
             shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
             shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
+            saveEditScope: {css: "div[data-tg-modular-edit-id ='dealScope'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
             editShareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
             editFirstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
@@ -77,6 +80,12 @@ if (pages.editDealScope === undefined) {
             numberOfScopesPerDeal: {css: "div.deal-terms-affix.m-view h3 span[data-ng-show='form.terms.scopeSearchTags.length === 0'] span[data-ng-bind='form.terms.numberOfScopesUnderActiveCp']"}
         },
 
+        editTheScopeArea: function () {
+            pages.editDealScope.elems.editScopeAreaElement.click();
+            pages.editDealScope.elems.editScopeIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryField))
+        },
+
         addScopeForm: function () {
             pages.editDealScope.elems.addScopeIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.contractTypeDropDown));
@@ -104,14 +113,14 @@ if (pages.editDealScope === undefined) {
         },
 
         addTheSpecificTerritoryByTypingToScope: function (territory) {
-            pages.editDealScope.elems.territoryField.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.territoryInput));
-            pages.editDealScope.elems.territoryInput.sendKeys(territory);
+            pages.editDealScope.elems.editTerritoryField.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryInput));
+            pages.editDealScope.elems.editTerritoryInput.sendKeys(territory);
         },
 
         selectSpecificCountry: function (country) {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.territoryDropDown));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryDropDown));
             browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -145,6 +154,12 @@ if (pages.editDealScope === undefined) {
             pages.editDealScope.elems.scope1.click();
         },
 
+        editSaveTheScopeChanges: function () {
+            pages.editDealScope.elems.saveEditScope.click();
+            pages.editDealScope.waitForAjax();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
+        },
+
         clickOnScopeNumberI: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
             //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
@@ -157,102 +172,102 @@ if (pages.editDealScope === undefined) {
         checkOverrideNumbersAddedOnScope: function (i) {
             pages.base.scrollIntoView(element(by.css("div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] div.pull-left.ng-binding")));
             browser.driver.findElement(by.css("div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] div.pull-left.ng-binding")).getText().
-                then(function (promise) {
-                    console.log("Number of overrides and text is : " + promise);
-                    expect(promise).toEqual("Override (" + i + ")");
-                });
+            then(function (promise) {
+                console.log("Number of overrides and text is : " + promise);
+                expect(promise).toEqual("Override (" + i + ")");
+            });
         },
 
         checkTheScopeNumberITextValue: function (i) {
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise);
-                    expect(promise).toContain("Scope " + i);
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise);
+                expect(promise).toContain("Scope " + i);
+            });
         },
 
         checkTheScopeNumberITextValueHasNotPss: function (i) {
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise + " and it doesn't have Pss");
-                    expect(promise).not.toContain("Pub Shares");
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise + " and it doesn't have Pss");
+                expect(promise).not.toContain("Pub Shares");
+            });
         },
 
         checkTheScopeNumberITextValueHasNotRr: function (i) {
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise + " and it doesn't have Rr");
-                    expect(promise).not.toContain("Rates");
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise + " and it doesn't have Rr");
+                expect(promise).not.toContain("Rates");
+            });
         },
 
         checkTheScopeNumberINamePssValue: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise);
-                    expect(promise).toContain("Scope " + i);
-                    expect(promise).toContain("Pub Shares");
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise);
+                expect(promise).toContain("Scope " + i);
+                expect(promise).toContain("Pub Shares");
+            });
         },
 
         checkTheScopeNumberINameRatesValue: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise);
-                    expect(promise).toContain("Scope " + i);
-                    expect(promise).toContain("Rates");
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise);
+                expect(promise).toContain("Scope " + i);
+                expect(promise).toContain("Rates");
+            });
         },
 
         checkTheScopeNumberINamePayeesValue: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise);
-                    expect(promise).toContain("Scope " + i);
-                    expect(promise).toContain("Payees");
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise);
+                expect(promise).toContain("Scope " + i);
+                expect(promise).toContain("Payees");
+            });
         },
 
         checkTheScopeNumberINameNotPayeesValue: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise);
-                    expect(promise).toContain("Scope " + i);
-                    expect(promise).not.toContain("Payees");
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise);
+                expect(promise).toContain("Scope " + i);
+                expect(promise).not.toContain("Payees");
+            });
         },
 
         checkTheScopeNumberINameRatesNotValue: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")));
             browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div.scope-heading.clearfix.relative")).getText().
-                then(function (promise) {
-                    console.log("Scope text is : " + promise);
-                    expect(promise).toContain("Scope " + i);
-                    expect(promise).not.toContain("Rates");
-                });
+            then(function (promise) {
+                console.log("Scope text is : " + promise);
+                expect(promise).toContain("Scope " + i);
+                expect(promise).not.toContain("Rates");
+            });
         },
 
         checkTheScopeRateSetDate: function (date) {
             pages.base.scrollIntoView(element(by.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")));
             browser.driver.findElement(By.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")).getText().
-                then(function (promise) {
-                    console.log("Effective date is : " + promise);
-                    expect(promise).toEqual(date);
-                });
+            then(function (promise) {
+                console.log("Effective date is : " + promise);
+                expect(promise).toEqual(date);
+            });
         },
 
         checkTheScopeRateSetDateNotEqual: function (date) {
             pages.base.scrollIntoView(element(by.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")));
             browser.driver.findElement(By.css("div.rate-set-summary-table table.rate-sets-table tbody  tr.ng-scope:nth-child(1) td:nth-child(4)")).getText().
-                then(function (promise) {
-                    console.log("Effective date is : " + promise);
-                    expect(promise).not.toEqual(date);
-                });
+            then(function (promise) {
+                console.log("Effective date is : " + promise);
+                expect(promise).not.toEqual(date);
+            });
         },
 
         clickOnShareIconOnScope: function () {
@@ -262,20 +277,20 @@ if (pages.editDealScope === undefined) {
 
         validateThePublisherSharesTitle: function () {
             pages.editDealScope.elems.publisherSharesTitle.getText().
-                then(function (promise) {
-                    console.log("Publisher shares set title is : " + promise);
-                    expect(promise).toEqual("PUBLISHER SHARES");
-                });
+            then(function (promise) {
+                console.log("Publisher shares set title is : " + promise);
+                expect(promise).toEqual("PUBLISHER SHARES");
+            });
         },
 
         validateThePublisherSharesHeaderTableTitle: function () {
             pages.editDealScope.elems.editPublisherSharesHeaderTitles.getText().
-                then(function (promise) {
-                    console.log("Publisher shares header titles are : " + promise);
-                    expect(promise).toContain("Publisher Role / Name");
-                    expect(promise).toContain("Own");
-                    expect(promise).toContain("Collect");
-                });
+            then(function (promise) {
+                console.log("Publisher shares header titles are : " + promise);
+                expect(promise).toContain("Publisher Role / Name");
+                expect(promise).toContain("Own");
+                expect(promise).toContain("Collect");
+            });
         },
 
         editClickOnPublisherShareSetArea: function () {
@@ -299,39 +314,39 @@ if (pages.editDealScope === undefined) {
 
         validateThePublisherSharesSetAddSocAgreemNumberTextChainI: function (i) {
             element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']")).getText().
-                then(function (promise) {
-                    console.log("Add society agreement number text message publisher shares set is  : " + promise);
-                    expect(promise).toEqual("Add Society Agreement Numbers");
-                });
+            then(function (promise) {
+                console.log("Add society agreement number text message publisher shares set is  : " + promise);
+                expect(promise).toEqual("Add Society Agreement Numbers");
+            });
         },
 
         validateThePublisherSharesSetPublisherNameEOrPAChainI: function (i) {
             element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ") div[data-ng-repeat='share in chain.shares']:nth-child(2)")).getText().
-                then(function (promise) {
-                    console.log("Publisher name text values publisher shares set are  : " + promise);
-                    expect(promise).toContain("%");
-                    expect(promise).not.toEqual("");
-                });
+            then(function (promise) {
+                console.log("Publisher name text values publisher shares set are  : " + promise);
+                expect(promise).toContain("%");
+                expect(promise).not.toEqual("");
+            });
         },
 
         validateThePublisherSharesSetPublisherNameAMChainI: function (i) {
             element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ") div[data-ng-repeat='share in chain.shares']:nth-child(3)")).getText().
-                then(function (promise) {
-                    console.log("Publisher name AM text values publisher shares set are  : " + promise);
-                    expect(promise).toContain("AM");
-                    expect(promise).toContain("%");
-                    expect(promise).not.toEqual("");
-                });
+            then(function (promise) {
+                console.log("Publisher name AM text values publisher shares set are  : " + promise);
+                expect(promise).toContain("AM");
+                expect(promise).toContain("%");
+                expect(promise).not.toEqual("");
+            });
         },
 
         validateThePublisherSharesSetSubtotalChainI: function (i) {
             element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ") div.ps-section__subtotal.clearfix")).getText().
-                then(function (promise) {
-                    console.log("Publisher name subtotal text values publisher shares set are  : " + promise);
-                    expect(promise).toContain("SUBTOTAL");
-                    expect(promise).toContain("%");
-                    expect(promise).not.toEqual("");
-                });
+            then(function (promise) {
+                console.log("Publisher name subtotal text values publisher shares set are  : " + promise);
+                expect(promise).toContain("SUBTOTAL");
+                expect(promise).toContain("%");
+                expect(promise).not.toEqual("");
+            });
         },
 
         editInFirstPublisherNameField: function (publisherName) {
@@ -376,7 +391,7 @@ if (pages.editDealScope === undefined) {
         editSaveTheChangesPage: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
             pages.editDealScope.elems.saveChanges.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='scopeForm'] div.rate-set-summary-table"))));
+            pages.editDealScope.waitForAjax();
         },
 
         editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
@@ -788,59 +803,59 @@ if (pages.editDealScope === undefined) {
         checkTheSocietyAgreementAddedOnScope: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.addSocietyAgreementNumberLink);
             pages.editDealScope.elems.addSocietyAgreementNumberLink.getText().
-                then(function (promise) {
-                    console.log("Society agreement numbers added - view mode : " + promise);
-                    expect(promise).toEqual("View Society Agreement Numbers");
-                });
+            then(function (promise) {
+                console.log("Society agreement numbers added - view mode : " + promise);
+                expect(promise).toEqual("View Society Agreement Numbers");
+            });
         },
 
         checkTheSocietyAgreementNotAddedOnScope: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.addSocietyAgreementNumberLink);
             pages.editDealScope.elems.addSocietyAgreementNumberLink.getText().
-                then(function (promise) {
-                    console.log("Society agreement numbers added - view mode : " + promise);
-                    expect(promise).toEqual("Add Society Agreement Numbers");
-                });
+            then(function (promise) {
+                console.log("Society agreement numbers added - view mode : " + promise);
+                expect(promise).toEqual("Add Society Agreement Numbers");
+            });
         },
 
         clickOnTheCopyPublisherShareInCopyScopeModal: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton);
             pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton.click();
             pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton.getAttribute("class").
-                then(function (promise) {
-                    console.log("Copy scope button for publisher shares is selected and it class name is : " + promise);
-                    expect(promise).toContain("active");
-                });
+            then(function (promise) {
+                console.log("Copy scope button for publisher shares is selected and it class name is : " + promise);
+                expect(promise).toContain("active");
+            });
         },
 
         clickOnTheSharePublisherShareInCopyScopeModal: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton);
             pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.click();
             pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.getAttribute("class").
-                then(function (promise) {
-                    console.log("Share scope button for publisher shares is selected and it class name is : " + promise);
-                    expect(promise).toContain("active");
-                });
+            then(function (promise) {
+                console.log("Share scope button for publisher shares is selected and it class name is : " + promise);
+                expect(promise).toContain("active");
+            });
         },
 
         clickOnTheCopyRoyaltyRatesInCopyScopeModal: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton);
             pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.click();
             pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.getAttribute("class").
-                then(function (promise) {
-                    console.log("Copy scope button for royalty rates is selected and it class name is : " + promise);
-                    expect(promise).toContain("active");
-                });
+            then(function (promise) {
+                console.log("Copy scope button for royalty rates is selected and it class name is : " + promise);
+                expect(promise).toContain("active");
+            });
         },
 
         clickOnTheShareRoyaltyRatesInCopyScopeModal: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.shareRoyaltyRatesInCopyScopeModalButton);
             pages.editDealScope.elems.shareRoyaltyRatesInCopyScopeModalButton.click();
             pages.editDealScope.elems.shareRoyaltyRatesInCopyScopeModalButton.getAttribute("class").
-                then(function (promise) {
-                    console.log("Share scope button for royalty rates is selected and it class name is : " + promise);
-                    expect(promise).toContain("active");
-                });
+            then(function (promise) {
+                console.log("Share scope button for royalty rates is selected and it class name is : " + promise);
+                expect(promise).toContain("active");
+            });
         }
 
     })

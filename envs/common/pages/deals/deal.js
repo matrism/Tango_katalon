@@ -12,6 +12,10 @@ if (pages.deal === undefined) {
             saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
             termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
+            contractPeriodsScopesHeaderLink: {css: "div[name='termsForm'] a[data-ng-class='{ active: form.show.section.cps }']"},
+            contractPeriodsTitle: {css: "div[data-ng-form='termsForm'] div.row div.span3.column:nth-child(1) h3"},
+            rightsTermPeriodsHeaderLink: {css: "div[name='termsForm'] a[data-ng-class='{ active: form.show.section.rtp }']"},
+            addAnotherRightsTermPeriodLink: {css: "a[data-ng-click='addRightsTermPeriodSet()']"},
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
             scopeHeader: {css: ".scope-heading"},
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
@@ -19,13 +23,15 @@ if (pages.deal === undefined) {
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm']"},
             relatedDealsHeaderLink: {css: "a[data-ng-click='showRelatedDealsPage()']"},
-            relatedDealsTitle: {css: "div.related-section.ng-scope h2"}
+            relatedDealsTitle: {css: "div.related-section.ng-scope h2"},
+            dealSummaryHeaderLink: {css: "a[data-ng-click='showDealSummaryPage()']"},
+            dealSummaryTitle: {css: "div.FORM.summary-section.clearfix.ng-scope h2"}
         },
 
 
         //TODO DSP locators are bad , dom can change between wait calls and locators keep a cached version
-        scopeHeaderElement: function () {
-            return element(by.css(".scope-heading"));
+        scopeHeaderElements: function () {
+            return $$('.scope-heading');
 
         },
 
@@ -77,6 +83,14 @@ if (pages.deal === undefined) {
             pages.deal.elems.termsHeader.click();
         },
 
+        goToTheContractPeriodsAndScopesHeaderLink: function () {
+            pages.deal.elems.contractPeriodsScopesHeaderLink.click();
+        },
+
+        goToTheRightsTermPeriodsHeaderLink: function () {
+            pages.deal.elems.rightsTermPeriodsHeaderLink.click();
+        },
+
         goToFinderDealTerms: function () {
             pages.deal.elems.finderDealsHeaderLink.click();
         },
@@ -85,8 +99,19 @@ if (pages.deal === undefined) {
             pages.deal.elems.relatedDealsHeaderLink.click();
         },
 
+        goToDealSummaryGeneral: function () {
+            pages.deal.elems.dealSummaryHeaderLink.click();
+        },
+
+        printTheDealNumber: function () {
+            pages.deal.elems.dealBriefNumber.getText().
+            then(function (promise) {
+                console.log("Deal number printed is " + promise);
+            });
+        },
+
         clickIncomeRatesLink: function () {
-            pages.base.scrollIntoView(    pages.deal.elems.incomeRates);
+            pages.base.scrollIntoView(pages.deal.elems.incomeRates);
             browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.incomeRates));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.incomeRates));
             pages.deal.elems.incomeRates.click();
@@ -94,15 +119,28 @@ if (pages.deal === undefined) {
 
         },
 
-        clickScopeHeader: function () {
+        clickFirstScopeHeader: function () {
+            var el = pages.deal.scopeHeaderElements().first();
 
+            browser.wait(EC.visibilityOf(el));
 
-            pages.base.waitForAjax();
+            pages.base.scrollTo('top');
 
-            browser.wait(ExpectedConditions.visibilityOf(pages.deal.scopeHeaderElement()));
+            pages.base.scrollIntoView(el);
 
+            return el.click();
+        },
 
-            pages.deal.scopeHeaderElement().click();
+        clickLastScopeHeader: function () {
+            var el = pages.deal.scopeHeaderElements().last();
+
+            browser.wait(EC.visibilityOf(el));
+
+            pages.base.scrollTo('top');
+
+            pages.base.scrollIntoView(el);
+
+            return el.click();
         },
 
         errorHeaderIsVisible: function () {
@@ -129,7 +167,7 @@ if (pages.deal === undefined) {
         },
         errorRRIsVisible: function () {
 
-            return this.errorRR.isDisplayed();
+            return this.errorRR().isDisplayed();
 
         }
 });
