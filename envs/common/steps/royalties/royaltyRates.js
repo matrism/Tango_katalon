@@ -83,10 +83,7 @@ exports.validateRRInputText = function (text) {
 
 exports.validateRRInput = function () {
     it("Expect input to be valid", function () {
-        expect(pages.royaltyRates.getRRInputBorderTopValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderRightValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderBottomValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderLeftValue()).toBe('rgba(51, 170, 237, 1)');
+        pages.royaltyRates.validateRRInput();
     });
 };
 
@@ -102,6 +99,10 @@ exports.addEffectiveStartDate = function (date) {
     });
 };
 
+addBasicStep(
+    exports, pages.royaltyRates, 'Enter effective start date for last rate set'
+);
+
 exports.cancelRateSet = function () {
     it("Cancel Rate Set", function () {
         pages.royaltyRates.clickcancelRateSet();
@@ -116,7 +117,9 @@ exports.addIncomeProviderByPartialMatch = function (provider) {
 
 exports.incomeProviderIsPresent = function (provider) {
     it("The Income Provider is succesfully added", function () {
-        expect(pages.royaltyRates.getIncomeProviderInputValue()).toBe(provider);
+        expect(pph.toLowerCase(
+            pages.royaltyRates.getIncomeProviderInputValue())
+        ).toBe(provider.toLowerCase());
     });
 };
 
@@ -128,7 +131,9 @@ exports.incomeDateMethodToggleIsDisplayed = function () {
 
 exports.dealSigningTerritoryIsSelected = function () {
     it("Deal Signing Territory - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Deal Signing Territory');
+        expect(['DST', 'Deal Signing Territory']).toContain(
+            pages.royaltyRates.getActiveIncomeToggle()
+        );
     });
 };
 
@@ -146,23 +151,25 @@ exports.selectWarnerChappellToggle = function () {
 
 exports.warnerChappellToggleIsSelected = function () {
     it("Warner Chappell - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Warner Chappell');
+        expect(['WCM', 'Warner Chappell']).toContain(
+            pages.royaltyRates.getActiveIncomeToggle()
+        );
     });
 };
 
 exports.inspectEffectiveStartDateArea = function () {
     it("Inspect Effective Start Date Area ", function () {
+        pages.base.scrollIntoView(pages.royaltyRates.elems.effectiveStartDateLabel);
+        browser.sleep(2000);
         expect(pages.royaltyRates.effectiveStartDateLabelIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateInputFieldIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateCalendarIconIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.getEffectiveStartDateContextualHelp()).toBe("Effective Date is based on time + Territory that is processing the royalty + Income Received Date. For rates to become active, Royalty Processing needs to know the date (when known) the Rate Set begins");
-        expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe("2015-03-12")
+        expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe('2014-03-12')
     });
 };
 
 exports.checkEffectiveStartDateErrorMessages = function (table, message) {
-    console.log("Inspect Effective Start Date Error Messages")
-
     var fields = table.shift();
     _.each(table, function (row, index) {
         var date = row[0],
@@ -566,8 +573,8 @@ exports.verifyRateSetSavedData = function () {
 
 exports.verifyPublisherShare = function () {
     it("Verify PS saved correctly", function () {
-        expect(pages.royaltyRates.originalPublisherNameHasText("ASCAP")).toBe("ASCAP PUB ASC0");
-        expect(pages.royaltyRates.administratorNameHasText("ASCAP")).toBe("ASCAP PUB ASC0");
+        expect(pages.royaltyRates.originalPublisherNameHasText()).toContain('ASCAP');
+        expect(pages.royaltyRates.administratorNameHasText()).toContain('ASCAP');
     })
 };
 
@@ -635,12 +642,6 @@ exports.refreshPage = function () {
         browser.driver.navigate().refresh();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
     });
-};
-
-exports.waitForAjaxCall = function () {
-    it("", function () {
-        pages.base.waitForAjax();
-    })
 };
 
 exports.addNewPublisherShares = function () {

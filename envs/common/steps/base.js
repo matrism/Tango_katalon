@@ -179,6 +179,9 @@ exports.fail = function (description) {
     });
 };
 
+pageStep('Pause');
+pageStep('Orphan browser');
+
 exports.clearDownloadsDirectory = function () {
     it('Clear downloads directory', function () {
         pages.base.clearDownloadsDirectory();
@@ -217,4 +220,7 @@ pageStep('Open new tab');
 pageStep('Duplicate tab');
 pageStep('Switch to tab');
 pageStep('Close tab by index');
-
+pageStep('Wait for modal');
+pageStep('Validate modal message body');
+pageStep('Close modal');
+pageStep('Scroll to');

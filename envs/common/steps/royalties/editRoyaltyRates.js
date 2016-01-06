@@ -28,9 +28,9 @@ exports.inspectRateSetForm = function () {
     });
 };
 
-exports.closeRateSetForm = function () {
+exports.closeRateSetForm = function (options) {
     it("Close Rate Set Form", function () {
-        pages.editRoyaltyRates.closeRoyaltySet();
+        pages.editRoyaltyRates.closeRoyaltySet(options);
         expect(pages.royaltyRates.elems.RRNameLabel.isPresent()).toBeFalsy();
     });
 };
@@ -65,10 +65,7 @@ exports.validateRRInputText = function (text) {
 
 exports.validateRRInput = function () {
     it("Expect input to be valid", function () {
-        expect(pages.royaltyRates.getRRInputBorderTopValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderRightValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderBottomValue()).toBe('rgba(51, 170, 237, 1)');
-        expect(pages.royaltyRates.getRRInputBorderLeftValue()).toBe('rgba(51, 170, 237, 1)');
+        pages.royaltyRates.validateRRInput();
     });
 };
 
@@ -80,7 +77,9 @@ exports.selectAnIncomeProvider = function (provider) {
 
 exports.incomeProviderIsPresent = function (provider) {
     it("The Income Provider is succesfully added", function () {
-        expect(pages.royaltyRates.getIncomeProviderInputValue()).toBe(provider);
+        expect(pph.toLowerCase(
+            pages.royaltyRates.getIncomeProviderInputValue())
+        ).toBe(provider.toLowerCase());
     });
 };
 
@@ -92,7 +91,9 @@ exports.incomeDateMethodToggleIsDisplayed = function () {
 
 exports.dealSigningTerritoryIsSelected = function () {
     it("Deal Signing Territory - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Deal Signing Territory');
+        expect(['DST', 'Deal Signing Territory']).toContain(
+            pages.royaltyRates.getActiveIncomeToggle()
+        );
     });
 };
 
@@ -110,23 +111,25 @@ exports.selectWarnerChappellToggle = function () {
 
 exports.warnerChappellToggleIsSelected = function () {
     it("Warner Chappell - is selected", function () {
-        expect(pages.royaltyRates.getActiveIncomeToggle()).toBe('Warner Chappell');
+        expect(['WCM', 'Warner Chappell']).toContain(
+            pages.royaltyRates.getActiveIncomeToggle()
+        );
     });
 };
 
 exports.inspectEffectiveStartDateArea = function () {
     it("Inspect Effective Start Date Area ", function () {
+        pages.base.scrollIntoView(pages.royaltyRates.elems.effectiveStartDateLabel);
+        browser.sleep(2000);
         expect(pages.royaltyRates.effectiveStartDateLabelIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateInputFieldIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.effectiveStartDateCalendarIconIsPresent()).toBeTruthy();
         expect(pages.royaltyRates.getEffectiveStartDateContextualHelp()).toBe("Effective Date is based on time + Territory that is processing the royalty + Income Received Date. For rates to become active, Royalty Processing needs to know the date (when known) the Rate Set begins");
-        // expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe("2015-03-12")
+        // expect(pages.royaltyRates.getEffectiveStartDateInputValue()).toBe('2014-03-12')
     });
 };
 
 exports.checkEffectiveStartDateErrorMessages = function (table, message) {
-    console.log("Inspect Effective Start Date Error Messages")
-
     var fields = table.shift();
     _.each(table, function (row, index) {
         var date = row[0],
@@ -163,7 +166,7 @@ exports.addRatePercentageToContractualField = function (percentage) {
 
 exports.clickOnReceiptApplicationMethod = function () {
     it("Change Rate Application Method to On Receipt", function () {
-        pages.royaltyRates.clickOnReceiptApplicationMethod();
+        pages.royaltyRates.clickButtonOnReceiptApplicationMethod();
     });
 };
 
@@ -213,7 +216,7 @@ exports.pause = function () {
 exports.rateSetSavedSuccesfully = function () {
     it("Rate Set Was Saved ", function () {
         pages.editRoyaltyRates.clickRRSumarryTable();
-        pages.editRoyaltyRates.clickeditSavedRRIcon();
+        pages.editRoyaltyRates.clickEditSavedRRIcon();
 
         expect(pages.editRoyaltyRates.getSavedRRName()).toBe("Rate Set 1");
         expect(pages.editRoyaltyRates.getSavedRRDate()).toBe("2015-11-11");
