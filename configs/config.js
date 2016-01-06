@@ -60,7 +60,8 @@ var defaultUserName = 'TangoTest1',
             failFast: cli['fail-fast'],
             noUpload: cli['no-upload'],
             orphanOnError: cli['orphan-on-error'],
-            demoReporter: cli['demo-reporter']
+            demoReporter: cli['demo-reporter'],
+            stepByStep: cli['step-by-step']
         },
         _env_: env,
         localhost: {

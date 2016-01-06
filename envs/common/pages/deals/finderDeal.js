@@ -444,7 +444,7 @@ if (pages.finderDeal === undefined) {
         },
 
         confirmCancelChangesModalDialog: function () {
-            pages.base.waitUntilModalAnimationFinishes();
+            pages.base.waitForModal();
             browser.wait(ExpectedConditions.visibilityOf(pages.finderDeal.elems.yesCancelChangesModalDialog));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.finderDeal.elems.yesCancelChangesModalDialog));
             pages.finderDeal.elems.yesCancelChangesModalDialog.click();

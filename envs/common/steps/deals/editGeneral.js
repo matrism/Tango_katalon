@@ -9,10 +9,10 @@ steps.editDealGeneral = exports;
 exports.returnAndCheckInternalContactsTitle = function () {
     it("Return internal contacts ", function () {
         element(By.css("div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2")).getText().
-            then(function (promise) {
-                console.log("Internal Contacts title is: " + promise);
-                expect(promise).toEqual("INTERNAL CONTACTS");
-            });
+        then(function (promise) {
+            console.log("Internal Contacts title is: " + promise);
+            expect(promise).toEqual("INTERNAL CONTACTS");
+        });
     });
 };
 
@@ -28,43 +28,43 @@ exports.editInternalContactsArea = function () {
 exports.returnAndCheckInternalContactsHeaderTable = function () {
     it("Return internal contacts table header ", function () {
         element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[1]")).getText().
-            then(function (promise) {
-                console.log("Internal Contacts header table is: " + promise);
-                expect(promise).toEqual("Contact Name Role Email");
-                internalContacts[0] = promise + "\n";
-            });
+        then(function (promise) {
+            console.log("Internal Contacts header table is: " + promise);
+            expect(promise).toEqual("Contact Name Role Email");
+            internalContacts[0] = promise + "\n";
+        });
     });
 };
 
 exports.returnAndCheckFirstInternalContactsValues = function () {
     it("Return first internal contacts values added ", function () {
         element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[2]")).getText().
-            then(function (promise) {
-                //console.log("First internal Contacts values added: " + promise);
-                expect(promise).not.toEqual("");
-                internalContacts[1] = promise + "\n";
-            });
+        then(function (promise) {
+            //console.log("First internal Contacts values added: " + promise);
+            expect(promise).not.toEqual("");
+            internalContacts[1] = promise + "\n";
+        });
     });
 };
 
 exports.returnAndCheckInternalContactsValues = function (i) {
     it("Return second third... the rest of internal contacts values added ", function () {
         element(By.xpath("//*[@class='view-internal-contact']//tbody//tr[" + (i + 1) + "]")).getText().
-            then(function (promise) {
-                console.log("Internal Contacts values added: " + promise);
-                expect(promise).not.toEqual("");
-                internalContacts[i] = promise + "\n";
-            });
+        then(function (promise) {
+            console.log("Internal Contacts values added: " + promise);
+            expect(promise).not.toEqual("");
+            internalContacts[i] = promise + "\n";
+        });
     });
 };
 
 exports.returnAndCheckAddInternalContactsLinkPresent = function () {
     it("Return add internal contacts link text ", function () {
         element(By.css("div.add-new-button button.btn.btn-link")).getText().
-            then(function (promise) {
-                //console.log("Add Internal Contacts list is present and it's name is: " + promise);
-                expect(promise).toEqual("Add External Contact");
-            });
+        then(function (promise) {
+            //console.log("Add Internal Contacts list is present and it's name is: " + promise);
+            expect(promise).toEqual("Add External Contact");
+        });
     });
 };
 
@@ -114,12 +114,12 @@ exports.clickEditInternalContactRole = function () {
     });
 },
 
-exports.clickEditInternalContactRoleRowI = function (i) {
-    it("Click edit internal contact role row i", function () {
-        pages.editDealGeneral.clickEditInternalContactsRoleRowI(i);
-        pages.editDealGeneral.waitForAjax();
-    });
-};
+    exports.clickEditInternalContactRoleRowI = function (i) {
+        it("Click edit internal contact role row i", function () {
+            pages.editDealGeneral.clickEditInternalContactsRoleRowI(i);
+            pages.editDealGeneral.waitForAjax();
+        });
+    };
 
 exports.removeInternalContactsRole = function () {
     it("Remove first internal contact role", function () {
@@ -189,6 +189,41 @@ exports.itCancelInternalContactsChanges = function () {
     it("Cancel internal contacts changes after editing them", function () {
         pages.editDealGeneral.clickOnCancelEditInternalContacts();
     })
+};
+
+exports.editContractExecutionDate = function () {
+    it("Edit the contract execution date ", function () {
+        pages.editDealGeneral.editFillIntoTheValidExecutionDateYear();
+        pages.editDealGeneral.editFillIntoTheValidExecutionDateMonth();
+        pages.editDealGeneral.editFillIntoTheValidExecutionDateDay();
+    });
+};
+
+exports.editGeneralTabFirstElementsLeftArea = function () {
+    it("Edit the general tab first elements left area ", function () {
+        pages.editDealGeneral.editTheGeneralTabFirstLeftElements();
+    });
+};
+
+exports.editRemoveTheExistingContractingParty = function () {
+    it("Edit remove existing contracting party", function () {
+        pages.editDealGeneral.editRemoveTheExistingContractingParty();
+    });
+};
+
+exports.editExistingContractingParty = function (contracting) {
+    it("Edit existing contracting party -  add new one ", function () {
+        pages.editDealGeneral.editFillIntoTheContractingParty(contracting);
+        pages.editDealGeneral.editSelectRandomValueDropDownContractingParty();
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
+exports.saveEditGeneralTabFirstElementsLeftArea = function () {
+    it("Save edit general tab first elements left area ", function () {
+        pages.editDealGeneral.clickOnTheSaveEditGeneralLeftTabArea();
+        pages.editDealGeneral.waitForAjax();
+    });
 };
 
 exports.itEditInternalContactsToDealGeneralTab = function (internal_contact) {

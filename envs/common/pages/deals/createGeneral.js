@@ -188,6 +188,19 @@ if (pages.createDealGeneral === undefined) {
             pages.createDealGeneral.elems.dayExecutionDate.sendKeys(day);
         },
 
+        fillIntoTheExecutionYearFieldValue: function (year) {
+            pages.createDealGeneral.elems.yearExecutionDate.sendKeys(year);
+        },
+
+        fillIntoTheExecutionMonthFieldValue: function (month) {
+            pages.createDealGeneral.elems.monthExecutionDate.sendKeys(month);
+        },
+
+        fillIntoTheExecutionDayFieldDayValue: function (day) {
+            pages.createDealGeneral.elems.dayExecutionDate.sendKeys(day);
+        },
+
+
         selectTheRandomArtist: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
             pages.createDealGeneral.elems.artistsField.click();

@@ -179,6 +179,9 @@ exports.fail = function (description) {
     });
 };
 
+pageStep('Pause');
+pageStep('Orphan browser');
+
 exports.clearDownloadsDirectory = function () {
     it('Clear downloads directory', function () {
         pages.base.clearDownloadsDirectory();
@@ -191,8 +194,33 @@ exports.validateDownloadFileCount = function (value) {
     });
 };
 
+exports.openTheNewTab = function(url) {
+    it("Open a new tab with url", function() {
+        browser.driver.executeScript(function () {
+            (function (a) {
+                document.body.appendChild(a);
+                a.setAttribute('href', location.href);
+                a.dispatchEvent((function (e) {
+                    e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
+                    return e;
+                }(document.createEvent('MouseEvents'))))
+            }(document.createElement('a')));
+        });
+    });
+};
+
+exports.focusOnNewOpenedTab = function(i){
+    it("Focus on the new opened tab ", function(){
+        pages.base.focusOnTheNewOpenedTab(i);
+    });
+};
+
+
 pageStep('Open new tab');
 pageStep('Duplicate tab');
 pageStep('Switch to tab');
 pageStep('Close tab by index');
-
+pageStep('Wait for modal');
+pageStep('Validate modal message body');
+pageStep('Close modal');
+pageStep('Scroll to');

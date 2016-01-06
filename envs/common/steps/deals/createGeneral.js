@@ -11,29 +11,29 @@ exports.goToNewDealPage = function () {
     });
 };
 
-exports.selectDesiredSigningTerritory = function(value) {
-    it('Select deal signing territory (' + value + ')', function() {
+exports.selectDesiredSigningTerritory = function (value) {
+    it('Select deal signing territory (' + value + ')', function () {
         pages.createDealGeneral.selectDesiredSigningTerritory(value);
     });
 };
 
 exports.selectDealSigningTerritory = function () {
     it("Select deal signing territory", function () {
-        pages.createDealGeneral.selectDesiredSigningTerritory("Argentina");
-    }
+            pages.createDealGeneral.selectDesiredSigningTerritory("Argentina");
+        }
     );
 };
 
-exports.enterContractingPartySearchTerms = function(value) {
-    it('Enter contracting party search terms (' + value + ')', function() {
+exports.enterContractingPartySearchTerms = function (value) {
+    it('Enter contracting party search terms (' + value + ')', function () {
         pages.createDealGeneral.fillContractingPartiesField(value);
     });
 };
 
 exports.fillContractingPartyField = function () {
     it("Fill contracting party field", function () {
-        pages.createDealGeneral.fillContractingPartiesField("bmi");
-    }
+            pages.createDealGeneral.fillContractingPartiesField("bmi");
+        }
     );
 };
 
@@ -52,8 +52,8 @@ exports.selectContractingParty = function () {
     });
 };
 
-exports.selectContractingPartySearchResultByIndex = function(i) {
-    it('Select contracting party search result #' + (i + 1), function() {
+exports.selectContractingPartySearchResultByIndex = function (i) {
+    it('Select contracting party search result #' + (i + 1), function () {
         pages.createDealGeneral.selectContractingPartySearchResultByIndex(i);
     });
 };
@@ -61,6 +61,7 @@ exports.selectContractingPartySearchResultByIndex = function(i) {
 exports.selectRandomContractingParty = function () {
     it("Select random suggestion", function () {
         pages.createDealGeneral.selectRandomContractingPartyValueFromDropDown();
+        pages.createDealGeneral.waitForAjax();
     });
 };
 
@@ -125,6 +126,26 @@ exports.fillIntoExecutionDateField = function () {
         pages.createDealGeneral.fillIntoTheExecutionMonthField();
         pages.createDealGeneral.elems.dayExecutionDate.isEnabled();
         pages.createDealGeneral.fillIntoTheExecutionDayField();
+    });
+};
+
+exports.fillIntoExecutionDateFieldSpecificYearValue = function (year) {
+    it("Fill into execution date year field ", function () {
+        pages.createDealGeneral.fillIntoTheExecutionYearField(year);
+    });
+};
+
+exports.fillIntoExecutionDateFieldSpecificMonthValue = function (month) {
+    it("Fill into execution date month field ", function () {
+        pages.createDealGeneral.elems.monthExecutionDate.isEnabled();
+        pages.createDealGeneral.fillIntoTheExecutionMonthField(month);
+    });
+};
+
+exports.fillIntoExecutionDateFieldSpecificDayValue = function (day) {
+    it("Fill into execution date day field ", function () {
+        pages.createDealGeneral.elems.dayExecutionDate.isEnabled();
+        pages.createDealGeneral.fillIntoTheExecutionDayField(day);
     });
 };
 
@@ -273,6 +294,25 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectRandomContractingParty();
+    });
+};
+
+
+exports.itFillDealGeneralYearExecutionDateValue = function(year){
+    it("Fill deal general year execution date specific value ", function(){
+        pages.createDealGeneral.fillIntoTheExecutionYearFieldValue(year);
+    });
+};
+
+exports.itFillDealGeneralMonthExecutionDateValue = function(month){
+    it("Fill deal general month execution date specific value ", function(){
+        pages.createDealGeneral.fillIntoTheExecutionMonthFieldValue(month);
+    });
+};
+
+exports.itFillDealGeneralDayExecutionDateValue = function(day){
+    it("Fill deal general day execution date specific value ", function(){
+        pages.createDealGeneral.fillIntoTheExecutionDayFieldDayValue(day);
     });
 };
 
