@@ -372,6 +372,7 @@ exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
 
 exports.checkTheNumberOfScopesPerDeal = function (i) {
     it("Check that the number of scopes per deal it is equal with " + i, function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.numberOfScopesPerDeal));
         pages.editDealScope.elems.numberOfScopesPerDeal.getText().
             then(function (promise) {
                 console.log("Number of scopes per deal is  : " + promise);
