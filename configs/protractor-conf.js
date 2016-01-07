@@ -1,5 +1,7 @@
 'use strict';
 
+require('../helpers');
+
 var path = require('path'),
     glob = require('glob'),
     _ = require('lodash'),
@@ -7,7 +9,7 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
-    HtmlReporter = require('protractor-jasmine2-screenshot-reporter'),
+    HtmlReporter = requireCustom('protractor-jasmine2-screenshot-reporter'),
     fs = require('fs'),
     screenShotPath,
     tmp = require('tmp'),
@@ -28,8 +30,6 @@ global.steps = {};
 global.hash = {};
 
 hash.testVariables = {};
-
-require('../helpers');
 
 global.systemConfig = global._tf_config._system_;
 
