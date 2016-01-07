@@ -9,7 +9,7 @@ exports.commonFeatureTags = ['royaltyRates', 'sanity'];
 exports.feature = [
     {
         name: "Assign single rate to Scope on creation",
-        tags: ['create', 'blah'],
+        tags: ['create'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
