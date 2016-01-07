@@ -1,71 +1,114 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <div class="tatHeader">
-    {{#if buildNumber}}
-        <p>
-            Build number:
-            <select id="tatBuildNumber">
-                <option>{{buildNumber}}</option>
-            </select>
-            (<a id="tatGoToNextReport" target="_top">Next</a>).
-        </p>
-    {{/if}}
-    <p>
-        Start date:
-        <time id="tatStartDate" datetime="{{isoStartDate}}">{{startDate}}{{#if timezone}} {{timezone}}{{/if}}</time>.
-    </p>
-    <p>
-        End date:
-        <time datetime="{{isoEndDate}}">{{endDate}}{{#if timezone}} {{timezone}}{{/if}}</time>.
-    </p>
-    <p>
-        Total time: {{duration}}.
-    </p>
-    <p>
-        Target environment: {{env.name}}
-        (<a href="{{env.url}}">{{env.url}}</a>).
-    </p>
-    <p>
-        Source branch:
-        {{#if branch}}
-            {{branch}}
-            (<a href="https://github.com/wmgdsp/tango-app/commit/{{commit.hash}}">{{commit.shortHash}}</a>).
-        {{else}}
-            unknown.
-        {{/if}}
-    </p>
-    <p>
-        Included tags:
-        {{#if includedTagsString}}
-            {{includedTagsString}}.
-        {{else}}
-            all.
-        {{/if}}
-    </p>
-    <p>
-        Excluded tags:
-        {{#if excludedTagsString}}
-            {{excludedTagsString}}.
-        {{else}}
-            none.
-        {{/if}}
-    </p>
-    <p>
-        Total steps:
-        <span class="tatTotalSteps"></span>
-        (<span class="tatTotalPassed passed"></span>
-        / <span class="tatTotalFailed failed"></span>).
-    </p>
-    <p>
-        <input type="text" id="tagSearch" placeholder="tag search" />
-    </p>
-    <p>
-        <input type="checkbox" id="showOnlyPassing" /> <span style="color: green;">✓</span> Show Only Passing
-        <input type="checkbox" id="showOnlyFailing" /> <span style="color: red;">✗</span> Show Only Failing
-    </p>
+    <table class="tatHeaderTable">
+        <tr>
+            <td>
+                <p>
+                    Included tags:
+                    {{#if includedTagsString}}
+                        {{includedTagsString}}.
+                    {{else}}
+                        all.
+                    {{/if}}
+                </p>
+                <p>
+                    Excluded tags:
+                    {{#if excludedTagsString}}
+                        {{excludedTagsString}}.
+                    {{else}}
+                        none.
+                    {{/if}}
+                </p>
+                <p>
+                    Total feature files:
+                    <span class="tatTotalFeatures"></span>
+                    (<span class="tatTotalFeaturesPassed passed"></span>
+                    / <span class="tatTotalFeaturesFailed failed"></span>).
+                </p>
+                <p>
+                    Total scenarios:
+                    <span class="tatTotalScenarios"></span>
+                    (<span class="tatTotalScenariosPassed passed"></span>
+                    / <span class="tatTotalScenariosFailed failed"></span>).
+                </p>
+                <p>
+                    Total steps:
+                    <span class="tatTotalSteps"></span>
+                    (<span class="tatTotalStepsPassed passed"></span>
+                    / <span class="tatTotalStepsFailed failed"></span>).
+                </p>
+                <p>
+                    <input type="text" id="tagSearch" placeholder="tag search" />
+                </p>
+                <p>
+                    <input type="checkbox" id="showOnlyPassing" /> <span style="color: green;">✓</span> Show Only Passing
+                    <input type="checkbox" id="showOnlyFailing" /> <span style="color: red;">✗</span> Show Only Failing
+                </p>
+                <p>
+                    <button id="tatExpandAll">
+                        Expand all
+                    </button>
+                    <button id="tatCollapseAll">
+                        Collapse all
+                    </button>
+                </p>
+            </td>
+            <td>
+                {{#if buildNumber}}
+                    <p>
+                        Build number:
+                        <select id="tatBuildNumber">
+                            <option>{{buildNumber}}</option>
+                        </select>
+                        (<a href="../../" target="_top">Summary</a>,
+                        <a href="../../consoleFull" target="_top">Logs</a>,
+                        <a href="../../rebuild" target="_top">Rebuild</a>,
+                        <a id="tatGoToNextReport" target="_top">Next</a>).
+                    </p>
+                {{/if}}
+                <p>
+                    Start date:
+                    <time id="tatStartDate" datetime="{{isoStartDate}}">{{startDate}}{{#if timezone}} {{timezone}}{{/if}}</time>.
+                </p>
+                <p>
+                    End date:
+                    <time datetime="{{isoEndDate}}">{{endDate}}{{#if timezone}} {{timezone}}{{/if}}</time>.
+                </p>
+                <p>
+                    Total time: {{duration}}.
+                </p>
+                <p>
+                    Target environment: {{env.name}}
+                    (<a href="{{env.url}}">{{env.url}}</a>).
+                </p>
+                <p>
+                    Source branch:
+                    {{#if branch}}
+                        {{branch}}
+                        (<a href="https://github.com/wmgdsp/tango-app/commit/{{commit.hash}}">{{commit.shortHash}}</a>).
+                    {{else}}
+                        unknown.
+                    {{/if}}
+                </p>
+            </td>
+        </tr>
+    </table>
 </div>
 <style>
-    .tatTotalPassed, .tatTotalFailed {
+    .tatHeader {
+        border-bottom: 1px solid lightgray;
+        padding-bottom: 1.3;
+    }
+
+    .tatHeaderTable td {
+        border: 10px solid transparent;
+        vertical-align: top;
+    }
+
+    .tatTotalFeaturesPassed, .tatTotalFeaturesFailed,
+    .tatTotalScenariosPassed, .tatTotalScenariosFailed,
+    .tatTotalStepsPassed, .tatTotalStepsFailed {
         padding: 0;
     }
 
@@ -229,7 +272,9 @@
             deals: 'Deals',
             financialInterfaces: 'Financial Interfaces',
             incomeManagement: 'incomeManagement',
+            orgs: 'Organisations',
             payees: 'Payees',
+            person: 'Person',
             royaltyProcessing: 'Royalty Processing',
             royaltyRates: 'Royalty Rates',
             works: 'Works',
@@ -321,22 +366,77 @@
         }
     });
 
+    // Setup expand / collapse all click handlers.
+    $('#tatExpandAll').click(function() {
+        $('.toggle').removeClass('active').click();
+    });
+
+    $('#tatCollapseAll').click(function() {
+        $('.toggle').addClass('active').click();
+    });
+
     // Collapse all lists.
     $('.toggle').click();
 </script>
 <script>
     'use strict';
 
+    function searchOrCheckHiddenElementPredicate() {
+        var selector = '.searchhide, .checkhide';
+
+        return (
+            $(this).closest(selector).addBack(selector).length === 0
+        );
+    }
+
+    function siblingMatchesPredicate(selector) {
+        return function() {
+            return ($(this).siblings(selector).length !== 0);
+        };
+    }
+
     function calculateTotals() {
         // Count total steps
-        $('.tatTotalSteps').text($('ul.feature:not(.searchhide) ul li > a').length);
+        var featureLists = $('body > ul > ul').filter(
+                searchOrCheckHiddenElementPredicate
+            ),
 
-        $('.tatTotalPassed').text(
-            $('ul.feature:not(.searchhide) ul li > .passed ~ a').length + ' ✓'
+            scenarioLists = featureLists.children('ul').filter(
+                searchOrCheckHiddenElementPredicate
+            ),
+
+            stepLinks = $('li > a:first-of-type').filter(
+                searchOrCheckHiddenElementPredicate
+            );
+
+        $('.tatTotalFeatures').text(featureLists.length);
+
+        $('.tatTotalFeaturesPassed').text(
+            featureLists.filter('.passed').length + ' ✓'
         );
 
-        $('.tatTotalFailed').text(
-            $('ul.feature:not(.searchhide) ul li > .failed ~ a').length + ' ✗'
+        $('.tatTotalFeaturesFailed').text(
+            featureLists.filter('.failed').length + ' ✗'
+        );
+
+        $('.tatTotalScenarios').text(scenarioLists.length);
+
+        $('.tatTotalScenariosPassed').text(
+            scenarioLists.filter('.passed').length + ' ✓'
+        );
+
+        $('.tatTotalScenariosFailed').text(
+            scenarioLists.filter('.failed').length + ' ✗'
+        );
+
+        $('.tatTotalSteps').text(stepLinks.length);
+
+        $('.tatTotalStepsPassed').text(
+            stepLinks.filter(siblingMatchesPredicate('span.passed')).length + ' ✓'
+        );
+
+        $('.tatTotalStepsFailed').text(
+            stepLinks.filter(siblingMatchesPredicate('span.failed')).length + ' ✗'
         );
     }
 
@@ -411,6 +511,7 @@
         });
 
         checkLists();
+        calculateTotals();
         updateLocationHash();
     });
 
@@ -432,6 +533,7 @@
         });
 
         checkLists();
+        calculateTotals();
         updateLocationHash();
     });
 

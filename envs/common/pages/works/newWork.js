@@ -564,7 +564,7 @@ exports.deleteComponentWork = function(i) {
     element.click();
 };
 exports.confirmComponentWorkDeletion = function() {
-    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.waitForModal();
 
     return exports.confirmComponentWorkDeletionButton().click();
 };

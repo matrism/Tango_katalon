@@ -1,5 +1,7 @@
 'use strict';
 
+require('../helpers');
+
 var path = require('path'),
     glob = require('glob'),
     _ = require('lodash'),
@@ -7,7 +9,7 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
-    HtmlReporter = require('protractor-jasmine2-screenshot-reporter'),
+    HtmlReporter = requireCustom('protractor-jasmine2-screenshot-reporter'),
     fs = require('fs'),
     screenShotPath,
     tmp = require('tmp'),
@@ -17,6 +19,7 @@ var path = require('path'),
     SnapbackReporter = require('../tools/enhanceHtmlReport/SnapbackReporter'),
     orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     demoReporter = require('../tools/demoReporter'),
+    stepByStepReporter = require('../tools/stepByStepReporter'),
     reporterFilePath,
     reporterFileName = 'reporter.htm';
 
@@ -27,8 +30,6 @@ global.steps = {};
 global.hash = {};
 
 hash.testVariables = {};
-
-require('../helpers');
 
 global.systemConfig = global._tf_config._system_;
 
@@ -108,7 +109,23 @@ config = {
         });
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
+
+        // maximize browser size, then check if it's bigger than our config resolution
         browser.driver.manage().window().maximize();
+
+        browser.driver.manage().window().getSize().then(function (size) {
+            // check if we have a system resolution and if either width/height is larger than actual browser width/height
+            if (systemConfig.resolution.width && systemConfig.resolution.height && (size.width < systemConfig.resolution.width || size.height < systemConfig.resolution.height)) {
+                // if so, set browser width/height to config and then out browser size
+                browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+
+                browser.driver.manage().window().getSize().then(function (size) {
+                    console.log('Browser Window Size: ' + JSON.stringify(size));
+                });
+            } else {
+                console.log('Browser Window Size: ' + JSON.stringify(size));
+            }
+        });
 
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {
@@ -138,14 +155,6 @@ config = {
                 );
             }, timeout);
         };
-
-        setTimeout(function(){
-            if (systemConfig.resolution.width && systemConfig.resolution.height) {
-                browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
-            } else {
-                browser.driver.manage().window().maximize();
-            }
-        });
 
         asciiPrefixes = {
             success: '[Pass] ',
@@ -185,6 +194,12 @@ config = {
 
         if(systemConfig.orphanOnError) {
             jasmine.getEnv().addReporter(orphanOnErrorReporter);
+        }
+
+        jasmine.getEnv().addReporter(stepByStepReporter);
+
+        if (systemConfig.stepByStep) {
+            stepByStepReporter.enable();
         }
 
         if (typeof process.env.__using_grunt === 'undefined') {

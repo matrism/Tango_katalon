@@ -6,7 +6,7 @@ exports.beforeFeature = function () {
 
 exports.commonFeatureTags = [
     'incomeProviderSearchRegression',
-    'royalties',
+    'royaltyRates',
     'incomeProvider',
     'regression'
 ];

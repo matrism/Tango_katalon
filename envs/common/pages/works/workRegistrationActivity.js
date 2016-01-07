@@ -88,12 +88,12 @@ exports.activityGroup = (function() {
         var target = activityGroup.targets[targetGroupName || 'latest'];
 
         pages.base.scrollIntoView(target.container);
-
         browser.wait(ExpectedConditions.elementToBeClickable(
             activityGroup.container.all().last()
         ));
 
-        return target.container.click();
+        target.container.click();
+        return pages.base.waitForAjax();
     };
 
     return activityGroup;
@@ -301,7 +301,11 @@ exports.activityGroup.events = (function() {
     events.toggleBlind = function() {
         var element = events.targets.latest.container;
         pages.base.scrollIntoView(element);
-        return element.click();
+        browser.wait(ExpectedConditions.visibilityOf(
+            element
+        ));
+        element.click();
+        return pages.base.waitForAjax();
     };
 
     events.fileNameElement = function() {
@@ -318,6 +322,50 @@ exports.activityGroup.events = (function() {
         return pph.trim(fileNameElement.getText()).then(function(text) {
             hash.testVariables[variableName] = text;
         });
+    };
+
+    events.getEmailMethod = function (i) {
+        var target = events.targets.latest;
+        return target.detailsContainer.all(by.cssContainingText(
+            '[data-ng-repeat="event in activity.delivery_events"]', 'Email to'
+        )).get(i);
+    };
+
+    events.getFtpMethod = function (i) {
+        var target = events.targets.latest;
+        return target.detailsContainer.all(by.cssContainingText(
+            '[data-ng-repeat="event in activity.delivery_events"]', 'FTP'
+        )).get(i);
+    };
+
+    events.getDeliveryEmail = function (deliveryMethod) {
+        return deliveryMethod.$(
+            '[data-ng-show="event.file_delivery_email_address"] a'
+        ).getText();
+    };
+
+    events.getDeliveryAddress = function (deliveryMethod) {
+        return deliveryMethod.element(
+            by.binding('event.file_delivery_ftp_address.split(":")[0]')
+        ).getText();
+    };
+
+    events.getDeliveryPort = function (deliveryMethod) {
+        return deliveryMethod.element(
+            by.binding('event.file_delivery_ftp_address.split(":")[1]')
+        ).getText();
+    };
+
+    events.getEmailMethodEmail = function (i) {
+        return events.getDeliveryEmail(events.getEmailMethod(i));
+    };
+
+    events.getFtpMethodAddress = function (i) {
+        return events.getDeliveryAddress(events.getFtpMethod(i));
+    };
+
+    events.getFtpMethodPort = function (i) {
+        return events.getDeliveryPort(events.getFtpMethod(i));
     };
 
     return events;

@@ -322,13 +322,15 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editClickOnMdrcYesCommercialReleaseByMajorLabel: function () {
-            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel);
-            pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel.click();
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel).perform();
+            browser.actions().click(pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel).perform();
+            //pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel);
+            //pages.editDealContractPeriod.elems.editMdrcYesCommercialReleaseByMajorLabel.click();
         },
 
         editClickOnMdrcNoCommercialReleaseByMajorLabel: function () {
-            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcNoCommercialReleaseByMajorLabel);
-            pages.editDealContractPeriod.elems.editMdrcNoCommercialReleaseByMajorLabel.click();
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.editMdrcNoCommercialReleaseByMajorLabel).perform();
+            browser.actions().click(pages.editDealContractPeriod.elems.editMdrcNoCommercialReleaseByMajorLabel).perform();
         },
 
         editTheMdrcLabelsField: function () {
@@ -437,8 +439,8 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editRemoveTheFirstMdrcLabel: function () {
-            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon);
-            pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon.click();
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon).perform();
+            browser.actions().click(pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon).perform();
         }
     });
 }

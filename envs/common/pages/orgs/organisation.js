@@ -32,6 +32,12 @@ if (pages.organisation === undefined) {
         scrollPageDataRow: function () {
             return $$(".DATA-ROW").count();
         },
+        validationErrorsFilterContainer: function () {
+            return $$('[data-ng-repeat="valError in groupedValidations.items"]');
+        },
+        validationErrorsWorkId: function (i) {
+            return this.validationErrorsFilterContainer().$$('a').get(i).getText();
+        },
         scrollPageDataErrors: function () {
             return $$(".DATA-CHILD .DATA-ROW").count();
         },
@@ -40,6 +46,12 @@ if (pages.organisation === undefined) {
         },
         listNonErrorStatus: function () {
             return $$(".row-header>div:nth-child(2)>span .icon-minus").count();
+        },
+        validationErrorCriticalStatus: function () {
+            return $$(".icon-minus-sign").count();
+        },
+        validationNonErrorStatus: function () {
+            return $$(".icon-minus").count();
         },
         listWorkTitle: function () {
             return $$(".row-header>div:nth-child(3)>h4").get(1).getText();
@@ -115,6 +127,9 @@ if (pages.organisation === undefined) {
         },
         getValidationFilterNumber: function(item) {
             return $$('.filter-item>div:nth-child(2)').get(item).getText();
+        },
+        getValidationFilterText: function(item) {
+            return $$('.filter-item .filter-text').get(item).getText();
         },
         backValidationErrors: function () {
             return $$(".ACTIVITY-HEADER a").first();
@@ -286,6 +301,9 @@ if (pages.organisation === undefined) {
         getEventRunDate: function (event) {
             return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
         },
+        getFileName: function (event) {
+            return event.$('[data-ng-if="activity.file_name"]').getText();
+        },
         popupRegistrationLinkByText: function (text) {
             //$$(".popup-reg-run>ul>li>a").
             return element(By.linkText(text));
@@ -293,14 +311,41 @@ if (pages.organisation === undefined) {
             // return protractor.driver.findElement(protractor.By.linkText(text));
         },
         activeRegistrationRunButton: function () {
-            return $('[data-tooltip=""][data-ng-click="canExecuteStackedWorks() && executeStackedWorks();"]');
+            return element(by.cssContainingText(
+                '#ACTIVITY-HEADER button:not(.disabled)', 'Execute Registration Run'
+            ));
         },
         registrationRunButton: function () {
             return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
         },
+        validationErrorsSortFilter: function () {
+            return $$(".ACTIVITY-HEADER>div.text-right a.dropdown-toggle").first().getText();
+        },
+        errorsFilterSortContainer: function () {
+            return $$('[data-ng-repeat="validationSortType in dataHolder.validationSortTypes"]');
+        },
+        errorTypeGroupedValidationsContainer: function () {
+            return $$('[data-ng-repeat="groupedValidations in activeContext.groupedValidations"]');
+        },
+        getErrorTypeHeader: function (i) {
+            return this.errorTypeGroupedValidationsContainer().$$('[data-ng-click="!isExpandableValidationBlind() || (groupedValidations.isExpandedGroup = !groupedValidations.isExpandedGroup)"] h3').get(i).getText();
+        },
+        affectedPartyGroupedValidationsContainer: function () {
+            return $$('[data-ng-if="stateHolder.validationSort.type === \'affected_party\' && !!groupedValidations.items[0].affected_party"]');
+        },
+        getErrorTypeFilters: function () {
+            return $$('[data-ng-switch-when="error_type"]').count();
+        },
+        getAffectedPartyHeader: function () {
+            return this.affectedPartyGroupedValidationsContainer().$$('.pull-right .text-right').first().getText();
+        },
+        selectValidationErrorsFilter: function (i) {
+            return this.errorsFilterSortContainer().$$('[data-ng-click="setValidationSort(validationSortType)"]').get(i);
+        },
         modalConfirmButton: function () {
-            // return element.all(by.css(".modal-footer>button")).element(by.buttonText("OK"));
-            return $('[data-ng-click="(data.show.cancel) ? data.apply() : ok()" ]');
+            return element(by.cssContainingText(
+                '.modal-footer button', 'OK'
+            ));
         },
         modalSuccessConfirmButton: function () {
             return $(".btn.btn-primary.pull-right");
@@ -314,56 +359,50 @@ if (pages.organisation === undefined) {
                 return text;
             })
         },
-        getEmailDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-EMAIL");
+        getEmailDeliveryMethods: function() {
+            return $$('.e2e-method-email'); 
         },
-        getSFTPDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-SFTP");
+        getFTPDeliveryMethods: function() {
+            return $$('.e2e-reg-delivery-method .e2e-method-ftp'); 
         },
-        getFTPDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-FTP");
-        },
-        getThirdPartyDeliveryMethods: function () {
-            return $$(".e2e-delivery-method-THIRDPARTY");
+        getThirdPartyDeliveryMethods: function() {
+            return $$('.e2e-method-3rd-party'); 
         },
         sfptDeliveryMethodName: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").first();
+            return deliveryMethod.$('.e2e-method-delivery strong.ng-binding');
         },
         sftpDeliveryMethodAddress: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.host"]');
+            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.model.host"]');
         },
         sftpDeliveryMethodPort: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.port"]');
+            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.model.port"]');;
         },
         sftpDeliveryMethodUsername: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").get(1);
+            return deliveryMethod.$('.e2e-method-username .ng-binding');
         },
         sftpUnmaskPasswordButton: function (deliveryMethod) {
-            return deliveryMethod.$(".control-group>.controls>.mask-input-password");
+            return deliveryMethod.$('.e2e-method-password a');
         },
         sftpPassword: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.showPassword"]');
+            return deliveryMethod.$('.e2e-method-password span');
         },
         sftpFileFormat: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").get(2);
-        },
-        sftpFileFormatStatus: function (deliveryMethod) {
-            return deliveryMethod.$(".control-group>.controls>span.compress-file");
+            return deliveryMethod.$('.e2e-method-file-format strong.ng-binding');
         },
         sftpDeliveryNotificationStatus: function (deliveryMethod) {
-            return deliveryMethod.$$(".control-group>.controls>strong").last();
-        },
-        sfptDeliveryStatusEmail: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.primary_emails"]');
-        },
-        sftpDeliveryStatusCC: function (deliveryMethod) {
-            return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.cc_emails"]');
+            return deliveryMethod.$('.e2e-method-notification .ng-binding');
         },
         thirdPartyName: function (deliveryMethod) {
-            return deliveryMethod.$('[ data-ng-if="dm.delivery_mechanism_type === \'THIRDPARTY\'"]>div>strong');
+            return deliveryMethod.$('.e2e-method-recipient .ng-binding');
         },
 
         //END OF LOCATORS ///////////////////////////////////////
+        getErrorTypeSortFilters: function () {
+            return this.getErrorTypeFilters();
+        },
+        getValidationErrorsWorkId: function (index) {
+            return this.validationErrorsWorkId(index);
+        },
         executeRegistrationFutureIsActive: function () {
             return this.futureRegistrationRunButton().isPresent();
         },
@@ -390,6 +429,12 @@ if (pages.organisation === undefined) {
         },
         getNonCriticalErrors: function () {
             return this.listNonErrorStatus();
+        },
+        getValidationCriticalErrors: function () {
+            return this.validationErrorCriticalStatus();
+        },
+        getValidationNonCriticalErrors: function () {
+            return this.validationNonErrorStatus();
         },
         getPreviewRegRunWorks: function() {
             return pages.organisation.scrollPageDataRow();
@@ -428,6 +473,23 @@ if (pages.organisation === undefined) {
         clickValidationFilter: function(item) {
             this.getPanelFilter(item).click();
             pages.base.waitForAjax();
+        },
+        clickValidationErrorsSortFilter: function() {
+            browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
+            this.validationErrorsSortFilter().click();
+            pages.base.waitForAjax();
+        },
+        selectValidationErrorsSortFilter: function(index) {
+            this.selectValidationErrorsFilter(index).click();
+            pages.base.waitForAjax();
+        },
+        getErrorTypeValidationErrorsHeader: function(index) {
+            for(var i=0; i < (index -1); i++) {
+                expect(this.getErrorTypeHeader(i)).toBeTruthy();
+            }
+        },
+        validateAffectedPartyHeader: function() {
+            expect(this.getAffectedPartyHeader()).toBeTruthy();
         },
         clickRunFilter: function(item) {
             this.getRunTypeFilter(item).click();
@@ -487,7 +549,6 @@ if (pages.organisation === undefined) {
             return this.thirdPartyName(deliveryMethod).getText();
         },
         getSFTPDeliveryMethodName: function (deliveryMethod) {
-
             return this.sfptDeliveryMethodName(deliveryMethod).getText();
         },
         getSFTPDelivetyMehodAddress: function (deliveryMethod) {
@@ -521,16 +582,13 @@ if (pages.organisation === undefined) {
             return this.sftpDeliveryStatusCC(deliveryMethod).getText();
         },
         getEmailDeliveryMethodEmail: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(1)>.controls>strong').getText();
-        },
-        getEmailDeliveryMethodCC: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(1)>div>[data-ng-show="dm.delivery_mechanism.cc_emails"]').getText();
+            return deliveryMethod.$$('.e2e-method-delivery .ng-binding').first().getText();
         },
         getEmailDeliveryMethodFileFormat: function (deliveryMethod) {
-            return deliveryMethod.$('div:nth-child(3)>.controls>strong').getText();
+            return deliveryMethod.$('.e2e-method-file-format .ng-binding').getText();
         },
         getEmailDeliveryMethodNotification: function (deliveryMethod) {
-            return deliveryMethod.$$('div:nth-child(5)>.controls >span').first().getText();
+            return deliveryMethod.$('.e2e-method-notification .ng-binding').getText();
         },
         numberOfWorks: function () {
             var number = parseInt(this.textWithTotalWorksNumber(), 10);
@@ -598,9 +656,6 @@ if (pages.organisation === undefined) {
         waitForElementWork: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.elementWork()));
         },
-        waitForOrgToBeInvisible: function () {
-            browser.wait(ExpectedConditions.invisibilityOf(this.orgTypeHeader()));
-        },
         typeOrganisationNameIntoInput: function (organisationName) {
             this.searchInput().sendKeys(organisationName);
         },
@@ -616,7 +671,7 @@ if (pages.organisation === undefined) {
             this.fileTypeIncomeInput().sendKeys(protractor.Key.ENTER);
         },
         clickExecuteRegistrationRunButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.iconDownloadAlt()));
+            browser.wait(ExpectedConditions.elementToBeClickable(this.activeRegistrationRunButton()));
             return this.activeRegistrationRunButton().click();
         },
         confirmModalDialog: function () {
@@ -637,25 +692,16 @@ if (pages.organisation === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.successModalMessage()));
             return this.successModalMessage().isPresent();
         },
-        resetWork: function (env, deliveryDate, name) {
-            console.log("Resetting Work ");
+        resetWork: function (runDate, recipient) {
+            console.log('Resetting Work');
 
-            //http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01
-            var enviroinment = "http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?";
-            var recipient = "BMI";
-            var runDate = "2014-09-01";
+            var url = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works?recipient=' + recipient + '&runDate=' + runDate;
 
-
-            client.request({
-
-                url: enviroinment + "recipient=" + recipient + "&runDate=" + runDate,
-                // url:"http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80/api/v1/workregs/reset_sent_works?recipient=BMI&runDate=2014-09-01",
-                method: 'POST' // optional
+            return client.request({
+                url: url,
+                method: 'POST'
             }).then(function (response) {
-
-                // console.log(response.getStatusCode());
                 return response.getStatusCode();
-
             });
         },
         clickPreviewRegistrationRunTab: function () {
@@ -712,75 +758,12 @@ if (pages.organisation === undefined) {
         },
         workHasDeliveredStatus: function () {
             return this.getStatus(this.getLastAddedWorkEvent());
-
-            //.row-header>div>div>span>.icon-exchange  ICON
-            //.row-header>div>div:nth-child(2)>p>span TOTAL WORKS TEXT
-            //.row-header>div>div:nth-child(2)>div CW text
-            //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time delivered date
-            //.row-header>div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time RUN DATE
         },
         clickLatestWork: function () {
             return this.getLastAddedWorkEvent().click();
         },
         getLatestWorkEvent: function () {
             this.getLastAddedWorkEvent();
-        },
-        testMultipleElements: function () {
-            //  //*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::node()
-
-            this.getLastAddedWorkEvent();
-            //.DATA-CHILD
-            // var list = browser.driver.findElements(By.xpath(".//*[@id='ACTIVITY-RECORDS']"));
-            //for(WebElement element: list){
-            //    //print text if text not empty
-            //    String text = element.getText();
-            //    if(!text.isEmpty){
-            //        S.O.P("Result :"+text);
-            //    }
-            //}
-            //browser.driver.findElements(By.xpath('//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]'))
-            this.getEmailDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-            this.getThirdPartyDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-            this.getSFTPDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-            this.getFTPDeliveryMethods().then(function (result) {
-                result.forEach(function (entry) {
-                    entry.getText().then(function (value) {
-                        console.log(value);
-                    })
-                });
-            });
-
-
-            //var element = document.evaluate( '//*[contains(concat(" ", normalize-space(@class), " "), "e2e-delivery-method-EMAIL")]/descendant::*/text()' ,document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            //
-            //element.forEach(function (entry) {
-            //    console.log(entry.stringValue);
-            //
-            //});
-            //alert( 'This document contains ' + element.stringValue + ' paragraph elements' );
-
-
-
-
-
         },
         typeOrganisationName: function (value) {
             browser.wait(ExpectedConditions.visibilityOf(this.organisationNameInput()));

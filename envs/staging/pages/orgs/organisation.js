@@ -1,6 +1,7 @@
 'use strict';
 
 var pph = require('../../../../helpers/pph'),
+    client = require('http-api-client'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 pages.organisation = exports;
@@ -27,12 +28,20 @@ exports.tabSetContainer = function() {
     return $('.nav-tabs');
 };
 
-exports.navigationTab = function () {
-    return $(".nav-tabs");
+exports.generalTab = function() {
+    return exports.tabSetContainer().element(by.cssContainingText(
+        'a', 'General'
+    ));
 };
 
-exports.generalTab = function () {
-    return $$(".nav-tabs>li>a").get(1);
+exports.goToGeneralTab = function() {
+    exports.generalTab().click();
+
+    return pages.base.waitForAjax();
+};
+
+exports.navigationTab = function () {
+    return $('.nav-tabs');
 };
 
 exports.previewRegistrationRunTab = function() {
@@ -675,4 +684,242 @@ exports.viewValidationErrors = function() {
     pages.base.scrollIntoView(button);
 
     return button.click();
+};
+
+exports.getEmailDeliveryMethods = function() {
+    return $$('.e2e-delivery-method-EMAIL');
+};
+exports.getSFTPDeliveryMethods = function() {
+    return $$('.e2e-delivery-method-SFTP');
+};
+exports.getFTPDeliveryMethods = function() {
+    return $$('.e2e-delivery-method-FTP');
+};
+exports.getThirdPartyDeliveryMethods = function() {
+    return $$('.e2e-delivery-method-THIRDPARTY');
+};
+exports.sfptDeliveryMethodName = function(deliveryMethod) {
+    return deliveryMethod.$$('.control-group>.controls>strong').first();
+};
+exports.sftpDeliveryMethodAddress = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.host"]');
+};
+exports.sftpDeliveryMethodPort = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.port"]');
+};
+exports.sftpDeliveryMethodUsername = function(deliveryMethod) {
+    return deliveryMethod.$$('.control-group>.controls>strong').get(1);
+};
+exports.sftpUnmaskPasswordButton = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>.mask-input-password');
+};
+exports.sftpPassword = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_mechanism.showPassword"]');
+};
+exports.sftpFileFormat = function(deliveryMethod) {
+    return deliveryMethod.$$('.control-group>.controls>strong').get(2);
+};
+exports.sftpFileFormatStatus = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>span.compress-file');
+};
+exports.sftpDeliveryNotificationStatus = function(deliveryMethod) {
+    return deliveryMethod.$$('.control-group>.controls>strong').last();
+};
+exports.sfptDeliveryStatusEmail = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.primary_emails"]');
+};
+exports.sftpDeliveryStatusCC = function(deliveryMethod) {
+    return deliveryMethod.$('.control-group>.controls>[data-ng-show="dm.delivery_notification.cc_emails"]');
+};
+exports.thirdPartyName = function(deliveryMethod) {
+    return deliveryMethod.$('[ data-ng-if="dm.delivery_mechanism_type === \'THIRDPARTY\'"]>div>strong');
+};
+exports.getEmailDeliveryMethodEmail = function (deliveryMethod) {
+    return deliveryMethod.$('div:nth-child(1)>.controls>strong').getText();
+};
+exports.getEmailDeliveryMethodCC = function (deliveryMethod) {
+    return deliveryMethod.$('div:nth-child(1)>div>[data-ng-show="dm.delivery_mechanism.cc_emails"]').getText();
+};
+exports.getEmailDeliveryMethodFileFormat = function (deliveryMethod) {
+    return deliveryMethod.$('div:nth-child(3)>.controls>strong').getText();
+};
+exports.getEmailDeliveryMethodNotification = function (deliveryMethod) {
+    return deliveryMethod.$$('div:nth-child(5)>.controls >span').first().getText();
+};
+exports.getIconType = function (event) {
+    return event.$('div>div>span>.icon-exchange').isPresent();
+};
+exports.getWorksText = function (event) {
+    pages.base.scrollIntoView(event);
+    return event.$('div>div:nth-child(2)>p>span').getText();
+};
+exports.getWorkIDNumber = function (event) {
+    return event.$('.row-header>div>div:nth-child(2)>div').getText();
+};
+exports.getRunDate = function (event) {
+    return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(3)>time').getText();
+};
+exports.getStatus = function (event) {
+    return event.$$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>span').first().getText();
+};
+exports.getEventRunDate = function (event) {
+    return event.$('div>div[data-ng-init="activityIndex = $index"]>div:nth-child(2)>time').getText();
+};
+exports.getFileName = function (event) {
+    return event.$('[data-ng-if="activity.file_name"]').getText();
+};
+exports.registrationRunButton = function () {
+    return $('#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child');
+};
+exports.registrationRunHeader = function () {
+    return $('.reg-run-header');
+};
+exports.customWorkButton = function () {
+    return $$('.reg-run-header>span>div>div>span>a').first();
+};
+exports.popupRegistrationRun = function () {
+    return $('.popup-reg-run');
+};
+exports.getLastAddedWorkEvent = function () {
+    return $$('.row-header').first();
+};
+exports.activeRegistrationRunButton = function () {
+    return element(by.cssContainingText(
+        '#ACTIVITY-HEADER button:not(.disabled)', 'Execute Registration Run'
+    ));
+};
+exports.iconDownloadAlt = function () {
+    return $('.icon-download-alt');
+};
+exports.modalFooter = function () {
+    return $('.modal-footer');
+};
+exports.modalConfirmButton = function () {
+    return element(by.cssContainingText(
+        '.modal-footer button', 'OK'
+    ));
+};
+exports.modalSuccessConfirmButton = function () {
+    return $('.btn.btn-primary.pull-right');
+};
+exports.successModalMessage = function () {
+    return $('.modal-success');
+};
+exports.textWithTotalWorksNumber = function () {
+    $('.modal-prompt').getText().then(function (text) {
+        return text;
+    })
+};
+exports.elementWork = function () {
+    return $('.DATA-ROW.DATA-CHILD:first-child');
+};
+exports.listWorkIdNumber = function () {
+    return $$('.row-header>div:nth-child(4)>div:nth-child(2)>a').get(1).getText();
+};
+exports.executeRegistrationIsActive = function () {
+    return this.activeRegistrationRunButton().isPresent();
+};
+exports.getThirdPartyName = function (deliveryMethod) {
+    return this.thirdPartyName(deliveryMethod).getText();
+};
+exports.getSFTPDeliveryMethodName = function (deliveryMethod) {
+    return this.sfptDeliveryMethodName(deliveryMethod).getText();
+};
+exports.getSFTPDelivetyMehodAddress = function (deliveryMethod) {
+    return this.sftpDeliveryMethodAddress(deliveryMethod).getText();
+};
+exports.getSFTPDeliveryMethodPort = function (deliveryMethod) {
+    return this.sftpDeliveryMethodPort(deliveryMethod).getText();
+};
+exports.getSFTPUsername = function (deliveryMethod) {
+    return this.sftpDeliveryMethodUsername(deliveryMethod).getText();
+};
+exports.clickUnmaskPasswordButton = function (deliveryMethod) {
+    return this.sftpUnmaskPasswordButton(deliveryMethod).click();
+};
+exports.getSFTPPassword = function (deliveryMethod) {
+    return this.sftpPassword(deliveryMethod).getText();
+};
+exports.getSFTPFileFormat = function (deliveryMethod) {
+    return this.sftpFileFormat(deliveryMethod).getText();
+};
+exports.getSFTPFileFormatStatus = function (deliveryMethod) {
+    return this.sftpFileFormatStatus(deliveryMethod).getText();
+};
+exports.getSFTPDeliveryNotificationStatus = function (deliveryMethod) {
+    return this.sftpDeliveryNotificationStatus(deliveryMethod).getText();
+};
+exports.getSFTPDeliveryNotificationStatusEmail = function (deliveryMethod) {
+    return this.sfptDeliveryStatusEmail(deliveryMethod).getText();
+};
+exports.getSFTPDeliveryNotificationStatusCC = function (deliveryMethod) {
+    return this.sftpDeliveryStatusCC(deliveryMethod).getText();
+};
+exports.clickCustomWorksButton = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.registrationRunHeader()));
+    this.customWorkButton().click();
+};
+exports.selectValueFromPopupRegRun = function (text) {
+    browser.wait(ExpectedConditions.visibilityOf(this.popupRegistrationRun()));
+    this.popupRegistrationLinkByText(text).click();
+};
+exports.popupRegistrationLinkByText = function (text) {
+    return element(By.linkText(text));
+};
+exports.clickExecuteRegistrationRunButton = function () {
+    browser.wait(ExpectedConditions.elementToBeClickable(this.activeRegistrationRunButton()));
+    return this.activeRegistrationRunButton().click();
+};
+exports.numberOfWorks = function () {
+    var number = parseInt(this.textWithTotalWorksNumber(), 10);
+    return number;
+};
+exports.confirmModalDialog = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.modalFooter()));
+    hash.totalNumberOfWorks = this.numberOfWorks();
+    return this.modalConfirmButton().click();
+};
+exports.confirmSuccessModal = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.modalSuccessConfirmButton()));
+    this.modalSuccessConfirmButton().click();
+};
+exports.registrationCanBeRun = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.registrationRunButton()));
+    return this.executeRegistrationIsActive();
+};
+exports.successDialogIsPresent = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.successModalMessage()));
+    return this.successModalMessage().isPresent();
+};
+exports.resetWork = function (runDate, recipient) {
+    console.log('Resetting Work');
+
+    var url = global.systemConfig.env.cr_url + '/api/v1/workregs/reset_sent_works?recipient=' + recipient + '&runDate=' + runDate;
+
+    return client.request({
+        url: url,
+        method: 'POST'
+    }).then(function (response) {
+        return response.getStatusCode();
+    });
+};
+exports.clickPreviewRegistrationRunTab = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
+    this.previewRegistrationRunTab().click();
+    return pages.base.waitForAjax();
+};
+exports.workHasDeliveredStatus = function () {
+    return this.getStatus(this.getLastAddedWorkEvent());
+};
+exports.clickLatestWork = function () {
+    return this.getLastAddedWorkEvent().click();
+};
+exports.getLatestWorkEvent = function () {
+    this.getLastAddedWorkEvent();
+};
+exports.waitForElementWork = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.elementWork()));
+};
+exports.listWorkIdNumberRegRun = function () {
+    return this.listWorkIdNumber();
 };

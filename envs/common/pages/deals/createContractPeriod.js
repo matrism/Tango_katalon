@@ -175,12 +175,13 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnMdrcYesCommercialReleaseByMajorLabel: function () {
-            pages.createDealContractPeriod.elems.mdrcYesCommercialReleaseByMajorLabel.click();
+            browser.actions().mouseMove( pages.createDealContractPeriod.elems.mdrcYesCommercialReleaseByMajorLabel).perform();
+            browser.actions().click( pages.createDealContractPeriod.elems.mdrcYesCommercialReleaseByMajorLabel).perform();
         },
 
         clickOnMdrcNoCommercialReleaseByMajorLabel: function () {
-            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.mdrcNoCommercialReleaseByMajorLabel);
-            pages.createDealContractPeriod.elems.mdrcNoCommercialReleaseByMajorLabel.click();
+            browser.actions().mouseMove(pages.createDealContractPeriod.elems.mdrcNoCommercialReleaseByMajorLabel).perform();
+            browser.actions().click(pages.createDealContractPeriod.elems.mdrcNoCommercialReleaseByMajorLabel).perform();
         },
 
         fillIntoMdrcLabelsField: function () {

@@ -30,8 +30,8 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1300,
-                height: 1080
+                width: 1360,
+                height: 1024
             },
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
             singleReport: cli['single-report'],
@@ -60,7 +60,8 @@ var defaultUserName = 'TangoTest1',
             failFast: cli['fail-fast'],
             noUpload: cli['no-upload'],
             orphanOnError: cli['orphan-on-error'],
-            demoReporter: cli['demo-reporter']
+            demoReporter: cli['demo-reporter'],
+            stepByStep: cli['step-by-step']
         },
         _env_: env,
         localhost: {
@@ -76,7 +77,8 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
-                service_url: 'http://tango.tango-qa-aws.dspdev.wmg.com'
+                service_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
+                cr_url: 'http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80'
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
@@ -85,7 +87,8 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: 'http://musicpublishing.staging.dsp.wmg.com',
-                service_url: 'http://musicpublishing.staging.dsp.wmg.com'
+                service_url: 'http://musicpublishing.staging.dsp.wmg.com',
+                cr_url: 'http://tancrsrv.east.ipaas.staging.dsp.wmg.com:80'
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
@@ -94,7 +97,8 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: cli['sso-url'] || configer.getEnvVarByKey('URL_SSO'),
                 app_url: cli['app-url'],
-                service_url: cli['service-url'] || cli['app-url']
+                service_url: cli['service-url'] || cli['app-url'],
+                cr_url: cli['cr-url']
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
@@ -103,7 +107,8 @@ var defaultUserName = 'TangoTest1',
 
 config._system_.env = {
     name: env.ENV_TYPE,
-    url: config[env.ENV_TYPE].urls.app_url
+    url: config[env.ENV_TYPE].urls.app_url,
+    cr_url: config[env.ENV_TYPE].urls.cr_url
 };
 
 config._system_.noReport = cli['no-report'];

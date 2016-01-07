@@ -31,6 +31,9 @@ exports.feature = [
                 this.scrollPrimaryValidationPage();
                 this.listErrorPrimaryValidationDetails();
                 this.checkPrimaryValidationErrorsFilters();
+                this.validateCriticalErrorsFilter();
+                this.validateNonCriticalErrorsFilter();
+                this.validateErrorSortFilters();
                 this.downloadCrFile();
                 this.validatePrimaryErrorCrFile('error');
                 this.backValidationErrors();
@@ -43,7 +46,7 @@ exports.feature = [
                 this.listWorkDetails();
                 this.checkFilters();
                 this.downloadCrFile();
-                this.validateCrFile('custom');//
+                this.validateCrFile('custom');
                 this.executeRegistrationRunValidation('CR_2013-09-15');
                 this.checkValidationErrorsButton();
                 // validation errors
@@ -51,6 +54,9 @@ exports.feature = [
                 this.scrollValidationPage();
                 this.listErrorValidationDetails();
                 this.checkValidationErrorsFilters();
+                this.validateCriticalErrorsFilter();
+                this.validateNonCriticalErrorsFilter();
+                this.validateErrorSortFilters();
                 this.downloadCrFile('error');
                 this.validateErrorCrFile('error_custom');
                 this.backValidationErrors('custom');

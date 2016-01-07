@@ -19,6 +19,37 @@ if (pages.RRSummaryTable === undefined) {
             return $$(".rate-summary-table__scope");
         },
 
+        ratesSummaryLink: function () {
+            return element(by.cssContainingText(
+                '.view-header a', 'RATES SUMMARY'
+            ));
+        },
+
+        ratesSummaryTable: function () {
+            return $('.rates-summary-table');
+        },
+
+        ratesSummaryTableLoader: function () {
+            return this.ratesSummaryTable().$('.loader');
+        },
+
+        goToRatesSummary: function () {
+            var self = this,
+                link = this.ratesSummaryLink();
+
+            pages.base.scrollIntoView(link);
+
+            link.click();
+
+            browser.wait(EC.visibilityOf(this.ratesSummaryTable()));
+
+            return browser.wait(function() {
+                return pph.matchesCssSelector(
+                    self.ratesSummaryTableLoader(), '.ng-hide'
+                );
+            });
+        },
+
         storeDisplayedIncomeRates: function () {
             browser.wait(ExpectedConditions.visibilityOf($(".rate-summary-table__scope")));
             var RRList = this.rrList();

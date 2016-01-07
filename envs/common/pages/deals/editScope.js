@@ -640,10 +640,12 @@ if (pages.editDealScope === undefined) {
         },
 
         editClickOnCopyScopeOptionNumberI: function (i) {
+            //browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+            browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-click='$event.preventDefault()'] i"))).perform();
+            browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']"))).click();
+            pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']")));
             browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
             browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-click='$event.preventDefault()'] i"))).perform();
-            //browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']"))).click();
-            pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']")));
             browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"))));
         },
