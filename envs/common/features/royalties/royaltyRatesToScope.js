@@ -308,7 +308,7 @@ exports.feature = [
     },
     {
         name: "Assign multiple rates to Scope on creation",
-        tags: ['create', 'broken'],
+        tags: ['create'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
