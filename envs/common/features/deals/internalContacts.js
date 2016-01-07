@@ -129,11 +129,11 @@ exports.feature = [
             steps.editDealGeneral.itCancelInternalContactsChanges();
             steps.editDealGeneral.cancelTheModalDialog();
             steps.base.scrollIntoView("Term header link", pages.deal.elems.termsHeader);
-            steps.deal.goToTermsDealTabDetails();
+            steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.cancelTheModalDialog();
             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("shilpa");
             steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
-            steps.deal.goToTermsDealTabDetails();
+            steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.confirmTheCancelModalDialog();
             steps.deal.expectTermsDetailsAreOk();
         }
