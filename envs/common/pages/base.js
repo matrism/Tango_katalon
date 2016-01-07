@@ -20,7 +20,7 @@ exports.modalContainer = function () {
     return $('body > .modal');
 };
 
-exports.waitUntilModalAnimationFinishes = function () {
+exports.waitForModal = function () {
     var container = exports.modalContainer();
 
     browser.wait(function () {
@@ -31,11 +31,20 @@ exports.waitUntilModalAnimationFinishes = function () {
     });
 };
 
+exports.modalHeader = function () {
+    return $('.modal-header');
+};
+
+exports.modalCloseButton = function () {
+    return exports.modalHeader().$('[data-ng-click="cancel()"]');
+};
+
+exports.closeModal = function () {
+    return exports.modalCloseButton().click();
+};
+
 exports.modalHeading = function () {
-    return $(
-        '.modal-header h1, .modal-header h2, .modal-header h3, ' +
-        '.modal-header h4, .modal-header h5, .modal-header h6'
-    );
+    return exports.modalHeader().$('h1, h2, h3, h4, h5, h6');
 };
 
 exports.modalHeadingText = function () {
@@ -44,6 +53,14 @@ exports.modalHeadingText = function () {
 
 exports.modalBody = function () {
     return $('.modal-body');
+};
+
+exports.modalBodyText = function () {
+    return pph.collapseWhitespace(pph.trim(pph.getAllText(exports.modalBody())))
+};
+
+exports.validateModalMessageBody = function (value) {
+    expect(exports.modalBodyText()).toBe(value);
 };
 
 exports.modalDialog = function () {
@@ -382,10 +399,7 @@ exports.dialogError = function () {
                 return null;
             }
 
-            return pph.stringConcat(
-                heading, '\n\n',
-                pph.collapseWhitespace(pph.trim(pph.getAllText(exports.modalBody())))
-            );
+            return pph.stringConcat(heading, '\n\n', exports.modalBodyText());
         });
     });
 };
@@ -487,7 +501,12 @@ exports.pause = function() {
             return false;
         });
     }, 99999999);
-}
+};
+
+exports.orphanBrowser = function() {
+    console.log('Orphaning browser...');
+    process.exit(-1);
+};
 
 exports.clickElement = function (elName, el, wait) {
     var notDisabledCssSelector = ':not([disabled], .disabled)';
@@ -508,4 +527,29 @@ exports.clickElement = function (elName, el, wait) {
     }
     el.click();
     pages.base.waitForAjax();
+};
+
+exports.scrollTo = function() {
+    var args = overloaded(arguments, {
+        1: ['y'],
+        2: ['x', 'y']
+    });
+
+    if(args.x === undefined) {
+        args.x = 0;
+    }
+
+    return browser.executeScript(function(x, y) {
+        switch(y) {
+            case 'top':
+                y = 0;
+                break;
+
+            case 'bottom':
+                y = document.body.scrollHeight;
+                break;
+        }
+
+        window.scrollTo(x, y);
+    }, args.x, args.y);
 };

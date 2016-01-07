@@ -2,7 +2,8 @@
 
 var _ = require('lodash'),
     promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+    ExpectedConditions = protractor.ExpectedConditions,
+    pageStep = require('../../../../helpers/basicPageStep');
 
 hash.royaltyRates = {};
 hash.royaltyRates.RRNames = [];
@@ -154,6 +155,8 @@ exports.expandInnerRR = function () {
         );
     })
 };
+
+pageStep('Go to rates summary');
 
 exports.validateIncomeRatesTable = function () {
     it("Check that Income Rates Table displays correct data", function () {

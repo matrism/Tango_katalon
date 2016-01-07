@@ -458,7 +458,7 @@ exports.clickCancelLink = function () {
 };
 
 exports.unsavedStatementModal = function () {
-    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.waitForModal();
     return $('.modal');
 };
 

@@ -49,6 +49,7 @@ exports.feature = [
             steps.work.validateWorkId();
 
             steps.base.goToHomePage();
+            steps.mainHeader.search.selectEntityType('Works');
             steps.work.selectWorkSearchFilterTag(0, 'Work ID');
             steps.work.searchForWorkUsingPreviouslyCreatedSongCode();
             steps.base.sleep(200);
@@ -153,6 +154,7 @@ exports.feature = [
             steps.work.findCurrentlyOpenWorkId();
 
             steps.base.goToHomePage();
+            steps.mainHeader.search.selectEntityType('Works');
             steps.work.selectWorkSearchFilterTag(0, 'Creator');
             steps.work.searchForWorkUsingPreviouslySelectedCreatorName(0);
             steps.base.sleep(200);
@@ -208,6 +210,7 @@ exports.feature = [
             steps.base.waitForAjax();
 
             steps.base.goToHomePage();
+            steps.mainHeader.search.selectEntityType('Works');
             steps.work.selectWorkSearchFilterTag(0, 'Creator');
             steps.work.searchForWorkUsingPreviouslySelectedCreatorName(0);
             steps.base.sleep(200);

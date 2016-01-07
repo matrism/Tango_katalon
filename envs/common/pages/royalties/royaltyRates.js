@@ -13,7 +13,7 @@ if (pages.royaltyRates === undefined) {
             confirmCancelButton: {css: ".modal-footer>.btn-primary"},
             RRNameLabel: {css: ".rate-set-entity-name>div>label"},
             incomeProvidesLabel: {css: ".flex1>label"},
-            incomeProviderInput: {css: ".ux-multiselect-type"},
+            incomeProviderInput: { css: ".tg-typeahead__input" },
             incomeDateMethodLabel: {css: ".flex1>div:nth-child(2)>div:not([class])>label"},
             effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
             contractualRateLabel: {css: ".rate-set-rate-field>label"},
@@ -160,6 +160,13 @@ if (pages.royaltyRates === undefined) {
         effectiveStartDateInput: function () {
             //return element.all(by.css(".rate-set-calendar>div>.date-picker-input")).last();
             return element(by.css("div.rate-set-calendar div[name='effectiveDate'] input.date-picker-input"));
+        },
+
+        effectiveStartDateInputForLastRateSet: function () {
+            return $$(
+                'div.rate-set-calendar div[name=\'effectiveDate\'] ' +
+                'input.date-picker-input'
+            ).last();
         },
 
         newRoyaltyRateSetButton: function () {
@@ -414,9 +421,9 @@ if (pages.royaltyRates === undefined) {
 
         closeRoyaltySet: function () {
             pages.royaltyRates.elems.closeRateSetButton.click();
-
-            ftf.helper.waitForElement(pages.royaltyRates.elems.confirmCancelButton, 30000);
-            pages.royaltyRates.elems.confirmCancelButton.click();
+            // on create, if closing, then no confirm comes up
+            //ftf.helper.waitForElement(pages.royaltyRates.elems.confirmCancelButton, 30000);
+            //pages.royaltyRates.elems.confirmCancelButton.click();
         },
 
         clearRoyaltyRateNameInput: function () {
@@ -431,36 +438,36 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element));
         },
 
-        selectIncomeProvider: function (sentKeys) {
-            var incomeProviderInput;
+        incomeProviderTypeahead: function () {
+            return element(by.model('set.income_providers'));
+        },
 
-            incomeProviderInput = browser.driver.findElement(by.css(".ux-multiselect-li>input"));
+        incomeProviderTypeaheadTags: function () {
+            return this.incomeProviderTypeahead().$$('.tg-typeahead__tag');
+        },
 
-            incomeProviderInput.sendKeys(sentKeys);
-            incomeProviderInput.click();
+        incomeProviderInput: function () {
+            return this.incomeProviderTypeahead().element(by.model('$term'));
+        },
 
-            var suggestion = $(".ng-scope.ng-binding>strong");
-            browser.wait(ExpectedConditions.visibilityOf(suggestion));
-            expect(suggestion.getText()).not.toContain("No results");
+        incomeProviderSearchResultsContainer: function () {
+            return $('.tg-typeahead__suggestions');
+        },
 
-            var desiredOption;
-            browser.driver.findElements(by.css('.ng-scope.ng-binding>strong'))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(sentKeys) != -1) {
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
-                    }
-                });
+        waitForIncomeProviderSearchResults: function () {
+            browser.wait(EC.visibilityOf(
+                this.incomeProviderSearchResultsContainer()
+            ));
+        },
+
+        incomeProviderSearchResultElements: function() {
+            this.waitForIncomeProviderSearchResults();
+            return $$('.tg-typeahead__suggestions-group-item');
+        },
+
+        selectIncomeProvider: function (value) {
+            this.incomeProviderInput().sendKeys(value);
+            this.incomeProviderSearchResultElements().first().click();
         },
 
         selectIncomeProviderByPartialMatch: function (sentKeys) {
@@ -497,9 +504,11 @@ if (pages.royaltyRates === undefined) {
         },
 
         getIncomeProviderInputValue: function () {
-            var incomeProviderInput;
-            incomeProviderInput = element.all(by.css(".tg-typeahead__tag-name.ng-binding")).get(2);
-            return incomeProviderInput.getText();
+            var tag = this.incomeProviderTypeaheadTags().first();
+
+            pages.base.scrollIntoView(tag);
+
+            return pph.trim(pph.getAllText(tag));
         },
 
         getEditIncomeProviderInputValue: function () {
@@ -560,6 +569,13 @@ if (pages.royaltyRates === undefined) {
             return element.getAttribute('value');
         },
 
+        validateRRInput: function() {
+            var input = this.royaltyRateInput();
+
+            pages.base.scrollIntoView(input);
+            expect(pph.matchesCssSelector(input, '.ng-valid')).toBeTruthy();
+        },
+
         isIncomeDateMethodToggleVisible: function () {
             var dateIncomeToggle;
             dateIncomeToggle = element(by.model('set.income_date_method_code'));
@@ -602,15 +618,29 @@ if (pages.royaltyRates === undefined) {
             return element.all(by.css('.btn.rate-set-toggle-btn.ng-valid.active')).get(0).getText();
         },
 
+        incomeDateMethodButtonsContainer: function () {
+            return element.all(by.model(
+                'set.income_date_method_code'
+            )).first().element(by.xpath('..'));
+        },
+
         clickDealSigningTerritoryToggle: function () {
-            var dealSigningTerritoryToggle = element.all(by.model('set.income_date_method_code')).get(0);
+            var dealSigningTerritoryToggle = this.incomeDateMethodButtonsContainer().$(
+                '[data-btn-radio="\\"DRDST\\""]'
+            );
+
             dealSigningTerritoryToggle.click();
+
             browser.driver.sleep(5000);
         },
 
         clickWarnerChappellToggle: function () {
-            var warnerChappellToggle = element.all(by.model('set.income_date_method_code')).get(1);
+            var warnerChappellToggle = this.incomeDateMethodButtonsContainer().$(
+                '[data-btn-radio="\\"DRWC\\""]'
+            );
+
             warnerChappellToggle.click();
+
             browser.driver.sleep(5000);
         },
 
@@ -654,6 +684,18 @@ if (pages.royaltyRates === undefined) {
             if (date != "") {
                 this.effectiveStartDateInput().clear();
                 this.effectiveStartDateInput().sendKeys(date);
+                browser.driver.sleep(2000);
+            }
+        },
+
+        enterEffectiveStartDateForLastRateSet: function (val) {
+            var el = this.effectiveStartDateInputForLastRateSet();
+
+            val = val.trim();
+
+            if(val) {
+                el.clear();
+                el.sendKeys(val);
                 browser.driver.sleep(2000);
             }
         },
@@ -819,7 +861,11 @@ if (pages.royaltyRates === undefined) {
         },
 
         clickAddNewPublisherSharesButton: function () {
-            this.newPublisherSharedButton().click();
+            var button = this.newPublisherSharedButton();
+
+            pages.base.scrollIntoView(button);
+
+            return button.click();
         },
 
         typeIntoOriginalPublisherInput: function (originalPublisher) {
@@ -848,11 +894,11 @@ if (pages.royaltyRates === undefined) {
             this.publisherSharesSaveButton().click();
         },
 
-        originalPublisherNameHasText: function (text) {
+        originalPublisherNameHasText: function () {
             return this.originalPublisherName().getText();
         },
 
-        administratorNameHasText: function (text) {
+        administratorNameHasText: function () {
             return this.administratorName().getText();
         },
 

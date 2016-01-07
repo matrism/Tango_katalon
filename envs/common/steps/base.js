@@ -174,10 +174,13 @@ exports.refreshPage = function () {
 };
 
 exports.fail = function (description) {
-    it(description, function () {
+    it(description || "This is a forced failure step", function () {
         throw new Error("This is a forced failure step.");
     });
 };
+
+pageStep('Pause');
+pageStep('Orphan browser');
 
 exports.clearDownloadsDirectory = function () {
     it('Clear downloads directory', function () {
@@ -217,4 +220,7 @@ pageStep('Open new tab');
 pageStep('Duplicate tab');
 pageStep('Switch to tab');
 pageStep('Close tab by index');
-
+pageStep('Wait for modal');
+pageStep('Validate modal message body');
+pageStep('Close modal');
+pageStep('Scroll to');

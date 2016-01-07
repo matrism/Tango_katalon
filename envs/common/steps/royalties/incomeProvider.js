@@ -122,7 +122,7 @@ exports.editValidRoyaltySetPair = function (table, message) {
             autoIt('pages.deal.continueToNextPage');
             autoIt('pages.deal.saveNewDeal');
 
-            autoIt('pages.deal.clickScopeHeader');
+            autoIt('pages.deal.clickFirstScopeHeader');
 
             autoIt('pages.royaltyRates.clickNewRoyaltySetButton');
             autoIt('pages.royaltyRates.selectIncomeProviderByPartialMatch', Income_Provider_1);
@@ -272,7 +272,7 @@ exports.editInvalidRoyaltySetPair = function (table, message) {
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
             });
 
-            autoIt('pages.deal.clickScopeHeader');
+            autoIt('pages.deal.clickFirstScopeHeader');
 
             autoIt('pages.royaltyRates.clickNewRoyaltySetButton');
             autoIt('pages.royaltyRates.selectIncomeProviderByPartialMatch', Income_Provider_1);

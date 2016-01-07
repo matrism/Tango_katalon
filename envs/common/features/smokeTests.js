@@ -14,7 +14,7 @@ exports.beforeFeature = function () {
 exports.feature = [
     {
         name: 'Create a deal with publisher share set',
-        tags: ['deal'],
+        tags: ['deals'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -31,7 +31,12 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
             steps.deal.itContinueToNextPage();
             steps.deal.itContinueToNextPage();
+
+            /******************************************
+            TEMPORARILY DISABLE ADDING OF PAYEE, IS BROKEN IN QA
             steps.createDealPayee.itAddPayeeOrganisationAndAssociateScope();
+            ******************************************/
+
             steps.deal.itContinueToNextPage();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -58,7 +63,7 @@ exports.feature = [
     },
     {
         name: 'New basic work',
-        tags: ['work'],
+        tags: ['works'],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
 
@@ -102,7 +107,7 @@ exports.feature = [
     },
     {
         name: 'New basic organisation',
-        tags: ['org'],
+        tags: ['orgCreationSmoke', 'orgs'],
         steps: function () {
             steps.mainHeader.createNewRecord('Organisation');
 
@@ -119,7 +124,7 @@ exports.feature = [
     },
     {
         name: 'View mode of  organisation',
-        tags: ['org', 'view'],
+        tags: ['viewOrgSmoke', 'orgs', 'view'],
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.validateCisacCode('021');
@@ -150,7 +155,7 @@ exports.feature = [
     ,
     {
         name: 'CR file downloads',
-        tags: ['org', 'crFileDownloads'],
+        tags: ['orgs', 'crFileDownloads'],
         steps: function () {
             steps.base.clearDownloadsDirectory();
             steps.searchSection.accessSavedOrganisationByName('BMI');
@@ -163,7 +168,7 @@ exports.feature = [
     },
     {
         name: "Royalties Manual Statement",
-        tags: ["manualStatement"],
+        tags: ['royaltyRates', 'manualStatement'],
         steps: function () {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();

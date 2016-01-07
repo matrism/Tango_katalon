@@ -4,36 +4,38 @@ var pageStep = require('../../../../helpers/basicPageStep');
 
 steps.newOrganisation = exports;
 
-pageStep('Populate name');
-pageStep('Select Org type');
-pageStep('Enter SUISA IPI number');
-pageStep('Select Territory of Operation');
-pageStep('Select publisher type');
-pageStep('Search for society');
-pageStep('Make Org registration recipient');
-pageStep('Add delivery method');
-pageStep('Fill required fields for delivery method');
-pageStep('Select Acknowledgement Process');
-pageStep('Select Acknowledgement Process Delivery Method');
-pageStep('Click Subpublisher Relationship button');
-pageStep('Fill required fields for last Subpublisher');
-pageStep('Click Add Subpublisher button');
-pageStep('Make Org Income Provider');
-pageStep('Select primary income provider territory of operation');
-pageStep('Set default Income Provider currency');
-pageStep('Set Income File Type');
-pageStep('Enter income type mapping type');
-pageStep('Enter income type mapping description');
-pageStep('Enter income type mapping file type search terms');
-pageStep('Select income type mapping file type search result by index');
-pageStep('Enter income type mapping internal type search terms');
-pageStep('Select income type mapping internal type search result by index');
-pageStep('Make Org Payee');
-pageStep('Make Org Statement Recipient');
-pageStep('Set statement recipient data');
-pageStep('Enter affiliated society search terms');
-pageStep('Select affiliated society search result by index');
-pageStep('Expect form to be valid');
-pageStep('Expect Done button to be clickable');
-pageStep('Save organisation');
-pageStep('Validate save redirection');
+pageStep([
+    'Populate name',
+    'Select Org type',
+    'Enter SUISA IPI number',
+    'Select Territory of Operation',
+    'Select publisher type',
+    'Search for society',
+    'Make Org registration recipient',
+    'Add delivery method',
+    'Fill required fields for delivery method',
+    'Select Acknowledgement Process',
+    'Select Acknowledgement Process Delivery Method',
+    'Click Subpublisher Relationship button',
+    'Fill required fields for last Subpublisher',
+    'Click Add Subpublisher button',
+    'Make Org Income Provider',
+    'Select primary income provider territory of operation',
+    'Set default Income Provider currency',
+    'Set Income File Type',
+    'Enter income type mapping type',
+    'Enter income type mapping description',
+    'Enter income type mapping file type search terms',
+    'Select income type mapping file type search result by index',
+    'Enter income type mapping internal type search terms',
+    'Select income type mapping internal type search result by index',
+    'Make Org Payee',
+    'Make Org Statement Recipient',
+    'Set statement recipient data',
+    'Enter affiliated society search terms',
+    'Select affiliated society search result by index',
+    'Expect form to be valid',
+    'Expect Done button to be clickable',
+    'Save organisation',
+    'Validate save redirection'
+]);

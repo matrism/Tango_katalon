@@ -182,9 +182,14 @@ exports.feature = [
             steps.createDealRtp.fillIntoRetentionPeriodDescriptionFromAcquisitionNumberI(1);
             steps.createDealRtp.selectRandomDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
             steps.deal.itContinueToNextPage();
+
+            /******************************************
+            TEMPORARILY DISABLE ADDING OF PAYEE, IS BROKEN IN QA
             steps.createDealPayee.itAddPayeeOrganisationAndAssociateScope();
             steps.base.scrollIntoView("Add new Payee", pages.createDealPayee.elems.addNewPayeeField);
             steps.createDealPayee.itAddPayeePersonAndAssociateScope();
+            ******************************************/
+
             steps.deal.itContinueToNextPage();
             steps.base.scrollIntoView("Financial ", pages.createDealApprovalRestrictions.elems.financialNoApprovalRequired);
             steps.createDealApprovalRestrictions.clickOnFinancialNoApprovalRequired();
