@@ -761,3 +761,9 @@ exports.itCheckTotalsValidationsCasesPublisherShare = function () {
         steps.createDealScope.saveThePublisherShareSet();
     });
 };
+
+exports.checkContractPeriodsAndScopesHeaderTitlePresent = function () {
+    it("Check that contract periods and scopes header title is present ", function () {
+        expect(pages.deal.elems.contractPeriodsScopesHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};

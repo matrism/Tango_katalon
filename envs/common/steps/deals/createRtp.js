@@ -124,3 +124,9 @@ exports.fillIntoAcquisitionDescription = function (i) {
         pages.createDealRtp.fillIntoTheAcquisitionDescription(i);
     });
 };
+
+exports.checkRightsTermPeriodsHeaderTitlePresent = function () {
+    it("Check that rights term periods header title is present ", function () {
+        expect(pages.deal.elems.rightsTermPeriodsHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};

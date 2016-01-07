@@ -247,10 +247,9 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-            steps.deal.checkContractPeriodsAndScopesHeaderTitlePresent();
-            steps.deal.checkRightsTermPeriodsHeaderTitlePresent();
-            steps.deal.checkFinderDealsHeaderTitlePresent();
-
+            steps.createDealScope.checkContractPeriodsAndScopesHeaderTitlePresent();
+            steps.createDealRtp.checkRightsTermPeriodsHeaderTitlePresent();
+            steps.finderDeal.checkFinderDealsHeaderTitlePresent();
 
             steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
             steps.base.focusOnNewOpenedTab(1);

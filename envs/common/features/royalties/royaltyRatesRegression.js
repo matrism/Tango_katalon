@@ -240,7 +240,7 @@ exports.feature = [
 
                 this.saveRateSet();
 
-                this.waitForAjaxCall();
+                steps.base.waitForAjax();
                 this.refreshPage();
 
                 this.openSavedScope();

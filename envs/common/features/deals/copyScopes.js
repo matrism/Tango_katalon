@@ -148,7 +148,7 @@ exports.feature = [
             steps.royaltyRates.saveRRData();
             steps.royaltyRates.saveRateSet();
 
-            steps.editDealScope.refreshThePage();
+            steps.deal.refreshThePage();
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkTheScopeRateSetDateValue("2016-08-09");
 
@@ -325,7 +325,7 @@ exports.feature = [
             steps.royaltyRates.saveRRData();
             steps.royaltyRates.saveRateSet();
 
-            steps.editDealScope.refreshThePage();
+            steps.deal.refreshThePage();
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkTheScopeRateSetDateValue("2016-08-09");
 

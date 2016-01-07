@@ -11,6 +11,14 @@ exports.goToNextPage = function () {
     });
 };
 
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+        pages.editDealScope.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+    });
+};
+
 exports.waitContinueButtonEnabled = function () {
     it("Check continue button to be enabled", function () {
         pages.deal.expectContinueButtonEnabled();
@@ -96,6 +104,12 @@ exports.goToTermsDealTabDetails = function () {
         pages.deal.goToTermsDealDetails();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.contractPeriodsScopesHeaderLink));
         pages.deal.waitForAjax();
+    });
+};
+
+exports.goToTermsDealDetails = function () {
+    it("Click on terms header", function () {
+        pages.deal.goToTermsDealDetails();
     });
 };
 

@@ -5,6 +5,12 @@ var promise = protractor.promise,
 
 steps.finderDeal = exports;
 
+exports.checkFinderDealsHeaderTitlePresent = function () {
+    it("Check that finder deals header title is present ", function () {
+        expect(pages.deal.elems.finderDealsHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};
+
 exports.validateGeneralTermsTitleIsPresent = function () {
     it("Validate the general terms title is present ", function () {
         pages.finderDeal.validateTheGeneralTermsTitleIsPresent();
