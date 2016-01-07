@@ -91,6 +91,13 @@ exports.goToGeneralDealTabDetails = function () {
     });
 };
 
+exports.goToTermsDealTabDetailsDirtyCheck = function () {
+    it("Click on terms header and go to terms deal tab details ", function () {
+        pages.deal.goToTermsDealDetails();
+       pages.deal.waitForAjax();
+    });
+};
+
 exports.goToTermsDealTabDetails = function () {
     it("Click on terms header and go to terms deal tab details ", function () {
         pages.deal.goToTermsDealDetails();
