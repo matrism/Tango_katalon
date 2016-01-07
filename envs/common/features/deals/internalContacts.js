@@ -107,7 +107,7 @@ exports.feature = [
     },
     {
         name: "Dirty check flow internal contact",
-        tags: ["edit", 'blah'],
+        tags: ["edit"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
