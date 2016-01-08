@@ -69,7 +69,7 @@ exports.feature = [
     },
 
     {
-        name: "Create a deal and check the deal header",
+        name: "Create a deal add/remove artists and check deal header",
         tags: ["header_artist"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -103,7 +103,47 @@ exports.feature = [
             steps.headerDeal.checkArtistText();
             steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna");
 
+            //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            //steps.editDealGeneral.editRandomArtistField("zwgf");
+            //steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+            //steps.headerDeal.checkArtistText();
+            //steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna, Shilpa", "zwgf");
+        }
+    },
+
+    {
+        name: "Create a deal add/edit dates and RTP and check the deal header",
+        tags: ["header_rtp"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.fillIntoExecutionDateFieldSpecificYearValue("2014");
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-02-12");
+            steps.createDealContractPeriod.fillActualEndDateFieldSpecificValue("2014-03-21");
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.headerDeal.checkStartDateText();
+            steps.headerDeal.checkStartDateValue("2014-02-12");
+            steps.headerDeal.checkEndDateText();
+            steps.headerDeal.checkEndDateValue("");
+
+            steps.editDealContractPeriod.editAddNewContractPeriod();
+            steps.editDealContractPeriod.editFillEndTargetMonths();
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealContractPeriod.editContractPeriodArea();
+            steps.editDealContractPeriod.editFillIntoEndActualDateField("2014-05-22");
+            steps.editDealContractPeriod.editTerminateNewContractPeriodDialog();
+            steps.headerDeal.checkStartDateText();
+            steps.headerDeal.checkStartDateValue("2014-02-12");
+            steps.headerDeal.checkEndDateText();
+            steps.headerDeal.checkEndDateValue("2014-05-22");
 
         }
     }
+
+
 ];

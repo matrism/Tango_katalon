@@ -17,6 +17,51 @@ exports.checkDeleteIconContractPeriodNumberIIsDisplayed = function (i) {
     });
 };
 
+exports.editContractPeriodArea = function () {
+    it("Edit the contract period area ", function () {
+        pages.editDealContractPeriod.editTheContractPeriodArea();
+    });
+};
+
+exports.editFillIntoEndActualDateField = function (value) {
+    it("Edit fill into the end actual date field specific value ", function () {
+        pages.editDealContractPeriod.editFillIntoTheEndActualDateField(value);
+    });
+};
+
+exports.editAddNewContractPeriodDialog = function () {
+    it("Edit add new contract period from modal dialog ", function () {
+        pages.editDealContractPeriod.editAddTheNewContractPeriodDialog();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editTerminateNewContractPeriodDialog = function () {
+    it("Edit terminate new contract period from modal dialog ", function () {
+        pages.editDealContractPeriod.editTerminateTheNewContractPeriodDialog();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editFillEndTargetMonths = function () {
+    it("Edit fill end target months field ", function () {
+        pages.editDealContractPeriod.editFillTheTargetEndMonths();
+    });
+};
+
+exports.editSaveAllContractPeriodChanges = function () {
+    it("Edit save the contract period changes ", function () {
+        pages.editDealContractPeriod.editSaveAllTheContractPeriodChanges();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editAddNewContractPeriod = function () {
+    it("Edit click on add new contract period icon ", function () {
+        pages.editDealContractPeriod.editClickOnAddContractPeriod();
+    });
+};
+
 exports.deleteContractPeriodNumberI = function (i) {
     it("Delete contract period number " + i, function () {
         pages.editDealContractPeriod.clickOnTheDeleteContractPeriodNumberI(i);

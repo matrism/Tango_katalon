@@ -197,9 +197,9 @@ exports.editSigningTerritory = function (value) {
     });
 };
 
-exports.editRandomArtistField = function () {
+exports.editRandomArtistField = function (value) {
     it("Edit select random artist field", function () {
-        pages.editDealGeneral.editSelectTheRandomArtist();
+        pages.editDealGeneral.editSelectTheRandomArtist(value);
         pages.editDealGeneral.waitForAjax();
     });
 };

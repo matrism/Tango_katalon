@@ -6,201 +6,201 @@ var _ = require('lodash'),
 if (pages.editDealGeneral === undefined) {
     pages.editDealGeneral = new ftf.pageObject({
 
-            locators: {
-                editGeneralLeftFirstFourFieldsArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.DETAIL.ng-scope"},
-                editGeneralLeftFirstFourFieldsEditorIcon: {css: "div[data-tg-modular-edit-id='generalLeft'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
-                removeExistingContractPartyIcon: {css: "span[ng-click='!$isDisabled() && $removeTag($tag)']"},
-                contractingPartyElement: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
-                contractingPartyInputField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-                editExecutionDateYearElement: {css: "input[data-ng-model='date.year']"},
-                editExecutionDateMonthElement: {css: "input[data-ng-model='date.month']"},
-                editExecutionDateDayElement: {css: "input[data-ng-model='date.day']"},
-                saveEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
-                internalContactTitle: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2"},
-                internalContactsArea: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3)"},
-                internalContactTableData: {css: "table.view-internal-contact tbody"},
-                internalContactsEditIcon: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) button i.fa.fa-pencil"},
-                internalContactsEditInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-                addInternalContactsLink: {css: "div.add-new-button button.btn.btn-link"},
-                saveEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button[data-ng-click='tgModularViewMethods.save();']"},
-                cancelEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button.btn.btn-cancel.ng-binding"},
-                editInternalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-                editInternalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
-                editInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-                removeInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
-                removeInternalContactsElement: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"},
-                confirmationModalDialog: {css: "div.modal-dialog.ng-scope"},
-                cancelModalDialogElement: {css: "div.modal.fade.in div.ng-scope"},
-                yesModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
-                noModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
-            },
+        locators: {
+            editGeneralLeftFirstFourFieldsArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.DETAIL.ng-scope"},
+            editGeneralLeftFirstFourFieldsEditorIcon: {css: "div[data-tg-modular-edit-id='generalLeft'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
+            removeExistingContractPartyIcon: {css: "span[ng-click='!$isDisabled() && $removeTag($tag)']"},
+            contractingPartyElement: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
+            contractingPartyInputField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editExecutionDateYearElement: {css: "input[data-ng-model='date.year']"},
+            editExecutionDateMonthElement: {css: "input[data-ng-model='date.month']"},
+            editExecutionDateDayElement: {css: "input[data-ng-model='date.day']"},
+            saveEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+            internalContactTitle: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2"},
+            internalContactsArea: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3)"},
+            internalContactTableData: {css: "table.view-internal-contact tbody"},
+            internalContactsEditIcon: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) button i.fa.fa-pencil"},
+            internalContactsEditInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            addInternalContactsLink: {css: "div.add-new-button button.btn.btn-link"},
+            saveEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button[data-ng-click='tgModularViewMethods.save();']"},
+            cancelEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button.btn.btn-cancel.ng-binding"},
+            editInternalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editInternalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            editInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            removeInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
+            removeInternalContactsElement: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"},
+            confirmationModalDialog: {css: "div.modal-dialog.ng-scope"},
+            cancelModalDialogElement: {css: "div.modal.fade.in div.ng-scope"},
+            yesModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
+            noModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
+        },
 
 
-            clickOnEditInternalContactsArea: function () {
-                pages.editDealGeneral.elems.internalContactsArea.click();
-            },
+        clickOnEditInternalContactsArea: function () {
+            pages.editDealGeneral.elems.internalContactsArea.click();
+        },
 
-            clickOnEditIconInternalContacts: function () {
-                pages.editDealGeneral.elems.internalContactsEditIcon.click();
-            },
+        clickOnEditIconInternalContacts: function () {
+            pages.editDealGeneral.elems.internalContactsEditIcon.click();
+        },
 
 
-            clickOnAddInternalContactsLink: function () {
-                pages.editDealGeneral.elems.addInternalContactsLink.click();
-            },
+        clickOnAddInternalContactsLink: function () {
+            pages.editDealGeneral.elems.addInternalContactsLink.click();
+        },
 
-            clickOnSaveEditInternalContacts: function () {
-                browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.saveEditInternalContactsButton));
-                pages.editDealGeneral.elems.saveEditInternalContactsButton.click();
-                browser.sleep(10000);
-            },
+        clickOnSaveEditInternalContacts: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.saveEditInternalContactsButton));
+            pages.editDealGeneral.elems.saveEditInternalContactsButton.click();
+            browser.sleep(10000);
+        },
 
-            clickOnCancelEditInternalContacts: function () {
-                pages.editDealGeneral.elems.cancelEditInternalContactsButton.click();
-            },
+        clickOnCancelEditInternalContacts: function () {
+            pages.editDealGeneral.elems.cancelEditInternalContactsButton.click();
+        },
 
-            editInternalContactsField: function (internal_contact) {
-                pages.editDealGeneral.elems.editInternalContactsInputField.clear();
-                pages.editDealGeneral.elems.editInternalContactsInputField.sendKeys(internal_contact);
-            },
+        editInternalContactsField: function (internal_contact) {
+            pages.editDealGeneral.elems.editInternalContactsInputField.clear();
+            pages.editDealGeneral.elems.editInternalContactsInputField.sendKeys(internal_contact);
+        },
 
-            selectEditRandomInternalContactsFromDropDown: function () {
-                var desiredOption;
-                browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
-                browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                    .then(function (options) {
-                        var randomNumber = Math.floor((Math.random() * options.length));
-                        options[randomNumber].click();
-                    });
-                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
-            },
+        selectEditRandomInternalContactsFromDropDown: function () {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
+        },
 
-            selectEditSpecificInternalContactsFromDropDown: function (internalRole) {
-                browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
-                var desiredOption;
-                browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                    .then(function findMatchingOption(options) {
-                        options.forEach(function (option) {
-                            option.getText().then(function doesOptionMatch(text) {
-                                    if (text.indexOf(internalRole) != -1) {
-                                        desiredOption = option;
-                                        return true;
-                                    }
+        selectEditSpecificInternalContactsFromDropDown: function (internalRole) {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
+            var desiredOption;
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(internalRole) != -1) {
+                                    desiredOption = option;
+                                    return true;
                                 }
-                            )
-                        });
-                    })
-                    .then(function clickOption() {
-                        if (desiredOption) {
-                            desiredOption.click();
-                        }
+                            }
+                        )
                     });
-                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
-            },
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
+        },
 
-            selectEditRandomInternalContactsFromDropDownRoleI: function (i) {
-                var desiredOption;
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-                browser.driver.findElements(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                    .then(function (options) {
-                        var randomNumber = Math.floor((Math.random() * options.length));
-                        options[randomNumber].click();
-                    });
-                browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-                pages.editDealGeneral.waitForAjax();
-            },
+        selectEditRandomInternalContactsFromDropDownRoleI: function (i) {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                });
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            pages.editDealGeneral.waitForAjax();
+        },
 
-            clickEditInternalContactsRole: function () {
-                pages.editDealGeneral.elems.editInternalContactRoleInputField.click();
-            },
+        clickEditInternalContactsRole: function () {
+            pages.editDealGeneral.elems.editInternalContactRoleInputField.click();
+        },
 
-            editTheIRowInternalContactField: function (i) {
-                var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
-                element.clear();
-                element.sendKeys("test");
-                browser.sleep(1000);
-            },
+        editTheIRowInternalContactField: function (i) {
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
+            element.clear();
+            element.sendKeys("test");
+            browser.sleep(1000);
+        },
 
-            clickEditInternalContactsRoleRowI: function (i) {
-                var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] input[ng-model='$term']"));
-                element.click();
-            },
+        clickEditInternalContactsRoleRowI: function (i) {
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] input[ng-model='$term']"));
+            element.click();
+        },
 
-            removeEditInternalContactsRoleRowI: function (i) {
-                var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] span[ng-click='!$isDisabled() && $removeTag($tag)']"));
-                element.click();
-            },
+        removeEditInternalContactsRoleRowI: function (i) {
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] span[ng-click='!$isDisabled() && $removeTag($tag)']"));
+            element.click();
+        },
 
-            removeEditInternalContactRole: function () {
-                pages.editDealGeneral.elems.removeInternalContactRoleInputField.click();
-            },
+        removeEditInternalContactRole: function () {
+            pages.editDealGeneral.elems.removeInternalContactRoleInputField.click();
+        },
 
-            removeEditInternalContactsRow: function () {
-                pages.editDealGeneral.elems.removeInternalContactsElement.click();
-            },
+        removeEditInternalContactsRow: function () {
+            pages.editDealGeneral.elems.removeInternalContactsElement.click();
+        },
 
-            removeEditInternalContactsRowI: function (i) {
-                var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"));
-                element.click();
-            },
+        removeEditInternalContactsRowI: function (i) {
+            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"));
+            element.click();
+        },
 
-            clickOnYesModalDialog: function () {
-                pages.editDealGeneral.elems.yesModalDialog.click();
-            },
+        clickOnYesModalDialog: function () {
+            pages.editDealGeneral.elems.yesModalDialog.click();
+        },
 
-            clickOnNoModalDialog: function () {
-                pages.editDealGeneral.elems.noModalDialog.click();
-            },
+        clickOnNoModalDialog: function () {
+            pages.editDealGeneral.elems.noModalDialog.click();
+        },
 
-            editTheGeneralTabFirstLeftElements: function () {
-                browser.actions().mouseMove(pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea).perform();
-                //pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea.click();
-                pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsEditorIcon.click();
-                browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editExecutionDateYearElement));
-            },
+        editTheGeneralTabFirstLeftElements: function () {
+            browser.actions().mouseMove(pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea).perform();
+            //pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsArea.click();
+            pages.editDealGeneral.elems.editGeneralLeftFirstFourFieldsEditorIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editExecutionDateYearElement));
+        },
 
-            editRemoveTheExistingContractingParty: function () {
-                pages.editDealGeneral.elems.removeExistingContractPartyIcon.click();
-            },
+        editRemoveTheExistingContractingParty: function () {
+            pages.editDealGeneral.elems.removeExistingContractPartyIcon.click();
+        },
 
-            editFillIntoTheContractingParty: function (contracting) {
-                pages.editDealGeneral.elems. contractingPartyElement.click();
-                pages.editDealGeneral.elems. contractingPartyInputField.sendKeys(contracting);
-            },
+        editFillIntoTheContractingParty: function (contracting) {
+            pages.editDealGeneral.elems. contractingPartyElement.click();
+            pages.editDealGeneral.elems. contractingPartyInputField.sendKeys(contracting);
+        },
 
-            editSelectRandomValueDropDownContractingParty: function () {
-                browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-                browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                    .then(function (options) {
-                        var randomNumber = Math.floor((Math.random() * options.length));
-                        options[randomNumber].click();
-                    });
-                pages.editDealGeneral.waitForAjax();
-            },
+        editSelectRandomValueDropDownContractingParty: function () {
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                });
+            pages.editDealGeneral.waitForAjax();
+        },
 
 
-            editSelectDesiredSigningTerritory: function (specific_country) {
-                pages.createDealGeneral.elems.dealSigningTerritoryPopup.click();
-                expect(pages.createDealGeneral.elems.dealSigningTerritoryDropDownData.isDisplayed);
-                var desiredOption;
-                browser.driver.findElements(by.css("div[name='dealSigningTerritory'] div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
-                    .then(function findMatchingOption(options) {
-                        options.forEach(function (option) {
-                            option.getText().then(function doesOptionMatch(text) {
-                                    if (text.indexOf(specific_country) != -1) {
-                                        desiredOption = option;
-                                        return true;
-                                    }
+        editSelectDesiredSigningTerritory: function (specific_country) {
+            pages.createDealGeneral.elems.dealSigningTerritoryPopup.click();
+            expect(pages.createDealGeneral.elems.dealSigningTerritoryDropDownData.isDisplayed);
+            var desiredOption;
+            browser.driver.findElements(by.css("div[name='dealSigningTerritory'] div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(specific_country) != -1) {
+                                    desiredOption = option;
+                                    return true;
                                 }
-                            )
-                        });
-                    })
-                    .then(function clickOption() {
-                        if (desiredOption) {
-                            desiredOption.click();
-                        }
+                            }
+                        )
                     });
-            },
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
 
         editSelectTheSpecificArtist: function (artistSearch, artist) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
@@ -227,45 +227,58 @@ if (pages.editDealGeneral === undefined) {
                 });
         },
 
-        editSelectTheRandomArtist: function () {
+        editSelectTheRandomArtist: function (value) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
             pages.createDealGeneral.elems.artistsField.click();
-            pages.createDealGeneral.elems.artistFieldInput.sendKeys("test");
+            pages.createDealGeneral.elems.artistFieldInput.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
-            browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    var element = options[randomNumber];
-                    browser.actions().mouseMove(element).click().perform();
-                })
+
+            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
+            then(function (promise) {
+                console.log("Text from artist is : " + promise);
+                if (promise.indexOf("Create New Artist") != -1) {
+                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[0];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
 
-
         editFillIntoTheValidExecutionDateYear: function () {
-                pages.editDealGeneral.elems.editExecutionDateYearElement.clear();
-                pages.editDealGeneral.elems.editExecutionDateYearElement.sendKeys("2015");
-            },
+            pages.editDealGeneral.elems.editExecutionDateYearElement.clear();
+            pages.editDealGeneral.elems.editExecutionDateYearElement.sendKeys("2015");
+        },
 
-            editFillIntoTheValidExecutionDateMonth: function () {
-                var number = Math.floor(Math.random() * 12) + 1;
-                pages.editDealGeneral.elems.editExecutionDateMonthElement.clear();
-                pages.editDealGeneral.elems.editExecutionDateMonthElement.sendKeys("07");
-            },
+        editFillIntoTheValidExecutionDateMonth: function () {
+            var number = Math.floor(Math.random() * 12) + 1;
+            pages.editDealGeneral.elems.editExecutionDateMonthElement.clear();
+            pages.editDealGeneral.elems.editExecutionDateMonthElement.sendKeys("07");
+        },
 
-            editFillIntoTheValidExecutionDateDay: function () {
-                var number = Math.floor(Math.random() * 28) + 1;
-                pages.editDealGeneral.elems.editExecutionDateDayElement.clear();
-                pages.editDealGeneral.elems.editExecutionDateDayElement.sendKeys("07");
-            },
+        editFillIntoTheValidExecutionDateDay: function () {
+            var number = Math.floor(Math.random() * 28) + 1;
+            pages.editDealGeneral.elems.editExecutionDateDayElement.clear();
+            pages.editDealGeneral.elems.editExecutionDateDayElement.sendKeys("07");
+        },
 
-            clickOnTheSaveEditGeneralLeftTabArea: function () {
-                browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems. saveEditLeftGeneralTabArea));
-                pages.editDealGeneral.elems. saveEditLeftGeneralTabArea.click();
-                pages.editDealGeneral.waitForAjax();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.contractingPartyElement));
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
-            }
+        clickOnTheSaveEditGeneralLeftTabArea: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.saveEditLeftGeneralTabArea));
+            pages.editDealGeneral.elems. saveEditLeftGeneralTabArea.click();
+            pages.editDealGeneral.waitForAjax();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.contractingPartyElement));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
         }
-    );
+    });
 }
