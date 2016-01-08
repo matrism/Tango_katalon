@@ -17,6 +17,12 @@ exports.checkContractTypeValue = function (value) {
     });
 };
 
+exports.checkExactContractTypeValue = function (value) {
+    it("Check that the contract type value from deal header is correct", function () {
+        pages.headerDeal.checkTheExactContractTypeValue(value);
+    });
+};
+
 exports.checkStatusText = function () {
     it("Check that the status text is present in the deal header", function () {
         pages.headerDeal.checkTheStatusText();

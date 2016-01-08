@@ -25,9 +25,9 @@ if (pages.headerDeal === undefined) {
             dealEndDateText: {css: "#RECORD-HEADER div.header-info div:nth-child(4) div.metadata-info:nth-child(2) p:nth-child(1)"},
             dealEndDateValue: {css: "#RECORD-HEADER div.header-info div:nth-child(4) div.metadata-info:nth-child(2) p:nth-child(2)"},
             dealArtistText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(1)"},
-            dealArtistValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(2)"},
-            dealLastUpdateText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p:nth-child(1)"},
-            dealLastUpdateValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p.info.ng-binding:nth-child(2)"},
+            dealArtistValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(3)"},
+            dealLastUpdateText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(1)"},
+            dealLastUpdateValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2)"}
 
         },
 
@@ -44,9 +44,18 @@ if (pages.headerDeal === undefined) {
             pages.headerDeal.elems.dealContractTypeValue.getText().
             then(function (promise) {
                 console.log("Contract type value is  : " + promise);
+                expect(promise).toContain(value);
+            });
+        },
+
+        checkTheExactContractTypeValue: function(value) {
+            pages.headerDeal.elems.dealContractTypeValue.getText().
+            then(function (promise) {
+                console.log("Contract type value is  : " + promise);
                 expect(promise).toEqual(value);
             });
         },
+
 
         checkTheStatusText: function () {
             pages.headerDeal.elems.dealStatusText.getText().
@@ -93,7 +102,7 @@ if (pages.headerDeal === undefined) {
             pages.headerDeal.elems.dealOwnershipText.getText().
             then(function (promise) {
                 console.log("Ownership title text is  : " + promise);
-                expect(promise).toEqual("OWNERSHIP:");
+                expect(promise).toEqual("OWNERSHIP: ");
             });
         },
 
@@ -109,7 +118,7 @@ if (pages.headerDeal === undefined) {
             pages.headerDeal.elems.dealAdministrationText.getText().
             then(function (promise) {
                 console.log("Administration title text is  : " + promise);
-                expect(promise).toEqual("ADMINISTRATION:");
+                expect(promise).toEqual("ADMINISTRATION: ");
             });
         },
 
@@ -157,7 +166,7 @@ if (pages.headerDeal === undefined) {
             pages.headerDeal.elems.dealArtistText.getText().
             then(function (promise) {
                 console.log("Artist title text is  : " + promise);
-                expect(promise).toEqual("END:");
+                expect(promise).toContain("ARTIST:");
             });
         },
 

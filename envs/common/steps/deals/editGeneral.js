@@ -191,6 +191,33 @@ exports.itCancelInternalContactsChanges = function () {
     })
 };
 
+exports.editSigningTerritory = function (value) {
+    it("Edit the signing territory general screen ", function () {
+        pages.editDealGeneral.editSelectDesiredSigningTerritory(value);
+    });
+};
+
+exports.editRandomArtistField = function () {
+    it("Edit select random artist field", function () {
+        pages.editDealGeneral.editSelectTheRandomArtist();
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
+exports.editSpecificArtistField = function (artistSearch, artist) {
+    it("Edit select specific artist field", function () {
+        pages.editDealGeneral.editSelectTheSpecificArtist(artistSearch, artist);
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
+exports.editRemoveArtistNumberI = function (i) {
+  it("Edit remove the artist number i from list ", function(){
+      browser.driver.findElement(By.css("div[name='artists'] div.ng-scope:nth-child(" + i + ") span[ng-click='!$isDisabled() && $removeTag($tag)']")).click();
+      pages.editDealGeneral.waitForAjax();
+  });
+};
+
 exports.editContractExecutionDate = function () {
     it("Edit the contract execution date ", function () {
         pages.editDealGeneral.editFillIntoTheValidExecutionDateYear();
@@ -283,3 +310,5 @@ exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
         steps.editDealGeneral.confirmModalDialog();
     });
 };
+
+

@@ -11,7 +11,7 @@ exports.goToNewDealPage = function () {
     });
 };
 
-exports.selectDesiredSigningTerritory = function (value) {
+exports.selectSigningTerritory = function (value) {
     it('Select deal signing territory (' + value + ')', function () {
         pages.createDealGeneral.selectDesiredSigningTerritory(value);
     });
