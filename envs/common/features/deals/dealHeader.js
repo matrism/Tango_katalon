@@ -58,7 +58,7 @@ exports.feature = [
             steps.headerDeal.checkContractTypeValue("Joint Venture");
             steps.headerDeal.checkContractTypeValue("Purchase");
 
-
+            steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editSigningTerritory("Austria");
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
@@ -141,6 +141,30 @@ exports.feature = [
             steps.headerDeal.checkStartDateValue("2014-02-12");
             steps.headerDeal.checkEndDateText();
             steps.headerDeal.checkEndDateValue("2014-05-22");
+
+        }
+    },
+    {
+        name: "Create a deal and check the deal header",
+        tags: ["header_signing_territory"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.headerDeal.checkSigningTerritoryText();
+            steps.headerDeal.checkSigningTerritoryValue("Argentina");
+
+            steps.deal.goToGeneralDealTabDetails();
+            steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            steps.editDealGeneral.editSigningTerritory("Austria");
+            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+            steps.headerDeal.checkSigningTerritoryText();
+            steps.headerDeal.checkSigningTerritoryValue("Austria");
 
         }
     }
