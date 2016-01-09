@@ -9,7 +9,7 @@ exports.beforeFeature = function () {
 exports.feature = [
     {
         name: "Create a deal and check the deal header",
-        tags: ["dealHeader"],
+        tags: ["header_general"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -23,20 +23,21 @@ exports.feature = [
             steps.headerDeal.checkExactContractTypeValue("");
             steps.headerDeal.checkStatusText();
             steps.headerDeal.checkStatusValue("Acquisition");
-            steps.headerDeal.checkSigningTerritoryText();
-            steps.headerDeal.checkSigningTerritoryValue("Argentina");
+            //steps.headerDeal.checkSigningTerritoryText();
+            //steps.headerDeal.checkSigningTerritoryValue("Argentina");
             steps.headerDeal.checkTerritoriesText();
             steps.headerDeal.checkOwnershipText();
             steps.headerDeal.checkOwnershipValue("None");
             steps.headerDeal.checkAdministrationText();
             steps.headerDeal.checkAdministrationValue("None");
-            steps.headerDeal.checkStartDateText();
-            steps.headerDeal.checkStartDateValue("2014-03-12");
-            steps.headerDeal.checkEndDateText();
-            steps.headerDeal.checkEndDateValue("");
-            steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkContractBriefNumberText();
-            steps.headerDeal.checkLastUpdateText();
+
+            //steps.headerDeal.checkStartDateText();
+            //steps.headerDeal.checkStartDateValue("2014-03-12");
+            //steps.headerDeal.checkEndDateText();
+            //steps.headerDeal.checkEndDateValue("");
+            //steps.headerDeal.checkArtistText();
+            //steps.headerDeal.checkContractBriefNumberText();
+            //steps.headerDeal.checkLastUpdateText();
 
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
@@ -180,9 +181,26 @@ exports.feature = [
 
     {
         name: "Open a deal check last update made some changes and check again last updated in deal header",
-        tags: ["header_last_updated"],
+        tags: ["header_contract_status"],
         steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.createDealGeneral.clickOnDraftContractStatus();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.headerDeal.checkStatusText();
+            steps.headerDeal.checkStatusValue("Draft");
 
+            steps.deal.goToGeneralDealTabDetails();
+            steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            steps.editDealGeneral.editSelectTheExecutedContractStatus("Executed");
+            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+
+            steps.headerDeal.checkStatusText();
+            steps.headerDeal.checkStatusValue("Acquisition");
         }
     }
 

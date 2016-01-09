@@ -279,6 +279,29 @@ if (pages.editDealGeneral === undefined) {
             pages.editDealGeneral.waitForAjax();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.contractingPartyElement));
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
+        },
+
+        editSelectToTheExecutedContractStatus: function (value) {
+            var desiredOption;
+            browser.driver.findElement(By.css("div[name='contract_status'] div.tg-dropdown-button button.tg-dropdown-label.overflow")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[name='contract_status'] ul.dropdown-menu li.ng-scope a"))));
+            browser.driver.findElements(By.css("div[name='contract_status'] ul.dropdown-menu li.ng-scope a"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         }
     });
 }
