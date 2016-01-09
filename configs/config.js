@@ -76,9 +76,6 @@ var defaultUserName = 'TangoTest1',
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
-                //app_url: 'http://tango.tango.qa.wmg.com',
-                //service_url: 'http://tango.tango.qa.wmg.com',
-                //cr_url: 'http://tango.tango.qa.wmg.com:80'
                 app_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
                 service_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
                 cr_url: 'http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80'

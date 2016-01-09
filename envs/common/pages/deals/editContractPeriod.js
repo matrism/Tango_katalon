@@ -86,6 +86,7 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editTheContractPeriodArea: function () {
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editContractPeriodAreaElement);
             browser.actions().mouseMove(pages.editDealContractPeriod.elems.editContractPeriodAreaElement).perform();
             pages.editDealContractPeriod.elems.editContractPeriodIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editActualEndDateField));

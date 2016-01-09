@@ -104,7 +104,7 @@ exports.feature = [
             steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna");
 
             //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            //steps.editDealGeneral.editRandomArtistField("zwgf");
+            //steps.editDealGeneral.editRandomArtistField("vfdbvf");
             //steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             //steps.headerDeal.checkArtistText();
             //steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna, Shilpa", "zwgf");

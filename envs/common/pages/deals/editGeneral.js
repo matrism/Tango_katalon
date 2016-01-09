@@ -233,14 +233,14 @@ if (pages.editDealGeneral === undefined) {
             pages.createDealGeneral.elems.artistFieldInput.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
 
-            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
+            element(By.css("li.tg-typeahead__suggestions-footer div:nth-child(2)")).getText().
             then(function (promise) {
                 console.log("Text from artist is : " + promise);
-                if (promise.indexOf("Create New Artist") != -1) {
-                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
+                if (promise.indexOf("Create New Artist ") != -1) {
+                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div:nth-child(2)"))
                         .then(function (options) {
                             var randomNumber = Math.floor((Math.random() * options.length));
-                            var element = options[0];
+                            var element = options[randomNumber];
                             browser.actions().mouseMove(element).click().perform();
                         })
                 }
