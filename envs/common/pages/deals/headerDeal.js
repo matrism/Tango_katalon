@@ -190,7 +190,7 @@ if (pages.headerDeal === undefined) {
             pages.headerDeal.elems.dealBriefNumberValue.getText().
             then(function (promise) {
                 console.log("Deal brief number value is  : " + promise);
-                expect(promise).toEqual(value);
+                expect(promise).not.toEqual("");
             });
         },
 

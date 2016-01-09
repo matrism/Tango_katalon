@@ -113,7 +113,7 @@ exports.feature = [
 
     {
         name: "Create a deal add/edit dates and RTP and check the deal header",
-        tags: ["header_rtp"],
+        tags: ["header_rtp_brief_number"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.fillIntoExecutionDateFieldSpecificYearValue("2014");
@@ -126,6 +126,9 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+
+            steps.headerDeal.checkContractBriefNumberText();
+            steps.headerDeal.checkContractBriefNumberValue();
             steps.headerDeal.checkStartDateText();
             steps.headerDeal.checkStartDateValue("2014-02-12");
             steps.headerDeal.checkEndDateText();
@@ -141,6 +144,8 @@ exports.feature = [
             steps.headerDeal.checkStartDateValue("2014-02-12");
             steps.headerDeal.checkEndDateText();
             steps.headerDeal.checkEndDateValue("2014-05-22");
+            steps.headerDeal.checkContractBriefNumberText();
+            steps.headerDeal.checkContractBriefNumberValue();
 
         }
     },

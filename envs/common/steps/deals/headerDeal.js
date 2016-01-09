@@ -119,9 +119,9 @@ exports.checkContractBriefNumberText = function () {
     });
 };
 
-exports.checkContractBriefNumberValue = function (value) {
+exports.checkContractBriefNumberValue = function () {
     it("Check that the contract brief number value from deal header is correct", function () {
-        pages.headerDeal.checkTheContractBriefNumberValue(value);
+        pages.headerDeal.checkTheContractBriefNumberValue();
     });
 };
 
