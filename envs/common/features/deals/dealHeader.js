@@ -146,7 +146,7 @@ exports.feature = [
     },
     {
         name: "Create a deal and check the deal header",
-        tags: ["header_signing_territory"],
+        tags: ["header_signing_last_update"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -165,6 +165,18 @@ exports.feature = [
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkSigningTerritoryText();
             steps.headerDeal.checkSigningTerritoryValue("Austria");
+
+            steps.headerDeal.checkLastUpdateText();
+            steps.headerDeal.checkLastUpdateValue("2016-01-09");
+            steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
+
+        }
+    },
+
+    {
+        name: "Open a deal check last update made some changes and check again last updated in deal header",
+        tags: ["header_last_updated"],
+        steps: function () {
 
         }
     }

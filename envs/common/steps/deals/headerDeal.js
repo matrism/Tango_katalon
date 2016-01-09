@@ -137,4 +137,10 @@ exports.checkLastUpdateValue = function (value) {
     });
 };
 
+exports.clickOnLastUpdateValueAndCheckTheAuditLogScreen = function(){
+    it("Click on the last update value deal header and check you are redirected to the audit log screen ", function(){
+        pages.headerDeal.clickOnTheLastUpdateValueAndCheckTheAuditLogScreen();
+    })
+};
+
 

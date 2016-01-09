@@ -208,7 +208,18 @@ if (pages.headerDeal === undefined) {
                 console.log("Last update value is  : " + promise);
                 expect(promise).toEqual(value);
             });
+        },
+
+        clickOnTheLastUpdateValueAndCheckTheAuditLogScreen : function() {
+            browser.driver.findElement(By.css("#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2) a")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div#RECORD-HEADER h1 strong"))));
+            browser.driver.findElement(By.css("div#RECORD-HEADER h1 strong")).getText().
+                then(function (promise) {
+                console.log("Audit log text  is  : " + promise);
+                expect(promise).toEqual("AUDIT LOG");
+            });
         }
+
 
     });
 }
