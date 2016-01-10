@@ -21,8 +21,8 @@ exports.feature = [
 
             steps.headerDeal.checkContractTypeText();
             steps.headerDeal.checkExactContractTypeValue("");
-            steps.headerDeal.checkStatusText();
-            steps.headerDeal.checkStatusValue("Acquisition");
+            //steps.headerDeal.checkStatusText();
+            //steps.headerDeal.checkStatusValue("Acquisition");
             //steps.headerDeal.checkSigningTerritoryText();
             //steps.headerDeal.checkSigningTerritoryValue("Argentina");
             steps.headerDeal.checkTerritoriesText();
@@ -59,12 +59,21 @@ exports.feature = [
             steps.headerDeal.checkContractTypeValue("Joint Venture");
             steps.headerDeal.checkContractTypeValue("Purchase");
 
-            steps.deal.goToGeneralDealTabDetails();
-            steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            steps.editDealGeneral.editSigningTerritory("Austria");
-            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
-            steps.headerDeal.checkSigningTerritoryText();
-            steps.headerDeal.checkSigningTerritoryValue("Argentina");
+            steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Assignment", "Worldwide");
+            steps.editDealScope.editSaveAllChanges();
+            steps.headerDeal.checkContractTypeText();
+            steps.headerDeal.checkContractTypeValue("Administration");
+            steps.headerDeal.checkContractTypeValue("Finder");
+            steps.headerDeal.checkContractTypeValue("Joint Venture");
+            steps.headerDeal.checkContractTypeValue("Purchase");
+            steps.headerDeal.checkContractTypeValue("Assignment");
+
+            //steps.deal.goToGeneralDealTabDetails();
+            //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            //steps.editDealGeneral.editSigningTerritory("Austria");
+            //steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+            //steps.headerDeal.checkSigningTerritoryText();
+            //steps.headerDeal.checkSigningTerritoryValue("Argentina");
 
         }
     },
@@ -201,6 +210,16 @@ exports.feature = [
 
             steps.headerDeal.checkStatusText();
             steps.headerDeal.checkStatusValue("Acquisition");
+
+            steps.deal.goToTermsDealTabDetails();
+            steps.deal.goToRightsTermPeriodsTermsTabDetails();
+            steps.editDealRtp.editRtpAcquisitionArea();
+            steps.editDealRtp.editFillIntoAcquisitionActualEndDateField("2015-08-09");
+            steps.editDealRtp.editSaveAcquisitionArea();
+
+            //steps.headerDeal.checkStatusText();
+            //steps.headerDeal.checkStatusValue("Expired");
+
         }
     }
 

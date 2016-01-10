@@ -48,6 +48,14 @@ if (pages.headerDeal === undefined) {
             });
         },
 
+        checkTheContractTypeValueNotDisplayed: function(value) {
+            pages.headerDeal.elems.dealContractTypeValue.getText().
+            then(function (promise) {
+                console.log("Contract type value is  : " + promise);
+                expect(promise).not.toContain(value);
+            });
+        },
+
         checkTheExactContractTypeValue: function(value) {
             pages.headerDeal.elems.dealContractTypeValue.getText().
             then(function (promise) {

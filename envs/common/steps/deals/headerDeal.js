@@ -17,6 +17,12 @@ exports.checkContractTypeValue = function (value) {
     });
 };
 
+exports.checkContractTypeValueNotDisplayed = function (value) {
+    it("Check that the contract type value from deal header is not displayed", function () {
+        pages.headerDeal.checkTheContractTypeValueNotDisplayed(value);
+    });
+};
+
 exports.checkExactContractTypeValue = function (value) {
     it("Check that the contract type value from deal header is correct", function () {
         pages.headerDeal.checkTheExactContractTypeValue(value);
