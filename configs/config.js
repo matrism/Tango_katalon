@@ -61,7 +61,8 @@ var defaultUserName = 'TangoTest1',
             noUpload: cli['no-upload'],
             orphanOnError: cli['orphan-on-error'],
             demoReporter: cli['demo-reporter'],
-            stepByStep: cli['step-by-step']
+            stepByStep: cli['step-by-step'],
+            fingerprints: cli.fingerprints
         },
         _env_: env,
         qa: {

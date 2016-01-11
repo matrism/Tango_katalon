@@ -94,6 +94,24 @@ config = {
         global.ExpectedConditions = protractor.ExpectedConditions;
         global.EC = ExpectedConditions;
 
+        if(systemConfig.fingerprints) {
+            (function () {
+                var webdriver = require('selenium-webdriver'),
+
+                    WEP = webdriver.WebElement.prototype;
+
+                ['click', 'sendKeys', 'getAttribute', 'getText', 'clear'].forEach(function (name) {
+                    var originalFn = WEP[name];
+
+                    WEP[name] = function () {
+                        highlightElement(this);
+
+                        return originalFn.apply(this, arguments);
+                    };
+                });
+            })();
+        }
+
         if (systemConfig.failFast) {
             jasmine.getEnv().addReporter(failFast.init());
         }
