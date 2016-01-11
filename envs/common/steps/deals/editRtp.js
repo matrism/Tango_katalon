@@ -30,6 +30,19 @@ exports.clickOnAddRetentionFromAcquisitionLink = function () {
     });
 };
 
+exports.editRtpRetentionArea = function () {
+    it("Edit the rtp retention area ", function () {
+        pages.editDealRtp.editTheRtpRetentionArea();
+    });
+};
+
+exports.editDeleteRtpRetentionFromAcquisitionForm = function () {
+    it("Edit delete the rtp retention from acquisition form ", function () {
+        pages.editDealRtp.editDeleteTheRtpRetentionFromAcquisitionForm();
+    });
+};
+
+
 exports.editFillRetentionDescriptionFromAcquisition = function (description) {
     it("Edit fill into the retention description field from acquisition ", function () {
         pages.editDealRtp.editFillTheRetentionDescriptionFromAcquisition(description);
@@ -48,8 +61,26 @@ exports.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI = function
     });
 };
 
+exports.editFillIntoActualEndDateFieldRetentionFromAcquisition = function (actualEndDate) {
+    it("Edit fill into the actual end date field retention from acquisition ", function () {
+        pages.editDealRtp.editFillIntoTheActualEndDateFieldRetentionFromAcquisition(actualEndDate)
+    });
+};
+
 exports.saveRetentionFromAcquisition = function () {
     it("Save the retention from acquisition number ", function () {
         pages.editDealRtp.saveTheRetentionFromAcquisition();
+    });
+};
+
+exports.clickOnAddPostTermCollectionFromRetention = function () {
+    it("Click on the add post term collection from retention ", function () {
+        pages.editDealRtp.editClickOnTheAddPostTermPeriodFromRetention();
+    });
+};
+
+exports.editFillIntoDurationFieldPostTermCollectionFromRetention = function(){
+    it("Edit fill into the duration field post term collection from retention ", function(){
+       pages.editDealRtp.editFillIntoTheDurationFieldPostTermCollectionFromRetention();
     });
 };

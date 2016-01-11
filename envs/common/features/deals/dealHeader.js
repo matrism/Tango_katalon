@@ -21,23 +21,11 @@ exports.feature = [
 
             steps.headerDeal.checkContractTypeText();
             steps.headerDeal.checkExactContractTypeValue("");
-            //steps.headerDeal.checkStatusText();
-            //steps.headerDeal.checkStatusValue("Acquisition");
-            //steps.headerDeal.checkSigningTerritoryText();
-            //steps.headerDeal.checkSigningTerritoryValue("Argentina");
             steps.headerDeal.checkTerritoriesText();
             steps.headerDeal.checkOwnershipText();
             steps.headerDeal.checkOwnershipValue("None");
             steps.headerDeal.checkAdministrationText();
             steps.headerDeal.checkAdministrationValue("None");
-
-            //steps.headerDeal.checkStartDateText();
-            //steps.headerDeal.checkStartDateValue("2014-03-12");
-            //steps.headerDeal.checkEndDateText();
-            //steps.headerDeal.checkEndDateValue("");
-            //steps.headerDeal.checkArtistText();
-            //steps.headerDeal.checkContractBriefNumberText();
-            //steps.headerDeal.checkLastUpdateText();
 
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
@@ -67,14 +55,6 @@ exports.feature = [
             steps.headerDeal.checkContractTypeValue("Joint Venture");
             steps.headerDeal.checkContractTypeValue("Purchase");
             steps.headerDeal.checkContractTypeValue("Assignment");
-
-            //steps.deal.goToGeneralDealTabDetails();
-            //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            //steps.editDealGeneral.editSigningTerritory("Austria");
-            //steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
-            //steps.headerDeal.checkSigningTerritoryText();
-            //steps.headerDeal.checkSigningTerritoryValue("Argentina");
-
         }
     },
 
@@ -160,7 +140,7 @@ exports.feature = [
         }
     },
     {
-        name: "Create a deal and check the deal header",
+        name: "Create a deal and check the deal header signing and last update",
         tags: ["header_signing_last_update"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -182,7 +162,7 @@ exports.feature = [
             steps.headerDeal.checkSigningTerritoryValue("Austria");
 
             steps.headerDeal.checkLastUpdateText();
-            steps.headerDeal.checkLastUpdateValue("2016-01-09");
+            steps.headerDeal.checkLastUpdateValue("2016-01-11");
             steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
 
         }
@@ -216,9 +196,27 @@ exports.feature = [
             steps.editDealRtp.editRtpAcquisitionArea();
             steps.editDealRtp.editFillIntoAcquisitionActualEndDateField("2015-08-09");
             steps.editDealRtp.editSaveAcquisitionArea();
+            steps.headerDeal.checkStatusText();
+            steps.headerDeal.checkStatusValue("Expired");
 
-            //steps.headerDeal.checkStatusText();
-            //steps.headerDeal.checkStatusValue("Expired");
+            steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
+            steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
+            steps.editDealRtp.saveRetentionFromAcquisition();
+            steps.headerDeal.checkStatusText();
+            steps.headerDeal.checkStatusValue("Retention");
+
+            steps.editDealRtp.editRtpRetentionArea();
+            steps.editDealRtp.editDeleteRtpRetentionFromAcquisitionForm();
+
+            steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
+            steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Conditional Duration");
+            steps.editDealRtp.editFillIntoActualEndDateFieldRetentionFromAcquisition("2015-11-12");
+            steps.editDealRtp.clickOnAddPostTermCollectionFromRetention();
+            steps.editDealRtp.editFillIntoDurationFieldPostTermCollectionFromRetention();
+            steps.editDealRtp.saveRetentionFromAcquisition();
+            steps.headerDeal.checkStatusText();
+            steps.headerDeal.checkStatusValue("Post Term Collection");
+
 
         }
     }
