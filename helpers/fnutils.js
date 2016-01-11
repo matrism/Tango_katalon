@@ -7,6 +7,8 @@ exports.bind = function(value, fn) {
         bindings = args.slice(0, -1),
         fn = _.last(args);
 
+    bindings.unshift(bindings[0]);
+
     return fn.bind.apply(fn, bindings);
 };
 
