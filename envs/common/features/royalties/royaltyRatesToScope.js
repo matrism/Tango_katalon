@@ -33,6 +33,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.verifyRateSetSavedData();
         }
@@ -58,6 +59,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -98,6 +100,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -146,6 +149,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -192,6 +196,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -232,6 +237,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -285,6 +291,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.storeAllRRData();
@@ -352,6 +359,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.verifyAllRateSetSavedData();
         }
@@ -375,6 +383,7 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.editSingleRoyaltySet();
             steps.royaltyRates.openAllRRFields();
@@ -400,6 +409,7 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.editSingleRoyaltySet();
             steps.royaltyRates.openAllRRFields();
@@ -428,6 +438,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -473,6 +484,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
