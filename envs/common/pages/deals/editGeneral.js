@@ -173,7 +173,7 @@ if (pages.editDealGeneral === undefined) {
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    options[0].click();
                 });
             pages.editDealGeneral.waitForAjax();
         },

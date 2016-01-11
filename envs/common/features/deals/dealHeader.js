@@ -26,6 +26,7 @@ exports.feature = [
             steps.headerDeal.checkOwnershipValue("None");
             steps.headerDeal.checkAdministrationText();
             steps.headerDeal.checkAdministrationValue("None");
+            steps.headerDeal.checkContractingPartyValue("BMI");
 
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
@@ -55,6 +56,14 @@ exports.feature = [
             steps.headerDeal.checkContractTypeValue("Joint Venture");
             steps.headerDeal.checkContractTypeValue("Purchase");
             steps.headerDeal.checkContractTypeValue("Assignment");
+
+            steps.deal.goToGeneralDealTabDetails();
+            steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            steps.editDealGeneral.editExistingContractingParty("ascap");
+            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+            steps.headerDeal.checkContractingPartyValue("BMI");
+            steps.headerDeal.checkContractingPartyValue("ASCAP");
+
         }
     },
 
@@ -145,7 +154,7 @@ exports.feature = [
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
-            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.createDealContractPeriod.itFillDealMandatorieldsContractPeriod();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -193,7 +202,22 @@ exports.feature = [
 
             steps.deal.goToTermsDealTabDetails();
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
+
             steps.editDealRtp.editRtpAcquisitionArea();
+            steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2016-08-08");
+            steps.editDealRtp.editSaveAcquisitionArea();
+            steps.headerDeal.checkStatusText();
+            steps.headerDeal.checkStatusValue("Pre Term");
+
+            //steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
+            //steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2014-04-05");
+            //steps.editDealRtp.editSaveAcquisitionArea();
+            //steps.headerDeal.checkStatusText();
+            //steps.headerDeal.checkStatusValue("Acquisition");
+            //steps.editDealRtp.editRtpAcquisitionArea();
+
+            steps.editDealRtp.editRtpAcquisitionArea();
+            steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2014-04-05");
             steps.editDealRtp.editFillIntoAcquisitionActualEndDateField("2015-08-09");
             steps.editDealRtp.editSaveAcquisitionArea();
             steps.headerDeal.checkStatusText();

@@ -11,6 +11,13 @@ exports.editRtpAcquisitionArea = function () {
     });
 };
 
+exports.editFillIntoAcquisitionActualStartDateField = function (endDate) {
+    it("Edit fill into the acquisition actual start date field ", function () {
+        pages.editDealRtp.editFillIntoTheAcquisitionActualStartDateField(endDate);
+    });
+};
+
+
 exports.editFillIntoAcquisitionActualEndDateField = function (endDate) {
     it("Edit fill into the acquisition actual end date field ", function () {
         pages.editDealRtp.editFillIntoTheAcquisitionActualEndDateField(endDate);
@@ -79,8 +86,15 @@ exports.clickOnAddPostTermCollectionFromRetention = function () {
     });
 };
 
-exports.editFillIntoDurationFieldPostTermCollectionFromRetention = function(){
-    it("Edit fill into the duration field post term collection from retention ", function(){
-       pages.editDealRtp.editFillIntoTheDurationFieldPostTermCollectionFromRetention();
+exports.editFillIntoDurationFieldPostTermCollectionFromRetention = function () {
+    it("Edit fill into the duration field post term collection from retention ", function () {
+        pages.editDealRtp.editFillIntoTheDurationFieldPostTermCollectionFromRetention();
+    });
+};
+
+
+exports.editClickOnAddAnotherAcquisitionPeriodLink = function () {
+    it("Edit click on add another acquisition period link", function () {
+        pages.editDealRtp.editClickOnTheAddAnotherAcquisitionPeriodLink();
     });
 };

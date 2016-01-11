@@ -7,6 +7,7 @@ var pph = require('../../../../helpers/pph'),
 if (pages.headerDeal === undefined) {
     pages.headerDeal = new ftf.pageObject({
         locators: {
+            dealContractingPartiesValue: {css: "div#RECORD-HEADER h1 div.overflow"},
             dealBriefNumberText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p:nth-child(1)"},
             dealBriefNumberValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p.info.ng-binding:nth-child(2)"},
             dealContractTypeText: {css: "#RECORD-HEADER div.header-info div:nth-child(1)  div.metadata-info:nth-child(1) p:nth-child(1)"},
@@ -64,6 +65,13 @@ if (pages.headerDeal === undefined) {
             });
         },
 
+        checkTheContractingPartyValue: function (value) {
+            pages.headerDeal.elems.dealContractingPartiesValue.getText().
+            then(function (promise) {
+                console.log("Contracting party value is  : " + promise);
+                expect(promise).toContain(value);
+            });
+        },
 
         checkTheStatusText: function () {
             pages.headerDeal.elems.dealStatusText.getText().

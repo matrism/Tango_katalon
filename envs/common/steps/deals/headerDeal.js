@@ -149,4 +149,10 @@ exports.clickOnLastUpdateValueAndCheckTheAuditLogScreen = function(){
     })
 };
 
+exports.checkContractingPartyValue = function (value) {
+    it("Check that the contracting party value from deal header is correct", function () {
+        pages.headerDeal.checkTheContractingPartyValue(value);
+    });
+};
+
 

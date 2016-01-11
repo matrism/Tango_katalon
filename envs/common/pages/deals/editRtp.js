@@ -6,13 +6,15 @@ var _ = require('lodash'),
 if (pages.editDealRtp === undefined) {
     pages.editDealRtp = new ftf.pageObject({
         locators: {
-            editRtpAcquisitionArea: {css: "div[data-ng-class='{ active: acqFormSection.edit }'] div[data-ng-if='acqFormSection.detail']"},
+            editAddAnotherAcquisitionPeriodButtonLink: {css: "a[data-ng-click='iv#RECORD-HEADER h1 div.overflow']"},
+            editRtpAcquisitionAreaField: {css: "div[data-ng-class='{ active: acqFormSection.edit }'] div[data-ng-if='acqFormSection.detail']"},
             editRtpAcquisitionIcon: {css: "div[data-ng-class='{ active: acqFormSection.edit }'] button[data-ng-click='showRtpEdit(acqFormSection, acqRtp.id, rtps.id)']"},
-            editDescriptionAcquisitionField: {css: "div[data-ng-class='{ active: acqFormSection.edit }'] input[data-ng-model='acqRtp.description']"},
+            editDescriptionAcquisitionField: {css: "input[data-ng-model='acqRtp.description']"},
+            editActualStartDateAcquisitionField: {css: "div[name='acquisitionStartDate'] input"},
             editActualEndDateAcquisitionField: {css: "div[data-ng-class='{ active: acqFormSection.edit }'] div[name='acquisitionEndDate'] input"},
             editSaveAcquisitionAreaButton: {css: "div[data-ng-class='{ active: acqFormSection.edit }'] button[data-ng-click='updateDeal(rtpFormAcq.$valid, form.deal, acqFormSection, false)']"},
             editAddRetentionFromAcquisitionLink: {css: "a[data-ng-click='addRetentionRightsTermPeriod(rtps.id)']"},
-            editTheRtpRetentionArea: {css: "div[data-ng-class='{ active: retentionFormSection.edit }'] div[data-ng-if ='retentionFormSection.detail']"},
+            editTheRtpRetentionAreaField: {css: "div[data-ng-class='{ active: retentionFormSection.edit }'] div[data-ng-if ='retentionFormSection.detail']"},
             editTheRtpRetentionIcon: {css: "div[data-ng-class='{ active: retentionFormSection.edit }'] button[data-ng-click='showRtpEdit(retentionFormSection, rtp.id, rtps.id)']"},
             removeTheRtpRetention: {css: "div[data-ng-class='{ active: retentionFormSection.edit }'] div[data-name='rtpForm'] a[ng-click='showDeleteRightsTermPeriodModal(rtps.id, rtp.id)']"},
             editDescriptionRetentionFromAcquisitionField: {css: "input[data-ng-model='rtp.description']"},
@@ -28,8 +30,13 @@ if (pages.editDealRtp === undefined) {
             confirmCancelModalDialog: {css: "div.modal-dialog.ng-scope button[data-ng-click='cancel()']"}
         },
 
+        editClickOnTheAddAnotherAcquisitionPeriodLink: function () {
+            pages.editDealRtp.elems.editAddAnotherAcquisitionPeriodButtonLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionAcquisitionField));
+        },
+
         editTheRtpAcquisitionArea: function () {
-            browser.actions().mouseMove(pages.editDealRtp.elems.editRtpAcquisitionArea).perform();
+            browser.actions().mouseMove(pages.editDealRtp.elems.editRtpAcquisitionAreaField).perform();
             pages.editDealRtp.elems.editRtpAcquisitionIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionAcquisitionField));
         },
@@ -39,13 +46,18 @@ if (pages.editDealRtp === undefined) {
             pages.editDealRtp.elems.editActualEndDateAcquisitionField.sendKeys(value);
         },
 
+        editFillIntoTheAcquisitionActualStartDateField: function (value) {
+            pages.editDealRtp.elems.editActualStartDateAcquisitionField.clear();
+            pages.editDealRtp.elems.editActualStartDateAcquisitionField.sendKeys(value);
+        },
+
         editSaveTheAcquisitionArea: function () {
             pages.editDealRtp.elems.editSaveAcquisitionAreaButton.click();
         },
 
 
         editTheRtpRetentionArea: function () {
-            browser.actions().mouseMove(pages.editDealRtp.elems.editTheRtpRetentionArea).perform();
+            browser.actions().mouseMove(pages.editDealRtp.elems.editTheRtpRetentionAreaField).perform();
             pages.editDealRtp.elems.editTheRtpRetentionIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField));
         },
@@ -130,7 +142,7 @@ if (pages.editDealRtp === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDurationRtpPostTermCollectionField));
         },
 
-        editFillIntoTheDurationFieldPostTermCollectionFromRetention: function(){
+        editFillIntoTheDurationFieldPostTermCollectionFromRetention: function () {
             var number = Math.floor(Math.random() * 20) + 1;
             pages.editDealRtp.elems.editDurationRtpPostTermCollectionField.sendKeys(number);
         }
