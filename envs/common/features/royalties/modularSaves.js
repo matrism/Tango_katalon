@@ -36,6 +36,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
 
             steps.deal.clickFirstScopeHeader();
 
@@ -143,6 +144,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
 
             steps.deal.clickFirstScopeHeader();
 

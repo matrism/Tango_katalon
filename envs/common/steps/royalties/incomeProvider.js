@@ -121,6 +121,7 @@ exports.editValidRoyaltySetPair = function (table, message) {
             //Added buttons
             autoIt('pages.deal.continueToNextPage');
             autoIt('pages.deal.saveNewDeal');
+            steps.deal.waitForDealToBeSaved();
 
             autoIt('pages.deal.clickFirstScopeHeader');
 
@@ -267,6 +268,7 @@ exports.editInvalidRoyaltySetPair = function (table, message) {
             //Added buttons
             autoIt('pages.deal.continueToNextPage');
             autoIt('pages.deal.saveNewDeal');
+            steps.deal.waitForDealToBeSaved();
 
             it('Wait for visibility of deal brief number', function() {
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));

@@ -50,6 +50,7 @@ exports.feature = [
                 d.itContinueToNextPage();
 
                 d.saveDeal();
+                d.waitForDealToBeSaved();
 
                 d.goToTermsDealTabDetails();
                 d.clickFirstScopeHeader();
