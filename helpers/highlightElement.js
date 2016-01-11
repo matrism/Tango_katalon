@@ -13,6 +13,7 @@ exports = module.exports = function(el, color) {
         }
 
         $el.data('tatHighlightRestoreData', el.style.outline);
+        $el.addClass('tatHighlight');
         el.style.outline = '3px solid ' + (color || 'purple');
     }, el, color);
 };
@@ -32,5 +33,12 @@ exports.restore = function(el) {
 
         el.style.outline = restoreData;
         $el.removeData('tatHighlightRestoreData');
+        $el.removeClass('tatHighlight');
     }, el);
+};
+
+exports.restoreAll = function () {
+    return $$('.tatHighlight').each(function (el) {
+        return exports.restore(el).then(null, function(){});
+    });
 };
