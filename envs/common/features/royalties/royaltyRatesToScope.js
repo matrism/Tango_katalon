@@ -4,12 +4,18 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['royaltyRates', 'sanity'];
+exports.commonFeatureTags = [
+    'royaltyRatesToScopeRegression',
+    'royaltyRates',
+    'regression'
+];
 
 exports.feature = [
     {
         name: "Assign single rate to Scope on creation",
-        tags: ['create'],
+
+        tags: [],
+
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -32,8 +38,10 @@ exports.feature = [
         }
     },
     {
-        name: "Edit single rate from Scope",
-        tags: ['edit'],
+        name: "Edit single rate from Scope ",
+
+        tags: [],
+
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -492,7 +500,9 @@ exports.feature = [
     },
     {
         name: "Test royalty input fields",
-        tags: ['create', 'validation'],
+
+        tags: [],
+
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
