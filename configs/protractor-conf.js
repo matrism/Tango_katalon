@@ -9,6 +9,7 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
+    stepCountReporter = require('../tools/stepCountReporter'),
     HtmlReporter = requireCustom('protractor-jasmine2-screenshot-reporter'),
     fs = require('fs'),
     screenShotPath,
@@ -173,6 +174,8 @@ config = {
                 );
             }, timeout);
         };
+
+        jasmine.getEnv().addReporter(stepCountReporter);
 
         asciiPrefixes = {
             success: '[Pass] ',

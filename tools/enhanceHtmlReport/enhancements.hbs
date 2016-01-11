@@ -197,13 +197,27 @@
 <script>
     'use strict';
 
+    // Parse step numbers.
+    $('li > a').each(function () {
+        var $this = $(this),
+
+            reResults = /^S-([0-9]+): /.exec($this.text());
+
+        $this.attr('step', reResults[1]);
+    });
+</script>
+<script>
+    'use strict';
+
     // Add links to HTML snapshots.
-    $('li > a').each(function(i) {
-        var $this = $(this);
+    $('li > a').each(function() {
+        var $this = $(this),
+
+            stepNum = parseInt($this.attr('step'));
 
         $this.after(
             document.createTextNode(' ('),
-            $('<a>').attr('href', i + '.html').text('HTML'),
+            $('<a>').attr('href', stepNum + '.html').text('HTML'),
             document.createTextNode(')')
         );
     });
