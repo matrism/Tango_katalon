@@ -348,7 +348,7 @@ if (pages.royaltyRates === undefined) {
                 .then(function (result) {
 
                     for (i = 0; i < result.length - 1; i++) {
-                        result[i].click();
+                        asAlways(result[i], 'scrollIntoView', 'click');
                     }
                 }
             )
@@ -758,7 +758,10 @@ if (pages.royaltyRates === undefined) {
         },
 
         clickLastOnReceiptFromCoverMechanical: function () {
-            this.lastSetOnReceiptFromCoverMechanical().click();
+            return asAlways(
+                this.lastSetOnReceiptFromCoverMechanical(),
+                'scrollIntoView', 'click'
+            );
         },
 
         clickDeleteButtonForRRSet: function () {
