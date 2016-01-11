@@ -33,13 +33,13 @@ exports.saveDeal = function () {
 
 exports.clickFirstScopeHeader = function () {
     it("Click the first scope header", function () {
-        pages.deal.clickFirstScopeHeader();
+        pages.deal.clickScopeHeader();
     });
 };
 
 exports.clickLastScopeHeader = function () {
     it("Click the last scope header", function () {
-        pages.deal.clickLastScopeHeader();
+        pages.deal.clickScopeHeaderLast();
     });
 };
 
@@ -96,6 +96,13 @@ exports.goToGeneralDealTabDetails = function () {
     it("Click on general header and go to general deal tab details ", function () {
         pages.deal.goToGeneralDealDetails();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealGeneralSummaryHeader));
+    });
+};
+
+exports.goToTermsDealTabDetailsDirtyCheck = function () {
+    it("Click on terms header and go to terms deal tab details ", function () {
+        pages.deal.goToTermsDealDetails();
+       pages.deal.waitForAjax();
     });
 };
 
@@ -175,3 +182,33 @@ exports.getRRIconData = function () {
         pages.deal.errorIconsAreVisible();
     });
 };
+
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+        pages.deal.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+    });
+};
+
+exports.checkContractPeriodsAndScopesHeaderTitlePresent = function(){
+ it("Check that contract periods and scopes header title is present ", function(){
+     expect(pages.deal.elems.contractPeriodsScopesHeaderLink.isDisplayed()).toBeTruthy();
+ });
+};
+
+exports.checkRightsTermPeriodsHeaderTitlePresent = function(){
+    it("Check that rights term periods header title is present ", function(){
+        expect(pages.deal.elems.rightsTermPeriodsHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};
+
+exports.checkFinderDealsHeaderTitlePresent = function(){
+    it("Check that finder deals header title is present ", function(){
+        expect(pages.deal.elems.finderDealsHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};
+
+
+
+
