@@ -458,7 +458,7 @@ exports.feature = [
 
                 this.continueToNextTab();
 
-                _.times(3, bind(steps.newWorkRecordings, function (i) {
+                _.times(3, bind(steps.newWorkRecordings, function (__, i) {
                     this.clickRecordingNameField(i);
                     this.selectRecordingNameSuggestionByIndex(i);
 
@@ -626,7 +626,7 @@ exports.feature = [
                 );
             });
 
-            _.times(3, bind(steps.album.recordings, function (i) {
+            _.times(3, bind(steps.album.recordings, function (__, i) {
                 this.validateTitle(
                     i, 'TEST RECORDING ' + randomId(
                         'commercialAlbumRecording' + i
@@ -735,7 +735,7 @@ exports.feature = [
                 this.validateLibraryName('AUDIOMACHINE');
             });
 
-            _.times(3, bind(steps.album.recordings, function (i) {
+            _.times(3, bind(steps.album.recordings, function (__, i) {
                 this.validateLibraryName(i, 'AUDIOMACHINE');
             }));
         },
