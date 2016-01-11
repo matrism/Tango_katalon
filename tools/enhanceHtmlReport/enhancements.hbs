@@ -209,6 +209,50 @@
 <script>
     'use strict';
 
+    // Sort lists by step number.
+    $('ul > li').closest('ul').find('ul').each(function () {
+        var $ul = $(this),
+            firstStepNum = parseInt($($ul.find('[step]')[0]).attr('step')),
+            $i = $ul,
+            $prev,
+            prevStepNum;
+
+        console.log($ul[0], 'S-' + firstStepNum);
+
+        while(1) {
+            $prev = $i.prev('ul, li');
+
+            if($prev.length === 0) {
+                $i.before($ul);
+                break;
+            }
+
+            prevStepNum = parseInt($prev.find('[step]').last().attr('step'));
+
+            if(prevStepNum === firstStepNum - 1) {
+                $prev.after($ul);
+                break;
+            }
+
+            $i = $prev;
+        }
+    });
+
+    // Validate.
+    $('[step]').toArray().reduce(function(a, b) {
+        var aStepNum = parseInt($(a).attr('step')),
+            bStepNum = parseInt($(b).attr('step'));
+
+        if(bStepNum !== aStepNum + 1) {
+            console.error('BUG: Step gap detected between', a, 'and', b);
+        }
+
+        return b;
+    });
+</script>
+<script>
+    'use strict';
+
     // Add links to HTML snapshots.
     $('li > a').each(function() {
         var $this = $(this),
