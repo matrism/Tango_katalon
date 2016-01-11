@@ -4,12 +4,18 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'smoke'];
+exports.commonFeatureTags = [
+    'simpleDealCreationSmoke',
+    'deals',
+    'smoke'
+];
 
 exports.feature = [
     {
         name: "Create a deal with publisher share set",
-        tags: ['create', 'pss' ],
+
+        tags: [],
+
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
