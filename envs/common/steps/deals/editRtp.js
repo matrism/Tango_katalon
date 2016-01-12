@@ -17,6 +17,11 @@ exports.editFillIntoAcquisitionActualStartDateField = function (endDate) {
     });
 };
 
+exports.editDeleteAddAnotherAcquisitionForm = function () {
+    it("Edit delete the add another acquisition form ", function () {
+        pages.editDealRtp.editDeleteTheAddAnotherAcquisitionForm();
+    });
+};
 
 exports.editFillIntoAcquisitionActualEndDateField = function (endDate) {
     it("Edit fill into the acquisition actual end date field ", function () {
@@ -31,6 +36,13 @@ exports.editSaveAcquisitionArea = function () {
     });
 };
 
+exports.editSaveAnotherAcquisitionForm = function () {
+    it("Edit save the add another acquisition form ", function () {
+        pages.editDealRtp.editSaveTheAnotherAcquisitionForm();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
 exports.clickOnAddRetentionFromAcquisitionLink = function () {
     it("Click on the add retention from acquisition link", function () {
         pages.editDealRtp.clickOnTheAddRetentionFromAcquisitionLink();
@@ -40,6 +52,7 @@ exports.clickOnAddRetentionFromAcquisitionLink = function () {
 exports.editRtpRetentionArea = function () {
     it("Edit the rtp retention area ", function () {
         pages.editDealRtp.editTheRtpRetentionArea();
+        pages.editDealRtp.waitForAjax();
     });
 };
 

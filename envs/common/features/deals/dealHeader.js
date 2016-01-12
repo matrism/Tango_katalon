@@ -209,12 +209,13 @@ exports.feature = [
             steps.headerDeal.checkStatusText();
             steps.headerDeal.checkStatusValue("Pre Term");
 
-            //steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
-            //steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2014-04-05");
-            //steps.editDealRtp.editSaveAcquisitionArea();
-            //steps.headerDeal.checkStatusText();
-            //steps.headerDeal.checkStatusValue("Acquisition");
-            //steps.editDealRtp.editRtpAcquisitionArea();
+            steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
+            steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2014-04-05");
+            steps.editDealRtp.editSaveAnotherAcquisitionForm();
+            steps.headerDeal.checkStatusText();
+            steps.headerDeal.checkStatusValue("Acquisition");
+            steps.editDealRtp.editRtpAcquisitionArea();
+            steps.editDealRtp.editDeleteAddAnotherAcquisitionForm();
 
             steps.editDealRtp.editRtpAcquisitionArea();
             steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2014-04-05");
