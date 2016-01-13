@@ -74,13 +74,10 @@ if (pages.editDealRtp === undefined) {
         },
 
         editDeleteTheAddAnotherAcquisitionForm: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon));
             pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.modalDialogDelete));
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealRtp.elems.confirmDeleteModalDialog));
+            pages.editDealRtp.waitForAjax();
             pages.editDealRtp.elems.confirmDeleteModalDialog.click();
             pages.editDealRtp.waitForAjax();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealRtp.elems.modalDialogDelete));
         },
 
         editDeleteTheRtpRetentionFromAcquisitionForm: function () {

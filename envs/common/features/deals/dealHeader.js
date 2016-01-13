@@ -66,7 +66,45 @@ exports.feature = [
 
         }
     },
+    {
+        name: "Create a deal and check the contracting party on deal header",
+        tags: ["header_contracting_party"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
 
+            steps.headerDeal.checkContractingPartyValue("bmi");
+
+            steps.deal.goToGeneralDealTabDetails();
+            steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            steps.editDealGeneral.editExistingContractingParty("ascap");
+            steps.editDealGeneral.editExistingContractingParty("wingman");
+            steps.editDealGeneral.editExistingContractingParty("madonna");
+            steps.editDealGeneral.editExistingContractingParty("mars");
+            steps.editDealGeneral.editExistingContractingParty("perry");
+            steps.editDealGeneral.editExistingContractingParty("katy");
+            steps.editDealGeneral.editExistingContractingParty("bruno");
+            steps.editDealGeneral.editExistingContractingParty("alex");
+            steps.editDealGeneral.editExistingContractingParty("michael");
+            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+            steps.headerDeal.clickOnContractingPartyValue();
+            steps.headerDeal.checkContractingPartyValue("bmi");
+            steps.headerDeal.checkContractingPartyValue("ascap");
+            steps.headerDeal.checkContractingPartyValue("wingman");
+            steps.headerDeal.checkContractingPartyValue("madonna");
+            steps.headerDeal.checkContractingPartyValue("mars");
+            steps.headerDeal.checkContractingPartyValue("perry");
+            steps.headerDeal.checkContractingPartyValue("katy");
+            steps.headerDeal.checkContractingPartyValue("bruno");
+            steps.headerDeal.checkContractingPartyValue("alex");
+            steps.headerDeal.checkContractingPartyValue("michael");
+        }
+    },
     {
         name: "Create a deal add/remove artists and check deal header",
         tags: ["header_artist"],

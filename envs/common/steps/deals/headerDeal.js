@@ -155,4 +155,9 @@ exports.checkContractingPartyValue = function (value) {
     });
 };
 
+exports.clickOnContractingPartyValue = function(){
+    it("Click on the contracting party value ", function(){
+       pages.headerDeal.clickOnTheContractingPartyValue();
+    });
+};
 

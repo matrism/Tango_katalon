@@ -34,14 +34,14 @@ if (pages.headerDeal === undefined) {
 
 
         checkTheContractTypeText: function () {
-           pages.headerDeal.elems.dealContractTypeText.getText().
+            pages.headerDeal.elems.dealContractTypeText.getText().
             then(function (promise) {
                 console.log("Contract type title text is  : " + promise);
                 expect(promise).toEqual("CONTRACT TYPE:");
             });
         },
 
-        checkTheContractTypeValue: function(value) {
+        checkTheContractTypeValue: function (value) {
             pages.headerDeal.elems.dealContractTypeValue.getText().
             then(function (promise) {
                 console.log("Contract type value is  : " + promise);
@@ -49,7 +49,7 @@ if (pages.headerDeal === undefined) {
             });
         },
 
-        checkTheContractTypeValueNotDisplayed: function(value) {
+        checkTheContractTypeValueNotDisplayed: function (value) {
             pages.headerDeal.elems.dealContractTypeValue.getText().
             then(function (promise) {
                 console.log("Contract type value is  : " + promise);
@@ -57,7 +57,7 @@ if (pages.headerDeal === undefined) {
             });
         },
 
-        checkTheExactContractTypeValue: function(value) {
+        checkTheExactContractTypeValue: function (value) {
             pages.headerDeal.elems.dealContractTypeValue.getText().
             then(function (promise) {
                 console.log("Contract type value is  : " + promise);
@@ -69,8 +69,12 @@ if (pages.headerDeal === undefined) {
             pages.headerDeal.elems.dealContractingPartiesValue.getText().
             then(function (promise) {
                 console.log("Contracting party value is  : " + promise);
-                expect(promise).toContain(value);
+                expect(promise.toLowerCase()).toContain(value);
             });
+        },
+
+        clickOnTheContractingPartyValue: function () {
+            browser.actions().mouseMove(pages.headerDeal.elems.dealContractingPartiesValue).perform();
         },
 
         checkTheStatusText: function () {
@@ -226,11 +230,11 @@ if (pages.headerDeal === undefined) {
             });
         },
 
-        clickOnTheLastUpdateValueAndCheckTheAuditLogScreen : function() {
+        clickOnTheLastUpdateValueAndCheckTheAuditLogScreen: function () {
             browser.driver.findElement(By.css("#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2) a")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div#RECORD-HEADER h1 strong"))));
             browser.driver.findElement(By.css("div#RECORD-HEADER h1 strong")).getText().
-                then(function (promise) {
+            then(function (promise) {
                 console.log("Audit log text  is  : " + promise);
                 expect(promise).toEqual("AUDIT LOG");
             });
