@@ -64,21 +64,19 @@ var defaultUserName = 'TangoTest1',
             stepByStep: cli['step-by-step']
         },
         _env_: env,
-        localhost: {
-            urls: {
-                sso: configer.getEnvVarByKey('URL_SSO'),
-                app_url: 'http://localhost:3000',
-                service_url: 'http://localhost:3000'
-            },
-            user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
-            user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
-        },
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
-                app_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
-                service_url: 'http://tango.tango-qa-aws.dspdev.wmg.com',
-                cr_url: 'http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80'
+                app_url: (
+                    cli['app-url'] || 'http://tango.tango-qa-aws.dspdev.wmg.com'
+                ),
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://tango.tango-qa-aws.dspdev.wmg.com'
+                ),
+                cr_url: (
+                    cli['cr-url'] || 'http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80'
+                )
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
@@ -86,14 +84,20 @@ var defaultUserName = 'TangoTest1',
         staging: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
-                app_url: 'http://musicpublishing.staging.dsp.wmg.com',
-                service_url: 'http://musicpublishing.staging.dsp.wmg.com',
-                cr_url: 'http://tancrsrv.east.ipaas.staging.dsp.wmg.com:80'
+                app_url: cli['app-url'] || 'http://musicpublishing.staging.dsp.wmg.com',
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://musicpublishing.staging.dsp.wmg.com'
+                ),
+                cr_url: (
+                    cli['cr-url'] ||
+                    'http://tancrsrv.east.ipaas.staging.dsp.wmg.com:80'
+                )
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
         },
-        custom: {
+        production: {
             urls: {
                 sso: cli['sso-url'] || configer.getEnvVarByKey('URL_SSO'),
                 app_url: cli['app-url'],
