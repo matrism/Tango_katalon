@@ -37,6 +37,13 @@ exports.fillContractingPartyField = function () {
     );
 };
 
+exports.fillCompanyCodeField = function (value) {
+    it("Fill company code field", function () {
+            pages.createDealGeneral.fillIntoCompanyCodeField(value);
+        }
+    );
+};
+
 exports.waitForContractingPartyDropDown = function () {
     it("Wait for suggestions dropdown to appear", function () {
         var suggestion = $(".tg-typeahead__suggestions-container");
@@ -61,6 +68,20 @@ exports.selectContractingPartySearchResultByIndex = function (i) {
 exports.selectRandomContractingParty = function () {
     it("Select random suggestion", function () {
         pages.createDealGeneral.selectRandomContractingPartyValueFromDropDown();
+        pages.createDealGeneral.waitForAjax();
+    });
+};
+
+exports.selectSpecificCompanyCode = function (value) {
+    it("Select specific suggestion", function () {
+        pages.createDealGeneral.selectCompanyCodeSpecificValue(value);
+        pages.createDealGeneral.waitForAjax();
+    });
+};
+
+exports.selectRandomCompanyCode = function () {
+    it("Select random suggestion", function () {
+        pages.createDealGeneral.selectRandomCompanyCodeValueFromDropDown();
         pages.createDealGeneral.waitForAjax();
     });
 };
@@ -291,6 +312,9 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
         steps.createDealGeneral.goToNewDealPage();
         steps.createDealGeneral.selectDealSigningTerritory();
+        steps.createDealGeneral.fillCompanyCodeField("a");
+        steps.createDealGeneral.waitForContractingPartyDropDown();
+        steps.createDealGeneral.selectRandomCompanyCode();
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectRandomContractingParty();
