@@ -11,7 +11,7 @@ exports.goToNewDealPage = function () {
     });
 };
 
-exports.selectDesiredSigningTerritory = function (value) {
+exports.selectSigningTerritory = function (value) {
     it('Select deal signing territory (' + value + ')', function () {
         pages.createDealGeneral.selectDesiredSigningTerritory(value);
     });
@@ -33,6 +33,13 @@ exports.enterContractingPartySearchTerms = function (value) {
 exports.fillContractingPartyField = function () {
     it("Fill contracting party field", function () {
             pages.createDealGeneral.fillContractingPartiesField("bmi");
+        }
+    );
+};
+
+exports.fillCompanyCodeField = function (value) {
+    it("Fill company code field", function () {
+            pages.createDealGeneral.fillIntoCompanyCodeField(value);
         }
     );
 };
@@ -61,6 +68,20 @@ exports.selectContractingPartySearchResultByIndex = function (i) {
 exports.selectRandomContractingParty = function () {
     it("Select random suggestion", function () {
         pages.createDealGeneral.selectRandomContractingPartyValueFromDropDown();
+        pages.createDealGeneral.waitForAjax();
+    });
+};
+
+exports.selectSpecificCompanyCode = function (value) {
+    it("Select specific suggestion", function () {
+        pages.createDealGeneral.selectCompanyCodeSpecificValue(value);
+        pages.createDealGeneral.waitForAjax();
+    });
+};
+
+exports.selectRandomCompanyCode = function () {
+    it("Select random suggestion", function () {
+        pages.createDealGeneral.selectRandomCompanyCodeValueFromDropDown();
         pages.createDealGeneral.waitForAjax();
     });
 };
@@ -291,6 +312,9 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
         steps.createDealGeneral.goToNewDealPage();
         steps.createDealGeneral.selectDealSigningTerritory();
+        steps.createDealGeneral.fillCompanyCodeField("a");
+        steps.createDealGeneral.waitForContractingPartyDropDown();
+        steps.createDealGeneral.selectRandomCompanyCode();
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectRandomContractingParty();

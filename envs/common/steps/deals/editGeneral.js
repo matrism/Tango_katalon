@@ -191,6 +191,33 @@ exports.itCancelInternalContactsChanges = function () {
     })
 };
 
+exports.editSigningTerritory = function (value) {
+    it("Edit the signing territory general screen ", function () {
+        pages.editDealGeneral.editSelectDesiredSigningTerritory(value);
+    });
+};
+
+exports.editRandomArtistField = function (value) {
+    it("Edit select random artist field", function () {
+        pages.editDealGeneral.editSelectTheRandomArtist(value);
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
+exports.editSpecificArtistField = function (artistSearch, artist) {
+    it("Edit select specific artist field", function () {
+        pages.editDealGeneral.editSelectTheSpecificArtist(artistSearch, artist);
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
+exports.editRemoveArtistNumberI = function (i) {
+    it("Edit remove the artist number i from list ", function () {
+        browser.driver.findElement(By.css("div[name='artists'] div.ng-scope:nth-child(" + i + ") span[ng-click='!$isDisabled() && $removeTag($tag)']")).click();
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
 exports.editContractExecutionDate = function () {
     it("Edit the contract execution date ", function () {
         pages.editDealGeneral.editFillIntoTheValidExecutionDateYear();
@@ -223,6 +250,12 @@ exports.saveEditGeneralTabFirstElementsLeftArea = function () {
     it("Save edit general tab first elements left area ", function () {
         pages.editDealGeneral.clickOnTheSaveEditGeneralLeftTabArea();
         pages.editDealGeneral.waitForAjax();
+    });
+};
+
+exports.editSelectTheExecutedContractStatus = function (value) {
+    it("Edit select the executed contract status and check that it is selected ", function () {
+        pages.editDealGeneral.editSelectToTheExecutedContractStatus(value);
     });
 };
 
@@ -283,3 +316,5 @@ exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
         steps.editDealGeneral.confirmModalDialog();
     });
 };
+
+
