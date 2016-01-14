@@ -57,7 +57,8 @@ if (pages.createDealContractPeriod === undefined) {
             rulesTitleTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins"},
             rulesTitleDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins i"},
             errorMissingFieldsEndRulesMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p[data-ng-if='!rulesForm.$valid']"},
-            endDateDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header"},
+            endDateDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(2) i"},
+            accountingPeriodEndDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) span i"},
             variableLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(1) label.control-label i"},
             attributeLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(3) label.control-label i"},
             withNoticeDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(4) label.control-label i"},
@@ -554,11 +555,59 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
+        checkTheAccountingPeriodEndDataTooltipTextEndRules: function(){
+            pages.createDealContractPeriod.elems.accountingPeriodEndDataTooltipTextEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Accounting period end data tooltip text  is   : " + promise);
+                expect(promise).toEqual("If the effect of the Rule will end the Period prior to the end of an accounting period, select this element that will then ensure the Period does not formally end until the accounting period has completed.");
+            });
+        },
+
         checkTheVariableLeftDataTooltipTextEndRules: function(){
             pages.createDealContractPeriod.elems.variableLeftDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Variable left data tooltip text is   : " + promise);
                 expect(promise).toEqual("This is the primary condition that would trigger the end of a Period. This element must be defined first to complete the rest of the Rule creation. For example, if the contract ends upon the MDRC Complete, then that is what should be selected from the dropdown.");
+            });
+        },
+
+        checkTheAttributeLeftDataTooltipTextEndRules: function(){
+            pages.createDealContractPeriod.elems.attributeLeftDataTooltipTextEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Attribute left data tooltip text is   : " + promise);
+                expect(promise).toEqual("This element provides a place for either a date, a percentage, or an amount that coincides with the Variable Left. For example, if the Variable Left is MDRC Complete, then a percentage will be selected as the Attribute.");
+            });
+        },
+
+        checkTheWithNoticeDataTooltipTextEndRules: function(){
+            pages.createDealContractPeriod.elems.withNoticeDataTooltipTextEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("With notice data tooltip text  is   : " + promise);
+                expect(promise).toEqual("This element appears as necessary when it coincides with the Variable Left. If checked, this element requires documentation that Variable Left has been fulfilled.");
+            });
+        },
+
+        checkTheRequirementDataTooltipTextEndRules: function(){
+            pages.createDealContractPeriod.elems.requirementDataTooltipTextEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Requirement data tooltip text  is   : " + promise);
+                expect(promise).toEqual("Using symbols, this element defines how Variable Left should be compared to Variable Right for the Condition to be true. For example, if the Deal stipulates that MDRC Complete (Variable Left) must occur \"on or before\" the Target End Date (Variable Right), then select \"< or =\" as the Requirement.");
+            });
+        },
+
+        checkTheVariableRightDataTooltipTextEndRules: function(){
+            pages.createDealContractPeriod.elems.variableRightDataTooltipTextEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Variable right data tooltip text  is   : " + promise);
+                expect(promise).toEqual("This is the condition in contrast to Variable Left that defines what would trigger the end of a Period. Commonly, this is the same as for End Date Type. For example, if the End Date is Balance Repaid at 110%, then that is what should be selected from the dropdown.");
+            });
+        },
+
+        checkTheAttributeRightDataTooltipTextEndRules: function(){
+            pages.createDealContractPeriod.elems.attributeRightDataTooltipTextEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Attribute right data tooltip text  is   : " + promise);
+                expect(promise).toEqual("This element provides a place for either a date, a percentage, or an amount that coincides with the Variable Right. For example, if the Variable Right is MDRC Complete, then a date will be selected as the Attribute.");
             });
         }
 
