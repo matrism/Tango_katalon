@@ -365,6 +365,8 @@ exports.itAddAllGeneralFieldsForSanityToDealGeneralTab = function () {
         steps.createDealGeneral.clickOnExecutedContractStatus();
         steps.createDealGeneral.fillIntoExecutionDateField();
         steps.createDealGeneral.selectDealSigningTerritory();
+        steps.createDealGeneral.fillCompanyCodeField("a");
+        steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectContractingPartySearchResultByIndex(1);
