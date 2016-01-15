@@ -97,7 +97,7 @@ var defaultUserName = 'TangoTest1',
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
             user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
         },
-        production: {
+        prod: {
             urls: {
                 sso: cli['sso-url'] || configer.getEnvVarByKey('URL_SSO'),
                 app_url: cli['app-url'],
