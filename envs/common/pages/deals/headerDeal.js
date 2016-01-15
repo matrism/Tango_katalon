@@ -28,8 +28,8 @@ if (pages.headerDeal === undefined) {
             dealArtistText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(1)"},
             dealArtistValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(3)"},
             dealLastUpdateText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(1)"},
-            dealLastUpdateValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2)"}
-
+            dealLastUpdateValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2)"},
+            dealLastUpdateDateLink: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2) a"}
         },
 
 
@@ -231,7 +231,8 @@ if (pages.headerDeal === undefined) {
         },
 
         clickOnTheLastUpdateValueAndCheckTheAuditLogScreen: function () {
-            browser.driver.findElement(By.css("#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2) a")).click();
+            pages.base.scrollIntoView(pages.headerDeal.elems.dealLastUpdateDateLink);
+            pages.headerDeal.elems.dealLastUpdateDateLink.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div#RECORD-HEADER h1 strong"))));
             browser.driver.findElement(By.css("div#RECORD-HEADER h1 strong")).getText().
             then(function (promise) {

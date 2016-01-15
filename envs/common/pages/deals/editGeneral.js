@@ -10,8 +10,10 @@ if (pages.editDealGeneral === undefined) {
             editGeneralLeftFirstFourFieldsArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.DETAIL.ng-scope"},
             editGeneralLeftFirstFourFieldsEditorIcon: {css: "div[data-tg-modular-edit-id='generalLeft'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             removeExistingContractPartyIcon: {css: "span[ng-click='!$isDisabled() && $removeTag($tag)']"},
-            contractingPartyElement: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
-            contractingPartyInputField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editContractingPartyElement: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
+            editContractingPartyInputField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editCompanyCodeElement: {css: "div[name='companyCode'] div[ng-class='tgTypeaheadWrapClass']"},
+            editCompanyCodeInputField: {css: "div[name='companyCode'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editExecutionDateYearElement: {css: "input[data-ng-model='date.year']"},
             editExecutionDateMonthElement: {css: "input[data-ng-model='date.month']"},
             editExecutionDateDayElement: {css: "input[data-ng-model='date.day']"},
@@ -164,8 +166,8 @@ if (pages.editDealGeneral === undefined) {
         },
 
         editFillIntoTheContractingParty: function (contracting) {
-            pages.editDealGeneral.elems. contractingPartyElement.click();
-            pages.editDealGeneral.elems. contractingPartyInputField.sendKeys(contracting);
+            pages.editDealGeneral.elems. editContractingPartyElement.click();
+            pages.editDealGeneral.elems. editContractingPartyInputField.sendKeys(contracting);
         },
 
         editSelectRandomValueDropDownContractingParty: function () {
@@ -174,6 +176,21 @@ if (pages.editDealGeneral === undefined) {
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[0].click();
+                });
+            pages.editDealGeneral.waitForAjax();
+        },
+
+        editFillIntoTheCompanyCode: function (value) {
+            pages.editDealGeneral.elems.editCompanyCodeElement.click();
+            pages.editDealGeneral.elems.editCompanyCodeInputField.sendKeys(value);
+        },
+
+        editSelectRandomValueDropDownCompanyCode: function () {
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
                 });
             pages.editDealGeneral.waitForAjax();
         },
@@ -277,7 +294,7 @@ if (pages.editDealGeneral === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.saveEditLeftGeneralTabArea));
             pages.editDealGeneral.elems. saveEditLeftGeneralTabArea.click();
             pages.editDealGeneral.waitForAjax();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.contractingPartyElement));
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editContractingPartyElement));
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
         },
 

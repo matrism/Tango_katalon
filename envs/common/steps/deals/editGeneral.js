@@ -192,8 +192,12 @@ exports.itCancelInternalContactsChanges = function () {
 };
 
 exports.editSigningTerritory = function (value) {
-    it("Edit the signing territory general screen ", function () {
+    it("Edit the signing territory general screen and add new company code", function () {
         pages.editDealGeneral.editSelectDesiredSigningTerritory(value);
+        pages.editDealGeneral.waitForAjax();
+        pages.editDealGeneral.editFillIntoTheCompanyCode("a");
+        pages.editDealGeneral.editSelectRandomValueDropDownCompanyCode();
+        pages.editDealGeneral.waitForAjax();
     });
 };
 
@@ -242,6 +246,14 @@ exports.editExistingContractingParty = function (contracting) {
     it("Edit existing contracting party -  add new one ", function () {
         pages.editDealGeneral.editFillIntoTheContractingParty(contracting);
         pages.editDealGeneral.editSelectRandomValueDropDownContractingParty();
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
+exports.editAddCompanyCode = function () {
+    it("Edit add company code ", function () {
+        pages.editDealGeneral.editFillIntoTheCompanyCode("a");
+        pages.editDealGeneral.editSelectRandomValueDropDownCompanyCode();
         pages.editDealGeneral.waitForAjax();
     });
 };

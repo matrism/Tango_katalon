@@ -26,7 +26,7 @@ exports.feature = [
             steps.headerDeal.checkOwnershipValue("None");
             steps.headerDeal.checkAdministrationText();
             steps.headerDeal.checkAdministrationValue("None");
-            steps.headerDeal.checkContractingPartyValue("BMI");
+            steps.headerDeal.checkContractingPartyValue("bmi");
 
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
@@ -61,8 +61,8 @@ exports.feature = [
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editExistingContractingParty("ascap");
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
-            steps.headerDeal.checkContractingPartyValue("BMI");
-            steps.headerDeal.checkContractingPartyValue("ASCAP");
+            steps.headerDeal.checkContractingPartyValue("bmi");
+            steps.headerDeal.checkContractingPartyValue("ascap");
 
         }
     },
@@ -190,9 +190,11 @@ exports.feature = [
         name: "Create a deal and check the deal header signing and last update",
         tags: ["header_signing_last_update"],
         steps: function () {
+            var today = new Date();
+            var currentDate = today.getFullYear() + "-" + today.getMonth()+ 1 +"-"+ today.getDate();
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
-            steps.createDealContractPeriod.itFillDealMandatorieldsContractPeriod();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -200,16 +202,14 @@ exports.feature = [
 
             steps.headerDeal.checkSigningTerritoryText();
             steps.headerDeal.checkSigningTerritoryValue("Argentina");
-
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editSigningTerritory("Austria");
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkSigningTerritoryText();
             steps.headerDeal.checkSigningTerritoryValue("Austria");
-
             steps.headerDeal.checkLastUpdateText();
-            steps.headerDeal.checkLastUpdateValue("2016-01-11");
+            steps.headerDeal.checkLastUpdateValue(currentDate);
             steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
 
         }
