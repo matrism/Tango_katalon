@@ -1,6 +1,9 @@
 "use strict";
 
-exports.commonFeatureTags = ['smoke', 'login', 'logout'];
+exports.commonFeatureTags = [
+    'authSmoke',
+    'smoke'
+];
 
 exports.feature = [
     {
