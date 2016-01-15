@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 exports.commonFeatureTags = [
     'authSmoke',
@@ -8,7 +8,9 @@ exports.commonFeatureTags = [
 exports.feature = [
     {
         name: 'Log in and out',
+
         tags: [],
+
         steps: function() {
             steps.login.itLogin();
             steps.mainHeader.logout();
