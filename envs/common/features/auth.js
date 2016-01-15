@@ -1,6 +1,7 @@
 'use strict';
 
 exports.commonFeatureTags = [
+    'broken',
     'authSmoke',
     'smoke'
 ];
@@ -8,6 +9,10 @@ exports.commonFeatureTags = [
 exports.feature = [
     {
         name: 'Log in and out',
+
+        breakageDescription: (
+            'Error on last step (angular is not defined) crashes Protractor.'
+        ),
 
         tags: [],
 
