@@ -999,6 +999,18 @@ exports.registration = (function () {
         );
     };
 
+    registration.modalRemoveAllConfirmation = function () {
+        return element(by.cssContainingText(
+            '.modal-footer button', 'Yes'
+        ));
+    };
+
+    registration.confirmRemoveAll = function () {
+        var element = this.modalRemoveAllConfirmation();
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element.click();
+    };
+
     registration.editSection = function () {
         var element = registration.editSectionButton();
         pages.base.scrollIntoView(element);
@@ -1008,24 +1020,6 @@ exports.registration = (function () {
     registration.isRegistrationRecipientSelect = function () {
         return $('.e2e-reg-delivery-is');
     };
-    registration.acknowledgementTypeSelect = function () {
-        return $('.e2e-acknowledgement-type');
-    };
-    registration.deliveryMethodSelect = function (i) {
-        return element.all(by.model('ackMethod.type')).get(i);
-    };
-    registration.addressInput = function (i) {
-        return $$('.e2e-acknowledgement-address input').get(i);
-    };
-    registration.portInput = function (i) {
-        return $$('.e2e-acknowledgement-port input').get(i);
-    };
-    registration.usernameInput = function (i) {
-        return $$('.e2e-acknowledgement-username input').get(i);
-    };
-    registration.passwordInput = function (i) {
-        return $$('.e2e-acknowledgement-password input').get(i);
-    };
 
     registration.selectIsRegistrationRecipient = function (value) {
         var element = registration.isRegistrationRecipientSelect();
@@ -1033,42 +1027,172 @@ exports.registration = (function () {
             by.cssContainingText('button', value)
         ).click();
     };
-    registration.selectAcknowledgementType = function (value) {
-        var element = registration.acknowledgementTypeSelect();
-        return element.element(
-            by.cssContainingText('button', value)
-        ).click();
-    };
-    registration.selectDeliveryMethod = function (i, value) {
-        var element = registration.deliveryMethodSelect(i);
-        return element.all(
-            by.cssContainingText('button', value)
-        ).get(0).click();
-    };
-    registration.enterAddress = function (i, value) {
-        var element = registration.addressInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-    registration.enterPort = function (i, value) {
-        var element = registration.portInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-    registration.enterUsername = function (i, value) {
-        var element = registration.usernameInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-    registration.enterPassword = function (i, value) {
-        var element = registration.passwordInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
+
+    registration.delivery = (function () {
+        var delivery = {};
+        
+        delivery.addMethodButton = function () {
+            return $('.e2e-method-add');
+        };
+        delivery.deliveryMethodSelect = function (i) {
+            return element.all(by.model('deliveryMethod.type')).get(i);
+        };
+        delivery.emailPrimaryEmailInput = function (i) {
+            return $$('.e2e-method-email .e2e-method-primary-email input').get(i);
+        };
+        delivery.ftpAddressInput = function (i) {
+            return $$('.e2e-method-host input').get(i);
+        };
+        delivery.ftpPortInput = function (i) {
+            return $$('.e2e-method-port input').get(i);
+        };
+        delivery.ftpUsernameInput = function (i) {
+            return $$('.e2e-method-username input').get(i);
+        };
+        delivery.ftpPasswordInput = function (i) {
+            return $$('.e2e-method-password input').get(i);
+        };
+        delivery.ftpNotificationSelect = function (i) {
+            return $$('.e2e-method-ftp .e2e-method-notification').get(i);
+        };
+        delivery.ftpNotificationPrimaryEmailInput = function (i) {
+            return $$('.e2e-method-ftp .e2e-method-primary-email input').get(i);
+        };
+        delivery.ftpNotificationCcEmailInput = function (i) {
+            return $$('.e2e-method-ftp .e2e-method-cc-email input').get(i);
+        };
+        delivery.thirdPartyRecipientInput = function (i) {
+            return $$('.e2e-method-3rd-party input').get(i);
+        };
+        delivery.firstThirdPartyRecipientOption = function () {
+            return $$('.e2e-method-3rd-party .tg-typeahead__suggestions').first();
+        };
+
+        delivery.addMethod = function () {
+            return delivery.addMethodButton().click();
+        };
+        delivery.selectMethod = function (i, value) {
+            var element = delivery.deliveryMethodSelect(i);
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+        };
+        delivery.enterEmailPrimaryEmail = function (i, value) {
+            var element = delivery.emailPrimaryEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpAddress = function (i, value) {
+            var element = delivery.ftpAddressInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpPort = function (i, value) {
+            var element = delivery.ftpPortInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpUsername = function (i, value) {
+            var element = delivery.ftpUsernameInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpPassword = function (i, value) {
+            var element = delivery.ftpPasswordInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.selectFtpNotification = function (i, value) {
+            var element = delivery.ftpNotificationSelect(i);
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+        };
+        delivery.enterFtpNotificationPrimaryEmail = function (i, value) {
+            var element = delivery.ftpNotificationPrimaryEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpNotificationCcEmail = function (i, value) {
+            var element = delivery.ftpNotificationCcEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterThirdPartyRecipient = function (i, value) {
+            var element = delivery.thirdPartyRecipientInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.selectFirstThirdPartyRecipient = function () {
+            var element = delivery.firstThirdPartyRecipientOption();
+            return element.click();
+        };
+
+        return delivery;
+    })();
+
+    registration.ack = (function () {
+        var ack = {};
+
+        ack.acknowledgementTypeSelect = function () {
+            return $('.e2e-acknowledgement-type');
+        };
+        ack.deliveryMethodSelect = function (i) {
+            return element.all(by.model('ackMethod.type')).get(i);
+        };
+        ack.addressInput = function (i) {
+            return $$('.e2e-acknowledgement-address input').get(i);
+        };
+        ack.portInput = function (i) {
+            return $$('.e2e-acknowledgement-port input').get(i);
+        };
+        ack.usernameInput = function (i) {
+            return $$('.e2e-acknowledgement-username input').get(i);
+        };
+        ack.passwordInput = function (i) {
+            return $$('.e2e-acknowledgement-password input').get(i);
+        };
+
+        ack.selectAcknowledgementType = function (value) {
+            var element = ack.acknowledgementTypeSelect();
+            return element.element(
+                by.cssContainingText('button', value)
+            ).click();
+        };
+        ack.selectDeliveryMethod = function (i, value) {
+            var element = ack.deliveryMethodSelect(i);
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+        };
+        ack.enterAddress = function (i, value) {
+            var element = ack.addressInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        ack.enterPort = function (i, value) {
+            var element = ack.portInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        ack.enterUsername = function (i, value) {
+            var element = ack.usernameInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        ack.enterPassword = function (i, value) {
+            var element = ack.passwordInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+
+        return ack;
+    })();
 
     registration.saveSectionButton = function () {
         return registration.sectionContainer().element(by.cssContainingText(

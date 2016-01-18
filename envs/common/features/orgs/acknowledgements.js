@@ -65,17 +65,19 @@ exports.feature = [
             using(steps.organisation.registration, function() {
                 this.editSection();
                 this.selectIsRegistrationRecipient('Yes');
-                this.selectAcknowledgementType('Multiple');
-                this.selectDeliveryMethod(0, 'SFTP');
-                this.enterAddress(0, data.sftp.address);
-                this.enterPort(0, data.sftp.port);
-                this.enterUsername(0, data.sftp.username);
-                this.enterPassword(0, data.sftp.password);
-                this.selectDeliveryMethod(1, 'FTP');
-                this.enterAddress(1, data.ftp.address);
-                this.enterPort(1, data.ftp.port);
-                this.enterUsername(1, data.ftp.username);
-                this.enterPassword(1, data.ftp.password);
+                using(this.ack, function() {
+                    this.selectAcknowledgementType('Multiple');
+                    this.selectDeliveryMethod(0, 'SFTP');
+                    this.enterAddress(0, data.sftp.address);
+                    this.enterPort(0, data.sftp.port);
+                    this.enterUsername(0, data.sftp.username);
+                    this.enterPassword(0, data.sftp.password);
+                    this.selectDeliveryMethod(1, 'FTP');
+                    this.enterAddress(1, data.ftp.address);
+                    this.enterPort(1, data.ftp.port);
+                    this.enterUsername(1, data.ftp.username);
+                    this.enterPassword(1, data.ftp.password);
+                });
                 this.saveSection();
             });
 

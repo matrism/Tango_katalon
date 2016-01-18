@@ -18,6 +18,48 @@ exports.feature = [
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
             using(steps.organisation, function () {
                 this.goToGeneralTab();
+
+                using(this.registration, function() {
+                    this.editSection();
+                    this.selectIsRegistrationRecipient('No');
+                    this.confirmRemoveAll();
+                    this.selectIsRegistrationRecipient('Yes');
+                    using(this.delivery, function() {
+                        this.addMethod();
+                        this.selectMethod(0, 'Email');
+                        this.enterEmailPrimaryEmail(0, data.cr.email.primary);
+                        this.addMethod();
+                        this.selectMethod(1, 'FTP');
+                        this.enterFtpAddress(0, data.cr.ftp.address);
+                        this.enterFtpPort(0, data.cr.ftp.port);
+                        this.enterFtpUsername(0, data.cr.ftp.username);
+                        this.enterFtpPassword(0, data.cr.ftp.password);
+                        this.selectFtpNotification(0, data.cr.ftp.notification);
+                        this.enterFtpNotificationPrimaryEmail(0, data.cr.ftp.notificationPrimaryEmail);
+                        this.enterFtpNotificationCcEmail(0, data.cr.ftp.notificationCcEmail);
+                        this.addMethod();
+                        this.selectMethod(2, '3rd Party');
+                        this.enterThirdPartyRecipient(0, data.cr.thirdParty);
+                        steps.base.sleep(200);
+                        steps.base.waitForAjax();
+                        this.selectFirstThirdPartyRecipient();
+                    });
+                    using(this.ack, function() {
+                        this.selectAcknowledgementType('Multiple');
+                        this.selectDeliveryMethod(0, 'SFTP');
+                        this.enterAddress(0, data.cr.ack.sftp.address);
+                        this.enterPort(0, data.cr.ack.sftp.port);
+                        this.enterUsername(0, data.cr.ack.sftp.username);
+                        this.enterPassword(0, data.cr.ack.sftp.password);
+                        this.selectDeliveryMethod(1, 'FTP');
+                        this.enterAddress(1, data.cr.ack.ftp.address);
+                        this.enterPort(1, data.cr.ack.ftp.port);
+                        this.enterUsername(1, data.cr.ack.ftp.username);
+                        this.enterPassword(1, data.cr.ack.ftp.password);
+                    });
+                    this.saveSection();
+                });
+
                 this.saveOrganisationDeliveryMethods();
                 this.goToRegistrationActivityTab();
                 this.saveRegActivityLastEvent();
