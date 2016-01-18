@@ -1,7 +1,8 @@
 'use strict';
 
 var using = fnutils.using,
-    data = requireFromEnvFolder('features/orgs/data/CrRegistration.js');
+    env = (systemConfig.env.name.match(/^(qa|custom)$/)) ? 'common' : systemConfig.env.name,
+    data = require('../../../' + env + '/features/orgs/data/CrRegistration.js');
 
 exports.commonFeatureTags = [];
 
@@ -21,7 +22,8 @@ exports.feature = [
                 using(this.registration, function() {
                     this.editSection();
                     this.selectIsRegistrationRecipient('No');
-                    this.confirmRemoveAll();
+                    this.saveSection();
+                    this.editSection();
                     this.selectIsRegistrationRecipient('Yes');
                     using(this.delivery, function() {
                         this.addMethod();
@@ -29,16 +31,15 @@ exports.feature = [
                         this.enterEmailPrimaryEmail(0, data.cr.email.primary);
                         this.addMethod();
                         this.selectMethod(1, 'FTP');
-                        this.enterFtpAddress(0, data.cr.ftp.address);
-                        this.enterFtpPort(0, data.cr.ftp.port);
-                        this.enterFtpUsername(0, data.cr.ftp.username);
-                        this.enterFtpPassword(0, data.cr.ftp.password);
-                        this.selectFtpNotification(0, data.cr.ftp.notification);
-                        this.enterFtpNotificationPrimaryEmail(0, data.cr.ftp.notificationPrimaryEmail);
-                        this.enterFtpNotificationCcEmail(0, data.cr.ftp.notificationCcEmail);
+                        this.enterFtpAddress(1, data.cr.ftp.address);
+                        this.enterFtpPort(1, data.cr.ftp.port);
+                        this.enterFtpUsername(1, data.cr.ftp.username);
+                        this.enterFtpPassword(1, data.cr.ftp.password);
+                        this.enterFtpNotificationPrimaryEmail(1, data.cr.ftp.notificationPrimaryEmail);
+                        this.enterFtpNotificationCcEmail(1, data.cr.ftp.notificationCcEmail);
                         this.addMethod();
                         this.selectMethod(2, '3rd Party');
-                        this.enterThirdPartyRecipient(0, data.cr.thirdParty);
+                        this.enterThirdPartyRecipient(2, data.cr.thirdParty);
                         steps.base.sleep(200);
                         steps.base.waitForAjax();
                         this.selectFirstThirdPartyRecipient();
