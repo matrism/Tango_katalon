@@ -58,6 +58,7 @@ if (pages.createDealContractPeriod === undefined) {
             rulesTitleDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins i"},
             errorMissingFieldsEndRulesMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p[data-ng-if='!rulesForm.$valid']"},
             endDateDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(2) i"},
+            accountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.period_end']"},
             accountingPeriodEndDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) span i"},
             variableLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(1) label.control-label i"},
             attributeLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(3) label.control-label i"},
@@ -65,6 +66,8 @@ if (pages.createDealContractPeriod === undefined) {
             requirementDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(5) label.control-label i"},
             variableRightDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(6) label.control-label i"},
             attributeRightDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(7) label.control-label i"},
+            preDefinedDateInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[name='endDateTypeDate'] input"},
+            preDefinedDateMandatoryErrorMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[data-validation-class='endDateTypeDate'] i"},
             addEndRulesLink: {css: "a[data-ng-show='!activeContractPeriod.showEndRules && !isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
             endDateFieldButtonEndRules: {css: "div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button"},
             endDateDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
@@ -499,15 +502,15 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheRulesForEndDateTitleTextEndRules: function(){
+        checkTheRulesForEndDateTitleTextEndRules: function () {
             pages.createDealContractPeriod.elems.rulesForEndDateTextEndRules.getText().
             then(function (promise) {
                 console.log("Rules for end date title is   : " + promise);
-                expect(promise).toEqual("RULES FOR END DATE ");
+                expect(promise).toEqual("RULES FOR END DATE");
             });
         },
 
-        checkTheRulesForEndDateDataTooltipTextEndRules: function(){
+        checkTheRulesForEndDateDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.rulesForEndDateDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Rules for end date data tooltip text  is   : " + promise);
@@ -515,39 +518,39 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-       checkTheSummaryOfRulesForEndDateTitleTextEndRules: function(){
-           pages.createDealContractPeriod.elems.summaryOfEndRulesTitleTextEndRules.getText().
-           then(function (promise) {
-               console.log("Summary of rules for end date title text is   : " + promise);
-               expect(promise).toEqual("Summary of Rules for End Date: ");
-           });
-       },
+        checkTheSummaryOfRulesForEndDateTitleTextEndRules: function () {
+            pages.createDealContractPeriod.elems.summaryOfEndRulesTitleTextEndRules.getText().
+            then(function (promise) {
+                console.log("Summary of rules for end date title text is   : " + promise);
+                expect(promise).toEqual("Summary of Rules for End Date:");
+            });
+        },
 
-        checkTheSummaryOfRulesForEndDateDataTooltipTextEndRules: function(){
-            pages.createDealContractPeriod.elems.summaryOfEndRulesTitleTextEndRules.getAttribute("data-tooltip").
+        checkTheSummaryOfRulesForEndDateDataTooltipTextEndRules: function () {
+            pages.createDealContractPeriod.elems.summaryOfEndRulesDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Summary of rules for end date data tooltip text is   : " + promise);
                 expect(promise).toEqual("As you define when the Period will end based on the elements below, this section will provide an at-a-glance account of what has been defined.");
             });
         },
 
-        checkTheRulesTitleTextEndRules: function(){
+        checkTheRulesTitleTextEndRules: function () {
             pages.createDealContractPeriod.elems.rulesTitleTextEndRules.getText().
             then(function (promise) {
                 console.log("Rules title text is   : " + promise);
-                expect(promise).toEqual("Rules: ");
+                expect(promise).toEqual("Rules:");
             });
         },
 
-        checkTheRulesDataTooltipTextEndRules: function(){
-            pages.createDealContractPeriod.elems.rulesTitleTextEndRules.getAttribute("data-tooltip").
+        checkTheRulesDataTooltipTextEndRules: function () {
+            pages.createDealContractPeriod.elems.rulesTitleDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Rules data tooltip text is   : " + promise);
                 expect(promise).toEqual("Add a Rule for each End Date scenario called for in the contract. For example, if the contract states that the Period \"ends on either the earlier of the contract year or the MDRC complete date,\" then two rules must be created as there are two possibilities listed-one for contract year (Target End Date) and the other for MDRC complete.");
             });
         },
 
-        checkTheEndDateDataTooltipTextEndRules: function(){
+        checkTheEndDateDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.endDateDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("End date data tooltip text  is   : " + promise);
@@ -555,7 +558,7 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheAccountingPeriodEndDataTooltipTextEndRules: function(){
+        checkTheAccountingPeriodEndDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.accountingPeriodEndDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Accounting period end data tooltip text  is   : " + promise);
@@ -563,7 +566,7 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheVariableLeftDataTooltipTextEndRules: function(){
+        checkTheVariableLeftDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.variableLeftDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Variable left data tooltip text is   : " + promise);
@@ -571,7 +574,7 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheAttributeLeftDataTooltipTextEndRules: function(){
+        checkTheAttributeLeftDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.attributeLeftDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Attribute left data tooltip text is   : " + promise);
@@ -579,7 +582,7 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheWithNoticeDataTooltipTextEndRules: function(){
+        checkTheWithNoticeDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.withNoticeDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("With notice data tooltip text  is   : " + promise);
@@ -587,7 +590,7 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheRequirementDataTooltipTextEndRules: function(){
+        checkTheRequirementDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.requirementDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Requirement data tooltip text  is   : " + promise);
@@ -595,7 +598,7 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheVariableRightDataTooltipTextEndRules: function(){
+        checkTheVariableRightDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.variableRightDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Variable right data tooltip text  is   : " + promise);
@@ -603,12 +606,24 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheAttributeRightDataTooltipTextEndRules: function(){
+        checkTheAttributeRightDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.attributeRightDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Attribute right data tooltip text  is   : " + promise);
                 expect(promise).toEqual("This element provides a place for either a date, a percentage, or an amount that coincides with the Variable Right. For example, if the Variable Right is MDRC Complete, then a date will be selected as the Attribute.");
             });
+        },
+
+        validateThePreDefinedDateFieldEndRulesIsRequiredWarning: function (error_message) {
+            pages.createDealContractPeriod.elems.preDefinedDateMandatoryErrorMessageEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Pre defined date error message data tooltip text  is   : " + promise);
+                expect(promise).toEqual(error_message);
+            });
+        },
+
+        fillIntoThePreDefinedDateFieldEndRulesSpecificDate : function(specific_date){
+            pages.createDealContractPeriod.elems.preDefinedDateInputFieldEndRules.sendKeys(specific_date);
         }
 
 

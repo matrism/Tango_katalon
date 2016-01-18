@@ -12,13 +12,13 @@ exports.addNewContractPeriod = function () {
 };
 
 exports.enterActualStartDate = function (value) {
-    it('Enter actual contract period start date (' + value + ')', function() {
+    it('Enter actual contract period start date (' + value + ')', function () {
         pages.createDealContractPeriod.fillStartActualDateSpecificValue(value);
     });
 };
 
 exports.enterTargetEndDateInMonths = function (value) {
-    it('Enter target contract period end date (' + value + ')', function() {
+    it('Enter target contract period end date (' + value + ')', function () {
         pages.createDealContractPeriod.fillTargetEndMonthsSpecificValue(value);
     });
 };
@@ -437,9 +437,112 @@ exports.saveAdvanceAssumptions = function () {
     });
 };
 
-exports.checkEndRulesTooltipTextValue = function(){
-    it("Exports the end rules tooltip text value ", function(){
-         pages.createDealContractPeriod.checkTheEndRulesTooltipTextValue();
+exports.checkEndRulesTooltipTextValue = function () {
+    it("Exports the end rules tooltip text value ", function () {
+        pages.createDealContractPeriod.checkTheEndRulesTooltipTextValue();
+    });
+};
+
+exports.checkRulesForEndDateTitleTextEndRules = function () {
+    it("Check the rules for end rules date title text end rules ", function () {
+        pages.createDealContractPeriod.checkTheRulesForEndDateTitleTextEndRules();
+    });
+};
+
+exports.checkRulesForEndDateDataTooltipTextEndRules = function () {
+    it("Check the rules for end date data tooltip text end rules", function () {
+        pages.createDealContractPeriod.checkTheRulesForEndDateDataTooltipTextEndRules();
+    });
+};
+
+exports.checkSummaryOfRulesForEndDateTitleTextEndRules = function () {
+    it("Check the summary of rules for end date title text end rules ", function () {
+        pages.createDealContractPeriod.checkTheSummaryOfRulesForEndDateTitleTextEndRules();
+    });
+};
+
+exports.checkSummaryOfRulesForEndDateDataTooltipTextEndRules = function () {
+    it("Check the summary of rules for end date data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheSummaryOfRulesForEndDateDataTooltipTextEndRules();
+    });
+};
+
+exports.checkRulesTitleTextEndRules = function () {
+    it("Check the rules title text end rules ", function () {
+        pages.createDealContractPeriod.checkTheRulesTitleTextEndRules();
+    });
+};
+
+exports.checkRulesDataTooltipTextEndRules = function () {
+    it("Check the rules data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheRulesDataTooltipTextEndRules();
+    });
+};
+
+exports.checkEndDateDataTooltipTextEndRules = function () {
+    it("Check the end date data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheEndDateDataTooltipTextEndRules();
+    });
+};
+
+exports.checkAccountingPeriodEndDataTooltipTextEndRules = function () {
+    it("Check the accounting period end data tooltip text end rules", function () {
+        pages.createDealContractPeriod.checkTheAccountingPeriodEndDataTooltipTextEndRules();
+    });
+};
+
+exports.checkVariableLeftDataTooltipTextEndRules = function () {
+    it("Check the variable left data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheVariableLeftDataTooltipTextEndRules();
+    });
+};
+
+exports.checkAttributeLeftDataTooltipTextEndRules = function () {
+    it("Check the attribute left data tooltip text end rules", function () {
+        pages.createDealContractPeriod.checkTheAttributeLeftDataTooltipTextEndRules();
+    });
+};
+
+exports.checkWithNoticeDataTooltipTextEndRules = function () {
+    it("Check the with notice data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheWithNoticeDataTooltipTextEndRules();
+    });
+};
+
+exports.checkRequirementDataTooltipTextEndRules = function () {
+    it("Check the requirement data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheRequirementDataTooltipTextEndRules();
+    });
+};
+
+exports.checkVariableRightDataTooltipTextEndRules = function () {
+    it("Check the variable right data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheVariableRightDataTooltipTextEndRules();
+    });
+};
+
+exports.checkAttributeRightDataTooltipTextEndRules = function () {
+    it("Check the attribute right data tooltip text end rules ", function () {
+        pages.createDealContractPeriod.checkTheAttributeRightDataTooltipTextEndRules();
+    });
+};
+
+exports.validateAccountingPeriodEndRulesIsDisplayed = function () {
+    it("Validate the accounting period end  rules is displayed", function () {
+        expect(pages.createDealContractPeriod.elems.accountingPeriodEndCheckBoxEndRules.isDisplayed()).toBeTruthy();
+    });
+};
+
+exports.validatePreDefinedDateFieldEndRulesIsRequiredWarning = function (error_message) {
+    it("Validate the pre defined date field  end  rules is required anc check the error message", function () {
+        expect(pages.createDealContractPeriod.elems.preDefinedDateInputFieldEndRules.isDisplayed()).toBeTruthy();
+        pages.createDealContractPeriod.validateThePreDefinedDateFieldEndRulesIsRequiredWarning(error_message);
+    });
+};
+
+exports.fillIntoPreDefinedDateFieldEndRulesSpecificDate = function(specific_date){
+    it("Fill into the pre defined date field end rules specific date ", function(){
+       pages.createDealContractPeriod.fillIntoThePreDefinedDateFieldEndRulesSpecificDate(specific_date);
     });
 };
 
