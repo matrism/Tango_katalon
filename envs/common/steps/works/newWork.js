@@ -309,6 +309,11 @@ exports.selectRandomCreator = function(i) {
         });
     });
 };
+
+addBasicStep(exports, pages.newWork, 'Enter creator search terms');
+
+addBasicStep(exports, pages.newWork, 'Select creator search result by index');
+
 exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
     var person;
 

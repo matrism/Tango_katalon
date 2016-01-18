@@ -617,6 +617,15 @@ exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
         return result;
     });
 };
+
+exports.selectCreatorSearchResultByIndex = function (i) {
+    var els = exports.creatorSearchResultElements();
+
+    browser.wait(EC.visibilityOfAny(els));
+
+    return asAlways(els.get(i), 'scrollIntoView', 'click');
+};
+
 module.exports.enterCreatorContribution = function(i, value) {
 	var element = pages.newWork.creatorContributionInput(i);
 	pages.base.scrollIntoView(element);
