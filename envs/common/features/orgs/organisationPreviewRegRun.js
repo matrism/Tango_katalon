@@ -1,12 +1,6 @@
 'use strict';
 
-var fnutils = require('../../../../helpers/fnutils'),
-    using = fnutils.using;
-
-exports.beforeFeature = function () {
-    steps.login.itLogin();
-    steps.searchSection.accessSavedOrganisationByName('BMI');
-};
+var using = fnutils.using;
 
 exports.commonFeatureTags = [
     'previewRegistrationRunRegression',
@@ -15,13 +9,18 @@ exports.commonFeatureTags = [
     'regression'
 ];
 
+exports.beforeFeature = function () {
+    steps.login.itLogin();
+    steps.searchSection.accessSavedOrganisationByName('BMI');
+};
+
 exports.feature = [
     {
         name: 'Preview Reg run and validate Errors',
         tags: ['organisationPreviewRegistrationRun'],
         steps: function () {
             steps.organisation.goToPreviewRegistrationRunTab();
-            //primary
+
             using(steps.organisation, function() {
                 //primary
                 this.checkStatusNumber();
@@ -69,4 +68,3 @@ exports.feature = [
         }
     }
 ];
-
