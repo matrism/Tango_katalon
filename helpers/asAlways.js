@@ -29,3 +29,7 @@ exports.trim = function (string) {
 exports.click = function (el) {
     el.click();
 };
+
+exports.clear = function (el) {
+    el.clear();
+};
