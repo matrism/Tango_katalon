@@ -1,14 +1,18 @@
 'use strict';
 
-var fnutils = require('../../../../helpers/fnutils'),
-    using = fnutils.using;
+var using = fnutils.using;
+
+exports.commonFeatureTags = [
+    'previewRegistrationRunRegression',
+    'previewRegistrationRun',
+    'orgs',
+    'regression'
+];
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
     steps.searchSection.accessSavedOrganisationByName('BMI');
 };
-
-exports.commonFeatureTags = ['orgs', 'previewRegRun', 'broken'];
 
 exports.feature = [
     {
@@ -16,7 +20,7 @@ exports.feature = [
         tags: ['organisationPreviewRegistrationRun'],
         steps: function () {
             steps.organisation.goToPreviewRegistrationRunTab();
-            //primary
+
             using(steps.organisation, function() {
                 //primary
                 this.checkStatusNumber();
@@ -64,4 +68,3 @@ exports.feature = [
         }
     }
 ];
-
