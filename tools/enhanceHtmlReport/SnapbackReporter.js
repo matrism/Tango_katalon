@@ -6,7 +6,7 @@ var fs = require('fs'),
 module.exports = function(options) {
     mkdirp.sync(options.dest);
 
-    this.specCount = 0;
+    this.specCount = 1;
 
     this.specDone = function(spec) {
         var path = options.dest + '/' + (this.specCount++) + '.html';

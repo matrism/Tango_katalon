@@ -9,6 +9,7 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
+    stepCountReporter = require('../tools/stepCountReporter'),
     HtmlReporter = requireCustom('protractor-jasmine2-screenshot-reporter'),
     fs = require('fs'),
     screenShotPath,
@@ -94,6 +95,24 @@ config = {
         global.ExpectedConditions = protractor.ExpectedConditions;
         global.EC = ExpectedConditions;
 
+        if(systemConfig.fingerprints) {
+            (function () {
+                var webdriver = require('selenium-webdriver'),
+
+                    WEP = webdriver.WebElement.prototype;
+
+                ['click', 'sendKeys', 'getAttribute', 'getText', 'clear'].forEach(function (name) {
+                    var originalFn = WEP[name];
+
+                    WEP[name] = function () {
+                        highlightElement(this);
+
+                        return originalFn.apply(this, arguments);
+                    };
+                });
+            })();
+        }
+
         if (systemConfig.failFast) {
             jasmine.getEnv().addReporter(failFast.init());
         }
@@ -156,6 +175,8 @@ config = {
             }, timeout);
         };
 
+        jasmine.getEnv().addReporter(stepCountReporter);
+
         asciiPrefixes = {
             success: '[Pass] ',
             failure: '[Fail] ',
@@ -201,6 +222,12 @@ config = {
         if (systemConfig.stepByStep) {
             stepByStepReporter.enable();
         }
+
+        jasmine.getEnv().addReporter({
+            specDone: function () {
+                return highlightElement.restoreAll();
+            }
+        });
 
         if (typeof process.env.__using_grunt === 'undefined') {
 //            var spawn = require('child_process').spawn;

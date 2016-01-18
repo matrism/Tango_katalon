@@ -123,7 +123,7 @@ exports.saveDisplayedIncomeRates = function () {
     });
 };
 
-exports.exportsexpandRR = function () {
+exports.expandRR = function () {
     it("EXPAND RR", function () {
         browser.sleep(5000);
         browser.wait(ExpectedConditions.visibilityOf($(".rate-summary-table__scope")));
@@ -131,8 +131,9 @@ exports.exportsexpandRR = function () {
         $$(".rate-summary-table__scope-rates>div>div>.rate-summary-table__collapse-btn")
             .then(function (result) {
 
-                for (i = 0; i < result.length; i++) {
-                    result[i].click();
+                for (var i = 0; i < result.length; i++) {
+                    asAlways(result[i], 'scrollIntoView', 'click');
+                    pages.base.waitForAjax();
                 }
             }
         );
@@ -148,8 +149,8 @@ exports.expandInnerRR = function () {
         browser.wait(ExpectedConditions.visibilityOf($$("div:not(.rate-summary-table__scope-item-col)>.rate-summary-table__collapse-btn").first()));
         $$("div:not(.rate-summary-table__scope-item-col)>.rate-summary-table__collapse-btn")
             .then(function (result) {
-                for (i = 0; i < result.length; i++) {
-                    result[i].click();
+                for (var i = 0; i < result.length; i++) {
+                    asAlways(result[i], 'scrollIntoView', 'click');
                 }
             }
         );

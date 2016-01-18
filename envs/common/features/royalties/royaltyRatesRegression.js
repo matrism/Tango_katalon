@@ -120,6 +120,7 @@ exports.feature = [
                 using(steps.deal, function () {
                     this.itContinueToNextPage();
                     this.saveDeal();
+                    this.waitForDealToBeSaved();
                     this.clickFirstScopeHeader();
                 });
 
@@ -176,6 +177,7 @@ exports.feature = [
                 using(steps.deal, function () {
                     this.itContinueToNextPage();
                     this.saveDeal();
+                    this.waitForDealToBeSaved();
                     this.clickFirstScopeHeader();
                 });
 
@@ -219,6 +221,7 @@ exports.feature = [
                 using(steps.deal, function () {
                     this.itContinueToNextPage();
                     this.saveDeal();
+                    this.waitForDealToBeSaved();
                     this.clickFirstScopeHeader();
                 });
 

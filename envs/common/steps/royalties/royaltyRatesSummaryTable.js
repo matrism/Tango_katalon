@@ -1,18 +1,20 @@
 'use strict';
 
-var rst = pages.royaltyRatesSummaryTable,
+var rrst = pages.royaltyRatesSummaryTable,
     currentTable;
 
 steps.royaltyRatesSummaryTable = exports;
 
-addBasicStep(exports, rst, 'Wait loader');
+addBasicStep(exports, rrst, 'Wait loader');
+
+addBasicStep(exports, rrst, 'Filter by');
 
 addStep(exports, 'Validate count', function (expected) {
-    expect(rst.list().count()).toBe(expected);
+    expect(rrst.list().count()).toBe(expected);
 });
 
 addStep(exports, 'Find', function (spec) {
-    currentTable = rst.find(spec);
+    currentTable = rrst.find(spec);
 });
 
 addStepGroup(exports, 'Scope', function (group) {
@@ -62,7 +64,7 @@ addStepGroup(exports, 'Rate set', function (group) {
 
     addBasicStep(group, function () {
         return currentRateSet;
-    },'Toggle');
+    }, 'Toggle');
 
     addStepGroup(group, 'Group', function (group) {
         var currentGroup;
@@ -77,6 +79,52 @@ addStepGroup(exports, 'Rate set', function (group) {
 
         addStep(group, 'Validate key', function (expected) {
             expect(currentGroup.key()).toBe(expected);
+        });
+
+        addBasicStep(group, function () {
+            return currentGroup;
+        }, 'Toggle');
+
+        addStepGroup(group, 'Income Types', function (group) {
+            var currentIncomeType;
+
+            addStep(group, 'Validate count', function (expected) {
+                expect(currentGroup.incomeTypes.list().count()).toBe(expected);
+            });
+
+            addStep(group, 'Find', function (spec) {
+                currentIncomeType = currentGroup.incomeTypes.find(spec);
+            });
+
+            addStep(group, 'Validate name', function (expected) {
+                expect(currentIncomeType.name()).toBe(expected);
+            });
+
+            addStepGroup(group, 'Rate Items', function (group) {
+                var currentRateItem;
+
+                addStep(group, 'Validate count', function (expected) {
+                    expect(
+                        currentIncomeType.rateItems.list().count()
+                    ).toBe(expected);
+                });
+
+                addStep(group, 'Find', function (spec) {
+                    currentRateItem = currentIncomeType.rateItems.find(spec);
+                });
+
+                addStep(group, 'Validate name', function (expected) {
+                    expect(currentRateItem.name()).toBe(expected);
+                });
+
+                addStep(group, 'Validate percentage', function (expected) {
+                    expect(currentRateItem.percentage()).toBe(expected);
+                });
+
+                addStep(group, 'Validate application method', function (expected) {
+                    expect(currentRateItem.applicationMethod()).toBe(expected);
+                });
+            });
         });
     });
 });
