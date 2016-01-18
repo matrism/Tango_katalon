@@ -4,7 +4,12 @@ var fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using,
     fromTestVariable = require('../../../../helpers/fromTestVariable');
 
-exports.commonFeatureTags = ['sanity', 'acknowledgements', 'cr', 'copyrightRegistration'];
+exports.commonFeatureTags = [
+    'acknowledgementsSanity',
+    'acknowledgements',
+    'cr',
+    'sanity'
+];
 
 exports.beforeFeature = function() {
     steps.login.itLogin();
