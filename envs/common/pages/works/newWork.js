@@ -153,6 +153,11 @@ module.exports.creatorNameInput = function(index) {
 			.element(by.model("creator.person_name"))
 	);
 };
+
+exports.creatorSearchResultElements = function () {
+    return $$('.typeahead-result');
+};
+
 module.exports.creatorContributionInput = function(index) {
 	return (
 		pages.newWork.creatorContributionRow(index)
@@ -569,7 +574,7 @@ exports.confirmComponentWorkDeletion = function() {
     return exports.confirmComponentWorkDeletionButton().click();
 };
 exports.selectRandomCreatorSuggestion = function() {
-    return $$(".typeahead-result").then(function(suggestions) {
+    return exports.creatorSearchResultElements().then(function(suggestions) {
         var randomSuggestion = _.sample(suggestions.slice(0, 3));
         var result = {};
 
@@ -591,7 +596,7 @@ exports.selectRandomCreatorSuggestion = function() {
     });
 };
 exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
-    var suggestion = $$('.typeahead-result').first();
+    var suggestion = exports.creatorSearchResultElements().first();
     var result = {};
 
     result.name = pph.trim(suggestion.$('.typeahead-result-text').getText());
