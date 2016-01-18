@@ -15,7 +15,7 @@ exports.feature = [
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.createDealContractPeriod.checkEndRulesTooltipTextValue();
-            steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
+            //steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
