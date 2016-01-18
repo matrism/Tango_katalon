@@ -1217,7 +1217,11 @@ exports.feature = [
 
             steps.createDealGeneral.selectDesiredSigningTerritory('Argentina');
 
-            steps.createDealGeneral.fillCompanyCodeField("a");
+            if(systemConfig.env.name === 'qa') {
+                steps.createDealGeneral.fillCompanyCodeField("a");
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
+            }
 
             steps.createDealGeneral.waitForContractingPartyDropDown();
 

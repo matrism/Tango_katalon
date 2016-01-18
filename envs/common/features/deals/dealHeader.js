@@ -26,7 +26,7 @@ exports.feature = [
             steps.headerDeal.checkOwnershipValue("None");
             steps.headerDeal.checkAdministrationText();
             steps.headerDeal.checkAdministrationValue("None");
-            steps.headerDeal.checkContractingPartyValue("BMI");
+            steps.headerDeal.checkContractingPartyValue("bmi");
 
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
@@ -61,8 +61,8 @@ exports.feature = [
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editExistingContractingParty("ascap");
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
-            steps.headerDeal.checkContractingPartyValue("BMI");
-            steps.headerDeal.checkContractingPartyValue("ASCAP");
+            steps.headerDeal.checkContractingPartyValue("bmi");
+            steps.headerDeal.checkContractingPartyValue("ascap");
 
         }
     },
@@ -192,7 +192,7 @@ exports.feature = [
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
-            steps.createDealContractPeriod.itFillDealMandatorieldsContractPeriod();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();

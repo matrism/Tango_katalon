@@ -312,9 +312,11 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
         steps.createDealGeneral.goToNewDealPage();
         steps.createDealGeneral.selectDealSigningTerritory();
-        steps.createDealGeneral.fillCompanyCodeField("a");
-        steps.createDealGeneral.waitForContractingPartyDropDown();
-        steps.createDealGeneral.selectRandomCompanyCode();
+        if(systemConfig.env.name === 'qa') {
+            steps.createDealGeneral.fillCompanyCodeField("a");
+            steps.createDealGeneral.waitForContractingPartyDropDown();
+            steps.createDealGeneral.selectRandomCompanyCode();
+        }
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectRandomContractingParty();
@@ -365,9 +367,11 @@ exports.itAddAllGeneralFieldsForSanityToDealGeneralTab = function () {
         steps.createDealGeneral.clickOnExecutedContractStatus();
         steps.createDealGeneral.fillIntoExecutionDateField();
         steps.createDealGeneral.selectDealSigningTerritory();
-        steps.createDealGeneral.fillCompanyCodeField("a");
-        steps.createDealGeneral.waitForContractingPartyDropDown();
-        steps.createDealGeneral.selectRandomCompanyCode();
+        if(systemConfig.env.name === 'qa') {
+            steps.createDealGeneral.fillCompanyCodeField("a");
+            steps.createDealGeneral.waitForContractingPartyDropDown();
+            steps.createDealGeneral.selectRandomCompanyCode();
+        }
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectContractingPartySearchResultByIndex(1);
@@ -396,4 +400,4 @@ exports.itAddAllGeneralFieldsForSanityToDealGeneralTab = function () {
         steps.createDealGeneral.clickOnYesPerformanceNonTitleBoundIncome();
         steps.createDealGeneral.clickOnNoPerformanceNonTitleBoundIncome();
     });
-}
+};
