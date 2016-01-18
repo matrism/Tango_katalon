@@ -4,7 +4,7 @@ var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 if (pages.createDealGeneral === undefined) {
-    pages.createDealGeneral = new ftf.pageObject({
+    exports = module.exports = pages.createDealGeneral = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
 
         locators: {
@@ -47,7 +47,6 @@ if (pages.createDealGeneral === undefined) {
             yesPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(1)"},
             noPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(2)"}
         },
-
 
         selectDesiredSigningTerritory: function (specific_country) {
             pages.createDealGeneral.elems.dealSigningTerritoryPopup.click();
@@ -387,6 +386,36 @@ if (pages.createDealGeneral === undefined) {
 
         clickOnTheNoPerformanceNonTitleBoundIncome: function () {
             pages.createDealGeneral.elems.noPerformanceNonTitleBoundIncome.click();
+        },
+
+        companyCode: {
+            typeahead: function () {
+                return element(by.model('deal.company_code'));
+            },
+
+            input: function () {
+                return exports.companyCode.typeahead().element(by.model('$term'));
+            },
+
+            searchResultElements: function () {
+                return $$('.tg-typeahead__suggestions-group-item');
+            },
+
+            enterSearchTerms: function (terms) {
+                var el = exports.companyCode.input();
+
+                asAlways(el, 'scrollIntoView', 'click', 'clear');
+
+                return el.sendKeys(terms);
+            },
+
+            selectSearchResultByIndex: function (i) {
+                var els = exports.companyCode.searchResultElements();
+
+                browser.wait(EC.visibilityOfAny(els));
+
+                return asAlways(els.get(i), 'scrollIntoView', 'click');
+            }
         }
     });
 }
