@@ -1,8 +1,6 @@
 'use strict';
 
-var fnutils = require('../../../../helpers/fnutils'),
-    using = fnutils.using,
-    fromTestVariable = require('../../../../helpers/fromTestVariable');
+var using = fnutils.using;
 
 exports.commonFeatureTags = [
     'acknowledgementsSanity',
