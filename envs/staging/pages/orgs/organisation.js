@@ -284,36 +284,14 @@ exports.registration = (function () {
         );
     };
 
+    registration.isRegistrationRecipientSelect = function () {
+        return $$('[data-ng-form="registration"] .btn-group').get(0);
+    };
+
     registration.editSection = function () {
         var element = registration.editSectionButton();
         pages.base.scrollIntoView(element);
         return element.click();
-    };
-
-    registration.isRegistrationRecipientSelect = function () {
-        return $$('[data-ng-form="registration"] .btn-group').get(0);
-    };
-    registration.acknowledgementTypeSelect = function () {
-        return $$('[data-ng-form="ackForm"] .btn-group').get(0);
-    };
-    registration.deliveryMethodSelect = function (i) {
-        return $$('.DELIVERY_ACKNOWLEDGEMENT div.btn-group').get(i);
-    };
-    registration.addressInput = function (i) {
-        var method = i ? '2ftp' : '1sftp';
-        return $('#ack' + method + 'Host');
-    };
-    registration.portInput = function (i) {
-        var method = i ? '2ftp' : '1sftp';
-        return $('#ack' + method + 'Port');
-    };
-    registration.usernameInput = function (i) {
-        var method = i ? '2ftp' : '1sftp';
-        return $('#ack' + method + 'Username');
-    };
-    registration.passwordInput = function (i) {
-        var method = i ? '2ftp' : '1sftp';
-        return $('#ack' + method + 'Password1');
     };
 
     registration.selectIsRegistrationRecipient = function (value) {
@@ -322,42 +300,179 @@ exports.registration = (function () {
             by.cssContainingText('button', value)
         ).click();
     };
-    registration.selectAcknowledgementType = function (value) {
-        var element = registration.acknowledgementTypeSelect();
-        return element.element(
-            by.cssContainingText('button', value)
-        ).click();
-    };
-    registration.selectDeliveryMethod = function (i, value) {
-        var element = registration.deliveryMethodSelect(i);
-        return element.all(
-            by.cssContainingText('button', value)
-        ).get(0).click();
-    };
-    registration.enterAddress = function (i, value) {
-        var element = registration.addressInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-    registration.enterPort = function (i, value) {
-        var element = registration.portInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-    registration.enterUsername = function (i, value) {
-        var element = registration.usernameInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-    registration.enterPassword = function (i, value) {
-        var element = registration.passwordInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
+
+    registration.delivery = (function () {
+        var delivery = {};
+
+        delivery.addMethodButton = function () {
+            return $('[data-ng-click="addDeliveryMethod(runType.selected.value[$index], $index)"]');
+        };
+        delivery.methodSection = function (i) {
+            return element.all(by.repeater('dm in getDeliveryMethods() | filter: { position: $index.toString() }')).get(i);
+        };
+        delivery.deliveryMethodSelect = function (i) {
+            return delivery.methodSection(i);
+        };
+        delivery.emailPrimaryEmailInput = function (i) {
+            return element.all(by.model('dm.delivery_mechanism.primary_emails')).get(i);
+        };
+        delivery.ftpAddressInput = function (i) {
+            return $$('[name="ftpHost"]').get(i);
+        };
+        delivery.ftpPortInput = function (i) {
+            return $$('[name="ftpPort"]').get(i);
+        };
+        delivery.ftpUsernameInput = function (i) {
+            return $$('[name="ftpUsername"]').get(i);
+        };
+        delivery.ftpPasswordInput = function (i) {
+            return $$('[name="ftpPassword1"]').get(i);
+        };
+        delivery.ftpNotificationSelect = function (i) {
+            return delivery.methodSection(i).element.all(by.model('dm.delivery_notification.notify'));
+        };
+        delivery.ftpNotificationPrimaryEmailInput = function (i) {
+            return $$('[name="ftpNotifyPrimaryEmails"]').get(i);
+        };
+        delivery.ftpNotificationCcEmailInput = function (i) {
+            return $$('[name="ftpNotifyCCEmails"]').get(i);
+        };
+        delivery.thirdPartyRecipientInput = function (i) {
+            return element.all(by.model('dm.delivery_mechanism.third_party_recipient.name')).get(i);
+        };
+        delivery.firstThirdPartyRecipientOption = function () {
+            return element.all(by.repeater('match in matches')).first();
+        };
+
+        delivery.addMethod = function () {
+            return delivery.addMethodButton().click();
+        };
+        delivery.selectMethod = function (i, value) {
+            var element = delivery.deliveryMethodSelect(i);
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+        };
+        delivery.enterEmailPrimaryEmail = function (i, value) {
+            var element = delivery.emailPrimaryEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpAddress = function (i, value) {
+            var element = delivery.ftpAddressInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpPort = function (i, value) {
+            var element = delivery.ftpPortInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpUsername = function (i, value) {
+            var element = delivery.ftpUsernameInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpPassword = function (i, value) {
+            var element = delivery.ftpPasswordInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.selectFtpNotification = function (i, value) {
+            var element = delivery.ftpNotificationSelect(i);
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+        };
+        delivery.enterFtpNotificationPrimaryEmail = function (i, value) {
+            var element = delivery.ftpNotificationPrimaryEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterFtpNotificationCcEmail = function (i, value) {
+            var element = delivery.ftpNotificationCcEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterThirdPartyRecipient = function (i, value) {
+            var element = delivery.thirdPartyRecipientInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.selectFirstThirdPartyRecipient = function () {
+            var element = delivery.firstThirdPartyRecipientOption();
+            return element.click();
+        };
+
+        return delivery;
+    })();
+
+    registration.ack = (function () {
+        var ack = {};
+
+        ack.acknowledgementTypeSelect = function () {
+            return $$('[data-ng-form="ackForm"] .btn-group').get(0);
+        };
+        ack.deliveryMethodSelect = function (i) {
+            return $$('.DELIVERY_ACKNOWLEDGEMENT div.btn-group').get(i);
+        };
+        ack.addressInput = function (i) {
+            var method = i ? '2ftp' : '1sftp';
+            return $('#ack' + method + 'Host');
+        };
+        ack.portInput = function (i) {
+            var method = i ? '2ftp' : '1sftp';
+            return $('#ack' + method + 'Port');
+        };
+        ack.usernameInput = function (i) {
+            var method = i ? '2ftp' : '1sftp';
+            return $('#ack' + method + 'Username');
+        };
+        ack.passwordInput = function (i) {
+            var method = i ? '2ftp' : '1sftp';
+            return $('#ack' + method + 'Password1');
+        };
+
+        ack.selectAcknowledgementType = function (value) {
+            var element = ack.acknowledgementTypeSelect();
+            return element.element(
+                by.cssContainingText('button', value)
+            ).click();
+        };
+        ack.selectDeliveryMethod = function (i, value) {
+            var element = ack.deliveryMethodSelect(i);
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+        };
+        ack.enterAddress = function (i, value) {
+            var element = ack.addressInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        ack.enterPort = function (i, value) {
+            var element = ack.portInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        ack.enterUsername = function (i, value) {
+            var element = ack.usernameInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        ack.enterPassword = function (i, value) {
+            var element = ack.passwordInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+
+        return ack;
+    })();
 
     registration.saveSectionButton = function () {
         return registration.sectionContainer().element(by.cssContainingText(
