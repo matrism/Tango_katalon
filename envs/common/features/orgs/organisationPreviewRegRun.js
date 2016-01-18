@@ -8,7 +8,12 @@ exports.beforeFeature = function () {
     steps.searchSection.accessSavedOrganisationByName('BMI');
 };
 
-exports.commonFeatureTags = ['orgs', 'previewRegRun'];
+exports.commonFeatureTags = [
+    'previewRegistrationRunRegression',
+    'previewRegistrationRun',
+    'orgs',
+    'regression'
+];
 
 exports.feature = [
     {
