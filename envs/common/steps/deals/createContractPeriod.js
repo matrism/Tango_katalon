@@ -437,6 +437,12 @@ exports.saveAdvanceAssumptions = function () {
     });
 };
 
+exports.checkEndRulesTooltipTextValue = function(){
+    it("Exports the end rules tooltip text value ", function(){
+         pages.createDealContractPeriod.checkTheEndRulesTooltipTextValue();
+    });
+};
+
 exports.itAddAdvanceAssumptions = function () {
     describe("Add advance assumptions ", function () {
         steps.createDealContractPeriod.clickOnAddAdvanceAssumptionsLink();

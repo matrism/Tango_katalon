@@ -1217,6 +1217,14 @@ exports.feature = [
 
             steps.createDealGeneral.selectDesiredSigningTerritory('Argentina');
 
+            if(systemConfig.env.name === 'qa') {
+                steps.createDealGeneral.fillCompanyCodeField("a");
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
+            }
+
+            steps.createDealGeneral.waitForContractingPartyDropDown();
+
             steps.createDealGeneral.enterContractingPartySearchTerms('ASCAP');
 
             steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
