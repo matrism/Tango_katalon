@@ -43,6 +43,19 @@ exports.feature = [
             steps.createDealContractPeriod.validatePreDefinedDateFieldEndRulesIsRequiredWarning("Invalid date.");
 
             steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("MDRC Complete Date");
+            steps.createDealContractPeriod.validateAccountingPeriodEndRulesIsDisplayed();
+            steps.createDealContractPeriod.validateOffsetByInputFieldEndRulesIsDisplayed();
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRules();
+            steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
+
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("Recouped Date");
+            steps.createDealContractPeriod.validateAccountingPeriodEndRulesIsDisplayed();
+            steps.createDealContractPeriod.validateOffsetByInputFieldEndRulesIsDisplayed();
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRules();
+            steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
+
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("Target End Date");
+            steps.createDealContractPeriod.validateAccountingPeriodEndRulesIsDisplayed();
             steps.createDealContractPeriod.validateOffsetByInputFieldEndRulesIsDisplayed();
             steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRules();
             steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();

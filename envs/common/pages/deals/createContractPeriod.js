@@ -58,7 +58,7 @@ if (pages.createDealContractPeriod === undefined) {
             rulesTitleDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins i"},
             errorMissingFieldsEndRulesMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p[data-ng-if='!rulesForm.$valid']"},
             endDateDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(2) i"},
-            accountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.period_end']"},
+            accountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div input[data-ng-model='rule.period_end']"},
             accountingPeriodEndDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) span i"},
             offsetByInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.offset']"},
             offsetByArrowChoiceEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
