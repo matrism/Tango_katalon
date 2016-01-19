@@ -60,6 +60,8 @@ if (pages.createDealContractPeriod === undefined) {
             endDateDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(2) i"},
             accountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.period_end']"},
             accountingPeriodEndDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) span i"},
+            offsetByInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.offset']"},
+            offsetByArrowChoiceEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
             variableLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(1) label.control-label i"},
             attributeLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(3) label.control-label i"},
             withNoticeDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(4) label.control-label i"},
@@ -622,8 +624,23 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        fillIntoThePreDefinedDateFieldEndRulesSpecificDate : function(specific_date){
+        fillIntoThePreDefinedDateFieldEndRulesSpecificDate: function (specific_date) {
             pages.createDealContractPeriod.elems.preDefinedDateInputFieldEndRules.sendKeys(specific_date);
+        },
+
+        fillIntoTheOffsetByInputFieldEndRules: function () {
+            var number = Math.floor(Math.random() * 100) + 1;
+            pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.sendKeys(number);
+        },
+
+        selectTheRandomOptionFromOffsetByChoiceEndRules: function () {
+            pages.createDealContractPeriod.elems.offsetByArrowChoiceEndRules.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))));
+            browser.driver.findElements(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
         }
 
 

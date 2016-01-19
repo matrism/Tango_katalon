@@ -533,6 +533,25 @@ exports.validateAccountingPeriodEndRulesIsDisplayed = function () {
     });
 };
 
+exports.validateOffsetByInputFieldEndRulesIsDisplayed = function(){
+  it("Validate the offset by input field end rules is displayed ", function(){
+     expect(pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.isDisplayed()).toBeTruthy();
+  });
+};
+
+exports.fillIntoOffsetByInputFieldEndRules = function(){
+    it("Fill into the offset by input field end rules ", function(){
+       pages.createDealContractPeriod.fillIntoTheOffsetByInputFieldEndRules();
+    });
+};
+
+exports.selectRandomOptionFromOffsetByChoiceEndRules = function(){
+    it("Select the random option from offset by choice end rules ", function(){
+       pages.createDealContractPeriod.selectTheRandomOptionFromOffsetByChoiceEndRules();
+    });
+};
+
+
 exports.validatePreDefinedDateFieldEndRulesIsRequiredWarning = function (error_message) {
     it("Validate the pre defined date field  end  rules is required anc check the error message", function () {
         expect(pages.createDealContractPeriod.elems.preDefinedDateInputFieldEndRules.isDisplayed()).toBeTruthy();

@@ -43,7 +43,9 @@ exports.feature = [
             steps.createDealContractPeriod.validatePreDefinedDateFieldEndRulesIsRequiredWarning("Invalid date.");
 
             steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("MDRC Complete Date");
-
+            steps.createDealContractPeriod.validateOffsetByInputFieldEndRulesIsDisplayed();
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRules();
+            steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
 
             //steps.deal.itContinueToNextPage();
             //steps.deal.saveDeal();
