@@ -17,8 +17,8 @@ if (pages.createDealGeneral === undefined) {
             dealSigningTerritoryDropDownData: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
             contractingPartiesInput: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             contractingPartiesField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
-            companyCodeInput: {css: "div[name='companyCode'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            companyCodeField: {css: "div[name='companyCode'] div[ng-class='tgTypeaheadWrapClass']"},
+            companyCodeInput: {css: "div[name='company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            companyCodeField: {css: "div[name='company'] div[ng-class='tgTypeaheadWrapClass']"},
             artistsField: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass']"},
             artistFieldInput: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             artistsDropDownData: {css: "div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
@@ -92,8 +92,8 @@ if (pages.createDealGeneral === undefined) {
         },
 
         selectRandomCompanyCodeValueFromDropDown: function () {
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='companyCode'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(by.css("div[name='companyCode'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='company'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(by.css("div[name='company'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     var element = options[randomNumber];
@@ -103,8 +103,8 @@ if (pages.createDealGeneral === undefined) {
 
         selectCompanyCodeSpecificValue: function (specific_value) {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='companyCode'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("div[name='companyCode'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[name='company'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[name='company'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
