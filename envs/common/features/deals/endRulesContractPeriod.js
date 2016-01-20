@@ -66,6 +66,8 @@ exports.feature = [
             steps.createDealContractPeriod.checkWithNoticeDataTooltipTextEndRules();
             steps.createDealContractPeriod.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1,1);
 
+
+
             //steps.deal.itContinueToNextPage();
             //steps.deal.saveDeal();
             //steps.deal.waitForDealToBeSaved();

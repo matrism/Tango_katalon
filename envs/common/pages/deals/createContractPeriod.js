@@ -427,6 +427,29 @@ if (pages.createDealContractPeriod === undefined) {
                 });
         },
 
+        selectTheRequirementEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            var desiredOption;
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j+2) +")) div[data-ng-model='condition.operator'] div.tg-dropdown-button"));
+            pages.createDealContractPeriod.elems.requirementFieldButtonEndRules.click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
         selectTheRequirementEndRulesSpecificValue: function (value) {
             var desiredOption;
             pages.createDealContractPeriod.elems.requirementFieldButtonEndRules.click();

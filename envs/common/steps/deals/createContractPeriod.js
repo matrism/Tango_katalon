@@ -380,15 +380,21 @@ exports.fillIntoAttributeLeftEndRules = function () {
     });
 };
 
-exports.fillIntoAttributeLeftEndRulesRuleNumberIRowNumberJ = function(i,j){
-  it("Fill into the attribute left end rules rule number " + i + " row number " + j, function(){
-     pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRulesRuleNumberIRowNumberJ(i,j);
-  });
+exports.fillIntoAttributeLeftEndRulesRuleNumberIRowNumberJ = function (i, j) {
+    it("Fill into the attribute left end rules rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRulesRuleNumberIRowNumberJ(i, j);
+    });
 };
 
 exports.selectRequirementEndRulesRandomValue = function (value) {
     it("Select the requirement end rule random value ", function () {
         pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValue(value);
+    });
+};
+
+exports.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Select the requirement end rules specific value rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
     });
 };
 
@@ -558,9 +564,9 @@ exports.clickOnWithNoticeCheckBoxEndRules = function () {
     });
 };
 
-exports.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ = function (i,j) {
+exports.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ = function (i, j) {
     it("Click on the with notice check box end rules rule number " + i + " row number " + j, function () {
-        pages.createDealContractPeriod.clickOnTheWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(i,j);
+        pages.createDealContractPeriod.clickOnTheWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(i, j);
         pages.createDealContractPeriod.waitForAjax();
     });
 };
