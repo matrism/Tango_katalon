@@ -350,9 +350,27 @@ exports.selectEndDateEndRulesSpecificValue = function (value) {
     });
 };
 
+exports.selectEndDateEndRulesSpecificValueRuleNumberI = function (i, value) {
+    it("Select end date end rules specific value ", function () {
+        pages.createDealContractPeriod.selectTheEndDateEndRulesSpecificValueRuleNumberI(i, value);
+    });
+};
+
 exports.selectWhenVariableLeftEndRulesSpecificValue = function (value) {
     it("Select the when variable left end rules specific value ", function () {
         pages.createDealContractPeriod.selectTheWhenVariableLeftEndRulesSpecificValue(value);
+    });
+};
+
+exports.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Select the when variable left end rules specific value rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+    });
+};
+
+exports.checkAttributeLeftWarningMessageEndRules = function () {
+    it("Check the attribute left warning message end rules ", function () {
+        pages.createDealContractPeriod.checkTheAttributeLeftWarningMessageEndRules();
     });
 };
 
@@ -360,6 +378,12 @@ exports.fillIntoAttributeLeftEndRules = function () {
     it("Fill into the attribute left end rules field ", function () {
         pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRules();
     });
+};
+
+exports.fillIntoAttributeLeftEndRulesRuleNumberIRowNumberJ = function(i,j){
+  it("Fill into the attribute left end rules rule number " + i + " row number " + j, function(){
+     pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRulesRuleNumberIRowNumberJ(i,j);
+  });
 };
 
 exports.selectRequirementEndRulesRandomValue = function (value) {
@@ -527,27 +551,47 @@ exports.checkAttributeRightDataTooltipTextEndRules = function () {
     });
 };
 
+exports.clickOnWithNoticeCheckBoxEndRules = function () {
+    it("Click on the with notice check box end rules ", function () {
+        pages.createDealContractPeriod.clickOnTheWithNoticeCheckBoxEndRules();
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ = function (i,j) {
+    it("Click on the with notice check box end rules rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.clickOnTheWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(i,j);
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
 exports.validateAccountingPeriodEndRulesIsDisplayed = function () {
     it("Validate the accounting period end  rules is displayed", function () {
         expect(pages.createDealContractPeriod.elems.accountingPeriodEndCheckBoxEndRules.isDisplayed()).toBeTruthy();
     });
 };
 
-exports.validateOffsetByInputFieldEndRulesIsDisplayed = function(){
-  it("Validate the offset by input field end rules is displayed ", function(){
-     expect(pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.isDisplayed()).toBeTruthy();
-  });
-};
-
-exports.fillIntoOffsetByInputFieldEndRules = function(){
-    it("Fill into the offset by input field end rules ", function(){
-       pages.createDealContractPeriod.fillIntoTheOffsetByInputFieldEndRules();
+exports.validateOffsetByInputFieldEndRulesIsDisplayed = function () {
+    it("Validate the offset by input field end rules is displayed ", function () {
+        expect(pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.isDisplayed()).toBeTruthy();
     });
 };
 
-exports.selectRandomOptionFromOffsetByChoiceEndRules = function(){
-    it("Select the random option from offset by choice end rules ", function(){
-       pages.createDealContractPeriod.selectTheRandomOptionFromOffsetByChoiceEndRules();
+exports.fillIntoOffsetByInputFieldEndRules = function () {
+    it("Fill into the offset by input field end rules ", function () {
+        pages.createDealContractPeriod.fillIntoTheOffsetByInputFieldEndRules();
+    });
+};
+
+exports.fillIntoOffsetByInputFieldEndRulesRuleNumberI = function (i) {
+    it("Fill into the offset by input field end rules rule number " + i, function () {
+        pages.createDealContractPeriod.fillIntoTheOffsetByInputFieldEndRulesRuleNumberI(i);
+    });
+};
+
+exports.selectRandomOptionFromOffsetByChoiceEndRules = function () {
+    it("Select the random option from offset by choice end rules ", function () {
+        pages.createDealContractPeriod.selectTheRandomOptionFromOffsetByChoiceEndRules();
     });
 };
 
@@ -559,9 +603,16 @@ exports.validatePreDefinedDateFieldEndRulesIsRequiredWarning = function (error_m
     });
 };
 
-exports.fillIntoPreDefinedDateFieldEndRulesSpecificDate = function(specific_date){
-    it("Fill into the pre defined date field end rules specific date ", function(){
-       pages.createDealContractPeriod.fillIntoThePreDefinedDateFieldEndRulesSpecificDate(specific_date);
+exports.fillIntoPreDefinedDateFieldEndRulesSpecificDate = function (specific_date) {
+    it("Fill into the pre defined date field end rules specific date ", function () {
+        pages.createDealContractPeriod.fillIntoThePreDefinedDateFieldEndRulesSpecificDate(specific_date);
+    });
+};
+
+
+exports.fillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI = function (i, specific_date) {
+    it("Fill into the pre defined date field end rules specific date rule number " + i, function () {
+        pages.createDealContractPeriod.fillIntoThePreDefinedDateFieldEndRulesSpecificDateRuleNumberI(i, specific_date);
     });
 };
 

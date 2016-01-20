@@ -34,31 +34,37 @@ exports.feature = [
             steps.createDealContractPeriod.checkAttributeRightDataTooltipTextEndRules();
 
             //check end date field
-            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("Repayment Date");
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Repayment Date");
             steps.createDealContractPeriod.validateAccountingPeriodEndRulesIsDisplayed();
 
-            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("Pre-Defined Date");
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Pre-Defined Date");
             steps.createDealContractPeriod.validatePreDefinedDateFieldEndRulesIsRequiredWarning("Date is required.");
-            steps.createDealContractPeriod.fillIntoPreDefinedDateFieldEndRulesSpecificDate("0000");
+            steps.createDealContractPeriod.fillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI(1, "0000");
             steps.createDealContractPeriod.validatePreDefinedDateFieldEndRulesIsRequiredWarning("Invalid date.");
 
-            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("MDRC Complete Date");
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1,"MDRC Complete Date");
             steps.createDealContractPeriod.validateAccountingPeriodEndRulesIsDisplayed();
             steps.createDealContractPeriod.validateOffsetByInputFieldEndRulesIsDisplayed();
-            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRules();
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
             steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
 
-            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("Recouped Date");
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1,"Recouped Date");
             steps.createDealContractPeriod.validateAccountingPeriodEndRulesIsDisplayed();
             steps.createDealContractPeriod.validateOffsetByInputFieldEndRulesIsDisplayed();
-            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRules();
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
             steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
 
-            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("Target End Date");
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Target End Date");
             steps.createDealContractPeriod.validateAccountingPeriodEndRulesIsDisplayed();
             steps.createDealContractPeriod.validateOffsetByInputFieldEndRulesIsDisplayed();
-            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRules();
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
             steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
+
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
+            steps.createDealContractPeriod.checkAttributeLeftWarningMessageEndRules();
+            steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesRuleNumberIRowNumberJ(1,1);
+            steps.createDealContractPeriod.checkWithNoticeDataTooltipTextEndRules();
+            steps.createDealContractPeriod.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1,1);
 
             //steps.deal.itContinueToNextPage();
             //steps.deal.saveDeal();
