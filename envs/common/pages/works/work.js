@@ -1313,6 +1313,24 @@ exports.goToRegistrationActivityTab = function() {
     });
 };
 
+exports.lastUpdateDateBinding = function () {
+    return element(by.binding('work.pristine.last_updated_date | tgIsoDate'));
+};
+
+exports.clickOnLastUpdateDate = function() {
+    var element = exports.lastUpdateDateBinding();
+    pages.base.scrollIntoView(element);
+    return element.click().then(function() {
+        pages.base.waitForAjax();
+    });
+};
+
+exports.getLastUpdateDate = function () {
+    var element = exports.lastUpdateDateBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
 exports.copy = (function () {
     var copy = {};
 
