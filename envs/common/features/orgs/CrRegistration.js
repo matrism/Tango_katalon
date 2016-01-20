@@ -60,8 +60,6 @@ exports.feature = [
                 });
 
                 this.saveOrganisationDeliveryMethods();
-                this.goToRegistrationActivityTab();
-                this.saveRegActivityLastEvent();
                 this.goToPreviewRegistrationRunTab();
                 this.selectCustomRegistrationRun(data.cr.view);
 
@@ -69,6 +67,7 @@ exports.feature = [
                 this.confirmRegistrationRun();
                 this.listWorkIdNumberRegRun();
                 this.goToRegistrationActivityTab();
+                this.saveRegActivityLastEvent();
                 this.verifyThatWorkIsDelivered();
                 this.checkThatAllDeliveriesAreDelivered();
 
