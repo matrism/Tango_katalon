@@ -3,7 +3,13 @@
 var using = fnutils.using,
     data = requireFromEnvFolder('features/orgs/data/CrRegistration.js');
 
-exports.commonFeatureTags = [];
+exports.commonFeatureTags = [
+    'crRegistrationSanity',
+    'crRegistration',
+    'cr',
+    'orgs',
+    'sanity'
+];
 
 exports.beforeFeature = function() {
     steps.login.itLogin();
@@ -12,7 +18,7 @@ exports.beforeFeature = function() {
 exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
-        tags: ['crRegistration', 'sanity', 'copyrightRegistration', 'orgs'],
+        tags: [],
         steps: function() {
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
             using(steps.organisation, function () {
