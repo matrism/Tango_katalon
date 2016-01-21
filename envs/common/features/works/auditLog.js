@@ -56,10 +56,10 @@ exports.feature = [
                 this.validateLastUpdateDate(currentDate);
                 this.clickOnLastUpdateDate();
 
-                steps.newWork.goToNewWorkPage();
+                steps.base.refreshPage();
                 steps.searchSection.selectEntityType('Works');
                 this.selectWorkSearchFilterTag(0, 'Title');
-                this.enterWorkSearchTerms(Math.round(Math.random()*5));
+                this.enterWorkSearchTerms(Math.ceil(Math.random()*5));
                 steps.base.sleep(200);
                 steps.base.waitForAjax();
                 this.clickWorkSearchMatch(Math.round(Math.random()*8));
