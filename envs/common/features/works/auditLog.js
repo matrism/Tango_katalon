@@ -5,7 +5,12 @@ var random = require('../../../../helpers/random'),
     fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
-exports.commonFeatureTags = ['auditLog', 'works'];
+exports.commonFeatureTags = [
+    'auditLogRegression',
+    'auditLog',
+    'works',
+    'regression'
+];
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
