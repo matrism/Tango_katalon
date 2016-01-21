@@ -496,13 +496,14 @@ if (pages.organisation === undefined) {
             pages.base.waitForAjax();
         },
         validateCrFile: function (workNumber, stepValue, period) {
-
             //var dir = 'C:\\Users\\constantin.crismaru\\Downloads\\';
 
             return pages.organisation.activityHeaderCount().then(function (header) {
                 var parts = header.split(' '),
                     myDate = new Date(),
-                    currentDay = ( myDate.getDate().toString().length == 1) ? '0' + myDate.getDate() : myDate.getDate(),
+                    currentDay = ( myDate.getDate().toString().length == 1 ) ? '0' + myDate.getDate() : myDate.getDate(),
+                    cMonth = myDate.getMonth() + 1,
+                    currentMonth = ( cMonth.toString().length == 1 ) ? '0' + cMonth : cMonth,
                     filename = '',
                     periodSize = period.length - 1,
                     returnObj ={};
@@ -510,13 +511,13 @@ if (pages.organisation === undefined) {
                 period = period.substr(0,periodSize);
 
                 switch(stepValue){
-                    case 'primary': filename  = '_PRIMARY_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                    case 'primary': filename  = '_PRIMARY_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
                         break;
-                    case 'custom': filename  = '_' + parts[0] + '_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                    case 'custom': filename  = '_' + parts[0] + '_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
                         break;
-                    case 'error_custom': filename  = '_' + period + '_ERR_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                    case 'error_custom': filename  = '_' + period + '_ERR_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
                         break;
-                    case 'error': filename  = '_PRIMARY_ERR_' + myDate.getFullYear() + (myDate.getMonth()+1) + currentDay + '.csv';
+                    case 'error': filename  = '_PRIMARY_ERR_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
                         break;
                     default: break;
                 };
