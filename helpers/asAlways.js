@@ -14,6 +14,14 @@ exports = module.exports = function (val) {
     }, val);
 };
 
+exports.waitUntilVisible = function (el) {
+    browser.wait(EC.visibilityOf(el));
+};
+
+exports.waitUntilAnyVisible = function (els) {
+    browser.wait(EC.visibilityOfAny(els));
+};
+
 exports.scrollIntoView = function (el) {
     pages.base.scrollIntoView(el);
 };
