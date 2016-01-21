@@ -171,7 +171,14 @@ exports.feature = [
     },
     {
         name: "Royalties Manual Statement",
-        tags: ['royaltyRates', 'manualStatement'],
+
+        tags: [
+            'royaltyRatesManualStatementsSmoke',
+            'royaltyRates',
+            'manualStatements',
+            'qaOnly'
+        ],
+
         steps: function () {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
