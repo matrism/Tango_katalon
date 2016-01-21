@@ -1422,7 +1422,7 @@ module.exports.validateIncludeWorkOnWebsite = function (include) {
     );
 };
 
-module.exports.validateLastUpdateDate = function(value) {
+exports.validateLastUpdateDate = function(value) {
     it('Validate Last Update Date', function () {
         expect(pages.work.getLastUpdateDate()).toBe(value);
     });

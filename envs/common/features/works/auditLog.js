@@ -1,7 +1,6 @@
 'use strict';
 
 var random = require('../../../../helpers/random'),
-    moment = require('moment'),
     randomString = random.string.makeMemoizedGenerator(),
     fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
