@@ -71,6 +71,7 @@ if (pages.createDealContractPeriod === undefined) {
             attributeRightDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(7) label.control-label i"},
             preDefinedDateInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[name='endDateTypeDate'] input"},
             preDefinedDateMandatoryErrorMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[data-validation-class='endDateTypeDate'] i"},
+            preDefinedDateAttributeRightMandatoryErrorMessageEndRules: {css: "div.span2.attribute-two div i"},
             addEndRulesLink: {css: "a[data-ng-show='!activeContractPeriod.showEndRules && !isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
             endDateFieldButtonEndRules: {css: "div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button"},
             endDateDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
@@ -82,6 +83,7 @@ if (pages.createDealContractPeriod === undefined) {
             requirementDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             variableRightFieldButtonEndRules: {css: "div[data-ng-model='condition.right_value'] div.tg-dropdown-button"},
             variableRightDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
+            variableRightErrorMessageEndRules: {css: "div.span2.control-group.condition-right-type.ng-scope div i"},
             saveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
             doneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
             deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
@@ -418,20 +420,27 @@ if (pages.createDealContractPeriod === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).sendKeys(percent);
         },
 
-        selectTheRequirementEndRulesRandomValue: function () {
-            pages.createDealContractPeriod.elems.requirementFieldButtonEndRules.click();
-            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+
+        fillIntoTheAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).sendKeys(value);
+        },
+
+        selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ: function (i,j,index) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
+            browser.wait(ExpectedConditions.visibilityOf("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"));
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"))
                 .then(function (options) {
-                    var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    var randomNumber = index;
+                    var element = options[1];
+                    browser.actions().mouseMove(element).perform();
+                    browser.actions().click(element).perform();
                 });
         },
 
         selectTheRequirementEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             var desiredOption;
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j+2) +")) div[data-ng-model='condition.operator'] div.tg-dropdown-button"));
-            pages.createDealContractPeriod.elems.requirementFieldButtonEndRules.click();
-            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -492,6 +501,40 @@ if (pages.createDealContractPeriod === undefined) {
                         desiredOption.click();
                     }
                 });
+        },
+
+        selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            var desiredOption;
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        fillIntoTheAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).sendKeys(value);
+        },
+
+        checkTheVariableRightWarningMessageEndRules: function () {
+            pages.createDealContractPeriod.elems.variableRightErrorMessageEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Variable right warning message data tooltip value is  : " + promise);
+                expect(promise).toEqual("Variable Right is required.");
+            });
         },
 
         saveTheEndRules: function () {
@@ -678,8 +721,8 @@ if (pages.createDealContractPeriod === undefined) {
             pages.createDealContractPeriod.elems.withNoticeCheckBoxEndRules.click();
         },
 
-        clickOnTheWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ: function (i,j) {
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j+2) + ") div.pull-left.conditions input[data-ng-model='condition.notification']")).click();
+        clickOnTheWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ: function (i, j) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div.pull-left.conditions input[data-ng-model='condition.notification']")).click();
         },
 
 
@@ -711,6 +754,14 @@ if (pages.createDealContractPeriod === undefined) {
             pages.createDealContractPeriod.elems.preDefinedDateMandatoryErrorMessageEndRules.getAttribute("data-tooltip").
             then(function (promise) {
                 console.log("Pre defined date error message data tooltip text  is   : " + promise);
+                expect(promise).toEqual(error_message);
+            });
+        },
+
+        validateThePreDefinedDateAttributeRightFieldEndRulesIsRequiredWarning: function (error_message) {
+            pages.createDealContractPeriod.elems.preDefinedDateAttributeRightMandatoryErrorMessageEndRules.getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Pre defined date attribute right error message data tooltip text  is   : " + promise);
                 expect(promise).toEqual(error_message);
             });
         },

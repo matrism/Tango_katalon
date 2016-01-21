@@ -374,6 +374,12 @@ exports.checkAttributeLeftWarningMessageEndRules = function () {
     });
 };
 
+exports.checkVariableRightWarningMessageEndRules = function () {
+    it("Check the variable right warning message end rules ", function () {
+        pages.createDealContractPeriod.checkTheVariableRightWarningMessageEndRules();
+    });
+};
+
 exports.fillIntoAttributeLeftEndRules = function () {
     it("Fill into the attribute left end rules field ", function () {
         pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRules();
@@ -383,6 +389,12 @@ exports.fillIntoAttributeLeftEndRules = function () {
 exports.fillIntoAttributeLeftEndRulesRuleNumberIRowNumberJ = function (i, j) {
     it("Fill into the attribute left end rules rule number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRulesRuleNumberIRowNumberJ(i, j);
+    });
+};
+
+exports.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Fill into the attribute left end rules rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
     });
 };
 
@@ -398,9 +410,27 @@ exports.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ = function (
     });
 };
 
+exports.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ = function (i,j,index) {
+    it("Select the requirement end rules specific value by index rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(i,j,index);
+    });
+};
+
 exports.selectRightVariableEndRulesSpecificValue = function (value) {
     it("Select the right variable end rules specific value ", function () {
         pages.createDealContractPeriod.selectTheRightVariableEndRulesSpecificValue(value);
+    });
+};
+
+exports.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Select the right variable end rules specific value rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+    });
+};
+
+exports.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Fill into the attribute right end rules rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.fillIntoTheAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
     });
 };
 
@@ -621,6 +651,14 @@ exports.fillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI = function (i
         pages.createDealContractPeriod.fillIntoThePreDefinedDateFieldEndRulesSpecificDateRuleNumberI(i, specific_date);
     });
 };
+
+exports.validatePreDefinedDateFieldAttributeRightEndRulesIsRequiredWarning = function (error_message) {
+    it("Validate the pre defined date attribute right field  end  rules is required anc check the error message", function () {
+        expect(pages.createDealContractPeriod.elems.preDefinedDateAttributeRightMandatoryErrorMessageEndRules.isDisplayed()).toBeTruthy();
+        pages.createDealContractPeriod.validateThePreDefinedDateAttributeRightFieldEndRulesIsRequiredWarning(error_message);
+    });
+};
+
 
 exports.itAddAdvanceAssumptions = function () {
     describe("Add advance assumptions ", function () {
