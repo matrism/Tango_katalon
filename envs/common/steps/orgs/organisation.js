@@ -166,6 +166,7 @@ if (steps.organisation === undefined) {
             it("Verify That list work id is delivered", function () {
                 pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
                     hash.testVariables['work id'] = workNumber;
+                    hash.workNumber = workNumber;
                     expect(workNumber).toBeTruthy();
                 });
             });
