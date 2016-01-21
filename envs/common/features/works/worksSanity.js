@@ -10,7 +10,11 @@ var leftPad = require('left-pad'),
     bind = fnutils.bind,
     using = fnutils.using;
 
-exports.commonFeatureTags = ['works', 'sanity'];
+exports.commonFeatureTags = [
+    'worksSanity',
+    'works',
+    'sanity'
+];
 
 exports.beforeFeature = [
         [steps.login.itLogin],
@@ -20,19 +24,19 @@ exports.feature = [
     {
         name: 'Create 4 persons to use as creators',
         tags: [
-            'works-sanity-create-persons',
-            'works-sanity-create-work',
-            'works-sanity-validate-work',
-            'works-sanity-create-composite-works',
-            'works-sanity-validate-composite-works',
-            'works-sanity-create-cos',
-            'works-sanity-validate-cos',
-            'works-sanity-create-cos-with-shell',
-            'works-sanity-validate-cos-with-shell',
-            'works-sanity-create-med',
-            'works-sanity-validate-med',
-            'works-sanity-create-med-with-shell',
-            'works-sanity-validate-med-with-shell',
+            'worksSanityCreatePersons',
+            'worksSanityCreateWork',
+            'worksSanityValidateWork',
+            'worksSanityCreateCompositeWorks',
+            'worksSanityValidateCompositeWorks',
+            'worksSanityCreateCos',
+            'worksSanityValidateCos',
+            'worksSanityCreateCosWithShell',
+            'worksSanityValidateCosWithShell',
+            'worksSanityCreateMed',
+            'worksSanityValidateMed',
+            'worksSanityCreateMedWithShell',
+            'worksSanityValidateMedWithShell',
             'worksSanityCreateLibraryWork',
             'worksSanityValidateLibraryWork',
             'worksSanityCreateCommercialAlbum',
@@ -46,18 +50,18 @@ exports.feature = [
             'worksSanitySearchForAlbumsByLabel',
             'worksSanitySearchForAlbumsByTitlePlusArtist',
             'worksSanitySearchForAlbumsByLibraryPlusTitle',
-            'works-sanity-search-for-works',
-            'works-sanity-search-for-works-by-id',
-            'works-sanity-search-for-works-by-song-code',
-            'works-sanity-search-for-works-by-primary-title',
-            'works-sanity-search-for-works-by-alternate-title',
-            'works-sanity-search-for-works-by-creator-presentation-name',
-            'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
-            'works-sanity-scope-delivery',
-            'works-sanity-generate-work-rights',
-            'works-sanity-validate-work-rights',
-            'works-sanity-validate-registration-activity',
-            'works-sanity-validate-cwr',
+            'worksSanitySearchForWorks',
+            'worksSanitySearchForWorksById',
+            'worksSanitySearchForWorksBySongCode',
+            'worksSanitySearchForWorksByPrimaryTitle',
+            'worksSanitySearchForWorksByAlternateTitle',
+            'worksSanitySearchForWorksByCreatorPresentationName',
+            'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
+            'worksSanityScopeDelivery',
+            'worksSanityGenerateWorkRights',
+            'worksSanityValidateWorkRights',
+            'worksSanityValidateRegistrationActivity',
+            'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
         steps: function () {
@@ -86,8 +90,8 @@ exports.feature = [
     {
         name: 'Create work with 2 creators',
         tags: [
-            'works-sanity-create-work',
-            'works-sanity-validate-work',
+            'worksSanityCreateWork',
+            'worksSanityValidateWork',
             'worksSanityCreateCommercialAlbum',
             'worksSanityValidateCommercialAlbum',
             'worksSanityCreateLibraryAlbum',
@@ -99,18 +103,18 @@ exports.feature = [
             'worksSanitySearchForAlbumsByLabel',
             'worksSanitySearchForAlbumsByTitlePlusArtist',
             'worksSanitySearchForAlbumsByLibraryPlusTitle',
-            'works-sanity-search-for-works',
-            'works-sanity-search-for-works-by-id',
-            'works-sanity-search-for-works-by-song-code',
-            'works-sanity-search-for-works-by-primary-title',
-            'works-sanity-search-for-works-by-alternate-title',
-            'works-sanity-search-for-works-by-creator-presentation-name',
-            'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
-            'works-sanity-scope-delivery',
-            'works-sanity-generate-work-rights',
-            'works-sanity-validate-work-rights',
-            'works-sanity-validate-registration-activity',
-            'works-sanity-validate-cwr',
+            'worksSanitySearchForWorks',
+            'worksSanitySearchForWorksById',
+            'worksSanitySearchForWorksBySongCode',
+            'worksSanitySearchForWorksByPrimaryTitle',
+            'worksSanitySearchForWorksByAlternateTitle',
+            'worksSanitySearchForWorksByCreatorPresentationName',
+            'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
+            'worksSanityScopeDelivery',
+            'worksSanityGenerateWorkRights',
+            'worksSanityValidateWorkRights',
+            'worksSanityValidateRegistrationActivity',
+            'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
         steps: [
@@ -187,7 +191,7 @@ exports.feature = [
     {
         name: 'Validate created work data',
         tags: [
-            'works-sanity-validate-work',
+            'worksSanityValidateWork',
         ],
         steps: [
             [steps.base.useEntityDataSlot, ['work', 'mainWork']],
@@ -257,20 +261,20 @@ exports.feature = [
     {
         name: 'Create 2 basic works to use as components',
         tags: [
-            'works-sanity-create-component-works',
-            'works-sanity-create-composite-works',
-            'works-sanity-validate-composite-works',
-            'works-sanity-create-cos',
-            'works-sanity-validate-cos',
-            'works-sanity-create-med',
-            'works-sanity-validate-med',
-            'works-sanity-search-for-works',
-            'works-sanity-search-for-works-by-id',
-            'works-sanity-search-for-works-by-song-code',
-            'works-sanity-search-for-works-by-primary-title',
-            'works-sanity-search-for-works-by-alternate-title',
-            'works-sanity-search-for-works-by-creator-presentation-name',
-            'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
+            'worksSanityCreateComponentWorks',
+            'worksSanityCreateCompositeWorks',
+            'worksSanityValidateCompositeWorks',
+            'worksSanityCreateCos',
+            'worksSanityValidateCos',
+            'worksSanityCreateMed',
+            'worksSanityValidateMed',
+            'worksSanitySearchForWorks',
+            'worksSanitySearchForWorksById',
+            'worksSanitySearchForWorksBySongCode',
+            'worksSanitySearchForWorksByPrimaryTitle',
+            'worksSanitySearchForWorksByAlternateTitle',
+            'worksSanitySearchForWorksByCreatorPresentationName',
+            'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
         ],
         steps: [
             [function () {
@@ -298,17 +302,17 @@ exports.feature = [
     {
         name: 'Create a Composite of Samples',
         tags: [
-            'works-sanity-create-cos',
-            'works-sanity-validate-cos',
-            'works-sanity-create-composite-works',
-            'works-sanity-validate-composite-works',
-            'works-sanity-search-for-works',
-            'works-sanity-search-for-works-by-id',
-            'works-sanity-search-for-works-by-song-code',
-            'works-sanity-search-for-works-by-primary-title',
-            'works-sanity-search-for-works-by-alternate-title',
-            'works-sanity-search-for-works-by-creator-presentation-name',
-            'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
+            'worksSanityCreateCos',
+            'worksSanityValidateCos',
+            'worksSanityCreateCompositeWorks',
+            'worksSanityValidateCompositeWorks',
+            'worksSanitySearchForWorks',
+            'worksSanitySearchForWorksById',
+            'worksSanitySearchForWorksBySongCode',
+            'worksSanitySearchForWorksByPrimaryTitle',
+            'worksSanitySearchForWorksByAlternateTitle',
+            'worksSanitySearchForWorksByCreatorPresentationName',
+            'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
         ],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'cosWork');
@@ -348,8 +352,8 @@ exports.feature = [
     {
         name: 'Validate created Composite of Samples',
         tags: [
-            'works-sanity-validate-cos',
-            'works-sanity-validate-composite-works',
+            'worksSanityValidateCos',
+            'worksSanityValidateCompositeWorks',
         ],
         steps: [
             [steps.base.useEntityDataSlot, ['work', 'cosWork']],
@@ -367,10 +371,10 @@ exports.feature = [
     {
         name: 'Create a Medley',
         tags: [
-            'works-sanity-create-med',
-            'works-sanity-validate-med',
-            'works-sanity-create-composite-works',
-            'works-sanity-validate-composite-works',
+            'worksSanityCreateMed',
+            'worksSanityValidateMed',
+            'worksSanityCreateCompositeWorks',
+            'worksSanityValidateCompositeWorks',
         ],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'medWork');
@@ -413,8 +417,8 @@ exports.feature = [
     {
         name: 'Validate created Medley',
         tags: [
-            'works-sanity-validate-med',
-            'works-sanity-validate-composite-works',
+            'worksSanityValidateMed',
+            'worksSanityValidateCompositeWorks',
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'medWork');
@@ -743,10 +747,10 @@ exports.feature = [
     {
         name: 'Create a Composite of Samples with shell works',
         tags: [
-            'works-sanity-create-cos-with-shell',
-            'works-sanity-validate-cos-with-shell',
-            'works-sanity-create-composite-works',
-            'works-sanity-validate-composite-works',
+            'worksSanityCreateCosWithShell',
+            'worksSanityValidateCosWithShell',
+            'worksSanityCreateCompositeWorks',
+            'worksSanityValidateCompositeWorks',
         ],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'cosShellWork');
@@ -777,8 +781,8 @@ exports.feature = [
     {
         name: 'Validate created Composite of Samples with shell works',
         tags: [
-            'works-sanity-validate-cos-with-shell',
-            'works-sanity-validate-composite-works-with-shell',
+            'worksSanityValidateCosWithShell',
+            'worksSanityValidateCompositeWorksWithShell',
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'cosShellWork');
@@ -797,10 +801,10 @@ exports.feature = [
     {
         name: 'Create a Medley with shell works',
         tags: [
-            'works-sanity-create-med-with-shell',
-            'works-sanity-validate-med-with-shell',
-            'works-sanity-create-composite-works',
-            'works-sanity-validate-composite-works',
+            'worksSanityCreateMedWithShell',
+            'worksSanityValidateMedWithShell',
+            'worksSanityCreateCompositeWorks',
+            'worksSanityValidateCompositeWorks',
         ],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 'medShellWork');
@@ -826,8 +830,8 @@ exports.feature = [
     {
         name: 'Validate created Medley with shell works',
         tags: [
-            'works-sanity-validate-med-with-shell',
-            'works-sanity-validate-composite-works-with-shell',
+            'worksSanityValidateMedWithShell',
+            'worksSanityValidateCompositeWorksWithShell',
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'medShellWork');
@@ -1010,8 +1014,8 @@ exports.feature = [
     {
         name: 'Search for 2 previously created works by work ID',
         tags: [
-            'works-sanity-search-for-works-by-id',
-            'works-sanity-search-for-works',
+            'worksSanitySearchForWorksById',
+            'worksSanitySearchForWorks',
         ],
         steps: function () {
             ['mainWork', 'cosWork'].forEach(function (workSlotId) {
@@ -1039,8 +1043,8 @@ exports.feature = [
     {
         name: 'Search for 2 previously created works by song code',
         tags: [
-            'works-sanity-search-for-works-by-song-code',
-            'works-sanity-search-for-works',
+            'worksSanitySearchForWorksBySongCode',
+            'worksSanitySearchForWorks',
         ],
         steps: function () {
             ['mainWork', 'cosWork'].forEach(function (workSlotId) {
@@ -1068,8 +1072,8 @@ exports.feature = [
     {
         name: 'Search for 2 previously created works by primary title',
         tags: [
-            'works-sanity-search-for-works-by-primary-title',
-            'works-sanity-search-for-works',
+            'worksSanitySearchForWorksByPrimaryTitle',
+            'worksSanitySearchForWorks',
         ],
         steps: function () {
             ['mainWork', 'cosWork'].forEach(function (workSlotId) {
@@ -1097,8 +1101,8 @@ exports.feature = [
     {
         name: 'Search for 2 previously created works by alternate title',
         tags: [
-            'works-sanity-search-for-works-by-alternate-title',
-            'works-sanity-search-for-works',
+            'worksSanitySearchForWorksByAlternateTitle',
+            'worksSanitySearchForWorks',
         ],
         steps: function () {
             ['mainWork', 'cosWork'].forEach(function (workSlotId) {
@@ -1126,8 +1130,8 @@ exports.feature = [
     {
         name: 'Search for 2 previously created works by creator presentation name',
         tags: [
-            'works-sanity-search-for-works-by-creator-presentation-name',
-            'works-sanity-search-for-works',
+            'worksSanitySearchForWorksByCreatorPresentationName',
+            'worksSanitySearchForWorks',
         ],
         steps: function () {
             ['mainWork', 'cosWork'].forEach(function (workSlotId) {
@@ -1155,8 +1159,8 @@ exports.feature = [
     {
         name: 'Search for 2 previously created works by primary title + creator presentation name',
         tags: [
-            'works-sanity-search-for-works-by-primary-title-and-creator-presentation-name',
-            'works-sanity-search-for-works',
+            'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
+            'worksSanitySearchForWorks',
             'broken',
             'unstable'
         ],
@@ -1202,12 +1206,12 @@ exports.feature = [
     {
         name: 'Create deal with 2 scopes and publisher shares',
         tags: [
-            'works-sanity-create-deal',
-            'works-sanity-scope-delivery',
-            'works-sanity-generate-work-rights',
-            'works-sanity-validate-work-rights',
-            'works-sanity-validate-registration-activity',
-            'works-sanity-validate-cwr',
+            'worksSanityCreateDeal',
+            'worksSanityScopeDelivery',
+            'worksSanityGenerateWorkRights',
+            'worksSanityValidateWorkRights',
+            'worksSanityValidateRegistrationActivity',
+            'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
         steps: function () {
@@ -1286,11 +1290,11 @@ exports.feature = [
     {
         name: 'Deliver scopes to previously created work',
         tags: [
-            'works-sanity-scope-delivery',
-            'works-sanity-generate-work-rights',
-            'works-sanity-validate-work-rights',
-            'works-sanity-validate-registration-activity',
-            'works-sanity-validate-cwr',
+            'worksSanityScopeDelivery',
+            'worksSanityGenerateWorkRights',
+            'worksSanityValidateWorkRights',
+            'worksSanityValidateRegistrationActivity',
+            'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
         steps: function () {
@@ -1330,9 +1334,9 @@ exports.feature = [
     {
         name: 'Generate work rights',
         tags: [
-            'works-sanity-generate-work-rights',
-            'works-sanity-validate-registration-activity',
-            'works-sanity-validate-cwr',
+            'worksSanityGenerateWorkRights',
+            'worksSanityValidateRegistrationActivity',
+            'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
         steps: function () {
@@ -1346,7 +1350,7 @@ exports.feature = [
     {
         name: 'Validate work rights',
         tags: [
-            'works-sanity-validate-work-rights'
+            'worksSanityValidateWorkRights'
         ],
         steps: function () {
             var creatorRightsData = [
@@ -1471,7 +1475,7 @@ exports.feature = [
         name: 'Validate Registration Activity',
         tags: [
             'TAT-400',
-            'works-sanity-validate-registration-activity',
+            'worksSanityValidateRegistrationActivity',
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
@@ -1502,7 +1506,7 @@ exports.feature = [
         name: 'Validate CWR',
         tags: [
             'TAT-381',
-            'works-sanity-validate-cwr',
+            'worksSanityValidateCwr',
         ],
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
