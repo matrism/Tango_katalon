@@ -63,6 +63,7 @@ if (pages.editDealRtp === undefined) {
         },
 
         editTheRtpRetentionArea: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editTheRtpRetentionAreaField));
             browser.actions().mouseMove(pages.editDealRtp.elems.editTheRtpRetentionAreaField).perform();
             pages.editDealRtp.elems.editTheRtpRetentionIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField));
@@ -74,17 +75,21 @@ if (pages.editDealRtp === undefined) {
         },
 
         editDeleteTheAddAnotherAcquisitionForm: function () {
-            pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon.click();
+            browser.actions().click(pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon).perform();
+            //pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon.click();
             pages.editDealRtp.waitForAjax();
-            pages.editDealRtp.elems.confirmDeleteModalDialog.click();
+            browser.actions().click(pages.editDealRtp.elems.confirmDeleteModalDialog).perform();
+            //pages.editDealRtp.elems.confirmDeleteModalDialog.click();
             pages.editDealRtp.waitForAjax();
         },
 
         editDeleteTheRtpRetentionFromAcquisitionForm: function () {
-            pages.editDealRtp.elems.removeTheRtpRetention.click();
+            browser.actions().click(pages.editDealRtp.elems.removeTheRtpRetention).perform();
+            //pages.editDealRtp.elems.removeTheRtpRetention.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.modalDialogDelete));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealRtp.elems.confirmDeleteModalDialog));
-            pages.editDealRtp.elems.confirmDeleteModalDialog.click();
+            browser.actions().click(pages.editDealRtp.elems.confirmDeleteModalDialog).perform();
+            //pages.editDealRtp.elems.confirmDeleteModalDialog.click();
             pages.editDealRtp.waitForAjax();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealRtp.elems.modalDialogDelete));
         },
