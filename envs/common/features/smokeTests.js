@@ -158,7 +158,14 @@ exports.feature = [
     ,
     {
         name: 'CR file downloads',
-        tags: ['orgs', 'crFileDownloads'],
+
+        tags: [
+            'crFileDownloadsSmoke',
+            'crFileDownloads',
+            'cr',
+            'orgs'
+        ],
+
         steps: function () {
             steps.base.clearDownloadsDirectory();
             steps.searchSection.accessSavedOrganisationByName('BMI');
