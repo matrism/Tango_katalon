@@ -6,7 +6,12 @@ exports.beforeFeature = [
     [steps.login.itLogin]
 ];
 
-exports.commonFeatureTags = ['works', 'workRankedSearchResults', 'smoke'];
+exports.commonFeatureTags = [
+    'rankedWorkSearchResultsRegression',
+    'worksSearch',
+    'works',
+    'regression'
+];
 
 exports.feature = [
     {
