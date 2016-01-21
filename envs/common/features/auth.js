@@ -3,6 +3,7 @@
 exports.commonFeatureTags = [
     'broken',
     'authSmoke',
+    'auth',
     'smoke'
 ];
 
