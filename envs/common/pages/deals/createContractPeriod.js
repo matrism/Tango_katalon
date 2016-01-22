@@ -427,11 +427,11 @@ if (pages.createDealContractPeriod === undefined) {
 
         selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ: function (i,j,index) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
-            browser.wait(ExpectedConditions.visibilityOf("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"));
-            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(9) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("body>div:nth-child(9) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = index;
-                    var element = options[1];
+                    var element = options[randomNumber];
                     browser.actions().mouseMove(element).perform();
                     browser.actions().click(element).perform();
                 });
@@ -440,7 +440,8 @@ if (pages.createDealContractPeriod === undefined) {
         selectTheRequirementEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             var desiredOption;
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
-            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(9) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("body>div:nth-child(9) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {

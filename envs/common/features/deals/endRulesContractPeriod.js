@@ -12,7 +12,7 @@ exports.feature = [
         tags: ["endRules"],
         steps: function () {
             var today = new Date();
-            var currentDate = today.getFullYear() + "-" + today.getMonth()+ 1 +"-"+ today.getDate();
+            var currentDate = today.getFullYear() + "-" + today.getMonth() + 1 + "-" + today.getDate();
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -67,7 +67,7 @@ exports.feature = [
             steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
             steps.createDealContractPeriod.checkWithNoticeDataTooltipTextEndRules();
             steps.createDealContractPeriod.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1, 1);
-            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1,1,0);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
             steps.createDealContractPeriod.checkVariableRightWarningMessageEndRules();
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Pre-Defined Date");
             steps.createDealContractPeriod.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "123");
@@ -75,30 +75,45 @@ exports.feature = [
             steps.createDealContractPeriod.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, currentDate);
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
-
-            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ(1,1,"=");
-            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ(1,1,">");
-            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ(1,1,"< or =");
-            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ(1,1,"> or =");
-
-            //steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1,1,1);
-            //steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1,1,2);
-            //steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1,1,3);
-            //steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1,1,4);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 1);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 2);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 3);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
 
 
             steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
             steps.createDealContractPeriod.checkAttributeLeftWarningMessageEndRules();
             steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
             steps.createDealContractPeriod.checkWithNoticeDataTooltipTextEndRules();
-            steps.createDealContractPeriod.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1, 1);
-            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ(1,1,"<");
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
             steps.createDealContractPeriod.checkVariableRightWarningMessageEndRules();
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Pre-Defined Date");
             steps.createDealContractPeriod.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "098");
             steps.createDealContractPeriod.validatePreDefinedDateFieldAttributeRightEndRulesIsRequiredWarning("Invalid date.");
             steps.createDealContractPeriod.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, currentDate);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 1);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 2);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 3);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
 
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
+            steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
+            steps.createDealContractPeriod.checkWithNoticeDataTooltipTextEndRules();
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
+            steps.createDealContractPeriod.checkVariableRightWarningMessageEndRules();
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Pre-Defined Date");
+            steps.createDealContractPeriod.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "444");
+            steps.createDealContractPeriod.validatePreDefinedDateFieldAttributeRightEndRulesIsRequiredWarning("Invalid date.");
+            steps.createDealContractPeriod.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, currentDate);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 1);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 2);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 3);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
 
 
 
