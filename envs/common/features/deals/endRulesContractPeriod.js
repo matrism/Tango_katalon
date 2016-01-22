@@ -115,6 +115,11 @@ exports.feature = [
             steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 3);
             steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
 
+            steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(2, "AND");
+            steps.createDealContractPeriod.clickOnAddNewRuleEndRulesAddedRuleNumberI(1);
+            steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(1, "WHEN");
+            steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(2, "AND");
+            steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(3, "AND");
 
 
             //steps.deal.itContinueToNextPage();

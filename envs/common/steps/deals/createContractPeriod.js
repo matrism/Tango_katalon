@@ -410,9 +410,9 @@ exports.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ = function (
     });
 };
 
-exports.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ = function (i,j,index) {
+exports.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ = function (i, j, index) {
     it("Select the requirement end rules specific value by index rule number " + i + " row number " + j, function () {
-        pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(i,j,index);
+        pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(i, j, index);
     });
 };
 
@@ -656,6 +656,18 @@ exports.validatePreDefinedDateFieldAttributeRightEndRulesIsRequiredWarning = fun
     it("Validate the pre defined date attribute right field  end  rules is required anc check the error message", function () {
         expect(pages.createDealContractPeriod.elems.preDefinedDateAttributeRightMandatoryErrorMessageEndRules.isDisplayed()).toBeTruthy();
         pages.createDealContractPeriod.validateThePreDefinedDateAttributeRightFieldEndRulesIsRequiredWarning(error_message);
+    });
+};
+
+exports.clickOnAddNewRuleEndRulesAddedRuleNumberI = function (i) {
+    it("Click on the add new rule end rules added rule number " + i, function () {
+        pages.createDealContractPeriod.clickOnTheAddNewRuleEndRulesAddedRuleNumberI(i);
+    });
+};
+
+exports.checkTextRuleWhenOrAndEndRulesRuleNumberI = function(i, name){
+    it("Check the text rule when or and end rules rule number " + i, function(){
+       pages.createDealContractPeriod.checkTheTextRuleWhenOrAndEndRulesRuleNumberI(i, name);
     });
 };
 

@@ -425,7 +425,7 @@ if (pages.createDealContractPeriod === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).sendKeys(value);
         },
 
-        selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ: function (i,j,index) {
+        selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ: function (i, j, index) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(9) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
             browser.driver.findElements(By.css("body>div:nth-child(9) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
@@ -793,6 +793,18 @@ if (pages.createDealContractPeriod === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 })
+        },
+
+        clickOnTheAddNewRuleEndRulesAddedRuleNumberI: function(i){
+            browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i+2) + ") a[data-ng-click='addEndRuleCondition(form.show.endRules.containerId, form.show.endRules.type, rule.id, $index)'] i")).click();
+        },
+
+        checkTheTextRuleWhenOrAndEndRulesRuleNumberI: function (i,name) {
+            browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i+2) + ") div.pull-left.condition-label")).getText().
+            then(function (promise) {
+                console.log("The rext rule when or and end rules for rule number: " +i + " is: " + promise);
+                expect(promise).toEqual(name);
+            });
         }
 
 
