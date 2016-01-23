@@ -309,6 +309,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnTheAddEndRulesToContractPeriod: function () {
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.addEndRulesLink);
             pages.createDealContractPeriod.elems.addEndRulesLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.endDateFieldButtonEndRules));
         },
