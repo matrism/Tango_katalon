@@ -191,7 +191,7 @@ exports.feature = [
         tags: ["header_signing_last_update"],
         steps: function () {
             var today = new Date();
-            var currentDate = today.getFullYear() + "-" + today.getMonth()+ 1 +"-"+ today.getDate();
+            var currentDate = today.getFullYear() + "-" + today.getMonth() + 1 + "-" + today.getDate();
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -210,7 +210,7 @@ exports.feature = [
             steps.headerDeal.checkSigningTerritoryValue("Austria");
             steps.headerDeal.checkLastUpdateText();
             steps.headerDeal.checkLastUpdateValue(currentDate);
-            steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
+            //steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
 
         }
     },

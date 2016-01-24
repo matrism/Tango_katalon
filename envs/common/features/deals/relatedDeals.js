@@ -262,177 +262,177 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
-            steps.relatedDeal.checkNoRelatedDealsDefined();
-            steps.relatedDeal.clickOnAddRelatedDealLink();
-
-            steps.base.focusOnNewOpenedTab(0);
-            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
-            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
-            steps.relatedDeal.clickOnSaveRelatedDeal();
-
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
-
-
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
-            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editScopeArea();
-            steps.editDealScope.editSpecificScopeType("Purchase");
-            steps.editDealScope.editSaveScopeChanges();
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.deal.refreshThePage();
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
-
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Purchase", 1);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
-
-
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToDealSummaryGeneralTabDetails();
-            steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            steps.editDealGeneral.editExistingContractingParty("warner");
-            steps.editDealGeneral.editExistingContractingParty("bmi");
-            steps.editDealGeneral.editExistingContractingParty("warner");
-            steps.editDealGeneral.editExistingContractingParty("ascap");
-            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
-
-            steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
-            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editScopeArea();
-            steps.editDealScope.editSpecificScopeType("Finder");
-            steps.editDealScope.editSaveScopeChanges();
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.deal.refreshThePage();
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
-
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
-
-
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
-            steps.base.focusOnNewOpenedTab(2);
-
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
-            steps.deal.itContinueToNextPage();
-            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
-            steps.createDealScope.addSpecificScope("Finder");
-            steps.deal.itContinueToNextPage();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
-            steps.relatedDeal.clickOnAddRelatedDealLink();
-
-            steps.base.focusOnNewOpenedTab(2);
-            steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
-            steps.relatedDeal.selectRandomValueFromRelationshipDropDown(2);
-            steps.relatedDeal.clickOnSaveRelatedDeal();
-
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
-
-
-
-            steps.base.focusOnNewOpenedTab(2);
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToDealSummaryGeneralTabDetails();
-            steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            steps.editDealGeneral.editContractExecutionDate();
-            steps.editDealGeneral.editExistingContractingParty("warner");
-            steps.editDealGeneral.editExistingContractingParty("bmi");
-            steps.editDealGeneral.editExistingContractingParty("warner");
-            steps.editDealGeneral.editExistingContractingParty("ascap");
-            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
-
-            steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
-            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Audit / Settlement", "Worldwide");
-            steps.editDealScope.editSaveAllChanges();
-
-            steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Assignment", "Worldwide");
-            steps.editDealScope.editSaveAllChanges();
-
-            steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Co-Publishing", "Worldwide");
-            steps.editDealScope.editSaveAllChanges();
-
-            steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Sub-Publishing", "Worldwide");
-            steps.editDealScope.editSaveAllChanges();
-
-            steps.deal.goToRightsTermPeriodsTermsTabDetails();
-            steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
-            steps.editDealRtp.editFillRetentionDescriptionFromAcquisition("Retention test");
-            steps.editDealRtp.editSelectSpecificScopeNumberIRtpAcquisition(1);
-            steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
-            steps.editDealRtp.saveRetentionFromAcquisition();
-
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.deal.refreshThePage();
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
-
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / SettlementCo-PublishingAssignmentFinderSub-Publishing", 1);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 1);
-
-            steps.base.focusOnNewOpenedTab(2);
-            steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToFinderDealTermsTabDetails();
-            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
-            steps.finderDeal.editTermsByContractPeriodFinderDeal();
-            steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
-            steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
-            steps.finderDeal.fillFindersRecoupmentResponsability();
-            steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
-            steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
-            steps.finderDeal.fillAggregateMaximumAdvancesPayable();
-            steps.finderDeal.fillAggregateMaximumOnAdvancesField();
-            steps.finderDeal.fillFindersOwnershipField();
-            steps.finderDeal.fillWmcsOwnershipField();
-            steps.finderDeal.selectRandomCreatorFoundSubmissionField();
-            steps.finderDeal.fillSubmissionDateField();
-            steps.finderDeal.selectRandomWcmDecisionDropDown();
-            steps.finderDeal.selectRandomValueFromFoundDealDropDown();
-            steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
-            steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
-
-            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
-            steps.finderDeal.clickOnFoundDealTermsTitle();
-            steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
-            steps.finderDeal.validateMaximumFoundAgreementsWithPreApprovalValue();
-            steps.finderDeal.validateFindersRecoupmentResponsabilityValue();
-            steps.finderDeal.validateNonSignedArtistMaximumAdvancesPayableValue();
-            steps.finderDeal.validateSignedArtistMaximumAdvancesPayableValue();
-            steps.finderDeal.validateAggregateMaximumAdvancesPayableValue();
-
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.deal.refreshThePage();
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
-
-            steps.relatedDeal.clickOnContractingPartyRelatedDealLink(1);
-            steps.base.focusOnNewOpenedTab(3);
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToRelatedDealsGeneralTabDetails();
+            //steps.relatedDeal.checkNoRelatedDealsDefined();
+            //steps.relatedDeal.clickOnAddRelatedDealLink();
+            //
+            //steps.base.focusOnNewOpenedTab(0);
+            //steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
+            //steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
+            //steps.relatedDeal.clickOnSaveRelatedDeal();
+            //
+            //steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
+            //steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            //steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+            //
+            //
+            //steps.base.focusOnNewOpenedTab(0);
+            //steps.deal.goToTermsDealTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editScopeArea();
+            //steps.editDealScope.editSpecificScopeType("Purchase");
+            //steps.editDealScope.editSaveScopeChanges();
+            //
+            //steps.base.focusOnNewOpenedTab(1);
+            //steps.deal.refreshThePage();
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToRelatedDealsGeneralTabDetails();
+            //
+            //steps.relatedDeal.checkContractTypeValueRowNumberI("Purchase", 1);
+            //steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            //steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+            //
+            //
+            //steps.base.focusOnNewOpenedTab(0);
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToDealSummaryGeneralTabDetails();
+            //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            //steps.editDealGeneral.editExistingContractingParty("warner");
+            //steps.editDealGeneral.editExistingContractingParty("bmi");
+            //steps.editDealGeneral.editExistingContractingParty("warner");
+            //steps.editDealGeneral.editExistingContractingParty("ascap");
+            //steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+            //
+            //steps.deal.goToTermsDealTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editScopeArea();
+            //steps.editDealScope.editSpecificScopeType("Finder");
+            //steps.editDealScope.editSaveScopeChanges();
+            //
+            //steps.base.focusOnNewOpenedTab(1);
+            //steps.deal.refreshThePage();
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToRelatedDealsGeneralTabDetails();
+            //
+            //steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
+            //steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            //steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+            //
+            //
+            //steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            //steps.base.focusOnNewOpenedTab(2);
+            //
+            //steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            //steps.deal.itContinueToNextPage();
+            //steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            //steps.createDealScope.addSpecificScope("Finder");
+            //steps.deal.itContinueToNextPage();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
+            //
+            //steps.base.focusOnNewOpenedTab(1);
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToRelatedDealsGeneralTabDetails();
+            //steps.relatedDeal.clickOnAddRelatedDealLink();
+            //
+            //steps.base.focusOnNewOpenedTab(2);
+            //steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
+            //steps.relatedDeal.selectRandomValueFromRelationshipDropDown(2);
+            //steps.relatedDeal.clickOnSaveRelatedDeal();
+            //
+            //steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
+            //steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            //steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+            //
+            //
+            //
+            //steps.base.focusOnNewOpenedTab(2);
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToDealSummaryGeneralTabDetails();
+            //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
+            //steps.editDealGeneral.editContractExecutionDate();
+            //steps.editDealGeneral.editExistingContractingParty("warner");
+            //steps.editDealGeneral.editExistingContractingParty("bmi");
+            //steps.editDealGeneral.editExistingContractingParty("warner");
+            //steps.editDealGeneral.editExistingContractingParty("ascap");
+            //steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
+            //
+            //steps.deal.goToTermsDealTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            //steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Audit / Settlement", "Worldwide");
+            //steps.editDealScope.editSaveAllChanges();
+            //
+            //steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Assignment", "Worldwide");
+            //steps.editDealScope.editSaveAllChanges();
+            //
+            //steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Co-Publishing", "Worldwide");
+            //steps.editDealScope.editSaveAllChanges();
+            //
+            //steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Sub-Publishing", "Worldwide");
+            //steps.editDealScope.editSaveAllChanges();
+            //
+            //steps.deal.goToRightsTermPeriodsTermsTabDetails();
+            //steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
+            //steps.editDealRtp.editFillRetentionDescriptionFromAcquisition("Retention test");
+            //steps.editDealRtp.editSelectSpecificScopeNumberIRtpAcquisition(1);
+            //steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
+            //steps.editDealRtp.saveRetentionFromAcquisition();
+            //
+            //
+            //steps.base.focusOnNewOpenedTab(1);
+            //steps.deal.refreshThePage();
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToRelatedDealsGeneralTabDetails();
+            //
+            //steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / SettlementCo-PublishingAssignmentFinderSub-Publishing", 1);
+            //steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
+            //steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 1);
+            //
+            //steps.base.focusOnNewOpenedTab(2);
+            //steps.deal.goToTermsDealTabDetails();
+            //steps.deal.goToFinderDealTermsTabDetails();
+            //steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
+            //steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
+            //steps.finderDeal.fillFindersRecoupmentResponsability();
+            //steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
+            //steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
+            //steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            //steps.finderDeal.fillAggregateMaximumOnAdvancesField();
+            //steps.finderDeal.fillFindersOwnershipField();
+            //steps.finderDeal.fillWmcsOwnershipField();
+            //steps.finderDeal.selectRandomCreatorFoundSubmissionField();
+            //steps.finderDeal.fillSubmissionDateField();
+            //steps.finderDeal.selectRandomWcmDecisionDropDown();
+            //steps.finderDeal.selectRandomValueFromFoundDealDropDown();
+            //steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
+            //steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
+            //
+            //steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.clickOnFoundDealTermsTitle();
+            //steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
+            //steps.finderDeal.validateMaximumFoundAgreementsWithPreApprovalValue();
+            //steps.finderDeal.validateFindersRecoupmentResponsabilityValue();
+            //steps.finderDeal.validateNonSignedArtistMaximumAdvancesPayableValue();
+            //steps.finderDeal.validateSignedArtistMaximumAdvancesPayableValue();
+            //steps.finderDeal.validateAggregateMaximumAdvancesPayableValue();
+            //
+            //
+            //steps.base.focusOnNewOpenedTab(1);
+            //steps.deal.refreshThePage();
+            //steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToRelatedDealsGeneralTabDetails();
+            //
+            //steps.relatedDeal.clickOnContractingPartyRelatedDealLink(1);
+            //steps.base.focusOnNewOpenedTab(3);
 
 
         }
