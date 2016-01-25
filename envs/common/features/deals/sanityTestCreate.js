@@ -66,7 +66,7 @@ exports.feature = [
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
             steps.base.scrollIntoView("Save end rules", pages.createDealContractPeriod.elems.saveButtonEndRules);
-            steps.createDealContractPeriod.saveEndRules();
+            steps.createDealContractPeriod.saveEndRulesForm();
             steps.base.scrollIntoView("Mdrc", pages.createDealContractPeriod.elems.addMdrcLink);
             steps.createDealContractPeriod.itAddIncompleteMdrcContractPeriod();
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);
@@ -77,7 +77,7 @@ exports.feature = [
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
             steps.base.scrollIntoView("Save end rules", pages.createDealContractPeriod.elems.saveButtonEndRules);
-            steps.createDealContractPeriod.saveEndRules();
+            steps.createDealContractPeriod.saveEndRulesForm();
             steps.base.scrollIntoView("Mdrc", pages.createDealContractPeriod.elems.addMdrcLink);
             steps.createDealContractPeriod.itAddDeemedCompleteMdrcContractPeriod();
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);
@@ -88,7 +88,7 @@ exports.feature = [
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
             steps.base.scrollIntoView("Save end rules", pages.createDealContractPeriod.elems.saveButtonEndRules);
-            steps.createDealContractPeriod.saveEndRules();
+            steps.createDealContractPeriod.saveEndRulesForm();
             steps.base.scrollIntoView("Mdrc", pages.createDealContractPeriod.elems.addMdrcLink);
             steps.createDealContractPeriod.itAddCompleteMdrcContractPeriod();
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);
@@ -99,7 +99,7 @@ exports.feature = [
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
             steps.base.scrollIntoView("Save end rules", pages.createDealContractPeriod.elems.saveButtonEndRules);
-            steps.createDealContractPeriod.saveEndRules();
+            steps.createDealContractPeriod.saveEndRulesForm();
             steps.base.scrollIntoView("Mdrc", pages.createDealContractPeriod.elems.addMdrcLink);
             steps.createDealContractPeriod.itAddIncompleteMdrcContractPeriod();
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);

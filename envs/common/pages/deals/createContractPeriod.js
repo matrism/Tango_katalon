@@ -441,6 +441,18 @@ if (pages.createDealContractPeriod === undefined) {
                 });
         },
 
+        selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK: function (i, j, k, index) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(" + k + ") div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("body>div:nth-child(" + k + ") div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = index;
+                    var element = options[randomNumber];
+                    browser.actions().mouseMove(element).perform();
+                    browser.actions().click(element).perform();
+                });
+        },
+
         selectTheRequirementEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             var desiredOption;
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
@@ -531,6 +543,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         fillIntoTheAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).clear();
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).sendKeys(value);
         },
 
@@ -562,6 +575,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         saveTheEndRules: function () {
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.saveButtonEndRules);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealContractPeriod.elems.saveButtonEndRules));
             pages.createDealContractPeriod.elems.saveButtonEndRules.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.createDealContractPeriod.elems.whenVariableLeftButtonEndRules));
@@ -795,6 +809,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         fillIntoThePreDefinedDateFieldEndRulesSpecificDateRuleNumberI: function (i, specific_date) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).clear();
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).sendKeys(specific_date);
         },
 
@@ -828,6 +843,21 @@ if (pages.createDealContractPeriod === undefined) {
                 console.log("The rext rule when or and end rules for rule number: " + i + " is: " + promise);
                 expect(promise).toEqual(name);
             });
+        },
+
+        clickOnTheCancelEndRulesButton: function(){
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.cancelButtonEndRules);
+            pages.createDealContractPeriod.elems.cancelButtonEndRules.click();
+        },
+
+        clickOnTheConfirmCancellationEndRulesModalButton: function(){
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
+            pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog.click();
+        },
+
+        clickOnTheContinueEditingEndRulesModalButton: function(){
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
+            pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog.click();
         }
 
 

@@ -8,8 +8,8 @@ exports.beforeFeature = function () {
 
 exports.feature = [
     {
-        name: "Create a deal with end rules on contract period",
-        tags: ["endRules"],
+        name: "Create a deal with end rules on contract period, validate fields and tooltips delete conditions",
+        tags: ["create_delete_condition_end_rules"],
         steps: function () {
             var today = new Date();
             var currentDate = today.getFullYear() + "-" + today.getMonth() + 1 + "-" + today.getDate();
@@ -121,14 +121,100 @@ exports.feature = [
             steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(2, "AND");
             steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(3, "AND");
 
-            steps.createDealContractPeriod.checkDeletIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.createDealContractPeriod.checkDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(1, 1);
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 1);
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
 
-            //steps.deal.itContinueToNextPage();
-            //steps.deal.saveDeal();
-            //steps.deal.waitForDealToBeSaved();
-            //steps.deal.returnDealNumber();
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
+            steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 1);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
+
+            steps.createDealContractPeriod.clickOnAddNewRuleEndRulesAddedRuleNumberI(1);
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
+            steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
+            steps.createDealContractPeriod.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1, 1);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK(1, 1, 15, 0);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
+            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            steps.createDealContractPeriod.cancelDeleteEndRules();
+            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
+
+            steps.createDealContractPeriod.saveEndRulesForm();
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+        }
+    },
+    {
+        name: "Create a deal with end rules on contract period and delete rules",
+        tags: ["delete_rule"],
+        steps: function () {
+
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.createDealContractPeriod.checkEndRulesTooltipTextValue();
+            steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
+
+
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Target End Date");
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
+            steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
+
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
+            steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 1);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
+
+            steps.createDealContractPeriod.clickOnAddNewRuleEndRulesAddedRuleNumberI(1);
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
+            steps.createDealContractPeriod.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
+            steps.createDealContractPeriod.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1, 1);
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK(1, 1, 15, 0);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
+
+            steps.createDealContractPeriod.saveEndRulesForm();
+
+            steps.editDealContractPeriod.editEndRulesForm();
+            steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            steps.editDealContractPeriod.editCancelDeleteEndRules();
+            steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJ(1, 2);
+            steps.editDealContractPeriod.editSaveEndRulesForm();
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+        }
+    },
+    {
+        name: "Create a deal with end rules on contract period and check the dirty check",
+        tags: ["dirty_check_end_rules"],
+        steps: function () {
+
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
+            steps.createDealContractPeriod.clickOnCancelEndRulesButton();
+
+            steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Target End Date");
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
+            steps.createDealContractPeriod.selectRandomOptionFromOffsetByChoiceEndRules();
+            steps.createDealContractPeriod.clickOnCancelEndRulesButton();
+            steps.createDealContractPeriod.clickOnContinueEditingEndRulesModalButton();
+            steps.createDealContractPeriod.clickOnCancelEndRulesButton();
+            steps.createDealContractPeriod.clickOnConfirmCancellationEndRulesModalButton();
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
         }
     }
+
 ];

@@ -475,6 +475,41 @@ exports.editRemoveMdrcLabel = function () {
     });
 };
 
+exports.editEndRulesForm = function(){
+    it("Edit the end rules form ", function(){
+       pages.editDealContractPeriod.editTheEndRulesForm();
+    });
+};
+
+exports.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
+    it("Edit delete end rules condition number " + i + " row number " + j, function () {
+        pages.editDealContractPeriod.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editDeleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
+    it("Edit delete end rules condition number " + i + " row number " + j, function () {
+        pages.editDealContractPeriod.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editCancelDeleteEndRules = function () {
+    it("Edit cancel delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editCancelDeleteEndRulesModalDialog));
+        pages.editDealContractPeriod.elems.editCancelDeleteEndRulesModalDialog.click();
+    });
+};
+
+exports.editSaveEndRulesForm = function () {
+    it("Edit save the end rules ", function () {
+        pages.editDealContractPeriod.editSaveTheEndRules();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+
 exports.itEditIncompleteMdrcContractPeriod = function (i) {
     describe("Edit incomplete MDRC on  contract period screen", function () {
         steps.editDealContractPeriod.editMdrcFormI(i);

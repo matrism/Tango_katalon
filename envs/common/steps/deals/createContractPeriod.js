@@ -410,7 +410,13 @@ exports.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ = function (
     });
 };
 
-exports.checkDeletIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ = function (i, j) {
+exports.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK = function (i, j, k, index) {
+    it("Select the requirement end rules specific value rule number " + i + " row number " + j + " and value of k " + k, function () {
+        pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK(i, j, k, index);
+    });
+};
+
+exports.checkDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ = function (i, j) {
     it("Check that the delete rule icon is present end rules rule number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.checkTheDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(i, j);
     });
@@ -427,6 +433,13 @@ exports.deleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
     it("Delete end rules condition number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
         pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.cancelDeleteEndRules = function () {
+    it("Cancel delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog));
+        pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog.click();
     });
 };
 
@@ -451,10 +464,11 @@ exports.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ = function
 exports.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
     it("Fill into the attribute right end rules rule number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.fillIntoTheAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 
-exports.saveEndRules = function () {
+exports.saveEndRulesForm = function () {
     it("Save the end rules ", function () {
         pages.createDealContractPeriod.saveTheEndRules();
         pages.createDealContractPeriod.waitForAjax();
@@ -464,6 +478,13 @@ exports.saveEndRules = function () {
 exports.doneEndRules = function () {
     it("Save the end rules ", function () {
         pages.createDealContractPeriod.doneTheEndRules();
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.clickOnCancelEndRulesButton = function () {
+    it("Click on the cancel end rules button", function () {
+        pages.createDealContractPeriod.clickOnTheCancelEndRulesButton();
         pages.createDealContractPeriod.waitForAjax();
     });
 };
@@ -483,6 +504,20 @@ exports.fillIntoLpControlPercentageOfWork = function () {
 exports.fillIntoLpControlPercentageOfMechanicalIncome = function () {
     it("Fill into the Lp control percentage of mechanical income ", function () {
         pages.createDealContractPeriod.fillIntoTheLpControlPercentageOfMechanicalIncome();
+    });
+};
+
+exports.clickOnConfirmCancellationEndRulesModalButton = function () {
+    it("Click on the confirm cancellation end rules modal dialog button ", function () {
+        pages.createDealContractPeriod.clickOnTheConfirmCancellationEndRulesModalButton();
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.clickOnContinueEditingEndRulesModalButton = function () {
+    it("Click on the continue editing end rules modal dialog button ", function () {
+        pages.createDealContractPeriod.clickOnTheContinueEditingEndRulesModalButton();
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 
@@ -669,6 +704,7 @@ exports.fillIntoPreDefinedDateFieldEndRulesSpecificDate = function (specific_dat
 exports.fillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI = function (i, specific_date) {
     it("Fill into the pre defined date field end rules specific date rule number " + i, function () {
         pages.createDealContractPeriod.fillIntoThePreDefinedDateFieldEndRulesSpecificDateRuleNumberI(i, specific_date);
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 
