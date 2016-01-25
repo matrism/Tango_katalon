@@ -41,3 +41,11 @@ exports.click = function (el) {
 exports.clear = function (el) {
     el.clear();
 };
+
+exports.getValue = function (el) {
+    return el.getAttribute('value');
+};
+
+exports.waitForAjax = function () {
+    pages.base.waitForAjax();
+};

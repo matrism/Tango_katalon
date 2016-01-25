@@ -212,11 +212,11 @@ pph.waitForAsync = function () {
 };
 
 pph.isDisplayed = function (el) {
-    return el.isPresent().then(function (present) {
-        if(!present) {
+    return pph.and(el.isPresent(), el.isDisplayed()).then(null, function (err) {
+        if(err.toString().includes('No element found using locator')) {
             return false;
         }
 
-        return el.isDisplayed();
+        throw err;
     });
 };

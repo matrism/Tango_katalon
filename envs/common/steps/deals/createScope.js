@@ -197,6 +197,8 @@ exports.validateErrorMessagePublisherRequired = function () {
     });
 };
 
+addBasicStep(exports, pages.createDealScope, 'Select publisher role');
+
 exports.enterPublisherSearchTerms = function (i, j, value) {
     it(
         'Chain #' + (i + 1) + ', publisher #' + (j + 1) +
