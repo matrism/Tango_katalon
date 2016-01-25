@@ -410,6 +410,26 @@ exports.selectRequirementEndRulesSpecificValueRuleNumberIRowNumberJ = function (
     });
 };
 
+exports.checkDeletIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ = function (i, j) {
+    it("Check that the delete rule icon is present end rules rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.checkTheDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(i, j);
+    });
+};
+
+exports.deleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
+    it("Delete end rules condition number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.deleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
+    it("Delete end rules condition number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
 exports.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ = function (i, j, index) {
     it("Select the requirement end rules specific value by index rule number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(i, j, index);
@@ -665,9 +685,9 @@ exports.clickOnAddNewRuleEndRulesAddedRuleNumberI = function (i) {
     });
 };
 
-exports.checkTextRuleWhenOrAndEndRulesRuleNumberI = function(i, name){
-    it("Check the text rule when or and end rules rule number " + i, function(){
-       pages.createDealContractPeriod.checkTheTextRuleWhenOrAndEndRulesRuleNumberI(i, name);
+exports.checkTextRuleWhenOrAndEndRulesRuleNumberI = function (i, name) {
+    it("Check the text rule when or and end rules rule number " + i, function () {
+        pages.createDealContractPeriod.checkTheTextRuleWhenOrAndEndRulesRuleNumberI(i, name);
     });
 };
 

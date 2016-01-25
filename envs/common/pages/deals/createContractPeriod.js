@@ -84,6 +84,9 @@ if (pages.createDealContractPeriod === undefined) {
             variableRightFieldButtonEndRules: {css: "div[data-ng-model='condition.right_value'] div.tg-dropdown-button"},
             variableRightDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             variableRightErrorMessageEndRules: {css: "div.span2.control-group.condition-right-type.ng-scope div i"},
+            deleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
+            confirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
+            cancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             saveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
             doneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
             deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
@@ -531,6 +534,25 @@ if (pages.createDealContractPeriod === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).sendKeys(value);
         },
 
+        checkTheDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ: function (i, j) {
+            expect(browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).isDisplayed()).toBeTruthy();
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).getAttribute("data-tooltip").
+            then(function (promise) {
+                console.log("Delete rule end rules data tooltip value is  : " + promise);
+                expect(promise).toEqual("Delete Condition");
+            });
+        },
+
+        clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal: function (i, j) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
+        },
+
+        clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
+            pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog.click();
+        },
+
         checkTheVariableRightWarningMessageEndRules: function () {
             pages.createDealContractPeriod.elems.variableRightErrorMessageEndRules.getAttribute("data-tooltip").
             then(function (promise) {
@@ -796,14 +818,14 @@ if (pages.createDealContractPeriod === undefined) {
                 })
         },
 
-        clickOnTheAddNewRuleEndRulesAddedRuleNumberI: function(i){
-            browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i+2) + ") a[data-ng-click='addEndRuleCondition(form.show.endRules.containerId, form.show.endRules.type, rule.id, $index)'] i")).click();
+        clickOnTheAddNewRuleEndRulesAddedRuleNumberI: function (i) {
+            browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i + 2) + ") a[data-ng-click='addEndRuleCondition(form.show.endRules.containerId, form.show.endRules.type, rule.id, $index)'] i")).click();
         },
 
-        checkTheTextRuleWhenOrAndEndRulesRuleNumberI: function (i,name) {
-            browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i+2) + ") div.pull-left.condition-label")).getText().
+        checkTheTextRuleWhenOrAndEndRulesRuleNumberI: function (i, name) {
+            browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i + 2) + ") div.pull-left.condition-label")).getText().
             then(function (promise) {
-                console.log("The rext rule when or and end rules for rule number: " +i + " is: " + promise);
+                console.log("The rext rule when or and end rules for rule number: " + i + " is: " + promise);
                 expect(promise).toEqual(name);
             });
         }

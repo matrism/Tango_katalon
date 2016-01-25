@@ -121,6 +121,9 @@ exports.feature = [
             steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(2, "AND");
             steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(3, "AND");
 
+            steps.createDealContractPeriod.checkDeletIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 1);
+            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
 
             //steps.deal.itContinueToNextPage();
             //steps.deal.saveDeal();
