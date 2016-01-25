@@ -160,8 +160,11 @@ if (pages.editDealScope === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
         },
 
-        clickOnScopeNumberI: function (i) {
+        waitForTheScopeNumberIToBeVisible: function (i) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))));
+        },
+
+        clickOnScopeNumberI: function (i) {
             pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
             //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
             //browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
