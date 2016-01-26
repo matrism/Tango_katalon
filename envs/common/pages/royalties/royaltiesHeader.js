@@ -15,6 +15,8 @@ exports.headerLink = function (text) {
 };
 
 exports.clickLink = function (text) {
-    return exports.headerLink(text).click();
+    return exports.headerLink(text).click().then(function(){;
+        pages.base.waitForAjax();
+    });
 };
 

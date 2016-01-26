@@ -1,6 +1,6 @@
 'use strict';
 
-function Typeahead (target, isElement) {
+function Typeahead (target, isElement, isAppendedToBody) {
     var typeahead = target; 
 
     if (!isElement) {
@@ -12,7 +12,12 @@ function Typeahead (target, isElement) {
     };
 
     typeahead.results = function (text) {
-        var results = typeahead.all(by.repeater('$match in $dataSet.queried.matches'));
+        var resultsSelector = by.repeater('$match in $dataSet.queried.matches'),
+            results = typeahead.all(resultsSelector);
+
+        if (isAppendedToBody) {
+            results = $('body > .tg-typeahead__suggestions-wrap').all(resultsSelector);
+        }
 
         if (text) {
             results = results.filter(function(elem, index){
