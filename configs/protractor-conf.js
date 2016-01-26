@@ -246,7 +246,9 @@ config = {
 
         jasmine.getEnv().addReporter({
             specDone: function () {
-                return highlightElement.restoreAll();
+                highlightElement.restoreAll().then(null, function (err) {
+                    console.error('Ignoring highlightElement.restoreAll error:', err);
+                });
             }
         });
 
