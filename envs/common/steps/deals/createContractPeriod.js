@@ -369,6 +369,12 @@ exports.selectEndDateEndRulesSpecificValue = function (value) {
     });
 };
 
+exports.fillIntoEndDateTypePreDefinedDateInputFieldEndRules = function(value){
+    it("Fill into the end date type pre defined date input field end rules ", function(){
+       pages.createDealContractPeriod.fillIntoTheEndDateTypePreDefinedDateInputFieldEndRules(value);
+    });
+};
+
 exports.selectEndDateEndRulesSpecificValueRuleNumberI = function (i, value) {
     it("Select end date end rules specific value ", function () {
         pages.createDealContractPeriod.selectTheEndDateEndRulesSpecificValueRuleNumberI(i, value);
@@ -706,6 +712,12 @@ exports.fillIntoOffsetByInputFieldEndRules = function () {
     });
 };
 
+exports.fillIntoOffsetByInputFieldEndRulesSpecificValue = function (number) {
+    it("Fill into the offset by input field end rules ", function () {
+        pages.createDealContractPeriod.fillIntoTheOffsetByInputFieldEndRulesSpecificValue(number);
+    });
+};
+
 exports.fillIntoOffsetByInputFieldEndRulesRuleNumberI = function (i) {
     it("Fill into the offset by input field end rules rule number " + i, function () {
         pages.createDealContractPeriod.fillIntoTheOffsetByInputFieldEndRulesRuleNumberI(i);
@@ -713,11 +725,16 @@ exports.fillIntoOffsetByInputFieldEndRulesRuleNumberI = function (i) {
 };
 
 exports.selectRandomOptionFromOffsetByChoiceEndRules = function () {
-    it("Select the random option from offset by choice end rules ", function () {
+    it("Select the random option from offset by choice end date end rules ", function () {
         pages.createDealContractPeriod.selectTheRandomOptionFromOffsetByChoiceEndRules();
     });
 };
 
+exports.selectSpecificOptionFromOffsetByChoiceEndRules= function(value){
+  it("Select the specific option from offset by choice end date end rules", function(){
+     pages.createDealContractPeriod.selectTheSpecificOptionFromOffsetByChoiceEndRules(value);
+  });
+};
 
 exports.validatePreDefinedDateFieldEndRulesIsRequiredWarning = function (error_message) {
     it("Validate the pre defined date field  end  rules is required anc check the error message", function () {

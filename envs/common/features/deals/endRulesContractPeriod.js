@@ -289,8 +289,32 @@ exports.feature = [
             steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Final Contract Period, then the Actual End Date is [End Date Type] ....");
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "FALSE");
             steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If NOT Final Contract Period, then the Actual End Date is [End Date Type] ....");
+            //cancel end rules and add again end rules
+            steps.createDealContractPeriod.clickOnCancelEndRulesButton();
+            steps.createDealContractPeriod.clickOnConfirmCancellationEndRulesModalButton();
+            steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
             //check end date type
-
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Repayment Date");
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
+            steps.createDealContractPeriod.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "32");
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is the Repayment Date.");
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Pre-Defined Date");
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is ....");
+            steps.createDealContractPeriod.fillIntoEndDateTypePreDefinedDateInputFieldEndRules("2014-12-18");
+            steps.createDealContractPeriod.clickOnEndRulesArea();
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is 2014-12-18.");
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "MDRC Complete Date");
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is the MDRC Complete Date ....");
+            steps.createDealContractPeriod.fillIntoOffsetByInputFieldEndRulesSpecificValue(21);
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is the MDRC Complete Date offset by 21 days.");
+            steps.createDealContractPeriod.selectSpecificOptionFromOffsetByChoiceEndRules("Weeks");
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is the MDRC Complete Date offset by 21 weeks.");
+            steps.createDealContractPeriod.selectSpecificOptionFromOffsetByChoiceEndRules("Months");
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is the MDRC Complete Date offset by 21 months.");
+            steps.createDealContractPeriod.selectSpecificOptionFromOffsetByChoiceEndRules("Years");
+            steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, then the Actual End Date is the MDRC Complete Date offset by 21 years.");
 
 
             //steps.deal.itContinueToNextPage();

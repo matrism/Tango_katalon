@@ -75,6 +75,7 @@ if (pages.createDealContractPeriod === undefined) {
             addEndRulesLink: {css: "a[data-ng-show='!activeContractPeriod.showEndRules && !isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
             endDateFieldButtonEndRules: {css: "div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button"},
             endDateDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
+            endDatePreDefinedDateInputFieldEndRules: {css: "div[name='endDateTypeDate'] input"},
             whenVariableLeftButtonEndRules: {css: "div[data-ng-model='condition.left_value'] div.tg-dropdown-button"},
             whenVariableLeftDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             attributeLeftFieldEndRules: {css: "input[data-ng-model='condition.left_value_percent']"},
@@ -339,6 +340,10 @@ if (pages.createDealContractPeriod === undefined) {
                 });
         },
 
+        fillIntoTheEndDateTypePreDefinedDateInputFieldEndRules: function (value) {
+            pages.createDealContractPeriod.elems.endDatePreDefinedDateInputFieldEndRules.clear();
+            pages.createDealContractPeriod.elems.endDatePreDefinedDateInputFieldEndRules.sendKeys(value);
+        },
 
         selectTheEndDateEndRulesSpecificValueRuleNumberI: function (i, value) {
             var desiredOption;
@@ -436,7 +441,7 @@ if (pages.createDealContractPeriod === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_amount']")).sendKeys(value);
         },
 
-        selectTheAttributeLeftEndRulesSpecificOptionPercentOrAmountRuleNumberIRowNumberJ : function(i,j, value){
+        selectTheAttributeLeftEndRulesSpecificOptionPercentOrAmountRuleNumberIRowNumberJ: function (i, j, value) {
             var desiredOption;
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.attribute_left_choice'] div.tg-dropdown-button")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(11) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
@@ -845,6 +850,12 @@ if (pages.createDealContractPeriod === undefined) {
 
         fillIntoTheOffsetByInputFieldEndRules: function () {
             var number = Math.floor(Math.random() * 100) + 1;
+            pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.clear();
+            pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.sendKeys(number);
+        },
+
+        fillIntoTheOffsetByInputFieldEndRulesSpecificValue: function (number) {
+            pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.clear();
             pages.createDealContractPeriod.elems.offsetByInputFieldEndRules.sendKeys(number);
         },
 
@@ -863,6 +874,31 @@ if (pages.createDealContractPeriod === undefined) {
                 })
         },
 
+
+        selectTheSpecificOptionFromOffsetByChoiceEndRules: function (value) {
+            var desiredOption;
+            pages.createDealContractPeriod.elems.offsetByArrowChoiceEndRules.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))));
+            browser.driver.findElements(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+
         clickOnTheAddNewRuleEndRulesAddedRuleNumberI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i + 2) + ") a[data-ng-click='addEndRuleCondition(form.show.endRules.containerId, form.show.endRules.type, rule.id, $index)'] i")).click();
         },
@@ -875,26 +911,26 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        clickOnTheCancelEndRulesButton: function(){
+        clickOnTheCancelEndRulesButton: function () {
             pages.base.scrollIntoView(pages.createDealContractPeriod.elems.cancelButtonEndRules);
             pages.createDealContractPeriod.elems.cancelButtonEndRules.click();
         },
 
-        clickOnTheConfirmCancellationEndRulesModalButton: function(){
+        clickOnTheConfirmCancellationEndRulesModalButton: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
             pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog.click();
         },
 
-        clickOnTheContinueEditingEndRulesModalButton: function(){
+        clickOnTheContinueEditingEndRulesModalButton: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
             pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog.click();
         },
 
-        clickOnTheEndRulesArea: function(){
-          browser.driver.findElement(By.css("div[data-ng-form='rulesForm'] div.summary-end-rules")).click();
+        clickOnTheEndRulesArea: function () {
+            browser.driver.findElement(By.css("div[data-ng-form='rulesForm'] div.summary-end-rules")).click();
         },
 
-        checkTheSummaryTextForEndRulesRuleNumberI : function(i, text){
+        checkTheSummaryTextForEndRulesRuleNumberI: function (i, text) {
             pages.base.scrollIntoView(element(by.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
             browser.driver.findElement(By.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
             then(function (promise) {
@@ -903,7 +939,7 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
-        checkTheSummaryTextForEndRulesRuleNumberIContainsText : function(i, text){
+        checkTheSummaryTextForEndRulesRuleNumberIContainsText: function (i, text) {
             pages.base.scrollIntoView(element(by.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
             browser.driver.findElement(By.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
             then(function (promise) {
