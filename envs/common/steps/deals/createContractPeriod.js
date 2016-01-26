@@ -338,6 +338,25 @@ exports.selectContractPeriodNumberI = function (i) {
     });
 };
 
+exports.checkSummaryTextForEndRulesRuleNumberI = function (i, text) {
+    it("Check the summary text for end rules rule number " + i, function () {
+        pages.createDealContractPeriod.checkTheSummaryTextForEndRulesRuleNumberI(i, text);
+    });
+};
+
+exports.clickOnEndRulesArea = function(){
+    it("Click on the end rules area", function() {
+        pages.createDealContractPeriod.clickOnTheEndRulesArea();
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.checkSummaryTextForEndRulesRuleNumberIContainsText = function (i, text) {
+    it("Check the summary text for end rules rule number " + i, function () {
+        pages.createDealContractPeriod.checkTheSummaryTextForEndRulesRuleNumberIContainsText(i, text);
+    });
+};
+
 exports.clickOnAddEndRulesToContractPeriod = function () {
     it("Click on the add end rules link to contract period ", function () {
         pages.createDealContractPeriod.clickOnTheAddEndRulesToContractPeriod();
@@ -392,9 +411,22 @@ exports.fillIntoAttributeLeftEndRulesRuleNumberIRowNumberJ = function (i, j) {
     });
 };
 
-exports.fillIntoAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+exports.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
     it("Fill into the attribute left end rules rule number " + i + " row number " + j, function () {
-        pages.createDealContractPeriod.fillIntoTheAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+        pages.createDealContractPeriod.fillIntoTheAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+    });
+};
+
+exports.fillIntoAttributeLeftAmountEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Fill into the attribute left end rules rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.fillIntoTheAttributeLeftAmountEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+    });
+};
+
+exports.selectAttributeLeftEndRulesSpecificOptionPercentOrAmountRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Select the attribute left end rules specific option percent or amount rule number " + i + " row number " + j, function () {
+        pages.createDealContractPeriod.selectTheAttributeLeftEndRulesSpecificOptionPercentOrAmountRuleNumberIRowNumberJ(i, j, value);
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 

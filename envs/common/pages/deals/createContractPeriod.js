@@ -421,12 +421,42 @@ if (pages.createDealContractPeriod === undefined) {
 
         fillIntoTheAttributeLeftEndRulesRuleNumberIRowNumberJ: function (i, j) {
             var percent = (Math.random() * 100 + 1).toFixed(2);
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).clear();
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).sendKeys(percent);
         },
 
 
-        fillIntoTheAttributeLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+        fillIntoTheAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).clear();
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).sendKeys(value);
+        },
+
+        fillIntoTheAttributeLeftAmountEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_amount']")).clear();
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_amount']")).sendKeys(value);
+        },
+
+        selectTheAttributeLeftEndRulesSpecificOptionPercentOrAmountRuleNumberIRowNumberJ : function(i,j, value){
+            var desiredOption;
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.attribute_left_choice'] div.tg-dropdown-button")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(11) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("body>div:nth-child(11) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         },
 
         selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ: function (i, j, index) {
@@ -858,6 +888,28 @@ if (pages.createDealContractPeriod === undefined) {
         clickOnTheContinueEditingEndRulesModalButton: function(){
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
             pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog.click();
+        },
+
+        clickOnTheEndRulesArea: function(){
+          browser.driver.findElement(By.css("div[data-ng-form='rulesForm'] div.summary-end-rules")).click();
+        },
+
+        checkTheSummaryTextForEndRulesRuleNumberI : function(i, text){
+            pages.base.scrollIntoView(element(by.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
+            browser.driver.findElement(By.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
+            then(function (promise) {
+                console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
+                expect(promise).toEqual(text);
+            });
+        },
+
+        checkTheSummaryTextForEndRulesRuleNumberIContainsText : function(i, text){
+            pages.base.scrollIntoView(element(by.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
+            browser.driver.findElement(By.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
+            then(function (promise) {
+                console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
+                expect(promise).toContain(text);
+            });
         }
 
 
