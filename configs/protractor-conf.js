@@ -332,8 +332,6 @@ config = {
             }
         }*/
 
-        console.log('here');
-
         if(!systemConfig.noReport) {
             enhanceHtmlReport(reporterFilePath, {
                 startDate: now,
