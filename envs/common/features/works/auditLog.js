@@ -37,7 +37,7 @@ exports.feature = [
         }
     },
     {
-        name: 'Go to work audit log page',
+        name: 'Create a work',
         tags: [],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
@@ -52,18 +52,28 @@ exports.feature = [
                 this.saveWork();
                 this.validateSaveWorkRedirection();
             });
+            steps.work.findCurrentlyOpenWorkId()
+        }
+    },
+    {
+        name: 'Validate Last Update Date and go to audit log page',
+        tags: [],
+        steps: function () {
+            var today = new Date(),
+                currentDate = today.getFullYear() + "-" + 
+                    ("0" + (today.getMonth() + 1)).slice(-2) + "-" + 
+                    today.getDate();
+            steps.base.useEntityDataSlot('work', 0);
             using(steps.work, function () {
-                var today = new Date(),
-                    currentDate = today.getFullYear() + "-" + 
-                        ("0" + (today.getMonth() + 1)).slice(-2) + "-" + 
-                        today.getDate();
+                this.goToWorkPage();
                 this.validateLastUpdateDate(currentDate);
                 this.clickOnLastUpdateDate();
+                this.auditLog.validateHeaderTitle();
 
                 steps.base.refreshPage();
                 steps.searchSection.selectEntityType('Works');
                 this.selectWorkSearchFilterTag(0, 'Title');
-                this.enterWorkSearchTerms(Math.ceil(Math.random()*5));
+                this.enterWorkSearchTerms('TESTING AUDIT LOG');
                 steps.base.sleep(200);
                 steps.base.waitForAjax();
                 this.clickWorkSearchMatch(Math.round(Math.random()*8));

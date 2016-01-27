@@ -1462,3 +1462,18 @@ exports.merge = (function () {
 
     return merge;
 })();
+
+exports.auditLog = (function () {
+    var auditLog = {};
+
+    auditLog.headerTitle = function () {
+        return $('#RECORD-HEADER h1 strong');
+    };
+
+    auditLog.validateHeaderTitle = function () {
+        var element = auditLog.headerTitle();
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    };
+
+    return auditLog;
+})();

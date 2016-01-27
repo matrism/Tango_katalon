@@ -1444,5 +1444,8 @@ pageStep([
         'Enter Primary Work Title',
         'Save work',
         'Validate Success Message'
+    ]],
+    ['Audit Log', [
+        'Validate Header Title'
     ]]
 ]);
