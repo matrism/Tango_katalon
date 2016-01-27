@@ -4,7 +4,8 @@ var randomString = random.string.makeMemoizedGenerator(),
     using = fnutils.using;
 
 exports.commonFeatureTags = [
-    'auditLogRegression',
+    'workAuditLogRegression',
+    'workAuditLog',
     'auditLog',
     'works',
     'regression'
