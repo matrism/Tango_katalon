@@ -1475,5 +1475,9 @@ exports.auditLog = (function () {
         expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
     };
 
+    auditLog.expectNoErrorMessage = function () {
+        expect(pages.base.isPresentAndDisplayed(pages.base.modalHeading())).toBe(false);
+    };
+
     return auditLog;
 })();

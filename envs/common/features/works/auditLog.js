@@ -69,6 +69,7 @@ exports.feature = [
                 this.validateLastUpdateDate(currentDate);
                 this.clickOnLastUpdateDate();
                 this.auditLog.validateHeaderTitle();
+                this.auditLog.expectNoErrorMessage();
 
                 steps.base.refreshPage();
                 steps.searchSection.selectEntityType('Works');

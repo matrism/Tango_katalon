@@ -1446,6 +1446,7 @@ pageStep([
         'Validate Success Message'
     ]],
     ['Audit Log', [
-        'Validate Header Title'
+        'Validate Header Title',
+        'Expect No Error Message'
     ]]
 ]);
