@@ -1,7 +1,7 @@
 exports.cr = {
     org: 'BMI',
-    date: '2013-08-15',
-    view: 'CR_2013-08-15',
+    date: '2012-07-01',
+    view: 'CR_2012-07-01',
     email: {
         primary: 'shilpa.gunna@wmg.com'
     },
