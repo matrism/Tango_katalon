@@ -521,12 +521,28 @@ if (pages.editDealContractPeriod === undefined) {
             pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
         },
 
+        editClickOnTheDeleteRuleEndRulesNumberI: function(i) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") a[data-ng-click='showDeleteEndRuleModal(form.show.endRules.containerId, form.show.endRules.type, rule.id)'] i")).click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
+            pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
+        },
+
         editSaveTheEndRules: function () {
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editSaveButtonEndRules);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editSaveButtonEndRules));
             pages.editDealContractPeriod.elems.editSaveButtonEndRules.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.editWhenVariableLeftButtonEndRules));
         },
+
+        editCheckTheSummaryTextForEndRulesRuleNumberI: function (i, text) {
+            pages.base.scrollIntoView(element(by.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
+            browser.driver.findElement(By.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
+            then(function (promise) {
+                console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
+                expect(promise).toEqual(text);
+            });
+        },
+
 
         editDoneTheEndRules: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editDoneButtonEndRules));

@@ -92,6 +92,7 @@ if (pages.createDealContractPeriod === undefined) {
             doneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
             deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
             cancelButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
+            addRuleButtonLinkEndRules: {css: "a[data-ng-click='addEndRule(form.show.endRules.containerId, form.show.endRules.type, rulesForm.$valid)']"},
             //assumptions
             addAssumptionLink: {css: "a[data-ng-click='addAdvanceAssumption()']"},
             lpControlPercentageOfWorkAssumptions: {css: "#lpControlPercentageWork"},
@@ -344,6 +345,7 @@ if (pages.createDealContractPeriod === undefined) {
             pages.createDealContractPeriod.elems.endDatePreDefinedDateInputFieldEndRules.clear();
             pages.createDealContractPeriod.elems.endDatePreDefinedDateInputFieldEndRules.sendKeys(value);
         },
+
 
         selectTheEndDateEndRulesSpecificValueRuleNumberI: function (i, value) {
             var desiredOption;
@@ -758,6 +760,10 @@ if (pages.createDealContractPeriod === undefined) {
             });
         },
 
+        clickOnTheAccountingPeriodEndDateCheckBoxEndRules: function () {
+            pages.createDealContractPeriod.elems. accountingPeriodEndCheckBoxEndRules.click();
+        },
+
         checkTheAccountingPeriodEndDataTooltipTextEndRules: function () {
             pages.createDealContractPeriod.elems.accountingPeriodEndDataTooltipTextEndRules.getAttribute("data-tooltip").
             then(function (promise) {
@@ -901,6 +907,11 @@ if (pages.createDealContractPeriod === undefined) {
 
         clickOnTheAddNewRuleEndRulesAddedRuleNumberI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i + 2) + ") a[data-ng-click='addEndRuleCondition(form.show.endRules.containerId, form.show.endRules.type, rule.id, $index)'] i")).click();
+        },
+
+        clickOnTheAddRuleInTheBottomOfEndRulesForm: function () {
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.addRuleButtonLinkEndRules);
+            pages.createDealContractPeriod.elems.addRuleButtonLinkEndRules.click();
         },
 
         checkTheTextRuleWhenOrAndEndRulesRuleNumberI: function (i, name) {

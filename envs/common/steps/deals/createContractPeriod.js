@@ -344,8 +344,8 @@ exports.checkSummaryTextForEndRulesRuleNumberI = function (i, text) {
     });
 };
 
-exports.clickOnEndRulesArea = function(){
-    it("Click on the end rules area", function() {
+exports.clickOnEndRulesArea = function () {
+    it("Click on the end rules area", function () {
         pages.createDealContractPeriod.clickOnTheEndRulesArea();
         pages.createDealContractPeriod.waitForAjax();
     });
@@ -369,11 +369,12 @@ exports.selectEndDateEndRulesSpecificValue = function (value) {
     });
 };
 
-exports.fillIntoEndDateTypePreDefinedDateInputFieldEndRules = function(value){
-    it("Fill into the end date type pre defined date input field end rules ", function(){
-       pages.createDealContractPeriod.fillIntoTheEndDateTypePreDefinedDateInputFieldEndRules(value);
+exports.fillIntoEndDateTypePreDefinedDateInputFieldEndRules = function (value) {
+    it("Fill into the end date type pre defined date input field end rules ", function () {
+        pages.createDealContractPeriod.fillIntoTheEndDateTypePreDefinedDateInputFieldEndRules(value);
     });
 };
+
 
 exports.selectEndDateEndRulesSpecificValueRuleNumberI = function (i, value) {
     it("Select end date end rules specific value ", function () {
@@ -638,6 +639,13 @@ exports.checkEndDateDataTooltipTextEndRules = function () {
     });
 };
 
+exports.clickAccountingPeriodEndDateCheckBoxEndRules = function () {
+    it("Click the accounting period end date check box end rules", function () {
+        pages.createDealContractPeriod.clickOnTheAccountingPeriodEndDateCheckBoxEndRules();
+        pages.createDealContractPeriod.waitForAjax();
+    });
+};
+
 exports.checkAccountingPeriodEndDataTooltipTextEndRules = function () {
     it("Check the accounting period end data tooltip text end rules", function () {
         pages.createDealContractPeriod.checkTheAccountingPeriodEndDataTooltipTextEndRules();
@@ -730,10 +738,10 @@ exports.selectRandomOptionFromOffsetByChoiceEndRules = function () {
     });
 };
 
-exports.selectSpecificOptionFromOffsetByChoiceEndRules= function(value){
-  it("Select the specific option from offset by choice end date end rules", function(){
-     pages.createDealContractPeriod.selectTheSpecificOptionFromOffsetByChoiceEndRules(value);
-  });
+exports.selectSpecificOptionFromOffsetByChoiceEndRules = function (value) {
+    it("Select the specific option from offset by choice end date end rules", function () {
+        pages.createDealContractPeriod.selectTheSpecificOptionFromOffsetByChoiceEndRules(value);
+    });
 };
 
 exports.validatePreDefinedDateFieldEndRulesIsRequiredWarning = function (error_message) {
@@ -773,6 +781,13 @@ exports.clickOnAddNewRuleEndRulesAddedRuleNumberI = function (i) {
 exports.checkTextRuleWhenOrAndEndRulesRuleNumberI = function (i, name) {
     it("Check the text rule when or and end rules rule number " + i, function () {
         pages.createDealContractPeriod.checkTheTextRuleWhenOrAndEndRulesRuleNumberI(i, name);
+    });
+};
+
+exports.clickOnAddRuleInTheBottomOfEndRulesForm = function () {
+    it("Click on the add rule in the bottom of end rules form ", function () {
+        pages.createDealContractPeriod.clickOnTheAddRuleInTheBottomOfEndRulesForm();
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 

@@ -475,9 +475,9 @@ exports.editRemoveMdrcLabel = function () {
     });
 };
 
-exports.editEndRulesForm = function(){
-    it("Edit the end rules form ", function(){
-       pages.editDealContractPeriod.editTheEndRulesForm();
+exports.editEndRulesForm = function () {
+    it("Edit the end rules form ", function () {
+        pages.editDealContractPeriod.editTheEndRulesForm();
     });
 };
 
@@ -502,10 +502,23 @@ exports.editCancelDeleteEndRules = function () {
     });
 };
 
+exports.editDeleteTheRuleEndRulesNumberI = function (i) {
+    it("Edit delete the entire rule number "+ i +" from end rules form ", function () {
+        pages.editDealContractPeriod.editClickOnTheDeleteRuleEndRulesNumberI(i);
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
 exports.editSaveEndRulesForm = function () {
     it("Edit save the end rules ", function () {
         pages.editDealContractPeriod.editSaveTheEndRules();
         pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editCheckSummaryTextForEndRulesRuleNumberI = function (i, text) {
+    it("Edit check the summary text for end rules rule number " + i, function () {
+        pages.editDealContractPeriod.editCheckTheSummaryTextForEndRulesRuleNumberI(i, text);
     });
 };
 
