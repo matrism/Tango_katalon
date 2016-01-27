@@ -1,8 +1,6 @@
 'use strict';
 
-var random = require('../../../../helpers/random'),
-    randomString = random.string.makeMemoizedGenerator(),
-    fnutils = require('../../../../helpers/fnutils'),
+var randomString = random.string.makeMemoizedGenerator(),
     using = fnutils.using;
 
 exports.commonFeatureTags = [
