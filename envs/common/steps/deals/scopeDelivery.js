@@ -25,6 +25,13 @@ exports.searchDealsForAllContributions = function(terms) {
     });
 };
 
+exports.searchDealsForContribution = function(contributionIndex, terms) {
+    it('Search deals (' + terms + ') ' +
+        'for contribution #' + (contributionIndex + 1), function() {
+        pages.scopeDelivery.searchDealsForContribution(contributionIndex, terms);
+    });
+};
+
 exports.selectDealSearchResultByIndex = function(i) {
     it('Select deal search result #' + (i + 1), function() {
         pages.scopeDelivery.selectDealSearchResultByIndex(i);
