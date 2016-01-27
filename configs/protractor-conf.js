@@ -791,9 +791,6 @@ config = {
                                     }, failCallback)
                             })
                             .then(function() {
-                                console.log('----testBugs------------');
-                                console.log(projectTestBugs);
-                                console.log('----testBugs------------');
                                 scriptFeatures.forEach(function (feature) {
                                     feature.zapiDone = false;
 
@@ -854,7 +851,7 @@ config = {
                                         }
                                     });
 
-                                   /* if (foundTestCase) {
+                                    if (foundTestCase) {
                                         Zapi.executeTestToTestCycle(cycleId, testCaseId)
                                             .then(function (response) {
                                                 var execIdObject = JSON.parse(response);
@@ -951,14 +948,14 @@ config = {
                                                                 }
                                                             }
                                                         } else {
-                                                            Zapi.updateTestStepResult(testCaseId, jiraExecutionId, localTestStep, feature)
+/*                                                            Zapi.updateTestStepResult(testCaseId, jiraExecutionId, localTestStep, feature)
                                                                 .then(function () {
                                                                     testStepResultsDone++;
 
                                                                     if (testStepResultsDone === testSteps.length) {
                                                                         testStepResultPromise.fulfill();
                                                                     }
-                                                                }, failCallback);
+                                                                }, failCallback);*/
                                                         }
                                                     }
                                                 });
@@ -1210,7 +1207,7 @@ config = {
                                                     zapiPromise.fulfill();
                                                 }
                                             });
-                                    } */
+                                    }
 
                                 });
 
