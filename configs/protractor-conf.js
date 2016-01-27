@@ -370,11 +370,10 @@ config = {
 
                 getTestCyclesComplete = function (response) {
 
-                    console.log('getTestCyclesComplete');
                     var testCycles,
                         testCycleIds;
 
-/*                    responseJson = JSON.parse(response);
+                    responseJson = JSON.parse(response);
 
                     if(responseJson['-1'] === undefined) {
                         console.log('create test cycle');
@@ -395,7 +394,7 @@ config = {
                                 break;
                             }
                         }
-                    }*/
+                    }
                 },
 
                 failCallback = function (status, response) {
@@ -405,13 +404,12 @@ config = {
                 },
 
                 createTestCycle = function () {
-                    console.log('createTestCycle');
-/*                    if (!cycleExists) {
+                    if (!cycleExists) {
                         return Zapi.createTestCycle(testCycleName)
                             .then(createTestCycleComplete, failCallback);
                     } else {
                         return protractor.promise.defer().fulfill();
-                    }*/
+                    }
                 },
 
                 createTestCycleComplete = function (response) {
@@ -555,8 +553,6 @@ config = {
                             }
                         }
                     }
-
-                    console.log(scriptFeatures);
 
                     return protractor.promise.defer().fulfill();
                 },
@@ -747,9 +743,7 @@ config = {
 
                 setUpCompleteZapiFlowTwo = function () {
 
-                    console.log('setUpCompleteZapiFlowTwo');
-
-/*                    function executeStepsAsync(steps) {
+                    function executeStepsAsync(steps) {
                         var fExecuteStep = function () {
                             var step = steps.shift();
 
@@ -860,7 +854,7 @@ config = {
                                         }
                                     });
 
-                                   /!* if (foundTestCase) {
+                                   /* if (foundTestCase) {
                                         Zapi.executeTestToTestCycle(cycleId, testCaseId)
                                             .then(function (response) {
                                                 var execIdObject = JSON.parse(response);
@@ -1216,7 +1210,7 @@ config = {
                                                     zapiPromise.fulfill();
                                                 }
                                             });
-                                    } *!/
+                                    } */
 
                                 });
 
@@ -1257,7 +1251,7 @@ config = {
 
                     });
 
-                    return zapiPromise;*/
+                    return zapiPromise;
                 },
 
                 executeTestsToCycleComplete = function (response) {
