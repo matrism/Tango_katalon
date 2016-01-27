@@ -14,6 +14,15 @@ exports.cr = {
         notificationPrimaryEmail: 'shilpa.gunna@axispoint.com',
         notificationCcEmail: 'shilpa.gunnaftp@axispoint.com'
     },
+    sftp: {
+        address: '54.88.249.193',
+        port: '22',
+        username: 'Tango_Test',
+        password: 'St@rwar1$',
+        notification: 'Yes',
+        notificationPrimaryEmail: 'shilpa.gunna@axispoint.com',
+        notificationCcEmail: 'shilpa.gunnaftp@axispoint.com'
+    },
     thirdParty: 'Lyricfind',
     ack: {
         sftp: {
