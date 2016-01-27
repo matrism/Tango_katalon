@@ -25,6 +25,7 @@
     "http-api-client": "^0.1.8",
     "jsftp": "^1.5.2",
     "jasmine-fail-fast": "^2.0.0",
+    "jasmine-json-test-reporter": "^1.0.0-beta",
     "jasmine-reporters": "~2.0.5",
     "jasmine-spec-reporter": "^2.4.0",
     "karma": "~0.12",
@@ -54,8 +55,5 @@
     "time": "^0.11.4"
   },
   "author": "WMG",
-  "license": "ISC",
-  "devDependencies": {
-    "jasmine-json-test-reporter": "^1.0.0-beta"
-  }
+  "license": "ISC"
 }
