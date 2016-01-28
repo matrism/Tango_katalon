@@ -1,3 +1,4 @@
 exports.mw = {
-    deal: '261703'
+    deal: '261703',
+    org: 'ABRAMUS'
 };

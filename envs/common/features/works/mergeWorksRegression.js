@@ -1,9 +1,6 @@
 'use strict';
 
-var random = require('../../../../helpers/random'),
-    randomString = random.string.makeMemoizedGenerator(),
-    fromTestVariable = require('../../../../helpers/fromTestVariable'),
-    fnutils = require('../../../../helpers/fnutils'),
+var randomString = random.string.makeMemoizedGenerator(),
     using = fnutils.using,
     data = requireFromEnvFolder('features/works/data/mergeWorksRegression.js');
 
@@ -46,7 +43,6 @@ exports.feature = [
                 steps.base.useBlankEntityDataSlot('work', 'work' + i);
                 using(steps.newWork, function () {
                     this.goToNewWorkPage();
-                    console.log(randomString('work'));
                     this.enterPrimaryWorkTitle(
                         'TEST MERGE WORK ' + (i + 1) + ' ' + randomString('work')
                     );
@@ -79,7 +75,7 @@ exports.feature = [
                 });
 
                 using(steps.workRegistrationActivity.activityGroup, function () {
-                    this.find({ firstWithRecipientName: 'ABRAMUS' });
+                    this.find({ firstWithRecipientName: data.mw.org });
                     this.toggleBlind();
                     using(this.events, function () {
                         this.validateEventCount(1);
@@ -90,10 +86,9 @@ exports.feature = [
             });
 
             // Verify Organisation Preview Registration Run
-            steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
+            steps.searchSection.accessSavedOrganisationByName(data.mw.org);
             steps.organisation.goToPreviewRegistrationRunTab();
             using(steps.organisationRegistrationStack, function () {
-                // this area doesn't work b/c new works are added at bottom of list, scheduled works is 4000+ records
                 using(this.works, function () {
                     this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
                     this.validateStatus('Scheduled');
@@ -149,14 +144,13 @@ exports.feature = [
         name: 'Validate Preview Reigstration Run',
         tags: [],
         steps: function () {
-            steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
+            steps.searchSection.accessSavedOrganisationByName(data.mw.org);
 
             // Wait for the work to be removed from Preview Registration Run
             steps.base.sleep(10000);
 
             steps.organisation.goToPreviewRegistrationRunTab();
             using(steps.organisationRegistrationStack, function () {
-                // this area doesn't work b/c new works are added at bottom of list, scheduled works is 4000+ records
                 using(this.works, function () {
                     this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
                     this.validateStatus('Scheduled');
