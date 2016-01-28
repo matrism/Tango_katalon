@@ -36,7 +36,7 @@ exports.feature = [
         }
     },
     {
-        name: 'Create works',
+        name: 'Create works and verify registration activity',
         tags: [],
         steps: function () {
             _.times(2, function(i) {
