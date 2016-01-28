@@ -19,6 +19,7 @@ if (pages.editDealContractPeriod === undefined) {
             editSaveAllContractPeriodButton: {css: "button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
             editAddContractPeriodElem: {css: "div.deal-terms-affix a[data-ng-click='addContractPeriod()']"},
             //end rules
+
             editEndRulesAreaElement: {css: "div[data-ng-show='!activeContractPeriod.showEndRules && isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
             editEndRulesIcon: {css: "div[data-ng-show='!activeContractPeriod.showEndRules && isEndRuleDirty(activeContractPeriod.end_rules[0])'] button.mdrc-edit-pencil i"},
             editRulesTitleTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins"},
@@ -109,6 +110,11 @@ if (pages.editDealContractPeriod === undefined) {
             browser.actions().mouseMove(pages.editDealContractPeriod.elems.editEndRulesAreaElement).perform();
             pages.editDealContractPeriod.elems.editEndRulesIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editRulesTitleTextEndRules));
+        },
+
+        editClickOnTheDeleteEndRulesButton: function(){
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editDeleteButtonEndRules);
+            pages.editDealContractPeriod.elems.editDeleteButtonEndRules.click();
         },
 
 

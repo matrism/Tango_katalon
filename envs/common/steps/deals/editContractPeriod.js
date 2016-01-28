@@ -481,6 +481,29 @@ exports.editEndRulesForm = function () {
     });
 };
 
+exports.editCancelDeleteEntireEndRules = function () {
+    it("Edit cancel delete entire end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']"))));
+        browser.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']")).click();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editConfirmDeleteEntireEndRules = function () {
+    it("Edit confirm delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
+        browser.driver.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")).click();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editClickOnDeleteEndRulesButton = function(){
+    it("Edit click on the delete entire end rules button ", function(){
+        pages.editDealContractPeriod.editClickOnTheDeleteEndRulesButton();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
 exports.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
     it("Edit delete end rules condition number " + i + " row number " + j, function () {
         pages.editDealContractPeriod.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
