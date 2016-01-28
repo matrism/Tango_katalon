@@ -192,11 +192,8 @@ exports.itCancelInternalContactsChanges = function () {
 };
 
 exports.editSigningTerritory = function (value) {
-    it("Edit the signing territory general screen and add new company code", function () {
+    it("Edit the signing territory general screen", function () {
         pages.editDealGeneral.editSelectDesiredSigningTerritory(value);
-        pages.editDealGeneral.waitForAjax();
-        pages.editDealGeneral.editFillIntoTheCompanyCode("a");
-        pages.editDealGeneral.editSelectRandomValueDropDownCompanyCode();
         pages.editDealGeneral.waitForAjax();
     });
 };
