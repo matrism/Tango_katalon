@@ -210,7 +210,7 @@ exports.feature = [
             steps.headerDeal.checkSigningTerritoryValue("Austria");
             steps.headerDeal.checkLastUpdateText();
             steps.headerDeal.checkLastUpdateValue(currentDate);
-            //steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
+            steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
 
         }
     },
