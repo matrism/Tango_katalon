@@ -393,29 +393,30 @@ exports.feature = [
             steps.createDealContractPeriod.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "2");
             steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
-
             // add new rule
             steps.createDealContractPeriod.clickOnAddRuleInTheBottomOfEndRulesForm();
             steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(2, "Target End Date");
             steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "Final Contract Period");
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "TRUE");
-
-
             // add new rule
             steps.createDealContractPeriod.clickOnAddRuleInTheBottomOfEndRulesForm();
             steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(3, "Recouped Date");
             steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Final Contract Period");
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "FALSE");
-
+            //delete end rule
+            steps.createDealContractPeriod.clickOnDeleteEndRulesButton();
+            steps.createDealContractPeriod.cancelDeleteEntireEndRules();
+            steps.createDealContractPeriod.clickOnDeleteEndRulesButton();
+            steps.createDealContractPeriod.confirmDeleteEntireEndRules();
 
             //save end rules
-            steps.createDealContractPeriod.saveEndRulesForm();
+            //steps.createDealContractPeriod.saveEndRulesForm();
 
 
-            steps.deal.itContinueToNextPage();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+            //steps.deal.itContinueToNextPage();
+            //steps.deal.saveDeal();
+            //steps.deal.waitForDealToBeSaved();
+            //steps.deal.returnDealNumber();
         }
     }
 

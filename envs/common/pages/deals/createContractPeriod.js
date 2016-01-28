@@ -937,6 +937,11 @@ if (pages.createDealContractPeriod === undefined) {
             pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog.click();
         },
 
+        clickOnTheDeleteEndRulesButton: function(){
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.deleteButtonEndRules);
+            pages.createDealContractPeriod.elems.deleteButtonEndRules.click();
+        },
+
         clickOnTheEndRulesArea: function () {
             browser.driver.findElement(By.css("div[data-ng-form='rulesForm'] div.summary-end-rules")).click();
         },
