@@ -195,6 +195,12 @@ exports.editSigningTerritory = function (value) {
     it("Edit the signing territory general screen", function () {
         pages.editDealGeneral.editSelectDesiredSigningTerritory(value);
         pages.editDealGeneral.waitForAjax();
+
+        if(systemConfig.env.name === 'qa') {
+            pages.editDealGeneral.editFillIntoTheCompanyCode("a");
+            pages.editDealGeneral.editSelectRandomValueDropDownCompanyCode();
+            pages.editDealGeneral.waitForAjax();
+        }
     });
 };
 
