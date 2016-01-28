@@ -409,7 +409,6 @@ exports.feature = [
             steps.createDealContractPeriod.clickOnDeleteEndRulesButton();
             steps.createDealContractPeriod.confirmDeleteEntireEndRules();
 
-
             //add end rules
             steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
             steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Repayment Date");
@@ -435,10 +434,32 @@ exports.feature = [
             steps.editDealContractPeriod.editClickOnDeleteEndRulesButton();
             steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
 
-            //steps.deal.itContinueToNextPage();
-            //steps.deal.saveDeal();
-            //steps.deal.waitForDealToBeSaved();
-            //steps.deal.returnDealNumber();
+            //add end rules
+            steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Repayment Date");
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
+            steps.createDealContractPeriod.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "2");
+            steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
+            // add new rule
+            steps.createDealContractPeriod.clickOnAddRuleInTheBottomOfEndRulesForm();
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(2, "Target End Date");
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "Final Contract Period");
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "TRUE");
+            // add new rule
+            steps.createDealContractPeriod.clickOnAddRuleInTheBottomOfEndRulesForm();
+            steps.createDealContractPeriod.selectEndDateEndRulesSpecificValueRuleNumberI(3, "Recouped Date");
+            steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Final Contract Period");
+            steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "FALSE");
+            //save end rules
+            steps.createDealContractPeriod.saveEndRulesForm();
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
         }
     }
 
