@@ -11,7 +11,7 @@ var path = require('path'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
     stepCountReporter = require('../tools/stepCountReporter'),
     HtmlReporter = requireCustom('protractor-jasmine2-screenshot-reporter'),
-    JSONReporter = require('jasmine-json-test-reporter'),
+    JSONReporter = requireCustom('jasmine-json-test-reporter'),
     fs = require('fs'),
     screenShotPath,
     tmp = require('tmp'),
@@ -974,7 +974,7 @@ config = {
                                                         }
                                                     });
 
-                                                    if(!foundTestBug) {
+                                                    if(!foundTestBug && systemConfig.bugLabel) {
                                                         Zapi.createJiraBug(testCaseId, feature, testStepBug, systemConfig.bugLabel)
                                                             .then(function (response) {
                                                                 linkedIssue = JSON.parse(response);
@@ -1164,7 +1164,7 @@ config = {
                                                         }
                                                     });
 
-                                                    if(!foundTestBug) {
+                                                    if(!foundTestBug && systemConfig.bugLabel) {
                                                         Zapi.createJiraBug(testCaseId, feature, testStepBug, systemConfig.bugLabel)
                                                             .then(function (response) {
                                                                 linkedIssue = JSON.parse(response);
