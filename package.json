@@ -54,8 +54,5 @@
     "time": "^0.11.4"
   },
   "author": "WMG",
-  "license": "ISC",
-  "devDependencies": {
-    "jasmine-json-test-reporter": "^1.0.0-beta"
-  }
+  "license": "ISC"
 }
