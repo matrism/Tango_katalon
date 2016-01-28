@@ -7,95 +7,95 @@ exports.beforeFeature = [
     [steps.login.itLogin],
 ];
 
-exports.commonFeatureTags = ['royaltyRates', 'royaltyUtilities', 'smoke'];
+exports.commonFeatureTags = ['royaltyProcessing', 'dataUtilities', 'royaltyUtilitiesSmoke', 'smoke'];
 
 exports.feature = [
     {
         name: 'Navigate across every royalty utility menu item and check first form fields',
-        tags: [],
+        tags: ['smoke', 'sanity', 'dataUtilitiesSmoke', 'dataUtilitiesSanity'],
         steps: function () {
             using(steps.dataUtilities, function () {
                 this.go();
 
-                this.openMenuBoardItem(0, 'Royalty Utilities');
+                this.openMenuBoardItem('Royalty Utilities');
 
-                this.openMenuBoardItem(1, 'Company Code');
+                this.openMenuBoardItem('Company Code');
 
-                this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItemByIndex(0);
 
-                this.openMenuBoardItemByIndex(3, 0);
-
-                this.expectFormControlLabelToBeVisible(0);
-                this.expectFormControlGroupDataNotToBeBlank(0);
-
-                this.navigateBreadcrumb('Royalty Utilities');
-
-                this.openMenuBoardItem(1, 'Statement Group');
-
-                this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItemByIndex(0);
 
                 this.expectFormControlLabelToBeVisible(0);
                 this.expectFormControlGroupDataNotToBeBlank(0);
 
                 this.navigateBreadcrumb('Royalty Utilities');
 
-                this.openMenuBoardItem(1, 'Royalty Period Data');
+                this.openMenuBoardItem('Statement Group');
 
-                this.openMenuBoardItemByIndex(2, 0);
-
-                this.expectFormControlLabelToBeVisible(0);
-                this.expectFormControlGroupDataNotToBeBlank(0);
-
-                this.navigateBreadcrumb('Royalty Utilities');
-
-                this.openMenuBoardItem(1, 'Royalty Processing Territory');
-
-                this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItemByIndex(0);
 
                 this.expectFormControlLabelToBeVisible(0);
                 this.expectFormControlGroupDataNotToBeBlank(0);
 
                 this.navigateBreadcrumb('Royalty Utilities');
 
-                this.openMenuBoardItem(1, 'Society Royalty Allocation');
+                this.openMenuBoardItem('Royalty Period Data');
 
-                this.openMenuBoardItemByIndex(2, 0);
-
-                this.expectFormControlLabelToBeVisible(0);
-                this.expectFormControlGroupDataNotToBeBlank(0);
-
-                this.navigateBreadcrumb('Royalty Utilities');
-
-                this.openMenuBoardItem(1, 'Income File Type');
-
-                this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItemByIndex(0);
 
                 this.expectFormControlLabelToBeVisible(0);
                 this.expectFormControlGroupDataNotToBeBlank(0);
 
                 this.navigateBreadcrumb('Royalty Utilities');
 
-                this.openMenuBoardItem(1, 'Nordic Processing');
+                this.openMenuBoardItem('Royalty Processing Territory');
 
-                this.openMenuBoardItemByIndex(2, 0);
-
-                this.expectFormControlLabelToBeVisible(0);
-                this.expectFormControlGroupDataNotToBeBlank(0);
-
-                this.navigateBreadcrumb('Royalty Utilities');
-
-                this.openMenuBoardItem(1, 'Deal Signing Territory');
-
-                this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItemByIndex(0);
 
                 this.expectFormControlLabelToBeVisible(0);
                 this.expectFormControlGroupDataNotToBeBlank(0);
 
                 this.navigateBreadcrumb('Royalty Utilities');
 
-                this.openMenuBoardItem(1, 'Company Set');
+                this.openMenuBoardItem('Society Royalty Allocation');
 
-                this.openMenuBoardItemByIndex(2, 0);
+                this.openMenuBoardItemByIndex(0);
+
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
+
+                this.navigateBreadcrumb('Royalty Utilities');
+
+                this.openMenuBoardItem('Income File Type');
+
+                this.openMenuBoardItemByIndex(0);
+
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
+
+                this.navigateBreadcrumb('Royalty Utilities');
+
+                this.openMenuBoardItem('Nordic Processing');
+
+                this.openMenuBoardItemByIndex(0);
+
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
+
+                this.navigateBreadcrumb('Royalty Utilities');
+
+                this.openMenuBoardItem('Deal Signing Territory');
+
+                this.openMenuBoardItemByIndex(0);
+
+                this.expectFormControlLabelToBeVisible(0);
+                this.expectFormControlGroupDataNotToBeBlank(0);
+
+                this.navigateBreadcrumb('Royalty Utilities');
+
+                this.openMenuBoardItem('Company Set');
+
+                this.openMenuBoardItemByIndex(0);
 
                 this.expectFormControlLabelToBeVisible(0);
                 this.expectFormControlGroupDataNotToBeBlank(0);
