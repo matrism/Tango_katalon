@@ -468,8 +468,7 @@ config = {
                                         parts = subFeatureName.split(':');
 
                                     var subLocalFeature = {
-                                        //name: parts[2],
-                                        name: subFeatureName,
+                                        name: parts[2],
                                         passed: subFeaturePassed,
                                         severity: subFeature.severity,
                                         filename: subFeature.filename,
@@ -505,10 +504,6 @@ config = {
 
                         for(var j =0; j < features.length; j++) {
                             var feature = features[j];
-/*
-                            console.log('------------!!----------');
-                            console.log(feature);
-                            console.log('------------!!----------');*/
 
                             if(!feature.passed) {
                                 scriptPassed = false;
