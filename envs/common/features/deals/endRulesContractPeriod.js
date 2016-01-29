@@ -459,6 +459,13 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
+            //edit end rules and delete end rules
+            steps.editDealContractPeriod.editEndRulesForm();
+            //delete end rule
+            steps.editDealContractPeriod.editClickOnDeleteEndRulesButton();
+            steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
+
+
 
         }
     }
