@@ -883,7 +883,7 @@ config = {
 
                                                 testSteps.forEach(function (testStep, i) {
                                                     localTestSteps.push({
-                                                        step: allFeatureSteps[i+1],
+                                                        step: allFeatureSteps[i],
                                                         createdStep: testStep,
                                                         index: i
                                                     });
