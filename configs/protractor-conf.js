@@ -469,7 +469,6 @@ config = {
 
                                     var subLocalFeature = {
                                         name: parts[3],
-                                        //name: subFeatureName,
                                         passed: subFeaturePassed,
                                         severity: subFeature.severity,
                                         filename: subFeature.filename,
@@ -1031,7 +1030,7 @@ config = {
                                             });
 
                                     } else {*/
-  /*                                      console.log('Creating a Jira Issue ...');
+                                        console.log('Creating a Jira Issue ...');
                                         Zapi.createJiraIssue(testFullName, jiraComponentName)
                                             .then(function (response) {
                                                 jiraIssue = JSON.parse(response);
@@ -1212,7 +1211,7 @@ config = {
                                                     console.log('All done.');
                                                     zapiPromise.fulfill();
                                                 }
-                                            });*/
+                                            });
                                     //}
 
                                 });
