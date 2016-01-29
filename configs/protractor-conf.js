@@ -924,7 +924,7 @@ config = {
 
                                                 testSteps.forEach(function (localTestStep) {
 
-                                                    console.log('-----------localTestStep----------------');
+                                                    console.log('-----------localTestStep-------------------');
                                                     console.log(localTestStep);
                                                     console.log('-----------localTestStep----------------');
 
