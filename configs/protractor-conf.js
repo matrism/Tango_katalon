@@ -958,13 +958,10 @@ config = {
                                                 });
 
                                                 if(!_.isEmpty(testStepBug)) {
-                                                    var summary = 'Test Bug through Jira API - linked to  ' + testStepBug.step.name + ' --- ' + feature.key,
+                                                    var summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
                                                         foundTestBug = false;
 
                                                     projectTestBugs.forEach(function(testBug) {
-                                                        console.log('------------------');
-                                                        console.log(testBug);
-                                                        console.log('------------------');
                                                         if(!foundTestBug && (testBug.summary == summary)) {
                                                             console.log('here  projectTestBugs');
                                                             linkedIssue = {
