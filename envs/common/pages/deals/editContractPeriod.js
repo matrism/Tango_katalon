@@ -135,6 +135,7 @@ if (pages.editDealContractPeriod === undefined) {
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog);
             browser.actions().mouseMove(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
             browser.actions().click(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editAddContractPeriodElem ));
             //pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog.click();
         },
 
