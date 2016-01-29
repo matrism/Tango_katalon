@@ -873,6 +873,9 @@ config = {
                                                 var allFeatureSteps = [];
 
                                                 feature.steps.forEach(function (step) {
+                                                    console.log('-----------------feature.steps-------------------');
+                                                    console.log(step);
+                                                    console.log('-----------------feature.steps-------------------');
                                                     allFeatureSteps.push(step);
                                                 });
 
