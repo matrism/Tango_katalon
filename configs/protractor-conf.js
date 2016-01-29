@@ -959,7 +959,7 @@ config = {
 
                                                 if(!_.isEmpty(testStepBug)) {
                                                     var summary = 'Test Bug through Jira API - linked to  --- ' + feature.key,
-                                                        summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
+                                                        //summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
                                                         //summary = s.replace(/'/gi,"\\'"),
                                                         foundTestBug = false;
 
