@@ -922,6 +922,10 @@ config = {
 
                                                 testSteps.forEach(function (localTestStep) {
 
+                                                    console.log('-----------localTestStep----------------');
+                                                    console.log(localTestStep);
+                                                    console.log('-----------localTestStep----------------');
+
                                                     if (localTestStep.step) {
                                                         if (!localTestStep.step.passed) {
                                                             console.log('Not passed step found, creating bug and linking ...');
