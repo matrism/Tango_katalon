@@ -966,9 +966,10 @@ config = {
 
                                                     projectTestBugs.forEach(function(testBug) {
                                                         console.log('=======================testBug===================');
-                                                        console.log(testBug);
+                                                        console.log(testBug.summary);
+                                                        console.log(summary);
                                                         console.log('=======================testBug===================');
-                                                        if(testBug.summary == summary) {
+                                                        if(!foundTestBug && (testBug.summary === summary)) {
                                                             console.log('here  projectTestBugs');
                                                             linkedIssue = {
                                                                 id:  testBug.id,
