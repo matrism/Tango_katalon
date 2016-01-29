@@ -552,10 +552,6 @@ config = {
                         }
                     }
 
-                    console.log('------scriptFeatures-----');
-                    console.log(scriptFeatures[0].steps);
-                    console.log('------scriptFeatures-----');
-
                     return protractor.promise.defer().fulfill();
                 },
 
@@ -966,7 +962,11 @@ config = {
                                                         foundTestBug = false;
 
                                                     projectTestBugs.forEach(function(testBug) {
-                                                        if(!foundTestBug && (testBug.summary === summary)) {
+                                                        console.log('------------------');
+                                                        console.log(testBug);
+                                                        console.log('------------------');
+                                                        if(!foundTestBug && (testBug.summary == summary)) {
+                                                            console.log('here  projectTestBugs');
                                                             linkedIssue = {
                                                                 id:  testBug.id,
                                                                 key: testBug.key,
