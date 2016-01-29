@@ -171,6 +171,7 @@ if (pages.editDealScope === undefined) {
             browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
             //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
             browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("input[name='scopeDescription']"))));
             pages.editDealScope.waitForAjax();
         },
 
