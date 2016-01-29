@@ -958,7 +958,8 @@ config = {
                                                 });
 
                                                 if(!_.isEmpty(testStepBug)) {
-                                                    var summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
+                                                    var summary = 'Test Bug through Jira API - linked to  --- ' + feature.key,
+                                                        summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
                                                         //summary = s.replace(/'/gi,"\\'"),
                                                         foundTestBug = false;
 
@@ -980,6 +981,9 @@ config = {
                                                             foundTestBug = true;
                                                         }
                                                     });
+
+                                                    console.log('foundTestBug');
+                                                    console.log(foundTestBug);
 
                                                     if(!foundTestBug && systemConfig.bugLabel) {
                                                         Zapi.createJiraBug(testCaseId, feature, testStepBug, systemConfig.bugLabel)
