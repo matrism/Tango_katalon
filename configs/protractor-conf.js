@@ -996,7 +996,7 @@ config = {
                                                     }
                                                 }
 
-                                                testStepResultPromise.fulfill();
+                                                //testStepResultPromise.fulfill();
 
                                                 return testStepResultPromise;
                                             }, failCallback)
