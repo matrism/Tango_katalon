@@ -468,7 +468,7 @@ config = {
                                         parts = subFeatureName.split(':');
 
                                     var subLocalFeature = {
-                                        name: parts[1],
+                                        name: parts[3],
                                         //name: subFeatureName,
                                         passed: subFeaturePassed,
                                         severity: subFeature.severity,
