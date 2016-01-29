@@ -171,7 +171,6 @@ if (pages.editDealScope === undefined) {
             browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
             //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
             browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
-            pages.editDealScope.waitForAjax();
         },
 
         checkOverrideNumbersAddedOnScope: function (i) {
@@ -657,6 +656,7 @@ if (pages.editDealScope === undefined) {
         },
 
         editFillInTheNumberOfCopiesForScopeNumberISpecificValue: function (i, value) {
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"))));
             browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']")).sendKeys(value);
         },
 
@@ -828,6 +828,7 @@ if (pages.editDealScope === undefined) {
         },
 
         clickOnTheCopyPublisherShareInCopyScopeModal: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton));
             pages.base.scrollIntoView(pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton);
             pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton.click();
             pages.editDealScope.elems.copyPublisherShareInCopyScopeModalButton.getAttribute("class").
@@ -848,6 +849,7 @@ if (pages.editDealScope === undefined) {
         },
 
         clickOnTheCopyRoyaltyRatesInCopyScopeModal: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton));
             pages.base.scrollIntoView(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton);
             pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.click();
             pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.getAttribute("class").
