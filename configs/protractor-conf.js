@@ -553,7 +553,6 @@ config = {
                     }
 
                     console.log('------scriptFeatures-----');
-                    console.log(scriptFeatures[0].steps);
                     console.log('------scriptFeatures-----');
 
                     return protractor.promise.defer().fulfill();
@@ -876,9 +875,6 @@ config = {
 
                                                 var allFeatureSteps = [];
                                                 feature.steps.forEach(function (step) {
-                                                    console.log('-----------------feature.steps-------------------');
-                                                    console.log(step);
-                                                    console.log('-----------------feature.steps-------------------');
                                                     allFeatureSteps.push(step);
                                                 });
 
@@ -886,7 +882,7 @@ config = {
 
                                                 testSteps.forEach(function (testStep, i) {
                                                     localTestSteps.push({
-                                                        step: allFeatureSteps[i],
+                                                        step: allFeatureSteps[i+1],
                                                         createdStep: testStep,
                                                         index: i
                                                     });
