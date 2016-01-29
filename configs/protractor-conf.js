@@ -553,7 +553,7 @@ config = {
                     }
 
                     console.log('------scriptFeatures-----');
-                    console.log(scriptFeatures);
+                    console.log(scriptFeatures[0].steps);
                     console.log('------scriptFeatures-----');
 
                     return protractor.promise.defer().fulfill();
