@@ -925,10 +925,6 @@ config = {
 
                                                 testSteps.forEach(function (localTestStep) {
 
-                                                    console.log('-----------localTestStep-------------------');
-                                                    console.log(localTestStep);
-                                                    console.log('-----------localTestStep----------------');
-
                                                     if (localTestStep.step) {
                                                         if (!localTestStep.step.passed) {
                                                             console.log('Not passed step found, creating bug and linking ...');
@@ -951,10 +947,6 @@ config = {
                                                                         }
                                                                     }
                                                                 }
-                                                                console.log('-----bugFound-------');
-                                                                console.log(bugFound);
-                                                                console.log(testStepBug);
-                                                                console.log('-----bugFound-------');
                                                             }
                                                         } else {
                                                             Zapi.updateTestStepResult(testCaseId, jiraExecutionId, localTestStep, feature)
@@ -973,8 +965,6 @@ config = {
                                                     var summary = 'Test Bug through Jira API - linked to  ' + testStepBug.step.name + ' --- ' + feature.key,
                                                         foundTestBug = false;
 
-                                                    console.log('here');
-                                                    console.log(summary);
                                                     projectTestBugs.forEach(function(testBug) {
                                                         if(!foundTestBug && (testBug.summary === summary)) {
                                                             linkedIssue = {
