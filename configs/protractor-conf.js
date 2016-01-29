@@ -946,14 +946,14 @@ config = {
                                                                 }
                                                             }
                                                         } else {
-/*                                                            Zapi.updateTestStepResult(testCaseId, jiraExecutionId, localTestStep, feature)
+                                                            Zapi.updateTestStepResult(testCaseId, jiraExecutionId, localTestStep, feature)
                                                                 .then(function () {
                                                                     testStepResultsDone++;
 
                                                                     if (testStepResultsDone === testSteps.length) {
                                                                         testStepResultPromise.fulfill();
                                                                     }
-                                                                }, failCallback);*/
+                                                                }, failCallback);
                                                         }
                                                     }
                                                 });
