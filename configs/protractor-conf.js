@@ -970,7 +970,7 @@ config = {
                                                 });
 
                                                 if(!_.isEmpty(testStepBug)) {
-                                                    var summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
+                                                    var summary = 'Test Bug through Jira API - linked to  ' + testStepBug.step.name + ' --- ' + feature.key,
                                                         foundTestBug = false;
 
                                                     console.log('here');
