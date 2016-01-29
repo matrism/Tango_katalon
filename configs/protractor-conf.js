@@ -552,6 +552,10 @@ config = {
                         }
                     }
 
+                    console.log('------scriptFeatures-----');
+                    console.log(scriptFeatures);
+                    console.log('------scriptFeatures-----');
+
                     return protractor.promise.defer().fulfill();
                 },
 
@@ -871,7 +875,6 @@ config = {
                                                 console.log('Mapping Steps for Issue ...');
 
                                                 var allFeatureSteps = [];
-
                                                 feature.steps.forEach(function (step) {
                                                     console.log('-----------------feature.steps-------------------');
                                                     console.log(step);
