@@ -968,7 +968,7 @@ config = {
                                                         console.log('=======================testBug===================');
                                                         console.log(testBug);
                                                         console.log('=======================testBug===================');
-                                                        if(!foundTestBug && (testBug.summary == summary)) {
+                                                        if(testBug.summary == summary) {
                                                             console.log('here  projectTestBugs');
                                                             linkedIssue = {
                                                                 id:  testBug.id,
