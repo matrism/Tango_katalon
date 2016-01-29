@@ -958,8 +958,7 @@ config = {
                                                 });
 
                                                 if(!_.isEmpty(testStepBug)) {
-                                                    var summary = 'Test Bug through Jira API - linked to  --- ' + feature.key,
-                                                        //summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
+                                                    var summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
                                                         //summary = s.replace(/'/gi,"\\'"),
                                                         foundTestBug = false;
 
@@ -1007,7 +1006,7 @@ config = {
                                                     }
                                                 }
 
-                                                //testStepResultPromise.fulfill();
+                                                testStepResultPromise.fulfill();
 
                                                 return testStepResultPromise;
                                             }, failCallback)

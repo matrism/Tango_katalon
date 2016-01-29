@@ -72,7 +72,7 @@ var Zapi = function () {
                     'project': {
                         'id': this.projectId || '14306'
                     },
-                    'summary': 'Test Bug through Jira API - linked to  --- ' + feature.key,
+                    'summary': 'Test Bug through Jira API - linked to ' + testStep.step.name + ' --- ' + feature.key,
                     'issuetype': {
                         'id': '1'
                     },
