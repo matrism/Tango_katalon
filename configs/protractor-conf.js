@@ -958,8 +958,8 @@ config = {
                                                 });
 
                                                 if(!_.isEmpty(testStepBug)) {
-                                                    var s = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
-                                                        summary = s.replace(/'/gi,"\\'"),
+                                                    var summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
+                                                        //summary = s.replace(/'/gi,"\\'"),
                                                         foundTestBug = false;
 
                                                     console.log(summary);
@@ -969,7 +969,7 @@ config = {
                                                         console.log(testBug.summary);
                                                         console.log(summary);
                                                         console.log('=======================testBug===================');
-                                                        if(!foundTestBug && (testBug.summary === summary)) {
+                                                        if(!foundTestBug && (testBug.summary == summary)) {
                                                             console.log('here  projectTestBugs');
                                                             linkedIssue = {
                                                                 id:  testBug.id,
