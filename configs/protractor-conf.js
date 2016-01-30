@@ -850,7 +850,7 @@ config = {
                                         }
                                     });
 
-/*                                    if (foundTestCase) {
+                                    if (foundTestCase) {
                                         Zapi.executeTestToTestCycle(cycleId, testCaseId)
                                             .then(function (response) {
                                                 var execIdObject = JSON.parse(response);
@@ -1027,7 +1027,7 @@ config = {
                                                 }
                                             });
 
-                                    } else {*/
+                                    } else {
                                         console.log('Creating a Jira Issue ...');
                                         Zapi.createJiraIssue(testFullName, jiraComponentName)
                                             .then(function (response) {
@@ -1217,7 +1217,7 @@ config = {
                                                     zapiPromise.fulfill();
                                                 }
                                             });
-                                    //}
+                                    }
 
                                 });
 
