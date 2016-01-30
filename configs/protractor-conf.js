@@ -1196,11 +1196,20 @@ config = {
                                                 return testStepResultPromise;
                                             }, failCallback)
                                             .then(function () {
+                                                console.log('-------------------testStepBug------------------------');
+                                                console.log(testStepBug);
+                                                console.log('-------------------testStepBug------------------------');
                                                 if (feature.bugsCreated && feature.bugsCreated.length) {
                                                     return Zapi.bulkUpdateExecutionDefects(feature.bugsCreated, jiraExecutionId)
                                                         .then(function (response) {
                                                             console.log('Succesfully linked defects (bugs created) to the execution with ID: ' + jiraExecutionId);
-                                                        }, failCallback);
+                                                        }, failCallback)
+                                                        .then(function () {
+                                                            return Zapi.updateTestStepResult(testCaseId, jiraExecutionId, testStepBug, feature, feature.bugsCreated);
+                                                        })
+                                                        .then(function () {
+                                                            return Zapi.updateAttachment(testStepBug.resultStep.id, path.join(screenShotPath, testStepBug.step.filename));
+                                                        });
                                                 } else {
                                                     return protractor.promise.defer().fulfill();
                                                 }
