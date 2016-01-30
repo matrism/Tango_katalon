@@ -1010,7 +1010,7 @@ config = {
                                                             console.log('Succesfully linked defects (bugs created) to the execution with ID: ' + jiraExecutionId);
                                                         }, failCallback)
                                                         .then(function () {
-                                                            return Zapi.updateTestStepResult(testCaseId, jiraExecutionId, testStepBug, feature, linkedIssue);
+                                                            return Zapi.updateTestStepResult(testCaseId, jiraExecutionId, testStepBug, feature, feature.bugsCreated);
                                                         })
                                                         .then(function () {
                                                             return Zapi.updateAttachment(testStepBug.resultStep.id, path.join(screenShotPath, testStepBug.step.filename));
