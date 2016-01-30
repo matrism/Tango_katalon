@@ -801,6 +801,7 @@ config = {
                                         componentName = '',
                                         jiraComponentName = '',
                                         featuresDone = 0,
+                                        testStepBug = {},
                                         nameParts = feature.name.split('Tags:'),
                                         componentArray = nameParts[1].split('.'),
                                         componentNames = componentArray[0].split(', '),
@@ -912,7 +913,6 @@ config = {
                                                 var testStepResultPromise = protractor.promise.defer(),
                                                     testStepResultsDone = 0,
                                                     bugFound =false,
-                                                    testStepBug = {},
                                                     linkedIssue;
 
                                                 if (!feature.passed) {
@@ -965,12 +965,7 @@ config = {
                                                     console.log(summary);
 
                                                     projectTestBugs.forEach(function(testBug) {
-                                                        console.log('=======================testBug===================');
-                                                        console.log(testBug.summary);
-                                                        console.log(summary);
-                                                        console.log('=======================testBug===================');
                                                         if(!foundTestBug && (testBug.summary == summary)) {
-                                                            console.log('here  projectTestBugs');
                                                             linkedIssue = {
                                                                 id:  testBug.id,
                                                                 key: testBug.key,
@@ -980,9 +975,6 @@ config = {
                                                             foundTestBug = true;
                                                         }
                                                     });
-
-                                                    console.log('foundTestBug');
-                                                    console.log(foundTestBug);
 
                                                     if(!foundTestBug && systemConfig.bugLabel) {
                                                         Zapi.createJiraBug(testCaseId, feature, testStepBug, systemConfig.bugLabel)
@@ -1016,7 +1008,13 @@ config = {
                                                     return Zapi.bulkUpdateExecutionDefects(feature.bugsCreated, jiraExecutionId)
                                                         .then(function (response) {
                                                             console.log('Succesfully linked defects (bugs created) to the execution with ID: ' + jiraExecutionId);
-                                                        }, failCallback);
+                                                        }, failCallback)
+                                                        .then(function () {
+                                                            return Zapi.updateTestStepResult(testCaseId, jiraExecutionId, testStepBug, feature, linkedIssue);
+                                                        })
+                                                        .then(function () {
+                                                            return Zapi.updateAttachment(testStepBug.resultStep.id, path.join(screenShotPath, testStepBug.step.filename));
+                                                        });
                                                 } else {
                                                     return protractor.promise.defer().fulfill();
                                                 }
