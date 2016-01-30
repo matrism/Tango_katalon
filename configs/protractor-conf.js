@@ -1195,9 +1195,6 @@ config = {
                                                 return testStepResultPromise;
                                             }, failCallback)
                                             .then(function () {
-                                                console.log('-------------------testStepBug------------------------');
-                                                console.log(testStepBug);
-                                                console.log('-------------------testStepBug------------------------');
                                                 if (feature.bugsCreated && feature.bugsCreated.length) {
                                                     return Zapi.bulkUpdateExecutionDefects(feature.bugsCreated, jiraExecutionId)
                                                         .then(function (response) {
