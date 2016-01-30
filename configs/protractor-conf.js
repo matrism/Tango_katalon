@@ -850,7 +850,7 @@ config = {
                                         }
                                     });
 
-                                    if (foundTestCase) {
+/*                                    if (foundTestCase) {
                                         Zapi.executeTestToTestCycle(cycleId, testCaseId)
                                             .then(function (response) {
                                                 var execIdObject = JSON.parse(response);
@@ -959,10 +959,7 @@ config = {
 
                                                 if(!_.isEmpty(testStepBug)) {
                                                     var summary = 'Test Bug through Jira API - linked to ' + testStepBug.step.name + ' --- ' + feature.key,
-                                                        //summary = s.replace(/'/gi,"\\'"),
                                                         foundTestBug = false;
-
-                                                    console.log(summary);
 
                                                     projectTestBugs.forEach(function(testBug) {
                                                         if(!foundTestBug && (testBug.summary == summary)) {
@@ -998,7 +995,7 @@ config = {
                                                     }
                                                 }
 
-                                                //testStepResultPromise.fulfill();
+                                                testStepResultPromise.fulfill();
 
                                                 return testStepResultPromise;
                                             }, failCallback)
@@ -1030,7 +1027,7 @@ config = {
                                                 }
                                             });
 
-                                    } else {
+                                    } else {*/
                                         console.log('Creating a Jira Issue ...');
                                         Zapi.createJiraIssue(testFullName, jiraComponentName)
                                             .then(function (response) {
@@ -1194,6 +1191,8 @@ config = {
                                                     }
                                                 }
 
+                                                testStepResultPromise.fulfill();
+
                                                 return testStepResultPromise;
                                             }, failCallback)
                                             .then(function () {
@@ -1219,7 +1218,7 @@ config = {
                                                     zapiPromise.fulfill();
                                                 }
                                             });
-                                    }
+                                    //}
 
                                 });
 
