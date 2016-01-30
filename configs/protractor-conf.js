@@ -1110,7 +1110,6 @@ config = {
                                                 var testStepResultPromise = protractor.promise.defer(),
                                                     testStepResultsDone = 0,
                                                     bugFound =false,
-                                                    testStepBug = {},
                                                     linkedIssue;
 
                                                 if (!feature.passed) {
