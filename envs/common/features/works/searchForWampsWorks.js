@@ -17,7 +17,7 @@ exports.feature = [
             [steps.work.enterWorkSearchTerms, ['WW 008918634 00']],
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
-            [steps.work.expectWorkSearchMatchTitleToBe, [0, "DON'T UPSET THE RHYTHMs"]],
+            [steps.work.expectWorkSearchMatchTitleToBe, [0, "DON'T UPSET THE RHYTHM"]],
 
             [steps.work.enterWorkSearchTerms, ['WW 008887127 00']],
             [steps.base.sleep, [200]],
