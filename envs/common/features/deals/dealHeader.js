@@ -190,8 +190,10 @@ exports.feature = [
         name: "Create a deal and check the deal header signing and last update",
         tags: ["header_signing_last_update"],
         steps: function () {
-            var today = new Date();
-            var currentDate = today.getFullYear() + "-" + today.getMonth() + 1 + "-" + today.getDate();
+            var today = new Date(),
+                currentDate = today.getFullYear() + '-' +
+                    ('0' + (today.getMonth() + 1)).slice(-2) + '-' +
+                    ('0' + (today.getDate())).slice(-2);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();

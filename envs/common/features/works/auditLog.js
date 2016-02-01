@@ -59,9 +59,9 @@ exports.feature = [
         tags: [],
         steps: function () {
             var today = new Date(),
-                currentDate = today.getFullYear() + "-" + 
-                    ("0" + (today.getMonth() + 1)).slice(-2) + "-" + 
-                    today.getDate();
+                currentDate = today.getFullYear() + '-' +
+                    ('0' + (today.getMonth() + 1)).slice(-2) + '-' +
+                    ('0' + (today.getDate())).slice(-2);
             steps.base.useEntityDataSlot('work', 0);
             using(steps.work, function () {
                 this.goToWorkPage();
