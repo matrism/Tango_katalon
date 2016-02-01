@@ -612,6 +612,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         saveTheEndRules: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.saveButtonEndRules));
             pages.base.scrollIntoView(pages.createDealContractPeriod.elems.saveButtonEndRules);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealContractPeriod.elems.saveButtonEndRules));
             pages.createDealContractPeriod.elems.saveButtonEndRules.click();

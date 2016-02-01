@@ -74,8 +74,12 @@ if (pages.editDealRtp === undefined) {
         },
 
         editDeleteTheAddAnotherAcquisitionForm: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon));
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon);
             pages.editDealRtp.elems.editDeleteAnotherAcquisitionFormIcon.click();
             pages.editDealRtp.waitForAjax();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.confirmDeleteModalDialog));
+            pages.base.scrollIntoView(pages.editDealRtp.elems.confirmDeleteModalDialog);
             pages.editDealRtp.elems.confirmDeleteModalDialog.click();
             pages.editDealRtp.waitForAjax();
         },

@@ -492,13 +492,15 @@ exports.editCancelDeleteEntireEndRules = function () {
 exports.editConfirmDeleteEntireEndRules = function () {
     it("Edit confirm delete end rules modal dialog ", function () {
         browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
+        pages.base.scrollIntoView(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")));
+        browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
         browser.driver.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")).click();
         pages.editDealContractPeriod.waitForAjax();
     });
 };
 
-exports.editClickOnDeleteEndRulesButton = function(){
-    it("Edit click on the delete entire end rules button ", function(){
+exports.editClickOnDeleteEndRulesButton = function () {
+    it("Edit click on the delete entire end rules button ", function () {
         pages.editDealContractPeriod.editClickOnTheDeleteEndRulesButton();
         pages.editDealContractPeriod.waitForAjax();
     });
@@ -526,7 +528,7 @@ exports.editCancelDeleteEndRules = function () {
 };
 
 exports.editDeleteTheRuleEndRulesNumberI = function (i) {
-    it("Edit delete the entire rule number "+ i +" from end rules form ", function () {
+    it("Edit delete the entire rule number " + i + " from end rules form ", function () {
         pages.editDealContractPeriod.editClickOnTheDeleteRuleEndRulesNumberI(i);
         pages.editDealContractPeriod.waitForAjax();
     });
