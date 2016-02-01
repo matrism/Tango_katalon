@@ -2,7 +2,7 @@
 
 var randomString = random.string.makeMemoizedGenerator(),
     using = fnutils.using,
-    data = requireFromEnvFolder('features/works/data/mergeWorksRegression.js');
+    moment = require('moment');
 
 exports.commonFeatureTags = [
     'mergeWorksRegression',
@@ -16,6 +16,45 @@ exports.beforeFeature = function () {
 };
 
 exports.feature = [
+    {
+        name: "Create a deal with publisher share set",
+        tags: [],
+        steps: function () {
+            steps.base.useBlankEntityDataSlot('deal', 0);
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.enterActualStartDate(
+                moment().format('YYYY-MM-DD')
+            );
+            steps.createDealContractPeriod.enterTargetEndDateInMonths(12);
+            steps.createDealScope.openNewScopeForm();
+            steps.createDealScope.selectContractType('Administration');
+            steps.createDealScope.enterTerritoryOfControlSearchTerms(
+                'Brazil'
+            );
+            steps.createDealScope.selectTerritoryOfControlSearchResultByIndex(0);
+            steps.createDealScope.clickOnAddPublisherShareSet({
+                scrollIntoView: true,
+            });
+            steps.createDealScope.enterPublisherSearchTerms(
+                0, 0, 'WCM Publisher 1'
+            );
+            steps.createDealScope.selectPublisherSearchResultByIndex(0);
+            steps.createDealScope.enterOwnPublisherShare(0, 0, 100);
+            steps.createDealScope.enterPublisherSearchTerms(
+                0, 1, 'WB MUSIC CORP.'
+            );
+            steps.createDealScope.selectPublisherSearchResultByIndex(0);
+            steps.createDealScope.enterCollectPublisherShare(0, 1, 100);
+            steps.deal.itContinueToNextPage();
+            steps.dealRtp.clickAcquisitionPeriodScopesField(0);
+            steps.dealRtp.selectAllSuggestedAcquisitionPeriodScopes(0);
+            steps.dealRtp.applyAcquisitionPeriodScopeChanges(0);
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.findId();
+        }
+    },
     {
         name: 'Create person to use as creator',
         tags: [],
@@ -56,7 +95,7 @@ exports.feature = [
                 steps.work.goToScopeDeliveryTab();
                 using(steps.scopeDelivery, function () {
                     this.deliverWork();
-                    this.searchDealsForContribution(0, data.mw.deal);
+                    this.searchDealsForContributionFromDealSlot(0, 0);
                     this.selectDealSearchResultByIndex(0);
                     this.clickScopeDeliveryCheckbox(0, 0);
                     this.save();
@@ -75,7 +114,7 @@ exports.feature = [
                 });
 
                 using(steps.workRegistrationActivity.activityGroup, function () {
-                    this.find({ firstWithRecipientName: data.mw.org });
+                    this.find({ firstWithRecipientName: 'ABRAMUS' });
                     this.toggleBlind();
                     using(this.events, function () {
                         this.validateEventCount(1);
@@ -86,7 +125,7 @@ exports.feature = [
             });
 
             // Verify Organisation Preview Registration Run
-            steps.searchSection.accessSavedOrganisationByName(data.mw.org);
+            steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
             steps.organisation.goToPreviewRegistrationRunTab();
             using(steps.organisationRegistrationStack, function () {
                 using(this.works, function () {
@@ -144,7 +183,7 @@ exports.feature = [
         name: 'Validate Preview Reigstration Run',
         tags: [],
         steps: function () {
-            steps.searchSection.accessSavedOrganisationByName(data.mw.org);
+            steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
 
             // Wait for the work to be removed from Preview Registration Run
             steps.base.sleep(10000);

@@ -32,6 +32,12 @@ exports.searchDealsForContribution = function(contributionIndex, terms) {
     });
 };
 
+exports.searchDealsForContributionFromDealSlot = function(i, dealSlot) {
+    it('Search deals for contribution #' + (i + 1), function() {
+        pages.scopeDelivery.searchDealsForContribution(i, hash.entityDataSlotsByType.deal[dealSlot].id);
+    });
+};
+
 exports.selectDealSearchResultByIndex = function(i) {
     it('Select deal search result #' + (i + 1), function() {
         pages.scopeDelivery.selectDealSearchResultByIndex(i);
