@@ -182,7 +182,7 @@ exports.feature = [
         }
     },
     {
-        name: 'Validate Preview Reigstration Run',
+        name: 'Validate Preview Registration Run',
         tags: [],
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
