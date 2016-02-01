@@ -63,19 +63,17 @@ exports.feature = [
         name: 'Create person to use as creator',
         tags: [],
         steps: function() {
-            _.times(1, function(i) {
-                steps.person.useBlankPersonSlot(i);
-                using(steps.newPerson, function () {
-                    this.goToNewPersonPage();
-                    this.enterLastName(
-                        'TEST PERSON ' + (i + 1) + ' ' + randomString('person' + i)
-                    );
-                    this.enterAffiliatedSocietySearchTerms('ASCAP');
-                    this.selectAffiliatedSocietySearchResultByIndex(0);
-                    this.save();
-                });
-                steps.person.findInternalIpiNumber();
-           });
+            steps.person.useBlankPersonSlot(0);
+            using(steps.newPerson, function () {
+                this.goToNewPersonPage();
+                this.enterLastName(
+                    'TEST PERSON 1 ' + randomString('person')
+                );
+                this.enterAffiliatedSocietySearchTerms('ASCAP');
+                this.selectAffiliatedSocietySearchResultByIndex(0);
+                this.save();
+            });
+            steps.person.findInternalIpiNumber();
         }
     },
     {
