@@ -2,6 +2,8 @@
 
 require('../helpers');
 
+require('string.prototype.includes');
+
 var path = require('path'),
     glob = require('glob'),
     _ = require('lodash'),
