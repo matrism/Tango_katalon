@@ -20,39 +20,43 @@ exports.feature = [
         name: "Create a deal with publisher share set",
         tags: [],
         steps: function () {
+            var cds = steps.createDealScope,
+                d = steps.deal,
+                dr = steps.dealRtp;
+
             steps.base.useBlankEntityDataSlot('deal', 0);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
-            steps.deal.itContinueToNextPage();
+            d.itContinueToNextPage();
             steps.createDealContractPeriod.enterActualStartDate(
                 moment().format('YYYY-MM-DD')
             );
             steps.createDealContractPeriod.enterTargetEndDateInMonths(12);
-            steps.createDealScope.openNewScopeForm();
-            steps.createDealScope.selectContractType('Administration');
-            steps.createDealScope.enterTerritoryOfControlSearchTerms(
+            cds.openNewScopeForm();
+            cds.selectContractType('Administration');
+            cds.enterTerritoryOfControlSearchTerms(
                 'Brazil'
             );
-            steps.createDealScope.selectTerritoryOfControlSearchResultByIndex(0);
-            steps.createDealScope.clickOnAddPublisherShareSet({
+            cds.selectTerritoryOfControlSearchResultByIndex(0);
+            cds.clickOnAddPublisherShareSet({
                 scrollIntoView: true,
             });
-            steps.createDealScope.enterPublisherSearchTerms(
+            cds.enterPublisherSearchTerms(
                 0, 0, 'WCM Publisher 1'
             );
-            steps.createDealScope.selectPublisherSearchResultByIndex(0);
-            steps.createDealScope.enterOwnPublisherShare(0, 0, 100);
-            steps.createDealScope.enterPublisherSearchTerms(
+            cds.selectPublisherSearchResultByIndex(0);
+            cds.enterOwnPublisherShare(0, 0, 100);
+            cds.enterPublisherSearchTerms(
                 0, 1, 'WB MUSIC CORP.'
             );
-            steps.createDealScope.selectPublisherSearchResultByIndex(0);
-            steps.createDealScope.enterCollectPublisherShare(0, 1, 100);
-            steps.deal.itContinueToNextPage();
-            steps.dealRtp.clickAcquisitionPeriodScopesField(0);
-            steps.dealRtp.selectAllSuggestedAcquisitionPeriodScopes(0);
-            steps.dealRtp.applyAcquisitionPeriodScopeChanges(0);
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.findId();
+            cds.selectPublisherSearchResultByIndex(0);
+            cds.enterCollectPublisherShare(0, 1, 100);
+            d.itContinueToNextPage();
+            dr.clickAcquisitionPeriodScopesField(0);
+            dr.selectAllSuggestedAcquisitionPeriodScopes(0);
+            dr.applyAcquisitionPeriodScopeChanges(0);
+            d.saveDeal();
+            d.waitForDealToBeSaved();
+            d.findId();
         }
     },
     {
