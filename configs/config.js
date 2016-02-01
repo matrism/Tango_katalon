@@ -50,7 +50,7 @@ var defaultUserName = 'TangoTest1',
             branch: cli.branch,
             commitHash: cli.commit,
             tags: tags,
-            bugLabel: cli['bug-label'] || 'TAT_Ondemand',
+            bugLabel: cli['bug-label'],
             legacyOverrides: {
                 stagingPerson: {
                     newPerson: 'newPersonStaging',

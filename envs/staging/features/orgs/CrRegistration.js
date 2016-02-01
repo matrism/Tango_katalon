@@ -38,8 +38,16 @@ exports.feature = [
                         this.enterFtpNotificationPrimaryEmail(1, data.cr.ftp.notificationPrimaryEmail);
                         this.enterFtpNotificationCcEmail(1, data.cr.ftp.notificationCcEmail);
                         this.addMethod();
-                        this.selectMethod(2, '3rd Party');
-                        this.enterThirdPartyRecipient(2, data.cr.thirdParty);
+                        this.selectMethod(2, 'SFTP');
+                        this.enterSftpAddress(2, data.cr.sftp.address);
+                        this.enterSftpPort(2, data.cr.sftp.port);
+                        this.enterSftpUsername(2, data.cr.sftp.username);
+                        this.enterSftpPassword(2, data.cr.sftp.password);
+                        this.enterSftpNotificationPrimaryEmail(2, data.cr.sftp.notificationPrimaryEmail);
+                        this.enterSftpNotificationCcEmail(2, data.cr.sftp.notificationCcEmail);
+                        this.addMethod();
+                        this.selectMethod(3, '3rd Party');
+                        this.enterThirdPartyRecipient(3, data.cr.thirdParty);
                         steps.base.sleep(200);
                         steps.base.waitForAjax();
                         this.selectFirstThirdPartyRecipient();
@@ -80,8 +88,7 @@ exports.feature = [
             });
 
             using(steps.registrationFileActivity, function () {
-                this.goToPage();
-                steps.organisation.waitForRegActivityElement();
+                this.goToRegistrationFileActivityPage();
                 this.findEventByRecipient(data.cr.org);
                 this.toggleBlind();
                 this.validateStatus('Delivered');

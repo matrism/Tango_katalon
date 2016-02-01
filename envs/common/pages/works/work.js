@@ -1313,6 +1313,24 @@ exports.goToRegistrationActivityTab = function() {
     });
 };
 
+exports.lastUpdateDateBinding = function () {
+    return element(by.binding('work.pristine.last_updated_date | tgIsoDate'));
+};
+
+exports.clickOnLastUpdateDate = function() {
+    var element = exports.lastUpdateDateBinding();
+    pages.base.scrollIntoView(element);
+    return element.click().then(function() {
+        pages.base.waitForAjax();
+    });
+};
+
+exports.getLastUpdateDate = function () {
+    var element = exports.lastUpdateDateBinding();
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
 exports.copy = (function () {
     var copy = {};
 
@@ -1443,4 +1461,23 @@ exports.merge = (function () {
     };
 
     return merge;
+})();
+
+exports.auditLog = (function () {
+    var auditLog = {};
+
+    auditLog.headerTitle = function () {
+        return $('#RECORD-HEADER h1 strong');
+    };
+
+    auditLog.validateHeaderTitle = function () {
+        var element = auditLog.headerTitle();
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    };
+
+    auditLog.expectNoErrorMessage = function () {
+        expect(pages.base.isPresentAndDisplayed(pages.base.modalHeading())).toBe(false);
+    };
+
+    return auditLog;
 })();

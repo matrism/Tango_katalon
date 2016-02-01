@@ -337,6 +337,27 @@ exports.registration = (function () {
         delivery.ftpNotificationCcEmailInput = function (i) {
             return $$('[name="ftpNotifyCCEmails"]').get(i);
         };
+        delivery.sftpAddressInput = function (i) {
+            return $$('[name="sftpHost"]').get(i);
+        };
+        delivery.sftpPortInput = function (i) {
+            return $$('[name="sftpPort"]').get(i);
+        };
+        delivery.sftpUsernameInput = function (i) {
+            return $$('[name="sftpUsername"]').get(i);
+        };
+        delivery.sftpPasswordInput = function (i) {
+            return $$('[name="sftpPassword1"]').get(i);
+        };
+        delivery.sftpNotificationSelect = function (i) {
+            return delivery.methodSection(i).element.all(by.model('dm.delivery_notification.notify'));
+        };
+        delivery.sftpNotificationPrimaryEmailInput = function (i) {
+            return $$('[name="sftpNotifyPrimaryEmails"]').get(i);
+        };
+        delivery.sftpNotificationCcEmailInput = function (i) {
+            return $$('[name="sftpNotifyCCEmails"]').get(i);
+        };
         delivery.thirdPartyRecipientInput = function (i) {
             return element.all(by.model('dm.delivery_mechanism.third_party_recipient.name')).get(i);
         };
@@ -392,6 +413,43 @@ exports.registration = (function () {
         };
         delivery.enterFtpNotificationCcEmail = function (i, value) {
             var element = delivery.ftpNotificationCcEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterSftpAddress = function (i, value) {
+            var element = delivery.sftpAddressInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterSftpPort = function (i, value) {
+            var element = delivery.sftpPortInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        delivery.enterSftpUsername = function (i, value) {
+            var element = delivery.sftpUsernameInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterSftpPassword = function (i, value) {
+            var element = delivery.sftpPasswordInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.selectSftpNotification = function (i, value) {
+            var element = delivery.sftpNotificationSelect(i);
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+        };
+        delivery.enterSftpNotificationPrimaryEmail = function (i, value) {
+            var element = delivery.sftpNotificationPrimaryEmailInput(i);
+            pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterSftpNotificationCcEmail = function (i, value) {
+            var element = delivery.sftpNotificationCcEmailInput(i);
             pages.base.scrollIntoView(element);
             return element.sendKeys(value);
         };
