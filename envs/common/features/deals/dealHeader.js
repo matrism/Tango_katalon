@@ -191,9 +191,9 @@ exports.feature = [
         tags: ["header_signing_last_update"],
         steps: function () {
             var today = new Date(),
-                currentDate = today.getFullYear() + "-" + 
-                    ("0" + (today.getMonth() + 1)).slice(-2) + "-" + 
-                    ("0" + (today.getDate())).slice(-2);
+                currentDate = today.getFullYear() + '-' +
+                    ('0' + (today.getMonth() + 1)).slice(-2) + '-' +
+                    ('0' + (today.getDate())).slice(-2);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
