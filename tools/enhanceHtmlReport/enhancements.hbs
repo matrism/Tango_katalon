@@ -305,7 +305,7 @@
     // Remove repeated list description prefixes.
     $('ul > h4').each(function() {
         var $this = $(this),
-            prefix = $this.text().replace(/\(.+\)$/, ''),
+            prefix = $this.text().replace(/\([0-9]+ s\)$/, ''),
 
             $list = $this.closest('ul');
 
