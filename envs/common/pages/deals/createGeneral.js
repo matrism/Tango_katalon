@@ -390,7 +390,7 @@ if (pages.createDealGeneral === undefined) {
 
         companyCode: {
             typeahead: function () {
-                return element(by.model('deal.company_code'));
+                return element(by.model('deal.company'));
             },
 
             input: function () {
