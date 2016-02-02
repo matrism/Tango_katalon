@@ -33,7 +33,7 @@ exports.feature = [
                 this.selectIncomeFileTypeSearchResultByIndex(0);
 
                 bmiMappings.forEach(
-                    bind(this.incomeTypeMapping, function(mapping, i) {
+                    bind(this.incomeTypeMapping, function(__, mapping, i) {
                         this.enterInboundIncomeType(i, mapping.inboundIncomeType);
 
                         this.enterInboundIncomeTypeDescription(

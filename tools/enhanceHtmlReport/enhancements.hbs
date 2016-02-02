@@ -149,8 +149,18 @@
         content: '–';
     }
 
+    ul + li {
+        margin-top: 1.33em;
+    }
+
     ul.hide, .feature.checkhide, .feature.searchhide {
         display: none !important;
+    }
+
+    .highlight {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        background-color: rgba(255, 250, 205, 0.5);
     }
 </style>
 <script>
@@ -197,13 +207,97 @@
 <script>
     'use strict';
 
+    // Parse step numbers.
+    $('li > a').each(function () {
+        var $this = $(this),
+
+            reResults = /^S-([0-9]+): (.*)$/.exec($this.text()),
+
+            stepNum = reResults[1];
+
+        $this.closest('li').attr('step', stepNum);
+
+        $this.text(reResults[2]);
+
+        $this.before(
+            (
+                $('<a>')
+                    .attr('href', '#,,,' + 'S-' + stepNum)
+                    .addClass('stepNum')
+                    .text('S-' + stepNum)
+            ),
+
+            document.createTextNode(': ')
+        );
+    });
+</script>
+<script>
+    'use strict';
+
+    // Add description link classes.
+    $('li > .stepNum + a').addClass('description');
+</script>
+<script>
+    'use strict';
+
+    // Sort lists by step number.
+    $('ul > li').closest('ul').find('ul').each(function () {
+        var $ul = $(this),
+            firstStepNum = parseInt($($ul.find('[step]')[0]).attr('step')),
+            $i = $ul,
+            $prev,
+            prevStepNum;
+
+        console.log($ul[0], 'S-' + firstStepNum);
+
+        while(1) {
+            $prev = $i.prev('ul, li');
+
+            if($prev.length === 0) {
+                $i.before($ul);
+                break;
+            }
+
+            prevStepNum = parseInt($prev.find('[step]').last().attr('step'));
+
+            if(prevStepNum === firstStepNum - 1) {
+                $prev.after($ul);
+                break;
+            }
+
+            $i = $prev;
+        }
+    });
+
+    // Validate.
+    $('[step]').toArray().reduce(function(a, b) {
+        var aStepNum = parseInt($(a).attr('step')),
+            bStepNum = parseInt($(b).attr('step'));
+
+        if(bStepNum !== aStepNum + 1) {
+            console.error('BUG: Step gap detected between', a, 'and', b);
+        }
+
+        return b;
+    });
+</script>
+<script>
+    'use strict';
+
     // Add links to HTML snapshots.
-    $('li > a').each(function(i) {
-        var $this = $(this);
+    $('li > .description').each(function() {
+        var $this = $(this),
+
+            stepNum = parseInt($this.closest('li').attr('step'));
 
         $this.after(
             document.createTextNode(' ('),
-            $('<a>').attr('href', i + '.html').text('HTML'),
+            (
+                $('<a>')
+                    .attr('href', stepNum + '.html')
+                    .addClass('htmlSnapshot')
+                    .text('HTML')
+            ),
             document.createTextNode(')')
         );
     });
@@ -469,12 +563,63 @@
     }
 
     function updateLocationHash() {
+        var stepNum = $('.highlight').attr('step') || '';
+
+        if(stepNum) {
+            stepNum = 'S-' + stepNum;
+        }
+
         top.location.hash = [
             $('#tagSearch').val(),
             $('#showOnlyPassing').prop('checked')? 'passing' : '',
-            $('#showOnlyFailing').prop('checked')? 'failing' : ''
+            $('#showOnlyFailing').prop('checked')? 'failing' : '',
+            stepNum
         ].join(',');
     }
+
+    // Parse location hash once
+    (function() {
+        var hashSlices,
+            searchTerms = '',
+            onlyPassing = false,
+            onlyFailing = false,
+            stepNum;
+
+        if(!top.location.hash) {
+            return;
+        }
+
+        hashSlices = top.location.hash.slice(1).split(',');
+
+        searchTerms = hashSlices[0];
+        onlyPassing = hashSlices[1];
+        onlyFailing = hashSlices[2];
+        stepNum = hashSlices[3];
+
+        $('#tagSearch').val(searchTerms).trigger('input');
+
+        if(onlyPassing) {
+            $('#showOnlyPassing').click();
+        }
+
+        if(onlyFailing) {
+            $('#showOnlyFailing').click();
+        }
+
+        if(stepNum && stepNum.startsWith('S-')) {
+            var targetStep;
+
+            stepNum = stepNum.slice(2);
+
+            targetStep = $('[step="' + stepNum + '"]');
+
+            targetStep.parents('ul').children('.toggle').click();
+
+            targetStep.addClass('highlight');
+
+            targetStep[0].scrollIntoView();
+        }
+    })();
 
     // tag search
     $('#tagSearch').on('input', function () {
@@ -536,32 +681,4 @@
         calculateTotals();
         updateLocationHash();
     });
-
-    // Parse location hash once
-    (function() {
-        var hashSlices,
-            searchTerms = '',
-            onlyPassing = false,
-            onlyFailing = false;
-
-        if(!top.location.hash) {
-            return;
-        }
-
-        hashSlices = top.location.hash.slice(1).split(',');
-
-        searchTerms = hashSlices[0];
-        onlyPassing = hashSlices[1];
-        onlyFailing = hashSlices[2];
-
-        $('#tagSearch').val(searchTerms).trigger('input');
-
-        if(onlyPassing) {
-            $('#showOnlyPassing').click();
-        }
-
-        if(onlyFailing) {
-            $('#showOnlyFailing').click();
-        }
-    })();
 </script>

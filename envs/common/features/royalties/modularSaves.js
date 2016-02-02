@@ -36,6 +36,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
 
             steps.deal.clickFirstScopeHeader();
 
@@ -89,7 +90,7 @@ exports.feature = [
             using(steps.royaltyRatesSummaryTable, function () {
                 this.validateCount(validationData.length);
 
-                validationData.forEach(bind(this, function (s, i) {
+                validationData.forEach(bind(this, function (__, s, i) {
                     this.find(i);
 
                     this.scope.validateDescription(s.description);
@@ -97,7 +98,7 @@ exports.feature = [
                     using(this.contractPeriod, function () {
                         this.validateCount(s.contractPeriods.length);
 
-                        s.contractPeriods.forEach(bind(this, function (cp, i) {
+                        s.contractPeriods.forEach(bind(this, function (__, cp, i) {
                             this.find(i);
 
                             this.validateDescription(cp);
@@ -107,7 +108,7 @@ exports.feature = [
                     using(this.rateSet, function () {
                         this.validateCount(s.rateSets.length);
 
-                        s.rateSets.forEach(bind(this, function (rs, i) {
+                        s.rateSets.forEach(bind(this, function (__, rs, i) {
                             this.find(i);
 
                             this.validateDescription(rs.description);
@@ -121,7 +122,7 @@ exports.feature = [
                             using(this.group, function () {
                                 this.validateCount(rs.groups.length);
 
-                                rs.groups.forEach(bind(this, function (g, i) {
+                                rs.groups.forEach(bind(this, function (__, g, i) {
                                     this.find(i);
 
                                     this.validateKey(g);
@@ -143,6 +144,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
 
             steps.deal.clickFirstScopeHeader();
 

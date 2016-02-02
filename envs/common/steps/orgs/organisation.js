@@ -166,6 +166,7 @@ if (steps.organisation === undefined) {
             it("Verify That list work id is delivered", function () {
                 pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
                     hash.testVariables['work id'] = workNumber;
+                    hash.workNumber = workNumber;
                     expect(workNumber).toBeTruthy();
                 });
             });
@@ -1011,16 +1012,31 @@ pageStep([
 
     ['Registration', [
         'Edit section',
-
         'Select is registration recipient',
-        'Select acknowledgement type',
-        'Select delivery method',
-        'Enter Address',
-        'Enter Port',
-        'Enter Username',
-        'Enter Password',
-
-        'Save section'
+        'Confirm Remove All',
+        'Save section',
+        ['Delivery', [
+            'Add method',
+            'Select Method',
+            'Enter Email Primary Email',
+            'Enter Ftp Address',
+            'Enter Ftp Port',
+            'Enter Ftp Username',
+            'Enter Ftp Password',
+            'Select Ftp Notification',
+            'Enter Ftp Notification Primary Email',
+            'Enter Ftp Notification CC Email',
+            'Enter Third Party Recipient',
+            'Select first Third Party Recipient'
+        ]],
+        ['Ack', [
+            'Select acknowledgement type',
+            'Select delivery method',
+            'Enter Address',
+            'Enter Port',
+            'Enter Username',
+            'Enter Password'
+        ]]
     ]],
 
     ['Income Provider', [

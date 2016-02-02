@@ -1,0 +1,94 @@
+rateSets:
+  Rate Set 1:
+    incomeProvider: HFA
+
+    effectiveDate: '2014-03-12'
+
+    rateItems:
+      - name: NPS
+        percentage: Balance
+
+      - name: Payout 1
+        percentage: 10.000%
+
+      - name: Admin Fee
+        percentage: 12.000%
+
+      - name: NPS
+        percentage: 2.000%
+
+  Rate Set 2:
+    incomeProvider: ASCAP
+
+    effectiveDate: '2023-06-17'
+
+    rateItems:
+      - name: NPS
+        percentage: Balance
+
+      - name: Payout 1
+        percentage: 18.000%
+
+rateSetGroups:
+  Cover Mechanical:
+    - Cover Mechanical
+    - Digital Cover
+
+  Mechanical:
+    - Mechanical
+    - Digital Mechanical
+    - Digital Streaming Mechanical
+    - Download Mechanical
+    - Karaoke Mechanical
+    - Mechanical Performance
+    - Ringtone Mechanical
+    - Video Mechanical
+
+  Non Society Performance:
+    - Direct Licensed Performance
+
+  Others:
+    - Others
+    - Grand Rights
+    - Hire Fee
+    - Image & Likeness
+    - Merchandising
+    - Management Income
+    - Small Rights
+
+  Performance:
+    - Performance
+    - Digital Performance
+    - Digital Streaming Performance
+    - Download Performance
+    - Film Performance
+    - Karaoke Performance
+    - Live Performance
+    - Radio Performance
+    - Ringtone Performance
+    - TV Performance
+
+  Print:
+    - Digital Lyrics
+    - Educational Print
+    - Folio Print
+    - Folio Sales
+    - Media
+    - Mixed Folio
+    - Sheet Sales
+    - Single Sheet Print
+
+  Synch:
+    - Synchronisation
+    - Cover Synch
+    - Commercial Synchronisation
+    - Digital Synch
+    - Film Synch
+    - TV Synch
+    - Video/Interactive Games
+    - Video Synch
+
+  TPP:
+    - Third Party Print
+    - Digital Print
+    - Third Party Lyrics

@@ -16,6 +16,20 @@ exports.waitLoader = function () {
     });
 };
 
+exports.filterDropdown = function () {
+    return element(by.model('RS.dataHolder.filters.contractPeriod'));
+};
+
+exports.filterBy = function (val) {
+    var el = exports.filterDropdown();
+
+    pages.base.scrollIntoView(el);
+
+    pages.base.selectDropdownOption(el, val);
+
+    pages.base.waitForAjax();
+};
+
 exports.list = function () {
     return $$('.rate-summary-table__scope');
 };
@@ -164,7 +178,10 @@ exports.find = function find (spec) {
                 var g = {};
 
                 g.list = function () {
-                    return rsEl.$$('.rate-summary-table__rate-group-item');
+                    return rsEl.all(by.repeater(
+                        '(RSGroupItemKey, RSGroupItemVal) in ' +
+                        'RSScopeItem.rateSet.data'
+                    ));
                 };
 
                 g.find = function find (spec) {
@@ -174,17 +191,149 @@ exports.find = function find (spec) {
 
                     pages.base.scrollIntoView(gEl);
 
+                    gEl.header = function () {
+                        return gEl.$('.rate-summary-table__rate-group-item');
+                    };
+
                     gEl.keyLabel = function () {
-                        return gEl.element(by.binding(
+                        return gEl.header().element(by.binding(
                             ' ::RSGroupItemKey '
                         ));
                     };
 
-                    gEl.key = function (i) {
+                    gEl.key = function () {
                         return asAlways(
                             gEl.keyLabel(), 'scrollIntoView', 'getAllText', 'trim'
                         );
                     };
+
+                    gEl.toggleButton = function () {
+                        return gEl.header().$(
+                            '.rate-summary-table__collapse-btn'
+                        );
+                    };
+
+                    gEl.toggle = function () {
+                        return asAlways(
+                            gEl.toggleButton(), 'scrollIntoView', 'click'
+                        );
+                    };
+
+                    gEl.incomeTypes = (function () {
+                        var it = {};
+
+                        it.list = function () {
+                            return gEl.$$(
+                                '.rate-summary-table__rate-type-item-wrap'
+                            );
+                        };
+
+                        it.find = function find (spec) {
+                            var itEl = elementFromSpec(spec, find.by, {
+                                Number: 'index'
+                            });
+
+                            pages.base.scrollIntoView(itEl);
+
+                            itEl.nameLabel = function () {
+                                return itEl.element(by.binding(
+                                    ' ::RSRateTypeItem.income_type_name '
+                                ));
+                            };
+
+                            itEl.name = function () {
+                                return asAlways(
+                                    itEl.nameLabel(),
+                                    'scrollIntoView', 'getAllText', 'trim'
+                                );
+                            };
+
+                            itEl.rateItems = (function () {
+                                var ri = {};
+
+                                ri.list = function () {
+                                    return itEl.$$(
+                                        '.rate-summary-table__rate-item'
+                                    );
+                                };
+
+                                ri.find = function find (spec) {
+                                    var riEl = elementFromSpec(spec, find.by, {
+                                        Number: 'index'
+                                    });
+
+                                    riEl.nameLabel = function () {
+                                        return riEl.element(by.binding(
+                                            ' ::getRateTypeNameByCode(RSRateItem) '
+                                        ));
+                                    };
+
+                                    riEl.name = function () {
+                                        return asAlways(
+                                            riEl.nameLabel(),
+                                            'scrollIntoView', 'getAllText', 'trim'
+                                        );
+                                    };
+
+                                    riEl.percentageLabel = function () {
+                                        return riEl.element(by.binding(
+                                            ' ::getRatePercentage(RSRateItem) '
+                                        ));
+                                    };
+
+                                    riEl.percentage = function () {
+                                        return asAlways(
+                                            riEl.percentageLabel(),
+                                            'scrollIntoView', 'getAllText', 'trim'
+                                        );
+                                    };
+
+                                    riEl.applicationMethodLabel = function () {
+                                        return riEl.element(by.binding(
+                                            ' ::getRateApplicationMethod(' +
+                                                'RSRateItem.rate_application_method_code' +
+                                            ') '
+                                        ));
+                                    };
+
+                                    riEl.applicationMethod = function () {
+                                        return asAlways(
+                                            riEl.applicationMethodLabel(),
+                                            'scrollIntoView', 'getAllText', 'trim'
+                                        );
+                                    };
+
+                                    return riEl;
+                                };
+
+                                ri.find.by = (function () {
+                                    var by = {};
+
+                                    by.index = function (spec) {
+                                        return ri.list().get(spec.index);
+                                    };
+
+                                    return by;
+                                })();
+
+                                return ri;
+                            })();
+
+                            return itEl;
+                        };
+
+                        it.find.by = (function () {
+                            var by = {};
+
+                            by.index = function (spec) {
+                                return it.list().get(spec.index);
+                            };
+
+                            return by;
+                        })();
+
+                        return it;
+                    })();
 
                     return gEl;
                 };

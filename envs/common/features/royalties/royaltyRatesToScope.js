@@ -4,12 +4,18 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['royaltyRates', 'sanity'];
+exports.commonFeatureTags = [
+    'royaltyRatesToScopeRegression',
+    'royaltyRates',
+    'regression'
+];
 
 exports.feature = [
     {
         name: "Assign single rate to Scope on creation",
-        tags: ['create'],
+
+        tags: [],
+
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -27,13 +33,16 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.verifyRateSetSavedData();
         }
     },
     {
-        name: "Edit single rate from Scope",
-        tags: ['edit'],
+        name: "Edit single rate from Scope ",
+
+        tags: [],
+
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -50,6 +59,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -90,6 +100,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -138,6 +149,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -184,6 +196,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -224,6 +237,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -277,6 +291,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.storeAllRRData();
@@ -308,7 +323,7 @@ exports.feature = [
     },
     {
         name: "Assign multiple rates to Scope on creation",
-        tags: ['create', 'broken'],
+        tags: ['create'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -344,6 +359,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.verifyAllRateSetSavedData();
         }
@@ -367,6 +383,7 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.editSingleRoyaltySet();
             steps.royaltyRates.openAllRRFields();
@@ -392,6 +409,7 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
             steps.royaltyRates.editSingleRoyaltySet();
             steps.royaltyRates.openAllRRFields();
@@ -420,6 +438,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -465,6 +484,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
 
             steps.royaltyRates.editSingleRoyaltySet();
@@ -492,7 +512,9 @@ exports.feature = [
     },
     {
         name: "Test royalty input fields",
-        tags: ['create', 'validation'],
+
+        tags: [],
+
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
