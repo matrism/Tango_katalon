@@ -486,32 +486,42 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
+            //steps.editDealScope.waitForScopeNumberIToBeVisible(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
+
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);

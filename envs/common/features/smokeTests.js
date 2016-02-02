@@ -158,7 +158,14 @@ exports.feature = [
     ,
     {
         name: 'CR file downloads',
-        tags: ['orgs', 'crFileDownloads'],
+
+        tags: [
+            'crFileDownloadsSmoke',
+            'crFileDownloads',
+            'cr',
+            'orgs'
+        ],
+
         steps: function () {
             steps.base.clearDownloadsDirectory();
             steps.searchSection.accessSavedOrganisationByName('BMI');
@@ -171,7 +178,14 @@ exports.feature = [
     },
     {
         name: "Royalties Manual Statement",
-        tags: ['royaltyRates', 'manualStatement'],
+
+        tags: [
+            'royaltyRatesManualStatementsSmoke',
+            'royaltyRates',
+            'manualStatements',
+            'qaOnly'
+        ],
+
         steps: function () {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();

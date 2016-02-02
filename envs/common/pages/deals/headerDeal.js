@@ -233,6 +233,7 @@ if (pages.headerDeal === undefined) {
         clickOnTheLastUpdateValueAndCheckTheAuditLogScreen: function () {
             pages.base.scrollIntoView(pages.headerDeal.elems.dealLastUpdateDateLink);
             pages.headerDeal.elems.dealLastUpdateDateLink.click();
+            pages.base.waitForAjax();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div#RECORD-HEADER h1 strong"))));
             browser.driver.findElement(By.css("div#RECORD-HEADER h1 strong")).getText().
             then(function (promise) {

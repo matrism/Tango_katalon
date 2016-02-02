@@ -210,3 +210,13 @@ pph.waitForAsync = function () {
 
     return browser.executeScript(noop);
 };
+
+pph.isDisplayed = function (el) {
+    return el.isPresent().then(function (present) {
+        if(!present) {
+            return false;
+        }
+
+        return el.isDisplayed();
+    });
+};

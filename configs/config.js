@@ -33,7 +33,11 @@ var defaultUserName = 'TangoTest1',
                 width: 1360,
                 height: 1024
             },
-            reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'html',
+            //protractor Zapi related
+            projectId: cli.projectId,
+            tcn: cli.tcn,
+            flow: cli.flow,
+            reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'all',
             singleReport: cli['single-report'],
             noUnicode: cli['no-unicode'],
             path_to_features: [],
@@ -46,6 +50,7 @@ var defaultUserName = 'TangoTest1',
             branch: cli.branch,
             commitHash: cli.commit,
             tags: tags,
+            bugLabel: cli['bug-label'],
             legacyOverrides: {
                 stagingPerson: {
                     newPerson: 'newPersonStaging',

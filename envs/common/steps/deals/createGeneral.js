@@ -401,3 +401,11 @@ exports.itAddAllGeneralFieldsForSanityToDealGeneralTab = function () {
         steps.createDealGeneral.clickOnNoPerformanceNonTitleBoundIncome();
     });
 };
+
+addStepGroup(exports, 'Company Code', function (group) {
+    var cd = pages.createDealGeneral.companyCode;
+
+    addBasicStep(group, cd, 'Enter search terms');
+
+    addBasicStep(group, cd, 'Select search result by index');
+});

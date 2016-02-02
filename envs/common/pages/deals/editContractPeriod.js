@@ -161,6 +161,7 @@ if (pages.editDealContractPeriod === undefined) {
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog);
             browser.actions().mouseMove(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
             browser.actions().click(pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog).perform();
+            //pages.editDealContractPeriod.elems.deleteContractPeriodModalDialog.click();
         },
 
         validateTheFirstIncompleteMdrcTitle: function () {
@@ -330,7 +331,6 @@ if (pages.editDealContractPeriod === undefined) {
                 expect(promise).toContain("works forgiven");
             });
         },
-
 
         editTheIMdrcForm: function (i) {
             browser.driver.findElement(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ")")).click();
@@ -555,8 +555,5 @@ if (pages.editDealContractPeriod === undefined) {
             pages.editDealContractPeriod.elems.editDoneButtonEndRules.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.editWhenVariableLeftButtonEndRules));
         }
-
-
-
     });
 }

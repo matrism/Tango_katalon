@@ -410,7 +410,7 @@ exports.downloadDirectoryEntries = function () {
 
 exports.clearDownloadsDirectory = function () {
     exports.downloadDirectoryEntries().forEach(function (path) {
-        fs.rmrfSync(path);
+        fs.removeSync(path);
     });
 };
 

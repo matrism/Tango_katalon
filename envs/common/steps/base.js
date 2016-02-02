@@ -6,16 +6,16 @@ var pageStep = require('../../../helpers/basicPageStep');
 
 steps.base = exports;
 
-exports.itClickOnElement = function(el, elName) {
-    it ("Click on " + elName, function() {
+exports.itClickOnElement = function (el, elName) {
+    it("Click on " + elName, function () {
         el.click();
         pages.base.waitForAjax();
     });
 };
 
-exports.itCheckIsRedirectToPage = function(pageName, expUrl) {
-    it ("User should be redirected to " + pageName, function() {
-        browser.getCurrentUrl().then(function(url) {
+exports.itCheckIsRedirectToPage = function (pageName, expUrl) {
+    it("User should be redirected to " + pageName, function () {
+        browser.getCurrentUrl().then(function (url) {
             expect(url).toContain(expUrl);
         });
     });
@@ -74,47 +74,47 @@ exports.goToHomePage = function () {
 };
 module.exports.scrollIntoView = function (elName, el) {
     it(
-		"Scroll '" + elName + "' into view", function () {
-		    pages.base.scrollIntoView(el);
-		    expect(el.isDisplayed()).toBeTruthy();
-		}
-	);
+        "Scroll '" + elName + "' into view", function () {
+            pages.base.scrollIntoView(el);
+            expect(el.isDisplayed()).toBeTruthy();
+        }
+    );
 };
 module.exports.hoverElement = function (elName, el) {
     it(
-		"Hover " + elName, function () {
-		    pages.base.scrollIntoView(el);
-		    expect(el.isDisplayed()).toBeTruthy();
-		    browser.actions().mouseMove(el).perform();
-		}
-	);
+        "Hover " + elName, function () {
+            pages.base.scrollIntoView(el);
+            expect(el.isDisplayed()).toBeTruthy();
+            browser.actions().mouseMove(el).perform();
+        }
+    );
 };
 module.exports.clickElement = function (elName, el, wait) {
     it(
-		"Click " + elName, function () {
+        "Click " + elName, function () {
             pages.base.clickElement(elName, el, wait);
-		}
-	);
+        }
+    );
 };
 module.exports.waitForElementToBeDisplayed = function (elName, el, wait) {
     it(
-		"Wait for " + elName + " to be displayed", function () {
-		    browser.wait(
-				ExpectedConditions.visibilityOf(el),
-				wait || _tf_config._system_.wait_timeout
-			);
-		}
-	);
+        "Wait for " + elName + " to be displayed", function () {
+            browser.wait(
+                ExpectedConditions.visibilityOf(el),
+                wait || _tf_config._system_.wait_timeout
+            );
+        }
+    );
 };
 module.exports.waitForElementToBeClickable = function (elName, el, wait) {
     it(
-		"Wait for " + elName + " to be clickable", function () {
-		    browser.wait(
-				ExpectedConditions.elementToBeClickable(el),
-				wait || _tf_config._system_.wait_timeout
-			);
-		}
-	);
+        "Wait for " + elName + " to be clickable", function () {
+            browser.wait(
+                ExpectedConditions.elementToBeClickable(el),
+                wait || _tf_config._system_.wait_timeout
+            );
+        }
+    );
 };
 module.exports.selectRandomDropdownOption = function (elName, el, more) {
     var deferred = promise.defer();
@@ -132,23 +132,23 @@ module.exports.selectRandomDropdownOption = function (elName, el, more) {
         notes = " (" + notes.join(", ") + ")";
     }
     it(
-		"Select a different random " + elName + notes, function () {
-		    pages.base.selectRandomDropdownOption(el, more);
-		}
-	);
+        "Select a different random " + elName + notes, function () {
+            pages.base.selectRandomDropdownOption(el, more);
+        }
+    );
     return deferred.promise;
 };
 module.exports.dirtyCheckContinueEditing = function () {
     steps.base.clickElement(
-		"continue editing button",
-		pages.base.dirtyCheckContinueEditingButton()
-	);
+        "continue editing button",
+        pages.base.dirtyCheckContinueEditingButton()
+    );
 };
 module.exports.dirtyCheckConfirmCancellation = function () {
     steps.base.clickElement(
-		"confirm cancellation button",
-		pages.base.dirtyCheckConfirmCancellationButton()
-	);
+        "confirm cancellation button",
+        pages.base.dirtyCheckConfirmCancellationButton()
+    );
 };
 module.exports.validateRedirection = function (pageName, expUrl) {
     it("User should be redirected to " + pageName, function () {
@@ -194,14 +194,20 @@ exports.validateDownloadFileCount = function (value) {
     });
 };
 
-exports.openTheNewTab = function(url) {
-    it("Open a new tab with url", function() {
+exports.openTheNewTab = function (url) {
+    it("Open a new tab with url", function () {
+
+        //browser.driver.get(url);
+        //browser.driver.findElement(By.css('body')).sendKeys(protractor.Key.CONTROL + "t");
+
+
         browser.driver.executeScript(function () {
             (function (a) {
                 document.body.appendChild(a);
                 a.setAttribute('href', location.href);
                 a.dispatchEvent((function (e) {
                     e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
+                   browser.sleep(1000);
                     return e;
                 }(document.createEvent('MouseEvents'))))
             }(document.createElement('a')));
@@ -209,8 +215,8 @@ exports.openTheNewTab = function(url) {
     });
 };
 
-exports.focusOnNewOpenedTab = function(i){
-    it("Focus on the new opened tab ", function(){
+exports.focusOnNewOpenedTab = function (i) {
+    it("Focus on the new opened tab ", function () {
         pages.base.focusOnTheNewOpenedTab(i);
     });
 };
