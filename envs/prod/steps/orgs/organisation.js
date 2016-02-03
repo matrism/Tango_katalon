@@ -1,12 +1,11 @@
 'use strict';
 
-var pageStep = require('../../../../helpers/basicPageStep'),
-    page = require(pages_path + 'organisationProduction');
+var pageStep = require('../../../../helpers/basicPageStep');
 
-steps.organisationProduction = exports;
+steps.organisation = exports;
 
 pageStep([
-    'Validate CISAC code',
+    'Validate Cisac Code',
     'Go to Preview Registration Run tab',
     'Wait for Preview Registration Run header to be displayed',
     'Go to Registration Activity tab',

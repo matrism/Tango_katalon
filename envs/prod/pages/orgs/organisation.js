@@ -2,7 +2,7 @@
 
 var ExpectedConditions = protractor.ExpectedConditions;
 
-pages.organisationProduction = exports;
+pages.organisation = exports;
 
 exports.cisacCodeBinding = function() {
     return $(
