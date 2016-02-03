@@ -1423,6 +1423,7 @@ module.exports.validateIncludeWorkOnWebsite = function (include) {
 };
 
 pageStep([
+    'Wait For Status to be Displayed',
     ['Merge', [
         'Merge Work',
         'Enter find work using previously entered primary title',

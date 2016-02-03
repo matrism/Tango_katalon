@@ -17,7 +17,7 @@ exports.beforeFeature = function () {
 
 exports.feature = [
     {
-        name: "Create a deal with publisher share set",
+        name: 'Create a deal with publisher share set',
         tags: [],
         steps: function () {
             var cds = steps.createDealScope,
@@ -104,8 +104,7 @@ exports.feature = [
                 });
             });
 
-            // Wait for Registration Activity to be processed
-            steps.base.sleep(40000);
+            steps.work.waitForStatusToBeDisplayed();
 
             // Verify Work Registration Activity
             _.times(2, function(i) {
@@ -186,9 +185,6 @@ exports.feature = [
         tags: [],
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
-
-            // Wait for the work to be removed from Preview Registration Run
-            steps.base.sleep(10000);
 
             steps.organisation.goToPreviewRegistrationRunTab();
             using(steps.organisationRegistrationStack, function () {

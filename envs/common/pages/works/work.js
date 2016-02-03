@@ -355,6 +355,13 @@ exports.confirmComponentWorkDeletionButton = function() {
         by.cssContainingText('button', 'Yes')
     );
 };
+exports.statusBinding = function () {
+    return element(by.binding('dealUtility.getRightsTermsPeriodName(work.workHeader.status)'));
+};
+exports.waitForStatusToBeDisplayed = function () {
+    var el = exports.statusBinding();
+    browser.wait(ExpectedConditions.visibilityOf(el));
+};
 module.exports.cancelCreatorsButton = function() {
     return (
         pages.work.editCreatorsContainer()
