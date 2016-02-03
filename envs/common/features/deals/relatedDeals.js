@@ -699,5 +699,62 @@ exports.feature = [
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 11);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 11);
         }
+    },
+    {
+        name: "Add related deals",
+        tags: ["add_related_deals"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+            steps.createDealScope.addSpecificScope("Administration");
+            steps.deal.itContinueToNextPage();
+            steps.createDealRtp.fillIntoAcquisitionDescription(1);
+            steps.createDealRtp.selectSpecificScopeNumberIRtpAcquisition(1);
+            steps.deal.itContinueToNextPage();
+            steps.deal.itContinueToNextPage();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.deal.goToGeneralDealTabDetail();
+            steps.deal.goToRelatedDealsGeneralTabDetails();
+            steps.relatedDeal.checkNoRelatedDealsDefined();
+            steps.relatedDeal.clickOnAddRelatedDealLink();
+            _.times(20, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("a");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            _.times(20, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("b");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            _.times(20, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("c");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            _.times(20, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("d");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            _.times(10, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("e");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            _.times(10, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("f");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+
+            steps.base.sleep(20000);
+        }
     }
 ];
