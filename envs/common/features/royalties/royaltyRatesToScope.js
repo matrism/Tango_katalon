@@ -361,7 +361,10 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.base.waitForAjax();
             steps.deal.clickFirstScopeHeader();
-            steps.royaltyRates.verifyAllRateSetSavedData();
+
+            steps.royaltyRates.validateRateSetNames([
+                'Rate Set 1', 'Rate Set 2', 'Rate Set 3'
+            ]);
         }
     },
     {

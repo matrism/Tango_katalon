@@ -609,6 +609,14 @@ exports.verifyAllRateSetSavedData = function () {
     });
 };
 
+addStep(exports, 'Validate rate set names', function (expected) {
+    browser.sleep(5000);
+
+    expect(pages.royaltyRates.savedRRNames().map(function (el) {
+        return el.getText();
+    })).toEqual(expected);
+});
+
 exports.editIncomeProviderByPartialMatch = function (provider) {
     it("Edit income provider to " + provider, function () {
         pages.royaltyRates.clearIncomeProviderInput();
