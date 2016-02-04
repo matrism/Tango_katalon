@@ -43,7 +43,7 @@ exports.createValidRoyaltySetPair = function (table, message) {
 
             autoIt('pages.createDealScope.addScopeForm');
             autoIt('pages.createDealScope.selectContractTypeScope', 'Finder');
-            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'United States');
+            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'Worldwide');
 
             autoIt('pages.createDealScope.selectRandomCountry');
 
@@ -114,7 +114,7 @@ exports.editValidRoyaltySetPair = function (table, message) {
 
             autoIt('pages.createDealScope.addScopeForm');
             autoIt('pages.createDealScope.selectContractTypeScope', 'Finder');
-            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'United States');
+            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'Worldwide');
 
             autoIt('pages.createDealScope.selectRandomCountry');
 
@@ -191,7 +191,7 @@ exports.createInvalidRoyaltySetPair = function (table, message) {
 
             autoIt('pages.createDealScope.addScopeForm');
             autoIt('pages.createDealScope.selectContractTypeScope', 'Finder');
-            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'United States');
+            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'Worldwide');
 
             autoIt('pages.createDealScope.selectRandomCountry');
 
@@ -261,7 +261,7 @@ exports.editInvalidRoyaltySetPair = function (table, message) {
 
             autoIt('pages.createDealScope.addScopeForm');
             autoIt('pages.createDealScope.selectContractTypeScope', 'Finder');
-            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'United States');
+            autoIt('pages.createDealScope.addTheSpecificTerritoryByTypingToScope', 'Worldwide');
 
             autoIt('pages.createDealScope.selectRandomCountry');
 

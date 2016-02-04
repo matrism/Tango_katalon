@@ -23,7 +23,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -50,7 +50,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -91,7 +91,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -116,7 +116,7 @@ exports.feature = [
 
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-02");
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
@@ -140,7 +140,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -178,7 +178,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -187,7 +187,7 @@ exports.feature = [
 
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-02");
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
@@ -228,7 +228,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -273,7 +273,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -282,7 +282,7 @@ exports.feature = [
 
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-02");
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
@@ -331,7 +331,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-01");
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -339,7 +339,7 @@ exports.feature = [
 
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-02");
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
@@ -348,7 +348,7 @@ exports.feature = [
 
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-03");
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
@@ -374,7 +374,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-01");
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -400,7 +400,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
             steps.royaltyRates.setEffectiveStartDate("2017-01-01");
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -429,7 +429,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
@@ -475,7 +475,7 @@ exports.feature = [
             steps.createDealScope.itAddSimpleScope();
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addRatePercentageToContractualField("10");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("HFA");
+            steps.royaltyRates.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
