@@ -219,7 +219,7 @@ exports.feature = [
         }
     },
     {
-        name: "Create a deal with end rules on contract period and check the dirty check",
+        name: "Create a deal with end rules on contract period and check the summary for end rules",
         tags: ["summary_end_rules"],
         steps: function () {
 
@@ -465,10 +465,10 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             //edit end rules and delete end rules
-            steps.editDealContractPeriod.editEndRulesForm();
+            //steps.editDealContractPeriod.editEndRulesForm();
             //delete end rule
-            steps.editDealContractPeriod.editClickOnDeleteEndRulesButton();
-            steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
+            //steps.editDealContractPeriod.editClickOnDeleteEndRulesButton();
+            //steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
 
 
 
