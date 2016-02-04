@@ -122,9 +122,9 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField("Geo Test Artist", "Gear Test Artist");
-            steps.editDealGeneral.editSpecificRandomArtistField("Star", "Star");
-            steps.editDealGeneral.editSpecificRandomArtistField("Bruce", "Bruce");
+            steps.editDealGeneral.editSpecificRandomArtistField("Gift Test Artist", "Gift Test Artist");
+            steps.editDealGeneral.editSpecificRandomArtistField("Senior", "Senior");
+            steps.editDealGeneral.editSpecificRandomArtistField("Billy", "Billy");
 
 
             //steps.editDealGeneral.editSpecificArtistField("test", "Gema Test Artist");
@@ -133,7 +133,7 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruce, Geo Test Artist, Star");
+            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Senior");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
@@ -144,13 +144,13 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruce, Geo Test Artist, Madonna, Star");
+            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Madonna, Senior");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruce, Geo Test Artist, Madonna");
+            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Madonna");
 
             //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             //steps.editDealGeneral.editRandomArtistField("vfdbvf");
