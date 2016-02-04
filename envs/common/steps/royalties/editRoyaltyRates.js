@@ -43,11 +43,9 @@ exports.clearRoyaltyRateInput = function () {
 
 exports.validateRoyaltyRateInput = function () {
     it("Error warning is shown for name input", function () {
-        expect(pages.royaltyRates.getRRInputBorderTopValue()).toBe('rgba(223, 74, 72, 1)');
-        expect(pages.royaltyRates.getRRInputBorderRightValue()).toBe('rgba(223, 74, 72, 1)');
-        expect(pages.royaltyRates.getRRInputBorderBottomValue()).toBe('rgba(223, 74, 72, 1)');
-        expect(pages.royaltyRates.getRRInputBorderLeftValue()).toBe('rgba(223, 74, 72, 1)');
-        expect(pages.royaltyRates.getRRInputPlaceholderValue()).toBe('Type Name..');
+        expect(pph.matchesCssSelector(
+            pages.royaltyRates.royaltyRateInput(), '.ng-invalid'
+        )).toBeTruthy();
     });
 };
 

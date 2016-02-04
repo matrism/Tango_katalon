@@ -1219,7 +1219,7 @@ exports.feature = [
 
             steps.createDealGeneral.goToNewDealPage();
 
-            steps.createDealGeneral.selectDesiredSigningTerritory('Argentina');
+            steps.createDealGeneral.selectSigningTerritory('Argentina');
 
             if(systemConfig.env.name === 'qa') {
                 steps.createDealGeneral.fillCompanyCodeField("a");

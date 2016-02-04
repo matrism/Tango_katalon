@@ -3,7 +3,7 @@
     - Contract Period 1
   rateSets:
     - description: Rate Set 1
-      incomeProvider: HFA
+      incomeProvider: FINLAND SYNCH INCOME
       effectiveDate: "2014-03-12"
       groups:
         - Cover Mechanical
@@ -31,7 +31,7 @@
     - Contract Period 1
   rateSets:
     - description: Rate Set 1
-      incomeProvider: HFA
+      incomeProvider: FINLAND SYNCH INCOME
       effectiveDate: "2043-06-17"
       groups:
         - Cover Mechanical
