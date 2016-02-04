@@ -15,13 +15,18 @@ module.exports = function (target, desc, fn) {
 
         if(stepArgs.length !== 0) {
             fullDesc += ' (' + stepArgs.map(function (arg) {
-                if(typeof arg !== 'object') {
+                if(Array.isArray(arg)) {
+                    return '[ ' + arg.join(', ') + ' ]';
+                }
+                else
+                if(typeof arg === 'object') {
+                    return _.map(arg, function (val, key) {
+                        return key + ': ' + val;
+                    }).join('; ');
+                }
+                else {
                     return arg;
                 }
-
-                return _.map(arg, function (val, key) {
-                    return key + ': ' + val;
-                }).join('; ');
             }).join(', ') + ')';
         }
 
