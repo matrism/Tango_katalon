@@ -21,7 +21,7 @@ if (pages.createDealGeneral === undefined) {
             companyCodeField: {css: "div[name='company'] div[ng-class='tgTypeaheadWrapClass']"},
             artistsField: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass']"},
             artistFieldInput: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            artistsDropDownData: {css: "div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            artistsDropDownData: {css: "div[name='artists'] ul.tg-typeahead__suggestions.ng-scope"},
             representMultipleDealsField: {css: "div[data-ng-model='deal.mult_deal_reason_code'] div.tg-dropdown-button"},
             exclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(1)"},
             nonExclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(2)"},
