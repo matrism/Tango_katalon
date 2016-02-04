@@ -1,6 +1,8 @@
 'use strict';
 
-var using = fnutils.using;
+var using = fnutils.using,
+
+    dealNum = { staging: '17277', prod: '3' }[systemConfig.env.name] || '205622';
 
 exports.commonFeatureTags = [
     'editExistingDealRoyaltyRatesRegression',
@@ -11,9 +13,7 @@ exports.commonFeatureTags = [
 exports.beforeFeature = function () {
     steps.login.itLogin();
 
-    steps.searchSection.accessSavedDealByNumber(
-        systemConfig.env.name === 'staging' ? '17277' : '205622'
-    );
+    steps.searchSection.accessSavedDealByNumber(dealNum);
 
     steps.royaltyRates.openSavedScope();
 };
