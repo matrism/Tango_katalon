@@ -4,7 +4,7 @@ var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 if (pages.createDealGeneral === undefined) {
-    pages.createDealGeneral = new ftf.pageObject({
+    exports = module.exports = pages.createDealGeneral = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
 
         locators: {
@@ -21,7 +21,7 @@ if (pages.createDealGeneral === undefined) {
             companyCodeField: {css: "div[name='company'] div[ng-class='tgTypeaheadWrapClass']"},
             artistsField: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass']"},
             artistFieldInput: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            artistsDropDownData: {css: "div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
+            artistsDropDownData: {css: "div[name='artists'] ul.tg-typeahead__suggestions.ng-scope"},
             representMultipleDealsField: {css: "div[data-ng-model='deal.mult_deal_reason_code'] div.tg-dropdown-button"},
             exclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(1)"},
             nonExclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(2)"},
@@ -47,7 +47,6 @@ if (pages.createDealGeneral === undefined) {
             yesPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(1)"},
             noPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(2)"}
         },
-
 
         selectDesiredSigningTerritory: function (specific_country) {
             pages.createDealGeneral.elems.dealSigningTerritoryPopup.click();
@@ -387,6 +386,36 @@ if (pages.createDealGeneral === undefined) {
 
         clickOnTheNoPerformanceNonTitleBoundIncome: function () {
             pages.createDealGeneral.elems.noPerformanceNonTitleBoundIncome.click();
+        },
+
+        companyCode: {
+            typeahead: function () {
+                return element(by.model('deal.company'));
+            },
+
+            input: function () {
+                return exports.companyCode.typeahead().element(by.model('$term'));
+            },
+
+            searchResultElements: function () {
+                return $$('.tg-typeahead__suggestions-group-item');
+            },
+
+            enterSearchTerms: function (terms) {
+                var el = exports.companyCode.input();
+
+                asAlways(el, 'scrollIntoView', 'click', 'clear');
+
+                return el.sendKeys(terms);
+            },
+
+            selectSearchResultByIndex: function (i) {
+                var els = exports.companyCode.searchResultElements();
+
+                browser.wait(EC.visibilityOfAny(els));
+
+                return asAlways(els.get(i), 'scrollIntoView', 'click');
+            }
         }
     });
 }

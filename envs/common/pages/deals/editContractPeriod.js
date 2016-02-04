@@ -18,6 +18,19 @@ if (pages.editDealContractPeriod === undefined) {
             editEndTargetMonths: {name: "targetEndDuration"},
             editSaveAllContractPeriodButton: {css: "button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
             editAddContractPeriodElem: {css: "div.deal-terms-affix a[data-ng-click='addContractPeriod()']"},
+            //end rules
+
+            editEndRulesAreaElement: {css: "div[data-ng-show='!activeContractPeriod.showEndRules && isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
+            editEndRulesIcon: {css: "div[data-ng-show='!activeContractPeriod.showEndRules && isEndRuleDirty(activeContractPeriod.end_rules[0])'] button.mdrc-edit-pencil i"},
+            editRulesTitleTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins"},
+            editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
+            editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
+            editCancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
+            editSaveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
+            editDoneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
+            editDeleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
+            editCancelButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
+            editWhenVariableLeftButtonEndRules: {css: "div[data-ng-model='condition.left_value'] div.tg-dropdown-button"},
             //mdrc
             mdrcTitle: {css: "div[data-ng-form='cpEditForm'] div.section-header-borderless.mdrc"},
             firstMdrcForm: {css: "div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(1)"},
@@ -92,6 +105,19 @@ if (pages.editDealContractPeriod === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editActualEndDateField));
         },
 
+        editTheEndRulesForm: function () {
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editEndRulesAreaElement);
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.editEndRulesAreaElement).perform();
+            pages.editDealContractPeriod.elems.editEndRulesIcon.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editRulesTitleTextEndRules));
+        },
+
+        editClickOnTheDeleteEndRulesButton: function(){
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editDeleteButtonEndRules);
+            pages.editDealContractPeriod.elems.editDeleteButtonEndRules.click();
+        },
+
+
         editFillIntoTheEndActualDateField: function (value) {
             pages.editDealContractPeriod.elems.editActualEndDateField.sendKeys(value);
             pages.editDealContractPeriod.elems.editContractPeriodAreaEditMode.click();
@@ -106,6 +132,7 @@ if (pages.editDealContractPeriod === undefined) {
 
         editTerminateTheNewContractPeriodDialog: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editContractPeriodModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editContractPeriodModalDialog));
             pages.editDealContractPeriod.elems.editTerminateDealContractPeriodModalDialog.click();
         },
 
@@ -489,6 +516,46 @@ if (pages.editDealContractPeriod === undefined) {
         editRemoveTheFirstMdrcLabel: function () {
             browser.actions().mouseMove(pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon).perform();
             browser.actions().click(pages.editDealContractPeriod.elems.editMdrcRemoveFirstLabelIcon).perform();
+        },
+
+        editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal: function (i, j) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
+        },
+
+        editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
+            pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
+        },
+
+        editClickOnTheDeleteRuleEndRulesNumberI: function(i) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") a[data-ng-click='showDeleteEndRuleModal(form.show.endRules.containerId, form.show.endRules.type, rule.id)'] i")).click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
+            pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
+        },
+
+        editSaveTheEndRules: function () {
+            pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editSaveButtonEndRules);
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editSaveButtonEndRules));
+            pages.editDealContractPeriod.elems.editSaveButtonEndRules.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.editWhenVariableLeftButtonEndRules));
+        },
+
+        editCheckTheSummaryTextForEndRulesRuleNumberI: function (i, text) {
+            pages.base.scrollIntoView(element(by.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
+            browser.driver.findElement(By.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
+            then(function (promise) {
+                console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
+                expect(promise).toEqual(text);
+            });
+        },
+
+
+        editDoneTheEndRules: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editDoneButtonEndRules));
+            pages.editDealContractPeriod.elems.editDoneButtonEndRules.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.editWhenVariableLeftButtonEndRules));
         }
     });
 }

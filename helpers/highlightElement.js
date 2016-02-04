@@ -39,6 +39,6 @@ exports.restore = function(el) {
 
 exports.restoreAll = function () {
     return $$('.tatHighlight').each(function (el) {
-        return exports.restore(el).then(null, function(){});
+        return exports.restore(el);
     });
 };

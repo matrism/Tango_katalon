@@ -1041,25 +1041,25 @@ exports.registration = (function () {
         delivery.emailPrimaryEmailInput = function (i) {
             return $$('.e2e-method-email .e2e-method-primary-email input').get(i);
         };
-        delivery.ftpAddressInput = function (i) {
+        delivery.addressInput = function (i) {
             return $$('.e2e-method-host input').get(i);
         };
-        delivery.ftpPortInput = function (i) {
+        delivery.portInput = function (i) {
             return $$('.e2e-method-port input').get(i);
         };
-        delivery.ftpUsernameInput = function (i) {
+        delivery.usernameInput = function (i) {
             return $$('.e2e-method-username input').get(i);
         };
-        delivery.ftpPasswordInput = function (i) {
+        delivery.passwordInput = function (i) {
             return $$('.e2e-method-password input').get(i);
         };
-        delivery.ftpNotificationSelect = function (i) {
+        delivery.notificationSelect = function (i) {
             return $$('.e2e-method-ftp .e2e-method-notification').get(i);
         };
-        delivery.ftpNotificationPrimaryEmailInput = function (i) {
+        delivery.notificationPrimaryEmailInput = function (i) {
             return $$('.e2e-method-ftp .e2e-method-primary-email input').get(i);
         };
-        delivery.ftpNotificationCcEmailInput = function (i) {
+        delivery.notificationCcEmailInput = function (i) {
             return $$('.e2e-method-ftp .e2e-method-cc-email input').get(i);
         };
         delivery.thirdPartyRecipientInput = function (i) {
@@ -1083,40 +1083,40 @@ exports.registration = (function () {
             pages.base.scrollIntoView(element);
             return element.sendKeys(value);
         };
-        delivery.enterFtpAddress = function (i, value) {
-            var element = delivery.ftpAddressInput(i);
+        delivery.enterAddress = function (i, value) {
+            var element = delivery.addressInput(i);
             pages.base.scrollIntoView(element);
             return element.sendKeys(value);
         };
-        delivery.enterFtpPort = function (i, value) {
-            var element = delivery.ftpPortInput(i);
+        delivery.enterPort = function (i, value) {
+            var element = delivery.portInput(i);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
         };
-        delivery.enterFtpUsername = function (i, value) {
-            var element = delivery.ftpUsernameInput(i);
+        delivery.enterUsername = function (i, value) {
+            var element = delivery.usernameInput(i);
             pages.base.scrollIntoView(element);
             return element.sendKeys(value);
         };
-        delivery.enterFtpPassword = function (i, value) {
-            var element = delivery.ftpPasswordInput(i);
+        delivery.enterPassword = function (i, value) {
+            var element = delivery.passwordInput(i);
             pages.base.scrollIntoView(element);
             return element.sendKeys(value);
         };
-        delivery.selectFtpNotification = function (i, value) {
-            var element = delivery.ftpNotificationSelect(i);
+        delivery.selectNotification = function (i, value) {
+            var element = delivery.notificationSelect(i);
             return element.all(
                 by.cssContainingText('button', value)
             ).get(0).click();
         };
-        delivery.enterFtpNotificationPrimaryEmail = function (i, value) {
-            var element = delivery.ftpNotificationPrimaryEmailInput(i);
+        delivery.enterNotificationPrimaryEmail = function (i, value) {
+            var element = delivery.notificationPrimaryEmailInput(i);
             pages.base.scrollIntoView(element);
             return element.sendKeys(value);
         };
-        delivery.enterFtpNotificationCcEmail = function (i, value) {
-            var element = delivery.ftpNotificationCcEmailInput(i);
+        delivery.enterNotificationCcEmail = function (i, value) {
+            var element = delivery.notificationCcEmailInput(i);
             pages.base.scrollIntoView(element);
             return element.sendKeys(value);
         };

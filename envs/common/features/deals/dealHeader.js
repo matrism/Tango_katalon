@@ -121,24 +121,36 @@ exports.feature = [
 
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            steps.editDealGeneral.editSpecificArtistField("test", "Gema Test Artist");
-            steps.editDealGeneral.editSpecificArtistField("Shilpa", "Shilpa");
-            steps.editDealGeneral.editSpecificArtistField("mars", "Bruno Mars");
+
+            steps.editDealGeneral.editSpecificRandomArtistField("Gift Test Artist", "Gift Test Artist");
+            steps.editDealGeneral.editSpecificRandomArtistField("Senior", "Senior");
+            steps.editDealGeneral.editSpecificRandomArtistField("Billy", "Billy");
+
+
+            //steps.editDealGeneral.editSpecificArtistField("test", "Gema Test Artist");
+            //steps.editDealGeneral.editSpecificArtistField("Shilpa", "Shilpa");
+            //steps.editDealGeneral.editSpecificArtistField("mars", "Bruno Mars");
+
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Shilpa");
+            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Senior");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            steps.editDealGeneral.editSpecificArtistField("madonna", "Madonna");
+
+            steps.editDealGeneral.editSpecificRandomArtistField("Madonna", "Madonna");
+
+
+            //steps.editDealGeneral.editSpecificArtistField("madonna", "Madonna");
+
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna, Shilpa");
+            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Madonna, Senior");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna");
+            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Madonna");
 
             //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             //steps.editDealGeneral.editRandomArtistField("vfdbvf");
@@ -191,7 +203,23 @@ exports.feature = [
         tags: ["header_signing_last_update"],
         steps: function () {
             var today = new Date();
-            var currentDate = today.getFullYear() + "-" + today.getMonth()+ 1 +"-"+ today.getDate();
+            //var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDay();
+            if(today.getMonth()<=8){
+                if(today.getDay()<=9){
+                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + 0 + today.getDay();
+                }
+                else{
+                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + today.getDay();
+                }
+            }
+            else{
+                if(today.getDay()<=9){
+                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + 0 + today.getDay();
+                }
+                else{
+                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDay();
+                }
+            }
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -210,7 +238,7 @@ exports.feature = [
             steps.headerDeal.checkSigningTerritoryValue("Austria");
             steps.headerDeal.checkLastUpdateText();
             steps.headerDeal.checkLastUpdateValue(currentDate);
-            steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
+            //steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
 
         }
     },

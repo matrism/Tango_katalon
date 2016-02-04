@@ -14,6 +14,14 @@ exports = module.exports = function (val) {
     }, val);
 };
 
+exports.waitUntilVisible = function (el) {
+    browser.wait(EC.visibilityOf(el));
+};
+
+exports.waitUntilAnyVisible = function (els) {
+    browser.wait(EC.visibilityOfAny(els));
+};
+
 exports.scrollIntoView = function (el) {
     pages.base.scrollIntoView(el);
 };
@@ -28,4 +36,8 @@ exports.trim = function (string) {
 
 exports.click = function (el) {
     el.click();
+};
+
+exports.clear = function (el) {
+    el.clear();
 };

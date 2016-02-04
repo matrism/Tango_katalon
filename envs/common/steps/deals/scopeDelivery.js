@@ -8,6 +8,14 @@ exports.deliverWork = function() {
     });
 };
 
+addStep(
+    exports, 'Search for deal from slot for contribution', function (i, slot) {
+        pages.scopeDelivery.searchDealsForContribution(
+            i, hash.entityDataSlotsByType.deal[slot].id
+        );
+    }
+);
+
 exports.searchForDealFromDealSlotForAllContributions = function(dealSlot) {
     it(
         'Search for deal from slot "' + dealSlot + '" for all contributions',
@@ -44,6 +52,8 @@ exports.selectDealSearchResultByIndex = function(i) {
     });
 };
 
+addBasicStep(exports, pages.scopeDelivery, 'Validate checkbox state');
+
 exports.clickScopeDeliveryCheckbox = function(contributionIndex, scopeIndex) {
     it(
         'Click scope delivery checkbox #' + (scopeIndex + 1) +
@@ -74,3 +84,5 @@ exports.validateContributionScopeName = function(i, name) {
         pages.scopeDelivery.validateContributionScopeName(i, name);
     });
 };
+
+addBasicStep(exports, pages.scopeDelivery, 'Expect validation message');

@@ -40,6 +40,13 @@ pageStep([
             'Select Ftp Notification',
             'Enter Ftp Notification Primary Email',
             'Enter Ftp Notification CC Email',
+            'Enter Sftp Address',
+            'Enter Sftp Port',
+            'Enter Sftp Username',
+            'Enter Sftp Password',
+            'Select Sftp Notification',
+            'Enter Sftp Notification Primary Email',
+            'Enter Sftp Notification CC Email',
             'Enter Third Party Recipient',
             'Select first Third Party Recipient'
         ]],

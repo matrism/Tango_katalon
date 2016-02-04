@@ -309,8 +309,11 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         clickRRSumarryTable: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.rrSumarryTable()));
-            this.rrSumarryTable().click();
+            var el = this.rrSumarryTable();
+
+            browser.wait(ExpectedConditions.visibilityOf(el));
+
+            return asAlways(el, 'scrollIntoView', 'click');
         },
 
         clickOpenRRButton: function () {
@@ -322,8 +325,10 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         clickEditSavedRRIcon: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.editSavedRRIcon()));
-            this.editSavedRRIcon().click();
+            return asAlways(
+                this.editSavedRRIcon(),
+                'waitUntilVisible', 'scrollIntoView', 'click'
+            );
         },
 
         getSavedRRName: function () {

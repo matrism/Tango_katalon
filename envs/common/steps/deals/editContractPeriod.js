@@ -475,6 +475,80 @@ exports.editRemoveMdrcLabel = function () {
     });
 };
 
+exports.editEndRulesForm = function () {
+    it("Edit the end rules form ", function () {
+        pages.editDealContractPeriod.editTheEndRulesForm();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editCancelDeleteEntireEndRules = function () {
+    it("Edit cancel delete entire end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']"))));
+        browser.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']")).click();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editConfirmDeleteEntireEndRules = function () {
+    it("Edit confirm delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
+        pages.base.scrollIntoView(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")));
+        //browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
+        browser.driver.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")).click();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editClickOnDeleteEndRulesButton = function () {
+    it("Edit click on the delete entire end rules button ", function () {
+        pages.editDealContractPeriod.editClickOnTheDeleteEndRulesButton();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
+    it("Edit delete end rules condition number " + i + " row number " + j, function () {
+        pages.editDealContractPeriod.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editDeleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
+    it("Edit delete end rules condition number " + i + " row number " + j, function () {
+        pages.editDealContractPeriod.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editCancelDeleteEndRules = function () {
+    it("Edit cancel delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editCancelDeleteEndRulesModalDialog));
+        pages.editDealContractPeriod.elems.editCancelDeleteEndRulesModalDialog.click();
+    });
+};
+
+exports.editDeleteTheRuleEndRulesNumberI = function (i) {
+    it("Edit delete the entire rule number " + i + " from end rules form ", function () {
+        pages.editDealContractPeriod.editClickOnTheDeleteRuleEndRulesNumberI(i);
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editSaveEndRulesForm = function () {
+    it("Edit save the end rules ", function () {
+        pages.editDealContractPeriod.editSaveTheEndRules();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
+exports.editCheckSummaryTextForEndRulesRuleNumberI = function (i, text) {
+    it("Edit check the summary text for end rules rule number " + i, function () {
+        pages.editDealContractPeriod.editCheckTheSummaryTextForEndRulesRuleNumberI(i, text);
+    });
+};
+
+
 exports.itEditIncompleteMdrcContractPeriod = function (i) {
     describe("Edit incomplete MDRC on  contract period screen", function () {
         steps.editDealContractPeriod.editMdrcFormI(i);

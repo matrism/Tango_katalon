@@ -1422,8 +1422,15 @@ module.exports.validateIncludeWorkOnWebsite = function (include) {
     );
 };
 
+exports.validateLastUpdateDate = function(value) {
+    it('Validate Last Update Date', function () {
+        expect(pages.work.getLastUpdateDate()).toBe(value);
+    });
+};
+
 pageStep([
     'Wait For Status to be Displayed',
+    'Click On Last Update Date',
     ['Merge', [
         'Merge Work',
         'Enter find work using previously entered primary title',
@@ -1438,5 +1445,9 @@ pageStep([
         'Enter Primary Work Title',
         'Save work',
         'Validate Success Message'
+    ]],
+    ['Audit Log', [
+        'Validate Header Title',
+        'Expect No Error Message'
     ]]
 ]);

@@ -70,6 +70,22 @@ exports.editModeContributionRow = function(i) {
     return elements.get(i);
 };
 
+exports.dealSearchForContributionInput = function (i) {
+    return exports.editModeContributionRow(i).$(
+        '[data-tg-typeahead-selected="' +
+            'addDealTo(match.model, [creatorContribution]); $internal.$clear();' +
+        '"]'
+    ).element(by.model('$term'));
+};
+
+exports.searchDealsForContribution = function (i, terms) {
+    var el = exports.dealSearchForContributionInput(i);
+
+    asAlways(el, 'scrollIntoView', 'click', 'clear');
+
+    return el.sendKeys(terms);
+};
+
 exports.scopeDeliveryCheckboxes = function(i) {
     return exports.editModeContributionRow(i).all(by.model(
         'dealScope.state.selected'
@@ -78,6 +94,29 @@ exports.scopeDeliveryCheckboxes = function(i) {
 
 exports.scopeDeliveryCheckbox = function(contributionIndex, scopeIndex) {
     return exports.scopeDeliveryCheckboxes(contributionIndex).get(scopeIndex);
+};
+
+exports.checkboxEnabled = function (iContribution, iScope) {
+    var el = exports.scopeDeliveryCheckbox(iContribution, iScope);
+
+    pages.base.scrollIntoView(el);
+
+    return el.isEnabled();
+};
+
+exports.validateCheckboxState = function (iContribution, iScope, expected) {
+    switch(expected) {
+        case 'enabled':
+        case 'disabled':
+            expect(exports.checkboxEnabled(iContribution, iScope)).toBe(
+                expected === 'enabled'
+            );
+            break;
+
+        default:
+            throw new Error('Unknown state: ' + expected);
+            break;
+    }
 };
 
 exports.clickScopeDeliveryCheckbox = function(contributionIndex, scopeIndex) {
@@ -165,4 +204,24 @@ exports.contributionScopeName = function(i) {
 
 exports.validateContributionScopeName = function(i, value) {
     expect(exports.contributionScopeName(i)).toBe(value);
+};
+
+exports.validationMessage = function (message) {
+    return element.all(by.cssContainingText('div, span', message)).filter(
+        pph.isDisplayed
+    ).first();
+};
+
+exports.expectValidationMessage = function (expected) {
+    var el = exports.validationMessage(expected),
+
+        isDisplayed = pph.isDisplayed(el).then(function (displayed) {
+            if(displayed) {
+                pages.base.scrollIntoView(el);
+            }
+
+            return displayed;
+        });
+
+    return expect(isDisplayed).toBeTruthy();
 };

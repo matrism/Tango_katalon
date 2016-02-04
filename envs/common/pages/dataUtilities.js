@@ -19,14 +19,22 @@ exports.menuBoards = function () {
     return exports.menuBoardsContainer().$$('.menu-board');
 };
 
-exports.menuBoardItem = function (boardIndex, name) {
-    return exports.menuBoards().get(boardIndex).element(by.cssContainingText(
+exports.menuBoardItem = function (name, boardIndex) {
+    var parentElem = exports.menuBoards();
+
+    if (boardIndex) {
+        parentElem = parentElem.get(boardIndex);
+    } else {
+        parentElem = parentElem.last();
+    }
+
+    return parentElem.element(by.cssContainingText(
         menuBoardItemCssSelector, name
     ));
 };
 
-exports.openMenuBoardItem = function (boardIndex, name) {
-    var element = exports.menuBoardItem(boardIndex, name);
+exports.openMenuBoardItem = function (name, boardIndex) {
+    var element = exports.menuBoardItem(name, boardIndex);
 
     pages.base.scrollIntoView(element);
 
@@ -36,10 +44,29 @@ exports.openMenuBoardItem = function (boardIndex, name) {
 };
 
 exports.menuBoardItems = function (boardIndex) {
-    return exports.menuBoards().get(boardIndex).$$(menuBoardItemCssSelector);
+    var parentElem = exports.menuBoards(), 
+        items;
+
+    if (boardIndex) {
+        parentElem = parentElem.get(boardIndex);
+    } else {
+        parentElem = parentElem.last();
+    }
+
+    items = parentElem.$$(menuBoardItemCssSelector);
+
+    browser.wait(function(){
+        return items.count().then(function(num){
+            return num && items.first().getText().then(function(text){
+                return text && text !== '';
+            });
+        });
+    });
+
+    return items;
 };
 
-exports.openMenuBoardItemByIndex = function (boardIndex, i) {
+exports.openMenuBoardItemByIndex = function (i, boardIndex) {
     var element = exports.menuBoardItems(boardIndex).get(i);
 
     pages.base.scrollIntoView(element);
@@ -104,3 +131,93 @@ exports.formControlGroupData = function (i) {
 exports.expectFormControlGroupDataNotToBeBlank = function (i) {
     expect(exports.formControlGroupData(i)).not.toBe('');
 };
+
+exports.expectItemsToBe = function (arr, i) {
+    expect(exports.menuBoardItems(i).getText()).toEqual(arr);
+};
+
+exports.editButton = function () {
+    return $('.EDITOR .btn-toggle');
+};
+
+exports.clickEditButton = function () {
+    var button = exports.editButton();
+    browser.wait(protractor.ExpectedConditions.presenceOf(button));
+    button.click();
+};
+
+exports.editProperty = function (propName, propValue) {
+    var elem = element.all(by.cssContainingText('.EDITOR label', propName)).filter(function(e){ return e.isDisplayed();}).first(),
+        inputElem;
+
+    browser.wait(protractor.ExpectedConditions.visibilityOf(elem));
+    inputElem = elem.element(by.xpath('..')).$('label + div [data-ng-model]');
+
+    inputElem.clear();
+    return inputElem.sendKeys(propValue);
+};
+
+exports.getProperty = function (propName) {
+    browser.sleep(2000);
+    var elem = element.all(by.cssContainingText('.EDITOR label', propName));
+
+    elem = elem.filter(function(e){return e.isDisplayed();}).first().element(by.xpath('..')).$('label + div');
+    return elem.getText();
+};
+
+var testData;
+exports.storeInitialPropValue = function(propName) {
+    testData[propName] = exports.getProperty(propName);
+};
+
+exports.expectPropertyToBe = function (propName, propValue) {
+    var prop = exports.getProperty(propName);
+
+    expect(prop).toEqual(propValue);
+};
+
+exports.clickCancelLink = function() {
+    $('.EDITOR .btn-cancel').click();
+};
+
+exports.clickSaveLink = function() {
+    $('.EDITOR .btn-primary').click();
+    pages.base.waitForAjax();
+};
+
+exports.checkSaveAndRevert = function (propName, propValue) {
+    var propInitialValue;
+    browser.sleep(5000);
+
+    exports.getProperty(propName).then(function(text){
+        propInitialValue = text || '';
+
+        if (!propValue) {
+            propValue = 'TAT_' + propInitialValue;
+        }
+
+        exports.expectPropertyToBe(propName, propInitialValue);
+        exports.clickEditButton();
+        browser.sleep(2000);
+        exports.editProperty(propName, propValue);
+        browser.sleep(2000);
+        exports.clickCancelLink();
+
+        exports.expectPropertyToBe(propName, propInitialValue);
+        exports.clickEditButton();
+        browser.sleep(2000);
+        exports.editProperty(propName, propValue);
+        browser.sleep(2000);
+        exports.clickSaveLink();
+        exports.expectPropertyToBe(propName, propValue);
+
+        exports.clickEditButton();
+        browser.sleep(2000);
+        exports.editProperty(propName, propInitialValue);
+        browser.sleep(2000);
+        exports.clickSaveLink();
+
+    });
+
+};
+

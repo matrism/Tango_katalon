@@ -13,6 +13,8 @@ module.exports = function(options) {
 
         browser.executeScript(payload).then(function(html) {
             fs.writeFileSync(path, '<!doctype html>\n' + html);
+        }, function(err) {
+            console.error('Ignoring HTML snapshot error:', err);
         });
     };
 };
