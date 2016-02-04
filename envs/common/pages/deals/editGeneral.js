@@ -219,7 +219,7 @@ if (pages.editDealGeneral === undefined) {
                 });
         },
 
-        editSelectTheRandomSpecificArtist: function (artistSearch, artist) {
+        editSelectTheRandomSpecificArtist: function (artistSearch, artistValue) {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
             pages.createDealGeneral.elems.artistsField.click();
             pages.createDealGeneral.elems.artistFieldInput.sendKeys(artistSearch);
@@ -233,17 +233,17 @@ if (pages.editDealGeneral === undefined) {
                         browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
                             .then(function (options) {
                                 var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[0];
+                                var element = options[randomNumber];
                                 browser.actions().mouseMove(element).click().perform();
                                 browser.sleep(500);
                             })
                     }
                     else {
-                        browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                             .then(function findMatchingOption(options) {
                                 options.forEach(function (option) {
                                     option.getText().then(function doesOptionMatch(text) {
-                                            if (text.indexOf(artist) != -1) {
+                                            if (text.indexOf(artistValue) != -1) {
                                                 desiredOption = option;
                                                 return true;
                                             }
