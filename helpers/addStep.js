@@ -20,7 +20,7 @@ module.exports = function (target, desc, fn) {
                 }
 
                 return _.map(arg, function (val, key) {
-                    return key + ': ' + value;
+                    return key + ': ' + val;
                 }).join('; ');
             }).join(', ') + ')';
         }
