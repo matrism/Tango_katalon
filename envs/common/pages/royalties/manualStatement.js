@@ -51,7 +51,7 @@ exports.form = (function(){
     form.createManualStatement = function () {
         return form.createManualStatementButton().click().then(function(){
             pages.base.waitForAjax();
-        });;
+        });
     };
 
     return form;
@@ -320,6 +320,14 @@ exports.batches = (function () {
         expect(totals.getText()).toEqual(val);
     };
 
+    batches.doneButton = function () {
+        return element(by.cssContainingText('button[type="submit"].btn-primary', 'Done'));
+    };
+
+    batches.save = function () {
+        return batches.doneButton().click();
+    };
+
     batches.works = (function () {
         var works = {};
 
@@ -345,6 +353,16 @@ exports.batches = (function () {
             return element.all(by.repeater('(workIndex, workEntry) in activeBatch.workEntries.workInstances'));
         };
 
+        works.work = function (idx) {
+            var work = works.workList().get(idx);
+
+            work.incomeLines = function () {
+                return work.all(by.repeater('line in workEntry.incomeLines'));
+            };
+
+            return work;
+        };
+
         works.expectNumberOfWorksToBe = function (num) {
             var workList = works.workList();
 
@@ -359,7 +377,9 @@ exports.batches = (function () {
                 work = workList.get(idx);
             }
 
-            return work.all(by.repeater('line in workEntry.incomeLines'));
+            var lines = work.all(by.repeater('line in workEntry.incomeLines'));
+
+            return lines;
         };
 
         works.addIncomeLine = function (data, idx) {
@@ -379,6 +399,17 @@ exports.batches = (function () {
                 });
             });
 
+        };
+
+        works.editIncomeLine = function (workIndex, lineIndex, label, val) {
+            var lines, line, input; 
+                lines = works.incomeLines(workIndex);
+                line = lines.get(lineIndex);
+
+                input = line.$('.table-cell.' + label).$('input');
+
+            input.clear();
+            input.sendKeys(val);
         };
 
         return works;

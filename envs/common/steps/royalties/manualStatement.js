@@ -35,6 +35,7 @@ pageStep([
         'Click batches accordion',
         'Select Batch',
         'Click default settings link',
+        'Save',
         ['Defaults', [
             'Set income type',
             'Set exploitation territory',
@@ -50,6 +51,7 @@ pageStep([
             'Add work by title',
             'Expect number of works to be',
             'Add income line',
+            'Edit income line',
             ]
         ],
     ]]

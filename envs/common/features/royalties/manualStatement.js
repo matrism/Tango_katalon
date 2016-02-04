@@ -86,8 +86,7 @@ exports.feature = [
                     statementBatches.expectBatchToBeDisabled(2);
                     statementBatches.expectBatchTotalsToBe('3,000.0000');
 
-
-                    statementBatches.selectBatch(3);
+                    statementBatches.selectBatch(2);
                     statementBatches.enterBatchAmount(3000);
                     statementBatches.expectBatchTotalsToBe('6,000.0000');
                     statementBatches.expectBatchDefaultsToBe('Select a Type', 'Select a Country', '100', '100', '100', '100', '100');
@@ -115,19 +114,21 @@ exports.feature = [
                   },
                   units: 1,
                   productDetail: '2423423',
-                  rate: 100,
                   amount: 200,
                   share: 100
                 };
 
                 batchWorks.expectNumberOfWorksToBe(0);
                 batchWorks.addWorkByTitle('test');
-                //steps.royaltyRates.setAmountRecievedForWork(1000);
                 batchWorks.expectNumberOfWorksToBe(1);
-                batchWorks.addIncomeLine(incomeLine);
-            });
 
-            steps.base.sleep(10000);
+                batchWorks.addIncomeLine(incomeLine);
+                batchWorks.addIncomeLine(incomeLine);
+                batchWorks.addIncomeLine(incomeLine);
+                batchWorks.editIncomeLine(0, 1, 'source', 'CCCCC');
+
+                statementBatches.save();
+            });
         }
     }
 ];
