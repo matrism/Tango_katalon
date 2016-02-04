@@ -211,6 +211,13 @@ exports.editRandomArtistField = function (value) {
     });
 };
 
+exports.editSpecificRandomArtistField = function (artistSearch, artist) {
+    it("Edit select specific artist field", function () {
+        pages.editDealGeneral.editSelectTheRandomSpecificArtist(artistSearch, artist);
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
 exports.editSpecificArtistField = function (artistSearch, artist) {
     it("Edit select specific artist field", function () {
         pages.editDealGeneral.editSelectTheSpecificArtist(artistSearch, artist);

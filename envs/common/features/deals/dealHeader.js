@@ -121,24 +121,36 @@ exports.feature = [
 
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            steps.editDealGeneral.editSpecificArtistField("test", "Gema Test Artist");
-            steps.editDealGeneral.editSpecificArtistField("Shilpa", "Shilpa");
-            steps.editDealGeneral.editSpecificArtistField("mars", "Bruno Mars");
+
+            steps.editDealGeneral.editSpecificRandomArtistField("Geo Test Artist", "Gear Test Artist");
+            steps.editDealGeneral.editSpecificRandomArtistField("Star", "Star");
+            steps.editDealGeneral.editSpecificRandomArtistField("Bruce", "Bruce");
+
+
+            //steps.editDealGeneral.editSpecificArtistField("test", "Gema Test Artist");
+            //steps.editDealGeneral.editSpecificArtistField("Shilpa", "Shilpa");
+            //steps.editDealGeneral.editSpecificArtistField("mars", "Bruno Mars");
+
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Shilpa");
+            steps.headerDeal.checkArtistValue("Bruce, Geo Test Artist, Star");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            steps.editDealGeneral.editSpecificArtistField("madonna", "Madonna");
+
+            steps.editDealGeneral.editSpecificRandomArtistField("Madonna", "Madonna");
+
+
+            //steps.editDealGeneral.editSpecificArtistField("madonna", "Madonna");
+
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna, Shilpa");
+            steps.headerDeal.checkArtistValue("Bruce, Geo Test Artist, Madonna, Star");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna");
+            steps.headerDeal.checkArtistValue("Bruce, Geo Test Artist, Madonna");
 
             //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             //steps.editDealGeneral.editRandomArtistField("vfdbvf");
@@ -226,7 +238,7 @@ exports.feature = [
             steps.headerDeal.checkSigningTerritoryValue("Austria");
             steps.headerDeal.checkLastUpdateText();
             steps.headerDeal.checkLastUpdateValue(currentDate);
-            steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
+            //steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
 
         }
     },
