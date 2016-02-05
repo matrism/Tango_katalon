@@ -23,7 +23,7 @@ exports.feature = [
             steps.createDealScope.saveThePublisherShareSet();
             //add rate set payout, nps and admin fee
             steps.royaltyRates.addNewRoyaltySet();
-            steps.royaltyRates.addIncomeProviderByPartialMatch("test");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("synch");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.addNPSToContractualField('30');
             steps.royaltyRates.addAdminFeeToContractualField('40');
@@ -43,7 +43,7 @@ exports.feature = [
             //add rate set to Scope
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addEffectiveStartDate("2015-06-07");
-            steps.royaltyRates.addIncomeProviderByPartialMatch("test");
+            steps.royaltyRates.addIncomeProviderByPartialMatch("synch");
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();

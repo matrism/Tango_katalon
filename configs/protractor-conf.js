@@ -468,7 +468,7 @@ config = {
                                         parts = subFeatureName.split(':');
 
                                     var subLocalFeature = {
-                                        name: parts[2],
+                                        name: parts[3],
                                         passed: subFeaturePassed,
                                         severity: subFeature.severity,
                                         filename: subFeature.filename,
@@ -801,6 +801,7 @@ config = {
                                         componentName = '',
                                         jiraComponentName = '',
                                         featuresDone = 0,
+                                        testStepBug = {},
                                         nameParts = feature.name.split('Tags:'),
                                         componentArray = nameParts[1].split('.'),
                                         componentNames = componentArray[0].split(', '),
@@ -871,7 +872,6 @@ config = {
                                                 console.log('Mapping Steps for Issue ...');
 
                                                 var allFeatureSteps = [];
-
                                                 feature.steps.forEach(function (step) {
                                                     allFeatureSteps.push(step);
                                                 });
@@ -913,7 +913,6 @@ config = {
                                                 var testStepResultPromise = protractor.promise.defer(),
                                                     testStepResultsDone = 0,
                                                     bugFound =false,
-                                                    testStepBug = {},
                                                     linkedIssue;
 
                                                 if (!feature.passed) {
@@ -946,14 +945,14 @@ config = {
                                                                 }
                                                             }
                                                         } else {
-/*                                                            Zapi.updateTestStepResult(testCaseId, jiraExecutionId, localTestStep, feature)
+                                                            Zapi.updateTestStepResult(testCaseId, jiraExecutionId, localTestStep, feature)
                                                                 .then(function () {
                                                                     testStepResultsDone++;
 
                                                                     if (testStepResultsDone === testSteps.length) {
                                                                         testStepResultPromise.fulfill();
                                                                     }
-                                                                }, failCallback);*/
+                                                                }, failCallback);
                                                         }
                                                     }
                                                 });
@@ -963,7 +962,7 @@ config = {
                                                         foundTestBug = false;
 
                                                     projectTestBugs.forEach(function(testBug) {
-                                                        if(!foundTestBug && (testBug.summary === summary)) {
+                                                        if(!foundTestBug && (testBug.summary == summary)) {
                                                             linkedIssue = {
                                                                 id:  testBug.id,
                                                                 key: testBug.key,
@@ -996,7 +995,7 @@ config = {
                                                     }
                                                 }
 
-                                                //testStepResultPromise.fulfill();
+                                                testStepResultPromise.fulfill();
 
                                                 return testStepResultPromise;
                                             }, failCallback)
@@ -1006,7 +1005,13 @@ config = {
                                                     return Zapi.bulkUpdateExecutionDefects(feature.bugsCreated, jiraExecutionId)
                                                         .then(function (response) {
                                                             console.log('Succesfully linked defects (bugs created) to the execution with ID: ' + jiraExecutionId);
-                                                        }, failCallback);
+                                                        }, failCallback)
+                                                        .then(function () {
+                                                            return Zapi.updateTestStepResult(testCaseId, jiraExecutionId, testStepBug, feature, feature.bugsCreated);
+                                                        })
+                                                        .then(function () {
+                                                            return Zapi.updateAttachment(testStepBug.resultStep.id, path.join(screenShotPath, testStepBug.step.filename));
+                                                        });
                                                 } else {
                                                     return protractor.promise.defer().fulfill();
                                                 }
@@ -1105,7 +1110,6 @@ config = {
                                                 var testStepResultPromise = protractor.promise.defer(),
                                                     testStepResultsDone = 0,
                                                     bugFound =false,
-                                                    testStepBug = {},
                                                     linkedIssue;
 
                                                 if (!feature.passed) {
@@ -1186,6 +1190,8 @@ config = {
                                                     }
                                                 }
 
+                                                testStepResultPromise.fulfill();
+
                                                 return testStepResultPromise;
                                             }, failCallback)
                                             .then(function () {
@@ -1193,7 +1199,13 @@ config = {
                                                     return Zapi.bulkUpdateExecutionDefects(feature.bugsCreated, jiraExecutionId)
                                                         .then(function (response) {
                                                             console.log('Succesfully linked defects (bugs created) to the execution with ID: ' + jiraExecutionId);
-                                                        }, failCallback);
+                                                        }, failCallback)
+                                                        .then(function () {
+                                                            return Zapi.updateTestStepResult(testCaseId, jiraExecutionId, testStepBug, feature, feature.bugsCreated);
+                                                        })
+                                                        .then(function () {
+                                                            return Zapi.updateAttachment(testStepBug.resultStep.id, path.join(screenShotPath, testStepBug.step.filename));
+                                                        });
                                                 } else {
                                                     return protractor.promise.defer().fulfill();
                                                 }

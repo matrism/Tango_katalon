@@ -385,12 +385,14 @@ exports.selectEndDateEndRulesSpecificValueRuleNumberI = function (i, value) {
 exports.selectWhenVariableLeftEndRulesSpecificValue = function (value) {
     it("Select the when variable left end rules specific value ", function () {
         pages.createDealContractPeriod.selectTheWhenVariableLeftEndRulesSpecificValue(value);
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 
 exports.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
     it("Select the when variable left end rules specific value rule number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 
@@ -514,12 +516,14 @@ exports.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ = fun
 exports.selectRightVariableEndRulesSpecificValue = function (value) {
     it("Select the right variable end rules specific value ", function () {
         pages.createDealContractPeriod.selectTheRightVariableEndRulesSpecificValue(value);
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 
 exports.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
     it("Select the right variable end rules specific value rule number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+        pages.createDealContractPeriod.waitForAjax();
     });
 };
 

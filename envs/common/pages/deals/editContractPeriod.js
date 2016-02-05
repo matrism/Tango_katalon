@@ -101,7 +101,7 @@ if (pages.editDealContractPeriod === undefined) {
         editTheContractPeriodArea: function () {
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editContractPeriodAreaElement);
             browser.actions().mouseMove(pages.editDealContractPeriod.elems.editContractPeriodAreaElement).perform();
-            pages.editDealContractPeriod.elems.editEndRulesIcon.click();
+            pages.editDealContractPeriod.elems.editContractPeriodIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editActualEndDateField));
         },
 
@@ -132,6 +132,7 @@ if (pages.editDealContractPeriod === undefined) {
 
         editTerminateTheNewContractPeriodDialog: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editContractPeriodModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editContractPeriodModalDialog));
             pages.editDealContractPeriod.elems.editTerminateDealContractPeriodModalDialog.click();
         },
 
@@ -522,6 +523,7 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
             pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
