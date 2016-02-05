@@ -753,8 +753,6 @@ exports.feature = [
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
             steps.relatedDeal.clickOnSaveRelatedDeal();
-
-            steps.base.sleep(20000);
         }
     }
 ];
