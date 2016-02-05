@@ -4,7 +4,7 @@ var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 if (pages.editDealRtp === undefined) {
-    pages.editDealRtp = new ftf.pageObject({
+    pages.editDealRtp = exports = new ftf.pageObject({
         locators: {
             editAddAnotherAcquisitionPeriodButtonLink: {css: "a[data-ng-click='addRightsTermPeriodSet()']"},
             editRtpAcquisitionAreaField: {css: "div[data-ng-class='{ active: acqFormSection.edit }'] div[data-ng-if='acqFormSection.detail']"},
@@ -65,7 +65,7 @@ if (pages.editDealRtp === undefined) {
         editTheRtpRetentionArea: function () {
             browser.actions().mouseMove(pages.editDealRtp.elems.editTheRtpRetentionAreaField).perform();
             pages.editDealRtp.elems.editTheRtpRetentionIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editScopeRetentionFromAcquisitionField));
         },
 
         clickOnTheAddRetentionFromAcquisitionLink: function () {
@@ -85,14 +85,17 @@ if (pages.editDealRtp === undefined) {
         },
 
         editDeleteTheRtpRetentionFromAcquisitionForm: function () {
-            browser.actions().click(pages.editDealRtp.elems.removeTheRtpRetention).perform();
-            //pages.editDealRtp.elems.removeTheRtpRetention.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.removeTheRtpRetention));
+            pages.base.scrollIntoView(pages.editDealRtp.elems.removeTheRtpRetention);
+            //browser.actions().click(pages.editDealRtp.elems.removeTheRtpRetention).perform();
+            pages.editDealRtp.elems.removeTheRtpRetention.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.modalDialogDelete));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealRtp.elems.confirmDeleteModalDialog));
-            browser.actions().click(pages.editDealRtp.elems.confirmDeleteModalDialog).perform();
-            //pages.editDealRtp.elems.confirmDeleteModalDialog.click();
+            //browser.actions().click(pages.editDealRtp.elems.confirmDeleteModalDialog).perform();
+            pages.editDealRtp.elems.confirmDeleteModalDialog.click();
+            browser.sleep(5000);
             pages.editDealRtp.waitForAjax();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealRtp.elems.modalDialogDelete));
+            //browser.wait(ExpectedConditions.invisibilityOf(pages.editDealRtp.elems.modalDialogDelete));
         },
 
         editFillTheRetentionDescriptionFromAcquisition: function (description) {
