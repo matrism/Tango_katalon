@@ -27,6 +27,16 @@ exports.searchDealsForAllContributions = function(terms) {
     return element.sendKeys(terms);
 };
 
+exports.dealSearchInput = function(i) {
+    return $$('.scope-delivery__search-deal input').get(i);
+};
+
+exports.searchDealsForContribution = function(i, terms) {
+    var element = exports.dealSearchInput(i);
+    pages.base.scrollIntoView(element);
+    return element.sendKeys(terms);
+};
+
 exports.dealSearchResults = function() {
     pages.base.waitForAjax();
     return $$('.tg-typeahead__suggestions-group-item-inner');

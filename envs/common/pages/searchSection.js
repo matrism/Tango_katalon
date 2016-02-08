@@ -49,7 +49,9 @@ if (pages.searchSection === undefined) {
         //END OF LOCATORS ///////////////////////////////////////
 
         clickDropdownMenu: function () {
-            this.searchDropdown().click();
+            var element = this.searchDropdown();
+            pages.base.scrollIntoView(element);
+            return element.click();
         },
 
         selectEntityTypeOption: function (value) {

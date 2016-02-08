@@ -1429,6 +1429,7 @@ exports.validateLastUpdateDate = function(value) {
 };
 
 pageStep([
+    'Wait For Status to be Displayed',
     'Click On Last Update Date',
     ['Merge', [
         'Merge Work',
