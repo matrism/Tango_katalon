@@ -241,6 +241,36 @@ if (pages.createDealGeneral === undefined) {
         },
 
 
+
+        selectTheRandomArtistValue: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
+            pages.createDealGeneral.elems.artistsField.click();
+            pages.createDealGeneral.elems.artistFieldInput.sendKeys("abcd");
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
+
+            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
+                then(function (promise) {
+                    console.log("Text from artist is : " + promise);
+                    if (promise.indexOf("Create New Artist") != -1) {
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                var element = options[randomNumber];
+                                browser.actions().mouseMove(element).click().perform();
+                                browser.sleep(500);
+                            })
+                    }
+                    else {browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                    }
+                });
+        },
+
+
         selectTheRandomArtist: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
             pages.createDealGeneral.elems.artistsField.click();

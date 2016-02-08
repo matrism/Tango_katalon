@@ -203,21 +203,21 @@ exports.feature = [
         tags: ["header_signing_last_update"],
         steps: function () {
             var today = new Date();
-            //var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDay();
+            //var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
             if(today.getMonth()<=8){
                 if(today.getDay()<=9){
-                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + 0 + today.getDay();
+                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + 0 + today.getDate();
                 }
                 else{
-                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + today.getDay();
+                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + today.getDate();
                 }
             }
             else{
                 if(today.getDay()<=9){
-                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + 0 + today.getDay();
+                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + 0 + today.getDate();
                 }
                 else{
-                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDay();
+                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
                 }
             }
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();

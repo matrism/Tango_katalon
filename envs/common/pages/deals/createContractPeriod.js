@@ -449,8 +449,8 @@ if (pages.createDealContractPeriod === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.attribute_left_choice'] div.tg-dropdown-button")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(By.xpath("//*[@class='tg-dropdown-menu ng-scope']//ul[@class='dropdown-menu']//li"))));
             browser.driver.findElements(By.xpath("//*[@class='tg-dropdown-menu ng-scope']//ul[@class='dropdown-menu']//li"))
-            //browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(11) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
-            //browser.driver.findElements(By.css("body>div:nth-child(11) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                //browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(11) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+                //browser.driver.findElements(By.css("body>div:nth-child(11) div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -696,6 +696,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         saveTheAdvanceAssumptions: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.saveAssumptionsButton));
+            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.saveAssumptionsButton);
             pages.createDealContractPeriod.elems.saveAssumptionsButton.click();
         },
 
@@ -898,8 +900,8 @@ if (pages.createDealContractPeriod === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.xpath("//*[@data-validation-class='offset']//ul[@class='dropdown-menu']//li/a"))));
             pages.base.scrollIntoView(element(By.xpath("//*[@data-validation-class='offset']//ul[@class='dropdown-menu']//li/a")));
             browser.driver.findElements(By.xpath("//*[@data-validation-class='offset']//ul[@class='dropdown-menu']//li/a"))
-            //browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))));
-            //browser.driver.findElements(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))
+                //browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))));
+                //browser.driver.findElements(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {

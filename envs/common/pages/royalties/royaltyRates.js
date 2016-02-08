@@ -13,7 +13,7 @@ if (pages.royaltyRates === undefined) {
             confirmCancelButton: {css: ".modal-footer>.btn-primary"},
             RRNameLabel: {css: ".rate-set-entity-name>div>label"},
             incomeProvidesLabel: {css: ".flex1>label"},
-            incomeProviderInput: { css: ".tg-typeahead__input" },
+            incomeProviderInput: {css: ".tg-typeahead__input"},
             incomeDateMethodLabel: {css: ".flex1>div:nth-child(2)>div:not([class])>label"},
             effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
             contractualRateLabel: {css: ".rate-set-rate-field>label"},
@@ -460,7 +460,7 @@ if (pages.royaltyRates === undefined) {
             ));
         },
 
-        incomeProviderSearchResultElements: function() {
+        incomeProviderSearchResultElements: function () {
             this.waitForIncomeProviderSearchResults();
             return $$('.tg-typeahead__suggestions-group-item');
         },
@@ -569,7 +569,7 @@ if (pages.royaltyRates === undefined) {
             return element.getAttribute('value');
         },
 
-        validateRRInput: function() {
+        validateRRInput: function () {
             var input = this.royaltyRateInput();
 
             pages.base.scrollIntoView(input);
@@ -693,7 +693,7 @@ if (pages.royaltyRates === undefined) {
 
             val = val.trim();
 
-            if(val) {
+            if (val) {
                 el.clear();
                 el.sendKeys(val);
                 browser.driver.sleep(2000);
@@ -776,6 +776,7 @@ if (pages.royaltyRates === undefined) {
             browser.actions().mouseMove(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
             //browser.actions().click(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
             browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.delete()']")).click();
+            browser.sleep(2000);
             //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
         },
 
@@ -812,8 +813,8 @@ if (pages.royaltyRates === undefined) {
             var messageEl = this.errorMessageRR(),
                 isPresent = messageEl.isPresent();
 
-            isPresent.then(function(isPresent) {
-                if(!isPresent) {
+            isPresent.then(function (isPresent) {
+                if (!isPresent) {
                     return;
                 }
 

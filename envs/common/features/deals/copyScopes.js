@@ -8,7 +8,7 @@ exports.commonFeatureTags = ['deals', 'copyScopes', 'regression'];
 
 exports.feature = [
     {
-        name: "Check copy scopes not available in create mode",
+        name: "Check copy scopes not available in create mode and use copy scope shares",
         tags: ["copy_shares"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -195,7 +195,7 @@ exports.feature = [
         }
     },
     {
-        name: "Check copy scopes not available in create mode",
+        name: "Check copy scopes not available in create mode and check copy scopes unshares",
         tags: ["copy_unshares"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
