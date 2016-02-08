@@ -484,47 +484,118 @@ exports.feature = [
             steps.royaltyRates.saveRateSet();
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
+
 
             //steps.editDealScope.waitForScopeNumberIToBeVisible(1);
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
 
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
 
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
 
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
 
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
 
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
-
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
-
-
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
 
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
 
 
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
+            steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
+
+            steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePssAndRR(1, 100);
+            steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
 
             steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");
         }

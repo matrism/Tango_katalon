@@ -5,7 +5,7 @@ var pph = require('../../../../helpers/pph'),
     promise = protractor.promise;
 
 if (pages.headerDeal === undefined) {
-    pages.headerDeal = new ftf.pageObject({
+    pages.headerDeal = exports = new ftf.pageObject({
         locators: {
             dealContractingPartiesValue: {css: "div#RECORD-HEADER h1 div.overflow"},
             dealBriefNumberText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p:nth-child(1)"},
