@@ -73,10 +73,79 @@ exports.feature = [
                 steps.royaltyRates.saveRateSet();
             }
 
+            steps.createDealScope.shareScopeToAllContractPeriods();
+
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+
+            //
+            //steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,49);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,49);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealContractPeriod.editSelectContractPeriodNumberI(3);
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
+            //steps.editDealScope.selectScopeNumberI(1);
+            //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
+            //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,49);
+            //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
+            //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
         }
     }
