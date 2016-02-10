@@ -205,7 +205,7 @@ exports.feature = [
             var today = new Date();
             //var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
             if(today.getMonth()<=8){
-                if(today.getDay()<=9){
+                if(today.getDate()<=9){
                     var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + 0 + today.getDate();
                 }
                 else{

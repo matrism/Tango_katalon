@@ -439,6 +439,12 @@ exports.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI = function (i) {
     });
 };
 
+exports.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait = function (i, timeout) {
+    it("Click on the copy scope button number of copies scope number " + i, function () {
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait(i, timeout);
+        pages.editDealScope.waitForAjax();
+    });
+};
 
 exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss = function (i, number) {
     it("Edit - copy specific number of scopes " + number + " from scope number " + i, function () {
