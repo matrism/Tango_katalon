@@ -228,11 +228,13 @@ config = {
             }));
         }
 
-        jasmine.getEnv().addReporter(new JSONReporter({
-            file: path.join(screenShotPath, 'jasmine-test-results.json'),
-            beautify: true,
-            indentationLevel: 4 // used if beautify === true
-        }));
+        if (!systemConfig.noReport) {
+            jasmine.getEnv().addReporter(new JSONReporter({
+                file: path.join(screenShotPath, 'jasmine-test-results.json'),
+                beautify: true,
+                indentationLevel: 4 // used if beautify === true
+            }));
+        }
 
         if(systemConfig.orphanOnError) {
             jasmine.getEnv().addReporter(orphanOnErrorReporter);
