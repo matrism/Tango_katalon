@@ -349,6 +349,7 @@ if (pages.createDealContractPeriod === undefined) {
 
         selectTheEndDateEndRulesSpecificValueRuleNumberI: function (i, value) {
             var desiredOption;
+            pages.base.scrollIntoView(element(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button")));
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button")).click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
