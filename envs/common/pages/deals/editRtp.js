@@ -155,6 +155,7 @@ if (pages.editDealRtp === undefined) {
         },
 
         saveTheRetentionFromAcquisition: function () {
+            pages.base.scrollIntoView(pages.editDealRtp.elems.saveRetentionFromAcquisitionButton);
             pages.editDealRtp.elems.saveRetentionFromAcquisitionButton.click();
             pages.editDealRtp.waitForAjax();
         },

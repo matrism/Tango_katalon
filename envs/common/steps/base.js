@@ -196,22 +196,7 @@ exports.validateDownloadFileCount = function (value) {
 
 exports.openTheNewTab = function (url) {
     it("Open a new tab with url", function () {
-
-        //browser.driver.get(url);
-        //browser.driver.findElement(By.css('body')).sendKeys(protractor.Key.CONTROL + "t");
-
-
-        browser.driver.executeScript(function () {
-            (function (a) {
-                document.body.appendChild(a);
-                a.setAttribute('href', location.href);
-                a.dispatchEvent((function (e) {
-                    e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
-                   browser.sleep(1000);
-                    return e;
-                }(document.createEvent('MouseEvents'))))
-            }(document.createElement('a')));
-        });
+        pages.base.openNewTab(url);
     });
 };
 
