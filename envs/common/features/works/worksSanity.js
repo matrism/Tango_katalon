@@ -1257,7 +1257,7 @@ exports.feature = [
                 });
 
                 steps.createDealScope.enterPublisherSearchTerms(
-                    0, 0, 'WCM Publisher 1'
+                    0, 0, 'WARNER ALLIANCE MUSIC'
                 );
 
                 steps.createDealScope.selectPublisherSearchResultByIndex(0);
@@ -1369,7 +1369,7 @@ exports.feature = [
                     {
                         row: 1,
                         role: 'E',
-                        name: 'WCM Publisher 1',
+                        name: 'WARNER ALLIANCE MUSIC',
                         societies: [],
                         shares: ['25.000', '–', '–', '–', '–'],
                     },
@@ -1390,7 +1390,7 @@ exports.feature = [
                     {
                         row: 5,
                         role: 'E',
-                        name: 'WCM Publisher 1',
+                        name: 'WARNER ALLIANCE MUSIC',
                         societies: [],
                         shares: ['25.000', '–', '–', '–', '–'],
                     },
@@ -1531,7 +1531,7 @@ exports.feature = [
 
             steps.workCwrPreview.validateRecordType(1, 'SPU');
             steps.workCwrPreview.validateRecordNumber(1);
-            steps.workCwrPreview.validatePublisherName(1, 'WCM PUBLISHER  1');
+            steps.workCwrPreview.validatePublisherName(1, 'WARNER ALLIANCE MUSIC');
             steps.workCwrPreview.validatePublisherRole(1, 'E');
 
             steps.workCwrPreview.validateRecordType(2, 'SPU');
@@ -1553,7 +1553,7 @@ exports.feature = [
 
             steps.workCwrPreview.validateRecordType(5, 'SPU');
             steps.workCwrPreview.validateRecordNumber(5);
-            steps.workCwrPreview.validatePublisherName(5, 'WCM PUBLISHER  1');
+            steps.workCwrPreview.validatePublisherName(5, 'WARNER ALLIANCE MUSIC');
             steps.workCwrPreview.validatePublisherRole(5, 'E');
 
             steps.workCwrPreview.validateRecordType(6, 'SPU');
@@ -1582,7 +1582,7 @@ exports.feature = [
 
             steps.workCwrPreview.validateRecordType(11, 'PWR');
             steps.workCwrPreview.validateRecordNumber(11);
-            steps.workCwrPreview.validatePublisherName(11, 'WCM PUBLISHER  1');
+            steps.workCwrPreview.validatePublisherName(11, 'WARNER ALLIANCE MUSIC');
 
             steps.workCwrPreview.validateRecordType(12, 'SWR');
             steps.workCwrPreview.validateRecordNumber(12);
@@ -1593,7 +1593,7 @@ exports.feature = [
 
             steps.workCwrPreview.validateRecordType(14, 'PWR');
             steps.workCwrPreview.validateRecordNumber(14);
-            steps.workCwrPreview.validatePublisherName(14, 'WCM PUBLISHER  1');
+            steps.workCwrPreview.validatePublisherName(14, 'WARNER ALLIANCE MUSIC');
 
             steps.workCwrPreview.validateRecordType(15, 'ALT');
 
