@@ -14,10 +14,11 @@ var Zapi = function () {
         var deferred = protractor.promise.defer();
         var Zapi = this;
 
+        testCycleName.replace('{1}', moment().format('YYYY-MM-DD'));
+
         browser.getProcessedConfig().then(function (config) {
             var capabilities = config.capabilities.tags,
                 issueName = Array.isArray(capabilities) ? capabilities[0] : capabilities,
-                //testCycleName = testCycleCliName || ('NightlyJob_' + moment().format('YYYY-MM-DD')),
                 components = ['deals', 'payees', 'works', 'dataUtilities', 'royaltyProcessing', 'royaltyRates', 'copyrightRegistration', 'financialInterfaces', 'incomeManagement'],
                 cycleExists,
                 cycleId,
