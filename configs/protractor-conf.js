@@ -349,7 +349,7 @@ config = {
             });
         }
 
-        var deferred = protractor.promise.defer().fulfill();
+        var deferred = protractor.promise.defer();
 
         if (testCycleCliName != "") {
             deferred = Zapi.onCleanUp(testCycleCliName, flow, screenShotPath);
