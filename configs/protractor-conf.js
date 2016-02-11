@@ -142,24 +142,24 @@ config = {
             Zapi.setProjectId(projectId);
         }
 
-        //browser.driver.manage().timeouts().setScriptTimeout(15000);
+        browser.driver.manage().timeouts().setScriptTimeout(15000);
 
-        //// maximize browser size, then check if it's bigger than our config resolution
-        //browser.driver.manage().window().maximize();
+        // maximize browser size, then check if it's bigger than our config resolution
+        browser.driver.manage().window().maximize();
 
-        //browser.driver.manage().window().getSize().then(function (size) {
-        //    // check if we have a system resolution and if either width/height is larger than actual browser width/height
-        //    if (systemConfig.resolution.width && systemConfig.resolution.height && (size.width < systemConfig.resolution.width || size.height < systemConfig.resolution.height)) {
-        //        // if so, set browser width/height to config and then out browser size
-        //        browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
+        browser.driver.manage().window().getSize().then(function (size) {
+            // check if we have a system resolution and if either width/height is larger than actual browser width/height
+            if (systemConfig.resolution.width && systemConfig.resolution.height && (size.width < systemConfig.resolution.width || size.height < systemConfig.resolution.height)) {
+                // if so, set browser width/height to config and then out browser size
+                browser.driver.manage().window().setSize(systemConfig.resolution.width, systemConfig.resolution.height);
 
-        //        browser.driver.manage().window().getSize().then(function (size) {
-        //            console.log('Browser Window Size: ' + JSON.stringify(size));
-        //        });
-        //    } else {
-        //        console.log('Browser Window Size: ' + JSON.stringify(size));
-        //    }
-        //});
+                browser.driver.manage().window().getSize().then(function (size) {
+                    console.log('Browser Window Size: ' + JSON.stringify(size));
+                });
+            } else {
+                console.log('Browser Window Size: ' + JSON.stringify(size));
+            }
+        });
 
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {
