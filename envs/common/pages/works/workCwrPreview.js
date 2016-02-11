@@ -182,11 +182,11 @@ exports.searchForRegistrationRecipient = function (name) {
 exports.selectRegistrationRecipientResultByIndex = function (index) {
     pages.base.waitForAjax();
 
-    var typeaheadResult = exports.registrationRecipientSearchResults();
+    var results = exports.registrationRecipientSearchResults();
 
-    browser.wait(ExpectedConditions.visibilityOfAny(exports.registrationRecipientSearchResults()));
+    browser.wait(ExpectedConditions.visibilityOfAny(results));
 
-    return typeaheadResult.click().then(function() {
+    return results.get(index).click().then(function() {
         pages.base.waitForAjax();
     });
 };
