@@ -733,22 +733,22 @@ exports.feature = [
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
             _.times(20, function () {
-                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("c");
-                steps.relatedDeal.clickValueRelationshipDropDown();
-                steps.relatedDeal.selectRandomValueRelationshipDropDown();
-            });
-            _.times(20, function () {
                 steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("d");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
-            _.times(10, function () {
+            _.times(20, function () {
                 steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("e");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
             _.times(10, function () {
                 steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("f");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            _.times(10, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("g");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
