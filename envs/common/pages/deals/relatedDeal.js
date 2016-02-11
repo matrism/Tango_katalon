@@ -126,6 +126,7 @@ if (pages.relatedDeal === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
+                    console.log('---element found---');
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 });

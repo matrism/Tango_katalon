@@ -88,6 +88,9 @@ exports.selectSpecificContractingPartyRelatedDealsTowNumberI = function (contrac
 
 exports.selectSpecificContractingPartyRelatedDeals = function (contracting) {
     it("Select random value for contracting party related deals ", function () {
+        console.log('-------');
+        console.log(contracting);
+        console.log('-------');
         pages.relatedDeal.fillIntoTheContractingPartiesFieldSpecificValue(contracting);
         pages.relatedDeal.selectTheRandomContractingPartyRelatedDeal();
         pages.relatedDeal.waitForAjax();
