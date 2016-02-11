@@ -14,7 +14,7 @@ var Zapi = function () {
         var deferred = protractor.promise.defer();
         var Zapi = this;
 
-        testCycleName.replace('{1}', moment().format('YYYY-MM-DD'));
+        testCycleName = testCycleName.replace('{1}', moment().format('YYYY-MM-DD'));
 
         browser.getProcessedConfig().then(function (config) {
             var capabilities = config.capabilities.tags,
