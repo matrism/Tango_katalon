@@ -555,17 +555,12 @@ exports.scrollTo = function () {
 };
 
 
-exports.waitDynamicForElement = function (conditionElementExist) {
-    var result = false;
-    var i = 0;
-    do {
-        if (conditionElementExist) {
-            result = true;
-            i = 501;
-        }
-        i++;
-    }
-    while ((i<=500) || (result==true));
-    return result;
+exports.waitForElementToBeHidden= function(el, timeout) {
+    timeout = timeout || 5000;
+    return browser.wait(function() {
+        return el.isDisplayed().then(function(displayed) {
+            return displayed === false;
+        });
+    }, timeout);
 };
 
