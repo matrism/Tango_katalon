@@ -172,7 +172,8 @@ exports.fillIntoExecutionDateFieldSpecificDayValue = function (day) {
 
 exports.selectRandomArtistValue = function () {
     it("Select a random value for artist field ", function () {
-        pages.createDealGeneral.selectTheRandomArtist();
+        //pages.createDealGeneral.selectTheRandomArtist();
+        pages.createDealGeneral.selectTheRandomArtistValue();
     });
 };
 

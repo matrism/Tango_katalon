@@ -653,6 +653,7 @@ if (pages.editDealScope === undefined) {
                 browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
                 browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-click='$event.preventDefault()'] i"))).perform();
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']")).click();
+                browser.sleep(1000);
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"))));
             },
 
@@ -683,6 +684,20 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
             },
 
+            editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait: function (i, timeout) {
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"))));
+                pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
+                browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
+                browser.sleep(timeout);
+                //browser.wait(ExpectedConditions.invisibilityOf(element(By.css("div.modal-dialog.ng-scope"))));
+                //while(!present) {
+                //    var present = pages.deal.elems.dealBriefNumber.isDisplayed;
+                //    var i=i+1;
+                    browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+                //}
+            },
+
+
             editClickOnTheCancelCopyScopeButtonNumberOfCopiesScopeNumberI: function (i) {
                 pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left")));
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button.btn.btn-cancel.pull-left")).click();
@@ -691,8 +706,7 @@ if (pages.editDealScope === undefined) {
             editClickOnTheAddOverrideIconPss: function () {
                 pages.editDealScope.elems.editOverridePssIcon.click();
                 pages.editDealScope.waitForAjax();
-            }
-            ,
+            },
 
             editSelectTheSubPublisherOverridePss: function (subPublisherName, subPublisherSelected) {
                 var desiredOption;
@@ -822,6 +836,7 @@ if (pages.editDealScope === undefined) {
             saveTheSocietyAgreementNumbersChanges: function () {
                 pages.base.scrollIntoView(pages.editDealScope.elems.saveChangesSocietyAgreementNumber);
                 pages.editDealScope.elems.saveChangesSocietyAgreementNumber.click();
+                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.addSocietyAgreementNumberLink));
             }
             ,
 
@@ -862,7 +877,7 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton));
                 pages.base.scrollIntoView(pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton);
                 pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.click();
-                pages.editDealScope.waitForAjax();
+                browser.sleep(1000);
                 pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.getAttribute("class").
                     then(function (promise) {
                         console.log("Share scope button for publisher shares is selected and it class name is : " + promise);
@@ -875,7 +890,7 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton));
                 pages.base.scrollIntoView(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton);
                 pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.click();
-                pages.editDealScope.waitForAjax();
+                browser.sleep(1000);
                 pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.getAttribute("class").
                     then(function (promise) {
                         console.log("Copy scope button for royalty rates is selected and it class name is : " + promise);
