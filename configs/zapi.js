@@ -1,5 +1,7 @@
 'use strict';
 
+var moment = require('moment');
+
 var Zapi = function () {
     var BASE_URL = 'https://jira.wmg.com',
         ZAPI_URL = BASE_URL + '/rest/zapi/latest/',
