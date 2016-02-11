@@ -206,6 +206,12 @@ exports.focusOnNewOpenedTab = function (i) {
     });
 };
 
+exports.closeTheTabByIndex = function(index){
+   it("Close the tab by index", function(){
+      pages.base.closeTabByIndex(index);
+   });
+};
+
 
 pageStep('Open new tab');
 pageStep('Duplicate tab');

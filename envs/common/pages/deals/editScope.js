@@ -689,12 +689,9 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
                 browser.sleep(timeout);
+                //pages.base.waitDynamicForElement(element(By.css("div.modal-dialog.ng-scope"));
                 //browser.wait(ExpectedConditions.invisibilityOf(element(By.css("div.modal-dialog.ng-scope"))));
-                //while(!present) {
-                //    var present = pages.deal.elems.dealBriefNumber.isDisplayed;
-                //    var i=i+1;
-                    browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
-                //}
+
             },
 
 

@@ -153,7 +153,7 @@ module.exports.selectRandomDropdownOption.standard = function (element, more) {
                 }
             }
         )
-        .then(
+            .then(
             function (values) {
                 var element;
                 var elementDisplayed;
@@ -432,12 +432,12 @@ exports.openNewTab = function (url) {
     $('#TAT_TEMP_ELEMENT').click();
 };
 
-exports.focusOnTheNewOpenedTab = function(i){
-   return browser.getAllWindowHandles().then(function (handles) {
-            browser.switchTo().window(handles[i]);
-        }).then(function () {
-            return browser.wait(ExpectedConditions.visibilityOf($('body')));
-        });
+exports.focusOnTheNewOpenedTab = function (i) {
+    return browser.getAllWindowHandles().then(function (handles) {
+        browser.switchTo().window(handles[i]);
+    }).then(function () {
+        return browser.wait(ExpectedConditions.visibilityOf($('body')));
+    });
 };
 
 exports.duplicateTab = function () {
@@ -470,16 +470,16 @@ exports.closeTabByIndex = function (index) {
     exports.switchToTab(index - 1);
 };
 
-exports.pause = function() {
-    browser.executeScript(function() {
+exports.pause = function () {
+    browser.executeScript(function () {
         window.tatDbgActive = true;
 
-        if(window.tatDbgAttached) {
+        if (window.tatDbgAttached) {
             return;
         }
 
-        document.body.addEventListener('keydown', function(event) {
-            if(!tatDbgActive || event.keyCode !== 120) {
+        document.body.addEventListener('keydown', function (event) {
+            if (!tatDbgActive || event.keyCode !== 120) {
                 return;
             }
 
@@ -489,9 +489,9 @@ exports.pause = function() {
         window.tatDbgAttached = true;
     });
 
-    return browser.wait(function() {
-        return browser.executeScript(function() {
-            if(window.tatDbgDone) {
+    return browser.wait(function () {
+        return browser.executeScript(function () {
+            if (window.tatDbgDone) {
                 delete window.tatDbgDone;
                 tatDbgActive = false;
 
@@ -503,7 +503,7 @@ exports.pause = function() {
     }, 99999999);
 };
 
-exports.orphanBrowser = function() {
+exports.orphanBrowser = function () {
     console.log('Orphaning browser...');
     process.exit(-1);
 };
@@ -529,18 +529,18 @@ exports.clickElement = function (elName, el, wait) {
     pages.base.waitForAjax();
 };
 
-exports.scrollTo = function() {
+exports.scrollTo = function () {
     var args = overloaded(arguments, {
         1: ['y'],
         2: ['x', 'y']
     });
 
-    if(args.x === undefined) {
+    if (args.x === undefined) {
         args.x = 0;
     }
 
-    return browser.executeScript(function(x, y) {
-        switch(y) {
+    return browser.executeScript(function (x, y) {
+        switch (y) {
             case 'top':
                 y = 0;
                 break;
@@ -553,3 +553,19 @@ exports.scrollTo = function() {
         window.scrollTo(x, y);
     }, args.x, args.y);
 };
+
+
+exports.waitDynamicForElement = function (conditionElementExist) {
+    var result = false;
+    var i = 0;
+    do {
+        if (conditionElementExist) {
+            result = true;
+            i = 501;
+        }
+        i++;
+    }
+    while ((i<=500) || (result==true));
+    return result;
+};
+
