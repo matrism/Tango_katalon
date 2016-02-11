@@ -231,6 +231,8 @@ exports.feature = [
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 2);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 2);
 
+            steps.base.closeTheTabByIndex(2);
+            steps.base.closeTheTabByIndex(1);
         }
     },
 
@@ -434,7 +436,9 @@ exports.feature = [
             steps.relatedDeal.clickOnContractingPartyRelatedDealLink(1);
             steps.base.focusOnNewOpenedTab(3);
 
-
+            steps.base.closeTheTabByIndex(3);
+            steps.base.closeTheTabByIndex(2);
+            steps.base.closeTheTabByIndex(1);
         }
     },
 
