@@ -11,6 +11,9 @@ exports.feature = [
         name: "Create a basic deal for LAD",
         tags: ["dealLad"],
         steps: function () {
+
+            //steps.searchSection.accessSavedDealByNumber("264929");
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             //add 3 contract periods
@@ -26,14 +29,14 @@ exports.feature = [
             steps.createDealContractPeriod.fillContractPeriodDescription("Description 3");
             steps.createDealContractPeriod.fillEndTargetMonths();
 
-            //add scope to the contract period 1
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            steps.createDealScope.itAddPublisherShare();
-            for (var i = 2; i <= 3; i++) {
-                steps.createDealScope.itAddPublisherShareWithMultipleThreeChains(i);
-            }
-            //override publisher
+            ////add scope to the contract period 1
+            //steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            //steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            //steps.createDealScope.itAddPublisherShare();
+            //for (var i = 2; i <= 3; i++) {
+            //    steps.createDealScope.itAddPublisherShareWithMultipleThreeChains(i);
+            //}
+            ////override publisher
             //steps.createDealScope.itOverridePublisherShare("Indiatestpub1", "Indiatestpub1", "India");
             //steps.createDealScope.itOverridePublisherShare("Algeriatestpub1", "Algeriatestpub1", "Algeria");
             //steps.createDealScope.itOverridePublisherShare("Albaniatestpub1", "Albaniatestpub1", "Albania");
@@ -52,7 +55,7 @@ exports.feature = [
             ////save the publisher share set
             //steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             //steps.createDealScope.saveThePublisherShareSet();
-
+            //
             //add RR to the scope
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addIncomeProviderByPartialMatch("test");
@@ -87,21 +90,24 @@ exports.feature = [
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
             //
             //steps.editDealScope.selectScopeNumberI(1);
             //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
             //
             //steps.editDealScope.selectScopeNumberI(1);
             //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,49);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
             //
             //steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
             //steps.editDealScope.selectScopeNumberI(1);
@@ -109,21 +115,24 @@ exports.feature = [
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
             //
             //steps.editDealScope.selectScopeNumberI(1);
             //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
             //
             //steps.editDealScope.selectScopeNumberI(1);
             //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,49);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
             //
             //steps.editDealContractPeriod.editSelectContractPeriodNumberI(3);
             //steps.editDealScope.selectScopeNumberI(1);
@@ -131,21 +140,27 @@ exports.feature = [
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
             //
             //steps.editDealScope.selectScopeNumberI(1);
             //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,100);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //
             //
             //steps.editDealScope.selectScopeNumberI(1);
             //steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
             //steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1,49);
             //steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             //steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 40000);
+            ////steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+
 
         }
     }
