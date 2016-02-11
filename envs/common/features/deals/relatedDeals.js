@@ -722,17 +722,17 @@ exports.feature = [
             steps.deal.goToRelatedDealsGeneralTabDetails();
             steps.relatedDeal.checkNoRelatedDealsDefined();
             steps.relatedDeal.clickOnAddRelatedDealLink();
-            _.times(20, function () {
+            _.times(1, function () {
                 steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("a");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
-            _.times(20, function () {
+            _.times(1, function () {
                 steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("b");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
-            _.times(20, function () {
+            _.times(1, function () {
                 steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("d");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
