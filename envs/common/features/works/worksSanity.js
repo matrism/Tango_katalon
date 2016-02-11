@@ -1227,9 +1227,9 @@ exports.feature = [
                 steps.createDealGeneral.selectRandomCompanyCode();
             }
 
-            steps.createDealGeneral.waitForContractingPartyDropDown();
-
             steps.createDealGeneral.enterContractingPartySearchTerms('ASCAP');
+
+            steps.createDealGeneral.waitForContractingPartyDropDown();
 
             steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
 
@@ -1370,14 +1370,14 @@ exports.feature = [
                         row: 1,
                         role: 'E',
                         name: 'WARNER ALLIANCE MUSIC',
-                        societies: [],
+                        societies: ['ASCAP'],
                         shares: ['25.000', '–', '–', '–', '–'],
                     },
                     {
                         row: 2,
                         role: 'AM',
                         name: 'WB MUSIC CORP.',
-                        societies: ['BMI'],
+                        societies: ['ASCAP'],
                         shares: ['–', '–', '–', '–', '–'],
                     },
                     {
@@ -1391,14 +1391,14 @@ exports.feature = [
                         row: 5,
                         role: 'E',
                         name: 'WARNER ALLIANCE MUSIC',
-                        societies: [],
+                        societies: ['ASCAP'],
                         shares: ['25.000', '–', '–', '–', '–'],
                     },
                     {
                         row: 6,
                         role: 'AM',
                         name: 'WB MUSIC CORP.',
-                        societies: ['BMI'],
+                        societies: ['ASCAP'],
                         shares: ['–', '–', '–', '–', '–'],
                     },
                     {
