@@ -738,17 +738,17 @@ exports.feature = [
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
             _.times(3, function () {
-                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("f");
-                steps.relatedDeal.clickValueRelationshipDropDown();
-                steps.relatedDeal.selectRandomValueRelationshipDropDown();
-            });
-            _.times(3, function () {
                 steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("g");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
             _.times(3, function () {
-                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("h");
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("p");
+                steps.relatedDeal.clickValueRelationshipDropDown();
+                steps.relatedDeal.selectRandomValueRelationshipDropDown();
+            });
+            _.times(3, function () {
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("t");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
