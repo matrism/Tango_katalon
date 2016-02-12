@@ -29,6 +29,12 @@ exports.feature = [
             steps.createDealContractPeriod.fillContractPeriodDescription("Description 3");
             steps.createDealContractPeriod.fillEndTargetMonths();
 
+            //add Advance Assumptions to all CPs
+            _.times(3, function(num){
+                steps.createDealContractPeriod.selectContractPeriodNumberI(num+1);
+                steps.createDealContractPeriod.itAddAdvanceAssumptions();
+            });
+
             ////add scope to the contract period 1
             //steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             //steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
