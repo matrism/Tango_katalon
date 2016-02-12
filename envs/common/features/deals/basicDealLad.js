@@ -29,33 +29,33 @@ exports.feature = [
             steps.createDealContractPeriod.fillContractPeriodDescription("Description 3");
             steps.createDealContractPeriod.fillEndTargetMonths();
 
-            ////add scope to the contract period 1
-            //steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            //steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            //steps.createDealScope.itAddPublisherShare();
-            //for (var i = 2; i <= 3; i++) {
-            //    steps.createDealScope.itAddPublisherShareWithMultipleThreeChains(i);
-            //}
-            ////override publisher
-            //steps.createDealScope.itOverridePublisherShare("Indiatestpub1", "Indiatestpub1", "India");
-            //steps.createDealScope.itOverridePublisherShare("Algeriatestpub1", "Algeriatestpub1", "Algeria");
-            //steps.createDealScope.itOverridePublisherShare("Albaniatestpub1", "Albaniatestpub1", "Albania");
-            //steps.createDealScope.itOverridePublisherShare("Braziltestpub1", "Braziltestpub1", "Brazil");
-            //steps.createDealScope.itOverridePublisherShare("Canadatestpub1", "Canadatestpub1", "Canada");
-            //steps.createDealScope.itOverridePublisherShare("Croatiatestpub1", "Croatiatestpub1", "Croatia");
-            //steps.createDealScope.itOverridePublisherShare("Chinatestpub1", "Chinatestpub1", "China");
-            //steps.createDealScope.itOverridePublisherShare("Francetestpub1", "Francetestpub1", "France");
-            //steps.createDealScope.itOverridePublisherShare("Indonesiatestpub1", "Indonesiatestpub1", "Indonesia");
-            //steps.createDealScope.itOverridePublisherShare("Japantestpub1", "Japantestpub1", "Japan");
-            //steps.createDealScope.itOverridePublisherShare("Moldovatestpub1", "Moldovatestpub1", "Moldova");
-            //steps.createDealScope.itOverridePublisherShare("Romaniatestpub1", "Romaniatestpub1", "Romania");
-            //steps.createDealScope.itOverridePublisherShare("Hungarytestpub1", "Hungarytestpub1", "Hungary");
-            //steps.createDealScope.itOverridePublisherShare("Greecetestpub1", "Greecetestpub1", "Greece");
-            //steps.createDealScope.itOverridePublisherShare("Panamatestpub1", "Panamatestpub1", "Panama");
-            ////save the publisher share set
-            //steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
-            //steps.createDealScope.saveThePublisherShareSet();
-            //
+            //add scope to the contract period 1
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.createDealScope.itAddPublisherShare();
+            for (var i = 2; i <= 3; i++) {
+                steps.createDealScope.itAddPublisherShareWithMultipleThreeChains(i);
+            }
+            //override publisher
+            steps.createDealScope.itOverridePublisherShare("Indiatestpub1", "Indiatestpub1", "India");
+            steps.createDealScope.itOverridePublisherShare("Algeriatestpub1", "Algeriatestpub1", "Algeria");
+            steps.createDealScope.itOverridePublisherShare("Albaniatestpub1", "Albaniatestpub1", "Albania");
+            steps.createDealScope.itOverridePublisherShare("Braziltestpub1", "Braziltestpub1", "Brazil");
+            steps.createDealScope.itOverridePublisherShare("Canadatestpub1", "Canadatestpub1", "Canada");
+            steps.createDealScope.itOverridePublisherShare("Croatiatestpub1", "Croatiatestpub1", "Croatia");
+            steps.createDealScope.itOverridePublisherShare("Chinatestpub1", "Chinatestpub1", "China");
+            steps.createDealScope.itOverridePublisherShare("Francetestpub1", "Francetestpub1", "France");
+            steps.createDealScope.itOverridePublisherShare("Indonesiatestpub1", "Indonesiatestpub1", "Indonesia");
+            steps.createDealScope.itOverridePublisherShare("Japantestpub1", "Japantestpub1", "Japan");
+            steps.createDealScope.itOverridePublisherShare("Moldovatestpub1", "Moldovatestpub1", "Moldova");
+            steps.createDealScope.itOverridePublisherShare("Romaniatestpub1", "Romaniatestpub1", "Romania");
+            steps.createDealScope.itOverridePublisherShare("Hungarytestpub1", "Hungarytestpub1", "Hungary");
+            steps.createDealScope.itOverridePublisherShare("Greecetestpub1", "Greecetestpub1", "Greece");
+            steps.createDealScope.itOverridePublisherShare("Panamatestpub1", "Panamatestpub1", "Panama");
+            //save the publisher share set
+            steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
+            steps.createDealScope.saveThePublisherShareSet();
+
             //add RR to the scope
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addIncomeProviderByPartialMatch("test");
