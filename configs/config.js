@@ -74,14 +74,14 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: (
-                    cli['app-url'] || 'http://tango.tango-qa-aws.dspdev.wmg.com'
+                    cli['app-url'] || 'http://tango.tango.qa.wmg.com'
                 ),
                 service_url: (
                     cli['service-url'] || cli['app-url'] ||
-                    'http://tango.tango-qa-aws.dspdev.wmg.com'
+                    'http://tango.tango.qa.wmg.com'
                 ),
                 cr_url: (
-                    cli['cr-url'] || 'http://tancrsrv.tango-qa-aws.dspdev.wmg.com:80'
+                    cli['cr-url'] || 'http://tancrsrv.tango.qa.wmg.com:80'
                 )
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
@@ -90,14 +90,14 @@ var defaultUserName = 'TangoTest1',
         staging: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
-                app_url: cli['app-url'] || 'http://musicpublishing.staging.dsp.wmg.com',
+                app_url: cli['app-url'] || 'http://musicpublishing.staging.wmg.com',
                 service_url: (
                     cli['service-url'] || cli['app-url'] ||
-                    'http://musicpublishing.staging.dsp.wmg.com'
+                    'http://musicpublishing.staging.wmg.com'
                 ),
                 cr_url: (
                     cli['cr-url'] ||
-                    'http://tancrsrv.east.ipaas.staging.dsp.wmg.com:80'
+                    'http://tancrsrv.internal.staging.wmg.com:80'
                 )
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
