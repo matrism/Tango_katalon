@@ -1,6 +1,8 @@
 'use strict';
 
-var using = fnutils.using;
+var using = fnutils.using,
+
+    dealId = { staging: '19846' }[systemConfig.env.name] || '245951';
 
 exports.commonFeatureTags = [
     'viewFilteredRoyaltyRatesSummaryRegression',
@@ -20,7 +22,7 @@ exports.feature = [
         tags: [],
 
         steps: function () {
-            steps.searchSection.accessSavedDealByNumber('209550');
+            steps.searchSection.accessSavedDealByNumber(dealId);
 
             steps.deal.goToIncomeRatesPage();
             steps.dealIncomeRates.goToRatesSummary();
