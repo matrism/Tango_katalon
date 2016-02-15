@@ -550,7 +550,7 @@ if (pages.createDealScope === undefined) {
 
         fillPublisherNameAMFieldChainI: function (i) {
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input[ng-model='$term']"));
-            element.sendKeys("wb music corp");
+            element.sendKeys("53026414");
         },
 
         clickOnTheYesSocietyAwardCreditPublisherShareSet: function () {

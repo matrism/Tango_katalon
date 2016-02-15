@@ -860,7 +860,7 @@ exports.itEditAddPublisherShare = function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.editDealScope.elems.editAddPublisherShareSetLink);
         steps.editDealScope.editClickOnAddPublisherShareSet();
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.editDealScope.editIntoFirstPublisherNameAMField("wb music corp");
+        steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
         steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
     });
@@ -872,7 +872,7 @@ exports.itEditAddPublisherShareWithSocietyAwardCredit = function () {
         steps.editDealScope.editClickOnAddPublisherShareSet();
         steps.editDealScope.editClickOnYesSocietyAwardCreditPublisherShareSet();
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.editDealScope.editIntoFirstPublisherNameAMField("wb music corp");
+        steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
         steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
     });
@@ -881,7 +881,7 @@ exports.itEditAddPublisherShareWithSocietyAwardCredit = function () {
 exports.itEditPublisherShare = function () {
     describe("Edit publisher share set", function () {
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.editDealScope.editIntoFirstPublisherNameAMField("wb music corp");
+        steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
         steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
     });
