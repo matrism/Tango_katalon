@@ -1606,9 +1606,18 @@ exports.feature = [
     },
     {
         name: 'Execute registration run',
+
         tags: [
+            'broken',
             'worksSanityExecuteRegistrationRun'
         ],
+
+        breakageDescription: (
+            "Since we don't define org delivery methods before doing this, " +
+            "it can cause data to be sent to WMG's peers if org data is set up " +
+            "with real delivery information. See TAT-796."
+        ),
+
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
 
