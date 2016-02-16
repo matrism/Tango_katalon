@@ -227,7 +227,7 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / SettlementCo-PublishingAssignmentProduction Music Miscellaneous ServicesSub-Publishing", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("AssignmentCo-PublishingProduction Music Miscellaneous ServicesAudit / SettlementSub-Publishing", 2);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 2);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 2);
 
@@ -393,7 +393,7 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / SettlementCo-PublishingAssignmentFinderSub-Publishing", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("AssignmentCo-PublishingFinderAudit / SettlementSub-Publishing", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 1);
 
