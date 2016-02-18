@@ -732,7 +732,7 @@ exports.feature = [
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
             _.times(20, function () {
-                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("b");
+                steps.relatedDeal.selectSpecificContractingPartyRelatedDeals("c");
                 steps.relatedDeal.clickValueRelationshipDropDown();
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
