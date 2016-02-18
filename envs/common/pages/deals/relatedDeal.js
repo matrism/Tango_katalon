@@ -131,7 +131,7 @@ if (pages.relatedDeal === undefined) {
                 });
         },
 
-        selectTheRandomValueFromRelationshipDropDownRowNumberI: function () {
+        selectTheRandomValueFromRelationshipDropDownRowNumberI: function (i) {
             browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.relationship div.tg-dropdown-button")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))));
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
