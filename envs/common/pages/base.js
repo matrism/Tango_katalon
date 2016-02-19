@@ -555,7 +555,7 @@ exports.scrollTo = function () {
 };
 
 
-exports.waitForTheElementToBeHidden= function(el, timeout) {
+exports.waitForTheElementToBeHidden= function(condition, timeout) {
     timeout = timeout || 50000;
     return browser.wait(function() {
         return el.isDisplayed().then(function(displayed) {
