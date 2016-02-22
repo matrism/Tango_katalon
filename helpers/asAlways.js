@@ -34,6 +34,10 @@ exports.trim = function (string) {
     return pph.trim(string);
 };
 
+exports.hover = function (el) {
+    browser.actions().mouseMove(el).perform();
+};
+
 exports.click = function (el) {
     el.click();
 };

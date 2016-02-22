@@ -26,6 +26,14 @@ module.exports = function (target, desc, fn) {
         }
 
         it(fullDesc, function () {
+            stepArgs = stepArgs.map(function (arg) {
+                if(typeof arg !== 'function' || !arg.testVariableFn) {
+                    return arg;
+                }
+
+                return arg();
+            });
+
             fn.apply(null, stepArgs);
         });
     };

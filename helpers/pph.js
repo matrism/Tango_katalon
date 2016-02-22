@@ -2,13 +2,16 @@
 var pph = module.exports = {};
 
 pph.arrayMethod = function(methodName, array, callback) {
+    var tail = [].slice.call(arguments, 2);
+
     array = [].slice.call(array, 0);
+
     return promise
         .all(array.map(function(value) {
             return promise.when(value);
         }))
         .then(function(values) {
-            return values[methodName](callback);
+            return values[methodName].apply(values, tail);
         });
 };
 pph.arraySome = function(array, predicate) {
@@ -132,6 +135,11 @@ pph.getAllText = function(element) {
         element
     );
 };
+
+pph.getValue = function (el) {
+    return el.getAttribute('value');
+};
+
 pph.matchesCssSelector = function(element, selector) {
     if(element instanceof protractor.ElementFinder) {
         element = element.getWebElement();
@@ -218,5 +226,19 @@ pph.isDisplayed = function (el) {
         }
 
         throw err;
+    });
+};
+
+pph.add = function () {
+    return pph.arrayMethod('reduce', arguments, function (a, b) {
+        return a + b;
+    }, 0);
+};
+
+pph.subtract = function () {
+    return pph.arrayMethod('map', arguments, function (value, i) {
+        return (i === 0)? value : -value;
+    }).then(function (values) {
+        return pph.add.apply(null, values);
     });
 };

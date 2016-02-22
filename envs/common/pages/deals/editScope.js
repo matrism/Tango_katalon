@@ -399,9 +399,9 @@ if (pages.editDealScope === undefined) {
             },
 
             editSaveTheChangesPage: function () {
-                pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
-                pages.editDealScope.elems.saveChanges.click();
-                pages.editDealScope.waitForAjax();
+                return asAlways(
+                    exports.saveButton(), 'scrollIntoView', 'click', 'waitForAjax'
+                );
             },
 
             editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
