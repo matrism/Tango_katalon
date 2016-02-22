@@ -461,6 +461,7 @@ exports.feature = [
         name: "Check copy scope performance test with pss and rates",
         tags: ['copy_performance'],
         steps: function () {
+            var timeout = 15000;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -488,7 +489,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -498,7 +499,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -507,7 +508,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -516,7 +517,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -525,7 +526,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -534,7 +535,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -543,7 +544,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -552,7 +553,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -561,7 +562,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -570,7 +571,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
 
@@ -579,7 +580,7 @@ exports.feature = [
             steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, 100);
             steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
             steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, 50000);
+            //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
             steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
 
             steps.editDealScope.checkTheNumberOfScopesPerDeal("1101");

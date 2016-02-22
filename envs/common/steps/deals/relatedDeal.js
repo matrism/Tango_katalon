@@ -165,6 +165,19 @@ exports.checkRelationshipValueRowNumberI = function (value, i) {
     });
 };
 
+exports.clickValueRelationshipDropDown = function () {
+    it("Click the relationship drop down ", function () {
+        pages.relatedDeal.clickValueRelationshipDropDown();
+    });
+};
+
+exports.selectRandomValueRelationshipDropDown = function () {
+    it("Select the random value from relationship drop down ", function () {
+        pages.relatedDeal.selectRandomValueRelationshipDropDown();
+        pages.relatedDeal.waitForAjax();
+    });
+};
+
 exports.selectRandomValueFromRelationshipDropDown = function (i) {
     it("Select the random value from relationship drop down ", function () {
         pages.relatedDeal.selectTheRandomValueFromRelationshipDropDownRowNumberI(i);

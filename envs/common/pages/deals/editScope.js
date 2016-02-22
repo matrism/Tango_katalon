@@ -549,7 +549,7 @@ if (pages.editDealScope === undefined) {
 
             editPublisherNameAMFieldChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"));
-                element.sendKeys("wb music corp");
+                element.sendKeys("53026414");
             },
 
             editSelectRandomPublisherNameDropDownChainI: function (i) {
@@ -645,7 +645,7 @@ if (pages.editDealScope === undefined) {
             },
 
             editClickOnCopyScopeOptionNumberI: function (i) {
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-click='$event.preventDefault()'] i"))));
+                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-click='$event.preventDefault()'] i"))));
                 //browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
                 browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-click='$event.preventDefault()'] i"))).perform();
                 browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='showScopeCopySection(sp.id)']"))).click();
@@ -685,11 +685,11 @@ if (pages.editDealScope === undefined) {
             },
 
             editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait: function (i, timeout) {
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"))));
+                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"))));
                 pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
-                pages.base.waitForElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), timeout);
-
+                pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), timeout);
+                //browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber), timeout);
             },
 
 
@@ -872,7 +872,6 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton));
                 pages.base.scrollIntoView(pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton);
                 pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.click();
-                browser.sleep(1000);
                 pages.editDealScope.elems.sharePublisherShareInCopyScopeModalButton.getAttribute("class").
                     then(function (promise) {
                         console.log("Share scope button for publisher shares is selected and it class name is : " + promise);
@@ -885,14 +884,12 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton));
                 pages.base.scrollIntoView(pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton);
                 pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.click();
-                browser.sleep(1000);
                 pages.editDealScope.elems.copyRoyaltyRatesInCopyScopeModalButton.getAttribute("class").
                     then(function (promise) {
                         console.log("Copy scope button for royalty rates is selected and it class name is : " + promise);
                         expect(promise).toContain("active");
                     });
-            }
-            ,
+            },
 
             clickOnTheShareRoyaltyRatesInCopyScopeModal: function () {
                 pages.base.scrollIntoView(pages.editDealScope.elems.shareRoyaltyRatesInCopyScopeModalButton);

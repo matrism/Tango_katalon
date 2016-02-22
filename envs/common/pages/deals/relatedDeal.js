@@ -23,68 +23,78 @@ if (pages.relatedDeal === undefined) {
             cancelRelatedDealButton: {css: "div[data-tg-modular-edit-id='relatedDeals'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"}
         },
 
+        getRelationshipDropDownButton: function () {
+            return $$("div[data-ng-model='relatedDeal.reason']").$$("div[ng-click='toggleOpenState($event);']").last();
+
+        },
+
+        getRelationshipDropDownListElement: function () {
+            return $$("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope").last();
+
+        },
+
         checkThatNoRelatedDealsDefined: function () {
             browser.driver.findElement(By.css("div.table-body.clearfix div.table-row.no-deals.ng-scope span")).getText().
-            then(function (promise) {
-                console.log("Check that no related deals defined  " + promise);
-                expect(promise).toContain("No Related Deals have been defined.");
-            });
+                then(function (promise) {
+                    console.log("Check that no related deals defined  " + promise);
+                    expect(promise).toContain("No Related Deals have been defined.");
+                });
         },
 
         checkTheRelatedDealsTitle: function () {
             pages.relatedDeal.elems.relatedDealsTitleName.getText().
-            then(function (promise) {
-                console.log("Check that related deals title is  " + promise);
-                expect(promise).toContain("Related Deals");
-            });
+                then(function (promise) {
+                    console.log("Check that related deals title is  " + promise);
+                    expect(promise).toContain("Related Deals");
+                });
         },
 
         checkTheRelatedDealsTooltipTitle: function () {
             pages.relatedDeal.elems.relatedDealsTitleTooltip.getAttribute("data-tooltip").
-            then(function (promise) {
-                console.log("Check that related deals tooltip title is  " + promise);
-                expect(promise).toEqual("Defines how other Deals are related to this one.");
-            });
+                then(function (promise) {
+                    console.log("Check that related deals tooltip title is  " + promise);
+                    expect(promise).toEqual("Defines how other Deals are related to this one.");
+                });
         },
 
         checkTheContractingPartiesTitleTableRelatedDeals: function () {
             pages.relatedDeal.elems.contractingPartiesTitleTable.getText().
-            then(function (promise) {
-                console.log("Check that contracting parties title is  " + promise);
-                expect(promise).toContain("Contracting Parties");
-            });
+                then(function (promise) {
+                    console.log("Check that contracting parties title is  " + promise);
+                    expect(promise).toContain("Contracting Parties");
+                });
         },
 
         checkTheContractTypeTitleTableRelatedDeals: function () {
             pages.relatedDeal.elems.contractTypeTitleTable.getText().
-            then(function (promise) {
-                console.log("Check that contract type title is  " + promise);
-                expect(promise).toContain("Contract Type");
-            });
+                then(function (promise) {
+                    console.log("Check that contract type title is  " + promise);
+                    expect(promise).toContain("Contract Type");
+                });
         },
 
         checkTheDealStatusTitleTableRelatedDeals: function () {
             pages.relatedDeal.elems.dealStatusTitleTable.getText().
-            then(function (promise) {
-                console.log("Check that deal status title is  " + promise);
-                expect(promise).toContain("Deal Status");
-            });
+                then(function (promise) {
+                    console.log("Check that deal status title is  " + promise);
+                    expect(promise).toContain("Deal Status");
+                });
         },
 
         checkTheContractExecutionDateTitleTableRelatedDeals: function () {
             pages.relatedDeal.elems.contractExecutionDateTitleTable.getText().
-            then(function (promise) {
-                console.log("Check that contract execution date title is  " + promise);
-                expect(promise).toContain("Contract Execution Date");
-            });
+                then(function (promise) {
+                    console.log("Check that contract execution date title is  " + promise);
+                    expect(promise).toContain("Contract Execution Date");
+                });
         },
 
         checkTheRelationshipTitleTableRelatedDeals: function () {
             pages.relatedDeal.elems.relationshipTitleTable.getText().
-            then(function (promise) {
-                console.log("Check that relationship title is  " + promise);
-                expect(promise).toContain("Relationship");
-            });
+                then(function (promise) {
+                    console.log("Check that relationship title is  " + promise);
+                    expect(promise).toContain("Relationship");
+                });
         },
 
         clickOnTheAddRelatedDealLink: function () {
@@ -131,6 +141,16 @@ if (pages.relatedDeal === undefined) {
                 });
         },
 
+        clickValueRelationshipDropDown: function () {
+            pages.relatedDeal.getRelationshipDropDownButton().click();
+            steps.base.sleep(200);
+        },
+
+        selectRandomValueRelationshipDropDown: function () {
+            //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))));
+            pages.relatedDeal.getRelationshipDropDownListElement().click();
+        },
+
         clickOnTheSaveRelatedDeal: function () {
             pages.relatedDeal.elems.saveRelatedDealButton.click();
         },
@@ -149,7 +169,6 @@ if (pages.relatedDeal === undefined) {
             browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.contracting-parties a")).click();
             pages.relatedDeal.waitForAjax();
         }
-
 
     });
 }
