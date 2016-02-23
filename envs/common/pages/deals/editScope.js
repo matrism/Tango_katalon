@@ -693,7 +693,7 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
                 //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), timeout);
                 //browser.waitForAngular();
-                //browser.sleep(timeout);
+                browser.sleep(timeout);
                 //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))), timeout);
             },
 
