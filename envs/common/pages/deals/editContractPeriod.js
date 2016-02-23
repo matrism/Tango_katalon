@@ -112,7 +112,7 @@ if (pages.editDealContractPeriod === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editRulesTitleTextEndRules));
         },
 
-        editClickOnTheDeleteEndRulesButton: function(){
+        editClickOnTheDeleteEndRulesButton: function () {
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editDeleteButtonEndRules);
             pages.editDealContractPeriod.elems.editDeleteButtonEndRules.click();
         },
@@ -168,170 +168,170 @@ if (pages.editDealContractPeriod === undefined) {
 
         validateTheFirstIncompleteMdrcTitle: function () {
             pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
-            then(function (promise) {
-                console.log("Mdrc title  is: " + promise);
-                expect(promise).toContain("Works");
-                expect(promise).toContain("Incomplete");
-            });
+                then(function (promise) {
+                    console.log("Mdrc title  is: " + promise);
+                    expect(promise).toContain("Works");
+                    expect(promise).toContain("Incomplete");
+                });
         },
 
         validateTheFirstDeemedCompleteMdrcTitle: function () {
             pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
-            then(function (promise) {
-                console.log("Mdrc title  is: " + promise);
-                expect(promise).toContain("Works");
-                expect(promise).toContain("Deemed Complete");
-            });
+                then(function (promise) {
+                    console.log("Mdrc title  is: " + promise);
+                    expect(promise).toContain("Works");
+                    expect(promise).toContain("Deemed Complete");
+                });
         },
 
         validateTheFirstCompleteMdrcTitle: function () {
             pages.editDealContractPeriod.elems.firstMdrcTitle.getText().
-            then(function (promise) {
-                console.log("Mdrc title  is: " + promise);
-                expect(promise).toContain("Works");
-                expect(promise).toContain("Complete");
-            });
+                then(function (promise) {
+                    console.log("Mdrc title  is: " + promise);
+                    expect(promise).toContain("Works");
+                    expect(promise).toContain("Complete");
+                });
         },
 
         validateTheIMdrcTitle: function (i, type) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") h3.contract-period-header.ng-binding")).getText().
-            then(function (promise) {
-                console.log("Mdrc title  is: " + promise);
-                expect(promise).toContain("Works");
-                expect(promise).toContain(type);
-            });
+                then(function (promise) {
+                    console.log("Mdrc title  is: " + promise);
+                    expect(promise).toContain("Works");
+                    expect(promise).toContain(type);
+                });
         },
 
         validateTheMdrcMinimumLabelValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.min_new_work_quantity || mdrcs.min_new_work_quantity_percent || mdrc.work_percent']")).getText().
-            then(function (promise) {
-                console.log("MDRC minimum label text value is " + promise);
-                expect(promise).toEqual("Minimums:");
-            });
+                then(function (promise) {
+                    console.log("MDRC minimum label text value is " + promise);
+                    expect(promise).toEqual("Minimums:");
+                });
         },
 
         validateTheMdrcMinimumTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.work_percent']")).getText().
-            then(function (promise) {
-                console.log("MDRC minimum right text value is " + promise);
-                expect(promise).toContain("minimum Work contribution");
-            });
+                then(function (promise) {
+                    console.log("MDRC minimum right text value is " + promise);
+                    expect(promise).toContain("minimum Work contribution");
+                });
         },
 
         validateTheMdrcCommercialReleaseLabelValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.com_release_major_territory != 0 || mdrc.commercial_release_quantity || mdrc.release_territories.territories.length > 0'] div p")).getText().
-            then(function (promise) {
-                console.log("MDRC commercial release label is " + promise);
-                expect(promise).toEqual("Commercial Release:");
-            });
+                then(function (promise) {
+                    console.log("MDRC commercial release label is " + promise);
+                    expect(promise).toEqual("Commercial Release:");
+                });
         },
 
         validateTheMdrcQuantityForCommercialReleaseTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.commercial_release_quantity']")).getText().
-            then(function (promise) {
-                console.log("MDRC quantity for Commercial Release right text value is " + promise);
-                expect(promise).toContain("Works are required for commercial release");
+                then(function (promise) {
+                    console.log("MDRC quantity for Commercial Release right text value is " + promise);
+                    expect(promise).toContain("Works are required for commercial release");
 
-            });
+                });
         },
 
         validateTheMdrcMajorTerritoryTextCommercialReleaseTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.com_release_major_territory != 0']")).getText().
-            then(function (promise) {
-                console.log("MDRC major territories Commercial Release right text value is " + promise);
-                expect(promise).toContain("Required in");
-                expect(promise).toContain("major territory");
-            });
+                then(function (promise) {
+                    console.log("MDRC major territories Commercial Release right text value is " + promise);
+                    expect(promise).toContain("Required in");
+                    expect(promise).toContain("major territory");
+                });
         },
 
         validateTheMdrcTerritoriesListTextCommercialReleaseTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div.tg-territory-label")).getText().
-            then(function (promise) {
-                console.log("MDRC territories list Commercial Release right text value is " + promise);
-                expect(promise).toContain("Countr");
-            });
+                then(function (promise) {
+                    console.log("MDRC territories list Commercial Release right text value is " + promise);
+                    expect(promise).toContain("Countr");
+                });
         },
 
         validateTheMdrcLabelsTextCommercialReleaseTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.labels != 0']")).getText().
-            then(function (promise) {
-                console.log("MDRC labels Commercial Release right text value is " + promise);
-                expect(promise).toContain("Approved labels:")
-            });
+                then(function (promise) {
+                    console.log("MDRC labels Commercial Release right text value is " + promise);
+                    expect(promise).toContain("Approved labels:")
+                });
         },
 
         validateTheMdrcMinimumStatutoryMechanicalRateLabelValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.min_stat_mech_rate_percent'] p")).getText().
-            then(function (promise) {
-                console.log("MDRC minimum statutory mechanical rate label is " + promise);
-                expect(promise).toEqual("Minimum Statutory\nMechanical Rate:");
-            });
+                then(function (promise) {
+                    console.log("MDRC minimum statutory mechanical rate label is " + promise);
+                    expect(promise).toEqual("Minimum Statutory\nMechanical Rate:");
+                });
         },
 
         validateTheMdrcMinimumStatutoryTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.min_stat_mech_rate_percent'] div.span3")).getText().
-            then(function (promise) {
-                console.log("MDRC minimum statutory right text value is " + promise);
-                expect(promise).toContain("allowed");
-            });
+                then(function (promise) {
+                    console.log("MDRC minimum statutory right text value is " + promise);
+                    expect(promise).toContain("allowed");
+                });
         },
 
         validateTheMdrcInNoEventLessThanTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.no_less_than']")).getText().
-            then(function (promise) {
-                console.log("MDRC in no event less than right text value is " + promise);
-                expect(promise).toContain("In No Event Less Than");
-            });
+                then(function (promise) {
+                    console.log("MDRC in no event less than right text value is " + promise);
+                    expect(promise).toContain("In No Event Less Than");
+                });
         },
 
         validateTheMdrcDeliveryScheduleLabelValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.delivery_schedule.frequency && mdrc.delivery_schedule.quantity'] p")).getText().
-            then(function (promise) {
-                console.log("MDRC delivery schedule label is " + promise);
-                expect(promise).toEqual("Delivery Schedule:");
-            });
+                then(function (promise) {
+                    console.log("MDRC delivery schedule label is " + promise);
+                    expect(promise).toEqual("Delivery Schedule:");
+                });
         },
 
         validateTheMdrcDeliveryScheduleTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='mdrc.delivery_schedule.frequency && mdrc.delivery_schedule.quantity'] div.span3")).getText().
-            then(function (promise) {
-                console.log("MDRC delivery schedule right text value is " + promise);
-                expect(promise).toContain("works");
-                expect(promise).toContain("every");
-                expect(promise).toContain("weeks");
-            });
+                then(function (promise) {
+                    console.log("MDRC delivery schedule right text value is " + promise);
+                    expect(promise).toContain("works");
+                    expect(promise).toContain("every");
+                    expect(promise).toContain("weeks");
+                });
         },
 
         validateTheMdrcDateCompletedLabelValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='(mdrc.completed_date && (mdrc.deemed_complete || !mdrc.deemed_complete))'] p")).getText().
-            then(function (promise) {
-                console.log("MDRC date completed label is " + promise);
-                expect(promise).toEqual("Date:");
-            });
+                then(function (promise) {
+                    console.log("MDRC date completed label is " + promise);
+                    expect(promise).toEqual("Date:");
+                });
         },
 
         validateTheMdrcDateCompletedTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='(mdrc.completed_date && (mdrc.deemed_complete || !mdrc.deemed_complete))'] div.span3")).getText().
-            then(function (promise) {
-                console.log("MDRC date completed text value is " + promise);
-                expect(promise).not.toEqual("");
-            });
+                then(function (promise) {
+                    console.log("MDRC date completed text value is " + promise);
+                    expect(promise).not.toEqual("");
+                });
         },
 
         validateTheMdrcShortfallLabelValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='(mdrc.deemed_complete) && mdrc.shortfall'] p")).getText().
-            then(function (promise) {
-                console.log("MDRC shortfall label is " + promise);
-                expect(promise).toEqual("Shortfall:");
-            });
+                then(function (promise) {
+                    console.log("MDRC shortfall label is " + promise);
+                    expect(promise).toEqual("Shortfall:");
+                });
         },
 
         validateTheMdrcShortfallTextValueI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(" + i + ") div[data-ng-show='(mdrc.deemed_complete) && mdrc.shortfall'] div.span3")).getText().
-            then(function (promise) {
-                console.log("MDRC shortfall text value is " + promise);
-                expect(promise).toContain("works forgiven");
-            });
+                then(function (promise) {
+                    console.log("MDRC shortfall text value is " + promise);
+                    expect(promise).toContain("works forgiven");
+                });
         },
 
         editTheIMdrcForm: function (i) {
@@ -418,23 +418,23 @@ if (pages.editDealContractPeriod === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editMdrcLabelsDropDownData));
 
             element(By.css("li.tg-typeahead__suggestions-footer")).getText().
-            then(function (promise) {
-                console.log("Text from label is : " + promise);
-                if (promise.indexOf("Create New Label") != -1) {
-                    browser.driver.findElements(By.css("li.tg-typeahead__suggestions-footer div a"))
-                        .then(function (options) {
-                            var randomNumber = Math.floor((Math.random() * options.length));
-                            options[randomNumber].click();
-                        })
-                }
-                else {
-                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                        .then(function (options) {
-                            var randomNumber = Math.floor((Math.random() * options.length));
-                            options[randomNumber].click();
-                        })
-                }
-            });
+                then(function (promise) {
+                    console.log("Text from label is : " + promise);
+                    if (promise.indexOf("Create New Label") != -1) {
+                        browser.driver.findElements(By.css("li.tg-typeahead__suggestions-footer div a"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                    else {
+                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                options[randomNumber].click();
+                            })
+                    }
+                });
         },
 
         editClickOnMdrcYesSelfRecord: function () {
@@ -530,7 +530,7 @@ if (pages.editDealContractPeriod === undefined) {
             pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
         },
 
-        editClickOnTheDeleteRuleEndRulesNumberI: function(i) {
+        editClickOnTheDeleteRuleEndRulesNumberI: function (i) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") a[data-ng-click='showDeleteEndRuleModal(form.show.endRules.containerId, form.show.endRules.type, rule.id)'] i")).click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
             pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
@@ -546,10 +546,10 @@ if (pages.editDealContractPeriod === undefined) {
         editCheckTheSummaryTextForEndRulesRuleNumberI: function (i, text) {
             pages.base.scrollIntoView(element(by.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
             browser.driver.findElement(By.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
-            then(function (promise) {
-                console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
-                expect(promise).toEqual(text);
-            });
+                then(function (promise) {
+                    console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
+                    expect(promise).toEqual(text);
+                });
         },
 
 
@@ -558,5 +558,6 @@ if (pages.editDealContractPeriod === undefined) {
             pages.editDealContractPeriod.elems.editDoneButtonEndRules.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.editWhenVariableLeftButtonEndRules));
         }
-    });
+
+        });
 }

@@ -41,6 +41,8 @@ if (pages.editDealScope === undefined) {
                 deletePssModalDialog: {css: "div.modal.fade.in div.ng-scope"},
                 confirmDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='ok()']"},
                 cancelDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
+                addCreatorLinkSocietyAgreementNumberForm: {css: "a[data-ng-click='data.addCreatorToChain()']"},
+                saveAddSocietyAgreementNumberForm: {css: "button[data-ng-click='data.save(data.isAgreementsNumbersValid)']"},
                 shareIconOnScope: {css: "div[data-ng-if='isScopeShared(sp.id)'] a.icon.share-icon.ng-binding i.fa.fa-share"},
                 shareScopeTextIcons: {css: "div[data-ng-show='isPublisherShareSetShared(form.terms.activePublisherShareSet.id)']"},
                 shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
@@ -680,16 +682,19 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"))));
                 pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
+                //browser.waitForAngular();
                 browser.sleep(8000);
-                browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
+                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))), 50000);
             },
 
             editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait: function (i, timeout) {
                 //browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"))));
                 pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
-                pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), timeout);
-                //browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber), timeout);
+                //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), timeout);
+                //browser.waitForAngular();
+                //browser.sleep(timeout);
+                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))), timeout);
             },
 
 
@@ -899,6 +904,67 @@ if (pages.editDealScope === undefined) {
                         console.log("Share scope button for royalty rates is selected and it class name is : " + promise);
                         expect(promise).toContain("active");
                     });
+            },
+
+            editClickOnTheAddNewSocietyAgreementNumberI: function (i) {
+                pages.base.scrollIntoView(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']")));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
+                browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']")).click();
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+            },
+
+            editFillIntoTheSocietyAgreementNumberRightPanelNumberI: function (i, society_name) {
+                var number = Math.floor(Math.random() * 999999999) + 1;
+                var societyNumber = browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") input[data-ng-model='societyAgreement.agreement_number']"));
+                societyNumber.clear();
+                societyNumber.sendKeys(number);
+
+                var societyName = browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") input[name='chainAgreementSociety']"));
+                societyName.clear();
+                societyName.sendKeys(society_name);
+            },
+
+            editSelectSpecificValueFromSocietyDropDownSocietyAgreementForm: function () {
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ng-scope a.typeahead-result.clearfix.ng-scope"))));
+                browser.driver.findElements(By.css("div.ng-scope a.typeahead-result.clearfix.ng-scope"))
+                    .then(function (options) {
+                        options[0].click();
+                    })
+            },
+
+            editFillIntoTheCreatorForSocietyAgreementNumberI: function (i, creator_name) {
+                pages.base.scrollIntoView(element(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") input[data-ng-model='creator.creator_model']")));
+                var creatorName = browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") input[data-ng-model='creator.creator_model']"));
+                creatorName.clear();
+                creatorName.sendKeys(creator_name);
+            },
+
+            editClickOnTheAddCreatorSocietyAgreementNumber: function () {
+                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.addCreatorLinkSocietyAgreementNumberForm));
+                pages.base.scrollIntoView(pages.editDealScope.elems.addCreatorLinkSocietyAgreementNumberForm);
+                pages.editDealScope.elems.addCreatorLinkSocietyAgreementNumberForm.click();
+            },
+
+            editFillIntoTheSocietyNumberAndNameLeftPanelCreatorForSocietyAgreementNumberCreatorIRowJ: function (i, j, society_name) {
+                var number = Math.floor(Math.random() * 999999999) + 1;
+                pages.base.scrollIntoView(element(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.agreement_number']")));
+                var societyNumber = browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.agreement_number']"));
+                societyNumber.clear();
+                societyNumber.sendKeys(number);
+
+                var societyName = browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ")  input[data-ng-model='societyAgreementCreator.society_model']"));
+                societyName.clear();
+                societyName.sendKeys(society_name);
+            },
+
+            saveTheChangesSocietyAgreementNumberForm: function () {
+                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm));
+                pages.base.scrollIntoView(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm);
+                pages.editDealScope.elems.saveAddSocietyAgreementNumberForm.click();
+                //pages.editDealScope.waitForAjax();
+                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"), 100000)));
+                pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 100000);
+
             }
 
         }

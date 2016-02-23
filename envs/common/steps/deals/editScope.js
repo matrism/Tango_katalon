@@ -921,3 +921,49 @@ exports.itEditOverridePublisherShare = function (subPublisherName, subPublisherS
 };
 
 
+exports.editClickOnAddNewSocietyAgreementNumberI = function (i) {
+    it("Edit click on the add new society agreement number link number " + i, function () {
+        pages.editDealScope.editClickOnTheAddNewSocietyAgreementNumberI(i);
+    });
+};
+
+exports.editClickOnAddCreatorSocietyAgreementNumber = function () {
+    it("Edit click on add creator society agreement number ", function () {
+
+    });
+};
+
+exports.editSocietyAgreementNumberRightPanelNumberI = function (i, society_name) {
+    it("Edit society agreement number right panel row number " + i + " and select the society " + society_name, function () {
+        pages.editDealScope.editFillIntoTheSocietyAgreementNumberRightPanelNumberI(i, society_name);
+        pages.editDealScope.editSelectSpecificValueFromSocietyDropDownSocietyAgreementForm();
+    });
+};
+
+exports.editSocietyAgreementNumberCreatorLeftPanelNumberI = function (i, creator_name) {
+    it("Edit society agreement number add creators left panel row number " + i + " and creator name " + creator_name, function () {
+        pages.editDealScope.editFillIntoTheCreatorForSocietyAgreementNumberI(i, creator_name);
+        pages.editDealScope.editSelectSpecificValueFromSocietyDropDownSocietyAgreementForm();
+    });
+};
+
+exports.editClickOnAddCreatorSocietyAgreementNumberForm = function () {
+    it("Click on the add creator society agreement number form ", function () {
+        pages.editDealScope.editClickOnTheAddCreatorSocietyAgreementNumber();
+    });
+};
+
+exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber = function (i, j, society_name) {
+    it("Edit society agreement number creator number " + i + " society row number " + j + " and society name " + society_name, function () {
+        pages.editDealScope.editFillIntoTheSocietyNumberAndNameLeftPanelCreatorForSocietyAgreementNumberCreatorIRowJ(i, j, society_name);
+        pages.editDealScope.editSelectSpecificValueFromSocietyDropDownSocietyAgreementForm();
+    });
+};
+
+exports.saveChangesSocietyAgreementNumberForm = function () {
+    it("Save changes society agreement number form ", function () {
+        pages.editDealScope.saveTheChangesSocietyAgreementNumberForm();
+    });
+};
+
+

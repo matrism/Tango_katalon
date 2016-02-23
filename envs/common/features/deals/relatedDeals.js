@@ -1,17 +1,20 @@
 'use strict';
 
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
 exports.commonFeatureTags = ['deals', "related", 'regression'];
 
-exports.feature = [
+var urlUse = 'http://tango.tango.qa.wmg.com';
 
+exports.feature = [
     {
         name: "Create related deals",
         tags: ["create_related_deals"],
         steps: function () {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
@@ -32,7 +35,8 @@ exports.feature = [
             steps.relatedDeal.checkTheHeaderTableTitlesRelatedDeals();
             steps.relatedDeal.checkNoRelatedDealsDefined();
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            //steps.base.openTheNewTab(systemConfig.env.app_url);
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -58,8 +62,7 @@ exports.feature = [
             steps.relatedDeal.clearIntoContractingPartiesField();
 
 
-
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(2);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
@@ -69,7 +72,6 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
-
 
 
             steps.base.focusOnNewOpenedTab(0);
@@ -253,7 +255,7 @@ exports.feature = [
             steps.createDealRtp.checkRightsTermPeriodsHeaderTitlePresent();
             steps.finderDeal.checkFinderDealsHeaderTitlePresent();
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -326,7 +328,7 @@ exports.feature = [
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(2);
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -351,7 +353,6 @@ exports.feature = [
             steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
-
 
 
             steps.base.focusOnNewOpenedTab(2);
@@ -457,7 +458,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
@@ -469,7 +470,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(2);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
@@ -481,7 +482,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(3);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
@@ -494,7 +495,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(4);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
@@ -507,7 +508,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(5);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
@@ -521,7 +522,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(6);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
@@ -534,7 +535,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(7);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1983");
@@ -546,7 +547,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(8);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -560,7 +561,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(9);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1983");
@@ -574,7 +575,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(10);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1983");
@@ -588,7 +589,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
 
-            steps.base.openTheNewTab("http://tango.tango-qa-aws.dspdev.wmg.com");
+            steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(11);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();

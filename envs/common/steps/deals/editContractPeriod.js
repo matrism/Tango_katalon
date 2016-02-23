@@ -548,7 +548,6 @@ exports.editCheckSummaryTextForEndRulesRuleNumberI = function (i, text) {
     });
 };
 
-
 exports.itEditIncompleteMdrcContractPeriod = function (i) {
     describe("Edit incomplete MDRC on  contract period screen", function () {
         steps.editDealContractPeriod.editMdrcFormI(i);
