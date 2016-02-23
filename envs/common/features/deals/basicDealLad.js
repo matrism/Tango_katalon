@@ -12,7 +12,7 @@ exports.feature = [
         tags: ["dealLad"],
         steps: function () {
 
-            var timeout = 100000;
+            var timeout = 60000;
             //steps.searchSection.accessSavedDealByNumber("246982");
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -30,11 +30,11 @@ exports.feature = [
             steps.createDealContractPeriod.fillContractPeriodDescription("Description 3");
             steps.createDealContractPeriod.fillEndTargetMonths();
 
-            //add Advance Assumptions to all CPs
-            _.times(3, function (num) {
-                steps.createDealContractPeriod.selectContractPeriodNumberI(num + 1);
-                steps.createDealContractPeriod.itAddAdvanceAssumptions();
-            });
+            ////add Advance Assumptions to all CPs
+            //_.times(3, function (num) {
+            //    steps.createDealContractPeriod.selectContractPeriodNumberI(num + 1);
+            //    steps.createDealContractPeriod.itAddAdvanceAssumptions();
+            //});
 
             //add scope to the contract period 1
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
@@ -310,8 +310,7 @@ exports.feature = [
                 steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(6, 29, "sesac");
                 steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(6, 30, "siae");
 
-                    steps.editDealScope.saveChangesSocietyAgreementNumberForm();
-
+                steps.editDealScope.saveChangesSocietyAgreementNumberForm();
 
 
             }

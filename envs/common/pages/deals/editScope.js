@@ -691,8 +691,9 @@ if (pages.editDealScope === undefined) {
                 //browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"))));
                 pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
                 browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
-                pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), timeout);
+                //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), timeout);
                 //browser.waitForAngular();
+                //browser.sleep(timeout);
                 //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))), timeout);
             },
 
@@ -961,8 +962,8 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm);
                 pages.editDealScope.elems.saveAddSocietyAgreementNumberForm.click();
                 //pages.editDealScope.waitForAjax();
-                browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
-                //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 50000);
+                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"), 100000)));
+                pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 100000);
 
             }
 
