@@ -3,7 +3,7 @@
 var pageStep = require('../../../../helpers/basicPageStep'),
     page;
 
-steps.personProduction = exports;
+steps.person = exports;
 
 hash.personSlots = {};
 hash.currentPersonSlot = null;

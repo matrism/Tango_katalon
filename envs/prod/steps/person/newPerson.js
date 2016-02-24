@@ -1,12 +1,12 @@
 'use strict';
 
 var _ = require('lodash'),
-    pageStep = require('../../../../../helpers/basicPageStep'),
+    pageStep = require('../../../../helpers/basicPageStep'),
     ExpectedConditions = protractor.ExpectedConditions,
     promise = protractor.promise,
     page;
 
-steps.newPersonProduction = exports;
+steps.newPerson = exports;
 
 pageStep([
     'Go to new person page',

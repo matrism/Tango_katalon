@@ -19,12 +19,12 @@ exports.feature = [
             steps.incomeProvider.createValidRoyaltySetPair(
                 [
                     ['Income_Provider_1', 'Date_1 ', 'Income_Provider_2', 'Date_2    '],
-                    ['HFA,ASCAP        ', '2017-01-01', '                 ', '2017-01-01'],
-                    ['HFA              ', '           ', '                 ', '          '],
+                    ['FINLAND SYNCH INCOME,ASCAP        ', '2017-01-01', '                 ', '2017-01-01'],
+                    ['FINLAND SYNCH INCOME              ', '           ', '                 ', '          '],
                     ['                 ', '           ', '                 ', '          '],
                     ['                 ', '2017-01-01 ', '                 ', '          '],
                     ['                 ', '2017-01-01 ', '                 ', '2017-01-03'],
-                    ['HFA              ', '2017-01-01 ', 'HFA              ', '2017-01-03']
+                    ['FINLAND SYNCH INCOME              ', '2017-01-01 ', 'FINLAND SYNCH INCOME              ', '2017-01-03']
                 ],
                 'Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is valid'
             );
@@ -37,8 +37,8 @@ exports.feature = [
             steps.incomeProvider.createInvalidRoyaltySetPair(
                 [
                     ['Income_Provider_1', 'Date_1 ', 'Income_Provider_2', 'Date_2    '],
-                    ['HFA,ASCAP        ', '2017-01-01', 'HFA              ', '2017-01-01'],
-                    ['HFA              ', '2017-01-01', 'HFA              ', '2017-01-01'],
+                    ['FINLAND SYNCH INCOME,ASCAP        ', '2017-01-01', 'FINLAND SYNCH INCOME              ', '2017-01-01'],
+                    ['FINLAND SYNCH INCOME              ', '2017-01-01', 'FINLAND SYNCH INCOME              ', '2017-01-01'],
                     ['                 ', '2017-01-01', '                 ', '2017-01-01']
                 ],
                 'Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is invalid'
@@ -52,12 +52,12 @@ exports.feature = [
             steps.incomeProvider.editValidRoyaltySetPair(
                 [
                     ['Income_Provider_1', 'Date_1 ', 'Income_Provider_2', 'Date_2    '],
-                    ['HFA              ', '           ', '                 ', '          '],
+                    ['FINLAND SYNCH INCOME              ', '           ', '                 ', '          '],
                     ['                 ', '           ', '                 ', '          '],
-                    ['HFA,ASCAP        ', '2017-01-01', '                 ', '2017-01-01'],
+                    ['FINLAND SYNCH INCOME,ASCAP        ', '2017-01-01', '                 ', '2017-01-01'],
                     ['                 ', '2017-01-01 ', '                 ', '          '],
                     ['                 ', '2017-01-01 ', '                 ', '2017-01-03'],
-                    ['HFA              ', '2017-01-01 ', 'HFA              ', '2017-01-03']
+                    ['FINLAND SYNCH INCOME              ', '2017-01-01 ', 'FINLAND SYNCH INCOME              ', '2017-01-03']
                 ],
                 'Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is valid'
             );
@@ -71,8 +71,8 @@ exports.feature = [
                 [
                     ['Income_Provider_1', 'Date_1 ', 'Income_Provider_2', 'Date_2    '],
                     ['                 ', '2017-01-01', '                 ', '2017-01-01'],
-                    ['HFA,ASCAP        ', '2017-01-01', 'HFA              ', '2017-01-01'],
-                    ['HFA              ', '2017-01-01', 'HFA              ', '2017-01-01']
+                    ['FINLAND SYNCH INCOME,ASCAP        ', '2017-01-01', 'FINLAND SYNCH INCOME              ', '2017-01-01'],
+                    ['FINLAND SYNCH INCOME              ', '2017-01-01', 'FINLAND SYNCH INCOME              ', '2017-01-01']
                 ],
                 'Check that income provider pair - Provider1: %Income_Provider_1% - Date1: %Date_1% and Provider2: %Income_Provider_2% - Date2: %Date_2%  is invalid'
             );

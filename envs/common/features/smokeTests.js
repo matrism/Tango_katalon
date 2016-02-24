@@ -190,7 +190,7 @@ exports.feature = [
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
 
-            steps.royaltyRates.typeIncomeProvider("HFA");
+            steps.royaltyRates.typeIncomeProvider('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.setStatementDistributionPeriod("1991", "02", "2013", "03");
 
