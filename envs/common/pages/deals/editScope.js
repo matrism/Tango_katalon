@@ -4,7 +4,7 @@ var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 if (pages.editDealScope === undefined) {
-    pages.editDealScope = new ftf.pageObject({
+    exports = module.exports = pages.editDealScope = new ftf.pageObject({
             locators: {
                 editScopeAreaElement: {css: "div[data-tg-modular-edit-id='dealScope'] div.DETAIL.ng-scope"},
                 editScopeIcon: {css: "div[data-tg-modular-edit-id='dealScope'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
@@ -48,7 +48,6 @@ if (pages.editDealScope === undefined) {
                 shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
                 shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
                 saveEditScope: {css: "div[data-tg-modular-edit-id ='dealScope'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
-                saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
                 editShareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
                 editFirstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
                 editDeleteScopeIcon: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)'] div.ng-scope i.fa.fa-times.ng-scope"},
@@ -156,10 +155,16 @@ if (pages.editDealScope === undefined) {
                 pages.editDealScope.elems.scope1.click();
             },
 
+            saveButton: function () {
+                return element(by.cssContainingText(
+                    '.ps-editor .CONTROLS button', 'Save'
+                ));
+            },
+
             editSaveTheScopeChanges: function () {
-                pages.editDealScope.elems.saveEditScope.click();
-                pages.editDealScope.waitForAjax();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
+                return asAlways(
+                    exports.saveButton(), 'scrollIntoView', 'click', 'waitForAjax'
+                );
             },
 
             waitForTheScopeNumberIToBeVisible: function (i) {
@@ -396,9 +401,9 @@ if (pages.editDealScope === undefined) {
             },
 
             editSaveTheChangesPage: function () {
-                pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
-                pages.editDealScope.elems.saveChanges.click();
-                pages.editDealScope.waitForAjax();
+                return asAlways(
+                    exports.saveButton(), 'scrollIntoView', 'click', 'waitForAjax'
+                );
             },
 
             editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {

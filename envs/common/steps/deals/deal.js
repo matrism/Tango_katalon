@@ -11,6 +11,20 @@ exports.goToNextPage = function () {
     });
 };
 
+exports.openDealFromSlot = function (slotId) {
+    describe('Open deal from slot (' + slotId + ')', function () {
+        var mhs = steps.mainHeader.search;
+
+        mhs.selectEntityType('Deal');
+
+        mhs.enterTerms(labeledFn('ID from deal slot', function () {
+            return hash.entityDataSlotsByType.deal[slotId].id
+        }));
+
+        mhs.selectResultByIndex(0);
+    });
+};
+
 exports.refreshThePage = function () {
     it("Refresh the page", function () {
         browser.driver.navigate().refresh();
@@ -209,6 +223,10 @@ exports.checkFinderDealsHeaderTitlePresent = function(){
     });
 };
 
+addBasicStep(
+    exports, pages.deal, 'Validate Society Agreement Numbers link presence'
+);
 
-
+addBasicStep(exports, pages.deal, 'Add Society Agreement Numbers to PSS chain');
+addBasicStep(exports, pages.deal, 'View PSS chain Society Agreement Numbers');
 

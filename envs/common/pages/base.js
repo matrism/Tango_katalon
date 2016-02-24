@@ -51,6 +51,10 @@ exports.modalHeadingText = function () {
     return exports.modalHeading().getText();
 };
 
+exports.validateModalHeading = function (expected) {
+    expect(exports.modalHeadingText()).toBe(expected);
+};
+
 exports.modalBody = function () {
     return $('.modal-body');
 };
@@ -389,18 +393,24 @@ exports.hitEscape = function () {
 };
 
 exports.dialogError = function () {
-    return exports.modalHeading().isPresent().then(function (modalOpen) {
-        if (!modalOpen) {
+    return pph.trim(exports.modalHeading().getText()).then(function (heading) {
+        if (!/error/i.test(heading)) {
             return null;
         }
 
-        return pph.trim(exports.modalHeading().getText()).then(function (heading) {
-            if (!/error/i.test(heading)) {
-                return null;
-            }
+        return heading;
+    }, function (err) {
+        if(err.message.indexOf('No element found using locator:') !== -1) {
+            return null;
+        }
 
-            return pph.stringConcat(heading, '\n\n', exports.modalBodyText());
-        });
+        throw err;
+    }).then(function (heading) {
+        if(!heading) {
+            return null;
+        }
+
+        return pph.stringConcat(heading, '\n\n', exports.modalBodyText());
     });
 };
 
@@ -564,3 +574,16 @@ exports.waitForTheElementToBeHidden= function(condition, timeout) {
     }, timeout);
 };
 
+exports.tooltipContainer = function () {
+    return $('body > .tooltip');
+};
+
+exports.tooltipMessage = function () {
+    var container = asAlways(exports.tooltipContainer(), 'scrollIntoView');
+
+    return pph.getAllText(container);
+};
+
+exports.validateTooltipMessage = function (message) {
+    expect(exports.tooltipMessage()).toBe(message);
+};

@@ -5,6 +5,8 @@ module.exports = function(variableName) {
         return hash.testVariables[variableName];
     };
 
+    fn.testVariableFn = true;
+
     fn.toString = function() {
         return variableName;
     };
