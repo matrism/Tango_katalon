@@ -2,6 +2,7 @@
 
 exports.commonFeatureTags = [
     'pssSocietyAgreementNumberTooltipsRegression',
+    'pssSocietyAgreementNumbersRegression',
     'pssSocietyAgreementNumbers',
     'deals',
     'regression'

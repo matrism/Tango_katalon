@@ -3,7 +3,8 @@
 var randomId = random.id.makeMemoizedGenerator();
 
 exports.commonFeatureTags = [
-    'validatePssSocietyAgreementNumberHeadingsRegression',
+    'pssSocietyAgreementNumberHeadingsRegression',
+    'pssSocietyAgreementNumbersRegression',
     'pssSocietyAgreementNumbers',
     'deals',
     'regression'
