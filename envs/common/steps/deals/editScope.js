@@ -442,7 +442,8 @@ exports.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI = function (i) {
 exports.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait = function (i, timeout) {
     it("Click on the copy scope button number of copies scope number " + i, function () {
         pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait(i, timeout);
-        pages.editDealScope.waitForAjax();
+        //pages.editDealScope.waitForAjax();
+        //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))), timeout);
     });
 };
 
@@ -924,6 +925,7 @@ exports.itEditOverridePublisherShare = function (subPublisherName, subPublisherS
 exports.editClickOnAddNewSocietyAgreementNumberI = function (i) {
     it("Edit click on the add new society agreement number link number " + i, function () {
         pages.editDealScope.editClickOnTheAddNewSocietyAgreementNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -963,6 +965,7 @@ exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber
 exports.saveChangesSocietyAgreementNumberForm = function () {
     it("Save changes society agreement number form ", function () {
         pages.editDealScope.saveTheChangesSocietyAgreementNumberForm();
+        //pages.editDealScope.waitForAjax();
     });
 };
 

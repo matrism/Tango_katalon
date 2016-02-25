@@ -9,17 +9,20 @@ if (pages.editDealPayee === undefined) {
         locators: {
             payeeHeaderTitleLink: {css: "ul.nav.nav-tabs li.ng-scope:nth-child(3) a"},
             payeeArea: {css: "div[tg-modular-edit-id='payeeByScopeName']"},
-            editPayeeIcon: { css: "div[tg-modular-edit-id='payeeByScopeName'] button[data-ng-click='tgModularViewMethods.switchToEditView()']" },
-            editPayeeEditAreaButton: { css: 'button[data-ng-click="tgModularViewMethods.switchToEditView()"]'},
-            editAddNewPayeeField: { css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']" },
-            editAddNewPayeeInputField: { css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']" },
-            editPayeeCompanyNameCodeInputField: { css: "div[data-ng-model='newPayee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']" },
-            editScopePayeeSelectAllScopes: { model: 'newPayee._all_scopes'},
-            editScopePayeeInputField: { css: "div[data-ng-model='newPayee._selected_scopes'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']" },
-            editSavePayeeFormButton: { css: "div[data-tg-modular-edit-id='payeeByScopeName'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']" },
-            editCancelPayeeFormButton: { css: "div[data-tg-modular-edit-id='payeeByScopeName'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left" },
-            editLegalRightPayeeInputField: {css: "input[data-ng-model='payeeDistribution.legal_right']"},
-            editDistributionPayeeInputField: {css: "input[data-ng-model='payeeDistribution.distribution']"},
+            editPayeeIcon: {css: "div[tg-modular-edit-id='payeeByScopeName'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
+            editPayeeEditAreaButton: {css: 'button[data-ng-click="tgModularViewMethods.switchToEditView()"]'},
+            editAddNewPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
+            editAddNewPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='newPayee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editScopePayeeSelectAllScopes: {model: 'newPayee._all_scopes'},
+            editPayoutPayeeField: {css: "div[name='payoutDesignations'] div.tg-dropdown-button"},
+            editPayoutAccountPayeeField: {css: "div[name='payeeAccount'] div.tg-dropdown-button"},
+            editAddAllScopeToPayee: {css: "input[data-ng-model='DPAY.newPayee._all_scopes']"},
+            editScopePayeeInputField: {css: "div[data-ng-model='newPayee._selected_scopes'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editSavePayeeFormButton: {css: "div[data-tg-modular-edit-id='payeeByScopeName'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+            editCancelPayeeFormButton: {css: "div[data-tg-modular-edit-id='payeeByScopeName'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
+            editLegalRightPayeeInputField: {css: "input[name='legalRight']"},
+            editDistributionPayeeInputField: {css: "input[name='distribution']"},
             editSavePayeeFooterButton: {css: "div.CONTROLS.ng-scope.page-footer button[data-ng-click='tgModularViewMethods.save();']"}
         },
 
@@ -42,6 +45,11 @@ if (pages.editDealPayee === undefined) {
             pages.editDealPayee.elems.editAddNewPayeeInputField.sendKeys(payee);
         },
 
+        editClickOnTheAddAllScopesToPayee: function () {
+            pages.editDealPayee.elems.editAddAllScopeToPayee.click();
+            pages.editDealPayee.waitForAjax();
+        },
+
         setPayeeSelectAllScopes: function (selectAllScopes) {
             it("Set Payee Select All Scopes to " + selectAllScopes, function () {
                 var cb = pages.editDealPayee.elems.editScopePayeeSelectAllScopes;
@@ -52,7 +60,7 @@ if (pages.editDealPayee === undefined) {
                     }
 
                     expect(cb.getAttribute('checked')).toBe(selectAllScopes);
-                }); 
+                });
             });
         },
 
@@ -86,6 +94,38 @@ if (pages.editDealPayee === undefined) {
                 });
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
+
+        editAddThePayoutToPayee: function () {
+            pages.editDealPayee.elems.editPayoutPayeeField.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function (options) {
+                    options[0].click();
+                });
+        },
+
+        editAddThePayoutAccountToPayee: function () {
+            pages.editDealPayee.elems.editPayoutAccountPayeeField.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function (options) {
+                    options[0].click();
+                });
+        },
+
+
+        editAssociateTheSpecificScopeNumberIToNewPayee: function (i) {
+            var desiredOption;
+            var specific_value = "Scope " + i;
+            browser.driver.findElement(by.css("div[data-ng-model='DPAY.newPayee._selected_scopes'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']")).sendKeys(specific_value);
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            .then(function (options) {
+                options[0].click();
+            });
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+        },
+
 
         editAssociateTheSpecificScopeNumberIToPayee: function (i) {
             var desiredOption;
@@ -150,7 +190,7 @@ if (pages.editDealPayee === undefined) {
             pages.editDealPayee.elems.editDistributionPayeeInputField.sendKeys("100");
         },
 
-        editCheckNoScopeAssociatedToPayee: function(){
+        editCheckNoScopeAssociatedToPayee: function () {
             browser.driver.findElement(By.css("div[data-ng-form='allPayeesForm']")).getText().
                 then(function (promise) {
                     console.log("Check that no scope is associated to payee " + promise);
@@ -158,12 +198,12 @@ if (pages.editDealPayee === undefined) {
                 });
         },
 
-        editCheckScopeNumberIAssociatedToPayee: function(i){
-            browser.driver.findElement(By.css("div[data-ng-if='::DPAY.isPayeeAssociated(payee)'] div[data-ng-repeat='payeeScope in payee.deal_scopes | filter: scopeFilter(scope) track by payeeScope.id']:nth-child(" + (i+3) + ")  strong[data-ng-bind='::payeeScope.description']")).getText().
-            then(function (promise) {
-                console.log("Check that scope number  : " + i + " is associated to payee " + promise);
-                expect(promise).toEqual("Scope " + i);
-            });
+        editCheckScopeNumberIAssociatedToPayee: function (i) {
+            browser.driver.findElement(By.css("div[data-ng-if='::DPAY.isPayeeAssociated(payee)'] div[data-ng-repeat='payeeScope in payee.deal_scopes | filter: scopeFilter(scope) track by payeeScope.id']:nth-child(" + (i + 3) + ")  strong[data-ng-bind='::payeeScope.description']")).getText().
+                then(function (promise) {
+                    console.log("Check that scope number  : " + i + " is associated to payee " + promise);
+                    expect(promise).toEqual("Scope " + i);
+                });
         }
     })
 }

@@ -32,6 +32,12 @@ exports.editSelectRandomPayeePersonFromDropDown = function (payee_name) {
     });
 };
 
+exports.editClickOnAddAllScopesToPayee = function(){
+    it("Edit click on the add all scopes to payee check box ", function(){
+       pages.editDealPayee.editClickOnTheAddAllScopesToPayee();
+    });
+};
+
 exports.editSelectRandomValueForPayeeCompanyNameCode = function () {
     it("Edit select the random value for payee company name/code ", function () {
         pages.editDealPayee.editSelectTheRandomValueForPayeeCompanyNameCode();
@@ -42,6 +48,24 @@ exports.editSelectRandomValueForPayeeCompanyNameCode = function () {
 exports.editAssociateRandomScopeToPayee = function () {
     it("Edit associate random scope to payee ", function () {
         pages.editDealPayee.editAssociateTheRandomScopeToPayee();
+    });
+};
+
+exports.editAssociateSpecificScopeNumberIToNewPayee = function (i) {
+    it("Edit associate specific  scope to new payee number " + i, function () {
+        pages.editDealPayee.editAssociateTheSpecificScopeNumberIToNewPayee(i);
+    });
+};
+
+exports.editAddPayoutToPayee = function (i) {
+    it("Edit add payout to payee", function () {
+        pages.editDealPayee.editAddThePayoutToPayee();
+    });
+};
+
+exports.editAddPayoutAccountToPayee = function (i) {
+    it("Edit add payout account to payee", function () {
+        pages.editDealPayee.editAddThePayoutAccountToPayee();
     });
 };
 

@@ -52,18 +52,18 @@ exports.waitForDealToBeSaved = function () {
 exports.returnDealNumber = function () {
     it("Return deal number ", function () {
         pages.deal.elems.dealBriefNumber.getText().
-        then(function (promise) {
-            console.log("Deal number is " + promise);
-        });
+            then(function (promise) {
+                console.log("Deal number is " + promise);
+            });
     });
 };
 
 exports.printDealNumber = function () {
     it("Return deal number ", function () {
         pages.deal.elems.dealBriefNumber.getText().
-        then(function (promise) {
-            console.log("Deal number is " + promise);
-        });
+            then(function (promise) {
+                console.log("Deal number is " + promise);
+            });
     });
 };
 
@@ -99,10 +99,18 @@ exports.goToGeneralDealTabDetails = function () {
     });
 };
 
+exports.goToPayeesDealTabDetails = function () {
+    it("Click on payees header and go to payees deal tab details ", function () {
+        pages.deal.goToPayeesDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealPayeesSummaryHeader));
+    });
+};
+
+
 exports.goToTermsDealTabDetailsDirtyCheck = function () {
     it("Click on terms header and go to terms deal tab details ", function () {
         pages.deal.goToTermsDealDetails();
-       pages.deal.waitForAjax();
+        pages.deal.waitForAjax();
     });
 };
 
@@ -191,20 +199,20 @@ exports.refreshThePage = function () {
     });
 };
 
-exports.checkContractPeriodsAndScopesHeaderTitlePresent = function(){
- it("Check that contract periods and scopes header title is present ", function(){
-     expect(pages.deal.elems.contractPeriodsScopesHeaderLink.isDisplayed()).toBeTruthy();
- });
+exports.checkContractPeriodsAndScopesHeaderTitlePresent = function () {
+    it("Check that contract periods and scopes header title is present ", function () {
+        expect(pages.deal.elems.contractPeriodsScopesHeaderLink.isDisplayed()).toBeTruthy();
+    });
 };
 
-exports.checkRightsTermPeriodsHeaderTitlePresent = function(){
-    it("Check that rights term periods header title is present ", function(){
+exports.checkRightsTermPeriodsHeaderTitlePresent = function () {
+    it("Check that rights term periods header title is present ", function () {
         expect(pages.deal.elems.rightsTermPeriodsHeaderLink.isDisplayed()).toBeTruthy();
     });
 };
 
-exports.checkFinderDealsHeaderTitlePresent = function(){
-    it("Check that finder deals header title is present ", function(){
+exports.checkFinderDealsHeaderTitlePresent = function () {
+    it("Check that finder deals header title is present ", function () {
         expect(pages.deal.elems.finderDealsHeaderLink.isDisplayed()).toBeTruthy();
     });
 };

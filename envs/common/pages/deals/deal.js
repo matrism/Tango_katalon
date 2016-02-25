@@ -12,6 +12,7 @@ if (pages.deal === undefined) {
             saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
             termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
+            payeesHeader: {css: ".nav-tabs>li:nth-child(3)>a"},
             contractPeriodsScopesHeaderLink: {css: "div[name='termsForm'] a[data-ng-class='{ active: form.show.section.cps }']"},
             contractPeriodsTitle: {css: "div[data-ng-form='termsForm'] div.row div.span3.column:nth-child(1) h3"},
             rightsTermPeriodsHeaderLink: {css: "div[name='termsForm'] a[data-ng-class='{ active: form.show.section.rtp }']"},
@@ -19,6 +20,7 @@ if (pages.deal === undefined) {
             dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
             scopeHeader: {css: ".scope-heading"},
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
+            dealPayeesSummaryHeader: {css: "div.deal-payee__label"},
             dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm']"},
@@ -89,6 +91,10 @@ if (pages.deal === undefined) {
 
         goToTheRightsTermPeriodsHeaderLink: function () {
             pages.deal.elems.rightsTermPeriodsHeaderLink.click();
+        },
+
+        goToPayeesDealDetails: function () {
+            pages.deal.elems.payeesHeader.click();
         },
 
         goToFinderDealTerms: function () {
