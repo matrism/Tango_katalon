@@ -41,7 +41,7 @@ exports.feature = [
                 scrollIntoView: true,
             });
             cds.enterPublisherSearchTerms(
-                0, 0, 'WCM Publisher 1'
+                0, 0, 'WARNER ALLIANCE MUSIC'
             );
             cds.selectPublisherSearchResultByIndex(0);
             cds.enterOwnPublisherShare(0, 0, 100);

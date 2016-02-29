@@ -115,7 +115,7 @@ exports.search = (function() {
         var element = search.termsInput();
         pages.base.scrollIntoView(element);
         element.clear();
-        return element.sendKeys(value);
+        return element.sendKeys(callResultOrValue(value));
     };
 
     search.resultsContainer = function() {

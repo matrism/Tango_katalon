@@ -2,9 +2,7 @@
 
 var pph = require('../../../../helpers/pph');
 
-pages.personProduction = exports;
-
-require(pages_path + 'base');
+pages.person = exports;
 
 exports.internalIpiNumberBinding = function() {
     return $(

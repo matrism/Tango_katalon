@@ -44,6 +44,7 @@
     "qs": "~5.2.0",
     "randomstring": "~1.1.0",
     "request": "^2.65.0",
+    "string.prototype.includes": "^1.0.0",
     "tmp": "0.0.27",
     "underscore": "1.6.0",
     "yamljs": "^0.2.4"

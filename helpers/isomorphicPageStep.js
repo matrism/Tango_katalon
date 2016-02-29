@@ -35,6 +35,14 @@ module.exports = function(options) {
         }
 
         it(descriptionWithArguments, function() {
+            stepArguments = stepArguments.map(function (arg) {
+                if(typeof arg !== 'function' || !arg.testVariableFn) {
+                    return arg;
+                }
+
+                return arg();
+            });
+
             if(options.before) {
                 options.before.apply(context, stepArguments);
             }

@@ -38,7 +38,7 @@ exports.feature = [
                 rr.addRatePercentageToContractualField('10');
                 rr.addAdminFeeToContractualField('12');
                 rr.addNPSToContractualField('2');
-                rr.addIncomeProviderByPartialMatch('HFA');
+                rr.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
                 rr.clickOnReceiptApplicationMethod();
                 rr.confirmChangingRateApplicationMethod();
                 rr.saveRateSet();

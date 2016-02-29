@@ -2,7 +2,7 @@
 
 var pageStep = require('../../../../helpers/basicPageStep');
 
-steps.newOrganisationProduction = exports;
+steps.newOrganisation = exports;
 
 pageStep('Populate name');
 pageStep('Select Org type');

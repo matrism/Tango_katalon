@@ -43,7 +43,7 @@ exports.feature = [
             using(steps.royaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.addRatePercentageToContractualField('10');
-                this.addIncomeProviderByPartialMatch('HFA');
+                this.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
                 this.clickOnReceiptApplicationMethod();
                 this.confirmChangingRateApplicationMethod();
                 this.storeRRObjectonEditPage();
@@ -60,7 +60,7 @@ exports.feature = [
 
                 this.addNewRoyaltySet();
                 this.addRatePercentageToContractualField('10');
-                this.addIncomeProviderByPartialMatch('HFA');
+                this.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
                 this.enterEffectiveStartDateForLastRateSet('2043-06-17');
                 this.clickOnReceiptApplicationMethod();
                 this.confirmChangingRateApplicationMethod();
@@ -151,7 +151,7 @@ exports.feature = [
             using(steps.royaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.addRatePercentageToContractualField('10');
-                this.addIncomeProviderByPartialMatch('HFA');
+                this.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
                 this.clickOnReceiptApplicationMethod();
                 this.confirmChangingRateApplicationMethod();
                 this.storeRRObjectonEditPage();
@@ -168,7 +168,7 @@ exports.feature = [
 
                 this.addNewRoyaltySet();
                 this.addRatePercentageToContractualField('10');
-                this.addIncomeProviderByPartialMatch('HFA');
+                this.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
                 this.enterEffectiveStartDateForLastRateSet('2043-06-17');
                 this.clickOnReceiptApplicationMethod();
                 this.confirmChangingRateApplicationMethod();

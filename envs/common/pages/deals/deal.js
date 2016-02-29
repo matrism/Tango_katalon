@@ -5,7 +5,7 @@ var pph = require('../../../../helpers/pph'),
     promise = protractor.promise;
 
 if (pages.deal === undefined) {
-    pages.deal = new ftf.pageObject({
+    exports = module.exports = pages.deal = new ftf.pageObject({
         locators: {
             dealBriefNumber: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) p.info.ng-binding"},
             continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
@@ -175,6 +175,57 @@ if (pages.deal === undefined) {
 
             return this.errorRR().isDisplayed();
 
+        },
+
+        publisherShareSetChainContainers: function () {
+            return $$('.ps-section');
+        },
+
+        addSocietyAgreementNumbersToPssChainLink: function (i) {
+            return exports.publisherShareSetChainContainers().get(i).element(
+                by.cssContainingText('a', 'Add Society Agreement Numbers')
+            );
+        },
+
+        addSocietyAgreementNumbersToPssChain: function (i) {
+            asAlways(
+                exports.addSocietyAgreementNumbersToPssChainLink(i),
+                'scrollIntoView', 'click'
+            );
+
+            return pages.base.waitForAjax();
+        },
+
+        validateSocietyAgreementNumbersLinkPresence: function (i, which, expected) {
+            var els = {
+                    add: exports.addSocietyAgreementNumbersToPssChainLink(i),
+                    view: exports.viewPssChainSocietyAgreementNumbersLink(i)
+                },
+
+                el = els[which];
+
+            expect(Object.keys(els)).toContain(which);
+
+            if(expected) {
+                pages.base.scrollIntoView(el);
+            }
+
+            expect(pph.isDisplayed(el)).toBe(expected);
+        },
+
+        viewPssChainSocietyAgreementNumbersLink: function (i) {
+            return exports.publisherShareSetChainContainers().get(i).element(
+                by.cssContainingText('a', 'View Society Agreement Numbers')
+            );
+        },
+
+        viewPssChainSocietyAgreementNumbers: function (i) {
+            asAlways(
+                exports.viewPssChainSocietyAgreementNumbersLink(i),
+                'scrollIntoView', 'click'
+            );
+
+            return pages.base.waitForAjax();
         }
 });
 }

@@ -1,7 +1,7 @@
 'use strict';
 
-var random = require('../../../../helpers/random'),
-    randomId = random.id.makeMemoizedGenerator();
+//var random = require('../../../../helpers/random'),
+//    randomId = random.id.makeMemoizedGenerator();
 
 var workData = {
     workId: "WW 015006249 00",
