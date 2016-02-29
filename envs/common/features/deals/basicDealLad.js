@@ -403,6 +403,7 @@ exports.feature = [
 
             steps.searchSection.accessSavedDealByNumber("248840");
             steps.deal.goToPayeesDealTabDetails();
+            steps.editDealPayee.editPayeeArea();
             steps.editDealPayee.editSelectRandomPayeePersonFromDropDown("test 1, payee");
             steps.editDealPayee.editClickOnAddAllScopesToPayee();
             steps.editDealPayee.editAssociateSpecificScopeNumberIToNewPayee(1);

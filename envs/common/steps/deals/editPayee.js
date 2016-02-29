@@ -18,6 +18,12 @@ exports.editPayeeArea = function () {
     });
 };
 
+exports.editClickOnAddPrimaryLinkForScopeNumberI = function (i) {
+    it("Edit click on the add primary link for scope number " + i, function () {
+        pages.editDealPayee.editClickOnTheAddPrimaryLinkForScopeNumberI(i);
+    });
+};
+
 exports.editSelectRandomPayeeOrganisationFromDropDown = function (payee_name) {
     it("Edit select the random payee organisation from drop down ", function () {
         pages.editDealPayee.editFillIntoAddNewPayeeFieldSpecificValue(payee_name);

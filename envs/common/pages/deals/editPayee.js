@@ -40,6 +40,10 @@ if (pages.editDealPayee === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField));
         },
 
+        editClickOnTheAddPrimaryLinkForScopeNumberI: function(){
+
+        },
+
         editFillIntoAddNewPayeeFieldSpecificValue: function (payee) {
             pages.editDealPayee.elems.editAddNewPayeeField.click();
             pages.editDealPayee.elems.editAddNewPayeeInputField.sendKeys(payee);
