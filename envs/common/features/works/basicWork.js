@@ -4,7 +4,7 @@ var random = require('../../../../helpers/random'),
     moment = require('moment'),
     randomString = random.string.makeMemoizedGenerator();
 
-exports.commonFeatureTags = ['basicWork', 'regression'];
+exports.commonFeatureTags = ['basicWork', 'regression', 'works'];
 
 var data = {
     workId: 'WW 015006249 00',
