@@ -48,6 +48,7 @@ if (pages.editDealScope === undefined) {
                 shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
                 shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
                 saveEditScope: {css: "div[data-tg-modular-edit-id ='dealScope'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+                saveChanges: {css: "div[data-ng-hide='form.isSavingDeal'] button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
                 editShareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
                 editFirstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
                 editDeleteScopeIcon: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)'] div.ng-scope i.fa.fa-times.ng-scope"},
@@ -162,9 +163,9 @@ if (pages.editDealScope === undefined) {
             },
 
             editSaveTheScopeChanges: function () {
-                return asAlways(
-                    exports.saveButton(), 'scrollIntoView', 'click', 'waitForAjax'
-                );
+                pages.editDealScope.elems.saveEditScope.click();
+                pages.editDealScope.waitForAjax();
+                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
             },
 
             waitForTheScopeNumberIToBeVisible: function (i) {
@@ -401,9 +402,9 @@ if (pages.editDealScope === undefined) {
             },
 
             editSaveTheChangesPage: function () {
-                return asAlways(
-                    exports.saveButton(), 'scrollIntoView', 'click', 'waitForAjax'
-                );
+                pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
+                pages.editDealScope.elems.saveChanges.click();
+                pages.editDealScope.waitForAjax();
             },
 
             editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {

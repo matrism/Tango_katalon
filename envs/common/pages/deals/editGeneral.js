@@ -239,22 +239,12 @@ if (pages.editDealGeneral === undefined) {
                             })
                     }
                     else {
-                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                            .then(function findMatchingOption(options) {
-                                options.forEach(function (option) {
-                                    option.getText().then(function doesOptionMatch(text) {
-                                            if (text.indexOf(artistValue) != -1) {
-                                                desiredOption = option;
-                                                return true;
-                                            }
-                                        }
-                                    )
-                                });
-                            })
-                            .then(function clickOption() {
-                                if (desiredOption) {
-                                    desiredOption.click();
-                                }
+                        browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                            .then(function (options) {
+                                var randomNumber = Math.floor((Math.random() * options.length));
+                                var element = options[0];
+                                element.click();
+                                //browser.actions().mouseMove(element).click().perform();
                             });
                     }
                 });

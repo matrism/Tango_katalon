@@ -65,7 +65,7 @@ exports.editAssociateSpecificScopeNumberIToNewPayee = function (i) {
 
 exports.editAddPayoutToPayee = function (i) {
     it("Edit add payout to payee", function () {
-        pages.editDealPayee.editAddThePayoutToPayee();
+        pages.editDealPayee.editAddThePayoutToPayee(i);
     });
 };
 

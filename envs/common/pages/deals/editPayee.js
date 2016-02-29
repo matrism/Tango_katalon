@@ -11,8 +11,8 @@ if (pages.editDealPayee === undefined) {
             payeeArea: {css: "div[tg-modular-edit-id='payeeByScopeName']"},
             editPayeeIcon: {css: "div[tg-modular-edit-id='payeeByScopeName'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             editPayeeEditAreaButton: {css: 'button[data-ng-click="tgModularViewMethods.switchToEditView()"]'},
-            editAddNewPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
-            editAddNewPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editAddNewPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onNewPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
+            editAddNewPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onNewPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='newPayee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editScopePayeeSelectAllScopes: {model: 'newPayee._all_scopes'},
             editPayoutPayeeField: {css: "div[name='payoutDesignations'] div.tg-dropdown-button"},
@@ -40,8 +40,10 @@ if (pages.editDealPayee === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField));
         },
 
-        editClickOnTheAddPrimaryLinkForScopeNumberI: function(){
-
+        editClickOnTheAddPrimaryLinkForScopeNumberI: function (i) {
+            pages.base.scrollIntoView(element(By.css("div.payee-by-scope div.payee-by-scope__row-wrap.ng-scope:nth-child(" + (i+1) + ") div.payee-by-scope__subrow")));
+            browser.driver.findElement(By.css("div.payee-by-scope div.payee-by-scope__row-wrap.ng-scope:nth-child(" + (i+1) + ") div.payee-by-scope__subrow")).click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField));
         },
 
         editFillIntoAddNewPayeeFieldSpecificValue: function (payee) {
@@ -124,9 +126,9 @@ if (pages.editDealPayee === undefined) {
             browser.driver.findElement(by.css("div[data-ng-model='DPAY.newPayee._selected_scopes'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']")).sendKeys(specific_value);
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-            .then(function (options) {
-                options[0].click();
-            });
+                .then(function (options) {
+                    options[0].click();
+                });
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 

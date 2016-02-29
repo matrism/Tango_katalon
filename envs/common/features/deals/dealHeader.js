@@ -123,7 +123,7 @@ exports.feature = [
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
             steps.editDealGeneral.editSpecificRandomArtistField("Gift Test Artist", "Gift Test Artist");
-            steps.editDealGeneral.editSpecificRandomArtistField("Senior", "Senior");
+            steps.editDealGeneral.editSpecificRandomArtistField("Bruno Mars", "Bruno Mars");
             steps.editDealGeneral.editSpecificRandomArtistField("Billy", "Billy");
 
 
@@ -133,7 +133,7 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Senior");
+            steps.headerDeal.checkArtistValue("Billy, Bruno Mars, Gift Test Artist");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
@@ -144,7 +144,7 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Madonna, Senior");
+            steps.headerDeal.checkArtistValue("Billy, Bruno Mars, Gift Test Artist, Madonna");
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
