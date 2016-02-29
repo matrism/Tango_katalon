@@ -39,20 +39,19 @@ envModulePaths = envModulePaths.map(parseModulePath);
 selectedModulePaths = commonModulePaths;
 
 envModulePaths.forEach(function (info) {
-    var selectedEquivalentIndex = -1;
+    var dupePosition = null;
 
     selectedModulePaths.forEach(function (otherInfo, index) {
         if (info.envFilePath === otherInfo.envFilePath) {
-            selectedEquivalentIndex = index;
+            dupePosition = index;
         }
     });
 
-    if (selectedEquivalentIndex === -1) {
-        selectedModulePaths.push(info);
+    if (dupePosition !== null) {
+        selectedModulePaths.splice(dupePosition, 1);
     }
-    else {
-        selectedModulePaths[selectedEquivalentIndex] = info;
-    }
+
+    selectedModulePaths.push(info);
 });
 
 var features = [],

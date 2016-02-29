@@ -205,7 +205,9 @@ exports.publisherName = function(groupIndex, row) {
 };
 
 exports.validatePublisherName = function(groupIndex, row, value) {
-    expect(exports.publisherName(groupIndex, row)).toBe(value);
+    expect(pph.toUpperCase(exports.publisherName(groupIndex, row))).toBe(
+        value.toUpperCase()
+    );
 };
 
 exports.publisherSocietiesBinding = function(groupIndex, row) {

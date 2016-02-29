@@ -32,7 +32,7 @@ exports.feature = [
                 rr.addAdminFeeToContractualField('12');
                 rr.addNPSToContractualField('2');
 
-                rr.addIncomeProviderByPartialMatch('HFA');
+                rr.addIncomeProviderByPartialMatch('FINLAND SYNCH INCOME');
                 rr.clickAtSourceApplicationMethod();
                 rr.confirmChangingRateApplicationMethod();
 

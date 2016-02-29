@@ -4,7 +4,7 @@ var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 if (pages.createDealScope === undefined) {
-    pages.createDealScope = new ftf.pageObject({
+    exports = module.exports = pages.createDealScope = new ftf.pageObject({
         locators: {
             addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
             descriptionField: {css: "input[name='scopeDescription']"},
@@ -314,6 +314,24 @@ if (pages.createDealScope === undefined) {
                         return element.isDisplayed();
                     })
             );
+        },
+
+        publisherRoleDropdown: function (i, j) {
+            return exports.publisherShareRows(i).get(j).$(
+                '[data-tg-dropdown="' +
+                    'role for role in shareAcquirerRoles' +
+                '"]'
+            );
+        },
+
+        selectPublisherRole: function (i, j, name) {
+            var el = exports.publisherRoleDropdown(i, j);
+
+            pages.base.scrollIntoView(el);
+
+            return pages.base.selectDropdownOption(el, name, {
+                dropdownType: 'tg'
+            });
         },
 
         publisherSearchTermsInput: function (i, j) {

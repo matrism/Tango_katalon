@@ -34,10 +34,22 @@ exports.trim = function (string) {
     return pph.trim(string);
 };
 
+exports.hover = function (el) {
+    browser.actions().mouseMove(el).perform();
+};
+
 exports.click = function (el) {
     el.click();
 };
 
 exports.clear = function (el) {
     el.clear();
+};
+
+exports.getValue = function (el) {
+    return el.getAttribute('value');
+};
+
+exports.waitForAjax = function () {
+    pages.base.waitForAjax();
 };
