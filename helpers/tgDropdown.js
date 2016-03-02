@@ -1,7 +1,11 @@
 'use strict';
 
-function TgDropdown (locator) {
-    var dropdown = element(locator);
+function TgDropdown (locator, isElement, isAppendedToBody) {
+    var dropdown = locator;
+
+    if (!isElement) {
+        dropdown = element(locator);
+    };
 
     dropdown.click = function () {
         return dropdown.$('.tg-dropdown-button').click();
@@ -9,6 +13,11 @@ function TgDropdown (locator) {
 
     dropdown.results = function (text) {
         var results = dropdown.$$('.dropdown-menu a');
+
+        if (isAppendedToBody) {
+            browser.sleep(500);
+            results = $$('body > div[tg-component-render-template] > .tg-dropdown-menu:not(.ng-hide) .tg-dropdown-menu-item');
+        }
 
         if (text) {
             results = results.filter(function(elem, index){
@@ -19,6 +28,18 @@ function TgDropdown (locator) {
         }
 
         return results;
+    };
+
+    dropdown.selectValue = function (val) {
+        pages.base.scrollIntoView(dropdown);
+        dropdown.click();
+        dropdown.results(val).first().click();
+    };
+
+    dropdown.select = function (idx) {
+        pages.base.scrollIntoView(dropdown);
+        dropdown.click();
+        dropdown.results().get(idx).click();
     };
 
     return dropdown;
