@@ -1,0 +1,1120 @@
+- inboundIncomeType: A&E
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: A&E HIS ESPANOL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: ABC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ABC FAMILY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ACTION MAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AIRTRAN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AL JAZEERA AMER
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Performance
+- inboundIncomeType: ALASKA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ALLTEL RBT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AMC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AMERICAN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AMERICAN HEROES
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Synch
+- inboundIncomeType: AMI ENTERTAINMT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ANIMAL PLANET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AT MAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AUDIENCE NETWK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: AXS TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BATANGA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BBC AMERICA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BIOGRAPHY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BLANKET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BMILIVE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BOOMERANG
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: BRAVO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CABLE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CARE MAIL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CARTOON
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CBS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: CBS COLL SPORTS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CCNECN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CCS INT & PREM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CENTRIC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CHILLER
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CINEMA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CINEMAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CLO TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CLOO TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CMS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CMTV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CNBC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CNN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CNN HEADLINE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Synch
+- inboundIncomeType: COLLEGE RADIO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: COMCAST SPORTS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: COMEDY CENTRAL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: COMM RADIO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CONCERT RADIO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CONTINENTAL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CRACKLE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CRICKETRBT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CRIME & INVEST
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CURRENT TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: CW
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Performance
+- inboundIncomeType: DELTA-NORTHWEST
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: DEST AMERICA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: DIGITAL MUS EXP
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: DINEY XD
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: DISC ESPANOL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: DISC FIT HEALTH
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: DISC MILITARY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: DISCOVERY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Ringtone Mechanical
+- inboundIncomeType: DISH CD
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Download Mechanical
+- inboundIncomeType: DISNEY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Streaming Mechanical
+- inboundIncomeType: DISNEY JR
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: DISNEY XD
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: DMX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Karaoke Mechanical
+- inboundIncomeType: ENCOR INDIEPLEX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical Performance
+- inboundIncomeType: ENCOR MOVIEPLEX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCOR RETROPLEX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE ACTION
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE BLACK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE CLASSIC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE DRAMA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE LOVE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE MYSTERY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE WAM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENCORE WESTERNS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ENTERTAINMENT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: EPIX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ESQUIRE NETWORK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FAMILY NET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Synch
+- inboundIncomeType: FILM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FIVE STAR MAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FLIX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FOX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FOX MOVIES
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FOX SPORTS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FOX SPORTS 1
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FOX SPORTS 2
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FRONTIER
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FUEL & FOX SP 2
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FUSE TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FX NETWORK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: FXX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: G4 TECH TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: GALAVISION
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: GENERAL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: GOLF
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: GREAT AMER CTRY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: GSN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: H2
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HALLMARK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HALLMARK MOVIE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HALOGEN TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HAWAIIAN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HBO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HBO COMEDY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HBO FAMILY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HBO LATINO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HBO PLUS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HBO SIGNATURE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HBO ZONE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HDNET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HDNET MOVIES
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HEADLINER
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HEARTS OF SPACE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HISTORY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HTV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: HULU
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ID DISCOVERY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: INDEPEND FILM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: INSPIRATION
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: INTERNET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ION CABLE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ITUNES RADIO
+  inboundIncomeTypeDescription: RADIO
+  incomeFileType: BMI
+  tangoIncomeType: Radio Performance
+- inboundIncomeType: JETBLUE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LIFETIME
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LIFETIME MOVIE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LIFETIME WOMEN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LIVE 365
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: LIVE 365 1Q2013
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LIVE 365 2Q2013
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LIVE 365 3Q2013
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LOCAL NPR
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: LOGO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MILITARY HIST
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MLB
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MORE MAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MOVIE CHANNEL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MOVIE CHANNEL 2
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MSNBC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MTV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MTV HITS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MTV TR3S
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MTV2
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MTVU
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MUN2
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MUSIC CHOICE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: MUZAK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NATH AMERICAN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NATL GEO EXPLOR
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NATL GEO WILD
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NBA TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NBC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NBC SPORTS NET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NCTA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NETFLIX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NETWORK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NETWORK NPR
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NETWORK PRI
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NFL NETWORK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NICK JR
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NICKELODEON
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NICKTOONS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NORTH AMERICAN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: NUVO TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: OPENING ACT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: OUTER MAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: OWN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: OXYGEN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: PALLADIA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: PANDORA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: PBS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: PBS KIDS SPROUT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: PIVOT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: PROJECTPLAYLIST
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: PURE COUNTRY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: RADIO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: RARIO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: REELZCHANNEL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: RFD TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Performance
+- inboundIncomeType: RHAPSODY INTER
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: RHAPSODY RADIO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: RINGBACK TONES
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: RLTV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: ROOT SPORTS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-BBCAM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-CNBC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-CNN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-CNNHLN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-FNEW
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Digital Mechanical
+- inboundIncomeType: SAT RAD-MSNBC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-NFLNET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-PLAYB
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SAT RAD-TWC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SCIENCE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME 2
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME 3
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME BEYOND
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME EXTREM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME FAMILY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME NEXT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SHOWTIME WOMEN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SIRIUS XM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SIRIUS XM COMM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SMITHSONIAN CH
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SOAPNET
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SONY MOVIE CH
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SPEED CHANNEL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SPIKE TV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SPORTSNET NY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SPORTSSOUTH
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SPOTIFY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SPRINT MSPOT RD
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Performance
+- inboundIncomeType: STARZ
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: STARZ CINEMA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: STARZ COMEDY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: STARZ EDGE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: STARZ HD
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: STARZ INBLACK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: STARZ KID & FAM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: STYLE NETWORK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SUN COUNTRY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SUNDANCE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SUNSPORTS FL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SUPER STATION
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SUPERSTATION
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: SYFY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: T MOBILE RBT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TBS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TEENNICK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TELEMUNDO
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TELEVISION
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: THE HUB
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: THRILLER MAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TLC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TNT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TOUCHTUNES
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TRINITY BRCST
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TRUTV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TURNER CLS MOV
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TV LAND
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TV LOCAL BL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TV LOCAL PP
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TV ONE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TV PER PROGRAM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: TVGN
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: UNI
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: UNIMAS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: UNITED
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: UNIVERSAL HD
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: UP ENT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: US AIRWAYS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: USA NETWORK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VARIOUS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VELOCITY
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VERIZON RBT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VH1
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VH1 CLASSIC
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VH1 SOUL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VIRGIN AMERICA
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: VIRGINMOBILE RB
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: WB
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: WEATHER CHANNEL
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: WEB TV NETWORK
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: WMODE RBT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: WOMEN MAX
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: WOMENS ENT
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: WORLD AIRWAYS
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: YAHOO.COM
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: YOUTUBE
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: YOUTUBE 1Q2013
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: YOUTUBE 1Q2014
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: YOUTUBE 2Q2013
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: Mechanical
+- inboundIncomeType: YOUTUBE 2Q2014
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Performance
+- inboundIncomeType: YOUTUBE 3Q2013
+  inboundIncomeTypeDescription: h
+  incomeFileType: BMI
+  tangoIncomeType: TV Performance
+- inboundIncomeType: YOUTUBE 4Q2013
+  inboundIncomeTypeDescription: hh
+  incomeFileType: BMI
+  tangoIncomeType: TV Synch

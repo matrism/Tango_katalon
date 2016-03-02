@@ -1,0 +1,6 @@
+/nbproject/
+/node_modules/
+/reports/html/*
+/reports/screens/*
+/reports/xml/*
+/vendor/

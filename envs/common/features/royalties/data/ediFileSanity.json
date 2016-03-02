@@ -1,0 +1,40 @@
+[
+    {
+        "processingTerritory": "Czech Republic",
+        "incomeProvider": "OSA",
+        "fileFormat": "CISAC F2",
+        "fileName": "./data/J9140050_4_tiny.WAR.dat",
+        "oldmockedFileName": "TAT5771445229874713.edi",
+        "mockedFileName": "TAT6861446666914811.edi",
+        "oldamount": "404,416.6401",
+        "amount": "42.3900",
+        "currency": "CZK",
+        "summaryByType": {
+            "Digital Mechanical": "42.3900"
+        }
+    },
+    {
+        "processingTerritory": "United States",
+        "incomeProvider": "FOX",
+        "fileFormat": "HARRY FOX",
+        "fileName": "./data/XTP2087N_HFA_09_tiny.CP9274780",
+        "mockedFileName": "TAT8741445259285502.edi",
+        "amount": "1.1900",
+        "currency": "USD",
+        "summaryByType": {
+            "Others": "1.1900"
+        }
+    },
+    {
+        "customFormat": false,
+        "multipleProviders": true,
+        "processingTerritory": "Greece",
+        "fileFormat": "Common XLS",
+        "fileName": "./data/aepicomxls_test14_tat.csv",
+        "mockedFileName": "TAT4651444832084292.edi",
+        "amount": "6341.1100",
+        "expectedAmount": "100.0000",
+        "currency": "EUR"
+
+    }
+]

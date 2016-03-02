@@ -1,0 +1,56 @@
+- description: Scope 1
+  contractPeriods:
+    - Contract Period 1
+  rateSets:
+    - description: Rate Set 1
+      incomeProvider: FINLAND SYNCH INCOME
+      effectiveDate: "2014-03-12"
+      groups:
+        - Cover Mechanical
+        - Mechanical
+        - Non Society Performance
+        - Others
+        - Performance
+        - Print
+        - Synch
+        - TPP
+    - description: Rate Set 2
+      incomeProvider: ASCAP
+      effectiveDate: "2023-06-17"
+      groups:
+        - Cover Mechanical
+        - Mechanical
+        - Non Society Performance
+        - Others
+        - Performance
+        - Print
+        - Synch
+        - TPP
+- description: Scope 2
+  contractPeriods:
+    - Contract Period 1
+  rateSets:
+    - description: Rate Set 1
+      incomeProvider: FINLAND SYNCH INCOME
+      effectiveDate: "2043-06-17"
+      groups:
+        - Cover Mechanical
+        - Mechanical
+        - Non Society Performance
+        - Others
+        - Performance
+        - Print
+        - Synch
+        - TPP
+    - description: Rate Set 2
+      incomeProvider: ASCAP
+      effectiveDate: "2034-06-17"
+      groups:
+        - Cover Mechanical
+        - Mechanical
+        - Non Society Performance
+        - Others
+        - Performance
+        - Print
+        - Synch
+        - TPP
