@@ -1,6 +1,7 @@
 'use strict';
 
-var pageStep = require('../../../../helpers/basicPageStep');
+var pageStep = require('../../../../helpers/basicPageStep'),
+    using = fnutils.using;
 
 steps.organisation = exports;
 
@@ -356,6 +357,59 @@ exports.confirmRegistrationRun = function (value) {
         pages.organisation.confirmModalDialog().then(function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.organisation.successModalMessage()));
             pages.organisation.confirmSuccessModal();
+        });
+    });
+};
+
+exports.registration.resetDeliveryInfo = function(data) {
+    describe("Reset delivery information", function () {
+        using(steps.organisation.registration, function() {
+            this.editSection();
+            this.selectIsRegistrationRecipient('No');
+            this.saveSection();
+            this.editSection();
+            this.selectIsRegistrationRecipient('Yes');
+            using(this.delivery, function() {
+                this.addMethod();
+                this.selectMethod(0, 'Email');
+                this.enterEmailPrimaryEmail(0, data.email.primary);
+                this.addMethod();
+                this.selectMethod(1, 'FTP');
+                this.enterFtpAddress(1, data.ftp.address);
+                this.enterFtpPort(1, data.ftp.port);
+                this.enterFtpUsername(1, data.ftp.username);
+                this.enterFtpPassword(1, data.ftp.password);
+                this.enterFtpNotificationPrimaryEmail(1, data.ftp.notificationPrimaryEmail);
+                this.enterFtpNotificationCcEmail(1, data.ftp.notificationCcEmail);
+                this.addMethod();
+                this.selectMethod(2, 'SFTP');
+                this.enterSftpAddress(2, data.sftp.address);
+                this.enterSftpPort(2, data.sftp.port);
+                this.enterSftpUsername(2, data.sftp.username);
+                this.enterSftpPassword(2, data.sftp.password);
+                this.enterSftpNotificationPrimaryEmail(2, data.sftp.notificationPrimaryEmail);
+                this.enterSftpNotificationCcEmail(2, data.sftp.notificationCcEmail);
+                this.addMethod();
+                this.selectMethod(3, '3rd Party');
+                this.enterThirdPartyRecipient(3, data.thirdParty);
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.selectFirstThirdPartyRecipient();
+            });
+            using(this.ack, function() {
+                this.selectAcknowledgementType('Multiple');
+                this.selectDeliveryMethod(0, 'SFTP');
+                this.enterAddress(0, data.ack.sftp.address);
+                this.enterPort(0, data.ack.sftp.port);
+                this.enterUsername(0, data.ack.sftp.username);
+                this.enterPassword(0, data.ack.sftp.password);
+                this.selectDeliveryMethod(1, 'FTP');
+                this.enterAddress(1, data.ack.ftp.address);
+                this.enterPort(1, data.ack.ftp.port);
+                this.enterUsername(1, data.ack.ftp.username);
+                this.enterPassword(1, data.ack.ftp.password);
+            });
+            this.saveSection();
         });
     });
 };

@@ -1,9 +1,9 @@
 'use strict';
 
-var pageStep = require('../../../../helpers/basicPageStep');
-
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+var pageStep = require('../../../../helpers/basicPageStep'),
+    using = fnutils.using,
+    promise = protractor.promise;
+    ExpectedConditions = protractor.ExpectedConditions;
 
 if (steps.organisation === undefined) {
     steps.organisation = exports = {
@@ -1072,3 +1072,57 @@ pageStep([
         'Expect name to be either',
     ]],
 ]);
+
+exports.registration.resetDeliveryInfo = function(data) {
+    describe("Reset delivery information", function () {
+        using(steps.organisation.registration, function() {
+            this.editSection();
+            this.selectIsRegistrationRecipient('No');
+            this.confirmRemoveAll();
+            this.selectIsRegistrationRecipient('Yes');
+            using(this.delivery, function() {
+                this.addMethod();
+                this.selectMethod(0, 'Email');
+                this.enterEmailPrimaryEmail(0, data.email.primary);
+                this.addMethod();
+                this.selectMethod(1, 'FTP');
+                this.enterAddress(0, data.ftp.address);
+                this.enterPort(0, data.ftp.port);
+                this.enterUsername(0, data.ftp.username);
+                this.enterPassword(0, data.ftp.password);
+                this.selectNotification(0, data.ftp.notification);
+                this.enterNotificationPrimaryEmail(0, data.ftp.notificationPrimaryEmail);
+                this.enterNotificationCcEmail(0, data.ftp.notificationCcEmail);
+                this.addMethod();
+                this.selectMethod(2, 'SFTP');
+                this.enterAddress(1, data.sftp.address);
+                this.enterPort(1, data.sftp.port);
+                this.enterUsername(1, data.sftp.username);
+                this.enterPassword(1, data.sftp.password);
+                this.selectNotification(1, data.sftp.notification);
+                this.enterNotificationPrimaryEmail(1, data.sftp.notificationPrimaryEmail);
+                this.enterNotificationCcEmail(1, data.sftp.notificationCcEmail);
+                this.addMethod();
+                this.selectMethod(3, '3rd Party');
+                this.enterThirdPartyRecipient(0, data.thirdParty);
+                steps.base.sleep(200);
+                steps.base.waitForAjax();
+                this.selectFirstThirdPartyRecipient();
+            });
+            using(this.ack, function() {
+                this.selectAcknowledgementType('Multiple');
+                this.selectDeliveryMethod(0, 'SFTP');
+                this.enterAddress(0, data.ack.sftp.address);
+                this.enterPort(0, data.ack.sftp.port);
+                this.enterUsername(0, data.ack.sftp.username);
+                this.enterPassword(0, data.ack.sftp.password);
+                this.selectDeliveryMethod(1, 'FTP');
+                this.enterAddress(1, data.ack.ftp.address);
+                this.enterPort(1, data.ack.ftp.port);
+                this.enterUsername(1, data.ack.ftp.username);
+                this.enterPassword(1, data.ack.ftp.password);
+            });
+            this.saveSection();
+        });
+    });
+};

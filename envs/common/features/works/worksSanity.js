@@ -7,6 +7,7 @@ var leftPad = require('left-pad'),
     randomString = random.string.makeMemoizedGenerator(),
     fromTestVariable = require('../../../../helpers/fromTestVariable'),
     fnutils = require('../../../../helpers/fnutils'),
+    data = requireFromEnvFolder('features/orgs/data/CrRegistration.js'),
     bind = fnutils.bind,
     using = fnutils.using;
 
@@ -1631,6 +1632,11 @@ exports.feature = [
                 this.find('first');
 
                 this.goToRecipientPage();
+            });
+
+            using(steps.organisation, function () {
+                this.goToGeneralTab();
+                this.registration.resetDeliveryInfo(data.cr);
             });
 
             steps.organisation.goToPreviewRegistrationRunTab();
