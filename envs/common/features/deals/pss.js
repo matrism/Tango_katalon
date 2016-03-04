@@ -4,13 +4,20 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 },
 
-exports.commonFeatureTags = ['deals', 'pss', 'regression'];
+exports.commonFeatureTags = [
+    'deals',
+    'pss',
+    'regression',
+    'pssRegression',
+    'nonControlledCreatorShare'
+];
 
 exports.feature = [
     {
-        name: "Create a deal with publisher share set",
-        tags: ["create"],
+        name: 'Create a deal with publisher share set',
+        tags: ['createPssRegression'],
         steps: function () {
+            var nccs = steps.editDealScope.nonCtrlCreatorShare;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -24,6 +31,9 @@ exports.feature = [
             steps.createDealScope.deleteChainIPublisherShare(1);
             steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
+            for (var i = 1; i <= 2; i++) {
+                nccs.validateLabelViewMode(i, (i == 1));
+            }
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -32,6 +42,7 @@ exports.feature = [
             steps.editDealScope.validatePublisherSharesTitle();
             steps.editDealScope.validatePublisherSharesHeaderTableTitle();
             for (var i = 1; i <= 2; i++) {
+                nccs.validateLabelViewMode(i, (i == 1));
                 steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
                 steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.editDealScope.validatePublisherSharesSetSubtotalChainI(i);
@@ -39,8 +50,8 @@ exports.feature = [
         }
     },
     {
-        name: "Check the visual design for publisher shares",
-        tags: ["view"],
+        name: 'Check the visual design for publisher shares',
+        tags: ['viewPssRegression'],
         steps: function () {
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -55,6 +66,8 @@ exports.feature = [
             steps.editDealScope.selectScope1();
             steps.editDealScope.validatePublisherSharesTitle();
             steps.editDealScope.validatePublisherSharesHeaderTableTitle();
+            steps.editDealScope.nonCtrlCreatorShare.validateLabelViewMode(i, true);
+            steps.editDealScope.nonCtrlCreatorShare.validateLabelPosition();
             steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
             steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
             steps.editDealScope.validatePublisherSharesSetSubtotalChainI(i);
@@ -62,8 +75,8 @@ exports.feature = [
         }
     },
     {
-        name: "Check the invalid cases for publisher shares",
-        tags: ["view"],
+        name: 'Check the invalid cases for publisher shares',
+        tags: ['checkInvalidPssRegression'],
         steps: function () {
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -87,8 +100,8 @@ exports.feature = [
         }
     },
     {
-        name: "Dirty check publisher share set",
-        tags: ["view"],
+        name: 'Dirty check publisher share set',
+        tags: ['dirtyCheckPssRegression'],
         steps: function () {
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -119,8 +132,8 @@ exports.feature = [
         }
     },
     {
-        name: "Delete publisher share set from a deal",
-        tags: ["delete"],
+        name: 'Delete publisher share set from a deal',
+        tags: ['deletePssRegression'],
         steps: function () {
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -146,10 +159,11 @@ exports.feature = [
         }
     },
     {
-        name: "Edit a deal with publisher share set",
-        tags: ["edit"],
+        name: 'Edit a deal with publisher share set',
+        tags: ['editPssRegression'],
         steps: function () {
-            var i = 1;
+            var i = 1,
+                nccs = steps.editDealScope.nonCtrlCreatorShare;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -163,6 +177,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
             steps.editDealScope.selectScope1();
             steps.editDealScope.validatePublisherSharesTitle();
+            nccs.validateLabelViewMode(i, true);
             steps.editDealScope.validatePublisherSharesHeaderTableTitle();
             steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
             steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
@@ -171,6 +186,7 @@ exports.feature = [
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.itEditPublisherShare();
             steps.editDealScope.editSaveThePublisherShareSet();
+            nccs.validateLabelViewMode(i, false);
             steps.editDealScope.validatePublisherSharesTitle();
             steps.editDealScope.validatePublisherSharesHeaderTableTitle();
             steps.editDealScope.editPublisherSharesSet();
@@ -179,10 +195,49 @@ exports.feature = [
             }
             steps.editDealScope.editSaveThePublisherShareSet();
             for (var i = 1; i <= 2; i++) {
+                nccs.validateLabelViewMode(i, (i == 2));
                 steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
                 steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.editDealScope.validatePublisherSharesSetSubtotalChainI(i);
             }
+        }
+    },
+    {
+        name: 'Create a deal with share PSS',
+        tags: ['nonControlledCreatorShareWithSharePSS'],
+        steps: function () {
+            var nccs = steps.editDealScope.nonCtrlCreatorShare,
+                cds = steps.createDealScope,
+                cdg = steps.createDealGeneral,
+                d = steps.deal,
+                eds = steps.editDealScope;
+
+            cdg.itFillDealMandatoryFieldsGeneralTab();
+            d.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            cds.itAddSimpleScope();
+            cds.itAddPublisherShare();
+            cds.saveThePublisherShareSet();
+            cds.itAddSimpleScope();
+            cds.sharePublisherShareSet();
+            cds.saveThePublisherShareSet();
+            d.itContinueToNextPage();
+            d.saveDeal();
+            d.waitForDealToBeSaved();
+            d.returnDealNumber();
+            eds.selectScope1();
+            nccs.validateLabelViewMode(1, true);
+            eds.selectScopeNumberI(2);
+            nccs.validateLabelViewMode(1, true);
+            eds.editPublisherSharesSet();
+            nccs.validateLabel(0);
+            nccs.expectCheckboxChecked(0);
+            nccs.click(0);
+            nccs.validateHelpMessage(0);
+            eds.editSaveThePublisherShareSetWithModal();
+            nccs.validateLabelViewMode(1, false);
+            eds.selectScopeNumberI(1);
+            nccs.validateLabelViewMode(1, false);
         }
     }
 ];
