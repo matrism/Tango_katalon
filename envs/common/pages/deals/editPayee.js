@@ -15,8 +15,8 @@ if (pages.editDealPayee === undefined) {
             editPayeeEditAreaButton: {css: 'button[data-ng-click="tgModularViewMethods.switchToEditView()"]'},
             editAddOldPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
             editAddOldPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editAddNewPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.newPayee._deal_payee'] div[ng-class='tgTypeaheadWrapClass']"},
-            editAddNewPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.newPayee._deal_payee'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editAddNewPayeeField: {css: "div[data-ng-model='DPAY.newPayee._deal_payee'] div[ng-class='tgTypeaheadWrapClass']"},
+            editAddNewPayeeInputField: {css: "div[data-ng-model='DPAY.newPayee._deal_payee'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='newPayee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editOldPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='payee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editScopePayeeSelectAllScopes: {model: 'newPayee._all_scopes'},
@@ -67,6 +67,7 @@ if (pages.editDealPayee === undefined) {
         },
 
         editFillIntoOldPayeeFieldSpecificValue: function (payee) {
+            pages.base.scrollIntoView(pages.editDealPayee.elems.editAddOldPayeeField);
             pages.editDealPayee.elems.editAddOldPayeeField.click();
             pages.editDealPayee.elems.editAddOldPayeeInputField.sendKeys(payee);
         },
@@ -111,6 +112,29 @@ if (pages.editDealPayee === undefined) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
                 });
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+        },
+
+        editSelectTheSpecificPayeePersonFromDropDown: function(payee_name){
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            .then(function findMatchingOption(options) {
+                options.forEach(function (option) {
+                    option.getText().then(function doesOptionMatch(text) {
+                            if (text.indexOf(payee_name) != -1) {
+                                desiredOption = option;
+                                return true;
+                            }
+                        }
+                    )
+                });
+            })
+            .then(function clickOption() {
+                if (desiredOption) {
+                    desiredOption.click();
+                }
+            });
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 
@@ -222,8 +246,6 @@ if (pages.editDealPayee === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 
-
-
         editAssociateTheRandomScopeToPayee: function () {
             pages.editDealPayee.elems.editScopeOldPayeeInputField.sendKeys("scope");
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
@@ -244,6 +266,7 @@ if (pages.editDealPayee === undefined) {
         editSaveThePayeePage: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.editSavePayeeFooterButton);
             pages.editDealPayee.elems.editSavePayeeFooterButton.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealPayee.elems.editAddOldPayeeInputField));
         },
 
         editCancelThePayeeForm: function () {
@@ -256,9 +279,22 @@ if (pages.editDealPayee === undefined) {
             pages.editDealPayee.elems.editLegalRightPayeeInputField.sendKeys("100");
         },
 
+        editFillIntoThePayeeLegalRightInputFieldForScopeNumberI: function (i) {
+            var element = browser.driver.findElement(By.css("div[data-tg-modular-edit-id='newPayee'] div[data-ng-repeat='payeeScope in payee.deal_scopes | filter: scopeFilter(scope) track by payeeScope.id']:nth-child(" + (i + 2) + ") input[name='legalRight']"));
+            element.clear();
+            element.sendKeys("100");
+        },
+
+
         editFillIntoThePayeeDistributionInputField: function () {
             pages.editDealPayee.elems.editDistributionPayeeInputField.clear();
             pages.editDealPayee.elems.editDistributionPayeeInputField.sendKeys("100");
+        },
+
+        editFillIntoThePayeeDistributionInputFieldForScopeNumberI: function (i) {
+            var element = browser.driver.findElement(By.css("div[data-tg-modular-edit-id='newPayee'] div[data-ng-repeat='payeeScope in payee.deal_scopes | filter: scopeFilter(scope) track by payeeScope.id']:nth-child(" + (i + 2) + ") input[name='distribution']"));
+            element.clear();
+            element.sendKeys("100");
         },
 
         editCheckNoScopeAssociatedToPayee: function () {
