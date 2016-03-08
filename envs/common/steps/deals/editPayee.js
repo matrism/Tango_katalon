@@ -24,9 +24,9 @@ exports.editOldPayeeArea = function () {
     });
 };
 
-exports.editClickOneByPayeeHeaderLink = function(){
-    it("Edit click on the by payee header link ", function(){
-       pages.editDealPayee.editClickOnTheByPayeeHeaderLink():
+exports.editClickOneByPayeeHeaderLink = function () {
+    it("Edit click on the by payee header link ", function () {
+        pages.editDealPayee.editClickOnTheByPayeeHeaderLink();
     });
 };
 
@@ -57,14 +57,14 @@ exports.editSelectRandomOldPayeePersonFromDropDown = function (payee_name) {
     });
 };
 
-exports.editSelectSpecificOldPayeePersonFromDropDown = function(payee_name){
+exports.editSelectSpecificOldPayeePersonFromDropDown = function (payee_name) {
     it("Edit select the specific old payee person from drop down ", function () {
         pages.editDealPayee.editFillIntoOldPayeeFieldSpecificValue(payee_name);
         pages.editDealPayee.editSelectTheSpecificPayeePersonFromDropDown(payee_name);
     });
 };
 
-exports.editSelectSpecificNewPayeePersonFromDropDown = function(payee_name){
+exports.editSelectSpecificNewPayeePersonFromDropDown = function (payee_name) {
     it("Edit select the specific new payee person from drop down ", function () {
         pages.editDealPayee.editFillIntoAddNewPayeeFieldSpecificValue(payee_name);
         pages.editDealPayee.editSelectTheSpecificPayeePersonFromDropDown(payee_name);
@@ -111,9 +111,10 @@ exports.editAssociateSpecificScopeNumberIToNewPayee = function (i) {
     });
 };
 
-exports.editAddPayoutToPayee = function (i) {
+exports.editAddPayoutToPayee = function () {
     it("Edit add payout to payee", function () {
-        pages.editDealPayee.editAddThePayoutToPayee(i);
+        pages.editDealPayee.editAddThePayoutToPayee();
+        pages.editDealPayee.waitForAjax();
     });
 };
 
@@ -149,11 +150,11 @@ exports.editSavePayeePage = function () {
     });
 };
 
-exports.editSavePayeeToPayeeForm = function(){
-  it("Edit save the payee to payee form", function(){
-     pages.editDealPayee.editAddPayeeToPayeeForm();
-      pages.editDealPayee.waitForAjax();
-  });
+exports.editSavePayeeToPayeeForm = function () {
+    it("Edit save the payee to payee form", function () {
+        pages.editDealPayee.editAddPayeeToPayeeForm();
+        pages.editDealPayee.waitForAjax();
+    });
 };
 
 exports.editCancelPayeeForm = function () {

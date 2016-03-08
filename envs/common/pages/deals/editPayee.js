@@ -16,8 +16,8 @@ if (pages.editDealPayee === undefined) {
             editPayeeEditAreaButton: {css: 'button[data-ng-click="tgModularViewMethods.switchToEditView()"]'},
             editAddOldPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
             editAddOldPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editAddNewPayeeField: {css: "div[data-ng-model='DPAY.newPayee._deal_payee'] div[ng-class='tgTypeaheadWrapClass']"},
-            editAddNewPayeeInputField: {css: "div[data-ng-model='DPAY.newPayee._deal_payee'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editAddNewPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
+            editAddNewPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='newPayee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editOldPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='payee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editScopePayeeSelectAllScopes: {model: 'newPayee._all_scopes'},
@@ -45,9 +45,7 @@ if (pages.editDealPayee === undefined) {
         editClickOnTheByPayeeHeaderLink: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.byPayeeHeaderLink);
             pages.editDealPayee.elems.byPayeeHeaderLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField))
-            )
-            ;
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField));
         },
 
         editThePayeeArea: function () {
@@ -72,6 +70,7 @@ if (pages.editDealPayee === undefined) {
         },
 
         editFillIntoAddNewPayeeFieldSpecificValue: function (payee) {
+            pages.base.scrollIntoView(pages.editDealPayee.elems.editAddNewPayeeField);
             pages.editDealPayee.elems.editAddNewPayeeField.click();
             pages.editDealPayee.elems.editAddNewPayeeInputField.sendKeys(payee);
         },
@@ -275,9 +274,9 @@ if (pages.editDealPayee === undefined) {
 
 
         editAddPayeeToPayeeForm: function () {
-            pages.base.scrollIntoView(pages.editDealPayee.elems.editAddPayeeButtonPayeeFor);
-            pages.editDealPayee.elems.editAddPayeeButtonPayeeFor.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealPayee.elems.editAddNewPayeeInputField));
+            pages.base.scrollIntoView(pages.editDealPayee.elems.editAddPayeeButtonPayeeForm);
+            pages.editDealPayee.elems.editAddPayeeButtonPayeeForm.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeInputField));
         },
 
         editSaveThePayeePage: function () {

@@ -554,23 +554,23 @@ exports.feature = [
             steps.editDealPayee.editClickOneByPayeeHeaderLink();
 
             steps.editDealPayee.editSelectSpecificNewPayeePersonFromDropDown("person " + 1 + ", TAT payee");
-            steps.editDealPayee.editSelectRandomValueForPayeeCompanyNameCode();
             for (var i = 1; i <= 3; i++) {
                 steps.editDealPayee.editAssociateSpecificScopeNumberIToNewPayee(i);
             }
-            steps.editDealPayee.editFillIntoPayeeLegalRightInputFieldScopeNumberI(1);
-            steps.editDealPayee.editFillIntoPayeeDistributionInputFieldScopeNumberI(1);
+            steps.editDealPayee.editAddPayoutToPayee();
+            steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
+            steps.editDealPayee.editFillIntoPayeeDistributionInputField();
             steps.editDealPayee.editSavePayeeToPayeeForm();
 
 
             for (var j = 2; j <= 200; j++) {
                 steps.editDealPayee.editSelectSpecificNewPayeePersonFromDropDown("person " + j + ", TAT payee");
-                steps.editDealPayee.editSelectRandomValueForPayeeCompanyNameCode();
                 for (var i = 3 * j; i >= 3 * j - 2; i--) {
                     steps.editDealPayee.editAssociateSpecificScopeNumberIToNewPayee(i);
                 }
-                steps.editDealPayee.editFillIntoPayeeLegalRightInputFieldScopeNumberI(j);
-                steps.editDealPayee.editFillIntoPayeeDistributionInputFieldScopeNumberI(j);
+                steps.editDealPayee.editAddPayoutToPayee();
+                steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
+                steps.editDealPayee.editFillIntoPayeeDistributionInputField();
                 steps.editDealPayee.editSavePayeeToPayeeForm();
             }
         }
