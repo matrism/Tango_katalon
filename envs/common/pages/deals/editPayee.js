@@ -8,6 +8,7 @@ if (pages.editDealPayee === undefined) {
     pages.editDealPayee = new ftf.pageObject({
         locators: {
             payeeHeaderTitleLink: {css: "ul.nav.nav-tabs li.ng-scope:nth-child(3) a"},
+            byPayeeHeaderLink: {css: "div.deal-payee.deal-payee-tab div.view-header.pull-left a:nth-child(4)"},
             payeeArea: {css: "div[tg-modular-edit-id='payeeByScopeName']"},
             oldPayeeArea: {css: "div[data-tg-modular-edit-id='payees']"},
             editPayeeIcon: {css: "div[tg-modular-edit-id='payeeByScopeName'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
@@ -31,6 +32,7 @@ if (pages.editDealPayee === undefined) {
             editCancelOldPayeeFormButton: {css: "div[data-tg-modular-edit-id='newPayee'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
             editLegalRightPayeeInputField: {css: "input[name='legalRight']"},
             editDistributionPayeeInputField: {css: "input[name='distribution']"},
+            editAddPayeeButtonPayeeForm: {css: "div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             editSavePayeeFooterButton: {css: "div.CONTROLS.ng-scope.page-footer button[data-ng-click='tgModularViewMethods.save();']"}
         },
 
@@ -38,6 +40,14 @@ if (pages.editDealPayee === undefined) {
             pages.base.scrollIntoView(pages.editDealPayee.elems.payeeHeaderTitleLink);
             pages.editDealPayee.elems.payeeHeaderTitleLink.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css(".deal-payee.deal-payee-tab"))));
+        },
+
+        editClickOnTheByPayeeHeaderLink: function () {
+            pages.base.scrollIntoView(pages.editDealPayee.elems.byPayeeHeaderLink);
+            pages.editDealPayee.elems.byPayeeHeaderLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField))
+            )
+            ;
         },
 
         editThePayeeArea: function () {
@@ -115,26 +125,26 @@ if (pages.editDealPayee === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 
-        editSelectTheSpecificPayeePersonFromDropDown: function(payee_name){
+        editSelectTheSpecificPayeePersonFromDropDown: function (payee_name) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-            .then(function findMatchingOption(options) {
-                options.forEach(function (option) {
-                    option.getText().then(function doesOptionMatch(text) {
-                            if (text.indexOf(payee_name) != -1) {
-                                desiredOption = option;
-                                return true;
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(payee_name) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
                             }
-                        }
-                    )
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
                 });
-            })
-            .then(function clickOption() {
-                if (desiredOption) {
-                    desiredOption.click();
-                }
-            });
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 
@@ -227,22 +237,22 @@ if (pages.editDealPayee === undefined) {
                 .then(function (options) {
                     options[0].click();
                 });
-                //.then(function findMatchingOption(options) {
-                //    options.forEach(function (option) {
-                //        option.getText().then(function doesOptionMatch(text) {
-                //                if (text.indexOf(specific_value) != -1) {
-                //                    desiredOption = option;
-                //                    return true;
-                //                }
-                //            }
-                //        )
-                //    });
-                //})
-                //.then(function clickOption() {
-                //    if (desiredOption) {
-                //        desiredOption.click();
-                //    }
-                //});
+            //.then(function findMatchingOption(options) {
+            //    options.forEach(function (option) {
+            //        option.getText().then(function doesOptionMatch(text) {
+            //                if (text.indexOf(specific_value) != -1) {
+            //                    desiredOption = option;
+            //                    return true;
+            //                }
+            //            }
+            //        )
+            //    });
+            //})
+            //.then(function clickOption() {
+            //    if (desiredOption) {
+            //        desiredOption.click();
+            //    }
+            //});
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 
@@ -261,6 +271,13 @@ if (pages.editDealPayee === undefined) {
             pages.base.scrollIntoView(pages.editDealPayee.elems.editSavePayeeFormButton);
             pages.editDealPayee.elems.editSavePayeeFormButton.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealPayee.elems.editCancelPayeeFormButton));
+        },
+
+
+        editAddPayeeToPayeeForm: function () {
+            pages.base.scrollIntoView(pages.editDealPayee.elems.editAddPayeeButtonPayeeFor);
+            pages.editDealPayee.elems.editAddPayeeButtonPayeeFor.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealPayee.elems.editAddNewPayeeInputField));
         },
 
         editSaveThePayeePage: function () {
