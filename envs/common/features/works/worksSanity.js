@@ -1630,6 +1630,7 @@ exports.feature = [
             using(steps.organisation, function () {
                 this.goToGeneralTab();
                 this.registration.resetDeliveryInfo(data.cr);
+                this.saveOrganisationDeliveryMethods();
             });
 
             steps.organisation.goToPreviewRegistrationRunTab();
@@ -1674,6 +1675,7 @@ exports.feature = [
                     this.find({ firstWithStatus: 'Delivered' });
 
                     this.toggleBlind();
+                    this.validateDeliveries();
 
                     this.storeFileNameInTestVariable('registration run file name');
                 });
