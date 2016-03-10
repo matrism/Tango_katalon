@@ -4,3 +4,4 @@
 /reports/screens/*
 /reports/xml/*
 /vendor/
+/custom-deps/**/node_modules
