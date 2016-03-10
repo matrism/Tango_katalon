@@ -33,52 +33,52 @@ exports.feature = [
             steps.createDealContractPeriod.fillContractPeriodDescription("Description 3");
             steps.createDealContractPeriod.fillEndTargetMonths();
 
+            describe('Add End Rules to all CPs', function () {
+                _.times(3, function (num) {
+                    var endRules = [
+                        {
+                            endRule: 'Repayment Date',
+                            ruleParams: ['Balance Repaid', 10, false, '=', 'MDRC Complete']
+                        },
+                        {
+                            endRule: 'MDRC Complete Date', 
+                            ruleParams: ['MDRC Complete', 20, undefined, '<', 'Pre-Defined Date', '2016-03-03'],
+                        },
+                        {
+                            endRule: 'Pre-Defined Date', 
+                            endRuleParam: '2016-03-03',
+                            ruleParams: ['Current date', undefined, undefined, '=', 'Pre-Defined Date', '2016-03-03'],
+                        },
+                        {
+                            endRule: 'Recouped Date', 
+                            ruleParams: ['Final Contract Period', undefined, undefined, '=', 'TRUE'],
+                        },
+                        {
+                            endRule: 'Target End Date',
+                            ruleParams: ['Recouped', 50, true, '< or =', 'MDRC Complete'],
+                        }
 
+                    ];
 
-            //add End Rules to all CPs
-            _.times(3, function (num) {
-                var endRules = [
-                    {
-                        endRule: 'Repayment Date',
-                        ruleParams: ['Balance Repaid', 10, false, '=', 'MDRC Complete']
-                    },
-                    {
-                        endRule: 'MDRC Complete Date', 
-                        ruleParams: ['MDRC Complete', 20, undefined, '<', 'Pre-Defined Date', '2016-03-03'],
-                    },
-                    {
-                        endRule: 'Pre-Defined Date', 
-                        endRuleParam: '2016-03-03',
-                        ruleParams: ['Current date', undefined, undefined, '=', 'Pre-Defined Date', '2016-03-03'],
-                    },
-                    {
-                        endRule: 'Recouped Date', 
-                        ruleParams: ['Final Contract Period', undefined, undefined, '=', 'TRUE'],
-                    },
-                    {
-                        endRule: 'Target End Date',
-                        ruleParams: ['Recouped', 50, true, '< or =', 'MDRC Complete'],
-                    }
+                    steps.createDealContractPeriod.selectContractPeriodNumberI(num + 1);
+                    steps.endRules.clickAddEndRulesLink();
+                    steps.endRules.setRule(endRules[0]);
 
-                ];
+                    _.times(4, function (ruleNum){
+                        var i = ruleNum+1;
 
-                steps.createDealContractPeriod.selectContractPeriodNumberI(num + 1);
-                steps.endRules.clickAddEndRulesLink();
-                steps.endRules.setRule(endRules[0]);
-
-                _.times(4, function (ruleNum){
-                    var i = ruleNum+1;
-
-                    steps.endRules.clickAddRuleLink();
-                    steps.endRules.setRule(endRules[i]);
+                        steps.endRules.clickAddRuleLink();
+                        steps.endRules.setRule(endRules[i]);
+                    });
+                    steps.endRules.saveRules();
                 });
-                steps.endRules.saveRules();
             });
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.deal.goToGeneralDealTabDetail();
 
         }
     }
