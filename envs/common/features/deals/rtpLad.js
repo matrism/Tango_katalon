@@ -19,7 +19,7 @@ exports.feature = [
             steps.deal.goToTermsDealTabDetails();
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
 
-            for (var acq = 0; acq <= 2; acq++) {
+            for (var acq = 0; acq <= 190; acq++) {
                 countPtc = 0;
                 //if (acq != 0) {
                 steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
