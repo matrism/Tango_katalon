@@ -20,21 +20,26 @@ function Typeahead (target) {
             results = $('body > .tg-typeahead__suggestions-wrap').all(resultsSelector);
         }*/
 
-        /*if (text) {
+        if (text) {
             results = results.filter(function(elem, index){
                 return elem.getText().then(function(elemText){
-                    return elemText.indexOf(text) > -1;
+                    return elemText.toLowerCase().indexOf(text.toLowerCase()) > -1;
                 });
             });
-        }*/
 
-        if (text) {
+            if (isExact) {
+                results = results.filter(pph.matchTextExact(text));
+            }
+
+        }
+
+        /*if (text) {
             results = typeahead.all(by.cssContainingText(resultSelector, text));
 
             if (isExact) {
                 results = results.filter(pph.matchTextExact(text));
             }
-        }
+        }*/
 
         browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
         return results;

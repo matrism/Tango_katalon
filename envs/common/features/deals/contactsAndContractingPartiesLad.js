@@ -41,27 +41,38 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
 
             describe('Add 10 external contacts', function () {
-                var roles = ['Attorney', 'Business Manager', 'Contact', 'Producer', 'Approvals', 'Legal Notices', 'Manager', 'Legal notices CC', 'Attorney', 'Business Manager'];
+                var roles = ['Attorney', 'Business Manager', 'Contact', 'Producer', 'Approvals', 'Legal Notices', 'Manager', 'Legal notices CC', 'Attorney', 'Business Manager'],
+                    names = ['Bob', 'Sharon', 'John', 'Sarah', 'William', 'Diane', 'Richard', 'Philip', 'Steve', 'Claire'];
 
                 steps.deal.clickAddExternalContactLink();
-                _.each(roles, function (role) {
-                    steps.deal.addExternalContact(role, 'Test');
+                _.each(roles, function (role, i) {
+                    steps.deal.addExternalContact(role, names[i]);
                 });
                 steps.deal.saveExternalContacts();
             });
 
             describe('Add 2 internal contacts', function () {
-                var roles = ['Attorney', 'Product Manager'];
+                var roles = ['Attorney', 'Product Manager'],
+                    names = ['Mackintosh, Alex', 'John'];
 
                 steps.deal.clickAddInternalContactLink();
-                _.each(roles, function (role) {
-                    steps.deal.addInternalContact(role, 'Test');
+                _.each(roles, function (role, i) {
+                    steps.deal.addInternalContact(role, names[i]);
                 });
                 steps.deal.saveInternalContacts();
             });
 
             describe('Add 5 contracting parties', function () {
-                steps.deal.addContractingParties('Test', 'JOHN ADAMS', 'Katy', 'ASCAP', 'MAX MARTIN');
+                steps.deal.expectNumberOfContractingPartiesToBe(1);
+                steps.deal.addContractingParties('SACEM', 'JOHN ADAMS', 'Katy', 'ASCAP', 'MAX MARTIN');
+            });
+
+
+            describe('Refresh page and expect added data to be present', function () {
+                steps.deal.refreshThePage();
+                steps.deal.expectNumberOfContractingPartiesToBe(6);
+                steps.deal.expectNumberOfExternalContactsToBe(10);
+                steps.deal.expectNumberOfInternalContactsToBe(2);
             });
 
         }

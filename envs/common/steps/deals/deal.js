@@ -254,5 +254,8 @@ addBasicStep(exports, pages.deal, 'Add Internal Contact');
 addBasicStep(exports, pages.deal, 'Save Internal Contacts');
 addBasicStep(exports, pages.deal, 'Save External Contacts');
 addBasicStep(exports, pages.deal, 'Add Contracting Parties');
+addBasicStep(exports, pages.deal, 'Expect number of Contracting Parties to be');
+addBasicStep(exports, pages.deal, 'Expect number of External Contacts to be');
+addBasicStep(exports, pages.deal, 'Expect number of Internal Contacts to be');
 
 

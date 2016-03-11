@@ -304,10 +304,10 @@ if (pages.deal === undefined) {
         exports.internalContacts().count().then(function(num){
             var contact = contacts.get(num-1);
 
-            nameEl = typeahead(contact.element(by.model('internalContact.model')), true);
-            roleEl = typeahead(contact.element(by.model('internalContact.roles')), true);
+            nameEl = typeahead(contact.element(by.model('internalContact.model')));
+            roleEl = typeahead(contact.element(by.model('internalContact.roles')));
 
-            nameEl.select(name, true);
+            nameEl.select(name);
             roleEl.select(role, true);
         });
     };
@@ -342,6 +342,25 @@ if (pages.deal === undefined) {
         });
 
         editor.save();
+    };
+
+    exports.expectNumberOfContractingPartiesToBe = function (num) {
+        var editor = exports.generalLeftEditor(),
+            parties = editor.all(by.repeater('party in modularEditModels.contractingParties'));
+
+        expect(parties.count()).toEqual(num);
+    };
+
+    exports.expectNumberOfExternalContactsToBe = function (num) {
+        var contacts = exports.externalContacts();
+
+        expect(contacts.count()).toEqual(num);
+    };
+
+    exports.expectNumberOfInternalContactsToBe = function (num) {
+        var contacts = exports.internalContacts();
+
+        expect(contacts.count()).toEqual(num);
     };
 
 
