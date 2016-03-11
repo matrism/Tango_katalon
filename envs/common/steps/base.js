@@ -212,14 +212,19 @@ exports.closeTheTabByIndex = function(index){
    });
 };
 
+pageStep([
+    'Open new tab',
+    'Duplicate tab',
+    'Switch to tab',
+    'Close tab by index',
+    'Wait for modal',
+    'Validate modal heading',
+    'Validate modal message body',
+    'Close modal',
+    'Scroll to',
+    'Validate tooltip message',
+    'Expect modal pop up to be displayed',
+    'Wait until modal animation finishes',
+    'Click modal primary button'
+]);
 
-pageStep('Open new tab');
-pageStep('Duplicate tab');
-pageStep('Switch to tab');
-pageStep('Close tab by index');
-pageStep('Wait for modal');
-pageStep('Validate modal heading');
-pageStep('Validate modal message body');
-pageStep('Close modal');
-pageStep('Scroll to');
-pageStep('Validate tooltip message');
