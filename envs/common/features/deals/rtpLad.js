@@ -8,23 +8,20 @@ exports.commonFeatureTags = ['deals', 'dealLad', 'regression'];
 
 exports.feature = [
     {
-        name: 'Create a basic deal for LAD with RTP',
+        name: 'Create a basic deal for LAD with RTP sets',
         tags: ['rtpLad'],
         steps: function () {
+            var countPtc = 0;
 
-            var timeout = 100000,
-                countPtc = 0;
-            steps.searchSection.accessSavedDealByNumber('267945');
+            steps.searchSection.accessSavedDealByNumber('268203');
 
             steps.deal.goToTermsDealTabDetails();
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
 
-            for (var acq = 0; acq <= 190; acq++) {
+            for (var acq = 0; acq <= 4; acq++) {
                 countPtc = 0;
-                //if (acq != 0) {
                 steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
                 steps.editDealRtp.selectScopeNumberIFromInput(0, 0, 'acq');
-                //}
 
                 for (var ret = 0; ret <= 1; ret++) {
                     steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
@@ -41,7 +38,6 @@ exports.feature = [
                 }
 
                 steps.editDealRtp.editSaveAnotherAcquisitionForm();
-                //steps.editDealRtp.saveRetentionFromAcquisition();
             }
         }
     }
