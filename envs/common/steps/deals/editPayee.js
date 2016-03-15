@@ -143,6 +143,13 @@ exports.editSavePayeeForm = function () {
     });
 };
 
+exports.editSaveOldPayeeForm = function () {
+    it("Edit save the old payee form ", function () {
+        pages.editDealPayee.editSaveTheOldPayeeForm();
+        pages.editDealPayee.waitForAjax();
+    });
+};
+
 exports.editSavePayeePage = function () {
     it("Edit save the payee page ", function () {
         pages.editDealPayee.editSaveThePayeePage();

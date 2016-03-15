@@ -439,11 +439,9 @@ exports.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI = function (i) {
     });
 };
 
-exports.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait = function (i, timeout) {
+exports.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait = function (i) {
     it("Click on the copy scope button number of copies scope number " + i, function () {
-        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait(i, timeout);
-        //pages.editDealScope.waitForAjax();
-        //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))), timeout);
+        pages.editDealScope.editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait(i);
     });
 };
 

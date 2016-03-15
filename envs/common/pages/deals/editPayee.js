@@ -279,6 +279,12 @@ if (pages.editDealPayee === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeInputField));
         },
 
+        editSaveTheOldPayeeForm: function () {
+            pages.base.scrollIntoView(pages.editDealPayee.elems.editSaveOldPayeeFormButton);
+            pages.editDealPayee.elems.editSaveOldPayeeFormButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddOldPayeeInputField));
+        },
+
         editSaveThePayeePage: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.editSavePayeeFooterButton);
             pages.editDealPayee.elems.editSavePayeeFooterButton.click();
