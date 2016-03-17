@@ -120,6 +120,12 @@ exports.goToPayeesDealTabDetails = function () {
     });
 };
 
+exports.goToOldPayeesDealTabDetails = function () {
+    it("Click on payees header and go to payees deal tab details ", function () {
+        pages.deal.goToPayeesDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.oldPayeeArea));
+    });
+};
 
 exports.goToTermsDealTabDetailsDirtyCheck = function () {
     it("Click on terms header and go to terms deal tab details ", function () {
