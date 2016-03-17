@@ -94,6 +94,7 @@ if (pages.deal === undefined) {
         },
 
         goToPayeesDealDetails: function () {
+            pages.base.scrollIntoView(pages.deal.elems.payeesHeader);
             pages.deal.elems.payeesHeader.click();
         },
 
