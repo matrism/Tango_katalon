@@ -16,6 +16,13 @@ exports.addNewRoyaltySet = function () {
     });
 };
 
+exports.editExistingRoyaltyRate = function () {
+    it("Edit the existing royalty rate ", function () {
+        pages.editRoyaltyRates.editTheExistingRoyaltyRate();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
 exports.inspectRateSetForm = function () {
     it("Inspect Rate Set Form", function () {
         expect(pages.royaltyRates.elems.RRNameLabel.isPresent()).toBeTruthy();
@@ -187,8 +194,23 @@ exports.saveRateSet = function () {
     });
 };
 
+exports.cancelTheRateSet = function () {
+    it("Cancel current Rate Set", function () {
+        pages.editRoyaltyRates.clickCancelButtonForRRSet();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
+exports.deleteTheRateSet = function () {
+    it("Delete current Rate Set", function () {
+        pages.editRoyaltyRates.clickDeleteButtonForRRSet();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
 exports.closeRateSet = function () {
     it("Close current Rate Set ", function () {
+
     });
 };
 

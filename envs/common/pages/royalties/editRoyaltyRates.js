@@ -7,6 +7,8 @@ if (pages.editRoyaltyRates === undefined) {
     pages.editRoyaltyRates = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
+            editRrArea: {css: "div.rate-set-summary-table"},
+            editRrIcon: {css: "button[data-ng-click='CR.onAddContractualRateSet(activeScope, false)']"},
             newRoyaltyRate: {css: ".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"},
             newRoyaltyRateSetButton: {css: ".ng-scope.ng-warn.ng-dirty>div>a"},
             closeRateSetButton: {css: ".rate-set-footer>.btn-cancel"},
@@ -19,6 +21,36 @@ if (pages.editRoyaltyRates === undefined) {
             contractualRateLabel: {css: ".rate-set-rate-field>label"},
             interCompanyLabel: {css: ".rate-set-header-row:nth-child(3)>div:not([class])>label"},
             scopeHeadingElement: {css: ".scope-heading"}
+        },
+
+        editTheExistingRoyaltyRate: function () {
+            browser.actions().mouseMove(pages.editRoyaltyRates.elems.editRrArea).perform();
+            pages.editRoyaltyRates.elems.editRrIcon.click();
+        },
+
+        clickCancelButtonForRRSet: function () {
+            var RRCancelButton;
+            RRCancelButton = element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"));
+
+            pages.base.scrollIntoView(RRCancelButton);
+            RRCancelButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+            var elem = element(by.css("div.modal-footer button[data-ng-click='ok()']"));
+            pages.base.scrollIntoView(elem);
+            elem.click();
+        },
+
+        clickDeleteButtonForRRSet: function () {
+            var RRDeleteButton;
+            RRDeleteButton = element(by.css("button[data-ng-click='CR.onRatesSetDelete(set, activeScope)']"));
+
+            pages.base.scrollIntoView(RRDeleteButton);
+            RRDeleteButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
+            var elem = element(by.css("div.modal-footer button[data-ng-click='data.delete()']"));
+            pages.base.scrollIntoView(elem);
+            elem.click();
+            browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
         },
 
         openRRButton: function () {
@@ -81,7 +113,7 @@ if (pages.editRoyaltyRates === undefined) {
 
             cancelBtn.click();
 
-            if(options.confirm || options.confirm === undefined) {
+            if (options.confirm || options.confirm === undefined) {
                 ftf.helper.waitForElement(confirmBtn, 30000);
                 confirmBtn.click();
             }
@@ -109,7 +141,7 @@ if (pages.editRoyaltyRates === undefined) {
             ));
         },
 
-        incomeProviderSearchResultElements: function() {
+        incomeProviderSearchResultElements: function () {
             this.waitForIncomeProviderSearchResults();
             return $$('.tg-typeahead__suggestions-group-item');
         },
@@ -168,7 +200,7 @@ if (pages.editRoyaltyRates === undefined) {
             return element.getAttribute('value');
         },
 
-        validateRRInput: function() {
+        validateRRInput: function () {
             var input = this.royaltyRateInput();
 
             pages.base.scrollIntoView(input);
@@ -322,6 +354,7 @@ if (pages.editRoyaltyRates === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(this.openRRButton()));
 
             this.openRRButton().click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"))));
         },
 
         clickEditSavedRRIcon: function () {
