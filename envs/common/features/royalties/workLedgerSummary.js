@@ -105,7 +105,7 @@ exports.feature = [
                 }
             };
 
-            xdescribe('Create new data', () => {
+            describe('Create new data', () => {
                 steps.newOrganisation.createOrganistation(orgData);
                 steps.base.sleep(1000);
                 steps.deal.createDeal(dealData);
@@ -122,34 +122,7 @@ exports.feature = [
             });
 
             describe('Load an EDI file', () => {
-
                 steps.uploadEdiFile.uploadFile(fileData);
-
-                /*goToUploadPage();
-                using(steps.uploadEdiFile, function(){
-
-                    fillFormWithFileData(fileData, fileDefaults);
-                    this.expectToBeRedirectedToFileUploadHistory();
-                    this.expectUploadedFileToBeListed();
-                    this.openUploadedFileBlind();
-
-                    this.expectUploadedFileToHaveCorrectExpectedAmount(fileData.amount);
-                    waitForFileToBeProcessed();
-                    if (!noUpload) { this.openUploadedFileBlind(); }
-
-                    this.openFirstGeneratedStatement();
-
-                    steps.base.switchToTab(1);
-                    this.expectToBeRedirectedToRoyaltyStatements();
-                    steps.royaltyStatements.viewDetailsForIncomeLines();
-                    steps.royaltyStatements.incomeWorks.storeSourceWorkIdInTestVariable('matchedWork');
-                    steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'));
-                    steps.royaltyStatements.incomeWorks.goToTab('Matched');
-                    steps.royaltyStatements.incomeWorks.storeWorkAmountByIdInTestVariable(fromTestVariable('matchedWork'), 'ledgerWorkAmount');
-                    //steps.base.closeTabByIndex(1);
-
-                    //this.rollBackUploadedFile();
-                });*/
 
                 describe('Validate statement Works', () => {
                     hash.testVariables['lastCreatedWorkId'] = 'WW 015035223 00';

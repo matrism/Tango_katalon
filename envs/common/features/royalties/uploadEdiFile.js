@@ -13,6 +13,84 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
+fileDefaults = {
+    currency: 'GBP',
+    exchangeRate: '1',
+    distributionPeriod: {
+        start: {
+            year: '2014',
+            month: '02'
+        },
+        end: {
+            year: '2014',
+            month: '02'
+        }
+    }
+};
+
+function goToUploadPage() {
+    steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
+
+    if (!noUpload){
+        steps.royaltiesHeader.clickLink('Upload Electronic File');
+    }
+}
+
+function fillFormWithFileData(file, fileDefaults, clickCreate, useOriginalName) {
+    if (fileDefaults) {
+        file = _.defaultsDeep(file, fileDefaults);
+    }
+
+    file.fileName = path.resolve(__dirname, file.fileName);
+
+    using(steps.uploadEdiFile, function() {
+        file.expectedAmount = file.expectedAmount || file.amount;
+
+        if (noUpload) {
+            file.name = file.mockedFileName;
+            this.assumeUploadedFile(file.name);
+            this.selectProcessingTerritory(file.processingTerritory);
+
+            return;
+        }
+
+        if (file.customFormat === false) {
+            this.selectWcmCommonFormat();
+        }
+
+        if (file.multipleProviders) {
+            this.checkMultipleIncomeProvidersBox();
+        } else {
+            this.selectIncomeProvider(file.incomeProvider);
+            this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
+            this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
+        }
+
+        this.selectProcessingTerritory(file.processingTerritory);
+        //this.selectProcessingTerritory(file.royaltyPeriod);
+        this.selectFileFormat(file.fileFormat);
+        this.selectFile(file.fileName, useOriginalName);
+
+        this.setExpectedFileAmount(file.expectedAmount);
+        this.setExpectedFileAmountCurrency(file.currency);
+        this.setExchangeRate(file.exchangeRate);
+
+        if (clickCreate !== false) { 
+            this.clickCreateButton();
+        }
+    });
+}
+
+function waitForFileStatusToBe() {
+    steps.uploadEdiFile.waitForFileStatusToBe.apply(null, arguments);
+}
+
+function waitForFileToBeProcessed() {
+    if (noUpload) { return; }
+
+    steps.uploadEdiFile.waitForFileToBeProcessed();
+}
+
 exports.feature = [
     {
         name: 'Upload EDI file - Smoke Test',
