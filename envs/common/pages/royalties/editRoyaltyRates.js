@@ -28,6 +28,13 @@ if (pages.editRoyaltyRates === undefined) {
             pages.editRoyaltyRates.elems.editRrIcon.click();
         },
 
+        clickCancelToTheModalDialog: function () {
+            var cancelModal = element(By.css("div.modal-footer button[data-ng-click='cancel()']"));
+            browser.wait(ExpectedConditions.visibilityOf(cancelModal));
+            pages.base.scrollIntoView(cancelModal);
+            cancelModal.click();
+        },
+
         clickCancelButtonForRRSet: function () {
             var RRCancelButton;
             RRCancelButton = element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"));
@@ -40,6 +47,15 @@ if (pages.editRoyaltyRates === undefined) {
             elem.click();
         },
 
+        clickCancelButtonForRRSetWithoutConfirm: function () {
+            var RRCancelButton;
+            RRCancelButton = element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"));
+
+            pages.base.scrollIntoView(RRCancelButton);
+            RRCancelButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+        },
+
         clickDeleteButtonForRRSet: function () {
             var RRDeleteButton;
             RRDeleteButton = element(by.css("button[data-ng-click='CR.onRatesSetDelete(set, activeScope)']"));
@@ -50,7 +66,17 @@ if (pages.editRoyaltyRates === undefined) {
             var elem = element(by.css("div.modal-footer button[data-ng-click='data.delete()']"));
             pages.base.scrollIntoView(elem);
             elem.click();
-            browser.wait(ExpectedConditions.visibilityOf(this.newRoyaltyRateSetButton()));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("a[data-ng-click='CR.onAddContractualRateSet(activeScope, true)']"))));
+        },
+
+
+        clickDeleteButtonForRRSetWithoutConfirm: function () {
+            var RRDeleteButton;
+            RRDeleteButton = element(by.css("button[data-ng-click='CR.onRatesSetDelete(set, activeScope)']"));
+
+            pages.base.scrollIntoView(RRDeleteButton);
+            RRDeleteButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
         },
 
         openRRButton: function () {

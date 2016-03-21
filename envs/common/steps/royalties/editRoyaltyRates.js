@@ -157,6 +157,13 @@ exports.setEffectiveStartDate = function (date) {
     });
 };
 
+exports.cancelToTheModalDialog = function () {
+    it("Cancel the modal dialog ", function () {
+        pages.editRoyaltyRates.clickCancelToTheModalDialog();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
 exports.openEffectiveStartDateCalender = function () {
     it("Open Effective start date calender", function () {
         pages.royaltyRates.clickEffectiveStartDateCalendarIcon();
@@ -201,9 +208,23 @@ exports.cancelTheRateSet = function () {
     });
 };
 
+exports.clickOnCancelButtonRateSet = function () {
+    it("Click on cancel button without confirm current Rate Set", function () {
+        pages.editRoyaltyRates.clickCancelButtonForRRSetWithoutConfirm();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
 exports.deleteTheRateSet = function () {
     it("Delete current Rate Set", function () {
         pages.editRoyaltyRates.clickDeleteButtonForRRSet();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
+exports.clickOnDeleteButtonToRateSet = function () {
+    it("Delete current Rate Set", function () {
+        pages.editRoyaltyRates.clickDeleteButtonForRRSetWithoutConfirm();
         pages.editRoyaltyRates.waitForAjax();
     });
 };

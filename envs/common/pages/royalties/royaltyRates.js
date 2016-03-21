@@ -330,14 +330,14 @@ if (pages.royaltyRates === undefined) {
             $$(".icon-chevron-down")
                 .then(function (result) {
 
-                    for (i = 0; i < result.length; i++) {
-                        pages.base.scrollIntoView(result[i]);
-                        browser.wait(ExpectedConditions.visibilityOf(result[i]));
-                        browser.wait(ExpectedConditions.elementToBeClickable(result[i]));
-                        result[i].click();
+                        for (i = 0; i < result.length; i++) {
+                            pages.base.scrollIntoView(result[i]);
+                            browser.wait(ExpectedConditions.visibilityOf(result[i]));
+                            browser.wait(ExpectedConditions.elementToBeClickable(result[i]));
+                            result[i].click();
+                        }
                     }
-                }
-            )
+                )
         },
 
         closeAllButLastIncomeGroups: function () {
@@ -347,11 +347,11 @@ if (pages.royaltyRates === undefined) {
             $$(".rate-set-row.rate-set-header>a>.icon-chevron-up")
                 .then(function (result) {
 
-                    for (i = 0; i < result.length - 1; i++) {
-                        asAlways(result[i], 'scrollIntoView', 'click');
+                        for (i = 0; i < result.length - 1; i++) {
+                            asAlways(result[i], 'scrollIntoView', 'click');
+                        }
                     }
-                }
-            )
+                )
         },
 
         typeInAllInputs: function (value) {
@@ -362,11 +362,11 @@ if (pages.royaltyRates === undefined) {
                 "       els[i].value = '1.23'; }");
             browser.driver.findElements(by.css(".rate-set-income-type-rates>div.ng-pristine>div.rate-set-rate-field>div>input"))
                 .then(function (result) {
-                    for (i = 0; i < result.length; i++) {
-                        result[i].sendKeys("45");
+                        for (i = 0; i < result.length; i++) {
+                            result[i].sendKeys("45");
+                        }
                     }
-                }
-            )
+                )
         },
         typeAllInputs: function (value) {
             var i = 0;
