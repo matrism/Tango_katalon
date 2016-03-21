@@ -163,3 +163,56 @@ exports.filters = (function(){
 
     return filters;
 })();
+
+exports.viewIncomeLinesLink = function () {
+    return $('.view-income-lines-link');
+};
+
+exports.viewDetailsForIncomeLines = function () {
+    var link = exports.viewIncomeLinesLink();
+
+    link.click();
+    pages.base.waitForAjax();
+};
+
+exports.incomeWorks = (function(){
+    var incomeWorks = {};
+
+    incomeWorks.workSearchTypeahead = function () {
+        return typeahead(by.model('incomeWork.selectedTangoWork'), false, true);
+    };
+
+    incomeWorks.searchForWork = function (val) {
+        var typeahead = incomeWorks.workSearchTypeahead();
+
+        typeahead.selectFirst(val);
+    };
+
+    incomeWorks.matchButton = function () {
+        return element(by.cssContainingText('.selected-work .btn-primary', 'Match'));
+    };
+
+    incomeWorks.matchWork = function (val) {
+        var matchButton = incomeWorks.matchButton();
+        incomeWorks.searchForWork(val);
+
+        matchButton.click();
+        pages.base.waitForAjax();
+    };
+
+    incomeWorks.tabs = function () {
+        return $$('.edi-matched .nav-tabs > li > a');
+    };
+
+    incomeWorks.goToTab = function (name) {
+        var tabs = incomeWorks.tabs();
+
+        tabs.filter(function(tab){
+            return tab.$('span > span:not(.muted)').getText().then(function(text){
+                return text.split(' (')[0] === name;
+            });
+        }).first().click();
+    };
+
+    return incomeWorks;
+})();

@@ -30,7 +30,7 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1360,
+                width: 1400,
                 height: 1024
             },
             //protractor Zapi related

@@ -49,6 +49,11 @@ function Typeahead (target, dummy, isAppendedToBody) {
         typeahead.results(text, isExact).first().click();
     };
 
+    typeahead.selectFirst = function(text) {
+        typeahead.sendKeys(text);
+        typeahead.results().first().click();
+    };
+
     return typeahead;
 }
 

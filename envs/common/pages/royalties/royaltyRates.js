@@ -693,8 +693,11 @@ if (pages.royaltyRates === undefined) {
 
             val = val.trim();
 
-            if (val) {
+            if (val || val === '') {
                 el.clear();
+            }
+
+            if (val && val !== '') {
                 el.sendKeys(val);
                 browser.driver.sleep(2000);
             }

@@ -228,3 +228,14 @@ pageStep([
     'Click modal primary button'
 ]);
 
+addStep(exports, 'Store binding in test variable', function (binding, varName) {
+
+    var idBinding = element(by.binding(binding));
+
+    browser.wait(EC.visibilityOf(idBinding));
+
+    idBinding.getText().then(function (value) {
+        hash.testVariables[varName] = value;
+    });
+
+});

@@ -82,7 +82,7 @@ exports.selectTerritoryOfControlSearchResultByIndex = function (i) {
 };
 
 exports.addSpecificScopeTypeAndTerritory = function (contractType, territory) {
-    it("Add simple scope", function () {
+    it('Add simple scope (' + contractType + ',' + territory + ')', function () {
         pages.createDealScope.addScopeForm();
         pages.createDealScope.selectContractTypeScope(contractType);
         pages.createDealScope.waitForAjax();

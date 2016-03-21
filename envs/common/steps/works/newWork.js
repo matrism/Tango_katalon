@@ -313,6 +313,7 @@ exports.selectRandomCreator = function(i) {
 addBasicStep(exports, pages.newWork, 'Enter creator search terms');
 
 addBasicStep(exports, pages.newWork, 'Select creator search result by index');
+addBasicStep(exports, pages.newWork, 'Continue if prompted');
 
 exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
     var person;

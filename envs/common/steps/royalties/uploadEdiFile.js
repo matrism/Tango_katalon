@@ -7,6 +7,7 @@ steps.uploadEdiFile = exports;
 pageStep([
     'Select Processing Territory',
     'Select first royalty period',
+    'Select royalty period',
     'Select Wcm Common Format',
     'Check multiple income providers box',
     'Select income provider',
