@@ -106,6 +106,18 @@ if (pages.createDealContractPeriod === undefined) {
             cancelAssumptionsButton: {css: "div.footer-buttons a[data-ng-click='cancelAssumptionChanges(form.terms.activeCp.id, assumption.id);']"}
         },
 
+        deleteEndRuleButton: function (i) {
+            return $$('[data-ng-click="showDeleteEndRuleModal(form.show.endRules.containerId, form.show.endRules.type, rule.id)"]').get(i - 1);
+        },
+
+        confirmDeleteEndRuleButton: function () {
+            return $('.modal-footer [data-ng-click="ok()"]');
+        },
+
+        ruleDateLabel: function (i) {
+            return $('div[data-ng-form="ruleForm"]:nth-child(' + i + ') .rule-label');
+        },
+
         clickOnAddContractPeriod: function () {
             pages.createDealContractPeriod.elems.addContractPeriodElem.click();
             pages.createDealContractPeriod.waitForAjax();
@@ -946,9 +958,29 @@ if (pages.createDealContractPeriod === undefined) {
             pages.createDealContractPeriod.elems.cancelButtonEndRules.click();
         },
 
+        clickOnDeleteEndRule: function (i) {
+            var el = pages.createDealContractPeriod.deleteEndRuleButton(i);
+            pages.base.scrollIntoView(el);
+            el.click();
+        },
+
+        clickOnConfirmDeleteEndRule: function () {
+            var el = pages.createDealContractPeriod.confirmDeleteEndRuleButton();
+            browser.wait(ExpectedConditions.visibilityOf(el));
+            el.click();
+            pages.createDealContractPeriod.waitForAjax();
+        },
+
         clickOnTheConfirmCancellationEndRulesModalButton: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
             pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog.click();
+        },
+
+        reorderEndRule: function (from, to) {
+            browser.actions().dragAndDrop(
+                pages.createDealContractPeriod.ruleDateLabel(from),
+                pages.createDealContractPeriod.ruleDateLabel(to)
+            ).perform();
         },
 
         clickOnTheContinueEditingEndRulesModalButton: function () {

@@ -24,6 +24,15 @@ if (pages.createDealRtp === undefined) {
             addAnotherRtpSetLink: {css: "a[data-ng-click='addRightsTermPeriodSet()']"}
         },
 
+        addEndRulesButton: function () {
+            return element.all(by.css('a[data-ng-click="showEndRules(rtp.id, \'rtp\')"]')).filter(function (el) {
+                    return el.isDisplayed();
+                }).first();
+        },
+
+        summaryEndRule: function (i) {
+            return $$('[data-ng-repeat="endRule in rtp.end_rules"] .rule-summary').get(i - 1);
+        },
 
         selectTheRtpAllContractPeriods: function () {
             pages.createDealRtp.elems.contractPeriodsRtpField.click();
@@ -246,6 +255,18 @@ if (pages.createDealRtp === undefined) {
                 });
             browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 5) + ") div[data-name='postTermRtpForm'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']")).click();
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 5) + ") div[data-name='postTermRtpForm'] ul.tg-typeahead__suggestions ng-scope"))));
+        },
+
+        clickOnAddEndRules: function () {
+            asAlways(pages.createDealRtp.addEndRulesButton(), 'scrollIntoView', 'click');
+        },
+
+        hoverEndRulesButton: function () {
+            asAlways(pages.createDealRtp.addEndRulesButton(), 'scrollIntoView', 'hover');
+        },
+
+        getSummaryEndRuleText: function (i) {
+            return pages.createDealRtp.summaryEndRule(i).getText();
         },
 
         fillIntoTheDurationPostTermPeriodNumberIFromAcquisition: function (i) {
