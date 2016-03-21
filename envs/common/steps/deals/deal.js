@@ -365,7 +365,6 @@ exports.createDeal = data => {
                 } else if (data.rtp_contract_periods) {
                     //TBI
                 }
-
                 steps.createDealRtp.selectSpecificScopeNumberIRtpAcquisition(1);
                 steps.createDealRtp.fillIntoAcquisitionStartDateField('2013-09-18');
                 steps.deal.goToNextPage();
@@ -398,4 +397,5 @@ addStep(exports, 'Store Deal ID in test variable', function (varName) {
     idBinding.getText().then(function (value) {
         hash.testVariables[varName] = value;
     });
+
 });
