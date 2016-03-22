@@ -9,6 +9,7 @@ exports.addEndRulesLink = function () {
 exports.clickAddEndRulesLink = function () {
     var button = exports.addEndRulesLink();
 
+    browser.wait(EC.visibilityOf(button));
     pages.base.scrollIntoView(button);
     button.click();
     browser.sleep(500);
@@ -28,7 +29,7 @@ exports.setRule = function (endRule, index) {
 
     if (index) {
         ruleSet = ruleSets.get(index);
-    };
+    }
 
     endDateElem = tgDropdown(ruleSet.element(by.model('rule.end_date_type')), true, true);
     endDateElem.selectValue(endDate);
@@ -80,7 +81,7 @@ exports.addRuleLink = function () {
 };
 
 exports.clickAddRuleLink = function () {
-    var link = exports.addRuleLink()
+    var link = exports.addRuleLink();
     pages.base.scrollIntoView(link);
     link.click();
     browser.sleep(500);

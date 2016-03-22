@@ -247,4 +247,15 @@ addBasicStep(exports, pages.deal, 'View PSS chain Society Agreement Numbers');
 pageStep([
     'Go to tab'
 ]);
+addBasicStep(exports, pages.deal, 'Click Add External Contact Link');
+addBasicStep(exports, pages.deal, 'Add External Contact');
+addBasicStep(exports, pages.deal, 'Click Add Internal Contact Link');
+addBasicStep(exports, pages.deal, 'Add Internal Contact');
+addBasicStep(exports, pages.deal, 'Save Internal Contacts');
+addBasicStep(exports, pages.deal, 'Save External Contacts');
+addBasicStep(exports, pages.deal, 'Add Contracting Parties');
+addBasicStep(exports, pages.deal, 'Expect number of Contracting Parties to be');
+addBasicStep(exports, pages.deal, 'Expect number of External Contacts to be');
+addBasicStep(exports, pages.deal, 'Expect number of Internal Contacts to be');
+
 
