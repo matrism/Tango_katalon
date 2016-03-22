@@ -32,7 +32,7 @@
     "karma-jasmine": "~0.1",
     "karma-junit-reporter": "~0.2",
     "karma-phantomjs-launcher": "~0.1",
-    "left-pad": "0.0.4",
+    "left-pad": "0.0.9",
     "lodash": "^2.4.1",
     "lpad": "~0.1.0",
     "mkdirp": "latest",
