@@ -421,11 +421,9 @@ if (pages.createDealContractPeriod === undefined) {
                     });
                 })
                 .then(function clickOption() {
-                    pages.base.isPresentAndDisplayed(desiredOption).then(function (displayed) {
-                        if (displayed) {
-                            desiredOption.click();
-                        }
-                    });
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
                 });
         },
 
@@ -585,7 +583,7 @@ if (pages.createDealContractPeriod === undefined) {
             var desiredOption;
             var el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.right_value"]');
             asAlways(el, 'scrollIntoView', 'click');
-            browser.driver.findElements(By.css('div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope:visible'))
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -599,11 +597,7 @@ if (pages.createDealContractPeriod === undefined) {
                 })
                 .then(function clickOption() {
                     if (desiredOption) {
-                        pages.base.isPresentAndDisplayed(desiredOption).then(function (displayed) {
-                            if (displayed) {
-                                desiredOption.click();
-                            }
-                        });
+                        desiredOption.click();
                     }
                 });
         },
