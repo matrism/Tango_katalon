@@ -227,7 +227,7 @@ if (pages.deal === undefined) {
             );
 
             return pages.base.waitForAjax();
-        }
+        },
         goToTab: function (name) {
             var tab = element(by.cssContainingText('ul.nav-tabs li', name));
 
