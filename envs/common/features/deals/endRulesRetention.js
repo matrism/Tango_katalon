@@ -24,7 +24,7 @@ exports.feature = [
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             d.itContinueToNextPage();
-            steps.endRulesRetention.itFillDealMandatoryFieldsContractPeriod();
+            er.itFillDealMandatoryFieldsContractPeriod();
             d.itContinueToNextPage();
             cdr.clickOnAddRetentionPeriodFromAcquisition();
             cdr.selectRandomDurationTypeRetentionFromAcquisitionNumberI(1, 'Conditional Duration');
