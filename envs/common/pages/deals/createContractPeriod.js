@@ -405,8 +405,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption;
-            var el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.left_value"]');
+            var desiredOption,
+                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.left_value"]');
             asAlways(el, 'scrollIntoView', 'click');
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
@@ -580,8 +580,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption;
-            var el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.right_value"]');
+            var desiredOption,
+                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.right_value"]');
             asAlways(el, 'scrollIntoView', 'click');
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
