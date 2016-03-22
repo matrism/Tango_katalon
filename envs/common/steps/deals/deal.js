@@ -1,7 +1,8 @@
 'use strict';
 
 var promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+    ExpectedConditions = protractor.ExpectedConditions,
+    pageStep = require('../../../../helpers/basicPageStep.js');
 
 steps.deal = exports;
 
@@ -243,4 +244,7 @@ addBasicStep(
 
 addBasicStep(exports, pages.deal, 'Add Society Agreement Numbers to PSS chain');
 addBasicStep(exports, pages.deal, 'View PSS chain Society Agreement Numbers');
+pageStep([
+    'Go to tab'
+]);
 

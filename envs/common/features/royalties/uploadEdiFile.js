@@ -45,7 +45,7 @@ function goToUploadPage() {
     steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
 
     if (!noUpload){
-        steps.base.clickElement('Upload Electronic File', $('[data-ui-sref="royalties.uploadEdiFile"]'));
+        steps.royaltiesHeader.clickLink('Upload Electronic File');
     }
 }
 

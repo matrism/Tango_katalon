@@ -839,6 +839,83 @@ if (pages.organisation === undefined) {
 
 module.exports = pages.organisation;
 
+exports.getValueByLabel = function(section, labelName, isExact) {
+    var parentElem = element(by.cssContainingText('.page-header', section)).element(by.xpath('..')),
+        elem;
+
+    if (isExact) {
+        elem = parentElem.$$('.control-label').filter(pph.matchTextExact(labelName)).first();
+    } else {
+        elem = parentElem.element(by.cssContainingText('.control-label', labelName));
+    }
+
+    return elem.element(by.xpath('..')).$('label + div').getText();
+};
+
+exports.expectValueToBe = function (section, labelName, value) {
+    expect(exports.getValueByLabel(section, labelName)).toEqual(value);
+};
+
+exports.expectValue = function (section, labelName, isExact) {
+    return expect(exports.getValueByLabel(section, labelName, isExact));
+};
+
+/*exports.expectModalPopUpToBeDisplayed = function () {}:
+exports.confirmModalDialog = function () {
+    browser.wait(ExpectedConditions.visibilityOf(this.modalFooter()));
+    return this.modalConfirmButton().click();
+};*/
+
+exports.expectInternalIpiNumberToBeUnique = function () {
+    exports.getValueByLabel('General', 'Internal IPI Number').then(function(text){
+        pages.mainHeader.search.selectEntityType('Organisation');
+        pages.mainHeader.search.enterTerms(text);
+
+        pages.base.waitForAjax();
+        browser.wait(protractor.ExpectedConditions.presenceOf($('#DSP-SEARCH .tg-typeahead__suggestions-group-item-inner')));
+
+        expect($$('#DSP-SEARCH .tg-typeahead__suggestions-group-item-inner').count()).toEqual(1);
+    });
+};
+
+exports.expectOrgResultsToContain = function (name) {
+    pages.base.waitForAjax();
+    browser.wait(protractor.ExpectedConditions.presenceOf($('#DSP-SEARCH .tg-typeahead__suggestions-group-item-inner')));
+
+    expect($$('#DSP-SEARCH .tg-typeahead__suggestions-group-item-inner').count()).toBeGreaterThan(0);
+};
+
+exports.editSection = function (section) {
+    exports.editSectionPart(section, 0);
+};
+
+exports.editSectionPart = function(section, part) {
+    var parentElem = element(by.cssContainingText('.page-header', section)).element(by.xpath('..')),
+        buttons = parentElem.$$('[data-ng-click="tgModularViewMethods.switchToEditView()"]');
+
+    buttons.get(part).click();
+};
+
+exports.saveSectionPart = function (section, part) {
+    var parentElem = element(by.cssContainingText('.page-header', section)).element(by.xpath('..')),
+        forms = parentElem.$$('.EDITOR');
+
+    forms.get(part).$('.CONTROLS .btn-primary').click();
+    pages.base.waitForAjax();
+};
+
+exports.cancelSectionPart = function (section, part) {
+    var parentElem = element(by.cssContainingText('.page-header', section)).element(by.xpath('..')),
+        forms = parentElem.$$('.EDITOR');
+
+    forms.get(part).$('.CONTROLS .btn-cancel').click();
+
+    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.expectModalPopUpToBeDisplayed();
+    pages.base.clickModalPrimaryButton();
+};
+
+
 exports.general = (function () {
     var general = {};
 
@@ -985,6 +1062,14 @@ exports.general = (function () {
     };
 
     return general;
+})();
+
+exports.contactInformation = (function () {
+    var contact = {};
+
+    contact.editAddress = function(){};
+
+    return contact;
 })();
 
 exports.registration = (function () {
@@ -1556,6 +1641,31 @@ exports.incomeProvider = (function () {
         var validationMessage = incomeProvider.sectionContainer().$$('.validation-message-text');
 
         expect(validationMessage.count()).toBeFalsy();
+    };
+
+    incomeProvider.expectNumberOfMappingsToBe = function (num) {
+        //var elem = $('.e2e-income-provider-mappings-has'),
+        var elem = $('.control-group.e2e-income-provider-mappings-details'),
+            message = 'This organisation has '+ num +' income type mapping';
+
+        expect(elem.getText()).toContain(message);
+    };
+
+    incomeProvider.viewIncomeTypeMappingDetails = function () {
+        var button = $('button.e2e-income-provider-mappings-details');
+
+        pages.base.scrollIntoView(button);
+        expect($('.e2e-income-provider-mappings').isPresent()).toBeFalsy();
+        button.click();
+
+        expect($('.e2e-income-provider-mappings').isPresent()).toBeTruthy();
+        expect($('.e2e-income-provider-mappings').isDisplayed()).toBeTruthy();
+    };
+
+    incomeProvider.expectMappingToBe = function (i, mapping) {
+        var row = $$('tr.e2e-income-provider-mapping').get(i);
+
+        expect(row.$$('td').getText()).toEqual(mapping);
     };
 
     return incomeProvider;

@@ -310,7 +310,11 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheContractPeriodNumberI: function (i) {
-            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
+            var elem = $$('.deal-list .contract-period-menu-item').get(i-1);
+
+            pages.base.scrollIntoView(elem);
+            elem.click();
+            //browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         },
 
         clickOnTheAddEndRulesToContractPeriod: function () {
