@@ -72,6 +72,7 @@ if (pages.createDealContractPeriod === undefined) {
             preDefinedDateInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[name='endDateTypeDate'] input"},
             preDefinedDateMandatoryErrorMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[data-validation-class='endDateTypeDate'] i"},
             preDefinedDateAttributeRightMandatoryErrorMessageEndRules: {css: "div.span2.attribute-two div i"},
+            //addEndRulesLink: {css: '[data-ng-click="addEndRule(form.show.endRules.containerId, form.show.endRules.type, rulesForm.$valid)"]'},
             addEndRulesLink: {css: "a[data-ng-show='!activeContractPeriod.showEndRules && !isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
             endDateFieldButtonEndRules: {css: "div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button"},
             endDateDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
@@ -88,10 +89,11 @@ if (pages.createDealContractPeriod === undefined) {
             deleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             cancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
-            saveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
+            //saveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
+            saveButtonEndRules: {css: '[data-ng-click="saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)"]'},
             doneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
-            deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
-            cancelButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
+            deleteButtonEndRules: {css: '.modal-footer [data-ng-click="showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)"]'},
+            cancelButtonEndRules: {css: '.modal-footer [data-ng-click="cancel()"]'},
             addRuleButtonLinkEndRules: {css: "a[data-ng-click='addEndRule(form.show.endRules.containerId, form.show.endRules.type, rulesForm.$valid)']"},
             //assumptions
             addAssumptionLink: {css: "a[data-ng-click='addAdvanceAssumption()']"},
@@ -406,8 +408,8 @@ if (pages.createDealContractPeriod === undefined) {
 
         selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             var desiredOption;
-            var el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.left_value"]');
-            asAlways(el, 'scrollIntoView', 'click');
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")).click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -421,11 +423,9 @@ if (pages.createDealContractPeriod === undefined) {
                     });
                 })
                 .then(function clickOption() {
-                    pages.base.isPresentAndDisplayed(desiredOption).then(function (displayed) {
-                        if (displayed) {
-                            desiredOption.click();
-                        }
-                    });
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
                 });
         },
 
@@ -583,9 +583,9 @@ if (pages.createDealContractPeriod === undefined) {
 
         selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             var desiredOption;
-            var el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.right_value"]');
-            asAlways(el, 'scrollIntoView', 'click');
-            browser.driver.findElements(By.css('div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope:visible'))
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -599,11 +599,7 @@ if (pages.createDealContractPeriod === undefined) {
                 })
                 .then(function clickOption() {
                     if (desiredOption) {
-                        pages.base.isPresentAndDisplayed(desiredOption).then(function (displayed) {
-                            if (displayed) {
-                                desiredOption.click();
-                            }
-                        });
+                        desiredOption.click();
                     }
                 });
         },
