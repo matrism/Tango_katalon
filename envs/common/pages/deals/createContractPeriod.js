@@ -982,6 +982,7 @@ if (pages.createDealContractPeriod === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(el));
             el.click();
             pages.createDealContractPeriod.waitForAjax();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
         },
 
         clickOnTheConfirmCancellationEndRulesModalButton: function () {
