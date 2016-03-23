@@ -88,7 +88,8 @@ if (pages.createDealRtp === undefined) {
         },
 
         clickOnTheAddRetentionPeriodFromAcquisition: function () {
-            pages.createDealRtp.elems.addRetentionPeriodLinkFromAcquisition.click();
+            var el = pages.createDealRtp.elems.addRetentionPeriodLinkFromAcquisition;
+            asAlways(el, 'scrollIntoView', 'click');
             pages.createDealRtp.waitForAjax();
         },
 
