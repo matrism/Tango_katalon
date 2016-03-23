@@ -523,6 +523,7 @@ exports.confirmDeleteEntireEndRules = function () {
         browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
         browser.driver.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")).click();
         pages.createDealContractPeriod.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
     });
 };
 
