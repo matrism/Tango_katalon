@@ -629,7 +629,14 @@ if (pages.createDealContractPeriod === undefined) {
             var deleteButton = $("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"),
                 confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
             asAlways(deleteButton, 'scrollIntoView', 'click');
-            browser.wait(ExpectedConditions.elementToBeClickable(confirmButton));
+            browser.wait(ExpectedConditions.visibilityOf(confirmButton));
+            confirmButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
+        },
+
+        clickOnConfirmDeleteEndRuleCondition: function () {
+            var confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
+            browser.wait(ExpectedConditions.visibilityOf(confirmButton));
             confirmButton.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
         },

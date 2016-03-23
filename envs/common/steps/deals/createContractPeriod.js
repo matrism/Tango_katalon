@@ -495,6 +495,12 @@ exports.deleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
     });
 };
 
+exports.clickOnConfirmDeleteEndRuleCondition = function () {
+    it('Confirm delete end rules condition', function () {
+        pages.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
+    });
+};
+
 exports.cancelDeleteEndRules = function () {
     it("Cancel delete end rules modal dialog ", function () {
         browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog));
