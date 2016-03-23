@@ -631,6 +631,7 @@ if (pages.createDealContractPeriod === undefined) {
             asAlways(deleteButton, 'scrollIntoView', 'click');
             browser.wait(ExpectedConditions.visibilityOf(confirmButton));
             confirmButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
         },
 
         checkTheVariableRightWarningMessageEndRules: function () {
