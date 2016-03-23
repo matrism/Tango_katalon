@@ -499,6 +499,7 @@ exports.cancelDeleteEndRules = function () {
     it("Cancel delete end rules modal dialog ", function () {
         browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog));
         pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog.click();
+        browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
     });
 };
 
@@ -507,6 +508,7 @@ exports.cancelDeleteEntireEndRules = function () {
         browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']"))));
         browser.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']")).click();
         pages.createDealContractPeriod.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
     });
 };
 
