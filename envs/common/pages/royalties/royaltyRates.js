@@ -964,7 +964,6 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.royaltyStatementsTable()));
             browser.driver.sleep(3000);
             this.createManualStatementButton().click();
-
         },
 
         typeInIncomeProvider: function (sentKeys) {
@@ -1012,6 +1011,7 @@ if (pages.royaltyRates === undefined) {
         createManualStatementClick: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(this.createManualStatementInnerButton()));
             this.createManualStatementInnerButton().click();
+            pages.base.waitForAjax();
         },
 
         typeInBatchAmount: function (value) {

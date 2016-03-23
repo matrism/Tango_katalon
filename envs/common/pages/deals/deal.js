@@ -94,6 +94,7 @@ if (pages.deal === undefined) {
         },
 
         goToPayeesDealDetails: function () {
+            pages.base.scrollIntoView(pages.deal.elems.payeesHeader);
             pages.deal.elems.payeesHeader.click();
         },
 
@@ -226,6 +227,141 @@ if (pages.deal === undefined) {
             );
 
             return pages.base.waitForAjax();
-        }
+        },
+        goToTab: function (name) {
+            var tab = element(by.cssContainingText('ul.nav-tabs li', name));
+
+            tab.click();
+        },
 });
+
+    exports.addExternalContactLink = function () {
+        var link = element(by.cssContainingText('.btn-link', 'Add External Contact'));
+        return link;
+    };
+
+    exports.clickAddExternalContactLink = function () {
+        var link = exports.addExternalContactLink();
+
+        pages.base.scrollIntoView(link);
+        link.click();
+    };
+
+    exports.externalContactsEditor = function () {
+        var editor = modularEdit.byId('externalContacts');
+        return editor;
+    };
+
+    exports.externalContacts = function () {
+        var editor = exports.externalContactsEditor();
+        return editor.all(by.repeater('contact in modularEditModels.model'));
+    };
+
+    exports.addExternalContact = function (role, name) {
+        var contact = exports.externalContacts().last(),
+            nameTypeahead = typeahead(contact.element(by.model('contact.model')), true);
+
+        contact.$('select').click();
+        contact.$$('select option').filter(pph.matchTextExact(role)).click();
+
+        nameTypeahead.select(name);
+    };
+
+    exports.saveExternalContacts = function () {
+        var editor = exports.externalContactsEditor();
+
+        editor.save();
+    };
+
+    exports.internalContactsEditor = function () {
+        var editor = modularEdit.byId('internalContacts');
+        return editor;
+    };
+
+    exports.addInternalContactLink = function () {
+        var link = element(by.cssContainingText('.btn-link', 'Add Internal Contact'));
+        return link;
+    };
+
+    exports.clickAddInternalContactLink = function () {
+        var link = exports.addInternalContactLink();
+
+        pages.base.scrollIntoView(link);
+        link.click();
+    };
+
+    exports.internalContacts = function () {
+        var editor = exports.internalContactsEditor();
+
+        return editor.all(by.repeater('internalContact in modularEditModels.contacts'));
+    };
+
+    exports.addInternalContact = function (role, name) {
+        var contacts = exports.internalContacts(),
+            nameEl,
+            roleEl;
+
+        exports.internalContacts().count().then(function(num){
+            var contact = contacts.get(num-1);
+
+            nameEl = typeahead(contact.element(by.model('internalContact.model')));
+            roleEl = typeahead(contact.element(by.model('internalContact.roles')));
+
+            nameEl.select(name);
+            roleEl.select(role, true);
+        });
+    };
+
+    exports.saveInternalContacts = function () {
+        var editor = exports.internalContactsEditor();
+
+        editor.save();
+    };
+
+    exports.generalLeftEditor = function () {
+        var editor = modularEdit.byId('generalLeft');
+        return editor;
+    };
+
+    exports.contractingPartiesTypeahead = function () {
+        var editor = exports.generalLeftEditor(),
+            el = editor.element(by.model('modularEditModels.contractingParties'));
+
+        return typeahead(el);
+    };
+
+    exports.addContractingParties = function () {
+        var editor = exports.generalLeftEditor(),
+            input = exports.contractingPartiesTypeahead(),
+            parties = _.toArray(arguments);
+
+        editor.edit();
+
+        _.each(parties, function (name) {
+            input.select(name);
+        });
+
+        editor.save();
+    };
+
+    exports.expectNumberOfContractingPartiesToBe = function (num) {
+        var editor = exports.generalLeftEditor(),
+            parties = editor.all(by.repeater('party in modularEditModels.contractingParties'));
+
+        expect(parties.count()).toEqual(num);
+    };
+
+    exports.expectNumberOfExternalContactsToBe = function (num) {
+        var contacts = exports.externalContacts();
+
+        expect(contacts.count()).toEqual(num);
+    };
+
+    exports.expectNumberOfInternalContactsToBe = function (num) {
+        var contacts = exports.internalContacts();
+
+        expect(contacts.count()).toEqual(num);
+    };
+
+
 }

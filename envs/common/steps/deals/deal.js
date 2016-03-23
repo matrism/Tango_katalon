@@ -1,7 +1,8 @@
 'use strict';
 
 var promise = protractor.promise,
-    ExpectedConditions = protractor.ExpectedConditions;
+    ExpectedConditions = protractor.ExpectedConditions,
+    pageStep = require('../../../../helpers/basicPageStep.js');
 
 steps.deal = exports;
 
@@ -120,6 +121,12 @@ exports.goToPayeesDealTabDetails = function () {
     });
 };
 
+exports.goToOldPayeesDealTabDetails = function () {
+    it("Click on payees header and go to payees deal tab details ", function () {
+        pages.deal.goToPayeesDealDetails();
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.oldPayeeArea));
+    });
+};
 
 exports.goToTermsDealTabDetailsDirtyCheck = function () {
     it("Click on terms header and go to terms deal tab details ", function () {
@@ -237,4 +244,18 @@ addBasicStep(
 
 addBasicStep(exports, pages.deal, 'Add Society Agreement Numbers to PSS chain');
 addBasicStep(exports, pages.deal, 'View PSS chain Society Agreement Numbers');
+pageStep([
+    'Go to tab'
+]);
+addBasicStep(exports, pages.deal, 'Click Add External Contact Link');
+addBasicStep(exports, pages.deal, 'Add External Contact');
+addBasicStep(exports, pages.deal, 'Click Add Internal Contact Link');
+addBasicStep(exports, pages.deal, 'Add Internal Contact');
+addBasicStep(exports, pages.deal, 'Save Internal Contacts');
+addBasicStep(exports, pages.deal, 'Save External Contacts');
+addBasicStep(exports, pages.deal, 'Add Contracting Parties');
+addBasicStep(exports, pages.deal, 'Expect number of Contracting Parties to be');
+addBasicStep(exports, pages.deal, 'Expect number of External Contacts to be');
+addBasicStep(exports, pages.deal, 'Expect number of Internal Contacts to be');
+
 

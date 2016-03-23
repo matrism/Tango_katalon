@@ -85,6 +85,11 @@ exports.expectModalPopUpToBeDisplayed = function (more) {
         more.timeout
     );
 };
+
+exports.clickModalPrimaryButton = function() {
+    return exports.modalFooter().$('.btn-primary').click();
+};
+
 exports.mainSearchBar = function () {
     return $('#DSP-SEARCH');
 };

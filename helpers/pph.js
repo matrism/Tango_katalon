@@ -242,3 +242,9 @@ pph.subtract = function () {
         return pph.add.apply(null, values);
     });
 };
+
+pph.classList = function (elem) {
+    return elem.getAttribute('class').then(function(classStr){
+        return classStr.split(' ');
+    });
+};

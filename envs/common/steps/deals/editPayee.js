@@ -18,6 +18,18 @@ exports.editPayeeArea = function () {
     });
 };
 
+exports.editOldPayeeArea = function () {
+    it("Edit the old payee area ", function () {
+        pages.editDealPayee.editTheOldPayeeArea();
+    });
+};
+
+exports.editClickOneByPayeeHeaderLink = function () {
+    it("Edit click on the by payee header link ", function () {
+        pages.editDealPayee.editClickOnTheByPayeeHeaderLink();
+    });
+};
+
 exports.editClickOnAddPrimaryLinkForScopeNumberI = function (i) {
     it("Edit click on the add primary link for scope number " + i, function () {
         pages.editDealPayee.editClickOnTheAddPrimaryLinkForScopeNumberI(i);
@@ -38,15 +50,51 @@ exports.editSelectRandomPayeePersonFromDropDown = function (payee_name) {
     });
 };
 
-exports.editClickOnAddAllScopesToPayee = function(){
-    it("Edit click on the add all scopes to payee check box ", function(){
-       pages.editDealPayee.editClickOnTheAddAllScopesToPayee();
+exports.editSelectRandomOldPayeePersonFromDropDown = function (payee_name) {
+    it("Edit select the random old payee person from drop down ", function () {
+        pages.editDealPayee.editFillIntoOldPayeeFieldSpecificValue(payee_name);
+        pages.editDealPayee.editSelectTheRandomPayeePersonFromDropDown();
+    });
+};
+
+exports.editSelectSpecificOldPayeePersonFromDropDown = function (payee_name) {
+    it("Edit select the specific old payee person from drop down ", function () {
+        pages.editDealPayee.editFillIntoOldPayeeFieldSpecificValue(payee_name);
+        pages.editDealPayee.editSelectTheSpecificPayeePersonFromDropDown(payee_name);
+    });
+};
+
+exports.editSelectSpecificNewPayeePersonFromDropDown = function (payee_name) {
+    it("Edit select the specific new payee person from drop down ", function () {
+        pages.editDealPayee.editFillIntoAddNewPayeeFieldSpecificValue(payee_name);
+        pages.editDealPayee.editSelectTheSpecificPayeePersonFromDropDown(payee_name);
+    });
+};
+
+
+exports.editClickOnAddAllScopesToPayee = function () {
+    it("Edit click on the add all scopes to payee check box ", function () {
+        pages.editDealPayee.editClickOnTheAddAllScopesToPayee();
+    });
+};
+
+exports.editClickOnNextPayeeScopePage = function () {
+    it("Edit click on the next payee scope page", function () {
+        pages.editDealPayee.editClickOnTheNextPayeeScopePage();
+        pages.editDealPayee.waitForAjax();
     });
 };
 
 exports.editSelectRandomValueForPayeeCompanyNameCode = function () {
     it("Edit select the random value for payee company name/code ", function () {
         pages.editDealPayee.editSelectTheRandomValueForPayeeCompanyNameCode();
+        pages.editDealPayee.waitForAjax();
+    });
+};
+
+exports.editSelectRandomValueForOldPayeeCompanyNameCode = function () {
+    it("Edit select the random value for old payee company name/code ", function () {
+        pages.editDealPayee.editSelectTheRandomValueForOldPayeeCompanyNameCode();
         pages.editDealPayee.waitForAjax();
     });
 };
@@ -63,9 +111,10 @@ exports.editAssociateSpecificScopeNumberIToNewPayee = function (i) {
     });
 };
 
-exports.editAddPayoutToPayee = function (i) {
+exports.editAddPayoutToPayee = function () {
     it("Edit add payout to payee", function () {
-        pages.editDealPayee.editAddThePayoutToPayee(i);
+        pages.editDealPayee.editAddThePayoutToPayee();
+        pages.editDealPayee.waitForAjax();
     });
 };
 
@@ -81,9 +130,22 @@ exports.editAssociateSpecificScopeNumberIToPayee = function (i) {
     });
 };
 
+exports.editAssociateSpecificScopeNumberIToOldPayee = function (i) {
+    it("Edit associate specific  scope to old payee number " + i, function () {
+        pages.editDealPayee.editAssociateTheSpecificScopeNumberIToOldPayee(i);
+    });
+};
+
 exports.editSavePayeeForm = function () {
     it("Edit save the payee form ", function () {
         pages.editDealPayee.editSaveThePayeeForm();
+        pages.editDealPayee.waitForAjax();
+    });
+};
+
+exports.editSaveOldPayeeForm = function () {
+    it("Edit save the old payee form ", function () {
+        pages.editDealPayee.editSaveTheOldPayeeForm();
         pages.editDealPayee.waitForAjax();
     });
 };
@@ -95,6 +157,12 @@ exports.editSavePayeePage = function () {
     });
 };
 
+exports.editSavePayeeToPayeeForm = function () {
+    it("Edit save the payee to payee form", function () {
+        pages.editDealPayee.editAddPayeeToPayeeForm();
+        pages.editDealPayee.waitForAjax();
+    });
+};
 
 exports.editCancelPayeeForm = function () {
     it("Edit cancel the payee form ", function () {
@@ -108,9 +176,21 @@ exports.editFillIntoPayeeLegalRightInputField = function () {
     });
 };
 
+exports.editFillIntoPayeeLegalRightInputFieldScopeNumberI = function (i) {
+    it("Edit fill into payee legal right input field for scope number " + i, function () {
+        pages.editDealPayee.editFillIntoThePayeeLegalRightInputFieldForScopeNumberI(i);
+    });
+};
+
 exports.editFillIntoPayeeDistributionInputField = function () {
     it("Edit fill into payee distribution input field", function () {
         pages.editDealPayee.editFillIntoThePayeeDistributionInputField();
+    });
+};
+
+exports.editFillIntoPayeeDistributionInputFieldScopeNumberI = function (i) {
+    it("Edit fill into payee distribution input field for scope number " + i, function () {
+        pages.editDealPayee.editFillIntoThePayeeDistributionInputFieldForScopeNumberI(i);
     });
 };
 
@@ -139,7 +219,7 @@ exports.itEditAddPayeeOrganisationAndAssociateScope = function (payee_name) {
     });
 };
 
-exports.itEditAddPayeePersonAndAssociateScope = function (payee_name,i) {
+exports.itEditAddPayeePersonAndAssociateScope = function (payee_name, i) {
     describe("Edit add payee as person and associate random scope ", function () {
         steps.editDealPayee.editSelectRandomPayeePersonFromDropDown(payee_name);
         steps.base.scrollIntoView("Company", pages.editDealPayee.elems.editPayeeCompanyNameCodeInputField);
