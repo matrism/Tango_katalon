@@ -975,6 +975,7 @@ if (pages.createDealContractPeriod === undefined) {
             var el = pages.createDealContractPeriod.deleteEndRuleButton(i);
             pages.base.scrollIntoView(el);
             el.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.confirmDeleteEndRuleButton));
         },
 
         clickOnConfirmDeleteEndRule: function () {
