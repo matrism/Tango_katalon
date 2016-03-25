@@ -82,6 +82,30 @@ exports.feature = [
 
 
         }
+    },
+
+    {
+        name: 'Check AAE edit  existing AAE',
+        tags: ['editAndAddAae'],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.itContinueToNextPage();
+            steps.deal.itContinueToNextPage();
+            steps.deal.itContinueToNextPage();
+
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.deal.goToTab('Advances');
+            steps.editDealAdvanceApplicableEarnings.itEditAddAdvanceApplicableEarnings();
+
+
+        }
     }
 
 

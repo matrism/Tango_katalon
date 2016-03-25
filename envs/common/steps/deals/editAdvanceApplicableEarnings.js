@@ -106,7 +106,7 @@ exports.editClickOnPrintPipelineCheckBoxAdvanceApplicableEarnings = function () 
 
 exports.editClickOnOtherPipelineCheckBoxAdvanceApplicableEarnings = function () {
     it("Edit click on the other pipeline check box advance applicable earnings ", function () {
-        pages.editDealAdvanceApplicableEarnings.clickOnTheOtherPipelineCheckBoxAdvanceApplicableEarnings();
+        pages.editDealAdvanceApplicableEarnings.editClickOnTheOtherPipelineCheckBoxAdvanceApplicableEarnings();
     });
 };
 
@@ -351,11 +351,6 @@ exports.editClickOnDefineOtherLabelAdvanceApplicableEarnings = function () {
     });
 };
 
-
-
-
-
-
 exports.editClickOnRemoveSynchTerritoryAdvanceApplicableEarnings = function () {
     it("Edit click on the remove synch territory advance applicable earnings ", function () {
         pages.editDealAdvanceApplicableEarnings.editClickOnTheRemoveSynchTerritoryAdvanceApplicableEarnings();
@@ -479,6 +474,70 @@ exports.itEditExistingAdvanceApplicableEarnings = function () {
         steps.editDealAdvanceApplicableEarnings.editClickOnRemoveOtherTerritoryAdvanceApplicableEarnings();
         steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineOtherTerritoryAdvanceApplicableEarnings();
         steps.editDealAdvanceApplicableEarnings.editClickOnRemoveOtherLabelAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineOtherLabelAdvanceApplicableEarnings();
+
+        steps.editDealAdvanceApplicableEarnings.editClickOnSaveAdvanceApplicableEarnings();
+
+    });
+};
+
+
+exports.itEditAddAdvanceApplicableEarnings = function () {
+    describe("Edit existing advance applicable earnings ", function () {
+        steps.editDealAdvanceApplicableEarnings.clickOnAdvanceApplicableEarningsHeaderTitleLink();
+
+        steps.base.scrollIntoView("synch ", pages.editDealAdvanceApplicableEarnings.elems.editSynchronisationPercentAdvanceApplicableEarnings);
+        steps.editDealAdvanceApplicableEarnings.editFillIntoSynchronisationPercentFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnSynchPipelineCheckBoxAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineSynchTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineSynchTerritoryFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineSynchTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineSynchLabelAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineSynchLabelAdvanceApplicableEarnings();
+
+        steps.base.scrollIntoView("mech ", pages.editDealAdvanceApplicableEarnings.elems.editMechanicalPercentAdvanceApplicableEarnings);
+        steps.editDealAdvanceApplicableEarnings.editFillIntoMechanicalPercentFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnMechPipelineCheckBoxAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineMechTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineMechTerritoryFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineMechTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineMechLabelAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineMechLabelAdvanceApplicableEarnings();
+
+        steps.base.scrollIntoView("perf ", pages.editDealAdvanceApplicableEarnings.elems.editPublicPerformancePercentAdvanceApplicableEarnings);
+        steps.editDealAdvanceApplicableEarnings.editFillIntoPublicPerformancePercentFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnPerfPipelineCheckBoxAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefinePerfTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefinePerfTerritoryFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefinePerfTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefinePerfLabelAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefinePerfLabelAdvanceApplicableEarnings();
+
+        steps.base.scrollIntoView("grand ", pages.editDealAdvanceApplicableEarnings.elems.editGrandRightsPercentAdvanceApplicableEarnings);
+        steps.editDealAdvanceApplicableEarnings.editFillIntoGrandRightsPercentFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnGrandPipelineCheckBoxAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineGrandTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineGrandTerritoryFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineGrandTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineGrandLabelAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineGrandLabelAdvanceApplicableEarnings();
+
+        steps.base.scrollIntoView("print ", pages.editDealAdvanceApplicableEarnings.elems.editPrintRightsPercentAdvanceApplicableEarnings);
+        steps.editDealAdvanceApplicableEarnings.editFillIntoPrintRightsPercentFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnPrintPipelineCheckBoxAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefinePrintTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefinePrintTerritoryFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefinePrintTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefinePrintLabelAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefinePrintLabelAdvanceApplicableEarnings();
+
+        steps.base.scrollIntoView("other ", pages.editDealAdvanceApplicableEarnings.elems.editOtherRightsPercentAdvanceApplicableEarnings);
+        steps.editDealAdvanceApplicableEarnings.editFillIntoOtherRightsPercentFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnOtherPipelineCheckBoxAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineOtherTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineOtherTerritoryFieldAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineOtherTerritoryAdvanceApplicableEarnings();
+        steps.editDealAdvanceApplicableEarnings.editClickOnDefineOtherLabelAdvanceApplicableEarnings();
         steps.editDealAdvanceApplicableEarnings.editSelectRandomDefineOtherLabelAdvanceApplicableEarnings();
 
         steps.editDealAdvanceApplicableEarnings.editClickOnSaveAdvanceApplicableEarnings();

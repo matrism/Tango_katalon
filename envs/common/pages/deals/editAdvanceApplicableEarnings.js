@@ -565,7 +565,7 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
         },
 
         editClickOnTheDefineOtherLabelAdvanceApplicableEarnings: function () {
-            pages.editDealAdvanceApplicableEarnings.elems.editDefineOthersLabelsAdvanceApplicableEarnings.click();
+            pages.editDealAdvanceApplicableEarnings.elems.editDefineOtherLabelsAdvanceApplicableEarnings.click();
             pages.editDealAdvanceApplicableEarnings.waitForAjax();
         },
 
