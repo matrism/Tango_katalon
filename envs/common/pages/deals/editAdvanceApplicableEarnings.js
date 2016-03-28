@@ -6,12 +6,12 @@ var pages_path = _tf_config._system_.path_to_pages;
 if (pages.editDealAdvanceApplicableEarnings === undefined) {
     pages.editDealAdvanceApplicableEarnings = new ftf.pageObject({
         locators: {
+            editAdvanceSummaryHeaderLink: {css: "a[data-ng-class='{ active: !form.show.advances.applicableEarnings.show }']"},
+            editAdvanceSummaryTitleText: {css: "div[data-ng-if='!form.show.advances.applicableEarnings.show'] h3"},
             editAaeHeaderLink: {css: "a[data-ng-class='{ active: form.show.advances.applicableEarnings.show }']"},
             editAaeTitleText: {css: "div[data-ng-if='!form.show.advances.createNewAdvance'] h3"},
             editAaeArea: {css: "div.advance-earnings.span12.nomargins.EDITOR"},
             editAaeIcon: {css: "a[data-ng-click='openEditForApplicableEarnings()']"},
-
-
             editSetDefaultsLinkAdvanceApplicableEarnings: {css: "table thead tr th.percent-income a[data-ng-click='setAllDefaults()']"},
             editClearAllLinkAdvanceApplicableEarnings: {css: "table thead tr th.percent-income a[data-ng-click='clearAllDefaults()']"},
             editIncludeAllPipelineCheckBoxAdvanceApplicableEarnings: {css: "table thead tr th.includes-pipeline span[data-ng-click='toggleAllPipelines()'] i"},
@@ -76,8 +76,8 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
             editRemovePrintLabelAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
             editRemoveOthersLabelAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
             editCancelAdvanceApplicableEarningsButton: {css: "div[data-ng-form='applicableEarningsForm'] div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
-            editSaveAdvanceApplicableEarningsButton: {css: "div[data-ng-form='applicableEarningsForm'] div.CONTROLS.clearfix button[data-ng-click='updateDeal(!applicableEarningsForm.$invalid)']"}
-
+            editSaveAdvanceApplicableEarningsButton: {css: "div[data-ng-form='applicableEarningsForm'] div.CONTROLS.clearfix button[data-ng-click='updateDeal(!applicableEarningsForm.$invalid)']"},
+            editNoButtonModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
         },
 
         checkTheAdvanceApplicableEarningsHeaderLinkIsPresent: function () {
@@ -87,6 +87,11 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
         clickOnTheAdvanceApplicableEarningsHeaderTitleLink: function () {
             pages.editDealAdvanceApplicableEarnings.elems.editAaeHeaderLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealAdvanceApplicableEarnings.elems.editAaeTitleText));
+        },
+
+        clickOnTheAdvanceSummaryHeaderTitleLink: function () {
+            pages.editDealAdvanceApplicableEarnings.elems.editAdvanceSummaryHeaderLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealAdvanceApplicableEarnings.elems.editAdvanceSummaryTitleText));
         },
 
         editTheAdvanceApplicableEarningsArea: function () {
@@ -626,6 +631,11 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
 
         editClickOnTheRemoveOtherLabelAdvanceApplicableEarnings: function () {
             pages.editDealAdvanceApplicableEarnings.elems.editRemoveOthersLabelAdvanceApplicableEarnings.click();
+            pages.editDealAdvanceApplicableEarnings.waitForAjax();
+        },
+
+        editClickOnNoButtonToModalDialog: function(){
+            pages.editDealAdvanceApplicableEarnings.elems.editNoButtonModalDialog.click();
             pages.editDealAdvanceApplicableEarnings.waitForAjax();
         }
 

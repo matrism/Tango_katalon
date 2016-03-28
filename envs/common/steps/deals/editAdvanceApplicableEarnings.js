@@ -14,6 +14,13 @@ exports.clickOnAdvanceApplicableEarningsHeaderTitleLink = function () {
     });
 };
 
+exports.clickOnAdvanceSummaryHeaderTitleLink = function () {
+    it("Edit click on the advance summary header title ", function () {
+        pages.editDealAdvanceApplicableEarnings.clickOnTheAdvanceSummaryHeaderTitleLink();
+    });
+};
+
+
 exports.editAdvanceApplicableEarningsArea = function () {
     it("Edit the advance applicable earnings area ", function () {
         pages.editDealAdvanceApplicableEarnings.editTheAdvanceApplicableEarningsArea();
@@ -217,6 +224,13 @@ exports.editClickOnDefineMechTerritoryFieldAdvanceApplicableEarnings = function 
         pages.editDealAdvanceApplicableEarnings.editClickOnTheDefineMechTerritoryFieldAdvanceApplicableEarnings();
     });
 };
+
+exports.editCancelTheModalDialog = function(){
+    it("Edit cancel the modal dialog displayed clickinhg to no", function(){
+       pages.editDealAdvanceApplicableEarnings.editClickOnNoButtonToModalDialog();
+    });
+};
+
 
 exports.editClickOnDefinePerfTerritoryFieldAdvanceApplicableEarnings = function () {
     it("Edit click on the define perf territory field advance applicable earnings ", function () {
