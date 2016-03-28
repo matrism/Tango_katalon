@@ -389,7 +389,9 @@ if (pages.createDealScope === undefined) {
         },
 
         fillInFirstPublisherNameField: function (publisherName) {
-            pages.createDealScope.elems.firstPublisherNameField.sendKeys(publisherName);
+            var element = pages.createDealScope.elems.firstPublisherNameField;
+            pages.base.scrollIntoView(element);
+            element.sendKeys(publisherName);
         },
 
         fillInFirstPublisherNameOwnPercent: function () {
@@ -411,12 +413,16 @@ if (pages.createDealScope === undefined) {
         },
 
         fillInFirstPublisherNameAMField: function (publisherNameAM) {
-            pages.createDealScope.elems.firstPublisherNameAMField.sendKeys(publisherNameAM);
+            var element = pages.createDealScope.elems.firstPublisherNameAMField;
+            pages.base.scrollIntoView(element);
+            element.sendKeys(publisherNameAM);
         },
 
         fillInFirstPublisherNameAMCollectPercent: function () {
-            var percent = (Math.random() * 9 + 1).toFixed(2);
-            pages.createDealScope.elems.firstPublisherNameAMCollectPercent.sendKeys(percent);
+            var percent = (Math.random() * 9 + 1).toFixed(2),
+                element = pages.createDealScope.elems.firstPublisherNameAMCollectPercent;
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
         },
 
         fillInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
@@ -449,6 +455,7 @@ if (pages.createDealScope === undefined) {
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
+                    pages.base.scrollIntoView(options[randomNumber]);
                     options[randomNumber].click();
                 })
         },
@@ -479,6 +486,7 @@ if (pages.createDealScope === undefined) {
                 })
                 .then(function clickOption() {
                     if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
                         desiredOption.click();
                     }
                 });
@@ -502,6 +510,7 @@ if (pages.createDealScope === undefined) {
                 })
                 .then(function clickOption() {
                     if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
                         desiredOption.click();
                     }
                 });
@@ -551,6 +560,7 @@ if (pages.createDealScope === undefined) {
 
         fillPublisherNameFieldChainI: function (i) {
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input[ng-model='$term']"));
+            pages.base.scrollIntoView(element);
             element.sendKeys("test");
         },
 
@@ -568,6 +578,7 @@ if (pages.createDealScope === undefined) {
 
         fillPublisherNameAMFieldChainI: function (i) {
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input[ng-model='$term']"));
+            pages.base.scrollIntoView(element);
             element.sendKeys("53026414");
         },
 
@@ -584,6 +595,7 @@ if (pages.createDealScope === undefined) {
             browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
+                    pages.base.scrollIntoView(options[randomNumber]);
                     options[randomNumber].click();
                 })
         },
@@ -609,6 +621,7 @@ if (pages.createDealScope === undefined) {
                 })
                 .then(function clickOption() {
                     if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
                         desiredOption.click();
                     }
                 });
@@ -617,6 +630,7 @@ if (pages.createDealScope === undefined) {
         fillPublisherNameAMCollectPercentChainI: function (i) {
             var percent = (Math.random() * 9 + 1).toFixed(2);
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"));
+            pages.base.scrollIntoView(element);
             element.sendKeys(percent);
         },
 
@@ -705,9 +719,13 @@ if (pages.createDealScope === undefined) {
         },
 
         shareThePublisherShareSet: function () {
-            pages.createDealScope.elems.sharePublisherShareSetIcon.click();
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.useThisPublisherShareSetButton));
-            pages.createDealScope.elems.useThisPublisherShareSetButton.click();
+            var shareIcon = pages.createDealScope.elems.sharePublisherShareSetIcon,
+                useButton = pages.createDealScope.elems.useThisPublisherShareSetButton;
+            pages.base.scrollIntoView(shareIcon);
+            shareIcon.click();
+            browser.wait(ExpectedConditions.elementToBeClickable(useButton));
+            pages.base.scrollIntoView(useButton);
+            useButton.click();
         },
 
         shareTheScope: function () {
@@ -735,8 +753,43 @@ if (pages.createDealScope === undefined) {
         checkTheShareUnshareDeleteIconIsPresent: function () {
             browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
             expect(pages.createDealScope.elems.shareUnshareDeleteScopeIcon.isDisplayed);
-        }
+        },
 
+        nonCtrlCreatorShare: function () {
+            var nccs = {};
 
+            nccs.component = function (i) {
+                var el = $$('[data-ng-click="setNonControlledCreatorShare(chain.id)"]').get(i);
+                pages.base.scrollIntoView(el);
+                return el;
+            };
+
+            nccs.helpIcon = function (i) {
+                return nccs.component(i).element(by.xpath('following-sibling::i'));
+            };
+
+            nccs.getText = function (i) {
+                return nccs.component(i).getText();
+            };
+
+            nccs.validateDefault = function (i) {
+                expect(nccs.component(i).$('i').getAttribute('class')).toBe('fa fa-square-o');
+            };
+
+            nccs.click = function (i) {
+                nccs.component(i).click();
+            };
+
+            nccs.hoverHelp = function (i) {
+                var el = nccs.helpIcon(i);
+                browser.actions().mouseMove(el).perform();
+            };
+
+            nccs.helpMessage = function (i) {
+                return nccs.helpIcon(i).getAttribute('data-tooltip');
+            };
+
+            return nccs;
+        }()
     });
 }

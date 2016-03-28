@@ -315,7 +315,7 @@ exports.editCancelThePublisherShareSet = function () {
 
 exports.editSelectSpecificPublisherNameDropDown = function () {
     it("Edit - select specific value publisher name drop down", function () {
-        pages.editDealScope.editSelectTheSpecificPublisherNameDropDown("(53026414)\nwb music corp.");
+        pages.editDealScope.editSelectTheSpecificPublisherNameDropDown('music');
     });
 };
 
@@ -525,7 +525,7 @@ exports.editIntoPublisherNameAMFieldChainI = function (i) {
 
 exports.editSelectSpecificPublisherNameDropDownChainI = function (i) {
     it("Edit - select specific value publisher name drop down chain i", function () {
-        pages.editDealScope.editSelectSpecificPublisherNameDropDownChainI("(53026414)\nwb music corp.", i);
+        pages.editDealScope.editSelectSpecificPublisherNameDropDownChainI('music', i);
     });
 };
 
@@ -877,8 +877,69 @@ exports.itEditAddPublisherShareWithSocietyAwardCredit = function () {
     });
 };
 
+exports.nonCtrlCreatorShare = (function () {
+    var nccs = {};
+
+    nccs.validateLabel = function (i) {
+        it('Non Controller Creator Share > validate label text #' + (i + 1), function () {
+            expect(pages.editDealScope.nonCtrlCreatorShare.getText(i)).toBe(
+                'Non-Controlled Creator Share'
+            );
+        });
+    };
+
+    nccs.validateLabelViewMode = function (i, expectPresent) {
+        it('Non Controller Creator Share > validate label on edit mode #' + (i), function () {
+            var element = pages.editDealScope.nonCtrlCreatorShare.label(i - 1);
+            pages.base.scrollIntoView(element);
+            expect(pages.base.isPresentAndDisplayed(element)).toBe(expectPresent);
+        });
+    };
+
+    nccs.validateLabelPosition = function () {
+        it('Non Controller Creator Share > validate label position', function () {
+            pages.editDealScope.nonCtrlCreatorShare.validateLabelPosition();
+        });
+    };
+
+    nccs.expectCheckboxChecked = function (i) {
+        it('Non Controlled Creator Share > expect checkbox checked #' + (i + 1), function () {
+            pages.editDealScope.nonCtrlCreatorShare.expectCheckboxChecked(i);
+        });
+    };
+
+    nccs.expectCheckboxNotChecked = function (i) {
+        it('Non Controlled Creator Share > expect checkbox not checked #' + (i + 1), function () {
+            pages.editDealScope.nonCtrlCreatorShare.expectCheckboxNotChecked(i);
+        });
+    };
+
+    nccs.click = function (i) {
+        it('Non Controlled Creator Share > click on checkbox #' + (i + 1), function () {
+            pages.editDealScope.nonCtrlCreatorShare.click(i);
+        });
+    };
+
+    nccs.validateHelpMessage = function (i) {
+        it('Non Controlled Creator Share > validate help message #' + (i + 1), function () {
+            pages.editDealScope.nonCtrlCreatorShare.hoverHelp(i);
+            expect(pages.editDealScope.nonCtrlCreatorShare.helpMessage(i)).toContain(
+                'Indicates WCM is not responsible'
+            );
+        });
+    };
+
+    return nccs;
+})();
+
 exports.itEditPublisherShare = function () {
     describe("Edit publisher share set", function () {
+        var nccs = exports.nonCtrlCreatorShare;
+
+        nccs.validateLabel(0);
+        nccs.expectCheckboxChecked(0);
+        nccs.click(0);
+        nccs.validateHelpMessage(0);
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
@@ -899,7 +960,13 @@ exports.itEditPublisherSharePATypeWithMultipleThreeChains = function (i) {
 
 exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
     describe("Edit publisher share set with three chains", function () {
+        var nccs = exports.nonCtrlCreatorShare;
+
         steps.editDealScope.editClickAddChainLink();
+        nccs.validateLabel(i - 1);
+        nccs.expectCheckboxNotChecked(i - 1);
+        nccs.click(i - 1);
+        nccs.validateHelpMessage(i - 1);
         steps.editDealScope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
         steps.editDealScope.editIntoPublisherNameAMFieldChainI(i);
         steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
