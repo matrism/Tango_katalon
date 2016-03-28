@@ -7,6 +7,7 @@ var leftPad = require('left-pad'),
     randomString = random.string.makeMemoizedGenerator(),
     fromTestVariable = require('../../../../helpers/fromTestVariable'),
     fnutils = require('../../../../helpers/fnutils'),
+    data = requireFromEnvFolder('features/orgs/data/CrRegistration.js'),
     bind = fnutils.bind,
     using = fnutils.using;
 
@@ -1608,15 +1609,8 @@ exports.feature = [
         name: 'Execute registration run',
 
         tags: [
-            'broken',
             'worksSanityExecuteRegistrationRun'
         ],
-
-        breakageDescription: (
-            "Since we don't define org delivery methods before doing this, " +
-            "it can cause data to be sent to WMG's peers if org data is set up " +
-            "with real delivery information. See TAT-796."
-        ),
 
         steps: function () {
             steps.base.useEntityDataSlot('work', 'mainWork');
@@ -1631,6 +1625,12 @@ exports.feature = [
                 this.find('first');
 
                 this.goToRecipientPage();
+            });
+
+            using(steps.organisation, function () {
+                this.goToGeneralTab();
+                this.registration.resetDeliveryInfo(data.cr);
+                this.saveOrganisationDeliveryMethods();
             });
 
             steps.organisation.goToPreviewRegistrationRunTab();
@@ -1675,6 +1675,7 @@ exports.feature = [
                     this.find({ firstWithStatus: 'Delivered' });
 
                     this.toggleBlind();
+                    this.validateDeliveries();
 
                     this.storeFileNameInTestVariable('registration run file name');
                 });
