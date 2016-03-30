@@ -43,6 +43,17 @@ exports.creatorToPublisher = (function () {
         return element.all(by.repeater('match in matches'));
     };
 
+    ctp.noCreatorSearchResultsMessage = function () {
+        return $('[data-ng-if="match.model.validResult == false"]');
+    };
+
+    ctp.expectNoCreatorSearchResults = function () {
+        return asAlways(
+            ctp.noCreatorSearchResultsMessage(),
+            'waitUntilVisible'
+        );
+    };
+
     ctp.creatorSearchResultRowByDisplayName = function (name) {
         var els = ctp.creatorSearchResultRows().$$('.pull-left.ng-binding');
 

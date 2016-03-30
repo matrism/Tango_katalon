@@ -15,6 +15,7 @@ addStepGroup(exports, 'Creator-To-Publisher', function (group) {
         'Find creator row',
 
         'Enter creator search terms',
+        'Expect no creator search results',
         'Select creator search result by display name',
 
         'Validate creator search terms field state',
