@@ -26,6 +26,11 @@ exports.createValidRoyaltySetPair = function (table, message) {
             autoIt('pages.deal.clickWarnerLogo');
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
+            if(systemConfig.env.name === 'qa') {
+                steps.createDealGeneral.fillCompanyCodeField('WCM');
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
+            }
             autoIt('pages.createDealGeneral.fillContractingPartiesField', 'bmi');
 
             it('Wait for suggestions', function() {
@@ -97,6 +102,11 @@ exports.editValidRoyaltySetPair = function (table, message) {
             autoIt('pages.deal.clickWarnerLogo');
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
+            if(systemConfig.env.name === 'qa') {
+                steps.createDealGeneral.fillCompanyCodeField('WCM');
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
+            }
             autoIt('pages.createDealGeneral.fillContractingPartiesField', 'bmi');
 
             it('Wait for suggestions', function() {
@@ -174,6 +184,11 @@ exports.createInvalidRoyaltySetPair = function (table, message) {
             autoIt('pages.deal.clickWarnerLogo');
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
+            if(systemConfig.env.name === 'qa') {
+                steps.createDealGeneral.fillCompanyCodeField('WCM');
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
+            }
             autoIt('pages.createDealGeneral.fillContractingPartiesField', 'bmi');
 
             it('Wait for suggestions', function() {
@@ -244,6 +259,11 @@ exports.editInvalidRoyaltySetPair = function (table, message) {
             autoIt('pages.deal.clickWarnerLogo');
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
+            if(systemConfig.env.name === 'qa') {
+                steps.createDealGeneral.fillCompanyCodeField('WCM');
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
+            }
             autoIt('pages.createDealGeneral.fillContractingPartiesField', 'bmi');
 
             it('Wait for suggestions', function() {
