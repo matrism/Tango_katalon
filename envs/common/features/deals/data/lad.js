@@ -1,0 +1,81 @@
+exports.lad = {
+    publisherOverride: [
+        'India',
+    /*
+        'Algeria',
+        'Albania',
+        'Brazil',
+        'Canada',
+        'Croatia',
+        'China',
+        'France',
+        'Indonesia',
+        'Japan',
+        'Moldova',
+        'Romania',
+        'Hungary',
+        'Greece',
+        'Panama'
+        */
+    ],
+    societyAgreement: {
+        rightPanel: [
+            'bmi',
+            'ascap',
+            'mcps',
+            /*
+            'socan',
+            'sacem',
+            'akm',
+            'cmrra',
+            'zaiks',
+            'bum/ste',
+            'stim'
+            */
+        ],
+        leftPanel: [
+            'test',
+            'shilpa',
+            'creator',
+            /*
+            'adrian',
+            'deni',
+            'alex',
+            */
+        ],
+        leftPanelRow: [
+            'bmi',
+            'ascap',
+            'mcps',
+            /*
+            'socan',
+            'sacem',
+            'akm',
+            'sokoj',
+            'zaiks',
+            'bum/ste',
+            'stim',
+            'stemra',
+            'cmrra',
+            'fox',
+            'osa',
+            'musicaut',
+            'koda',
+            'komca',
+            'abramus',
+            'acum',
+            'aepi',
+            'apra',
+            'cash',
+            'compass',
+            'gema',
+            'msg',
+            'sabam',
+            'sazas',
+            'sayco',
+            'sesac',
+            'siae'
+            */
+        ]
+    }
+};

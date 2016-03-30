@@ -609,6 +609,7 @@ if (pages.createDealScope === undefined) {
                 })
                 .then(function clickOption() {
                     if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
                         desiredOption.click();
                     }
                 });

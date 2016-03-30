@@ -91,7 +91,8 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         selectTheContractPeriodNumberI: function (i) {
-            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
+            var el = browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")"));
+            asAlways(el, 'scrollIntoView','click');
         },
 
         checkTheContractPeriodNumberIIsDisplayed: function (i) {
