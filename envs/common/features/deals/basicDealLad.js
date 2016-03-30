@@ -84,8 +84,7 @@ exports.feature = [
             });
             cds.saveThePublisherShareSet();
 
-            //for (var i = 1; i <= 6; i++) {
-            for (var i = 1; i <= 2; i++) {
+            for (var i = 1; i <= 6; i++) {
                 steps.royaltyRates.addNewRoyaltySet();
                 if (i > 1) {
                     steps.royaltyRates.addEffectiveStartDate('2015-06-0' + i);
@@ -109,8 +108,7 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
-            //for (var i = 1; i <= 3; i++) {
-            for (var i = 1; i <= 2; i++) {
+            for (var i = 1; i <= 3; i++) {
                 steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(i);
 
                 data.societyAgreement.rightPanel.forEach(function (rp, rpIndex) {
@@ -129,8 +127,7 @@ exports.feature = [
                 steps.editDealScope.saveChangesSocietyAgreementNumberForm();
             }
 
-            //for (var i = 1; i <= 3; i++) {
-            for (var i = 1; i <= 1; i++) {
+            for (var i = 1; i <= 3; i++) {
                 steps.editDealContractPeriod.editSelectContractPeriodNumberI(i);
                 for (var j = 1; j <= 3; j++) {
                     var copies = (j == 3) ? 49 : 100;
@@ -156,8 +153,7 @@ exports.feature = [
             steps.editDealPayee.editFillIntoPayeeDistributionInputField();
             steps.editDealPayee.editSavePayeeToPayeeForm();
 
-            //for (var j = 2; j <= 200; j++) {
-            for (var j = 2; j <= 1; j++) {
+            for (var j = 2; j <= 200; j++) {
                 steps.editDealPayee.editSelectSpecificNewPayeePersonFromDropDown('person ' + j + ', TAT payee');
                 for (var i = 3 * j; i >= 3 * j - 2; i--) {
                     steps.editDealPayee.editAssociateSpecificScopeNumberIToNewPayee(i);
