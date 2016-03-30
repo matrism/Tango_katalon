@@ -7,12 +7,12 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'dealLad', 'regression', 'lad'];
+exports.commonFeatureTags = ['deals', 'lad'];
 
 exports.feature = [
     {
         name: 'Create a basic deal for LAD',
-        tags: ['basicDealLad'],
+        tags: ['ladCreateBasicDeal'],
         steps: function () {
             var d = steps.deal,
                 ccp = steps.createDealContractPeriod;
@@ -43,39 +43,40 @@ exports.feature = [
         }
     },
     {
-        name: 'LAD script',
-        tags: ['addscope'],
+        name: 'Add Assumptions and override publisher',
+        tags: ['ladAddAssumptionsOverridePublisher'],
         steps: function () {
             var d = steps.deal,
-                cds = steps.createDealScope;
-
-            var timeout = 100000;
+                cds = steps.createDealScope,
+                cdcp = steps.createDealContractPeriod,
+                rr = steps.royaltyRates,
+                eds = steps.editDealScope;
 
             d.openDealFromSlot('mainDeal');
             d.goToTermsDealTabDetails();
 
             //add Advance Assumptions to all CPs
             _.times(3, function (num) {
-                steps.createDealContractPeriod.selectContractPeriodNumberI(num + 1);
-                steps.createDealContractPeriod.itAddAdvanceAssumptions();
+                cdcp.selectContractPeriodNumberI(num + 1);
+                cdcp.itAddAdvanceAssumptions();
             });
 
             //add scope to the contract period 1
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            cdcp.selectContractPeriodNumberI(1);
             cds.addSpecificScopeTypeAndTerritory('Administration', 'Worldwide');
-            steps.createDealScope.clickOnAddPublisherShareSet({
+            cds.clickOnAddPublisherShareSet({
                 scrollIntoView: true,
             });
-            steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-            steps.createDealScope.fillIntoFirstPublisherNameAMField('53026414');
-            steps.createDealScope.selectSpecificPublisherNameDropDown();
-            steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
+            cds.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+            cds.fillIntoFirstPublisherNameAMField('53026414');
+            cds.selectSpecificPublisherNameDropDown();
+            cds.fillIntoFirstPublisherNameAMCollectField();
             for (var i = 2; i <= 3; i++) {
-                steps.createDealScope.clickAddChainLink();
-                steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
-                steps.createDealScope.fillIntoPublisherNameAMFieldChainI(i);
-                steps.createDealScope.selectSpecificPublisherNameDropDownChainI(i);
-                steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(i);
+                cds.clickAddChainLink();
+                cds.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
+                cds.fillIntoPublisherNameAMFieldChainI(i);
+                cds.selectSpecificPublisherNameDropDownChainI(i);
+                cds.fillIntoPublisherNameAMCollectFieldChainI(i);
             }
 
             //override publisher
@@ -85,83 +86,118 @@ exports.feature = [
             cds.saveThePublisherShareSet();
 
             for (var i = 1; i <= 6; i++) {
-                steps.royaltyRates.addNewRoyaltySet();
+                rr.addNewRoyaltySet();
                 if (i > 1) {
-                    steps.royaltyRates.addEffectiveStartDate('2015-06-0' + i);
+                    rr.addEffectiveStartDate('2015-06-0' + i);
                 }
-                steps.royaltyRates.addIncomeProviderByPartialMatch('test');
-                steps.royaltyRates.addRatePercentageToContractualField(10 * i);
-                steps.royaltyRates.clickOnReceiptApplicationMethod();
-                steps.royaltyRates.confirmChangingRateApplicationMethod();
+                rr.addIncomeProviderByPartialMatch('test');
+                rr.addRatePercentageToContractualField(10 * i);
+                rr.clickOnReceiptApplicationMethod();
+                rr.confirmChangingRateApplicationMethod();
                 steps.base.scrollIntoView('Done rate set button', element(by.css('.rate-sets-top-toolbar>button')));
-                steps.royaltyRates.saveRateSet();
+                rr.saveRateSet();
             }
 
             cds.shareScopeToAllContractPeriods();
 
-            steps.editDealScope.editSaveAllChanges();
-            steps.editDealScope.editConfirmModalDialogDirtyCheck();
+            eds.editSaveAllChanges();
+            eds.editConfirmModalDialogDirtyCheck();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+        }
+    },
+    {
+        name: 'Add Society Agreement',
+        tags: ['ladAddSocietyAgreement'],
+        steps: function () {
+            var d = steps.deal,
+                eds = steps.editDealScope;
 
-            //add society agreement number
+            d.openDealFromSlot('mainDeal');
+            d.goToTermsDealTabDetails();
+
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.selectScopeNumberI(1);
+            eds.selectScopeNumberI(1);
 
             for (var i = 1; i <= 3; i++) {
-                steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(i);
+                eds.editClickOnAddNewSocietyAgreementNumberI(i);
 
                 data.societyAgreement.rightPanel.forEach(function (rp, rpIndex) {
-                    steps.editDealScope.editSocietyAgreementNumberRightPanelNumberI(rpIndex + 1, rp);
+                    eds.editSocietyAgreementNumberRightPanelNumberI(rpIndex + 1, rp);
                 });
                 data.societyAgreement.leftPanel.forEach(function (lp, lpIndex) {
-                    steps.editDealScope.editSocietyAgreementNumberCreatorLeftPanelNumberI(lpIndex + 1, lp);
+                    eds.editSocietyAgreementNumberCreatorLeftPanelNumberI(lpIndex + 1, lp);
                     data.societyAgreement.leftPanelRow.forEach(function (lpr, lprIndex) {
                         if (lprIndex > 1) {
-                            steps.editDealScope.editClickOnAddCreatorSocietyAgreementNumberForm();
+                            eds.editClickOnAddCreatorSocietyAgreementNumberForm();
                         }
-                        steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(lpIndex + 1, lprIndex + 1, lpr);
+                        eds.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(lpIndex + 1, lprIndex + 1, lpr);
                     });
                 });
 
-                steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+                eds.saveChangesSocietyAgreementNumberForm();
             }
+
+        }
+    },
+    {
+        name: 'Copy scopes',
+        tags: ['ladCopyScopes'],
+        steps: function () {
+            var d = steps.deal,
+                eds = steps.editDealScope;
+
+            var timeout = 100000;
+
+            d.openDealFromSlot('mainDeal');
+            d.goToTermsDealTabDetails();
 
             for (var i = 1; i <= 3; i++) {
                 steps.editDealContractPeriod.editSelectContractPeriodNumberI(i);
                 for (var j = 1; j <= 3; j++) {
                     var copies = (j == 3) ? 49 : 100;
-                    steps.editDealScope.selectScopeNumberI(1);
-                    steps.editDealScope.editClickOnTheCopyScopeOptionNumberI(1);
-                    steps.editDealScope.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, copies);
-                    steps.editDealScope.clickOnCopyPublisherShareInCopyScopeModal();
-                    steps.editDealScope.clickOnCopyRoyaltyRatesInCopyScopeModal();
-                    steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
-                    //steps.editDealScope.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
+                    eds.selectScopeNumberI(1);
+                    eds.editClickOnTheCopyScopeOptionNumberI(1);
+                    eds.editFillIntoTheNumberOfCopiesForScopeNumberISpecificValue(1, copies);
+                    eds.clickOnCopyPublisherShareInCopyScopeModal();
+                    eds.clickOnCopyRoyaltyRatesInCopyScopeModal();
+                    eds.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
+                    //eds.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
                 }
             }
 
-            steps.deal.goToPayeesDealTabDetails();
-            steps.editDealPayee.editClickOneByPayeeHeaderLink();
+        }
+    },
+    {
+        name: 'Add Payees',
+        tags: ['ladAddPayees'],
+        steps: function () {
+            var d = steps.deal,
+                edp = steps.editDealPayee;
 
-            steps.editDealPayee.editSelectSpecificNewPayeePersonFromDropDown('person ' + 1 + ', TAT payee');
+            d.openDealFromSlot('mainDeal');
+            d.goToPayeesDealTabDetails();
+            edp.editClickOneByPayeeHeaderLink();
+
+            edp.editSelectSpecificNewPayeePersonFromDropDown('person ' + 1 + ', TAT payee');
             for (var i = 1; i <= 3; i++) {
-                steps.editDealPayee.editAssociateSpecificScopeNumberIToNewPayee(i);
+                edp.editAssociateSpecificScopeNumberIToNewPayee(i);
             }
-            steps.editDealPayee.editAddPayoutToPayee();
-            steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
-            steps.editDealPayee.editFillIntoPayeeDistributionInputField();
-            steps.editDealPayee.editSavePayeeToPayeeForm();
+            edp.editAddPayoutToPayee();
+            edp.editFillIntoPayeeLegalRightInputField();
+            edp.editFillIntoPayeeDistributionInputField();
+            edp.editSavePayeeToPayeeForm();
 
-            for (var j = 2; j <= 200; j++) {
-                steps.editDealPayee.editSelectSpecificNewPayeePersonFromDropDown('person ' + j + ', TAT payee');
+            //for (var j = 2; j <= 200; j++) {
+            for (var j = 2; j <= 3; j++) {
+                edp.editSelectSpecificNewPayeePersonFromDropDown('person ' + j + ', TAT payee');
                 for (var i = 3 * j; i >= 3 * j - 2; i--) {
-                    steps.editDealPayee.editAssociateSpecificScopeNumberIToNewPayee(i);
+                    edp.editAssociateSpecificScopeNumberIToNewPayee(i);
                 }
-                steps.editDealPayee.editAddPayoutToPayee();
-                steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
-                steps.editDealPayee.editFillIntoPayeeDistributionInputField();
-                steps.editDealPayee.editSavePayeeToPayeeForm();
+                edp.editAddPayoutToPayee();
+                edp.editFillIntoPayeeLegalRightInputField();
+                edp.editFillIntoPayeeDistributionInputField();
+                edp.editSavePayeeToPayeeForm();
             }
 
         }

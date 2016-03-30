@@ -1,7 +1,6 @@
 exports.lad = {
     publisherOverride: [
         'India',
-    /*
         'Algeria',
         'Albania',
         'Brazil',
@@ -16,14 +15,12 @@ exports.lad = {
         'Hungary',
         'Greece',
         'Panama'
-        */
     ],
     societyAgreement: {
         rightPanel: [
             'bmi',
             'ascap',
             'mcps',
-            /*
             'socan',
             'sacem',
             'akm',
@@ -31,23 +28,19 @@ exports.lad = {
             'zaiks',
             'bum/ste',
             'stim'
-            */
         ],
         leftPanel: [
             'test',
             'shilpa',
             'creator',
-            /*
             'adrian',
             'deni',
-            'alex',
-            */
+            'alex'
         ],
         leftPanelRow: [
             'bmi',
             'ascap',
             'mcps',
-            /*
             'socan',
             'sacem',
             'akm',
@@ -75,7 +68,6 @@ exports.lad = {
             'sayco',
             'sesac',
             'siae'
-            */
         ]
     }
 };
