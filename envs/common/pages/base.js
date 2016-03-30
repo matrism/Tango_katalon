@@ -73,6 +73,13 @@ exports.modalDialog = function () {
 exports.modalFooter = function () {
     return $('.modal-footer');
 };
+
+exports.modalFooterButtonByLabel = function (label) {
+    return exports.modalFooter().element(by.cssContainingText(
+        'button', label
+    ));
+};
+
 exports.expectModalPopUpToBeDisplayed = function (more) {
     more = more || {};
 
