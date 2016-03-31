@@ -152,11 +152,11 @@ exports.feature = [
                     eds.editSocietyAgreementNumberRightPanelNumberI(rpIndex + 1, rp);
                 });
                 data.societyAgreement.leftPanel.forEach(function (lp, lpIndex) {
+                    if (lpIndex > 0) {
+                        eds.editClickOnAddCreatorSocietyAgreementNumberForm();
+                    }
                     eds.editSocietyAgreementNumberCreatorLeftPanelNumberI(lpIndex + 1, lp);
                     data.societyAgreement.leftPanelRow.forEach(function (lpr, lprIndex) {
-                        if (lpIndex > 1) {
-                            eds.editClickOnAddCreatorSocietyAgreementNumberForm();
-                        }
                         eds.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(lpIndex + 1, lprIndex + 1, lpr);
                     });
                 });
