@@ -54,7 +54,8 @@ exports.feature = [
         steps: function () {
             var d = steps.deal,
                 cds = steps.createDealScope,
-                ccp = steps.createDealContractPeriod;
+                ccp = steps.createDealContractPeriod,
+                eds = steps.editDealScope;
 
             if(systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
@@ -89,7 +90,6 @@ exports.feature = [
             cds.saveThePublisherShareSet();
 
             eds.editSaveAllChanges();
-            eds.editConfirmModalDialogDirtyCheck();
             d.waitForDealToBeSaved();
         }
     },
@@ -108,6 +108,10 @@ exports.feature = [
                 d.openDealFromSlot('mainDeal');
             }
 
+            d.goToTermsDealTabDetails();
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            eds.selectScopeNumberI(1);
+
             for (var i = 1; i <= 6; i++) {
                 rr.addNewRoyaltySet();
                 if (i > 1) {
@@ -122,10 +126,6 @@ exports.feature = [
             }
 
             cds.shareScopeToAllContractPeriods();
-
-            eds.editSaveAllChanges();
-            eds.editConfirmModalDialogDirtyCheck();
-            d.waitForDealToBeSaved();
         }
     },
     {
