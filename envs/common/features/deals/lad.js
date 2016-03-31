@@ -49,7 +49,7 @@ exports.feature = [
         }
     },
     {
-        name: 'Add PSS and override publisher',
+        name: 'Add PSS, override publisher and share scope',
         tags: ['ladPSSOverridePublisher'],
         steps: function () {
             var d = steps.deal,
@@ -91,6 +91,8 @@ exports.feature = [
 
             eds.editSaveAllChanges();
             d.waitForDealToBeSaved();
+
+            cds.shareScopeToAllContractPeriods();
         }
     },
     {
@@ -124,8 +126,6 @@ exports.feature = [
                 steps.base.scrollIntoView('Done rate set button', element(by.css('.rate-sets-top-toolbar>button')));
                 rr.saveRateSet();
             }
-
-            cds.shareScopeToAllContractPeriods();
         }
     },
     {
@@ -334,8 +334,8 @@ exports.feature = [
             edp.editFillIntoPayeeDistributionInputField();
             edp.editSavePayeeToPayeeForm();
 
-            //for (var j = 2; j <= 200; j++) {
-            for (var j = 2; j <= 10; j++) {
+            for (var j = 2; j <= 200; j++) {
+            //for (var j = 2; j <= 10; j++) {
                 edp.editSelectSpecificNewPayeePersonFromDropDown('person ' + j + ', TAT payee');
                 for (var i = 3 * j; i >= 3 * j - 2; i--) {
                     edp.editAssociateSpecificScopeNumberIToNewPayee(i);
@@ -365,8 +365,8 @@ exports.feature = [
             steps.deal.goToTermsDealTabDetails();
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
 
-            //for (var acq = 0; acq <= 200; acq++) {
-            for (var acq = 0; acq <= 10; acq++) {
+            for (var acq = 0; acq <= 200; acq++) {
+            //for (var acq = 0; acq <= 10; acq++) {
                 countPtc = 0;
                 steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
                 steps.editDealRtp.selectScopeNumberIFromInput(0, 0, 'acq');
