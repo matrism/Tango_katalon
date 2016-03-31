@@ -168,76 +168,6 @@ exports.feature = [
         }
     },
     {
-        name: 'Add Payees',
-        tags: ['ladAddPayees'],
-        steps: function () {
-            var d = steps.deal,
-                edp = steps.editDealPayee;
-
-            d.openDealFromSlot('mainDeal');
-            d.goToPayeesDealTabDetails();
-            edp.editClickOneByPayeeHeaderLink();
-
-            edp.editSelectSpecificNewPayeePersonFromDropDown('person ' + 1 + ', TAT payee');
-            for (var i = 1; i <= 3; i++) {
-                edp.editAssociateSpecificScopeNumberIToNewPayee(i);
-            }
-            edp.editAddPayoutToPayee();
-            edp.editFillIntoPayeeLegalRightInputField();
-            edp.editFillIntoPayeeDistributionInputField();
-            edp.editSavePayeeToPayeeForm();
-
-            //for (var j = 2; j <= 200; j++) {
-            for (var j = 2; j <= 3; j++) {
-                edp.editSelectSpecificNewPayeePersonFromDropDown('person ' + j + ', TAT payee');
-                for (var i = 3 * j; i >= 3 * j - 2; i--) {
-                    edp.editAssociateSpecificScopeNumberIToNewPayee(i);
-                }
-                edp.editAddPayoutToPayee();
-                edp.editFillIntoPayeeLegalRightInputField();
-                edp.editFillIntoPayeeDistributionInputField();
-                edp.editSavePayeeToPayeeForm();
-            }
-
-        }
-    },
-    {
-        name: 'Add RTP sets',
-        tags: ['ladRtp'],
-        steps: function () {
-            var countPtc = 0,
-                d = steps.deal,
-                edp = steps.editDealPayee;
-
-            d.openDealFromSlot('mainDeal');
-
-            steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToRightsTermPeriodsTermsTabDetails();
-
-            for (var acq = 0; acq <= 4; acq++) {
-                countPtc = 0;
-                steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
-                steps.editDealRtp.selectScopeNumberIFromInput(0, 0, 'acq');
-
-                for (var ret = 0; ret <= 1; ret++) {
-                    steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
-                    steps.editDealRtp.selectScopeNumberIFromInput(0, ret, 'ret');
-                    steps.editDealRtp.selectScopeNumberIFromInput(1, ret, 'ret');
-                    steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(ret + 1, 'Life of Copyright');
-                    for (var ptc = 0; ptc <= 1; ptc++) {
-                        steps.editDealRtp.clickOnAddPostTermCollectionFromRetention(ret);
-                        steps.editDealRtp.selectScopeNumberIFromInput(0, countPtc, 'ptc');
-                        steps.editDealRtp.selectScopeNumberIFromInput(1, countPtc, 'ptc');
-                        steps.editDealRtp.editFillIntoDurationFieldPostTermCollectionFromRetention(ret, ptc);
-                        countPtc++;
-                    }
-                }
-
-                steps.editDealRtp.editSaveAnotherAcquisitionForm();
-            }
-        }
-    },
-    {
         name: 'AddEndRules',
         tags: ['ladEndRules'],
         steps: function () {
@@ -336,6 +266,77 @@ exports.feature = [
             steps.editAdvances.expectEachContractPeriodToHaveAdvances(2);
             steps.editAdvances.expectContractPeriodsToDisplayAdvanceAssumptionsLink();
             steps.editAdvances.expectAdvanceAssumptionsPopUpToAppear();
+        }
+    },
+    {
+        name: 'Add Payees',
+        tags: ['ladAddPayees'],
+        steps: function () {
+            var d = steps.deal,
+                edp = steps.editDealPayee;
+
+            d.openDealFromSlot('mainDeal');
+            d.goToPayeesDealTabDetails();
+            edp.editClickOneByPayeeHeaderLink();
+
+            edp.editSelectSpecificNewPayeePersonFromDropDown('person ' + 1 + ', TAT payee');
+            for (var i = 1; i <= 3; i++) {
+                edp.editAssociateSpecificScopeNumberIToNewPayee(i);
+            }
+            edp.editAddPayoutToPayee();
+            edp.editFillIntoPayeeLegalRightInputField();
+            edp.editFillIntoPayeeDistributionInputField();
+            edp.editSavePayeeToPayeeForm();
+
+            for (var j = 2; j <= 200; j++) {
+            //for (var j = 2; j <= 10; j++) {
+                edp.editSelectSpecificNewPayeePersonFromDropDown('person ' + j + ', TAT payee');
+                for (var i = 3 * j; i >= 3 * j - 2; i--) {
+                    edp.editAssociateSpecificScopeNumberIToNewPayee(i);
+                }
+                edp.editAddPayoutToPayee();
+                edp.editFillIntoPayeeLegalRightInputField();
+                edp.editFillIntoPayeeDistributionInputField();
+                edp.editSavePayeeToPayeeForm();
+            }
+
+        }
+    },
+    {
+        name: 'Add RTP sets',
+        tags: ['ladRtp'],
+        steps: function () {
+            var countPtc = 0,
+                d = steps.deal,
+                edp = steps.editDealPayee;
+
+            d.openDealFromSlot('mainDeal');
+
+            steps.deal.goToTermsDealTabDetails();
+            steps.deal.goToRightsTermPeriodsTermsTabDetails();
+
+            for (var acq = 0; acq <= 200; acq++) {
+            //for (var acq = 0; acq <= 10; acq++) {
+                countPtc = 0;
+                steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
+                steps.editDealRtp.selectScopeNumberIFromInput(0, 0, 'acq');
+
+                for (var ret = 0; ret <= 1; ret++) {
+                    steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
+                    steps.editDealRtp.selectScopeNumberIFromInput(0, ret, 'ret');
+                    steps.editDealRtp.selectScopeNumberIFromInput(1, ret, 'ret');
+                    steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(ret + 1, 'Life of Copyright');
+                    for (var ptc = 0; ptc <= 1; ptc++) {
+                        steps.editDealRtp.clickOnAddPostTermCollectionFromRetention(ret);
+                        steps.editDealRtp.selectScopeNumberIFromInput(0, countPtc, 'ptc');
+                        steps.editDealRtp.selectScopeNumberIFromInput(1, countPtc, 'ptc');
+                        steps.editDealRtp.editFillIntoDurationFieldPostTermCollectionFromRetention(ret, ptc);
+                        countPtc++;
+                    }
+                }
+
+                steps.editDealRtp.editSaveAnotherAcquisitionForm();
+            }
         }
     }
 ];
