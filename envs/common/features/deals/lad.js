@@ -54,9 +54,7 @@ exports.feature = [
         steps: function () {
             var d = steps.deal,
                 cds = steps.createDealScope,
-                ccp = steps.createDealContractPeriod,
-                rr = steps.royaltyRates,
-                eds = steps.editDealScope;
+                ccp = steps.createDealContractPeriod;
 
             if(systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
@@ -89,6 +87,23 @@ exports.feature = [
                 cds.itOverridePublisherShare(po + 'testpub1', po + 'testpub1', po);
             });
             cds.saveThePublisherShareSet();
+
+        }
+    },
+    {
+        name: 'Add Royalty rates and share scope',
+        tags: ['ladAddRoyaltyRates'],
+        steps: function () {
+            var d = steps.deal,
+                rr = steps.royaltyRates,
+                cds = steps.createDealScope,
+                eds = steps.editDealScope;
+
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
 
             for (var i = 1; i <= 6; i++) {
                 rr.addNewRoyaltySet();
@@ -145,7 +160,6 @@ exports.feature = [
 
                 eds.saveChangesSocietyAgreementNumberForm();
             }
-
         }
     },
     {
