@@ -59,6 +59,7 @@ addStepGroup(exports, 'Publisher', function (group) {
         'Enter society agreement number',
 
         'Enter society search terms',
+        'Expect no society search results',
         'Select society search result by name',
 
         'Validate society agreement number row count',

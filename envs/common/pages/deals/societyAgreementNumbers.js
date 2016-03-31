@@ -381,6 +381,17 @@ exports.publisher = (function () {
         return element.all(by.repeater('match in matches'));
     };
 
+    p.noSocietySearchResultsMessage = function () {
+        return $('[data-ng-if="match.model.validResult == false"]');
+    };
+
+    p.expectNoSocietySearchResults = function () {
+        return asAlways(
+            p.noSocietySearchResultsMessage(),
+            'waitUntilVisible'
+        );
+    };
+
     p.societySearchResultRowByName = function (name) {
         var els = p.societySearchResultRows().$$('.pull-left');
 
