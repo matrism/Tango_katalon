@@ -58,7 +58,12 @@ exports.feature = [
                 rr = steps.royaltyRates,
                 eds = steps.editDealScope;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
+
             d.goToTermsDealTabDetails();
 
             //add scope to the contract period 1
@@ -112,7 +117,11 @@ exports.feature = [
             var d = steps.deal,
                 eds = steps.editDealScope;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
             d.goToTermsDealTabDetails();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
@@ -148,7 +157,11 @@ exports.feature = [
 
             var timeout = 100000;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
             d.goToTermsDealTabDetails();
 
             for (var i = 1; i <= 3; i++) {
@@ -173,7 +186,11 @@ exports.feature = [
         steps: function () {
             var d = steps.deal;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
 
             d.goToTermsDealTabDetails();
 
@@ -200,7 +217,11 @@ exports.feature = [
         steps: function () {
             var d = steps.deal;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
 
             d.goToGeneralDealTabDetail();
 
@@ -245,7 +266,11 @@ exports.feature = [
         steps: function () {
             var d = steps.deal;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
 
             d.goToTab('Advances');
             _.times(3, function (cpNum) {
@@ -275,7 +300,11 @@ exports.feature = [
             var d = steps.deal,
                 edp = steps.editDealPayee;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
             d.goToPayeesDealTabDetails();
             edp.editClickOneByPayeeHeaderLink();
 
@@ -310,7 +339,11 @@ exports.feature = [
                 d = steps.deal,
                 edp = steps.editDealPayee;
 
-            d.openDealFromSlot('mainDeal');
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
 
             steps.deal.goToTermsDealTabDetails();
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
