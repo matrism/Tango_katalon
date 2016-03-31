@@ -35,6 +35,12 @@ exports.feature = [
             ccp.fillContractPeriodDescription('Description 3');
             ccp.fillEndTargetMonths();
 
+            //add Advance Assumptions to all CPs
+            _.times(3, function (num) {
+                ccp.selectContractPeriodNumberI(num + 1);
+                ccp.itAddAdvanceAssumptions();
+            });
+
             d.itContinueToNextPage();
             d.saveDeal();
             d.waitForDealToBeSaved();
@@ -43,26 +49,20 @@ exports.feature = [
         }
     },
     {
-        name: 'Add Assumptions and override publisher',
+        name: 'Add PSS and override publisher',
         tags: ['ladAddAssumptionsOverridePublisher'],
         steps: function () {
             var d = steps.deal,
                 cds = steps.createDealScope,
-                cdcp = steps.createDealContractPeriod,
+                ccp = steps.createDealContractPeriod,
                 rr = steps.royaltyRates,
                 eds = steps.editDealScope;
 
             d.openDealFromSlot('mainDeal');
             d.goToTermsDealTabDetails();
 
-            //add Advance Assumptions to all CPs
-            _.times(3, function (num) {
-                cdcp.selectContractPeriodNumberI(num + 1);
-                cdcp.itAddAdvanceAssumptions();
-            });
-
             //add scope to the contract period 1
-            cdcp.selectContractPeriodNumberI(1);
+            ccp.selectContractPeriodNumberI(1);
             cds.addSpecificScopeTypeAndTerritory('Administration', 'Worldwide');
             cds.clickOnAddPublisherShareSet({
                 scrollIntoView: true,
@@ -102,8 +102,7 @@ exports.feature = [
 
             eds.editSaveAllChanges();
             eds.editConfirmModalDialogDirtyCheck();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+            d.waitForDealToBeSaved();
         }
     },
     {
@@ -128,7 +127,7 @@ exports.feature = [
                 data.societyAgreement.leftPanel.forEach(function (lp, lpIndex) {
                     eds.editSocietyAgreementNumberCreatorLeftPanelNumberI(lpIndex + 1, lp);
                     data.societyAgreement.leftPanelRow.forEach(function (lpr, lprIndex) {
-                        if (lprIndex > 1) {
+                        if (lpIndex > 1) {
                             eds.editClickOnAddCreatorSocietyAgreementNumberForm();
                         }
                         eds.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(lpIndex + 1, lprIndex + 1, lpr);
@@ -200,6 +199,143 @@ exports.feature = [
                 edp.editSavePayeeToPayeeForm();
             }
 
+        }
+    },
+    {
+        name: 'Add RTP sets',
+        tags: ['ladRtp'],
+        steps: function () {
+            var countPtc = 0,
+                d = steps.deal,
+                edp = steps.editDealPayee;
+
+            d.openDealFromSlot('mainDeal');
+
+            steps.deal.goToTermsDealTabDetails();
+            steps.deal.goToRightsTermPeriodsTermsTabDetails();
+
+            for (var acq = 0; acq <= 4; acq++) {
+                countPtc = 0;
+                steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
+                steps.editDealRtp.selectScopeNumberIFromInput(0, 0, 'acq');
+
+                for (var ret = 0; ret <= 1; ret++) {
+                    steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
+                    steps.editDealRtp.selectScopeNumberIFromInput(0, ret, 'ret');
+                    steps.editDealRtp.selectScopeNumberIFromInput(1, ret, 'ret');
+                    steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(ret + 1, 'Life of Copyright');
+                    for (var ptc = 0; ptc <= 1; ptc++) {
+                        steps.editDealRtp.clickOnAddPostTermCollectionFromRetention(ret);
+                        steps.editDealRtp.selectScopeNumberIFromInput(0, countPtc, 'ptc');
+                        steps.editDealRtp.selectScopeNumberIFromInput(1, countPtc, 'ptc');
+                        steps.editDealRtp.editFillIntoDurationFieldPostTermCollectionFromRetention(ret, ptc);
+                        countPtc++;
+                    }
+                }
+
+                steps.editDealRtp.editSaveAnotherAcquisitionForm();
+            }
+        }
+    },
+    {
+        name: 'AddEndRules',
+        tags: ['ladEndRules'],
+        steps: function () {
+            var d = steps.deal;
+
+            d.openDealFromSlot('mainDeal');
+
+            d.goToTermsDealTabDetails();
+
+            describe('Add End Rules to all CPs', function () {
+                _.times(3, function (num) {
+                    steps.createDealContractPeriod.selectContractPeriodNumberI(num + 1);
+                    steps.endRules.clickAddEndRulesLink();
+                    steps.endRules.setRule(data.endRules[0]);
+
+                    _.times(4, function (ruleNum){
+                        var i = ruleNum+1;
+
+                        steps.endRules.clickAddRuleLink();
+                        steps.endRules.setRule(data.endRules[i]);
+                    });
+                    steps.endRules.saveRules();
+                });
+            });
+        }
+    },
+    {
+        name: 'Add Contacts and Contracting Parties',
+        tags: ['ladContactsAndContractingParties'],
+        steps: function () {
+            var d = steps.deal;
+
+            d.openDealFromSlot('mainDeal');
+
+            d.goToGeneralDealTabDetail();
+
+            describe('Add 10 external contacts', function () {
+                var roles = ['Attorney', 'Business Manager', 'Contact', 'Producer', 'Approvals', 'Legal Notices', 'Manager', 'Legal notices CC', 'Attorney', 'Business Manager'],
+                    names = ['Bob', 'Sharon', 'John', 'Sarah', 'William', 'Diane', 'Richard', 'Philip', 'Steve', 'Claire'];
+
+                steps.deal.clickAddExternalContactLink();
+                _.each(roles, function (role, i) {
+                    steps.deal.addExternalContact(role, names[i]);
+                });
+                steps.deal.saveExternalContacts();
+            });
+
+            describe('Add 2 internal contacts', function () {
+                var roles = ['Attorney', 'Product Manager'],
+                    names = ['Mackintosh, Alex', 'John'];
+
+                steps.deal.clickAddInternalContactLink();
+                _.each(roles, function (role, i) {
+                    steps.deal.addInternalContact(role, names[i]);
+                });
+                steps.deal.saveInternalContacts();
+            });
+
+            describe('Add 5 contracting parties', function () {
+                steps.deal.expectNumberOfContractingPartiesToBe(1);
+                steps.deal.addContractingParties('SACEM', 'JOHN ADAMS', 'Katy', 'ASCAP', 'MAX MARTIN');
+            });
+
+            describe('Refresh page and expect added data to be present', function () {
+                steps.deal.refreshThePage();
+                steps.deal.expectNumberOfContractingPartiesToBe(6);
+                steps.deal.expectNumberOfExternalContactsToBe(10);
+                steps.deal.expectNumberOfInternalContactsToBe(2);
+            });
+        }
+    },
+    {
+        name: 'Add Advances',
+        tags: ['ladAdvances'],
+        steps: function () {
+            var d = steps.deal;
+
+            d.openDealFromSlot('mainDeal');
+
+            d.goToTab('Advances');
+            _.times(3, function (cpNum) {
+                describe('Add Advances for Contract Period #' + (cpNum+1), function (){
+                    _.times(2, function () {
+                        steps.editAdvances.clickAddAdvanceButton();
+                        steps.editAdvances.selectContractPeriodByIndex(cpNum+1);
+                        steps.editAdvances.setAdvanceAmount(100);
+                        steps.editAdvances.setCurrency('USD');
+                        steps.editAdvances.distributionRules.setWhen('Contract Execution');
+                        steps.editAdvances.saveAdvance();
+                        steps.editAdvances.expectToBeRedirectedToAdvanceSummary();
+                    });
+                });
+            });
+
+            steps.editAdvances.expectContractPeriodsToBe(3);
+            steps.editAdvances.expectEachContractPeriodToHaveAdvances(2);
+            steps.editAdvances.expectContractPeriodsToDisplayAdvanceAssumptionsLink();
+            steps.editAdvances.expectAdvanceAssumptionsPopUpToAppear();
         }
     }
 ];

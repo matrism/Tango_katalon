@@ -8,6 +8,7 @@ exports.addAdvanceButton = function () {
 
 exports.clickAddAdvanceButton = function () {
     var button = exports.addAdvanceButton();
+    pages.base.scrollIntoView(button);
     browser.wait(EC.visibilityOf(button));
 
     button.click();

@@ -69,5 +69,29 @@ exports.lad = {
             'sesac',
             'siae'
         ]
-    }
+    },
+    endRules: [
+        {
+            endRule: 'Repayment Date',
+            ruleParams: ['Balance Repaid', 10, false, '=', 'MDRC Complete']
+        },
+        {
+            endRule: 'MDRC Complete Date',
+            ruleParams: ['MDRC Complete', 20, undefined, '<', 'Pre-Defined Date', '2016-03-03'],
+        },
+        {
+            endRule: 'Pre-Defined Date',
+            endRuleParam: '2016-03-03',
+            ruleParams: ['Current date', undefined, undefined, '=', 'Pre-Defined Date', '2016-03-03'],
+        },
+        {
+            endRule: 'Recouped Date',
+            ruleParams: ['Final Contract Period', undefined, undefined, '=', 'TRUE'],
+        },
+        {
+            endRule: 'Target End Date',
+            ruleParams: ['Recouped', 50, true, '< or =', 'MDRC Complete'],
+        }
+
+    ]
 };
