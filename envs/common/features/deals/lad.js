@@ -50,7 +50,7 @@ exports.feature = [
     },
     {
         name: 'Add PSS and override publisher',
-        tags: ['ladAddAssumptionsOverridePublisher'],
+        tags: ['ladPSSOverridePublisher'],
         steps: function () {
             var d = steps.deal,
                 cds = steps.createDealScope,
@@ -88,6 +88,9 @@ exports.feature = [
             });
             cds.saveThePublisherShareSet();
 
+            eds.editSaveAllChanges();
+            eds.editConfirmModalDialogDirtyCheck();
+            d.waitForDealToBeSaved();
         }
     },
     {
