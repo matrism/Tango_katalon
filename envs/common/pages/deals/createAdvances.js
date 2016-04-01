@@ -12,6 +12,7 @@ if (pages.createDealAdvances === undefined) {
             advanceDetailsDistributionRulesCurrencyArrow: {css: "div[data-validation-class='advancePaymentDistributionCurrency'] button.btn.dropdown-toggle"},
             firstDistributionRulesPercentAdvanceDetails: {css: "table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(1) input[data-ng-model='apd.percent']"},
             addAdvanceApplicableEarningsLink: {css: "a[data-ng-click='aaeLinkOnClick(true, aaeForm.$invalid, modified)']"},
+            viewAdvanceApplicableEarningsLink: {css: "a[data-ng-click='aaeLinkOnClick(true, aaeForm.$invalid, modified)']:nth-child(2)"},
             setDefaultsLinkAdvanceApplicableEarnings: {css: "table thead tr th.percent-income a[data-ng-click='setAllDefaults()']"},
             clearAllLinkAdvanceApplicableEarnings: {css: "table thead tr th.percent-income a[data-ng-click='clearAllDefaults()']"},
             includeAllPipelineCheckBoxAdvanceApplicableEarnings: {css: "table thead tr th.includes-pipeline span[data-ng-click='toggleAllPipelines()'] i"},
@@ -64,7 +65,12 @@ if (pages.createDealAdvances === undefined) {
             definePrintLabelsInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             defineOthersLabelsInputFieldAdvanceApplicableEarnings: {css: "table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             cancelAdvanceApplicableEarningsButton: {css: "div[data-ng-form='applicableEarningsForm'] div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
-            doneAdvanceApplicableEarningsButton: {css: "div[data-ng-form='applicableEarningsForm'] div.CONTROLS.clearfix button[data-ng-click='doneEditingApplicableEarnings(applicableEarningsForm.$invalid)']"}
+            doneAdvanceApplicableEarningsButton: {css: "div[data-ng-form='applicableEarningsForm'] div.CONTROLS.clearfix button[data-ng-click='doneEditingApplicableEarnings(applicableEarningsForm.$invalid)']"},
+            aaeWarningUnsavedData: {css: "div.advance-earnings.span12.nomargins.EDITOR span.error-text.ng-scope span"},
+            aaeCollapseIconWarningUnsavedData: {css: "div[data-ng-form='aaeForm'] div.pull-left.controls i"},
+            modalBodyCancelAdvance: {css: "div.modal-body p[data-ng-show='data.shouldResetAAE']"},
+            noModalBodyCancelAdvance: {css: "div.modal-footer button[data-ng-click='cancel()']"},
+            cancelThisAdvanceButton: {css: "button[data-ng-click='$external.DA.showCancelAdvanceModal()']"}
         },
 
         clickOnTheAddFirstAdvanceLink: function () {
@@ -181,6 +187,11 @@ if (pages.createDealAdvances === undefined) {
                     var element = options[randomNumber];
                     element.click();
                 });
+        },
+
+        clickOnTheViewAdvanceApplicableEarningsLink: function () {
+            pages.createDealAdvances.elems.viewAdvanceApplicableEarningsLink.click();
+            pages.createDealAdvances.waitForAjax();
         },
 
         clickOnTheAddViewAdvanceApplicableEarningsLink: function () {
@@ -387,26 +398,25 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.defineSynchLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            element(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(1) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
 
@@ -418,26 +428,25 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.defineMechLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            element(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(2) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
         selectTheRandomDefinePerfLabelAdvanceApplicableEarnings: function () {
@@ -448,26 +457,25 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.definePerfLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            element(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(3) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
 
@@ -479,26 +487,25 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.defineGrandLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            element(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(4) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
         selectTheRandomDefineDigitalLabelAdvanceApplicableEarnings: function () {
@@ -509,26 +516,25 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.defineDigitalLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
         selectTheRandomDefinePrintLabelAdvanceApplicableEarnings: function () {
@@ -539,26 +545,25 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.definePrintLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            element(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(5) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
         selectTheRandomDefineOtherLabelAdvanceApplicableEarnings: function () {
@@ -569,30 +574,34 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.defineOthersLabelsInputFieldAdvanceApplicableEarnings.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions.ng-scope"))));
 
-            element(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            element(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("table tbody tr:nth-child(6) td.advance-ea-labels.pipeline-labels ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
         clickOnTheDoneAdvanceApplicableEarnings: function () {
             pages.createDealAdvances.elems.doneAdvanceApplicableEarningsButton.click();
+            pages.createDealAdvances.waitForAjax();
+        },
+
+        clickOnTheCancelThisAdvanceButton: function () {
+            pages.createDealAdvances.elems.cancelThisAdvanceButton.click();
             pages.createDealAdvances.waitForAjax();
         },
 

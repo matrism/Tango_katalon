@@ -72,6 +72,12 @@ if (steps.createDealAdvances === undefined) {
             });
         },
 
+        clickOnViewAdvanceApplicableEarningsLink: function () {
+            it("Click on the view advance applicable earning link ", function () {
+                pages.createDealAdvances.clickOnTheViewAdvanceApplicableEarningsLink();
+            });
+        },
+
         clickOnSetDefaultsLinkAdvanceApplicableEarnings: function () {
             it("Click on the set defaults link advance applicable earnings ", function () {
                 pages.createDealAdvances.clickOnTheSetDefaultsLinkAdvanceApplicableEarnings();
@@ -255,6 +261,48 @@ if (steps.createDealAdvances === undefined) {
         clickOnCancelAdvanceApplicableEarnings: function () {
             it("Click on the cancel advance applicable earnings ", function () {
                 pages.createDealAdvances.clickOnTheCancelAdvanceApplicableEarnings();
+            });
+        },
+
+        checkAdvanceApplicableEarningWarningUnsavedData: function () {
+            it("Check the advance applicable earning warning message unsaved data is ok ", function () {
+                pages.createDealAdvances.elems.aaeWarningUnsavedData.getText().then(function (promise) {
+                    console.log("Advance applicable earnings warning data is: " + promise);
+                    expect(promise).toEqual("Unsaved Data. To ensure that Advance Applicable Earnings is saved, there must also be a saved Advance for this Deal.");
+                });
+            });
+        },
+
+        checkTheCancelModalBodyAdvanceApplicableEarningsWarningUnsavedDataMessage: function () {
+            it("Check the cancel modal body warning message for advance applicable earnings at cancel advance ", function () {
+                pages.createDealAdvances.elems.modalBodyCancelAdvance.getText().then(function (promise) {
+                    console.log("The cancel modal body warning message for advance applicable earnings at cancel advance is: " + promise);
+                    expect(promise).toEqual("Note that the unsaved data within Advance Applicable Earnings will be lost by this Cancel action.");
+                });
+                pages.createDealAdvances.waitForAjax();
+            });
+        },
+
+        clickOnNoOnCancelAdvanceModalDialog: function () {
+            it("Click on no on cancel advance modal dialog ", function () {
+                pages.base.scrollIntoView(pages.createDealAdvances.elems.noModalBodyCancelAdvance);
+                pages.createDealAdvances.elems.noModalBodyCancelAdvance.click();
+                pages.createDealAdvances.waitForAjax();
+            });
+        },
+
+        checkAdvanceApplicableEarningCollapseWarningTooltipUnsavedData: function () {
+            it("Check the advance applicable earning collapse warning message tooltip unsaved data is ok ", function () {
+                pages.createDealAdvances.elems.aaeCollapseIconWarningUnsavedData.getAttribute("data-tooltip").then(function (promise) {
+                    console.log("Advance applicable earnings collapse tooltip unsaved data warning message is: " + promise);
+                    expect(promise).toEqual("Unsaved Data. To ensure that Advance Applicable Earnings is saved, there must also be a saved Advance for this Deal.");
+                });
+            });
+        },
+
+        clickOnCancelThisAdvanceButton: function () {
+            it("Click on cancel this advance button ", function () {
+                pages.createDealAdvances.clickOnTheCancelThisAdvanceButton();
             });
         },
 
