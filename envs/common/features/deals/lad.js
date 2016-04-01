@@ -449,6 +449,45 @@ exports.feature = [
         }
     },
     {
+        name: "Add related deals",
+        tags: ["ladRelatedDeals"],
+        steps: function () {
+            var d = steps.deal,
+                rd = steps.relatedDeal,
+                edr = steps.editDealRtp;
+
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
+
+            steps.deal.goToGeneralDealTabDetail();
+            steps.deal.goToRelatedDealsGeneralTabDetails();
+            //rd.checkNoRelatedDealsDefined();
+
+            ['a', 'c', 'd', 'g'].forEach(function (i) {
+                rd.clickOnAddRelatedDealLink();
+                _.times(20, function () {
+                    rd.selectSpecificContractingPartyRelatedDeals(i);
+                    rd.clickValueRelationshipDropDown();
+                    rd.selectRandomValueRelationshipDropDown();
+                });
+                rd.clickOnSaveRelatedDeal();
+            });
+
+            ['p', 't'].forEach(function (i) {
+                rd.clickOnAddRelatedDealLink();
+                _.times(10, function () {
+                    rd.selectSpecificContractingPartyRelatedDeals(i);
+                    rd.clickValueRelationshipDropDown();
+                    rd.selectRandomValueRelationshipDropDown();
+                });
+                rd.clickOnSaveRelatedDeal();
+            });
+        }
+    },
+    {
         name: 'Add creators to multiple scopes',
         tags: ['ladScopeCreatorsMultiple'],
         steps: function () {
