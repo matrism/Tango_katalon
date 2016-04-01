@@ -92,7 +92,9 @@ exports.feature = [
             eds.editSaveAllChanges();
             d.waitForDealToBeSaved();
 
-            cds.shareScopeToAllContractPeriods();
+            cds.clickOnShareScope();
+            cds.selectAllContractPeriodsShareScopeModalDialog();
+            cds.clickOnTheDoneShareScopeModalDialog();
         }
     },
     {
