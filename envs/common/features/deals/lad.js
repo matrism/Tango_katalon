@@ -132,6 +132,33 @@ exports.feature = [
         }
     },
     {
+        name: 'Add scope creators',
+        tags: ['ladScopeCreators'],
+        steps: function () {
+            var d = steps.deal,
+                edcp = steps.editDealContractPeriod,
+                eds = steps.editDealScope;
+
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
+
+            d.goToTermsDealTabDetails();
+
+            edcp.editSelectContractPeriodNumberI(1);
+            eds.selectScopeNumberI(1);
+            eds.editScopeArea();
+            data.creators.forEach(function (creator) {
+                eds.enterCreatorSearchTerms(creator);
+                eds.selectCreatorSearchResultByName(creator);
+            });
+            eds.editSaveScopeChanges();
+            eds.editConfirmModalDialogDirtyCheck();
+        }
+    },
+    {
         name: 'Add Society Agreement',
         tags: ['ladAddSocietyAgreement'],
         steps: function () {
@@ -419,6 +446,59 @@ exports.feature = [
 
                 edr.editSaveAnotherAcquisitionForm();
             }
+        }
+    },
+    {
+        name: 'Add creators to multiple scopes',
+        tags: ['ladScopeCreatorsMultiple'],
+        steps: function () {
+            var d = steps.deal,
+                edcp = steps.editDealContractPeriod,
+                eds = steps.editDealScope;
+
+            if(systemConfig.dealId) {
+                steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
+            } else {
+                d.openDealFromSlot('mainDeal');
+            }
+
+            d.goToTermsDealTabDetails();
+
+            _.times(3, function (i) {
+                describe('Contract Period ' + (i + 1), function () {
+                    edcp.editSelectContractPeriodNumberI(i);
+
+                    _.times(250, function (j) {
+                        describe('Scope ' + (j + 1), function () {
+                            eds.selectScopeNumberI(j);
+
+                            eds.editScopeArea();
+
+                            data.creators.forEach(function (creator) {
+                                eds.enterCreatorSearchTerms(creator);
+                                eds.selectCreatorSearchResultByName(creator);
+                            });
+
+                            eds.editSaveScopeChanges();
+                            eds.editConfirmModalDialogDirtyCheck();
+                        });
+                    });
+                });
+            });
+
+            _.times(3, function (i) {
+                describe('Contract Period ' + (i + 1), function () {
+                    edcp.editSelectContractPeriodNumberI(i);
+
+                    [0, 199, 249].forEach(function (j) {
+                        describe('Scope ' + (j + 1), function () {
+                            eds.selectScopeNumberI(j);
+
+                            eds.validateCreatorsLabel(data.creators.join(', '));
+                        });
+                    });
+                });
+            });
         }
     }
 ];

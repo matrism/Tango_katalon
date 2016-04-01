@@ -93,5 +93,13 @@ exports.lad = {
             ruleParams: ['Recouped', 50, true, '< or =', 'MDRC Complete'],
         }
 
+    ],
+    creators: [
+        'BOBEK, BEDRICH',
+        'COOPER, ROBERT WILLIAM BOB',
+        'SANDERS, BOBBI',
+        'FULTS, BOB',
+        'BOTH, BOB',
+        'DYLAN, BOB'
     ]
 };
