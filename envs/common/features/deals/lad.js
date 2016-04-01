@@ -127,6 +127,7 @@ exports.feature = [
                 rr.confirmChangingRateApplicationMethod();
                 steps.base.scrollIntoView('Done rate set button', element(by.css('.rate-sets-top-toolbar>button')));
                 rr.saveRateSet();
+                rr.confirmChangingRateApplicationMethod();
             }
         }
     },
