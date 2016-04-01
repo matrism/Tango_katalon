@@ -5,9 +5,9 @@ var fnutils = require('../../../../helpers/fnutils'),
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
-exports.beforeFeature = [
-    [steps.login.itLogin],
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.commonFeatureTags = [
     'albums',

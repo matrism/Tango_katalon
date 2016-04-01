@@ -7,9 +7,9 @@ var random = require('../../../../helpers/random'),
 
 exports.commonFeatureTags = ['person', 'sanity', 'personSanity', 'dataUtilities'],
 
-exports.beforeFeature = [
-    [steps.login.itLogin]
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 var stagingPerson = (systemConfig.tags.indexOf('stagingPerson') !== -1);
 

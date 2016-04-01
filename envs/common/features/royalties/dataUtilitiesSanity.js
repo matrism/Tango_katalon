@@ -3,9 +3,9 @@
 var fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
-exports.beforeFeature = [
-    [steps.login.itLogin],
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.commonFeatureTags = ['royaltyProcessing', 'dataUtilities', 'sanity', 'royaltyUtilitiesSanity'];
 

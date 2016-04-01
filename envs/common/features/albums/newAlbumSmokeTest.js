@@ -8,9 +8,9 @@ var steps_path = _tf_config._system_.path_to_steps,
 
 exports.commonFeatureTags = ['albums', 'smoke', 'albumsSmoke'],
 
-exports.beforeFeature = [
-    [steps.login.itLogin],
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.feature = [
     {

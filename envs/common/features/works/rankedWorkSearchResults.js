@@ -2,9 +2,9 @@
 
 var data = require('./data/rankedWorkSearchResults.js');
 
-exports.beforeFeature = [
-    [steps.login.itLogin]
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.commonFeatureTags = [
     'rankedWorkSearchResultsRegression',
@@ -17,7 +17,8 @@ exports.feature = [
     {
         name: 'Create test data',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 data.baseWorksData.forEach(function (workData, i) {
                     var evenCreatorContribution = 100 / workData.creators.length;
@@ -90,12 +91,14 @@ exports.feature = [
                     steps.newWork.validateSaveWorkRedirection();
                 });
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Search by work title (exact match)',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 data.searchDataByExactTitleMatch.forEach(function (searchData) {
                     steps.base.goToHomePage();
@@ -116,12 +119,14 @@ exports.feature = [
                     });
                 });
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Search by work title (partial match)',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 data.searchDataByPartialTitleMatch.forEach(function (searchData) {
                     steps.base.goToHomePage();
@@ -142,12 +147,14 @@ exports.feature = [
                     });
                 });
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Search by creator #1',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 data.searchDataByCreatorMatch1.forEach(function (searchData) {
                     steps.base.goToHomePage();
@@ -168,12 +175,14 @@ exports.feature = [
                     });
                 });
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Search by creator #2',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 data.searchDataByCreatorMatch2.forEach(function (searchData) {
                     steps.base.goToHomePage();
@@ -194,12 +203,14 @@ exports.feature = [
                     });
                 });
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Search by exact title + creator',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 data.searchDataByExactTitleAndCreator.forEach(function (searchData) {
                     steps.base.goToHomePage();
@@ -224,12 +235,14 @@ exports.feature = [
                     });
                 });
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Search by partial title + creator',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 data.searchDataByPartialTitleAndCreator.forEach(function (searchData) {
                     steps.base.goToHomePage();
@@ -254,6 +267,7 @@ exports.feature = [
                     });
                 });
             }],
-        ],
+            ]);
+        }
     }
 ];

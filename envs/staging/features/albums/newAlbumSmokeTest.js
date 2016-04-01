@@ -6,9 +6,10 @@ var steps_path = _tf_config._system_.path_to_steps,
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
-var beforeFeature = [
-        [steps.login.itLogin],
-    ],
+var beforeFeature = () => {
+        steps.login.itLogin();
+    },
+
     feature = [
         {
             name: 'Create person',
