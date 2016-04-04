@@ -72,7 +72,7 @@ exports.distributionRules = (function(){
 
 exports.saveButton = function () {
     return $('.create-models-buttons-holder .btn-primary');
-}
+};
 
 exports.saveAdvance = function () {
     exports.saveButton().click();
@@ -130,5 +130,4 @@ exports.expectAdvanceAssumptionsPopUpToAppear = function () {
         browser.actions().mouseMove(elem).perform();
         browser.sleep(5000);
     });
-
 };
