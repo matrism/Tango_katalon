@@ -313,7 +313,7 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
         steps.createDealGeneral.goToNewDealPage();
         steps.createDealGeneral.selectDealSigningTerritory();
-        if(systemConfig.env.name === 'staging') {
+        if(systemConfig.env.name === 'qa') {
             steps.createDealGeneral.fillCompanyCodeField("a");
             steps.createDealGeneral.waitForContractingPartyDropDown();
             steps.createDealGeneral.selectRandomCompanyCode();
