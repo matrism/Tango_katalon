@@ -49,7 +49,7 @@ exports.feature = [
     },
     {
         name: 'Add PSS, override publisher and share scope',
-        tags: ['ladPSSOverridePublisher'],
+        tags: ['ladPSSOverridePublisher', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 cds = steps.createDealScope,
@@ -98,7 +98,7 @@ exports.feature = [
     },
     {
         name: 'Add Royalty rates and share scope',
-        tags: ['ladAddRoyaltyRates'],
+        tags: ['ladAddRoyaltyRates', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 rr = steps.royaltyRates,
@@ -132,7 +132,7 @@ exports.feature = [
     },
     {
         name: 'Add scope creators',
-        tags: ['ladScopeCreators'],
+        tags: ['ladScopeCreators', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 edcp = steps.editDealContractPeriod,
@@ -159,7 +159,7 @@ exports.feature = [
     },
     {
         name: 'Add Society Agreement',
-        tags: ['ladAddSocietyAgreement'],
+        tags: ['ladAddSocietyAgreement', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 eds = steps.editDealScope;
@@ -196,7 +196,7 @@ exports.feature = [
     },
     {
         name: 'Copy scopes',
-        tags: ['ladCopyScopes'],
+        tags: ['ladCopyScopes', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 eds = steps.editDealScope;
@@ -227,7 +227,7 @@ exports.feature = [
     },
     {
         name: 'AddEndRules',
-        tags: ['ladEndRules'],
+        tags: ['ladEndRules', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal;
 
@@ -258,7 +258,7 @@ exports.feature = [
     },
     {
         name: 'Add Contacts and Contracting Parties',
-        tags: ['ladContactsAndContractingParties'],
+        tags: ['ladContactsAndContractingParties', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal;
 
@@ -307,7 +307,7 @@ exports.feature = [
     },
     {
         name: 'Add Advances',
-        tags: ['ladAdvances'],
+        tags: ['ladAdvances', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 ea = steps.editAdvances;
@@ -341,7 +341,7 @@ exports.feature = [
     },
     {
         name: 'Add Payees',
-        tags: ['ladAddPayees'],
+        tags: ['ladAddPayees', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 edp = steps.editDealPayee;
@@ -357,7 +357,7 @@ exports.feature = [
                 d.goToOldPayeesDealTabDetails();
 
                 edp.editOldPayeeArea();
-                edp.editSelectSpecificOldPayeePersonFromDropDown("person " + 1 + ", TAT payee");
+                edp.editSelectSpecificOldPayeePersonFromDropDown('person ' + 1 + ', TAT payee');
                 edp.editSelectRandomValueForOldPayeeCompanyNameCode();
                 for (var i = 1; i <= 3; i++) {
                     edp.editAssociateSpecificScopeNumberIToOldPayee(i);
@@ -367,7 +367,7 @@ exports.feature = [
                 edp.editSaveOldPayeeForm();
 
                 for (var j = 2; j <= 200; j++) {
-                    edp.editSelectSpecificOldPayeePersonFromDropDown("person " + j + ", TAT payee");
+                    edp.editSelectSpecificOldPayeePersonFromDropDown('person ' + j + ', TAT payee');
                     edp.editSelectRandomValueForOldPayeeCompanyNameCode();
                     for (var i = 3 * j; i >= 3 * j - 2; i--) {
                         var k = 1;
@@ -409,7 +409,7 @@ exports.feature = [
     },
     {
         name: 'Add RTP sets',
-        tags: ['ladRtp'],
+        tags: ['ladRtp', 'ladExistingDeal'],
         steps: function () {
             var countPtc = 0,
                 d = steps.deal,
@@ -448,8 +448,8 @@ exports.feature = [
         }
     },
     {
-        name: "Add related deals",
-        tags: ["ladRelatedDeals"],
+        name: 'Add related deals',
+        tags: ['ladRelatedDeals', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
                 rd = steps.relatedDeal,
@@ -463,7 +463,6 @@ exports.feature = [
 
             d.goToGeneralDealTabDetail();
             d.goToRelatedDealsGeneralTabDetails();
-            //rd.checkNoRelatedDealsDefined();
 
             ['a', 'c', 'd', 'g'].forEach(function (i) {
                 rd.clickOnAddRelatedDealLink();
