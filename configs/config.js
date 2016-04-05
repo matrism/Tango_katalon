@@ -49,6 +49,7 @@ var defaultUserName = 'TangoTest1',
             buildNumber: cli.build,
             branch: cli.branch,
             commitHash: cli.commit,
+            feat: cli.feat,
             tags: tags,
             bugLabel: cli['bug-label'],
             legacyOverrides: {
