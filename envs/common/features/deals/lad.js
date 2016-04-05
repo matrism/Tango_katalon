@@ -431,13 +431,17 @@ exports.feature = [
 
                 for (var ret = 0; ret <= 1; ret++) {
                     edr.clickOnAddRetentionFromAcquisitionLink();
-                    edr.selectScopeNumberIFromInput(0, ret, 'ret');
-                    edr.selectScopeNumberIFromInput(1, ret, 'ret');
+                    if (acq < 180) {
+                        edr.selectScopeNumberIFromInput(0, ret, 'ret');
+                        edr.selectScopeNumberIFromInput(1, ret, 'ret');
+                    }
                     edr.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(ret + 1, 'Life of Copyright');
                     for (var ptc = 0; ptc <= 1; ptc++) {
                         edr.clickOnAddPostTermCollectionFromRetention(ret);
-                        edr.selectScopeNumberIFromInput(0, countPtc, 'ptc');
-                        edr.selectScopeNumberIFromInput(1, countPtc, 'ptc');
+                        if (acq < 180) {
+                            edr.selectScopeNumberIFromInput(0, countPtc, 'ptc');
+                            edr.selectScopeNumberIFromInput(1, countPtc, 'ptc');
+                        }
                         edr.editFillIntoDurationFieldPostTermCollectionFromRetention(ret, ptc);
                         countPtc++;
                     }
