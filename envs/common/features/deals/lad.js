@@ -18,7 +18,6 @@ exports.feature = [
                 ccp = steps.createDealContractPeriod;
 
             steps.base.useBlankEntityDataSlot('deal', 'mainDeal');
-            //steps.searchSection.accessSavedDealByNumber('265160');
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             d.itContinueToNextPage();
@@ -221,7 +220,6 @@ exports.feature = [
                     eds.clickOnCopyPublisherShareInCopyScopeModal();
                     eds.clickOnCopyRoyaltyRatesInCopyScopeModal();
                     eds.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberIWait(1, timeout);
-                    //eds.editClickOnCopyScopeButtonNumberOfCopiesScopeNumberI(1);
                 }
             }
 
@@ -276,34 +274,34 @@ exports.feature = [
                 var roles = ['Attorney', 'Business Manager', 'Contact', 'Producer', 'Approvals', 'Legal Notices', 'Manager', 'Legal notices CC', 'Attorney', 'Business Manager'],
                     names = ['Bob', 'Sharon', 'John', 'Sarah', 'William', 'Diane', 'Richard', 'Philip', 'Steve', 'Claire'];
 
-                steps.deal.clickAddExternalContactLink();
+                d.clickAddExternalContactLink();
                 _.each(roles, function (role, i) {
-                    steps.deal.addExternalContact(role, names[i]);
+                    d.addExternalContact(role, names[i]);
                 });
-                steps.deal.saveExternalContacts();
+                d.saveExternalContacts();
             });
 
             describe('Add 2 internal contacts', function () {
                 var roles = ['Attorney', 'Product Manager'],
                     names = ['Mackintosh, Alex', 'John'];
 
-                steps.deal.clickAddInternalContactLink();
+                d.clickAddInternalContactLink();
                 _.each(roles, function (role, i) {
-                    steps.deal.addInternalContact(role, names[i]);
+                    d.addInternalContact(role, names[i]);
                 });
-                steps.deal.saveInternalContacts();
+                d.saveInternalContacts();
             });
 
             describe('Add 5 contracting parties', function () {
-                steps.deal.expectNumberOfContractingPartiesToBe(1);
-                steps.deal.addContractingParties('SACEM', 'JOHN ADAMS', 'Katy', 'ASCAP', 'MAX MARTIN');
+                d.expectNumberOfContractingPartiesToBe(1);
+                d.addContractingParties('SACEM', 'JOHN ADAMS', 'Katy', 'ASCAP', 'MAX MARTIN');
             });
 
             describe('Refresh page and expect added data to be present', function () {
-                steps.deal.refreshThePage();
-                steps.deal.expectNumberOfContractingPartiesToBe(6);
-                steps.deal.expectNumberOfExternalContactsToBe(10);
-                steps.deal.expectNumberOfInternalContactsToBe(2);
+                d.refreshThePage();
+                d.expectNumberOfContractingPartiesToBe(6);
+                d.expectNumberOfExternalContactsToBe(10);
+                d.expectNumberOfInternalContactsToBe(2);
             });
         }
     },
@@ -311,7 +309,8 @@ exports.feature = [
         name: 'Add Advances',
         tags: ['ladAdvances'],
         steps: function () {
-            var d = steps.deal;
+            var d = steps.deal,
+                ea = steps.editAdvances;
 
             if(systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
@@ -323,21 +322,21 @@ exports.feature = [
             _.times(3, function (cpNum) {
                 describe('Add Advances for Contract Period #' + (cpNum+1), function (){
                     _.times(2, function () {
-                        steps.editAdvances.clickAddAdvanceButton();
-                        steps.editAdvances.selectContractPeriodByIndex(cpNum+1);
-                        steps.editAdvances.setAdvanceAmount(100);
-                        steps.editAdvances.setCurrency('USD');
-                        steps.editAdvances.distributionRules.setWhen('Contract Execution');
-                        steps.editAdvances.saveAdvance();
-                        steps.editAdvances.expectToBeRedirectedToAdvanceSummary();
+                        ea.clickAddAdvanceButton();
+                        ea.selectContractPeriodByIndex(cpNum+1);
+                        ea.setAdvanceAmount(100);
+                        ea.setCurrency('USD');
+                        ea.distributionRules.setWhen('Contract Execution');
+                        ea.saveAdvance();
+                        ea.expectToBeRedirectedToAdvanceSummary();
                     });
                 });
             });
 
-            steps.editAdvances.expectContractPeriodsToBe(3);
-            steps.editAdvances.expectEachContractPeriodToHaveAdvances(2);
-            steps.editAdvances.expectContractPeriodsToDisplayAdvanceAssumptionsLink();
-            steps.editAdvances.expectAdvanceAssumptionsPopUpToAppear();
+            ea.expectContractPeriodsToBe(3);
+            ea.expectEachContractPeriodToHaveAdvances(2);
+            ea.expectContractPeriodsToDisplayAdvanceAssumptionsLink();
+            ea.expectAdvanceAssumptionsPopUpToAppear();
         }
     },
     {
@@ -355,7 +354,7 @@ exports.feature = [
 
             if(systemConfig.env.name === 'staging') {
 
-                steps.deal.goToOldPayeesDealTabDetails();
+                d.goToOldPayeesDealTabDetails();
 
                 edp.editOldPayeeArea();
                 edp.editSelectSpecificOldPayeePersonFromDropDown("person " + 1 + ", TAT payee");
@@ -462,8 +461,8 @@ exports.feature = [
                 d.openDealFromSlot('mainDeal');
             }
 
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
+            d.goToGeneralDealTabDetail();
+            d.goToRelatedDealsGeneralTabDetails();
             //rd.checkNoRelatedDealsDefined();
 
             ['a', 'c', 'd', 'g'].forEach(function (i) {
