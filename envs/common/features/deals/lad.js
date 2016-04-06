@@ -427,7 +427,9 @@ exports.feature = [
             for (var acq = 0; acq <= 200; acq++) {
                 countPtc = 0;
                 edr.editClickOnAddAnotherAcquisitionPeriodLink();
-                edr.selectScopeNumberIFromInput(0, 0, 'acq');
+                if (acq < 180) {
+                    edr.selectScopeNumberIFromInput(0, 0, 'acq');
+                }
 
                 for (var ret = 0; ret <= 1; ret++) {
                     edr.clickOnAddRetentionFromAcquisitionLink();
