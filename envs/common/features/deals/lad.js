@@ -97,7 +97,7 @@ exports.feature = [
         }
     },
     {
-        name: 'Add Royalty rates and share scope',
+        name: 'Add Royalty rates',
         tags: ['ladAddRoyaltyRates', 'ladExistingDeal'],
         steps: function () {
             var d = steps.deal,
