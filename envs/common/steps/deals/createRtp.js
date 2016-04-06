@@ -130,3 +130,21 @@ exports.checkRightsTermPeriodsHeaderTitlePresent = function () {
         expect(pages.deal.elems.rightsTermPeriodsHeaderLink.isDisplayed()).toBeTruthy();
     });
 };
+
+exports.addEndRules = function () {
+    it('Click on Add End Rules', function () {
+        pages.createDealRtp.clickOnAddEndRules();
+    });
+};
+
+exports.hoverEndRules = function () {
+    it('Hover End Rules button', function () {
+        pages.createDealRtp.hoverEndRulesButton();
+    });
+};
+
+exports.validateSummaryEndRule = function (i, text) {
+    it('Validate Summary End Rule #' + i, function () {
+        expect(pages.createDealRtp.getSummaryEndRuleText(i)).toBe(text);
+    });
+};
