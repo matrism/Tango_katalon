@@ -2,6 +2,10 @@
 var configer = global.ftf.configer,
     cli = configer.getParamsFromCli(),
     tags = (function () {
+        if(cli.tags === true) {
+            cli.tags = '';
+        }
+
         var tags = (cli.tags || '').toString().split(',');
         var negatedTags = (cli['@tags'] || '').toString().split(',');
 
