@@ -126,8 +126,6 @@ config._system_.env = {
     cr_url: config[env.ENV_TYPE].urls.cr_url
 };
 
-config._system_.noReport = cli['no-report'];
-
 config = configer.process(config);
 
 module.exports = config;
