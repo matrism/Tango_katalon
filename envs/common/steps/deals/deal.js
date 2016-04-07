@@ -372,8 +372,9 @@ exports.createDeal = data => {
 
             describe('Payees', () => {
                 //steps.createDealPayee.selectPayeeOrganisationFromDropDown(data.payee.name);
-                steps.createDealPayee.selectPayeeOrganisationFromDropdown(data.payee.name);
+                steps.createDealPayee.selectPayeeOrganisationFromDropdown(data.payee.name || fromTestVariable('lastCreatedOrgId'));
                 steps.createDealPayee.fillPayeeInfo('Payout 1', 100, 100);
+                steps.createDealPayee.savePayeeForm();
             });
             steps.deal.waitContinueButtonEnabled();
             steps.deal.goToNextPage();
@@ -381,21 +382,28 @@ exports.createDeal = data => {
             steps.deal.waitContinueButtonEnabled();
             steps.deal.goToNextPage();
             steps.deal.saveDeal();
-            steps.deal.storeDealIdInTestVariable('lastCreatedDealId');
+            steps.deal.storeDealIdInTestVariable('lastCreatedDealId', 'lastCreatedDealUuid');
         }
     });
 };
 
 
-addStep(exports, 'Store Deal ID in test variable', function (varName) {
+addStep(exports, 'Store Deal ID in test variable', function (varName, uuidVarName) {
 
     var binding = 'getPristineDeal().deal_header.contract_brief_number',
         idBinding = element(by.binding(binding));
 
     browser.wait(EC.visibilityOf(idBinding));
 
-    idBinding.getText().then(function (value) {
-        hash.testVariables[varName] = value;
+    if (uuidVarName) {
+        idBinding.evaluate('getPristineDeal().id').then(value => { 
+            setTestVariable(uuidVarName, value);
+        });
+    }
+
+    idBinding.getText().then(value => {
+        setTestVariable(varName, value);
     });
 
 });
+

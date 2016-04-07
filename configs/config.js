@@ -1,5 +1,4 @@
 'use strict';
-
 let jobRunnerConfig = require('./jobRunnerConfig'),
 
     _ = require('lodash'),
@@ -48,7 +47,7 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1400,
+                width: 1200,
                 height: 1024
             },
             streamId: cli['stream'] || 1,
@@ -91,7 +90,11 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: (
-                    cli['app-url'] || 'http://tango.tango.qa.wmg.com'
+                    cli['app-url'] || 'http://tango.tango.qa.wmg.com/'
+                ),
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://tango.tango.qa.wmg.com/'
                 ),
                 cr_url: (
                     cli['cr-url'] || 'http://tancrsrv.tango.qa.wmg.com:80'

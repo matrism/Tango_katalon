@@ -7,6 +7,33 @@ pages.manualStatement = exports;
 exports.form = (function(){
     var form = {};
 
+    form.royaltyPeriodDropdown = function () {
+        return tgRoyaltyPeriod.byModel('statement.royalty_period');
+    };
+
+    form.selectFirstRoyaltyPeriod = function () {
+        var dropdown = form.royaltyPeriodDropdown();
+
+        dropdown.select(0);
+    };
+
+    form.selectRoyaltyPeriod = function (name) {
+        var dropdown = form.royaltyPeriodDropdown();
+
+        dropdown.selectValue(name);
+    };
+
+    form.processingTerritoryDropdown = function () {
+        return tgDropdown(by.model('processingTerritoryModel'));
+    };
+
+    form.selectProcessingTerritory = function (val) {
+        var elem = form.processingTerritoryDropdown();
+
+        elem.selectValue(val);
+        pages.base.waitForAjax();
+    };
+
     form.incomeProviderTypeahead = function () {
         return Typeahead(by.model('statement.income_provider'));
     };
@@ -117,15 +144,16 @@ exports.list = (function(){
             var statementIdElement = elem.$('.statement-id');
 
             return statementIdElement.getText().then(function(text){
+                console.log(text, id);
                 return text === id;
             });
-        });
+        }).first();
 
         return blind;
     };
 
     list.openBlindByStatementId = function (id) {
-        var blind = list.blindsByStatementId(id).first();
+        var blind = list.blindsByStatementId(id);
 
         blind.$('.accordion-toggle').click();
     };
@@ -189,6 +217,32 @@ exports.list = (function(){
     list.clickAddBatchButton = function () {
         list.addBatchButton().click();
         pages.base.waitForAjax();
+    };
+
+    list.closeStatementButton = function () {
+        return $('.royalties-common-filters + .clearfix .btn-primary');
+    };
+
+    list.closeStatementById = function (id) {
+        let statement = list.blindsByStatementId(id),
+            closeButton = list.closeStatementButton();
+        statement.$('.statement-toggle i').click();
+
+        closeButton.click();
+
+        browser.wait(function(){
+            return closeButton.isEnabled().then((enabled) => { return !enabled});
+        });
+    };
+
+    list.storeStatementAmountById = function (id) {
+        let statement = list.blindsByStatementId(id);
+
+        statement.$('.converted-amount').getText().then((amount) => {
+            console.log(amount);
+            hash.testVariables['lastCreatedStatementAmount'] = amount;
+        });
+
     };
 
     return list;
@@ -345,8 +399,16 @@ exports.batches = (function () {
 
             filter.element(by.cssContainingText('option', 'Title')).click();
             browser.sleep(1000);
-            typeahead.sendKeys(title);
-            typeahead.results().first().click();
+            typeahead.select(title);
+        };
+
+        works.addWorkByWorkId = function (val) {
+            var typeahead = works.newWorkTypeahead(),
+                filter = works.newWorkTypeaheadFilter();
+                filter.element(by.cssContainingText('option', 'Work ID')).click();
+                browser.sleep(1000);
+
+                typeahead.select(val);
         };
 
         works.workList = function () {

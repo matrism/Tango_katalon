@@ -119,6 +119,7 @@ exports.uploadFile = fileData => {
                 file.name = file.mockedFileName;
                 this.assumeUploadedFile(file.name);
                 this.selectProcessingTerritory(file.processingTerritory);
+                steps.royaltyStatements.selectRoyaltyPeriod(file.royaltyPeriod);
 
                 return;
             }
