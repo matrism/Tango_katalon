@@ -44,6 +44,13 @@ function Typeahead (target, dummy, isAppendedToBody) {
         return results;
     };
 
+    typeahead.setFilter = function (value) {
+        var tagFilter = typeahead.$('.tg-typeahead__tag-filter');
+
+        tagFilter.click();
+        tagFilter.element(by.cssContainingText('option', value)).click();
+    };
+
     typeahead.select = function (text, isExact) {
         typeahead.sendKeys(text);
         typeahead.results(text, isExact).first().click();

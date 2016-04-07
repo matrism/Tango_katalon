@@ -24,6 +24,8 @@ pageStep([
         'Search for work',
         'Match work',
         'Go to tab',
+        'Open Work by Id',
+        'Expect work total amount to be'
     ]],
 ]);
 
@@ -35,6 +37,7 @@ addStep(exports.incomeWorks, 'Store Source Work Id in test variable', function (
     browser.wait(EC.visibilityOf(idBinding));
 
     idBinding.getText().then(function (value) {
+        console.log(value);
         hash.testVariables[varName] = value;
     });
 
@@ -58,6 +61,7 @@ addStep(exports.incomeWorks, 'Store Work amount by id in test variable', functio
     //browser.wait(EC.visibilityOf(idBinding));
 
     idBinding.getText().then(function (value) {
+        console.log(value);
         hash.testVariables[varName] = value;
     });
 

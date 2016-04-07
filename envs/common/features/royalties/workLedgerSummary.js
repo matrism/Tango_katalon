@@ -2,6 +2,7 @@
 
 var using = require('../../../../helpers/fnutils').using,
     _ = require('lodash'),
+    iso = require('iso-3166-1'),
     path = require('path'),
     noUpload = systemConfig.noUpload,
     YAML = require('yamljs'),
@@ -21,12 +22,12 @@ exports.feature = [
         tags: ['workLedgerSummary'],
         steps: () => {
             var orgData = {
-                name: 'Org test 1',
+                name: 'Org test 1 TAT ARIEL',
                 territory_of_operation: 'Worldwide',
                 publisher_type: 'WCM',
                 type: 'Publisher',
                 payee: {
-                    account_name: 'org test 1',
+                    account_name: 'org test 1 TAT ARIEL',
                 }
             },
             dealData = {
@@ -67,7 +68,7 @@ exports.feature = [
                 ],
                 rtp_contract_periods: 'all',
                 payee: {
-                    name: 'org test 1',
+                    name: 'org test 1 TAT ARIEL',
                 }
             },
             workData = {
@@ -79,9 +80,32 @@ exports.feature = [
                         percentage: 100
                     }
                 ]
+            },
+            fileData = {
+                processingTerritory: 'Poland',
+                royaltyPeriod: 'July 2015 - December 2015',
+                incomeProvider: 'WARNER MUSIC HONG KONG',
+                fileFormat: 'ASIAN - WARNER',
+                fileName: './data/war07_smallfile_02.txt',
+                mockedFileName: 'TAT_2016-03-30T19_51_39.249Z.edi',
+                amount: '100.0000',
+                currency: 'USD',
+                summaryByType: {
+                    'Folio Sales': '100.0000'
+                },
+                distributionPeriod: {
+                    start: {
+                        year: '2015',
+                        month: '01'
+                    },
+                    end: {
+                        year: '2016',
+                        month: '01'
+                    }
+                }
             };
 
-            describe('Create new data', () => {
+            xdescribe('Create new data', () => {
                 steps.newOrganisation.createOrganistation(orgData);
                 steps.base.sleep(1000);
                 steps.deal.createDeal(dealData);
@@ -98,130 +122,18 @@ exports.feature = [
             });
 
             describe('Load an EDI file', () => {
-                var file = {
-                        processingTerritory: 'Poland',
-                        royaltyPeriod: 'July 2015 - December 2015',
-                        incomeProvider: 'WARNER MUSIC HONG KONG',
-                        fileFormat: 'ASIAN - WARNER',
-                        fileName: './data/war07_smallfile_02.txt',
-                        mockedFileName: 'TAT_2016-03-30T19_51_39.249Z.edi',
-                        amount: '100.0000',
-                        currency: 'USD',
-                        summaryByType: {
-                            'Folio Sales': '100.0000'
-                        },
-                        distributionPeriod: {
-                            start: {
-                                year: '2015',
-                                month: '01'
-                            },
-                            end: {
-                                year: '2016',
-                                month: '01'
-                            }
-                        }
-                    };
 
-                function setTestTimeout(time) {
-                    beforeEach(function(){
-                        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-                        jasmine.DEFAULT_TIMEOUT_INTERVAL = time;
-                    });
+                steps.uploadEdiFile.uploadFile(fileData);
 
-                    afterEach(function(){
-                        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
-                    });
-                }
-
-                fileDefaults = {
-                    currency: 'GBP',
-                    exchangeRate: '1',
-                    distributionPeriod: {
-                        start: {
-                            year: '2014',
-                            month: '02'
-                        },
-                        end: {
-                            year: '2014',
-                            month: '02'
-                        }
-                    }
-                };
-
-                function goToUploadPage() {
-                    steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
-
-                    if (!noUpload){
-                        steps.royaltiesHeader.clickLink('Upload Electronic File');
-                    }
-                }
-
-                function fillFormWithFileData(file, fileDefaults, clickCreate, useOriginalName) {
-                    if (fileDefaults) {
-                        file = _.defaultsDeep(file, fileDefaults);
-                    }
-
-                    file.fileName = path.resolve(__dirname, file.fileName);
-
-                    using(steps.uploadEdiFile, function() {
-                        file.expectedAmount = file.expectedAmount || file.amount;
-
-                        if (noUpload) {
-                            file.name = file.mockedFileName;
-                            this.assumeUploadedFile(file.name);
-                            this.selectProcessingTerritory(file.processingTerritory);
-
-                            return;
-                        }
-
-                        if (file.customFormat === false) {
-                            this.selectWcmCommonFormat();
-                        }
-
-                        if (file.multipleProviders) {
-                            this.checkMultipleIncomeProvidersBox();
-                        } else {
-                            this.selectIncomeProvider(file.incomeProvider);
-                            this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
-                            this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
-                        }
-
-                        this.selectProcessingTerritory(file.processingTerritory);
-                        //this.selectProcessingTerritory(file.royaltyPeriod);
-                        this.selectFileFormat(file.fileFormat);
-                        this.selectFile(file.fileName, useOriginalName);
-
-                        this.setExpectedFileAmount(file.expectedAmount);
-                        this.setExpectedFileAmountCurrency(file.currency);
-                        this.setExchangeRate(file.exchangeRate);
-
-                        if (clickCreate !== false) { 
-                            this.clickCreateButton();
-                        }
-                    });
-                }
-
-                function waitForFileStatusToBe() {
-                    steps.uploadEdiFile.waitForFileStatusToBe.apply(null, arguments);
-                }
-
-                function waitForFileToBeProcessed() {
-                    if (noUpload) { return; }
-
-                    steps.uploadEdiFile.waitForFileToBeProcessed();
-                }
-
-                setTestTimeout(PROCESSING_TIMEOUT);
-
-                goToUploadPage();
+                /*goToUploadPage();
                 using(steps.uploadEdiFile, function(){
 
-                    fillFormWithFileData(file, fileDefaults);
+                    fillFormWithFileData(fileData, fileDefaults);
                     this.expectToBeRedirectedToFileUploadHistory();
                     this.expectUploadedFileToBeListed();
                     this.openUploadedFileBlind();
 
-                    this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
+                    this.expectUploadedFileToHaveCorrectExpectedAmount(fileData.amount);
                     waitForFileToBeProcessed();
                     if (!noUpload) { this.openUploadedFileBlind(); }
 
@@ -237,9 +149,30 @@ exports.feature = [
                     //steps.base.closeTabByIndex(1);
 
                     //this.rollBackUploadedFile();
+                });*/
+
+                describe('Validate statement Works', () => {
+                    hash.testVariables['lastCreatedWorkId'] = 'WW 015035223 00';
+
+                    if (!noUpload) { steps.uploadEdiFile.openUploadedFileBlind(); }
+                    steps.uploadEdiFile.openFirstGeneratedStatement();
+                    steps.base.switchToTab(1);
+                    steps.uploadEdiFile.expectToBeRedirectedToRoyaltyStatements();
+
+                    steps.royaltyStatements.viewDetailsForIncomeLines();
+                    steps.royaltyStatements.incomeWorks.storeSourceWorkIdInTestVariable('matchedWork');
+                    steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'), 'Work ID');
+                    steps.royaltyStatements.incomeWorks.goToTab('Matched');
+                    steps.royaltyStatements.incomeWorks.storeWorkAmountByIdInTestVariable(fromTestVariable('matchedWork'), 'ledgerWorkAmount');
+
+                    steps.royaltiesBackEnd.validateWorkSummary(
+                        iso.whereCountry(fileData.processingTerritory).numeric,
+                        royaltyPeriodParser(fileData.royaltyPeriod),
+                        fromTestVariable('lastCreatedWorkId')
+                    );
+                    steps.royaltyStatements.incomeWorks.openWorkById(fromTestVariable('matchedWork'));
+                    steps.royaltyStatements.incomeWorks.expectWorkTotalAmountToBe(fromTestVariable('ledgerWorkAmount'));
                 });
-
-
             });
 
             steps.base.sleep(10000);
