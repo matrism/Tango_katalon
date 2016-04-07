@@ -22,6 +22,7 @@ if (pages.editDealRtp === undefined) {
             editDescriptionRetentionFromAcquisitionField: {css: "input[data-ng-model='rtp.description']"},
             editScopeRetentionFromAcquisitionField: {css: "div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass']"},
             editScopeRetentionFromAcquisitionInputField: {css: "div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editAddEndRulesLinkFromRetention: {css: "div[data-watched-init='endRulesAreDirty = isEndRuleDirty(rtp.end_rules[0])'] a"},
             editApplyScopeAcquisitionButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
             editActualEndDateRetentionFromAcquisitionField: {css: "div[name='retentionEndDate'] input"},
             editAddPostTermPeriodFromRetentionLink: {css: "a[data-ng-click='addPostTermCollectionRightsTermPeriodToRetention(rtps.id, rtp.id)']"},
@@ -29,7 +30,14 @@ if (pages.editDealRtp === undefined) {
             saveRetentionFromAcquisitionButton: {css: "button[data-ng-click='updateDeal(retentionForm.$valid, form.deal, retentionFormSection, false)"},
             modalDialogDelete: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope button.btn.btn-primary:nth-child(2)"},
-            confirmCancelModalDialog: {css: "div.modal-dialog.ng-scope button[data-ng-click='cancel()']"}
+            confirmCancelModalDialog: {css: "div.modal-dialog.ng-scope button[data-ng-click='cancel()']"},
+            editDoneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
+            editWhenVariableLeftButtonEndRules: {css: "div[data-ng-model='condition.left_value'] div.tg-dropdown-button"},
+            editOffsetByArrowChoiceEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
+            editCancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
+            editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
+            editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
+            editCancelEndRulesLinkFromRetention: {css: "div[data-ng-form='editCancelEndRulesLinkFromRetention'] div.modal-footer button[data-ng-click='cancel()']"}
         },
 
         editClickOnTheAddAnotherAcquisitionPeriodLink: function () {
@@ -69,6 +77,7 @@ if (pages.editDealRtp === undefined) {
         },
 
         clickOnTheAddRetentionFromAcquisitionLink: function () {
+            pages.base.scrollIntoView( pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink);
             pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField));
         },
@@ -100,6 +109,12 @@ if (pages.editDealRtp === undefined) {
 
         editFillTheRetentionDescriptionFromAcquisition: function (description) {
             pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField.sendKeys(description);
+        },
+
+        editClickOnTheAddEndRulesFromRetentionNumber: function () {
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editAddEndRulesLinkFromRetention);
+            pages.editDealRtp.elems.editAddEndRulesLinkFromRetention.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-form='rtpEndRulesModalForm']"))));
         },
 
         editFillIntoTheActualEndDateFieldRetentionFromAcquisition: function (actualEndDate) {
@@ -168,8 +183,156 @@ if (pages.editDealRtp === undefined) {
         editFillIntoTheDurationFieldPostTermCollectionFromRetention: function () {
             var number = Math.floor(Math.random() * 20) + 1;
             pages.editDealRtp.elems.editDurationRtpPostTermCollectionField.sendKeys(number);
+        },
+
+        editSelectTheEndDateEndRulesSpecificValueRuleNumberI: function (i, value) {
+            var desiredOption;
+            pages.base.scrollIntoView(element(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        editSelectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+
+        editFillIntoTheAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).clear();
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[data-ng-model='condition.left_value_percent']")).sendKeys(value);
+        },
+
+        editSelectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ: function (i, j, index) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
+
+            browser.wait(ExpectedConditions.visibilityOf(element(By.xpath("//*[@class='tg-dropdown-menu ng-scope']//ul[@class='dropdown-menu']//li"))));
+            browser.driver.findElements(By.xpath("//*[@class='tg-dropdown-menu ng-scope']//ul[@class='dropdown-menu']//li")).then(function (options) {
+                var randomNumber = index;
+                var element = options[randomNumber];
+                browser.actions().mouseMove(element).perform();
+                browser.actions().click(element).perform();
+            });
+        },
+
+        editSelectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        editDoneTheEndRules: function () {
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealRtp.elems.editDoneButtonEndRules));
+            pages.editDealRtp.elems.editDoneButtonEndRules.click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealRtp.elems.editWhenVariableLeftButtonEndRules));
+        },
+
+        editFillIntoTheOffsetByInputFieldEndRulesRuleNumberI: function (i) {
+            var number = Math.floor(Math.random() * 100) + 1;
+            var element =browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header input[data-ng-model='rule.offset']"));
+            element.clear();
+            element.sendKeys(number);
+        },
+
+        editSelectTheRandomOptionFromOffsetByChoiceEndRules: function () {
+            pages.editDealRtp.elems.editOffsetByArrowChoiceEndRules.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))));
+            browser.driver.findElements(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[randomNumber].click();
+                })
+        },
+
+        editClickOnTheAddNewRuleEndRulesAddedRuleNumberI: function (i) {
+            browser.driver.findElement(By.css("div[data-ng-form='conditionForm']:nth-child(" + (i + 2) + ") a[data-ng-click='addEndRuleCondition(form.show.endRules.containerId, form.show.endRules.type, rule.id, $index)'] i")).click();
+        },
+
+        editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal: function (i, j) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
+        },
+
+        editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDeleteEndRulesModalDialog));
+            pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog.click();
+        },
+
+        checkTheEndRuleRetentionTooltipSummary: function (text) {
+            browser.actions().mouseMove(pages.editDealRtp.elems.editAddEndRulesLinkFromRetention).perform();
+            pages.base.scrollIntoView(element(by.css("div[data-ng-show='rtp.showEndRulesList'] div.popup-info")));
+            browser.driver.findElement(By.css("div[data-ng-show='rtp.showEndRulesList'] div.popup-info ul.end-rules-list li span.pull-left.rule-summary")).getText().
+            then(function (promise) {
+                console.log("The tooltip summary text for  end rules  is: " + promise);
+                expect(promise).toContain(text);
+            });
+        },
+
+        editClickOnTheCancelEndRulesFromRetentionNumber: function () {
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention);
+            pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+            browser.driver.findElement(By.css("div.modal-footer button[data-ng-click='ok()']"));
+        },
+
+        editClickOnTheCancelEndRulesFromRetentionNumberWIthoutModal: function () {
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention);
+            pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
         }
 
 
-    })
+    });
 }

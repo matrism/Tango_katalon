@@ -111,3 +111,107 @@ exports.editClickOnAddAnotherAcquisitionPeriodLink = function () {
         pages.editDealRtp.editClickOnTheAddAnotherAcquisitionPeriodLink();
     });
 };
+
+exports.editClickOnAddEndRulesLinkOnRetention = function () {
+    it("Edit click on add end rules link on retention", function () {
+        pages.editDealRtp.editClickOnTheAddEndRulesFromRetentionNumber();
+    });
+};
+
+exports.editSelectEndDateEndRulesSpecificValueRuleNumberI = function (i, value) {
+    it("Edit select end date end rules specific value ", function () {
+        pages.editDealRtp.editSelectTheEndDateEndRulesSpecificValueRuleNumberI(i, value);
+    });
+};
+
+exports.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Edit select the when variable left end rules specific value rule number " + i + " row number " + j, function () {
+        pages.editDealRtp.editSelectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Edit fill into the attribute left end rules rule number " + i + " row number " + j, function () {
+        pages.editDealRtp.editFillIntoTheAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+    });
+};
+
+exports.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ = function (i, j, index) {
+    it("Edit select the requirement end rules specific value by index rule number " + i + " row number " + j, function () {
+        pages.editDealRtp.editSelectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(i, j, index);
+    });
+};
+
+exports.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Edit select the right variable end rules specific value rule number " + i + " row number " + j, function () {
+        pages.editDealRtp.editSelectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editDoneEndRules = function () {
+    it("Edit click on Done the end rules ", function () {
+        pages.editDealRtp.editDoneTheEndRules();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editFillIntoOffsetByInputFieldEndRulesRuleNumberI = function (i) {
+    it("Edit fill into the offset by input field end rules rule number " + i, function () {
+        pages.editDealRtp.editFillIntoTheOffsetByInputFieldEndRulesRuleNumberI(i);
+    });
+};
+
+exports.editSelectRandomOptionFromOffsetByChoiceEndRules = function () {
+    it("Edit select the random option from offset by choice end date end rules ", function () {
+        pages.editDealRtp.editSelectTheRandomOptionFromOffsetByChoiceEndRules();
+    });
+};
+
+exports.editClickOnAddNewRuleEndRulesAddedRuleNumberI = function (i) {
+    it("Edit click on the add new rule end rules added rule number " + i, function () {
+        pages.editDealRtp.editClickOnTheAddNewRuleEndRulesAddedRuleNumberI(i);
+    });
+};
+
+exports.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
+    it("Edit delete end rules condition number " + i + " row number " + j, function () {
+        pages.editDealRtp.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editCancelDeleteEndRules = function () {
+    it("Edit cancel delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editCancelDeleteEndRulesModalDialog));
+        pages.editDealRtp.elems.editCancelDeleteEndRulesModalDialog.click();
+    });
+};
+
+exports.editDeleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
+    it("Edit delete end rules condition number " + i + " row number " + j, function () {
+        pages.editDealRtp.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.checkEndRuleRetentionTooltipSummary = function (text) {
+    it("Check end rule retention tooltip summary ", function () {
+        pages.editDealRtp.checkTheEndRuleRetentionTooltipSummary(text);
+    });
+};
+
+exports.editClickOnCancelEndRulesLinkOnRetention = function () {
+    it("Edit click on cancel end rules link on retention", function () {
+        pages.editDealRtp.editClickOnTheCancelEndRulesFromRetentionNumber();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editClickOnCancelEndRulesLinkOnRetentionWithoutModal = function () {
+    it("Edit click on cancel end rules link on retention", function () {
+        pages.editDealRtp.editClickOnTheCancelEndRulesFromRetentionNumberWIthoutModal();
+        pages.editDealRtp.waitForAjax();
+    });
+};
