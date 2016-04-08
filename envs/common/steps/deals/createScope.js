@@ -330,7 +330,7 @@ exports.cancelThePublisherShareSet = function () {
 
 exports.selectSpecificPublisherNameDropDown = function () {
     it("Select specific value publisher name drop down", function () {
-        pages.createDealScope.selectTheSpecificPublisherNameDropDown("(53026414)\nwb music corp.");
+        pages.createDealScope.selectTheSpecificPublisherNameDropDown('music');
     });
 };
 
@@ -413,7 +413,7 @@ exports.fillIntoPublisherNameAMFieldChainI = function (i) {
 
 exports.selectSpecificPublisherNameDropDownChainI = function (i) {
     it("Select specific value publisher name drop down chain i", function () {
-        pages.createDealScope.selectSpecificPublisherNameDropDownChainI("(53026414)\nwb music corp.", i);
+        pages.createDealScope.selectSpecificPublisherNameDropDownChainI('music', i);
     });
 };
 
@@ -594,10 +594,51 @@ exports.checkDeleteScopeLinkIsEnabled = function () {
     });
 };
 
+exports.nonCtrlCreatorShare = (function () {
+    var nccs = {};
+
+    nccs.validateLabel = function (i) {
+        it('Non Controller Creator Share > validate label text #' + (i + 1), function () {
+            expect(pages.createDealScope.nonCtrlCreatorShare.getText(i)).toBe(
+                'Non-Controlled Creator Share'
+            );
+        });
+    };
+
+    nccs.validateDefault = function (i) {
+        it('Non Controlled Creator Share > validate default value #' + (i + 1), function () {
+            pages.createDealScope.nonCtrlCreatorShare.validateDefault(i);
+        });
+    };
+
+    nccs.click = function (i) {
+        it('Non Controlled Creator Share > click on checkbox #' + (i + 1), function () {
+            pages.createDealScope.nonCtrlCreatorShare.click(i);
+        });
+    };
+
+    nccs.validateHelpMessage = function (i) {
+        it('Non Controlled Creator Share > validate help message #' + (i + 1), function () {
+            pages.createDealScope.nonCtrlCreatorShare.hoverHelp(i);
+            expect(pages.createDealScope.nonCtrlCreatorShare.helpMessage(i)).toContain(
+                'Indicates WCM is not responsible'
+            );
+        });
+    };
+
+    return nccs;
+})();
+
 exports.itAddPublisherShare = function () {
     describe("Add publisher share set", function () {
+        var nccs = exports.nonCtrlCreatorShare;
+
         steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
         steps.createDealScope.clickOnAddPublisherShareSet();
+        nccs.validateLabel(0);
+        nccs.validateDefault(0);
+        nccs.click(0);
+        nccs.validateHelpMessage(0);
         steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.createDealScope.fillIntoFirstPublisherNameAMField("53026414");
         steps.createDealScope.selectSpecificPublisherNameDropDown();
@@ -643,7 +684,15 @@ exports.itAddPublisherSharePATypeWithMultipleThreeChains = function (i) {
 
 exports.itAddPublisherShareWithMultipleThreeChains = function (i) {
     describe("Add publisher share set with three chains", function () {
+        var nccs = exports.nonCtrlCreatorShare;
+
         steps.createDealScope.clickAddChainLink();
+        nccs.validateLabel(i - 1);
+        nccs.validateDefault(i - 1);
+        if (i == 2) {
+            nccs.click(i - 1);
+        }
+        nccs.validateHelpMessage(i - 1);
         steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
         steps.createDealScope.fillIntoPublisherNameAMFieldChainI(i);
         steps.createDealScope.selectSpecificPublisherNameDropDownChainI(i);
@@ -660,9 +709,15 @@ exports.itAddSimpleScope = function () {
 
 exports.itCheckVisualDesignPublisherShare = function () {
     describe("Check visual design for publsiher share set", function () {
+        var nccs = exports.nonCtrlCreatorShare;
+
         steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
         steps.createDealScope.validateNoPublisherShareWarningIsDisplayed();
         steps.createDealScope.clickOnAddPublisherShareSet();
+        nccs.validateLabel(0);
+        nccs.validateDefault(0);
+        nccs.click(0);
+        nccs.validateHelpMessage(0);
         steps.createDealScope.validatePlaceholdersForPublisherNameEAndAM();
         steps.createDealScope.validateErrorMessagePublisherRequired();
         steps.createDealScope.validatePublisherNameTooltipEOrPAIcon();

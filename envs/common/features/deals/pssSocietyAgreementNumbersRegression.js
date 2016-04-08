@@ -276,6 +276,12 @@ exports.feature = [
 
                 deal.addSocietyAgreementNumbersToPssChain(0);
 
+                dsanCtp.validateAddCreatorLinkState('disabled');
+
+                dsanCtp.focus();
+
+                dsanCtp.validateAddCreatorLinkState('disabled');
+
                 times(3, function (i, howMany) {
                     var last = (i === howMany - 1);
 
@@ -285,15 +291,21 @@ exports.feature = [
                         'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
                     );
 
+                    dsanCtp.validateAddCreatorLinkState('enabled');
+
                     _.times(2, function (j) {
                         var societyName;
 
                         dsanCtp.enterSocietyAgreementNumber(i, j, ('12345' + i) + j);
 
+                        dsanCtp.validateAddCreatorLinkState('disabled');
+
                         societyName = ['ASCAP', 'BMI'][j];
 
                         dsanCtp.enterSocietySearchTerms(i, j, societyName);
                         dsanCtp.selectSocietySearchResultByName(societyName);
+
+                        dsanCtp.validateAddCreatorLinkState('enabled');
                     });
 
                     if(!last) {
@@ -479,6 +491,12 @@ exports.feature = [
 
             deal.viewPssChainSocietyAgreementNumbers(0);
 
+            dsanCtp.validateAddCreatorLinkState('disabled');
+
+            dsanCtp.focus();
+
+            dsanCtp.validateAddCreatorLinkState('enabled');
+
             describe('Delete first 3 creator sets', function () {
                 _.each([ 3, 1, 2 ], function (iPerson) {
                     dsanCtp.findCreatorSet(
@@ -490,6 +508,8 @@ exports.feature = [
                 });
             });
 
+            dsanCtp.validateAddCreatorLinkState('enabled');
+
             describe(
                 'Delete 1 society agreement number from remaining creator set',
                 function () {
@@ -500,6 +520,8 @@ exports.feature = [
                     dsanCtp.deleteSocietyAgreementNumber(iSet, 0);
                 }
             );
+
+            dsanCtp.validateAddCreatorLinkState('enabled');
 
             dsan.save();
 

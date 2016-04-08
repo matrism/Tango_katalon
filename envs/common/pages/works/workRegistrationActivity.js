@@ -268,30 +268,21 @@ exports.activityGroup.events = (function() {
         expect(events.getProcessedDate()).toBe(value);
     };
 
-    events.anyEventStatusElement = function(status) {
-        var target = exports.activityGroup.targets.latest;
-
-        return target.container.element(by.cssContainingText('.label', status));
-    };
-
     events.waitUntilAnyEventStatusBecomes = function(status) {
-        var statusElement = events.anyEventStatusElement(status);
+        var container = exports.activityGroup.targets.latest.container;
 
         browser.wait(function() {
-            browser.wait(function() {
-                return statusElement.isPresent();
-            });
 
-            pages.base.scrollIntoView(statusElement);
+            pages.base.scrollIntoView(container);
 
-            return pph.trim(statusElement.getText()).then(function(text) {
-                if(text === status) {
+            return pph.trim(container.getText()).then(function(text) {
+                if(text.indexOf(status) > -1) {
                     return true;
                 }
 
                 pages.base.refreshPage();
 
-                activityGroup.toggleBlind();
+                exports.activityGroup.toggleBlind();
 
                 return false;
             });

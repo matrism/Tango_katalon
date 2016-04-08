@@ -122,9 +122,9 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField("Gift Test Artist", "Gift Test Artist");
-            steps.editDealGeneral.editSpecificRandomArtistField("Bruno Mars", "Bruno Mars");
-            steps.editDealGeneral.editSpecificRandomArtistField("Billy", "Billy");
+            steps.editDealGeneral.editSpecificRandomArtistField('Ronald Cheng', 'Ronald Cheng');
+            steps.editDealGeneral.editSpecificRandomArtistField('Bruno Mars', 'Bruno Mars');
+            steps.editDealGeneral.editSpecificRandomArtistField('Billie Black', 'Billie Black');
 
 
             //steps.editDealGeneral.editSpecificArtistField("test", "Gema Test Artist");
@@ -133,7 +133,7 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Billy, Bruno Mars, Gift Test Artist");
+            steps.headerDeal.checkArtistValue('Billie Black, Bruno Mars, Ronald Cheng');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
@@ -144,13 +144,13 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Billy, Bruno Mars, Gift Test Artist, Madonna");
+            steps.headerDeal.checkArtistValue('Billie Black, Bruno Mars, Madonna, Ronald Cheng');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue("Billy, Gift Test Artist, Madonna");
+            steps.headerDeal.checkArtistValue('Billie Black, Madonna, Ronald Cheng');
 
             //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             //steps.editDealGeneral.editRandomArtistField("vfdbvf");

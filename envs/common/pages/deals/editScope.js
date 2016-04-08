@@ -315,6 +315,76 @@ if (pages.editDealScope === undefined) {
                 pages.editDealScope.elems.publisherSharesSetEditIcon.click();
             },
 
+            publisherShareChain: function (i) {
+                return element.all(by.repeater(
+                        'chain in modularEditModels.model._chains track by chain.id'
+                    )).get(i);
+            },
+
+            nonCtrlCreatorShare: function () {
+                var nccs = {};
+
+                nccs.component = function (i) {
+                    var el = $$('[data-ng-click="setNonControlledCreatorShare(chain.id)"]').get(i);
+                    pages.base.scrollIntoView(el);
+                    return el;
+                };
+
+                nccs.label = function (i) {
+                    return pages.editDealScope.publisherShareChain(i).element(by.cssContainingText(
+                            'span', 'Non-Controlled Creator Share'
+                        ));
+                };
+
+                nccs.societyAgreementNumberLinkParent = function () {
+                    return pages.editDealScope.elems.addSocietyAgreementNumberLink.element(
+                            by.xpath('parent::div')
+                        );
+                };
+
+                nccs.validateLabelPosition = function (i) {
+                    var element = nccs.societyAgreementNumberLinkParent().element(by.cssContainingText(
+                            'span', 'Non-Controlled Creator Share'
+                        ));
+                    expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+                };
+
+                nccs.checkbox = function (i) {
+                    return nccs.component(i).$('i');
+                };
+
+                nccs.helpIcon = function (i) {
+                    return nccs.component(i).element(by.xpath('following-sibling::i'));
+                };
+
+                nccs.getText = function (i) {
+                    return nccs.component(i).getText();
+                };
+
+                nccs.expectCheckboxNotChecked = function (i) {
+                    expect(nccs.checkbox(i).getAttribute('class')).toBe('fa fa-square-o');
+                };
+
+                nccs.expectCheckboxChecked = function (i) {
+                    expect(nccs.checkbox(i).getAttribute('class')).toBe('fa fa-check-square-o');
+                };
+
+                nccs.click = function (i) {
+                    nccs.component(i).click();
+                };
+
+                nccs.hoverHelp = function (i) {
+                    var el = nccs.helpIcon(i);
+                    browser.actions().mouseMove(el).perform();
+                };
+
+                nccs.helpMessage = function (i) {
+                    return nccs.helpIcon(i).getAttribute('data-tooltip');
+                };
+
+                return nccs;
+            }(),
+
             clickOnAddSocietyAgreementNumberLinkPublisherSharesSetChainI: function (i) {
                 var element = browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"));
                 element.click();
@@ -358,20 +428,26 @@ if (pages.editDealScope === undefined) {
             },
 
             editInFirstPublisherNameField: function (publisherName) {
-                pages.editDealScope.elems.editFirstPublisherNameField.clear();
-                pages.editDealScope.elems.editFirstPublisherNameField.sendKeys(publisherName);
+                var element = pages.editDealScope.elems.editFirstPublisherNameField;
+                pages.base.scrollIntoView(element);
+                element.clear();
+                element.sendKeys(publisherName);
             },
 
             editInFirstPublisherNameOwnPercent: function () {
-                var percent = (Math.random() * 3 + 30).toFixed(2);
-                pages.editDealScope.elems.editFirstPublisherOwnPercent.clear();
-                pages.editDealScope.elems.editFirstPublisherOwnPercent.sendKeys(percent);
+                var percent = (Math.random() * 3 + 30).toFixed(2),
+                    element = pages.editDealScope.elems.editFirstPublisherOwnPercent;
+                pages.base.scrollIntoView(element);
+                element.clear();
+                element.sendKeys(percent);
             },
 
             editInFirstPublisherNameCollectPercent: function () {
-                var percent = (Math.random() * 9 + 1).toFixed(2);
-                pages.editDealScope.elems.editFirstPublisherCollectPercent.clear();
-                pages.editDealScope.elems.editFirstPublisherCollectPercent.sendKeys(percent);
+                var percent = (Math.random() * 9 + 1).toFixed(2),
+                    element = pages.editDealScope.elems.editFirstPublisherCollectPercent;
+                pages.base.scrollIntoView(element);
+                element.clear();
+                element.sendKeys(percent);
             },
 
             editInFirstPublisherNameOwnPercentSpecificValue: function (percent) {
@@ -385,15 +461,19 @@ if (pages.editDealScope === undefined) {
             },
 
             editInFirstPublisherNameAMField: function (publisherNameAM) {
-                pages.editDealScope.elems.editFirstPublisherNameAMField.clear();
-                pages.editDealScope.elems.editFirstPublisherNameAMField.sendKeys(publisherNameAM);
+                var element = pages.editDealScope.elems.editFirstPublisherNameAMField;
+                pages.base.scrollIntoView(element);
+                element.clear();
+                element.sendKeys(publisherNameAM);
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editPublisherNameDropDownData));
             },
 
             editInFirstPublisherNameAMCollectPercent: function () {
-                var percent = (Math.random() * 9 + 1).toFixed(2);
-                pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.clear();
-                pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent.sendKeys(percent);
+                var percent = (Math.random() * 9 + 1).toFixed(2),
+                    element = pages.editDealScope.elems.editFirstPublisherNameAMCollectPercent;
+                pages.base.scrollIntoView(element);
+                element.clear();
+                element.sendKeys(percent);
             },
 
             savePageButton: function () {
@@ -461,6 +541,7 @@ if (pages.editDealScope === undefined) {
                     })
                     .then(function clickOption() {
                         if (desiredOption) {
+                            pages.base.scrollIntoView(desiredOption);
                             desiredOption.click();
                         }
                     });
@@ -484,6 +565,7 @@ if (pages.editDealScope === undefined) {
                     })
                     .then(function clickOption() {
                         if (desiredOption) {
+                            pages.base.scrollIntoView(desiredOption);
                             desiredOption.click();
                         }
                     });
@@ -534,6 +616,7 @@ if (pages.editDealScope === undefined) {
                     })
                     .then(function clickOption() {
                         if (desiredOption) {
+                            pages.base.scrollIntoView(desiredOption);
                             desiredOption.click();
                         }
                     });
@@ -541,23 +624,27 @@ if (pages.editDealScope === undefined) {
 
             editPublisherNameFieldChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input"));
+                pages.base.scrollIntoView(element);
                 element.sendKeys("test");
             },
 
             editPublisherNameOwnPercentFieldChainI: function (i) {
                 var percent = (Math.random() * 3 + 30).toFixed(2);
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"));
+                pages.base.scrollIntoView(element);
                 element.sendKeys(percent);
             },
 
             editPublisherNameCollectPercentFieldChainI: function (i) {
                 var percent = (Math.random() * 9 + 1).toFixed(2);
                 var element = browser.driver.findElement(By.css("#deal-publisher  div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"));
+                pages.base.scrollIntoView(element);
                 element.sendKeys(percent);
             },
 
             editPublisherNameAMFieldChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"));
+                pages.base.scrollIntoView(element);
                 element.sendKeys("53026414");
             },
 
@@ -566,6 +653,7 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                     .then(function (options) {
                         var randomNumber = Math.floor((Math.random() * options.length));
+                        pages.base.scrollIntoView(options[randomNumber]);
                         options[randomNumber].click();
                     })
             },
@@ -587,6 +675,7 @@ if (pages.editDealScope === undefined) {
                     })
                     .then(function clickOption() {
                         if (desiredOption) {
+                            pages.base.scrollIntoView(desiredOption);
                             desiredOption.click();
                         }
                     });
@@ -595,11 +684,13 @@ if (pages.editDealScope === undefined) {
             editPublisherNameAMCollectPercentChainI: function (i) {
                 var percent = (Math.random() * 9 + 1).toFixed(2);
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"));
+                pages.base.scrollIntoView(element);
                 element.sendKeys(percent);
             },
 
             editClickOnDeleteIconChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope"));
+                pages.base.scrollIntoView(element);
                 element.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.confirmDeleteModalDialog));
             },

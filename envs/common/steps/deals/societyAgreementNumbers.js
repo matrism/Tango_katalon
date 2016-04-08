@@ -12,9 +12,12 @@ addStepGroup(exports, 'Creator-To-Publisher', function (group) {
     addBasicStep(group, ctp, [
         'Validate form heading',
 
+        'Focus',
+
         'Find creator row',
 
         'Enter creator search terms',
+        'Expect no creator search results',
         'Select creator search result by display name',
 
         'Validate creator search terms field state',
@@ -25,6 +28,7 @@ addStepGroup(exports, 'Creator-To-Publisher', function (group) {
         'Select society search result by name',
         'Expect society search result to be disallowed',
 
+        'Validate Add Creator link state',
         'Add creator',
 
         'Validate creator row count',
@@ -58,6 +62,7 @@ addStepGroup(exports, 'Publisher', function (group) {
         'Enter society agreement number',
 
         'Enter society search terms',
+        'Expect no society search results',
         'Select society search result by name',
 
         'Validate society agreement number row count',

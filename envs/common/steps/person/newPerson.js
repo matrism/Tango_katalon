@@ -24,6 +24,9 @@ exports.waitForPageToLoad = function () {
     });
 };
 
+addBasicStep(exports, pages.person, 'Make creator');
+addBasicStep(exports, pages.person, 'Confirm making non-creator');
+
 exports.enterFirstName = steps.person.enterFirstName;
 
 exports.enterLastName = steps.person.enterLastName;
