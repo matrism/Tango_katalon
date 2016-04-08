@@ -77,6 +77,32 @@ exports.findId = function () {
     });
 };
 
+exports.creatorButtonsContainer = function () {
+    return $('[data-watched-init="isCreator = PAY.isRoleCreator()"]');
+};
+
+exports.creatorButtonByLabel = function (label) {
+    return exports.creatorButtonsContainer().element(
+        by.cssContainingText('button', label)
+    );
+};
+
+exports.makeCreator = function (creator) {
+    var el = exports.creatorButtonByLabel(
+        creator? 'Yes' : 'No'
+    );
+
+    return asAlways(el, 'scrollIntoView', 'click');
+};
+
+exports.confirmMakingNonCreator = function (confirm) {
+    pages.base.waitForModal();
+
+    return pages.base.modalFooterButtonByLabel(
+        confirm? 'Yes' : 'No'
+    ).click();
+};
+
 exports.firstNameInput = function () {
     return element(by.model('person.name.primary.master_data.primary_name.first_name'));
 };

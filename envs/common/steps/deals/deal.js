@@ -114,6 +114,13 @@ exports.goToGeneralDealTabDetails = function () {
     });
 };
 
+exports.goToGeneralDealTabDetailsDirtyCheck = function () {
+    it("Click on general header and go to general deal tab details ", function () {
+        pages.deal.goToGeneralDealDetails();
+        pages.deal.waitForAjax();
+    });
+};
+
 exports.goToPayeesDealTabDetails = function () {
     it("Click on payees header and go to payees deal tab details ", function () {
         pages.deal.goToPayeesDealDetails();

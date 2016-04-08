@@ -339,10 +339,6 @@ exports.closeRateSet = function () {
     });
 };
 
-exports.openRateSetPanel = function () {
-    it("  ", function () {
-    });
-};
 
 exports.openSavedScope = function () {
     it("Click Scope Heading", function () {

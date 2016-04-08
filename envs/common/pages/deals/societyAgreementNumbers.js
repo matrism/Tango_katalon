@@ -23,6 +23,10 @@ exports.creatorToPublisher = (function () {
         expect(pph.getAllText(ctp.formHeading())).toBe(expected);
     };
 
+    ctp.focus = function () {
+        return ctp.formHeading().click();
+    };
+
     ctp.creatorRows = function () {
         return ctp.form().all(by.repeater('creator in data.model.creators'));
     };
@@ -41,6 +45,17 @@ exports.creatorToPublisher = (function () {
 
     ctp.creatorSearchResultRows = function () {
         return element.all(by.repeater('match in matches'));
+    };
+
+    ctp.noCreatorSearchResultsMessage = function () {
+        return $('[data-ng-if="match.model.validResult == false"]');
+    };
+
+    ctp.expectNoCreatorSearchResults = function () {
+        return asAlways(
+            ctp.noCreatorSearchResultsMessage(),
+            'waitUntilVisible'
+        );
     };
 
     ctp.creatorSearchResultRowByDisplayName = function (name) {
@@ -125,6 +140,24 @@ exports.creatorToPublisher = (function () {
 
     ctp.addCreatorLink = function () {
         return $('[data-ng-click="data.addCreatorToChain()"]');
+    };
+
+    ctp.addCreatorLinkEnabled = function () {
+        return pph.matchesCssSelector(
+            ctp.addCreatorLink(), ':not(.muted)'
+        );
+    };
+
+    ctp.addCreatorLinkState = function () {
+        return promise.all([
+            ctp.addCreatorLinkEnabled().then(function (enabled) {
+                return enabled? 'enabled' : 'disabled';
+            })
+        ]);
+    };
+
+    ctp.validateAddCreatorLinkState = function (state) {
+        expect(ctp.addCreatorLinkState()).toContain(state);
     };
 
     ctp.addCreator = function () {
@@ -368,6 +401,17 @@ exports.publisher = (function () {
 
     p.societySearchResultRows = function () {
         return element.all(by.repeater('match in matches'));
+    };
+
+    p.noSocietySearchResultsMessage = function () {
+        return $('[data-ng-if="match.model.validResult == false"]');
+    };
+
+    p.expectNoSocietySearchResults = function () {
+        return asAlways(
+            p.noSocietySearchResultsMessage(),
+            'waitUntilVisible'
+        );
     };
 
     p.societySearchResultRowByName = function (name) {

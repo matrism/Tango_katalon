@@ -22,6 +22,32 @@ exports.findId = function() {
     });
 };
 
+exports.creatorButtonsContainer = function () {
+    return element(by.model('modularEditModels.model.isCreator'));
+};
+
+exports.creatorButtonByLabel = function (label) {
+    return exports.creatorButtonsContainer().element(
+        by.cssContainingText('button', label)
+    );
+};
+
+exports.makeCreator = function (creator) {
+    var el = exports.creatorButtonByLabel(
+        creator? 'Yes' : 'No'
+    );
+
+    return asAlways(el, 'scrollIntoView', 'click');
+};
+
+exports.confirmMakingNonCreator = function (confirm) {
+    pages.base.waitForModal();
+
+    return pages.base.modalFooterButtonByLabel(
+        confirm? 'Yes' : 'No'
+    ).click();
+};
+
 exports.firstNameInput = function() {
     return $('.e2e-primary-name-first input');
 };

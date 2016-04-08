@@ -17,6 +17,8 @@ pageStep([
     'Add email'
 ]);
 
+addBasicStep(exports, pages.person, 'Make creator');
+addBasicStep(exports, pages.person, 'Confirm making non-creator');
 
 exports.enterFirstName = function (value) {
     it('Enter first name (' + value + ')', function () {
