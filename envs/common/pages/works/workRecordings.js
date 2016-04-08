@@ -85,7 +85,7 @@ exports.validateRecordingDurations = function(values) {
 };
 
 exports.libraryNameBinding = function(i) {
-    return $$('[data-ng-switch="commonDataHolder.isLibrary"] .ng-binding').first();
+    return $$('[data-ng-switch="commonDataHolder.isLibrary"] .ng-binding').get(i);
 };
 
 exports.libraryName = function(i) {
@@ -96,4 +96,55 @@ exports.libraryName = function(i) {
 
 exports.validateLibraryName = function(i, value) {
     expect(exports.libraryName(i)).toBe(value);
+};
+
+exports.toggleRecordingButton = function (i) {
+    return exports.recordingContainer(i).$(
+            '[data-ng-click="isCollapsed = !isCollapsed"]'
+        );
+};
+
+exports.toggleAlbumButton = function (i) {
+    return exports.recordingContainer(i).$(
+            '[data-ng-click="isCollapsed2 = !isCollapsed2"]'
+        );
+};
+
+exports.toggleRecording = function (i) {
+    exports.toggleRecordingButton(i).click();
+    pages.base.waitForAjax();
+};
+
+exports.toggleAlbum = function (i) {
+    exports.toggleAlbumButton(i).click();
+    pages.base.waitForAjax();
+};
+
+exports.albumTitleBinding = function (i) {
+    //return exports.recordingContainer(i).element(by.binding(' ::track.album.title || \'&nbsp;\' '));
+    return exports.recordingContainer(i).$('[data-ui-sref="albumView({albumId:track.album_id})"]');
+};
+
+exports.validateAlbumTitle = function (i, value) {
+    expect(exports.albumTitleBinding(i).getText()).toBe(value);
+};
+
+exports.albumRelease = function (i) {
+    return element.all(by.repeater('albumRelease in track.album.albumReleases')).get(i);
+}
+
+exports.albumTerritoryBinding = function (i) {
+    return exports.recordingContainer(i).element(by.binding(' getTerritory(territory).title '));
+};
+
+exports.validateAlbumTerritory = function (i, value) {
+    expect(exports.albumTerritoryBinding(i).getText()).toBe(value);
+};
+
+exports.albumConfigurationBinding = function (i) {
+    return exports.recordingContainer(i).element(by.binding(' getTerritory(territory).title '));
+};
+
+exports.validateAlbumConfiguration = function (i, value) {
+    expect(exports.albumTerritoryBinding(i).getText()).toBe(value);
 };

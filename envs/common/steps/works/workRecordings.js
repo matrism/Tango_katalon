@@ -23,3 +23,7 @@ exports.validateRecordingDurations = function(values) {
 };
 
 pageStep('Validate library name');
+pageStep('Toggle Recording');
+pageStep('Toggle Album');
+pageStep('Validate Album Title');
+pageStep('Validate Album Territory');
