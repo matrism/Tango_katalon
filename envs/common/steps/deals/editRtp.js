@@ -87,6 +87,7 @@ exports.editFillIntoActualEndDateFieldRetentionFromAcquisition = function (actua
     });
 };
 
+
 exports.saveRetentionFromAcquisition = function () {
     it("Save the retention from acquisition number ", function () {
         pages.editDealRtp.saveTheRetentionFromAcquisition();
@@ -109,6 +110,18 @@ exports.editFillIntoDurationFieldPostTermCollectionFromRetention = function () {
 exports.editClickOnAddAnotherAcquisitionPeriodLink = function () {
     it("Edit click on add another acquisition period link", function () {
         pages.editDealRtp.editClickOnTheAddAnotherAcquisitionPeriodLink();
+    });
+};
+
+exports.scrollIntoViewAddEndRuleToRetention = function(){
+  it("Edit - scroll into view add end rule to retention ", function(){
+      pages.base.scrollIntoView(element(by.css("div[data-ng-if='retentionFormSection.detail'] div.aquisition-details")));
+  });
+};
+
+exports.scrollIntoViewAddEndRuleToRetentionEditMode = function(){
+    it("Edit - scroll into view add end rule to retention ", function(){
+        pages.base.scrollIntoView(element(by.css("div[data-ng-if='retentionFormSection.edit'] select#retention_duration_type")));
     });
 };
 
@@ -212,6 +225,41 @@ exports.editClickOnCancelEndRulesLinkOnRetention = function () {
 exports.editClickOnCancelEndRulesLinkOnRetentionWithoutModal = function () {
     it("Edit click on cancel end rules link on retention", function () {
         pages.editDealRtp.editClickOnTheCancelEndRulesFromRetentionNumberWIthoutModal();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editClickOnContinueEditingEndRulesModalButton = function () {
+    it("Edit click on the continue editing end rules modal dialog button ", function () {
+        pages.editDealRtp.editClickOnTheContinueEditingEndRulesModalButton();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editClickOnConfirmCancellationEndRulesModalButton = function () {
+    it("Edit click on the confirm cancellation end rules modal dialog button ", function () {
+        pages.editDealRtp.editClickOnTheConfirmCancellationEndRulesModalButton();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editFillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI = function (i, specific_date) {
+    it("Edit fill into the pre defined date field end rules specific date rule number " + i, function () {
+        pages.editDealRtp.editFillIntoThePreDefinedDateFieldEndRulesSpecificDateRuleNumberI(i, specific_date);
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editAddEndRuleOnTheForm = function () {
+    it("Edit click on add end rule link on the bottom of the end rules form ", function () {
+        pages.editDealRtp.editAddTheEndRuleOnTheForm();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editFillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ = function (i, j, value) {
+    it("Fill into the attribute right end rules rule number " + i + " row number " + j, function () {
+        pages.editDealRtp.editFillIntoTheAttributeRightDateEndRulesSpecificValueRuleNumberIRowNumberJ(i, j, value);
         pages.editDealRtp.waitForAjax();
     });
 };

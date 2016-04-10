@@ -37,7 +37,8 @@ if (pages.editDealRtp === undefined) {
             editCancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
             editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
-            editCancelEndRulesLinkFromRetention: {css: "div[data-ng-form='editCancelEndRulesLinkFromRetention'] div.modal-footer button[data-ng-click='cancel()']"}
+            editCancelEndRulesLinkFromRetention: {css: "div[data-ng-form='rtpEndRulesModalForm'] div.modal-footer button[data-ng-click='cancel()']"},
+            editAddRuleLinkBottomEndRuleForm: {css: "a[data-ng-click='addEndRule(form.show.endRules.containerId, form.show.endRules.type, rulesForm.$valid)']"}
         },
 
         editClickOnTheAddAnotherAcquisitionPeriodLink: function () {
@@ -112,7 +113,7 @@ if (pages.editDealRtp === undefined) {
         },
 
         editClickOnTheAddEndRulesFromRetentionNumber: function () {
-            pages.base.scrollIntoView(pages.editDealRtp.elems.editAddEndRulesLinkFromRetention);
+            //pages.base.scrollIntoView(pages.editDealRtp.elems.editAddEndRulesLinkFromRetention);
             pages.editDealRtp.elems.editAddEndRulesLinkFromRetention.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-form='rtpEndRulesModalForm']"))));
         },
@@ -330,8 +331,33 @@ if (pages.editDealRtp === undefined) {
         editClickOnTheCancelEndRulesFromRetentionNumberWIthoutModal: function () {
             pages.base.scrollIntoView(pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention);
             pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+        },
+
+        editClickOnTheContinueEditingEndRulesModalButton: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDeleteEndRulesModalDialog));
+            pages.editDealRtp.elems.editCancelDeleteEndRulesModalDialog.click();
+        },
+
+        editClickOnTheConfirmCancellationEndRulesModalButton: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDeleteEndRulesModalDialog));
+            pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog.click();
+        },
+
+        editFillIntoThePreDefinedDateFieldEndRulesSpecificDateRuleNumberI: function (i, specific_date) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).clear();
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).sendKeys(specific_date);
+        },
+
+        editAddTheEndRuleOnTheForm: function(){
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editAddRuleLinkBottomEndRuleForm);
+            pages.editDealRtp.elems.editAddRuleLinkBottomEndRuleForm.click();
+        },
+
+        editFillIntoTheAttributeRightDateEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).clear();
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).sendKeys(value);
         }
+
 
 
     });

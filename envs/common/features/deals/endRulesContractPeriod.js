@@ -471,7 +471,6 @@ exports.feature = [
             //steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
 
 
-
         }
     },
 
