@@ -66,11 +66,6 @@ exports.feature = [
             steps.editDealScope.itEditOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.editDealScope.editSaveThePublisherShareSetWithModal();
 
-            steps.editDealScope.selectScopeNumberI(4);
-            steps.editDealScope.checkOverrideTitleAndNumber(1);
-            steps.editDealScope.selectScopeNumberI(5);
-            steps.editDealScope.checkOverrideTitleAndNumber(1);
-
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 2);
 
@@ -145,8 +140,8 @@ exports.feature = [
             steps.royaltyRates.editSingleRoyaltySet();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.royaltyRates.addEffectiveStartDate("2016-08-09");
-            steps.royaltyRates.saveRRData();
             steps.royaltyRates.saveRateSet();
+            steps.royaltyRates.confirmSaveRateSet();
 
             steps.deal.refreshThePage();
             steps.editDealScope.selectScopeNumberI(1);
