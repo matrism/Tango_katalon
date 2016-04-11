@@ -792,6 +792,11 @@ if (pages.royaltyRates === undefined) {
             RRDoneButton.click();
         },
 
+        confirmSaveTheRateSet: function (){
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.modal-footer button[data-ng-click='ok()']"))));
+            browser.findElement(By.css("div.modal-footer button[data-ng-click='ok()']")).click();
+        },
+
         waitForLoadToAppear: function () {
             browser.wait(ExpectedConditions.visibilityOf($(".pull-right.rate_set-loader")));
         },

@@ -145,8 +145,8 @@ exports.feature = [
             steps.royaltyRates.editSingleRoyaltySet();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.royaltyRates.addEffectiveStartDate("2016-08-09");
-            steps.royaltyRates.saveRRData();
             steps.royaltyRates.saveRateSet();
+            steps.royaltyRates.confirmSaveRateSet();
 
             steps.deal.refreshThePage();
             steps.editDealScope.selectScopeNumberI(1);

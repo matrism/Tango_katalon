@@ -320,6 +320,13 @@ exports.saveRateSet = function () {
     });
 };
 
+exports.confirmSaveRateSet = function () {
+    it("Confirm save the rate set changes ", function () {
+        pages.royaltyRates.confirmSaveTheRateSet();
+        pages.royaltyRates.waitForAjax();
+    });
+};
+
 exports.deleteRateSet = function () {
     it("Delete current Rate Set", function () {
         pages.royaltyRates.clickDeleteButtonForRRSet();
