@@ -1,8 +1,6 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../../../../helpers/random'),
+let random = require('../../../../helpers/random'),
     randomString = random.string.makeMemoizedGenerator();
 
 exports.beforeFeature = () => {

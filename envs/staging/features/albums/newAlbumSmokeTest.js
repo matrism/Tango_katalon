@@ -1,7 +1,6 @@
 'use strict';
 
-var steps_path = _tf_config._system_.path_to_steps,
-    fnutils = require('../../../../helpers/fnutils'),
+let fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using,
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
