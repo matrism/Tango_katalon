@@ -48,7 +48,7 @@ exports.feature = [
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName('BMI');
 
-            using(steps.organisationStaging, function () {
+            using(steps.organisation, function () {
                 this.validateCisacCode('021');
                 this.goToPreviewRegistrationRunTab();
                 this.waitForPreviewRegistrationRunHeaderToBeDisplayed();
@@ -58,7 +58,7 @@ exports.feature = [
 
             steps.searchSection.accessSavedOrganisationByName('WB MUSIC CORP.');
 
-            steps.organisationStaging.validateSubPublisherName(
+            steps.organisation.validateSubPublisherName(
                 0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
             );
         },
@@ -70,8 +70,8 @@ exports.feature = [
         ],
         steps: function () {
             steps.searchSection.accessSavedPersonByName('katy perry');
-            steps.personStaging.validateSuisaIpiNumber('292555933');
-            steps.personStaging.validateAlternativeName(0, 'katy perry')
+            steps.person.validateSuisaIpiNumber('292555933');
+            steps.person.validateAlternativeName(0, 'katy perry')
         }
     },
     {
