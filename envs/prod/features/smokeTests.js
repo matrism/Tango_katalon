@@ -93,7 +93,7 @@ exports.feature = [
             steps.editDealScope.editSaveTheChangesDealScope();
 
             steps.editDealPayee.clickOnPayeesHeader();
-            steps.editDealPayee.editPayeeArea();
+            steps.editDealPayee.editOldPayeeArea();
             steps.editDealPayee.itEditAddPayeePersonAndAssociateScope("paul");
             steps.editDealPayee.editSavePayeePage();
         }
