@@ -221,9 +221,115 @@ exports.feature = [
             steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(2, 3, 2);
             steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(2, 3, "Retention Period Minimum");
 
+            steps.editDealRtp.editAddEndRuleOnTheForm();
+
+            steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(3, "Recouped Date");
+
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Balance Repaid");
+            steps.editDealRtp.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "28");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(3, 1, 3);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Retention Period Minimum");
+
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(3, 2, "Current date");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(3, 2, 4);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(3, 2, "Pre-Defined Date");
+            steps.editDealRtp.editFillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(3, 2, "2016-01-20");
+
             steps.editDealRtp.editDoneEndRules();
 
             steps.editDealRtp.saveRetentionFromAcquisition();
         }
+    },
+
+    {
+        name: "Create a deal with end rules on contract period and test delete scenarios",
+        tags: ["edit_delete__entire_end_rules"],
+        steps: function () {
+
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.deal.goToRightsTermPeriodsTermsTabDetails();
+            steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
+            steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Conditional Duration");
+            steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
+
+
+            steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(1, "Retention Period Start");
+            steps.editDealRtp.editFillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
+            steps.editDealRtp.editSelectRandomOptionFromOffsetByChoiceEndRules();
+
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Current date");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Retention Period Minimum");
+
+            steps.editDealRtp.editAddEndRuleOnTheForm();
+
+            steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(2, "Repayment Date");
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "Recouped");
+            steps.editDealRtp.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "12");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(2, 1, 2);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "Retention Period Minimum");
+
+            steps.editDealRtp.editAddEndRuleOnTheForm();
+
+            steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(3, "Recouped Date");
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Balance Repaid");
+            steps.editDealRtp.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "28");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(3, 1, 3);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Retention Period Minimum");
+
+            //steps.editDealRtp.editDoneEndRules();
+
+
+            //delete end rule from delete end rule button
+            steps.createDealContractPeriod.clickOnDeleteEndRulesButton();
+            steps.createDealContractPeriod.cancelDeleteEntireEndRules();
+            steps.createDealContractPeriod.clickOnDeleteEndRulesButton();
+            steps.createDealContractPeriod.confirmDeleteEntireEndRules();
+
+
+
+            steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Conditional Duration");
+            steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
+
+
+            steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(1, "Retention Period Start");
+            steps.editDealRtp.editFillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
+            steps.editDealRtp.editSelectRandomOptionFromOffsetByChoiceEndRules();
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
+            steps.editDealRtp.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "2");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
+
+            steps.editDealRtp.editAddEndRuleOnTheForm();
+
+            steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(2, "Repayment Date");
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "Recouped");
+            steps.editDealRtp.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "12");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(2, 1, 2);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(2, 1, "Retention Period Minimum");
+
+            steps.editDealRtp.editAddEndRuleOnTheForm();
+
+            steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(3, "Recouped Date");
+            steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Current date");
+            steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(3, 1, 4);
+            steps.editDealRtp.editSelectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "Pre-Defined Date");
+            steps.editDealRtp.editFillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(3, 1, "2016-01-20");
+
+            steps.editDealRtp.editDoneEndRules();
+
+
+            steps.createDealContractPeriod.saveEndRulesForm();
+
+        }
     }
+
+
     ];
