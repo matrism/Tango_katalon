@@ -44,6 +44,7 @@ var defaultUserName = 'TangoTest1',
                 width: 1360,
                 height: 1024
             },
+            streamId: cli['stream'] || 1,
             //protractor Zapi related
             projectId: cli.projectId,
             tcn: cli.tcn,

@@ -16,6 +16,9 @@ let path = require('path'),
         }
     })();
 
+global.featureList = [];
+global.scenarioList = [];
+
 function tagMatches(a, b) {
     return a.some((a) => {
         return b.includes(a);
@@ -50,9 +53,13 @@ fMods.forEach((fPath) => {
         }
     }
 
+    featureList.push(fMod);
+
     describe(shortPath, () => {
         fMod.feature.forEach((scenario) => {
             describe(scenario.name, () => {
+                scenarioList.push(scenario);
+
                 if(systemConfig.tags.length > 0) {
                     let tags = fMod.commonFeatureTags.concat(scenario.tags);
 

@@ -165,6 +165,8 @@ config = {
             }));
         }
 
+        jasmine.getEnv().addReporter(require('../reporter/shellReporter'));
+
         if(systemConfig.orphanOnError) {
             jasmine.getEnv().addReporter(orphanOnErrorReporter);
         }

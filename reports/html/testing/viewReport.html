@@ -1,0 +1,1076 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script
+    src="https://code.jquery.com/jquery-2.2.3.js"
+    integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
+    crossorigin="anonymous"
+></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"
+>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.3/jquery.sticky.min.js"></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"
+></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"
+></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.17.1/URI.min.js"></script>
+
+<style>
+    body {
+        font-family: monospace;
+        font-size: 1.2em;
+        padding: 0 20px;
+    }
+
+    #header {
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+
+    #header table {
+        margin-bottom: 10px;
+    }
+
+    #header table td {
+        vertical-align: top;
+    }
+
+    #header table td + td {
+        padding-left: 50px;
+    }
+
+    #header .ctls {
+        padding: 10px 0;
+        background-color: white;
+    }
+
+    #filter {
+        width: 450px;
+    }
+
+    .stream:not(.filteredOut) + .stream {
+        margin-top: 1em;
+    }
+
+    .process, .block {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .step {
+        margin: 10px 0;
+    }
+
+    .process, .block, .step {
+        margin-left: 30px;
+    }
+
+    :not(.literal) + .literal {
+        margin-top: 10px;
+    }
+
+    .literal + :not(.literal) {
+        margin-top: 10px;
+    }
+
+    .literal {
+        color: brown;
+    }
+
+    .literal:before {
+        content: '> ';
+    }
+
+    .name {
+        margin-left: -30px;
+    }
+
+    .failed {
+        color: red;
+    }
+
+    .passed {
+        color: blue;
+    }
+
+    .process.failed {
+        color: #a0a000;
+    }
+
+    .name:not(:last-child) .val {
+        cursor: pointer;
+    }
+
+    .name:not(:last-child):before {
+        content: '[-] ';
+    }
+
+    .collapse:not(.filterExpand) .name:not(:last-child):before {
+        content: '[+] ';
+    }
+
+    .collapse:not(.filterExpand) > :not(.name) {
+        display: none;
+    }
+
+    .filteredOut {
+        display: none;
+    }
+
+    .browserUrl, .png, .html {
+        display: inline-block;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+    <div id="header" class="sticky">
+        <table>
+            <tr>
+                <td>
+                    <div class="status">
+                        Status: <span class="val">Loading</span>
+                    </div>
+
+                    <div class="targetEnv">
+                        Target environment: <span class="val">?</span>
+                        <span class="url">
+                            (<a class="val" href="#">?</a>)
+                        </span>
+                    </div>
+
+                    <div class="branch">
+                        Branch: <span class="val">?</span>
+                        <span class="commit">
+                            (<a class="val" href="#">?</a>)
+                        </span>
+                    </div>
+
+                    <div class="hostTimeZone">
+                        Host time zone: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="parallelJobs">
+                        Parallel jobs: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="startDateTime">
+                        Started on: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="endDateTime">
+                        Ended on: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="links">
+                        <a href="report.txt" target="_top">Raw report</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="tags">
+                        Tags: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="negatedTags">
+                        Negated tags: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="totalFeatures">
+                        Total features: <span class="val">?</span>
+
+                        <span class="totalFeaturesPassed passed">
+                            (<span class="val">0</span> ✓
+                        </span>
+                        /
+                        <span class="totalFeaturesFailed failed">
+                            <span class="val">0</span> ✗)
+                        </span>
+                    </div>
+
+                    <div class="totalScenarios">
+                        Total scenarios: <span class="val">?</span>
+
+                        <span class="totalScenariosPassed passed">
+                            (<span class="val">0</span> ✓
+                        </span>
+                        /
+                        <span class="totalScenariosFailed failed">
+                            <span class="val">0</span> ✗)
+                        </span>
+                    </div>
+
+                    <div class="totalSteps">
+                        Total steps: <span class="val">?</span>
+
+                        <span class="totalStepsPassed passed">
+                            (<span class="val">0</span> ✓
+                        </span>
+                        /
+                        <span class="totalStepsFailed failed">
+                            <span class="val">0</span> ✗)
+                        </span>
+                    </div>
+
+                    <div class="timeTaken">
+                        Total time taken: <span class="val">Unknown</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="ctls">
+            <input type="text" id="filter" placeholder="Filter">
+
+            <div style="margin-top: 10px">
+                <button id="expandAllCollapseSteps">Expand all / Collapse steps</button>
+                <button id="expandAll">Expand all</button>
+                <button id="collapseAll">Collapse all</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.tat = {};
+
+        $('#header .ctls').sticky({ topSpacing: 0 });
+    </script>
+
+    <script>
+        tat.duration = function (dur) {
+            return moment.duration(
+                parseFloat(dur), 'seconds'
+            ).format('h[h] m[m] s[s]');
+        };
+    </script>
+
+    <script>
+        $('body').on('click', '.name:not(:last-child) .val', function (ev) {
+            var $block = $(ev.target).closest('.name').parent();
+
+            if($block.is('.filterExpand')) {
+                $block.removeClass('filterExpand').addClass('collapse');
+            }
+            else {
+                $block.toggleClass('collapse');
+            }
+        });
+    </script>
+
+    <script>
+        window.updateHashQuery = function (key, val) {
+            var q = URI.parseQuery(
+                URI(top.location.href).fragment()
+            );
+
+            if(val === undefined || val === null) {
+                delete q[key];
+            }
+            else {
+                q[key] = val;
+            }
+
+            q = URI.buildQuery(q);
+
+            if(q !== URI(top.location.href).fragment()) {
+                window.location.hash = '#' + q;
+            }
+        };
+    </script>
+
+    <script>
+        var $body = $('body'),
+
+            updateFilter = $.debounce(250, function (terms) {
+                var $all = $('.feature, .scenario, .stream');
+
+                updateHashQuery('f', terms || null);
+
+                if(terms.length === 0) {
+                    $all.removeClass('filteredOut');
+                    return;
+                }
+
+                $all.addClass('filteredOut').removeClass('filterExpand');
+
+                terms.forEach(function (term) {
+                    var classSel;
+
+                    switch(term) {
+                        case 'pass':
+                        case 'fail':
+                        case 'crash':
+                            term += 'ed';
+
+                        case 'passed':
+                        case 'failed':
+                            classSel = term;
+                            break;
+
+                        default:
+                            classSel = term + '-tag';
+                            break;
+                    }
+
+                    $('.' + classSel).each(function () {
+                        var $this = $(this);
+
+                        $this.removeClass('filteredOut');
+
+                        if($this.is('.feature')) {
+                            $this.find('.scenario').removeClass('filteredOut');
+                        }
+                        else
+                        if(/-tag$/.test(classSel)) {
+                            $this.closest('.feature')
+                                .removeClass('filteredOut')
+                                .addClass('filterExpand');
+                        }
+
+                        $this.closest('.stream').removeClass('filteredOut');
+                    });
+                });
+            });
+
+        $('#filter').on('keyup', function () {
+            var terms = this.value;
+
+            updateFilter(terms.split(',').map(function (t) {
+                return t.trim();
+            }).filter(function (t) {
+                return (t !== '');
+            }));
+        });
+    </script>
+
+    <script>
+        var uri = URI(top.location.href),
+            q = URI.parseQuery(uri.fragment());
+
+        $('#filter').val(q.f);
+    </script>
+
+    <script>
+        $('#expandAllCollapseSteps').click(function () {
+            $('.filterExpand').removeClass('filterExpand');
+            $('.collapse:not(.step)').removeClass('collapse');
+            $('.step').addClass('collapse');
+        });
+
+        $('#expandAll').click(function () {
+            $('.filterExpand').removeClass('filterExpand');
+            $('.collapse').removeClass('collapse');
+        });
+
+        $('#collapseAll').click(function () {
+            $('.filterExpand').removeClass('filterExpand');
+            $('.feature, .scenario, .step, .block').addClass('collapse');
+        });
+    </script>
+
+    <script>
+        var xhr = $.get('report.txt');
+
+        xhr.done(function (data) {
+            var lines = data.split('\n');
+
+            console.time('Parsing time');
+
+            var interval = setInterval(function () {
+                for(var i = 0; i < 400; ++i) {
+                    line = lines.shift();
+
+                    if(!line) {
+                        clearInterval(interval);
+                        tat.done();
+
+                        return;
+                    }
+
+                    try {
+                        if(top.location.hash.includes('dbg')) {
+                            console.log(line);
+                        }
+
+                        tat.consumeLine(line);
+                    }
+                    catch(err) {
+                        console.error(err.stack);
+                        clearInterval(interval);
+
+                        return;
+                    }
+                }
+            }, 100);
+        });
+
+        xhr.fail(function () {
+            console.error('Failed to load report.txt.');
+        });
+    </script>
+
+    <script>
+        var stm,
+            stFns = {};
+
+        tat.rp = {
+            passedFeatures: 0,
+            failedFeatures: 0,
+
+            totalScenarios: 0,
+            passedScenarios: 0,
+            failedScenarios: 0,
+
+            totalSteps: 0,
+            passedSteps: 0,
+            failedSteps: 0,
+
+            streams: []
+        };
+
+        function makeDiv(classes) {
+            return $('<div>').attr('class', classes);
+        }
+
+        function makeFieldDiv(classes, key, val) {
+            return $('<div>').attr('class', classes).text(key + ': ').append(
+                $('<span class="val">').text(val)
+            );
+        }
+
+        function makeLineDiv(classes, l) {
+            return $('<div>').attr('class', classes).text(l);
+        }
+
+        function makeLinkDiv(classes, name, href) {
+            return $('<div>').attr('class', classes).append(
+                $('<a>').attr('href', href).text(name)
+            );
+        }
+
+        function setStream(id) {
+            stm = tat.rp.streams[id];
+
+            if(!stm) {
+                stm = tat.rp.streams[id] = {
+                    id: id,
+                    children: [],
+                    stFn: stFns.initial
+                };
+
+                stm.div = makeDiv('stream');
+                stm.div.append(makeFieldDiv('id', 'Stream ID', stm.id));
+                stm.div.append(makeFieldDiv('status', 'Status', 'Loading'));
+
+                $('body').append(stm.div);
+            }
+        }
+
+        stFns.initial = [
+            {
+                re: /^Target environment is (.+) \((.+)\)$/,
+
+                fn: function (l, env, appUrl) {
+                    var $urlEl;
+
+                    $('#header .targetEnv > .val').text(env);
+
+                    $urlEl = $('#header .targetEnv .url > .val').text(appUrl);
+
+                    if(appUrl !== 'unknown') {
+                        $urlEl.attr('href', appUrl)
+                    }
+                }
+            },
+
+            {
+                re: /^Test code branch is (.+) \((.+)\)$/,
+
+                fn: function (l, branch, commit) {
+                    var ghUrlPrefix = 'https://github.com/wmgdsp/tango-e2e/commit/',
+
+                        $commitVal;
+
+                    $('#header .branch > .val').text(branch);
+
+                    $commitVal = $('#header .branch .commit > .val')
+                        .text(commit.slice(0, 7));
+
+                    if(commit !== 'unknown') {
+                        $commitVal.attr('href', ghUrlPrefix + commit)
+                    }
+                }
+            },
+
+            {
+                re: /^Host time zone is (.+)$/, fn: function (l, tz) {
+                    $('#header .hostTimeZone > .val').text(tz);
+                }
+            },
+
+            {
+                re: /^Silent job timeout is (.+)$/, fn: function (l, timeout) {
+                    $('#header .silentJobTimeout > .val').text(
+                        tat.duration(timeout)
+                    );
+                }
+            },
+
+            {
+                re: /^Starting ([0-9]+) feature processes with ([0-9]+) parallel jobs on (.+)$/,
+
+                fn: function (l, fCount, jCount, dateTime) {
+                    fCount = parseInt(fCount);
+                    jCount = parseInt(jCount);
+
+                    $('#header .parallelJobs > .val').text(jCount);
+                    $('#header .totalFeatures > .val').text(fCount);
+                    $('#header .startDateTime > .val').text(dateTime);
+                }
+            },
+
+            {
+                re: /^Requested tags: (.+)$/, fn: function (l, tags) {
+                    $('#header .tags > .val').text(tags);
+                }
+            },
+
+            {
+                re: /^Negated tags: (.+)$/, fn: function (l, tags) {
+                    $('#header .negatedTags > .val').text(tags);
+                }
+            },
+
+            {
+                re: /^Starting process on (.+)$/, fn: function (l, dateTime) {
+                    var p = {
+                        type: 'process',
+                        startDateTime: dateTime,
+                        totalSteps: 'Unknown',
+                        latestStep: 0,
+                        children: []
+                    };
+
+                    stm.children.push(stm.process = p);
+
+                    stm.div.append(p.div = makeDiv('process'));
+                    p.div.append(makeLineDiv('log', 'Starting process'));
+
+                    p.div.append(makeFieldDiv(
+                        'startDateTime', 'Started on', dateTime
+                    ));
+
+                    p.div.append(makeFieldDiv(
+                        'totalSteps', 'Total steps', p.totalSteps
+                    ));
+
+                    stm.stFn = stFns.processStarted;
+                }
+            },
+
+            {
+                re: /^Total time taken so far: (.+)$/,
+
+                fn: function (l, timeTaken) {
+                    $('#header .timeTaken > .val').text(
+                        tat.duration(timeTaken)
+                    );
+                }
+            },
+
+            {
+                re: /^All done on (.+)$/, fn: function (l, dateTime) {
+                    $('#header .endDateTime > .val').text(dateTime);
+                    $('#header .status > .val').text('Finished');
+                }
+            },
+
+            {
+                fn: function (l) {
+                    var lc = stm.children[stm.children.length - 1];
+
+                    if(lc && lc.type === 'log') {
+                        lc.msg += l + '\n';
+                    }
+                    else {
+                        stm.children.push({
+                            type: 'log',
+                            msg: l
+                        });
+                    }
+
+                    stm.div.append(makeLineDiv('log literal', l));
+                }
+            }
+        ];
+
+        setStream(0);
+
+        stFns.processStarted = [
+            {
+                re: /^Testing started with ([0-9]+) steps to run$/,
+
+                fn: function (l, stepCount) {
+                    var p = stm.process;
+
+                    p.totalSteps = parseInt(stepCount);
+
+                    p.div.children('.totalSteps').children('.val').text(p.totalSteps);
+
+                    $('#header .totalSteps > .val').text(
+                        tat.rp.totalSteps += p.totalSteps
+                    );
+                }
+            },
+
+            {
+                re: /^(Feature|Scenario|Block): (.+)$/,
+
+                fn: function (l, blockType, name) {
+                    var b = {
+                            type: blockType.toLowerCase(),
+                            name: name,
+                            children: []
+                        },
+
+                        p = stm.process;
+
+                    p.children.push(p.block = b);
+
+                    p.div.append(b.div = makeDiv('feature block collapse'));
+                    b.div.append(makeFieldDiv('name', blockType, name));
+
+                    stm.stFn = stFns.block;
+                }
+            },
+
+            {
+                re: /^Process finished on (.+) \(took (.+)\)$/,
+
+                fn: function (l, dateTime, timeTaken) {
+                    var p = stm.process;
+
+                    p.div.append(makeLineDiv(
+                        'log', 'Process finished'
+                    ));
+
+                    p.div.append(makeFieldDiv(
+                        'endDateTime', 'Ended on', dateTime
+                    ));
+
+                    p.div.append(makeFieldDiv(
+                        'timeTaken', 'Time taken', tat.duration(timeTaken)
+                    ));
+
+                    delete stm.process;
+
+                    stm.div.children('.status').children('.val').text('Finished');
+
+                    // TODO: Fix me.
+                    stm.stFn = stFns.initial;
+                }
+            },
+
+            { re: /^Testing finished$/, fn: function () {} },
+
+            {
+                fn: function (l) {
+                    var p = stm.process,
+
+                        lc = p.children[p.children.length - 1];
+
+                    if(lc && lc.type === 'log') {
+                        lc.msg += '\n' + l;
+                    }
+                    else {
+                        p.children.push({
+                            type: 'log',
+                            msg: l
+                        });
+                    }
+
+                    p.div.append(makeLineDiv('log literal', l));
+                }
+            }
+        ];
+
+        stFns.block = [
+            {
+                re: /^(Feature|Scenario|Block): (.+)$/,
+
+                fn: function (l, blockType, name) {
+                    var parent = stm.process.block,
+
+                        b = {
+                            type: blockType.toLowerCase(),
+                            name: name,
+                            parent: parent,
+                            children: []
+                        };
+
+                    b.children.push(stm.process.block = b);
+
+                    parent.div.append(b.div = makeDiv('block collapse'));
+                    b.div.append(makeFieldDiv('name', blockType, name));
+
+                    if(!parent.parent) {
+                        b.div.addClass('scenario');
+
+                        $('#header .totalScenarios > .val').text(
+                            ++tat.rp.totalScenarios
+                        );
+                    }
+                }
+            },
+
+            {
+                re: /^Tags: (.+)$/, fn: function (l, tags) {
+                    var b = stm.process.block;
+
+                    b.div.append(makeFieldDiv('tags', 'Tags', tags));
+
+                    tags.split(',').forEach(function (tag) {
+                        b.div.addClass(tag.trim() + '-tag');
+                    });
+                }
+            },
+
+            {
+                re: /^Step: (.+)$/, fn: function (l, name) {
+                    var p = stm.process,
+                        b = p.block,
+
+                        s = {
+                            type: 'step',
+                            num: ++p.latestStep,
+                            name: name,
+                            children: []
+                        };
+
+                    b.children.push(b.step = s);
+
+                    b.div.append(s.div = makeDiv('step collapse'));
+                    s.div.append(makeFieldDiv('name', 'Step', name));
+
+                    stm.stFn = stFns.step;
+                }
+            },
+
+            {
+                re: /^End (feature|scenario|block): (.+) on (.+) \(took (.+)\)$/,
+
+                fn: function (l, blockType, result, dateTime, timeTaken) {
+                    var b = stm.process.block;
+
+                    if(b.type !== blockType.toLowerCase()) {
+                        throw new Error('Unmatched block type: ' + blockType);
+                    }
+
+                    b.div.append(makeFieldDiv(
+                        'endDateTime', 'Ended on', dateTime
+                    ));
+
+                    b.div.append(makeFieldDiv(
+                        'timeTaken', 'Time taken', tat.duration(timeTaken)
+                    ));
+
+                    let f = b.div.find('.failed');
+
+                    if(f.length > 0) {
+                        result = 'failed';
+                    }
+                    else {
+                        result = 'passed';
+                    }
+
+                    b.div.addClass(b.result = result);
+
+                    if(b.parent) {
+                        if(!b.parent.parent) {
+                            if(result === 'passed') {
+                                $('#header .totalScenariosPassed > .val').text(
+                                    ++tat.rp.passedScenarios
+                                );
+                            }
+                            else {
+                                $('#header .totalScenariosFailed > .val').text(
+                                    ++tat.rp.failedScenarios
+                                );
+                            }
+                        }
+
+                        stm.process.block = b.parent;
+                        delete b.parent;
+
+                        return;
+                    }
+                    else
+                    if(stm.process.result !== 'failed') {
+                        $('#header .totalFeaturesPassed > .val').text(
+                            ++tat.rp.passedFeatures
+                        );
+                    }
+
+                    delete stm.process.block;
+
+                    stm.stFn = stFns.processStarted;
+                }
+            },
+
+            {
+                re: /^Process finished on (.+) \(took (.+)\)$/,
+
+                fn: function (l, dateTime, timeTaken) {
+                    var p = stm.process;
+
+                    p.div.append(makeFieldDiv(
+                        'endDateTime', 'Ended on', dateTime
+                    ));
+
+                    p.div.append(makeFieldDiv(
+                        'timeTaken', 'Time taken', tat.duration(timeTaken)
+                    ));
+
+                    p.block.div.parents(
+                        '.process, .feature, .scenario, .block'
+                    ).addBack().each(function () {
+                        $(this).addClass('crashed failed');
+                    });
+
+                    stm.div.children('.status').children('.val').text('Finished');
+                }
+            },
+
+            {
+                fn: function (l) {
+                    var b = stm.process.block,
+
+                        lc = b.children[b.children.length - 1];
+
+                    if(lc && lc.type === 'log') {
+                        lc.msg += '\n' + l;
+                    }
+                    else {
+                        b.children.push({
+                            type: 'log',
+                            msg: l
+                        });
+                    }
+
+                    b.div.append(makeLineDiv('log literal', l));
+                }
+            }
+        ];
+
+        stFns.step = [
+            {
+                re: /^Browser URL: (.+)$/, fn: function (l, url) {
+                    stm.process.block.step.div.append(
+                        makeLinkDiv('browserUrl', 'Browser URL', url)
+                    );
+                }
+            },
+
+            {
+                re: /^PNG saved$/, fn: function () {
+                    var s = stm.process.block.step;
+
+                    s.div.append(makeLinkDiv(
+                        'png', 'PNG', stm.id + '_' + s.num + '.png'
+                    ));
+                }
+            },
+
+            {
+                re: /^HTML saved$/, fn: function () {
+                    var s = stm.process.block.step;
+
+                    s.div.append(makeLinkDiv(
+                        'html', 'HTML', stm.id + '_' + s.num + '.html'
+                    ));
+                }
+            },
+
+            {
+                re: /^End step: (.+) on (.+) \(took (.+)\)$/,
+
+                fn: function (l, result, dateTime, timeTaken) {
+                    var p = stm.process,
+                        s = p.block.step;
+
+                    s.div.append(makeFieldDiv(
+                        'endDateTime', 'Ended on', dateTime
+                    ));
+
+                    s.div.append(makeFieldDiv(
+                        'timeTaken', 'Time taken', tat.duration(timeTaken)
+                    ));
+
+                    s.result = result;
+
+                    s.div.addClass(result);
+
+                    if(result === 'failed') {
+                        $('#header .totalStepsFailed > .val').text(
+                            ++tat.rp.failedSteps
+                        );
+
+                        if(p.result !== 'failed') {
+                            p.result = 'failed';
+
+                            $('#header .totalFeaturesFailed > .val').text(
+                                ++tat.rp.failedFeatures
+                            );
+                        }
+                    }
+                    else {
+                        $('#header .totalStepsPassed > .val').text(
+                            ++tat.rp.passedSteps
+                        );
+                    }
+
+                    delete stm.process.block.step;
+
+                    stm.stFn = stFns.block;
+                }
+            },
+
+            {
+                re: /^Process finished on (.+) \(took (.+)\)$/,
+
+                fn: function (l, dateTime, timeTaken) {
+                    var p = stm.process;
+
+                    p.div.append(makeFieldDiv(
+                        'endDateTime', 'Ended on', dateTime
+                    ));
+
+                    p.div.append(makeFieldDiv(
+                        'timeTaken', 'Time taken', tat.duration(timeTaken)
+                    ));
+
+                    p.block.div.parents(
+                        '.process, .feature, .scenario, .block'
+                    ).addBack().each(function () {
+                        $(this).addClass('crashed failed');
+                    });
+
+                    stm.div.children('.status').children('.val').text('Finished');
+
+                    tat.rp.streams[0].div.children(
+                        '.finishedFeatureCount'
+                    ).children('.val').text(
+                        ++tat.rp.finishedFeatureCount
+                    );
+                }
+            },
+
+            {
+                fn: function (l) {
+                    var s = stm.process.block.step,
+
+                        lc = s.children[s.children.length - 1];
+
+                    if(lc && lc.type === 'log') {
+                        lc.msg += '\n' + l;
+                    }
+                    else {
+                        s.children.push({
+                            type: 'log',
+                            msg: l
+                        });
+                    }
+
+                    s.div.append(makeLineDiv('log literal', l));
+                }
+            }
+        ];
+
+        for(var n in stFns) {
+            stFns[n].name = n;
+        }
+
+        var stmIdRe = /^([0-9]+):(.*)$/;
+
+        tat.consumeLine = function (l) {
+            var stmIdReRes = stmIdRe.exec(l),
+
+                stFn;
+
+            if(!stmIdReRes) {
+                setStream(0);
+            }
+            else {
+                setStream(parseInt(stmIdReRes[1]));
+                l = stmIdReRes[2];
+            }
+
+            l = l.replace(/^ +/, '');
+
+            stFn = stm.stFn;
+
+            if(!stFn) {
+                console.error('Ignoring line:', l);
+                return;
+            }
+
+            if(!l.startsWith('[(+)]')) {
+                stFnOpt = stFn[stFn.length - 1];
+
+                if(stFnOpt.re) {
+                    throw new Error('In ' + stFn.name + ', stream ' + stm.id + ': No handler for line: ' + l);
+                }
+
+                stFnOpt.fn(l);
+            }
+            else {
+                l = l.slice('[(+)] '.length);
+
+                if(!stFn.some(function (stFnOpt) {
+                    var reRes,
+                        fnRes;
+
+                    if(!stFnOpt.re) {
+                        return false;
+                    }
+
+                    reRes = stFnOpt.re.exec(l);
+
+                    if(!reRes) {
+                        return false;
+                    }
+
+                    fnRes = stFnOpt.fn.apply(stFnOpt, reRes);
+
+                    if(fnRes === undefined) {
+                        fnRes = true;
+                    }
+
+                    return fnRes;
+                })) {
+                    throw new Error('In ' + stFn.name + ', stream ' + stm.id + ': No handler for line: ' + l);
+                }
+            }
+
+            $('#filter').keyup();
+        };
+
+        tat.done = function () {
+            tat.rp.streams.forEach(function (stm) {
+                delete stm.stFn;
+            });
+
+            tat.rp.streams[0].div.children('.status').children('.val').text('Finished');
+
+            console.timeEnd('Parsing time');
+        };
+    </script>
+</body>
