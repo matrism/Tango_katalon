@@ -17,7 +17,7 @@ function Typeahead (target, dummy, isAppendedToBody) {
         var results = typeahead.$$(resultSelector);
 
         if (isAppendedToBody) {
-            results = $('body > .tg-typeahead__suggestions-wrap').$$(resultsSelector);
+            results = $('body > .tg-typeahead__suggestions-wrap').$$(resultSelector);
         }
 
         if (text) {
@@ -30,7 +30,6 @@ function Typeahead (target, dummy, isAppendedToBody) {
             if (isExact) {
                 results = results.filter(pph.matchTextExact(text));
             }
-
         }
 
         /*if (text) {
