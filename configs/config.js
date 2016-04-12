@@ -19,9 +19,16 @@ var configer = global.ftf.configer,
 
         return tags;
     })(),
-    env = {
-        ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
-    };
+
+    env = cli.env || configer.getEnvVarByKey('ENV_TYPE');
+
+if(!env || env === true) {
+    env = 'qa';
+}
+
+if(cli['app-url'] === true) {
+    delete cli['app-url'];
+}
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
@@ -74,7 +81,7 @@ var defaultUserName = 'TangoTest1',
             stepByStep: cli['step-by-step'],
             fingerprints: cli.fingerprints
         },
-        _env_: env,
+        _env_: { ENV_TYPE: env },
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
@@ -120,10 +127,14 @@ var defaultUserName = 'TangoTest1',
         }
     };
 
+if(!config[env]) {
+    throw new Error('Unknown environment: ' + env);
+}
+
 config._system_.env = {
-    name: env.ENV_TYPE,
-    url: config[env.ENV_TYPE].urls.app_url,
-    cr_url: config[env.ENV_TYPE].urls.cr_url
+    name: env,
+    url: config[env].urls.app_url,
+    cr_url: config[env].urls.cr_url
 };
 
 config = configer.process(config);
