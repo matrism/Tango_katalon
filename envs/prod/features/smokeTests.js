@@ -57,8 +57,8 @@ exports.feature = [
 
             steps.searchSection.accessSavedOrganisationByName('WB MUSIC CORP.');
 
-            steps.organisation.validateSubPublisherName(
-                0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
+            steps.organisation.subPublishers.expectNameToBeEither(
+                0, ['WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.']
             );
         },
     },
