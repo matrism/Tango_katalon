@@ -556,8 +556,14 @@ exports.expectPayeeAccountNameToBeIfPresent = function (val) {
     });
 };
 
+exports.statementRecipientButtonsContainer = () => {
+    return $('.e2e-payment-statement-is button');
+};
+
 exports.statementRecipientYesButton = function () {
-    return $('[data-ng-click="PAY.onSetRoleStatementRecipient(true)"]');
+    return exports.statementRecipientButtonsContainer().element(
+        by.cssContainingText('button', 'Yes')
+    );
 };
 
 exports.makeOrgStatementRecipient = function () {
