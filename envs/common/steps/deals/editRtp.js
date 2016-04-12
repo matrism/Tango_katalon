@@ -263,3 +263,97 @@ exports.editFillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ = f
         pages.editDealRtp.waitForAjax();
     });
 };
+
+exports.editClickOnDeleteEndRulesButtonForRetention = function(){
+    it("Edit click on the delete entire end rules button for retention ", function(){
+        pages.editDealRtp.editClickOnTheDeleteEndRulesButtonForRetention();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editCancelDeleteEntireEndRulesForRetention = function () {
+    it("Edit cancel delete entire end rules modal dialog for retention", function () {
+        browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']"))));
+        browser.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']")).click();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editConfirmDeleteEntireEndRulesForRetention = function () {
+    it("Edit confirm delete end rules modal dialog for retention", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
+        browser.driver.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")).click();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editDeleteRuleNumberIFromEndRulesRetention = function(i){
+    it("Edit delete rule number " + i  + " from end rules retention ", function(){
+       pages.editDealRtp.editDeleteTheRuleNumberIFromEndRulesRetention(i);
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editConfirmDeleteRuleNumberIFromEndRulesRetention = function(){
+    it("Edit confirm delete rule  from end rules retention ", function(){
+        pages.editDealRtp.editConfirmDeleteTheRuleFromEndRulesRetention();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editCancelDeleteRuleNumberIFromEndRulesRetention = function(){
+    it("Edit cancel delete rule  from end rules retention ", function(){
+        pages.editDealRtp.editCancelDeleteTheRuleFromEndRulesRetention();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+exports.editCheckSummaryTextForEndRulesRuleNumberIRetention = function (i, text) {
+    it("Edit check the summary text for end rules rule number " + i, function () {
+        pages.editDealRtp.editCheckTheSummaryTextForEndRulesRuleNumberIRetention(i, text);
+    });
+};
+
+exports.editCheckSummaryTextForEndRulesRuleNumberIContainsText = function (i, text) {
+    it("Edit check the summary text for end rules rule number " + i, function () {
+        pages.editDealRtp.editCheckTheSummaryTextForEndRulesRuleNumberIContainsText(i, text);
+    });
+};
+
+exports.editClickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJRetention = function (i, j) {
+    it("Edit click on the with notice check box end rules rule number " + i + " row number " + j, function () {
+        pages.editDealRtp.editClickOnTheWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJRetention(i, j);
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editClickOnEndRulesAreaRetention = function () {
+    it("Edit click on the end rules area retention", function () {
+        pages.editDealRtp.editClickOnTheEndRulesAreaRetention();
+        pages.editDealRtp.waitForAjax();
+    });
+};
+
+exports.editFillIntoEndDateTypePreDefinedDateInputFieldEndRules = function (value) {
+    it("Edit fill into the end date type pre defined date input field end rules ", function () {
+        pages.editDealRtp.editFillIntoTheEndDateTypePreDefinedDateInputFieldEndRules(value);
+    });
+};
+
+exports.editFillIntoOffsetByInputFieldEndRulesSpecificValue = function (number) {
+    it("Edit fill into the offset by input field end rules ", function () {
+        pages.editDealRtp.editFillIntoTheOffsetByInputFieldEndRulesSpecificValue(number);
+    });
+};
+
+exports.editSelectSpecificOptionFromOffsetByChoiceEndRules = function (value) {
+    it("Edit select the specific option from offset by choice end date end rules", function () {
+        pages.editDealRtp.editSelectTheSpecificOptionFromOffsetByChoiceEndRules(value);
+    });
+};
+
+exports.editClickAccountingPeriodEndDateCheckBoxEndRules = function () {
+    it("Edit click the accounting period end date check box end rules", function () {
+        pages.editDealRtp.editClickOnTheAccountingPeriodEndDateCheckBoxEndRules();
+        pages.editDealRtp.waitForAjax();
+    });
+};

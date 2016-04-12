@@ -38,7 +38,11 @@ if (pages.editDealRtp === undefined) {
             editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
             editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             editCancelEndRulesLinkFromRetention: {css: "div[data-ng-form='rtpEndRulesModalForm'] div.modal-footer button[data-ng-click='cancel()']"},
-            editAddRuleLinkBottomEndRuleForm: {css: "a[data-ng-click='addEndRule(form.show.endRules.containerId, form.show.endRules.type, rulesForm.$valid)']"}
+            editAddRuleLinkBottomEndRuleForm: {css: "a[data-ng-click='addEndRule(form.show.endRules.containerId, form.show.endRules.type, rulesForm.$valid)']"},
+            editDeleteButtonEndRulesRetention: {css: "div.modal-footer button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
+            editEndDatePreDefinedDateInputFieldEndRules: {css: "div[name='endDateTypeDate'] input"},
+            editOffsetByInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.offset']"},
+            editAccountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div input[data-ng-model='rule.period_end']"}
         },
 
         editClickOnTheAddAnotherAcquisitionPeriodLink: function () {
@@ -78,7 +82,7 @@ if (pages.editDealRtp === undefined) {
         },
 
         clickOnTheAddRetentionFromAcquisitionLink: function () {
-            pages.base.scrollIntoView( pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink);
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink);
             pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField));
         },
@@ -281,7 +285,7 @@ if (pages.editDealRtp === undefined) {
 
         editFillIntoTheOffsetByInputFieldEndRulesRuleNumberI: function (i) {
             var number = Math.floor(Math.random() * 100) + 1;
-            var element =browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header input[data-ng-model='rule.offset']"));
+            var element = browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header input[data-ng-model='rule.offset']"));
             element.clear();
             element.sendKeys(number);
         },
@@ -314,8 +318,7 @@ if (pages.editDealRtp === undefined) {
         checkTheEndRuleRetentionTooltipSummary: function (text) {
             browser.actions().mouseMove(pages.editDealRtp.elems.editAddEndRulesLinkFromRetention).perform();
             pages.base.scrollIntoView(element(by.css("div[data-ng-show='rtp.showEndRulesList'] div.popup-info")));
-            browser.driver.findElement(By.css("div[data-ng-show='rtp.showEndRulesList'] div.popup-info ul.end-rules-list li span.pull-left.rule-summary")).getText().
-            then(function (promise) {
+            browser.driver.findElement(By.css("div[data-ng-show='rtp.showEndRulesList'] div.popup-info ul.end-rules-list li span.pull-left.rule-summary")).getText().then(function (promise) {
                 console.log("The tooltip summary text for  end rules  is: " + promise);
                 expect(promise).toContain(text);
             });
@@ -348,7 +351,7 @@ if (pages.editDealRtp === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).sendKeys(specific_date);
         },
 
-        editAddTheEndRuleOnTheForm: function(){
+        editAddTheEndRuleOnTheForm: function () {
             pages.base.scrollIntoView(pages.editDealRtp.elems.editAddRuleLinkBottomEndRuleForm);
             pages.editDealRtp.elems.editAddRuleLinkBottomEndRuleForm.click();
         },
@@ -356,6 +359,91 @@ if (pages.editDealRtp === undefined) {
         editFillIntoTheAttributeRightDateEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).clear();
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value_date'] input")).sendKeys(value);
+        },
+
+        editClickOnTheDeleteEndRulesButtonForRetention: function () {
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editDeleteButtonEndRulesRetention);
+            pages.editDealRtp.elems.editDeleteButtonEndRulesRetention.click();
+        },
+
+        editDeleteTheRuleNumberIFromEndRulesRetention: function (i) {
+            pages.base.scrollIntoView(element(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header a.pull-right.remove-btn")));
+            browser.driver.findElement(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header a.pull-right.remove-btn")).click();
+        },
+
+        editConfirmDeleteTheRuleFromEndRulesRetention: function(){
+            browser.driver.findElement(By.css("div.modal-footer button[data-ng-click='ok()']")).click();
+        },
+
+
+        editCancelDeleteTheRuleFromEndRulesRetention: function(){
+            browser.driver.findElement(By.css("div.modal-footer button[data-ng-click='cancel()']")).click();
+        },
+
+        editCheckTheSummaryTextForEndRulesRuleNumberIRetention: function (i, text) {
+            pages.base.scrollIntoView(element(by.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
+            browser.driver.findElement(By.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
+            then(function (promise) {
+                console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
+                expect(promise).toEqual(text);
+            });
+        },
+
+        editCheckTheSummaryTextForEndRulesRuleNumberIContainsText: function (i, text) {
+            pages.base.scrollIntoView(element(by.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
+            browser.driver.findElement(By.css("div.summary-end-rules ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
+            then(function (promise) {
+                console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
+                expect(promise).toContain(text);
+            });
+        },
+
+        editClickOnTheWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJRetention: function (i, j) {
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div.pull-left.conditions input[data-ng-model='condition.notification']")).click();
+        },
+
+        editClickOnTheEndRulesAreaRetention: function () {
+            browser.driver.findElement(By.css("div[data-ng-form='rulesForm'] div.summary-end-rules")).click();
+        },
+
+        editFillIntoTheEndDateTypePreDefinedDateInputFieldEndRules: function (value) {
+            pages.editDealRtp.elems.editEndDatePreDefinedDateInputFieldEndRules.clear();
+            pages.editDealRtp.elems.editEndDatePreDefinedDateInputFieldEndRules.sendKeys(value);
+        },
+
+        editFillIntoTheOffsetByInputFieldEndRulesSpecificValue: function (number) {
+            pages.editDealRtp.elems.editOffsetByInputFieldEndRules.clear();
+            pages.editDealRtp.elems.editOffsetByInputFieldEndRules.sendKeys(number);
+        },
+
+        editSelectTheSpecificOptionFromOffsetByChoiceEndRules: function (value) {
+            var desiredOption;
+            pages.editDealRtp.elems.editOffsetByArrowChoiceEndRules.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.xpath("//*[@data-validation-class='offset']//ul[@class='dropdown-menu']//li/a"))));
+            pages.base.scrollIntoView(element(By.xpath("//*[@data-validation-class='offset']//ul[@class='dropdown-menu']//li/a")));
+            browser.driver.findElements(By.xpath("//*[@data-validation-class='offset']//ul[@class='dropdown-menu']//li/a"))
+                //browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))));
+                //browser.driver.findElements(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        editClickOnTheAccountingPeriodEndDateCheckBoxEndRules: function () {
+            pages.editDealRtp.elems.editAccountingPeriodEndCheckBoxEndRules.click();
         }
 
 

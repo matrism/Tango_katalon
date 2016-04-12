@@ -184,6 +184,7 @@ exports.feature = [
             steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
             steps.editDealContractPeriod.editCancelDeleteEndRules();
             steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJ(1, 2);
+            steps.editDealContractPeriod.editConfirmDeleteEndRules();
             steps.editDealContractPeriod.editSaveEndRulesForm();
 
             steps.deal.itContinueToNextPage();
