@@ -22,19 +22,6 @@ pageStep([
     'Cancel artist search',
     'Enter album code',
 
-    ['Recordings', [
-        'Enter Search Terms',
-        'Select search type',
-        'Select work search type',
-        'Expect New Recording Option To Be Visible',
-        'Create Entered Recording',
-        'Cancel Search',
-        'Select Work Search Result By Index',
-        'Enter Artist Search Terms',
-        'Select Artist Search Result By Index',
-        'Validate library name',
-    ]],
-
     ['Release Details', [
         'Wait for territories selector to be ready',
         'Edit territories',
@@ -52,17 +39,7 @@ pageStep([
     'Save'
 ]);
 
-exports.recordings.enterWorkIdFromWorkSlotAsWorkSearchTerms = function(i, slotName) {
-    it(
-        'Track #' + (i + 1) + ' - ' +
-        'Enter work ID from work slot "' + slotName + '" as work search terms',
-        function() {
-            pages.newAlbum.recordings.enterWorkSearchTerms(
-                i, hash.entityDataSlotsByType.work[slotName].id
-            );
-        }
-    );
-};
+exports.recordings = steps.album.recordings;
 
 exports.findAlbumUuid = function() {
     it('Find album UUID', function() {

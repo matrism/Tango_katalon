@@ -4,11 +4,10 @@ var pageStep = require('../../../../helpers/basicPageStep');
 
 steps.album = exports;
 
-exports.goToAlbumPage = function() {
+exports.goToAlbumPage = function(albumId) {
     it('Go to album page', function() {
-        pages.album.goToAlbumPage(
-            hash.currentEntityDataSlotsByType.album.uuid
-        );
+        albumId = albumId || hash.currentEntityDataSlotsByType.album.uuid;
+        pages.album.goToAlbumPage(albumId);
     });
 };
 
@@ -28,6 +27,15 @@ pageStep([
     'Go to tab',
 
     ['Recordings', [
+        'Enter Search Terms',
+        'Select search type',
+        'Select work search type',
+        'Expect New Recording Option To Be Visible',
+        'Create Entered Recording',
+        'Cancel Search',
+        'Select Work Search Result By Index',
+        'Enter Artist Search Terms',
+        'Select Artist Search Result By Index',
         'Validate title',
         'Validate artist name',
         'Validate library name',
@@ -54,6 +62,18 @@ exports.recordings.validateWorkIdUsingWorkSlot = function(i, value) {
         '(' + argumentListString + ')', function() {
             pages.album.recordings.validateWorkId(
                 i, hash.entityDataSlotsByType.work[value].id
+            );
+        }
+    );
+};
+
+exports.recordings.enterWorkIdFromWorkSlotAsWorkSearchTerms = function(i, slotName) {
+    it(
+        'Track #' + (i + 1) + ' - ' +
+        'Enter work ID from work slot "' + slotName + '" as work search terms',
+        function() {
+            pages.album.recordings.enterWorkSearchTerms(
+                i, hash.entityDataSlotsByType.work[slotName].id
             );
         }
     );
