@@ -242,6 +242,20 @@ exports.recordings = (function() {
         expect(exports.workId(i)).toBe(value);
     };
 
+    exports.editor = function () {
+        return modularEdit.byId('albumTracks');
+    };
+
+    exports.edit = function () {
+        var editor = exports.editor();
+        editor.edit();
+    };
+
+    exports.save = function () {
+        var editor = exports.editor();
+        editor.save();
+    };
+
     return exports;
 })();
 

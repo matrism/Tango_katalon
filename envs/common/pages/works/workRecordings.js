@@ -121,8 +121,7 @@ exports.toggleAlbum = function (i) {
 };
 
 exports.albumTitleBinding = function (i) {
-    //return exports.recordingContainer(i).element(by.binding(' ::track.album.title || \'&nbsp;\' '));
-    return exports.recordingContainer(i).$('[data-ui-sref="albumView({albumId:track.album_id})"]');
+    return exports.recordingContainer(i).element(by.binding('::track.album.title'));
 };
 
 exports.validateAlbumTitle = function (i, value) {
@@ -133,18 +132,42 @@ exports.albumRelease = function (i) {
     return element.all(by.repeater('albumRelease in track.album.albumReleases')).get(i);
 }
 
-exports.albumTerritoryBinding = function (i) {
-    return exports.recordingContainer(i).element(by.binding(' getTerritory(territory).title '));
+exports.releaseTerritoryBinding = function (i) {
+    return exports.recordingContainer(i).element(by.binding('getTerritory(territory).title'));
 };
 
-exports.validateAlbumTerritory = function (i, value) {
-    expect(exports.albumTerritoryBinding(i).getText()).toBe(value);
+exports.validateReleaseTerritory = function (i, value) {
+    expect(exports.releaseTerritoryBinding(i).getText()).toBe(value);
 };
 
-exports.albumConfigurationBinding = function (i) {
-    return exports.recordingContainer(i).element(by.binding(' getTerritory(territory).title '));
+exports.releaseConfigurationBinding = function (i) {
+    return exports.recordingContainer(i).element(by.binding('albumRelease.configuration'));
 };
 
-exports.validateAlbumConfiguration = function (i, value) {
-    expect(exports.albumTerritoryBinding(i).getText()).toBe(value);
+exports.validateReleaseConfiguration = function (i, value) {
+    expect(exports.releaseConfigurationBinding(i).getText()).toBe(value);
+};
+
+exports.releaseLabelBinding = function (i) {
+    return exports.recordingContainer(i).element(by.binding('albumRelease.label[0].name'));
+};
+
+exports.validateReleaseConfiguration = function (i, value) {
+    expect(exports.releaseConfigurationBinding(i).getText()).toBe(value);
+};
+
+exports.releaseCatalogBinding = function (i) {
+    return exports.recordingContainer(i).element(by.binding('albumRelease.catalog_number'));
+};
+
+exports.validateReleaseCatalog = function (i, value) {
+    expect(exports.releaseCatalogBinding(i).getText()).toBe(value);
+};
+
+exports.releaseLicenseCodeBinding = function (i) {
+    return exports.recordingContainer(i).element(by.binding('albumRelease.license_code'));
+};
+
+exports.validateReleaseLicenseCode = function (i, value) {
+    expect(exports.releaseLicenseCodeBinding(i).getText()).toBe(value);
 };

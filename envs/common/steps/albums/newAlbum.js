@@ -11,116 +11,29 @@ exports.goToNewAlbumPage = function() {
     });
 };
 
-exports.enterTitle = function(value) {
-    it('Enter title (' + value + ')', function() {
-        pages.newAlbum.enterTitle(value);
-    });
-};
-
-exports.selectReleaseType = function(value) {
-    it('Select release type (' + value + ')', function() {
-        pages.newAlbum.selectReleaseType(value);
-    });
-};
-
-exports.enterArtistSearchTerms = function(value) {
-    it('Enter artist search terms', function() {
-        pages.newAlbum.enterArtistSearchTerms(value);
-    });
-};
-
-exports.expectNewArtistOptionToBeVisible = function() {
-    it('Expect "Create New Artist" option to be visible', function() {
-        pages.newAlbum.expectNewArtistOptionToBeVisible();
-    });
-};
-
-exports.createEnteredArtist = function() {
-    it('Create entered artist', function() {
-        pages.newAlbum.createEnteredArtist();
-    });
-};
-
-exports.cancelArtistSearch = function() {
-    it('Cancel artist search', function() {
-        pages.newAlbum.cancelArtistSearch();
-    });
-};
-
-pageStep('Select library');
-
-exports.enterAlbumCode = function(value) {
-    it('Enter album code (' + value + ')', function() {
-        pages.newAlbum.enterAlbumCode(value);
-    });
-};
-
-pageStep('Select recording search type');
-
-exports.enterRecordingSearchTerms = function(i, value) {
-    it(
-        'Track #' + (i + 1) + ' - ' +
-        'Enter recording search terms (' + value + ')', function() {
-            pages.newAlbum.enterRecordingSearchTerms(i, value);
-        }
-    );
-};
-
-exports.expectNewRecordingOptionToBeVisible = function() {
-    it('Expect "Create New Recording" option to be visible', function() {
-        pages.newAlbum.expectNewRecordingOptionToBeVisible();
-    });
-};
-
-exports.createEnteredRecording = function() {
-    it('Create entered recording', function() {
-        pages.newAlbum.createEnteredRecording();
-    });
-};
-
-exports.cancelRecordingSearch = function() {
-    it('Cancel recording search', function() {
-        pages.newAlbum.cancelRecordingSearch();
-    });
-};
-
-exports.enterWorkIdFromWorkSlotAsWorkSearchTerms = function(i, slotName) {
-    it(
-        'Track #' + (i + 1) + ' - ' +
-        'Enter work ID from work slot "' + slotName + '" as work search terms',
-        function() {
-            pages.newAlbum.enterRecordingWorkSearchTerms(
-                i, hash.entityDataSlotsByType.work[slotName].id
-            );
-        }
-    );
-};
-
-exports.selectRecordingWorkSearchResultByIndex = function(i) {
-    it('Select work search result #' + (i + 1), function() {
-        pages.newAlbum.selectRecordingWorkSearchResultByIndex(i);
-    });
-};
-
-exports.enterRecordingArtistSearchTerms = function(i, value) {
-    it(
-        'Track #' + (i + 1) + ' - ' +
-        'Enter artist search terms (' + value + ')', function() {
-            pages.newAlbum.enterRecordingArtistSearchTerms(i, value);
-        }
-    );
-};
-
-exports.selectRecordingArtistSearchResultByIndex = function(i) {
-    it('Select artist search result #' + (i + 1), function() {
-        pages.newAlbum.selectRecordingArtistSearchResultByIndex(i);
-    });
-};
-
 pageStep([
-    'Validate recording library name',
-
     'Go to tab',
+    'Enter title',
+    'Select release type',
+    'Select library',
+    'Enter artist search terms',
+    'Expect New Artist Option To Be Visible',
+    'Create entered artist',
+    'Cancel artist search',
+    'Enter album code',
+
+    ['Recordings', [
+        'Enter Search Terms',
+        'Select search type',
+        'Select work search type',
+        'Expect New Recording Option To Be Visible',
+        'Create Entered Recording',
+        'Cancel Search',
+        'Select Work Search Result By Index',
+        'Enter Artist Search Terms',
+        'Select Artist Search Result By Index',
+        'Validate library name',
+    ]],
 
     ['Release Details', [
         'Wait for territories selector to be ready',
@@ -135,12 +48,20 @@ pageStep([
         'Enter catalogue number',
         'Enter license code',
     ]],
+
+    'Save'
 ]);
 
-exports.save = function() {
-    it('Save album', function() {
-        pages.newAlbum.save();
-    });
+exports.recordings.enterWorkIdFromWorkSlotAsWorkSearchTerms = function(i, slotName) {
+    it(
+        'Track #' + (i + 1) + ' - ' +
+        'Enter work ID from work slot "' + slotName + '" as work search terms',
+        function() {
+            pages.newAlbum.recordings.enterWorkSearchTerms(
+                i, hash.entityDataSlotsByType.work[slotName].id
+            );
+        }
+    );
 };
 
 exports.findAlbumUuid = function() {

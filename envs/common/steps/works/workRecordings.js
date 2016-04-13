@@ -26,4 +26,7 @@ pageStep('Validate library name');
 pageStep('Toggle Recording');
 pageStep('Toggle Album');
 pageStep('Validate Album Title');
-pageStep('Validate Album Territory');
+pageStep('Validate Release Territory');
+pageStep('Validate Release Configuration');
+pageStep('Validate Release Catalog');
+pageStep('Validate Release License Code');

@@ -32,6 +32,8 @@ pageStep([
         'Validate artist name',
         'Validate library name',
         'Validate duration',
+        'Edit',
+        'Save'
     ]],
 
     ['Release Details', [

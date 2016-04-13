@@ -101,155 +101,173 @@ exports.enterAlbumCode = function(value) {
     return element.sendKeys(value);
 };
 
-exports.trackContainers = function() {
-    return element.all(by.repeater('track in dataHolder.tracks'));
-};
+exports.recordings = (function() {
+    var exports = {};
 
-exports.recordingSearchTermsTypeahead = function(i) {
-    return exports.trackContainers().get(i).$('.create-album__track-recording');
-};
+    exports.trackContainers = function() {
+        return $$('[data-ng-repeat^="track in"]');
+        //return element.all(by.repeater('track in dataHolder.tracks'));
+    };
 
-exports.recordingSearchTypeDropdown = function(i) {
-    return exports.recordingSearchTermsTypeahead(i).$(
-        '.tg-typeahead__tag-filter'
-    );
-};
+    exports.searchTermsTypeahead = function(i) {
+        return exports.trackContainers().get(i).$('[class*="album__track-recording"]');
+    };
 
-exports.selectRecordingSearchType = function(i, value) {
-    var element = exports.recordingSearchTypeDropdown(i);
-    pages.base.scrollIntoView(element);
-    return pages.base.selectDropdownOption(element, value);
-};
+    exports.searchTypeDropdown = function(i) {
+        return exports.searchTermsTypeahead(i).$(
+            '.tg-typeahead__tag-filter'
+        );
+    };
 
-exports.recordingSearchTermsInput = function(i) {
-    return exports.recordingSearchTermsTypeahead(i).element(by.model('$term'));
-};
+    exports.workSearchTypeDropdown = function(i) {
+        return $$('[class*="album__new-recording-work"] .tg-typeahead__tag-filter').get(i);
+    };
 
-exports.enterRecordingSearchTerms = function(i, value) {
-    var element = exports.recordingSearchTermsInput(i);
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-};
+    exports.selectSearchType = function(i, value) {
+        var element = exports.searchTypeDropdown(i);
+        pages.base.scrollIntoView(element);
+        return pages.base.selectDropdownOption(element, value);
+    };
 
-exports.recordingSearchResultsContainer = function() {
-    var el = $('.tg-typeahead__suggestions');
-    browser.wait(ExpectedConditions.visibilityOf(el));
-    browser.sleep(50);
-    return el;
-};
+    exports.selectWorkSearchType = function(i, value) {
+        var element = exports.workSearchTypeDropdown(i);
+        pages.base.scrollIntoView(element);
+        return pages.base.selectDropdownOption(element, value);
+    };
 
-exports.createEnteredRecordingOption = function() {
-    return exports.recordingSearchResultsContainer().element(
-        by.cssContainingText('span', 'Create New Recording')
-    );
-};
+    exports.searchTermsInput = function(i) {
+        return exports.searchTermsTypeahead(i).element(by.model('$term'));
+        //return exports.searchTermsTypeahead(i).$('input');
+    };
 
-exports.expectNewRecordingOptionToBeVisible = function() {
-    var element = exports.createEnteredRecordingOption();
-    pages.base.scrollIntoView(element);
-    expect(element.isDisplayed()).toBeTruthy();
-};
+    exports.enterSearchTerms = function(i, value) {
+        var element = exports.searchTermsInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
 
-exports.createEnteredRecording = function() {
-    var element = exports.createEnteredRecordingOption();
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
+    exports.searchResultsContainer = function() {
+        var el = $('.tg-typeahead__suggestions');
+        browser.wait(ExpectedConditions.visibilityOf(el));
+        browser.sleep(50);
+        return el;
+    };
 
-exports.cancelRecordingSearch = function() {
-    return pages.base.hitEscape();
-};
+    exports.createEnteredRecordingOption = function() {
+        return exports.searchResultsContainer().element(
+            by.cssContainingText('span', 'Create New Recording')
+        );
+    };
 
-exports.recordingWorkSearchTermsTypeahead = function(i) {
-    return (
-        exports.trackContainers().get(i)
-            .element(by.model('track.recording.work_id'))
-    );
-};
+    exports.expectNewRecordingOptionToBeVisible = function() {
+        var element = exports.createEnteredRecordingOption();
+        pages.base.scrollIntoView(element);
+        expect(element.isDisplayed()).toBeTruthy();
+    };
 
-exports.recordingWorkSearchTermsInput = function(i) {
-    return exports.recordingWorkSearchTermsTypeahead(i).element(by.model('$term'));
-};
+    exports.createEnteredRecording = function() {
+        var element = exports.createEnteredRecordingOption();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
 
-exports.enterRecordingWorkSearchTerms = function(i, value) {
-    var element = exports.recordingWorkSearchTermsInput(i);
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-};
+    exports.cancelSearch = function() {
+        return pages.base.hitEscape();
+    };
 
-exports.recordingWorkSearchResultsContainer = function() {
-    var el = $('.tg-typeahead__suggestions');
-    browser.wait(ExpectedConditions.visibilityOf(el));
-    browser.sleep(50);
-    return el;
-};
+    exports.workSearchTermsTypeahead = function(i) {
+        return (
+            exports.trackContainers().get(i)
+                .element(by.model('track.recording.work_id'))
+        );
+    };
 
-exports.recordingWorkSearchResults = function() {
-    return exports.recordingWorkSearchResultsContainer().$$(
-        '.tg-typeahead__suggestions-group-item'
-    );
-};
+    exports.workSearchTermsInput = function(i) {
+        return exports.workSearchTermsTypeahead(i).$('input');
+    };
 
-exports.selectRecordingWorkSearchResultByIndex = function(i) {
-    var element = exports.recordingWorkSearchResults().get(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
+    exports.enterWorkSearchTerms = function(i, value) {
+        var element = exports.workSearchTermsInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
 
-exports.recordingArtistSearchTermsTypeahead = function(i) {
-    return (
-        exports.trackContainers().get(i)
-            .element(by.model('track.recording.model.artist_id'))
-    );
-};
+    exports.workSearchResultsContainer = function() {
+        var el = $('.tg-typeahead__suggestions');
+        browser.wait(ExpectedConditions.visibilityOf(el));
+        browser.sleep(50);
+        return el;
+    };
 
-exports.recordingArtistSearchTermsInput = function(i) {
-    return exports.recordingArtistSearchTermsTypeahead(i).element(by.model('$term'));
-};
+    exports.workSearchResults = function() {
+        return exports.workSearchResultsContainer().$$(
+            '.tg-typeahead__suggestions-group-item'
+        );
+    };
 
-exports.enterRecordingArtistSearchTerms = function(i, value) {
-    var element = exports.recordingArtistSearchTermsInput(i);
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-};
+    exports.selectWorkSearchResultByIndex = function(i) {
+        var element = exports.workSearchResults().get(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
 
-exports.recordingArtistSearchResultsContainer = function() {
-    var el = $('.tg-typeahead__suggestions');
-    browser.wait(ExpectedConditions.visibilityOf(el));
-    browser.sleep(50);
-    return el;
-};
+    exports.artistSearchTermsTypeahead = function(i) {
+        return (
+            exports.trackContainers().get(i)
+                .element(by.model('track.recording.model.artist_id'))
+        );
+    };
 
-exports.recordingArtistSearchResults = function() {
-    return exports.recordingArtistSearchResultsContainer().$$(
-        '.tg-typeahead__suggestions-group-item'
-    );
-};
+    exports.artistSearchTermsInput = function(i) {
+        return exports.artistSearchTermsTypeahead(i).element(by.model('$term'));
+    };
 
-exports.selectRecordingArtistSearchResultByIndex = function(i) {
-    var element = exports.recordingArtistSearchResults().get(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
+    exports.enterArtistSearchTerms = function(i, value) {
+        var element = exports.artistSearchTermsInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
 
-exports.recordingLibraryNameBinding = function(i) {
-    return exports.trackContainers().get(i).element(by.binding(
-        ' dataHolder.newAlbum.library.libraryName '
-    ));
-};
+    exports.artistSearchResultsContainer = function() {
+        var el = $('.tg-typeahead__suggestions');
+        browser.wait(ExpectedConditions.visibilityOf(el));
+        browser.sleep(50);
+        return el;
+    };
 
-exports.recordingLibraryName = function(i) {
-    var element = exports.recordingLibraryNameBinding(i);
-    pages.base.scrollIntoView(element);
-    return pph.trim(element.getText());
-};
+    exports.artistSearchResults = function() {
+        return exports.artistSearchResultsContainer().$$(
+            '.tg-typeahead__suggestions-group-item'
+        );
+    };
 
-exports.validateRecordingLibraryName = function(i, value) {
-    expect(exports.recordingLibraryName(i)).toBe(value);
-};
+    exports.selectArtistSearchResultByIndex = function(i) {
+        var element = exports.artistSearchResults().get(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.libraryNameBinding = function(i) {
+        return exports.trackContainers().get(i).element(by.binding(
+            ' dataHolder.newAlbum.library.libraryName '
+        ));
+    };
+
+    exports.libraryName = function(i) {
+        var element = exports.libraryNameBinding(i);
+        pages.base.scrollIntoView(element);
+        return pph.trim(element.getText());
+    };
+
+    exports.validateLibraryName = function(i, value) {
+        expect(exports.libraryName(i)).toBe(value);
+    };
+
+    return exports;
+})();
 
 exports.tabSetContainer = function() {
     return $('.nav-tabs');
