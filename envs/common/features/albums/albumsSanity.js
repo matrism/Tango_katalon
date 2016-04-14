@@ -153,7 +153,7 @@ exports.feature = [
                     'TESTALBUMCODE' + randomId('commercialAlbum')
                 );
 
-                this.enterDuration('000010');
+                this.enterDuration('001000');
 
                 _.times(3, function (i) {
                     this.recordings.selectSearchType(i, 'Title');
@@ -176,7 +176,7 @@ exports.feature = [
 
                     this.recordings.selectArtistSearchResultByIndex(0);
 
-                    //this.recordings.enterDuration('000020');
+                    this.recordings.enterDuration(i, '000' + (i + 1) + '00');
                 }, this);
 
                 this.goToTab('Release Details');
@@ -237,7 +237,7 @@ exports.feature = [
 
                 this.validateTrackCount(3);
 
-                this.validateDuration('00:00:10');
+                this.validateDuration('00:10:00');
 
                 this.validateConfigurations(['CD']);
 
@@ -259,7 +259,7 @@ exports.feature = [
                     i, 'TEST ARTIST ' + randomId('commercialAlbum')
                 );
 
-                this.validateDuration(i, '00:00:20');
+                this.validateDuration(i, '00:0' + (i + 1) + ':00');
 
                 this.validateWorkIdUsingWorkSlot(i, 'mainWork');
             }));
@@ -334,9 +334,9 @@ exports.feature = [
                 );
 
                 wr.validateRecordingDurations(
-                    _.times(6, function (i) {
+                    _.times(3, function (i) {
                         //return '00 : ' + leftPad(i + 1, 2, 0) + ' : 00';
-                        return '00 : 00 : 00';
+                        return '00 : 0' + (i + 1) + ' : 00';
                     })
                 );
 
@@ -352,7 +352,7 @@ exports.feature = [
         ],
         steps: function () {
             steps.base.useEntityDataSlot('album', 'libraryAlbum');
-            hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
+            //hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             using(steps.newAlbum, function () {
                 this.goToNewAlbumPage();
@@ -431,7 +431,10 @@ exports.feature = [
 
             a.goToAlbumPage();
             //a.goToAlbumPage('5e93516a-fd97-11e5-b174-be909e760f77');
-            a.recordings.edit();
+            ar.edit();
+
+            ar.deleteTrack(0);
+            ar.deleteTrack(1);
 
             //nar.selectSearchType(0, 'Title');
 
@@ -456,7 +459,7 @@ exports.feature = [
 
             ar.selectArtistSearchResultByIndex(0);
 
-            a.recordings.save();
+            ar.save();
 
             ar.validateTitle(
                 3, 'TEST RECORDING EDIT' + randomId(
@@ -472,6 +475,7 @@ exports.feature = [
 
             ar.validateWorkIdUsingWorkSlot(3, 'mainWork');
 
+            a.header.validateTrackCount(2);
         },
     },
     {

@@ -40,7 +40,28 @@ pageStep([
     'Save'
 ]);
 
-exports.recordings = steps.album.recordings;
+exports.recordings = (function() {
+    var exports = {},
+        ar = steps.album.recordings;
+
+    exports.selectSearchType = ar.selectSearchType;
+    exports.enterSearchTerms = ar.enterSearchTerms;
+    exports.createEnteredRecording = ar.createEnteredRecording;
+    exports.enterWorkIdFromWorkSlotAsWorkSearchTerms = ar.enterWorkIdFromWorkSlotAsWorkSearchTerms;
+    exports.selectWorkSearchResultByIndex = ar.selectWorkSearchResultByIndex;
+    exports.enterArtistSearchTerms = ar.enterArtistSearchTerms;
+    exports.selectArtistSearchResultByIndex = ar.selectArtistSearchResultByIndex;
+    exports.enterDuration = ar.enterDuration;
+
+    exports.validateLibraryName = function(i, value) {
+        it('Validate library name', function() {
+            pages.newAlbum.recordings.validateLibraryName(i, value);
+        });
+    };
+
+    return exports;
+})();
+
 
 exports.findAlbumUuid = function() {
     it('Find album UUID', function() {

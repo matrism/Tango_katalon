@@ -321,3 +321,23 @@ exports.albumUuid = function() {
         return reResults[1];
     });
 };
+
+exports.recordings = (function() {
+    var exports = {};
+
+    exports.libraryNameBinding = function(i) {
+        return $$('.create-album__new-recording-library').get(i);
+    };
+
+    exports.libraryName = function(i) {
+        var element = exports.libraryNameBinding(i);
+        pages.base.scrollIntoView(element);
+        return pph.trim(element.getText());
+    };
+
+    exports.validateLibraryName = function(i, value) {
+        expect(exports.libraryName(i)).toBe(value);
+    };
+
+    return exports;
+})();

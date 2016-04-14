@@ -401,20 +401,23 @@ exports.recordings = (function() {
         return element.click();
     };
 
-    exports.libraryNameBinding = function(i) {
-        return exports.trackContainers().get(i).element(by.binding(
-            ' dataHolder.newAlbum.library.libraryName '
-        ));
+    exports.durationInput = function(i) {
+        return exports.trackContainers().get(i).element(by.model('time'));
     };
 
-    exports.libraryName = function(i) {
-        var element = exports.libraryNameBinding(i);
+    exports.enterDuration = function(i, value) {
+        var element = exports.durationInput(i);
         pages.base.scrollIntoView(element);
-        return pph.trim(element.getText());
+        return element.sendKeys(value);
     };
 
-    exports.validateLibraryName = function(i, value) {
-        expect(exports.libraryName(i)).toBe(value);
+    exports.deleteButton = function (i) {
+        return exports.trackContainers().get(i).$('[data-ng-click^="removeTrack"]');
+    };
+
+    exports.deleteTrack = function(i) {
+        var element = exports.deleteButton(i);
+        asAlways(element, 'scrollIntoView', 'click');
     };
 
     return exports;
