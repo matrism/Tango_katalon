@@ -557,7 +557,7 @@ exports.expectPayeeAccountNameToBeIfPresent = function (val) {
 };
 
 exports.statementRecipientButtonsContainer = () => {
-    return $('.e2e-payment-statement-is button');
+    return $('.e2e-payment-statement-is');
 };
 
 exports.statementRecipientYesButton = function () {
