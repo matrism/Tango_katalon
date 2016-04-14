@@ -132,6 +132,7 @@ exports.feature = [
         ],
         steps: function () {
             steps.base.useEntityDataSlot('album', 'commercialAlbum');
+            hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             using(steps.newAlbum, function () {
                 this.goToNewAlbumPage();
@@ -351,6 +352,7 @@ exports.feature = [
         ],
         steps: function () {
             steps.base.useEntityDataSlot('album', 'libraryAlbum');
+            hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             using(steps.newAlbum, function () {
                 this.goToNewAlbumPage();
