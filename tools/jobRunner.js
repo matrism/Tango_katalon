@@ -121,7 +121,7 @@ let cp = require('child_process'),
         }
 
         if(rawArg === '--env') {
-            if(negatedTags !== null) {
+            if(env !== null) {
                 console.error('Multiple --env.');
                 process.exit(1);
             }
@@ -137,7 +137,7 @@ let cp = require('child_process'),
         }
 
         if(rawArg === '--app-url') {
-            if(negatedTags !== null) {
+            if(appUrl !== null) {
                 console.error('Multiple --app-url.');
                 process.exit(1);
             }
@@ -153,7 +153,7 @@ let cp = require('child_process'),
         }
 
         if(rawArg === '--branch') {
-            if(negatedTags !== null) {
+            if(branch !== null) {
                 console.error('Multiple --branch.');
                 process.exit(1);
             }
@@ -169,7 +169,7 @@ let cp = require('child_process'),
         }
 
         if(rawArg === '--commit') {
-            if(negatedTags !== null) {
+            if(commit !== null) {
                 console.error('Multiple --commit.');
                 process.exit(1);
             }
