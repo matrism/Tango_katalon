@@ -299,6 +299,13 @@ exports.enabledSaveButton = function() {
     return element;
 };
 
+exports.validateSaveButtonState = function (expected) {
+    var element = exports.saveButton();
+    expect(pph.matchesCssSelector(element, '.disabled')).toBe(
+        expected == 'disabled' ? true : false
+    );
+};
+
 exports.save = function() {
     return exports.enabledSaveButton().click().then(function() {
         pages.base.waitForAjax();

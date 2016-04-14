@@ -42,6 +42,8 @@ pageStep([
         'Validate artist name',
         'Validate library name',
         'Validate duration',
+        'Validate Save Button State',
+        'Cancel',
         'Edit',
         'Save'
     ]],

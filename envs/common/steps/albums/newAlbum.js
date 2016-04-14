@@ -37,6 +37,7 @@ pageStep([
         'Enter license code'
     ]],
 
+    'Validate Save Button State',
     'Save'
 ]);
 

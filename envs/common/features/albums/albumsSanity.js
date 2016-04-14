@@ -87,7 +87,10 @@ exports.feature = [
             na.enterAlbumCode(
                 'TESTALBUMCODE' + randomId('commercialAlbum')
             );
+            na.enterDuration('777777');
+            na.validateSaveButtonState('disabled');
             na.enterDuration('001000');
+            na.validateSaveButtonState('enabled');
 
             _.times(3, function (i) {
                 nar.selectSearchType(i, 'Title');
@@ -103,7 +106,10 @@ exports.feature = [
                     i, 'TEST ARTIST ' + randomId('commercialAlbum')
                 );
                 nar.selectArtistSearchResultByIndex(0);
+                nar.enterDuration(i, '777777');
+                na.validateSaveButtonState('disabled');
                 nar.enterDuration(i, '000' + (i + 1) + '00');
+                na.validateSaveButtonState('enabled');
             });
 
             na.goToTab('Release Details');
@@ -328,6 +334,20 @@ exports.feature = [
                 )
             );
             ar.createEnteredRecording();
+            ar.cancel();
+            steps.base.dirtyCheckConfirmCancellation();
+            a.header.validateTrackCount(3);
+            ar.edit();
+            ar.deleteTrack(0);
+            ar.deleteTrack(1);
+            ar.enterSearchTerms(
+                i, 'TEST RECORDING EDIT' + randomId(
+                    'commercialAlbumRecordingEdit'
+                )
+            );
+            ar.createEnteredRecording();
+            ar.cancel();
+            steps.base.dirtyCheckContinueEditing();
             ar.selectWorkSearchType(0, 'Work ID');
             ar.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
             ar.selectWorkSearchResultByIndex(0);
@@ -335,6 +355,10 @@ exports.feature = [
                 i, 'TEST ARTIST ' + randomId('commercialAlbum')
             );
             ar.selectArtistSearchResultByIndex(0);
+            ar.enterDuration(i, '777777');
+            ar.validateSaveButtonState('disabled');
+            ar.enterDuration(i, '000400');
+            ar.validateSaveButtonState('enabled');
             ar.save();
 
             ar.validateTitle(
@@ -345,7 +369,7 @@ exports.feature = [
             ar.validateArtistName(
                 3, 'TEST ARTIST EDIT' + randomId('commercialAlbum')
             );
-            ar.validateDuration(3, '00:00:00');
+            ar.validateDuration(3, '00:04:00');
             ar.validateWorkIdUsingWorkSlot(3, 'mainWork');
 
             a.header.validateTrackCount(2);

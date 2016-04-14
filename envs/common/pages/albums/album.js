@@ -246,19 +246,33 @@ exports.recordings = (function() {
         return modularEdit.byId('albumTracks');
     };
 
-    exports.edit = function () {
+    exports.cancelButton = function () {
         var editor = exports.editor();
-        editor.edit();
+        return editor.element(by.cssContainingText('button','Cancel'));
+    };
+
+    exports.cancel = function () {
+        var element = exports.cancelButton();
+        asAlways(element, 'scrollIntoView', 'click');
+    };
+
+    exports.edit = function () {
+        exports.editor().edit();
     };
 
     exports.save = function () {
-        var editor = exports.editor();
-        editor.save();
+        exports.editor().save();
+    };
+
+    exports.validateSaveButtonState = function (expected) {
+        var element = exports.editor().saveButton;
+        expect(pph.matchesCssSelector(element, '.disabled')).toBe(
+            expected == 'disabled' ? true : false
+        );
     };
 
     exports.trackContainers = function() {
         return $$('[data-ng-repeat^="track in"]');
-        //return element.all(by.repeater('track in dataHolder.tracks'));
     };
 
     exports.searchTermsTypeahead = function(i) {
