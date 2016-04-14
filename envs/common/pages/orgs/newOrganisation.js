@@ -574,18 +574,40 @@ exports.makeOrgStatementRecipient = function () {
 };
 
 exports.statementRecipientOptions = function () {
-    return $('[name="statementRecipientForm"]').all(by.repeater('(key,value) in PAY.viewModel.statementRecipient'));
+    return $('[name="statementRecipientForm"]').all(
+        by.repeater('(key,value) in PAY.viewModel.statementRecipient'
+    ));
 };
 
-exports.setStatementRecipientData = function (option, subOption) {
-    var elem = exports.statementRecipientOptions().filter(pph.matchText(option)).first(),
-        subOptions = elem.all(by.repeater('item in value.formatAndDelivery'));
+exports.statementRecipientOptionByName = (name) => {
+    return exports.statementRecipientOptions().filter(
+        pph.matchText(name)
+    ).first();
+};
 
-    pages.base.scrollIntoView(elem);
-    elem.click();
-    browser.wait(protractor.ExpectedConditions.visibilityOfAny(subOptions));
+exports.statementRecipientSubOptions = (option) => {
+    return option.all(by.repeater('item in value.formatAndDelivery'));
+};
 
-    subOptions.filter(pph.matchText(subOption)).first().click();
+exports.statementRecipientSubOptionByName = (option, subOptionName) => {
+    return exports.statementRecipientSubOptions(option).filter(
+        pph.matchText(subOptionName)
+    ).first();
+};
+
+exports.setStatementRecipientData = (optionName, subOptionName) => {
+    let option = exports.statementRecipientOptionByName(optionName);
+
+    asAlways(option, 'scrollIntoView', 'click');
+
+    browser.wait(EC.visibilityOfAny(
+        exports.statementRecipientSubOptions(option)
+    ));
+
+    asAlways(
+        exports.statementRecipientSubOptionByName(option, subOptionName),
+        'scrollIntoView', 'click'
+    );
 };
 
 exports.affiliatedSocietyTypeahead = function() {
