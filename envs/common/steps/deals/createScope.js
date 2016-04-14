@@ -373,6 +373,25 @@ exports.shareScopeToAllContractPeriods = function () {
     });
 };
 
+exports.clickOnShareScope = function () {
+    it('Click on share scope', function () {
+        pages.createDealScope.shareTheScope();
+    });
+};
+
+exports.selectAllContractPeriodsShareScopeModalDialog = function () {
+    it('Select all contract periods', function () {
+        pages.createDealScope.selectAllContractPeriodsShareScopeModalDialog();
+    });
+};
+
+exports.clickOnTheDoneShareScopeModalDialog = function () {
+    it('Click on the done share scope on modal dialog', function () {
+        pages.createDealScope.clickOnTheDoneShareScopeModalDialog();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
 exports.clickAddChainLink = function () {
     it("Click on add chain link", function () {
         pages.createDealScope.clickOnAddChainLink();

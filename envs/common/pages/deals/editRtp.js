@@ -21,15 +21,48 @@ if (pages.editDealRtp === undefined) {
             removeTheRtpRetention: {css: "div[data-ng-class='{ active: retentionFormSection.edit }'] div[data-name='rtpForm'] a[ng-click='showDeleteRightsTermPeriodModal(rtps.id, rtp.id)']"},
             editDescriptionRetentionFromAcquisitionField: {css: "input[data-ng-model='rtp.description']"},
             editScopeRetentionFromAcquisitionField: {css: "div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass']"},
-            editScopeRetentionFromAcquisitionInputField: {css: "div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editApplyScopeAcquisitionButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
             editActualEndDateRetentionFromAcquisitionField: {css: "div[name='retentionEndDate'] input"},
-            editAddPostTermPeriodFromRetentionLink: {css: "a[data-ng-click='addPostTermCollectionRightsTermPeriodToRetention(rtps.id, rtp.id)']"},
-            editDurationRtpPostTermCollectionField: {css: "div[data-name='retentionPostRtpForm'] input[name='retentionPostTermDuration']"},
             saveRetentionFromAcquisitionButton: {css: "button[data-ng-click='updateDeal(retentionForm.$valid, form.deal, retentionFormSection, false)"},
             modalDialogDelete: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope button.btn.btn-primary:nth-child(2)"},
             confirmCancelModalDialog: {css: "div.modal-dialog.ng-scope button[data-ng-click='cancel()']"}
+        },
+
+        editAddPostTermPeriodFromRetentionLink: function (i) {
+            return $$(
+                    'a[data-ng-click="addPostTermCollectionRightsTermPeriodToRetention(rtps.id, rtp.id)"]'
+                ).get(i);
+        },
+
+        retentionSection: function (i) {
+            return $$(
+                    '[data-ng-repeat="rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods"]'
+                ).get(i);
+        },
+
+        editDurationRtpPostTermCollectionField: function (i, j) {
+            return pages.editDealRtp.retentionSection(i).$$(
+                    'div[data-name="retentionPostRtpForm"] input[name="retentionPostTermDuration"]'
+                ).get(j);
+        },
+
+        editScopeAcquisitionInputField: function (i) {
+            return $$('[data-ng-model="acqRtp.deal_scope_id_holders"] input').get(i);
+        },
+
+        editScopeRetentionInputField: function (i) {
+            return $$('[data-ng-model="rtp.deal_scope_id_holders"] input').get(i);
+        },
+
+        editScopePostTermInputField: function (i) {
+            return $$('[data-ng-model="postTermCollectionRTP.deal_scope_id_holders"] input').get(i);
+        },
+
+        scopeOption: function (i) {
+            return $$(
+                    'ul.tg-typeahead__suggestions li.tg-typeahead__suggestions-container ul li'
+                ).get(i);
         },
 
         editClickOnTheAddAnotherAcquisitionPeriodLink: function () {
@@ -69,8 +102,9 @@ if (pages.editDealRtp === undefined) {
         },
 
         clickOnTheAddRetentionFromAcquisitionLink: function () {
-            pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField));
+            var el = pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink;
+            pages.base.scrollIntoView(el);
+            el.click();
         },
 
         editDeleteTheAddAnotherAcquisitionForm: function () {
@@ -106,31 +140,22 @@ if (pages.editDealRtp === undefined) {
             pages.editDealRtp.elems.editActualEndDateRetentionFromAcquisitionField.sendKeys(actualEndDate);
         },
 
-        editSelectTheSpecificScopeNumberIRtpAcquisition: function (i) {
-            var scope = "Scope " + i;
-            var desiredOption;
-            pages.editDealRtp.elems.editScopeRetentionFromAcquisitionField.click();
-            pages.editDealRtp.elems.editScopeRetentionFromAcquisitionInputField.sendKeys("s");
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                .then(function findMatchingOption(options) {
-                    options.forEach(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(scope) != -1) {
-                                    desiredOption = option;
-                                    return true;
-                                }
-                            }
-                        )
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
-                    }
-                });
+        selectScopeNumberIFromInput: function (i, j, type) {
+            var input;
+
+            if (type == 'ptc') {
+                input = pages.editDealRtp.editScopePostTermInputField(j);
+            } else if (type == 'acq') {
+                input = pages.editDealRtp.editScopeAcquisitionInputField(j);
+            } else {
+                input = pages.editDealRtp.editScopeRetentionInputField(j);
+            }
+            pages.base.scrollIntoView(input);
+            input.clear();
+            input.click();
+            browser.wait(ExpectedConditions.visibilityOf($('ul.tg-typeahead__suggestions.ng-scope')));
+            pages.editDealRtp.scopeOption(i).click();
             pages.editDealRtp.elems.editApplyScopeAcquisitionButton.click();
-            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions ng-scope"))));
         },
 
         editSelectTheSpecificDurationTypeRetentionFromAcquisitionNumberI: function (i, durationType) {
@@ -160,14 +185,18 @@ if (pages.editDealRtp === undefined) {
             pages.editDealRtp.waitForAjax();
         },
 
-        editClickOnTheAddPostTermPeriodFromRetention: function () {
-            pages.editDealRtp.elems.editAddPostTermPeriodFromRetentionLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDurationRtpPostTermCollectionField));
+        editClickOnTheAddPostTermPeriodFromRetention: function (i) {
+            i = i || 0;
+            var element = pages.editDealRtp.editAddPostTermPeriodFromRetentionLink(i);
+            pages.base.scrollIntoView(element);
+            element.click();
         },
 
-        editFillIntoTheDurationFieldPostTermCollectionFromRetention: function () {
+        editFillIntoTheDurationFieldPostTermCollectionFromRetention: function (i, j) {
             var number = Math.floor(Math.random() * 20) + 1;
-            pages.editDealRtp.elems.editDurationRtpPostTermCollectionField.sendKeys(number);
+            i = i || 0;
+            j = j || 0;
+            pages.editDealRtp.editDurationRtpPostTermCollectionField(i, j).sendKeys(number);
         }
 
 
