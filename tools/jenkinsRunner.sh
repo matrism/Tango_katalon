@@ -21,6 +21,14 @@ echo '{"webdriverVersions": {"selenium": "2.47.1", "chromedriver": "2.14", "iedr
 # Job runner.
 cmd_line="node ./tools/jobRunner.js $job_runner_options"
 
+if [ -n "$job_count" ]; then
+    cmd_line+=" --jobs $(printf '%q' "$job_count")"
+fi
+
+if [ -n "$job_silence_timeout" ]; then
+    cmd_line+=" --jobSilenceTimeout $(printf '%q' "$job_silence_timeout")"
+fi
+
 if [ -n "$app_url" ]; then
     cmd_line+=" --app-url $(printf '%q' "$app_url")"
 fi
@@ -44,10 +52,6 @@ fi
 cmd_line+=" --commit $(git rev-parse HEAD)"
 
 cmd_line+=" --build $(printf '%q' "$BUILD_NUMBER")"
-
-if [ -n "$job_silence_timeout" ]; then
-    cmd_line+=" --jobSilenceTimeout $(printf '%q' "$job_silence_timeout")"
-fi
 
 # Xvfb.
 cmd_line+=" xvfb-run -a -s \"-screen 0 1920x1080x24\""

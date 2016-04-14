@@ -12,7 +12,7 @@ let cp = require('child_process'),
 
     masterStartTime = Date.now(),
 
-    silentJobTimeout = null,
+    jobSilenceTimeout = null,
 
     env = null,
     appUrl = null,
@@ -104,18 +104,18 @@ let cp = require('child_process'),
             continue;
         }
 
-        if(rawArg === '--silentJobTimeout') {
-            if(silentJobTimeout !== null) {
-                console.error('Multiple --silentJobTimeout.');
+        if(rawArg === '--jobSilenceTimeout') {
+            if(jobSilenceTimeout !== null) {
+                console.error('Multiple --jobSilenceTimeout.');
                 process.exit(1);
             }
 
             if(rawArgs[0].startsWith('--')) {
-                silentJobTimeout = '';
+                jobSilenceTimeout = '';
                 continue;
             }
 
-            silentJobTimeout = parseInt(rawArgs.shift());
+            jobSilenceTimeout = parseInt(rawArgs.shift());
 
             continue;
         }
@@ -189,8 +189,8 @@ let cp = require('child_process'),
         break;
     }
 
-    if(silentJobTimeout === null || silentJobTimeout === '') {
-        silentJobTimeout = 11 * 60 * 1000;
+    if(jobSilenceTimeout === null || jobSilenceTimeout === '') {
+        jobSilenceTimeout = 11 * 60 * 1000;
     }
 
     env = env || '';
@@ -293,9 +293,9 @@ let cp = require('child_process'),
 
         let silentJobCheckInterval;
 
-        if(silentJobTimeout) {
+        if(jobSilenceTimeout) {
             silentJobCheckInterval = setInterval(() => {
-                if(Date.now() - lastLogTime > silentJobTimeout) {
+                if(Date.now() - lastLogTime > jobSilenceTimeout) {
                     console.log(
                         i + ': Process silent for too long - killing with',
                         nextSignal
@@ -363,7 +363,7 @@ let cp = require('child_process'),
     log(0, 'Test code branch is', branch, '(' + commit + ')');
     log(0, 'Host time zone is', moment().format('Z'));
 
-    log(0, 'Silent job timeout is', (silentJobTimeout / 1000) + 's');
+    log(0, 'Silent job timeout is', (jobSilenceTimeout / 1000) + 's');
 
     log(
         0, 'Starting', paths.length, 'feature processes with',
