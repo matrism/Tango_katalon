@@ -7,7 +7,9 @@ exports.beforeFeature = [
     [steps.login.itLogin],
 ];
 
-exports.commonFeatureTags = [];
+exports.commonFeatureTags = [
+    'qaOnly'
+];
 
 exports.feature = [
     {

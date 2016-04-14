@@ -51,16 +51,6 @@ var defaultUserName = 'TangoTest1',
             commitHash: cli.commit,
             tags: tags,
             bugLabel: cli['bug-label'],
-            legacyOverrides: {
-                stagingPerson: {
-                    newPerson: 'newPersonStaging',
-                    person: 'personStaging',
-                },
-                stagingOrganisation: {
-                    newOrganisation: 'newOrganisationStaging',
-                    organisation: 'organisationStaging',
-                },
-            },
             dontSkipBroken: cli['dont-skip-broken'],
             failFast: cli['fail-fast'],
             noUpload: cli['no-upload'],
