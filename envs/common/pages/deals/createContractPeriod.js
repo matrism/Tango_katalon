@@ -106,6 +106,18 @@ if (pages.createDealContractPeriod === undefined) {
             cancelAssumptionsButton: {css: "div.footer-buttons a[data-ng-click='cancelAssumptionChanges(form.terms.activeCp.id, assumption.id);']"}
         },
 
+        deleteEndRuleButton: function (i) {
+            return $$('[data-ng-click="showDeleteEndRuleModal(form.show.endRules.containerId, form.show.endRules.type, rule.id)"]').get(i - 1);
+        },
+
+        confirmDeleteEndRuleButton: function () {
+            return $('.modal-footer [data-ng-click="ok()"]');
+        },
+
+        ruleDateLabel: function (i) {
+            return $('div[data-ng-form="ruleForm"]:nth-child(' + i + ') .rule-label');
+        },
+
         clickOnAddContractPeriod: function () {
             pages.createDealContractPeriod.elems.addContractPeriodElem.click();
             pages.createDealContractPeriod.waitForAjax();
@@ -397,9 +409,9 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption;
-            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")));
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")).click();
+            var desiredOption,
+                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.left_value"]');
+            asAlways(el, 'scrollIntoView', 'click');
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -572,9 +584,9 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption;
-            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")));
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")).click();
+            var desiredOption,
+                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.right_value"]');
+            asAlways(el, 'scrollIntoView', 'click');
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -614,10 +626,19 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
-            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
-            pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog.click();
+            var deleteButton = $("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"),
+                confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
+            asAlways(deleteButton, 'scrollIntoView', 'click');
+            browser.wait(ExpectedConditions.visibilityOf(confirmButton));
+            confirmButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
+        },
+
+        clickOnConfirmDeleteEndRuleCondition: function () {
+            var confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
+            browser.wait(ExpectedConditions.visibilityOf(confirmButton));
+            confirmButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
         },
 
         checkTheVariableRightWarningMessageEndRules: function () {
@@ -950,9 +971,31 @@ if (pages.createDealContractPeriod === undefined) {
             pages.createDealContractPeriod.elems.cancelButtonEndRules.click();
         },
 
+        clickOnDeleteEndRule: function (i) {
+            var el = pages.createDealContractPeriod.deleteEndRuleButton(i);
+            pages.base.scrollIntoView(el);
+            el.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.confirmDeleteEndRuleButton()));
+        },
+
+        clickOnConfirmDeleteEndRule: function () {
+            var el = pages.createDealContractPeriod.confirmDeleteEndRuleButton();
+            browser.wait(ExpectedConditions.visibilityOf(el));
+            el.click();
+            pages.createDealContractPeriod.waitForAjax();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
+        },
+
         clickOnTheConfirmCancellationEndRulesModalButton: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
             pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog.click();
+        },
+
+        reorderEndRule: function (from, to) {
+            browser.actions().dragAndDrop(
+                pages.createDealContractPeriod.ruleDateLabel(from),
+                pages.createDealContractPeriod.ruleDateLabel(to)
+            ).perform();
         },
 
         clickOnTheContinueEditingEndRulesModalButton: function () {
