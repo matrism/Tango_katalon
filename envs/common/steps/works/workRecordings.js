@@ -22,11 +22,13 @@ exports.validateRecordingDurations = function(values) {
     });
 };
 
-pageStep('Validate library name');
-pageStep('Toggle Recording');
-pageStep('Toggle Album');
-pageStep('Validate Album Title');
-pageStep('Validate Release Territory');
-pageStep('Validate Release Configuration');
-pageStep('Validate Release Catalog');
-pageStep('Validate Release License Code');
+pageStep([
+    'Validate library name',
+    'Toggle Recording',
+    'Toggle Album',
+    'Validate Album Title',
+    'Validate Release Territory',
+    'Validate Release Configuration',
+    'Validate Release Catalog',
+    'Validate Release License Code'
+]);

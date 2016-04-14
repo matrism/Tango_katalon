@@ -23,107 +23,44 @@ exports.feature = [
             'albumsSanityCreatePersons',
         ],
         steps: function () {
-            _.times(1, function (i) {
-                steps.person.useBlankPersonSlot(i);
+            var p = steps.person,
+                np = steps.newPerson;
 
-                using(steps.newPerson, function () {
-                    this.goToNewPersonPage();
+            p.useBlankPersonSlot(0);
 
-                    this.enterLastName(
-                        'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
-                    );
-                });
+            np.goToNewPersonPage();
+            np.enterLastName(
+                'TEST PERSON ' + randomId('person')
+            );
+            np.enterAffiliatedSocietySearchTerms('ASCAP');
+            np.selectAffiliatedSocietySearchResultByIndex(0);
+            np.save();
 
-                using(steps.newPerson, function () {
-                    this.enterAffiliatedSocietySearchTerms('ASCAP');
-                    this.selectAffiliatedSocietySearchResultByIndex(0);
-
-                    this.save();
-                });
-
-                steps.person.findInternalIpiNumber();
-            });
-        },
+            p.findInternalIpiNumber();
+        }
     },
     {
         name: 'Create work',
         tags: [
             'albumsSanityCreateWork',
         ],
-        steps: [
-            [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
+        steps: function () {
+            var nw = steps.newWork;
 
-            [steps.newWork.goToNewWorkPage],
+            steps.base.useBlankEntityDataSlot('work', 'mainWork');
 
-            [steps.newWork.enterPrimaryWorkTitle, [
-                'TEST WORK ' + randomId('mainWork'),
-            ]],
+            nw.goToNewWorkPage();
+            nw.enterPrimaryWorkTitle(
+                'TEST WORK ' + randomId('mainWork')
+            );
+            nw.selectCreatorFromPersonSlot(0, 0);
+            nw.enterCreatorContribution(0, 100);
+            nw.optToIncludeWorkOnWebsite(false);
+            nw.saveWork();
+            nw.validateSaveWorkRedirection();
 
-            [steps.newWork.enterAlternateWorkTitle, [
-                0, 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork'),
-            ]],
-
-            [steps.newWork.selectCreatorFromPersonSlot, [0, 0]],
-            [steps.newWork.enterCreatorContribution, [0, 100]],
-
-            //[steps.newWork.selectCreatorFromPersonSlot, [1, 1]],
-            //[steps.newWork.enterCreatorContribution, [1, 50]],
-
-            /*
-            [steps.newWork.selectRandomMusicalDistributionCategory],
-            [steps.newWork.selectRandomTextMusicRelationship],
-            [steps.newWork.selectRandomExcerptType],
-            [steps.newWork.selectRandomVersionType],
-            [steps.newWork.selectRandomLyricAdaptation],
-            [steps.newWork.selectRandomMusicArrangement],
-            */
-
-            [steps.newWork.optToIncludeWorkOnWebsite, [false]],
-
-            /*
-            [steps.newWork.continueToNextTab],
-
-            [function () {
-                _.times(3, function (i) {
-                    steps.newWorkRecordings.clickRecordingNameField(i);
-                    steps.newWorkRecordings.selectRecordingNameSuggestionByIndex(i);
-
-                    steps.newWorkRecordings.enterArtistName(
-                        i, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
-                    );
-
-                    steps.newWorkRecordings.createEnteredArtist();
-
-                    steps.newWorkRecordings.enterRecordingDuration(
-                        i, '00' + leftPad(i + 1, 2, 0) + '00'
-                    );
-                });
-            }],
-
-            [steps.newWork.continueToNextTab],
-
-            [function () {
-                _.times(4, function (i) {
-                    steps.newWorkCopyrightCertificates.enterUsLibraryOfCongressNumber(
-                        i, 'TEST ' + randomId('copyrightNumber' + i)
-                    );
-
-                    steps.newWorkCopyrightCertificates.enterRegistrationDate(
-                        i, '2015-03-12'
-                    );
-
-                    steps.newWorkCopyrightCertificates.enterSubmittedDate(
-                        i, '2015-06-12'
-                    );
-                });
-            }],
-            */
-
-            [steps.newWork.saveWork],
-            [steps.newWork.validateSaveWorkRedirection],
-
-            [steps.work.findCurrentlyOpenWorkId],
-        ],
+            steps.work.findCurrentlyOpenWorkId();
+        }
     },
     {
         name: 'Create commercial album',
@@ -131,90 +68,67 @@ exports.feature = [
             'albumsSanityCreateCommercialAlbum',
         ],
         steps: function () {
+            var na = steps.newAlbum,
+                nar = na.recordings,
+                nard = na.releaseDetails;
+
             steps.base.useEntityDataSlot('album', 'commercialAlbum');
-            hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
+            //hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
-            using(steps.newAlbum, function () {
-                this.goToNewAlbumPage();
+            na.goToNewAlbumPage();
+            na.enterTitle(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+            na.selectReleaseType('Commercial');
+            na.enterArtistSearchTerms(
+                'TEST ARTIST ' + randomId('commercialAlbum')
+            );
+            na.createEnteredArtist();
+            na.enterAlbumCode(
+                'TESTALBUMCODE' + randomId('commercialAlbum')
+            );
+            na.enterDuration('001000');
 
-                this.enterTitle(
-                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
-                );
-
-                this.selectReleaseType('Commercial');
-
-                this.enterArtistSearchTerms(
-                    'TEST ARTIST ' + randomId('commercialAlbum')
-                );
-
-                this.createEnteredArtist();
-
-                this.enterAlbumCode(
-                    'TESTALBUMCODE' + randomId('commercialAlbum')
-                );
-
-                this.enterDuration('001000');
-
-                _.times(3, function (i) {
-                    this.recordings.selectSearchType(i, 'Title');
-
-                    this.recordings.enterSearchTerms(
-                        i, 'TEST RECORDING ' + randomId(
-                            'commercialAlbumRecording' + i
-                        )
-                    );
-
-                    this.recordings.createEnteredRecording();
-
-                    this.recordings.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
-
-                    this.recordings.selectWorkSearchResultByIndex(0);
-
-                    this.recordings.enterArtistSearchTerms(
-                        i, 'TEST ARTIST ' + randomId('commercialAlbum')
-                    );
-
-                    this.recordings.selectArtistSearchResultByIndex(0);
-
-                    this.recordings.enterDuration(i, '000' + (i + 1) + '00');
-                }, this);
-
-                this.goToTab('Release Details');
-            });
-
-            using(steps.newAlbum.releaseDetails, function () {
-                this.waitForTerritoriesSelectorToBeReady(0);
-                this.editTerritories(0);
-                this.enterTerritorySearchTerms(0, 'United States');
-                this.selectTerritorySearchResultByIndex(0);
-
-                this.enterReleaseDate(0, moment().format('YYYY-MM-DD'));
-
-                this.selectConfiguration(0, 'CD');
-
-                this.enterLabelSearchTerms(
-                    0, 'TEST LABEL ' + randomId('commercialAlbumLabel')
-                );
-
-                this.createEnteredLabel();
-
-                this.enterCatalogueNumber(
-                    0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
-                );
-
-                this.enterLicenseCode(
-                    0, 'LICENSE' + randomId(
-                        'commercialAlbumLicenseCode'
+            _.times(3, function (i) {
+                nar.selectSearchType(i, 'Title');
+                nar.enterSearchTerms(
+                    i, 'TEST RECORDING ' + randomId(
+                        'commercialAlbumRecording' + i
                     )
                 );
+                nar.createEnteredRecording();
+                nar.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
+                nar.selectWorkSearchResultByIndex(0);
+                nar.enterArtistSearchTerms(
+                    i, 'TEST ARTIST ' + randomId('commercialAlbum')
+                );
+                nar.selectArtistSearchResultByIndex(0);
+                nar.enterDuration(i, '000' + (i + 1) + '00');
             });
 
-            using(steps.newAlbum, function () {
-                this.save();
+            na.goToTab('Release Details');
+            nard.waitForTerritoriesSelectorToBeReady(0);
+            nard.editTerritories(0);
+            nard.enterTerritorySearchTerms(0, 'United States');
+            nard.selectTerritorySearchResultByIndex(0);
+            nard.enterReleaseDate(0, moment().format('YYYY-MM-DD'));
+            nard.selectConfiguration(0, 'CD');
+            nard.enterLabelSearchTerms(
+                0, 'TEST LABEL ' + randomId('commercialAlbumLabel')
+            );
+            nard.createEnteredLabel();
+            nard.enterCatalogueNumber(
+                0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+            );
+            nard.enterLicenseCode(
+                0, 'LICENSE' + randomId(
+                    'commercialAlbumLicenseCode'
+                )
+            );
 
-                this.findAlbumUuid();
-            });
-        },
+            na.save();
+            na.findAlbumUuid();
+        }
     },
     {
         name: 'Validate created commercial album',
@@ -222,72 +136,57 @@ exports.feature = [
             'albumsSanityValidateCommercialAlbum',
         ],
         steps: function () {
+            var a = steps.album,
+                ah = a.header,
+                ar = a.recordings,
+                ard = a.releaseDetails;
+
             steps.base.useEntityDataSlot('album', 'commercialAlbum');
 
-            steps.album.goToAlbumPage();
+            a.goToAlbumPage();
 
-            using(steps.album.header, function () {
-                this.validateTitle(
-                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
-                );
+            ah.validateTitle(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
+            );
+            ah.validateTrackCount(3);
+            ah.validateDuration('00:10:00');
+            ah.validateConfigurations(['CD']);
+            ah.validateTerritoryCount(1);
+            ah.validateAlbumCode(
+                'TESTALBUMCODE' + randomId('commercialAlbum')
+            );
 
-                this.validateArtistName(
-                    'TEST ARTIST ' + randomId('commercialAlbum')
-                );
-
-                this.validateTrackCount(3);
-
-                this.validateDuration('00:10:00');
-
-                this.validateConfigurations(['CD']);
-
-                this.validateTerritoryCount(1);
-
-                this.validateAlbumCode(
-                    'TESTALBUMCODE' + randomId('commercialAlbum')
-                );
-            });
-
-            _.times(3, bind(steps.album.recordings, function (__, i) {
-                this.validateTitle(
+            _.times(3, function (i) {
+                ar.validateTitle(
                     i, 'TEST RECORDING ' + randomId(
                         'commercialAlbumRecording' + i
                     )
                 );
-
-                this.validateArtistName(
+                ar.validateArtistName(
                     i, 'TEST ARTIST ' + randomId('commercialAlbum')
                 );
-
-                this.validateDuration(i, '00:0' + (i + 1) + ':00');
-
-                this.validateWorkIdUsingWorkSlot(i, 'mainWork');
-            }));
+                ar.validateDuration(i, '00:0' + (i + 1) + ':00');
+                ar.validateWorkIdUsingWorkSlot(i, 'mainWork');
+            });
 
             steps.album.goToTab('Release Details');
 
-            using(steps.album.releaseDetails, function () {
-                this.validateTerritories(0, ['United States']);
-
-                this.validateReleaseDate(0, moment().format('YYYY-MM-DD'));
-
-                this.validateConfiguration(0, 'CD');
-
-                this.validateLabelName(
-                    0, 'TEST LABEL ' + randomId('commercialAlbumLabel')
-                );
-
-                this.validateCatalogueNumber(
-                    0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
-                );
-
-                this.validateLicenseCode(
-                    0, 'LICENSE' + randomId(
-                        'commercialAlbumLicenseCode'
-                    )
-                );
-            });
-        },
+            ard.validateTerritories(0, ['United States']);
+            ard.validateReleaseDate(0, moment().format('YYYY-MM-DD'));
+            ard.validateConfiguration(0, 'CD');
+            ard.validateLabelName(
+                0, 'TEST LABEL ' + randomId('commercialAlbumLabel')
+            );
+            ard.validateCatalogueNumber(
+                0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+            );
+            ard.validateLicenseCode(
+                0, 'LICENSE' + randomId('commercialAlbumLicenseCode')
+            );
+        }
     },
     {
         name: 'Validate Recordings on Work page',
@@ -295,54 +194,50 @@ exports.feature = [
             'validateRecordingsOnWork',
         ],
         steps: function () {
-            using(steps.work, function () {
-                var wr = steps.workRecordings;
+            var w = steps.work,
+                wr = steps.workRecordings;
 
-                steps.base.useEntityDataSlot('work', 'mainWork');
-                this.goToWorkPage();
-                //this.goToWorkPageById('WW 015062988 00');
-                this.goToRecordingsTab();
-                wr.toggleRecording(0);
-                wr.toggleAlbum(0);
-                wr.validateAlbumTitle(0, 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum'));
-                wr.validateReleaseTerritory(0, 'United States');
-                wr.validateReleaseConfiguration(0, 'CD');
-                wr.validateReleaseCatalog(0,
-                    randomId('commercialAlbumCatalogueNumber').slice(0, 15)
-                );
-                wr.validateReleaseLicenseCode(0,
-                    'LICENSE' + randomId('commercialAlbumLicenseCode')
-                );
+            steps.base.useEntityDataSlot('work', 'mainWork');
+            w.goToWorkPage();
+            //this.goToWorkPageById('WW 015062988 00');
+            w.goToRecordingsTab();
 
-                wr.validateRecordingNames(
-                    _.times(3, function (i) {
-                        return 'TEST RECORDING ' + randomId('commercialAlbumRecording' + i);
-                    })
-                );
-                /*
-                wr.validateRecordingNames(
-                    _.times(3, function (i) {
-                        return 'TEST RECORDING ' + randomId('libraryAlbumRecording' + i);
-                    })
-                );
-                */
-
-                wr.validateArtistNames(
-                    _.times(3, function (i) {
-                        return 'TEST ARTIST ' + randomId('commercialAlbum');
-                    })
-                );
-
-                wr.validateRecordingDurations(
-                    _.times(3, function (i) {
-                        //return '00 : ' + leftPad(i + 1, 2, 0) + ' : 00';
-                        return '00 : 0' + (i + 1) + ' : 00';
-                    })
-                );
-
-
-            });
-        },
+            wr.toggleRecording(0);
+            wr.toggleAlbum(0);
+            wr.validateAlbumTitle(0,
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+            wr.validateReleaseTerritory(0, 'United States');
+            wr.validateReleaseConfiguration(0, 'CD');
+            wr.validateReleaseCatalog(0,
+                randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+            );
+            wr.validateReleaseLicenseCode(0,
+                'LICENSE' + randomId('commercialAlbumLicenseCode')
+            );
+            wr.validateRecordingNames(
+                _.times(3, function (i) {
+                    return 'TEST RECORDING ' + randomId('commercialAlbumRecording' + i);
+                })
+            );
+            /*
+            wr.validateRecordingNames(
+                _.times(3, function (i) {
+                    return 'TEST RECORDING ' + randomId('libraryAlbumRecording' + i);
+                })
+            );
+            */
+            wr.validateArtistNames(
+                _.times(3, function (i) {
+                    return 'TEST ARTIST ' + randomId('commercialAlbum');
+                })
+            );
+            wr.validateRecordingDurations(
+                _.times(3, function (i) {
+                    return '00 : 0' + (i + 1) + ' : 00';
+                })
+            );
+        }
     },
     {
         name: 'Create library album',
@@ -351,47 +246,38 @@ exports.feature = [
             'albumsSanityValidateLibraryAlbum',
         ],
         steps: function () {
+            var na = steps.newAlbum,
+                nar = na.recordings;
+
             steps.base.useEntityDataSlot('album', 'libraryAlbum');
             //hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
-            using(steps.newAlbum, function () {
-                this.goToNewAlbumPage();
+            na.goToNewAlbumPage();
+            na.enterTitle(
+                'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
+            );
+            na.selectReleaseType('Library');
+            na.selectLibrary('AUDIOMACHINE');
+            na.enterAlbumCode(
+                'TESTALBUMCODE' + randomId('libraryAlbum')
+            );
 
-                this.enterTitle(
-                    'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
+            _.times(3, function (i) {
+                nar.selectSearchType(i, 'Title');
+                nar.enterSearchTerms(
+                    i, 'TEST RECORDING ' + randomId(
+                        'libraryAlbumRecording' + i
+                    )
                 );
-
-                this.selectReleaseType('Library');
-
-                this.selectLibrary('AUDIOMACHINE');
-
-                this.enterAlbumCode(
-                    'TESTALBUMCODE' + randomId('libraryAlbum')
-                );
-
-                _.times(3, function (i) {
-                    this.recordings.selectSearchType(i, 'Title');
-
-                    this.recordings.enterSearchTerms(
-                        i, 'TEST RECORDING ' + randomId(
-                            'libraryAlbumRecording' + i
-                        )
-                    );
-
-                    this.recordings.createEnteredRecording();
-
-                    this.recordings.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
-
-                    this.recordings.selectWorkSearchResultByIndex(0);
-
-                    this.recordings.validateLibraryName(i, 'AUDIOMACHINE');
-                }, this);
-
-                this.save();
-
-                this.findAlbumUuid();
+                nar.createEnteredRecording();
+                nar.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
+                nar.selectWorkSearchResultByIndex(0);
+                nar.validateLibraryName(i, 'AUDIOMACHINE');
             });
-        },
+
+            na.save();
+            na.findAlbumUuid();
+        }
     },
     {
         name: 'Validate created library album',
@@ -399,22 +285,23 @@ exports.feature = [
             'albumsSanityValidateLibraryAlbum',
         ],
         steps: function () {
+            var a = steps.album,
+                ah = a.header,
+                ar = a.recordings;
+
             steps.base.useEntityDataSlot('album', 'libraryAlbum');
 
-            steps.album.goToAlbumPage();
+            a.goToAlbumPage();
 
-            using(steps.album.header, function () {
-                this.validateTitle(
-                    'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
-                );
+            ah.validateTitle(
+                'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
+            );
+            ah.validateLibraryName('AUDIOMACHINE');
 
-                this.validateLibraryName('AUDIOMACHINE');
+            _.times(3, function (i) {
+                ar.validateLibraryName(i, 'AUDIOMACHINE');
             });
-
-            _.times(3, bind(steps.album.recordings, function (__, i) {
-                this.validateLibraryName(i, 'AUDIOMACHINE');
-            }));
-        },
+        }
     },
     {
         name: 'Edit created commercial album',
@@ -431,34 +318,23 @@ exports.feature = [
 
             a.goToAlbumPage();
             //a.goToAlbumPage('5e93516a-fd97-11e5-b174-be909e760f77');
-            ar.edit();
 
+            ar.edit();
             ar.deleteTrack(0);
             ar.deleteTrack(1);
-
-            //nar.selectSearchType(0, 'Title');
-
             ar.enterSearchTerms(
                 i, 'TEST RECORDING EDIT' + randomId(
                     'commercialAlbumRecordingEdit'
                 )
             );
-
             ar.createEnteredRecording();
-
             ar.selectWorkSearchType(0, 'Work ID');
-
             ar.enterWorkIdFromWorkSlotAsWorkSearchTerms(i, 'mainWork');
-
             ar.selectWorkSearchResultByIndex(0);
-
             ar.enterArtistSearchTerms(
                 i, 'TEST ARTIST ' + randomId('commercialAlbum')
-                //i, 'TEST ARTIST 1411460126120218'
             );
-
             ar.selectArtistSearchResultByIndex(0);
-
             ar.save();
 
             ar.validateTitle(
@@ -466,17 +342,14 @@ exports.feature = [
                     'commercialAlbumRecordingEdit'
                 )
             );
-
             ar.validateArtistName(
                 3, 'TEST ARTIST EDIT' + randomId('commercialAlbum')
             );
-
             ar.validateDuration(3, '00:00:00');
-
             ar.validateWorkIdUsingWorkSlot(3, 'mainWork');
 
             a.header.validateTrackCount(2);
-        },
+        }
     },
     {
         name: 'Search for previously created commercial album by title',
@@ -485,22 +358,20 @@ exports.feature = [
             'albumsSanitySearchForAlbumsByTitle',
         ],
         steps: function () {
-            using(steps.mainHeader.search, function () {
-                this.selectEntityType('Albums');
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
 
-                this.selectFilterTag('Title');
-
-                this.enterTerms(
-                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
-                );
-
-                this.selectResultByIndex(0);
-            });
-
-            steps.album.header.validateTitle(
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Title');
+            mhs.enterTerms(
                 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
             );
-        },
+            mhs.selectResultByIndex(0);
+
+            ah.validateTitle(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+        }
     },
     {
         name: 'Search for previously created commercial album by artist',
@@ -509,22 +380,18 @@ exports.feature = [
             'albumsSanitySearchForAlbumsByArtist',
         ],
         steps: function () {
-            using(steps.mainHeader.search, function () {
-                this.selectEntityType('Albums');
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
 
-                this.selectFilterTag('Artist');
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Artist');
+            mhs.enterTerms('TEST ARTIST ' + randomId('commercialAlbum'));
+            mhs.selectResultByIndex(0);
 
-                this.enterTerms(
-                    'TEST ARTIST ' + randomId('commercialAlbum')
-                );
-
-                this.selectResultByIndex(0);
-            });
-
-            steps.album.header.validateTitle(
+            ah.validateTitle(
                 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
             );
-        },
+        }
     },
     {
         name: 'Search for previously created commercial album by catalog',
@@ -533,22 +400,20 @@ exports.feature = [
             'albumsSanitySearchForAlbumsByCatalog',
         ],
         steps: function () {
-            using(steps.mainHeader.search, function () {
-                this.selectEntityType('Albums');
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
 
-                this.selectFilterTag('Catalog');
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Catalog');
+            mhs.enterTerms(
+                randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+            );
+            mhs.selectResultByIndex(0);
 
-                this.enterTerms(
-                    randomId('commercialAlbumCatalogueNumber').slice(0, 15)
-                );
-
-                this.selectResultByIndex(0);
-            });
-
-            steps.album.header.validateTitle(
+            ah.validateTitle(
                 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
             );
-        },
+        }
     },
     {
         name: 'Search for previously created commercial album by label',
@@ -557,22 +422,18 @@ exports.feature = [
             'albumsSanitySearchForAlbumsByLabel',
         ],
         steps: function () {
-            using(steps.mainHeader.search, function () {
-                this.selectEntityType('Albums');
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
 
-                this.selectFilterTag('Label');
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Label');
+            mhs.enterTerms('TEST LABEL ' + randomId('commercialAlbumLabel'));
+            mhs.selectResultByIndex(0);
 
-                this.enterTerms(
-                    'TEST LABEL ' + randomId('commercialAlbumLabel')
-                );
-
-                this.selectResultByIndex(0);
-            });
-
-            steps.album.header.validateTitle(
+            ah.validateTitle(
                 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
             );
-        },
+        }
     },
     {
         name: 'Search for previously created commercial album by title + artist',
@@ -581,30 +442,23 @@ exports.feature = [
             'albumsSanitySearchForAlbumsByTitlePlusArtist',
         ],
         steps: function () {
-            using(steps.mainHeader.search, function () {
-                this.selectEntityType('Albums');
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
 
-                this.selectFilterTag('Title');
-
-                this.enterTerms(
-                    'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
-                );
-
-                this.addAnotherTerm();
-
-                this.selectFilterTag('Artist');
-
-                this.enterTerms(
-                    'TEST ARTIST ' + randomId('commercialAlbum')
-                );
-
-                this.selectResultByIndex(0);
-            });
-
-            steps.album.header.validateTitle(
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Title');
+            mhs.enterTerms(
                 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
             );
-        },
+            mhs.addAnotherTerm();
+            mhs.selectFilterTag('Artist');
+            mhs.enterTerms('TEST ARTIST ' + randomId('commercialAlbum'));
+            mhs.selectResultByIndex(0);
+
+            ah.validateTitle(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+        }
     },
     {
         name: 'Search for previously created library album by library + title',
@@ -613,27 +467,22 @@ exports.feature = [
             'albumsSanitySearchForAlbumsByLibraryPlusTitle',
         ],
         steps: function () {
-            using(steps.mainHeader.search, function () {
-                this.selectEntityType('Albums');
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
 
-                this.selectFilterTag('Library');
-
-                this.enterTerms('AUDM');
-
-                this.addAnotherTerm();
-
-                this.selectFilterTag('Title');
-
-                this.enterTerms(
-                    'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
-                );
-
-                this.selectResultByIndex(0);
-            });
-
-            steps.album.header.validateTitle(
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Library');
+            mhs.enterTerms('AUDM');
+            mhs.addAnotherTerm();
+            mhs.selectFilterTag('Title');
+            mhs.enterTerms(
                 'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
             );
-        },
+            mhs.selectResultByIndex(0);
+
+            ah.validateTitle(
+                'TEST LIBRARY ALBUM ' + randomId('libraryAlbum')
+            );
+        }
     }
 ];
