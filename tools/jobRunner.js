@@ -60,6 +60,15 @@ let cp = require('child_process'),
 
             jobCount = parseInt(c);
 
+            if(jobCount > 10) {
+                console.error(
+                    'Too many jobs (' + jobCount + ').',
+                    'Patch this check if you really want to do it.'
+                );
+
+                process.exit(1);
+            }
+
             continue;
         }
 
