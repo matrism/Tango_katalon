@@ -21,6 +21,7 @@ pageStep([
     'Create entered artist',
     'Cancel artist search',
     'Enter album code',
+    'Enter duration',
 
     ['Release Details', [
         'Wait for territories selector to be ready',
@@ -33,7 +34,7 @@ pageStep([
         'Create entered label',
         'Select label search result by index',
         'Enter catalogue number',
-        'Enter license code',
+        'Enter license code'
     ]],
 
     'Save'

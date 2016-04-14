@@ -36,6 +36,7 @@ pageStep([
         'Select Work Search Result By Index',
         'Enter Artist Search Terms',
         'Select Artist Search Result By Index',
+        'Enter duration',
         'Validate title',
         'Validate artist name',
         'Validate library name',

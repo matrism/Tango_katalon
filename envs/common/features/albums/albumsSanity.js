@@ -152,6 +152,8 @@ exports.feature = [
                     'TESTALBUMCODE' + randomId('commercialAlbum')
                 );
 
+                this.enterDuration('000010');
+
                 _.times(3, function (i) {
                     this.recordings.selectSearchType(i, 'Title');
 
@@ -172,6 +174,8 @@ exports.feature = [
                     );
 
                     this.recordings.selectArtistSearchResultByIndex(0);
+
+                    //this.recordings.enterDuration('000020');
                 }, this);
 
                 this.goToTab('Release Details');
@@ -198,7 +202,7 @@ exports.feature = [
                 );
 
                 this.enterLicenseCode(
-                    0, 'TEST LICENSE CODE ' + randomId(
+                    0, 'LICENSE' + randomId(
                         'commercialAlbumLicenseCode'
                     )
                 );
@@ -232,7 +236,7 @@ exports.feature = [
 
                 this.validateTrackCount(3);
 
-                this.validateDuration('00:00:00');
+                this.validateDuration('00:00:10');
 
                 this.validateConfigurations(['CD']);
 
@@ -254,7 +258,7 @@ exports.feature = [
                     i, 'TEST ARTIST ' + randomId('commercialAlbum')
                 );
 
-                this.validateDuration(i, '00:00:00');
+                this.validateDuration(i, '00:00:20');
 
                 this.validateWorkIdUsingWorkSlot(i, 'mainWork');
             }));
@@ -277,7 +281,7 @@ exports.feature = [
                 );
 
                 this.validateLicenseCode(
-                    0, 'TEST LICENSE CODE ' + randomId(
+                    0, 'LICENSE' + randomId(
                         'commercialAlbumLicenseCode'
                     )
                 );
@@ -306,7 +310,7 @@ exports.feature = [
                     randomId('commercialAlbumCatalogueNumber').slice(0, 15)
                 );
                 wr.validateReleaseLicenseCode(0,
-                    'TEST LICENSE CODE ' + randomId('commercialAlbumLicenseCode')
+                    'LICENSE' + randomId('commercialAlbumLicenseCode')
                 );
 
                 wr.validateRecordingNames(

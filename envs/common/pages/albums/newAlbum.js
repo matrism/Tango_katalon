@@ -76,6 +76,16 @@ exports.cancelArtistSearch = function() {
     return pages.base.hitEscape();
 };
 
+exports.durationInput = function () {
+    return element(by.model('time'));
+};
+
+exports.enterDuration = function(value) {
+    var element = exports.durationInput();
+    pages.base.scrollIntoView(element);
+    return element.sendKeys(value);
+};
+
 exports.libraryDropdown = function() {
     return element(by.model('dataHolder.newAlbum.library'));
 };
