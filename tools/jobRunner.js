@@ -20,6 +20,8 @@ let cp = require('child_process'),
     branch = null,
     commit = null,
 
+    build = null,
+
     jobCount = null,
 
     tags = null,
@@ -184,6 +186,22 @@ let cp = require('child_process'),
             continue;
         }
 
+        if(rawArg === '--build') {
+            if(build !== null) {
+                console.error('Multiple --build.');
+                process.exit(1);
+            }
+
+            if(rawArgs[0].startsWith('--')) {
+                build = '';
+                continue;
+            }
+
+            build = rawArgs.shift();
+
+            continue;
+        }
+
         startPrefix = [rawArg, ...rawArgs];
 
         break;
@@ -259,6 +277,7 @@ let cp = require('child_process'),
             '--app-url', appUrl,
             '--branch', branch,
             '--commit', commit,
+            '--build', build,
             '--tags', tags,
             '--@tags', negatedTags,
             '--feat', fPath
