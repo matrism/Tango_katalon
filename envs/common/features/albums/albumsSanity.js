@@ -8,6 +8,7 @@ var leftPad = require('left-pad'),
     using = fnutils.using;
 
 exports.commonFeatureTags = [
+    'albums',
     'albumsSanity',
     'sanity'
 ];
