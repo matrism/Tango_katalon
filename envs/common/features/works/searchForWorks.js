@@ -120,11 +120,7 @@ exports.feature = [
     {
         name: 'Search for a work by creator name and SUISA and internal IPI numbers',
 
-        tags: [
-            'broken'
-        ],
-
-        breakageDescription: 'May cause Protractor crashes. See TAT-807.',
+        tags: [],
 
         steps: function() {
             steps.person.useBlankPersonSlot(1);
