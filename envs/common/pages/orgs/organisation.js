@@ -522,27 +522,42 @@ if (pages.organisation === undefined) {
                     default: break;
                 };
 
-                var f = fs.readFileSync(systemConfig.downloadsDirectoryPath + filename, {encoding: 'utf-8'});
+                let filePath = systemConfig.downloadsDirectoryPath + '/' + filename;
 
-                // Split on row
-                f = f.split('\n');
+                return browser.wait(() => {
+                    let stat;
 
-                f.forEach(function (row) {
-                    if(row.indexOf(workNumber) > -1) {
-                        var creatorPart = row.split('"'),
-                            workPart = creatorPart[0].split(',');
-
-                        returnObj = {
-                            workName: workPart[1],
-                            creator: creatorPart[1],
-                            workNumber: workNumber
-                        };
+                    try {
+                        stat = fs.statSync(filePath);
                     }
+                    catch(err) {
+                    }
+
+                    // TODO: This might not be enough on Firefox.
+                    return (stat && stat.size > 0);
+                }).then(() => {
+                    let f = fs.readFileSync(filePath, { encoding: 'utf-8' });
+
+                    // Split on row
+                    f = f.split('\n');
+
+                    f.forEach(function (row) {
+                        if(row.indexOf(workNumber) > -1) {
+                            var creatorPart = row.split('"'),
+                                workPart = creatorPart[0].split(',');
+
+                            returnObj = {
+                                workName: workPart[1],
+                                creator: creatorPart[1],
+                                workNumber: workNumber
+                            };
+                        }
+                    });
+
+                    returnObj.fileSize = f.length;
+
+                    return returnObj;
                 });
-
-                returnObj.fileSize = f.length;
-
-                return returnObj;
             });
 
         },
