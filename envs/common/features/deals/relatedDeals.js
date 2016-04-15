@@ -151,7 +151,7 @@ exports.feature = [
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
             steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
             steps.editDealRtp.editFillRetentionDescriptionFromAcquisition("Retention test");
-            steps.editDealRtp.editSelectSpecificScopeNumberIRtpAcquisition(1);
+            steps.editDealRtp.selectScopeNumberIFromInput(0, 0, 'ret');
             steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
             steps.editDealRtp.saveRetentionFromAcquisition();
 
@@ -384,7 +384,7 @@ exports.feature = [
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
             steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
             steps.editDealRtp.editFillRetentionDescriptionFromAcquisition("Retention test");
-            steps.editDealRtp.editSelectSpecificScopeNumberIRtpAcquisition(1);
+            steps.editDealRtp.selectScopeNumberIFromInput(0, 0, 'ret');
             steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
             steps.editDealRtp.saveRetentionFromAcquisition();
 

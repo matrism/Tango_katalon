@@ -73,6 +73,7 @@ exports.saveRules = function () {
     var button = exports.saveButton();
 
     button.click();
+    pages.base.waitForAjax();
     browser.wait(EC.invisibilityOf(button));
 };
 

@@ -1,7 +1,10 @@
 "use strict";
 
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+var promise = protractor.promise,
+
+    ExpectedConditions = protractor.ExpectedConditions,
+
+    page = pages.editDealScope;
 
 steps.editDealScope = exports;
 
@@ -1034,4 +1037,6 @@ exports.saveChangesSocietyAgreementNumberForm = function () {
     });
 };
 
-
+addBasicStep(exports, page, 'Enter creator search terms');
+addBasicStep(exports, page, 'Select creator search result by name');
+addBasicStep(exports, page, 'Validate creators label');

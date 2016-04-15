@@ -84,7 +84,7 @@ exports.selectSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ = funct
 };
 
 exports.fillIntoDurationPostTermPeriodNumberJFromRetentionNumberI = function (i, j) {
-    it("Fill into description post term period number i from retention j", function () {
+    it('Fill into duration post term period number i from retention j', function () {
         pages.createDealRtp.fillIntoTheDurationPostTermPeriodNumberJFromRetentionNumberI(i, j);
     });
 };
