@@ -110,7 +110,7 @@ exports.enterWorkSearchTerms = function(value) {
 exports.enterCreatorNameAsWorkSearchTerms = function(value) {
     return promise.when(value).then(function(value) {
         var reResult;
-        if(value.indexOf(',') !== -1) {
+        if(value && value.indexOf(',') !== -1) {
             reResult = /^(.+), ([^,]+)$/.exec(value)[1];
             value = reResult[1] + ' ' + reResult[0];
         }
