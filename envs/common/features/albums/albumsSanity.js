@@ -486,6 +486,60 @@ exports.feature = [
         }
     },
     {
+        name: 'Search for previously created library album by title + catalog',
+        tags: [
+            'albumsSanitySearchForAlbums',
+            'albumsSanitySearchForAlbumsByLibraryPlusCatalog',
+        ],
+        steps: function () {
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
+
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Title');
+            mhs.enterTerms(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+            mhs.addAnotherTerm();
+            mhs.selectFilterTag('Catalog');
+            mhs.enterTerms(
+                randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+            );
+            mhs.selectResultByIndex(0);
+
+            ah.validateTitle(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+        }
+    },
+    {
+        name: 'Search for previously created library album by title + label',
+        tags: [
+            'albumsSanitySearchForAlbums',
+            'albumsSanitySearchForAlbumsByLibraryPlusLabel',
+        ],
+        steps: function () {
+            var mhs = steps.mainHeader.search,
+                ah = steps.album.header;
+
+            mhs.selectEntityType('Albums');
+            mhs.selectFilterTag('Title');
+            mhs.enterTerms(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+            mhs.addAnotherTerm();
+            mhs.selectFilterTag('Label');
+            mhs.enterTerms(
+                'TEST LABEL ' + randomId('commercialAlbumLabel')
+            );
+            mhs.selectResultByIndex(0);
+
+            ah.validateTitle(
+                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            );
+        }
+    },
+    {
         name: 'Search for previously created library album by library + title',
         tags: [
             'albumsSanitySearchForAlbums',
