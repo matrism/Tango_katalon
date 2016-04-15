@@ -240,7 +240,7 @@ if (pages.organisation === undefined) {
             return $(".nav-tabs");
         },
         downloadFileButton: function () {
-            return $(".icon-download-alt.ng-scope");
+            return $(".download-icon.ng-scope");
         },
         validationErrorsButton: function () {
             return $$(".btn.btn-primary.ng-scope").first();
