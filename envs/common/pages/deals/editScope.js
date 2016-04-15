@@ -83,8 +83,8 @@ if (pages.editDealScope === undefined) {
             },
 
             editTheScopeArea: function () {
-                pages.editDealScope.elems.editScopeAreaElement.click();
-                pages.editDealScope.elems.editScopeIcon.click();
+                asAlways(pages.editDealScope.elems.editScopeAreaElement, 'scrollIntoView', 'click');
+                asAlways(pages.editDealScope.elems.editScopeIcon, 'scrollIntoView', 'click');
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryField))
             },
 
@@ -156,30 +156,25 @@ if (pages.editDealScope === undefined) {
                 pages.editDealScope.elems.scope1.click();
             },
 
-            saveButton: function () {
-                return element(by.cssContainingText(
-                    '.ps-editor .CONTROLS button', 'Save'
-                ));
-            },
-
             editSaveTheScopeChanges: function () {
-                pages.editDealScope.elems.saveEditScope.click();
-                pages.editDealScope.waitForAjax();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
+                return asAlways(
+                    exports.elems.saveEditScope, 'scrollIntoView', 'click', 'waitForAjax'
+                );
             },
 
             waitForTheScopeNumberIToBeVisible: function (i) {
                 browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))));
             },
 
+            scopeMenuItems: function () {
+                return $$('.scope-menu-item');
+            },
+
             clickOnScopeNumberI: function (i) {
-                pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))));
-                //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
-                //browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
-                browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
-                //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
-                browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+                return asAlways(
+                    exports.scopeMenuItems().get(i - 1),
+                    'scrollIntoView', 'scrollIntoView'
+                ).click();
             },
 
             checkOverrideNumbersAddedOnScope: function (i) {
@@ -481,10 +476,16 @@ if (pages.editDealScope === undefined) {
                 element.sendKeys(percent);
             },
 
+            savePageButton: function () {
+                return element(by.cssContainingText(
+                    '.ps-editor .CONTROLS button', 'Save'
+                ));
+            },
+
             editSaveTheChangesPage: function () {
-                pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
-                pages.editDealScope.elems.saveChanges.click();
-                pages.editDealScope.waitForAjax();
+                return asAlways(
+                    pages.editDealScope.elems.saveChanges, 'scrollIntoView', 'click', 'waitForAjax'
+                );
             },
 
             editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
@@ -785,8 +786,9 @@ if (pages.editDealScope === undefined) {
             },
 
             editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait: function (i) {
-                pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
-                browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
+                var el = element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"));
+                asAlways(el, 'scrollIntoView', 'click');
+                pages.base.waitForAjax();
                 browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
             },
 
@@ -1064,3 +1066,41 @@ if (pages.editDealScope === undefined) {
         }
     )
 }
+
+exports.creatorTypeahead = function () {
+    return $('[data-tg-typeahead-id="dealScopeCreator"]');
+};
+
+exports.creatorInput = function () {
+    return exports.creatorTypeahead().element(by.model('$term'));
+};
+
+exports.enterCreatorSearchTerms = function (terms) {
+    return asAlways(
+        exports.creatorInput(), 'scrollIntoView', 'clear'
+    ).sendKeys(terms);
+};
+
+exports.creatorSearchResultByName = function (name) {
+    return element(by.cssContainingText('.tg-typeahead__item-left strong', name));
+};
+
+exports.selectCreatorSearchResultByName = function (name) {
+    return asAlways(
+        exports.creatorSearchResultByName(name), 'waitUntilVisible', 'scrollIntoView'
+    ).click();
+};
+
+exports.creatorsLabel = function () {
+    return element(by.binding(
+        ' activeScope.creators | pluck:\'displayName\' | join:\', \' '
+    ));
+};
+
+exports.creatorsLabelText = function () {
+    return asAlways(exports.creatorsLabel(), 'scrollIntoView', 'getAllText');
+};
+
+exports.validateCreatorsLabel = function (expected) {
+    expect(exports.creatorsLabelText()).toBe(expected);
+};

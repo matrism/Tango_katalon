@@ -36,6 +36,7 @@ var defaultUserName = 'TangoTest1',
             //protractor Zapi related
             projectId: cli.projectId,
             tcn: cli.tcn,
+            dealId: cli.dealId,
             flow: cli.flow,
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'all',
             singleReport: cli['single-report'],

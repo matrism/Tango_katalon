@@ -4,7 +4,7 @@ var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 if (pages.editDealContractPeriod === undefined) {
-    pages.editDealContractPeriod = new ftf.pageObject({
+    exports = module.exports = pages.editDealContractPeriod = new ftf.pageObject({
 
         locators: {
             editContractPeriodAreaElement: {css: "div[data-tg-modular-edit-id='contractPeriod'] div.DETAIL.ng-scope"},
@@ -90,8 +90,15 @@ if (pages.editDealContractPeriod === undefined) {
             modalDialogCp: {css: "div.modal-dialog.ng-scope"}
         },
 
+         contractPeriodMenuItems: function () {
+             return $$('.contract-period-menu-item');
+         },
+
         selectTheContractPeriodNumberI: function (i) {
-            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
+            return asAlways(
+                exports.contractPeriodMenuItems().get(i - 1),
+                'scrollIntoView', 'click'
+            );
         },
 
         checkTheContractPeriodNumberIIsDisplayed: function (i) {
