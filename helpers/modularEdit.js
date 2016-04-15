@@ -23,13 +23,13 @@ function modularEdit (target) {
 
     el.save = function () {
         pages.base.scrollIntoView(el.saveButton);
-        saveButton.click();
+        el.saveButton.click();
         waitForEditModeToBeClosed();
     };
 
     el.cancel = function () {
         pages.base.scrollIntoView(el.cancelButton);
-        cancelButton.click();
+        el.cancelButton.click();
         waitForEditModeToBeClosed();
     };
 
