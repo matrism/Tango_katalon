@@ -120,7 +120,7 @@ exports.feature = [
 
             dsanCtp.clickCreatorSearchTermsField(0);
 
-            dsanCtp.validateFormHeaderTooltip(0,
+            dsanCtp.validateFormHeaderTooltip(
                 'Enter the unique number assigned by the Society that ' +
                 'links Creators to the Publisher Chain (a.k.a. Writer ' +
                 'to Original Publisher Agreement Number). This number ' +
@@ -130,7 +130,7 @@ exports.feature = [
 
             dsanPub.clickSocietyAgreementNumberField(0);
 
-            dsanPub.validateFormHeaderTooltip(1,
+            dsanPub.validateFormHeaderTooltip(
                 'Enter the unique number assigned by the Society that links ' +
                 'the Publishers within the Chain (a.k.a. Original Publisher ' +
                 'to Administrator Agreement Number). This number is ' +

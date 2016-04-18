@@ -336,12 +336,12 @@ exports.creatorToPublisher = (function () {
         );
     };
 
-    ctp.formHeaderTooltipButton = function (i) {
-        return ctp.formHeader().$$('i[data-tooltip]').get(i);
+    ctp.formHeaderTooltipButton = function () {
+        return ctp.formHeader().$('i[data-tooltip]');
     };
 
-    ctp.validateFormHeaderTooltip = function (i, message) {
-        asAlways(ctp.formHeaderTooltipButton(i), 'scrollIntoView', 'hover');
+    ctp.validateFormHeaderTooltip = function (message) {
+        asAlways(ctp.formHeaderTooltipButton(), 'scrollIntoView', 'hover');
 
         return pages.base.validateTooltipMessage(message);
     };
