@@ -208,6 +208,13 @@ exports.cancelTheRateSet = function () {
     });
 };
 
+exports.confirmCancelTheRateSet = function () {
+    it('Cancel current Rate Set', function () {
+        pages.editRoyaltyRates.clickConfirmCancelButtonForRRSet();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
 exports.clickOnCancelButtonRateSet = function () {
     it("Click on cancel button without confirm current Rate Set", function () {
         pages.editRoyaltyRates.clickCancelButtonForRRSetWithoutConfirm();

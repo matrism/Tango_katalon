@@ -42,18 +42,12 @@ if (pages.editRoyaltyRates === undefined) {
             pages.base.scrollIntoView(RRCancelButton);
             RRCancelButton.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+        },
+
+        clickConfirmCancelButtonForRRSet: function () {
             var elem = element(by.css("div.modal-footer button[data-ng-click='ok()']"));
             pages.base.scrollIntoView(elem);
             elem.click();
-        },
-
-        clickCancelButtonForRRSetWithoutConfirm: function () {
-            var RRCancelButton;
-            RRCancelButton = element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"));
-
-            pages.base.scrollIntoView(RRCancelButton);
-            RRCancelButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
         },
 
         clickDeleteButtonForRRSet: function () {
