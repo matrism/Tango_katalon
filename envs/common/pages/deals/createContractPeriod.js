@@ -630,8 +630,6 @@ if (pages.createDealContractPeriod === undefined) {
                 confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
             asAlways(deleteButton, 'scrollIntoView', 'click');
             browser.wait(ExpectedConditions.visibilityOf(confirmButton));
-            confirmButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
         },
 
         clickOnConfirmDeleteEndRuleCondition: function () {
