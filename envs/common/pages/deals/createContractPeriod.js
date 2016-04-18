@@ -626,10 +626,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
-            var deleteButton = $("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"),
-                confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
+            var deleteButton = $("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i");
             asAlways(deleteButton, 'scrollIntoView', 'click');
-            browser.wait(ExpectedConditions.visibilityOf(confirmButton));
         },
 
         clickOnConfirmDeleteEndRuleCondition: function () {

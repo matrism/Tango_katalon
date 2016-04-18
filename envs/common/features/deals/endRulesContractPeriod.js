@@ -138,9 +138,10 @@ exports.feature = [
             steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
             //steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK(1, 1, 15, 0);
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
-            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
             steps.createDealContractPeriod.cancelDeleteEndRules();
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
+            steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
 
             steps.createDealContractPeriod.saveEndRulesForm();
 
