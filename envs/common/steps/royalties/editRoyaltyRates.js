@@ -222,9 +222,9 @@ exports.deleteTheRateSet = function () {
     });
 };
 
-exports.clickOnDeleteButtonToRateSet = function () {
-    it("Delete current Rate Set", function () {
-        pages.editRoyaltyRates.clickDeleteButtonForRRSetWithoutConfirm();
+exports.confirmDeleteTheRateSet = function () {
+    it('Delete current Rate Set', function () {
+        pages.editRoyaltyRates.clickConfirmDeleteButtonForRRSet();
         pages.editRoyaltyRates.waitForAjax();
     });
 };

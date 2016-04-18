@@ -63,12 +63,14 @@ if (pages.editRoyaltyRates === undefined) {
             pages.base.scrollIntoView(RRDeleteButton);
             RRDeleteButton.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
-            var elem = element(by.css("div.modal-footer button[data-ng-click='data.delete()']"));
-            pages.base.scrollIntoView(elem);
-            elem.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("a[data-ng-click='CR.onAddContractualRateSet(activeScope, true)']"))));
         },
 
+        clickConfirmDeleteButtonForRRSet: function () {
+            var elem = element(by.css('div.modal-footer button[data-ng-click="data.delete()"]'));
+            pages.base.scrollIntoView(elem);
+            elem.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css('a[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'))));
+        },
 
         clickDeleteButtonForRRSetWithoutConfirm: function () {
             var RRDeleteButton;

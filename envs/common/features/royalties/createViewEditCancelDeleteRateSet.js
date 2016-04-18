@@ -133,7 +133,7 @@ exports.feature = [
             steps.editRoyaltyRates.clickOnCancelButtonRateSet();
             steps.editRoyaltyRates.cancelToTheModalDialog();
             //click on delete button
-            steps.editRoyaltyRates.clickOnDeleteButtonToRateSet();
+            steps.editRoyaltyRates.deleteRateSet();
             steps.editRoyaltyRates.cancelToTheModalDialog();
 
             //save the rate set in edit mode
