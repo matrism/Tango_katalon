@@ -30,6 +30,13 @@ exports.enterContractingPartySearchTerms = function (value) {
     });
 };
 
+exports.fillContractingPartyFieldData = function (value) {
+    it("Fill contracting party field", function () {
+            pages.createDealGeneral.fillContractingPartiesField(value);
+        }
+    );
+};
+
 exports.fillContractingPartyField = function () {
     it("Fill contracting party field", function () {
             pages.createDealGeneral.fillContractingPartiesField("bmi");
@@ -319,6 +326,21 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
             steps.createDealGeneral.selectRandomCompanyCode();
         }
         steps.createDealGeneral.fillContractingPartyField();
+        steps.createDealGeneral.waitForContractingPartyDropDown();
+        steps.createDealGeneral.selectRandomContractingParty();
+    });
+};
+
+exports.itFillDealMandatoryFieldsGeneralTabWithData = function (contractingParty, country) {
+    describe("Fill mandatory fields in deals general tab", function () {
+        steps.createDealGeneral.goToNewDealPage();
+        steps.createDealGeneral.selectSigningTerritory(country);
+        if(systemConfig.env.name === 'qa') {
+            steps.createDealGeneral.fillCompanyCodeField("a");
+            steps.createDealGeneral.waitForContractingPartyDropDown();
+            steps.createDealGeneral.selectRandomCompanyCode();
+        }
+        steps.createDealGeneral.fillContractingPartyFieldData(contractingParty);
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectRandomContractingParty();
     });

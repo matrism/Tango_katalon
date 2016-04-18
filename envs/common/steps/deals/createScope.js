@@ -92,6 +92,17 @@ exports.addSpecificScopeTypeAndTerritory = function (contractType, territory) {
     });
 };
 
+exports.addScopeTypeAndTerritory = function (contractType, territory) {
+    it("Add simple scope", function () {
+        pages.createDealScope.addScopeForm();
+        pages.createDealScope.selectContractTypeScope(contractType);
+        pages.createDealScope.waitForAjax();
+        pages.createDealScope.addTheSpecificTerritoryByTypingToScope(territory);
+        pages.createDealScope.selectRandomCountry();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
 exports.selectCountry = function () {
     it("Select country", function () {
         pages.createDealScope.addTerritoryByTypingToScope();
@@ -328,9 +339,15 @@ exports.cancelThePublisherShareSet = function () {
     });
 };
 
+exports.selectSpecificPublisherNameDropDownValue = function (publisherName) {
+    it("Select specific value publisher name drop down", function () {
+        pages.createDealScope.selectTheSpecificPublisherNameDropDown(publisherName);
+    });
+};
+
 exports.selectSpecificPublisherNameDropDown = function () {
     it("Select specific value publisher name drop down", function () {
-        pages.createDealScope.selectTheSpecificPublisherNameDropDown('music');
+        pages.createDealScope.selectTheSpecificPublisherNameDropDown("music");
     });
 };
 
@@ -392,6 +409,12 @@ exports.fillIntoPublisherNameAMFieldChainI = function (i) {
     });
 };
 
+exports.selectSpecificPublisherNameDropDownChainIValue = function (value, i) {
+    it("Select specific value publisher name drop down chain i", function () {
+        pages.createDealScope.selectSpecificPublisherNameDropDownChainI(value, i);
+    });
+};
+
 exports.selectSpecificPublisherNameDropDownChainI = function (i) {
     it("Select specific value publisher name drop down chain i", function () {
         pages.createDealScope.selectSpecificPublisherNameDropDownChainI('music', i);
@@ -426,6 +449,30 @@ exports.deleteChainIPublisherShare = function (i) {
 exports.clickPublisherSharesSetArea = function () {
     it("Click on publisher shares set area ", function () {
         pages.createDealScope.clickOnPublisherShareSetArea();
+    });
+};
+
+exports.selectTheRandomPublisherNameDropDownChainI = function(i){
+    it("Select random publisher name drop down chain " + i, function(){
+       pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
+    });
+};
+
+exports.fillIntoPublisherNameOwnPercentFieldChainISpecificValue = function(i, percent){
+    it("Fill into the publisher name own percent field specific value chain " + i, function(){
+       pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, percent);
+    });
+};
+
+exports.fillIntoPublisherNameCollectPercentFieldChainISpecificValue = function(i, percent){
+    it("Fill into the publisher name collect percent field specific value chain " + i, function(){
+        pages.createDealScope.fillPublisherNameCollectPercentFieldChainISpecificValue(i, percent);
+    });
+};
+
+exports.fillIntoPublisherNameAMCollectPercentChainISpecificValue = function(i, percent){
+    it("Fill into the publisher name AM collect percent field specific value chain " + i, function(){
+        pages.createDealScope.fillPublisherNameAMCollectPercentChainISpecificValue(i, percent);
     });
 };
 
@@ -610,6 +657,12 @@ exports.nonCtrlCreatorShare = (function () {
     return nccs;
 })();
 
+exports.fillSpecificValuePublisherNameFieldChainI = function (i, publisherRole) {
+    it("Fill into publisher role field chain " + i + " specific value ", function(){
+        pages.createDealScope.fillPublisherNameFieldChainISpecificValue(i, publisherRole);
+    });
+};
+
 exports.itAddPublisherShare = function () {
     describe("Add publisher share set", function () {
         var nccs = exports.nonCtrlCreatorShare;
@@ -623,6 +676,18 @@ exports.itAddPublisherShare = function () {
         steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.createDealScope.fillIntoFirstPublisherNameAMField("53026414");
         steps.createDealScope.selectSpecificPublisherNameDropDown();
+        steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
+    });
+};
+
+exports.itAddPublisherShareSpecificValues = function (publisherShare, publisherName) {
+    describe("Add publisher share set specific value", function () {
+
+        steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+        steps.createDealScope.clickOnAddPublisherShareSet();
+        steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+        steps.createDealScope.fillIntoFirstPublisherNameAMField(publisherShare);
+        steps.createDealScope.selectSpecificPublisherNameDropDownValue(publisherName);
         steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
     });
 };
