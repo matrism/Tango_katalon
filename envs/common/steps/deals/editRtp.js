@@ -62,6 +62,11 @@ exports.editDeleteRtpRetentionFromAcquisitionForm = function () {
     });
 };
 
+exports.editConfirmDeleteRtpRetentionFromAcquisitionForm = function () {
+    it('Confirm delete the rtp retention from acquisition form', function () {
+        pages.editDealRtp.editConfirmDeleteTheRtpRetentionFromAcquisitionForm();
+    });
+};
 
 exports.editFillRetentionDescriptionFromAcquisition = function (description) {
     it("Edit fill into the retention description field from acquisition ", function () {

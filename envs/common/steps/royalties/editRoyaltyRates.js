@@ -209,7 +209,7 @@ exports.cancelTheRateSet = function () {
 };
 
 exports.confirmCancelTheRateSet = function () {
-    it('Cancel current Rate Set', function () {
+    it('Confirm Cancel current Rate Set', function () {
         pages.editRoyaltyRates.clickConfirmCancelButtonForRRSet();
         pages.editRoyaltyRates.waitForAjax();
     });
@@ -230,7 +230,7 @@ exports.deleteTheRateSet = function () {
 };
 
 exports.confirmDeleteTheRateSet = function () {
-    it('Delete current Rate Set', function () {
+    it('Confirm Delete current Rate Set', function () {
         pages.editRoyaltyRates.clickConfirmDeleteButtonForRRSet();
         pages.editRoyaltyRates.waitForAjax();
     });
