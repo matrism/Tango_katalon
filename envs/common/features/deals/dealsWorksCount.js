@@ -53,7 +53,7 @@ exports.feature = [
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
             steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
-            steps.createDealScope.selectRandomPublisherNameDropDown();
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
