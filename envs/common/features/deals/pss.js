@@ -156,6 +156,7 @@ exports.feature = [
             steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
+            steps.editDealScope.editConfirmModalDialogDirtyCheck();
         }
     },
     {

@@ -732,9 +732,6 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editDeletePublisherShareSet));
                 pages.editDealScope.elems.editDeletePublisherShareSet.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.confirmDeletePssModalDialog));
-                browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.confirmDeletePssModalDialog));
-                pages.editDealScope.elems.confirmDeletePssModalDialog.click();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.confirmDeletePssModalDialog));
             },
 
             editClickOnCopyScopeOption: function () {

@@ -161,6 +161,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
+            steps.editDealScope.editConfirmModalDialogDirtyCheck();
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINoPss(1);
@@ -338,6 +339,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
+            steps.editDealScope.editConfirmModalDialogDirtyCheck();
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINoPss(1);
