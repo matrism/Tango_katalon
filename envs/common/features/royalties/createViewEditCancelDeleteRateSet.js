@@ -40,6 +40,7 @@ exports.feature = [
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.editRoyaltyRates.deleteTheRateSet();
+            steps.editRoyaltyRates.confirmDeleteTheRateSet();
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -90,6 +91,7 @@ exports.feature = [
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.editRoyaltyRates.deleteTheRateSet();
+            steps.editRoyaltyRates.confirmDeleteTheRateSet();
         }
     },
 
@@ -133,7 +135,7 @@ exports.feature = [
             steps.editRoyaltyRates.clickOnCancelButtonRateSet();
             steps.editRoyaltyRates.cancelToTheModalDialog();
             //click on delete button
-            steps.editRoyaltyRates.deleteRateSet();
+            steps.editRoyaltyRates.deleteTheRateSet();
             steps.editRoyaltyRates.cancelToTheModalDialog();
 
             //save the rate set in edit mode
