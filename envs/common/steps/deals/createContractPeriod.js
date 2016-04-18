@@ -915,7 +915,6 @@ exports.itAddIncompleteMdrcContractPeriod = function () {
 
 exports.itAddDeemedCompleteMdrcContractPeriod = function () {
     describe("Add deemed complete MDRC on  contract period screen", function () {
-        steps.base.scrollIntoView(pages.createDealContractPeriod.elems.addMdrcLink);
         steps.createDealContractPeriod.clickOnAddMdrc();
         steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.deemedCompleteMdrc);
         steps.createDealContractPeriod.checkIncompleteMdrcOptionIsSelected();

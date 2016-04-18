@@ -163,7 +163,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnAddMdrcLink: function () {
-            pages.createDealContractPeriod.elems.addMdrcLink.click();
+            var el = pages.createDealContractPeriod.elems.addMdrcLink;
+            asAlways(el, 'scrollIntoView', 'click');
             browser.sleep(1000);
         },
 
