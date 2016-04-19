@@ -1123,9 +1123,10 @@ exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function(mor
     );
 };
 exports.confirmComponentWorkDeletion = function() {
+    var el = exports.confirmComponentWorkDeletionButton();
+    browser.wait(EC.visibilityOf(el));
     pages.base.waitForModal();
-
-    return exports.confirmComponentWorkDeletionButton().click();
+    return el.click();
 };
 exports.selectRandomCreatorSuggestion = function() {
     return $$(".typeahead-result").then(function(suggestions) {
