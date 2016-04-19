@@ -66,19 +66,17 @@ exports.waitForDealToBeSaved = function () {
 
 exports.returnDealNumber = function () {
     it("Return deal number ", function () {
-        pages.deal.elems.dealBriefNumber.getText().
-            then(function (promise) {
-                console.log("Deal number is " + promise);
-            });
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Deal number is " + promise);
+        });
     });
 };
 
 exports.printDealNumber = function () {
     it("Return deal number ", function () {
-        pages.deal.elems.dealBriefNumber.getText().
-            then(function (promise) {
-                console.log("Deal number is " + promise);
-            });
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Deal number is " + promise);
+        });
     });
 };
 
@@ -244,6 +242,16 @@ exports.checkFinderDealsHeaderTitlePresent = function () {
         expect(pages.deal.elems.finderDealsHeaderLink.isDisplayed()).toBeTruthy();
     });
 };
+
+exports.checkGrowlMessageDisplayedAfterScopeEdited = function (message) {
+    it("Check that the success message after saving in the top of the screen is ok ", function () {
+        browser.driver.findElement(By.css("div.growl-item.ng-scope.growl-item-success p")).getText().then(function (promise) {
+            console.log("The success message after saving in the top of the screen is " + promise);
+            expect(promise).toEqual(message);
+        });
+    });
+};
+//div.growl-item.ng-scope.growl-item-success
 
 addBasicStep(
     exports, pages.deal, 'Validate Society Agreement Numbers link presence'

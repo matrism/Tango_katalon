@@ -94,7 +94,7 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
         pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
-            pages.base.focusOnTheNewOpenedTab(0);
+            pages.base.focusOnTheNewOpenedTab(i);
             pages.deal.printTheDealNumber();
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
@@ -104,3 +104,5 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
         });
     });
 };
+
+

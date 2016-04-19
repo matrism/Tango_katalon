@@ -1035,3 +1035,20 @@ exports.saveChangesSocietyAgreementNumberForm = function () {
 };
 
 
+exports.clickOnWorkLinkFromScopeNumberI = function (i) {
+    it("Click on work link from scope number  " + i, function () {
+        pages.editDealScope.clickOnTheWorkLinkFromScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkWorksCountOnScopeNumberI = function(i,count){
+  it("Check that the works count on scope number " + i + " is equal to " + j, function(){
+     browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)'] span")).getText().
+     then(function (promise) {
+         console.log("Works count on scope is  : " + promise);
+         expect(promise).toEqual(count);
+     });
+  });
+};
+

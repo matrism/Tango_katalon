@@ -1059,7 +1059,14 @@ if (pages.editDealScope === undefined) {
                 //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(3) a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
 
                 //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 100000);
-            }
+            },
+
+        clickOnTheWorkLinkFromScopeNumberI: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']")));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))));
+            browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))).perform();
+            browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))).perform();
+        }
 
         }
     )

@@ -1428,6 +1428,21 @@ exports.validateLastUpdateDate = function(value) {
     });
 };
 
+exports.goBackToMainPageFromWork = function(){
+    it("Go to the main page from work ", function(){
+       pages.work.goBackToTheMainPageFromWork();
+    });
+};
+
+exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
+    it("Check that the error message for work conflicts is ok ", function () {
+        browser.driver.findElement(By.css("p[data-ng-if='hasDealConflicts()'] span")).getText().then(function (promise) {
+            console.log("The error message for work conflicts is " + promise);
+            expect(promise).toEqual(message);
+        });
+    });
+};
+
 pageStep([
     'Wait For Status to be Displayed',
     'Click On Last Update Date',

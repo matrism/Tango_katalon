@@ -28,8 +28,8 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(1);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
             steps.deal.itContinueToNextPage();
-            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-            steps.createDealContractPeriod.fillEndTargetMonths();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
+            steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
             steps.createDealScope.addScopeTypeAndTerritory("Administration", "Europe");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
@@ -39,7 +39,6 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("70");
-
 
             //steps.createDealScope.clickAddChainLink();
             //steps.createDealScope.fillSpecificValuePublisherNameFieldChainI(2, "wcm publisher 1");
@@ -76,7 +75,20 @@ exports.feature = [
             steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDelivery(0);
 
             steps.base.focusOnNewOpenedTab(1);
+            steps.deal.refreshThePage();
+            steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+            steps.work.goBackToMainPageFromWork();
 
+            steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editIntoFirstPublisherNameOwnFieldSpecificValue("71");
+            steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("71");
+            steps.editDealScope.editSaveThePublisherShareSet();
+            steps.deal.checkGrowlMessageDisplayedAfterScopeEdited("Delivered Works are being updated. Please check Deal later today for Delivery conflicts.");
+
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+            steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
         }
     }
 ];
