@@ -86,6 +86,18 @@ exports.validateContributionScopeName = function (i, name) {
     });
 };
 
+exports.updateScopeDelivery = function () {
+    it("Click on update scope delivery button ", function () {
+        pages.scopeDelivery.updateTheScopeDelivery();
+    });
+};
+
+exports.clickOnRemoveScopeDelivery = function(){
+  it("Click on remove button to remove the scope delivery ", function(){
+      pages.scopeDelivery.clickOnTheRemoveScopeDelivery();
+  });
+};
+
 addBasicStep(exports, pages.scopeDelivery, 'Expect validation message');
 
 

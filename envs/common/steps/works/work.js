@@ -1443,6 +1443,45 @@ exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
     });
 };
 
+exports.checkDefaultFilterContractPeriodForWorkLog = function () {
+    it("Check the default filters for work log contract period ", function () {
+        browser.driver.findElement(By.css("div[data-tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow span")).getText().then(function (promise) {
+            console.log("The default filters for work log contract period " + promise);
+            expect(promise).toEqual("Contract Period 1");
+        });
+    });
+};
+
+exports.checkDefaultFilterScopeForWorkLog = function () {
+    it("Check the default filters for work log scope ", function () {
+        browser.driver.findElement(By.css("div[data-tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow span")).getText().then(function (promise) {
+            console.log("The default filters for work log scope " + promise);
+            expect(promise).toEqual("Scope 1");
+        });
+    });
+};
+
+exports.checkDefaultFilterAllWorksForWorkLog = function () {
+    it("Check the default filters for work log all/conflict works is all works ", function () {
+        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)")).getAttribute("class")
+            .then(function (promise) {
+            console.log("The default filters for work log all works is default " + promise);
+            expect(promise).toContain("active");
+        });
+    });
+};
+
+exports.checkDefaultFilterConflictWorksForWorkLog = function () {
+    it("Check the default filters for work log all/conflict works is all works ", function () {
+        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
+            .then(function (promise) {
+                console.log("The default filters for work log conflict works is not default " + promise);
+                expect(promise).not.toContain("active");
+            });
+    });
+};
+
+
 pageStep([
     'Wait For Status to be Displayed',
     'Click On Last Update Date',

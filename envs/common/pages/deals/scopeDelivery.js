@@ -10,12 +10,32 @@ exports.deliverWorkButton = function () {
     ));
 };
 
+exports.updateScopeDeliveryButton = function(){
+    return element(by.cssContainingText(
+        'button', 'Update Scope Delivery'
+    ));
+};
+
+exports.removeScopeDeliveryButton = function(){
+    return element(by.cssContainingText(
+        'span', 'Remove'
+    ));
+};
+
 exports.scopeDeliveryTabElement = function () {
     return element(by.css("ul.nav.nav-tabs.tg-sticky-header.m-is-sticky li.ng-scope:nth-child(3) a"))
 };
 
 exports.deliverWork = function () {
     return exports.deliverWorkButton().click();
+};
+
+exports.updateTheScopeDelivery = function(){
+    return exports.updateScopeDeliveryButton().click();
+};
+
+exports.clickOnTheRemoveScopeDelivery = function(){
+  return exports.removeScopeDeliveryButton().click();
 };
 
 exports.dealSearchForAllContributionsInput = function () {
