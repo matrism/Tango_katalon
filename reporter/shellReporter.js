@@ -48,18 +48,20 @@ exports.jasmineStarted = (info) => {
     log('Testing started with', info.totalSpecsDefined, 'steps to run');
 };
 
-let suiteLv = 0,
+let suiteStack = [],
 
     iNextFeature = 0,
     iNextScenario = 0;
 
 exports.suiteStarted = (suite) => {
+    suiteStack.push(suite);
+
     suite.startTime = Date.now();
 
     let prefix = {
-        0: 'Feature',
-        1: 'Scenario'
-    }[suiteLv++] || 'Block';
+        1: 'Feature',
+        2: 'Scenario'
+    }[suiteStack.length] || 'Block';
 
     suite.type = prefix.toLowerCase();
 
@@ -100,7 +102,9 @@ exports.specStarted = (spec) => {
 };
 
 exports.specDone = (spec) => {
-    spec.failedExpectations.forEach((failure) => {
+    let failures = spec.failedExpectations;
+
+    failures.forEach((failure) => {
         console.log(failure.message);
         console.log(failure.stack);
     });
@@ -111,6 +115,17 @@ exports.specDone = (spec) => {
         'End step:', spec.status, eventDateTimeString(),
         '(took', timeTakenSince(spec.startTime) + ')'
     );
+
+    if(failures.length > 0) {
+        let criticalStep = suiteStack.some((suite) => {
+            return suite.obj && suite.obj.enableCriticalSteps;
+        });
+
+        if(criticalStep) {
+            log('Critical step failure - stop');
+            process.exit(1);
+        }
+    }
 };
 
 exports.suiteDone = (suite) => {
@@ -127,7 +142,7 @@ exports.suiteDone = (suite) => {
         timeTakenSince(suite.startTime) + ')'
     );
 
-    --suiteLv;
+    suiteStack.pop();
 };
 
 exports.jasmineDone = () => {
