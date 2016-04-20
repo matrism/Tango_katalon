@@ -22,21 +22,6 @@ pageStep([
     'Cancel artist search',
     'Enter album code',
     'Enter duration',
-
-    ['Release Details', [
-        'Wait for territories selector to be ready',
-        'Edit territories',
-        'Enter territory search terms',
-        'Select territory search result by index',
-        'Enter release date',
-        'Select configuration',
-        'Enter label search terms',
-        'Create entered label',
-        'Select label search result by index',
-        'Enter catalogue number',
-        'Enter license code'
-    ]],
-
     'Validate Save Button State',
     'Save'
 ]);
@@ -63,6 +48,24 @@ exports.recordings = (function() {
     return exports;
 })();
 
+exports.releaseDetails = (function() {
+    var exports = {},
+        ard = steps.album.releaseDetails;
+
+    exports.waitForTerritoriesSelectorToBeReady = ard.waitForTerritoriesSelectorToBeReady;
+    exports.editTerritories = ard.editTerritories;
+    exports.enterTerritorySearchTerms = ard.enterTerritorySearchTerms;
+    exports.selectTerritorySearchResultByIndex = ard.selectTerritorySearchResultByIndex;
+    exports.enterReleaseDate = ard.enterReleaseDate;
+    exports.selectConfiguration = ard.selectConfiguration;
+    exports.enterLabelSearchTerms = ard.enterLabelSearchTerms;
+    exports.createEnteredLabel = ard.createEnteredLabel;
+    exports.selectLabelSearchResultByIndex = ard.selectLabelSearchResultByIndex;
+    exports.enterCatalogueNumber = ard.enterCatalogueNumber;
+    exports.enterLicenseCode = ard.enterLicenseCode;
+
+    return exports;
+})();
 
 exports.findAlbumUuid = function() {
     it('Find album UUID', function() {

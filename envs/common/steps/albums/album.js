@@ -64,6 +64,19 @@ pageStep([
         'Validate label name',
         'Validate catalogue number',
         'Validate license code',
+        'Edit',
+        'Save',
+        'Wait for territories selector to be ready',
+        'Edit territories',
+        'Enter territory search terms',
+        'Select territory search result by index',
+        'Enter release date',
+        'Select configuration',
+        'Enter label search terms',
+        'Create entered label',
+        'Select label search result by index',
+        'Enter catalogue number',
+        'Enter license code'
     ]],
 ]);
 

@@ -510,14 +510,14 @@ exports.goToTab = function(value) {
 exports.releaseDetails = (function() {
     var exports = {};
 
-    exports.rows = function() {
+    exports.viewRows = function() {
         return element.all(by.repeater(
             'albumRelease in modularEditModels.model.albumReleases'
         ));
     };
 
     exports.territoryBindings = function(i) {
-        return exports.rows().get(i).all(by.binding(
+        return exports.viewRows().get(i).all(by.binding(
             ' territory.title '
         ));
     };
@@ -537,7 +537,7 @@ exports.releaseDetails = (function() {
     };
 
     exports.releaseDateBinding = function(i) {
-        return exports.rows().get(i).element(by.binding(
+        return exports.viewRows().get(i).element(by.binding(
             ' albumRelease.release_date '
         ));
     };
@@ -553,7 +553,7 @@ exports.releaseDetails = (function() {
     };
 
     exports.configurationBinding = function(i) {
-        return exports.rows().get(i).element(by.binding(
+        return exports.viewRows().get(i).element(by.binding(
             ' albumRelease.configuration '
         ));
     };
@@ -569,7 +569,7 @@ exports.releaseDetails = (function() {
     };
 
     exports.labelNameBinding = function(i) {
-        return exports.rows().get(i).element(by.binding(
+        return exports.viewRows().get(i).element(by.binding(
             ' albumRelease.label.name '
         ));
     };
@@ -585,7 +585,7 @@ exports.releaseDetails = (function() {
     };
 
     exports.catalogueNumberBinding = function(i) {
-        return exports.rows().get(i).element(by.binding(
+        return exports.viewRows().get(i).element(by.binding(
             ' albumRelease.catalog_number '
         ));
     };
@@ -601,7 +601,7 @@ exports.releaseDetails = (function() {
     };
 
     exports.licenseCodeBinding = function(i) {
-        return exports.rows().get(i).element(by.binding(
+        return exports.viewRows().get(i).element(by.binding(
             ' albumRelease.license_code '
         ));
     };
@@ -614,6 +614,173 @@ exports.releaseDetails = (function() {
 
     exports.validateLicenseCode = function(i, value) {
         expect(exports.licenseCode(i)).toBe(value);
+    };
+
+    exports.editor = function () {
+        return modularEdit.byId('albumReleases');
+    };
+
+    exports.save = function () {
+        exports.editor().save();
+    };
+
+    exports.edit = function () {
+        exports.editor().edit();
+    };
+
+    exports.rows = function() {
+        return $$('[data-ng-repeat^="albumRelease in"]');
+    };
+
+    exports.territoriesSelector = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.territory_code'
+        ));
+    };
+
+    exports.territoriesSelectorGlobeButton = function(i) {
+        return exports.territoriesSelector(i).$('.tg-territory__globe-button');
+    };
+
+    exports.waitForTerritoriesSelectorToBeReady = function(i) {
+        var element = exports.territoriesSelectorGlobeButton(i);
+
+        pages.base.scrollIntoView(element);
+
+        return browser.wait(function() {
+            return pph.matchesCssSelector(
+                element, ':not(.tg-territory__loading-button)'
+            );
+        });
+    };
+
+    exports.editTerritories = function(i) {
+        var element = exports.territoriesSelector(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.territorySearchTermsInput = function(i) {
+        return exports.territoriesSelector(i).element(by.model('$term'));
+    };
+
+    exports.enterTerritorySearchTerms = function(i, value) {
+        var element = exports.territorySearchTermsInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.territorySearchResults = function() {
+        var elements = $$('.tg-typeahead__suggestions-group-item');
+        browser.wait(ExpectedConditions.visibilityOfAny(elements));
+        return elements;
+    };
+
+    exports.selectTerritorySearchResultByIndex = function(i) {
+        var element = exports.territorySearchResults().get(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.releaseDateInput = function(i) {
+        return exports.rows().get(i).element(by.model('date'));
+    };
+
+    exports.enterReleaseDate = function(i, value) {
+        var element = exports.releaseDateInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.configurationDropdown = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.configuration'
+        ));
+    };
+
+    exports.selectConfiguration = function(i, value) {
+        var element = exports.configurationDropdown(i);
+
+        pages.base.scrollIntoView(element);
+
+        return pages.base.selectDropdownOption(element, value, {
+            dropdownType: 'tg',
+        });
+    };
+
+    exports.labelTypeahead = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.label'
+        ));
+    };
+
+    exports.labelSearchTermsInput = function(i) {
+        return exports.labelTypeahead(i).element(by.model('$term'));
+    };
+
+    exports.enterLabelSearchTerms = function(i, value) {
+        var element = exports.labelSearchTermsInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.labelSearchResultsContainer = function() {
+        var element = $('.tg-typeahead__suggestions');
+        browser.wait(ExpectedConditions.visibilityOf(element));
+        return element;
+    };
+
+    exports.createEnteredLabelOption = function() {
+        return exports.labelSearchResultsContainer().element(by.cssContainingText(
+            'a', 'Create New Label'
+        ));
+    };
+
+    exports.createEnteredLabel = function() {
+        var element = exports.createEnteredLabelOption();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.labelSearchResults = function() {
+        var elements = $$('.tg-typeahead__suggestions-group-item');
+        browser.wait(ExpectedConditions.visibilityOfAny(elements));
+        return elements;
+    };
+
+    exports.selectLabelSearchResultByIndex = function(i) {
+        var element = exports.labelSearchResults().get(i);
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    exports.catalogueNumberInput = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.catalog_number'
+        ));
+    };
+
+    exports.enterCatalogueNumber = function(i, value) {
+        var element = exports.catalogueNumberInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
+    };
+
+    exports.licenseCodeInput = function(i) {
+        return exports.rows().get(i).element(by.model(
+            'albumRelease.license_code'
+        ));
+    };
+
+    exports.enterLicenseCode = function(i, value) {
+        var element = exports.licenseCodeInput(i);
+        pages.base.scrollIntoView(element);
+        element.clear();
+        return element.sendKeys(value);
     };
 
     return exports;

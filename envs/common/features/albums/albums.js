@@ -182,7 +182,7 @@ exports.feature = [
                 ar.validateWorkIdUsingWorkSlot(i, 'mainWork');
             });
 
-            steps.album.goToTab('Release Details');
+            a.goToTab('Release Details');
 
             ard.validateTerritories(0, ['United States']);
             ard.validateReleaseDate(0, moment().format('YYYY-MM-DD'));
@@ -316,28 +316,52 @@ exports.feature = [
         steps: function () {
             var a = steps.album,
                 ar = a.recordings,
+                ah = a.header,
+                ard = a.releaseDetails,
                 i = 3;
 
             steps.base.useEntityDataSlot('album', 'commercialAlbum');
-            //hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
+           // hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             a.goToAlbumPage();
             //a.goToAlbumPage('b1e48ecd-0721-11e6-a3e5-6a003dc3dea3');
 
-
-            a.header.editAlbumTitle();
-            a.header.enterAlbumTitle(
+            ah.editAlbumTitle();
+            ah.enterAlbumTitle(
                 'TEST COMMERCIAL ALBUM EDIT ' + randomId('commercialAlbum')
             );
-            a.header.saveAlbumTitle();
-            a.header.editDuration();
-            a.header.enterDuration('002000');
-            a.header.saveDuration();
-            a.header.editAlbumCode();
-            a.header.enterAlbumCode(
+            ah.saveAlbumTitle();
+            ah.editDuration();
+            ah.enterDuration('002000');
+            ah.saveDuration();
+            ah.editAlbumCode();
+            ah.enterAlbumCode(
                 'TESTALBUMCODEEDIT' + randomId('commercialAlbum')
             );
-            a.header.saveAlbumCode();
+            ah.saveAlbumCode();
+
+            a.goToTab('Release Details');
+            ard.edit();
+
+            ard.waitForTerritoriesSelectorToBeReady(0);
+            ard.editTerritories(1);
+            ard.enterTerritorySearchTerms(1, 'Brazil');
+            ard.selectTerritorySearchResultByIndex(0);
+            ard.enterReleaseDate(1, moment().format('YYYY-MM-DD'));
+            ard.selectConfiguration(1, 'LP');
+            ard.enterLabelSearchTerms(
+                1, 'TEST LABEL 2' + randomId('commercialAlbumLabel')
+            );
+            ard.createEnteredLabel();
+            ard.enterCatalogueNumber(
+                1, randomId('commercialAlbumCatalogueNumber2').slice(0, 15)
+            );
+            ard.enterLicenseCode(
+                1, 'LICENSE2' + randomId('commercialAlbumLicenseCode')
+            );
+
+            ard.save();
+            a.goToTab('Recordings');
 
             ar.edit();
             ar.deleteTrack(0);
@@ -350,7 +374,7 @@ exports.feature = [
             ar.createEnteredRecording();
             ar.cancel();
             steps.base.dirtyCheckConfirmCancellation();
-            a.header.validateTrackCount(3);
+            ah.validateTrackCount(3);
             ar.edit();
             ar.deleteTrack(0);
             ar.deleteTrack(1);
@@ -393,14 +417,13 @@ exports.feature = [
             a.goToAlbumPage();
 
             ah.validateTitle(
-                'TEST COMMERCIAL ALBUM EDIT' + randomId('commercialAlbum')
+                'TEST COMMERCIAL ALBUM EDIT ' + randomId('commercialAlbum')
             );
             ah.validateDuration('00:20:00');
             ah.validateAlbumCode(
                 'TESTALBUMCODEEDIT' + randomId('commercialAlbum')
             );
-
-            ah.validateTrackCount(3);
+            ah.validateTrackCount(1);
 
             ar.validateTitle(
                 3, 'TEST RECORDING EDIT' + randomId(
@@ -412,6 +435,21 @@ exports.feature = [
             );
             ar.validateDuration(3, '00:04:00');
             ar.validateWorkIdUsingWorkSlot(3, 'mainWork');
+
+            a.goToTab('Release Details');
+
+            ard.validateTerritories(1, ['Brazil']);
+            ard.validateReleaseDate(1, moment().format('YYYY-MM-DD'));
+            ard.validateConfiguration(1, 'LP');
+            ard.validateLabelName(
+                1, 'TEST LABEL 2' + randomId('commercialAlbumLabel')
+            );
+            ard.validateCatalogueNumber(
+                1, randomId('commercialAlbumCatalogueNumber2').slice(0, 15)
+            );
+            ard.validateLicenseCode(
+                1, 'LICENSE2' + randomId('commercialAlbumLicenseCode')
+            );
         }
     },
     {
