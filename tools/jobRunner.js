@@ -213,7 +213,7 @@ let cp = require('child_process'),
         jobSilenceTimeout = 11 * 60 * 1000;
     }
 
-    env = env || '';
+    env = env || 'qa';
     appUrl = appUrl || '';
 
     branch = branch || 'unknown';
@@ -388,13 +388,12 @@ let cp = require('child_process'),
         return str.split(',');
     });
 
-    let paths = enumFeatures(...tagArrays).map((feature) => {
+    let paths = enumFeatures(env, ...tagArrays).map((feature) => {
         return feature.path;
     });
 
     log(
-        0, 'Target environment is', env || 'unknown',
-        '(' + (appUrl || 'unknown') + ')'
+        0, 'Target environment is', env, '(' + (appUrl || 'unknown') + ')'
     );
 
     log(0, 'Test code branch is', branch, '(' + commit + ')');
