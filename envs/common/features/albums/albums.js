@@ -470,8 +470,8 @@ exports.feature = [
             );
             mhs.selectResultByIndex(0);
 
-            ah.validateTitle(
-                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
             );
         }
     },
@@ -491,8 +491,8 @@ exports.feature = [
             mhs.enterTerms('TEST ARTIST ' + randomId('commercialAlbum'));
             mhs.selectResultByIndex(0);
 
-            ah.validateTitle(
-                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
             );
         }
     },
@@ -514,8 +514,8 @@ exports.feature = [
             );
             mhs.selectResultByIndex(0);
 
-            ah.validateTitle(
-                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
             );
         }
     },
@@ -534,8 +534,8 @@ exports.feature = [
             mhs.enterTerms('TEST LABEL ' + randomId('commercialAlbumLabel'));
             mhs.selectResultByIndex(0);
 
-            ah.validateTitle(
-                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
             );
         }
     },
@@ -559,8 +559,8 @@ exports.feature = [
             mhs.enterTerms('TEST ARTIST ' + randomId('commercialAlbum'));
             mhs.selectResultByIndex(0);
 
-            ah.validateTitle(
-                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
             );
         }
     },
@@ -586,8 +586,8 @@ exports.feature = [
             );
             mhs.selectResultByIndex(0);
 
-            ah.validateTitle(
-                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
             );
         }
     },
@@ -613,8 +613,8 @@ exports.feature = [
             );
             mhs.selectResultByIndex(0);
 
-            ah.validateTitle(
-                'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
+            ah.validateArtistName(
+                'TEST ARTIST ' + randomId('commercialAlbum')
             );
         }
     },
