@@ -101,6 +101,7 @@ exports.specStarted = (spec) => {
 
 exports.specDone = (spec) => {
     spec.failedExpectations.forEach((failure) => {
+        console.log(failure.message);
         console.log(failure.stack);
     });
 
@@ -114,8 +115,8 @@ exports.specDone = (spec) => {
 
 exports.suiteDone = (suite) => {
     suite.failedExpectations.forEach((failure) => {
-        console.log('Failed expectation:', failure.message);
-        console.log('Stack:', failure.stack);
+        console.log(failure.message);
+        console.log(failure.stack);
     });
 
     --indent;
