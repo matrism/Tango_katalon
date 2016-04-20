@@ -14,6 +14,15 @@ exports.goToAlbumPage = function(albumId) {
 pageStep([
     ['Header', [
         'Expect header to be visible',
+        'Edit Album Title',
+        'Edit Duration',
+        'Edit Album Code',
+        'Save Album Title',
+        'Save Duration',
+        'Save Album Code',
+        'Enter Album Title',
+        'Enter Duration',
+        'Enter Album Code',
         'Validate title',
         'Validate artist name',
         'Validate library name',

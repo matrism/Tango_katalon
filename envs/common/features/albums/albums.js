@@ -9,8 +9,7 @@ var leftPad = require('left-pad'),
 
 exports.commonFeatureTags = [
     'albums',
-    'albumsSanity',
-    'sanity'
+    'albumsRegression'
 ];
 
 exports.beforeFeature = function() {
@@ -21,7 +20,8 @@ exports.feature = [
     {
         name: 'Create person to use as creators',
         tags: [
-            'albumsSanityCreatePersons',
+            'albumsCreatePersons',
+            'albumsSanity'
         ],
         steps: function () {
             var p = steps.person,
@@ -43,7 +43,8 @@ exports.feature = [
     {
         name: 'Create work',
         tags: [
-            'albumsSanityCreateWork',
+            'albumsCreateWork',
+            'albumsSanity'
         ],
         steps: function () {
             var nw = steps.newWork;
@@ -66,7 +67,8 @@ exports.feature = [
     {
         name: 'Create commercial album',
         tags: [
-            'albumsSanityCreateCommercialAlbum',
+            'createCommercialAlbum',
+            'albumsSanity'
         ],
         steps: function () {
             var na = steps.newAlbum,
@@ -140,7 +142,8 @@ exports.feature = [
     {
         name: 'Validate created commercial album',
         tags: [
-            'albumsSanityValidateCommercialAlbum',
+            'validateCommercialAlbum',
+            'albumsSanity'
         ],
         steps: function () {
             var a = steps.album,
@@ -199,6 +202,7 @@ exports.feature = [
         name: 'Validate Recordings on Work page',
         tags: [
             'validateRecordingsOnWork',
+            'albumsSanity'
         ],
         steps: function () {
             var w = steps.work,
@@ -227,13 +231,6 @@ exports.feature = [
                     return 'TEST RECORDING ' + randomId('commercialAlbumRecording' + i);
                 })
             );
-            /*
-            wr.validateRecordingNames(
-                _.times(3, function (i) {
-                    return 'TEST RECORDING ' + randomId('libraryAlbumRecording' + i);
-                })
-            );
-            */
             wr.validateArtistNames(
                 _.times(3, function (i) {
                     return 'TEST ARTIST ' + randomId('commercialAlbum');
@@ -249,8 +246,8 @@ exports.feature = [
     {
         name: 'Create library album',
         tags: [
-            'albumsSanityCreateLibraryAlbum',
-            'albumsSanityValidateLibraryAlbum',
+            'createLibraryAlbum',
+            'albumsSanity'
         ],
         steps: function () {
             var na = steps.newAlbum,
@@ -289,7 +286,8 @@ exports.feature = [
     {
         name: 'Validate created library album',
         tags: [
-            'albumsSanityValidateLibraryAlbum',
+            'validateLibraryAlbum',
+            'albumsSanity'
         ],
         steps: function () {
             var a = steps.album,
@@ -313,7 +311,7 @@ exports.feature = [
     {
         name: 'Edit created commercial album',
         tags: [
-            'albumsSanityEditCommercialAlbum',
+            'editCommercialAlbum'
         ],
         steps: function () {
             var a = steps.album,
@@ -321,10 +319,25 @@ exports.feature = [
                 i = 3;
 
             steps.base.useEntityDataSlot('album', 'commercialAlbum');
-            hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
+            //hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             a.goToAlbumPage();
-            //a.goToAlbumPage('5e93516a-fd97-11e5-b174-be909e760f77');
+            //a.goToAlbumPage('b1e48ecd-0721-11e6-a3e5-6a003dc3dea3');
+
+
+            a.header.editAlbumTitle();
+            a.header.enterAlbumTitle(
+                'TEST COMMERCIAL ALBUM EDIT ' + randomId('commercialAlbum')
+            );
+            a.header.saveAlbumTitle();
+            a.header.editDuration();
+            a.header.enterDuration('002000');
+            a.header.saveDuration();
+            a.header.editAlbumCode();
+            a.header.enterAlbumCode(
+                'TESTALBUMCODEEDIT' + randomId('commercialAlbum')
+            );
+            a.header.saveAlbumCode();
 
             ar.edit();
             ar.deleteTrack(0);
@@ -362,6 +375,33 @@ exports.feature = [
             ar.validateSaveButtonState('enabled');
             ar.save();
 
+        }
+    },
+    {
+        name: 'Validate edited commercial album',
+        tags: [
+            'validateEditedCommercialAlbum'
+        ],
+        steps: function () {
+            var a = steps.album,
+                ah = a.header,
+                ar = a.recordings,
+                ard = a.releaseDetails;
+
+            steps.base.useEntityDataSlot('album', 'commercialAlbum');
+
+            a.goToAlbumPage();
+
+            ah.validateTitle(
+                'TEST COMMERCIAL ALBUM EDIT' + randomId('commercialAlbum')
+            );
+            ah.validateDuration('00:20:00');
+            ah.validateAlbumCode(
+                'TESTALBUMCODEEDIT' + randomId('commercialAlbum')
+            );
+
+            ah.validateTrackCount(3);
+
             ar.validateTitle(
                 3, 'TEST RECORDING EDIT' + randomId(
                     'commercialAlbumRecordingEdit'
@@ -372,15 +412,14 @@ exports.feature = [
             );
             ar.validateDuration(3, '00:04:00');
             ar.validateWorkIdUsingWorkSlot(3, 'mainWork');
-
-            a.header.validateTrackCount(2);
         }
     },
     {
         name: 'Search for previously created commercial album by title',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByTitle',
+            'searchForAlbums',
+            'searchForAlbumsByTitle',
+            'albumsSanity'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -401,8 +440,9 @@ exports.feature = [
     {
         name: 'Search for previously created commercial album by artist',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByArtist',
+            'searchForAlbums',
+            'searchForAlbumsByArtist',
+            'albumsSanity'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -421,8 +461,9 @@ exports.feature = [
     {
         name: 'Search for previously created commercial album by catalog',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByCatalog',
+            'searchForAlbums',
+            'searchForAlbumsByCatalog',
+            'albumsSanity'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -443,8 +484,8 @@ exports.feature = [
     {
         name: 'Search for previously created commercial album by label',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByLabel',
+            'searchForAlbums',
+            'searchForAlbumsByLabel'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -463,8 +504,8 @@ exports.feature = [
     {
         name: 'Search for previously created commercial album by title + artist',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByTitlePlusArtist',
+            'searchForAlbums',
+            'searchForAlbumsByTitlePlusArtist'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -488,8 +529,8 @@ exports.feature = [
     {
         name: 'Search for previously created library album by title + catalog',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByLibraryPlusCatalog',
+            'searchForAlbums',
+            'searchForAlbumsByTitlePlusCatalog'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -515,8 +556,8 @@ exports.feature = [
     {
         name: 'Search for previously created library album by title + label',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByLibraryPlusLabel',
+            'searchForAlbums',
+            'searchForAlbumsByTitlePlusLabel'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -542,8 +583,8 @@ exports.feature = [
     {
         name: 'Search for previously created library album by library + title',
         tags: [
-            'albumsSanitySearchForAlbums',
-            'albumsSanitySearchForAlbumsByLibraryPlusTitle',
+            'searchForAlbums',
+            'searchForAlbumsByLibraryPlusTitle'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,

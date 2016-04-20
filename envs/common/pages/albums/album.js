@@ -154,6 +154,60 @@ exports.header = (function() {
         expect(exports.albumCode()).toBe(value);
     };
 
+    exports.albumTitleEditor = function () {
+        return modularEdit.byId('albumTitle');
+    };
+
+    exports.durationEditor = function () {
+        return modularEdit.byId('albumDuration');
+    };
+
+    exports.albumCodeEditor = function () {
+        return modularEdit.byId('albumCode');
+    };
+
+    exports.editAlbumTitle = function () {
+        exports.albumTitleEditor().edit();
+    };
+
+    exports.editDuration = function () {
+        exports.durationEditor().edit();
+    };
+
+    exports.editAlbumCode = function () {
+        exports.albumCodeEditor().edit();
+    };
+
+    exports.saveAlbumTitle = function () {
+        exports.albumTitleEditor().save();
+    };
+
+    exports.saveDuration = function () {
+        exports.durationEditor().save();
+    };
+
+    exports.saveAlbumCode = function () {
+        exports.albumCodeEditor().save();
+    };
+
+    exports.enterAlbumTitle = function (value) {
+        var el = exports.albumTitleEditor().$('input');
+        asAlways(el, 'scrollIntoView', 'clear');
+        el.sendKeys(value);
+    };
+
+    exports.enterDuration = function (value) {
+        var el = exports.durationEditor().$('input');
+        asAlways(el, 'scrollIntoView', 'clear');
+        el.sendKeys(value);
+    };
+
+    exports.enterAlbumCode = function (value) {
+        var el = exports.albumCodeEditor().$('input');
+        asAlways(el, 'scrollIntoView', 'clear');
+        el.sendKeys(value);
+    };
+
     return exports;
 })();
 
