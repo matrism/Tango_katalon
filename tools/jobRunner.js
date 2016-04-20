@@ -230,7 +230,11 @@ let cp = require('child_process'),
 }
 
 {
-    let copyFileSync = require('../tools/copyFileSync');
+    let mkdirp = require('mkdirp'),
+
+        copyFileSync = require('../tools/copyFileSync');
+
+    mkdirp.sync(conf.htmlReportPath);
 
     ['logParser.js', 'view.html'].forEach((fileName) => {
         copyFileSync(

@@ -4,8 +4,6 @@ set -e
 echo "Using node `node -v`"
 echo "Using `google-chrome --version`"
 
-mkdir -p reports/html
-
 # Dependency setup.
 npm install
 
