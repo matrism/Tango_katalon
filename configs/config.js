@@ -1,5 +1,8 @@
 'use strict';
-var configer = global.ftf.configer,
+
+let jobRunnerConfig = require('./jobRunnerConfig'),
+
+    configer = global.ftf.configer,
     cli = configer.getParamsFromCli(),
     tags = (function () {
         if(cli.tags === true) {
@@ -52,6 +55,7 @@ var defaultUserName = 'TangoTest1',
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'all',
             singleReport: cli['single-report'],
             noUnicode: cli['no-unicode'],
+            htmlReportPath: jobRunnerConfig.htmlReportPath,
             path_to_features: [],
             path_to_steps: [],
             path_to_pages: [],

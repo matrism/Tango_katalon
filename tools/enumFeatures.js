@@ -10,6 +10,9 @@ let path = require('path'),
     rootDir = path.normalize(__dirname + '/..');
 
 function tagMatches(a, b) {
+    a = a || [];
+    b = b || [];
+
     return a.some((a) => {
         return b.includes(a);
     });

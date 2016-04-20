@@ -70,6 +70,7 @@ fi
 cmd_line+=" $additional_protractor_options"
 
 # Report logging.
+# TODO: Fix me (bad path?)
 cmd_line+=" | tee reports/html/testing/report.txt"
 
 # Invocation

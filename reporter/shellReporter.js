@@ -10,9 +10,6 @@ let fs = require('fs'),
     indent = 0,
     latestStepNum = 0;
 
-// TODO: Move this somewhere appropriate.
-systemConfig.screenshotsPath = 'reports/html/testing';
-
 function log() {
     let indentStr = new Array(indent + 1).join('    ');
     console.log(indentStr + '[(+)]', ...arguments);
@@ -28,7 +25,7 @@ exports.jasmineStarted = (info) => {
 
         browser.takeScreenshot().then((png) => {
             let fName = systemConfig.streamId + '_' + currentStepNum + '.png',
-                fPath = systemConfig.screenshotsPath + '/' + fName;
+                fPath = systemConfig.htmlReportPath + '/' + fName;
 
             fs.writeFileSync(fPath, new Buffer(png, 'base64'));
 
@@ -37,7 +34,7 @@ exports.jasmineStarted = (info) => {
 
         return takeHtmlSnapshot().then((html) => {
             let fName = systemConfig.streamId + '_' + currentStepNum + '.html',
-                fPath = systemConfig.screenshotsPath + '/' + fName;
+                fPath = systemConfig.htmlReportPath + '/' + fName;
 
             fs.writeFileSync(fPath, html);
 

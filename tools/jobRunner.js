@@ -5,7 +5,9 @@ let cp = require('child_process'),
 
     kill = require('tree-kill'),
 
-    enumFeaturePaths = require('./enumFeaturePaths'),
+    conf = require('../configs/jobRunnerConfig'),
+
+    enumFeatures = require('./enumFeatures'),
 
     eventDateTimeString = require('../reporter/eventDateTimeString'),
     timeTakenSince = require('../reporter/timeTakenSince'),
@@ -228,6 +230,16 @@ let cp = require('child_process'),
 }
 
 {
+    let copyFileSync = require('../tools/copyFileSync');
+
+    ['logParser.js', 'view.html'].forEach((fileName) => {
+        copyFileSync(
+            __dirname + '/../reporter/' + fileName, conf.htmlReportPath
+        );
+    });
+}
+
+{
     let errorsFlag = false,
 
         activeJobs = 0,
@@ -372,7 +384,9 @@ let cp = require('child_process'),
         return str.split(',');
     });
 
-    let paths = enumFeaturePaths(...tagArrays);
+    let paths = enumFeatures(...tagArrays).map((feature) => {
+        return feature.path;
+    });
 
     log(
         0, 'Target environment is', env || 'unknown',
