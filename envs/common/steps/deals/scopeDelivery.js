@@ -92,9 +92,15 @@ exports.updateScopeDelivery = function () {
     });
 };
 
-exports.clickOnRemoveScopeDelivery = function(){
-  it("Click on remove button to remove the scope delivery ", function(){
-      pages.scopeDelivery.clickOnTheRemoveScopeDelivery();
+exports.clickOnRemoveScopeDelivery = function () {
+    it("Click on remove button to remove the scope delivery ", function () {
+        pages.scopeDelivery.clickOnTheRemoveScopeDelivery();
+    });
+};
+
+exports.checkErrorMessageScopeDeliveryConflict = function (message) {
+  it("Check the error message for scope delivery conflict ", function(){
+      pages.scopeDelivery.checkTheErrorMessageScopeDeliveryConflict();
   });
 };
 
@@ -117,4 +123,33 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
     });
 };
 
+exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithoutSave = function (i) {
+    it("Get deal number created in other tab and use it to work delivery ", function () {
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Contract brief number promise is " + promise);
+            pages.deal.printTheDealNumber();
+            pages.base.focusOnTheNewOpenedTab(i);
+            pages.deal.printTheDealNumber();
+            pages.scopeDelivery.searchDealsForContribution(0, promise);
+            pages.scopeDelivery.selectDealSearchResultByIndex(0);
+            pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
+        });
+    });
+};
+
+
+exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = function (i) {
+    it("Get deal number created in other tab and use it to work delivery ", function () {
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Contract brief number promise is " + promise);
+            pages.deal.printTheDealNumber();
+            pages.base.focusOnTheNewOpenedTab(i);
+            pages.deal.printTheDealNumber();
+            pages.scopeDelivery.searchDealsForContribution(0, promise);
+            pages.scopeDelivery.selectDealSearchResultByIndex(0);
+            pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
+            pages.scopeDelivery.save();
+        });
+    });
+};
 

@@ -100,13 +100,12 @@ exports.checkScopeNumberINameAndNotRates = function (i) {
 exports.validateShareScopesPopupDetailsContractPeriod1 = function () {
     it("Validate share scopes pop up details contract period 1 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 2");
-                expect(promise).toContain("Description 3");
-                expect(promise).toContain("Description 4");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 2");
+            expect(promise).toContain("Description 3");
+            expect(promise).toContain("Description 4");
+        });
     });
 };
 
@@ -114,13 +113,12 @@ exports.validateShareScopesPopupDetailsContractPeriod2 = function () {
     it("Validate share scopes pop up details contract period 2 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
 
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 1");
-                expect(promise).toContain("Description 3");
-                expect(promise).toContain("Description 4");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 1");
+            expect(promise).toContain("Description 3");
+            expect(promise).toContain("Description 4");
+        });
     });
 };
 
@@ -128,13 +126,12 @@ exports.validateShareScopesPopupDetailsContractPeriod3 = function () {
     it("Validate share scopes pop up details contract period 3 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
 
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 1");
-                expect(promise).toContain("Description 2");
-                expect(promise).toContain("Description 4");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 1");
+            expect(promise).toContain("Description 2");
+            expect(promise).toContain("Description 4");
+        });
     });
 };
 
@@ -142,13 +139,12 @@ exports.validateShareScopesPopupDetailsContractPeriod4 = function () {
     it("Validate share scopes pop up details contract period i ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
 
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 1");
-                expect(promise).toContain("Description 2");
-                expect(promise).toContain("Description 3");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 1");
+            expect(promise).toContain("Description 2");
+            expect(promise).toContain("Description 3");
+        });
     });
 };
 
@@ -371,23 +367,21 @@ exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
 exports.checkTheNumberOfScopesPerDeal = function (i) {
     it("Check that the number of scopes per deal it is equal with " + i, function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.numberOfScopesPerDeal));
-        pages.editDealScope.elems.numberOfScopesPerDeal.getText().
-            then(function (promise) {
-                console.log("Number of scopes per deal is  : " + promise);
-                expect(promise).toEqual(i);
-            });
+        pages.editDealScope.elems.numberOfScopesPerDeal.getText().then(function (promise) {
+            console.log("Number of scopes per deal is  : " + promise);
+            expect(promise).toEqual(i);
+        });
     });
 };
 
 exports.checkPayeesPresentInCopyScopeModal = function () {
     it("Check payees text present in copy scope modal ", function () {
         pages.base.scrollIntoView(pages.editDealScope.elems.payeesCopyScopeModal);
-        pages.editDealScope.elems.payeesCopyScopeModal.getText().
-            then(function (promise) {
-                console.log("Payees text in copy scope modal is  : " + promise);
-                expect(promise).toContain("Payees");
-                expect(promise).toContain("Will be copied");
-            });
+        pages.editDealScope.elems.payeesCopyScopeModal.getText().then(function (promise) {
+            console.log("Payees text in copy scope modal is  : " + promise);
+            expect(promise).toContain("Payees");
+            expect(promise).toContain("Will be copied");
+        });
     });
 };
 
@@ -460,22 +454,20 @@ exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss = function
 exports.checkSharePublisherShareSetIconPresent = function () {
     it("Check no share publisher share set icon present ", function () {
         pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
-        pages.editDealScope.elems.publisherSharesTitle.getText().
-            then(function (promise) {
-                console.log("Unshare text is : " + promise);
-                expect(promise).toContain("Unshare");
-            });
+        pages.editDealScope.elems.publisherSharesTitle.getText().then(function (promise) {
+            console.log("Unshare text is : " + promise);
+            expect(promise).toContain("Unshare");
+        });
     });
 };
 
 exports.checkNoSharePublisherShareSetIconPresent = function () {
     it("Check no share publisher share set icon present ", function () {
         pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
-        pages.editDealScope.elems.publisherSharesTitle.getText().
-            then(function (promise) {
-                console.log("Publisher share title text is : " + promise);
-                expect(promise).not.toContain("Unshare");
-            });
+        pages.editDealScope.elems.publisherSharesTitle.getText().then(function (promise) {
+            console.log("Publisher share title text is : " + promise);
+            expect(promise).not.toContain("Unshare");
+        });
     });
 };
 
@@ -619,12 +611,32 @@ exports.editClickOnYesSocietyAwardCreditPublisherShareSet = function () {
     });
 };
 
+exports.editDeleteExistingTerritoryFromScope = function () {
+    it("Edit delete the existing territory from scope ", function () {
+        pages.editDealScope.editDeleteTheExistingTerritoryFromScope();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editAddTheSpecificTerritoryByTypingToScope = function(territory){
+  it("Edit add specific territory by typing on scope ", function(){
+     pages.editDealScope.addTheSpecificTerritoryByTypingToScope(territory);
+  });
+};
+
 exports.editSpecificScopeType = function (contractType) {
     it("Add simple scope", function () {
         pages.editDealScope.selectContractTypeScope(contractType);
         pages.editDealScope.waitForAjax();
     });
 };
+
+exports.editSelectSpecificCountry = function(territory){
+  it("Edit select specific country ", function(){
+     pages.editDealScope.selectSpecificCountry(territory);
+  });
+};
+
 
 exports.editAddSpecificScopeTypeAndTerritory = function (contractType, territory) {
     it("Add simple scope", function () {
@@ -661,11 +673,10 @@ exports.editCheckUnshareScopeLinkIsDisabled = function () {
     it("Edit check unshare link is disabled on share scope", function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
-        pages.editDealScope.elems.editUnshareScopeLink.getAttribute("class").
-            then(function (promise) {
-                console.log("Unshare scope link class is : " + promise);
-                expect(promise).toContain("disabled");
-            });
+        pages.editDealScope.elems.editUnshareScopeLink.getAttribute("class").then(function (promise) {
+            console.log("Unshare scope link class is : " + promise);
+            expect(promise).toContain("disabled");
+        });
     });
 };
 
@@ -673,11 +684,10 @@ exports.editCheckCopyScopeLinkIsDisabled = function () {
     it("Edit check copy link is disabled on share scope", function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
-        pages.editDealScope.elems.editCopyScopeLink.getAttribute("class").
-            then(function (promise) {
-                console.log("Unshare scope link class is : " + promise);
-                expect(promise).toContain("disabled");
-            });
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("class").then(function (promise) {
+            console.log("Unshare scope link class is : " + promise);
+            expect(promise).toContain("disabled");
+        });
     });
 };
 
@@ -686,11 +696,10 @@ exports.editCheckCopyScopeDisabledDataTooltip = function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).perform();
-        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
-            then(function (promise) {
-                console.log("Copy scope disabled tooltip is : " + promise);
-                expect(promise).toEqual("Cannot Copy: Editing in progress.");
-            });
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").then(function (promise) {
+            console.log("Copy scope disabled tooltip is : " + promise);
+            expect(promise).toEqual("Cannot Copy: Editing in progress.");
+        });
     });
 };
 
@@ -708,11 +717,10 @@ exports.editCheckCopyScopeEnabledDataTooltip = function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).click();
-        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
-            then(function (promise) {
-                console.log("Copy scope enabled tooltip is : " + promise);
-                expect(promise).toEqual("Copy entirety of this Scope.");
-            });
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").then(function (promise) {
+            console.log("Copy scope enabled tooltip is : " + promise);
+            expect(promise).toEqual("Copy entirety of this Scope.");
+        });
     });
 };
 
@@ -1042,13 +1050,12 @@ exports.clickOnWorkLinkFromScopeNumberI = function (i) {
     });
 };
 
-exports.checkWorksCountOnScopeNumberI = function(i,count){
-  it("Check that the works count on scope number " + i + " is equal to " + count, function(){
-     browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)'] span")).getText().
-     then(function (promise) {
-         console.log("Works count on scope is  : " + promise);
-         expect(promise).toEqual(count);
-     });
-  });
+exports.checkWorksCountOnScopeNumberI = function (i, count) {
+    it("Check that the works count on scope number " + i + " is equal to " + count, function () {
+        browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)'] span")).getText().then(function (promise) {
+            console.log("Works count on scope is  : " + promise);
+            expect(promise).toEqual(count);
+        });
+    });
 };
 

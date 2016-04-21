@@ -367,7 +367,7 @@ exports.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () {
                         console.log("We are on the E case");
                         pages.createDealScope.fillInFirstPublisherNameField("test");
                         pages.createDealScope.selectRandomPublisherNameDropDown();
-                        pages.createDealScope.fillInFirstPublisherNameOwnPercent();
+                        pages.createDealScope.fillInFirstPublisherNameOwnPercentSpecificValue("30");
                         pages.createDealScope.fillInFirstPublisherNameCollectPercent();
                         break;
                     case "PA":
@@ -486,7 +486,7 @@ exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
                         console.log("We are on the E case");
                         pages.createDealScope.fillPublisherNameFieldChainI(i);
                         pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
-                        pages.createDealScope.fillPublisherNameOwnPercentFieldChainI(i);
+                        pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
                         pages.createDealScope.fillPublisherNameCollectPercentFieldChainI(i);
                         break;
                     case "PA":
@@ -733,12 +733,6 @@ exports.itAddPublisherShareWithMultipleThreeChains = function (i) {
         var nccs = exports.nonCtrlCreatorShare;
 
         steps.createDealScope.clickAddChainLink();
-        nccs.validateLabel(i - 1);
-        nccs.validateDefault(i - 1);
-        if (i == 2) {
-            nccs.click(i - 1);
-        }
-        nccs.validateHelpMessage(i - 1);
         steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
         steps.createDealScope.fillIntoPublisherNameAMFieldChainI(i);
         steps.createDealScope.selectSpecificPublisherNameDropDownChainI(i);

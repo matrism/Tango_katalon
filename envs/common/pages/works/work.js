@@ -1265,6 +1265,14 @@ exports.goBackToTheMainPageFromWork = function () {
     });
 };
 
+exports.clickOnTheWorkLinkFromDeliveryWorksPageNumberI = function (i) {
+    var element = browser.driver.findElement(By.css("ul.validate-work.ng-isolate-scope li.work-info.clearfix.ng-scope:nth-child(" + i + ") a.title.ng-binding"));
+    pages.base.scrollIntoView(element);
+    return element.click().then(function () {
+        pages.base.waitForAjax();
+    });
+};
+
 exports.recordingsTab = function () {
     return exports.tabSetContainer().element(
         by.cssContainingText('span', 'Recordings')

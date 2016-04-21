@@ -46,6 +46,20 @@ if (pages.createDealRtp === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions ng-scope"))));
         },
 
+        selectTheRandomScopeRtpAcquisitionNumberI: function (i) {
+            pages.createDealRtp.elems.scopeAcquisitionField.click();
+            pages.createDealRtp.elems.scopeAcquisitionInputField.sendKeys("Scope " + i);
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    options[0].click();
+                });
+            pages.createDealRtp.elems.applyScopeAcquisitionButton.click();
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions ng-scope"))));
+        },
+
+
         selectTheSpecificScopeNumberIRtpAcquisition: function (i) {
             var scope = "Scope " + i;
             var desiredOption;

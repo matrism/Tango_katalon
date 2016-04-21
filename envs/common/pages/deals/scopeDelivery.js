@@ -38,6 +38,14 @@ exports.clickOnTheRemoveScopeDelivery = function(){
   return exports.removeScopeDeliveryButton().click();
 };
 
+exports.checkTheErrorMessageScopeDeliveryConflict = function(){
+    browser.driver.findElement(By.css("div[data-ng-repeat='conflict in dealScope.conflicts']")).getText()
+        .then(function (promise) {
+            console.log("Error is  " + promise);
+            expect(promise).toContain(message);
+        });
+};
+
 exports.dealSearchForAllContributionsInput = function () {
     return $('[data-ng-if="modularEditModels.model.length > 1"]').element(
         by.model('$term')

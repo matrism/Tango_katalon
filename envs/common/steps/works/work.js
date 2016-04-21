@@ -21,7 +21,7 @@ exports.goToWorkPage = function (data, key) {
     });
 };
 
-exports.goToWorkPageById = function(workId) {
+exports.goToWorkPageById = function (workId) {
     it('Go to work page by ID (' + workId + ')', function () {
         workId = callResultOrValue(workId);
         pages.work.open(workId);
@@ -30,14 +30,14 @@ exports.goToWorkPageById = function(workId) {
 
 pageStep('Go to General tab');
 
-module.exports.goToScopeDeliveryTab = function() {
-    it('Go to Scope Delivery tab', function() {
+module.exports.goToScopeDeliveryTab = function () {
+    it('Go to Scope Delivery tab', function () {
         pages.work.goToScopeDeliveryTab();
     });
 };
 
-exports.goToRecordingsTab = function() {
-    it('Go to Recordings tab', function() {
+exports.goToRecordingsTab = function () {
+    it('Go to Recordings tab', function () {
         pages.work.goToRecordingsTab();
         browser.sleep(200);
         pages.base.waitForAjax();
@@ -61,6 +61,7 @@ module.exports.findCurrentlyOpenWorkId = function () {
 
     return deferred.promise;
 };
+
 exports.validateWorkId = function () {
     it('Validate work ID', function () {
         pages.work.validateWorkId(
@@ -159,9 +160,9 @@ module.exports.editCreators = function () {
     var el = pages.work.editCreatorsButton(),
         notDisabledCssSelector = ':not([disabled], .disabled)';
 
-    it ('Click edit creators button', function() {
-        browser.wait (
-            function() {
+    it('Click edit creators button', function () {
+        browser.wait(
+            function () {
                 return pph.matchesCssSelector(el, notDisabledCssSelector);
             }
         );
@@ -435,23 +436,23 @@ exports.expectShellWorkTitleToMatchEnteredOne = function (i) {
         pages.work.validateEnteredShellWorkTitle(i, shellWork.name);
     });
 };
-exports.selectShellWorkCreatorFromPersonSlot = function(i, j, slotIndex, data, key) {
+exports.selectShellWorkCreatorFromPersonSlot = function (i, j, slotIndex, data, key) {
     var person;
 
     it(
         'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
-        ' of (shell) component work #' + (i + 1), function() {
+        ' of (shell) component work #' + (i + 1), function () {
             person = _.merge({}, hash.personSlots[slotIndex]);
             pages.work.enterShellWorkCreatorSearchTerms(i, j, person.ipiNumber);
         }
     );
 
-    it('Expect creator suggestions dropdown to be displayed', function() {
+    it('Expect creator suggestions dropdown to be displayed', function () {
         pages.work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first search result', function() {
-        pages.work.selectFirstCreatorSuggestion().then(function(selected) {
+    it('Select first search result', function () {
+        pages.work.selectFirstCreatorSuggestion().then(function (selected) {
             var component,
                 creator;
 
@@ -1007,9 +1008,9 @@ module.exports.validateCreatorName = function (name) {
         }
     );
 };
-exports.validateSubjectCreatorNames = function(howMany) {
-    _.times(howMany, function(i) {
-        it('Validate subject creator #' + (i + 1) + ' - name', function() {
+exports.validateSubjectCreatorNames = function (howMany) {
+    _.times(howMany, function (i) {
+        it('Validate subject creator #' + (i + 1) + ' - name', function () {
             expect(pages.work.creatorNames()).toContain(
                 hash.currentEntityDataSlotsByType.work.creators[i].name
             );
@@ -1028,9 +1029,9 @@ module.exports.validateCreatorContributionByName = function (name, percentage) {
         }
     );
 };
-exports.validateSubjectCreatorContributions = function(howMany) {
-    _.times(howMany, function(i) {
-        it('Validate subject creator #' + (i + 1) + ' - contribution', function() {
+exports.validateSubjectCreatorContributions = function (howMany) {
+    _.times(howMany, function (i) {
+        it('Validate subject creator #' + (i + 1) + ' - contribution', function () {
             var data = hash.currentEntityDataSlotsByType.work;
             var creator = data.creators[i];
             expect(pages.work.creatorContributionByName(creator.name)).toBe(
@@ -1192,21 +1193,21 @@ module.exports.validateDeliveryDate = function (year, month, day) {
     });
 };
 
-exports.goToRightsTab = function() {
-    it('Go to Rights tab', function() {
+exports.goToRightsTab = function () {
+    it('Go to Rights tab', function () {
         pages.work.goToRightsTab();
         pages.base.waitForAjax();
     });
 };
 
-exports.goToPreviewCwrTab = function() {
-    it('Go to Preview CWR tab', function() {
+exports.goToPreviewCwrTab = function () {
+    it('Go to Preview CWR tab', function () {
         pages.work.goToPreviewCwrTab();
     });
 };
 
-exports.goToRegistrationActivityTab = function() {
-    it('Go to Registration Activity tab', function() {
+exports.goToRegistrationActivityTab = function () {
+    it('Go to Registration Activity tab', function () {
         pages.work.goToRegistrationActivityTab();
     });
 };
@@ -1226,7 +1227,7 @@ module.exports.validateMusicalDistributionCategory = function (value) {
         promise.when(value).then(function (value) {
             var data = hash.currentEntityDataSlotsByType.work;
             value = value || data.musicalDistributionCategory;
-            if(!value) {
+            if (!value) {
                 return;
             }
             expect(pages.work.musicalDistributionCategory()).toBe(value);
@@ -1235,10 +1236,10 @@ module.exports.validateMusicalDistributionCategory = function (value) {
 };
 module.exports.validateTextMusicRelationship = function (value) {
     it("Validate text music relationship (if validation value is not empty)", function () {
-        promise.when(value).then(function(value) {
+        promise.when(value).then(function (value) {
             var data = hash.currentEntityDataSlotsByType.work;
             value = value || data.textMusicRelationship;
-            if(!value) {
+            if (!value) {
                 return;
             }
             if (value.toLowerCase() === "select type") {
@@ -1257,7 +1258,7 @@ module.exports.validateExcerptType = function (value) {
         promise.when(value).then(function (value) {
             var data = hash.currentEntityDataSlotsByType.work;
             value = value || data.excerptType;
-            if(!value) {
+            if (!value) {
                 return;
             }
             if (value.toLowerCase() === "select type") {
@@ -1276,7 +1277,7 @@ module.exports.validateVersionType = function (value) {
         promise.when(value).then(function (value) {
             var data = hash.currentEntityDataSlotsByType.work;
             value = value || data.versionType;
-            if(!value) {
+            if (!value) {
                 return;
             }
             expect(pages.work.versionType()).toBe(value);
@@ -1295,7 +1296,7 @@ module.exports.validateLyricAdaptation = function (value) {
         promise.when(value).then(function (value) {
             var data = hash.currentEntityDataSlotsByType.work;
             value = value || data.lyricAdaptation;
-            if(!value) {
+            if (!value) {
                 return;
             }
             expect(pages.work.lyricAdaptation()).toBe(value);
@@ -1307,7 +1308,7 @@ module.exports.validateMusicArrangement = function (value) {
         promise.when(value).then(function (value) {
             var data = hash.currentEntityDataSlotsByType.work;
             value = value || data.musicArrangement;
-            if(!value) {
+            if (!value) {
                 return;
             }
             expect(pages.work.musicArrangement()).toBe(value);
@@ -1422,15 +1423,15 @@ module.exports.validateIncludeWorkOnWebsite = function (include) {
     );
 };
 
-exports.validateLastUpdateDate = function(value) {
+exports.validateLastUpdateDate = function (value) {
     it('Validate Last Update Date', function () {
         expect(pages.work.getLastUpdateDate()).toBe(value);
     });
 };
 
-exports.goBackToMainPageFromWork = function(){
-    it("Go to the main page from work ", function(){
-       pages.work.goBackToTheMainPageFromWork();
+exports.goBackToMainPageFromWork = function () {
+    it("Go to the main page from work ", function () {
+        pages.work.goBackToTheMainPageFromWork();
     });
 };
 
@@ -1465,9 +1466,9 @@ exports.checkDefaultFilterAllWorksForWorkLog = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
         browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)")).getAttribute("class")
             .then(function (promise) {
-            console.log("The default filters for work log all works is default " + promise);
-            expect(promise).toContain("active");
-        });
+                console.log("The default filters for work log all works is default " + promise);
+                expect(promise).toContain("active");
+            });
     });
 };
 
@@ -1480,6 +1481,13 @@ exports.checkDefaultFilterConflictWorksForWorkLog = function () {
             });
     });
 };
+
+exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
+    it("Click on work link to see details from delivery works number " + i, function () {
+        pages.works.clickOnTheWorkLinkFromDeliveryWorksPageNumberI(i);
+    });
+};
+
 
 
 pageStep([
