@@ -236,9 +236,9 @@ let cp = require('child_process'),
 
     mkdirp.sync(conf.htmlReportPath);
 
-    ['logParser.js', 'view.html'].forEach((fileName) => {
+    ['helpers/logParser.js', 'reporter/view.html'].forEach((path) => {
         copyFileSync(
-            __dirname + '/../reporter/' + fileName, conf.htmlReportPath
+            __dirname + '/../' + path, conf.htmlReportPath
         );
     });
 }
