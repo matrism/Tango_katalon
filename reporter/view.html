@@ -414,9 +414,17 @@
             var el = { t: tag, a: {}, c: children || [] };
 
             if(typeof attr === 'string') {
-                el.a.class = attr;
+                el.a.class = new Set(attr.split(/ +/));
             }
             else {
+                if(typeof attr.class === 'string') {
+                    attr.class = attr.class.split(/ +/);
+                }
+
+                if(Array.isArray(attr.class)) {
+                    attr.class = new Set(attr.class);
+                }
+
                 el.a = attr;
             }
 
@@ -450,7 +458,13 @@
             html += '<' + el.t;
 
             html += Object.keys(el.a).reduce(function (html, k) {
-                return html + ' ' + k + '="' + el.a[k] + '"';
+                var v = el.a[k];
+
+                if(k === 'class') {
+                    v = Array.from(v.values()).join(' ');
+                }
+
+                return html + ' ' + k + '="' + v + '"';
             }, '');
 
             html += '>';
@@ -620,9 +634,9 @@
             featureTags: function (stmId, tags) {
                 var fDiv = tat.stm.fDiv;
 
-                fDiv.a.class += ' ' + tags.map(function (tag) {
-                    return tag + '-tag';
-                }).join(' ');
+                tags.forEach(function (tag) {
+                    fDiv.a.class.add(tag + '-tag');
+                });
 
                 fDiv.c.push(tat.makeFieldDiv(
                     'tags', 'Tags', tags.join(', ')
@@ -647,9 +661,9 @@
             scenarioTags: function (stmId, tags) {
                 var scDiv = tat.stm.scDiv;
 
-                scDiv.a.class += ' ' + tags.map(function (tag) {
-                    return tag + '-tag';
-                }).join(' ');
+                tags.forEach(function (tag) {
+                    scDiv.a.class.add(tag + '-tag');
+                });
 
                 scDiv.c.push(tat.makeFieldDiv(
                     'tags', 'Tags', tags.join(', ')
@@ -718,15 +732,14 @@
                 var stm = tat.stm,
                     bDiv = stm.bDiv;
 
-                stm.stDiv.a.class += ' ' + result;
+                stm.stDiv.a.class.add(result);
 
                 if(result === 'failed') {
                     do {
-                        // TODO: Use a Set instead of a string...
-                        bDiv.a.class += ' ' + result;
+                        bDiv.a.class.add(result);
                     } while(bDiv = bDiv.parent);
 
-                    stm.fDiv.a.class += ' ' + result;
+                    stm.fDiv.a.class.add(result);
                 }
                 else {
                     ++tat.passedSteps;
@@ -751,10 +764,10 @@
                 var stm = tat.stm,
                     bDiv = stm.bDiv;
 
-                bDiv.a.class += ' ' + result;
+                bDiv.a.class.add(result);
 
-                if(bDiv.a.class.indexOf(' failed') === -1) {
-                    bDiv.a.class += ' passed';
+                if(!bDiv.a.class.has('failed')) {
+                    bDiv.a.class.add('passed');
                 }
 
                 stm.bDiv = bDiv.parent;
@@ -777,10 +790,10 @@
                 var stm = tat.stm,
                     scDiv = stm.scDiv;
 
-                scDiv.a.class += ' ' + result;
+                scDiv.a.class.add(result);
 
-                if(scDiv.a.class.indexOf(' failed') === -1) {
-                    scDiv.a.class += ' passed';
+                if(!scDiv.a.class.has('failed')) {
+                    scDiv.a.class.add('passed');
                     ++tat.passedScenarios;
                 }
 
@@ -803,10 +816,10 @@
                 var stm = tat.stm,
                     fDiv = stm.fDiv;
 
-                fDiv.a.class += ' ' + result;
+                fDiv.a.class.add(result);
 
-                if(fDiv.a.class.indexOf(' failed') === -1) {
-                    fDiv.a.class += ' passed';
+                if(!fDiv.a.class.has('failed')) {
+                    fDiv.a.class.add('passed');
                     ++tat.passedFeatures;
                 }
 
@@ -831,10 +844,10 @@
                 ));
             },
 
-            processFinished: function (stmId, how) {
+            processFinished: function (stmId, result) {
                 var stm = tat.stm;
 
-                stm.pDiv.a.class += ' ' + how;
+                stm.pDiv.a.class.add(result);
 
                 stm.logDiv = tat.stm.div;
             },
