@@ -30,10 +30,14 @@ features.forEach((feature) => {
         let fTags = fMod.commonFeatureTags || [];
 
         if(skipBroken && fTags.includes('broken')) {
-            it('Broken feature', () => {
-                throw new Error(
-                    fMod.breakageDescription || noBreakageDescriptionMsg
-                );
+            describe('Broken feature', () => {
+                describe('Broken feature', () => {
+                    it('Broken feature', () => {
+                        throw new Error(
+                            fMod.breakageDescription || noBreakageDescriptionMsg
+                        );
+                    });
+                });
             });
 
             return;
@@ -46,10 +50,12 @@ features.forEach((feature) => {
                 let sTags = scenario.tags || [];
 
                 if(skipBroken && sTags.includes('broken')) {
-                    it('Broken scenario', () => {
-                        throw new Error(
-                            scenario.breakageDescription || noBreakageDescriptionMsg
-                        );
+                    describe('Broken scenario', () => {
+                        it('Broken scenario', () => {
+                            throw new Error(
+                                scenario.breakageDescription || noBreakageDescriptionMsg
+                            );
+                        });
                     });
 
                     return;
