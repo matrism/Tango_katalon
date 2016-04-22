@@ -23,7 +23,7 @@ var exports = function (callbacks) {
 
     parseStateHandlers = {},
 
-    lineStmIdRe = /^([0-9]+): (.+)$/;
+    lnStmIdRe = /^([0-9]+): (.*)$/;
 
 proto.setStream = function (id) {
     this.stm = this.streams[id] || {
@@ -43,39 +43,45 @@ proto.unexpectedLine = function (l) {
 
 proto.fire = function (name) {
     var allCb = this.cbs.all,
+        unhandledCb = this.cbs.unhandled,
         cb = this.cbs[name],
 
+        genericCbArgs,
         cbArgs;
 
     if(!allCb && !cb) {
         return;
     }
 
-    cbArgs = [].slice.call(arguments, 1);
-    cbArgs.unshift(this.stm.id);
+    genericCbArgs = [this.stm.id].concat([].slice.call(arguments));
+    cbArgs = [this.stm.id].concat([].slice.call(arguments, 1));
 
     if(allCb) {
-        allCb.apply(null, [name].concat(cbArgs));
+        allCb.apply(null, genericCbArgs);
     }
 
     if(cb) {
         cb.apply(null, cbArgs);
+    }
+    else
+    if(unhandledCb) {
+        unhandledCb.apply(null, genericCbArgs);
     }
 };
 
 proto.parseLine = function (l) {
     var parser = this,
 
-        stmIdReRes = lineStmIdRe.exec(l),
+        lnStmIdReRes = lnStmIdRe.exec(l),
 
         parseStateHandlerOptions;
 
-    if(!stmIdReRes) {
+    if(!lnStmIdReRes) {
         this.setStream(0);
     }
     else {
-        this.setStream(parseInt(stmIdReRes[1]));
-        l = stmIdReRes[2];
+        this.setStream(parseInt(lnStmIdReRes[1]));
+        l = lnStmIdReRes[2];
     }
 
     l = l.replace(/^ +/, '');
@@ -238,9 +244,9 @@ parseStateHandlers.testingFinished = [
         re: /^Process finished on (.+) \(took (.+)\)$/,
 
         fn: function (l, dateTime, timeTaken) {
-            this.fire('processFinishedDateTime', dateTime, l);
+            this.fire('processFinishDateTime', dateTime, l);
             this.fire('processTimeTaken', timeTaken, l);
-            this.fire('processFinished', 'cleanly', l);
+            this.fire('processFinished', 'finished', l);
         }
     }
 ];
@@ -362,7 +368,7 @@ parseStateHandlers.step = [
         re: /^End step: (.+) on (.+) \(took (.+)\)$/,
 
         fn: function (l, result, dateTime, timeTaken) {
-            this.fire('stepFinishedDateTime', dateTime, l);
+            this.fire('stepFinishDateTime', dateTime, l);
             this.fire('stepTimeTaken', timeTaken, l);
             this.fire('stepFinished', result, l);
 
@@ -376,9 +382,9 @@ parseStateHandlers.fallback = [
         re: /^Process finished on (.+) \(took (.+)\)$/,
 
         fn: function (l, dateTime, timeTaken) {
-            this.fire('processFinishedDateTime', dateTime, l);
+            this.fire('processFinishDateTime', dateTime, l);
             this.fire('processTimeTaken', timeTaken, l);
-            this.fire('processFinished', 'prematurely', l);
+            this.fire('processFinished', 'crashed', l);
         }
     }
 ];

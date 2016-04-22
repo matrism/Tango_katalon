@@ -24,11 +24,20 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.17.1/URI.min.js"></script>
 
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/incremental-dom/0.4.1/incremental-dom-min.js"
+></script>
+
+<script src="logParser.js"></script>
+
 <style>
     body {
+        padding: 0 20px;
+
         font-family: monospace;
         font-size: 1.2em;
-        padding: 0 20px;
+
+        line-height: 1.4em;
     }
 
     #header {
@@ -102,7 +111,7 @@
         color: blue;
     }
 
-    .process.failed {
+    .process.crashed {
         color: #a0a000;
     }
 
@@ -141,16 +150,16 @@
                         Status: <span class="val">Loading</span>
                     </div>
 
-                    <div class="targetEnv">
+                    <div class="targetEnvType">
                         Target environment: <span class="val">?</span>
-                        <span class="url">
+                        <span class="targetAppUrl">
                             (<a class="val" href="#">?</a>)
                         </span>
                     </div>
 
-                    <div class="branch">
-                        Branch: <span class="val">?</span>
-                        <span class="commit">
+                    <div class="testBranchName">
+                        Test branch: <span class="val">?</span>
+                        <span class="testCommitHash">
                             (<a class="val" href="#">?</a>)
                         </span>
                     </div>
@@ -161,6 +170,10 @@
 
                     <div class="parallelJobs">
                         Parallel jobs: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="silentJobTimeout">
+                        Silent job timeout: <span class="val">Unknown</span>
                     </div>
 
                     <div class="startDateTime">
@@ -239,12 +252,16 @@
     </div>
 
     <script>
+        'use strict';
+
         window.tat = {};
 
         $('#header .ctls').sticky({ topSpacing: 0 });
     </script>
 
     <script>
+        'use strict';
+
         tat.duration = function (dur) {
             return moment.duration(
                 parseFloat(dur), 'seconds'
@@ -253,6 +270,8 @@
     </script>
 
     <script>
+        'use strict';
+
         $('body').on('click', '.name:not(:last-child) .val', function (ev) {
             var $block = $(ev.target).closest('.name').parent();
 
@@ -266,6 +285,8 @@
     </script>
 
     <script>
+        'use strict';
+
         window.updateHashQuery = function (key, val) {
             var q = URI.parseQuery(
                 URI(top.location.href).fragment()
@@ -287,10 +308,12 @@
     </script>
 
     <script>
+        'use strict';
+
         var $body = $('body'),
 
             updateFilter = $.debounce(250, function (terms) {
-                var $all = $('.feature, .scenario, .stream');
+                var $all = $('.stream, .feature, .scenario');
 
                 updateHashQuery('f', terms || null);
 
@@ -323,8 +346,12 @@
                     $('.' + classSel).each(function () {
                         var $this = $(this);
 
-                        $this.removeClass('filteredOut');
+                        $this.removeClass('filteredOut').addClass('filterExpand');
 
+                        if($this.is('.process')) {
+                            $this.find('.stream, .feature, .scenario').removeClass('filteredOut');
+                        }
+                        else
                         if($this.is('.feature')) {
                             $this.find('.scenario').removeClass('filteredOut');
                         }
@@ -352,6 +379,8 @@
     </script>
 
     <script>
+        'use strict';
+
         var uri = URI(top.location.href),
             q = URI.parseQuery(uri.fragment());
 
@@ -359,6 +388,8 @@
     </script>
 
     <script>
+        'use strict';
+
         $('#expandAllCollapseSteps').click(function () {
             $('.filterExpand').removeClass('filterExpand');
             $('.collapse:not(.step)').removeClass('collapse');
@@ -377,700 +408,521 @@
     </script>
 
     <script>
-        var xhr = $.get('report.txt');
+        'use strict';
 
-        xhr.done(function (data) {
-            var lines = data.split('\n');
+        tat.el = function (tag, attr, children) {
+            var el = { t: tag, a: {}, c: children || [] };
 
-            console.time('Parsing time');
+            if(typeof attr === 'string') {
+                el.a.class = attr;
+            }
+            else {
+                el.a = attr;
+            }
 
-            var interval = setInterval(function () {
-                for(var i = 0; i < 400; ++i) {
-                    line = lines.shift();
+            return el;
+        };
 
-                    if(!line) {
-                        clearInterval(interval);
-                        tat.done();
+        tat.makeFieldDiv = function (classes, key, val) {
+            return tat.el('div', classes, [
+                key + ': ',
+                tat.el('span', 'val', [val])
+            ]);
+        };
 
-                        return;
-                    }
+        tat.makeLineDiv = function (classes, l) {
+            return tat.el('div', classes, [l]);
+        };
 
-                    try {
-                        if(top.location.hash.includes('dbg')) {
-                            console.log(line);
-                        }
+        tat.makeLinkDiv = function (classes, name, href) {
+            return tat.el('div', classes, [
+                tat.el('a', { class: classes, href: href }, [name])
+            ]);
+        };
 
-                        tat.consumeLine(line);
-                    }
-                    catch(err) {
-                        console.error(err.stack);
-                        clearInterval(interval);
+        tat.renderEl = function (el) {
+            var html = '';
 
-                        return;
-                    }
+            if(typeof el !== 'object') {
+                return el.toString().replace(/</g, '&lt;');
+            }
+
+            html += '<' + el.t;
+
+            html += Object.keys(el.a).reduce(function (html, k) {
+                return html + ' ' + k + '="' + el.a[k] + '"';
+            }, '');
+
+            html += '>';
+
+            html += el.c.reduce(function (html, c) {
+                return html + tat.renderEl(c);
+            }, '');
+
+            html += '</' + el.t + '>';
+
+            return html;
+        };
+    </script>
+
+    <script>
+        'use strict';
+
+        tat.streams = [];
+
+        tat.featureCount = 0;
+        tat.passedFeatures = 0;
+
+        tat.scenarioCount = 0;
+        tat.passedScenarios = 0;
+
+        tat.stepCount = 0;
+        tat.passedSteps = 0;
+
+        var $body = $('body'),
+
+            ghCommitHrefPrefix = (
+                'https://github.com/wmgdsp/tango-e2e/commit/'
+            );
+
+        function setStream (id) {
+            var stm = tat.stm = tat.streams[id];
+
+            if(!stm) {
+                stm = tat.stm = tat.streams[id] = {};
+
+                stm.id = id;
+                stm.children = [];
+
+                stm.div = tat.el('div', 'stream', [
+                    tat.makeFieldDiv('id', 'ID', id)
+                ]);
+
+                stm.logDiv = stm.div;
+            }
+        }
+
+        tat.logParser = new TatLogParser({
+            all: function (stmId) {
+                setStream(stmId);
+            },
+
+            unhandled: function () {
+                console.error('Unhandled event:', arguments);
+            },
+
+            targetEnvType: function (stmId, type) {
+                $('.targetEnvType > .val').text(type);
+            },
+
+            targetAppUrl: function (stmId, href) {
+                var $val = $('.targetAppUrl > .val').text(href);
+
+                if(href !== 'unknown') {
+                    $val.attr('href', href);
                 }
-            }, 100);
-        });
+            },
 
-        xhr.fail(function () {
-            console.error('Failed to load report.txt.');
+            testBranchName: function (stmId, name) {
+                $('.testBranchName > .val').text(name);
+            },
+
+            testCommitHash: function (stmId, hash) {
+                var $val = $('.testCommitHash > .val').text(
+                    hash.slice(0, 7)
+                );
+
+                if(hash !== 'unknown') {
+                    $val.attr('href', ghCommitHrefPrefix + hash);
+                }
+            },
+
+            hostTimeZone: function (stmId, tz) {
+                $('.hostTimeZone > .val').text(tz);
+            },
+
+            silentJobTimeout: function (stmId, t) {
+                $('.silentJobTimeout > .val').text(tat.duration(t));
+            },
+
+            featureCount: function (stmId, n) {
+                tat.featureCount = n;
+            },
+
+            jobCount: function (stmId, n) {
+                $('.parallelJobs > .val').text(n);
+            },
+
+            startDateTime: function (stmId, dt) {
+                $('.startDateTime > .val').text(dt);
+            },
+
+            requestedTestTags: function (stmId, tags) {
+                if(tags.length === 0) {
+                    tags = ['all'];
+                }
+
+                $('.tags > .val').text(tags.join(', '));
+            },
+
+            negatedTestTags: function (stmId, tags) {
+                if(tags.length === 0) {
+                    tags = ['none'];
+                }
+
+                $('.negatedTags > .val').text(tags.join(', '));
+            },
+
+            processStarted: function (stmId) {
+                var stm = tat.stm,
+
+                    pDiv = stm.pDiv = tat.el('div', 'process');
+
+                stm.div.c.push(pDiv);
+                stm.logDiv = pDiv;
+            },
+
+            processStartTime: function (stmId, dt) {
+                tat.stm.pDiv.c.push(tat.makeFieldDiv(
+                    'startTime', 'Started on', dt
+                ));
+            },
+
+            testingStarted: function () {
+                tat.stm.pDiv.c.push(tat.makeLineDiv(
+                    'log', 'Testing started'
+                ));
+            },
+
+            totalSteps: function (stmId, total) {
+                var pDiv = tat.stm.pDiv;
+
+                pDiv.c.push(tat.makeFieldDiv(
+                    'totalSteps', 'Total steps', total
+                ));
+
+                tat.stepCount += total;
+            },
+
+            featureStarted: function (stmId, name) {
+                var stm = tat.stm,
+                    
+                    fDiv = stm.fDiv = stm.bDiv = tat.el(
+                        'div', 'feature block collapse'
+                    );
+
+                fDiv.c.push(tat.makeFieldDiv('name', 'Feature', name));
+
+                stm.pDiv.c.push(fDiv);
+                stm.logDiv = fDiv;
+            },
+
+            featureTags: function (stmId, tags) {
+                var fDiv = tat.stm.fDiv;
+
+                fDiv.a.class += ' ' + tags.map(function (tag) {
+                    return tag + '-tag';
+                }).join(' ');
+
+                fDiv.c.push(tat.makeFieldDiv(
+                    'tags', 'Tags', tags.join(', ')
+                ));
+            },
+
+            scenarioStarted: function (stmId, name) {
+                var stm = tat.stm,
+                    
+                    scDiv = stm.scDiv = stm.bDiv = tat.el(
+                        'div', 'scenario block collapse'
+                    );
+
+                scDiv.c.push(tat.makeFieldDiv('name', 'Scenario', name));
+
+                stm.fDiv.c.push(scDiv);
+                stm.logDiv = scDiv;
+
+                ++tat.scenarioCount;
+            },
+
+            scenarioTags: function (stmId, tags) {
+                var scDiv = tat.stm.scDiv;
+
+                scDiv.a.class += ' ' + tags.map(function (tag) {
+                    return tag + '-tag';
+                }).join(' ');
+
+                scDiv.c.push(tat.makeFieldDiv(
+                    'tags', 'Tags', tags.join(', ')
+                ));
+            },
+
+            blockStarted: function (stmId, name) {
+                var stm = tat.stm,
+                    
+                    bDiv = tat.el('div', 'block collapse');
+
+                bDiv.c.push(tat.makeFieldDiv('name', 'Block', name));
+
+                stm.bDiv.c.push(bDiv);
+
+                bDiv.parent = stm.bDiv;
+                stm.bDiv = bDiv;
+
+                stm.logDiv = bDiv;
+            },
+
+            stepStarted: function (stmId, name) {
+                var stm = tat.stm,
+
+                    stDiv = stm.stDiv = tat.el(
+                        'div', 'step block collapse'
+                    );
+
+                stDiv.c.push(tat.makeFieldDiv('name', 'Step', name));
+
+                stm.bDiv.c.push(stDiv);
+                stm.logDiv = stDiv;
+            },
+
+            browserUrl: function (stmId, url) {
+                tat.stm.stDiv.c.push(tat.makeLinkDiv(
+                    'browserUrl', 'Browser URL', url
+                ));
+            },
+
+            pngSaved: function (stmId, fileName) {
+                tat.stm.stDiv.c.push(tat.makeLinkDiv(
+                    'png', 'PNG', fileName
+                ));
+            },
+
+            htmlSaved: function (stmId, fileName) {
+                tat.stm.stDiv.c.push(tat.makeLinkDiv(
+                    'html', 'HTML', fileName
+                ));
+            },
+
+            stepFinishDateTime: function (stmId, dt) {
+                tat.stm.stDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            stepTimeTaken: function (stmId, tt) {
+                tat.stm.stDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            stepFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    bDiv = stm.bDiv;
+
+                stm.stDiv.a.class += ' ' + result;
+
+                if(result === 'failed') {
+                    do {
+                        // TODO: Use a Set instead of a string...
+                        bDiv.a.class += ' ' + result;
+                    } while(bDiv = bDiv.parent);
+
+                    stm.fDiv.a.class += ' ' + result;
+                }
+                else {
+                    ++tat.passedSteps;
+                }
+
+                stm.logDiv = stm.bDiv;
+            },
+
+            blockFinishDateTime: function (stmId, dt) {
+                tat.stm.bDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            blockTimeTaken: function (stmId, tt) {
+                tat.stm.bDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            blockFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    bDiv = stm.bDiv;
+
+                bDiv.a.class += ' ' + result;
+
+                if(bDiv.a.class.indexOf(' failed') === -1) {
+                    bDiv.a.class += ' passed';
+                }
+
+                stm.bDiv = bDiv.parent;
+                stm.logDiv = bDiv.parent;
+            },
+
+            scenarioFinishDateTime: function (stmId, dt) {
+                tat.stm.scDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            scenarioTimeTaken: function (stmId, tt) {
+                tat.stm.scDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            scenarioFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    scDiv = stm.scDiv;
+
+                scDiv.a.class += ' ' + result;
+
+                if(scDiv.a.class.indexOf(' failed') === -1) {
+                    scDiv.a.class += ' passed';
+                    ++tat.passedScenarios;
+                }
+
+                stm.logDiv = stm.fDiv;
+            },
+
+            featureFinishDateTime: function (stmId, dt) {
+                tat.stm.fDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            featureTimeTaken: function (stmId, tt) {
+                tat.stm.fDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            featureFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    fDiv = stm.fDiv;
+
+                fDiv.a.class += ' ' + result;
+
+                if(fDiv.a.class.indexOf(' failed') === -1) {
+                    fDiv.a.class += ' passed';
+                    ++tat.passedFeatures;
+                }
+
+                stm.logDiv = stm.pDiv;
+            },
+
+            testingFinished: function () {
+                tat.stm.pDiv.c.push(tat.makeLineDiv(
+                    'log', 'Testing finished'
+                ));
+            },
+
+            processFinishDateTime: function (stmId, dt) {
+                tat.stm.pDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            processTimeTaken: function (stmId, tt) {
+                tat.stm.pDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            processFinished: function (stmId, how) {
+                var stm = tat.stm;
+
+                stm.pDiv.a.class += ' ' + how;
+
+                stm.logDiv = tat.stm.div;
+            },
+
+            totalTimeTakenSoFar: function (stmId, tt) {
+                tat.timeTakenSoFar = tt;
+            },
+
+            endDateTime: function (stmId, dt) {
+                $('.endDateTime > .val').text(dt);
+                $('.timeTaken > .val').text(tat.duration(tat.timeTakenSoFar));
+            },
+
+            log: function (stmId, ln) {
+                tat.stm.logDiv.c.push(
+                    tat.makeLineDiv('log literal', ln)
+                );
+            },
+
+            allDone: function () {
+                $('.totalFeatures > .val').text(tat.featureCount);
+                $('.totalScenarios > .val').text(tat.scenarioCount);
+                $('.totalSteps > .val').text(tat.stepCount);
+
+                $('.totalFeaturesPassed > .val').text(tat.passedFeatures);
+                $('.totalScenariosPassed > .val').text(tat.passedScenarios);
+                $('.totalStepsPassed > .val').text(tat.passedSteps);
+
+                $('.totalFeaturesFailed > .val').text(
+                    tat.featureCount - tat.passedFeatures
+                );
+
+                $('.totalScenariosFailed > .val').text(
+                    tat.scenarioCount - tat.passedScenarios
+                );
+
+                $('.totalStepsFailed > .val').text(
+                    tat.stepCount - tat.passedSteps
+                );
+            }
         });
     </script>
 
     <script>
-        var stm,
-            stFns = {};
+        'use strict';
 
-        tat.rp = {
-            passedFeatures: 0,
-            failedFeatures: 0,
+        var xhr = $.get('report.txt'),
 
-            totalScenarios: 0,
-            passedScenarios: 0,
-            failedScenarios: 0,
+            lnRe = /^(.*)\n/gm,
+            lnReRes;
 
-            totalSteps: 0,
-            passedSteps: 0,
-            failedSteps: 0,
+        console.time('Total time');
 
-            streams: []
-        };
+        console.log('Downloading...');
+        console.time('Download time');
 
-        function makeDiv(classes) {
-            return $('<div>').attr('class', classes);
-        }
+        xhr.done(function (data) {
+            console.timeEnd('Download time');
 
-        function makeFieldDiv(classes, key, val) {
-            return $('<div>').attr('class', classes).text(key + ': ').append(
-                $('<span class="val">').text(val)
-            );
-        }
+            console.log('Parsing...');
+            console.time('Parse time');
 
-        function makeLineDiv(classes, l) {
-            return $('<div>').attr('class', classes).text(l);
-        }
-
-        function makeLinkDiv(classes, name, href) {
-            return $('<div>').attr('class', classes).append(
-                $('<a>').attr('href', href).text(name)
-            );
-        }
-
-        function setStream(id) {
-            stm = tat.rp.streams[id];
-
-            if(!stm) {
-                stm = tat.rp.streams[id] = {
-                    id: id,
-                    children: [],
-                    stFn: stFns.initial
-                };
-
-                stm.div = makeDiv('stream');
-                stm.div.append(makeFieldDiv('id', 'Stream ID', stm.id));
-                stm.div.append(makeFieldDiv('status', 'Status', 'Loading'));
-
-                $('body').append(stm.div);
-            }
-        }
-
-        stFns.initial = [
-            {
-                re: /^Target environment is (.+) \((.+)\)$/,
-
-                fn: function (l, env, appUrl) {
-                    var $urlEl;
-
-                    $('#header .targetEnv > .val').text(env);
-
-                    $urlEl = $('#header .targetEnv .url > .val').text(appUrl);
-
-                    if(appUrl !== 'unknown') {
-                        $urlEl.attr('href', appUrl)
-                    }
-                }
-            },
-
-            {
-                re: /^Test code branch is (.+) \((.+)\)$/,
-
-                fn: function (l, branch, commit) {
-                    var ghUrlPrefix = 'https://github.com/wmgdsp/tango-e2e/commit/',
-
-                        $commitVal;
-
-                    $('#header .branch > .val').text(branch);
-
-                    $commitVal = $('#header .branch .commit > .val')
-                        .text(commit.slice(0, 7));
-
-                    if(commit !== 'unknown') {
-                        $commitVal.attr('href', ghUrlPrefix + commit)
-                    }
-                }
-            },
-
-            {
-                re: /^Host time zone is (.+)$/, fn: function (l, tz) {
-                    $('#header .hostTimeZone > .val').text(tz);
-                }
-            },
-
-            {
-                re: /^Silent job timeout is (.+)$/, fn: function (l, timeout) {
-                    $('#header .silentJobTimeout > .val').text(
-                        tat.duration(timeout)
-                    );
-                }
-            },
-
-            {
-                re: /^Starting ([0-9]+) feature processes with ([0-9]+) parallel jobs on (.+)$/,
-
-                fn: function (l, fCount, jCount, dateTime) {
-                    fCount = parseInt(fCount);
-                    jCount = parseInt(jCount);
-
-                    $('#header .parallelJobs > .val').text(jCount);
-                    $('#header .totalFeatures > .val').text(fCount);
-                    $('#header .startDateTime > .val').text(dateTime);
-                }
-            },
-
-            {
-                re: /^Requested tags: (.+)$/, fn: function (l, tags) {
-                    $('#header .tags > .val').text(tags);
-                }
-            },
-
-            {
-                re: /^Negated tags: (.+)$/, fn: function (l, tags) {
-                    $('#header .negatedTags > .val').text(tags);
-                }
-            },
-
-            {
-                re: /^Starting process on (.+)$/, fn: function (l, dateTime) {
-                    var p = {
-                        type: 'process',
-                        startDateTime: dateTime,
-                        totalSteps: 'Unknown',
-                        latestStep: 0,
-                        children: []
-                    };
-
-                    stm.children.push(stm.process = p);
-
-                    stm.div.append(p.div = makeDiv('process'));
-                    p.div.append(makeLineDiv('log', 'Starting process'));
-
-                    p.div.append(makeFieldDiv(
-                        'startDateTime', 'Started on', dateTime
-                    ));
-
-                    p.div.append(makeFieldDiv(
-                        'totalSteps', 'Total steps', p.totalSteps
-                    ));
-
-                    stm.stFn = stFns.processStarted;
-                }
-            },
-
-            {
-                re: /^Total time taken so far: (.+)$/,
-
-                fn: function (l, timeTaken) {
-                    $('#header .timeTaken > .val').text(
-                        tat.duration(timeTaken)
-                    );
-                }
-            },
-
-            {
-                re: /^All done on (.+)$/, fn: function (l, dateTime) {
-                    $('#header .endDateTime > .val').text(dateTime);
-                    $('#header .status > .val').text('Finished');
-                }
-            },
-
-            {
-                fn: function (l) {
-                    var lc = stm.children[stm.children.length - 1];
-
-                    if(lc && lc.type === 'log') {
-                        lc.msg += l + '\n';
-                    }
-                    else {
-                        stm.children.push({
-                            type: 'log',
-                            msg: l
-                        });
-                    }
-
-                    stm.div.append(makeLineDiv('log literal', l));
-                }
-            }
-        ];
-
-        setStream(0);
-
-        stFns.processStarted = [
-            {
-                re: /^Testing started with ([0-9]+) steps to run$/,
-
-                fn: function (l, stepCount) {
-                    var p = stm.process;
-
-                    p.totalSteps = parseInt(stepCount);
-
-                    p.div.children('.totalSteps').children('.val').text(p.totalSteps);
-
-                    $('#header .totalSteps > .val').text(
-                        tat.rp.totalSteps += p.totalSteps
-                    );
-                }
-            },
-
-            {
-                re: /^(Feature|Scenario|Block): (.+)$/,
-
-                fn: function (l, blockType, name) {
-                    var b = {
-                            type: blockType.toLowerCase(),
-                            name: name,
-                            children: []
-                        },
-
-                        p = stm.process;
-
-                    p.children.push(p.block = b);
-
-                    p.div.append(b.div = makeDiv('feature block collapse'));
-                    b.div.append(makeFieldDiv('name', blockType, name));
-
-                    stm.stFn = stFns.block;
-                }
-            },
-
-            {
-                re: /^Process finished on (.+) \(took (.+)\)$/,
-
-                fn: function (l, dateTime, timeTaken) {
-                    var p = stm.process;
-
-                    p.div.append(makeLineDiv(
-                        'log', 'Process finished'
-                    ));
-
-                    p.div.append(makeFieldDiv(
-                        'endDateTime', 'Ended on', dateTime
-                    ));
-
-                    p.div.append(makeFieldDiv(
-                        'timeTaken', 'Time taken', tat.duration(timeTaken)
-                    ));
-
-                    delete stm.process;
-
-                    stm.div.children('.status').children('.val').text('Finished');
-
-                    // TODO: Fix me.
-                    stm.stFn = stFns.initial;
-                }
-            },
-
-            { re: /^Testing finished$/, fn: function () {} },
-
-            {
-                fn: function (l) {
-                    var p = stm.process,
-
-                        lc = p.children[p.children.length - 1];
-
-                    if(lc && lc.type === 'log') {
-                        lc.msg += '\n' + l;
-                    }
-                    else {
-                        p.children.push({
-                            type: 'log',
-                            msg: l
-                        });
-                    }
-
-                    p.div.append(makeLineDiv('log literal', l));
-                }
-            }
-        ];
-
-        stFns.block = [
-            {
-                re: /^(Feature|Scenario|Block): (.+)$/,
-
-                fn: function (l, blockType, name) {
-                    var parent = stm.process.block,
-
-                        b = {
-                            type: blockType.toLowerCase(),
-                            name: name,
-                            parent: parent,
-                            children: []
-                        };
-
-                    b.children.push(stm.process.block = b);
-
-                    parent.div.append(b.div = makeDiv('block collapse'));
-                    b.div.append(makeFieldDiv('name', blockType, name));
-
-                    if(!parent.parent) {
-                        b.div.addClass('scenario');
-
-                        $('#header .totalScenarios > .val').text(
-                            ++tat.rp.totalScenarios
-                        );
-                    }
-                }
-            },
-
-            {
-                re: /^Tags: (.+)$/, fn: function (l, tags) {
-                    var b = stm.process.block;
-
-                    b.div.append(makeFieldDiv('tags', 'Tags', tags));
-
-                    tags.split(',').forEach(function (tag) {
-                        b.div.addClass(tag.trim() + '-tag');
-                    });
-                }
-            },
-
-            {
-                re: /^Step: (.+)$/, fn: function (l, name) {
-                    var p = stm.process,
-                        b = p.block,
-
-                        s = {
-                            type: 'step',
-                            num: ++p.latestStep,
-                            name: name,
-                            children: []
-                        };
-
-                    b.children.push(b.step = s);
-
-                    b.div.append(s.div = makeDiv('step collapse'));
-                    s.div.append(makeFieldDiv('name', 'Step', name));
-
-                    stm.stFn = stFns.step;
-                }
-            },
-
-            {
-                re: /^End (feature|scenario|block): (.+) on (.+) \(took (.+)\)$/,
-
-                fn: function (l, blockType, result, dateTime, timeTaken) {
-                    var b = stm.process.block;
-
-                    if(b.type !== blockType.toLowerCase()) {
-                        throw new Error('Unmatched block type: ' + blockType);
-                    }
-
-                    b.div.append(makeFieldDiv(
-                        'endDateTime', 'Ended on', dateTime
-                    ));
-
-                    b.div.append(makeFieldDiv(
-                        'timeTaken', 'Time taken', tat.duration(timeTaken)
-                    ));
-
-                    let f = b.div.find('.failed');
-
-                    if(f.length > 0) {
-                        result = 'failed';
-                    }
-                    else {
-                        result = 'passed';
-                    }
-
-                    b.div.addClass(b.result = result);
-
-                    if(b.parent) {
-                        if(!b.parent.parent) {
-                            if(result === 'passed') {
-                                $('#header .totalScenariosPassed > .val').text(
-                                    ++tat.rp.passedScenarios
-                                );
-                            }
-                            else {
-                                $('#header .totalScenariosFailed > .val').text(
-                                    ++tat.rp.failedScenarios
-                                );
-                            }
-                        }
-
-                        stm.process.block = b.parent;
-                        delete b.parent;
-
-                        return;
-                    }
-                    else
-                    if(stm.process.result !== 'failed') {
-                        $('#header .totalFeaturesPassed > .val').text(
-                            ++tat.rp.passedFeatures
-                        );
-                    }
-
-                    delete stm.process.block;
-
-                    stm.stFn = stFns.processStarted;
-                }
-            },
-
-            {
-                re: /^Process finished on (.+) \(took (.+)\)$/,
-
-                fn: function (l, dateTime, timeTaken) {
-                    var p = stm.process;
-
-                    p.div.append(makeFieldDiv(
-                        'endDateTime', 'Ended on', dateTime
-                    ));
-
-                    p.div.append(makeFieldDiv(
-                        'timeTaken', 'Time taken', tat.duration(timeTaken)
-                    ));
-
-                    p.block.div.parents(
-                        '.process, .feature, .scenario, .block'
-                    ).addBack().each(function () {
-                        $(this).addClass('crashed failed');
-                    });
-
-                    stm.div.children('.status').children('.val').text('Finished');
-                }
-            },
-
-            {
-                fn: function (l) {
-                    var b = stm.process.block,
-
-                        lc = b.children[b.children.length - 1];
-
-                    if(lc && lc.type === 'log') {
-                        lc.msg += '\n' + l;
-                    }
-                    else {
-                        b.children.push({
-                            type: 'log',
-                            msg: l
-                        });
-                    }
-
-                    b.div.append(makeLineDiv('log literal', l));
-                }
-            }
-        ];
-
-        stFns.step = [
-            {
-                re: /^Browser URL: (.+)$/, fn: function (l, url) {
-                    stm.process.block.step.div.append(
-                        makeLinkDiv('browserUrl', 'Browser URL', url)
-                    );
-                }
-            },
-
-            {
-                re: /^PNG saved$/, fn: function () {
-                    var s = stm.process.block.step;
-
-                    s.div.append(makeLinkDiv(
-                        'png', 'PNG', stm.id + '_' + s.num + '.png'
-                    ));
-                }
-            },
-
-            {
-                re: /^HTML saved$/, fn: function () {
-                    var s = stm.process.block.step;
-
-                    s.div.append(makeLinkDiv(
-                        'html', 'HTML', stm.id + '_' + s.num + '.html'
-                    ));
-                }
-            },
-
-            {
-                re: /^End step: (.+) on (.+) \(took (.+)\)$/,
-
-                fn: function (l, result, dateTime, timeTaken) {
-                    var p = stm.process,
-                        s = p.block.step;
-
-                    s.div.append(makeFieldDiv(
-                        'endDateTime', 'Ended on', dateTime
-                    ));
-
-                    s.div.append(makeFieldDiv(
-                        'timeTaken', 'Time taken', tat.duration(timeTaken)
-                    ));
-
-                    s.result = result;
-
-                    s.div.addClass(result);
-
-                    if(result === 'failed') {
-                        $('#header .totalStepsFailed > .val').text(
-                            ++tat.rp.failedSteps
-                        );
-
-                        if(p.result !== 'failed') {
-                            p.result = 'failed';
-
-                            $('#header .totalFeaturesFailed > .val').text(
-                                ++tat.rp.failedFeatures
-                            );
-                        }
-                    }
-                    else {
-                        $('#header .totalStepsPassed > .val').text(
-                            ++tat.rp.passedSteps
-                        );
-                    }
-
-                    delete stm.process.block.step;
-
-                    stm.stFn = stFns.block;
-                }
-            },
-
-            {
-                re: /^Process finished on (.+) \(took (.+)\)$/,
-
-                fn: function (l, dateTime, timeTaken) {
-                    var p = stm.process;
-
-                    p.div.append(makeFieldDiv(
-                        'endDateTime', 'Ended on', dateTime
-                    ));
-
-                    p.div.append(makeFieldDiv(
-                        'timeTaken', 'Time taken', tat.duration(timeTaken)
-                    ));
-
-                    p.block.div.parents(
-                        '.process, .feature, .scenario, .block'
-                    ).addBack().each(function () {
-                        $(this).addClass('crashed failed');
-                    });
-
-                    stm.div.children('.status').children('.val').text('Finished');
-
-                    tat.rp.streams[0].div.children(
-                        '.finishedFeatureCount'
-                    ).children('.val').text(
-                        ++tat.rp.finishedFeatureCount
-                    );
-                }
-            },
-
-            {
-                fn: function (l) {
-                    var s = stm.process.block.step,
-
-                        lc = s.children[s.children.length - 1];
-
-                    if(lc && lc.type === 'log') {
-                        lc.msg += '\n' + l;
-                    }
-                    else {
-                        s.children.push({
-                            type: 'log',
-                            msg: l
-                        });
-                    }
-
-                    s.div.append(makeLineDiv('log literal', l));
-                }
-            }
-        ];
-
-        for(var n in stFns) {
-            stFns[n].name = n;
-        }
-
-        var stmIdRe = /^([0-9]+):(.*)$/;
-
-        tat.consumeLine = function (l) {
-            var stmIdReRes = stmIdRe.exec(l),
-
-                stFn;
-
-            if(!stmIdReRes) {
-                setStream(0);
-            }
-            else {
-                setStream(parseInt(stmIdReRes[1]));
-                l = stmIdReRes[2];
+            while(lnReRes = lnRe.exec(data)) {
+                tat.logParser.parseLine(lnReRes[1]);
             }
 
-            l = l.replace(/^ +/, '');
+            console.timeEnd('Parse time');
 
-            stFn = stm.stFn;
+            console.log('Rendering...');
+            console.time('Render time');
 
-            if(!stFn) {
-                console.error('Ignoring line:', l);
-                return;
-            }
-
-            if(!l.startsWith('[(+)]')) {
-                stFnOpt = stFn[stFn.length - 1];
-
-                if(stFnOpt.re) {
-                    throw new Error('In ' + stFn.name + ', stream ' + stm.id + ': No handler for line: ' + l);
-                }
-
-                stFnOpt.fn(l);
-            }
-            else {
-                l = l.slice('[(+)] '.length);
-
-                if(!stFn.some(function (stFnOpt) {
-                    var reRes,
-                        fnRes;
-
-                    if(!stFnOpt.re) {
-                        return false;
-                    }
-
-                    reRes = stFnOpt.re.exec(l);
-
-                    if(!reRes) {
-                        return false;
-                    }
-
-                    fnRes = stFnOpt.fn.apply(stFnOpt, reRes);
-
-                    if(fnRes === undefined) {
-                        fnRes = true;
-                    }
-
-                    return fnRes;
-                })) {
-                    throw new Error('In ' + stFn.name + ', stream ' + stm.id + ': No handler for line: ' + l);
-                }
-            }
+            $body.append($(tat.streams.reduce(function (html, stm) {
+                return html + tat.renderEl(stm.div);
+            }, '')));
 
             $('#filter').keyup();
-        };
 
-        tat.done = function () {
-            tat.rp.streams.forEach(function (stm) {
-                delete stm.stFn;
-            });
+            $('.status > .val').text('Ready');
 
-            tat.rp.streams[0].div.children('.status').children('.val').text('Finished');
+            console.timeEnd('Render time');
 
-            console.timeEnd('Parsing time');
-        };
+            console.timeEnd('Total time');
+        });
+
+        xhr.fail(function () {
+            console.error('Failed to load report.txt.');
+
+            $('.status > .val').text('Download failed');
+        });
     </script>
 </body>

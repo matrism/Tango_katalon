@@ -4,7 +4,7 @@ let fs = require('fs');
 
 let lines = fs.readFileSync('/dev/stdin', { encoding: 'utf8' });
 
-let LogParser = require('./logParser');
+let LogParser = require('../helpers/logParser');
 
 let logParser = new LogParser({
     all(ev, stmId) {
