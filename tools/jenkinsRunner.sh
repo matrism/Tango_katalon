@@ -4,6 +4,9 @@ set -e
 echo "Using node `node -v`"
 echo "Using `google-chrome --version`"
 
+# TODO: Fix me (bad path?)
+mkdir -p reports/html/testing
+
 # Dependency setup.
 npm install
 
