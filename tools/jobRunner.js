@@ -388,7 +388,7 @@ let cp = require('child_process'),
         return str.split(',');
     });
 
-    let paths = enumFeatures(env, ...tagArrays).map((feature) => {
+    let paths = enumFeatures(env, null, ...tagArrays).map((feature) => {
         return feature.path;
     });
 

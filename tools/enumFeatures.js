@@ -18,12 +18,18 @@ function tagMatches(a, b) {
     });
 }
 
-module.exports = (envType, tags, negatedTags) => {
+module.exports = (envType, feature, tags, negatedTags) => {
     let ret = [],
 
+        overrideCandidates = [],
+        candidates = [],
+
+        allCandidates;
+
+    if(!feature) {
         overrideCandidates = glob.sync(
             rootDir + '/envs/' + envType + '/features/**/*.js'
-        ),
+        );
 
         candidates = glob.sync(rootDir + '/envs/common/features/**/*.js').filter((path) => {
             let tail = path.slice((rootDir + '/envs/common/features/').length),
@@ -33,9 +39,13 @@ module.exports = (envType, tags, negatedTags) => {
                 ) === -1);
 
             return hasNoOverride;
-        }),
+        });
 
         allCandidates = overrideCandidates.concat(candidates);
+    }
+    else {
+        allCandidates = [feature];
+    }
 
     allCandidates.forEach((fPath) => {
         let fMod = _.cloneDeep(require(fPath));

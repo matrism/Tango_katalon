@@ -3,7 +3,10 @@
 let enumFeatures = require('../tools/enumFeatures'),
 
     features = enumFeatures(
-        systemConfig.env.name, systemConfig.tags, systemConfig.tags.negated
+        systemConfig.env.name,
+        systemConfig.feat,
+        systemConfig.tags,
+        systemConfig.tags.negated
     );
 
 global.featureList = [];
