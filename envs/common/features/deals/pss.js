@@ -50,6 +50,37 @@ exports.feature = [
         }
     },
     {
+        name: 'Create a deal with publisher share set having 100% percent',
+        tags: ['createPssRegressionFullPercent'],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+            steps.createDealScope.itAddSimpleScope();
+            steps.createDealScope.itAddPublisherShare();
+            for (var i = 2; i <= 3; i++) {
+                steps.createDealScope.itAddPublisherShareWithMultipleThreeChains(i);
+                steps.createDealScope.validateDeleteChainIIconPublisherShare(i);
+            }
+            steps.base.scrollIntoView("Delete chain icon publisher share set", element(By.css("#deal-publisher div.ng-scope:nth-child(1) div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")));
+            steps.createDealScope.deleteChainIPublisherShare(1);
+            steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
+            steps.createDealScope.saveThePublisherShareSet();
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+            steps.editDealScope.selectScope1();
+            steps.editDealScope.validatePublisherSharesTitle();
+            steps.editDealScope.validatePublisherSharesHeaderTableTitle();
+            for (var i = 1; i <= 2; i++) {
+                steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
+                steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
+                steps.editDealScope.validatePublisherSharesSetSubtotalChainI(i);
+            }
+        }
+    },
+    {
         name: 'Check the visual design for publisher shares',
         tags: ['viewPssRegression'],
         steps: function () {

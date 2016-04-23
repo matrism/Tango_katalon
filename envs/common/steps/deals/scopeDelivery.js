@@ -66,6 +66,17 @@ exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
     );
 };
 
+exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
+    it(
+        'Click scope delivery checkbox #' + (scopeIndex + 1) +
+        ' for contribution #' + (contributionIndex + 1), function () {
+            pages.scopeDelivery.clickScopeDeliveryCheckbox(
+                contributionIndex, scopeIndex
+            );
+        }
+    );
+};
+
 exports.save = function () {
     it('Save Scope Delivery changes', function () {
         pages.scopeDelivery.save();
@@ -99,9 +110,9 @@ exports.clickOnRemoveScopeDelivery = function () {
 };
 
 exports.checkErrorMessageScopeDeliveryConflict = function (message) {
-  it("Check the error message for scope delivery conflict ", function(){
-      pages.scopeDelivery.checkTheErrorMessageScopeDeliveryConflict();
-  });
+    it("Check the error message for scope delivery conflict ", function () {
+        pages.scopeDelivery.checkTheErrorMessageScopeDeliveryConflict();
+    });
 };
 
 addBasicStep(exports, pages.scopeDelivery, 'Expect validation message');
@@ -118,6 +129,23 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 1);
+            pages.scopeDelivery.save();
+        });
+    });
+};
+
+exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex = function (i, indexMin, indexMax) {
+    it("Get deal number created in other tab and use it to work delivery ", function () {
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Contract brief number promise is " + promise);
+            pages.deal.printTheDealNumber();
+            pages.base.focusOnTheNewOpenedTab(i);
+            pages.deal.printTheDealNumber();
+            pages.scopeDelivery.searchDealsForContribution(0, promise);
+            pages.scopeDelivery.selectDealSearchResultByIndex(0);
+            for (var j = indexMin; j <= indexMax; j++) {
+                pages.scopeDelivery.clickScopeDeliveryCheckbox(0, indexMax);
+            }
             pages.scopeDelivery.save();
         });
     });
@@ -150,6 +178,30 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = functi
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
             pages.scopeDelivery.save();
         });
+    });
+};
+
+exports.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI = function (i) {
+    it("Select from delivered work filter drop down contract period with index number " + i, function () {
+        pages.scopeDelivery.clickOnContractPeriodFilterFromDeliveredWork();
+        pages.scopeDelivery.selectContractPeriodSearchResultByIndexFromFilteredWorkDelivery(i);
+    });
+};
+
+exports.selectFromDeliveredWorkFilterDropDownScopeWithIndexNumberI = function (i) {
+    it("Select from delivered work filter drop down scope with index number " + i, function () {
+        pages.scopeDelivery.clickOnScopeFilterFromDeliveredWork();
+        pages.scopeDelivery.selectScopeSearchResultByIndexFromFilteredWorkDelivery(i);
+    });
+};
+
+exports.checkTheTotalNumberOfWorks = function (count) {
+    it("Check the total number of works ", function () {
+        browser.driver.findElement(By.css("p[data-ng-show='dataHolder.workLogTotals.works'] span")).getText()
+            .then(function (promise) {
+                console.log("Total number of works are " + promise);
+                expect(promise).toEqual(count);
+            });
     });
 };
 

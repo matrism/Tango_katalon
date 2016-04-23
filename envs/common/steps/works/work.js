@@ -1484,7 +1484,7 @@ exports.checkDefaultFilterConflictWorksForWorkLog = function () {
 
 exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
     it("Click on work link to see details from delivery works number " + i, function () {
-        pages.works.clickOnTheWorkLinkFromDeliveryWorksPageNumberI(i);
+        pages.work.clickOnTheWorkLinkFromDeliveryWorksPageNumberI(i);
     });
 };
 

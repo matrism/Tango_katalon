@@ -380,15 +380,15 @@ exports.feature = [
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
-            for(var i=1; i<=6; i++) {
-            steps.createDealScope.addScopeTypeAndTerritory("Administration", "Europe");
+            for (var i = 1; i <= 5; i++) {
+                steps.createDealScope.addScopeTypeAndTerritory("Administration", "Europe");
             }
 
             steps.deal.itContinueToNextPage();
             steps.base.scrollIntoView("acquisition ", pages.createDealRtp.elems.acquisitionDescription);
             steps.createDealRtp.fillIntoAcquisitionDescription(1);
-            for(var i=1; i<=6; i++) {
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(i);
+            for (var i = 1; i <= 5; i++) {
+                steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(i);
             }
 
 
@@ -397,25 +397,25 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.base.openTheNewTab(urlUse);
-            //create another 20 works and deliver to the same deal
-            for (var i = 1; i <= 6; i++) {
-            steps.base.focusOnNewOpenedTab(1);
-            steps.base.useBlankEntityDataSlot('work', 0);
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
-            steps.newWork.selectRandomCreator(0);
-            steps.newWork.enterCreatorContribution(0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
+            //create another 5 works and deliver to the same deal
+            for (var i = 1; i <= 5; i++) {
+                steps.base.focusOnNewOpenedTab(1);
+                steps.base.useBlankEntityDataSlot('work', 0);
+                steps.newWork.goToNewWorkPage();
+                steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+                steps.newWork.selectRandomCreator(0);
+                steps.newWork.enterCreatorContribution(0, 100);
+                steps.newWork.optToIncludeWorkOnWebsite(false);
+                steps.newWork.saveWork();
 
 
-            steps.work.goToScopeDeliveryTab();
-            steps.scopeDelivery.deliverWork();
-            steps.base.focusOnNewOpenedTab(0);
-            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope(1);
+                steps.work.goToScopeDeliveryTab();
+                steps.scopeDelivery.deliverWork();
+                steps.base.focusOnNewOpenedTab(0);
+                steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope(1);
 
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.refreshThePage();
+                steps.base.focusOnNewOpenedTab(0);
+                steps.deal.refreshThePage();
             }
 
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
@@ -428,12 +428,164 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(2);
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.updateScopeDelivery();
+
             steps.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
             steps.scopeDelivery.clickOnRemoveScopeDelivery();
             steps.scopeDelivery.save();
 
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
+
+        }
+    },
+
+
+    {
+        name: "Deals view work count",
+        tags: ["filterDealsWorks"],
+        steps: function () {
+
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.deal.itContinueToNextPage();
+
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("50");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("51");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("51");
+
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(2);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Europe");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(3);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Asia");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(4);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Finland");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(5);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Asia");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(6);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Africa");
+
+            steps.deal.itContinueToNextPage();
+            steps.base.scrollIntoView("acquisition ", pages.createDealRtp.elems.acquisitionDescription);
+            steps.createDealRtp.fillIntoAcquisitionDescription(1);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(1);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(2);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(3);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(4);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(5);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(6);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(7);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(8);
+
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            //add works and deliver work to deal
+            steps.base.openTheNewTab(urlUse);
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 0, 0);
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 1, 3);
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 4, 5);
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 6, 7);
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+            steps.work.checkDefaultFilterContractPeriodForWorkLog();
+            steps.work.checkDefaultFilterScopeForWorkLog();
+            steps.work.checkDefaultFilterAllWorksForWorkLog();
+            steps.work.checkDefaultFilterConflictWorksForWorkLog();
+
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
+            steps.scopeDelivery.checkTheTotalNumberOfWorks("4");
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(1);
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownScopeWithIndexNumberI(1);
+            steps.work.goBackToMainPageFromWork();
 
         }
     }

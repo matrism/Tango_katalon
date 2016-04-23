@@ -10,13 +10,13 @@ exports.deliverWorkButton = function () {
     ));
 };
 
-exports.updateScopeDeliveryButton = function(){
+exports.updateScopeDeliveryButton = function () {
     return element(by.cssContainingText(
         'button', 'Update Scope Delivery'
     ));
 };
 
-exports.removeScopeDeliveryButton = function(){
+exports.removeScopeDeliveryButton = function () {
     return element(by.cssContainingText(
         'span', 'Remove'
     ));
@@ -30,15 +30,22 @@ exports.deliverWork = function () {
     return exports.deliverWorkButton().click();
 };
 
-exports.updateTheScopeDelivery = function(){
-    return exports.updateScopeDeliveryButton().click();
+exports.updateTheScopeDelivery = function () {
+    browser.wait(ExpectedConditions.visibilityOf(exports.updateScopeDeliveryButton()));
+    return exports.updateScopeDeliveryButton().click().then(function () {
+        pages.base.waitForAjax();
+    });
 };
 
-exports.clickOnTheRemoveScopeDelivery = function(){
-  return exports.removeScopeDeliveryButton().click();
+exports.clickOnTheRemoveScopeDelivery = function () {
+    browser.wait(ExpectedConditions.visibilityOf(exports.removeScopeDeliveryButton()));
+    pages.base.scrollIntoView(exports.removeScopeDeliveryButton());
+    return exports.removeScopeDeliveryButton().click().then(function () {
+        pages.base.waitForAjax();
+    });
 };
 
-exports.checkTheErrorMessageScopeDeliveryConflict = function(){
+exports.checkTheErrorMessageScopeDeliveryConflict = function () {
     browser.driver.findElement(By.css("div[data-ng-repeat='conflict in dealScope.conflicts']")).getText()
         .then(function (promise) {
             console.log("Error is  " + promise);
@@ -63,10 +70,74 @@ exports.dealSearchInput = function (i) {
     return $$('.scope-delivery__search-deal input').get(i);
 };
 
+exports.contractPeriodFilterButton = function () {
+    return element(by.css("div[data-tg-dropdown-selected='selectWorkLogCP();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+};
+
+exports.scopeFilterButton= function(){
+  return element(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+};
+
+exports.clickOnContractPeriodFilterFromDeliveredWork = function () {
+    var element = exports.contractPeriodFilterButton();
+    return element.click().then(function () {
+        pages.base.waitForAjax();
+    });
+};
+
+exports.clickOnScopeFilterFromDeliveredWork = function () {
+    var element = exports.scopeFilterButton();
+    return element.click().then(function () {
+        pages.base.waitForAjax();
+    });
+};
+
+exports.contractPeriodSearchResultsFilter = function(i){
+    var elements = exports.contractPeriodDropDownResults();
+    browser.wait(ExpectedConditions.visibilityOfAny(elements));
+    return elements.get(i);
+};
+
+exports.scopeSearchResultsFilter = function(i){
+    var elements = exports.scopeDropDownResults();
+    browser.wait(ExpectedConditions.visibilityOfAny(elements));
+    return elements.get(i);
+};
+
+exports.selectContractPeriodSearchResultByIndexFromFilteredWorkDelivery = function (i) {
+    var element = exports.contractPeriodSearchResultsFilter(i),
+        clickPromise;
+
+    clickPromise = element.click();
+    pages.base.waitForAjax();
+
+    return clickPromise;
+};
+
+exports.selectScopeSearchResultByIndexFromFilteredWorkDelivery = function (i) {
+    var element = exports.scopeSearchResultsFilter(i),
+        clickPromise;
+
+    clickPromise = element.click();
+    pages.base.waitForAjax();
+
+    return clickPromise;
+};
+
 exports.searchDealsForContribution = function (i, terms) {
     var element = exports.dealSearchInput(i);
     pages.base.scrollIntoView(element);
     return element.sendKeys(terms);
+};
+
+exports.contractPeriodDropDownResults = function () {
+    pages.base.waitForAjax();
+    return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
+};
+
+exports.scopeDropDownResults = function () {
+    pages.base.waitForAjax();
+    return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
 };
 
 exports.dealSearchResults = function () {
@@ -79,6 +150,7 @@ exports.dealSearchResult = function (i) {
     browser.wait(ExpectedConditions.visibilityOfAny(elements));
     return elements.get(i);
 };
+
 
 exports.selectDealSearchResultByIndex = function (i) {
     var element = exports.dealSearchResult(i),
@@ -257,5 +329,6 @@ exports.expectValidationMessage = function (expected) {
 
     return expect(isDisplayed).toBeTruthy();
 };
+
 
 

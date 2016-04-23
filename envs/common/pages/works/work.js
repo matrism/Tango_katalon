@@ -1292,9 +1292,12 @@ exports.scopeDeliveryTab = function () {
 };
 
 exports.goToScopeDeliveryTab = function () {
+    browser.wait(ExpectedConditions.visibilityOf(exports.scopeDeliveryTab()));
     var element = exports.scopeDeliveryTab();
     pages.base.scrollIntoView(element);
-    return element.click();
+    return element.click().then(function () {
+        pages.base.waitForAjax();
+    });
 };
 
 
