@@ -458,7 +458,7 @@ exports.feature = [
             }
 
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
             steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
@@ -467,15 +467,15 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
             steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
-            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("51");
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("50");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
-            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("51");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
 
 
             steps.createDealContractPeriod.selectContractPeriodNumberI(2);
@@ -520,10 +520,11 @@ exports.feature = [
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
             steps.newWork.saveWork();
+            var workId = steps.work.findCurrentlyOpenWorkId();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(0);
-            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 0, 0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 0, 1);
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
 
@@ -538,7 +539,7 @@ exports.feature = [
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(0);
-            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 1, 3);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 2, 3);
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
 
@@ -569,6 +570,31 @@ exports.feature = [
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(0);
             steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 6, 7);
+
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editIntoFirstPublisherNameOwnFieldSpecificValue("51");
+            steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("51");
+            steps.editDealScope.editSaveThePublisherShareSet();
+            //steps.deal.checkGrowlMessageDisplayedAfterScopeEdited("Delivered Works are being updated. Please check Deal later today for Delivery conflicts.");
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.goToHomePage();
+            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
+            steps.work.enterWorkSearchTerms(workId);
+            steps.base.sleep(200);
+            steps.base.waitForAjax();
+            steps.work.clickWorkSearchMatch(0);
+            steps.base.waitForAjax();
+            steps.work.goToScopeDeliveryTab();
+            steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
+
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
 
@@ -582,9 +608,16 @@ exports.feature = [
 
             steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
             steps.scopeDelivery.checkTheTotalNumberOfWorks("4");
+            //steps.scopeDelivery.checkTheTotalNumberOfWorksAndConflictingWorksMessage("Total: 4 Works - 1 have conflict(s)");
             steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(1);
             steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
             steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownScopeWithIndexNumberI(1);
+
+            steps.work.clickOnConflictingWorksButtonFilterForWorkLog();
+            steps.work.checkDefaultFilterConflictWorksForWorkLogSelected();
+            steps.work.clickOnAllWorksButtonFilterForWorkLog();
+            steps.work.checkDefaultFilterAllWorksForWorkLog();
+            steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
 
         }

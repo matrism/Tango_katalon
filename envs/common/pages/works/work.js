@@ -1112,6 +1112,16 @@ exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = funct
         expect(presentAndDisplayed).toBeTruthy();
     });
 };
+
+
+exports.allWorksButton = function () {
+    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)"));
+};
+
+exports.conflictingWorksButton = function(){
+    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)"));
+};
+
 exports.deleteComponentWork = function (i) {
     var element = exports.deleteComponentWorkButton(i);
     pages.base.scrollIntoView(element);
@@ -1248,6 +1258,24 @@ exports.generalTab = function () {
         by.cssContainingText('span', 'General')
     );
 };
+
+
+exports.clickOnTheAllWorksButtonFilterForWorkLog = function(){
+    var element = exports.allWorksButton();
+    pages.base.scrollIntoView(element);
+    return element.click().then(function () {
+        pages.base.waitForAjax();
+    });
+};
+
+exports.clickOnTheConflictingWorksButtonFilterForWorkLog = function(){
+    var element = exports.conflictingWorksButton();
+    pages.base.scrollIntoView(element);
+    return element.click().then(function () {
+        pages.base.waitForAjax();
+    });
+};
+
 
 exports.goToGeneralTab = function () {
     var element = exports.generalTab();

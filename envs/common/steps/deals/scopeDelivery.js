@@ -205,3 +205,12 @@ exports.checkTheTotalNumberOfWorks = function (count) {
     });
 };
 
+exports.checkTheTotalNumberOfWorksAndConflictingWorksMessage = function (message) {
+    it("Check the total number of works and conflicting works message", function () {
+        browser.driver.findElement(By.css("p[data-ng-show='dataHolder.workLogTotals.works']")).getText()
+            .then(function (promise) {
+                console.log("Total number of works and conflicting works message is  " + promise);
+                expect(promise).toEqual(message);
+            });
+    });
+};

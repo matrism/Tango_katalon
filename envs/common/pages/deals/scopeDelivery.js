@@ -23,7 +23,7 @@ exports.removeScopeDeliveryButton = function () {
 };
 
 exports.scopeDeliveryTabElement = function () {
-    return element(by.css("ul.nav.nav-tabs.tg-sticky-header.m-is-sticky li.ng-scope:nth-child(3) a"))
+    return element(by.css("ul.nav.nav-tabs.tg-sticky-header.m-is-sticky li.ng-scope:nth-child(3) a"));
 };
 
 exports.deliverWork = function () {
@@ -132,12 +132,14 @@ exports.searchDealsForContribution = function (i, terms) {
 
 exports.contractPeriodDropDownResults = function () {
     pages.base.waitForAjax();
-    return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
+    return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li"));
+    //return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
 };
 
 exports.scopeDropDownResults = function () {
     pages.base.waitForAjax();
-    return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
+    return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li"));
+    //return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
 };
 
 exports.dealSearchResults = function () {

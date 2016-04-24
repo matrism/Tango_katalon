@@ -1435,6 +1435,19 @@ exports.goBackToMainPageFromWork = function () {
     });
 };
 
+
+exports.clickOnAllWorksButtonFilterForWorkLog = function() {
+    it("Click on the all works button filter for work log ", function(){
+        pages.work.clickOnTheAllWorksButtonFilterForWorkLog();
+    });
+};
+
+exports.clickOnConflictingWorksButtonFilterForWorkLog = function() {
+    it("Click on the conflicting works button filter for work log ", function(){
+        pages.work.clickOnTheConflictingWorksButtonFilterForWorkLog();
+    });
+};
+
 exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
     it("Check that the error message for work conflicts is ok ", function () {
         browser.driver.findElement(By.css("p[data-ng-if='hasDealConflicts()'] span")).getText().then(function (promise) {
@@ -1472,12 +1485,23 @@ exports.checkDefaultFilterAllWorksForWorkLog = function () {
     });
 };
 
+
 exports.checkDefaultFilterConflictWorksForWorkLog = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
         browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
             .then(function (promise) {
                 console.log("The default filters for work log conflict works is not default " + promise);
                 expect(promise).not.toContain("active");
+            });
+    });
+};
+
+exports.checkDefaultFilterConflictWorksForWorkLogSelected= function () {
+    it("Check the default filters for work log all/conflict works is all works ", function () {
+        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
+            .then(function (promise) {
+                console.log("The default filters for work log conflict works is not default " + promise);
+                expect(promise).toContain("active");
             });
     });
 };
