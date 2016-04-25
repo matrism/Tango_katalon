@@ -865,28 +865,6 @@
                 tat.stm.logDiv.c.push(
                     tat.makeLineDiv('log literal', ln)
                 );
-            },
-
-            allDone: function () {
-                $('.totalFeatures > .val').text(tat.featureCount);
-                $('.totalScenarios > .val').text(tat.scenarioCount);
-                $('.totalSteps > .val').text(tat.stepCount);
-
-                $('.totalFeaturesPassed > .val').text(tat.passedFeatures);
-                $('.totalScenariosPassed > .val').text(tat.passedScenarios);
-                $('.totalStepsPassed > .val').text(tat.passedSteps);
-
-                $('.totalFeaturesFailed > .val').text(
-                    tat.featureCount - tat.passedFeatures
-                );
-
-                $('.totalScenariosFailed > .val').text(
-                    tat.scenarioCount - tat.passedScenarios
-                );
-
-                $('.totalStepsFailed > .val').text(
-                    tat.stepCount - tat.passedSteps
-                );
             }
         });
     </script>
@@ -918,6 +896,26 @@
 
             console.log('Rendering...');
             console.time('Render time');
+
+            $('.totalFeatures > .val').text(tat.featureCount);
+            $('.totalScenarios > .val').text(tat.scenarioCount);
+            $('.totalSteps > .val').text(tat.stepCount);
+
+            $('.totalFeaturesPassed > .val').text(tat.passedFeatures);
+            $('.totalScenariosPassed > .val').text(tat.passedScenarios);
+            $('.totalStepsPassed > .val').text(tat.passedSteps);
+
+            $('.totalFeaturesFailed > .val').text(
+                tat.featureCount - tat.passedFeatures
+            );
+
+            $('.totalScenariosFailed > .val').text(
+                tat.scenarioCount - tat.passedScenarios
+            );
+
+            $('.totalStepsFailed > .val').text(
+                tat.stepCount - tat.passedSteps
+            );
 
             $body.append($(tat.streams.reduce(function (html, stm) {
                 return html + tat.renderEl(stm.div);
