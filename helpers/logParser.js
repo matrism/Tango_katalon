@@ -321,6 +321,8 @@ parseStateHandlers.block = [
 
     {
         re: /^Step: (.+)$/, fn: function (l, name) {
+            ++this.stm.stepNum;
+
             this.fire('stepStarted', name, l);
             this.stm.parseState = 'step';
         }
