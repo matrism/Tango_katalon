@@ -348,7 +348,9 @@ exports.feature = [
             steps.createDealContractPeriod.clickOnEndRulesArea();
             steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 30% is on 2014-12-08, and Balance Repaid at 32% is before the MDRC Complete Date, and Recouped at 30% (with notice) is after the Target End Date, and NOT Final Contract Period, then the Actual End Date is the MDRC Complete Date offset by 21 days.");
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
+            steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
             steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, and NOT Final Contract Period, then the Actual End Date is the MDRC Complete Date offset by 21 days.");
             //add new rule
             steps.createDealContractPeriod.clickOnAddRuleInTheBottomOfEndRulesForm();
