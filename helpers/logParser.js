@@ -323,7 +323,7 @@ parseStateHandlers.block = [
         re: /^Step: (.+)$/, fn: function (l, name) {
             ++this.stm.stepNum;
 
-            this.fire('stepStarted', name, l);
+            this.fire('stepStarted', name, this.stm.stepNum, l);
             this.stm.parseState = 'step';
         }
     },
