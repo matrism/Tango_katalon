@@ -483,7 +483,8 @@ exports.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () 
                         pages.editDealScope.editInFirstPublisherNameField("test");
                         pages.editDealScope.editSelectRandomPublisherNameDropDown();
                         pages.editDealScope.editInFirstPublisherNameOwnPercent();
-                        pages.editDealScope.editInFirstPublisherNameCollectPercent();
+                        //pages.editDealScope.editInFirstPublisherNameCollectPercent();
+                        pages.editDealScope.editInFirstPublisherNameOwnPercentSpecificValue("30");
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -524,6 +525,12 @@ exports.editSelectSpecificPublisherNameDropDownChainI = function (i) {
 exports.editIntoPublisherNameAMCollectFieldChainI = function (i) {
     it("Edit - fill into publisher name AM collect chain i percent random value", function () {
         pages.editDealScope.editPublisherNameAMCollectPercentChainI(i);
+    });
+};
+
+exports.editIntoPublisherNameAMCollectFieldChainISpecificValue = function (i, percent) {
+    it("Edit - fill into publisher name AM collect chain i percent specific value", function () {
+        pages.editDealScope.editPublisherNameAMCollectPercentChainISpecificValue(i, percent);
     });
 };
 
@@ -576,7 +583,9 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
                         pages.editDealScope.editPublisherNameFieldChainI(i);
                         pages.editDealScope.editSelectRandomPublisherNameDropDownChainI(i);
                         pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
-                        pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
+                        pages.editDealScope.editPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
+                        pages.editDealScope.editPublisherNameCollectPercentFieldChainISpecificValue(i, "25");
+                        //pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -951,7 +960,8 @@ exports.itEditPublisherShare = function () {
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
-        steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
+        steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("20");
+        //steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
     });
 };
 
@@ -978,7 +988,8 @@ exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
         steps.editDealScope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
         steps.editDealScope.editIntoPublisherNameAMFieldChainI(i);
         steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
-        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
+        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainISpecificValue(i, "10");
+        //steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
 };
 

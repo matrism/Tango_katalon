@@ -368,7 +368,8 @@ exports.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () {
                         pages.createDealScope.fillInFirstPublisherNameField("test");
                         pages.createDealScope.selectRandomPublisherNameDropDown();
                         pages.createDealScope.fillInFirstPublisherNameOwnPercentSpecificValue("30");
-                        pages.createDealScope.fillInFirstPublisherNameCollectPercent();
+                        pages.createDealScope.fillInFirstPublisherNameCollectPercentSpecificValue("20");
+                        //pages.createDealScope.fillInFirstPublisherNameCollectPercent();
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -487,7 +488,8 @@ exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
                         pages.createDealScope.fillPublisherNameFieldChainI(i);
                         pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
                         pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
-                        pages.createDealScope.fillPublisherNameCollectPercentFieldChainI(i);
+                        pages.createDealScope.fillPublisherNameCollectPercentFieldChainISpecificValue(i, "25");
+                        //pages.createDealScope.fillPublisherNameCollectPercentFieldChainI(i);
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -676,7 +678,8 @@ exports.itAddPublisherShare = function () {
         steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.createDealScope.fillIntoFirstPublisherNameAMField("53026414");
         steps.createDealScope.selectSpecificPublisherNameDropDown();
-        steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
+        steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("10");
+        //steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
     });
 };
 
@@ -736,7 +739,8 @@ exports.itAddPublisherShareWithMultipleThreeChains = function (i) {
         steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
         steps.createDealScope.fillIntoPublisherNameAMFieldChainI(i);
         steps.createDealScope.selectSpecificPublisherNameDropDownChainI(i);
-        steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(i);
+        steps.createDealScope.fillIntoPublisherNameAMCollectPercentChainISpecificValue(i, "10");
+        //steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(i);
     });
 };
 

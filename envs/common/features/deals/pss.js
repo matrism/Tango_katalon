@@ -62,8 +62,6 @@ exports.feature = [
                 steps.createDealScope.itAddPublisherShareWithMultipleThreeChains(i);
                 steps.createDealScope.validateDeleteChainIIconPublisherShare(i);
             }
-            steps.base.scrollIntoView("Delete chain icon publisher share set", element(By.css("#deal-publisher div.ng-scope:nth-child(1) div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")));
-            steps.createDealScope.deleteChainIPublisherShare(1);
             steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
             steps.deal.itContinueToNextPage();

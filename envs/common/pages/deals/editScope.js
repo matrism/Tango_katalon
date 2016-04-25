@@ -616,6 +616,12 @@ if (pages.editDealScope === undefined) {
                 element.sendKeys("test");
             },
 
+        editPublisherNameOwnPercentFieldChainISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
+        },
+
             editPublisherNameOwnPercentFieldChainI: function (i) {
                 var percent = (Math.random() * 3 + 30).toFixed(2);
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"));
@@ -629,6 +635,12 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(element);
                 element.sendKeys(percent);
             },
+
+        editPublisherNameCollectPercentFieldChainISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("#deal-publisher  div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
+        },
 
             editPublisherNameAMFieldChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"));
@@ -675,6 +687,12 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(element);
                 element.sendKeys(percent);
             },
+
+        editPublisherNameAMCollectPercentChainISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
+        },
 
             editClickOnDeleteIconChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope"));
