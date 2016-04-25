@@ -243,7 +243,7 @@ exports.feature = [
 
     {
         name: "Create a deal with end rules on contract period and test delete scenarios",
-        tags: ["edit_delete__entire_end_rules"],
+        tags: ["edit_delete_entire_end_rules"],
         steps: function () {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
