@@ -482,9 +482,10 @@ exports.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () 
                         console.log("We are on the E case");
                         pages.editDealScope.editInFirstPublisherNameField("test");
                         pages.editDealScope.editSelectRandomPublisherNameDropDown();
-                        pages.editDealScope.editInFirstPublisherNameOwnPercent();
+                        //pages.editDealScope.editInFirstPublisherNameOwnPercent();
                         //pages.editDealScope.editInFirstPublisherNameCollectPercent();
                         pages.editDealScope.editInFirstPublisherNameOwnPercentSpecificValue("30");
+                        pages.editDealScope.editInFirstPublisherNameCollectPercentSpecificValue("20");
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -582,7 +583,7 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
                         console.log("We are on the E case");
                         pages.editDealScope.editPublisherNameFieldChainI(i);
                         pages.editDealScope.editSelectRandomPublisherNameDropDownChainI(i);
-                        pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
+                        //pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
                         pages.editDealScope.editPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
                         pages.editDealScope.editPublisherNameCollectPercentFieldChainISpecificValue(i, "25");
                         //pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
@@ -960,7 +961,7 @@ exports.itEditPublisherShare = function () {
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
-        steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("20");
+        steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("10");
         //steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
     });
 };
