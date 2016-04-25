@@ -76,7 +76,6 @@ exports.feature = [
                 nard = na.releaseDetails;
 
             steps.base.useEntityDataSlot('album', 'commercialAlbum');
-            //hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             na.goToNewAlbumPage();
             na.enterTitle(
@@ -210,7 +209,6 @@ exports.feature = [
 
             steps.base.useEntityDataSlot('work', 'mainWork');
             w.goToWorkPage();
-            //this.goToWorkPageById('WW 015062988 00');
             w.goToRecordingsTab();
 
             wr.toggleRecording(0);
@@ -254,7 +252,6 @@ exports.feature = [
                 nar = na.recordings;
 
             steps.base.useEntityDataSlot('album', 'libraryAlbum');
-            //hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             na.goToNewAlbumPage();
             na.enterTitle(
@@ -321,10 +318,8 @@ exports.feature = [
                 i = 3;
 
             steps.base.useEntityDataSlot('album', 'commercialAlbum');
-           // hash.entityDataSlotsByType = {work: {mainWork: {id: 'WW 015062988 00'}}};
 
             a.goToAlbumPage();
-            //a.goToAlbumPage('b1e48ecd-0721-11e6-a3e5-6a003dc3dea3');
 
             ah.editAlbumTitle();
             ah.enterAlbumTitle(
