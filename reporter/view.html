@@ -685,14 +685,14 @@
                 stm.logDiv = bDiv;
             },
 
-            stepStarted: function (stmId, name) {
+            stepStarted: function (stmId, name, num) {
                 var stm = tat.stm,
 
                     stDiv = stm.stDiv = tat.el(
                         'div', 'step block collapse'
                     );
 
-                stDiv.c.push(tat.makeFieldDiv('name', 'Step', name));
+                stDiv.c.push(tat.makeFieldDiv('name', 'S-' + num, name));
 
                 stm.bDiv.c.push(stDiv);
                 stm.logDiv = stDiv;
