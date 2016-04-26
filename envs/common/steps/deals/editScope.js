@@ -1,7 +1,6 @@
 "use strict";
 
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+var page = pages.editDealScope;
 
 steps.editDealScope = exports;
 
