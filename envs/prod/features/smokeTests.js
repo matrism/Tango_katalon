@@ -33,11 +33,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = [
-    'productionSmoke',
-    'production',
-    'smoke'
-];
+exports.commonFeatureTags = ["smoke", "production"];
 
 exports.feature = [
     {

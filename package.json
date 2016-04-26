@@ -33,7 +33,7 @@
     "karma-junit-reporter": "~0.2",
     "karma-phantomjs-launcher": "~0.1",
     "left-pad": "0.0.9",
-    "lodash": "^4.10.0",
+    "lodash": "^2.4.1",
     "lpad": "~0.1.0",
     "mkdirp": "latest",
     "moment": "^2.10.3",

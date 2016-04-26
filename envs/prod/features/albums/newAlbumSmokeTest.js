@@ -9,12 +9,7 @@ exports.beforeFeature = [
     [steps.login.itLogin],
 ];
 
-exports.commonFeatureTags = [
-    'albums',
-    'productionSmoke',
-    'production',
-    'smoke'
-];
+exports.commonFeatureTags = ['albums', 'smoke', 'production'];
 
 exports.feature = [
     {

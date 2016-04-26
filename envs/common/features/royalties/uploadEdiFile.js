@@ -56,7 +56,7 @@ function fillFormWithFileData(file, fileDefaults, clickCreate, useOriginalName) 
 
     file.fileName = path.resolve(__dirname, file.fileName);
 
-    using(steps.uploadEdiFile, function() {
+    using(pages.uploadEdiFile, function() {
         file.expectedAmount = file.expectedAmount || file.amount;
 
         if (noUpload) {
@@ -487,7 +487,7 @@ exports.feature = [
 
                 file.fileName = path.resolve(__dirname, file.fileName);
 
-                using(steps.uploadEdiFile, function() {
+                using(pages.uploadEdiFile, function() {
                     file.expectedAmount = file.expectedAmount || file.amount;
 
                     if (file.customFormat === false) {

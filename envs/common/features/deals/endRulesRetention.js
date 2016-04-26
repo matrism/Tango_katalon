@@ -4,12 +4,12 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 },
 
-exports.commonFeatureTags = [
-    'deals', 
-    'endRules', 
-    'endRulesRetention',
-    'regression'
-];
+    exports.commonFeatureTags = [
+        'deals',
+        'endRules',
+        'endRulesRetention',
+        'regression'
+    ];
 
 exports.feature = [
     {
@@ -331,7 +331,7 @@ exports.feature = [
 
             // save end rules
             er.saveEndRulesForm();
-            
+
             cdr.hoverEndRules();
             cdr.validateSummaryEndRule(1, 'If Balance Repaid at 45% (with notice) is after the Recouped Date, then the Actual End Date is the Repayment Date.');
             cdr.validateSummaryEndRule(2, 'If Balance Repaid at 32% is before the Recouped Date, then the Actual End Date is the Retention Period Start offset by 21 days.');
@@ -340,5 +340,6 @@ exports.feature = [
             d.waitForDealToBeSaved();
             d.returnDealNumber();
         }
-    },
+    }
+
 ];

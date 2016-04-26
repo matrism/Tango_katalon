@@ -7,17 +7,12 @@ exports.beforeFeature = [
     [steps.login.itLogin],
 ];
 
-exports.commonFeatureTags = [
-    'organisationSmoke',
-    'productionSmoke',
-    'production',
-    'smoke'
-];
+exports.commonFeatureTags = [ 'productionSmokeTest', 'production', 'organisationSmokeTests' ];
 
 exports.feature = [
     {
         name: 'Create Organisation form',
-        tags: ['newOrganisationFormProductionSmoke'],
+        tags: ['newOrganisationFormProductionSmokeTest','smokeProd'],
         steps: function () {
             steps.mainHeader.createNewRecord('Organisation');
 

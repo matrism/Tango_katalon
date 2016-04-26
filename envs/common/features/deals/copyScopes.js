@@ -66,11 +66,6 @@ exports.feature = [
             steps.editDealScope.itEditOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.editDealScope.editSaveThePublisherShareSetWithModal();
 
-            steps.editDealScope.selectScopeNumberI(4);
-            steps.editDealScope.checkOverrideTitleAndNumber(1);
-            steps.editDealScope.selectScopeNumberI(5);
-            steps.editDealScope.checkOverrideTitleAndNumber(1);
-
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editCopySpecificNumberOfScopesFromScopeNumberI(1, 2);
 
