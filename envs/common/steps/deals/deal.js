@@ -6,6 +6,9 @@ var promise = protractor.promise,
 
 steps.deal = exports;
 
+hash.dealSlots = {};
+hash.currentDealSlot = null;
+
 exports.goToNextPage = function () {
     it("Click on continue to next page button", function () {
         pages.deal.continueToNextPage();
@@ -66,21 +69,67 @@ exports.waitForDealToBeSaved = function () {
 
 exports.returnDealNumber = function () {
     it("Return deal number ", function () {
-        pages.deal.elems.dealBriefNumber.getText().
-            then(function (promise) {
-                console.log("Deal number is " + promise);
-            });
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Deal number is " + promise);
+        });
     });
 };
 
 exports.printDealNumber = function () {
     it("Return deal number ", function () {
-        pages.deal.elems.dealBriefNumber.getText().
-            then(function (promise) {
-                console.log("Deal number is " + promise);
-            });
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Deal number is " + promise);
+        });
     });
 };
+
+exports.useDealSlot = function (i) {
+    it('Use deal slot #' + (i + 1), function () {
+        var currentDealSlot;
+
+        if (!hash.dealSlots[i]) {
+            currentDealSlot = hash.dealSlots[i] = {};
+            currentDealSlot.slotIndex = i;
+        }
+        else {
+            currentDealSlot = hash.dealSlots[i];
+        }
+
+        hash.currentDealSlot = currentDealSlot;
+    });
+};
+
+exports.clearCurrentPersonSlot = function () {
+    it('Clear current deal slot', function () {
+        var currentIndex = hash.currentDealSlot.slotIndex;
+
+        hash.currentDealSlot = hash.dealSlots[currentIndex] = {
+            slotIndex: currentIndex,
+        };
+    });
+};
+
+
+   exports.findCurrentlyOpenDealId = function () {
+        //var deferred = promise.defer();
+
+        it("Find currently open deal ID", function () {
+            var idBinding = element(by.binding(
+                'getPristineDeal().deal_header.contract_brief_number'
+            ));
+            console.log("id binding " + idBinding);
+            idBinding.getText().then(function (value) {
+                console.log("value is " + value);
+                hash.currentDealSlot = value;
+                console.log("Slot is " + hash.currentDealSlot);
+
+            });
+
+            //deferred.fulfill(idBinding);
+        });
+        //return deferred.promise;
+    };
+
 
 exports.findId = function () {
     it('Find deal ID', function () {
@@ -245,6 +294,16 @@ exports.checkFinderDealsHeaderTitlePresent = function () {
     });
 };
 
+exports.checkGrowlMessageDisplayedAfterScopeEdited = function (message) {
+    it("Check that the success message after saving in the top of the screen is ok ", function () {
+        browser.driver.findElement(By.css("div.growl-item.ng-scope.growl-item-success p")).getText().then(function (promise) {
+            console.log("The success message after saving in the top of the screen is " + promise);
+            expect(promise).toEqual(message);
+        });
+    });
+};
+//div.growl-item.ng-scope.growl-item-success
+
 addBasicStep(
     exports, pages.deal, 'Validate Society Agreement Numbers link presence'
 );
@@ -264,5 +323,6 @@ addBasicStep(exports, pages.deal, 'Add Contracting Parties');
 addBasicStep(exports, pages.deal, 'Expect number of Contracting Parties to be');
 addBasicStep(exports, pages.deal, 'Expect number of External Contacts to be');
 addBasicStep(exports, pages.deal, 'Expect number of Internal Contacts to be');
+
 
 

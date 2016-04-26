@@ -384,6 +384,7 @@ exports.enterCreatorContribution = function(i, value) {
 
                 creator.contribution = value;
             });
+            pages.newWork.waitForAjax();
         }
     );
 };
@@ -873,6 +874,7 @@ module.exports.optToIncludeWorkOnWebsite = function(include) {
 	it (
 		"Opt whether to include work on WarnerChappell.com or not", function() {
 			pages.newWork.optToIncludeWorkOnWebsite(include);
+            pages.newWork.waitForAjax();
 		}
 	);
 };

@@ -9,7 +9,7 @@ exports.commonFeatureTags = ['deals', 'psss', 'regression'];
 exports.feature = [
     {
         name: "Create a deal with publisher share set",
-        tags: ["create"],
+        tags: ["pss2"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -22,6 +22,7 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+
         }
     }
 ];
