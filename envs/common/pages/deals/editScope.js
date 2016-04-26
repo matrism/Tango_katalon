@@ -12,6 +12,7 @@ if (pages.editDealScope === undefined) {
                 contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
                 editTerritoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
                 editTerritoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+                editTerritoryDeleteIcon: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] span[ng-click='!$isDisabled() && $removeTag($tag); $event.stopPropagation();']"},
                 editTerritoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
                 publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
                 publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.DETAIL.ng-scope"},
@@ -83,8 +84,8 @@ if (pages.editDealScope === undefined) {
             },
 
             editTheScopeArea: function () {
-                asAlways(pages.editDealScope.elems.editScopeAreaElement, 'scrollIntoView', 'click');
-                asAlways(pages.editDealScope.elems.editScopeIcon, 'scrollIntoView', 'click');
+                pages.editDealScope.elems.editScopeAreaElement.click();
+                pages.editDealScope.elems.editScopeIcon.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryField))
             },
 
@@ -112,6 +113,11 @@ if (pages.editDealScope === undefined) {
                             desiredOption.click();
                         }
                     });
+            },
+
+            editDeleteTheExistingTerritoryFromScope: function () {
+                pages.editDealScope.elems.editTerritoryField.click();
+                pages.editDealScope.elems.editTerritoryDeleteIcon.click();
             },
 
             addTheSpecificTerritoryByTypingToScope: function (territory) {
@@ -157,9 +163,9 @@ if (pages.editDealScope === undefined) {
             },
 
             editSaveTheScopeChanges: function () {
-                return asAlways(
-                    exports.elems.saveEditScope, 'scrollIntoView', 'click', 'waitForAjax'
-                );
+                pages.editDealScope.elems.saveEditScope.click();
+                pages.editDealScope.waitForAjax();
+                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
             },
 
             waitForTheScopeNumberIToBeVisible: function (i) {
@@ -171,10 +177,13 @@ if (pages.editDealScope === undefined) {
             },
 
             clickOnScopeNumberI: function (i) {
-                return asAlways(
-                    exports.scopeMenuItems().get(i - 1),
-                    'scrollIntoView', 'scrollIntoView'
-                ).click();
+                pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))));
+                //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
+                //browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+                browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+                //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
+                browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
             },
 
             checkOverrideNumbersAddedOnScope: function (i) {
@@ -483,9 +492,9 @@ if (pages.editDealScope === undefined) {
             },
 
             editSaveTheChangesPage: function () {
-                return asAlways(
-                    pages.editDealScope.elems.saveChanges, 'scrollIntoView', 'click', 'waitForAjax'
-                );
+                pages.base.scrollIntoView(pages.editDealScope.elems.saveChanges);
+                pages.editDealScope.elems.saveChanges.click();
+                pages.editDealScope.waitForAjax();
             },
 
             editInFirstPublisherNameAMCollectPercentSpecificValue: function (percent) {
@@ -628,6 +637,12 @@ if (pages.editDealScope === undefined) {
                 element.sendKeys("test");
             },
 
+        editPublisherNameOwnPercentFieldChainISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
+        },
+
             editPublisherNameOwnPercentFieldChainI: function (i) {
                 var percent = (Math.random() * 3 + 30).toFixed(2);
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"));
@@ -641,6 +656,12 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(element);
                 element.sendKeys(percent);
             },
+
+        editPublisherNameCollectPercentFieldChainISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("#deal-publisher  div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
+        },
 
             editPublisherNameAMFieldChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"));
@@ -687,6 +708,12 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(element);
                 element.sendKeys(percent);
             },
+
+        editPublisherNameAMCollectPercentChainISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
+        },
 
             editClickOnDeleteIconChainI: function (i) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope"));
@@ -783,9 +810,8 @@ if (pages.editDealScope === undefined) {
             },
 
             editClickOnTheCopyScopeButtonNumberOfCopiesScopeNumberIWait: function (i) {
-                var el = element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']"));
-                asAlways(el, 'scrollIntoView', 'click');
-                pages.base.waitForAjax();
+                pages.base.scrollIntoView(element(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")));
+                browser.driver.findElement(by.css("ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") div[data-ng-form='scopeCopyForm'] button[data-ng-click='copyScope(sp.id)']")).click();
                 browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
             },
 
@@ -1058,6 +1084,13 @@ if (pages.editDealScope === undefined) {
                 //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(3) a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
 
                 //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 100000);
+            },
+
+            clickOnTheWorkLinkFromScopeNumberI: function (i) {
+                pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']")));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))));
+                browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))).perform();
+                browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))).perform();
             }
 
         }

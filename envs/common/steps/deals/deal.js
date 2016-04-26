@@ -245,6 +245,16 @@ exports.checkFinderDealsHeaderTitlePresent = function () {
     });
 };
 
+exports.checkGrowlMessageDisplayedAfterScopeEdited = function (message) {
+    it("Check that the success message after saving in the top of the screen is ok ", function () {
+        browser.driver.findElement(By.css("div.growl-item.ng-scope.growl-item-success p")).getText().then(function (promise) {
+            console.log("The success message after saving in the top of the screen is " + promise);
+            expect(promise).toEqual(message);
+        });
+    });
+};
+//div.growl-item.ng-scope.growl-item-success
+
 addBasicStep(
     exports, pages.deal, 'Validate Society Agreement Numbers link presence'
 );
@@ -264,5 +274,6 @@ addBasicStep(exports, pages.deal, 'Add Contracting Parties');
 addBasicStep(exports, pages.deal, 'Expect number of Contracting Parties to be');
 addBasicStep(exports, pages.deal, 'Expect number of External Contacts to be');
 addBasicStep(exports, pages.deal, 'Expect number of Internal Contacts to be');
+
 
 

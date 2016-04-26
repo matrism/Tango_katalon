@@ -186,6 +186,7 @@ exports.feature = [
             steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
             steps.editDealContractPeriod.editCancelDeleteEndRules();
             steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJ(1, 2);
+            steps.editDealContractPeriod.editConfirmDeleteEndRules();
             steps.editDealContractPeriod.editSaveEndRulesForm();
 
             steps.deal.itContinueToNextPage();
@@ -473,7 +474,6 @@ exports.feature = [
             //steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
 
 
-
         }
     },
 
@@ -496,7 +496,6 @@ exports.feature = [
             steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
             steps.createDealContractPeriod.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "2");
             steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 4);
-            //steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK(1, 1, 6, 4);
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "MDRC Complete");
             steps.createDealContractPeriod.saveEndRulesForm();
 

@@ -1,10 +1,7 @@
 "use strict";
 
-var promise = protractor.promise,
-
-    ExpectedConditions = protractor.ExpectedConditions,
-
-    page = pages.editDealScope;
+var promise = protractor.promise;
+var ExpectedConditions = protractor.ExpectedConditions;
 
 steps.editDealScope = exports;
 
@@ -493,8 +490,10 @@ exports.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () 
                         console.log("We are on the E case");
                         pages.editDealScope.editInFirstPublisherNameField("test");
                         pages.editDealScope.editSelectRandomPublisherNameDropDown();
-                        pages.editDealScope.editInFirstPublisherNameOwnPercent();
-                        pages.editDealScope.editInFirstPublisherNameCollectPercent();
+                        //pages.editDealScope.editInFirstPublisherNameOwnPercent();
+                        //pages.editDealScope.editInFirstPublisherNameCollectPercent();
+                        pages.editDealScope.editInFirstPublisherNameOwnPercentSpecificValue("30");
+                        pages.editDealScope.editInFirstPublisherNameCollectPercentSpecificValue("20");
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -535,6 +534,12 @@ exports.editSelectSpecificPublisherNameDropDownChainI = function (i) {
 exports.editIntoPublisherNameAMCollectFieldChainI = function (i) {
     it("Edit - fill into publisher name AM collect chain i percent random value", function () {
         pages.editDealScope.editPublisherNameAMCollectPercentChainI(i);
+    });
+};
+
+exports.editIntoPublisherNameAMCollectFieldChainISpecificValue = function (i, percent) {
+    it("Edit - fill into publisher name AM collect chain i percent specific value", function () {
+        pages.editDealScope.editPublisherNameAMCollectPercentChainISpecificValue(i, percent);
     });
 };
 
@@ -586,8 +591,10 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
                         console.log("We are on the E case");
                         pages.editDealScope.editPublisherNameFieldChainI(i);
                         pages.editDealScope.editSelectRandomPublisherNameDropDownChainI(i);
-                        pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
-                        pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
+                        //pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
+                        pages.editDealScope.editPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
+                        pages.editDealScope.editPublisherNameCollectPercentFieldChainISpecificValue(i, "25");
+                        //pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -622,12 +629,32 @@ exports.editClickOnYesSocietyAwardCreditPublisherShareSet = function () {
     });
 };
 
+exports.editDeleteExistingTerritoryFromScope = function () {
+    it("Edit delete the existing territory from scope ", function () {
+        pages.editDealScope.editDeleteTheExistingTerritoryFromScope();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editAddTheSpecificTerritoryByTypingToScope = function(territory){
+  it("Edit add specific territory by typing on scope ", function(){
+     pages.editDealScope.addTheSpecificTerritoryByTypingToScope(territory);
+  });
+};
+
 exports.editSpecificScopeType = function (contractType) {
     it("Add simple scope", function () {
         pages.editDealScope.selectContractTypeScope(contractType);
         pages.editDealScope.waitForAjax();
     });
 };
+
+exports.editSelectSpecificCountry = function(territory){
+  it("Edit select specific country ", function(){
+     pages.editDealScope.selectSpecificCountry(territory);
+  });
+};
+
 
 exports.editAddSpecificScopeTypeAndTerritory = function (contractType, territory) {
     it("Add simple scope", function () {
@@ -946,7 +973,8 @@ exports.itEditPublisherShare = function () {
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
-        steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
+        steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("10");
+        //steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
     });
 };
 
@@ -973,7 +1001,8 @@ exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
         steps.editDealScope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
         steps.editDealScope.editIntoPublisherNameAMFieldChainI(i);
         steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
-        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
+        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainISpecificValue(i, "10");
+        //steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
 };
 
@@ -1034,6 +1063,23 @@ exports.saveChangesSocietyAgreementNumberForm = function () {
     it("Save changes society agreement number form ", function () {
         pages.editDealScope.saveTheChangesSocietyAgreementNumberForm();
         //pages.editDealScope.waitForAjax();
+    });
+};
+
+
+exports.clickOnWorkLinkFromScopeNumberI = function (i) {
+    it("Click on work link from scope number  " + i, function () {
+        pages.editDealScope.clickOnTheWorkLinkFromScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkWorksCountOnScopeNumberI = function (i, count) {
+    it("Check that the works count on scope number " + i + " is equal to " + count, function () {
+        browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)'] span")).getText().then(function (promise) {
+            console.log("Works count on scope is  : " + promise);
+            expect(promise).toEqual(count);
+        });
     });
 };
 

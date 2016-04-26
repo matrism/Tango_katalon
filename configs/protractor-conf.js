@@ -349,7 +349,7 @@ config = {
                 includedTagsString: systemConfig.tags.join(', '),
                 excludedTagsString: systemConfig.tags.negated.join(', ')
             });
-        
+
 
             var deferred = protractor.promise.defer();
 

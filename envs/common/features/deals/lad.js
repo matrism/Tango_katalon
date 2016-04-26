@@ -56,7 +56,7 @@ exports.feature = [
                 ccp = steps.createDealContractPeriod,
                 eds = steps.editDealScope;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -105,7 +105,7 @@ exports.feature = [
                 cds = steps.createDealScope,
                 eds = steps.editDealScope;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -138,7 +138,7 @@ exports.feature = [
                 edcp = steps.editDealContractPeriod,
                 eds = steps.editDealScope;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -164,7 +164,7 @@ exports.feature = [
             var d = steps.deal,
                 eds = steps.editDealScope;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -203,7 +203,7 @@ exports.feature = [
 
             var timeout = 100000;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -231,7 +231,7 @@ exports.feature = [
         steps: function () {
             var d = steps.deal;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -245,8 +245,8 @@ exports.feature = [
                     steps.endRules.clickAddEndRulesLink();
                     steps.endRules.setRule(data.endRules[0]);
 
-                    _.times(4, function (ruleNum){
-                        var i = ruleNum+1;
+                    _.times(4, function (ruleNum) {
+                        var i = ruleNum + 1;
 
                         steps.endRules.clickAddRuleLink();
                         steps.endRules.setRule(data.endRules[i]);
@@ -262,7 +262,7 @@ exports.feature = [
         steps: function () {
             var d = steps.deal;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -312,7 +312,7 @@ exports.feature = [
             var d = steps.deal,
                 ea = steps.editAdvances;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -320,10 +320,10 @@ exports.feature = [
 
             d.goToTab('Advances');
             _.times(3, function (cpNum) {
-                describe('Add Advances for Contract Period #' + (cpNum+1), function (){
+                describe('Add Advances for Contract Period #' + (cpNum + 1), function () {
                     _.times(2, function () {
                         ea.clickAddAdvanceButton();
-                        ea.selectContractPeriodByIndex(cpNum+1);
+                        ea.selectContractPeriodByIndex(cpNum + 1);
                         ea.setAdvanceAmount(100);
                         ea.setCurrency('USD');
                         ea.distributionRules.setWhen('Contract Execution');
@@ -346,13 +346,13 @@ exports.feature = [
             var d = steps.deal,
                 edp = steps.editDealPayee;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
             }
 
-            if(systemConfig.env.name === 'staging') {
+            if (systemConfig.env.name === 'staging') {
 
                 d.goToOldPayeesDealTabDetails();
 
@@ -415,7 +415,7 @@ exports.feature = [
                 d = steps.deal,
                 edr = steps.editDealRtp;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');
@@ -461,7 +461,7 @@ exports.feature = [
                 rd = steps.relatedDeal,
                 edr = steps.editDealRtp;
 
-            if(systemConfig.dealId) {
+            if (systemConfig.dealId) {
                 steps.searchSection.accessSavedDealByNumber(systemConfig.dealId);
             } else {
                 d.openDealFromSlot('mainDeal');

@@ -410,9 +410,9 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption,
-                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.left_value"]');
-            asAlways(el, 'scrollIntoView', 'click');
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")).click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -585,10 +585,10 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption,
-                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.right_value"]');
-            asAlways(el, 'scrollIntoView', 'click');
-            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -662,8 +662,7 @@ if (pages.createDealContractPeriod === undefined) {
 
 
         clickOnTheAddAdvanceAssumptionsLink: function () {
-            var el = pages.createDealContractPeriod.elems.addAssumptionLink;
-            asAlways(el, 'scrollIntoView', 'click');
+            pages.createDealContractPeriod.elems.addAssumptionLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.lpControlPercentageOfWorkAssumptions));
         },
 

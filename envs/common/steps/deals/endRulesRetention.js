@@ -56,6 +56,7 @@ exports.selectSpecificOptionFromOffsetByChoiceEndRules = steps.createDealContrac
 exports.clickAccountingPeriodEndDateCheckBoxEndRules = steps.createDealContractPeriod.clickAccountingPeriodEndDateCheckBoxEndRules;
 exports.clickOnAddRuleInTheBottomOfEndRulesForm = steps.createDealContractPeriod.clickOnAddRuleInTheBottomOfEndRulesForm;
 exports.reorderEndRule = steps.createDealContractPeriod.reorderEndRule;
+exports.doneEndRules = steps.createDealContractPeriod.doneEndRules;
 
 exports.saveEndRulesForm = function () {
     it('Save the end rules', function () {

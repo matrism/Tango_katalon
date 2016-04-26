@@ -95,7 +95,7 @@ if (pages.createDealGeneral === undefined) {
             browser.driver.findElements(by.css("div[name='company'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    var element = options[randomNumber];
+                    var element = options[0];
                     element.click();
                 })
         },
