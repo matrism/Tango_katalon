@@ -110,7 +110,7 @@ exports.enterWorkSearchTerms = function (value) {
 exports.enterCreatorNameAsWorkSearchTerms = function (value) {
     return promise.when(value).then(function (value) {
         var reResult;
-        if (value.indexOf(',') !== -1) {
+        if(value && value.indexOf(',') !== -1) {
             reResult = /^(.+), ([^,]+)$/.exec(value)[1];
             value = reResult[1] + ' ' + reResult[0];
         }
@@ -1136,10 +1136,11 @@ exports.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed = function (mo
         'DELETE COMPONENT & ALLOCATION'
     );
 };
-exports.confirmComponentWorkDeletion = function () {
+exports.confirmComponentWorkDeletion = function() {
+    var el = exports.confirmComponentWorkDeletionButton();
+    browser.wait(EC.visibilityOf(el));
     pages.base.waitForModal();
-
-    return exports.confirmComponentWorkDeletionButton().click();
+    return el.click();
 };
 exports.selectRandomCreatorSuggestion = function () {
     return $$(".typeahead-result").then(function (suggestions) {

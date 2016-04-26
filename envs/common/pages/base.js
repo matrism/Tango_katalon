@@ -597,5 +597,6 @@ exports.tooltipMessage = function () {
 };
 
 exports.validateTooltipMessage = function (message) {
+    browser.wait(EC.visibilityOf(exports.tooltipContainer()));
     expect(exports.tooltipMessage()).toBe(message);
 };

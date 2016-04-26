@@ -208,6 +208,13 @@ exports.cancelTheRateSet = function () {
     });
 };
 
+exports.confirmCancelTheRateSet = function () {
+    it('Confirm Cancel current Rate Set', function () {
+        pages.editRoyaltyRates.clickConfirmCancelButtonForRRSet();
+        pages.editRoyaltyRates.waitForAjax();
+    });
+};
+
 exports.clickOnCancelButtonRateSet = function () {
     it("Click on cancel button without confirm current Rate Set", function () {
         pages.editRoyaltyRates.clickCancelButtonForRRSetWithoutConfirm();
@@ -222,9 +229,9 @@ exports.deleteTheRateSet = function () {
     });
 };
 
-exports.clickOnDeleteButtonToRateSet = function () {
-    it("Delete current Rate Set", function () {
-        pages.editRoyaltyRates.clickDeleteButtonForRRSetWithoutConfirm();
+exports.confirmDeleteTheRateSet = function () {
+    it('Confirm Delete current Rate Set', function () {
+        pages.editRoyaltyRates.clickConfirmDeleteButtonForRRSet();
         pages.editRoyaltyRates.waitForAjax();
     });
 };

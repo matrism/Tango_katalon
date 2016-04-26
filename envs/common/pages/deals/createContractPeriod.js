@@ -163,7 +163,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnAddMdrcLink: function () {
-            pages.createDealContractPeriod.elems.addMdrcLink.click();
+            var el = pages.createDealContractPeriod.elems.addMdrcLink;
+            asAlways(el, 'scrollIntoView', 'click');
             browser.sleep(1000);
         },
 
@@ -626,10 +627,15 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
-            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.deleteEndRulesModalDialog));
-            pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog.click();
+            var deleteButton = $("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i");
+            asAlways(deleteButton, 'scrollIntoView', 'click');
+        },
+
+        clickOnConfirmDeleteEndRuleCondition: function () {
+            var confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
+            browser.wait(ExpectedConditions.visibilityOf(confirmButton));
+            confirmButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
         },
 
         checkTheVariableRightWarningMessageEndRules: function () {

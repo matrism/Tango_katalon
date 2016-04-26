@@ -129,11 +129,12 @@ if (pages.editDealRtp === undefined) {
             pages.editDealRtp.elems.removeTheRtpRetention.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.modalDialogDelete));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealRtp.elems.confirmDeleteModalDialog));
-            //browser.actions().click(pages.editDealRtp.elems.confirmDeleteModalDialog).perform();
+        },
+
+        editConfirmDeleteTheRtpRetentionFromAcquisitionForm: function () {
             pages.editDealRtp.elems.confirmDeleteModalDialog.click();
             browser.sleep(5000);
             pages.editDealRtp.waitForAjax();
-            //browser.wait(ExpectedConditions.invisibilityOf(pages.editDealRtp.elems.modalDialogDelete));
         },
 
         editFillTheRetentionDescriptionFromAcquisition: function (description) {

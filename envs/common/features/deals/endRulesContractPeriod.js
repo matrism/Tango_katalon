@@ -122,8 +122,9 @@ exports.feature = [
             steps.createDealContractPeriod.checkTextRuleWhenOrAndEndRulesRuleNumberI(3, "AND");
 
             steps.createDealContractPeriod.checkDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(1, 1);
-            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 1);
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
 
             steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
             steps.createDealContractPeriod.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "55.54");
@@ -137,9 +138,10 @@ exports.feature = [
             steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
             //steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJDataNumberK(1, 1, 15, 0);
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
-            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
             steps.createDealContractPeriod.cancelDeleteEndRules();
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
+            steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
 
             steps.createDealContractPeriod.saveEndRulesForm();
 
