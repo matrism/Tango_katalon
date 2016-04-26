@@ -30,19 +30,43 @@ if (pages.editDealRtp === undefined) {
             saveRetentionFromAcquisitionButton: {css: "button[data-ng-click='updateDeal(retentionForm.$valid, form.deal, retentionFormSection, false)"},
             modalDialogDelete: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope button.btn.btn-primary:nth-child(2)"},
-            confirmCancelModalDialog: {css: "div.modal-dialog.ng-scope button[data-ng-click='cancel()']"},
-            editDoneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
-            editWhenVariableLeftButtonEndRules: {css: "div[data-ng-model='condition.left_value'] div.tg-dropdown-button"},
-            editOffsetByArrowChoiceEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
-            editCancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
-            editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
-            editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
-            editCancelEndRulesLinkFromRetention: {css: "div[data-ng-form='rtpEndRulesModalForm'] div.modal-footer button[data-ng-click='cancel()']"},
-            editAddRuleLinkBottomEndRuleForm: {css: "a[data-ng-click='addEndRule(form.show.endRules.containerId, form.show.endRules.type, rulesForm.$valid)']"},
-            editDeleteButtonEndRulesRetention: {css: "div.modal-footer button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
-            editEndDatePreDefinedDateInputFieldEndRules: {css: "div[name='endDateTypeDate'] input"},
-            editOffsetByInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.offset']"},
-            editAccountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div input[data-ng-model='rule.period_end']"}
+            confirmCancelModalDialog: {css: "div.modal-dialog.ng-scope button[data-ng-click='cancel()']"}
+        },
+
+        editAddPostTermPeriodFromRetentionLink: function (i) {
+            return $$(
+                    'a[data-ng-click="addPostTermCollectionRightsTermPeriodToRetention(rtps.id, rtp.id)"]'
+                ).get(i);
+        },
+
+        retentionSection: function (i) {
+            return $$(
+                    '[data-ng-repeat="rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods"]'
+                ).get(i);
+        },
+
+        editDurationRtpPostTermCollectionField: function (i, j) {
+            return pages.editDealRtp.retentionSection(i).$$(
+                    'div[data-name="retentionPostRtpForm"] input[name="retentionPostTermDuration"]'
+                ).get(j);
+        },
+
+        editScopeAcquisitionInputField: function (i) {
+            return $$('[data-ng-model="acqRtp.deal_scope_id_holders"] input').get(i);
+        },
+
+        editScopeRetentionInputField: function (i) {
+            return $$('[data-ng-model="rtp.deal_scope_id_holders"] input').get(i);
+        },
+
+        editScopePostTermInputField: function (i) {
+            return $$('[data-ng-model="postTermCollectionRTP.deal_scope_id_holders"] input').get(i);
+        },
+
+        scopeOption: function (i) {
+            return $$(
+                    'ul.tg-typeahead__suggestions li.tg-typeahead__suggestions-container ul li'
+                ).get(i);
         },
 
         editClickOnTheAddAnotherAcquisitionPeriodLink: function () {

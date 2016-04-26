@@ -349,14 +349,16 @@ config = {
                 includedTagsString: systemConfig.tags.join(', '),
                 excludedTagsString: systemConfig.tags.negated.join(', ')
             });
-        }
 
-        var deferred = protractor.promise.defer();
 
-        if (testCycleCliName != "") {
-            deferred = Zapi.onCleanUp(testCycleCliName, flow, screenShotPath);
-        } else {
-            deferred.fulfill();
+            var deferred = protractor.promise.defer();
+
+            if (testCycleCliName) {
+                deferred = Zapi.onCleanUp(testCycleCliName, flow, screenShotPath);
+            } else {
+                deferred.fulfill();
+            }
+
         }
 
         console.log('Finished with code:', statusCode);
