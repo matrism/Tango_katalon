@@ -638,6 +638,10 @@
                     fDiv.a.class.add(tag + '-tag');
                 });
 
+                if(tags.length === 0) {
+                    tags = ['none'];
+                }
+
                 fDiv.c.push(tat.makeFieldDiv(
                     'tags', 'Tags', tags.join(', ')
                 ));
@@ -664,6 +668,10 @@
                 tags.forEach(function (tag) {
                     scDiv.a.class.add(tag + '-tag');
                 });
+
+                if(tags.length === 0) {
+                    tags = ['none'];
+                }
 
                 scDiv.c.push(tat.makeFieldDiv(
                     'tags', 'Tags', tags.join(', ')
