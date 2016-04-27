@@ -30,7 +30,7 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1360,
+                width: 1400,
                 height: 1024
             },
             //protractor Zapi related
@@ -83,6 +83,9 @@ var defaultUserName = 'TangoTest1',
                 ),
                 cr_url: (
                     cli['cr-url'] || 'http://tancrsrv.tango.qa.wmg.com:80'
+                ),
+                royalties_url: (
+                    cli['royalties-url'] || 'http://tanroysrv.tango.qa.wmg.com:80'
                 )
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
@@ -119,7 +122,8 @@ var defaultUserName = 'TangoTest1',
 config._system_.env = {
     name: env.ENV_TYPE,
     url: config[env.ENV_TYPE].urls.app_url,
-    cr_url: config[env.ENV_TYPE].urls.cr_url
+    cr_url: config[env.ENV_TYPE].urls.cr_url,
+    royalties_url: config[env.ENV_TYPE].urls.royalties_url
 };
 
 config._system_.noReport = cli['no-report'];

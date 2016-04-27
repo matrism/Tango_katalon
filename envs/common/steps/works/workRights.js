@@ -1,5 +1,7 @@
 'use strict';
 
+var pageStep = require('../../../../helpers/basicPageStep');
+
 steps.workRights = exports;
 
 exports.expectRightsDataToBeDisplayed = function() {
@@ -124,3 +126,5 @@ exports.validateWcmTotalShares = function(groupIndex, values) {
         }
     );
 };
+
+pageStep('Expect no errors in rights generation');

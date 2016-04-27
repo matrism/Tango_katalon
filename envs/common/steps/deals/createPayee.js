@@ -12,6 +12,16 @@ exports.selectRandomPayeeOrganisationFromDropDown = function () {
     });
 };
 
+exports.selectPayeeOrganisationFromDropDown = function (name) {
+    it("Select the payee organisation from drop down (" + name + ")", function () {
+        pages.createDealPayee.fillIntoAddNewPayeeFieldSpecificValue(name);
+        pages.createDealPayee.selectPayeeOrganisationFromDropDown(0);
+    });
+};
+
+addBasicStep(exports, pages.createDealPayee, 'Select Payee Organisation from dropdown');
+addBasicStep(exports, pages.createDealPayee, 'Fill Payee Info');
+
 exports.selectRandomPayeePersonFromDropDown = function () {
     it("Select the random payee person from drop down ", function () {
         pages.createDealPayee.fillIntoAddNewPayeeFieldSpecificValue("payee");

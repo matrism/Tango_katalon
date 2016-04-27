@@ -35,6 +35,12 @@ exports.fillIntoAcquisitionEndDateField = function () {
     });
 };
 
+exports.fillIntoAcquisitionStartDateField = function (date) {
+    it("Fill into acquisition start date field (" + date + ")", function () {
+        pages.createDealRtp.fillIntoTheAcquisitionStartDateField(date);
+    });
+};
+
 exports.clickOnAddRetentionPeriodFromAcquisition = function () {
     it("Click on the add retention period from acquisition ", function () {
         pages.createDealRtp.clickOnTheAddRetentionPeriodFromAcquisition();

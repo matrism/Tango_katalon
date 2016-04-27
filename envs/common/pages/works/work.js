@@ -1541,3 +1541,38 @@ exports.auditLog = (function () {
 
     return auditLog;
 })();
+
+exports.scopeDelivery = (function () {
+    var scopeDelivery = {};
+
+    scopeDelivery.onDeliverWorkToDealScopeButton = function () {
+        return $('.scope_delivery_wrap .btn-primary');
+    };
+
+    scopeDelivery.clickOnDeliverWorkToDealScopeButton = function () {
+        scopeDelivery.onDeliverWorkToDealScopeButton().click();
+    };
+
+    scopeDelivery.dealSearchTypeahead = function () {
+        var elem = $('.linked-scopes-content .search-container div[data-tg-typeahead]');
+        return typeahead(elem, true, true);
+    };
+
+    scopeDelivery.selectDeal = function (deal) {
+        scopeDelivery.dealSearchTypeahead().select(deal);
+    };
+
+    scopeDelivery.checkScope = function (i) {
+        var table = $('.delivered-scope-table');
+
+        browser.wait(EC.visibilityOf(table));
+        table.all(by.model('dealScope.state.selected')).get(i).click();
+    };
+
+    scopeDelivery.save = function () {
+        $('.scope_delivery_wrap .btn-primary').click();
+        pages.base.waitForAjax();
+    };
+
+    return scopeDelivery;
+})();

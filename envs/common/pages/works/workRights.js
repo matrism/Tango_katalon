@@ -283,3 +283,7 @@ exports.wcmTotalShares = function(groupIndex) {
 exports.validateWcmTotalShares = function(groupIndex, values) {
     expect(exports.wcmTotalShares(groupIndex)).toEqual(values);
 };
+
+exports.expectNoErrorsInRightsGeneration = function () {
+    expect($$('.rights-table .text-error').count()).toEqual(0);
+};

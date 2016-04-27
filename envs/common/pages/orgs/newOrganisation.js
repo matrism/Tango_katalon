@@ -42,18 +42,17 @@ exports.territoryOfOperationField = function () {
 
 exports.selectTerritoryOfOperation = function (name) {
     var elem = exports.territoryOfOperationField(),
-        typeahead = Typeahead(elem.element(by.model('$dataHolder.internalModel')), true);
+        typeahead = Typeahead(elem.element(by.model('$dataHolder.internalModel')));
 
     pages.base.scrollIntoView(elem);
+
     typeahead.$$('.tg-typeahead__tags-text').then(function(elements) {
         if(elements.length !== 0) {
             elements[0].click();
         }
     });
 
-    typeahead.sendKeys(name);
-    pages.base.waitForAjax();
-    typeahead.results().filter(pph.matchTextExact(name)).first().click();
+    typeahead.select(name);
 };
 
 exports.societyTypeahead = function () {
@@ -546,8 +545,19 @@ exports.makeOrgPayee = function () {
     elem.click();
 };
 
-exports.expectPayeeAccountNameToBeIfPresent = function (val) {
+exports.payeeAccountNameInput = function () {
     var elem = element(by.model('payeeAccount.account_name'));
+    return elem;
+};
+
+exports.setPayeeAccountName = function (name) {
+    var elem = exports.payeeAccountNameInput();
+
+    elem.sendKeys(name);
+};
+
+exports.expectPayeeAccountNameToBeIfPresent = function (val) {
+    var elem = exports.payeeAccountNameInput();
 
     elem.isPresent().then(function(isPresent){
         if (isPresent) {

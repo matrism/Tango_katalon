@@ -1513,6 +1513,41 @@ exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
 };
 
 
+exports.createWork = data => {
+    var newWork = steps.newWork;
+
+    describe('Create new Work', () => {
+        //steps.mainHeader.createNewRecord('Work');
+        newWork.goToNewWorkPage();
+        steps.base.useEntityDataSlot('work', 1);
+
+        newWork.enterPrimaryWorkTitle(data.primary_work_title);
+
+        _.each(data.creators_and_contributions, (creator, i) => {
+            newWork.enterCreatorSearchTerms(i, creator.name);
+            newWork.selectCreatorSearchResultByIndex(0);
+            newWork.continueIfPrompted();
+            newWork.enterCreatorContribution(i, creator.percentage);
+        });
+
+        newWork.optToIncludeWorkOnWebsite(true);
+        newWork.saveWork();
+        steps.work.storeWorkIdInTestVariable('lastCreatedWorkId');
+    });
+};
+
+addStep(exports, 'Store Work ID in test variable', function (varName) {
+
+    var binding = '::getWorkFullCode(work.pristine)',
+        idBinding = element(by.binding(binding));
+
+    browser.wait(EC.visibilityOf(idBinding));
+
+    idBinding.getText().then(function (value) {
+        hash.testVariables[varName] = value;
+    });
+
+});
 
 pageStep([
     'Wait For Status to be Displayed',
@@ -1535,5 +1570,11 @@ pageStep([
     ['Audit Log', [
         'Validate Header Title',
         'Expect No Error Message'
+    ]],
+    ['Scope Delivery',[
+        'Click on Deliver Work to Deal Scope Button',
+        'Select deal',
+        'Check scope',
+        'Save'
     ]]
 ]);

@@ -17,6 +17,7 @@ if (pages.createDealRtp === undefined) {
             scopeAcquisitionInputField: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-model='acqRtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             applyScopeAcquisitionButton: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
             acquisitionActualEndDate: {css: "div[name='acquisitionEndDate'] input"},
+            acquisitionActualStartDate: {css: "div[name='acquisitionStartDate'] input"},
             addRetentionPeriodLinkFromAcquisition: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) a[data-ng-click='addRetentionRightsTermPeriod(rtps.id)']"},
             addPostTermPeriodLinkFromAcquisition: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) a[data-ng-click='addPostTermCollectionRightsTermPeriod(rtps.id)']"},
             addEndRulesLinkRtpRetention2FromAcquisition: {css: "div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(3) div.aquisition-period.clearfix.retention.ng-scope div[data-watched-init='endRulesAreDirty = isEndRuleDirty(rtp.end_rules[0])'] a"},
@@ -99,6 +100,10 @@ if (pages.createDealRtp === undefined) {
         fillIntoTheAcquisitionEndDateField: function () {
             var time = "2016-08-09";
             pages.createDealRtp.elems.acquisitionActualEndDate.sendKeys(time);
+        },
+
+        fillIntoTheAcquisitionStartDateField: function (date) {
+            pages.createDealRtp.elems.acquisitionActualStartDate.clear().sendKeys(date);
         },
 
         clickOnTheAddRetentionPeriodFromAcquisition: function () {
