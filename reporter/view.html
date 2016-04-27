@@ -313,57 +313,48 @@
         var $body = $('body'),
 
             updateFilter = $.debounce(250, function (terms) {
-                var $all = $('.stream, .feature, .scenario');
-
                 updateHashQuery('f', terms || null);
 
+                $('.filterExpand').removeClass('filterExpand');
+
                 if(terms.length === 0) {
-                    $all.removeClass('filteredOut');
+                    $('.filteredOut').removeClass('filteredOut');
                     return;
                 }
 
-                $all.addClass('filteredOut').removeClass('filterExpand');
+                $('.stream, .feature').addClass('filteredOut');
 
                 terms.forEach(function (term) {
-                    var classSel;
+                    var $matches;
 
-                    switch(term) {
-                        case 'pass':
-                        case 'fail':
-                        case 'crash':
-                            term += 'ed';
-
-                        case 'passed':
-                        case 'failed':
-                            classSel = term;
-                            break;
-
-                        default:
-                            classSel = term + '-tag';
-                            break;
+                    if(['pass', 'fail', 'crash'].indexOf(term) !== -1) {
+                        term += 'ed';
                     }
 
-                    $('.' + classSel).each(function () {
-                        var $this = $(this);
+                    if(['passed', 'failed', 'crashed'].indexOf(term) !== -1) {
+                        $matches = $('.' + term);
 
-                        $this.removeClass('filteredOut').addClass('filterExpand');
+                        $matches
+                            .filter('.feature, .process')
+                            .closest('.stream')
+                            .addBack()
+                            .removeClass('filteredOut');
+                    }
+                    else {
+                        $matches = $('.' + term + '-tag');
 
-                        if($this.is('.process')) {
-                            $this.find('.stream, .feature, .scenario').removeClass('filteredOut');
-                        }
-                        else
-                        if($this.is('.feature')) {
-                            $this.find('.scenario').removeClass('filteredOut');
-                        }
-                        else
-                        if(/-tag$/.test(classSel)) {
-                            $this.closest('.feature')
-                                .removeClass('filteredOut')
-                                .addClass('filterExpand');
-                        }
+                        $matches
+                            .parents('.feature, .stream')
+                            .addBack()
+                            .removeClass('filteredOut')
+                            .addClass('filterExpand');
 
-                        $this.closest('.stream').removeClass('filteredOut');
-                    });
+                        if($matches.is('.feature')) {
+                            $matches
+                                .find('.filteredOut')
+                                .removeClass('filteredOut');
+                        }
+                    }
                 });
             });
 
