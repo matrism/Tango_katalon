@@ -16,7 +16,7 @@ function TgDropdown (locator, isElement, isAppendedToBody) {
 
         if (isAppendedToBody) {
             browser.sleep(500);
-            results = $$('body > div[tg-component-render-template] > .tg-dropdown-menu:not(.ng-hide) .tg-dropdown-menu-item');
+            results = $$('body > div[tg-component-render-template] > .tg-dropdown-menu:not(.ng-hide) li');
         }
 
         if (text) {
