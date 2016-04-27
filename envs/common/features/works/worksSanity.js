@@ -169,9 +169,17 @@ exports.feature = [
     },
     {
         name: 'Validate created work data',
+
         tags: [
             'worksSanityValidateWork',
+            'broken'
         ],
+
+        breakageDescription: (
+            'Timeout - Async callback was not invoked within timeout ' +
+            'specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.'
+        ),
+
         steps: [
             [steps.base.useEntityDataSlot, ['work', 'mainWork']],
 

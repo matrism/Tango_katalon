@@ -1,7 +1,6 @@
 'use strict';
 
-//var random = require('../../../../helpers/random'),
-//    randomId = random.id.makeMemoizedGenerator();
+var using = fnutils.using;
 
 var workData = {
     workId: "WW 015006249 00",
@@ -48,7 +47,7 @@ exports.feature = [
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName('BMI');
 
-            using(steps.organisationStaging, function () {
+            using(steps.organisation, function () {
                 this.validateCisacCode('021');
                 this.goToPreviewRegistrationRunTab();
                 this.waitForPreviewRegistrationRunHeaderToBeDisplayed();
@@ -58,8 +57,8 @@ exports.feature = [
 
             steps.searchSection.accessSavedOrganisationByName('WB MUSIC CORP.');
 
-            steps.organisationStaging.validateSubPublisherName(
-                0, 'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.'
+            steps.organisation.subPublishers.expectNameToBeEither(
+                0, ['WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.']
             );
         },
     },
@@ -70,8 +69,8 @@ exports.feature = [
         ],
         steps: function () {
             steps.searchSection.accessSavedPersonByName('katy perry');
-            steps.personStaging.validateSuisaIpiNumber('292555933');
-            steps.personStaging.validateAlternativeName(0, 'katy perry')
+            steps.person.validateSuisaIpiNumber('292555933');
+            steps.person.validateAlternativeName(0, 'katy perry')
         }
     },
     {
@@ -94,7 +93,7 @@ exports.feature = [
             steps.editDealScope.editSaveTheChangesDealScope();
 
             steps.editDealPayee.clickOnPayeesHeader();
-            steps.editDealPayee.editPayeeArea();
+            steps.editDealPayee.editOldPayeeArea();
             steps.editDealPayee.itEditAddPayeePersonAndAssociateScope("paul");
             steps.editDealPayee.editSavePayeePage();
         }

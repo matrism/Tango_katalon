@@ -76,7 +76,7 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         openRRButton: function () {
-            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) a i.icon.icon-chevron-down"));
+            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) .rate-set-chevron"));
             //return $(".icon-chevron-down");
         },
 

@@ -119,7 +119,7 @@ exports.feature = [
 
             np.makeCreator(false);
 
-            if(systemConfig.env.name === 'qa') {
+            if(systemConfig.env.name !== 'prod') {
                 np.confirmMakingNonCreator(true);
             }
 
