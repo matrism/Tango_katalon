@@ -23,13 +23,17 @@ exports.jasmineStarted = (info) => {
             log('Browser URL:', url);
         });
 
-        browser.takeScreenshot().then((png) => {
-            let fName = systemConfig.streamId + '_' + currentStepNum + '.png',
-                fPath = systemConfig.htmlReportPath + '/' + fName;
+        retryPromise(() => {
+            return browser.takeScreenshot().then((png) => {
+                let fName = systemConfig.streamId + '_' + currentStepNum + '.png',
+                    fPath = systemConfig.htmlReportPath + '/' + fName;
 
-            fs.writeFileSync(fPath, new Buffer(png, 'base64'));
+                fs.writeFileSync(fPath, new Buffer(png, 'base64'));
 
-            log('PNG saved');
+                log('PNG saved');
+            });
+        }, 3, 'Screenshot taking for report').then(null, (error) => {
+            console.error('Non-critical errors ignored:', error.message);
         });
 
         return takeHtmlSnapshot().then((html) => {
