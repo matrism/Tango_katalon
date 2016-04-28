@@ -1,8 +1,7 @@
 'use strict';
 
 var using = fnutils.using,
-    env = (systemConfig.env.name.match(/^(qa|custom)$/)) ? 'common' : systemConfig.env.name,
-    data = require('../../../' + env + '/features/orgs/data/CrRegistration.js');
+    data = requireFromEnvFolder('features/orgs/data/CrRegistration.js');
 
 exports.commonFeatureTags = [];
 
