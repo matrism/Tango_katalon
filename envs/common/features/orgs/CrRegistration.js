@@ -28,57 +28,9 @@ exports.feature = [
             using(steps.organisation, function () {
                 this.goToGeneralTab();
 
-                using(this.registration, function() {
-                    this.editSection();
-                    this.selectIsRegistrationRecipient('No');
-                    this.confirmRemoveAll();
-                    this.selectIsRegistrationRecipient('Yes');
-                    using(this.delivery, function() {
-                        this.addMethod();
-                        this.selectMethod(0, 'Email');
-                        this.enterEmailPrimaryEmail(0, data.cr.email.primary);
-                        this.addMethod();
-                        this.selectMethod(1, 'FTP');
-                        this.enterAddress(0, data.cr.ftp.address);
-                        this.enterPort(0, data.cr.ftp.port);
-                        this.enterUsername(0, data.cr.ftp.username);
-                        this.enterPassword(0, data.cr.ftp.password);
-                        this.selectNotification(0, data.cr.ftp.notification);
-                        this.enterNotificationPrimaryEmail(0, data.cr.ftp.notificationPrimaryEmail);
-                        this.enterNotificationCcEmail(0, data.cr.ftp.notificationCcEmail);
-                        this.addMethod();
-                        this.selectMethod(2, 'SFTP');
-                        this.enterAddress(1, data.cr.sftp.address);
-                        this.enterPort(1, data.cr.sftp.port);
-                        this.enterUsername(1, data.cr.sftp.username);
-                        this.enterPassword(1, data.cr.sftp.password);
-                        this.selectNotification(1, data.cr.sftp.notification);
-                        this.enterNotificationPrimaryEmail(1, data.cr.sftp.notificationPrimaryEmail);
-                        this.enterNotificationCcEmail(1, data.cr.sftp.notificationCcEmail);
-                        this.addMethod();
-                        this.selectMethod(3, '3rd Party');
-                        this.enterThirdPartyRecipient(0, data.cr.thirdParty);
-                        steps.base.sleep(200);
-                        steps.base.waitForAjax();
-                        this.selectFirstThirdPartyRecipient();
-                    });
-                    using(this.ack, function() {
-                        this.selectAcknowledgementType('Multiple');
-                        this.selectDeliveryMethod(0, 'SFTP');
-                        this.enterAddress(0, data.cr.ack.sftp.address);
-                        this.enterPort(0, data.cr.ack.sftp.port);
-                        this.enterUsername(0, data.cr.ack.sftp.username);
-                        this.enterPassword(0, data.cr.ack.sftp.password);
-                        this.selectDeliveryMethod(1, 'FTP');
-                        this.enterAddress(1, data.cr.ack.ftp.address);
-                        this.enterPort(1, data.cr.ack.ftp.port);
-                        this.enterUsername(1, data.cr.ack.ftp.username);
-                        this.enterPassword(1, data.cr.ack.ftp.password);
-                    });
-                    this.saveSection();
-                });
-
+                this.registration.resetDeliveryInfo(data.cr);
                 this.saveOrganisationDeliveryMethods();
+
                 this.goToPreviewRegistrationRunTab();
                 this.selectCustomRegistrationRun(data.cr.view);
 
