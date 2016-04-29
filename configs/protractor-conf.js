@@ -17,6 +17,7 @@ var path = require('path'),
     config,
     orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     demoReporter = require('../tools/demoReporter'),
+    zapiReporter = require('../tools/zapiReporter'),
     stepByStepReporter = require('../tools/stepByStepReporter');
 
 global.ftf = require('factory-testing-framework');
@@ -166,6 +167,11 @@ config = {
         }
 
         jasmine.getEnv().addReporter(require('../reporter/shellReporter'));
+
+        jasmine.getEnv().addReporter(zapiReporter);
+        zapiReporter.init({
+            cycleId: systemConfig.cycle
+        });
 
         if(systemConfig.orphanOnError) {
             jasmine.getEnv().addReporter(orphanOnErrorReporter);

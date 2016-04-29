@@ -12,6 +12,8 @@ let cp = require('child_process'),
     eventDateTimeString = require('../reporter/eventDateTimeString'),
     timeTakenSince = require('../reporter/timeTakenSince'),
 
+    Zapi = require('../tools/zapi'),
+
     masterStartTime = Date.now(),
 
     jobSilenceTimeout = null,
@@ -28,6 +30,8 @@ let cp = require('child_process'),
 
     tags = null,
     negatedTags = null,
+    cycleName = null,
+    cycleId = null,
 
     startPrefix;
 
@@ -104,6 +108,22 @@ let cp = require('child_process'),
             }
 
             negatedTags = rawArgs.shift();
+
+            continue;
+        }
+
+        if(rawArg === '--cycleName') {
+            if(cycleName !== null) {
+                console.error('Multiple --test-cycle-name.');
+                process.exit(1);
+            }
+
+            if(rawArgs[0].startsWith('--')) {
+                cycleName = '';
+                continue;
+            }
+
+            cycleName = rawArgs.shift();
 
             continue;
         }
@@ -222,6 +242,7 @@ let cp = require('child_process'),
     jobCount = jobCount || 1;
     tags = tags || '';
     negatedTags = negatedTags || '';
+    cycleName = cycleName || '';
 
     if(!startPrefix) {
         console.error('Missing process start prefix.');
@@ -293,6 +314,7 @@ let cp = require('child_process'),
             '--app-url', appUrl,
             '--branch', branch,
             '--commit', commit,
+            '--cycle', cycleId,
             '--build', build,
             '--tags', tags,
             '--@tags', negatedTags,
@@ -409,7 +431,12 @@ let cp = require('child_process'),
     log(0, 'Requested tags:', tags || 'all');
     log(0, 'Negated tags:', negatedTags || 'none');
 
-    for(let i = 0; i < jobCount; ++i) {
-        startNext();
-    }
+    Zapi.setTestCycle(cycleName).then((result) => {
+        cycleId = result.cycleId;
+        log(0, 'Test Cycle:', cycleId || 'none', cycleName);
+
+        for(let i = 0; i < jobCount; ++i) {
+            startNext();
+        }
+    });
 }
