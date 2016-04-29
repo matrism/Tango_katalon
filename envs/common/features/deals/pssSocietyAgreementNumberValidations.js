@@ -6,10 +6,6 @@ exports.beforeFeature = function () {
 
 exports.commonFeatureTags = ['deals', 'psss', 'regression'];
 
-
-var data = requireFromEnvFolder('features/deals/data/lad.js'),
-    data = data.lad;
-
 exports.feature = [
     {
         name: "Check PSS society agreement number validations ",
