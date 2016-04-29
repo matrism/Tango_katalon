@@ -32,7 +32,7 @@ exports.feature = [
             steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
             for (var i = 1; i <= 2; i++) {
-                nccs.validateLabelViewMode(i, (i == 1));
+                nccs.validateLabelViewMode(i, (i == 0));
             }
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -42,7 +42,7 @@ exports.feature = [
             steps.editDealScope.validatePublisherSharesTitle();
             steps.editDealScope.validatePublisherSharesHeaderTableTitle();
             for (var i = 1; i <= 2; i++) {
-                nccs.validateLabelViewMode(i, (i == 1));
+                nccs.validateLabelViewMode(i, (i == 0));
                 steps.editDealScope.validatePublisherSharesSetPublisherNameEOrPAChainI(i);
                 steps.editDealScope.validatePublisherSharesSetPublisherNameAMChainI(i);
                 steps.editDealScope.validatePublisherSharesSetSubtotalChainI(i);
