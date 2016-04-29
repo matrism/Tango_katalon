@@ -125,6 +125,11 @@ exports.feature = [
             steps.base.scrollIntoView("Scroll in the top of the society agreement number", element(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) input[data-ng-model='creator.creator_model']")));
             steps.base.scrollIntoView("Scroll in the bottom of the society agreement number ", element(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(5) input[data-ng-model='creator.creator_model']")));
 
+            steps.deal.refreshThePage();
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+
         }
     }
 ];
