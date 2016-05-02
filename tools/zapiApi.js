@@ -31,15 +31,14 @@ var ZapiApi = function () {
         return this.get(ZAPI_URL + 'teststep/' + issueId);
     };
 
-    // TODO remove reporter or add another
-    this.createIssue = (id, name, componentName) => {
+    this.createIssue = (featureId, featureName, componentName) => {
         var createUrl = BASE_URL + '/rest/api/2/issue',
             obj = {
                 'fields': {
                     'project': {
                         'id': projectId
                     },
-                    'summary': name,
+                    'summary': featureName,
                     'issuetype': {
                         'id': '10302'
                     },
@@ -52,26 +51,24 @@ var ZapiApi = function () {
                         {'name': componentName}
                     ],
                     'labels': [
-                        'auto_created', 'live', id
+                        'auto_created', 'live', featureId
                     ],
                     //'description': 'Optional Description.'
                 }
             };
 
-        return this.post(createUrl, null, obj, 201);
+        return this.post(createUrl, null, obj);
     };
 
-    this.updateJiraIssue = (name) => {
-        var updateUrl = BASE_URL + '/rest/api/2/issue/' + name,
+    this.updateIssue = (issueId, featureName, componentName) => {
+        var updateUrl = BASE_URL + '/rest/api/2/issue/' + issueId,
             obj = {
-                'update': {
-                    'assignee': [{'set':[{'name': 'works'}]}]
+                'fields': {
+                    'summary': featureName
                 }
             };
 
-        console.log(updateUrl);
-
-        return this.put(updateUrl, null, {"update": {"components": [{"add":{"name": "works"}}]}});
+        return this.put(updateUrl, null, obj);
     };
 
     this.createJiraBug = (issueId, feature, testStep, bugLabel) => {
@@ -108,15 +105,15 @@ var ZapiApi = function () {
      return this.get(getProjectUrl);
      };*/
 
-    this.createTestStepForIssue = (issueId, testStep, orderId) => {
-        var testStepUrl = ZAPI_URL + 'teststep/' + issueId,
-            testStepObject = {
-                step: testStep.name,
+    this.createIssueStep = (issueId, description, orderId) => {
+        var url = ZAPI_URL + 'teststep/' + issueId,
+            obj = {
+                step: description,
                 orderId: orderId,
-                result: 'Successfully completes.'
+                result: ''
             };
 
-        return this.post(testStepUrl, null, testStepObject);
+        return this.post(url, null, obj);
     };
 
     this.getIssueId = (issueName) => {
@@ -129,6 +126,10 @@ var ZapiApi = function () {
 
     this.getIssueByLabel = (label) => {
         return this.get(BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20issuetype%20%3D%2010302%20and%20labels=' + label + '&maxResults=1');
+    };
+
+    this.getIssueSteps = (issueId) => {
+        return this.get(ZAPI_URL + 'teststep/' + issueId);
     };
 
     // TODO remove reporter filter and startAt
@@ -247,13 +248,19 @@ var ZapiApi = function () {
 
     this.requestCallback = (error, response, body, url, deferred) => {
         if(response) {
-            var status = response.statusCode ? response.statusCode : null;
+            var status = response.statusCode ? response.statusCode : null,
+                parsedBody;
 
-            if (error || (status !== 200 || status !== 201)) {
-                log(url, status, error);
+            if (error || [200,201,204].indexOf(status) == -1) {
+                log(url, 'Status: ' + status, error, body);
                 deferred.reject(status, body);
             } else {
-                deferred.resolve(JSON.parse(body));
+                try {
+                    parsedBody = JSON.parse(body);
+                }
+                catch(err) {
+                }
+                deferred.resolve(parsedBody);
             }
         }
     };

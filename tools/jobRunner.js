@@ -12,7 +12,7 @@ let cp = require('child_process'),
     eventDateTimeString = require('../reporter/eventDateTimeString'),
     timeTakenSince = require('../reporter/timeTakenSince'),
 
-    Zapi = require('../tools/zapi'),
+    zapi = require('../tools/zapi'),
 
     masterStartTime = Date.now(),
 
@@ -431,7 +431,7 @@ let cp = require('child_process'),
     log(0, 'Requested tags:', tags || 'all');
     log(0, 'Negated tags:', negatedTags || 'none');
 
-    Zapi.setTestCycle(cycleName).then((result) => {
+    zapi.setTestCycle(cycleName).then((result) => {
         cycleId = result.cycleId;
         log(0, 'Test Cycle:', cycleId || 'none', cycleName);
 
