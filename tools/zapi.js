@@ -23,7 +23,8 @@ var Zapi = function () {
     }
 
     this.setTestCycle = (testCycleName) => {
-        var deferred = Q.defer();
+        var deferred = Q.defer(),
+            cycleId;
         if (!testCycleName) {
             deferred.resolve({cycleId: null});
         } else {
@@ -33,6 +34,7 @@ var Zapi = function () {
                 for (var id in cycleIds) {
                     if (cycleIds[id].name === testCycleName) {
                         deferred.resolve({cycleId: id});
+                        cycleId = id;
                         //log('Using test cycle: ' + cycleId + ' - ' + testCycleName);
                         break;
                     }
@@ -49,10 +51,16 @@ var Zapi = function () {
         return deferred.promise;
     };
 
-    this.saveIssue = (featureName, tags) => {
-        log(featureName, tags);
-        return;
-        ZapiApi.createIssue();
+    this.saveIssue = (id, featureName, tags) => {
+        var componentName;
+        tags.forEach((tag) => {
+            if (components[tag]) {
+                componentName = components[tag];
+            }
+        });
+        return ZapiApi.createIssue(id, featureName, componentName).then((result) => {
+            log(id, featureName, tags, result);
+        });
     };
 
 };

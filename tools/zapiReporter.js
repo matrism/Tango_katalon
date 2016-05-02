@@ -16,14 +16,13 @@ exports.suiteStarted = (suite) => {
         if (suite.obj.featureName) {
             featureName = suite.obj.featureName;
         } else {
-            
             featureName = path.parse(featureName).name.replace(/^[a-z]|[A-Z]/g, function(v, i) {
                 return i === 0 ? v.toUpperCase() : " " + v;
             });
         }
 
         browser.controlFlow().execute(() => { 
-            return Zapi.saveIssue(featureName, suite.obj.commonFeatureTags);
+            return Zapi.saveIssue(suite.obj.id, featureName, suite.obj.commonFeatureTags);
         });
     }
 };

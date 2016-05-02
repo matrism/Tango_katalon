@@ -12,6 +12,10 @@ var ZapiApi = function () {
         versionId = '-1',
         projectName = 'WC';
 
+    function log () {
+        console.log('[Zapi]', ...arguments);
+    }
+
     this.createTestCycle = (name) => {
         var obj = {
             name: name,
@@ -28,7 +32,7 @@ var ZapiApi = function () {
     };
 
     // TODO remove reporter or add another
-    this.createIssue = (name, componentName) => {
+    this.createIssue = (id, name, componentName) => {
         var createUrl = BASE_URL + '/rest/api/2/issue',
             obj = {
                 'fields': {
@@ -39,16 +43,18 @@ var ZapiApi = function () {
                     'issuetype': {
                         'id': '10302'
                     },
+                    /*
                     'reporter': {
                         'name': 'Constantine.Crismaru'
                     },
+                    */
                     'components': [
                         {'name': componentName}
                     ],
                     'labels': [
-                        'auto_created'
+                        'auto_created', 'live', id
                     ],
-                    'description': 'Optional Description.'
+                    //'description': 'Optional Description.'
                 }
             };
 
@@ -239,98 +245,57 @@ var ZapiApi = function () {
         });
     };
 
+    this.requestCallback = (error, response, body, url, deferred) => {
+        if(response) {
+            var status = response.statusCode ? response.statusCode : null;
+
+            if (error || (status !== 200 || status !== 201)) {
+                log(url, status, error);
+                deferred.reject(status, body);
+            } else {
+                deferred.resolve(JSON.parse(body));
+            }
+        }
+    };
+
     this.get = (url, qs) => {
         var deferred = Q.defer();
-
         tgRequest.get(url, qs, (error, response, body) => {
-            if(response) {
-                var status = response.statusCode ? response.statusCode : null;
-
-                if (error || status !== 200) {
-                    deferred.reject(status, body);
-                } else {
-                    deferred.resolve(JSON.parse(body));
-                }
-            }
+            this.requestCallback(error, response, body, url, deferred);
         });
-
         return deferred.promise;
     };
 
     // TODO: can we just use post?
     this.postFile = (url, qs, formData, successfulStatusCode) => {
         var deferred = Q.defer();
-
         tgRequest.postFile(url, qs, formData, (error, response, body) => {
-            if(response) {
-                var status = response.statusCode,
-                    success = successfulStatusCode || 200;
-
-                if (error || status !== success) {
-                    deferred.reject(status, body);
-                } else {
-                    deferred.resolve(body);
-                }
-            }
+            this.requestCallback(error, response, body, url, deferred);
         });
-
         return deferred.promise;
     };
 
     this.post = (url, qs, obj, successfulStatusCode) => {
         var deferred = Q.defer();
-
         tgRequest.post(url, qs, obj, (error, response, body) => {
-            if(response) {
-                var status = response.statusCode,
-                    success = successfulStatusCode || 200;
-
-                if (error || status !== success) {
-                    console.log(response);
-                    console.log(body);
-                    deferred.reject(status, body);
-                } else {
-                    deferred.resolve(JSON.parse(body));
-                }
-            }
+            this.requestCallback(error, response, body, url, deferred);
         });
-
         return deferred.promise;
     };
 
     this.put = (url, qs, obj, successfulStatusCode) => {
         var deferred = Q.defer();
-
         tgRequest.put(url, qs, obj, (error, response, body) => {
-            if(response) {
-                var status = response.statusCode,
-                    success = successfulStatusCode || 200;
-
-                if (error || status !== success) {
-                    deferred.reject(status, body);
-                } else {
-                    deferred.resolve(body);
-                }
-            }
+            this.requestCallback(error, response, body, url, deferred);
         });
-
         return deferred.promise;
     };
 
     this.delete = (url, successfulStatusCode) => {
         var deferred = Q.defer();
-
         tgRequest.delete(url, null, (error, response) => {
-            var status = response.statusCode,
-                success = successfulStatusCode || 200;
-
-            if (error || status !== success) {
-                deferred.reject(status);
-            } else {
-                deferred.fulfill(status);
-            }
+            this.requestCallback(error, response, body, url, deferred);
         });
-
         return deferred.promise;
     };
 };
