@@ -17,7 +17,7 @@ var path = require('path'),
     config,
     orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     demoReporter = require('../tools/demoReporter'),
-    zapiReporter = require('../tools/zapiReporter'),
+    zapiReporter = require('../reporter/zapiReporter'),
     stepByStepReporter = require('../tools/stepByStepReporter');
 
 global.ftf = require('factory-testing-framework');
