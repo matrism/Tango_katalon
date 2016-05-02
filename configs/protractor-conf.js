@@ -84,7 +84,11 @@ config = {
             }
         }
     },
-    specs: ['init.js'],
+
+    specs: [
+        !systemConfig.interactiveMode ? 'init.js' : 'interactive.js'
+    ],
+
     onPrepare: function() {
         console.time('Tests time');
         var reporting = systemConfig.reporting,
