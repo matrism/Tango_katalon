@@ -129,7 +129,7 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
-
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
         }
     }
 ];
