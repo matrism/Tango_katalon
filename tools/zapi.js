@@ -1,6 +1,6 @@
 'use strict';
 
-var Zapi = function () {
+var zapi = function () {
     var fs = require('fs'),
         Q = require('q'),
         path = require('path'),
@@ -16,7 +16,8 @@ var Zapi = function () {
             'copyrightRegistration': 'Copyright Registration',
             'financialInterfaces': 'Financial Interfaces',
             'incomeManagement': 'Income Management'
-        };
+        },
+        self = this;
 
     function log () {
         console.log('[Zapi]', ...arguments);
@@ -24,12 +25,15 @@ var Zapi = function () {
 
     this.setTestCycle = (testCycleName) => {
         var deferred = Q.defer(),
-            cycleId;
+            cycleId,
+            failCallback = () => {
+                deferred.resolve({cycleId: null});
+            };
 
         testCycleName = testCycleName.replace('{1}', moment().format('YYYY-MM-DD'));
 
         if (!testCycleName) {
-            deferred.resolve({cycleId: null});
+            failCallback();
         } else {
             log('Getting test cycles...');
             ZapiApi.getTestCycles().then((response) => {
@@ -49,24 +53,24 @@ var Zapi = function () {
                     ZapiApi.createTestCycle(testCycleName).then((result) => {
                         deferred.resolve({cycleId: result.id, cycleName: testCycleName});
                         log(result.responseMessage + ' - ' + testCycleName );
-                    });
+                    }, failCallback);
                 }
-            });
+            }, failCallback);
         }
         return deferred.promise;
     };
 
 
-    this.issue = (function () {
-        var issue = {};
-        issue.id = '';
-        issue.steps = [];
-        issue.getStepsDeferred = Q.defer();
-        issue.createStepsPromises = [];
+    this.issue = (() => {
+        var issue = {
+            id: null,
+            steps: [],
+            saveDeferred: Q.defer(),
+            getStepsDeferred: Q.defer()
+        };
 
         issue.save = (featureId, featureName, tags) => {
-            var deferred = Q.defer(),
-                componentName;
+            var componentName;
 
             tags.forEach((tag) => {
                 if (components[tag]) {
@@ -81,71 +85,100 @@ var Zapi = function () {
                     issue.id = response.issues[0].id;
                     log('Issue already exists:', issue.id);
                     log('Updating issue...', issue.id);
-                    issue.getSteps();
                     ZapiApi.updateIssue(issue.id, featureName, tags).then((result) => {
                         log('Issue updated:', issue.id);
-                        deferred.resolve({id: issue.id});
+                        issue.getSteps();
+                        issue.saveDeferred.resolve({id: issue.id});
                     });
                 }
 
                 if (!issue.id) {
                     log('Creating Issue...');
                     ZapiApi.createIssue(featureId, featureName, componentName).then((result) => {
-                        issue.getStepsDeferred.resolve();
                         if (result.id) {
-                            deferred.resolve({id: result.id});
-                            log('Issue created: ', featureId, featureName, tags, result.id, result.key);
+                            issue.id = result.id;
+                            log('Issue created: ', featureId, featureName, tags, issue.id, result.key);
+                            issue.saveDeferred.resolve({id: issue.id});
                         }
                     });
                 }
             });
-            return deferred.promise;
+            return issue.saveDeferred.promise;
         };
 
         issue.getSteps = () => {
             log('Getting issue steps...')
             return ZapiApi.getIssueSteps(issue.id).then((response) => {
                 issue.getStepsDeferred.resolve();
-                log('Issue steps found.');
-                issue.steps = response;
+                issue.steps = Array.isArray(response) ? response : [];
+                log('Get issue steps done.');
             });
         };
 
         // TODO: update step description, add new ones and remove non existent ones
         issue.saveStep = (description, orderId) => {
-            var deferred = Q.defer();
-            issue.getStepsDeferred.promise.then(() => {
+            return issue.getStepsDeferred.promise.then(() => {
                 if (issue.steps.length) {
                     log('Issue steps already exists.');
                 } else {
                     log('Adding issue step...', issue.id, description, orderId);
-                    let promise = ZapiApi.createIssueStep(issue.id, description, orderId).then((response) => {
+                    return ZapiApi.createIssueStep(issue.id, description, orderId).then((response) => {
                         log('Issue step added:', response.id);
-                        deferred.resolve();
+                        issue.steps.push(response);
                     });
-                    issue.createStepsPromises.push(promise);
                 }
-            });
-            return deferred;
-        };
-
-        issue.waitForCreateSteps = () => {
-            log('Wait for Create Steps');
-            browser.controlFlow().execute(() => { 
-                return Q.all(issue.createStepsPromises);
             });
         };
 
         issue.execute = (cycleId) => {
-            log('Executing issue...');
+            log('Executing issue...', cycleId, issue.id);
             return ZapiApi.executeTestToTestCycle(cycleId, issue.id).then((response) => {
-                log('Execution response:', response);
+                for (var key in response) {
+                    self.execution.id = key;
+                    self.execution.getSteps();
+                }
+                log('Execution response:', this.execution.id);
             });
         };
 
         return issue;
     })();
 
+    this.execution = (() => {
+        var execution = {
+            id: null,
+            steps: [],
+            getStepsDeferred: Q.defer()
+        };
+
+        execution.getSteps = () => {
+            log('Getting execution steps...');
+            return ZapiApi.getExecutionSteps(execution.id).then((response) => {
+                execution.getStepsDeferred.resolve();
+                execution.steps = Array.isArray(response) ? response.reverse() : [];
+                log('Get execution steps done');
+            });
+        };
+
+        execution.updateStepResult = (orderId, status, comment) => {
+            return execution.getStepsDeferred.promise.then(() => {
+                var issueStep = self.issue.steps.find((step) => {
+                        return step.orderId == orderId;
+                    }),
+                    execStep = execution.steps.find((step) => {
+                        return step.stepId == issueStep.id; 
+                    });
+                log(execStep);
+
+                log('Updating execution step result...', id, status, comment);
+                return ZapiApi.updateExecutionStepResult(this.issue.id, execution.id, execStep.id, status, comment).then((response) => {
+                    log('Execution step updated:', response);
+                });
+            });
+        };
+
+        return execution;
+    })();
 };
 
-module.exports = new Zapi();
+module.exports = new zapi();

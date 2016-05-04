@@ -123,6 +123,7 @@ var ZapiApi = function () {
         return this.get({url: BASE_URL + '/rest/api/2/issue/' + issueName});
     };
 
+    // filter by cycle name
     this.getTestCycles = () => {
         return this.get({url: ZAPI_URL + 'cycle?projectId=' + projectId});
     };
@@ -146,8 +147,8 @@ var ZapiApi = function () {
         return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%201&startAt=0&maxResults=1000'});
     };
 
-    this.getTestStepResultsForExecution = (jiraExecutionId) => {
-        return this.get({url: ZAPI_URL + 'stepResult?executionId=' + jiraExecutionId});
+    this.getExecutionSteps = (executionId) => {
+        return this.get({url: ZAPI_URL + 'stepResult?executionId=' + executionId});
     };
 
     this.bulkUpdateExecutionDefects = (createdBugs, jiraExecutionId) => {
@@ -164,13 +165,13 @@ var ZapiApi = function () {
         return this.put({url: ZAPI_URL + 'execution/updateWithBulkDefects', body: updateObject});
     };
 
-    this.updateTestStepResult = (jiraIssueId, jiraExecutionId, testStepObject, feature, linkedIssue) => {
+    this.updateExecutionStepResult = (issueId, executionId, stepId, status, comment, linkedIssue) => {
         var updateObject = {
-            id: testStepObject.resultStep.id,
-            issueId: jiraIssueId,
-            executionId: jiraExecutionId,
-            comment: feature.name,
-            status: testStepObject.step.passed ? 1 : 2
+            id: stepId,
+            issueId: issueId,
+            executionId: executionId,
+            comment: comment,
+            status: status == 'passed' ? 1 : 2
         };
 
         if (linkedIssue) {
@@ -178,7 +179,7 @@ var ZapiApi = function () {
             updateObject.defectList = [ linkedIssue.key ];
         }
 
-        return this.put({url: ZAPI_URL + 'stepResult/' + testStepObject.resultStep.id, body:updateObject});
+        return this.put({url: ZAPI_URL + 'stepResult/' + stepId, body: updateObject});
     };
 
     this.updateTestExecutionStatus = (passed, execId) => {
@@ -251,25 +252,53 @@ var ZapiApi = function () {
         });
     };
 
+    this.get = (req) => {
+        req.method = 'GET';
+        return this.request(req);
+    };
+
+    this.post = (req) => {
+        req.method = 'POST';
+        return this.request(req);
+    };
+
+    this.postFile = (req) => {
+        req.headers = {'X-Atlassian-Token': 'nocheck'};
+        req.method = 'POST';
+        return this.request(req);
+    };
+
+    this.put = (req) => {
+        req.method = 'PUT';
+        return this.request(req);
+    };
+
+    this.delete = (req) => {
+        req.method = 'DELETE';
+        return this.request(req);
+    };
+
     this.request = (req) => {
         var deferred = Q.defer(),
             bodyParams,
-            r;
+            r,
+            writeBody = (['POST','PUT'].indexOf(req.method) > -1);
 
-        req.headers = {
-            'Authorization': 'Basic ' + base64.encode('Constantine.Crismaru:America66%'),
-            'Content-Type': 'application/json'
-        }
-        if (req.method == 'POST') {
+        req.headers = req.headers || {};
+        req.headers['Authorization'] = 'Basic ' + base64.encode('Constantine.Crismaru:America66%');
+        req.headers['Content-Type'] = 'application/json';
+
+        if (writeBody) {
             bodyParams = JSON.stringify(req.body);
             delete req.body;
             req.headers['Content-Length'] = bodyParams.length;
         }
+        //log('START -',req.method, req.url);
         r = request(req, (error, response, body) => {
-            //log(req.url, body);
+            //log('DONE  -', req.method, req.url, response.statusCode, body);
             if(response) {
                 let status = response.statusCode ? response.statusCode : null,
-                    parsedBody;
+                    parsedBody = {};
 
                 if (error || [200,201,204].indexOf(status) == -1) {
                     log(req.url, 'Status: ' + status, error, body);
@@ -282,79 +311,21 @@ var ZapiApi = function () {
                     }
                     deferred.resolve(parsedBody);
                 }
+            } else {
+                log(req.url, error);
+                deferred.reject();
             }
+        }, (error) => {
+            log('Error - ', req.method, req.url, error);
+            deferred.reject();
         });
 
-        if (req.method == 'POST') {
+        if (writeBody) {
             r.write(bodyParams);
             r.end();
         }
 
         return deferred.promise;
-    };
-
-    this.get = (req) => {
-        req.method = 'GET';
-        return this.request(req);
-    };
-
-    // TODO: can we just use post?
-    this.postFile = (url, qs, formData, successfulStatusCode) => {
-        //tgRequest.postFile(url, qs, formData, (error, response, body) => {
-    };
-
-    this.post = (req) => {
-        req.method = 'POST';
-        return this.request(req);
-    };
-
-    this.put = (url, qs, obj) => {
-        //tgRequest.put(url, qs, obj, (error, response, body) => {
-    };
-
-    this.delete = (url) => {
-    //tgRequest.delete(url, null, (error, response) => {
-    };
-
-    this.postFile = function (url, qs, formData, fn) {
-        request({
-            method: 'POST',
-            url: url,
-            formData: formData,
-            headers: {
-                'Authorization': authorization,
-                'X-Atlassian-Token': 'nocheck'
-            }
-        }, fn);
-    };
-
-    this.put = function (url, qs, body, fn) {
-        var _body = JSON.stringify(body),
-            _req = request({
-                method: 'PUT',
-                url: url,
-                qs: qs,
-                headers: {
-                    'Authorization': authorization,
-                    'Content-Type': 'application/json',
-                    'Content-Length': _body.length
-                }
-            }, fn);
-
-        _req.write(_body);
-        _req.end();
-    };
-
-    this.delete = function (url, qs, fn) {
-        request({
-            method: 'DELETE',
-            url: url,
-            qs: qs,
-            headers: {
-                'Authorization': authorization,
-                'Content-Type': 'application/json'
-            }
-        }, fn);
     };
 };
 
