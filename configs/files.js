@@ -1,11 +1,5 @@
 'use strict';
 
-var configer = global.ftf.configer,
-    cli = configer.getParamsFromCli(),
-    env = {
-        ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
-    };
-
 var fs = require('fs'),
     path = require('path'),
     extname = path.extname,
@@ -14,10 +8,11 @@ var fs = require('fs'),
     basePath = __dirname,
     basePathSlash = basePath + '/',
 
-    commonModulePaths = glob.sync(basePath + '/../envs/common/**/*.js'),
-    envModulePaths = glob.sync(basePath + '/../envs/' + env.ENV_TYPE + '/**/*.js'),
-
-    selectedModulePaths;
+    configer = global.ftf.configer,
+    cli = configer.getParamsFromCli(),
+    env = {
+        ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
+    };
 
 function parseModulePath(path) {
     var tail = path.slice(basePathSlash.length),
@@ -32,46 +27,59 @@ function parseModulePath(path) {
     };
 }
 
-commonModulePaths = commonModulePaths.map(parseModulePath);
+exports.load = () => {
+    var commonModulePaths = glob.sync(basePath + '/../envs/common/**/*.js'),
+        envModulePaths = glob.sync(basePath + '/../envs/' + env.ENV_TYPE + '/**/*.js'),
 
-envModulePaths = envModulePaths.map(parseModulePath);
+        selectedModulePaths;
 
-selectedModulePaths = commonModulePaths;
+    commonModulePaths = commonModulePaths.map(parseModulePath);
 
-envModulePaths.forEach(function (info) {
-    var dupePosition = null;
+    envModulePaths = envModulePaths.map(parseModulePath);
 
-    selectedModulePaths.forEach(function (otherInfo, index) {
-        if (info.envFilePath === otherInfo.envFilePath) {
-            dupePosition = index;
+    selectedModulePaths = commonModulePaths;
+
+    envModulePaths.forEach(function (info) {
+        var dupePosition = null;
+
+        selectedModulePaths.forEach(function (otherInfo, index) {
+            if (info.envFilePath === otherInfo.envFilePath) {
+                dupePosition = index;
+            }
+        });
+
+        if (dupePosition !== null) {
+            selectedModulePaths.splice(dupePosition, 1);
+        }
+
+        selectedModulePaths.push(info);
+    });
+
+    let ret = {};
+
+    ret.features = [];
+    ret.steps = [];
+    ret.pages = [];
+
+    selectedModulePaths.forEach(function (info) {
+        var fullPath = info.fullPath;
+
+        if (fullPath.indexOf('/features/') > -1 && fullPath.indexOf('/data/') === -1) {
+            ret.features.push(fullPath);
+        } else if (fullPath.indexOf('/pages/') > -1) {
+            ret.pages.push(fullPath);
+        } else if (fullPath.indexOf('/steps/') > -1) {
+            ret.steps.push(fullPath);
         }
     });
 
-    if (dupePosition !== null) {
-        selectedModulePaths.splice(dupePosition, 1);
-    }
+    Object.keys(steps).forEach(k => delete steps[k]);
+    Object.keys(pages).forEach(k => delete pages[k]);
 
-    selectedModulePaths.push(info);
-});
+    ret.pages.concat(ret.steps).forEach(path => {
+        delete require.cache[require.resolve(path)];
+        require(path);
+    });
 
-var features = [],
-      steps = [],
-      pages = [];
-
-selectedModulePaths.forEach(function (info) {
-    var fullPath = info.fullPath;
-
-    if (fullPath.indexOf('/features/') > -1 && fullPath.indexOf('/data/') === -1) {
-        features.push(fullPath);
-    } else if (fullPath.indexOf('/pages/') > -1) {
-        pages.push(fullPath);
-    } else if (fullPath.indexOf('/steps/') > -1) {
-        steps.push(fullPath);
-    }
-});
-
-module.exports = {
-    features: features,
-    steps: steps,
-    pages: pages
-}
+    return ret;
+};

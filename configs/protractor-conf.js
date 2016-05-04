@@ -131,12 +131,7 @@ config = {
         //jasmine.getEnv().addReporter(beforeReporter);
 
         // set path to features in config
-        systemConfig.path_to_features = testFiles.features;
-
-        // require all pages and steps files
-        testFiles.pages.concat(testFiles.steps).forEach(function (filePath) {
-            require(filePath);
-        });
+        systemConfig.path_to_features = testFiles.load().features;
 
         projectId = systemConfig.projectId;
         flow = 2;

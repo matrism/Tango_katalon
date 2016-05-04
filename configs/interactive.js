@@ -1,6 +1,8 @@
 var repl = require('repl'),
     os = require('os'),
 
+    $files = require('./files'),
+
     $emptyCmd = '(' + os.EOL + ')',
 
     $absurdTimeout = 1e10,
@@ -57,6 +59,11 @@ it('Run REPL', () => {
                 callback(err, val);
             };
         }
+    });
+
+    replServer.defineCommand('reload', function () {
+        $files.load();
+        this.displayPrompt();
     });
 
     replServer.defineCommand('orphan', () => {
