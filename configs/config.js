@@ -66,11 +66,7 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: (
-                    cli['app-url'] || 'http://tango.tango.qa.wmg.com'
-                ),
-                service_url: (
-                    cli['service-url'] || cli['app-url'] ||
-                    'http://tango.tango.qa.wmg.com'
+                    cli['app-url'] || 'http://tango-node.tango.qa.wmg.com'
                 ),
                 cr_url: (
                     cli['cr-url'] || 'http://tancrsrv.tango.qa.wmg.com:80'
@@ -85,11 +81,7 @@ var defaultUserName = 'TangoTest1',
         staging: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
-                app_url: cli['app-url'] || 'http://musicpublishing.staging.wmg.com',
-                service_url: (
-                    cli['service-url'] || cli['app-url'] ||
-                    'http://musicpublishing.staging.wmg.com'
-                ),
+                app_url: cli['app-url'] || 'http://tango-node.internal.staging.wmg.com',
                 cr_url: (
                     cli['cr-url'] ||
                     'http://tancrsrv.internal.staging.wmg.com:80'
@@ -102,7 +94,6 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: cli['sso-url'] || configer.getEnvVarByKey('URL_SSO'),
                 app_url: cli['app-url'],
-                service_url: cli['service-url'] || cli['app-url'],
                 cr_url: cli['cr-url']
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
