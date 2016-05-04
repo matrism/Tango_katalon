@@ -26,15 +26,18 @@ var Zapi = function () {
         var deferred = Q.defer(),
             cycleId;
 
+        testCycleName = testCycleName.replace('{1}', moment().format('YYYY-MM-DD'));
+
         if (!testCycleName) {
             deferred.resolve({cycleId: null});
         } else {
+            log('Getting test cycles...');
             ZapiApi.getTestCycles().then((response) => {
                 let cycleIds = response['-1'][0];
 
                 for (var id in cycleIds) {
                     if (cycleIds[id].name === testCycleName) {
-                        deferred.resolve({cycleId: id});
+                        deferred.resolve({cycleId: id, cycleName: testCycleName});
                         cycleId = id;
                         log('Cycle already exists: ' + cycleId + ' - ' + testCycleName);
                         break;
@@ -44,7 +47,7 @@ var Zapi = function () {
                 if (!cycleId) {
                     log('Creating Cycle...');
                     ZapiApi.createTestCycle(testCycleName).then((result) => {
-                        deferred.resolve({cycleId: result.id});
+                        deferred.resolve({cycleId: result.id, cycleName: testCycleName});
                         log(result.responseMessage + ' - ' + testCycleName );
                     });
                 }
@@ -103,30 +106,40 @@ var Zapi = function () {
             log('Getting issue steps...')
             return ZapiApi.getIssueSteps(issue.id).then((response) => {
                 issue.getStepsDeferred.resolve();
-                log('Issue steps found', resolve.length);
+                log('Issue steps found.');
                 issue.steps = response;
             });
         };
 
+        // TODO: update step description, add new ones and remove non existent ones
         issue.saveStep = (description, orderId) => {
+            var deferred = Q.defer();
             issue.getStepsDeferred.promise.then(() => {
-                // TODO: update step description, add new ones and remove non existent ones
                 if (issue.steps.length) {
                     log('Issue steps already exists.');
                 } else {
                     log('Adding issue step...', issue.id, description, orderId);
                     let promise = ZapiApi.createIssueStep(issue.id, description, orderId).then((response) => {
                         log('Issue step added:', response.id);
+                        deferred.resolve();
                     });
                     issue.createStepsPromises.push(promise);
                 }
             });
+            return deferred;
         };
 
         issue.waitForCreateSteps = () => {
             log('Wait for Create Steps');
             browser.controlFlow().execute(() => { 
                 return Q.all(issue.createStepsPromises);
+            });
+        };
+
+        issue.execute = (cycleId) => {
+            log('Executing issue...');
+            return ZapiApi.executeTestToTestCycle(cycleId, issue.id).then((response) => {
+                log('Execution response:', response);
             });
         };
 

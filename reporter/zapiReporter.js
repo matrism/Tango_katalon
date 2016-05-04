@@ -21,7 +21,9 @@ exports.suiteStarted = (suite) => {
             });
         }
 
-        zapi.issue.save(suite.obj.id, featureName, suite.obj.commonFeatureTags);
+        zapi.issue.save(suite.obj.id, featureName, suite.obj.commonFeatureTags).then(() => {
+            return zapi.issue.execute(options.cycleId);
+        });
     }
 };
 
@@ -29,8 +31,16 @@ exports.specStarted = (spec) => {
 };
 
 exports.specDone = (spec) => {
-    zapi.issue.saveStep(spec.description, spec.stepNum);
-    zapi.issue.waitForCreateSteps();
+    if (spec.description != 'User is logged in') {
+        //console.log(spec);
+        var scenario = '';
+        if (true) {
+            //zapi.issue.saveStep(spec.description, spec.stepNum);
+        }
+        zapi.issue.saveStep(spec.description, spec.stepNum).then(() => {
+        });
+        //zapi.issue.waitForCreateSteps();
+    }
 };
 
 exports.suiteDone = (suite) => {

@@ -3,7 +3,7 @@
 let fs = require('fs'),
     path = require('path'),
     Q = require('q'),
-    tgRequest = require('../helpers/tgRequest');
+    request = require('request');
 
 var ZapiApi = function () {
     var BASE_URL = 'https://jira.wmg.com',
@@ -17,14 +17,17 @@ var ZapiApi = function () {
     }
 
     this.createTestCycle = (name) => {
-        var obj = {
+        var body = {
             name: name,
             environment: "qa",
             projectId: projectId,
             versionId: versionId
         };
 
-        return this.post(ZAPI_URL + 'cycle', null, obj);
+        return this.post({
+            url: ZAPI_URL + 'cycle',
+            body: body
+        });
     };
 
     this.getTestStepsForIssue = (issueId) => {
@@ -57,7 +60,7 @@ var ZapiApi = function () {
                 }
             };
 
-        return this.post(createUrl, null, obj);
+        return this.post({url: createUrl, body: obj});
     };
 
     this.updateIssue = (issueId, featureName, componentName) => {
@@ -68,7 +71,7 @@ var ZapiApi = function () {
                 }
             };
 
-        return this.put(updateUrl, null, obj);
+        return this.put({url: updateUrl, body: obj});
     };
 
     this.createJiraBug = (issueId, feature, testStep, bugLabel) => {
@@ -76,7 +79,7 @@ var ZapiApi = function () {
             obj = {
                 'fields': {
                     'project': {
-                        'id': this.projectId
+                        'id': projectId
                     },
                     'summary': 'Test Bug through Jira API - linked to ' + testStep.step.name + ' --- ' + feature.key,
                     'issuetype': {
@@ -96,7 +99,7 @@ var ZapiApi = function () {
                 }
             };
 
-        return this.post(createUrl, null, obj, 201);
+        return this.post({url: createUrl, body: obj});
     };
 
     /*    this.getAllProjects = () => {
@@ -113,37 +116,38 @@ var ZapiApi = function () {
                 result: ''
             };
 
-        return this.post(url, null, obj);
+        return this.post({url: url, body: obj});
     };
 
     this.getIssueId = (issueName) => {
-        return this.get(BASE_URL + '/rest/api/2/issue/' + issueName);
+        return this.get({url: BASE_URL + '/rest/api/2/issue/' + issueName});
     };
 
     this.getTestCycles = () => {
-        return this.get(ZAPI_URL + 'cycle?projectId=' + projectId);
+        return this.get({url: ZAPI_URL + 'cycle?projectId=' + projectId});
     };
 
     this.getIssueByLabel = (label) => {
-        return this.get(BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20issuetype%20%3D%2010302%20and%20labels=' + label + '&maxResults=1');
+
+        return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20issuetype%20%3D%2010302%20and%20labels=' + label + '&maxResults=1'});
     };
 
     this.getIssueSteps = (issueId) => {
-        return this.get(ZAPI_URL + 'teststep/' + issueId);
+        return this.get({url: ZAPI_URL + 'teststep/' + issueId});
     };
 
     // TODO remove reporter filter and startAt
     this.getTestCases = () => {
-        return this.get(BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%2010302&startAt=0&maxResults=1000');
+        return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%2010302&startAt=0&maxResults=1000'});
     };
 
     // TODO remove reporter filter
     this.getTestBugs = () => {
-        return this.get(BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%201&startAt=0&maxResults=1000');
+        return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%201&startAt=0&maxResults=1000'});
     };
 
     this.getTestStepResultsForExecution = (jiraExecutionId) => {
-        return this.get(ZAPI_URL + 'stepResult?executionId=' + jiraExecutionId);
+        return this.get({url: ZAPI_URL + 'stepResult?executionId=' + jiraExecutionId});
     };
 
     this.bulkUpdateExecutionDefects = (createdBugs, jiraExecutionId) => {
@@ -157,7 +161,7 @@ var ZapiApi = function () {
             updateObject.defects.push(createdBug.key)
         });
 
-        return this.put(ZAPI_URL + 'execution/updateWithBulkDefects', null, updateObject, 200);
+        return this.put({url: ZAPI_URL + 'execution/updateWithBulkDefects', body: updateObject});
     };
 
     this.updateTestStepResult = (jiraIssueId, jiraExecutionId, testStepObject, feature, linkedIssue) => {
@@ -174,22 +178,23 @@ var ZapiApi = function () {
             updateObject.defectList = [ linkedIssue.key ];
         }
 
-        return this.put(ZAPI_URL + 'stepResult/' + testStepObject.resultStep.id, null, updateObject);
+        return this.put({url: ZAPI_URL + 'stepResult/' + testStepObject.resultStep.id, body:updateObject});
     };
 
     this.updateTestExecutionStatus = (passed, execId) => {
-        return this.put(ZAPI_URL + 'execution/' + execId + '/execute', null, { comment: 'Automated Execution.', status: passed ? 1 : 2});
+        var updateObject = { comment: 'Automated Execution.', status: passed ? 1 : 2};
+        return this.put({url: ZAPI_URL + 'execution/' + execId + '/execute', body: updateObject});
     };
 
     this.executeTestToTestCycle = (cycleId, issueId) => {
         var obj = {
             cycleId: cycleId,
             issueId: issueId,
-            projectId: this.projectId,
+            projectId: projectId,
             versionId: versionId
         };
 
-        return this.post(ZAPI_URL + 'execution/', null, obj);
+        return this.post({url: ZAPI_URL + 'execution/', body: obj});
     };
 
     this.updateTestExecution = (executionId, status, comment) => {
@@ -199,12 +204,12 @@ var ZapiApi = function () {
             comment: comment
         };
 
-        return this.put(ZAPI_URL + 'execution/' + executionId + '/execute', null, obj);
+        return this.put({url: ZAPI_URL + 'execution/' + executionId + '/execute', body: obj});
     };
 
     this.getAttachments = (entityId) => {
         var entityType = 'TESTSTEPRESULT';
-        return this.get(ZAPI_URL + 'attachment/attachmentsByEntity?entityId=' + entityId + '&entityType=' + entityType);
+        return this.get({url: ZAPI_URL + 'attachment/attachmentsByEntity?entityId=' + entityId + '&entityType=' + entityType});
     };
 
     this.addAttachment = (entityId, file) => {
@@ -219,11 +224,11 @@ var ZapiApi = function () {
                 }
             };
 
-        return this.postFile(ZAPI_URL + 'attachment/?entityId=' + entityId + '&entityType=' + entityType, null, formData);
+        return this.postFile({url: ZAPI_URL + 'attachment/?entityId=' + entityId + '&entityType=' + entityType, formData: formData});
     };
 
     this.deleteAttachment = (id) => {
-        return this.delete(ZAPI_URL + 'attachment/' + id);
+        return this.delete({url: ZAPI_URL + 'attachment/' + id});
     };
 
     this.deleteAttachmentsByStep = (stepId) => {
@@ -246,64 +251,110 @@ var ZapiApi = function () {
         });
     };
 
-    this.requestCallback = (error, response, body, url, deferred) => {
-        if(response) {
-            var status = response.statusCode ? response.statusCode : null,
-                parsedBody;
+    this.request = (req) => {
+        var deferred = Q.defer(),
+            bodyParams,
+            r;
 
-            if (error || [200,201,204].indexOf(status) == -1) {
-                log(url, 'Status: ' + status, error, body);
-                deferred.reject(status, body);
-            } else {
-                try {
-                    parsedBody = JSON.parse(body);
-                }
-                catch(err) {
-                }
-                deferred.resolve(parsedBody);
-            }
+        req.headers = {
+            'Authorization': 'Basic ' + base64.encode('Constantine.Crismaru:America66%'),
+            'Content-Type': 'application/json'
         }
+        if (req.method == 'POST') {
+            bodyParams = JSON.stringify(req.body);
+            delete req.body;
+            req.headers['Content-Length'] = bodyParams.length;
+        }
+        r = request(req, (error, response, body) => {
+            //log(req.url, body);
+            if(response) {
+                let status = response.statusCode ? response.statusCode : null,
+                    parsedBody;
+
+                if (error || [200,201,204].indexOf(status) == -1) {
+                    log(req.url, 'Status: ' + status, error, body);
+                    deferred.reject(status, body);
+                } else {
+                    try {
+                        parsedBody = JSON.parse(body);
+                    }
+                    catch(err) {
+                    }
+                    deferred.resolve(parsedBody);
+                }
+            }
+        });
+
+        if (req.method == 'POST') {
+            r.write(bodyParams);
+            r.end();
+        }
+
+        return deferred.promise;
     };
 
-    this.get = (url, qs) => {
-        var deferred = Q.defer();
-        tgRequest.get(url, qs, (error, response, body) => {
-            this.requestCallback(error, response, body, url, deferred);
-        });
-        return deferred.promise;
+    this.get = (req) => {
+        req.method = 'GET';
+        return this.request(req);
     };
 
     // TODO: can we just use post?
     this.postFile = (url, qs, formData, successfulStatusCode) => {
-        var deferred = Q.defer();
-        tgRequest.postFile(url, qs, formData, (error, response, body) => {
-            this.requestCallback(error, response, body, url, deferred);
-        });
-        return deferred.promise;
+        //tgRequest.postFile(url, qs, formData, (error, response, body) => {
     };
 
-    this.post = (url, qs, obj, successfulStatusCode) => {
-        var deferred = Q.defer();
-        tgRequest.post(url, qs, obj, (error, response, body) => {
-            this.requestCallback(error, response, body, url, deferred);
-        });
-        return deferred.promise;
+    this.post = (req) => {
+        req.method = 'POST';
+        return this.request(req);
     };
 
-    this.put = (url, qs, obj, successfulStatusCode) => {
-        var deferred = Q.defer();
-        tgRequest.put(url, qs, obj, (error, response, body) => {
-            this.requestCallback(error, response, body, url, deferred);
-        });
-        return deferred.promise;
+    this.put = (url, qs, obj) => {
+        //tgRequest.put(url, qs, obj, (error, response, body) => {
     };
 
-    this.delete = (url, successfulStatusCode) => {
-        var deferred = Q.defer();
-        tgRequest.delete(url, null, (error, response) => {
-            this.requestCallback(error, response, body, url, deferred);
-        });
-        return deferred.promise;
+    this.delete = (url) => {
+    //tgRequest.delete(url, null, (error, response) => {
+    };
+
+    this.postFile = function (url, qs, formData, fn) {
+        request({
+            method: 'POST',
+            url: url,
+            formData: formData,
+            headers: {
+                'Authorization': authorization,
+                'X-Atlassian-Token': 'nocheck'
+            }
+        }, fn);
+    };
+
+    this.put = function (url, qs, body, fn) {
+        var _body = JSON.stringify(body),
+            _req = request({
+                method: 'PUT',
+                url: url,
+                qs: qs,
+                headers: {
+                    'Authorization': authorization,
+                    'Content-Type': 'application/json',
+                    'Content-Length': _body.length
+                }
+            }, fn);
+
+        _req.write(_body);
+        _req.end();
+    };
+
+    this.delete = function (url, qs, fn) {
+        request({
+            method: 'DELETE',
+            url: url,
+            qs: qs,
+            headers: {
+                'Authorization': authorization,
+                'Content-Type': 'application/json'
+            }
+        }, fn);
     };
 };
 
