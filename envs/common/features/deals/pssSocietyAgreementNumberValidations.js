@@ -44,8 +44,7 @@ exports.feature = [
             steps.editDealScope.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip();
 
             //save the society agreement number
-            steps.editDealScope.saveSocietyAgreementNumberForm();
-            //steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
 
             //check that after addition of society agreement number the title of the link is View
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
