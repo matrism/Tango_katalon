@@ -279,7 +279,7 @@ exports.feature = [
 
     {
         name: "Deals view work count",
-        tags: ["ladDealsWorks"],
+        tags: ['ladDealsWorks', 'lad'],
         steps: function () {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
