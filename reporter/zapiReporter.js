@@ -3,8 +3,8 @@
 let zapi = require('../tools/zapi'),
     path = require('path');
 
-exports.init = (options) => {
-    exports.cycleId = options.cycleId;
+exports.init = (cycleId) => {
+    exports.cycleId = cycleId;
 };
 
 exports.jasmineStarted = (info) => {
@@ -22,24 +22,34 @@ exports.suiteStarted = (suite) => {
         }
 
         zapi.issue.save(suite.obj.id, featureName, suite.obj.commonFeatureTags).then(() => {
-            return zapi.issue.execute(options.cycleId);
+            return zapi.issue.execute(exports.cycleId);
         });
     }
 };
 
 exports.specStarted = (spec) => {
+    //console.log('SPEC STARTED');
+    /*
+    log('Wait for execute');
+    browser.controlFlow().execute(() => { 
+        //return Q.all([issue.executeDeferred]);
+        return zapi.issue.executeDeferred.promise;
+    });
+    */
 };
 
 exports.specDone = (spec) => {
     if (spec.description != 'User is logged in') {
-        //console.log(spec);
-        var scenario = '';
-        if (true) {
-            //zapi.issue.saveStep(spec.description, spec.stepNum);
-        }
         zapi.issue.saveStep(spec.description, spec.stepNum).then(() => {
+            var comment = ''; 
+            if (spec.failedExpectations.length) {
+                comment = spec.fullName;
+                spec.failedExpectations.forEach((expectation) => {
+                    comment += ' -- ' + expectation.message;
+                });
+            }
+            zapi.execution.updateStepResult(spec.stepNum, spec.status, comment);
         });
-        //zapi.issue.waitForCreateSteps();
     }
 };
 
