@@ -62,6 +62,30 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+
+            //go to Advances tab
+            steps.deal.goToTab('Advances');
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(0, "All Advances");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(1, "Contract Period 1");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(2, "Contract Period 2");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownNotToContainsCp("Contract Period 3");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownNotToContainsCp("Contract Period 4");
+            steps.editAdvances.editSelectContractPeriodAdvancesByIndex(1);
+            steps.editAdvances.editCheckContractPeriodAdvancesNumberIDetailsDisplayed(1, "Contract Period 1");
+            steps.editAdvances.editSelectContractPeriodAdvancesByIndex(0);
+            steps.editAdvances.editCheckContractPeriodAdvancesNumberIDetailsDisplayed(1, "Contract Period 1");
+            steps.editAdvances.editCheckContractPeriodAdvancesNumberIDetailsDisplayed(2, "Contract Period 2");
+
+            //add another advance
+            steps.editAdvances.editClickOnAddAdvanceButton();
+            steps.createDealAdvances.selectSpecificContractPeriodAdvanceDetailsByIndex(1);
+            steps.base.scrollIntoView("Amount advances", pages.createDealAdvances.elems.advanceDetailsAmount);
+            steps.createDealAdvances.fillIntoAmountAdvanceDetailsSpecificValue("20");
+            steps.createDealAdvances.selectSpecificCurrencyAdvanceDetails("USD");
+            steps.createDealAdvances.selectPaymentStructureAdvanceDetails("Lump Sum");
+            steps.createDealAdvances.selectWhenDistributionRulesAdvanceDetails("Contract Execution");
+            steps.createDealAdvances.fillIntoPercentDistributionRulesAdvanceDetailsNumberISpecificValue(1, "30");
+            steps.editAdvances.saveAdvance();
         }
     }
 ];

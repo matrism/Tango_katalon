@@ -2,6 +2,15 @@
 
 pages.editAdvances = exports;
 
+exports.editSelectTheContractPeriodAdvancesByIndex = function(index){
+    pages.base.scrollIntoView(element(by.css("select[name='advanceContractPeriod']")));
+    browser.wait(ExpectedConditions.visibilityOf(element(By.css("select[name='advanceContractPeriod'] option"))));
+    browser.driver.findElements(By.css("select[name='advanceContractPeriod'] option"))
+        .then(function (options) {
+            options[index].click();
+        })
+};
+
 exports.addAdvanceButton = function () {
     return element(by.cssContainingText('button.btn-primary', 'Add Advance'));
 };
