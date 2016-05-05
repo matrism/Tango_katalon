@@ -26,34 +26,34 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
-            //add society agreement number
-            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
-            //add data into right panel
-            steps.editDealScope.editSocietyAgreementNumberRightPanelNumberI(1, "bmi");
-            //add data into left panel
-            steps.editDealScope.editSocietyAgreementNumberCreatorLeftPanelNumberI(1, "test");
-            steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(1, 1, "bmi");
-
-            //validate tooltips society agreement numbers
-            steps.editDealScope.checkSocietyAgreementNumberTextTooltip();
-            steps.editDealScope.checkCreatorToPublisherChainSocietyAgreementNumberTextTooltip();
-            steps.editDealScope.checkPublisherChainAgreementNumbersSocietyAgreementNumberTextTooltip();
-            //validate tooltips delete icon
-            steps.editDealScope.checkDeleteCreatorSetSocietyAgreementNumberTextTooltip();
-            steps.editDealScope.checkDeleteAgreementNumberSocietyAgreementNumberTextTooltip();
-            steps.editDealScope.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip();
-
-            //save the society agreement number
-            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
-
-            //check that after addition of society agreement number the title of the link is View
-            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
-            //add society agreement number
-            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
-            //remove creator and publisher chain
-            steps.editDealScope.deleteCreatorSetSocietyAgreementNumberNumberI(1);
-            steps.editDealScope.deletePublisherChainSocietyAgreementNumberNumberI(1);
-            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+            ////add society agreement number
+            //steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            ////add data into right panel
+            //steps.editDealScope.editSocietyAgreementNumberRightPanelNumberI(1, "bmi");
+            ////add data into left panel
+            //steps.editDealScope.editSocietyAgreementNumberCreatorLeftPanelNumberI(1, "test");
+            //steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(1, 1, "bmi");
+            //
+            ////validate tooltips society agreement numbers
+            //steps.editDealScope.checkSocietyAgreementNumberTextTooltip();
+            //steps.editDealScope.checkCreatorToPublisherChainSocietyAgreementNumberTextTooltip();
+            //steps.editDealScope.checkPublisherChainAgreementNumbersSocietyAgreementNumberTextTooltip();
+            ////validate tooltips delete icon
+            //steps.editDealScope.checkDeleteCreatorSetSocietyAgreementNumberTextTooltip();
+            //steps.editDealScope.checkDeleteAgreementNumberSocietyAgreementNumberTextTooltip();
+            //steps.editDealScope.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip();
+            //
+            ////save the society agreement number
+            //steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+            //
+            ////check that after addition of society agreement number the title of the link is View
+            //steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            ////add society agreement number
+            //steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            ////remove creator and publisher chain
+            //steps.editDealScope.deleteCreatorSetSocietyAgreementNumberNumberI(1);
+            //steps.editDealScope.deletePublisherChainSocietyAgreementNumberNumberI(1);
+            //steps.editDealScope.saveChangesSocietyAgreementNumberForm();
 
             //check that after addition of society agreement number the title of the link is Add
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
