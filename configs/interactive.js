@@ -20,8 +20,15 @@ $vs.clear = function() {
     this.length = 0;
 };
 
-function $reload () {
-    $files.load();
+function $reload (path) {
+    if (!path) {
+        $files.load();
+        return;
+    }
+
+    delete require.cache[require.resolve(path)];
+
+    return require(path);
 }
 
 steps.login.itLogin();
