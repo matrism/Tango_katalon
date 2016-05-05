@@ -39,12 +39,13 @@ exports.feature = [
             steps.editDealScope.checkCreatorToPublisherChainSocietyAgreementNumberTextTooltip();
             steps.editDealScope.checkPublisherChainAgreementNumbersSocietyAgreementNumberTextTooltip();
             //validate tooltips delete icon
-            //steps.editDealScope.checkDeleteCreatorSetSocietyAgreementNumberTextTooltip();
-            //steps.editDealScope.checkDeleteAgreementNumberSocietyAgreementNumberTextTooltip();
-            //steps.editDealScope.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip();
+            steps.editDealScope.checkDeleteCreatorSetSocietyAgreementNumberTextTooltip();
+            steps.editDealScope.checkDeleteAgreementNumberSocietyAgreementNumberTextTooltip();
+            steps.editDealScope.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip();
 
             //save the society agreement number
-            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+            steps.editDealScope.saveSocietyAgreementNumberForm();
+            //steps.editDealScope.saveChangesSocietyAgreementNumberForm();
 
             //check that after addition of society agreement number the title of the link is View
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");

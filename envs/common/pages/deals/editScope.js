@@ -936,6 +936,7 @@ if (pages.editDealScope === undefined) {
             ,
 
             saveTheSocietyAgreementNumbersChanges: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.cancelSocietyAgreementNumber);
                 pages.base.scrollIntoView(pages.editDealScope.elems.saveChangesSocietyAgreementNumber);
                 pages.editDealScope.elems.saveChangesSocietyAgreementNumber.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.addSocietyAgreementNumberLink));
