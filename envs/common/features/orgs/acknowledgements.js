@@ -5,6 +5,8 @@ var using = fnutils.using;
 exports.commonFeatureTags = [
     'acknowledgementsSanity',
     'acknowledgements',
+    'copyrightRegistration',
+    'orgs',
     'cr',
     'sanity'
 ];

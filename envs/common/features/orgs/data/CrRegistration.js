@@ -6,7 +6,7 @@ exports.cr = {
         primary: 'shilpa.gunna@wmg.com'
     },
     ftp: {
-        address: '54.88.249.193',
+        address: '10.194.1.212',
         port: '21',
         username: 'Tango_Test',
         password: 'St@rwar1$',
@@ -15,7 +15,7 @@ exports.cr = {
         notificationCcEmail: 'shilpa.gunnaftp@axispoint.com'
     },
     sftp: {
-        address: '54.88.249.193',
+        address: '10.194.1.212',
         port: '22',
         username: 'Tango_Test',
         password: 'St@rwar1$',
