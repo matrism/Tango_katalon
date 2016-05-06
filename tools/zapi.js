@@ -218,6 +218,16 @@ var zapi = function () {
 
         return execution;
     })();
+
+
+    this.bugs = (() => {
+        var bugs = {};
+        return bugs;
+    })();
+
+    this.processStepResult = (orderId, status, comment) => {
+        this.execution.updateStepResult(orderId, status, comment);
+    };
 };
 
 module.exports = new zapi();

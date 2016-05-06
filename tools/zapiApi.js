@@ -129,7 +129,6 @@ var ZapiApi = function () {
     };
 
     this.getIssueByLabel = (label) => {
-
         return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20issuetype%20%3D%2010302%20and%20labels=' + label + '&maxResults=1'});
     };
 
@@ -151,9 +150,9 @@ var ZapiApi = function () {
         return this.get({url: ZAPI_URL + 'stepResult?executionId=' + executionId});
     };
 
-    this.bulkUpdateExecutionDefects = (createdBugs, jiraExecutionId) => {
+    this.bulkUpdateExecutionDefects = (createdBugs, executionId) => {
         var updateObject = {
-            executions: [ jiraExecutionId ],
+            executions: [ executionId ],
             defects: [],
             detailedResponse: false
         };
