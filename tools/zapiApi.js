@@ -182,9 +182,14 @@ var ZapiApi = function () {
         return this.put({url: ZAPI_URL + 'stepResult/' + stepId, body: updateObject});
     };
 
-    this.updateTestExecutionStatus = (passed, execId) => {
-        var updateObject = { comment: 'Automated Execution.', status: passed ? 1 : 2};
-        return this.put({url: ZAPI_URL + 'execution/' + execId + '/execute', body: updateObject});
+    this.updateExecutionStatus = (executionId, status) => {
+        var updateObject = { comment: 'Automated Execution.', status: status ? 1 : 2};
+        return this.put({url: ZAPI_URL + 'execution/' + executionId + '/execute', body: updateObject});
+    };
+
+    this.clearExecutionStatus = (executionId) => {
+        var updateObject = { comment: '', status: -1};
+        return this.put({url: ZAPI_URL + 'execution/' + executionId + '/execute', body: updateObject});
     };
 
     this.executeTestToTestCycle = (cycleId, issueId) => {
@@ -196,6 +201,10 @@ var ZapiApi = function () {
         };
 
         return this.post({url: ZAPI_URL + 'execution/', body: obj});
+    };
+
+    this.getExecution = (executionId) => {
+        return this.get({url: ZAPI_URL + 'zql/executeSearch/?zqlQuery=execution+%3D+' + executionId + '&expand=executionStatus'});
     };
 
     this.updateTestExecution = (executionId, status, comment) => {
@@ -295,7 +304,7 @@ var ZapiApi = function () {
         }
         //log('START -',req.method, req.url);
         r = request(req, (error, response, body) => {
-            //log('DONE  -', req.method, req.url, response.statusCode, body);
+            //log('DONE  -', req.method, req.url, response.statusCode);
             if(response) {
                 let status = response.statusCode ? response.statusCode : null,
                     parsedBody = {};

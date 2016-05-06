@@ -1,11 +1,15 @@
 'use strict';
 
 let zapi = require('../tools/zapi'),
-    path = require('path');
+    path = require('path'),
+    Q = require('q'),
+    promises = [];
 
 exports.init = (cycleId) => {
-    exports.cycleId = cycleId;
+    zapi.setCycleId(cycleId);
 };
+
+exports.deferred = Q.defer();
 
 exports.jasmineStarted = (info) => {
 };
@@ -21,41 +25,41 @@ exports.suiteStarted = (suite) => {
             });
         }
 
-        zapi.issue.save(suite.obj.id, featureName, suite.obj.commonFeatureTags).then(() => {
-            return zapi.issue.execute(exports.cycleId);
-        });
+        zapi.issue.save(suite.obj.id, featureName, suite.obj.commonFeatureTags);
+        zapi.issue.execute();
     }
 };
 
 exports.specStarted = (spec) => {
-    //console.log('SPEC STARTED');
-    /*
-    log('Wait for execute');
-    browser.controlFlow().execute(() => { 
-        //return Q.all([issue.executeDeferred]);
-        return zapi.issue.executeDeferred.promise;
-    });
-    */
 };
 
 exports.specDone = (spec) => {
-    if (spec.description != 'User is logged in') {
-        zapi.issue.saveStep(spec.description, spec.stepNum).then(() => {
-            var comment = ''; 
-            if (spec.failedExpectations.length) {
-                comment = spec.fullName;
-                spec.failedExpectations.forEach((expectation) => {
-                    comment += ' -- ' + expectation.message;
-                });
-            }
-            zapi.execution.updateStepResult(spec.stepNum, spec.status, comment);
+    var description = spec.description,
+        stepNum = spec.stepNum + 1,
+        comment = '';
+
+    if (spec.description == 'User is logged in') {
+        let scenario = spec.fullName.split(' ').splice(1).join(' ').replace('Before feature User is logged in', '');
+        description = '-------- Scenario: ' + scenario;
+    }
+
+    if (spec.failedExpectations.length) {
+        comment = spec.fullName;
+        spec.failedExpectations.forEach((expectation) => {
+            comment += ' -- ' + expectation.message;
         });
     }
+
+    zapi.issue.saveStep(description, stepNum);
+    zapi.execution.updateStepResult(stepNum, spec.status, comment);
 };
 
 exports.suiteDone = (suite) => {
 };
 
 exports.jasmineDone = () => {
-
+    //zapi.issue.postExecution();
+    zapi.execution.updateStatus().then(() => {
+        exports.deferred.resolve()
+    });
 };

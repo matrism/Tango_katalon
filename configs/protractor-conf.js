@@ -168,10 +168,10 @@ config = {
 
         jasmine.getEnv().addReporter(require('../reporter/shellReporter'));
 
-        jasmine.getEnv().addReporter(zapiReporter);
-        zapiReporter.init({
-            cycleId: systemConfig.cycle
-        });
+        if (parseInt(systemConfig.cycle)) {
+            jasmine.getEnv().addReporter(zapiReporter);
+            zapiReporter.init(systemConfig.cycle);
+        }
 
         if(systemConfig.orphanOnError) {
             jasmine.getEnv().addReporter(orphanOnErrorReporter);
@@ -231,6 +231,14 @@ config = {
     onCleanUp: function(statusCode) {
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
+
+        var deferred = protractor.promise.defer();
+
+        zapiReporter.deferred.promise.then(() => {
+            deferred.fulfill();
+        });
+
+        return deferred;
     },
     framework: 'jasmine2',
     jasmineNodeOpts: {
