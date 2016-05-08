@@ -130,6 +130,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
             steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            steps.editDealScope.checkSocietyAgreementNumberHeaderTextTooltip();
         }
     }
 ];
