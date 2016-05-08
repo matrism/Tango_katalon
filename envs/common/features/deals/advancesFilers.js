@@ -78,14 +78,21 @@ exports.feature = [
 
             //add another advance
             steps.editAdvances.editClickOnAddAdvanceButton();
-            steps.createDealAdvances.selectSpecificContractPeriodAdvanceDetailsByIndex(1);
+            steps.createDealAdvances.selectSpecificContractPeriodAdvanceDetailsByIndex(3);
             steps.base.scrollIntoView("Amount advances", pages.createDealAdvances.elems.advanceDetailsAmount);
             steps.createDealAdvances.fillIntoAmountAdvanceDetailsSpecificValue("20");
             steps.createDealAdvances.selectSpecificCurrencyAdvanceDetails("USD");
             steps.createDealAdvances.selectPaymentStructureAdvanceDetails("Lump Sum");
             steps.createDealAdvances.selectWhenDistributionRulesAdvanceDetails("Contract Execution");
             steps.createDealAdvances.fillIntoPercentDistributionRulesAdvanceDetailsNumberISpecificValue(1, "30");
-            steps.editAdvances.saveAdvance();
+            steps.editAdvances.editSaveAdvance();
+
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(0, "All Advances");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(1, "Contract Period 1");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(2, "Contract Period 2");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(3, "Contract Period 3");
+            //select contract period 3 from advances drop down
+            steps.editAdvances.editSelectContractPeriodAdvancesByIndex(2);
         }
     }
 ];

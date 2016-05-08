@@ -46,6 +46,11 @@ exports.editClickOnAddAdvanceButton = function () {
     });
 };
 
+exports.editSaveAdvance = function () {
+    it("Edit click on save advance", function () {
+        pages.editAdvances.editSaveTheAdvance();
+    });
+};
 
 pageStep([
     'Click Add Advance button',

@@ -15,6 +15,18 @@ exports.addAdvanceButton = function () {
     return element(by.cssContainingText('button.btn-primary', 'Add Advance'));
 };
 
+
+exports.saveAdvanceButton = function () {
+    return element(by.css("div[data-ng-form='addNewAdvanceForm'] button[data-ng-click='updateDeal(addNewAdvanceForm.$valid, null, true)']"));
+};
+
+exports.editSaveTheAdvance = function(){
+    var button = exports.saveAdvanceButton();
+    pages.base.scrollIntoView(button);
+    button.click();
+    browser.wait(EC.visibilityOf(element(by.css("div[data-ng-form='allAdvancesForm']"))));
+};
+
 exports.clickAddAdvanceButton = function () {
     var button = exports.addAdvanceButton();
     pages.base.scrollIntoView(button);
