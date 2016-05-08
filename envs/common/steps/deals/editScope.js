@@ -1043,7 +1043,7 @@ exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber
 exports.saveChangesSocietyAgreementNumberForm = function () {
     it("Save changes society agreement number form ", function () {
         pages.editDealScope.saveTheChangesSocietyAgreementNumberForm();
-        pages.editDealScope.waitForAjax();
+        //pages.editDealScope.waitForAjax();
     });
 };
 

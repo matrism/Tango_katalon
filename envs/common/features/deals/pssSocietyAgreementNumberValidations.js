@@ -44,7 +44,7 @@ exports.feature = [
             steps.editDealScope.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip();
 
             //save the society agreement number
-            steps.editDealScope.saveSocietyAgreementNumberForm();
+            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
 
             //check that after addition of society agreement number the title of the link is View
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
@@ -53,7 +53,7 @@ exports.feature = [
             //remove creator and publisher chain
             steps.editDealScope.deleteCreatorSetSocietyAgreementNumberNumberI(1);
             steps.editDealScope.deletePublisherChainSocietyAgreementNumberNumberI(1);
-            steps.editDealScope.saveSocietyAgreementNumberForm();
+            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
 
             //check that after addition of society agreement number the title of the link is Add
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
@@ -130,6 +130,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
             steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            steps.editDealScope.checkSocietyAgreementNumberHeaderTextTooltip();
         }
     }
 ];
