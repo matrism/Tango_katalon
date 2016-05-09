@@ -51,14 +51,14 @@ exports.specDone = (spec) => {
     }
 
     zapi.issue.saveStep(description, stepNum);
-    zapi.execution.updateStepResult(stepNum, spec.status, comment);
+    zapi.processStepResult(stepNum, spec.status, comment);
 };
 
 exports.suiteDone = (suite) => {
 };
 
 exports.jasmineDone = () => {
-    //zapi.issue.postExecution();
+    zapi.issue.postExecution();
     zapi.execution.updateStatus().then(() => {
         exports.deferred.resolve()
     });

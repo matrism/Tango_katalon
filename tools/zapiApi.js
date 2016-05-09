@@ -202,8 +202,8 @@ var ZapiApi = function () {
         return this.post({url: ZAPI_URL + 'execution/', body: obj});
     };
 
-    this.getExecution = (executionId) => {
-        return this.get({url: ZAPI_URL + 'zql/executeSearch/?zqlQuery=execution+%3D+' + executionId + '&expand=executionStatus'});
+    this.getExecution = (executionId, issueId) => {
+        return this.get({url: ZAPI_URL + 'execution/navigator/' + executionId + '?zql=issue%3D' + issueId + '&offset=0&maxRecords=0&expand=executionStatus,checksteps'});
     };
 
     this.updateTestExecution = (executionId, status, comment) => {

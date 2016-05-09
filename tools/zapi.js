@@ -108,6 +108,7 @@ var zapi = function () {
                             issue.id = result.id;
                             log('Issue created: ', featureId, featureName, tags, issue.id, result.key);
                             issue.saveDeferred.resolve({id: issue.id});
+                            issue.getStepsDeferred.resolve();
                         }
                     });
                 }
@@ -148,10 +149,10 @@ var zapi = function () {
                         self.execution.id = key;
                     }
                     log('Execution response:', self.execution.id);
-                    log('Getting execution...', self.execution.id);
-                    return ZapiApi.getExecution(self.execution.id).then(() => {
+                    log('Getting execution...', self.execution.id, issue.id);
+                    return ZapiApi.getExecution(self.execution.id, issue.id).then(() => {
                         log('Get execution done.')
-                        self.execution.getSteps();
+                        return self.execution.getSteps();
                     });
                 });
             });
@@ -159,8 +160,15 @@ var zapi = function () {
 
         issue.postExecution = () => {
             Q.all(issue.saveStepPromises)
-                .then(issue.execute())
-                .then(issue.postExecutionDeferred.resolve());
+                .then(() => {
+                    return issue.getSteps();
+                })
+                .then(() => {
+                    return issue.execute();
+                })
+                .then(() => {
+                    return issue.postExecutionDeferred.resolve();
+                });
         };
 
         return issue;
@@ -178,18 +186,20 @@ var zapi = function () {
         execution.getSteps = () => {
             log('Getting execution steps...');
             return ZapiApi.getExecutionSteps(execution.id).then((response) => {
+                execution.steps = Array.isArray(response) ? response : [];
                 execution.getStepsDeferred.resolve();
-                execution.steps = Array.isArray(response) ? response.reverse() : [];
                 log('Get execution steps done');
             });
         };
 
         execution.updateStepResult = (orderId, status, comment) => {
+            var promise;
+
             if (status != 'passed') {
                 execution.passing = false;
             }
 
-            var promise = execution.getStepsDeferred.promise.then(() => {
+            var fnUpdateStepResult = () => {
                 var issueStep = self.issue.steps.find((step) => {
                         return step.orderId == orderId;
                     }),
@@ -201,7 +211,18 @@ var zapi = function () {
                 return ZapiApi.updateExecutionStepResult(this.issue.id, execution.id, execStep.id, status, comment).then((response) => {
                     log('Execution step updated:', response.id);
                 });
-            });
+            };
+
+            if (self.issue.stepsFound) {
+                promise = execution.getStepsDeferred.promise.then(() => {
+                    return fnUpdateStepResult();
+                });
+            } else {
+                promise = self.issue.postExecutionDeferred.promise.then(() => {
+                    return fnUpdateStepResult();
+                });
+            }
+
             execution.updateStepPromises.push(promise);
         };
 
@@ -226,7 +247,7 @@ var zapi = function () {
     })();
 
     this.processStepResult = (orderId, status, comment) => {
-        this.execution.updateStepResult(orderId, status, comment);
+        self.execution.updateStepResult(orderId, status, comment);
     };
 };
 
