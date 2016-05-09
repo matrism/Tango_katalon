@@ -74,28 +74,30 @@ var ZapiApi = function () {
         return this.put({url: updateUrl, body: obj});
     };
 
-    this.createJiraBug = (issueId, feature, testStep, bugLabel) => {
+    this.createBug = (summary, description, severity, bugLabel) => {
         var createUrl = BASE_URL + '/rest/api/2/issue',
             obj = {
                 'fields': {
                     'project': {
                         'id': projectId
                     },
-                    'summary': 'Test Bug through Jira API - linked to ' + testStep.step.name + ' --- ' + feature.key,
+                    'summary': summary,
                     'issuetype': {
                         'id': '1'
                     },
+                    'labels': [
+                        'auto_created', 'live',
+                        //severity,
+                        //bugLabel
+                    ],
+                    /* 
                     'reporter': {
                         'name': 'Constantine.Crismaru'
                     },
-                    'labels': [
-                        testStep.step.severity,
-                        bugLabel
-                    ],
-                    /*                    'severity': {
+                      'severity': {
                      'name': testStep.step.severity
                      },*/
-                    'description': 'Optional Description.'
+                    'description': description
                 }
             };
 
@@ -125,58 +127,79 @@ var ZapiApi = function () {
 
     // filter by cycle name
     this.getTestCycles = () => {
-        return this.get({url: ZAPI_URL + 'cycle?projectId=' + projectId});
+        return this.get({
+            url: ZAPI_URL + 'cycle', 
+            qs: {
+                projectId: projectId
+            }
+        });
+        //return this.get({url: ZAPI_URL + 'cycle?projectId=' + projectId});
     };
 
     this.getIssueByLabel = (label) => {
-        return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20issuetype%20%3D%2010302%20and%20labels=' + label + '&maxResults=1'});
+        return this.get({
+            url: BASE_URL + '/rest/api/2/search',
+            qs: {
+                jql: 'project=' + projectName + ' AND issuetype = 10302 AND labels=' + label,
+                maxResults: 1
+            }
+        });
+        //return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20issuetype%20%3D%2010302%20and%20labels=' + label + '&maxResults=1'});
     };
 
     this.getIssueSteps = (issueId) => {
         return this.get({url: ZAPI_URL + 'teststep/' + issueId});
     };
 
+    /*
     // TODO remove reporter filter and startAt
     this.getTestCases = () => {
         return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%2010302&startAt=0&maxResults=1000'});
     };
+    */
 
     // TODO remove reporter filter
-    this.getTestBugs = () => {
-        return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%201&startAt=0&maxResults=1000'});
+    this.getBug = (description) => {
+        description = description.replace(/[-\[\]\,\(\)\'"]/g, '');
+        return this.get({
+            url: BASE_URL + '/rest/api/2/search',
+            qs: {
+                jql: 'project=' + projectName + ' AND summary~"' + description + '" AND issuetype = 1',
+                startAt: '0',
+                maxResults: '1'
+            }
+        });
     };
 
     this.getExecutionSteps = (executionId) => {
-        return this.get({url: ZAPI_URL + 'stepResult?executionId=' + executionId});
+        return this.get({
+            url: ZAPI_URL + 'stepResult',
+            qs: {
+                executionId: executionId
+            }
+        });
     };
 
-    this.bulkUpdateExecutionDefects = (createdBugs, executionId) => {
+    this.bulkUpdateExecutionDefects = (executionId, createdBugs) => {
         var updateObject = {
             executions: [ executionId ],
-            defects: [],
+            defects: createdBugs,
             detailedResponse: false
         };
-
-        createdBugs.forEach((createdBug) => {
-            updateObject.defects.push(createdBug.key)
-        });
 
         return this.put({url: ZAPI_URL + 'execution/updateWithBulkDefects', body: updateObject});
     };
 
-    this.updateExecutionStepResult = (issueId, executionId, stepId, status, comment, linkedIssue) => {
+    this.updateExecutionStepResult = (issueId, executionId, stepId, status, comment, bugId) => {
         var updateObject = {
             id: stepId,
             issueId: issueId,
             executionId: executionId,
             comment: comment,
+            updateDefectList: true,
+            defectList: [ bugId ],
             status: status == 'passed' ? 1 : 2
         };
-
-        if (linkedIssue) {
-            updateObject.updateDefectList = true;
-            updateObject.defectList = [ linkedIssue.key ];
-        }
 
         return this.put({url: ZAPI_URL + 'stepResult/' + stepId, body: updateObject});
     };
@@ -203,7 +226,15 @@ var ZapiApi = function () {
     };
 
     this.getExecution = (executionId, issueId) => {
-        return this.get({url: ZAPI_URL + 'execution/navigator/' + executionId + '?zql=issue%3D' + issueId + '&offset=0&maxRecords=0&expand=executionStatus,checksteps'});
+        return this.get({
+            url: ZAPI_URL + 'execution/navigator/' + executionId,
+            qs: {
+                zql: 'issue=' + issueId,
+                offset: '0',
+                maxRecords: '0',
+                expand: 'executionStatus,checksteps'
+            }
+        });
     };
 
     this.updateTestExecution = (executionId, status, comment) => {
@@ -213,12 +244,21 @@ var ZapiApi = function () {
             comment: comment
         };
 
-        return this.put({url: ZAPI_URL + 'execution/' + executionId + '/execute', body: obj});
+        return this.put({
+            url: ZAPI_URL + 'execution/' + executionId + '/execute',
+            body: obj
+        });
     };
 
     this.getAttachments = (entityId) => {
         var entityType = 'TESTSTEPRESULT';
-        return this.get({url: ZAPI_URL + 'attachment/attachmentsByEntity?entityId=' + entityId + '&entityType=' + entityType});
+        return this.get({
+            url: ZAPI_URL + 'attachment/attachmentsByEntity',
+            qs: {
+                entityId: entityId,
+                entityType: entityType
+            }
+        });
     };
 
     this.addAttachment = (entityId, file) => {
@@ -233,7 +273,14 @@ var ZapiApi = function () {
                 }
             };
 
-        return this.postFile({url: ZAPI_URL + 'attachment/?entityId=' + entityId + '&entityType=' + entityType, formData: formData});
+        return this.postFile({
+            url: ZAPI_URL + 'attachment/',
+            qs: {
+                entityId: entityId,
+                entityType: entityType
+            },
+            formData: formData
+        });
     };
 
     this.deleteAttachment = (id) => {

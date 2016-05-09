@@ -20,6 +20,7 @@ var zapi = function () {
         self = this;
 
     this.cycleId = null;
+    this.processStepPromises = [];
 
     function log () {
         console.log('[Zapi]', ...arguments);
@@ -71,6 +72,7 @@ var zapi = function () {
             id: null,
             steps: [],
             stepsFound: false,
+            featureName: '',
             saveStepPromises: [],
             saveDeferred: Q.defer(),
             getStepsDeferred: Q.defer(),
@@ -79,6 +81,7 @@ var zapi = function () {
 
         issue.save = (featureId, featureName, tags) => {
             var componentName;
+            issue.featureName = featureName;
 
             tags.forEach((tag) => {
                 if (components[tag]) {
@@ -178,7 +181,6 @@ var zapi = function () {
         var execution = {
             id: null,
             steps: [],
-            updateStepPromises: [],
             getStepsDeferred: Q.defer(),
             passing: true
         };
@@ -192,7 +194,7 @@ var zapi = function () {
             });
         };
 
-        execution.updateStepResult = (orderId, status, comment) => {
+        execution.updateStepResult = (orderId, status, comment, bugKey) => {
             var promise;
 
             if (status != 'passed') {
@@ -207,8 +209,8 @@ var zapi = function () {
                         return step.stepId == issueStep.id; 
                     });
 
-                log('Updating execution step result...', execStep.id, status, comment);
-                return ZapiApi.updateExecutionStepResult(this.issue.id, execution.id, execStep.id, status, comment).then((response) => {
+                log('Updating execution step result...', execStep.id, status, comment, bugKey);
+                return ZapiApi.updateExecutionStepResult(this.issue.id, execution.id, execStep.id, status, comment, bugKey).then((response) => {
                     log('Execution step updated:', response.id);
                 });
             };
@@ -223,18 +225,24 @@ var zapi = function () {
                 });
             }
 
-            execution.updateStepPromises.push(promise);
+            return promise;
         };
 
         execution.updateStatus = () => {
-            return Q.all(execution.updateStepPromises).then(() => {
-                log('Updating execution final result...', execution.id, execution.passing);
-                return ZapiApi.clearExecutionStatus(execution.id).then(() => {
-                    return ZapiApi.updateExecutionStatus(execution.id, execution.passing).then((response) => {
-                        log('Execution final result updated.', response.id);
-                    });
+            return Q.all(self.processStepPromises).then(() => {
+                    log('Updating execution final result...', execution.id, execution.passing);
+                    return ZapiApi.clearExecutionStatus(execution.id);
+                }).then(() => {
+                    return ZapiApi.updateExecutionStatus(execution.id, execution.passing)
+                }).then((response) => {
+                    log('Execution final result updated:', response.id);
+                    if (self.bugs.bugsCreated.length) {
+                        log('Linking defects to execution.', execution.id, self.bugs.bugsCreated);
+                        return ZapiApi.bulkUpdateExecutionDefects(execution.id, self.bugs.bugsCreated).then((result) => {
+                            log('Defects linked to execution.');
+                        });
+                    }
                 });
-            });
         };
 
         return execution;
@@ -242,12 +250,67 @@ var zapi = function () {
 
 
     this.bugs = (() => {
-        var bugs = {};
+        var bugs = {
+            stepFailed: false,
+            bugsCreated: []
+        };
+
+        bugs.save = (stepName, failMessage) => {
+            var summaryCreate = bugs.getSummary(self.issue.featureName, stepName),
+                summaryFind = self.issue.featureName + ' ' + stepName,
+                deferred = Q.defer();
+
+            bugs.stepFailed = true;
+            log('Getting bug... ', summaryFind);
+            ZapiApi.getBug(summaryFind).then((response) => {
+                log('Bugs found:', response.total);
+                if (response.issues && response.issues.length) {
+                    log('Bug already exists:', response.issues[0].key);
+                    bugs.bugsCreated.push(response.issues[0].key);
+                    deferred.resolve(response.issues[0].key);
+                } else {
+                    log('Creating bug...', summaryCreate, failMessage);
+                    return ZapiApi.createBug(summaryCreate, failMessage).then((result) => {
+                        log('Bug created:', result.id, result.key);
+                        bugs.bugsCreated.push(result.key);
+                        deferred.resolve(result.key);
+                    });
+                }
+            });
+
+            return deferred.promise;
+        };
+
+        bugs.getSummary = (featureName, stepName) => {
+            return 'Added by Zapi - Feature: ' + featureName + ' -- Step:  ' + stepName;
+        };
+
         return bugs;
     })();
 
-    this.processStepResult = (orderId, status, comment) => {
-        self.execution.updateStepResult(orderId, status, comment);
+    this.processStepResult = (stepName, orderId, status, failMessage) => {
+        var saveBugDeferred = Q.defer(),
+            promise;
+        if (failMessage) {
+            if (self.bugs.stepFailed) {
+                log('Skipping bug creation - a bug was already created for this feature.');
+                saveBugDeferred.resolve();
+            } else {
+                self.bugs.save(stepName, failMessage).then((response) => {
+                    saveBugDeferred.resolve(response);
+                });
+            }
+        } else {
+            saveBugDeferred.resolve();
+        }
+
+        promise = saveBugDeferred.promise.then((response) => {
+            return self.execution.updateStepResult(orderId, status, failMessage, response).then(() => {
+                //return ZapiApi.updateAttachment(testStepBug.resultStep.id, path.join(screenShotPath, testStepBug.step.filename));
+            });
+        });
+
+        self.processStepPromises.push(promise);
     };
 };
 

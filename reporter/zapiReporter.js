@@ -34,24 +34,25 @@ exports.specStarted = (spec) => {
 };
 
 exports.specDone = (spec) => {
-    var description = spec.description,
+    var stepName = spec.description,
         stepNum = spec.stepNum + 1,
-        comment = '';
+        failMessage = '';
 
-    if (spec.description == 'User is logged in') {
+    if (stepName == 'User is logged in') {
         let scenario = spec.fullName.split(' ').splice(1).join(' ').replace('Before feature User is logged in', '');
-        description = '-------- Scenario: ' + scenario;
+        stepName = '[Scenario] ' + scenario;
     }
 
     if (spec.failedExpectations.length) {
-        comment = spec.fullName;
+        failMessage = spec.fullName;
         spec.failedExpectations.forEach((expectation) => {
-            comment += ' -- ' + expectation.message;
+            failMessage += ' -- ' + expectation.message;
         });
     }
 
-    zapi.issue.saveStep(description, stepNum);
-    zapi.processStepResult(stepNum, spec.status, comment);
+    console.log(spec);
+    zapi.issue.saveStep(stepName, stepNum);
+    zapi.processStepResult(stepName, stepNum, spec.status, failMessage);
 };
 
 exports.suiteDone = (suite) => {
