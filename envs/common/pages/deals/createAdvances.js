@@ -7,6 +7,7 @@ if (pages.createDealAdvances === undefined) {
     pages.createDealAdvances = new ftf.pageObject({
         locators: {
             addFirstAdvanceLink: {css: "a[data-ng-click='addAdvanceFromCreate(true, false)']"},
+            yesSuspendedButton: {css: "button[name='advanceSuspended']"},
             advanceDetailsAmount: {css: "input[data-ng-model='activeAdvance.amount']"},
             advanceDetailsCurrencyArrow: {css: "div[data-validation-class='advanceCurrency'] button.btn.dropdown-toggle"},
             advanceDetailsDistributionRulesCurrencyArrow: {css: "div[data-validation-class='advancePaymentDistributionCurrency'] button.btn.dropdown-toggle"},
@@ -122,6 +123,11 @@ if (pages.createDealAdvances === undefined) {
                     var element = options[randomNumber];
                     element.click();
                 })
+        },
+
+        clickOnTheYesToSuspendedAdvanceButton: function(){
+            pages.base.scrollIntoView(pages.createDealAdvances.elems.yesSuspendedButton);
+            pages.createDealAdvances.elems.yesSuspendedButton.click();
         },
 
         selectTheSpecificCurrencyAdvanceDetails: function (currency) {

@@ -47,6 +47,13 @@ if (steps.createDealAdvances === undefined) {
             });
         },
 
+        clickOnYesToSuspendedAdvanceButton: function () {
+            it("Click on yes to suspended advance button ", function () {
+                pages.createDealAdvances.clickOnTheYesToSuspendedAdvanceButton();
+                pages.createDealAdvances.waitForAjax();
+            });
+        },
+
         selectPaymentStructureAdvanceDetails: function (value) {
             it("Select the payment structure advance details ", function () {
                 pages.createDealAdvances.selectThePaymentStructureAdvanceDetails(value);
