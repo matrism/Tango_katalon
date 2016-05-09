@@ -212,6 +212,7 @@ var zapi = function () {
                 log('Updating execution step result...', execStep.id, status, comment, bugKey);
                 return ZapiApi.updateExecutionStepResult(this.issue.id, execution.id, execStep.id, status, comment, bugKey).then((response) => {
                     log('Execution step updated:', response.id);
+                    return response.id;
                 });
             };
 
@@ -305,8 +306,15 @@ var zapi = function () {
         }
 
         promise = saveBugDeferred.promise.then((response) => {
-            return self.execution.updateStepResult(orderId, status, failMessage, response).then(() => {
-                //return ZapiApi.updateAttachment(testStepBug.resultStep.id, path.join(screenShotPath, testStepBug.step.filename));
+            return self.execution.updateStepResult(orderId, status, failMessage, response).then((stepExecutionId) => {
+                let fName = systemConfig.streamId + '_' + orderId + '.png',
+                    fPath = systemConfig.htmlReportPath + '/' + fName;
+                //if (failMessage) {
+                    log('Updating attachment...', stepExecutionId, '../'+fPath);
+                    return ZapiApi.updateAttachment(response.id, fPath).then((result) => {
+                        log('Attachment updated', result);
+                    });
+                //}
             });
         });
 

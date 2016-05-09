@@ -50,7 +50,6 @@ exports.specDone = (spec) => {
         });
     }
 
-    console.log(spec);
     zapi.issue.saveStep(stepName, stepNum);
     zapi.processStepResult(stepName, stepNum, spec.status, failMessage);
 };
