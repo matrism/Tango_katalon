@@ -339,4 +339,10 @@ exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
     });
 };
 
+exports.editCheckDealSigningTerritoryCannotBeChangedTooltip = function () {
+    it("Edit check that deal signing territory cannot be changed, it is greyed out and check the error message ", function () {
+        pages.editDealGeneral.editCheckTheDealSigningTerritoryCannotBeChangedTooltip();
+    });
+};
+
 

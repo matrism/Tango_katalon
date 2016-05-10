@@ -166,8 +166,8 @@ if (pages.editDealGeneral === undefined) {
         },
 
         editFillIntoTheContractingParty: function (contracting) {
-            pages.editDealGeneral.elems. editContractingPartyElement.click();
-            pages.editDealGeneral.elems. editContractingPartyInputField.sendKeys(contracting);
+            pages.editDealGeneral.elems.editContractingPartyElement.click();
+            pages.editDealGeneral.elems.editContractingPartyInputField.sendKeys(contracting);
         },
 
         editSelectRandomValueDropDownContractingParty: function () {
@@ -226,28 +226,27 @@ if (pages.editDealGeneral === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
             var desiredOption;
 
-            element(By.css("li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from artist is : " + promise);
-                    if (promise.indexOf("Create New Artist") != -1) {
-                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                browser.actions().mouseMove(element).click().perform();
-                                browser.sleep(500);
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[0];
-                                element.click();
-                                //browser.actions().mouseMove(element).click().perform();
-                            });
-                    }
-                });
+            element(By.css("li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
+                console.log("Text from artist is : " + promise);
+                if (promise.indexOf("Create New Artist") != -1) {
+                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            browser.actions().mouseMove(element).click().perform();
+                            browser.sleep(500);
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[0];
+                            element.click();
+                            //browser.actions().mouseMove(element).click().perform();
+                        });
+                }
+            });
         },
 
         editSelectTheSpecificArtist: function (artistSearch, artist) {
@@ -281,8 +280,7 @@ if (pages.editDealGeneral === undefined) {
             pages.createDealGeneral.elems.artistFieldInput.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
 
-            element(By.css("li.tg-typeahead__suggestions-footer div:nth-child(2)")).getText().
-            then(function (promise) {
+            element(By.css("li.tg-typeahead__suggestions-footer div:nth-child(2)")).getText().then(function (promise) {
                 console.log("Text from artist is : " + promise);
                 if (promise.indexOf("Create New Artist") != -1) {
                     browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div:nth-child(2)"))
@@ -323,11 +321,12 @@ if (pages.editDealGeneral === undefined) {
 
         clickOnTheSaveEditGeneralLeftTabArea: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.saveEditLeftGeneralTabArea));
-            pages.editDealGeneral.elems. saveEditLeftGeneralTabArea.click();
+            pages.editDealGeneral.elems.saveEditLeftGeneralTabArea.click();
             pages.editDealGeneral.waitForAjax();
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editContractingPartyElement));
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
         },
+
 
         editSelectToTheExecutedContractStatus: function (value) {
             var desiredOption;
@@ -350,6 +349,18 @@ if (pages.editDealGeneral === undefined) {
                         desiredOption.click();
                     }
                 });
+        },
+
+        editCheckTheDealSigningTerritoryCannotBeChangedTooltip: function () {
+            browser.actions().mouseMove(element(by.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass']"))).perform();
+            browser.driver.findElement(By.css("")).getText().
+            then(function (promise) {
+                console.log(" : " + promise);
+                expect(promise).toEqual("");
+            });
         }
     });
 }
+
+
+
