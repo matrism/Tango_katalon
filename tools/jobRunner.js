@@ -431,7 +431,6 @@ let cp = require('child_process'),
     log(0, 'Requested tags:', tags || 'all');
     log(0, 'Negated tags:', negatedTags || 'none');
 
-    log(0, 'Test Cycle param:', cycleName || 'none');
     zapi.setTestCycle(cycleName).then((result) => {
         cycleId = result.cycleId;
         log(0, 'Test Cycle:', cycleId || 'none', result.cycleName || '');

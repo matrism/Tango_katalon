@@ -20,10 +20,13 @@ var zapi = function () {
         self = this;
 
     this.cycleId = null;
+    this.debug = false;
     this.processStepPromises = [];
 
     function log () {
-        console.log('[Zapi]', ...arguments);
+        if (self.debug) {
+            console.log('[Zapi]', ...arguments);
+        }
     }
 
     this.setTestCycle = (testCycleName) => {
@@ -64,7 +67,11 @@ var zapi = function () {
     };
 
     this.setCycleId = (cycleId) => {
-        this.cycleId = cycleId
+        this.cycleId = cycleId;
+    };
+
+    this.setDebug = (debug) => {
+        this.debug = debug;
     };
 
     this.issue = (() => {

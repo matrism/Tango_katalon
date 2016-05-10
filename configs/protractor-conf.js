@@ -170,7 +170,10 @@ config = {
 
         if (parseInt(systemConfig.cycle)) {
             jasmine.getEnv().addReporter(zapiReporter);
-            zapiReporter.init(systemConfig.cycle);
+            zapiReporter.init({
+                cycleId: systemConfig.cycle,
+                debug: false
+            });
         }
 
         if(systemConfig.orphanOnError) {

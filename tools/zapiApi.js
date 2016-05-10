@@ -45,11 +45,6 @@ var ZapiApi = function () {
                     'issuetype': {
                         'id': '10302'
                     },
-                    /*
-                    'reporter': {
-                        'name': 'Constantine.Crismaru'
-                    },
-                    */
                     'components': [
                         {'name': componentName}
                     ],
@@ -104,12 +99,6 @@ var ZapiApi = function () {
         return this.post({url: createUrl, body: obj});
     };
 
-    /*    this.getAllProjects = () => {
-     console.log('---getAllProjects---');
-     var getProjectUrl = BASE_URL + '/rest/api/2/project';
-     return this.get(getProjectUrl);
-     };*/
-
     this.createIssueStep = (issueId, description, orderId) => {
         var url = ZAPI_URL + 'teststep/' + issueId,
             obj = {
@@ -125,7 +114,7 @@ var ZapiApi = function () {
         return this.get({url: BASE_URL + '/rest/api/2/issue/' + issueName});
     };
 
-    // filter by cycle name
+    // TODO: filter by cycle name
     this.getTestCycles = () => {
         return this.get({
             url: ZAPI_URL + 'cycle', 
@@ -133,7 +122,6 @@ var ZapiApi = function () {
                 projectId: projectId
             }
         });
-        //return this.get({url: ZAPI_URL + 'cycle?projectId=' + projectId});
     };
 
     this.getIssueByLabel = (label) => {
@@ -144,21 +132,12 @@ var ZapiApi = function () {
                 maxResults: 1
             }
         });
-        //return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20issuetype%20%3D%2010302%20and%20labels=' + label + '&maxResults=1'});
     };
 
     this.getIssueSteps = (issueId) => {
         return this.get({url: ZAPI_URL + 'teststep/' + issueId});
     };
 
-    /*
-    // TODO remove reporter filter and startAt
-    this.getTestCases = () => {
-        return this.get({url: BASE_URL + '/rest/api/2/search?jql=project=' + projectName + '%20and%20reporter=Constantine.Crismaru%20and%20issuetype%20%3D%2010302&startAt=0&maxResults=1000'});
-    };
-    */
-
-    // TODO remove reporter filter
     this.getBug = (description) => {
         description = description.replace(/[-\[\]\,\(\)\'"]/g, '');
         return this.get({

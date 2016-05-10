@@ -5,8 +5,9 @@ let zapi = require('../tools/zapi'),
     Q = require('q'),
     promises = [];
 
-exports.init = (cycleId) => {
-    zapi.setCycleId(cycleId);
+exports.init = (obj) => {
+    zapi.setCycleId(obj.cycleId);
+    zapi.setDebug(obj.debug);
 };
 
 exports.deferred = Q.defer();
@@ -60,6 +61,7 @@ exports.suiteDone = (suite) => {
 exports.jasmineDone = () => {
     zapi.issue.postExecution();
     zapi.execution.updateStatus().then(() => {
+        console.log('[Zapi] Done');
         exports.deferred.resolve()
     });
 };
