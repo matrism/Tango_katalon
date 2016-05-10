@@ -288,16 +288,15 @@ var ZapiApi = function () {
     };
 
     this.deleteAttachmentsByStep = (stepId) => {
-        var self = this,
-            promise = this.getAttachments(stepId);
+        var self = this;
 
-        promise.then((response) => {
-            var responseJson = JSON.parse(response);
-            responseJson.data.forEach((file) => {
-                self.deleteAttachment(file.fileId);
+        return this.getAttachments(stepId).then((response) => {
+            let promises = [];
+            response.data.forEach((file) => {
+                promises.push(self.deleteAttachment(file.fileId));
             })
+            return Q.all(promises);
         });
-        return promise;
     };
 
     this.updateAttachment = (stepId, file) => {
@@ -337,7 +336,7 @@ var ZapiApi = function () {
         var deferred = Q.defer(),
             bodyParams,
             r,
-            writeBody = (['POST','PUT'].indexOf(req.method) > -1);
+            writeBody = (req.body);
 
         req.headers = req.headers || {};
         req.headers['Authorization'] = 'Basic ' + base64.encode('Constantine.Crismaru:America66%');

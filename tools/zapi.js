@@ -309,12 +309,12 @@ var zapi = function () {
             return self.execution.updateStepResult(orderId, status, failMessage, response).then((stepExecutionId) => {
                 let fName = systemConfig.streamId + '_' + orderId + '.png',
                     fPath = systemConfig.htmlReportPath + '/' + fName;
-                //if (failMessage) {
+                if (failMessage) {
                     log('Updating attachment...', stepExecutionId, '../'+fPath);
-                    return ZapiApi.updateAttachment(response.id, fPath).then((result) => {
+                    return ZapiApi.updateAttachment(stepExecutionId, fPath).then((result) => {
                         log('Attachment updated', result);
                     });
-                //}
+                }
             });
         });
 
