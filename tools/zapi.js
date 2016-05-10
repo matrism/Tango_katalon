@@ -217,7 +217,9 @@ var zapi = function () {
                     });
 
                 log('Updating execution step result...', execStep.id, status, comment, bugKey || '');
-                return ZapiApi.updateExecutionStepResult(this.issue.id, execution.id, execStep.id, status, comment, bugKey).then((response) => {
+                return ZapiApi.updateExecutionStepResult(
+                        this.issue.id, execution.id, execStep.id, status, comment, bugKey
+                       ).then((response) => {
                     log('Execution step updated:', response.id);
                     return response.id;
                 });
@@ -246,7 +248,9 @@ var zapi = function () {
                     log('Execution final result updated:', response.id);
                     if (self.bugs.bugsCreated.length) {
                         log('Linking defects to execution.', execution.id, self.bugs.bugsCreated);
-                        return ZapiApi.bulkUpdateExecutionDefects(execution.id, self.bugs.bugsCreated).then((result) => {
+                        return ZapiApi.bulkUpdateExecutionDefects(
+                                execution.id, self.bugs.bugsCreated
+                            ).then((result) => {
                             log('Defects linked to execution.');
                         });
                     }
@@ -316,9 +320,11 @@ var zapi = function () {
         }
 
         promise = saveBugDeferred.promise.then((response) => {
-            return self.execution.updateStepResult(orderId, status, failMessage, response).then((stepExecutionId) => {
+            return self.execution.updateStepResult(orderId, status, failMessage, response)
+                .then((stepExecutionId) => {
                 let fName = systemConfig.streamId + '_' + orderId + '.png',
                     fPath = systemConfig.htmlReportPath + '/' + fName;
+
                 if (createBugAndAttachment) {
                     log('Updating attachment...', stepExecutionId, '../'+fPath);
                     return ZapiApi.updateAttachment(stepExecutionId, fPath).then((result) => {
