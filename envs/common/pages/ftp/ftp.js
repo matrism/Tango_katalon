@@ -31,7 +31,7 @@ exports.uploadAckFile = function() {
                 user: ftpOptions[2],
                 pass: ftpOptions[3]
             });
-            ftp.ls(".", function(err, res) {
+            ftp.ls("/files", function(err, res) {
                 if (err) {
                     console.error(err);
                 } else {
@@ -49,7 +49,7 @@ exports.uploadAckFile = function() {
                     });
 
                     // Upload file
-                    ftp.put(ackFileFullName, ackNewFile, function(putError) {
+                    ftp.put(ackFileFullName, '/files/' + ackNewFile, function(putError) {
                         if (putError) {
                             console.error(putError);
                         } else {
