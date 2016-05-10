@@ -112,9 +112,9 @@ let cp = require('child_process'),
             continue;
         }
 
-        if(rawArg === '--cycleName') {
+        if(rawArg === '--cycle-name') {
             if(cycleName !== null) {
-                console.error('Multiple --test-cycle-name.');
+                console.error('Multiple --cycle-name.');
                 process.exit(1);
             }
 
