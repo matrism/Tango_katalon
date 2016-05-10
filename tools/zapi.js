@@ -216,7 +216,7 @@ var zapi = function () {
                         return step.stepId == issueStep.id; 
                     });
 
-                log('Updating execution step result...', execStep.id, status, comment, bugKey);
+                log('Updating execution step result...', execStep.id, status, comment, bugKey || '');
                 return ZapiApi.updateExecutionStepResult(this.issue.id, execution.id, execStep.id, status, comment, bugKey).then((response) => {
                     log('Execution step updated:', response.id);
                     return response.id;
@@ -298,16 +298,19 @@ var zapi = function () {
 
     this.processStepResult = (stepName, orderId, status, failMessage) => {
         var saveBugDeferred = Q.defer(),
-            promise;
-        if (failMessage) {
-            if (self.bugs.stepFailed) {
-                log('Skipping bug creation - a bug was already created for this feature.');
-                saveBugDeferred.resolve();
-            } else {
-                self.bugs.save(stepName, failMessage).then((response) => {
-                    saveBugDeferred.resolve(response);
-                });
-            }
+            promise,
+            createBugAndAttachment;
+
+        if (stepName.indexOf('[Scenario]') > -1) {
+            self.bugs.stepFailed = false;
+        }
+
+        createBugAndAttachment = (failMessage && ! self.bugs.stepFailed);
+
+        if (createBugAndAttachment) {
+            self.bugs.save(stepName, failMessage).then((response) => {
+                saveBugDeferred.resolve(response);
+            });
         } else {
             saveBugDeferred.resolve();
         }
@@ -316,7 +319,7 @@ var zapi = function () {
             return self.execution.updateStepResult(orderId, status, failMessage, response).then((stepExecutionId) => {
                 let fName = systemConfig.streamId + '_' + orderId + '.png',
                     fPath = systemConfig.htmlReportPath + '/' + fName;
-                if (failMessage) {
+                if (createBugAndAttachment) {
                     log('Updating attachment...', stepExecutionId, '../'+fPath);
                     return ZapiApi.updateAttachment(stepExecutionId, fPath).then((result) => {
                         log('Attachment updated', result);
