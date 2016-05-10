@@ -150,7 +150,7 @@ function payload() {
                 clone.style.position = 'static';
             }
 
-            var bindings = angular.element(el).data().$binding;
+            var bindings = window.angular && angular.element(el).data().$binding;
 
             if(bindings && bindings.length !== 0) {
                 clone.setAttribute('data-binding-expr', bindings[0]);
