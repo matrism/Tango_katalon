@@ -339,7 +339,8 @@ var ZapiApi = function () {
             writeBody = (req.body);
 
         req.headers = req.headers || {};
-        req.headers['Authorization'] = 'Basic ' + base64.encode('Constantine.Crismaru:America66%');
+        // base64.encode('User:password');
+        req.headers['Authorization'] = 'Basic ' + 'RGFuaWVsLkFyZW5oYXJ0OiR0ZW1wb3JhcnlwYXNzd29yZDEyMw==';
         req.headers['Content-Type'] = 'application/json';
 
         if (writeBody) {
@@ -347,6 +348,7 @@ var ZapiApi = function () {
             delete req.body;
             req.headers['Content-Length'] = bodyParams.length;
         }
+
         //log('START -',req.method, req.url);
         r = request(req, (error, response, body) => {
             //log('DONE  -', req.method, req.url, response.statusCode);
