@@ -112,9 +112,9 @@ let cp = require('child_process'),
             continue;
         }
 
-        if(rawArg === '--cycle-name') {
+        if(rawArg === '--tcn') {
             if(cycleName !== null) {
-                console.error('Multiple --cycle-name.');
+                console.error('Multiple --tcn.');
                 process.exit(1);
             }
 

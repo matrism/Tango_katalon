@@ -65,7 +65,7 @@ if [ -n "$wait_timeout" ]; then
 fi
 
 if [ -n "$cycle_name" ]; then
-    cmd_line+=" --cycle-name $(printf '%q' "$cycle_name") "
+    cmd_line+=" --tcn $(printf '%q' "$cycle_name") "
 fi
 
 cmd_line+=" $additional_protractor_options"
