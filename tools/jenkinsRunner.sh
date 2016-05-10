@@ -50,6 +50,10 @@ if [ -n "$branch" ]; then
     cmd_line+=" --branch $(printf '%q' "$branch")"
 fi
 
+if [ -n "$cycle" ]; then
+    cmd_line+=" --cycle $(printf '%q' "$cycle") "
+fi
+
 cmd_line+=" --commit $(git rev-parse HEAD)"
 
 cmd_line+=" --build $(printf '%q' "$BUILD_NUMBER")"
@@ -62,10 +66,6 @@ cmd_line+=" ./node_modules/.bin/protractor configs/protractor-conf.js"
 
 if [ -n "$wait_timeout" ]; then
     cmd_line+=" --wait_timeout $(printf '%q' "$wait_timeout")"
-fi
-
-if [ -n "$cycle" ]; then
-    cmd_line+=" --tcn $(printf '%q' "$cycle") "
 fi
 
 cmd_line+=" $additional_protractor_options"
