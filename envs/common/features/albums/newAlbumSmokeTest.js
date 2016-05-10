@@ -5,6 +5,8 @@ let fnutils = require('../../../../helpers/fnutils'),
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
+exports.id = '91708765-ad67-4d7c-881d-b5d599a07145';
+
 exports.commonFeatureTags = ['albums', 'smoke', 'albumsSmoke'],
 
 exports.beforeFeature = () => {

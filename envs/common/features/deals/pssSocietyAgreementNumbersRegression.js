@@ -2,6 +2,8 @@
 
 var randomId = random.id.makeMemoizedGenerator();
 
+exports.id = 'fd4f34da-92bf-4cd4-8a0c-3e6b5b245dc0';
+
 exports.commonFeatureTags = [
     'addPssSocietyAgreementNumbersRegression',
     'editPssSocietyAgreementNumbersRegression',

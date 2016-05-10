@@ -3,6 +3,9 @@
 var randomString = random.string.makeMemoizedGenerator(),
     using = fnutils.using;
 
+exports.id = '1e729eb6-7585-42d0-b517-ca72b723527b';
+exports.featureName = 'Works Audit Log';
+
 exports.commonFeatureTags = [
     'workAuditLogRegression',
     'workAuditLog',

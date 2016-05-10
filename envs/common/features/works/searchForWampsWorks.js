@@ -4,6 +4,8 @@ exports.beforeFeature = () => {
     steps.login.itLogin();
 };
 
+exports.id = '7e426da9-ca9e-447a-84d6-f41821664f2a';
+
 exports.commonFeatureTags = ['works', 'smoke', 'searchForWampsWorks'];
 
 exports.feature = [

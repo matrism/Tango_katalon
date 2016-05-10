@@ -4,6 +4,8 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
+exports.id = 'fe105199-7cec-4236-a773-0c4294d6367c';
+
 exports.commonFeatureTags = ['royaltyRates', 'rateSet', 'regression'];
 
 exports.feature = [

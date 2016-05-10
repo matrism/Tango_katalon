@@ -2,6 +2,8 @@
 
 var using = fnutils.using;
 
+exports.id = '8356e1e0-0625-4696-80b9-260e2839e9fd';
+
 exports.commonFeatureTags = [
     'previewRegistrationRunRegression',
     'previewRegistrationRun',

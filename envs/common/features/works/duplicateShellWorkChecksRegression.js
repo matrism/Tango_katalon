@@ -3,6 +3,8 @@
 var using = fnutils.using,
     randomString = random.string.makeMemoizedGenerator();
 
+exports.id = '046a97d6-bfea-433e-ba37-2bb1687068af';
+
 exports.beforeFeature = function() {
     steps.login.itLogin();
 };

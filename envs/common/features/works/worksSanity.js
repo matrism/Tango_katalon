@@ -11,6 +11,8 @@ var leftPad = require('left-pad'),
     bind = fnutils.bind,
     using = fnutils.using;
 
+exports.id = '9816ee88-8ecc-41fe-8014-30f21b2142c8';
+
 exports.commonFeatureTags = [
     'worksSanity',
     'works',

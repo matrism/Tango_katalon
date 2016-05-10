@@ -5,6 +5,8 @@ var moment = require('moment'),
     randomString = random.string.makeMemoizedGenerator(),
     using = fnutils.using;
 
+exports.id = 'b1f93e66-5f8f-4b7a-a459-59e7d2c17c2d';
+
 exports.commonFeatureTags = [
     'scopeDeliveryWithoutRtpRegression',
     'scopeDelivery',

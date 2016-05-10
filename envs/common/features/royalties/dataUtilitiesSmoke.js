@@ -3,6 +3,8 @@
 var fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
+exports.id = 'd0e81a6b-8520-4d4f-bff5-d6d9b0fece3c';
+
 exports.beforeFeature = () => {
     steps.login.itLogin();
 };

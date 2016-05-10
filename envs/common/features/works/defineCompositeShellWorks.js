@@ -3,6 +3,8 @@
 let random = require('../../../../helpers/random'),
     randomString = random.string.makeMemoizedGenerator();
 
+exports.id = 'f3031baf-95ec-4cb3-bf56-bf0ebf46753a';
+
 exports.beforeFeature = () => {
     steps.login.itLogin();
 };

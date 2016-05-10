@@ -1,5 +1,7 @@
 'use strict';
 
+exports.id = '02160962-86ea-49ea-b8e6-875fd5465300';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 },

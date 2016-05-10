@@ -1,5 +1,7 @@
 'use strict';
 
+exports.id = 'd3abf302-cc7c-4539-aeb4-ecd379acca56';
+
 exports.commonFeatureTags = [
     'broken',
     'authSmoke',

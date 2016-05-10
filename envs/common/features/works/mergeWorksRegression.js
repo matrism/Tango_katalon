@@ -4,6 +4,8 @@ var randomString = random.string.makeMemoizedGenerator(),
     using = fnutils.using,
     moment = require('moment');
 
+exports.id = '323da77d-5c98-4836-8fc6-b752dcaf0ca1';
+
 exports.commonFeatureTags = [
     'mergeWorksRegression',
     'worksRegression',

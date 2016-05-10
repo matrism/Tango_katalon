@@ -3,6 +3,8 @@ var fnutils = require('../../../../helpers/fnutils'),
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
+exports.id = 'e088e141-fd44-4245-8476-f66dc8e07057';
+
 exports.beforeFeature = () => {
     steps.login.itLogin();
 };

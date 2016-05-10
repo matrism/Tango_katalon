@@ -3,6 +3,9 @@
 var random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
+exports.id = '375f9a39-8336-4a4a-a03b-c7430955ad32';
+exports.featureName = 'Create Person Smoke';
+
 exports.beforeFeature = () => {
     steps.login.itLogin();
 };

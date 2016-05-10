@@ -3,6 +3,8 @@
 var fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
+exports.id = 'c4a31f69-95d2-4280-9fa7-77d54fdcb691';
+
 exports.commonFeatureTags = [
     'albums', 'smoke', 'albumsSmoke', 'searchForAlbum', 'production', 'productionSmoke'
 ];

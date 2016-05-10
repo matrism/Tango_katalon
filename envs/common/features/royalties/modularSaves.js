@@ -8,6 +8,9 @@ var yaml = require('yamljs'),
     // TODO: Implement overriding.
     validationData = yaml.load(__dirname + '/data/modularSaves.yml');
 
+exports.id = '38e7c75f-13bc-494c-93a2-3c8e316df842';
+exports.featureName = 'Royality Rates Modular Saves Regression';
+
 exports.commonFeatureTags = [
     'royaltyRatesModularSavesRegression',
     'royaltyRates',

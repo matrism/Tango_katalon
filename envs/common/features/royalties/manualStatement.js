@@ -1,5 +1,8 @@
 'use strict';
 
+exports.id = 'd87b5715-3426-4267-97bd-c7fd527a86b9';
+exports.featureName = 'Royality Manual Statement';
+
 exports.commonFeatureTags = ['royaltyProcessing', 'manualStatement'];
 
 exports.beforeFeature = function () {

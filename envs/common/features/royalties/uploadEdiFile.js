@@ -20,6 +20,8 @@ function setTestTimeout(time) {
     });
 }
 
+exports.id = '3810742f-a560-4031-bb1a-b083092ff822';
+
 exports.commonFeatureTags = ['royaltyProcessing'];
 
 exports.beforeFeature = function () {

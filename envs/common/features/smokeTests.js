@@ -5,6 +5,9 @@ var random = require('../../../helpers/random'),
     fnutils = require('../../../helpers/fnutils'),
     using = fnutils.using;
 
+exports.id = '81d52b01-bfba-45f9-835a-05f2d2a43d7d';
+exports.featureName = 'Smoke tests - deals, person, works, orgs, royalty';
+
 exports.commonFeatureTags = ['smoke'];
 
 exports.beforeFeature = function () {

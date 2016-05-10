@@ -4,6 +4,8 @@ var using = fnutils.using,
 
     dealNum = { staging: '17277', prod: '3' }[systemConfig.env.name] || '205622';
 
+exports.id = 'd0e81a6b-8520-4d4f-bff5-d6d9b0fece3c';
+
 exports.commonFeatureTags = [
     'editExistingDealRoyaltyRatesRegression',
     'royaltyRates',

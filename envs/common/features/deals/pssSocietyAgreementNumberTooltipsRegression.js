@@ -1,5 +1,7 @@
 'use strict';
 
+exports.id = '0db05fd5-57b1-4f3e-909e-504c54d231dc';
+
 exports.commonFeatureTags = [
     'pssSocietyAgreementNumberTooltipsRegression',
     'pssSocietyAgreementNumbersRegression',

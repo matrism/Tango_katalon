@@ -1,5 +1,8 @@
 'use strict';
 
+exports.id = 'b822a54d-73ac-4056-a20c-4d78fe073f1d';
+exports.featureName = 'Deal MDRC';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };

@@ -7,6 +7,8 @@ var yaml = require('yamljs'),
 
     using = fnutils.using;
 
+exports.id = '82ddbb58-7274-4ca3-ba6b-0e4ab73c708b';
+
 exports.commonFeatureTags = [
     'viewRoyaltyRatesSummaryRegression',
     'royaltyRatesSummary',
