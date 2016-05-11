@@ -55,6 +55,20 @@ if (pages.editDealPayee === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.payee-by-scope div.payee-by-scope__row-wrap.ng-scope:nth-child(2) div.payee-by-scope__subrow"))));
         },
 
+        editDeleteFirstScopeFromThePayee: function () {
+            pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")));
+            browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ng-scope div.modal-footer"))));
+            browser.driver.findElement(By.css("div.ng-scope div.modal-footer button[data-ng-click='ok()']")).click();
+        },
+
+        editDeletePayeeFromDealByThePayeeScreen: function () {
+            pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayee(payee)']")));
+            browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayee(payee)']")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ng-scope div.modal-footer"))));
+            browser.driver.findElement(By.css("div.ng-scope div.modal-footer button[data-ng-click='ok()']")).click();
+        },
+
         editTheOldPayeeArea: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.oldPayeeArea);
             browser.actions().mouseMove(pages.editDealPayee.elems.oldPayeeArea).perform();
@@ -320,19 +334,17 @@ if (pages.editDealPayee === undefined) {
         },
 
         editCheckNoScopeAssociatedToPayee: function () {
-            browser.driver.findElement(By.css("div[data-ng-form='allPayeesForm']")).getText().
-                then(function (promise) {
-                    console.log("Check that no scope is associated to payee " + promise);
-                    expect(promise).not.toContain("Scope");
-                });
+            browser.driver.findElement(By.css("div[data-ng-form='allPayeesForm']")).getText().then(function (promise) {
+                console.log("Check that no scope is associated to payee " + promise);
+                expect(promise).not.toContain("Scope");
+            });
         },
 
         editCheckScopeNumberIAssociatedToPayee: function (i) {
-            browser.driver.findElement(By.css("div[data-ng-if='::DPAY.isPayeeAssociated(payee)'] div[data-ng-repeat='payeeScope in payee.deal_scopes | filter: scopeFilter(scope) track by payeeScope.id']:nth-child(" + (i + 3) + ")  strong[data-ng-bind='::payeeScope.description']")).getText().
-                then(function (promise) {
-                    console.log("Check that scope number  : " + i + " is associated to payee " + promise);
-                    expect(promise).toEqual("Scope " + i);
-                });
+            browser.driver.findElement(By.css("div[data-ng-if='::DPAY.isPayeeAssociated(payee)'] div[data-ng-repeat='payeeScope in payee.deal_scopes | filter: scopeFilter(scope) track by payeeScope.id']:nth-child(" + (i + 3) + ")  strong[data-ng-bind='::payeeScope.description']")).getText().then(function (promise) {
+                console.log("Check that scope number  : " + i + " is associated to payee " + promise);
+                expect(promise).toEqual("Scope " + i);
+            });
         }
     })
 }

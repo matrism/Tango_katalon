@@ -18,6 +18,20 @@ exports.editPayeeArea = function () {
     });
 };
 
+exports.editDeleteFirstScopeFromPayee = function () {
+    it("Edit delete first scope from payee with payee", function () {
+        pages.editDealPayee.editDeleteFirstScopeFromThePayee();
+        pages.editDealPayee.waitForAjax();
+    });
+};
+
+exports.editDeletePayeeFromDealByPayeeScreen = function () {
+    it("Edit delete payee from deal from by payee screen", function () {
+        pages.editDealPayee.editDeletePayeeFromDealByThePayeeScreen();
+        pages.editDealPayee.waitForAjax();
+    });
+};
+
 exports.editOldPayeeArea = function () {
     it("Edit the old payee area ", function () {
         pages.editDealPayee.editTheOldPayeeArea();

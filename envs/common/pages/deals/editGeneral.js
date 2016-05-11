@@ -18,6 +18,7 @@ if (pages.editDealGeneral === undefined) {
             editExecutionDateMonthElement: {css: "input[data-ng-model='date.month']"},
             editExecutionDateDayElement: {css: "input[data-ng-model='date.day']"},
             saveEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+            cancelEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
             internalContactTitle: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2"},
             internalContactsArea: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3)"},
             internalContactTableData: {css: "table.view-internal-contact tbody"},
@@ -327,6 +328,11 @@ if (pages.editDealGeneral === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
         },
 
+        clickOnTheCancelEditGeneralLeftTabArea: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.cancelEditLeftGeneralTabArea));
+            pages.editDealGeneral.elems.cancelEditLeftGeneralTabArea.click();
+        },
+
 
         editSelectToTheExecutedContractStatus: function (value) {
             var desiredOption;
@@ -352,11 +358,10 @@ if (pages.editDealGeneral === undefined) {
         },
 
         editCheckTheDealSigningTerritoryCannotBeChangedTooltip: function () {
-            browser.actions().mouseMove(element(by.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass']"))).perform();
-            browser.driver.findElement(By.css("")).getText().
-            then(function (promise) {
-                console.log(" : " + promise);
-                expect(promise).toEqual("");
+            browser.actions().mouseMove(element(by.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass'] "))).perform();
+            browser.driver.findElement(By.css("div.tooltip.fade")).getText().then(function (promise) {
+                console.log(" Tooltip text fade is : " + promise);
+                expect(promise).toEqual("To edit the Deal Signing Territory, all Deal Payees need to be removed or a new deal should be created.");
             });
         }
     });
