@@ -236,6 +236,10 @@
                     <div class="timeTaken">
                         Total time taken: <span class="val">Unknown</span>
                     </div>
+
+                    <div class="testCycle">
+                        Test Cycle: <a class="val" href="#">None</a>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -486,6 +490,10 @@
 
         var $body = $('body'),
 
+            jiraCyclePrefx = (
+                'https://jira.wmg.com/secure/enav/#?query=project%20%3D%20%22WC%22%20AND%20cycleName%20in%20'
+            ),
+
             ghCommitHrefPrefix = (
                 'https://github.com/wmgdsp/tango-e2e/commit/'
             );
@@ -576,6 +584,18 @@
                 }
 
                 $('.negatedTags > .val').text(tags.join(', '));
+            },
+
+            testCycle: function (stmId, testCycle) {
+                var href = '',
+                    el = $('.testCycle > .val');
+
+                el.text(testCycle);
+                if (testCycle && testCycle != 'none') {
+                    el.attr('href', jiraCyclePrefx + '(%22' + testCycle + '%22)');
+                } else {
+                    el.removeAttr('href');
+                }
             },
 
             processStarted: function (stmId) {

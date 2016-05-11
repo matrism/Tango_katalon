@@ -234,13 +234,15 @@ config = {
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
 
-        var deferred = protractor.promise.defer();
+        if (parseInt(systemConfig.cycle)) {
+            var deferred = protractor.promise.defer();
 
-        zapiReporter.deferred.promise.then(() => {
-            deferred.fulfill();
-        });
+            zapiReporter.deferred.promise.then(() => {
+                deferred.fulfill();
+            });
 
-        return deferred;
+            return deferred;
+        }
     },
     framework: 'jasmine2',
     jasmineNodeOpts: {

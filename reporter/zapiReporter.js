@@ -16,7 +16,7 @@ exports.jasmineStarted = (info) => {
 };
 
 exports.suiteStarted = (suite) => {
-    if (suite.type = 'feature' && suite.obj && suite.obj.id) {
+    if (suite.type == 'feature' && suite.obj && suite.obj.id) {
         var featureName = suite.fullName;
         if (suite.obj.featureName) {
             featureName = suite.obj.featureName;

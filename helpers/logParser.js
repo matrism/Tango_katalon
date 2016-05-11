@@ -187,6 +187,12 @@ parseStateHandlers.control = [
     },
 
     {
+        re: /^Test Cycle: (.+)$/, fn: function (l, testCycle) {
+            this.fire('testCycle', testCycle, l);
+        }
+    },
+
+    {
         re: /^Total time taken so far: (.+)$/, fn: function (l, timeTaken) {
             this.fire('totalTimeTakenSoFar', timeTaken, l);
         }
