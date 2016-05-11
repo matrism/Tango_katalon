@@ -1,5 +1,8 @@
 'use strict';
 
+exports.id = 'bcc5a071-a2f8-4e63-adc6-6b9fa1218036';
+exports.featureName = 'Deals Internal Contacts Smoke';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };

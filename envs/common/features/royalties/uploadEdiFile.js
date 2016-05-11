@@ -5,6 +5,8 @@ var using = require('../../../../helpers/fnutils').using,
     _ = require('lodash'),
     YAML = require('yamljs');
 
+exports.id = '3810742f-a560-4031-bb1a-b083092ff822';
+
 exports.commonFeatureTags = ['royaltyProcessing'];
 
 exports.beforeFeature = function () {

@@ -3,20 +3,12 @@
 var fs = require('fs'),
     mkdirp = require('mkdirp');
 
-module.exports = function(options) {
-    mkdirp.sync(options.dest);
-
-    this.specCount = 1;
-
-    this.specDone = function(spec) {
-        var path = options.dest + '/' + (this.specCount++) + '.html';
-
-        browser.executeScript(payload).then(function(html) {
-            fs.writeFileSync(path, '<!doctype html>\n' + html);
-        }, function(err) {
-            console.error('Ignoring HTML snapshot error:', err);
-        });
-    };
+module.exports = () => {
+    return browser.executeScript(payload).then(function(html) {
+        return html;
+    }, function(err) {
+        console.error('Ignoring HTML snapshot error:', err);
+    });
 };
 
 function payload() {
@@ -158,7 +150,7 @@ function payload() {
                 clone.style.position = 'static';
             }
 
-            var bindings = angular.element(el).data().$binding;
+            var bindings = window.angular && angular.element(el).data().$binding;
 
             if(bindings && bindings.length !== 0) {
                 clone.setAttribute('data-binding-expr', bindings[0]);

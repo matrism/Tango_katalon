@@ -4,6 +4,8 @@ var random = require('../../../../helpers/random'),
     randomString = random.string.makeMemoizedGenerator(),
     randomId = random.id.makeMemoizedGenerator();
 
+exports.id = '05c77628-80ae-43bf-ba24-0502f76911a1';
+
 exports.beforeFeature = function() {
     steps.login.itLogin();
 };

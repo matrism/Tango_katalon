@@ -1,7 +1,6 @@
 'use strict';
 
-var request = require('request'),
-    Base64 = {
+var Base64 = {
 
         // private property
         _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
@@ -138,80 +137,6 @@ var request = require('request'),
             return string;
         }
 
-    },
-    authorization = 'Basic ' + Base64.encode('Constantine.Crismaru:America66%');
-
-var tgRequest = function () {
-
-    this.get = function (url, qs, fn) {
-        request({
-            method: 'GET',
-            url: url,
-            qs: qs,
-            headers: {
-                'Authorization': authorization,
-                'Content-Type': 'application/json'
-            }
-        }, fn);
     };
 
-    this.post = function (url, qs, body, fn) {
-        var _body = JSON.stringify(body),
-            _req = request({
-                method: 'POST',
-                url: url,
-                qs: qs,
-                headers: {
-                    'Authorization': authorization,
-                    'Content-Type': 'application/json',
-                    'Content-Length': _body.length
-                }
-            }, fn);
-
-        _req.write(_body);
-        _req.end();
-    };
-
-    this.postFile = function (url, qs, formData, fn) {
-        request({
-            method: 'POST',
-            url: url,
-            formData: formData,
-            headers: {
-                'Authorization': authorization,
-                'X-Atlassian-Token': 'nocheck'
-            }
-        }, fn);
-    };
-
-    this.put = function (url, qs, body, fn) {
-        var _body = JSON.stringify(body),
-            _req = request({
-                method: 'PUT',
-                url: url,
-                qs: qs,
-                headers: {
-                    'Authorization': authorization,
-                    'Content-Type': 'application/json',
-                    'Content-Length': _body.length
-                }
-            }, fn);
-
-        _req.write(_body);
-        _req.end();
-    };
-
-    this.delete = function (url, qs, fn) {
-        request({
-            method: 'DELETE',
-            url: url,
-            qs: qs,
-            headers: {
-                'Authorization': authorization,
-                'Content-Type': 'application/json'
-            }
-        }, fn);
-    };
-};
-
-module.exports = new tgRequest();
+module.exports = Base64;

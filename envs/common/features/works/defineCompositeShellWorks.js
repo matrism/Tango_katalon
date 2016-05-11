@@ -1,13 +1,13 @@
 'use strict';
 
-var pages_path = _tf_config._system_.path_to_pages,
-    steps_path = _tf_config._system_.path_to_steps,
-    random = require('../../../../helpers/random'),
+let random = require('../../../../helpers/random'),
     randomString = random.string.makeMemoizedGenerator();
 
-exports.beforeFeature = [
-    [steps.login.itLogin]
-];
+exports.id = 'f3031baf-95ec-4cb3-bf56-bf0ebf46753a';
+
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.commonFeatureTags = ['works', 'workCompositeShell', 'regression'];
 
@@ -37,7 +37,8 @@ exports.feature = [
         {
             name: 'Define a COS composite work with shell works',
             tags: [],
-            steps: [
+            steps: function () {
+                executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 0]],
 
                 [steps.newWork.goToNewWorkPage],
@@ -73,12 +74,14 @@ exports.feature = [
                 [steps.mainHeader.search.selectEntityType, ['Works']],
                 [steps.work.searchForPreviouslyEnteredComponentWork, [0]],
                 [steps.work.expectNoResultsForWorkSearchMessageToBeDisplayed],
-            ]
+                ]);
+            }
         },
         {
             name: 'Define a POT composite work with shell works',
             tags: [],
-            steps: [
+            steps: function () {
+                executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 1]],
 
                 [steps.newWork.goToNewWorkPage],
@@ -103,12 +106,14 @@ exports.feature = [
                 [steps.work.clickShowComponentWorkDetailsButton, [0]],
                 [steps.work.validateShellWorkCreatorName, [0, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [0, 0]],
-            ]
+                ]);
+            }
         },
         {
             name: 'Define a UCO composite work with shell works',
             tags: [],
-            steps: [
+            steps: function () {
+                executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 2]],
 
                 [steps.newWork.goToNewWorkPage],
@@ -133,12 +138,14 @@ exports.feature = [
                 [steps.work.clickShowComponentWorkDetailsButton, [0]],
                 [steps.work.validateShellWorkCreatorName, [0, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [0, 0]],
-            ]
+                ]);
+            }
         },
         {
             name: 'Define a MED composite work with shell works',
             tags: [],
-            steps: [
+            steps: function () {
+                executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 3]],
 
                 [steps.newWork.goToNewWorkPage],
@@ -171,12 +178,14 @@ exports.feature = [
                 [steps.work.clickShowComponentWorkDetailsButton, [1]],
                 [steps.work.validateShellWorkCreatorName, [1, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [1, 0]],
-            ]
+                ]);
+            }
         },
         {
             name: 'Define COS composites with multiple shell works and different allocation combinations',
             tags: [],
-            steps: [
+            steps: function () {
+                executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 4]],
 
                 [steps.newWork.goToNewWorkPage],
@@ -345,12 +354,14 @@ exports.feature = [
                 [steps.work.clickShowComponentWorkDetailsButton, [2]],
                 [steps.work.validateShellWorkCreatorName, [2, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [2, 0]],
-            ]
+                ]);
+            }
         },
         {
             name: 'Edit a COS composite work with shell works',
             tags: [],
-            steps: [
+            steps: function () {
+                executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 7]],
 
                 [steps.newWork.goToNewWorkPage],
@@ -388,6 +399,7 @@ exports.feature = [
                 [steps.work.clickShowComponentWorkDetailsButton, [0]],
                 [steps.work.validateShellWorkCreatorName, [0, 0]],
                 [steps.work.validateShellWorkCreatorContribution, [0, 0]],
-            ]
+                ]);
+            }
         }
 ];

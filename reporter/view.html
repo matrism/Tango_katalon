@@ -1,0 +1,958 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script
+    src="https://code.jquery.com/jquery-2.2.3.js"
+    integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
+    crossorigin="anonymous"
+></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"
+>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.3/jquery.sticky.min.js"></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"
+></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"
+></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.17.1/URI.min.js"></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/incremental-dom/0.4.1/incremental-dom-min.js"
+></script>
+
+<script src="logParser.js"></script>
+
+<style>
+    body {
+        padding: 0 20px;
+
+        font-family: monospace;
+        font-size: 1.2em;
+
+        line-height: 1.4em;
+    }
+
+    #header {
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+
+    #header table {
+        margin-bottom: 10px;
+    }
+
+    #header table td {
+        vertical-align: top;
+    }
+
+    #header table td + td {
+        padding-left: 50px;
+    }
+
+    #header .ctls {
+        padding: 10px 0;
+        background-color: white;
+    }
+
+    #filter {
+        width: 450px;
+    }
+
+    .stream:not(.filteredOut) + .stream {
+        margin-top: 1em;
+    }
+
+    .process, .block {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .step {
+        margin: 10px 0;
+    }
+
+    .process, .block, .step {
+        margin-left: 30px;
+    }
+
+    :not(.literal) + .literal {
+        margin-top: 10px;
+    }
+
+    .literal + :not(.literal) {
+        margin-top: 10px;
+    }
+
+    .literal {
+        color: brown;
+    }
+
+    .literal:before {
+        content: '> ';
+    }
+
+    .name {
+        margin-left: -30px;
+    }
+
+    .failed {
+        color: red;
+    }
+
+    .passed {
+        color: blue;
+    }
+
+    .process.crashed {
+        color: #a0a000;
+    }
+
+    .name:not(:last-child) .val {
+        cursor: pointer;
+    }
+
+    .name:not(:last-child):before {
+        content: '[-] ';
+    }
+
+    .collapse:not(.filterExpand) .name:not(:last-child):before {
+        content: '[+] ';
+    }
+
+    .collapse:not(.filterExpand) > :not(.name) {
+        display: none;
+    }
+
+    .filteredOut {
+        display: none;
+    }
+
+    .browserUrl, .png, .html {
+        display: inline-block;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+    <div id="header" class="sticky">
+        <table>
+            <tr>
+                <td>
+                    <div class="status">
+                        Status: <span class="val">Loading</span>
+                    </div>
+
+                    <div class="targetEnvType">
+                        Target environment: <span class="val">?</span>
+                        <span class="targetAppUrl">
+                            (<a class="val" href="#">?</a>)
+                        </span>
+                    </div>
+
+                    <div class="testBranchName">
+                        Test branch: <span class="val">?</span>
+                        <span class="testCommitHash">
+                            (<a class="val" href="#">?</a>)
+                        </span>
+                    </div>
+
+                    <div class="hostTimeZone">
+                        Host time zone: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="parallelJobs">
+                        Parallel jobs: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="silentJobTimeout">
+                        Silent job timeout: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="startDateTime">
+                        Started on: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="endDateTime">
+                        Ended on: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="links">
+                        <a href="report.txt" target="_top">Raw report</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="tags">
+                        Tags: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="negatedTags">
+                        Negated tags: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="totalFeatures">
+                        Total features: <span class="val">?</span>
+
+                        <span class="totalFeaturesPassed passed">
+                            (<span class="val">0</span> ✓
+                        </span>
+                        /
+                        <span class="totalFeaturesFailed failed">
+                            <span class="val">0</span> ✗)
+                        </span>
+                    </div>
+
+                    <div class="totalScenarios">
+                        Total scenarios: <span class="val">?</span>
+
+                        <span class="totalScenariosPassed passed">
+                            (<span class="val">0</span> ✓
+                        </span>
+                        /
+                        <span class="totalScenariosFailed failed">
+                            <span class="val">0</span> ✗)
+                        </span>
+                    </div>
+
+                    <div class="totalSteps">
+                        Total steps: <span class="val">?</span>
+
+                        <span class="totalStepsPassed passed">
+                            (<span class="val">0</span> ✓
+                        </span>
+                        /
+                        <span class="totalStepsFailed failed">
+                            <span class="val">0</span> ✗)
+                        </span>
+                    </div>
+
+                    <div class="timeTaken">
+                        Total time taken: <span class="val">Unknown</span>
+                    </div>
+
+                    <div class="testCycle">
+                        Test Cycle: <a class="val" href="#">None</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="ctls">
+            <input type="text" id="filter" placeholder="Filter">
+
+            <div style="margin-top: 10px">
+                <button id="expandAllCollapseSteps">Expand all / Collapse steps</button>
+                <button id="expandAll">Expand all</button>
+                <button id="collapseAll">Collapse all</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        'use strict';
+
+        window.tat = {};
+
+        $('#header .ctls').sticky({ topSpacing: 0 });
+    </script>
+
+    <script>
+        'use strict';
+
+        tat.duration = function (dur) {
+            return moment.duration(
+                parseFloat(dur), 'seconds'
+            ).format('h[h] m[m] s[s]');
+        };
+    </script>
+
+    <script>
+        'use strict';
+
+        $('body').on('click', '.name:not(:last-child) .val', function (ev) {
+            var $block = $(ev.target).closest('.name').parent();
+
+            if($block.is('.filterExpand')) {
+                $block.removeClass('filterExpand').addClass('collapse');
+            }
+            else {
+                $block.toggleClass('collapse');
+            }
+        });
+    </script>
+
+    <script>
+        'use strict';
+
+        window.updateHashQuery = function (key, val) {
+            var q = URI.parseQuery(
+                URI(top.location.href).fragment()
+            );
+
+            if(val === undefined || val === null) {
+                delete q[key];
+            }
+            else {
+                q[key] = val;
+            }
+
+            q = URI.buildQuery(q);
+
+            if(q !== URI(top.location.href).fragment()) {
+                window.location.hash = '#' + q;
+            }
+        };
+    </script>
+
+    <script>
+        'use strict';
+
+        var $body = $('body'),
+
+            updateFilter = $.debounce(250, function (terms) {
+                updateHashQuery('f', terms || null);
+
+                $('.filterExpand').removeClass('filterExpand');
+
+                if(terms.length === 0) {
+                    $('.filteredOut').removeClass('filteredOut');
+                    return;
+                }
+
+                $('.stream, .feature').addClass('filteredOut');
+
+                terms.forEach(function (term) {
+                    var $matches;
+
+                    if(['pass', 'fail', 'crash'].indexOf(term) !== -1) {
+                        term += 'ed';
+                    }
+
+                    if(['passed', 'failed', 'crashed'].indexOf(term) !== -1) {
+                        $matches = $('.' + term);
+
+                        $matches
+                            .filter('.feature, .process')
+                            .closest('.stream')
+                            .addBack()
+                            .removeClass('filteredOut');
+                    }
+                    else {
+                        $matches = $('.' + term + '-tag');
+
+                        $matches
+                            .parents('.feature, .stream')
+                            .addBack()
+                            .removeClass('filteredOut')
+                            .addClass('filterExpand');
+
+                        if($matches.is('.feature')) {
+                            $matches
+                                .find('.filteredOut')
+                                .removeClass('filteredOut');
+                        }
+                    }
+                });
+            });
+
+        $('#filter').on('keyup', function () {
+            var terms = this.value;
+
+            updateFilter(terms.split(',').map(function (t) {
+                return t.trim();
+            }).filter(function (t) {
+                return (t !== '');
+            }));
+        });
+    </script>
+
+    <script>
+        'use strict';
+
+        var uri = URI(top.location.href),
+            q = URI.parseQuery(uri.fragment());
+
+        $('#filter').val(q.f);
+    </script>
+
+    <script>
+        'use strict';
+
+        $('#expandAllCollapseSteps').click(function () {
+            $('.filterExpand').removeClass('filterExpand');
+            $('.collapse:not(.step)').removeClass('collapse');
+            $('.step').addClass('collapse');
+        });
+
+        $('#expandAll').click(function () {
+            $('.filterExpand').removeClass('filterExpand');
+            $('.collapse').removeClass('collapse');
+        });
+
+        $('#collapseAll').click(function () {
+            $('.filterExpand').removeClass('filterExpand');
+            $('.feature, .scenario, .step, .block').addClass('collapse');
+        });
+    </script>
+
+    <script>
+        'use strict';
+
+        tat.el = function (tag, attr, children) {
+            var el = { t: tag, a: {}, c: children || [] };
+
+            if(typeof attr === 'string') {
+                el.a.class = new Set(attr.split(/ +/));
+            }
+            else {
+                if(typeof attr.class === 'string') {
+                    attr.class = attr.class.split(/ +/);
+                }
+
+                if(Array.isArray(attr.class)) {
+                    attr.class = new Set(attr.class);
+                }
+
+                el.a = attr;
+            }
+
+            return el;
+        };
+
+        tat.makeFieldDiv = function (classes, key, val) {
+            return tat.el('div', classes, [
+                key + ': ',
+                tat.el('span', 'val', [val])
+            ]);
+        };
+
+        tat.makeLineDiv = function (classes, l) {
+            return tat.el('div', classes, [l]);
+        };
+
+        tat.makeLinkDiv = function (classes, name, href) {
+            return tat.el('div', classes, [
+                tat.el('a', { class: classes, href: href }, [name])
+            ]);
+        };
+
+        tat.renderEl = function (el) {
+            var html = '';
+
+            if(typeof el !== 'object') {
+                return el.toString().replace(/</g, '&lt;');
+            }
+
+            html += '<' + el.t;
+
+            html += Object.keys(el.a).reduce(function (html, k) {
+                var v = el.a[k];
+
+                if(k === 'class') {
+                    v = Array.from(v.values()).join(' ');
+                }
+
+                return html + ' ' + k + '="' + v + '"';
+            }, '');
+
+            html += '>';
+
+            html += el.c.reduce(function (html, c) {
+                return html + tat.renderEl(c);
+            }, '');
+
+            html += '</' + el.t + '>';
+
+            return html;
+        };
+    </script>
+
+    <script>
+        'use strict';
+
+        tat.streams = [];
+
+        tat.featureCount = 0;
+        tat.passedFeatures = 0;
+
+        tat.scenarioCount = 0;
+        tat.passedScenarios = 0;
+
+        tat.stepCount = 0;
+        tat.passedSteps = 0;
+
+        var $body = $('body'),
+
+            jiraCyclePrefx = (
+                'https://jira.wmg.com/secure/enav/#?query=project%20%3D%20%22WC%22%20AND%20cycleName%20in%20'
+            ),
+
+            ghCommitHrefPrefix = (
+                'https://github.com/wmgdsp/tango-e2e/commit/'
+            );
+
+        function setStream (id) {
+            var stm = tat.stm = tat.streams[id];
+
+            if(!stm) {
+                stm = tat.stm = tat.streams[id] = {};
+
+                stm.id = id;
+                stm.children = [];
+
+                stm.div = tat.el('div', 'stream', [
+                    tat.makeFieldDiv('id', 'ID', id)
+                ]);
+
+                stm.logDiv = stm.div;
+            }
+        }
+
+        tat.logParser = new TatLogParser({
+            all: function (stmId) {
+                setStream(stmId);
+            },
+
+            unhandled: function () {
+                console.log('Unhandled event:', arguments);
+            },
+
+            targetEnvType: function (stmId, type) {
+                $('.targetEnvType > .val').text(type);
+            },
+
+            targetAppUrl: function (stmId, href) {
+                var $val = $('.targetAppUrl > .val').text(href);
+
+                if(href !== 'unknown') {
+                    $val.attr('href', href);
+                }
+            },
+
+            testBranchName: function (stmId, name) {
+                $('.testBranchName > .val').text(name);
+            },
+
+            testCommitHash: function (stmId, hash) {
+                var $val = $('.testCommitHash > .val').text(
+                    hash.slice(0, 7)
+                );
+
+                if(hash !== 'unknown') {
+                    $val.attr('href', ghCommitHrefPrefix + hash);
+                }
+            },
+
+            hostTimeZone: function (stmId, tz) {
+                $('.hostTimeZone > .val').text(tz);
+            },
+
+            silentJobTimeout: function (stmId, t) {
+                $('.silentJobTimeout > .val').text(tat.duration(t));
+            },
+
+            featureCount: function (stmId, n) {
+                tat.featureCount = n;
+            },
+
+            jobCount: function (stmId, n) {
+                $('.parallelJobs > .val').text(n);
+            },
+
+            startDateTime: function (stmId, dt) {
+                $('.startDateTime > .val').text(dt);
+            },
+
+            requestedTestTags: function (stmId, tags) {
+                if(tags.length === 0) {
+                    tags = ['all'];
+                }
+
+                $('.tags > .val').text(tags.join(', '));
+            },
+
+            negatedTestTags: function (stmId, tags) {
+                if(tags.length === 0) {
+                    tags = ['none'];
+                }
+
+                $('.negatedTags > .val').text(tags.join(', '));
+            },
+
+            testCycle: function (stmId, testCycle) {
+                var href = '',
+                    el = $('.testCycle > .val');
+
+                el.text(testCycle);
+                if (testCycle && testCycle != 'none') {
+                    el.attr('href', jiraCyclePrefx + '(%22' + testCycle + '%22)');
+                } else {
+                    el.removeAttr('href');
+                }
+            },
+
+            processStarted: function (stmId) {
+                var stm = tat.stm,
+
+                    pDiv = stm.pDiv = tat.el('div', 'process');
+
+                stm.div.c.push(pDiv);
+                stm.logDiv = pDiv;
+            },
+
+            processStartTime: function (stmId, dt) {
+                tat.stm.pDiv.c.push(tat.makeFieldDiv(
+                    'startTime', 'Started on', dt
+                ));
+            },
+
+            testingStarted: function () {
+                tat.stm.pDiv.c.push(tat.makeLineDiv(
+                    'log', 'Testing started'
+                ));
+            },
+
+            totalSteps: function (stmId, total) {
+                var pDiv = tat.stm.pDiv;
+
+                pDiv.c.push(tat.makeFieldDiv(
+                    'totalSteps', 'Total steps', total
+                ));
+
+                tat.stepCount += total;
+            },
+
+            featureStarted: function (stmId, name) {
+                var stm = tat.stm,
+                    
+                    fDiv = stm.fDiv = stm.bDiv = tat.el(
+                        'div', 'feature block collapse'
+                    );
+
+                fDiv.c.push(tat.makeFieldDiv('name', 'Feature', name));
+
+                stm.pDiv.c.push(fDiv);
+                stm.logDiv = fDiv;
+            },
+
+            featureTags: function (stmId, tags) {
+                var fDiv = tat.stm.fDiv;
+
+                tags.forEach(function (tag) {
+                    fDiv.a.class.add(tag + '-tag');
+                });
+
+                if(tags.length === 0) {
+                    tags = ['none'];
+                }
+
+                fDiv.c.push(tat.makeFieldDiv(
+                    'tags', 'Tags', tags.join(', ')
+                ));
+            },
+
+            scenarioStarted: function (stmId, name) {
+                var stm = tat.stm,
+                    
+                    scDiv = stm.scDiv = stm.bDiv = tat.el(
+                        'div', 'scenario block collapse'
+                    );
+
+                scDiv.c.push(tat.makeFieldDiv('name', 'Scenario', name));
+
+                stm.fDiv.c.push(scDiv);
+                stm.logDiv = scDiv;
+
+                ++tat.scenarioCount;
+            },
+
+            scenarioTags: function (stmId, tags) {
+                var scDiv = tat.stm.scDiv;
+
+                tags.forEach(function (tag) {
+                    scDiv.a.class.add(tag + '-tag');
+                });
+
+                if(tags.length === 0) {
+                    tags = ['none'];
+                }
+
+                scDiv.c.push(tat.makeFieldDiv(
+                    'tags', 'Tags', tags.join(', ')
+                ));
+            },
+
+            blockStarted: function (stmId, name) {
+                var stm = tat.stm,
+                    
+                    bDiv = tat.el('div', 'block collapse');
+
+                bDiv.c.push(tat.makeFieldDiv('name', 'Block', name));
+
+                stm.bDiv.c.push(bDiv);
+
+                bDiv.parent = stm.bDiv;
+                stm.bDiv = bDiv;
+
+                stm.logDiv = bDiv;
+            },
+
+            stepStarted: function (stmId, name, num) {
+                var stm = tat.stm,
+
+                    stDiv = stm.stDiv = tat.el(
+                        'div', 'step block collapse'
+                    );
+
+                stDiv.c.push(tat.makeFieldDiv('name', 'S-' + num, name));
+
+                stm.bDiv.c.push(stDiv);
+                stm.logDiv = stDiv;
+            },
+
+            browserUrl: function (stmId, url) {
+                tat.stm.stDiv.c.push(tat.makeLinkDiv(
+                    'browserUrl', 'Browser URL', url
+                ));
+            },
+
+            pngSaved: function (stmId, fileName) {
+                tat.stm.stDiv.c.push(tat.makeLinkDiv(
+                    'png', 'PNG', fileName
+                ));
+            },
+
+            htmlSaved: function (stmId, fileName) {
+                tat.stm.stDiv.c.push(tat.makeLinkDiv(
+                    'html', 'HTML', fileName
+                ));
+            },
+
+            stepFinishDateTime: function (stmId, dt) {
+                tat.stm.stDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            stepTimeTaken: function (stmId, tt) {
+                tat.stm.stDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            stepFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    bDiv = stm.bDiv;
+
+                stm.stDiv.a.class.add(result);
+
+                if(result === 'failed') {
+                    do {
+                        bDiv.a.class.add(result);
+                    } while(bDiv = bDiv.parent);
+
+                    stm.fDiv.a.class.add(result);
+                }
+                else {
+                    ++tat.passedSteps;
+                }
+
+                stm.logDiv = stm.bDiv;
+            },
+
+            blockFinishDateTime: function (stmId, dt) {
+                tat.stm.bDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            blockTimeTaken: function (stmId, tt) {
+                tat.stm.bDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            blockFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    bDiv = stm.bDiv;
+
+                bDiv.a.class.add(result);
+
+                if(!bDiv.a.class.has('failed')) {
+                    bDiv.a.class.add('passed');
+                }
+
+                stm.bDiv = bDiv.parent;
+                stm.logDiv = bDiv.parent;
+            },
+
+            scenarioFinishDateTime: function (stmId, dt) {
+                tat.stm.scDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            scenarioTimeTaken: function (stmId, tt) {
+                tat.stm.scDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            scenarioFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    scDiv = stm.scDiv;
+
+                scDiv.a.class.add(result);
+
+                if(!scDiv.a.class.has('failed')) {
+                    scDiv.a.class.add('passed');
+                    ++tat.passedScenarios;
+                }
+
+                stm.logDiv = stm.fDiv;
+            },
+
+            featureFinishDateTime: function (stmId, dt) {
+                tat.stm.fDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            featureTimeTaken: function (stmId, tt) {
+                tat.stm.fDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            featureFinished: function (stmId, result) {
+                var stm = tat.stm,
+                    fDiv = stm.fDiv;
+
+                fDiv.a.class.add(result);
+
+                if(!fDiv.a.class.has('failed')) {
+                    fDiv.a.class.add('passed');
+                    ++tat.passedFeatures;
+                }
+
+                stm.logDiv = stm.pDiv;
+            },
+
+            testingFinished: function () {
+                tat.stm.pDiv.c.push(tat.makeLineDiv(
+                    'log', 'Testing finished'
+                ));
+            },
+
+            processFinishDateTime: function (stmId, dt) {
+                tat.stm.pDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Finished on', dt
+                ));
+            },
+
+            processTimeTaken: function (stmId, tt) {
+                tat.stm.pDiv.c.push(tat.makeFieldDiv(
+                    'log', 'Time taken', tat.duration(tt)
+                ));
+            },
+
+            processFinished: function (stmId, result) {
+                var stm = tat.stm;
+
+                stm.pDiv.a.class.add(result);
+
+                stm.logDiv = tat.stm.div;
+            },
+
+            totalTimeTakenSoFar: function (stmId, tt) {
+                tat.timeTakenSoFar = tt;
+            },
+
+            endDateTime: function (stmId, dt) {
+                $('.endDateTime > .val').text(dt);
+                $('.timeTaken > .val').text(tat.duration(tat.timeTakenSoFar));
+            },
+
+            log: function (stmId, ln) {
+                tat.stm.logDiv.c.push(
+                    tat.makeLineDiv('log literal', ln)
+                );
+            }
+        });
+    </script>
+
+    <script>
+        'use strict';
+
+        var xhr = $.get('report.txt'),
+
+            lnRe = /^(.*)\n/gm,
+            lnReRes;
+
+        console.time('Total time');
+
+        console.log('Downloading...');
+        console.time('Download time');
+
+        xhr.done(function (data) {
+            console.timeEnd('Download time');
+
+            console.log('Parsing...');
+            console.time('Parse time');
+
+            while(lnReRes = lnRe.exec(data)) {
+                tat.logParser.parseLine(lnReRes[1]);
+            }
+
+            console.timeEnd('Parse time');
+
+            console.log('Rendering...');
+            console.time('Render time');
+
+            $('.totalFeatures > .val').text(tat.featureCount);
+            $('.totalScenarios > .val').text(tat.scenarioCount);
+            $('.totalSteps > .val').text(tat.stepCount);
+
+            $('.totalFeaturesPassed > .val').text(tat.passedFeatures);
+            $('.totalScenariosPassed > .val').text(tat.passedScenarios);
+            $('.totalStepsPassed > .val').text(tat.passedSteps);
+
+            $('.totalFeaturesFailed > .val').text(
+                tat.featureCount - tat.passedFeatures
+            );
+
+            $('.totalScenariosFailed > .val').text(
+                tat.scenarioCount - tat.passedScenarios
+            );
+
+            $('.totalStepsFailed > .val').text(
+                tat.stepCount - tat.passedSteps
+            );
+
+            $body.append($(tat.streams.reduce(function (html, stm) {
+                return html + tat.renderEl(stm.div);
+            }, '')));
+
+            $('#filter').keyup();
+
+            $('.status > .val').text('Ready');
+
+            console.timeEnd('Render time');
+
+            console.timeEnd('Total time');
+        });
+
+        xhr.fail(function () {
+            console.error('Failed to load report.txt.');
+
+            $('.status > .val').text('Download failed');
+        });
+    </script>
+</body>

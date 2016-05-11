@@ -3,9 +3,11 @@
 var fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
-exports.beforeFeature = [
-    [steps.login.itLogin],
-];
+exports.id = 'fabb5807-8264-4053-8797-26d451fb2e0c';
+
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.commonFeatureTags = ['royaltyProcessing', 'dataUtilities', 'sanity', 'royaltyUtilitiesSanity'];
 

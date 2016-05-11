@@ -11,15 +11,17 @@ var leftPad = require('left-pad'),
     bind = fnutils.bind,
     using = fnutils.using;
 
+exports.id = '9816ee88-8ecc-41fe-8014-30f21b2142c8';
+
 exports.commonFeatureTags = [
     'worksSanity',
     'works',
     'sanity'
 ];
 
-exports.beforeFeature = [
-        [steps.login.itLogin],
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.feature = [
     {
@@ -96,7 +98,8 @@ exports.feature = [
             'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
 
             [steps.newWork.goToNewWorkPage],
@@ -165,7 +168,8 @@ exports.feature = [
             [steps.newWork.validateSaveWorkRedirection],
 
             [steps.work.findCurrentlyOpenWorkId],
-        ],
+            ]);
+        }
     },
     {
         name: 'Validate created work data',
@@ -180,7 +184,8 @@ exports.feature = [
             'specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.'
         ),
 
-        steps: [
+        steps: () => {
+            executeLegacyStepsArray([
             [steps.base.useEntityDataSlot, ['work', 'mainWork']],
 
             [steps.work.goToWorkPage],
@@ -243,7 +248,8 @@ exports.feature = [
                     })
                 );
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Create 2 basic works to use as components',
@@ -263,7 +269,8 @@ exports.feature = [
             'worksSanitySearchForWorksByCreatorPresentationName',
             'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
         ],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [function () {
                 _.times(2, function (i) {
                     steps.base.useBlankEntityDataSlot('work', 'component' + i);
@@ -284,7 +291,8 @@ exports.feature = [
                     steps.work.findCurrentlyOpenWorkId();
                 });
             }],
-        ],
+            ]);
+        }
     },
     {
         name: 'Create a Composite of Samples',
@@ -342,7 +350,8 @@ exports.feature = [
             'worksSanityValidateCos',
             'worksSanityValidateCompositeWorks',
         ],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [steps.base.useEntityDataSlot, ['work', 'cosWork']],
 
             [steps.work.goToWorkPage],
@@ -353,7 +362,8 @@ exports.feature = [
             [steps.work.validateCompositeWorkType],
             [steps.work.validateComponentWorkName, [0]],
             [steps.work.validateComponentWorkAllocation, [0]],
-        ],
+            ]);
+        }
     },
     {
         name: 'Create a Medley',

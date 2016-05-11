@@ -1,16 +1,17 @@
 'use strict';
 
-var steps_path = _tf_config._system_.path_to_steps,
-    fnutils = require('../../../../helpers/fnutils'),
+let fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using,
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
+exports.id = '91708765-ad67-4d7c-881d-b5d599a07145';
+
 exports.commonFeatureTags = ['albums', 'smoke', 'albumsSmoke'],
 
-exports.beforeFeature = [
-    [steps.login.itLogin],
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 exports.feature = [
     {

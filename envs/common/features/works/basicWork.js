@@ -4,6 +4,8 @@ var random = require('../../../../helpers/random'),
     moment = require('moment'),
     randomString = random.string.makeMemoizedGenerator();
 
+exports.id = 'df605209-e2fd-4111-b0f1-b60ba3cbbc5a';
+
 exports.commonFeatureTags = [
     'basicWork',
     'regression',

@@ -1,8 +1,10 @@
 'use strict';
 
-exports.beforeFeature = [
-    [steps.login.itLogin]
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
+
+exports.id = '7e426da9-ca9e-447a-84d6-f41821664f2a';
 
 exports.commonFeatureTags = ['works', 'smoke', 'searchForWampsWorks'];
 
@@ -10,7 +12,8 @@ exports.feature = [
     {
         name: 'Search for WAMPS works by full work ID',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [steps.mainHeader.search.selectEntityType, ['Works']],
             [steps.work.selectWorkSearchFilterTag, [0, 'Work ID']],
 
@@ -33,12 +36,14 @@ exports.feature = [
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BLUE SAILS UPON A SILVER SEA"]],
-        ]
+            ]);
+        }
     },
     {
         name: 'Search for WAMPS works by song code',
         tags: [],
-        steps: [
+        steps: function () {
+            executeLegacyStepsArray([
             [steps.mainHeader.search.selectEntityType, ['Works']],
             [steps.work.selectWorkSearchFilterTag, [0, 'Work ID']],
 
@@ -61,6 +66,7 @@ exports.feature = [
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BLUE SAILS UPON A SILVER SEA"]],
-        ]
+            ]);
+        }
     }
 ];

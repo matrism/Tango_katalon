@@ -1,7 +1,14 @@
 'use strict';
-var configer = global.ftf.configer,
+
+let jobRunnerConfig = require('./jobRunnerConfig'),
+
+    configer = global.ftf.configer,
     cli = configer.getParamsFromCli(),
     tags = (function () {
+        if(cli.tags === true) {
+            cli.tags = '';
+        }
+
         var tags = (cli.tags || '').toString().split(',');
         var negatedTags = (cli['@tags'] || '').toString().split(',');
 
@@ -15,9 +22,16 @@ var configer = global.ftf.configer,
 
         return tags;
     })(),
-    env = {
-        ENV_TYPE: cli.env || configer.getEnvVarByKey('ENV_TYPE') || 'qa'
-    };
+
+    env = cli.env || configer.getEnvVarByKey('ENV_TYPE');
+
+if(!env || env === true) {
+    env = 'qa';
+}
+
+if(cli['app-url'] === true) {
+    delete cli['app-url'];
+}
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
@@ -33,6 +47,7 @@ var defaultUserName = 'TangoTest1',
                 width: 1400,
                 height: 1024
             },
+            streamId: cli['stream'] || 1,
             //protractor Zapi related
             projectId: cli.projectId,
             tcn: cli.tcn,
@@ -41,6 +56,7 @@ var defaultUserName = 'TangoTest1',
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'all',
             singleReport: cli['single-report'],
             noUnicode: cli['no-unicode'],
+            htmlReportPath: jobRunnerConfig.htmlReportPath,
             path_to_features: [],
             path_to_steps: [],
             path_to_pages: [],
@@ -51,6 +67,7 @@ var defaultUserName = 'TangoTest1',
             buildNumber: cli.build,
             branch: cli.branch,
             commitHash: cli.commit,
+            feat: cli.feat,
             tags: tags,
             bugLabel: cli['bug-label'],
             dontSkipBroken: cli['dont-skip-broken'],
@@ -58,10 +75,11 @@ var defaultUserName = 'TangoTest1',
             noUpload: cli['no-upload'],
             orphanOnError: cli['orphan-on-error'],
             demoReporter: cli['demo-reporter'],
+            cycle: cli['cycle'],
             stepByStep: cli['step-by-step'],
             fingerprints: cli.fingerprints
         },
-        _env_: env,
+        _env_: { ENV_TYPE: env },
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
@@ -101,14 +119,16 @@ var defaultUserName = 'TangoTest1',
         }
     };
 
-config._system_.env = {
-    name: env.ENV_TYPE,
-    url: config[env.ENV_TYPE].urls.app_url,
-    cr_url: config[env.ENV_TYPE].urls.cr_url,
-    royalties_url: config[env.ENV_TYPE].urls.royalties_url
-};
+if(!config[env]) {
+    throw new Error('Unknown environment: ' + env);
+}
 
-config._system_.noReport = cli['no-report'];
+config._system_.env = {
+    name: env,
+    url: config[env].urls.app_url,
+    cr_url: config[env].urls.cr_url,
+    royalties_url: config[env].urls.royalties_url
+};
 
 config = configer.process(config);
 

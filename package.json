@@ -14,6 +14,7 @@
     "angular"
   ],
   "dependencies": {
+    "array.prototype.includes": "^1.0.0",
     "async": "0.8.0",
     "brace-expansion": "^1.1.2",
     "change-case": "^2.3.0",
@@ -47,6 +48,7 @@
     "request": "^2.65.0",
     "string.prototype.includes": "^1.0.0",
     "tmp": "0.0.27",
+    "tree-kill": "^1.0.0",
     "underscore": "1.6.0",
     "yamljs": "^0.2.4"
   },

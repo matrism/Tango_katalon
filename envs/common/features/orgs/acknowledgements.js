@@ -2,6 +2,8 @@
 
 var using = fnutils.using;
 
+exports.id = '1d88bbff-0515-40bc-8cac-5222ae31d444';
+
 exports.commonFeatureTags = [
     'acknowledgementsSanity',
     'acknowledgements',

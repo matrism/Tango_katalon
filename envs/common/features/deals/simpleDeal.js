@@ -1,5 +1,8 @@
 'use strict';
 
+exports.id = '149c3c0f-0a00-40e3-9566-e2d2852bcb1b';
+exports.featureName = 'Create Simple Deal';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };

@@ -2,6 +2,8 @@
 
 var using = fnutils.using;
 
+exports.id = 'a06c49ca-3a36-440e-9029-4e045e6fbbef';
+
 exports.commonFeatureTags = [
     'royaltyRatesRegression',
     'royaltyRates',

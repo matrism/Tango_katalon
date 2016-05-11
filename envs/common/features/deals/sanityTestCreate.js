@@ -1,5 +1,8 @@
 'use strict';
 
+exports.id = '95e22fda-9a16-455f-af64-1b1bfab00a79';
+exports.featureName = 'Create Deal Sanity';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };

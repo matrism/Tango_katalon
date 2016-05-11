@@ -5,11 +5,14 @@ var random = require('../../../../helpers/random'),
     fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using;
 
+exports.id = '810c445d-6aea-4b7d-8840-1ad9f741587a';
+exports.featureName = 'Person Sanity';
+
 exports.commonFeatureTags = ['person', 'sanity', 'personSanity', 'dataUtilities'],
 
-exports.beforeFeature = [
-    [steps.login.itLogin]
-];
+exports.beforeFeature = () => {
+    steps.login.itLogin();
+};
 
 var stagingPerson = (systemConfig.tags.indexOf('stagingPerson') !== -1);
 

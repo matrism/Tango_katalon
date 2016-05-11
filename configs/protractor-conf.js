@@ -11,25 +11,14 @@ var path = require('path'),
     mkdirp = require ('mkdirp'),
     moment = require('moment'),
     now = moment().format('YYYY-MM-DD HH-mm-ss'),
-    stepCountReporter = require('../tools/stepCountReporter'),
-    HtmlReporter = requireCustom('protractor-jasmine2-screenshot-reporter'),
-    JSONReporter = requireCustom('jasmine-json-test-reporter'),
     fs = require('fs'),
     screenShotPath,
     tmp = require('tmp'),
     config,
-    SSReporter_instance,
-    enhanceHtmlReport = require('../tools/enhanceHtmlReport'),
-    SnapbackReporter = require('../tools/enhanceHtmlReport/SnapbackReporter'),
     orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     demoReporter = require('../tools/demoReporter'),
-    stepByStepReporter = require('../tools/stepByStepReporter'),
-    reporterFilePath,
-    reporterFileName = 'reporter.htm',
-    Zapi = require('./zapi'),
-    projectId,
-    flow,
-    testCycleCliName;
+    zapiReporter = require('../reporter/zapiReporter'),
+    stepByStepReporter = require('../tools/stepByStepReporter');
 
 global.ftf = require('factory-testing-framework');
 global._tf_config = require('./config');
@@ -40,25 +29,6 @@ global.hash = {};
 hash.testVariables = {};
 
 global.systemConfig = global._tf_config._system_;
-
-if (!systemConfig.noReport) {
-    screenShotPath = path.join(__dirname, '../reports/html/');
-
-    if(systemConfig.singleReport) {
-        screenShotPath = path.join(screenShotPath, 'single/');
-    } else {
-        screenShotPath = path.join(screenShotPath, now);
-    }
-
-    reporterFilePath = screenShotPath + '/' + reporterFileName;
-
-    //mkdirp(screenShotPath);
-
-    SSReporter_instance = new HtmlReporter({
-        dest: screenShotPath + '/',
-        filename: reporterFileName,
-    });
-}
 
 systemConfig.downloadsDirectoryPath = tmp.dirSync().name;
 
@@ -96,7 +66,6 @@ config = {
             testFiles = require('./files.js'),
             matchers,
             browserWait,
-            SpecReporter = require('jasmine-spec-reporter'),
             jasmineReporters,
             asciiPrefixes,
             failFast = require('jasmine-fail-fast'),
@@ -132,16 +101,6 @@ config = {
 
         // set path to features in config
         systemConfig.path_to_features = testFiles.load().features;
-
-        projectId = systemConfig.projectId;
-        flow = 2;
-        /*flow = systemConfig.flow;*/
-        testCycleCliName = systemConfig.tcn;
-
-        if (projectId) {
-            Zapi.projectId = projectId;
-            Zapi.setProjectId(projectId);
-        }
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
@@ -191,21 +150,6 @@ config = {
             }, timeout);
         };
 
-        jasmine.getEnv().addReporter(stepCountReporter);
-
-        asciiPrefixes = {
-            success: '[Pass] ',
-            failure: '[Fail] ',
-            pending: '[Pending] ',
-        };
-
-        jasmine.getEnv().addReporter(new SpecReporter({
-            displayStacktrace: 'specs',
-            displayFailuresSummary: false,
-            displaySpecDuration: true,
-            prefixes: systemConfig.noUnicode? asciiPrefixes : null,
-        }));
-
         if (systemConfig.demoReporter) {
             jasmine.getEnv().addReporter(demoReporter);
         }
@@ -221,20 +165,14 @@ config = {
             }));
         }
 
-        if (SSReporter_instance && (reporting === 'html' || reporting === 'all')) {
-            jasmine.getEnv().addReporter(SSReporter_instance);
+        jasmine.getEnv().addReporter(require('../reporter/shellReporter'));
 
-            jasmine.getEnv().addReporter(new SnapbackReporter({
-                dest: screenShotPath
-            }));
-        }
-
-        if (!systemConfig.noReport) {
-            jasmine.getEnv().addReporter(new JSONReporter({
-                file: path.join(screenShotPath, 'jasmine-test-results.json'),
-                beautify: true,
-                indentationLevel: 4 // used if beautify === true
-            }));
+        if (parseInt(systemConfig.cycle)) {
+            jasmine.getEnv().addReporter(zapiReporter);
+            zapiReporter.init({
+                cycleId: systemConfig.cycle,
+                debug: false
+            });
         }
 
         if(systemConfig.orphanOnError) {
@@ -291,79 +229,20 @@ config = {
                 );
             };
         }
-
-        if(!systemConfig.dontSkipBroken) {
-            glob.sync(__dirname + '/../features/*.js').forEach(
-                function(featureModulePath) {
-                    var featureModule = require(featureModulePath),
-                        feature;
-
-                    if(featureModule.commonFeatureTags.indexOf('broken') !== -1) {
-                        delete featureModule.beforeFeature;
-
-                        feature = featureModule.feature[0];
-                        featureModule.feature = [feature];
-
-                        feature.name = 'Broken feature test';
-
-                        feature.steps = makeBrokenTestSteps(
-                            featureModule.breakageDescription
-                        );
-
-                        return;
-                    }
-
-                    featureModule.feature.forEach(function(feature) {
-                        if(feature.tags.indexOf('broken') === -1) {
-                            return;
-                        }
-
-                        feature.steps = makeBrokenTestSteps(
-                            feature.breakageDescription
-                        );
-                    });
-                }
-            );
-        }
     },
     onCleanUp: function(statusCode) {
-        /*if (typeof process.env.__using_grunt === 'undefined' && SSReporter_instance) {
-            try {
-                //SSReporter_instance.compileReport();
-            } catch(e) {
-                //console.error('Error on compileReport: ', e.stack);
-            }
-        }*/
-
-        if(!systemConfig.noReport) {
-            enhanceHtmlReport(reporterFilePath, {
-                startDate: now,
-                env: systemConfig.env,
-                buildNumber: systemConfig.buildNumber,
-                branch: systemConfig.branch,
-                commit: {
-                    hash: systemConfig.commitHash,
-                    shortHash: systemConfig.commitHash ? systemConfig.commitHash.slice(0, 7) : ''
-                },
-                includedTagsString: systemConfig.tags.join(', '),
-                excludedTagsString: systemConfig.tags.negated.join(', ')
-            });
-
-
-            var deferred = protractor.promise.defer();
-
-            if (testCycleCliName) {
-                deferred = Zapi.onCleanUp(testCycleCliName, flow, screenShotPath);
-            } else {
-                deferred.fulfill();
-            }
-
-        }
-
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
 
-        return deferred;
+        if (parseInt(systemConfig.cycle)) {
+            var deferred = protractor.promise.defer();
+
+            zapiReporter.deferred.promise.then(() => {
+                deferred.fulfill();
+            });
+
+            return deferred;
+        }
     },
     framework: 'jasmine2',
     jasmineNodeOpts: {

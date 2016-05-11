@@ -3,6 +3,9 @@
 var using = fnutils.using,
     data = requireFromEnvFolder('features/orgs/data/CrRegistration.js');
 
+exports.id = '283a2f02-cadd-44f1-8541-371c2762fbcc';
+exports.featureName = 'Copyright Registration Sanity';
+
 exports.commonFeatureTags = [
     'crRegistrationSanity',
     'crRegistration',
