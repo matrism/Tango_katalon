@@ -44,13 +44,14 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1360,
+                width: 1400,
                 height: 1024
             },
             streamId: cli['stream'] || 1,
             //protractor Zapi related
             projectId: cli.projectId,
             tcn: cli.tcn,
+            dealId: cli.dealId,
             flow: cli.flow,
             reporting: cli.reporting in ['html', 'xml', 'all'] ? cli.reporting : 'all',
             singleReport: cli['single-report'],
@@ -59,6 +60,7 @@ var defaultUserName = 'TangoTest1',
             path_to_features: [],
             path_to_steps: [],
             path_to_pages: [],
+            interactiveMode: cli.interactive || cli.i,
             wait_timeout: cli.timeout || 60000,
             show_skipped_tests: false,
             screenshot_only_on_fail: false,
@@ -68,16 +70,6 @@ var defaultUserName = 'TangoTest1',
             feat: cli.feat,
             tags: tags,
             bugLabel: cli['bug-label'],
-            legacyOverrides: {
-                stagingPerson: {
-                    newPerson: 'newPersonStaging',
-                    person: 'personStaging',
-                },
-                stagingOrganisation: {
-                    newOrganisation: 'newOrganisationStaging',
-                    organisation: 'organisationStaging',
-                },
-            },
             dontSkipBroken: cli['dont-skip-broken'],
             failFast: cli['fail-fast'],
             noUpload: cli['no-upload'],
@@ -93,12 +85,11 @@ var defaultUserName = 'TangoTest1',
                 app_url: (
                     cli['app-url'] || 'http://tango.tango.qa.wmg.com'
                 ),
-                service_url: (
-                    cli['service-url'] || cli['app-url'] ||
-                    'http://tango.tango.qa.wmg.com'
-                ),
                 cr_url: (
                     cli['cr-url'] || 'http://tancrsrv.tango.qa.wmg.com:80'
+                ),
+                royalties_url: (
+                    cli['royalties-url'] || 'http://tanroysrv.tango.qa.wmg.com:80'
                 )
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
@@ -107,11 +98,7 @@ var defaultUserName = 'TangoTest1',
         staging: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
-                app_url: cli['app-url'] || 'http://musicpublishing.staging.wmg.com',
-                service_url: (
-                    cli['service-url'] || cli['app-url'] ||
-                    'http://musicpublishing.staging.wmg.com'
-                ),
+                app_url: cli['app-url'] || 'http://tango.internal.staging.wmg.com',
                 cr_url: (
                     cli['cr-url'] ||
                     'http://tancrsrv.internal.staging.wmg.com:80'
@@ -124,7 +111,6 @@ var defaultUserName = 'TangoTest1',
             urls: {
                 sso: cli['sso-url'] || configer.getEnvVarByKey('URL_SSO'),
                 app_url: cli['app-url'],
-                service_url: cli['service-url'] || cli['app-url'],
                 cr_url: cli['cr-url']
             },
             user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
@@ -139,7 +125,8 @@ if(!config[env]) {
 config._system_.env = {
     name: env,
     url: config[env].urls.app_url,
-    cr_url: config[env].urls.cr_url
+    cr_url: config[env].urls.cr_url,
+    royalties_url: config[env].urls.royalties_url
 };
 
 config = configer.process(config);

@@ -48,6 +48,7 @@ pageStep([
     'Enter income type mapping internal type search terms',
     'Select income type mapping internal type search result by index',
     'Make Org Payee',
+    'Set payee account name',
     'Expect Payee Account Name to be if present',
     'Make Org Statement Recipient',
     'Set statement recipient data',
@@ -58,3 +59,25 @@ pageStep([
     'Save organisation',
     'Validate save redirection'
 ]);
+
+exports.createOrganistation = data => {
+    var newOrg = this;
+
+    describe('Create new organisation', () => {
+        steps.mainHeader.createNewRecord('Organisation');
+
+        newOrg.populateName(data.name);
+        newOrg.selectOrgType(data.type);
+        newOrg.selectTerritoryOfOperation(data.territory_of_operation);
+        newOrg.selectPublisherType(data.publisher_type);
+
+        if (data.payee) {
+            newOrg.makeOrgPayee();
+            if (data.payee.account_name) {
+                newOrg.expectPayeeAccountNameToBeIfPresent(data.name);
+            }
+        }
+
+        newOrg.saveOrganisation();
+    });
+}

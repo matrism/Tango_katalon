@@ -693,8 +693,11 @@ if (pages.royaltyRates === undefined) {
 
             val = val.trim();
 
-            if (val) {
+            if (val || val === '') {
                 el.clear();
+            }
+
+            if (val && val !== '') {
                 el.sendKeys(val);
                 browser.driver.sleep(2000);
             }
@@ -770,18 +773,14 @@ if (pages.royaltyRates === undefined) {
             pages.base.scrollIntoView(RRDoneButton);
             RRDoneButton.click();
             browser.waitForAngular();
-
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
-            //browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
-            //pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.delete()']")));
-            //browser.actions().mouseMove(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
-            pages.base.scrollIntoView((element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
-            //browser.actions().click(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))).perform();
-            browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.delete()']")).click();
-            browser.waitForAngular();
-            //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
         },
 
+        clickConfirmDeleteButtonForRRSet: function () {
+            pages.base.scrollIntoView((element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
+            browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.delete()']")).click();
+            browser.waitForAngular();
+        },
 
         clickDoneButtonForRRSet: function () {
 

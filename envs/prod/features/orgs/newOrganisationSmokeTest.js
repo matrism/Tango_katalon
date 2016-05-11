@@ -21,7 +21,7 @@ exports.feature = [
         steps: function () {
             steps.mainHeader.createNewRecord('Organisation');
 
-            using(steps.newOrganisationStaging, function() {
+            using(steps.newOrganisation, function() {
                 this.populateName('Org smoke test');
                 this.selectTerritoryOfOperation('United States');
                 this.selectOrgType('Publisher');

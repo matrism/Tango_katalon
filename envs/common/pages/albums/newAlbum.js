@@ -76,6 +76,16 @@ exports.cancelArtistSearch = function() {
     return pages.base.hitEscape();
 };
 
+exports.durationInput = function () {
+    return element(by.model('time'));
+};
+
+exports.enterDuration = function(value) {
+    var element = exports.durationInput();
+    pages.base.scrollIntoView(element);
+    return element.sendKeys(value);
+};
+
 exports.libraryDropdown = function() {
     return element(by.model('dataHolder.newAlbum.library'));
 };
@@ -101,156 +111,6 @@ exports.enterAlbumCode = function(value) {
     return element.sendKeys(value);
 };
 
-exports.trackContainers = function() {
-    return element.all(by.repeater('track in dataHolder.tracks'));
-};
-
-exports.recordingSearchTermsTypeahead = function(i) {
-    return exports.trackContainers().get(i).$('.create-album__track-recording');
-};
-
-exports.recordingSearchTypeDropdown = function(i) {
-    return exports.recordingSearchTermsTypeahead(i).$(
-        '.tg-typeahead__tag-filter'
-    );
-};
-
-exports.selectRecordingSearchType = function(i, value) {
-    var element = exports.recordingSearchTypeDropdown(i);
-    pages.base.scrollIntoView(element);
-    return pages.base.selectDropdownOption(element, value);
-};
-
-exports.recordingSearchTermsInput = function(i) {
-    return exports.recordingSearchTermsTypeahead(i).element(by.model('$term'));
-};
-
-exports.enterRecordingSearchTerms = function(i, value) {
-    var element = exports.recordingSearchTermsInput(i);
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-};
-
-exports.recordingSearchResultsContainer = function() {
-    var el = $('.tg-typeahead__suggestions');
-    browser.wait(ExpectedConditions.visibilityOf(el));
-    browser.sleep(50);
-    return el;
-};
-
-exports.createEnteredRecordingOption = function() {
-    return exports.recordingSearchResultsContainer().element(
-        by.cssContainingText('span', 'Create New Recording')
-    );
-};
-
-exports.expectNewRecordingOptionToBeVisible = function() {
-    var element = exports.createEnteredRecordingOption();
-    pages.base.scrollIntoView(element);
-    expect(element.isDisplayed()).toBeTruthy();
-};
-
-exports.createEnteredRecording = function() {
-    var element = exports.createEnteredRecordingOption();
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
-
-exports.cancelRecordingSearch = function() {
-    return pages.base.hitEscape();
-};
-
-exports.recordingWorkSearchTermsTypeahead = function(i) {
-    return (
-        exports.trackContainers().get(i)
-            .element(by.model('track.recording.work_id'))
-    );
-};
-
-exports.recordingWorkSearchTermsInput = function(i) {
-    return exports.recordingWorkSearchTermsTypeahead(i).element(by.model('$term'));
-};
-
-exports.enterRecordingWorkSearchTerms = function(i, value) {
-    var element = exports.recordingWorkSearchTermsInput(i);
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-};
-
-exports.recordingWorkSearchResultsContainer = function() {
-    var el = $('.tg-typeahead__suggestions');
-    browser.wait(ExpectedConditions.visibilityOf(el));
-    browser.sleep(50);
-    return el;
-};
-
-exports.recordingWorkSearchResults = function() {
-    return exports.recordingWorkSearchResultsContainer().$$(
-        '.tg-typeahead__suggestions-group-item'
-    );
-};
-
-exports.selectRecordingWorkSearchResultByIndex = function(i) {
-    var element = exports.recordingWorkSearchResults().get(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
-
-exports.recordingArtistSearchTermsTypeahead = function(i) {
-    return (
-        exports.trackContainers().get(i)
-            .element(by.model('track.recording.model.artist_id'))
-    );
-};
-
-exports.recordingArtistSearchTermsInput = function(i) {
-    return exports.recordingArtistSearchTermsTypeahead(i).element(by.model('$term'));
-};
-
-exports.enterRecordingArtistSearchTerms = function(i, value) {
-    var element = exports.recordingArtistSearchTermsInput(i);
-    pages.base.scrollIntoView(element);
-    element.clear();
-    return element.sendKeys(value);
-};
-
-exports.recordingArtistSearchResultsContainer = function() {
-    var el = $('.tg-typeahead__suggestions');
-    browser.wait(ExpectedConditions.visibilityOf(el));
-    browser.sleep(50);
-    return el;
-};
-
-exports.recordingArtistSearchResults = function() {
-    return exports.recordingArtistSearchResultsContainer().$$(
-        '.tg-typeahead__suggestions-group-item'
-    );
-};
-
-exports.selectRecordingArtistSearchResultByIndex = function(i) {
-    var element = exports.recordingArtistSearchResults().get(i);
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
-
-exports.recordingLibraryNameBinding = function(i) {
-    return exports.trackContainers().get(i).element(by.binding(
-        ' dataHolder.newAlbum.library.libraryName '
-    ));
-};
-
-exports.recordingLibraryName = function(i) {
-    var element = exports.recordingLibraryNameBinding(i);
-    pages.base.scrollIntoView(element);
-    return pph.trim(element.getText());
-};
-
-exports.validateRecordingLibraryName = function(i, value) {
-    expect(exports.recordingLibraryName(i)).toBe(value);
-};
-
 exports.tabSetContainer = function() {
     return $('.nav-tabs');
 };
@@ -267,168 +127,6 @@ exports.goToTab = function(value) {
     return element.click();
 };
 
-exports.releaseDetails = (function() {
-    var exports = {};
-
-    exports.rows = function() {
-        return element.all(by.repeater('albumRelease in dataHolder.albumReleases'));
-    };
-
-    exports.territoriesSelector = function(i) {
-        return exports.rows().get(i).element(by.model(
-            'albumRelease.territory_code'
-        ));
-    };
-
-    exports.territoriesSelectorGlobeButton = function(i) {
-        return exports.territoriesSelector(i).$('.tg-territory__globe-button');
-    };
-
-    exports.waitForTerritoriesSelectorToBeReady = function(i) {
-        var element = exports.territoriesSelectorGlobeButton(i);
-
-        pages.base.scrollIntoView(element);
-
-        return browser.wait(function() {
-            return pph.matchesCssSelector(
-                element, ':not(.tg-territory__loading-button)'
-            );
-        });
-    };
-
-    exports.editTerritories = function(i) {
-        var element = exports.territoriesSelector(i);
-        pages.base.scrollIntoView(element);
-        return element.click();
-    };
-
-    exports.territorySearchTermsInput = function(i) {
-        return exports.territoriesSelector(i).element(by.model('$term'));
-    };
-
-    exports.enterTerritorySearchTerms = function(i, value) {
-        var element = exports.territorySearchTermsInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-
-    exports.territorySearchResults = function() {
-        var elements = $$('.tg-typeahead__suggestions-group-item');
-        browser.wait(ExpectedConditions.visibilityOfAny(elements));
-        return elements;
-    };
-
-    exports.selectTerritorySearchResultByIndex = function(i) {
-        var element = exports.territorySearchResults().get(i);
-        pages.base.scrollIntoView(element);
-        return element.click();
-    };
-
-    exports.releaseDateInput = function(i) {
-        return exports.rows().get(i).element(by.model('date'));
-    };
-
-    exports.enterReleaseDate = function(i, value) {
-        var element = exports.releaseDateInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-
-    exports.configurationDropdown = function(i) {
-        return exports.rows().get(i).element(by.model(
-            'albumRelease.configuration'
-        ));
-    };
-
-    exports.selectConfiguration = function(i, value) {
-        var element = exports.configurationDropdown(i);
-
-        pages.base.scrollIntoView(element);
-
-        return pages.base.selectDropdownOption(element, value, {
-            dropdownType: 'tg',
-        });
-    };
-
-    exports.labelTypeahead = function(i) {
-        return exports.rows().get(i).element(by.model(
-            'albumRelease.label'
-        ));
-    };
-
-    exports.labelSearchTermsInput = function(i) {
-        return exports.labelTypeahead(i).element(by.model('$term'));
-    };
-
-    exports.enterLabelSearchTerms = function(i, value) {
-        var element = exports.labelSearchTermsInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-
-    exports.labelSearchResultsContainer = function() {
-        var element = $('.tg-typeahead__suggestions');
-        browser.wait(ExpectedConditions.visibilityOf(element));
-        return element;
-    };
-
-    exports.createEnteredLabelOption = function() {
-        return exports.labelSearchResultsContainer().element(by.cssContainingText(
-            'a', 'Create New Label'
-        ));
-    };
-
-    exports.createEnteredLabel = function() {
-        var element = exports.createEnteredLabelOption();
-        pages.base.scrollIntoView(element);
-        return element.click();
-    };
-
-    exports.labelSearchResults = function() {
-        var elements = $$('.tg-typeahead__suggestions-group-item');
-        browser.wait(ExpectedConditions.visibilityOfAny(elements));
-        return elements;
-    };
-
-    exports.selectLabelSearchResultByIndex = function(i) {
-        var element = exports.labelSearchResults().get(i);
-        pages.base.scrollIntoView(element);
-        return element.click();
-    };
-
-    exports.catalogueNumberInput = function(i) {
-        return exports.rows().get(i).element(by.model(
-            'albumRelease.catalog_number'
-        ));
-    };
-
-    exports.enterCatalogueNumber = function(i, value) {
-        var element = exports.catalogueNumberInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-
-    exports.licenseCodeInput = function(i) {
-        return exports.rows().get(i).element(by.model(
-            'albumRelease.license_code'
-        ));
-    };
-
-    exports.enterLicenseCode = function(i, value) {
-        var element = exports.licenseCodeInput(i);
-        pages.base.scrollIntoView(element);
-        element.clear();
-        return element.sendKeys(value);
-    };
-
-    return exports;
-})();
-
-
 exports.saveButton = function() {
     return $('.page-footer').element(by.cssContainingText('button', 'Create'));
 };
@@ -437,6 +135,13 @@ exports.enabledSaveButton = function() {
     var element = exports.saveButton();
     expect(pph.matchesCssSelector(element, ':not(.disabled)')).toBeTruthy();
     return element;
+};
+
+exports.validateSaveButtonState = function (expected) {
+    var element = exports.saveButton();
+    expect(pph.matchesCssSelector(element, '.disabled')).toBe(
+        expected == 'disabled' ? true : false
+    );
 };
 
 exports.save = function() {
@@ -461,3 +166,23 @@ exports.albumUuid = function() {
         return reResults[1];
     });
 };
+
+exports.recordings = (function() {
+    var exports = {};
+
+    exports.libraryNameBinding = function(i) {
+        return $$('.create-album__new-recording-library').get(i);
+    };
+
+    exports.libraryName = function(i) {
+        var element = exports.libraryNameBinding(i);
+        pages.base.scrollIntoView(element);
+        return pph.trim(element.getText());
+    };
+
+    exports.validateLibraryName = function(i, value) {
+        expect(exports.libraryName(i)).toBe(value);
+    };
+
+    return exports;
+})();

@@ -7,6 +7,7 @@ if (pages.createDealAdvances === undefined) {
     pages.createDealAdvances = new ftf.pageObject({
         locators: {
             addFirstAdvanceLink: {css: "a[data-ng-click='addAdvanceFromCreate(true, false)']"},
+            yesSuspendedButton: {css: "button[name='advanceSuspended']"},
             advanceDetailsAmount: {css: "input[data-ng-model='activeAdvance.amount']"},
             advanceDetailsCurrencyArrow: {css: "div[data-validation-class='advanceCurrency'] button.btn.dropdown-toggle"},
             advanceDetailsDistributionRulesCurrencyArrow: {css: "div[data-validation-class='advancePaymentDistributionCurrency'] button.btn.dropdown-toggle"},
@@ -70,12 +71,29 @@ if (pages.createDealAdvances === undefined) {
             aaeCollapseIconWarningUnsavedData: {css: "div[data-ng-form='aaeForm'] div.pull-left.controls i"},
             modalBodyCancelAdvance: {css: "div.modal-body p[data-ng-show='data.shouldResetAAE']"},
             noModalBodyCancelAdvance: {css: "div.modal-footer button[data-ng-click='cancel()']"},
-            cancelThisAdvanceButton: {css: "button[data-ng-click='$external.DA.showCancelAdvanceModal()']"}
+            cancelThisAdvanceButton: {css: "button[data-ng-click='$external.DA.showCancelAdvanceModal()']"},
+            addAnotherAdvanceButton: {css: "button[data-ng-click='$external.DA.addAdvanceFromCreate(false, isInvalidWizard(), false)']"},
+            numberOfUnitsSales:{css: "input[name='advancePaymentConditionUnits']"}
         },
 
         clickOnTheAddFirstAdvanceLink: function () {
             pages.createDealAdvances.elems.addFirstAdvanceLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealAdvances.elems.advanceDetailsAmount));
+        },
+
+        clickOnTheAddAnotherAdvanceButton: function () {
+            pages.base.scrollIntoView(pages.createDealAdvances.elems.addAnotherAdvanceButton);
+            pages.createDealAdvances.elems.addAnotherAdvanceButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealAdvances.elems.advanceDetailsAmount));
+        },
+
+        selectTheSpecificContractPeriodAdvanceDetailsByIndex: function (index) {
+            pages.base.scrollIntoView(element(by.css("select[name='advanceContractPeriod']")));
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("select[name='advanceContractPeriod'] option"))));
+            browser.driver.findElements(By.css("select[name='advanceContractPeriod'] option"))
+                .then(function (options) {
+                    options[index].click();
+                })
         },
 
         selectTheRandomContractPeriodAdvanceDetails: function () {
@@ -92,6 +110,10 @@ if (pages.createDealAdvances === undefined) {
             pages.createDealAdvances.elems.advanceDetailsAmount.sendKeys(number);
         },
 
+        fillIntoTheAmountAdvanceDetailsSpecificValue: function (amount) {
+            pages.createDealAdvances.elems.advanceDetailsAmount.sendKeys(amount);
+        },
+
         selectTheRandomCurrencyAdvanceDetails: function () {
             pages.createDealAdvances.elems.advanceDetailsCurrencyArrow.click();
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-validation-class='advanceCurrency'] ul.dropdown-menu.advance-currency-dropdown li.ng-scope"))));
@@ -102,6 +124,35 @@ if (pages.createDealAdvances === undefined) {
                     element.click();
                 })
         },
+
+        clickOnTheYesToSuspendedAdvanceButton: function(){
+            pages.base.scrollIntoView(pages.createDealAdvances.elems.yesSuspendedButton);
+            pages.createDealAdvances.elems.yesSuspendedButton.click();
+        },
+
+        selectTheSpecificCurrencyAdvanceDetails: function (currency) {
+            var desiredOption;
+            pages.createDealAdvances.elems.advanceDetailsCurrencyArrow.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-validation-class='advanceCurrency'] ul.dropdown-menu.advance-currency-dropdown li.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-validation-class='advanceCurrency'] ul.dropdown-menu.advance-currency-dropdown li.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(currency) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
 
         selectThePaymentStructureAdvanceDetails: function (specific_value) {
             var desiredOption;
@@ -143,6 +194,15 @@ if (pages.createDealAdvances === undefined) {
                         desiredOption.click();
                     }
                 });
+        },
+
+        fillIntoThePercentDistributionRulesAdvanceDetailsNumberISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(" + i + ") input[data-ng-model='apd.percent']"));
+            element.sendKeys(percent);
+        },
+
+        fillIntoTheNumberOfUnitsSalesOptionAdvanceDetailsSpecificValue: function (units) {
+            pages.createDealAdvances.elems.numberOfUnitsSales.sendKeys(units);
         },
 
         fillIntoThePercentDistributionRulesAdvanceDetailsNumberI: function (i) {

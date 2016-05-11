@@ -525,8 +525,18 @@ exports.editCancelDeleteEndRules = function () {
     it("Edit cancel delete end rules modal dialog ", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editCancelDeleteEndRulesModalDialog));
         pages.editDealContractPeriod.elems.editCancelDeleteEndRulesModalDialog.click();
+        pages.editDealContractPeriod.waitForAjax();
     });
 };
+
+exports.editConfirmDeleteEndRules = function () {
+    it("Edit confirm delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog));
+        pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
+        pages.editDealContractPeriod.waitForAjax();
+    });
+};
+
 
 exports.editDeleteTheRuleEndRulesNumberI = function (i) {
     it("Edit delete the entire rule number " + i + " from end rules form ", function () {

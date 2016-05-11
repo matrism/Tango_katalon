@@ -17,6 +17,12 @@ exports.selectRandomScopeRtpAcquisition = function () {
     });
 };
 
+exports.selectRandomScopeRtpAcquisitionNumberI = function (i) {
+    it("Select the random scope rtp acquisition number " + i, function () {
+        pages.createDealRtp.selectTheRandomScopeRtpAcquisitionNumberI(i);
+    });
+};
+
 exports.selectSpecificScopeNumberIRtpAcquisition = function (i) {
     it("Select the specific  scope rtp acquisition " + i, function () {
         pages.createDealRtp.selectTheSpecificScopeNumberIRtpAcquisition(i);
@@ -26,6 +32,12 @@ exports.selectSpecificScopeNumberIRtpAcquisition = function (i) {
 exports.fillIntoAcquisitionEndDateField = function () {
     it("Fill into acquisition end date field ", function () {
         pages.createDealRtp.fillIntoTheAcquisitionEndDateField();
+    });
+};
+
+exports.fillIntoAcquisitionStartDateField = function (date) {
+    it("Fill into acquisition start date field (" + date + ")", function () {
+        pages.createDealRtp.fillIntoTheAcquisitionStartDateField(date);
     });
 };
 
@@ -84,7 +96,7 @@ exports.selectSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ = funct
 };
 
 exports.fillIntoDurationPostTermPeriodNumberJFromRetentionNumberI = function (i, j) {
-    it("Fill into description post term period number i from retention j", function () {
+    it('Fill into duration post term period number i from retention j', function () {
         pages.createDealRtp.fillIntoTheDurationPostTermPeriodNumberJFromRetentionNumberI(i, j);
     });
 };

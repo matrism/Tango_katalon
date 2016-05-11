@@ -6,6 +6,7 @@ var using = fnutils.using,
 exports.commonFeatureTags = [
     'crRegistrationSanity',
     'crRegistration',
+    'copyrightRegistration',
     'cr',
     'orgs',
     'sanity'

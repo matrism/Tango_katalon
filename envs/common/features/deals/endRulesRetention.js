@@ -4,12 +4,12 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 },
 
-exports.commonFeatureTags = [
-    'deals', 
-    'endRules', 
-    'endRulesRetention',
-    'regression'
-];
+    exports.commonFeatureTags = [
+        'deals',
+        'endRules',
+        'endRulesRetention',
+        'regression'
+    ];
 
 exports.feature = [
     {
@@ -97,8 +97,8 @@ exports.feature = [
             er.checkTextRuleWhenOrAndEndRulesRuleNumberI(3, 'AND');
 
             er.checkDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(1, 1);
-            er.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 1);
-            er.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 1);
+            er.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            er.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
             er.clickOnConfirmDeleteEndRuleCondition();
 
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, 'Balance Repaid');
@@ -151,9 +151,9 @@ exports.feature = [
             er.saveEndRulesForm();
 
             cdr.addEndRules();
-            er.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            er.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
             er.cancelDeleteEndRules();
-            er.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            er.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
             er.clickOnConfirmDeleteEndRuleCondition();
 
             er.clickOnAddRuleInTheBottomOfEndRulesForm();
@@ -307,9 +307,9 @@ exports.feature = [
             er.fillIntoAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, '2014-12-08');
             er.clickOnEndRulesArea();
             er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Balance Repaid at 30% is on 2014-12-08, and Balance Repaid at 32% is before the Recouped Date, and Recouped at 30% (with notice) is after the Retention Period Minimum, then the Actual End Date is the Retention Period Start offset by 21 days.');
-            er.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 1);
+            er.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
             er.clickOnConfirmDeleteEndRuleCondition();
-            er.deleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            er.deleteEndRulesConditionNumberIRowNumberJ(1, 2);
             er.clickOnConfirmDeleteEndRuleCondition();
             er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Balance Repaid at 32% is before the Recouped Date, then the Actual End Date is the Retention Period Start offset by 21 days.');
 
@@ -331,7 +331,7 @@ exports.feature = [
 
             // save end rules
             er.saveEndRulesForm();
-            
+
             cdr.hoverEndRules();
             cdr.validateSummaryEndRule(1, 'If Balance Repaid at 45% (with notice) is after the Recouped Date, then the Actual End Date is the Repayment Date.');
             cdr.validateSummaryEndRule(2, 'If Balance Repaid at 32% is before the Recouped Date, then the Actual End Date is the Retention Period Start offset by 21 days.');
@@ -340,5 +340,6 @@ exports.feature = [
             d.waitForDealToBeSaved();
             d.returnDealNumber();
         }
-    },
+    }
+
 ];

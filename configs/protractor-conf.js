@@ -53,7 +53,11 @@ config = {
             }
         }
     },
-    specs: ['init.js'],
+
+    specs: [
+        !systemConfig.interactiveMode ? 'init.js' : 'interactive.js'
+    ],
+
     onPrepare: function() {
         console.time('Tests time');
         var reporting = systemConfig.reporting,
@@ -95,12 +99,7 @@ config = {
         //jasmine.getEnv().addReporter(beforeReporter);
 
         // set path to features in config
-        systemConfig.path_to_features = testFiles.features;
-
-        // require all pages and steps files
-        testFiles.pages.concat(testFiles.steps).forEach(function (filePath) {
-            require(filePath);
-        });
+        systemConfig.path_to_features = testFiles.load().features;
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 

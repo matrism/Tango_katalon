@@ -32,6 +32,7 @@ exports.feature = [
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.editRoyaltyRates.cancelTheRateSet();
+            steps.editRoyaltyRates.confirmCancelTheRateSet();
             steps.royaltyRates.saveRateSet();
             //verify RR saved ok
             steps.royaltyRates.verifyRateSetSavedData();
@@ -40,6 +41,7 @@ exports.feature = [
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.editRoyaltyRates.deleteTheRateSet();
+            steps.editRoyaltyRates.confirmDeleteTheRateSet();
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -82,6 +84,7 @@ exports.feature = [
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.editRoyaltyRates.cancelTheRateSet();
+            steps.editRoyaltyRates.confirmCancelTheRateSet();
             steps.royaltyRates.saveRateSet();
             //verify RR saved ok
             steps.royaltyRates.verifyRateSetSavedData();
@@ -90,6 +93,7 @@ exports.feature = [
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.editRoyaltyRates.deleteTheRateSet();
+            steps.editRoyaltyRates.confirmDeleteTheRateSet();
         }
     },
 
@@ -130,10 +134,10 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetailsDirtyCheck();
             steps.editRoyaltyRates.cancelToTheModalDialog();
             //click on cancel button
-            steps.editRoyaltyRates.clickOnCancelButtonRateSet();
+            steps.editRoyaltyRates.cancelTheRateSet();
             steps.editRoyaltyRates.cancelToTheModalDialog();
             //click on delete button
-            steps.editRoyaltyRates.clickOnDeleteButtonToRateSet();
+            steps.editRoyaltyRates.deleteTheRateSet();
             steps.editRoyaltyRates.cancelToTheModalDialog();
 
             //save the rate set in edit mode

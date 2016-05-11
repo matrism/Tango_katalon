@@ -245,6 +245,16 @@ exports.checkFinderDealsHeaderTitlePresent = function () {
     });
 };
 
+exports.checkGrowlMessageDisplayedAfterScopeEdited = function (message) {
+    it("Check that the success message after saving in the top of the screen is ok ", function () {
+        browser.driver.findElement(By.css("div.growl-item.ng-scope.growl-item-success p")).getText().then(function (promise) {
+            console.log("The success message after saving in the top of the screen is " + promise);
+            expect(promise).toEqual(message);
+        });
+    });
+};
+//div.growl-item.ng-scope.growl-item-success
+
 addBasicStep(
     exports, pages.deal, 'Validate Society Agreement Numbers link presence'
 );
@@ -265,4 +275,127 @@ addBasicStep(exports, pages.deal, 'Expect number of Contracting Parties to be');
 addBasicStep(exports, pages.deal, 'Expect number of External Contacts to be');
 addBasicStep(exports, pages.deal, 'Expect number of Internal Contacts to be');
 
+exports.createDeal = data => {
+    var newDeal = this;
 
+    describe('Create new deal', () => {
+        steps.mainHeader.createNewRecord('Deal');
+
+        steps.createDealGeneral.selectSigningTerritory(data.deal_signing_territory);
+        steps.createDealGeneral.fillCompanyCodeField(data.company_code);
+        steps.createDealGeneral.selectSpecificCompanyCode(data.company_code);
+        steps.createDealGeneral.enterContractingPartySearchTerms(data.contracting_parties);
+        steps.createDealGeneral.waitForContractingPartyDropDown();
+        steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
+        exports.itContinueToNextPage();
+
+        if (data.contract_periods) {
+            describe('Contract periods', () => {
+                _.each(data.contract_periods, (cp, i) => {
+                    if (i > 0) {
+                        steps.createDealContractPeriod.addNewContractPeriod();
+                    } else {
+                        steps.createDealContractPeriod.enterActualStartDate(cp.start);
+                    }
+
+                    steps.createDealContractPeriod.enterTargetEndDateInMonths(cp.end);
+
+                    describe('Scopes', () => {
+                        _.each(cp.scopes, (scp, j) => {
+                            steps.createDealScope.addSpecificScopeTypeAndTerritory(scp.contract_type, scp.territory);
+
+                            if (scp.publisher_share_sets) {
+                                describe('Publisher Share Sets', () => {
+                                    steps.createDealScope.clickOnAddPublisherShareSet({scrollIntoView: true});
+
+                                    _.each(scp.publisher_share_sets, (pss, k) => {
+                                        if (k === 0) {
+                                            steps.createDealScope.selectPublisherRole(0, k, pss.role);
+                                        }
+
+                                        steps.createDealScope.enterPublisherSearchTerms(0, k, pss.name);
+                                        steps.createDealScope.selectPublisherSearchResultByIndex(0);
+
+                                        if (pss.own) {
+                                            steps.createDealScope.enterOwnPublisherShare(0, k, pss.own);
+                                        }
+
+                                        if (pss.collect) {
+                                            steps.createDealScope.enterCollectPublisherShare(0, k, pss.collect);
+                                        }
+                                    });
+
+                                    steps.createDealScope.saveSharePublisherShareSet();
+                                });
+                            }
+
+                            if (scp.royalty_rate_sets) {
+                                describe('Royalty Rates', () => {
+                                    steps.royaltyRates.addNewRoyaltySet();
+
+                                    _.each(scp.royalty_rate_sets, (rr, k) => {
+                                        steps.royaltyRates.enterEffectiveStartDateForLastRateSet(rr.effective_start_date);
+
+                                        if (rr.application_method === 'At Source') {
+                                            steps.royaltyRates.clickAtSourceApplicationMethod();
+                                        } else if (rr.application_method === 'On Receipt') {
+                                            steps.royaltyRates.clickOnReceiptApplicationMethod();
+                                        }
+                                        steps.royaltyRates.confirmChangingRateApplicationMethod();
+
+                                        steps.royaltyRates.addRatePercentageToContractualField(rr.contractual_rate);
+                                        steps.royaltyRates.addNPSToContractualField(rr.NPS);
+                                    });
+
+                                    steps.royaltyRates.saveRateSet();
+                                    steps.base.sleep(10000);
+                                });
+                            }
+                        });
+                    });
+
+                });
+            });
+
+            steps.deal.goToNextPage();
+
+            describe('Right Term Periods', () => {
+                if (data.rtp_contract_periods === 'all') {
+                    steps.createDealRtp.selectRtpAllContractPeriods();
+                } else if (data.rtp_contract_periods) {
+                    //TBI
+                }
+
+                steps.createDealRtp.selectSpecificScopeNumberIRtpAcquisition(1);
+                steps.createDealRtp.fillIntoAcquisitionStartDateField('2013-09-18');
+                steps.deal.goToNextPage();
+            });
+
+            describe('Payees', () => {
+                //steps.createDealPayee.selectPayeeOrganisationFromDropDown(data.payee.name);
+                steps.createDealPayee.selectPayeeOrganisationFromDropdown(data.payee.name);
+                steps.createDealPayee.fillPayeeInfo('Payout 1', 100, 100);
+            });
+            steps.deal.waitContinueButtonEnabled();
+            steps.deal.goToNextPage();
+
+            steps.deal.waitContinueButtonEnabled();
+            steps.deal.goToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.storeDealIdInTestVariable('lastCreatedDealId');
+        }
+    });
+};
+
+
+addStep(exports, 'Store Deal ID in test variable', function (varName) {
+
+    var binding = 'getPristineDeal().deal_header.contract_brief_number',
+        idBinding = element(by.binding(binding));
+
+    browser.wait(EC.visibilityOf(idBinding));
+
+    idBinding.getText().then(function (value) {
+        hash.testVariables[varName] = value;
+    });
+});

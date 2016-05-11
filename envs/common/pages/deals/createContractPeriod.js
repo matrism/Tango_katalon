@@ -163,7 +163,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnAddMdrcLink: function () {
-            pages.createDealContractPeriod.elems.addMdrcLink.click();
+            var el = pages.createDealContractPeriod.elems.addMdrcLink;
+            asAlways(el, 'scrollIntoView', 'click');
             browser.sleep(1000);
         },
 
@@ -409,9 +410,9 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption,
-                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.left_value"]');
-            asAlways(el, 'scrollIntoView', 'click');
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.left_value'] div.tg-dropdown-button")).click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -584,10 +585,10 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         selectTheRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
-            var desiredOption,
-                el = $('[data-ng-form="ruleForm"]:nth-child(' + i + ') [data-ng-form="conditionForm"]:nth-child(' + (j + 2) + ') [data-ng-model="condition.right_value"]');
-            asAlways(el, 'scrollIntoView', 'click');
-            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.right_value'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -626,12 +627,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
-            var deleteButton = $("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"),
-                confirmButton = pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog;
+            var deleteButton = $("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i");
             asAlways(deleteButton, 'scrollIntoView', 'click');
-            browser.wait(ExpectedConditions.visibilityOf(confirmButton));
-            confirmButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
         },
 
         clickOnConfirmDeleteEndRuleCondition: function () {

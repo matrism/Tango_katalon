@@ -163,3 +163,103 @@ exports.filters = (function(){
 
     return filters;
 })();
+
+exports.viewIncomeLinesLink = function () {
+    return $('.view-income-lines-link');
+};
+
+exports.viewDetailsForIncomeLines = function () {
+    var link = exports.viewIncomeLinesLink();
+
+    link.click();
+    pages.base.waitForAjax();
+};
+
+exports.incomeWorks = (function(){
+    var incomeWorks = {};
+
+    incomeWorks.works = function () {
+        var works = $$('.incomeWorksHolder .accordion-group');
+
+        return works;
+    };
+
+    incomeWorks.workById = function(workId) {
+        var works = incomeWorks.works(),
+            binding = '::incomeWork.source_work_id',
+            idBinding;
+
+        browser.wait(EC.visibilityOfAny(works));
+        works = works.filter(function(elem){
+            return elem.element(by.binding(binding)).getText().then(function(text){
+                console.log(text, workId);
+                return text === workId;
+            });
+        });
+
+        return works.first();
+    };
+
+    incomeWorks.openWorkById = function (id) {
+        var work = incomeWorks.workById(id);
+        work.$('.suspense-title > p:first-child > a').click();
+    };
+
+    incomeWorks.workSearchTypeahead = function () {
+        return typeahead(by.model('incomeWork.selectedTangoWork'), false, true);
+    };
+
+    incomeWorks.searchForWork = function (val, filterType) {
+        var typeahead = incomeWorks.workSearchTypeahead();
+
+        if (filterType) {
+            typeahead.setFilter('Work ID');
+        }
+
+        typeahead.selectFirst(val);
+    };
+
+    incomeWorks.matchButton = function () {
+        return element(by.cssContainingText('.selected-work .btn-primary', 'Match'));
+    };
+
+    incomeWorks.matchWork = function (val, filterType) {
+        var matchButton = incomeWorks.matchButton();
+        incomeWorks.searchForWork(val, filterType);
+
+        matchButton.click();
+        pages.base.waitForAjax();
+    };
+
+    incomeWorks.tabs = function () {
+        return $$('.edi-matched .nav-tabs > li > a');
+    };
+
+    incomeWorks.goToTab = function (name) {
+        var tabs = incomeWorks.tabs();
+
+        tabs.filter(function(tab){
+            return tab.$('span > span:not(.muted)').getText().then(function(text){
+                return text.split(' (')[0] === name;
+            });
+        }).first().click();
+    };
+
+    incomeWorks.workTotalAmount = function () {
+        var elem = element(by.binding('getTotalAmount() | tgNumeric:{decimals:4}'));
+
+        browser.wait(EC.visibilityOf(elem));
+
+        return elem;
+    };
+
+    incomeWorks.expectWorkTotalAmountToBe = function (val) {
+        incomeWorks.workTotalAmount().getText().then(function(total){
+            total = Number(total);
+
+            expect(total).toEqual(Number(val)+1);
+        });
+    };
+
+    return incomeWorks;
+})();

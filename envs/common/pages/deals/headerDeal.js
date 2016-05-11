@@ -86,7 +86,9 @@ if (pages.headerDeal === undefined) {
         },
 
         checkTheStatusValue: function (value) {
-            pages.headerDeal.elems.dealStatusValue.getText().
+            var el = pages.headerDeal.elems.dealStatusValue;
+            pages.base.scrollIntoView(el);
+            el.getText().
             then(function (promise) {
                 console.log("Status value is  : " + promise);
                 expect(promise).toEqual(value);
