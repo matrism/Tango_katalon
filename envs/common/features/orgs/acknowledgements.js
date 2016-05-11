@@ -7,6 +7,8 @@ exports.id = '1d88bbff-0515-40bc-8cac-5222ae31d444';
 exports.commonFeatureTags = [
     'acknowledgementsSanity',
     'acknowledgements',
+    'copyrightRegistration',
+    'orgs',
     'cr',
     'sanity'
 ];
@@ -18,13 +20,13 @@ exports.beforeFeature = function() {
 var data = {
     org: 'BMI',
     sftp: {
-        address: 'sftp.wmg.com',
+        address: '10.194.1.212',
         port: '22',
-        username: 'ddharman',
-        password: 'welcome1'
+        username: 'Tango_Test',
+        password: 'St@rwar1$'
     },
     ftp: {
-        address: '54.88.249.193',
+        address: '10.194.1.212',
         port: '21',
         username: 'Tango_Test',
         password: 'St@rwar1$'

@@ -300,6 +300,7 @@ exports.feature = [
 
             steps.editDealRtp.editRtpRetentionArea();
             steps.editDealRtp.editDeleteRtpRetentionFromAcquisitionForm();
+            steps.editDealRtp.editConfirmDeleteRtpRetentionFromAcquisitionForm();
 
             steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
             steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(1, "Conditional Duration");

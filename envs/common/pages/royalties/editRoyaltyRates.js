@@ -42,18 +42,12 @@ if (pages.editRoyaltyRates === undefined) {
             pages.base.scrollIntoView(RRCancelButton);
             RRCancelButton.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+        },
+
+        clickConfirmCancelButtonForRRSet: function () {
             var elem = element(by.css("div.modal-footer button[data-ng-click='ok()']"));
             pages.base.scrollIntoView(elem);
             elem.click();
-        },
-
-        clickCancelButtonForRRSetWithoutConfirm: function () {
-            var RRCancelButton;
-            RRCancelButton = element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"));
-
-            pages.base.scrollIntoView(RRCancelButton);
-            RRCancelButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
         },
 
         clickDeleteButtonForRRSet: function () {
@@ -63,12 +57,14 @@ if (pages.editRoyaltyRates === undefined) {
             pages.base.scrollIntoView(RRDeleteButton);
             RRDeleteButton.click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
-            var elem = element(by.css("div.modal-footer button[data-ng-click='data.delete()']"));
-            pages.base.scrollIntoView(elem);
-            elem.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("a[data-ng-click='CR.onAddContractualRateSet(activeScope, true)']"))));
         },
 
+        clickConfirmDeleteButtonForRRSet: function () {
+            var elem = element(by.css('div.modal-footer button[data-ng-click="data.delete()"]'));
+            pages.base.scrollIntoView(elem);
+            elem.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css('a[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'))));
+        },
 
         clickDeleteButtonForRRSetWithoutConfirm: function () {
             var RRDeleteButton;
@@ -80,7 +76,7 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         openRRButton: function () {
-            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) a i.icon.icon-chevron-down"));
+            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) .rate-set-chevron"));
             //return $(".icon-chevron-down");
         },
 

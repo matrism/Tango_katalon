@@ -117,15 +117,15 @@ exports.feature = [
             deal.addSocietyAgreementNumbersToPssChain(0);
 
             describe('Check Creator-to-Publisher society inputs', function () {
-                dsanCtp.enterSocietySearchTerms(0, 0, 'COPYRIGHTHUB');
-                dsanCtp.selectSocietySearchResultByName('COPYRIGHTHUB');
+                dsanCtp.enterSocietySearchTerms(0, 0, 'ICE');
+                dsanCtp.selectSocietySearchResultByName('ICE');
 
                 dsanCtp.deleteSocietyAgreementNumber(0, 0);
             });
 
             describe('Check Creator-to-Publisher society inputs', function () {
-                dsanPub.enterSocietySearchTerms(0, 'COPYRIGHTHUB');
-                dsanPub.selectSocietySearchResultByName('COPYRIGHTHUB');
+                dsanPub.enterSocietySearchTerms(0, 'ICE');
+                dsanPub.selectSocietySearchResultByName('ICE');
             });
         }
     }

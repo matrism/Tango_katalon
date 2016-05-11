@@ -6,7 +6,17 @@ var random = require('../../../../helpers/random'),
 
 exports.id = 'df605209-e2fd-4111-b0f1-b60ba3cbbc5a';
 
-exports.commonFeatureTags = ['basicWork', 'regression', 'works'];
+exports.commonFeatureTags = [
+    'basicWork',
+    'regression',
+    'works',
+    'broken'
+];
+
+exports.breakageDescription = (
+    'Timeout - Async callback was not invoked within timeout ' +
+    'specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.'
+);
 
 var data = {
     workId: 'WW 015006249 00',

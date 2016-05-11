@@ -9,6 +9,7 @@ exports.featureName = 'Copyright Registration Sanity';
 exports.commonFeatureTags = [
     'crRegistrationSanity',
     'crRegistration',
+    'copyrightRegistration',
     'cr',
     'orgs',
     'sanity'

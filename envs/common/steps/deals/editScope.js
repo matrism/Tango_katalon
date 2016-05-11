@@ -1,7 +1,6 @@
 "use strict";
 
-var promise = protractor.promise;
-var ExpectedConditions = protractor.ExpectedConditions;
+var page = pages.editDealScope;
 
 steps.editDealScope = exports;
 
@@ -100,13 +99,12 @@ exports.checkScopeNumberINameAndNotRates = function (i) {
 exports.validateShareScopesPopupDetailsContractPeriod1 = function () {
     it("Validate share scopes pop up details contract period 1 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 2");
-                expect(promise).toContain("Description 3");
-                expect(promise).toContain("Description 4");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 2");
+            expect(promise).toContain("Description 3");
+            expect(promise).toContain("Description 4");
+        });
     });
 };
 
@@ -114,13 +112,12 @@ exports.validateShareScopesPopupDetailsContractPeriod2 = function () {
     it("Validate share scopes pop up details contract period 2 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
 
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 1");
-                expect(promise).toContain("Description 3");
-                expect(promise).toContain("Description 4");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 1");
+            expect(promise).toContain("Description 3");
+            expect(promise).toContain("Description 4");
+        });
     });
 };
 
@@ -128,13 +125,12 @@ exports.validateShareScopesPopupDetailsContractPeriod3 = function () {
     it("Validate share scopes pop up details contract period 3 ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
 
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 1");
-                expect(promise).toContain("Description 2");
-                expect(promise).toContain("Description 4");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 1");
+            expect(promise).toContain("Description 2");
+            expect(promise).toContain("Description 4");
+        });
     });
 };
 
@@ -142,13 +138,12 @@ exports.validateShareScopesPopupDetailsContractPeriod4 = function () {
     it("Validate share scopes pop up details contract period i ", function () {
         pages.editDealScope.clickOnShareIconOnScope();
 
-        pages.editDealScope.elems.shareScopesDetailsPopup.getText().
-            then(function (promise) {
-                console.log("Shares scopes details popup contract periods: " + promise);
-                expect(promise).toContain("Description 1");
-                expect(promise).toContain("Description 2");
-                expect(promise).toContain("Description 3");
-            });
+        pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
+            console.log("Shares scopes details popup contract periods: " + promise);
+            expect(promise).toContain("Description 1");
+            expect(promise).toContain("Description 2");
+            expect(promise).toContain("Description 3");
+        });
     });
 };
 
@@ -371,23 +366,21 @@ exports.editCopySpecificNumberOfScopesFromScopeNumberI = function (i, number) {
 exports.checkTheNumberOfScopesPerDeal = function (i) {
     it("Check that the number of scopes per deal it is equal with " + i, function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.numberOfScopesPerDeal));
-        pages.editDealScope.elems.numberOfScopesPerDeal.getText().
-            then(function (promise) {
-                console.log("Number of scopes per deal is  : " + promise);
-                expect(promise).toEqual(i);
-            });
+        pages.editDealScope.elems.numberOfScopesPerDeal.getText().then(function (promise) {
+            console.log("Number of scopes per deal is  : " + promise);
+            expect(promise).toEqual(i);
+        });
     });
 };
 
 exports.checkPayeesPresentInCopyScopeModal = function () {
     it("Check payees text present in copy scope modal ", function () {
         pages.base.scrollIntoView(pages.editDealScope.elems.payeesCopyScopeModal);
-        pages.editDealScope.elems.payeesCopyScopeModal.getText().
-            then(function (promise) {
-                console.log("Payees text in copy scope modal is  : " + promise);
-                expect(promise).toContain("Payees");
-                expect(promise).toContain("Will be copied");
-            });
+        pages.editDealScope.elems.payeesCopyScopeModal.getText().then(function (promise) {
+            console.log("Payees text in copy scope modal is  : " + promise);
+            expect(promise).toContain("Payees");
+            expect(promise).toContain("Will be copied");
+        });
     });
 };
 
@@ -460,22 +453,20 @@ exports.editCopySpecificNumberOfScopesFromScopeNumberIWithoutSharePss = function
 exports.checkSharePublisherShareSetIconPresent = function () {
     it("Check no share publisher share set icon present ", function () {
         pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
-        pages.editDealScope.elems.publisherSharesTitle.getText().
-            then(function (promise) {
-                console.log("Unshare text is : " + promise);
-                expect(promise).toContain("Unshare");
-            });
+        pages.editDealScope.elems.publisherSharesTitle.getText().then(function (promise) {
+            console.log("Unshare text is : " + promise);
+            expect(promise).toContain("Unshare");
+        });
     });
 };
 
 exports.checkNoSharePublisherShareSetIconPresent = function () {
     it("Check no share publisher share set icon present ", function () {
         pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesTitle);
-        pages.editDealScope.elems.publisherSharesTitle.getText().
-            then(function (promise) {
-                console.log("Publisher share title text is : " + promise);
-                expect(promise).not.toContain("Unshare");
-            });
+        pages.editDealScope.elems.publisherSharesTitle.getText().then(function (promise) {
+            console.log("Publisher share title text is : " + promise);
+            expect(promise).not.toContain("Unshare");
+        });
     });
 };
 
@@ -490,8 +481,10 @@ exports.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () 
                         console.log("We are on the E case");
                         pages.editDealScope.editInFirstPublisherNameField("test");
                         pages.editDealScope.editSelectRandomPublisherNameDropDown();
-                        pages.editDealScope.editInFirstPublisherNameOwnPercent();
-                        pages.editDealScope.editInFirstPublisherNameCollectPercent();
+                        //pages.editDealScope.editInFirstPublisherNameOwnPercent();
+                        //pages.editDealScope.editInFirstPublisherNameCollectPercent();
+                        pages.editDealScope.editInFirstPublisherNameOwnPercentSpecificValue("30");
+                        pages.editDealScope.editInFirstPublisherNameCollectPercentSpecificValue("20");
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -532,6 +525,12 @@ exports.editSelectSpecificPublisherNameDropDownChainI = function (i) {
 exports.editIntoPublisherNameAMCollectFieldChainI = function (i) {
     it("Edit - fill into publisher name AM collect chain i percent random value", function () {
         pages.editDealScope.editPublisherNameAMCollectPercentChainI(i);
+    });
+};
+
+exports.editIntoPublisherNameAMCollectFieldChainISpecificValue = function (i, percent) {
+    it("Edit - fill into publisher name AM collect chain i percent specific value", function () {
+        pages.editDealScope.editPublisherNameAMCollectPercentChainISpecificValue(i, percent);
     });
 };
 
@@ -583,8 +582,10 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
                         console.log("We are on the E case");
                         pages.editDealScope.editPublisherNameFieldChainI(i);
                         pages.editDealScope.editSelectRandomPublisherNameDropDownChainI(i);
-                        pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
-                        pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
+                        //pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
+                        pages.editDealScope.editPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
+                        pages.editDealScope.editPublisherNameCollectPercentFieldChainISpecificValue(i, "25");
+                        //pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
                         break;
                     case "PA":
                         console.log("We are on the PA case");
@@ -619,12 +620,32 @@ exports.editClickOnYesSocietyAwardCreditPublisherShareSet = function () {
     });
 };
 
+exports.editDeleteExistingTerritoryFromScope = function () {
+    it("Edit delete the existing territory from scope ", function () {
+        pages.editDealScope.editDeleteTheExistingTerritoryFromScope();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editAddTheSpecificTerritoryByTypingToScope = function (territory) {
+    it("Edit add specific territory by typing on scope ", function () {
+        pages.editDealScope.addTheSpecificTerritoryByTypingToScope(territory);
+    });
+};
+
 exports.editSpecificScopeType = function (contractType) {
     it("Add simple scope", function () {
         pages.editDealScope.selectContractTypeScope(contractType);
         pages.editDealScope.waitForAjax();
     });
 };
+
+exports.editSelectSpecificCountry = function (territory) {
+    it("Edit select specific country ", function () {
+        pages.editDealScope.selectSpecificCountry(territory);
+    });
+};
+
 
 exports.editAddSpecificScopeTypeAndTerritory = function (contractType, territory) {
     it("Add simple scope", function () {
@@ -661,11 +682,10 @@ exports.editCheckUnshareScopeLinkIsDisabled = function () {
     it("Edit check unshare link is disabled on share scope", function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
-        pages.editDealScope.elems.editUnshareScopeLink.getAttribute("class").
-            then(function (promise) {
-                console.log("Unshare scope link class is : " + promise);
-                expect(promise).toContain("disabled");
-            });
+        pages.editDealScope.elems.editUnshareScopeLink.getAttribute("class").then(function (promise) {
+            console.log("Unshare scope link class is : " + promise);
+            expect(promise).toContain("disabled");
+        });
     });
 };
 
@@ -673,11 +693,10 @@ exports.editCheckCopyScopeLinkIsDisabled = function () {
     it("Edit check copy link is disabled on share scope", function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
-        pages.editDealScope.elems.editCopyScopeLink.getAttribute("class").
-            then(function (promise) {
-                console.log("Unshare scope link class is : " + promise);
-                expect(promise).toContain("disabled");
-            });
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("class").then(function (promise) {
+            console.log("Unshare scope link class is : " + promise);
+            expect(promise).toContain("disabled");
+        });
     });
 };
 
@@ -686,11 +705,10 @@ exports.editCheckCopyScopeDisabledDataTooltip = function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).perform();
-        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
-            then(function (promise) {
-                console.log("Copy scope disabled tooltip is : " + promise);
-                expect(promise).toEqual("Cannot Copy: Editing in progress.");
-            });
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").then(function (promise) {
+            console.log("Copy scope disabled tooltip is : " + promise);
+            expect(promise).toEqual("Cannot Copy: Editing in progress.");
+        });
     });
 };
 
@@ -708,11 +726,10 @@ exports.editCheckCopyScopeEnabledDataTooltip = function () {
         browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
         browser.actions().mouseMove(pages.editDealScope.elems.editCopyScopeLink).click();
-        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").
-            then(function (promise) {
-                console.log("Copy scope enabled tooltip is : " + promise);
-                expect(promise).toEqual("Copy entirety of this Scope.");
-            });
+        pages.editDealScope.elems.editCopyScopeLink.getAttribute("data-tooltip").then(function (promise) {
+            console.log("Copy scope enabled tooltip is : " + promise);
+            expect(promise).toEqual("Copy entirety of this Scope.");
+        });
     });
 };
 
@@ -943,7 +960,8 @@ exports.itEditPublisherShare = function () {
         steps.editDealScope.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.editDealScope.editIntoFirstPublisherNameAMField("53026414");
         steps.editDealScope.editSelectSpecificPublisherNameDropDown();
-        steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
+        steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("10");
+        //steps.editDealScope.editIntoFirstPublisherNameAMCollectField();
     });
 };
 
@@ -970,7 +988,8 @@ exports.itEditPublisherShareWithMultipleThreeChains = function (i) {
         steps.editDealScope.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI(i);
         steps.editDealScope.editIntoPublisherNameAMFieldChainI(i);
         steps.editDealScope.editSelectSpecificPublisherNameDropDownChainI(i);
-        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
+        steps.editDealScope.editIntoPublisherNameAMCollectFieldChainISpecificValue(i, "10");
+        //steps.editDealScope.editIntoPublisherNameAMCollectFieldChainI(i);
     });
 };
 
@@ -991,12 +1010,6 @@ exports.editClickOnAddNewSocietyAgreementNumberI = function (i) {
     it("Edit click on the add new society agreement number link number " + i, function () {
         pages.editDealScope.editClickOnTheAddNewSocietyAgreementNumberI(i);
         pages.editDealScope.waitForAjax();
-    });
-};
-
-exports.editClickOnAddCreatorSocietyAgreementNumber = function () {
-    it("Edit click on add creator society agreement number ", function () {
-
     });
 };
 
@@ -1035,3 +1048,126 @@ exports.saveChangesSocietyAgreementNumberForm = function () {
 };
 
 
+exports.clickOnWorkLinkFromScopeNumberI = function (i) {
+    it("Click on work link from scope number  " + i, function () {
+        pages.editDealScope.clickOnTheWorkLinkFromScopeNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkWorksCountOnScopeNumberI = function (i, count) {
+    it("Check that the works count on scope number " + i + " is equal to " + count, function () {
+        browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)'] span")).getText().then(function (promise) {
+            console.log("Works count on scope is  : " + promise);
+            expect(promise).toEqual(count);
+        });
+    });
+};
+
+exports.checkSocietyAgreementNumberTextTooltip = function () {
+    it("Check the society agreement number text tooltip ", function () {
+        browser.driver.findElement(By.css("div.modal-header h3 i")).getAttribute("data-tooltip").then(function (promise) {
+            console.log("Society agreement number text tooltip is : " + promise);
+            expect(promise).toEqual("Enter Society Agreement Numbers that correspond to Registration Recipients. These numbers will be included on CWR files.");
+        });
+    });
+};
+
+exports.checkCreatorToPublisherChainSocietyAgreementNumberTextTooltip = function () {
+    it("Check the creator to publisher chain society agreement number text tooltip ", function () {
+        browser.driver.findElement(By.css("div[data-ng-form='agreementNumbersCreatorForm'] h5 i")).getAttribute("data-tooltip").then(function (promise) {
+            console.log("The creator to publisher chain society agreement number text tooltip is : " + promise);
+            expect(promise).toEqual("Enter the unique number assigned by the Society that links Creators to the Publisher Chain (a.k.a. Writer to Original Publisher Agreement Number). This number is included on CWR files when Works by the specified Creators are delivered to this Scope.");
+        });
+    });
+};
+
+exports.checkPublisherChainAgreementNumbersSocietyAgreementNumberTextTooltip = function () {
+    it("Check publisher chain agreement numbers society agreement number text tooltip ", function () {
+        browser.driver.findElement(By.css("div[data-ng-form='societyAgreementsForm'] h5 i")).getAttribute("data-tooltip").then(function (promise) {
+            console.log("Check the publisher chain agreement numbers society agreement number text tooltip is : " + promise);
+            expect(promise).toEqual("Enter the unique number assigned by the Society that links the Publishers within the Chain (a.k.a. Original Publisher to Administrator Agreement Number). This number is included on CWR files when Works are delivered to this Scope.");
+        });
+    });
+};
+
+exports.checkDeleteCreatorSetSocietyAgreementNumberTextTooltip = function () {
+    it("Check the delete creator set society agreement number text tooltip ", function () {
+        browser.driver.findElement(By.css("div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i")).getAttribute("data-tooltip").then(function (promise) {
+            console.log("Delete creator set society agreement number text tooltip is : " + promise);
+            expect(promise).toEqual("Remove Creator set");
+        });
+    });
+};
+
+
+exports.checkDeleteAgreementNumberSocietyAgreementNumberTextTooltip = function () {
+    it("Check the delete agreement number society agreement number text tooltip ", function () {
+        browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(2) a[data-ng-click='data.removeCreatorAgreementNumber(creator, societyAgreementCreator, $index)'] i")).getAttribute("data-tooltip").then(function (promise) {
+            console.log("Delete agreement number society agreement number text tooltip is : " + promise);
+            expect(promise).toEqual("Remove Agreement Number");
+        });
+    });
+};
+
+exports.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip = function () {
+    it("Check the delete publisher chain agreement number society agreement number text tooltip ", function () {
+        browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(1) a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i")).getAttribute("data-tooltip").then(function (promise) {
+            console.log("Delete publisher chain agreement number society agreement number text tooltip is : " + promise);
+            expect(promise).toEqual("Remove Agreement Number");
+        });
+    });
+};
+
+exports.checkAddOrViewSocietyAgreementNumberText = function (title) {
+    it("Check the add or view society agreement number title link ", function () {
+        pages.editDealScope.elems.addSocietyAgreementNumberLink.getText().then(function (promise) {
+            console.log("The add or view society agreement number title link is : " + promise);
+            expect(promise).toEqual(title);
+        });
+    });
+};
+
+exports.deleteCreatorSetSocietyAgreementNumberNumberI = function (i) {
+    it("Delete the creator set society agreement number " + i, function () {
+        pages.editDealScope.deleteTheCreatorSetSocietyAgreementNumberNumberI(i);
+    });
+};
+
+exports.deletePublisherChainSocietyAgreementNumberNumberI = function (i) {
+    it("Delete the publisher chain society agreement number " + i, function () {
+        pages.editDealScope.deleteThePublisherChainSocietyAgreementNumberNumberI(i);
+    });
+};
+
+exports.checkCancelSocietyAgreementNumberButtonLinkIsVisible = function () {
+    it("Check the cancel society agreement number button link is visible", function () {
+        expect(pages.editDealScope.elems.cancelSocietyAgreementNumber.isDisplayed()).toBeTruthy();
+    });
+};
+
+exports.clickOnCancelSocietyAgreementNumberButtonLink = function () {
+    it("Click on cancel button link society agreement number ", function () {
+        pages.editDealScope.clickOnTheCancelSocietyAgreementNumberButtonLink();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.checkSocietyAgreementNumberHeaderTextTooltip = function () {
+    it("Check society agreement number header text title  ", function () {
+       browser.driver.findElement(By.css("div.modal-header h3 div.break-word.overflow.pull-left.ng-binding")).getText().then(function (promise) {
+            console.log("The society agreement number header text title is : " + promise);
+            expect(promise).toContain("LONG");
+        });
+    });
+};
+
+exports.clickOnCreatorSetSocietyAgreementNumberArea = function(){
+    it("Click on the creator set society agreement number area ", function(){
+       pages.editDealScope.clickOnTheCreatorSetSocietyAgreementNumberArea();
+    });
+};
+
+addBasicStep(exports, page, 'Enter creator search terms');
+addBasicStep(exports, page, 'Select creator search result by name');
+addBasicStep(exports, page, 'Validate creators label');

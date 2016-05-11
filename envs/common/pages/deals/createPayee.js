@@ -32,6 +32,11 @@ if (pages.createDealPayee === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(1) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
         },
 
+        selectPayeeOrganisationFromDropdown: function (name) {
+            var elem = typeahead($('.new-payee__typeahead'));
+            elem.select(name);
+        },
+
         selectTheRandomPayeePersonFromDropDown: function () {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
@@ -99,6 +104,14 @@ if (pages.createDealPayee === undefined) {
         cancelThePayeeForm: function () {
             pages.createDealPayee.elems.cancelPayeeFormButton.click();
             pages.createDealPayee.waitForAjax();
+        },
+
+        fillPayeeInfo: function (payout, legalRight, distribution) {
+            var payoutElem = tgDropdown(by.model('DPAY.newPayee.designation'));
+
+            payoutElem.selectValue(payout);
+            element(by.model('DPAY.newPayee.legal_right')).clear().sendKeys(legalRight);
+            element(by.model('DPAY.newPayee.distribution')).clear().sendKeys(distribution);
         },
 
         fillIntoThePayeeLegalRightInputField: function () {

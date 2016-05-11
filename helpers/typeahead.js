@@ -17,7 +17,7 @@ function Typeahead (target, dummy, isAppendedToBody) {
         var results = typeahead.$$(resultSelector);
 
         if (isAppendedToBody) {
-            results = $('body > .tg-typeahead__suggestions-wrap').$$(resultsSelector);
+            results = $('body > .tg-typeahead__suggestions-wrap').$$(resultSelector);
         }
 
         if (text) {
@@ -30,7 +30,6 @@ function Typeahead (target, dummy, isAppendedToBody) {
             if (isExact) {
                 results = results.filter(pph.matchTextExact(text));
             }
-
         }
 
         /*if (text) {
@@ -45,9 +44,21 @@ function Typeahead (target, dummy, isAppendedToBody) {
         return results;
     };
 
+    typeahead.setFilter = function (value) {
+        var tagFilter = typeahead.$('.tg-typeahead__tag-filter');
+
+        tagFilter.click();
+        tagFilter.element(by.cssContainingText('option', value)).click();
+    };
+
     typeahead.select = function (text, isExact) {
         typeahead.sendKeys(text);
         typeahead.results(text, isExact).first().click();
+    };
+
+    typeahead.selectFirst = function(text) {
+        typeahead.sendKeys(text);
+        typeahead.results().first().click();
     };
 
     return typeahead;

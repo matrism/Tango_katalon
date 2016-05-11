@@ -169,7 +169,7 @@ if (pages.createDealScope === undefined) {
             browser.driver.findElements(By.css("div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    var element = options[randomNumber];
+                    var element = options[0];
                     element.click();
                 });
             browser.wait(ExpectedConditions.invisibilityOf(pages.createDealScope.elems.territoryDropDown));
@@ -455,8 +455,8 @@ if (pages.createDealScope === undefined) {
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    pages.base.scrollIntoView(options[randomNumber]);
-                    options[randomNumber].click();
+                    pages.base.scrollIntoView(options[0]);
+                    options[0].click();
                 })
         },
 
@@ -561,7 +561,13 @@ if (pages.createDealScope === undefined) {
         fillPublisherNameFieldChainI: function (i) {
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input[ng-model='$term']"));
             pages.base.scrollIntoView(element);
-            element.sendKeys("test");
+            element.sendKeys("wcm publisher 1");
+        },
+
+        fillPublisherNameFieldChainISpecificValue: function (i, publisherRole) {
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input[ng-model='$term']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(publisherRole);
         },
 
         fillPublisherNameOwnPercentFieldChainI: function (i) {
@@ -572,6 +578,16 @@ if (pages.createDealScope === undefined) {
 
         fillPublisherNameCollectPercentFieldChainI: function (i) {
             var percent = (Math.random() * 9 + 1).toFixed(2);
+            var element = browser.driver.findElement(By.css("#deal-publisher  div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"));
+            element.sendKeys(percent);
+        },
+
+        fillPublisherNameOwnPercentFieldChainISpecificValue: function (i, percent) {
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"));
+            element.sendKeys(percent);
+        },
+
+        fillPublisherNameCollectPercentFieldChainISpecificValue: function (i, percent) {
             var element = browser.driver.findElement(By.css("#deal-publisher  div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"));
             element.sendKeys(percent);
         },
@@ -595,8 +611,8 @@ if (pages.createDealScope === undefined) {
             browser.driver.findElements(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    pages.base.scrollIntoView(options[randomNumber]);
-                    options[randomNumber].click();
+                    pages.base.scrollIntoView(options[0]);
+                    options[0].click();
                 })
         },
 
@@ -629,6 +645,12 @@ if (pages.createDealScope === undefined) {
 
         fillPublisherNameAMCollectPercentChainI: function (i) {
             var percent = (Math.random() * 9 + 1).toFixed(2);
+            var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"));
+            pages.base.scrollIntoView(element);
+            element.sendKeys(percent);
+        },
+
+        fillPublisherNameAMCollectPercentChainISpecificValue: function (i, percent) {
             var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"));
             pages.base.scrollIntoView(element);
             element.sendKeys(percent);

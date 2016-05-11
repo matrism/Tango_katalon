@@ -9,8 +9,8 @@ function modularEdit (target) {
         el = element(target);
     }
 
-    saveButton = el.$('.CONTROLS .btn-primary');
-    cancelButton = el.$('.CONTROLS .btn-cancel');
+    el.saveButton = el.$('.CONTROLS .btn-primary');
+    el.cancelButton = el.$('.CONTROLS .btn-cancel');
 
     function waitForEditModeToBeClosed() {
         browser.wait(function(){
@@ -22,14 +22,14 @@ function modularEdit (target) {
     }
 
     el.save = function () {
-        pages.base.scrollIntoView(saveButton);
-        saveButton.click();
+        pages.base.scrollIntoView(el.saveButton);
+        el.saveButton.click();
         waitForEditModeToBeClosed();
     };
 
     el.cancel = function () {
-        pages.base.scrollIntoView(cancelButton);
-        cancelButton.click();
+        pages.base.scrollIntoView(el.cancelButton);
+        el.cancelButton.click();
         waitForEditModeToBeClosed();
     };
 

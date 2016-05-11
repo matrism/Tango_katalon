@@ -1,24 +1,9 @@
 'use strict';
 
 var using = require('../../../../helpers/fnutils').using,
-    _ = require('lodash'),
-    path = require('path'),
     noUpload = systemConfig.noUpload,
-    YAML = require('yamljs'),
-    fileDefaults,
-    originalTimeout,
-    PROCESSING_TIMEOUT = 60 * 60 * 1000;
-
-function setTestTimeout(time) {
-    beforeEach(function(){
-        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = time;
-    });
-
-    afterEach(function(){
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
-    });
-}
+    _ = require('lodash'),
+    YAML = require('yamljs');
 
 exports.id = '3810742f-a560-4031-bb1a-b083092ff822';
 
@@ -28,129 +13,25 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-fileDefaults = {
-    currency: 'GBP',
-    exchangeRate: '1',
-    distributionPeriod: {
-        start: {
-            year: '2014',
-            month: '02'
-        },
-        end: {
-            year: '2014',
-            month: '02'
-        }
-    }
-};
-
-function goToUploadPage() {
-    steps.mainHeader.goToSubLink('Royalty Processing', 'History of File Upload');
-
-    if (!noUpload){
-        steps.royaltiesHeader.clickLink('Upload Electronic File');
-    }
-}
-
-function fillFormWithFileData(file, fileDefaults, clickCreate, useOriginalName) {
-    if (fileDefaults) {
-        file = _.defaultsDeep(file, fileDefaults);
-    }
-
-    file.fileName = path.resolve(__dirname, file.fileName);
-
-    using(steps.uploadEdiFile, function() {
-        file.expectedAmount = file.expectedAmount || file.amount;
-
-        if (noUpload) {
-            file.name = file.mockedFileName;
-            this.assumeUploadedFile(file.name);
-            this.selectProcessingTerritory(file.processingTerritory);
-
-            return;
-        }
-
-        if (file.customFormat === false) {
-            this.selectWcmCommonFormat();
-        }
-
-        if (file.multipleProviders) {
-            this.checkMultipleIncomeProvidersBox();
-        } else {
-            this.selectIncomeProvider(file.incomeProvider);
-            this.setStatementDistributionPeriodStart(file.distributionPeriod.start.year, file.distributionPeriod.start.month);
-            this.setStatementDistributionPeriodEnd(file.distributionPeriod.end.year, file.distributionPeriod.end.month);
-        }
-
-        this.selectProcessingTerritory(file.processingTerritory);
-        //this.selectProcessingTerritory(file.royaltyPeriod);
-        this.selectFileFormat(file.fileFormat);
-        this.selectFile(file.fileName, useOriginalName);
-
-        this.setExpectedFileAmount(file.expectedAmount);
-        this.setExpectedFileAmountCurrency(file.currency);
-        this.setExchangeRate(file.exchangeRate);
-
-        if (clickCreate !== false) { 
-            this.clickCreateButton();
-        }
-    });
-}
-
-function waitForFileStatusToBe() {
-    steps.uploadEdiFile.waitForFileStatusToBe.apply(null, arguments);
-}
-
-function waitForFileToBeProcessed() {
-    if (noUpload) { return; }
-
-    steps.uploadEdiFile.waitForFileToBeProcessed();
-}
-
 exports.feature = [
     {
         name: 'Upload EDI file - Smoke Test',
         tags: ['uploadEDIFile', 'smokeTest', 'uploadEDIFileSmoke'],
         steps: function() {
             var file = {
-                    "processingTerritory": "Chile",
-                    "incomeProvider": "FABER MUSIC LTD",
-                    "fileFormat": "FABER SALES",
-                    "fileName": "./data/fabersales_tiny_TAT.txt",
-                    "mockedFileName": "TAT501445970278941.edi",
-                    "amount": "2044.9100",
-                    "currency": "GBP",
-                    "summaryByType": {
-                        "Folio Sales": "2,044.9100"
+                    processingTerritory: 'Chile',
+                    incomeProvider: 'FABER MUSIC LTD',
+                    fileFormat: 'FABER SALES',
+                    fileName: './data/fabersales_tiny_TAT.txt',
+                    mockedFileName: 'TAT501445970278941.edi',
+                    amount: '2044.9100',
+                    currency: 'GBP',
+                    summaryByType: {
+                        'Folio Sales': '2,044.9100'
                     }
                 };
 
-            setTestTimeout(PROCESSING_TIMEOUT);
-
-            goToUploadPage();
-            using(steps.uploadEdiFile, function(){
-
-                fillFormWithFileData(file, fileDefaults);
-                this.expectToBeRedirectedToFileUploadHistory();
-                this.expectUploadedFileToBeListed();
-                this.openUploadedFileBlind();
-
-                this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                waitForFileToBeProcessed();
-
-                this.expectFileReadInAmountToBe(file.amount + ' GBP');
-                if (!noUpload) { this.openUploadedFileBlind(); }
-                this.expectFileGrossAmountToBe(file.amount);
-                this.expectFileNetAmountToBe(file.amount);
-
-                this.openFirstGeneratedStatement();
-                steps.base.switchToTab(1);
-                this.expectToBeRedirectedToRoyaltyStatements();
-                this.expectSummaryByTypeToBe('Folio Sales', file.amount);
-                steps.base.closeTabByIndex(1);
-
-                this.rollBackUploadedFile();
-            });
-
+            steps.uploadEdiFile.uploadFile(file);
         },
     },
     {
@@ -168,22 +49,14 @@ exports.feature = [
                 }
             };
 
-            setTestTimeout(PROCESSING_TIMEOUT);
+            //setTestTimeout(PROCESSING_TIMEOUT);
 
             describe('Load a file - Custom Format - OSA', function(){
-                goToUploadPage();
+                steps.uploadEdiFile.goToUploadPage();
                 using(steps.uploadEdiFile, function(){
                     var file = files[0];
 
-                    fillFormWithFileData(file, fileDefaults);
-
-                    this.expectToBeRedirectedToFileUploadHistory();
-
-                    this.expectUploadedFileToBeListed();
-                    this.openUploadedFileBlind();
-
-                    this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                    waitForFileToBeProcessed();
+                    steps.uploadEdiFile.uploadFile(file);
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
                     if (!noUpload) { this.openUploadedFileBlind(); }
@@ -205,20 +78,12 @@ exports.feature = [
 
             describe('Load a file - Custom Format - FOX', function(){
 
-                goToUploadPage();
+                //steps.uploadEdiFile.goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
                     var file = files[1];
 
-                    fillFormWithFileData(file, fileDefaults);
-
-                    this.expectToBeRedirectedToFileUploadHistory();
-
-                    this.expectUploadedFileToBeListed();
-                    this.openUploadedFileBlind();
-
-                    this.expectUploadedFileToHaveCorrectExpectedAmount(file.amount);
-                    waitForFileToBeProcessed();
+                    steps.uploadEdiFile.uploadFile(file);
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
 
@@ -242,19 +107,12 @@ exports.feature = [
             });
 
             describe('Load a file - Multiple Providers', function() {
-                goToUploadPage();
+                //steps.uploadEdiFile.goToUploadPage();
 
                 using(steps.uploadEdiFile, function(){
                     var file = files[2];
 
-                    fillFormWithFileData(file, fileDefaults);
-
-                    this.expectToBeRedirectedToFileUploadHistory();
-                    this.expectUploadedFileToBeListed();
-                    this.openUploadedFileBlind();
-
-                    this.expectUploadedFileToHaveCorrectExpectedAmount(file.expectedAmount);
-                    waitForFileToBeProcessed();
+                    steps.uploadEdiFile.uploadFile(file);
 
                     this.expectFileReadInAmountToBe(file.amount + ' ' + file.currency);
 
@@ -365,7 +223,7 @@ exports.feature = [
                     //Income Type Mapping Error
 
                     //steps.base.switchToTab(0);
-                    goToUploadPage();
+                    steps.uploadEdiFile.goToUploadPage();
                     fillFormWithFileData(file, fileDefaults);
 
                     /*if (!noUpload) {

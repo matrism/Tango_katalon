@@ -42,18 +42,17 @@ exports.territoryOfOperationField = function () {
 
 exports.selectTerritoryOfOperation = function (name) {
     var elem = exports.territoryOfOperationField(),
-        typeahead = Typeahead(elem.element(by.model('$dataHolder.internalModel')), true);
+        typeahead = Typeahead(elem.element(by.model('$dataHolder.internalModel')));
 
     pages.base.scrollIntoView(elem);
+
     typeahead.$$('.tg-typeahead__tags-text').then(function(elements) {
         if(elements.length !== 0) {
             elements[0].click();
         }
     });
 
-    typeahead.sendKeys(name);
-    pages.base.waitForAjax();
-    typeahead.results().filter(pph.matchTextExact(name)).first().click();
+    typeahead.select(name);
 };
 
 exports.societyTypeahead = function () {
@@ -546,8 +545,19 @@ exports.makeOrgPayee = function () {
     elem.click();
 };
 
-exports.expectPayeeAccountNameToBeIfPresent = function (val) {
+exports.payeeAccountNameInput = function () {
     var elem = element(by.model('payeeAccount.account_name'));
+    return elem;
+};
+
+exports.setPayeeAccountName = function (name) {
+    var elem = exports.payeeAccountNameInput();
+
+    elem.sendKeys(name);
+};
+
+exports.expectPayeeAccountNameToBeIfPresent = function (val) {
+    var elem = exports.payeeAccountNameInput();
 
     elem.isPresent().then(function(isPresent){
         if (isPresent) {
@@ -556,8 +566,14 @@ exports.expectPayeeAccountNameToBeIfPresent = function (val) {
     });
 };
 
+exports.statementRecipientButtonsContainer = () => {
+    return $('.e2e-payment-statement-is');
+};
+
 exports.statementRecipientYesButton = function () {
-    return $('[data-ng-click="PAY.onSetRoleStatementRecipient(true)"]');
+    return exports.statementRecipientButtonsContainer().element(
+        by.cssContainingText('button', 'Yes')
+    );
 };
 
 exports.makeOrgStatementRecipient = function () {
@@ -568,18 +584,40 @@ exports.makeOrgStatementRecipient = function () {
 };
 
 exports.statementRecipientOptions = function () {
-    return $('[name="statementRecipientForm"]').all(by.repeater('(key,value) in PAY.viewModel.statementRecipient'));
+    return $('[name="statementRecipientForm"]').all(
+        by.repeater('(key,value) in PAY.viewModel.statementRecipient'
+    ));
 };
 
-exports.setStatementRecipientData = function (option, subOption) {
-    var elem = exports.statementRecipientOptions().filter(pph.matchText(option)).first(),
-        subOptions = elem.all(by.repeater('item in value.formatAndDelivery'));
+exports.statementRecipientOptionByName = (name) => {
+    return exports.statementRecipientOptions().filter(
+        pph.matchText(name)
+    ).first();
+};
 
-    pages.base.scrollIntoView(elem);
-    elem.click();
-    browser.wait(protractor.ExpectedConditions.visibilityOfAny(subOptions));
+exports.statementRecipientSubOptions = (option) => {
+    return option.all(by.repeater('item in value.formatAndDelivery'));
+};
 
-    subOptions.filter(pph.matchText(subOption)).first().click();
+exports.statementRecipientSubOptionByName = (option, subOptionName) => {
+    return exports.statementRecipientSubOptions(option).filter(
+        pph.matchText(subOptionName)
+    ).first();
+};
+
+exports.setStatementRecipientData = (optionName, subOptionName) => {
+    let option = exports.statementRecipientOptionByName(optionName);
+
+    asAlways(option, 'scrollIntoView', 'click');
+
+    browser.wait(EC.visibilityOfAny(
+        exports.statementRecipientSubOptions(option)
+    ));
+
+    asAlways(
+        exports.statementRecipientSubOptionByName(option, subOptionName),
+        'scrollIntoView', 'click'
+    );
 };
 
 exports.affiliatedSocietyTypeahead = function() {

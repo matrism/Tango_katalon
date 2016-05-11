@@ -481,13 +481,6 @@ exports.reorderEndRule = function (from, to) {
     });
 };
 
-exports.deleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
-    it("Delete end rules condition number " + i + " row number " + j, function () {
-        pages.createDealContractPeriod.clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
-        pages.createDealContractPeriod.waitForAjax();
-    });
-};
-
 exports.deleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
     it("Delete end rules condition number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);

@@ -38,6 +38,16 @@ exports.selectFirstRoyaltyPeriod = function () {
     return dropdown.$$('.dropdown-menu > li > a').first().click();
 };
 
+exports.selectRoyaltyPeriod = function (name) {
+    var dropdown = exports.royaltyPeriodDropdown();
+
+    dropdown.$('button.ng-binding').click();
+
+    browser.wait(EC.visibilityOfAny(dropdown.$$('.dropdown-menu > li')));
+
+    return dropdown.$$('.dropdown-menu > li > a').filter(pph.matchText(name)).first().click();
+};
+
 exports.selectWcmCommonFormat = function () {
     return element(by.cssContainingText('.nav-tabs li a', 'WCM Common Format')).click();
 };
