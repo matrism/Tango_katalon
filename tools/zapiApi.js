@@ -86,9 +86,6 @@ var ZapiApi = function () {
                         //bugLabel
                     ],
                     /* 
-                    'reporter': {
-                        'name': 'Constantine.Crismaru'
-                    },
                       'severity': {
                      'name': testStep.step.severity
                      },*/
