@@ -472,26 +472,26 @@ exports.clickPublisherSharesSetArea = function () {
     });
 };
 
-exports.selectTheRandomPublisherNameDropDownChainI = function(i){
-    it("Select random publisher name drop down chain " + i, function(){
-       pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
+exports.selectTheRandomPublisherNameDropDownChainI = function (i) {
+    it("Select random publisher name drop down chain " + i, function () {
+        pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
     });
 };
 
-exports.fillIntoPublisherNameOwnPercentFieldChainISpecificValue = function(i, percent){
-    it("Fill into the publisher name own percent field specific value chain " + i, function(){
-       pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, percent);
+exports.fillIntoPublisherNameOwnPercentFieldChainISpecificValue = function (i, percent) {
+    it("Fill into the publisher name own percent field specific value chain " + i, function () {
+        pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, percent);
     });
 };
 
-exports.fillIntoPublisherNameCollectPercentFieldChainISpecificValue = function(i, percent){
-    it("Fill into the publisher name collect percent field specific value chain " + i, function(){
+exports.fillIntoPublisherNameCollectPercentFieldChainISpecificValue = function (i, percent) {
+    it("Fill into the publisher name collect percent field specific value chain " + i, function () {
         pages.createDealScope.fillPublisherNameCollectPercentFieldChainISpecificValue(i, percent);
     });
 };
 
-exports.fillIntoPublisherNameAMCollectPercentChainISpecificValue = function(i, percent){
-    it("Fill into the publisher name AM collect percent field specific value chain " + i, function(){
+exports.fillIntoPublisherNameAMCollectPercentChainISpecificValue = function (i, percent) {
+    it("Fill into the publisher name AM collect percent field specific value chain " + i, function () {
         pages.createDealScope.fillPublisherNameAMCollectPercentChainISpecificValue(i, percent);
     });
 };
@@ -581,11 +581,10 @@ exports.checkUnshareScopeLinkIsDisabled = function () {
     it("Check unshare link is disabled on share scope", function () {
         browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
-        pages.createDealScope.elems.unshareScopeLink.getAttribute("class").
-            then(function (promise) {
-                console.log("Unshare scope link class is : " + promise);
-                expect(promise).toContain("disabled");
-            });
+        pages.createDealScope.elems.unshareScopeLink.getAttribute("class").then(function (promise) {
+            console.log("Unshare scope link class is : " + promise);
+            expect(promise).toContain("disabled");
+        });
     });
 };
 
@@ -593,11 +592,10 @@ exports.checkCopyScopeLinkIsDisabled = function () {
     it("Check copy link is disabled on share scope", function () {
         browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
-        pages.createDealScope.elems.copyScopeLink.getAttribute("class").
-            then(function (promise) {
-                console.log("Unshare scope link class is : " + promise);
-                expect(promise).toContain("disabled");
-            });
+        pages.createDealScope.elems.copyScopeLink.getAttribute("class").then(function (promise) {
+            console.log("Unshare scope link class is : " + promise);
+            expect(promise).toContain("disabled");
+        });
     });
 };
 
@@ -606,11 +604,10 @@ exports.checkCopyScopeDisabledDataTooltip = function () {
         browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.copyScopeLink).click();
-        pages.createDealScope.elems.copyScopeLink.getAttribute("data-tooltip").
-            then(function (promise) {
-                console.log("Copy scope disabled tooltip is : " + promise);
-                expect(promise).toEqual("Cannot Copy: Editing in progress.");
-            });
+        pages.createDealScope.elems.copyScopeLink.getAttribute("data-tooltip").then(function (promise) {
+            console.log("Copy scope disabled tooltip is : " + promise);
+            expect(promise).toEqual("Cannot Copy: Editing in progress.");
+        });
     });
 };
 
@@ -627,11 +624,10 @@ exports.checkCopyScopeEnabledDataTooltip = function () {
         browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.copyScopeLink).perform();
-        pages.createDealScope.elems.copyScopeLink.getAttribute("data-tooltip").
-            then(function (promise) {
-                console.log("Copy scope enabled tooltip is : " + promise);
-                expect(promise).toEqual("Copy entirety of this Scope.");
-            });
+        pages.createDealScope.elems.copyScopeLink.getAttribute("data-tooltip").then(function (promise) {
+            console.log("Copy scope enabled tooltip is : " + promise);
+            expect(promise).toEqual("Copy entirety of this Scope.");
+        });
     });
 };
 
@@ -679,7 +675,7 @@ exports.nonCtrlCreatorShare = (function () {
 })();
 
 exports.fillSpecificValuePublisherNameFieldChainI = function (i, publisherRole) {
-    it("Fill into publisher role field chain " + i + " specific value ", function(){
+    it("Fill into publisher role field chain " + i + " specific value ", function () {
         pages.createDealScope.fillPublisherNameFieldChainISpecificValue(i, publisherRole);
     });
 };
@@ -904,5 +900,48 @@ exports.itCheckTotalsValidationsCasesPublisherShare = function () {
 exports.checkContractPeriodsAndScopesHeaderTitlePresent = function () {
     it("Check that contract periods and scopes header title is present ", function () {
         expect(pages.deal.elems.contractPeriodsScopesHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};
+
+exports.checkTheContractualTypeAreaTextDisplayed = function (text) {
+    it("Check the contractual type area text value displayed", function () {
+        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types text value is : " + promise);
+            expect(promise).toContain(text);
+        });
+    });
+};
+
+exports.checkTheContractualTypePublishingRightsTextDisplayed = function (text) {
+    it("Check the contractual type publishing rights text value displayed", function () {
+        browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1)")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types publishing rights text value is : " + promise);
+            expect(promise).toContain(text);
+        });
+    });
+};
+
+exports.checkTheContractualTypeMasterRightsTextDisplayed = function (text) {
+    it("Check the contractual type master rights text value displayed", function () {
+        browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2)")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types master rights text value is : " + promise);
+            expect(promise).toContain(text);
+        });
+    });
+};
+
+exports.checkTheContractualTypeLimitedTooTextTooltipDisplayed = function () {
+    it("Check the contractual type limited too text tooltip value displayed", function () {
+        browser.driver.findElement(By.css("div[data-name='contRightTypes'] label.checkbox i.fa.fa-info-circle.ng-scope")).getAttribute("data-tooltip").then(function (promise) {
+            console.log("Deal scope contractual right types limited too text tooltip value is : " + promise);
+            expect(promise).toEqual("Check this only if the contract limits you to an explicit list of included right types.");
+        });
+    });
+};
+
+exports.expandCollapseMasterRights = function () {
+    it("Expand or collapse master rights by clicking the arrow", function () {
+        pages.createDealScope.expandCollapseTheMasterRights();
+        pages.createDealScope.waitForAjax();
     });
 };

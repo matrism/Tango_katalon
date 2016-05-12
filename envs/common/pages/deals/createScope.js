@@ -62,7 +62,8 @@ if (pages.createDealScope === undefined) {
             selectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.addAllAvailableContractPeriods()']"},
             deSelectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.removeAllAvailableContractPeriods()']"},
             firstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
-            deleteScopeIcon: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)'] div.ng-scope i.fa.fa-times.ng-scope"}
+            deleteScopeIcon: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)'] div.ng-scope i.fa.fa-times.ng-scope"},
+            expandCollapseMasterRights: {css: " div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) i.fa.pull-right.fa-sort-down"}
         },
 
         addContractPeriodIcon: function () {
@@ -761,6 +762,11 @@ if (pages.createDealScope === undefined) {
         selectAllContractPeriodsShareScopeModalDialog: function () {
             pages.createDealScope.elems.selectAllLinkShareScopeModalDialog.click();
         },
+
+        expandCollapseTheMasterRights: function () {
+            pages.createDealScope.elems.expandCollapseMasterRights.click();
+        },
+
 
         clickOnTheDoneShareScopeModalDialog: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.doneShareScopeModalDialog));
