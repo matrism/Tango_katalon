@@ -210,21 +210,23 @@ exports.execution = (() => {
         var fnUpdateStepResult = () => {
             var issueStep = exports.issue.steps.find((step) => {
                     return step.orderId == orderId;
-                }),
+                }) || {},
                 execStep = execution.steps.find((step) => {
                     return step.stepId == issueStep.id;
-                });
+                }) || {};
 
             log(
                 'Updating execution step result...',
                 execStep.id, status, comment, bugKey || ''
             );
-            return ZapiApi.updateExecutionStepResult(
-                    exports.issue.id, execution.id, execStep.id, status, comment, bugKey
-                ).then((response) => {
-                    log('Execution step updated:', response.id);
-                    return response.id;
-                });
+            if (execStep.id) {
+                return ZapiApi.updateExecutionStepResult(
+                        exports.issue.id, execution.id, execStep.id, status, comment, bugKey
+                    ).then((response) => {
+                        log('Execution step updated:', response.id);
+                        return response.id;
+                    });
+            }
         };
 
         if (exports.issue.stepsFound) {
