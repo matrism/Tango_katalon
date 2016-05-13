@@ -37,14 +37,129 @@ exports.feature = [
             steps.createDealScope.checkTheContractualTypePublishingRightsTextDisplayed("Other");
 
             //click on master rights and check default values for master rights
-            steps.createDealScope.expandCollapseMasterRights();
+            steps.createDealScope.expandMasterRights();
             steps.createDealScope.checkTheContractualTypeMasterRightsTextDisplayed("Master Synch");
             steps.createDealScope.checkTheContractualTypeMasterRightsTextDisplayed("Master Mech");
             steps.createDealScope.checkTheContractualTypeMasterRightsTextDisplayed("Master Perf");
             steps.createDealScope.checkTheContractualTypeMasterRightsTextDisplayed("Master Grand");
             steps.createDealScope.checkTheContractualTypeMasterRightsTextDisplayed("Master Digital");
             steps.createDealScope.checkTheContractualTypeMasterRightsTextDisplayed("Master Other");
-            steps.createDealScope.expandCollapseMasterRights();
+            steps.createDealScope.collapseMasterRights();
+
+            //click on publishing rights
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextNotDisplayed("All Publishing Rights are included.");
+            steps.createDealScope.checkTheContractualTypeAreaErrorMessageMandatoryRightSelected();
+
+            //click on master rights
+            steps.createDealScope.clickOnMasterRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("All Publishing Rights are excluded.");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("All Master Rights are included.");
+
+            //deselect master rights
+            steps.createDealScope.clickOnMasterRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaErrorMessageMandatoryRightSelected();
+
+            //click on synch and grand publishing right
+            steps.createDealScope.clickOnPublishingRightsNumberI(1);
+            steps.createDealScope.clickOnPublishingRightsNumberI(4);
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("The following Publishing Rights are excluded: Mech, Perf, Print, Other");
+
+            //click on publishing rights
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.expandMasterRights();
+            steps.createDealScope.clickOnMasterRightsNumberI(3);
+            steps.createDealScope.clickOnMasterRightsNumberI(4);
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("All Publishing Rights are included.");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("The following Master Rights are excluded: Master Synch, Master Mech, Master Digital, Master Other");
+
+            //deselect some publishing rights
+            steps.createDealScope.clickOnPublishingRightsNumberI(4);
+            steps.createDealScope.clickOnPublishingRightsNumberI(5);
+            steps.createDealScope.clickOnPublishingRightsNumberI(6);
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("The following Publishing Rights are excluded: Grand, Print, Other");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("The following Master Rights are excluded: Master Synch, Master Mech, Master Digital, Master Other");
+            //click 2 times to publishing rights to deselect all
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("All Publishing Rights are excluded.");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("The following Master Rights are excluded: Master Synch, Master Mech, Master Digital, Master Other");
+
+            //select all publishing rights and de select master rights, check limited to
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.clickOnMasterRightsCheckBox();
+            steps.createDealScope.clickOnMasterRightsCheckBox();
+            steps.createDealScope.clickOnLimitedToCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Publishing Rights are included, but limited to: Synch, Mech, Perf, Grand, Print, Other");
+
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaErrorMessageMandatoryRightSelected();
+
+            steps.createDealScope.clickOnMasterRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("All Publishing Rights are excluded.");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Master Rights are included, but limited to: Master Synch, Master Mech, Master Perf, Master Grand, Master Digital, Master Other");
+
+            steps.createDealScope.clickOnPublishingRightsNumberI(1);
+            steps.createDealScope.clickOnPublishingRightsNumberI(2);
+            steps.createDealScope.clickOnMasterRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Publishing Rights are included, but limited to: Synch, Mech");
+
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.clickOnMasterRightsNumberI(1);
+            steps.createDealScope.clickOnMasterRightsNumberI(4);
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Publishing Rights are included, but limited to: Synch, Mech, Perf, Grand, Print, Other");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Master Rights are included, but limited to: Master Synch, Master Grand");
+
+            steps.createDealScope.clickOnPublishingRightsNumberI(1);
+            steps.createDealScope.clickOnPublishingRightsNumberI(2);
+            steps.createDealScope.clickOnPublishingRightsNumberI(3);
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Publishing Rights are included, but limited to: Grand, Print, Other");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Master Rights are included, but limited to: Master Synch, Master Grand");
+
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Summary");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("All Publishing Rights are excluded.");
+            steps.createDealScope.checkTheContractualTypeAreaTextDisplayed("Master Rights are included, but limited to: Master Synch, Master Grand");
+
+            //select all publishing rights and check that its children are selected
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.checkThatPublishingRightsNumberIIsSelected(1);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsSelected(2);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsSelected(3);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsSelected(4);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsSelected(5);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsSelected(6);
+
+            //de select all publishing rights and check that its children are de selected
+            steps.createDealScope.clickOnPublishingRightsCheckBox();
+            steps.createDealScope.checkThatPublishingRightsNumberIIsDeSelected(1);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsDeSelected(2);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsDeSelected(3);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsDeSelected(4);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsDeSelected(5);
+            steps.createDealScope.checkThatPublishingRightsNumberIIsDeSelected(6);
+
+            //select all master rights and that its children are selected
+            steps.createDealScope.clickOnMasterRightsCheckBox();
+            steps.createDealScope.checkThatMasterRightsNumberIIsSelected(1);
+            steps.createDealScope.checkThatMasterRightsNumberIIsSelected(2);
+            steps.createDealScope.checkThatMasterRightsNumberIIsSelected(3);
+            steps.createDealScope.checkThatMasterRightsNumberIIsSelected(4);
+            steps.createDealScope.checkThatMasterRightsNumberIIsSelected(5);
+            steps.createDealScope.checkThatMasterRightsNumberIIsSelected(6);
+
 
             steps.deal.itContinueToNextPage();
             //steps.deal.saveDeal();

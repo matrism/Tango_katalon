@@ -912,6 +912,25 @@ exports.checkTheContractualTypeAreaTextDisplayed = function (text) {
     });
 };
 
+exports.checkTheContractualTypeAreaTextNotDisplayed = function (text) {
+    it("Check the contractual type area text value is not displayed", function () {
+        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types text value is : " + promise);
+            expect(promise).not.toContain(text);
+        });
+    });
+};
+
+exports.checkTheContractualTypeAreaErrorMessageMandatoryRightSelected = function (text) {
+    it("Check the contractual type area error message displayed at least one right selected", function () {
+        browser.driver.findElement(By.css("div[data-ng-show='contRightTypes.$error.crtRequire']")).getText()
+            .then(function (promise) {
+                console.log("Deal scope contractual right types error message mandatory right is : " + promise);
+                expect(promise).toEqual("At least one contractual right type must be selected in order to save this scope");
+            });
+    });
+};
+
 exports.checkTheContractualTypePublishingRightsTextDisplayed = function (text) {
     it("Check the contractual type publishing rights text value displayed", function () {
         browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1)")).getText().then(function (promise) {
@@ -939,9 +958,79 @@ exports.checkTheContractualTypeLimitedTooTextTooltipDisplayed = function () {
     });
 };
 
-exports.expandCollapseMasterRights = function () {
-    it("Expand or collapse master rights by clicking the arrow", function () {
-        pages.createDealScope.expandCollapseTheMasterRights();
+exports.expandMasterRights = function () {
+    it("Expand master rights by clicking the arrow", function () {
+        pages.createDealScope.expandTheMasterRights();
         pages.createDealScope.waitForAjax();
     });
+};
+
+exports.collapseMasterRights = function () {
+    it("Collapse master rights by clicking the arrow", function () {
+        pages.createDealScope.collapseTheMasterRights();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnPublishingRightsCheckBox = function () {
+    it("Click on publishing rights check box ", function () {
+        pages.createDealScope.clickOnThePublishingRightsCheckBox();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnPublishingRightsNumberI = function(i){
+  it("Click on the publishing rights number " + i, function(){
+     pages.createDealScope.clickOnThePublishingRightsNumberI(i);
+      pages.createDealScope.waitForAjax();
+  });
+};
+
+exports.checkThatPublishingRightsNumberIIsSelected = function(i){
+    it("Check that the publishing rights number " + i + " is selected", function(){
+        pages.createDealScope.checkThatThePublishingRightsNumberIIsSelected(i);
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.checkThatPublishingRightsNumberIIsDeSelected = function(i){
+    it("Check that the publishing rights number " + i + " is de-selected", function(){
+        pages.createDealScope.checkThatThePublishingRightsNumberIIsDeSelected(i);
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.checkThatMasterRightsNumberIIsSelected = function(i){
+    it("Check that the publishing rights number " + i + " is selected", function(){
+        pages.createDealScope.checkThatTheMasterRightsNumberIIsSelected(i);
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.checkThatMastergRightsNumberIIsDeSelected = function(i){
+    it("Check that the publishing rights number " + i + " is de-selected", function(){
+        pages.createDealScope.checkThatTheMasterRightsNumberIIsDeSelected(i);
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnMasterRightsNumberI = function(i){
+    it("Click on the masterng rights number " + i, function(){
+        pages.createDealScope.clickOnTheMasterRightsNumberI(i);
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnMasterRightsCheckBox = function () {
+    it("Click on master rights check box ", function () {
+        pages.createDealScope.clickOnTheMasterRightsCheckBox();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnLimitedToCheckBox = function(){
+  it("Click on the limited to check box on contractual right types on scope ", function () {
+      pages.createDealScope.clickOnTheLimitedToCheckBox();
+      pages.createDealScope.waitForAjax();
+  });
 };

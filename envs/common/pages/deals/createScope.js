@@ -55,21 +55,26 @@ if (pages.createDealScope === undefined) {
             shareScopeLink: {css: "a[data-ng-click='showShareScopeModal(sp.id)']"},
             unshareScopeLink: {css: "a[data-ng-click='showUnshareScopeModal(sp.id)']"},
             deleteScopeLink: {css: "a[data-ng-click='showDeleteScopeModal(sp.id, canScopeBeDeleted(sp.id))']"},
-            copyScopeLink: {css:"a[data-ng-click='showScopeCopySection(sp.id)']"},
+            copyScopeLink: {css: "a[data-ng-click='showScopeCopySection(sp.id)']"},
             shareScopeModalDialog: {css: "div.modal-dialog.large.ng-scope"},
             cancelShareScopeModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
             doneShareScopeModalDialog: {css: "div.modal-footer button[data-ng-click='data.done()']"},
             selectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.addAllAvailableContractPeriods()']"},
             deSelectAllLinkShareScopeModalDialog: {css: "a[data-ng-click='data.removeAllAvailableContractPeriods()']"},
             firstScope: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
+            limitedToCheckBoxContractualType: {css: "input[data-ng-model='modularEditModels.model.right_types_include_or_exclude']"},
             deleteScopeIcon: {css: "ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)'] div.ng-scope i.fa.fa-times.ng-scope"},
-            expandCollapseMasterRights: {css: " div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) i.fa.pull-right.fa-sort-down"}
+            publishingRightsCheckBox: {css: "div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) div[data-ng-click='onContRightTypesSelectAllClick(modularEditModels.model, value, $event)'] i"},
+            masterRightsCheckBox: {css: "div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) div[data-ng-click='onContRightTypesSelectAllClick(modularEditModels.model, value, $event)'] i"},
+            expandMasterRightsElement: {css: "div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) i.fa.pull-right.fa-sort-down"},
+            collapseMasterRightsElement: {css: "div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) i.fa.pull-right.fa-sort-up"}
         },
 
         addContractPeriodIcon: function () {
             return $$(".column-add-button-icon").first();
 
         },
+
         addContractPeriodButton: function () {
             return $(".column-add-button-hint").first();
 
@@ -199,93 +204,83 @@ if (pages.createDealScope === undefined) {
         },
 
         validateTheNoPublisherShareWarningMessage: function () {
-            pages.createDealScope.elems.noPublisherShareWarningMessage.getText().
-                then(function (promise) {
-                    console.log("No publisher share warning message is: " + promise);
-                    expect(promise).toEqual("No publisher shares have been defined on any scopes associated with this contract period.");
-                });
+            pages.createDealScope.elems.noPublisherShareWarningMessage.getText()
+                .then(function (promise) {
+                console.log("No publisher share warning message is: " + promise);
+                expect(promise).toEqual("No publisher shares have been defined on any scopes associated with this contract period.");
+            });
         },
 
         validateThe3DecimalsExceededPublisherShareWarningMessage: function () {
-            pages.createDealScope.elems.decimalPlacesPublisherShareErrorMessage.getText().
-                then(function (promise) {
-                    console.log("3 decimals exceeded error message: " + promise);
-                    expect(promise).toEqual("Shares cannot exceed 3 decimal places");
-                });
+            pages.createDealScope.elems.decimalPlacesPublisherShareErrorMessage.getText().then(function (promise) {
+                console.log("3 decimals exceeded error message: " + promise);
+                expect(promise).toEqual("Shares cannot exceed 3 decimal places");
+            });
         },
 
         validateSubtotalOfOwnPublisherShareWarningMessage: function () {
-            pages.createDealScope.elems.subtotalOwnPublisherShareErrorMessage.getText().
-                then(function (promise) {
-                    console.log("Subtotal of own error message is : " + promise);
-                    expect(promise).toEqual("Subtotal of Own cannot be greater than 100%");
-                });
+            pages.createDealScope.elems.subtotalOwnPublisherShareErrorMessage.getText().then(function (promise) {
+                console.log("Subtotal of own error message is : " + promise);
+                expect(promise).toEqual("Subtotal of Own cannot be greater than 100%");
+            });
         },
 
         validateSubtotalOfOwnLessThanCollectPublisherShareWarningMessage: function () {
-            pages.createDealScope.elems.subtotalOwnPublisherShareErrorMessage.getText().
-                then(function (promise) {
-                    console.log("Subtotal of own less than collect error message is : " + promise);
-                    expect(promise).toEqual("Subtotal of Collect cannot be greater than Own");
-                });
+            pages.createDealScope.elems.subtotalOwnPublisherShareErrorMessage.getText().then(function (promise) {
+                console.log("Subtotal of own less than collect error message is : " + promise);
+                expect(promise).toEqual("Subtotal of Collect cannot be greater than Own");
+            });
         },
 
         validateChainTotalOfOwnPublisherShareWarningMessage: function () {
-            pages.createDealScope.elems.chainTotalOwnPublisherShareErrorMessage.getText().
-                then(function (promise) {
-                    console.log("Chain total of own error message is : " + promise);
-                    expect(promise).toEqual("Chain total of Own cannot be greater than 100%");
-                });
+            pages.createDealScope.elems.chainTotalOwnPublisherShareErrorMessage.getText().then(function (promise) {
+                console.log("Chain total of own error message is : " + promise);
+                expect(promise).toEqual("Chain total of Own cannot be greater than 100%");
+            });
         },
 
         validateChainTotalOfOwnPublisherCannotBeLessThanCollectShareWarningMessage: function () {
-            pages.createDealScope.elems.chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage.getText().
-                then(function (promise) {
-                    console.log("Chain total of own less than collect error message is : " + promise);
-                    expect(promise).toEqual("Subtotal of Collect cannot be greater than Own");
-                });
+            pages.createDealScope.elems.chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage.getText().then(function (promise) {
+                console.log("Chain total of own less than collect error message is : " + promise);
+                expect(promise).toEqual("Subtotal of Collect cannot be greater than Own");
+            });
         },
 
         validateThePlaceholdersForPublisherNameE: function () {
-            pages.createDealScope.elems.firstPublisherNameField.getAttribute("placeholder").
-                then(function (promise) {
-                    console.log("Placeholder for firs publisher name E is : " + promise);
-                    expect(promise).toEqual("search by name or IPI number...");
-                });
+            pages.createDealScope.elems.firstPublisherNameField.getAttribute("placeholder").then(function (promise) {
+                console.log("Placeholder for firs publisher name E is : " + promise);
+                expect(promise).toEqual("search by name or IPI number...");
+            });
         },
 
         validateThePlaceholdersForPublisherNameAM: function () {
-            pages.createDealScope.elems.firstPublisherNameAMField.getAttribute("placeholder").
-                then(function (promise) {
-                    console.log("Placeholder for firs publisher name AM is : " + promise);
-                    expect(promise).toEqual("search by name or IPI number...");
-                });
+            pages.createDealScope.elems.firstPublisherNameAMField.getAttribute("placeholder").then(function (promise) {
+                console.log("Placeholder for firs publisher name AM is : " + promise);
+                expect(promise).toEqual("search by name or IPI number...");
+            });
         },
 
         validateTheErrorMessagePublisherRequired: function () {
-            pages.createDealScope.elems.publisherIsRequiredErrorMessage.getText().
-                then(function (promise) {
-                    console.log("Error message for publisher required is : " + promise);
-                    expect(promise).toEqual("Publisher is required");
-                });
+            pages.createDealScope.elems.publisherIsRequiredErrorMessage.getText().then(function (promise) {
+                console.log("Error message for publisher required is : " + promise);
+                expect(promise).toEqual("Publisher is required");
+            });
         },
 
         validateThePublisherNameTooltipEOrPAIcon: function () {
             browser.driver.actions().mouseMove(element(by.css("#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.span1.nomargins.ng-scope"))).perform();
-            element(By.css("#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.span1.nomargins.ng-scope")).getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Publisher type E or PA tooltip text : " + promise);
-                    expect(promise).toEqual("Original Publisher");
-                });
+            element(By.css("#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.span1.nomargins.ng-scope")).getAttribute("data-tooltip").then(function (promise) {
+                console.log("Publisher type E or PA tooltip text : " + promise);
+                expect(promise).toEqual("Original Publisher");
+            });
         },
 
         validateThePublisherNameTooltipAMIcon: function () {
             browser.driver.actions().mouseMove(element(by.css("#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div.pull-left.ps-role.ng-scope"))).perform();
-            element(By.css("#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div.pull-left.ps-role.ng-scope")).getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Publisher type AM tooltip text : " + promise);
-                    expect(promise).toEqual("Administrator");
-                });
+            element(By.css("#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div.pull-left.ps-role.ng-scope")).getAttribute("data-tooltip").then(function (promise) {
+                console.log("Publisher type AM tooltip text : " + promise);
+                expect(promise).toEqual("Administrator");
+            });
         },
 
         clickOnAddPublisherShareSetLink: function (options) {
@@ -312,15 +307,15 @@ if (pages.createDealScope === undefined) {
             return (
                 pages.createDealScope.publisherShareChainContainers().get(i)
                     .$$('.publisher-row, .am-share').filter(function (element) {
-                        return element.isDisplayed();
-                    })
+                    return element.isDisplayed();
+                })
             );
         },
 
         publisherRoleDropdown: function (i, j) {
             return exports.publisherShareRows(i).get(j).$(
                 '[data-tg-dropdown="' +
-                    'role for role in shareAcquirerRoles' +
+                'role for role in shareAcquirerRoles' +
                 '"]'
             );
         },
@@ -763,10 +758,75 @@ if (pages.createDealScope === undefined) {
             pages.createDealScope.elems.selectAllLinkShareScopeModalDialog.click();
         },
 
-        expandCollapseTheMasterRights: function () {
-            pages.createDealScope.elems.expandCollapseMasterRights.click();
+        expandTheMasterRights: function () {
+            pages.base.scrollIntoView(pages.createDealScope.elems.expandMasterRightsElement);
+            pages.createDealScope.elems.expandMasterRightsElement.click();
         },
 
+        collapseTheMasterRights: function () {
+            pages.base.scrollIntoView(pages.createDealScope.elems.collapseMasterRightsElement);
+            pages.createDealScope.elems.collapseMasterRightsElement.click();
+        },
+
+
+        clickOnThePublishingRightsCheckBox: function () {
+            pages.base.scrollIntoView( pages.createDealScope.elems.publishingRightsCheckBox);
+            pages.createDealScope.elems.publishingRightsCheckBox.click();
+        },
+
+        clickOnThePublishingRightsNumberI: function (i) {
+            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")));
+            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")).click();
+        },
+
+        checkThatThePublishingRightsNumberIIsSelected: function(i){
+            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li:nth-child(" + i + ")")));
+            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li:nth-child(" + i + ")")).getAttribute("class")
+                .then(function (promise) {
+                    console.log("The selected publishing rights class is : " + promise);
+                    expect(promise).toContain("selected");
+                    expect(promise).toEqual("ng-binding ng-scope selected");
+                });
+        },
+
+        checkThatThePublishingRightsNumberIIsDeSelected: function(i){
+            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li:nth-child(" + i + ")")));
+            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li:nth-child(" + i + ")")).getAttribute("class")
+                .then(function (promise) {
+                    console.log("The selected publishing rights class is : " + promise);
+                    expect(promise).toEqual("ng-binding ng-scope");
+                    expect(promise).not.toContain("selected");
+                });
+        },
+
+        checkThatTheMasterRightsNumberIIsSelected: function(i){
+            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li:nth-child(" + i + ")")));
+            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li:nth-child(" + i + ")")).getAttribute("class")
+                .then(function (promise) {
+                    console.log("The selected master rights class is : " + promise);
+                    expect(promise).toContain("selected");
+                });
+        },
+
+        checkThatTheMasterRightsNumberIIsDeSelected: function(i){
+            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li:nth-child(" + i + ")")));
+            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li:nth-child(" + i + ")")).getAttribute("class")
+                .then(function (promise) {
+                    console.log("The selected master right class is : " + promise);
+                    expect(promise).not.toContain("selected");
+                });
+        },
+
+
+        clickOnTheMasterRightsNumberI: function (i) {
+            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")));
+            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")).click();
+        },
+
+        clickOnTheMasterRightsCheckBox: function () {
+            pages.base.scrollIntoView(pages.createDealScope.elems.masterRightsCheckBox);
+            pages.createDealScope.elems.masterRightsCheckBox.click();
+        },
 
         clickOnTheDoneShareScopeModalDialog: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.doneShareScopeModalDialog));
@@ -781,6 +841,11 @@ if (pages.createDealScope === undefined) {
         checkTheShareUnshareDeleteIconIsPresent: function () {
             browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
             expect(pages.createDealScope.elems.shareUnshareDeleteScopeIcon.isDisplayed);
+        },
+
+        clickOnTheLimitedToCheckBox: function () {
+            pages.base.scrollIntoView(pages.createDealScope.elems.limitedToCheckBoxContractualType);
+            pages.createDealScope.elems.limitedToCheckBoxContractualType.click();
         },
 
         nonCtrlCreatorShare: function () {
@@ -818,6 +883,7 @@ if (pages.createDealScope === undefined) {
             };
 
             return nccs;
-        }()
+        }
+        ()
     });
 }
