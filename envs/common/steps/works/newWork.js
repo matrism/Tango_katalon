@@ -884,9 +884,12 @@ exports.continueToNextTab = function() {
     });
 };
 
-exports.saveWork = function() {
+exports.save = function() {
      steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
 };
+
+exports.saveWork = exports.save;
+
 exports.validateSaveWorkRedirection = function() {
      steps.base.validateRedirection("created work page", "/rights");
 };

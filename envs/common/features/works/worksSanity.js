@@ -463,7 +463,7 @@ exports.feature = [
                     this.focusTitleField(i);
                     this.selectTitleSuggestionByIndex(i);
 
-                    this.validateLibraryName(i);
+                    this.validateLibraryName(i, 'AUDIOMACHINE');
                 }));
 
                 this.saveWork();

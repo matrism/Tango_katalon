@@ -20,15 +20,15 @@ test.album = {};
 test.person = {};
 test.work = {};
 
+test.cannotDeleteWithAlbumMsg = (
+    'Cannot Delete a Recording while associated to an Album'
+);
+
 exports.beforeFeature = () => {
     let login = steps.login,
         base = steps.base;
 
-    // ---
-
     login.itLogin();
-
-    // ---
 
     test.id = random.id();
 
@@ -44,10 +44,10 @@ exports.beforeFeature = () => {
         ][i]];
 
         {
-            let iPadded = leftPad(i, 2, 0);
+            let iPadded = leftPad(i + 1, 2, 0);
 
             ret.releaseDate = [
-                2000 + i, iPadded, iPadded
+                2001 + i, iPadded, iPadded
             ].join('-');
         }
 
@@ -68,13 +68,9 @@ exports.beforeFeature = () => {
 
     test.work.title = `TEST WORK ${test.id}`;
 
-    // ---
-
     describe('Create albums', () => {
         let na = steps.newAlbum,
             nard = na.releaseDetails;
-
-        // ---
 
         base.useBlankEntityDataSlot('album', 'main');
 
@@ -88,8 +84,6 @@ exports.beforeFeature = () => {
         na.createEnteredArtist();
 
         na.enterAlbumCode(`TESTALBUMCODE${test.id}`);
-
-        // ---
 
         na.goToTab('Release Details');
 
@@ -116,18 +110,12 @@ exports.beforeFeature = () => {
             nard.enterLicenseCode(i, row.licenseCode);
         });
 
-        // ---
-
         na.save();
     });
-
-    // ---
 
     describe('Create person', () => {
         let p = steps.person,
             np = steps.newPerson;
-
-        // ---
 
         p.useBlankPersonSlot(0);
 
@@ -143,8 +131,6 @@ exports.beforeFeature = () => {
 
     describe('Fill required work creation fields', () => {
         let nw = steps.newWork;
-
-        // ---
 
         base.useBlankEntityDataSlot('work', 'main');
 
@@ -162,14 +148,15 @@ exports.beforeFeature = () => {
 };
 
 let addRecordings = () => {
-    let wr = steps.workRecordings,
+    let base = steps.base,
+        wr = steps.workRecordings,
         alb = wr.albums;
 
     describe('Add recordings', () => {
         test.recRows = _.times(4, i => {
-            describe(`Add recording ${i}`, () => {
-                let recRow = {};
+            let recRow = {};
 
+            describe(`Add recording ${i}`, () => {
                 recRow.id = random.id();
 
                 recRow.title = `TEST RECORDING ${recRow.id}`;
@@ -179,8 +166,6 @@ let addRecordings = () => {
                 recRow.artist.id = random.id();
                 recRow.artist.name = `TEST ARTIST ${recRow.artist.id}`;
 
-                // ---
-
                 wr.enterTitle(i, recRow.title);
                 wr.validateEnteredTitle(i, recRow.title);
 
@@ -188,11 +173,9 @@ let addRecordings = () => {
                 wr.createEnteredArtist();
                 wr.validateEnteredArtistSearchTerms(i, recRow.artist.name);
 
-                wr.validateRemovability(i, true);
+                wr.validateRemoveButtonState(i, 'enabled');
 
-                // ---
-
-                alb.toggleExpand(i);
+                wr.toggle(i);
 
                 alb.enterSearchTerms(i, 0, test.id);
                 alb.selectSearchResultByIndex(0, test.album.title);
@@ -201,13 +184,13 @@ let addRecordings = () => {
                 wr.validateRemoveButtonState(i, 'disabled');
 
                 wr.hoverRemoveButton(i);
-                base.validateTooltipMessage('Delete Recording');
+                base.validateTooltipMessage(test.cannotDeleteWithAlbumMsg);
 
                 alb.enterTrackNumber(i, 0, i + 1);
                 alb.validateEnteredTrackNumber(i, 0, i + 1);
-
-                return recRow;
             });
+
+            return recRow;
         });
     });
 };
@@ -220,9 +203,7 @@ let validateRecordingIrremovabilities = () => {
         test.recRows.forEach((row, i) => {
             wr.hoverRemoveButton(i);
 
-            base.validateTooltipMessage(
-                'Cannot Delete a Recording while associated to an Album'
-            );
+            base.validateTooltipMessage(test.cannotDeleteWithAlbumMsg);
 
             wr.validateRemoveButtonState(i, 'disabled');
         });
@@ -232,24 +213,35 @@ let validateRecordingIrremovabilities = () => {
 let validateRecordingAlbumReleaseDetails = () => {
     let wr = steps.workRecordings,
         alb = wr.albums,
-        rd = alb.releaseDetails;
+        rd = alb.release;
 
     describe('Validate recording album release details', () => {
         test.recRows.forEach((row, i) => {
             describe(`Recording ${i}`, () => {
-                alb.toggleExpand(i);
-                rd.toggleExpand(0);
+                wr.toggle(i);
+                alb.toggle(i, 0);
 
-                // ---
+                test.album.releaseDetails.forEach((row, j) => {
+                    describe(`Release details row ${j}`, () => {
+                        rd.findByCatalogueNumber(
+                            i, 0, row.catalogueNumber, 'release row index'
+                        );
 
-                test.album.releaseDetails.forEach((row, i) => {
-                    describe(`Release details row ${i}`, () => {
-                        rd.validateTerritories(i, row.territories);
-                        rd.validateReleaseDate(i, row.releaseDate);
-                        rd.validateConfiguration(i, row.configuration);
-                        rd.validateLabelName(i, row.labelName);
-                        rd.validateCatalogueNumber(i, row.catalogueNumber);
-                        rd.validateLicenseCode(i, row.licenseCode);
+                        let jFound = fromTestVariable('release row index');
+
+                        row.territories.forEach((name, k) => (
+                            rd.validateTerritory(i, 0, jFound, k, name)
+                        ));
+
+                        rd.validateReleaseDate(i, 0, jFound, row.releaseDate);
+
+                        rd.validateConfiguration(
+                            i, 0, jFound, row.configuration
+                        );
+
+                        rd.validateLabelName(i, 0, jFound, row.labelName);
+
+                        rd.validateLicenseCode(i, 0, jFound, row.licenseCode);
                     });
                 });
             });
@@ -259,8 +251,6 @@ let validateRecordingAlbumReleaseDetails = () => {
 
 let openAlbum = () => {
     let mhs = steps.mainHeader.search;
-
-    // ---
 
     mhs.selectEntityType('Albums');
 
@@ -272,8 +262,6 @@ let validateAlbumRecordings = () => {
     let alb = steps.album,
         ah = alb.header,
         ar = alb.recordings;
-
-    // ---
 
     ah.validateTrackCount(test.recRows.length);
 
@@ -296,9 +284,8 @@ exports.feature = [
 
         steps: () => {
             let nw = steps.newWork,
-                w = steps.work;
-
-            // ---
+                w = steps.work,
+                wr = steps.workRecordings;
 
             nw.continueToNextTab();
 
@@ -306,15 +293,13 @@ exports.feature = [
 
             nw.save();
 
-            // ---
-
             w.goToRecordingsTab();
-
-            validateRecordingIrremovabilities();
 
             validateRecordingAlbumReleaseDetails();
 
-            // ---
+            wr.edit();
+
+            validateRecordingIrremovabilities();
 
             openAlbum();
 
@@ -333,11 +318,7 @@ exports.feature = [
                 w = steps.work,
                 wr = steps.workRecordings;
 
-            // ---
-
             nw.save();
-
-            // ---
 
             w.goToRecordingsTab();
 
@@ -347,21 +328,19 @@ exports.feature = [
 
             wr.save();
 
-            // ---
-
-            validateRecordingIrremovabilities();
-
             validateRecordingAlbumReleaseDetails();
 
-            // ---
+            wr.edit();
+
+            validateRecordingIrremovabilities();
 
             base.refreshPage();
 
-            validateRecordingIrremovabilities();
-
             validateRecordingAlbumReleaseDetails();
 
-            // ---
+            wr.edit();
+
+            validateRecordingIrremovabilities();
 
             openAlbum();
 

@@ -36,8 +36,6 @@ exports.beforeFeature = () => {
 
         p.useBlankPersonSlot(0);
 
-        // ---
-
         let np = steps.newPerson;
 
         np.goToNewPersonPage();
@@ -54,8 +52,6 @@ exports.beforeFeature = () => {
         let base = steps.base;
 
         base.useBlankEntityDataSlot('work', test.scenario.i);
-
-        // ---
 
         let nw = steps.newWork;
 
@@ -79,11 +75,10 @@ exports.feature = [
         tags: [],
 
         steps: () => {
-            let nw = steps.newWork;
+            let base = steps.base,
+                nw = steps.newWork;
 
             nw.continueToNextTab();
-
-            // ---
 
             let wr = steps.workRecordings;
 
@@ -103,8 +98,6 @@ exports.feature = [
                         recRow.title = `TEST RECORDING ${recRow.id}`;
                         recRow.artistName = `TEST ARTIST ${recRow.id}`;
 
-                        // ---
-
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
@@ -123,8 +116,8 @@ exports.feature = [
                             3, leftPad(i, 2, 0)
                         ).join(' : '));
 
-                        wr.toggleFirstUseCheckbox(i);
-                        wr.validateFirstUseCheckboxState(i, true);
+                        wr.toggleFirstUseFlag(i);
+                        wr.validateFirstUseFlagState(i, true);
 
                         wr.hoverRemoveButton(i);
                         base.validateTooltipMessage('Delete Recording');
@@ -154,7 +147,7 @@ exports.feature = [
                             i * 2 + 1, 2, 0
                         )).join(' : '));
 
-                        wr.validateFirstUseCheckboxState(i, i === 1);
+                        wr.validateFirstUseFlagState(i, i === 1);
                     });
                 });
             });
@@ -167,23 +160,18 @@ exports.feature = [
         tags: [],
 
         steps: () => {
-            let nw = steps.newWork;
+            let base = steps.base,
+                nw = steps.newWork;
 
             nw.save();
-
-            // ---
 
             let w = steps.work;
 
             w.goToRecordingsTab();
 
-            // ---
-
             let wr = steps.workRecordings;
 
             wr.addRecordings();
-
-            // ---
 
             let testRecRows = [];
 
@@ -198,8 +186,6 @@ exports.feature = [
                         recRow.title = `TEST RECORDING ${recRow.id}`;
                         recRow.artistName = `TEST ARTIST ${recRow.id}`;
 
-                        // ---
-
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
@@ -218,8 +204,8 @@ exports.feature = [
                             3, leftPad(i, 2, 0)
                         ).join(' : '));
 
-                        wr.toggleFirstUseCheckbox(i);
-                        wr.validateFirstUseCheckboxState(i, true);
+                        wr.toggleFirstUseFlag(i);
+                        wr.validateFirstUseFlagState(i, true);
 
                         wr.hoverRemoveButton(i);
                         base.validateTooltipMessage('Delete Recording');
@@ -249,7 +235,7 @@ exports.feature = [
                             i * 2 + 1, 2, 0
                         )).join(' : '));
 
-                        wr.validateFirstUseCheckboxState(i, i === 1);
+                        wr.validateFirstUseFlagState(i, i === 1);
                     });
                 });
             });
@@ -266,8 +252,6 @@ exports.feature = [
 
             nw.continueToNextTab();
 
-            // ---
-
             let wr = steps.workRecordings;
 
             let testRecRows = [];
@@ -285,8 +269,6 @@ exports.feature = [
 
                         recRow.title = `TEST RECORDING ${recRow.id}`;
                         recRow.artistName = `TEST ARTIST ${recRow.id}`;
-
-                        // ---
 
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
@@ -306,23 +288,19 @@ exports.feature = [
                             3, leftPad(i, 2, 0)
                         ).join(' : '));
 
-                        wr.toggleFirstUseCheckbox(i);
-                        wr.validateFirstUseCheckboxState(i, true);
+                        wr.toggleFirstUseFlag(i);
+                        wr.validateFirstUseFlagState(i, true);
                     });
                 });
             });
 
             nw.save();
 
-            // ---
-
             let w = steps.work;
 
             w.goToRecordingsTab();
 
             wr.edit();
-
-            // ---
 
             let alb = wr.albums;
 
@@ -334,8 +312,8 @@ exports.feature = [
 
                     let iFound = fromTestVariable('row index');
 
-                    alb.toggleExpand(iFound);
-                    alb.toggleExpand(iFound);
+                    wr.toggle(iFound);
+                    wr.toggle(iFound);
 
                     wr.remove(iFound);
                     testRecRows.splice(i, 1);
@@ -343,8 +321,6 @@ exports.feature = [
             });
 
             wr.save();
-
-            // ---
 
             let validateRemainingOnes = () => {
                 describe('Validate remaining ones', () => {
@@ -366,7 +342,7 @@ exports.feature = [
                                 3, leftPad(i * 2 + 1, 2, 0)
                             ).join(' : '));
 
-                            wr.validateFirstUseCheckboxState(iFound, i === 1);
+                            wr.validateFirstUseFlagState(iFound, i === 1);
                         });
                     });
                 });

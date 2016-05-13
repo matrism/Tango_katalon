@@ -5,6 +5,12 @@ steps.workRecordings = exports;
 let page = pages.workRecordings;
 
 addBasicStep(exports, page, [
+    'Add recordings',
+    'Edit',
+
+    'Cancel changes',
+    'Save',
+
     'Validate row count',
 
     'Focus title field',
@@ -14,12 +20,14 @@ addBasicStep(exports, page, [
     'Find by entered title',
     'Entered title',
     'Validate entered title',
+    'Expect empty title field',
 
     'Find by title',
     'Validate title',
 
     'Enter artist search terms',
     'Validate entered artist search terms',
+    'Expect empty artist search terms field',
     'Select artist search result by index',
     'Create entered artist',
 
@@ -29,6 +37,7 @@ addBasicStep(exports, page, [
 
     'Enter duration',
     'Validate entered duration',
+    'Expect empty duration field',
     'Validate duration',
 
     'Toggle first use flag',
@@ -43,9 +52,12 @@ addBasicStep(exports, page, [
 ]);
 
 addStepGroup(exports, 'Albums', g => {
-    addBasicStep(exports, page.albums, [
+    addBasicStep(g, page.albums, [
+        'Validate row count',
+
         'Enter search terms',
         'Validate entered search terms',
+        'Expect empty search terms field',
         'Select search result by index',
         'Validate selected album title',
 
@@ -53,6 +65,8 @@ addStepGroup(exports, 'Albums', g => {
 
         'Enter track number',
         'Validate entered track number',
+        'Expect empty track number field',
+        'Validate track number',
 
         'Remove',
 
@@ -61,11 +75,12 @@ addStepGroup(exports, 'Albums', g => {
 });
 
 addStepGroup(exports.albums, 'Release', g => {
-    addBasicStep(exports, page.albums.release, [
+    addBasicStep(g, page.albums.release, [
         'Validate territory',
         'Validate release date',
         'Validate configuration',
         'Validate label name',
+        'Find by catalogue number',
         'Validate catalogue number',
         'Validate license code'
     ]);

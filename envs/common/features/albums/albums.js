@@ -214,16 +214,16 @@ exports.feature = [
             w.goToRecordingsTab();
 
             wr.toggle(0);
-            alb.toggle(0);
-            wr.validateAlbumTitle(0,
+            alb.toggle(0, 0);
+            alb.validateAlbumTitle(0, 0,
                 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
             );
-            rd.validateTerritory(0, 'United States');
-            rd.validateConfiguration(0, 'CD');
-            rd.validateCatalogueNumber(0,
+            rd.validateTerritory(0, 0, 0, 0, 'United States');
+            rd.validateConfiguration(0, 0, 0, 'CD');
+            rd.validateCatalogueNumber(0, 0, 0,
                 randomId('commercialAlbumCatalogueNumber').slice(0, 15)
             );
-            rd.validateLicenseCode(0,
+            rd.validateLicenseCode(0, 0, 0,
                 'LICENSE' + randomId('commercialAlbumLicenseCode')
             );
 

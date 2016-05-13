@@ -4,6 +4,56 @@ pages.workRecordings = exports;
 
 // ---
 
+exports.editContainer = () => $(
+    '[data-ng-controller="WorkRecordingsEditController"]'
+);
+
+// ---
+
+exports.addRecordingsButton = () => exports.editContainer().element(
+    by.cssContainingText('button', 'Enter Recording Details')
+);
+
+exports.addRecordings = () => asAlways(
+    exports.addRecordingsButton(), 'scrollIntoView', 'click'
+);
+
+// ---
+
+exports.editButton = () => exports.editContainer().$(
+    '[data-ng-click="tgModularViewMethods.switchToEditView()"]'
+);
+
+exports.edit = () => asAlways(
+    exports.editButton(), 'scrollIntoView', 'click'
+);
+
+// ---
+
+exports.editControls = () => exports.editContainer().$('.CONTROLS');
+
+// ---
+
+exports.saveButton = () => exports.editControls().element(
+    by.cssContainingText('button', 'Save')
+);
+
+exports.save = () => asAlways(
+    exports.saveButton(), 'scrollIntoView', 'click', 'waitForAjax'
+);
+
+// ---
+
+exports.cancelChangesButton = () => exports.editControls().element(
+    by.cssContainingText('button', 'Cancel')
+);
+
+exports.cancelChanges = () => asAlways(
+    exports.cancelChangesButton(), 'scrollIntoView', 'click'
+);
+
+// ---
+
 exports.rows = () => $$('.work-recordings-table-tr-wrap');
 
 exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
@@ -30,7 +80,7 @@ exports.titleSuggestionsContainer = () => $(
     '.work-recordings-table-suggestions'
 );
 
-exportss.titleSuggestionRows = () => element(by.repeater(
+exports.titleSuggestionRows = () => element.all(by.repeater(
     'rec in recording.suggestions.list'
 ));
 
@@ -81,6 +131,8 @@ exports.validateEnteredTitle = (i, val) => expect(
     exports.enteredTitle(i)
 ).toBe(val);
 
+exports.expectEmptyTitleField = i => exports.validateEnteredTitle(i, '');
+
 // ---
 
 {
@@ -130,15 +182,19 @@ exports.artistTypeahead = i => Typeahead(exports.rows().get(i).element(
 
 exports.enterArtistSearchTerms = (i, val) => asAlways(
     exports.artistTypeahead(i), 'scrollIntoView', 'clear'
-);
+).sendKeys(val);
 
 exports.enteredArtistSearchTerms = i => asAlways(
-    exports.artistTypeahead(i), 'scrollIntoView', 'getValue'
-);
+    exports.artistTypeahead(i), 'scrollIntoView'
+).getValue();
 
 exports.validateEnteredArtistSearchTerms = (i, val) => expect(
     exports.enteredArtistSearchTerms(i)
 ).toBe(val);
+
+exports.expectEmptyArtistSearchTermsField = i => (
+    exports.validateEnteredArtistSearchTerms(i, '')
+);
 
 // ---
 
@@ -146,15 +202,17 @@ exports.artistSearchResultNameBinding = (i, j) => (
     exports.artistTypeahead(i).results().get(j).$('.ng-binding')
 );
 
-exports.selectArtistSearchResultByIndex = (i, j, name) => asAlways(
-    exports.artistSearchResultNameBinding(i, j), 'scrollIntoView'
-).then(el => {
+exports.selectArtistSearchResultByIndex = (i, j, name) => {
+    let el = asAlways(
+        exports.artistSearchResultNameBinding(i, j), 'scrollIntoView'
+    );
+
     if(name) {
         expect(pph.getAllText(el)).toBe(name);
     }
 
-    return el;
-}).then(el => el.click());
+    return el.click();
+};
 
 exports.createEnteredArtistOption = () => element(by.cssContainingText(
     '.tg-typeahead__suggestions-footer a', 'Create New Artist'
@@ -199,9 +257,13 @@ exports.durationInput = i => exports.rows().get(i).$(
     '.work-recordings-table-time input'
 );
 
-exports.enterDuration = (i, val) => asAlways(
-    exports.durationInput(i), 'scrollIntoView', 'clear'
-).sendKeys(val);
+exports.enterDuration = (i, val) => {
+    let el = asAlways(exports.durationInput(i), 'scrollIntoView', 'clear');
+
+    browser.sleep(200);
+
+    return el.sendKeys(val);
+};
 
 exports.enteredDuration = i => asAlways(
     exports.durationInput(i), 'scrollIntoView', 'getValue'
@@ -210,6 +272,8 @@ exports.enteredDuration = i => asAlways(
 exports.validateEnteredDuration = (i, val) => expect(
     exports.enteredDuration(i)
 ).toBe(val);
+
+exports.expectEmptyDurationField = i => exports.validateEnteredDuration(i, '');
 
 // ---
 
@@ -245,7 +309,7 @@ exports.validateFirstUseFlagState = (i, st) => expect(
 
 // ---
 
-exports.removeButton = i => exports.recordingContainer(i).$(
+exports.removeButton = i => exports.rows().get(i).$(
     '.work-recordings-table-td-remove'
 );
 
@@ -256,12 +320,10 @@ exports.removeButtonEnabled = i => pph.matchesCssSelector(asAlways(
 ), ':not(.disabled)');
 
 exports.removeButtonState = i => {
-    let el = exports.removeButton(i);
-
     return promise.all([
-        exports.removeButtonEnabled().then(enabled => (
+        exports.removeButtonEnabled(i).then(enabled => (
             enabled? 'enabled' : 'disabled'
-        ));
+        ))
     ]);
 };
 
@@ -271,9 +333,10 @@ exports.validateRemoveButtonState = (i, st) => expect(
 
 // ---
 
-exports.hoverRemoveButton = i => asAlways(
-    exports.removeButton(i), 'scrollIntoView', 'hover'
-);
+exports.hoverRemoveButton = i => {
+    asAlways(exports.removeButton(i), 'scrollIntoView', 'hover');
+    return browser.sleep(500);
+};
 
 // ---
 
@@ -300,7 +363,12 @@ exports.toggle = i => asAlways(
 exports.albums = (() => {
     let alb = {};
 
-    alb.rows = i => exports.rows().get(i).$$('.work-recordings-table2');
+    alb.rows = i => exports.rows().get(i).$$(
+        '[data-ng-repeat="track in recording.tracks"], ' +
+        '.work-recordings-table2 > .work-recordings-table2-tr'
+    );
+
+    alb.validateRowCount = (i, val) => expect(alb.rows(i).count()).toBe(val);
 
     // ---
 
@@ -316,7 +384,7 @@ exports.albums = (() => {
 
     alb.enterSearchTerms = (i, j, val) => asAlways(
         alb.searchInput(i, j), 'scrollIntoView', 'clear'
-    ).then(el => el.sendKeys(val));
+    ).sendKeys(val);
 
     alb.enteredSearchTerms = (i, j) => asAlways(
         alb.searchInput(i, j), 'scrollIntoView', 'getValue'
@@ -325,6 +393,10 @@ exports.albums = (() => {
     alb.validateEnteredSearchTerms = (i, j, val) => expect(
         alb.enteredSearchTerms(i, j)
     ).toBe(val);
+
+    exports.expectEmptySearchTermsField = i => (
+        exports.validateEnteredSearchTerms(i, '')
+    );
 
     // ---
 
@@ -382,9 +454,9 @@ exports.albums = (() => {
 
     // ---
 
-    alb.trackNumberInput = (i, j) => alb.rows(i).get(j).$(
-        '.work-recordings-table2-track-input'
-    );
+    alb.trackNumberInput = (i, j) => alb.rows(i).get(j).element(by.model(
+        'track.track_number'
+    ));
 
     alb.enterTrackNumber = (i, j, val) => asAlways(
         alb.trackNumberInput(i, j), 'scrollIntoView', 'clear'
@@ -396,6 +468,24 @@ exports.albums = (() => {
 
     alb.validateEnteredTrackNumber = (i, j, val) => expect(
         alb.enteredTrackNumber(i, j)
+    ).toBe(val.toString());
+
+    alb.expectEmptyTrackNumberField = (i, j) => (
+        alb.validateEnteredTrackNumber(i, j, '')
+    );
+
+    // ---
+
+    alb.trackNumberBinding = (i, j) => alb.rows(i).get(j).element(
+        by.binding(" ::track.track_number || ' ' ")
+    );
+
+    alb.trackNumber = (i, j) => asAlways(
+        alb.trackNumberBinding(i, j), 'scrollIntoView', 'getAllText'
+    );
+
+    alb.validateTrackNumber = (i, j, val) => expect(
+        alb.trackNumber(i, j)
     ).toBe(val.toString());
 
     // ---
@@ -411,11 +501,11 @@ exports.albums = (() => {
     // ---
 
     alb.toggleButton = (i, j) => alb.rows(i).get(j).$(
-        '[data-ng-click="isCollapsed2 = !isCollapsed2"]'
+        '.work-recordings-table2-td-chevron'
     );
 
     alb.toggle = (i, j) => asAlways(
-        exports.toggleButton(i, j),
+        alb.toggleButton(i, j),
         'scrollIntoView', 'click', 'waitForAjax'
     );
 
@@ -468,7 +558,7 @@ exports.albums.release = (() => {
     );
 
     rel.configuration = (i, j, k) => asAlways(
-        rel.releaseDateBinding(i, j, k), 'scrollIntoView', 'getAllText'
+        rel.configurationBinding(i, j, k), 'scrollIntoView', 'getAllText'
     );
 
     rel.validateConfiguration = (i, j, k, val) => expect(
@@ -482,7 +572,7 @@ exports.albums.release = (() => {
     );
 
     rel.labelName = (i, j, k) => asAlways(
-        rel.releaseDateBinding(i, j, k), 'scrollIntoView', 'getAllText'
+        rel.labelNameBinding(i, j, k), 'scrollIntoView', 'getAllText'
     );
 
     rel.validateLabelName = (i, j, k, val) => expect(
@@ -491,12 +581,45 @@ exports.albums.release = (() => {
 
     // ---
 
-    rel.catalogueNumberBinding = (i, j, k) => rel.rows(i, j).get(k).element(
-        by.binding(" albumRelease.catalog_number || ' ' ")
-    );
+    {
+        let locator = by.binding(" albumRelease.catalog_number || ' ' ");
+
+        rel.catalogueNumberBindings = (i, j) => rel.rows(i, j).all(locator);
+
+        rel.catalogueNumberBinding = (i, j, k) => rel.rows(i, j).get(k).element(
+            locator
+        );
+    }
+
+    // ---
+
+    rel.rowIndexByCatalogueNumber = (i, j, val) => {
+        let el = rel.catalogueNumberBindings(i, j).filter(el => pph.areEqual(
+            pph.getAllText(el), val.toString()
+        )).first();
+
+        return browser.executeScript(function (el) {
+            return $(el).closest('.work-recordings-table3-tr').index();
+        }, el.getWebElement());
+    };
+
+    rel.findByCatalogueNumber = (i, j, val, varName) => {
+        let iRow;
+
+        return (
+            rel.rowIndexByCatalogueNumber(i, j, val)
+                .then(i => iRow = i)
+                .then(() => pages.base.scrollIntoView(
+                    rel.catalogueNumberBinding(iRow)
+                ))
+                .then(() => hash.testVariables[varName] = iRow)
+        );
+    };
+
+    // ---
 
     rel.catalogueNumber = (i, j, k) => asAlways(
-        rel.releaseDateBinding(i, j, k), 'scrollIntoView', 'getAllText'
+        rel.catalogueNumberBinding(i, j, k), 'scrollIntoView', 'getAllText'
     );
 
     rel.validateCatalogueNumber = (i, j, k, val) => expect(
@@ -510,7 +633,7 @@ exports.albums.release = (() => {
     );
 
     rel.licenseCode = (i, j, k) => asAlways(
-        rel.releaseDateBinding(i, j, k), 'scrollIntoView', 'getAllText'
+        rel.licenseCodeBinding(i, j, k), 'scrollIntoView', 'getAllText'
     );
 
     rel.validateLicenseCode = (i, j, k, val) => expect(
