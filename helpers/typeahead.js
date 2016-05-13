@@ -8,8 +8,18 @@ function Typeahead (target, dummy, isAppendedToBody) {
         typeahead = element(target);
     }
 
+    let termInput = typeahead.element(by.model('$term'));
+
+    typeahead.clear = () => {
+        return termInput.clear();
+    };
+
     typeahead.sendKeys = function (keys) {
-        return typeahead.element(by.model('$term')).sendKeys(keys);
+        return termInput.sendKeys(keys);
+    };
+
+    typeahead.getValue = () => {
+        return termInput.getAttribute('value');
     };
 
     typeahead.results = function (text, isExact) {
