@@ -30,16 +30,10 @@ function Typeahead (target, dummy, isAppendedToBody) {
             results = $('body > .tg-typeahead__suggestions-wrap').$$(resultSelector);
         }
 
-        if (text) {
-            results = results.filter(function(elem, index){
-                return elem.getText().then(function(elemText){
-                    return elemText.toLowerCase().indexOf(text.toLowerCase()) > -1;
-                });
-            });
+        browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
 
-            if (isExact) {
-                results = results.filter(pph.matchTextExact(text));
-            }
+        if (text) {
+            results = results.filter(pph.matchText(text, isExact));
         }
 
         /*if (text) {
@@ -50,7 +44,6 @@ function Typeahead (target, dummy, isAppendedToBody) {
             }
         }*/
 
-        browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
         return results;
     };
 
@@ -62,13 +55,15 @@ function Typeahead (target, dummy, isAppendedToBody) {
     };
 
     typeahead.select = function (text, isExact) {
-        typeahead.sendKeys(text);
-        typeahead.results(text, isExact).first().click();
+        return typeahead.clear().then(
+            () => typeahead.sendKeys(text)
+        ).then(
+            () => typeahead.results(text, isExact).first().click()
+        );
     };
 
     typeahead.selectFirst = function(text) {
-        typeahead.sendKeys(text);
-        typeahead.results().first().click();
+        return typeahead.select();
     };
 
     return typeahead;
