@@ -205,40 +205,45 @@ exports.feature = [
         ],
         steps: function () {
             var w = steps.work,
-                wr = steps.workRecordings;
+                wr = steps.workRecordings,
+                alb = wr.albums,
+                rd = alb.release;
 
             steps.base.useEntityDataSlot('work', 'mainWork');
             w.goToWorkPage();
             w.goToRecordingsTab();
 
-            wr.toggleRecording(0);
-            wr.toggleAlbum(0);
+            wr.toggle(0);
+            alb.toggle(0);
             wr.validateAlbumTitle(0,
                 'TEST COMMERCIAL ALBUM ' + randomId('commercialAlbum')
             );
-            wr.validateReleaseTerritory(0, 'United States');
-            wr.validateReleaseConfiguration(0, 'CD');
-            wr.validateReleaseCatalog(0,
+            rd.validateTerritory(0, 'United States');
+            rd.validateConfiguration(0, 'CD');
+            rd.validateCatalogueNumber(0,
                 randomId('commercialAlbumCatalogueNumber').slice(0, 15)
             );
-            wr.validateReleaseLicenseCode(0,
+            rd.validateLicenseCode(0,
                 'LICENSE' + randomId('commercialAlbumLicenseCode')
             );
-            wr.validateRecordingNames(
-                _.times(3, function (i) {
-                    return 'TEST RECORDING ' + randomId('commercialAlbumRecording' + i);
-                })
-            );
-            wr.validateArtistNames(
-                _.times(3, function (i) {
-                    return 'TEST ARTIST ' + randomId('commercialAlbum');
-                })
-            );
-            wr.validateRecordingDurations(
-                _.times(3, function (i) {
-                    return '00 : 0' + (i + 1) + ' : 00';
-                })
-            );
+
+            _.times(3, i => {
+                wr.findByTitle(
+                    'TEST RECORDING ' + randomId(
+                        'commercialAlbumRecording' + i
+                    ), 'row index'
+                );
+
+                let iFound = fromTestVariable('row index');
+
+                wr.validateArtistName(
+                    iFound, 'TEST ARTIST ' + randomId('commercialAlbum')
+                );
+
+                wr.validateDuration(
+                    iFound, '00 : 0' + (i + 1) + ' : 00'
+                );
+            });
         }
     },
     {

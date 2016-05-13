@@ -198,11 +198,10 @@ let addRecordings = () => {
                 alb.selectSearchResultByIndex(0, test.album.title);
                 alb.validateSelectedAlbumTitle(i, 0, test.album.title);
 
-                wr.validateRemovability(i, false);
+                wr.validateRemoveButtonState(i, 'disabled');
 
-                wr.validateRemoveButtonTooltip(
-                    i, 'Cannot Delete a Recording while associated to an Album'
-                );
+                wr.hoverRemoveButton(i);
+                base.validateTooltipMessage('Delete Recording');
 
                 alb.enterTrackNumber(i, 0, i + 1);
                 alb.validateEnteredTrackNumber(i, 0, i + 1);
@@ -214,15 +213,18 @@ let addRecordings = () => {
 };
 
 let validateRecordingIrremovabilities = () => {
-    let wr = steps.workRecordings;
+    let base = steps.base,
+        wr = steps.workRecordings;
 
     describe('Validate recording irremovabilities', () => {
         test.recRows.forEach((row, i) => {
-            wr.validateRemoveButtonTooltip(
-                i, 'Cannot Delete a Recording while associated to an Album'
+            wr.hoverRemoveButton(i);
+
+            base.validateTooltipMessage(
+                'Cannot Delete a Recording while associated to an Album'
             );
 
-            wr.validateRemovability(i, false);
+            wr.validateRemoveButtonState(i, 'disabled');
         });
     });
 };

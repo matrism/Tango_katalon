@@ -127,7 +127,8 @@ exports.feature = [
                         wr.toggleFirstUseCheckbox(i);
                         wr.validateFirstUseCheckboxState(i, true);
 
-                        wr.validateRemoveButtonTooltip(i, 'Delete Recording');
+                        wr.hoverRemoveButton(i);
+                        base.validateTooltipMessage('Delete Recording');
                     });
                 });
             });
@@ -211,7 +212,8 @@ exports.feature = [
                         wr.toggleFirstUseCheckbox(i);
                         wr.validateFirstUseCheckboxState(i, true);
 
-                        wr.validateRemoveButtonTooltip(i, 'Delete Recording');
+                        wr.hoverRemoveButton(i);
+                        base.validateTooltipMessage('Delete Recording');
                     });
                 });
             });
