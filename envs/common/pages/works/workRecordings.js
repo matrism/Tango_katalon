@@ -4,6 +4,8 @@ var pph = require('../../../../helpers/pph');
 
 pages.workRecordings = exports;
 
+// ---
+
 exports.recordingContainers = function() {
     return $$('.work-recordings-table-tr-wrap');
 };
@@ -11,6 +13,40 @@ exports.recordingContainers = function() {
 exports.recordingContainer = function(i) {
     return exports.recordingContainers().get(i);
 };
+
+// ---
+
+exports.recordingNameInput = i => (
+    exports.recordingContainer(i).element(by.model(
+        'recording.title'
+    ))
+);
+
+exports.clickRecordingNameField = i => asAlways(
+    exports.recordingNameInput(i), 'scrollIntoView', 'click'
+);
+
+exports.recordingNameSuggestions = () => $$(
+    '.work-recordings-table-suggestions > li'
+);
+
+exports.waitForRecordingNameSuggestions = () => browser.wait(
+    EC.visibilityOfAny(exports.recordingNameSuggestions())
+);
+
+exports.selectRecordingNameSuggestionByIndex = (i, val) => {
+    exports.waitForRecordingNameSuggestions();
+
+    let el = exports.recordingNameSuggestions().get(i);
+
+    return pages.base.scrollIntoView(el).then(() => {
+        if(val) {
+            expect(pph.getAllText(el)).toBe(val);
+        }
+    }).then(() => el.click());
+};
+
+// ---
 
 exports.recordingNameBindings = function() {
     return exports.recordingContainers().all(
@@ -36,6 +72,43 @@ exports.validateRecordingNames = function(values) {
     });
 };
 
+// ---
+
+exports.artistNameInput = i => (
+    exports.recordingContainer(i)
+        .element(by.model('recording.artist'))
+        .element(by.model('$term'))
+);
+
+exports.enterArtistName = (i, val) => asAlways(
+    exports.artistNameInput(i), 'scrollIntoView', 'clear'
+).sendKeys(val);
+
+exports.artistSearchResultsContainer = () => $(
+    '.tg-typeahead__suggestions'
+);
+
+exports.waitForArtistSearchResults = () => browser.wait(
+    EC.visibilityOf(exports.artistSearchResultsContainer())
+);
+
+exports.createEnteredArtistOption = () => (
+    exports.artistSearchResultsContainer().element(
+        by.cssContainingText('span', 'Create New Artist')
+    )
+);
+
+exports.createEnteredArtist = () => {
+    exports.waitForArtistSearchResults();
+
+    return asAlways(
+        exports.createEnteredArtistOption(),
+        'scrollIntoView', 'click', 'waitForAjax'
+    );
+};
+
+// ---
+
 exports.artistNameBindings = function() {
     return exports.recordingContainers().all(
         by.binding('recording.artist.display_name')
@@ -59,6 +132,20 @@ exports.validateArtistNames = function(values) {
         expect(names).toContain(value);
     });
 };
+
+// ---
+
+exports.recordingDurationInput = i => (
+    exports.recordingContainer(i)
+        .element(by.model('recording.duration'))
+        .element(by.model('time'))
+);
+
+exports.enterRecordingDuration = (i, val) => asAlways(
+    exports.recordingDurationInput(i), 'scrollIntoView', 'clear'
+).sendKeys(val);
+
+// ---
 
 exports.recordingDurationBindings = function() {
     return exports.recordingContainers().all(
@@ -84,6 +171,8 @@ exports.validateRecordingDurations = function(values) {
     });
 };
 
+// ---
+
 exports.libraryNameBinding = function(i) {
     return $$('[data-ng-switch="commonDataHolder.isLibrary"] .ng-binding').get(i);
 };
@@ -97,6 +186,8 @@ exports.libraryName = function(i) {
 exports.validateLibraryName = function(i, value) {
     expect(exports.libraryName(i)).toBe(value);
 };
+
+// ---
 
 exports.toggleRecordingButton = function (i) {
     return exports.recordingContainer(i).$(

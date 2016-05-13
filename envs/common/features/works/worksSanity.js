@@ -131,16 +131,16 @@ exports.feature = [
 
             [function () {
                 _.times(3, function (i) {
-                    steps.newWorkRecordings.clickRecordingNameField(i);
-                    steps.newWorkRecordings.selectRecordingNameSuggestionByIndex(i);
+                    steps.workRecordings.clickRecordingNameField(i);
+                    steps.workRecordings.selectRecordingNameSuggestionByIndex(i);
 
-                    steps.newWorkRecordings.enterArtistName(
+                    steps.workRecordings.enterArtistName(
                         i, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
                     );
 
-                    steps.newWorkRecordings.createEnteredArtist();
+                    steps.workRecordings.createEnteredArtist();
 
-                    steps.newWorkRecordings.enterRecordingDuration(
+                    steps.workRecordings.enterRecordingDuration(
                         i, '00' + leftPad(i + 1, 2, 0) + '00'
                     );
                 });
@@ -459,7 +459,7 @@ exports.feature = [
 
                 this.continueToNextTab();
 
-                _.times(3, bind(steps.newWorkRecordings, function (__, i) {
+                _.times(3, bind(steps.workRecordings, function (__, i) {
                     this.clickRecordingNameField(i);
                     this.selectRecordingNameSuggestionByIndex(i);
 
