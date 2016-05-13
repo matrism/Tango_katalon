@@ -7,6 +7,9 @@ var leftPad = require('left-pad'),
     bind = fnutils.bind,
     using = fnutils.using;
 
+exports.id = 'd8fbef14-ad20-4457-a80a-295df4c98716';
+exports.featureName = 'Albums Regression';
+
 exports.commonFeatureTags = [
     'albums',
     'albumsRegression'
