@@ -136,7 +136,7 @@ exports.issue = (() => {
 
     // TODO: update step description, add new ones and remove non existent ones
     issue.saveStep = (description, orderId) => {
-        var promise = issue.getStepsDeferred.promise.then(() => {
+        issue.getStepsDeferred.promise.then(() => {
             if (issue.stepsFound) {
                 log('Issue steps already exists.');
             } else {
