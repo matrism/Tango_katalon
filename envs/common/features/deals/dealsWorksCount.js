@@ -4,6 +4,8 @@ var moment = require('moment'),
     randomId = random.id.makeMemoizedGenerator(),
     randomString = random.string.makeMemoizedGenerator();
 
+exports.id = 'a8f953e7-7a3b-4e63-9e89-def519e6e73c';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };

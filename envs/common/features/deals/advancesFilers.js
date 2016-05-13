@@ -1,5 +1,8 @@
 'use strict';
 
+exports.id = '2cc24101-005c-4835-85b2-cb4c5de42bd0';
+exports.featureName = 'Deal Advances Filter';
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };

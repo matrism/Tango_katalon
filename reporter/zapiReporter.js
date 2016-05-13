@@ -3,7 +3,12 @@
 let zapi = require('../tools/zapi'),
     path = require('path'),
     Q = require('q'),
-    promises = [];
+    promises = [],
+    reportingIsEnabled = false;
+
+function log () {
+    console.log('[Zapi]', ...arguments);
+}
 
 exports.init = (obj) => {
     zapi.setCycleId(obj.cycleId);
@@ -18,6 +23,8 @@ exports.jasmineStarted = (info) => {
 exports.suiteStarted = (suite) => {
     if (suite.type == 'feature' && suite.obj && suite.obj.id) {
         var featureName = suite.fullName;
+        reportingIsEnabled = true;
+
         if (suite.obj.featureName) {
             featureName = suite.obj.featureName;
         } else {
@@ -39,6 +46,10 @@ exports.specDone = (spec) => {
         stepNum = spec.stepNum + 1,
         failMessage = '';
 
+    if (!reportingIsEnabled) {
+        return;
+    }
+
     if (stepName == 'User is logged in') {
         let scenario = spec.fullName.split(' ').splice(1).join(' ').replace('Before feature User is logged in', '');
         stepName = '[Scenario] ' + scenario;
@@ -59,9 +70,15 @@ exports.suiteDone = (suite) => {
 };
 
 exports.jasmineDone = () => {
-    zapi.issue.postExecution();
-    zapi.execution.updateStatus().then(() => {
-        console.log('[Zapi] Done');
+    if (reportingIsEnabled) {
+        zapi.issue.postExecution();
+        zapi.execution.updateStatus().then(() => {
+            log('Done');
+            exports.deferred.resolve()
+        });
+    } else {
+        log('Feature id not found on feature file.');
         exports.deferred.resolve()
-    });
+    }
+
 };
