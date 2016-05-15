@@ -979,43 +979,57 @@ exports.clickOnPublishingRightsCheckBox = function () {
     });
 };
 
-exports.clickOnPublishingRightsNumberI = function(i){
-  it("Click on the publishing rights number " + i, function(){
-     pages.createDealScope.clickOnThePublishingRightsNumberI(i);
-      pages.createDealScope.waitForAjax();
-  });
+exports.checkThatPublishingRightsCheckBoxIsPartiallySelected = function () {
+    it("Check that the publishing rights is partially selected", function () {
+        pages.createDealScope.checkThatThePublishingRightsCheckBoxIsPartiallySelected();
+        pages.createDealScope.waitForAjax();
+    });
 };
 
-exports.checkThatPublishingRightsNumberIIsSelected = function(i){
-    it("Check that the publishing rights number " + i + " is selected", function(){
+exports.checkThatMasterRightsCheckBoxIsPartiallySelected = function () {
+    it("Check that the master rights is partially selected", function () {
+        pages.createDealScope.checkThatTheMasterRightsCheckBoxIsPartiallySelected();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnPublishingRightsNumberI = function (i) {
+    it("Click on the publishing rights number " + i, function () {
+        pages.createDealScope.clickOnThePublishingRightsNumberI(i);
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.checkThatPublishingRightsNumberIIsSelected = function (i) {
+    it("Check that the publishing rights number " + i + " is selected", function () {
         pages.createDealScope.checkThatThePublishingRightsNumberIIsSelected(i);
         pages.createDealScope.waitForAjax();
     });
 };
 
-exports.checkThatPublishingRightsNumberIIsDeSelected = function(i){
-    it("Check that the publishing rights number " + i + " is de-selected", function(){
+exports.checkThatPublishingRightsNumberIIsDeSelected = function (i) {
+    it("Check that the publishing rights number " + i + " is de-selected", function () {
         pages.createDealScope.checkThatThePublishingRightsNumberIIsDeSelected(i);
         pages.createDealScope.waitForAjax();
     });
 };
 
-exports.checkThatMasterRightsNumberIIsSelected = function(i){
-    it("Check that the publishing rights number " + i + " is selected", function(){
+exports.checkThatMasterRightsNumberIIsSelected = function (i) {
+    it("Check that the publishing rights number " + i + " is selected", function () {
         pages.createDealScope.checkThatTheMasterRightsNumberIIsSelected(i);
         pages.createDealScope.waitForAjax();
     });
 };
 
-exports.checkThatMastergRightsNumberIIsDeSelected = function(i){
-    it("Check that the publishing rights number " + i + " is de-selected", function(){
+exports.checkThatMastergRightsNumberIIsDeSelected = function (i) {
+    it("Check that the publishing rights number " + i + " is de-selected", function () {
         pages.createDealScope.checkThatTheMasterRightsNumberIIsDeSelected(i);
         pages.createDealScope.waitForAjax();
     });
 };
 
-exports.clickOnMasterRightsNumberI = function(i){
-    it("Click on the masterng rights number " + i, function(){
+exports.clickOnMasterRightsNumberI = function (i) {
+    it("Click on the masterng rights number " + i, function () {
         pages.createDealScope.clickOnTheMasterRightsNumberI(i);
         pages.createDealScope.waitForAjax();
     });
@@ -1028,9 +1042,9 @@ exports.clickOnMasterRightsCheckBox = function () {
     });
 };
 
-exports.clickOnLimitedToCheckBox = function(){
-  it("Click on the limited to check box on contractual right types on scope ", function () {
-      pages.createDealScope.clickOnTheLimitedToCheckBox();
-      pages.createDealScope.waitForAjax();
-  });
+exports.clickOnLimitedToCheckBox = function () {
+    it("Click on the limited to check box on contractual right types on scope ", function () {
+        pages.createDealScope.clickOnTheLimitedToCheckBox();
+        pages.createDealScope.waitForAjax();
+    });
 };

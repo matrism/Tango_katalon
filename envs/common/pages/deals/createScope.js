@@ -770,8 +770,26 @@ if (pages.createDealScope === undefined) {
 
 
         clickOnThePublishingRightsCheckBox: function () {
-            pages.base.scrollIntoView( pages.createDealScope.elems.publishingRightsCheckBox);
+            pages.base.scrollIntoView(pages.createDealScope.elems.publishingRightsCheckBox);
             pages.createDealScope.elems.publishingRightsCheckBox.click();
+        },
+
+        checkThatThePublishingRightsCheckBoxIsPartiallySelected: function(){
+            pages.base.scrollIntoView(pages.createDealScope.elems.publishingRightsCheckBox);
+            pages.createDealScope.elems.publishingRightsCheckBox.getAttribute("class")
+                .then(function (promise) {
+                    console.log("The partial selected publishing rights class is : " + promise);
+                    expect(promise).toEqual("fa fa-minus-square-o");
+                });
+        },
+
+        checkThatTheMasterRightsCheckBoxIsPartiallySelected: function(){
+            pages.base.scrollIntoView(pages.createDealScope.elems.masterRightsCheckBox);
+            pages.createDealScope.elems.masterRightsCheckBox.getAttribute("class")
+                .then(function (promise) {
+                    console.log("The partial selected master rights class is : " + promise);
+                    expect(promise).toEqual("fa fa-minus-square-o");
+                });
         },
 
         clickOnThePublishingRightsNumberI: function (i) {
