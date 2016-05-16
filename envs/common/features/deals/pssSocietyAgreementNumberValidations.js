@@ -4,7 +4,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'psss', 'regression'];
+exports.commonFeatureTags = ['deals', 'society', 'regression'];
 
 exports.feature = [
     {
