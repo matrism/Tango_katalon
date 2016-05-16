@@ -275,6 +275,13 @@ exports.saveEditGeneralTabFirstElementsLeftArea = function () {
     });
 };
 
+exports.cancelEditGeneralTabFirstElementsLeftArea = function () {
+    it("Cancel edit general tab first elements left area ", function () {
+        pages.editDealGeneral.clickOnTheCancelEditGeneralLeftTabArea();
+        pages.editDealGeneral.waitForAjax();
+    });
+};
+
 exports.editSelectTheExecutedContractStatus = function (value) {
     it("Edit select the executed contract status and check that it is selected ", function () {
         pages.editDealGeneral.editSelectToTheExecutedContractStatus(value);
@@ -339,4 +346,42 @@ exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
     });
 };
 
+exports.editCheckDealSigningTerritoryCannotBeChangedTooltip = function () {
+    it("Edit check that deal signing territory cannot be changed, it is greyed out and check the error message ", function () {
+        pages.editDealGeneral.editCheckTheDealSigningTerritoryCannotBeChangedTooltip();
+    });
+};
 
+exports.editCheckDealSigningTerritoryFieldGeneralTabIsDisabled = function () {
+    it("Edit check that deal signing territory general tab is disabled, cannot be clicked ", function () {
+        pages.base.scrollIntoView(element(by.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass']")));
+        browser.driver.findElement(By.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass']>div")).getAttribute("class").
+        then(function (promise) {
+            console.log(" Deal territory class contains disabled text : " + promise);
+            expect(promise).toContain("disabled");
+        });
+    });
+};
+
+
+exports.editCheckDealSigningTerritoryFieldGeneralTabIsNotDisabled = function () {
+    it("Edit check that deal signing territory general tab is disabled, cannot be clicked ", function () {
+        pages.base.scrollIntoView(element(by.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass']")));
+        browser.driver.findElement(By.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass']>div")).getAttribute("class").
+        then(function (promise) {
+            console.log(" Deal territory class contains disabled text : " + promise);
+            expect(promise).not.toContain("disabled");
+        });
+    });
+};
+
+exports.editCheckDealSigningTerritoryValueIs = function (country) {
+    it("Edit check that deal signing territory general tab is successfully changed and the value is ", function () {
+        pages.base.scrollIntoView(element(by.css("div[data-tg-modular-edit-id='generalLeft'] div.control-group div:nth-child(3) div.controls.span4.break-word.ng-binding")));
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='generalLeft'] div.control-group div:nth-child(3) div.controls.span4.break-word.ng-binding")).getText().
+        then(function (promise) {
+            console.log(" Deal territory value is  : " + promise);
+            expect(promise).toEqual(country);
+        });
+    });
+};

@@ -18,7 +18,8 @@ var path = require('path'),
     orphanOnErrorReporter = require('../tools/orphanOnErrorReporter'),
     demoReporter = require('../tools/demoReporter'),
     zapiReporter = require('../reporter/zapiReporter'),
-    stepByStepReporter = require('../tools/stepByStepReporter');
+    stepByStepReporter = require('../tools/stepByStepReporter'),
+    unlinkTestRunSnapshots = require('../tools/unlinkTestRunSnapshots');
 
 global.ftf = require('factory-testing-framework');
 global._tf_config = require('./config');
@@ -231,6 +232,10 @@ config = {
         }
     },
     onCleanUp: function(statusCode) {
+        if(statusCode === 0 && systemConfig.saveDiskSpace) {
+            unlinkTestRunSnapshots();
+        }
+
         console.log('Finished with code:', statusCode);
         console.timeEnd('Tests time');
 

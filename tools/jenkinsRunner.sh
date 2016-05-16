@@ -59,7 +59,7 @@ cmd_line+=" --commit $(git rev-parse HEAD)"
 cmd_line+=" --build $(printf '%q' "$BUILD_NUMBER")"
 
 # Xvfb.
-cmd_line+=" xvfb-run -a -s \"-screen 0 1920x1080x24\""
+cmd_line+=" -- xvfb-run -a -s \"-screen 0 1920x1080x24\""
 
 # Protractor.
 cmd_line+=" ./node_modules/.bin/protractor configs/protractor-conf.js"

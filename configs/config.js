@@ -77,7 +77,8 @@ var defaultUserName = 'TangoTest1',
             demoReporter: cli['demo-reporter'],
             cycle: cli['cycle'],
             stepByStep: cli['step-by-step'],
-            fingerprints: cli.fingerprints
+            fingerprints: cli.fingerprints,
+            saveDiskSpace: cli['save-disk-space']
         },
         _env_: { ENV_TYPE: env },
         qa: {
