@@ -13,7 +13,7 @@ cmd_line="node ./tools/jobRunner.js $@"
 cmd_line+=" --commit $(git rev-parse HEAD)"
 
 # Protractor.
-cmd_line+=" ./node_modules/.bin/protractor configs/protractor-conf.js"
+cmd_line+=" -- ./node_modules/.bin/protractor configs/protractor-conf.js"
 
 # Report logging.
 # TODO: Fix me (bad path?)

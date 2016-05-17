@@ -224,7 +224,17 @@ let cp = require('child_process'),
             continue;
         }
 
-        startPrefix = [rawArg, ...rawArgs];
+        startPrefix = (() => {
+            let ret = [rawArg, ...rawArgs],
+                iSplit = ret.indexOf('--');
+
+            if(iSplit !== -1) {
+                ret.unshift(...ret.splice(iSplit + 1));
+                ret.pop();
+            }
+
+            return ret;
+        })();
 
         break;
     }

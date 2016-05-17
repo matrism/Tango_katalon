@@ -20,7 +20,7 @@ echo '{"webdriverVersions": {"selenium": "2.47.1", "chromedriver": "2.14", "iedr
     --out_dir ./node_modules/protractor/selenium --standalone false
 
 # Job runner.
-cmd_line="node ./tools/jobRunner.js $job_runner_options"
+cmd_line="node ./tools/jobRunner.js"
 
 if [ -n "$job_count" ]; then
     cmd_line+=" --jobs $(printf '%q' "$job_count")"
@@ -58,8 +58,10 @@ cmd_line+=" --commit $(git rev-parse HEAD)"
 
 cmd_line+=" --build $(printf '%q' "$BUILD_NUMBER")"
 
+cmd_line+=" $job_runner_options"
+
 # Xvfb.
-cmd_line+=" xvfb-run -a -s \"-screen 0 1920x1080x24\""
+cmd_line+=" -- xvfb-run -a -s \"-screen 0 1920x1080x24\""
 
 # Protractor.
 cmd_line+=" ./node_modules/.bin/protractor configs/protractor-conf.js"
@@ -68,7 +70,7 @@ if [ -n "$wait_timeout" ]; then
     cmd_line+=" --wait_timeout $(printf '%q' "$wait_timeout")"
 fi
 
-cmd_line+=" $additional_protractor_options"
+cmd_line+=" $job_options"
 
 # Report logging.
 # TODO: Fix me (bad path?)
