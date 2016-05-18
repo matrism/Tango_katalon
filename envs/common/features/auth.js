@@ -3,7 +3,6 @@
 exports.id = 'd3abf302-cc7c-4539-aeb4-ecd379acca56';
 
 exports.commonFeatureTags = [
-    'broken',
     'authSmoke',
     'auth'
 ];
@@ -11,10 +10,6 @@ exports.commonFeatureTags = [
 exports.feature = [
     {
         name: 'Log in and out',
-
-        breakageDescription: (
-            'Error on last step (angular is not defined) crashes Protractor.'
-        ),
 
         tags: [],
 
