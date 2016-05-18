@@ -100,7 +100,9 @@
     }
 
     .name {
+        display: inline-block;
         margin-left: -30px;
+        margin-right: 20px;
     }
 
     .failed {
@@ -115,7 +117,7 @@
         color: #a0a000;
     }
 
-    .name:not(:last-child) .val {
+    .name:not(:last-child) {
         cursor: pointer;
     }
 
@@ -276,8 +278,10 @@
     <script>
         'use strict';
 
-        $('body').on('click', '.name:not(:last-child) .val', function (ev) {
-            var $block = $(ev.target).closest('.name').parent();
+        $('body').on('click', '.name:not(:last-child)', function (ev) {
+            var $block = (
+                $(ev.target).closest('.name').addBack('.name').parent()
+            );
 
             if($block.is('.filterExpand')) {
                 $block.removeClass('filterExpand').addClass('collapse');
