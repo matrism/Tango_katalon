@@ -53,8 +53,21 @@ exports.table = (() => {
         )).first();
     };
 
+    table.addTotal = (data) => {
+        let total = {};
+        for (let i in data) {
+            for (let j in data[i]) {
+                total[j] = total[j] || 0;
+                total[j] += parseFloat(data[i][j]);
+            }
+        }
+        data['total'] = total;
+        return data;
+    };
+
     table.validate = (incomeGroup, backendData) => {
         backendData = callResultOrValue(backendData) || {};
+        let data = table.addTotal(backendData);
         table.findIncomeGroup(incomeGroup);
         let breakdownRows = {
             'domestic_values': table.breakdown('Domestic').$$('td'),
@@ -65,9 +78,10 @@ exports.table = (() => {
             for (let column in table.columns) {
                 if (backendData[row] && breakdownRows[row]) {
                     let order = table.columns[column],
-                        backendValue = Number(backendData[row][column]).toFixed(4);
+                        backendValue = Number(backendData[row][column]).toFixed(4),
+                        tableValue = breakdownRows[row].get(order).getText();
 
-                    expect(breakdownRows[row].get(order)).toBe(backendValue);
+                    expect(tableValue).toBe(backendValue);
                 }
             }
         }

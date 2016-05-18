@@ -1,6 +1,6 @@
 'use strict';
 
-var iso = require('iso-3166-1'),
+var iso = require('iso-3166-1');
 
 exports.commonFeatureTags = ['royaltyProcessing'];
 
