@@ -443,7 +443,11 @@
 
         tat.makeLinkDiv = function (classes, name, href) {
             return tat.el('div', classes, [
-                tat.el('a', { class: classes, href: href }, [name])
+                tat.el('a', {
+                    class: classes,
+                    href: href,
+                    target: '_blank'
+                }, [name])
             ]);
         };
 
