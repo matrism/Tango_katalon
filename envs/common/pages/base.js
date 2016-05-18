@@ -105,10 +105,23 @@ module.exports.dirtyCheckContinueEditingButton = function () {
         by.cssContainingText("button", "Continue Editing")
     );
 };
+
+exports.dirtyCheckContinueEditing = () => {
+    exports.waitForModal();
+
+    return exports.dirtyCheckContinueEditingButton().click();
+};
+
 module.exports.dirtyCheckConfirmCancellationButton = function () {
     return exports.modalFooter().element(
         by.cssContainingText("button", "CONFIRM CANCELLATION")
     );
+};
+
+exports.dirtyCheckConfirmCancellation = () => {
+    exports.waitForModal();
+
+    return exports.dirtyCheckConfirmCancellationButton().click();
 };
 
 module.exports.randomDate = function (start, end) {
