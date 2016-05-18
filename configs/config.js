@@ -2,8 +2,10 @@
 
 let jobRunnerConfig = require('./jobRunnerConfig'),
 
+    _ = require('lodash'),
     configer = global.ftf.configer,
-    cli = configer.getParamsFromCli(),
+    userConfig = require('config-file').home('.tatconfig'),
+    cli = _.defaultsDeep(userConfig.cli, configer.getParamsFromCli()),
     tags = (function () {
         if(cli.tags === true) {
             cli.tags = '';
@@ -32,6 +34,8 @@ if(!env || env === true) {
 if(cli['app-url'] === true) {
     delete cli['app-url'];
 }
+
+global.userConfig = userConfig;
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
@@ -69,6 +73,7 @@ var defaultUserName = 'TangoTest1',
             commitHash: cli.commit,
             feat: cli.feat,
             tags: tags,
+            noReport: cli['no-report'],
             bugLabel: cli['bug-label'],
             dontSkipBroken: cli['dont-skip-broken'],
             failFast: cli['fail-fast'],
@@ -78,7 +83,8 @@ var defaultUserName = 'TangoTest1',
             cycle: cli['cycle'],
             stepByStep: cli['step-by-step'],
             fingerprints: cli.fingerprints,
-            saveDiskSpace: cli['save-disk-space']
+            saveDiskSpace: cli['save-disk-space'],
+            persistProfile: cli['persist-profile']
         },
         _env_: { ENV_TYPE: env },
         qa: {

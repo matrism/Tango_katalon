@@ -19,7 +19,8 @@ var path = require('path'),
     demoReporter = require('../tools/demoReporter'),
     zapiReporter = require('../reporter/zapiReporter'),
     stepByStepReporter = require('../tools/stepByStepReporter'),
-    unlinkTestRunSnapshots = require('../tools/unlinkTestRunSnapshots');
+    unlinkTestRunSnapshots = require('../tools/unlinkTestRunSnapshots'),
+    chromeArgs;
 
 global.ftf = require('factory-testing-framework');
 global._tf_config = require('./config');
@@ -33,6 +34,20 @@ global.systemConfig = global._tf_config._system_;
 
 systemConfig.downloadsDirectoryPath = tmp.dirSync().name;
 
+chromeArgs = [
+    'no-sandbox',
+    'test-type=browser',
+    `window-size=${systemConfig.resolution.width},${systemConfig.resolution.height}`
+]
+
+if (systemConfig.persistProfile) {
+    chromeArgs.push(`user-data-dir=${process.env.HOME}/.tat/chromeProfile`);
+}
+
+if (userConfig) {
+    chromeArgs = _.union(chromeArgs, userConfig.chromeArgs);
+}
+
 config = {
     capabilities: {
 
@@ -45,7 +60,7 @@ config = {
         browserName: global._tf_config._system_.browser, //firefox, ie
         chromeOptions: {
           //  args: ['--test-type']
-            args: ['--no-sandbox', '--test-type=browser'],
+            args: chromeArgs,
             prefs: {
                 'download': {
                     'prompt_for_download': false,
