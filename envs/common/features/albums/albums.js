@@ -129,7 +129,7 @@ exports.feature = [
             );
             nard.createEnteredLabel();
             nard.enterCatalogueNumber(
-                0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+                0, randomString('commercialAlbumCatalogueNumber').slice(0, 15)
             );
             nard.enterLicenseCode(
                 0, 'LICENSE' + randomId(
@@ -193,7 +193,7 @@ exports.feature = [
                 0, 'TEST LABEL ' + randomId('commercialAlbumLabel')
             );
             ard.validateCatalogueNumber(
-                0, randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+                0, randomString('commercialAlbumCatalogueNumber').slice(0, 15)
             );
             ard.validateLicenseCode(
                 0, 'LICENSE' + randomId('commercialAlbumLicenseCode')
@@ -224,7 +224,7 @@ exports.feature = [
             rd.validateTerritory(0, 0, 0, 0, 'United States');
             rd.validateConfiguration(0, 0, 0, 'CD');
             rd.validateCatalogueNumber(0, 0, 0,
-                randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+                randomString('commercialAlbumCatalogueNumber').slice(0, 15)
             );
             rd.validateLicenseCode(0, 0, 0,
                 'LICENSE' + randomId('commercialAlbumLicenseCode')
@@ -513,7 +513,7 @@ exports.feature = [
             mhs.selectEntityType('Albums');
             mhs.selectFilterTag('Catalog');
             mhs.enterTerms(
-                randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+                randomString('commercialAlbumCatalogueNumber').slice(0, 15)
             );
             mhs.selectResultByIndex(0);
 
@@ -585,7 +585,7 @@ exports.feature = [
             mhs.addAnotherTerm();
             mhs.selectFilterTag('Catalog');
             mhs.enterTerms(
-                randomId('commercialAlbumCatalogueNumber').slice(0, 15)
+                randomString('commercialAlbumCatalogueNumber').slice(0, 15)
             );
             mhs.selectResultByIndex(0);
 
