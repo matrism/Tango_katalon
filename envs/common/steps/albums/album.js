@@ -53,6 +53,7 @@ pageStep([
         'Validate duration',
         'Validate Save Button State',
         'Cancel',
+        'Confirm Cancel',
         'Edit',
         'Save'
     ]],

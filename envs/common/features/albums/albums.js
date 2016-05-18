@@ -371,7 +371,7 @@ exports.feature = [
             );
             ar.createEnteredRecording();
             ar.cancel();
-            steps.base.dirtyCheckConfirmCancellation();
+            ar.confirmCancel();
             ah.validateTrackCount(3);
             ar.edit();
             ar.deleteTrack(0);

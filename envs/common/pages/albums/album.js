@@ -310,6 +310,15 @@ exports.recordings = (function() {
         asAlways(element, 'scrollIntoView', 'click');
     };
 
+    exports.confirmCancelButton = function () {
+        return $('.modal-footer [data-ng-click="ok();"]') ;
+    };
+
+    exports.confirmCancel = function () {
+        var element = exports.confirmCancelButton();
+        asAlways(element, 'waitUntilVisible', 'scrollIntoView', 'click');
+    };
+
     exports.edit = function () {
         exports.editor().edit();
     };
