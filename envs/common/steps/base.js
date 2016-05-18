@@ -138,18 +138,11 @@ module.exports.selectRandomDropdownOption = function (elName, el, more) {
     );
     return deferred.promise;
 };
-module.exports.dirtyCheckContinueEditing = function () {
-    steps.base.clickElement(
-        "continue editing button",
-        pages.base.dirtyCheckContinueEditingButton()
-    );
-};
-module.exports.dirtyCheckConfirmCancellation = function () {
-    steps.base.clickElement(
-        "confirm cancellation button",
-        pages.base.dirtyCheckConfirmCancellationButton()
-    );
-};
+
+addBasicStep(exports, pages.base, 'Dirty check continue editing');
+
+addBasicStep(exports, pages.base, 'Dirty check confirm cancellation');
+
 module.exports.validateRedirection = function (pageName, expUrl) {
     it("User should be redirected to " + pageName, function () {
         browser.getCurrentUrl().then(function (url) {
