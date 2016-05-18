@@ -1302,6 +1302,18 @@ exports.clickOnTheWorkLinkFromDeliveryWorksPageNumberI = function (i) {
     });
 };
 
+exports.incomeRatesTab = function () {
+    return exports.tabSetContainer().element(
+        by.cssContainingText('span', 'Income & Rates')
+    );
+};
+
+exports.goToIncomeRatesTab = function () {
+    var element = exports.incomeRatesTab();
+    pages.base.scrollIntoView(element);
+    return element.click();
+};
+
 exports.recordingsTab = function () {
     return exports.tabSetContainer().element(
         by.cssContainingText('span', 'Recordings')
