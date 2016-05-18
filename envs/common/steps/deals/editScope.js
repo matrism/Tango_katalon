@@ -608,6 +608,7 @@ exports.editClickOnAddPublisherShareSet = function () {
 exports.editSaveScopeChanges = function () {
     it("Edit save the scope changes ", function () {
         pages.editDealScope.editSaveTheScopeChanges();
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -1155,16 +1156,123 @@ exports.clickOnCancelSocietyAgreementNumberButtonLink = function () {
 
 exports.checkSocietyAgreementNumberHeaderTextTooltip = function () {
     it("Check society agreement number header text title  ", function () {
-       browser.driver.findElement(By.css("div.modal-header h3 div.break-word.overflow.pull-left.ng-binding")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div.modal-header h3 div.break-word.overflow.pull-left.ng-binding")).getText().then(function (promise) {
             console.log("The society agreement number header text title is : " + promise);
             expect(promise).toContain("LONG");
         });
     });
 };
 
-exports.clickOnCreatorSetSocietyAgreementNumberArea = function(){
-    it("Click on the creator set society agreement number area ", function(){
-       pages.editDealScope.clickOnTheCreatorSetSocietyAgreementNumberArea();
+exports.clickOnCreatorSetSocietyAgreementNumberArea = function () {
+    it("Click on the creator set society agreement number area ", function () {
+        pages.editDealScope.clickOnTheCreatorSetSocietyAgreementNumberArea();
+    });
+};
+
+exports.checkContractualRightsTypeTextPresent = function () {
+    it("Check the contractual rights type text value present in view mode ", function () {
+        pages.editDealScope.checkTheContractualRightsTypeTextPresent();
+    });
+};
+
+exports.checkContractualRightTypesIncludedOrExcludedTextValuePresent = function (text) {
+    it("Check the contractual right types included or excluded text value present", function () {
+        pages.editDealScope.checkTheContractualRightTypesIncludedOrExcludedTextValuePresent(text);
+    });
+};
+
+exports.editCheckTheContractualTypePublishingRightsTextDisplayed = function (text) {
+    it("Edit check the contractual type publishing rights text value displayed", function () {
+        browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1)")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types publishing rights text value is : " + promise);
+            expect(promise).toContain(text);
+        });
+    });
+};
+
+exports.editCheckTheContractualTypeMasterRightsTextDisplayed = function (text) {
+    it("Edit check the contractual type master rights text value displayed", function () {
+        browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2)")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types master rights text value is : " + promise);
+            expect(promise).toContain(text);
+        });
+    });
+};
+
+exports.editExpandMasterRights = function () {
+    it("Edit expand master rights by clicking the arrow", function () {
+        pages.editDealScope.editExpandTheMasterRights();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editCollapseMasterRights = function () {
+    it("Edit collapse master rights by clicking the arrow", function () {
+        pages.editDealScope.editCollapseTheMasterRights();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editClickOnPublishingRightsCheckBox = function () {
+    it("Edit click on publishing rights check box ", function () {
+        pages.editDealScope.editClickOnThePublishingRightsCheckBox();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editClickOnMasterRightsCheckBox = function () {
+    it("Edit click on master rights check box ", function () {
+        pages.editDealScope.editClickOnTheMasterRightsCheckBox();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editCheckTheContractualTypeAreaTextDisplayed = function (text) {
+    it("Edit check the contractual type area text value displayed", function () {
+        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types text value is : " + promise);
+            expect(promise).toContain(text);
+        });
+    });
+};
+
+exports.editCheckTheContractualTypeAreaTextNotDisplayed = function (text) {
+    it("Edit check the contractual type area text value is not displayed", function () {
+        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+            console.log("Deal scope contractual right types text value is : " + promise);
+            expect(promise).not.toContain(text);
+        });
+    });
+};
+
+exports.editCheckTheContractualTypeAreaErrorMessageMandatoryRightSelected = function (text) {
+    it("Edit check the contractual type area error message displayed at least one right selected", function () {
+        browser.driver.findElement(By.css("div[data-ng-show='contRightTypes.$error.crtRequire']")).getText()
+            .then(function (promise) {
+                console.log("Deal scope contractual right types error message mandatory right is : " + promise);
+                expect(promise).toEqual("At least one contractual right type must be selected in order to save this scope");
+            });
+    });
+};
+
+exports.editClickOnPublishingRightsNumberI = function (i) {
+    it("Edit click on the publishing rights number " + i, function () {
+        pages.editDealScope.editClickOnThePublishingRightsNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editClickOnMasterRightsNumberI = function (i) {
+    it("Edit click on the master rights number " + i, function () {
+        pages.editDealScope.editClickOnTheMasterRightsNumberI(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editClickOnLimitedToCheckBox = function () {
+    it("Edit click on the limited to check box on contractual right types on scope ", function () {
+        pages.editDealScope.editClickOnTheLimitedToCheckBox();
+        pages.editDealScope.waitForAjax();
     });
 };
 

@@ -106,7 +106,7 @@ exports.feature = [
             steps.editAdvances.editClickOnNoToSuspendedAdvanceButton();
             steps.editAdvances.editSaveAdvancesDetailsAreaContractPeriodNumberI(1);
 
-            //check suspenede advances option not present anymore
+            //check suspended advances option not present anymore
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(0, "All Advances");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(1, "Contract Period 1");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(2, "Contract Period 2");
@@ -139,7 +139,6 @@ exports.feature = [
             steps.editAdvances.editSaveAdvance();
 
             //edit select all advances from drop down and check the suspended
-            //steps.editAdvances.editSelectContractPeriodAdvancesByIndex(0);
             steps.editAdvances.editCheckThatContractPeriodNumberIHasSuspendedAdvances(2, 2);
             steps.editAdvances.editCheckThatContractPeriodNumberIHasSuspendedAdvances(4, 1);
             steps.editAdvances.editCheckTheSuspendedContractPeriodDetailsAreGreyedOutContractPeriodNumberI(2, 2);
