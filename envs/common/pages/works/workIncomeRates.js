@@ -76,11 +76,11 @@ exports.table = (() => {
         return element(by.model('dataHolder.selected.breakdown'));
     };
 
-    table.validate = (incomeGroup, backendData) => {
-        backendData = callResultOrValue(backendData) || {};
+    table.validate = (incomeGroup, expectedData) => {
+        expectedData = callResultOrValue(expectedData) || {};
         table.findIncomeGroup(incomeGroup);
 
-        let data = table.addTotal(backendData),
+        let data = table.addTotal(expectedData),
             breakdownSelect = table.breakdownSelect();
 
         for (let row in table.rows) {

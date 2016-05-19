@@ -283,5 +283,30 @@ exports.feature = [
 
             steps.base.sleep(10000);
         },
+    },
+    {
+        name: 'Work Ledger Summary - Validate work summary on work > income and rates',
+        tags: ['workLedgerSummary', 'workLedgerSummaryIncomeRates'],
+        steps: () => {
+            var w = steps.work,
+                wir = steps.workIncomeRates,
+                rb = steps.royaltiesBackEnd;
+
+            //hash.testVariables['lastCreatedWorkId'] = mockValues.lastCreatedWorkId;
+            w.goToWorkPageById(fromTestVariable['lastCreatedWorkId']);
+            w.goToIncomeRatesTab();
+
+            wir.filters.selectProcessingTerritory(fileData.processingTerritory);
+            wir.filters.selectRoyaltyPeriod(fileData.royaltyPeriod);
+
+            rb.storeWorkSummaryInTestVariable(
+                iso.whereCountry(fileData.processingTerritory).numeric,
+                royaltyPeriodParser(fileData.royaltyPeriod),
+                fromTestVariable('lastCreatedWorkId'),
+                'work summary'
+            );
+
+            wir.table.validate('Mechanical', fromTestVariable('work summary'));
+        }
     }
 ];
