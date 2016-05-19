@@ -292,7 +292,7 @@ exports.feature = [
                 wir = steps.workIncomeRates,
                 rb = steps.royaltiesBackEnd;
 
-            hash.testVariables['lastCreatedWorkId'] = mockValues.lastCreatedWorkId;
+            //hash.testVariables['lastCreatedWorkId'] = mockValues.lastCreatedWorkId;
             w.goToWorkPageById(fromTestVariable('lastCreatedWorkId'));
             w.goToIncomeRatesTab();
 
