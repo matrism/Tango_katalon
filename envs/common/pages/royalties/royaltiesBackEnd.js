@@ -59,9 +59,7 @@ exports.getWorkSummary = (ptc, rp, twc) => {
                 keys = _.keys(obj);
 
             if (keys.length) {
-                let childObj = obj[keys[0]],
-                    val = String(childObj.non_domestic_values.gross_received);
-                return !_.isNil(val) && val !== '0';
+                return val;
             }
         }
     );

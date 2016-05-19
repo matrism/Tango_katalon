@@ -41,16 +41,23 @@ exports.table = (() => {
         'subpublisher_nps': 3
     };
 
+    table.rows = {
+        'domestic_values': 'Domestic',
+        'non_domestic_values': 'Non-Domestic',
+        'total': 'Total'
+    };
+
     table.findIncomeGroup = (name) => {
         table.incomeGroup = element(by.cssContainingText(
             '[ng-repeat="incomeGroup in royaltyLedgerData"]', name
         ));
+        pages.base.scrollIntoView(table.incomeGroup);
     };
 
-    table.breakdown = (name) => {
+    table.rowElements = (name) => {
         return table.incomeGroup.all(by.cssContainingText(
-            '[ng-repeat="breakdown in incomeGroup.distributions"]', name
-        )).first();
+            'tr', name
+        )).first().$$('td');
     };
 
     table.addTotal = (data) => {
@@ -65,21 +72,28 @@ exports.table = (() => {
         return data;
     };
 
+    table.breakdownSelect = () => {
+        return element(by.model('dataHolder.selected.breakdown'));
+    };
+
     table.validate = (incomeGroup, backendData) => {
         backendData = callResultOrValue(backendData) || {};
-        let data = table.addTotal(backendData);
         table.findIncomeGroup(incomeGroup);
-        let breakdownRows = {
-            'domestic_values': table.breakdown('Domestic').$$('td'),
-            'non_domestic_values': table.breakdown('Non-Domestic').$$('td')
-        };
 
-        for (let row in breakdownRows) {
-            for (let column in table.columns) {
-                if (backendData[row] && breakdownRows[row]) {
+        let data = table.addTotal(backendData),
+            breakdownSelect = table.breakdownSelect();
+
+        for (let row in table.rows) {
+            let rowDescription = table.rows[row],
+                rowElements = table.rowElements(rowDescription);
+            pages.base.scrollIntoView(breakdownSelect);
+            pages.base.selectDropdownOption.tg(breakdownSelect, rowDescription);
+
+            if (data[row]) {
+                for (let column in table.columns) {
                     let order = table.columns[column],
-                        backendValue = Number(backendData[row][column]).toFixed(4),
-                        tableValue = breakdownRows[row].get(order).getText();
+                        backendValue = Number(data[row][column]).toFixed(4),
+                        tableValue = rowElements.get(order).getText();
 
                     expect(tableValue).toBe(backendValue);
                 }
