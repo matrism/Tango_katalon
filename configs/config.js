@@ -4,7 +4,7 @@ let jobRunnerConfig = require('./jobRunnerConfig'),
 
     _ = require('lodash'),
     configer = global.ftf.configer,
-    userConfig = require('config-file').home('.tatconfig'),
+    userConfig = require('config-file').home('.tatconfig') || {},
     cli = _.defaultsDeep(userConfig.cli, configer.getParamsFromCli()),
     tags = (function () {
         if(cli.tags === true) {
