@@ -4,7 +4,7 @@ var pageStep = require('../../../../helpers/basicPageStep.js');
 steps.workIncomeRates = exports;
 
 pageStep([
-    ['filters', [
+    ['Filters', [
         'Select Royalty Period',
         'Select Processing Territory'
     ]],

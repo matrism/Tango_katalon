@@ -5,7 +5,6 @@ var pageStep = require('../../../../helpers/basicPageStep');
 steps.royaltiesBackEnd = exports;
 
 pageStep([
-    'Store work summary in test variable',
     'Get work summary',
     'Validate work summary'
 ]);

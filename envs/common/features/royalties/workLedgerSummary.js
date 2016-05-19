@@ -292,8 +292,8 @@ exports.feature = [
                 wir = steps.workIncomeRates,
                 rb = steps.royaltiesBackEnd;
 
-            //hash.testVariables['lastCreatedWorkId'] = mockValues.lastCreatedWorkId;
-            w.goToWorkPageById(fromTestVariable['lastCreatedWorkId']);
+            hash.testVariables['lastCreatedWorkId'] = mockValues.lastCreatedWorkId;
+            w.goToWorkPageById(fromTestVariable('lastCreatedWorkId'));
             w.goToIncomeRatesTab();
 
             wir.filters.selectProcessingTerritory(fileData.processingTerritory);
