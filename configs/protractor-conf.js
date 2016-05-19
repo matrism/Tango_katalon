@@ -100,6 +100,40 @@ config = {
 
         //jasmine.getEnv().addReporter(beforeReporter);
 
+        // TODO: Remove this work-around once refactored HTML
+        // from Tango's PR 4656 gets deployed to upper environments.
+        if (systemConfig.env.name === 'qa') {
+            let patch = str => str.replace(
+                /#RECORD-HEADER/g, '.RECORD-HEADER'
+            ).replace(
+                /#ACTIVITY-HEADER/g, '.ACTIVITY-HEADER'
+            ).replace(
+                /#ACTIVITY-RECORDS/g, '.ACTIVITY-RECORDS'
+            );
+
+            let oldByCss = By.css;
+
+            By.css = function (selector) {
+                return oldByCss.call(this, patch(selector));
+            };
+
+            let oldByCssContainingText = By.cssContainingText;
+
+            By.cssContainingText = function (selector, text) {
+                return oldByCssContainingText.call(
+                    this, patch(selector), text
+                );
+            };
+
+            let old$ = $;
+
+            global.$ = selector => old$(patch(selector));
+
+            let old$$ = $$;
+
+            global.$$ = selector => old$$(patch(selector));
+        }
+
         // set path to features in config
         systemConfig.path_to_features = testFiles.load().features;
 
