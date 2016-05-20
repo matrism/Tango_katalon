@@ -57,6 +57,7 @@ exports.feature = [
 
 
 
+
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
