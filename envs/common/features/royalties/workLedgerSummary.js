@@ -297,6 +297,7 @@ exports.feature = [
             w.goToIncomeRatesTab();
 
             wir.filters.selectProcessingTerritory(fileData.processingTerritory);
+            wir.filters.validateCurrency('PLN');
             wir.filters.selectRoyaltyPeriod(fileData.royaltyPeriod);
 
             rb.storeWorkSummaryInTestVariable(
@@ -306,6 +307,9 @@ exports.feature = [
                 'work summary'
             );
 
+            wir.table.selectIncomeGroup('Performance');
+            wir.table.validateNoIncomeMessage();
+            wir.table.selectIncomeGroup('Mechanical');
             wir.table.validate('Mechanical', fromTestVariable('work summary'));
         }
     }

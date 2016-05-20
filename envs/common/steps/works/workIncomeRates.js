@@ -6,9 +6,12 @@ steps.workIncomeRates = exports;
 pageStep([
     ['Filters', [
         'Select Royalty Period',
-        'Select Processing Territory'
+        'Select Processing Territory',
+        'Validate Currency'
     ]],
     ['Table', [
+        'Select Income Group',
+        'Validate No Income Message',
         'Validate'
     ]]
 ]);

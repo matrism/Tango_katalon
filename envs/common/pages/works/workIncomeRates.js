@@ -26,6 +26,14 @@ exports.filters = (() => {
         pages.base.waitForAjax();
     };
 
+    filters.currencyBinding = () => {
+        return element(by.binding('dataHolder.selected.processingTerritory.currency'));
+    };
+
+    filters.validateCurrency = (val) => {
+        expect(filters.currencyBinding().getText()).toBe(val);
+    };
+
     return filters;
 })();
 
@@ -44,7 +52,8 @@ exports.table = (() => {
     table.rows = {
         'domestic_values': 'Domestic',
         'non_domestic_values': 'Non-Domestic',
-        'total': 'Total'
+        'total': 'Total',
+        'affiliate': 'Affiliate'
     };
 
     table.findIncomeGroup = (name) => {
@@ -60,6 +69,26 @@ exports.table = (() => {
         )).first().$$('td');
     };
 
+    table.breakdownSelect = () => {
+        return element(by.model('dataHolder.selected.breakdown'));
+    };
+
+    table.incomeGroupSelect = () => {
+        return element(by.model('dataHolder.selected.incomeGroup'));
+    };
+
+    table.selectIncomeGroup = (name) => {
+        pages.base.selectDropdownOption.tg(table.incomeGroupSelect(), name);
+    };
+
+    table.noIncomeMessage = () => {
+        return $('[data-ng-show="stateHolder.errorsExist"]').getText();
+    };
+
+    table.validateNoIncomeMessage = () => {
+        expect(table.noIncomeMessage()).toContain('No income history');
+    };
+
     table.addTotal = (data) => {
         let total = {};
         for (let i in data) {
@@ -72,16 +101,25 @@ exports.table = (() => {
         return data;
     };
 
-    table.breakdownSelect = () => {
-        return element(by.model('dataHolder.selected.breakdown'));
+    table.addAffiliate = (data) => {
+        let affiliate = {};
+        for (let i in data) {
+            for (let j in data[i]) {
+                affiliate[j] = '-';
+            }
+        }
+        data['affiliate'] = affiliate;
+        return data;
     };
 
     table.validate = (incomeGroup, expectedData) => {
         expectedData = callResultOrValue(expectedData) || {};
         table.findIncomeGroup(incomeGroup);
 
-        let data = table.addTotal(expectedData),
-            breakdownSelect = table.breakdownSelect();
+        let breakdownSelect = table.breakdownSelect();
+
+        expectedData = table.addTotal(expectedData),
+        expectedData = table.addAffiliate(expectedData);
 
         for (let row in table.rows) {
             let rowDescription = table.rows[row],
@@ -89,13 +127,17 @@ exports.table = (() => {
             pages.base.scrollIntoView(breakdownSelect);
             pages.base.selectDropdownOption.tg(breakdownSelect, rowDescription);
 
-            if (data[row]) {
+            if (expectedData[row]) {
                 for (let column in table.columns) {
                     let order = table.columns[column],
-                        backendValue = Number(data[row][column]).toFixed(4),
+                        expectedValue = expectedData[row][column],
                         tableValue = rowElements.get(order).getText();
 
-                    expect(tableValue).toBe(backendValue);
+                    if (parseFloat(expectedValue) || expectedValue == 0) {
+                        expectedValue = Number(expectedValue).toFixed(4);
+                    }
+
+                    expect(tableValue).toBe(expectedValue);
                 }
             }
         }
