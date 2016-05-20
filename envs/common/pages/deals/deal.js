@@ -7,7 +7,7 @@ var pph = require('../../../../helpers/pph'),
 if (pages.deal === undefined) {
     exports = module.exports = pages.deal = new ftf.pageObject({
         locators: {
-            dealBriefNumber: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) p.info.ng-binding"},
+            dealBriefNumber: {css: "div.RECORD-HEADER div.header-info div.metadata-box:nth-child(6) p.info.ng-binding"},
             continueButton: {css: "div.page-footer button[data-ng-click='next()']"},
             saveDealButton: {css: "div.page-footer button[data-ng-click='done()']"},
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
