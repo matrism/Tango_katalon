@@ -23,12 +23,12 @@ exports.modalContainer = function () {
 exports.waitForModal = function () {
     var container = exports.modalContainer();
 
-    browser.wait(function () {
+    return browser.wait(function () {
         return pph.and(
             container.isPresent(),
             pph.matchesCssSelector(container, ':not(.animate)')
         );
-    });
+    }).then(() => browser.sleep(500));
 };
 
 exports.modalHeader = function () {
