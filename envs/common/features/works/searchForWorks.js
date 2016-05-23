@@ -41,7 +41,7 @@ exports.feature = [
             steps.work.findCurrentlyOpenWorkId();
 
             steps.base.goToHomePage();
-            steps.work.validateDefaultWorkSearchFilterTag(0);
+            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
             steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
             steps.base.sleep(200);
             steps.base.waitForAjax();
