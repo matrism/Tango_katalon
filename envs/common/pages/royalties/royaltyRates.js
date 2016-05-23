@@ -626,7 +626,7 @@ if (pages.royaltyRates === undefined) {
 
         clickDealSigningTerritoryToggle: function () {
             var dealSigningTerritoryToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\\"DRDST\\""]'
+                '[data-btn-radio="\'DRDST\'"]'
             );
 
             dealSigningTerritoryToggle.click();
@@ -636,7 +636,7 @@ if (pages.royaltyRates === undefined) {
 
         clickWarnerChappellToggle: function () {
             var warnerChappellToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\\"DRWC\\""]'
+                '[data-btn-radio="\'DRWC\'"]'
             );
 
             warnerChappellToggle.click();
