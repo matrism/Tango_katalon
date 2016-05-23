@@ -658,7 +658,7 @@ if (pages.royaltyRates === undefined) {
 
         effectiveStartDateCalendarIconIsPresent: function () {
             var effectiveStartDateCalendarIco;
-            effectiveStartDateCalendarIco = element(by.css("   .icon-calendar"));
+            effectiveStartDateCalendarIco = element(by.css('.rate-set-calendar .fa-calendar'));
             return effectiveStartDateCalendarIco.isPresent();
         },
 
