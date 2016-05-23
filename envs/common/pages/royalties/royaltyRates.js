@@ -178,7 +178,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         openRRButton: function () {
-            return $$(".icon-chevron-down").first();
+            return $$(".icon-chevron-down, .fa-chevron-down").first();
         },
 
         royaltyRateInput: function () {
@@ -327,7 +327,7 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.openRRButton()));
             browser.wait(ExpectedConditions.elementToBeClickable(this.openRRButton()));
 
-            $$(".icon-chevron-down")
+            $$(".icon-chevron-down, .fa-chevron-down")
                 .then(function (result) {
 
                         for (i = 0; i < result.length; i++) {
