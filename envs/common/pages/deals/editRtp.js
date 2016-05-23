@@ -45,6 +45,42 @@ if (pages.editDealRtp === undefined) {
             editAccountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div input[data-ng-model='rule.period_end']"}
         },
 
+        editAddPostTermPeriodFromRetentionLink: function (i) {
+            return $$(
+                    'a[data-ng-click="addPostTermCollectionRightsTermPeriodToRetention(rtps.id, rtp.id)"]'
+                ).get(i);
+        },
+
+        retentionSection: function (i) {
+            return $$(
+                    '[data-ng-repeat="rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods"]'
+                ).get(i);
+        },
+
+        editDurationRtpPostTermCollectionField: function (i, j) {
+            return pages.editDealRtp.retentionSection(i).$$(
+                    'div[data-name="retentionPostRtpForm"] input[name="retentionPostTermDuration"]'
+                ).get(j);
+        },
+
+        editScopeAcquisitionInputField: function (i) {
+            return $$('[data-ng-model="acqRtp.deal_scope_id_holders"] input').get(i);
+        },
+
+        editScopeRetentionInputField: function (i) {
+            return $$('[data-ng-model="rtp.deal_scope_id_holders"] input').get(i);
+        },
+
+        editScopePostTermInputField: function (i) {
+            return $$('[data-ng-model="postTermCollectionRTP.deal_scope_id_holders"] input').get(i);
+        },
+
+        scopeOption: function (i) {
+            return $$(
+                    'ul.tg-typeahead__suggestions li.tg-typeahead__suggestions-container ul li'
+                ).get(i);
+        },
+
         editClickOnTheAddAnotherAcquisitionPeriodLink: function () {
             pages.base.scrollIntoView(pages.editDealRtp.elems.editAddAnotherAcquisitionPeriodButtonLink);
             pages.editDealRtp.elems.editAddAnotherAcquisitionPeriodButtonLink.click();
