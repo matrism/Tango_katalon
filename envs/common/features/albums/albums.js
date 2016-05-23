@@ -428,16 +428,17 @@ exports.feature = [
             );
             ah.validateTrackCount(1);
 
+            ar.validateTrackNumber(0, 3);
             ar.validateTitle(
-                3, 'TEST RECORDING EDIT' + randomId(
+                0, 'TEST RECORDING EDIT' + randomId(
                     'commercialAlbumRecordingEdit'
                 )
             );
             ar.validateArtistName(
-                3, 'TEST ARTIST EDIT' + randomId('commercialAlbum')
+                0, 'TEST ARTIST EDIT' + randomId('commercialAlbum')
             );
-            ar.validateDuration(3, '00:04:00');
-            ar.validateWorkIdUsingWorkSlot(3, 'mainWork');
+            ar.validateDuration(0, '00:04:00');
+            ar.validateWorkIdUsingWorkSlot(0, 'mainWork');
 
             a.goToTab('Release Details');
 
