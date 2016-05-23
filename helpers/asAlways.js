@@ -50,6 +50,10 @@ exports.getValue = function (el) {
     return el.getAttribute('value');
 };
 
+exports.isChecked = function (el) {
+    return el.getAttribute('checked').then(checked => !!checked);
+};
+
 exports.waitForAjax = function () {
     pages.base.waitForAjax();
 };

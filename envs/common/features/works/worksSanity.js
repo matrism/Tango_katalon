@@ -131,16 +131,16 @@ exports.feature = [
 
             [function () {
                 _.times(3, function (i) {
-                    steps.newWorkRecordings.clickRecordingNameField(i);
-                    steps.newWorkRecordings.selectRecordingNameSuggestionByIndex(i);
+                    steps.workRecordings.focusTitleField(i);
+                    steps.workRecordings.selectTitleSuggestionByIndex(i);
 
-                    steps.newWorkRecordings.enterArtistName(
+                    steps.workRecordings.enterArtistSearchTerms(
                         i, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
                     );
 
-                    steps.newWorkRecordings.createEnteredArtist();
+                    steps.workRecordings.createEnteredArtist();
 
-                    steps.newWorkRecordings.enterRecordingDuration(
+                    steps.workRecordings.enterDuration(
                         i, '00' + leftPad(i + 1, 2, 0) + '00'
                     );
                 });
@@ -230,23 +230,23 @@ exports.feature = [
             [steps.work.goToRecordingsTab],
 
             [function () {
-                steps.workRecordings.validateRecordingNames(
-                    _.times(3, function () {
-                        return 'TEST WORK ' + randomId('mainWork');
-                    })
-                );
+                let wr = steps.workRecordings;
 
-                steps.workRecordings.validateArtistNames(
-                    _.times(3, function (i) {
-                        return 'TEST ARTIST ' + randomId('mainWorkArtist' + i);
-                    })
-                );
+                _.times(3, i => {
+                    wr.findByTitle(
+                        'TEST WORK ' + randomId('mainWork'), 'row index'
+                    );
 
-                steps.workRecordings.validateRecordingDurations(
-                    _.times(3, function (i) {
-                        return '00 : ' + leftPad(i + 1, 2, 0) + ' : 00';
-                    })
-                );
+                    let iFound = fromTestVariable('row index');
+
+                    wr.validateArtistName(
+                        iFound, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
+                    );
+
+                    wr.validateDuration(
+                        iFound, '00 : ' + leftPad(i + 1, 2, 0) + ' : 00'
+                    );
+                });
             }],
             ]);
         }
@@ -459,11 +459,11 @@ exports.feature = [
 
                 this.continueToNextTab();
 
-                _.times(3, bind(steps.newWorkRecordings, function (__, i) {
-                    this.clickRecordingNameField(i);
-                    this.selectRecordingNameSuggestionByIndex(i);
+                _.times(3, bind(steps.workRecordings, function (__, i) {
+                    this.focusTitleField(i);
+                    this.selectTitleSuggestionByIndex(i);
 
-                    this.validateLibraryName(i);
+                    this.validateLibraryName(i, 'AUDIOMACHINE');
                 }));
 
                 this.saveWork();
@@ -490,15 +490,16 @@ exports.feature = [
             });
 
             using(steps.workRecordings, function () {
-                this.validateRecordingNames(
-                    _.times(3, function () {
-                        return 'TEST LIBRARY WORK ' + randomId('libraryWork');
-                    })
-                );
+                _.times(3, i => {
+                    this.findByTitle(
+                        'TEST LIBRARY WORK ' + randomId('libraryWork'),
+                        'row index'
+                    );
 
-                _.times(3, function (i) {
-                    this.validateLibraryName(i, 'AUDIOMACHINE');
-                }, this);
+                    let iFound = fromTestVariable('row index');
+
+                    this.validateLibraryName(iFound, 'AUDIOMACHINE');
+                });
             });
         },
     },
