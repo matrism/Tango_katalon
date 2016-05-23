@@ -21,17 +21,19 @@ var data = {
     org: 'BMI',
     sftp: {
         address: '10.194.1.212',
+        directory: 'files/',
         port: '22',
         username: 'Tango_Test',
         password: 'St@rwar1$'
     },
     ftp: {
         address: '10.194.1.212',
+        directory: 'files/',
         port: '21',
         username: 'Tango_Test',
         password: 'St@rwar1$'
     },
-    ftpMethod: ' FTP',
+    ftpMethod: 'SFTP',
     event: {
         status: 'File Loaded',
         totalAccepted: '330',
@@ -76,11 +78,13 @@ exports.feature = [
                     this.selectAcknowledgementType('Multiple');
                     this.selectDeliveryMethod(0, 'SFTP');
                     this.enterAddress(0, data.sftp.address);
+                    this.enterDirectory(0, data.sftp.directory);
                     this.enterPort(0, data.sftp.port);
                     this.enterUsername(0, data.sftp.username);
                     this.enterPassword(0, data.sftp.password);
                     this.selectDeliveryMethod(1, 'FTP');
                     this.enterAddress(1, data.ftp.address);
+                    this.enterDirectory(1, data.ftp.directory);
                     this.enterPort(1, data.ftp.port);
                     this.enterUsername(1, data.ftp.username);
                     this.enterPassword(1, data.ftp.password);

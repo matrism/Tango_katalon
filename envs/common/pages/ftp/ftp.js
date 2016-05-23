@@ -1,6 +1,6 @@
 'use strict';
 
-var JSFtp = require('jsftp'),
+var ssh2 = require('ssh2'),
     fs = require('fs'),
     promise = protractor.promise;
 
@@ -18,6 +18,7 @@ exports.uploadAckFile = function() {
         ackFilePrefix = ackFileName.split('_')[0],
         ftpOptionsPromise = [
             hash.ftpOptions.host,
+            hash.ftpOptions.directory,
             hash.ftpOptions.port,
             hash.ftpOptions.user,
             hash.ftpOptions.pass
@@ -25,42 +26,64 @@ exports.uploadAckFile = function() {
 
     browser.controlFlow().execute(function() {
         promise.all(ftpOptionsPromise).then(function (ftpOptions) {
-            ftp = new JSFtp({
+
+            var conn = new ssh2(),
+                ftpDirectory = ftpOptions[1];
+
+            conn.connect({
                 host: ftpOptions[0],
-                port: ftpOptions[1],
-                user: ftpOptions[2],
-                pass: ftpOptions[3]
+                port: ftpOptions[2],
+                username: ftpOptions[3],
+                password: ftpOptions[4]
             });
-            ftp.ls(".", function(err, res) {
-                if (err) {
-                    console.error(err);
-                } else {
 
-                    // Get the next sequencial counter
-                    res.forEach(function(file) {
-                        var fileSplit = file.name.split('_'),
-                            filePrefix = fileSplit[0],
-                            fileCounter = fileSplit.length > 1 ? fileSplit[1].split('-')[0] : 0;
-                            
-                        if (filePrefix == ackFilePrefix && fileCounter >= ackFileCounter) {
-                            ackFileCounter = parseInt(fileCounter) + 1;
+            conn.on('ready', () => {
+                conn.sftp((err, sftp) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    sftp.readdir(ftpDirectory, (err, files) => {
+                        let readStream,
+                            writeStream;
+
+                        if (err) {
+                            console.error(err);
+                            return;
                         }
-                        ackNewFile = ackFileName.replace('001', ackFileCounter);
-                    });
 
-                    // Upload file
-                    ftp.put(ackFileFullName, ackNewFile, function(putError) {
-                        if (putError) {
-                            console.error(putError);
-                        } else {
+                        // Get the next sequencial counter
+                        files.forEach((file) => {
+                            let fileSplit = file.filename.split('_'),
+                                filePrefix = fileSplit[0],
+                                fileCounter = 0;
+
+                            if (fileSplit.length > 1) {
+                                fileCounter = fileSplit[1].split('-')[0];
+                            }
+
+                            if (filePrefix == ackFilePrefix
+                                && fileCounter >= ackFileCounter) {
+                                ackFileCounter = parseInt(fileCounter) + 1;
+                            }
+                            ackNewFile = ackFileName.replace('001', ackFileCounter);
+                        });
+
+                        // Upload file
+                        console.log('Uploading...', ackNewFile);
+                        readStream = fs.createReadStream(ackFileFullName);
+                        writeStream = sftp.createWriteStream(ftpDirectory + ackNewFile);
+                        writeStream.on('close', () => {
                             hash.testVariables['current ACK file name'] = ackNewFile;
+                            console.log('Uploaded');
                             deferred.fulfill(ackNewFile);
-                        }
+                            conn.end();
+                        });
+                        readStream.pipe(writeStream);
                     });
-                }
+                });
             });
         });
         return deferred.promise;
     });
 };
-

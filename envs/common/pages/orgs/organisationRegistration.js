@@ -28,6 +28,10 @@ exports.getFtpAddress = function () {
     return element(by.binding('selectedAckDevMechanism.deliveryMethod.host')).getText();
 };
 
+exports.getFtpDirectory = function () {
+    return element(by.binding('selectedAckDevMechanism.deliveryMethod.path')).getText();
+};
+
 exports.getFtpPort = function () {
     return element(by.binding('selectedAckDevMechanism.deliveryMethod.port')).getText();
 };
@@ -116,6 +120,7 @@ exports.unmaskPassword = function () {
 exports.getFtpOptions = function () {
     hash.ftpOptions = {
         host: exports.getFtpAddress(),
+        directory: exports.getFtpDirectory(),
         port: exports.getFtpPort(),
         user: exports.getFtpUsername(),
         pass: exports.getFtpPassword()
