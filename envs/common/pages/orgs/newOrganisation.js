@@ -325,7 +325,7 @@ exports.fillSubpublisherSocietyAgreementNumber = function (number) {
 exports.selectSubpublisherSociety = function (name) {
     var elem = Typeahead(element(by.model('modularEditModels.model.agreement.society')), true);
     elem.sendKeys(name);
-    pages.base.waitForAjax();
+    browser.wait(EC.visibilityOfAny(elem.results()));
     elem.results().filter(pph.matchTextExact(name)).first().click();
 };
 
