@@ -1245,6 +1245,9 @@ exports.registration = (function () {
         ack.addressInput = function (i) {
             return $$('.e2e-acknowledgement-address input').get(i);
         };
+        ack.directoryInput = function (i) {
+            return $$('.e2e-acknowledgement-directory input').get(i);
+        };
         ack.portInput = function (i) {
             return $$('.e2e-acknowledgement-port input').get(i);
         };
@@ -1269,6 +1272,12 @@ exports.registration = (function () {
         };
         ack.enterAddress = function (i, value) {
             var element = ack.addressInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
+            return element.sendKeys(value);
+        };
+        ack.enterDirectory = function (i, value) {
+            var element = ack.directoryInput(i);
             pages.base.scrollIntoView(element);
             element.clear();
             return element.sendKeys(value);
