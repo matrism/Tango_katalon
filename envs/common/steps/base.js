@@ -217,7 +217,7 @@ pageStep([
     'Scroll to',
     'Validate tooltip message',
     'Expect modal pop up to be displayed',
-    'Wait until modal animation finishes',
+    'Wait for modal',
     'Click modal primary button'
 ]);
 

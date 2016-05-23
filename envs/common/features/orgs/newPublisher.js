@@ -96,7 +96,7 @@ exports.feature = [
                         newOrg.fillSubpublisherSocietyAgreementNumber(202202);
                         newOrg.selectSubpublisherSociety('OSA');
                         newOrg.removeLastSubpublisher();
-                        steps.base.waitUntilModalAnimationFinishes();
+                        steps.base.waitForModal();
                         steps.base.expectModalPopUpToBeDisplayed();
                         steps.base.clickModalPrimaryButton();
                     });
