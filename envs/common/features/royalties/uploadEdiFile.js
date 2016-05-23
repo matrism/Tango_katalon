@@ -2,6 +2,7 @@
 
 var using = require('../../../../helpers/fnutils').using,
     noUpload = systemConfig.noUpload,
+    path = require('path'),
     _ = require('lodash'),
     YAML = require('yamljs');
 
