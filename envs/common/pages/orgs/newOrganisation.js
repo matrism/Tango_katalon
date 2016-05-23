@@ -199,7 +199,7 @@ exports.expectFtpAndSftpToHaveDifferentLabels = function () {
 
     panel.$('.e2e-method-remove .btn-delete').click();
 
-    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.waitForModal();
     pages.base.expectModalPopUpToBeDisplayed();
     pages.base.clickModalPrimaryButton();
 };

@@ -925,7 +925,7 @@ exports.cancelSectionPart = function (section, part) {
 
     forms.get(part).$('.CONTROLS .btn-cancel').click();
 
-    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.waitForModal();
     pages.base.expectModalPopUpToBeDisplayed();
     pages.base.clickModalPrimaryButton();
 };
