@@ -380,10 +380,8 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         clickEditSavedRRIcon: function () {
-            return asAlways(
-                this.editSavedRRIcon(),
-                'waitUntilVisible', 'scrollIntoView', 'click'
-            );
+            asAlways(this.rrSumarryTable(), 'scrollIntoView', 'hover');
+            this.editSavedRRIcon().click();
         },
 
         getSavedRRName: function () {
