@@ -7,7 +7,7 @@ var pph = require('../../../../helpers/pph'),
 if (pages.headerDeal === undefined) {
     pages.headerDeal = exports = new ftf.pageObject({
         locators: {
-            dealContractingPartiesValue: {css: "div h1 div.overflow"},
+            dealContractingPartiesValue: {css: "h1 div.overflow"},
             dealBriefNumberText: {css: "div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p:nth-child(1)"},
             dealBriefNumberValue: {css: "div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p.info.ng-binding:nth-child(2)"},
             dealContractTypeText: {css: "div.header-info div:nth-child(1)  div.metadata-info:nth-child(1) p:nth-child(1)"},
