@@ -115,9 +115,10 @@ exports.feature = [
 
             steps.editDealRtp.scrollIntoViewAddEndRuleToRetention();
             steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
-            steps.editDealRtp.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
-            steps.editDealRtp.editCancelDeleteEndRules();
-            steps.editDealRtp.editDeleteEndRulesConditionNumberIRowNumberJ(1, 2);
+            steps.editDealRtp.editDeleteRtpEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            steps.editDealRtp.editCancelRtpDeleteEndRules();
+            steps.editDealRtp.editDeleteRtpEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
+            steps.editDealRtp.editConfirmRtpDeleteEndRules();
 
             steps.editDealRtp.editDoneEndRules();
             steps.editDealRtp.saveRetentionFromAcquisition();

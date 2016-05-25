@@ -32,6 +32,13 @@ exports.editDeletePayeeFromDealByPayeeScreen = function () {
     });
 };
 
+exports.editConfirmDeletePayeeModal = function(){
+    it("Edit confirm delete rule  from end rules retention ", function(){
+        pages.editDealPayee.editConfirmDeletePayeeModal();
+        pages.editDealPayee.waitForAjax();
+    });
+};
+
 exports.editOldPayeeArea = function () {
     it("Edit the old payee area ", function () {
         pages.editDealPayee.editTheOldPayeeArea();

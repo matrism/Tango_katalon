@@ -359,7 +359,7 @@ if (pages.editDealGeneral === undefined) {
 
         editCheckTheDealSigningTerritoryCannotBeChangedTooltip: function () {
             browser.actions().mouseMove(element(by.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass'] "))).perform();
-            browser.driver.findElement(By.css("div.tooltip.fade")).getText().then(function (promise) {
+            browser.driver.findElement(By.css("div.tooltip-inner.ng-binding")).getText().then(function (promise) {
                 console.log(" Tooltip text fade is : " + promise);
                 expect(promise).toEqual("To edit the Deal Signing Territory, all Deal Payees need to be removed or a new deal should be created.");
             });

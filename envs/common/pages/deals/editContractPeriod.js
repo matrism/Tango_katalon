@@ -414,8 +414,9 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editTheMdrcLabelsField: function () {
+            var value = Math.random().toString(36).substr(2, 4);
             pages.editDealContractPeriod.elems.editMdrcLabelsElement.clear();
-            pages.editDealContractPeriod.elems.editMdrcLabelsElement.sendKeys("a");
+            pages.editDealContractPeriod.elems.editMdrcLabelsElement.sendKeys(value);
         },
 
         editSelectMdrcRandomValueFromLabel: function () {
@@ -531,6 +532,7 @@ if (pages.editDealContractPeriod === undefined) {
             pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog).perform();
             pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
         },
 

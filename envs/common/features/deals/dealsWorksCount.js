@@ -10,7 +10,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'works', 'regression'];
+exports.commonFeatureTags = ['deals', 'dealWorksCount', 'regression'];
 
 var urlUse = 'http://tango.tango.qa.wmg.com';
 
@@ -100,7 +100,7 @@ exports.feature = [
     },
 
     {
-        name: "Deals view work count",
+        name: "Deals view multiple work count",
         tags: ["dealMultipleWorks"],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
@@ -280,7 +280,7 @@ exports.feature = [
 
 
     {
-        name: "Deals view work count",
+        name: "Deals view lad work count",
         tags: ['ladDealsWorks', 'lad'],
         steps: function () {
 
@@ -374,7 +374,7 @@ exports.feature = [
 
 
     {
-        name: "Deals view work count",
+        name: "Deals view additional work count",
         tags: ["additionalDealsWorks"],
         steps: function () {
 
@@ -443,7 +443,7 @@ exports.feature = [
 
 
     {
-        name: "Deals view work count",
+        name: "Deals view filter work count",
         tags: ["filterDealsWorks"],
         steps: function () {
 

@@ -27,6 +27,7 @@ exports.scopeDeliveryTabElement = function () {
 };
 
 exports.deliverWork = function () {
+    browser.wait(ExpectedConditions.visibilityOf(exports.deliverWorkButton()));
     return exports.deliverWorkButton().click();
 };
 

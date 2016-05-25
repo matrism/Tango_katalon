@@ -7,29 +7,29 @@ var pph = require('../../../../helpers/pph'),
 if (pages.headerDeal === undefined) {
     pages.headerDeal = exports = new ftf.pageObject({
         locators: {
-            dealContractingPartiesValue: {css: "div#RECORD-HEADER h1 div.overflow"},
-            dealBriefNumberText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p:nth-child(1)"},
-            dealBriefNumberValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p.info.ng-binding:nth-child(2)"},
-            dealContractTypeText: {css: "#RECORD-HEADER div.header-info div:nth-child(1)  div.metadata-info:nth-child(1) p:nth-child(1)"},
-            dealContractTypeValue: {css: "#RECORD-HEADER div.header-info div:nth-child(1)  div.metadata-info:nth-child(1) p:nth-child(2)"},
-            dealStatusText: {css: "#RECORD-HEADER div.header-info div:nth-child(2) div.metadata-info:nth-child(1) p:nth-child(1)"},
-            dealStatusValue: {css: "#RECORD-HEADER div.header-info div:nth-child(2) div.metadata-info:nth-child(1) p span"},
-            dealSigningTerritoryText: {css: "#RECORD-HEADER div.header-info div:nth-child(2) div.metadata-info:nth-child(2) p:nth-child(1)"},
-            dealSigningTerritoryValue: {css: "#RECORD-HEADER div.header-info div:nth-child(2) div.metadata-info:nth-child(2) p span"},
-            dealTerritoriesText: {css: "#RECORD-HEADER div.header-info div:nth-child(3) div.metadata-info:nth-child(1) p"},
-            dealOwnershipText: {css: "#RECORD-HEADER div.header-info div:nth-child(3) div.relative.clearfix.ownership:nth-child(2) div.metadata-label"},
-            dealOwnershipValue: {css: "#RECORD-HEADER div.header-info div:nth-child(3) div.relative.clearfix.ownership:nth-child(2) div[data-tg-territory-label='getPristineDeal().territory_of_ownership.territories']"},
-            dealAdministrationText: {css: "#RECORD-HEADER div.header-info div:nth-child(3) div.relative.clearfix.administration:nth-child(3) div.metadata-label"},
-            dealAdministrationValue: {css: "#RECORD-HEADER div.header-info div:nth-child(3) div.relative.clearfix.administration:nth-child(3) div[data-tg-territory-label='getPristineDeal().territory_of_administration.territories']"},
-            dealStartDateText: {css: "#RECORD-HEADER div.header-info div:nth-child(4) div.metadata-info:nth-child(1) p:nth-child(1)"},
-            dealStartDateValue: {css: "#RECORD-HEADER div.header-info div:nth-child(4) div.metadata-info:nth-child(1) p:nth-child(2)"},
-            dealEndDateText: {css: "#RECORD-HEADER div.header-info div:nth-child(4) div.metadata-info:nth-child(2) p:nth-child(1)"},
-            dealEndDateValue: {css: "#RECORD-HEADER div.header-info div:nth-child(4) div.metadata-info:nth-child(2) p:nth-child(2)"},
-            dealArtistText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(1)"},
-            dealArtistValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(3)"},
-            dealLastUpdateText: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(1)"},
-            dealLastUpdateValue: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2)"},
-            dealLastUpdateDateLink: {css: "#RECORD-HEADER div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2) a"}
+            dealContractingPartiesValue: {css: "h1 div.overflow"},
+            dealBriefNumberText: {css: "div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p:nth-child(1)"},
+            dealBriefNumberValue: {css: "div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(1) p.info.ng-binding:nth-child(2)"},
+            dealContractTypeText: {css: "div.header-info div:nth-child(1)  div.metadata-info:nth-child(1) p:nth-child(1)"},
+            dealContractTypeValue: {css: "div.header-info div:nth-child(1)  div.metadata-info:nth-child(1) p:nth-child(2)"},
+            dealStatusText: {css: "div.header-info div:nth-child(2) div.metadata-info:nth-child(1) p:nth-child(1)"},
+            dealStatusValue: {css: "div.header-info div:nth-child(2) div.metadata-info:nth-child(1) p span"},
+            dealSigningTerritoryText: {css: "div.header-info div:nth-child(2) div.metadata-info:nth-child(2) p:nth-child(1)"},
+            dealSigningTerritoryValue: {css: "div.header-info div:nth-child(2) div.metadata-info:nth-child(2) p span"},
+            dealTerritoriesText: {css: "div.header-info div:nth-child(3) div.metadata-info:nth-child(1) p"},
+            dealOwnershipText: {css: "div.header-info div:nth-child(3) div.relative.clearfix.ownership:nth-child(2) div.metadata-label"},
+            dealOwnershipValue: {css: "div.header-info div:nth-child(3) div.relative.clearfix.ownership:nth-child(2) div[data-tg-territory-label='getPristineDeal().territory_of_ownership.territories']"},
+            dealAdministrationText: {css: "div.header-info div:nth-child(3) div.relative.clearfix.administration:nth-child(3) div.metadata-label"},
+            dealAdministrationValue: {css: "div.header-info div:nth-child(3) div.relative.clearfix.administration:nth-child(3) div[data-tg-territory-label='getPristineDeal().territory_of_administration.territories']"},
+            dealStartDateText: {css: "div.header-info div:nth-child(4) div.metadata-info:nth-child(1) p:nth-child(1)"},
+            dealStartDateValue: {css: "div.header-info div:nth-child(4) div.metadata-info:nth-child(1) p:nth-child(2)"},
+            dealEndDateText: {css: "div.header-info div:nth-child(4) div.metadata-info:nth-child(2) p:nth-child(1)"},
+            dealEndDateValue: {css: "div.header-info div:nth-child(4) div.metadata-info:nth-child(2) p:nth-child(2)"},
+            dealArtistText: {css: "div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(1)"},
+            dealArtistValue: {css: "div.header-info div.metadata-box:nth-child(5) div.metadata-info:nth-child(1) p:nth-child(3)"},
+            dealLastUpdateText: {css: "div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(1)"},
+            dealLastUpdateValue: {css: "div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2)"},
+            dealLastUpdateDateLink: {css: "div.header-info div.metadata-box:nth-child(6) div.metadata-info:nth-child(2) p:nth-child(2) a"}
         },
 
 
@@ -236,8 +236,8 @@ if (pages.headerDeal === undefined) {
             pages.base.scrollIntoView(pages.headerDeal.elems.dealLastUpdateDateLink);
             pages.headerDeal.elems.dealLastUpdateDateLink.click();
             pages.base.waitForAjax();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div#RECORD-HEADER h1 strong"))));
-            browser.driver.findElement(By.css("div#RECORD-HEADER h1 strong")).getText().
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div h1 strong"))));
+            browser.driver.findElement(By.css("div h1 strong")).getText().
             then(function (promise) {
                 console.log("Audit log text  is  : " + promise);
                 expect(promise).toEqual("AUDIT LOG");
