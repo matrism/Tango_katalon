@@ -269,7 +269,7 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
         },
 
         editSelectTheRandomDefineSynchLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 5);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealAdvanceApplicableEarnings.elems.editDefineSynchLabelsFieldAdvanceApplicableEarnings));
             pages.editDealAdvanceApplicableEarnings.elems.editDefineSynchLabelsFieldAdvanceApplicableEarnings.click();
             pages.editDealAdvanceApplicableEarnings.elems.editDefineSynchLabelsInputFieldAdvanceApplicableEarnings.clear();
@@ -299,7 +299,7 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
 
 
         editSelectTheRandomDefineMechLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 5);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealAdvanceApplicableEarnings.elems.editDefineMechLabelsFieldAdvanceApplicableEarnings));
             pages.editDealAdvanceApplicableEarnings.elems.editDefineMechLabelsFieldAdvanceApplicableEarnings.click();
             pages.editDealAdvanceApplicableEarnings.elems.editDefineMechLabelsInputFieldAdvanceApplicableEarnings.clear();
@@ -328,7 +328,7 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
         },
 
         editSelectTheRandomDefinePerfLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 5);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealAdvanceApplicableEarnings.elems.editDefinePerfLabelsFieldAdvanceApplicableEarnings));
             pages.editDealAdvanceApplicableEarnings.elems.editDefinePerfLabelsFieldAdvanceApplicableEarnings.click();
             pages.editDealAdvanceApplicableEarnings.elems.editDefinePerfLabelsInputFieldAdvanceApplicableEarnings.clear();
@@ -358,7 +358,7 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
 
 
         editSelectTheRandomDefineGrandLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 5);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealAdvanceApplicableEarnings.elems.editDefineGrandLabelsFieldAdvanceApplicableEarnings));
             pages.editDealAdvanceApplicableEarnings.elems.editDefineGrandLabelsFieldAdvanceApplicableEarnings.click();
             pages.editDealAdvanceApplicableEarnings.elems.editDefineGrandLabelsInputFieldAdvanceApplicableEarnings.clear();
@@ -387,7 +387,7 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
         },
 
         editSelectTheRandomDefinePrintLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 5);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealAdvanceApplicableEarnings.elems.editDefinePrintLabelsFieldAdvanceApplicableEarnings));
             pages.editDealAdvanceApplicableEarnings.elems.editDefinePrintLabelsFieldAdvanceApplicableEarnings.click();
             pages.editDealAdvanceApplicableEarnings.elems.editDefinePrintLabelsInputFieldAdvanceApplicableEarnings.clear();
@@ -416,7 +416,7 @@ if (pages.editDealAdvanceApplicableEarnings === undefined) {
         },
 
         editSelectTheRandomDefineOtherLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 5);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealAdvanceApplicableEarnings.elems.editDefineOthersLabelsFieldAdvanceApplicableEarnings));
             pages.editDealAdvanceApplicableEarnings.elems.editDefineOthersLabelsFieldAdvanceApplicableEarnings.click();
             pages.editDealAdvanceApplicableEarnings.elems.editDefineOthersLabelsInputFieldAdvanceApplicableEarnings.clear();
