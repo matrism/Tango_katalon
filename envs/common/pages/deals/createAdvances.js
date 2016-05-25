@@ -450,8 +450,8 @@ if (pages.createDealAdvances === undefined) {
         },
 
         selectTheRandomDefineSynchLabelAdvanceApplicableEarnings: function () {
-            //var value = Math.random().toString(36).substr(2, 3);
-            var value = "a";
+            var value = Math.random().toString(36).substr(2, 4);
+            //var value = "a";
             pages.createDealAdvances.elems.defineSynchLabelsAdvanceApplicableEarnings.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealAdvances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings));
             pages.createDealAdvances.elems.defineSynchLabelsFieldAdvanceApplicableEarnings.click();
@@ -481,7 +481,7 @@ if (pages.createDealAdvances === undefined) {
 
 
         selectTheRandomDefineMechLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 4);
             pages.createDealAdvances.elems.defineMechLabelsAdvanceApplicableEarnings.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealAdvances.elems.defineMechLabelsFieldAdvanceApplicableEarnings));
             pages.createDealAdvances.elems.defineMechLabelsFieldAdvanceApplicableEarnings.click();
@@ -510,7 +510,7 @@ if (pages.createDealAdvances === undefined) {
         },
 
         selectTheRandomDefinePerfLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 4);
             pages.createDealAdvances.elems.definePerfLabelsAdvanceApplicableEarnings.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealAdvances.elems.definePerfLabelsFieldAdvanceApplicableEarnings));
             pages.createDealAdvances.elems.definePerfLabelsFieldAdvanceApplicableEarnings.click();
@@ -540,7 +540,7 @@ if (pages.createDealAdvances === undefined) {
 
 
         selectTheRandomDefineGrandLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 4);
             pages.createDealAdvances.elems.defineGrandLabelsAdvanceApplicableEarnings.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealAdvances.elems.defineGrandLabelsFieldAdvanceApplicableEarnings));
             pages.createDealAdvances.elems.defineGrandLabelsFieldAdvanceApplicableEarnings.click();
@@ -569,7 +569,7 @@ if (pages.createDealAdvances === undefined) {
         },
 
         selectTheRandomDefineDigitalLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 4);
             pages.createDealAdvances.elems.defineDigitalLabelsAdvanceApplicableEarnings.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealAdvances.elems.defineDigitalLabelsFieldAdvanceApplicableEarnings));
             pages.createDealAdvances.elems.defineDigitalLabelsFieldAdvanceApplicableEarnings.click();
@@ -598,7 +598,7 @@ if (pages.createDealAdvances === undefined) {
         },
 
         selectTheRandomDefinePrintLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 4);
             pages.createDealAdvances.elems.definePrintLabelsAdvanceApplicableEarnings.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealAdvances.elems.definePrintLabelsFieldAdvanceApplicableEarnings));
             pages.createDealAdvances.elems.definePrintLabelsFieldAdvanceApplicableEarnings.click();
@@ -627,7 +627,7 @@ if (pages.createDealAdvances === undefined) {
         },
 
         selectTheRandomDefineOtherLabelAdvanceApplicableEarnings: function () {
-            var value = Math.random().toString(36).substr(2, 3);
+            var value = Math.random().toString(36).substr(2, 4);
             pages.createDealAdvances.elems.defineOtherLabelsAdvanceApplicableEarnings.click();
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealAdvances.elems.defineOthersLabelsFieldAdvanceApplicableEarnings));
             pages.createDealAdvances.elems.defineOthersLabelsFieldAdvanceApplicableEarnings.click();
