@@ -45,7 +45,7 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editCheckDealSigningTerritoryFieldGeneralTabIsDisabled();
-            steps.editDealGeneral.editCheckDealSigningTerritoryCannotBeChangedTooltip();
+            //steps.editDealGeneral.editCheckDealSigningTerritoryCannotBeChangedTooltip();
             steps.editDealGeneral.cancelEditGeneralTabFirstElementsLeftArea();
 
             //go to payees tab and delete the payee
