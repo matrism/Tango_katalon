@@ -79,5 +79,24 @@ exports.createOrganistation = data => {
         }
 
         newOrg.saveOrganisation();
+        newOrg.storeOrganisationIdInTestVariable('lastCreatedOrgId');
     });
 }
+
+addStep(exports, 'Store Organisation ID in test variable', storeBindingInTestVariable('::modularEditModels.model.typeModel.internalIpiNumber'));
+addStep(exports, 'Store Organisation UUID in test variable', (varName) => {
+    return browser.getCurrentUrl().then(function(value) {
+        var regExp = /\/#\/org\/([a-z0-9-]+)/,
+            reResults;
+
+        expect(value).toMatch(regExp);
+
+        reResults = regExp.exec(value);
+
+        if(!reResults) {
+            return null;
+        }
+
+        setTestVariable(varName, reResults[1]);
+    });
+});
