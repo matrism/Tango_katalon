@@ -188,7 +188,6 @@ exports.feature = [
             steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal(1, 2);
             steps.editDealContractPeriod.editCancelDeleteEndRules();
             steps.editDealContractPeriod.editDeleteEndRulesConditionNumberIRowNumberJ(1, 2);
-            steps.editDealContractPeriod.editConfirmDeleteEndRules();
             steps.editDealContractPeriod.editSaveEndRulesForm();
 
             steps.deal.itContinueToNextPage();
@@ -470,10 +469,10 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             //edit end rules and delete end rules
-            //steps.editDealContractPeriod.editEndRulesForm();
+            steps.editDealContractPeriod.editEndRulesForm();
             //delete end rule
-            //steps.editDealContractPeriod.editClickOnDeleteEndRulesButton();
-            //steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
+            steps.editDealContractPeriod.editClickOnDeleteEndRulesButton();
+            steps.editDealContractPeriod.editConfirmDeleteEntireEndRules();
 
 
         }
