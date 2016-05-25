@@ -194,7 +194,7 @@ exports.editClickOnAddNewRuleEndRulesAddedRuleNumberI = function (i) {
 };
 
 exports.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
-    it("Edit delete end rules condition number " + i + " row number " + j, function () {
+    it("Edit delete end rules without modal condition number " + i + " row number " + j, function () {
         pages.editDealRtp.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
         pages.editDealRtp.waitForAjax();
     });

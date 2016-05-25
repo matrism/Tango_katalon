@@ -23,6 +23,7 @@ if (pages.editDealPayee === undefined) {
             editScopePayeeSelectAllScopes: {model: 'newPayee._all_scopes'},
             editPayoutPayeeField: {css: "div[name='payoutDesignations'] div.tg-dropdown-button"},
             editPayoutAccountPayeeField: {css: "div[name='payeeAccount'] div.tg-dropdown-button"},
+            editConfirmDeleteModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             editAddAllScopeToPayee: {css: "input[data-ng-model='DPAY.newPayee._all_scopes']"},
             editScopePayeeInputField: {css: "div[data-ng-model='newPayee._selected_scopes'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editScopeOldPayeeInputField: {css: "div[data-ng-model='payee.selectedScope'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -59,14 +60,16 @@ if (pages.editDealPayee === undefined) {
             pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")));
             browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ng-scope div.modal-footer"))));
-            browser.driver.findElement(By.css("div.ng-scope div.modal-footer button[data-ng-click='ok()']")).click();
+            browser.actions().mouseMove(pages.editDealPayee.elems.editConfirmDeleteModalDialog).perform();
+            pages.editDealPayee.elems.editConfirmDeleteModalDialog.click();
         },
 
         editDeletePayeeFromDealByThePayeeScreen: function () {
             pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayee(payee)']")));
             browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayee(payee)']")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ng-scope div.modal-footer"))));
-            browser.driver.findElement(By.css("div.ng-scope div.modal-footer button[data-ng-click='ok()']")).click();
+            browser.actions().mouseMove(pages.editDealPayee.elems.editConfirmDeleteModalDialog).perform();
+            pages.editDealPayee.elems.editConfirmDeleteModalDialog.click();
         },
 
         editTheOldPayeeArea: function () {
