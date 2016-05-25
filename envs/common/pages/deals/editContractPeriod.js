@@ -414,8 +414,9 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editTheMdrcLabelsField: function () {
+            var value = Math.random().toString(36).substr(2, 3);
             pages.editDealContractPeriod.elems.editMdrcLabelsElement.clear();
-            pages.editDealContractPeriod.elems.editMdrcLabelsElement.sendKeys("a");
+            pages.editDealContractPeriod.elems.editMdrcLabelsElement.sendKeys(value);
         },
 
         editSelectMdrcRandomValueFromLabel: function () {
