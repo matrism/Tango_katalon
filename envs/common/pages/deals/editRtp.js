@@ -309,11 +309,11 @@ if (pages.editDealRtp === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
         },
 
-        editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
+        editClickOnTheDeleteRtpIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
             pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog));
-            browser.actions().mouseMove(pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog);
+            browser.actions().mouseMove(pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog).perform();
             pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog.click();
         },
 

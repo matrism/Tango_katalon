@@ -193,26 +193,28 @@ exports.editClickOnAddNewRuleEndRulesAddedRuleNumberI = function (i) {
     });
 };
 
-exports.editDeleteEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
+exports.editDeleteRtpEndRulesConditionNumberIRowNumberJWithoutModal = function (i, j) {
     it("Edit delete end rules without modal condition number " + i + " row number " + j, function () {
         pages.editDealRtp.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJWithoutModal(i, j);
         pages.editDealRtp.waitForAjax();
     });
 };
 
-exports.editCancelDeleteEndRules = function () {
+
+exports.editCancelRtpDeleteEndRules = function () {
     it("Edit cancel delete end rules modal dialog ", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editCancelDeleteEndRulesModalDialog));
         pages.editDealRtp.elems.editCancelDeleteEndRulesModalDialog.click();
     });
 };
 
-exports.editDeleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
-    it("Edit delete end rules condition number " + i + " row number " + j, function () {
-        pages.editDealRtp.editClickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
-        pages.editDealRtp.waitForAjax();
+exports.editConfirmRtpDeleteEndRules = function () {
+    it("Edit confirm delete end rules modal dialog ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog));
+        pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog.click();
     });
 };
+
 
 exports.checkEndRuleRetentionTooltipSummary = function (text) {
     it("Check end rule retention tooltip summary ", function () {

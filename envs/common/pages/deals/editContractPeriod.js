@@ -531,6 +531,7 @@ if (pages.editDealContractPeriod === undefined) {
             pages.base.scrollIntoView(element(by.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog).perform();
             pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
         },
 

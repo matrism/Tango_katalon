@@ -54,11 +54,13 @@ exports.feature = [
             //delete scope from payee
             steps.editDealPayee.editPayeeArea();
             steps.editDealPayee.editDeleteFirstScopeFromPayee();
+            steps.editDealPayee.editConfirmDeletePayeeModal();
             steps.editDealPayee.editSavePayeePage();
 
             //delete payee from deal
             steps.editDealPayee.editClickOneByPayeeHeaderLink();
             steps.editDealPayee.editDeletePayeeFromDealByPayeeScreen();
+            steps.editDealPayee.editConfirmDeletePayeeModal();
 
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();

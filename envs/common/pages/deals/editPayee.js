@@ -59,17 +59,15 @@ if (pages.editDealPayee === undefined) {
         editDeleteFirstScopeFromThePayee: function () {
             pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")));
             browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")).click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ng-scope div.modal-footer"))));
-            browser.actions().mouseMove(pages.editDealPayee.elems.editConfirmDeleteModalDialog).perform();
-            pages.editDealPayee.elems.editConfirmDeleteModalDialog.click();
         },
 
         editDeletePayeeFromDealByThePayeeScreen: function () {
             pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayee(payee)']")));
             browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayee(payee)']")).click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ng-scope div.modal-footer"))));
-            browser.actions().mouseMove(pages.editDealPayee.elems.editConfirmDeleteModalDialog).perform();
-            pages.editDealPayee.elems.editConfirmDeleteModalDialog.click();
+        },
+
+        editConfirmDeletePayeeModal: function () {
+            browser.driver.findElement(By.css("div.modal-footer button[data-ng-click='ok()']")).click();
         },
 
         editTheOldPayeeArea: function () {
