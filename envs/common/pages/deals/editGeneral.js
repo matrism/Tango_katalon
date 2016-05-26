@@ -234,8 +234,9 @@ if (pages.editDealGeneral === undefined) {
                         .then(function (options) {
                             var randomNumber = Math.floor((Math.random() * options.length));
                             var element = options[randomNumber];
-                            browser.actions().mouseMove(element).click().perform();
-                            browser.sleep(500);
+                            element.click();
+                            //browser.actions().mouseMove(element).click().perform();
+                            browser.sleep(2000);
                         })
                 }
                 else {
@@ -244,6 +245,7 @@ if (pages.editDealGeneral === undefined) {
                             var randomNumber = Math.floor((Math.random() * options.length));
                             var element = options[0];
                             element.click();
+                            browser.sleep(2000);
                             //browser.actions().mouseMove(element).click().perform();
                         });
                 }
