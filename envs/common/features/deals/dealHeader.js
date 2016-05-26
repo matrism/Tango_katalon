@@ -124,41 +124,29 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField('Ronald Cheng', 'Ronald Cheng');
-            steps.editDealGeneral.editSpecificRandomArtistField('Bruno Mars', 'Bruno Mars');
-            steps.editDealGeneral.editSpecificRandomArtistField('Billie Black', 'Billie Black');
+            steps.editDealGeneral.editSpecificRandomArtistField('Ron Wilson', 'Ronnie');
+            steps.editDealGeneral.editSpecificRandomArtistField('Bruce Mike', 'Bruce Mike');
+            steps.editDealGeneral.editSpecificRandomArtistField('Bill Lame', 'Bill Lue');
 
-
-            //steps.editDealGeneral.editSpecificArtistField("test", "Gema Test Artist");
-            //steps.editDealGeneral.editSpecificArtistField("Shilpa", "Shilpa");
-            //steps.editDealGeneral.editSpecificArtistField("mars", "Bruno Mars");
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Billie Black, Bruno Mars, Ronald Cheng');
+            steps.headerDeal.checkArtistValue('Bill Lame, Bruce Mike, Ron Wilson');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField("Madonna", "Madonna");
-
-
-            //steps.editDealGeneral.editSpecificArtistField("madonna", "Madonna");
+            steps.editDealGeneral.editSpecificRandomArtistField("Michael", "Michael");
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Billie Black, Bruno Mars, Madonna, Ronald Cheng');
+            steps.headerDeal.checkArtistValue('Bill Lame, Bruce Mike, Michael, Ron Wilson');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Billie Black, Madonna, Ronald Cheng');
+            steps.headerDeal.checkArtistValue('Bill Lame, Michael, Ron Wilson');
 
-            //steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
-            //steps.editDealGeneral.editRandomArtistField("vfdbvf");
-            //steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
-            //steps.headerDeal.checkArtistText();
-            //steps.headerDeal.checkArtistValue("Bruno Mars, Gema Test Artist, Madonna, Shilpa", "zwgf");
         }
     },
 

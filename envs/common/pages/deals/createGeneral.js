@@ -243,9 +243,10 @@ if (pages.createDealGeneral === undefined) {
 
 
         selectTheRandomArtistValue: function () {
+            var value = Math.random().toString(36).substr(2, 4);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
             pages.createDealGeneral.elems.artistsField.click();
-            pages.createDealGeneral.elems.artistFieldInput.sendKeys("abcd");
+            pages.createDealGeneral.elems.artistFieldInput.sendKeys(value);
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
 
             element(By.css("li.tg-typeahead__suggestions-footer")).getText().
