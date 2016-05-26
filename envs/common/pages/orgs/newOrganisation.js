@@ -239,7 +239,10 @@ exports.acknowledgementProcessButtons = function () {
 exports.selectAcknowledgementProcess = function (type) {
     var buttons = exports.acknowledgementProcessButtons();
 
-    buttons.filter(pph.matchTextExact(type)).first().click();
+    asAlways(
+        buttons.filter(pph.matchTextExact(type)).first(),
+        'scrollIntoView', 'click'
+    );
 };
 
 exports.acknowledgementProcessDeliveryMethodButtons = function () {
