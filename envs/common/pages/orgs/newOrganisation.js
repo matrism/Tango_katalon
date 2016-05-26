@@ -225,6 +225,7 @@ exports.fillRequiredFieldsForDeliveryMethod = function (type) {
             elem.element(by.model('deliveryMethod.model.port')).sendKeys('80');
             elem.element(by.model('deliveryMethod.model.username')).sendKeys('testUsername');
             elem.$('.password-field').sendKeys('testPassword');
+            elem.$('.e2e-method-notification-emails input').sendKeys('test@nowhere.tango');
         }
     };
 
