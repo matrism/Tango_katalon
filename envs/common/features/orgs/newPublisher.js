@@ -266,7 +266,7 @@ exports.feature = [
                 describe('Payment/Statement Info', function () {
                     orgPage.editSectionPart('Payment/Statement Info', 0);
                     newOrg.makeOrgPayee();
-                    newOrg.expectPayeeAccountNameToBeIfPresent(org.name);
+                    newOrg.expectPayeeAccountNameToBeIfPresent(viewEditOrgName);
                     /*this.makeOrgStatementRecipient();
                     this.setStatementRecipientData('Excel', 'Email with Attachment');*/
                     orgPage.saveSectionPart('Payment/Statement Info', 0);
