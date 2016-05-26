@@ -330,7 +330,9 @@ exports.selectSubpublisherSociety = function (name) {
     var elem = Typeahead(element(by.model('modularEditModels.model.agreement.society')), true);
     elem.sendKeys(name);
     browser.wait(EC.visibilityOfAny(elem.results()));
-    elem.results().filter(pph.matchTextExact(name)).first().click();
+    elem.results().$$('.tg-typeahead__item-left').filter(
+        pph.matchTextExact(name)
+    ).first().click();
 };
 
 exports.clickAddSubpublisherButton = function () {
