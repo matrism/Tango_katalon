@@ -2,7 +2,10 @@
 
 module.exports = function(variableName) {
     var fn = function() {
-        return hash.testVariables[variableName];
+        let val = hash.testVariables[variableName];
+        console.log(`Using ${variableName}: ${val}`);
+
+        return val;
     };
 
     fn.testVariableFn = true;

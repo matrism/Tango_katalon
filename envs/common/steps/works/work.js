@@ -1512,7 +1512,6 @@ exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
     });
 };
 
-
 exports.createWork = data => {
     var newWork = steps.newWork;
 
