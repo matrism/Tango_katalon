@@ -1087,14 +1087,12 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElement(By.css("div[data-ng-form='agreementNumbersCreatorForm']")).click();
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i"))));
                 browser.driver.findElement(By.css("div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i")).click();
-                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm));
             },
 
             deleteThePublisherChainSocietyAgreementNumberNumberI: function (i) {
                 browser.driver.findElement(By.css("div[data-ng-form='societyAgreementsForm']")).click();
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i"))));
                 browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i")).click();
-                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm));
             },
 
             checkTheContractualRightsTypeTextPresent: function () {
