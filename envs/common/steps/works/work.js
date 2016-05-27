@@ -36,6 +36,14 @@ module.exports.goToScopeDeliveryTab = function () {
     });
 };
 
+exports.goToIncomeRatesTab = function () {
+    it('Go to Recordings tab', function () {
+        pages.work.goToIncomeRatesTab();
+        browser.sleep(200);
+        pages.base.waitForAjax();
+    });
+};
+
 exports.goToRecordingsTab = function () {
     it('Go to Recordings tab', function () {
         pages.work.goToRecordingsTab();

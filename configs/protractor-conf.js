@@ -48,6 +48,16 @@ if (userConfig) {
     chromeArgs = _.union(chromeArgs, userConfig.chromeArgs);
 }
 
+chromeArgs = [
+    'no-sandbox',
+    'test-type=browser',
+    `window-size=${systemConfig.resolution.width},${systemConfig.resolution.height}`
+];
+
+if (userConfig) {
+    chromeArgs = _.union(chromeArgs, userConfig.chromeArgs);
+}
+
 config = {
     capabilities: {
 
@@ -120,6 +130,7 @@ config = {
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
+        /*
         // maximize browser size, then check if it's bigger than our config resolution
         browser.driver.manage().window().maximize();
 
@@ -136,6 +147,7 @@ config = {
                 console.log('Browser Window Size: ' + JSON.stringify(size));
             }
         });
+        */
 
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {
@@ -201,13 +213,13 @@ config = {
             stepByStepReporter.enable();
         }
 
-        jasmine.getEnv().addReporter({
+        /*jasmine.getEnv().addReporter({
             specDone: function () {
                 highlightElement.restoreAll().then(null, function (err) {
                     console.error('Ignoring highlightElement.restoreAll error:', err);
                 });
             }
-        });
+        });*/
 
         if (typeof process.env.__using_grunt === 'undefined') {
 //            var spawn = require('child_process').spawn;
