@@ -1031,6 +1031,7 @@ exports.editSocietyAgreementNumberCreatorLeftPanelNumberI = function (i, creator
 exports.editClickOnAddCreatorSocietyAgreementNumberForm = function () {
     it("Click on the add creator society agreement number form ", function () {
         pages.editDealScope.editClickOnTheAddCreatorSocietyAgreementNumber();
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -1038,6 +1039,7 @@ exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber
     it("Edit society agreement number creator number " + i + " society row number " + j + " and society name " + society_name, function () {
         pages.editDealScope.editFillIntoTheSocietyNumberAndNameLeftPanelCreatorForSocietyAgreementNumberCreatorIRowJ(i, j, society_name);
         pages.editDealScope.editSelectSpecificValueFromSocietyDropDownSocietyAgreementForm();
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -1097,7 +1099,6 @@ exports.checkDeleteCreatorSetSocietyAgreementNumberTextTooltip = function () {
         browser.driver.findElement(By.css("div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i")).getAttribute("data-tooltip").then(function (promise) {
             console.log("Delete creator set society agreement number text tooltip is : " + promise);
             expect(promise).toEqual("Remove Creator set");
-            pages.editDealScope.waitForAjax();
         });
     });
 };
@@ -1108,7 +1109,6 @@ exports.checkDeleteAgreementNumberSocietyAgreementNumberTextTooltip = function (
         browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(2) a[data-ng-click='data.removeCreatorAgreementNumber(creator, societyAgreementCreator, $index)'] i")).getAttribute("data-tooltip").then(function (promise) {
             console.log("Delete agreement number society agreement number text tooltip is : " + promise);
             expect(promise).toEqual("Remove Agreement Number");
-            pages.editDealScope.waitForAjax();
         });
     });
 };
@@ -1118,7 +1118,6 @@ exports.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextToolti
         browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(1) a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i")).getAttribute("data-tooltip").then(function (promise) {
             console.log("Delete publisher chain agreement number society agreement number text tooltip is : " + promise);
             expect(promise).toEqual("Remove Agreement Number");
-            pages.editDealScope.waitForAjax();
         });
     });
 };
