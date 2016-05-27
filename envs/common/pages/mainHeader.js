@@ -56,6 +56,8 @@ exports.newRecordButton = function () {
 exports.createNewRecord = function (type) {
     var button = exports.newRecordButton();
 
+    pages.base.scrollIntoView(button);
+
     return button.click().then(function (){
         if (type) {
             button.dropdownOptions().filter(function(elem){
