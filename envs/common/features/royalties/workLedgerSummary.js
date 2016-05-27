@@ -181,6 +181,7 @@ exports.feature = [
                         processingStart = processingPeriod.start.format(dateFormat),
                         processingEnd = processingPeriod.end.endOf('month').format(dateFormat);
 
+
                     steps.royaltiesBackEnd.getIncomeApportion({
                         work_id: fromTestVariable('lastCreatedWorkId'),
                         income_provider_id: fromTestVariable('lastCreatedOrgUuid'),
@@ -191,6 +192,102 @@ exports.feature = [
                         processing_start_date: processingStart,
                         processing_end_date: processingEnd
                     });
+
+                });
+
+            });
+
+            steps.base.sleep(10000);
+        },
+    },
+    {
+        name: 'Work Ledger Summary - Manual Statement',
+        tags: ['workLedgerSummary', 'workLedgerSummaryManualStatement'],
+        steps: () => {
+
+            _.defaults(hash.testVariables, mockValues);
+
+            describe('Create new data', () => {
+                steps.newOrganisation.createOrganistation(orgData);
+                steps.base.sleep(1000);
+                steps.deal.createDeal(dealData);
+                steps.work.createWork(workData);
+
+                steps.work.goToScopeDeliveryTab();
+                steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();
+                steps.work.scopeDelivery.selectDeal(fromTestVariable('lastCreatedDealId'));
+                steps.work.scopeDelivery.checkScope(0);
+                steps.work.scopeDelivery.save();
+
+                steps.work.goToRightsTab();
+                steps.workRights.expectNoErrorsInRightsGeneration();
+            });
+
+            describe('Create Manual Statement', () => {
+                let statementBatches = steps.manualStatement.batches,
+                    batchWorks = statementBatches.works,
+                    statementList = steps.manualStatement.list,
+                    statementView = steps.manualStatement.view;
+
+                steps.manualStatement.create(fileData);
+
+                describe('Add Batch', function () {
+                    statementBatches.enterBatchAmount(100);
+                    statementBatches.expectBatchTotalsToBe('100.0000');
+                    statementBatches.clickDefaultSettingsLink();
+
+                    describe('Fill out default settings for Batch', function () {
+                        statementBatches.defaults.setIncomeType('Mechanical');
+                        statementBatches.defaults.setExploitationTerritory('Brazil');
+                        statementBatches.expectBatchDefaultsToBe('Mechanical', 'Brazil', '100', '100', '100', '100', '100');
+                    });
+                });
+
+                describe('Add Work', function () {
+                    var incomeLine = {
+                      source: 'aaa',
+                      incomeType: 'Mechanical',
+                      territory: 'Afghanistan',
+                      period: {
+                        from: {
+                          year: 2014,
+                          month: '10'
+                        },
+                        to: {
+                          year: 2014,
+                          month: '11'
+                        }
+                      },
+                      units: 1,
+                      productDetail: '2423423',
+                      amount: 100,
+                      share: 100
+                    };
+
+                    //hash.testVariables['lastCreatedWorkId'] = 'WW 015035223 00';
+
+                    batchWorks.expectNumberOfWorksToBe(0);
+                    batchWorks.addWorkByWorkId(fromTestVariable('lastCreatedWorkId'));
+                    batchWorks.expectNumberOfWorksToBe(1);
+
+                    batchWorks.addIncomeLine(incomeLine);
+
+                    statementBatches.save();
+                    statementView.clickBackToStatementsViewLink();
+                    statementList.closeStatementById(fromTestVariable('lastCreatedStatementId'));
+                    statementList.storeStatementAmountById(fromTestVariable('lastCreatedStatementId'));
+                });
+
+                describe('Validate statement Works', () => {
+                    //hash.testVariables['lastCreatedWorkId'] = 'WW 015035223 00';
+
+                    steps.royaltiesBackEnd.validateWorkSummary(
+                        iso.whereCountry(fileData.processingTerritory).numeric,
+                        royaltyPeriodParser(fileData.royaltyPeriod),
+                        fromTestVariable('lastCreatedWorkId')
+                    );
+                    statementList.openBlindByStatementId(fromTestVariable('lastCreatedStatementId'));
+                    //steps.royaltyStatements.incomeWorks.openWorkById(fromTestVariable('matchedWork'));
                 });
 
             });
@@ -291,5 +388,34 @@ exports.feature = [
 
             steps.base.sleep(10000);
         },
+    },
+    {
+        name: 'Work Ledger Summary - Validate work summary on work > income and rates',
+        tags: ['workLedgerSummary', 'workLedgerSummaryIncomeRates'],
+        steps: () => {
+            var w = steps.work,
+                wir = steps.workIncomeRates,
+                rb = steps.royaltiesBackEnd;
+
+            //hash.testVariables['lastCreatedWorkId'] = mockValues.lastCreatedWorkId;
+            w.goToWorkPageById(fromTestVariable('lastCreatedWorkId'));
+            w.goToIncomeRatesTab();
+
+            wir.filters.selectProcessingTerritory(fileData.processingTerritory);
+            wir.filters.validateCurrency('PLN');
+            wir.filters.selectRoyaltyPeriod(fileData.royaltyPeriod);
+
+            rb.storeWorkSummaryInTestVariable(
+                iso.whereCountry(fileData.processingTerritory).numeric,
+                royaltyPeriodParser(fileData.royaltyPeriod),
+                fromTestVariable('lastCreatedWorkId'),
+                'work summary'
+            );
+
+            wir.table.selectIncomeGroup('Performance');
+            wir.table.validateNoIncomeMessage();
+            wir.table.selectIncomeGroup('Mechanical');
+            wir.table.validate('Mechanical', fromTestVariable('work summary'));
+        }
     }
 ];
