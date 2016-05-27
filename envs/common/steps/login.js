@@ -1,18 +1,33 @@
 "use strict";
+let _ = require('lodash'),
+    futureDate = new Date(Date.now()*2);
 
 if (steps.login === undefined) {
     steps.login = {
         itLogin: function() {
             it("User is logged in", function() {
-                var cookies = _tf_config._system_.cookies;
-                if(!cookies || cookies.length === 0) {
-                    pages.login.login();
-                }
-                else {
-                    pages.login.injectCookies(cookies);
-                }
-                pages.login.waitForAjax();
-                pages.login.check();
+                pages.login.open(true);
+
+                browser.manage().getCookies().then((cookies) => {
+                    if (!_.find(cookies, {name: 'TAT_Login'})) {
+                        pages.login.login();
+
+                        pages.login.waitForAjax();
+                        pages.login.check();
+
+                        browser.manage().getCookies().then((cookies) => {
+                            let cookie = _.find(cookies, {name: 'JSESSIONID'});
+
+                            if (cookie) {
+                                browser.manage().deleteCookie(cookie.name);
+                                browser.manage().addCookie(cookie.name, cookie.value, undefined, undefined, false, futureDate);
+                                browser.manage().addCookie('TAT_Login', true, undefined, undefined, false, futureDate);
+                            }
+                        });
+                    }
+                });
+
+
             });
         },
         itCheckUserMenuHasUsername: function(userName) {
