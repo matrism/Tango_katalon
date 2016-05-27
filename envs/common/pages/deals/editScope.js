@@ -92,6 +92,7 @@ if (pages.editDealScope === undefined) {
             },
 
             editTheScopeArea: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editScopeAreaElement);
                 pages.editDealScope.elems.editScopeAreaElement.click();
                 pages.editDealScope.elems.editScopeIcon.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryField))
