@@ -1144,6 +1144,9 @@ exports.registration = (function () {
         delivery.addressInput = function (i) {
             return $$('.e2e-method-host input').get(i);
         };
+        delivery.directoryInput = function (i) {
+            return $$('.e2e-method-directory input').get(i);
+        };
         delivery.portInput = function (i) {
             return $$('.e2e-method-port input').get(i);
         };
@@ -1186,6 +1189,12 @@ exports.registration = (function () {
         delivery.enterAddress = function (i, value) {
             var element = delivery.addressInput(i);
             pages.base.scrollIntoView(element);
+            return element.sendKeys(value);
+        };
+        delivery.enterDirectory = function (i, value) {
+            var element = delivery.directoryInput(i);
+            pages.base.scrollIntoView(element);
+            element.clear();
             return element.sendKeys(value);
         };
         delivery.enterPort = function (i, value) {
