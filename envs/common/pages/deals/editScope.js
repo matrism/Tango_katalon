@@ -1065,8 +1065,8 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm);
                 pages.editDealScope.elems.saveAddSocietyAgreementNumberForm.click();
                 browser.wait(ExpectedConditions.stalenessOf(element(by.css("div.modal-dialog.ng-scope"))));
-                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"), 100000)));
-                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(3) a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
+                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
 
                 //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 100000);
             },
@@ -1087,14 +1087,12 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElement(By.css("div[data-ng-form='agreementNumbersCreatorForm']")).click();
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i"))));
                 browser.driver.findElement(By.css("div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i")).click();
-                pages.editDealScope.waitForAjax();
             },
 
             deleteThePublisherChainSocietyAgreementNumberNumberI: function (i) {
                 browser.driver.findElement(By.css("div[data-ng-form='societyAgreementsForm']")).click();
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i"))));
                 browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i")).click();
-                pages.editDealScope.waitForAjax();
             },
 
             checkTheContractualRightsTypeTextPresent: function () {

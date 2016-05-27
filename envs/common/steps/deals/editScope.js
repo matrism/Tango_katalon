@@ -1132,12 +1132,14 @@ exports.checkAddOrViewSocietyAgreementNumberText = function (title) {
 exports.deleteCreatorSetSocietyAgreementNumberNumberI = function (i) {
     it("Delete the creator set society agreement number " + i, function () {
         pages.editDealScope.deleteTheCreatorSetSocietyAgreementNumberNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
 exports.deletePublisherChainSocietyAgreementNumberNumberI = function (i) {
     it("Delete the publisher chain society agreement number " + i, function () {
         pages.editDealScope.deleteThePublisherChainSocietyAgreementNumberNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
