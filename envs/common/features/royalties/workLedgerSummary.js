@@ -10,7 +10,7 @@ var using = require('../../../../helpers/fnutils').using,
     originalTimeout,
     PROCESSING_TIMEOUT = 60 * 60 * 1000;
 
-exports.commonFeatureTags = ['royaltyProcessing'];
+exports.commonFeatureTags = ['royaltyProcessing', 'broken'];
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
