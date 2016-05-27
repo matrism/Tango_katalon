@@ -878,7 +878,7 @@ if (steps.organisation === undefined) {
                         }
                         return isDelivered;
                     });
-                });
+                }, 180000);
             });
         },
         checkThatAllDeliveriesAreDelivered: function () {
