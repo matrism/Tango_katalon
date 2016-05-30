@@ -277,8 +277,8 @@ exports.feature = [
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
 
-            steps.base.closeTheTabByIndex(1);
             steps.base.closeTheTabByIndex(2);
+            steps.base.closeTheTabByIndex(1);
 
         }
     },
@@ -444,8 +444,8 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
 
-            steps.base.closeTheTabByIndex(1);
             steps.base.closeTheTabByIndex(2);
+            steps.base.closeTheTabByIndex(1);
 
 
         }
