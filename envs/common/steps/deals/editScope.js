@@ -1031,6 +1031,7 @@ exports.editSocietyAgreementNumberCreatorLeftPanelNumberI = function (i, creator
 exports.editClickOnAddCreatorSocietyAgreementNumberForm = function () {
     it("Click on the add creator society agreement number form ", function () {
         pages.editDealScope.editClickOnTheAddCreatorSocietyAgreementNumber();
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -1038,6 +1039,7 @@ exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber
     it("Edit society agreement number creator number " + i + " society row number " + j + " and society name " + society_name, function () {
         pages.editDealScope.editFillIntoTheSocietyNumberAndNameLeftPanelCreatorForSocietyAgreementNumberCreatorIRowJ(i, j, society_name);
         pages.editDealScope.editSelectSpecificValueFromSocietyDropDownSocietyAgreementForm();
+        pages.editDealScope.waitForAjax();
     });
 };
 
@@ -1132,12 +1134,14 @@ exports.checkAddOrViewSocietyAgreementNumberText = function (title) {
 exports.deleteCreatorSetSocietyAgreementNumberNumberI = function (i) {
     it("Delete the creator set society agreement number " + i, function () {
         pages.editDealScope.deleteTheCreatorSetSocietyAgreementNumberNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 
 exports.deletePublisherChainSocietyAgreementNumberNumberI = function (i) {
     it("Delete the publisher chain society agreement number " + i, function () {
         pages.editDealScope.deleteThePublisherChainSocietyAgreementNumberNumberI(i);
+        pages.editDealScope.waitForAjax();
     });
 };
 

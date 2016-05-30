@@ -66,17 +66,6 @@ exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
     );
 };
 
-exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
-    it(
-        'Click scope delivery checkbox #' + (scopeIndex + 1) +
-        ' for contribution #' + (contributionIndex + 1), function () {
-            pages.scopeDelivery.clickScopeDeliveryCheckbox(
-                contributionIndex, scopeIndex
-            );
-        }
-    );
-};
-
 exports.save = function () {
     it('Save Scope Delivery changes', function () {
         pages.scopeDelivery.save();

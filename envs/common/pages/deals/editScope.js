@@ -92,6 +92,7 @@ if (pages.editDealScope === undefined) {
             },
 
             editTheScopeArea: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editScopeAreaElement);
                 pages.editDealScope.elems.editScopeAreaElement.click();
                 pages.editDealScope.elems.editScopeIcon.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryField))
@@ -1013,7 +1014,7 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']")));
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
                 browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']")).click();
-                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") input[data-ng-model='societyAgreement.agreement_number']"))));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") input[data-ng-model='societyAgreement.agreement_number']"))));
             },
 
             editFillIntoTheSocietyAgreementNumberRightPanelNumberI: function (i, society_name) {
@@ -1032,6 +1033,7 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElements(By.css("div.ng-scope a.typeahead-result.clearfix.ng-scope"))
                     .then(function (options) {
                         options[0].click();
+                        browser.sleep(1000);
                     })
             },
 
@@ -1061,12 +1063,14 @@ if (pages.editDealScope === undefined) {
             },
 
             saveTheChangesSocietyAgreementNumberForm: function () {
+                browser.sleep(1000);
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm));
                 pages.base.scrollIntoView(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm);
                 pages.editDealScope.elems.saveAddSocietyAgreementNumberForm.click();
                 browser.wait(ExpectedConditions.stalenessOf(element(by.css("div.modal-dialog.ng-scope"))));
-                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"), 100000)));
-                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(3) a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
+                browser.sleep(1000);
+                //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
 
                 //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 100000);
             },
@@ -1087,14 +1091,12 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElement(By.css("div[data-ng-form='agreementNumbersCreatorForm']")).click();
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i"))));
                 browser.driver.findElement(By.css("div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-form='agreementNumbersCreatorsForm'] a[data-ng-click='data.removeCreatorSetFromChain(creator, $index, agreementNumbersCreatorForm)'] i")).click();
-                pages.editDealScope.waitForAjax();
             },
 
             deleteThePublisherChainSocietyAgreementNumberNumberI: function (i) {
                 browser.driver.findElement(By.css("div[data-ng-form='societyAgreementsForm']")).click();
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i"))));
                 browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i")).click();
-                pages.editDealScope.waitForAjax();
             },
 
             checkTheContractualRightsTypeTextPresent: function () {
@@ -1106,52 +1108,52 @@ if (pages.editDealScope === undefined) {
                     });
             },
 
-        checkTheContractualRightTypesIncludedOrExcludedTextValuePresent: function (text) {
-            pages.base.scrollIntoView(pages.editDealScope.elems.contractualRightTypeTextValueElement);
-            pages.editDealScope.elems.contractualRightTypeTextValueElement.getText()
-                .then(function (promise) {
-                    console.log("Contractual right types text value rights included or excluded from view scope is : " + promise);
-                    expect(promise).toEqual(text);
-                });
-        },
+            checkTheContractualRightTypesIncludedOrExcludedTextValuePresent: function (text) {
+                pages.base.scrollIntoView(pages.editDealScope.elems.contractualRightTypeTextValueElement);
+                pages.editDealScope.elems.contractualRightTypeTextValueElement.getText()
+                    .then(function (promise) {
+                        console.log("Contractual right types text value rights included or excluded from view scope is : " + promise);
+                        expect(promise).toEqual(text);
+                    });
+            },
 
-        editExpandTheMasterRights: function () {
-            pages.base.scrollIntoView(pages.editDealScope.elems.editExpandMasterRightsElement);
-            pages.editDealScope.elems.editExpandMasterRightsElement.click();
-        },
+            editExpandTheMasterRights: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editExpandMasterRightsElement);
+                pages.editDealScope.elems.editExpandMasterRightsElement.click();
+            },
 
-        editCollapseTheMasterRights: function () {
-            pages.base.scrollIntoView(pages.editDealScope.elems.editCollapseMasterRightsElement);
-            pages.editDealScope.elems.editCollapseMasterRightsElement.click();
-        },
+            editCollapseTheMasterRights: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editCollapseMasterRightsElement);
+                pages.editDealScope.elems.editCollapseMasterRightsElement.click();
+            },
 
-        editClickOnThePublishingRightsCheckBox: function () {
-            pages.base.scrollIntoView(pages.editDealScope.elems.editPublishingRightsCheckBox);
-            pages.editDealScope.elems.editPublishingRightsCheckBox.click();
-        },
+            editClickOnThePublishingRightsCheckBox: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editPublishingRightsCheckBox);
+                pages.editDealScope.elems.editPublishingRightsCheckBox.click();
+            },
 
 
-        editClickOnTheMasterRightsCheckBox: function () {
-            pages.base.scrollIntoView(pages.editDealScope.elems.editMasterRightsCheckBox);
-            pages.editDealScope.elems.editMasterRightsCheckBox.click();
-        },
+            editClickOnTheMasterRightsCheckBox: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editMasterRightsCheckBox);
+                pages.editDealScope.elems.editMasterRightsCheckBox.click();
+            },
 
-        editClickOnThePublishingRightsNumberI: function (i) {
-            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")));
-            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")).click();
-        },
+            editClickOnThePublishingRightsNumberI: function (i) {
+                pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")));
+                browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(1) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")).click();
+            },
 
-        editClickOnTheMasterRightsNumberI: function (i) {
-            pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")));
-            browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")).click();
-        },
+            editClickOnTheMasterRightsNumberI: function (i) {
+                pages.base.scrollIntoView(element(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")));
+                browser.driver.findElement(By.css("div.contract-type-accordion div.accordion div.accordion-group.ng-isolate-scope:nth-child(2) ul.contract-types.ng-scope li.ng-binding.ng-scope:nth-child(" + i + ")")).click();
+            },
 
-        editClickOnTheLimitedToCheckBox: function () {
-            pages.base.scrollIntoView(pages.editDealScope.elems.editLimitedToCheckBoxContractualType);
-            pages.editDealScope.elems.editLimitedToCheckBoxContractualType.click();
-        },
+            editClickOnTheLimitedToCheckBox: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editLimitedToCheckBoxContractualType);
+                pages.editDealScope.elems.editLimitedToCheckBoxContractualType.click();
+            },
 
-        clickOnTheCancelSocietyAgreementNumberButtonLink: function () {
+            clickOnTheCancelSocietyAgreementNumberButtonLink: function () {
                 pages.editDealScope.elems.cancelSocietyAgreementNumber.click();
             }
         }
