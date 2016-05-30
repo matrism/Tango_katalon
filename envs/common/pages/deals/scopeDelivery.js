@@ -233,7 +233,7 @@ exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
 
     pages.base.scrollIntoView(element);
 
-    //pages.base.waitForAjax();
+    pages.base.waitForAjax();
 
     browser.wait(ExpectedConditions.elementToBeClickable(element));
 

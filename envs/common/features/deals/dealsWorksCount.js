@@ -437,6 +437,7 @@ exports.feature = [
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.updateScopeDelivery();
 
+
             steps.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
             steps.scopeDelivery.clickOnRemoveScopeDelivery();
             steps.scopeDelivery.save();
