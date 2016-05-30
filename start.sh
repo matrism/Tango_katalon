@@ -37,25 +37,6 @@ PARAMS=$@
 OPTIND=1
 PROFILELINE=""
 
-while getopts ":hup:s" OPTION; do
-    case "$OPTION" in
-        h)
-            usage
-            exit 1
-            ;;
-        u)
-            UPDATE="1"
-            ;;
-        p)
-            PROFILE=$OPTARG
-            PARAMS=${PARAMS/"-p"/}
-            PARAMS=${PARAMS/$OPTARG/}
-            ;;
-        *)
-            ;;
-    esac
-done
-
 shift "$((OPTIND-1))"
 
 FILE="./profiles/$PROFILE.yml"
