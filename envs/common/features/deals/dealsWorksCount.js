@@ -410,7 +410,7 @@ exports.feature = [
                 steps.base.focusOnNewOpenedTab(1);
                 steps.base.useBlankEntityDataSlot('work', 0);
                 steps.newWork.goToNewWorkPage();
-                steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+                steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + randomId(1));
                 steps.newWork.selectRandomCreator(0);
                 steps.newWork.enterCreatorContribution(0, 100);
                 steps.newWork.optToIncludeWorkOnWebsite(false);
