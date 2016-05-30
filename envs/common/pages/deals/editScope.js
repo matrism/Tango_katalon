@@ -1014,7 +1014,7 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']")));
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
                 browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div:nth-child(" + (i + 2) + ") a[data-ng-click='showSocietyAgreementNumbersModal(chain)']")).click();
-                //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") input[data-ng-model='societyAgreement.agreement_number']"))));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") input[data-ng-model='societyAgreement.agreement_number']"))));
             },
 
             editFillIntoTheSocietyAgreementNumberRightPanelNumberI: function (i, society_name) {
