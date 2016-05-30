@@ -48,16 +48,6 @@ if (userConfig) {
     chromeArgs = _.union(chromeArgs, userConfig.chromeArgs);
 }
 
-chromeArgs = [
-    'no-sandbox',
-    'test-type=browser',
-    `window-size=${systemConfig.resolution.width},${systemConfig.resolution.height}`
-];
-
-if (userConfig) {
-    chromeArgs = _.union(chromeArgs, userConfig.chromeArgs);
-}
-
 config = {
     capabilities: {
 
