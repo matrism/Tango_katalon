@@ -100,190 +100,7 @@ exports.feature = [
     },
 
     {
-        name: "Deals view filter work count",
-        tags: ["filterDealsWorks"],
-        steps: function () {
-
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
-            steps.deal.itContinueToNextPage();
-
-            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-            steps.createDealContractPeriod.fillActualEndDateField();
-            steps.createDealContractPeriod.addNewContractPeriodDialog();
-            steps.createDealContractPeriod.fillEndTargetMonths();
-            for (var i = 3; i <= 6; i++) {
-                steps.createDealContractPeriod.addNewContractPeriod();
-                steps.createDealContractPeriod.fillEndTargetMonths();
-            }
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
-            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
-            steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
-            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
-            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("50");
-            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
-            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
-            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
-            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
-            steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
-            steps.createDealScope.selectRandomPublisherNameDropDownValue();
-            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("50");
-            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
-            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
-            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
-
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(2);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Europe");
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(3);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Asia");
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(4);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Finland");
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(5);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Asia");
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(6);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Africa");
-
-            steps.deal.itContinueToNextPage();
-            steps.base.scrollIntoView("acquisition ", pages.createDealRtp.elems.acquisitionDescription);
-            steps.createDealRtp.fillIntoAcquisitionDescription(1);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(1);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(2);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(3);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(4);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(5);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(6);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(7);
-            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(8);
-
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
-
-            //add works and deliver work to deal
-            steps.base.openTheNewTab(urlUse);
-            steps.base.focusOnNewOpenedTab(1);
-            steps.base.useBlankEntityDataSlot('work', 0);
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
-            steps.newWork.selectRandomCreator(0);
-            steps.newWork.enterCreatorContribution(0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            var workId = steps.work.findCurrentlyOpenWorkId();
-            steps.work.goToScopeDeliveryTab();
-            steps.scopeDelivery.deliverWork();
-            steps.base.focusOnNewOpenedTab(0);
-            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 0, 1);
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.refreshThePage();
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.base.useBlankEntityDataSlot('work', 0);
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
-            steps.newWork.selectRandomCreator(0);
-            steps.newWork.enterCreatorContribution(0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.work.goToScopeDeliveryTab();
-            steps.scopeDelivery.deliverWork();
-            steps.base.focusOnNewOpenedTab(0);
-            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 2, 3);
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.refreshThePage();
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.base.useBlankEntityDataSlot('work', 0);
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
-            steps.newWork.selectRandomCreator(0);
-            steps.newWork.enterCreatorContribution(0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.work.goToScopeDeliveryTab();
-            steps.scopeDelivery.deliverWork();
-            steps.base.focusOnNewOpenedTab(0);
-            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 4, 5);
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.refreshThePage();
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.base.useBlankEntityDataSlot('work', 0);
-            steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
-            steps.newWork.selectRandomCreator(0);
-            steps.newWork.enterCreatorContribution(0, 100);
-            steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.newWork.saveWork();
-            steps.work.goToScopeDeliveryTab();
-            steps.scopeDelivery.deliverWork();
-            steps.base.focusOnNewOpenedTab(0);
-            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 6, 7);
-
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.refreshThePage();
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.editDealScope.selectScopeNumberI(1);
-
-            steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
-            steps.editDealScope.editPublisherSharesSet();
-            steps.editDealScope.editIntoFirstPublisherNameOwnFieldSpecificValue("51");
-            steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("51");
-            steps.editDealScope.editSaveThePublisherShareSet();
-            //steps.deal.checkGrowlMessageDisplayedAfterScopeEdited("Delivered Works are being updated. Please check Deal later today for Delivery conflicts.");
-
-            steps.base.focusOnNewOpenedTab(1);
-            steps.base.goToHomePage();
-            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
-            steps.work.enterWorkSearchTerms(workId);
-            steps.base.sleep(200);
-            steps.base.waitForAjax();
-            steps.work.clickWorkSearchMatch(0);
-            steps.base.waitForAjax();
-            steps.work.goToScopeDeliveryTab();
-            steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
-
-            steps.base.focusOnNewOpenedTab(0);
-            steps.deal.refreshThePage();
-
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
-            steps.work.checkDefaultFilterContractPeriodForWorkLog();
-            steps.work.checkDefaultFilterScopeForWorkLog();
-            steps.work.checkDefaultFilterAllWorksForWorkLog();
-            steps.work.checkDefaultFilterConflictWorksForWorkLog();
-
-            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
-            steps.scopeDelivery.checkTheTotalNumberOfWorks("4");
-            //steps.scopeDelivery.checkTheTotalNumberOfWorksAndConflictingWorksMessage("Total: 4 Works - 1 have conflict(s)");
-            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(1);
-            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
-            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownScopeWithIndexNumberI(1);
-
-            steps.work.clickOnConflictingWorksButtonFilterForWorkLog();
-            steps.work.checkDefaultFilterConflictWorksForWorkLogSelected();
-            steps.work.clickOnAllWorksButtonFilterForWorkLog();
-            steps.work.checkDefaultFilterAllWorksForWorkLog();
-            steps.work.checkDefaultFilterConflictWorksForWorkLog();
-            steps.work.goBackToMainPageFromWork();
-
-        }
-    },
-
-    {
-        name: "Deals view multiple work count",
+        name: "Deals view work count",
         tags: ["dealMultipleWorks"],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
@@ -622,6 +439,189 @@ exports.feature = [
             steps.deal.refreshThePage();
 
         }
-    }
+    },
 
+
+    {
+        name: "Deals view work count",
+        tags: ["filterDealsWorks"],
+        steps: function () {
+
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.deal.itContinueToNextPage();
+
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
+            for (var i = 3; i <= 6; i++) {
+                steps.createDealContractPeriod.addNewContractPeriod();
+                steps.createDealContractPeriod.fillEndTargetMonths();
+            }
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("50");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("50");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
+
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(2);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Europe");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(3);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Asia");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(4);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Finland");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(5);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Asia");
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(6);
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Africa");
+
+            steps.deal.itContinueToNextPage();
+            steps.base.scrollIntoView("acquisition ", pages.createDealRtp.elems.acquisitionDescription);
+            steps.createDealRtp.fillIntoAcquisitionDescription(1);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(1);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(2);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(3);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(4);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(5);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(6);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(7);
+            steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(8);
+
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            //add works and deliver work to deal
+            steps.base.openTheNewTab(urlUse);
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            var workId = steps.work.findCurrentlyOpenWorkId();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 0, 1);
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 2, 3);
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 4, 5);
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.useBlankEntityDataSlot('work', 0);
+            steps.newWork.goToNewWorkPage();
+            steps.newWork.enterPrimaryWorkTitle('NEW WORK ' + randomId(0));
+            steps.newWork.selectRandomCreator(0);
+            steps.newWork.enterCreatorContribution(0, 100);
+            steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.newWork.saveWork();
+            steps.work.goToScopeDeliveryTab();
+            steps.scopeDelivery.deliverWork();
+            steps.base.focusOnNewOpenedTab(0);
+            steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 6, 7);
+
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editIntoFirstPublisherNameOwnFieldSpecificValue("51");
+            steps.editDealScope.editIntoFirstPublisherNameAMCollectFieldSpecificValue("51");
+            steps.editDealScope.editSaveThePublisherShareSet();
+            //steps.deal.checkGrowlMessageDisplayedAfterScopeEdited("Delivered Works are being updated. Please check Deal later today for Delivery conflicts.");
+
+            steps.base.focusOnNewOpenedTab(1);
+            steps.base.goToHomePage();
+            steps.work.selectWorkSearchFilterTag(0, 'Work ID');
+            steps.work.enterWorkSearchTerms(workId);
+            steps.base.sleep(200);
+            steps.base.waitForAjax();
+            steps.work.clickWorkSearchMatch(0);
+            steps.base.waitForAjax();
+            steps.work.goToScopeDeliveryTab();
+            steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
+
+            steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
+
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+            steps.work.checkDefaultFilterContractPeriodForWorkLog();
+            steps.work.checkDefaultFilterScopeForWorkLog();
+            steps.work.checkDefaultFilterAllWorksForWorkLog();
+            steps.work.checkDefaultFilterConflictWorksForWorkLog();
+
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
+            steps.scopeDelivery.checkTheTotalNumberOfWorks("4");
+            //steps.scopeDelivery.checkTheTotalNumberOfWorksAndConflictingWorksMessage("Total: 4 Works - 1 have conflict(s)");
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(1);
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownContractPeriodWithIndexNumberI(0);
+            steps.scopeDelivery.selectFromDeliveredWorkFilterDropDownScopeWithIndexNumberI(1);
+
+            steps.work.clickOnConflictingWorksButtonFilterForWorkLog();
+            steps.work.checkDefaultFilterConflictWorksForWorkLogSelected();
+            steps.work.clickOnAllWorksButtonFilterForWorkLog();
+            steps.work.checkDefaultFilterAllWorksForWorkLog();
+            steps.work.checkDefaultFilterConflictWorksForWorkLog();
+            steps.work.goBackToMainPageFromWork();
+
+        }
+    }
 ];
