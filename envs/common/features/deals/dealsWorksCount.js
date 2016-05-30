@@ -96,11 +96,13 @@ exports.feature = [
             steps.work.checkDefaultFilterAllWorksForWorkLog();
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
 
+            steps.work.closeTheTabByIndex(1);
+
         }
     },
 
     {
-        name: "Deals view work count",
+        name: "Deals view multiple work count",
         tags: ["dealMultipleWorks"],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
@@ -275,6 +277,9 @@ exports.feature = [
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
 
+            steps.work.closeTheTabByIndex(1);
+            steps.work.closeTheTabByIndex(2);
+
         }
     },
 
@@ -369,6 +374,8 @@ exports.feature = [
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
 
+            steps.work.closeTheTabByIndex(1);
+
         }
     },
 
@@ -392,7 +399,6 @@ exports.feature = [
             for (var i = 1; i <= 5; i++) {
                 steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(i);
             }
-
 
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -437,6 +443,10 @@ exports.feature = [
 
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
+
+            steps.work.closeTheTabByIndex(1);
+            steps.work.closeTheTabByIndex(2);
+
 
         }
     },
@@ -621,6 +631,8 @@ exports.feature = [
             steps.work.checkDefaultFilterAllWorksForWorkLog();
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
+
+            steps.work.closeTheTabByIndex(1);
 
         }
     }
