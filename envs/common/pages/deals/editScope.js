@@ -1033,6 +1033,7 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElements(By.css("div.ng-scope a.typeahead-result.clearfix.ng-scope"))
                     .then(function (options) {
                         options[0].click();
+                        browser.sleep(1000);
                     })
             },
 
@@ -1066,6 +1067,7 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm);
                 pages.editDealScope.elems.saveAddSocietyAgreementNumberForm.click();
                 browser.wait(ExpectedConditions.stalenessOf(element(by.css("div.modal-dialog.ng-scope"))));
+                browser.sleep(1000);
                 //browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
                 //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] a[data-ng-click='showSocietyAgreementNumbersModal(chain)']"))));
 
@@ -1094,6 +1096,7 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElement(By.css("div[data-ng-form='societyAgreementsForm']")).click();
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i"))));
                 browser.driver.findElement(By.css("div[data-ng-repeat='societyAgreement in data.model.society_agreement_numbers']:nth-child(" + i + ") a[data-ng-click='data.removeAgreementNumber(societyAgreement, $index)'] i")).click();
+                browser.sleep(1000);
             },
 
             checkTheContractualRightsTypeTextPresent: function () {
