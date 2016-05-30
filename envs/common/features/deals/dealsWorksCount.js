@@ -443,7 +443,7 @@ exports.feature = [
 
 
     {
-        name: "Deals view work count",
+        name: "Deals view filter work count",
         tags: ["filterDealsWorks"],
         steps: function () {
 
