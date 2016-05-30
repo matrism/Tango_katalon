@@ -96,7 +96,7 @@ exports.feature = [
             steps.work.checkDefaultFilterAllWorksForWorkLog();
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
 
-            steps.work.closeTheTabByIndex(1);
+            steps.base.closeTheTabByIndex(1);
 
         }
     },
@@ -277,8 +277,8 @@ exports.feature = [
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
 
-            steps.work.closeTheTabByIndex(1);
-            steps.work.closeTheTabByIndex(2);
+            steps.base.closeTheTabByIndex(1);
+            steps.base.closeTheTabByIndex(2);
 
         }
     },
@@ -374,7 +374,7 @@ exports.feature = [
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
 
-            steps.work.closeTheTabByIndex(1);
+            steps.base.closeTheTabByIndex(1);
 
         }
     },
@@ -444,8 +444,8 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
 
-            steps.work.closeTheTabByIndex(1);
-            steps.work.closeTheTabByIndex(2);
+            steps.base.closeTheTabByIndex(1);
+            steps.base.closeTheTabByIndex(2);
 
 
         }
@@ -632,7 +632,7 @@ exports.feature = [
             steps.work.checkDefaultFilterConflictWorksForWorkLog();
             steps.work.goBackToMainPageFromWork();
 
-            steps.work.closeTheTabByIndex(1);
+            steps.base.closeTheTabByIndex(1);
 
         }
     }
