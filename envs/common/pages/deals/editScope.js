@@ -1033,7 +1033,6 @@ if (pages.editDealScope === undefined) {
                 browser.driver.findElements(By.css("div.ng-scope a.typeahead-result.clearfix.ng-scope"))
                     .then(function (options) {
                         options[0].click();
-                        browser.sleep(1000);
                     })
             },
 
