@@ -4,7 +4,8 @@ let jobRunnerConfig = require('./jobRunnerConfig'),
     _ = require('lodash'),
     configer = global.ftf.configer,
     userConfig = require('config-file').home('.tatconfig') || {},
-    cli = _.defaultsDeep(userConfig.cli, configer.getParamsFromCli()),
+    userCli = _.clone(userConfig.cli),
+    cli = _.defaultsDeep(userCli, configer.getParamsFromCli()),
     tags = (function () {
         if(cli.tags === true) {
             cli.tags = '';
@@ -35,6 +36,9 @@ if(cli['app-url'] === true) {
 }
 
 global.userConfig = userConfig;
+if (userConfig) {
+    console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
+}
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
@@ -83,7 +87,8 @@ var defaultUserName = 'TangoTest1',
             stepByStep: cli['step-by-step'],
             fingerprints: cli.fingerprints,
             saveDiskSpace: cli['save-disk-space'],
-            persistProfile: cli['persist-profile']
+            persistProfile: cli['persist-profile'],
+            simpleReporter: cli['simple-reporter']
         },
         _env_: { ENV_TYPE: env },
         qa: {
