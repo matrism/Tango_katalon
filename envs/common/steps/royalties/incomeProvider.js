@@ -23,7 +23,7 @@ exports.createValidRoyaltySetPair = function (table, message) {
         consoleMessage = consoleMessage.replace('%Date_2%', Date_2);
 
         describe(consoleMessage, function () {
-            autoIt('pages.deal.clickWarnerLogo');
+            steps.base.refreshPage();
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
             if(systemConfig.env.name === 'qa') {
@@ -99,7 +99,7 @@ exports.editValidRoyaltySetPair = function (table, message) {
         consoleMessage = consoleMessage.replace('%Date_2%', Date_2);
 
         describe(consoleMessage, function () {
-            autoIt('pages.deal.clickWarnerLogo');
+            steps.base.refreshPage();
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
             if(systemConfig.env.name === 'qa') {
@@ -181,7 +181,7 @@ exports.createInvalidRoyaltySetPair = function (table, message) {
         consoleMessage = consoleMessage.replace('%Date_2%', Date_2);
 
         describe(consoleMessage, function () {
-            autoIt('pages.deal.clickWarnerLogo');
+            steps.base.refreshPage();
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
             if(systemConfig.env.name === 'qa') {
@@ -256,7 +256,7 @@ exports.editInvalidRoyaltySetPair = function (table, message) {
         consoleMessage = consoleMessage.replace('%Date_2%', Date_2);
 
         describe(consoleMessage, function () {
-            autoIt('pages.deal.clickWarnerLogo');
+            steps.base.refreshPage();
             autoIt('pages.mainHeader.createNewRecord', 'Deal');
             autoIt('pages.createDealGeneral.selectDesiredSigningTerritory', 'Argentina');
             if(systemConfig.env.name === 'qa') {

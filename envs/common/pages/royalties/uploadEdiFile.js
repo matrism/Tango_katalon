@@ -82,7 +82,7 @@ exports.selectFileFormat = function (name) {
 };
 
 exports.fileInput = function () {
-    return $('.btn.upload-file-button input[type="file"]');
+    return $('.tg-file-upload-input input[type="file"]');
 };
 
 

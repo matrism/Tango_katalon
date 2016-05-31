@@ -688,6 +688,11 @@ exports.searchForPreviouslyEnteredComponentWork = function (i) {
         pages.work.waitForWorkSearchResultToBeDisplayed();
     });
 };
+
+addBasicStep(
+    exports, pages.work, 'Wait for work search result to be displayed'
+);
+
 exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function () {
     it('Expect "No results for work search" to be displayed', function () {
         pages.work.expectNoResultsForWorkSearchMessageToBeDisplayed();

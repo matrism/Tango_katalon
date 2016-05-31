@@ -15,8 +15,9 @@ if (pages.modal === undefined) {
 
         //Methods
         clickOnYesButton: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.yesButttonOnModal()));
-            this.yesButttonOnModal().click();
+            return pages.base.waitForModal().then(
+                () => this.yesButttonOnModal().click()
+            );
         }
     });
 }
