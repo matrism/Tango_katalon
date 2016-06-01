@@ -812,7 +812,9 @@
 
                 if(result === 'failed') {
                     do {
-                        bDiv.a.class.add(result);
+                        if (bDiv.a) {
+                            bDiv.a.class.add(result);
+                        }
                     } while(bDiv = bDiv.parent);
 
                     stm.fDiv.a.class.add(result);
@@ -1037,6 +1039,11 @@
         } else {
             $consoleOut.find(':hidden').remove()
             $consoleOut.hide();
+            $htmlReport.find('.links a').click((event) => {
+                event.preventDefault();
+                $htmlReport.hide();
+                $consoleOut.show();
+            });
 
             liveUpdate();
             $consoleOut.bind('DOMSubtreeModified', liveUpdate);
