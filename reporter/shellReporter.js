@@ -23,27 +23,29 @@ exports.jasmineStarted = (info) => {
             log('Browser URL:', url);
         });
 
-        retryPromise(() => {
-            return browser.takeScreenshot().then((png) => {
-                let fName = systemConfig.streamId + '_' + currentStepNum + '.png',
+        if (!systemConfig.noReport) {
+            retryPromise(() => {
+                return browser.takeScreenshot().then((png) => {
+                    let fName = systemConfig.streamId + '_' + currentStepNum + '.png',
+                        fPath = systemConfig.htmlReportPath + '/' + fName;
+
+                    fs.writeFileSync(fPath, new Buffer(png, 'base64'));
+
+                    log('PNG saved');
+                });
+            }, 3, 'Screenshot taking for report').then(null, (error) => {
+                console.error('Non-critical errors ignored:', error.message);
+            });
+
+            return takeHtmlSnapshot().then((html) => {
+                let fName = systemConfig.streamId + '_' + currentStepNum + '.html',
                     fPath = systemConfig.htmlReportPath + '/' + fName;
 
-                fs.writeFileSync(fPath, new Buffer(png, 'base64'));
+                fs.writeFileSync(fPath, html);
 
-                log('PNG saved');
+                log('HTML saved');
             });
-        }, 3, 'Screenshot taking for report').then(null, (error) => {
-            console.error('Non-critical errors ignored:', error.message);
-        });
-
-        return takeHtmlSnapshot().then((html) => {
-            let fName = systemConfig.streamId + '_' + currentStepNum + '.html',
-                fPath = systemConfig.htmlReportPath + '/' + fName;
-
-            fs.writeFileSync(fPath, html);
-
-            log('HTML saved');
-        });
+        }
     });
 
     log('Testing started with', info.totalSpecsDefined, 'steps to run');

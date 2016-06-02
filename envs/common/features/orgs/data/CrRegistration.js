@@ -7,6 +7,7 @@ exports.cr = {
     },
     ftp: {
         address: '10.194.1.212',
+        directory: 'files/',
         port: '21',
         username: 'Tango_Test',
         password: 'St@rwar1$',
@@ -16,6 +17,7 @@ exports.cr = {
     },
     sftp: {
         address: '10.194.1.212',
+        directory: 'files/',
         port: '22',
         username: 'Tango_Test',
         password: 'St@rwar1$',
@@ -27,12 +29,14 @@ exports.cr = {
     ack: {
         sftp: {
             address: '10.194.1.212',
+            directory: 'files/',
             port: '22',
             username: 'Tango_Test',
             password: 'St@rwar1$'
         },
         ftp: {
             address: '10.194.1.212',
+            directory: 'files/',
             port: '21',
             username: 'Tango_Test',
             password: 'St@rwar1$'

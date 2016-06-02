@@ -18,7 +18,7 @@ function checkSaveAndRevert (propName, propValue) {
     using(steps.dataUtilities, function () {
         var self = this;
         self.getProperty(propName).then(function(text){
-            propInitialValue = text || '';
+            propInitialValue = (text || '').replace(/^(TAT_)+/, '');
 
             if (!propValue) {
                 propValue = 'TAT_' + propInitialValue;

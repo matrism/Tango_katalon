@@ -8,23 +8,19 @@ var ExpectedConditions = protractor.ExpectedConditions,
 pages.royaltyStatements = exports;
 
 exports.royaltyPeriodDropdown = function () {
-    return $('.royalty-period-component[data-royalty-period-model="filters.royalty_period"]');
+    return tgRoyaltyPeriod.byModel('filters.royalty_period');
 };
 
 exports.selectFirstRoyaltyPeriod = function () {
-    var dropdown = exports.royaltyPeriodDropdown(), 
-        button = dropdown.$('button.ng-binding');
+    var dropdown = exports.royaltyPeriodDropdown();
 
-    browser.wait(ExpectedConditions.visibilityOf(button));
-    button.click();
+    dropdown.select(0);
+};
 
-    browser.wait(function(){
-        return dropdown.$$('.dropdown-menu > li').count().then(function(count){
-            return count > 2;
-        });
-    });
+exports.selectRoyaltyPeriod = function (val) {
+    var dropdown = exports.royaltyPeriodDropdown();
 
-    return dropdown.$$('.dropdown-menu > li > a').first().click();
+    dropdown.selectValue(val);
 };
 
 exports.statementList = function () {
@@ -201,6 +197,7 @@ exports.incomeWorks = (function(){
     };
 
     incomeWorks.openWorkById = function (id) {
+        console.log('id', id);
         var work = incomeWorks.workById(id);
         work.$('.suspense-title > p:first-child > a').click();
     };

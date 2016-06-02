@@ -184,7 +184,7 @@ exports.feature = [
                 cds.enterPublisherSearchTerms(2, 1, 'WB MUSIC CORP.');
                 cds.selectPublisherSearchResultByIndex(0);
 
-                eds.editSaveTheChangesDealScope();
+                eds.editSaveThePublisherShareSet();
             });
 
             deal.validateSocietyAgreementNumbersLinkPresence(
@@ -205,7 +205,7 @@ exports.feature = [
                 cds.enterCollectPublisherShare(1, 0, 25);
                 cds.enterCollectPublisherShare(2, 0, 25);
 
-                eds.editSaveTheChangesDealScope();
+                eds.editSaveThePublisherShareSet();
             });
 
             deal.validateSocietyAgreementNumbersLinkPresence(

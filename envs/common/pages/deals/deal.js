@@ -58,11 +58,6 @@ if (pages.deal === undefined) {
 
         //END OF LOCATORS
 
-        clickWarnerLogo: function () {
-            browser.refresh();
-            pages.deal.warnerLogo().click();
-        },
-
         continueToNextPage: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.continueButton));
             pages.deal.elems.continueButton.click();

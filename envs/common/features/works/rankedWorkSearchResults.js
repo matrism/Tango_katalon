@@ -107,7 +107,7 @@ exports.feature = [
                     steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms('"' + searchData.terms + '"');
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
                         steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
                         if (expectedMatch.alternateTitle) {
@@ -135,7 +135,7 @@ exports.feature = [
                     steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms(searchData.terms);
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
                         steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
                         if (expectedMatch.alternateTitle) {
@@ -163,7 +163,7 @@ exports.feature = [
                     steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Creator');
                     steps.work.enterWorkSearchTerms(searchData.terms);
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
                         steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
                         if (expectedMatch.alternateTitle) {
@@ -191,7 +191,7 @@ exports.feature = [
                     steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Creator');
                     steps.work.enterWorkSearchTerms(searchData.terms);
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
                         steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
                         if (expectedMatch.alternateTitle) {
@@ -219,11 +219,11 @@ exports.feature = [
                     steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms('"' + searchData.titleTerms + '"');
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     steps.work.addAnotherWorkSearchTerm();
                     steps.work.selectWorkSearchFilterTag(1, 'Creator');
                     steps.work.enterWorkSearchTerms(searchData.creatorTerms);
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
                         steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
                         if (expectedMatch.alternateTitle) {
@@ -251,11 +251,11 @@ exports.feature = [
                     steps.mainHeader.search.selectEntityType('Works');
                     steps.work.selectWorkSearchFilterTag(0, 'Title');
                     steps.work.enterWorkSearchTerms(searchData.titleTerms);
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     steps.work.addAnotherWorkSearchTerm();
                     steps.work.selectWorkSearchFilterTag(1, 'Creator');
                     steps.work.enterWorkSearchTerms(searchData.creatorTerms);
-                    steps.base.waitForAjax();
+                    steps.work.waitForWorkSearchResultToBeDisplayed();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
                         steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
                         if (expectedMatch.alternateTitle) {

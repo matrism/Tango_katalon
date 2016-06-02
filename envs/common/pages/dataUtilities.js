@@ -190,7 +190,7 @@ exports.checkSaveAndRevert = function (propName, propValue) {
     browser.sleep(5000);
 
     exports.getProperty(propName).then(function(text){
-        propInitialValue = text || '';
+        propInitialValue = (text || '').replace(/^(TAT_)+/, '');
 
         if (!propValue) {
             propValue = 'TAT_' + propInitialValue;

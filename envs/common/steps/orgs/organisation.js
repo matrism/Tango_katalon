@@ -1053,6 +1053,7 @@ pageStep([
             'Select Method',
             'Enter Email Primary Email',
             'Enter Address',
+            'Enter Directory',
             'Enter Port',
             'Enter Username',
             'Enter Password',
@@ -1066,6 +1067,7 @@ pageStep([
             'Select acknowledgement type',
             'Select delivery method',
             'Enter Address',
+            'Enter Directory',
             'Enter Port',
             'Enter Username',
             'Enter Password'
@@ -1123,6 +1125,7 @@ exports.registration.resetDeliveryInfo = function(data) {
                 this.addMethod();
                 this.selectMethod(1, 'FTP');
                 this.enterAddress(0, data.ftp.address);
+                this.enterDirectory(0, data.ftp.directory);
                 this.enterPort(0, data.ftp.port);
                 this.enterUsername(0, data.ftp.username);
                 this.enterPassword(0, data.ftp.password);
@@ -1132,6 +1135,7 @@ exports.registration.resetDeliveryInfo = function(data) {
                 this.addMethod();
                 this.selectMethod(2, 'SFTP');
                 this.enterAddress(1, data.sftp.address);
+                this.enterDirectory(1, data.sftp.directory);
                 this.enterPort(1, data.sftp.port);
                 this.enterUsername(1, data.sftp.username);
                 this.enterPassword(1, data.sftp.password);
@@ -1149,11 +1153,13 @@ exports.registration.resetDeliveryInfo = function(data) {
                 this.selectAcknowledgementType('Multiple');
                 this.selectDeliveryMethod(0, 'SFTP');
                 this.enterAddress(0, data.ack.sftp.address);
+                this.enterDirectory(0, data.ack.sftp.directory);
                 this.enterPort(0, data.ack.sftp.port);
                 this.enterUsername(0, data.ack.sftp.username);
                 this.enterPassword(0, data.ack.sftp.password);
                 this.selectDeliveryMethod(1, 'FTP');
                 this.enterAddress(1, data.ack.ftp.address);
+                this.enterDirectory(1, data.ack.ftp.directory);
                 this.enterPort(1, data.ack.ftp.port);
                 this.enterUsername(1, data.ack.ftp.username);
                 this.enterPassword(1, data.ack.ftp.password);

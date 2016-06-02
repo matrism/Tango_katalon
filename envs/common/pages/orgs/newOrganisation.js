@@ -199,7 +199,7 @@ exports.expectFtpAndSftpToHaveDifferentLabels = function () {
 
     panel.$('.e2e-method-remove .btn-delete').click();
 
-    pages.base.waitUntilModalAnimationFinishes();
+    pages.base.waitForModal();
     pages.base.expectModalPopUpToBeDisplayed();
     pages.base.clickModalPrimaryButton();
 };
@@ -225,6 +225,7 @@ exports.fillRequiredFieldsForDeliveryMethod = function (type) {
             elem.element(by.model('deliveryMethod.model.port')).sendKeys('80');
             elem.element(by.model('deliveryMethod.model.username')).sendKeys('testUsername');
             elem.$('.password-field').sendKeys('testPassword');
+            elem.$('.e2e-method-notification-emails input').sendKeys('test@nowhere.tango');
         }
     };
 
@@ -238,7 +239,10 @@ exports.acknowledgementProcessButtons = function () {
 exports.selectAcknowledgementProcess = function (type) {
     var buttons = exports.acknowledgementProcessButtons();
 
-    buttons.filter(pph.matchTextExact(type)).first().click();
+    asAlways(
+        buttons.filter(pph.matchTextExact(type)).first(),
+        'scrollIntoView', 'click'
+    );
 };
 
 exports.acknowledgementProcessDeliveryMethodButtons = function () {
@@ -325,8 +329,10 @@ exports.fillSubpublisherSocietyAgreementNumber = function (number) {
 exports.selectSubpublisherSociety = function (name) {
     var elem = Typeahead(element(by.model('modularEditModels.model.agreement.society')), true);
     elem.sendKeys(name);
-    pages.base.waitForAjax();
-    elem.results().filter(pph.matchTextExact(name)).first().click();
+    browser.wait(EC.visibilityOfAny(elem.results()));
+    elem.results().$$('.tg-typeahead__item-left').filter(
+        pph.matchTextExact(name)
+    ).first().click();
 };
 
 exports.clickAddSubpublisherButton = function () {

@@ -2,6 +2,7 @@
 
 var using = require('../../../../helpers/fnutils').using,
     noUpload = systemConfig.noUpload,
+    path = require('path'),
     _ = require('lodash'),
     YAML = require('yamljs');
 
@@ -327,14 +328,14 @@ exports.feature = [
                     return {
                         year: period[0],
                         month: period[1]
-                    }
+                    };
                 }
 
                 files.forEach(function(item){
                     item.distributionPeriod = {
                         start: parsePeriod(item.distributionPeriodStart),
                         end: parsePeriod(item.distributionPeriodEnd)
-                    }
+                    };
                 });
 
                 return files;
@@ -383,7 +384,7 @@ exports.feature = [
                 return {
                     year: period[0],
                     month: period[1]
-                }
+                };
             }
 
             function downloadS3Dir(dirname, doneFn) {

@@ -148,7 +148,10 @@ exports.feature = [
             steps.editRoyaltyRates.openRateSetPanel();
             steps.royaltyRates.addEffectiveStartDate("2016-08-09");
             steps.royaltyRates.saveRateSet();
-            steps.royaltyRates.confirmSaveRateSet();
+
+            if(systemConfig.env.name === 'qa') {
+                steps.royaltyRates.confirmSaveRateSet();
+            }
 
             steps.deal.refreshThePage();
             steps.editDealScope.selectScopeNumberI(1);

@@ -178,7 +178,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         openRRButton: function () {
-            return $$(".icon-chevron-down").first();
+            return $$(".icon-chevron-down, .fa-chevron-down").first();
         },
 
         royaltyRateInput: function () {
@@ -327,7 +327,7 @@ if (pages.royaltyRates === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(this.openRRButton()));
             browser.wait(ExpectedConditions.elementToBeClickable(this.openRRButton()));
 
-            $$(".icon-chevron-down")
+            $$(".icon-chevron-down, .fa-chevron-down")
                 .then(function (result) {
 
                         for (i = 0; i < result.length; i++) {
@@ -626,7 +626,7 @@ if (pages.royaltyRates === undefined) {
 
         clickDealSigningTerritoryToggle: function () {
             var dealSigningTerritoryToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\\"DRDST\\""]'
+                '[data-btn-radio="\'DRDST\'"]'
             );
 
             dealSigningTerritoryToggle.click();
@@ -636,7 +636,7 @@ if (pages.royaltyRates === undefined) {
 
         clickWarnerChappellToggle: function () {
             var warnerChappellToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\\"DRWC\\""]'
+                '[data-btn-radio="\'DRWC\'"]'
             );
 
             warnerChappellToggle.click();
@@ -658,7 +658,7 @@ if (pages.royaltyRates === undefined) {
 
         effectiveStartDateCalendarIconIsPresent: function () {
             var effectiveStartDateCalendarIco;
-            effectiveStartDateCalendarIco = element(by.css("   .icon-calendar"));
+            effectiveStartDateCalendarIco = element(by.css('.rate-set-calendar .fa-calendar'));
             return effectiveStartDateCalendarIco.isPresent();
         },
 

@@ -36,6 +36,14 @@ module.exports.goToScopeDeliveryTab = function () {
     });
 };
 
+exports.goToIncomeRatesTab = function () {
+    it('Go to Recordings tab', function () {
+        pages.work.goToIncomeRatesTab();
+        browser.sleep(200);
+        pages.base.waitForAjax();
+    });
+};
+
 exports.goToRecordingsTab = function () {
     it('Go to Recordings tab', function () {
         pages.work.goToRecordingsTab();
@@ -680,6 +688,11 @@ exports.searchForPreviouslyEnteredComponentWork = function (i) {
         pages.work.waitForWorkSearchResultToBeDisplayed();
     });
 };
+
+addBasicStep(
+    exports, pages.work, 'Wait for work search result to be displayed'
+);
+
 exports.expectNoResultsForWorkSearchMessageToBeDisplayed = function () {
     it('Expect "No results for work search" to be displayed', function () {
         pages.work.expectNoResultsForWorkSearchMessageToBeDisplayed();
@@ -1511,7 +1524,6 @@ exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
         pages.work.clickOnTheWorkLinkFromDeliveryWorksPageNumberI(i);
     });
 };
-
 
 exports.createWork = data => {
     var newWork = steps.newWork;

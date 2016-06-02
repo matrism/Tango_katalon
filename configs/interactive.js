@@ -5,7 +5,7 @@ var repl = require('repl'),
 
     $emptyCmd = '(' + os.EOL + ')',
 
-    $absurdTimeout = 1e10,
+    $absurdTimeout = 1e8,
 
     $nextUp = null,
     $replCallback = null,
@@ -18,12 +18,11 @@ var repl = require('repl'),
 $vs.clear = function() {
     this.length = 0;
 };
-
+console.log(jasmine.DEFAULT_TIMEOUT_INTERVAL);
 steps.login.itLogin();
 
 it('Run REPL', () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = $absurdTimeout;
-
+    console.log(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     var replServer = repl.start({
         input: process.stdin,
         output: process.stdout,
@@ -103,4 +102,4 @@ it('Run REPL', () => {
             $replCallback(err);
         }).then(() => $break);
     }, $absurdTimeout);
-});
+}, $absurdTimeout);

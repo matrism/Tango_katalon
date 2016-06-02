@@ -248,7 +248,7 @@ if (pages.editRoyaltyRates === undefined) {
 
         clickDealSigningTerritoryToggle: function () {
             var dealSigningTerritoryToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\\"DRDST\\""]'
+                '[data-btn-radio="\'DRDST\'"]'
             );
 
             dealSigningTerritoryToggle.click();
@@ -258,7 +258,7 @@ if (pages.editRoyaltyRates === undefined) {
 
         clickWarnerChappellToggle: function () {
             var warnerChappellToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\\"DRWC\\""]'
+                '[data-btn-radio="\'DRWC\'"]'
             );
 
             warnerChappellToggle.click();
@@ -380,10 +380,8 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         clickEditSavedRRIcon: function () {
-            return asAlways(
-                this.editSavedRRIcon(),
-                'waitUntilVisible', 'scrollIntoView', 'click'
-            );
+            asAlways(this.rrSumarryTable(), 'scrollIntoView', 'hover');
+            this.editSavedRRIcon().click();
         },
 
         getSavedRRName: function () {

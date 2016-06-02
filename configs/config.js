@@ -1,9 +1,10 @@
 'use strict';
-
 let jobRunnerConfig = require('./jobRunnerConfig'),
 
+    _ = require('lodash'),
     configer = global.ftf.configer,
-    cli = configer.getParamsFromCli(),
+    userConfig = require('config-file').home('.tatconfig') || {},
+    cli = _.defaultsDeep(userConfig.cli, configer.getParamsFromCli()),
     tags = (function () {
         if(cli.tags === true) {
             cli.tags = '';
@@ -33,6 +34,8 @@ if(cli['app-url'] === true) {
     delete cli['app-url'];
 }
 
+global.userConfig = userConfig;
+
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
     config = {
@@ -44,7 +47,7 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1400,
+                width: 1200,
                 height: 1024
             },
             streamId: cli['stream'] || 1,
@@ -69,6 +72,7 @@ var defaultUserName = 'TangoTest1',
             commitHash: cli.commit,
             feat: cli.feat,
             tags: tags,
+            noReport: cli['no-report'],
             bugLabel: cli['bug-label'],
             dontSkipBroken: cli['dont-skip-broken'],
             failFast: cli['fail-fast'],
@@ -78,14 +82,19 @@ var defaultUserName = 'TangoTest1',
             cycle: cli['cycle'],
             stepByStep: cli['step-by-step'],
             fingerprints: cli.fingerprints,
-            saveDiskSpace: cli['save-disk-space']
+            saveDiskSpace: cli['save-disk-space'],
+            persistProfile: cli['persist-profile']
         },
         _env_: { ENV_TYPE: env },
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: (
-                    cli['app-url'] || 'http://tango.tango.qa.wmg.com'
+                    cli['app-url'] || 'http://tango.tango.qa.wmg.com/'
+                ),
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://tango.tango.qa.wmg.com/'
                 ),
                 cr_url: (
                     cli['cr-url'] || 'http://tancrsrv.tango.qa.wmg.com:80'

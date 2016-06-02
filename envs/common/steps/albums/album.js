@@ -47,6 +47,7 @@ pageStep([
         'Select Artist Search Result By Index',
         'Enter duration',
         'Delete track',
+        'Validate track number',
         'Validate title',
         'Validate artist name',
         'Validate library name',

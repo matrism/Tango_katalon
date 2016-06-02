@@ -636,14 +636,11 @@ exports.editIncomeProviderByPartialMatch = function (provider) {
 
 exports.editSingleRoyaltySet = function () {
     it("Click RR edit button", function () {
-        browser.wait(ExpectedConditions.visibilityOf(pages.editRoyaltyRates.rrSumarryTable()));
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.editRoyaltyRates.rrSumarryTable()));
+        let el = pages.editRoyaltyRates.rrSumarryTable();
 
-        pages.editRoyaltyRates.clickRRSumarryTable();
-        pages.base.scrollIntoView(pages.editRoyaltyRates.rrSumarryTable());
-        var el = pages.editRoyaltyRates.rrSumarryTable();
+        browser.wait(EC.visibilityOf(el));
+        pages.base.scrollIntoView(el);
 
-        browser.actions().mouseMove(el).perform();
         pages.editRoyaltyRates.clickEditSavedRRIcon();
 
         pages.editRoyaltyRates.waitForAjax();

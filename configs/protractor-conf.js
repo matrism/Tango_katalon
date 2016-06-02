@@ -19,7 +19,8 @@ var path = require('path'),
     demoReporter = require('../tools/demoReporter'),
     zapiReporter = require('../reporter/zapiReporter'),
     stepByStepReporter = require('../tools/stepByStepReporter'),
-    unlinkTestRunSnapshots = require('../tools/unlinkTestRunSnapshots');
+    unlinkTestRunSnapshots = require('../tools/unlinkTestRunSnapshots'),
+    chromeArgs;
 
 global.ftf = require('factory-testing-framework');
 global._tf_config = require('./config');
@@ -33,6 +34,20 @@ global.systemConfig = global._tf_config._system_;
 
 systemConfig.downloadsDirectoryPath = tmp.dirSync().name;
 
+chromeArgs = [
+    'no-sandbox',
+    'test-type=browser',
+    `window-size=${systemConfig.resolution.width},${systemConfig.resolution.height}`
+]
+
+if (systemConfig.persistProfile) {
+    chromeArgs.push(`user-data-dir=${process.env.HOME}/.tat/chromeProfile`);
+}
+
+if (userConfig) {
+    chromeArgs = _.union(chromeArgs, userConfig.chromeArgs);
+}
+
 config = {
     capabilities: {
 
@@ -45,7 +60,7 @@ config = {
         browserName: global._tf_config._system_.browser, //firefox, ie
         chromeOptions: {
           //  args: ['--test-type']
-            args: ['--no-sandbox', '--test-type=browser'],
+            args: chromeArgs,
             prefs: {
                 'download': {
                     'prompt_for_download': false,
@@ -100,11 +115,46 @@ config = {
 
         //jasmine.getEnv().addReporter(beforeReporter);
 
+        // TODO: Remove this work-around once refactored HTML
+        // from Tango's PR 4656 gets deployed to upper environments.
+        if (systemConfig.env.name === 'qa') {
+            let patch = str => str.replace(
+                /#RECORD-HEADER/g, '.RECORD-HEADER'
+            ).replace(
+                /#ACTIVITY-HEADER/g, '.ACTIVITY-HEADER'
+            ).replace(
+                /#ACTIVITY-RECORDS/g, '.ACTIVITY-RECORDS'
+            );
+
+            let oldByCss = By.css;
+
+            By.css = function (selector) {
+                return oldByCss.call(this, patch(selector));
+            };
+
+            let oldByCssContainingText = By.cssContainingText;
+
+            By.cssContainingText = function (selector, text) {
+                return oldByCssContainingText.call(
+                    this, patch(selector), text
+                );
+            };
+
+            let old$ = $;
+
+            global.$ = selector => old$(patch(selector));
+
+            let old$$ = $$;
+
+            global.$$ = selector => old$$(patch(selector));
+        }
+
         // set path to features in config
         systemConfig.path_to_features = testFiles.load().features;
 
         browser.driver.manage().timeouts().setScriptTimeout(15000);
 
+        /*
         // maximize browser size, then check if it's bigger than our config resolution
         browser.driver.manage().window().maximize();
 
@@ -121,6 +171,7 @@ config = {
                 console.log('Browser Window Size: ' + JSON.stringify(size));
             }
         });
+        */
 
         browserWait = browser.wait;
         browser.wait = function(testFn, timeout, options) {
@@ -186,13 +237,13 @@ config = {
             stepByStepReporter.enable();
         }
 
-        jasmine.getEnv().addReporter({
+        /*jasmine.getEnv().addReporter({
             specDone: function () {
                 highlightElement.restoreAll().then(null, function (err) {
                     console.error('Ignoring highlightElement.restoreAll error:', err);
                 });
             }
-        });
+        });*/
 
         if (typeof process.env.__using_grunt === 'undefined') {
 //            var spawn = require('child_process').spawn;

@@ -232,6 +232,18 @@ exports.recordings = (function() {
         expect(exports.title(i)).toBe(value);
     };
 
+    exports.trackNumberBinding = i => exports.rows().get(i).element(by.binding(
+        ' track.track_number '
+    ));
+
+    exports.trackNumber = i => asAlways(
+        exports.trackNumberBinding(i), 'scrollIntoView', 'getAllText'
+    );
+
+    exports.validateTrackNumber = (i, val) => expect(
+        exports.trackNumber(i)
+    ).toBe(val.toString());
+
     exports.artistNameBinding = function(i) {
         return exports.rows().get(i).element(by.binding(
             ' track.recording.artist.display_name '

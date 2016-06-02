@@ -70,6 +70,8 @@ exports.feature = [
         tags: ['newAlbumSmokeCreateCommercialAlbum'],
         steps: function() {
             using(steps.newAlbum, function() {
+                let nar = this.recordings;
+
                 this.goToNewAlbumPage();
 
                 this.enterTitle('TEST ALBUM ' + randomId('commercialAlbum'));
@@ -86,21 +88,21 @@ exports.feature = [
                     'TEST ALBUM CODE ' + randomId('commercialAlbumCode')
                 );
 
-                this.enterRecordingSearchTerms(
+                nar.enterSearchTerms(
                     0, 'TEST RECORDING ' + randomId('commercialAlbumRecording')
                 );
 
-                this.createEnteredRecording();
+                nar.createEnteredRecording();
 
-                this.enterWorkIdFromWorkSlotAsWorkSearchTerms(0, 'mainWork');
+                nar.enterWorkIdFromWorkSlotAsWorkSearchTerms(0, 'mainWork');
 
-                this.selectRecordingWorkSearchResultByIndex(0);
+                nar.selectWorkSearchResultByIndex(0);
 
-                this.enterRecordingArtistSearchTerms(
+                nar.enterArtistSearchTerms(
                     0, 'TEST ARTIST ' + randomId('commercialAlbumArtist')
                 );
 
-                this.selectRecordingArtistSearchResultByIndex(0);
+                nar.selectArtistSearchResultByIndex(0);
 
                 this.save();
             });
