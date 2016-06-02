@@ -139,6 +139,7 @@ if (pages.editDealGeneral === undefined) {
         },
 
         removeEditInternalContactsRow: function () {
+            pages.base.scrollIntoView(pages.editDealGeneral.elems.removeInternalContactsElement);
             pages.editDealGeneral.elems.removeInternalContactsElement.click();
         },
 
