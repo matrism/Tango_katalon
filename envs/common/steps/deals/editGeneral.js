@@ -147,9 +147,9 @@ exports.removeInternalContactsRowI = function (i) {
 
 exports.confirmModalDialog = function () {
     it("Confirm modal dialog action", function () {
-        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
-        pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
+        //browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
+        //browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
+        //pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
         pages.editDealGeneral.clickOnYesModalDialog();
         browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.yesModalDialog));
         pages.editDealGeneral.waitForAjax();
