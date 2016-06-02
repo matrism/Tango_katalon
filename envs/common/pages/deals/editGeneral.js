@@ -141,7 +141,8 @@ if (pages.editDealGeneral === undefined) {
         removeEditInternalContactsRow: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.removeInternalContactsElement));
             pages.base.scrollIntoView(pages.editDealGeneral.elems.removeInternalContactsElement);
-            pages.editDealGeneral.elems.removeInternalContactsElement.click();
+            browser.click(pages.editDealGeneral.elems.removeInternalContactsElement);
+            //pages.editDealGeneral.elems.removeInternalContactsElement.click();
         },
 
         removeEditInternalContactsRowI: function (i) {
