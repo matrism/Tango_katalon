@@ -149,6 +149,7 @@ exports.confirmModalDialog = function () {
     it("Confirm modal dialog action", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.confirmationModalDialog));
         browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
+        pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
         pages.editDealGeneral.clickOnYesModalDialog();
         browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.yesModalDialog));
     });
@@ -158,6 +159,7 @@ exports.confirmTheCancelModalDialog = function () {
     it("Confirm modal dialog action", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
         browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
+        pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
         pages.editDealGeneral.clickOnYesModalDialog();
         browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
     });
