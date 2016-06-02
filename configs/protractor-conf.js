@@ -82,7 +82,7 @@ config = {
             testFiles = require('./files.js'),
             matchers,
             browserWait,
-            jasmineReporters,
+            jasmineReporters = require('jasmine-reporters'),
             asciiPrefixes,
             failFast = require('jasmine-fail-fast'),
             beforeReporter = require('../helpers/beforeReporter');
@@ -207,7 +207,6 @@ config = {
         }
 
         if (reporting === 'xml' || reporting === 'all') {
-            jasmineReporters = require('jasmine-reporters');
 
             jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
                 consolidateAll: false,
@@ -217,7 +216,15 @@ config = {
             }));
         }
 
-        jasmine.getEnv().addReporter(require('../reporter/shellReporter'));
+        if (!systemConfig.simpleReporter) {
+            jasmine.getEnv().addReporter(require('../reporter/shellReporter'));
+        } else {
+            jasmine.getEnv().addReporter(new jasmineReporters.TerminalReporter({
+                color: true,
+                showStack: true,
+                verbosity: 3
+            }));
+        }
 
         if (parseInt(systemConfig.cycle)) {
             jasmine.getEnv().addReporter(zapiReporter);
