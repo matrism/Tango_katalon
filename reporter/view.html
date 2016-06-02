@@ -511,7 +511,9 @@
                 var v = el.a[k];
 
                 if(k === 'class') {
-                    v = Array.from(v.values()).join(' ');
+                    let array = [];
+                    v.forEach(function (val) { array.push(val); });
+                    v = array.join(' ');
                 }
 
                 return html + ' ' + k + '="' + v + '"';
