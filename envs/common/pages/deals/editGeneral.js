@@ -140,7 +140,8 @@ if (pages.editDealGeneral === undefined) {
 
         removeEditInternalContactsRow: function () {
             pages.base.scrollIntoView(pages.editDealGeneral.elems.removeInternalContactsElement);
-            pages.editDealGeneral.elems.removeInternalContactsElement.click();
+            browser.actions().click(pages.editDealGeneral.elems.removeInternalContactsElement);
+            //pages.editDealGeneral.elems.removeInternalContactsElement.click();
         },
 
         removeEditInternalContactsRowI: function (i) {
