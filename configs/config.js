@@ -36,7 +36,7 @@ if(cli['app-url'] === true) {
 }
 
 global.userConfig = userConfig;
-if (userConfig) {
+if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
 
