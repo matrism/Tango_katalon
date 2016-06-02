@@ -417,6 +417,11 @@
 
             if (!isLive) {
                 el = { t: tag, a: {}, c: children || [] };
+
+                if (tat.useElId) {
+                    el.a.id = 'tatEl' + tat.elCount++;
+                }
+
                 if(typeof attr === 'string') {
                     el.a.class = new Set(attr.split(/ +/));
                 }
@@ -430,51 +435,64 @@
                     el.a = attr;
                 }
             } else {
-                el = $('<' + tag + '>');
-                attr = attr || '';
+                el = tat.jqueryEl($('<' + tag + '>'), attr, children);
+            }
 
-                if(typeof attr === 'string') {
-                    el.addClass(attr);
+            return el;
+        };
+
+        tat.jqueryEl = function (el, attr, children) {
+            if(typeof attr === 'string') {
+                el.addClass(attr);
+            }
+            else {
+                attr = attr || {};
+                if(typeof attr.class === 'string') {
+                    el.addClass(attr.class);
                 }
-                else {
-                    if(typeof attr.class === 'string') {
-                        el.addClass(attr.class);
-                    }
 
-                    if(Array.isArray(attr.class)) {
-                        attr.class.forEach(className => {
-                            el.addClass(className);
-                        });
-                    }
-
-                    Object.keys(attr).forEach(k => {
-                        if(k === 'class') {
-                            return;
-                        }
-
-                        var v = attr[k];
-
-                        el.attr(k, v);
+                if(Array.isArray(attr.class)) {
+                    attr.class.forEach(className => {
+                        el.addClass(className);
                     });
                 }
 
-                el.c = {
-                    push: function (child){ el.append(child); }
-                };
-
-                el.a = {
-                    class: {
-                        add: className => el.addClass(className),
-                        has: className => el.hasClass(className)
+                Object.keys(attr).forEach(k => {
+                    if(k === 'class') {
+                        return;
                     }
-                };
 
-                if(children) {
-                    children.forEach(function(child) { el.append(child); });
-                }
+                    var v = attr[k];
 
+                    el.attr(k, v);
+                });
             }
+            if(children) {
+                children.forEach(function(child) { el.append(child); });
+            }
+
+            el.c = {
+                push: function (child){ el.append(child); }
+            };
+
+            el.a = {
+                class: {
+                    add: className => el.addClass(className),
+                    has: className => el.hasClass(className)
+                }
+            };
             return el;
+        };
+
+        tat.convertElements = function () {
+            tat.streams.forEach(function (stm) {
+                for (let key in stm) {
+                    let el = stm[key];
+                    if (typeof el === 'object' && el.t && el.a) {
+                        stm[key] = tat.jqueryEl($('#' + el.a.id), el.a, el.c);
+                    }
+                }
+            });
         };
 
         tat.makeFieldDiv = function (classes, key, val) {
@@ -536,6 +554,8 @@
 
         tat.streams = [];
 
+        tat.elCount = 0;
+        tat.useElId = false;
         tat.featureCount = 0;
         tat.passedFeatures = 0;
 
@@ -970,7 +990,7 @@
             return newText;
         }
 
-        function liveUpdate() {
+        function updateFromJenkins() {
             var data = getJenkinsConsoleOutput();
             while(lnReRes = lnRe.exec(data)) {
                 tat.logParser.parseLine(lnReRes[1]);
@@ -1039,16 +1059,34 @@
                 $('.status > .val').text('Download failed');
             });
         } else {
+            var $liveButton = $('<button>').html('Activate Live Report');
             $consoleOut.find(':hidden').remove();
-            $consoleOut.hide();
-            $htmlReport.find('.links a').click((event) => {
-                event.preventDefault();
-                $htmlReport.hide();
-                $consoleOut.show();
-            });
+            if (!$('[href="consoleFull"]').length) {
+                $('#main-panel h1').after($liveButton);
+            }
+            $liveButton.after($('<br>'));
+            $liveButton.click(() => {
+                $liveButton.hide();
+                $consoleOut.hide();
+                $htmlReport.append($(reportHeader));
 
-            liveUpdate();
-            $consoleOut.bind('DOMSubtreeModified', liveUpdate);
+                isLive = false;
+                tat.useElId = true;
+                updateFromJenkins();
+                $htmlReport.append($(tat.streams.reduce(function (html, stm) {
+                    return html + tat.renderEl(stm.div);
+                }, '')));
+                isLive = true;
+
+                tat.convertElements();
+
+                $consoleOut.bind('DOMSubtreeModified', updateFromJenkins);
+                $htmlReport.find('.links a').click((event) => {
+                    event.preventDefault();
+                    $htmlReport.hide();
+                    $consoleOut.show();
+                });
+            });
         }
 
     </script>
