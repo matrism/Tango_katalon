@@ -179,13 +179,13 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
             //add second chain for pss
             steps.createDealScope.clickAddChainLink();
-            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "publisher", 33, 12);
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "publisher", "33", "12");
             steps.createDealScope.fillIntoPublisherNameAMFieldChainI(2);
             steps.createDealScope.selectSpecificPublisherNameDropDownChainI(2);
             steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(2);
             //add third chain for pss
             steps.createDealScope.clickAddChainLink();
-            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "name", 34, 24);
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "name", "34", "24");
             steps.createDealScope.fillIntoPublisherNameAMFieldChainI(3);
             steps.createDealScope.selectSpecificPublisherNameDropDownChainI(3);
             steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(3);
