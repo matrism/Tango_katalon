@@ -42,16 +42,16 @@ if (pages.organisation === undefined) {
             return $$(".DATA-CHILD .DATA-ROW").count();
         },
         listErrorStatus: function () {
-            return $$(".row-header>div:nth-child(2)>span .icon-minus-sign").count();
+            return $$('.row-header>div:nth-child(2)>span .fa-minus-circle').count();
         },
         listNonErrorStatus: function () {
-            return $$(".row-header>div:nth-child(2)>span .icon-minus").count();
+            return $$('.row-header>div:nth-child(2)>span .fa-minus').count();
         },
         validationErrorCriticalStatus: function () {
-            return $$(".icon-minus-sign").count();
+            return $$('.fa-minus-circle').count();
         },
         validationNonErrorStatus: function () {
-            return $$(".icon-minus").count();
+            return $$('.fa-minus').count();
         },
         listWorkTitle: function () {
             return $$(".row-header>div:nth-child(3)>h4").get(1).getText();
