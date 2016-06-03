@@ -70,7 +70,9 @@ addStepGroup(exports, 'Albums', g => {
 
         'Remove',
 
-        'Toggle'
+        'Toggle',
+
+        'Open'
     ]);
 });
 

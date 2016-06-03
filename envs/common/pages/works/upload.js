@@ -19,6 +19,8 @@ exports.waitForSourceSearchResults = () => browser.wait(EC.visibilityOfAny(
 ));
 
 exports.selectSourceSearchResultByIndex = (i, name) => {
+    exports.waitForSourceSearchResults();
+
     let result = exports.sourceTypeahead().results().get(i);
 
     return pages.base.scrollIntoView(result).then(() => {
@@ -76,6 +78,8 @@ exports.selectMusicLibrary = name => {
 
 exports.uploadButton = () => $('[data-ng-click="uploadFile();"]');
 
-exports.upload = () => asAlways(
-    exports.uploadButton(), 'scrollIntoView', 'click'
-);
+exports.upload = () => {
+    asAlways(exports.uploadButton(), 'scrollIntoView', 'click');
+
+    return pages.worksUploadHistory.waitForPage(3 * 6e4);
+};

@@ -4,12 +4,18 @@ pages.worksUploadHistory = exports;
 
 exports.headingContainer = () => $('.work-history-heading__container');
 
+exports.waitForPage = timeout => {
+    browser.wait(EC.visibilityOf(exports.headingContainer()));
+
+    return pages.base.waitForAjax(timeout);
+};
+
 exports.uploadWorksLink = () => exports.headingContainer().element(
     by.cssContainingText('a', 'UPLOAD WORKS')
 );
 
 exports.uploadWorks = () => asAlways(
-    exports.uploadWorksLink(), 'scrollIntoView', 'click'
+    exports.uploadWorksLink(), 'scrollIntoView', 'click', 'waitForAjax'
 );
 
 exports.rows = () => element.all(by.repeater(
@@ -20,7 +26,7 @@ exports.fileNameBindingForRow = row => row.element(by.binding(
     ' ::historyFiles.file_name'
 ));
 
-exports.findRowByFileName = (name, testVarName) => {
+exports.findRowByFileName = (name, testVarName, dontExpect) => {
     let rows = exports.rows();
 
     let iFound = -1;
@@ -57,10 +63,34 @@ exports.findRowByFileName = (name, testVarName) => {
                 return true;
             });
         }).then(() => {
-            expect(iFound).not.toBe(-1);
+            if(!dontExpect) {
+                expect(iFound).not.toBe(-1);
+            }
 
             return iFound;
         });
+    });
+};
+
+exports.waitUntilFileNameIsStaged = fileName => {
+    return browser.wait(() => {
+        return exports.findRowByFileName(fileName, 'uploaded row', false).then(
+            i => {
+                if(i === -1) {
+                    return false;
+                }
+
+                return pph.isDisplayed(exports.viewFileLink(i)).then(
+                    displayed => {
+                        if(!displayed) {
+                            pages.base.refreshPage();
+                        }
+
+                        return displayed;
+                    }
+                );
+            }
+        );
     });
 };
 
