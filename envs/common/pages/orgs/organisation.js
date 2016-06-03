@@ -255,7 +255,7 @@ if (pages.organisation === undefined) {
             return $(".text-highlight");
         },
         iconDownloadAlt: function () {
-            return $(".icon-download-alt");
+            return $('.fa-download');
         },
         successModalMessage: function () {
             return $(".modal-success");
