@@ -294,7 +294,7 @@ exports.feature = [
 
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
-            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "20");
 
 
@@ -314,7 +314,7 @@ exports.feature = [
             steps.editDealScope.editSaveThePublisherShareSet();
 
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
-            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "20");
 
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "name");

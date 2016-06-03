@@ -712,6 +712,7 @@ if (pages.editDealScope === undefined) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope"));
                 pages.base.scrollIntoView(element);
                 element.click();
+                browser.sleep(1000)
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.confirmDeleteModalDialog));
             },
 
@@ -732,6 +733,7 @@ if (pages.editDealScope === undefined) {
             editConfirmOnDeleteModalDialog: function () {
                 browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.confirmDeleteModalDialog));
                 pages.editDealScope.elems.confirmDeleteModalDialog.click();
+                browser.sleep(1000);
                 browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.confirmDeleteModalDialog));
             },
 
