@@ -179,7 +179,7 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
             //add second chain for pss
             steps.createDealScope.clickAddChainLink();
-            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "publisher", "33", "26");
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "publisher", "33", "21");
             steps.createDealScope.fillIntoPublisherNameAMFieldChainI(2);
             steps.createDealScope.selectSpecificPublisherNameDropDownChainI(2);
             steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(2);
@@ -301,7 +301,7 @@ exports.feature = [
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "publisher");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "33");
-            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "26");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "21");
 
 
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(3, "name");
@@ -323,7 +323,7 @@ exports.feature = [
 
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "publisher");
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "33");
-            steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "26");
+            steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "21");
         }
     }
 ];
