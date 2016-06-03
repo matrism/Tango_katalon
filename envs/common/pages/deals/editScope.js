@@ -712,7 +712,7 @@ if (pages.editDealScope === undefined) {
                 var element = browser.driver.findElement(By.css("#deal-publisher div.ng-scope:nth-child(" + i + ") div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope"));
                 pages.base.scrollIntoView(element);
                 element.click();
-                browser.sleep(1000)
+                browser.sleep(2000);
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.confirmDeleteModalDialog));
             },
 
@@ -1138,11 +1138,11 @@ if (pages.editDealScope === undefined) {
             editUnshareThePublisherShareSetFromSelectedScope: function () {
                 pages.base.scrollIntoView(pages.editDealScope.elems.editUnsharePublisherShareSetLink);
                 pages.editDealScope.elems.editUnsharePublisherShareSetLink.click();
-                browser.sleep(1000);
+                browser.sleep(2000);
                 //browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editConfirmUnsharePssModalDialog));
                 pages.base.scrollIntoView(pages.editDealScope.elems.editConfirmUnsharePssModalDialog);
                 pages.editDealScope.elems.editConfirmUnsharePssModalDialog.click();
-                browser.sleep(1000);
+                browser.sleep(2000);
                 browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editConfirmUnsharePssModalDialog));
             },
 
