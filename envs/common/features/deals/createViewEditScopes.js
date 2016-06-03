@@ -179,13 +179,13 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
             //add second chain for pss
             steps.createDealScope.clickAddChainLink();
-            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValue(2, "publisher");
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "publisher", 33, 12);
             steps.createDealScope.fillIntoPublisherNameAMFieldChainI(2);
             steps.createDealScope.selectSpecificPublisherNameDropDownChainI(2);
             steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(2);
             //add third chain for pss
             steps.createDealScope.clickAddChainLink();
-            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValue(3, "name");
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "name", 34, 24);
             steps.createDealScope.fillIntoPublisherNameAMFieldChainI(3);
             steps.createDealScope.selectSpecificPublisherNameDropDownChainI(3);
             steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(3);
@@ -286,10 +286,44 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINameAndPss(1);
 
+            //steps.searchSection.accessSavedDealByNumber('305772');
 
             //pss chain sequence number
-            //steps.createDealContractPeriod.selectContractPeriodNumberI(3);
-            //steps.editDealScope.selectScopeNumberI(2);
+            steps.createDealContractPeriod.selectContractPeriodNumberI(3);
+            steps.editDealScope.selectScopeNumberI(2);
+
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "20");
+
+
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "33");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "12");
+
+
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(3, "name");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(3, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(3, "34");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(3, "24");
+
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editDeleteChainIPublisherShare(2);
+            steps.editDealScope.editSaveThePublisherShareSet();
+
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "20");
+
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "name");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "34");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(2, "24");
+
+            steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "publisher");
+            steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "33");
+            steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "12");
         }
     }
 ];

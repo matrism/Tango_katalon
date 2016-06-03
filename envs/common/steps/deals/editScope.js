@@ -1299,6 +1299,18 @@ exports.editUnsharePublisherShareSetFromSelectedScope = function () {
 };
 
 
+exports.expectPublisherShareSetTextValuePresentForChainI = function(i, text){
+    it("Edit check the publisher share set text values for chain number " + i, function(){
+        pages.editDealScope.expectThePublisherShareSetTextValuePresentForChainI(i, text);
+    });
+};
+
+exports.expectPublisherShareSetTextValueNotPresentForChainI = function(i, text){
+    it("Edit check the publisher share set text values for chain number " + i, function(){
+        pages.editDealScope.expectThePublisherShareSetTextValueNotPresentForChainI(i, text);
+    });
+};
+
 addBasicStep(exports, page, 'Enter creator search terms');
 addBasicStep(exports, page, 'Select creator search result by name');
 addBasicStep(exports, page, 'Validate creators label');

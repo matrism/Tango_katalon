@@ -1165,6 +1165,22 @@ if (pages.editDealScope === undefined) {
                 pages.editDealScope.elems.editLimitedToCheckBoxContractualType.click();
             },
 
+            expectThePublisherShareSetTextValuePresentForChainI: function (i, text) {
+                browser.driver.findElement(By.css("[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ")")).getText()
+                    .then(function (promise) {
+                        console.log("Publisher share set text value for chain number " + i + "  is : " + promise);
+                        expect(promise.toString().toLowerCase()).toContain(text);
+                    });
+            },
+
+            expectThePublisherShareSetTextValueNotPresentForChainI: function (i, text) {
+                browser.driver.findElement(By.css("[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ")")).getText()
+                    .then(function (promise) {
+                        console.log("Publisher share set text value for chain number " + i + "  is : " + promise);
+                        expect(promise.toString().toLowerCase()).not.toContain(text);
+                    });
+            },
+
             clickOnTheCancelSocietyAgreementNumberButtonLink: function () {
                 pages.editDealScope.elems.cancelSocietyAgreementNumber.click();
             }

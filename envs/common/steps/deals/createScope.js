@@ -553,6 +553,31 @@ exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValue = function (
     });
 };
 
+exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect = function (i, publisherEName, percent, collect) {
+    it("Fill publisher name fields chain i based on publisher type E or PA", function () {
+        browser.driver.findElement(By.css("#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
+            .then(function (promise) {
+                console.log("Publisher type is: " + promise);
+                switch (promise) {
+                    case "E":
+                        console.log("We are on the E case");
+                        pages.createDealScope.fillPublisherNameFieldChainISpecificValue(i, publisherEName);
+                        pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
+                        pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, percent);
+                        pages.createDealScope.fillPublisherNameCollectPercentFieldChainISpecificValue(i, collect);
+                        //pages.createDealScope.fillPublisherNameCollectPercentFieldChainI(i);
+                        break;
+                    case "PA":
+                        console.log("We are on the PA case");
+                        pages.createDealScope.fillPublisherNameFieldChainI(i);
+                        pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
+                        pages.createDealScope.fillPublisherNameCollectPercentFieldChainI(i);
+                        break;
+                }
+            });
+    });
+};
+
 exports.clickOnAddOverrideIconPss = function () {
     it("Click on add override icon publisher share set ", function () {
         pages.createDealScope.clickOnTheAddOverrideIconPss();
