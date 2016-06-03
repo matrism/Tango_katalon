@@ -78,6 +78,7 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
 
@@ -89,7 +90,9 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 3");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("2 other scopes share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 2");
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
 
@@ -107,6 +110,7 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 4");
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
 
@@ -120,6 +124,7 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 4");
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
 
@@ -245,7 +250,9 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 3");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("2 other scopes share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 3");
             steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
             //validate unshare success scope 2 no pss
@@ -256,6 +263,7 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 3");
 
             steps.editDealScope.selectScopeNumberI(3);
@@ -263,6 +271,7 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
 
             //unshare another scope
