@@ -1136,9 +1136,11 @@ if (pages.editDealScope === undefined) {
         editUnshareThePublisherShareSetFromSelectedScope: function () {
             pages.base.scrollIntoView(pages.editDealScope.elems.editUnsharePublisherShareSetLink);
             pages.editDealScope.elems.editUnsharePublisherShareSetLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editConfirmUnsharePssModalDialog));
+            browser.sleep(1000);
+            //browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editConfirmUnsharePssModalDialog));
             pages.base.scrollIntoView(pages.editDealScope.elems.editConfirmUnsharePssModalDialog);
             pages.editDealScope.elems.editConfirmUnsharePssModalDialog.click();
+            browser.sleep(1000);
             browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editConfirmUnsharePssModalDialog));
         },
 

@@ -228,7 +228,7 @@ exports.feature = [
             steps.editDealScope.editSaveThePublisherShareSet();
             steps.editDealScope.editCheckPublisherShareSetNameTextValue("test");
 
-            ////steps.searchSection.accessSavedDealByNumber();
+            //steps.searchSection.accessSavedDealByNumber('305772');
 
             //unshare pss
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
@@ -244,7 +244,7 @@ exports.feature = [
             //unshare pss from scope 2
             steps.createDealScope.validateSharePublisherShareSetCount(" 3");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
-            steps.createDealScope.validateSharePublisherShareSetTextTooltip("3 other scopes share this Publisher Share set");
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("2 other scopes share this Publisher Share set");
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 3");
             steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
