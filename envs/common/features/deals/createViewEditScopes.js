@@ -88,7 +88,7 @@ exports.feature = [
             steps.createDealScope.clickOnUseThisPublisherShareSetButton();
             steps.createDealScope.validateSharePublisherShareSetCount(" 3");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
-            steps.createDealScope.validateSharePublisherShareSetTextTooltip("2 others scope share this Publisher Share set");
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("2 other scopes share this Publisher Share set");
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 2");
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
@@ -128,7 +128,7 @@ exports.feature = [
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
 
-            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.selectScopeNumberI(2);
             steps.createDealScope.checkPublisherShareSetNameTextValue("wb music corp");
 
             steps.createDealScope.addScopeTypeAndTerritory("Administration", "europe");
@@ -231,7 +231,7 @@ exports.feature = [
             ////steps.searchSection.accessSavedDealByNumber();
 
             //unshare pss
-            steps.createDealContractPeriod.selectContractPeriodNumberI(2);
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(2);
             steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
 
