@@ -1280,6 +1280,25 @@ exports.editClickOnLimitedToCheckBox = function () {
     });
 };
 
+exports.editCheckPublisherShareSetNameTextValue = function (text) {
+    it("Edit check publisher name first line value text is correct ", function () {
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id'] div.publisher-row.clearfix.ng-scope:nth-child(2) div.pull-left.ps-name")).getText()
+            .then(function (promise) {
+                console.log("Publisher share set text value is  is : " + promise);
+                expect(promise.toString().toLowerCase()).toContain(text);
+            });
+    });
+};
+
+
+exports.editUnsharePublisherShareSetFromSelectedScope = function () {
+    it("Edit click on the unshare publisher share set icon ", function () {
+        pages.editDealScope.editUnshareThePublisherShareSetFromSelectedScope();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+
 addBasicStep(exports, page, 'Enter creator search terms');
 addBasicStep(exports, page, 'Select creator search result by name');
 addBasicStep(exports, page, 'Validate creators label');

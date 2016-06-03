@@ -175,7 +175,7 @@ exports.clickOnYesSocietyAwardCreditPublisherShareSet = function () {
     });
 };
 
-exports.lickOnNoSocietyAwardCreditPublisherShareSet = function () {
+exports.clickOnNoSocietyAwardCreditPublisherShareSet = function () {
     it("Click on the no society award credit pss and check it is selected", function () {
         pages.createDealScope.clickOnTheNoSocietyAwardCreditPublisherShareSet();
         var test = pages.createDealScope.elems.noSocietyAwardCreditPss.getAttribute("class").toString();
@@ -336,6 +336,13 @@ exports.saveThePublisherShareSet = function () {
 exports.cancelThePublisherShareSet = function () {
     it("Cancel the publisher share set", function () {
         pages.createDealScope.cancelPublisherShareSet();
+    });
+};
+
+exports.confirmModalDialogAction = function () {
+    it("Confirm the modal dialog action ", function () {
+        pages.createDealScope.confirmOnTheModalDialog();
+        pages.createDealScope.waitForAjax();
     });
 };
 
@@ -505,6 +512,31 @@ exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
                     case "E":
                         console.log("We are on the E case");
                         pages.createDealScope.fillPublisherNameFieldChainI(i);
+                        pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
+                        pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
+                        pages.createDealScope.fillPublisherNameCollectPercentFieldChainISpecificValue(i, "25");
+                        //pages.createDealScope.fillPublisherNameCollectPercentFieldChainI(i);
+                        break;
+                    case "PA":
+                        console.log("We are on the PA case");
+                        pages.createDealScope.fillPublisherNameFieldChainI(i);
+                        pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
+                        pages.createDealScope.fillPublisherNameCollectPercentFieldChainI(i);
+                        break;
+                }
+            });
+    });
+};
+
+exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValue = function (i, publisherEName) {
+    it("Fill publisher name fields chain i based on publisher type E or PA", function () {
+        browser.driver.findElement(By.css("#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
+            .then(function (promise) {
+                console.log("Publisher type is: " + promise);
+                switch (promise) {
+                    case "E":
+                        console.log("We are on the E case");
+                        pages.createDealScope.fillPublisherNameFieldChainISpecificValue(i, publisherEName);
                         pages.createDealScope.selectRandomPublisherNameDropDownChainI(i);
                         pages.createDealScope.fillPublisherNameOwnPercentFieldChainISpecificValue(i, "35");
                         pages.createDealScope.fillPublisherNameCollectPercentFieldChainISpecificValue(i, "25");
@@ -1046,5 +1078,134 @@ exports.clickOnLimitedToCheckBox = function () {
     it("Click on the limited to check box on contractual right types on scope ", function () {
         pages.createDealScope.clickOnTheLimitedToCheckBox();
         pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnSharePublisherShareSetIcon = function () {
+    it("Click on the share publisher share set icon ", function () {
+        pages.createDealScope.clickOnTheSharePublisherShareSetIcon();
+    });
+};
+
+exports.clickOnUseThisPublisherShareSetButton = function () {
+    it("Click on the use this publisher share set icon ", function () {
+        pages.createDealScope.clickOnTheUseThisPublisherShareSetButton();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.clickOnUseThisPublisherShareSetButtonShareNumberI = function (i) {
+    it("Click on the use this publisher share set icon number i", function () {
+        pages.createDealScope.clickOnTheUseThisPublisherShareSetButtonShareNumberI(i);
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.validateSharePublisherShareSetCount = function (number) {
+    it("Check the share publisher share set count number of scope shared", function () {
+        pages.createDealScope.validateTheSharePublisherShareSetCount(number);
+    });
+};
+
+exports.validateSharePublisherShareSetTextTooltip = function (text) {
+    it("Check the share publisher share set text tooltip", function () {
+        pages.createDealScope.validateTheSharePublisherShareSetTextTooltip(text);
+    });
+};
+
+exports.mouseOverPublisherShareTextTooltip = function () {
+    it("Mouse over the publisher text tooltip", function () {
+        pages.createDealScope.mouseOverThePubisherShareTextTooltip();
+    });
+};
+
+exports.clickOnSaveSharePublisherShareSetButton = function () {
+    it("Click on save share publisher share set buton", function () {
+        pages.createDealScope.clickOnTheSaveSharePublisherShareSetButton();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.unsharePublisherShareSetFromSelectedScope = function () {
+    it("Click on the unshare publisher share set icon ", function () {
+        pages.createDealScope.unshareThePublisherShareSetFromSelectedScope();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+
+exports.deleteSharePublisherShareSet = function () {
+    it("Delete the share publisher share set", function () {
+        pages.createDealScope.clickOnTheDeleteSharePublisherShareSetButton();
+        pages.createDealScope.confirmOnDeleteModalDialog();
+        pages.createDealScope.waitForAjax();
+    });
+};
+
+exports.checkWarningMessageForEditingPublisherSharesScope = function (text) {
+    it("Check the warning message when you are trying to edit a shared publisher share scope ", function () {
+        pages.base.scrollIntoView(element(By.css("div[data-ng-form='pubShareSetForm'] div.validation-message-text.ng-binding")));
+        browser.driver.findElement(By.css("div[data-ng-form='pubShareSetForm'] div.validation-message-text.ng-binding")).getText()
+            .then(function (promise) {
+                console.log("The warning text displayed is : " + promise);
+                expect(promise).toEqual(text);
+            });
+    });
+};
+
+exports.editPublisherShareSetArea = function () {
+    it("Edit the publisher share set area ", function () {
+        pages.createDealScope.editThePublisherShareSetArea();
+    });
+};
+
+exports.checkPublisherShareSetNameTextValue = function (text) {
+    it("Check publisher name first line value text is correct ", function () {
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id'] div.publisher-row.clearfix.ng-scope:nth-child(2) div.pull-left.ps-name")).getText()
+            .then(function (promise) {
+                console.log("Publisher share set text value is  is : " + promise);
+                expect(promise.toString().toLowerCase()).toContain(text);
+            });
+    });
+};
+
+exports.checkSocietyAwardCreditNotDisplayedOnPss = function () {
+    it("Check that society award credits not present into publisher share set ", function () {
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets']")).getText()
+            .then(function (promise) {
+                console.log("Check society award credit text not present into pss is is : " + promise);
+                expect(promise).not.toContain("Society Award Credit:");
+            });
+    });
+};
+
+exports.checkSocietyAwardCreditDisplayedOnPss = function () {
+    it("Check that society award credits not present into publisher share set ", function () {
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets']")).getText()
+            .then(function (promise) {
+                console.log("Check society award credit text present into pss is : " + promise);
+                expect(promise).toContain("Society Award Credit:");
+            });
+    });
+};
+
+exports.checkNoSocietyAwardCreditPssOptionSelected = function () {
+    it("Check that no society award credits option is selected ", function () {
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)")).getAttribute("class")
+            .then(function (promise) {
+                console.log("Society award credit no button class is : " + promise);
+                expect(promise).toContain("active");
+            });
+    });
+};
+
+
+exports.checkSocietyAwardCreditPssTextTooltip = function () {
+    it("Check that society award credits not present into publisher share set ", function () {
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] #deal-publisher div.ng-scope div.control-group.publisher-share label i")).getAttribute("data-tooltip")
+            .then(function (promise) {
+                console.log("Society award credit pss text tooltip is : " + promise);
+                expect(promise).toEqual("By choosing \"yes\" you are indicating the ability to register with ownership—particular to deal type, on such admin deals—for the purpose of receiving society awards.");
+            });
     });
 };
