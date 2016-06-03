@@ -685,7 +685,8 @@ if (pages.createDealScope === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealScope.elems.confirmDeleteModalDialog));
             pages.base.scrollIntoView(pages.createDealScope.elems.confirmDeleteModalDialog);
             pages.createDealScope.elems.confirmDeleteModalDialog.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.createDealScope.elems.modalDialog));
+            browser.sleep(1000);
+            //browser.wait(ExpectedConditions.invisibilityOf(pages.createDealScope.elems.modalDialog));
         },
 
         clickOnTheAddOverrideIconPss: function () {
@@ -894,7 +895,7 @@ if (pages.createDealScope === undefined) {
         unshareThePublisherShareSetFromSelectedScope: function () {
             pages.base.scrollIntoView(pages.createDealScope.elems.unsharePublisherShareSetLink);
             pages.createDealScope.elems.unsharePublisherShareSetLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealScope.elems.confirmUnsharePssModalDialog));
+            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.confirmUnsharePssModalDialog));
             pages.base.scrollIntoView(pages.createDealScope.elems.confirmUnsharePssModalDialog);
             pages.createDealScope.elems.confirmUnsharePssModalDialog.click();
             browser.wait(ExpectedConditions.invisibilityOf(pages.createDealScope.elems.confirmUnsharePssModalDialog));

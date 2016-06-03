@@ -1120,7 +1120,7 @@ exports.mouseOverPublisherShareTextTooltip = function () {
 };
 
 exports.clickOnSaveSharePublisherShareSetButton = function () {
-    it("Click on save share publisher share set buton", function () {
+    it("Click on save share publisher share set button", function () {
         pages.createDealScope.clickOnTheSaveSharePublisherShareSetButton();
         pages.createDealScope.waitForAjax();
     });

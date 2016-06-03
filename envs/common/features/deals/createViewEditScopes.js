@@ -232,9 +232,50 @@ exports.feature = [
 
             //unshare pss
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            //check scope 1,2,3 has pss
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkScopeNumberINameAndPss(1);
             steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkScopeNumberINameAndPss(2);
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkScopeNumberINameAndPss(3);
+            //select scope 2
+            steps.editDealScope.selectScopeNumberI(2);
+            //unshare pss from scope 2
+            steps.createDealScope.validateSharePublisherShareSetCount(" 3");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("3 other scopes share this Publisher Share set");
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 3");
+            steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
+            //validate unshare success scope 2 no pss
+            steps.editDealScope.checkScopeNumberINoPss(2);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkScopeNumberINameAndPss(1);
+            steps.createDealScope.validateSharePublisherShareSetCount(" 2");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 3");
+
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkScopeNumberINameAndPss(3);
+            steps.createDealScope.validateSharePublisherShareSetCount(" 2");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
+
+            //unshare another scope
             steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
 
+            steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkScopeNumberINoPss(2);
+
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkScopeNumberINoPss(3);
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkScopeNumberINameAndPss(1);
 
 
             //pss chain sequence number
