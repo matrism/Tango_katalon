@@ -1142,7 +1142,7 @@ if (pages.editDealScope === undefined) {
                 //browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editConfirmUnsharePssModalDialog));
                 pages.base.scrollIntoView(pages.editDealScope.elems.editConfirmUnsharePssModalDialog);
                 pages.editDealScope.elems.editConfirmUnsharePssModalDialog.click();
-                browser.sleep(2000);
+                browser.sleep(4000);
                 browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editConfirmUnsharePssModalDialog));
             },
 
