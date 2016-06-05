@@ -54,7 +54,7 @@ exports.feature = [
      },
     {
         name: "Create edit and view simple flow internal contact",
-        tags: ["create", 'edit', 'view'],
+        tags: ["create", 'editInternal', 'view'],
         steps: function () {
             var j = 2;
             //create a deal with 1 internal contact
@@ -88,8 +88,10 @@ exports.feature = [
             steps.editDealGeneral.printInternalContactList();
             //delete both internal contacts
             steps.editDealGeneral.editInternalContactsArea();
-            steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
-            steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
+            steps.editDealGeneral.itRemoveInternalContactsRowIToDealGeneralTab(1);
+            steps.editDealGeneral.itRemoveInternalContactsRowIToDealGeneralTab(1);
+            //steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
+            //steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
             steps.editDealGeneral.itSaveInternalContactsChanges();
             steps.editDealGeneral.returnAndCheckInternalContactsTitle();
             //add 2 internal contacts
