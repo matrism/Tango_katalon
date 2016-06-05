@@ -944,7 +944,7 @@ if (pages.createDealScope === undefined) {
         clickOnTheDeleteSharePublisherShareSetButton: function () {
             pages.base.scrollIntoView(pages.createDealScope.elems.deletePublisherShareSetButton);
             pages.createDealScope.elems.deletePublisherShareSetButton.click();
-            browser.sleep(1000);
+            browser.sleep(2000);
         },
 
 
