@@ -136,7 +136,7 @@ exports.removeInternalContactsRoleRowI = function (i) {
 exports.removeInternalContactsRow = function () {
     it("Remove internal contact row", function () {
         pages.editDealGeneral.removeEditInternalContactsRow();
-        pages.editDealGeneral.waitForAjax();
+        //pages.editDealGeneral.waitForAjax();
     });
 };
 
@@ -335,7 +335,7 @@ exports.itRemoveFirstInternalContactsRowToDealGeneralTab = function () {
     describe("Remove first internal contacts row in deals general tab", function () {
         steps.editDealGeneral.removeInternalContactsRow();
         steps.editDealGeneral.confirmModalDialog();
-        steps.editDealGeneral.expectSaveEditInternalContactButtonPresent();
+        //steps.editDealGeneral.expectSaveEditInternalContactButtonPresent();
     });
 };
 

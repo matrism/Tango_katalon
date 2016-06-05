@@ -142,7 +142,7 @@ if (pages.editDealGeneral === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.removeInternalContactsElement));
             pages.base.scrollIntoView(pages.editDealGeneral.elems.removeInternalContactsElement);
             pages.editDealGeneral.elems.removeInternalContactsElement.click();
-            browser.sleep(1000);
+            browser.sleep(2000);
         },
 
         removeEditInternalContactsRowI: function (i) {
@@ -151,10 +151,10 @@ if (pages.editDealGeneral === undefined) {
         },
 
         clickOnYesModalDialog: function () {
-            //browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
             pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
             pages.editDealGeneral.elems.yesModalDialog.click();
-            browser.sleep(1000);
+            browser.sleep(2000);
         },
 
         clickOnNoModalDialog: function () {

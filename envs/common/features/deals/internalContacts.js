@@ -88,10 +88,8 @@ exports.feature = [
             steps.editDealGeneral.printInternalContactList();
             //delete both internal contacts
             steps.editDealGeneral.editInternalContactsArea();
-            steps.editDealGeneral.itRemoveInternalContactsRowIToDealGeneralTab(1);
-            steps.editDealGeneral.itRemoveInternalContactsRowIToDealGeneralTab(1);
-            //steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
-            //steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
+            steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
+            steps.editDealGeneral.itRemoveFirstInternalContactsRowToDealGeneralTab();
             steps.editDealGeneral.itSaveInternalContactsChanges();
             steps.editDealGeneral.returnAndCheckInternalContactsTitle();
             //add 2 internal contacts
