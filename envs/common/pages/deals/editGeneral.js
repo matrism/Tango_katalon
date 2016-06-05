@@ -141,8 +141,7 @@ if (pages.editDealGeneral === undefined) {
         removeEditInternalContactsRow: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.removeInternalContactsElement));
             pages.base.scrollIntoView(pages.editDealGeneral.elems.removeInternalContactsElement);
-            browser.actions().click(pages.editDealGeneral.elems.removeInternalContactsElement).perform();
-            //pages.editDealGeneral.elems.removeInternalContactsElement.click();
+            pages.editDealGeneral.elems.removeInternalContactsElement.click();
         },
 
         removeEditInternalContactsRowI: function (i) {
@@ -151,6 +150,8 @@ if (pages.editDealGeneral === undefined) {
         },
 
         clickOnYesModalDialog: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
+            pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
             pages.editDealGeneral.elems.yesModalDialog.click();
         },
 

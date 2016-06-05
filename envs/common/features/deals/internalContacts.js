@@ -49,9 +49,6 @@ exports.feature = [
              steps.editDealGeneral.returnAndCheckInternalContactsHeaderTable();
              steps.editDealGeneral.returnAndCheckAddInternalContactsLinkPresent();
              steps.editDealGeneral.returnAndCheckFirstInternalContactsValues();
-             //for (var i = 2; i <= 4; i++) {
-             //    steps.editDealGeneral.returnAndCheckInternalContactsValues(i);
-             //}
              steps.editDealGeneral.printInternalContactList();
          }
      },
