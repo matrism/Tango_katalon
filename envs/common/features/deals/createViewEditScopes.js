@@ -122,8 +122,8 @@ exports.feature = [
             steps.createDealScope.clickOnSharePublisherShareSetIcon();
             steps.createDealScope.clickOnUseThisPublisherShareSetButtonShareNumberI(2);
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
-            steps.createDealScope.mouseOverPublisherShareTextTooltip();
-            steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            //steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            //steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 4");
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
