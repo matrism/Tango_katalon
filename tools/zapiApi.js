@@ -140,7 +140,7 @@ var ZapiApi = function () {
         return this.get({
             url: BASE_URL + '/rest/api/2/search',
             qs: {
-                jql: 'project=' + projectName + ' AND summary~"' + description + '" AND issuetype = 1',
+                jql: 'project=' + projectName + ' AND summary~"' + description + '" AND issuetype = 1 AND status != Closed',
                 startAt: '0',
                 maxResults: '1'
             }
