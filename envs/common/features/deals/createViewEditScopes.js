@@ -323,7 +323,6 @@ exports.feature = [
 
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "publisher");
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "33");
-            //steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "21");
         }
     }
 ];
