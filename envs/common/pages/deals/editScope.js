@@ -1075,6 +1075,13 @@ if (pages.editDealScope === undefined) {
                 //pages.base.waitForTheElementToBeHidden(element(by.css("div.modal-dialog.ng-scope")), 100000);
             },
 
+            saveTheChangesSocietyAgreementNumberFormWait: function () {
+                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm));
+                pages.base.scrollIntoView(pages.editDealScope.elems.saveAddSocietyAgreementNumberForm);
+                pages.editDealScope.elems.saveAddSocietyAgreementNumberForm.click();
+                browser.sleep(10000);
+            },
+
             clickOnTheWorkLinkFromScopeNumberI: function (i) {
                 pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']")));
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))));
