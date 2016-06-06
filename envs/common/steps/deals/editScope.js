@@ -1050,6 +1050,12 @@ exports.saveChangesSocietyAgreementNumberForm = function () {
     });
 };
 
+exports.saveChangesSocietyAgreementNumberFormWait = function () {
+    it("Save changes society agreement number form ", function () {
+        pages.editDealScope.saveTheChangesSocietyAgreementNumberFormWait();
+        pages.editDealScope.waitForAjax();
+    });
+};
 
 exports.clickOnWorkLinkFromScopeNumberI = function (i) {
     it("Click on work link from scope number  " + i, function () {
