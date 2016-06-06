@@ -271,9 +271,9 @@ exports.bugs = (() => {
         bugsCreated: []
     };
 
-    bugs.save = (stepName, failMessage) => {
-        var summaryCreate = bugs.getSummary(exports.issue.featureName, stepName),
-            summaryFind = exports.issue.featureName + ' ' + stepName,
+    bugs.save = (scenario, stepName, failMessage) => {
+        let summaryCreate = bugs.getSummary(exports.issue.featureName, scenario),
+            summaryFind = exports.issue.featureName + ' ' + scenario,
             deferred = Q.defer();
 
         bugs.stepFailed = true;
@@ -297,14 +297,14 @@ exports.bugs = (() => {
         return deferred.promise;
     };
 
-    bugs.getSummary = (featureName, stepName) => {
-        return 'Added by Zapi - Feature: ' + featureName + ' -- Step:  ' + stepName;
+    bugs.getSummary = (featureName, scenario) => {
+        return 'Added by Zapi - Feature: ' + featureName + ' -- Scenario:  ' + scenario;
     };
 
     return bugs;
 })();
 
-exports.processStepResult = (stepName, orderId, status, failMessage) => {
+exports.processStepResult = (stepName, orderId, status, failMessage, scenario) => {
     var saveBugDeferred = Q.defer(),
         promise,
         createBugAndAttachment;
@@ -316,7 +316,7 @@ exports.processStepResult = (stepName, orderId, status, failMessage) => {
     createBugAndAttachment = (failMessage && ! exports.bugs.stepFailed);
 
     if (createBugAndAttachment) {
-        exports.bugs.save(stepName, failMessage).then((response) => {
+        exports.bugs.save(scenario, stepName, failMessage).then((response) => {
             saveBugDeferred.resolve(response);
         });
     } else {

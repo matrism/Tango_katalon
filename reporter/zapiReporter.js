@@ -4,6 +4,7 @@ let zapi = require('../tools/zapi'),
     path = require('path'),
     Q = require('q'),
     promises = [],
+    currentScenario = '',
     reportingIsEnabled = false;
 
 function log () {
@@ -51,8 +52,8 @@ exports.specDone = (spec) => {
     }
 
     if (stepName == 'User is logged in') {
-        let scenario = spec.fullName.split(' ').splice(1).join(' ').replace('Before feature User is logged in', '');
-        stepName = '[Scenario] ' + scenario;
+        currentScenario = spec.fullName.split(' ').splice(1).join(' ').replace('Before feature User is logged in', '');
+        stepName = '[Scenario] ' + currentScenario;
     }
 
     if (spec.failedExpectations.length) {
@@ -63,7 +64,7 @@ exports.specDone = (spec) => {
     }
 
     zapi.issue.saveStep(stepName, stepNum);
-    zapi.processStepResult(stepName, stepNum, spec.status, failMessage);
+    zapi.processStepResult(stepName, stepNum, spec.status, failMessage, currentScenario);
 };
 
 exports.suiteDone = (suite) => {
