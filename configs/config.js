@@ -51,7 +51,7 @@ var defaultUserName = 'TangoTest1',
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
             resolution: {
-                width: 1200,
+                width: 1400,
                 height: 1024
             },
             streamId: cli['stream'] || 1,

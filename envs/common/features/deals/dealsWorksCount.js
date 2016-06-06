@@ -21,7 +21,7 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK ' + randomId(1));
+            steps.newWork.enterPrimaryWorkTitle('TEST WORK ' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -107,7 +107,7 @@ exports.feature = [
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('DENISA WORK ' + randomId(1));
+            steps.newWork.enterPrimaryWorkTitle('DENISA WORK ' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -164,7 +164,7 @@ exports.feature = [
             // create a new work entitled  A WORK 1
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('THE WORK 1' + randomString(1));
+            steps.newWork.enterPrimaryWorkTitle('THE WORK 1' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -173,7 +173,7 @@ exports.feature = [
 
             //open a new tab
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('THE WORK 2' + randomString(1));
+            steps.newWork.enterPrimaryWorkTitle('THE WORK 2' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -183,7 +183,7 @@ exports.feature = [
 
             //open a new tab
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('THE WORK 3' + randomString(1));
+            steps.newWork.enterPrimaryWorkTitle('THE WORK 3' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -327,7 +327,7 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(1);
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('DATA WORK 1 ' + randomId(0));
+            steps.newWork.enterPrimaryWorkTitle('DATA WORK 1 ' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -346,7 +346,7 @@ exports.feature = [
                 steps.base.focusOnNewOpenedTab(1);
                 steps.base.useBlankEntityDataSlot('work', 0);
                 steps.newWork.goToNewWorkPage();
-                steps.newWork.enterPrimaryWorkTitle('THE WORK ' + i + randomString(0));
+                steps.newWork.enterPrimaryWorkTitle('THE WORK ' + i + (new Date()).getTime());
                 steps.newWork.selectRandomCreator(0);
                 steps.newWork.enterCreatorContribution(0, 100);
                 steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -410,7 +410,7 @@ exports.feature = [
                 steps.base.focusOnNewOpenedTab(1);
                 steps.base.useBlankEntityDataSlot('work', 0);
                 steps.newWork.goToNewWorkPage();
-                steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + randomId(1));
+                steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' +  (new Date()).getTime());
                 steps.newWork.selectRandomCreator(0);
                 steps.newWork.enterCreatorContribution(0, 100);
                 steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -528,7 +528,7 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(1);
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + randomId(1));
+            steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -544,7 +544,7 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(1);
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + randomId(1));
+            steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -559,7 +559,7 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(1);
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEw TEST WORK ' + randomId(0));
+            steps.newWork.enterPrimaryWorkTitle('NEw TEST WORK ' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
@@ -574,7 +574,7 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(1);
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
-            steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + randomId(0));
+            steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + (new Date()).getTime());
             steps.newWork.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);

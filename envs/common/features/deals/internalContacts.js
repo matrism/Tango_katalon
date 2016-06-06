@@ -49,15 +49,12 @@ exports.feature = [
              steps.editDealGeneral.returnAndCheckInternalContactsHeaderTable();
              steps.editDealGeneral.returnAndCheckAddInternalContactsLinkPresent();
              steps.editDealGeneral.returnAndCheckFirstInternalContactsValues();
-             //for (var i = 2; i <= 4; i++) {
-             //    steps.editDealGeneral.returnAndCheckInternalContactsValues(i);
-             //}
              steps.editDealGeneral.printInternalContactList();
          }
      },
     {
         name: "Create edit and view simple flow internal contact",
-        tags: ["create", 'edit', 'view'],
+        tags: ["create", 'editInternal', 'view'],
         steps: function () {
             var j = 2;
             //create a deal with 1 internal contact
