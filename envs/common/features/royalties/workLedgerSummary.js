@@ -401,6 +401,7 @@ exports.feature = [
             w.goToWorkPageById(fromTestVariable('lastCreatedWorkId'));
             w.goToIncomeRatesTab();
 
+            wir.table.validateNoIncomeMessage();
             wir.filters.selectProcessingTerritory(fileData.processingTerritory);
             wir.filters.validateCurrency('PLN');
             wir.filters.selectRoyaltyPeriod(fileData.royaltyPeriod);
@@ -412,8 +413,6 @@ exports.feature = [
                 'work summary'
             );
 
-            wir.table.selectIncomeGroup('Performance');
-            wir.table.validateNoIncomeMessage();
             wir.table.selectIncomeGroup('Mechanical');
             wir.table.validate('Mechanical', fromTestVariable('work summary'));
         }
