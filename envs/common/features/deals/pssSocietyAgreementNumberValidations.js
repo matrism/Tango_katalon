@@ -46,7 +46,7 @@ exports.feature = [
             steps.editDealScope.checkDeletePublisherChainAgreementNumberSocietyAgreementNumberTextTooltip();
 
             //save the society agreement number
-            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+            steps.editDealScope.saveChangesSocietyAgreementNumberFormWait();
 
             //check that after addition of society agreement number the title of the link is View
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
@@ -55,7 +55,7 @@ exports.feature = [
             //remove creator and publisher chain
             steps.editDealScope.deleteCreatorSetSocietyAgreementNumberNumberI(1);
             steps.editDealScope.deletePublisherChainSocietyAgreementNumberNumberI(1);
-            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+            steps.editDealScope.saveChangesSocietyAgreementNumberFormWait();
 
             //check that after addition of society agreement number the title of the link is Add
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
@@ -122,7 +122,7 @@ exports.feature = [
 
 
             //check scrolling in the society agreement number
-            steps.editDealScope.saveChangesSocietyAgreementNumberForm();
+            steps.editDealScope.saveChangesSocietyAgreementNumberFormWait();
             steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
             steps.base.scrollIntoView("Scroll in the top of the society agreement number", element(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(1) input[data-ng-model='creator.creator_model']")));
             steps.base.scrollIntoView("Scroll in the bottom of the society agreement number ", element(by.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(5) input[data-ng-model='creator.creator_model']")));

@@ -31,7 +31,7 @@
 <script src="logParser.js"></script>
 
 <style>
-    body {
+    #htmlReport {
         padding: 0 20px;
 
         font-family: monospace;
@@ -40,24 +40,24 @@
         line-height: 1.4em;
     }
 
-    #header {
+    #reportHeader {
         padding-top: 10px;
         padding-bottom: 20px;
     }
 
-    #header table {
+    #reportHeader table {
         margin-bottom: 10px;
     }
 
-    #header table td {
+    #reportHeader table td {
         vertical-align: top;
     }
 
-    #header table td + td {
+    #reportHeader table td + td {
         padding-left: 50px;
     }
 
-    #header .ctls {
+    #reportHeader .ctls {
         padding: 10px 0;
         background-color: white;
     }
@@ -143,8 +143,8 @@
     }
 </style>
 
-<body>
-    <div id="header" class="sticky">
+<body id="htmlReport">
+    <div id="reportHeader" class="sticky">
         <table>
             <tr>
                 <td>
@@ -260,9 +260,12 @@
     <script>
         'use strict';
 
+        var $consoleOut = $('.console-output'),
+            isLive = $consoleOut.length;
+
         window.tat = {};
 
-        $('#header .ctls').sticky({ topSpacing: 0 });
+        $('#reportHeader .ctls').sticky({ topSpacing: 0 });
     </script>
 
     <script>
@@ -318,7 +321,7 @@
     <script>
         'use strict';
 
-        var $body = $('body'),
+        var $htmlReport = $('#htmlReport'),
 
             updateFilter = $.debounce(250, function (terms) {
                 updateHashQuery('f', terms || null);
@@ -410,24 +413,86 @@
         'use strict';
 
         tat.el = function (tag, attr, children) {
-            var el = { t: tag, a: {}, c: children || [] };
+            var el;
 
-            if(typeof attr === 'string') {
-                el.a.class = new Set(attr.split(/ +/));
-            }
-            else {
-                if(typeof attr.class === 'string') {
-                    attr.class = attr.class.split(/ +/);
+            if (!isLive) {
+                el = { t: tag, a: {}, c: children || [] };
+
+                if (tat.useElId) {
+                    el.a.id = 'tatEl' + tat.elCount++;
                 }
 
-                if(Array.isArray(attr.class)) {
-                    attr.class = new Set(attr.class);
+                if(typeof attr === 'string') {
+                    el.a.class = new Set(attr.split(/ +/));
                 }
-
-                el.a = attr;
+                else {
+                    if(typeof attr.class === 'string') {
+                        attr.class = attr.class.split(/ +/);
+                    }
+                    if(Array.isArray(attr.class)) {
+                        attr.class = new Set(attr.class);
+                    }
+                    el.a = attr;
+                }
+            } else {
+                el = tat.jqueryEl($('<' + tag + '>'), attr, children);
             }
 
             return el;
+        };
+
+        tat.jqueryEl = function (el, attr, children) {
+            if(typeof attr === 'string') {
+                el.addClass(attr);
+            }
+            else {
+                attr = attr || {};
+                if(typeof attr.class === 'string') {
+                    el.addClass(attr.class);
+                }
+
+                if(Array.isArray(attr.class)) {
+                    attr.class.forEach(className => {
+                        el.addClass(className);
+                    });
+                }
+
+                Object.keys(attr).forEach(k => {
+                    if(k === 'class') {
+                        return;
+                    }
+
+                    var v = attr[k];
+
+                    el.attr(k, v);
+                });
+            }
+            if(children) {
+                children.forEach(function(child) { el.append(child); });
+            }
+
+            el.c = {
+                push: function (child){ el.append(child); }
+            };
+
+            el.a = {
+                class: {
+                    add: className => el.addClass(className),
+                    has: className => el.hasClass(className)
+                }
+            };
+            return el;
+        };
+
+        tat.convertElements = function () {
+            tat.streams.forEach(function (stm) {
+                for (let key in stm) {
+                    let el = stm[key];
+                    if (typeof el === 'object' && el.t && el.a) {
+                        stm[key] = tat.jqueryEl($('#' + el.a.id), el.a, el.c);
+                    }
+                }
+            });
         };
 
         tat.makeFieldDiv = function (classes, key, val) {
@@ -464,7 +529,9 @@
                 var v = el.a[k];
 
                 if(k === 'class') {
-                    v = Array.from(v.values()).join(' ');
+                    let array = [];
+                    v.forEach(function (val) { array.push(val); });
+                    v = array.join(' ');
                 }
 
                 return html + ' ' + k + '="' + v + '"';
@@ -487,6 +554,8 @@
 
         tat.streams = [];
 
+        tat.elCount = 0;
+        tat.useElId = false;
         tat.featureCount = 0;
         tat.passedFeatures = 0;
 
@@ -496,9 +565,7 @@
         tat.stepCount = 0;
         tat.passedSteps = 0;
 
-        var $body = $('body'),
-
-            jiraCyclePrefx = (
+        var jiraCyclePrefx = (
                 'https://jira.wmg.com/secure/enav/#?query=project%20%3D%20%22WC%22%20AND%20cycleName%20in%20'
             ),
 
@@ -518,6 +585,10 @@
                 stm.div = tat.el('div', 'stream', [
                     tat.makeFieldDiv('id', 'ID', id)
                 ]);
+
+                if (isLive) {
+                    $htmlReport.append(stm.div);
+                }
 
                 stm.logDiv = stm.div;
             }
@@ -763,7 +834,9 @@
 
                 if(result === 'failed') {
                     do {
-                        bDiv.a.class.add(result);
+                        if (bDiv.a) {
+                            bDiv.a.class.add(result);
+                        }
                     } while(bDiv = bDiv.parent);
 
                     stm.fDiv.a.class.add(result);
@@ -899,68 +972,122 @@
     <script>
         'use strict';
 
-        var xhr = $.get('report.txt'),
-
+        var xhr,
+            lastConsoleOutput = '',
             lnRe = /^(.*)\n/gm,
             lnReRes;
 
-        console.time('Total time');
+        function getJenkinsConsoleOutput() {
+            var clone = $consoleOut.clone();
+            clone.find('span:hidden').remove();
 
-        console.log('Downloading...');
-        console.time('Download time');
+            var fullText = clone.text(),
+                newText = fullText.replace(lastConsoleOutput, '');
+            lastConsoleOutput = fullText;
 
-        xhr.done(function (data) {
-            console.timeEnd('Download time');
+            clone.remove();
 
-            console.log('Parsing...');
-            console.time('Parse time');
+            return newText;
+        }
 
+        function updateFromJenkins() {
+            var data = getJenkinsConsoleOutput();
             while(lnReRes = lnRe.exec(data)) {
                 tat.logParser.parseLine(lnReRes[1]);
             }
+            updateHeader();
+            $('.png, .html').remove();
+        }
 
-            console.timeEnd('Parse time');
-
-            console.log('Rendering...');
-            console.time('Render time');
-
+        function updateHeader() {
             $('.totalFeatures > .val').text(tat.featureCount);
             $('.totalScenarios > .val').text(tat.scenarioCount);
             $('.totalSteps > .val').text(tat.stepCount);
-
             $('.totalFeaturesPassed > .val').text(tat.passedFeatures);
             $('.totalScenariosPassed > .val').text(tat.passedScenarios);
             $('.totalStepsPassed > .val').text(tat.passedSteps);
-
             $('.totalFeaturesFailed > .val').text(
                 tat.featureCount - tat.passedFeatures
             );
-
             $('.totalScenariosFailed > .val').text(
                 tat.scenarioCount - tat.passedScenarios
             );
-
             $('.totalStepsFailed > .val').text(
                 tat.stepCount - tat.passedSteps
             );
+        }
 
-            $body.append($(tat.streams.reduce(function (html, stm) {
-                return html + tat.renderEl(stm.div);
-            }, '')));
+        if (!isLive) {
+            xhr = $.get('report.txt');
+            console.time('Total time');
 
-            $('#filter').keyup();
+            console.log('Downloading...');
+            console.time('Download time');
 
-            $('.status > .val').text('Ready');
+            xhr.done(function (data) {
+                console.timeEnd('Download time');
 
-            console.timeEnd('Render time');
+                console.log('Parsing...');
+                console.time('Parse time');
 
-            console.timeEnd('Total time');
-        });
+                while(lnReRes = lnRe.exec(data)) {
+                    tat.logParser.parseLine(lnReRes[1]);
+                }
 
-        xhr.fail(function () {
-            console.error('Failed to load report.txt.');
+                console.timeEnd('Parse time');
 
-            $('.status > .val').text('Download failed');
-        });
+                console.log('Rendering...');
+                console.time('Render time');
+                updateHeader();
+
+                $htmlReport.append($(tat.streams.reduce(function (html, stm) {
+                    return html + tat.renderEl(stm.div);
+                }, '')));
+
+                $('#filter').keyup();
+
+                $('.status > .val').text('Ready');
+
+                console.timeEnd('Render time');
+
+                console.timeEnd('Total time');
+            });
+
+            xhr.fail(function () {
+                console.error('Failed to load report.txt.');
+
+                $('.status > .val').text('Download failed');
+            });
+        } else {
+            var $liveButton = $('<button>').html('Activate Live Report');
+            $consoleOut.find(':hidden').remove();
+            if (!$('[href="consoleFull"]').length) {
+                $('#main-panel h1').after($liveButton);
+            }
+            $liveButton.after($('<br>'));
+            $liveButton.click(() => {
+                $liveButton.hide();
+                $consoleOut.hide();
+                $htmlReport.append($(reportHeader));
+
+                isLive = false;
+                tat.useElId = true;
+                updateFromJenkins();
+                $htmlReport.append($(tat.streams.reduce(function (html, stm) {
+                    return html + tat.renderEl(stm.div);
+                }, '')));
+                isLive = true;
+
+                tat.convertElements();
+
+                $consoleOut.bind('DOMSubtreeModified', updateFromJenkins);
+                $htmlReport.find('.links a').click((event) => {
+                    event.preventDefault();
+                    $htmlReport.hide();
+                    $consoleOut.show();
+                });
+            });
+        }
+
     </script>
 </body>

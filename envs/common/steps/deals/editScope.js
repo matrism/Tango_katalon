@@ -1050,6 +1050,12 @@ exports.saveChangesSocietyAgreementNumberForm = function () {
     });
 };
 
+exports.saveChangesSocietyAgreementNumberFormWait = function () {
+    it("Save changes society agreement number form ", function () {
+        pages.editDealScope.saveTheChangesSocietyAgreementNumberFormWait();
+        pages.editDealScope.waitForAjax();
+    });
+};
 
 exports.clickOnWorkLinkFromScopeNumberI = function (i) {
     it("Click on work link from scope number  " + i, function () {
@@ -1277,6 +1283,37 @@ exports.editClickOnLimitedToCheckBox = function () {
     it("Edit click on the limited to check box on contractual right types on scope ", function () {
         pages.editDealScope.editClickOnTheLimitedToCheckBox();
         pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editCheckPublisherShareSetNameTextValue = function (text) {
+    it("Edit check publisher name first line value text is correct ", function () {
+        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id'] div.publisher-row.clearfix.ng-scope:nth-child(2) div.pull-left.ps-name")).getText()
+            .then(function (promise) {
+                console.log("Publisher share set text value is  is : " + promise);
+                expect(promise.toString().toLowerCase()).toContain(text);
+            });
+    });
+};
+
+
+exports.editUnsharePublisherShareSetFromSelectedScope = function () {
+    it("Edit click on the unshare publisher share set icon ", function () {
+        pages.editDealScope.editUnshareThePublisherShareSetFromSelectedScope();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+
+exports.expectPublisherShareSetTextValuePresentForChainI = function(i, text){
+    it("Edit check the publisher share set text values for chain number " + i, function(){
+        pages.editDealScope.expectThePublisherShareSetTextValuePresentForChainI(i, text);
+    });
+};
+
+exports.expectPublisherShareSetTextValueNotPresentForChainI = function(i, text){
+    it("Edit check the publisher share set text values for chain number " + i, function(){
+        pages.editDealScope.expectThePublisherShareSetTextValueNotPresentForChainI(i, text);
     });
 };
 

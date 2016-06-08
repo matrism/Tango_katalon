@@ -150,6 +150,7 @@ if (pages.editDealRtp === undefined) {
         },
 
         editFillTheRetentionDescriptionFromAcquisition: function (description) {
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField);
             pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField.sendKeys(description);
         },
 

@@ -136,6 +136,7 @@ exports.removeInternalContactsRoleRowI = function (i) {
 exports.removeInternalContactsRow = function () {
     it("Remove internal contact row", function () {
         pages.editDealGeneral.removeEditInternalContactsRow();
+        //pages.editDealGeneral.waitForAjax();
     });
 };
 
@@ -147,11 +148,8 @@ exports.removeInternalContactsRowI = function (i) {
 
 exports.confirmModalDialog = function () {
     it("Confirm modal dialog action", function () {
-        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.confirmationModalDialog));
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
-        pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
         pages.editDealGeneral.clickOnYesModalDialog();
-        browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.yesModalDialog));
+        pages.editDealGeneral.waitForAjax();
     });
 };
 
@@ -337,7 +335,7 @@ exports.itRemoveFirstInternalContactsRowToDealGeneralTab = function () {
     describe("Remove first internal contacts row in deals general tab", function () {
         steps.editDealGeneral.removeInternalContactsRow();
         steps.editDealGeneral.confirmModalDialog();
-        steps.editDealGeneral.expectSaveEditInternalContactButtonPresent();
+        //steps.editDealGeneral.expectSaveEditInternalContactButtonPresent();
     });
 };
 
