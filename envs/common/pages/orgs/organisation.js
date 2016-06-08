@@ -724,6 +724,7 @@ if (pages.organisation === undefined) {
 
             browser.wait(function () {
                 var fileCountNow = pages.base.downloadDirectoryEntries().length;
+                console.log(fileCountNow,fileCountThen);
                 return fileCountNow > fileCountThen;
             });
         },
