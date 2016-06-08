@@ -13,7 +13,6 @@ exports.commonFeatureTags = [
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
-    steps.searchSection.accessSavedOrganisationByName('BMI');
 };
 
 exports.feature = [
@@ -21,6 +20,7 @@ exports.feature = [
         name: 'Preview Reg run and validate Errors',
         tags: ['organisationPreviewRegistrationRun'],
         steps: function () {
+            steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.goToPreviewRegistrationRunTab();
 
             using(steps.organisation, function() {

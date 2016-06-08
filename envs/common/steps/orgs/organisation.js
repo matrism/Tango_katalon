@@ -290,6 +290,7 @@ if (steps.organisation === undefined) {
                         var index = hash.filterCount + i + 1;
 
                         pages.organisation.clickValidationFilter(i);
+                        pages.base.waitForAjax();
 
                         pages.organisation.getValidationFilterNumber(index).then(function (item) {
                             hash.statusErrorsFilter = hash.statusErrorsFilter + parseInt(item.replace(/,/g, ""));
@@ -320,6 +321,7 @@ if (steps.organisation === undefined) {
                 steps.organisation.selectValidationErrorsSortFilter(2);
                 steps.organisation.validateSortHeader('Affected Party');
                 steps.organisation.selectErrorsStatusPanel();
+                steps.organisation.selectValidationErrorsSortFilter(0);
             });
         },
         checkFilters: function () {

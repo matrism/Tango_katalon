@@ -715,6 +715,7 @@ if (pages.organisation === undefined) {
             return pages.base.waitForAjax();
         },
         downloadCrFile: function () {
+            pages.base.clearDownloadsDirectory();
             var button = this.downloadFileButton(),
                 fileCountThen = pages.base.downloadDirectoryEntries().length;
 
