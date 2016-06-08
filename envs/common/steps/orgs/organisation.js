@@ -319,6 +319,7 @@ if (steps.organisation === undefined) {
                 steps.organisation.clickValidationErrorsSortFilter();
                 steps.organisation.selectValidationErrorsSortFilter(2);
                 steps.organisation.validateSortHeader('Affected Party');
+                steps.organisation.selectErrorsStatusPanel();
             });
         },
         checkFilters: function () {
