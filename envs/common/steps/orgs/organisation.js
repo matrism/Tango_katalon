@@ -266,17 +266,14 @@ if (steps.organisation === undefined) {
                 pages.organisation.selectValidationErrorsSortFilter(i);
             });
         },
-        validateErrorTypeHeader: function() {
+        validateErrorTypeHeader: function(i, value) {
             it("Validate Error Type Header", function () {
-                pages.organisation.getErrorTypeSortFilters().then(function (value){
-                    pages.organisation.getErrorTypeValidationErrorsHeader(value);
-                });
+                expect(pages.organisation.getErrorTypeHeader(i)).toBe(value);
             });
         },
-        validateAffectedPartyHeader: function() {
-            it("Validate Affected Party Header", function () {
-                //getAffectedPartyHeader
-                pages.organisation.validateAffectedPartyHeader();
+        validateSortHeader: function(value) {
+            it('Validate Sort Header', function () {
+                pages.organisation.validateSortHeader(value);
             });
         },
         selectErrorsStatusPanel: function() {
@@ -317,10 +314,11 @@ if (steps.organisation === undefined) {
                 steps.organisation.checkWorksFilter();
                 steps.organisation.clickValidationErrorsSortFilter();
                 steps.organisation.selectValidationErrorsSortFilter(1);
-                steps.organisation.validateErrorTypeHeader();
+                steps.organisation.selectErrorsStatusPanel();
+                steps.organisation.validateErrorTypeHeader(0, 'Ownership & Collection Shares');
                 steps.organisation.clickValidationErrorsSortFilter();
                 steps.organisation.selectValidationErrorsSortFilter(2);
-                steps.organisation.validateAffectedPartyHeader();
+                steps.organisation.validateSortHeader('Affected Party');
             });
         },
         checkFilters: function () {

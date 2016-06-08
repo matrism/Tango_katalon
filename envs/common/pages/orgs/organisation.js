@@ -330,14 +330,11 @@ if (pages.organisation === undefined) {
         getErrorTypeHeader: function (i) {
             return this.errorTypeGroupedValidationsContainer().$$('[data-ng-click="!isExpandableValidationBlind() || (groupedValidations.isExpandedGroup = !groupedValidations.isExpandedGroup)"] h3').get(i).getText();
         },
-        affectedPartyGroupedValidationsContainer: function () {
-            return $$('[data-ng-if="stateHolder.validationSort.type === \'affected_party\' && !!groupedValidations.items[0].affected_party"]');
-        },
         getErrorTypeFilters: function () {
             return $$('[data-ng-switch-when="error_type"]').count();
         },
-        getAffectedPartyHeader: function () {
-            return this.affectedPartyGroupedValidationsContainer().$$('.pull-right .text-right').first().getText();
+        getSelectedSortHeader: function () {
+            return element(by.binding('stateHolder.validationSort.name')).getText();
         },
         selectValidationErrorsFilter: function (i) {
             return this.errorsFilterSortContainer().$$('[data-ng-click="setValidationSort(validationSortType)"]').get(i);
@@ -397,9 +394,6 @@ if (pages.organisation === undefined) {
         },
 
         //END OF LOCATORS ///////////////////////////////////////
-        getErrorTypeSortFilters: function () {
-            return this.getErrorTypeFilters();
-        },
         getValidationErrorsWorkId: function (index) {
             return this.validationErrorsWorkId(index);
         },
@@ -483,13 +477,8 @@ if (pages.organisation === undefined) {
             this.selectValidationErrorsFilter(index).click();
             pages.base.waitForAjax();
         },
-        getErrorTypeValidationErrorsHeader: function(index) {
-            for(var i=0; i < (index -1); i++) {
-                expect(this.getErrorTypeHeader(i)).toBeTruthy();
-            }
-        },
-        validateAffectedPartyHeader: function() {
-            expect(this.getAffectedPartyHeader()).toBeTruthy();
+        validateSortHeader: function(value) {
+            expect(this.getSelectedSortHeader()).toBe(value);
         },
         clickRunFilter: function(item) {
             this.getRunTypeFilter(item).click();
