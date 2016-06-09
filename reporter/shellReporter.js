@@ -118,17 +118,6 @@ exports.specDone = (spec) => {
         'End step:', spec.status, eventDateTimeString(),
         '(took', timeTakenSince(spec.startTime) + ')'
     );
-
-    if(failures.length > 0) {
-        let criticalStep = suiteStack.some((suite) => {
-            return suite.obj && suite.obj.enableCriticalSteps;
-        });
-
-        if(criticalStep) {
-            log('Critical step failure - stop');
-            process.exit(1);
-        }
-    }
 };
 
 exports.suiteDone = (suite) => {

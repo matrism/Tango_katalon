@@ -19,6 +19,7 @@ var path = require('path'),
     demoReporter = require('../tools/demoReporter'),
     zapiReporter = require('../reporter/zapiReporter'),
     stepByStepReporter = require('../tools/stepByStepReporter'),
+    criticalSection = require('../tools/criticalSection'),
     unlinkTestRunSnapshots = require('../tools/unlinkTestRunSnapshots'),
     chromeArgs;
 
@@ -251,6 +252,8 @@ config = {
                 });
             }
         });*/
+
+        jasmine.getEnv().addReporter(criticalSection.reporter);
 
         if (typeof process.env.__using_grunt === 'undefined') {
 //            var spawn = require('child_process').spawn;
