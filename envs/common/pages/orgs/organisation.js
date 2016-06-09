@@ -484,7 +484,7 @@ if (pages.organisation === undefined) {
             this.getRunTypeFilter(item).click();
             pages.base.waitForAjax();
         },
-        validateCrFile: function (workNumber, stepValue, period) {
+        validateCrFile: function (workNumber, stepValue, period, org) {
             //var dir = 'C:\\Users\\constantin.crismaru\\Downloads\\';
 
             return pages.organisation.activityHeaderCount().then(function (header) {
@@ -495,21 +495,18 @@ if (pages.organisation === undefined) {
                     currentMonth = ( cMonth.toString().length == 1 ) ? '0' + cMonth : cMonth,
                     filename = '',
                     periodSize = period.length - 1,
-                    returnObj ={};
+                    strDate = myDate.getFullYear() + currentMonth + currentDay,
+                    returnObj ={},
+                    filenames = {
+                        primary: org + '_PRIMARY_' + strDate + '.csv',
+                        custom: org + '_' + parts[0] + '_' + strDate + '.csv',
+                        errorCustom: org + '_' + period + '_ERR_' + strDate + '.csv',
+                        error: org + '_PRIMARY_ERR_' + strDate + '.csv'
+                    };
 
                 period = period.substr(0,periodSize);
 
-                switch(stepValue){
-                    case 'primary': filename  = '_PRIMARY_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
-                        break;
-                    case 'custom': filename  = '_' + parts[0] + '_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
-                        break;
-                    case 'error_custom': filename  = '_' + period + '_ERR_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
-                        break;
-                    case 'error': filename  = '_PRIMARY_ERR_' + myDate.getFullYear() + currentMonth + currentDay + '.csv';
-                        break;
-                    default: break;
-                };
+                filename = filenames[stepValue];
 
                 let filePath = systemConfig.downloadsDirectoryPath + '/' + filename;
 
@@ -525,25 +522,17 @@ if (pages.organisation === undefined) {
                     // TODO: This might not be enough on Firefox.
                     return (stat && stat.size > 0);
                 }).then(() => {
-                    let f = fs.readFileSync(filePath, { encoding: 'utf-8' });
+                    let f = fs.readFileSync(filePath, { encoding: 'utf-8' }),
+                        rows = f.split('\n'),
+                        selectedRow = rows[3],
+                        values = selectedRow.split('","');
 
-                    // Split on row
-                    f = f.split('\n');
-
-                    f.forEach(function (row) {
-                        if(row.indexOf(workNumber) > -1) {
-                            var creatorPart = row.split('"'),
-                                workPart = creatorPart[0].split(',');
-
-                            returnObj = {
-                                workName: workPart[1],
-                                creator: creatorPart[1],
-                                workNumber: workNumber
-                            };
-                        }
-                    });
-
-                    returnObj.fileSize = f.length;
+                    returnObj = {
+                        workName: values[1],
+                        creator: values[2],
+                        workNumber: values[0].replace('"', ''),
+                        fileSize: rows.length
+                    };
 
                     return returnObj;
                 });

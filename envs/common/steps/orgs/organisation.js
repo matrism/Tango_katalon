@@ -644,37 +644,37 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-        getCrFileInformation: function (stepValue) {
+        getCrFileInformation: function (stepValue, org) {
             it('Get CR file information ', function () {
                 hash.crFileInformation = {};
 
-                pages.organisation.validateCrFile(hash.workNumber, stepValue, hash.statusPeriod).then(function (value) {
+                pages.organisation.validateCrFile(hash.workNumber, stepValue, hash.statusPeriod, org).then(function (value) {
                     hash.crFileInformation = value;
                 });
             });
         },
-        validateCrFile: function (stepValue) {
+        validateCrFile: function (stepValue, org) {
             describe("Check CR file", function () {
-                steps.organisation.getCrFileInformation(stepValue);
+                steps.organisation.getCrFileInformation(stepValue, org);
                 steps.organisation.validateWorkNumberCrFile();
                 steps.organisation.validateWorkNameCrFile();
                 steps.organisation.validateCreatorsCrFile();
                 steps.organisation.validateSizeCrFile();
             });
         },
-        validateErrorCrFile: function (stepValue) {
+        validateErrorCrFile: function (stepValue, org) {
             describe("Check validation errors CR file", function () {
                 if(hash.validationErrors) {
-                    steps.organisation.getCrFileInformation(stepValue);
+                    steps.organisation.getCrFileInformation(stepValue, org);
                     steps.organisation.validateWorkNumberCrFile();
                     steps.organisation.validateWorkNameCrFile();
                     steps.organisation.validateErrorSizeCrFile();
                 }
             });
         },
-        validatePrimaryErrorCrFile: function (stepValue) {
+        validatePrimaryErrorCrFile: function (stepValue, org) {
             describe("Check validation errors CR file", function () {
-                steps.organisation.getCrFileInformation(stepValue);
+                steps.organisation.getCrFileInformation(stepValue, org);
                 steps.organisation.validateWorkNumberCrFile();
                 steps.organisation.validateWorkNameCrFile();
                 steps.organisation.validateErrorSizeCrFile();
