@@ -527,7 +527,6 @@ if (pages.organisation === undefined) {
                     workNumber: values[0].replace('"', ''),
                     fileSize: rows.length
                 };
-                console.log(returnObj);
 
                 return returnObj;
             });
