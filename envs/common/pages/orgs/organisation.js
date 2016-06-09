@@ -485,59 +485,52 @@ if (pages.organisation === undefined) {
             pages.base.waitForAjax();
         },
         validateCrFile: function (workNumber, stepValue, period, org) {
-            //var dir = 'C:\\Users\\constantin.crismaru\\Downloads\\';
+            let returnObj = {},
+                now = new Date(),
+                currentDay = ('0' + now.getDate()).slice(-2),
+                currentMonth = ('0' + (now.getMonth()+1)).slice(-2),
+                fullDate = now.getFullYear() + currentMonth + currentDay,
+                periodStr = period ? period.substr(0, period.length - 1) : '',
+                periodSplit = periodStr.split('_'),
+                periodType = periodSplit[0],
+                customDate = periodSplit[1] || '',
+                customYear = customDate.slice(0, 4),
+                customDateStr = new Date(customDate + ' 00:00').toString().slice(0, 10),
+                filenames = {
+                    primary: org + '_PRIMARY_' + fullDate + '.csv',
+                    custom: org + '_' + periodType + '_' + customDateStr + ' 00-00-00 UTC ' + customYear + '_' + fullDate + '.csv',
+                    errorCustom: org + '_' + periodStr + '_ERR_' + fullDate + '.csv',
+                    error: org + '_PRIMARY_ERR_' + fullDate + '.csv'
+                },
+                filename = filenames[stepValue],
+                filePath = systemConfig.downloadsDirectoryPath + '/' + filename;
 
-            return pages.organisation.activityHeaderCount().then(function (header) {
-                var parts = header.split(' '),
-                    myDate = new Date(),
-                    currentDay = ( myDate.getDate().toString().length == 1 ) ? '0' + myDate.getDate() : myDate.getDate(),
-                    cMonth = myDate.getMonth() + 1,
-                    currentMonth = ( cMonth.toString().length == 1 ) ? '0' + cMonth : cMonth,
-                    filename = '',
-                    periodSize = period.length - 1,
-                    strDate = myDate.getFullYear() + currentMonth + currentDay,
-                    returnObj ={},
-                    filenames = {
-                        primary: org + '_PRIMARY_' + strDate + '.csv',
-                        custom: org + '_' + parts[0] + '_' + strDate + '.csv',
-                        errorCustom: org + '_' + period + '_ERR_' + strDate + '.csv',
-                        error: org + '_PRIMARY_ERR_' + strDate + '.csv'
-                    };
+            return browser.wait(() => {
+                let stat;
 
-                period = period.substr(0,periodSize);
+                try {
+                    stat = fs.statSync(filePath);
+                }
+                catch(err) {
+                }
 
-                filename = filenames[stepValue];
+                return (stat && stat.size > 0);
+            }).then(() => {
+                let f = fs.readFileSync(filePath, { encoding: 'utf-8' }),
+                    rows = f.split('\n'),
+                    selectedRow = rows[3],
+                    values = selectedRow.split('","');
 
-                let filePath = systemConfig.downloadsDirectoryPath + '/' + filename;
+                returnObj = {
+                    workName: values[1],
+                    creator: values[2],
+                    workNumber: values[0].replace('"', ''),
+                    fileSize: rows.length
+                };
+                console.log(returnObj);
 
-                return browser.wait(() => {
-                    let stat;
-
-                    try {
-                        stat = fs.statSync(filePath);
-                    }
-                    catch(err) {
-                    }
-
-                    // TODO: This might not be enough on Firefox.
-                    return (stat && stat.size > 0);
-                }).then(() => {
-                    let f = fs.readFileSync(filePath, { encoding: 'utf-8' }),
-                        rows = f.split('\n'),
-                        selectedRow = rows[3],
-                        values = selectedRow.split('","');
-
-                    returnObj = {
-                        workName: values[1],
-                        creator: values[2],
-                        workNumber: values[0].replace('"', ''),
-                        fileSize: rows.length
-                    };
-
-                    return returnObj;
-                });
+                return returnObj;
             });
-
         },
         getThirdPartyName: function (deliveryMethod) {
             return this.thirdPartyName(deliveryMethod).getText();
