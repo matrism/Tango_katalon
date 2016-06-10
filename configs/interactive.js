@@ -1,4 +1,5 @@
 var repl = require('repl'),
+    replHistory = require('repl.history'),
     os = require('os'),
 
     $files = require('./files'),
@@ -18,11 +19,9 @@ var repl = require('repl'),
 $vs.clear = function() {
     this.length = 0;
 };
-console.log(jasmine.DEFAULT_TIMEOUT_INTERVAL);
 steps.login.itLogin();
 
 it('Run REPL', () => {
-    console.log(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     var replServer = repl.start({
         input: process.stdin,
         output: process.stdout,
@@ -72,6 +71,8 @@ it('Run REPL', () => {
     replServer.on('exit', () => {
         $break = true;
     });
+
+    replHistory(replServer, process.env.HOME + '/.tathistory');
 
     browser.wait(() => {
         var deferred;
