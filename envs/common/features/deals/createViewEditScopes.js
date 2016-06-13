@@ -9,7 +9,7 @@ exports.commonFeatureTags = ['deals', 'scopes', 'regression'];
 exports.feature = [
     {
         name: "Create and view deal scopes",
-        tags: ["scopAdded"],
+        tags: ["scopeAdded"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -323,6 +323,96 @@ exports.feature = [
 
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "publisher");
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "33");
+        }
+    },
+
+
+    {
+        name: "Create and view deal scopes",
+        tags: ["shrScope"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
+
+            //add scope with pss to contract period 1
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
+
+
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.createDealScope.saveThePublisherShareSet();
+
+            //add second scope to contract period 1
+            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "france");
+            //share publisher share set from scope 1 to scope 2
+            steps.createDealScope.clickOnSharePublisherShareSetIcon();
+            steps.createDealScope.clickOnUseThisPublisherShareSetButton();
+            steps.createDealScope.validateSharePublisherShareSetCount(" 2");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
+            steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
+
+            //add third scope to contract period 1
+            steps.createDealScope.addScopeTypeAndTerritory("Administration", "europe");
+            //share publisher share set from scope 1 to scope 2
+            steps.createDealScope.clickOnSharePublisherShareSetIcon();
+            steps.createDealScope.clickOnUseThisPublisherShareSetButton();
+            steps.createDealScope.validateSharePublisherShareSetCount(" 3");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 2");
+            steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
+
+            //add scopes to contract period 2
+            steps.createDealContractPeriod.selectContractPeriodNumberI(2);
+            steps.createDealScope.addScopeTypeAndTerritory("Administration", "worldwide");
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher");
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("40");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("20");
+            steps.createDealScope.saveThePublisherShareSet();
+
+            steps.createDealScope.addScopeTypeAndTerritory("Administration", "asia");
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "40");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "20");
+
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+            steps.editDealScope.editSaveThePublisherShareSet();
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "25");
         }
     }
 ];
