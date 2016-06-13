@@ -1,7 +1,6 @@
 'use strict';
 
-var using = require('../../../../helpers/fnutils').using,
-    _ = require('lodash');
+let _ = require('lodash');
 
 exports.commonFeatureTags = ['royaltyProcessing', 'crossReference'];
 
