@@ -54,16 +54,22 @@ function Typeahead (target, dummy, isAppendedToBody) {
         tagFilter.element(by.cssContainingText('option', value)).click();
     };
 
-    typeahead.select = function (text, isExact) {
+    typeahead.select = function (text, isExact, index) {
         return typeahead.clear().then(
             () => typeahead.sendKeys(text)
         ).then(
-            () => typeahead.results(text, isExact).first().click()
+            () => {
+                if (!_.isNumber(index)) {
+                    typeahead.results(text, isExact).first().click();
+                } else {
+                    typeahead.results().get(index).click();
+                }
+            }
         );
     };
 
     typeahead.selectFirst = function(text) {
-        return typeahead.select();
+        return typeahead.select(text, false, 0);
     };
 
     return typeahead;

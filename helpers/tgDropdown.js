@@ -1,9 +1,9 @@
 'use strict';
 
-function TgDropdown (locator, isElement, isAppendedToBody) {
+function TgDropdown (locator, dummy, isAppendedToBody) {
     var dropdown = locator;
 
-    if (!isElement) {
+    if (!dropdown.element) {
         dropdown = element(locator);
     };
 
