@@ -367,7 +367,7 @@ exports.feature = [
 
             //add third scope to contract period 1
             steps.createDealScope.addScopeTypeAndTerritory("Administration", "europe");
-            //share publisher share set from scope 1 to scope 2
+            //share publisher share set from scope 1 to scope 3
             steps.createDealScope.clickOnSharePublisherShareSetIcon();
             steps.createDealScope.clickOnUseThisPublisherShareSetButton();
             steps.createDealScope.validateSharePublisherShareSetCount(" 3");
@@ -398,6 +398,50 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(3);
+
+            //check initial values for the shared pss
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
+
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+            steps.editDealScope.editSaveThePublisherShareSetWithModal();
+
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "25");
+
+            //check pss values updated for scope 1 too
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "25");
+
+            //check pss values updated for scope 2 too
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "25");
+
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editDeleteThePublisherShareSet();
+            steps.editDealScope.editConfirmModalDialogDirtyCheck();
+
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkScopeNumberINoPss(1);
+
+            steps.editDealScope.selectScopeNumberI(2);
+            steps.editDealScope.checkScopeNumberINoPss(2);
+
+            steps.editDealScope.selectScopeNumberI(3);
+            steps.editDealScope.checkScopeNumberINoPss(3);
+
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
             steps.editDealScope.selectScopeNumberI(1);
 
@@ -413,6 +457,7 @@ exports.feature = [
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "25");
+
         }
     }
 ];
