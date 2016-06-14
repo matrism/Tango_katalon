@@ -13,7 +13,6 @@ exports.commonFeatureTags = [
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
-    steps.searchSection.accessSavedOrganisationByName('BMI');
 };
 
 exports.feature = [
@@ -21,6 +20,7 @@ exports.feature = [
         name: 'Preview Reg run and validate Errors',
         tags: ['organisationPreviewRegistrationRun'],
         steps: function () {
+            steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.goToPreviewRegistrationRunTab();
 
             using(steps.organisation, function() {
@@ -31,7 +31,7 @@ exports.feature = [
                 this.checkFilters();
                 this.checkRunTypeFilters();
                 this.downloadCrFile();
-                this.validateCrFile('primary');
+                this.validateCrFile('primary', 'BMI');
                 // validation errors
                 this.viewPrimaryValidationErrors();
                 this.scrollPrimaryValidationPage();
@@ -41,7 +41,7 @@ exports.feature = [
                 this.validateNonCriticalErrorsFilter();
                 this.validateErrorSortFilters();
                 this.downloadCrFile();
-                this.validatePrimaryErrorCrFile('error');
+                this.validatePrimaryErrorCrFile('error', 'BMI');
                 this.backValidationErrors();
                 //custom   CR_2013-09-15 CR_2013-10-01 CR_2013-06-15 CR_2013-10-15
                 this.selectCustomRegistrationRun('CR_2200-05-15');
@@ -52,7 +52,7 @@ exports.feature = [
                 this.listWorkDetails();
                 this.checkFilters();
                 this.downloadCrFile();
-                this.validateCrFile('custom');
+                this.validateCrFile('custom', 'BMI');
                 this.executeRegistrationRunValidation('CR_2013-09-15');
                 this.checkValidationErrorsButton();
                 // validation errors
@@ -64,7 +64,7 @@ exports.feature = [
                 this.validateNonCriticalErrorsFilter();
                 this.validateErrorSortFilters();
                 this.downloadCrFile('error');
-                this.validateErrorCrFile('error_custom');
+                this.validateErrorCrFile('errorCustom', 'BMI');
                 this.backValidationErrors('custom');
             });
         }

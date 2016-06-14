@@ -266,17 +266,14 @@ if (steps.organisation === undefined) {
                 pages.organisation.selectValidationErrorsSortFilter(i);
             });
         },
-        validateErrorTypeHeader: function() {
+        validateErrorTypeHeader: function(i, value) {
             it("Validate Error Type Header", function () {
-                pages.organisation.getErrorTypeSortFilters().then(function (value){
-                    pages.organisation.getErrorTypeValidationErrorsHeader(value);
-                });
+                expect(pages.organisation.getErrorTypeHeader(i)).toBe(value);
             });
         },
-        validateAffectedPartyHeader: function() {
-            it("Validate Affected Party Header", function () {
-                //getAffectedPartyHeader
-                pages.organisation.validateAffectedPartyHeader();
+        validateSortHeader: function(value) {
+            it('Validate Sort Header', function () {
+                pages.organisation.validateSortHeader(value);
             });
         },
         selectErrorsStatusPanel: function() {
@@ -293,6 +290,7 @@ if (steps.organisation === undefined) {
                         var index = hash.filterCount + i + 1;
 
                         pages.organisation.clickValidationFilter(i);
+                        pages.base.waitForAjax();
 
                         pages.organisation.getValidationFilterNumber(index).then(function (item) {
                             hash.statusErrorsFilter = hash.statusErrorsFilter + parseInt(item.replace(/,/g, ""));
@@ -317,10 +315,14 @@ if (steps.organisation === undefined) {
                 steps.organisation.checkWorksFilter();
                 steps.organisation.clickValidationErrorsSortFilter();
                 steps.organisation.selectValidationErrorsSortFilter(1);
-                steps.organisation.validateErrorTypeHeader();
+                steps.organisation.selectErrorsStatusPanel();
+                steps.organisation.validateErrorTypeHeader(0, 'Ownership & Collection Shares');
                 steps.organisation.clickValidationErrorsSortFilter();
                 steps.organisation.selectValidationErrorsSortFilter(2);
-                steps.organisation.validateAffectedPartyHeader();
+                steps.organisation.validateSortHeader('Affected Party');
+                steps.organisation.selectErrorsStatusPanel();
+                steps.organisation.clickValidationErrorsSortFilter();
+                steps.organisation.selectValidationErrorsSortFilter(0);
             });
         },
         checkFilters: function () {
@@ -642,37 +644,37 @@ if (steps.organisation === undefined) {
                 });
             });
         },
-        getCrFileInformation: function (stepValue) {
+        getCrFileInformation: function (stepValue, org) {
             it('Get CR file information ', function () {
                 hash.crFileInformation = {};
 
-                pages.organisation.validateCrFile(hash.workNumber, stepValue, hash.statusPeriod).then(function (value) {
+                pages.organisation.validateCrFile(hash.workNumber, stepValue, hash.statusPeriod, org).then(function (value) {
                     hash.crFileInformation = value;
                 });
             });
         },
-        validateCrFile: function (stepValue) {
+        validateCrFile: function (stepValue, org) {
             describe("Check CR file", function () {
-                steps.organisation.getCrFileInformation(stepValue);
+                steps.organisation.getCrFileInformation(stepValue, org);
                 steps.organisation.validateWorkNumberCrFile();
                 steps.organisation.validateWorkNameCrFile();
                 steps.organisation.validateCreatorsCrFile();
                 steps.organisation.validateSizeCrFile();
             });
         },
-        validateErrorCrFile: function (stepValue) {
+        validateErrorCrFile: function (stepValue, org) {
             describe("Check validation errors CR file", function () {
                 if(hash.validationErrors) {
-                    steps.organisation.getCrFileInformation(stepValue);
+                    steps.organisation.getCrFileInformation(stepValue, org);
                     steps.organisation.validateWorkNumberCrFile();
                     steps.organisation.validateWorkNameCrFile();
                     steps.organisation.validateErrorSizeCrFile();
                 }
             });
         },
-        validatePrimaryErrorCrFile: function (stepValue) {
+        validatePrimaryErrorCrFile: function (stepValue, org) {
             describe("Check validation errors CR file", function () {
-                steps.organisation.getCrFileInformation(stepValue);
+                steps.organisation.getCrFileInformation(stepValue, org);
                 steps.organisation.validateWorkNumberCrFile();
                 steps.organisation.validateWorkNameCrFile();
                 steps.organisation.validateErrorSizeCrFile();
