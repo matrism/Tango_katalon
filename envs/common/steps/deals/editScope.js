@@ -1336,15 +1336,35 @@ exports.editUnsharePublisherShareSetFromSelectedScope = function () {
 };
 
 
-exports.expectPublisherShareSetTextValuePresentForChainI = function(i, text){
-    it("Edit check the publisher share set text values for chain number " + i, function(){
+exports.expectPublisherShareSetTextValuePresentForChainI = function (i, text) {
+    it("Edit check the publisher share set text values for chain number " + i, function () {
         pages.editDealScope.expectThePublisherShareSetTextValuePresentForChainI(i, text);
     });
 };
 
-exports.expectPublisherShareSetTextValueNotPresentForChainI = function(i, text){
-    it("Edit check the publisher share set text values for chain number " + i, function(){
+exports.expectPublisherShareSetTextValueNotPresentForChainI = function (i, text) {
+    it("Edit check the publisher share set text values for chain number " + i, function () {
         pages.editDealScope.expectThePublisherShareSetTextValueNotPresentForChainI(i, text);
+    });
+};
+
+exports.editClickOnTheShareScopeOption = function () {
+    it("Edit click on share scope option ", function () {
+        pages.editDealScope.editClickOnShareScopeOption();
+    });
+};
+
+exports.editSelectContractPeriodNumberIOnShareScopeModalDialog = function (i) {
+    it("Edit select the contract period number " + i + " on share scope modal dialog", function () {
+        pages.editDealScope.editSelectTheContractPeriodNumberIOnShareScopeModalDialog(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editClickOnDoneButtonOnShareScopeModalDialog = function () {
+    it("Edit click on the done button on share scope modal dialog ", function () {
+        pages.editDealScope.editClickOnTheDoneButtonOnShareScopeModalDialog();
+        pages.editDealScope.waitForAjax();
     });
 };
 
