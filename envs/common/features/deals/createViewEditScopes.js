@@ -461,11 +461,9 @@ exports.feature = [
         }
     },
 
-
     {
-        name: "Delete shared PSS and shared scopes different scenarios",
-        //tags: ["deleteSharedPssAndScope"],
-        tags: ["deleteShared"],
+        name: "Update PSS on scope, shared scope, delete a shared PSS on a scope",
+        tags: ["updatePssSharedScope"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -473,10 +471,85 @@ exports.feature = [
             steps.createDealContractPeriod.fillActualEndDateField();
             steps.createDealContractPeriod.addNewContractPeriodDialog();
             steps.createDealContractPeriod.fillEndTargetMonths();
-            for (var i = 3; i <= 3; i++) {
-                steps.createDealContractPeriod.addNewContractPeriod();
-                steps.createDealContractPeriod.fillEndTargetMonths();
-            }
+
+            //add scope with pss to contract period 1
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
+
+
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.createDealScope.saveThePublisherShareSet();
+
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            steps.editDealScope.editClickOnTheShareScopeOption();
+            steps.editDealScope.editSelectContractPeriodNumberIOnShareScopeModalDialog(2);
+            steps.editDealScope.editClickOnDoneButtonOnShareScopeModalDialog();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            //check initial values for the scope 1
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            //check values for shared scope
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
+
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA();
+            steps.editDealScope.editSaveThePublisherShareSetWithModal();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            //check pss values updated for scope 1 too
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "25");
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            //check pss values updated for shared scope from contract period 2
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "25");
+
+        }
+    },
+
+
+    {
+        name: "Delete shared PSS and shared scopes different scenarios",
+        tags: ["deletePssOnSharedScope"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
 
             //add scope with pss to contract period 1
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
@@ -493,17 +566,70 @@ exports.feature = [
             steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.createDealScope.saveThePublisherShareSet();
 
-            //add second scope to contract period 1
-            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "france");
-
             //add scopes to contract period 2
             steps.createDealContractPeriod.selectContractPeriodNumberI(2);
             steps.createDealScope.addScopeTypeAndTerritory("Administration", "asia");
 
-            //add scope to contract period 3
-            steps.createDealContractPeriod.selectContractPeriodNumberI(3);
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            steps.editDealScope.editClickOnTheShareScopeOption();
+            steps.editDealScope.editSelectContractPeriodNumberIOnShareScopeModalDialog(2);
+            steps.editDealScope.editClickOnDoneButtonOnShareScopeModalDialog();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.editPublisherSharesSet();
+            steps.editDealScope.editDeleteThePublisherShareSet();
+            steps.editDealScope.editConfirmModalDialogDirtyCheck();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkScopeNumberINoPss(1);
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkScopeNumberINoPss(1);
+
+        }
+    },
+
+
+    {
+        name: "Delete shared PSS and shared scopes different scenarios",
+        tags: ["deleteSharedPssOnSharedScope"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
+
+            //add scope with pss to contract period 1
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
+
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.createDealScope.saveThePublisherShareSet();
+
+            //add scopes to contract period 2
+            steps.createDealContractPeriod.selectContractPeriodNumberI(2);
             steps.createDealScope.addScopeTypeAndTerritory("Administration", "worldwide");
-            //share publisher share set from scope 1 to scope 4
+            //share publisher share set from scope 1 to scope 2
             steps.createDealScope.clickOnSharePublisherShareSetIcon();
             steps.createDealScope.clickOnUseThisPublisherShareSetButton();
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
@@ -523,7 +649,6 @@ exports.feature = [
 
             steps.editDealScope.editClickOnTheShareScopeOption();
             steps.editDealScope.editSelectContractPeriodNumberIOnShareScopeModalDialog(2);
-            steps.editDealScope.editSelectContractPeriodNumberIOnShareScopeModalDialog(3);
             steps.editDealScope.editClickOnDoneButtonOnShareScopeModalDialog();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
@@ -537,10 +662,6 @@ exports.feature = [
             steps.editDealScope.checkScopeNumberINoPss(1);
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
-            steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.checkScopeNumberINoPss(1);
-
-            steps.editDealContractPeriod.editSelectContractPeriodNumberI(3);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINoPss(1);
 
