@@ -58,6 +58,7 @@ if (pages.editDealScope === undefined) {
                 editDeleteScopeLink: {css: "a[data-ng-click='showDeleteScopeModal(sp.id, canScopeBeDeleted(sp.id))']"},
                 editCopyScopeLink: {css: "a[data-ng-click='showScopeCopySection(sp.id)']"},
                 copyScopeText: {css: "div[data-ng-form='scopeCopyForm'] p.title"},
+                doneButtonShareScopeModalDilaog: {css: "button[data-ng-click='data.done()']"},
                 numberOfCopiesTooltip: {css: "div[data-ng-form='scopeCopyForm'] label.control-label i.fa.fa-info-circle.ng-scope"},
                 numberOfCopiesInputField: {css: "div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"},
                 numberOfCopiesErrorTriangle: {css: "div[data-ng-form='scopeCopyForm'] i.fa.fa-exclamation-triangle.error-text.ng-scope"},
@@ -754,6 +755,24 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.editDeletePublisherShareSet));
                 pages.editDealScope.elems.editDeletePublisherShareSet.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.confirmDeletePssModalDialog));
+            },
+
+            editClickOnShareScopeOption: function () {
+                browser.actions().mouseMove(pages.editDealScope.elems.editFirstScope).perform();
+                browser.actions().mouseMove(pages.editDealScope.elems.editShareUnshareDeleteScopeIcon).perform();
+                pages.editDealScope.elems.editShareScopeLink.click();
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.large.ng-scope"))));
+            },
+
+            editSelectTheContractPeriodNumberIOnShareScopeModalDialog: function (i) {
+                pages.base.scrollIntoView(element(by.css("div.modal-body.share-scope-modal-body table tbody tr:nth-child(" + i + ")")));
+                browser.driver.findElement(by.css("div.modal-body.share-scope-modal-body table tbody tr:nth-child(" + i + ")")).click();
+            },
+
+            editClickOnTheDoneButtonOnShareScopeModalDialog: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.doneButtonShareScopeModalDilaog);
+                pages.editDealScope.elems.doneButtonShareScopeModalDilaog.click();
+                browser.sleep(2000);
             },
 
             editClickOnCopyScopeOption: function () {

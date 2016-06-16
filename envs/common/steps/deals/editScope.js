@@ -598,6 +598,37 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
     });
 };
 
+
+exports.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () {
+    it("Edit -fill publisher name fields chain i based on publisher type E or PA", function () {
+        browser.driver.findElement(By.css("#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
+            .then(function (promise) {
+                console.log("Publisher type is: " + promise);
+                switch (promise) {
+                    case "E":
+                        console.log("We are on the E case");
+                        pages.editDealScope.editClearFirstPublisherNameField();
+                        pages.editDealScope.editPublisherNameFieldChainI(1);
+                        pages.editDealScope.editSelectRandomPublisherNameDropDownChainI(1);
+                        //pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
+                        pages.editDealScope.editClearInFirstPublisherNameOwnPercent();
+                        pages.editDealScope.editPublisherNameOwnPercentFieldChainISpecificValue(1, "35");
+                        pages.editDealScope.editClearFirstPublisherNameAMCollectPercent();
+                        pages.editDealScope.editPublisherNameAMCollectPercentChainISpecificValue(1, "25");
+                        //pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
+                        break;
+                    case "PA":
+                        console.log("We are on the PA case");
+                        pages.editDealScope.editPublisherNameFieldChainI(1);
+                        pages.editDealScope.editSelectRandomPublisherNameDropDownChainI(1);
+                        pages.editDealScope.editPublisherNameCollectPercentFieldChainI(1);
+                        break;
+                }
+            });
+    });
+};
+
+
 exports.editClickOnAddPublisherShareSet = function () {
     it("Open publisher share set form", function () {
         pages.editDealScope.editClickOnAddPublisherShareSetLink();
@@ -1305,15 +1336,35 @@ exports.editUnsharePublisherShareSetFromSelectedScope = function () {
 };
 
 
-exports.expectPublisherShareSetTextValuePresentForChainI = function(i, text){
-    it("Edit check the publisher share set text values for chain number " + i, function(){
+exports.expectPublisherShareSetTextValuePresentForChainI = function (i, text) {
+    it("Edit check the publisher share set text values for chain number " + i, function () {
         pages.editDealScope.expectThePublisherShareSetTextValuePresentForChainI(i, text);
     });
 };
 
-exports.expectPublisherShareSetTextValueNotPresentForChainI = function(i, text){
-    it("Edit check the publisher share set text values for chain number " + i, function(){
+exports.expectPublisherShareSetTextValueNotPresentForChainI = function (i, text) {
+    it("Edit check the publisher share set text values for chain number " + i, function () {
         pages.editDealScope.expectThePublisherShareSetTextValueNotPresentForChainI(i, text);
+    });
+};
+
+exports.editClickOnTheShareScopeOption = function () {
+    it("Edit click on share scope option ", function () {
+        pages.editDealScope.editClickOnShareScopeOption();
+    });
+};
+
+exports.editSelectContractPeriodNumberIOnShareScopeModalDialog = function (i) {
+    it("Edit select the contract period number " + i + " on share scope modal dialog", function () {
+        pages.editDealScope.editSelectTheContractPeriodNumberIOnShareScopeModalDialog(i);
+        pages.editDealScope.waitForAjax();
+    });
+};
+
+exports.editClickOnDoneButtonOnShareScopeModalDialog = function () {
+    it("Edit click on the done button on share scope modal dialog ", function () {
+        pages.editDealScope.editClickOnTheDoneButtonOnShareScopeModalDialog();
+        pages.editDealScope.waitForAjax();
     });
 };
 
