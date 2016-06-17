@@ -36,6 +36,73 @@ exports.feature = [
         },
     },
     {
+        name: 'Upload EDI file - CISAC M3',
+        tags: ['uploadEDIFile', 'sanityTest', 'uploadCisacM3'],
+        steps: function() {
+            let uf = steps.uploadEdiFile,
+                file = {
+                    processingTerritory: 'Czech Republic',
+                    incomeProvider: 'OSA',
+                    fileFormat: 'CISAC M3',
+                    fileName: './data/K9140050_test_06.WAR.dat',
+                    amount: '395785.7000',
+                    currency: 'CZK'
+                };
+
+            uf.uploadFile(file);
+            if (!noUpload) {
+                uf.openUploadedFileBlind();
+            }
+            uf.expectFileGrossAmountToBe(file.amount);
+            uf.openFirstGeneratedStatement();
+        }
+    },
+    {
+        name: 'Upload EDI file - ASIAN WARNER',
+        tags: ['uploadEDIFile', 'sanityTest', 'uploadAsianWarner'],
+        steps: function() {
+            let uf = steps.uploadEdiFile,
+                file = {
+                    processingTerritory: 'Hong Kong',
+                    incomeProvider: 'WARNER MUSIC HONG KONG',
+                    fileFormat: 'ASIAN - WARNER',
+                    fileName: './data/WARO7_testfinale13.txt',
+                    amount: '252422.1800',
+                    currency: 'HKD'
+                };
+
+            uf.uploadFile(file);
+            if (!noUpload) {
+                uf.openUploadedFileBlind();
+            }
+            uf.expectFileGrossAmountToBe(file.amount);
+            uf.openFirstGeneratedStatement();
+        }
+    },
+    {
+        name: 'Upload EDI file - ASIAN SONY DIGITAL',
+        tags: ['uploadEDIFile', 'sanityTest', 'uploadAsianSonyDigital'],
+        steps: function() {
+            let uf = steps.uploadEdiFile,
+                file = {
+                    processingTerritory: 'Hong Kong',
+                    incomeProvider: 'SONY ATV MUSIC PUBLISHING HONG KONG',
+                    fileFormat: 'ASIAN - SONY DIGITAL',
+                    fileName: './data/SBLD7_stag_03.txt',
+                    mockedFileName: 'TAT_2016-06-16T20_11_33.915Z.edi',
+                    amount: '64038.8900',
+                    currency: 'HKD'
+                };
+
+            uf.uploadFile(file);
+            if (!noUpload) {
+                uf.openUploadedFileBlind();
+            }
+            uf.expectFileGrossAmountToBe(file.amount);
+            uf.openFirstGeneratedStatement();
+        }
+    },
+    {
         name: 'Upload EDI file - Sanity Test',
         tags: ['uploadEDIFile', 'sanityTest', 'uploadEDIFileSanity'],
         steps: function(){
