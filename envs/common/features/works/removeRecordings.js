@@ -4,6 +4,8 @@ let leftPad = require('left-pad');
 
 let randomId = random.id.makeMemoizedGenerator();
 
+exports.id = '2d475e93-9a07-4bba-b4d1-e22cced0170d';
+
 exports.commonFeatureTags = [
     'removeWorkRecordingsRegression',
     'removeWorkRecordings',

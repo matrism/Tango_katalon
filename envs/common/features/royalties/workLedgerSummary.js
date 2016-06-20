@@ -10,6 +10,8 @@ var using = require('../../../../helpers/fnutils').using,
     originalTimeout,
     PROCESSING_TIMEOUT = 60 * 60 * 1000;
 
+exports.id = 'c629be22-73e2-429d-b68c-fe08309a154c';
+
 exports.commonFeatureTags = ['royaltyProcessing', 'broken'];
 
 exports.beforeFeature = function () {

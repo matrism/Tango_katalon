@@ -2,6 +2,8 @@
 
 let leftPad = require('left-pad');
 
+exports.id = '5677aad7-6d25-46c4-907e-841831b2def1';
+
 exports.commonFeatureTags = [
     'addWorkRecordingAlbumsRegression',
     'addWorkRecordingAlbums',
