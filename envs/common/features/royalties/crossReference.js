@@ -2,6 +2,8 @@
 
 let _ = require('lodash');
 
+exports.id = '1b5971ea-db9d-4fc0-bffc-358be66bbbf2';
+
 exports.commonFeatureTags = ['royaltyProcessing', 'crossReference'];
 
 exports.beforeFeature = function () {
