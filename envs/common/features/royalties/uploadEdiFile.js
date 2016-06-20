@@ -46,6 +46,7 @@ exports.feature = [
                     fileFormat: 'CISAC M3',
                     fileName: './data/K9140050_test_06.WAR.dat',
                     amount: '395785.7000',
+                    grossAmount: '395778.1100',
                     currency: 'CZK'
                 };
 
@@ -53,7 +54,7 @@ exports.feature = [
             if (!noUpload) {
                 uf.openUploadedFileBlind();
             }
-            uf.expectFileGrossAmountToBe(file.amount);
+            uf.expectFileGrossAmountToBe(file.grossAmount);
             uf.openFirstGeneratedStatement();
         }
     },
