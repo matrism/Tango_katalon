@@ -1074,6 +1074,18 @@ exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber
     });
 };
 
+exports.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye = function (i, j, value) {
+    it("Edit check society agreement number creator number " + i + " society row number " + j + " contains name " + value, function () {
+        pages.base.scrollIntoView(element(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.society_model']")));
+        browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.society_model']")).getAttribute('value')
+            .then(function (promise) {
+                console.log("The society agreement number value is : " + promise);
+                //expect(promise).toEqual(value);
+            });
+
+    });
+};
+
 exports.saveChangesSocietyAgreementNumberForm = function () {
     it("Save changes society agreement number form ", function () {
         pages.editDealScope.saveTheChangesSocietyAgreementNumberForm();
