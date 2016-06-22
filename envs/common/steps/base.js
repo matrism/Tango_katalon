@@ -210,7 +210,6 @@ pageStep([
     'Duplicate tab',
     'Switch to tab',
     'Close tab by index',
-    'Close current tab',
     'Close current tab and switch to',
     'Wait for modal',
     'Validate modal heading',
