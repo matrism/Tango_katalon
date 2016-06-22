@@ -1525,8 +1525,9 @@ exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
     });
 };
 
-exports.createWork = data => {
-    var newWork = steps.newWork;
+exports.createWork = (data, varName) => {
+    var newWork = steps.newWork,
+    varName = varName || 'lastCreatedWorkId';
 
     describe('Create new Work', () => {
         //steps.mainHeader.createNewRecord('Work');
@@ -1544,7 +1545,7 @@ exports.createWork = data => {
 
         newWork.optToIncludeWorkOnWebsite(true);
         newWork.saveWork();
-        steps.work.storeWorkIdInTestVariable('lastCreatedWorkId');
+        steps.work.storeWorkIdInTestVariable(varName);
     });
 };
 
