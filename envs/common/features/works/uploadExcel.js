@@ -8,7 +8,6 @@ let path = require('path'),
     generateExcel = requireFromEnvFolder('features/works/data/generateUploadExcel');
 
 exports.commonFeatureTags = [
-    'dbg',
     'uploadWorksExcelRegression',
     'uploadWorksExcel',
     'works',
