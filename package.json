@@ -57,6 +57,8 @@
     "zip-folder": "n2liquid/node-zip-folder"
   },
   "optionalDependencies": {
+    "http-sync": "latest",
+    "http-sync-win": "latest",
     "time": "^0.11.4"
   },
   "author": "WMG",
