@@ -53,7 +53,8 @@
     "tmp": "0.0.27",
     "tree-kill": "^1.0.0",
     "underscore": "1.6.0",
-    "yamljs": "^0.2.4"
+    "yamljs": "^0.2.4",
+    "zip-folder": "n2liquid/node-zip-folder"
   },
   "optionalDependencies": {
     "http-sync": "latest",
