@@ -1,14 +1,12 @@
 'use strict';
 
 let randomString = random.string.makeMemoizedGenerator(),
-    totalBatches = 50,
-    worksByBatch = 100,
+    totalBatches = 20,
+    worksByBatch = 20,
     linesByWork = 10,
     createWorks = 10;
 
-
-exports.id = 'd6cb8feb-8578-494b-98bf-7543d527c052';
-exports.featureName = 'Large Royality Manual Statement';
+//exports.id = 'd6cb8feb-8578-494b-98bf-7543d527c052';
 
 exports.commonFeatureTags = [
     'royaltyProcessing',
