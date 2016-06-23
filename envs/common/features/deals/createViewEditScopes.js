@@ -797,5 +797,50 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
         }
+    },
+
+
+    {
+        name: "Delete shared PSS and shared scopes different scenarios",
+        tags: ["creatorWorkForHire"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
+
+            //add scope with pss to contract period 1
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
+
+            //add creators
+            steps.createDealScope.fillIntoCreatorFieldSpecificLetter("alex");
+            steps.createDealScope.selectRandomValueFromCreatorDropDown();
+
+            //work for hire
+            steps.createDealScope.checkTextTooltipWorkForHire();
+            steps.createDealScope.checkNoWorkForHireButtonIsSelected();
+            steps.createDealScope.checkYesWorkForHireButtonIsNotSelected();
+
+            steps.createDealScope.clickOnYesWorkForHireButton();
+            steps.createDealScope.checkYesWorkForHireButtonIsSelected();
+            steps.createDealScope.checkNoWorkForHireButtonIsNotSelected();
+
+            steps.createDealScope.clickOnNoWorkForHireButton();
+            steps.createDealScope.checkNoWorkForHireButtonIsSelected();
+            steps.createDealScope.checkYesWorkForHireButtonIsNotSelected();
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+
+
+        }
     }
 ];

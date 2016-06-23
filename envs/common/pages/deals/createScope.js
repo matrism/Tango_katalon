@@ -36,6 +36,10 @@ if (pages.createDealScope === undefined) {
             chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
             yesSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(1)"},
             noSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)"},
+            creatorInputField: {css: "div[data-ng-model='modularEditModels.model.creators'] input[ng-model='$term']"},
+            workForHireTextTooltip: {css: "label[for='work_for_hire'] i"},
+            yesWorkForHire: {css: "button[data-ng-model='modularEditModels.model.work_for_hire']:nth-child(1)"},
+            noWorkForHire: {css: "button[data-ng-model='modularEditModels.model.work_for_hire']:nth-child(2)"},
             modalDialog: {css: "div.modal-dialog.ng-scope"},
             confirmDeleteModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
             cancelModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
@@ -131,6 +135,55 @@ if (pages.createDealScope === undefined) {
                         desiredOption.click();
                     }
                 });
+        },
+
+        fillIntoTheCreatorFieldSpecificLetter: function (letter) {
+            pages.base.scrollIntoView(pages.createDealScope.elems.creatorInputField);
+            pages.createDealScope.elems.creatorInputField.sendKeys(letter);
+        },
+
+        selectTheSpecificValueFromCreatorDropDown: function (creator) {
+            var desiredOption;
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.toLowerCase().indexOf(creator) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheRandomValueFromCreatorDropDown: function () {
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                .then(function (options) {
+                    var randomNumber = Math.floor((Math.random() * options.length));
+                    var element = options[0];
+                    element.click();
+                });
+
+        },
+
+        clickOnTheYesWorkForHireButton: function () {
+            pages.base.scrollIntoView(pages.createDealScope.elems.yesWorkForHire);
+            pages.createDealScope.elems.yesWorkForHire.click();
+        },
+
+        clickOnTheNoWorkForHireButton: function () {
+            pages.base.scrollIntoView(pages.createDealScope.elems.noWorkForHire);
+            pages.createDealScope.elems.noWorkForHire.click();
         },
 
         clickOnPublisherShareSetArea: function () {

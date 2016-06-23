@@ -1234,3 +1234,83 @@ exports.checkSocietyAwardCreditPssTextTooltip = function () {
             });
     });
 };
+
+exports.fillIntoCreatorFieldSpecificLetter = function (creator) {
+    it("Fill into the creator field specific letter ", function () {
+        pages.createDealScope.fillIntoTheCreatorFieldSpecificLetter(creator);
+    });
+};
+
+exports.selectSpecificValueFromCreatorDropDown = function (creator) {
+    it("Select the specific value from creator drop down ", function () {
+        pages.createDealScope.selectTheSpecificValueFromCreatorDropDown(creator);
+    });
+};
+
+exports.selectRandomValueFromCreatorDropDown = function () {
+    it("Select the specific value from creator drop down ", function () {
+        pages.createDealScope.selectTheRandomValueFromCreatorDropDown();
+    });
+};
+
+exports.checkTextTooltipWorkForHire = function () {
+    it("Check the text tooltip work for hire ", function () {
+        pages.createDealScope.elems.workForHireTextTooltip.getAttribute("data-tooltip")
+            .then(function (promise) {
+                console.log("Work for hire text tooltip is : " + promise);
+                expect(promise).toEqual("Works created under an employee agreement. The employer is the legally recognized creator of these works.");
+            });
+    });
+};
+
+exports.checkYesWorkForHireButtonIsSelected = function () {
+    it("Check the yes work for hire button is selected", function () {
+        pages.createDealScope.elems.yesWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).toContain("active");
+            });
+    });
+};
+
+exports.checkYesWorkForHireButtonIsNotSelected = function () {
+    it("Check the yes work for hire button is not selected", function () {
+        pages.createDealScope.elems.yesWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).not.toContain("active");
+            });
+    });
+};
+
+exports.checkNoWorkForHireButtonIsSelected = function () {
+    it("Check the no work for hire button is selected", function () {
+        pages.createDealScope.elems.noWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).toContain("active");
+            });
+    });
+};
+
+exports.checkNoWorkForHireButtonIsNotSelected = function () {
+    it("Check the no work for hire button is not selected", function () {
+        pages.createDealScope.elems.noWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).not.toContain("active");
+            });
+    });
+};
+
+exports.clickOnYesWorkForHireButton = function () {
+    it("Click on yes work for hire button ", function () {
+        pages.createDealScope.clickOnTheYesWorkForHireButton();
+    });
+};
+
+exports.clickOnNoWorkForHireButton = function () {
+    it("Click on no work for hire button ", function () {
+        pages.createDealScope.clickOnTheNoWorkForHireButton();
+    });
+};
