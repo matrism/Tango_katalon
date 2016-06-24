@@ -10,6 +10,8 @@ var using = require('../../../../helpers/fnutils').using,
     originalTimeout,
     PROCESSING_TIMEOUT = 60 * 60 * 1000;
 
+exports.id = 'c629be22-73e2-429d-b68c-fe08309a154c';
+
 exports.commonFeatureTags = ['royaltyProcessing', 'broken'];
 
 exports.beforeFeature = function () {
@@ -401,6 +403,7 @@ exports.feature = [
             w.goToWorkPageById(fromTestVariable('lastCreatedWorkId'));
             w.goToIncomeRatesTab();
 
+            wir.table.validateNoIncomeMessage();
             wir.filters.selectProcessingTerritory(fileData.processingTerritory);
             wir.filters.validateCurrency('PLN');
             wir.filters.selectRoyaltyPeriod(fileData.royaltyPeriod);
@@ -412,8 +415,6 @@ exports.feature = [
                 'work summary'
             );
 
-            wir.table.selectIncomeGroup('Performance');
-            wir.table.validateNoIncomeMessage();
             wir.table.selectIncomeGroup('Mechanical');
             wir.table.validate('Mechanical', fromTestVariable('work summary'));
         }

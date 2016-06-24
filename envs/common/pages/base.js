@@ -482,21 +482,29 @@ exports.duplicateTab = function () {
 };
 
 exports.switchToTab = function (methodSpecifier) {
-    return methodSpecifierCall(exports.switchToTab, methodSpecifier);
+    return methodSpecifierCall(exports.switchToTab, methodSpecifier).then(
+        () => pages.base.waitForAjax()
+    );
 };
 
 exports.switchToTab.index = function (i) {
     return browser.getAllWindowHandles().then(function (handles) {
-        browser.switchTo().window(handles[i]);
+        return browser.switchTo().window(handles[i]);
     }).then(function () {
         return browser.wait(ExpectedConditions.visibilityOf($('body')));
     });
 };
 
 exports.closeCurrentTabAndSwitchTo = function (methodSpecifier) {
-    browser.driver.close();
+    return browser.getAllWindowHandles().then(handles => {
+        if(handles.length <= 1) {
+            throw new Error('Cannot close last open tab');
+        }
 
-    return exports.switchToTab(methodSpecifier);
+        return browser.driver.close().then(() => {
+            return exports.switchToTab(methodSpecifier);
+        });
+    });
 };
 
 exports.closeTabByIndex = function (index) {

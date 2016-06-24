@@ -4,6 +4,8 @@ let leftPad = require('left-pad');
 
 let randomId = random.id.makeMemoizedGenerator();
 
+exports.id = 'b54b3723-ac99-415a-92ed-4e37a059515e';
+
 exports.commonFeatureTags = [
     'workRecordingDirtyChecksRegression',
     'workRecordingDirtyChecks',

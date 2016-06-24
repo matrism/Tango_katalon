@@ -79,6 +79,7 @@ exports.table = (() => {
 
     table.selectIncomeGroup = (name) => {
         pages.base.selectDropdownOption.tg(table.incomeGroupSelect(), name);
+        pages.base.waitForAjax();
     };
 
     table.noIncomeMessage = () => {

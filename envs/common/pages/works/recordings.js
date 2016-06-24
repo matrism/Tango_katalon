@@ -171,7 +171,7 @@ exports.title = i => asAlways(
 );
 
 exports.validateTitle = (i, val) => expect(
-    exports.titleBinding(i)
+    exports.title(i)
 ).toBe(val);
 
 // ---
@@ -451,6 +451,11 @@ exports.albums = (() => {
     alb.validateAlbumTitle = (i, j, val) => expect(
         alb.albumTitle(i, j)
     ).toBe(val);
+
+    alb.open = (i, j) => asAlways(
+        alb.albumTitleBinding(i, j),
+        'scrollIntoView', 'click', 'waitForAjax'
+    );
 
     // ---
 
