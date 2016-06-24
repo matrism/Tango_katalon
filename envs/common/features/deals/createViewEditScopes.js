@@ -667,7 +667,212 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINoPss(1);
 
+        }
+    },
 
+
+    {
+        name: "Delete shared PSS and shared scopes different scenarios",
+        tags: ["sharePssWithSocAgreementNumber"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+            steps.createDealContractPeriod.fillActualEndDateField();
+            steps.createDealContractPeriod.addNewContractPeriodDialog();
+            steps.createDealContractPeriod.fillEndTargetMonths();
+
+            //add scope with pss to contract period 1
+            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
+
+            steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+            steps.createDealScope.clickOnAddPublisherShareSet();
+            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.selectRandomPublisherNameDropDownValue();
+            steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
+            steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
+            steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.createDealScope.saveThePublisherShareSet();
+
+            //add scope to contract period 2
+            steps.createDealContractPeriod.selectContractPeriodNumberI(2);
+            steps.createDealScope.addScopeTypeAndTerritory("Administration", "worldwide");
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+
+            //add creators
+            steps.editDealScope.editSocietyAgreementNumberCreatorLeftPanelNumberI(1, "shilpa");
+            steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(1, 1, "ascap");
+            steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(1, 2, "socan");
+            steps.editDealScope.saveChangesSocietyAgreementNumberFormWait();
+
+            //share publisher share set to scope 2 from scope 1
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            //share publisher share set from scope 1 to scope 2
+            steps.createDealScope.clickOnSharePublisherShareSetIcon();
+            steps.createDealScope.clickOnUseThisPublisherShareSetButton();
+            steps.createDealScope.validateSharePublisherShareSetCount(" 2");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
+            steps.createDealScope.mouseOverPublisherShareTextTooltip();
+            steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
+            steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
+
+            //check society agreement number values for scope 1 on contract period 1
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 1, "ASCAP");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 2, "SOCAN");
+            steps.editDealScope.clickOnCancelSocietyAgreementNumberButtonLink();
+
+            //check society agreement number values for shared scope 2 on contract period 2
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 1, "ASCAP");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 2, "SOCAN");
+            steps.editDealScope.clickOnCancelSocietyAgreementNumberButtonLink();
+
+            //update society agreement number of shared scope
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(1, 3, "sacem");
+            steps.editDealScope.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber(1, 4, "stim");
+            steps.editDealScope.saveChangesSocietyAgreementNumberFormWait();
+
+            //check society agreement number updated for both scopes 1 and scope 2 which shared pss and society agreement number
+            //check society agreement number values for scope 1 on contract period 1
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 1, "ASCAP");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 2, "SOCAN");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 3, "SACEM");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 4, "STIM");
+            steps.editDealScope.clickOnCancelSocietyAgreementNumberButtonLink();
+
+            //check society agreement number values for shared scope 2 on contract period 2
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 1, "ASCAP");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 2, "SOCAN");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 3, "SACEM");
+            steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 4, "STIM");
+            steps.editDealScope.clickOnCancelSocietyAgreementNumberButtonLink();
+
+
+            //delete society agreement numbers on shared scope 2
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
+            //remove creator and publisher chain
+            steps.editDealScope.deleteCreatorSetSocietyAgreementNumberNumberI(1);
+            steps.editDealScope.saveChangesSocietyAgreementNumberFormWait();
+
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
+            steps.editDealScope.selectScopeNumberI(1);
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
+        }
+    },
+
+
+    {
+        name: "Delete shared PSS and shared scopes different scenarios",
+        tags: ["creatorWorkForHire"],
+        steps: function () {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+            steps.deal.itContinueToNextPage();
+            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
+
+            ////add scope with pss to contract period 1
+            //steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
+
+            //add creators
+            steps.createDealScope.fillIntoCreatorFieldSpecificLetter("alex");
+            steps.createDealScope.selectRandomValueFromCreatorDropDown();
+
+            //work for hire
+            steps.createDealScope.checkTextTooltipWorkForHire();
+            steps.createDealScope.checkNoWorkForHireButtonIsSelected();
+            steps.createDealScope.checkYesWorkForHireButtonIsNotSelected();
+
+            steps.createDealScope.clickOnYesWorkForHireButton();
+            steps.createDealScope.checkYesWorkForHireButtonIsSelected();
+            steps.createDealScope.checkNoWorkForHireButtonIsNotSelected();
+
+            steps.createDealScope.clickOnNoWorkForHireButton();
+            steps.createDealScope.checkNoWorkForHireButtonIsSelected();
+            steps.createDealScope.checkYesWorkForHireButtonIsNotSelected();
+
+            steps.deal.itContinueToNextPage();
+            steps.deal.saveDeal();
+            steps.deal.waitForDealToBeSaved();
+            steps.deal.returnDealNumber();
+
+            steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
+            steps.editDealScope.selectScopeNumberI(1);
+
+            //check creator name
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("creators");
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("alex");
+
+            //check work for hire
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("work for hire");
+            steps.editDealScope.editCheckWorkForHireValueDetailsForScope("No");
+
+            //edit scope area
+            steps.editDealScope.editScopeArea();
+
+            //add creators
+            steps.editDealScope.editFillIntoCreatorFieldSpecificLetter("test");
+            steps.editDealScope.editSelectRandomValueFromCreatorDropDown();
+
+            //work for hire
+            steps.editDealScope.editCheckTextTooltipWorkForHire();
+            steps.editDealScope.editCheckNoWorkForHireButtonIsSelected();
+            steps.editDealScope.editCheckYesWorkForHireButtonIsNotSelected();
+
+            steps.editDealScope.editClickOnYesWorkForHireButton();
+            steps.editDealScope.editCheckYesWorkForHireButtonIsSelected();
+            steps.editDealScope.editCheckNoWorkForHireButtonIsNotSelected();
+
+            steps.editDealScope.editSaveScopeChanges();
+
+            //check creator name
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("creators");
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("alex");
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("test");
+
+            //check work for hire
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("work for hire");
+            steps.editDealScope.editCheckWorkForHireValueDetailsForScope("Yes");
         }
     }
 ];

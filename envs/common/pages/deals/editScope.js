@@ -59,6 +59,8 @@ if (pages.editDealScope === undefined) {
                 editCopyScopeLink: {css: "a[data-ng-click='showScopeCopySection(sp.id)']"},
                 copyScopeText: {css: "div[data-ng-form='scopeCopyForm'] p.title"},
                 doneButtonShareScopeModalDilaog: {css: "button[data-ng-click='data.done()']"},
+                editScopeTextArea: {css: "div[data-tg-modular-edit-id='dealScope'] div.DETAIL.ng-scope"},
+                editScopeWorkForHireTextValue: {css: "div[data-tg-modular-edit-id='dealScope'] div.DETAIL.ng-scope div:nth-child(6) div"},
                 numberOfCopiesTooltip: {css: "div[data-ng-form='scopeCopyForm'] label.control-label i.fa.fa-info-circle.ng-scope"},
                 numberOfCopiesInputField: {css: "div[data-ng-form='scopeCopyForm'] input[data-ng-model='sp.copy.num']"},
                 numberOfCopiesErrorTriangle: {css: "div[data-ng-form='scopeCopyForm'] i.fa.fa-exclamation-triangle.error-text.ng-scope"},
@@ -91,6 +93,10 @@ if (pages.editDealScope === undefined) {
                 editLimitedToCheckBoxContractualType: {css: "input[data-ng-model='modularEditModels.model.right_types_include_or_exclude']"},
                 editUnsharePublisherShareSetLink: {css: "a[data-ng-click='showUnsharePubShareSetModal(form.terms.activeScope.id, true)']"},
                 editConfirmUnsharePssModalDialog: {css: "div.modal-footer button[data-ng-click='data.unshare()']"},
+                editCreatorInputField: {css: "div[data-ng-model='modularEditModels.model.creators'] input[ng-model='$term']"},
+                editWorkForHireTextTooltip: {css: "label[for='work_for_hire'] i"},
+                editYesWorkForHire: {css: "button[data-ng-model='modularEditModels.model.work_for_hire']:nth-child(1)"},
+                editNoWorkForHire: {css: "button[data-ng-model='modularEditModels.model.work_for_hire']:nth-child(2)"},
                 numberOfScopesPerDeal: {css: "div.deal-terms-affix.m-view h3 span[data-ng-show='form.terms.scopeSearchTags.length === 0'] span[data-ng-bind='form.terms.numberOfScopesUnderActiveCp']"}
             },
 
@@ -1192,6 +1198,33 @@ if (pages.editDealScope === undefined) {
                 pages.base.scrollIntoView(pages.editDealScope.elems.editLimitedToCheckBoxContractualType);
                 pages.editDealScope.elems.editLimitedToCheckBoxContractualType.click();
             },
+
+            editFillIntoTheCreatorFieldSpecificLetter: function (letter) {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editCreatorInputField);
+                pages.editDealScope.elems.editCreatorInputField.sendKeys(letter);
+            },
+
+            editSelectTheRandomValueFromCreatorDropDown: function () {
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+                browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+                    .then(function (options) {
+                        var randomNumber = Math.floor((Math.random() * options.length));
+                        var element = options[0];
+                        element.click();
+                    });
+
+            },
+
+            editClickOnTheYesWorkForHireButton: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editYesWorkForHire);
+                pages.editDealScope.elems.editYesWorkForHire.click();
+            },
+
+            editClickOnTheNoWorkForHireButton: function () {
+                pages.base.scrollIntoView(pages.editDealScope.elems.editNoWorkForHire);
+                pages.editDealScope.elems.editNoWorkForHire.click();
+            },
+
 
             expectThePublisherShareSetTextValuePresentForChainI: function (i, text) {
                 browser.driver.findElement(By.css("[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id']:nth-child(" + (i + 2) + ")")).getText()

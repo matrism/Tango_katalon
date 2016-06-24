@@ -1074,6 +1074,18 @@ exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber
     });
 };
 
+exports.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye = function (i, j, value) {
+    it("Edit check society agreement number creator number " + i + " society row number " + j + " contains name " + value, function () {
+        pages.base.scrollIntoView(element(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.society_model']")));
+        browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.society_model']")).getAttribute('value')
+            .then(function (promise) {
+                console.log("The society agreement number value is : " + promise);
+                //expect(promise).toEqual(value);
+            });
+
+    });
+};
+
 exports.saveChangesSocietyAgreementNumberForm = function () {
     it("Save changes society agreement number form ", function () {
         pages.editDealScope.saveTheChangesSocietyAgreementNumberForm();
@@ -1367,6 +1379,101 @@ exports.editClickOnDoneButtonOnShareScopeModalDialog = function () {
         pages.editDealScope.waitForAjax();
     });
 };
+
+exports.editCheckCreatorNameWorkForHireDetailsForScope = function (text) {
+    it("Edit check the scope details text for selected scope ", function () {
+        pages.editDealScope.elems.editScopeTextArea.getText()
+            .then(function (promise) {
+                console.log("Scope text values area are : " + promise);
+                expect(promise.toString().toLowerCase()).toContain(text);
+            });
+    });
+};
+
+exports.editCheckWorkForHireValueDetailsForScope = function (text) {
+    it("Edit check the work for hire for selected scope ", function () {
+        pages.editDealScope.elems.editScopeWorkForHireTextValue.getText()
+            .then(function (promise) {
+                console.log("Scope text values area are : " + promise);
+                expect(promise).toEqual(text);
+            });
+    });
+};
+
+exports.editFillIntoCreatorFieldSpecificLetter = function (creator) {
+    it("Edit fill into the creator field specific letter ", function () {
+        pages.editDealScope.editFillIntoTheCreatorFieldSpecificLetter(creator);
+    });
+};
+
+exports.editSelectRandomValueFromCreatorDropDown = function () {
+    it("Edit select the specific value from creator drop down ", function () {
+        pages.editDealScope.editSelectTheRandomValueFromCreatorDropDown();
+    });
+};
+
+exports.editCheckTextTooltipWorkForHire = function () {
+    it("Edit check the text tooltip work for hire ", function () {
+        pages.editDealScope.elems.editWorkForHireTextTooltip.getAttribute("data-tooltip")
+            .then(function (promise) {
+                console.log("Work for hire text tooltip is : " + promise);
+                expect(promise).toEqual("Works created under an employee agreement. The employer is the legally recognized creator of these works.");
+            });
+    });
+};
+
+exports.editCheckYesWorkForHireButtonIsSelected = function () {
+    it("Edit check the yes work for hire button is selected", function () {
+        pages.editDealScope.elems.editYesWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).toContain("active");
+            });
+    });
+};
+
+exports.editCheckYesWorkForHireButtonIsNotSelected = function () {
+    it("Edit check the yes work for hire button is not selected", function () {
+        pages.editDealScope.elems.editYesWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).not.toContain("active");
+            });
+    });
+};
+
+exports.editCheckNoWorkForHireButtonIsSelected = function () {
+    it("Edit check the no work for hire button is selected", function () {
+        pages.editDealScope.elems.editNoWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).toContain("active");
+            });
+    });
+};
+
+exports.editCheckNoWorkForHireButtonIsNotSelected = function () {
+    it("Edit check the no work for hire button is not selected", function () {
+        pages.editDealScope.elems.editNoWorkForHire.getAttribute("class")
+            .then(function (promise) {
+                console.log("Yes work for hire button class is : " + promise);
+                expect(promise).not.toContain("active");
+            });
+    });
+};
+
+exports.editClickOnYesWorkForHireButton = function () {
+    it("Edit click on yes work for hire button ", function () {
+        pages.editDealScope.editClickOnTheYesWorkForHireButton();
+    });
+};
+
+exports.editClickOnNoWorkForHireButton = function () {
+    it("Edit click on no work for hire button ", function () {
+        pages.editDealScope.editClickOnTheNoWorkForHireButton();
+    });
+};
+
 
 addBasicStep(exports, page, 'Enter creator search terms');
 addBasicStep(exports, page, 'Select creator search result by name');
