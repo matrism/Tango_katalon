@@ -807,12 +807,9 @@ exports.feature = [
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
-            steps.createDealContractPeriod.fillActualEndDateField();
-            steps.createDealContractPeriod.addNewContractPeriodDialog();
-            steps.createDealContractPeriod.fillEndTargetMonths();
 
-            //add scope with pss to contract period 1
-            steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            ////add scope with pss to contract period 1
+            //steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
 
             //add creators
@@ -840,7 +837,40 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
+            //check creator name
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("creators");
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("alex");
 
+            //check work for hire
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("work for hire");
+            steps.editDealScope.editCheckWorkForHireValueDetailsForScope("No");
+
+            //edit scope area
+            steps.editDealScope.editScopeArea();
+
+            //add creators
+            steps.editDealScope.editFillIntoCreatorFieldSpecificLetter("test");
+            steps.editDealScope.editSelectRandomValueFromCreatorDropDown();
+
+            //work for hire
+            steps.editDealScope.editCheckTextTooltipWorkForHire();
+            steps.editDealScope.editCheckNoWorkForHireButtonIsSelected();
+            steps.editDealScope.editCheckYesWorkForHireButtonIsNotSelected();
+
+            steps.editDealScope.editClickOnYesWorkForHireButton();
+            steps.editDealScope.editCheckYesWorkForHireButtonIsSelected();
+            steps.editDealScope.editCheckNoWorkForHireButtonIsNotSelected();
+
+            steps.editDealScope.editSaveScopeChanges();
+
+            //check creator name
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("creators");
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("alex");
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("test");
+
+            //check work for hire
+            steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("work for hire");
+            steps.editDealScope.editCheckWorkForHireValueDetailsForScope("Yes");
         }
     }
 ];
