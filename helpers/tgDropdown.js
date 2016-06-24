@@ -11,7 +11,7 @@ function TgDropdown (locator, dummy, isAppendedToBody) {
         return dropdown.$('.tg-dropdown-button').click();
     };
 
-    dropdown.results = function (text) {
+    dropdown.results = function (text, isExact) {
         var results = dropdown.$$('.dropdown-menu a');
 
         if (isAppendedToBody) {
@@ -19,21 +19,19 @@ function TgDropdown (locator, dummy, isAppendedToBody) {
             results = $$('body > div[tg-component-render-template] > .tg-dropdown-menu:not(.ng-hide) li');
         }
 
+        browser.wait(ExpectedConditions.visibilityOfAny(results));
+
         if (text) {
-            results = results.filter(function(elem, index){
-                return elem.getText().then(function(elemText){
-                    return elemText.indexOf(text) > -1;
-                });
-            });
+            results = results.filter(pph.matchText(text, isExact));
         }
 
         return results;
     };
 
-    dropdown.selectValue = function (val) {
+    dropdown.selectValue = function (val, isExact) {
         pages.base.scrollIntoView(dropdown);
         dropdown.click();
-        dropdown.results(val).first().click();
+        dropdown.results(val, isExact).first().click();
     };
 
     dropdown.select = function (idx) {
