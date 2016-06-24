@@ -1,8 +1,8 @@
 'use strict';
 
 let randomString = random.string.makeMemoizedGenerator(),
-    totalBatches = 20,
-    worksByBatch = 20,
+    totalBatches = 10,
+    worksByBatch = 10,
     linesByWork = 10,
     createWorks = 10;
 
