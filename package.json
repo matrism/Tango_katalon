@@ -4,8 +4,7 @@
   "description": "",
   "main": "configs/protractor-conf.js",
   "scripts": {
-    "test": "./start.sh",
-    "postinstall": "cd custom-deps && ./install.sh"
+    "test": "./start.sh"
   },
   "keywords": [
     "testing",
@@ -27,6 +26,7 @@
     "http-api-client": "^0.1.8",
     "iso-3166-1": "^1.0.1",
     "jasmine-fail-fast": "^2.0.0",
+    "jasmine-json-test-reporter": "file:custom-deps/jasmine-json-test-reporter",
     "jasmine-reporters": "^2.0.8",
     "jasmine-spec-reporter": "^2.4.0",
     "karma": "~0.12",
@@ -43,6 +43,7 @@
     "path": "latest",
     "phantomjs": "~1.9",
     "protractor": "2.5.1",
+    "protractor-jasmine2-screenshot-reporter": "file:custom-deps/protractor-jasmine2-screenshot-reporter",
     "q": "~0.8.12",
     "qs": "~5.2.0",
     "query-string": "^4.1.0",
@@ -54,7 +55,7 @@
     "tree-kill": "^1.0.0",
     "underscore": "1.6.0",
     "yamljs": "^0.2.4",
-    "zip-folder": "n2liquid/node-zip-folder"
+    "zip-folder": "file:custom-deps/zip-folder"
   },
   "optionalDependencies": {
     "http-sync": "latest",
