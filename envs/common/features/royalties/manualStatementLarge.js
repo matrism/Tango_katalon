@@ -1,18 +1,17 @@
 'use strict';
 
 let randomString = random.string.makeMemoizedGenerator(),
-    totalBatches = 10,
-    worksByBatch = 10,
+    totalBatches = 50,
+    worksByBatch = 100,
     linesByWork = 10,
     createWorks = 10;
-
-//exports.id = 'd6cb8feb-8578-494b-98bf-7543d527c052';
 
 exports.commonFeatureTags = [
     'royaltyProcessing',
     'manualStatementSanity',
     'sanity',
-    'manualStatementLarge'
+    'manualStatementLarge',
+    'weekly'
 ];
 
 exports.beforeFeature = () => {
@@ -88,7 +87,6 @@ exports.feature = [
                 describe('Add Batch with works and lines', () => {
                     statementBatches.selectBatch(i < 3 ? i : 3);
                     statementBatches.enterBatchAmount(1000 * (i + 1));
-                    //statementBatches.expectBatchTotalsToBe((i + 1) + ',000.0000');
 
                     if (i == 0) {
                         statementBatches.clickDefaultSettingsLink();
