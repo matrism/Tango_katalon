@@ -6,7 +6,7 @@ var _ = require('lodash'),
 if (pages.createDealScope === undefined) {
     exports = module.exports = pages.createDealScope = new ftf.pageObject({
         locators: {
-            addScopeIcon: {xpath: "//*[@class='overview-header']//h3[contains(text(),'Scopes')]//a[@class='column-add-button']"},
+            addScopeIcon: {css: '[data-ng-click^="addScope(form.terms.addScopeView);"]'},
             descriptionField: {css: "input[name='scopeDescription']"},
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
             territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
