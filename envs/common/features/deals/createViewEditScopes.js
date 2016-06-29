@@ -670,7 +670,7 @@ exports.feature = [
 
 
     {
-        name: "Delete shared PSS and shared scopes different scenarios",
+        name: "Share PSS with society agreement number",
         tags: ["sharePssWithSocAgreementNumber"],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -722,8 +722,6 @@ exports.feature = [
             steps.createDealScope.clickOnSharePublisherShareSetIcon();
             steps.createDealScope.clickOnUseThisPublisherShareSetButton();
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
-            steps.createDealScope.mouseOverPublisherShareTextTooltip();
-            steps.createDealScope.validateSharePublisherShareSetTextTooltip("1 other scope share this Publisher Share set");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
@@ -808,8 +806,7 @@ exports.feature = [
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
 
-            ////add scope with pss to contract period 1
-            //steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            //add scope with pss to contract period 1
             steps.createDealScope.addScopeTypeAndTerritory("Assignment", "worldwide");
 
             //add creators
