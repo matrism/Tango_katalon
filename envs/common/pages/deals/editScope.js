@@ -778,7 +778,7 @@ if (pages.editDealScope === undefined) {
             editClickOnTheDoneButtonOnShareScopeModalDialog: function () {
                 pages.base.scrollIntoView(pages.editDealScope.elems.doneButtonShareScopeModalDilaog);
                 pages.editDealScope.elems.doneButtonShareScopeModalDilaog.click();
-                browser.sleep(2000);
+                browser.sleep(4000);
             },
 
             editClickOnCopyScopeOption: function () {
