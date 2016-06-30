@@ -54,16 +54,12 @@ if [ -n "$cycle" ]; then
     cmd_line+=" --cycle $(printf '%q' "$cycle") "
 fi
 
-echo 'DEBUG'
-echo $customuser
-echo $cycle
-
-if [ -n "$user" ]; then
-    cmd_line+=" --user $(printf '%q' "$user") "
+if [ -n "$app_user" ]; then
+    cmd_line+=" --app-user $(printf '%q' "$app_user") "
 fi
 
-if [ -n "$password" ]; then
-    cmd_line+=" --password $(printf '%q' "$password") "
+if [ -n "$app_password" ]; then
+    cmd_line+=" --app_password $(printf '%q' "$app_password") "
 fi
 
 cmd_line+=" --commit $(git rev-parse HEAD)"

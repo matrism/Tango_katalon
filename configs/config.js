@@ -42,8 +42,8 @@ if (userConfig.cli) {
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
-    user = cli['user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
-    password = cli['password'] || configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword,
+    user = cli['app-user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
+    password = cli['app-password'] || configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword,
     config = {
         _default_: {
             client_id: 'devportal',
