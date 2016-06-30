@@ -6,6 +6,7 @@ if (steps.login === undefined) {
     steps.login = {
         itLogin: function() {
             it("User is logged in", function() {
+                console.log('User: ' + _tf_config.user_name);
                 pages.login.open(true);
 
                 browser.manage().getCookies().then((cookies) => {
