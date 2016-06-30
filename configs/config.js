@@ -42,6 +42,8 @@ if (userConfig.cli) {
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
+    user = cli['app-user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
+    password = cli['app-password'] || configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword,
     config = {
         _default_: {
             client_id: 'devportal',
@@ -108,8 +110,8 @@ var defaultUserName = 'TangoTest1',
                     cli['royalties-url'] || 'http://tanroysrv.tango.qa.wmg.com:80'
                 )
             },
-            user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
-            user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
+            user_name: user,
+            user_password: password
         },
         staging: {
             urls: {
@@ -120,8 +122,8 @@ var defaultUserName = 'TangoTest1',
                     'http://tancrsrv.internal.staging.wmg.com:80'
                 )
             },
-            user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
-            user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
+            user_name: user,
+            user_password: password
         },
         prod: {
             urls: {
@@ -129,8 +131,8 @@ var defaultUserName = 'TangoTest1',
                 app_url: cli['app-url'],
                 cr_url: cli['cr-url']
             },
-            user_name: configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
-            user_password: configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword
+            user_name: user,
+            user_password: password
         }
     };
 

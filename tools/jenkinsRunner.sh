@@ -54,6 +54,14 @@ if [ -n "$cycle" ]; then
     cmd_line+=" --cycle $(printf '%q' "$cycle") "
 fi
 
+if [ -n "$app_user" ]; then
+    cmd_line+=" --app-user $(printf '%q' "$app_user") "
+fi
+
+if [ -n "$app_password" ]; then
+    cmd_line+=" --app_password $(printf '%q' "$app_password") "
+fi
+
 cmd_line+=" --commit $(git rev-parse HEAD)"
 
 cmd_line+=" --build $(printf '%q' "$BUILD_NUMBER")"
