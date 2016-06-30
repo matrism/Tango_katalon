@@ -54,6 +54,9 @@ if [ -n "$cycle" ]; then
     cmd_line+=" --cycle $(printf '%q' "$cycle") "
 fi
 
+echo 'DEBUG'
+echo $user
+
 if [ -n "$user" ]; then
     cmd_line+=" --user $(printf '%q' "$user") "
 fi
