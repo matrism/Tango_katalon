@@ -40,8 +40,8 @@ if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
 
-var defaultUserName = 'TangoTest1',
-    defaultPassword = 'P@ssw0rd78',
+var defaultUserName = cli['user'] || 'TangoTest1',
+    defaultPassword = cli['password'] || 'P@ssw0rd78',
     config = {
         _default_: {
             client_id: 'devportal',
