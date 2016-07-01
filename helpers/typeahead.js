@@ -27,7 +27,7 @@ function Typeahead (target, dummy, isAppendedToBody) {
         var results = typeahead.$$(resultSelector);
 
         if (isAppendedToBody) {
-            results = $('body > .tg-typeahead__suggestions-wrap').$$(resultSelector);
+            results = $$('body > .tg-typeahead__suggestions-wrap').first().$$(resultSelector);
         }
 
         browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));

@@ -474,6 +474,15 @@ exports.batches = (function () {
             input.sendKeys(val);
         };
 
+        works.duplicateLineLink = (i) => {
+            i = i || 0;
+            return $$('[data-ng-click="duplicateLastIncomeLine(workEntry)"]').get(i);
+        };
+
+        works.duplicateLine = (i) => {
+            works.duplicateLineLink(i).click();
+        };
+
         return works;
     })();
 

@@ -59,6 +59,7 @@ pageStep([
             'Expect number of works to be',
             'Add income line',
             'Edit income line',
+            'Duplicate line'
             ]
         ],
     ]]
