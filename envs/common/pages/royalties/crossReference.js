@@ -109,3 +109,61 @@ exports.expectFormLabelsToBe = (labels) => {
 
     expect(formLabels.getText()).toEqual(labels);
 };
+
+exports.items = (() => {
+    let item = {};
+
+    item.index = 0;
+
+    item.get = (index) => {
+        item.index = index ? index : item.index;
+        return $$('tg-cross-reference-item').get(item.index);
+    };
+
+    item.expand = (index) => {
+        item.get(index).click();
+    };
+
+    item.rematchButton = () => {
+        return item.get().$('[data-ng-click="xref._rematch = true;"]');
+    };
+
+    item.rematch = () => {
+        asAlways(
+            item.rematchButton(),
+            'waitUntilVisible',
+            'click'
+        );
+    };
+
+    item.rematchWorkSearch = () => {
+        return Typeahead(by.model('xref.rematchTangoWork'));
+    };
+
+    item.searchForRematchWork = (text, filter) => {
+        let typeahead = item.rematchWorkSearch();
+
+        if (filter) {
+            typeahead.setFilter(filter);
+        }
+
+        typeahead.selectFirst(text);
+        //setTestVariable('Last Incoming Work search term', text);
+    };
+
+
+
+    item.unmatchButton = () => {
+        return item.get().$('[data-ng-click="xref._rematch = false; unmatchCrossReference(xref)"]');
+    };
+
+    item.unmatch = () => {
+        asAlways(
+            item.unmatchButton(),
+            'waitUntilVisible',
+            'click'
+        );
+    };
+
+    return item;
+})();

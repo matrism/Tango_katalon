@@ -14,4 +14,10 @@ pageStep([
     'Click Add Cross Reference button',
     'Expect Cross Reference form to be visible',
     'Expect form labels to be',
+    ['Items', [
+        'Expand',
+        'Rematch',
+        'Search For Rematch Work',
+        'Unmatch'
+    ]]
 ]);
