@@ -19,5 +19,12 @@ pageStep([
         'Rematch',
         'Search For Rematch Work',
         'Unmatch'
+    ]],
+    ['Add Form', [
+        'Enter Title',
+        'Enter Creators',
+        'Enter Id',
+        'Enter IncomeProvider',
+        'Confirm'
     ]]
 ]);

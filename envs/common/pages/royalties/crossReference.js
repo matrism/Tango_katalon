@@ -137,7 +137,7 @@ exports.items = (() => {
     };
 
     item.rematchWorkSearch = () => {
-        return Typeahead(by.model('xref.rematchTangoWork'));
+        return Typeahead(by.model('xref.rematchTangoWork'), false, true);
     };
 
     item.searchForRematchWork = (text, filter) => {
@@ -147,11 +147,10 @@ exports.items = (() => {
             typeahead.setFilter(filter);
         }
 
+        //typeahead.select(text, false, 0);
         typeahead.selectFirst(text);
         //setTestVariable('Last Incoming Work search term', text);
     };
-
-
 
     item.unmatchButton = () => {
         return item.get().$('[data-ng-click="xref._rematch = false; unmatchCrossReference(xref)"]');
@@ -166,4 +165,44 @@ exports.items = (() => {
     };
 
     return item;
+})();
+
+exports.addForm = (() => {
+    let addForm = {};
+
+    addForm.titleInput = () => {
+        return element(by.model('newCrossRefModel.incoming_song_title'));
+    };
+    addForm.creatorsInput = () => {
+        return element(by.model('newCrossRefModel.incoming_composer'));
+    };
+    addForm.idInput = () => {
+        return element(by.model('newCrossRefModel.source_work_id'));
+    };
+    addForm.incomeProviderTypeahead = () => {
+        return Typeahead(by.model('newCrossRefModel.incomeProvider'));
+    };
+    addForm.confirmButtom = () => {
+        return $('[data-ng-click="addNewCrossReference(newCrossRefModel)"]');
+    };
+
+    addForm.enterTitle = (value) => {
+        addForm.titleInput().sendKeys(value);
+    };
+    addForm.enterCreators = (value) => {
+        addForm.creatorsInput().sendKeys(value);
+    };
+    addForm.enterId = (value) => {
+        addForm.idInput().sendKeys(value);
+    };
+    addForm.enterIncomeProvider = (value) => {
+        let typeahead = addForm.incomeProviderTypeahead();
+        typeahead.selectFirst(value);
+    };
+    addForm.confirm = () => {
+        addForm.confirmButtom().click();
+        pages.base.waitForAjax();
+    };
+
+    return addForm;
 })();

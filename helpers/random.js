@@ -15,6 +15,11 @@ exports.string = function() {
 };
 exports.string.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.string);
 
+exports.stringLowerCase = function() {
+	return randomstring.generate({charset: '0123456789abcdefghijklmnopqrstuvxzy'});
+};
+exports.stringLowerCase.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.stringLowerCase);
+
 exports.letter = function() {
     return String.fromCharCode("A".charCodeAt(0) + Math.round(Math.random() * 25));
 };
