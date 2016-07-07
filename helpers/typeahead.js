@@ -15,6 +15,7 @@ function Typeahead (target, dummy, isAppendedToBody) {
     };
 
     typeahead.sendKeys = function (keys) {
+        pages.base.scrollIntoView(termInput);
         return termInput.sendKeys(keys);
     };
 
@@ -37,7 +38,7 @@ function Typeahead (target, dummy, isAppendedToBody) {
         var results = typeahead.$$(resultSelector);
 
         if (isAppendedToBody) {
-            results = $$('body > .tg-typeahead__suggestions-wrap').first().$$(resultSelector);
+            results = $$('body > .tg-typeahead__suggestions-wrap > ul').first().$$(resultSelector);
         }
 
         browser.wait(protractor.ExpectedConditions.visibilityOfAny(results));
@@ -76,7 +77,8 @@ function Typeahead (target, dummy, isAppendedToBody) {
     typeahead.enterText = (text) => {
         typeahead.clear();
         typeahead.sendKeys(text);
-        return pages.base.waitForAjax();
+        browser.sleep(200);
+        pages.base.waitForAjax();
     };
 
     typeahead.selectFirst = function(text) {

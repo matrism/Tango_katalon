@@ -77,6 +77,10 @@ exports.expectTangoWorkToBeVisible = () => {
     expect(tangoWork.isDisplayed()).toBeTruthy();
 };
 
+exports.expectNoCrossReference = () => {
+    expect(exports.incomingWorkContainer().getText()).toContain('No cross references found using this criteria');
+};
+
 exports.incomingWorkId = () => {
     let incomingWork = exports.incomingWorkContainer();
 

@@ -17,6 +17,7 @@ pageStep([
     'Click Add Cross Reference button',
     'Expect Cross Reference form to be visible',
     'Expect form labels to be',
+    'Expect No Cross Reference',
     ['Items', [
         'Expand',
         'Rematch',
