@@ -22,6 +22,16 @@ function Typeahead (target, dummy, isAppendedToBody) {
         return termInput.getAttribute('value');
     };
 
+    typeahead.noResultsMessage = function () {
+        return $('[data-ng-if="$dataSets[0].data.noResults"]');
+    };
+
+    typeahead.expectNoResultsMessage = function () {
+        var element = typeahead.noResultsMessage();
+        browser.wait(EC.visibilityOf(element));
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    };
+
     typeahead.results = function (text, isExact) {
         //var results = typeahead.all(by.repeater('$match in $dataSet.queried.matches'));
         var results = typeahead.$$(resultSelector);
@@ -55,17 +65,18 @@ function Typeahead (target, dummy, isAppendedToBody) {
     };
 
     typeahead.select = function (text, isExact, index) {
-        return typeahead.clear().then(
-            () => typeahead.sendKeys(text)
-        ).then(
-            () => {
-                if (!_.isNumber(index)) {
-                    typeahead.results(text, isExact).first().click();
-                } else {
-                    typeahead.results().get(index).click();
-                }
-            }
-        );
+        typeahead.enterText(text);
+        if (!_.isNumber(index)) {
+            typeahead.results(text, isExact).first().click();
+        } else {
+            typeahead.results().get(index).click();
+        }
+    };
+
+    typeahead.enterText = (text) => {
+        typeahead.clear();
+        typeahead.sendKeys(text);
+        return pages.base.waitForAjax();
     };
 
     typeahead.selectFirst = function(text) {

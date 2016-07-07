@@ -28,6 +28,20 @@ exports.searchForIncomingWork = (text, filter) => {
     setTestVariable('Last Incoming Work search term', text);
 };
 
+exports.enterIncomingWorkSearchTerms = (text, filter) => {
+    let typeahead = exports.incomingWorksSearch();
+
+    if (filter) {
+        typeahead.setFilter(filter);
+    }
+
+    typeahead.enterText(text);
+};
+
+exports.expectNoResultsMessage = () => {
+    exports.incomingWorksSearch().expectNoResultsMessage();
+};
+
 exports.tangoWorkSearch = () => {
     return Typeahead(by.model('$parent.tangoWork'));
 };
@@ -80,6 +94,16 @@ exports.expectIncomingWorkIdToContain = (term) => {
 exports.expectIncomingWorkIdToContainSearchTerm = () => {
     let searchTerm = hash.testVariables['Last Incoming Work search term'];
     exports.expectIncomingWorkIdToContain(searchTerm);
+};
+
+exports.tangoWorkTitle = (index) => {
+    index = index || 0;
+    return $$('[data-ui-sref^="workView"]').get(index);
+};
+
+exports.expectTangoWorkTitleToContain = (text, index) => {
+    let elem = exports.tangoWorkTitle(index);
+    expect(elem.getText()).toContain(text);
 };
 
 exports.addCrossReferenceButton = () => {
@@ -147,9 +171,17 @@ exports.items = (() => {
             typeahead.setFilter(filter);
         }
 
-        //typeahead.select(text, false, 0);
         typeahead.selectFirst(text);
-        //setTestVariable('Last Incoming Work search term', text);
+    };
+
+    item.confirmButton = () => {
+        return $('[data-ng-click="ok()"]');
+    };
+
+    item.confirm = () => {
+        pages.base.waitForModal();
+        item.confirmButton().click();
+        pages.base.waitForAjax();
     };
 
     item.unmatchButton = () => {

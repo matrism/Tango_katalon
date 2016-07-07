@@ -20,7 +20,7 @@ exports.beforeFeature = () => {
 exports.feature = [
     {
         name: 'Create works',
-        tags: [],
+        tags: ['crossReferenceIncoming'],
         steps: () => {
             let workData = {
                     creators_and_contributions: [{
@@ -30,7 +30,7 @@ exports.feature = [
                     }]
                 };
 
-            for (let i = 0; i < 1; i++) {
+            for (let i = 0; i < 2; i++) {
                 workData.primary_work_title = 'WORK TAT ' + randomString(i);
                 steps.work.createWork(workData, 'workId' + i);
             }
@@ -38,13 +38,12 @@ exports.feature = [
     },
     {
         name: 'Cross Reference - Add',
-        tags: ['crossReferenceAddRegression'],
+        tags: ['crossReferenceIncoming'],
         steps: () => {
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             steps.crossReference.selectSearchCriterion('Tango Works');
 
             steps.crossReference.searchForTangoWork(fromTestVariable('workId0'), 'Work ID');
-            //steps.crossReference.searchForTangoWork('WW 015079700 00', 'Work ID');
             steps.crossReference.expectTangoWorkToBeVisible();
             steps.crossReference.clickAddCrossReferenceButton();
             steps.crossReference.expectCrossReferenceFormToBeVisible();
@@ -55,26 +54,51 @@ exports.feature = [
                 'ID:',
                 'Income Provider:'
             ]);
-            steps.crossReference.addForm.enterTitle('test reference 123');
+            steps.crossReference.addForm.enterTitle('test reference');
             steps.crossReference.addForm.enterCreators('test creator');
-            steps.crossReference.addForm.enterId('reference' + randomStringLowerCase('add'));
+            steps.crossReference.addForm.enterId(randomStringLowerCase('add'));
             steps.crossReference.addForm.enterIncomeProvider('BMI');
             steps.crossReference.addForm.confirm();
         },
     },
     {
-        name: 'Cross Reference - Search incoming work',
-        tags: ['crossReferenceSearchIncomingWorkRegression'],
+        name: 'Cross Reference - Search incoming work and rematch',
+        tags: ['crossReferenceIncoming'],
         steps: () => {
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             steps.crossReference.selectSearchCriterion('Incoming Works');
-            steps.crossReference.searchForIncomingWork('reference' + randomStringLowerCase('add'), 'Incoming Work ID');
+            steps.crossReference.searchForIncomingWork(randomStringLowerCase('add'), 'Incoming Work ID');
             steps.crossReference.expectIncomingWorkToBeVisible();
             steps.crossReference.expectIncomingWorkIdToContainSearchTerm();
             steps.crossReference.items.expand();
             steps.crossReference.items.rematch();
-            steps.crossReference.items.searchForRematchWork('WORK TAT ' + randomString(0), 'Title');
-            steps.base.sleep(5000);
+            steps.crossReference.items.searchForRematchWork('WORK TAT ' + randomString(1), 'Title');
+            steps.crossReference.items.confirm();
+        },
+    },
+    {
+        name: 'Cross Reference - Validate matching work and unmatch',
+        tags: ['crossReferenceIncoming'],
+        steps: () => {
+            steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
+            steps.crossReference.selectSearchCriterion('Incoming Works');
+            steps.crossReference.searchForIncomingWork(randomStringLowerCase('add'), 'Incoming Work ID');
+            steps.crossReference.expectIncomingWorkToBeVisible();
+            steps.crossReference.expectIncomingWorkIdToContainSearchTerm();
+            steps.crossReference.expectTangoWorkTitleToContain('WORK TAT ' + randomString(1));
+            steps.crossReference.items.expand();
+            steps.crossReference.items.unmatch();
+            steps.crossReference.items.confirm();
+        },
+    },
+    {
+        name: 'Cross Reference - Validate unmatched incoming work',
+        tags: ['crossReferenceIncoming'],
+        steps: () => {
+            steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
+            steps.crossReference.selectSearchCriterion('Incoming Works');
+            steps.crossReference.enterIncomingWorkSearchTerms(randomStringLowerCase('add'), 'Incoming Work ID');
+            steps.crossReference.expectNoResultsMessage();
         },
     },
     {
