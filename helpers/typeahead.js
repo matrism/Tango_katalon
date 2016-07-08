@@ -66,19 +66,21 @@ function Typeahead (target, dummy, isAppendedToBody) {
     };
 
     typeahead.select = function (text, isExact, index) {
-        typeahead.enterText(text);
-        if (!_.isNumber(index)) {
-            typeahead.results(text, isExact).first().click();
-        } else {
-            typeahead.results().get(index).click();
-        }
+        return typeahead.enterText(text).then(() => {
+            if (!_.isNumber(index)) {
+                typeahead.results(text, isExact).first().click();
+            } else {
+                typeahead.results().get(index).click();
+            }
+        });
     };
 
     typeahead.enterText = (text) => {
         typeahead.clear();
-        typeahead.sendKeys(text);
-        browser.sleep(200);
-        pages.base.waitForAjax();
+        return typeahead.sendKeys(text).then(() => {
+            browser.sleep(200);
+            return pages.base.waitForAjax();
+        });
     };
 
     typeahead.selectFirst = function(text) {
