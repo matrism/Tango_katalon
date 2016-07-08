@@ -24,7 +24,7 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        steps: criticalScenario(() => {
             var p = steps.person,
                 np = steps.newPerson;
 
@@ -40,14 +40,14 @@ exports.feature = [
             np.save();
 
             p.findInternalIpiNumber();
-        },
+        }),
     },
     {
         name: 'Create work',
 
         tags: [],
 
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 'mainWork');
 
             using(steps.newWork, function (nw) {
@@ -64,7 +64,7 @@ exports.feature = [
             });
 
             steps.work.findCurrentlyOpenWorkId();
-        }
+        })
     },
     {
         name: 'Create deal with publisher shares but no RTP',

@@ -56,8 +56,8 @@ exports.feature = [
             'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
-        steps: function () {
-            _.times(4, function (i) {
+        steps: criticalScenario(() => {
+            _.times(2, (i) => {
                 steps.person.useBlankPersonSlot(i);
 
                 using(steps.newPerson, function () {
@@ -77,7 +77,7 @@ exports.feature = [
 
                 steps.person.findInternalIpiNumber();
             });
-        },
+        })
     },
     {
         name: 'Create work with 2 creators',
@@ -98,7 +98,7 @@ exports.feature = [
             'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun'
         ],
-        steps: function () {
+        steps: criticalScenario(() => {
             executeLegacyStepsArray([
             [steps.base.useBlankEntityDataSlot, ['work', 'mainWork']],
 
@@ -169,7 +169,7 @@ exports.feature = [
 
             [steps.work.findCurrentlyOpenWorkId],
             ]);
-        }
+        })
     },
     {
         name: 'Validate created work data',

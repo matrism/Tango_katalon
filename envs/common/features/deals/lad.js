@@ -13,7 +13,7 @@ exports.feature = [
     {
         name: 'Create a basic deal for LAD',
         tags: ['ladCreateBasicDeal'],
-        steps: function () {
+        steps: criticalScenario(() => {
             var d = steps.deal,
                 ccp = steps.createDealContractPeriod;
 
@@ -45,12 +45,12 @@ exports.feature = [
             d.waitForDealToBeSaved();
             d.printDealNumber();
             d.findId();
-        }
+        })
     },
     {
         name: 'Add PSS, override publisher and share scope',
         tags: ['ladPSSOverridePublisher', 'ladExistingDeal'],
-        steps: function () {
+        steps: criticalScenario(() => {
             var d = steps.deal,
                 cds = steps.createDealScope,
                 ccp = steps.createDealContractPeriod,

@@ -19,7 +19,7 @@ exports.feature = [
     {
         name: 'Create 2 people',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot(0);
 
             using(steps.newPerson, function() {
@@ -34,7 +34,7 @@ exports.feature = [
             });
 
             steps.person.findInternalIpiNumber();
-        }
+        })
     },
     {
         name: 'Duplicate shell work check',

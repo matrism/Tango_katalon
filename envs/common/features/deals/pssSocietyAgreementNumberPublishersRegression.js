@@ -21,7 +21,7 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        steps: criticalScenario(() => {
             var base = steps.base,
 
                 deal = steps.deal,
@@ -104,7 +104,7 @@ exports.feature = [
 
                 deal.findId();
             });
-        }
+        })
     },
     {
         name: (
