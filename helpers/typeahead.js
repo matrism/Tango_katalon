@@ -78,7 +78,7 @@ function Typeahead (target, dummy, isAppendedToBody) {
     typeahead.enterText = (text) => {
         typeahead.clear();
         return typeahead.sendKeys(text).then(() => {
-            browser.sleep(200);
+            browser.sleep(400);
             return pages.base.waitForAjax();
         });
     };
