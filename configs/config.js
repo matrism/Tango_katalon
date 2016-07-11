@@ -40,6 +40,8 @@ if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
 
+console.log(cli);
+
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
     user = cli['app-user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
@@ -52,6 +54,7 @@ var defaultUserName = 'TangoTest1',
         _system_: {
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
+            seleniumAddress: 'http://selenium-hub.shared.wmg.com:4444/wd/hub',
             resolution: {
                 width: 1400,
                 height: 1024
