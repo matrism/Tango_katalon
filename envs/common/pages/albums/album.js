@@ -5,7 +5,7 @@ var pph = require('../../../../helpers/pph');
 pages.album = exports;
 
 exports.goToAlbumPage = function(value) {
-    browser.driver.get(_tf_config.urls.app_url + '/#/album/' + value);
+    browser.driver.get(_tf_config.urls.app_url + '#/album/' + value);
     pages.base.waitForAjax();
 };
 
