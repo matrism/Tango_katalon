@@ -21,7 +21,7 @@ exports.feature = [
     {
         name: 'Create a deal with publisher share set',
         tags: [],
-        steps: function () {
+        steps: criticalScenario(() => {
             var cds = steps.createDealScope,
                 d = steps.deal,
                 dr = steps.dealRtp;
@@ -59,12 +59,12 @@ exports.feature = [
             d.saveDeal();
             d.waitForDealToBeSaved();
             d.findId();
-        }
+        })
     },
     {
         name: 'Create person to use as creator',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot(0);
             using(steps.newPerson, function () {
                 this.goToNewPersonPage();
@@ -76,7 +76,7 @@ exports.feature = [
                 this.save();
             });
             steps.person.findInternalIpiNumber();
-        }
+        })
     },
     {
         name: 'Create works and verify registration activity',

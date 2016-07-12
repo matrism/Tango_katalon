@@ -122,10 +122,12 @@ exports.feature = [
             _.defaults(hash.testVariables, mockValues);
 
             xdescribe('Create new data', () => {
-                steps.newOrganisation.createOrganistation(orgData);
-                steps.base.sleep(1000);
-                steps.deal.createDeal(dealData);
-                steps.work.createWork(workData);
+                steps.criticalSection.wrap(() => {
+                    steps.newOrganisation.createOrganistation(orgData);
+                    steps.base.sleep(1000);
+                    steps.deal.createDeal(dealData);
+                    steps.work.createWork(workData);
+                });
 
                 steps.work.goToScopeDeliveryTab();
                 steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();
@@ -305,10 +307,12 @@ exports.feature = [
             _.defaults(hash.testVariables, mockValues);
 
             describe('Create new data', () => {
-                steps.newOrganisation.createOrganistation(orgData);
-                steps.base.sleep(1000);
-                steps.deal.createDeal(dealData);
-                steps.work.createWork(workData);
+                steps.criticalSection.wrap(() => {
+                    steps.newOrganisation.createOrganistation(orgData);
+                    steps.base.sleep(1000);
+                    steps.deal.createDeal(dealData);
+                    steps.work.createWork(workData);
+                });
 
                 steps.work.goToScopeDeliveryTab();
                 steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();

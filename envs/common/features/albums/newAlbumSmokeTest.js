@@ -21,7 +21,7 @@ exports.feature = [
             'newAlbumSmokeTestCreateWork',
             'newAlbumSmokeCreateCommercialAlbum',
         ],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot(0);
 
             using(steps.newPerson, function() {
@@ -36,7 +36,7 @@ exports.feature = [
             });
 
             steps.person.findInternalIpiNumber();
-        },
+        }),
     },
     {
         name: 'Create work',
@@ -44,7 +44,7 @@ exports.feature = [
             'newAlbumSmokeTestCreateWork',
             'newAlbumSmokeCreateCommercialAlbum',
         ],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 'mainWork');
 
             using(steps.newWork, function() {
@@ -63,7 +63,7 @@ exports.feature = [
             });
 
             steps.work.findCurrentlyOpenWorkId();
-        },
+        }),
     },
     {
         name: 'Create commercial album',

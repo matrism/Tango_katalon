@@ -22,7 +22,7 @@ exports.feature = [
     {
         name: 'Create person to use as creator',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             _.times(1, function(i) {
                 steps.person.useBlankPersonSlot(i);
                 using(steps.newPerson, function () {
@@ -36,7 +36,7 @@ exports.feature = [
                 });
                 steps.person.findInternalIpiNumber();
            });
-        }
+        })
     },
     {
         name: 'Create a work',
