@@ -57,7 +57,7 @@ exports.feature = [
             'worksSanityExecuteRegistrationRun'
         ],
         steps: criticalScenario(() => {
-            _.times(2, (i) => {
+            _.times(4, function (i) {
                 steps.person.useBlankPersonSlot(i);
 
                 using(steps.newPerson, function () {
