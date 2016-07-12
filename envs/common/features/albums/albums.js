@@ -26,7 +26,7 @@ exports.feature = [
             'albumsCreatePersons',
             'albumsSanity'
         ],
-        steps: function () {
+        steps: criticalScenario(() => {
             var p = steps.person,
                 np = steps.newPerson;
 
@@ -41,7 +41,7 @@ exports.feature = [
             np.save();
 
             p.findInternalIpiNumber();
-        }
+        })
     },
     {
         name: 'Create work',
@@ -49,7 +49,7 @@ exports.feature = [
             'albumsCreateWork',
             'albumsSanity'
         ],
-        steps: function () {
+        steps: criticalScenario(() => {
             var nw = steps.newWork;
 
             steps.base.useBlankEntityDataSlot('work', 'mainWork');
@@ -65,7 +65,7 @@ exports.feature = [
             nw.validateSaveWorkRedirection();
 
             steps.work.findCurrentlyOpenWorkId();
-        }
+        })
     },
     {
         name: 'Create commercial album',

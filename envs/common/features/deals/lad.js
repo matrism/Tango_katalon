@@ -94,7 +94,7 @@ exports.feature = [
             cds.clickOnShareScope();
             cds.selectAllContractPeriodsShareScopeModalDialog();
             cds.clickOnTheDoneShareScopeModalDialog();
-        }
+        })
     },
     {
         name: 'Add Royalty rates',
