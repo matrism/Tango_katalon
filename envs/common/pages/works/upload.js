@@ -5,7 +5,7 @@ pages.uploadWorks = exports;
 exports.fileInput = () => $('[name="work_upload_file"] [type="file"]');
 
 exports.enterFilePath = path => asAlways(
-    exports.fileInput(), 'scrollIntoView', 'clear'
+    exports.fileInput(), 'scrollIntoView'
 ).sendKeys(path);
 
 exports.sourceTypeahead = () => Typeahead(by.model('dataHolder.model.source'));
