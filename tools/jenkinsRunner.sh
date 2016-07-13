@@ -54,6 +54,10 @@ if [ -n "$cycle" ]; then
     cmd_line+=" --cycle $(printf '%q' "$cycle") "
 fi
 
+if [ -n "$use_selenium_server" ]; then
+    cmd_line+=" --use-selenium-server "
+fi
+
 if [ -n "$app_user" ]; then
     cmd_line+=" --app-user $(printf '%q' "$app_user") "
 fi
