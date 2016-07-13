@@ -71,7 +71,9 @@ exports.feature = [
 
                 uw.selectMusicLibrary('AUDIOMACHINE');
 
-                uw.upload();
+                steps.criticalSection.wrap(() => {
+                    uw.upload();
+                });
             });
 
             wuh.waitUntilFileNameIsStaged(fromTestVariable(
