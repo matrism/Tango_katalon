@@ -52,7 +52,7 @@ var defaultUserName = 'TangoTest1',
         _system_: {
             browser: (cli.browser in ['chrome', 'firefox', 'ie'] ? cli.browser : 'chrome'),
             directConnect: !cli.selenium,
-            seleniumAddress: cli['use-selenum-server'] ? 'http://selenium-hub.shared.wmg.com:4444/wd/hub' : '',
+            seleniumAddress: cli['use-selenium-server'] ? 'http://selenium-hub.shared.wmg.com:4444/wd/hub' : '',
             resolution: {
                 width: 1400,
                 height: 1024
