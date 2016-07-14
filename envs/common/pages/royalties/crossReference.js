@@ -121,23 +121,6 @@ exports.clickAddCrossReferenceButton = () => {
     pages.base.waitForAjax();
 };
 
-exports.crossReferenceForm = () => {
-    return $('form[data-name="addCrossRefForm"]');
-};
-
-exports.expectCrossReferenceFormToBeVisible = () => {
-    let form = exports.crossReferenceForm();
-
-    expect(form.isDisplayed()).toBeTruthy();
-};
-
-exports.expectFormLabelsToBe = (labels) => {
-    let form = exports.crossReferenceForm(),
-        formLabels = form.$$('.control-label');
-
-    expect(formLabels.getText()).toEqual(labels);
-};
-
 exports.items = (() => {
     let item = {};
 
@@ -150,6 +133,22 @@ exports.items = (() => {
 
     item.expand = (index) => {
         item.get(index).click();
+    };
+
+    item.getText = () => {
+        return item.get().getText();
+    };
+
+    item.validateTitle = (value) => {
+        expect(item.getText()).toContain(value);
+    };
+
+    item.validateCreators = (value) => {
+        expect(item.getText()).toContain(value);
+    };
+
+    item.validateId = (value) => {
+        expect(item.getText()).toContain(value);
     };
 
     item.rematchButton = () => {
@@ -206,18 +205,40 @@ exports.items = (() => {
 exports.addForm = (() => {
     let addForm = {};
 
+    addForm.crossReferenceForm = () => {
+        return $('form[data-name="addCrossRefForm"]');
+    };
+
+    addForm.labels = () => {
+        let form = addForm.crossReferenceForm();
+        return form.$$('.control-label');
+    };
+
+    addForm.expectCrossReferenceFormToBeVisible = () => {
+        let form = addForm.crossReferenceForm();
+        expect(form.isDisplayed()).toBeTruthy();
+    };
+
+    addForm.expectFormLabelsToBe = (labels) => {
+        expect(addForm.labels().getText()).toEqual(labels);
+    };
+
     addForm.titleInput = () => {
         return element(by.model('newCrossRefModel.incoming_song_title'));
     };
+
     addForm.creatorsInput = () => {
         return element(by.model('newCrossRefModel.incoming_composer'));
     };
+
     addForm.idInput = () => {
         return element(by.model('newCrossRefModel.source_work_id'));
     };
+
     addForm.incomeProviderTypeahead = () => {
         return Typeahead(by.model('newCrossRefModel.incomeProvider'));
     };
+
     addForm.confirmButtom = () => {
         return $('[data-ng-click="addNewCrossReference(newCrossRefModel)"]');
     };
@@ -225,19 +246,38 @@ exports.addForm = (() => {
     addForm.enterTitle = (value) => {
         addForm.titleInput().sendKeys(value);
     };
+
     addForm.enterCreators = (value) => {
         addForm.creatorsInput().sendKeys(value);
     };
+
     addForm.enterId = (value) => {
         addForm.idInput().sendKeys(value);
     };
+
     addForm.enterIncomeProvider = (value) => {
         let typeahead = addForm.incomeProviderTypeahead();
         typeahead.selectFirst(value);
     };
+
+    addForm.expectConfirmButtomToBeDisabled = () => {
+        expect(addForm.confirmButtom().isEnabled()).toBeFalsy();
+    };
+
     addForm.confirm = () => {
         addForm.confirmButtom().click();
         pages.base.waitForAjax();
+    };
+
+    addForm.successMessage = () => {
+        return element(by.cssContainingText(
+            'p', 'Cross reference has been added to work'
+        ));
+    };
+
+    addForm.validateSuccessMessage = () => {
+        let element = addForm.successMessage();
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
     };
 
     return addForm;

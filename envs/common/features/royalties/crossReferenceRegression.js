@@ -51,19 +51,24 @@ exports.feature = [
             cr.searchForTangoWork(fromTestVariable('workId0'), 'Work ID');
             cr.expectTangoWorkToBeVisible();
             cr.clickAddCrossReferenceButton();
-            cr.expectCrossReferenceFormToBeVisible();
-            cr.expectFormLabelsToBe([
+            cra.expectCrossReferenceFormToBeVisible();
+            cra.expectFormLabelsToBe([
                 'Incoming Work Details:',
                 'Title:',
                 'Creators:',
                 'ID:',
                 'Income Provider:'
             ]);
+            cra.expectConfirmButtomToBeDisabled();
             cra.enterTitle('test reference');
+            cra.expectConfirmButtomToBeDisabled();
             cra.enterCreators('test creator');
+            cra.expectConfirmButtomToBeDisabled();
             cra.enterId(randomStringLowerCase(0));
+            cra.expectConfirmButtomToBeDisabled();
             cra.enterIncomeProvider('BMI');
             cra.confirm();
+            cra.validateSuccessMessage();
         },
     },
     {
@@ -79,6 +84,9 @@ exports.feature = [
             cr.expectIncomingWorkToBeVisible();
             cr.expectIncomingWorkIdToContainSearchTerm();
             cri.expand();
+            cri.validateTitle('test reference');
+            cri.validateCreators('test creator');
+            cri.validateId(randomStringLowerCase(0));
             cri.rematch();
             cri.searchForRematchWork('WORK TAT ' + randomString(1), 'Title');
             cri.confirm();
@@ -126,7 +134,7 @@ exports.feature = [
             cr.searchForTangoWork(fromTestVariable('workId0'), 'Work ID');
             cr.expectTangoWorkToBeVisible();
             cr.clickAddCrossReferenceButton();
-            cr.expectCrossReferenceFormToBeVisible();
+            cra.expectCrossReferenceFormToBeVisible();
             cra.enterTitle('test reference');
             cra.enterCreators('test creator');
             cra.enterId(randomStringLowerCase(1));
@@ -146,6 +154,9 @@ exports.feature = [
             cr.searchForTangoWork(fromTestVariable('workId0'), 'Work ID');
             cr.expectTangoWorkToBeVisible();
             cri.expand();
+            cri.validateTitle('test reference');
+            cri.validateCreators('test creator');
+            cri.validateId(randomStringLowerCase(1));
             cri.rematch();
             cri.searchForRematchWork('WORK TAT ' + randomString(1), 'Title');
             cri.confirm();
