@@ -20,7 +20,7 @@ exports.feature = [
     {
         name: 'Create a person',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot(0);
 
             using(steps.newPerson, function() {
@@ -35,7 +35,7 @@ exports.feature = [
             });
 
             steps.person.findInternalIpiNumber();
-        }
+        })
     },
     {
         name: 'Define and edit COS, POT, and UCO composite works',

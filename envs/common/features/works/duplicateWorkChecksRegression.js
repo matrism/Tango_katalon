@@ -20,7 +20,7 @@ exports.feature = [
     {
         name: 'Create 2 people',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             _.times(2, function(i) {
                 steps.person.useBlankPersonSlot(i);
 
@@ -39,7 +39,7 @@ exports.feature = [
 
                 steps.person.findInternalIpiNumber();
             });
-        }
+        })
     },
     {
         name: 'Duplicate work checks',

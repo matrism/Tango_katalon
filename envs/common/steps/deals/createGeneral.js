@@ -318,16 +318,18 @@ exports.clickOnNoPerformanceNonTitleBoundIncome = function () {
 
 exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
-        steps.createDealGeneral.goToNewDealPage();
-        steps.createDealGeneral.selectDealSigningTerritory();
-        if(systemConfig.env.name === 'qa') {
-            steps.createDealGeneral.fillCompanyCodeField("a");
+        steps.criticalSection.wrap(() => {
+            steps.createDealGeneral.goToNewDealPage();
+            steps.createDealGeneral.selectDealSigningTerritory();
+            if(systemConfig.env.name === 'qa') {
+                steps.createDealGeneral.fillCompanyCodeField("a");
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
+            }
+            steps.createDealGeneral.fillContractingPartyField();
             steps.createDealGeneral.waitForContractingPartyDropDown();
-            steps.createDealGeneral.selectRandomCompanyCode();
-        }
-        steps.createDealGeneral.fillContractingPartyField();
-        steps.createDealGeneral.waitForContractingPartyDropDown();
-        steps.createDealGeneral.selectRandomContractingParty();
+            steps.createDealGeneral.selectRandomContractingParty();
+        });
     });
 };
 

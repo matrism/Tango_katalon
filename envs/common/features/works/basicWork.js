@@ -50,7 +50,7 @@ exports.feature = [
     {
         name: 'Create persons to use as creators',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             _.times(2, function(i) {
                 steps.person.useBlankPersonSlot(i);
                 steps.newPerson.goToNewPersonPage();
@@ -62,7 +62,7 @@ exports.feature = [
                 steps.newPerson.save();
                 steps.person.findInternalIpiNumber();
            });
-        }
+        })
     },
     {
         name: 'New basic work',

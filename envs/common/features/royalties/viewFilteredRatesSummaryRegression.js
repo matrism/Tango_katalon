@@ -24,7 +24,9 @@ exports.feature = [
         tags: [],
 
         steps: function () {
-            steps.searchSection.accessSavedDealByNumber(dealId);
+            steps.criticalSection.wrap(() => {
+                steps.searchSection.accessSavedDealByNumber(dealId);
+            });
 
             steps.deal.goToIncomeRatesPage();
             steps.dealIncomeRates.goToRatesSummary();

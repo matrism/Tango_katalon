@@ -21,7 +21,7 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        steps: criticalScenario(() => {
             var base = steps.base,
 
                 deal = steps.deal,
@@ -104,14 +104,14 @@ exports.feature = [
 
                 deal.findId();
             });
-        }
+        })
     },
     {
         name: 'Create 1 person (non-creator)',
 
         tags: [],
 
-        steps: function () {
+        steps: criticalScenario(() => {
             var p = steps.person,
                 np = steps.newPerson;
 
@@ -128,7 +128,7 @@ exports.feature = [
             np.enterLastName('TEST PERSON ' + randomId('person'));
 
             np.save();
-        }
+        })
     },
     {
         name: (

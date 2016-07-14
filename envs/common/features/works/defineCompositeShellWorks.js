@@ -15,8 +15,8 @@ exports.feature = [
         {
             name: 'Create persons to use as creators for COS and MED composite work',
             tags: [],
-            steps: function () {
-                _.times(2, function (i) {
+            steps: criticalScenario(() => {
+                _.times(2, (i) => {
                     steps.person.useBlankPersonSlot(i);
 
                     steps.newPerson.goToNewPersonPage();
@@ -32,7 +32,7 @@ exports.feature = [
 
                     steps.person.findInternalIpiNumber();
                 });
-            }
+            })
         },
         {
             name: 'Define a COS composite work with shell works',
