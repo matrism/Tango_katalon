@@ -1,7 +1,6 @@
 'use strict';
 
-let _ = require('lodash'),
-    randomString = random.string.makeMemoizedGenerator(),
+let randomString = random.string.makeMemoizedGenerator(),
     randomStringLowerCase = random.stringLowerCase.makeMemoizedGenerator();
 
 exports.id = '20220195-f59d-4f4d-98de-f52aec8e2603';
