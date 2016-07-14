@@ -20,7 +20,7 @@ exports.feature = [
     {
         name: 'Create works',
         tags: ['crossReferenceIncoming', 'crossReferenceTango'],
-        steps: () => {
+        steps: criticalScenario(() => {
             let workData = {
                     creators_and_contributions: [{
                         role: 'CA',
@@ -35,7 +35,7 @@ exports.feature = [
                     steps.work.createWork(workData, 'workId' + i);
                 });
             }
-        }
+        })
     },
     {
         name: 'Add Cross Reference',
