@@ -107,6 +107,7 @@ exports.tangoWorkTitle = (index) => {
 
 exports.expectTangoWorkTitleToContain = (text, index) => {
     let elem = exports.tangoWorkTitle(index);
+    pages.base.scrollIntoView(elem);
     expect(elem.getText()).toContain(text);
 };
 
@@ -132,7 +133,11 @@ exports.items = (() => {
     };
 
     item.expand = (index) => {
-        item.get(index).click();
+        asAlways(
+            item.get(index),
+            'scrollIntoView',
+            'click'
+        );
     };
 
     item.getText = () => {
@@ -175,6 +180,7 @@ exports.items = (() => {
         }
 
         typeahead.selectFirst(text);
+        pages.base.waitForModal();
     };
 
     item.confirmButton = () => {
