@@ -19,6 +19,18 @@ var repl = require('repl'),
 $vs.clear = function() {
     this.length = 0;
 };
+
+function $reload (path) {
+    if (!path) {
+        $files.load();
+        return;
+    }
+
+    delete require.cache[require.resolve(path)];
+
+    return require(path);
+}
+
 steps.login.itLogin();
 
 it('Run REPL', () => {
@@ -57,11 +69,6 @@ it('Run REPL', () => {
                 callback(err, val);
             };
         }
-    });
-
-    replServer.defineCommand('reload', function () {
-        $files.load();
-        this.displayPrompt();
     });
 
     replServer.defineCommand('orphan', () => {
