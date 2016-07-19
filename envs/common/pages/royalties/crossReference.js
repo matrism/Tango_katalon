@@ -28,6 +28,20 @@ exports.searchForIncomingWork = (text, filter) => {
     setTestVariable('Last Incoming Work search term', text);
 };
 
+exports.enterIncomingWorkSearchTerms = (text, filter) => {
+    let typeahead = exports.incomingWorksSearch();
+
+    if (filter) {
+        typeahead.setFilter(filter);
+    }
+
+    typeahead.enterText(text);
+};
+
+exports.expectNoResultsMessage = () => {
+    exports.incomingWorksSearch().expectNoResultsMessage();
+};
+
 exports.tangoWorkSearch = () => {
     return Typeahead(by.model('$parent.tangoWork'));
 };
@@ -63,6 +77,10 @@ exports.expectTangoWorkToBeVisible = () => {
     expect(tangoWork.isDisplayed()).toBeTruthy();
 };
 
+exports.expectNoCrossReference = () => {
+    expect(exports.incomingWorkContainer().getText()).toContain('No cross references found using this criteria');
+};
+
 exports.incomingWorkId = () => {
     let incomingWork = exports.incomingWorkContainer();
 
@@ -82,6 +100,17 @@ exports.expectIncomingWorkIdToContainSearchTerm = () => {
     exports.expectIncomingWorkIdToContain(searchTerm);
 };
 
+exports.tangoWorkTitle = (index) => {
+    index = index || 0;
+    return $$('[data-ui-sref^="workView"]').get(index);
+};
+
+exports.expectTangoWorkTitleToContain = (text, index) => {
+    let elem = exports.tangoWorkTitle(index);
+    pages.base.scrollIntoView(elem);
+    expect(elem.getText()).toContain(text);
+};
+
 exports.addCrossReferenceButton = () => {
     return element(by.buttonText('Add Cross Reference'));
 };
@@ -93,19 +122,169 @@ exports.clickAddCrossReferenceButton = () => {
     pages.base.waitForAjax();
 };
 
-exports.crossReferenceForm = () => {
-    return $('form[data-name="addCrossRefForm"]');
-};
+exports.items = (() => {
+    let item = {};
 
-exports.expectCrossReferenceFormToBeVisible = () => {
-    let form = exports.crossReferenceForm();
+    item.index = 0;
 
-    expect(form.isDisplayed()).toBeTruthy();
-};
+    item.get = (index) => {
+        item.index = index ? index : item.index;
+        return $$('tg-cross-reference-item').get(item.index);
+    };
 
-exports.expectFormLabelsToBe = (labels) => {
-    let form = exports.crossReferenceForm(),
-        formLabels = form.$$('.control-label');
+    item.expand = (index) => {
+        asAlways(
+            item.get(index),
+            'scrollIntoView',
+            'click'
+        );
+    };
 
-    expect(formLabels.getText()).toEqual(labels);
-};
+    item.getText = () => {
+        return item.get().getText();
+    };
+
+    item.validateTitle = (value) => {
+        expect(item.getText()).toContain(value);
+    };
+
+    item.validateCreators = (value) => {
+        expect(item.getText()).toContain(value);
+    };
+
+    item.validateId = (value) => {
+        expect(item.getText()).toContain(value);
+    };
+
+    item.rematchButton = () => {
+        return item.get().$('[data-ng-click="xref._rematch = true;"]');
+    };
+
+    item.rematch = () => {
+        asAlways(
+            item.rematchButton(),
+            'waitUntilVisible',
+            'click'
+        );
+    };
+
+    item.rematchWorkSearch = () => {
+        return Typeahead(by.model('xref.rematchTangoWork'), false, true);
+    };
+
+    item.searchForRematchWork = (text, filter) => {
+        let typeahead = item.rematchWorkSearch();
+
+        if (filter) {
+            typeahead.setFilter(filter);
+        }
+
+        typeahead.selectFirst(text);
+        pages.base.waitForModal();
+    };
+
+    item.confirmButton = () => {
+        return $('[data-ng-click="ok()"]');
+    };
+
+    item.confirm = () => {
+        pages.base.waitForModal();
+        item.confirmButton().click();
+        pages.base.waitForAjax();
+    };
+
+    item.unmatchButton = () => {
+        return item.get().$('[data-ng-click="xref._rematch = false; unmatchCrossReference(xref)"]');
+    };
+
+    item.unmatch = () => {
+        asAlways(
+            item.unmatchButton(),
+            'waitUntilVisible',
+            'click'
+        );
+    };
+
+    return item;
+})();
+
+exports.addForm = (() => {
+    let addForm = {};
+
+    addForm.crossReferenceForm = () => {
+        return $('form[data-name="addCrossRefForm"]');
+    };
+
+    addForm.labels = () => {
+        let form = addForm.crossReferenceForm();
+        return form.$$('.control-label');
+    };
+
+    addForm.expectCrossReferenceFormToBeVisible = () => {
+        let form = addForm.crossReferenceForm();
+        expect(form.isDisplayed()).toBeTruthy();
+    };
+
+    addForm.expectFormLabelsToBe = (labels) => {
+        expect(addForm.labels().getText()).toEqual(labels);
+    };
+
+    addForm.titleInput = () => {
+        return element(by.model('newCrossRefModel.incoming_song_title'));
+    };
+
+    addForm.creatorsInput = () => {
+        return element(by.model('newCrossRefModel.incoming_composer'));
+    };
+
+    addForm.idInput = () => {
+        return element(by.model('newCrossRefModel.source_work_id'));
+    };
+
+    addForm.incomeProviderTypeahead = () => {
+        return Typeahead(by.model('newCrossRefModel.incomeProvider'));
+    };
+
+    addForm.confirmButtom = () => {
+        return $('[data-ng-click="addNewCrossReference(newCrossRefModel)"]');
+    };
+
+    addForm.enterTitle = (value) => {
+        addForm.titleInput().sendKeys(value);
+    };
+
+    addForm.enterCreators = (value) => {
+        addForm.creatorsInput().sendKeys(value);
+    };
+
+    addForm.enterId = (value) => {
+        addForm.idInput().sendKeys(value);
+    };
+
+    addForm.enterIncomeProvider = (value) => {
+        let typeahead = addForm.incomeProviderTypeahead();
+        typeahead.selectFirst(value);
+    };
+
+    addForm.expectConfirmButtomToBeDisabled = () => {
+        expect(addForm.confirmButtom().isEnabled()).toBeFalsy();
+    };
+
+    addForm.confirm = () => {
+        addForm.confirmButtom().click();
+        pages.base.waitForAjax();
+    };
+
+    addForm.successMessage = () => {
+        return element(by.cssContainingText(
+            'p', 'Cross reference has been added to work'
+        ));
+    };
+
+    addForm.validateSuccessMessage = () => {
+        let element = addForm.successMessage();
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    };
+
+    return addForm;
+})();
