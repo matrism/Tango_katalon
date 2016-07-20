@@ -14,9 +14,10 @@ exports.feature = [
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
             steps.royaltiesHeader.clickLink('Create Manual Statement');
-
             steps.createManualStatement.selectDesiredProcessingTerritory("India");
+            steps.createManualStatement.selectDesiredRoyaltyPeriodValueDropDown("July 2015 - December 2015");
             steps.createManualStatement.selectDesiredValueForIncomeProviderDropDown("warner music hong kong");
+
         }
     }
 ];

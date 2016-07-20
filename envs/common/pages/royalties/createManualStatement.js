@@ -9,6 +9,7 @@ if (pages.createManualStatement === undefined) {
         locators: {
             processingTerritoryButton: {css: "div[data-ng-model='processingTerritoryModel'] div.tg-dropdown-button"},
             incomeProviderInputField: {css: "div[name='income_provider'] input"},
+            royaltyPeriodButton: {css: "div[data-royalty-period-model='statement.royalty_period'] div.btn-group.ng-scope"},
             startStatementDistributionYear: {css: "input[data-ng-model='statement.earnings_start.year']"},
             startStatementDistributionMonthDropDown: {css: "select[data-ng-model='statement.earnings_start.month'] option"},
             endStatementDistributionYear: {css: "input[data-ng-model='statement.earnings_end.year']"},
@@ -41,6 +42,28 @@ if (pages.createManualStatement === undefined) {
                 });
         },
 
+        selectTheDesiredRoyaltyPeriod: function (royaltyPeriod) {
+            var desiredOption;
+            pages.createManualStatement.elems.royaltyPeriodButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(royaltyPeriod) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
 
         fillIntoTheIncomeProviderFieldSpecificValue: function(incomeProvider){
             pages.base.scrollIntoView(pages.createManualStatement.elems.incomeProviderInputField);
