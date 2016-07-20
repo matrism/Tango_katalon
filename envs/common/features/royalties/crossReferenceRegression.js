@@ -88,6 +88,7 @@ exports.feature = [
             cri.validateId(randomStringLowerCase(0));
             cri.rematch();
             cri.searchForRematchWork('WORK TAT ' + randomString(1), 'Title');
+            cri.selectFirstRematchWork();
             cri.confirm();
         },
     },
@@ -158,6 +159,7 @@ exports.feature = [
             cri.validateId(randomStringLowerCase(1));
             cri.rematch();
             cri.searchForRematchWork('WORK TAT ' + randomString(1), 'Title');
+            cri.selectFirstRematchWork();
             cri.confirm();
         },
     },

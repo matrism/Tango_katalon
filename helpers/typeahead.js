@@ -67,11 +67,7 @@ function Typeahead (target, dummy, isAppendedToBody) {
 
     typeahead.select = function (text, isExact, index) {
         return typeahead.enterText(text).then(() => {
-            if (!_.isNumber(index)) {
-                typeahead.results(text, isExact).first().click();
-            } else {
-                typeahead.results().get(index).click();
-            }
+            typeahead.clickResult(text, isExact, index);
         });
     };
 
@@ -81,6 +77,14 @@ function Typeahead (target, dummy, isAppendedToBody) {
             browser.sleep(400);
             return pages.base.waitForAjax();
         });
+    };
+
+    typeahead.clickResult = (text, isExact, index) => {
+        if (!_.isNumber(index)) {
+            typeahead.results(text, isExact).first().click();
+        } else {
+            typeahead.results().get(index).click();
+        }
     };
 
     typeahead.selectFirst = function(text) {

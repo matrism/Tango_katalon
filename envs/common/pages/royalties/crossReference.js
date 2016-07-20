@@ -179,7 +179,13 @@ exports.items = (() => {
             typeahead.setFilter(filter);
         }
 
-        typeahead.selectFirst(text);
+        typeahead.enterText(text);
+    };
+
+    item.selectFirstRematchWork = () => {
+        let typeahead = item.rematchWorkSearch();
+
+        typeahead.clickResult();
         pages.base.waitForModal();
     };
 
