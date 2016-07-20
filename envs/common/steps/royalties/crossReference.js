@@ -23,6 +23,7 @@ pageStep([
         'Validate Id',
         'Rematch',
         'Search For Rematch Work',
+        'Select First Rematch Work',
         'Confirm',
         'Unmatch'
     ]],
