@@ -54,7 +54,7 @@ if [ -n "$cycle" ]; then
     cmd_line+=" --cycle $(printf '%q' "$cycle") "
 fi
 
-if [ -n "$use_selenium_server" ]; then
+if [ "$use_selenium_server" != 'false' ]; then
     cmd_line+=" --use-selenium-server "
 fi
 
