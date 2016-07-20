@@ -39,6 +39,7 @@ global.userConfig = userConfig;
 if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
+console.log(cli['use-selenium-server']);
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
