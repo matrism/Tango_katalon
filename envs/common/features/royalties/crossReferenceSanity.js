@@ -41,8 +41,8 @@ exports.feature = [
                 steps.crossReference.searchForTangoWork(terms[idx], val);
                 steps.crossReference.expectTangoWorkToBeVisible();
                 steps.crossReference.clickAddCrossReferenceButton();
-                steps.crossReference.expectCrossReferenceFormToBeVisible();
-                steps.crossReference.expectFormLabelsToBe([
+                steps.crossReference.addForm.expectCrossReferenceFormToBeVisible();
+                steps.crossReference.addForm.expectFormLabelsToBe([
                     'Incoming Work Details:',
                     'Title:',
                     'Creators:',
