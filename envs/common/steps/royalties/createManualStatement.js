@@ -25,7 +25,71 @@ exports.selectDesiredValueForIncomeProviderDropDown = function (incomeProvider) 
 };
 
 exports.fillIntoStatementDistributionPeriodStartDate = function (year, month) {
-    it("Fill into the statement distribution period desired year " + year + " and desired month " + month, function () {
+    it("Fill into the start statement distribution period desired year " + year + " and desired month " + month, function () {
+        pages.createManualStatement.fillIntoTheStatementDistributionPeriodStartYear(year);
+        pages.createManualStatement.selectTheDesiredStatementDistributionPeriodStartMonth(month);
+    });
+};
 
+exports.fillIntoStatementDistributionPeriodEndDate = function (year, month) {
+    it("Fill into the end statement distribution period desired year " + year + " and desired month " + month, function () {
+        pages.createManualStatement.fillIntoTheStatementDistributionPeriodEndYear(year);
+        pages.createManualStatement.selectTheDesiredStatementDistributionPeriodEndMonth(month);
+    });
+};
+
+exports.fillIntoStatementAmountInputField = function (amount) {
+    it("Fill into statement amount input field the desired value " + amount, function () {
+        pages.createManualStatement.fillIntoTheStatementAmountInputField(amount);
+    });
+};
+
+exports.selectCurrencyFromStatementAmountCurrencyDropDown = function (currency) {
+    it("Select desired currency from statement amount currency drop down " + currency, function () {
+        pages.createManualStatement.selectTheCurrencyFromStatementAmountCurrencyDropDown(currency);
+    });
+};
+
+exports.fillIntoCommissionRateInputField = function (value) {
+    it("Fill into the commission rate input field the value " + value, function () {
+        pages.createManualStatement.fillIntoTheCommissionRateInputField(value);
+    });
+};
+
+exports.fillIntoExchangeRateInputField = function (value) {
+    it("Fill into the exchange rate input field the value " + value, function () {
+        pages.createManualStatement.fillIntoTheExchangeRateInputField(value);
+    });
+};
+
+exports.clickOnCreateButtonManualStatement = function () {
+    it("Click on the create button for manual statement ", function () {
+        pages.createManualStatement.clickOnTheCreateButtonManualStatement();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+exports.fillIntoBatchAmountValue = function (amount) {
+    it("Fill into the batch amount value " + amount, function () {
+        pages.createManualStatement.fillIntoTheBatchAmountValue(amount);
+    });
+};
+
+exports.clickOnDefaultSettingsLink = function(){
+    it("Click on the default settings link ", function () {
+       pages.createManualStatement.clickOnTheDefaultSettingsLink();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+exports.selectDesiredIncomeTypeValueFromDropDown = function (incomeType) {
+  it("Select the desired income type value from the drop down ", function(){
+     pages.createManualStatement.selectTheDesiredIncomeTypeValueFromDropDown(incomeType);
+  });
+};
+
+exports.selectDesiredExploitationTerritoryValueFromDropDown = function (territory) {
+    it("Select the desired territory value from the drop down ", function(){
+        pages.createManualStatement.selectTheDesiredExploitationTerritoryValueFromDropDown(territory);
     });
 };
