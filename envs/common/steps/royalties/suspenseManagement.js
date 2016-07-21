@@ -8,5 +8,8 @@ pageStep([
     ['Filters', [
         'Select Processing Territory',
         'Select royalty period'
+    ]],
+    ['Activity Summary', [
+        'Validate'
     ]]
 ]);

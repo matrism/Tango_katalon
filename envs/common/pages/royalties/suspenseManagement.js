@@ -28,3 +28,17 @@ exports.filters = (() => {
 
     return filters;
 })();
+
+exports.activitySummary = (() => {
+    var activitySummary = {};
+
+    activitySummary.get = () => {
+        return $('.activity-summary');
+    };
+
+    activitySummary.validate = (labels) => {
+        expect(activitySummary.get().getText()).toEqual(labels.join('\n'));
+    };
+
+    return activitySummary;
+})();

@@ -21,11 +21,43 @@ exports.feature = [
         tags: [],
         steps: () => {
             let sm = steps.suspenseManagement,
-                smf = sm.filters;
+                smf = sm.filters,
+                smas = sm.activitySummary;
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Suspense Management');
-            smf.selectProcessingTerritory('Poland');
-            smf.selectRoyaltyPeriod('July 2016 - December 2016');
+
+            //smf.validateDefaultProcessingTerritory();
+            //smf.validateDefaultRoyaltyPeriod();
+
+            //sm.validateDefaultTabSelected();
+
+            smas.validate([
+                'Opening Balance',
+                '(April 1, 2016)',
+                '0.0000',
+                'Activity in this Period',
+                '(as of July 21, 2016)',
+                'Unmatched',
+                'Unmatched',
+                '0.0000',
+                'Expected to be added',
+                '0.0000',
+                '0.0000',
+                'Matched',
+                'Matched',
+                '- 0.0000',
+                'Profit',
+                'Profit - User',
+                '- 0.0000',
+                'Expected to be Aged on Final Run Date',
+                '- 0.0000',
+                '- 0.0000',
+                'Expected Closing Balance',
+                '0.0000'
+            ]);
+
+            //smf.selectProcessingTerritory('Poland');
+            //smf.selectRoyaltyPeriod('July 2016 - December 2016');
         }
     }
 ];
