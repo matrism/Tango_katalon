@@ -318,7 +318,7 @@ exports.clickOnNoPerformanceNonTitleBoundIncome = function () {
 
 exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
-        steps.criticalSection.wrap(() => {
+        //steps.criticalSection.wrap(() => {
             steps.createDealGeneral.goToNewDealPage();
             steps.createDealGeneral.selectDealSigningTerritory();
             if(systemConfig.env.name === 'qa') {
@@ -330,7 +330,7 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
             steps.createDealGeneral.waitForContractingPartyDropDown();
             steps.createDealGeneral.selectRandomContractingParty();
         });
-    });
+    //});
 };
 
 exports.itFillDealMandatoryFieldsGeneralTabWithData = function (contractingParty, country) {
