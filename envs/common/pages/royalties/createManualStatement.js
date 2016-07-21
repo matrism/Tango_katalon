@@ -21,8 +21,10 @@ if (pages.createManualStatement === undefined) {
             createManualStatementButton: {css: "button[data-ng-click='onSaveClick()']"},
             batchAmountInputField: {css: "input[data-ng-model='batch.amount']"},
             defaultSettingsButtonLink: {css: "div[data-ng-click='stateHolder.showBatchesDefault = !stateHolder.showBatchesDefault']"},
-            incomeTypeDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.income_type'] div.tg-dropdown-label.overflow"},
-            exploitationTerritoryDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.exploitation_territory'] div.tg-dropdown-button"}
+            incomeTypeDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.income_type'] div.tg-dropdown-button"},
+            exploitationTerritoryDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.exploitation_territory'] div.tg-dropdown-button"},
+            worksSearchInputField: {css: "div[data-ng-model='workEntries.newWork'] input"},
+            receivedAmountInputField:{css:"div.amount.pull-left.table-cell input"}
         },
 
         selectTheDesiredProcessingTerritory: function (country) {
@@ -189,9 +191,9 @@ if (pages.createManualStatement === undefined) {
 
         selectTheDesiredIncomeTypeValueFromDropDown: function (incomeType) {
             pages.createManualStatement.elems.incomeTypeDropDownButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='activeBatch.batch_income_defaults.income_type'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
             var desiredOption;
-            browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+            browser.driver.findElements(By.css("div[data-ng-model='activeBatch.batch_income_defaults.income_type'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -205,6 +207,7 @@ if (pages.createManualStatement === undefined) {
                 })
                 .then(function clickOption() {
                     if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
                         desiredOption.click();
                     }
                 });
@@ -212,13 +215,35 @@ if (pages.createManualStatement === undefined) {
 
         selectTheDesiredExploitationTerritoryValueFromDropDown: function (territory) {
             pages.createManualStatement.elems.exploitationTerritoryDropDownButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='activeBatch.batch_income_defaults.exploitation_territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
             var desiredOption;
-            browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+            browser.driver.findElements(By.css("div[data-ng-model='activeBatch.batch_income_defaults.exploitation_territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
                                 if (text.indexOf(territory) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheDesiredWorkTypeToSearchFromDropDown: function (workType) {
+            var desiredOption;
+            browser.driver.findElements(By.css("div[data-ng-model='workEntries.newWork'] select option"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(workType) != -1) {
                                     desiredOption = option;
                                     return true;
                                 }
@@ -233,5 +258,27 @@ if (pages.createManualStatement === undefined) {
                 });
         },
 
+        fillIntoTheWorksInputFieldDesiredWork: function (workIdentifier) {
+            pages.createManualStatement.elems.worksSearchInputField.sendKeys(workIdentifier);
+        },
+
+        selectTheDesiredWorkForManualStatement : function(){
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container"))
+                .then(function (options) {
+                    var element = options[0];
+                    element.click();
+                })
+        },
+
+        fillIntoTheAmountReceivedValue: function (amount) {
+            pages.base.scrollIntoView(pages.createManualStatement.elems.receivedAmountInputField);
+            pages.createManualStatement.elems.receivedAmountInputField.sendKeys(amount);
+        },
+
+        clickOnTheDoneButtonManualStatement: function () {
+            pages.base.scrollIntoView(pages.createManualStatement.elems.createManualStatementButton);
+            pages.createManualStatement.elems.createManualStatementButton.click();
+        }
     })
 }

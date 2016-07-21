@@ -24,8 +24,16 @@ exports.feature = [
             steps.createManualStatement.fillIntoExchangeRateInputField("1");
             steps.createManualStatement.clickOnCreateButtonManualStatement();
 
-            steps.createManualStatement.fillIntoBatchAmountValue("12");
+            steps.createManualStatement.fillIntoBatchAmountValue("100");
             steps.createManualStatement.clickOnDefaultSettingsLink();
+            steps.createManualStatement.selectDesiredIncomeTypeValueFromDropDown("Mechanical");
+            steps.createManualStatement.selectDesiredExploitationTerritoryValueFromDropDown("Brazil");
+
+            steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("WorkId");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork(" WW 015033011 00 ");
+            //steps.createManualStatement.selectDesiredWorkForManualStatement();
+            //steps.createManualStatement.fillIntoAmountReceivedValue("100");
+            //steps.createManualStatement.clickOnDoneButtonManualStatement();
         }
     }
 ];

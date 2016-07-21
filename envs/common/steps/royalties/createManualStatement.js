@@ -75,21 +75,53 @@ exports.fillIntoBatchAmountValue = function (amount) {
     });
 };
 
-exports.clickOnDefaultSettingsLink = function(){
+exports.clickOnDefaultSettingsLink = function () {
     it("Click on the default settings link ", function () {
-       pages.createManualStatement.clickOnTheDefaultSettingsLink();
+        pages.createManualStatement.clickOnTheDefaultSettingsLink();
         pages.createManualStatement.waitForAjax();
     });
 };
 
 exports.selectDesiredIncomeTypeValueFromDropDown = function (incomeType) {
-  it("Select the desired income type value from the drop down ", function(){
-     pages.createManualStatement.selectTheDesiredIncomeTypeValueFromDropDown(incomeType);
-  });
+    it("Select the desired income type value from the drop down ", function () {
+        pages.createManualStatement.selectTheDesiredIncomeTypeValueFromDropDown(incomeType);
+    });
 };
 
 exports.selectDesiredExploitationTerritoryValueFromDropDown = function (territory) {
-    it("Select the desired territory value from the drop down ", function(){
+    it("Select the desired territory value from the drop down ", function () {
         pages.createManualStatement.selectTheDesiredExploitationTerritoryValueFromDropDown(territory);
+    });
+};
+
+exports.selectDesiredWorkTypeToSearchFromDropDown = function (workType) {
+    it("Select the desired work type to search from drop down " + workType, function () {
+        pages.createManualStatement.selectTheDesiredWorkTypeToSearchFromDropDown(workType);
+    });
+};
+
+exports.fillIntoWorksInputFieldDesiredWork = function (workIdentifier) {
+    it("Fill into the works input field desired work value ", function () {
+        pages.createManualStatement.fillIntoTheWorksInputFieldDesiredWork(workIdentifier);
+    });
+};
+
+exports.selectDesiredWorkForManualStatement = function () {
+    it("Select the desired work for manual statement ", function () {
+        pages.createManualStatement.selectTheDesiredWorkForManualStatement();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+exports.fillIntoAmountReceivedValue = function (amount) {
+    it("Fill into the amount received value " + amount, function () {
+        pages.createManualStatement.fillIntoTheAmountReceivedValue(amount);
+    });
+};
+
+exports.clickOnDoneButtonManualStatement = function () {
+    it("Click on the done button for manual statement ", function () {
+        pages.createManualStatement.clickOnTheDoneButtonManualStatement();
+        pages.createManualStatement.waitForAjax();
     });
 };
