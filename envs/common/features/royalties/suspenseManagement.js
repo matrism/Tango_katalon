@@ -17,46 +17,35 @@ exports.beforeFeature = () => {
 
 exports.feature = [
     {
-        name: 'Cross Reference - Search',
+        name: 'Suspense Management - Activity Summary',
         tags: [],
         steps: () => {
             let sm = steps.suspenseManagement,
                 smf = sm.filters,
-                smas = sm.activitySummary;
+                smas = sm.activitySummary,
+                numRegex = '^-? ?[,0-9]*\\.\\d*$',
+                activitySummaryLabels = [
+                    'Opening Balance',
+                    '(April 1, 2016)',
+                    'Activity in this Period',
+                    '(as of July 22, 2016)',
+                    'Unmatched',
+                    'Expected to be added',
+                    'Matched',
+                    'Profit - User',
+                    'Expected to be Aged on Final Run Date',
+                    'Expected Closing Balance'
+                ];
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Suspense Management');
 
-            //smf.validateDefaultProcessingTerritory();
-            //smf.validateDefaultRoyaltyPeriod();
-
-            //sm.validateDefaultTabSelected();
-
-            smas.validate([
-                'Opening Balance',
-                '(April 1, 2016)',
-                '0.0000',
-                'Activity in this Period',
-                '(as of July 21, 2016)',
-                'Unmatched',
-                'Unmatched',
-                '0.0000',
-                'Expected to be added',
-                '0.0000',
-                '0.0000',
-                'Matched',
-                'Matched',
-                '- 0.0000',
-                'Profit',
-                'Profit - User',
-                '- 0.0000',
-                'Expected to be Aged on Final Run Date',
-                '- 0.0000',
-                '- 0.0000',
-                'Expected Closing Balance',
-                '0.0000'
-            ]);
-
-            //smf.selectProcessingTerritory('Poland');
+            smf.validateProcessingTerritory('Argentina');
+            //smf.validateRoyaltyPeriod();
+            sm.validateSelectedTab('Activity Summary');
+            smas.validateLabels(activitySummaryLabels);
+            smas.validateValues(numRegex);
+            smf.selectProcessingTerritory('United States');
+            smas.expectValuesToBeUpdated();
             //smf.selectRoyaltyPeriod('July 2016 - December 2016');
         }
     }
