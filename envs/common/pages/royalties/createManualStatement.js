@@ -268,6 +268,7 @@ if (pages.createManualStatement === undefined) {
                 .then(function (options) {
                     var element = options[0];
                     element.click();
+                    browser.sleep(7000);
                 })
         },
 

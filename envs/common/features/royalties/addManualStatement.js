@@ -30,7 +30,7 @@ exports.feature = [
             steps.createManualStatement.selectDesiredExploitationTerritoryValueFromDropDown("Brazil");
 
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("WorkId");
-            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork(" WW 015033011 00 ");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 015081725 00");
             //steps.createManualStatement.selectDesiredWorkForManualStatement();
             //steps.createManualStatement.fillIntoAmountReceivedValue("100");
             //steps.createManualStatement.clickOnDoneButtonManualStatement();
