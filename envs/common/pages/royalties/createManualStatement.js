@@ -31,7 +31,6 @@ if (pages.createManualStatement === undefined) {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.processingTerritoryButton));
             pages.createManualStatement.elems.processingTerritoryButton.click();
-            browser.driver.findElement(by.css("div.tg-dropdown-menu.ng-scope.tg-dropdown-menu-has-search input")).sendKeys(country);
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
             browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
@@ -268,7 +267,7 @@ if (pages.createManualStatement === undefined) {
                 .then(function (options) {
                     var element = options[0];
                     element.click();
-                    browser.sleep(7000);
+                    browser.sleep(10000);
                 })
         },
 
