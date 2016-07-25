@@ -6,6 +6,7 @@ steps.suspenseManagement = exports;
 
 pageStep([
     'Validate Selected Tab',
+    'Click Tab'
     ['Filters', [
         'Validate Processing Territory',
         'Select Processing Territory',

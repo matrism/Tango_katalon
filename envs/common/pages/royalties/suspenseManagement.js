@@ -10,6 +10,10 @@ exports.validateSelectedTab = (value) => {
     expect(exports.selectedTab().getText()).toBe(value);
 };
 
+exports.clickTab = (value) => {
+    
+};
+
 exports.filters = (() => {
     var filters = {};
 

@@ -1,14 +1,11 @@
 'use strict';
 
-let _ = require('lodash');
-
 exports.id = '1845233b-e44d-44f7-979a-df74593f9061';
 
 exports.commonFeatureTags = [
     'royaltyProcessing',
     'suspenseManagement',
     'suspenseManagementSanity',
-    'suspenseManagementActivitySummary',
     'sanity'
 ];
 
@@ -19,7 +16,7 @@ exports.beforeFeature = () => {
 exports.feature = [
     {
         name: 'Suspense Management - Activity Summary',
-        tags: [],
+        tags: ['suspenseManagementActivitySummary'],
         steps: () => {
             let sm = steps.suspenseManagement,
                 smf = sm.filters,
@@ -68,7 +65,26 @@ exports.feature = [
             smas.expectValuesToBeUpdated();
             smas.validateLabels(activitySummaryLabelsClosed);
             smas.validateValues(numRegex);
-            steps.base.sleep(2000);
+        }
+    },
+    {
+        name: 'Suspense Management - Suspense Tab',
+        tags: ['suspenseManagementSuspenseTab'],
+        steps: () => {
+            let sm = steps.suspenseManagement,
+                smf = sm.filters,
+                sms = sm.suspense;
+
+            steps.mainHeader.goToSubLink('Royalty Processing', 'Suspense Management');
+
+            smf.validateProcessingTerritory('Argentina');
+            sm.validateSelectedTab('Activity Summary');
+            sm.clickTab('Suspense');
+            sm.validateSelectedTab('Suspense');
+            smf.selectProcessingTerritory('Brazil');
+            smf.selectRoyaltyPeriod('Closed Periods');
+            smf.selectClosedPeriod(2);
+            smf.clickGo();
         }
     }
 ];
