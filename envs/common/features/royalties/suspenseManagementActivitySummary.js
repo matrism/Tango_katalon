@@ -8,6 +8,7 @@ exports.commonFeatureTags = [
     'royaltyProcessing',
     'suspenseManagement',
     'suspenseManagementSanity',
+    'suspenseManagementActivitySummary',
     'sanity'
 ];
 
