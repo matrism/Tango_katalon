@@ -113,6 +113,12 @@ exports.selectDesiredWorkForManualStatement = function () {
     });
 };
 
+exports.selectAndAddWorkForManualStatement = function(){
+    it("Select and add the work for manual statement if it doesn't exist", function(){
+       pages.createManualStatement.selectAndAddTheWorkForManualStatement();
+    });
+};
+
 exports.fillIntoAmountReceivedValue = function (amount) {
     it("Fill into the amount received value " + amount, function () {
         pages.createManualStatement.fillIntoTheAmountReceivedValue(amount);

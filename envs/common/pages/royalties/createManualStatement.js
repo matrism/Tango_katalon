@@ -18,13 +18,13 @@ if (pages.createManualStatement === undefined) {
             statementAmountCurrencyButton: {css: "div.clearfix.statement.ng-scope div:nth-child(6) a.btn.dropdown-toggle.pull-left"},
             commissionRateInputField: {css: "input[data-ng-model='statement.commission_percentage']"},
             exchangeRateInputField: {css: "input[name='exchange_rate']"},
-            createManualStatementButton: {css: "button[data-ng-click='onSaveClick()']"},
+            createTheManualStatementButton: {css: "button[data-ng-click='onSaveClick()']"},
             batchAmountInputField: {css: "input[data-ng-model='batch.amount']"},
             defaultSettingsButtonLink: {css: "div[data-ng-click='stateHolder.showBatchesDefault = !stateHolder.showBatchesDefault']"},
             incomeTypeDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.income_type'] div.tg-dropdown-button"},
             exploitationTerritoryDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.exploitation_territory'] div.tg-dropdown-button"},
             worksSearchInputField: {css: "div[data-ng-model='workEntries.newWork'] input"},
-            receivedAmountInputField:{css:"div.amount.pull-left.table-cell input"}
+            receivedAmountInputField: {css: "div.amount.pull-left.table-cell input"}
         },
 
         selectTheDesiredProcessingTerritory: function (country) {
@@ -175,8 +175,8 @@ if (pages.createManualStatement === undefined) {
         },
 
         clickOnTheCreateButtonManualStatement: function () {
-            pages.base.scrollIntoView(pages.createManualStatement.elems.createManualStatementButton);
-            pages.createManualStatement.elems.createManualStatementButton.click();
+            pages.base.scrollIntoView(pages.createManualStatement.elems.createTheManualStatementButton);
+            pages.createManualStatement.elems.createTheManualStatementButton.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.batchAmountInputField));
         },
 
@@ -261,24 +261,58 @@ if (pages.createManualStatement === undefined) {
             pages.createManualStatement.elems.worksSearchInputField.sendKeys(workIdentifier);
         },
 
-        selectTheDesiredWorkForManualStatement : function(){
+        selectTheDesiredWorkForManualStatement: function () {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container"))
                 .then(function (options) {
                     var element = options[0];
                     element.click();
-                    browser.sleep(10000);
                 })
         },
+
+        selectAndAddTheWorkForManualStatement: function () {
+            var desiredOption;
+            var createWorkText ="Create Shell Work to Defer Payment";
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(createWorkText) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                                else {
+                                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container"))
+                                        .then(function (options) {
+                                            var element = options[0];
+                                            element.click();
+                                        })
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                        browser.driver.findElement(By.css("textarea[data-ng-model='workEntry.work.creatorsName']")).sendKeys("test");
+                    }
+                });
+        },
+
 
         fillIntoTheAmountReceivedValue: function (amount) {
             pages.base.scrollIntoView(pages.createManualStatement.elems.receivedAmountInputField);
             pages.createManualStatement.elems.receivedAmountInputField.sendKeys(amount);
+            browser.sleep(2000);
         },
 
         clickOnTheDoneButtonManualStatement: function () {
-            pages.base.scrollIntoView(pages.createManualStatement.elems.createManualStatementButton);
-            pages.createManualStatement.elems.createManualStatementButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.createTheManualStatementButton));
+            pages.base.scrollIntoView(pages.createManualStatement.elems.createTheManualStatementButton);
+            pages.createManualStatement.elems.createTheManualStatementButton.click();
+            browser.sleep(10000);
         }
     })
 }
