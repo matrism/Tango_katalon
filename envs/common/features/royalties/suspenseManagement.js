@@ -26,16 +26,29 @@ exports.feature = [
                 numRegex = '^-? ?[,0-9]*\\.\\d*$',
                 activitySummaryLabels = [
                     'Opening Balance',
-                    '(April 1, 2016)',
+                    '(.*)',
                     'Activity in this Period',
-                    '(as of July 22, 2016)',
+                    '(as of .*)',
                     'Unmatched',
                     'Expected to be added',
                     'Matched',
                     'Profit - User',
                     'Expected to be Aged on Final Run Date',
                     'Expected Closing Balance'
+                ],
+                activitySummaryLabelsClosed = [
+                    'Opening Balance',
+                    '(.*)',
+                    'Activity in this Period',
+                    '(Processed on .*)',
+                    'Unmatched',
+                    'Added in this period',
+                    'Matched',
+                    'Profit - User',
+                    'Aged on Run Date',
+                    'Closing Balance'
                 ];
+
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Suspense Management');
 
@@ -45,8 +58,16 @@ exports.feature = [
             smas.validateLabels(activitySummaryLabels);
             smas.validateValues(numRegex);
             smf.selectProcessingTerritory('United States');
+            //smas.validateLabels(activitySummaryLabels);
             smas.expectValuesToBeUpdated();
-            //smf.selectRoyaltyPeriod('July 2016 - December 2016');
+            smas.validateValues(numRegex);
+            smf.selectRoyaltyPeriod('Closed Periods');
+            smf.selectClosedPeriod(2);
+            smf.clickGo();
+            smas.expectValuesToBeUpdated();
+            smas.validateLabels(activitySummaryLabelsClosed);
+            smas.validateValues(numRegex);
+            steps.base.sleep(2000);
         }
     }
 ];

@@ -9,7 +9,9 @@ pageStep([
     ['Filters', [
         'Validate Processing Territory',
         'Select Processing Territory',
-        'Select royalty period'
+        'Select Royalty Period',
+        'Select Closed Period',
+        'Click Go'
     ]],
     ['Activity Summary', [
         'Validate Labels',

@@ -21,6 +21,16 @@ exports.filters = (() => {
         let dropdown = filters.royaltyPeriodDropdown();
 
         dropdown.selectValue(name);
+        pages.base.waitForAjax();
+        pages.base.waitForModal();
+    };
+
+    filters.selectClosedPeriod = (index) => {
+        tgRoyaltyPeriod.selectClosedPeriod(index);
+    };
+
+    filters.clickGo = () => {
+        tgRoyaltyPeriod.clickGo();
     };
 
     filters.processingTerritoryDropdown = () => {
@@ -70,6 +80,7 @@ exports.activitySummary = (() => {
 
     activitySummary.validateValues = (numRegex) => {
         activitySummary.values().then((text) => {
+            expect(text.length).toBe(9);
             activitySummary.lastValues = text;
             text.forEach((value, index) => {
                 expect(value).toMatch(numRegex);
