@@ -113,9 +113,9 @@ exports.selectDesiredWorkForManualStatement = function () {
     });
 };
 
-exports.selectAndAddWorkForManualStatement = function(){
-    it("Select and add the work for manual statement if it doesn't exist", function(){
-       pages.createManualStatement.selectAndAddTheWorkForManualStatement();
+exports.selectAndAddWorkForManualStatement = function () {
+    it("Select and add the work for manual statement if it doesn't exist", function () {
+        pages.createManualStatement.selectAndAddTheWorkForManualStatement();
     });
 };
 
@@ -129,5 +129,62 @@ exports.clickOnDoneButtonManualStatement = function () {
     it("Click on the done button for manual statement ", function () {
         pages.createManualStatement.clickOnTheDoneButtonManualStatement();
         pages.createManualStatement.waitForAjax();
+    });
+};
+
+exports.checkProcessingTerritoryText = function () {
+    it("Check the processing territory text present ", function () {
+
+    });
+};
+
+exports.returnManualStatementIdNumber = function () {
+    it("Return manual statement id number ", function () {
+        pages.createManualStatement.elems.manualStatementIdNumber.getText().then(function (promise) {
+            console.log("Id number for manual statemtn is " + promise);
+        });
+    });
+};
+
+exports.selectDesiredFilterRoyaltyPeriodValueDropDown = function (royaltyPeriod) {
+    it("Select the desired royalty period value from the drop down ", function () {
+        pages.createManualStatement.selectTheDesiredFilterRoyaltyPeriod(royaltyPeriod);
+    });
+};
+
+exports.clickOnTheManualStatementNumberIFromList = function (i) {
+    it("Click on the manual statement number  " + i + " from the list ", function () {
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div[data-ng-class='getStatementStatusClass(statement.status)']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(1) strong"))));
+    });
+};
+
+exports.checkDateCreatedTextForStatementNumberIFromList= function(i){
+  it("Check the date created text for statement number " + i  + " from the list", function(){
+     browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(1) strong")).getText()
+         .then(function (promise) {
+          console.log("The date created text for statement is  : " + promise);
+          expect(promise).toEqual("Date Created:");
+      });
+  });
+};
+
+exports.checkDateCreatedValueForStatementNumberIFromList= function(i, value){
+    it("Check the date created value for statement number " + i  + " from the list", function(){
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(1) div")).getText()
+            .then(function (promise) {
+            console.log("The date created value for statement is  : " + promise);
+            expect(promise).toEqual(value);
+        });
+    });
+};
+
+exports.checkStatementDistributionPeriodTextForStatementNumberIFromList= function(i){
+    it("Check the date created text for statement number " + i  + " from the list", function(){
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(2) strong")).getText()
+            .then(function (promise) {
+                console.log("The statement distribution period text for statement is  : " + promise);
+                expect(promise).toEqual("Statement Distribution Period:");
+            });
     });
 };

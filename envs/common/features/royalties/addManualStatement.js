@@ -9,7 +9,7 @@ exports.beforeFeature = function () {
 exports.feature = [
     {
         name: 'Manual Statement Part 1',
-        tags: ['addManualStatement'],
+        tags: ['addManualStatement1'],
         steps: function () {
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
             steps.royaltiesHeader.clickLink('Create Manual Statement');
@@ -40,6 +40,23 @@ exports.feature = [
         name: 'Manual Statement Part 2',
         tags: ['addManualStatement2'],
         steps: function () {
+            var today = new Date();
+            if(today.getMonth()<=8){
+                if(today.getDate()<=9){
+                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + 0 + today.getDate();
+                }
+                else{
+                    var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + today.getDate();
+                }
+            }
+            else{
+                if(today.getDay()<=9){
+                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + 0 + today.getDate();
+                }
+                else{
+                    var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
+                }
+            }
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
             steps.royaltiesHeader.clickLink('Create Manual Statement');
             steps.createManualStatement.selectDesiredProcessingTerritory("India");
@@ -62,6 +79,15 @@ exports.feature = [
             steps.createManualStatement.selectDesiredWorkForManualStatement();
             steps.createManualStatement.fillIntoAmountReceivedValue("100");
             steps.createManualStatement.clickOnDoneButtonManualStatement();
+
+            steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
+            steps.createManualStatement.selectDesiredProcessingTerritory("India");
+            steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - December 2015");
+            steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
+
+            steps.createManualStatement.checkDateCreatedTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkDateCreatedValueForStatementNumberIFromList(1, currentDate);
+            steps.createManualStatement.checkStatementDistributionPeriodTextForStatementNumberIFromList(1);
 
         }
     }

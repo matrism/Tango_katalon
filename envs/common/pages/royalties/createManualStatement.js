@@ -10,6 +10,7 @@ if (pages.createManualStatement === undefined) {
             processingTerritoryButton: {css: "div[data-ng-model='processingTerritoryModel'] div.tg-dropdown-button"},
             incomeProviderInputField: {css: "div[name='income_provider'] input"},
             royaltyPeriodButton: {css: "div[data-royalty-period-model='statement.royalty_period'] div.btn-group.ng-scope"},
+            royaltyFilterPeriodButton: {css: "div[data-royalty-period-model='filters.royalty_period'] div.btn-group.ng-scope"},
             startStatementDistributionYear: {css: "input[data-ng-model='statement.earnings_start.year']"},
             startStatementDistributionMonthDropDown: {css: "select[data-ng-model='statement.earnings_start.month'] option"},
             endStatementDistributionYear: {css: "input[data-ng-model='statement.earnings_end.year']"},
@@ -24,7 +25,8 @@ if (pages.createManualStatement === undefined) {
             incomeTypeDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.income_type'] div.tg-dropdown-button"},
             exploitationTerritoryDropDownButton: {css: "div[data-ng-model='activeBatch.batch_income_defaults.exploitation_territory'] div.tg-dropdown-button"},
             worksSearchInputField: {css: "div[data-ng-model='workEntries.newWork'] input"},
-            receivedAmountInputField: {css: "div.amount.pull-left.table-cell input"}
+            receivedAmountInputField: {css: "div.amount.pull-left.table-cell input"},
+            manualStatementIdNumber: {css: "div.RECORD-HEADER h1"},
         },
 
         selectTheDesiredProcessingTerritory: function (country) {
@@ -272,7 +274,7 @@ if (pages.createManualStatement === undefined) {
 
         selectAndAddTheWorkForManualStatement: function () {
             var desiredOption;
-            var createWorkText ="Create Shell Work to Defer Payment";
+            var createWorkText = "Create Shell Work to Defer Payment";
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope"))));
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer"))
                 .then(function findMatchingOption(options) {
@@ -312,7 +314,29 @@ if (pages.createManualStatement === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.createTheManualStatementButton));
             pages.base.scrollIntoView(pages.createManualStatement.elems.createTheManualStatementButton);
             pages.createManualStatement.elems.createTheManualStatementButton.click();
-            browser.sleep(10000);
+        },
+
+        selectTheDesiredFilterRoyaltyPeriod: function (royaltyPeriod) {
+            var desiredOption;
+            pages.createManualStatement.elems.royaltyFilterPeriodButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(royaltyPeriod) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         }
     })
 }
