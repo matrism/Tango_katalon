@@ -41,19 +41,19 @@ exports.feature = [
         tags: ['addManualStatement2'],
         steps: function () {
             var today = new Date();
-            if(today.getMonth()<=8){
-                if(today.getDate()<=9){
+            if (today.getMonth() <= 8) {
+                if (today.getDate() <= 9) {
                     var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + 0 + today.getDate();
                 }
-                else{
+                else {
                     var currentDate = today.getFullYear() + "-" + 0 + (today.getMonth() + 1).toString() + "-" + today.getDate();
                 }
             }
-            else{
-                if(today.getDay()<=9){
+            else {
+                if (today.getDay() <= 9) {
                     var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + 0 + today.getDate();
                 }
-                else{
+                else {
                     var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
                 }
             }
@@ -88,6 +88,9 @@ exports.feature = [
             steps.createManualStatement.checkDateCreatedTextForStatementNumberIFromList(1);
             steps.createManualStatement.checkDateCreatedValueForStatementNumberIFromList(1, currentDate);
             steps.createManualStatement.checkStatementDistributionPeriodTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkStatementDistributionPeriodValueForStatementNumberIFromList(1, "2015-04 to 2015-10");
+            steps.createManualStatement.checkAccountReferenceTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkAccountReferenceValueForStatementNumberIFromList(1);
 
         }
     }

@@ -180,11 +180,41 @@ exports.checkDateCreatedValueForStatementNumberIFromList= function(i, value){
 };
 
 exports.checkStatementDistributionPeriodTextForStatementNumberIFromList= function(i){
-    it("Check the date created text for statement number " + i  + " from the list", function(){
+    it("Check the statement distribution period text for statement number " + i  + " from the list", function(){
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(2) strong")).getText()
             .then(function (promise) {
                 console.log("The statement distribution period text for statement is  : " + promise);
                 expect(promise).toEqual("Statement Distribution Period:");
+            });
+    });
+};
+
+exports.checkStatementDistributionPeriodValueForStatementNumberIFromList= function(i, value){
+    it("Check the statement distribution period value for statement number " + i  + " from the list", function(){
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(2) div")).getText()
+            .then(function (promise) {
+                console.log("The statement distribution period value for statement is  : " + promise);
+                expect(promise).toEqual(value);
+            });
+    });
+};
+
+exports.checkAccountReferenceTextForStatementNumberIFromList= function(i){
+    it("Check the account reference text for statement number " + i  + " from the list", function(){
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group:nth-child(3) strong")).getText()
+            .then(function (promise) {
+                console.log("The account reference text for statement is  : " + promise);
+                expect(promise).toEqual("Accounts Reference:");
+            });
+    });
+};
+
+exports.checkAccountReferenceValueForStatementNumberIFromList= function(i){
+    it("Check the account reference value for statement number " + i  + " from the list", function(){
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group:nth-child(3) span")).getText()
+            .then(function (promise) {
+                console.log("The account reference value for statement is  : " + promise);
+                expect(promise).toEqual("N/A");
             });
     });
 };
