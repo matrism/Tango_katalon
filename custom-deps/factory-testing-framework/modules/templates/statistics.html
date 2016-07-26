@@ -1,0 +1,39 @@
+<table class="statistics">
+    <tr>
+        <td>Statistics</td>
+        <td>Total</td> 
+        <td>Passed</td> 
+        <td>Failed</td> 
+        <% if (!statistics.using_grunt) { %>
+        <td>Skipped</td> 
+        <% } %>
+    </tr>
+    <tr>
+        <td>Files</td>
+        <td><%= statistics.files_total == 0 ? "-" : statistics.files_total %></td>
+        <td><%= statistics.files_passed == 0 ? "-" : statistics.files_passed %></td>
+        <td><%= statistics.files_failed == 0 ? "-" : statistics.files_failed %></td>
+        <% if (!statistics.using_grunt) { %>
+        <td><%= statistics.files_skipped == 0 ? "-" : statistics.files_skipped %></td>
+        <% } %>
+    </tr>
+    <tr>
+        <td>Features</td>
+        <td><%= statistics.features_total == 0 ? "-" : statistics.features_total %></td>
+        <td><%= statistics.features_passed == 0 ? "-" : statistics.features_passed %></td>
+        <td><%= statistics.features_failed == 0 ? "-" : statistics.features_failed %></td>
+        <% if (!statistics.using_grunt) { %>
+        <td><%= statistics.features_skipped == 0 ? "-" : statistics.features_skipped %></td>
+        <% } %>
+    </tr>
+    <tr>
+        <td>Steps</td>
+        <td><%= statistics.steps_total == 0 ? "-" : statistics.steps_total %></td>
+        <td><%= statistics.steps_passed == 0 ? "-" : statistics.steps_passed %></td>
+        <td><%= statistics.steps_failed == 0 ? "-" : statistics.steps_failed %></td>
+    </tr>
+    <tr>
+        <td>Time, s</td>
+        <td><%= totalTime %></td>
+    </tr>
+</table>

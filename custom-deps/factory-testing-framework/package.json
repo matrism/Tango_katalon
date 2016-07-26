@@ -1,0 +1,25 @@
+{
+    "name": "factory-testing-framework",
+    "version": "0.0.3",
+    "description": "JS testing framework",
+    "main": "testingFramework",
+    "keywords": [
+        "testing",
+        "e2e",
+        "protractor",
+        "angular"
+    ],
+    "dependencies": { 
+        "underscore"                  : "^1.8.3",
+        "qs"                          : "^5.2.0",
+        "mkdirp"                      : "^0.5.1",
+        "string.prototype.endswith"   : "^0.2.0",
+        "string.prototype.startswith" : "^0.2.0"
+    },
+    "optionalDependencies": {
+        "http-sync-win" : "latest",
+        "http-sync"     : "latest"
+    },
+    "author": "WMG",
+    "license": "ISC"
+}
