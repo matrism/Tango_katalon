@@ -1,0 +1,5 @@
+<select multiple="multiple" size="4" onChange="filterTags(this)" style="width: 180px" id="tags_filter">
+    <% _.each(tags, function(tag) { %>
+    <option value="<%= tag %>"><%= tag %></option>
+    <% }); %>
+</select>

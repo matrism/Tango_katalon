@@ -1,0 +1,27 @@
+{
+    "name": "protractor_tests",
+    "version": "0.0.1",
+    "authors": [
+        "WMG"
+    ],
+    "description": "desc",
+    "main": "main.js",
+    "moduleType": [
+        "node"
+    ],
+    "keywords": [
+        "1"
+    ],
+    "license": "MIT",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "bower_components",
+        "node_modules",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "factory-testing-framework": "git@github.com:wmgdsp/factory-testing-framework#master"
+    }
+}

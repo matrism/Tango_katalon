@@ -1,0 +1,28 @@
+<tr
+    <% if (classnames.length > 0) { %>
+    class="<%= classnames.join(" ") %>" 
+    <% } %> 
+>
+    <td class="noBottomTopBorder">
+        <span class="plus_minus" id="span_feature_<%= feature_id %>" onclick="toggle('feature_<%= feature_id %>');">
+            +
+        </span>
+    </td>
+    <td colspan="<%= colspan %>" style="color:<%= bgColor %>;">
+        <b>Feature: <%= feature_name[0] %></b>
+    </td>
+    <% if (show_tags) { %>
+    <td colspan="4" class="message">
+        Tags: <%= feature_name[1] %>
+    </td>
+    <% } %>
+    <td colspan="5" class="message"></td>
+    <td colspan="2"><%= time %></td>
+    <td colspan="2" style="color:#fff;background-color: <%= bgColor %>">
+        <% if (feature.skipped) { %>
+        Skipped
+        <% } else { %>
+        <%= feature.passed %>
+        <% } %>
+    </td>
+</tr>

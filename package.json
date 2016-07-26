@@ -18,7 +18,7 @@
     "brace-expansion": "^1.1.2",
     "change-case": "^2.3.0",
     "config-file": "^0.3.2",
-    "factory-testing-framework": "git+ssh://git@github.com:wmgdsp/factory-testing-framework#tango",
+    "factory-testing-framework": "file:custom-deps/factory-testing-framework",
     "fs-extra": "^0.24.0",
     "glob": "^5.0.14",
     "grunt-parallel": "^0.3.1",
