@@ -92,6 +92,18 @@ exports.feature = [
             steps.createManualStatement.checkAccountReferenceTextForStatementNumberIFromList(1);
             steps.createManualStatement.checkAccountReferenceValueForStatementNumberIFromList(1);
 
+            steps.createManualStatement.checkStatementAmountTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkStatementAmountValueForStatementNumberIFromList(1, "100.0000EUR");
+            steps.createManualStatement.checkExchangeRateTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkExchangeRateValueForStatementNumberIFromList(1, "1 EUR to 1 INR");
+            steps.createManualStatement.checkConvertedAmountTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkConvertedAmountValueForStatementNumberIFromList(1, "100.0000  INR");
+            steps.createManualStatement.checkCommissionTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkCommissionValueForStatementNumberIFromList(1, "- 0.0000  INR");
+            steps.createManualStatement.checkWriteOffAmountTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkWriteOffAmountValueForStatementNumberIFromList(1, "- 0.0000  INR");
+            steps.createManualStatement.checkAmountConvertedNetTextForStatementNumberIFromList(1);
+            steps.createManualStatement.checkAmountConvertedNetValueForStatementNumberIFromList(1, "= 100.0000  INR");
         }
     }
 ];
