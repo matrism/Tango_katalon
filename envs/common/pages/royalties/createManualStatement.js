@@ -337,6 +337,16 @@ if (pages.createManualStatement === undefined) {
                         desiredOption.click();
                     }
                 });
+        },
+
+        editTheExpandedManualStatementNumberIFromList: function (i) {
+            browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.accordion-inner")).click();
+            browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") button[data-ng-click='toggleEditState(statement, $index, statementForm)']")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") textarea[data-ng-model='statement.account_reference']"))));
+        },
+
+        clickOnTheBatch1LinkManualStatementEditMode: function(){
+
         }
     })
 }

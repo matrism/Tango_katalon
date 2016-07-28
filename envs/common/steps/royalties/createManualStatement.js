@@ -160,28 +160,28 @@ exports.clickOnTheManualStatementNumberIFromList = function (i) {
     });
 };
 
-exports.checkDateCreatedTextForStatementNumberIFromList= function(i){
-  it("Check the date created text for statement number " + i  + " from the list", function(){
-     browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(1) strong")).getText()
-         .then(function (promise) {
-          console.log("The date created text for statement is  : " + promise);
-          expect(promise).toEqual("Date Created:");
-      });
-  });
-};
-
-exports.checkDateCreatedValueForStatementNumberIFromList= function(i, value){
-    it("Check the date created value for statement number " + i  + " from the list", function(){
-        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(1) div")).getText()
+exports.checkDateCreatedTextForStatementNumberIFromList = function (i) {
+    it("Check the date created text for statement number " + i + " from the list", function () {
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(1) strong")).getText()
             .then(function (promise) {
-            console.log("The date created value for statement is  : " + promise);
-            expect(promise).toEqual(value);
-        });
+                console.log("The date created text for statement is  : " + promise);
+                expect(promise).toEqual("Date Created:");
+            });
     });
 };
 
-exports.checkStatementDistributionPeriodTextForStatementNumberIFromList= function(i){
-    it("Check the statement distribution period text for statement number " + i  + " from the list", function(){
+exports.checkDateCreatedValueForStatementNumberIFromList = function (i, value) {
+    it("Check the date created value for statement number " + i + " from the list", function () {
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(1) div")).getText()
+            .then(function (promise) {
+                console.log("The date created value for statement is  : " + promise);
+                expect(promise).toEqual(value);
+            });
+    });
+};
+
+exports.checkStatementDistributionPeriodTextForStatementNumberIFromList = function (i) {
+    it("Check the statement distribution period text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(2) strong")).getText()
             .then(function (promise) {
                 console.log("The statement distribution period text for statement is  : " + promise);
@@ -190,8 +190,8 @@ exports.checkStatementDistributionPeriodTextForStatementNumberIFromList= functio
     });
 };
 
-exports.checkStatementDistributionPeriodValueForStatementNumberIFromList= function(i, value){
-    it("Check the statement distribution period value for statement number " + i  + " from the list", function(){
+exports.checkStatementDistributionPeriodValueForStatementNumberIFromList = function (i, value) {
+    it("Check the statement distribution period value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group.clearfix:nth-child(2) div")).getText()
             .then(function (promise) {
                 console.log("The statement distribution period value for statement is  : " + promise);
@@ -200,8 +200,8 @@ exports.checkStatementDistributionPeriodValueForStatementNumberIFromList= functi
     });
 };
 
-exports.checkAccountReferenceTextForStatementNumberIFromList= function(i){
-    it("Check the account reference text for statement number " + i  + " from the list", function(){
+exports.checkAccountReferenceTextForStatementNumberIFromList = function (i) {
+    it("Check the account reference text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group:nth-child(3) strong")).getText()
             .then(function (promise) {
                 console.log("The account reference text for statement is  : " + promise);
@@ -210,8 +210,8 @@ exports.checkAccountReferenceTextForStatementNumberIFromList= function(i){
     });
 };
 
-exports.checkAccountReferenceValueForStatementNumberIFromList= function(i){
-    it("Check the account reference value for statement number " + i  + " from the list", function(){
+exports.checkAccountReferenceValueForStatementNumberIFromList = function (i) {
+    it("Check the account reference value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-left.first-column.span5.clearfix div.control-group:nth-child(3) span")).getText()
             .then(function (promise) {
                 console.log("The account reference value for statement is  : " + promise);
@@ -220,8 +220,8 @@ exports.checkAccountReferenceValueForStatementNumberIFromList= function(i){
     });
 };
 
-exports.checkStatementAmountTextForStatementNumberIFromList= function(i){
-    it("Check the statement amount text for statement number " + i  + " from the list", function(){
+exports.checkStatementAmountTextForStatementNumberIFromList = function (i) {
+    it("Check the statement amount text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(1) div.control-group.clearfix:nth-child(1) span.pull-left.ng-binding")).getText()
             .then(function (promise) {
                 console.log("The statement amount text for statement is  : " + promise);
@@ -230,8 +230,8 @@ exports.checkStatementAmountTextForStatementNumberIFromList= function(i){
     });
 };
 
-exports.checkStatementAmountValueForStatementNumberIFromList= function(i, value){
-    it("Check the statement amount value for statement number " + i  + " from the list", function(){
+exports.checkStatementAmountValueForStatementNumberIFromList = function (i, value) {
+    it("Check the statement amount value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(1) div.control-group.clearfix:nth-child(1) div")).getText()
             .then(function (promise) {
                 console.log("The statement amount value for statement is  : " + promise);
@@ -240,8 +240,8 @@ exports.checkStatementAmountValueForStatementNumberIFromList= function(i, value)
     });
 };
 
-exports.checkExchangeRateTextForStatementNumberIFromList= function(i){
-    it("Check the exchange rate text for statement number " + i  + " from the list", function(){
+exports.checkExchangeRateTextForStatementNumberIFromList = function (i) {
+    it("Check the exchange rate text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(1) div.control-group.clearfix:nth-child(2) strong")).getText()
             .then(function (promise) {
                 console.log("The exchange rate text for statement is  : " + promise);
@@ -250,8 +250,8 @@ exports.checkExchangeRateTextForStatementNumberIFromList= function(i){
     });
 };
 
-exports.checkExchangeRateValueForStatementNumberIFromList= function(i, value){
-    it("Check the exchange rate value for statement number " + i  + " from the list", function(){
+exports.checkExchangeRateValueForStatementNumberIFromList = function (i, value) {
+    it("Check the exchange rate value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(1) div.control-group.clearfix:nth-child(2) div")).getText()
             .then(function (promise) {
                 console.log("The exchange rate value for statement is  : " + promise);
@@ -261,8 +261,8 @@ exports.checkExchangeRateValueForStatementNumberIFromList= function(i, value){
 };
 
 
-exports.checkConvertedAmountTextForStatementNumberIFromList= function(i){
-    it("Check the converted amount text for statement number " + i  + " from the list", function(){
+exports.checkConvertedAmountTextForStatementNumberIFromList = function (i) {
+    it("Check the converted amount text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix:nth-child(1) span.pull-left")).getText()
             .then(function (promise) {
                 console.log("The converted amount text for statement is  : " + promise);
@@ -271,8 +271,8 @@ exports.checkConvertedAmountTextForStatementNumberIFromList= function(i){
     });
 };
 
-exports.checkConvertedAmountValueForStatementNumberIFromList = function(i, value){
-    it("Check the converted amount value for statement number " + i  + " from the list", function(){
+exports.checkConvertedAmountValueForStatementNumberIFromList = function (i, value) {
+    it("Check the converted amount value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix:nth-child(1) div")).getText()
             .then(function (promise) {
                 console.log("The converted amount value for statement is  : " + promise);
@@ -281,8 +281,8 @@ exports.checkConvertedAmountValueForStatementNumberIFromList = function(i, value
     });
 };
 
-exports.checkCommissionTextForStatementNumberIFromList = function(i){
-    it("Check the commission text for statement number " + i  + " from the list", function(){
+exports.checkCommissionTextForStatementNumberIFromList = function (i) {
+    it("Check the commission text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix:nth-child(2) div.pull-left")).getText()
             .then(function (promise) {
                 console.log("The commission text for statement is  : " + promise);
@@ -291,8 +291,8 @@ exports.checkCommissionTextForStatementNumberIFromList = function(i){
     });
 };
 
-exports.checkCommissionValueForStatementNumberIFromList = function(i, value){
-    it("Check the commission value for statement number " + i  + " from the list", function(){
+exports.checkCommissionValueForStatementNumberIFromList = function (i, value) {
+    it("Check the commission value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix:nth-child(2) div.pull-right")).getText()
             .then(function (promise) {
                 console.log("The commission value for statement is  : " + promise);
@@ -301,8 +301,8 @@ exports.checkCommissionValueForStatementNumberIFromList = function(i, value){
     });
 };
 
-exports.checkWriteOffAmountTextForStatementNumberIFromList = function(i){
-    it("Check the write off amount text for statement number " + i  + " from the list", function(){
+exports.checkWriteOffAmountTextForStatementNumberIFromList = function (i) {
+    it("Check the write off amount text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix:nth-child(3) strong")).getText()
             .then(function (promise) {
                 console.log("The write off amount text for statement is  : " + promise);
@@ -311,8 +311,8 @@ exports.checkWriteOffAmountTextForStatementNumberIFromList = function(i){
     });
 };
 
-exports.checkWriteOffAmountValueForStatementNumberIFromList = function(i, value){
-    it("Check the write off amount value for statement number " + i  + " from the list", function(){
+exports.checkWriteOffAmountValueForStatementNumberIFromList = function (i, value) {
+    it("Check the write off amount value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix:nth-child(3) div.pull-right")).getText()
             .then(function (promise) {
                 console.log("The write off amount text for statement is  : " + promise);
@@ -321,8 +321,8 @@ exports.checkWriteOffAmountValueForStatementNumberIFromList = function(i, value)
     });
 };
 
-exports.checkAmountConvertedNetTextForStatementNumberIFromList = function(i){
-    it("Check the amount converted net text for statement number " + i  + " from the list", function(){
+exports.checkAmountConvertedNetTextForStatementNumberIFromList = function (i) {
+    it("Check the amount converted net text for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix.amount-total:nth-child(4) span.pull-left")).getText()
             .then(function (promise) {
                 console.log("The amount converted net text for statement is  : " + promise);
@@ -331,12 +331,34 @@ exports.checkAmountConvertedNetTextForStatementNumberIFromList = function(i){
     });
 };
 
-exports.checkAmountConvertedNetValueForStatementNumberIFromList = function(i, value){
-    it("Check the amount converted net value for statement number " + i  + " from the list", function(){
+exports.checkAmountConvertedNetValueForStatementNumberIFromList = function (i, value) {
+    it("Check the amount converted net value for statement number " + i + " from the list", function () {
         browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div:nth-child(3) div.control-group.clearfix.amount-total:nth-child(4) div.pull-right")).getText()
             .then(function (promise) {
                 console.log("The amount converted net value for statement is  : " + promise);
                 expect(promise).toEqual(value);
             });
     });
+};
+
+exports.checkBatchSummaryForStatementNumberIFromList = function (i, text) {
+    it("Check the batch summary for statement number " + i + " from the list", function () {
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix div.batch-table.ng-scope")).getText()
+            .then(function (promise) {
+                console.log("The batch summary for statement is  : " + promise);
+                expect(promise).toContain(text);
+            });
+    });
+};
+
+exports.editExpandedManualStatementNumberIFromList = function (i) {
+    it("Edit the expanded manual statement number " + i + " from list", function () {
+        pages.createManualStatement.editTheExpandedManualStatementNumberIFromList(i);
+    });
+};
+
+exports.clickOnBatch1LinkManualStatementEditMode = function(){
+  it("Click on the batch 1 link to see the details ", function(){
+      pages.createManualStatement.clickOnTheBatch1LinkManualStatementEditMode();
+  });
 };

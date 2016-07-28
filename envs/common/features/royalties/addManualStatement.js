@@ -104,6 +104,17 @@ exports.feature = [
             steps.createManualStatement.checkWriteOffAmountValueForStatementNumberIFromList(1, "- 0.0000  INR");
             steps.createManualStatement.checkAmountConvertedNetTextForStatementNumberIFromList(1);
             steps.createManualStatement.checkAmountConvertedNetValueForStatementNumberIFromList(1, "= 100.0000  INR");
+
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "Batch Summary");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "Lines");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "Status");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "Batch Total");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "Batch 1");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "RECONCILED");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "100.0000 EUR");
+
+            steps.createManualStatement.editExpandedManualStatementNumberIFromList(1);
+
         }
     }
 ];
