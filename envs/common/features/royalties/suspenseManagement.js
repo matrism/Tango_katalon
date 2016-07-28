@@ -47,16 +47,16 @@ exports.feature = [
                     'Closing Balance'
                 ];
 
-
             steps.mainHeader.goToSubLink('Royalty Processing', 'Suspense Management');
 
             smf.validateProcessingTerritory('Argentina');
-            //smf.validateRoyaltyPeriod();
             sm.validateSelectedTab('Activity Summary');
             smas.validateLabels(activitySummaryLabels);
             smas.validateValues(numRegex);
+            smf.selectRoyaltyPeriod(null, 1);
+            smas.validateValues(numRegex);
+            smas.validateLabels(activitySummaryLabels);
             smf.selectProcessingTerritory('United States');
-            //smas.validateLabels(activitySummaryLabels);
             smas.expectValuesToBeUpdated();
             smas.validateValues(numRegex);
             smf.selectRoyaltyPeriod('Closed Periods');
@@ -76,15 +76,28 @@ exports.feature = [
                 sms = sm.suspense;
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Suspense Management');
-
-            smf.validateProcessingTerritory('Argentina');
             sm.validateSelectedTab('Activity Summary');
             sm.clickTab('Suspense');
             sm.validateSelectedTab('Suspense');
             smf.selectProcessingTerritory('Brazil');
+            sms.expectRowsToBePresent();
+            smf.selectRoyaltyPeriod(null, 1);
+            sms.expectRowsToBeUpdated();
+            sms.expectRowsToBePresent();
             smf.selectRoyaltyPeriod('Closed Periods');
-            smf.selectClosedPeriod(2);
+            smf.selectClosedPeriod(1);
             smf.clickGo();
+            sms.expectRowsToBeUpdated();
+            sms.expectRowsToBePresent();
+            smf.selectProcessingTerritory('United States');
+            sms.expectRowsToBeUpdated();
+            sms.expectRowsToBePresent();
+            smf.validateProcessingTerritory('United States');
+            smf.storeSelectedPeriod();
+            sm.clickTab('Activity Summary');
+            sm.validateSelectedTab('Activity Summary');
+            smf.validateProcessingTerritory('United States');
+            smf.validateRoyaltyPeriod()
         }
     }
 ];

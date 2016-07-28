@@ -40,6 +40,10 @@ function TgRoyaltiesComponent (locator) {
         elem.results().get(idx).click();
     };
 
+    elem.getSelectedValue = () => {
+        return elem.$('.btn-group').getText();
+    };
+
     return elem;
 }
 

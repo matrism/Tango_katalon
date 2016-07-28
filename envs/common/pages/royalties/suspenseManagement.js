@@ -2,8 +2,10 @@
 
 pages.suspenseManagement = exports;
 
+exports.tabsSelector = 'li[ng-repeat="$tab in $tabs"]';
+
 exports.selectedTab = () => {
-    return $('[ng-repeat="$tab in $tabs"].active');
+    return $(exports.tabsSelector + '.active');
 };
 
 exports.validateSelectedTab = (value) => {
@@ -11,25 +13,33 @@ exports.validateSelectedTab = (value) => {
 };
 
 exports.clickTab = (value) => {
-    
+    let el = element(by.cssContainingText(exports.tabsSelector, value));
+    el.click();
+    pages.base.waitForAjax();
 };
 
 exports.filters = (() => {
-    var filters = {};
+    let filters = {};
+
+    filters.currentSelectedPeriod = '';
 
     filters.royaltyPeriodDropdown = () => {
         return tgRoyaltyPeriod.byModel('dataHolder.royalty_period');
     };
 
-    filters.selectRoyaltyPeriod = (name) => {
+    filters.selectRoyaltyPeriod = (name, index) => {
         let dropdown = filters.royaltyPeriodDropdown();
 
-        dropdown.selectValue(name);
+        if (index) {
+            dropdown.select(index);
+        } else {
+            dropdown.selectValue(name);
+        }
         pages.base.waitForAjax();
-        pages.base.waitForModal();
     };
 
     filters.selectClosedPeriod = (index) => {
+        pages.base.waitForModal();
         tgRoyaltyPeriod.selectClosedPeriod(index);
     };
 
@@ -52,11 +62,22 @@ exports.filters = (() => {
         pages.base.waitForAjax();
     };
 
+    filters.storeSelectedPeriod = () => {
+        filters.royaltyPeriodDropdown().getSelectedValue().then((text) => {
+            filters.currentSelectedPeriod = text;
+        });
+    };
+
+    filters.validateRoyaltyPeriod = (value) => {
+        value = value || filters.currentSelectedPeriod;
+        expect(filters.royaltyPeriodDropdown().getSelectedValue()).toBe(value);
+    };
+
     return filters;
 })();
 
 exports.activitySummary = (() => {
-    var activitySummary = {};
+    let activitySummary = {};
 
     activitySummary.lastValues = '';
 
@@ -97,4 +118,29 @@ exports.activitySummary = (() => {
     };
 
     return activitySummary;
+})();
+
+exports.suspense = (() => {
+    let suspense = {};
+
+    suspense.firstRowText = '';
+
+    suspense.rows = () => {
+        return element.all(by.repeater('incomeWork in dataHolder.suspenseLines track by incomeWork.id'));
+    };
+
+    suspense.expectRowsToBePresent = () => {
+        let elements = suspense.rows();
+        expect(elements.count()).not.toBe(0);
+        elements.first().getText().then((text) => {
+            suspense.firstRowText = text;
+        });
+    };
+
+    suspense.expectRowsToBeUpdated = () => {
+        let elements = suspense.rows();
+        expect(elements.first().getText()).not.toEqual(suspense.firstRowText);
+    };
+
+    return suspense;
 })();
