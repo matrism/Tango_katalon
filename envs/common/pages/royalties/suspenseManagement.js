@@ -62,14 +62,17 @@ exports.filters = (() => {
         pages.base.waitForAjax();
     };
 
-    filters.storeSelectedPeriod = () => {
+    filters.storeSelectedPeriod = (variable) => {
         filters.royaltyPeriodDropdown().getSelectedValue().then((text) => {
             filters.currentSelectedPeriod = text;
+            if (variable) {
+                hash.testVariables[variable] = text
+            }
         });
     };
 
-    filters.validateRoyaltyPeriod = (value) => {
-        value = value || filters.currentSelectedPeriod;
+    filters.validateRoyaltyPeriod = (variable) => {
+        let value = callResultOrValue(variable) || filters.currentSelectedPeriod;
         expect(filters.royaltyPeriodDropdown().getSelectedValue()).toBe(value);
     };
 

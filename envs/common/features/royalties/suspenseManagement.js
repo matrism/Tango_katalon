@@ -97,7 +97,31 @@ exports.feature = [
             sm.clickTab('Activity Summary');
             sm.validateSelectedTab('Activity Summary');
             smf.validateProcessingTerritory('United States');
-            smf.validateRoyaltyPeriod()
+            smf.validateRoyaltyPeriod();
+        }
+    },
+    {
+        name: 'Validate if the selected territory and period are kept when change the page.',
+        tags: ['suspenseManagementFilters'],
+        steps: () => {
+            let sm = steps.suspenseManagement,
+                smf = sm.filters,
+                mh = steps.mainHeader,
+                rs = steps.royaltyStatements;
+
+            mh.goToSubLink('Royalty Processing', 'Suspense Management');
+            smf.selectProcessingTerritory('Brazil');
+            smf.selectRoyaltyPeriod(null, 1);
+            smf.storeSelectedPeriod('lastSelectedPeriod');
+            mh.goToSubLink('Royalty Processing', 'Royalty Statements');
+            rs.validateProcessingTerritory('Brazil');
+            rs.validateRoyaltyPeriod(fromTestVariable('lastSelectedPeriod'));
+            rs.selectProcessingTerritory('United States');
+            rs.selectFirstRoyaltyPeriod();
+            rs.storeSelectedPeriod('lastSelectedPeriod');
+            mh.goToSubLink('Royalty Processing', 'Suspense Management');
+            smf.validateProcessingTerritory('United States');
+            smf.validateRoyaltyPeriod(fromTestVariable('lastSelectedPeriod'));
         }
     }
 ];

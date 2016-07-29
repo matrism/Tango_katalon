@@ -23,6 +23,32 @@ exports.selectRoyaltyPeriod = function (val) {
     dropdown.selectValue(val);
 };
 
+exports.processingTerritoryDropdown = () => {
+    return tgDropdown(by.model('processingTerritoryModel'));
+};
+
+exports.validateProcessingTerritory = (value) => {
+    expect(exports.processingTerritoryDropdown().getSelectedValue()).toBe(value);
+};
+
+exports.selectProcessingTerritory = (val) => {
+    let elem = exports.processingTerritoryDropdown();
+
+    elem.selectValue(val);
+    pages.base.waitForAjax();
+};
+
+exports.storeSelectedPeriod = (variable) => {
+    exports.royaltyPeriodDropdown().getSelectedValue().then((text) => {
+        hash.testVariables[variable] = text
+    });
+};
+
+exports.validateRoyaltyPeriod = (value) => {
+    value = callResultOrValue(value);
+    expect(exports.royaltyPeriodDropdown().getSelectedValue()).toBe(value);
+};
+
 exports.statementList = function () {
     pages.base.waitForAjax();
     return element.all(by.repeater('statement in statements'));
