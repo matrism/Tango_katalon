@@ -27,6 +27,7 @@ if (pages.createManualStatement === undefined) {
             worksSearchInputField: {css: "div[data-ng-model='workEntries.newWork'] input"},
             receivedAmountInputField: {css: "div.amount.pull-left.table-cell input"},
             manualStatementIdNumber: {css: "div.RECORD-HEADER h1"},
+            batch1LinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement, batch), statementForm)']"}
         },
 
         selectTheDesiredProcessingTerritory: function (country) {
@@ -345,8 +346,10 @@ if (pages.createManualStatement === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") textarea[data-ng-model='statement.account_reference']"))));
         },
 
-        clickOnTheBatch1LinkManualStatementEditMode: function(){
-
+        clickOnTheBatch1LinkManualStatementEditMode: function () {
+            pages.base.scrollIntoView(pages.createManualStatement.elems.batch1LinkManualStatement);
+            pages.createManualStatement.elems.batch1LinkManualStatement.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.batchAmountInputField));
         }
     })
 }

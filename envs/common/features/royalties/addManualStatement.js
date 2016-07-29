@@ -114,6 +114,16 @@ exports.feature = [
             steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "100.0000 EUR");
 
             steps.createManualStatement.editExpandedManualStatementNumberIFromList(1);
+            steps.createManualStatement.clickOnBatch1LinkManualStatementEditMode();
+
+            steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Title");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("test");
+            steps.createManualStatement.selectDesiredWorkForManualStatement();
+
+            steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Creator");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("creator");
+            steps.createManualStatement.selectDesiredWorkForManualStatement();
+
 
         }
     }
