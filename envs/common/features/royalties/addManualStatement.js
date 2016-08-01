@@ -29,7 +29,7 @@ exports.feature = [
             steps.createManualStatement.selectDesiredExploitationTerritoryValueFromDropDown("Brazil");
 
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Work ID");
-            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 015081725 00");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 010278355 00");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
             steps.createManualStatement.fillIntoAmountReceivedValue("100");
             steps.createManualStatement.clickOnDoneButtonManualStatement();
@@ -75,9 +75,9 @@ exports.feature = [
             steps.createManualStatement.selectDesiredExploitationTerritoryValueFromDropDown("Brazil");
 
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Work ID");
-            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 015081725 00");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 010278355 00");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
-            steps.createManualStatement.fillIntoAmountReceivedValue("100");
+            steps.createManualStatement.fillIntoAmountReceivedValue("40");
             steps.createManualStatement.clickOnDoneButtonManualStatement();
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
@@ -119,12 +119,16 @@ exports.feature = [
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Title");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("test");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2,1,"10");
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2,2,"20");
 
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Creator");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("creator");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(3,1,"15");
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(3,2,"5");
 
-
+            steps.createManualStatement.clickOnDoneButtonManualStatement();
         }
     }
 ];

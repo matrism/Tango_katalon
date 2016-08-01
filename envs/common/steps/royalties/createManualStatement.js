@@ -119,9 +119,27 @@ exports.selectAndAddWorkForManualStatement = function () {
     });
 };
 
+exports.fillIntoAmountReceivedValueWorkIRowJ = function (i, j, amount) {
+    it("Fill into the amount received value work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.fillIntoTheAmountReceivedValueWorkIRowJ(i, j, amount);
+    });
+};
+
 exports.fillIntoAmountReceivedValue = function (amount) {
     it("Fill into the amount received value " + amount, function () {
         pages.createManualStatement.fillIntoTheAmountReceivedValue(amount);
+    });
+};
+
+exports.fillIntoSourceValueWorkIRowJ = function(i,j,source){
+    it("Fill into the source field desired value work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.fillIntoTheSourceValueWorkIRowJ(i, j, source);
+    });
+};
+
+exports.selectDesiredIncomeTypeWorkIRowJ = function(i,j,incomeType){
+    it("Select the desired income type work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.selectTheDesiredIncomeTypeWorkIRowJ(i, j, incomeType);
     });
 };
 
@@ -357,8 +375,8 @@ exports.editExpandedManualStatementNumberIFromList = function (i) {
     });
 };
 
-exports.clickOnBatch1LinkManualStatementEditMode = function(){
-  it("Click on the batch 1 link to see the details ", function(){
-      pages.createManualStatement.clickOnTheBatch1LinkManualStatementEditMode();
-  });
+exports.clickOnBatch1LinkManualStatementEditMode = function () {
+    it("Click on the batch 1 link to see the details ", function () {
+        pages.createManualStatement.clickOnTheBatch1LinkManualStatementEditMode();
+    });
 };

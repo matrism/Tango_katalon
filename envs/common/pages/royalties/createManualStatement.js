@@ -87,7 +87,7 @@ if (pages.createManualStatement === undefined) {
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
-                    options[randomNumber].click();
+                    options[0].click();
                 });
         },
 
@@ -304,11 +304,144 @@ if (pages.createManualStatement === undefined) {
                 });
         },
 
+        fillIntoTheAmountReceivedValueWorkIRowJ: function (i, j, amount) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.amount.pull-left.table-cell input")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.amount.pull-left.table-cell input")).sendKeys(amount);
+            browser.sleep(2000);
+        },
 
         fillIntoTheAmountReceivedValue: function (amount) {
             pages.base.scrollIntoView(pages.createManualStatement.elems.receivedAmountInputField);
+            pages.createManualStatement.elems.receivedAmountInputField.clear();
             pages.createManualStatement.elems.receivedAmountInputField.sendKeys(amount);
             browser.sleep(2000);
+        },
+
+        fillIntoTheSourceValueWorkIRowJ: function (i, j, source) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.source.pull-left.table-cell input")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.source.pull-left.table-cell input")).click();
+        },
+
+        selectTheDesiredIncomeTypeWorkIRowJ: function (i,j, incomeType) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.income-type.pull-left.table-cell div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.income-type.pull-left.table-cell div.tg-dropdown-button")).sendKeys(source);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='line.incomeType'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            var desiredOption;
+            browser.driver.findElements(By.css("div[data-ng-model='line.incomeType'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(incomeType) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheDesiredTerritoryWorkIRowJ: function (i,j, country) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.territory.pull-left.table-cell div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.territory.pull-left.table-cell div.tg-dropdown-button")).sendKeys(source);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='line.territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            var desiredOption;
+            browser.driver.findElements(By.css("div[data-ng-model='line.territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(country) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        pages.base.scrollIntoView(desiredOption);
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        fillIntoTheYearFromPeriodWorkIRowJ: function (i, j, year) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell input[data-ng-model='line.period.from.year']")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell input[data-ng-model='line.period.from.year']")).sendKeys(year);
+        },
+
+        selectTheDesiredMonthFromPeriodWorkIRowJ: function(i,j,month){
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.from.month'] option")));
+            var desiredOption;
+            browser.driver.findElements(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.from.month'] option"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(month) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+
+        },
+
+
+        fillIntoTheYearToPeriodWorkIRowJ: function (i, j, year) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell input[data-ng-model='line.period.to.year']")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell input[data-ng-model='line.period.to.year']")).sendKeys(year);
+        },
+
+        selectTheDesiredMonthToPeriodWorkIRowJ: function(i,j,month){
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.to.month'] option")));
+            var desiredOption;
+            browser.driver.findElements(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.to.month'] option"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(month) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+
+        },
+
+        fillIntoTheUnitsWorkIRowJ: function (i, j, unitsNumber) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.units.pull-left.table-cell input[data-ng-model='line.units']")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.units.pull-left.table-cell input[data-ng-model='line.units']")).sendKeys(unitsNumber);
+        },
+
+        fillIntoTheProductDetailsWorkIRowJ: function (i, j, productDetails) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.product-details.pull-left.table-cell input[data-ng-model='line.productDetail']")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.product-details.pull-left.table-cell input[data-ng-model='line.productDetail']")).sendKeys(productDetails);
+        },
+
+        fillIntoTheSharePercentWorkIRowJ: function (i, j, sharePercent) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share pull-left.table-cell input[data-ng-model='line.line.share']")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share pull-left.table-cell input[data-ng-model='line.line.share']")).sendKeys(sharePercent);
         },
 
         clickOnTheDoneButtonManualStatement: function () {
