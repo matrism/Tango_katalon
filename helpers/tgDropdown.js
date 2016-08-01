@@ -40,6 +40,10 @@ function TgDropdown (locator, dummy, isAppendedToBody) {
         dropdown.results().get(idx).click();
     };
 
+    dropdown.getSelectedValue = () => {
+        return dropdown.$('.tg-dropdown-button').getText();
+    };
+
     return dropdown;
 }
 

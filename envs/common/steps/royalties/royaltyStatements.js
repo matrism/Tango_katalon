@@ -7,6 +7,10 @@ steps.royaltyStatements = exports;
 pageStep([
     'Select first royalty period',
     'Select Royalty Period',
+    'Store Selected Period',
+    'Validate Royalty Period',
+    'Validate Processing Territory',
+    'Select Processing Territory',
     'Expect statement list to be populated',
     'Store first statement ID',
     'Store Income Providers',
