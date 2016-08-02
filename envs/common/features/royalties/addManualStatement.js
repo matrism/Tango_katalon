@@ -69,7 +69,7 @@ exports.feature = [
             steps.createManualStatement.fillIntoExchangeRateInputField("1");
             steps.createManualStatement.clickOnCreateButtonManualStatement();
 
-            steps.createManualStatement.fillIntoBatchAmountValue("100");
+            steps.createManualStatement.fillIntoBatchAmountValue("55");
             steps.createManualStatement.clickOnDefaultSettingsLink();
             steps.createManualStatement.selectDesiredIncomeTypeValueFromDropDown("Mechanical");
             steps.createManualStatement.selectDesiredExploitationTerritoryValueFromDropDown("Brazil");
@@ -77,7 +77,7 @@ exports.feature = [
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Work ID");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 010278355 00");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
-            steps.createManualStatement.fillIntoAmountReceivedValue("40");
+            steps.createManualStatement.fillIntoAmountReceivedValue("20");
             steps.createManualStatement.clickOnDoneButtonManualStatement();
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
@@ -111,7 +111,8 @@ exports.feature = [
             steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "Batch Total");
             steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "Batch 1");
             steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "RECONCILED");
-            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "100.0000 EUR");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "55.0000 EUR");
+            steps.createManualStatement.checkBatchSummaryForStatementNumberIFromList(1, "45.0000 EUR");
 
             steps.createManualStatement.editExpandedManualStatementNumberIFromList(1);
             steps.createManualStatement.clickOnBatch1LinkManualStatementEditMode();
@@ -119,16 +120,65 @@ exports.feature = [
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Title");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("test");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
-            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2,1,"10");
-            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2,2,"20");
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2, 1, "10");
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2, 2, "5");
+
+            steps.createManualStatement.fillIntoSourceValueWorkIRowJ(2,1,"source 1");
+            steps.createManualStatement.selectDesiredIncomeTypeWorkIRowJ(2,1, "Digital Mechanical");
+            steps.createManualStatement.selectDesiredTerritoryWorkIRowJ(2,1, "Argentina");
+            steps.createManualStatement.fillIntoYearFromPeriodWorkIRowJ(2,1, "2015");
+            steps.createManualStatement.selectDesiredMonthFromPeriodWorkIRowJ(2,1, "01");
+            steps.createManualStatement.fillIntoYearToPeriodWorkIRowJ(2,1, "2015");
+            steps.createManualStatement.selectDesiredMonthToPeriodWorkIRowJ(2,1,"06");
+            steps.createManualStatement.fillIntoUnitsWorkIRowJ(2,1,"12");
+            steps.createManualStatement.fillIntoProductDetailsWorkIRowJ(2, 1, "catalogue 1");
+            steps.createManualStatement.fillIntoSharePercentWorkIRowJ(2, 1, "34");
+
+            steps.createManualStatement.fillIntoSourceValueWorkIRowJ(2,2,"source 2");
+            steps.createManualStatement.selectDesiredIncomeTypeWorkIRowJ(2,2, "Download Mechanical");
+            steps.createManualStatement.selectDesiredTerritoryWorkIRowJ(2,2, "Algeria");
+            steps.createManualStatement.fillIntoYearFromPeriodWorkIRowJ(2,2, "2015");
+            steps.createManualStatement.selectDesiredMonthFromPeriodWorkIRowJ(2,2, "02");
+            steps.createManualStatement.fillIntoYearToPeriodWorkIRowJ(2,2, "2015");
+            steps.createManualStatement.selectDesiredMonthToPeriodWorkIRowJ(2,2,"08");
+            steps.createManualStatement.fillIntoUnitsWorkIRowJ(2,2,"55");
+            steps.createManualStatement.fillIntoProductDetailsWorkIRowJ(2, 2, "catalogue 2");
+            steps.createManualStatement.fillIntoSharePercentWorkIRowJ(2, 2, "15");
 
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Creator");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("creator");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
-            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(3,1,"15");
-            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(3,2,"5");
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(3, 1, "15");
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(3, 2, "5");
+
+            steps.createManualStatement.fillIntoSourceValueWorkIRowJ(3,1,"source 1");
+            steps.createManualStatement.selectDesiredIncomeTypeWorkIRowJ(3,1, "Karaoke Mechanical");
+            steps.createManualStatement.selectDesiredTerritoryWorkIRowJ(3,1, "Armenia");
+            steps.createManualStatement.fillIntoYearFromPeriodWorkIRowJ(3,1, "2015");
+            steps.createManualStatement.selectDesiredMonthFromPeriodWorkIRowJ(3,1, "02");
+            steps.createManualStatement.fillIntoYearToPeriodWorkIRowJ(3,1, "2015");
+            steps.createManualStatement.selectDesiredMonthToPeriodWorkIRowJ(3,1,"09");
+            steps.createManualStatement.fillIntoUnitsWorkIRowJ(3,1,"22");
+            steps.createManualStatement.fillIntoProductDetailsWorkIRowJ(3, 1, "catalogue 3");
+            steps.createManualStatement.fillIntoSharePercentWorkIRowJ(3, 1, "55");
+
+            steps.createManualStatement.fillIntoSourceValueWorkIRowJ(3,2,"source 2");
+            steps.createManualStatement.selectDesiredIncomeTypeWorkIRowJ(3,2, "Ringtone Mechanical");
+            steps.createManualStatement.selectDesiredTerritoryWorkIRowJ(3,2, "Austria");
+            steps.createManualStatement.fillIntoYearFromPeriodWorkIRowJ(3,2, "2015");
+            steps.createManualStatement.selectDesiredMonthFromPeriodWorkIRowJ(3,2, "03");
+            steps.createManualStatement.fillIntoYearToPeriodWorkIRowJ(3,2, "2015");
+            steps.createManualStatement.selectDesiredMonthToPeriodWorkIRowJ(3,2,"11");
+            steps.createManualStatement.fillIntoUnitsWorkIRowJ(3,2,"33");
+            steps.createManualStatement.fillIntoProductDetailsWorkIRowJ(3, 2, "catalogue 4");
+            steps.createManualStatement.fillIntoSharePercentWorkIRowJ(3, 2, "67");
 
             steps.createManualStatement.clickOnDoneButtonManualStatement();
+
+            steps.createManualStatement.clickOnBackToStatementViewLink();
+            steps.createManualStatement.editExpandedManualStatementNumberIFromList(1);
+            steps.createManualStatement.clickOnAddBatchLinkManualStatementEditMode();
+            steps.createManualStatement.fillIntoTheBatchAmountDesiredValueNumberI(2,45);
         }
     }
 ];

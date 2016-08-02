@@ -27,7 +27,9 @@ if (pages.createManualStatement === undefined) {
             worksSearchInputField: {css: "div[data-ng-model='workEntries.newWork'] input"},
             receivedAmountInputField: {css: "div.amount.pull-left.table-cell input"},
             manualStatementIdNumber: {css: "div.RECORD-HEADER h1"},
-            batch1LinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement, batch), statementForm)']"}
+            batch1LinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement, batch), statementForm)']"},
+            backToStatementViewLink: {css: "a[data-ui-sref='royalties.statements({statementId: statement.statement_id})']"},
+            addBatchLinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement), statementForm)']"}
         },
 
         selectTheDesiredProcessingTerritory: function (country) {
@@ -319,15 +321,15 @@ if (pages.createManualStatement === undefined) {
 
         fillIntoTheSourceValueWorkIRowJ: function (i, j, source) {
             pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.source.pull-left.table-cell input")));
-            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.source.pull-left.table-cell input")).click();
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.source.pull-left.table-cell input")).sendKeys(source);
         },
 
-        selectTheDesiredIncomeTypeWorkIRowJ: function (i,j, incomeType) {
+        selectTheDesiredIncomeTypeWorkIRowJ: function (i, j, incomeType) {
             pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.income-type.pull-left.table-cell div.tg-dropdown-button")));
-            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.income-type.pull-left.table-cell div.tg-dropdown-button")).sendKeys(source);
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='line.incomeType'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.income-type.pull-left.table-cell div.tg-dropdown-button")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.income-type.pull-left.table-cell div[data-ng-model='line.incomeType'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
             var desiredOption;
-            browser.driver.findElements(By.css("div[data-ng-model='line.incomeType'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+            browser.driver.findElements(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.income-type.pull-left.table-cell div[data-ng-model='line.incomeType'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -347,12 +349,12 @@ if (pages.createManualStatement === undefined) {
                 });
         },
 
-        selectTheDesiredTerritoryWorkIRowJ: function (i,j, country) {
+        selectTheDesiredTerritoryWorkIRowJ: function (i, j, country) {
             pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.territory.pull-left.table-cell div.tg-dropdown-button")));
-            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.territory.pull-left.table-cell div.tg-dropdown-button")).sendKeys(source);
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='line.territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.territory.pull-left.table-cell div.tg-dropdown-button")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.territory.pull-left.table-cell div[data-ng-model='line.territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
             var desiredOption;
-            browser.driver.findElements(By.css("div[data-ng-model='line.territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+            browser.driver.findElements(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.territory.pull-left.table-cell div[data-ng-model='line.territory'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -377,7 +379,7 @@ if (pages.createManualStatement === undefined) {
             browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell input[data-ng-model='line.period.from.year']")).sendKeys(year);
         },
 
-        selectTheDesiredMonthFromPeriodWorkIRowJ: function(i,j,month){
+        selectTheDesiredMonthFromPeriodWorkIRowJ: function (i, j, month) {
             pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.from.month'] option")));
             var desiredOption;
             browser.driver.findElements(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.from.month'] option"))
@@ -400,16 +402,15 @@ if (pages.createManualStatement === undefined) {
 
         },
 
-
         fillIntoTheYearToPeriodWorkIRowJ: function (i, j, year) {
-            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell input[data-ng-model='line.period.to.year']")));
-            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell input[data-ng-model='line.period.to.year']")).sendKeys(year);
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-to.pull-left.table-cell input[data-ng-model='line.period.to.year']")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-to.pull-left.table-cell input[data-ng-model='line.period.to.year']")).sendKeys(year);
         },
 
-        selectTheDesiredMonthToPeriodWorkIRowJ: function(i,j,month){
-            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.to.month'] option")));
+        selectTheDesiredMonthToPeriodWorkIRowJ: function (i, j, month) {
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-to.pull-left.table-cell select[data-ng-model='line.period.to.month'] option")));
             var desiredOption;
-            browser.driver.findElements(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-from.pull-left.table-cell select[data-ng-model='line.period.to.month'] option"))
+            browser.driver.findElements(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.period-to.pull-left.table-cell select[data-ng-model='line.period.to.month'] option"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -440,8 +441,8 @@ if (pages.createManualStatement === undefined) {
         },
 
         fillIntoTheSharePercentWorkIRowJ: function (i, j, sharePercent) {
-            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share pull-left.table-cell input[data-ng-model='line.line.share']")));
-            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share pull-left.table-cell input[data-ng-model='line.line.share']")).sendKeys(sharePercent);
+            pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share.pull-left.table-cell input[data-ng-model='line.share']")));
+            browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share.pull-left.table-cell input[data-ng-model='line.share']")).sendKeys(sharePercent);
         },
 
         clickOnTheDoneButtonManualStatement: function () {
@@ -474,6 +475,7 @@ if (pages.createManualStatement === undefined) {
         },
 
         editTheExpandedManualStatementNumberIFromList: function (i) {
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.accordion-inner"))));
             browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.accordion-inner")).click();
             browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") button[data-ng-click='toggleEditState(statement, $index, statementForm)']")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='statement in statements']:nth-child(" + i + ") textarea[data-ng-model='statement.account_reference']"))));
@@ -483,6 +485,23 @@ if (pages.createManualStatement === undefined) {
             pages.base.scrollIntoView(pages.createManualStatement.elems.batch1LinkManualStatement);
             pages.createManualStatement.elems.batch1LinkManualStatement.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.batchAmountInputField));
+        },
+
+        clickOnTheBackToStatementViewLink: function () {
+            pages.base.scrollIntoView(pages.createManualStatement.elems.backToStatementViewLink);
+            pages.createManualStatement.elems.backToStatementViewLink.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.processingTerritoryButton));
+        },
+
+        clickOnTheAddBatchLinkManualStatementEditMode: function () {
+            pages.base.scrollIntoView(pages.createManualStatement.elems.addBatchLinkManualStatement);
+            pages.createManualStatement.elems.addBatchLinkManualStatement.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.batchAmountInputField));
+        },
+
+        fillIntoTheBatchAmountDesiredValueNumberI: function (i, amount) {
+            pages.base.scrollIntoView(element(by.css("ul.nav.nav-tabs.pull-left li:nth-child(" + (i + 1) + ") input[data-ng-model='batch.amount']")));
+            browser.driver.findElement(By.css("ul.nav.nav-tabs.pull-left li:nth-child(" + (i + 1) + ") input[data-ng-model='batch.amount']")).sendKeys(amount);
         }
     })
 }

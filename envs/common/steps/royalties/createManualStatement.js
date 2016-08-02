@@ -131,15 +131,63 @@ exports.fillIntoAmountReceivedValue = function (amount) {
     });
 };
 
-exports.fillIntoSourceValueWorkIRowJ = function(i,j,source){
+exports.fillIntoSourceValueWorkIRowJ = function (i, j, source) {
     it("Fill into the source field desired value work number " + i + +" row number " + j, function () {
         pages.createManualStatement.fillIntoTheSourceValueWorkIRowJ(i, j, source);
     });
 };
 
-exports.selectDesiredIncomeTypeWorkIRowJ = function(i,j,incomeType){
+exports.selectDesiredIncomeTypeWorkIRowJ = function (i, j, incomeType) {
     it("Select the desired income type work number " + i + +" row number " + j, function () {
         pages.createManualStatement.selectTheDesiredIncomeTypeWorkIRowJ(i, j, incomeType);
+    });
+};
+
+exports.selectDesiredTerritoryWorkIRowJ = function (i, j, territory) {
+    it("Select the desired territory work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.selectTheDesiredTerritoryWorkIRowJ(i, j, territory);
+    });
+};
+
+exports.fillIntoYearFromPeriodWorkIRowJ = function (i, j, year) {
+    it("Fill into the year from field desired value work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.fillIntoTheYearFromPeriodWorkIRowJ(i, j, year);
+    });
+};
+
+exports.selectDesiredMonthFromPeriodWorkIRowJ = function (i, j, month) {
+    it("Select the desired month from period work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.selectTheDesiredMonthFromPeriodWorkIRowJ(i, j, month);
+    });
+};
+
+exports.fillIntoYearToPeriodWorkIRowJ = function (i, j, year) {
+    it("Fill into the year to field desired value work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.fillIntoTheYearToPeriodWorkIRowJ(i, j, year);
+    });
+};
+
+exports.selectDesiredMonthToPeriodWorkIRowJ = function (i, j, month) {
+    it("Select the desired month to period work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.selectTheDesiredMonthToPeriodWorkIRowJ(i, j, month);
+    });
+};
+
+exports.fillIntoUnitsWorkIRowJ = function (i, j, unitsNumber) {
+    it("Fill into the units number field desired value work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.fillIntoTheUnitsWorkIRowJ(i, j, unitsNumber);
+    });
+};
+
+exports.fillIntoProductDetailsWorkIRowJ = function (i, j, productDetails) {
+    it("Fill into the product details field desired value work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.fillIntoTheProductDetailsWorkIRowJ(i, j, productDetails);
+    });
+};
+
+exports.fillIntoSharePercentWorkIRowJ = function (i, j, sharePercent) {
+    it("Fill into the share percent field desired value work number " + i + +" row number " + j, function () {
+        pages.createManualStatement.fillIntoTheSharePercentWorkIRowJ(i, j, sharePercent);
     });
 };
 
@@ -195,6 +243,13 @@ exports.checkDateCreatedValueForStatementNumberIFromList = function (i, value) {
                 console.log("The date created value for statement is  : " + promise);
                 expect(promise).toEqual(value);
             });
+    });
+};
+
+exports.clickOnBackToStatementViewLink = function () {
+    it("Click on the back to the statement view link ", function () {
+        pages.createManualStatement.clickOnTheBackToStatementViewLink();
+        pages.createManualStatement.waitForAjax();
     });
 };
 
@@ -379,4 +434,16 @@ exports.clickOnBatch1LinkManualStatementEditMode = function () {
     it("Click on the batch 1 link to see the details ", function () {
         pages.createManualStatement.clickOnTheBatch1LinkManualStatementEditMode();
     });
+};
+
+exports.clickOnAddBatchLinkManualStatementEditMode = function () {
+    it("Click on the add batch link to add new batch ", function () {
+        pages.createManualStatement.clickOnTheAddBatchLinkManualStatementEditMode();
+    });
+};
+
+exports.fillIntoTheBatchAmountDesiredValueNumberI= function(i,value){
+  it("Fill into the batch amount desired value for batch number " + i, function(){
+     pages.createManualStatement.fillIntoTheBatchAmountDesiredValueNumberI(i, value);
+  });
 };
