@@ -77,7 +77,7 @@ exports.feature = [
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Work ID");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 010278355 00");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
-            steps.createManualStatement.fillIntoAmountReceivedValue("20");
+            steps.createManualStatement.fillIntoAmountReceivedValue("55");
             steps.createManualStatement.clickOnDoneButtonManualStatement();
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
@@ -179,6 +179,38 @@ exports.feature = [
             steps.createManualStatement.editExpandedManualStatementNumberIFromList(1);
             steps.createManualStatement.clickOnAddBatchLinkManualStatementEditMode();
             steps.createManualStatement.fillIntoTheBatchAmountDesiredValueNumberI(2,45);
+
+            steps.createManualStatement.clickOnDefaultSettingsLink();
+            steps.createManualStatement.selectDesiredIncomeTypeValueFromDropDown("Digital Mechanical");
+            steps.createManualStatement.selectDesiredExploitationTerritoryValueFromDropDown("Bahamas");
+            steps.createManualStatement.clickOnUseBatch1SettingsCheckBox();
+
+            steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Title");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("work test");
+            steps.createManualStatement.selectDesiredWorkForManualStatement();
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(1, 2, "45");
+
+            steps.createManualStatement.fillIntoSourceValueWorkIRowJ(1,1,"Source new");
+            steps.createManualStatement.selectDesiredIncomeTypeWorkIRowJ(1,1, "Download Mechanical");
+            steps.createManualStatement.selectDesiredTerritoryWorkIRowJ(1,1, "Austria");
+            steps.createManualStatement.fillIntoYearFromPeriodWorkIRowJ(1,1, "2015");
+            steps.createManualStatement.selectDesiredMonthFromPeriodWorkIRowJ(1,1, "01");
+            steps.createManualStatement.fillIntoYearToPeriodWorkIRowJ(1,1, "2015");
+            steps.createManualStatement.selectDesiredMonthToPeriodWorkIRowJ(1,1,"08");
+            steps.createManualStatement.fillIntoUnitsWorkIRowJ(1,1,"8");
+            steps.createManualStatement.fillIntoProductDetailsWorkIRowJ(2, 1, "New catalogue");
+            steps.createManualStatement.fillIntoSharePercentWorkIRowJ(2, 1, "9");
+
+            steps.createManualStatement.clickOnTheClosedBatchCheckBox();
+
+            steps.createManualStatement.clickOnDoneButtonManualStatement();
+
+            steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
+            steps.createManualStatement.selectDesiredProcessingTerritory("India");
+            steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - December 2015");
+            //steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
+
+            steps.createManualStatement.checkStatusOfTheManualStatementNumberIFromList(1,"Reconciled");
         }
     }
 ];

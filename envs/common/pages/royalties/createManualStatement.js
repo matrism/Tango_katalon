@@ -27,8 +27,10 @@ if (pages.createManualStatement === undefined) {
             worksSearchInputField: {css: "div[data-ng-model='workEntries.newWork'] input"},
             receivedAmountInputField: {css: "div.amount.pull-left.table-cell input"},
             manualStatementIdNumber: {css: "div.RECORD-HEADER h1"},
+            useBatch1SettingsCheckBox: {css: "div.pull-right.use-other-batch.ng-scope i.fa.pull-left.fa-square-o"},
             batch1LinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement, batch), statementForm)']"},
             backToStatementViewLink: {css: "a[data-ui-sref='royalties.statements({statementId: statement.statement_id})']"},
+            closedBatchCheckBox: {css: "i[data-ng-click='stateHolder.isEditingBatches && openCloseBatch(activeBatch) && $event.stopPropagation()']"},
             addBatchLinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement), statementForm)']"}
         },
 
@@ -243,6 +245,7 @@ if (pages.createManualStatement === undefined) {
 
         selectTheDesiredWorkTypeToSearchFromDropDown: function (workType) {
             var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-model='workEntries.newWork'] select")));
             browser.driver.findElements(By.css("div[data-ng-model='workEntries.newWork'] select option"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -502,6 +505,16 @@ if (pages.createManualStatement === undefined) {
         fillIntoTheBatchAmountDesiredValueNumberI: function (i, amount) {
             pages.base.scrollIntoView(element(by.css("ul.nav.nav-tabs.pull-left li:nth-child(" + (i + 1) + ") input[data-ng-model='batch.amount']")));
             browser.driver.findElement(By.css("ul.nav.nav-tabs.pull-left li:nth-child(" + (i + 1) + ") input[data-ng-model='batch.amount']")).sendKeys(amount);
+        },
+
+        clickOnTheUseBatch1SettingsCheckBox: function () {
+            pages.base.scrollIntoView(pages.createManualStatement.elems.useBatch1SettingsCheckBox);
+            pages.createManualStatement.elems.useBatch1SettingsCheckBox.click();
+        },
+
+        clickOnTheClosedBatchCheckBox: function () {
+            pages.base.scrollIntoView(pages.createManualStatement.elems.closedBatchCheckBox);
+            pages.createManualStatement.elems.closedBatchCheckBox.click();
         }
     })
 }

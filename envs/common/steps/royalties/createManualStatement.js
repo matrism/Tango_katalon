@@ -198,16 +198,10 @@ exports.clickOnDoneButtonManualStatement = function () {
     });
 };
 
-exports.checkProcessingTerritoryText = function () {
-    it("Check the processing territory text present ", function () {
-
-    });
-};
-
 exports.returnManualStatementIdNumber = function () {
     it("Return manual statement id number ", function () {
         pages.createManualStatement.elems.manualStatementIdNumber.getText().then(function (promise) {
-            console.log("Id number for manual statemtn is " + promise);
+            console.log("Id number for manual statement is " + promise);
         });
     });
 };
@@ -442,8 +436,30 @@ exports.clickOnAddBatchLinkManualStatementEditMode = function () {
     });
 };
 
-exports.fillIntoTheBatchAmountDesiredValueNumberI= function(i,value){
-  it("Fill into the batch amount desired value for batch number " + i, function(){
-     pages.createManualStatement.fillIntoTheBatchAmountDesiredValueNumberI(i, value);
-  });
+exports.fillIntoTheBatchAmountDesiredValueNumberI = function (i, value) {
+    it("Fill into the batch amount desired value for batch number " + i, function () {
+        pages.createManualStatement.fillIntoTheBatchAmountDesiredValueNumberI(i, value);
+    });
+};
+
+exports.clickOnUseBatch1SettingsCheckBox = function () {
+    it("Click on the use batch 1 settings link ", function () {
+        pages.createManualStatement.clickOnTheUseBatch1SettingsCheckBox();
+    });
+};
+
+exports.clickOnClosedBatchCheckBox = function () {
+    it("Click on the closed batch check box ", function () {
+        pages.createManualStatement.clickOnTheClosedBatchCheckBox();
+    });
+};
+
+exports.checkStatusOfTheManualStatementNumberIFromList = function (i, status) {
+    it("Check the status of the manual statement number  " + i + " from the list ", function () {
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div[data-ng-class='getStatementStatusClass(statement.status)'] div[data-ng-class='getStatementStatusClass(statement.status)']")).getText()
+            .then(function (promise) {
+                console.log("Status of the manual statement is  " + promise);
+                expect(promise).toEqual(status);
+            });
+    });
 };
