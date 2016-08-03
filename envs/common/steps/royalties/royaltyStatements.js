@@ -14,6 +14,7 @@ pageStep([
     'Expect statement list to be populated',
     'Store first statement ID',
     'Store Income Providers',
+    'Store Companies',
     'Expect all visible statements to have type',
     'Expect number of visible statements to be',
     'Expect number of visible statements to be at least',
@@ -22,7 +23,9 @@ pageStep([
         'Filter by first statement ID',
         'Expect disabled filters to be',
         'Clear ID filter',
-        'Filter by known income providers'
+        'Clear Income Provider filter',
+        'Filter by known income providers',
+        'Filter by known companies'
     ]],
     'View details for income lines',
     ['Income Works', [

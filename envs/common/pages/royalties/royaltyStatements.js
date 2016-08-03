@@ -69,6 +69,15 @@ exports.storeIncomeProviders = function () {
     });
 }
 
+exports.storeCompanies = function () {
+    var list = exports.statementList();
+
+    list.$$('.company').getText().then(function(arr){
+        arr = arr.filter(Boolean);
+        testData.companies = _.uniq(arr);
+    });
+}
+
 exports.expectStatementListToBePopulated = function() {
     var list = exports.statementList();
 
@@ -160,10 +169,20 @@ exports.filters = (function(){
         return elem;
     };
 
-    filters.filterByIncomeProvider = function () {
-        var elem = filters.incomeProvider(),
-            results = elem.$$('.tg-typeahead__suggestions-group-item'),
-            names = _.toArray(arguments);
+    filters.company = () => {
+        var elem = $('[data-tg-searchable-column-id="filterStatementsByCompanyName"]');
+        return elem;
+    };
+
+    filters.clearIncomeProviderFilter = () => {
+        var elem = filters.incomeProvider();
+
+        elem.$('.tg-searchable-column__button-reset-filter').click();
+        pages.base.waitForAjax();
+    };
+
+    filters.multiFilter = (elem, names) => {
+        var results = elem.$$('.tg-typeahead__suggestions-group-item');
 
         elem.$('.tg-searchable-column__button-toggle').click();
 
@@ -179,8 +198,22 @@ exports.filters = (function(){
         pages.base.waitForAjax();
     };
 
+    filters.filterByIncomeProvider = (names) => {
+        let elem = filters.incomeProvider();
+        filters.multiFilter(elem, names);
+    };
+
+    filters.filterByCompany = (names) => {
+        let elem = filters.company();
+        filters.multiFilter(elem, names);
+    };
+
     filters.filterByKnownIncomeProviders = function () {
-        filters.filterByIncomeProvider(testData.incomeProviders[0], testData.incomeProviders[1]);
+        filters.filterByIncomeProvider([testData.incomeProviders[0], testData.incomeProviders[1]]);
+    };
+
+    filters.filterByKnownCompanies = function () {
+        filters.filterByCompany([testData.companies[0]]);
     };
 
     return filters;
