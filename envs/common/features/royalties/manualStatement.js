@@ -34,9 +34,9 @@ exports.feature = [
                 statementView.openStatementBlind();
 
                 statementView.expectStatementValueToBe('Processing Territory', 'Argentina');
-                statementView.expectStatementValueToBe('Royalty Period', 'January 2016 - March 2016');
+                statementView.expectStatementValueToBe('Royalty Period', '.* - .*');
                 statementView.expectStatementValueToBe('Income Provider', 'TATIP');
-                statementView.expectStatementValueToBe('Statement Distribution Period', '2014-10 to 2014-11');
+                statementView.expectStatementValueToBe('Distribution Period', '2014-10 to 2014-11');
                 statementView.expectStatementValueToBe('Statement Amount', '1,000.0000 USD');
                 statementView.expectStatementValueToBe('Commission Rate', '0 %');
                 statementView.expectStatementValueToBe('Exchange Rate', '1 USD TO 1 ARS');
@@ -45,7 +45,6 @@ exports.feature = [
 
                 describe('Edit mode', function () {
                     statementView.clickBackToStatementsViewLink();
-                    statementList.openFirstBlind();
 
                     statementList.clickEditButton();
                     statementList.expectSaveButtonToBeDisabled();
@@ -122,7 +121,7 @@ exports.feature = [
                 };
 
                 batchWorks.expectNumberOfWorksToBe(0);
-                batchWorks.addWorkByTitle('test');
+                batchWorks.addWorkByTitle('john');
                 batchWorks.expectNumberOfWorksToBe(1);
 
                 batchWorks.addIncomeLine(incomeLine);

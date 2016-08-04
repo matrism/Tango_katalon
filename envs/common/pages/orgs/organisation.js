@@ -262,7 +262,7 @@ if (pages.organisation === undefined) {
         },
         previewRegistrationRunTab: function () {
 
-            return $$(".nav-tabs>li>a").last();
+            return $$(".nav-tabs>li>a").get(2);
         },
         registrationActivityTab: function () {
             return $$(".nav-tabs>li>a").first();
