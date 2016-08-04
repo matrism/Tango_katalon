@@ -6,7 +6,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 },
 
-    exports.commonFeatureTags = ['deals', 'header', 'regression'];
+exports.commonFeatureTags = ['deals', 'header', 'regression', 'dealHeader'];
 
 exports.feature = [
     {
