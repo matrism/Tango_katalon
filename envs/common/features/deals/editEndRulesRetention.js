@@ -357,16 +357,16 @@ exports.feature = [
             steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
 
             //check default summary, if
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If [Variable Left] ... [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If [Variable Left] ... [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....");
             steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIContainsText(1, "If");
 
             //check variable left
             steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Balance Repaid ... [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Balance Repaid ... [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....");
             steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Current date");
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Current date[Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Current date[Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....");
             steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped ... [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped ... [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....");
 
             //cancel end rules and add again end rules
             steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetention();
@@ -377,13 +377,13 @@ exports.feature = [
             //check attribute left and % attribute left
             steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Recouped");
             steps.editDealRtp.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "65.43");
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped at 65.43% [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped at 65.43% [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....");
 
             //check with notice
             steps.editDealRtp.editClickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJRetention(1, 1);
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped at 65.43% (with notice) [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped at 65.43% (with notice) [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....");
             steps.editDealRtp.editClickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJRetention(1, 1);
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped at 65.43% [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Recouped at 65.43% [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....");
 
             //check requirement
             steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
@@ -452,7 +452,7 @@ exports.feature = [
 
             //check add new condition
             steps.editDealRtp.editSelectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 2, "Recouped");
-            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Balance Repaid at 32% is before the Recouped Date, and Recouped ... [Requirement] [Variable Right] ..., then the Actual End Date is the Recouped Date offset by 21 days.");
+            steps.editDealRtp.editCheckSummaryTextForEndRulesRuleNumberIRetention(1, "If Balance Repaid at 32% is before the Recouped Date, and Recouped ... [Requirement][Variable Right] ..., then the Actual End Date is the Recouped Date offset by 21 days.");
             steps.editDealRtp.editFillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 2, "30");
             steps.editDealRtp.editClickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJRetention(1, 2);
             steps.editDealRtp.editSelectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 2, 2);
