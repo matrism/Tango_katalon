@@ -202,8 +202,11 @@ exports.feature = [
             steps.createManualStatement.fillIntoSharePercentWorkIRowJ(1, 1, "9");
 
             steps.createManualStatement.clickOnClosedBatchCheckBox();
-
             steps.createManualStatement.clickOnDoneButtonManualStatement();
+            steps.createManualStatement.clickOnBackToStatementViewLink();
+
+            steps.createManualStatement.checkStatusOfTheBatchNumberIManualStatement(1,1,"RECONCILED");
+            steps.createManualStatement.checkStatusOfTheBatchNumberIManualStatement(2,1,"CLOSED");
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
             steps.createManualStatement.selectDesiredProcessingTerritory("India");
@@ -211,6 +214,10 @@ exports.feature = [
 
             steps.createManualStatement.checkStatusOfTheManualStatementNumberIFromList(1,"Reconciled");
             steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
+
+            steps.createManualStatement.checkStatusOfTheBatchNumberIManualStatement(1,1,"RECONCILED");
+            steps.createManualStatement.checkStatusOfTheBatchNumberIManualStatement(2,1,"CLOSED");
+
         }
     }
 ];

@@ -446,13 +446,13 @@ if (pages.createManualStatement === undefined) {
         fillIntoTheSharePercentWorkIRowJ: function (i, j, sharePercent) {
             pages.base.scrollIntoView(element(by.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share.pull-left.table-cell input[data-ng-model='line.share']")));
             browser.driver.findElement(By.css("div.works-entries.ng-scope > div > div.ng-scope:nth-child(" + i + ") div.clearfix.table-row.ng-scope:nth-child(" + (j + 1) + ") div.share.pull-left.table-cell input[data-ng-model='line.share']")).sendKeys(sharePercent);
+            browser.sleep(1000);
         },
 
         clickOnTheDoneButtonManualStatement: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.createTheManualStatementButton));
             pages.base.scrollIntoView(pages.createManualStatement.elems.createTheManualStatementButton);
             pages.createManualStatement.elems.createTheManualStatementButton.click();
-            browser.sleep(3000);
         },
 
         selectTheDesiredFilterRoyaltyPeriod: function (royaltyPeriod) {
@@ -511,7 +511,6 @@ if (pages.createManualStatement === undefined) {
         clickOnTheUseBatch1SettingsCheckBox: function () {
             pages.base.scrollIntoView(pages.createManualStatement.elems.useBatch1SettingsCheckBox);
             pages.createManualStatement.elems.useBatch1SettingsCheckBox.click();
-            browser.sleep(2000);
         },
 
         clickOnTheClosedBatchCheckBox: function () {

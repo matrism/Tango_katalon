@@ -451,6 +451,7 @@ exports.clickOnUseBatch1SettingsCheckBox = function () {
 exports.clickOnClosedBatchCheckBox = function () {
     it("Click on the closed batch check box ", function () {
         pages.createManualStatement.clickOnTheClosedBatchCheckBox();
+        pages.createManualStatement.waitForAjax();
     });
 };
 
@@ -460,6 +461,16 @@ exports.checkStatusOfTheManualStatementNumberIFromList = function (i, status) {
         browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div[data-ng-class='getStatementStatusClass(statement.status)']")).getText()
             .then(function (promise) {
                 console.log("Status of the manual statement is  " + promise);
+                expect(promise).toEqual(status);
+            });
+    });
+};
+
+exports.checkStatusOfTheBatchNumberIManualStatement = function (i,j, status) {
+    it("Check the status of the batch for  manual statement number  " + i + " from the list ", function () {
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + j + ") div.pull-rigth.second-column.span5.clearfix div.batch-table.ng-scope div[data-ng-repeat='batch in statement.manual_statement.income_statement_batches']:nth-child(" + i + ") span:nth-child(" + (j+2) +") span[data-ng-class='batch.status.toLowerCase()']")).getText()
+          .then(function (promise) {
+                console.log("Status of the batch for manual statement is  " + promise);
                 expect(promise).toEqual(status);
             });
     });
