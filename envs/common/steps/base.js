@@ -205,6 +205,16 @@ exports.closeTheTabByIndex = function(index){
    });
 };
 
+exports.scrollToBottom = () => {
+    it('Scroll to bottom and wait for Ajax', () => {
+        for (let i = 0; i < 20; i++) {
+            browser.executeScript('window.scrollTo(0, document.body.scrollHeight)').then(() => {
+                return pages.base.waitForAjax();
+            });
+        }
+    });
+};
+
 pageStep([
     'Open new tab',
     'Duplicate tab',

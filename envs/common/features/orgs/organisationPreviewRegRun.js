@@ -38,6 +38,7 @@ exports.feature = [
                 this.listErrorPrimaryValidationDetails();
                 this.checkPrimaryValidationErrorsFilters();
                 this.validateCriticalErrorsFilter();
+                steps.base.scrollToBottom();
                 this.validateNonCriticalErrorsFilter();
                 this.validateErrorSortFilters();
                 this.downloadCrFile();
