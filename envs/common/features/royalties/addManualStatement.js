@@ -77,7 +77,7 @@ exports.feature = [
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Work ID");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("WW 010278355 00");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
-            steps.createManualStatement.fillIntoAmountReceivedValue("55");
+            steps.createManualStatement.fillIntoAmountReceivedValue("20");
             steps.createManualStatement.clickOnDoneButtonManualStatement();
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
@@ -118,7 +118,7 @@ exports.feature = [
             steps.createManualStatement.clickOnBatch1LinkManualStatementEditMode();
 
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Title");
-            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("test");
+            steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("test work");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
             steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2, 1, "10");
             steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(2, 2, "5");
@@ -178,7 +178,7 @@ exports.feature = [
             steps.createManualStatement.clickOnBackToStatementViewLink();
             steps.createManualStatement.editExpandedManualStatementNumberIFromList(1);
             steps.createManualStatement.clickOnAddBatchLinkManualStatementEditMode();
-            steps.createManualStatement.fillIntoTheBatchAmountDesiredValueNumberI(2,45);
+            steps.createManualStatement.fillIntoBatchAmountDesiredValueNumberI(2,"45");
 
             steps.createManualStatement.clickOnDefaultSettingsLink();
             steps.createManualStatement.selectDesiredIncomeTypeValueFromDropDown("Digital Mechanical");
@@ -188,7 +188,7 @@ exports.feature = [
             steps.createManualStatement.selectDesiredWorkTypeToSearchFromDropDown("Title");
             steps.createManualStatement.fillIntoWorksInputFieldDesiredWork("work test");
             steps.createManualStatement.selectDesiredWorkForManualStatement();
-            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(1, 2, "45");
+            steps.createManualStatement.fillIntoAmountReceivedValueWorkIRowJ(1, 1, "45");
 
             steps.createManualStatement.fillIntoSourceValueWorkIRowJ(1,1,"Source new");
             steps.createManualStatement.selectDesiredIncomeTypeWorkIRowJ(1,1, "Download Mechanical");
@@ -198,19 +198,19 @@ exports.feature = [
             steps.createManualStatement.fillIntoYearToPeriodWorkIRowJ(1,1, "2015");
             steps.createManualStatement.selectDesiredMonthToPeriodWorkIRowJ(1,1,"08");
             steps.createManualStatement.fillIntoUnitsWorkIRowJ(1,1,"8");
-            steps.createManualStatement.fillIntoProductDetailsWorkIRowJ(2, 1, "New catalogue");
-            steps.createManualStatement.fillIntoSharePercentWorkIRowJ(2, 1, "9");
+            steps.createManualStatement.fillIntoProductDetailsWorkIRowJ(1, 1, "New catalogue");
+            steps.createManualStatement.fillIntoSharePercentWorkIRowJ(1, 1, "9");
 
-            steps.createManualStatement.clickOnTheClosedBatchCheckBox();
+            steps.createManualStatement.clickOnClosedBatchCheckBox();
 
             steps.createManualStatement.clickOnDoneButtonManualStatement();
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
             steps.createManualStatement.selectDesiredProcessingTerritory("India");
             steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - December 2015");
-            //steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
 
             steps.createManualStatement.checkStatusOfTheManualStatementNumberIFromList(1,"Reconciled");
+            steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
         }
     }
 ];

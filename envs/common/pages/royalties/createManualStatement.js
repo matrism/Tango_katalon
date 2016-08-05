@@ -452,6 +452,7 @@ if (pages.createManualStatement === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(pages.createManualStatement.elems.createTheManualStatementButton));
             pages.base.scrollIntoView(pages.createManualStatement.elems.createTheManualStatementButton);
             pages.createManualStatement.elems.createTheManualStatementButton.click();
+            browser.sleep(3000);
         },
 
         selectTheDesiredFilterRoyaltyPeriod: function (royaltyPeriod) {
@@ -510,6 +511,7 @@ if (pages.createManualStatement === undefined) {
         clickOnTheUseBatch1SettingsCheckBox: function () {
             pages.base.scrollIntoView(pages.createManualStatement.elems.useBatch1SettingsCheckBox);
             pages.createManualStatement.elems.useBatch1SettingsCheckBox.click();
+            browser.sleep(2000);
         },
 
         clickOnTheClosedBatchCheckBox: function () {

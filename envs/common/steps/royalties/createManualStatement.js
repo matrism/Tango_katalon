@@ -436,7 +436,7 @@ exports.clickOnAddBatchLinkManualStatementEditMode = function () {
     });
 };
 
-exports.fillIntoTheBatchAmountDesiredValueNumberI = function (i, value) {
+exports.fillIntoBatchAmountDesiredValueNumberI = function (i, value) {
     it("Fill into the batch amount desired value for batch number " + i, function () {
         pages.createManualStatement.fillIntoTheBatchAmountDesiredValueNumberI(i, value);
     });
@@ -456,7 +456,8 @@ exports.clickOnClosedBatchCheckBox = function () {
 
 exports.checkStatusOfTheManualStatementNumberIFromList = function (i, status) {
     it("Check the status of the manual statement number  " + i + " from the list ", function () {
-        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div[data-ng-class='getStatementStatusClass(statement.status)'] div[data-ng-class='getStatementStatusClass(statement.status)']")).getText()
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div[data-ng-class='getStatementStatusClass(statement.status)']"))));
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div[data-ng-class='getStatementStatusClass(statement.status)']")).getText()
             .then(function (promise) {
                 console.log("Status of the manual statement is  " + promise);
                 expect(promise).toEqual(status);
