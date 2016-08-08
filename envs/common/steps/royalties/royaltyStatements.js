@@ -16,9 +16,11 @@ pageStep([
     'Store Income Providers',
     'Store Companies',
     'Expect all visible statements to have type',
+    'Expect all visible statements to have status',
     'Expect number of visible statements to be',
     'Expect number of visible statements to be at least',
     ['Filters', [
+        'Select Status',
         'Select type',
         'Filter by first statement ID',
         'Expect disabled filters to be',

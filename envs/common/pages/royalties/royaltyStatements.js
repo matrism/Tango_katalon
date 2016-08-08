@@ -84,12 +84,12 @@ exports.expectStatementListToBePopulated = function() {
     expect(list.count()).toBeGreaterThan(0);
 };
 
-exports.expectAllVisibleStatementsToHaveType = function (name) {
+exports.expectAllVisibleStatementsToHaveColumn = function (name, column) {
     var list = exports.statementList();
 
     list.count().then(function(count){
         if (count) {
-            list.$$('.statement-type').getText().then(function(arr){
+            list.$$(column).getText().then(function(arr){
 
                 var onlyItemsOfExpectedType = _.every(arr, function(text) {
                     return text === name;
@@ -100,6 +100,14 @@ exports.expectAllVisibleStatementsToHaveType = function (name) {
         }
     });
 
+};
+
+exports.expectAllVisibleStatementsToHaveStatus = function (name) {
+    exports.expectAllVisibleStatementsToHaveColumn(name, '.statement-status');
+};
+
+exports.expectAllVisibleStatementsToHaveType = function (name) {
+    exports.expectAllVisibleStatementsToHaveColumn(name, '.statement-type');
 };
 
 exports.expectNumberOfVisibleStatementsToBe = function (num) {
@@ -119,7 +127,7 @@ exports.filters = (function(){
     var filters = {};
 
     filters.status = function () {
-
+        return tgDropdown(by.model('filters.status'));
     };
 
     filters.type = function () {
@@ -129,6 +137,14 @@ exports.filters = (function(){
 
     filters.selectType = function (name) {
         var dropdown = filters.type();
+
+        dropdown.click();
+        dropdown.results(name).first().click();
+        pages.base.waitForAjax();
+    };
+
+    filters.selectStatus = function (name) {
+        var dropdown = filters.status();
 
         dropdown.click();
         dropdown.results(name).first().click();

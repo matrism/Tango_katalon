@@ -30,6 +30,11 @@ exports.feature = [
             rs.selectFirstRoyaltyPeriod();
             rs.expectStatementListToBePopulated();
 
+            rsf.selectStatus('Unreconciled');
+            rs.expectAllVisibleStatementsToHaveStatus('Unreconciled');
+            rsf.selectStatus('Closed');
+            rs.expectAllVisibleStatementsToHaveStatus('Closed');
+            rsf.selectStatus('All');
             rsf.selectType('EDI');
             rs.expectAllVisibleStatementsToHaveType('EDI');
             rsf.selectType('Manual');
