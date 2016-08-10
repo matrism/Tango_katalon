@@ -17,7 +17,7 @@ exports.beforeFeature = function () {
 exports.feature = [
     {
         name: 'Upload EDI file - Smoke Test',
-        tags: ['uploadEDIFile', 'smokeTest', 'uploadEDIFileSmoke'],
+        tags: ['uploadEDIFile', 'smoke', 'uploadEDIFileSmoke'],
         steps: function() {
             var file = {
                     processingTerritory: 'Chile',
@@ -37,7 +37,7 @@ exports.feature = [
     },
     {
         name: 'Upload EDI file - CISAC M3',
-        tags: ['uploadEDIFile', 'sanityTest', 'uploadCisacM3'],
+        tags: ['uploadEDIFile', 'sanity', 'uploadCisacM3'],
         steps: function() {
             let uf = steps.uploadEdiFile,
                 file = {
@@ -60,7 +60,7 @@ exports.feature = [
     },
     {
         name: 'Upload EDI file - ASIAN WARNER',
-        tags: ['uploadEDIFile', 'sanityTest', 'uploadAsianWarner'],
+        tags: ['uploadEDIFile', 'sanity', 'uploadAsianWarner'],
         steps: function() {
             let uf = steps.uploadEdiFile,
                 file = {
@@ -82,7 +82,7 @@ exports.feature = [
     },
     {
         name: 'Upload EDI file - ASIAN SONY DIGITAL',
-        tags: ['uploadEDIFile', 'sanityTest', 'uploadAsianSonyDigital'],
+        tags: ['uploadEDIFile', 'sanity', 'uploadAsianSonyDigital'],
         steps: function() {
             let uf = steps.uploadEdiFile,
                 file = {
@@ -105,7 +105,7 @@ exports.feature = [
     },
     {
         name: 'Upload EDI file - Sanity Test',
-        tags: ['uploadEDIFile', 'sanityTest', 'uploadEDIFileSanity'],
+        tags: ['uploadEDIFile', 'sanity', 'uploadEDIFileSanity'],
         steps: function(){
             var files = YAML.load(path.resolve(__dirname, './data/ediFileSanity.yml')),
                 incomeProviders;
@@ -380,7 +380,7 @@ exports.feature = [
     },
     {
         name: 'Upload multiple EDI files',
-        tags: ['uploadMultipleEDIFiles', 'utility'],
+        tags: ['uploadMultipleEDIFiles', 'utility', 'regression'],
         steps: function() {
             var files;
 

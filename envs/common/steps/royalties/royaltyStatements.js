@@ -19,6 +19,7 @@ pageStep([
     'Expect all visible statements to have status',
     'Expect number of visible statements to be',
     'Expect number of visible statements to be at least',
+    'Expand Statement',
     ['Filters', [
         'Select Status',
         'Select type',
@@ -28,6 +29,9 @@ pageStep([
         'Clear Income Provider filter',
         'Filter by known income providers',
         'Filter by known companies'
+    ]],
+    ['Statement Details', [
+        'Expect to be visible'
     ]],
     'View details for income lines',
     ['Income Works', [

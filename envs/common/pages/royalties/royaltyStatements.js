@@ -54,6 +54,10 @@ exports.statementList = function () {
     return element.all(by.repeater('statement in statements'));
 };
 
+exports.statementRow = (i) => {
+    return exports.statementList().get(i);
+};
+
 exports.storeFirstStatementId = function () {
     var list = exports.statementList();
     list.first().$('.statement-id').getText().then(function(id){
@@ -122,6 +126,26 @@ exports.expectNumberOfVisibleStatementsToBeAtLeast = function (num) {
     expect(list.count()).toBeGreaterThan(num-1);
 
 };
+
+exports.expandStatement = (i) => {
+    exports.statementRow(i).$('.fa-chevron-down').click();
+    pages.base.waitForAjax();
+};
+
+exports.statementDetails = (() => {
+    let statementDetails = {};
+
+    statementDetails.get = (i) => {
+        return exports.statementRow(i).$('.accordion-body');
+    };
+
+    statementDetails.expectToBeVisible = (i) => {
+        let element = statementDetails.get(i);
+        expect(pages.base.isPresentAndDisplayed(element)).toBeTruthy();
+    };
+
+    return statementDetails;
+})();
 
 exports.filters = (function(){
     var filters = {};

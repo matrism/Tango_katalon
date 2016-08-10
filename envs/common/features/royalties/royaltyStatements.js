@@ -2,12 +2,12 @@
 
 var using = fnutils.using;
 
-exports.id = '4b83d03e-62e9-4718-8207-76717a81ee37';
+exports.id = 'a4803196-dfad-491b-839e-d362d2408ac1';
 
 exports.commonFeatureTags = [
     'royaltyRatesRegression',
     'royaltyRates',
-    'royaltyStatementsFilters',
+    'royaltyStatements',
     'regression'
 ];
 
@@ -18,7 +18,7 @@ exports.beforeFeature = () => {
 exports.feature = [
     {
         name: 'Royalty Statements Filters',
-        tags: [],
+        tags: ['royaltyStatementsFilters'],
         steps: () => {
             let rs = steps.royaltyStatements,
                 rsf = rs.filters;
@@ -60,4 +60,28 @@ exports.feature = [
             rs.expectAllVisibleStatementsToHaveType('MANUAL');
         }
     },
+    {
+        name: 'Royalty Statements - Expand statements',
+        tags: ['royaltyStatementsDetails'],
+        steps: () => {
+            let rs = steps.royaltyStatements,
+                rsf = rs.filters,
+                rsd = rs.statementDetails;
+
+            steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
+
+            rs.selectProcessingTerritory('United States');
+
+            rs.selectFirstRoyaltyPeriod();
+            rs.expectStatementListToBePopulated();
+            rsf.selectType('EDI');
+            rs.expectAllVisibleStatementsToHaveType('EDI');
+            rs.expandStatement(0);
+            rsd.expectToBeVisible(0);
+            rsf.selectType('Manual');
+            rs.expectAllVisibleStatementsToHaveType('MANUAL');
+            rs.expandStatement(0);
+            rsd.expectToBeVisible(0);
+        }
+    }
 ] 
