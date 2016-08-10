@@ -7,18 +7,27 @@ steps.royaltyStatements = exports;
 pageStep([
     'Select first royalty period',
     'Select Royalty Period',
+    'Store Selected Period',
+    'Validate Royalty Period',
+    'Validate Processing Territory',
+    'Select Processing Territory',
     'Expect statement list to be populated',
     'Store first statement ID',
     'Store Income Providers',
+    'Store Companies',
     'Expect all visible statements to have type',
+    'Expect all visible statements to have status',
     'Expect number of visible statements to be',
     'Expect number of visible statements to be at least',
     ['Filters', [
+        'Select Status',
         'Select type',
         'Filter by first statement ID',
         'Expect disabled filters to be',
         'Clear ID filter',
-        'Filter by known income providers'
+        'Clear Income Provider filter',
+        'Filter by known income providers',
+        'Filter by known companies'
     ]],
     'View details for income lines',
     ['Income Works', [

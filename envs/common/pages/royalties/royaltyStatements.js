@@ -23,6 +23,32 @@ exports.selectRoyaltyPeriod = function (val) {
     dropdown.selectValue(val);
 };
 
+exports.processingTerritoryDropdown = () => {
+    return tgDropdown(by.model('processingTerritoryModel'));
+};
+
+exports.validateProcessingTerritory = (value) => {
+    expect(exports.processingTerritoryDropdown().getSelectedValue()).toBe(value);
+};
+
+exports.selectProcessingTerritory = (val) => {
+    let elem = exports.processingTerritoryDropdown();
+
+    elem.selectValue(val);
+    pages.base.waitForAjax();
+};
+
+exports.storeSelectedPeriod = (variable) => {
+    exports.royaltyPeriodDropdown().getSelectedValue().then((text) => {
+        hash.testVariables[variable] = text
+    });
+};
+
+exports.validateRoyaltyPeriod = (value) => {
+    value = callResultOrValue(value);
+    expect(exports.royaltyPeriodDropdown().getSelectedValue()).toBe(value);
+};
+
 exports.statementList = function () {
     pages.base.waitForAjax();
     return element.all(by.repeater('statement in statements'));
@@ -43,18 +69,27 @@ exports.storeIncomeProviders = function () {
     });
 }
 
+exports.storeCompanies = function () {
+    var list = exports.statementList();
+
+    list.$$('.company').getText().then(function(arr){
+        arr = arr.filter(Boolean);
+        testData.companies = _.uniq(arr);
+    });
+}
+
 exports.expectStatementListToBePopulated = function() {
     var list = exports.statementList();
 
     expect(list.count()).toBeGreaterThan(0);
 };
 
-exports.expectAllVisibleStatementsToHaveType = function (name) {
+exports.expectAllVisibleStatementsToHaveColumn = function (name, column) {
     var list = exports.statementList();
 
     list.count().then(function(count){
         if (count) {
-            list.$$('.statement-type').getText().then(function(arr){
+            list.$$(column).getText().then(function(arr){
 
                 var onlyItemsOfExpectedType = _.every(arr, function(text) {
                     return text === name;
@@ -65,6 +100,14 @@ exports.expectAllVisibleStatementsToHaveType = function (name) {
         }
     });
 
+};
+
+exports.expectAllVisibleStatementsToHaveStatus = function (name) {
+    exports.expectAllVisibleStatementsToHaveColumn(name, '.statement-status');
+};
+
+exports.expectAllVisibleStatementsToHaveType = function (name) {
+    exports.expectAllVisibleStatementsToHaveColumn(name, '.statement-type');
 };
 
 exports.expectNumberOfVisibleStatementsToBe = function (num) {
@@ -84,7 +127,7 @@ exports.filters = (function(){
     var filters = {};
 
     filters.status = function () {
-
+        return tgDropdown(by.model('filters.status'));
     };
 
     filters.type = function () {
@@ -94,6 +137,14 @@ exports.filters = (function(){
 
     filters.selectType = function (name) {
         var dropdown = filters.type();
+
+        dropdown.click();
+        dropdown.results(name).first().click();
+        pages.base.waitForAjax();
+    };
+
+    filters.selectStatus = function (name) {
+        var dropdown = filters.status();
 
         dropdown.click();
         dropdown.results(name).first().click();
@@ -134,10 +185,20 @@ exports.filters = (function(){
         return elem;
     };
 
-    filters.filterByIncomeProvider = function () {
-        var elem = filters.incomeProvider(),
-            results = elem.$$('.tg-typeahead__suggestions-group-item'),
-            names = _.toArray(arguments);
+    filters.company = () => {
+        var elem = $('[data-tg-searchable-column-id="filterStatementsByCompanyName"]');
+        return elem;
+    };
+
+    filters.clearIncomeProviderFilter = () => {
+        var elem = filters.incomeProvider();
+
+        elem.$('.tg-searchable-column__button-reset-filter').click();
+        pages.base.waitForAjax();
+    };
+
+    filters.multiFilter = (elem, names) => {
+        var results = elem.$$('.tg-typeahead__suggestions-group-item');
 
         elem.$('.tg-searchable-column__button-toggle').click();
 
@@ -153,8 +214,22 @@ exports.filters = (function(){
         pages.base.waitForAjax();
     };
 
+    filters.filterByIncomeProvider = (names) => {
+        let elem = filters.incomeProvider();
+        filters.multiFilter(elem, names);
+    };
+
+    filters.filterByCompany = (names) => {
+        let elem = filters.company();
+        filters.multiFilter(elem, names);
+    };
+
     filters.filterByKnownIncomeProviders = function () {
-        filters.filterByIncomeProvider(testData.incomeProviders[0], testData.incomeProviders[1]);
+        filters.filterByIncomeProvider([testData.incomeProviders[0], testData.incomeProviders[1]]);
+    };
+
+    filters.filterByKnownCompanies = function () {
+        filters.filterByCompany([testData.companies[0]]);
     };
 
     return filters;
