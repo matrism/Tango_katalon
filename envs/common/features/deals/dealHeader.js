@@ -6,7 +6,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 },
 
-    exports.commonFeatureTags = ['deals', 'header', 'regression'];
+exports.commonFeatureTags = ['deals', 'header', 'regression', 'dealHeader'];
 
 exports.feature = [
     {
@@ -135,17 +135,17 @@ exports.feature = [
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField("Michael", "Michael");
+            steps.editDealGeneral.editSpecificRandomArtistField("Ron WilsonBruce MikeBill LameMichael", "Ron WilsonBruce MikeBill LameMichael");
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Bill Lame, Bruce Mike, Michael, Ron Wilson');
+            steps.headerDeal.checkArtistValue('Bill Lame, Bruce Mike, Ron Wilson, Ron WilsonBruce MikeBill LameMichael');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Bill Lame, Michael, Ron Wilson');
+            steps.headerDeal.checkArtistValue('Bill Lame, Ron Wilson, Ron WilsonBruce MikeBill LameMichael');
 
         }
     },

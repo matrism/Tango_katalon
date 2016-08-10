@@ -197,16 +197,16 @@ exports.feature = [
             cdr.addEndRules();
 
             // check default summary, if
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If [Variable Left] ... [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If [Variable Left] ... [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
             er.checkSummaryTextForEndRulesRuleNumberIContainsText(1, 'If');
 
             // check variable left
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, 'Balance Repaid');
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Balance Repaid ... [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Balance Repaid ... [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, 'Current date');
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Current date[Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Current date[Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, 'Recouped');
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped ... [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped ... [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
 
             // cancel end rules and add again end rules
             er.clickOnCancelEndRulesButton();
@@ -216,16 +216,16 @@ exports.feature = [
             // check attribute left and % attribute left
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, 'Recouped');
             er.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, '65.43');
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 65.43% [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 65.43% [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
             er.selectAttributeLeftEndRulesSpecificOptionPercentOrAmountRuleNumberIRowNumberJ(1, 1, 'Amount');
             er.fillIntoAttributeLeftAmountEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, 32);
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 32 [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 32 [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
 
             // check with notice
             er.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1, 1);
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 32 (with notice) [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 32 (with notice) [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
             er.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1, 1);
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 32 [Requirement] [Variable Right] ..., then the Actual End Date is [End Date Type] ....');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Recouped at 32 [Requirement][Variable Right] ..., then the Actual End Date is [End Date Type] ....');
 
             // check requirement
             er.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
@@ -294,14 +294,14 @@ exports.feature = [
 
             // check add new condition
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 2, 'Recouped');
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Balance Repaid at 32% is before the Recouped Date, and Recouped ... [Requirement] [Variable Right] ..., then the Actual End Date is the Retention Period Start offset by 21 days.');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Balance Repaid at 32% is before the Recouped Date, and Recouped ... [Requirement][Variable Right] ..., then the Actual End Date is the Retention Period Start offset by 21 days.');
             er.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 2, '30');
             er.clickOnWithNoticeCheckBoxEndRulesRuleNumberIRowNumberJ(1, 2);
             er.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 2, 2);
             er.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 2, 'Retention Period Minimum');
             er.checkSummaryTextForEndRulesRuleNumberI(1, 'If Balance Repaid at 32% is before the Recouped Date, and Recouped at 30% (with notice) is after the Retention Period Minimum, then the Actual End Date is the Retention Period Start offset by 21 days.');
             er.clickOnAddNewRuleEndRulesAddedRuleNumberI(1);
-            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If [Variable Left] ... [Requirement] [Variable Right] ..., and Balance Repaid at 32% is before the Recouped Date, and Recouped at 30% (with notice) is after the Retention Period Minimum, then the Actual End Date is the Retention Period Start offset by 21 days.');
+            er.checkSummaryTextForEndRulesRuleNumberI(1, 'If [Variable Left] ... [Requirement][Variable Right] ..., and Balance Repaid at 32% is before the Recouped Date, and Recouped at 30% (with notice) is after the Retention Period Minimum, then the Actual End Date is the Retention Period Start offset by 21 days.');
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, 'Balance Repaid');
             er.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, '30');
             er.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 1);

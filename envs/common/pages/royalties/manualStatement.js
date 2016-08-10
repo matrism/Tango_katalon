@@ -97,7 +97,7 @@ exports.view = (function(){
 
         var parentElem = element(by.cssContainingText('.control-label', label)).element(by.xpath('..'));
 
-        expect(parentElem.$('.controls').getText()).toEqual(val);
+        expect(parentElem.$('.controls').getText()).toMatch(val);
     };
 
     view.backToStatementsViewLink = function () {
