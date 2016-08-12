@@ -349,6 +349,23 @@ exports.itFillDealMandatoryFieldsGeneralTabWithData = function (contractingParty
 };
 
 
+exports.itFillDealMandatoryFieldsGeneralTabWithSpecificData = function (contractingParty, country, companyCode) {
+    describe("Fill mandatory fields in deals general tab", function () {
+        steps.createDealGeneral.goToNewDealPage();
+        steps.createDealGeneral.selectSigningTerritory(country);
+        if(systemConfig.env.name === 'qa') {
+            steps.createDealGeneral.fillCompanyCodeField(companyCode);
+            steps.createDealGeneral.waitForContractingPartyDropDown();
+            steps.createDealGeneral.selectRandomCompanyCode();
+        }
+        steps.createDealGeneral.fillContractingPartyFieldData(contractingParty);
+        steps.createDealGeneral.waitForContractingPartyDropDown();
+        steps.createDealGeneral.selectRandomContractingParty();
+    });
+};
+
+
+
 exports.itFillDealGeneralYearExecutionDateValue = function(year){
     it("Fill deal general year execution date specific value ", function(){
         pages.createDealGeneral.fillIntoTheExecutionYearFieldValue(year);

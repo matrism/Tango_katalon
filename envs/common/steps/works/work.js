@@ -1549,6 +1549,19 @@ exports.createWork = (data, varName) => {
     });
 };
 
+exports.storeWorkIdInTestVariable = function(varName){
+  it("Store WOrk Id in test variable", function(){
+      var binding = '::getWorkFullCode(work.pristine)',
+          idBinding = element(by.binding(binding));
+
+      browser.wait(EC.visibilityOf(idBinding));
+
+      idBinding.getText().then(function (value) {
+          hash.testVariables[varName] = value;
+      });
+  });
+};
+
 addStep(exports, 'Store Work ID in test variable', function (varName) {
 
     var binding = '::getWorkFullCode(work.pristine)',
