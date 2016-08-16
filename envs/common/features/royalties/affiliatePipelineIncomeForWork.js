@@ -86,7 +86,7 @@ var orgData = {
         incomeProvider: 'SACM',
         fileFormat: 'SACM',
         fileName: './data/mexicosmallfile_0.txt',
-        mockedFileName: 'TAT_2016-05-04T03_24_59.815Z.edi',
+        mockedFileName: 'TAT_2016-08-14T03_24_59.815Z.edi',
         amount: '100.0000',
         summaryByType: {
             'Folio Sales': '100.0000'
@@ -190,6 +190,41 @@ exports.feature = [
 
                 steps.work.goToRightsTab();
                 steps.workRights.expectNoErrorsInRightsGeneration();
+
+            });
+
+            describe('Upload edi file data', function () {
+                steps.uploadEdiFile.uploadFile(fileData);
+            });
+
+            describe('Verify uploaded edi file data ', function () {
+                steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
+
+                steps.createManualStatement.selectDesiredProcessingTerritory("Mexico");
+                steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - September 2015");
+                steps.createManualStatement.checkAmountOfTheBatchNumberIManualStatement(1, "1,164.5300");
+            });
+        }
+    },
+
+    {
+        name: 'Affiliate pipeline income -  upload EDI File',
+        tags: ['uploadIncomeEdiFile'],
+        steps: function () {
+
+            //describe('Upload edi file data', function () {
+            //    steps.uploadEdiFile.uploadFile(fileData);
+            //});
+
+            describe('Verify uploaded edi file data ', function () {
+                steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
+
+                steps.createManualStatement.selectDesiredProcessingTerritory("Mexico");
+                steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - September 2015");
+                steps.createManualStatement.checkAmountOfTheBatchNumberIManualStatement(1, "1,164.5300");
+                steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
+
+                steps.createManualStatement.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList(1);
 
             });
         }

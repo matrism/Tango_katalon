@@ -475,3 +475,22 @@ exports.checkStatusOfTheBatchNumberIManualStatement = function (i,j, status) {
             });
     });
 };
+
+exports.checkAmountOfTheBatchNumberIManualStatement = function (i,amount) {
+    it("Check the amount of the batch for  manual statement number  " + i + " from the list ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.converted-amount.pull-right"))));
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.converted-amount.pull-right")).getText()
+            .then(function (promise) {
+                console.log("Amount of the batch for manual statement is  " + promise);
+                expect(promise).toEqual(amount);
+            });
+    });
+};
+
+exports.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList = function (i) {
+    it("Click on the view details of income line for  manual statement number  " + i + " from the list ", function () {
+        pages.base.scrollIntoView(element(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix a[data-ui-sref='royalties.viewIncomeStatementWorks(getIncomeLinesRouteParams(statement))']")));
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix a[data-ui-sref='royalties.viewIncomeStatementWorks(getIncomeLinesRouteParams(statement))']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("#SUB-VIEWS h1.new-heading.nomargins.ng-binding"))));
+    });
+};
