@@ -203,28 +203,11 @@ exports.feature = [
                 steps.createManualStatement.selectDesiredProcessingTerritory("Mexico");
                 steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - September 2015");
                 steps.createManualStatement.checkAmountOfTheBatchNumberIManualStatement(1, "1,164.5300");
-            });
-        }
-    },
-
-    {
-        name: 'Affiliate pipeline income -  upload EDI File',
-        tags: ['uploadIncomeEdiFile'],
-        steps: function () {
-
-            //describe('Upload edi file data', function () {
-            //    steps.uploadEdiFile.uploadFile(fileData);
-            //});
-
-            describe('Verify uploaded edi file data ', function () {
-                steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
-
-                steps.createManualStatement.selectDesiredProcessingTerritory("Mexico");
-                steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - September 2015");
-                steps.createManualStatement.checkAmountOfTheBatchNumberIManualStatement(1, "1,164.5300");
                 steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
 
                 steps.createManualStatement.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList(1);
+                steps.createManualStatement.clickOnIncomeStatementCreatedFromList(4);
+                steps.createManualStatement.reMatchDesiredWorkForIncomeStatementInTheListNumberI('lastCreatedWorkId', 4)
 
             });
         }
