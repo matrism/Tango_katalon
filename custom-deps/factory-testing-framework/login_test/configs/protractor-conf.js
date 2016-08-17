@@ -24,7 +24,7 @@ config = {
     onPrepare: function() {
         console.time("Tests time");
         var reporting = _tf_config._system_.reporting;
-        browser.driver.manage().timeouts().setScriptTimeout(15000);
+        browser.driver.manage().timeouts().setScriptTimeout(150000);
     
         if (_tf_config._system_.resolution.width && _tf_config._system_.resolution.height)
             browser.driver.manage().window().setSize(_tf_config._system_.resolution.width, _tf_config._system_.resolution.height);

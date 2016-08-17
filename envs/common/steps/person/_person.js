@@ -15,6 +15,12 @@ exports.goToPersonPage = function () {
     });
 };
 
+exports.goToPerson = function (id) {
+    it('Go to person #'+id, function () {
+        pages.person.open(id);
+    });
+};
+
 exports.usePersonSlot = function (i) {
     it('Use person slot #' + (i + 1), function () {
         var currentPersonSlot;

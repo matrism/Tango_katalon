@@ -153,7 +153,7 @@ config = {
         // set path to features in config
         systemConfig.path_to_features = testFiles.load().features;
 
-        browser.driver.manage().timeouts().setScriptTimeout(15000);
+        browser.driver.manage().timeouts().setScriptTimeout(150000);
 
         /*
         // maximize browser size, then check if it's bigger than our config resolution
@@ -313,7 +313,7 @@ config = {
     framework: 'jasmine2',
     jasmineNodeOpts: {
         showColors: true,
-        defaultTimeoutInterval: 10 * 60 * 1000,
+        defaultTimeoutInterval: 100 * 60 * 1000,
         print: function(){}
     }
 };
