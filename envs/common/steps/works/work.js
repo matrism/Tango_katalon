@@ -1449,14 +1449,14 @@ exports.goBackToMainPageFromWork = function () {
 };
 
 
-exports.clickOnAllWorksButtonFilterForWorkLog = function() {
-    it("Click on the all works button filter for work log ", function(){
+exports.clickOnAllWorksButtonFilterForWorkLog = function () {
+    it("Click on the all works button filter for work log ", function () {
         pages.work.clickOnTheAllWorksButtonFilterForWorkLog();
     });
 };
 
-exports.clickOnConflictingWorksButtonFilterForWorkLog = function() {
-    it("Click on the conflicting works button filter for work log ", function(){
+exports.clickOnConflictingWorksButtonFilterForWorkLog = function () {
+    it("Click on the conflicting works button filter for work log ", function () {
         pages.work.clickOnTheConflictingWorksButtonFilterForWorkLog();
     });
 };
@@ -1509,7 +1509,7 @@ exports.checkDefaultFilterConflictWorksForWorkLog = function () {
     });
 };
 
-exports.checkDefaultFilterConflictWorksForWorkLogSelected= function () {
+exports.checkDefaultFilterConflictWorksForWorkLogSelected = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
         browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
             .then(function (promise) {
@@ -1549,17 +1549,18 @@ exports.createWork = (data, varName) => {
     });
 };
 
-exports.storeWorkIdInTestVariable = function(varName){
-  it("Store WOrk Id in test variable", function(){
-      var binding = '::getWorkFullCode(work.pristine)',
-          idBinding = element(by.binding(binding));
+exports.storeTheWorkIdInTestVariable = function (varName) {
+    it("Store Work Id in test variable", function () {
+        var binding = '::getWorkFullCode(work.pristine)',
+            idBinding = element(by.binding(binding));
 
-      browser.wait(EC.visibilityOf(idBinding));
+        browser.wait(EC.visibilityOf(idBinding));
 
-      idBinding.getText().then(function (value) {
-          hash.testVariables[varName] = value;
-      });
-  });
+        idBinding.getText().then(function (value) {
+            console.log('work id is ' + value);
+            setTestVariable(varName, value);
+        });
+    });
 };
 
 addStep(exports, 'Store Work ID in test variable', function (varName) {
@@ -1597,7 +1598,7 @@ pageStep([
         'Validate Header Title',
         'Expect No Error Message'
     ]],
-    ['Scope Delivery',[
+    ['Scope Delivery', [
         'Click on Deliver Work to Deal Scope Button',
         'Select deal',
         'Check scope',

@@ -551,14 +551,10 @@ if (pages.createManualStatement === undefined) {
             browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] input")).sendKeys(workId);
         },
 
-        selectTheDesiredWorkForManualStatementIncomeLineNumberI: function (i) {
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container"))));
-            browser.driver.findElements(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container"))
-                .then(function (options) {
-                    var element = options[0];
-                    element.click();
-                    browser.sleep(8000);
-                })
+        confirmOnTheMatchWorkOnIncomeLineNumberIAfterIsSelected: function () {
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+            pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.rematchMatchedIncomeWork()']")));
+            browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.rematchMatchedIncomeWork()']")).click();
         }
     })
 }

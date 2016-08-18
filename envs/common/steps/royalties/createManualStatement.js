@@ -505,9 +505,35 @@ exports.clickOnIncomeStatementCreatedFromList = function (i) {
 
 exports.reMatchDesiredWorkForIncomeStatementInTheListNumberI = function (workId, i) {
     it("Rematch the desired work for income statement having the work id " + workId + " and the line number " + i + " in the list", function () {
-        pages.createManualStatement.clickOnTheRematchButtonLinkForIncomeStatementsLineNumberI(4);
-        pages.createManualStatement.selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI("Work ID");
+        pages.createManualStatement.clickOnTheRematchButtonLinkForIncomeStatementsLineNumberI(i);
+        pages.createManualStatement.selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI("Work ID", i);
         pages.createManualStatement.fillIntoTheWorksInputFieldDesiredWorkIncomeLineNumberI(workId, i);
         pages.createManualStatement.selectTheDesiredWorkForManualStatementIncomeLineNumberI(i);
     });
 };
+
+exports.clickOnRematchButtonLinkForIncomeStatementsLineNumberI = function (i) {
+    it("Click on the rematch button link from income statement line number " + i, function () {
+        pages.createManualStatement.clickOnTheRematchButtonLinkForIncomeStatementsLineNumberI(i);
+    });
+};
+
+exports.selectDesiredWorkTypeToSearchFromDropDownIncomeLineI = function (type, i) {
+    it("Select desired work type to search from drop down income line number " + i, function () {
+        pages.createManualStatement.selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI(type, i);
+    });
+};
+
+exports.fillIntoWorksInputFieldDesiredWorkIncomeLineNumberI = function (workId, i) {
+    it("Fill into the works input field desired work income line number " + i, function () {
+        pages.createManualStatement.fillIntoTheWorksInputFieldDesiredWorkIncomeLineNumberI(workId, i);
+    });
+};
+
+exports.confirmOnMatchWorkOnIncomeLineNumberIAfterIsSelected = function () {
+    it("Click on the match work after it is selected on income ", function () {
+        pages.createManualStatement.confirmOnTheMatchWorkOnIncomeLineNumberIAfterIsSelected();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+

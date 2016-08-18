@@ -1375,6 +1375,7 @@ exports.registrationActivityTab = function () {
     );
 };
 
+
 exports.goToRegistrationActivityTab = function () {
     var element = exports.registrationActivityTab();
 

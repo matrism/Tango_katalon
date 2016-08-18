@@ -8,6 +8,7 @@ var using = require('../../../../helpers/fnutils').using,
     YAML = require('yamljs'),
     fileDefaults,
     originalTimeout,
+    fromTestVariable = require('../../../../helpers/fromTestVariable'),
     PROCESSING_TIMEOUT = 60 * 60 * 1000;
 
 exports.id = 'c629be22-73e2-429d-b68c-fe08309a154c';
@@ -118,7 +119,8 @@ console.log('Mock values:', mockValues);
 exports.feature = [
     {
         name: 'Affiliate pipeline income - EDI File',
-        tags: ['affiliatePipelineIncomeEdiFile'],
+        //tags: ['affiliatePipelineIncomeEdiFile'],
+        tags: ['affiliateEdi'],
         steps: function () {
 
             describe('Create new  data', function () {
@@ -178,9 +180,9 @@ exports.feature = [
                 steps.newWork.enterCreatorSearchTerms(0, "Cristina");
                 steps.newWork.selectCreatorSearchResultByIndex(0);
                 steps.newWork.enterCreatorContribution(0, 100);
-                steps.newWork.optToIncludeWorkOnWebsite(false);
+                steps.newWork.optToIncludeWorkOnWebsite(true);
                 steps.newWork.saveWork();
-                steps.work.storeWorkIdInTestVariable('lastCreatedWorkId');
+                steps.work.storeTheWorkIdInTestVariable('lastCreatedWorkId');
 
                 steps.work.goToScopeDeliveryTab();
                 steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();
@@ -190,7 +192,6 @@ exports.feature = [
 
                 steps.work.goToRightsTab();
                 steps.workRights.expectNoErrorsInRightsGeneration();
-
             });
 
             describe('Upload edi file data', function () {
@@ -199,15 +200,20 @@ exports.feature = [
 
             describe('Verify uploaded edi file data ', function () {
                 steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
-
                 steps.createManualStatement.selectDesiredProcessingTerritory("Mexico");
                 steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - September 2015");
                 steps.createManualStatement.checkAmountOfTheBatchNumberIManualStatement(1, "1,164.5300");
                 steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
-
                 steps.createManualStatement.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList(1);
                 steps.createManualStatement.clickOnIncomeStatementCreatedFromList(4);
-                steps.createManualStatement.reMatchDesiredWorkForIncomeStatementInTheListNumberI('lastCreatedWorkId', 4)
+                steps.createManualStatement.clickOnRematchButtonLinkForIncomeStatementsLineNumberI(4);
+                steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'), 'Work ID');
+                steps.createManualStatement.confirmOnMatchWorkOnIncomeLineNumberIAfterIsSelected();
+            });
+
+            describe('Backend functionality', function () {
+                steps.base.openTheNewTab("http://tanrflowsrv.tango.qa.wmg.com");
+                steps.base.focusOnNewOpenedTab(1);
 
             });
         }
