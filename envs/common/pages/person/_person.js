@@ -1,6 +1,7 @@
 'use strict';
 
-var ExpectedConditions = protractor.ExpectedConditions;
+var _ = require('lodash'),
+    ExpectedConditions = protractor.ExpectedConditions;
 
 exports = module.exports = pages.person = new ftf.pageObject();
 
@@ -76,13 +77,13 @@ exports.emailContainer = function(i) {
     return $$('.e2e-contact-email').get(i);
 };
 exports.alternativeNameContainer = function(i) {
-    return $$('.e2e-alternative-name').get(i);
+    return $$('.e2e-alternative-name .person__alternative-name_block').get(i);
 };
 exports.alternativeFirstNameInput = function(i) {
-    return this.alternativeNameContainer(i).$('.e2e-alternative-name-fisrt input');
+    return this.alternativeNameContainer(i).$('.e2e-primary-name-first input');
 };
 exports.alternativeLastNameInput = function(i) {
-    return this.alternativeNameContainer(i).$('.e2e-alternative-name-last input');
+    return this.alternativeNameContainer(i).$('.e2e-primary-name-last input');
 };
 exports.alternativeCreditsNameInput = function(i) {
     return this.alternativeNameContainer(i).$('.e2e-primary-name-credits input');
@@ -159,28 +160,29 @@ exports.payeeOption = function(value) {
 };
 
 exports.internalIpiNumberBinding = function() {
-    return $(".e2e-primary-name-internal-ipi .controls");
+    return $(".e2e-primary-name .e2e-primary-name-internal-ipi .controls");
 };
+
 exports.suisaIPINumber = function() {
     return $(".e2e-primary-name-suisa-ipi .controls");
 };
 exports.nameBinding = function() {
-    return $('.e2e-primary-name-full .controls');
+    return $('.e2e-primary-name .e2e-primary-name-full .controls');
 };
 exports.firstNameBinding = function() {
-    return $('.e2e-primary-name-first .controls');
+    return $('.e2e-primary-name .e2e-primary-name-first .controls');
 };
 exports.lastNameBinding = function() {
-    return $('.e2e-primary-name-last .controls');
+    return $('.e2e-primary-name .e2e-primary-name-last .controls');
 };
 exports.alternativeNameBinding = function(i) {
-    return $$('.e2e-alternative-name-full .controls').get(i);
+    return $$('.e2e-alternative-name .e2e-primary-name-full .controls').get(i);
 };
-exports.alternativeFirstNameBinding = function() {
-    return $('.e2e-alternative-name-first .controls');
+exports.alternativeFirstNameBinding = function(i) {
+    return $$('.e2e-alternative-name .e2e-primary-name-first .controls').get(i);
 };
-exports.alternativeLastNameBinding = function() {
-    return $('.e2e-alternative-name-last .controls');
+exports.alternativeLastNameBinding = function(i) {
+    return $$('.e2e-alternative-name .e2e-primary-name-last .controls').get(i);
 };
 exports.affiliatedSocietyBinding = function() {
     return $('.e2e-society-affiliation-society .controls');
@@ -229,11 +231,11 @@ exports.editNameButton = function() {
 exports.saveNameButton = function() {
     return exports.getSaveButton($('.e2e-primary-name'));
 };
-exports.editAlternativeNameButton = function() {
-    return exports.getEditButton($('.e2e-alternative-name'));
+exports.editAlternativeNameButton = function(i) {
+    return exports.getEditButton($$('.e2e-alternative-name .person__alternative-name_block').get(i));
 };
-exports.saveAlternativeNameButton = function() {
-    return exports.getSaveButton($('.e2e-alternative-name'));
+exports.saveAlternativeNameButton = function(i) {
+    return exports.getSaveButton($$('.e2e-alternative-name .person__alternative-name_block').get(i));
 };
 exports.editSocietyAffiliationButton = function() {
     return exports.getEditButton($('.e2e-society-affiliation'));
@@ -265,6 +267,12 @@ exports.editPaymentButton = function() {
 exports.savePaymentButton = function() {
     return exports.getSaveButton($('.e2e-payee'));
 };
+exports.editOthersButton = function() {
+    return exports.getEditButton($('.e2e-others'));
+};
+exports.saveOthersButton = function() {
+    return exports.getSaveButton($('.e2e-others'));
+};
 
 exports.getBindingText = function(element) {
     pages.base.scrollIntoView(element);
@@ -291,11 +299,11 @@ exports.getLastName = function() {
 exports.getAlternativeName = function(i) {
     return exports.getBindingText(exports.alternativeNameBinding(i));
 };
-exports.getAlternativeFirstName = function() {
-    return exports.getBindingText(exports.alternativeFirstNameBinding());
+exports.getAlternativeFirstName = function(i) {
+    return exports.getBindingText(exports.alternativeFirstNameBinding(i));
 };
-exports.getAlternativeLastName = function() {
-    return exports.getBindingText(exports.alternativeLastNameBinding());
+exports.getAlternativeLastName = function(i) {
+    return exports.getBindingText(exports.alternativeLastNameBinding(i));
 };
 exports.getAffiliatedSociety = function() {
     return exports.getBindingText(exports.affiliatedSocietyBinding());
@@ -361,11 +369,11 @@ exports.editPrimaryName = function() {
 exports.savePrimaryName = function() {
     return exports.clickOnEditButton(exports.saveNameButton());
 };
-exports.editAlternativeName = function() {
-    return exports.clickOnEditButton(exports.editAlternativeNameButton());
+exports.editAlternativeName = function(i) {
+    return exports.clickOnEditButton(exports.editAlternativeNameButton(i));
 };
-exports.saveAlternativeName = function() {
-    return exports.clickOnEditButton(exports.saveAlternativeNameButton());
+exports.saveAlternativeName = function(i) {
+    return exports.clickOnEditButton(exports.saveAlternativeNameButton(i));
 };
 exports.editSocietyAffiliation = function() {
     return exports.clickOnEditButton(exports.editSocietyAffiliationButton());
@@ -396,6 +404,13 @@ exports.editPayment = function() {
 };
 exports.savePayment = function() {
     return exports.clickOnEditButton(exports.savePaymentButton());
+};
+
+exports.editOthers = function() {
+    return exports.clickOnEditButton(exports.editOthersButton());
+};
+exports.saveOthers = function() {
+    return exports.clickOnEditButton(exports.saveOthersButton());
 };
 
 exports.typeFirstName = function(value) {
@@ -552,5 +567,27 @@ exports.personSearchMatch = function(i) {
 };
 exports.clickPersonSearchMatch = function(i) {
     return exports.personSearchMatch(i).click();
+};
+
+exports.placeOfBirthInput = function() {
+    return $('.e2e-others-place-of-birth input');
+};
+
+exports.typePlaceOfBirth = function(value) {
+    var element = this.placeOfBirthInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
+exports.citizenshipInput = function() {
+    return $('.e2e-others-citizenship input');
+};
+
+exports.typeCitizenship = function(value) {
+    var element = this.citizenshipInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
 };
 

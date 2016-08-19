@@ -52,7 +52,7 @@ var loginPage = function(_tf_config, lg_element) {
         },
         check: function(should_be_logged_in, wait_timeout) { 
             lg_element = lg_element || element(By.partialLinkText(this._login_name()));
-            wait_timeout = wait_timeout || 1000000;
+            wait_timeout = wait_timeout || 10000;
             should_be_logged_in = typeof should_be_logged_in === "undefined" ? true : should_be_logged_in;
             ftf.helper.waitForElement(lg_element, wait_timeout);
             lg_element.isPresent().then(function(present) {
