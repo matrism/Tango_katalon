@@ -112,8 +112,6 @@ mockValues = {
     lastCreatedStatementId: '8664'
 };
 
-console.log(`Mock values:`, mockValues);
-
 exports.feature = [
     {
         name: 'Work Ledger Summary - EDI File',
