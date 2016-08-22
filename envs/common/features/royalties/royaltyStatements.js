@@ -17,6 +17,19 @@ exports.beforeFeature = () => {
 
 exports.feature = [
     {
+        name: 'Royalty Statements - Check links',
+        tags: ['royaltyStatementsLinks'],
+        steps: () => {
+            let rh = steps.royaltiesHeader,
+                mh = steps.mainHeader;
+
+            mh.goToSubLink('Royalty Processing', 'Royalty Statements');
+            rh.clickLink('Upload Electronic File');
+            mh.goToSubLink('Royalty Processing', 'Royalty Statements');
+            rh.clickLink('Create Manual Statement');
+        }
+    },
+    {
         name: 'Royalty Statements Filters',
         tags: ['royaltyStatementsFilters'],
         steps: () => {
