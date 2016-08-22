@@ -127,30 +127,30 @@ exports.getPayeeAccountSummary = (ptc, rp, payeeId) => {
 };
 
 
-exports.getAffiliateWorkPipeline = function(ptc, rp, twc, frc)=> {
-    let url = systemConfig.env.royalties_url + '/api/v1/affiliate/work/pipeline';
-
-    url += `/territory_code/${ptc}/royalty_period/${rp}/tango_work_code/${twc}/force_recalc/${frc}`;
-
-    return requestUntilValue(
-        {
-            url: url,
-            method: 'GET'
-        },
-        'work_summary_distributions',
-        (val, objKey) => {
-        let obj = val[objKey],
-        keys = _.keys(obj);
-
-    if (keys.length) {
-        //TOFIX
-        /*let childObj = obj[keys[0]],
-         val = String(childObj.non_domestic_values.gross_received);
-         return !_.isNil(val) && val !== '0';*/
-        return val;
-    }
-}
-);
-};
+//exports.getAffiliateWorkPipeline = function(ptc, rp, twc, frc)=> {
+//    let url = systemConfig.env.royalties_url + '/api/v1/affiliate/work/pipeline';
+//
+//    url += `/territory_code/${ptc}/royalty_period/${rp}/tango_work_code/${twc}/force_recalc/${frc}`;
+//
+//    return requestUntilValue(
+//        {
+//            url: url,
+//            method: 'GET'
+//        },
+//        'work_summary_distributions',
+//        (val, objKey) => {
+//        let obj = val[objKey],
+//        keys = _.keys(obj);
+//
+//    if (keys.length) {
+//        //TOFIX
+//        /*let childObj = obj[keys[0]],
+//         val = String(childObj.non_domestic_values.gross_received);
+//         return !_.isNil(val) && val !== '0';*/
+//        return val;
+//    }
+//}
+//);
+//};
 
 
