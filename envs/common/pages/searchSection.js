@@ -5,8 +5,7 @@ var ExpectedConditions = protractor.ExpectedConditions;
 if (pages.searchSection === undefined) {
     pages.searchSection = new ftf.pageObject({
         url: _tf_config.urls.app_url + "#/create/deal",
-        locators: {
-        },
+        locators: {},
 
         searchDropdown: function () {
             return $("#DSP-SEARCH-DROP>button")
@@ -90,10 +89,25 @@ if (pages.searchSection === undefined) {
             pages.base.waitForAjax();
         },
 
+        workSearchTypeahead: function () {
+            return typeahead(by.model('incomeWork.selectedTangoWork'), false, true);
+        },
+
+        selectWorkTypeOption: function(){
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[data-ng-if='search.type === searchTypes.work'] select")));
+            browser.driver.findElements(By.css("div[data-ng-if='search.type === searchTypes.work'] select option"))
+                .then(function (options) {
+                    var element = options[0];
+                    element.click();
+                });
+        },
+
         typeDealNumberIntoInput: function (dealContractNumber) {
             this.searchInput().sendKeys(dealContractNumber);
         }
-    });
+    })
+    ;
 }
 
 module.exports = pages.searchSection;

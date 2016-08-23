@@ -49,21 +49,34 @@ exports.clickOnTryItOutButton = function () {
     });
 };
 
-exports.useWorkNumberFromManualStatementPageAndDoGetAffiliateIncomeWorkCall = function(){
-   it("Do the get affiliate income work call ", function(){
-       browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(4) div.work-accordion-group__item-work-code.ng-binding")).getText()
-           .then(function(promise){
-               console.log("The work code is " + promise);
+exports.useWorkNumberFromManualStatementPageAndDoGetAffiliateIncomeWorkCall = function () {
+    it("Do the get affiliate income work call ", function () {
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(4) div.work-accordion-group__item-work-code.ng-binding")).getText()
+            .then(function (promise) {
+                console.log("The work code is " + promise);
+                pages.base.focusOnTheNewOpenedTab(1);
+                pages.affiliateIncomeSwagger.expandTheAffiliateIncomeOperations();
+                pages.affiliateIncomeSwagger.expandTheGetAffiliateWorkPipelineCall();
+                pages.affiliateIncomeSwagger.fillIntoTheTangoWorkCodeInputField(promise);
+                pages.affiliateIncomeSwagger.selectTheDesiredOptionForForceRecalc("false");
+            });
+    });
+};
 
-               //pages.base.openTheNewTab("http://tanrflowsrv.tango.qa.wmg.com");
-               pages.base.focusOnTheNewOpenedTab(1);
-               pages.affiliateIncomeSwagger.expandTheAffiliateIncomeOperations();
-               pages.affiliateIncomeSwagger.expandTheGetAffiliateWorkPipelineCall();
-               //pages.affiliateIncomeSwagger.fillIntoTheTerritoryCodeInputField(124);
-               //pages.affiliateIncomeSwagger.fillIntoTheRoyaltyPeriodInputField(201507201509);
-               pages.affiliateIncomeSwagger.fillIntoTheTangoWorkCodeInputField(promise);
-               pages.affiliateIncomeSwagger.selectTheDesiredOptionForForceRecalc("false");
-               //pages.affiliateIncomeSwagger.clickOnTheTryItOutButton();
-           });
-  });
+exports.useTheWorkCodeAndSearchForIt = function () {
+    it("Use the work code and search for it ", function () {
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(4) div.work-accordion-group__item-work-code.ng-binding")).getText()
+            .then(function (promise) {
+                console.log("The work code is " + promise);
+                pages.searchSection.selectWorkTypeOption();
+                pages.searchSection.typeDealNumberIntoInput(promise);
+                pages.searchSection.selectValueFromDropdown();
+            });
+    });
+};
+
+exports.checkIncomeTypeOnJsonResult = function (incomeType) {
+    it("Check the income type on Json result ", function () {
+
+    });
 };

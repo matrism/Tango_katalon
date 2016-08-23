@@ -122,7 +122,7 @@ exports.feature = [
         //tags: ['affiliatePipelineIncomeEdiFile'],
         tags: ['affiliateEdi'],
         steps: function () {
-            //
+
             //describe('Create new  data', function () {
             //    //add organisation
             //    steps.mainHeader.createNewRecord("Organisation");
@@ -210,19 +210,25 @@ exports.feature = [
                 //steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'), 'Work ID');
                 //steps.createManualStatement.confirmOnMatchWorkOnIncomeLineNumberIAfterIsSelected();
             });
+            //
+            //describe('Backend functionality', function () {
+            //    steps.base.openTheNewTab("http://tanrflowsrv.tango.qa.wmg.com");
+            //    steps.affiliateIncomeSwagger.useWorkNumberFromManualStatementPageAndDoGetAffiliateIncomeWorkCall();
+            //    steps.affiliateIncomeSwagger.fillIntoTerritoryCodeInputField(124);
+            //    steps.affiliateIncomeSwagger.fillIntoRoyaltyPeriodInputField(201507201509);
+            //    steps.affiliateIncomeSwagger.selectTheDesiredOptionForForceRecalc("true");
+            //    steps.affiliateIncomeSwagger.clickOnTryItOutButton();
+            //});
 
-            describe('Backend functionality', function () {
-                steps.base.openTheNewTab("http://tanrflowsrv.tango.qa.wmg.com");
-                steps.affiliateIncomeSwagger.useWorkNumberFromManualStatementPageAndDoGetAffiliateIncomeWorkCall();
-                steps.affiliateIncomeSwagger.fillIntoTerritoryCodeInputField(124);
-                steps.affiliateIncomeSwagger.fillIntoRoyaltyPeriodInputField(201507201509);
-                steps.affiliateIncomeSwagger.selectTheDesiredOptionForForceRecalc("false");
-                steps.affiliateIncomeSwagger.clickOnTryItOutButton();
+
+            describe('Check affiliate income for work', function () {
+                //steps.base.focusOnNewOpenedTab(0);
+                steps.affiliateIncomeSwagger.useTheWorkCodeAndSearchForIt();
+                steps.work.goToIncomeRatesTab();
+
             });
-
-
-
-
         }
+
+
     }];
 

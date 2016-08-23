@@ -3,6 +3,7 @@
 var _ = require("lodash");
 var ExpectedConditions = protractor.ExpectedConditions;
 var pages_path = _tf_config._system_.path_to_pages;
+browser.ignoreSynchronization = true;
 
 if (pages.affiliateIncomeSwagger === undefined) {
     pages.affiliateIncomeSwagger = new ftf.pageObject({
@@ -69,7 +70,6 @@ if (pages.affiliateIncomeSwagger === undefined) {
         clickOnTheTryItOutButton: function(){
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.tryItOutButton);
             pages.affiliateIncomeSwagger.elems.tryItOutButton.click();
-            browser.sleep(10000);
         }
 
 
