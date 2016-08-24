@@ -123,80 +123,86 @@ exports.feature = [
         tags: ['affiliateEdi'],
         steps: function () {
 
-            //describe('Create new  data', function () {
-            //    //add organisation
-            //    steps.mainHeader.createNewRecord("Organisation");
-            //    steps.newOrganisation.populateName("Org test 1 TAT DENISA");
-            //    steps.newOrganisation.selectOrgType("Publisher");
-            //    steps.newOrganisation.selectTerritoryOfOperation("Worldwide");
-            //    steps.newOrganisation.selectPublisherType("WCM");
-            //    steps.newOrganisation.saveOrganisation();
-            //
-            //    //create deal
-            //    steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithSpecificData("bmi", "Canada", "CAM");
-            //    steps.deal.itContinueToNextPage();
-            //    steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
-            //    steps.createDealScope.addSpecificScopeTypeAndTerritory("Finder", "Worldwide");
-            //    //add Pss
-            //    steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
-            //    steps.createDealScope.clickOnAddPublisherShareSet();
-            //    steps.createDealScope.fillIntoFirstPublisherNameField("74616273");
-            //    steps.createDealScope.selectRandomPublisherNameDropDownValue();
-            //    steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("100");
-            //    steps.createDealScope.fillIntoFirstPublisherNameAMField("221851397");
-            //    steps.createDealScope.selectRandomPublisherNameDropDownValue();
-            //    steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("100");
-            //    steps.createDealScope.saveThePublisherShareSet();
-            //    //add rate set to Scope
-            //    steps.royaltyRates.addNewRoyaltySet();
-            //    steps.royaltyRates.addRatePercentageToContractualField("10");
-            //    steps.royaltyRates.clickOnReceiptApplicationMethod();
-            //    steps.royaltyRates.confirmChangingRateApplicationMethod();
-            //    steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
-            //    steps.royaltyRates.saveRateSet();
-            //    steps.deal.itContinueToNextPage();
-            //    //add rtp
-            //    steps.createDealRtp.selectRtpAllContractPeriods();
-            //    steps.createDealRtp.selectSpecificScopeNumberIRtpAcquisition(1);
-            //    steps.createDealRtp.fillIntoAcquisitionStartDateField("2013-09-18");
-            //    steps.deal.itContinueToNextPage();
-            //    //add payee
-            //    steps.createDealPayee.selectPayeeOrganisationFromDropdown("Org test 1 TAT DENISA");
-            //    steps.createDealPayee.fillPayeeInfo('Payout 1', 100, 100);
-            //    steps.createDealPayee.savePayeeForm();
-            //    steps.deal.waitContinueButtonEnabled();
-            //    steps.deal.itContinueToNextPage();
-            //    steps.deal.waitContinueButtonEnabled();
-            //    steps.deal.itContinueToNextPage();
-            //    steps.deal.saveDeal();
-            //    steps.deal.waitForDealToBeSaved();
-            //    steps.deal.returnDealNumber();
-            //    steps.deal.storeDealIdInTestVariable('lastCreatedDealId', 'lastCreatedDealUuid');
-            //
-            //    //create work
-            //    steps.base.useBlankEntityDataSlot('work', 0);
-            //    steps.newWork.goToNewWorkPage();
-            //    steps.newWork.enterPrimaryWorkTitle('WORK TAT 1' + (new Date()).getTime());
-            //    steps.newWork.enterCreatorSearchTerms(0, "Cristina");
-            //    steps.newWork.selectCreatorSearchResultByIndex(0);
-            //    steps.newWork.enterCreatorContribution(0, 100);
-            //    steps.newWork.optToIncludeWorkOnWebsite(true);
-            //    steps.newWork.saveWork();
-            //    steps.work.storeTheWorkIdInTestVariable('lastCreatedWorkId');
-            //
-            //    steps.work.goToScopeDeliveryTab();
-            //    steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();
-            //    steps.work.scopeDelivery.selectDeal(fromTestVariable('lastCreatedDealId'));
-            //    steps.work.scopeDelivery.checkScope(0);
-            //    steps.work.scopeDelivery.save();
-            //
-            //    steps.work.goToRightsTab();
-            //    steps.workRights.expectNoErrorsInRightsGeneration();
-            //});
-            //
-            //describe('Upload edi file data', function () {
-            //    steps.uploadEdiFile.uploadFile(fileData);
-            //});
+            var amountOfWork = 11.64,
+                exchangeRate = 0.07913008170000001,
+                grossReceived = amountOfWork*exchangeRate/100,
+                netReceived = amountOfWork*exchangeRate/100;
+
+
+            describe('Create new  data', function () {
+                //add organisation
+                steps.mainHeader.createNewRecord("Organisation");
+                steps.newOrganisation.populateName("Org test 1 TAT DENISA");
+                steps.newOrganisation.selectOrgType("Publisher");
+                steps.newOrganisation.selectTerritoryOfOperation("Worldwide");
+                steps.newOrganisation.selectPublisherType("WCM");
+                steps.newOrganisation.saveOrganisation();
+
+                //create deal
+                steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithSpecificData("bmi", "Canada", "CAM");
+                steps.deal.itContinueToNextPage();
+                steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
+                steps.createDealScope.addSpecificScopeTypeAndTerritory("Finder", "Worldwide");
+                //add Pss
+                steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
+                steps.createDealScope.clickOnAddPublisherShareSet();
+                steps.createDealScope.fillIntoFirstPublisherNameField("74616273");
+                steps.createDealScope.selectRandomPublisherNameDropDownValue();
+                steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("100");
+                steps.createDealScope.fillIntoFirstPublisherNameAMField("221851397");
+                steps.createDealScope.selectRandomPublisherNameDropDownValue();
+                steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("100");
+                steps.createDealScope.saveThePublisherShareSet();
+                //add rate set to Scope
+                steps.royaltyRates.addNewRoyaltySet();
+                steps.royaltyRates.addRatePercentageToContractualField("10");
+                steps.royaltyRates.clickOnReceiptApplicationMethod();
+                steps.royaltyRates.confirmChangingRateApplicationMethod();
+                steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
+                steps.royaltyRates.saveRateSet();
+                steps.deal.itContinueToNextPage();
+                //add rtp
+                steps.createDealRtp.selectRtpAllContractPeriods();
+                steps.createDealRtp.selectSpecificScopeNumberIRtpAcquisition(1);
+                steps.createDealRtp.fillIntoAcquisitionStartDateField("2013-09-18");
+                steps.deal.itContinueToNextPage();
+                //add payee
+                steps.createDealPayee.selectPayeeOrganisationFromDropdown("Org test 1 TAT DENISA");
+                steps.createDealPayee.fillPayeeInfo('Payout 1', 100, 100);
+                steps.createDealPayee.savePayeeForm();
+                steps.deal.waitContinueButtonEnabled();
+                steps.deal.itContinueToNextPage();
+                steps.deal.waitContinueButtonEnabled();
+                steps.deal.itContinueToNextPage();
+                steps.deal.saveDeal();
+                steps.deal.waitForDealToBeSaved();
+                steps.deal.returnDealNumber();
+                steps.deal.storeDealIdInTestVariable('lastCreatedDealId', 'lastCreatedDealUuid');
+
+                //create work
+                steps.base.useBlankEntityDataSlot('work', 0);
+                steps.newWork.goToNewWorkPage();
+                steps.newWork.enterPrimaryWorkTitle('WORK TAT 1' + (new Date()).getTime());
+                steps.newWork.enterCreatorSearchTerms(0, "Cristina");
+                steps.newWork.selectCreatorSearchResultByIndex(0);
+                steps.newWork.enterCreatorContribution(0, 100);
+                steps.newWork.optToIncludeWorkOnWebsite(true);
+                steps.newWork.saveWork();
+                steps.work.storeTheWorkIdInTestVariable('lastCreatedWorkId');
+
+                steps.work.goToScopeDeliveryTab();
+                steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();
+                steps.work.scopeDelivery.selectDeal(fromTestVariable('lastCreatedDealId'));
+                steps.work.scopeDelivery.checkScope(0);
+                steps.work.scopeDelivery.save();
+
+                steps.work.goToRightsTab();
+                steps.workRights.expectNoErrorsInRightsGeneration();
+            });
+
+            describe('Upload edi file data', function () {
+                steps.uploadEdiFile.uploadFile(fileData);
+            });
 
             describe('Verify uploaded edi file data ', function () {
                 steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
@@ -206,27 +212,41 @@ exports.feature = [
                 steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
                 steps.createManualStatement.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList(1);
                 steps.createManualStatement.clickOnIncomeStatementCreatedFromList(4);
-                //steps.createManualStatement.clickOnRematchButtonLinkForIncomeStatementsLineNumberI(4);
-                //steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'), 'Work ID');
-                //steps.createManualStatement.confirmOnMatchWorkOnIncomeLineNumberIAfterIsSelected();
+                steps.createManualStatement.clickOnRematchButtonLinkForIncomeStatementsLineNumberI(4);
+                steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'), 'Work ID');
+                steps.createManualStatement.confirmOnMatchWorkOnIncomeLineNumberIAfterIsSelected();
             });
+
+            describe('Backend functionality', function () {
+                steps.base.openTheNewTab("http://tanrflowsrv.tango.qa.wmg.com");
+                steps.affiliateIncomeSwagger.useWorkNumberFromManualStatementPageAndDoGetAffiliateIncomeWorkCall();
+                steps.affiliateIncomeSwagger.fillIntoTerritoryCodeInputField(124);
+                steps.affiliateIncomeSwagger.fillIntoRoyaltyPeriodInputField(201507201509);
+                steps.affiliateIncomeSwagger.selectDesiredOptionForForceRecalc("true");
+                steps.affiliateIncomeSwagger.clickOnTryItOutButton();
+            });
+
+            describe('Check the Json results', function(){
+               steps.affiliateIncomeSwagger.checkIncomeTypeOnJsonResult('SDIGP');
+
+                //steps.affiliateIncomeSwagger.checkGrossReceivedValueOnJsonResult(grossReceived.toString);
+                //steps.affiliateIncomeSwagger.checkNetReceivedValueOnJsonResult(netReceived.toString);
+                steps.affiliateIncomeSwagger.checkGrossReceivedValueOnJsonResult("0.921074150988");
+                steps.affiliateIncomeSwagger.checkNetReceivedValueOnJsonResult("0.921074150988");
+                steps.affiliateIncomeSwagger.checkDstNpsValueOnJsonResult("0.66317338871136");
+                steps.affiliateIncomeSwagger.checkPaidOutValueOnJsonResult("0.07368593207904");
+                steps.affiliateIncomeSwagger.checkAdminValueOnJsonResult("0");
+                steps.affiliateIncomeSwagger.checkSubPublisherNpsValueOnJsonResult("0.18421483019760002");
+
+            });
+
+
+            //describe('Check affiliate income for work', function () {
+            //    //steps.base.focusOnNewOpenedTab(0);
+            //    steps.affiliateIncomeSwagger.useTheWorkCodeAndSearchForIt();
+            //    steps.work.goToIncomeRatesTab();
             //
-            //describe('Backend functionality', function () {
-            //    steps.base.openTheNewTab("http://tanrflowsrv.tango.qa.wmg.com");
-            //    steps.affiliateIncomeSwagger.useWorkNumberFromManualStatementPageAndDoGetAffiliateIncomeWorkCall();
-            //    steps.affiliateIncomeSwagger.fillIntoTerritoryCodeInputField(124);
-            //    steps.affiliateIncomeSwagger.fillIntoRoyaltyPeriodInputField(201507201509);
-            //    steps.affiliateIncomeSwagger.selectTheDesiredOptionForForceRecalc("true");
-            //    steps.affiliateIncomeSwagger.clickOnTryItOutButton();
             //});
-
-
-            describe('Check affiliate income for work', function () {
-                //steps.base.focusOnNewOpenedTab(0);
-                steps.affiliateIncomeSwagger.useTheWorkCodeAndSearchForIt();
-                steps.work.goToIncomeRatesTab();
-
-            });
         }
 
 

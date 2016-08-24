@@ -18,34 +18,35 @@ if (pages.affiliateIncomeSwagger === undefined) {
 
 
         expandTheAffiliateIncomeOperations: function () {
+            browser.sleep(2000);
             browser.wait(ExpectedConditions.visibilityOf(pages.affiliateIncomeSwagger.elems.affiliateIncomeOperations));
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.affiliateIncomeOperations);
             pages.affiliateIncomeSwagger.elems.affiliateIncomeOperations.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.affiliateIncomeSwagger.elems.getAffiliateWorkPipelineLine));
         },
 
-        expandTheGetAffiliateWorkPipelineCall: function(){
+        expandTheGetAffiliateWorkPipelineCall: function () {
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.getAffiliateWorkPipelineLine);
             pages.affiliateIncomeSwagger.elems.getAffiliateWorkPipelineLine.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.affiliateIncomeSwagger.elems.territoryCodeInputField));
         },
 
-        fillIntoTheTerritoryCodeInputField: function(territoryCode){
+        fillIntoTheTerritoryCodeInputField: function (territoryCode) {
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.territoryCodeInputField);
             pages.affiliateIncomeSwagger.elems.territoryCodeInputField.sendKeys(territoryCode);
         },
 
-        fillIntoTheRoyaltyPeriodInputField: function(royaltyPeriod){
+        fillIntoTheRoyaltyPeriodInputField: function (royaltyPeriod) {
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.royaltyPeriodInputField);
             pages.affiliateIncomeSwagger.elems.royaltyPeriodInputField.sendKeys(royaltyPeriod);
         },
 
-        fillIntoTheTangoWorkCodeInputField: function(tangoWorkCode){
+        fillIntoTheTangoWorkCodeInputField: function (tangoWorkCode) {
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.tangoWorkCodeInputField);
             pages.affiliateIncomeSwagger.elems.tangoWorkCodeInputField.sendKeys(tangoWorkCode);
         },
 
-        selectTheDesiredOptionForForceRecalc : function(forceRecalc){
+        selectTheDesiredOptionForForceRecalc: function (forceRecalc) {
             var desiredOption;
             pages.base.scrollIntoView(element(by.css("#affiliate_pipelineWorkIncome_0_content select[name='force_recalc']")));
             browser.driver.findElements(By.css("#affiliate_pipelineWorkIncome_0_content select[name='force_recalc'] option"))
@@ -63,13 +64,15 @@ if (pages.affiliateIncomeSwagger === undefined) {
                 .then(function clickOption() {
                     if (desiredOption) {
                         desiredOption.click();
+                        browser.sleep(1000);
                     }
                 });
         },
 
-        clickOnTheTryItOutButton: function(){
+        clickOnTheTryItOutButton: function () {
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.tryItOutButton);
             pages.affiliateIncomeSwagger.elems.tryItOutButton.click();
+            browser.sleep(2000);
         }
 
 

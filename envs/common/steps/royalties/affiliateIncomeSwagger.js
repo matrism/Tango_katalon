@@ -36,7 +36,7 @@ exports.fillIntoTangoWorkCodeInputField = function (tangoWorkCode) {
     });
 };
 
-exports.selectTheDesiredOptionForForceRecalc = function (forceRecalc) {
+exports.selectDesiredOptionForForceRecalc = function (forceRecalc) {
     it("Select the desired option for force recalc ", function () {
         pages.affiliateIncomeSwagger.selectTheDesiredOptionForForceRecalc(forceRecalc);
     });
@@ -58,6 +58,7 @@ exports.useWorkNumberFromManualStatementPageAndDoGetAffiliateIncomeWorkCall = fu
                 pages.affiliateIncomeSwagger.expandTheAffiliateIncomeOperations();
                 pages.affiliateIncomeSwagger.expandTheGetAffiliateWorkPipelineCall();
                 pages.affiliateIncomeSwagger.fillIntoTheTangoWorkCodeInputField(promise);
+                //pages.affiliateIncomeSwagger.fillIntoTheTangoWorkCodeInputField("WW 015092015 00");
                 pages.affiliateIncomeSwagger.selectTheDesiredOptionForForceRecalc("false");
             });
     });
@@ -77,6 +78,77 @@ exports.useTheWorkCodeAndSearchForIt = function () {
 
 exports.checkIncomeTypeOnJsonResult = function (incomeType) {
     it("Check the income type on Json result ", function () {
+        pages.base.scrollIntoView(element(by.css("div.response pre.json span:nth-child(18)>span.attribute")));
+        browser.driver.findElement(By.css("div.response pre.json span:nth-child(18)>span.attribute")).getText()
+            .then(function (promise) {
+                console.log("The income type from json result is : " + promise);
+                expect(promise).toEqual(incomeType);
+            });
+    });
+};
 
+exports.checkGrossReceivedValueOnJsonResult = function (grossReceived) {
+    it("Check the gross received value on Json result ", function () {
+        pages.base.scrollIntoView(element(by.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(2)")));
+        browser.driver.findElement(By.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(2)")).getText()
+            .then(function (promise) {
+                console.log("The gross received value from json result is : " + promise);
+                expect(promise).toEqual(grossReceived);
+            });
+    });
+};
+
+exports.checkNetReceivedValueOnJsonResult = function (netReceived) {
+    it("Check the net received value on Json result ", function () {
+        pages.base.scrollIntoView(element(by.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(4)")));
+        browser.driver.findElement(By.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(4)")).getText()
+            .then(function (promise) {
+                console.log("The net received value from json result is : " + promise);
+                expect(promise).toEqual(netReceived);
+            });
+    });
+};
+
+exports.checkDstNpsValueOnJsonResult = function (paidOut) {
+    it("Check the dst nps value on Json result ", function () {
+        pages.base.scrollIntoView(element(by.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(6)")));
+        browser.driver.findElement(By.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(6)")).getText()
+            .then(function (promise) {
+                console.log("The dst nps value from json result is : " + promise);
+                expect(promise).toEqual(paidOut);
+            });
+    });
+};
+
+exports.checkPaidOutValueOnJsonResult = function (paidOut) {
+    it("Check the paid out value on Json result ", function () {
+        pages.base.scrollIntoView(element(by.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(8)")));
+        browser.driver.findElement(By.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(8)")).getText()
+            .then(function (promise) {
+                console.log("The paid out value from json result is : " + promise);
+                expect(promise).toEqual(paidOut);
+            });
+    });
+};
+
+exports.checkAdminValueOnJsonResult = function (admin) {
+    it("Check the admin value on Json result ", function () {
+        pages.base.scrollIntoView(element(by.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(10)")));
+        browser.driver.findElement(By.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(10)")).getText()
+            .then(function (promise) {
+                console.log("The admin value from json result is : " + promise);
+                expect(promise).toEqual(admin);
+            });
+    });
+};
+
+exports.checkSubPublisherNpsValueOnJsonResult = function (subPublisherNps) {
+    it("Check the subpublisher nps value on Json result ", function () {
+        pages.base.scrollIntoView(element(by.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(12)")));
+        browser.driver.findElement(By.css("div.response pre.json span:nth-child(18)>span.value>span.value:nth-child(12)")).getText()
+            .then(function (promise) {
+                console.log("The subpubliser nps value from json result is : " + promise);
+                expect(promise).toEqual(subPublisherNps);
+            });
     });
 };
