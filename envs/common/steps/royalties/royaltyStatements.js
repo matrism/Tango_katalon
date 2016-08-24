@@ -23,6 +23,7 @@ pageStep([
     ['Filters', [
         'Select Status',
         'Select type',
+        'Validate selected type',
         'Filter by first statement ID',
         'Expect disabled filters to be',
         'Clear ID filter',

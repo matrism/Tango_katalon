@@ -167,6 +167,12 @@ exports.filters = (function(){
         pages.base.waitForAjax();
     };
 
+    filters.validateSelectedType = function (name) {
+        var dropdown = filters.type();
+
+        expect(dropdown.getSelectedValue()).toBe(name);
+    };
+
     filters.selectStatus = function (name) {
         var dropdown = filters.status();
 

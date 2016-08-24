@@ -87,6 +87,7 @@ exports.feature = [
 
             rs.selectFirstRoyaltyPeriod();
             rs.expectStatementListToBePopulated();
+            rsf.validateSelectedType('All');
             rsf.selectType('EDI');
             rs.expectAllVisibleStatementsToHaveType('EDI');
             rs.expandStatement(0);
