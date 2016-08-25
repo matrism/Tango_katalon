@@ -58,6 +58,10 @@ if [ "$use_selenium_server" != 'false' ]; then
     cmd_line+=" --use-selenium-server "
 fi
 
+if [ -n "$deal_id" ]; then
+    cmd_line+=" --deal-id $(printf '%q' "$deal_id") "
+fi
+
 if [ -n "$app_user" ]; then
     cmd_line+=" --app-user $(printf '%q' "$app_user") "
 fi
