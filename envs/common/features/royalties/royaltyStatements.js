@@ -74,7 +74,7 @@ exports.feature = [
         }
     },
     {
-        name: 'Royalty Statements - Expand statements',
+        name: 'Royalty Statements - Validate default table filters and expand statements',
         tags: ['royaltyStatementsDetails'],
         steps: () => {
             let rs = steps.royaltyStatements,
@@ -87,7 +87,11 @@ exports.feature = [
 
             rs.selectFirstRoyaltyPeriod();
             rs.expectStatementListToBePopulated();
+            rsf.validateSelectedStatus('All');
             rsf.validateSelectedType('All');
+            rsf.validateSelectedId('All');
+            rsf.validateSelectedIncomeProvider('All');
+            rsf.validateSelectedCompany('All');
             rsf.selectType('EDI');
             rs.expectAllVisibleStatementsToHaveType('EDI');
             rs.expandStatement(0);

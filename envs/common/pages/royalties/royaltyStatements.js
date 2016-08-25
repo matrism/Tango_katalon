@@ -167,12 +167,6 @@ exports.filters = (function(){
         pages.base.waitForAjax();
     };
 
-    filters.validateSelectedType = function (name) {
-        var dropdown = filters.type();
-
-        expect(dropdown.getSelectedValue()).toBe(name);
-    };
-
     filters.selectStatus = function (name) {
         var dropdown = filters.status();
 
@@ -260,6 +254,31 @@ exports.filters = (function(){
 
     filters.filterByKnownCompanies = function () {
         filters.filterByCompany([testData.companies[0]]);
+    };
+
+    filters.validateSelectedStatus = function (name) {
+        var dropdown = filters.status();
+        expect(dropdown.getSelectedValue()).toBe(name);
+    };
+
+    filters.validateSelectedType = function (name) {
+        var dropdown = filters.type();
+        expect(dropdown.getSelectedValue()).toBe(name);
+    };
+
+    filters.validateSelectedId = function (name) {
+        var dropdown = filters.id();
+        expect(dropdown.getText()).toContain(name);
+    };
+
+    filters.validateSelectedIncomeProvider = function (name) {
+        var dropdown = filters.incomeProvider();
+        expect(dropdown.getText()).toContain(name);
+    };
+
+    filters.validateSelectedCompany = function (name) {
+        var dropdown = filters.company();
+        expect(dropdown.getText()).toContain(name);
     };
 
     return filters;

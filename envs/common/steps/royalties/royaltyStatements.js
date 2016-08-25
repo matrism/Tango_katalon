@@ -23,13 +23,17 @@ pageStep([
     ['Filters', [
         'Select Status',
         'Select type',
-        'Validate selected type',
         'Filter by first statement ID',
         'Expect disabled filters to be',
         'Clear ID filter',
         'Clear Income Provider filter',
         'Filter by known income providers',
-        'Filter by known companies'
+        'Filter by known companies',
+        'Validate selected Status',
+        'Validate selected type',
+        'Validate selected ID',
+        'Validate selected Income Provider',
+        'Validate selected Company'
     ]],
     ['Statement Details', [
         'Expect to be visible'
