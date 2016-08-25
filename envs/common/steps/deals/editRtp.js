@@ -80,6 +80,12 @@ exports.editSelectSpecificScopeNumberIRtpAcquisition = function (i) {
     });
 };
 
+exports.selectScopeNumberIFromInput = function (i, j, type) {
+    it('Select scope number ' + i + ' from ' + type + ' input #' + i, function () {
+        pages.editDealRtp.selectScopeNumberIFromInput(i, j, type);
+    });
+};
+
 exports.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI = function (i, durationType) {
     it("Edit select the specific duration type retention from acquisition number " + i, function () {
         pages.editDealRtp.editSelectTheSpecificDurationTypeRetentionFromAcquisitionNumberI(i, durationType);

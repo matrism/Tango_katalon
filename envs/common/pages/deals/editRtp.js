@@ -191,6 +191,23 @@ if (pages.editDealRtp === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions ng-scope"))));
         },
 
+        selectScopeNumberIFromInput: function (i, j, type) {
+            var input;
+
+            if (type == 'ptc') {
+                input = pages.editDealRtp.editScopePostTermInputField(j);
+            } else if (type == 'acq') {
+                input = pages.editDealRtp.editScopeAcquisitionInputField(j);
+            } else {
+                input = pages.editDealRtp.editScopeRetentionInputField(j);
+            }
+            pages.base.scrollIntoView(input);
+            input.clear();
+            input.click();
+            browser.wait(ExpectedConditions.visibilityOf($('ul.tg-typeahead__suggestions.ng-scope')));
+            pages.editDealRtp.scopeOption(i).click();
+        },
+
         editSelectTheSpecificDurationTypeRetentionFromAcquisitionNumberI: function (i, durationType) {
             var desiredOption;
             browser.driver.findElements(By.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope select#retention_duration_type option"))
