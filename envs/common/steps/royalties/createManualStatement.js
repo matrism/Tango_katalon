@@ -537,4 +537,33 @@ exports.confirmOnMatchWorkOnIncomeLineNumberIAfterIsSelected = function () {
     });
 };
 
+exports.selectDesiredFilterRoyaltyPeriodValueDropDownIncomeRates = function (royaltyPeriod) {
+    it("Select the desired royalty period value from the drop down ", function () {
+        pages.createManualStatement.selectTheDesiredFilterRoyaltyPeriodIncomeRates(royaltyPeriod);
+        pages.createManualStatement.waitForAjax();
+    });
+};
 
+
+exports.checkValuesInTheIncomeRatesFilteredTable = function (values) {
+    it("Check that values are present into the income and rates - royalty income table ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("table.table.royalty-share-distribution-table.royalty-income-table"))));
+        browser.driver.findElement(By.css("table.table.royalty-share-distribution-table.royalty-income-table")).getText()
+            .then(function (promise) {
+                console.log("The table has a lot of values :" + promise);
+                expect(promise).toContain(values);
+            });
+    });
+};
+
+exports.selectSpecificStatementIncomeGroupValueDropDown = function(statementIncomeGroup){
+  it("Select specific statement income group value from drop down ", function(){
+      pages.createManualStatement.selectTheSpecificStatementIncomeGroupValueDropDown(statementIncomeGroup);
+  });
+};
+
+exports.selectSpecificBreakdownDropDown = function(breakdown){
+    it("Select specific breakdown value from drop down ", function(){
+        pages.createManualStatement.selectTheSpecificBreakdownValueDropDown(breakdown);
+    });
+};

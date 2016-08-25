@@ -70,9 +70,17 @@ if (pages.affiliateIncomeSwagger === undefined) {
         },
 
         clickOnTheTryItOutButton: function () {
+            browser.sleep(1000);
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.tryItOutButton);
             pages.affiliateIncomeSwagger.elems.tryItOutButton.click();
-            browser.sleep(2000);
+            pages.affiliateIncomeSwagger.elems.tryItOutButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.block.response_body.json pre.json"))));
+            //browser.driver.findElement(By.css("div.block.response_body.json pre.json")).getText().then(function (promise) {
+            //    if (promise) {
+            //        pages.affiliateIncomeSwagger.elems.tryItOutButton.click();
+            //        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.block.response_body.json pre.json"))));
+            //    }
+            //});
         }
 
 

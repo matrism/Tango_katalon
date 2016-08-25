@@ -31,7 +31,9 @@ if (pages.createManualStatement === undefined) {
             batch1LinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement, batch), statementForm)']"},
             backToStatementViewLink: {css: "a[data-ui-sref='royalties.statements({statementId: statement.statement_id})']"},
             closedBatchCheckBox: {css: "i[data-ng-click='stateHolder.isEditingBatches && openCloseBatch(activeBatch) && $event.stopPropagation()']"},
-            addBatchLinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement), statementForm)']"}
+            addBatchLinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement), statementForm)']"},
+            incomeStatementGroupDropDownButton: {css: "div[data-ng-model='dataHolder.selected.incomeGroup'] div.tg-dropdown-button"},
+            breakdownDropDownButton: {css: "div[data-ng-model='dataHolder.selected.breakdown'] div.tg-dropdown-button"}
         },
 
         selectTheDesiredProcessingTerritory: function (country) {
@@ -555,6 +557,79 @@ if (pages.createManualStatement === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
             pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.rematchMatchedIncomeWork()']")));
             browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.rematchMatchedIncomeWork()']")).click();
+        },
+
+        selectTheDesiredFilterRoyaltyPeriodIncomeRates: function (royaltyPeriod) {
+            var desiredOption;
+            browser.driver.findElement(By.css("div[data-periods-filter-function='filterRoyaltyPeriod(period)'] div.btn-group.ng-scope")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(royaltyPeriod) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheSpecificStatementIncomeGroupValueDropDown: function (incomeStatementGroup) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.incomeStatementGroupDropDownButton);
+            pages.createManualStatement.elems.incomeStatementGroupDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(incomeStatementGroup) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheSpecificBreakdownValueDropDown: function (breakdown) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.breakdownDropDownButton);
+            pages.createManualStatement.elems.breakdownDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(breakdown) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         }
+
+
     })
 }
