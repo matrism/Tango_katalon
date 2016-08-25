@@ -206,6 +206,7 @@ if (pages.editDealRtp === undefined) {
             input.click();
             browser.wait(ExpectedConditions.visibilityOf($('ul.tg-typeahead__suggestions.ng-scope')));
             pages.editDealRtp.scopeOption(i).click();
+            pages.editDealRtp.elems.editApplyScopeAcquisitionButton.click();
         },
 
         editSelectTheSpecificDurationTypeRetentionFromAcquisitionNumberI: function (i, durationType) {
