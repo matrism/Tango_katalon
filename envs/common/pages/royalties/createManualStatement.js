@@ -606,6 +606,30 @@ if (pages.createManualStatement === undefined) {
                 });
         },
 
+        selectTheSpecificStatementIncomeGroupValueDropDownByIndex: function (index) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.incomeStatementGroupDropDownButton);
+            pages.createManualStatement.elems.incomeStatementGroupDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function (options) {
+                    var element = options[index];
+                    element.click();
+                })
+        },
+
+        selectTheSpecificBreakdownValueDropDownByIndex: function (index) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.breakdownDropDownButton);
+            pages.createManualStatement.elems.breakdownDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function (options) {
+                    var element = options[index];
+                    element.click();
+                })
+        },
+
         selectTheSpecificBreakdownValueDropDown: function (breakdown) {
             var desiredOption;
             pages.base.scrollIntoView(pages.createManualStatement.elems.breakdownDropDownButton);

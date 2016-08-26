@@ -226,8 +226,8 @@ exports.feature = [
                 steps.affiliateIncomeSwagger.clickOnTryItOutButton();
             });
 
-            describe('Check the Json results', function(){
-               steps.affiliateIncomeSwagger.checkIncomeTypeOnJsonResult('SDIGP');
+            describe('Check the Json results', function () {
+                steps.affiliateIncomeSwagger.checkIncomeTypeOnJsonResult('SDIGP');
 
                 steps.affiliateIncomeSwagger.checkGrossReceivedValueOnJsonResult("0.921074150988");
                 steps.affiliateIncomeSwagger.checkNetReceivedValueOnJsonResult("0.921074150988");
@@ -237,17 +237,88 @@ exports.feature = [
                 steps.affiliateIncomeSwagger.checkSubPublisherNpsValueOnJsonResult("0.18421483019760002");
 
             });
+        }
+    },
 
-
+    {
+        name: 'Affiliate pipeline income - EDI File',
+        tags: ['affiliateIncomeWork'],
+        steps: function () {
             describe('Check affiliate income for work', function () {
-                steps.base.focusOnNewOpenedTab(0);
+                steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
+                steps.createManualStatement.selectDesiredProcessingTerritory("Mexico");
+                steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDown("July 2015 - September 2015");
+                steps.createManualStatement.checkAmountOfTheBatchNumberIManualStatement(1, "1,164.5300");
+                steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
+                steps.createManualStatement.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList(1);
+                steps.createManualStatement.clickOnIncomeStatementCreatedFromList(4);
+
+                //steps.base.focusOnNewOpenedTab(0);
+                steps.base.refreshPage();
                 steps.affiliateIncomeSwagger.useTheWorkCodeAndSearchForIt();
                 steps.work.goToIncomeRatesTab();
                 steps.createManualStatement.selectDesiredProcessingTerritory("Mexico");
                 steps.createManualStatement.selectDesiredFilterRoyaltyPeriodValueDropDownIncomeRates("July 2015 - September 2015");
                 steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
-                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("11.6400");
+                //steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("11.6400");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Domestic");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Non-Domestic");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Affiliate");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Total");
 
+                steps.createManualStatement.checkTheCurrencyDisplayedOnTheScreen("Currency: MXN");
+
+                //Mechanical
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(1);
+                steps.createManualStatement.checkNoIncomeHistoryMessageIsDisplayed();
+                //Performance
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(2);
+                steps.createManualStatement.checkNoIncomeHistoryMessageIsDisplayed();
+                //Synchronisation
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(3);
+                steps.createManualStatement.checkNoIncomeHistoryMessageIsDisplayed();
+                //Digital Performance
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(4);
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
+                //Digital Mechanical
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(5);
+                steps.createManualStatement.checkNoIncomeHistoryMessageIsDisplayed();
+                //Others
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(6);
+                steps.createManualStatement.checkNoIncomeHistoryMessageIsDisplayed();
+                //Print
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(7);
+                steps.createManualStatement.checkNoIncomeHistoryMessageIsDisplayed();
+                //Master Rights
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(8);
+                steps.createManualStatement.checkNoIncomeHistoryMessageIsDisplayed();
+                //All
+                steps.createManualStatement.selectSpecificStatementIncomeGroupValueDropDownByIndex(0);
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
+
+                //Domestic
+                steps.createManualStatement.selectSpecificBreakdownDropDownByIndex(1);
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Domestic");
+                //Non-Domestic
+                steps.createManualStatement.selectSpecificBreakdownDropDownByIndex(2);
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Non-Domestic");
+                //Affiliate
+                steps.createManualStatement.selectSpecificBreakdownDropDownByIndex(3);
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Affiliate");
+                //Total
+                steps.createManualStatement.selectSpecificBreakdownDropDownByIndex(4);
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Total");
+                //Affiliate Pipeline
+                steps.createManualStatement.selectSpecificBreakdownDropDownByIndex(5);
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Digital Performance");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("Affiliate Pipeline");
+                steps.createManualStatement.checkValuesInTheIncomeRatesFilteredTable("-");
+                //All
+                steps.createManualStatement.selectSpecificBreakdownDropDown(0);
             });
         }
 

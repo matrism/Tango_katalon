@@ -83,6 +83,7 @@ exports.checkIncomeTypeOnJsonResult = function (incomeType) {
             .then(function (promise) {
                 console.log("The income type from json result is : " + promise);
                 expect(promise).toEqual(incomeType);
+                browser.sleep(2000);
             });
     });
 };

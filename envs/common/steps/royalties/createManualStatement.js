@@ -562,8 +562,42 @@ exports.selectSpecificStatementIncomeGroupValueDropDown = function(statementInco
   });
 };
 
+exports.selectSpecificStatementIncomeGroupValueDropDownByIndex = function(index){
+    it("Select specific statement income group value from drop down ", function(){
+        pages.createManualStatement.selectTheSpecificStatementIncomeGroupValueDropDownByIndex(index);
+    });
+};
+
+exports.selectSpecificBreakdownDropDownByIndex = function(index){
+    it("Select specific breakdown value from drop down ", function(){
+        pages.createManualStatement.selectTheSpecificBreakdownValueDropDownByIndex(index);
+    });
+};
+
 exports.selectSpecificBreakdownDropDown = function(breakdown){
     it("Select specific breakdown value from drop down ", function(){
         pages.createManualStatement.selectTheSpecificBreakdownValueDropDown(breakdown);
+    });
+};
+
+exports.checkNoIncomeHistoryMessageIsDisplayed = function () {
+    it("Check that no income history message is displayed ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("table.table.royalty-share-distribution-table.royalty-income-table tbody"))));
+        browser.driver.findElement(By.css("table.table.royalty-share-distribution-table.royalty-income-table tbody")).getText()
+            .then(function (promise) {
+                console.log("The no income history message is  :" + promise);
+                expect(promise).toEqual("No income history for the selected Royalty Processing Territory in the selected Royalty Period(s)");
+            });
+    });
+};
+
+exports.checkTheCurrencyDisplayedOnTheScreen = function (currency) {
+    it("Check the currency displayed on the screen ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-controller='WorkIncomeController'] div.clearfix.filters-rights div:nth-child(3) p"))));
+        browser.driver.findElement(By.css("div[data-ng-controller='WorkIncomeController'] div.clearfix.filters-rights div:nth-child(3) p")).getText()
+            .then(function (promise) {
+                console.log("The currency displayed on the screen is  :" + promise);
+                expect(promise).toEqual(currency);
+            });
     });
 };
