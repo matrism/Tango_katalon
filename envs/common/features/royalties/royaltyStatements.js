@@ -2,12 +2,12 @@
 
 var using = fnutils.using;
 
-exports.id = '4b83d03e-62e9-4718-8207-76717a81ee37';
+exports.id = 'a4803196-dfad-491b-839e-d362d2408ac1';
 
 exports.commonFeatureTags = [
     'royaltyRatesRegression',
     'royaltyRates',
-    'royaltyStatementsFilters',
+    'royaltyStatements',
     'regression'
 ];
 
@@ -17,8 +17,21 @@ exports.beforeFeature = () => {
 
 exports.feature = [
     {
+        name: 'Royalty Statements - Check links',
+        tags: ['royaltyStatementsLinks'],
+        steps: () => {
+            let rh = steps.royaltiesHeader,
+                mh = steps.mainHeader;
+
+            mh.goToSubLink('Royalty Processing', 'Royalty Statements');
+            rh.clickLink('Upload Electronic File');
+            mh.goToSubLink('Royalty Processing', 'Royalty Statements');
+            rh.clickLink('Create Manual Statement');
+        }
+    },
+    {
         name: 'Royalty Statements Filters',
-        tags: [],
+        tags: ['royaltyStatementsFilters'],
         steps: () => {
             let rs = steps.royaltyStatements,
                 rsf = rs.filters;
@@ -60,4 +73,33 @@ exports.feature = [
             rs.expectAllVisibleStatementsToHaveType('MANUAL');
         }
     },
+    {
+        name: 'Royalty Statements - Validate default table filters and expand statements',
+        tags: ['royaltyStatementsDetails'],
+        steps: () => {
+            let rs = steps.royaltyStatements,
+                rsf = rs.filters,
+                rsd = rs.statementDetails;
+
+            steps.mainHeader.goToSubLink('Royalty Processing', 'Royalty Statements');
+
+            rs.selectProcessingTerritory('United States');
+
+            rs.selectFirstRoyaltyPeriod();
+            rs.expectStatementListToBePopulated();
+            rsf.validateSelectedStatus('All');
+            rsf.validateSelectedType('All');
+            rsf.validateSelectedId('All');
+            rsf.validateSelectedIncomeProvider('All');
+            rsf.validateSelectedCompany('All');
+            rsf.selectType('EDI');
+            rs.expectAllVisibleStatementsToHaveType('EDI');
+            rs.expandStatement(0);
+            rsd.expectToBeVisible(0);
+            rsf.selectType('Manual');
+            rs.expectAllVisibleStatementsToHaveType('MANUAL');
+            rs.expandStatement(0);
+            rsd.expectToBeVisible(0);
+        }
+    }
 ] 
