@@ -74,6 +74,7 @@ if (pages.deal === undefined) {
 
         goToGeneralDealDetails: function () {
             pages.deal.elems.generalHeader.click();
+            pages.deal.waitForAjax();
         },
 
         goToTermsDealDetails: function () {
