@@ -662,7 +662,9 @@ if (pages.createDealContractPeriod === undefined) {
 
 
         clickOnTheAddAdvanceAssumptionsLink: function () {
-            pages.createDealContractPeriod.elems.addAssumptionLink.click();
+            var el = pages.createDealContractPeriod.elems.addAssumptionLink;
+            pages.base.scrollIntoView(el);
+            el.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.lpControlPercentageOfWorkAssumptions));
         },
 

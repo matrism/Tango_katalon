@@ -118,9 +118,9 @@ if (pages.editDealRtp === undefined) {
         },
 
         clickOnTheAddRetentionFromAcquisitionLink: function () {
-            pages.base.scrollIntoView(pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink);
-            pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDescriptionRetentionFromAcquisitionField));
+            var el = pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink;
+            pages.base.scrollIntoView(el);
+            el.click();
         },
 
         editDeleteTheAddAnotherAcquisitionForm: function () {
@@ -191,6 +191,24 @@ if (pages.editDealRtp === undefined) {
             browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions ng-scope"))));
         },
 
+        selectScopeNumberIFromInput: function (i, j, type) {
+            var input;
+
+            if (type == 'ptc') {
+                input = pages.editDealRtp.editScopePostTermInputField(j);
+            } else if (type == 'acq') {
+                input = pages.editDealRtp.editScopeAcquisitionInputField(j);
+            } else {
+                input = pages.editDealRtp.editScopeRetentionInputField(j);
+            }
+            pages.base.scrollIntoView(input);
+            input.clear();
+            input.click();
+            browser.wait(ExpectedConditions.visibilityOf($('ul.tg-typeahead__suggestions.ng-scope')));
+            pages.editDealRtp.scopeOption(i).click();
+            pages.editDealRtp.elems.editApplyScopeAcquisitionButton.click();
+        },
+
         editSelectTheSpecificDurationTypeRetentionFromAcquisitionNumberI: function (i, durationType) {
             var desiredOption;
             browser.driver.findElements(By.css("div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope select#retention_duration_type option"))
@@ -218,14 +236,18 @@ if (pages.editDealRtp === undefined) {
             pages.editDealRtp.waitForAjax();
         },
 
-        editClickOnTheAddPostTermPeriodFromRetention: function () {
-            pages.editDealRtp.elems.editAddPostTermPeriodFromRetentionLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealRtp.elems.editDurationRtpPostTermCollectionField));
+        editClickOnTheAddPostTermPeriodFromRetention: function (i) {
+            i = i || 0;
+            var element = pages.editDealRtp.editAddPostTermPeriodFromRetentionLink(i);
+            pages.base.scrollIntoView(element);
+            element.click();
         },
 
-        editFillIntoTheDurationFieldPostTermCollectionFromRetention: function () {
+        editFillIntoTheDurationFieldPostTermCollectionFromRetention: function (i, j) {
             var number = Math.floor(Math.random() * 20) + 1;
-            pages.editDealRtp.elems.editDurationRtpPostTermCollectionField.sendKeys(number);
+            i = i || 0;
+            j = j || 0;
+            pages.editDealRtp.editDurationRtpPostTermCollectionField(i, j).sendKeys(number);
         },
 
         editSelectTheEndDateEndRulesSpecificValueRuleNumberI: function (i, value) {

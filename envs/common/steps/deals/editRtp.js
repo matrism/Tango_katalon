@@ -80,6 +80,12 @@ exports.editSelectSpecificScopeNumberIRtpAcquisition = function (i) {
     });
 };
 
+exports.selectScopeNumberIFromInput = function (i, j, type) {
+    it('Select scope number ' + i + ' from ' + type + ' input #' + i, function () {
+        pages.editDealRtp.selectScopeNumberIFromInput(i, j, type);
+    });
+};
+
 exports.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI = function (i, durationType) {
     it("Edit select the specific duration type retention from acquisition number " + i, function () {
         pages.editDealRtp.editSelectTheSpecificDurationTypeRetentionFromAcquisitionNumberI(i, durationType);
@@ -99,15 +105,15 @@ exports.saveRetentionFromAcquisition = function () {
     });
 };
 
-exports.clickOnAddPostTermCollectionFromRetention = function () {
-    it("Click on the add post term collection from retention ", function () {
-        pages.editDealRtp.editClickOnTheAddPostTermPeriodFromRetention();
+exports.clickOnAddPostTermCollectionFromRetention = function (i) {
+    it('Click on the add post term collection from retention #' + (i + 1), function () {
+        pages.editDealRtp.editClickOnTheAddPostTermPeriodFromRetention(i);
     });
 };
 
-exports.editFillIntoDurationFieldPostTermCollectionFromRetention = function () {
-    it("Edit fill into the duration field post term collection from retention ", function () {
-        pages.editDealRtp.editFillIntoTheDurationFieldPostTermCollectionFromRetention();
+exports.editFillIntoDurationFieldPostTermCollectionFromRetention = function (i, j) {
+    it('Edit fill into the duration field post term collection #' + (j + 1) +' from retention #' + (i + 1), function () {
+        pages.editDealRtp.editFillIntoTheDurationFieldPostTermCollectionFromRetention(i, j);
     });
 };
 
