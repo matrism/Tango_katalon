@@ -137,11 +137,6 @@ exports.feature = [{
             this.enterAlternativeLastName(0, 'ALT LAST ' + randomString(1));
             this.saveAlternativeName(0);
 
-            this.editAlternativeName(1);
-            this.enterAlternativeFirstName(1, 'ALT FIRST ' + randomString(1));
-            this.enterAlternativeLastName(1, 'ALT LAST ' + randomString(1));
-            this.saveAlternativeName(1);
-
             this.editSocietyAffiliation();
             this.enterAffiliatedSocietySearchTerms('MACP');
             this.selectAffiliatedSocietySearchResultByIndex(0);
