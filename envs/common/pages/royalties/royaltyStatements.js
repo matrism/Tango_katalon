@@ -225,6 +225,7 @@ exports.incomeWorks = (function(){
         incomeWorks.searchForWork(val, filterType);
 
         matchButton.click();
+        browser.sleep(2000);
         pages.base.waitForAjax();
     };
 

@@ -74,6 +74,7 @@ if (pages.affiliateIncomeSwagger === undefined) {
             pages.base.scrollIntoView(pages.affiliateIncomeSwagger.elems.tryItOutButton);
             pages.affiliateIncomeSwagger.elems.tryItOutButton.click();
             pages.affiliateIncomeSwagger.elems.tryItOutButton.click();
+            browser.sleep(3000);
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.block.response_body.json pre.json"))));
             //browser.driver.findElement(By.css("div.block.response_body.json pre.json")).getText().then(function (promise) {
             //    if (promise) {

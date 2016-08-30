@@ -211,6 +211,10 @@ exports.feature = [
                 steps.createManualStatement.checkAmountOfTheBatchNumberIManualStatement(1, "1,164.5300");
                 steps.createManualStatement.clickOnTheManualStatementNumberIFromList(1);
                 steps.createManualStatement.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList(1);
+
+
+                //steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'), 'Work ID');
+                steps.createManualStatement.clickOnMatchedStatements();
                 steps.createManualStatement.clickOnIncomeStatementCreatedFromList(4);
                 steps.createManualStatement.clickOnRematchButtonLinkForIncomeStatementsLineNumberI(4);
                 steps.royaltyStatements.incomeWorks.matchWork(fromTestVariable('lastCreatedWorkId'), 'Work ID');

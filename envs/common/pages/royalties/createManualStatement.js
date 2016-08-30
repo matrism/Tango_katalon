@@ -526,6 +526,16 @@ if (pages.createManualStatement === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] input"))));
         },
 
+        clickOnTheMatchButtonLinkForIncomeStatements: function () {
+            pages.base.scrollIntoView(element(By.css("button[data-ng-click='matchIncomeWork(incomeWork, workMatch)']")));
+            browser.driver.findElement(By.css("button[data-ng-click='matchIncomeWork(incomeWork, workMatch)']")).click();
+        },
+
+        clickOnTheMatchedStatements: function () {
+            pages.base.scrollIntoView(element(by.css("#incomeWorksTab ul.nav.nav-tabs li.ng-scope:nth-child(3)")));
+            browser.driver.findElement(By.css("#incomeWorksTab ul.nav.nav-tabs li.ng-scope:nth-child(3)")).click();
+        },
+
         selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI: function (workType, i) {
             var desiredOption;
             pages.base.scrollIntoView(element(by.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] select")));

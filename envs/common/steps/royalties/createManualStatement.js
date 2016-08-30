@@ -518,6 +518,21 @@ exports.clickOnRematchButtonLinkForIncomeStatementsLineNumberI = function (i) {
     });
 };
 
+exports.clickOnMatchButtonLinkForIncomeStatements = function () {
+    it("Click on the match button link from income statement ", function () {
+        pages.createManualStatement.clickOnTheMatchButtonLinkForIncomeStatements();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+exports.clickOnMatchedStatements = function () {
+    it("Click on the matched statements tab ", function () {
+        pages.createManualStatement.clickOnTheMatchedStatements();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+
 exports.selectDesiredWorkTypeToSearchFromDropDownIncomeLineI = function (type, i) {
     it("Select desired work type to search from drop down income line number " + i, function () {
         pages.createManualStatement.selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI(type, i);
@@ -556,26 +571,26 @@ exports.checkValuesInTheIncomeRatesFilteredTable = function (values) {
     });
 };
 
-exports.selectSpecificStatementIncomeGroupValueDropDown = function(statementIncomeGroup){
-  it("Select specific statement income group value from drop down ", function(){
-      pages.createManualStatement.selectTheSpecificStatementIncomeGroupValueDropDown(statementIncomeGroup);
-  });
+exports.selectSpecificStatementIncomeGroupValueDropDown = function (statementIncomeGroup) {
+    it("Select specific statement income group value from drop down ", function () {
+        pages.createManualStatement.selectTheSpecificStatementIncomeGroupValueDropDown(statementIncomeGroup);
+    });
 };
 
-exports.selectSpecificStatementIncomeGroupValueDropDownByIndex = function(index){
-    it("Select specific statement income group value from drop down ", function(){
+exports.selectSpecificStatementIncomeGroupValueDropDownByIndex = function (index) {
+    it("Select specific statement income group value from drop down ", function () {
         pages.createManualStatement.selectTheSpecificStatementIncomeGroupValueDropDownByIndex(index);
     });
 };
 
-exports.selectSpecificBreakdownDropDownByIndex = function(index){
-    it("Select specific breakdown value from drop down ", function(){
+exports.selectSpecificBreakdownDropDownByIndex = function (index) {
+    it("Select specific breakdown value from drop down ", function () {
         pages.createManualStatement.selectTheSpecificBreakdownValueDropDownByIndex(index);
     });
 };
 
-exports.selectSpecificBreakdownDropDown = function(breakdown){
-    it("Select specific breakdown value from drop down ", function(){
+exports.selectSpecificBreakdownDropDown = function (breakdown) {
+    it("Select specific breakdown value from drop down ", function () {
         pages.createManualStatement.selectTheSpecificBreakdownValueDropDown(breakdown);
     });
 };
