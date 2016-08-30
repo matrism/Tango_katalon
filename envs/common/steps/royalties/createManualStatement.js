@@ -466,12 +466,153 @@ exports.checkStatusOfTheManualStatementNumberIFromList = function (i, status) {
     });
 };
 
-exports.checkStatusOfTheBatchNumberIManualStatement = function (i,j, status) {
+exports.checkStatusOfTheBatchNumberIManualStatement = function (i, j, status) {
     it("Check the status of the batch for  manual statement number  " + i + " from the list ", function () {
-        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + j + ") div.pull-rigth.second-column.span5.clearfix div.batch-table.ng-scope div[data-ng-repeat='batch in statement.manual_statement.income_statement_batches']:nth-child(" + i + ") span:nth-child(" + (j+2) +") span[data-ng-class='batch.status.toLowerCase()']")).getText()
-          .then(function (promise) {
+        browser.driver.findElement(By.css("div[data-ng-repeat='statement in statements']:nth-child(" + j + ") div.pull-rigth.second-column.span5.clearfix div.batch-table.ng-scope div[data-ng-repeat='batch in statement.manual_statement.income_statement_batches']:nth-child(" + i + ") span:nth-child(" + (j + 2) + ") span[data-ng-class='batch.status.toLowerCase()']")).getText()
+            .then(function (promise) {
                 console.log("Status of the batch for manual statement is  " + promise);
                 expect(promise).toEqual(status);
+            });
+    });
+};
+
+exports.checkAmountOfTheBatchNumberIManualStatement = function (i, amount) {
+    it("Check the amount of the batch for  manual statement number  " + i + " from the list ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.converted-amount.pull-right"))));
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.converted-amount.pull-right")).getText()
+            .then(function (promise) {
+                console.log("Amount of the batch for manual statement is  " + promise);
+                expect(promise).toEqual(amount);
+            });
+    });
+};
+
+exports.clickOnTheViewDetailsOfIncomeLineForStatementNumberIFromList = function (i) {
+    it("Click on the view details of income line for  manual statement number  " + i + " from the list ", function () {
+        pages.base.scrollIntoView(element(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix a[data-ui-sref='royalties.viewIncomeStatementWorks(getIncomeLinesRouteParams(statement))']")));
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='statement in statements']:nth-child(" + i + ") div.pull-rigth.second-column.span5.clearfix a[data-ui-sref='royalties.viewIncomeStatementWorks(getIncomeLinesRouteParams(statement))']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("#SUB-VIEWS h1.new-heading.nomargins.ng-binding"))));
+    });
+};
+
+exports.clickOnIncomeStatementCreatedFromList = function (i) {
+    it("Click on the income statement created from list line number " + i, function () {
+        pages.base.scrollIntoView(element(by.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ")")));
+        browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ")")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-if='incomeWork.matchedWork']"))));
+    });
+};
+
+exports.reMatchDesiredWorkForIncomeStatementInTheListNumberI = function (workId, i) {
+    it("Rematch the desired work for income statement having the work id " + workId + " and the line number " + i + " in the list", function () {
+        pages.createManualStatement.clickOnTheRematchButtonLinkForIncomeStatementsLineNumberI(i);
+        pages.createManualStatement.selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI("Work ID", i);
+        pages.createManualStatement.fillIntoTheWorksInputFieldDesiredWorkIncomeLineNumberI(workId, i);
+        pages.createManualStatement.selectTheDesiredWorkForManualStatementIncomeLineNumberI(i);
+    });
+};
+
+exports.clickOnRematchButtonLinkForIncomeStatementsLineNumberI = function (i) {
+    it("Click on the rematch button link from income statement line number " + i, function () {
+        pages.createManualStatement.clickOnTheRematchButtonLinkForIncomeStatementsLineNumberI(i);
+    });
+};
+
+exports.clickOnMatchButtonLinkForIncomeStatements = function () {
+    it("Click on the match button link from income statement ", function () {
+        pages.createManualStatement.clickOnTheMatchButtonLinkForIncomeStatements();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+exports.clickOnMatchedStatements = function () {
+    it("Click on the matched statements tab ", function () {
+        pages.createManualStatement.clickOnTheMatchedStatements();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+
+exports.selectDesiredWorkTypeToSearchFromDropDownIncomeLineI = function (type, i) {
+    it("Select desired work type to search from drop down income line number " + i, function () {
+        pages.createManualStatement.selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI(type, i);
+    });
+};
+
+exports.fillIntoWorksInputFieldDesiredWorkIncomeLineNumberI = function (workId, i) {
+    it("Fill into the works input field desired work income line number " + i, function () {
+        pages.createManualStatement.fillIntoTheWorksInputFieldDesiredWorkIncomeLineNumberI(workId, i);
+    });
+};
+
+exports.confirmOnMatchWorkOnIncomeLineNumberIAfterIsSelected = function () {
+    it("Click on the match work after it is selected on income ", function () {
+        pages.createManualStatement.confirmOnTheMatchWorkOnIncomeLineNumberIAfterIsSelected();
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+exports.selectDesiredFilterRoyaltyPeriodValueDropDownIncomeRates = function (royaltyPeriod) {
+    it("Select the desired royalty period value from the drop down ", function () {
+        pages.createManualStatement.selectTheDesiredFilterRoyaltyPeriodIncomeRates(royaltyPeriod);
+        pages.createManualStatement.waitForAjax();
+    });
+};
+
+
+exports.checkValuesInTheIncomeRatesFilteredTable = function (values) {
+    it("Check that values are present into the income and rates - royalty income table ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("table.table.royalty-share-distribution-table.royalty-income-table"))));
+        browser.driver.findElement(By.css("table.table.royalty-share-distribution-table.royalty-income-table")).getText()
+            .then(function (promise) {
+                console.log("The table has a lot of values :" + promise);
+                expect(promise).toContain(values);
+            });
+    });
+};
+
+exports.selectSpecificStatementIncomeGroupValueDropDown = function (statementIncomeGroup) {
+    it("Select specific statement income group value from drop down ", function () {
+        pages.createManualStatement.selectTheSpecificStatementIncomeGroupValueDropDown(statementIncomeGroup);
+    });
+};
+
+exports.selectSpecificStatementIncomeGroupValueDropDownByIndex = function (index) {
+    it("Select specific statement income group value from drop down ", function () {
+        pages.createManualStatement.selectTheSpecificStatementIncomeGroupValueDropDownByIndex(index);
+    });
+};
+
+exports.selectSpecificBreakdownDropDownByIndex = function (index) {
+    it("Select specific breakdown value from drop down ", function () {
+        pages.createManualStatement.selectTheSpecificBreakdownValueDropDownByIndex(index);
+    });
+};
+
+exports.selectSpecificBreakdownDropDown = function (breakdown) {
+    it("Select specific breakdown value from drop down ", function () {
+        pages.createManualStatement.selectTheSpecificBreakdownValueDropDown(breakdown);
+    });
+};
+
+exports.checkNoIncomeHistoryMessageIsDisplayed = function () {
+    it("Check that no income history message is displayed ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("table.table.royalty-share-distribution-table.royalty-income-table tbody"))));
+        browser.driver.findElement(By.css("table.table.royalty-share-distribution-table.royalty-income-table tbody")).getText()
+            .then(function (promise) {
+                console.log("The no income history message is  :" + promise);
+                expect(promise).toEqual("No income history for the selected Royalty Processing Territory in the selected Royalty Period(s)");
+            });
+    });
+};
+
+exports.checkTheCurrencyDisplayedOnTheScreen = function (currency) {
+    it("Check the currency displayed on the screen ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-controller='WorkIncomeController'] div.clearfix.filters-rights div:nth-child(3) p"))));
+        browser.driver.findElement(By.css("div[data-ng-controller='WorkIncomeController'] div.clearfix.filters-rights div:nth-child(3) p")).getText()
+            .then(function (promise) {
+                console.log("The currency displayed on the screen is  :" + promise);
+                expect(promise).toEqual(currency);
             });
     });
 };

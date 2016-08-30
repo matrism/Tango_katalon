@@ -31,7 +31,9 @@ if (pages.createManualStatement === undefined) {
             batch1LinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement, batch), statementForm)']"},
             backToStatementViewLink: {css: "a[data-ui-sref='royalties.statements({statementId: statement.statement_id})']"},
             closedBatchCheckBox: {css: "i[data-ng-click='stateHolder.isEditingBatches && openCloseBatch(activeBatch) && $event.stopPropagation()']"},
-            addBatchLinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement), statementForm)']"}
+            addBatchLinkManualStatement: {css: "button[data-ng-click='checkNavigation(statement, getStatementRouteParams(statement), statementForm)']"},
+            incomeStatementGroupDropDownButton: {css: "div[data-ng-model='dataHolder.selected.incomeGroup'] div.tg-dropdown-button"},
+            breakdownDropDownButton: {css: "div[data-ng-model='dataHolder.selected.breakdown'] div.tg-dropdown-button"}
         },
 
         selectTheDesiredProcessingTerritory: function (country) {
@@ -516,6 +518,152 @@ if (pages.createManualStatement === undefined) {
         clickOnTheClosedBatchCheckBox: function () {
             pages.base.scrollIntoView(pages.createManualStatement.elems.closedBatchCheckBox);
             pages.createManualStatement.elems.closedBatchCheckBox.click();
+        },
+
+        clickOnTheRematchButtonLinkForIncomeStatementsLineNumberI: function (i) {
+            pages.base.scrollIntoView(element(by.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") a[data-ng-click='incomeWork.rematch = true']")));
+            browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") a[data-ng-click='incomeWork.rematch = true']")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] input"))));
+        },
+
+        clickOnTheMatchButtonLinkForIncomeStatements: function () {
+            pages.base.scrollIntoView(element(By.css("button[data-ng-click='matchIncomeWork(incomeWork, workMatch)']")));
+            browser.driver.findElement(By.css("button[data-ng-click='matchIncomeWork(incomeWork, workMatch)']")).click();
+        },
+
+        clickOnTheMatchedStatements: function () {
+            pages.base.scrollIntoView(element(by.css("#incomeWorksTab ul.nav.nav-tabs li.ng-scope:nth-child(3)")));
+            browser.driver.findElement(By.css("#incomeWorksTab ul.nav.nav-tabs li.ng-scope:nth-child(3)")).click();
+        },
+
+        selectTheDesiredWorkTypeToSearchFromDropDownIncomeLineI: function (workType, i) {
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] select")));
+            browser.driver.findElements(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] select option"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(workType) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        fillIntoTheWorksInputFieldDesiredWorkIncomeLineNumberI: function (workId, i) {
+            pages.base.scrollIntoView(element(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] input")));
+            browser.driver.findElement(By.css("div.accordion div[data-ng-repeat='incomeWork in getIncomeWorks()']:nth-child(" + i + ") div[data-ng-model='incomeWork.selectedTangoWork'] input")).sendKeys(workId);
+        },
+
+        confirmOnTheMatchWorkOnIncomeLineNumberIAfterIsSelected: function () {
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog.ng-scope"))));
+            pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='data.rematchMatchedIncomeWork()']")));
+            browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='data.rematchMatchedIncomeWork()']")).click();
+        },
+
+        selectTheDesiredFilterRoyaltyPeriodIncomeRates: function (royaltyPeriod) {
+            var desiredOption;
+            browser.driver.findElement(By.css("div[data-periods-filter-function='filterRoyaltyPeriod(period)'] div.btn-group.ng-scope")).click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.ng-scope.status-OPEN"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(royaltyPeriod) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheSpecificStatementIncomeGroupValueDropDown: function (incomeStatementGroup) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.incomeStatementGroupDropDownButton);
+            pages.createManualStatement.elems.incomeStatementGroupDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(incomeStatementGroup) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
+        selectTheSpecificStatementIncomeGroupValueDropDownByIndex: function (index) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.incomeStatementGroupDropDownButton);
+            pages.createManualStatement.elems.incomeStatementGroupDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.incomeGroup'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function (options) {
+                    var element = options[index];
+                    element.click();
+                })
+        },
+
+        selectTheSpecificBreakdownValueDropDownByIndex: function (index) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.breakdownDropDownButton);
+            pages.createManualStatement.elems.breakdownDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function (options) {
+                    var element = options[index];
+                    element.click();
+                })
+        },
+
+        selectTheSpecificBreakdownValueDropDown: function (breakdown) {
+            var desiredOption;
+            pages.base.scrollIntoView(pages.createManualStatement.elems.breakdownDropDownButton);
+            pages.createManualStatement.elems.breakdownDropDownButton.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[data-ng-model='dataHolder.selected.breakdown'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(breakdown) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         }
+
+
     })
 }

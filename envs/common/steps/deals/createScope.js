@@ -352,6 +352,12 @@ exports.selectSpecificPublisherNameDropDownValue = function (publisherName) {
     });
 };
 
+exports.selectRandomPublisherNameDropDownValue = function (publisherName) {
+    it("Selectrandom value publisher name drop down", function () {
+        pages.createDealScope.selectRandomPublisherNameDropDown();
+    });
+};
+
 exports.selectSpecificPublisherNameDropDown = function () {
     it("Select specific value publisher name drop down", function () {
         pages.createDealScope.selectTheSpecificPublisherNameDropDown("music");

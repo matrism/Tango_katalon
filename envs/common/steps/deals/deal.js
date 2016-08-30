@@ -66,19 +66,17 @@ exports.waitForDealToBeSaved = function () {
 
 exports.returnDealNumber = function () {
     it("Return deal number ", function () {
-        pages.deal.elems.dealBriefNumber.getText().
-            then(function (promise) {
-                console.log("Deal number is " + promise);
-            });
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Deal number is " + promise);
+        });
     });
 };
 
 exports.printDealNumber = function () {
     it("Return deal number ", function () {
-        pages.deal.elems.dealBriefNumber.getText().
-            then(function (promise) {
-                console.log("Deal number is " + promise);
-            });
+        pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
+            console.log("Deal number is " + promise);
+        });
     });
 };
 
@@ -253,6 +251,7 @@ exports.checkGrowlMessageDisplayedAfterScopeEdited = function (message) {
         });
     });
 };
+
 //div.growl-item.ng-scope.growl-item-success
 
 addBasicStep(
@@ -281,13 +280,14 @@ exports.createDeal = data => {
     describe('Create new deal', () => {
         steps.mainHeader.createNewRecord('Deal');
 
-        steps.createDealGeneral.selectSigningTerritory(data.deal_signing_territory);
-        steps.createDealGeneral.fillCompanyCodeField(data.company_code);
-        steps.createDealGeneral.selectSpecificCompanyCode(data.company_code);
-        steps.createDealGeneral.enterContractingPartySearchTerms(data.contracting_parties);
-        steps.createDealGeneral.waitForContractingPartyDropDown();
-        steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
-        exports.itContinueToNextPage();
+    steps.createDealGeneral.selectSigningTerritory(data.deal_signing_territory);
+    steps.createDealGeneral.fillCompanyCodeField(data.company_code);
+    //steps.createDealGeneral.selectRandomCompanyCode();
+    steps.createDealGeneral.selectSpecificCompanyCode(data.company_code);
+    steps.createDealGeneral.enterContractingPartySearchTerms(data.contracting_parties);
+    steps.createDealGeneral.waitForContractingPartyDropDown();
+    steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
+    exports.itContinueToNextPage();
 
         if (data.contract_periods) {
             describe('Contract periods', () => {
@@ -387,6 +387,24 @@ exports.createDeal = data => {
     });
 };
 
+exports.storeDealIdInTestVariable = function(varName, uuidVarName){
+    it("Store deal id in test variable ", function(){
+        var binding = 'getPristineDeal().deal_header.contract_brief_number',
+            idBinding = element(by.binding(binding));
+
+        browser.wait(EC.visibilityOf(idBinding));
+
+        if (uuidVarName) {
+            idBinding.evaluate('getPristineDeal().id').then(function(value) {
+                setTestVariable(uuidVarName, value);
+        });
+        }
+
+        idBinding.getText().then(function(value) {
+            setTestVariable(varName, value);
+        });
+    });
+};
 
 addStep(exports, 'Store Deal ID in test variable', function (varName, uuidVarName) {
 
@@ -396,7 +414,7 @@ addStep(exports, 'Store Deal ID in test variable', function (varName, uuidVarNam
     browser.wait(EC.visibilityOf(idBinding));
 
     if (uuidVarName) {
-        idBinding.evaluate('getPristineDeal().id').then(value => { 
+        idBinding.evaluate('getPristineDeal().id').then(value => {
             setTestVariable(uuidVarName, value);
         });
     }
