@@ -12,7 +12,7 @@ exports.feature = [
         tags: ["personAsPayee"],
         steps: function () {
 
-            for (var i = 2; i <= 100; i++) {
+            //for (var i = 1; i <= 100; i++) {
                 steps.person.useBlankPersonSlot(0);
                 steps.newPerson.goToNewPersonPage();
                 steps.newPerson.enterLastName("person " + i + " TAT payee");
@@ -20,7 +20,7 @@ exports.feature = [
                 steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
                 steps.newPerson.selectAsPayeeOptionToYes();
                 steps.newPerson.save();
-            }
+            //}
         }
     }
 ];
