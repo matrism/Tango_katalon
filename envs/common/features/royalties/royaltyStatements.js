@@ -8,6 +8,7 @@ exports.commonFeatureTags = [
     'royaltyRatesRegression',
     'royaltyRates',
     'royaltyStatements',
+    'royaltyProcessing',
     'regression'
 ];
 
