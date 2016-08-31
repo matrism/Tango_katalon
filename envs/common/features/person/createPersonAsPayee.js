@@ -12,7 +12,7 @@ exports.feature = [
         tags: ["personAsPayee"],
         steps: function () {
 
-            for (var i = 1; i <= 1; i++) {
+            for (var i = 2; i <= 100; i++) {
                 steps.person.useBlankPersonSlot(0);
                 steps.newPerson.goToNewPersonPage();
                 steps.newPerson.enterLastName("person " + i + " TAT payee");
