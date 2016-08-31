@@ -19,7 +19,7 @@ exports.goToNewPersonPage = function () {
 
 exports.waitForPageToLoad = function () {
     it('Wait for page to load', function () {
-           pages.newPerson.waitForPageToBeShown();
+        pages.newPerson.waitForPageToBeShown();
 
     });
 };
@@ -76,6 +76,7 @@ exports.clickOnPayee = steps.person.clickOnPayee;
 exports.save = function () {
     it('Save person', function () {
         pages.newPerson.save();
+        pages.base.waitForAjax();
     });
 };
 
@@ -100,7 +101,14 @@ exports.enterDateOfDeath = function (year, month, day) {
         });
     });
 };
-    
+
+exports.selectAsPayeeOptionToYes = function () {
+    it("Click on yes option to select person as payee ", function () {
+        pages.newPerson.selectTheAsPayeeOptionToYes();
+        pages.newPerson.waitForAjax();
+    });
+};
+
 pageStep([
     'Add alternative name',
     'Add address',

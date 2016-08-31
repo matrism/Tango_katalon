@@ -97,9 +97,10 @@ var defaultUserName = 'TangoTest1',
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
-                app_url: (
-                    cli['app-url'] || 'http://tango.tango.qa.wmg.com/'
-                ),
+                app_url: cli['app-url'] || 'http://musicpublishing.staging.wmg.com',
+                //app_url: (
+                //    cli['app-url'] || 'http://tango.tango.qa.wmg.com/'
+                //),
                 service_url: (
                     cli['service-url'] || cli['app-url'] ||
                     'http://tango.tango.qa.wmg.com/'

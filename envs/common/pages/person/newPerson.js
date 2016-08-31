@@ -143,6 +143,11 @@ if (pages.newPerson === undefined) {
             this.dateOfDeathMonth().sendKeys(month);
             return this.dateOfDeathDay().sendKeys(day);
 
+        },
+
+        selectTheAsPayeeOptionToYes :function(){
+            pages.base.scrollIntoView(element(by.css("div[ng-model='modularEditModels.model.isPayee'] button:nth-child(1)")));
+            browser.driver.findElement(By.css("div[ng-model='modularEditModels.model.isPayee'] button:nth-child(1)")).click();
         }
 
     });
