@@ -1,6 +1,7 @@
 'use strict';
 
-var pph = require('../../../../helpers/pph'),
+var _ = require('lodash'),
+    pph = require('../../../../helpers/pph'),
     changeCase = require('change-case'),
     pageStep = require('../../../../helpers/basicPageStep');
 
@@ -12,6 +13,12 @@ hash.currentPersonSlot = null;
 exports.goToPersonPage = function () {
     it('Go to person page', function () {
         pages.person.open(hash.currentPersonSlot.id);
+    });
+};
+
+exports.goToPerson = function (id) {
+    it('Go to person #'+id, function () {
+        pages.person.open(id);
     });
 };
 
@@ -343,14 +350,14 @@ exports.validateLastName = function () {
         expect(pages.person.getLastName()).toBe(hash.currentPersonSlot.lastName);
     });
 };
-exports.validateAlternativeFirstName = function () {
-    it('Validate Alternative First Name', function () {
-        expect(pages.person.getAlternativeFirstName()).toBe(hash.currentPersonSlot.alternativeFirstName);
+exports.validateAlternativeFirstName = function (i) {
+    it('Validate Alternative First Name #'+i, function () {
+        expect(pages.person.getAlternativeFirstName(i)).toBe(hash.currentPersonSlot.alternativeFirstName);
     });
 };
-exports.validateAlternativeLastName = function () {
-    it('Validate Alternative Last Name', function () {
-        expect(pages.person.getAlternativeLastName()).toBe(hash.currentPersonSlot.alternativeLastName);
+exports.validateAlternativeLastName = function (i) {
+    it('Validate Alternative Last Name #'+i, function () {
+        expect(pages.person.getAlternativeLastName(i)).toBe(hash.currentPersonSlot.alternativeLastName);
     });
 };
 exports.validateAffiliatedSociety = function () {
@@ -438,7 +445,9 @@ pageStep([
     'Edit email',
     'Save email',
     'Edit payment',
-    'Save payment'
+    'Save payment',
+    'Edit others',
+    'Save others'
 ]);
 
 exports.clickOnEnterPersonSearchTerms = function (value) {
@@ -465,5 +474,21 @@ exports.validateIpiNumber = function () {
         pages.person.validateIpiNumber(
             hash.currentPersonSlot.ipiNumber
         );
+    });
+};
+
+exports.enterPlaceOfBirth = function (value) {
+    it('Enter place of birth (' + value + ')', function () {
+        pages.person.typePlaceOfBirth(value).then(function () {
+            hash.currentPersonSlot.placeOfBirth = value;
+        });
+    });
+};
+
+exports.enterCitizenship = function (value) {
+    it('Enter citizenship (' + value + ')', function () {
+        pages.person.typeCitizenship(value).then(function () {
+            hash.currentPersonSlot.citizenship = value;
+        });
     });
 };
