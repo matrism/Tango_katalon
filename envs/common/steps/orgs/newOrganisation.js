@@ -57,7 +57,8 @@ pageStep([
     'Expect form to be valid',
     'Expect Done button to be clickable',
     'Save organisation',
-    'Validate save redirection'
+    'Validate save redirection',
+    'Verify active org type button'
 ]);
 
 exports.createOrganistation = data => {

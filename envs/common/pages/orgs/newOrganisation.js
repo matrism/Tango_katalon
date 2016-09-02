@@ -16,6 +16,20 @@ exports.orgTypeButtons = function () {
     return element(by.model('modularEditModels.model.type')).$$('button');
 };
 
+exports.orgTypeButtonActive = function () {
+    return element(by.model('modularEditModels.model.type')).$$('.active');
+};
+
+exports.verifyActiveOrgTypeButton = function (type) {
+    var activeButton = exports.orgTypeButtonActive();
+
+    //pages.base.scrollIntoView(activeButton);
+    activeButton.getText().then(function (text) {
+        expect(text[0]).toEqual(type);
+    });;
+    
+};
+
 exports.selectOrgType = function (type) {
     var buttons = exports.orgTypeButtons();
 
