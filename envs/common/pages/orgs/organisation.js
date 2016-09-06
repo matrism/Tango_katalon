@@ -1683,3 +1683,40 @@ exports.subPublishers = (function () {
 
     return subPublishers;
 })();
+
+exports.enterOrgSearchTerms = function(value) {
+    var element = exports.orgSearchTermsInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
+exports.orgSearchTermsInput = function() {
+    return pages.base.mainSearchBar().element(by.model('$term'));
+};
+
+exports.validateIpiNumber = function(value) {
+    //TO-DO
+    expect(exports.internalIpiNumber()).toBe(value);
+};
+
+exports.orgSearchMatches = function() {
+    return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
+};
+
+exports.orgSearchMatch = function(i) {
+    var elements = exports.orgSearchMatches();
+    browser.wait(ExpectedConditions.visibilityOfAny(elements));
+    return elements.get(i);
+};
+exports.clickOrgSearchMatch = function(i) {
+    return exports.orgSearchMatch(i).click();
+};
+
+exports.internalIpiNumber = function() {
+    return exports.getBindingText(exports.internalIpiNumberBinding());
+};
+
+exports.internalIpiNumberBinding = function() {
+    return $(".e2e-general-suisa-ipi .controls");
+};

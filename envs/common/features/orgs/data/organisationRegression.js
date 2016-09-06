@@ -21,7 +21,7 @@ exports.publisher = {
     },
     incomeProvider: {
         currency: 'MYR',
-        incomeFileType: 'ASIAN WARNER'
+        incomeFileType: 'ASIAN - WARNER'
     }
 
 };

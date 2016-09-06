@@ -5,7 +5,7 @@ var pph = require('../../../../helpers/pph.js');
 pages.newOrganisation = exports;
 
 exports.nameField = function () {
-    return element(by.model('modularEditModels.model.name'));
+    return element(by.model('tgModularEditModel.name'));
 };
 
 exports.populateName = function (name) {
@@ -13,11 +13,11 @@ exports.populateName = function (name) {
 };
 
 exports.orgTypeButtons = function () {
-    return element(by.model('modularEditModels.model.type')).$$('button');
+    return element(by.model('tgModularEditModel.type')).$$('button');
 };
 
 exports.orgTypeButtonActive = function () {
-    return element(by.model('modularEditModels.model.type')).$$('.active');
+    return element(by.model('tgModularEditModel.type')).$$('.active');
 };
 
 exports.verifyActiveOrgTypeButton = function (type) {
@@ -26,7 +26,7 @@ exports.verifyActiveOrgTypeButton = function (type) {
     //pages.base.scrollIntoView(activeButton);
     activeButton.getText().then(function (text) {
         expect(text[0]).toEqual(type);
-    });;
+    });
     
 };
 
@@ -51,7 +51,7 @@ exports.enterSuisaIpiNumber = function(value) {
 };
 
 exports.territoryOfOperationField = function () {
-    return element(by.model('modularEditModels.model.territoriesOfOperation'));
+    return element(by.model('tgModularEditModel.territoriesOfOperation'));
 };
 
 exports.selectTerritoryOfOperation = function (name) {
@@ -102,15 +102,15 @@ exports.clickAddRecipientButton = function () {
 };
 
 exports.typeRecipientName = function (name) {
-    var elem = Typeahead(element(by.model('recipient.model')), true);
+    var elem = Typeahead(element(by.css('.e2e-reg-recipient')).element(by.model('tgOrgTypeaheadModel')), true);
+    elem.click();
     elem.sendKeys(name);
     pages.base.waitForAjax();
     elem.results(name).click();
 };
 
-exports.addRecipient = function (name) {
+exports.addRecipient = function () {
     exports.clickAddRecipientButton();
-    exports.typeRecipientName(name);
 };
 
 exports.publisherTypeButtons = function () {
@@ -232,15 +232,16 @@ exports.addDeliveryMethod = function (type) {
 
 exports.fillRequiredFieldsForDeliveryMethod = function (type) {
     var elem = exports.deliveryMethodPanels().last().$('.e2e-method-' + type.toLowerCase()),
+    notification = exports.deliveryMethodPanels().last().$('.e2e-method-notification-emails'),
 
     options = {
         FTP: function () {
-            elem.element(by.model('deliveryMethod.model.host')).sendKeys('ftp.tango.testing');
-            elem.element(by.model('deliveryMethod.model.port')).sendKeys('80');
-            elem.element(by.model('deliveryMethod.model.username')).sendKeys('testUsername');
-            elem.$('.password-field').sendKeys('testPassword');
-            elem.$('.e2e-method-notification-emails input').sendKeys('test@nowhere.tango');
-        }
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.host')).sendKeys('ftp.tango.testing');
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.port')).sendKeys('80');
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.username')).sendKeys('testUsername');
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.password')).sendKeys('testPassword');
+            notification.element(by.model('deliveryMethod.deliveryNotification.primaryEmails')).sendKeys('test@nowhere.tango');
+        },
     };
 
     options[type]();
@@ -304,7 +305,7 @@ exports.removeLastSubpublisher = function () {
 };
 
 exports.subpublisherTypeahead = function () {
-    var elem = exports.subpublishersRepeater().last().element(by.model('modularEditModels.model.publisher'));
+    var elem = exports.subpublishersRepeater().last().element(by.css('[ng-name="subPublisher"]'));
 
     elem.results = function () { 
         return exports.subpublisherForm().$$('.e2e-sub-publisher-def .tg-typeahead__suggestions-group-item');
@@ -315,7 +316,7 @@ exports.subpublisherTypeahead = function () {
 
 exports.fillRequiredFieldsForLastSubpublisher = function (name, territory) {
     var subpublisherTypeahead = exports.subpublisherTypeahead(),
-        territoryOfControl = exports.subpublishersRepeater().last().element(by.model('modularEditModels.model.territoryOfControl')),
+        territoryOfControl = exports.subpublishersRepeater().last().element(by.model('tgModularEditModel.territoriesOfControl')),
         territoryTypeahead = Typeahead(territoryOfControl.element(by.model('$dataHolder.internalModel')), true),
         results, firstResult;
 
@@ -341,7 +342,7 @@ exports.fillSubpublisherSocietyAgreementNumber = function (number) {
 };
 
 exports.selectSubpublisherSociety = function (name) {
-    var elem = Typeahead(element(by.model('modularEditModels.model.agreement.society')), true);
+    var elem = Typeahead(element(by.css('[ng-name="agreementSociety"]')), true);
     elem.sendKeys(name);
     browser.wait(EC.visibilityOfAny(elem.results()));
     elem.results().$$('.tg-typeahead__item-left').filter(
@@ -361,7 +362,7 @@ exports.clickAddSubpublisherButton = function () {
 };
 
 exports.incomeProviderButtons = function () {
-    return element(by.model('modularEditModels.model.isIncomeProvider')).$$('button');
+    return element(by.model('__isIncomeProvider')).$$('button');
 };
 
 exports.makeOrgIncomeProvider = function () {
@@ -407,7 +408,7 @@ exports.selectPrimaryIncomeProviderTerritoryOfOperation = function(value) {
 };
 
 exports.incomeProviderDefaultCurrencySelect = function () {
-    return element(by.model('modularEditModels.model.currencyCode'));
+    return element(by.model('tgModularEditModel.currencyCode'));
 };
 
 exports.setDefaultIncomeProviderCurrency = function (value) {
@@ -419,7 +420,7 @@ exports.setDefaultIncomeProviderCurrency = function (value) {
 };
 
 exports.incomeFileTypeSelect = function (){
-    return element(by.model('modularEditModels.model.incomeFileTypes'));
+    return element(by.model('tgModularEditModel.incomeFileTypes'));
 };
 
 exports.setIncomeFileType = function(type) {
@@ -676,7 +677,7 @@ exports.doneButton = function () {
 
 exports.expectFormToBeValid = function () {
     var button = exports.doneButton();
-    expect(button.evaluate('OrganisationCreateForm.$valid')).toBeTruthy();
+    expect(button.evaluate('__isValid')).toBeTruthy();
 };
 
 exports.expectDoneButtonToBeClickable = function () {

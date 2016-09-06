@@ -1020,6 +1020,7 @@ exports.expectValueExact = function (section, labelName) {
 };
 
 pageStep([
+    'Enter org search terms',
     'Get value by label',
     'Expect internal IPI number to be unique',
     'Edit section',
@@ -1170,5 +1171,31 @@ exports.registration.resetDeliveryInfo = function(data) {
                 this.saveSection();
             });
         });
+    });
+};
+
+exports.clickOnEnterOrgSearchTerms = function (value) {
+    it('Search for org (' + value + ')', function () {
+        pages.organisation.enterOrgSearchTerms(value);
+    });
+    pages.base.waitForAjax();
+};
+
+exports.clickOrgSearchMatch = function (i) {
+    it('Click org search match #' + (i + 1), function () {
+        pages.organisation.clickOrgSearchMatch(i);
+        pages.base.waitForAjax();
+    });
+};
+
+exports.validateIpiNumber = function (value) {
+    it('Validate IPI Number', function () {
+        pages.organisation.validateIpiNumber(value);
+    });
+};
+
+exports.findInternalIpiNumber = function () {
+    it('Find internal IPI number', function () {
+        return pages.organisation.internalIpiNumber();
     });
 };

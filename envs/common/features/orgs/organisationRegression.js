@@ -8,36 +8,36 @@ var fnutils = require('../../../../helpers/fnutils'),
 //exports.id = 'e088e141-fd44-4245-8476-f66dc8e07057';
 
 exports.beforeFeature = () => {
-    steps.login.itLogin(); //1
+    steps.login.itLogin();
 };
 
 exports.commonFeatureTags = [
-    'orgsNew', 'crefactor'
+    'crefactor'
 ];
 
 exports.feature = [{
     name: 'Create Organisation',
-    tags: ['newPublisher'],
+    tags: [],
 
     steps: function() {
         var newOrg = steps.newOrganisation,
-            orgPage = steps.organisation;
+            orgPage = steps.organisation,
+            rndStr = randomString(0),
+            orgIpiNumber = undefined;
+
         //,data.society,data.copyrightHub,data.licensee
         [data.publisher].forEach(function(org) {
 
             describe('Create ' + org.organisationType + ' & validate data', function() {
                 describe('Create new '+ org.organisationType, function() {
 
-                    //2 the following record dropdown is displayed
-                    steps.mainHeader.createNewRecord('Organisation'); //3 new organisation is displayed
+                    steps.mainHeader.createNewRecord('Organisation');
 
-                    //4 inspect type field have society c hub lincensee publisher
+                    newOrg.verifyActiveOrgTypeButton('Publisher');
 
-                    newOrg.verifyActiveOrgTypeButton('Publisher'); //5 sub publisher rela is on the apge
 
-                    //6
                     describe('General', function() {
-                        newOrg.populateName(org.name);
+                        newOrg.populateName(org.name + rndStr);
                         newOrg.selectTerritoryOfOperation(org.territoryOfOperation);
                         newOrg.selectOrgType(org.organisationType);
                         newOrg.selectPublisherType(org.publisherType);
@@ -70,7 +70,8 @@ exports.feature = [{
                         newOrg.fillRequiredFieldsForDeliveryMethod(org.deliveryMethod);
 
                         newOrg.makeOrgHaveRegistrationRecipients();
-                        newOrg.addRecipient('FOX');
+                        newOrg.addRecipient();
+                        newOrg.typeRecipientName('FOX');
                     });
 
                     describe('Sub-Publisher Relationships', function() {
@@ -106,15 +107,20 @@ exports.feature = [{
 
                     newOrg.expectFormToBeValid();
                     //newOrg.saveOrganisation();
+                    //orgIpiNumber=orgPage.findInternalIpiNumber();
                 });
 
-                // xdescribe('Use previously saved Org', function () {
-                //     it('Navigate to Org', function(){
-                //         browser.get('http://tango.tango-qa-aws.dspdev.wmg.com/#/org/50692a03-db5c-46ab-885b-a6867cba04cf/general');
-                //         pages.base.waitForAjax();
-                //     });
-                // });
 
+
+                // describe('Navigate to previously saved '+ org.organisationType, function () {
+                //     steps.base.goToHomePage();
+                //     steps.searchSection.selectEntityType('Organisations');
+                //     orgPage.enterOrgSearchTerms(org.name + rndStr);
+                //     pages.base.waitForAjax();
+                //     orgPage.clickOrgSearchMatch(0);
+                //     orgPage.validateIpiNumber(orgIpiNumber);
+                // });
+                //
                 // describe('Validate saved data', function(){
                 //     using(steps.organisation, function(){
                 //         this.expectValue('General', 'Name').toEqual(org.name);
@@ -122,11 +128,11 @@ exports.feature = [{
                 //         this.expectValueExact('General', 'Type:').toEqual('Publisher');
                 //         this.expectInternalIpiNumberToBeUnique();
                 //         this.expectValue('General', 'Publisher Type').toEqual('WCM');
-
+                //
                 //         _.each(org.contact.addressLines, function(line, i) {
                 //             steps.organisation.expectValue('Contact Information', 'Address ' + (i+1)).toEqual(line);
                 //         });
-
+                //
                 //         this.expectValue('Contact Information', 'City').toEqual(org.contact.city);
                 //         this.expectValue('Contact Information', 'State/Province/Region').toEqual(org.contact.state);
                 //         this.expectValue('Contact Information', 'ZIP/Postal Code').toEqual(org.contact.zipCode);
@@ -134,7 +140,7 @@ exports.feature = [{
                 //         this.expectValue('Contact Information', 'Telephone').toEqual(org.contact.phoneNumber);
                 //         this.expectValue('Contact Information', 'Fax').toEqual(org.contact.faxNumber);
                 //         this.expectValue('Contact Information', 'Email').toEqual(org.contact.email);
-
+                //
                 //         this.expectValue('Income Provider', 'Primary Territory of Operation').toEqual(org.territoryOfOperation);
                 //         this.expectValue('Income Provider', 'Default Currency').toEqual(org.incomeProvider.currency);
                 //         this.expectValue('Income Provider', 'Income File Type').toEqual(org.incomeProvider.incomeFileType);
@@ -142,7 +148,7 @@ exports.feature = [{
                 //         this.incomeProvider.viewIncomeTypeMappingDetails();
                 //         this.incomeProvider.expectMappingToBe(0, ['20', 'description', '', 'Mechanical']);
                 //         this.incomeProvider.expectMappingToBe(1, ['30', 'description', org.incomeProvider.incomeFileType, 'Digital Cover']);
-
+                //
                 //         this.expectValue('Payment/Statement Info', 'Payee').toEqual('Yes');
                 //         this.expectValue('Payment/Statement Info', 'Statement Recipient').toEqual('No');
                 //         this.expectValue('Payment/Statement Info', 'Preferred Language').toEqual('English');
