@@ -105,6 +105,8 @@ exports.typeRecipientName = function (name) {
     var elem = Typeahead(element(by.css('.e2e-reg-recipient')).element(by.model('tgOrgTypeaheadModel')), true);
     elem.click();
     elem.sendKeys(name);
+    elem.click();
+    elem.sendKeys(name);
     pages.base.waitForAjax();
     elem.results(name).click();
 };
