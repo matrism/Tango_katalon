@@ -101,6 +101,25 @@ exports.clickAddRecipientButton = function () {
     return $('.e2e-reg-recipient-add').click();
 };
 
+exports.recipientTerritoryNotOverlapMessage = function () {
+    var error = element(by.css('[territories-not-overlapping-message="At least one Territory of Operation must overlap between Organisation and Registration Recipient."]'));
+    return error;
+};
+
+exports.expectRecipientTerritoryNotOverlapMessageToBeVisible = function () {
+    var error = exports.recipientTerritoryNotOverlapMessage();
+
+    expect(error.isPresent()).toBeTruthy();
+    expect(error.isDisplayed()).toBeTruthy();
+};
+
+exports.expectRecipientTerritoryNotOverlapMessageToNotBeVisible = function () {
+    var error = exports.recipientTerritoryNotOverlapMessage();
+
+    expect(error.isPresent()).toBeTruthy();
+    expect(error.isDisplayed()).toBeFalsy();
+};
+
 exports.typeRecipientName = function (name) {
     var elem = Typeahead(element(by.css('.e2e-reg-recipient')).element(by.model('tgOrgTypeaheadModel')), true);
     elem.click();
@@ -230,6 +249,17 @@ exports.addDeliveryMethod = function (type) {
     //exports.expectFtpAndSftpToHaveDifferentLabels();
 
     exports.clickDeliveryMethodButton(type);
+};
+
+exports.removeDeliveryMethod = function (i) {
+    var button = $$('.e2e-reg-delivery-method .e2e-method-remove .btn-delete').get(i);
+
+    pages.base.scrollIntoView(button);
+    button.click();
+
+    pages.base.waitForModal();
+    pages.base.expectModalPopUpToBeDisplayed();
+    pages.base.clickModalPrimaryButton();
 };
 
 exports.fillRequiredFieldsForDeliveryMethod = function (type) {
@@ -373,7 +403,7 @@ exports.makeOrgIncomeProvider = function () {
 };
 
 exports.territoryErrorMessage = function () {
-    var error = $('.e2e-income-provider div + div + .help-inline .validation-message-error');
+    var error = element(by.css('[territory-of-operation-required-message="Please add at least one Territory of Operation in order to save the changes."]'));
     return error;
 };
 
@@ -384,10 +414,11 @@ exports.expectTerritoryErrorMessageToBeVisible = function () {
     expect(error.isDisplayed()).toBeTruthy();
 };
 
-exports.expectTerritoryErrorMessageToNotBePresent = function () {
+exports.expectTerritoryErrorMessageToNotBeVisible = function () {
     var error = exports.territoryErrorMessage();
 
-    expect(error.isPresent()).toBeFalsy();
+    expect(error.isPresent()).toBeTruthy();
+    expect(error.isDisplayed()).toBeFalsy();
 };
 
 exports.primaryIncomeProviderTerritoryOfOperationDropdown = function() {
@@ -674,7 +705,7 @@ exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
 };
 
 exports.doneButton = function () {
-    return $('#FORM-CONTROLS').element(by.cssContainingText('button', 'Done'));
+    return $(".btn.btn-primary.ng-scope");
 };
 
 exports.expectFormToBeValid = function () {
@@ -688,9 +719,10 @@ exports.expectDoneButtonToBeClickable = function () {
 
 exports.saveOrganisation = function() {
     exports.expectDoneButtonToBeClickable();
+    exports.doneButton().click();
+    return pages.base.waitForAjax();
+};
 
-    return exports.doneButton().click().then(function() {
-        pages.base.waitForAjax();
-        expect(browser.getCurrentUrl()).toMatch(/#\/org\/.+$/);
-    });
+exports.validateSaveRedirection = function () {
+    expect(browser.getCurrentUrl()).toMatch(/#\/org\/.+$/);
 };

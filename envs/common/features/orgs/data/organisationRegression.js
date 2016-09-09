@@ -53,7 +53,7 @@ exports.society = {
 
 };
 exports.copyrightHub = {
-    name: 'Copywright Hub ',
+    name: 'Copyright Hub ',
     territoryOfOperation: 'Malaysia',
     organisationType: 'Publisher',
     publisherType: 'WCM',
