@@ -2,8 +2,10 @@
 
 var pageStep = require('../../../../helpers/basicPageStep'),
     using = fnutils.using,
-    promise = protractor.promise;
+    promise = protractor.promise,
     ExpectedConditions = protractor.ExpectedConditions;
+
+hash.currentOrg={};
 
 if (steps.organisation === undefined) {
     steps.organisation = exports = {
@@ -1020,7 +1022,6 @@ exports.expectValueExact = function (section, labelName) {
 };
 
 pageStep([
-    'Enter org search terms',
     'Get value by label',
     'Expect internal IPI number to be unique',
     'Edit section',
@@ -1174,11 +1175,21 @@ exports.registration.resetDeliveryInfo = function(data) {
     });
 };
 
-exports.clickOnEnterOrgSearchTerms = function (value) {
-    it('Search for org (' + value + ')', function () {
-        pages.organisation.enterOrgSearchTerms(value);
+
+exports.enterOrgSearchTermsIpiNumber = function () {
+    it('Enter org search terms IPI Number (' + hash.currentOrg.ipiNumber + ')', function () {
+        pages.organisation.enterOrgSearchTerms(hash.currentOrg.ipiNumber);
+        pages.base.waitForAjax();
     });
-    pages.base.waitForAjax();
+
+};
+
+exports.enterOrgSearchTerms = function (value) {
+    it('Enter org search terms (' + value + ')', function () {
+        pages.organisation.enterOrgSearchTerms(value);
+        pages.base.waitForAjax();
+    });
+
 };
 
 exports.clickOrgSearchMatch = function (i) {
@@ -1188,14 +1199,18 @@ exports.clickOrgSearchMatch = function (i) {
     });
 };
 
-exports.validateIpiNumber = function (value) {
-    it('Validate IPI Number', function () {
-        pages.organisation.validateIpiNumber(value);
+exports.validateIpiNumber = function () {
+    it('Validate IPI Number to be equal ' + hash.currentOrg.ipiNumber, function () {
+        pages.organisation.validateIpiNumber(hash.currentOrg.ipiNumber);
+        pages.base.waitForAjax();
     });
 };
 
 exports.findInternalIpiNumber = function () {
     it('Find internal IPI number', function () {
-        return pages.organisation.internalIpiNumber();
+            hash.currentOrg.ipiNumber=pages.organisation.internalIpiNumber().then(function (ipiNumber) {
+                var currentOrg=hash.currentOrg;
+                currentOrg.ipiNumber=ipiNumber;
+            });
     });
 };

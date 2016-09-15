@@ -1696,8 +1696,9 @@ exports.orgSearchTermsInput = function() {
 };
 
 exports.validateIpiNumber = function(value) {
-    //TO-DO
-    expect(exports.internalIpiNumber()).toBe(value);
+    exports.internalIpiNumber().then(function (ipiNumber) {
+        expect(ipiNumber).toBe(value);
+    });
 };
 
 exports.orgSearchMatches = function() {
@@ -1713,10 +1714,15 @@ exports.clickOrgSearchMatch = function(i) {
     return exports.orgSearchMatch(i).click();
 };
 
+exports.getBindingText = function(element) {
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
 exports.internalIpiNumber = function() {
     return exports.getBindingText(exports.internalIpiNumberBinding());
 };
 
 exports.internalIpiNumberBinding = function() {
-    return $(".e2e-general-suisa-ipi .controls");
+    return $(".e2e-general-internal-ipi .controls");
 };
