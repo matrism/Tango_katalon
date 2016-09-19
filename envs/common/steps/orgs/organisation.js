@@ -1199,6 +1199,13 @@ exports.clickOrgSearchMatch = function (i) {
     });
 };
 
+exports.clickOrgSearchMatchByName = function (name) {
+    it('Click org search match #' + (name), function () {
+        pages.organisation.clickOrgSearchMatchByName(name);
+        pages.base.waitForAjax();
+    });
+};
+
 exports.validateIpiNumber = function () {
     it('Validate IPI Number to be equal ' + hash.currentOrg.ipiNumber, function () {
         pages.organisation.validateIpiNumber(hash.currentOrg.ipiNumber);

@@ -1705,13 +1705,28 @@ exports.orgSearchMatches = function() {
     return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
 };
 
+exports.orgSearchListResults = function() {
+    return pages.base.mainSearchBar().$('.tg-typeahead__suggestions-group');
+};
+
 exports.orgSearchMatch = function(i) {
     var elements = exports.orgSearchMatches();
     browser.wait(ExpectedConditions.visibilityOfAny(elements));
     return elements.get(i);
 };
+
+exports.orgSearchMatchByName = function(name) {
+    var element = exports.orgSearchListResults().element(by.cssContainingText('li',name));
+    browser.wait(ExpectedConditions.visibilityOf(element));
+    return element;
+};
+
 exports.clickOrgSearchMatch = function(i) {
     return exports.orgSearchMatch(i).click();
+};
+
+exports.clickOrgSearchMatchByName = function(name) {
+    return exports.orgSearchMatchByName(name).click();
 };
 
 exports.getBindingText = function(element) {
