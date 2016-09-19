@@ -2,6 +2,7 @@ exports.publisher = {
     name: 'Publisher ',
     territoryOfOperation: 'Malaysia',
     organisationType: 'Publisher',
+    affiliatedSociety: 'ASCAP',
     publisherType: 'WCM',
     deliveryMethod: 'FTP',
 
@@ -28,8 +29,7 @@ exports.publisher = {
 exports.society = {
     name: 'Society ',
     territoryOfOperation: 'Malaysia',
-    organisationType: 'Publisher',
-    publisherType: 'WCM',
+    organisationType: 'Society',
     deliveryMethod: 'FTP',
 
     contact: {
@@ -55,8 +55,7 @@ exports.society = {
 exports.copyrightHub = {
     name: 'Copyright Hub ',
     territoryOfOperation: 'Malaysia',
-    organisationType: 'Publisher',
-    publisherType: 'WCM',
+    organisationType: 'Copyright Hub',
     deliveryMethod: 'FTP',
 
     contact: {
@@ -82,8 +81,7 @@ exports.copyrightHub = {
 exports.licensee = {
     name: 'Licensee ',
     territoryOfOperation: 'Malaysia',
-    organisationType: 'Publisher',
-    publisherType: 'WCM',
+    organisationType: 'Licensee',
     deliveryMethod: 'FTP',
 
     contact: {

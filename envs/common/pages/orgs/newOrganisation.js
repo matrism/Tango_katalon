@@ -8,8 +8,36 @@ exports.nameField = function () {
     return element(by.model('tgModularEditModel.name'));
 };
 
-exports.populateName = function (name) {
-    return exports.nameField().sendKeys(name);
+exports.societyAbbreviationField = function () {
+    return element(by.model('tgModularEditModel.cisacSocietyAbbreviation'));
+};
+
+exports.societyCodeField = function () {
+    return element(by.model('tgModularEditModel.cisacSocietyCode'));
+};
+
+exports.populateName = function (name, edit) {
+    var element = exports.nameField();
+    if(edit){
+        element.clear();
+    }
+    return element.sendKeys(name);
+};
+
+exports.fillSocietyAbbreviation = function (name, edit) {
+    var element = exports.societyAbbreviationField();
+    if(edit){
+        element.clear();
+    }
+    return element.sendKeys(name);
+};
+
+exports.fillSocietyCode = function (name, edit) {
+    var element = exports.societyCodeField();
+    if(edit){
+        element.clear();
+    }
+    return element.sendKeys(name);
 };
 
 exports.orgTypeButtons = function () {
@@ -37,7 +65,7 @@ exports.selectOrgType = function (type) {
 };
 
 exports.suisaIpiNumberInput = function() {
-    return element(by.model('modularEditModels.model.typeModel.suisaIpiNumber'));
+    return element(by.model('tgModularEditModel.suisaIpiNumber'));
 };
 
 exports.enterSuisaIpiNumber = function(value) {
@@ -48,6 +76,14 @@ exports.enterSuisaIpiNumber = function(value) {
     input.clear();
 
     return input.sendKeys(value);
+};
+
+exports.designeeCheckbox = function () {
+    return element(by.model('tgModularEditModel.isPublisherDesignee'));
+};
+
+exports.checkDesigneeCheckbox = function () {
+    return exports.designeeCheckbox().click();
 };
 
 exports.territoryOfOperationField = function () {
@@ -69,14 +105,64 @@ exports.selectTerritoryOfOperation = function (name) {
     typeahead.select(name);
 };
 
-exports.societyTypeahead = function () {
-    return Typeahead(element(by.model('modularEditModels.model.typeModel.affiliatedSociety')), true);
+exports.affiliatedSocietyTypeahead = function () {
+    return element(by.css('[tg-org-typeahead-model="tgModularEditModel.affiliatedSociety"]'));
 };
 
-exports.selectSociety = function (name) {
-    var typeahead = exports.societyTypeahead;
-    typeahead.sendKeys(name);
-    typeahead.results().filter(pph.matchTextExact(name));
+exports.societiesOfInterestTypeahead = function () {
+    return element(by.css('[tg-org-typeahead-model="tgModularEditModel.societiesOfInterest"]'));
+};
+
+exports.affiliatedSocietySearchTermsInput = function() {
+    return exports.affiliatedSocietyTypeahead().element(by.model('$term'));
+};
+
+exports.enterAffiliatedSocietySearchTerms = function(value) {
+    var input = exports.affiliatedSocietySearchTermsInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
+exports.affiliatedSocietySearchResultOptions = function() {
+    var options = $$('.tg-typeahead__suggestions-group-item');
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
+
+    return options;
+};
+
+exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
+    return exports.affiliatedSocietySearchResultOptions().get(i).click();
+};
+
+exports.societiesOfInterestSearchTermsInput = function() {
+    return exports.societiesOfInterestTypeahead().element(by.model('$term'));
+};
+
+exports.enterSocietiesOfInterestSearchTerms = function(value) {
+    var input = exports.societiesOfInterestSearchTermsInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
+exports.societiesOfInterestSearchResultOptions = function() {
+    var options = $$('.tg-typeahead__suggestions-group-item');
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
+
+    return options;
+};
+
+exports.selectSocietiesOfInterestSearchResultByIndex = function(i) {
+    return exports.societiesOfInterestSearchResultOptions().get(i).click();
 };
 
 exports.isRegistrationRecipientButtons = function () {
@@ -592,8 +678,19 @@ exports.payeeYesButton = function () {
     return $$('.e2e-payee-is button').first();
 };
 
+exports.payeeNoButton = function () {
+    return $$('.e2e-payee-is button').last();
+};
+
 exports.makeOrgPayee = function () {
     var elem = exports.payeeYesButton();
+    pages.base.scrollIntoView(elem);
+
+    elem.click();
+};
+
+exports.makeOrgNonPayee = function () {
+    var elem = exports.payeeNoButton();
     pages.base.scrollIntoView(elem);
 
     elem.click();
@@ -672,36 +769,6 @@ exports.setStatementRecipientData = (optionName, subOptionName) => {
         exports.statementRecipientSubOptionByName(option, subOptionName),
         'scrollIntoView', 'click'
     );
-};
-
-exports.affiliatedSocietyTypeahead = function() {
-    return element(by.model('modularEditModels.model.typeModel.affiliatedSociety'));
-};
-
-exports.affiliatedSocietySearchTermsInput = function() {
-    return exports.affiliatedSocietyTypeahead().element(by.model('$term'));
-};
-
-exports.enterAffiliatedSocietySearchTerms = function(value) {
-    var input = exports.affiliatedSocietySearchTermsInput();
-
-    pages.base.scrollIntoView(input);
-
-    input.clear();
-
-    return input.sendKeys(value);
-};
-
-exports.affiliatedSocietySearchResultOptions = function() {
-    var options = $$('.tg-typeahead__suggestions-group-item');
-
-    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
-
-    return options;
-};
-
-exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
-    return exports.affiliatedSocietySearchResultOptions().get(i).click();
 };
 
 exports.doneButton = function () {

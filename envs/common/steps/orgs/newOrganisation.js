@@ -51,6 +51,7 @@ pageStep([
     'Enter income type mapping internal type search terms',
     'Select income type mapping internal type search result by index',
     'Make Org Payee',
+    'Make Org Non Payee',
     'Set payee account name',
     'Expect Payee Account Name to be if present',
     'Make Org Statement Recipient',
@@ -61,7 +62,11 @@ pageStep([
     'Expect Done button to be clickable',
     'Save organisation',
     'Validate save redirection',
-    'Verify active org type button'
+    'Verify active org type button',
+    'Fill society abbreviation',
+    'Fill society code',
+    'Enter societies of interest search terms',
+    'Select societies of interest search result by index'
 ]);
 
 exports.createOrganistation = data => {
