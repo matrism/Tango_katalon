@@ -1177,7 +1177,7 @@ exports.registration.resetDeliveryInfo = function(data) {
 
 
 exports.enterOrgSearchTermsIpiNumber = function () {
-    it('Enter org search terms IPI Number (' + hash.currentOrg.ipiNumber + ')', function () {
+    it('Enter org search terms IPI Number', function () {
         pages.organisation.enterOrgSearchTerms(hash.currentOrg.ipiNumber);
         pages.base.waitForAjax();
     });
@@ -1209,8 +1209,7 @@ exports.validateIpiNumber = function () {
 exports.findInternalIpiNumber = function () {
     it('Find internal IPI number', function () {
             hash.currentOrg.ipiNumber=pages.organisation.internalIpiNumber().then(function (ipiNumber) {
-                var currentOrg=hash.currentOrg;
-                currentOrg.ipiNumber=ipiNumber;
+                hash.currentOrg.ipiNumber = ipiNumber;
             });
     });
 };
