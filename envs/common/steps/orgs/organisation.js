@@ -2,8 +2,10 @@
 
 var pageStep = require('../../../../helpers/basicPageStep'),
     using = fnutils.using,
-    promise = protractor.promise;
+    promise = protractor.promise,
     ExpectedConditions = protractor.ExpectedConditions;
+
+hash.currentOrg={};
 
 if (steps.organisation === undefined) {
     steps.organisation = exports = {
@@ -1170,5 +1172,51 @@ exports.registration.resetDeliveryInfo = function(data) {
                 this.saveSection();
             });
         });
+    });
+};
+
+
+exports.enterOrgSearchTermsIpiNumber = function () {
+    it('Enter org search terms IPI Number', function () {
+        pages.organisation.enterOrgSearchTerms(hash.currentOrg.ipiNumber);
+        pages.base.waitForAjax();
+    });
+
+};
+
+exports.enterOrgSearchTerms = function (value) {
+    it('Enter org search terms (' + value + ')', function () {
+        pages.organisation.enterOrgSearchTerms(value);
+        pages.base.waitForAjax();
+    });
+
+};
+
+exports.clickOrgSearchMatch = function (i) {
+    it('Click org search match #' + (i + 1), function () {
+        pages.organisation.clickOrgSearchMatch(i);
+        pages.base.waitForAjax();
+    });
+};
+
+exports.clickOrgSearchMatchByName = function (name) {
+    it('Click org search match #' + (name), function () {
+        pages.organisation.clickOrgSearchMatchByName(name);
+        pages.base.waitForAjax();
+    });
+};
+
+exports.validateIpiNumber = function () {
+    it('Validate IPI Number to be equal ' + hash.currentOrg.ipiNumber, function () {
+        pages.organisation.validateIpiNumber(hash.currentOrg.ipiNumber);
+        pages.base.waitForAjax();
+    });
+};
+
+exports.findInternalIpiNumber = function () {
+    it('Find internal IPI number', function () {
+            hash.currentOrg.ipiNumber=pages.organisation.internalIpiNumber().then(function (ipiNumber) {
+                hash.currentOrg.ipiNumber = ipiNumber;
+            });
     });
 };

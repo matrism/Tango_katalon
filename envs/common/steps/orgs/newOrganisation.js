@@ -22,8 +22,11 @@ pageStep([
     'Make Org registration recipient',
     'Make Org have registration recipients',
     'Add delivery method',
+    'Remove delivery method',
     'Expect FTP and SFTP to have different labels',
     'Fill required fields for delivery method',
+    'Expect recipient territory not overlap message to be visible',
+    'Expect recipient territory not overlap message to not be visible',
     'Select Acknowledgement Process',
     'Select Acknowledgement Process Delivery Method',
     'Type recipient name',
@@ -36,7 +39,7 @@ pageStep([
     'Remove last Subpublisher',
     'Make Org Income Provider',
     'Expect territory error message to be visible',
-    'Expect territory error message to not be present',
+    'Expect territory error message to not be visible',
     'Select primary income provider territory of operation',
     'Set default Income Provider currency',
     'Set Income File Type',
@@ -48,6 +51,7 @@ pageStep([
     'Enter income type mapping internal type search terms',
     'Select income type mapping internal type search result by index',
     'Make Org Payee',
+    'Make Org Non Payee',
     'Set payee account name',
     'Expect Payee Account Name to be if present',
     'Make Org Statement Recipient',
@@ -57,7 +61,12 @@ pageStep([
     'Expect form to be valid',
     'Expect Done button to be clickable',
     'Save organisation',
-    'Validate save redirection'
+    'Validate save redirection',
+    'Verify active org type button',
+    'Fill society abbreviation',
+    'Fill society code',
+    'Enter societies of interest search terms',
+    'Select societies of interest search result by index'
 ]);
 
 exports.createOrganistation = data => {

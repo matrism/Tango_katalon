@@ -1683,3 +1683,61 @@ exports.subPublishers = (function () {
 
     return subPublishers;
 })();
+
+exports.enterOrgSearchTerms = function(value) {
+    var element = exports.orgSearchTermsInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
+exports.orgSearchTermsInput = function() {
+    return pages.base.mainSearchBar().element(by.model('$term'));
+};
+
+exports.validateIpiNumber = function(value) {
+    exports.internalIpiNumber().then(function (ipiNumber) {
+        expect(ipiNumber).toBe(value);
+    });
+};
+
+exports.orgSearchMatches = function() {
+    return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
+};
+
+exports.orgSearchListResults = function() {
+    return pages.base.mainSearchBar().$('.tg-typeahead__suggestions-group');
+};
+
+exports.orgSearchMatch = function(i) {
+    var elements = exports.orgSearchMatches();
+    browser.wait(ExpectedConditions.visibilityOfAny(elements));
+    return elements.get(i);
+};
+
+exports.orgSearchMatchByName = function(name) {
+    var element = exports.orgSearchListResults().element(by.cssContainingText('li',name));
+    browser.wait(ExpectedConditions.visibilityOf(element));
+    return element;
+};
+
+exports.clickOrgSearchMatch = function(i) {
+    return exports.orgSearchMatch(i).click();
+};
+
+exports.clickOrgSearchMatchByName = function(name) {
+    return exports.orgSearchMatchByName(name).click();
+};
+
+exports.getBindingText = function(element) {
+    pages.base.scrollIntoView(element);
+    return element.getText();
+};
+
+exports.internalIpiNumber = function() {
+    return exports.getBindingText(exports.internalIpiNumberBinding());
+};
+
+exports.internalIpiNumberBinding = function() {
+    return $(".e2e-general-internal-ipi .controls");
+};

@@ -5,3 +5,5 @@
 /reports/xml/*
 /vendor/
 /custom-deps/**/node_modules
+.idea/
+.vscode/

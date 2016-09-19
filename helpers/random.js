@@ -13,6 +13,16 @@ exports.id.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports
 exports.string = function() {
 	return randomstring.generate({charset: '0123456789ABCDEFGHIJKLMNOPQRSTUVXZY'});
 };
+
+exports.threeDigitCode = function() {
+	return randomstring.generate({
+		length: 3,
+		charset: 'numeric'
+	});
+};
+
+exports.string.threeDigitCodeGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.threeDigitCode);
+
 exports.string.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.string);
 
 exports.stringLowerCase = function() {

@@ -5,15 +5,57 @@ var pph = require('../../../../helpers/pph.js');
 pages.newOrganisation = exports;
 
 exports.nameField = function () {
-    return element(by.model('modularEditModels.model.name'));
+    return element(by.model('tgModularEditModel.name'));
 };
 
-exports.populateName = function (name) {
-    return exports.nameField().sendKeys(name);
+exports.societyAbbreviationField = function () {
+    return element(by.model('tgModularEditModel.cisacSocietyAbbreviation'));
+};
+
+exports.societyCodeField = function () {
+    return element(by.model('tgModularEditModel.cisacSocietyCode'));
+};
+
+exports.populateName = function (name, edit) {
+    var element = exports.nameField();
+    if(edit){
+        element.clear();
+    }
+    return element.sendKeys(name);
+};
+
+exports.fillSocietyAbbreviation = function (name, edit) {
+    var element = exports.societyAbbreviationField();
+    if(edit){
+        element.clear();
+    }
+    return element.sendKeys(name);
+};
+
+exports.fillSocietyCode = function (name, edit) {
+    var element = exports.societyCodeField();
+    if(edit){
+        element.clear();
+    }
+    return element.sendKeys(name);
 };
 
 exports.orgTypeButtons = function () {
-    return element(by.model('modularEditModels.model.type')).$$('button');
+    return element(by.model('tgModularEditModel.type')).$$('button');
+};
+
+exports.orgTypeButtonActive = function () {
+    return element(by.model('tgModularEditModel.type')).$$('.active');
+};
+
+exports.verifyActiveOrgTypeButton = function (type) {
+    var activeButton = exports.orgTypeButtonActive();
+
+    //pages.base.scrollIntoView(activeButton);
+    activeButton.getText().then(function (text) {
+        expect(text[0]).toEqual(type);
+    });
+    
 };
 
 exports.selectOrgType = function (type) {
@@ -23,7 +65,7 @@ exports.selectOrgType = function (type) {
 };
 
 exports.suisaIpiNumberInput = function() {
-    return element(by.model('modularEditModels.model.typeModel.suisaIpiNumber'));
+    return element(by.model('tgModularEditModel.suisaIpiNumber'));
 };
 
 exports.enterSuisaIpiNumber = function(value) {
@@ -36,8 +78,16 @@ exports.enterSuisaIpiNumber = function(value) {
     return input.sendKeys(value);
 };
 
+exports.designeeCheckbox = function () {
+    return element(by.model('tgModularEditModel.isPublisherDesignee'));
+};
+
+exports.checkDesigneeCheckbox = function () {
+    return exports.designeeCheckbox().click();
+};
+
 exports.territoryOfOperationField = function () {
-    return element(by.model('modularEditModels.model.territoriesOfOperation'));
+    return element(by.model('tgModularEditModel.territoriesOfOperation'));
 };
 
 exports.selectTerritoryOfOperation = function (name) {
@@ -55,14 +105,64 @@ exports.selectTerritoryOfOperation = function (name) {
     typeahead.select(name);
 };
 
-exports.societyTypeahead = function () {
-    return Typeahead(element(by.model('modularEditModels.model.typeModel.affiliatedSociety')), true);
+exports.affiliatedSocietyTypeahead = function () {
+    return element(by.css('[tg-org-typeahead-model="tgModularEditModel.affiliatedSociety"]'));
 };
 
-exports.selectSociety = function (name) {
-    var typeahead = exports.societyTypeahead;
-    typeahead.sendKeys(name);
-    typeahead.results().filter(pph.matchTextExact(name));
+exports.societiesOfInterestTypeahead = function () {
+    return element(by.css('[tg-org-typeahead-model="tgModularEditModel.societiesOfInterest"]'));
+};
+
+exports.affiliatedSocietySearchTermsInput = function() {
+    return exports.affiliatedSocietyTypeahead().element(by.model('$term'));
+};
+
+exports.enterAffiliatedSocietySearchTerms = function(value) {
+    var input = exports.affiliatedSocietySearchTermsInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
+exports.affiliatedSocietySearchResultOptions = function() {
+    var options = $$('.tg-typeahead__suggestions-group-item');
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
+
+    return options;
+};
+
+exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
+    return exports.affiliatedSocietySearchResultOptions().get(i).click();
+};
+
+exports.societiesOfInterestSearchTermsInput = function() {
+    return exports.societiesOfInterestTypeahead().element(by.model('$term'));
+};
+
+exports.enterSocietiesOfInterestSearchTerms = function(value) {
+    var input = exports.societiesOfInterestSearchTermsInput();
+
+    pages.base.scrollIntoView(input);
+
+    input.clear();
+
+    return input.sendKeys(value);
+};
+
+exports.societiesOfInterestSearchResultOptions = function() {
+    var options = $$('.tg-typeahead__suggestions-group-item');
+
+    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
+
+    return options;
+};
+
+exports.selectSocietiesOfInterestSearchResultByIndex = function(i) {
+    return exports.societiesOfInterestSearchResultOptions().get(i).click();
 };
 
 exports.isRegistrationRecipientButtons = function () {
@@ -87,16 +187,37 @@ exports.clickAddRecipientButton = function () {
     return $('.e2e-reg-recipient-add').click();
 };
 
+exports.recipientTerritoryNotOverlapMessage = function () {
+    var error = element(by.css('[territories-not-overlapping-message="At least one Territory of Operation must overlap between Organisation and Registration Recipient."]'));
+    return error;
+};
+
+exports.expectRecipientTerritoryNotOverlapMessageToBeVisible = function () {
+    var error = exports.recipientTerritoryNotOverlapMessage();
+
+    expect(error.isPresent()).toBeTruthy();
+    expect(error.isDisplayed()).toBeTruthy();
+};
+
+exports.expectRecipientTerritoryNotOverlapMessageToNotBeVisible = function () {
+    var error = exports.recipientTerritoryNotOverlapMessage();
+
+    expect(error.isPresent()).toBeTruthy();
+    expect(error.isDisplayed()).toBeFalsy();
+};
+
 exports.typeRecipientName = function (name) {
-    var elem = Typeahead(element(by.model('recipient.model')), true);
+    var elem = Typeahead(element(by.css('.e2e-reg-recipient')).element(by.model('tgOrgTypeaheadModel')), true);
+    elem.click();
+    elem.sendKeys(name);
+    elem.click();
     elem.sendKeys(name);
     pages.base.waitForAjax();
     elem.results(name).click();
 };
 
-exports.addRecipient = function (name) {
+exports.addRecipient = function () {
     exports.clickAddRecipientButton();
-    exports.typeRecipientName(name);
 };
 
 exports.publisherTypeButtons = function () {
@@ -216,17 +337,29 @@ exports.addDeliveryMethod = function (type) {
     exports.clickDeliveryMethodButton(type);
 };
 
+exports.removeDeliveryMethod = function (i) {
+    var button = $$('.e2e-reg-delivery-method .e2e-method-remove .btn-delete').get(i);
+
+    pages.base.scrollIntoView(button);
+    button.click();
+
+    pages.base.waitForModal();
+    pages.base.expectModalPopUpToBeDisplayed();
+    pages.base.clickModalPrimaryButton();
+};
+
 exports.fillRequiredFieldsForDeliveryMethod = function (type) {
     var elem = exports.deliveryMethodPanels().last().$('.e2e-method-' + type.toLowerCase()),
+    notification = exports.deliveryMethodPanels().last().$('.e2e-method-notification-emails'),
 
     options = {
         FTP: function () {
-            elem.element(by.model('deliveryMethod.model.host')).sendKeys('ftp.tango.testing');
-            elem.element(by.model('deliveryMethod.model.port')).sendKeys('80');
-            elem.element(by.model('deliveryMethod.model.username')).sendKeys('testUsername');
-            elem.$('.password-field').sendKeys('testPassword');
-            elem.$('.e2e-method-notification-emails input').sendKeys('test@nowhere.tango');
-        }
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.host')).sendKeys('ftp.tango.testing');
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.port')).sendKeys('80');
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.username')).sendKeys('testUsername');
+            elem.element(by.model('deliveryMethod.deliveryMechanism.ftp.password')).sendKeys('testPassword');
+            notification.element(by.model('deliveryMethod.deliveryNotification.primaryEmails')).sendKeys('test@nowhere.tango');
+        },
     };
 
     options[type]();
@@ -290,7 +423,7 @@ exports.removeLastSubpublisher = function () {
 };
 
 exports.subpublisherTypeahead = function () {
-    var elem = exports.subpublishersRepeater().last().element(by.model('modularEditModels.model.publisher'));
+    var elem = exports.subpublishersRepeater().last().element(by.css('[ng-name="subPublisher"]'));
 
     elem.results = function () { 
         return exports.subpublisherForm().$$('.e2e-sub-publisher-def .tg-typeahead__suggestions-group-item');
@@ -301,7 +434,7 @@ exports.subpublisherTypeahead = function () {
 
 exports.fillRequiredFieldsForLastSubpublisher = function (name, territory) {
     var subpublisherTypeahead = exports.subpublisherTypeahead(),
-        territoryOfControl = exports.subpublishersRepeater().last().element(by.model('modularEditModels.model.territoryOfControl')),
+        territoryOfControl = exports.subpublishersRepeater().last().element(by.model('tgModularEditModel.territoriesOfControl')),
         territoryTypeahead = Typeahead(territoryOfControl.element(by.model('$dataHolder.internalModel')), true),
         results, firstResult;
 
@@ -327,7 +460,7 @@ exports.fillSubpublisherSocietyAgreementNumber = function (number) {
 };
 
 exports.selectSubpublisherSociety = function (name) {
-    var elem = Typeahead(element(by.model('modularEditModels.model.agreement.society')), true);
+    var elem = Typeahead(element(by.css('[ng-name="agreementSociety"]')), true);
     elem.sendKeys(name);
     browser.wait(EC.visibilityOfAny(elem.results()));
     elem.results().$$('.tg-typeahead__item-left').filter(
@@ -347,7 +480,7 @@ exports.clickAddSubpublisherButton = function () {
 };
 
 exports.incomeProviderButtons = function () {
-    return element(by.model('modularEditModels.model.isIncomeProvider')).$$('button');
+    return element(by.model('__isIncomeProvider')).$$('button');
 };
 
 exports.makeOrgIncomeProvider = function () {
@@ -356,7 +489,7 @@ exports.makeOrgIncomeProvider = function () {
 };
 
 exports.territoryErrorMessage = function () {
-    var error = $('.e2e-income-provider div + div + .help-inline .validation-message-error');
+    var error = element(by.css('[territory-of-operation-required-message="Please add at least one Territory of Operation in order to save the changes."]'));
     return error;
 };
 
@@ -367,10 +500,11 @@ exports.expectTerritoryErrorMessageToBeVisible = function () {
     expect(error.isDisplayed()).toBeTruthy();
 };
 
-exports.expectTerritoryErrorMessageToNotBePresent = function () {
+exports.expectTerritoryErrorMessageToNotBeVisible = function () {
     var error = exports.territoryErrorMessage();
 
-    expect(error.isPresent()).toBeFalsy();
+    expect(error.isPresent()).toBeTruthy();
+    expect(error.isDisplayed()).toBeFalsy();
 };
 
 exports.primaryIncomeProviderTerritoryOfOperationDropdown = function() {
@@ -393,7 +527,7 @@ exports.selectPrimaryIncomeProviderTerritoryOfOperation = function(value) {
 };
 
 exports.incomeProviderDefaultCurrencySelect = function () {
-    return element(by.model('modularEditModels.model.currencyCode'));
+    return element(by.model('tgModularEditModel.currencyCode'));
 };
 
 exports.setDefaultIncomeProviderCurrency = function (value) {
@@ -405,7 +539,7 @@ exports.setDefaultIncomeProviderCurrency = function (value) {
 };
 
 exports.incomeFileTypeSelect = function (){
-    return element(by.model('modularEditModels.model.incomeFileTypes'));
+    return element(by.model('tgModularEditModel.incomeFileTypes'));
 };
 
 exports.setIncomeFileType = function(type) {
@@ -544,8 +678,19 @@ exports.payeeYesButton = function () {
     return $$('.e2e-payee-is button').first();
 };
 
+exports.payeeNoButton = function () {
+    return $$('.e2e-payee-is button').last();
+};
+
 exports.makeOrgPayee = function () {
     var elem = exports.payeeYesButton();
+    pages.base.scrollIntoView(elem);
+
+    elem.click();
+};
+
+exports.makeOrgNonPayee = function () {
+    var elem = exports.payeeNoButton();
     pages.base.scrollIntoView(elem);
 
     elem.click();
@@ -626,43 +771,13 @@ exports.setStatementRecipientData = (optionName, subOptionName) => {
     );
 };
 
-exports.affiliatedSocietyTypeahead = function() {
-    return element(by.model('modularEditModels.model.typeModel.affiliatedSociety'));
-};
-
-exports.affiliatedSocietySearchTermsInput = function() {
-    return exports.affiliatedSocietyTypeahead().element(by.model('$term'));
-};
-
-exports.enterAffiliatedSocietySearchTerms = function(value) {
-    var input = exports.affiliatedSocietySearchTermsInput();
-
-    pages.base.scrollIntoView(input);
-
-    input.clear();
-
-    return input.sendKeys(value);
-};
-
-exports.affiliatedSocietySearchResultOptions = function() {
-    var options = $$('.tg-typeahead__suggestions-group-item');
-
-    browser.wait(protractor.ExpectedConditions.visibilityOfAny(options));
-
-    return options;
-};
-
-exports.selectAffiliatedSocietySearchResultByIndex = function(i) {
-    return exports.affiliatedSocietySearchResultOptions().get(i).click();
-};
-
 exports.doneButton = function () {
-    return $('#FORM-CONTROLS').element(by.cssContainingText('button', 'Done'));
+    return $(".btn.btn-primary.ng-scope");
 };
 
 exports.expectFormToBeValid = function () {
     var button = exports.doneButton();
-    expect(button.evaluate('OrganisationCreateForm.$valid')).toBeTruthy();
+    expect(button.evaluate('__isValid')).toBeTruthy();
 };
 
 exports.expectDoneButtonToBeClickable = function () {
@@ -671,9 +786,10 @@ exports.expectDoneButtonToBeClickable = function () {
 
 exports.saveOrganisation = function() {
     exports.expectDoneButtonToBeClickable();
+    exports.doneButton().click();
+    return pages.base.waitForAjax();
+};
 
-    return exports.doneButton().click().then(function() {
-        pages.base.waitForAjax();
-        expect(browser.getCurrentUrl()).toMatch(/#\/org\/.+$/);
-    });
+exports.validateSaveRedirection = function () {
+    expect(browser.getCurrentUrl()).toMatch(/#\/org\/.+$/);
 };
