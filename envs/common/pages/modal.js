@@ -13,10 +13,20 @@ if (pages.modal === undefined) {
             return $(".modal-footer>.btn-primary");
         },
 
+        okButttonOnModal: function () {
+            return $(".modal-footer>.btn");
+        },
+
         //Methods
         clickOnYesButton: function () {
             return pages.base.waitForModal().then(
                 () => this.yesButttonOnModal().click()
+            );
+        },
+
+        clickOnOKButton: function () {
+            return pages.base.waitForModal().then(
+                () => this.okButttonOnModal().click()
             );
         }
     });

@@ -29,6 +29,8 @@ exports.feature = [{
 
         //browser.ignoreSynchronization=true;
 
+        steps.modal.clickOKOnPopupModal();
+
         [data.publisher,data.society,data.copyrightHub,data.licensee].forEach(function (org) {
 
             rs = randomString();
