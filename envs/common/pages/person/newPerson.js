@@ -44,14 +44,38 @@ if (pages.newPerson === undefined) {
         creditsNameInput: function () {
             return $("#primaryCreditsName");
         },
+        dateOfDeath: function () {
+            return element(by.model('tgModularEditModel.deathDate'));
+        },
         dateOfDeathYear: function () {
-            return element(by.model('date.year'));
+            return this.dateOfDeath().element(by.css("[data-ng-model='date.year']"));
         },
         dateOfDeathMonth: function () {
-            return element(by.model('date.month'));
+            return this.dateOfDeath().element(by.css("[data-ng-model='date.month']"));
         },
         dateOfDeathDay: function () {
-            return element(by.model('date.day'));
+            return this.dateOfDeath().element(by.css("[data-ng-model='date.day']"));
+        },
+        dateOfBirth: function () {
+            return element(by.model('tgModularEditModel.birthDate'));
+        },
+        dateOfBirthYear: function () {
+            return this.dateOfBirth().element(by.css("[data-ng-model='date.year']"));
+        },
+        dateOfBirthMonth: function () {
+            return this.dateOfBirth().element(by.css("[data-ng-model='date.month']"));
+        },
+        dateOfBirthDay: function () {
+            return this.dateOfBirth().element(by.css("[data-ng-model='date.day']"));
+        },
+        dateOfBirthError: function () {
+            return element(by.css("[tg-model-validation-field='birthDate']"));
+        },
+        dateOfDeathError: function () {
+            return element(by.css("[tg-model-validation-field='deathDate']"));
+        },
+        dateOfDeathBeforeBirthError(){
+            return element(by.css("[date-of-death-before-birth-message]"));
         },
         cityInput: function () {
             return $("#city-0");
@@ -139,9 +163,22 @@ if (pages.newPerson === undefined) {
         },
 
         typeDateOfDeath: function (year, month, day) {
+            this.dateOfDeathYear().clear();
             this.dateOfDeathYear().sendKeys(year);
+            this.dateOfDeathMonth().clear();
             this.dateOfDeathMonth().sendKeys(month);
+            this.dateOfDeathDay().clear();
             return this.dateOfDeathDay().sendKeys(day);
+
+        },
+
+        typeDateOfBirth: function (year, month, day) {
+            this.dateOfBirthYear().clear()
+            this.dateOfBirthYear().sendKeys(year);
+            this.dateOfBirthMonth().clear();
+            this.dateOfBirthMonth().sendKeys(month);
+            this.dateOfBirthDay().clear();
+            return this.dateOfBirthDay().sendKeys(day);
 
         },
 

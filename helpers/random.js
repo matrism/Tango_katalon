@@ -36,3 +36,12 @@ exports.moment = function(a, b) {
 	}
 	return moment(_.random(a, b));
 };
+
+exports.randomSuisaIpi = function() {
+	return randomstring.generate({
+		length: 11,
+		charset: 'numeric'
+	});
+};
+
+exports.string.makeSuisaIpiMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.randomSuisaIpi);

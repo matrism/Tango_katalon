@@ -24,7 +24,7 @@ exports.findId = function() {
 };
 
 exports.creatorButtonsContainer = function () {
-    return element(by.model('modularEditModels.model.isCreator'));
+    return element(by.model('__isCreator'));
 };
 
 exports.creatorButtonByLabel = function (label) {
@@ -184,6 +184,9 @@ exports.alternativeFirstNameBinding = function(i) {
 exports.alternativeLastNameBinding = function(i) {
     return $$('.e2e-alternative-name .e2e-primary-name-last .controls').get(i);
 };
+exports.alternativeSuisaIpiNumberBinding = function(i) {
+    return $$('.e2e-alternative-name .e2e-primary-name-suisa-ipi .controls').get(i);
+};
 exports.affiliatedSocietyBinding = function() {
     return $('.e2e-society-affiliation-society .controls');
 };
@@ -224,6 +227,12 @@ exports.getEditButton = function(section) {
 exports.getSaveButton = function(section) {
     return section.$('[data-ng-click*="save()"]');
 };
+exports.getDeleteButton = function(section) {
+    return section.$('[data-ng-click*="delete()"]');
+};
+exports.getCancelButton = function(section) {
+    return section.$('[data-ng-click*="cancel()"]');
+};
 
 exports.editNameButton = function() {
     return exports.getEditButton($('.e2e-primary-name'));
@@ -231,11 +240,20 @@ exports.editNameButton = function() {
 exports.saveNameButton = function() {
     return exports.getSaveButton($('.e2e-primary-name'));
 };
+exports.cancelNameButton = function() {
+    return exports.getCancelButton($('.e2e-primary-name'));
+};
 exports.editAlternativeNameButton = function(i) {
     return exports.getEditButton($$('.e2e-alternative-name .person__alternative-name_block').get(i));
 };
 exports.saveAlternativeNameButton = function(i) {
     return exports.getSaveButton($$('.e2e-alternative-name .person__alternative-name_block').get(i));
+};
+exports.deleteAlternativeNameButton = function(i) {
+    return exports.getDeleteButton($$('.e2e-alternative-name .person__alternative-name_block').get(i));
+};
+exports.cancelAlternativeNameButton = function(i) {
+    return exports.getCancelButton($$('.e2e-alternative-name .person__alternative-name_block').get(i));
 };
 exports.editSocietyAffiliationButton = function() {
     return exports.getEditButton($('.e2e-society-affiliation'));
@@ -243,11 +261,20 @@ exports.editSocietyAffiliationButton = function() {
 exports.saveSocietyAffiliationButton = function() {
     return exports.getSaveButton($('.e2e-society-affiliation'));
 };
+exports.cancelSocietyAffiliationButton = function() {
+    return exports.getCancelButton($('.e2e-society-affiliation'));
+};
 exports.editAddressButton = function(i) {
     return exports.getEditButton(exports.addressContainer(i));
 };
 exports.saveAddressButton = function(i) {
     return exports.getSaveButton(exports.addressContainer(i));
+};
+exports.deleteAddressButton = function(i) {
+    return exports.getDeleteButton(exports.addressContainer(i));
+};
+exports.cancelAddressButton = function(i) {
+    return exports.getCancelButton(exports.addressContainer(i));
 };
 exports.editPhoneButton = function(i) {
     return exports.getEditButton(exports.phoneContainer(i));
@@ -255,11 +282,23 @@ exports.editPhoneButton = function(i) {
 exports.savePhoneButton = function(i) {
     return exports.getSaveButton(exports.phoneContainer(i));
 };
+exports.deletePhoneButton = function(i) {
+    return exports.getDeleteButton(exports.phoneContainer(i));
+};
+exports.cancelPhoneButton = function(i) {
+    return exports.getCancelButton(exports.phoneContainer(i));
+};
 exports.editEmailButton = function(i) {
     return exports.getEditButton(exports.emailContainer(i));
 };
 exports.saveEmailButton = function(i) {
     return exports.getSaveButton(exports.emailContainer(i));
+};
+exports.deleteEmailButton = function(i) {
+    return exports.getDeleteButton(exports.emailContainer(i));
+};
+exports.cancelEmailButton = function(i) {
+    return exports.getCancelButton(exports.emailContainer(i));
 };
 exports.editPaymentButton = function() {
     return exports.getEditButton($('.e2e-payee'));
@@ -267,11 +306,17 @@ exports.editPaymentButton = function() {
 exports.savePaymentButton = function() {
     return exports.getSaveButton($('.e2e-payee'));
 };
+exports.cancelPaymentButton = function() {
+    return exports.getCancelButton($('.e2e-payee'));
+};
 exports.editOthersButton = function() {
     return exports.getEditButton($('.e2e-others'));
 };
 exports.saveOthersButton = function() {
     return exports.getSaveButton($('.e2e-others'));
+};
+exports.cancelOthersButton = function() {
+    return exports.getCancelButton($('.e2e-others'));
 };
 
 exports.getBindingText = function(element) {
@@ -279,6 +324,7 @@ exports.getBindingText = function(element) {
     return element.getText();
 };
 exports.internalIpiNumber = function() {
+    pages.base.isPresentAndDisplayed(exports.internalIpiNumberBinding());
     return exports.getBindingText(exports.internalIpiNumberBinding());
 };
 exports.getSuisaIPI = function() {
@@ -304,6 +350,9 @@ exports.getAlternativeFirstName = function(i) {
 };
 exports.getAlternativeLastName = function(i) {
     return exports.getBindingText(exports.alternativeLastNameBinding(i));
+};
+exports.getAlternativeSuisaIpiNumber = function(i) {
+    return exports.getBindingText(exports.alternativeSuisaIpiNumberBinding(i));
 };
 exports.getAffiliatedSociety = function() {
     return exports.getBindingText(exports.affiliatedSocietyBinding());
@@ -354,63 +403,101 @@ exports.getPrimaryEmail = function(i) {
     return element;
 };
 
-exports.clickOnEditButton = function(element) {
-    pages.base.scrollIntoView(element);
-    return element.click();
-};
-exports.clickOnEditButton = function(element) {
+exports.clickOnButton = function(element) {
     pages.base.scrollIntoView(element);
     element.click();
     pages.base.waitForAjax();
 };
+exports.clickOnDeleteButton = function(element) {
+    pages.base.scrollIntoView(element);
+    element.click();
+    pages.modal.clickOnYesButton();
+    pages.base.waitForAjax();
+};
 exports.editPrimaryName = function() {
-    return exports.clickOnEditButton(exports.editNameButton());
+    return exports.clickOnButton(exports.editNameButton());
 };
 exports.savePrimaryName = function() {
-    return exports.clickOnEditButton(exports.saveNameButton());
+    return exports.clickOnButton(exports.saveNameButton());
+};
+exports.cancelPrimaryName = function() {
+    return exports.clickOnButton(exports.cancelNameButton());
 };
 exports.editAlternativeName = function(i) {
-    return exports.clickOnEditButton(exports.editAlternativeNameButton(i));
+    return exports.clickOnButton(exports.editAlternativeNameButton(i));
 };
 exports.saveAlternativeName = function(i) {
-    return exports.clickOnEditButton(exports.saveAlternativeNameButton(i));
+    return exports.clickOnButton(exports.saveAlternativeNameButton(i));
+};
+exports.deleteAlternativeName = function(i) {
+    return exports.clickOnDeleteButton(exports.deleteAlternativeNameButton(i));
+};
+exports.cancelAlternativeName = function(i) {
+    return exports.clickOnButton(exports.cancelAlternativeNameButton(i));
 };
 exports.editSocietyAffiliation = function() {
-    return exports.clickOnEditButton(exports.editSocietyAffiliationButton());
+    return exports.clickOnButton(exports.editSocietyAffiliationButton());
 };
 exports.saveSocietyAffiliation = function() {
-    return exports.clickOnEditButton(exports.saveSocietyAffiliationButton());
+    return exports.clickOnButton(exports.saveSocietyAffiliationButton());
+};
+exports.cancelSocietyAffiliation = function() {
+    return exports.clickOnButton(exports.cancelSocietyAffiliationButton());
 };
 exports.editAddress = function(i) {
-    return exports.clickOnEditButton(exports.editAddressButton(i));
+    return exports.clickOnButton(exports.editAddressButton(i));
 };
 exports.saveAddress = function(i) {
-    return exports.clickOnEditButton(exports.saveAddressButton(i));
+    return exports.clickOnButton(exports.saveAddressButton(i));
+};
+exports.deleteAddress = function(i) {
+    return exports.clickOnDeleteButton(exports.deleteAddressButton(i));
+};
+exports.cancelAddress = function(i) {
+    return exports.clickOnButton(exports.cancelAddressButton(i));
 };
 exports.editPhone = function(i) {
-    return exports.clickOnEditButton(exports.editPhoneButton(i));
+    return exports.clickOnButton(exports.editPhoneButton(i));
 };
 exports.savePhone = function(i) {
-    return exports.clickOnEditButton(exports.savePhoneButton(i));
+    return exports.clickOnButton(exports.savePhoneButton(i));
+};
+exports.deletePhone = function(i) {
+    return exports.clickOnDeleteButton(exports.deletePhoneButton(i));
+};
+exports.cancelPhone = function(i) {
+    return exports.clickOnButton(exports.cancelPhoneButton(i));
 };
 exports.editEmail = function(i) {
-    return exports.clickOnEditButton(exports.editEmailButton(i));
+    return exports.clickOnButton(exports.editEmailButton(i));
 };
 exports.saveEmail = function(i) {
-    return exports.clickOnEditButton(exports.saveEmailButton(i));
+    return exports.clickOnButton(exports.saveEmailButton(i));
+};
+exports.deleteEmail = function(i) {
+    return exports.clickOnDeleteButton(exports.deleteEmailButton(i));
+};
+exports.cancelEmail = function(i) {
+    return exports.clickOnButton(exports.cancelEmailButton(i));
 };
 exports.editPayment = function() {
-    return exports.clickOnEditButton(exports.editPaymentButton());
+    return exports.clickOnButton(exports.editPaymentButton());
 };
 exports.savePayment = function() {
-    return exports.clickOnEditButton(exports.savePaymentButton());
+    return exports.clickOnButton(exports.savePaymentButton());
+};
+exports.cancelPayment = function() {
+    return exports.clickOnButton(exports.cancelPaymentButton());
 };
 
 exports.editOthers = function() {
-    return exports.clickOnEditButton(exports.editOthersButton());
+    return exports.clickOnButton(exports.editOthersButton());
 };
 exports.saveOthers = function() {
-    return exports.clickOnEditButton(exports.saveOthersButton());
+    return exports.clickOnButton(exports.saveOthersButton());
+};
+exports.cancelOthers = function() {
+    return exports.clickOnButton(exports.cancelOthersButton());
 };
 
 exports.typeFirstName = function(value) {
@@ -548,6 +635,9 @@ exports.clickPayee = function (value) {
 exports.validateIpiNumber = function(value) {
     expect(exports.internalIpiNumber()).toBe(value);
 };
+exports.validateSuisaIpiNumber = function(value) {
+    expect(exports.suisaIPINumber()).toBe(value);
+};
 exports.enterPersonSearchTerms = function(value) {
     var element = exports.personSearchTermsInput();
     pages.base.scrollIntoView(element);
@@ -591,3 +681,93 @@ exports.typeCitizenship = function(value) {
     return element.sendKeys(value);
 };
 
+exports.mexicoRegistrationNumberInput = function() {
+    return element(by.model('tgModularEditModel.mexicoAgreementNumber'));
+};
+
+exports.typeMexicoRegistrationNumber = function(value) {
+    var element = this.mexicoRegistrationNumberInput();
+    pages.base.scrollIntoView(element);
+    element.clear();
+    return element.sendKeys(value);
+};
+
+exports.maritalStatusDropdown = function() {
+    return element(by.model('tgModularEditModel.maritalStatusCode'));
+};
+
+exports.statementRecipientButtonsContainer = () => {
+    return $('.e2e-payment-statement-is');
+};
+
+exports.statementRecipientYesButton = function () {
+    return exports.statementRecipientButtonsContainer().element(
+        by.cssContainingText('button', 'Yes')
+    );
+};
+
+exports.makePersonStatementRecipient = function () {
+    var elem = exports.statementRecipientYesButton();
+    pages.base.scrollIntoView(elem);
+
+    elem.click();
+};
+
+exports.statementRecipientOptions = function () {
+    return $('[name="StatementRecipientForm"]').all(
+        by.repeater('(key, format) in dataHolder.statementFormats'
+        ));
+};
+
+exports.statementRecipientOptionByName = (name) => {
+    return exports.statementRecipientOptions().filter(
+        pph.matchText(name)
+    ).first();
+};
+
+exports.statementRecipientSubOptions = (option) => {
+    return option.all(by.repeater('item in ::format.formatAndDelivery'));
+};
+
+exports.statementRecipientSubOptionByName = (option, subOptionName) => {
+    return exports.statementRecipientSubOptions(option).filter(
+        pph.matchText(subOptionName)
+    ).first();
+};
+
+exports.setStatementRecipientData = (optionName, subOptionName) => {
+    let option = exports.statementRecipientOptionByName(optionName);
+
+    asAlways(option, 'scrollIntoView', 'click');
+
+    browser.wait(EC.visibilityOfAny(
+        exports.statementRecipientSubOptions(option)
+    ));
+
+    asAlways(
+        exports.statementRecipientSubOptionByName(option, subOptionName),
+        'scrollIntoView', 'click'
+    );
+};
+
+exports.mexicoRegDate= function () {
+    return element(by.model('tgModularEditModel.mexicoRegistrationDate'));
+};
+exports.mexicoRegDateYear= function () {
+    return exports.mexicoRegDate().element(by.css("[data-ng-model='date.year']"));
+};
+exports.mexicoRegDateMonth= function () {
+    return exports.mexicoRegDate().element(by.css("[data-ng-model='date.month']"));
+};
+exports.mexicoRegDateDay= function () {
+    return exports.mexicoRegDate().element(by.css("[data-ng-model='date.day']"));
+};
+
+exports.typeMexicoRegDate= function (year, month, day) {
+    exports.mexicoRegDateYear().clear();
+    exports.mexicoRegDateYear().sendKeys(year);
+    exports.mexicoRegDateMonth().clear();
+    exports.mexicoRegDateMonth().sendKeys(month);
+    exports.mexicoRegDateDay().clear();
+    return exports.mexicoRegDateDay().sendKeys(day);
+};

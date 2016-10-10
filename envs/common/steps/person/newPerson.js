@@ -73,6 +73,22 @@ exports.enterEmail = steps.person.enterEmail;
 
 exports.clickOnPayee = steps.person.clickOnPayee;
 
+exports.makePersonStatementRecipient = steps.person.makePersonStatementRecipient;
+
+exports.setStatementRecipientData = steps.person.setStatementRecipientData;
+
+exports.enterPlaceOfBirth = steps.person.enterPlaceOfBirth;
+
+exports.enterCitizenship = steps.person.enterCitizenship;
+
+exports.selectRandomMaritalStatus = steps.person.selectRandomMaritalStatus;
+
+exports.enterMexicoRegistrationNumber = steps.person.enterMexicoRegistrationNumber;
+
+exports.validateMexicoRegDateIsEnabled = steps.person.validateMexicoRegDateIsEnabled;
+
+exports.enterMexicoRegDate = steps.person.enterMexicoRegDate;
+
 exports.save = function () {
     it('Save person', function () {
         pages.newPerson.save();
@@ -100,6 +116,50 @@ exports.enterDateOfDeath = function (year, month, day) {
             hash.currentPersonSlot.dateOfDeath = year + "-" + month + "-" + day;
         });
     });
+};
+
+exports.enterDateOfBirth = function (year, month, day) {
+    it('Enter Date of Birth (' + year + "-" + month + "-" + day + ')', function () {
+        pages.newPerson.typeDateOfBirth(year, month, day).then(function () {
+            hash.currentPersonSlot.dateOfBirth = year + "-" + month + "-" + day;
+        });
+    });
+};
+
+exports.validateDateOfDeathIsSameOrAfterDateOfBirth = function (isSameOrAfter){
+    if(isSameOrAfter) {
+        it('Date Of Death Is Same Or After Date Of Birth', function () {
+            expect(pages.base.isPresentAndDisplayed(pages.newPerson.dateOfDeathBeforeBirthError())).toBeFalsy();
+        });
+    }else{
+        it('Date Of Death Is Not Same Or After Date Of Birth', function () {
+            expect(pages.base.isPresentAndDisplayed(pages.newPerson.dateOfDeathBeforeBirthError())).toBeTruthy();
+        });
+    }
+};
+
+exports.dateOfBirthIsValid = function (valid){
+    if(valid) {
+        it('Date of birth is valid', function () {
+            expect(pages.base.isPresentAndDisplayed(pages.newPerson.dateOfBirthError())).toBeFalsy();
+        });
+    }else{
+        it('Date of birth is not valid', function () {
+            expect(pages.base.isPresentAndDisplayed(pages.newPerson.dateOfBirthError())).toBeTruthy();
+        });
+    }
+};
+
+exports.dateOfDeathIsValid = function (valid){
+    if(valid) {
+        it('Date of death is valid', function () {
+            expect(pages.base.isPresentAndDisplayed(pages.newPerson.dateOfDeathError())).toBeFalsy();
+        });
+    }else{
+        it('Date of death is not valid', function () {
+            expect(pages.base.isPresentAndDisplayed(pages.newPerson.dateOfDeathError())).toBeTruthy();
+        });
+    }
 };
 
 exports.selectAsPayeeOptionToYes = function () {
