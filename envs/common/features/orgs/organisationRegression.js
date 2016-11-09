@@ -24,14 +24,12 @@ exports.feature = [{
         var newOrg = steps.newOrganisation,
             orgPage = steps.organisation,
             rs = null,
-            rc = null,
-            ipiNumber = null;
+            rc = null;
 
         //browser.ignoreSynchronization=true;
-
         //steps.modal.clickOKOnPopupModal();
 
-        [data.publisher, data.society, data.licensee].forEach(function (org) {
+        [data.publisher, data.society, data.copyrightHub, data.licensee].forEach(function (org) {
 
             rs = randomString(0);
             rc = randomCode(0);
@@ -45,7 +43,7 @@ exports.feature = [{
 
                     describe('General', function () {
                         newOrg.populateName(org.name + rs);
-                        //newOrg.selectTerritoryOfOperation(org.territoryOfOperation);
+                        newOrg.selectTerritoryOfOperation(org.territoryOfOperation);
                         newOrg.selectOrgType(org.organisationType);
 
                         if (org.organisationType === 'Publisher') {
@@ -62,8 +60,8 @@ exports.feature = [{
                         if (org.organisationType === 'Copyright Hub') {
                             newOrg.fillSocietyAbbreviation(rs.substr(0, 5));
                             newOrg.fillSocietyCode(rc);
-                            //newOrg.enterSocietiesOfInterestSearchTerms('ASCAP');
-                            //newOrg.selectSocietiesOfInterestSearchResultByIndex(0);
+                            newOrg.enterSocietiesOfInterestSearchTerms('ASCAP');
+                            newOrg.selectSocietiesOfInterestSearchResultByIndex(0);
                         }
 
                     });
@@ -271,8 +269,8 @@ exports.feature = [{
                         steps.base.dirtyCheckContinueEditing();
 
                         orgPage.contactInformation.editSection();
-                        newOrg.fillContactPhoneNumber(org.contact.phoneNumber + viewEditName);
-                        newOrg.fillContactFaxNumber(org.contact.faxNumber + viewEditName);
+                        newOrg.fillContactPhoneNumber('1234567890');
+                        newOrg.fillContactFaxNumber('0987654321');
                         newOrg.fillContactEmail('edited' + org.contact.email);
                         orgPage.contactInformation.cancelSection();
                         steps.base.dirtyCheckContinueEditing();
@@ -375,9 +373,9 @@ exports.feature = [{
                             this.expectValue('Contact Information', 'City').toEqual(org.contact.city + viewEditName);
                             this.expectValue('Contact Information', 'State/Province/Region').toEqual(org.contact.state + viewEditName);
                             this.expectValue('Contact Information', 'ZIP/Postal Code').toEqual(org.contact.zipCode + viewEditName);
-                            this.expectValue('Contact Information', 'Country').toEqual(org.contact.country + viewEditName);
-                            this.expectValue('Contact Information', 'Telephone').toEqual(org.contact.phoneNumber + viewEditName);
-                            this.expectValue('Contact Information', 'Fax').toEqual(org.contact.faxNumber + viewEditName);
+                            this.expectValue('Contact Information', 'Country').toEqual('Albania');
+                            this.expectValue('Contact Information', 'Telephone').toEqual('1234567890');
+                            this.expectValue('Contact Information', 'Fax').toEqual('0987654321');
                             this.expectValue('Contact Information', 'Email').toEqual('edited' + org.contact.email);
                         });
                     });
@@ -445,13 +443,13 @@ exports.feature = [{
                                 steps.organisation.expectValue('Contact Information', 'Address ' + (i + 1)).toEqual(line);
                             });
 
-                            orgPage.expectValue('Contact Information', 'City').toEqual(org.contact.city);
-                            orgPage.expectValue('Contact Information', 'State/Province/Region').toEqual(org.contact.state);
-                            orgPage.expectValue('Contact Information', 'ZIP/Postal Code').toEqual(org.contact.zipCode);
+                            orgPage.expectValue('Contact Information', 'City').toEqual(org.contact.city + viewEditName);
+                            orgPage.expectValue('Contact Information', 'State/Province/Region').toEqual(org.contact.state + viewEditName);
+                            orgPage.expectValue('Contact Information', 'ZIP/Postal Code').toEqual(org.contact.zipCode + viewEditName);
                             orgPage.expectValue('Contact Information', 'Country').toEqual(org.contact.country);
-                            orgPage.expectValue('Contact Information', 'Telephone').toEqual(org.contact.phoneNumber);
-                            orgPage.expectValue('Contact Information', 'Fax').toEqual(org.contact.faxNumber);
-                            orgPage.expectValue('Contact Information', 'Email').toEqual(org.contact.email);
+                            orgPage.expectValue('Contact Information', 'Telephone').toEqual('1234567890');
+                            orgPage.expectValue('Contact Information', 'Fax').toEqual('0987654321');
+                            orgPage.expectValue('Contact Information', 'Email').toEqual('edited' + org.contact.email);
 
                             // orgPage.expectValue('Income Provider', 'Primary Territory of Operation').toEqual(org.territoryOfOperation);
                             // orgPage.expectValue('Income Provider', 'Default Currency').toEqual(org.incomeProvider.currency);
@@ -465,17 +463,6 @@ exports.feature = [{
                             orgPage.expectValue('Payment/Statement Info', 'Statement Recipient').toEqual('No');
                             orgPage.expectValue('Payment/Statement Info', 'Preferred Language').toEqual('English');
 
-                            describe('Search for Edited Org', function () {
-                                describe('by name', function () {
-                                    steps.mainHeader.search.selectEntityType('Organisation');
-                                    steps.mainHeader.search.enterTerms(org.name + rs + viewEditName);
-                                    orgPage.expectOrgResultsToContain(viewEditName);
-                                });
-
-                                describe('by SUISA/IPI', function () {
-                                    orgPage.expectInternalIpiNumberToBeUnique();
-                                });
-                            });
                         });
                     });
 
