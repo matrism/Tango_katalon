@@ -154,7 +154,10 @@ exports.enterAlternativeCreditsName = function (i, value) {
 exports.enterAlternativeSuisaIpiNumber = function (i, value) {
     it('Enter alternative Suisa Ipi name #' + (i + 1) + ' (' + value + ')', function () {
         pages.person.typeAlternativeSuisaIpiNumber(i, value).then(function () {
-            hash.currentPersonSlot.alternativeSuisaIpiNumber = value;
+            if(!hash.currentPersonSlot.alternativeSuisaIpiNumber){
+                hash.currentPersonSlot.alternativeSuisaIpiNumber=[];
+            }
+            hash.currentPersonSlot.alternativeSuisaIpiNumber[i] = value;
         });
     });
 };
@@ -320,7 +323,7 @@ exports.findInternalIpiNumber = function () {
 };
 
 exports.findSuisaIpiNumber = function () {
-    it('Find internal IPI number', function () {
+        it('Find Suisa IPI number', function () {
         pages.person.getSuisaIPI().then(function (value) {
             expect(value).toBeTruthy();
             hash.currentPersonSlot.ipiNumber = value;
@@ -329,10 +332,24 @@ exports.findSuisaIpiNumber = function () {
     });
 };
 
-exports.validateSuisaIpiNumber = function (ipi) {
-    it('Validate SUISA IPI number (' + ipi + ')', function () {
+exports.findAlternativeSuisaIpiNumber = function (i) {
+    it('Find Alternative Suisa IPI number #'+i, function () {
+        pages.person.getAlternativeSuisaIpiNumber(i).then(function (value) {
 
-        expect(pages.person.getSuisaIPI()).toBe(ipi)
+            expect(value).toBeTruthy();
+            if(!hash.currentPersonSlot.alternativeSuisaIpiNumber){
+                hash.currentPersonSlot.alternativeSuisaIpiNumber=[];
+            }
+
+            hash.currentPersonSlot.alternativeSuisaIpiNumber[i] = value;
+        });
+    });
+};
+
+exports.validateSuisaIpiNumber = function () {
+    it('Validate SUISA IPI number', function () {
+
+        expect(pages.person.getSuisaIPI()).toBe(hash.currentPersonSlot.suisaIpiNumber)
     });
 };
 
@@ -374,7 +391,7 @@ exports.validateAlternativeLastName = function (i) {
 
 exports.validateAlternativeSuisaIpiNumber = function (i) {
     it('Validate Alternative Suisa Ipi Number #'+i, function () {
-        expect(pages.person.getAlternativeLastName(i)).toBe(hash.currentPersonSlot.alternativeSuisaIpiNumber);
+        expect(pages.person.getAlternativeSuisaIpiNumber(i)).toBe(hash.currentPersonSlot.alternativeSuisaIpiNumber[i]);
     });
 };
 
@@ -497,9 +514,8 @@ exports.searchForPersonUsingPreviouslyCreated = function (field) {
 };
 exports.verifySearchResultIsUnique = function () {
     it('Verify only one search result is returned', function () {
-        pages.personSearchMatches.count().then(function (num) {
-            expect(num).toEqual(1);
-        });
+        browser.sleep(5000);
+        pages.person.personSearchIsUnique();
     });
 };
 exports.clickPersonSearchMatch = function (i) {

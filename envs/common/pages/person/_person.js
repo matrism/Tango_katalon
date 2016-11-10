@@ -164,7 +164,7 @@ exports.internalIpiNumberBinding = function() {
 };
 
 exports.suisaIPINumber = function() {
-    return $(".e2e-primary-name-suisa-ipi .controls");
+    return $(".e2e-primary-name .e2e-primary-name-suisa-ipi .controls");
 };
 exports.nameBinding = function() {
     return $('.e2e-primary-name .e2e-primary-name-full .controls');
@@ -558,7 +558,7 @@ exports.affiliatedSocietySearchResult = function(i) {
     return this.affiliatedSocietySearchResults().get(i);
 };
 exports.clickAffiliatedSocietySearchResultByIndex = function(i) {
-    browser.sleep(200);
+    browser.sleep(5000);
     pages.base.waitForAjax();
     return this.affiliatedSocietySearchResult(i).click();
 };
@@ -650,6 +650,11 @@ exports.personSearchTermsInput = function() {
 exports.personSearchMatches = function() {
     return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
 };
+
+exports.personSearchIsUnique = function() {
+    return expect(pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item').count()).toEqual(1);
+};
+
 exports.personSearchMatch = function(i) {
     var elements = exports.personSearchMatches();
     browser.wait(ExpectedConditions.visibilityOfAny(elements));

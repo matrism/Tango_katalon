@@ -143,11 +143,16 @@ exports.feature = [
                 this.validateFirstName();
 
                 this.editAlternativeName(0);
+                this.enterAlternativeFirstName(0, 'ALT FIRST ' + randomString(1));
+                this.enterAlternativeLastName(0, 'ALT LAST ' + randomString(1));
+                this.saveAlternativeName(0);
+
+                this.editAlternativeName(0);
                 this.deleteAlternativeName(0);
 
                 steps.newPerson.addAlternativeName();
-                this.enterAlternativeFirstName(0, 'ALT FIRST ' + randomString(1));
-                this.enterAlternativeLastName(0, 'ALT LAST ' + randomString(1));
+                this.enterAlternativeFirstName(0, 'ALT FIRST ' + randomString(1.12));
+                this.enterAlternativeLastName(0, 'ALT LAST ' + randomString(1.12));
                 this.saveAlternativeName(0);
 
                 this.editAddress(0);
@@ -208,12 +213,9 @@ exports.feature = [
             using(steps.newPerson, function () {
                 this.goToNewPersonPage();
                 this.enterLastName(randomString(7) + ' LAST');
-                //this.enterSuisaIpiNumber(randomSuisaIpi(0));
-                //this.enterAffiliatedSocietySearchTerms('ASCAP');
-
-                // bypass bug
-                this.makeCreator(false);
-                this.confirmMakingNonCreator(true);
+                this.enterSuisaIpiNumber(randomSuisaIpi(0));
+                this.enterAffiliatedSocietySearchTerms('ASCAP');
+                this.selectAffiliatedSocietySearchResultByIndex(0);
 
                 this.addAlternativeName();
                 this.enterAlternativeLastName(0, randomString(8) + ' LAST');
@@ -258,8 +260,8 @@ exports.feature = [
 
             using(steps.newPerson, function () {
                 this.goToNewPersonPage();
-                this.enterFirstName(randomString(0) + ' FIRST');
-                this.enterLastName(randomString(0) + ' LAST');
+                this.enterFirstName(randomString(5555) + ' FIRST');
+                this.enterLastName(randomString(5555) + ' LAST');
                 this.enterDateOfBirth(today.year(), today.month(), today.date());
                 this.enterDateOfDeath(yesterday.year(), yesterday.month(), yesterday.date());
                 this.validateDateOfDeathIsSameOrAfterDateOfBirth(false);
@@ -269,11 +271,8 @@ exports.feature = [
                 this.enterAlternativeFirstName(0, 'TEST ' + randomString(0.1));
                 this.enterAlternativeLastName(0, 'PERSON ' + randomString(0.1));
 
-                //bypass tango bug
-                this.makeCreator(false);
-                this.confirmMakingNonCreator(true);
-                //this.enterAffiliatedSocietySearchTerms('ASCAP');
-                //this.selectAffiliatedSocietySearchResultByIndex(0);
+                this.enterAffiliatedSocietySearchTerms('ASCAP');
+                this.selectAffiliatedSocietySearchResultByIndex(0);
 
                 this.addAddress();
                 this.enterAddressOne(0, 'Abbey Road');
@@ -336,9 +335,9 @@ exports.feature = [
                     steps.person.validateName();
                     steps.person.validateFirstName();
                     steps.person.validateLastName();
-                    steps.person.validateAlternativeName();
-                    steps.person.validateAlternativeFirstName();
-                    steps.person.validateAlternativeLastName();
+                    steps.person.validateAlternativeName(0);
+                    steps.person.validateAlternativeFirstName(0);
+                    steps.person.validateAlternativeLastName(0);
                 });
             });
         },
@@ -346,7 +345,7 @@ exports.feature = [
         name: 'Validate created person',
         tags: [],
         steps: function () {
-            steps.base.useEntityDataSlot('person', 0);
+            steps.base.useEntityDataSlot('person', 2);
 
             using(steps.person, function () {
                 this.goToPersonPage();
