@@ -152,9 +152,12 @@ exports.enterAlternativeCreditsName = function (i, value) {
 };
 
 exports.enterAlternativeSuisaIpiNumber = function (i, value) {
-    it('Enter alternative Siosa Ipi name #' + (i + 1) + ' (' + value + ')', function () {
+    it('Enter alternative Suisa Ipi name #' + (i + 1) + ' (' + value + ')', function () {
         pages.person.typeAlternativeSuisaIpiNumber(i, value).then(function () {
-            hash.currentPersonSlot.alternativeSuisaIpiNumber = value;
+            if(!hash.currentPersonSlot.alternativeSuisaIpiNumber){
+                hash.currentPersonSlot.alternativeSuisaIpiNumber=[];
+            }
+            hash.currentPersonSlot.alternativeSuisaIpiNumber[i] = value;
         });
     });
 };
@@ -311,17 +314,42 @@ exports.findId = function () {
 exports.findInternalIpiNumber = function () {
     it('Find internal IPI number', function () {
         pages.person.internalIpiNumber().then(function (value) {
+            expect(value).toBeTruthy();
             hash.currentPersonSlot.ipiNumber = value;
             hash.currentPersonSlot.internalIpiNumber = value;
         });
     });
 
-
 };
-exports.validateSuisaIpiNumber = function (ipi) {
-    it('Validate SUISA IPI number (' + ipi + ')', function () {
 
-        expect(pages.person.getSuisaIPI()).toBe(ipi)
+exports.findSuisaIpiNumber = function () {
+        it('Find Suisa IPI number', function () {
+        pages.person.getSuisaIPI().then(function (value) {
+            expect(value).toBeTruthy();
+            hash.currentPersonSlot.ipiNumber = value;
+            hash.currentPersonSlot.suisaIpiNumber = value;
+        });
+    });
+};
+
+exports.findAlternativeSuisaIpiNumber = function (i) {
+    it('Find Alternative Suisa IPI number #'+i, function () {
+        pages.person.getAlternativeSuisaIpiNumber(i).then(function (value) {
+
+            expect(value).toBeTruthy();
+            if(!hash.currentPersonSlot.alternativeSuisaIpiNumber){
+                hash.currentPersonSlot.alternativeSuisaIpiNumber=[];
+            }
+
+            hash.currentPersonSlot.alternativeSuisaIpiNumber[i] = value;
+        });
+    });
+};
+
+exports.validateSuisaIpiNumber = function () {
+    it('Validate SUISA IPI number', function () {
+
+        expect(pages.person.getSuisaIPI()).toBe(hash.currentPersonSlot.suisaIpiNumber)
     });
 };
 
@@ -360,6 +388,13 @@ exports.validateAlternativeLastName = function (i) {
         expect(pages.person.getAlternativeLastName(i)).toBe(hash.currentPersonSlot.alternativeLastName);
     });
 };
+
+exports.validateAlternativeSuisaIpiNumber = function (i) {
+    it('Validate Alternative Suisa Ipi Number #'+i, function () {
+        expect(pages.person.getAlternativeSuisaIpiNumber(i)).toBe(hash.currentPersonSlot.alternativeSuisaIpiNumber[i]);
+    });
+};
+
 exports.validateAffiliatedSociety = function () {
     it('Validate Affiliated Society', function () {
         expect(pages.person.getAffiliatedSociety()).toBe(hash.currentPersonSlot.affiliatedSociety);
@@ -434,20 +469,34 @@ exports.validatePrimaryEmail = function(i) {
 pageStep([
     'Edit primary name',
     'Save primary name',
+    'Cancel primary name',
     'Edit alternative name',
     'Save alternative name',
+    'Cancel alternative name',
+    'Delete alternative name',
     'Edit society affiliation',
     'Save society affiliation',
+    'Cancel society affiliation',
     'Edit address',
     'Save address',
+    'Cancel address',
+    'Delete address',
     'Edit phone',
     'Save phone',
+    'Cancel phone',
+    'Delete phone',
     'Edit email',
     'Save email',
+    'Cancel email',
+    'Delete email',
     'Edit payment',
     'Save payment',
+    'Cancel payment',
     'Edit others',
-    'Save others'
+    'Save others',
+    'Cancel others',
+    'Make Person Statement Recipient',
+    'Set Statement Recipient Data'
 ]);
 
 exports.clickOnEnterPersonSearchTerms = function (value) {
@@ -461,6 +510,12 @@ exports.searchForPersonUsingPreviouslyCreated = function (field) {
             hash.currentPersonSlot[[field].map(changeCase.camelCase)]
         );
         pages.base.waitForAjax();
+    });
+};
+exports.verifySearchResultIsUnique = function () {
+    it('Verify only one search result is returned', function () {
+        browser.sleep(5000);
+        pages.person.personSearchIsUnique();
     });
 };
 exports.clickPersonSearchMatch = function (i) {
@@ -490,5 +545,33 @@ exports.enterCitizenship = function (value) {
         pages.person.typeCitizenship(value).then(function () {
             hash.currentPersonSlot.citizenship = value;
         });
+    });
+};
+
+exports.enterMexicoRegistrationNumber = function (value) {
+    it('Enter Mexico Registration Number (' + value + ')', function () {
+        pages.person.typeMexicoRegistrationNumber(value).then(function () {
+            hash.currentPersonSlot.mexicoRegistrationNumber = value;
+        });
+    });
+};
+
+exports.selectRandomMaritalStatus = function () {
+    it('Select Random Marital Status', function () {
+        pages.base.randomTgDropdownSelector(pages.person.maritalStatusDropdown());
+    });
+};
+
+exports.enterMexicoRegDate = function (year, month, day) {
+    it('Enter Mexico Reg Date (' + year + "-" + month + "-" + day + ')', function () {
+        pages.person.typeMexicoRegDate(year, month, day).then(function () {
+            hash.currentPersonSlot.mexicoRegDate = year + "-" + month + "-" + day;
+        });
+    });
+};
+
+exports.validateMexicoRegDateIsEnabled = function () {
+    it('Validate Mexico Reg Date Is Enabled', function () {
+        expect(pages.person.mexicoRegDate().isEnabled()).toBe(true);
     });
 };
