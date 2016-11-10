@@ -1047,6 +1047,12 @@ pageStep([
         'Expect section to be in view mode',
     ]],
 
+    ['Contact Information', [
+        'Edit section',
+        'Save section',
+        'Cancel section'
+    ]],
+
     ['Registration', [
         'Edit section',
         'Select is registration recipient',

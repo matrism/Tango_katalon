@@ -246,9 +246,12 @@ exports.addressLineInput = function(num) {
 exports.fillContactAddressLines = function (lines) {
     var lineInput = exports.addressLineInput;
 
+    lineInput(2).clear();
     lineInput(2).sendKeys(lines[1]);
     expect(pph.classList(lineInput(1))).toContain('ng-invalid-required');
+    lineInput(3).clear();
     lineInput(3).sendKeys(lines[2]);
+    lineInput(1).clear();
     lineInput(1).sendKeys(lines[0]);
 
     expect(pph.classList(lineInput(1))).not.toContain('ng-invalid-required');
@@ -256,6 +259,7 @@ exports.fillContactAddressLines = function (lines) {
 
 function sendKeysToElement(elem) {
     return function (val) {
+        elem.clear();
         elem.sendKeys(val);
     };
 };

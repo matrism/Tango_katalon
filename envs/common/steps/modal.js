@@ -9,6 +9,11 @@ if (steps.modal === undefined) {
             it("Confirm Popup Modal", function () {
                 pages.modal.clickOnYesButton();
             })
+        },
+        clickOKOnPopupModal: function () {
+            it("Confirm Popup Modal", function () {
+                pages.modal.clickOnOKButton();
+            })
         }
     };
 }

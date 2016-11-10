@@ -894,10 +894,6 @@ exports.cancelSectionPart = function (section, part) {
         forms = parentElem.$$('.EDITOR');
 
     forms.get(part).$('.CONTROLS .btn-cancel').click();
-
-    pages.base.waitForModal();
-    pages.base.expectModalPopUpToBeDisplayed();
-    pages.base.clickModalPrimaryButton();
 };
 
 
@@ -1053,6 +1049,54 @@ exports.contactInformation = (function () {
     var contact = {};
 
     contact.editAddress = function(){};
+
+    contact.sectionContainer = function () {
+        return $('.organisation__contact-phone_block');
+    };
+
+    contact.editSectionButton = function () {
+        return contact.sectionContainer().$(
+            '[data-ng-click="tgModularViewMethods.switchToEditView()"]'
+        );
+    };
+
+    contact.editSection = function () {
+        var element = contact.editSectionButton();
+        pages.base.scrollIntoView(element);
+        return element.click();
+    };
+
+    contact.cancelSectionButton = function () {
+        return contact.sectionContainer().element(by.css(
+            '.CONTROLS .btn-cancel'
+        ));
+    };
+
+    contact.cancelSection = function () {
+        var element = contact.cancelSectionButton();
+
+        pages.base.scrollIntoView(element);
+
+        return element.click().then(function () {
+            pages.base.waitForAjax();
+        });
+    };
+
+    contact.saveSectionButton = function () {
+        return contact.sectionContainer().element(by.cssContainingText(
+            '.CONTROLS button', 'Save'
+        ));
+    };
+
+    contact.saveSection = function () {
+        var element = contact.saveSectionButton();
+
+        pages.base.scrollIntoView(element);
+
+        return element.click().then(function () {
+            pages.base.waitForAjax();
+        });
+    };
 
     return contact;
 })();
