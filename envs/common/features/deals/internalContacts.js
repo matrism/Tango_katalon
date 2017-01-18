@@ -38,11 +38,12 @@ exports.feature = [
              }
              steps.editDealGeneral.printInternalContactList();
              steps.editDealGeneral.editInternalContactsArea();
-             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("a");
+             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("Brown,Annie");
              for (var i = 2; i <= 4; i++) {
                  //steps.editDealGeneral.itEditAddInternalContactsRowIToDealGeneralTab(i);
                  steps.editDealGeneral.itEditAndRemoveInternalContactsRowIToDealGeneralTab(i);
              }
+             steps.base.sleep(5000)
              steps.editDealGeneral.itSaveInternalContactsChanges();
 
              steps.editDealGeneral.returnAndCheckInternalContactsTitle();
@@ -107,7 +108,7 @@ exports.feature = [
     },
     {
         name: "Dirty check flow internal contact",
-        tags: ["edit"],
+        tags: ["edit", 'TAT977'],
         steps: function () {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);

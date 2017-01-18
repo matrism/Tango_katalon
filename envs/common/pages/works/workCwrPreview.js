@@ -2,9 +2,10 @@
 
 var leftPad = require('left-pad'),
     pph = require('../../../../helpers/pph'),
+    asa = require('../../../../helpers/asAlways'),
     ExpectedConditions = protractor.ExpectedConditions,
     publisherRecordType = {
-        regExp: /^(SPU|OPU)([0-9]{16})(.{2})(.{9})(.{40})(.{9})/,
+        regExp: /^(SPU|OPU)([0-9]{16})(.{2})(.{9})(.{40})(.{9})(.{87})(.{14})/,
         fields: [
             'recordType',
             'recordNumber',
@@ -12,6 +13,8 @@ var leftPad = require('left-pad'),
             'publisherIpiNumber',
             'publisherName',
             'publisherRole',
+            'number1',
+            'societyNumber',
         ],
     },
     territoryCollectionSharesRecordType = {
@@ -91,9 +94,9 @@ exports.expectCwrDataToBeDisplayed = function() {
 
 exports.rawRecord = function(i) {
     var element = exports.recordBindings().get(i);
-    pages.base.scrollIntoView(element);
-    return pph.trim(element.getText());
-};
+     pages.base.scrollIntoView(element);
+     return pph.trim(element.getText());
+ };
 
 exports.recordFieldValue = function(i, fieldName) {
     return exports.rawRecord(i).then(function(value) {
@@ -129,6 +132,27 @@ exports.validateRecordType = function(i, value) {
     exports.validateRecordField(i, 'recordType', value);
 };
 
+exports.validateRecordExist = function(i){
+
+    return exports.rawRecord(i).then(function(value) {
+
+        console.log(value);
+        //var recordTypeName = value.slice(0, 3).trim();
+
+        // if (recordTypeName =='')
+        // {
+        //     console.log('There is no Scoiety Number ');
+        // }
+
+    });
+
+};
+exports.validateSocietyNumber = function(i,value) {
+
+       exports.validateRecordField(i, 'societyNumber', value);
+
+};
+
 exports.validateRecordNumber = function(i) {
     exports.validateRecordField(i, 'recordNumber', leftPad(i, 16, 0));
 };
@@ -145,6 +169,7 @@ exports.validateSubmitterWorkNumberAsWorkId = function(i, value) {
 
 exports.validatePublisherName = function(i, value) {
     exports.validateRecordField(i, 'publisherName', value);
+    console.log('publisherName')
 };
 
 exports.validatePublisherRole = function(i, value) {
@@ -190,3 +215,4 @@ exports.selectRegistrationRecipientResultByIndex = function (index) {
         pages.base.waitForAjax();
     });
 };
+

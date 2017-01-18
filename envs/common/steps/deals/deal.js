@@ -285,7 +285,7 @@ exports.createDeal = data => {
     //steps.createDealGeneral.selectRandomCompanyCode();
     steps.createDealGeneral.selectSpecificCompanyCode(data.company_code);
     steps.createDealGeneral.enterContractingPartySearchTerms(data.contracting_parties);
-    steps.createDealGeneral.waitForContractingPartyDropDown();
+    //steps.createDealGeneral.waitForContractingPartyDropDown();
     steps.createDealGeneral.selectContractingPartySearchResultByIndex(0);
     exports.itContinueToNextPage();
 

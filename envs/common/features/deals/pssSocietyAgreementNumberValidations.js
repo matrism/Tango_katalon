@@ -2,11 +2,15 @@
 
 exports.id = 'a31afc82-c555-4ec8-a30e-331a07de59bf';
 
+
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'society', 'regression'];
+//exports.commonFeatureTags = ['deals', 'society', 'regression'];
+
+exports.commonFeatureTags = ['pssSocietyAgreementNumberValidation'];
 
 exports.feature = [
     {

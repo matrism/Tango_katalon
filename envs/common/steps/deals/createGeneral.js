@@ -325,6 +325,11 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
                 steps.createDealGeneral.fillCompanyCodeField("a");
                 steps.createDealGeneral.waitForContractingPartyDropDown();
                 steps.createDealGeneral.selectRandomCompanyCode();
+            } else
+            {
+                steps.createDealGeneral.fillCompanyCodeField("a");
+                steps.createDealGeneral.waitForContractingPartyDropDown();
+                steps.createDealGeneral.selectRandomCompanyCode();
             }
             steps.createDealGeneral.fillContractingPartyField();
             steps.createDealGeneral.waitForContractingPartyDropDown();

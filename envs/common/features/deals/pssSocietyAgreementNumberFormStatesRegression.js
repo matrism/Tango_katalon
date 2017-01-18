@@ -23,7 +23,7 @@ exports.feature = [
         tags: [],
 
         steps: criticalScenario(() => {
-            var base = steps.base,
+        var base = steps.base,
 
                 deal = steps.deal,
                 cdg = steps.createDealGeneral;

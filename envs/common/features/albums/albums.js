@@ -43,6 +43,7 @@ exports.feature = [
             p.findInternalIpiNumber();
         })
     },
+
     {
         name: 'Create work',
         tags: [
@@ -55,6 +56,7 @@ exports.feature = [
             steps.base.useBlankEntityDataSlot('work', 'mainWork');
 
             nw.goToNewWorkPage();
+            steps.base.sleep(5000);
             nw.enterPrimaryWorkTitle(
                 'TEST WORK ' + randomId('mainWork')
             );

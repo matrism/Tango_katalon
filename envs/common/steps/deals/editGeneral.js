@@ -8,7 +8,7 @@ steps.editDealGeneral = exports;
 
 exports.returnAndCheckInternalContactsTitle = function () {
     it("Return internal contacts ", function () {
-        element(By.css("div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2")).getText().
+        element(By.css("div.ng-scope div.span12.nomargins:nth-child(3) h2")).getText().
         then(function (promise) {
             console.log("Internal Contacts title is: " + promise);
             expect(promise).toEqual("INTERNAL CONTACTS");
@@ -19,9 +19,9 @@ exports.returnAndCheckInternalContactsTitle = function () {
 exports.editInternalContactsArea = function () {
     it("Edit internal contacts area ", function () {
         pages.editDealGeneral.clickOnEditInternalContactsArea();
-        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.internalContactsEditIcon));
+        //browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.internalContactsEditIcon));
         pages.editDealGeneral.clickOnEditIconInternalContacts();
-        browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.internalContactsEditInputField));
+        //browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.internalContactsEditInputField));
     });
 };
 
@@ -156,8 +156,8 @@ exports.confirmModalDialog = function () {
 exports.confirmTheCancelModalDialog = function () {
     it("Confirm modal dialog action", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesModalDialog));
-        pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
+        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.yesCancelModalDialog));
+        pages.base.scrollIntoView(pages.editDealGeneral.elems.yesCancelModalDialog);
         pages.editDealGeneral.clickOnYesModalDialog();
         browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
     });
@@ -172,9 +172,9 @@ exports.expectSaveEditInternalContactButtonPresent = function () {
 exports.cancelTheModalDialog = function () {
     it("Cancel modal dialog action", function () {
         browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.noModalDialog));
+        browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealGeneral.elems.noCancelModalDialog));
         pages.editDealGeneral.clickOnNoModalDialog();
-        browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
+        //browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.cancelModalDialogElement));
     });
 };
 

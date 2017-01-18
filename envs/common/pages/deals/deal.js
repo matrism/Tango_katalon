@@ -17,7 +17,7 @@ if (pages.deal === undefined) {
             contractPeriodsTitle: {css: "div[data-ng-form='termsForm'] div.row div.span3.column:nth-child(1) h3"},
             rightsTermPeriodsHeaderLink: {css: "div[name='termsForm'] a[data-ng-class='{ active: form.show.section.rtp }']"},
             addAnotherRightsTermPeriodLink: {css: "a[data-ng-click='addRightsTermPeriodSet()']"},
-            dealGeneralSummaryHeader: {css: "a[data-ng-click='showDealSummaryPage()']"},
+            dealGeneralSummaryHeader: {css: "a[ui-sref='deal.view.general.summary']"},
             scopeHeader: {css: ".scope-heading"},
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
             dealPayeesSummaryHeader: {css: "div.deal-payee__label"},

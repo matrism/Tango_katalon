@@ -28,7 +28,7 @@ let jobRunnerConfig = require('./jobRunnerConfig'),
     env = cli.env || configer.getEnvVarByKey('ENV_TYPE');
 
 if(!env || env === true) {
-    env = 'qa';
+    env = 'refactor';
 }
 
 if(cli['app-url'] === true) {
@@ -42,6 +42,8 @@ if (userConfig.cli) {
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
+ //var defaultUserName = 'AfinaAshley',
+    //defaultPassword = 'M@hadi3970!@',
     user = cli['app-user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
     password = cli['app-password'] || configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword,
     config = {
@@ -94,14 +96,35 @@ var defaultUserName = 'TangoTest1',
             simpleReporter: cli['simple-reporter']
         },
         _env_: { ENV_TYPE: env },
+        refactor:{
+            urls:{
+                sso: configer.getEnvVarByKey('URL_SSO'),
+                app_url: (
+                    //cli['app-url'] || 'http://tango.tango.qa.wmg.com/'
+                    cli['app-url'] || 'http://tango.tango-refactor.tango.dev.wmg.com/'
+                ),
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://tango.tango-refactor.tango.dev.wmg.com/'
+                    //'http://tango.tango.qa.wmg.com/'
+                )
+
+            },
+
+            user_name: user,
+            user_password: password
+
+        },
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: (
                     cli['app-url'] || 'http://tango.tango.qa.wmg.com/'
+                    //cli['app-url'] || 'http://tango.tango-refactor.tango.dev.wmg.com/'
                 ),
                 service_url: (
                     cli['service-url'] || cli['app-url'] ||
+                    //'http://tango.tango-refactor.tango.dev.wmg.com/'
                     'http://tango.tango.qa.wmg.com/'
                 ),
                 cr_url: (

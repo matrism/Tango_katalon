@@ -33,6 +33,15 @@ exports.validateRecordType = function(i, value) {
     );
 };
 
+exports.validateSocietyNumber = function(i, value) {
+    it(
+        'Record #' + (i + 1) + ' - Validate SocietyNumber (' + value + ')',
+        function() {
+            pages.workCwrPreview.validateSocietyNumber(i, value);
+        }
+    );
+};
+
 exports.validateRecordNumber = function(i) {
     it(
         'Record #' + (i + 1) + ' - Validate record number', function() {

@@ -126,6 +126,7 @@ exports.feature = [
             describe('Check Creator-to-Publisher society inputs', function () {
                 dsanPub.enterSocietySearchTerms(0, 'ICE');
                 dsanPub.selectSocietySearchResultByName('ICE');
+                dsanPub.enterSocietyAgreementNumber(0,'ABC123')
             });
         }
     }

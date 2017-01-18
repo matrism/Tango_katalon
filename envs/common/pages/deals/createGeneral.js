@@ -5,7 +5,8 @@ var _ = require('lodash'),
 
 if (pages.createDealGeneral === undefined) {
     exports = module.exports = pages.createDealGeneral = new ftf.pageObject({
-        url: _tf_config.urls.app_url + "#/create/deal",
+        //url: _tf_config.urls.app_url + "#/create/deal",
+        url: _tf_config.urls.app_url + "#/deal/create",
 
         locators: {
             draftContractStatusButton: {css: "#deal-general button[data-ng-model='deal.contract_execution_status']:nth-child(1)"},
@@ -16,7 +17,7 @@ if (pages.createDealGeneral === undefined) {
             dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},
             dealSigningTerritoryDropDownData: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"},
             contractingPartiesInput: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            contractingPartiesField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
+            contractingPartiesField: {css: "div[name='contractingParties'] div[class='ng-scope'] div[ng-class='tgTypeaheadWrapClass']"},
             companyCodeInput: {css: "div[name='company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             companyCodeField: {css: "div[name='company'] div[ng-class='tgTypeaheadWrapClass']"},
             artistsField: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass']"},
@@ -34,9 +35,9 @@ if (pages.createDealGeneral === undefined) {
             legalFileReferenceCodeField: {css: "#deal-general input[name='legalFileNumbers']"},
             externalContactsNameDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             externalContactNameFieldInput: {css: "div[data-ng-model='contact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            internalContactsInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.model'] input[ng-model='$term']"},
+            internalContactsInputField: {css: 'div[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(1) div[ng-model="contact.user"] div[ng-class="tgTypeaheadWrapClass"] input[ng-model="$term"]'},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
-            internalContactRoleInputField: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) div[data-ng-model='internalContact.roles'] input[ng-model='$term']"},
+            internalContactRoleInputField: {css: 'div[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(1) div[ng-model="contact.roles"] div[ng-class="tgTypeaheadWrapClass"] input[ng-model="$term"]'},
             demosDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(1) input"},
             usCopyrightCertificateDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(2) input"},
             legalFeesDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(3) input"},
@@ -182,13 +183,13 @@ if (pages.createDealGeneral === undefined) {
         },
 
         fillIntoTheIRowInternalContactField: function (i) {
-            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[ng-repeat='contact in tgModularEditModel.$getItems()']:nth-child(" + i + ") div[ng-model='contact.user'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
             element.sendKeys("shilpa");
         },
 
 
         clickIntoInternalContactsRoleRowI: function (i) {
-            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[ng-repeat='contact in tgModularEditModel.$getItems()']:nth-child(" + i + ") div[ng-model='contact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
             element.click();
         },
 

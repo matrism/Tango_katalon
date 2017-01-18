@@ -19,23 +19,25 @@ if (pages.editDealGeneral === undefined) {
             editExecutionDateDayElement: {css: "input[data-ng-model='date.day']"},
             saveEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             cancelEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
-            internalContactTitle: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) h2"},
-            internalContactsArea: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3)"},
+            internalContactTitle: {css: "div.ng-scope div.span12.nomargins:nth-child(3) h2"},
+            internalContactsArea: {css: "div.ng-scope div.span12.nomargins:nth-child(3)"},
             internalContactTableData: {css: "table.view-internal-contact tbody"},
-            internalContactsEditIcon: {css: "div.summary-section.ng-scope div.span12.nomargins:nth-child(3) button i.fa.fa-pencil"},
-            internalContactsEditInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            internalContactsEditIcon: {css: "div.ng-scope div.span12.nomargins:nth-child(3) button i.fa.fa-pencil"},
+            internalContactsEditInputField: {css: "div[ng-model='contact.user] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             addInternalContactsLink: {css: "div.add-new-button button.btn.btn-link"},
-            saveEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button[data-ng-click='tgModularViewMethods.save();']"},
-            cancelEditInternalContactsButton: {css: "div[data-tg-modular-edit-id='internalContacts'] button.btn.btn-cancel.ng-binding"},
-            editInternalContactsInputField: {css: "div[data-ng-model='internalContact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editInternalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
-            editInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            removeInternalContactRoleInputField: {css: "div[data-ng-model='internalContact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
-            removeInternalContactsElement: {css: "div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(1) button[data-ng-click='removeInternalContact(modularEditModels.contacts, internalContact)']"},
+            saveEditInternalContactsButton: {css: "div[tg-modular-edit-id='internalContacts'] button[data-ng-click='tgModularViewMethods.save()']"},
+            cancelEditInternalContactsButton: {css: "div[tg-modular-edit-id='internalContacts'] button.btn.btn-cancel.ng-binding.pull-left"},
+            editInternalContactsInputField: {css: "div[ng-model='contact.user'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editInternalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-group-item.ng-scope div.internal-contacts-results__tbody.ng-scope"},
+            editInternalContactRoleInputField: {css: "div[ng-model='contact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            removeInternalContactRoleInputField: {css: "div[ng-model='contact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
+            removeInternalContactsElement: {css: 'div[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(1) button.internal-contact__remove'},
             confirmationModalDialog: {css: "div.modal-dialog.ng-scope"},
             cancelModalDialogElement: {css: "div.modal.fade.in div.ng-scope"},
-            yesModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
-            noModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
+            yesModalDialog: {css: "div.modal-footer button[ng-click='ok();']"},
+            noModalDialog: {css: "div.modal-footer button[ng-click='cancel();']"},
+            yesCancelModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
+            noCancelModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"}
         },
 
 
@@ -63,6 +65,7 @@ if (pages.editDealGeneral === undefined) {
         },
 
         editInternalContactsField: function (internal_contact) {
+            browser.sleep(1000)
             pages.editDealGeneral.elems.editInternalContactsInputField.clear();
             pages.editDealGeneral.elems.editInternalContactsInputField.sendKeys(internal_contact);
         },
@@ -70,7 +73,7 @@ if (pages.editDealGeneral === undefined) {
         selectEditRandomInternalContactsFromDropDown: function () {
             var desiredOption;
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.editInternalContactsDropDownData));
-            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.driver.findElements(By.css("div.ng-scope ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-group-item.ng-scope div.internal-contacts-results__tbody.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -118,19 +121,19 @@ if (pages.editDealGeneral === undefined) {
         },
 
         editTheIRowInternalContactField: function (i) {
-            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.model'] input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[ng-repeat='contact in tgModularEditModel.$getItems()']:nth-child(" + i + ") div[ng-model='contact.user'] input[ng-model='$term']"));
             element.clear();
             element.sendKeys("test");
             browser.sleep(1000);
         },
 
         clickEditInternalContactsRoleRowI: function (i) {
-            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] input[ng-model='$term']"));
+            var element = browser.findElement(By.css("div[ng-repeat='contact in tgModularEditModel.$getItems()']:nth-child(" + i + ") div[ng-model='contact.roles'] input[ng-model='$term']"));
             element.click();
         },
 
         removeEditInternalContactsRoleRowI: function (i) {
-            var element = browser.findElement(By.css("div[data-ng-repeat='internalContact in modularEditModels.contacts']:nth-child(" + i + ") div[data-ng-model='internalContact.roles'] span[ng-click='!$isDisabled() && $removeTag($tag)']"));
+            var element = browser.findElement(By.css("div[ng-repeat='contact in tgModularEditModel.$getItems()']:nth-child(" + i + ") div[ng-model='contact.roles'] div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"));
             element.click();
         },
 
@@ -151,14 +154,14 @@ if (pages.editDealGeneral === undefined) {
         },
 
         clickOnYesModalDialog: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
-            pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
-            pages.editDealGeneral.elems.yesModalDialog.click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesCancelModalDialog));
+            pages.base.scrollIntoView(pages.editDealGeneral.elems.yesCancelModalDialog);
+            pages.editDealGeneral.elems.yesCancelModalDialog.click();
             browser.sleep(2000);
         },
 
         clickOnNoModalDialog: function () {
-            pages.editDealGeneral.elems.noModalDialog.click();
+            pages.editDealGeneral.elems.noCancelModalDialog.click();
         },
 
         editTheGeneralTabFirstLeftElements: function () {

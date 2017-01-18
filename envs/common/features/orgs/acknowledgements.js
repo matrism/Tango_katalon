@@ -66,7 +66,7 @@ var data = {
 exports.feature = [
     {
         name: 'Load Ack File',
-        tags: [],
+        tags: ['LoadAckFile'],
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName(data.org);
 

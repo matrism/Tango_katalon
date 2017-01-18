@@ -1545,7 +1545,7 @@ exports.createWork = (data, varName) => {
 
         newWork.optToIncludeWorkOnWebsite(true);
         newWork.saveWork();
-        steps.work.storeWorkIdInTestVariable(varName);
+        steps.work.storeTheWorkIdInTestVariable(varName);
     });
 };
 

@@ -6,15 +6,15 @@ var _ = require('lodash'),
 if (pages.createDealScope === undefined) {
     exports = module.exports = pages.createDealScope = new ftf.pageObject({
         locators: {
-            addScopeIcon: {css: '[data-ng-click^="addScope(form.terms.addScopeView);"]'},
+            addScopeIcon: {css: 'a[ng-click="addScope(); scrollScopeMenu();"] i[class="column-add-button-icon fa fa-plus"]'},
             descriptionField: {css: "input[name='scopeDescription']"},
             contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
-            territoryField: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass']"},
-            territoryInput: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            territoryField: {css: 'div[class="tg-territory__input-container"] div[ng-class="tgTypeaheadWrapClass"]'},
+            territoryInput: {css: 'div[class="tg-territory__input-container"] div[ng-class="tgTypeaheadWrapClass"] input[ng-model="$term"]'},
             territoryActivator: {css: 'div[ng-model="modularEditModels.model.deal_scope_territories.territories"] .tg-typeahead__tags-text'},
             territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
-            addPublisherShareSetLink: {css: "div.publisher-share-totals a[data-ng-click='addChain(modularEditModels.model.id, form.terms.activeScope.id);']"},
-            firstPublisherNameField: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div[name='acquirer'] input[ng-model='$term']"},
+            addPublisherShareSetLink: {css: "div.publisher-share-totals a[ng-click='addChainAndSwitchToEdit()']"},
+            firstPublisherNameField: {css: '#deal-publisher div[ng-form="dealChainsForm"] div[ng-form="chainForm"] div.publisher-share.clearfix div.publisher-row.clearfix.ng-scope div.control-group.pull-left.ps-name.relative.ng-scope.error div[tg-org-typeahead-name="acquirer"]:nth-child(1) div[ng-model="tgOrgTypeaheadModel"] input[ng-model="$term"]'},
             firstPublisherOwnPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"},
             firstPublisherCollectPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"},
             firstPublisherNameAMField: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input[ng-model='$term']"},
@@ -364,13 +364,15 @@ if (pages.createDealScope === undefined) {
 
         publisherShareChainContainers: function () {
             return element.all(
-                by.repeater('chain in modularEditModels.model._chains track by chain.id')
+               // by.repeater('chain in modularEditModels.model._chains track by chain.id')
+                by.repeater('chain in tgModularEditModel.chains.$getItems() track by chain.id')
             );
         },
 
         publisherShareRows: function (i) {
             return (
                 pages.createDealScope.publisherShareChainContainers().get(i)
+                //pages.createDealScope.publisherShareChainContainers()
                     .$$('.publisher-row, .am-share').filter(function (element) {
                     return element.isDisplayed();
                 })
@@ -379,9 +381,10 @@ if (pages.createDealScope === undefined) {
 
         publisherRoleDropdown: function (i, j) {
             return exports.publisherShareRows(i).get(j).$(
-                '[data-tg-dropdown="' +
-                'role for role in shareAcquirerRoles' +
-                '"]'
+                //'[data-tg-dropdown="' +
+                //'role for role in shareAcquirerRoles' +
+                //'"]'
+                '[ng-model="share.acquirerRole"]'
             );
         },
 
@@ -398,7 +401,7 @@ if (pages.createDealScope === undefined) {
         publisherSearchTermsInput: function (i, j) {
             return (
                 pages.createDealScope.publisherShareRows(i)
-                    .get(j).$('[name="acquirer"] input')
+                    .get(j).$('[ng-name="acquirer"] input')
             );
         },
 
@@ -450,7 +453,8 @@ if (pages.createDealScope === undefined) {
         },
 
         fillInFirstPublisherNameField: function (publisherName) {
-            var element = pages.createDealScope.elems.firstPublisherNameField;
+            var element = pages.createDealScope.elems.firstPublisherNameField
+            //element.get(i);
             pages.base.scrollIntoView(element);
             element.clear();
             element.sendKeys(publisherName);
