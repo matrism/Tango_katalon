@@ -12,7 +12,7 @@ module.exports.open = function (workId) {
     }
     promise.when(workId).then(
         function (workId) {
-            browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
+            browser.get(_tf_config.urls.app_url + "#/work/view/" + workId + "/general");
             pages.base.waitForAjax();
         }
     );
@@ -1251,7 +1251,7 @@ module.exports.optToIncludeWorkOnWebsite = function (include) {
 };
 
 exports.tabSetContainer = function () {
-    return $('[data-tg-tabset-id="workEditTabset"]');
+    return $('[tg-tabset-id="workEditTabset"]');
 };
 
 exports.generalTab = function () {
