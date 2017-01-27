@@ -148,7 +148,7 @@ exports.removeInternalContactsRowI = function (i) {
 
 exports.confirmModalDialog = function () {
     it("Confirm modal dialog action", function () {
-        pages.editDealGeneral.clickOnYesModalDialog();
+        pages.editDealGeneral.clickYesModalDialog();
         pages.editDealGeneral.waitForAjax();
     });
 };

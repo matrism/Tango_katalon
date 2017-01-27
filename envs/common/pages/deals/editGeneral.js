@@ -160,6 +160,14 @@ if (pages.editDealGeneral === undefined) {
             browser.sleep(2000);
         },
 
+        clickYesModalDialog: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
+            pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
+            pages.editDealGeneral.elems.yesModalDialog.click();
+            browser.sleep(2000);
+        },
+
+
         clickOnNoModalDialog: function () {
             pages.editDealGeneral.elems.noCancelModalDialog.click();
         },
