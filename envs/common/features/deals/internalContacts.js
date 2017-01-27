@@ -132,10 +132,9 @@ exports.feature = [
             steps.base.scrollIntoView("Term header link", pages.deal.elems.termsHeader);
             steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.cancelTheModalDialog();
-            //steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("shilpa");
             steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
-            //steps.deal.goToTermsDealTabDetailsDirtyCheck();
+            steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.confirmTheCancelModalDialog();
             steps.deal.goToGeneralDealTabDetails();
             steps.deal.expectTermsDetailsAreOk();

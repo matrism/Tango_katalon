@@ -1263,7 +1263,6 @@ exports.registration = (function () {
             return $('.e2e-acknowledgement-type');
         };
         ack.deliveryMethodSelect = function (i) {
-            //return element.all(by.model('ackMethod.type')).get(i);
             return element.all(by.model('__type')).get(i);
         };
         ack.addressInput = function (i) {
