@@ -153,6 +153,13 @@ if (pages.editDealGeneral === undefined) {
             element.click();
         },
 
+        clickYesModalDialog: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesModalDialog));
+            pages.base.scrollIntoView(pages.editDealGeneral.elems.yesModalDialog);
+            pages.editDealGeneral.elems.yesModalDialog.click();
+            browser.sleep(2000);
+        },
+
         clickOnYesModalDialog: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.yesCancelModalDialog));
             pages.base.scrollIntoView(pages.editDealGeneral.elems.yesCancelModalDialog);
