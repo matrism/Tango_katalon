@@ -66,7 +66,7 @@ var data = {
 exports.feature = [
     {
         name: 'Load Ack File',
-        tags: ['LoadAckFile'],
+        tags: [],
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName(data.org);
 
@@ -135,7 +135,7 @@ exports.feature = [
                 using(this.events, function() {
                     this.find({ firstWithFileName: fromTestVariable('current ACK file name') });
                     this.toggleBlind();
-                    //this.waitUntilAnyEventStatusBecomes(data.workEvent.status);
+                    this.waitUntilAnyEventStatusBecomes(data.workEvent.status);
                     this.validateStatus(data.workEvent.status);
                     steps.base.sleep(5000);
                     this.validateAckCreationDate(data.event.creationDate);
