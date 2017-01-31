@@ -123,7 +123,7 @@ exports.feature = [
     },
     {
         name: 'Validate Work Registration Activity',
-        tags: [''],
+        tags: [],
         steps: function () {
             steps.work.goToWorkPageById(data.workEvent.workId);
             steps.work.goToRegistrationActivityTab();
