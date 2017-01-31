@@ -31,7 +31,7 @@ exports.activityGroup = (function() {
     activityGroup.container.firstWithRecipientName = function(name) {
         return element.all(
             by.cssContainingText(
-                '[data-ng-repeat="activitiesGroup in dataHolder.groupedActivities"]', name
+                '[ng-repeat="activitiesGroup in dataHolder.groupedActivities track by activitiesGroup.registration.name"]', name
             )
          ).first();
     };
@@ -142,7 +142,7 @@ exports.activityGroup.events = (function() {
         name = callResultOrValue(name);
         return events.containerOfDetails(
             element.all(by.cssContainingText(
-                '[data-ng-repeat-start="activity in activitiesGroup.activities"]+tr', name
+                '[ng-repeat-start="activity in activitiesGroup.activities"]+tr', name
             )).first()
         );
     };
@@ -202,7 +202,7 @@ exports.activityGroup.events = (function() {
 
     events.getMessage = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.$('[data-ng-bind$="message.message_text"]').getText();
+        return target.detailsContainer.$('[ng-bind="::message.message_text"]').getText();
     };
 
     events.getRecordType = function() {
