@@ -13,7 +13,7 @@ exports.commonFeatureTags = ['royaltyProcessing', 'dataUtilities', 'sanity', 'ro
 
 function checkSaveAndRevert (propName, propValue) {
     var propInitialValue;
-    browser.sleep(5000);git
+    browser.sleep(5000);
 
     using(steps.dataUtilities, function () {
         var self = this;
