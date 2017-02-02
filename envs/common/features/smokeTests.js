@@ -186,13 +186,14 @@ exports.feature = [
             'royaltyRatesManualStatementsSmoke',
             'royaltyRates',
             'manualStatements',
-            'qaOnly'
+            'qaOnly',
+            'TAT990'
         ],
 
         steps: function () {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
-
+            steps.base.sleep(5000);
             steps.royaltyRates.typeIncomeProvider('FINLAND SYNCH INCOME');
 
             steps.royaltyRates.setStatementDistributionPeriod("1991", "02", "2013", "03");
@@ -200,8 +201,9 @@ exports.feature = [
             steps.royaltyRates.setStatementAmount("1000");
             steps.royaltyRates.setExchangeRate("1");
             steps.royaltyRates.createManualStatement();
-
-            steps.royaltyRates.enterBatchAmmount("1000");
+            steps.base.sleep(5000);
+            steps.royaltyRates.enterBatchArea();
+            steps.royaltyRates.enterBatchAmount("1000");
             steps.royaltyRates.clickDefaultSettingsOnBatch();
             steps.royaltyRates.selectIncomeTypeForBatch("Mechanical");
 
