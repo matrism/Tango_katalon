@@ -150,7 +150,6 @@ module.exports.creatorRoleDropdown = function(index) {
 module.exports.creatorNameInput = function(index) {
 	return (
 		pages.newWork.creatorContributionRow(index)
-			//.element(by.model("creator.person"))
 		.element(by.model('creator.person'))
 	);
 };
@@ -164,14 +163,7 @@ module.exports.creatorContributionInput = function(index) {
 			.element(by.model("creator.workContribution"))
 	);
 };
-/*module.exports.contributionRequiredMessage = function(i) {
-	return (
-		pages.newWork.creatorContributionRow(i)
-			.element(by.cssContainingText(
-				".validation-message-text", "Contribution is required"
-			))
-	);
-};*/
+
 module.exports.contributionTotalBinding = function() {
 	return element(by.binding("getContributionTotalFor(work) | number:3"));
 };

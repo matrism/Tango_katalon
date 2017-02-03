@@ -2,10 +2,6 @@
 
 pages.newWorkCopyrightCertificates = exports;
 
-exports.certificateContainers = function() {
-    return $$('.cf-row.ng-scope');  
-};
-
 exports.certificateRows = () => element.all(by.repeater(
 	    'certificate in tgModularEditModel.usCopyrightCertificates.$getItems()'
 	));
