@@ -6,16 +6,16 @@ var _ = require('lodash'),
     ExpectedConditions = protractor.ExpectedConditions;
 
 exports = module.exports = pages.newWork = new ftf.pageObject({
-	url: _tf_config.urls.app_url + "#/create/work"
+	url: _tf_config.urls.app_url + "#/work/create"
 });
 module.exports.primaryWorkTitleLanguageDropdown = function() {
-	return element(by.model("work.primary_title.language_code"));
+	return element(by.model('tgModularEditModel.primaryTitle.languageCode'));
 };
 module.exports.primaryWorkTitleInput = function() {
-	return element(by.model("work.primary_title.title"));
+	return element(by.model('tgModularEditModel.primaryTitle.title'));
 };
 module.exports.alternateWorkTitleRows = function() {
-	return element.all(by.repeater("altTitle in work.alternative_titles"));
+	return element.all(by.repeater('altTitle in tgModularEditModel.alternativeTitles.$getItems()'));
 };
 module.exports.alternateWorkTitleRow = function(index) {
 	return pages.newWork.alternateWorkTitleRows().get(index);
@@ -136,7 +136,7 @@ exports.componentWorkAllocationInput = function(i) {
     return exports.componentWorkAllocationInputs().get(i);
 };
 module.exports.creatorContributionRows = function() {
-	return element.all(by.repeater("creator in commonDataHolder.creatorsContributions"));
+	return element.all(by.repeater('creator in tgModularEditModel.creators.$getItems()'));
 };
 module.exports.creatorContributionRow = function(index) {
 	return pages.newWork.creatorContributionRows().get(index);
@@ -150,28 +150,28 @@ module.exports.creatorRoleDropdown = function(index) {
 module.exports.creatorNameInput = function(index) {
 	return (
 		pages.newWork.creatorContributionRow(index)
-			.element(by.model("creator.person_name"))
+			//.element(by.model("creator.person"))
+		.element(by.model('creator.person'))
 	);
 };
-
 exports.creatorSearchResultElements = function () {
-    return $$('.typeahead-result');
+    return $$('.tg-typeahead__suggestions-group-item');
 };
 
 module.exports.creatorContributionInput = function(index) {
 	return (
 		pages.newWork.creatorContributionRow(index)
-			.element(by.model("creator.contribution"))
+			.element(by.model("creator.workContribution"))
 	);
 };
-module.exports.contributionRequiredMessage = function(i) {
+/*module.exports.contributionRequiredMessage = function(i) {
 	return (
 		pages.newWork.creatorContributionRow(i)
 			.element(by.cssContainingText(
 				".validation-message-text", "Contribution is required"
 			))
 	);
-};
+};*/
 module.exports.contributionTotalBinding = function() {
 	return element(by.binding("getContributionTotalFor(work) | number:3"));
 };
@@ -186,37 +186,37 @@ module.exports.totalContributionTooHighMessage = function() {
 	));
 };
 module.exports.musicalDistributionCategoryDropdown = function() {
-	return element(by.model("work.musical_work_distribution_category"));
+	return element(by.model("tgModularEditModel.musicalWorkDistributionCategory"));
 };
 module.exports.textMusicRelationshipDropdown = function() {
-	return element(by.model("work.text_music_relationship"));
+	return element(by.model("tgModularEditModel.textMusicRelationship"));
 };
 module.exports.excerptTypeDropdown = function() {
-	return element(by.model("work.excerpt_type"));
+	return element(by.model("tgModularEditModel.excerptType"));
 };
 module.exports.versionTypeDropdown = function() {
-	return element(by.model("work.version_type"));
+	return element(by.model("tgModularEditModel.versionType"));
 };
 module.exports.lyricAdaptationDropdown = function() {
-	return element(by.model("work.lyric_adaptation_type"));
+	return element(by.model("tgModularEditModel.lyricAdaptationType"));
 };
 module.exports.musicArrangementDropdown = function() {
-	return element(by.model("work.music_arrangement_type"));
+	return element(by.model("tgModularEditModel.musicArrangementType"));
 };
 module.exports.intendedPurposeDropdown = function() {
-	return element(by.model("work.intended_purpose"));
+	return element(by.model("tgModularEditModel.intendedPurpose"));
 };
 module.exports.productionTitleInput = function() {
-	return element(by.model("work.production_title.title"));
+	return element(by.model("tgModularEditModel.productionTitle.title"));
 };
 module.exports.bltvrDropdown = function() {
-	return element(by.model("work.bltvr"));
+	return element(by.model("tgModularEditModel.bltvr"));
 };
 module.exports.musicLibraryDropdown = function() {
-	return element(by.model("work.library_code"));
+	return element(by.model("tgModularEditModel.libraryCode"));
 };
 module.exports.creationDateContainer = function() {
-	return element(by.model("work.creation_date"));
+	return element(by.model("tgModularEditModel.date"));
 };
 module.exports.creationDatePickerIcon = function() {
 	return (
@@ -243,7 +243,7 @@ module.exports.creationDayInput = function() {
 	);
 };
 module.exports.deliveryDateContainer = function() {
-	return element(by.model("work.delivery_date"));
+	return element(by.model("tgModularEditModel.date"));
 };
 module.exports.deliveryDatePickerIcon = function() {
 	return (
@@ -270,7 +270,7 @@ module.exports.deliveryDayInput = function() {
 	);
 };
 module.exports.includeWorkOnWebsiteButtons = function() {
-	return element.all(by.model("work.include_on_website"));
+	return element.all(by.model("tgModularEditModel.includeOnWebsite"));
 };
 module.exports.continueToNextTabButton = function() {
     return $('.page-footer').element(by.cssContainingText(
@@ -465,7 +465,7 @@ exports.enterComponentWorkSearchTerms = function(i, value) {
     element.sendKeys(value);
 };
 exports.enterCreatorSearchTerms = function(i, name) {
-    var element = pages.newWork.creatorNameInput(i);
+	var element = pages.newWork.creatorNameInput(i).element(by.css('input[ng-model="$term"]'));
     pages.base.scrollIntoView(element);
     element.clear();
     element.sendKeys(name);
@@ -578,10 +578,10 @@ exports.selectRandomCreatorSuggestion = function() {
         var randomSuggestion = _.sample(suggestions.slice(0, 3));
         var result = {};
 
-        result.name = pph.trim(randomSuggestion.$('.typeahead-result-text').getText());
+        result.name = pph.trim(randomSuggestion.$('.tg-typeahead__suggestions-group-item .cf-col-8').getText());
 
         result.ipiNumber = (
-            randomSuggestion.$('.typeahead-result-right').getText().then(function(value) {
+            randomSuggestion.$('.tg-typeahead__suggestions-group-item .cf-col-4').getText().then(function(value) {
                 if(/^\(.*\)$/.test(value)) {
                     value = value.slice(1, -1);
                 }
@@ -599,10 +599,10 @@ exports.selectCreatorSuggestionByIpiNumber = function(ipiNumber) {
     var suggestion = exports.creatorSearchResultElements().first();
     var result = {};
 
-    result.name = pph.trim(suggestion.$('.typeahead-result-text').getText());
+    result.name = pph.trim(suggestion.$('.tg-typeahead__suggestions-group-item .cf-col-8').getText());
 
     result.ipiNumber = (
-        suggestion.$('.typeahead-result-right').getText().then(function(value) {
+        suggestion.$('.tg-typeahead__suggestions-group-item .cf-col-4').getText().then(function(value) {
             if(/^\(.*\)$/.test(value)) {
                 value = value.slice(1, -1);
             }

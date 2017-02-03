@@ -3,13 +3,17 @@
 pages.newWorkCopyrightCertificates = exports;
 
 exports.certificateContainers = function() {
-    return $$('table.table.certificates_table tr.ng-scope');
+    return $$('.cf-row.ng-scope');  
 };
+
+exports.certificateRows = () => element.all(by.repeater(
+	    'certificate in tgModularEditModel.usCopyrightCertificates.$getItems()'
+	));
 
 exports.usLibraryOfCongressNumberInput = function(i) {
     return (
-        exports.certificateContainers().get(i)
-            .element(by.model('cert.us_library_of_congress_number'))
+        exports.certificateRows().get(i)
+            .element(by.model('certificate.usLibraryOfCongressNumber'))
     );
 };
 
@@ -20,8 +24,8 @@ exports.enterUsLibraryOfCongressNumber = function(i, value) {
 
 exports.registrationDateInput = function(i) {
     return (
-        exports.certificateContainers().get(i)
-            .element(by.model('cert.registration_date'))
+        exports.certificateRows().get(i)
+            .element(by.model('certificate.registrationDate'))
     );
 };
 
@@ -31,8 +35,8 @@ exports.enterRegistrationDate = function(i, value) {
 
 exports.submittedDateInput = function(i) {
     return (
-        exports.certificateContainers().get(i)
-            .element(by.model('cert.submit_date'))
+        exports.certificateRows().get(i)
+            .element(by.model('certificate.submitDate'))
     );
 };
 
