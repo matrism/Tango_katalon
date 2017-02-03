@@ -3,7 +3,7 @@
 pages.workCopyrightCertificates = exports;
 
 exports.certificateContainers = function() {
-    return $$('table.table.table-certificate-section__container tr.ng-scope');
+    return $$('.cf-row');
 };
 
 exports.usLibraryOfCongressNumberBindings = function() {

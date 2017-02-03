@@ -35,13 +35,13 @@ module.exports.validateDefaultCreatorRole = function(i) {
 		}
 	);
 };
-module.exports.ensureContributionRequiredMessageIsDisplayed = function(i) {
+/*module.exports.ensureContributionRequiredMessageIsDisplayed = function(i) {
 	it("Ensure contribution required message is displayed", function() {
 		expect(pages.base.isPresentAndDisplayed(
 			pages.newWork.contributionRequiredMessage(i)
 		)).toBeTruthy();
 	});
-};
+};*/
 module.exports.validateCreatorContributionInputMask = function(i, validationTable) {
 	it("Validate creator contribution input mask", function() {
 		validationTable = validationTable || {
@@ -322,6 +322,7 @@ exports.selectCreatorFromPersonSlot = function(creatorRow, slotIndex) {
         'Type IPI number from person slot #' + (slotIndex + 1) +
         ' on creator search field #' + (creatorRow + 1), function() {
             person = _.merge({}, hash.personSlots[slotIndex]);
+            console.log(person.ipiNumber);
             pages.newWork.enterCreatorSearchTerms(creatorRow, person.ipiNumber);
         }
     );
@@ -891,5 +892,5 @@ exports.save = function() {
 exports.saveWork = exports.save;
 
 exports.validateSaveWorkRedirection = function() {
-     steps.base.validateRedirection("created work page", "/rights");
+     steps.base.validateRedirection("created work page", "/general");
 };
