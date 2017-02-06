@@ -976,7 +976,6 @@ if (pages.royaltyRates === undefined) {
             var incomeProviderInput;
 
             incomeProviderInput = $$("div.tg-typeahead div.tg-typeahead__input-wrap input[ng-model='$term']").get(1);
-            //var rateSetTab = $('[data-close-others="oneAtATime"]');
             browser.driver.sleep(5000);
 
             if (sentKeys != "") {

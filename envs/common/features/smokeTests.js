@@ -186,8 +186,7 @@ exports.feature = [
             'royaltyRatesManualStatementsSmoke',
             'royaltyRates',
             'manualStatements',
-            'qaOnly',
-            'TAT990'
+            'qaOnly'
         ],
 
         steps: function () {
