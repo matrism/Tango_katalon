@@ -38,6 +38,7 @@ function checkSaveAndRevert (propName, propValue) {
             self.clickEditButton();
             self.editProperty(propName, propInitialValue);
             self.clickSaveLink();
+            self.expectPropertyToBe(propName, propInitialValue);
         });
     });
 };
@@ -62,9 +63,9 @@ exports.feature = [
                 this.checkSaveAndRevert('VAT NO');
 
                 this.navigateBreadcrumb('Royalty Utilities');
-                this.openMenuBoardItem('Statement Group');
+                this.openMenuBoardItem('Income Provider Xref Group');
                 this.openMenuBoardItemByIndex(0);
-                this.checkSaveAndRevert('Statement Group Name');
+                this.checkSaveAndRevert('Xref Group Name');
 
                 this.navigateBreadcrumb('Royalty Utilities');
                 this.openMenuBoardItem('Royalty Period Data');

@@ -66,7 +66,7 @@ exports.feature = [
     },
     {
         name: 'New basic work',
-        tags: ['create'],
+        tags: ['createWorkD'],
         steps: function () {
             steps.base.useBlankEntityDataSlot('work', 0);
 
@@ -91,7 +91,7 @@ exports.feature = [
                         var lastOne = (i === howMany - 1);
                         steps.newWork.validateDefaultCreatorRole(i);
                         creator.name = steps.newWork.selectCreatorFromPersonSlot(i, i);
-                        steps.newWork.ensureContributionRequiredMessageIsDisplayed();
+                        //steps.newWork.ensureContributionRequiredMessageIsDisplayed();
                         steps.newWork.validateCreatorContributionInputMask(i);
                         if(firstOne) {
                             steps.newWork.enterMediumCreatorContribution(i);

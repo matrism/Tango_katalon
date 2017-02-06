@@ -136,6 +136,7 @@ exports.feature = [
             steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
             steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.confirmTheCancelModalDialog();
+            steps.deal.goToGeneralDealTabDetails();
             steps.deal.expectTermsDetailsAreOk();
         }
     }

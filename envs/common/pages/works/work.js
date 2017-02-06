@@ -12,7 +12,7 @@ module.exports.open = function (workId) {
     }
     promise.when(workId).then(
         function (workId) {
-            browser.get(_tf_config.urls.app_url + "#/work/" + workId + "/metadata");
+            browser.get(_tf_config.urls.app_url + "#/work/view/" + workId + "/general");
             pages.base.waitForAjax();
         }
     );
@@ -131,7 +131,7 @@ exports.clickWorkSearchMatch = function (i) {
     return exports.workSearchMatch(i).click();
 };
 module.exports.workIdBinding = function () {
-    return element(by.binding("getWorkFullCode(work.pristine)"));
+    return element(by.binding("tgWorkHeader.workCode.getFullCode()"));
 };
 module.exports.primaryWorkTitleBinding = function () {
     return element(by.binding("getWorkName(workPristine)"));
@@ -1059,7 +1059,7 @@ exports.enterShellWorkCreatorContribution = function (i, j, value) {
 };
 exports.expectCreatorSuggestionsToBeDisplayed = function () {
     browser.wait(
-        ExpectedConditions.visibilityOf($('.typeahead-result')),
+        ExpectedConditions.visibilityOf($('.tg-typeahead__suggestions-group-item')),
         _tf_config._system_.wait_timeout
     );
 };
@@ -1251,7 +1251,7 @@ module.exports.optToIncludeWorkOnWebsite = function (include) {
 };
 
 exports.tabSetContainer = function () {
-    return $('[data-tg-tabset-id="workEditTabset"]');
+    return $('[tg-tabset-id="workEditTabset"]');
 };
 
 exports.generalTab = function () {

@@ -113,6 +113,7 @@ exports.feature = [
             ]],
 
             [steps.newWork.selectCreatorFromPersonSlot, [0, 0]],
+        //    [steps.newWork.selectCreatorSearchResultByIndex(0)],
             [steps.newWork.enterCreatorContribution, [0, 50]],
 
             [steps.newWork.selectCreatorFromPersonSlot, [1, 1]],

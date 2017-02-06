@@ -51,8 +51,8 @@ var data = {
         creationDate: '2013-05-02'
     },
     workEvent: {
-        workId: 'WW 001136936 00',
-        status: 'Rejected',
+        workId: 'WW 010072251 00',
+        status: 'Rejected (RC)',
         message: 'BMI records indicate that controlled ' +
             'publisher is administered by another BMI publisher.',
         recordType: 'NWR',
@@ -66,7 +66,7 @@ var data = {
 exports.feature = [
     {
         name: 'Load Ack File',
-        tags: ['LoadAckFile'],
+        tags: [],
         steps: function () {
             steps.searchSection.accessSavedOrganisationByName(data.org);
 
@@ -77,12 +77,14 @@ exports.feature = [
                 using(this.ack, function() {
                     this.selectAcknowledgementType('Multiple');
                     this.selectDeliveryMethod(0, 'SFTP');
+                    steps.base.sleep(5000);
                     this.enterAddress(0, data.sftp.address);
                     this.enterDirectory(0, data.sftp.directory);
                     this.enterPort(0, data.sftp.port);
                     this.enterUsername(0, data.sftp.username);
                     this.enterPassword(0, data.sftp.password);
                     this.selectDeliveryMethod(1, 'FTP');
+                    steps.base.sleep(5000);
                     this.enterAddress(1, data.ftp.address);
                     this.enterDirectory(1, data.ftp.directory);
                     this.enterPort(1, data.ftp.port);
@@ -134,8 +136,11 @@ exports.feature = [
                 using(this.events, function() {
                     this.find({ firstWithFileName: fromTestVariable('current ACK file name') });
                     this.toggleBlind();
+                    this.waitUntilAnyEventStatusBecomes(data.workEvent.status);
                     this.validateStatus(data.workEvent.status);
+                    steps.base.sleep(5000);
                     this.validateAckCreationDate(data.event.creationDate);
+                    steps.base.sleep(5000);
                     this.validateInitiatedBy();
                     this.validateMessage(data.workEvent.message);
                     this.validateSocietyCode(data.workEvent.societyCode);
@@ -171,3 +176,4 @@ exports.feature = [
         }
     }
 ];
+

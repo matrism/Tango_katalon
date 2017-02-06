@@ -54,14 +54,14 @@ exports.cancelChanges = () => asAlways(
 
 // ---
 
-exports.rows = () => $$('.work-recordings-table-tr-wrap');
+exports.rows = () => $$('.content-border');
 
 exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
 
 // ---
 
 {
-    let locator = by.model('recording.title');
+    let locator = by.model('$term');
 
     exports.titleInput = i => exports.rows().get(i).element(locator);
 
@@ -77,21 +77,19 @@ exports.focusTitleField = i => asAlways(
 // ---
 
 exports.titleSuggestionsContainer = () => $(
-    '.work-recordings-table-suggestions'
+    '.tg-typeahead__suggestions-group-item'
 );
 
+
+
 exports.titleSuggestionRows = () => element.all(by.repeater(
-    'rec in recording.suggestions.list'
+    '$match in $dataSet.suggested.matches | limitTo:$dataSet.suggested.limit'
 ));
 
 exports.selectTitleSuggestionByIndex = (i, val) => {
-    let el = exports.titleSuggestionRows().get(i);
+    let el = exports.titleSuggestionRows();
 
-    return pages.base.scrollIntoView(el).then(() => {
-        if(val) {
-            expect(pph.getAllText(el)).toBe(val);
-        }
-    }).then(() => el.click());
+   el.click();
 };
 
 // ---
@@ -108,7 +106,7 @@ exports.rowIndexByEnteredTitle = val => {
     )).first();
 
     return browser.executeScript(function (el) {
-        return $(el).closest('.work-recordings-table-tr-wrap').index() - 1;
+        return $(el).closest('.content-border').index() - 1;
     }, el.getWebElement());
 };
 
@@ -136,7 +134,7 @@ exports.expectEmptyTitleField = i => exports.validateEnteredTitle(i, '');
 // ---
 
 {
-    let locator = by.binding('recording.title');
+    let locator = by.binding('$match.model');
 
     exports.titleBinding = i => exports.rows().get(i).element(locator);
 
@@ -151,7 +149,7 @@ exports.rowIndexByTitle = val => {
     )).first();
 
     return browser.executeScript(function (el) {
-        return $(el).closest('.work-recordings-table-tr-wrap').index() - 1;
+        return $(el).closest('.content-border').index() - 1;
     }, el.getWebElement());
 };
 
@@ -177,7 +175,7 @@ exports.validateTitle = (i, val) => expect(
 // ---
 
 exports.artistTypeahead = i => Typeahead(exports.rows().get(i).element(
-    by.model('recording.artist')
+    by.model('recordingLink.recording.artist')
 ));
 
 exports.enterArtistSearchTerms = (i, val) => asAlways(
@@ -226,7 +224,7 @@ exports.createEnteredArtist = () => asAlways(
 // ---
 
 exports.artistNameBinding = i => exports.rows().get(i).element(by.binding(
-    'recording.artist.display_name'
+    'recording.artist.displayName'
 ));
 
 exports.artistName = i => asAlways(
@@ -254,7 +252,7 @@ exports.validateLibraryName = (i, val) => expect(
 // ---
 
 exports.durationInput = i => exports.rows().get(i).$(
-    '.work-recordings-table-time input'
+    '.tg-time-selector input'
 );
 
 exports.enterDuration = (i, val) => {
@@ -292,7 +290,7 @@ exports.validateDuration = (i, val) => expect(
 // ---
 
 exports.firstUseCheckbox = i => exports.rows().get(i).$(
-    '.work-recordings-table-first-use'
+    '.recordingLink.firstUse'
 );
 
 exports.toggleFirstUseFlag = i => asAlways(
@@ -310,7 +308,7 @@ exports.validateFirstUseFlagState = (i, st) => expect(
 // ---
 
 exports.removeButton = i => exports.rows().get(i).$(
-    '.work-recordings-table-td-remove'
+    '.content-border.m-remove'
 );
 
 // ---
@@ -347,7 +345,7 @@ exports.remove = i => asAlways(
 // ---
 
 exports.toggleButton = i => exports.rows().get(i).$(
-    '.work-recordings-table-td-chevron'
+    '.fa fa-angle-up.fa-angle-down'
 );
 
 exports.expanded = i => asAlways(
@@ -364,8 +362,8 @@ exports.albums = (() => {
     let alb = {};
 
     alb.rows = i => exports.rows().get(i).$$(
-        '[data-ng-repeat="track in recording.tracks"], ' +
-        '.work-recordings-table2 > .work-recordings-table2-tr'
+        '[data-ng-repeat="track in recordingLink.recording.tracks.$getItems()"], ' +
+        '.content-border2 > .content-border2-tr'
     );
 
     alb.validateRowCount = (i, val) => expect(alb.rows(i).count()).toBe(val);
@@ -460,7 +458,7 @@ exports.albums = (() => {
     // ---
 
     alb.trackNumberInput = (i, j) => alb.rows(i).get(j).element(by.model(
-        'track.track_number'
+        'track.trackNumber'
     ));
 
     alb.enterTrackNumber = (i, j, val) => asAlways(
@@ -496,7 +494,7 @@ exports.albums = (() => {
     // ---
 
     alb.removeButton = (i, j) => alb.rows(i).get(j).$(
-        '.work-recordings-table2-td-remove'
+        '.content-border.m-remove'
     );
 
     alb.remove = (i, j) => asAlways(
@@ -506,7 +504,7 @@ exports.albums = (() => {
     // ---
 
     alb.toggleButton = (i, j) => alb.rows(i).get(j).$(
-        '.work-recordings-table2-td-chevron'
+        '.fa fa-angle-up.fa-angle-down'
     );
 
     alb.toggle = (i, j) => asAlways(

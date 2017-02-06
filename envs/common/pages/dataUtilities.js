@@ -182,7 +182,7 @@ exports.clickCancelLink = function() {
 
 exports.clickSaveLink = function() {
     $('.EDITOR .btn-primary').click();
-    pages.base.waitForAjax();
+   pages.base.waitForAjax();
 };
 
 exports.checkSaveAndRevert = function (propName, propValue) {
@@ -211,11 +211,14 @@ exports.checkSaveAndRevert = function (propName, propValue) {
         exports.clickSaveLink();
         exports.expectPropertyToBe(propName, propValue);
 
+
+
         exports.clickEditButton();
         browser.sleep(2000);
         exports.editProperty(propName, propInitialValue);
         browser.sleep(2000);
         exports.clickSaveLink();
+        exports.expectPropertyToBe(propName, propInitialValue);
 
     });
 
