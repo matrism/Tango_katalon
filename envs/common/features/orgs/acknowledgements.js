@@ -51,7 +51,7 @@ var data = {
         creationDate: '2013-05-02'
     },
     workEvent: {
-        workId: 'WW 001136936 00',
+        workId: 'WW 010072251 00',
         status: 'Rejected (RC)',
         message: 'BMI records indicate that controlled ' +
             'publisher is administered by another BMI publisher.',
@@ -84,6 +84,7 @@ exports.feature = [
                     this.enterUsername(0, data.sftp.username);
                     this.enterPassword(0, data.sftp.password);
                     this.selectDeliveryMethod(1, 'FTP');
+                    steps.base.sleep(5000);
                     this.enterAddress(1, data.ftp.address);
                     this.enterDirectory(1, data.ftp.directory);
                     this.enterPort(1, data.ftp.port);
