@@ -11,10 +11,10 @@ if (pages.createDealContractPeriod === undefined) {
             startDate: {css: "div#actualStartDate input"},
             endTargetMonths: {name: "targetEndDuration"},
             actualEndDate: {css: "div#actualEndDate input"},
-            contractPeriodArea: {css: "div[data-tg-modular-edit-id='contractPeriod']"},
+            contractPeriodArea: {css: 'div.js-details-column div.details.FORM.DETAIL.ng-scope'},
             contractPeriodModalDialog: {css: "div.modal-dialog.ng-scope"},
             cancelContractPeriodModalDialog: {css: "div.modal-footer a[data-ng-click='cancel()']"},
-            newContractPeriodModalDialog: {xpath: "//*[@class='modal-footer']//button[contains(text(),'New Contract Period')]"},
+            newContractPeriodModalDialog: {css: 'div.modal-footer button[data-ng-click="ok('+"'"+"addNew"+"'"+')"]'},
             terminateDealContractPeriodModalDialog: {css: "div.modal-footer button[data-ng-click='data.terminate()']"},
             addMdrcLink: {css: "a[data-ng-click='addCommitment()']"},
             incompleteMdrc: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-class='{ active: !mdrc.is_completed && !mdrc.showDeemedCompleteDetails }']"},
@@ -106,6 +106,11 @@ if (pages.createDealContractPeriod === undefined) {
             cancelAssumptionsButton: {css: "div.footer-buttons a[data-ng-click='cancelAssumptionChanges(form.terms.activeCp.id, assumption.id);']"}
         },
 
+        specifyDateLink: function (){
+
+            return $('.ng-valid-previous-cp-has-valid-target-end-date .control-group span[data-ng-if="!modularEditModels.model.target_end_date_override"]');
+        },
+
         deleteEndRuleButton: function (i) {
             return $$('[data-ng-click="showDeleteEndRuleModal(form.show.endRules.containerId, form.show.endRules.type, rule.id)"]').get(i - 1);
         },
@@ -157,9 +162,9 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         addTheNewContractPeriodDialog: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.contractPeriodModalDialog));
+            //browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.contractPeriodModalDialog));
             pages.createDealContractPeriod.elems.newContractPeriodModalDialog.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.createDealContractPeriod.elems.newContractPeriodModalDialog));
+            //browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.newContractPeriodModalDialog));
         },
 
         clickOnAddMdrcLink: function () {

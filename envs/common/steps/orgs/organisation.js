@@ -66,6 +66,7 @@ if (steps.organisation === undefined) {
         executeRegistrationRun: function (value, date, org) {
             it('Execute Registration Run', function () {
                 pages.organisation.registrationCanBeRun().then(function (isVisible) {
+                    console.log(isVisible);
                     if (isVisible.toString() == 'true') {
                         pages.organisation.clickExecuteRegistrationRunButton();
                     }
@@ -168,6 +169,7 @@ if (steps.organisation === undefined) {
             it("Verify That list work id is delivered", function () {
                 pages.organisation.listWorkIdNumberRegRun().then( function (workNumber) {
                     hash.testVariables['work id'] = workNumber;
+                    console.log(hash.testVariables['work id']);
                     hash.workNumber = workNumber;
                     expect(workNumber).toBeTruthy();
                 });
@@ -1059,6 +1061,7 @@ pageStep([
         'Confirm Remove All',
         'Save section',
         ['Delivery', [
+            'Delete Row',
             'Add method',
             'Select Method',
             'Enter Email Primary Email',
@@ -1071,7 +1074,8 @@ pageStep([
             'Enter Notification Primary Email',
             'Enter Notification CC Email',
             'Enter Third Party Recipient',
-            'Select first Third Party Recipient'
+            'Select first Third Party Recipient',
+            'Delete Confirm Dialog'
         ]],
         ['Ack', [
             'Select acknowledgement type',
@@ -1127,12 +1131,14 @@ exports.registration.resetDeliveryInfo = function(data) {
             using(steps.organisation.registration, function() {
                 this.editSection();
                 this.selectIsRegistrationRecipient('No');
+                steps.base.sleep(5000);
                 this.confirmRemoveAll();
                 this.selectIsRegistrationRecipient('Yes');
                 using(this.delivery, function() {
                     this.addMethod();
                     this.selectMethod(0, 'Email');
                     this.enterEmailPrimaryEmail(0, data.email.primary);
+                    this.selectNotification(0, data.email.notification);
                     this.addMethod();
                     this.selectMethod(1, 'FTP');
                     this.enterAddress(0, data.ftp.address);
@@ -1140,7 +1146,7 @@ exports.registration.resetDeliveryInfo = function(data) {
                     this.enterPort(0, data.ftp.port);
                     this.enterUsername(0, data.ftp.username);
                     this.enterPassword(0, data.ftp.password);
-                    this.selectNotification(0, data.ftp.notification);
+                    this.selectNotification(1, data.ftp.notification);
                     this.enterNotificationPrimaryEmail(0, data.ftp.notificationPrimaryEmail);
                     this.enterNotificationCcEmail(0, data.ftp.notificationCcEmail);
                     this.addMethod();
@@ -1150,15 +1156,20 @@ exports.registration.resetDeliveryInfo = function(data) {
                     this.enterPort(1, data.sftp.port);
                     this.enterUsername(1, data.sftp.username);
                     this.enterPassword(1, data.sftp.password);
-                    this.selectNotification(1, data.sftp.notification);
+                    this.selectNotification(2, data.sftp.notification);
                     this.enterNotificationPrimaryEmail(1, data.sftp.notificationPrimaryEmail);
                     this.enterNotificationCcEmail(1, data.sftp.notificationCcEmail);
                     this.addMethod();
                     this.selectMethod(3, '3rd Party');
                     this.enterThirdPartyRecipient(0, data.thirdParty);
-                    steps.base.sleep(200);
                     steps.base.waitForAjax();
+                    steps.base.sleep('5000');
                     this.selectFirstThirdPartyRecipient();
+                    this.deleteRow(4);
+                    steps.base.sleep('5000');
+                    this.deleteConfirmDialog('Yes')
+
+
                 });
                 using(this.ack, function() {
                     this.selectAcknowledgementType('Multiple');

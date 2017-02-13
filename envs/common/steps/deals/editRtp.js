@@ -107,13 +107,13 @@ exports.saveRetentionFromAcquisition = function () {
 
 exports.clickOnAddPostTermCollectionFromRetention = function (i) {
     it('Click on the add post term collection from retention #' + (i + 1), function () {
-        pages.editDealRtp.editClickOnTheAddPostTermPeriodFromRetention(i);
+        pages.editDealRtp.editClickOnTheAddPostTermPeriodFromRetention();
     });
 };
 
 exports.editFillIntoDurationFieldPostTermCollectionFromRetention = function (i, j) {
     it('Edit fill into the duration field post term collection #' + (j + 1) +' from retention #' + (i + 1), function () {
-        pages.editDealRtp.editFillIntoTheDurationFieldPostTermCollectionFromRetention(i, j);
+        pages.editDealRtp.editFillTheDurationFieldPostTermCollectionFromRetention(i, j);
     });
 };
 

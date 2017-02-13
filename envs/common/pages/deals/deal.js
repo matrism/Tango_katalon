@@ -13,10 +13,10 @@ if (pages.deal === undefined) {
             generalHeader: {css: ".nav-tabs>li:nth-child(1)>a"},
             termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
             payeesHeader: {css: ".nav-tabs>li:nth-child(3)>a"},
-            contractPeriodsScopesHeaderLink: {css: "div[name='termsForm'] a[data-ng-class='{ active: form.show.section.cps }']"},
+            contractPeriodsScopesHeaderLink: {css: "a.pull-left.active"},
             contractPeriodsTitle: {css: "div[data-ng-form='termsForm'] div.row div.span3.column:nth-child(1) h3"},
-            rightsTermPeriodsHeaderLink: {css: "div[name='termsForm'] a[data-ng-class='{ active: form.show.section.rtp }']"},
-            addAnotherRightsTermPeriodLink: {css: "a[data-ng-click='addRightsTermPeriodSet()']"},
+            rightsTermPeriodsHeaderLink: {css: "a.pull-left"},
+            addAnotherRightsTermPeriodLink: {css: "a[ng-click='addRightsTermPeriodSet()']"},
             dealGeneralSummaryHeader: {css: "a[ui-sref='deal.view.general.summary']"},
             scopeHeader: {css: ".scope-heading"},
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
@@ -32,6 +32,12 @@ if (pages.deal === undefined) {
 
 
         //TODO DSP locators are bad , dom can change between wait calls and locators keep a cached version
+
+        termPeriodsHeaderlink: function () {
+            return $$('a.pull-left');
+        },
+
+
         scopeHeaderElements: function () {
             return $$('.scope-heading');
 
@@ -86,7 +92,9 @@ if (pages.deal === undefined) {
         },
 
         goToTheRightsTermPeriodsHeaderLink: function () {
-            pages.deal.elems.rightsTermPeriodsHeaderLink.click();
+            var el = pages.deal.termPeriodsHeaderlink().get(1);
+            el.click();
+
         },
 
         goToPayeesDealDetails: function () {

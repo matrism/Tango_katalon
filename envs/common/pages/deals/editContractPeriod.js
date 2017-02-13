@@ -7,17 +7,17 @@ if (pages.editDealContractPeriod === undefined) {
     exports = module.exports = pages.editDealContractPeriod = new ftf.pageObject({
 
         locators: {
-            editContractPeriodAreaElement: {css: "div[data-tg-modular-edit-id='contractPeriod'] div.DETAIL.ng-scope"},
-            editContractPeriodIcon: {css: "div[data-tg-modular-edit-id='contractPeriod'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i"},
+            editContractPeriodAreaElement: {css: "div[tg-modular-edit-id='contractPeriodModularEdit'] div.DETAIL.ng-scope"},
+            editContractPeriodIcon: {css: "div[tg-modular-edit-id='contractPeriodModularEdit'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i"},
             editActualEndDateField: {css: "div#actualEndDate input"},
-            editContractPeriodAreaEditMode: {css: "div[data-tg-modular-edit-id='contractPeriod']"},
+            editContractPeriodAreaEditMode: {css: "div[tg-modular-edit-id='contractPeriodModularEdit']"},
             editContractPeriodModalDialog: {css: "div.modal-dialog.ng-scope"},
             editCancelContractPeriodModalDialog: {css: "div.modal-footer a[data-ng-click='cancel()']"},
             editNewContractPeriodModalDialog: {xpath: "//*[@class='modal-footer']//button[contains(text(),'New Contract Period')]"},
             editTerminateDealContractPeriodModalDialog: {css: "div.modal-footer button[data-ng-click='data.terminate()']"},
             editEndTargetMonths: {name: "targetEndDuration"},
             editSaveAllContractPeriodButton: {css: "button[data-ng-click='saveFreshlyAddedModel(valid, activeForm)']"},
-            editAddContractPeriodElem: {css: "div.deal-terms-affix a[data-ng-click='addContractPeriod()']"},
+            editAddContractPeriodElem: {css: "div.deal-terms-affix a[ng-click='addContractPeriod()'] i.fa-plus"},
             //end rules
 
             editEndRulesAreaElement: {css: "div[data-ng-show='!activeContractPeriod.showEndRules && isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
@@ -95,7 +95,7 @@ if (pages.editDealContractPeriod === undefined) {
          },
 
         selectTheContractPeriodNumberI: function (i) {
-            browser.driver.findElement(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
+            browser.driver.findElement(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
         },
 
         checkTheContractPeriodNumberIIsDisplayed: function (i) {
