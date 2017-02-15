@@ -671,7 +671,6 @@ if (pages.organisation === undefined) {
             this.modalSuccessConfirmButton().click();
         },
         registrationCanBeRun: function () {
-            //browser.wait(ExpectedConditions.visibilityOf(this.registrationRunButton()));
             return this.executeRegistrationIsActive();
         },
         successDialogIsPresent: function () {

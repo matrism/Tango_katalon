@@ -49,28 +49,28 @@ if (pages.createDealContractPeriod === undefined) {
             mdrcCancelLink: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem a[data-ng-click='cancelCommitmentChanges(form.terms.activeCp.id, mdrc.id);']"},
             mdrcDeleteButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"},
             //end rules
-            endRulesTooltip: {css: "div.section-header-borderless.end-rules i"},
-            rulesForEndDateTextEndRules: {css: "div[data-ng-form='rulesForm'] h4.cp-header"},
-            rulesForEndDateDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] h4.cp-header i"},
-            summaryOfEndRulesTitleTextEndRules: {css: "div[data-ng-form='rulesForm'] div.summary-end-rules p.title"},
-            summaryOfEndRulesDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.summary-end-rules p.title i"},
-            rulesTitleTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins"},
-            rulesTitleDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins i"},
-            errorMissingFieldsEndRulesMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p[data-ng-if='!rulesForm.$valid']"},
-            endDateDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(2) i"},
-            accountingPeriodEndCheckBoxEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div input[data-ng-model='rule.period_end']"},
-            accountingPeriodEndDataTooltipTextEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) span i"},
-            offsetByInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.offset']"},
-            offsetByArrowChoiceEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
-            variableLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(1) label.control-label i"},
-            attributeLeftDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(3) label.control-label i"},
-            withNoticeDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(4) label.control-label i"},
-            withNoticeCheckBoxEndRules: {css: "div[data-ng-form='conditionForm']:nth-child(3) div.pull-left.conditions div:nth-child(4) input[data-ng-model='condition.notification']"},
-            requirementDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(5) label.control-label i"},
-            variableRightDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(6) label.control-label i"},
-            attributeRightDataTooltipTextEndRules: {css: "div[data-ng-form='conditionForm'] div.pull-left.conditions div:nth-child(7) label.control-label i"},
-            preDefinedDateInputFieldEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[name='endDateTypeDate'] input"},
-            preDefinedDateMandatoryErrorMessageEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) div[data-validation-class='endDateTypeDate'] i"},
+            endRulesTooltip: {css: "div.EDITOR.active.end-rules-popup h4"},
+            rulesForEndDateTextEndRules: {css: "div[ng-form='rulesForm'] h4.cp-header"},
+            rulesForEndDateDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] h4.cp-header i"},
+            summaryOfEndRulesTitleTextEndRules: {css: "div[ng-form='rulesForm'] div.summary-end-rules p.title"},
+            summaryOfEndRulesDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] div.summary-end-rules p.title i"},
+            rulesTitleTextEndRules: {css: "div[ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins"},
+            rulesTitleDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins i"},
+            errorMissingFieldsEndRulesMessageEndRules: {css: "div[ng-form='rulesForm'] div.end-rules p[data-ng-if='!rulesForm.$valid']"},
+            endDateDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(2) i"},
+            accountingPeriodEndCheckBoxEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div input[ng-model='rule.accountingPeriodEnd']"},
+            accountingPeriodEndDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) span i"},
+            offsetByInputFieldEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) input[data-ng-model='rule.offset']"},
+            offsetByArrowChoiceEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
+            variableLeftDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(1) label.control-label i"},
+            attributeLeftDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(3) label.control-label i"},
+            withNoticeDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(4) label.control-label i"},
+            withNoticeCheckBoxEndRules: {css: "div[ng-form='conditionForm']:nth-child(3) div.pull-left.conditions div:nth-child(4) input[data-ng-model='condition.notification']"},
+            requirementDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(5) label.control-label i"},
+            variableRightDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(6) label.control-label i"},
+            attributeRightDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(7) label.control-label i"},
+            preDefinedDateInputFieldEndRules: {css: "div[ng-form='ruleForm'] div.clearfix.rule-header div[name='endDateTypeDate'] input"},
+            preDefinedDateMandatoryErrorMessageEndRules: {css: "div[ng-form='ruleForm'] div.clearfix.rule-header div[tg-model-class-validation='rule.endDateType.attrValue'] i"},
             preDefinedDateAttributeRightMandatoryErrorMessageEndRules: {css: "div.span2.attribute-two div i"},
             addEndRulesLink: {css: "a[data-ng-show='!activeContractPeriod.showEndRules && !isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
             endDateFieldButtonEndRules: {css: "div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button"},
@@ -162,9 +162,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         addTheNewContractPeriodDialog: function () {
-            //browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.contractPeriodModalDialog));
             pages.createDealContractPeriod.elems.newContractPeriodModalDialog.click();
-            //browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.newContractPeriodModalDialog));
         },
 
         clickOnAddMdrcLink: function () {
@@ -371,8 +369,8 @@ if (pages.createDealContractPeriod === undefined) {
 
         selectTheEndDateEndRulesSpecificValueRuleNumberI: function (i, value) {
             var desiredOption;
-            pages.base.scrollIntoView(element(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button")));
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button")).click();
+            pages.base.scrollIntoView(element(By.css("div[ng-form='ruleForm'] div[ng-model='rule.endDateType.code'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[ng-form='ruleForm'] div[ng-model='rule.endDateType.code'] div.tg-dropdown-button")).click();
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
@@ -875,7 +873,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         validateThePreDefinedDateFieldEndRulesIsRequiredWarning: function (error_message) {
-            pages.createDealContractPeriod.elems.preDefinedDateMandatoryErrorMessageEndRules.getAttribute("data-tooltip").
+            pages.createDealContractPeriod.elems.preDefinedDateMandatoryErrorMessageEndRules.getAttribute("tooltip").
                 then(function (promise) {
                     console.log("Pre defined date error message data tooltip text  is   : " + promise);
                     expect(promise).toEqual(error_message);
@@ -895,8 +893,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         fillIntoThePreDefinedDateFieldEndRulesSpecificDateRuleNumberI: function (i, specific_date) {
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).clear();
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).sendKeys(specific_date);
+            browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).clear();
+            browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div.clearfix.rule-header div[name='endDateTypeDate'] input")).sendKeys(specific_date);
         },
 
         fillIntoTheOffsetByInputFieldEndRules: function () {

@@ -25,7 +25,6 @@ exports.feature = [
             steps.headerDeal.checkExactContractTypeValue("");
             steps.headerDeal.checkTerritoriesText();
             steps.headerDeal.checkOwnershipText();
-            steps.base.sleep(5000);
             steps.headerDeal.checkOwnershipValue("None");
             steps.headerDeal.checkAdministrationText();
             steps.headerDeal.checkAdministrationValue("None");
@@ -59,7 +58,6 @@ exports.feature = [
             steps.headerDeal.checkContractTypeValue("Joint Venture");
             steps.headerDeal.checkContractTypeValue("Purchase");
             steps.headerDeal.checkContractTypeValue("Assignment");
-            steps.base.sleep(5000);
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editExistingContractingParty("ascap");
@@ -158,7 +156,6 @@ exports.feature = [
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-02-12");
             steps.createDealContractPeriod.fillActualEndDateFieldSpecificValue("2014-03-21");
-            steps.base.sleep(10000);
             steps.createDealContractPeriod.addNewContractPeriodDialog();
             steps.createDealContractPeriod.fillEndTargetMonths();
             steps.deal.itContinueToNextPage();
@@ -172,7 +169,7 @@ exports.feature = [
             steps.headerDeal.checkStartDateValue("2014-02-12");
             steps.headerDeal.checkEndDateText();
             steps.headerDeal.checkEndDateValue("");
-            steps.base.sleep(10000);
+
             steps.editDealContractPeriod.editAddNewContractPeriod();
             steps.editDealContractPeriod.editFillEndTargetMonths();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
@@ -228,7 +225,7 @@ exports.feature = [
             steps.headerDeal.checkSigningTerritoryValue("Argentina");
             steps.headerDeal.checkLastUpdateText();
             steps.headerDeal.checkLastUpdateValue(currentDate);
-            //steps.headerDeal.clickOnLastUpdateValueAndCheckTheAuditLogScreen();
+            
 
         }
     },
@@ -236,7 +233,7 @@ exports.feature = [
     {
         name: "Open a deal check last update made some changes and check again last updated in deal header",
         tags: ["header_contract_status"],
-        steps: criticalScenario(() => {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.clickOnDraftContractStatus();
             steps.deal.itContinueToNextPage();
@@ -263,7 +260,7 @@ exports.feature = [
             steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2016-08-08");
             steps.editDealRtp.editSaveAcquisitionArea();
             steps.headerDeal.checkStatusText();
-            //steps.headerDeal.checkStatusValue("Pre Term");
+
 
             steps.editDealRtp.editClickOnAddAnotherAcquisitionPeriodLink();
             steps.editDealRtp.editFillIntoAcquisitionActualStartDateField("2014-04-05");
@@ -292,7 +289,7 @@ exports.feature = [
             //
             steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
             steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(3, "Conditional Duration");
-            steps.base.sleep(5000);
+
             steps.editDealRtp.editFillIntoActualEndDateFieldRetentionFromAcquisition("2016-12-31");
             steps.editDealRtp.saveRetentionFromAcquisition();
             steps.editDealRtp.clickOnAddPostTermCollectionFromRetention();
@@ -302,7 +299,7 @@ exports.feature = [
             steps.headerDeal.checkStatusValue("Post Term Collection");
 
 
-        })
+        }
     }
 
 

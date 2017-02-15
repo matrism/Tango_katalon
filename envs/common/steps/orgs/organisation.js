@@ -1163,10 +1163,9 @@ exports.registration.resetDeliveryInfo = function(data) {
                     this.selectMethod(3, '3rd Party');
                     this.enterThirdPartyRecipient(0, data.thirdParty);
                     steps.base.waitForAjax();
-                    steps.base.sleep('5000');
+
                     this.selectFirstThirdPartyRecipient();
                     this.deleteRow(4);
-                    steps.base.sleep('5000');
                     this.deleteConfirmDialog('Yes')
 
 

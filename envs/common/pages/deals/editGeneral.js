@@ -347,11 +347,8 @@ if (pages.editDealGeneral === undefined) {
         },
 
         clickOnTheSaveEditGeneralLeftTabArea: function () {
-            //browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.saveEditLeftGeneralTabArea));
             pages.editDealGeneral.elems.saveEditLeftGeneralTabArea.click();
             pages.editDealGeneral.waitForAjax();
-            //browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editContractingPartyElement));
-            //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
         },
 
         clickOnTheCancelEditGeneralLeftTabArea: function () {
