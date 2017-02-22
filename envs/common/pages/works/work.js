@@ -24,16 +24,17 @@ exports.workSearchTermsInput = function () {
     return pages.base.mainSearchBar().element(by.model('$term'));
 };
 exports.noResultsForWorkSearchMessage = function () {
-    return pages.base.mainSearchBar().$('[data-ng-if="$dataSets[0].data.noResults"]');
+    return pages.base.mainSearchBar().$('[ng-if="!$dataSets[0].queried.matches.length"]');
 };
 exports.addAnotherWorkSearchTermOption = function () {
-    return pages.base.mainSearchBar().$('[data-ng-click="selectFilterMatch($term);"]');
+    return pages.base.mainSearchBar().$('[ng-click="selectFilterMatch($term);"]');
 };
 exports.removeWorkSearchTermButton = function (i) {
     return pages.base.mainSearchBar().$$('.tg-typeahead__tag-remove').get(i);
 };
 exports.workSearchMatches = function () {
     return pages.base.mainSearchBar().$$('.tg-typeahead__suggestions-group-item');
+    console.log(workSearchMatches);
 };
 exports.workSearchMatch = function (i) {
     return exports.workSearchMatches().get(i);
@@ -51,13 +52,14 @@ exports.expectWorkSearchMatchCountNotToBe = function (value) {
     expect(exports.workSearchMatchCount()).not.toBe(value);
 };
 exports.workSearchMatchMainLabelBinding = function (i) {
-    return exports.workSearchMatch(i).$('.tg-typeahead__item-left');
+    return exports.workSearchMatch(i).$('.cf-col-8.cf-start.cf-break-all');
 };
 exports.workSearchMatchMainLabelParts = function (i) {
     return (
-        pph.getAllText(exports.workSearchMatchMainLabelBinding(i)).then(
-            function (value) {
-                var reResult = /^(.+?) - \((.+?)\)( \(Alt\) (.+?))?$/.exec(value);
+        pph.getAllText(exports.workSearchMatchMainLabelBinding(i)).then(        	
+            function (value) { 
+                var reResult = /^(.+?) - \((.+?)\)?$/.exec(value);
+                // will be used once the bug is fixed /^(.+?) - \((.+?)\)(\(Alt\) (.+?))?$/
                 return {
                     title: reResult[1],
                     alternateTitle: reResult[4],
@@ -1154,7 +1156,7 @@ exports.selectRandomCreatorSuggestion = function () {
         deferredIpiNumber = promise.defer();
         result.ipiNumber = deferredIpiNumber.promise;
 
-        randomSuggestionResultRight = randomSuggestion.$('.typeahead-result-right');
+        randomSuggestionResultRight = randomSuggestion.$('.cf-col-4.m-no-padding.cf-end.ng-binding');
 
         randomSuggestionResultRight.isPresent().then(function (hasResultRight) {
             if (!hasResultRight) {

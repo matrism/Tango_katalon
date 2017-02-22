@@ -27,12 +27,12 @@ exports.feature = [
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BEYOND THE VEIL"]],
 
-            [steps.work.enterWorkSearchTerms, ['WW 008825773 00']],
+            [steps.work.enterWorkSearchTerms, ['WW 015001125 00']],
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
-            [steps.work.expectWorkSearchMatchTitleToBe, [0, "COLD MOUNTAIN"]],
+            [steps.work.expectWorkSearchMatchTitleToBe, [0, "COLD MOUNTAIN 55555 LILIA CHANGE"]],
 
-            [steps.work.enterWorkSearchTerms, ['WW 008751880 00']],
+            [steps.work.enterWorkSearchTerms, ['WW 015003969 00']],
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BLUE SAILS UPON A SILVER SEA"]],
@@ -57,12 +57,12 @@ exports.feature = [
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BEYOND THE VEIL"]],
 
-            [steps.work.enterWorkSearchTerms, ['008825773']],
+            [steps.work.enterWorkSearchTerms, ['015001125']],
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
-            [steps.work.expectWorkSearchMatchTitleToBe, [0, "COLD MOUNTAIN"]],
+            [steps.work.expectWorkSearchMatchTitleToBe, [0, "COLD MOUNTAIN 55555 LILIA CHANGE"]],
 
-            [steps.work.enterWorkSearchTerms, ['008751880']],
+            [steps.work.enterWorkSearchTerms, ['015003969']],
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BLUE SAILS UPON A SILVER SEA"]],
