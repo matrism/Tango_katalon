@@ -126,13 +126,13 @@ exports.editClickOnAddAnotherAcquisitionPeriodLink = function () {
 
 exports.scrollIntoViewAddEndRuleToRetention = function(){
   it("Edit - scroll into view add end rule to retention ", function(){
-      pages.base.scrollIntoView(element(by.css("div[data-ng-if='retentionFormSection.detail'] div.aquisition-details")));
+      pages.base.scrollIntoView(element(by.css("div[tg-modular-view='detail'] div.right-terms-period-details")));
   });
 };
 
 exports.scrollIntoViewAddEndRuleToRetentionEditMode = function(){
     it("Edit - scroll into view add end rule to retention ", function(){
-        pages.base.scrollIntoView(element(by.css("div[data-ng-if='retentionFormSection.edit'] select#retention_duration_type")));
+        pages.base.scrollIntoView(element(by.css("div[tg-modular-edit-id='retentionModulatEdit'] select#retentionDurationType")));
     });
 };
 
@@ -187,9 +187,9 @@ exports.editFillIntoOffsetByInputFieldEndRulesRuleNumberI = function (i) {
     });
 };
 
-exports.editSelectRandomOptionFromOffsetByChoiceEndRules = function () {
+exports.editSelectRandomOptionFromOffsetByChoiceEndRules = function (i) {
     it("Edit select the random option from offset by choice end date end rules ", function () {
-        pages.editDealRtp.editSelectTheRandomOptionFromOffsetByChoiceEndRules();
+        pages.editDealRtp.editSelectTheRandomOptionFromOffsetByChoiceEndRules(i);
     });
 };
 

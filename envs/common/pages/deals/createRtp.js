@@ -18,7 +18,7 @@ if (pages.createDealRtp === undefined) {
             applyScopeAcquisitionButton: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
             acquisitionActualEndDate: {css: "div[name='acquisitionEndDate'] input"},
             acquisitionActualStartDate: {css: "div[name='acquisitionStartDate'] input"},
-            addRetentionPeriodLinkFromAcquisition: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) a[data-ng-click='addRetentionRightsTermPeriod(rtps.id)']"},
+            addRetentionPeriodLinkFromAcquisition: {css: "a[ng-click='rightsTermPeriodSet.addPeriod(constants.RETENTION)']"},
             addPostTermPeriodLinkFromAcquisition: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) a[data-ng-click='addPostTermCollectionRightsTermPeriod(rtps.id)']"},
             addEndRulesLinkRtpRetention2FromAcquisition: {css: "div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(3) div.aquisition-period.clearfix.retention.ng-scope div[data-watched-init='endRulesAreDirty = isEndRuleDirty(rtp.end_rules[0])'] a"},
             postTermPeriodDescriptionFromAcquisition: {css: "div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(6) div[data-name='postTermRtpForm'] input[data-ng-model='rtp.description']"},
@@ -26,13 +26,13 @@ if (pages.createDealRtp === undefined) {
         },
 
         addEndRulesButton: function () {
-            return element.all(by.css('a[data-ng-click="showEndRules(rtp.id, \'rtp\')"]')).filter(function (el) {
+            return element.all(by.css('a[ng-click="showEndRules(tgModularEditModel, tgModularViewMethods.switchToView)"]')).filter(function (el) {
                     return el.isDisplayed();
                 }).first();
         },
 
         summaryEndRule: function (i) {
-            return $$('[data-ng-repeat="endRule in rtp.end_rules"] .rule-summary').get(i - 1);
+            return $$('[ng-repeat="endRule in tgModularEditModel.endRulesWrapper.endRules.$getItems()"] .rule-summary').get(i - 1);
         },
 
         selectTheRtpAllContractPeriods: function () {
@@ -163,7 +163,7 @@ if (pages.createDealRtp === undefined) {
 
         selectTheSpecificDurationTypeRetentionFromAcquisitionNumberI: function (i, durationType) {
             var desiredOption;
-            browser.driver.findElements(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope select#retention_duration_type option"))
+            browser.driver.findElements(by.css("select[id='retentionDurationType'] option:nth-child(" + (i + 1) + ")"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
