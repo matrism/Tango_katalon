@@ -7,8 +7,8 @@ if (pages.editDealGeneral === undefined) {
     pages.editDealGeneral = new ftf.pageObject({
 
         locators: {
-            editGeneralLeftFirstFourFieldsArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.DETAIL.ng-scope"},
-            editGeneralLeftFirstFourFieldsEditorIcon: {css: "div[data-tg-modular-edit-id='generalLeft'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
+            editGeneralLeftFirstFourFieldsArea: {css: "div[tg-modular-edit-model-holder='{model: generalView.summaryLeft}'] div.DETAIL.ng-scope"},
+            editGeneralLeftFirstFourFieldsEditorIcon: {css: "div[tg-modular-edit-model-holder='{model: generalView.summaryLeft}'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             removeExistingContractPartyIcon: {css: "span[ng-click='!$isDisabled() && $removeTag($tag)']"},
             editContractingPartyElement: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass']"},
             editContractingPartyInputField: {css: "div[name='contractingParties'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
@@ -17,7 +17,7 @@ if (pages.editDealGeneral === undefined) {
             editExecutionDateYearElement: {css: "input[data-ng-model='date.year']"},
             editExecutionDateMonthElement: {css: "input[data-ng-model='date.month']"},
             editExecutionDateDayElement: {css: "input[data-ng-model='date.day']"},
-            saveEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+            saveEditLeftGeneralTabArea: {css: "div[tg-modular-edit-model-holder='{model: generalView.summaryLeft}'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
             cancelEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
             internalContactTitle: {css: "div.ng-scope div.span12.nomargins:nth-child(3) h2"},
             internalContactsArea: {css: "div.ng-scope div.span12.nomargins:nth-child(3)"},
@@ -347,11 +347,8 @@ if (pages.editDealGeneral === undefined) {
         },
 
         clickOnTheSaveEditGeneralLeftTabArea: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.saveEditLeftGeneralTabArea));
             pages.editDealGeneral.elems.saveEditLeftGeneralTabArea.click();
             pages.editDealGeneral.waitForAjax();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealGeneral.elems.editContractingPartyElement));
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.span6.editor-left.modular-edit.ng-valid.ng-scope.ng-pristine"))));
         },
 
         clickOnTheCancelEditGeneralLeftTabArea: function () {

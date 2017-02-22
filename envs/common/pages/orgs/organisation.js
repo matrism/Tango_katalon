@@ -312,11 +312,11 @@ if (pages.organisation === undefined) {
         },
         activeRegistrationRunButton: function () {
             return element(by.cssContainingText(
-                '#ACTIVITY-HEADER button:not(.disabled)', 'Execute Registration Run'
+                '.ACTIVITY-HEADER button:not(.disabled)', 'Execute Registration Run'
             ));
         },
         registrationRunButton: function () {
-            return $("#ACTIVITY-RECORDS>#ACTIVITY-HEADER>div.text-right>button:last-child");
+            return $$(".ACTIVITY-RECORDS .ACTIVITY-HEADER div.text-right button[data-ng-click='canExecuteStackedWorks() && executeStackedWorks();']");
         },
         validationErrorsSortFilter: function () {
             return $$(".ACTIVITY-HEADER>div.text-right a.dropdown-toggle").first().getText();
@@ -671,7 +671,6 @@ if (pages.organisation === undefined) {
             this.modalSuccessConfirmButton().click();
         },
         registrationCanBeRun: function () {
-            browser.wait(ExpectedConditions.visibilityOf(this.registrationRunButton()));
             return this.executeRegistrationIsActive();
         },
         successDialogIsPresent: function () {
@@ -1115,9 +1114,7 @@ exports.registration = (function () {
     };
 
     registration.modalRemoveAllConfirmation = function () {
-        return element(by.cssContainingText(
-            '.modal-footer button', 'Yes'
-        ));
+        return $('.modal-footer button[ng-click="ok();"]');
     };
 
     registration.confirmRemoveAll = function () {
@@ -1145,12 +1142,34 @@ exports.registration = (function () {
 
     registration.delivery = (function () {
         var delivery = {};
+
+        delivery.rows = function () {
+            return $$('.e2e-reg-delivery-method');
+        };
+
+        delivery.deleteRowButton = function (i) {
+            return delivery.rows().get(i).$('.e2e-method-remove');
+        };
+
+        delivery.deleteRow = function (i) {
+            var element = delivery.deleteRowButton(i);
+            pages.base.scrollIntoView(element);
+            return element.click();
+        };
+
+        delivery.deleteConfirmDialog = function(value) {
+            var element = $('.modal-dialog .modal-footer');
+            return element.all(
+                by.cssContainingText('button', value)
+            ).get(0).click();
+
+        };
         
         delivery.addMethodButton = function () {
             return $('.e2e-method-add');
         };
         delivery.deliveryMethodSelect = function (i) {
-            return element.all(by.model('deliveryMethod.type')).get(i);
+            return element.all(by.model('deliveryMethod.deliveryMechanismType')).get(i);
         };
         delivery.emailPrimaryEmailInput = function (i) {
             return $$('.e2e-method-email .e2e-method-primary-email input').get(i);
@@ -1171,13 +1190,13 @@ exports.registration = (function () {
             return $$('.e2e-method-password input').get(i);
         };
         delivery.notificationSelect = function (i) {
-            return $$('.e2e-method-ftp .e2e-method-notification').get(i);
+            return $$('.e2e-method-notification .btn-group').get(i);
         };
         delivery.notificationPrimaryEmailInput = function (i) {
-            return $$('.e2e-method-ftp .e2e-method-primary-email input').get(i);
+            return $$('.e2e-method-notification-emails .e2e-method-primary-email input').get(i);
         };
         delivery.notificationCcEmailInput = function (i) {
-            return $$('.e2e-method-ftp .e2e-method-cc-email input').get(i);
+            return $$('.ng-scope .e2e-method-cc-email input').get(i);
         };
         delivery.thirdPartyRecipientInput = function (i) {
             return $$('.e2e-method-3rd-party input').get(i);
@@ -1231,7 +1250,7 @@ exports.registration = (function () {
             var element = delivery.notificationSelect(i);
             return element.all(
                 by.cssContainingText('button', value)
-            ).get(0).click();
+            ).click();
         };
         delivery.enterNotificationPrimaryEmail = function (i, value) {
             var element = delivery.notificationPrimaryEmailInput(i);

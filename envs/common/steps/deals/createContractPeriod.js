@@ -32,6 +32,7 @@ exports.fillActualEndDateField = function () {
 exports.fillActualEndDateFieldSpecificValue = function (actualDate) {
     it("Fill actual end date field ", function () {
         pages.createDealContractPeriod.fillEndActualDateSpecificValue(actualDate);
+
     });
 };
 

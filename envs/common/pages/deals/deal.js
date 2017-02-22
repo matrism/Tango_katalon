@@ -32,6 +32,12 @@ if (pages.deal === undefined) {
 
 
         //TODO DSP locators are bad , dom can change between wait calls and locators keep a cached version
+
+        termPeriodsHeaderlink: function () {
+            return $$('a.pull-left');
+        },
+
+
         scopeHeaderElements: function () {
             return $$('.scope-heading');
 
@@ -86,7 +92,9 @@ if (pages.deal === undefined) {
         },
 
         goToTheRightsTermPeriodsHeaderLink: function () {
-            pages.deal.elems.rightsTermPeriodsHeaderLink.click();
+            var el = pages.deal.termPeriodsHeaderlink().get(1);
+            el.click();
+
         },
 
         goToPayeesDealDetails: function () {
