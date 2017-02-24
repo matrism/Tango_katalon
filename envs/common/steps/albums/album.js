@@ -38,7 +38,7 @@ pageStep([
     ['Recordings', [
         'Enter Search Terms',
         'Select search type',
-        'Select work search type',
+        'Select Work Search Type',
         'Expect New Recording Option To Be Visible',
         'Create Entered Recording',
         'Cancel Search',
@@ -99,6 +99,7 @@ exports.recordings.enterWorkIdFromWorkSlotAsWorkSearchTerms = function(i, slotNa
         'Track #' + (i + 1) + ' - ' +
         'Enter work ID from work slot "' + slotName + '" as work search terms',
         function() {
+            pages.album.recordings.selectWorkSearchType(1, 'Work ID');
             pages.album.recordings.enterWorkSearchTerms(
                 i, hash.entityDataSlotsByType.work[slotName].id
             );

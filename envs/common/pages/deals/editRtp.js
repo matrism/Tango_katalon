@@ -48,8 +48,8 @@ if (pages.editDealRtp === undefined) {
 
         editAddPostTermPeriodFromRetentionLink: function (i) {
             return $$(
-                'a[ng-click="tgModularEditModel.addPostTermCollectionPeriod()"]'
-            ).get(i);
+                    'a[ng-click="tgModularEditModel.addPostTermCollectionPeriod()"]'
+                ).get(i);
         },
 
         retentionSection: function (i) {
@@ -60,8 +60,8 @@ if (pages.editDealRtp === undefined) {
 
         editDurationRtpPostTermCollectionField: function (i, j) {
             return pages.editDealRtp.retentionSection(i).$$(
-                'div[tg-modular-edit-id="postTermCollectionModulatEdit"] input[name="retentionPostTermDuration"]'
-            ).get(j);
+                   'div[tg-modular-edit-id="postTermCollectionModulatEdit"] input[name="retentionPostTermDuration"]'
+                ).get(j);
         },
 
         editScopeAcquisitionInputField: function (i) {
