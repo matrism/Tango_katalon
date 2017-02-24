@@ -485,8 +485,7 @@ exports.reorderEndRule = function (from, to) {
 exports.deleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
     it("Delete end rules condition number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
-        //pages.createDealContractPeriod.waitForAjax();
-    });
+     });
 };
 
 exports.clickOnConfirmDeleteEndRuleCondition = function () {
@@ -817,7 +816,6 @@ exports.fillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI = function (i
 
 exports.validatePreDefinedDateFieldAttributeRightEndRulesIsRequiredWarning = function (error_message) {
     it('Validate the pre defined date attribute right field end rules is required and check the error message', function () {
-        //expect(pages.createDealContractPeriod.elems.preDefinedDateAttributeRightMandatoryErrorMessageEndRules.isDisplayed()).toBeTruthy();
         pages.createDealContractPeriod.validateThePreDefinedDateAttributeRightFieldEndRulesIsRequiredWarning(error_message);
     });
 };

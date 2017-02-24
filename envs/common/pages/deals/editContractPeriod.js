@@ -558,7 +558,7 @@ if (pages.editDealContractPeriod === undefined) {
         editDoneTheEndRules: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editDoneButtonEndRules));
             pages.editDealContractPeriod.elems.editDoneButtonEndRules.click();
-            //browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.editWhenVariableLeftButtonEndRules));
+
         }
 
         });
