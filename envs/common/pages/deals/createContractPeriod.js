@@ -370,14 +370,9 @@ if (pages.createDealContractPeriod === undefined) {
 
         selectTheEndDateEndRulesSpecificValueRuleNumberI: function (i, value) {
             var desiredOption;
-<<<<<<< HEAD
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-model='rule.endDateType.code'] div.tg-dropdown-button"))));
             pages.base.scrollIntoView(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-model='rule.endDateType.code'] div.tg-dropdown-button")));
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-model='rule.endDateType.code'] div.tg-dropdown-button")).click();
-=======
-            pages.base.scrollIntoView(element(By.css("div[ng-form='ruleForm'] div[ng-model='rule.endDateType.code'] div.tg-dropdown-button")));
-            browser.driver.findElement(By.css("div[ng-form='ruleForm'] div[ng-model='rule.endDateType.code'] div.tg-dropdown-button")).click();
->>>>>>> development-crefactor
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
