@@ -7,7 +7,7 @@ let fnutils = require('../../../../helpers/fnutils'),
 
 exports.id = '91708765-ad67-4d7c-881d-b5d599a07145';
 
-exports.commonFeatureTags = ['albums', 'smoke', 'albumsSmoke'],
+exports.commonFeatureTags = ['albums', 'smoke', 'albumsSmoke','newAlbumSmoke'],
 
 exports.beforeFeature = () => {
     steps.login.itLogin();
@@ -21,7 +21,7 @@ exports.feature = [
             'newAlbumSmokeTestCreateWork',
             'newAlbumSmokeCreateCommercialAlbum',
         ],
-        steps: criticalScenario(() => {
+        steps: function() {
             steps.person.useBlankPersonSlot(0);
 
             using(steps.newPerson, function() {
@@ -36,7 +36,7 @@ exports.feature = [
             });
 
             steps.person.findInternalIpiNumber();
-        }),
+        }
     },
     {
         name: 'Create work',
@@ -44,7 +44,7 @@ exports.feature = [
             'newAlbumSmokeTestCreateWork',
             'newAlbumSmokeCreateCommercialAlbum',
         ],
-        steps: criticalScenario(() => {
+        steps: function() {
             steps.base.useBlankEntityDataSlot('work', 'mainWork');
 
             using(steps.newWork, function() {
@@ -63,13 +63,14 @@ exports.feature = [
             });
 
             steps.work.findCurrentlyOpenWorkId();
-        }),
+        }
     },
     {
         name: 'Create commercial album',
         tags: ['newAlbumSmokeCreateCommercialAlbum'],
         steps: function() {
             using(steps.newAlbum, function() {
+
                 let nar = this.recordings;
 
                 this.goToNewAlbumPage();
@@ -93,21 +94,19 @@ exports.feature = [
                 );
 
                 nar.createEnteredRecording();
-
                 nar.enterWorkIdFromWorkSlotAsWorkSearchTerms(0, 'mainWork');
-
                 nar.selectWorkSearchResultByIndex(0);
 
-                nar.enterArtistSearchTerms(
-                    0, 'TEST ARTIST ' + randomId('commercialAlbumArtist')
+                 nar.enterArtistSearchTerms(
+                     0, 'TEST ARTIST ' + randomId('commercialAlbumArtist')
                 );
 
-                nar.selectArtistSearchResultByIndex(0);
+                 nar.selectArtistSearchResultByIndex(0);
 
-                this.save();
+               this.save();
             });
 
             steps.album.header.expectHeaderToBeVisible();
-        },
-    },
+        }
+    }
 ];

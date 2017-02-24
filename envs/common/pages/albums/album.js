@@ -338,11 +338,11 @@ exports.recordings = (function() {
     };
 
     exports.trackContainers = function() {
-        return $$('[data-ng-repeat^="track in"]');
+        return $$('[ng-repeat="track in dataHolder.tracks"]');
     };
 
     exports.searchTermsTypeahead = function(i) {
-        return exports.trackContainers().get(i).$('[class*="album__track-recording"]');
+        return exports.trackContainers().get(i).$('.create-album__track-recording');
     };
 
     exports.searchTypeDropdown = function(i) {
@@ -352,7 +352,7 @@ exports.recordings = (function() {
     };
 
     exports.workSearchTypeDropdown = function(i) {
-        return $$('[class*="album__new-recording-work"] .tg-typeahead__tag-filter').get(i);
+        return exports.searchTermsTypeahead(i).$('.tg-typeahead__tag-filter.ng-pristine.ng-valid.ng-scope.ng-touched');
     };
 
     exports.selectSearchType = function(i, value) {
@@ -361,10 +361,27 @@ exports.recordings = (function() {
         return pages.base.selectDropdownOption(element, value);
     };
 
-    exports.selectWorkSearchType = function(i, value) {
-        var element = exports.workSearchTypeDropdown(i);
-        pages.base.scrollIntoView(element);
-        return pages.base.selectDropdownOption(element, value);
+    exports.selectWorkSearchType = function(i,value) {
+        var desiredOption;
+        pages.base.scrollIntoView(element(By.css('div[ng-repeat="track in dataHolder.tracks"]:nth-child('+ i +') div.create-album__new-recording-work select')));
+        browser.driver.findElement(By.css('div[ng-repeat="track in dataHolder.tracks"]:nth-child('+ i +') div.create-album__new-recording-work select')).click();
+        browser.driver.findElements(By.css("select[ng-model='$filterTag.filter'] option"))
+            .then(function findMatchingOption(options) {
+                options.forEach(function (option) {
+                    option.getText().then(function doesOptionMatch(text) {
+                            if (text.indexOf(value) != -1) {
+                                desiredOption = option;
+                                return true;
+                            }
+                        }
+                    )
+                });
+            })
+            .then(function clickOption() {
+                if (desiredOption) {
+                    desiredOption.click();
+                }
+            });
     };
 
     exports.searchTermsInput = function(i) {
@@ -379,7 +396,7 @@ exports.recordings = (function() {
     };
 
     exports.searchResultsContainer = function() {
-        var el = $('.tg-typeahead__suggestions');
+        var el = $('.tg-typeahead__suggestions-footer-inner.tg-typeahead__suggestions-footer-border.ng-scope');
         browser.wait(ExpectedConditions.visibilityOf(el));
         browser.sleep(50);
         return el;
@@ -421,6 +438,7 @@ exports.recordings = (function() {
     exports.enterWorkSearchTerms = function(i, value) {
         var element = exports.workSearchTermsInput(i);
         pages.base.scrollIntoView(element);
+
         element.clear();
         return element.sendKeys(value);
     };
