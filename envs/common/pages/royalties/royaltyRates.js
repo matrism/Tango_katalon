@@ -31,7 +31,9 @@ if (pages.royaltyRates === undefined) {
             confirmOverrideModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             overrideModalDialog: {css: "div.modal-dialog.ng-scope"},
             interCompanyArrow: {css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']"},
-            rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"}
+            rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"},
+            editBatchArea: {css: "div[data-ng-controller='MaintainBatchesController']"},
+            editBatchButton: {css: "div[data-ng-controller='MaintainBatchesController'] i.fa.fa-pencil"}
         },
 
         activeContractPeriod: function () {
@@ -973,9 +975,7 @@ if (pages.royaltyRates === undefined) {
         typeInIncomeProvider: function (sentKeys) {
             var incomeProviderInput;
 
-            incomeProviderInput = $$(".tg-typeahead__input.ng-pristine.ng-untouched.ng-valid").last();
-
-            var rateSetTab = $('[data-close-others="oneAtATime"]');
+            incomeProviderInput = $$("div.tg-typeahead div.tg-typeahead__input-wrap input[ng-model='$term']").get(1);
             browser.driver.sleep(5000);
 
             if (sentKeys != "") {
@@ -1018,7 +1018,17 @@ if (pages.royaltyRates === undefined) {
             pages.base.waitForAjax();
         },
 
+        clickOnEditBatchArea: function () {
+            pages.royaltyRates.elems.editBatchArea.click();
+        },
+
+        clickOnEditIconBatch: function () {
+            pages.royaltyRates.elems.editBatchButton.click();
+        },
+
         typeInBatchAmount: function (value) {
+
+            steps.base.sleep(5000);
             browser.wait(ExpectedConditions.visibilityOf(this.batchAmountInput()));
             this.batchAmountInput().sendKeys(value);
         },
