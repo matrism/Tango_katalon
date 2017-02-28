@@ -9,9 +9,9 @@ if (pages.createDealGeneral === undefined) {
         url: _tf_config.urls.app_url + "#/deal/create",
 
         locators: {
-            draftContractStatusButton: {css: "#deal-general button[data-ng-model='deal.contract_execution_status']:nth-child(1)"},
+            draftContractStatusButton: {css: "div[tg-modular-edit-entity='Deal'] button[ng-model='tgModularEditModel.contractExecutionStatus']:nth-child(1)"},
             executedContractStatusButton: {css: "#deal-general button[data-ng-model='deal.contract_execution_status']:nth-child(2)"},
-            yearExecutionDate: {css: "#deal-general input[data-ng-model='date.year']"},
+            yearExecutionDate: {css: "div[ng-model='tgModularEditModel.contractExecutionDate'] input[data-ng-model='date.year']"},
             monthExecutionDate: {css: "#deal-general input[data-ng-model='date.month']"},
             dayExecutionDate: {css: "#deal-general input[data-ng-model='date.day']"},
             dealSigningTerritoryPopup: {css: "div[name='dealSigningTerritory'] div.tg-dropdown-button"},

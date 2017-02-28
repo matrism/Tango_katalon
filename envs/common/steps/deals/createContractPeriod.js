@@ -485,8 +485,7 @@ exports.reorderEndRule = function (from, to) {
 exports.deleteEndRulesConditionNumberIRowNumberJ = function (i, j) {
     it("Delete end rules condition number " + i + " row number " + j, function () {
         pages.createDealContractPeriod.clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ(i, j);
-        pages.createDealContractPeriod.waitForAjax();
-    });
+     });
 };
 
 exports.clickOnConfirmDeleteEndRuleCondition = function () {
@@ -497,7 +496,8 @@ exports.clickOnConfirmDeleteEndRuleCondition = function () {
 
 exports.cancelDeleteEndRules = function () {
     it("Cancel delete end rules modal dialog ", function () {
-        browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog));
+        browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog));
+        pages.base.scrollIntoView(pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog);
         pages.createDealContractPeriod.elems.cancelDeleteEndRulesModalDialog.click();
         browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
     });
@@ -505,8 +505,9 @@ exports.cancelDeleteEndRules = function () {
 
 exports.cancelDeleteEntireEndRules = function () {
     it("Cancel delete entire end rules modal dialog ", function () {
-        browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']"))));
-        browser.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='cancel()']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='cancel()']"))));
+        pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='cancel()']")));
+        browser.findElement(by.css("div.modal-footer button[data-ng-click='cancel()']")).click();
         pages.createDealContractPeriod.waitForAjax();
         browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.ruleDateLabel(1)));
     });
@@ -514,8 +515,9 @@ exports.cancelDeleteEntireEndRules = function () {
 
 exports.confirmDeleteEntireEndRules = function () {
     it("Confirm delete end rules modal dialog ", function () {
-        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
-        browser.driver.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+        pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='ok()']")));
+        browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='ok()']")).click();
         pages.createDealContractPeriod.waitForAjax();
     });
 };
@@ -779,9 +781,9 @@ exports.fillIntoOffsetByInputFieldEndRulesRuleNumberI = function (i) {
     });
 };
 
-exports.selectRandomOptionFromOffsetByChoiceEndRules = function () {
+exports.selectRandomOptionFromOffsetByChoiceEndRules = function (i) {
     it("Select the random option from offset by choice end date end rules ", function () {
-        pages.createDealContractPeriod.selectTheRandomOptionFromOffsetByChoiceEndRules();
+        pages.createDealContractPeriod.selectTheRandomOptionFromOffsetByChoiceEndRules(i);
     });
 };
 
@@ -814,7 +816,6 @@ exports.fillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI = function (i
 
 exports.validatePreDefinedDateFieldAttributeRightEndRulesIsRequiredWarning = function (error_message) {
     it('Validate the pre defined date attribute right field end rules is required and check the error message', function () {
-        expect(pages.createDealContractPeriod.elems.preDefinedDateAttributeRightMandatoryErrorMessageEndRules.isDisplayed()).toBeTruthy();
         pages.createDealContractPeriod.validateThePreDefinedDateAttributeRightFieldEndRulesIsRequiredWarning(error_message);
     });
 };
