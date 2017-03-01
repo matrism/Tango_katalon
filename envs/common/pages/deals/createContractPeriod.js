@@ -49,7 +49,8 @@ if (pages.createDealContractPeriod === undefined) {
             mdrcCancelLink: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem a[data-ng-click='cancelCommitmentChanges(form.terms.activeCp.id, mdrc.id);']"},
             mdrcDeleteButton: {css: "div.mdrc-form.mdrc-listing.ng-scope.last-elem button[data-ng-click='showDeleteCommitmentModal(mdrc.id, form.terms.activeCp.id, modularInitView)']"},
             //end rules
-            endRulesTooltip: {css: "div.EDITOR.active.end-rules-popup h4"},
+            endRulesTooltip: {css: "div.section-header-borderless.end-rules i"},
+            endRulesTooltip1: {css: "div.EDITOR.active.end-rules-popup h4 i"},
             rulesForEndDateTextEndRules: {css: "div[ng-form='rulesForm'] h4.cp-header"},
             rulesForEndDateDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] h4.cp-header i"},
             summaryOfEndRulesTitleTextEndRules: {css: "div[ng-form='rulesForm'] div.summary-end-rules p.title"},
@@ -57,10 +58,10 @@ if (pages.createDealContractPeriod === undefined) {
             rulesTitleTextEndRules: {css: "div[ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins"},
             rulesTitleDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins i"},
             errorMissingFieldsEndRulesMessageEndRules: {css: "div[ng-form='rulesForm'] div.end-rules p[data-ng-if='!rulesForm.$valid']"},
-            endDateDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(2) i"},
+            endDateDataTooltipTextEndRules: {css: "div[ng-form='ruleForm'] div.clearfix.rule-header div:nth-child(2) i"},
             accountingPeriodEndCheckBoxEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div input[ng-model='rule.accountingPeriodEnd']"},
-            accountingPeriodEndDataTooltipTextEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) span i"},
-            offsetByInputFieldEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header input[ng-model='rule.offsetValue']"},
+            accountingPeriodEndDataTooltipTextEndRules: {css: "div[ng-form='ruleForm'] div.clearfix.rule-header div:nth-child(4) span i"},
+            offsetByInputFieldEndRules: {css: "div[ng-form='ruleForm'] div.clearfix.rule-header div:nth-child(4) input[ng-model='rule.offsetValue']"},
             offsetByArrowChoiceEndRules: {css: "div[ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
             variableLeftDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(1) label.control-label i"},
             attributeLeftDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(3) label.control-label i"},
@@ -71,26 +72,26 @@ if (pages.createDealContractPeriod === undefined) {
             attributeRightDataTooltipTextEndRules: {css: "div[ng-form='conditionForm'] div.pull-left.conditions div:nth-child(7) label.control-label i"},
             preDefinedDateInputFieldEndRules: {css: "div[ng-form='ruleForm'] div.clearfix.rule-header div[name='endDateTypeDate'] input"},
             preDefinedDateMandatoryErrorMessageEndRules: {css: "div[ng-form='ruleForm'] div.clearfix.rule-header div[tg-model-class-validation='rule.endDateType.attrValue'] i"},
-            preDefinedDateAttributeRightMandatoryErrorMessageEndRules: {css: "div[ng-form='ruleForm'] div[ng-form='conditionForm'] div.controls.pull-left.nomargins.ng-scope i"},
-            addEndRulesLink: {css: "a[data-ng-show='!activeContractPeriod.showEndRules && !isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
-            endDateFieldButtonEndRules: {css: "div[data-ng-model='rule.end_date_type'] div.tg-dropdown-button"},
+            preDefinedDateAttributeRightMandatoryErrorMessageEndRules: {css: "div.span2.attribute-two div i"},
+            addEndRulesLink: {css: "a[ng-click='switchEndRulesToEdit(true)']"},
+            endDateFieldButtonEndRules: {css: "div[ng-model='rule.endDateType.code'] div.tg-dropdown-button"},
             endDateDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             endDatePreDefinedDateInputFieldEndRules: {css: "div[name='endDateTypeDate'] input"},
             whenVariableLeftButtonEndRules: {css: "div[data-ng-model='condition.left_value'] div.tg-dropdown-button"},
             whenVariableLeftDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             attributeLeftFieldEndRules: {css: "input[data-ng-model='condition.left_value_percent']"},
-            attributeLeftErrorMessageEndRules: {css: "div[data-validation-class='leftValuePercent'] i"},
+            attributeLeftErrorMessageEndRules: {css: "div[tg-model-class-validation='condition.leftValue.attrValue'] i"},
             requirementFieldButtonEndRules: {css: "div[data-ng-form='conditionForm']:nth-child(3) div[data-ng-model='condition.operator'] div.tg-dropdown-button"},
             requirementDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             variableRightFieldButtonEndRules: {css: "div[data-ng-model='condition.right_value'] div.tg-dropdown-button"},
             variableRightDropDownDataEndRules: {css: "div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"},
             variableRightErrorMessageEndRules: {css: "div.span2.control-group.condition-right-type.ng-scope div i"},
-            deleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
-            confirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
-            cancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
+            deleteEndRulesModalDialog: {css: "div.modal.fade.in"},
+            confirmDeleteEndRulesModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
+            cancelDeleteEndRulesModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
             saveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
             doneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
-            deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
+            deleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='tgModularViewMethods.delete()']"},
             cancelButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
             addRuleButtonLinkEndRules: {css: "a[ng-click='addEndRule()']"},
             //assumptions
@@ -335,6 +336,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnTheAddEndRulesToContractPeriod: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.addEndRulesLink));
             pages.base.scrollIntoView(pages.createDealContractPeriod.elems.addEndRulesLink);
             pages.createDealContractPeriod.elems.addEndRulesLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.endDateFieldButtonEndRules));
@@ -416,10 +418,11 @@ if (pages.createDealContractPeriod === undefined) {
 
         selectTheWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             var desiredOption;
+
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.leftValue.code'] div.tg-dropdown-button"))));
             pages.base.scrollIntoView(element(by.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.leftValue.code'] div.tg-dropdown-button")));
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.leftValue.code'] div.tg-dropdown-button")).click();
-            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope a"))
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -439,7 +442,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         checkTheAttributeLeftWarningMessageEndRules: function () {
-            pages.createDealContractPeriod.elems.attributeLeftErrorMessageEndRules.getAttribute("data-tooltip").
+            pages.createDealContractPeriod.elems.attributeLeftErrorMessageEndRules.getAttribute("tooltip").
                 then(function (promise) {
                     console.log("Attribute left warning message data tooltip value is  : " + promise);
                     expect(promise).toEqual("Percent is required.");
@@ -462,6 +465,7 @@ if (pages.createDealContractPeriod === undefined) {
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[ng-model='condition.leftValue.attrValue']")).clear();
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[ng-model='condition.leftValue.attrValue']")).sendKeys(value);
         },
+
 
         fillIntoTheAttributeLeftAmountEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") input[name='attrLeftAmount']")).clear();
@@ -508,8 +512,8 @@ if (pages.createDealContractPeriod === undefined) {
             browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") div[data-ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[data-ng-model='condition.operator'] div.tg-dropdown-button")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(By.xpath("//*[@class='tg-dropdown-menu ng-scope']//ul[@class='dropdown-menu']//li[@class='ng-scope']"))));
             browser.driver.findElements(By.xpath("//*[@class='tg-dropdown-menu ng-scope']//ul[@class='dropdown-menu']//li[@class='ng-scope']"))
-                //browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(" + k + ") div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
-                //browser.driver.findElements(By.css("body>div:nth-child(" + k + ") div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+            //browser.wait(ExpectedConditions.visibilityOf(element(By.css("body>div:nth-child(" + k + ") div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
+            //browser.driver.findElements(By.css("body>div:nth-child(" + k + ") div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = index;
                     var element = options[randomNumber];
@@ -608,6 +612,29 @@ if (pages.createDealContractPeriod === undefined) {
                 });
         },
 
+        selectTheRightVariableEndRulesSpecificFinalContractPeriod: function (i, j, value) {
+            var desiredOption;
+            pages.base.scrollIntoView(element(by.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.rightValue.attrValue'] div.tg-dropdown-button")));
+            browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.rightValue.attrValue'] div.tg-dropdown-button")).click();
+            browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(value) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
+        },
+
         fillIntoTheAttributeRightEndRulesSpecificValueRuleNumberIRowNumberJ: function (i, j, value) {
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.rightValue.attrValue'] input")).clear();
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.rightValue.attrValue'] input")).sendKeys(value);
@@ -629,16 +656,15 @@ if (pages.createDealContractPeriod === undefined) {
 
         clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"))));
-            pages.base.scrollIntoView(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
+            browser.actions().mouseMove(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"))).perform();
+            //pages.base.scrollIntoView(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
         },
 
         clickOnConfirmDeleteEndRuleCondition: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog));
-            pages.base.scrollIntoView(pages.createDealContractPeriod.elems.confirmDeleteEndRulesModalDialog);
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"))));
+            browser.actions().mouseMove(element(By.css("div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"))).perform();
             browser.driver.findElement(By.css("div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']")).click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.saveButton));
-
         },
 
         checkTheVariableRightWarningMessageEndRules: function () {
@@ -702,27 +728,27 @@ if (pages.createDealContractPeriod === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("ul.tg-typeahead__suggestions.ng-scope"))));
 
             element(By.css("li.tg-typeahead__suggestions-footer")).getText().
-                then(function (promise) {
-                    console.log("Text from label is : " + promise);
-                    if (promise.indexOf("Create New Label") != -1) {
-                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                pages.base.scrollIntoView(element);
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                    else {
-                        browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
-                            .then(function (options) {
-                                var randomNumber = Math.floor((Math.random() * options.length));
-                                var element = options[randomNumber];
-                                pages.base.scrollIntoView(element);
-                                browser.actions().mouseMove(element).click().perform();
-                            })
-                    }
-                });
+            then(function (promise) {
+                console.log("Text from label is : " + promise);
+                if (promise.indexOf("Create New Label") != -1) {
+                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            pages.base.scrollIntoView(element);
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+                else {
+                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope div"))
+                        .then(function (options) {
+                            var randomNumber = Math.floor((Math.random() * options.length));
+                            var element = options[randomNumber];
+                            pages.base.scrollIntoView(element);
+                            browser.actions().mouseMove(element).click().perform();
+                        })
+                }
+            });
         },
 
         saveTheAdvanceAssumptions: function () {
@@ -741,66 +767,66 @@ if (pages.createDealContractPeriod === undefined) {
 
         checkTheEndRulesTooltipTextValue: function () {
             pages.createDealContractPeriod.elems.endRulesTooltip.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("End rules tooltip value is  : " + promise);
-                    expect(promise).toEqual("A set of Rules that define when this Period should end.");
-                });
+            then(function (promise) {
+                console.log("End rules tooltip value is  : " + promise);
+                expect(promise).toEqual("A set of Rules that define when this Period should end.");
+            });
         },
 
         checkTheRulesForEndDateTitleTextEndRules: function () {
             pages.createDealContractPeriod.elems.rulesForEndDateTextEndRules.getText().
-                then(function (promise) {
-                    console.log("Rules for end date title is   : " + promise);
-                    expect(promise).toEqual("RULES FOR END DATE");
-                });
+            then(function (promise) {
+                console.log("Rules for end date title is   : " + promise);
+                expect(promise).toEqual("RULES FOR END DATE");
+            });
         },
 
         checkTheRulesForEndDateDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.rulesForEndDateDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Rules for end date data tooltip text  is   : " + promise);
-                    expect(promise).toEqual("A set of Rules that define when this Period should end.");
-                });
+            pages.createDealContractPeriod.elems.rulesForEndDateDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Rules for end date data tooltip text  is   : " + promise);
+                expect(promise).toEqual("A set of Rules that define when this Period should end.");
+            });
         },
 
         checkTheSummaryOfRulesForEndDateTitleTextEndRules: function () {
             pages.createDealContractPeriod.elems.summaryOfEndRulesTitleTextEndRules.getText().
-                then(function (promise) {
-                    console.log("Summary of rules for end date title text is   : " + promise);
-                    expect(promise).toEqual("Summary of Rules for End Date:");
-                });
+            then(function (promise) {
+                console.log("Summary of rules for end date title text is   : " + promise);
+                expect(promise).toEqual("Summary of Rules for End Date:");
+            });
         },
 
         checkTheSummaryOfRulesForEndDateDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.summaryOfEndRulesDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Summary of rules for end date data tooltip text is   : " + promise);
-                    expect(promise).toEqual("As you define when the Period will end based on the elements below, this section will provide an at-a-glance account of what has been defined.");
-                });
+            pages.createDealContractPeriod.elems.summaryOfEndRulesDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Summary of rules for end date data tooltip text is   : " + promise);
+                expect(promise).toEqual("As you define when the Period will end based on the elements below, this section will provide an at-a-glance account of what has been defined.");
+            });
         },
 
         checkTheRulesTitleTextEndRules: function () {
             pages.createDealContractPeriod.elems.rulesTitleTextEndRules.getText().
-                then(function (promise) {
-                    console.log("Rules title text is   : " + promise);
-                    expect(promise).toEqual("Rules:");
-                });
+            then(function (promise) {
+                console.log("Rules title text is   : " + promise);
+                expect(promise).toEqual("Rules:");
+            });
         },
 
         checkTheRulesDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.rulesTitleDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Rules data tooltip text is   : " + promise);
-                    expect(promise).toEqual("Add a Rule for each End Date scenario called for in the contract. For example, if the contract states that the Period \"ends on either the earlier of the contract year or the MDRC complete date,\" then two rules must be created as there are two possibilities listed-one for contract year (Target End Date) and the other for MDRC complete.");
-                });
+            pages.createDealContractPeriod.elems.rulesTitleDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Rules data tooltip text is   : " + promise);
+                expect(promise).toEqual("Add a Rule for each End Date scenario called for in the contract. For example, if the contract states that the Period \"ends on either the earlier of the contract year or the MDRC complete date,\" then two rules must be created as there are two possibilities listed-one for contract year (Target End Date) and the other for MDRC complete.");
+            });
         },
 
         checkTheEndDateDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.endDateDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("End date data tooltip text  is   : " + promise);
-                    expect(promise).toEqual("Defines the type of End Date (e.g., MDRC completion date).");
-                });
+            pages.createDealContractPeriod.elems.endDateDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("End date data tooltip text  is   : " + promise);
+                expect(promise).toEqual("Defines the type of End Date (e.g., MDRC completion date).");
+            });
         },
 
         clickOnTheAccountingPeriodEndDateCheckBoxEndRules: function () {
@@ -808,35 +834,35 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         checkTheAccountingPeriodEndDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.accountingPeriodEndDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Accounting period end data tooltip text  is   : " + promise);
-                    expect(promise).toEqual("If the effect of the Rule will end the Period prior to the end of an accounting period, select this element that will then ensure the Period does not formally end until the accounting period has completed.");
-                });
+            pages.createDealContractPeriod.elems.accountingPeriodEndDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Accounting period end data tooltip text  is   : " + promise);
+                expect(promise).toEqual("If the effect of the Rule will end the Period prior to the end of an accounting period, select this element that will then ensure the Period does not formally end until the accounting period has completed.");
+            });
         },
 
         checkTheVariableLeftDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.variableLeftDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Variable left data tooltip text is   : " + promise);
-                    expect(promise).toEqual("This is the primary condition that would trigger the end of a Period. This element must be defined first to complete the rest of the Rule creation. For example, if the contract ends upon the MDRC Complete, then that is what should be selected from the dropdown.");
-                });
+            pages.createDealContractPeriod.elems.variableLeftDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Variable left data tooltip text is   : " + promise);
+                expect(promise).toEqual("This is the primary condition that would trigger the end of a Period. This element must be defined first to complete the rest of the Rule creation. For example, if the contract ends upon the MDRC Complete, then that is what should be selected from the dropdown.");
+            });
         },
 
         checkTheAttributeLeftDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.attributeLeftDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Attribute left data tooltip text is   : " + promise);
-                    expect(promise).toEqual("This element provides a place for either a date, a percentage, or an amount that coincides with the Variable Left. For example, if the Variable Left is MDRC Complete, then a percentage will be selected as the Attribute.");
-                });
+            pages.createDealContractPeriod.elems.attributeLeftDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Attribute left data tooltip text is   : " + promise);
+                expect(promise).toEqual("This element provides a place for either a date, a percentage, or an amount that coincides with the Variable Left. For example, if the Variable Left is MDRC Complete, then a percentage will be selected as the Attribute.");
+            });
         },
 
         checkTheWithNoticeDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.withNoticeDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("With notice data tooltip text  is   : " + promise);
-                    expect(promise).toEqual("This element appears as necessary when it coincides with the Variable Left. If checked, this element requires documentation that Variable Left has been fulfilled.");
-                });
+            pages.createDealContractPeriod.elems.withNoticeDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("With notice data tooltip text  is   : " + promise);
+                expect(promise).toEqual("This element appears as necessary when it coincides with the Variable Left. If checked, this element requires documentation that Variable Left has been fulfilled.");
+            });
         },
 
         clickOnTheWithNoticeCheckBoxEndRules: function () {
@@ -849,35 +875,35 @@ if (pages.createDealContractPeriod === undefined) {
 
 
         checkTheRequirementDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.requirementDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Requirement data tooltip text  is   : " + promise);
-                    expect(promise).toEqual("Using symbols, this element defines how Variable Left should be compared to Variable Right for the Condition to be true. For example, if the Deal stipulates that MDRC Complete (Variable Left) must occur \"on or before\" the Target End Date (Variable Right), then select \"< or =\" as the Requirement.");
-                });
+            pages.createDealContractPeriod.elems.requirementDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Requirement data tooltip text  is   : " + promise);
+                expect(promise).toEqual("Using symbols, this element defines how Variable Left should be compared to Variable Right for the Condition to be true. For example, if the Deal stipulates that MDRC Complete (Variable Left) must occur \"on or before\" the Target End Date (Variable Right), then select \"< or =\" as the Requirement.");
+            });
         },
 
         checkTheVariableRightDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.variableRightDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Variable right data tooltip text  is   : " + promise);
-                    expect(promise).toEqual("This is the condition in contrast to Variable Left that defines what would trigger the end of a Period. Commonly, this is the same as for End Date Type. For example, if the End Date is Balance Repaid at 110%, then that is what should be selected from the dropdown.");
-                });
+            pages.createDealContractPeriod.elems.variableRightDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Variable right data tooltip text  is   : " + promise);
+                expect(promise).toEqual("This is the condition in contrast to Variable Left that defines what would trigger the end of a Period. Commonly, this is the same as for End Date Type. For example, if the End Date is Balance Repaid at 110%, then that is what should be selected from the dropdown.");
+            });
         },
 
         checkTheAttributeRightDataTooltipTextEndRules: function () {
-            pages.createDealContractPeriod.elems.attributeRightDataTooltipTextEndRules.getAttribute("data-tooltip").
-                then(function (promise) {
-                    console.log("Attribute right data tooltip text  is   : " + promise);
-                    expect(promise).toEqual("This element provides a place for either a date, a percentage, or an amount that coincides with the Variable Right. For example, if the Variable Right is MDRC Complete, then a date will be selected as the Attribute.");
-                });
+            pages.createDealContractPeriod.elems.attributeRightDataTooltipTextEndRules.getAttribute("tooltip").
+            then(function (promise) {
+                console.log("Attribute right data tooltip text  is   : " + promise);
+                expect(promise).toEqual("This element provides a place for either a date, a percentage, or an amount that coincides with the Variable Right. For example, if the Variable Right is MDRC Complete, then a date will be selected as the Attribute.");
+            });
         },
 
         validateThePreDefinedDateFieldEndRulesIsRequiredWarning: function (error_message) {
             pages.createDealContractPeriod.elems.preDefinedDateMandatoryErrorMessageEndRules.getAttribute("tooltip").
-                then(function (promise) {
-                    console.log("Pre defined date error message data tooltip text  is   : " + promise);
-                    expect(promise).toEqual(error_message);
-                });
+            then(function (promise) {
+                console.log("Pre defined date error message data tooltip text  is   : " + promise);
+                expect(promise).toEqual(error_message);
+            });
         },
 
         validateThePreDefinedDateAttributeRightFieldEndRulesIsRequiredWarning: function (error_message) {
@@ -930,8 +956,6 @@ if (pages.createDealContractPeriod === undefined) {
             browser.wait(ExpectedConditions.visibilityOf(element(By.xpath("//*[@tg-model-class-validation='rule.offsetValue']//ul[@class='dropdown-menu']/li/a"))));
             pages.base.scrollIntoView(element(By.xpath("//*[@tg-model-class-validation='rule.offsetValue']//ul[@class='dropdown-menu']/li/a")));
             browser.driver.findElements(By.xpath("//*[@tg-model-class-validation='rule.offsetValue']//ul[@class='dropdown-menu']/li/a"))
-                //browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))));
-                //browser.driver.findElements(By.css("div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) ul.dropdown-menu li a"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
