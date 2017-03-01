@@ -492,10 +492,9 @@ exports.editCancelDeleteEntireEndRules = function () {
 
 exports.editConfirmDeleteEntireEndRules = function () {
     it("Edit confirm delete end rules modal dialog ", function () {
-        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
-        pages.base.scrollIntoView(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")));
-        //browser.wait(ExpectedConditions.elementToBeClickable(element(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']"))));
-        browser.driver.findElement(by.css("div[data-ng-show='data.deleteButton'] div.modal-footer button[data-ng-click='data.deleteAllEndRulesAndSave()']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+        pages.base.scrollIntoView(element(by.css("div.modal-footer button[data-ng-click='ok()']")));
+        browser.driver.findElement(by.css("div.modal-footer button[data-ng-click='ok()']")).click();
         pages.editDealContractPeriod.waitForAjax();
     });
 };
