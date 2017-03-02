@@ -17,7 +17,7 @@ exports.feature = [
     {
         name: 'Create an organisation with an income provider role and then edit it',
         tags: ['create', 'edit', 'createIncomeProviderSanity'],
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.mainHeader.createNewRecord('Organisation');
 
             using(steps.newOrganisation, function () {
@@ -84,7 +84,7 @@ exports.feature = [
                 this.selectPrimaryTerritoryOfOperation('Brazil');
 
                 this.selectDefaultCurrency('BRL');
-
+                steps.base.sleep(5000);
                 this.deleteIncomeFileType('ASCAP DOMESTIC');
                 this.enterIncomeFileTypeSearchTerms('ABRAMUS');
                 this.selectIncomeFileTypeSearchResultByIndex(0);
@@ -111,6 +111,6 @@ exports.feature = [
                 this.saveSection();
                 this.expectSectionToBeInViewMode();
             });
-       }
+       })
     }
 ];
