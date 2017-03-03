@@ -149,6 +149,7 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editClickOnAddContractPeriod: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editAddContractPeriodElem));
             pages.editDealContractPeriod.elems.editAddContractPeriodElem.click();
             pages.editDealContractPeriod.waitForAjax();
         },
