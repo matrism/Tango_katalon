@@ -3,15 +3,15 @@
 pages.endRulesRetention = exports;
 
 exports.saveEndRulesButton = function () {
-    return $('[data-ng-click="saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)"]');
+    return $('.modal-footer button[ng-click="ok()"]');
 };
 
 exports.deleteEndRulesButton = function () {
-    return $('.modal-footer [data-ng-click="showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)"]');
+    return $('.modal-footer button[ng-click="data.showDeleteAllEndRulesModal()"]');
 };
 
 exports.cancelEndRulesButton = function () {
-    return $('.modal-footer [data-ng-click="cancel()"]');
+    return $('.modal-footer button[ng-click="cancel()"]');
 };
 
 exports.saveEndRules = function () {

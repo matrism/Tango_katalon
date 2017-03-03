@@ -20,15 +20,15 @@ if (pages.editDealContractPeriod === undefined) {
             editAddContractPeriodElem: {css: "div.deal-terms-affix a[ng-click='addContractPeriod()'] i.fa-plus"},
             //end rules
 
-            editEndRulesAreaElement: {css: "div[data-ng-show='!activeContractPeriod.showEndRules && isEndRuleDirty(activeContractPeriod.end_rules[0])']"},
-            editEndRulesIcon: {css: "div[data-ng-show='!activeContractPeriod.showEndRules && isEndRuleDirty(activeContractPeriod.end_rules[0])'] button.mdrc-edit-pencil i"},
-            editRulesTitleTextEndRules: {css: "div[data-ng-form='rulesForm'] div.end-rules p.title.pull-left.nomargins"},
+            editEndRulesAreaElement: {css: "div[ng-show='endRulesWrapperModel.endRules.$count()']"},
+            editEndRulesIcon: {css: "div[ng-show='endRulesWrapperModel.endRules.$count()'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i"},
+            editRulesTitleTextEndRules: {css: "div[ng-form='ruleForm'] h4"},
             editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
             editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
             editCancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             editSaveButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-primary.pull-right.ng-scope"},
-            editDoneButtonEndRules: {css: "button[data-ng-click='saveEndRules(form.show.endRules.containerId, form.show.endRules.type, rtpEndRulesModalForm.$valid)']"},
-            editDeleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
+            editDoneButtonEndRules: {css: ".modal-footer button[ng-click='ok()']"},
+            editDeleteButtonEndRules: {css: "div.CONTROLS.clearfix button[data-ng-click='tgModularViewMethods.delete()']"},
             editCancelButtonEndRules: {css: "div.CONTROLS.clearfix button.btn.btn-cancel.pull-left"},
             editWhenVariableLeftButtonEndRules: {css: "div[data-ng-model='condition.left_value'] div.tg-dropdown-button"},
             //mdrc
@@ -110,10 +110,10 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editTheEndRulesForm: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editEndRulesAreaElement));
             pages.base.scrollIntoView(pages.editDealContractPeriod.elems.editEndRulesAreaElement);
             browser.actions().mouseMove(pages.editDealContractPeriod.elems.editEndRulesAreaElement).perform();
             pages.editDealContractPeriod.elems.editEndRulesIcon.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editRulesTitleTextEndRules));
         },
 
         editClickOnTheDeleteEndRulesButton: function () {
@@ -534,8 +534,10 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editClickOnTheDeleteRuleEndRulesNumberI: function (i) {
-            browser.driver.findElement(By.css("div[data-ng-form='ruleForm']:nth-child(" + i + ") a[data-ng-click='showDeleteEndRuleModal(form.show.endRules.containerId, form.show.endRules.type, rule.id)'] i")).click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editDeleteEndRulesModalDialog));
+            pages.base.scrollIntoView(element(by.css("div[ng-form='ruleForm']:nth-child(" + i + ") a[ng-click='showDeleteEndRuleModal(rule)'] i")));
+            browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") a[ng-click='showDeleteEndRuleModal(rule)'] i")).click();
+            browser.wait(ExpectedConditions.visibilityOf(pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog));
+            browser.actions().mouseMove(pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog).perform();
             pages.editDealContractPeriod.elems.editConfirmDeleteEndRulesModalDialog.click();
         },
 
@@ -547,8 +549,8 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         editCheckTheSummaryTextForEndRulesRuleNumberI: function (i, text) {
-            pages.base.scrollIntoView(element(by.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")));
-            browser.driver.findElement(By.css("div.mdrc-form.active ul.end-rules-list li[data-ng-repeat='endRule in form.show.endRules.container']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
+            pages.base.scrollIntoView(element(by.css("div.mdrc-list.nomargins.relative.end-rules li[ng-repeat='endRule in tgModularEditModel.endRules.$getItems()']:nth-child(" + i + ") span.pull-left.rule-summary")));
+            browser.driver.findElement(By.css("div.mdrc-list.nomargins.relative.end-rules li[ng-repeat='endRule in tgModularEditModel.endRules.$getItems()']:nth-child(" + i + ") span.pull-left.rule-summary")).getText().
                 then(function (promise) {
                     console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
                     expect(promise).toEqual(text);
@@ -559,7 +561,7 @@ if (pages.editDealContractPeriod === undefined) {
         editDoneTheEndRules: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealContractPeriod.elems.editDoneButtonEndRules));
             pages.editDealContractPeriod.elems.editDoneButtonEndRules.click();
-            browser.wait(ExpectedConditions.invisibilityOf(pages.editDealContractPeriod.elems.editWhenVariableLeftButtonEndRules));
+
         }
 
         });

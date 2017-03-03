@@ -830,8 +830,13 @@ exports.createManualStatement = function () {
         pages.royaltyRates.createManualStatementClick();
     });
 };
-
-exports.enterBatchAmmount = function (value) {
+exports.enterBatchArea = function (){
+    it("Click Edit", function(){
+        pages.royaltyRates.clickOnEditBatchArea();
+        pages.royaltyRates.clickOnEditIconBatch();
+    });
+}
+exports.enterBatchAmount = function (value) {
     it("Enter batch amount", function () {
         pages.royaltyRates.typeInBatchAmount(value);
     });
