@@ -107,6 +107,7 @@ if (pages.editDealScope === undefined) {
             },
 
             addScopeForm: function () {
+                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.addScopeIcon));
                 pages.editDealScope.elems.addScopeIcon.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.contractTypeDropDown));
             },
