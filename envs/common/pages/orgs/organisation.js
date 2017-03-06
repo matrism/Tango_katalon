@@ -947,11 +947,11 @@ exports.general = (function () {
     };
 
     general.deleteTerritoryOfOperation = function (value) {
-        var element = general.deleteTerritoryOfOperationTypeaheadTagButton(
+       var element = general.deleteTerritoryOfOperationTypeaheadTagButton(
             general.territoryOfOperationTypeaheadTag(value)
         );
 
-        pages.base.scrollIntoView(element);
+            pages.base.scrollIntoView(element);
 
         return element.click();
     };
@@ -1017,7 +1017,7 @@ exports.general = (function () {
 
     general.saveSectionButton = function () {
         return general.sectionContainer().element(by.cssContainingText(
-            '.CONTROLS button', 'Save'
+            '.btn.btn-primary.pull-right.ng-scope.ng-binding', 'Save'
         ));
     };
 
@@ -1430,10 +1430,12 @@ exports.incomeProvider = (function () {
         return incomeProvider.incomeFileTypeTypeahead().element(
             by.cssContainingText('.tg-typeahead__tag', value)
         );
+
     };
 
     incomeProvider.deleteIncomeFileTypeButton = function (element) {
         return element.$('.tg-typeahead__tag-remove');
+
     };
 
     incomeProvider.deleteIncomeFileType = function (value) {
@@ -1443,7 +1445,9 @@ exports.incomeProvider = (function () {
 
         pages.base.scrollIntoView(element);
 
+
         return element.click();
+
     };
 
     incomeProvider.incomeFileTypeSearchTermsInput = function () {

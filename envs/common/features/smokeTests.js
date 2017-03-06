@@ -189,7 +189,7 @@ exports.feature = [
             'qaOnly'
         ],
 
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
             steps.base.sleep(5000);
@@ -215,6 +215,6 @@ exports.feature = [
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.expandSavedManualStatement();
             steps.royaltyRates.validateManualStatement();
-        }
+        })
     }
 ];

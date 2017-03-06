@@ -245,35 +245,30 @@ if (pages.editDealGeneral === undefined) {
         },
 
         editSelectTheRandomSpecificArtist: function (artistSearch, artistValue) {
+            console.log('artistSearch = ', artistSearch);
+            console.log('artistValue = ', artistValue);
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealGeneral.elems.artistsField));
             pages.createDealGeneral.elems.artistsField.click();
             pages.createDealGeneral.elems.artistFieldInput.sendKeys(artistSearch);
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealGeneral.elems.artistsDropDownData));
             var desiredOption;
-
-            element(By.css("li.tg-typeahead__suggestions-footer")).getText().then(function (promise) {
-                console.log("Text from artist is : " + promise);
-                if (promise.indexOf("Create New Artist") != -1) {
-                    browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer div a"))
-                        .then(function (options) {
-                            var randomNumber = Math.floor((Math.random() * options.length));
-                            var element = options[randomNumber];
-                            element.click();
-                            //browser.actions().mouseMove(element).click().perform();
-                            browser.sleep(2000);
-                        })
-                }
-                else {
-                    browser.driver.findElements(By.css("div[name='artists'] div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
-                        .then(function (options) {
-                            var randomNumber = Math.floor((Math.random() * options.length));
-                            var element = options[0];
-                            element.click();
-                            browser.sleep(2000);
-                            //browser.actions().mouseMove(element).click().perform();
-                        });
-                }
-            });
+            browser.driver.findElements(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-group-item"))
+                .then(function findMatchingOption(options) {
+                    options.forEach(function (option) {
+                        option.getText().then(function doesOptionMatch(text) {
+                                if (text.indexOf(artistSearch) != -1) {
+                                    desiredOption = option;
+                                    return true;
+                                }
+                            }
+                        )
+                    });
+                })
+                .then(function clickOption() {
+                    if (desiredOption) {
+                        desiredOption.click();
+                    }
+                });
         },
 
         editSelectTheSpecificArtist: function (artistSearch, artist) {

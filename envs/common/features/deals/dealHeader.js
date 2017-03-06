@@ -12,7 +12,7 @@ exports.feature = [
     {
         name: "Create a deal and check the deal header",
         tags: ["header_general"],
-        steps: function () {
+        steps: function(){
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -70,7 +70,7 @@ exports.feature = [
     {
         name: "Create a deal and check the contracting party on deal header",
         tags: ["header_contracting_party"],
-        steps: function () {
+        steps: function(){
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -107,7 +107,7 @@ exports.feature = [
     {
         name: "Create a deal add/remove artists and check deal header",
         tags: ["header_artist"],
-        steps: function () {
+        steps: function(){
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -121,14 +121,14 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField('Ron Wilson', 'Ronnie');
-            steps.editDealGeneral.editSpecificRandomArtistField('Bruce Mike', 'Bruce Mike');
-            steps.editDealGeneral.editSpecificRandomArtistField('Bill Lame', 'Bill Lue');
+            steps.editDealGeneral.editSpecificRandomArtistField('Ashley', 'Ashley');
+            steps.editDealGeneral.editSpecificRandomArtistField('Matt Tryner', 'Matt Tryner');
+            steps.editDealGeneral.editSpecificRandomArtistField('Billy Cogen', 'Billy Cogen');
 
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Bill Lame, Bruce Mike, Ron Wilson');
+            steps.headerDeal.checkArtistValue('Ashley, Billy Cogen, Matt Tryner');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
@@ -136,13 +136,13 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Bill Lame, Bruce Mike, Ron Wilson, Ron WilsonBruce MikeBill LameMichael');
+            steps.headerDeal.checkArtistValue('Ashley, Billy Cogen, Matt Tryner, Ron WilsonBruce MikeBill LameMichael');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Bill Lame, Ron Wilson, Ron WilsonBruce MikeBill LameMichael');
+            steps.headerDeal.checkArtistValue('Ashley, Billy Cogen, Ron WilsonBruce MikeBill LameMichael');
 
         }
     },
@@ -150,7 +150,7 @@ exports.feature = [
     {
         name: "Create a deal add/edit dates and RTP and check the deal header",
         tags: ["header_rtp_brief_number"],
-        steps: function () {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.fillIntoExecutionDateFieldSpecificYearValue("2014");
             steps.deal.itContinueToNextPage();
@@ -188,7 +188,7 @@ exports.feature = [
     {
         name: "Create a deal and check the deal header signing and last update",
         tags: ["header_signing_last_update"],
-        steps: function () {
+        steps: function() {
             var today = new Date();
             //var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
             if(today.getMonth()<=8){
@@ -233,7 +233,7 @@ exports.feature = [
     {
         name: "Open a deal check last update made some changes and check again last updated in deal header",
         tags: ["header_contract_status"],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.clickOnDraftContractStatus();
             steps.deal.itContinueToNextPage();
@@ -299,7 +299,7 @@ exports.feature = [
             steps.headerDeal.checkStatusValue("Post Term Collection");
 
 
-        }
+        })
     }
 
 

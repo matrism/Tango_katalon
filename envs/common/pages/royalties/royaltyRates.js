@@ -265,11 +265,11 @@ if (pages.royaltyRates === undefined) {
         },
 
         dropdownMenu: function () {
-            return $$(".tg-dropdown-menu>.dropdown-menu").first();
+            return $$(".tg-dropdown-menu > .dropdown-menu").first();
         },
 
         exploitationDropdownMenu: function () {
-            return $$(".tg-dropdown-menu>.dropdown-menu").last();
+            return $("div[data-ng-model = 'activeBatch.batch_income_defaults.exploitation_territory'] div.tg-dropdown-menu ul.dropdown-menu");
         },
 
         incomeTypeDropdown: function () {
