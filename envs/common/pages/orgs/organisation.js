@@ -927,7 +927,7 @@ exports.general = (function () {
     };
 
     general.territoriesOfOperationSelector = function () {
-        return element(by.model('$dataHolder.internalModel'));
+        return element(by.model('tgModularEditModel.territoriesOfOperation'));
     };
 
     general.editTerritoriesOfOperation = function () {
