@@ -11,13 +11,13 @@ exports.beforeFeature = () => {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['royaltyRates', 'incomeProvider', 'smoke'];
+exports.commonFeatureTags = ['royaltyRates', 'incomeProvider', 'smoke', 'incomeProviderSmokeTest'];
 
 exports.feature = [
     {
         name: 'Create an organisation with an income provider role and then edit it',
         tags: ['create', 'edit'],
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.mainHeader.createNewRecord('Organisation');
 
             using(steps.newOrganisation, function () {
@@ -110,6 +110,6 @@ exports.feature = [
                 this.saveSection();
                 this.expectSectionToBeInViewMode();
             });
-       }
+       })
     }
 ];

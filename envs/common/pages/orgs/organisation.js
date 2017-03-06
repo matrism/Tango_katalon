@@ -916,7 +916,7 @@ exports.general = (function () {
     };
 
     general.nameInput = function () {
-        return element(by.model('modularEditModels.model.name'));
+        return element(by.model('tgModularEditModel.name'));
     };
 
     general.enterName = function (value) {
@@ -927,7 +927,7 @@ exports.general = (function () {
     };
 
     general.territoriesOfOperationSelector = function () {
-        return element(by.model('modularEditModels.model.territoriesOfOperation'));
+        return element(by.model('tgModularEditModel.territoriesOfOperation'));
     };
 
     general.editTerritoriesOfOperation = function () {
@@ -986,7 +986,7 @@ exports.general = (function () {
     };
 
     general.organisationTypeButtons = function () {
-        return element(by.model('modularEditModels.model.type')).$$('button');
+        return element(by.model('tgModularEditModel.type')).$$('button');
     };
 
     general.selectOrganisationType = function (value) {
@@ -1000,7 +1000,7 @@ exports.general = (function () {
     };
 
     general.publisherTypeButtons = function () {
-        return element(by.model('modularEditModels.model.typeModel.publisherType')).$$(
+        return element(by.model('tgModularEditModel.publisherRelationship')).$$(
             'button'
         );
     };
@@ -1384,7 +1384,7 @@ exports.incomeProvider = (function () {
 
     incomeProvider.primaryTerritoryOfOperationDropdown = function () {
         return element(by.model(
-            'modularEditModels.model.primaryTerritoryOfOperation'
+            'tgModularEditModel.primaryTerritoryOfOperation'
         ));
     };
 
@@ -1404,7 +1404,7 @@ exports.incomeProvider = (function () {
     };
 
     incomeProvider.defaultCurrencyDropdown = function () {
-        return element(by.model('modularEditModels.model.currencyCode'));
+        return element(by.model('tgModularEditModel.currencyCode'));
     };
 
     incomeProvider.defaultCurrencyOption = function (value) {
@@ -1423,7 +1423,7 @@ exports.incomeProvider = (function () {
     };
 
     incomeProvider.incomeFileTypeTypeahead = function () {
-        return element(by.model('modularEditModels.model.incomeFileTypes'));
+        return element(by.model('tgModularEditModel.incomeFileTypes'));
     };
 
     incomeProvider.incomeFileTypeTypeaheadTag = function (value) {

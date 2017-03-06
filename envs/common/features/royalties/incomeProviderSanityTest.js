@@ -11,7 +11,7 @@ exports.beforeFeature = () => {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['royaltyProcessing', 'incomeProvider', 'sanity'];
+exports.commonFeatureTags = ['royaltyProcessing', 'incomeProvider', 'sanity', 'incomeProviderSanityTest'];
 
 exports.feature = [
     {

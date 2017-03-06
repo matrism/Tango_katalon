@@ -512,7 +512,7 @@ exports.expectTerritoryErrorMessageToNotBeVisible = function () {
 };
 
 exports.primaryIncomeProviderTerritoryOfOperationDropdown = function() {
-    return element(by.model('modularEditModels.model.primaryTerritoryOfOperation'));
+    return element(by.model('tgModularEditModel.primaryTerritoryOfOperation'));
 };
 
 exports.primaryIncomeProviderTerritoryOfOperationOptions = function() {
