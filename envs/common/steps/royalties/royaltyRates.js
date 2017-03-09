@@ -862,9 +862,6 @@ exports.selectExploitationTerritoryForBatch = function (value) {
 
 exports.addWorkByTitle = function (value) {
     it("Add work by title", function () {
-        pages.searchSection.clickDropdownMenu();
-        pages.searchSection.selectOrganisationOptionFromDropdown();
-        pages.royaltyRates.selectAddByTitleOption();
         pages.royaltyRates.addWorkByTitleFromTypeAhead(value);
     });
 };

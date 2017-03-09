@@ -2,6 +2,19 @@
 
 exports.id = '1c701eea-f1d4-4af9-90b6-1b10d5c2569a';
 
+exports.beforeEach =function () {
+    var origFn = browser.driver.controlFlow().execute;
+
+    browser.driver.controlFlow().execute = function () {
+        var args = arguments;
+        origFn.call(browser.driver.controlFlow(), function () {
+            return protractor.promise.delayed(1000);   // here we can adjust the execution speed
+        });
+        return origFn.apply(browser.driver.controlFlow(), args);
+    };
+
+},
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 },
@@ -122,8 +135,11 @@ exports.feature = [
 
             steps.createDealContractPeriod.checkDeleteIconIsPresentAndDataTooltipEndRulesConditionNumberIRowNumberJ(1, 1);
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.cancelDeleteEndRules();
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
 
             steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Balance Repaid");
@@ -138,8 +154,11 @@ exports.feature = [
             steps.createDealContractPeriod.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 1, 0);
             steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 1, "Target End Date");
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.cancelDeleteEndRules();
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
 
             steps.createDealContractPeriod.saveEndRulesForm();
@@ -182,8 +201,11 @@ exports.feature = [
 
             steps.editDealContractPeriod.editEndRulesForm();
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.cancelDeleteEndRules();
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
 
             steps.deal.itContinueToNextPage();
@@ -349,6 +371,7 @@ exports.feature = [
             steps.createDealContractPeriod.clickOnEndRulesArea();
             steps.createDealContractPeriod.checkSummaryTextForEndRulesRuleNumberI(1, "If Balance Repaid at 32% is before the MDRC Complete Date, and Balance Repaid at 30% is on 2014-12-08, and Recouped at 30% (with notice) is after the Target End Date, and NOT Final Contract Period , and then the Actual End Date is the MDRC Complete Date offset by 21 days .");
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.clickOnConfirmDeleteEndRuleCondition();
             steps.createDealContractPeriod.deleteEndRulesConditionNumberIRowNumberJ(1, 1);
             steps.base.sleep(5000);

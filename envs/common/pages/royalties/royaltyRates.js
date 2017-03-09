@@ -269,7 +269,8 @@ if (pages.royaltyRates === undefined) {
         },
 
         exploitationDropdownMenu: function () {
-            return $("div[data-ng-model = 'activeBatch.batch_income_defaults.exploitation_territory'] div.tg-dropdown-menu ul.dropdown-menu");
+            return $("div[data-ng-model = 'activeBatch.batch_income_defaults.exploitation_territory'] div.tg-dropdown-menu.ng-scope.tg-dropdown-menu-has-search ul.dropdown-menu");
+
         },
 
         incomeTypeDropdown: function () {
@@ -277,7 +278,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         exploitationTerritoryDropdown: function () {
-            return $$(".tg-dropdown-caret.fa.fa-caret-down").last();
+            return $("div.exploitation-territory button.tg-dropdown-caret.fa.fa-caret-down");
         },
 
         workSearchOptionsDropdown: function () {
@@ -285,7 +286,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         workInput: function () {
-            return $('.tg-typeahead__input.ng-pristine.ng-untouched.ng-valid[placeholder="Search by Title, Creator or Work ID"]');
+            return $('div[data-ng-model="workEntries.newWork"] input.tg-typeahead__input.ng-pristine.ng-valid.ng-touched[placeholder="Search by Title, Creator or Work ID"]');
         },
 
         amountRecievedInput: function () {
@@ -1048,7 +1049,9 @@ if (pages.royaltyRates === undefined) {
             this.exploitationTerritoryDropdown().click();
 
             browser.wait(ExpectedConditions.visibilityOf(this.exploitationDropdownMenu()));
-            this.exploitationDropdownMenu().element(by.cssContainingText('li>a>span', value)).click()
+
+            this.exploitationDropdownMenu().element(by.cssContainingText('li>a', value)).click();
+
         },
 
         selectAddByTitleOption: function () {
@@ -1059,13 +1062,11 @@ if (pages.royaltyRates === undefined) {
             var workInput;
 
             workInput = this.workInput();
-
-            var rateSetTab = $('[data-close-others="oneAtATime"]');
             browser.driver.sleep(5000);
 
             if (sentKeys != "") {
                 var suggestion = $(".tg-typeahead__item-left>strong");
-                browser.wait(ExpectedConditions.invisibilityOf(suggestion));
+                //browser.wait(ExpectedConditions.invisibilityOf(suggestion));
                 workInput.sendKeys(sentKeys);
                 suggestion = $(".tg-typeahead__item-left>strong");
                 browser.wait(ExpectedConditions.visibilityOf(suggestion));

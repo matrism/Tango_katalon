@@ -12,6 +12,7 @@ exports.editSelectContractPeriodAdvancesByIndex = function (index) {
 
 exports.editCheckContractPeriodAdvancesDropDownContainsCp = function (i, contractPeriod) {
     it("Check that contract period advances drop down contains contract period " + contractPeriod, function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("select[name='advanceContractPeriod'] option:nth-child(" + (i + 1) + ")"))));
         browser.driver.findElement(by.css("select[name='advanceContractPeriod'] option:nth-child(" + (i + 1) + ")")).getText()
             .then(function (promise) {
                 console.log("Contract periods are " + promise);
@@ -32,7 +33,8 @@ exports.editCheckContractPeriodAdvancesDropDownNotToContainsCp = function (contr
 
 exports.editCheckContractPeriodAdvancesNumberIDetailsDisplayed = function (i, contractPeriod) {
     it("Check that contract period advances is displayed on the screen, details of contract period number " + i, function () {
-        browser.driver.findElement(by.css("div[data-ng-form='allAdvancesForm'] div.view-advance.ng-scope:nth-child(" + (i + 2) + ") h4")).getText()
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='allAdvancesForm'] div.view-advance.ng-scope:nth-child(" + (i + 2) + ") h4"))));
+        browser.driver.findElement(by.css("div[ng-form='allAdvancesForm'] div.view-advance.ng-scope:nth-child(" + (i + 2) + ") h4")).getText()
             .then(function (promise) {
                 console.log("Contract periods details are " + promise);
                 expect(promise).toContain(contractPeriod);
@@ -89,7 +91,8 @@ exports.editSelectContractPeriodAdvancesByIndexForContractPeriodNumberI = functi
 
 exports.editCheckThatContractPeriodNumberIHasSuspendedAdvances = function (i, j) {
     it("Edit check that contract period number " + i + " has suspended advances", function () {
-        browser.driver.findElement(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[name='advancesViewForm']:nth-child(" + j + ") span[data-ng-show='advance.supposedToBeSuspended']" )).getText()
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("button[ng-click='addAdvance()']"))));
+        browser.driver.findElement(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[name='advancesViewForm']:nth-child(" + j + ") span[ng-show='advance.supposedToBeSuspended']")).getText()
             .then(function (promise) {
                 console.log("Contract periods number " + i + " has suspended advances " + promise);
                 expect(promise).toEqual("Suspended");
@@ -99,7 +102,8 @@ exports.editCheckThatContractPeriodNumberIHasSuspendedAdvances = function (i, j)
 
 exports.editCheckTheSuspendedContractPeriodDetailsAreGreyedOutContractPeriodNumberI = function (i,j) {
     it("Edit check the suspended contract period details are greyed out for contract period number " + i, function () {
-        browser.driver.findElement(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[name='advancesViewForm']:nth-child(" + j + ") div.table.advances-view-table.clearfix.ng-scope>div")).getAttribute("class")
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[name='advancesViewForm']:nth-child(" + j + ")"))));
+        browser.driver.findElement(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[name='advancesViewForm']:nth-child(" + j + ") div.table.advances-view-table.clearfix.ng-scope>div")).getAttribute("class")
             .then(function (promise) {
                 console.log("Contract periods number " + i + " has suspended advances " + promise);
                 expect(promise).toContain("muted");

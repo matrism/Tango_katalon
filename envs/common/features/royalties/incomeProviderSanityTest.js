@@ -17,7 +17,7 @@ exports.feature = [
     {
         name: 'Create an organisation with an income provider role and then edit it',
         tags: ['create', 'edit', 'createIncomeProviderSanity'],
-        steps: criticalScenario(() => {
+        steps: function(){
             steps.mainHeader.createNewRecord('Organisation');
 
             using(steps.newOrganisation, function () {
@@ -111,6 +111,6 @@ exports.feature = [
                 this.saveSection();
                 this.expectSectionToBeInViewMode();
             });
-       })
+       }
     }
 ];

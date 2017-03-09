@@ -117,6 +117,7 @@ exports.feature = [
             steps.base.sleep(5000);
             steps.endRulesRetention.cancelDeleteEndRules();
             steps.endRulesRetention.deleteEndRulesConditionNumberIRowNumberJ(1, 0);
+            steps.base.sleep(5000);
             steps.endRulesRetention.clickOnConfirmDeleteEndRuleCondition();
 
             steps.endRulesRetention.saveEndRulesForm();
@@ -146,8 +147,9 @@ exports.feature = [
             steps.deal.goToRightsTermPeriodsTermsTabDetails();
             steps.editDealRtp.clickOnAddRetentionFromAcquisitionLink();
             steps.editDealRtp.editSelectSpecificDurationTypeRetentionFromAcquisitionNumberI(3, "Conditional Duration");
-
+            steps.base.sleep(5000);
             steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
+            steps.base.sleep(5000);
             steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetentionWithoutModal();
 
             steps.editDealRtp.scrollIntoViewAddEndRuleToRetentionEditMode();
@@ -157,6 +159,7 @@ exports.feature = [
             steps.editDealRtp.editSelectRandomOptionFromOffsetByChoiceEndRules(3);
             steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetention();
             steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
+            steps.base.sleep(5000);
             steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetention();
             steps.editDealRtp.saveRetentionFromAcquisition();
 
@@ -286,15 +289,19 @@ exports.feature = [
 
             //delete end rules from delete rule icons
             steps.editDealRtp.editDeleteRuleNumberIFromEndRulesRetention(1);
+            steps.base.sleep(5000);
             steps.editDealRtp.editCancelDeleteRuleNumberIFromEndRulesRetention();
             //delete rule 1
             steps.editDealRtp.editDeleteRuleNumberIFromEndRulesRetention(1);
+            steps.base.sleep(5000);
             steps.editDealRtp.editConfirmDeleteRuleNumberIFromEndRulesRetention();
             //delete rule 1
             steps.editDealRtp.editDeleteRuleNumberIFromEndRulesRetention(1);
+            steps.base.sleep(5000);
             steps.editDealRtp.editConfirmDeleteRuleNumberIFromEndRulesRetention();
             //delete rule 1
             steps.editDealRtp.editDeleteRuleNumberIFromEndRulesRetention(1);
+            steps.base.sleep(5000);
             steps.editDealRtp.editConfirmDeleteRuleNumberIFromEndRulesRetention();
 
             //add end rules from retention after deletion
@@ -332,7 +339,7 @@ exports.feature = [
     {
         name: "Create a deal with end rules on contract period and check the summary for end rules",
         tags: ["edit_summary_end_rules"],
-        steps: function() {
+        steps: criticalScenario(() =>{
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -472,7 +479,7 @@ exports.feature = [
             steps.createDealRtp.validateSummaryEndRule(1, 'If Balance Repaid at 45% (with notice) is after the Recouped Date, then the Actual End Date is the Repayment Date .');
             steps.createDealRtp.validateSummaryEndRule(2, 'If Balance Repaid at 32% is before the Recouped Date, and Recouped at 30% (with notice) is after the Retention Period Minimum, then the Actual End Date is the Retention Period Start offset by 21 days .');
 
-        }
+        })
     }
 
 

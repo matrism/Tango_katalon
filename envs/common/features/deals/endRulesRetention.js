@@ -2,8 +2,24 @@
 
 exports.id = '02160962-86ea-49ea-b8e6-875fd5465300';
 
+// exports.beforeEach =function () {
+//     var origFn = browser.driver.controlFlow().execute;
+//
+//     browser.driver.controlFlow().execute = function () {
+//         var args = arguments;
+//         origFn.call(browser.driver.controlFlow(), function () {
+//             return protractor.promise.delayed(100);   // here we can adjust the execution speed
+//         });
+//         return origFn.apply(browser.driver.controlFlow(), args);
+//     };
+//
+// },
+
 exports.beforeFeature = function () {
+
+
     steps.login.itLogin();
+
 },
 
     exports.commonFeatureTags = [
