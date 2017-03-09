@@ -6,7 +6,7 @@ var _ = require('lodash'),
 if (pages.createDealContractPeriod === undefined) {
     pages.createDealContractPeriod = new ftf.pageObject({
         locators: {
-            addContractPeriodElem: {css: "div.deal-terms-affix a[data-ng-click='addContractPeriod()']"},
+            addContractPeriodElem: {css: "div.deal-terms-affix a[ng-click='addContractPeriod()']"},
             descriptionContractPeriod: {css: "div.input-addition #description"},
             startDate: {css: "div#actualStartDate input"},
             endTargetMonths: {name: "targetEndDuration"},
@@ -655,9 +655,8 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnTheDeleteIconEndRulesConditionNumberIRowNumberJ: function (i, j) {
+            pages.base.scrollIntoView(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
             browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"))));
-            browser.actions().mouseMove(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i"))).perform();
-            //pages.base.scrollIntoView(element(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")));
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") a.pull-right.remove-btn i")).click();
         },
 

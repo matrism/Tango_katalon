@@ -10,6 +10,19 @@ exports.featureName = 'Smoke tests - deals, person, works, orgs, royalty';
 
 exports.commonFeatureTags = ['smoke'];
 
+exports.beforeEach =function () {
+    var origFn = browser.driver.controlFlow().execute;
+
+    browser.driver.controlFlow().execute = function () {
+        var args = arguments;
+        origFn.call(browser.driver.controlFlow(), function () {
+            return protractor.promise.delayed(1000);   // here we can adjust the execution speed
+        });
+        return origFn.apply(browser.driver.controlFlow(), args);
+    };
+
+},
+
 exports.beforeFeature = function () {
     steps.login.itLogin();
 };
@@ -193,28 +206,28 @@ exports.feature = [
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
             steps.base.sleep(5000);
-            steps.royaltyRates.typeIncomeProvider('FINLAND SYNCH INCOME');
+            steps.royaltyRates.typeIncomeProvider('BMI');
 
-            steps.royaltyRates.setStatementDistributionPeriod("1991", "02", "2013", "03");
+            steps.royaltyRates.setStatementDistributionPeriod("2016", "06", "2016", "12");
 
-            steps.royaltyRates.setStatementAmount("1000");
+            steps.royaltyRates.setStatementAmount("500");
             steps.royaltyRates.setExchangeRate("1");
             steps.royaltyRates.createManualStatement();
             steps.base.sleep(5000);
             steps.royaltyRates.enterBatchArea();
-            steps.royaltyRates.enterBatchAmount("1000");
+            steps.royaltyRates.enterBatchAmount("500");
             steps.royaltyRates.clickDefaultSettingsOnBatch();
-            steps.royaltyRates.selectIncomeTypeForBatch("Mechanical");
+            steps.royaltyRates.selectIncomeTypeForBatch("Video Synch");
 
-            steps.royaltyRates.selectExploitationTerritoryForBatch("Lithuania");
-            steps.royaltyRates.addWorkByTitle("test");
-
-            steps.royaltyRates.setAmountRecievedForWork("1000");
-            steps.royaltyRates.clickDoneButtonForManualStatement();
-
-            steps.royaltyRates.goToRoyaltyStatements();
-            steps.royaltyRates.expandSavedManualStatement();
-            steps.royaltyRates.validateManualStatement();
+            steps.royaltyRates.selectExploitationTerritoryForBatch("Malaysia");
+            steps.royaltyRates.addWorkByTitle("SANGITA BEST WORK");
+            //
+            // steps.royaltyRates.setAmountRecievedForWork("1000");
+            // steps.royaltyRates.clickDoneButtonForManualStatement();
+            //
+            // steps.royaltyRates.goToRoyaltyStatements();
+            // steps.royaltyRates.expandSavedManualStatement();
+            // steps.royaltyRates.validateManualStatement();
         })
     }
 ];

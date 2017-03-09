@@ -6,9 +6,9 @@ var pages_path = _tf_config._system_.path_to_pages;
 if (pages.createDealAdvances === undefined) {
     pages.createDealAdvances = new ftf.pageObject({
         locators: {
-            addFirstAdvanceLink: {css: "a[data-ng-click='addAdvanceFromCreate(true, false)']"},
+            addFirstAdvanceLink: {css: "a[data-ng-click='addAdvanceFromCreate(false)']"},
             yesSuspendedButton: {css: "button[name='advanceSuspended']"},
-            advanceDetailsAmount: {css: "input[data-ng-model='activeAdvance.amount']"},
+            advanceDetailsAmount: {css: "input[data-ng-model='freshlyAddedModel.amount']"},
             advanceDetailsCurrencyArrow: {css: "div[data-validation-class='advanceCurrency'] button.btn.dropdown-toggle"},
             advanceDetailsDistributionRulesCurrencyArrow: {css: "div[data-validation-class='advancePaymentDistributionCurrency'] button.btn.dropdown-toggle"},
             firstDistributionRulesPercentAdvanceDetails: {css: "table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(1) input[data-ng-model='apd.percent']"},
@@ -72,7 +72,7 @@ if (pages.createDealAdvances === undefined) {
             modalBodyCancelAdvance: {css: "div.modal-body p[data-ng-show='data.shouldResetAAE']"},
             noModalBodyCancelAdvance: {css: "div.modal-footer button[data-ng-click='cancel()']"},
             cancelThisAdvanceButton: {css: "button[data-ng-click='$external.DA.showCancelAdvanceModal()']"},
-            addAnotherAdvanceButton: {css: "button[data-ng-click='$external.DA.addAdvanceFromCreate(false, isInvalidWizard(), false)']"},
+            addAnotherAdvanceButton: {css: "button[ng-click='DA.addAdvanceFromCreate(false)']"},
             numberOfUnitsSales:{css: "input[name='advancePaymentConditionUnits']"}
         },
 
@@ -199,6 +199,7 @@ if (pages.createDealAdvances === undefined) {
         fillIntoThePercentDistributionRulesAdvanceDetailsNumberISpecificValue: function (i, percent) {
             var element = browser.driver.findElement(By.css("table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(" + i + ") input[data-ng-model='apd.percent']"));
             element.sendKeys(percent);
+            browser.driver.findElement(By.css("div.advance-earnings.EDITOR.active.ng-scope")).click();
         },
 
         fillIntoTheNumberOfUnitsSalesOptionAdvanceDetailsSpecificValue: function (units) {
@@ -209,6 +210,7 @@ if (pages.createDealAdvances === undefined) {
             var percent = (Math.random() * 99 + 1).toFixed(2);
             var element = browser.driver.findElement(By.css("table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(" + i + ") input[data-ng-model='apd.percent']"));
             element.sendKeys(percent);
+
         },
 
         selectTheRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI: function (i) {

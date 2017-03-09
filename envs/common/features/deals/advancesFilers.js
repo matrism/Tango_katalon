@@ -13,7 +13,7 @@ exports.feature = [
     {
         name: "Create a deal with publisher share set",
         tags: ["filterAdvances"],
-        steps: function () {
+        steps: function(){
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -92,14 +92,14 @@ exports.feature = [
             steps.editAdvances.editSaveAdvance();
 
             //check suspended advances option present
+            steps.base.sleep(5000);
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(0, "All Advances");
-            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(1, "Suspended Advances");
-            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(2, "Contract Period 1");
-            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(3, "Contract Period 2");
-            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(4, "Contract Period 3");
-
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(1, "Contract Period 1");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(2, "Contract Period 2");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(3, "Contract Period 3");
+            steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(4, "Suspended Advances");
             //select contract period 3 from advances drop down
-            steps.editAdvances.editSelectContractPeriodAdvancesByIndex(4);
+            steps.editAdvances.editSelectContractPeriodAdvancesByIndex(3);
 
             steps.editAdvances.editClickToSeeAdvanceDetailsForContractPeriodNumberI(1);
             steps.editAdvances.editAdvanceDetailsAreaContractPeriodNumberI(1);
@@ -138,18 +138,6 @@ exports.feature = [
             steps.createDealAdvances.fillIntoPercentDistributionRulesAdvanceDetailsNumberISpecificValue(1, "30");
             steps.editAdvances.editSaveAdvance();
 
-            //edit select all advances from drop down and check the suspended
-            steps.editAdvances.editCheckThatContractPeriodNumberIHasSuspendedAdvances(2, 2);
-            steps.editAdvances.editCheckThatContractPeriodNumberIHasSuspendedAdvances(4, 1);
-            steps.editAdvances.editCheckTheSuspendedContractPeriodDetailsAreGreyedOutContractPeriodNumberI(2, 2);
-            steps.editAdvances.editCheckTheSuspendedContractPeriodDetailsAreGreyedOutContractPeriodNumberI(4, 1);
-
-            //select the suspended advances
-            steps.editAdvances.editSelectContractPeriodAdvancesByIndex(1);
-            steps.editAdvances.editCheckThatContractPeriodNumberIHasSuspendedAdvances(1, 1);
-            steps.editAdvances.editCheckThatContractPeriodNumberIHasSuspendedAdvances(2, 1);
-            steps.editAdvances.editCheckTheSuspendedContractPeriodDetailsAreGreyedOutContractPeriodNumberI(1, 1);
-            steps.editAdvances.editCheckTheSuspendedContractPeriodDetailsAreGreyedOutContractPeriodNumberI(2, 1);
         }
     },
 
@@ -157,7 +145,7 @@ exports.feature = [
     {
         name: "Create a deal with publisher share set",
         tags: ["filterDeleteAdvances"],
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -251,6 +239,6 @@ exports.feature = [
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownNotToContainsCp("Contract Period 4");
             steps.editAdvances.editCheckContractPeriodAdvancesNumberIDetailsDisplayed(2, "Contract Period 2");
             steps.editAdvances.editCheckContractPeriodAdvancesDetailsIsNotDisplayed("Contract Period 1");
-        }
+        })
     }
 ];

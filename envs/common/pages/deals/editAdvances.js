@@ -14,13 +14,14 @@ exports.editSelectTheContractPeriodAdvancesByIndex = function (index) {
 
 exports.editClickOnTheNoSuspendButtonAdvances = function () {
     var button = exports.noSuspendedButton();
+    browser.wait(ExpectedConditions.visibilityOf(element(by.css("button[ng-model='tgModularEditModel.cancelled']:nth-child(2)"))));
     pages.base.scrollIntoView(button);
     button.click();
     pages.base.waitForAjax();
 };
 
 exports.noSuspendedButton = function(){
-  return element(By.css("button[data-ng-model='advance.supposedToBeSuspended']:nth-child(2)"));
+  return element(By.css("button[ng-model='tgModularEditModel.cancelled']:nth-child(2)"));
 };
 
 exports.addAdvanceButton = function () {
@@ -28,30 +29,31 @@ exports.addAdvanceButton = function () {
 };
 
 exports.editClickToSeeTheAdvanceDetailsForContractPeriodNumberI = function (i) {
-    pages.base.scrollIntoView(element(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ")")));
-    browser.driver.findElement(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") accordion")).click();
-    browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") i.pull-left.fa.fa-chevron-up"))));
+    pages.base.scrollIntoView(element(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ")")));
+    browser.driver.findElement(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") accordion")).click();
+    browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") i.pull-left.fa.fa-chevron-up"))));
 };
 
 exports.editTheAdvanceDetailsAreaContractPeriodNumberI = function (i) {
-    browser.actions().mouseMove(element(by.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-if='advanceFormSection.details_template.detail']"))).perform();
-    browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-if='advanceFormSection.details_template.detail'] i.fa.fa-pencil"))));
-    browser.driver.findElement(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-if='advanceFormSection.details_template.detail'] i.fa.fa-pencil")).click();
+    browser.actions().mouseMove(element(by.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-if='advance.contractPeriodId == cp.id']"))).perform();
+    browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-if='advance.contractPeriodId == cp.id'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i.fa.fa-pencil"))));
+    browser.driver.findElement(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-if='advance.contractPeriodId == cp.id'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i.fa.fa-pencil")).click();
 };
 
 exports.saveAdvanceButton = function () {
-    return element(by.css("div[data-ng-form='addNewAdvanceForm'] button[data-ng-click='updateDeal(addNewAdvanceForm.$valid, null, true)']"));
+    return element(by.css("div[ng-if='dataHolder.advances.createNewAdvance'] button[ng-click='__isValid && saveAdvance()']"));
 };
 
 exports.editSaveTheAdvance = function () {
     var button = exports.saveAdvanceButton();
     pages.base.scrollIntoView(button);
     button.click();
-    browser.wait(EC.visibilityOf(element(by.css("div[data-ng-form='allAdvancesForm']"))));
+    //browser.wait(EC.visibilityOf(element(by.css("div[data-ng-form='allAdvancesForm']"))));
 };
 
 exports.clickAddAdvanceButton = function () {
     var button = exports.addAdvanceButton();
+    browser.wait(ExpectedConditions.visibilityOf(element(by.css("button[ng-click='addAdvance()']"))));
     pages.base.scrollIntoView(button);
     browser.wait(EC.visibilityOf(button));
 
@@ -119,6 +121,15 @@ exports.saveButton = function () {
     return $('.create-models-buttons-holder .btn-primary');
 };
 
+exports.advanceSummary = function() {
+    return $$("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']");
+};
+
+exports.advanceFilter = function(i){
+    return $$("div.suspended").get(i);
+
+}
+
 exports.saveAdvance = function () {
     exports.saveButton().click();
 };
@@ -180,16 +191,29 @@ exports.expectAdvanceAssumptionsPopUpToAppear = function () {
 
 
 exports.editSelectTheContractPeriodAdvancesByIndexForContractPeriodNumberI = function (index, i) {
-    pages.base.scrollIntoView(element(by.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-form='advanceDetailsEditForm'] select[data-ng-model='advance.cpId']")));
-    browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-form='advanceDetailsEditForm'] select[data-ng-model='advance.cpId'] option"))));
-    browser.driver.findElements(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-form='advanceDetailsEditForm'] select[data-ng-model='advance.cpId'] option"))
+    pages.base.scrollIntoView(element(by.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-form='advancesViewForm'] select[ng-model='tgModularEditModel.cpId']")));
+    browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-form='advancesViewForm'] select[ng-model='tgModularEditModel.cpId'] option"))));
+    browser.driver.findElements(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-form='advancesViewForm'] select[ng-model='tgModularEditModel.cpId'] option"))
         .then(function (options) {
             options[index].click();
         })
 };
 
 exports.editSaveTheAdvancesDetailsAreaContractPeriodNumberI = function (i) {
-    pages.base.scrollIntoView(element(by.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-form='advanceDetailsEditForm'] button[data-ng-click='updateDeal(advanceDetailsEditForm.$valid)']")));
-    browser.findElement(By.css("div[data-ng-form='allAdvancesForm'] div[data-ng-repeat='cp in form.deal.deal_contract_periods | filter:filterCpsForAdvancesView(form.show.advances.filterCpId)']:nth-child(" + (i + 2) + ") div[data-ng-form='advanceDetailsEditForm'] button[data-ng-click='updateDeal(advanceDetailsEditForm.$valid)']")).click();
+    pages.base.scrollIntoView(element(by.css("div[ng-form='advancesViewForm'] button[data-ng-click='tgModularViewMethods.save()']")));
+    browser.findElement(By.css("div[ng-form='advancesViewForm'] button[data-ng-click='tgModularViewMethods.save()']")).click();
     pages.base.waitForAjax();
 };
+
+exports.editCheckThatContractPeriodNumberHasSuspendedAdvances = function (i) {
+    it("Edit check that contract period number " + i + " has suspended advances", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("button[ng-click='addAdvance()']"))));
+        browser.driver.findElement(exports.advanceFilter(i)).getText()
+            .then(function (promise) {
+                console.log("Contract periods number " + i + " has suspended advances " + promise);
+                expect(promise).toEqual("Suspended");
+            });
+    });
+};
+
+
