@@ -164,7 +164,7 @@ exports.internalIpiNumberBinding = function() {
 };
 
 exports.suisaIPINumber = function() {
-    return $(".e2e-primary-name .e2e-primary-name-suisa-ipi .controls");
+    return $(".e2e-primary-name .e2e-primary-name-suisa-ipi .controls .ng-binding");
 };
 exports.nameBinding = function() {
     return $('.e2e-primary-name .e2e-primary-name-full .controls');

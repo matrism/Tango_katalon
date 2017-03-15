@@ -108,7 +108,8 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         newRoyaltySetButton: function () {
-            return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
+            //return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
+            return element(by.css('a[ng-click="onAddContractualRateSet(true)"]'));
         },
 
         royaltyRateInput: function () {

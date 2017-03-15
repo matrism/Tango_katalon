@@ -93,6 +93,7 @@ exports.selectAnIncomeProvider = function (provider) {
 
 exports.addEffectiveStartDate = function (date) {
     it("Type effective start date into input", function () {
+        browser.driver.sleep(2000);
         pages.royaltyRates.typeIntoEffectiveStartDateInput(date);
     });
 };

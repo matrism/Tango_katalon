@@ -346,10 +346,11 @@ exports.findAlternativeSuisaIpiNumber = function (i) {
     });
 };
 
-exports.validateSuisaIpiNumber = function () {
+exports.validateSuisaIpiNumber = function (suisaIpiNumber) {
     it('Validate SUISA IPI number', function () {
 
-        expect(pages.person.getSuisaIPI()).toBe(hash.currentPersonSlot.suisaIpiNumber)
+        //expect(pages.person.getSuisaIPI()).toBe(hash.currentPersonSlot.suisaIpiNumber)
+        expect(pages.person.getSuisaIPI()).toBe(suisaIpiNumber);
     });
 };
 
