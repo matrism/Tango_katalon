@@ -163,8 +163,6 @@ exports.feature = [
 
             steps.organisation.subPublishers.expectNameToBeEither(
                 0, [
-                    //'JAWARA PUSTAKA MUZIK',
-                    //'WARNER/CHAPPELL MUSIC PUBLISHING CHILE LTDA.',
                     'DANCING BEAR PUBLISHING LTD',
                     'WARNER CHAPPELL MUSIC (MALAYSIA) SDN. BHD.',
                     'AKIN WARNER'

@@ -246,7 +246,6 @@ if (pages.organisation === undefined) {
             return $$(".btn.btn-primary.ng-scope").first();
         },
         activityHeader: function () {
-            //return $("#ACTIVITY-HEADER");
             return $("div[data-ng-show='show.table.records || show.alert || show.no_reg_activity']");
         },
         elementWork: function () {

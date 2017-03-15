@@ -43,7 +43,6 @@ exports.getSuisaIPI = function() {
     browser.wait(ExpectedConditions.visibilityOf(exports.suisaIPINumber()));
     var element = exports.suisaIPINumber();
     pages.base.scrollIntoView(element);
-    console.log()
     return element.getText();
 };
 
