@@ -14,15 +14,15 @@ if (pages.createDealScope === undefined) {
             territoryActivator: {css: 'div[ng-model="modularEditModels.model.deal_scope_territories.territories"] .tg-typeahead__tags-text'},
             territoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             addPublisherShareSetLink: {css: "div.publisher-share-totals a[ng-click='addChainAndSwitchToEdit()']"},
-            firstPublisherNameField: {css: '#deal-publisher div[ng-form="dealChainsForm"] div[ng-form="chainForm"] div.publisher-share.clearfix div.publisher-row.clearfix.ng-scope div.control-group.pull-left.ps-name.relative.ng-scope.error div[tg-org-typeahead-name="acquirer"]:nth-child(1) div[ng-model="tgOrgTypeaheadModel"] input[ng-model="$term"]'},
-            firstPublisherOwnPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"},
-            firstPublisherCollectPercent: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"},
-            firstPublisherNameAMField: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input[ng-model='$term']"},
-            firstPublisherNameAMCollectPercent: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"},
+            firstPublisherNameField: {css: '#deal-publisher div[ng-form="dealChainsForm"] div[ng-form="chainForm"] div.publisher-share.clearfix div.publisher-row.clearfix.ng-scope div.control-group.pull-left.ps-name.relative.ng-scope.error div[tg-org-typeahead-name="acquirer"]:nth-child(1) div[ng-model="tgOrgTypeaheadModel"] input'},
+            firstPublisherOwnPercent: {css: "#deal-publisher div[tg-model-class-validation='share.ownShare'] input[name='ownShare']"},
+            firstPublisherCollectPercent: {css: "#deal-publisher div[ng-form='chainForm'] div.publisher-row.clearfix input[name='collectShare']"},
+            firstPublisherNameAMField: {css: "#deal-publisher div[ng-form='chainForm'] div.ng-scope:nth-child(4) div[name='acquirer'] input[ng-model='$term']"},
+            firstPublisherNameAMCollectPercent: {css: "#deal-publisher div[ng-form='chainForm'] div[class='publisher-row clearfix ng-scope am-share'] input[name='collectShare']"},
             publisherNameDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             firstPublisherTypeEOrPAArrow: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-caret.fa.fa-caret-down"},
             firstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
-            firstPublisherTypeValue: {css: "#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
+            firstPublisherTypeValue: {css: "#deal-publisher div[ng-form='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
             firstPublisherTypeText: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button"},
             savePublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
             cancelPublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
@@ -34,8 +34,8 @@ if (pages.createDealScope === undefined) {
             subtotalOwnPublisherShareErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
             chainTotalOwnPublisherShareErrorMessage: {css: "#deal-publisher  ul[role='alert'] li[data-ng-show='pubShareSetForm.$error.scopeOwnTotal']"},
             chainSubtotalOfCollectCannotGreaterThanOwnErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li.ng-scope"},
-            yesSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(1)"},
-            noSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)"},
+            yesSocietyAwardCreditPss: {css: "#deal-publisher button[ng-model='tgModularEditModel.societyAwardCredit']:nth-child(1)"},
+            noSocietyAwardCreditPss: {css: "#deal-publisher button[ng-model='tgModularEditModel.societyAwardCredit']:nth-child(2)"},
             creatorInputField: {css: "div[data-ng-model='modularEditModels.model.creators'] input[ng-model='$term']"},
             workForHireTextTooltip: {css: "label[for='work_for_hire'] i"},
             yesWorkForHire: {css: "button[data-ng-model='modularEditModels.model.work_for_hire']:nth-child(1)"},
@@ -471,10 +471,12 @@ if (pages.createDealScope === undefined) {
         },
 
         fillInFirstPublisherNameOwnPercentSpecificValue: function (percent) {
+            pages.createDealScope.elems.firstPublisherOwnPercent.clear();
             pages.createDealScope.elems.firstPublisherOwnPercent.sendKeys(percent);
         },
 
         fillInFirstPublisherNameCollectPercentSpecificValue: function (percent) {
+            pages.createDealScope.elems.firstPublisherCollectPercent.clear();
             pages.createDealScope.elems.firstPublisherCollectPercent.sendKeys(percent);
         },
 
@@ -485,7 +487,7 @@ if (pages.createDealScope === undefined) {
         },
 
         fillInFirstPublisherNameAMCollectPercent: function () {
-            var percent = (Math.random() * 9 + 1).toFixed(2),
+            var percent = ((Math.random() * 25) + 1).toFixed(2),
                 element = pages.createDealScope.elems.firstPublisherNameAMCollectPercent;
             pages.base.scrollIntoView(element);
             element.sendKeys(percent);

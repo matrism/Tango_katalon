@@ -172,7 +172,8 @@ if (pages.royaltyRates === undefined) {
         },
 
         newRoyaltyRateSetButton: function () {
-            return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
+            //return element(by.css('[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'));
+            return element(by.css('a[ng-click="onAddContractualRateSet(true)"]'));
         },
 
         newRoyaltyRateSetButtonEdit: function () {
@@ -286,7 +287,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         workInput: function () {
-            return $('div[data-ng-model="workEntries.newWork"] input.tg-typeahead__input.ng-pristine.ng-valid.ng-touched[placeholder="Search by Title, Creator or Work ID"]');
+            return $('div[data-ng-model="workEntries.newWork"] input.tg-typeahead__input.ng-pristine.ng-valid[placeholder="Search by Title, Creator or Work ID"]');
         },
 
         amountRecievedInput: function () {
@@ -1060,7 +1061,6 @@ if (pages.royaltyRates === undefined) {
 
         addWorkByTitleFromTypeAhead: function (sentKeys) {
             var workInput;
-
             workInput = this.workInput();
             browser.driver.sleep(5000);
 

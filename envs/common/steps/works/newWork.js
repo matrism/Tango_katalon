@@ -285,6 +285,8 @@ exports.confirmComponentWorkDeletion = function() {
         pages.newWork.confirmComponentWorkDeletion();
     });
 };
+
+/*
 exports.selectRandomCreator = function(i) {
     it('Type a random letter on creator name field #' + (i + 1), function() {
         pages.newWork.enterRandomLetterOnCreatorNameField(i);
@@ -306,6 +308,32 @@ exports.selectRandomCreator = function(i) {
         pages.newWork.selectRandomCreatorSuggestion().then(function(selected) {
            creator.name = selected.name;
            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+*/
+exports.selectCreator = function(i) {
+
+    it('Type the creator name + (name);', function() {
+        pages.newWork.enterCreatorSearchTerms(0,i);
+    });
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        var data = hash.currentEntityDataSlotsByType.work;
+        var creator;
+
+        data.creators = data.creators || [];
+        data.creators[i] = data.creators[i] || {};
+
+        creator = data.creators[i];
+
+        pages.newWork.selectRandomCreatorSuggestion().then(function(selected) {
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
         });
     });
 };
