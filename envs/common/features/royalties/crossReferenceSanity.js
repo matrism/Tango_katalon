@@ -20,20 +20,18 @@ exports.feature = [
     {
         name: 'Cross Reference - Search',
         tags: ['crossReferenceSearchSanity'],
-        //steps: () => {
-        steps: criticalScenario(() => {
+        steps: function() {
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             steps.crossReference.selectSearchCriterion('Incoming Works');
             steps.crossReference.searchForIncomingWork('test', 'Incoming Work ID');
             steps.crossReference.expectIncomingWorkToBeVisible();
             steps.crossReference.expectIncomingWorkIdToContainSearchTerm();
-        }),
+        },
     },
     {
         name: 'Cross Reference - Add',
         tags: ['crossReferenceAddSanity'],
-        //steps: () => {
-        steps: criticalScenario(() => {
+        steps: function() {
             let filters = ['Work ID', 'Title', 'Creator'],
                 terms = ['WW 015069382 00', 'test', 'test'];
 
@@ -53,6 +51,6 @@ exports.feature = [
                     'Income Provider:'
                 ]);
             });
-        }),
+        },
     },
 ];
