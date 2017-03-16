@@ -71,6 +71,12 @@ function Typeahead (target, dummy, isAppendedToBody) {
         });
     };
 
+    typeahead.selectTW = function (text, index) {
+        return typeahead.enterText(text).then(() => {
+                $$('body > .tg-typeahead__suggestions-wrap > ul').get(index).click();
+        });
+    };
+
     typeahead.enterText = (text) => {
         typeahead.clear();
         return typeahead.sendKeys(text).then(() => {
@@ -89,6 +95,10 @@ function Typeahead (target, dummy, isAppendedToBody) {
 
     typeahead.selectFirst = function(text) {
         return typeahead.select(text, false, 0);
+    };
+
+    typeahead.selectFirstTangoWork = function(text) {
+        return typeahead.selectTW(text, 0);
     };
 
     return typeahead;

@@ -8,7 +8,8 @@ exports.commonFeatureTags = [
     'royaltyProcessing',
     'crossReference',
     'crossReferenceSanity',
-    'sanity'
+    'sanity',
+    'TS-209'
 ];
 
 exports.beforeFeature = () => {
@@ -19,18 +20,20 @@ exports.feature = [
     {
         name: 'Cross Reference - Search',
         tags: ['crossReferenceSearchSanity'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             steps.crossReference.selectSearchCriterion('Incoming Works');
             steps.crossReference.searchForIncomingWork('test', 'Incoming Work ID');
             steps.crossReference.expectIncomingWorkToBeVisible();
             steps.crossReference.expectIncomingWorkIdToContainSearchTerm();
-        },
+        }),
     },
     {
         name: 'Cross Reference - Add',
         tags: ['crossReferenceAddSanity'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let filters = ['Work ID', 'Title', 'Creator'],
                 terms = ['WW 015069382 00', 'test', 'test'];
 
@@ -50,6 +53,6 @@ exports.feature = [
                     'Income Provider:'
                 ]);
             });
-        },
+        }),
     },
 ];
