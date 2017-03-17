@@ -132,19 +132,18 @@ exports.feature = [
             using(steps.workRegistrationActivity.activityGroup, function() {
                 this.find({ firstWithRecipientName: data.org });
                 this.toggleBlind();
-
                 using(this.events, function() {
-                    this.find({ firstWithFileName: fromTestVariable('current ACK file name') });
-                    this.toggleBlind();
-                    this.waitUntilAnyEventStatusBecomes(data.workEvent.status);
-                    this.validateStatus(data.workEvent.status);
-                    steps.base.sleep(5000);
-                    this.validateAckCreationDate(data.event.creationDate);
-                    steps.base.sleep(5000);
-                    this.validateInitiatedBy();
-                    this.validateMessage(data.workEvent.message);
-                    this.validateSocietyCode(data.workEvent.societyCode);
-                    this.validateProcessedDate(data.workEvent.processedDate);
+                this.find({ firstWithFileName: fromTestVariable('current ACK file name') });
+                this.toggleBlind();
+                this.waitUntilAnyEventStatusBecomes(data.workEvent.status);
+                this.validateStatus(data.workEvent.status);
+                steps.base.sleep(5000);
+                this.validateAckCreationDate(data.event.creationDate);
+                steps.base.sleep(5000);
+                this.validateInitiatedBy();
+                this.validateMessage(data.workEvent.message);
+                this.validateSocietyCode(data.workEvent.societyCode);
+                this.validateProcessedDate(data.workEvent.processedDate);
                 });
             });
         }
@@ -172,6 +171,7 @@ exports.feature = [
                 });
                 this.validateReceivedDate(data.event.creationDate);
                 this.validateInitiatedBy();
+                steps.base.sleep(1000);
             });
         }
     }
