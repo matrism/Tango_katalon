@@ -8,7 +8,8 @@ exports.commonFeatureTags = [
     'royaltyProcessing',
     'crossReference',
     'crossReferenceSanity',
-    'sanity'
+    'sanity',
+    'TS-209'
 ];
 
 exports.beforeFeature = () => {
@@ -19,7 +20,7 @@ exports.feature = [
     {
         name: 'Cross Reference - Search',
         tags: ['crossReferenceSearchSanity'],
-        steps: () => {
+        steps: function() {
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             steps.crossReference.selectSearchCriterion('Incoming Works');
             steps.crossReference.searchForIncomingWork('test', 'Incoming Work ID');
@@ -30,7 +31,7 @@ exports.feature = [
     {
         name: 'Cross Reference - Add',
         tags: ['crossReferenceAddSanity'],
-        steps: () => {
+        steps: function() {
             let filters = ['Work ID', 'Title', 'Creator'],
                 terms = ['WW 015069382 00', 'test', 'test'];
 

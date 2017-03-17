@@ -53,7 +53,7 @@ exports.searchForTangoWork = (text, filter) => {
         typeahead.setFilter(filter);
     }
 
-    typeahead.selectFirst(text);
+    typeahead.selectFirstTangoWork(text);
     setTestVariable('Last Tango Work search term', text);
 };
 
