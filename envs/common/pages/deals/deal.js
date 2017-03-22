@@ -21,7 +21,7 @@ if (pages.deal === undefined) {
             scopeHeader: {css: ".scope-heading"},
             incomeRates: {css: ".nav-tabs>li:nth-child(5)>a"},
             dealPayeesSummaryHeader: {css: "div.deal-payee__label"},
-            dealTermsSummaryHeader: {css: "a[data-ng-class='{ active: form.show.section.cps }']"},
+            dealTermsSummaryHeader: {css: "a[ui-sref='deal.view.terms.cpAndScopes']"},
             finderDealsHeaderLink: {css: "a[data-ng-class='{ active: form.show.section.fdt }']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm']"},
             relatedDealsHeaderLink: {css: "a[data-ng-click='showRelatedDealsPage()']"},
