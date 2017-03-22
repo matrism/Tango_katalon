@@ -487,9 +487,10 @@ if (pages.createDealScope === undefined) {
         },
 
         fillInFirstPublisherNameAMCollectPercent: function () {
-            var percent = ((Math.random() * 25) + 1).toFixed(2),
+            var percent = ((Math.random() * 9) + 1).toFixed(2),
                 element = pages.createDealScope.elems.firstPublisherNameAMCollectPercent;
             pages.base.scrollIntoView(element);
+            element.clear();
             element.sendKeys(percent);
         },
 

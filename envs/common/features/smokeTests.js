@@ -32,7 +32,7 @@ exports.beforeFeature = function () {
 exports.feature = [
     {
         name: 'Create a deal with publisher share set',
-        tags: ['deals','createDeal_ts-212'],
+        tags: ['deals','createDeal'],
         steps: function () {
         //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
