@@ -108,8 +108,8 @@ exports.feature = [
     },
     {
         name: "Dirty check flow internal contact",
-        tags: ["edit", 'TAT977'],
-        steps: function () {
+        tags: ["edit", 'TS21'],
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
             steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shilpa");
@@ -137,7 +137,8 @@ exports.feature = [
             steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.confirmTheCancelModalDialog();
             steps.deal.goToGeneralDealTabDetails();
+            steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.deal.expectTermsDetailsAreOk();
-        }
+        })
     }
 ];
