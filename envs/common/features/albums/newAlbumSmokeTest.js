@@ -68,10 +68,12 @@ exports.feature = [
     {
         name: 'Create commercial album',
         tags: ['newAlbumSmokeCreateCommercialAlbum'],
-        steps: function() {
+        steps: criticalScenario(() => {
             using(steps.newAlbum, function() {
 
-                let nar = this.recordings;
+                let nar = this.recordings,
+                    nard = this.releaseDetails;
+
 
                 this.goToNewAlbumPage();
 
@@ -102,11 +104,16 @@ exports.feature = [
                 );
 
                  nar.selectArtistSearchResultByIndex(0);
+                 this.goToTab('Release Details');
+
+
 
                this.save();
             });
 
+
+
             steps.album.header.expectHeaderToBeVisible();
-        }
+        })
     }
 ];

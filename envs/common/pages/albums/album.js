@@ -18,6 +18,7 @@ exports.header = (function() {
 
     exports.expectHeaderToBeVisible = function() {
         var element = exports.container();
+        browser.wait(ExpectedConditions.visibilityOf(element));
         pages.base.scrollIntoView(element);
         expect(element.isDisplayed()).toBeTruthy();
     };
@@ -659,14 +660,14 @@ exports.releaseDetails = (function() {
     };
 
     exports.rows = function() {
-        return $$('[data-ng-repeat^="albumRelease in"]');
+        return $$("div[ng-repeat='albumRelease in dataHolder.albumReleases']");
     };
 
     exports.territoriesSelector = function(i) {
         return exports.rows().get(i).element(by.model(
             'albumRelease.territory_code'
         ));
-    };
+    }
 
     exports.territoriesSelectorGlobeButton = function(i) {
         return exports.territoriesSelector(i).$('.tg-territory__globe-button');
