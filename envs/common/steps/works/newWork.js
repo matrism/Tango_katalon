@@ -920,5 +920,5 @@ exports.save = function() {
 exports.saveWork = exports.save;
 
 exports.validateSaveWorkRedirection = function() {
-     steps.base.validateRedirection("created work page", "/general");
+	steps.base.validateRedirection("created work page", "/rights/summary");
 };
