@@ -5,7 +5,7 @@ pages.workRecordings = exports;
 // ---
 
 exports.editContainer = () => $(
-    '[data-ng-controller="WorkRecordingsEditController"]'
+    '[tg-modular-edit-id="workRecordings"]'
 );
 
 // ---
@@ -61,7 +61,7 @@ exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
 // ---
 
 {
-    let locator = by.model('$term');
+    let locator = by.css('div[ng-model="recordingLink.recording.title"] input');
 
     exports.titleInput = i => exports.rows().get(i).element(locator);
 
@@ -238,7 +238,7 @@ exports.validateArtistName = (i, val) => expect(
 // ---
 
 exports.libraryNameBinding = i => exports.rows().get(i).$(
-    '[data-ng-switch="commonDataHolder.isLibrary"] .ng-binding'
+    '[ng-switch="!!WorkRecordingsCtrl.getLibraryCode()"] .ng-binding'
 );
 
 exports.libraryName = i => asAlways(
@@ -290,7 +290,7 @@ exports.validateDuration = (i, val) => expect(
 // ---
 
 exports.firstUseCheckbox = i => exports.rows().get(i).$(
-    '.recordingLink.firstUse'
+    'input[ng-model="recordingLink.firstUse"]'
 );
 
 exports.toggleFirstUseFlag = i => asAlways(
@@ -308,7 +308,7 @@ exports.validateFirstUseFlagState = (i, st) => expect(
 // ---
 
 exports.removeButton = i => exports.rows().get(i).$(
-    '.content-border.m-remove'
+    'a.ng-scope i'
 );
 
 // ---
@@ -345,7 +345,11 @@ exports.remove = i => asAlways(
 // ---
 
 exports.toggleButton = i => exports.rows().get(i).$(
-    '.fa fa-angle-up.fa-angle-down'
+    '.fa.fa-angle-up.fa-angle-down'
+);
+
+exports.toggleCloseButton = i => exports.rows().get(i).$(
+    '.fa.fa-angle-up'
 );
 
 exports.expanded = i => asAlways(
@@ -354,6 +358,10 @@ exports.expanded = i => asAlways(
 
 exports.toggle = i => asAlways(
     exports.toggleButton(i), 'scrollIntoView', 'click', 'waitForAjax'
+);
+
+exports.toggleDown = i => asAlways(
+    exports.toggleCloseButton(i), 'scrollIntoView', 'click', 'waitForAjax'
 );
 
 // ---

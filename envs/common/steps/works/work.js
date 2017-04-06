@@ -1088,13 +1088,13 @@ exports.validateComponentWorkName = function (i, data, key) {
 };
 exports.validateComponentWorkAllocation = function (i, data, key) {
     it('Validate component work allocation #' + (i + 1), function () {
-        var component;
+        // var component;
 
-        data = data || hash.currentEntityDataSlotsByType.work;
-        key = key || 'components';
-        component = data[key][i];
+        // data = data || hash.currentEntityDataSlotsByType.work;
+        // key = key || 'components';
+        // component = data[key][i];
 
-        pages.work.validateComponentWorkAllocation(i, component.allocation);
+        pages.work.validateComponentWorkAllocation(i, data);
     });
 };
 module.exports.validateCreatorContributionInputMask = function (i, validationTable) {

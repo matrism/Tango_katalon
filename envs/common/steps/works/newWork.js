@@ -75,7 +75,7 @@ module.exports.ensureTotalContributionTooHighMessageIsDisplayed = function() {
 module.exports.validateTotalContribution = function() {
 	it (
 		"Validate total contribution", function() {
-			expect(pages.newWork.totalContribution()).toBe(100);
+			expect(pages.newWork.totalContribution()).toBe("100.000%");
 		}
 	);
 };
@@ -476,6 +476,7 @@ exports.enterNewShellWork = function(i, title, data, key) {
         });
     });
 };
+
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
         var data = hash.currentEntityDataSlotsByType.work;
@@ -506,11 +507,11 @@ exports.validateRequiredShellWorkCreatorNameField = function(i, j) {
         }
     );
 };
-exports.selectRandomShellWorkCreator = function(i, j, data, key) {
+exports.selectRandomShellWorkCreator = function(i, j, title, data, key) {
     it(
         'Type a random letter on creator name field #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            pages.newWork.enterRandomLetterOnShellWorkCreatorNameField(i, j);
+            pages.newWork.enterRandomLetterOnShellWorkCreatorNameField(i, j, title);
         }
     );
 

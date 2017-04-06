@@ -206,16 +206,13 @@ module.exports.saveWorkTitlesButton = function () {
     );
 };
 module.exports.creatorNamesContainer = function () {
-    return $(".EDITOR.creators-edit");
+    return $(".work-modular-edit");
 };
 module.exports.editCreatorsContainer = function () {
     return $('div[data-ng-show="workHeader.creators.edit"]');
 };
 module.exports.editCreatorsButton = function () {
-    return $(
-        "[data-ng-click='showEdit(workHeader.creators, " +
-        "contributionEditForm)']"
-    );
+    return $('div[tg-modular-edit-id="workContributors"] button[data-ng-click="tgModularViewMethods.switchToEditView()"]');
 };
 exports.compositeWorkCheckbox = function () {
     return element(by.model('work.contribution.isCompositeWork'));
@@ -258,14 +255,14 @@ module.exports.creatorsEditorCheckingForDuplicatesMessage = function () {
     return $(".creators-edit [data-ng-show='show.requests.checkDuplicates']");
 };
 exports.componentWorkRows = function () {
-    return element.all(by.repeater('component in work.contribution.components'));
+    return element.all(by.repeater('component in tgModularEditModel.components.$getItems()'));
 };
 exports.componentWorkRow = function (i) {
     return exports.componentWorkRows().get(i);
 };
 exports.componentWorkNameBindings = function () {
     return exports.componentWorkRows().all(
-        by.binding('getWorkName(component.model)')
+        by.binding('component.work.primaryTitle.title')
     );
 };
 exports.componentWorkNameBinding = function (i) {
@@ -273,11 +270,11 @@ exports.componentWorkNameBinding = function (i) {
 };
 exports.componentWorkIdLabel = function (i) {
     return exports.componentWorkRows().get(i).element(
-        by.binding('getWorkFullCode(component.model)')
+        by.binding('component.work.workCode.getFullCode()')
     );
 };
 exports.showComponentWorkDetailsButton = function (i) {
-    return exports.componentWorkRows().get(i).$('.show-hide-ca');
+    return exports.componentWorkRows().get(i).$('a[ng-click="component.toggleDetails()"]');
 };
 exports.shellWorkCreatorRows = function (i) {
     return exports.componentWorkRows().get(i).all(
@@ -285,10 +282,10 @@ exports.shellWorkCreatorRows = function (i) {
     );
 };
 exports.shellWorkCreatorNameLabel = function (i, j) {
-    return exports.componentWorkRows().get(i).$$('.show-ca_name').get(j);
+    return exports.componentWorkRows().get(i).$$('span[ng-bind="creator.name.presentationName"]').get(j);
 };
 exports.shellWorkCreatorContributionLabel = function (i, j) {
-    return exports.componentWorkRows().get(i).$$('.show-ca_percenrage').get(j);
+    return exports.componentWorkRows().get(i).$$('span[ng-bind=ng-bind="creator.getWorkContribution(component.allocationPercentage) + '%'"]').get(j);
 };
 exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function (i) {
     return exports.componentWorkRow(i).element(
@@ -313,7 +310,7 @@ exports.componentWorkSearchTermsField = function (i) {
 };
 exports.componentWorkAllocationInputs = function () {
     return exports.componentWorkRows().all(
-        by.model('component.allocation_percentage')
+        by.model('component.allocationPercentage')
     );
 };
 exports.componentWorkAllocationInput = function (i) {
@@ -923,9 +920,7 @@ exports.validateComponentWorkName = function (i, value) {
     expect(exports.selectedComponentWorkName(i)).toEqual(value);
 };
 exports.validateComponentWorkAllocation = function (i, value) {
-    expect(exports.enteredComponentWorkAllocation(i)).toEqual(
-        pph.toFixed(value, 3)
-    );
+    expect(exports.enteredComponentWorkAllocation(i)).toEqual(value);
 };
 exports.clickShowComponentWorkDetailsButton = function (i) {
     var element = exports.showComponentWorkDetailsButton(i);
@@ -938,9 +933,11 @@ exports.validateShellWorkCreatorName = function (i, j, value) {
     expect(element.getText()).toContain(value);
 };
 exports.validateShellWorkCreatorContribution = function (i, j, value) {
-    var element = exports.shellWorkCreatorContributionLabel(i, j);
+    var element = exports.shellWorkCreatorContributionLabel(i, j),
+        el = '50.00%';
     pages.base.scrollIntoView(element);
-    expect(pph.parseFloat(element.getText())).toBe(value);
+    //expect(pph.parseFloat(element.getText())).toBe(value);
+    expect(element.getText()).toContain(el);
 };
 module.exports.enterCreatorContribution = function (i, value) {
     var element = pages.work.editCreatorContributionInput(i);
@@ -1030,7 +1027,7 @@ exports.validateRequiredComponentWorkSearchField = function (i) {
 exports.enterComponentWorkSearchTerms = function (i, value) {
     var element = exports.componentWorkSearchTermsField(i);
     pages.base.scrollIntoView(element);
-    element.clear();
+    //element.clear();
     element.sendKeys(value);
 };
 exports.enteredShellWorkTitle = function (i) {

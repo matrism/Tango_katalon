@@ -263,7 +263,7 @@ exports.recordings = (function() {
 
     exports.libraryNameBinding = function(i) {
         return exports.rows().get(i).element(by.binding(
-            ' modularEditModels.model.library.libraryName '
+            'WorkRecordingsCtrl.getLibraryCode()'
         ));
     };
 
