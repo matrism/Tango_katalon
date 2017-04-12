@@ -209,7 +209,7 @@ module.exports.creatorNamesContainer = function () {
     return $(".work-modular-edit");
 };
 module.exports.editCreatorsContainer = function () {
-    return $('div[data-ng-show="workHeader.creators.edit"]');
+    return $('div[data-ng-if="view.isEdit()"]');
 };
 module.exports.editCreatorsButton = function () {
     return $('div[tg-modular-edit-id="workContributors"] button[data-ng-click="tgModularViewMethods.switchToEditView()"]');
@@ -305,7 +305,7 @@ exports.componentWorkSearchFilterDropdown = function (i) {
 };
 exports.componentWorkSearchTermsField = function (i) {
     return exports.componentWorkRow(i).element(
-        by.model('component.selected_work')
+        by.css('div[ng-model="component.work"] div.tg-typeahead__input-wrap input')
     );
 };
 exports.componentWorkAllocationInputs = function () {
@@ -317,19 +317,19 @@ exports.componentWorkAllocationInput = function (i) {
     return exports.componentWorkAllocationInputs().get(i);
 };
 exports.enterAsNewWorkSuggestion = function () {
-    return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
+    return element(by.cssContainingText('.tg-typeahead__suggestions-footer-inner', 'Enter as a new work'));
 };
 exports.waitForEnterAsNewWorkToBeDisplayed = function () {
     browser.wait(ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()));
 };
 exports.shellWorkTitleInput = function (i) {
     return exports.componentWorkRows().get(i).element(
-        by.model('component.shell.primary_title.title')
+        by.model('component.nonControlledWork.primaryTitle.title')
     );
 };
-exports.shellWorkCreatorNameInputs = function (i) {
+exports.shellWorkCreatorNameInputs = function(i) {
     return exports.componentWorkRows().get(i).all(
-        by.model('creator.person_name')
+        by.css('div[ng-model="creator.person"] input')
     );
 };
 exports.shellWorkCreatorNameInput = function (i, j) {
@@ -337,14 +337,14 @@ exports.shellWorkCreatorNameInput = function (i, j) {
 };
 exports.shellWorkCreatorContributionInputs = function (i) {
     return exports.componentWorkRows().get(i).all(
-        by.model('creator.contribution')
+        by.model('creator.workContribution')
     );
 };
 exports.shellWorkCreatorContributionInput = function (i, j) {
     return exports.shellWorkCreatorContributionInputs(i).get(j);
 };
 exports.deleteComponentWorkButtons = function () {
-    return exports.componentWorkRows().$$('.delete-button');
+    return exports.componentWorkRows().$$('a[ng-click="confirmComponentRemove(tgModularEditModel.components, component, $viewForm);"]');
 };
 exports.deleteComponentWorkButton = function (i) {
     return exports.deleteComponentWorkButtons().get(i);
@@ -916,6 +916,34 @@ exports.validateComponentWorkId = function (i, value) {
     pages.base.scrollIntoView(element);
     expect(element.getText()).toBe(value);
 };
+
+exports.workTitle = function (){
+
+    let locator = by.css('span[ng-bind="component.work.primaryTitle.title"]');
+
+     return exports.componentWorkRows().all(locator);
+};
+
+exports.rowIndexByEnteredTitle = function(val) {
+    var findByText = function() {
+        var using = arguments[0] || document;
+        var text = arguments[1];
+        var matches = [];
+        function addMatchingLeaves(element) {
+            if (element.children.length === 0 && element.textContent.match(text)) {
+                matches.push(element);
+            }
+            for (var i = 0; i < element.children.length; ++i) {
+                addMatchingLeaves(element.children[i]);
+            }
+        }
+        addMatchingLeaves(using);
+        return matches;
+    };
+
+    by.addLocator('text', findByText);
+};
+
 exports.validateComponentWorkName = function (i, value) {
     expect(exports.selectedComponentWorkName(i)).toEqual(value);
 };
@@ -1087,10 +1115,10 @@ exports.selectFirstComponentWorkSuggestion = function () {
     });
 };
 exports.selectFirstCreatorSuggestion = function () {
-    var suggestion = $$('.typeahead-result').first(),
+    var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
         result = {};
 
-    result.name = pph.trim(suggestion.$('.typeahead-result-text').getText());
+    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryName.presentationName | tgHighlight:$term"]').getText());
 
     return suggestion.click().then(function () {
         return result;
