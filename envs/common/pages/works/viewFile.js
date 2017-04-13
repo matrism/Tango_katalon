@@ -2,9 +2,7 @@
 
 pages.viewWorkFile = exports;
 
-exports.fileNameBinding = () => element(by.binding(
-    ' dataHolder.uploadFile.file_name '
-));
+exports.fileNameBinding = () => element(by.binding('dataHolder.uploadFile.file_name'));
 
 exports.fileName = () => asAlways(
     exports.fileNameBinding(), 'scrollIntoView', 'getAllText'
@@ -13,7 +11,7 @@ exports.fileName = () => asAlways(
 exports.validateFileName = val => expect(exports.fileName()).toBe(val);
 
 exports.totalWorksMsgBinding = () => element(by.binding(
-    ' dataHolder.uploadFile.total_works_count || 0 '
+    'dataHolder.uploadFile.total_works_count || 0'
 ));
 
 exports.totalWorksMsg = () => asAlways(
@@ -24,9 +22,9 @@ exports.totalWorks = () => {
     return exports.totalWorksMsg().then(msg => {
         let iSlice = msg.indexOf(':');
 
-        if(iSlice === -1) {
-            throw new Error(`Parse error (missing colon): ${msg}`);
-        }
+        // if(iSlice === -1) {
+        //     throw new Error(`Parse error (missing colon): ${msg}`);
+        // }
 
         return msg.slice(iSlice + 1).trim();
     });
@@ -88,6 +86,14 @@ exports.unconfirmed = (() => {
 
     unc.create = i => asAlways(
         unc.createLink(i), 'scrollIntoView', 'click', 'waitForAjax'
+    );
+
+    unc.clickConfirmation = () => $('.modal.fade.in div.modal-footer button[data-ng-click="ok();"]');
+
+
+
+    unc.confirmation = () => asAlways(
+        unc.clickConfirmation(), 'scrollIntoView', 'click'
     );
 
     return unc;
