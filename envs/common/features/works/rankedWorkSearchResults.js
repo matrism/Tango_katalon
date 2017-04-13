@@ -21,7 +21,7 @@ exports.feature = [
         name: 'Create test data',
         tags: [],
         steps: criticalScenario(() => {
-        //steps: function () {
+       //steps: function () {
             executeLegacyStepsArray([
             [function () {
                 data.baseWorksData.forEach(function (workData, i) {
@@ -74,8 +74,8 @@ exports.feature = [
                     });
 
                     steps.base.useBlankEntityDataSlot('work', i);
-
-                    steps.newWork.goToNewWorkPage();
+                browser.driver.navigate().refresh();
+                steps.newWork.goToNewWorkPage();
 
                     steps.newWork.enterPrimaryWorkTitle(workData.primaryTitle);
 
@@ -93,6 +93,7 @@ exports.feature = [
                     });
                     steps.newWork.optToIncludeWorkOnWebsite(false);
                     steps.newWork.waitSaveButtonEnabled();
+
                     steps.newWork.saveWork();
                     steps.newWork.validateIgnoreModal();
                     steps.newWork.validateSaveWorkRedirection();
@@ -190,7 +191,7 @@ exports.feature = [
     },
     {
         name: 'Search by creator #2',
-        tags: ['ts-369'],
+        tags: ['ts-369_1'],
         steps: criticalScenario(() => {
         //steps: function () {
             executeLegacyStepsArray([
@@ -219,7 +220,7 @@ exports.feature = [
     },
     {
         name: 'Search by exact title + creator',
-        tags: ['ts-369'],
+        tags: ['ts-369_1'],
         steps: criticalScenario(() => {
         //steps: function () {
             executeLegacyStepsArray([
@@ -252,7 +253,7 @@ exports.feature = [
     },
     {
         name: 'Search by partial title + creator',
-        tags: ['ts-369'],
+        tags: ['ts-369_1'],
         steps: criticalScenario(() => {
         //steps: function () {
             executeLegacyStepsArray([

@@ -643,9 +643,7 @@ exports.expectWorkSearchMatchCountNotToBe = function (value) {
 };
 exports.expectWorkSearchMatchTitleToBe = function (i, value) {
     it('Expect work search match #' + (i + 1) + ' title to be "' + value + '"', function () {
-        if(value.replace(/[0-9]/g,"")=== "SADNESS") {
             pages.work.expectWorkSearchMatchTitleToBe(i, value);
-        }
     });
 };
 exports.expectWorkSearchMatchAlternateTitleToBe = function (i, value) {

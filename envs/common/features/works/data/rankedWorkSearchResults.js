@@ -64,6 +64,7 @@ exports.baseWorksData = [
         alternateTitles: [
             randomId(0) + 'DIAMONDS IN THE MOON',
         ],
+
         creators: [
             {
                 firstName: randomId(0) + 'GUISEPPE',
@@ -384,14 +385,7 @@ exports.searchDataByCreatorMatch1 = [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED'
                 ],
             },
-
-             {
-             title: randomId(0) + 'DIAMONDS IN THE MOON',
-             creators: [
-             randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
-             ],
-             },
-
+            /*
             {
                 title: randomId(0) + 'SADNESS',
                 //alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE MOON) SADNESS',
@@ -399,15 +393,23 @@ exports.searchDataByCreatorMatch1 = [
                     randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2'
                 ],
             },
-            /*
+
             {
                 title: randomId(0) + 'WINTER IS COMING',
                 //alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE MOON) SADNESS',
                 creators: [
                     randomId(0) + 'TABERNER, ' + randomId(0) + 'ELIZABETH2'
                 ],
+            }
+
+            {
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
+                creators: [
+                    randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
+                ],
             },
             */
+
         ],
     },
 ];

@@ -181,6 +181,7 @@ module.exports.enterAlternateWorkTitle = function(i, value) {
 
             alternateTitles[i] = value;
         });
+        browser.sleep(1000);
     });
 };
 module.exports.enterRandomAlternateWorkTitle = function(i) {
@@ -927,7 +928,9 @@ exports.validateIgnoreModal = function() {
 };
 
 exports.validateSaveWorkRedirection = function() {
-	steps.base.validateRedirection("created work page", "/rights/summary");
+    it('Checking redirection Page', function() {
+        steps.base.validateRedirection("created work page", "/rights/summary");
+    });
 };
 
 exports.waitSaveButtonEnabled = function () {
