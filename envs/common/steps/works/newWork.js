@@ -920,6 +920,18 @@ exports.save = function() {
 
 exports.saveWork = exports.save;
 
+exports.validateIgnoreModal = function() {
+    it('Continue to if found similar work', function() {
+        pages.newWork.continueIfPrompted();
+    });
+};
+
 exports.validateSaveWorkRedirection = function() {
 	steps.base.validateRedirection("created work page", "/rights/summary");
+};
+
+exports.waitSaveButtonEnabled = function () {
+    it("Check Save button to be enabled", function () {
+        browser.sleep(4000);
+    });
 };

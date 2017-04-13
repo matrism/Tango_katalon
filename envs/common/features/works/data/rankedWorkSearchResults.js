@@ -4,8 +4,9 @@ var random = require('../../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator();
 
 exports.baseWorksData = [
+
     {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+        primaryTitle: randomId(0) + 'DIAMONDS IN THE MOON',
         creators: [
             {
                 firstName: randomId(0) + 'ALBERT',
@@ -14,7 +15,7 @@ exports.baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+        primaryTitle: randomId(0) + 'DIAMONDS IN THE MOON',
         creators: [
             {
                 firstName: randomId(0) + 'DANNY2',
@@ -33,7 +34,7 @@ exports.baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+        primaryTitle: randomId(0) + 'DIAMONDS IN THE MOON',
         creators: [
             {
                 firstName: randomId(0) + 'BRIAN',
@@ -46,7 +47,7 @@ exports.baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+        primaryTitle: randomId(0) + 'DIAMONDS IN THE MOON',
         creators: [
             {
                 firstName: randomId(0) + 'MAX',
@@ -61,7 +62,7 @@ exports.baseWorksData = [
     {
         primaryTitle: randomId(0) + 'CRIMINAL',
         alternateTitles: [
-            randomId(0) + 'DIAMONDS IN THE SKY',
+            randomId(0) + 'DIAMONDS IN THE MOON',
         ],
         creators: [
             {
@@ -73,7 +74,7 @@ exports.baseWorksData = [
     {
         primaryTitle: randomId(0) + 'CRIMINAL',
         alternateTitles: [
-            randomId(0) + 'DIAMONDS IN THE SKY',
+            randomId(0) + 'DIAMONDS IN THE MOON',
         ],
         creators: [
             {
@@ -85,7 +86,7 @@ exports.baseWorksData = [
     {
         primaryTitle: randomId(0) + 'OH GOD',
         alternateTitles: [
-            randomId(0) + 'OH ' + randomId(0) + 'DIAMONDS IN THE SKY',
+            randomId(0) + 'OH ' + randomId(0) + 'DIAMONDS IN THE MOON',
         ],
         creators: [
             {
@@ -99,7 +100,7 @@ exports.baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'DIAMONDS IN THE SKY BABY',
+        primaryTitle: randomId(0) + 'DIAMONDS IN THE MOON BABY',
         creators: [
             {
                 firstName: randomId(0) + 'FRED',
@@ -110,7 +111,7 @@ exports.baseWorksData = [
     {
         primaryTitle: randomId(0) + 'SADNESS',
         alternateTitles: [
-            '(' + randomId(0) + 'DIAMONDS IN THE SKY) SADNESS'
+            '(' + randomId(0) + 'DIAMONDS IN THE MOON) SADNESS'
         ],
         creators: [
             {
@@ -130,7 +131,7 @@ exports.baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE SKY',
+        primaryTitle: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE MOON',
         creators: [
             {
                 firstName: randomId(0) + 'KANYE',
@@ -143,7 +144,7 @@ exports.baseWorksData = [
         ],
     },
     {
-        primaryTitle: randomId(0) + 'TERE ARE IN THE SKY ' + randomId(0) + 'DIAMONDS',
+        primaryTitle: randomId(0) + 'TERE ARE IN THE MOON ' + randomId(0) + 'DIAMONDS',
         creators: [
             {
                 firstName: randomId(0) + 'FRED',
@@ -205,29 +206,29 @@ exports.baseWorksData = [
 
 exports.searchDataByExactTitleMatch = [
     {
-        terms: randomId(0) + 'DIAMONDS IN THE SKY',
+        terms: randomId(0) + 'DIAMONDS IN THE MOON',
         expectedMatches: [
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT',
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
                     randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY',
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2',
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'WALKER, ' + randomId(0) + 'MAX',
                     randomId(0) + 'KENNEDY-MCDONALD, ' + randomId(0) + 'RONALD',
@@ -235,14 +236,14 @@ exports.searchDataByExactTitleMatch = [
             },
             {
                 title: randomId(0) + 'CRIMINAL',
-                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'BONDI, ' + randomId(0) + 'GUISEPPE',
                 ],
             },
             {
                 title: randomId(0) + 'CRIMINAL',
-                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'LUCY',
                 ],
@@ -253,29 +254,29 @@ exports.searchDataByExactTitleMatch = [
 
 exports.searchDataByPartialTitleMatch = [
     {
-        terms: randomId(0) + 'DIAMONDS IN THE SKY',
+        terms: randomId(0) + 'DIAMONDS IN THE MOON',
         expectedMatches: [
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
                     randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'WALKER, ' + randomId(0) + 'MAX',
                     randomId(0) + 'KENNEDY-MCDONALD, ' + randomId(0) + 'RONALD'
@@ -283,26 +284,26 @@ exports.searchDataByPartialTitleMatch = [
             },
             {
                 title: randomId(0) + 'CRIMINAL',
-                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'BONDI, ' + randomId(0) + 'GUISEPPE'
                 ],
             },
             {
                 title: randomId(0) + 'CRIMINAL',
-                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'LUCY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY BABY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON BABY',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED'
                 ],
             },
             {
-                title: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'WEST, ' + randomId(0) + 'KANYE',
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'SIMON'
@@ -310,14 +311,14 @@ exports.searchDataByPartialTitleMatch = [
             },
             {
                 title: randomId(0) + 'SADNESS',
-                alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE SKY) SADNESS',
+                //alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE MOON) SADNESS',
                 creators: [
                     randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2'
                 ],
             },
             {
                 title: randomId(0) + 'OH GOD',
-                alternateTitle: randomId(0) + 'OH ' + randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'OH ' + randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'CLARKE, ' + randomId(0) + 'VINCE',
                     randomId(0) + 'BELL, ' + randomId(0) + 'ANDY'
@@ -333,39 +334,39 @@ exports.searchDataByCreatorMatch1 = [
         expectedMatches: [
             {
                 title: randomId(0) + 'CRIMINAL',
-                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'LUCY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
                     randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'WALKER, ' + randomId(0) + 'MAX',
                     randomId(0) + 'KENNEDY-MCDONALD, ' + randomId(0) + 'RONALD'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY BABY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON BABY',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED'
                 ],
             },
             {
-                title: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'WEST, ' + randomId(0) + 'KANYE',
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'SIMON'
@@ -378,24 +379,35 @@ exports.searchDataByCreatorMatch1 = [
                 ],
             },
             {
-                title: randomId(0) + 'TERE ARE IN THE SKY ' + randomId(0) + 'DIAMONDS',
+                title: randomId(0) + 'TERE ARE IN THE MOON ' + randomId(0) + 'DIAMONDS',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED'
                 ],
             },
-            {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
-                creators: [
-                    randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
-                ],
-            },
+
+             {
+             title: randomId(0) + 'DIAMONDS IN THE MOON',
+             creators: [
+             randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
+             ],
+             },
+
             {
                 title: randomId(0) + 'SADNESS',
-                alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE SKY) SADNESS',
+                //alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE MOON) SADNESS',
                 creators: [
                     randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2'
                 ],
             },
+            /*
+            {
+                title: randomId(0) + 'WINTER IS COMING',
+                //alternateTitle: '(' + randomId(0) + 'DIAMONDS IN THE MOON) SADNESS',
+                creators: [
+                    randomId(0) + 'TABERNER, ' + randomId(0) + 'ELIZABETH2'
+                ],
+            },
+            */
         ],
     },
 ];
@@ -405,13 +417,13 @@ exports.searchDataByCreatorMatch2 = [
         terms: randomId(0) + 'FRED ' + randomId(0) + 'KENNEDY',
         expectedMatches: [
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY BABY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON BABY',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED'
                 ],
             },
             {
-                title: randomId(0) + 'TERE ARE IN THE SKY ' + randomId(0) + 'DIAMONDS',
+                title: randomId(0) + 'TERE ARE IN THE MOON ' + randomId(0) + 'DIAMONDS',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED'
                 ],
@@ -422,24 +434,24 @@ exports.searchDataByCreatorMatch2 = [
 
 exports.searchDataByExactTitleAndCreator = [
     {
-        titleTerms: randomId(0) + 'DIAMONDS IN THE SKY',
+        titleTerms: randomId(0) + 'DIAMONDS IN THE MOON',
         creatorTerms: randomId(0) + 'KENNEDY',
         expectedMatches: [
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
                     randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'WALKER, ' + randomId(0) + 'MAX',
                     randomId(0) + 'KENNEDY-MCDONALD, ' + randomId(0) + 'RONALD'
@@ -447,13 +459,13 @@ exports.searchDataByExactTitleAndCreator = [
             },
             {
                 title: randomId(0) + 'CRIMINAL',
-                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'LUCY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
                 ],
@@ -464,40 +476,59 @@ exports.searchDataByExactTitleAndCreator = [
 
 exports.searchDataByPartialTitleAndCreator = [
     {
-        titleTerms: randomId(0) + 'DIAMONDS IN THE SKY',
+        titleTerms: randomId(0) + 'DIAMONDS IN THE MOON',
         creatorTerms: randomId(0) + 'KENNEDY',
         expectedMatches: [
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'ALBERT'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'BRIAN',
                     randomId(0) + 'JOHNSON, ' + randomId(0) + 'BUDDY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'WALKER, ' + randomId(0) + 'MAX',
                     randomId(0) + 'KENNEDY-MCDONALD, ' + randomId(0) + 'RONALD'
                 ],
             },
             {
+                title: randomId(0) + 'DIAMONDS IN THE MOON',
+                creators: [
+                    randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
+                ],
+            },
+            {
                 title: randomId(0) + 'CRIMINAL',
-                alternateTitle: randomId(0) + 'DIAMONDS IN THE SKY',
+                //alternateTitle: randomId(0) + 'DIAMONDS IN THE MOON',
                 creators: [
                     randomId(0) + 'KENNEDY, ' + randomId(0) + 'LUCY'
                 ],
             },
             {
-                title: randomId(0) + 'DIAMONDS IN THE SKY',
+                title: randomId(0) + 'DIAMONDS IN THE MOON BABY',
                 creators: [
-                    randomId(0) + 'MCGREGOR, ' + randomId(0) + 'DANNY2'
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'FRED'
+                ],
+            },
+            {
+                title: randomId(0) + 'DO YOU KNOW ' + randomId(0) + 'DIAMONDS IN THE MOON',
+                creators: [
+                    randomId(0) + 'KENNEDY, ' + randomId(0) + 'SIMON',
+                    randomId(0) + 'WEST, ' + randomId(0) + 'KANYE'
+                ],
+            },
+            {
+                title: randomId(0) + 'SADNESS',
+                creators: [
+                    randomId(0) + 'GIDDY, ' + randomId(0) + 'ROMEO2'
                 ],
             },
         ],

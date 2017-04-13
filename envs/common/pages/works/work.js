@@ -78,12 +78,14 @@ exports.expectWorkSearchMatchTitleToBe = function (i, value) {
     expect(exports.workSearchMatchTitle(i)).toBe(value);
 };
 exports.workSearchMatchAlternateTitle = function (i) {
+
     return exports.workSearchMatchMainLabelParts(i).then(function (parts) {
         return parts.alternateTitle;
     });
 };
 exports.expectWorkSearchMatchAlternateTitleToBe = function (i, value) {
-    expect(exports.workSearchMatchAlternateTitle(i)).toBe(value);
+  expect(exports.workSearchMatchMainLabelBinding(i).getText()).toBe(value);
+
 };
 exports.workSearchMatchCreatorNames = function (i) {
     return exports.workSearchMatchMainLabelParts(i).then(function (parts) {
