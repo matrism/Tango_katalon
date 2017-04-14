@@ -643,7 +643,7 @@ exports.expectWorkSearchMatchCountNotToBe = function (value) {
 };
 exports.expectWorkSearchMatchTitleToBe = function (i, value) {
     it('Expect work search match #' + (i + 1) + ' title to be "' + value + '"', function () {
-            pages.work.expectWorkSearchMatchTitleToBe(i, value);
+        pages.work.expectWorkSearchMatchTitleToBe(i, value);
     });
 };
 exports.expectWorkSearchMatchAlternateTitleToBe = function (i, value) {
@@ -1062,6 +1062,8 @@ exports.validateCompositeWorkType = function (data, key) {
         pages.work.validateCompositeWorkType(data[key]);
     });
 };
+
+
 exports.validateComponentWorkId = function (i, data, key) {
     it('Validate component work ID', function () {
         var component;
@@ -1073,28 +1075,42 @@ exports.validateComponentWorkId = function (i, data, key) {
         component = data[key][i] = data[key][i] || {};
 
         pages.work.validateComponentWorkId(i, component.workCode);
+
+
+
     });
 };
-exports.validateComponentWorkName = function (i, data, key) {
+exports.validateComponentWorkName = function (i, varName, data, key) {
     it('Validate component work name #' + (i + 1), function () {
-        var component;
+        var component,
+            row = pages.work.componentWorkRows;
+
 
         data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         component = data[key][i];
 
-        pages.work.validateComponentWorkName(i, component.name);
+
+        for ( var j=0 ; j < row.length ; j++ )
+        {
+            pages.work.validateComponentWorkName(j, component.name);
+        }
+
     });
 };
 exports.validateComponentWorkAllocation = function (i, data, key) {
     it('Validate component work allocation #' + (i + 1), function () {
-        // var component;
+
+        var row = pages.work.componentWorkRows;
 
         // data = data || hash.currentEntityDataSlotsByType.work;
         // key = key || 'components';
         // component = data[key][i];
+        for ( var j=0 ; j < row.length ; j++ ) {
+            pages.work.validateComponentWorkAllocation(j, data);
+        }
 
-        pages.work.validateComponentWorkAllocation(i, data);
+
     });
 };
 module.exports.validateCreatorContributionInputMask = function (i, validationTable) {
@@ -1124,6 +1140,7 @@ exports.validateShellWorkCreatorName = function (i, j, data, key) {
         ' of (shell) component work #' + (i + 1), function () {
             var component;
             var creator;
+            var row = pages.work.componentWorkRows;
 
             data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
@@ -1134,7 +1151,9 @@ exports.validateShellWorkCreatorName = function (i, j, data, key) {
             component.creators = component.creators || [];
             creator = component.creators[j] = component.creators[j] || {};
 
-            pages.work.validateShellWorkCreatorName(i, j, creator.name);
+            for ( var i=0 ; i < row.length ; i++ ) {
+                pages.work.validateShellWorkCreatorName(i, j, creator.name);
+            }
         }
     );
 };
@@ -1528,26 +1547,26 @@ exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
 
 exports.createWork = (data, varName) => {
     var newWork = steps.newWork,
-    varName = varName || 'lastCreatedWorkId';
+        varName = varName || 'lastCreatedWorkId';
 
     describe('Create new Work', () => {
         //steps.mainHeader.createNewRecord('Work');
         newWork.goToNewWorkPage();
-        steps.base.useEntityDataSlot('work', 1);
+    steps.base.useEntityDataSlot('work', 1);
 
-        newWork.enterPrimaryWorkTitle(data.primary_work_title);
+    newWork.enterPrimaryWorkTitle(data.primary_work_title);
 
-        _.each(data.creators_and_contributions, (creator, i) => {
-            newWork.enterCreatorSearchTerms(i, creator.name);
-            newWork.selectCreatorSearchResultByIndex(0);
-            newWork.continueIfPrompted();
-            newWork.enterCreatorContribution(i, creator.percentage);
-        });
+    _.each(data.creators_and_contributions, (creator, i) => {
+        newWork.enterCreatorSearchTerms(i, creator.name);
+    newWork.selectCreatorSearchResultByIndex(0);
+    newWork.continueIfPrompted();
+    newWork.enterCreatorContribution(i, creator.percentage);
+});
 
-        newWork.optToIncludeWorkOnWebsite(true);
-        newWork.saveWork();
-        steps.work.storeTheWorkIdInTestVariable(varName);
-    });
+    newWork.optToIncludeWorkOnWebsite(true);
+    newWork.saveWork();
+    steps.work.storeTheWorkIdInTestVariable(varName);
+});
 };
 
 exports.storeTheWorkIdInTestVariable = function (varName) {
