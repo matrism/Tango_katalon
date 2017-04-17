@@ -73,6 +73,10 @@ exports.enterAsNewWorkSuggestion = function() {
 exports.waitForEnterAsNewWorkToBeDisplayed = function() {
     browser.wait(ExpectedConditions.visibilityOf(element(by.css('.tg-typeahead__suggestions-group-item'))));
 };
+
+exports.waitForEnterShellWorkToBeDisplayed = function() {
+    browser.wait(ExpectedConditions.visibilityOf(element(by.css('.tg-typeahead__suggestions-group-item'))));
+};
 exports.shellWorkTitleLanguageDropdown = function(i) {
     return exports.componentWorkRows().get(i).element(
         by.model('component.nonControlledWork.primaryTitle.languageCode')

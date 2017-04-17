@@ -17,7 +17,8 @@ addStepGroup(exports, 'Unconfirmed', g => {
         'Validate row count',
         'Validate work title',
         'Toggle',
-        'Create'
+        'Create',
+        'Confirmation'
     ].forEach(desc => addBasicStep(g, gPage, desc));
 });
 

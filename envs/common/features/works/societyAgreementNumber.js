@@ -136,14 +136,14 @@ exports.feature = [
             deal.waitForDealToBeSaved();
             deal.findId();
             deal.returnDealNumber();
-            // steps.work.createWork(workData);
-            // steps.work.goToScopeDeliveryTab();
-            // steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();
-            // console.log(fromTestVariable('lastCreatedDealId'));
-            // steps.work.scopeDelivery.selectDeal(fromTestVariable('lastCreatedDealId'));
-            // steps.work.scopeDelivery.checkScope(0);
-            // steps.work.scopeDelivery.save();
-            // steps.base.sleep(5000);
+            steps.work.createWork(workData);
+            steps.work.goToScopeDeliveryTab();
+            steps.work.scopeDelivery.clickOnDeliverWorkToDealScopeButton();
+            console.log(fromTestVariable('lastCreatedDealId'));
+            steps.work.scopeDelivery.selectDeal(fromTestVariable('lastCreatedDealId'));
+            steps.work.scopeDelivery.checkScope(0);
+            steps.work.scopeDelivery.save();
+            steps.base.sleep(5000);
 
 
         }

@@ -871,12 +871,12 @@ exports.itAddSimpleEndRuleToContractPeriod = function () {
     describe("Add end rule to contract period ", function () {
         steps.createDealContractPeriod.clickOnAddEndRulesToContractPeriod();
         steps.base.scrollIntoView("End rules details ", pages.createDealContractPeriod.elems.endDateFieldButtonEndRules);
-        steps.createDealContractPeriod.selectEndDateEndRulesSpecificValue("Repayment Date");
-        steps.createDealContractPeriod.selectWhenVariableLeftEndRulesSpecificValue("Balance Repaid");
-        steps.createDealContractPeriod.fillIntoAttributeLeftEndRules();
-        steps.createDealContractPeriod.selectRequirementEndRulesRandomValue("<");
-        steps.createDealContractPeriod.selectRightVariableEndRulesSpecificValue("MDRC Complete");
-    });
+        steps.endRulesRetention.selectEndDateEndRulesSpecificValueRuleNumberI(1, "Repayment Date");
+        steps.endRulesRetention.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 0, "Balance Repaid");
+        steps.endRulesRetention.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 0, "2");
+        steps.endRulesRetention.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(1, 0, 4);
+        steps.endRulesRetention.selectRightVariableEndRulesSpecificValueRuleNumberIRowNumberJ(1, 0, "Recouped");
+     });
 };
 
 exports.itAddSimpleEndRuleToRtp = function () {

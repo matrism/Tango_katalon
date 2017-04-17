@@ -7,16 +7,16 @@ var pages_path = _tf_config._system_.path_to_pages;
 if (pages.createDealRtp === undefined) {
     pages.createDealRtp = new ftf.pageObject({
         locators: {
-            contractPeriodsRtpField: {css: "div[data-ng-model='rtps.deal_contract_period_id_holders'] div[ng-class='tgTypeaheadWrapClass']"},
+            contractPeriodsRtpField: {css: "div[ng-model='tgModularEditModel.dealContractPeriods'] div[ng-class='tgTypeaheadWrapClass']"},
             contractPeriodsRtpInputField: {css: "div[data-ng-model='rtps.deal_contract_period_id_holders'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             selectAllContractPeriodRtpLink: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-header"},
             cancelContractPeriodRtpButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='$closePopup();']"},
-            applyContractPeriodRtpButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
-            acquisitionDescription: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) input[data-ng-model='acqRtp.description']"},
-            scopeAcquisitionField: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-model='acqRtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass']"},
-            scopeAcquisitionInputField: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-model='acqRtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            applyScopeAcquisitionButton: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
-            acquisitionActualEndDate: {css: "div[name='acquisitionEndDate'] input"},
+            applyContractPeriodRtpButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[ng-click='applySelections($dataSets);']"},
+            acquisitionDescription: {css: "div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] input[ng-model='tgModularEditModel.description']"},
+            scopeAcquisitionField: {css: "div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] div[ng-model='tgModularEditModel.dealScopeIds'] div[ng-class='tgTypeaheadWrapClass']"},
+            scopeAcquisitionInputField: {css: "div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] div[ng-model='tgModularEditModel.dealScopeIds'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            applyScopeAcquisitionButton: {css: "div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[ng-click='applySelections($dataSets);']"},
+            acquisitionActualEndDate: {css: "div[name='endDate'] input"},
             acquisitionActualStartDate: {css: "div[name='acquisitionStartDate'] input"},
             addRetentionPeriodLinkFromAcquisition: {css: "a[ng-click='rightsTermPeriodSet.addPeriod(constants.RETENTION)']"},
             addPostTermPeriodLinkFromAcquisition: {css: "div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) a[data-ng-click='addPostTermCollectionRightsTermPeriod(rtps.id)']"},
@@ -33,6 +33,17 @@ if (pages.createDealRtp === undefined) {
 
         summaryEndRule: function (i) {
             return $$('[ng-repeat="endRule in tgModularEditModel.endRulesWrapper.endRules.$getItems()"] .rule-summary').get(i - 1);
+        },
+
+        row: function (i) {
+
+            return $$('div[ng-repeat="rightsTermPeriod in rightsTermPeriodSet.getRightsTermsPeriodsByPeriod(constants.RETENTION, constants.PTC) | orderBy: orderRightsTermPeriods"]').get(i);
+
+        },
+
+        selectRententionScope: function (i) {
+
+            return  pages.createDealRtp.row(i).element(by.css("div[tg-modular-edit-id='retentionModulatEdit'] div[ng-class='tgTypeaheadWrapClass'] div.tg-typeahead__suggestions-wrap ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"));
         },
 
         selectTheRtpAllContractPeriods: function () {
@@ -75,8 +86,8 @@ if (pages.createDealRtp === undefined) {
             var desiredOption;
             pages.createDealRtp.elems.scopeAcquisitionField.click();
             pages.createDealRtp.elems.scopeAcquisitionInputField.sendKeys("s");
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.driver.findElements(By.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -94,7 +105,7 @@ if (pages.createDealRtp === undefined) {
                     }
                 });
             pages.createDealRtp.elems.applyScopeAcquisitionButton.click();
-            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) ul.tg-typeahead__suggestions ng-scope"))));
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] ul.tg-typeahead__suggestions ng-scope"))));
         },
 
         fillIntoTheAcquisitionEndDateField: function () {
@@ -113,7 +124,7 @@ if (pages.createDealRtp === undefined) {
         },
 
         fillIntoTheRetentionPeriodDescriptionFromAcquisitionNumberI: function (i) {
-            var element = browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope input[data-ng-model='rtp.description']"));
+            var element = browser.driver.findElement(by.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] div[ng-repeat='rightsTermPeriod in rightsTermPeriodSet.getRightsTermsPeriodsByPeriod(constants.RETENTION, constants.PTC) | orderBy: orderRightsTermPeriods']:nth-child(" + i + ") div[tg-modular-edit-id='retentionModulatEdit'] input[ng-model='tgModularEditModel.description']"));
             element.sendKeys("Retention from acquisition description " + i);
         },
 
@@ -133,14 +144,14 @@ if (pages.createDealRtp === undefined) {
         },
 
         selectTheSpecificScopeNumberJFromAcquisitionNumberI: function (i, j) {
-            var scopeField = browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass']"));
+            var scopeField = browser.driver.findElement(by.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] div[ng-repeat='rightsTermPeriod in rightsTermPeriodSet.getRightsTermsPeriodsByPeriod(constants.RETENTION, constants.PTC) | orderBy: orderRightsTermPeriods']:nth-child(" + i + ") div[tg-modular-edit-id='retentionModulatEdit'] input[placeholder='Search by Scope description']"));
             scopeField.click();
             var desiredOption;
             var desiredScope = "Scope " + j;
-            var scopeInputField = browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
-            scopeInputField.sendKeys("Scope");
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            var scopeInputField = browser.driver.findElement(by.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] div[ng-repeat='rightsTermPeriod in rightsTermPeriodSet.getRightsTermsPeriodsByPeriod(constants.RETENTION, constants.PTC) | orderBy: orderRightsTermPeriods']:nth-child(" + i + ") div[tg-modular-edit-id='retentionModulatEdit'] input[ng-model='$term']"));
+            scopeInputField.sendKeys("Scope " + j);
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealRtp.selectRententionScope(i)));
+            browser.driver.findElements(pages.createDealRtp.selectRententionScope(i))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -157,8 +168,8 @@ if (pages.createDealRtp === undefined) {
                         desiredOption.click();
                     }
                 });
-            browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']")).click();
-            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope ul.tg-typeahead__suggestions ng-scope"))));
+            // browser.driver.findElement(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']")).click();
+            // browser.wait(ExpectedConditions.invisibilityOf(element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(" + (i + 1) + ") div.aquisition-period.clearfix.retention.ng-scope ul.tg-typeahead__suggestions ng-scope"))));
         },
 
         selectTheSpecificDurationTypeRetentionFromAcquisitionNumberI: function (i, durationType) {

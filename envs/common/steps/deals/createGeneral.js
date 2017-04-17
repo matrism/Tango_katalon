@@ -198,9 +198,9 @@ exports.clickOnExclusiveDealRights = function () {
     });
 };
 
-exports.clickOnNonExclusiveDealRights = function () {
+exports.clickOnNonExclusiveDealRights = function (i) {
     it("Click on the non exclusive deal rights and validate that is successfully selected ", function () {
-        pages.createDealGeneral.clickOnTheNonExclusiveDealRights();
+        pages.createDealGeneral.clickOnTheNonExclusiveDealRights()
         var test = pages.createDealGeneral.elems.nonExclusiveDealRights.getAttribute("class").toString();
         expect(test.indexOf("active") != -1);
     });
@@ -414,28 +414,22 @@ exports.itAddAllGeneralFieldsForSanityToDealGeneralTab = function () {
         steps.createDealGeneral.clickOnExecutedContractStatus();
         steps.createDealGeneral.fillIntoExecutionDateField();
         steps.createDealGeneral.selectDealSigningTerritory();
-        if(systemConfig.env.name === 'qa') {
-            steps.createDealGeneral.fillCompanyCodeField("a");
-            steps.createDealGeneral.waitForContractingPartyDropDown();
-            steps.createDealGeneral.selectRandomCompanyCode();
-        }
+        steps.createDealGeneral.fillCompanyCodeField("a");
+        steps.createDealGeneral.waitForContractingPartyDropDown();
+        steps.createDealGeneral.selectRandomCompanyCode();
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectContractingPartySearchResultByIndex(1);
         steps.createDealGeneral.selectRandomArtistValue();
         steps.createDealGeneral.selectRandomValueRepresentMultipleDeals();
-        steps.createDealGeneral.clickOnNonExclusiveDealRights();
-        steps.createDealGeneral.clickOnExclusiveDealRights();
+        steps.createDealGeneral.clickOnNonExclusiveDealRights(2);
+        steps.createDealGeneral.clickOnExclusiveDealRights(1);
         steps.base.scrollIntoView("Deal keywords ", pages.createDealGeneral.elems.dealKeywordsField);
         steps.createDealGeneral.selectRandomDealKeywords();
         steps.createDealGeneral.fillIntoWampsContractBriefNumberField();
         steps.createDealGeneral.fillIntoAuditPeriodField();
         steps.createDealGeneral.fillIntoPeriodToFileSuitField();
         steps.createDealGeneral.fillIntoLegalFileReferenceCodeField();
-        //steps.createDealGeneral.selectRandomExternalContactRoleRowI(1);
-        //steps.createDealGeneral.selectRandomExternalContactNameRowI(1);
-        //steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
-        //steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("test");
         steps.createDealGeneral.fillIntoDemoDealChargeBacksField();
         steps.createDealGeneral.fillIntoUsCopyrightCertificateDealChargeBacksField();
         steps.createDealGeneral.fillIntoLegalFeesDealChargeBacksField();
