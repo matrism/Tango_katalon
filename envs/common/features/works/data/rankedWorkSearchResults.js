@@ -400,7 +400,7 @@ exports.searchDataByCreatorMatch1 = [
                 creators: [
                     randomId(0) + 'TABERNER, ' + randomId(0) + 'ELIZABETH2'
                 ],
-            }
+            },
 
             {
                 title: randomId(0) + 'DIAMONDS IN THE MOON',

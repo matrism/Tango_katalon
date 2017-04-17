@@ -162,7 +162,7 @@ exports.feature = [
     },
     {
         name: 'Search by creator #1',
-        tags: ['ts-369'],
+        tags: ['ts-369_extra'],
         steps: criticalScenario(() => {
         //steps: function () {
             executeLegacyStepsArray([
@@ -174,7 +174,8 @@ exports.feature = [
                     steps.work.enterWorkSearchTerms(searchData.terms);
                     steps.work.waitForWorkSearchResultToBeDisplayed();
                     searchData.expectedMatches.forEach(function (expectedMatch, i) {
-                        steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
+                    steps.work.expectWorkSearchMatchTitleToBe(i, expectedMatch.title);
+
                         if (expectedMatch.alternateTitle) {
                             steps.work.expectWorkSearchMatchAlternateTitleToBe(
                                 i, expectedMatch.alternateTitle
