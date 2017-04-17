@@ -4,9 +4,11 @@ var using = fnutils.using,
     randomId = random.id.makeMemoizedGenerator(),
     randomString = random.string.makeMemoizedGenerator();
 
+
 exports.id = 'a6937b15-1d27-4129-9c1b-6b4282553f86';
 
 exports.beforeFeature = function() {
+    browser.driver.manage().deleteAllCookies();
     steps.login.itLogin();
 };
 
@@ -21,79 +23,88 @@ exports.feature = [
         name: 'Create a person',
         tags: [],
         steps: criticalScenario(() => {
-            steps.person.useBlankPersonSlot(0);
+            _.times(4, (i) => {
+            steps.person.useBlankPersonSlot(i);
 
-            using(steps.newPerson, function() {
-                this.goToNewPersonPage();
+                using(steps.newPerson, function () {
+                    this.goToNewPersonPage();
 
-                this.enterLastName('TEST PERSON ' + randomString());
+                    this.enterLastName(
+                        'TEST PERSON ' + (i + 1) + ' ' + randomString('person' + i)
+                    );
 
-                this.enterAffiliatedSocietySearchTerms('ASCAP');
-                this.selectAffiliatedSocietySearchResultByIndex(0);
+                    this.enterAffiliatedSocietySearchTerms('ASCAP');
+                    this.selectAffiliatedSocietySearchResultByIndex(0);
 
-                this.save();
+                    this.save();
+                });
+
+                steps.person.findInternalIpiNumber();
             });
-
-            steps.person.findInternalIpiNumber();
         })
     },
     {
         name: 'Define and edit COS, POT, and UCO composite works',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             using(steps.newWork, function() {
                 steps.base.useBlankEntityDataSlot('work', 0);
 
                 this.goToNewWorkPage();
+                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(0));
                 this.selectCreatorFromPersonSlot(0, 0);
                 this.enterMaximumCreatorContribution(0);
-                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomId(0));
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 1);
 
                 this.goToNewWorkPage();
-                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(1));
+                this.selectCreatorFromPersonSlot(0, 1);
                 this.enterMaximumCreatorContribution(0);
-                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomId(1));
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 2);
 
                 this.goToNewWorkPage();
-                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(2));
+                this.selectCreatorFromPersonSlot(0, 2);
                 this.enterMaximumCreatorContribution(0);
-                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomId(2));
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
+
 
                 steps.base.useBlankEntityDataSlot('work', 3);
 
                 this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(0));
+                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(3));
                 this.validateDefaultCompositeWorkCheckboxState();
                 this.clickCompositeWorkCheckbox();
                 this.validateRequiredCompositeWorkTypeField();
                 this.validateDefaultCompositeWorkType();
                 this.selectCompositeWorkType('Composite of Samples');
-                this.selectCreatorFromPersonSlot(0, 0);
+                this.selectCreatorFromPersonSlot(0, 3);
                 this.enterMediumCreatorContribution(0);
-                this.validateDefaultComponentWorkSearchFilter(0);
-                this.validateRequiredComponentWorkSearchField(0);
+                //this.validateDefaultComponentWorkSearchFilter(0);
+                //this.validateRequiredComponentWorkSearchField(0);
 
                 this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
                 );
 
                 this.expectShowComponentWorkDetailsButtonToAppear(0);
                 this.validateRequiredComponentWorkAllocationField(0);
                 this.enterMediumComponentWorkAllocation(0);
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
             });
@@ -256,7 +267,7 @@ exports.feature = [
                 this.validateComponentWorkName(1);
                 this.validateComponentWorkAllocation(1);
             });
-        }
+        })
     },
     {
         name: 'Change a non-composite work into a Composite of Samples',

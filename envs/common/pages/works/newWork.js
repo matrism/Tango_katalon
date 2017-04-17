@@ -73,6 +73,10 @@ exports.enterAsNewWorkSuggestion = function() {
 exports.waitForEnterAsNewWorkToBeDisplayed = function() {
     browser.wait(ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()));
 };
+
+exports.waitForEnterShellWorkToBeDisplayed = function() {
+    browser.wait(ExpectedConditions.visibilityOf(element(by.css('.tg-typeahead__suggestions-group-item'))));
+};
 exports.shellWorkTitleLanguageDropdown = function(i) {
     return exports.componentWorkRows().get(i).element(
         by.model('component.nonControlledWork.primaryTitle.languageCode')
@@ -136,7 +140,7 @@ exports.confirmComponentWorkDeletionButton = function() {
 };
 exports.showComponentWorkDetailsButtons = function() {
     return exports.componentWorkRows().all(
-        by.cssContainingText('span', 'Show Details')
+        by.cssContainingText('a', 'Show Details')
     );
 };
 exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function(i) {
@@ -549,11 +553,11 @@ exports.validateRequiredComponentWorkSearchField = function(i) {
     expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.selectFirstComponentWorkSuggestion = function() {
-    var suggestion = $$('.typeahead-result').get(0),
+    var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
         result = {};
 
-    result.name = suggestion.$('.typeahead-result-text').getText();
-    result.workCode = suggestion.$('.typeahead-result-right').getText();
+    result.name = suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText();
+    result.workCode = suggestion.$('span[ng-bind-html="::$match.data.workCode.getFullCode() | tgHighlight:$term"]').getText();
 
     return suggestion.click().then(function() {
         return result;

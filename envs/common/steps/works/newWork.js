@@ -156,7 +156,7 @@ module.exports.validateDefaultMusicLibrary = function() {
 	});
 };
 module.exports.enterPrimaryWorkTitle = function(value) {
-    it('Enter primary work title', function() {
+    it('Enter primary work title' + value, function() {
         pages.newWork.enterPrimaryWorkTitle(value).then(function() {
             hash.currentEntityDataSlotsByType.work.primaryTitle = value;
         });
@@ -240,7 +240,7 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
     });
 
     it('Wait for component work suggestions to load', function() {
-        pages.newWork.waitForEnterAsNewWorkToBeDisplayed();
+        pages.newWork.waitForEnterShellWorkToBeDisplayed();
     });
 
     it('Select a random work', function() {

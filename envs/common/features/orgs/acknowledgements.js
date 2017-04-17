@@ -66,8 +66,8 @@ var data = {
 exports.feature = [
     {
         name: 'Load Ack File',
-        tags: [],
-        steps: function () {
+        tags: ['LoadAckFile'],
+        steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName(data.org);
 
             steps.organisation.goToGeneralTab();
@@ -120,7 +120,7 @@ exports.feature = [
                 this.validateAckCreationDate(data.event.creationDate);
                 this.validateInitiatedBy();
             });
-        }
+        })
     },
     {
         name: 'Validate Work Registration Activity',

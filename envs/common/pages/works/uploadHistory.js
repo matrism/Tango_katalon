@@ -23,7 +23,7 @@ exports.rows = () => element.all(by.repeater(
 ));
 
 exports.fileNameBindingForRow = row => row.element(by.binding(
-    ' ::historyFiles.file_name'
+    '::historyFiles.file_name'
 ));
 
 exports.findRowByFileName = (name, testVarName, dontExpect) => {
@@ -97,7 +97,7 @@ exports.waitUntilFileNameIsStaged = fileName => {
 exports.rowHeading = i => exports.rows().get(i).$('.accordion-heading');
 
 exports.unconfirmedCountBinding = i => exports.rowHeading(i).element(
-    by.binding(' ::historyFiles.unconfirmed_count || 0')
+    by.binding('::historyFiles.unconfirmed_count || 0')
 );
 
 exports.unconfirmedCount = i => asAlways(
@@ -109,7 +109,7 @@ exports.validateUnconfirmedCount = (i, val) => expect(
 ).toBe(val.toString());
 
 exports.openCountBinding = i => exports.rowHeading(i).element(by.binding(
-    ' ::(historyFiles.in_progress_count + historyFiles.delivered_count) || 0 '
+    '::(historyFiles.in_progress_count + historyFiles.delivered_count) || 0'
 ));
 
 exports.openCount = i => asAlways(
@@ -121,7 +121,7 @@ exports.validateOpenCount = (i, val) => expect(
 ).toBe(val.toString());
 
 exports.createdCountBinding = i => exports.rowHeading(i).element(
-    by.binding(' ::historyFiles.created_count || 0 ')
+    by.binding('::historyFiles.created_count || 0')
 );
 
 exports.createdCount = i => asAlways(
@@ -133,7 +133,7 @@ exports.validateCreatedCount = (i, val) => expect(
 ).toBe(val.toString());
 
 exports.uploadDateBinding = i => exports.rowHeading(i).element(by.binding(
-    ' ::historyFiles.upload_date | tgIsoDate'
+    '::historyFiles.upload_date | tgIsoDate'
 ));
 
 exports.uploadDate = i => asAlways(
@@ -145,7 +145,7 @@ exports.validateUploadDate = (i, val) => expect(
 ).toBe(val);
 
 exports.sourceBinding = i => exports.rowHeading(i).element(by.binding(
-    ' ::historyFiles.organisation_name'
+    '::historyFiles.organisation_name'
 ));
 
 exports.source = i => asAlways(
@@ -165,7 +165,7 @@ exports.fileName = i => asAlways(
 exports.validateFileName = (i, val) => expect(exports.fileName(i)).toBe(val);
 
 exports.viewFileLink = i => exports.rowHeading(i).$(
-    '[data-ui-sref="worksViewFile({workFileId:historyFiles.id})"]'
+    '[ui-sref="worksViewFile({workFileId:historyFiles.id})"]'
 );
 
 exports.viewFile = i => asAlways(
