@@ -13,7 +13,8 @@ exports.feature = [
     {
         name: "Deals sanity test flow create mode",
         tags: [],
-        steps: function () {
+        steps: criticalScenario(() =>
+        {
             //fill all general screen fields
             steps.createDealGeneral.itAddAllGeneralFieldsForSanityToDealGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -34,9 +35,10 @@ exports.feature = [
             steps.royaltyRates.confirmChangingRateApplicationMethod();
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
+            steps.base.sleep(1000);
             steps.createDealScope.shareScopeToAllContractPeriods();
             //select contract period 2
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(2)")));
+            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(2)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(2);
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Finder", "Worldwide");
             steps.base.scrollIntoView("Share publisher share set", pages.createDealScope.elems.sharePublisherShareSetIcon);
@@ -50,21 +52,23 @@ exports.feature = [
             steps.royaltyRates.addRatePercentageToContractualField('10');
             steps.royaltyRates.clickOnReceiptApplicationMethod();
             steps.royaltyRates.confirmChangingRateApplicationMethod();
+            steps.base.sleep(1000);
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
             //select contract period 3
-            steps.base.scrollIntoView("Contract period list", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(3)")));
+            steps.base.scrollIntoView("Contract period list", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(3)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(3);
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Joint Venture", "Worldwide");
             steps.createDealScope.itAddPublisherShare();
             steps.createDealScope.saveThePublisherShareSet();
             steps.royaltyRates.addNewRoyaltySet();
+            steps.base.sleep(1000);
             steps.base.scrollIntoView("Rate set name", pages.royaltyRates.elems.rateSetNameFieldIcon);
             steps.royaltyRates.overrideRoyaltyRateSetNumberI(1);
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(1)")));
+            steps.base.scrollIntoView("contract period 1", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(1)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
@@ -75,7 +79,7 @@ exports.feature = [
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);
             steps.createDealContractPeriod.itAddAdvanceAssumptions();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(2)")));
+            steps.base.scrollIntoView("contract period 2", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(2)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(2);
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
@@ -86,7 +90,7 @@ exports.feature = [
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);
             steps.createDealContractPeriod.itAddAdvanceAssumptions();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(3)")));
+            steps.base.scrollIntoView("contract period 3", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(3)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(3);
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
@@ -97,7 +101,7 @@ exports.feature = [
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);
             steps.createDealContractPeriod.itAddAdvanceAssumptions();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(4)")));
+            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(4)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(4);
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
             steps.createDealContractPeriod.itAddSimpleEndRuleToContractPeriod();
@@ -108,23 +112,27 @@ exports.feature = [
             steps.base.scrollIntoView("Advance assumptions", pages.createDealContractPeriod.elems.addAssumptionLink);
             steps.createDealContractPeriod.itAddAdvanceAssumptions();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(1)")));
+            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(1)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
+            steps.base.scrollIntoView("Scope Number 1", element(By.css("ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(1)")));
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.validateShareScopesPopupDetailsContractPeriod1();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(2)")));
+            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(2)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(2);
+            steps.base.scrollIntoView("Scope Number 1", element(By.css("ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(1)")));
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.validateShareScopesPopupDetailsContractPeriod2();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(3)")));
+            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(3)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(3);
+            steps.base.scrollIntoView("Scope Number 1", element(By.css("ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(1)")));
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.validateShareScopesPopupDetailsContractPeriod3();
 
-            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[data-ng-click='setActiveContractPeriod(cp.id)']:nth-child(4)")));
+            steps.base.scrollIntoView("contract period ", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(4)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(4);
+            steps.base.scrollIntoView("Scope Number 1", element(By.css("ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(1)")));
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.validateShareScopesPopupDetailsContractPeriod4();
 
@@ -137,17 +145,18 @@ exports.feature = [
             //add first retention from acquisition
             steps.createDealRtp.clickOnAddRetentionPeriodFromAcquisition();
             steps.createDealRtp.fillIntoRetentionPeriodDescriptionFromAcquisitionNumberI(1);
-            steps.createDealRtp.selectSpecificScopeNumberJFromAcquisitionNumberI(1, 1);
+            //steps.createDealRtp.selectSpecificScopeNumberJFromAcquisitionNumberI(1, 1);
             steps.createDealRtp.selectRandomDurationTypeRetentionFromAcquisitionNumberI(1, "Life of Copyright");
             //add second retention from acquisition
             steps.createDealRtp.clickOnAddRetentionPeriodFromAcquisition();
-            steps.base.scrollIntoView("Retention 2 from acquisition", element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(3) div.aquisition-period.clearfix.retention.ng-scope input[data-ng-model='rtp.description']")));
+            steps.base.scrollIntoView("Retention 2 from acquisition", element(by.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] div[ng-repeat='rightsTermPeriod in rightsTermPeriodSet.getRightsTermsPeriodsByPeriod(constants.RETENTION, constants.PTC) | orderBy: orderRightsTermPeriods']:nth-child(2) div[tg-modular-edit-id='retentionModulatEdit'] input[ng-model='tgModularEditModel.description']")));
             steps.createDealRtp.fillIntoRetentionPeriodDescriptionFromAcquisitionNumberI(2);
-            steps.createDealRtp.selectSpecificScopeNumberJFromAcquisitionNumberI(2, 2);
+            //steps.createDealRtp.selectSpecificScopeNumberJFromAcquisitionNumberI(2, 2);
             steps.createDealRtp.selectRandomDurationTypeRetentionFromAcquisitionNumberI(2, "Conditional Duration");
             steps.base.scrollIntoView("Add end rules to retention", pages.createDealRtp.elems.addEndRulesLinkRtpRetention2FromAcquisition);
             steps.createDealRtp.clickOnAddEndRulesRetentionPeriodFromAcquisitionNumberI(2);
             steps.createDealContractPeriod.itAddSimpleEndRuleToRtp();
+
             //add post term period 1 from retention 1
             steps.base.scrollIntoView("Add post term from retention 1", element(by.css("div[data-ng-repeat='rtps in form.deal.deal_rights_term_period_sets track by $index']:nth-child(4) div[data-ng-repeat='rtp in rtps.rights_terms_periods | orderBy: orderRightsTermPeriods']:nth-child(2) div.aquisition-period.clearfix.retention.ng-scope a[data-ng-click='addPostTermCollectionRightsTermPeriodToRetention(rtps.id, rtp.id)']")));
             steps.createDealRtp.clickOnAddPostTermPeriodFromRetentionNumberI(1);
@@ -231,6 +240,6 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
-        }
+        })
     }
 ];

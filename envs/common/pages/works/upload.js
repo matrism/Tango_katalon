@@ -8,7 +8,7 @@ exports.enterFilePath = path => asAlways(
     exports.fileInput(), 'scrollIntoView'
 ).sendKeys(path);
 
-exports.sourceTypeahead = () => Typeahead(by.model('dataHolder.model.source'));
+exports.sourceTypeahead = () => Typeahead(by.model('tgOrgTypeaheadModel'));
 
 exports.enterSourceSearchTerms = val => asAlways(
     exports.sourceTypeahead(), 'scrollIntoView', 'clear'
@@ -76,7 +76,7 @@ exports.selectMusicLibrary = name => {
     ).click();
 };
 
-exports.uploadButton = () => $('[data-ng-click="uploadFile();"]');
+exports.uploadButton = () => $('[ng-click="uploadFile();"]');
 
 exports.upload = () => {
     asAlways(exports.uploadButton(), 'scrollIntoView', 'click');

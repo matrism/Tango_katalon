@@ -44,7 +44,7 @@ exports.feature = [
     {
         name: 'Duplicate work checks',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 0);
 
             using(steps.newWork, function() {
@@ -61,6 +61,7 @@ exports.feature = [
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 1);
@@ -74,6 +75,7 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.clickFirstSimilarWorkTitle();
                 steps.duplicateWorkChecks.validateSimilarWorkLinkDestination();
 
@@ -88,10 +90,12 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 3);
@@ -105,10 +109,12 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 4);
@@ -122,10 +128,12 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 5);
@@ -139,10 +147,12 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 6);
@@ -156,10 +166,12 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 7);
@@ -173,10 +185,12 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 8);
@@ -190,6 +204,7 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.expectSimilarWorksPopUpToHaveScrollbar();
 
                 steps.base.useBlankEntityDataSlot('work', 9);
@@ -203,6 +218,7 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.enterPrimaryWorkTitle(
@@ -217,6 +233,7 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.enterPrimaryWorkTitle(
@@ -224,6 +241,7 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.enterPrimaryWorkTitle(
@@ -231,10 +249,12 @@ exports.feature = [
                 );
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
 
                 steps.base.useBlankEntityDataSlot('work', 10);
@@ -249,10 +269,11 @@ exports.feature = [
 
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
+                steps.base.sleep(5000);
                 this.validateSaveWorkRedirection();
             });
 
-            steps.base.sleep(100);
+            steps.base.sleep(5000);
 
             using(steps.work, function() {
                 this.hoverPrimaryWorkTitleHeading();
@@ -260,11 +281,8 @@ exports.feature = [
                 this.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomWorkString);
                 this.waitTitleEditorCheckForDuplicates();
 
-                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-
                 this.saveWorkTitles();
             });
-        }
+        })
     }
 ];

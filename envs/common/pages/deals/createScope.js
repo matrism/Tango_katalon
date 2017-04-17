@@ -24,7 +24,7 @@ if (pages.createDealScope === undefined) {
             firstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
             firstPublisherTypeValue: {css: "#deal-publisher div[ng-form='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
             firstPublisherTypeText: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button"},
-            savePublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+            savePublisherShareSet: {css: "div[tg-modular-edit-id='publisherShareSetModularEdit'] div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
             cancelPublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
             addChainLink: {css: "#deal-publisher a[data-ng-click='addChain(modularEditModels.activeScope.publisher_share_set_id, modularEditModels.activeScope.id)']"},
             noPublisherShareWarningMessage: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.ng-scope div.validation-message-error.ng-scope div.validation-message-text.ng-binding"},
@@ -45,19 +45,19 @@ if (pages.createDealScope === undefined) {
             cancelModalDialog: {css: "div.modal-footer button[data-ng-click='cancel()']"},
             confirmOnModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
             publisherShareSetArea: {css: "div[data-tg-modular-edit-id='publisherShareSets']"},
-            overridePssIcon: {css: "div[data-ng-click='form.popups.overridenSubPublishers = !form.popups.overridenSubPublishers'] a[data-ng-click='showSubPubOverrideForm()'] i"},
+            overridePssIcon: {css: "div[ng-click='stateHolder.overridenSubPublishers = !stateHolder.overridenSubPublishers'] a[ng-click='addSubPubOverrideForm()'] i"},
             subPublisherOverridePssField: {css: "div[name='subPublisherOverride'] div[ng-class='tgTypeaheadWrapClass']"},
             subPublisherOverridePssInputField: {css: "div[name='subPublisherOverride'] input[ng-model='$term']"},
-            territoryOverridePssField: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
-            territoryOverridePssFieldInput: {css: "div[ng-model='form.subPubOverride.override_territories.territories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            territoryOverridePssField: {css: "div[ng-model='getSubPubOverrideCurrentModel().overrideTerritories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass']"},
+            territoryOverridePssFieldInput: {css: "div[ng-model='getSubPubOverrideCurrentModel().overrideTerritories'] div.tg-territory div.tg-territory__input-container div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             cancelOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='showSubPubOverrideForm()']"},
-            doneOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, false)']"},
+            doneOverridePublisherShareSetButton: {css: "div[name='subPubOverrideForm'] div.CONTROLS.clearfix button[type='submit']"},
             addAnotherOverridePublisherShareSetButton: {css: "div[data-ng-show='form.show.buttons.subPubOverride.buttons'] button[data-ng-click='subPubOverrideForm.$invalid || addSubPublisherOverride(form.subPubOverride, modularEditModels.model.id, true)']"},
-            sharePublisherShareSetIcon: {css: "div[data-ng-click='showSharePublisherShareSetSection(true)'] i"},
-            useThisPublisherShareSetButton: {css: "button[data-ng-click='sharePubShareSet(pss.id, modularEditModels.activeScope.id)']"},
-            activeScope: {css: "li[data-ng-click='onSetActiveScope(sp.id)']"},
-            shareUnshareDeleteScopeIcon: {css: "div[data-ng-click='$event.preventDefault()'] i"},
-            shareScopeLink: {css: "a[data-ng-click='showShareScopeModal(sp.id)']"},
+            sharePublisherShareSetIcon: {css: "div[ng-click='showSharePublisherShareSetSection(true)'] i"},
+            useThisPublisherShareSetButton: {css: "button[ng-click='sharePublisherShareSet(pss)']"},
+            activeScope: {css: "ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']"},
+            shareUnshareDeleteScopeIcon: {css: "div[ng-click='$event.preventDefault()'] i.fa.fa-caret-down"},
+            shareScopeLink: {css: "a[ng-click='showShareScopeModal(sp)']"},
             unshareScopeLink: {css: "a[data-ng-click='showUnshareScopeModal(sp.id)']"},
             deleteScopeLink: {css: "a[data-ng-click='showDeleteScopeModal(sp.id, canScopeBeDeleted(sp.id))']"},
             copyScopeLink: {css: "a[data-ng-click='showScopeCopySection(sp.id)']"},
@@ -586,13 +586,10 @@ if (pages.createDealScope === undefined) {
         },
 
         saveThePublisherShareSets: function () {
-            var saveButton = pages.createDealScope.elems.savePublisherShareSet;
+            pages.base.scrollIntoView(pages.createDealScope.elems.savePublisherShareSet);
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealScope.elems.savePublisherShareSet));
 
-            pages.base.scrollIntoView(saveButton);
-
-            browser.wait(ExpectedConditions.elementToBeClickable(saveButton));
-
-            return saveButton.click();
+            pages.createDealScope.elems.savePublisherShareSet.click();
         },
 
         cancelPublisherShareSet: function () {
@@ -827,6 +824,7 @@ if (pages.createDealScope === undefined) {
         },
 
         shareTheScope: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealScope.elems.activeScope));
             browser.actions().mouseMove(pages.createDealScope.elems.activeScope).perform();
             browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
             pages.createDealScope.elems.shareScopeLink.click();
@@ -1019,7 +1017,7 @@ if (pages.createDealScope === undefined) {
             var nccs = {};
 
             nccs.component = function (i) {
-                var el = $$('[data-ng-click="setNonControlledCreatorShare(chain.id)"]').get(i);
+                var el = $$('[ng-click="chain.setNonControlledCreatorShare()"]').get(i);
                 pages.base.scrollIntoView(el);
                 return el;
             };
@@ -1046,7 +1044,7 @@ if (pages.createDealScope === undefined) {
             };
 
             nccs.helpMessage = function (i) {
-                return nccs.helpIcon(i).getAttribute('data-tooltip');
+                return nccs.helpIcon(i).getAttribute('tooltip');
             };
 
             return nccs;

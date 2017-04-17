@@ -24,7 +24,7 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() => {
             let base = steps.base,
 
                 mh = steps.mainHeader,
@@ -45,6 +45,7 @@ exports.feature = [
                 albCode = random.id();
 
             mh.goToLink('Works Upload History');
+            steps.base.sleep(1000);
             wuh.uploadWorks();
 
             it('Generate Excel file', () => {
@@ -75,7 +76,7 @@ exports.feature = [
                     uw.upload();
                 });
             });
-
+            steps.base.sleep(1000);
             wuh.waitUntilFileNameIsStaged(fromTestVariable(
                 'generated Excel file name'
             ));
@@ -101,6 +102,7 @@ exports.feature = [
             wuh.viewFile(iUploaded);
 
             describe('Validate header data', () => {
+                steps.base.sleep(1000);
                 vwf.validateFileName(fromTestVariable(
                     'generated Excel file name'
                 ));
@@ -108,12 +110,14 @@ exports.feature = [
                 vwf.validateTotalWorks(3);
             });
 
+            steps.base.sleep(1000);
             vwfu.validateRowCount(3);
 
             _.times(3, i => {
                 describe(`Create work ${i}`, () => {
                     vwfu.toggle(0);
                     vwfu.create(0);
+                    vwfu.confirmation();
                 });
             });
 
@@ -163,6 +167,6 @@ exports.feature = [
                     base.closeCurrentTabAndSwitchTo(0);
                 });
             });
-        }
+        })
     }
 ];
