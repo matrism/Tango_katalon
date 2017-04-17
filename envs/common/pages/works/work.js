@@ -153,18 +153,18 @@ module.exports.alternateWorkTitleBindings = function () {
     );
 };
 module.exports.primaryWorkTitleHeading = function () {
-    return $("[data-ng-show='workHeader.title.detail']");
+    return $("[data-ng-if='view.isShowing']");
 };
 module.exports.editWorkTitlesButton = function () {
-    return $(".title-edit [data-ng-click='showEdit(workHeader.title, titleEditForm)']");
+    return $(".work-modular-edit [data-ng-click='tgModularViewMethods.switchToEditView()']");
 };
 module.exports.editWorkTitlesContainer = function () {
-    return $("[data-ng-show='workHeader.title.edit']");
+    return $("[tg-modular-edit-id='workTitles']");
 };
 module.exports.editPrimaryWorkTitleField = function () {
     return (
         pages.work.editWorkTitlesContainer()
-            .element(by.model("work.title.primary_title.title"))
+            .element(by.model("tgModularEditModel.primaryTitle.title"))
     );
 };
 module.exports.alternateWorkTitleEditRows = function () {
@@ -381,10 +381,10 @@ exports.similarWorksPopUpScrollArea = function () {
     return pages.base.modalDialog().$('[style*="max-height"]');
 };
 exports.similarWorkTitleBindings = function () {
-    return pages.base.modalDialog().$$('.work-name');
+    return pages.base.modalDialog().element(by.repeater('work in data.works'));
 };
 exports.firstSimilarWorkTitleBinding = function () {
-    return exports.similarWorkTitleBindings().first();
+    return exports.similarWorkTitleBindings();
 };
 exports.ignoreSimilarWorksButton = function () {
     return pages.base.modalFooter().element(
