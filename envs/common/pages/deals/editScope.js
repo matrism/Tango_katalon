@@ -44,7 +44,7 @@ if (pages.editDealScope === undefined) {
                 cancelDeletePssModalDialog: {css: "div.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
                 addCreatorLinkSocietyAgreementNumberForm: {css: "a[data-ng-click='data.addCreatorToChain()']"},
                 saveAddSocietyAgreementNumberForm: {css: "button[data-ng-click='data.save(data.isAgreementsNumbersValid)']"},
-                shareIconOnScope: {css: "div[data-ng-if='isScopeShared(sp.id)'] a.icon.share-icon.ng-binding i.fa.fa-share"},
+                shareIconOnScope: {css: "div[ng-if='sp.isLinkedToMultipleEntities()'] a.icon.share-icon.ng-binding i.fa.fa-share"},
                 shareScopeTextIcons: {css: "div[data-ng-show='isPublisherShareSetShared(form.terms.activePublisherShareSet.id)']"},
                 shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
                 shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
@@ -196,13 +196,9 @@ if (pages.editDealScope === undefined) {
             },
 
             clickOnScopeNumberI: function (i) {
-                pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")));
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))));
-                //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
-                //browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
-                browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
-                //browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")")).click();
-                browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ")"))));
+                browser.actions().mouseMove(element(by.css("ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
+                browser.actions().click(element(by.css("ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ")"))).perform();
             },
 
             checkOverrideNumbersAddedOnScope: function (i) {
