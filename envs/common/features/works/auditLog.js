@@ -41,7 +41,7 @@ exports.feature = [
     {
         name: 'Create a work',
         tags: [],
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 0);
             using(steps.newWork, function () {
                 this.goToNewWorkPage();
@@ -55,12 +55,12 @@ exports.feature = [
                 this.validateSaveWorkRedirection();
             });
             steps.work.findCurrentlyOpenWorkId()
-        }
+        })
     },
     {
         name: 'Validate Last Update Date and go to audit log page',
         tags: [],
-        steps: function () {
+        steps: criticalScenario(() => {
             var today = new Date(),
                 currentDate = today.getFullYear() + '-' +
                     ('0' + (today.getMonth() + 1)).slice(-2) + '-' +
@@ -83,9 +83,10 @@ exports.feature = [
                 steps.base.waitForAjax();
                 this.hoverPrimaryWorkTitleHeading();
                 this.editWorkTitles();
+                this.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomString(0));
                 this.saveWorkTitles();
                 this.validateLastUpdateDate(currentDate);
             });
-        }
+        })
     }
 ];
