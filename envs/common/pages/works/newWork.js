@@ -71,7 +71,7 @@ exports.enterAsNewWorkSuggestion = function() {
     return element(by.cssContainingText('.tg-typeahead__suggestions-footer-inner', 'Enter as a new work'));
 };
 exports.waitForEnterAsNewWorkToBeDisplayed = function() {
-    browser.wait(ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()));
+    browser.wait(ExpectedConditions.visibilityOf(element(by.css('.tg-typeahead__suggestions-group-item'))));
 };
 
 exports.waitForEnterShellWorkToBeDisplayed = function() {
@@ -727,7 +727,7 @@ exports.continueToNextTab = function() {
 };
 exports.continueIfPrompted = function () {
     var btn = element.all(by.buttonText('Ignore and continue to enter new work'));
-    browser.sleep(2000);
+    browser.sleep(1000);
 
     btn.count().then(function(num){
         if (num > 0) {

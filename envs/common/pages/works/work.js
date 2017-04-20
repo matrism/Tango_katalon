@@ -77,13 +77,17 @@ exports.workSearchMatchTitle = function (i) {
 exports.expectWorkSearchMatchTitleToBe = function (i, value) {
     expect(exports.workSearchMatchTitle(i)).toBe(value);
 };
+exports.expectWorkSearchMatchTitleToBeCreator1 = function (i, value) {
+    expect(exports.workSearchMatchTitle(i)).toBe(value);
+};
+
 exports.workSearchMatchAlternateTitle = function (i) {
     return exports.workSearchMatchMainLabelParts(i).then(function (parts) {
         return parts.alternateTitle;
     });
 };
 exports.expectWorkSearchMatchAlternateTitleToBe = function (i, value) {
-    expect(exports.workSearchMatchAlternateTitle(i)).toBe(value);
+  expect(exports.workSearchMatchMainLabelBinding(i).getText()).toBe(value);
 };
 exports.workSearchMatchCreatorNames = function (i) {
     return exports.workSearchMatchMainLabelParts(i).then(function (parts) {
@@ -327,7 +331,7 @@ exports.shellWorkTitleInput = function (i) {
         by.model('component.nonControlledWork.primaryTitle.title')
     );
 };
-exports.shellWorkCreatorNameInputs = function(i) {
+exports.shellWorkCreatorNameInputs = function (i) {
     return exports.componentWorkRows().get(i).all(
         by.css('div[ng-model="creator.person"] input')
     );
@@ -921,7 +925,7 @@ exports.workTitle = function (){
 
     let locator = by.css('span[ng-bind="component.work.primaryTitle.title"]');
 
-     return exports.componentWorkRows().all(locator);
+    return exports.componentWorkRows().all(locator);
 };
 
 exports.rowIndexByEnteredTitle = function(val) {
