@@ -74,16 +74,9 @@ exports.feature = [
                 this.auditLog.expectNoErrorMessage();
 
                 steps.base.refreshPage();
-                steps.searchSection.selectEntityType('Works');
-                this.selectWorkSearchFilterTag(0, 'Title');
-                this.enterWorkSearchTerms('TESTING AUDIT LOG');
-                steps.base.sleep(200);
-                steps.base.waitForAjax();
-                this.clickWorkSearchMatch(Math.round(Math.random()*8));
-                steps.base.waitForAjax();
                 this.hoverPrimaryWorkTitleHeading();
                 this.editWorkTitles();
-                this.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomString(0));
+                this.enterPrimaryWorkTitle('TEST WORK GRINCH ' + randomString(1));
                 this.saveWorkTitles();
                 this.validateLastUpdateDate(currentDate);
             });

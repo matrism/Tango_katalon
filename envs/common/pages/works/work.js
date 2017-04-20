@@ -149,10 +149,10 @@ module.exports.alternateWorkTitleBindings = function () {
     );
 };
 module.exports.primaryWorkTitleHeading = function () {
-    return $("[data-ng-if='view.isShowing']");
+    return $("div[ui-view='titles'] [data-ng-if='view.isShowing']");
 };
 module.exports.editWorkTitlesButton = function () {
-    return $(".work-modular-edit [data-ng-click='tgModularViewMethods.switchToEditView()']");
+    return $("div[ui-view='titles'] .work-modular-edit [data-ng-click='tgModularViewMethods.switchToEditView()']");
 };
 module.exports.editWorkTitlesContainer = function () {
     return $("[tg-modular-edit-id='workTitles']");
@@ -1414,7 +1414,7 @@ exports.goToRegistrationActivityTab = function () {
 };
 
 exports.lastUpdateDateBinding = function () {
-    return element(by.binding('work.pristine.last_updated_date | tgIsoDate'));
+    return element(by.binding('tgWorkHeader.lastUpdatedDate | tgIsoDate'));
 };
 
 exports.clickOnLastUpdateDate = function () {
@@ -1567,7 +1567,7 @@ exports.auditLog = (function () {
     var auditLog = {};
 
     auditLog.headerTitle = function () {
-        return $('#RECORD-HEADER h1 strong');
+        return $('div[ui-view="audit"] h1');
     };
 
     auditLog.validateHeaderTitle = function () {
