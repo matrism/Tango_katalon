@@ -68,7 +68,7 @@ exports.searchDealsForAllContributions = function (terms) {
 };
 
 exports.dealSearchInput = function (i) {
-    return $$('.scope-delivery__search-deal input').get(i);
+    return $$('[tg-typeahead-placeholder="Search deals"] input').get(i);
 };
 
 exports.contractPeriodFilterButton = function () {
@@ -145,7 +145,7 @@ exports.scopeDropDownResults = function () {
 
 exports.dealSearchResults = function () {
     pages.base.waitForAjax();
-    return $$('.tg-typeahead__suggestions-group-item-inner');
+    return $$('.tg-typeahead__suggestions-group-item');
 };
 
 exports.dealSearchResult = function (i) {
@@ -167,7 +167,7 @@ exports.selectDealSearchResultByIndex = function (i) {
 
 exports.editModeContributionRows = function () {
     return element.all(by.repeater(
-        'creatorContribution in modularEditModels.model'
+        'dealScopeLink in dealLink.dealScopeLinks.$getItems()'
     ));
 };
 
@@ -185,6 +185,7 @@ exports.dealSearchForContributionInput = function (i) {
     ).element(by.model('$term'));
 };
 
+/*
 exports.searchDealsForContribution = function (i, terms) {
     var el = exports.dealSearchForContributionInput(i);
 
@@ -193,9 +194,10 @@ exports.searchDealsForContribution = function (i, terms) {
     return el.sendKeys(terms);
 };
 
+*/
 exports.scopeDeliveryCheckboxes = function (i) {
     return exports.editModeContributionRow(i).all(by.model(
-        'dealScope.state.selected'
+        'dealScopeLink.selected'
     ));
 };
 
@@ -243,7 +245,7 @@ exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
 };
 
 exports.modularEditContainer = function () {
-    return $('[data-tg-modular-edit-id="scopeDelivery"]');
+    return $('[tg-modular-edit-id="scopeDelivery"]');
 };
 
 exports.modularEditControls = function () {

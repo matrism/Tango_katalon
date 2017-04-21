@@ -355,7 +355,7 @@ exports.confirmComponentWorkDeletionButton = function () {
     );
 };
 exports.statusBinding = function () {
-    return element(by.binding('dealUtility.getRightsTermsPeriodName(work.workHeader.status)'));
+    return element(by.binding('::dealLink.deal.contractBriefNumber'));
 };
 exports.waitForStatusToBeDisplayed = function () {
     var el = exports.statusBinding();
@@ -1118,7 +1118,7 @@ exports.selectFirstCreatorSuggestion = function () {
     var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
         result = {};
 
-    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryName.presentationName | tgHighlight:$term"]').getText());
+    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText());
 
     return suggestion.click().then(function () {
         return result;
@@ -1519,7 +1519,7 @@ exports.merge = (function () {
     };
 
     merge.findWorkInput = function () {
-        return element(by.model('data.workSearch.selected_work'));
+        return element(by.css('[ng-model="__searchedWork"] input'));
     };
 
     merge.enterFindWorkUsingPreviouslyEnteredPrimaryTitle = function () {
