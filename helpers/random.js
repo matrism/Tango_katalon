@@ -5,7 +5,7 @@ var _ = require("lodash"),
     memoizeNonNullaryCalls = require('./memoizeNonNullaryCalls');
 
 exports.id = function() {
-	return Math.floor(Math.random() * 1000) +  Date.now().toString();
+	return Math.floor(Math.random() * 100) +  Date.now().toString();
 };
 
 exports.id.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.id);

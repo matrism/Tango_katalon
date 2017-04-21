@@ -59,7 +59,7 @@ exports.suisaIpiNumberInput = function() {
     return $('.e2e-primary-name-suisa-ipi input');
 };
 exports.presentationNameInput = function () {
-    return element(by.model('modularEditModels.model.fullName'));
+    return element(by.model('tgModularEditModel.presentationName'));
 };
 exports.affiliatedSocietySearchInput = function() {
     return $('.e2e-society-affiliation-society input');
