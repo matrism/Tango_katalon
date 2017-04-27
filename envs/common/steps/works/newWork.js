@@ -915,8 +915,17 @@ exports.continueToNextTab = function() {
     });
 };
 
+exports.continueIfSimilarWorksPrompted = function() {
+    it('Continue if similar works is found', function() {
+        pages.newWork.continueIfPrompted();
+    });
+};
+
 exports.save = function() {
+   // it('Saving work', function() {
+       // browser.sleep(2000);
      steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
+   // });
 };
 
 exports.saveWork = exports.save;

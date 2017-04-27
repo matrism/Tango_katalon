@@ -991,6 +991,25 @@ if (steps.organisation === undefined) {
                 expect(pages.organisation.getFirstSubPublisherData()).toBe(firstPublisherDate);
 
             });
+        },
+        scrollCWRtoLastResult: function(){
+            it("Scroll to the end of the page until the last result", function () {var countel = element(by.css('.count'));
+               countel.getText().then(function(total){
+                    var totalnew
+                    totalnew = total.trim();
+                    var totalnew1 = totalnew.replace(/[^0-9.]/g,"");
+                    totalnew1 = parseInt(totalnew1);
+
+                    pages.organisation.scrollPreviewRegRun();
+                    var i = 0;
+                    while(i < totalnew1){
+                        pages.organisation.scrollPreviewRegRun();
+                        i=i+100;
+                        browser.sleep(2000);
+                    }
+               });
+
+            });
         }
     };
 }
@@ -1022,6 +1041,8 @@ exports.expectValue = function(section, labelName, isExact){
 exports.expectValueExact = function (section, labelName) {
     return exports.expectValue(section, labelName, true);
 };
+
+
 
 pageStep([
     'Get value by label',

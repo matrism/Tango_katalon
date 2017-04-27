@@ -31,7 +31,7 @@ exports.activityGroup = (function() {
     activityGroup.container.firstWithRecipientName = function(name) {
         return element.all(
             by.cssContainingText(
-                '[ng-repeat="activitiesGroup in dataHolder.groupedActivities track by activitiesGroup.registration.name"]', name
+                '[ng-repeat="activitiesGroup in dataHolder.groupedActivities track by (activitiesGroup.registration.name + activitiesGroup.registration.orgId)"]', name
             )
          ).first();
     };

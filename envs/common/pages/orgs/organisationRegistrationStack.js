@@ -15,7 +15,7 @@ exports.works = (function() {
     };
 
     works.container.all = function() {
-        return element.all(by.repeater('work in processorsContext.works.getAll()'));
+        return element.all(by.css('[data-ng-repeat="work in processorsContext.works.getAll()"]'));
     };
 
     works.container.title = function(title) {
@@ -36,7 +36,6 @@ exports.works = (function() {
         if(targetWorkName) {
             works.targets[targetWorkName] = works.targets.latest;
         }
-
         return resultPromise;
     };
 
@@ -142,7 +141,7 @@ exports.registrationRun = (function() {
     var registrationRun = {};
 
     registrationRun.stackHeader = function() {
-        return $('#ACTIVITY-HEADER');
+        return $('.ACTIVITY-HEADER');
     };
 
     registrationRun.executeButton = function() {
