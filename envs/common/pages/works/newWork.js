@@ -51,7 +51,7 @@ exports.componentWorkRow = function(i) {
 };
 exports.componentWorkSearchFilterDropdowns = function() {
     return exports.componentWorkRows().all(
-        by.model('component.filter')
+        by.model('component.workSearchType')
     );
 };
 exports.componentWorkSearchFilterDropdown = function(i) {
@@ -77,6 +77,15 @@ exports.waitForEnterAsNewWorkToBeDisplayed = function() {
 exports.waitForEnterShellWorkToBeDisplayed = function() {
     browser.wait(ExpectedConditions.visibilityOf(element(by.css('.tg-typeahead__suggestions-group-item'))));
 };
+
+exports.enterAsWorkSuggestion = function(value) {
+    return element(by.cssContainingText('.tg-typeahead__suggestions-group-item.ng-scope', value));
+};
+
+exports.waitForEnterAsWorkToBeDisplayed = function(value) {
+    browser.wait(ExpectedConditions.visibilityOf(exports.enterAsWorkSuggestion(value)));
+};
+
 exports.shellWorkTitleLanguageDropdown = function(i) {
     return exports.componentWorkRows().get(i).element(
         by.model('component.nonControlledWork.primaryTitle.languageCode')
@@ -128,7 +137,7 @@ exports.shellWorkCreatorContributionInput = function(i, j) {
     return exports.shellWorkCreatorContributionInputs(i).get(j);
 };
 exports.deleteComponentWorkButtons = function() {
-    return exports.componentWorkRows().$$('.delete-button');
+    return exports.componentWorkRows().$$('[ng-click="confirmComponentRemove(tgModularEditModel.components, component, $viewForm);"]');
 };
 exports.deleteComponentWorkButton = function(i) {
     return exports.deleteComponentWorkButtons().get(i);
@@ -553,7 +562,7 @@ exports.validateRequiredComponentWorkSearchField = function(i) {
     expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.selectFirstComponentWorkSuggestion = function() {
-    var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
+    var suggestion = $$('.tg-typeahead__suggestions-group-item').get(0),
         result = {};
 
     result.name = suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText();
