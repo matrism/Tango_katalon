@@ -24,7 +24,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() =>
+        {
             let base = steps.base,
 
                 mh = steps.mainHeader,
@@ -45,6 +46,7 @@ exports.feature = [
                 albCode = random.id();
 
             mh.goToLink('Works Upload History');
+            steps.base.sleep(5000);
             wuh.uploadWorks();
 
             it('Generate Excel file', () => {
@@ -163,6 +165,6 @@ exports.feature = [
                     base.closeCurrentTabAndSwitchTo(0);
                 });
             });
-        }
+        })
     }
 ];

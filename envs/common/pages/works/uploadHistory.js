@@ -11,7 +11,7 @@ exports.waitForPage = timeout => {
 };
 
 exports.uploadWorksLink = () => exports.headingContainer().element(
-    by.cssContainingText('a', 'UPLOAD WORKS')
+    by.cssContainingText('a','UPLOAD WORKS')
 );
 
 exports.uploadWorks = () => asAlways(
