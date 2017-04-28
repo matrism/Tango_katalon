@@ -262,6 +262,32 @@ module.exports.selectCreatorRole = function (i, role) {
         pages.work.selectCreatorRole(i, role);
     });
 };
+
+exports.selectRandomCreator = function(i) {
+    it('Type a random letter on creator name field #' + (i + 1), function() {
+        pages.work.enterRandomLetterOnCreatorNameField(i);
+    });
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        var data = hash.currentEntityDataSlotsByType.work;
+        var creator;
+
+        data.creators = data.creators || [];
+        data.creators[i] = data.creators[i] || {};
+
+        creator = data.creators[i];
+
+        pages.newWork.selectRandomCreatorSuggestion().then(function(selected) {
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+
 exports.enterMediumCreatorContribution = function (i, contribution, data, key) {
     it('Enter medium creator contribution #' + (i + 1), function () {
         var creator;
@@ -352,7 +378,7 @@ exports.selectFirstComponentWorkMatching = function (i, value, data, key) {
     });
 
     it('Wait for component work suggestions to load', function () {
-        pages.newWork.waitForEnterAsNewWorkToBeDisplayed();
+        pages.work.waitForEnterAsWorkToBeDisplayed(value);
     });
 
     it('Select a random work', function () {
@@ -1090,7 +1116,6 @@ exports.validateComponentWorkName = function (i, varName, data, key) {
         key = key || 'components';
         component = data[key][i];
 
-
         for ( var j=0 ; j < row.length ; j++ )
         {
             pages.work.validateComponentWorkName(j, component.name);
@@ -1100,7 +1125,6 @@ exports.validateComponentWorkName = function (i, varName, data, key) {
 };
 exports.validateComponentWorkAllocation = function (i, data, key) {
     it('Validate component work allocation #' + (i + 1), function () {
-
         var row = pages.work.componentWorkRows;
 
         // data = data || hash.currentEntityDataSlotsByType.work;
@@ -1109,8 +1133,6 @@ exports.validateComponentWorkAllocation = function (i, data, key) {
         for ( var j=0 ; j < row.length ; j++ ) {
             pages.work.validateComponentWorkAllocation(j, data);
         }
-
-
     });
 };
 module.exports.validateCreatorContributionInputMask = function (i, validationTable) {

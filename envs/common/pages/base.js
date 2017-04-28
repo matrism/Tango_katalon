@@ -154,7 +154,7 @@ exports.selectDropdownOption = function (element, value, more) {
 };
 exports.selectDropdownOption.standard = function (element, value) {
     element.click();
-    element.element(by.cssContainingText('option', value)).click();
+    element.element(by.cssContainingText('a', value)).click();
 };
 exports.selectDropdownOption.tg = function (element, value) {
     browser.executeScript(function (element) {
@@ -399,7 +399,7 @@ module.exports.randomTgDropdownSelector = function (element) {
     return fn;
 };
 module.exports.selectedDropdownOption = function (element) {
-    return element.$("option:checked").getText();
+    return element.$('span[ng-bind="$selectedItem.value"]').getText();
 };
 module.exports.selectedTgDropdownOption = function (element) {
     return (

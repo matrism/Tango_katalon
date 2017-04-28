@@ -241,7 +241,7 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
     });
 
     it('Wait for component work suggestions to load', function() {
-        pages.newWork.waitForEnterShellWorkToBeDisplayed();
+        pages.newWork.waitForEnterAsWorkToBeDisplayed(searchTerms);
     });
 
     it('Select a random work', function() {

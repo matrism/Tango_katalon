@@ -21,25 +21,24 @@ exports.commonFeatureTags = [
 exports.feature = [
     {
         name: 'Create a person',
-        tags: [],
+        tags: ['Medley_error'],
         steps: criticalScenario(() => {
             _.times(4, (i) => {
             steps.person.useBlankPersonSlot(i);
 
-                using(steps.newPerson, function () {
-                    this.goToNewPersonPage();
+            steps.newPerson.goToNewPersonPage();
 
-                    this.enterLastName(
-                        'TEST PERSON ' + (i + 1) + ' ' + randomString('person' + i)
-                    );
+            steps.newPerson.enterLastName(
+                'TEST PERSON ' + (i + 1) + ' ' + randomString('person' + i)
+            );
 
-                    this.enterAffiliatedSocietySearchTerms('ASCAP');
-                    this.selectAffiliatedSocietySearchResultByIndex(0);
+            steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
+            steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
 
-                    this.save();
-                });
+            steps.newPerson.save();
 
-                steps.person.findInternalIpiNumber();
+            steps.person.findInternalIpiNumber();
+
             });
         })
     },
@@ -48,44 +47,50 @@ exports.feature = [
         tags: [],
         steps: criticalScenario(() => {
             using(steps.newWork, function() {
-                steps.base.useBlankEntityDataSlot('work', 0);
 
-                this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(0));
-                this.selectCreatorFromPersonSlot(0, 0);
-                this.enterMaximumCreatorContribution(0);
-                this.optToIncludeWorkOnWebsite(false);
-                steps.base.sleep(5000);
-                this.saveWork();
-                this.validateSaveWorkRedirection();
+        steps.base.useBlankEntityDataSlot('work', 0);
 
-                steps.base.useBlankEntityDataSlot('work', 1);
+        this.goToNewWorkPage();
+        this.selectCreatorFromPersonSlot(0, 0);
+        this.enterMaximumCreatorContribution(0);
+        this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(0));
+        this.optToIncludeWorkOnWebsite(false);
+        steps.base.sleep(5000);
+        this.saveWork();
+        this.validateSaveWorkRedirection();
+    });
 
-                this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(1));
-                this.selectCreatorFromPersonSlot(0, 1);
-                this.enterMaximumCreatorContribution(0);
-                this.optToIncludeWorkOnWebsite(false);
-                steps.base.sleep(5000);
-                this.saveWork();
-                this.validateSaveWorkRedirection();
+        using(steps.newWork, function() {
+        steps.base.useBlankEntityDataSlot('work', 1);
 
-                steps.base.useBlankEntityDataSlot('work', 2);
+        this.goToNewWorkPage();
+        this.enterPrimaryWorkTitle(randomString(1));
+        this.selectCreatorFromPersonSlot(0, 1);
+        this.enterMaximumCreatorContribution(0);
+        this.optToIncludeWorkOnWebsite(false);
+        steps.base.sleep(5000);
+        this.saveWork();
+        this.validateSaveWorkRedirection();
+       });
 
-                this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(2));
-                this.selectCreatorFromPersonSlot(0, 2);
-                this.enterMaximumCreatorContribution(0);
-                this.optToIncludeWorkOnWebsite(false);
-                steps.base.sleep(5000);
-                this.saveWork();
-                this.validateSaveWorkRedirection();
+        using(steps.newWork, function() {
+            steps.base.useBlankEntityDataSlot('work', 2);
 
+            this.goToNewWorkPage();
+            this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(2));
+            this.selectCreatorFromPersonSlot(0, 1);
+            this.enterMaximumCreatorContribution(0);
+            this.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(5000);
+            this.saveWork();
+            this.validateSaveWorkRedirection();
+        });
 
+        using(steps.newWork, function() {
                 steps.base.useBlankEntityDataSlot('work', 3);
 
                 this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPONENT WORK ' + randomString(3));
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(3));
                 this.validateDefaultCompositeWorkCheckboxState();
                 this.clickCompositeWorkCheckbox();
                 this.validateRequiredCompositeWorkTypeField();
@@ -93,7 +98,7 @@ exports.feature = [
                 this.selectCompositeWorkType('Composite of Samples');
                 this.selectCreatorFromPersonSlot(0, 3);
                 this.enterMediumCreatorContribution(0);
-                //this.validateDefaultComponentWorkSearchFilter(0);
+                this.validateDefaultComponentWorkSearchFilter(0);
                 //this.validateRequiredComponentWorkSearchField(0);
 
                 this.selectFirstComponentWorkMatching(
@@ -109,14 +114,14 @@ exports.feature = [
                 this.validateSaveWorkRedirection();
             });
 
-            steps.base.sleep(100);
+            steps.base.sleep(1000);
 
             using(steps.work, function() {
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
-                this.validateCompositeWorkType();
+                //this.validateCompositeWorkType();
                 this.validateComponentWorkName(0);
-                this.validateComponentWorkAllocation(0);
+                //this.validateComponentWorkAllocation(0);
 
                 this.deleteComponentWork(0);
                 this.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed();
@@ -125,26 +130,27 @@ exports.feature = [
                 this.validateRequiredComponentWorkSearchField(0);
 
                 this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(1)
+                    0, randomString(1)
                 );
 
                 this.validateRequiredComponentWorkAllocationField(0);
                 this.enterComponentWorkAllocation(0, 25);
 
                 this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(2)
+                    1, 'TEST COMPONENT WORK ' + randomString(2)
                 );
 
                 this.validateRequiredComponentWorkAllocationField(1);
                 this.enterComponentWorkAllocation(1, 25);
+                steps.base.sleep(5000);
                 this.saveCreators();
                 steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
                 this.validateComponentWorkName(0);
-                this.validateComponentWorkAllocation(0);
+                //this.validateComponentWorkAllocation(0);
                 this.validateComponentWorkName(1);
-                this.validateComponentWorkAllocation(1);
+                //this.validateComponentWorkAllocation(1);
             });
 
             using(steps.newWork, function() {
@@ -158,11 +164,12 @@ exports.feature = [
                 this.enterMediumCreatorContribution(0);
 
                 this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
                 );
 
                 this.enterMediumComponentWorkAllocation(0);
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
             });
@@ -172,9 +179,9 @@ exports.feature = [
             using(steps.work, function() {
                 steps.work.hoverCreatorNamesContainer();
                 steps.work.editCreators();
-                steps.work.validateCompositeWorkType();
+                //steps.work.validateCompositeWorkType();
                 steps.work.validateComponentWorkName(0);
-                steps.work.validateComponentWorkAllocation(0);
+                //steps.work.validateComponentWorkAllocation(0);
             });
 
             steps.base.useBlankEntityDataSlot('work', 5);
@@ -188,11 +195,12 @@ exports.feature = [
                 this.enterMediumCreatorContribution(0);
 
                 this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
                 );
 
                 this.enterMediumComponentWorkAllocation(0);
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
             });
@@ -202,9 +210,9 @@ exports.feature = [
             using(steps.work, function() {
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
-                this.validateCompositeWorkType();
+                //this.validateCompositeWorkType();
                 this.validateComponentWorkName(0);
-                this.validateComponentWorkAllocation(0);
+                //this.validateComponentWorkAllocation(0);
             });
 
             using(steps.newWork, function() {
@@ -216,13 +224,13 @@ exports.feature = [
                 this.selectCompositeWorkType('Medley');
 
                 this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
                 );
 
                 this.enterMediumComponentWorkAllocation(0);
 
                 this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(0)
+                    1, 'TEST COMPONENT WORK ' + randomString(0)
                 );
 
                 this.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(1);
@@ -230,11 +238,12 @@ exports.feature = [
                 this.confirmComponentWorkDeletion();
 
                 this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(1)
+                    1, randomString(1)
                 );
 
                 this.enterMediumComponentWorkAllocation(1);
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
             });
@@ -244,20 +253,170 @@ exports.feature = [
             using(steps.work, function() {
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
-                this.validateCompositeWorkType();
+                //this.validateCompositeWorkType();
                 this.validateComponentWorkName(0);
-                this.validateComponentWorkAllocation(0);
+                //this.validateComponentWorkAllocation(0);
                 this.validateComponentWorkName(1);
-                this.validateComponentWorkAllocation(1);
+                //this.validateComponentWorkAllocation(1);
 
                 this.deleteComponentWork(0);
                 this.confirmComponentWorkDeletion();
 
                 this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(2)
+                    1, 'TEST COMPONENT WORK ' + randomString(2)
                 );
 
                 this.enterMediumComponentWorkAllocation(1);
+                steps.base.sleep(5000);
+                this.saveCreators();
+                steps.base.refreshPage();
+                this.hoverCreatorNamesContainer();
+                this.editCreators();
+                this.validateComponentWorkName(0);
+                //this.validateComponentWorkAllocation(0);
+                this.validateComponentWorkName(1);
+                //this.validateComponentWorkAllocation(1);
+            });
+        })
+    },
+    {
+        name: 'Change a non-composite work into a Composite of Samples',
+        tags: [],
+        steps: criticalScenario(() => {
+            steps.base.useBlankEntityDataSlot('work', 7);
+
+            using(steps.newWork, function() {
+                this.goToNewWorkPage();
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(4));
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
+                this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+            });
+
+            steps.base.sleep(100);
+
+            using(steps.work, function() {
+                this.hoverCreatorNamesContainer();
+                this.editCreators();
+                this.clickCompositeWorkCheckbox();
+                this.validateRequiredCompositeWorkTypeField();
+                //this.validateDefaultCompositeWorkType();
+                this.selectCompositeWorkType('Composite of Samples');
+                this.enterMediumCreatorContribution(0);
+
+                this.selectFirstComponentWorkMatching(
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
+                );
+
+                this.expectShowComponentWorkDetailsButtonToAppear(0);
+                this.enterMediumComponentWorkAllocation(0);
+                steps.base.sleep(5000);
+                this.saveCreators();
+                steps.base.refreshPage();
+                this.hoverCreatorNamesContainer();
+                this.editCreators();
+                this.validateComponentWorkName(0);
+                this.validateComponentWorkAllocation(0);
+            });
+        })
+    },
+    {
+        name: 'Change a Composite of Samples work into a non-composite work',
+        tags: [],
+        steps: criticalScenario(() => {
+            steps.base.useBlankEntityDataSlot('work', 8);
+
+            using(steps.newWork, function() {
+                this.goToNewWorkPage();
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(5));
+                this.clickCompositeWorkCheckbox();
+                this.selectCompositeWorkType('Composite of Samples');
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMediumCreatorContribution(0);
+
+                this.selectFirstComponentWorkMatching(
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
+                );
+
+                this.enterMediumComponentWorkAllocation(0);
+                this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+            });
+
+            steps.base.sleep(100);
+
+            using(steps.work, function() {
+                this.hoverCreatorNamesContainer();
+                this.editCreators();
+                this.clickCompositeWorkCheckbox();
+                this.expectDisablingWorkAsCompositePopUpToBeDisplayed();
+                steps.base.sleep(5000);
+                this.confirmDisablingWorkAsComposite();
+                this.enterCreatorContribution(0, 100);
+                steps.base.sleep(5000);
+                this.saveCreators();
+                steps.base.refreshPage();
+                this.hoverCreatorNamesContainer();
+                this.editCreators();
+                this.validateCompositeWorkCheckbox();
+            });
+        })
+    },
+    {
+        name: 'Change a non-composite work into a Medley',
+        tags: [],
+        steps: criticalScenario(() => {
+            steps.base.useBlankEntityDataSlot('work', 9);
+
+            using(steps.newWork, function() {
+                this.goToNewWorkPage();
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(6));
+                this.selectCreatorFromPersonSlot(0, 0);
+                this.enterMaximumCreatorContribution(0);
+                this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
+                this.saveWork();
+                this.validateSaveWorkRedirection();
+            });
+
+            steps.base.sleep(100);
+
+            using(steps.work, function() {
+                this.hoverCreatorNamesContainer();
+                this.editCreators();
+                this.clickCompositeWorkCheckbox();
+                this.selectCompositeWorkType('Medley');
+                this.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed();
+                steps.base.sleep(5000);
+                this.confirmMakingIntoMedley();
+
+                this.selectFirstComponentWorkMatching(
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
+                );
+
+                this.enterMediumComponentWorkAllocation(0);
+
+                this.selectFirstComponentWorkMatching(
+                    1, 'TEST COMPONENT WORK ' + randomString(0)
+                );
+
+                this.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(1);
+                this.deleteComponentWork(1);
+                this.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed();
+                steps.base.sleep(5000);
+                this.confirmComponentWorkDeletion();
+
+                this.selectFirstComponentWorkMatching(
+                    1, randomString(1)
+                );
+
+                this.enterMediumComponentWorkAllocation(1);
+                steps.base.sleep(5000);
                 this.saveCreators();
                 steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();
@@ -270,161 +429,22 @@ exports.feature = [
         })
     },
     {
-        name: 'Change a non-composite work into a Composite of Samples',
-        tags: [],
-        steps: function() {
-            steps.base.useBlankEntityDataSlot('work', 7);
-
-            using(steps.newWork, function() {
-                this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(4));
-                this.selectCreatorFromPersonSlot(0, 0);
-                this.enterMaximumCreatorContribution(0);
-                this.optToIncludeWorkOnWebsite(false);
-                this.saveWork();
-                this.validateSaveWorkRedirection();
-            });
-
-            steps.base.sleep(100);
-
-            using(steps.work, function() {
-                this.hoverCreatorNamesContainer();
-                this.editCreators();
-                this.clickCompositeWorkCheckbox();
-                this.validateRequiredCompositeWorkTypeField();
-                this.validateDefaultCompositeWorkType();
-                this.selectCompositeWorkType('Composite of Samples');
-                this.enterMediumCreatorContribution(0);
-
-                this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
-                );
-
-                this.expectShowComponentWorkDetailsButtonToAppear(0);
-                this.enterMediumComponentWorkAllocation(0);
-                this.saveCreators();
-                steps.base.refreshPage();
-                this.hoverCreatorNamesContainer();
-                this.editCreators();
-                this.validateComponentWorkName(0);
-                this.validateComponentWorkAllocation(0);
-            });
-        }
-    },
-    {
-        name: 'Change a Composite of Samples work into a non-composite work',
-        tags: [],
-        steps: function() {
-            steps.base.useBlankEntityDataSlot('work', 8);
-
-            using(steps.newWork, function() {
-                this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(5));
-                this.clickCompositeWorkCheckbox();
-                this.selectCompositeWorkType('Composite of Samples');
-                this.selectCreatorFromPersonSlot(0, 0);
-                this.enterMediumCreatorContribution(0);
-
-                this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
-                );
-
-                this.enterMediumComponentWorkAllocation(0);
-                this.optToIncludeWorkOnWebsite(false);
-                this.saveWork();
-                this.validateSaveWorkRedirection();
-            });
-
-            steps.base.sleep(100);
-
-            using(steps.work, function() {
-                this.hoverCreatorNamesContainer();
-                this.editCreators();
-                this.clickCompositeWorkCheckbox();
-                this.expectDisablingWorkAsCompositePopUpToBeDisplayed();
-                this.confirmDisablingWorkAsComposite();
-                this.enterCreatorContribution(0, 100);
-                this.saveCreators();
-                steps.base.refreshPage();
-                this.hoverCreatorNamesContainer();
-                this.editCreators();
-                this.validateCompositeWorkCheckbox();
-            });
-        }
-    },
-    {
-        name: 'Change a non-composite work into a Medley',
-        tags: [],
-        steps: function() {
-            steps.base.useBlankEntityDataSlot('work', 9);
-
-            using(steps.newWork, function() {
-                this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(6));
-                this.selectCreatorFromPersonSlot(0, 0);
-                this.enterMaximumCreatorContribution(0);
-                this.optToIncludeWorkOnWebsite(false);
-                this.saveWork();
-                this.validateSaveWorkRedirection();
-            });
-
-            steps.base.sleep(100);
-
-            using(steps.work, function() {
-                this.hoverCreatorNamesContainer();
-                this.editCreators();
-                this.clickCompositeWorkCheckbox();
-                this.selectCompositeWorkType('Medley');
-                this.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed();
-                this.confirmMakingIntoMedley();
-
-                this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
-                );
-
-                this.enterMediumComponentWorkAllocation(0);
-
-                this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(0)
-                );
-
-                this.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear(1);
-                this.deleteComponentWork(1);
-                this.expectComponentWorkDeletionConfirmationPopUpToBeDisplayed();
-                this.confirmComponentWorkDeletion();
-
-                this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(1)
-                );
-
-                this.enterMediumComponentWorkAllocation(1);
-                this.saveCreators();
-                steps.base.refreshPage();
-                this.hoverCreatorNamesContainer();
-                this.editCreators();
-                this.validateComponentWorkName(0);
-                this.validateComponentWorkAllocation(0);
-                this.validateComponentWorkName(1);
-                this.validateComponentWorkAllocation(1);
-            });
-        }
-    },
-    {
         name: 'Change a Composite of Samples work into a Medley',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 10);
 
             using(steps.newWork, function() {
                 this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(7));
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(7));
                 this.clickCompositeWorkCheckbox();
                 this.selectCompositeWorkType('Composite of Samples');
                 this.selectCreatorFromPersonSlot(0, 0);
                 this.enterMediumCreatorContribution(0);
-                this.selectFirstComponentWorkMatching(0, 'TEST COMPONENT WORK ' + randomId(0));
+                this.selectFirstComponentWorkMatching(0, 'TEST COMPONENT WORK ' + randomString(0));
                 this.enterMediumComponentWorkAllocation(0);
                 this.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
             });
@@ -436,9 +456,11 @@ exports.feature = [
                 this.editCreators();
                 this.selectCompositeWorkType('Medley');
                 this.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed();
+                steps.base.sleep(5000);
                 this.confirmMakingIntoMedley();
-                this.selectFirstComponentWorkMatching(1, 'TEST COMPONENT WORK ' + randomId(1));
+                this.selectFirstComponentWorkMatching(1, 'TEST COMPONENT WORK ' + randomString(2));
                 this.enterMediumComponentWorkAllocation(1);
+                steps.base.sleep(5000);
                 this.saveCreators();
                 steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();
@@ -448,28 +470,28 @@ exports.feature = [
                 this.validateComponentWorkName(1);
                 this.validateComponentWorkAllocation(1);
             });
-        }
+        })
     },
     {
         name: 'Change a Medley into a Composite of Samples',
-        tags: [],
-        steps: function() {
+        tags: ['Medley_error'],
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 11);
 
             using(steps.newWork, function() {
                 this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomId(8));
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(8));
                 this.clickCompositeWorkCheckbox();
                 this.selectCompositeWorkType('Medley');
 
                 this.selectFirstComponentWorkMatching(
-                    0, 'TEST COMPONENT WORK ' + randomId(0)
+                    0, 'TEST COMPONENT WORK ' + randomString(0)
                 );
 
                 this.enterMediumComponentWorkAllocation(0);
 
                 this.selectFirstComponentWorkMatching(
-                    1, 'TEST COMPONENT WORK ' + randomId(1)
+                    1, 'TEST COMPONENT WORK ' + randomString(2)
                 );
 
                 this.enterMediumComponentWorkAllocation(1);
@@ -487,15 +509,15 @@ exports.feature = [
                 this.enterComponentWorkAllocation(0, 25);
                 this.enterComponentWorkAllocation(1, 25);
                 this.enterMediumCreatorContribution(0);
-                this.selectDifferentRandomCreator(0);
+                steps.base.sleep(5000);
+                this.selectRandomCreator(0);
                 this.selectCreatorRole(0, 'PA');
                 this.selectCreatorRole(0, 'CA');              
                 this.saveCreators();
                 steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
-                this.validateCompositeWorkType();
             });
-        }
+        })
     }
 ];
