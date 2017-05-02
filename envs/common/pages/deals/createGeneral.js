@@ -423,7 +423,7 @@ if (pages.createDealGeneral === undefined) {
 
         companyCode: {
             typeahead: function () {
-                return element(by.model('deal.company'));
+                return element(by.model('tgModularEditModel.company'));
             },
 
             input: function () {
