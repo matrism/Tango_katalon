@@ -399,7 +399,7 @@ module.exports.randomTgDropdownSelector = function (element) {
     return fn;
 };
 module.exports.selectedDropdownOption = function (element) {
-    return element.$('span[ng-bind="$selectedItem.value"]').getText();
+    return element.$('[ng-bind="$selectedItem.typeName"]').getText();
 };
 module.exports.selectedTgDropdownOption = function (element) {
     return (
