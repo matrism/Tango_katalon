@@ -79,12 +79,10 @@ exports.feature = [
 
                 cdg.selectSigningTerritory('Argentina');
 
-                if(systemConfig.env.name === 'qa') {
                     using(cdg.companyCode, function (cd) {
                         cd.enterSearchTerms('WCM');
                         cd.selectSearchResultByIndex(0);
                     });
-                }
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.selectContractingPartySearchResultByIndex(0);
@@ -166,13 +164,12 @@ exports.feature = [
                 cdg.goToNewDealPage();
 
                 cdg.selectSigningTerritory('Argentina');
+                console.log(systemConfig.env.name);
 
-                if(systemConfig.env.name === 'qa') {
                     using(cdg.companyCode, function (cd) {
                         cd.enterSearchTerms('WCM');
                         cd.selectSearchResultByIndex(0);
                     });
-                }
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.selectContractingPartySearchResultByIndex(0);
@@ -229,6 +226,8 @@ exports.feature = [
                 sd.save();
 
                 steps.base.refreshPage();
+
+                steps.work.goToScopeDeliveryTab();
 
                 sd.validateContributionDealIdFromDealSlot(0, 'noPssDeal');
 

@@ -265,14 +265,20 @@ exports.save = function () {
 };
 
 exports.contributionRows = function () {
-    return $$('.scope-delivery-row').filter(function (element) {
+    return $$('.work-dst-row').filter(function (element) {
         return element.isDisplayed();
     });
 };
 
 exports.contributionDealIdBinding = function (i) {
     return exports.contributionRows().get(i).element(by.binding(
-        '::linkedDeal.deal.contractBriefNumber'
+        '::dealLink.deal.contractBriefNumber'
+    ));
+};
+
+exports.contributionScopeNameBinding = function (i) {
+    return exports.contributionRows().get(i).element(by.binding(
+        '::dealScopeLink.dealScope.description'
     ));
 };
 
@@ -296,9 +302,7 @@ exports.contributionScopeDeliveryDetails = function (i) {
 };
 
 exports.contributionDealId = function (i) {
-    return exports.contributionScopeDeliveryDetails(i).then(function (values) {
-        return values.dealId;
-    });
+    return exports.contributionDealIdBinding(i).getText();
 };
 
 exports.validateContributionDealId = function (i, value) {
@@ -306,9 +310,7 @@ exports.validateContributionDealId = function (i, value) {
 };
 
 exports.contributionScopeName = function (i) {
-    return exports.contributionScopeDeliveryDetails(i).then(function (values) {
-        return values.scopeName;
-    });
+    return exports.contributionScopeNameBinding(i).getText();
 };
 
 exports.validateContributionScopeName = function (i, value) {
