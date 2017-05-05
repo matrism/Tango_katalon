@@ -370,8 +370,7 @@ exports.albums = (() => {
     let alb = {};
 
     alb.rows = i => exports.rows().get(i).$$(
-        '[data-ng-repeat="track in recordingLink.recording.tracks.$getItems()"], ' +
-        '.content-border2 > .content-border2-tr'
+        '[ng-repeat="track in recordingLink.recording.tracks.$getItems()"]'
     );
 
     alb.validateRowCount = (i, val) => expect(alb.rows(i).count()).toBe(val);
@@ -379,7 +378,7 @@ exports.albums = (() => {
     // ---
 
     alb.searchTypeaheadContainer = (i, j) => alb.rows(i).get(j).$(
-        '[data-tg-typeahead-id^="albumsSearchTypeahead_"]'
+        '[tg-typeahead-placeholder="Search by Title, Artist, Library, Catalog, or Label"]'
     );
 
     alb.searchInput = (i, j) => alb.searchTypeaheadContainer(i, j).element(
@@ -433,7 +432,7 @@ exports.albums = (() => {
     // ---
 
     alb.selectedAlbumTitleBinding = (i, j) => alb.rows(i).get(j).element(
-        by.binding(' ::track.album.title ')
+        by.binding('::track.album.title')
     );
 
     alb.selectedAlbumTitle = (i, j) => asAlways(
@@ -502,7 +501,7 @@ exports.albums = (() => {
     // ---
 
     alb.removeButton = (i, j) => alb.rows(i).get(j).$(
-        '.content-border.m-remove'
+        '[ng-click="recordingLink.recording.tracks.$remove(track); $viewForm && $viewForm.$setDirty();"]'
     );
 
     alb.remove = (i, j) => asAlways(
