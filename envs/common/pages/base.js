@@ -114,7 +114,7 @@ exports.dirtyCheckContinueEditing = () => {
 
 module.exports.dirtyCheckConfirmCancellationButton = function () {
     return exports.modalFooter().element(
-        by.cssContainingText("button", "CONFIRM CANCELLATION")
+        by.cssContainingText("button", "Confirm Cancellation")
     );
 };
 

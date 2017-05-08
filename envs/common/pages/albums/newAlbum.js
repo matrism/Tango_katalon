@@ -48,7 +48,7 @@ exports.enterArtistSearchTerms = function(value) {
 };
 
 exports.artistSearchResultsContainer = function() {
-    var el = $('.tg-typeahead__suggestions');
+    var el = $('.tg-typeahead__suggestions-footer');
     browser.wait(ExpectedConditions.visibilityOf(el));
     browser.sleep(50);
     return el;
