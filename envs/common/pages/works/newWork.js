@@ -71,7 +71,7 @@ exports.enterAsNewWorkSuggestion = function() {
     return element(by.cssContainingText('.tg-typeahead__suggestions-footer-inner', 'Enter as a new work'));
 };
 exports.waitForEnterAsNewWorkToBeDisplayed = function() {
-    browser.wait(ExpectedConditions.visibilityOf(element(by.css('.tg-typeahead__suggestions-group-item'))));
+    browser.wait(ExpectedConditions.visibilityOf(element(by.css('.tg-typeahead__suggestions-footer-inner'))));
 };
 
 exports.waitForEnterShellWorkToBeDisplayed = function() {

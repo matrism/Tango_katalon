@@ -39,7 +39,8 @@ exports.feature = [
     {
         name: 'Duplicate shell work check',
         tags: [],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             using(steps.newWork, function() {
                 steps.base.useBlankEntityDataSlot('work', 0);
 
@@ -75,8 +76,8 @@ exports.feature = [
 
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
-
                 this.enterShellWorkCreatorContribution(0, 0, 100);
+
                 this.optToIncludeWorkOnWebsite(false);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
@@ -94,12 +95,13 @@ exports.feature = [
                 this.validateShellWorkCreatorName(0, 0);
                 this.validateShellWorkCreatorContribution(0, 0);
             });
-        }
+        })
     },
     {
         name: 'Duplicate shell work check: Ignore articles, extra whitespace, and punctuation',
         tags: [],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             using(steps.newWork, function() {
                 steps.base.useBlankEntityDataSlot('work', 2);
 
@@ -156,6 +158,6 @@ exports.feature = [
                 steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
                 steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
             });
-        }
+        })
     }
 ];
