@@ -289,7 +289,7 @@ exports.shellWorkCreatorNameLabel = function (i, j) {
     return exports.componentWorkRows().get(i).$$('span[ng-bind="creator.name.presentationName"]').get(j);
 };
 exports.shellWorkCreatorContributionLabel = function (i, j) {
-    return exports.componentWorkRows().get(i).$$('span[ng-bind=ng-bind="creator.getWorkContribution(component.allocationPercentage) + '%'"]').get(j);
+    return exports.componentWorkRows().get(i).$$('span[ng-bind="creator.getWorkContribution(component.allocationPercentage) + \'%\'"]').get(j);
 };
 exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function (i) {
     return exports.componentWorkRow(i).element(
