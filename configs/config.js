@@ -40,7 +40,7 @@ if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
 
-var defaultUserName = 'TangoTest2',
+var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
  //var defaultUserName = 'AfinaAshley',
     //defaultPassword = 'M@hadi3970!@',

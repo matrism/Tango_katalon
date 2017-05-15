@@ -49,6 +49,7 @@ exports.saveDeal = function () {
 exports.clickFirstScopeHeader = function () {
     it("Click the first scope header", function () {
         pages.deal.clickFirstScopeHeader();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("[ng-form='scopeForm']"))));
     });
 };
 

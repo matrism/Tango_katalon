@@ -35,11 +35,11 @@ exports.feature = [
             describe('Fill general fields', function () {
                 cdg.selectSigningTerritory('Argentina');
 
-                if(systemConfig.env.name === 'qa') {
+                //if(systemConfig.env.name === 'qa') {
                     cdg.fillCompanyCodeField('WCM');
                     cdg.waitForContractingPartyDropDown();
                     cdg.selectRandomCompanyCode();
-                }
+                //}
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.waitForContractingPartyDropDown();
@@ -92,6 +92,7 @@ exports.feature = [
                 deal.itContinueToNextPage();
 
                 deal.saveDeal();
+                steps.base.sleep(5000);
                 deal.waitForDealToBeSaved();
 
                 deal.findId();
@@ -103,7 +104,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -120,14 +122,15 @@ exports.feature = [
                 dsanCtp.enterSocietySearchTerms(0, 0, 'ICE');
                 dsanCtp.selectSocietySearchResultByName('ICE');
 
-                dsanCtp.deleteSocietyAgreementNumber(0, 0);
+                //dsanCtp.deleteSocietyAgreementNumber(0, 0);
             });
 
             describe('Check Creator-to-Publisher society inputs', function () {
                 dsanPub.enterSocietySearchTerms(0, 'ICE');
                 dsanPub.selectSocietySearchResultByName('ICE');
-                dsanPub.enterSocietyAgreementNumber(0,'ABC123')
+                dsanPub.enterSocietyAgreementNumber(0,'ABC123');
+                dsanCtp.deleteSocietyAgreementNumber(0, 0);
             });
-        }
+        })
     }
 ];
