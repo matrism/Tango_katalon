@@ -1353,7 +1353,7 @@ exports.goToGeneralTab = function () {
 };
 
 exports.goBackToTheMainPageFromWork = function () {
-    var element = browser.driver.findElement(By.css("a[data-ng-click='stateHolder.workLog.isShown = false;']"));
+    var element = browser.driver.findElement(By.css("a[ui-sref='deal.view.terms.cpAndScopes.cp.scope({cpId: stateHolder.filters.cpId, scopeId: stateHolder.filters.scopeId})']"));
     pages.base.scrollIntoView(element);
     return element.click().then(function () {
         pages.base.waitForAjax();

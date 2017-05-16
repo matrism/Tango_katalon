@@ -321,7 +321,7 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
         //steps.criticalSection.wrap(() => {
             steps.createDealGeneral.goToNewDealPage();
             steps.createDealGeneral.selectDealSigningTerritory();
-            if(systemConfig.env.name === 'qa') {
+            if(systemConfig.env.name === 'refactor') {
                 steps.createDealGeneral.fillCompanyCodeField("a");
                 steps.createDealGeneral.waitForContractingPartyDropDown();
                 steps.createDealGeneral.selectRandomCompanyCode();
@@ -342,8 +342,8 @@ exports.itFillDealMandatoryFieldsGeneralTabWithData = function (contractingParty
     describe("Fill mandatory fields in deals general tab", function () {
         steps.createDealGeneral.goToNewDealPage();
         steps.createDealGeneral.selectSigningTerritory(country);
-        if(systemConfig.env.name === 'qa') {
-            steps.createDealGeneral.fillCompanyCodeField("a");
+        if(systemConfig.env.name === 'refactor') {
+            steps.createDealGeneral.fillCompanyCodeField("ITO");
             steps.createDealGeneral.waitForContractingPartyDropDown();
             steps.createDealGeneral.selectRandomCompanyCode();
         }
@@ -358,7 +358,7 @@ exports.itFillDealMandatoryFieldsGeneralTabWithSpecificData = function (contract
     describe("Fill mandatory fields in deals general tab", function () {
         steps.createDealGeneral.goToNewDealPage();
         steps.createDealGeneral.selectSigningTerritory(country);
-        if(systemConfig.env.name === 'qa') {
+        if(systemConfig.env.name === 'refactor') {
             steps.createDealGeneral.fillCompanyCodeField(companyCode);
             steps.createDealGeneral.waitForContractingPartyDropDown();
             steps.createDealGeneral.selectRandomCompanyCode();

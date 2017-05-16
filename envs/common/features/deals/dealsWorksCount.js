@@ -18,18 +18,20 @@ exports.feature = [
     {
         name: "Deals view work count",
         tags: ["dealsWork"],
-        steps: function () {
+        steps: criticalScenario(() =>
+        {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('TEST WORK ' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(5000);
             steps.newWork.saveWork();
 
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
@@ -70,7 +72,9 @@ exports.feature = [
             steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDelivery(0);
 
             steps.base.focusOnNewOpenedTab(1);
+            steps.base.sleep(5000);
             steps.deal.refreshThePage();
+            steps.base.sleep(5000);
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
             steps.work.goBackToMainPageFromWork();
 
@@ -82,7 +86,8 @@ exports.feature = [
             steps.deal.checkGrowlMessageDisplayedAfterScopeEdited("Delivered Works are being updated. Please check Deal later today for Delivery conflicts.");
 
             steps.base.focusOnNewOpenedTab(0);
-            steps.deal.refreshThePage();
+            steps.work.refreshThePage();
+            steps.work.goToScopeDeliveryTab();
             steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
 
             steps.base.focusOnNewOpenedTab(1);
@@ -98,7 +103,7 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        }
+        })
     },
 
     {

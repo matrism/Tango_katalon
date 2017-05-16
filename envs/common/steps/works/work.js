@@ -37,6 +37,13 @@ module.exports.goToScopeDeliveryTab = function () {
     });
 };
 
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+
+    });
+};
+
 exports.goToIncomeRatesTab = function () {
     it('Go to Recordings tab', function () {
         pages.work.goToIncomeRatesTab();

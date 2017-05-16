@@ -113,11 +113,12 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            pages.deal.printTheDealNumber();
+            steps.base.sleep(5000);
+            //pages.deal.printTheDealNumber();
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
-            pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 1);
+            pages.scopeDelivery.clickScopeDeliveryCheckbox(1, 0);
             pages.scopeDelivery.save();
         });
     });
