@@ -55,7 +55,7 @@ exports.checkTheErrorMessageScopeDeliveryConflict = function () {
 };
 
 exports.dealSearchForAllContributionsInput = function () {
-    return $('[data-ng-if="modularEditModels.model.length > 1"]').element(
+    return $('[ng-if="tgModularEditModel.creatorLinks.$count() > 1"]').element(
         by.model('$term')
     );
 };
@@ -202,7 +202,8 @@ exports.scopeDeliveryCheckboxes = function (i) {
 };
 
 exports.scopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
-    return exports.scopeDeliveryCheckboxes(contributionIndex).get(scopeIndex);
+    //return exports.scopeDeliveryCheckboxes(contributionIndex).get(scopeIndex);
+    return exports.scopeDeliveryCheckboxes(contributionIndex);
 };
 
 exports.checkboxEnabled = function (iContribution, iScope) {

@@ -2,6 +2,15 @@
 
 steps.workRecordings = exports;
 
+exports.validateLibraryNameRec = function(){
+    it('Validate Library Name', function () {
+        pages.workRecordings.validateLibraryNameRec1;
+    });
+}
+
+
+
+
 let page = pages.workRecordings;
 
 addBasicStep(exports, page, [

@@ -545,8 +545,9 @@ module.exports.bltvrBinding = function () {
 };
 module.exports.musicLibraryBinding = function () {
     return element(by.binding(
-        ' getAdminDataName(dataHolder.musicLibrarys, ' +
-        'modularEditModels.model.library_code) '
+        //'getAdminDataName(dataHolder.musicLibrarys, ' +
+        //'modularEditModels.model.library_code)'
+        '::tgModularEditModel.getLibraryName()'
     ));
 };
 module.exports.editAssetTypeButton = function () {

@@ -54,7 +54,10 @@ exports.cancelChanges = () => asAlways(
 
 // ---
 
-exports.rows = () => $$('.content-border');
+//exports.rows = () => $$('.content-border');
+exports.rows = () => $$('[ng-repeat="recordingLink in WorkRecordingsCtrl.getRecordingsView().getRecordingLinks()"]');
+
+exports.rowsRec = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
 
 exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
 
@@ -66,12 +69,14 @@ exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
     exports.titleInput = i => exports.rows().get(i).element(locator);
 
     exports.titleInputs = () => exports.rows().all(locator);
+
+    exports.titleInputRec = i => exports.rowsRec().get(i).element(by.css('[ng-model="$term"]'));
 }
 
 // ---
 
 exports.focusTitleField = i => asAlways(
-    exports.titleInput(i), 'scrollIntoView', 'click'
+    exports.titleInputRec(i), 'scrollIntoView', 'click'
 );
 
 // ---
@@ -134,7 +139,7 @@ exports.expectEmptyTitleField = i => exports.validateEnteredTitle(i, '');
 // ---
 
 {
-    let locator = by.binding('$match.model');
+    let locator = by.binding('::recordingLink.recording.title');
 
     exports.titleBinding = i => exports.rows().get(i).element(locator);
 
@@ -174,8 +179,8 @@ exports.validateTitle = (i, val) => expect(
 
 // ---
 
-exports.artistTypeahead = i => Typeahead(exports.rows().get(i).element(
-    by.model('recordingLink.recording.artist')
+exports.artistTypeahead = i => Typeahead(exports.rowsRec().get(i).element(
+    by.css('[ng-switch="!!WorkRecordingsCtrl.getLibraryCode()"]')
 ));
 
 exports.enterArtistSearchTerms = (i, val) => asAlways(
@@ -241,17 +246,29 @@ exports.libraryNameBinding = i => exports.rows().get(i).$(
     '[ng-switch="!!WorkRecordingsCtrl.getLibraryCode()"] .ng-binding'
 );
 
+exports.libraryNameBindingRec = i => exports.rowsRec().get(i).$(
+    '[ng-switch="!!WorkRecordingsCtrl.getLibraryCode()"] .ng-binding'
+);
+
 exports.libraryName = i => asAlways(
     exports.libraryNameBinding(i), 'scrollIntoView', 'getAllText'
+);
+
+exports.libraryNameRec = i => asAlways(
+    exports.libraryNameBindingRec(i), 'scrollIntoView', 'getAllText'
 );
 
 exports.validateLibraryName = (i, val) => expect(
     exports.libraryName(i)
 ).toBe(val);
 
+exports.validateLibraryNameRec1 = (i, val) => expect(
+    exports.libraryNameRec(i)
+).toBe(val);
+
 // ---
 
-exports.durationInput = i => exports.rows().get(i).$(
+exports.durationInput = i => exports.rowsRec().get(i).$(
     '.tg-time-selector input'
 );
 

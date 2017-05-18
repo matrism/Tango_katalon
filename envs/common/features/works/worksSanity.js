@@ -476,7 +476,7 @@ steps.work.findCurrentlyOpenWorkId();
             this.focusTitleField(i);
             this.selectTitleSuggestionByIndex(i);
 
-            this.validateLibraryName(i, 'AUDM', 1);
+            this.validateLibraryNameRec(i, 'AUDIOMACHINE', 1);
         }));
 
         this.saveWork();
@@ -514,7 +514,7 @@ steps.work.findCurrentlyOpenWorkId();
 
         let iFound = fromTestVariable('row index');
 
-        this.validateLibraryName(i, 'AUDM', 2);
+        this.validateLibraryName(i, 'AUDIOMACHINE', 2);
     });
     });
 }),
