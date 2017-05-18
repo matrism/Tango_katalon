@@ -18,7 +18,7 @@ exports.feature = [
     {
         name: "Deals view work count",
         tags: ["dealsWork"],
-        steps: criticalScenario(() =>
+        steps: function()
         {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
@@ -87,15 +87,17 @@ exports.feature = [
 
             steps.base.focusOnNewOpenedTab(0);
             steps.work.refreshThePage();
+            steps.base.sleep(50000);
             steps.work.goToScopeDeliveryTab();
             steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
 
             steps.base.focusOnNewOpenedTab(1);
             steps.deal.refreshThePage();
+            steps.base.sleep(50000);
             steps.editDealScope.checkWorksCountOnScopeNumberI(1, "1");
             steps.editDealScope.checkWorksCountOnScopeNumberI(2, "1");
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
-
+            steps.base.sleep(50000);
             steps.work.checkDefaultFilterContractPeriodForWorkLog();
             steps.work.checkDefaultFilterScopeForWorkLog();
             steps.work.checkDefaultFilterAllWorksForWorkLog();
@@ -103,24 +105,26 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        })
+        }
     },
 
     {
         name: "Deals view multiple work count",
         tags: ["dealMultipleWorks"],
-        steps: function () {
+        steps: function()
+        {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('DENISA WORK ' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
 
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
@@ -170,18 +174,20 @@ exports.feature = [
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('THE WORK 1' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId1 = steps.work.findCurrentlyOpenWorkId();
 
             //open a new tab
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('THE WORK 2' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId2 = steps.work.findCurrentlyOpenWorkId();
 
@@ -189,9 +195,10 @@ exports.feature = [
             //open a new tab
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('THE WORK 3' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId3 = steps.work.findCurrentlyOpenWorkId();
 
@@ -292,9 +299,10 @@ exports.feature = [
     {
         name: "Deals view lad work count",
         tags: ['ladDealsWorks', 'lad'],
-        steps: function () {
+        steps: function()
+        {
 
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
@@ -333,9 +341,10 @@ exports.feature = [
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('DATA WORK 1 ' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
 
             steps.work.goToScopeDeliveryTab();
@@ -352,9 +361,10 @@ exports.feature = [
                 steps.base.useBlankEntityDataSlot('work', 0);
                 steps.newWork.goToNewWorkPage();
                 steps.newWork.enterPrimaryWorkTitle('THE WORK ' + i + (new Date()).getTime());
-                steps.newWork.selectRandomCreator(0);
+                steps.work.selectRandomCreator(0);
                 steps.newWork.enterCreatorContribution(0, 100);
                 steps.newWork.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(7000);
                 steps.newWork.saveWork();
 
                 steps.work.goToScopeDeliveryTab();
@@ -388,9 +398,9 @@ exports.feature = [
     {
         name: "Deals view additional work count",
         tags: ["additionalDealsWorks"],
-        steps: function () {
+        steps: function() {
 
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
@@ -416,9 +426,10 @@ exports.feature = [
                 steps.base.useBlankEntityDataSlot('work', 0);
                 steps.newWork.goToNewWorkPage();
                 steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' +  (new Date()).getTime());
-                steps.newWork.selectRandomCreator(0);
+                steps.work.selectRandomCreator(0);
                 steps.newWork.enterCreatorContribution(0, 100);
                 steps.newWork.optToIncludeWorkOnWebsite(false);
+                steps.base.sleep(7000);
                 steps.newWork.saveWork();
 
 
@@ -461,9 +472,9 @@ exports.feature = [
     {
         name: "Deals view filter work count",
         tags: ["filterDealsWorks"],
-        steps: function () {
+        steps: criticalScenario(() => {
 
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
 
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -476,7 +487,7 @@ exports.feature = [
             }
 
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Italy");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
             steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
@@ -485,7 +496,7 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("50");
-            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Germany");
+            steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Italy");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
             steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
@@ -534,9 +545,10 @@ exports.feature = [
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId = steps.work.findCurrentlyOpenWorkId();
             steps.work.goToScopeDeliveryTab();
@@ -550,9 +562,10 @@ exports.feature = [
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
@@ -565,9 +578,10 @@ exports.feature = [
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('NEw TEST WORK ' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
@@ -580,9 +594,10 @@ exports.feature = [
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('NEW TEST WORK ' + (new Date()).getTime());
-            steps.newWork.selectRandomCreator(0);
+            steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
+            steps.base.sleep(7000);
             steps.newWork.saveWork();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
@@ -611,7 +626,7 @@ exports.feature = [
             steps.work.clickWorkSearchMatch(0);
             steps.base.waitForAjax();
             steps.work.goToScopeDeliveryTab();
-            steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
+            //steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
 
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.refreshThePage();
@@ -619,6 +634,7 @@ exports.feature = [
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+            steps.base.sleep(5000);
             steps.work.checkDefaultFilterContractPeriodForWorkLog();
             steps.work.checkDefaultFilterScopeForWorkLog();
             steps.work.checkDefaultFilterAllWorksForWorkLog();
@@ -640,6 +656,6 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        }
+        })
     }
 ];

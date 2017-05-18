@@ -1512,7 +1512,7 @@ exports.clickOnConflictingWorksButtonFilterForWorkLog = function () {
 
 exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
     it("Check that the error message for work conflicts is ok ", function () {
-        browser.driver.findElement(By.css("p[data-ng-if='hasDealConflicts()'] span")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("p[data-ng-if='hasDealConflictsAtWork()'] span")).getText().then(function (promise) {
             console.log("The error message for work conflicts is " + promise);
             expect(promise).toEqual(message);
         });
@@ -1521,7 +1521,7 @@ exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
 
 exports.checkDefaultFilterContractPeriodForWorkLog = function () {
     it("Check the default filters for work log contract period ", function () {
-        browser.driver.findElement(By.css("div[data-tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow span")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow span.ng-binding.ng-scope")).getText().then(function (promise) {
             console.log("The default filters for work log contract period " + promise);
             expect(promise).toEqual("Contract Period 1");
         });
@@ -1530,7 +1530,7 @@ exports.checkDefaultFilterContractPeriodForWorkLog = function () {
 
 exports.checkDefaultFilterScopeForWorkLog = function () {
     it("Check the default filters for work log scope ", function () {
-        browser.driver.findElement(By.css("div[data-tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow span")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow span.ng-binding.ng-scope")).getText().then(function (promise) {
             console.log("The default filters for work log scope " + promise);
             expect(promise).toEqual("Scope 1");
         });
@@ -1539,7 +1539,7 @@ exports.checkDefaultFilterScopeForWorkLog = function () {
 
 exports.checkDefaultFilterAllWorksForWorkLog = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
-        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)")).getAttribute("class")
+        browser.driver.findElement(By.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(1)")).getAttribute("class")
             .then(function (promise) {
                 console.log("The default filters for work log all works is default " + promise);
                 expect(promise).toContain("active");
@@ -1550,7 +1550,7 @@ exports.checkDefaultFilterAllWorksForWorkLog = function () {
 
 exports.checkDefaultFilterConflictWorksForWorkLog = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
-        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
+        browser.driver.findElement(By.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(2)")).getAttribute("class")
             .then(function (promise) {
                 console.log("The default filters for work log conflict works is not default " + promise);
                 expect(promise).not.toContain("active");

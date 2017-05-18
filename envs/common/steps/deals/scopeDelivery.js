@@ -114,7 +114,6 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
             steps.base.sleep(5000);
-            //pages.deal.printTheDealNumber();
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
@@ -130,11 +129,13 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex = func
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            pages.deal.printTheDealNumber();
+            steps.base.sleep(5000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
+            // pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
+            // pages.scopeDelivery.clickScopeDeliveryCheckbox(1, 0);
             for (var j = indexMin; j <= indexMax; j++) {
-                pages.scopeDelivery.clickScopeDeliveryCheckbox(0, indexMax);
+                pages.scopeDelivery.clickScopeDeliveryCheckbox(indexMax, 0);
             }
             pages.scopeDelivery.save();
         });
@@ -162,7 +163,7 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = functi
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            pages.deal.printTheDealNumber();
+            steps.base.sleep(5000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);

@@ -72,11 +72,11 @@ exports.dealSearchInput = function (i) {
 };
 
 exports.contractPeriodFilterButton = function () {
-    return element(by.css("div[data-tg-dropdown-selected='selectWorkLogCP();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+    return element(by.css("div[tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow"));
 };
 
 exports.scopeFilterButton= function(){
-  return element(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+  return element(by.css("div[tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow"));
 };
 
 exports.clickOnContractPeriodFilterFromDeliveredWork = function () {
