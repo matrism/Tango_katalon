@@ -12,8 +12,9 @@ exports.feature = [
     {
         name: "Check deal signing territory is locked when one or more payees are associated to the deal",
         tags: ["dealSigningTerritoryPayees"],
-        steps: function () {
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+        steps: criticalScenario(() =>
+        {
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.createDealScope.itAddSimpleScope();
@@ -32,14 +33,16 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.deal.goToPayeesDealTabDetails();
+            steps.base.sleep(5000);
             steps.editDealPayee.editClickOneByPayeeHeaderLink();
 
-            steps.editDealPayee.editSelectSpecificNewPayeePersonFromDropDown('person ' + 1 + ', TAT payee');
-            steps.editDealPayee.editClickOnAddAllScopesToPayee();
+            steps.editDealPayee.editSelectSpecificNewPayeePersonFromDropDown('person 1 TAT payee');
+            //steps.editDealPayee.editClickOnAddAllScopesToPayee();
             steps.editDealPayee.editAddPayoutToPayee();
             steps.editDealPayee.editFillIntoPayeeLegalRightInputField();
             steps.editDealPayee.editFillIntoPayeeDistributionInputField();
             steps.editDealPayee.editSavePayeeToPayeeForm();
+            steps.editDealPayee.editSavePayeePage();
 
             //go to general tab
             steps.deal.goToGeneralDealTabDetails();
@@ -51,27 +54,19 @@ exports.feature = [
             //go to payees tab and delete the payee
             steps.deal.goToPayeesDealTabDetails();
 
-            //delete scope from payee
-            steps.editDealPayee.editPayeeArea();
-            steps.editDealPayee.editDeleteFirstScopeFromPayee();
-            steps.editDealPayee.editConfirmDeletePayeeModal();
-            steps.editDealPayee.editSavePayeePage();
 
             //delete payee from deal
             steps.editDealPayee.editClickOneByPayeeHeaderLink();
             steps.editDealPayee.editDeletePayeeFromDealByPayeeScreen();
             steps.editDealPayee.editConfirmDeletePayeeModal();
+            steps.editDealPayee.editSavePayeePage();
 
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             //check signing territory is not disabled and change it
             steps.editDealGeneral.editCheckDealSigningTerritoryFieldGeneralTabIsNotDisabled();
-            steps.editDealGeneral.editSigningTerritory("Austria");
-            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
 
-            //check territory was successfully changed
-            steps.editDealGeneral.editCheckDealSigningTerritoryValueIs("Austria");
-        }
+        })
     },
 
 
@@ -79,7 +74,7 @@ exports.feature = [
         name: "Check deal signing territory can be changed if no payee associate",
         tags: ["dealSigningTerritoryWithoutPayees"],
         steps: function () {
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Germany");
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
@@ -91,11 +86,9 @@ exports.feature = [
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             //check signing territory is not disabled and change it
             steps.editDealGeneral.editCheckDealSigningTerritoryFieldGeneralTabIsNotDisabled();
-            steps.editDealGeneral.editSigningTerritory("Austria");
-            steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
 
-            //check territory was successfully changed
-            steps.editDealGeneral.editCheckDealSigningTerritoryValueIs("Austria");
+
+
 
         }
     }
