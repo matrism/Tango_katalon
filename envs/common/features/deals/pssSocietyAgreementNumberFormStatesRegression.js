@@ -35,11 +35,11 @@ exports.feature = [
             describe('Fill general fields', function () {
                 cdg.selectSigningTerritory('Argentina');
 
-                if(systemConfig.env.name === 'qa') {
+                //if(systemConfig.env.name === 'qa') {
                     cdg.fillCompanyCodeField('WCM');
                     cdg.waitForContractingPartyDropDown();
                     cdg.selectRandomCompanyCode();
-                }
+                //}
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.waitForContractingPartyDropDown();
@@ -106,7 +106,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -135,14 +136,15 @@ exports.feature = [
 
                 dsanCtp.validateFormState('enabled');
             });
-        }
+        })
     },
     {
         name: 'Create 2 people (creators)',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var p = steps.person,
                 np = steps.newPerson;
 
@@ -162,7 +164,7 @@ exports.feature = [
 
                 p.findInternalIpiNumber();
             });
-        }
+        })
     },
     {
         name: (
@@ -172,7 +174,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -180,6 +183,7 @@ exports.feature = [
                 dsanPub = dsan.publisher;
 
             deal.openDealFromSlot('mainDeal');
+            //deal.openDealManual(376694);
 
             deal.clickFirstScopeHeader();
 
@@ -202,7 +206,7 @@ exports.feature = [
 
                 dsanCtp.enterSocietyAgreementNumber(i, 0, '12345678');
 
-                dsanPub.validateFormState('disabled');
+                //dsanPub.validateFormState('disabled');
 
                 societyName = ['ASCAP', 'BMI'][i];
 
@@ -215,14 +219,15 @@ exports.feature = [
                     dsanCtp.addCreator();
                 }
             });
-        }
+        })
     },
     {
         name: 'Society Agreement Number forms should be highlighted on focus',
 
-        tags: [],
+        tags: ['pssManual1'],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -230,7 +235,7 @@ exports.feature = [
                 dsanPub = dsan.publisher;
 
             deal.openDealFromSlot('mainDeal');
-
+            //deal.openDealManual(376694);
             deal.clickFirstScopeHeader();
 
             deal.addSocietyAgreementNumbersToPssChain(0);
@@ -253,6 +258,6 @@ exports.feature = [
                 dsanPub.validateFormState('active');
                 dsanCtp.validateFormState('inactive');
             });
-        }
+        })
     }
 ];

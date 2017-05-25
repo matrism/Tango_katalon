@@ -36,11 +36,11 @@ exports.feature = [
             describe('Fill general fields', function () {
                 cdg.selectSigningTerritory('Argentina');
 
-                if(systemConfig.env.name === 'qa') {
+                //if(systemConfig.env.name === 'qa') {
                     cdg.fillCompanyCodeField('WCM');
                     cdg.waitForContractingPartyDropDown();
                     cdg.selectRandomCompanyCode();
-                }
+                //}
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.waitForContractingPartyDropDown();
@@ -133,7 +133,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal;
 
             deal.openDealFromSlot('mainDeal');
@@ -149,14 +150,15 @@ exports.feature = [
                     i, 'view', false
                 );
             });
-        }
+        })
     },
     {
         name: 'Validate "Add / View Society Agreement Numbers" links on deal edit',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal;
 
             deal.openDealFromSlot('mainDeal');
@@ -211,7 +213,7 @@ exports.feature = [
             deal.validateSocietyAgreementNumbersLinkPresence(
                 2, 'add', true
             );
-        }
+        })
     },
     {
         name: (
@@ -220,7 +222,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
                 dsan = steps.dealSocietyAgreementNumbers;
 
@@ -231,14 +234,15 @@ exports.feature = [
             deal.addSocietyAgreementNumbersToPssChain(0);
 
             dsan.validateSaveButtonState('disabled');
-        }
+        })
     },
     {
         name: 'Create 5 people (creators)',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var p = steps.person,
                 np = steps.newPerson;
 
@@ -258,14 +262,15 @@ exports.feature = [
 
                 p.findInternalIpiNumber();
             });
-        }
+        })
     },
     {
         name: 'Add Creator-To-Publisher Chain Society Agreement Numbers',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -300,7 +305,7 @@ exports.feature = [
 
                         dsanCtp.enterSocietyAgreementNumber(i, j, ('12345' + i) + j);
 
-                        dsanCtp.validateAddCreatorLinkState('disabled');
+                        //dsanCtp.validateAddCreatorLinkState('disabled');
 
                         societyName = ['ASCAP', 'BMI'][j];
 
@@ -344,14 +349,15 @@ exports.feature = [
                     });
                 });
             });
-        }
+        })
     },
     {
         name: 'Edit Creator-To-Publisher Chain Society Agreement Numbers',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -411,7 +417,7 @@ exports.feature = [
                     dsanCtp.selectSocietySearchResultByName(societyName);
                 });
             });
-
+            steps.base.sleep(1000);
             dsan.save();
 
             deal.viewPssChainSocietyAgreementNumbers(0);
@@ -472,14 +478,15 @@ exports.feature = [
                     dsanCtp.validateSocietyName(iSet, j, societyName);
                 });
             });
-        }
+        })
     },
     {
         name: 'Delete Creator-To-Publisher Chain Society Agreement Numbers',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -488,6 +495,8 @@ exports.feature = [
                 iSet = fromTestVariable('found set index');
 
             deal.openDealFromSlot('mainDeal');
+
+            steps.base.sleep(2000);
 
             deal.clickFirstScopeHeader();
 
@@ -505,12 +514,16 @@ exports.feature = [
                         'TEST PERSON ' + (iPerson + 1) + ' ' +
                         randomId('person' + iPerson), 'found set index'
                     );
-
+                    steps.base.sleep(5000);
                     dsanCtp.deleteCreator(iSet);
+                    //dsanCtp.deleteCreator(0);
+                    steps.base.sleep(3000);
                 });
             });
 
             dsanCtp.validateAddCreatorLinkState('enabled');
+
+            //revisit this part
 
             describe(
                 'Delete 1 society agreement number from remaining creator set',
@@ -518,8 +531,10 @@ exports.feature = [
                     dsanCtp.findCreatorSet(
                         'TEST PERSON 5 ' + randomId('person4'), 0
                     );
+                    steps.base.sleep(3000);
+                    //dsanCtp.deleteSocietyAgreementNumber(iSet, 0);
+                    dsanCtp.deleteSocietyAgreementNumber(0, 0);
 
-                    dsanCtp.deleteSocietyAgreementNumber(iSet, 0);
                 }
             );
 
@@ -536,18 +551,19 @@ exports.feature = [
                     'TEST PERSON 5 ' + randomId('person4'), 'found set index'
                 );
 
-                dsanCtp.validateSocietyAgreementNumber(iSet, 0, '2234531');
+                dsanCtp.validateSocietyAgreementNumber(iSet, 0, '2234530');
 
-                dsanCtp.validateSocietyName(iSet, 0, 'ASCAP');
+                dsanCtp.validateSocietyName(iSet, 0, 'AWA');
             });
-        }
+        })
     },
     {
         name: 'Add Publisher Chain Society Agreement Numbers',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -583,20 +599,22 @@ exports.feature = [
                     dsanPub.validateSocietyName(i, societyName);
                 });
             });
-        }
+        })
     },
     {
         name: 'Edit Publisher Chain Society Agreement Numbers',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
                 dsanPub = dsan.publisher;
 
             deal.openDealFromSlot('mainDeal');
+
 
             deal.clickFirstScopeHeader();
 
@@ -612,8 +630,8 @@ exports.feature = [
             describe('Add a new society agreement number', function () {
                 dsanPub.enterSocietyAgreementNumber(2, '2234562');
 
-                dsanPub.enterSocietySearchTerms(2, 'ASCAP');
-                dsanPub.selectSocietySearchResultByName('ASCAP');
+                dsanPub.enterSocietySearchTerms(2, 'ICE');
+                dsanPub.selectSocietySearchResultByName('ICE');
             });
 
             dsan.save();
@@ -631,16 +649,17 @@ exports.feature = [
             describe('Validate newly added society agreement number', function () {
                 dsanPub.validateSocietyAgreementNumber(2, '2234562');
 
-                dsanPub.validateSocietyName(2, 'ASCAP');
+                dsanPub.validateSocietyName(2, 'ICE');
             });
-        }
+        })
     },
     {
         name: 'Delete Publisher Chain Society Agreement Numbers',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -655,6 +674,7 @@ exports.feature = [
             describe('Delete first 2 society agreement numbers', function () {
                 _.times(2, function (i) {
                     dsanPub.deleteSocietyAgreementNumber(0);
+                    steps.base.sleep(2000);
                 });
             });
 
@@ -667,8 +687,8 @@ exports.feature = [
             describe('Validate remaining society agreement number', function () {
                 dsanPub.validateSocietyAgreementNumber(0, '2234562');
 
-                dsanPub.validateSocietyName(0, 'ASCAP');
+                dsanPub.validateSocietyName(0, 'ICE');
             });
-        }
+        })
     }
 ];
