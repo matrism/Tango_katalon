@@ -95,15 +95,20 @@ exports.validateFirstCompleteMdrcTitle = function () {
     });
 };
 
-exports.validateITypeOfMdrcTitle = function (i, type) {
+exports.validateITypeOfMdrcTitle = function (type) {
     it("Validate the I incomplete MDRC title ", function () {
-        pages.editDealContractPeriod.validateTheIMdrcTitle(i, type);
+        var row = pages.editDealContractPeriod.componentMDRC()
+
+        for ( var i=0 ; i < row.length ; i++ ) {
+            pages.editDealContractPeriod.validateTheIMdrcTitle(i, type);
+
+        }
     });
 };
 
 exports.validateMdrcIMinimumLabelValue = function (i) {
     it("Validate the I minimum label and text ", function () {
-        pages.editDealContractPeriod.validateTheMdrcMinimumLabelValueI(i);
+       pages.editDealContractPeriod.validateTheMdrcMinimumLabelValueI(i);
     });
 };
 
@@ -173,33 +178,61 @@ exports.validateMdrcDeliveryScheduleTextValueI = function (i) {
     });
 };
 
-exports.validateMdrcDateCompletedLabelValueI = function (i) {
+exports.validateMdrcDateCompletedLabelValueI = function () {
     it("Validate the I MDRC date completed label value ", function () {
-        pages.editDealContractPeriod.validateTheMdrcDateCompletedLabelValueI(i);
+        var row = pages.editDealContractPeriod.componentMDRC()
+
+        for ( var i=0 ; i < row.length ; i++ ) {
+            pages.editDealContractPeriod.validateTheMdrcDateCompletedLabelValueI(i);
+
+        }
+
+
     });
 };
 
-exports.validateMdrcDateCompletedTextValueI = function (i) {
+exports.validateMdrcDateCompletedTextValueI = function () {
     it("Validate the I MDRC date completed text value ", function () {
-        pages.editDealContractPeriod.validateTheMdrcDateCompletedTextValueI(i);
+        var row = pages.editDealContractPeriod.componentMDRC()
+
+        for ( var i=0 ; i < row.length ; i++ ) {
+            pages.editDealContractPeriod.validateTheMdrcDateCompletedTextValueI(i);
+
+        }
+
     });
 };
 
-exports.validateMdrcShortfallLabelValueI = function (i) {
+exports.validateMdrcShortfallLabelValueI = function () {
     it("Validate the I MDRC shortfall label value ", function () {
-        pages.editDealContractPeriod.validateTheMdrcShortfallLabelValueI(i);
+
+        var row = pages.editDealContractPeriod.componentMDRC()
+
+        for ( var i=0 ; i < row.length ; i++ ) {
+            pages.editDealContractPeriod.validateTheMdrcShortfallLabelValueI(i);
+
+        }
+
     });
 };
 
-exports.validateTheMdrcShortfallTextValueI = function (i) {
+exports.validateTheMdrcShortfallTextValueI = function () {
     it("Validate the I MDRC shortfall text value ", function () {
-        pages.editDealContractPeriod.validateTheMdrcShortfallTextValueI(i);
+
+        var row = pages.editDealContractPeriod.componentMDRC()
+
+        for ( var i=0 ; i < row.length ; i++ ) {
+            pages.editDealContractPeriod.validateTheMdrcShortfallTextValueI(i);
+
+        }
+
     });
 };
 
 exports.editMdrcFormI = function (i) {
     it("Edit MDRC form the i mdrc in the list", function () {
-        pages.editDealContractPeriod.editTheIMdrcForm(i)
+           pages.editDealContractPeriod.editTheIMdrcForm(i);
+
     });
 };
 
@@ -557,6 +590,71 @@ exports.editCheckSummaryTextForEndRulesRuleNumberI = function (i, text) {
     });
 };
 
+exports.editITypeOfMdrcTitle = function (i) {
+    it("Edit Status for MDRC", function () {
+        browser.driver.findElement(By.css("div[ng-repeat='mdrc in contractPeriod.minimumDeliveryCommitments.$getItems()']:nth-child(" + i + ") h3.contract-period-header.ng-binding span.label.ng-scope")).getText()
+                .then(function (promise) {
+                    console.log("MDRC Status: " + promise);
+                    switch (promise) {
+                        case "Complete":
+                            console.log("Status Incomplete");
+                            pages.editDealContractPeriod.editTheIMdrcForm(i);
+                            pages.editDealContractPeriod.editIClickOnIncompleteOption(i);
+                            pages.editDealContractPeriod.editTheIMdrcQuantity(i);
+                            pages.editDealContractPeriod.editTheIMdrcQuantityForCommercialRelease(i);
+                            pages.editDealContractPeriod.checkIMdrcNoCommercialReleaseByMajorLabelOptionIsSelected(i);
+                            pages.editDealContractPeriod.clickOnIMdrcYesCommercialReleaseByMajorLabel(i);
+                            pages.editDealContractPeriod.checkIMdrcYesCommercialReleaseByMajorLabelOptionIsSelected(i);
+                            pages.editDealContractPeriod.selectIMdrcRandomLabel(i);
+                            pages.editDealContractPeriod.checkIMdrcNoSelfRecordOptionIsSelected(i);
+                            pages.editDealContractPeriod.editTheIMdrcPercentOfMinStatutoryRate(i);
+                            pages.editDealContractPeriod.checkIMdrcNoProportionalRecoupmentAllowedOptionIsSelected(i);
+                            pages.editDealContractPeriod.checkIMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected(i);
+                            pages.editDealContractPeriod.fillIntoIMdrcDeliverySchedule(i);
+                            pages.editDealContractPeriod.fillIntoIMdrcEveryWeeks(i);
+                            pages.editDealContractPeriod.saveIMdrcForm(i);
+                            break;
+                        case "Incomplete":
+                            console.log("Status Deemed Complete");
+                            pages.editDealContractPeriod.editTheIMdrcForm(i);
+                            pages.editDealContractPeriod.editIClickOnDeemedCompleteOption(i);
+                            pages.editDealContractPeriod.editTheIMdrcQuantity(i);
+                            pages.editDealContractPeriod.editTheIMdrcQuantityForCommercialRelease(i);
+                            pages.editDealContractPeriod.checkIMdrcNoCommercialReleaseByMajorLabelOptionIsSelected(i);
+                            pages.editDealContractPeriod.clickOnIMdrcYesCommercialReleaseByMajorLabel(i);
+                            pages.editDealContractPeriod.checkIMdrcYesCommercialReleaseByMajorLabelOptionIsSelected(i);
+                            pages.editDealContractPeriod.selectIMdrcRandomLabel(i);
+                            pages.editDealContractPeriod.checkIMdrcNoSelfRecordOptionIsSelected(i);
+                            pages.editDealContractPeriod.editTheIMdrcPercentOfMinStatutoryRate(i);
+                            pages.editDealContractPeriod.checkIMdrcNoProportionalRecoupmentAllowedOptionIsSelected(i);
+                            pages.editDealContractPeriod.checkIMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected(i);
+                            pages.editDealContractPeriod.fillIntoIMdrcDeliverySchedule(i);
+                            pages.editDealContractPeriod.fillIntoIMdrcEveryWeeks(i);
+                            pages.editDealContractPeriod.saveIMdrcForm(i);
+                            break;
+                        case "Deemed Complete":
+                            pages.editDealContractPeriod.editTheIMdrcForm(i);
+                            pages.editDealContractPeriod.editIClickOnCompleteOption(i);
+                            pages.editDealContractPeriod.editTheIMdrcQuantity(i);
+                            pages.editDealContractPeriod.checkIMdrcNoCommercialReleaseByMajorLabelOptionIsSelected(i);
+                            pages.editDealContractPeriod.clickOnIMdrcYesCommercialReleaseByMajorLabel(i);
+                            pages.editDealContractPeriod.checkIMdrcYesCommercialReleaseByMajorLabelOptionIsSelected(i);
+                            pages.editDealContractPeriod.selectIMdrcRandomLabel(i);
+                            pages.editDealContractPeriod.checkIMdrcNoSelfRecordOptionIsSelected(i);
+                            pages.editDealContractPeriod.editTheIMdrcPercentOfMinStatutoryRate(i);
+                            pages.editDealContractPeriod.checkIMdrcNoProportionalRecoupmentAllowedOptionIsSelected(i);
+                            pages.editDealContractPeriod.checkIMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected(i);
+                            pages.editDealContractPeriod.fillIntoIMdrcDeliverySchedule(i);
+                            pages.editDealContractPeriod.fillIntoIMdrcEveryWeeks(i);
+                            pages.editDealContractPeriod.saveIMdrcForm(i);
+                            break;
+                    }
+
+                });
+
+    });
+};
+
 exports.itEditIncompleteMdrcContractPeriod = function (i) {
     describe("Edit incomplete MDRC on  contract period screen", function () {
         steps.editDealContractPeriod.editMdrcFormI(i);
@@ -564,22 +662,20 @@ exports.itEditIncompleteMdrcContractPeriod = function (i) {
         steps.editDealContractPeriod.editCheckIncompleteMdrcOptionIsSelected();
         steps.editDealContractPeriod.editMdrcQuantityField();
         steps.editDealContractPeriod.editMdrcQuantityForCommercialReleaseField();
-        steps.editDealContractPeriod.editAddMdrcTerritoryField();
-        steps.editDealContractPeriod.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton();
-        steps.editDealContractPeriod.editClickMdrcNoCommercialReleaseByMajorLabelButton();
-        steps.editDealContractPeriod.editCheckMdrcNoCommercialReleaseByMajorLabelOptionIsSelectedButton();
-        steps.base.scrollIntoView("Label section", pages.editDealContractPeriod.elems.editMdrcLabelsElement);
-        steps.editDealContractPeriod.editRemoveMdrcLabel();
-        steps.editDealContractPeriod.editSelectMdrcRandomLabelOption();
-        steps.editDealContractPeriod.editCheckMdrcNoSelfRecordOptionIsSelectedOption();
+        steps.createDealContractPeriod.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
+        steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
+        steps.createDealContractPeriod.selectMdrcRandomLabel();
+        steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.editDealContractPeriod.editMdrcPercentOfMinStatutoryRateField();
-        steps.editDealContractPeriod.editMdrcInNoEventLessThanField();
-        steps.editDealContractPeriod.editCheckMdrcNoProportionalRecoupmentAllowedOptionIsSelectedOption();
-        steps.editDealContractPeriod.editCheckMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelectedOption();
-        steps.editDealContractPeriod.editMdrcDeliveryScheduleField();
-        steps.editDealContractPeriod.editMdrcEveryWeeksField();
-        steps.base.scrollIntoView("Save MDRC button", pages.editDealContractPeriod.elems.editMdrcSaveButton);
-        steps.editDealContractPeriod.editSaveMdrcFormButton();
+        steps.createDealContractPeriod.fillMdrcInNoEventLessThan();
+        steps.createDealContractPeriod.checkMdrcNoProportionalRecoupmentAllowedOptionIsSelected();
+        steps.createDealContractPeriod.checkMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected();
+        steps.createDealContractPeriod.fillMdrcDeliverySchedule();
+        steps.createDealContractPeriod.fillMdrcEveryWeeks();
+        steps.base.scrollIntoView("Save MDRC button", pages.createDealContractPeriod.elems.mdrcSaveButton);
+        steps.createDealContractPeriod.saveMdrcForm();
     })
 };
 
@@ -592,22 +688,21 @@ exports.itEditDeemedCompleteMdrcContractPeriod = function (i) {
         steps.editDealContractPeriod.editMdrcShortfallAmountField();
         steps.editDealContractPeriod.editMdrcQuantityField();
         steps.editDealContractPeriod.editMdrcQuantityForCommercialReleaseField();
-        steps.editDealContractPeriod.editAddMdrcTerritoryField();
-        steps.editDealContractPeriod.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton();
-        steps.editDealContractPeriod.editClickMdrcNoCommercialReleaseByMajorLabelButton();
-        steps.editDealContractPeriod.editCheckMdrcNoCommercialReleaseByMajorLabelOptionIsSelectedButton();
-        steps.base.scrollIntoView("Label section", pages.editDealContractPeriod.elems.editMdrcLabelsElement);
-        steps.editDealContractPeriod.editRemoveMdrcLabel();
-        steps.editDealContractPeriod.editSelectMdrcRandomLabelOption();
-        steps.editDealContractPeriod.editCheckMdrcNoSelfRecordOptionIsSelectedOption();
+        steps.createDealContractPeriod.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
+        steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
+        steps.createDealContractPeriod.selectMdrcRandomLabel();
+        steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.editDealContractPeriod.editMdrcPercentOfMinStatutoryRateField();
-        steps.editDealContractPeriod.editMdrcInNoEventLessThanField();
-        steps.editDealContractPeriod.editCheckMdrcNoProportionalRecoupmentAllowedOptionIsSelectedOption();
-        steps.editDealContractPeriod.editCheckMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelectedOption();
-        steps.editDealContractPeriod.editMdrcDeliveryScheduleField();
-        steps.editDealContractPeriod.editMdrcEveryWeeksField();
-        steps.base.scrollIntoView("Save MDRC button", pages.editDealContractPeriod.elems.editMdrcSaveButton);
-        steps.editDealContractPeriod.editSaveMdrcFormButton();
+        steps.createDealContractPeriod.fillMdrcInNoEventLessThan();
+        steps.createDealContractPeriod.checkMdrcNoProportionalRecoupmentAllowedOptionIsSelected();
+        steps.createDealContractPeriod.checkMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected();
+        steps.createDealContractPeriod.fillMdrcDeliverySchedule();
+        steps.createDealContractPeriod.fillMdrcEveryWeeks();
+        steps.base.scrollIntoView("Save MDRC button", pages.createDealContractPeriod.elems.mdrcSaveButton);
+        steps.createDealContractPeriod.saveMdrcForm();
+
     })
 };
 
@@ -618,22 +713,24 @@ exports.itEditCompleteMdrcContractPeriod = function (i) {
         steps.editDealContractPeriod.editCheckCompleteMdrcOptionIsSelected();
         steps.editDealContractPeriod.editDateCompletedField();
         steps.editDealContractPeriod.editMdrcQuantityField();
-        steps.editDealContractPeriod.editMdrcQuantityForCommercialReleaseField();
-        steps.editDealContractPeriod.editAddMdrcTerritoryField();
-        steps.editDealContractPeriod.editCheckMdrcYesCommercialReleaseByMajorLabelOptionIsSelectedButton();
-        steps.editDealContractPeriod.editClickMdrcNoCommercialReleaseByMajorLabelButton();
-        steps.editDealContractPeriod.editCheckMdrcNoCommercialReleaseByMajorLabelOptionIsSelectedButton();
-        steps.base.scrollIntoView("Label section", pages.editDealContractPeriod.elems.editMdrcLabelsElement);
-        steps.editDealContractPeriod.editRemoveMdrcLabel();
-        steps.editDealContractPeriod.editSelectMdrcRandomLabelOption();
-        steps.editDealContractPeriod.editCheckMdrcNoSelfRecordOptionIsSelectedOption();
+        steps.createDealContractPeriod.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
+        steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
+        steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
+        steps.createDealContractPeriod.selectMdrcRandomLabel();
+        steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.editDealContractPeriod.editMdrcPercentOfMinStatutoryRateField();
-        steps.editDealContractPeriod.editMdrcInNoEventLessThanField();
-        steps.editDealContractPeriod.editCheckMdrcNoProportionalRecoupmentAllowedOptionIsSelectedOption();
-        steps.editDealContractPeriod.editCheckMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelectedOption();
-        steps.editDealContractPeriod.editMdrcDeliveryScheduleField();
-        steps.editDealContractPeriod.editMdrcEveryWeeksField();
-        steps.base.scrollIntoView("Save MDRC button", pages.editDealContractPeriod.elems.editMdrcSaveButton);
-        steps.editDealContractPeriod.editSaveMdrcFormButton();
+        steps.createDealContractPeriod.fillMdrcInNoEventLessThan();
+        steps.createDealContractPeriod.checkMdrcNoProportionalRecoupmentAllowedOptionIsSelected();
+        steps.createDealContractPeriod.checkMdrcNoSeeContractForAdditionalMdrcComplexitiesOptionIsSelected();
+        steps.createDealContractPeriod.fillMdrcDeliverySchedule();
+        steps.createDealContractPeriod.fillMdrcEveryWeeks();
+        steps.base.scrollIntoView("Save MDRC button", pages.createDealContractPeriod.elems.mdrcSaveButton);
+        steps.createDealContractPeriod.saveMdrcForm();
     })
+
 };
+
+
+
+
