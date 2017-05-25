@@ -15,8 +15,8 @@ if (pages.editDealScope === undefined) {
                 editTerritoryDeleteIcon: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] span[ng-click='!$isDisabled() && $removeTag($tag); $event.stopPropagation();']"},
                 editTerritoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
                 publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
-                publisherSharesSetArea: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.DETAIL.ng-scope"},
-                publisherSharesSetEditIcon: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
+                publisherSharesSetArea: {css: "div[name='scopeForm'] [ng-controller='DealPssController']"},
+                publisherSharesSetEditIcon: {css: "div[name='scopeForm'] [ng-controller='DealPssController'] .modular-edit-btn"},
                 editPublisherSharesHeaderTitles: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.clearfix.ps-heading"},
                 scope1: {css: "div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
                 editAddPublisherShareSetLink: {css: "div.publisher-share-totals a[data-ng-click='addChain(modularEditModels.model.id, form.terms.activeScope.id);']"},
@@ -32,10 +32,10 @@ if (pages.editDealScope === undefined) {
                 editFirstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
                 editFirstPublisherTypeValue: {css: "#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
                 editFirstPublisherTypeText: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button"},
-                editSavePublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
+                editSavePublisherShareSet: {css: ".EDITOR.ps-editor button[data-ng-click='tgModularViewMethods.save()']"},
                 editCancelPublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
                 editDeletePublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button[data-ng-show='!!tgDeleteButton']"},
-                editAddChainLink: {css: "#deal-publisher a[data-ng-click='addChain(modularEditModels.activeScope.publisher_share_set_id, modularEditModels.activeScope.id)']"},
+                editAddChainLink: {css: "#deal-publisher a[ng-click='tgModularEditModel.addChain()']"},
                 modalDialog: {css: "div.modal-dialog.ng-scope"},
                 confirmDeleteModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
                 cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
@@ -581,7 +581,7 @@ if (pages.editDealScope === undefined) {
             editSaveThePublisherShareSets: function () {
                 pages.base.scrollIntoView(pages.editDealScope.elems.editSavePublisherShareSet);
                 pages.editDealScope.elems.editSavePublisherShareSet.click();
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-tg-modular-view='detail']"))));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("[ng-controller='DealPssController']"))));
             },
 
             editSaveThePublisherShareSetsWithModal: function () {

@@ -118,18 +118,20 @@ exports.feature = [
 
             deal.addSocietyAgreementNumbersToPssChain(0);
 
+
             describe('Check Creator-to-Publisher society inputs', function () {
                 dsanCtp.enterSocietySearchTerms(0, 0, 'ICE');
                 dsanCtp.selectSocietySearchResultByName('ICE');
-
-                //dsanCtp.deleteSocietyAgreementNumber(0, 0);
+                dsanCtp.enterSocietyAgreementNumber(0,'ABC123');
+                dsanCtp.deleteSocietyAgreementNumber(0, 0);
             });
 
-            describe('Check Creator-to-Publisher society inputs', function () {
+            describe('Check Publisher society inputs', function () {
                 dsanPub.enterSocietySearchTerms(0, 'ICE');
                 dsanPub.selectSocietySearchResultByName('ICE');
                 dsanPub.enterSocietyAgreementNumber(0,'ABC123');
-                dsanCtp.deleteSocietyAgreementNumber(0, 0);
+                dsanPub.deleteSocietyAgreementNumber(0, 0);
+
             });
         })
     }

@@ -26,6 +26,20 @@ exports.openDealFromSlot = function (slotId) {
     });
 };
 
+exports.openDealManual = function (DealID) {
+    describe('Open deal (' + DealID + ')', function () {
+        var mhs = steps.mainHeader.search;
+
+        mhs.selectEntityType('Deal');
+
+        mhs.enterTerms(labeledFn('ID from deal slot', function () {
+            return DealID
+        }));
+
+        mhs.selectResultByIndex(0);
+    });
+};
+
 exports.refreshThePage = function () {
     it("Refresh the page", function () {
         browser.driver.navigate().refresh();

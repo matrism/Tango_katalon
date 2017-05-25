@@ -34,11 +34,11 @@ exports.feature = [
             describe('Fill general fields', function () {
                 cdg.selectSigningTerritory('Argentina');
 
-                if(systemConfig.env.name === 'qa') {
+                //if(systemConfig.env.name === 'qa') {
                     cdg.fillCompanyCodeField('WCM');
                     cdg.waitForContractingPartyDropDown();
                     cdg.selectRandomCompanyCode();
-                }
+                //}
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.waitForContractingPartyDropDown();
@@ -138,7 +138,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -157,6 +158,6 @@ exports.feature = [
 
                 dsanCtp.expectNoCreatorSearchResults();
             });
-        }
+        })
     },
 ];
