@@ -8,7 +8,7 @@ if (pages.editDealPayee === undefined) {
     pages.editDealPayee = new ftf.pageObject({
         locators: {
             payeeHeaderTitleLink: {css: "ul.nav.nav-tabs li.ng-scope:nth-child(3) a"},
-            byPayeeHeaderLink: {css: "div.deal-payee.deal-payee-tab div.view-header.pull-left a:nth-child(4)"},
+            byPayeeHeaderLink: {css: "div.deal-modular-edit.ng-scope.modular-edit.ng-pristine.ng-valid div.form-horizontal.ng-scope button[data-ng-click='tgModularViewMethods.switchToEditView()'] i"},
             payeeArea: {css: "div[tg-modular-edit-id='payeeByScopeName']"},
             oldPayeeArea: {css: "div[data-tg-modular-edit-id='payees']"},
             editPayeeIcon: {css: "div[tg-modular-edit-id='payeeByScopeName'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
@@ -16,8 +16,8 @@ if (pages.editDealPayee === undefined) {
             editPayeeEditAreaButton: {css: 'button[data-ng-click="tgModularViewMethods.switchToEditView()"]'},
             editAddOldPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
             editAddOldPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editAddNewPayeeField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass']"},
-            editAddNewPayeeInputField: {css: "div[data-tg-typeahead-selected='DPAY.onAddPayeeSelect(match)'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editAddNewPayeeField: {css: "[tg-modular-edit-id='payeeByScopeName'] div[tg-modular-view='edit'] div.payee-by-scope__row-wrap div.payee-by-scope__td button[ng-click='addPrimaryPayee(scope)']"},
+            editAddNewPayeeInputField: {css: "div[ng-model='newPayee._deal_payee'] div[ng-class='tgTypeaheadWrapClass'] div.tg-typeahead__input-wrap input[ng-model='$term']"},
             editPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='newPayee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editOldPayeeCompanyNameCodeInputField: {css: "div[data-ng-model='payee.company'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editScopePayeeSelectAllScopes: {model: 'newPayee._all_scopes'},
@@ -33,8 +33,8 @@ if (pages.editDealPayee === undefined) {
             editCancelOldPayeeFormButton: {css: "div[data-tg-modular-edit-id='newPayee'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
             editLegalRightPayeeInputField: {css: "input[name='legalRight']"},
             editDistributionPayeeInputField: {css: "input[name='distribution']"},
-            editAddPayeeButtonPayeeForm: {css: "div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
-            editSavePayeeFooterButton: {css: "div.CONTROLS.ng-scope.page-footer button[data-ng-click='tgModularViewMethods.save();']"}
+            editAddPayeeButtonPayeeForm: {css: "div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
+            editSavePayeeFooterButton: {css: "div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"}
         },
 
         clickOnThePayeeHeaderLink: function () {
@@ -46,7 +46,7 @@ if (pages.editDealPayee === undefined) {
         editClickOnTheByPayeeHeaderLink: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.byPayeeHeaderLink);
             pages.editDealPayee.elems.byPayeeHeaderLink.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField));
+            //browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeField));
         },
 
         editThePayeeArea: function () {
@@ -57,13 +57,13 @@ if (pages.editDealPayee === undefined) {
         },
 
         editDeleteFirstScopeFromThePayee: function () {
-            pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")));
-            browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayeeDistribution(scopeDistribution, scope, $formExtend)']")).click();
+            pages.base.scrollIntoView(element(by.css("button[ng-click='removePayeeDistribution(scopeDistribution, scope, $formExtend)']")));
+            browser.driver.findElement(By.css("button[ng-click='removePayeeDistribution(scopeDistribution, scope, $formExtend)']")).click();
         },
 
         editDeletePayeeFromDealByThePayeeScreen: function () {
-            pages.base.scrollIntoView(element(by.css("button[data-ng-click='DPAY.removePayee(payee)']")));
-            browser.driver.findElement(By.css("button[data-ng-click='DPAY.removePayee(payee)']")).click();
+            pages.base.scrollIntoView(element(by.css("button[ng-click='removePayeeDistribution(scopeDistribution, scope, $formExtend)']")));
+            browser.driver.findElement(By.css("button[ng-click='removePayeeDistribution(scopeDistribution, scope, $formExtend)']")).click();
         },
 
         editConfirmDeletePayeeModal: function () {
@@ -141,8 +141,8 @@ if (pages.editDealPayee === undefined) {
 
         editSelectTheSpecificPayeePersonFromDropDown: function (payee_name) {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
-            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(2) div.overflow.ng-binding"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(2) div.overflow.ng-binding"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -159,7 +159,7 @@ if (pages.editDealPayee === undefined) {
                         desiredOption.click();
                     }
                 });
-            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope:nth-child(2) ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(2) div.overflow.ng-binding"))));
         },
 
         editSelectTheRandomValueForPayeeCompanyNameCode: function () {
@@ -186,8 +186,8 @@ if (pages.editDealPayee === undefined) {
 
         editAddThePayoutToPayee: function () {
             pages.editDealPayee.elems.editPayoutPayeeField.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))));
-            browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"))));
+            browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope a"))
                 .then(function (options) {
                     options[0].click();
                 });
@@ -291,7 +291,7 @@ if (pages.editDealPayee === undefined) {
         editAddPayeeToPayeeForm: function () {
             pages.base.scrollIntoView(pages.editDealPayee.elems.editAddPayeeButtonPayeeForm);
             pages.editDealPayee.elems.editAddPayeeButtonPayeeForm.click();
-            browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeInputField));
+            //browser.wait(ExpectedConditions.visibilityOf(pages.editDealPayee.elems.editAddNewPayeeInputField));
         },
 
         editSaveTheOldPayeeForm: function () {
