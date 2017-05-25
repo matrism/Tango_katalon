@@ -417,7 +417,7 @@ exports.feature = [
                     dsanCtp.selectSocietySearchResultByName(societyName);
                 });
             });
-
+            steps.base.sleep(1000);
             dsan.save();
 
             deal.viewPssChainSocietyAgreementNumbers(0);
@@ -496,6 +496,8 @@ exports.feature = [
 
             deal.openDealFromSlot('mainDeal');
 
+            steps.base.sleep(2000);
+
             deal.clickFirstScopeHeader();
 
             deal.viewPssChainSocietyAgreementNumbers(0);
@@ -512,7 +514,7 @@ exports.feature = [
                         'TEST PERSON ' + (iPerson + 1) + ' ' +
                         randomId('person' + iPerson), 'found set index'
                     );
-                    steps.base.sleep(3000);
+                    steps.base.sleep(5000);
                     dsanCtp.deleteCreator(iSet);
                     //dsanCtp.deleteCreator(0);
                     steps.base.sleep(3000);

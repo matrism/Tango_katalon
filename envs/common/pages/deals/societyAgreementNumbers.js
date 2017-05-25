@@ -584,5 +584,5 @@ exports.save = function () {
         exports.saveButton(),
         'scrollIntoView', 'click', 'waitForAjax'
     );
-    steps.base.sleep(3000);
+
 };
