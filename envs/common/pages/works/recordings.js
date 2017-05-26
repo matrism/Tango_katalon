@@ -54,7 +54,7 @@ exports.cancelChanges = () => asAlways(
 
 // ---
 
-exports.rows = () => $$('.content-border');
+exports.rows = () => $$('div[ng-repeat="recordingLink in WorkRecordingsCtrl.getRecordingsView().getRecordingLinks()"]');
 
 exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
 
@@ -134,7 +134,7 @@ exports.expectEmptyTitleField = i => exports.validateEnteredTitle(i, '');
 // ---
 
 {
-    let locator = by.binding('$match.model');
+    let locator = by.binding('::recordingLink.recording.title');
 
     exports.titleBinding = i => exports.rows().get(i).element(locator);
 
@@ -238,7 +238,7 @@ exports.validateArtistName = (i, val) => expect(
 // ---
 
 exports.libraryNameBinding = i => exports.rows().get(i).$(
-    '[data-ng-switch="commonDataHolder.isLibrary"] .ng-binding'
+    'span[ng-bind="::WorkRecordingsCtrl.getLibraryName(recordingLink.recording.libraryCode)"]'
 );
 
 exports.libraryName = i => asAlways(
@@ -276,7 +276,7 @@ exports.expectEmptyDurationField = i => exports.validateEnteredDuration(i, '');
 // ---
 
 exports.durationBinding = i => exports.rows().get(i).element(by.binding(
-    'secondsToTime(recording.duration)'
+    '::recordingLink.recording.getDuration()'
 ));
 
 exports.duration = i => asAlways(
@@ -345,7 +345,7 @@ exports.remove = i => asAlways(
 // ---
 
 exports.toggleButton = i => exports.rows().get(i).$(
-    '.fa fa-angle-up.fa-angle-down'
+    '.fa.fa-angle-up.fa-angle-down'
 );
 
 exports.expanded = i => asAlways(
@@ -362,9 +362,7 @@ exports.albums = (() => {
     let alb = {};
 
     alb.rows = i => exports.rows().get(i).$$(
-        '[data-ng-repeat="track in recordingLink.recording.tracks.$getItems()"], ' +
-        '.content-border2 > .content-border2-tr'
-    );
+        '[ng-repeat="track in recordingLink.recording.tracks.$getItems()"]');
 
     alb.validateRowCount = (i, val) => expect(alb.rows(i).count()).toBe(val);
 
@@ -439,7 +437,7 @@ exports.albums = (() => {
     // ---
 
     alb.albumTitleBinding = (i, j) => alb.rows(i).get(j).element(
-        by.binding(" ::track.album.title || ' ' ")
+        by.binding("::track.album.title")
     );
 
     alb.albumTitle = (i, j) => asAlways(
@@ -480,7 +478,7 @@ exports.albums = (() => {
     // ---
 
     alb.trackNumberBinding = (i, j) => alb.rows(i).get(j).element(
-        by.binding(" ::track.track_number || ' ' ")
+        by.binding("::track.trackNumber")
     );
 
     alb.trackNumber = (i, j) => asAlways(

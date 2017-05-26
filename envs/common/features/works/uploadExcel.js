@@ -75,12 +75,16 @@ exports.feature = [
 
                 steps.criticalSection.wrap(() => {
                     uw.upload();
+
+
                 });
             });
 
-            wuh.waitUntilFileNameIsStaged(fromTestVariable(
-                'generated Excel file name'
-            ));
+            steps.base.refreshPage();
+
+            // wuh.waitUntilFileNameIsStaged(fromTestVariable(
+            //     'generated Excel file name'
+            // ));
 
             wuh.findRowByFileName(
                 fromTestVariable('generated Excel file name'), 'uploaded row'
@@ -103,6 +107,7 @@ exports.feature = [
             wuh.viewFile(iUploaded);
 
             describe('Validate header data', () => {
+                steps.base.sleep(5000);
                 vwf.validateFileName(fromTestVariable(
                     'generated Excel file name'
                 ));
@@ -115,6 +120,7 @@ exports.feature = [
             _.times(3, i => {
                 describe(`Create work ${i}`, () => {
                     vwfu.toggle(0);
+                    steps.base.sleep(5000);
                     vwfu.create(0);
                 });
             });
@@ -136,7 +142,7 @@ exports.feature = [
 
                         wr.validateTitle(0, `TEST WORK ${iOne} ${albCode}`);
                         wr.validateLibraryName(0, 'AUDIOMACHINE');
-                        wr.validateDuration(0, `00 : ${iOnePadded} : ${iOnePadded}`);
+                        wr.validateDuration(0, `00:${iOnePadded}:${iOnePadded}`);
 
                         wr.toggle(0);
 
@@ -150,7 +156,7 @@ exports.feature = [
                     describe('Validate created album data', () => {
                         ah.validateTitle(`TEST ALBUM ${albCode}`);
                         ah.validateLibraryName('AUDIOMACHINE');
-                        ah.validateTrackCount(3);
+                        ah.validateTrackCount(1);
                         ah.validateDuration('00:00:00');
                         ah.validateAlbumCode(`TESTALB${albCode}`);
                     });

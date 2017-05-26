@@ -3,7 +3,7 @@
 pages.viewWorkFile = exports;
 
 exports.fileNameBinding = () => element(by.binding(
-    ' dataHolder.uploadFile.file_name '
+    'dataHolder.uploadFile.file_name'
 ));
 
 exports.fileName = () => asAlways(
@@ -12,8 +12,8 @@ exports.fileName = () => asAlways(
 
 exports.validateFileName = val => expect(exports.fileName()).toBe(val);
 
-exports.totalWorksMsgBinding = () => element(by.binding(
-    ' dataHolder.uploadFile.total_works_count || 0 '
+exports.totalWorksMsgBinding = () => element(by.css(
+    "p.work_ph"
 ));
 
 exports.totalWorksMsg = () => asAlways(
@@ -37,7 +37,7 @@ exports.validateTotalWorks = val => expect(
 ).toBe(val.toString());
 
 exports.tabs = () => $(
-    '[data-tg-tabset-id="stagedWorksTabset"] .nav-tabs'
+    '[tg-tabset-id="stagedWorksTabset"] ul.nav-tabs'
 ).all(by.repeater('$tab in $tabs'));
 
 exports.tabByName = name => exports.tabs().filter(el => {
@@ -137,7 +137,7 @@ exports.created = (() => {
         ).toBe(val);
 
         cwv.workIdBinding = i => cwv.rows().get(i).element(by.binding(
-            ' workUtility.makeFullCode(stage.matched_work_code) '
+            'workUtility.makeFullCode(stage.matched_work_code)'
         ));
 
         cwv.workId = i => asAlways(
