@@ -256,6 +256,12 @@ exports.checkFinderDealsHeaderTitlePresent = function () {
     });
 };
 
+exports.waitforSomething = function (object) {
+    it("Wait for object to be visible ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css(object))));
+    });
+};
+
 exports.checkGrowlMessageDisplayedAfterScopeEdited = function (message) {
     it("Check that the success message after saving in the top of the screen is ok ", function () {
         browser.driver.findElement(By.css("div.growl-item.ng-scope.growl-item-success p")).getText().then(function (promise) {

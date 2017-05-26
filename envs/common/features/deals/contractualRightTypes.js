@@ -227,7 +227,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             //steps.searchSection.accessSavedDealByNumber('294553');
-            steps.base.sleep(5000);
+            steps.deal.waitforSomething(".contract-period-menu-item");
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
@@ -253,7 +253,7 @@ exports.feature = [
 
 
             //steps.searchSection.accessSavedDealByNumber('294556');
-            steps.base.sleep(5000);
+            steps.deal.waitforSomething(".contract-period-menu-item");
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
