@@ -12,7 +12,8 @@ exports.feature = [
     {
         name: "Create a deal with publisher share set",
         tags: ["createViewContractualRightTypes"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -226,20 +227,21 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             //steps.searchSection.accessSavedDealByNumber('294553');
-
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
             steps.editDealScope.checkContractualRightsTypeTextPresent();
             steps.editDealScope.checkContractualRightTypesIncludedOrExcludedTextValuePresent("Publishing Rights are included, but limited to: Print");
 
-        }
+        })
     },
 
     {
         name: "Create a deal with publisher share set",
         tags: ["editContractualRightTypes"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -251,7 +253,7 @@ exports.feature = [
 
 
             //steps.searchSection.accessSavedDealByNumber('294556');
-
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
@@ -372,7 +374,7 @@ exports.feature = [
             steps.editDealScope.checkContractualRightsTypeTextPresent();
             steps.editDealScope.checkContractualRightTypesIncludedOrExcludedTextValuePresent("All Publishing Rights are included.");
 
-        }
+        })
     }
 
 ];
