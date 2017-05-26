@@ -8,7 +8,8 @@ exports.creatorToPublisher = (function () {
     var ctp = {};
 
     ctp.form = function () {
-        return $('[data-ng-form="agreementNumbersCreatorForm"]');
+        //return $('[data-ng-form="agreementNumbersCreatorForm"]');
+        return $('.left-side');
     };
 
     ctp.formHeader = function () {
@@ -28,12 +29,13 @@ exports.creatorToPublisher = (function () {
     };
 
     ctp.creatorRows = function () {
-        return ctp.form().all(by.repeater('creator in data.model.creators'));
+        return ctp.form().all(by.repeater('item in data.model.creatorSocietyAgreements.$getItems() track by item.id'));
     };
 
     ctp.creatorSearchTermsInput = function(i) {
         return ctp.creatorRows().get(i).element(
-            by.model('creator.creator_model')
+            //by.model('creator.creator_model')
+            by.css('[tg-model-class-validation="item.creator"] input')
         );
     };
 
@@ -44,11 +46,11 @@ exports.creatorToPublisher = (function () {
     };
 
     ctp.creatorSearchResultRows = function () {
-        return element.all(by.repeater('match in matches'));
+        return element.all(by.css('.tg-typeahead__suggestions-group-item'));
     };
 
     ctp.noCreatorSearchResultsMessage = function () {
-        return $('[data-ng-if="match.model.validResult == false"]');
+        return $('[ng-if="!$dataSets[0].queried.matches.length"]');
     };
 
     ctp.expectNoCreatorSearchResults = function () {
@@ -59,7 +61,7 @@ exports.creatorToPublisher = (function () {
     };
 
     ctp.creatorSearchResultRowByDisplayName = function (name) {
-        var els = ctp.creatorSearchResultRows().$$('.pull-left.ng-binding');
+        var els = ctp.creatorSearchResultRows().$$('.tg-typeahead__item-left.ng-binding');
 
         browser.wait(EC.visibilityOfAny(els));
 
@@ -77,14 +79,15 @@ exports.creatorToPublisher = (function () {
 
     ctp.societyAgreementNumberRows = function (i) {
         return ctp.creatorRows().get(i).all(by.repeater(
-            'societyAgreementCreator in ' +
-            'creator.creator_society_agreement_numbers'
+            //'societyAgreementCreator in ' +
+            //'creator.creator_society_agreement_numbers'
+            "societyAgreementCreator in item.societyAgreements.$getItems() track by societyAgreementCreator.id"
         ));
     };
 
     ctp.societyAgreementNumberInput = function (iCreator, iNum) {
         return ctp.societyAgreementNumberRows(iCreator).get(iNum).element(
-            by.model('societyAgreementCreator.agreement_number')
+            by.model('societyAgreementCreator.agreementNumber')
         );
     };
 
@@ -96,8 +99,8 @@ exports.creatorToPublisher = (function () {
     };
 
     ctp.societyInput = function (iCreator, iNum) {
-        return ctp.societyAgreementNumberRows(iCreator).get(iNum).element(by.model(
-            'societyAgreementCreator.society_model'
+        return ctp.societyAgreementNumberRows(iCreator).get(iNum).element(by.css(
+            '[tg-org-typeahead-model="societyAgreementCreator.society"] input'
         ));
     };
 
@@ -108,11 +111,21 @@ exports.creatorToPublisher = (function () {
     };
 
     ctp.societySearchResultRows = function () {
-        return element.all(by.repeater('match in matches'));
+        return element.all(by.repeater('$match in $dataSet.queried.matches | limitTo:$dataSet.queried.limit'));
     };
 
     ctp.societySearchResultRowByName = function (name) {
-        var els = ctp.societySearchResultRows().$$('.pull-left');
+        var els = ctp.societySearchResultRows().$$('.tg-typeahead__item-left');
+
+        browser.wait(EC.visibilityOfAny(els));
+
+        return els.filter(function (el) {
+            return pph.areEqual(pph.getAllText(el), name);
+        }).first();
+    };
+
+    ctp.societySearchResultDisabled = function (name) {
+        var els = ctp.element(by.css('.tg-typeahead__suggestions-group'));
 
         browser.wait(EC.visibilityOfAny(els));
 
@@ -130,16 +143,16 @@ exports.creatorToPublisher = (function () {
 
     ctp.expectSocietySearchResultToBeDisallowed = function (name) {
         var el = asAlways(
-            ctp.societySearchResultRowByName(name), 'scrollIntoView'
+            ctp.societySearchResultDisabled(name), 'scrollIntoView'
         );
 
-        expect(pph.matchesCssSelector(
-            el.element(by.xpath('../..')), '.not-allowed'
-        )).toBeTruthy();
+        expect(
+            el.element(by.css('.tg-typeahead__suggestions-group .disabled').first())
+        ).toBeTruthy();
     };
 
     ctp.addCreatorLink = function () {
-        return $('[data-ng-click="data.addCreatorToChain()"]');
+        return $('[ng-click="data.addCreatorToChain()"]');
     };
 
     ctp.addCreatorLinkEnabled = function () {
@@ -275,13 +288,13 @@ exports.creatorToPublisher = (function () {
 
     ctp.formEnabled = function () {
         return pph.or(
-            pph.not(ctp.creatorSearchTermsInput(0).getAttribute('disabled')),
+            //pph.not(ctp.creatorSearchTermsInput(0).getAttribute('disabled')),
 
             pph.not(
                 ctp.societyAgreementNumberInput(0, 0).getAttribute('disabled')
-            ),
+            )
 
-            pph.not(ctp.societyInput(0, 0).getAttribute('disabled'))
+            //pph.not(ctp.societyInput(0, 0).getAttribute('disabled'))
         );
     };
 
@@ -317,7 +330,7 @@ exports.creatorToPublisher = (function () {
 
     ctp.deleteCreator = function (i) {
         ctp.clickCreatorSearchTermsField(i);
-
+        steps.base.sleep(1000);
         return asAlways(ctp.deleteCreatorButton(i), 'scrollIntoView', 'click');
     };
 
@@ -334,10 +347,11 @@ exports.creatorToPublisher = (function () {
             ctp.deleteSocietyAgreementNumberButton(iCreator, iNum),
             'scrollIntoView', 'click'
         );
+
     };
 
     ctp.formHeaderTooltipButton = function () {
-        return ctp.formHeader().$('i[data-tooltip]');
+        return ctp.formHeader().$('i[tooltip]');
     };
 
     ctp.validateFormHeaderTooltip = function (message) {
@@ -353,7 +367,8 @@ exports.publisher = (function () {
     var p = {};
 
     p.form = function () {
-        return $('[data-ng-form="societyAgreementsForm"]');
+        //return $('[data-ng-form="societyAgreementsForm"]');
+        return $('.right-side');
     };
 
     p.formHeader = function () {
@@ -370,13 +385,13 @@ exports.publisher = (function () {
 
     p.societyAgreementNumberRows = function () {
         return p.form().all(by.repeater(
-            'societyAgreement in data.model.society_agreement_numbers'
+            'societyAgreement in data.model.societyAgreements.$getItems()'
         ));
     };
 
     p.societyAgreementNumberInput = function(i) {
         return p.societyAgreementNumberRows().get(i).element(by.model(
-            'societyAgreement.agreement_number'
+            'societyAgreement.agreementNumber'
         ));
     };
 
@@ -388,8 +403,8 @@ exports.publisher = (function () {
     };
 
     p.societyInput = function (i) {
-        return p.societyAgreementNumberRows().get(i).element(by.model(
-            'societyAgreement.society_model'
+        return p.societyAgreementNumberRows().get(i).element(by.css(
+            '[tg-org-typeahead-model="societyAgreement.societyCorrelation"] input'
         ));
     };
 
@@ -400,11 +415,12 @@ exports.publisher = (function () {
     };
 
     p.societySearchResultRows = function () {
-        return element.all(by.repeater('match in matches'));
+        //return element.all(by.repeater('match in matches'));
+        return element.all(by.css('.tg-typeahead__suggestions-group-item'));
     };
 
     p.noSocietySearchResultsMessage = function () {
-        return $('[data-ng-if="match.model.validResult == false"]');
+        return $('[ng-if="!$dataSets[0].queried.matches.length"]');
     };
 
     p.expectNoSocietySearchResults = function () {
@@ -415,7 +431,7 @@ exports.publisher = (function () {
     };
 
     p.societySearchResultRowByName = function (name) {
-        var els = p.societySearchResultRows().$$('.pull-left');
+        var els = p.societySearchResultRows().$$('.tg-typeahead__item-left');
 
         browser.wait(EC.visibilityOfAny(els));
 
@@ -514,6 +530,7 @@ exports.publisher = (function () {
 
     p.deleteSocietyAgreementNumber = function (i) {
         p.clickSocietyAgreementNumberField(i);
+        steps.base.sleep(1000);
 
         return asAlways(
             p.deleteSocietyAgreementNumberButton(i),
@@ -522,7 +539,7 @@ exports.publisher = (function () {
     };
 
     p.formHeaderTooltipButton = function () {
-        return p.formHeader().$('i[data-tooltip]');
+        return p.formHeader().$('i[tooltip]');
     };
 
     p.validateFormHeaderTooltip = function (message) {
@@ -535,7 +552,7 @@ exports.publisher = (function () {
 });
 
 exports.modalHeaderTooltipButton = function () {
-    return pages.base.modalHeader().$('i[data-tooltip]');
+    return pages.base.modalHeader().$('i[tooltip]');
 };
 
 exports.validateModalHeaderTooltip = function (message) {
@@ -567,4 +584,5 @@ exports.save = function () {
         exports.saveButton(),
         'scrollIntoView', 'click', 'waitForAjax'
     );
+
 };

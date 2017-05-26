@@ -26,7 +26,7 @@ if (pages.createDealScope === undefined) {
             firstPublisherTypeText: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button"},
             savePublisherShareSet: {css: "div[tg-modular-edit-id='publisherShareSetModularEdit'] div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
             cancelPublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
-            addChainLink: {css: "#deal-publisher a[data-ng-click='addChain(modularEditModels.activeScope.publisher_share_set_id, modularEditModels.activeScope.id)']"},
+            addChainLink: {css: "#deal-publisher a[ng-click='tgModularEditModel.addChain()']"},
             noPublisherShareWarningMessage: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.ng-scope div.validation-message-error.ng-scope div.validation-message-text.ng-binding"},
             noPublisherShareWarningIcon: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.ng-scope div.validation-message-error.ng-scope i.fa.fa-exclamation-triangle"},
             publisherIsRequiredErrorMessage: {css: "#deal-publisher div[data-name='chainForm'] div[data-ng-show='chainForm.$invalid'] ul[role='alert'] li[data-ng-if='chainForm.$error.required || chainForm.$error.typeaheadModelSelected']"},
