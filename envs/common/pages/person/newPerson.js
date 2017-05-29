@@ -183,8 +183,8 @@ if (pages.newPerson === undefined) {
         },
 
         selectTheAsPayeeOptionToYes :function(){
-            pages.base.scrollIntoView(element(by.css("div[ng-model='modularEditModels.model.isPayee'] button:nth-child(1)")));
-            browser.driver.findElement(By.css("div[ng-model='modularEditModels.model.isPayee'] button:nth-child(1)")).click();
+            pages.base.scrollIntoView(element(by.css("div[ng-model='__isPayee'] button:nth-child(1)")));
+            browser.driver.findElement(By.css("div[ng-model='__isPayee'] button:nth-child(1)")).click();
         }
 
     });
