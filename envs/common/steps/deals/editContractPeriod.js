@@ -7,6 +7,7 @@ steps.editDealContractPeriod = exports;
 
 exports.editSelectContractPeriodNumberI = function (i) {
     it("Select contract period number " + i + " from list", function () {
+        browser.pause();
         pages.editDealContractPeriod.selectTheContractPeriodNumberI(i);
     });
 };

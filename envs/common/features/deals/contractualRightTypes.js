@@ -258,6 +258,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
 
+
             //check default values for publishing rights
             steps.editDealScope.editCheckTheContractualTypePublishingRightsTextDisplayed("Synch");
             steps.editDealScope.editCheckTheContractualTypePublishingRightsTextDisplayed("Mech");

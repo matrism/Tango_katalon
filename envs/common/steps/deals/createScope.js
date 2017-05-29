@@ -106,7 +106,8 @@ exports.addScopeTypeAndTerritory = function (contractType, territory) {
 exports.selectCountry = function () {
     it("Select country", function () {
         pages.createDealScope.addTerritoryByTypingToScope();
-        pages.createDealScope.selectRandomCountry();
+        //pages.createDealScope.selectRandomCountry();
+        pages.createDealScope.selectSpecificCountry('Asia');
         pages.createDealScope.waitForAjax();
     });
 };
