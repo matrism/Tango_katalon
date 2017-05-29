@@ -100,7 +100,6 @@ exports.feature = [
                 1, 'TEST WORK ALTERNATE TITLE ' + randomId(0.2)
             );
 
-            //steps.newWork.selectRandomCreator(0);
             steps.newWork.selectCreator('nawawi');
             steps.newWork.enterCreatorContribution(0, 100);
 
@@ -116,7 +115,6 @@ exports.feature = [
             steps.mainHeader.search.selectEntityType('Works');
             steps.work.selectWorkSearchFilterTag(0, 'Work ID');
 
-            steps.work.validateDefaultWorkSearchFilterTag(0);
             steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
             steps.base.sleep(200);
             steps.base.waitForAjax();
@@ -127,7 +125,7 @@ exports.feature = [
             steps.base.waitForAjax();
 
             steps.work.validateWorkId();
-        }//)
+        }
     },
     {
         name: 'New basic organisation',
@@ -214,8 +212,8 @@ exports.feature = [
             'qaOnly'
         ],
 
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
             steps.base.sleep(5000);
@@ -233,14 +231,14 @@ exports.feature = [
             steps.royaltyRates.selectIncomeTypeForBatch("Video Synch");
 
             steps.royaltyRates.selectExploitationTerritoryForBatch("Malaysia");
+            steps.base.sleep(5000);
             steps.royaltyRates.addWorkByTitle("SANGITA BEST WORK");
-            //
-            // steps.royaltyRates.setAmountRecievedForWork("1000");
-            // steps.royaltyRates.clickDoneButtonForManualStatement();
-            //
-            // steps.royaltyRates.goToRoyaltyStatements();
-            // steps.royaltyRates.expandSavedManualStatement();
-            // steps.royaltyRates.validateManualStatement();
-        }//)
+            steps.royaltyRates.setAmountRecievedForWork("1000");
+            steps.royaltyRates.clickDoneButtonForManualStatement();
+
+            steps.royaltyRates.goToRoyaltyStatements();
+            steps.royaltyRates.expandSavedManualStatement();
+            steps.royaltyRates.validateManualStatement();
+         })
     }
 ];

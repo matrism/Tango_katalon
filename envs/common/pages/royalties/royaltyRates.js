@@ -287,7 +287,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         workInput: function () {
-            return $('div[data-ng-model="workEntries.newWork"] input.tg-typeahead__input.ng-pristine.ng-valid[placeholder="Search by Title, Creator or Work ID"]');
+            return $('div[data-ng-model="activeBatch.workEntries.newWork"] input.tg-typeahead__input.ng-pristine.ng-untouched.ng-valid[placeholder="Search by Title, Creator or Work ID"]');
         },
 
         amountRecievedInput: function () {
@@ -1066,9 +1066,7 @@ if (pages.royaltyRates === undefined) {
 
             if (sentKeys != "") {
                 var suggestion = $(".tg-typeahead__item-left>strong");
-                //browser.wait(ExpectedConditions.invisibilityOf(suggestion));
                 workInput.sendKeys(sentKeys);
-                suggestion = $(".tg-typeahead__item-left>strong");
                 browser.wait(ExpectedConditions.visibilityOf(suggestion));
                 suggestion.click();
             }
