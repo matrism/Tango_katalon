@@ -14,6 +14,7 @@ exports.feature = [
         name: "Create a deal with publisher share set",
         tags: ["filterAdvances"],
         steps: function(){
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
