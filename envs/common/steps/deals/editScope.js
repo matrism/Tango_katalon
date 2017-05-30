@@ -683,7 +683,8 @@ exports.editAddSpecificScopeTypeAndTerritory = function (contractType, territory
     it("Add simple scope", function () {
         pages.editDealScope.addScopeForm();
         pages.editDealScope.selectContractTypeScope(contractType);
-        pages.editDealScope.waitForAjax();
+        //browser.pause();
+        //pages.editDealScope.waitForAjax();
         pages.editDealScope.addTheSpecificTerritoryByTypingToScope(territory);
         pages.editDealScope.selectSpecificCountry(territory);
         pages.editDealScope.waitForAjax();
