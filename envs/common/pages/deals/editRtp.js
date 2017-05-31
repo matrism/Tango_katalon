@@ -14,7 +14,7 @@ if (pages.editDealRtp === undefined) {
             editActualStartDateAcquisitionField: {css: 'div[ng-model="tgModularEditModel.startDate"] input[ng-model="date"]'},
             editDeleteAnotherAcquisitionFormIcon: {css: 'a[ng-click="showDeleteRightsTermPeriodSetModal(rightsTermPeriodSet)"]'},
             editActualEndDateAcquisitionField: {css: 'div[ng-model="tgModularEditModel.endDate"] input[ng-model="date"]'},
-            editSaveAcquisitionAreaButton: {css: 'div[data-ng-if="view.isEdit()"] button[data-ng-click="tgModularViewMethods.save()"]'},
+            editSaveAcquisitionAreaButton: {css: '.rights-term-container .acquisition div[data-ng-if="view.isEdit()"] button[data-ng-click="tgModularViewMethods.save()"]'},
             editSaveAnotherAcquisitionButton: {css: 'div[data-ng-if="view.isEdit()"] button[data-ng-click="tgModularViewMethods.save()"]'},
             editAddRetentionFromAcquisitionLink: {css: "a[ng-click='rightsTermPeriodSet.addPeriod(constants.RETENTION)']"},
             editTheRtpRetentionAreaField: {css: "div[tg-modular-edit-id='retentionModulatEdit']"},
@@ -105,6 +105,7 @@ if (pages.editDealRtp === undefined) {
         },
 
         editSaveTheAcquisitionArea: function () {
+            pages.base.scrollIntoView(pages.editDealRtp.elems.editActualStartDateAcquisitionField);
             pages.editDealRtp.elems.editSaveAcquisitionAreaButton.click();
         },
 

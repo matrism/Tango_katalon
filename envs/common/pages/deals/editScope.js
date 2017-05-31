@@ -10,8 +10,8 @@ if (pages.editDealScope === undefined) {
                 editScopeIcon: {css: "div[data-tg-modular-edit-id='dealScope'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
                 addScopeIcon: {css: 'a[ng-click="addScope(); scrollScopeMenu();"] i[class="column-add-button-icon fa fa-plus"]'},
                 contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
-                editTerritoryField: {css: "div[class='tg-territory__input-container'] div[ng-class='tgTypeaheadWrapClass']"},
-                editTerritoryInput: {css: "div[class='tg-territory__input-container'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+                editTerritoryField: {css: "[ng-model='tgModularEditModel.dealScopeTerritories'] .tg-typeahead"},
+                editTerritoryInput: {css: "[ng-model='tgModularEditModel.dealScopeTerritories'] input"},
                 editTerritoryDeleteIcon: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] span[ng-click='!$isDisabled() && $removeTag($tag); $event.stopPropagation();']"},
                 editTerritoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
                 publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
@@ -139,6 +139,8 @@ if (pages.editDealScope === undefined) {
             },
 
             addTheSpecificTerritoryByTypingToScope: function (territory) {
+                //browser.pause();
+                pages.base.scrollIntoView(pages.editDealScope.elems.editTerritoryField);
                 pages.editDealScope.elems.editTerritoryField.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.editTerritoryInput));
                 pages.editDealScope.elems.editTerritoryInput.sendKeys(territory);
