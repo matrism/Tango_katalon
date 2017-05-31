@@ -1283,7 +1283,7 @@ exports.editClickOnMasterRightsCheckBox = function () {
 
 exports.editCheckTheContractualTypeAreaTextDisplayed = function (text) {
     it("Edit check the contractual type area text value displayed", function () {
-        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[name='contRightTypes'] div.control-label")).getText().then(function (promise) {
             console.log("Deal scope contractual right types text value is : " + promise);
             expect(promise).toContain(text);
         });
@@ -1292,7 +1292,7 @@ exports.editCheckTheContractualTypeAreaTextDisplayed = function (text) {
 
 exports.editCheckTheContractualTypeAreaTextNotDisplayed = function (text) {
     it("Edit check the contractual type area text value is not displayed", function () {
-        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[name='contRightTypes'] div.control-label")).getText().then(function (promise) {
             console.log("Deal scope contractual right types text value is : " + promise);
             expect(promise).not.toContain(text);
         });
@@ -1301,10 +1301,10 @@ exports.editCheckTheContractualTypeAreaTextNotDisplayed = function (text) {
 
 exports.editCheckTheContractualTypeAreaErrorMessageMandatoryRightSelected = function (text) {
     it("Edit check the contractual type area error message displayed at least one right selected", function () {
-        browser.driver.findElement(By.css("div[data-ng-show='contRightTypes.$error.crtRequire']")).getText()
+        browser.driver.findElement(By.css(".text-error")).getText()
             .then(function (promise) {
                 console.log("Deal scope contractual right types error message mandatory right is : " + promise);
-                expect(promise).toEqual("At least one contractual right type must be selected in order to save this scope");
+                expect(promise).toContain("Required fields are missing or invalid. Please resolve errors.");
             });
     });
 };
