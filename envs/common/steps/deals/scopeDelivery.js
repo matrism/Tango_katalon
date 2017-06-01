@@ -59,7 +59,7 @@ exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
     it(
         'Click scope delivery checkbox #' + (scopeIndex + 1) +
         ' for contribution #' + (contributionIndex + 1), function () {
-            if(scopeIndex==1) { scopeIndex= 2; contributionIndex=2;}
+           //if(scopeIndex==1) { scopeIndex= 1; contributionIndex=1;}
             pages.scopeDelivery.clickScopeDeliveryCheckbox(
                 contributionIndex, scopeIndex
             );

@@ -126,6 +126,7 @@ exports.recordFieldValue = function(i, fieldName) {
 
 exports.validateRecordField = function(i, fieldName, value) {
     expect(exports.recordFieldValue(i, fieldName)).toBe(value);
+
 };
 
 exports.validateRecordType = function(i, value) {
@@ -185,7 +186,7 @@ exports.validateWriterDesignationCode = function(i, value) {
 };
 
 exports.registrationRecipientTypeahead = function () {
-    return element(by.model('dataHolder.currentRecipient'));
+    return element(by.model('tgOrgTypeaheadModel'));
 };
 
 exports.registrationRecipientSearch = function () {
@@ -194,7 +195,7 @@ exports.registrationRecipientSearch = function () {
 
 exports.registrationRecipientSearchResults = function () {
     return exports.registrationRecipientTypeahead().all(by.repeater(
-        '$match in $dataSet.queried.matches'
+        '$match in $dataSet.queried.matches | limitTo:$dataSet.queried.limit'
     ));
 };
 

@@ -166,8 +166,8 @@ exports.selectDealSearchResultByIndex = function (i) {
 };
 
 exports.editModeContributionRows = function () {
-    return element.all(by.repeater(
-        'dealScopeLink in dealLink.dealScopeLinks.$getItems()'
+    return element.all(by.css(
+        '[ui-view="creatorContributionView"] [ng-repeat="creatorLink in tgModularEditModel.creatorLinks.$getItems() | orderBy:[\'creator.name.presentationName\']"]'
     ));
 };
 
@@ -202,8 +202,8 @@ exports.scopeDeliveryCheckboxes = function (i) {
 };
 
 exports.scopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
-    //return exports.scopeDeliveryCheckboxes(contributionIndex).get(scopeIndex);
-    return exports.scopeDeliveryCheckboxes(contributionIndex);
+    return exports.scopeDeliveryCheckboxes(contributionIndex).get(scopeIndex);
+    //return exports.scopeDeliveryCheckboxes(contributionIndex);
 };
 
 exports.checkboxEnabled = function (iContribution, iScope) {
@@ -230,6 +230,8 @@ exports.validateCheckboxState = function (iContribution, iScope, expected) {
 };
 
 exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
+
+
     var element = exports.scopeDeliveryCheckbox(
         contributionIndex, scopeIndex
     );
@@ -240,9 +242,11 @@ exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
 
     browser.wait(ExpectedConditions.elementToBeClickable(element));
 
+
     return element.click().then(function () {
         pages.base.waitForAjax();
     });
+
 };
 
 exports.modularEditContainer = function () {

@@ -56,7 +56,7 @@ exports.activityGroup = (function() {
         var target = activityGroup.targets[targetGroupName || 'latest'];
 
         return target.container.element(by.binding(
-            ' activitiesGroup.registration.name '
+            '::activitiesGroup.registration.name'
         ));
     };
 
