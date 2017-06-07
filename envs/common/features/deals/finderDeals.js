@@ -6,7 +6,7 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'finder', 'regression'];
+exports.commonFeatureTags = ['deals', 'finder', 'regression','ts-357'];
 
 exports.feature = [
     {
@@ -33,6 +33,7 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.base.sleep(2000);
             steps.deal.goToFinderDealTermsTabDetails();
             steps.finderDeal.clickOnGeneralTermsFinderDeal();
             steps.finderDeal.editGeneralTermsFinderDeal();
@@ -82,6 +83,7 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.base.sleep(2000);
             steps.deal.goToFinderDealTermsTabDetails();
             steps.finderDeal.clickOnGeneralTermsFinderDeal();
             steps.finderDeal.editGeneralTermsFinderDeal();
@@ -120,6 +122,7 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.base.sleep(2000);
             steps.deal.goToFinderDealTermsTabDetails();
             steps.finderDeal.clickOnGeneralTermsFinderDeal();
             steps.finderDeal.editGeneralTermsFinderDeal();
@@ -132,7 +135,7 @@ exports.feature = [
             steps.finderDeal.clickOnFinderWhoIsResponsibleForAdvances();
             steps.finderDeal.clickOnNoWcmRightToPursue();
             steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
-            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            //steps.finderDeal.clickOnGeneralTermsFinderDeal();
             steps.finderDeal.editGeneralTermsFinderDeal();
             steps.finderDeal.clickOnNoPriorAwarenessNotification();
             steps.finderDeal.fillNotifyWithinTheNumberOfDays(number);
@@ -143,10 +146,10 @@ exports.feature = [
             steps.finderDeal.clickOnWcmWhoIsResponsibleForAdvances();
             steps.finderDeal.clickOnYesWcmRightToPursue();
             steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
-            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            //steps.finderDeal.clickOnGeneralTermsFinderDeal();
             steps.finderDeal.validatePriorAwarenessNotificationValue("No");
-            steps.finderDeal.validateNotifyWithinThisNumberOfDaysValue(number + " Days");
-            steps.finderDeal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Days");
+            steps.finderDeal.validateNotifyWithinThisNumberOfDaysValue(number + " Day s");
+            steps.finderDeal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Day s");
             steps.finderDeal.validateAssumedResponseValue("None");
             steps.finderDeal.validateWhoWillDraftDealsValue("WCM");
             steps.finderDeal.validateWhoHasControlToExerciseFutureOptionsValue("Finder");
@@ -176,6 +179,7 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.base.sleep(2000);
             steps.deal.goToFinderDealTermsTabDetails();
             steps.finderDeal.validateTermsByContractPeriodFinderDealTitle();
             steps.finderDeal.validateNumberOfTermsByContractPeriodFinderDealTitle("6");
@@ -186,6 +190,7 @@ exports.feature = [
             steps.finderDeal.validateTooltipsForTermsByContractPeriodI(4, "Future Unexercised");
             steps.finderDeal.editTermsByContractPeriodFinderDeal();
             steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
+            steps.finderDeal.clickOnFoundDealTermsTitle("editmode");
             steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalTooltip();
             steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
             steps.finderDeal.validateMaximumFoundAgreementsWithPreApprovalTooltip();
@@ -197,13 +202,14 @@ exports.feature = [
             steps.finderDeal.validateSignedArtistMaximumAdvancesPayableTooltip();
             steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
             steps.finderDeal.validateAggregateMaximumAdvancesPayableTooltip();
-            steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            steps.finderDeal.clickOnOwnershipTermsTitle("editmode");
             steps.finderDeal.validateAggregateMaximumOnAdvancesTooltip();
             steps.finderDeal.fillAggregateMaximumOnAdvancesField();
             steps.finderDeal.validateFindersOwnerhsipTooltip();
             steps.finderDeal.fillFindersOwnershipField();
             steps.finderDeal.validateWcmsOwnerhsipTooltip();
             steps.finderDeal.fillWmcsOwnershipField();
+            steps.finderDeal.clickOnTheFoundSubmissionsTitle("editmode");
             steps.finderDeal.validateCreatorsFoundSubmissionsTooltip();
             steps.finderDeal.selectRandomCreatorFoundSubmissionField();
             steps.finderDeal.validateSubmissionDateTooltip();
@@ -224,6 +230,7 @@ exports.feature = [
             var number = Math.floor(Math.random() * 1000) + 1;
             var num = Math.floor(Math.random() * 500) + 1;
             var percent = (Math.random() * 100 + 1).toFixed(2);
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
@@ -242,26 +249,29 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.base.sleep(2000);
             steps.deal.goToFinderDealTermsTabDetails();
             steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
             steps.finderDeal.editTermsByContractPeriodFinderDeal();
-            steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
+            //steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(1);
+            steps.finderDeal.clickOnFoundDealTermsTitle("editmode");
             steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
             steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
             steps.finderDeal.fillFindersRecoupmentResponsability();
             steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
             steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
             steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            steps.finderDeal.clickOnOwnershipTermsTitle("editmode");
             steps.finderDeal.fillAggregateMaximumOnAdvancesField();
             steps.finderDeal.fillFindersOwnershipField();
             steps.finderDeal.fillWmcsOwnershipField();
+            steps.finderDeal.clickOnTheFoundSubmissionsTitle("editmode");
             steps.finderDeal.selectRandomCreatorFoundSubmissionField();
             steps.finderDeal.fillSubmissionDateField();
             steps.finderDeal.selectRandomWcmDecisionDropDown();
             steps.finderDeal.selectRandomValueFromFoundDealDropDown();
             steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
             steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
-            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
             steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode(2);
             steps.finderDeal.clickOnFoundDealTermsTitle();
             steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
@@ -290,6 +300,7 @@ exports.feature = [
             var number = Math.floor(Math.random() * 1000) + 1;
             var num = Math.floor(Math.random() * 500) + 1;
             var percent = (Math.random() * 100 + 1).toFixed(2);
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
@@ -308,9 +319,11 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.base.sleep(2000);
             steps.deal.goToFinderDealTermsTabDetails();
             steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
             steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickOnFoundDealTermsTitle("editmode");
             //steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(3);
             steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
             steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
@@ -330,6 +343,7 @@ exports.feature = [
             var number = Math.floor(Math.random() * 1000) + 1;
             var num = Math.floor(Math.random() * 500) + 1;
             var percent = (Math.random() * 100 + 1).toFixed(2);
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillContractPeriodDescription("Description long name added now in this field for multiple long long name name name name 1");
@@ -348,6 +362,7 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+            steps.base.sleep(2000);
             steps.deal.goToFinderDealTermsTabDetails();
             //general terms addition
             steps.finderDeal.clickOnGeneralTermsFinderDeal();
@@ -361,7 +376,7 @@ exports.feature = [
             steps.finderDeal.clickOnFinderWhoIsResponsibleForAdvances();
             steps.finderDeal.clickOnNoWcmRightToPursue();
             steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
-            steps.finderDeal.clickOnGeneralTermsFinderDeal();
+            //steps.finderDeal.clickOnGeneralTermsFinderDeal();
             steps.finderDeal.editGeneralTermsFinderDeal();
             steps.finderDeal.clickOnNoPriorAwarenessNotification();
             steps.finderDeal.fillNotifyWithinTheNumberOfDays(number);
@@ -375,15 +390,18 @@ exports.feature = [
             steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
             steps.finderDeal.editTermsByContractPeriodFinderDeal();
             steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriod(2);
+            steps.finderDeal.clickOnFoundDealTermsTitle("editmode");
             steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
             steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
             steps.finderDeal.fillFindersRecoupmentResponsability();
             steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
             steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
             steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+            steps.finderDeal.clickOnOwnershipTermsTitle("editmode");
             steps.finderDeal.fillAggregateMaximumOnAdvancesField();
             steps.finderDeal.fillFindersOwnershipField();
             steps.finderDeal.fillWmcsOwnershipField();
+            steps.finderDeal.clickOnTheFoundSubmissionsTitle("editmode");
             steps.finderDeal.selectRandomCreatorFoundSubmissionField();
             steps.finderDeal.fillSubmissionDateField();
             steps.finderDeal.selectRandomWcmDecisionDropDown();
@@ -391,17 +409,18 @@ exports.feature = [
             steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
             //modular save
             steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickOnSaveGeneralTermsFinderDeal();
             //validations general terms
             steps.finderDeal.validatePriorAwarenessNotificationValue("No");
-            steps.finderDeal.validateNotifyWithinThisNumberOfDaysValue(number + " Days");
-            steps.finderDeal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Days");
+            steps.finderDeal.validateNotifyWithinThisNumberOfDaysValue(number + " Day s");
+            steps.finderDeal.validateSubmissionDecisionWithinNumberOfDaysValue(number + " Day s");
             steps.finderDeal.validateAssumedResponseValue("None");
             steps.finderDeal.validateWhoWillDraftDealsValue("WCM");
             steps.finderDeal.validateWhoHasControlToExerciseFutureOptionsValue("Finder");
             steps.finderDeal.validateWhoIsResponsibleForAdvancesValue("WCM");
             steps.finderDeal.validateWcmRightToPursueValue("Yes");
             //validations terms by contract period
-            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
             steps.finderDeal.clickContractPeriodNumberIDetailsTermsByContractPeriodViewMode(2);
             steps.finderDeal.clickOnFoundDealTermsTitle();
             steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
