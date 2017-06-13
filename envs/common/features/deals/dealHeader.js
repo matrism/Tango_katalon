@@ -6,13 +6,14 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 },
 
-exports.commonFeatureTags = ['deals', 'header', 'regression', 'dealHeader'];
+exports.commonFeatureTags = ['deals', 'header', 'regression', 'dealHeader','ts-354'];
 
 exports.feature = [
     {
         name: "Create a deal and check the deal header",
         tags: ["header_general"],
-        steps: function(){
+        //steps: function(){
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -65,12 +66,13 @@ exports.feature = [
             steps.headerDeal.checkContractingPartyValue("bmi");
             steps.headerDeal.checkContractingPartyValue("ascap");
 
-        }
+        })
     },
     {
         name: "Create a deal and check the contracting party on deal header",
         tags: ["header_contracting_party"],
-        steps: function(){
+        //steps: function(){
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -102,18 +104,21 @@ exports.feature = [
             steps.headerDeal.checkContractingPartyValue("bruno");
             steps.headerDeal.checkContractingPartyValue("alex");
             steps.headerDeal.checkContractingPartyValue("michael");
-        }
+        })
     },
     {
         name: "Create a deal add/remove artists and check deal header",
         tags: ["header_artist"],
-        steps: function(){
+        //steps: function(){
+        steps: criticalScenario(() => {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
+
             steps.deal.returnDealNumber();
 
             steps.headerDeal.checkArtistText();
@@ -128,7 +133,7 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Ashley, Billy Cogen, Matt Tryner');
+            steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Matt Tryner');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
@@ -136,21 +141,22 @@ exports.feature = [
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Ashley, Billy Cogen, Matt Tryner, Ron WilsonBruce MikeBill LameMichael');
+            steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Matt Tryner, Ron WilsonBruce MikeBill LameMichael');
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Ashley, Billy Cogen, Ron WilsonBruce MikeBill LameMichael');
+            steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Ron WilsonBruce MikeBill LameMichael');
 
-        }
+        })
     },
 
     {
         name: "Create a deal add/edit dates and RTP and check the deal header",
         tags: ["header_rtp_brief_number"],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.fillIntoExecutionDateFieldSpecificYearValue("2014");
             steps.deal.itContinueToNextPage();
@@ -183,12 +189,13 @@ exports.feature = [
             steps.headerDeal.checkContractBriefNumberText();
             steps.headerDeal.checkContractBriefNumberValue();
 
-        }
+        })
     },
     {
         name: "Create a deal and check the deal header signing and last update",
         tags: ["header_signing_last_update"],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             var today = new Date();
             //var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
             if(today.getMonth()<=8){
@@ -227,7 +234,7 @@ exports.feature = [
             steps.headerDeal.checkLastUpdateValue(currentDate);
             
 
-        }
+        })
     },
 
     {

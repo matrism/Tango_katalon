@@ -106,7 +106,8 @@ exports.addScopeTypeAndTerritory = function (contractType, territory) {
 exports.selectCountry = function () {
     it("Select country", function () {
         pages.createDealScope.addTerritoryByTypingToScope();
-        pages.createDealScope.selectRandomCountry();
+        //pages.createDealScope.selectRandomCountry();
+        pages.createDealScope.selectSpecificCountry('Asia');
         pages.createDealScope.waitForAjax();
     });
 };
@@ -968,7 +969,7 @@ exports.checkContractPeriodsAndScopesHeaderTitlePresent = function () {
 
 exports.checkTheContractualTypeAreaTextDisplayed = function (text) {
     it("Check the contractual type area text value displayed", function () {
-        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[ng-form='contRightTypes'] div.control-label")).getText().then(function (promise) {
             console.log("Deal scope contractual right types text value is : " + promise);
             expect(promise).toContain(text);
         });
@@ -977,7 +978,7 @@ exports.checkTheContractualTypeAreaTextDisplayed = function (text) {
 
 exports.checkTheContractualTypeAreaTextNotDisplayed = function (text) {
     it("Check the contractual type area text value is not displayed", function () {
-        browser.driver.findElement(By.css("div[data-name='contRightTypes'] div.control-label")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[ng-form='contRightTypes'] div.control-label")).getText().then(function (promise) {
             console.log("Deal scope contractual right types text value is : " + promise);
             expect(promise).not.toContain(text);
         });
@@ -986,10 +987,12 @@ exports.checkTheContractualTypeAreaTextNotDisplayed = function (text) {
 
 exports.checkTheContractualTypeAreaErrorMessageMandatoryRightSelected = function (text) {
     it("Check the contractual type area error message displayed at least one right selected", function () {
-        browser.driver.findElement(By.css("div[data-ng-show='contRightTypes.$error.crtRequire']")).getText()
+        //browser.driver.findElement(by.css("div[data-ng-show='contRightTypes.$error.crtRequire']")).getText()
+        $$(".text-error").get(0).getText()
             .then(function (promise) {
                 console.log("Deal scope contractual right types error message mandatory right is : " + promise);
-                expect(promise).toEqual("At least one contractual right type must be selected in order to save this scope");
+                //expect(promise).toEqual("At least one contractual right type must be selected in order to save this scope");
+                expect(promise).toContain("Required fields are missing or invalid. Please resolve errors.");
             });
     });
 };
@@ -1014,7 +1017,7 @@ exports.checkTheContractualTypeMasterRightsTextDisplayed = function (text) {
 
 exports.checkTheContractualTypeLimitedTooTextTooltipDisplayed = function () {
     it("Check the contractual type limited too text tooltip value displayed", function () {
-        browser.driver.findElement(By.css("div[data-name='contRightTypes'] label.checkbox i.fa.fa-info-circle.ng-scope")).getAttribute("data-tooltip").then(function (promise) {
+        browser.driver.findElement(By.css("div[ng-form='contRightTypes'] label.checkbox i.fa.fa-info-circle.ng-scope")).getAttribute("tooltip").then(function (promise) {
             console.log("Deal scope contractual right types limited too text tooltip value is : " + promise);
             expect(promise).toEqual("Check this only if the contract limits you to an explicit list of included right types.");
         });

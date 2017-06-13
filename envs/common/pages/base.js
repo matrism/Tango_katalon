@@ -154,7 +154,7 @@ exports.selectDropdownOption = function (element, value, more) {
 };
 exports.selectDropdownOption.standard = function (element, value) {
     element.click();
-    element.element(by.cssContainingText('a', value)).click();
+    element.element(by.cssContainingText('option', value)).click();
 };
 
 exports.selectHeaderDropdownOption = function (element, value, more) {
