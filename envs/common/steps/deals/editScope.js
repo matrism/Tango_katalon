@@ -481,8 +481,6 @@ exports.editFillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () 
                         console.log("We are on the E case");
                         pages.editDealScope.editInFirstPublisherNameField("test");
                         pages.editDealScope.editSelectRandomPublisherNameDropDown();
-                        //pages.editDealScope.editInFirstPublisherNameOwnPercent();
-                        //pages.editDealScope.editInFirstPublisherNameCollectPercent();
                         pages.editDealScope.editInFirstPublisherNameOwnPercentSpecificValue("30");
                         pages.editDealScope.editInFirstPublisherNameCollectPercentSpecificValue("20");
                         break;
@@ -556,6 +554,8 @@ exports.editClickPublisherSharesSetArea = function () {
 exports.editDeleteThePublisherShareSet = function () {
     it("Edit - delete the publisher share set ", function () {
         pages.editDealScope.editDeletePublisherSharesSet();
+        browser.sleep(5000);
+        pages.editDealScope.editConfirmOnDeleteModalDialog();
         pages.editDealScope.waitForAjax();
     });
 };
@@ -601,19 +601,19 @@ exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
 
 exports.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA = function () {
     it("Edit -fill publisher name fields chain i based on publisher type E or PA", function () {
-        browser.driver.findElement(By.css("#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
+        browser.driver.findElement(By.css("#deal-publisher div[name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
             .then(function (promise) {
                 console.log("Publisher type is: " + promise);
                 switch (promise) {
                     case "E":
                         console.log("We are on the E case");
-                        pages.editDealScope.editClearFirstPublisherNameField();
+                        //pages.editDealScope.editClearFirstPublisherNameField();
                         pages.editDealScope.editPublisherNameFieldChainI(1);
                         pages.editDealScope.editSelectRandomPublisherNameDropDownChainI(1);
                         //pages.editDealScope.editPublisherNameOwnPercentFieldChainI(i);
-                        pages.editDealScope.editClearInFirstPublisherNameOwnPercent();
+                        //pages.editDealScope.editClearInFirstPublisherNameOwnPercent();
                         pages.editDealScope.editPublisherNameOwnPercentFieldChainISpecificValue(1, "35");
-                        pages.editDealScope.editClearFirstPublisherNameAMCollectPercent();
+                        //pages.editDealScope.editClearFirstPublisherNameAMCollectPercent();
                         pages.editDealScope.editPublisherNameAMCollectPercentChainISpecificValue(1, "25");
                         //pages.editDealScope.editPublisherNameCollectPercentFieldChainI(i);
                         break;
@@ -1077,11 +1077,11 @@ exports.editSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelNumber
 
 exports.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye = function (i, j, value) {
     it("Edit check society agreement number creator number " + i + " society row number " + j + " contains name " + value, function () {
-        pages.base.scrollIntoView(element(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.society_model']")));
-        browser.driver.findElement(By.css("div.ps-container div[data-ng-repeat='creator in data.model.creators']:nth-child(" + i + ") div[data-ng-repeat='societyAgreementCreator in creator.creator_society_agreement_numbers']:nth-child(" + (j + 1) + ") input[data-ng-model='societyAgreementCreator.society_model']")).getAttribute('value')
+        pages.base.scrollIntoView(element(By.css("div.form-container div[ng-repeat='item in data.model.creatorSocietyAgreements.$getItems() track by item.id']:nth-child(" + i + ") div[ng-repeat='societyAgreementCreator in item.societyAgreements.$getItems() track by societyAgreementCreator.id']:nth-child(" + (j + 1) + ") div[ng-model='tgOrgTypeaheadModel'] input")));
+        browser.driver.findElement(By.css("div.form-container div[ng-repeat='item in data.model.creatorSocietyAgreements.$getItems() track by item.id']:nth-child(" + i + ") div[ng-repeat='societyAgreementCreator in item.societyAgreements.$getItems() track by societyAgreementCreator.id']:nth-child(" + (j + 1) + ") div[ng-model='tgOrgTypeaheadModel'] input")).getAttribute('value')
             .then(function (promise) {
                 console.log("The society agreement number value is : " + promise);
-                //expect(promise).toEqual(value);
+                expect(promise).toEqual(value);
             });
 
     });
@@ -1332,7 +1332,8 @@ exports.editClickOnLimitedToCheckBox = function () {
 
 exports.editCheckPublisherShareSetNameTextValue = function (text) {
     it("Edit check publisher name first line value text is correct ", function () {
-        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id'] div.publisher-row.clearfix.ng-scope:nth-child(2) div.pull-left.ps-name")).getText()
+        var element = pages.editDealScope.checkFirstPublisherNameField(0);
+       element.getText()
             .then(function (promise) {
                 console.log("Publisher share set text value is  is : " + promise);
                 expect(promise.toString().toLowerCase()).toContain(text);
@@ -1415,7 +1416,7 @@ exports.editSelectRandomValueFromCreatorDropDown = function () {
 
 exports.editCheckTextTooltipWorkForHire = function () {
     it("Edit check the text tooltip work for hire ", function () {
-        pages.editDealScope.elems.editWorkForHireTextTooltip.getAttribute("data-tooltip")
+        pages.editDealScope.elems.editWorkForHireTextTooltip.getAttribute("tooltip")
             .then(function (promise) {
                 console.log("Work for hire text tooltip is : " + promise);
                 expect(promise).toEqual("Works created under an employee agreement. The employer is the legally recognized creator of these works.");

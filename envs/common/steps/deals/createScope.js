@@ -455,9 +455,9 @@ exports.selectSpecificPublisherNameDropDownChainI = function (i) {
     });
 };
 
-exports.fillIntoPublisherNameAMCollectFieldChainI = function (i) {
+exports.fillIntoPublisherNameAMCollectFieldChainI = function (i, percent) {
     it("Fill into publisher name AM collect chain i percent random value", function () {
-        pages.createDealScope.fillPublisherNameAMCollectPercentChainI(i);
+        pages.createDealScope.fillPublisherNameAMCollectPercentChainI(i, percent);
     });
 };
 
@@ -562,7 +562,7 @@ exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValue = function (
 
 exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect = function (i, publisherEName, percent, collect) {
     it("Fill publisher name fields chain i based on publisher type E or PA", function () {
-        browser.driver.findElement(By.css("#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
+        browser.driver.findElement(By.css("#deal-publisher div[name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
             .then(function (promise) {
                 console.log("Publisher type is: " + promise);
                 switch (promise) {
@@ -645,10 +645,11 @@ exports.checkUnshareScopeLinkIsDisabled = function () {
     it("Check unshare link is disabled on share scope", function () {
         browser.actions().mouseMove(pages.createDealScope.elems.firstScope).perform();
         browser.actions().mouseMove(pages.createDealScope.elems.shareUnshareDeleteScopeIcon).perform();
-        pages.createDealScope.elems.unshareScopeLink.getAttribute("class").then(function (promise) {
-            console.log("Unshare scope link class is : " + promise);
-            expect(promise).toContain("disabled");
-        });
+        expect(pages.createDealScope.elems.copyScopeLink.isPresent()).toBeFalsy();
+        // pages.createDealScope.elems.unshareScopeLink.getAttribute("class").then(function (promise) {
+        //     console.log("Unshare scope link class is : " + promise);
+        //     expect(promise).toContain("disabled");
+        // });
     });
 };
 
@@ -789,7 +790,7 @@ exports.itAddPublisherShareWithSocietyAwardCredit = function () {
 
 exports.itOverridePublisherShare = function (subPublisherName, subPublisherSelected, territory) {
     describe("Override publisher share set", function () {
-        steps.base.scrollIntoView("Override pss icon ", pages.createDealScope.elems.overridePssIcon);
+        //steps.base.scrollIntoView("Override pss icon ", pages.createDealScope.elems.overridePssIcon);
         steps.createDealScope.clickOnAddOverrideIconPss();
         steps.base.scrollIntoView("Override pss ", pages.createDealScope.elems.subPublisherOverridePssInputField);
         steps.createDealScope.selectSubPublisherOverridePss(subPublisherName, subPublisherSelected);
@@ -1178,8 +1179,8 @@ exports.deleteSharePublisherShareSet = function () {
 
 exports.checkWarningMessageForEditingPublisherSharesScope = function (text) {
     it("Check the warning message when you are trying to edit a shared publisher share scope ", function () {
-        pages.base.scrollIntoView(element(By.css("div[data-ng-form='pubShareSetForm'] div.validation-message-text.ng-binding")));
-        browser.driver.findElement(By.css("div[data-ng-form='pubShareSetForm'] div.validation-message-text.ng-binding")).getText()
+        pages.base.scrollIntoView(element(By.css("div[ng-form='pubShareSetForm'] div.validation-message-text.ng-binding")));
+        browser.driver.findElement(By.css("div[ng-form='pubShareSetForm'] div.validation-message-text.ng-binding")).getText()
             .then(function (promise) {
                 console.log("The warning text displayed is : " + promise);
                 expect(promise).toEqual(text);
@@ -1195,7 +1196,8 @@ exports.editPublisherShareSetArea = function () {
 
 exports.checkPublisherShareSetNameTextValue = function (text) {
     it("Check publisher name first line value text is correct ", function () {
-        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] div[data-ng-repeat='chain in modularEditModels.model._chains track by chain.id'] div.publisher-row.clearfix.ng-scope:nth-child(2) div.pull-left.ps-name")).getText()
+        var element = pages.editDealScope.checkFirstPublisherNameField(0);
+        element.getText()
             .then(function (promise) {
                 console.log("Publisher share set text value is  is : " + promise);
                 expect(promise.toString().toLowerCase()).toContain(text);
@@ -1205,7 +1207,7 @@ exports.checkPublisherShareSetNameTextValue = function (text) {
 
 exports.checkSocietyAwardCreditNotDisplayedOnPss = function () {
     it("Check that society award credits not present into publisher share set ", function () {
-        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets']")).getText()
+        browser.driver.findElement(By.css("div[tg-modular-edit-id='publisherShareSetModularEdit']")).getText()
             .then(function (promise) {
                 console.log("Check society award credit text not present into pss is is : " + promise);
                 expect(promise).not.toContain("Society Award Credit:");
@@ -1215,7 +1217,7 @@ exports.checkSocietyAwardCreditNotDisplayedOnPss = function () {
 
 exports.checkSocietyAwardCreditDisplayedOnPss = function () {
     it("Check that society award credits not present into publisher share set ", function () {
-        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets']")).getText()
+        browser.driver.findElement(By.css("div[tg-modular-edit-id='publisherShareSetModularEdit']")).getText()
             .then(function (promise) {
                 console.log("Check society award credit text present into pss is : " + promise);
                 expect(promise).toContain("Society Award Credit:");
@@ -1225,7 +1227,7 @@ exports.checkSocietyAwardCreditDisplayedOnPss = function () {
 
 exports.checkNoSocietyAwardCreditPssOptionSelected = function () {
     it("Check that no society award credits option is selected ", function () {
-        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)")).getAttribute("class")
+        browser.driver.findElement(By.css("div[tg-modular-edit-id='publisherShareSetModularEdit'] button[ng-model='tgModularEditModel.societyAwardCredit']:nth-child(2)")).getAttribute("class")
             .then(function (promise) {
                 console.log("Society award credit no button class is : " + promise);
                 expect(promise).toContain("active");
@@ -1236,7 +1238,7 @@ exports.checkNoSocietyAwardCreditPssOptionSelected = function () {
 
 exports.checkSocietyAwardCreditPssTextTooltip = function () {
     it("Check that society award credits not present into publisher share set ", function () {
-        browser.driver.findElement(By.css("div[data-tg-modular-edit-id='publisherShareSets'] #deal-publisher div.ng-scope div.control-group.publisher-share label i")).getAttribute("data-tooltip")
+        browser.driver.findElement(By.css("div[tg-modular-edit-id='publisherShareSetModularEdit'] #deal-publisher div.ng-scope div.control-group.publisher-share label i")).getAttribute("tooltip")
             .then(function (promise) {
                 console.log("Society award credit pss text tooltip is : " + promise);
                 expect(promise).toEqual("By choosing \"yes\" you are indicating the ability to register with ownership—particular to deal type, on such admin deals—for the purpose of receiving society awards.");
@@ -1264,7 +1266,7 @@ exports.selectRandomValueFromCreatorDropDown = function () {
 
 exports.checkTextTooltipWorkForHire = function () {
     it("Check the text tooltip work for hire ", function () {
-        pages.createDealScope.elems.workForHireTextTooltip.getAttribute("data-tooltip")
+        pages.createDealScope.elems.workForHireTextTooltip.getAttribute("tooltip")
             .then(function (promise) {
                 console.log("Work for hire text tooltip is : " + promise);
                 expect(promise).toEqual("Works created under an employee agreement. The employer is the legally recognized creator of these works.");
