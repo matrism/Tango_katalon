@@ -100,6 +100,7 @@ if (pages.editDealContractPeriod === undefined) {
 
         selectTheContractPeriodNumberI: function (i) {
             browser.driver.findElement(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(" + i + ")")).click();
+            //browser.driver.findElement(By.css("[ui-view='cpList'] ul.deal-list:nth-child("+ i +")")).click();
         },
 
         checkTheContractPeriodNumberIIsDisplayed: function (i) {

@@ -6,29 +6,31 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', "related", 'regression'];
+exports.commonFeatureTags = ['deals', "related", 'regression','ts-360'];
 
-var urlUse = 'http://tango.tango.qa.wmg.com';
+var urlUse = 'http://tango.tango-refactor.tango.dev.wmg.com'; // use for open new tab
 
 exports.feature = [
     {
         name: "Create related deals",
         tags: ["create_related_deals"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
 
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
-            steps.deal.itContinueToNextPage();
-            steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
-            steps.createDealScope.addSpecificScope("Administration");
-            steps.deal.itContinueToNextPage();
-            steps.createDealRtp.fillIntoAcquisitionDescription(1);
-            steps.createDealRtp.selectSpecificScopeNumberIRtpAcquisition(1);
-            steps.deal.itContinueToNextPage();
-            steps.deal.itContinueToNextPage();
-            steps.deal.itContinueToNextPage();
-            steps.deal.saveDeal();
-            steps.deal.waitForDealToBeSaved();
-            steps.deal.returnDealNumber();
+             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
+             steps.deal.itContinueToNextPage();
+             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
+             steps.createDealScope.addSpecificScope("Administration");
+             steps.deal.itContinueToNextPage();
+             steps.createDealRtp.fillIntoAcquisitionDescription(1);
+             steps.createDealRtp.selectSpecificScopeNumberIRtpAcquisition(1);
+             steps.deal.itContinueToNextPage();
+             steps.deal.itContinueToNextPage();
+             steps.deal.itContinueToNextPage();
+             steps.deal.saveDeal();
+             steps.deal.waitForDealToBeSaved();
+             steps.deal.returnDealNumber();
+
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
             steps.relatedDeal.checkRelatedDealsTitle();
@@ -37,6 +39,7 @@ exports.feature = [
             steps.relatedDeal.checkNoRelatedDealsDefined();
 
             //steps.base.openTheNewTab(systemConfig.env.app_url);
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
 
@@ -62,9 +65,10 @@ exports.feature = [
             steps.relatedDeal.checkContractingPartyDropDownWithNoResult();
             steps.relatedDeal.clearIntoContractingPartiesField();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(2);
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("1982");
             steps.deal.itContinueToNextPage();
@@ -74,7 +78,6 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
             steps.base.focusOnNewOpenedTab(0);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
             steps.relatedDeal.checkContractTypeValueRowNumberI("Administration", 1);
@@ -83,10 +86,10 @@ exports.feature = [
             steps.relatedDeal.checkRelationshipValueRowNumberI("Select One", 1);
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
 
-            steps.relatedDeal.checkContractTypeValueRowNumberI("—", 2);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("—", 2);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("—", 2);
-            steps.relatedDeal.checkRelationshipValueRowNumberI("—", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("--", 2);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("--", 2);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 2);
+            steps.relatedDeal.checkRelationshipValueRowNumberI("--", 2);
 
             steps.relatedDeal.checkDeleteRelationshipTooltipRowNumberI(1);
             steps.relatedDeal.deleteRelationshipRowNumberI(1);
@@ -96,10 +99,10 @@ exports.feature = [
 
             steps.deal.goToRelatedDealsGeneralTabDetails();
             steps.relatedDeal.clickOnAddRelatedDealLink();
-            steps.relatedDeal.checkContractTypeValueRowNumberI("—", 1);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("—", 1);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("—", 1);
-            steps.relatedDeal.checkRelationshipValueRowNumberI("—", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("--", 1);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("--", 1);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+            steps.relatedDeal.checkRelationshipValueRowNumberI("--", 1);
 
             steps.base.focusOnNewOpenedTab(0);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
@@ -115,10 +118,10 @@ exports.feature = [
 
             steps.deal.goToRelatedDealsGeneralTabDetails();
             steps.relatedDeal.clickOnAddRelatedDealLink();
-            steps.relatedDeal.checkContractTypeValueRowNumberI("—", 1);
-            steps.relatedDeal.checkDealStatusValueRowNumberI("—", 1);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("—", 1);
-            steps.relatedDeal.checkRelationshipValueRowNumberI("—", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("--", 1);
+            steps.relatedDeal.checkDealStatusValueRowNumberI("--", 1);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
+            steps.relatedDeal.checkRelationshipValueRowNumberI("--", 1);
 
             steps.base.focusOnNewOpenedTab(0);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
@@ -142,6 +145,7 @@ exports.feature = [
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
 
             steps.deal.goToTermsDealTabDetails();
+            steps.base.sleep(2000);
             steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
@@ -177,6 +181,7 @@ exports.feature = [
 
             steps.deal.goToTermsDealTabDetails();
             steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            steps.base.sleep(4000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
@@ -210,7 +215,9 @@ exports.feature = [
 
             steps.base.focusOnNewOpenedTab(0);
 
+            steps.deal.refreshThePage();
             steps.deal.goToTermsDealTabDetails();
+            steps.base.sleep(4000);
             steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Audit / Settlement", "Worldwide");
@@ -230,19 +237,26 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
-            steps.relatedDeal.checkContractTypeValueRowNumberI("AssignmentCo-PublishingProduction Music Miscellaneous ServicesAudit / SettlementSub-Publishing", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / Settlement", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Co-Publishing", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Production Music Miscellaneous Services", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Sub-Publishing", 2);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Assignment", 2);
+
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 2);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 2);
 
             steps.base.closeTheTabByIndex(2);
             steps.base.closeTheTabByIndex(1);
-        }
+        })
     },
 
     {
         name: "Create related finder deals",
         tags: ["related_finder_deal"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
@@ -256,8 +270,10 @@ exports.feature = [
             steps.createDealRtp.checkRightsTermPeriodsHeaderTitlePresent();
             steps.finderDeal.checkFinderDealsHeaderTitlePresent();
 
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
+
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -284,7 +300,7 @@ exports.feature = [
 
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
@@ -292,11 +308,11 @@ exports.feature = [
             steps.editDealScope.editSaveScopeChanges();
 
             steps.base.focusOnNewOpenedTab(1);
-            steps.deal.refreshThePage();
+            //steps.deal.refreshThePage();
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
-            steps.relatedDeal.checkContractTypeValueRowNumberI("Purchase", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Finder", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
 
@@ -311,8 +327,10 @@ exports.feature = [
             steps.editDealGeneral.editExistingContractingParty("ascap");
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
 
+            steps.deal.refreshThePage();
             steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            steps.base.sleep(2000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
@@ -328,7 +346,7 @@ exports.feature = [
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 1);
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(2);
 
@@ -368,7 +386,7 @@ exports.feature = [
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
 
             steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Audit / Settlement", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
@@ -395,7 +413,10 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
-            steps.relatedDeal.checkContractTypeValueRowNumberI("AssignmentCo-PublishingFinderAudit / SettlementSub-Publishing", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Co-Publishing", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / Settlement", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Assignment", 1);
+            steps.relatedDeal.checkContractTypeValueRowNumberI("Sub-Publishing", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 1);
 
@@ -404,15 +425,20 @@ exports.feature = [
             steps.deal.goToFinderDealTermsTabDetails();
             steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
             steps.finderDeal.editTermsByContractPeriodFinderDeal();
+            steps.finderDeal.clickOnFoundDealTermsTitle("editmode");
             steps.finderDeal.fillMaximumFoundAgreementsWithoutPreApprovalContractPeriodI();
             steps.finderDeal.fillMaximumFoundAgreementWithPreApprovalContractPeriodI();
             steps.finderDeal.fillFindersRecoupmentResponsability();
             steps.finderDeal.fillNonSignedArtistMaximumAdvancesPayable();
             steps.finderDeal.fillSignedArtistMaximumAdvancesPayable();
             steps.finderDeal.fillAggregateMaximumAdvancesPayable();
+
+            steps.finderDeal.clickOnOwnershipTermsTitle("editmode");
             steps.finderDeal.fillAggregateMaximumOnAdvancesField();
             steps.finderDeal.fillFindersOwnershipField();
             steps.finderDeal.fillWmcsOwnershipField();
+
+            steps.finderDeal.clickOnTheFoundSubmissionsTitle("editmode");
             steps.finderDeal.selectRandomCreatorFoundSubmissionField();
             steps.finderDeal.fillSubmissionDateField();
             steps.finderDeal.selectRandomWcmDecisionDropDown();
@@ -420,7 +446,7 @@ exports.feature = [
             steps.finderDeal.fillFindersRecoupmentResponsabilityOverride();
             steps.finderDeal.clickOnSaveTermsByContractPeriodFinderDeal();
 
-            steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
+            //steps.finderDeal.clickOnTermsByContractPeriodFinderDeal();
             steps.finderDeal.clickOnFoundDealTermsTitle();
             steps.finderDeal.validateMaximumFoundAgreementsWithoutPreApprovalValue();
             steps.finderDeal.validateMaximumFoundAgreementsWithPreApprovalValue();
@@ -432,6 +458,7 @@ exports.feature = [
 
             steps.base.focusOnNewOpenedTab(1);
             steps.deal.refreshThePage();
+            steps.base.sleep(1000);
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
@@ -441,14 +468,16 @@ exports.feature = [
             steps.base.closeTheTabByIndex(3);
             steps.base.closeTheTabByIndex(2);
             steps.base.closeTheTabByIndex(1);
-        }
+        })
     },
 
 
     {
         name: "Create related deals",
         tags: ["multiple_related_deal"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("2004");
             steps.deal.itContinueToNextPage();
@@ -470,7 +499,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(2);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -482,7 +511,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(3);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -495,7 +524,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(4);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -508,7 +537,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(5);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -522,7 +551,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(6);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -535,7 +564,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(7);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -547,7 +576,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(8);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -561,7 +590,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(9);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -574,7 +603,6 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
-
 
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(10);
@@ -589,7 +617,6 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(11);
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -600,18 +627,15 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
             steps.base.focusOnNewOpenedTab(0);
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
-
 
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(4);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 1);
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(1);
             steps.relatedDeal.clickOnSaveRelatedDeal();
-
 
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(11);
@@ -632,13 +656,11 @@ exports.feature = [
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(4);
             steps.relatedDeal.clickOnSaveRelatedDeal();
 
-
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(2);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 5);
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(5);
             steps.relatedDeal.clickOnSaveRelatedDeal();
-
 
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(3);
@@ -646,13 +668,11 @@ exports.feature = [
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(6);
             steps.relatedDeal.clickOnSaveRelatedDeal();
 
-
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(8);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 7);
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(7);
             steps.relatedDeal.clickOnSaveRelatedDeal();
-
 
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(5);
@@ -660,13 +680,11 @@ exports.feature = [
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(8);
             steps.relatedDeal.clickOnSaveRelatedDeal();
 
-
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(7);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 9);
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(9);
             steps.relatedDeal.clickOnSaveRelatedDeal();
-
 
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(10);
@@ -674,20 +692,18 @@ exports.feature = [
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(10);
             steps.relatedDeal.clickOnSaveRelatedDeal();
 
-
             steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.focusOnNewOpenedTab(9);
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDealsRowJ(0, 11);
             steps.relatedDeal.selectRandomValueFromRelationshipDropDown(11);
             steps.relatedDeal.clickOnSaveRelatedDeal();
 
-
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 2);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982", 2);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982-01", 2);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 3);
-            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982-01", 3);
+            steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982", 3);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 4);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1982-07", 4);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 5);
@@ -704,12 +720,14 @@ exports.feature = [
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("1983-04-11", 10);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 11);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("None specified", 11);
-        }
+        })
     },
     {
         name: "Add related deals",
         tags: ["add_related_deals"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriod();
@@ -759,6 +777,6 @@ exports.feature = [
                 steps.relatedDeal.selectRandomValueRelationshipDropDown();
             });
             steps.relatedDeal.clickOnSaveRelatedDeal();
-        }
+        })
     }
 ];
