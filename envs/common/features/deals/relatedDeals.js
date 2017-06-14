@@ -146,7 +146,7 @@ exports.feature = [
 
             steps.deal.goToTermsDealTabDetails();
             steps.base.sleep(2000);
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
@@ -180,7 +180,7 @@ exports.feature = [
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
 
             steps.deal.goToTermsDealTabDetails();
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
             steps.base.sleep(4000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
@@ -218,7 +218,7 @@ exports.feature = [
             steps.deal.refreshThePage();
             steps.deal.goToTermsDealTabDetails();
             steps.base.sleep(4000);
-            steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
+            //steps.deal.goToContractPeriodsAndScopesTermsTabDetails();
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Audit / Settlement", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
