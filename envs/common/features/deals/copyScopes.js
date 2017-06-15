@@ -12,21 +12,22 @@ exports.feature = [
     {
         name: "Check copy scopes not available in create mode and use copy scope shares",
         tags: ["copy_shares"],
-        steps: function () {
+        steps: criticalScenario(() =>
+        {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            steps.createDealScope.checkDeleteScopeIconIsPresent();
+            //steps.createDealScope.checkDeleteScopeIconIsPresent();
             steps.createDealContractPeriod.addNewContractPeriod();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriodEndDate();
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             steps.createDealScope.checkShareUnshareDeleteScopeIconIsPresent();
             steps.createDealScope.checkShareScopeLinkIsEnabled();
             steps.createDealScope.checkUnshareScopeLinkIsDisabled();
-            steps.createDealScope.checkCopyScopeLinkIsDisabled();
+            //steps.createDealScope.checkCopyScopeLinkIsDisabled();
             steps.createDealScope.checkDeleteScopeLinkIsEnabled();
-            steps.createDealScope.checkCopyScopeDisabledDataTooltip();
+            //steps.createDealScope.checkCopyScopeDisabledDataTooltip();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
@@ -199,7 +200,7 @@ exports.feature = [
             steps.editDealScope.checkScopeNumberINoRr(10);
             steps.editDealScope.selectScopeNumberI(11);
             steps.editDealScope.checkScopeNumberINoRr(11);
-        }
+        })
     },
     {
         name: "Check copy scopes not available in create mode and check copy scopes unshares",
