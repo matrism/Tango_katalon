@@ -20,11 +20,11 @@ if (pages.editDealRtp === undefined) {
             editTheRtpRetentionAreaField: {css: "div[tg-modular-edit-id='retentionModulatEdit']"},
             editTheRtpRetentionIcon: {css: "div[tg-modular-edit-id='retentionModulatEdit'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
             removeTheRtpRetention: {css: "div[tg-modular-edit-id='retentionModulatEdit'] a[ng-click='showDeleteRightsTermPeriodModal(tgModularEditModel)']"},
-            editDescriptionRetentionFromAcquisitionField: {css: "input[data-ng-model='rtp.description']"},
+            editDescriptionRetentionFromAcquisitionField: {css: "input[ng-model='tgModularEditModel.description']"},
             editScopeRetentionFromAcquisitionField: {css: "div[tg-modular-edit-id='retentionModulatEdit'] div[tg-modular-view='edit']"},
-            editScopeRetentionFromAcquisitionInputField: {css: "div[data-ng-model='rtp.deal_scope_id_holders'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editScopeRetentionFromAcquisitionInputField: {css: "div[ng-model='tgModularEditModel.dealScopeIds'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             editAddEndRulesLinkFromRetention: {css: "a[ng-click='showEndRules(tgModularEditModel, tgModularViewMethods.switchToView)']"},
-            editApplyScopeAcquisitionButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[data-ng-click='applySelections($dataSets);']"},
+            editApplyScopeAcquisitionButton: {css: "ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[ng-click='applySelections($dataSets);']"},
             editActualEndDateRetentionFromAcquisitionField: {css: "div[name='endDate'] input[ng-model='date']"},
             editAddPostTermPeriodFromRetentionLink: {css: 'a[ng-click="tgModularEditModel.addPostTermCollectionPeriod()"]'},
             editDurationRtpPostTermCollectionField: {css: "div[tg-modular-edit-id='postTermCollectionModulatEdit'] input[name='retentionPostTermDuration']"},
@@ -189,7 +189,7 @@ if (pages.editDealRtp === undefined) {
                     }
                 });
             pages.editDealRtp.elems.editApplyScopeAcquisitionButton.click();
-            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions ng-scope"))));
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope"))));
         },
 
         selectScopeNumberIFromInput: function (i, j, type) {

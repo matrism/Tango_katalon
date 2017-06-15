@@ -14,7 +14,7 @@ if (pages.deal === undefined) {
             termsHeader: {css: ".nav-tabs>li:nth-child(2)>a"},
             payeesHeader: {css: ".nav-tabs>li:nth-child(3)>a"},
             contractPeriodsScopesHeaderLink: {css: "a[ui-sref='deal.view.terms.cpAndScopes']"},
-            contractPeriodsTitle: {css: "div[data-ng-form='termsForm'] div.row div.span3.column:nth-child(1) h3"},
+            contractPeriodsTitle: {css: "div[ng-form='termsForm'] div.row div.span3.column:nth-child(1) h3"},
             rightsTermPeriodsHeaderLink: {css: "a[ui-sref='deal.view.terms.rtp']"},
             addAnotherRightsTermPeriodLink: {css: "a[ng-click='addRightsTermPeriodSet()']"},
             dealGeneralSummaryHeader: {css: "a[ui-sref='deal.view.general.summary']"},
@@ -24,10 +24,10 @@ if (pages.deal === undefined) {
             dealTermsSummaryHeader: {css: "a[ui-sref='deal.view.terms.cpAndScopes']"},
             finderDealsHeaderLink: {css: "a[ui-sref='deal.view.terms.finderDeals']"},
             finderDealsTitle: {css: "div[data-ng-form='finderDealsForm']"},
-            relatedDealsHeaderLink: {css: "a[data-ng-click='showRelatedDealsPage()']"},
-            relatedDealsTitle: {css: "div.related-section.ng-scope h2"},
-            dealSummaryHeaderLink: {css: "a[data-ng-click='showDealSummaryPage()']"},
-            dealSummaryTitle: {css: "div.FORM.summary-section.clearfix.ng-scope h2"}
+            relatedDealsHeaderLink: {css: "a[ui-sref='deal.view.general.relatedDeals']"},
+            relatedDealsTitle: {css: "div[ng-init='getRelatedDealsView = DealRelatedDealsCtrl.getRelatedDealsView()'] h2"},
+            dealSummaryHeaderLink: {css: "a[ui-sref='deal.view.general.summary']"},
+            dealSummaryTitle: {css: ".page-header h2.indigo"}
         },
 
 

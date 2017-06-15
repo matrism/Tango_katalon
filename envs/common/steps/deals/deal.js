@@ -26,7 +26,7 @@ exports.openDealFromSlot = function (slotId) {
     });
 };
 
-exports.openDealManual = function (DealID) {
+exports.openDealbyID = function (DealID) {
     describe('Open deal (' + DealID + ')', function () {
         var mhs = steps.mainHeader.search;
 
