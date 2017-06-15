@@ -42,9 +42,9 @@ exports.editCheckContractPeriodAdvancesNumberIDetailsDisplayed = function (i, co
     });
 };
 
-exports.editCheckContractPeriodAdvancesDetailsIsNotDisplayed = function (contractPeriod) {
+exports.editCheckContractPeriodAdvancesDetailsIsNotDisplayed = function (i, contractPeriod) {
     it("Check that contract period advances is not displayed on the screen, details of contract period ", function () {
-        browser.driver.findElement(by.css("div[data-ng-form='allAdvancesForm'] div.view-advance.ng-scope h4.advance-status.ng-binding.active")).getText()
+        browser.driver.findElement(by.css("div[ng-form='allAdvancesForm'] div.view-advance.ng-scope:nth-child(" + (i + 2) + ") h4")).getText()
             .then(function (promise) {
                 console.log("Contract periods details active are " + promise);
                 expect(promise).not.toContain(contractPeriod);

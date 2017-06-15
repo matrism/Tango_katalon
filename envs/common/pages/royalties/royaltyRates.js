@@ -287,7 +287,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         workInput: function () {
-            return $('[data-ng-model="activeBatch.workEntries.newWork"] input');
+            return $('div[data-ng-model="activeBatch.workEntries.newWork"] input.tg-typeahead__input.ng-pristine.ng-untouched.ng-valid[placeholder="Search by Title, Creator or Work ID"]');
         },
 
         amountRecievedInput: function () {
@@ -1067,7 +1067,6 @@ if (pages.royaltyRates === undefined) {
             if (sentKeys != "") {
                 var suggestion = $(".tg-typeahead__item-left>strong");
                 workInput.sendKeys(sentKeys);
-                //browser.wait(ExpectedConditions.invisibilityOf(suggestion));
                 browser.wait(ExpectedConditions.visibilityOf(suggestion));
                 suggestion.click();
             }

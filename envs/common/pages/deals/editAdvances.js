@@ -28,16 +28,44 @@ exports.addAdvanceButton = function () {
     return element(by.cssContainingText('button.btn-primary', 'Add Advance'));
 };
 
+exports.contractRow = function (i){
+    return $$("div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)'] div[ng-form='advancesViewForm']").get(i-1);
+};
+
+exports.editContractRow = function(i){
+    var row = exports.contractRow(i);
+
+    return row.$("div.accordion-heading");
+
+};
+
+exports.editAdvanceDetail = function(i){
+    var row = exports.contractRow(i);
+
+    return row.$("i.pull-left.fa.fa-chevron-up:nth-child(2)");
+
+};
+
+
 exports.editClickToSeeTheAdvanceDetailsForContractPeriodNumberI = function (i) {
-    pages.base.scrollIntoView(element(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ")")));
-    browser.driver.findElement(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") accordion")).click();
-    browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") i.pull-left.fa.fa-chevron-up"))));
+    var row = exports.contractRow(i),
+    contract = exports.editContractRow(i),
+    advance_detail = exports.editAdvanceDetail(i);
+
+    pages.base.scrollIntoView(row);
+    contract.click();
+    browser.wait(EC.visibilityOf(advance_detail));
 };
 
 exports.editTheAdvanceDetailsAreaContractPeriodNumberI = function (i) {
-    browser.actions().mouseMove(element(by.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-if='advance.contractPeriodId == cp.id']"))).perform();
-    browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-if='advance.contractPeriodId == cp.id'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i.fa.fa-pencil"))));
-    browser.driver.findElement(By.css("div[ng-form='allAdvancesForm'] div[ng-repeat='cp in dataHolder.availableContractPeriods | filter:filterCpsForAdvancesView(dataHolder.filterCpId)']:nth-child(" + (i + 2) + ") div[ng-if='advance.contractPeriodId == cp.id'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i.fa.fa-pencil")).click();
+    var row = exports.contractRow(i),
+        advance_summary = row.$("div[tg-modular-edit-id='advancesModularEdit']"),
+        button = row.$("div[tg-modular-edit-id='advancesModularEdit'] button[data-ng-click='tgModularViewMethods.switchToEditView()'] i.fa.fa-pencil");
+
+
+    browser.actions().mouseMove(advance_summary).perform();
+    browser.wait(EC.visibilityOf(button));
+    button.click();
 };
 
 exports.saveAdvanceButton = function () {

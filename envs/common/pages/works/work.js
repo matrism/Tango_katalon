@@ -105,7 +105,7 @@ exports.expectSelectedWorkSearchFilterTagToBe = function (i, value) {
 exports.selectWorkSearchFilterTag = function (i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);
-    return pages.base.selectDropdownOption(element, value);
+    return pages.base.selectHeaderDropdownOption(element, value);
 };
 exports.enterWorkSearchTerms = function (value) {
     var element = exports.workSearchTermsInput();

@@ -13,7 +13,9 @@ exports.feature = [
     {
         name: "Create a deal with publisher share set",
         tags: ["filterAdvances"],
-        steps: function(){
+        steps: function()
+        {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -225,6 +227,7 @@ exports.feature = [
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownNotToContainsCp("Contract Period 4");
             steps.editAdvances.editCheckContractPeriodAdvancesNumberIDetailsDisplayed(2, "Contract Period 2");
             steps.editAdvances.editCheckContractPeriodAdvancesNumberIDetailsDisplayed(3, "Contract Period 3");
+            steps.deal.refreshThePage()
 
             //go to terms tab and delete contract period 1 which has advances assigned
             steps.deal.goToTermsDealTabDetails();
@@ -234,11 +237,12 @@ exports.feature = [
             steps.deal.goToTab('Advances');
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(0, "All Advances");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(1, "Contract Period 2");
+            //steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(2, "Contract Period 2");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownNotToContainsCp("Contract Period 1");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownNotToContainsCp("Contract Period 3");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownNotToContainsCp("Contract Period 4");
             steps.editAdvances.editCheckContractPeriodAdvancesNumberIDetailsDisplayed(2, "Contract Period 2");
-            steps.editAdvances.editCheckContractPeriodAdvancesDetailsIsNotDisplayed("Contract Period 1");
+            steps.editAdvances.editCheckContractPeriodAdvancesDetailsIsNotDisplayed(2, "Contract Period 1");
         })
     }
 ];
