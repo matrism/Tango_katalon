@@ -357,10 +357,10 @@ if (pages.organisation === undefined) {
             })
         },
         getEmailDeliveryMethods: function() {
-            return $$('.e2e-method-email'); 
+            return $$('.DELIVERY_METHOD:nth-child(1)');
         },
         getFTPDeliveryMethods: function() {
-            return $$('.e2e-reg-delivery-method .e2e-method-ftp'); 
+            return $$('.DELIVERY_METHOD:not(:nth-child(1)):not(:nth-child(4))');
         },
         getThirdPartyDeliveryMethods: function() {
             return $$('.e2e-method-3rd-party'); 
@@ -369,10 +369,10 @@ if (pages.organisation === undefined) {
             return deliveryMethod.$('.e2e-method-delivery strong.ng-binding');
         },
         sftpDeliveryMethodAddress: function (deliveryMethod) {
-            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.model.host"]');
+            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.deliveryMechanism.ftp.host"]');
         },
         sftpDeliveryMethodPort: function (deliveryMethod) {
-            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.model.port"]');;
+            return deliveryMethod.$('.e2e-method-delivery [ng-if="::deliveryMethod.deliveryMechanism.ftp.port"]');;
         },
         sftpDeliveryMethodUsername: function (deliveryMethod) {
             return deliveryMethod.$('.e2e-method-username .ng-binding');
@@ -537,7 +537,7 @@ if (pages.organisation === undefined) {
         getSFTPDeliveryMethodName: function (deliveryMethod) {
             return this.sfptDeliveryMethodName(deliveryMethod).getText();
         },
-        getSFTPDelivetyMehodAddress: function (deliveryMethod) {
+        getSFTPDeliveryMehodAddress: function (deliveryMethod) {
             return this.sftpDeliveryMethodAddress(deliveryMethod).getText();
         },
         getSFTPDeliveryMethodPort: function (deliveryMethod) {
@@ -571,7 +571,7 @@ if (pages.organisation === undefined) {
             return deliveryMethod.$$('.e2e-method-delivery .ng-binding').first().getText();
         },
         getEmailDeliveryMethodFileFormat: function (deliveryMethod) {
-            return deliveryMethod.$('.e2e-method-file-format .ng-binding').getText();
+            return deliveryMethod.$$('.e2e-method-file-format .ng-binding').first().getText();
         },
         getEmailDeliveryMethodNotification: function (deliveryMethod) {
             return deliveryMethod.$('.e2e-method-notification .ng-binding').getText();
@@ -1159,6 +1159,7 @@ exports.registration = (function () {
 
         delivery.deleteConfirmDialog = function(value) {
             var element = $('.modal-dialog .modal-footer');
+            browser.wait(ExpectedConditions.visibilityOf(element));
             return element.all(
                 by.cssContainingText('button', value)
             ).get(0).click();
@@ -1202,7 +1203,7 @@ exports.registration = (function () {
             return $$('.e2e-method-3rd-party input').get(i);
         };
         delivery.firstThirdPartyRecipientOption = function () {
-            return $$('.e2e-method-3rd-party .tg-typeahead__suggestions').first();
+            return $$('.e2e-method-3rd-party .tg-typeahead__suggestions .tg-typeahead__suggestions-container .tg-typeahead__suggestions-group').first();
         };
 
         delivery.addMethod = function () {

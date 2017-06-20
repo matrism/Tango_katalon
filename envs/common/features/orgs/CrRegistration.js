@@ -23,7 +23,8 @@ exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
         tags: [],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
             using(steps.organisation, function () {
                 this.goToGeneralTab();
@@ -86,6 +87,6 @@ exports.feature = [
                     this.validateProcessedDate(data.cr.date);
                 });
             });
-        }
+        })
     }
 ];
