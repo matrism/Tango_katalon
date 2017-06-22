@@ -66,8 +66,6 @@ if (steps.organisation === undefined) {
         executeRegistrationRun: function (value, date, org) {
             it('Execute Registration Run', function () {
                 browser.wait(ExpectedConditions.visibilityOf(element(By.css('.ACTIVITY-HEADER button:not(.disabled)'))));
-
-                //steps.base.sleep(2000);
                 pages.organisation.registrationCanBeRun().then(function (isVisible) {
                     console.log(isVisible.toString());
                     if (isVisible.toString() == 'true') {
@@ -1191,7 +1189,7 @@ exports.registration.resetDeliveryInfo = function(data) {
                     this.enterThirdPartyRecipient(0, data.thirdParty);
                     steps.base.waitForAjax();
 
-                    steps.base.sleep(1000);
+                    steps.base.sleep(3000);
                     this.selectFirstThirdPartyRecipient();
                     this.deleteRow(4);
 

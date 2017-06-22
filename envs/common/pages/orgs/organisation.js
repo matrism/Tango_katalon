@@ -1159,6 +1159,8 @@ exports.registration = (function () {
 
         delivery.deleteConfirmDialog = function(value) {
             var element = $('.modal-dialog .modal-footer');
+            steps.base.sleep(1000);
+            pages.base.scrollIntoView(element);
             browser.wait(ExpectedConditions.visibilityOf(element));
             return element.all(
                 by.cssContainingText('button', value)

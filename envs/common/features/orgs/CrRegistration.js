@@ -27,6 +27,7 @@ exports.feature = [
         steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
             using(steps.organisation, function () {
+
                 this.goToGeneralTab();
 
                 this.registration.resetDeliveryInfo(data.cr);
@@ -37,7 +38,7 @@ exports.feature = [
 
                 this.executeRegistrationRun(data.cr.view, data.cr.date, data.cr.org);
                 this.confirmRegistrationRun();
-                this.listWorkIdNumberRegRun();
+
                 this.goToRegistrationActivityTab();
                 this.saveRegActivityLastEvent();
                 this.verifyThatWorkIsDelivered();
@@ -61,7 +62,8 @@ exports.feature = [
                 this.validateStatus('Delivered');
             });
 
-            steps.work.goToWorkPageById(fromTestVariable('work id'));
+            //steps.work.goToWorkPageById(fromTestVariable('work id'));
+            steps.work.goToWorkPageById('WW 015080882 00');
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
