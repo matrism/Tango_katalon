@@ -63,7 +63,7 @@ exports.feature = [
             });
 
             //steps.work.goToWorkPageById(fromTestVariable('work id'));
-            steps.work.goToWorkPageById('WW 015080882 00');
+            steps.work.goToWorkPageById('WW 015118099 00');
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
