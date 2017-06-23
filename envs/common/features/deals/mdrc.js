@@ -7,13 +7,13 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'mdrc', "regression"];
+exports.commonFeatureTags = ['deals', 'mdrc', "regression","TS-358"];
 
 exports.feature = [
     {
         name: "Create a deal with incomplete MDRC",
-        tags: ["create", "view"],
-        steps: function () {
+        tags: ["create","view"],
+        steps: function() {
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -45,7 +45,7 @@ exports.feature = [
         {
             name: "Create a deal with deemed complete MDRC",
             tags: ["create"],
-            steps: function () {
+            steps: function() {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -80,7 +80,8 @@ exports.feature = [
         {
             name: "Create a deal with complete MDRC",
             tags: ['create', 'view'],
-            steps: function () {
+            steps: function()
+            {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -113,7 +114,7 @@ exports.feature = [
         {
             name: "Create a deal with multiple types of MDRC",
             tags: ['create', 'view'],
-            steps: function () {
+            steps: function(){
                 var i = 1;
                 var j = 2;
                 var k = 3;
@@ -131,7 +132,7 @@ exports.feature = [
                 steps.editDealContractPeriod.waitForMdrcToBeLoaded();
                 steps.base.scrollIntoView("Mdrc", pages.editDealContractPeriod.elems.mdrcTitle);
                 //validate incomplete MDRC
-                steps.editDealContractPeriod.validateITypeOfMdrcTitle(i, "Incomplete");
+                steps.editDealContractPeriod.validateITypeOfMdrcTitle("Incomplete");
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(i);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(i);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(i);
@@ -145,11 +146,11 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
                 //validate deemed complete MDRC
-                steps.editDealContractPeriod.validateITypeOfMdrcTitle(j, "Deemed Complete");
+                steps.editDealContractPeriod.validateITypeOfMdrcTitle("Deemed Complete");
                 steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI(j);
                 steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI(j);
-                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI(j);
-                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI(j);
+                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI();
+                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI();
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(j);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(j);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(j);
@@ -163,9 +164,9 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(j);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(j);
                 //validate complete MDRC
-                steps.editDealContractPeriod.validateITypeOfMdrcTitle(k, "Complete");
-                steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI(k);
-                steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI(k);
+                steps.editDealContractPeriod.validateITypeOfMdrcTitle("Complete");
+                steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI();
+                steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI();
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(k);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(k);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(k);
@@ -183,7 +184,7 @@ exports.feature = [
         {
             name: "Edit a deal with deemed complete MDRC into an incomplete MDRC",
             tags: ["'edit"],
-            steps: function () {
+            steps: function() {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -230,7 +231,7 @@ exports.feature = [
         {
             name: "Edit a deal with incomplete MDRC into a deemed complete MDRC",
             tags: ["edit"],
-            steps: function () {
+            steps: function() {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -260,8 +261,8 @@ exports.feature = [
                 steps.editDealContractPeriod.validateFirstDeemedCompleteMdrcTitle();
                 steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI(i);
                 steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI(i);
-                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI(i);
-                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI(i);
+                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI();
+                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI();
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(i);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(i);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(i);
@@ -279,7 +280,7 @@ exports.feature = [
         {
             name: "Edit a deal with multiple types of MDRC",
             tags: ['edit'],
-            steps: function () {
+            steps: function() {
                 var i = 1;
                 var j = 2;
                 var k = 3;
@@ -298,7 +299,7 @@ exports.feature = [
                 steps.base.scrollIntoView("Mdrc", pages.editDealContractPeriod.elems.mdrcTitle);
 
                 //validate incomplete MDRC
-                steps.base.scrollIntoView("Edit first MDRC form ", element(by.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(1)")));
+                steps.base.scrollIntoView("Edit first MDRC form ", element(by.css("div[ng-repeat='mdrc in contractPeriod.minimumDeliveryCommitments.$getItems()']:nth-child(1)")));
                 steps.editDealContractPeriod.validateITypeOfMdrcTitle(i, "Incomplete");
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(i);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(i);
@@ -314,12 +315,12 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
 
                 //validate deemed complete MDRC
-                steps.base.scrollIntoView("Second MDRC form", element(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(2)")));
+                steps.base.scrollIntoView("Second MDRC form", element(By.css("div[ng-repeat='mdrc in contractPeriod.minimumDeliveryCommitments.$getItems()']:nth-child(2)")));
                 steps.editDealContractPeriod.validateITypeOfMdrcTitle(j, "Deemed Complete");
                 steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI(j);
                 steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI(j);
-                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI(j);
-                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI(j);
+                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI();
+                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI();
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(j);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(j);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(j);
@@ -334,7 +335,7 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(j);
 
                 //validate complete MDRC
-                steps.base.scrollIntoView("Third MDRC form", element(By.css("div.mdrc-list.minimum-delivery div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(3)")));
+                steps.base.scrollIntoView("Third MDRC form", element(By.css("div[ng-repeat='mdrc in contractPeriod.minimumDeliveryCommitments.$getItems()']:nth-child(3)")));
                 steps.editDealContractPeriod.validateITypeOfMdrcTitle(k, "Complete");
                 steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI(k);
                 steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI(k);
@@ -351,12 +352,16 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(k);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(k);
 
-                //edit incomplete MDRC first form into complete MDRC
-                steps.base.scrollIntoView("MDRC title", pages.editDealContractPeriod.elems.mdrcTitle);
-                steps.editDealContractPeriod.itEditCompleteMdrcContractPeriod(i);
-                steps.editDealContractPeriod.validateITypeOfMdrcTitle(i, "Complete");
-                steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI(i);
-                steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI(i);
+
+            steps.base.scrollIntoView("MDRC title", pages.editDealContractPeriod.elems.mdrcTitle);
+
+
+
+                // steps.editDealContractPeriod.itEditIncompleteMdrcContractPeriod(i);
+
+                steps.editDealContractPeriod.editITypeOfMdrcTitle(i);
+                steps.base.sleep(5000);
+                steps.editDealContractPeriod.validateITypeOfMdrcTitle(i, "Incomplete");
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(i);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(i);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(i);
@@ -370,10 +375,13 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
 
-                //edit deemed complete MDRC second form into incomplete MDRC
-                steps.base.scrollIntoView("Second MDRC form", element(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(2) h3.contract-period-header.ng-binding")));
-                steps.editDealContractPeriod.itEditIncompleteMdrcContractPeriod(j);
-                steps.editDealContractPeriod.validateITypeOfMdrcTitle(j, "Incomplete");
+                //edit incomplete MDRC first form into complete MDRC
+
+                steps.editDealContractPeriod.editITypeOfMdrcTitle(j);
+                steps.base.sleep(5000);
+                steps.editDealContractPeriod.validateITypeOfMdrcTitle(j, "Complete");
+                steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI();
+                steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI();
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(j);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(j);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(j);
@@ -387,14 +395,15 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(j);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(j);
 
+
                 //edit complete MDRC third form into deemed complete MDRC
-                steps.base.scrollIntoView("Third MDRC form", element(By.css("div[data-ng-repeat='mdrc in form.terms.activeCp.minimum_delivery_commitments']:nth-child(3) h3.contract-period-header.ng-binding")));
-                steps.editDealContractPeriod.itEditDeemedCompleteMdrcContractPeriod(k);
+                steps.editDealContractPeriod.editITypeOfMdrcTitle(k);
+                steps.base.sleep(5000);
                 steps.editDealContractPeriod.validateITypeOfMdrcTitle(k, "Deemed Complete");
-                steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI(k);
-                steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI(k);
-                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI(k);
-                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI(k);
+                steps.editDealContractPeriod.validateMdrcDateCompletedLabelValueI();
+                steps.editDealContractPeriod.validateMdrcDateCompletedTextValueI();
+                steps.editDealContractPeriod.validateMdrcShortfallLabelValueI();
+                steps.editDealContractPeriod.validateTheMdrcShortfallTextValueI();
                 steps.editDealContractPeriod.validateMdrcIMinimumLabelValue(k);
                 steps.editDealContractPeriod.validateMdrcIMinimumTextValue(k);
                 steps.editDealContractPeriod.validateMdrcICommercialReleaseLabelValue(k);

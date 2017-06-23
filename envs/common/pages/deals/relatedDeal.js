@@ -7,29 +7,30 @@ var pph = require('../../../../helpers/pph'),
 if (pages.relatedDeal === undefined) {
     pages.relatedDeal = new ftf.pageObject({
         locators: {
-            relatedDealsTitleName: {css: "div.related-section.ng-scope h2"},
-            relatedDealsTitleTooltip: {css: "div.related-section.ng-scope h2 i"},
+            relatedDealsTitleName: {css: "div h2"},
+            relatedDealsTitleTooltip: {css: "div h2 i"},
             contractingPartiesTitleTable: {css: "div.table-header.clearfix div.pull-left.contracting-parties"},
             contractTypeTitleTable: {css: "div.table-header.clearfix div.pull-left.contract-type"},
             dealStatusTitleTable: {css: "div.table-header.clearfix div.pull-left.deal-status"},
             contractExecutionDateTitleTable: {css: "div.table-header.clearfix div.pull-left.execution-date"},
             relationshipTitleTable: {css: "div.table-header.clearfix div.pull-left.relationship"},
             addRelatedDealLink: {css: "p.add-related-deal a"},
-            contractingPartiesField: {css: "#related_deal_typeahead div[ng-class='tgTypeaheadWrapClass']"},
-            contractingPartiesInputField: {css: "#related_deal_typeahead div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
-            editRelatedDealArea: {css: "div[data-tg-modular-edit-id='relatedDeals']"},
-            editRelatedDealIcon: {css: "div[data-tg-modular-edit-id='relatedDeals'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
-            saveRelatedDealButton: {css: "div[data-tg-modular-edit-id='relatedDeals'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save();']"},
-            cancelRelatedDealButton: {css: "div[data-tg-modular-edit-id='relatedDeals'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"}
+            contractingPartiesField: {css: "[ng-model='relatedDeal.deal'] div[ng-class='tgTypeaheadWrapClass']"},
+            contractingPartiesInputField: {css: "[ng-model='relatedDeal.deal'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+            editRelatedDealArea: {css: "div[tg-modular-edit-id='relatedDeals']"},
+            editRelatedDealIcon: {css: "div[tg-modular-edit-id='relatedDeals'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
+            saveRelatedDealButton: {css: "div[tg-modular-edit-id='relatedDeals'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
+            cancelRelatedDealButton: {css: "div[tg-modular-edit-id='relatedDeals'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"}
         },
 
         getRelationshipDropDownButton: function () {
-            return $$("div[data-ng-model='relatedDeal.reason']").$$("div[ng-click='toggleOpenState($event);']").last();
+            return $$("div[ng-model='relatedDeal.relationship']").$$("div[ng-click='toggleOpenState($event);']").last();
 
         },
 
         getRelationshipDropDownListElement: function () {
-            return $$("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope").last();
+            var i = Math.floor(Math.random() * 5) + 1;
+            return $$("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope:nth-child("+ i +")");
 
         },
 
@@ -45,12 +46,12 @@ if (pages.relatedDeal === undefined) {
             pages.relatedDeal.elems.relatedDealsTitleName.getText().
                 then(function (promise) {
                     console.log("Check that related deals title is  " + promise);
-                    expect(promise).toContain("Related Deals");
+                    expect(promise).toContain("RELATED DEALS");
                 });
         },
 
         checkTheRelatedDealsTooltipTitle: function () {
-            pages.relatedDeal.elems.relatedDealsTitleTooltip.getAttribute("data-tooltip").
+            pages.relatedDeal.elems.relatedDealsTitleTooltip.getAttribute("tooltip").
                 then(function (promise) {
                     console.log("Check that related deals tooltip title is  " + promise);
                     expect(promise).toEqual("Defines how other Deals are related to this one.");
@@ -109,12 +110,13 @@ if (pages.relatedDeal === undefined) {
 
         fillIntoTheContractingPartiesFieldSpecificValue: function (contracting) {
             pages.relatedDeal.elems.contractingPartiesField.click();
+            pages.relatedDeal.elems.contractingPartiesInputField.clear();
             pages.relatedDeal.elems.contractingPartiesInputField.sendKeys(contracting);
         },
 
         fillIntoTheContractingPartiesFieldSpecificValueRowNumberI: function (contracting, i) {
-            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") #related_deal_typeahead div[ng-class='tgTypeaheadWrapClass']")).click();
-            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") #related_deal_typeahead div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']")).sendKeys(contracting);
+            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div[ng-class='tgTypeaheadWrapClass']")).click();
+            browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']")).sendKeys(contracting);
         },
 
         clearIntoTheContractingPartiesField: function (ocntracting) {

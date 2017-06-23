@@ -341,7 +341,7 @@ exports.clickOnCancelTermsByContractPeriodTermsFinderDeal = function () {
 
 exports.validatePriorAwarenessNotificationTooltip = function () {
     it("Validate the prior awareness notification tooltip ", function () {
-        pages.finderDeal.elems.priorAwarenessTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.priorAwarenessTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The prior awareness notification tooltip is : " + promise);
                 expect(promise).toContain("Indicates WCM's obligation to inform the Finder of prior");
@@ -352,7 +352,7 @@ exports.validatePriorAwarenessNotificationTooltip = function () {
 
 exports.validateNotifyWithinThisNumberOfDaysTooltip = function () {
     it("Validate the notify within this number of days tooltip ", function () {
-        pages.finderDeal.elems.notifyWithinThisNumberOfDaysTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.notifyWithinThisNumberOfDaysTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The notify within this number of days tooltip is : " + promise);
                 expect(promise).toEqual("Indicates within how many days the Finder must be notified of WCM \"knowledge\" of the Creator(s).");
@@ -362,7 +362,7 @@ exports.validateNotifyWithinThisNumberOfDaysTooltip = function () {
 
 exports.validateSubmissionDecisionWithinNumberOfDaysTooltip = function () {
     it("Validate the submission decision within number of days tooltip ", function () {
-        pages.finderDeal.elems.submissionDecisionWithinNumberOfDaysTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.submissionDecisionWithinNumberOfDaysTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The submission decision within number of days tooltip is : " + promise);
                 expect(promise).toEqual("Indicates within how many days WCM must either Accept or Decline the Finder submission.");
@@ -372,7 +372,7 @@ exports.validateSubmissionDecisionWithinNumberOfDaysTooltip = function () {
 
 exports.validateAssumedResponseTooltip = function () {
     it("Validate the assumed response tooltip ", function () {
-        pages.finderDeal.elems.assumedResponseTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.assumedResponseTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The assumed response tooltip is : " + promise);
                 expect(promise).toEqual("Indicates the default response to the Finder if WCM has not responded to a submission within the specified number of days.");
@@ -382,7 +382,7 @@ exports.validateAssumedResponseTooltip = function () {
 
 exports.validateWhoWillDraftDealsTooltip = function () {
     it("Validate who will draft deals tooltip ", function () {
-        pages.finderDeal.elems.whoWillDraftDealsTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.whoWillDraftDealsTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The who will draft deals tooltip is : " + promise);
                 expect(promise).toEqual("Defines which party (WCM or Finder) is responsible for drafting the agreements for the found deals.");
@@ -392,7 +392,7 @@ exports.validateWhoWillDraftDealsTooltip = function () {
 
 exports.validateWhoHasControlToExerciseFutureOptionsTooltip = function () {
     it("Validate who has control to exercise future options tooltip", function () {
-        pages.finderDeal.elems.whoHasControlToExerciseFutureOptionsTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.whoHasControlToExerciseFutureOptionsTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The who has control to exercise future options tooltip is : " + promise);
                 expect(promise).toEqual("Indicates whether WCM or Finder will have the control over exercising the Option.");
@@ -402,7 +402,7 @@ exports.validateWhoHasControlToExerciseFutureOptionsTooltip = function () {
 
 exports.validateWhoIsResponsibleForAdvancesTooltip = function () {
     it("Validate who is responsible for advances tooltip", function () {
-        pages.finderDeal.elems.whoIsResponsibleForAdvancesTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.whoIsResponsibleForAdvancesTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The who is responsible for advances tooltip is : " + promise);
                 expect(promise).toEqual("Indicates whether WCM or Finder will be responsible for Advances to the Creator(s).");
@@ -412,7 +412,7 @@ exports.validateWhoIsResponsibleForAdvancesTooltip = function () {
 
 exports.validateFindersRightToPursueTooltip = function () {
     it("Validate finders right to pursue tooltip", function () {
-        pages.finderDeal.elems.findersRightToPursueTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersRightToPursueTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The finders right to pursue tooltip is : " + promise);
                 expect(promise).toEqual("Indicates that if WCM declines a submission, then the Finder has a right to pursue any found deal.");
@@ -422,7 +422,7 @@ exports.validateFindersRightToPursueTooltip = function () {
 
 exports.validateWcmRightToPursueTooltip = function () {
     it("Validate wcms right to pursue tooltip", function () {
-        pages.finderDeal.elems.wcmRightToPursueTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.wcmRightToPursueTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The wcms right to pursue tooltip is : " + promise);
                 expect(promise).toEqual("Indicates WCM has a right to pursue any submission to which WCM, the Finder, and Creator(s) could not come to a three-party agreement.");
@@ -432,7 +432,7 @@ exports.validateWcmRightToPursueTooltip = function () {
 
 exports.checkErrorMessageNotifyWithinThisNumberOfDays = function () {
     it("Check the error message displayed for invalid notify within number of days value ", function () {
-        browser.driver.findElement(By.css("div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(2) i.fa.fa-exclamation-triangle.error-icon.consent-status.ng-scope")).getAttribute("data-tooltip").
+        browser.driver.findElement(By.css("[data-ng-form='finderDealGeneralForm'] div.control-group.clearfix:nth-child(2) i.fa.fa-exclamation-triangle.error-icon.consent-status.ng-scope")).getAttribute("tooltip").
             then(function (promise) {
                 console.log("The error message displayed for invalid notify within number of days value is : " + promise);
                 expect(promise).toEqual("0 is not a valid value.");
@@ -442,7 +442,7 @@ exports.checkErrorMessageNotifyWithinThisNumberOfDays = function () {
 
 exports.checkErrorMessageSubmissionDecisionWithinNumberOfDays = function () {
     it("Check the error message displayed for invalid submission decision within number of days value ", function () {
-        browser.driver.findElement(By.css("div[data-ng-show='form.show.finderDeal.general.edit'] div.control-group.clearfix:nth-child(3) i.fa.fa-exclamation-triangle.error-icon.consent-status.ng-scope")).getAttribute("data-tooltip").
+        browser.driver.findElement(By.css("[data-ng-form='finderDealGeneralForm'] div.control-group.clearfix:nth-child(3) i.fa.fa-exclamation-triangle.error-icon.consent-status.ng-scope")).getAttribute("tooltip").
             then(function (promise) {
                 console.log("The error message displayed  for invalid submission decision within number of days value is : " + promise);
                 expect(promise).toEqual("0 is not a valid value.");
@@ -562,7 +562,7 @@ exports.validateTooltipsForTermsByContractPeriodI = function (i, type) {
 
 exports.validateMaximumFoundAgreementsWithoutPreApprovalTooltip = function () {
     it("Validate maximum found agreements without pre approval tooltip", function () {
-        pages.finderDeal.elems.maximumFoundAgreementsWithoutPreApprovalTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.maximumFoundAgreementsWithoutPreApprovalTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The maximum found agreements without pre approval tooltip is : " + promise);
                 expect(promise).toEqual("Maximum number of Deals that a Finder can sign without obtaining WCM approval during a contract period.");
@@ -572,7 +572,7 @@ exports.validateMaximumFoundAgreementsWithoutPreApprovalTooltip = function () {
 
 exports.validateMaximumFoundAgreementsWithPreApprovalTooltip = function () {
     it("Validate maximum found agreements with pre approval tooltip", function () {
-        pages.finderDeal.elems.maximumFoundAgreementsWithPreApprovalTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.maximumFoundAgreementsWithPreApprovalTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The maximum found agreements with pre approval tooltip is : " + promise);
                 expect(promise).toEqual("Total number of Deals that a Finder can sign with WCM during a contract period.");
@@ -582,7 +582,7 @@ exports.validateMaximumFoundAgreementsWithPreApprovalTooltip = function () {
 
 exports.validateFindersRecoupmentResponsabilityTooltip = function () {
     it("Validate finders recoupment responsability tooltip", function () {
-        pages.finderDeal.elems.findersRecoupmentResponsabilityTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersRecoupmentResponsabilityTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The  finders recoupment responsabilitytooltip is : " + promise);
                 expect(promise).toEqual("This is the generally agreed upon Finder's obligation for recoupment of Advances paid to any Found Deal.");
@@ -592,7 +592,7 @@ exports.validateFindersRecoupmentResponsabilityTooltip = function () {
 
 exports.validateNonSignedArtistMaximumAdvancesPayableTooltip = function () {
     it("Validate non signed artist maximum advances payable tooltip", function () {
-        pages.finderDeal.elems.nonSignedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.nonSignedArtistMaximumAdvancesPayableTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The non signed artist maximum advances payable tooltip is : " + promise);
                 expect(promise).toEqual("For non-signed Creator(s) on each found Deal, the Finder can spend up to this defined dollar amount.");
@@ -602,7 +602,7 @@ exports.validateNonSignedArtistMaximumAdvancesPayableTooltip = function () {
 
 exports.validateSignedArtistMaximumAdvancesPayableTooltip = function () {
     it("Validate signed artist maximum advances payable tooltip", function () {
-        pages.finderDeal.elems.signedArtistMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.signedArtistMaximumAdvancesPayableTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The  signed artist maximum advances payable tooltip is : " + promise);
                 expect(promise).toEqual("For signed Creator(s) on each found Deal, the Finder can spend up to this defined dollar amount.");
@@ -612,7 +612,7 @@ exports.validateSignedArtistMaximumAdvancesPayableTooltip = function () {
 
 exports.validateAggregateMaximumAdvancesPayableTooltip = function () {
     it("Validate aggregate maximum advances payable tooltip", function () {
-        pages.finderDeal.elems.aggregateMaximumAdvancesPayableTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.aggregateMaximumAdvancesPayableTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The aggregate maximum advances payable tooltip is : " + promise);
                 expect(promise).toContain("The aggregate defines the overall cap amount for all advances on Finder Deals");
@@ -623,7 +623,7 @@ exports.validateAggregateMaximumAdvancesPayableTooltip = function () {
 
 exports.validateAggregateMaximumOnAdvancesTooltip = function () {
     it("Validate aggregate maximum on advances tooltip", function () {
-        pages.finderDeal.elems.aggregateMaximumOnAdvancesTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.aggregateMaximumOnAdvancesTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The  aggregate maximum on advances tooltip is : " + promise);
                 expect(promise).toEqual("The aggregate defines the ownership percentages in relation to advance amounts paid by WCM (e.g., If aggregated advances exceed $300,000 during the Contract Period, then ownership is split 50/50.)");
@@ -633,7 +633,7 @@ exports.validateAggregateMaximumOnAdvancesTooltip = function () {
 
 exports.validateFindersOwnerhsipTooltip = function () {
     it("Validate finders ownership tooltip", function () {
-        pages.finderDeal.elems.findersOwnershipTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersOwnershipTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The finders ownership tooltip is : " + promise);
                 expect(promise).toEqual("This is the agreed-upon ownership percentage the Finder will have when Advances total the maximum defined.");
@@ -643,7 +643,7 @@ exports.validateFindersOwnerhsipTooltip = function () {
 
 exports.validateWcmsOwnerhsipTooltip = function () {
     it("Validate WCM's ownership tooltip", function () {
-        pages.finderDeal.elems.wcmOwnershipTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.wcmOwnershipTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The WCM's ownership tooltip is : " + promise);
                 expect(promise).toEqual("This is the agreed-upon ownership percentage WCM will have when Advances total the maximum defined.");
@@ -653,7 +653,7 @@ exports.validateWcmsOwnerhsipTooltip = function () {
 
 exports.validateCreatorsFoundSubmissionsTooltip = function () {
     it("Validate creators found submissions tooltip", function () {
-        pages.finderDeal.elems.creatorsFoundSubmissionTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.creatorsFoundSubmissionTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The creator found submission tooltip is : " + promise);
                 expect(promise).toEqual("Creator(s) are the songwriter(s) submitted by the Finder.");
@@ -663,7 +663,7 @@ exports.validateCreatorsFoundSubmissionsTooltip = function () {
 
 exports.validateSubmissionDateTooltip = function () {
     it("Validate submission date tooltip", function () {
-        pages.finderDeal.elems.submissionDateTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.submissionDateTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The submission date tooltip is : " + promise);
                 expect(promise).toEqual("Indicates the date on which the Finder submitted Creator(s) to WCM.");
@@ -673,7 +673,7 @@ exports.validateSubmissionDateTooltip = function () {
 
 exports.validateWcmDecisionTooltip = function () {
     it("Validate WCM decision tooltip", function () {
-        pages.finderDeal.elems.wcmDecisionTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.wcmDecisionTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The WCM decision tooltip is : " + promise);
                 expect(promise).toEqual("Indicates whether WCM will work with the Finder to further the relationship on submitted Creator(s).");
@@ -683,7 +683,7 @@ exports.validateWcmDecisionTooltip = function () {
 
 exports.validateFoundDealTooltip = function () {
     it("Validate found deal tooltip", function () {
-        pages.finderDeal.elems.foundDealTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.foundDealTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The found deal tooltip is : " + promise);
                 expect(promise).toEqual("Provides a reference to Deals that resulted from Finder submissions.");
@@ -693,7 +693,7 @@ exports.validateFoundDealTooltip = function () {
 
 exports.validateFindersRecoupmentResponsabilityOverrideTooltip = function () {
     it("Validate finders recoupment responsability override tooltip", function () {
-        pages.finderDeal.elems.findersRecoupmentResponsabilityOverrideTooltip.getAttribute("data-tooltip").
+        pages.finderDeal.elems.findersRecoupmentResponsabilityOverrideTooltip.getAttribute("tooltip").
             then(function (promise) {
                 console.log("The finders recoupment responsability override tooltip is : " + promise);
                 expect(promise).toEqual("Nullifies the generally agreed upon Finder's obligation for recoupment of Advances paid to this Found Deal.");
@@ -841,23 +841,23 @@ exports.validateFindersRecoupmentResponsabilityOverrideValue = function () {
     });
 };
 
-exports.clickOnFoundDealTermsTitle = function () {
+exports.clickOnFoundDealTermsTitle = function (mode) {
     it("Click on the found deal terms title ", function () {
-        pages.finderDeal.clickOnTheFoundDealTermsTitle();
+        pages.finderDeal.clickOnTheFoundDealTermsTitle(mode);
         pages.finderDeal.waitForAjax();
     });
 };
 
-exports.clickOnOwnershipTermsTitle = function () {
+exports.clickOnOwnershipTermsTitle = function (mode) {
     it("Click on the ownership terms title ", function () {
-        pages.finderDeal.clickOnTheOwnershipTermsTitle();
+        pages.finderDeal.clickOnTheOwnershipTermsTitle(mode);
         pages.finderDeal.waitForAjax();
     });
 };
 
-exports.clickOnTheFoundSubmissionsTitle = function () {
+exports.clickOnTheFoundSubmissionsTitle = function (mode) {
     it("Click on the found submissions title ", function () {
-        pages.finderDeal.clickOnTheFoundSubmissionsTitle();
+        pages.finderDeal.clickOnTheFoundSubmissionsTitle(mode);
         pages.finderDeal.waitForAjax();
     });
 };

@@ -370,7 +370,7 @@ exports.editCheckDealSigningTerritoryFieldGeneralTabIsNotDisabled = function () 
         browser.driver.findElement(By.css("div[name='dealSigningTerritory'] div[ng-class='tgDropdownWrapClass']>div")).getAttribute("class").
         then(function (promise) {
             console.log(" Deal territory class contains disabled text : " + promise);
-            expect(promise).not.toContain("disabled");
+            expect(promise).toContain("disabled");
         });
     });
 };

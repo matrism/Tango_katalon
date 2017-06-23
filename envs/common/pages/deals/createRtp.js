@@ -84,7 +84,7 @@ if (pages.createDealRtp === undefined) {
         selectTheSpecificScopeNumberIRtpAcquisition: function (i) {
             var scope = "Scope " + i;
             var desiredOption;
-            pages.createDealRtp.elems.scopeAcquisitionField.click();
+            asAlways(pages.createDealRtp.elems.scopeAcquisitionField, 'scrollIntoView', 'click');
             pages.createDealRtp.elems.scopeAcquisitionInputField.sendKeys("s");
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))));
             browser.driver.findElements(By.css("div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-container div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))

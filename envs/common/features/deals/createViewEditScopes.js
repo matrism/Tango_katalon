@@ -12,7 +12,8 @@ exports.feature = [
     {
         name: "Create and view deal scopes",
         tags: ["scopeAdded"],
-        steps: function () {
+        steps: function()
+        {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -69,12 +70,14 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.base.sleep(5000);
             steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.createDealScope.saveThePublisherShareSet();
 
             //add second scope to contract period 1
             steps.createDealScope.addScopeTypeAndTerritory("Assignment", "france");
             //share publisher share set from scope 1 to scope 2
+             steps.base.sleep(5000);
             steps.createDealScope.clickOnSharePublisherShareSetIcon();
             steps.createDealScope.clickOnUseThisPublisherShareSetButton();
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
@@ -119,6 +122,7 @@ exports.feature = [
             steps.createDealScope.editPublisherShareSetArea();
             steps.createDealScope.checkWarningMessageForEditingPublisherSharesScope("You are editing a shared publisher shares set. All scopes that are associated with this publishers shares set will be automatically updated with your changes.");
             steps.createDealScope.cancelThePublisherShareSet();
+            steps.base.sleep(5000);
             steps.createDealScope.confirmModalDialogAction();
 
             steps.createDealScope.clickOnSharePublisherShareSetIcon();
@@ -131,7 +135,7 @@ exports.feature = [
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
 
             steps.createDealScope.editPublisherShareSetArea();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
+            steps.editDealScope.editIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
 
@@ -142,7 +146,7 @@ exports.feature = [
             //share publisher share set from scope 4 to scope 6 and delete share
             steps.createDealScope.clickOnSharePublisherShareSetIcon();
             steps.createDealScope.clickOnUseThisPublisherShareSetButtonShareNumberI(2);
-            steps.createDealScope.deleteSharePublisherShareSet();
+            steps.editDealScope.editDeleteThePublisherShareSet();
 
             //check no pss present on scopes 4,5,6
             steps.editDealScope.selectScopeNumberI(1);
@@ -184,13 +188,14 @@ exports.feature = [
             steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(2, "publisher", "33", "21");
             steps.createDealScope.fillIntoPublisherNameAMFieldChainI(2);
             steps.createDealScope.selectSpecificPublisherNameDropDownChainI(2);
-            steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(2);
+            steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(2, '10');
             //add third chain for pss
             steps.createDealScope.clickAddChainLink();
             steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(3, "name", "34", "12");
             steps.createDealScope.fillIntoPublisherNameAMFieldChainI(3);
             steps.createDealScope.selectSpecificPublisherNameDropDownChainI(3);
-            steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(3);
+            steps.createDealScope.fillIntoPublisherNameAMCollectFieldChainI(3, '20');
+            steps.createDealScope.saveThePublisherShareSet();
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
@@ -202,6 +207,7 @@ exports.feature = [
             steps.headerDeal.checkContractBriefNumberValue();
 
             //scope 1,2,3
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINameAndPss(1);
@@ -258,6 +264,8 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 3");
             steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
             //validate unshare success scope 2 no pss
+            steps.deal.refreshThePage();
+            steps.deal.goToTermsDealTabDetails();
             steps.editDealScope.checkScopeNumberINoPss(2);
 
             steps.editDealScope.selectScopeNumberI(1);
@@ -280,9 +288,13 @@ exports.feature = [
             steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
 
             steps.editDealScope.selectScopeNumberI(2);
+            steps.deal.refreshThePage();
+            steps.deal.goToTermsDealTabDetails();
             steps.editDealScope.checkScopeNumberINoPss(2);
 
             steps.editDealScope.selectScopeNumberI(3);
+            steps.deal.refreshThePage();
+            steps.deal.goToTermsDealTabDetails();
             steps.editDealScope.checkScopeNumberINoPss(3);
 
             steps.editDealScope.selectScopeNumberI(1);
@@ -332,7 +344,7 @@ exports.feature = [
     {
         name: "Update PSS on scope, shared scope, delete a shared PSS on a scope",
         tags: ["shareScope"],
-        steps: function () {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -353,6 +365,7 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.base.sleep(5000);
             steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.createDealScope.saveThePublisherShareSet();
 
@@ -399,7 +412,7 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
-
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(3);
 
@@ -409,8 +422,11 @@ exports.feature = [
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
 
             steps.editDealScope.editPublisherSharesSet();
-            steps.editDealScope.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-            steps.editDealScope.editSaveThePublisherShareSetWithModal();
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(1, "test", "35", "25");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("5");
+            steps.createDealScope.saveThePublisherShareSet();
+            steps.base.sleep(5000);
+            steps.createDealScope.confirmModalDialogAction();
 
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
@@ -433,7 +449,7 @@ exports.feature = [
 
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
-            steps.editDealScope.editConfirmModalDialogDirtyCheck();
+            //steps.editDealScope.editConfirmModalDialogDirtyCheck();
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkScopeNumberINoPss(1);
@@ -453,8 +469,10 @@ exports.feature = [
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "20");
 
             steps.editDealScope.editPublisherSharesSet();
-            steps.editDealScope.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-            steps.editDealScope.editSaveThePublisherShareSet();
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(1, "test", "35", "25");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("5");
+            steps.createDealScope.saveThePublisherShareSet();
+            steps.base.sleep(5000);
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "test");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "35");
@@ -466,7 +484,7 @@ exports.feature = [
     {
         name: "Update PSS on scope, shared scope, delete a shared PSS on a scope",
         tags: ["updatePssSharedScope"],
-        steps: function () {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -487,6 +505,7 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.base.sleep(5000);
             steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.createDealScope.saveThePublisherShareSet();
 
@@ -496,7 +515,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
@@ -519,8 +538,11 @@ exports.feature = [
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
 
             steps.editDealScope.editPublisherSharesSet();
-            steps.editDealScope.editAndClearPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-            steps.editDealScope.editSaveThePublisherShareSetWithModal();
+            steps.createDealScope.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainIValuePercentCollect(1, "test", "35", "25");
+            steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("5");
+            steps.createDealScope.saveThePublisherShareSet();
+            steps.base.sleep(5000);
+            steps.createDealScope.confirmModalDialogAction();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             //check pss values updated for scope 1 too
@@ -545,7 +567,7 @@ exports.feature = [
     {
         name: "Delete shared PSS and shared scopes different scenarios",
         tags: ["deletePssOnSharedScope"],
-        steps: function () {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -565,6 +587,7 @@ exports.feature = [
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
             steps.createDealScope.selectSpecificPublisherNameDropDownValue("(53026414)\nwb music corp.");
             steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("30");
+            steps.base.sleep(5000);
             steps.createDealScope.itOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
             steps.createDealScope.saveThePublisherShareSet();
 
@@ -578,6 +601,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
@@ -589,7 +613,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
-            steps.editDealScope.editConfirmModalDialogDirtyCheck();
+            //steps.editDealScope.editConfirmModalDialogDirtyCheck();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
@@ -606,7 +630,7 @@ exports.feature = [
     {
         name: "Delete shared PSS and shared scopes different scenarios",
         tags: ["deleteSharedPssOnSharedScope"],
-        steps: function () {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -645,11 +669,12 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
-
+            steps.base.sleep(5000);
             steps.editDealScope.editClickOnTheShareScopeOption();
+            steps.base.sleep(5000);
             steps.editDealScope.editSelectContractPeriodNumberIOnShareScopeModalDialog(2);
             steps.editDealScope.editClickOnDoneButtonOnShareScopeModalDialog();
 
@@ -657,7 +682,6 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
-            steps.editDealScope.editConfirmModalDialogDirtyCheck();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
@@ -674,7 +698,7 @@ exports.feature = [
     {
         name: "Share PSS with society agreement number",
         tags: ["sharePssWithSocAgreementNumber"],
-        steps: function () {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -705,6 +729,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
@@ -726,7 +751,9 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetCount(" 2");
             steps.createDealScope.mouseOverPublisherShareTextTooltip();
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 1");
-            steps.createDealScope.clickOnSaveSharePublisherShareSetButton();
+            steps.createDealScope.saveThePublisherShareSet();
+            steps.base.sleep(5000);
+            steps.createDealScope.confirmModalDialogAction();
 
             //check society agreement number values for scope 1 on contract period 1
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
@@ -760,6 +787,7 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.base.sleep(5000);
             steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
             steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 1, "ASCAP");
             steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 2, "SOCAN");
@@ -771,6 +799,7 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
+            steps.base.sleep(5000);
             steps.editDealScope.editClickOnAddNewSocietyAgreementNumberI(1);
             steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 1, "ASCAP");
             steps.editDealScope.editCheckSocietyAgreementNumberCreatorNumberISocietyRowNumberJLeftPanelContainsValye(1, 2, "SOCAN");
@@ -791,11 +820,11 @@ exports.feature = [
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
             steps.editDealScope.selectScopeNumberI(1);
-            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("Add Society Agreement Numbers");
+            steps.editDealScope.checkAddOrViewSocietyAgreementNumberText("View Society Agreement Numbers");
         }
     },
 
@@ -803,7 +832,7 @@ exports.feature = [
     {
         name: "Delete shared PSS and shared scopes different scenarios",
         tags: ["creatorWorkForHire"],
-        steps: function () {
+        steps: function() {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -833,6 +862,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
+            steps.base.sleep(5000);
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
@@ -848,6 +878,7 @@ exports.feature = [
             steps.editDealScope.editScopeArea();
 
             //add creators
+            steps.base.sleep(5000);
             steps.editDealScope.editFillIntoCreatorFieldSpecificLetter("test");
             steps.editDealScope.editSelectRandomValueFromCreatorDropDown();
 

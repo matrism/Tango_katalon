@@ -40,7 +40,7 @@ if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
 
-var defaultUserName = 'TangoTest2',
+var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
  //var defaultUserName = 'AfinaAshley',
     //defaultPassword = 'M@hadi3970!@',
@@ -115,6 +115,29 @@ var defaultUserName = 'TangoTest2',
             user_password: password
 
         },
+        staging_test:{
+            urls:{
+                sso: configer.getEnvVarByKey('URL_SSO'),
+                app_url: (
+                    cli['app-url'] || 'http://tango.staging-test.tango.qa.wmg.com/'
+                ),
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://tango.staging-test.tango.qa.wmg.com/'
+                ),
+                cr_url: (
+                    cli['cr-url'] || 'http://tancrsrv.staging-test.tango.qa.wmg.com'
+                ),
+                royalties_url: (
+                    cli['royalties-url'] || 'http://tanroysrv.staging-test.tango.qa.wmg.com'
+                )
+
+            },
+
+            user_name: user,
+            user_password: password
+
+        },
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
@@ -158,6 +181,7 @@ var defaultUserName = 'TangoTest2',
             user_name: user,
             user_password: password
         }
+
     };
 
 if(!config[env]) {

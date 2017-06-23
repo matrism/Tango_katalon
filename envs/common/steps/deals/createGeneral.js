@@ -318,6 +318,7 @@ exports.clickOnNoPerformanceNonTitleBoundIncome = function () {
 
 exports.itFillDealMandatoryFieldsGeneralTab = function () {
     describe("Fill mandatory fields in deals general tab", function () {
+
         //steps.criticalSection.wrap(() => {
             steps.createDealGeneral.goToNewDealPage();
             steps.createDealGeneral.selectDealSigningTerritory();
