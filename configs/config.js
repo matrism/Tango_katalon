@@ -107,6 +107,12 @@ var defaultUserName = 'TangoTest1',
                     cli['service-url'] || cli['app-url'] ||
                     'http://tango.tango-refactor.tango.dev.wmg.com/'
                     //'http://tango.tango.qa.wmg.com/'
+                ),
+                cr_url: (
+                    cli['cr-url'] || 'http://tancrsrv.tango-refactor.tango.dev.wmg.com'
+                ),
+                royalties_url: (
+                    cli['royalties-url'] || 'http://tanroysrv.tango-refactor.tango.dev.wmg.com'
                 )
 
             },

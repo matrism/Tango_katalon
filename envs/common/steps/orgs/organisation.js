@@ -65,9 +65,11 @@ if (steps.organisation === undefined) {
         },
         executeRegistrationRun: function (value, date, org) {
             it('Execute Registration Run', function () {
+                browser.wait(ExpectedConditions.visibilityOf(element(By.css('.ACTIVITY-HEADER button:not(.disabled)'))));
                 pages.organisation.registrationCanBeRun().then(function (isVisible) {
-                    console.log(isVisible);
+                    console.log(isVisible.toString());
                     if (isVisible.toString() == 'true') {
+                        console.log("executed");
                         pages.organisation.clickExecuteRegistrationRunButton();
                     }
                     else {
@@ -808,9 +810,11 @@ if (steps.organisation === undefined) {
                             pages.organisation.getEmailDeliveryMethodEmail(deliveryMethod).then(function (result) {
                                 emailDelivery.email = result;
                             });
+
                             pages.organisation.getEmailDeliveryMethodFileFormat(deliveryMethod).then(function (result) {
                                 emailDelivery.fileFormat = result;
                             });
+
                             pages.organisation.getEmailDeliveryMethodNotification(deliveryMethod).then(function (result) {
                                 emailDelivery.deliveryNotification = result;
                             }).then(function () {
@@ -829,7 +833,7 @@ if (steps.organisation === undefined) {
                             pages.organisation.getSFTPDeliveryMethodName(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodName = result;
                             });
-                            pages.organisation.getSFTPDelivetyMehodAddress(deliveryMethod).then(function (result) {
+                            pages.organisation.getSFTPDeliveryMehodAddress(deliveryMethod).then(function (result) {
                                 sftpDelivery.deliveryMethodAddress = result;
                             });
                             pages.organisation.getSFTPDeliveryMethodPort(deliveryMethod).then(function (result) {
@@ -1185,8 +1189,10 @@ exports.registration.resetDeliveryInfo = function(data) {
                     this.enterThirdPartyRecipient(0, data.thirdParty);
                     steps.base.waitForAjax();
 
+                    steps.base.sleep(3000);
                     this.selectFirstThirdPartyRecipient();
                     this.deleteRow(4);
+
                     this.deleteConfirmDialog('Yes')
 
 
@@ -1207,6 +1213,8 @@ exports.registration.resetDeliveryInfo = function(data) {
                     this.enterPassword(1, data.ack.ftp.password);
                 });
                 this.saveSection();
+                steps.base.waitForAjax();
+                steps.base.sleep(1000);
             });
         });
     });
