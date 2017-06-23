@@ -12,12 +12,12 @@ exports.beforeFeature = function () {
 
 exports.commonFeatureTags = ['deals', 'dealWorksCount', 'regression'];
 
-var urlUse = 'http://tango.tango.qa.wmg.com';
+var urlUse = 'http://tango.tango-refactor.tango.dev.wmg.com';
 
 exports.feature = [
     {
         name: "Deals view work count",
-        tags: ["dealsWork"],
+        tags: ["dealsViewWork"],
         steps: function()
         {
             steps.base.useBlankEntityDataSlot('work', 0);
@@ -356,7 +356,7 @@ exports.feature = [
             steps.deal.refreshThePage();
 
             //create another 99 works and deliver to the same deal
-            for (var i = 2; i <= 100; i++) {
+            for (var i = 2; i <= 20; i++) {
                 steps.base.focusOnNewOpenedTab(1);
                 steps.base.useBlankEntityDataSlot('work', 0);
                 steps.newWork.goToNewWorkPage();
@@ -378,6 +378,7 @@ exports.feature = [
 
             steps.editDealContractPeriod.editAddNewContractPeriod();
             steps.editDealContractPeriod.editFillEndTargetMonths();
+            steps.deal.refreshThePage();
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.editDealScope.editSaveAllChanges();
 
@@ -398,20 +399,20 @@ exports.feature = [
     {
         name: "Deals view additional work count",
         tags: ["additionalDealsWorks"],
-        steps: function() {
+        steps: function(){
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
-            for (var i = 1; i <= 5; i++) {
+            for (var i = 1; i <= 4; i++) {
                 steps.createDealScope.addScopeTypeAndTerritory("Administration", "Europe");
             }
 
             steps.deal.itContinueToNextPage();
             steps.base.scrollIntoView("acquisition ", pages.createDealRtp.elems.acquisitionDescription);
             steps.createDealRtp.fillIntoAcquisitionDescription(1);
-            for (var i = 1; i <= 5; i++) {
+            for (var i = 1; i <= 4; i++) {
                 steps.createDealRtp.selectRandomScopeRtpAcquisitionNumberI(i);
             }
 
@@ -421,7 +422,7 @@ exports.feature = [
 
             steps.base.openTheNewTab(urlUse);
             //create another 5 works and deliver to the same deal
-            for (var i = 1; i <= 5; i++) {
+            for (var i = 1; i <= 4; i++) {
                 steps.base.focusOnNewOpenedTab(1);
                 steps.base.useBlankEntityDataSlot('work', 0);
                 steps.newWork.goToNewWorkPage();
@@ -436,10 +437,11 @@ exports.feature = [
                 steps.work.goToScopeDeliveryTab();
                 steps.scopeDelivery.deliverWork();
                 steps.base.focusOnNewOpenedTab(0);
-                steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope(1);
+                steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope(1, 0, 3);
 
                 steps.base.focusOnNewOpenedTab(0);
                 steps.deal.refreshThePage();
+                steps.base.sleep(5000);
             }
 
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
@@ -450,7 +452,9 @@ exports.feature = [
 
             steps.work.clickOnWorkLinkFromDeliveryWorksPageNumberI(1);
             steps.base.focusOnNewOpenedTab(2);
+            steps.base.sleep(5000);
             steps.work.goToScopeDeliveryTab();
+            steps.base.sleep(5000);
             steps.scopeDelivery.updateScopeDelivery();
 
 
@@ -472,7 +476,7 @@ exports.feature = [
     {
         name: "Deals view filter work count",
         tags: ["filterDealsWorks"],
-        steps: criticalScenario(() => {
+        steps: function() {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
@@ -656,6 +660,6 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        })
+        }
     }
 ];

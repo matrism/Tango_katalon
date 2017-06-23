@@ -1181,11 +1181,11 @@ exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = funct
 
 
 exports.allWorksButton = function () {
-    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)"));
+    return element(by.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(1)"));
 };
 
 exports.conflictingWorksButton = function(){
-    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)"));
+    return element(by.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(2)"));
 };
 
 exports.deleteComponentWork = function (i) {

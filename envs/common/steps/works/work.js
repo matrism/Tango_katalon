@@ -1560,7 +1560,7 @@ exports.checkDefaultFilterConflictWorksForWorkLog = function () {
 
 exports.checkDefaultFilterConflictWorksForWorkLogSelected = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
-        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
+        browser.driver.findElement(By.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(2)")).getAttribute("class")
             .then(function (promise) {
                 console.log("The default filters for work log conflict works is not default " + promise);
                 expect(promise).toContain("active");
