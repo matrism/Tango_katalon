@@ -322,7 +322,7 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
         //steps.criticalSection.wrap(() => {
             steps.createDealGeneral.goToNewDealPage();
             steps.createDealGeneral.selectDealSigningTerritory();
-            if(systemConfig.env.name === 'qa') {
+            if(systemConfig.env.name === 'refactor') {
                 steps.createDealGeneral.fillCompanyCodeField("a");
                 steps.createDealGeneral.waitForContractingPartyDropDown();
                 steps.createDealGeneral.selectRandomCompanyCode();

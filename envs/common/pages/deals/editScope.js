@@ -10,32 +10,32 @@ if (pages.editDealScope === undefined) {
                 editScopeIcon: {css: "div[tg-modular-edit-id='dealScopeModularEdit'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
                 addScopeIcon: {css: 'a[ng-click="addScope(); scrollScopeMenu();"] i[class="column-add-button-icon fa fa-plus"]'},
                 contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
-                editTerritoryField: {css: "[ng-model='tgModularEditModel.dealScopeTerritories'] .tg-typeahead"},
-                editTerritoryInput: {css: "[ng-model='tgModularEditModel.dealScopeTerritories'] input"},
-                editTerritoryDeleteIcon: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] span[ng-click='!$isDisabled() && $removeTag($tag); $event.stopPropagation();']"},
+                editTerritoryField: {css: "div[class='tg-territory__input-container'] div[ng-class='tgTypeaheadWrapClass']"},
+                editTerritoryInput: {css: "div[class='tg-territory__input-container'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
+                editTerritoryDeleteIcon: {css: "div[ng-model='$dataHolder.internalModel'] span[ng-click='!$isDisabled() && $removeTag($tag); $event.stopPropagation();']"},
                 editTerritoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
                 publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
-                publisherSharesSetArea: {css: "div[name='scopeForm'] [ng-controller='DealPssController']"},
-                publisherSharesSetEditIcon: {css: "div[name='scopeForm'] [ng-controller='DealPssController'] .modular-edit-btn"},
+                publisherSharesSetArea: {css: "div[name='scopeForm'] div[tg-modular-edit-id='publisherShareSetModularEdit'] div.DETAIL.ng-scope"},
+                publisherSharesSetEditIcon: {css: "div[name='scopeForm'] div[tg-modular-edit-id='publisherShareSetModularEdit'] button[data-ng-click='tgModularViewMethods.switchToEditView()']"},
                 editPublisherSharesHeaderTitles: {css: "div[name='scopeForm'] div[data-tg-modular-edit-id='publisherShareSets'] div.clearfix.ps-heading"},
                 scope1: {css: "div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']"},
-                editAddPublisherShareSetLink: {css: "div[tg-modular-edit-id='publisherShareSetModularEdit'] div[ng-show='!form.popups.sharePublisherShareSets'] a[ng-click='addChainAndSwitchToEdit()']"},
-                editYesSocietyAwardCreditPss: {css: "#deal-publisher button[ng-model='tgModularEditModel.societyAwardCredit']:nth-child(1)"},
-                editNoSocietyAwardCreditPss: {css: "#deal-publisher button[ng-model='tgModularEditModel.societyAwardCredit']:nth-child(2)"},
-                editFirstPublisherNameField: {css: "#deal-publisher div[ng-form='dealChainsForm'] div[ng-form='chainForm'] div.publisher-share.clearfix div.publisher-row.clearfix.ng-scope div.control-group.pull-left.ps-name.relative.ng-scope.error div[tg-org-typeahead-name='acquirer']:nth-child(1) div[ng-model='tgOrgTypeaheadModel'] input"},
-                editFirstPublisherOwnPercent: {css: "#deal-publisher div[name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"},
-                editFirstPublisherCollectPercent: {css: "#deal-publisher div[name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"},
-                editFirstPublisherNameAMField: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"},
-                editFirstPublisherNameAMCollectPercent: {css: "#deal-publisher div[name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"},
+                editAddPublisherShareSetLink: {css: "div.publisher-share-totals a[data-ng-click='addChain(modularEditModels.model.id, form.terms.activeScope.id);']"},
+                editYesSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(1)"},
+                editNoSocietyAwardCreditPss: {css: "#deal-publisher button[data-ng-model='modularEditModels.model.society_award_credit']:nth-child(2)"},
+                editFirstPublisherNameField: {css: "#deal-publisher div[data-name='dealChainsForm'] div.publisher-row.clearfix div[name='acquirer'] input"},
+                editFirstPublisherOwnPercent: {css: "#deal-publisher div[name='dealChainsForm'] div.publisher-row.clearfix input[name='ownShare']"},
+                editFirstPublisherCollectPercent: {css: "#deal-publisher div[data-name='dealChainsForm'] div.publisher-row.clearfix input[name='collectShare']"},
+                editFirstPublisherNameAMField: {css: "#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"},
+                editFirstPublisherNameAMCollectPercent: {css: "#deal-publisher div[ng-form='chainForm'] div[class='publisher-row clearfix ng-scope am-share'] input[name='collectShare']"},
                 editPublisherNameDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
                 editFirstPublisherTypeEOrPAArrow: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-caret.fa.fa-caret-down"},
                 editFirstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
                 editFirstPublisherTypeValue: {css: "#deal-publisher div[name='dealChainsForm'] div.ng-scope:nth-child(1) div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow"},
                 editFirstPublisherTypeText: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button"},
-                editSavePublisherShareSet: {css: ".EDITOR.ps-editor button[data-ng-click='tgModularViewMethods.save()']"},
-                editCancelPublisherShareSet: {css: "div[tg-modular-edit-id='publisherShareSetModularEdit'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.cancel()']"},
-                editDeletePublisherShareSet: {css: "div[tg-modular-edit-id='publisherShareSetModularEdit'] div.CONTROLS.ng-scope button[data-ng-show='!!tgDeleteButton']"},
-                editAddChainLink: {css: "#deal-publisher a[ng-click='tgModularEditModel.addChain()']"},
+                editSavePublisherShareSet: {css: "div[tg-modular-edit-id='publisherShareSetModularEdit'] div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
+                editCancelPublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
+                editDeletePublisherShareSet: {css: "div[data-tg-modular-edit-id='publisherShareSets'] div.CONTROLS.ng-scope button[data-ng-show='!!tgDeleteButton']"},
+                editAddChainLink: {css: "#deal-publisher a[data-ng-click='addChain(modularEditModels.activeScope.publisher_share_set_id, modularEditModels.activeScope.id)']"},
                 modalDialog: {css: "div.modal-dialog.ng-scope"},
                 confirmDeleteModalDialog: {css: "div.modal-footer button[data-ng-click='ok()']"},
                 cancelModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
@@ -48,7 +48,7 @@ if (pages.editDealScope === undefined) {
                 shareScopeTextIcons: {css: "div[data-ng-show='isPublisherShareSetShared(form.terms.activePublisherShareSet.id)']"},
                 shareScopesDetailsPopup: {css: "div.shared-scope-popup.m-arrow"},
                 shareScopesDetailsPopupContractPeriods: {css: "div[data-ng-show='form.popups.sharedScope'] ul li.ng-scope a"},
-                saveEditScope: {css: "div[tg-modular-edit-id ='dealScopeModularEdit'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
+                saveEditScope: {css: "div[tg-modular-edit-id='dealScopeModularEdit'] div.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
                 saveChanges: {css: "div[ng-hide='stateHolder.isSavingEntity'] button[ng-click='saveFreshlyAddedScope()']"},
                 editShareUnshareDeleteScopeIcon: {css: "div[ng-click='$event.preventDefault()'] i"},
                 editFirstScope: {css: "ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']"},
@@ -186,7 +186,7 @@ if (pages.editDealScope === undefined) {
             editSaveTheScopeChanges: function () {
                 pages.editDealScope.elems.saveEditScope.click();
                 pages.editDealScope.waitForAjax();
-                browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
+                //browser.wait(ExpectedConditions.invisibilityOf(pages.editDealScope.elems.editTerritoryField));
             },
 
             waitForTheScopeNumberIToBeVisible: function (i) {
@@ -320,7 +320,7 @@ if (pages.editDealScope === undefined) {
 
 
             editThePublisherSharesSet: function () {
-                //browser.wait(ExpectedConditions.elementToBeClickable(pages.editDealScope.elems.publisherSharesSetArea));
+                browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.publisherSharesSetArea));
                 pages.base.scrollIntoView(pages.editDealScope.elems.publisherSharesSetArea);
                 pages.editDealScope.elems.publisherSharesSetArea.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.publisherSharesSetEditIcon));
@@ -597,7 +597,7 @@ if (pages.editDealScope === undefined) {
             editSaveThePublisherShareSets: function () {
                 pages.base.scrollIntoView(pages.editDealScope.elems.editSavePublisherShareSet);
                 pages.editDealScope.elems.editSavePublisherShareSet.click();
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("[ng-controller='DealPssController']"))));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[tg-modular-edit-id='publisherShareSetModularEdit'] div[tg-modular-view='detail']"))));
             },
 
             editSaveThePublisherShareSetsWithModal: function () {
@@ -1121,10 +1121,10 @@ if (pages.editDealScope === undefined) {
             },
 
             clickOnTheWorkLinkFromScopeNumberI: function (i) {
-                pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']")));
-                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))));
-                browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))).perform();
-                browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[data-ng-click='onSetActiveScope(sp.id)']:nth-child(" + i + ") a[data-ng-click='switchToWorkLog(form.terms.activeCp.id, sp.id, false)']"))).perform();
+                pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']")));
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))));
+                browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))).perform();
+                browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))).perform();
             },
 
             clickOnTheCreatorSetSocietyAgreementNumberArea: function () {

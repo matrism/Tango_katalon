@@ -72,11 +72,11 @@ exports.dealSearchInput = function (i) {
 };
 
 exports.contractPeriodFilterButton = function () {
-    return element(by.css("div[data-tg-dropdown-selected='selectWorkLogCP();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+    return element(by.css("div[tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow"));
 };
 
 exports.scopeFilterButton= function(){
-  return element(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+  return element(by.css("div[tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow"));
 };
 
 exports.clickOnContractPeriodFilterFromDeliveredWork = function () {
@@ -133,13 +133,13 @@ exports.searchDealsForContribution = function (i, terms) {
 
 exports.contractPeriodDropDownResults = function () {
     pages.base.waitForAjax();
-    return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li"));
+    return element.all(by.css("div[tg-dropdown-selected='selectWorkLogCP();'] ul.dropdown-menu li"));
     //return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
 };
 
 exports.scopeDropDownResults = function () {
     pages.base.waitForAjax();
-    return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li"));
+    return element.all(by.css("div[tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li"));
     //return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
 };
 
@@ -225,6 +225,37 @@ exports.validateCheckboxState = function (iContribution, iScope, expected) {
         default:
             throw new Error('Unknown state: ' + expected);
             break;
+    }
+};
+
+exports.selectDeliveryByText = function(indexMin, contributionIndex, scopeIndex, Text){
+
+    for (var j = indexMin; j <= contributionIndex; j++) {
+        var row = $$('div[ng-repeat="dealScopeLink in dealLink.dealScopeLinks.$getItems()"]').get(contributionIndex),
+            scope = row.$('span[class="overflow scope-delivery-description ng-binding"]');
+
+        scope.getText().then(function (promise) {
+
+            if (Text == promise) {
+
+                var element = exports.scopeDeliveryCheckbox(
+                    contributionIndex, scopeIndex
+                );
+
+                pages.base.scrollIntoView(element);
+
+                pages.base.waitForAjax();
+
+                browser.wait(ExpectedConditions.elementToBeClickable(element));
+
+                return element.click().then(function () {
+                    pages.base.waitForAjax();
+                });
+
+
+            }
+
+        });
     }
 };
 

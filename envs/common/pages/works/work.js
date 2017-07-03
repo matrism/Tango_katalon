@@ -1181,11 +1181,11 @@ exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = funct
 
 
 exports.allWorksButton = function () {
-    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)"));
+    return element(by.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(1)"));
 };
 
 exports.conflictingWorksButton = function(){
-    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)"));
+    return element(by.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(2)"));
 };
 
 exports.deleteComponentWork = function (i) {
@@ -1353,7 +1353,7 @@ exports.goToGeneralTab = function () {
 };
 
 exports.goBackToTheMainPageFromWork = function () {
-    var element = browser.driver.findElement(By.css("a[data-ng-click='stateHolder.workLog.isShown = false;']"));
+    var element = browser.driver.findElement(By.css("a[ui-sref='deal.view.terms.cpAndScopes.cp.scope({cpId: stateHolder.filters.cpId, scopeId: stateHolder.filters.scopeId})']"));
     pages.base.scrollIntoView(element);
     return element.click().then(function () {
         pages.base.waitForAjax();

@@ -113,11 +113,11 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            pages.deal.printTheDealNumber();
+            steps.base.sleep(5000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
-            pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 1);
+            pages.scopeDelivery.clickScopeDeliveryCheckbox(1, 0);
             pages.scopeDelivery.save();
         });
     });
@@ -129,11 +129,13 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex = func
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            pages.deal.printTheDealNumber();
+            steps.base.sleep(5000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
+            // pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
+            // pages.scopeDelivery.clickScopeDeliveryCheckbox(1, 0);
             for (var j = indexMin; j <= indexMax; j++) {
-                pages.scopeDelivery.clickScopeDeliveryCheckbox(0, indexMax);
+                pages.scopeDelivery.clickScopeDeliveryCheckbox(indexMax, 0);
             }
             pages.scopeDelivery.save();
         });
@@ -155,16 +157,17 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithoutSave = functio
 };
 
 
-exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = function (i) {
+exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = function (i, indexMin, indexMax) {
     it("Get deal number created in other tab and use it to work delivery ", function () {
         pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            pages.deal.printTheDealNumber();
+            steps.base.sleep(5000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
+            steps.base.sleep(5000);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
-            pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
+            pages.scopeDelivery.selectDeliveryByText(indexMin, indexMax, 0, 'Scope 1');
             pages.scopeDelivery.save();
         });
     });
@@ -186,7 +189,7 @@ exports.selectFromDeliveredWorkFilterDropDownScopeWithIndexNumberI = function (i
 
 exports.checkTheTotalNumberOfWorks = function (count) {
     it("Check the total number of works ", function () {
-        browser.driver.findElement(By.css("p[data-ng-show='dataHolder.workLogTotals.works'] span")).getText()
+        browser.driver.findElement(By.css("p[ng-show='dataHolder.workLogTotals.works'] span")).getText()
             .then(function (promise) {
                 console.log("Total number of works are " + promise);
                 expect(promise).toEqual(count);
