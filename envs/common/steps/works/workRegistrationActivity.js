@@ -36,6 +36,9 @@ exports.activityGroup.events.validateDeliveries = function () {
     it('Verify That All inner deliveries are delivered', function () {
         using(pages.workRegistrationActivity.activityGroup.events, function () {
             var self = this;
+            var x;
+            if (x == 0){ x=1; }
+            else  { x=0;}
             if (hash.emailDeliveries) {
                 hash.emailDeliveries.forEach(function (emailDelivery, i) {
                     expect(self.getEmailMethodEmail(i)).toBe(emailDelivery.email);
@@ -44,7 +47,7 @@ exports.activityGroup.events.validateDeliveries = function () {
             if (hash.ftpDeliveries) {
                 hash.ftpDeliveries.forEach(function (ftpDelivery, i) {
                     expect(self.getFtpMethodAddress(i)).toBe(ftpDelivery.deliveryMethodAddress);
-                    expect(self.getFtpMethodPort(i)).toContain(ftpDelivery.deliveryMethodPort);
+                    expect(self.getFtpMethodPort(i)).toContain(ftpDelivery.deliveryMethodPort[x]);
                 });
             }
         });

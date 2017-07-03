@@ -6,13 +6,14 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'rightTypes', 'regression'];
+exports.commonFeatureTags = ['deals', 'rightTypes', 'regression','ts-17'];
 
 exports.feature = [
     {
         name: "Create a deal with publisher share set",
         tags: ["createViewContractualRightTypes"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -226,20 +227,21 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             //steps.searchSection.accessSavedDealByNumber('294553');
-
+            steps.deal.waitforSomething(".contract-period-menu-item");
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
 
             steps.editDealScope.checkContractualRightsTypeTextPresent();
             steps.editDealScope.checkContractualRightTypesIncludedOrExcludedTextValuePresent("Publishing Rights are included, but limited to: Print");
 
-        }
+        })
     },
 
     {
         name: "Create a deal with publisher share set",
         tags: ["editContractualRightTypes"],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -251,10 +253,11 @@ exports.feature = [
 
 
             //steps.searchSection.accessSavedDealByNumber('294556');
-
+            steps.deal.waitforSomething(".contract-period-menu-item");
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
+
 
             //check default values for publishing rights
             steps.editDealScope.editCheckTheContractualTypePublishingRightsTextDisplayed("Synch");
@@ -372,7 +375,7 @@ exports.feature = [
             steps.editDealScope.checkContractualRightsTypeTextPresent();
             steps.editDealScope.checkContractualRightTypesIncludedOrExcludedTextValuePresent("All Publishing Rights are included.");
 
-        }
+        })
     }
 
 ];

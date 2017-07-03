@@ -26,8 +26,12 @@ exports.validateDeliveries = function () {
             }
             if (hash.ftpDeliveries) {
                 hash.ftpDeliveries.forEach(function (ftpDelivery, i) {
+                    console.log("ftp" + i)
+                    var x;
+                    if (x == 0){ x=1; }
+                    else  { x=0;}
                     expect(self.getFtpMethodAddress(i)).toBe(ftpDelivery.deliveryMethodAddress);
-                    expect(self.getFtpMethodPort(i)).toContain(ftpDelivery.deliveryMethodPort);
+                    expect(self.getFtpMethodPort(i)).toContain(ftpDelivery.deliveryMethodPort[x]);
                     expect(self.getFtpMethodFileFormat(i)).toBe(ftpDelivery.fileFormat);
                 });
             }

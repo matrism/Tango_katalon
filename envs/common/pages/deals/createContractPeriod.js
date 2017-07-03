@@ -1053,8 +1053,7 @@ if (pages.createDealContractPeriod === undefined) {
                     console.log("The summary text for  end rules for rule number: " + i + " is: " + promise);
                     expect(promise).toContain(text);
                 });
-        }
-
+        },
 
     });
 }

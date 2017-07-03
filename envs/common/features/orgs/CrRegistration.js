@@ -23,9 +23,11 @@ exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
         tags: [],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
             using(steps.organisation, function () {
+
                 this.goToGeneralTab();
 
                 this.registration.resetDeliveryInfo(data.cr);
@@ -36,7 +38,7 @@ exports.feature = [
 
                 this.executeRegistrationRun(data.cr.view, data.cr.date, data.cr.org);
                 this.confirmRegistrationRun();
-                this.listWorkIdNumberRegRun();
+
                 this.goToRegistrationActivityTab();
                 this.saveRegActivityLastEvent();
                 this.verifyThatWorkIsDelivered();
@@ -60,7 +62,8 @@ exports.feature = [
                 this.validateStatus('Delivered');
             });
 
-            steps.work.goToWorkPageById(fromTestVariable('work id'));
+            //steps.work.goToWorkPageById(fromTestVariable('work id'));
+            steps.work.goToWorkPageById('WW 015118099 00');
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
@@ -86,6 +89,6 @@ exports.feature = [
                     this.validateProcessedDate(data.cr.date);
                 });
             });
-        }
+        })
     }
 ];

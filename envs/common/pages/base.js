@@ -156,6 +156,17 @@ exports.selectDropdownOption.standard = function (element, value) {
     element.click();
     element.element(by.cssContainingText('option', value)).click();
 };
+
+exports.selectHeaderDropdownOption = function (element, value, more) {
+    more = more || {};
+    more.dropdownType = more.dropdownType || 'standard';
+    return exports.selectHeaderDropdownOption[more.dropdownType](element, value, more);
+};
+exports.selectHeaderDropdownOption.standard = function (element, value) {
+    element.click();
+    element.element(by.cssContainingText('option', value)).click();
+};
+
 exports.selectDropdownOption.tg = function (element, value) {
     browser.executeScript(function (element) {
         element.click();
@@ -468,11 +479,11 @@ exports.openNewTab = function (url) {
 };
 
 exports.focusOnTheNewOpenedTab = function (i) {
-    return browser.getAllWindowHandles().then(function (handles) {
-        browser.switchTo().window(handles[i]);
-    }).then(function () {
-        return browser.wait(ExpectedConditions.visibilityOf($('body')));
-    });
+        return browser.getAllWindowHandles().then(function (handles) {
+            browser.switchTo().window(handles[i]);
+        }).then(function () {
+            return browser.wait(ExpectedConditions.visibilityOf($('body')));
+        });
 };
 
 exports.duplicateTab = function () {

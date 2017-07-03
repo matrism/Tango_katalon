@@ -42,8 +42,6 @@ if (userConfig.cli) {
 
 var defaultUserName = 'TangoTest1',
     defaultPassword = 'P@ssw0rd78',
- //var defaultUserName = 'AfinaAshley',
-    //defaultPassword = 'M@hadi3970!@',
     user = cli['app-user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
     password = cli['app-password'] || configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword,
     config = {
@@ -107,6 +105,35 @@ var defaultUserName = 'TangoTest1',
                     cli['service-url'] || cli['app-url'] ||
                     'http://tango.tango-refactor.tango.dev.wmg.com/'
                     //'http://tango.tango.qa.wmg.com/'
+                ),
+                cr_url: (
+                    cli['cr-url'] || 'http://tancrsrv.tango-refactor.tango.dev.wmg.com'
+                ),
+                royalties_url: (
+                    cli['royalties-url'] || 'http://tanroysrv.tango-refactor.tango.dev.wmg.com'
+                )
+
+            },
+
+            user_name: user,
+            user_password: password
+
+        },
+        staging_test:{
+            urls:{
+                sso: configer.getEnvVarByKey('URL_SSO'),
+                app_url: (
+                    cli['app-url'] || 'http://tango.staging-test.tango.qa.wmg.com/'
+                ),
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://tango.staging-test.tango.qa.wmg.com/'
+                ),
+                cr_url: (
+                    cli['cr-url'] || 'http://tancrsrv.staging-test.tango.qa.wmg.com'
+                ),
+                royalties_url: (
+                    cli['royalties-url'] || 'http://tanroysrv.staging-test.tango.qa.wmg.com'
                 )
 
             },
@@ -158,6 +185,7 @@ var defaultUserName = 'TangoTest1',
             user_name: user,
             user_password: password
         }
+
     };
 
 if(!config[env]) {

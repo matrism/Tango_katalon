@@ -4,15 +4,16 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['persons', 'payee', 'regression'];
+exports.commonFeatureTags = ['Organisation_payee', 'regression'];
 
 exports.feature = [
     {
         name: "Create multiple organisations as payees",
         tags: ["orgAsPayee"],
-        steps: function () {
+        steps: criticalScenario(() =>
+        {
 
-            //for (var i = 1; i <= 100; i++) {
+            for (var i = 1; i <= 20; i++) {
                 steps.mainHeader.createNewRecord("Organisation");
                 steps.newOrganisation.populateName("org " + i + " TAT payee");
                 steps.newOrganisation.selectOrgType("Publisher");
@@ -20,7 +21,7 @@ exports.feature = [
                 steps.newOrganisation.selectPublisherType("WCM");
                 steps.newPerson.selectAsPayeeOptionToYes();
                 steps.newOrganisation.saveOrganisation();
-            //}
-        }
+            }
+        })
     }
 ];
