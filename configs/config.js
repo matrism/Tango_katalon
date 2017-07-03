@@ -40,7 +40,7 @@ if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
 
-var defaultUserName = 'TangoTest1',
+var defaultUserName = 'TangoTest2',
     defaultPassword = 'P@ssw0rd78',
     user = cli['app-user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
     password = cli['app-password'] || configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword,

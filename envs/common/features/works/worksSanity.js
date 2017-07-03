@@ -1315,12 +1315,12 @@ steps.work.findCurrentlyOpenWorkId();
     steps.workCwrPreview.searchForRegistrationRecipient('ABRAMUS');
 
     steps.workCwrPreview.selectFirstRegistrationRecipientResult();
-
+/*
     steps.workCwrPreview.validateRecordType(0, 'NWR');
 
     steps.workCwrPreview.validateRecordNumber(0);
 
-    /*
+
     steps.workCwrPreview.validateWorkTitle(
         0, 'TEST WORK ' + randomId('mainWork')
     );
@@ -1402,7 +1402,7 @@ steps.work.findCurrentlyOpenWorkId();
     steps.workCwrPreview.validateWorkTitle(
         15, 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork')
     );
-    */
+*/
 })
 },
 
