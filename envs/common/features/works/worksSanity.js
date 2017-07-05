@@ -1410,7 +1410,7 @@ steps.work.findCurrentlyOpenWorkId();
     name: 'Execute registration run',
 
         tags: [
-    'worksSanityExecuteRegistrationRun'
+    'worksSanityExecuteRegistrationRun','execRegRun'
 ],
 
     //steps: function () {
@@ -1418,8 +1418,8 @@ steps.work.findCurrentlyOpenWorkId();
     steps.base.useEntityDataSlot('work', 'mainWork');
 
     using(steps.work, function () {
-        this.goToWorkPage();
-
+        //this.goToWorkPage();
+        steps.work.goToWorkPageById('WW 015121074 00');
         this.goToRegistrationActivityTab();
     });
 
@@ -1431,8 +1431,8 @@ steps.work.findCurrentlyOpenWorkId();
 
     using(steps.organisation, function () {
         this.goToGeneralTab();
-        this.registration.resetDeliveryInfo(data.cr);
-        this.saveOrganisationDeliveryMethods();
+        //this.registration.resetDeliveryInfo(data.cr);
+        //this.saveOrganisationDeliveryMethods();
         //this.saveOrganisationDeliveryMethodsNew(); //New function as the old one has a problem
     });
 
@@ -1440,13 +1440,15 @@ steps.work.findCurrentlyOpenWorkId();
 
     using(steps.organisationRegistrationStack, function () {
         // this area doesn't work b/c new works are added at bottom of list, scheduled works is 4000+ records
-        //using(this.works, function () {
-        //    this.find({ title: 'TEST WORK ' + randomId('mainWork') });
+        using(this.works, function () {
+            steps.base.scrollToBottom(20);
+           //this.find({ title: 'TEST WORK ' + randomId('mainWork') });
+            this.find({ title: 'ME AND MYSELF' });
 
-        //    this.validateErrors('none');
+            this.validateErrors('none');
 
-        //    this.validateStatus('Scheduled');
-        //});
+            this.validateStatus('Scheduled');
+        });
 
         using(this.registrationRun, function () {
             this.execute();
