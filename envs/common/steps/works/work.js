@@ -1600,7 +1600,7 @@ exports.createWork = (data, varName) => {
 
 exports.storeTheWorkIdInTestVariable = function (varName) {
     it("Store Work Id in test variable", function () {
-        var binding = '::getWorkFullCode(work.pristine)',
+        var binding = 'tgWorkHeader.workCode.getFullCode()',
             idBinding = element(by.binding(binding));
 
         browser.wait(EC.visibilityOf(idBinding));

@@ -25,9 +25,15 @@ exports.feature = [
         tags: [],
         //steps: function() {
         steps: criticalScenario(() => {
-            steps.searchSection.accessSavedOrganisationByName(data.cr.org);
-            using(steps.organisation, function () {
+            //create work and deliver it to scope
+            steps.CreateWorkComp.CreateWork(1);
+            steps.ScopeDeliveryComp.scopeDelivery(0,0,374359);
+            //-----------------------------------
 
+
+            steps.searchSection.accessSavedOrganisationByName(data.cr.org);
+
+            using(steps.organisation, function () {
                 this.goToGeneralTab();
 
                 this.registration.resetDeliveryInfo(data.cr);
@@ -62,8 +68,7 @@ exports.feature = [
                 this.validateStatus('Delivered');
             });
 
-            //steps.work.goToWorkPageById(fromTestVariable('work id'));
-            steps.work.goToWorkPageById('WW 015118099 00');
+            steps.work.goToWorkPageById(fromTestVariable('work id'));
             steps.work.goToRegistrationActivityTab();
 
             using(steps.workRegistrationActivity.activityGroup, function() {
