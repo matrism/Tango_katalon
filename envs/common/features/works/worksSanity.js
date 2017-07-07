@@ -186,7 +186,7 @@ exports.feature = [
 
         tags: [
             'worksSanityValidateWork',
-            'broken'
+            'broken_work'
         ],
 
         breakageDescription: (
@@ -196,7 +196,11 @@ exports.feature = [
 
         //steps: function() {
         steps: criticalScenario(() => {
+        jasmineNodeOpts: {
+            defaultTimeoutInterval: 100000
+        }
             executeLegacyStepsArray([
+
                 [steps.base.useEntityDataSlot, ['work', 'mainWork']],
 
                 [steps.work.goToWorkPage],
