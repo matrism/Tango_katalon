@@ -259,14 +259,13 @@ exports.validatePartyShares = function(groupIndex, row, values) {
 
 exports.wcmTotalSharesRow = function(groupIndex) {
     return exports.rightsGroupContainers().get(groupIndex).$(
-        'tr[data-watched-init="wcts = territoryGroup.rights.totalWcmCrtShares;"]'
-    );
+        'tr[watched-init="wcts = territoryGroup.rights.totalWcmCrtShares;"]'
+    )
 };
 
 exports.wcmTotalShareBindings = function(groupIndex) {
     return exports.wcmTotalSharesRow(groupIndex).all(by.repeater(
-        'type in dataHolder.ownershipDetails.types ' +
-        '| filter:{ visible:true, summary:false }'
+        'type in dataHolder.ownershipDetails.types | filter:{ visible:true, summary:false }'
     )).$$('.ng-binding');
 };
 

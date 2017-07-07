@@ -513,7 +513,7 @@ module.exports.versionTypeBinding = function () {
 };
 module.exports.versionTypeIdBinding = function () {
     return element(by.binding(
-        "getWorkFullCode(dataHolder.modifiedWork)"
+        "::tgModularEditModel.modifiedWork.workCode.getFullCode()"
     ));
 };
 module.exports.lyricAdaptationBinding = function () {
@@ -1493,7 +1493,7 @@ exports.copy = (function () {
     };
 
     copy.primaryWorkTitleInput = function (i) {
-        return element.all(by.model("work.primary_title.title")).get(i);
+        return element.all(by.model("workCopy.primaryTitle.title")).get(i);
     };
 
     copy.saveWorkButton = function () {

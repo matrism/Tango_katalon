@@ -106,7 +106,7 @@ exports.activityGroup.events = (function() {
 
     events.containerFromChild = function(childElement) {
         return childElement.element(by.xpath(
-            'ancestor::*[@data-ng-repeat-start="' +
+            'ancestor::*[@ng-repeat-start="' +
                 'activity in activitiesGroup.activities' +
             '"][1]'
         ));
@@ -302,7 +302,7 @@ exports.activityGroup.events = (function() {
     events.fileNameElement = function() {
         var target = events.targets.latest;
 
-        return target.detailsContainer.$('[data-ng-bind="activity.file_name"]');
+        return target.detailsContainer.$('[ng-bind="::activity.file_name"]');
     };
 
     events.storeFileNameInTestVariable = function(variableName) {

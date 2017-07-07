@@ -55,7 +55,10 @@ exports.feature = [
             'worksSanityValidateWorkRights',
             'worksSanityValidateRegistrationActivity',
             'worksSanityValidateCwr',
-            'worksSanityExecuteRegistrationRun'
+            'worksSanityExecuteRegistrationRun',
+            'worksSanityMerge',
+            'worksSanityCopy'
+
         ],
         steps: criticalScenario(() => {
         //steps: function () {
@@ -98,7 +101,10 @@ exports.feature = [
             'worksSanityValidateWorkRights',
             'worksSanityValidateRegistrationActivity',
             'worksSanityValidateCwr',
-            'worksSanityExecuteRegistrationRun'
+            'worksSanityExecuteRegistrationRun',
+            'worksSanityMerge',
+            'worksSanityCopy'
+
         ],
         steps: criticalScenario(() => {
         //steps: function () {
@@ -273,6 +279,7 @@ exports.feature = [
             'worksSanitySearchForWorksByAlternateTitle',
             'worksSanitySearchForWorksByCreatorPresentationName',
             'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
+        'worksSanityMerge'
         ],
         //steps: function () {
         steps: criticalScenario(() => {
@@ -992,7 +999,8 @@ steps.work.findCurrentlyOpenWorkId();
 {
     name: 'Validate work rights',
         tags: [
-    'worksSanityValidateWorkRights'
+    'worksSanityValidateWorkRights',
+    'valworkrights'
 ],
     //steps: function () {
     steps: criticalScenario(() => {
@@ -1013,7 +1021,7 @@ steps.work.findCurrentlyOpenWorkId();
         row: 1,
         role: 'E',
         name: 'WARNER ALLIANCE MUSIC',
-        societies: ['ASCAP'],
+        societies: ['TEST'],
         shares: ['25.000', '–', '–', '–', '–'],
     },
     {
@@ -1034,7 +1042,8 @@ steps.work.findCurrentlyOpenWorkId();
         row: 5,
         role: 'E',
         name: 'WARNER ALLIANCE MUSIC',
-        societies: ['ASCAP'],
+        //societies: ['ASCAP'],
+        societies: ['TEST'],
         shares: ['25.000', '–', '–', '–', '–'],
     },
     {
@@ -1056,7 +1065,6 @@ steps.work.findCurrentlyOpenWorkId();
     steps.base.useEntityDataSlot('work', 'mainWork');
 
     steps.work.goToWorkPage();
-
     steps.work.goToRightsTab();
 
     steps.workRights.validateSigningTerritoryCode(0, 'AR');
@@ -1146,158 +1154,7 @@ steps.work.findCurrentlyOpenWorkId();
     });
 }),
 },
-/*
-{
-    name: 'Validate CWR',
-        tags: [
-    'TAT-381',
-    'worksSanityValidateCwr',
-    'valCWR'
-],
-    //steps: function () {
-    steps: criticalScenario(() => {
-    steps.base.useEntityDataSlot('work', 'mainWork');
 
-    steps.work.goToWorkPage();
-  // steps.work.goToWorkPageById('WW 015121072 00');
-    steps.work.goToPreviewCwrTab();
-
-    steps.workCwrPreview.searchForRegistrationRecipient('ABRAMUS');
-
-    steps.workCwrPreview.selectFirstRegistrationRecipientResult();
-
-    steps.workCwrPreview.validateRecordType(0, 'NWR');
-
-    steps.workCwrPreview.validateRecordNumber(0);
-
-
-    steps.workCwrPreview.validateWorkTitle(
-        0, 'TEST WORK ' + randomId('mainWork')
-    );
-
-    steps.workCwrPreview.validateSubmitterWorkNumberUsingWorkIdFromCurrentWorkSlot(0);
-
-    _.times(8, function (i) {
-        var recordval = [
-            'SPU000000000000000101TO0002A40WARNER ALLIANCE MUSIC                         E                                   000025000000250000002500 N 0000000000000',
-            'SPU000000000000000201TO00054BBWB MUSIC CORP.                                AM         00053026414              010000000100000001000000 N 0000000000000',
-            'SPU000000000000000301TO00054B3WARNER/CHAPPELL EDICOES MUSICAIS LTDA         SE         00232620014              201000002010000020100000 N 0000000000000',
-            'SPT0000000000000004TO00054B3      025000500005000I0076N001',
-            'SPU000000000000000502TO0002A40WARNER ALLIANCE MUSIC                         E                                   000025000000250000002500 N 0000000000000',
-            'SPU000000000000000602TO00054BBWB MUSIC CORP.                                AM         00053026414              010000000100000001000000 N 0000000000000',
-            'SPU000000000000000702TO00054B3WARNER/CHAPPELL EDICOES MUSICAIS LTDA         SE         00232620014              201000002010000020100000 N 0000000000000',
-            'SPT0000000000000008TO00054B3      025000500005000I0076N001',
-            'SWR0000000000000009TP007430CTEST PERSON 1 7701491299229092                                              CA000000000           010025000990250009902500 N               000000000000',
-            'SWT0000000000000010TP007430C025000000000000I0076N001',
-            'PWR0000000000000011TO0002A40WARNER ALLIANCE MUSIC                                                    TP007430C',
-            'SWR0000000000000012TP007430DTEST PERSON 2 8671491299229107                                              CA000000000           010025000990250009902500 N               000000000000',
-            'SWT0000000000000013TP007430D025000000000000I0076N001',
-            'PWR0000000000000014TO0002A40WARNER ALLIANCE MUSIC                                                    TP007430D',
-            'ALT0000000000000015TEST WORK ALTERNATE TITLE 6991491299229123                  ATEN'
-        ];
-        steps.workCwrPreview.validateRecordTypeNew(i + 1, recordval[i]);
-    });
-
-    steps.workCwrPreview.validateRecordType(9, 'SWR');
-    steps.workCwrPreview.validateRecordNumber(9);
-    steps.workCwrPreview.validateWriterDesignationCode(9, 'CA');
-
-
-    steps.workCwrPreview.validateRecordType(12, 'SWR');
-    steps.workCwrPreview.validateRecordNumber(12);
-    steps.workCwrPreview.validateWriterDesignationCode(12, 'CA');
-
-
-    steps.workCwrPreview.validateRecordType(15, 'ALT');
-
-    steps.workCwrPreview.validateRecordNumber(15);
-
-    steps.workCwrPreview.validateWorkTitle(
-        15, 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork')
-    );
-
-
-
-    /*
-     steps.workCwrPreview.validateRecordType(1, 'SPU');
-     steps.workCwrPreview.validateRecordNumber(1);
-     steps.workCwrPreview.validatePublisherName(1, 'WARNER ALLIANCE MUSIC');
-     steps.workCwrPreview.validatePublisherRole(1, 'E');
-
-
-     steps.workCwrPreview.validateRecordType(2, 'SPU');
-     steps.workCwrPreview.validateRecordNumber(2);
-     steps.workCwrPreview.validatePublisherName(2, 'WB MUSIC CORP.');
-     steps.workCwrPreview.validatePublisherRole(2, 'AM');
-
-
-     steps.workCwrPreview.validateRecordType(3, 'SPU');
-     //steps.workCwrPreview.validateRecordNumber(3);
-
-     steps.workCwrPreview.validatePublisherName(
-     3, 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA'
-     );
-
-     steps.workCwrPreview.validatePublisherRole(3, 'SE');
-
-     //steps.workCwrPreview.validateRecordType(4, 'SPT');
-     steps.workCwrPreview.validateRecordNumber(4);
-
-     steps.workCwrPreview.validateRecordType(5, 'SPU');
-     //steps.workCwrPreview.validateRecordNumber(5);
-     steps.workCwrPreview.validatePublisherName(5, 'WARNER ALLIANCE MUSIC');
-     steps.workCwrPreview.validatePublisherRole(5, 'E');
-
-     steps.workCwrPreview.validateRecordType(6, 'SPU');
-     //steps.workCwrPreview.validateRecordNumber(6);
-     steps.workCwrPreview.validatePublisherName(6, 'WB MUSIC CORP.');
-     steps.workCwrPreview.validatePublisherRole(6, 'AM');
-
-     steps.workCwrPreview.validateRecordType(7, 'SPU');
-     //steps.workCwrPreview.validateRecordNumber(7);
-
-     steps.workCwrPreview.validatePublisherName(
-     7, 'WARNER/CHAPPELL EDICOES MUSICAIS LTDA'
-     );
-
-     steps.workCwrPreview.validatePublisherRole(7, 'SE');
-
-     steps.workCwrPreview.validateRecordType(8, 'SPT');
-     //steps.workCwrPreview.validateRecordNumber(8);
-
-     steps.workCwrPreview.validateRecordType(9, 'SWR');
-     //steps.workCwrPreview.validateRecordNumber(9);
-     steps.workCwrPreview.validateWriterDesignationCode(9, 'CA');
-
-     steps.workCwrPreview.validateRecordType(10, 'SWT');
-     //steps.workCwrPreview.validateRecordNumber(10);
-
-     steps.workCwrPreview.validateRecordType(11, 'PWR');
-     steps.workCwrPreview.validateRecordNumber(11);
-     steps.workCwrPreview.validatePublisherName(11, 'WARNER ALLIANCE MUSIC');
-
-     steps.workCwrPreview.validateRecordType(12, 'SWR');
-     steps.workCwrPreview.validateRecordNumber(12);
-     steps.workCwrPreview.validateWriterDesignationCode(12, 'CA');
-
-     steps.workCwrPreview.validateRecordType(13, 'SWT');
-     steps.workCwrPreview.validateRecordNumber(13);
-
-     steps.workCwrPreview.validateRecordType(14, 'PWR');
-     steps.workCwrPreview.validateRecordNumber(14);
-     steps.workCwrPreview.validatePublisherName(14, 'WARNER ALLIANCE MUSIC');
-
-     steps.workCwrPreview.validateRecordType(15, 'ALT');
-
-     steps.workCwrPreview.validateRecordNumber(15);
-
-     steps.workCwrPreview.validateWorkTitle(
-     15, 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork')
-     );
-
-})
-},
-*/
 {
     name: 'Validate CWR',
         tags: [
@@ -1309,7 +1166,6 @@ steps.work.findCurrentlyOpenWorkId();
     steps.base.useEntityDataSlot('work', 'mainWork');
 
    steps.work.goToWorkPage();
-    //steps.work.goToWorkPageById('WW 015121074 00');
     steps.work.goToPreviewCwrTab();
 
     steps.workCwrPreview.searchForRegistrationRecipient('ABRAMUS');
@@ -1419,7 +1275,6 @@ steps.work.findCurrentlyOpenWorkId();
 
     using(steps.work, function () {
         this.goToWorkPage();
-        //steps.work.goToWorkPageById('WW 015121074 00');
         this.goToRegistrationActivityTab();
     });
 
@@ -1431,8 +1286,8 @@ steps.work.findCurrentlyOpenWorkId();
 
     using(steps.organisation, function () {
         this.goToGeneralTab();
-        //this.registration.resetDeliveryInfo(data.cr);
-        //this.saveOrganisationDeliveryMethods();
+        this.registration.resetDeliveryInfo(data.cr);
+        this.saveOrganisationDeliveryMethods();
         //this.saveOrganisationDeliveryMethodsNew(); //New function as the old one has a problem
     });
 
@@ -1441,9 +1296,8 @@ steps.work.findCurrentlyOpenWorkId();
     using(steps.organisationRegistrationStack, function () {
         // this area doesn't work b/c new works are added at bottom of list, scheduled works is 4000+ records
         using(this.works, function () {
-            steps.base.scrollToBottom()
+            steps.base.scrollToBottom(15);
            this.find({ title: 'TEST WORK ' + randomId('mainWork') });
-            //this.find({ title: 'ME AND MYSELF' });
 
             this.validateErrors('none');
 
@@ -1465,7 +1319,6 @@ steps.work.findCurrentlyOpenWorkId();
 
     using(steps.work, function () {
         this.goToWorkPage();
-
         this.goToRegistrationActivityTab();
     });
 
@@ -1565,6 +1418,7 @@ steps.work.findCurrentlyOpenWorkId();
     using(steps.work, function () {
     steps.base.useEntityDataSlot('work', 'mainWork');
     this.goToWorkPage();
+    //this.goToWorkPageById('WW 015122073 00');
     this.goToGeneralTab();
     using(this.copy, function () {
         this.copyWork();
@@ -1615,6 +1469,7 @@ steps.work.findCurrentlyOpenWorkId();
     using(steps.work, function () {
     steps.base.useEntityDataSlot('work', 'mainWork');
     this.goToWorkPage();
+    //this.goToWorkPageById('WW 015122073 00');
     this.goToGeneralTab();
     using(this.copy, function () {
         this.copyWork();
