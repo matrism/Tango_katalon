@@ -4,6 +4,7 @@ steps.workCopyrightCertificates = exports;
 
 exports.validateUsLibraryOfCongressNumbers = function(values) {
     it('Validate US Library of Congress numbers (' + values.join(', ') + ')', function() {
+        //console.log(values);
         pages.workCopyrightCertificates.validateUsLibraryOfCongressNumbers(values);
     });
 };

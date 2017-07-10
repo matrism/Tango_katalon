@@ -3,11 +3,11 @@
 pages.workCopyrightCertificates = exports;
 
 exports.certificateContainers = function() {
-    return $$('.cf-row');
+    return $$('.cf-container');
 };
 
 exports.usLibraryOfCongressNumberBindings = function() {
-    return exports.certificateContainers().all(by.css('td:nth-child(1)'));
+    return exports.certificateContainers().all(by.css('[ng-bind="::certificate.copyrightStatus !== \'PENDING\' ? certificate.usLibraryOfCongressNumber : \'Pending\'"]'));
 };
 
 exports.usLibraryOfCongressNumbers = function() {
@@ -16,17 +16,19 @@ exports.usLibraryOfCongressNumbers = function() {
     pages.base.scrollIntoView(elements.first());
 
     return elements.map(function(element) {
+        console.element()
         return element.getText();
+
     });
 };
 
 exports.validateUsLibraryOfCongressNumbers = function(values) {
     var numbers = exports.usLibraryOfCongressNumbers();
-    expect(numbers).toEqual(values);
+    expect(numbers).toContain(values);
 };
 
 exports.registrationDateBindings = function() {
-    return exports.certificateContainers().all(by.css('td:nth-child(2)'));
+    return exports.certificateContainers().all(by.css('[ng-bind="::certificate.copyrightStatus !== \'PENDING\' ? (certificate.registrationDate | date:\'yyyy-MM-dd\') : \'--\'"]'));
 };
 
 exports.registrationDates = function() {
@@ -45,7 +47,7 @@ exports.validateRegistrationDates = function(values) {
 };
 
 exports.submittedDateBindings = function() {
-    return exports.certificateContainers().all(by.css('td:nth-child(5)'));
+    return exports.certificateContainers().all(by.css('[ng-bind="::certificate.submitDate | date:\'yyyy-MM-dd\'"]'));
 };
 
 exports.submittedDates = function() {
@@ -60,5 +62,5 @@ exports.submittedDates = function() {
 
 exports.validateSubmittedDates = function(values) {
     var dates = exports.submittedDates();
-    expect(dates).toEqual(values);
+    expect(dates).toMatch(values);
 };

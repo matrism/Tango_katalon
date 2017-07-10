@@ -491,24 +491,22 @@ module.exports.assetTypeContainer = function () {
 };
 module.exports.musicalDistributionCategoryBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.musicalDistributionCategories, " +
-        "modularEditModels.model.musical_work_distribution_category)"
+        "::tgModularEditModel.getMusicalDistributionCategoryName()"
     ));
 };
 module.exports.textMusicRelationshipBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.textMusicRelationships, " +
-        "modularEditModels.model.text_music_relationship)"
+        "::tgModularEditModel.getTextMusicRelationshipName()"
     ));
 };
 module.exports.excerptTypeBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.excerptTypes, modularEditModels.model.excerpt_type)"
+        "::tgModularEditModel.getExcerptTypeName()"
     ));
 };
 module.exports.versionTypeBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.versionTypes, modularEditModels.model.version_type)"
+        "::tgModularEditModel.getVersionTypeName()"
     ));
 };
 module.exports.versionTypeIdBinding = function () {

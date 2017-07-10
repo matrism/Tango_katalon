@@ -186,7 +186,8 @@ exports.feature = [
 
         tags: [
             'worksSanityValidateWork',
-            'broken_work'
+            'broken_work',
+            'valcrtwork'
         ],
 
         breakageDescription: (
@@ -195,7 +196,7 @@ exports.feature = [
         ),
 
         //steps: function() {
-        steps: criticalScenario(() => {
+       //steps: criticalScenario(() => {
         jasmineNodeOpts: {
             defaultTimeoutInterval: 100000
         }
@@ -204,6 +205,7 @@ exports.feature = [
                 [steps.base.useEntityDataSlot, ['work', 'mainWork']],
 
                 [steps.work.goToWorkPage],
+                [steps.work.goToGeneralTab],
 
                 [steps.work.validatePrimaryWorkTitle, [
                     'TEST WORK ' + randomId('mainWork'),
@@ -213,11 +215,12 @@ exports.feature = [
                 [steps.work.validateTextMusicRelationship],
                 [steps.work.validateExcerptType],
                 [steps.work.validateVersionType],
-                [steps.work.validateLyricAdaptation],
-                [steps.work.validateMusicArrangement],
+                //[steps.work.validateLyricAdaptation],
+                //[steps.work.validateMusicArrangement],
 
                 [function () {
                     steps.workCopyrightCertificates.validateUsLibraryOfCongressNumbers(
+
                         _.times(4, function (i) {
                             return 'TEST ' + randomId('copyrightNumber' + i);
                         })
@@ -263,6 +266,7 @@ exports.feature = [
                     );
                 });
                 }],
+
             ]);
         })
     },
