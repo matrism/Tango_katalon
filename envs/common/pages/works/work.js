@@ -619,7 +619,7 @@ module.exports.editMusicLibraryField = function () {
 };
 module.exports.workInclusionOnWebsiteParagraph = function () {
     return (
-        element(by.css("[data-ng-switch='!!modularEditModels.model.includeOnWebsite']"))
+        element(by.css("[ng-switch='tgModularEditModel.includeOnWebsite']"))
             .element(by.css(".ng-scope"))
     );
 };
@@ -750,8 +750,10 @@ module.exports.selectedWorkInclusionOnWebsiteOption = function () {
 module.exports.creatorNames = function (i) {
     var ithElement;
     var elements = (
-        $(".scope-delivery-table")
-            .all(by.binding("::creatorContribution.creator.name"))
+       // $(".scope-delivery-table")
+           // .all(by.binding("::creatorContribution.creator.name"))
+        $(".work-dst-table")
+            .all(by.binding("creatorLink.creator.name.presentationName"))
             .filter(
                 function (element) {
                     return element.isDisplayed();
@@ -775,8 +777,10 @@ module.exports.creatorContributions = function (i) {
     var ithElement;
     // FIXME: Move this into its own locator.
     var elements = (
-        $('.scope-delivery-table')
-            .all(by.binding(' ::(creatorContribution.contribution.value | number:3) '))
+        //$('.scope-delivery-table') // prev code
+            //.all(by.binding(' ::(creatorContribution.contribution.value | number:3) '))
+        $('.work-dst-table')
+            .all(by.binding('(creatorLink.creator.workContribution | number:3) + \'%\''))
             .filter(
                 function (element) {
                     return element.isDisplayed();

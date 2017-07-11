@@ -229,7 +229,8 @@ exports.createEnteredArtist = () => asAlways(
 // ---
 
 exports.artistNameBinding = i => exports.rows().get(i).element(by.binding(
-    'recording.artist.displayName'
+    //'recording.artist.displayName'
+    '::recordingLink.recording.artist.displayName'
 ));
 
 exports.artistName = i => asAlways(
@@ -237,8 +238,14 @@ exports.artistName = i => asAlways(
 );
 
 exports.validateArtistName = (i, val) => expect(
-    exports.artistName(i)
+   exports.artistName(i)
 ).toBe(val);
+
+// exports.validateArtistName = (i, val) =>
+// {
+//     expect(exports.artistName(i)).toBe(val);
+// }
+
 
 // ---
 

@@ -3,11 +3,12 @@
 pages.workCopyrightCertificates = exports;
 
 exports.certificateContainers = function() {
-    return $$('.cf-container');
+    return $$('[ui-view="usCopyrightCertificate"]');
 };
 
 exports.usLibraryOfCongressNumberBindings = function() {
     return exports.certificateContainers().all(by.css('[ng-bind="::certificate.copyrightStatus !== \'PENDING\' ? certificate.usLibraryOfCongressNumber : \'Pending\'"]'));
+    //return exports.certificateContainers().all(by.css('td:nth-child(1)'));
 };
 
 exports.usLibraryOfCongressNumbers = function() {
@@ -16,7 +17,6 @@ exports.usLibraryOfCongressNumbers = function() {
     pages.base.scrollIntoView(elements.first());
 
     return elements.map(function(element) {
-        console.element()
         return element.getText();
 
     });
@@ -24,7 +24,7 @@ exports.usLibraryOfCongressNumbers = function() {
 
 exports.validateUsLibraryOfCongressNumbers = function(values) {
     var numbers = exports.usLibraryOfCongressNumbers();
-    expect(numbers).toContain(values);
+    expect(numbers).toEqual(values);
 };
 
 exports.registrationDateBindings = function() {
@@ -62,5 +62,5 @@ exports.submittedDates = function() {
 
 exports.validateSubmittedDates = function(values) {
     var dates = exports.submittedDates();
-    expect(dates).toMatch(values);
+    expect(dates).toEqual(values);
 };
