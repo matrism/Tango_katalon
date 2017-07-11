@@ -1,3 +1,4 @@
+var today = moment().format('YYYY-MM-DD');
 exports.cr = {
     /*
     org: 'BMI',
@@ -44,8 +45,10 @@ exports.cr = {
         }
     }
     */
+
     org: 'BMI',
-    date: '2017-06-21',
+    //date: '2017-06-21',
+    date: today ,
     view: 'PRIMARY',
     email: {
         primary: 'shahrul.ibrahim@warnerchappell.com'
