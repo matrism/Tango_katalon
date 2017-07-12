@@ -48,7 +48,7 @@ exports.feature = [
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -75,6 +75,7 @@ exports.feature = [
             steps.base.sleep(5000);
             steps.deal.refreshThePage();
             steps.base.sleep(5000);
+            steps.deal.refreshThePage();
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
             steps.work.goBackToMainPageFromWork();
 
@@ -141,7 +142,7 @@ exports.feature = [
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -319,7 +320,7 @@ exports.feature = [
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Worldwide");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -437,7 +438,7 @@ exports.feature = [
                 steps.work.goToScopeDeliveryTab();
                 steps.scopeDelivery.deliverWork();
                 steps.base.focusOnNewOpenedTab(0);
-                steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope(1, 0, 3);
+                steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 0, 3);
 
                 steps.base.focusOnNewOpenedTab(0);
                 steps.deal.refreshThePage();
@@ -459,7 +460,7 @@ exports.feature = [
 
 
             steps.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
-            steps.scopeDelivery.clickOnRemoveScopeDelivery();
+            //steps.scopeDelivery.clickOnRemoveScopeDelivery();
             steps.scopeDelivery.save();
 
             steps.base.focusOnNewOpenedTab(0);
@@ -503,7 +504,7 @@ exports.feature = [
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Administration", "Italy");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("50");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");

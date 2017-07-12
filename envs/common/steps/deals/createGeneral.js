@@ -347,7 +347,13 @@ exports.itFillDealMandatoryFieldsGeneralTabWithData = function (contractingParty
             steps.createDealGeneral.fillCompanyCodeField("ITO");
             steps.createDealGeneral.waitForContractingPartyDropDown();
             steps.createDealGeneral.selectRandomCompanyCode();
+        } else
+        {
+            steps.createDealGeneral.fillCompanyCodeField("ITO");
+            steps.createDealGeneral.waitForContractingPartyDropDown();
+            steps.createDealGeneral.selectRandomCompanyCode();
         }
+
         steps.createDealGeneral.fillContractingPartyFieldData(contractingParty);
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectRandomContractingParty();
