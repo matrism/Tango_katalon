@@ -206,13 +206,13 @@ exports.closeTheTabByIndex = function(index){
    });
 };
 
-exports.scrollToBottom = () => {
-    it('Scroll to bottom and wait for Ajax', () => {
-        for (let i = 0; i < 20; i++) {
-            browser.executeScript('window.scrollTo(0, document.body.scrollHeight)').then(() => {
+exports.scrollToBottom = function(index){
+    it('Scroll to bottom and wait for Ajax', function(){
+        for (let i = 0; i < index; i++) {
+            browser.executeScript('window.scrollTo(0, document.body.scrollHeight)').then(function () {
                 return pages.base.waitForAjax();
             });
-        }
+        };
     });
 };
 

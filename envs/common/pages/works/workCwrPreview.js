@@ -126,10 +126,16 @@ exports.recordFieldValue = function(i, fieldName) {
 
 exports.validateRecordField = function(i, fieldName, value) {
     expect(exports.recordFieldValue(i, fieldName)).toBe(value);
+
 };
 
-exports.validateRecordType = function(i, value) {
-    exports.validateRecordField(i, 'recordType', value);
+exports.validateRecordType = function(i, RecordName) {
+    //exports.validateRecordField(i, 'recordType', value);
+    return exports.rawRecord(i).then(function(value) {
+        var recordTypeName = value.slice(0, 3).trim();
+        expect(recordTypeName).toBe(RecordName);
+
+    });
 };
 
 exports.validateRecordExist = function(i){
@@ -154,7 +160,12 @@ exports.validateSocietyNumber = function(i,value) {
 };
 
 exports.validateRecordNumber = function(i) {
-    exports.validateRecordField(i, 'recordNumber', leftPad(i, 16, 0));
+    //exports.validateRecordField(i, 'recordNumber', leftPad(i, 16, 0));
+    return exports.rawRecord(i).then(function(value) {
+        var recordTypeNum = value.slice(3, 19).trim();
+        expect(recordTypeNum).toBe(leftPad(i, 16, 0));
+
+    });
 };
 
 exports.validateWorkTitle = function(i, value) {
@@ -167,13 +178,30 @@ exports.validateSubmitterWorkNumberAsWorkId = function(i, value) {
     );
 };
 
-exports.validatePublisherName = function(i, value) {
-    exports.validateRecordField(i, 'publisherName', value);
-    console.log('publisherName')
+exports.validatePublisherName = function(i, PubName) {
+    //exports.validateRecordField(i, 'publisherName', value);
+    return exports.rawRecord(i).then(function(value) {
+        var recordTypeName = value.slice(0, 3).trim(),
+            recordPublisher,
+            x;
+        if (recordTypeName == 'PWR') {
+            x=28;
+        } else {
+            x=30;
+        }
+        recordPublisher = value.slice(x).trim()
+        expect(recordPublisher).toContain(PubName);
+
+    });
 };
 
-exports.validatePublisherRole = function(i, value) {
-    exports.validateRecordField(i, 'publisherRole', value);
+exports.validatePublisherRole = function(i, PubRole) {
+    //exports.validateRecordField(i, 'publisherRole', value);
+    return exports.rawRecord(i).then(function(value) {
+        var recordPubRole = value.slice(30).trim();
+        expect(recordPubRole).toContain(PubRole);
+
+    });
 };
 
 exports.validateWriterName = function(i, value) {
@@ -185,7 +213,7 @@ exports.validateWriterDesignationCode = function(i, value) {
 };
 
 exports.registrationRecipientTypeahead = function () {
-    return element(by.model('dataHolder.currentRecipient'));
+    return element(by.model('tgOrgTypeaheadModel'));
 };
 
 exports.registrationRecipientSearch = function () {
@@ -194,7 +222,7 @@ exports.registrationRecipientSearch = function () {
 
 exports.registrationRecipientSearchResults = function () {
     return exports.registrationRecipientTypeahead().all(by.repeater(
-        '$match in $dataSet.queried.matches'
+        '$match in $dataSet.queried.matches | limitTo:$dataSet.queried.limit'
     ));
 };
 

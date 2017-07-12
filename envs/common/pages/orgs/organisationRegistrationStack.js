@@ -22,6 +22,8 @@ exports.works = (function() {
         return works.container().all(by.cssContainingText(
             '.ng-binding', title
         )).all(by.xpath('ancestor::li[1]')).first();
+
+
     };
 
     works.find = function(methodSpecifier, targetWorkName) {

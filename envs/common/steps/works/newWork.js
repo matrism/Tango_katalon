@@ -923,7 +923,7 @@ exports.continueIfSimilarWorksPrompted = function() {
 
 exports.save = function() {
    // it('Saving work', function() {
-       // browser.sleep(2000);
+    steps.base.sleep(5000);
      steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
    // });
 };
