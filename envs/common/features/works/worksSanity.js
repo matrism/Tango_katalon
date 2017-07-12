@@ -971,6 +971,8 @@ steps.work.findCurrentlyOpenWorkId();
 
     steps.scopeDelivery.save();
 
+    browser.sleep(8000);
+
     steps.base.refreshPage();
 
     steps.work.goToScopeDeliveryTab();
