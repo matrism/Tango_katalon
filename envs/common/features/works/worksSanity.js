@@ -953,13 +953,13 @@ steps.work.findCurrentlyOpenWorkId();
 
     steps.scopeDelivery.deliverWork();
 
-    /*
-    steps.scopeDelivery.searchForDealFromDealSlotForAllContributions(
-        '377631' //'mainDeal'
-    );
-    */
 
-    steps.scopeDelivery.searchDealsForAllContributions('377631');
+    steps.scopeDelivery.searchForDealFromDealSlotForAllContributions(
+        'mainDeal'
+    );
+
+
+    //steps.scopeDelivery.searchDealsForAllContributions('377631');
 
     steps.scopeDelivery.selectDealSearchResultByIndex(0);
 
@@ -967,11 +967,11 @@ steps.work.findCurrentlyOpenWorkId();
         steps.scopeDelivery.clickScopeDeliveryCheckbox(i, i);
     });
 
-    browser.sleep(2000);
+    steps.base.sleep(5000);
 
     steps.scopeDelivery.save();
 
-    browser.sleep(8000);
+    steps.base.sleep(10000);
 
     steps.base.refreshPage();
 
