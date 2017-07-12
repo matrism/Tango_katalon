@@ -54,7 +54,9 @@ exports.cancelChanges = () => asAlways(
 
 // ---
 
-exports.rows = () => $$('div[ng-repeat="recordingLink in WorkRecordingsCtrl.getRecordingsView().getRecordingLinks()"]');
+exports.rows = () => $$('[ng-repeat="recordingLink in WorkRecordingsCtrl.getRecordingsView().getRecordingLinks()"]');
+
+exports.rowsRec = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
 
 exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
 
@@ -66,12 +68,14 @@ exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
     exports.titleInput = i => exports.rows().get(i).element(locator);
 
     exports.titleInputs = () => exports.rows().all(locator);
+
+    exports.titleInputRec = i => exports.rowsRec().get(i).element(by.css('[ng-model="$term"]'));
 }
 
 // ---
 
 exports.focusTitleField = i => asAlways(
-    exports.titleInput(i), 'scrollIntoView', 'click'
+    exports.titleInputRec(i), 'scrollIntoView', 'click'
 );
 
 // ---
@@ -174,8 +178,8 @@ exports.validateTitle = (i, val) => expect(
 
 // ---
 
-exports.artistTypeahead = i => Typeahead(exports.rows().get(i).element(
-    by.model('recordingLink.recording.artist')
+exports.artistTypeahead = i => Typeahead(exports.rowsRec().get(i).element(
+    by.css('[ng-switch="!!WorkRecordingsCtrl.getLibraryCode()"]')
 ));
 
 exports.enterArtistSearchTerms = (i, val) => asAlways(
@@ -224,7 +228,8 @@ exports.createEnteredArtist = () => asAlways(
 // ---
 
 exports.artistNameBinding = i => exports.rows().get(i).element(by.binding(
-    'recording.artist.displayName'
+    //'recording.artist.displayName'
+    '::recordingLink.recording.artist.displayName'
 ));
 
 exports.artistName = i => asAlways(
@@ -232,8 +237,14 @@ exports.artistName = i => asAlways(
 );
 
 exports.validateArtistName = (i, val) => expect(
-    exports.artistName(i)
+   exports.artistName(i)
 ).toBe(val);
+
+// exports.validateArtistName = (i, val) =>
+// {
+//     expect(exports.artistName(i)).toBe(val);
+// }
+
 
 // ---
 
@@ -241,17 +252,29 @@ exports.libraryNameBinding = i => exports.rows().get(i).$(
     'span[ng-bind="::WorkRecordingsCtrl.getLibraryName(recordingLink.recording.libraryCode)"]'
 );
 
+exports.libraryNameBindingRec = i => exports.rowsRec().get(i).$(
+    '[ng-switch="!!WorkRecordingsCtrl.getLibraryCode()"] .ng-binding'
+);
+
 exports.libraryName = i => asAlways(
     exports.libraryNameBinding(i), 'scrollIntoView', 'getAllText'
+);
+
+exports.libraryNameRec = i => asAlways(
+    exports.libraryNameBindingRec(i), 'scrollIntoView', 'getAllText'
 );
 
 exports.validateLibraryName = (i, val) => expect(
     exports.libraryName(i)
 ).toBe(val);
 
+exports.validateLibraryNameRec1 = (i, val) => expect(
+    exports.libraryNameRec(i)
+).toBe(val);
+
 // ---
 
-exports.durationInput = i => exports.rows().get(i).$(
+exports.durationInput = i => exports.rowsRec().get(i).$(
     '.tg-time-selector input'
 );
 

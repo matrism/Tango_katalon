@@ -289,7 +289,7 @@ exports.shellWorkCreatorNameLabel = function (i, j) {
     return exports.componentWorkRows().get(i).$$('span[ng-bind="creator.name.presentationName"]').get(j);
 };
 exports.shellWorkCreatorContributionLabel = function (i, j) {
-    return exports.componentWorkRows().get(i).$$('span[ng-bind=ng-bind="creator.getWorkContribution(component.allocationPercentage) + '%'"]').get(j);
+    return exports.componentWorkRows().get(i).$$('span[ng-bind="creator.getWorkContribution(component.allocationPercentage) + \'%\'"]').get(j);
 };
 exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function (i) {
     return exports.componentWorkRow(i).element(
@@ -491,29 +491,27 @@ module.exports.assetTypeContainer = function () {
 };
 module.exports.musicalDistributionCategoryBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.musicalDistributionCategories, " +
-        "modularEditModels.model.musical_work_distribution_category)"
+        "::tgModularEditModel.getMusicalDistributionCategoryName()"
     ));
 };
 module.exports.textMusicRelationshipBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.textMusicRelationships, " +
-        "modularEditModels.model.text_music_relationship)"
+        "::tgModularEditModel.getTextMusicRelationshipName()"
     ));
 };
 module.exports.excerptTypeBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.excerptTypes, modularEditModels.model.excerpt_type)"
+        "::tgModularEditModel.getExcerptTypeName()"
     ));
 };
 module.exports.versionTypeBinding = function () {
     return element(by.binding(
-        "getAdminDataName(dataHolder.versionTypes, modularEditModels.model.version_type)"
+        "::tgModularEditModel.getVersionTypeName()"
     ));
 };
 module.exports.versionTypeIdBinding = function () {
     return element(by.binding(
-        "getWorkFullCode(dataHolder.modifiedWork)"
+        "::tgModularEditModel.modifiedWork.workCode.getFullCode()"
     ));
 };
 module.exports.lyricAdaptationBinding = function () {
@@ -545,8 +543,9 @@ module.exports.bltvrBinding = function () {
 };
 module.exports.musicLibraryBinding = function () {
     return element(by.binding(
-        ' getAdminDataName(dataHolder.musicLibrarys, ' +
-        'modularEditModels.model.library_code) '
+        //'getAdminDataName(dataHolder.musicLibrarys, ' +
+        //'modularEditModels.model.library_code)'
+        '::tgModularEditModel.getLibraryName()'
     ));
 };
 module.exports.editAssetTypeButton = function () {
@@ -620,7 +619,7 @@ module.exports.editMusicLibraryField = function () {
 };
 module.exports.workInclusionOnWebsiteParagraph = function () {
     return (
-        element(by.css("[data-ng-switch='!!modularEditModels.model.includeOnWebsite']"))
+        element(by.css("[ng-switch='tgModularEditModel.includeOnWebsite']"))
             .element(by.css(".ng-scope"))
     );
 };
@@ -751,8 +750,10 @@ module.exports.selectedWorkInclusionOnWebsiteOption = function () {
 module.exports.creatorNames = function (i) {
     var ithElement;
     var elements = (
-        $(".scope-delivery-table")
-            .all(by.binding("::creatorContribution.creator.name"))
+       // $(".scope-delivery-table")
+           // .all(by.binding("::creatorContribution.creator.name"))
+        $(".work-dst-table")
+            .all(by.binding("creatorLink.creator.name.presentationName"))
             .filter(
                 function (element) {
                     return element.isDisplayed();
@@ -776,8 +777,10 @@ module.exports.creatorContributions = function (i) {
     var ithElement;
     // FIXME: Move this into its own locator.
     var elements = (
-        $('.scope-delivery-table')
-            .all(by.binding(' ::(creatorContribution.contribution.value | number:3) '))
+        //$('.scope-delivery-table') // prev code
+            //.all(by.binding(' ::(creatorContribution.contribution.value | number:3) '))
+        $('.work-dst-table')
+            .all(by.binding('(creatorLink.creator.workContribution | number:3) + \'%\''))
             .filter(
                 function (element) {
                     return element.isDisplayed();
@@ -1492,7 +1495,7 @@ exports.copy = (function () {
     };
 
     copy.primaryWorkTitleInput = function (i) {
-        return element.all(by.model("work.primary_title.title")).get(i);
+        return element.all(by.model("workCopy.primaryTitle.title")).get(i);
     };
 
     copy.saveWorkButton = function () {
