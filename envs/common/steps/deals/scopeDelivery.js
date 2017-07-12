@@ -157,7 +157,7 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithoutSave = functio
 };
 
 
-exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = function (i, indexMin, indexMax) {
+exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = function (i) {
     it("Get deal number created in other tab and use it to work delivery ", function () {
         pages.deal.elems.dealBriefNumber.getText().then(function (promise) {
             console.log("Contract brief number promise is " + promise);
@@ -167,7 +167,7 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = functi
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             steps.base.sleep(5000);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
-            pages.scopeDelivery.selectDeliveryByText(indexMin, indexMax, 0, 'Scope 1');
+            pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
             pages.scopeDelivery.save();
         });
     });
