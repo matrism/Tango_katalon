@@ -79,6 +79,8 @@ exports.activityGroup = (function() {
 
         nameElement.click();
 
+        browser.sleep(5000);
+
         pages.base.closeCurrentTabAndSwitchTo(0);
 
         return pages.base.waitForAjax();
