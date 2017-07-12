@@ -31,7 +31,7 @@ exports.activityGroup = (function() {
     activityGroup.container.firstWithRecipientName = function(name) {
         return element.all(
             by.cssContainingText(
-                '[ng-repeat="activitiesGroup in dataHolder.groupedActivities track by activitiesGroup.registration.name"]', name
+                '[ng-repeat="activitiesGroup in dataHolder.groupedActivities track by (activitiesGroup.registration.name + activitiesGroup.registration.orgId)"]', name
             )
          ).first();
     };
@@ -232,7 +232,7 @@ exports.activityGroup.events = (function() {
     events.getProcessedDate = function() {
         var target = events.targets.latest;
         return target.container.element(
-            by.binding('activity.run_date | tgIsoDate')
+            by.binding('::activity.modified_date | tgIsoDate')
         ).getText();
     };
 
@@ -318,14 +318,14 @@ exports.activityGroup.events = (function() {
     events.getEmailMethod = function (i) {
         var target = events.targets.latest;
         return target.detailsContainer.all(by.cssContainingText(
-            '[data-ng-repeat="event in activity.delivery_events"]', 'Email to'
+            '[ng-repeat="event in activity.delivery_events"]', 'Email to'
         )).get(i);
     };
 
     events.getFtpMethod = function (i) {
         var target = events.targets.latest;
         return target.detailsContainer.all(by.cssContainingText(
-            '[data-ng-repeat="event in activity.delivery_events"]', 'FTP'
+            '[ng-repeat="event in activity.delivery_events"]', 'FTP'
         )).get(i);
     };
 

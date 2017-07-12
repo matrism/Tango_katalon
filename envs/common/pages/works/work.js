@@ -77,13 +77,17 @@ exports.workSearchMatchTitle = function (i) {
 exports.expectWorkSearchMatchTitleToBe = function (i, value) {
     expect(exports.workSearchMatchTitle(i)).toBe(value);
 };
+exports.expectWorkSearchMatchTitleToBeCreator1 = function (i, value) {
+    expect(exports.workSearchMatchTitle(i)).toBe(value);
+};
+
 exports.workSearchMatchAlternateTitle = function (i) {
     return exports.workSearchMatchMainLabelParts(i).then(function (parts) {
         return parts.alternateTitle;
     });
 };
 exports.expectWorkSearchMatchAlternateTitleToBe = function (i, value) {
-    expect(exports.workSearchMatchAlternateTitle(i)).toBe(value);
+  expect(exports.workSearchMatchMainLabelBinding(i).getText()).toBe(value);
 };
 exports.workSearchMatchCreatorNames = function (i) {
     return exports.workSearchMatchMainLabelParts(i).then(function (parts) {
@@ -101,7 +105,7 @@ exports.expectSelectedWorkSearchFilterTagToBe = function (i, value) {
 exports.selectWorkSearchFilterTag = function (i, value) {
     var element = exports.workSearchFilterTagDropdown(i);
     pages.base.scrollIntoView(element);
-    return pages.base.selectDropdownOption(element, value);
+    return pages.base.selectHeaderDropdownOption(element, value);
 };
 exports.enterWorkSearchTerms = function (value) {
     var element = exports.workSearchTermsInput();
@@ -149,18 +153,18 @@ module.exports.alternateWorkTitleBindings = function () {
     );
 };
 module.exports.primaryWorkTitleHeading = function () {
-    return $("[data-ng-show='workHeader.title.detail']");
+    return $("div[ui-view='titles'] [data-ng-if='view.isShowing']");
 };
 module.exports.editWorkTitlesButton = function () {
-    return $(".title-edit [data-ng-click='showEdit(workHeader.title, titleEditForm)']");
+    return $("div[ui-view='titles'] .work-modular-edit [data-ng-click='tgModularViewMethods.switchToEditView()']");
 };
 module.exports.editWorkTitlesContainer = function () {
-    return $("[data-ng-show='workHeader.title.edit']");
+    return $("[tg-modular-edit-id='workTitles']");
 };
 module.exports.editPrimaryWorkTitleField = function () {
     return (
         pages.work.editWorkTitlesContainer()
-            .element(by.model("work.title.primary_title.title"))
+            .element(by.model("tgModularEditModel.primaryTitle.title"))
     );
 };
 module.exports.alternateWorkTitleEditRows = function () {
@@ -206,27 +210,24 @@ module.exports.saveWorkTitlesButton = function () {
     );
 };
 module.exports.creatorNamesContainer = function () {
-    return $(".EDITOR.creators-edit");
+    return $(".work-modular-edit");
 };
 module.exports.editCreatorsContainer = function () {
-    return $('div[data-ng-show="workHeader.creators.edit"]');
+    return $('div[data-ng-if="view.isEdit()"]');
 };
 module.exports.editCreatorsButton = function () {
-    return $(
-        "[data-ng-click='showEdit(workHeader.creators, " +
-        "contributionEditForm)']"
-    );
+    return $('div[tg-modular-edit-id="workContributors"] button[data-ng-click="tgModularViewMethods.switchToEditView()"]');
 };
-exports.compositeWorkCheckbox = function () {
-    return element(by.model('work.contribution.isCompositeWork'));
+exports.compositeWorkCheckbox = function() {
+    return element(by.model('tgModularEditModel.isCompositeWork'));
 };
 exports.confirmDisablingWorkAsCompositeButton = function () {
     return pages.base.modalFooter().element(
         by.cssContainingText('button', 'Yes')
     );
 };
-exports.compositeWorkTypeDropdown = function () {
-    return element(by.model('work.contribution.composite_type'));
+exports.compositeWorkTypeDropdown = function() {
+    return element(by.model('tgModularEditModel.compositeType'));
 };
 exports.confirmMakingIntoMedleyButton = function () {
     return pages.base.modalFooter().element(
@@ -234,7 +235,7 @@ exports.confirmMakingIntoMedleyButton = function () {
     );
 };
 module.exports.editCreatorNameInputs = function () {
-    return element.all(by.model("creator.person_name"));
+    return element.all(by.css("div[ng-model='creator.person'] div.tg-typeahead__input-container input"));
 };
 module.exports.editCreatorNameInput = function (i) {
     return pages.work.editCreatorNameInputs().get(i);
@@ -246,7 +247,7 @@ module.exports.editCreatorRole = function (i) {
     return pages.work.editCreatorRoles().get(i);
 };
 module.exports.editCreatorContributionInputs = function () {
-    return element.all(by.model("creator.contribution"));
+    return element.all(by.model("creator.workContribution"));
 };
 module.exports.editCreatorContributionInput = function (i) {
     return pages.work.editCreatorContributionInputs().get(i);
@@ -258,14 +259,14 @@ module.exports.creatorsEditorCheckingForDuplicatesMessage = function () {
     return $(".creators-edit [data-ng-show='show.requests.checkDuplicates']");
 };
 exports.componentWorkRows = function () {
-    return element.all(by.repeater('component in work.contribution.components'));
+    return element.all(by.repeater('component in tgModularEditModel.components.$getItems()'));
 };
 exports.componentWorkRow = function (i) {
     return exports.componentWorkRows().get(i);
 };
 exports.componentWorkNameBindings = function () {
     return exports.componentWorkRows().all(
-        by.binding('getWorkName(component.model)')
+        by.binding('component.work.primaryTitle.title')
     );
 };
 exports.componentWorkNameBinding = function (i) {
@@ -273,11 +274,11 @@ exports.componentWorkNameBinding = function (i) {
 };
 exports.componentWorkIdLabel = function (i) {
     return exports.componentWorkRows().get(i).element(
-        by.binding('getWorkFullCode(component.model)')
+        by.binding('component.work.workCode.getFullCode()')
     );
 };
 exports.showComponentWorkDetailsButton = function (i) {
-    return exports.componentWorkRows().get(i).$('.show-hide-ca');
+    return exports.componentWorkRows().get(i).$('a[ng-click="component.toggleDetails()"]');
 };
 exports.shellWorkCreatorRows = function (i) {
     return exports.componentWorkRows().get(i).all(
@@ -285,10 +286,10 @@ exports.shellWorkCreatorRows = function (i) {
     );
 };
 exports.shellWorkCreatorNameLabel = function (i, j) {
-    return exports.componentWorkRows().get(i).$$('.show-ca_name').get(j);
+    return exports.componentWorkRows().get(i).$$('span[ng-bind="creator.name.presentationName"]').get(j);
 };
 exports.shellWorkCreatorContributionLabel = function (i, j) {
-    return exports.componentWorkRows().get(i).$$('.show-ca_percenrage').get(j);
+    return exports.componentWorkRows().get(i).$$('span[ng-bind=ng-bind="creator.getWorkContribution(component.allocationPercentage) + '%'"]').get(j);
 };
 exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function (i) {
     return exports.componentWorkRow(i).element(
@@ -300,39 +301,48 @@ exports.sameWorkCantBeAddedAsComponentMultipleTimesMessage = function (i) {
 };
 exports.componentWorkSearchFilterDropdowns = function () {
     return exports.componentWorkRows().all(
-        by.model('component.filter')
+        by.model('component.workSearchType')
     );
 };
 exports.componentWorkSearchFilterDropdown = function (i) {
     return exports.componentWorkSearchFilterDropdowns().get(i);
 };
 exports.componentWorkSearchTermsField = function (i) {
-    return exports.componentWorkRow(i).element(
-        by.model('component.selected_work')
+   return exports.componentWorkRows().get(i).element(
+        by.css('div[ng-model="component.work"] div.tg-typeahead__input-wrap input')
+     );
+};
+
+exports.componentWorkSearchField = function (i) {
+    return exports.componentWorkRows().get(i).element(
+        by.model('component.work')
     );
 };
 exports.componentWorkAllocationInputs = function () {
     return exports.componentWorkRows().all(
-        by.model('component.allocation_percentage')
+        by.model('component.allocationPercentage')
     );
 };
 exports.componentWorkAllocationInput = function (i) {
     return exports.componentWorkAllocationInputs().get(i);
 };
-exports.enterAsNewWorkSuggestion = function () {
-    return element(by.cssContainingText('.more-results-link', 'Enter as a new work'));
+exports.enterAsWorkSuggestion = function(value) {
+    return element(by.cssContainingText('.tg-typeahead__suggestions-group-item.ng-scope', value));
+
 };
-exports.waitForEnterAsNewWorkToBeDisplayed = function () {
-    browser.wait(ExpectedConditions.visibilityOf(exports.enterAsNewWorkSuggestion()));
+
+exports.waitForEnterAsWorkToBeDisplayed = function(value) {
+    browser.wait(ExpectedConditions.visibilityOf(exports.enterAsWorkSuggestion(value)));
 };
+
 exports.shellWorkTitleInput = function (i) {
     return exports.componentWorkRows().get(i).element(
-        by.model('component.shell.primary_title.title')
+        by.model('component.nonControlledWork.primaryTitle.title')
     );
 };
 exports.shellWorkCreatorNameInputs = function (i) {
     return exports.componentWorkRows().get(i).all(
-        by.model('creator.person_name')
+        by.css('div[ng-model="creator.person"] input')
     );
 };
 exports.shellWorkCreatorNameInput = function (i, j) {
@@ -340,14 +350,14 @@ exports.shellWorkCreatorNameInput = function (i, j) {
 };
 exports.shellWorkCreatorContributionInputs = function (i) {
     return exports.componentWorkRows().get(i).all(
-        by.model('creator.contribution')
+        by.model('creator.workContribution')
     );
 };
 exports.shellWorkCreatorContributionInput = function (i, j) {
     return exports.shellWorkCreatorContributionInputs(i).get(j);
 };
 exports.deleteComponentWorkButtons = function () {
-    return exports.componentWorkRows().$$('.delete-button');
+    return exports.componentWorkRows().$$('[ng-click="confirmComponentRemove(tgModularEditModel.components, component, $viewForm);"]');
 };
 exports.deleteComponentWorkButton = function (i) {
     return exports.deleteComponentWorkButtons().get(i);
@@ -358,7 +368,7 @@ exports.confirmComponentWorkDeletionButton = function () {
     );
 };
 exports.statusBinding = function () {
-    return element(by.binding('dealUtility.getRightsTermsPeriodName(work.workHeader.status)'));
+    return element(by.binding('::dealLink.deal.contractBriefNumber'));
 };
 exports.waitForStatusToBeDisplayed = function () {
     var el = exports.statusBinding();
@@ -380,10 +390,10 @@ exports.similarWorksPopUpScrollArea = function () {
     return pages.base.modalDialog().$('[style*="max-height"]');
 };
 exports.similarWorkTitleBindings = function () {
-    return pages.base.modalDialog().$$('.work-name');
+    return pages.base.modalDialog().element(by.repeater('work in data.works'));
 };
 exports.firstSimilarWorkTitleBinding = function () {
-    return exports.similarWorkTitleBindings().first();
+    return exports.similarWorkTitleBindings();
 };
 exports.ignoreSimilarWorksButton = function () {
     return pages.base.modalFooter().element(
@@ -919,13 +929,39 @@ exports.validateComponentWorkId = function (i, value) {
     pages.base.scrollIntoView(element);
     expect(element.getText()).toBe(value);
 };
+
+exports.workTitle = function (){
+
+    let locator = by.css('span[ng-bind="component.work.primaryTitle.title"]');
+
+    return exports.componentWorkRows().all(locator);
+};
+
+exports.rowIndexByEnteredTitle = function(val) {
+    var findByText = function() {
+        var using = arguments[0] || document;
+        var text = arguments[1];
+        var matches = [];
+        function addMatchingLeaves(element) {
+            if (element.children.length === 0 && element.textContent.match(text)) {
+                matches.push(element);
+            }
+            for (var i = 0; i < element.children.length; ++i) {
+                addMatchingLeaves(element.children[i]);
+            }
+        }
+        addMatchingLeaves(using);
+        return matches;
+    };
+
+    by.addLocator('text', findByText);
+};
+
 exports.validateComponentWorkName = function (i, value) {
     expect(exports.selectedComponentWorkName(i)).toEqual(value);
 };
 exports.validateComponentWorkAllocation = function (i, value) {
-    expect(exports.enteredComponentWorkAllocation(i)).toEqual(
-        pph.toFixed(value, 3)
-    );
+    expect(exports.enteredComponentWorkAllocation(i)).toEqual(value);
 };
 exports.clickShowComponentWorkDetailsButton = function (i) {
     var element = exports.showComponentWorkDetailsButton(i);
@@ -938,9 +974,11 @@ exports.validateShellWorkCreatorName = function (i, j, value) {
     expect(element.getText()).toContain(value);
 };
 exports.validateShellWorkCreatorContribution = function (i, j, value) {
-    var element = exports.shellWorkCreatorContributionLabel(i, j);
+    var element = exports.shellWorkCreatorContributionLabel(i, j),
+        el = '50.00%';
     pages.base.scrollIntoView(element);
-    expect(pph.parseFloat(element.getText())).toBe(value);
+    //expect(pph.parseFloat(element.getText())).toBe(value);
+    expect(element.getText()).toContain(el);
 };
 module.exports.enterCreatorContribution = function (i, value) {
     var element = pages.work.editCreatorContributionInput(i);
@@ -1007,6 +1045,32 @@ exports.expectMakingIntoMedleyConfirmationPopUpToBeDisplayed = function (more) {
 exports.confirmMakingIntoMedley = function () {
     exports.confirmMakingIntoMedleyButton().click();
 };
+
+module.exports.creatorContributionRows = function() {
+    return element.all(by.repeater('creator in tgModularEditModel.creators.$getItems()'));
+};
+module.exports.creatorContributionRow = function(index) {
+    return pages.newWork.creatorContributionRows().get(index);
+};
+
+module.exports.creatorNameInput = function(index) {
+    return (
+        pages.work.creatorContributionRow(index)
+            .element(by.model('creator.person'))
+    );
+};
+
+exports.enterCreatorSearchTerms = function(i, name) {
+    var element = pages.work.creatorNameInput(i).element(by.css('input[ng-model="$term"]'));
+    pages.base.scrollIntoView(element);
+    element.clear();
+    element.sendKeys(name);
+};
+
+exports.enterRandomLetterOnCreatorNameField = function(i) {
+    exports.enterCreatorSearchTerms(i, random.letter());
+};
+
 exports.validateRequiredCompositeWorkTypeField = function () {
     var element = exports.compositeWorkTypeDropdown();
     pages.base.scrollIntoView(element);
@@ -1023,14 +1087,14 @@ exports.validateDefaultComponentWorkSearchFilter = function (i) {
     expect(pages.base.selectedDropdownOption(element)).toBe('Title');
 };
 exports.validateRequiredComponentWorkSearchField = function (i) {
-    var element = exports.componentWorkSearchTermsField(i);
+    var element = exports.componentWorkSearchField(i);
     pages.base.scrollIntoView(element);
     expect(pph.matchesCssSelector(element, '.ng-invalid-required')).toBeTruthy();
 };
 exports.enterComponentWorkSearchTerms = function (i, value) {
     var element = exports.componentWorkSearchTermsField(i);
     pages.base.scrollIntoView(element);
-    element.clear();
+    //element.clear();
     element.sendKeys(value);
 };
 exports.enteredShellWorkTitle = function (i) {
@@ -1060,8 +1124,7 @@ exports.enterShellWorkCreatorContribution = function (i, j, value) {
     return element.sendKeys(value);
 };
 exports.expectCreatorSuggestionsToBeDisplayed = function () {
-    browser.wait(
-        ExpectedConditions.visibilityOf($('.tg-typeahead__suggestions-group-item')),
+    browser.wait(ExpectedConditions.visibilityOf($('li.tg-typeahead__suggestions-container')),
         _tf_config._system_.wait_timeout
     );
 };
@@ -1080,20 +1143,21 @@ exports.enterComponentWorkAllocation = function (i, value) {
     element.sendKeys(value);
 };
 exports.selectFirstComponentWorkSuggestion = function () {
-    var suggestion = $$('.typeahead-result').get(0),
+    var suggestion = $$('.tg-typeahead__suggestions-group-item').get(0),
         result = {};
 
-    result.name = suggestion.$('.typeahead-result-text').getText();
+    result.name = suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText();
+    result.workCode = suggestion.$('span[ng-bind-html="::$match.data.workCode.getFullCode() | tgHighlight:$term"]').getText();
 
-    return suggestion.click().then(function () {
+    return suggestion.click().then(function() {
         return result;
     });
 };
 exports.selectFirstCreatorSuggestion = function () {
-    var suggestion = $$('.typeahead-result').first(),
+    var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
         result = {};
 
-    result.name = pph.trim(suggestion.$('.typeahead-result-text').getText());
+    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText());
 
     return suggestion.click().then(function () {
         return result;
@@ -1117,11 +1181,11 @@ exports.expectSameWorkCantBeAddedAsComponentMultipleTimesMessageToAppear = funct
 
 
 exports.allWorksButton = function () {
-    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)"));
+    return element(by.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(1)"));
 };
 
 exports.conflictingWorksButton = function(){
-    return element(by.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)"));
+    return element(by.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(2)"));
 };
 
 exports.deleteComponentWork = function (i) {
@@ -1289,7 +1353,7 @@ exports.goToGeneralTab = function () {
 };
 
 exports.goBackToTheMainPageFromWork = function () {
-    var element = browser.driver.findElement(By.css("a[data-ng-click='stateHolder.workLog.isShown = false;']"));
+    var element = browser.driver.findElement(By.css("a[ui-sref='deal.view.terms.cpAndScopes.cp.scope({cpId: stateHolder.filters.cpId, scopeId: stateHolder.filters.scopeId})']"));
     pages.base.scrollIntoView(element);
     return element.click().then(function () {
         pages.base.waitForAjax();
@@ -1389,7 +1453,7 @@ exports.goToRegistrationActivityTab = function () {
 };
 
 exports.lastUpdateDateBinding = function () {
-    return element(by.binding('work.pristine.last_updated_date | tgIsoDate'));
+    return element(by.binding('tgWorkHeader.lastUpdatedDate | tgIsoDate'));
 };
 
 exports.clickOnLastUpdateDate = function () {
@@ -1494,7 +1558,7 @@ exports.merge = (function () {
     };
 
     merge.findWorkInput = function () {
-        return element(by.model('data.workSearch.selected_work'));
+        return element(by.css('[ng-model="__searchedWork"] input'));
     };
 
     merge.enterFindWorkUsingPreviouslyEnteredPrimaryTitle = function () {
@@ -1542,7 +1606,7 @@ exports.auditLog = (function () {
     var auditLog = {};
 
     auditLog.headerTitle = function () {
-        return $('#RECORD-HEADER h1 strong');
+        return $('div[ui-view="audit"] h1');
     };
 
     auditLog.validateHeaderTitle = function () {

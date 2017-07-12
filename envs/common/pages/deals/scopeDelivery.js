@@ -68,15 +68,15 @@ exports.searchDealsForAllContributions = function (terms) {
 };
 
 exports.dealSearchInput = function (i) {
-    return $$('.scope-delivery__search-deal input').get(i);
+    return $$('[tg-typeahead-placeholder="Search deals"] input').get(i);
 };
 
 exports.contractPeriodFilterButton = function () {
-    return element(by.css("div[data-tg-dropdown-selected='selectWorkLogCP();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+    return element(by.css("div[tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow"));
 };
 
 exports.scopeFilterButton= function(){
-  return element(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] div.tg-dropdown-button button.tg-dropdown-label.overflow"));
+  return element(by.css("div[tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow"));
 };
 
 exports.clickOnContractPeriodFilterFromDeliveredWork = function () {
@@ -133,19 +133,19 @@ exports.searchDealsForContribution = function (i, terms) {
 
 exports.contractPeriodDropDownResults = function () {
     pages.base.waitForAjax();
-    return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li"));
+    return element.all(by.css("div[tg-dropdown-selected='selectWorkLogCP();'] ul.dropdown-menu li"));
     //return element.all(by.css("div[data-tg-dropdown-selected = 'selectWorkLogCP();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
 };
 
 exports.scopeDropDownResults = function () {
     pages.base.waitForAjax();
-    return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li"));
+    return element.all(by.css("div[tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li"));
     //return element.all(by.css("div[data-tg-dropdown-selected='selectWorkLogScope();'] ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"));
 };
 
 exports.dealSearchResults = function () {
     pages.base.waitForAjax();
-    return $$('.tg-typeahead__suggestions-group-item-inner');
+    return $$('.tg-typeahead__suggestions-group-item');
 };
 
 exports.dealSearchResult = function (i) {
@@ -167,7 +167,7 @@ exports.selectDealSearchResultByIndex = function (i) {
 
 exports.editModeContributionRows = function () {
     return element.all(by.repeater(
-        'creatorContribution in modularEditModels.model'
+        'dealScopeLink in dealLink.dealScopeLinks.$getItems()'
     ));
 };
 
@@ -185,6 +185,7 @@ exports.dealSearchForContributionInput = function (i) {
     ).element(by.model('$term'));
 };
 
+/*
 exports.searchDealsForContribution = function (i, terms) {
     var el = exports.dealSearchForContributionInput(i);
 
@@ -193,9 +194,10 @@ exports.searchDealsForContribution = function (i, terms) {
     return el.sendKeys(terms);
 };
 
+*/
 exports.scopeDeliveryCheckboxes = function (i) {
     return exports.editModeContributionRow(i).all(by.model(
-        'dealScope.state.selected'
+        'dealScopeLink.selected'
     ));
 };
 
@@ -226,6 +228,37 @@ exports.validateCheckboxState = function (iContribution, iScope, expected) {
     }
 };
 
+exports.selectDeliveryByText = function(indexMin, contributionIndex, scopeIndex, Text){
+
+    for (var j = indexMin; j <= contributionIndex; j++) {
+        var row = $$('div[ng-repeat="dealScopeLink in dealLink.dealScopeLinks.$getItems()"]').get(contributionIndex),
+            scope = row.$('span[class="overflow scope-delivery-description ng-binding"]');
+
+        scope.getText().then(function (promise) {
+
+            if (Text == promise) {
+
+                var element = exports.scopeDeliveryCheckbox(
+                    contributionIndex, scopeIndex
+                );
+
+                pages.base.scrollIntoView(element);
+
+                pages.base.waitForAjax();
+
+                browser.wait(ExpectedConditions.elementToBeClickable(element));
+
+                return element.click().then(function () {
+                    pages.base.waitForAjax();
+                });
+
+
+            }
+
+        });
+    }
+};
+
 exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
     var element = exports.scopeDeliveryCheckbox(
         contributionIndex, scopeIndex
@@ -243,7 +276,7 @@ exports.clickScopeDeliveryCheckbox = function (contributionIndex, scopeIndex) {
 };
 
 exports.modularEditContainer = function () {
-    return $('[data-tg-modular-edit-id="scopeDelivery"]');
+    return $('[tg-modular-edit-id="scopeDelivery"]');
 };
 
 exports.modularEditControls = function () {
@@ -263,14 +296,20 @@ exports.save = function () {
 };
 
 exports.contributionRows = function () {
-    return $$('.scope-delivery-row').filter(function (element) {
+    return $$('.work-dst-row').filter(function (element) {
         return element.isDisplayed();
     });
 };
 
 exports.contributionDealIdBinding = function (i) {
     return exports.contributionRows().get(i).element(by.binding(
-        '::linkedDeal.deal.contractBriefNumber'
+        '::dealLink.deal.contractBriefNumber'
+    ));
+};
+
+exports.contributionScopeNameBinding = function (i) {
+    return exports.contributionRows().get(i).element(by.binding(
+        '::dealScopeLink.dealScope.description'
     ));
 };
 
@@ -294,9 +333,7 @@ exports.contributionScopeDeliveryDetails = function (i) {
 };
 
 exports.contributionDealId = function (i) {
-    return exports.contributionScopeDeliveryDetails(i).then(function (values) {
-        return values.dealId;
-    });
+    return exports.contributionDealIdBinding(i).getText();
 };
 
 exports.validateContributionDealId = function (i, value) {
@@ -304,9 +341,7 @@ exports.validateContributionDealId = function (i, value) {
 };
 
 exports.contributionScopeName = function (i) {
-    return exports.contributionScopeDeliveryDetails(i).then(function (values) {
-        return values.scopeName;
-    });
+    return exports.contributionScopeNameBinding(i).getText();
 };
 
 exports.validateContributionScopeName = function (i, value) {

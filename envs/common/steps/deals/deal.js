@@ -26,6 +26,20 @@ exports.openDealFromSlot = function (slotId) {
     });
 };
 
+exports.openDealbyID = function (DealID) {
+    describe('Open deal (' + DealID + ')', function () {
+        var mhs = steps.mainHeader.search;
+
+        mhs.selectEntityType('Deal');
+
+        mhs.enterTerms(labeledFn('ID from deal slot', function () {
+            return DealID
+        }));
+
+        mhs.selectResultByIndex(0);
+    });
+};
+
 exports.refreshThePage = function () {
     it("Refresh the page", function () {
         browser.driver.navigate().refresh();
@@ -49,6 +63,7 @@ exports.saveDeal = function () {
 exports.clickFirstScopeHeader = function () {
     it("Click the first scope header", function () {
         pages.deal.clickFirstScopeHeader();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("[ng-form='scopeForm']"))));
     });
 };
 
@@ -82,9 +97,7 @@ exports.printDealNumber = function () {
 
 exports.findId = function () {
     it('Find deal ID', function () {
-        var idBinding = element(by.binding(
-            ' getPristineDeal().deal_header.contract_brief_number '
-        ));
+        var idBinding = $$('.RECORD-HEADER .info.ng-binding').get(2);
 
         idBinding.getText().then(function (value) {
             hash.currentEntityDataSlotsByType.deal.id = value;
@@ -240,6 +253,12 @@ exports.checkRightsTermPeriodsHeaderTitlePresent = function () {
 exports.checkFinderDealsHeaderTitlePresent = function () {
     it("Check that finder deals header title is present ", function () {
         expect(pages.deal.elems.finderDealsHeaderLink.isDisplayed()).toBeTruthy();
+    });
+};
+
+exports.waitforSomething = function (object) {
+    it("Wait for object to be visible ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css(object))));
     });
 };
 

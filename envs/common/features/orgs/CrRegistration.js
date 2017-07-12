@@ -23,8 +23,16 @@ exports.feature = [
     {
         name: 'Validate CR Registration scheduling',
         tags: [],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
+            //create work and deliver it to scope
+            steps.CreateWorkComp.CreateWork(1);
+            steps.ScopeDeliveryComp.scopeDelivery(0,0,374359);
+            //-----------------------------------
+
+
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
+
             using(steps.organisation, function () {
                 this.goToGeneralTab();
 
@@ -36,7 +44,7 @@ exports.feature = [
 
                 this.executeRegistrationRun(data.cr.view, data.cr.date, data.cr.org);
                 this.confirmRegistrationRun();
-                this.listWorkIdNumberRegRun();
+
                 this.goToRegistrationActivityTab();
                 this.saveRegActivityLastEvent();
                 this.verifyThatWorkIsDelivered();
@@ -86,6 +94,6 @@ exports.feature = [
                     this.validateProcessedDate(data.cr.date);
                 });
             });
-        }
+        })
     }
 ];

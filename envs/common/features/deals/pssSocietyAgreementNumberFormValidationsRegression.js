@@ -35,11 +35,11 @@ exports.feature = [
             describe('Fill general fields', function () {
                 cdg.selectSigningTerritory('Argentina');
 
-                if(systemConfig.env.name === 'qa') {
+                //if(systemConfig.env.name === 'qa') {
                     cdg.fillCompanyCodeField('WCM');
                     cdg.waitForContractingPartyDropDown();
                     cdg.selectRandomCompanyCode();
-                }
+                //}
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.waitForContractingPartyDropDown();
@@ -105,7 +105,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -119,13 +120,15 @@ exports.feature = [
 
             dsanCtp.enterSocietySearchTerms(0, 0, 'ASCAP');
             dsanCtp.selectSocietySearchResultByName('ASCAP');
+            dsanCtp.enterSocietyAgreementNumber(0, 0, '123');
+
 
             dsanCtp.enterSocietySearchTerms(0, 1, 'ASCAP');
             dsanCtp.expectSocietySearchResultToBeDisallowed('ASCAP');
-            dsanCtp.selectSocietySearchResultByName('ASCAP');
+            //dsanCtp.selectSocietySearchResultByName('ASCAP');
 
-            dsanCtp.validateSocietyName(0, 1, '');
-        }
+            //dsanCtp.validateSocietyName(0, 1, '');
+        })
     },
     {
         name: (
@@ -135,7 +138,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -152,7 +156,7 @@ exports.feature = [
             dsanCtp.enterSocietyAgreementNumber(0, 0, '123');
 
             dsanCtp.validateCreatorSearchTermsFieldState(0, 'invalid');
-        }
+        })
     },
     {
         name: (
@@ -162,7 +166,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -210,14 +215,15 @@ exports.feature = [
 
                 dsanPub.validateSocietyAgreementNumberFieldState(0, 'invalid');
             });
-        }
+        })
     },
     {
         name: 'Save button is disabled when either form is invalid',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -249,14 +255,15 @@ exports.feature = [
 
                 dsan.validateSaveButtonState('enabled');
             });
-        }
+        })
     },
     {
         name: 'Create person (creator)',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var p = steps.person,
                 np = steps.newPerson;
 
@@ -272,14 +279,15 @@ exports.feature = [
             np.selectAffiliatedSocietySearchResultByIndex(0);
 
             np.save();
-        }
+        })
     },
     {
         name: 'Creator sets with no society agreement numbers are valid',
 
         tags: [],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -308,6 +316,6 @@ exports.feature = [
             describe('Validate changes', function () {
                 dsanCtp.findCreatorSet(creatorName, 'unused');
             });
-        }
+        })
     }
 ];

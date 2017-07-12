@@ -11,7 +11,7 @@ exports.rightsTermPeriodContainer = function(i) {
 };
 
 exports.acquisitionPeriodContainer = function(i) {
-    return exports.rightsTermPeriodContainer(i).$('.aquisition-period');
+    return exports.rightsTermPeriodContainer(i).$('.ng-isolate-scope');
 };
 
 exports.acquisitionPeriodScopesInput = function(i) {
@@ -28,14 +28,16 @@ exports.clickAcquisitionPeriodScopesInput = function(i) {
 
 exports.acquisitionPeriodScopesTypeaheadContainer = function(i) {
     return exports.acquisitionPeriodContainer(i).element(
-        by.model('acqRtp.deal_scope_id_holders')
+        //by.model('acqRtp.deal_scope_id_holders')
+        by.css('.tg-typeahead__suggestions')
     );
 };
 
 exports.selectAllSuggestedAcquisitionPeriodScopesOption = function(i) {
     return exports.acquisitionPeriodScopesTypeaheadContainer(i).element(
         // TODO: Select by binding instead of this.
-        by.cssContainingText('strong', 'Select All')
+        //by.cssContainingText
+        by.css('.ng-binding')
     );
 };
 

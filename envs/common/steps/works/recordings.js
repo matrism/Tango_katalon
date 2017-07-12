@@ -48,7 +48,8 @@ addBasicStep(exports, page, [
     'Remove',
 
     'Expanded',
-    'Toggle'
+    'Toggle',
+    'Toggle Down'
 ]);
 
 addStepGroup(exports, 'Albums', g => {

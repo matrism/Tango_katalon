@@ -8,8 +8,7 @@ exports.commonFeatureTags = [
     'royaltyProcessing',
     'crossReference',
     'crossReferenceSanity',
-    'sanity',
-    'TS-209'
+    'sanity'
 ];
 
 exports.beforeFeature = () => {
@@ -23,7 +22,7 @@ exports.feature = [
         steps: function() {
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             steps.crossReference.selectSearchCriterion('Incoming Works');
-            steps.crossReference.searchForIncomingWork('test', 'Incoming Work ID');
+            steps.crossReference.searchForIncomingWork('a', 'Incoming Work ID');
             steps.crossReference.expectIncomingWorkToBeVisible();
             steps.crossReference.expectIncomingWorkIdToContainSearchTerm();
         },

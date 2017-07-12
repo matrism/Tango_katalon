@@ -24,9 +24,9 @@ exports.totalWorks = () => {
     return exports.totalWorksMsg().then(msg => {
         let iSlice = msg.indexOf(':');
 
-        if(iSlice === -1) {
-            throw new Error(`Parse error (missing colon): ${msg}`);
-        }
+        // if(iSlice === -1) {
+        //     throw new Error(`Parse error (missing colon): ${msg}`);
+        // }
 
         return msg.slice(iSlice + 1).trim();
     });
@@ -88,6 +88,14 @@ exports.unconfirmed = (() => {
 
     unc.create = i => asAlways(
         unc.createLink(i), 'scrollIntoView', 'click', 'waitForAjax'
+    );
+
+    unc.clickConfirmation = () => $('.modal.fade.in div.modal-footer button[data-ng-click="ok();"]');
+
+
+
+    unc.confirmation = () => asAlways(
+        unc.clickConfirmation(), 'scrollIntoView', 'click'
     );
 
     return unc;

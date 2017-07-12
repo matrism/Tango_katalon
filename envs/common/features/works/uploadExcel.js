@@ -23,10 +23,9 @@ exports.feature = [
         name: 'Create albums and recordings',
 
         tags: [],
-
         steps: criticalScenario(() =>
         {
-            let base = steps.base,
+           let base = steps.base,
 
                 mh = steps.mainHeader,
                 wuh = steps.worksUploadHistory,
@@ -85,7 +84,6 @@ exports.feature = [
             // wuh.waitUntilFileNameIsStaged(fromTestVariable(
             //     'generated Excel file name'
             // ));
-
             wuh.findRowByFileName(
                 fromTestVariable('generated Excel file name'), 'uploaded row'
             );
@@ -115,6 +113,7 @@ exports.feature = [
                 vwf.validateTotalWorks(3);
             });
 
+            steps.base.sleep(1000);
             vwfu.validateRowCount(3);
 
             _.times(3, i => {
@@ -122,6 +121,7 @@ exports.feature = [
                     vwfu.toggle(0);
                     steps.base.sleep(5000);
                     vwfu.create(0);
+                    vwfu.confirmation();
                 });
             });
 

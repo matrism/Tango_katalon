@@ -75,7 +75,7 @@ module.exports.ensureTotalContributionTooHighMessageIsDisplayed = function() {
 module.exports.validateTotalContribution = function() {
 	it (
 		"Validate total contribution", function() {
-			expect(pages.newWork.totalContribution()).toBe(100);
+			expect(pages.newWork.totalContribution()).toBe("100.000%");
 		}
 	);
 };
@@ -156,7 +156,7 @@ module.exports.validateDefaultMusicLibrary = function() {
 	});
 };
 module.exports.enterPrimaryWorkTitle = function(value) {
-    it('Enter primary work title', function() {
+    it('Enter primary work title' + value, function() {
         pages.newWork.enterPrimaryWorkTitle(value).then(function() {
             hash.currentEntityDataSlotsByType.work.primaryTitle = value;
         });
@@ -181,6 +181,7 @@ module.exports.enterAlternateWorkTitle = function(i, value) {
 
             alternateTitles[i] = value;
         });
+        browser.sleep(1000);
     });
 };
 module.exports.enterRandomAlternateWorkTitle = function(i) {
@@ -240,7 +241,7 @@ exports.selectFirstComponentWorkMatching = function(i, searchTerms, data, key) {
     });
 
     it('Wait for component work suggestions to load', function() {
-        pages.newWork.waitForEnterAsNewWorkToBeDisplayed();
+        pages.newWork.waitForEnterAsWorkToBeDisplayed(searchTerms);
     });
 
     it('Select a random work', function() {
@@ -476,6 +477,7 @@ exports.enterNewShellWork = function(i, title, data, key) {
         });
     });
 };
+
 exports.expectShellWorkTitleToMatchEnteredOne = function(i) {
     it('Expect shell work title #' + (i + 1) + ' to match entered one', function() {
         var data = hash.currentEntityDataSlotsByType.work;
@@ -506,11 +508,11 @@ exports.validateRequiredShellWorkCreatorNameField = function(i, j) {
         }
     );
 };
-exports.selectRandomShellWorkCreator = function(i, j, data, key) {
+exports.selectRandomShellWorkCreator = function(i, j, title, data, key) {
     it(
         'Type a random letter on creator name field #' + (j + 1) +
         ' of (shell) component work #' + (i + 1), function() {
-            pages.newWork.enterRandomLetterOnShellWorkCreatorNameField(i, j);
+            pages.newWork.enterRandomLetterOnShellWorkCreatorNameField(i, j, title);
         }
     );
 
@@ -913,12 +915,35 @@ exports.continueToNextTab = function() {
     });
 };
 
+exports.continueIfSimilarWorksPrompted = function() {
+    it('Continue if similar works is found', function() {
+        pages.newWork.continueIfPrompted();
+    });
+};
+
 exports.save = function() {
+   // it('Saving work', function() {
+       // browser.sleep(2000);
      steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
+   // });
 };
 
 exports.saveWork = exports.save;
 
+exports.validateIgnoreModal = function() {
+    it('Continue to if found similar work', function() {
+        pages.newWork.continueIfPrompted();
+    });
+};
+
 exports.validateSaveWorkRedirection = function() {
-	steps.base.validateRedirection("created work page", "/rights/summary");
+    it('Checking redirection Page', function() {
+        steps.base.validateRedirection("created work page", "/rights/summary");
+    });
+};
+
+exports.waitSaveButtonEnabled = function () {
+    it("Check Save button to be enabled", function () {
+        browser.sleep(4000);
+    });
 };

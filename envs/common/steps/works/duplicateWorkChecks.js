@@ -21,7 +21,7 @@ exports.clickFirstSimilarWorkTitle = function() {
 };
 
 exports.validateSimilarWorkLinkDestination = function() {
-     steps.base.validateRedirection("similar work page", "/metadata");
+     steps.base.validateRedirection("similar work page", "/rights/summary");
 };
 
 exports.ignoreSimilarWorksWarning = function() {

@@ -80,8 +80,7 @@ exports.feature = [
     },
     {
         name: 'Create works and verify registration activity',
-        tags: [],
-        steps: function () {
+        steps: criticalScenario(() => {
             _.times(2, function(i) {
                 steps.base.useBlankEntityDataSlot('work', 'work' + i);
                 using(steps.newWork, function () {
@@ -92,7 +91,9 @@ exports.feature = [
                     this.selectCreatorFromPersonSlot(0, 0);
                     this.enterCreatorContribution(0, 100);
                     this.optToIncludeWorkOnWebsite(false);
+
                     this.saveWork();
+                    this.continueIfSimilarWorksPrompted();
                     this.validateSaveWorkRedirection();
                 });
                 steps.work.findCurrentlyOpenWorkId();
@@ -130,20 +131,24 @@ exports.feature = [
             // Verify Organisation Preview Registration Run
             steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
             steps.organisation.goToPreviewRegistrationRunTab();
+            steps.organisation.scrollCWRtoLastResult();
             using(steps.organisationRegistrationStack, function () {
                 using(this.works, function () {
                     this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
+
                     this.validateStatus('Scheduled');
+
                     this.find({ title: 'TEST MERGE WORK 2 ' + randomString('work') });
                     this.validateStatus('Scheduled');
                 });
             });
-        }
+        })
     },
+
     {
         name: 'Merge work',
         tags: [],
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useEntityDataSlot('work', 'work0');
             steps.work.goToWorkPage();
             steps.work.goToGeneralTab();
@@ -154,12 +159,12 @@ exports.feature = [
                 this.continue();
                 this.confirm();
             });
-        }
+        })
     },
     {
         name: 'Search for the merged works',
         tags: [],
-        steps: function () {
+        steps: criticalScenario(() => {
             using(steps.work, function() {
                 steps.base.useEntityDataSlot('work', 'work0');
                 steps.searchSection.selectEntityType('Works');
@@ -180,16 +185,17 @@ exports.feature = [
                 steps.base.waitForAjax();
                 this.expectWorkSearchMatchCountToBe(0);
             });
-        }
+        })
     },
     {
         name: 'Validate Preview Registration Run',
         tags: [],
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
 
             steps.organisation.goToPreviewRegistrationRunTab();
             using(steps.organisationRegistrationStack, function () {
+                steps.organisation.scrollCWRtoLastResult();
                 using(this.works, function () {
                     this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
                     this.validateStatus('Scheduled');
@@ -205,6 +211,6 @@ exports.feature = [
                     });
                 });
             });
-        }
+        })
     },
 ];

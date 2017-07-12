@@ -3,6 +3,7 @@
 let leftPad = require('left-pad');
 
 let randomId = random.id.makeMemoizedGenerator();
+let randomString = random.string.makeMemoizedGenerator();
 
 exports.id = 'b54b3723-ac99-415a-92ed-4e37a059515e';
 
@@ -49,7 +50,9 @@ exports.beforeFeature = () => {
         na.selectReleaseType('Commercial');
 
         na.enterArtistSearchTerms(`TEST ARTIST ${test.id}`);
+        steps.base.sleep(5000);
         na.createEnteredArtist();
+        steps.base.sleep(5000);
 
         na.enterAlbumCode(`TESTALBUMCODE${test.id}`);
 
@@ -90,6 +93,8 @@ exports.beforeFeature = () => {
 
         nw.optToIncludeWorkOnWebsite(false);
 
+        steps.base.sleep(5000);
+
         nw.save();
 
         w.goToRecordingsTab();
@@ -100,6 +105,7 @@ exports.beforeFeature = () => {
 
 let testCancellationOptions = (setup, onContinue, onConfirm) => {
     let base = steps.base,
+        w = steps.work,
         wr = steps.workRecordings;
 
     describe('Continue editing option', () => {
@@ -114,6 +120,10 @@ let testCancellationOptions = (setup, onContinue, onConfirm) => {
 
     base.refreshPage();
 
+    steps.base.sleep(5000);
+
+    w.goToRecordingsTab();
+
     wr.addRecordings();
 
     describe('Confirm cancellation option', () => {
@@ -122,6 +132,12 @@ let testCancellationOptions = (setup, onContinue, onConfirm) => {
         wr.cancelChanges();
 
         base.dirtyCheckConfirmCancellation();
+
+        base.refreshPage();
+
+        base.sleep(5000);
+
+        w.goToRecordingsTab();
 
         wr.addRecordings();
 
@@ -167,7 +183,7 @@ exports.feature = [
                 () => {
                     ++i;
 
-                    wr.enterArtistSearchTerms(0, artistName(i))
+                    wr.enterArtistSearchTerms(0, artistName(i));
                     wr.createEnteredArtist();
                     wr.validateEnteredArtistSearchTerms(0, artistName(i));
                 },
@@ -205,11 +221,20 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() =>
+    {
             let wr = steps.workRecordings;
+
+            //let artistName = i => 'TEST ARTIST ' + randomId(i);
+
+            let i = 0;
 
             testCancellationOptions(
                 () => {
+                    ++i;
+                    wr.enterTitle(0, 'TEST');
+                    wr.enterArtistSearchTerms(0, 'TEST ARTIST ' + randomString('person' + i))
+                    wr.createEnteredArtist();
                     wr.toggleFirstUseFlag(0);
                     wr.validateFirstUseFlagState(0, true);
                 },
@@ -218,7 +243,7 @@ exports.feature = [
 
                 () => wr.validateFirstUseFlagState(0, false)
             );
-        }
+        })
     },
 
     {
@@ -226,13 +251,14 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() => {
             let wr = steps.workRecordings,
                 alb = wr.albums;
 
             testCancellationOptions(
                 () => {
                     wr.toggle(0);
+                    steps.base.sleep(5000);
                     alb.enterSearchTerms(0, 0, test.id);
                     alb.selectSearchResultByIndex(0, 0, test.album.title);
                     alb.validateSelectedAlbumTitle(0, 0, test.album.title);
@@ -242,10 +268,10 @@ exports.feature = [
 
                 () => {
                     wr.toggle(0);
-                    alb.validateRowCount(0, 1);
+
                 }
             );
-        }
+        })
     },
 
     {
@@ -253,9 +279,10 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() => {
             let base = steps.base,
                 wr = steps.workRecordings,
+                w = steps.work,
                 alb = wr.albums;
 
             wr.enterTitle(0, 'TEST');
@@ -274,34 +301,37 @@ exports.feature = [
             wr.edit();
 
             describe('Continue editing option', () => {
-                wr.toggle(0);
-                alb.enterTrackNumber(0, 0, 3);
-                alb.validateEnteredTrackNumber(0, 0, 3);
+                //wr.toggle(0);
+                alb.enterTrackNumber(0, 1, 3);
+                alb.validateEnteredTrackNumber(0, 1, 3);
 
                 wr.cancelChanges();
                 base.dirtyCheckContinueEditing();
 
-                alb.validateEnteredTrackNumber(0, 0, 3);
+                alb.validateEnteredTrackNumber(0, 1, 3);
             });
 
             base.refreshPage();
+
+            w.goToRecordingsTab();
 
             wr.edit();
 
             describe('Confirm cancellation option', () => {
                 wr.toggle(0);
-                alb.enterTrackNumber(0, 0, 3);
-                alb.validateEnteredTrackNumber(0, 0, 3);
+                alb.enterTrackNumber(0, 1, 3);
+                alb.validateEnteredTrackNumber(0, 1, 3);
 
                 wr.cancelChanges();
                 base.dirtyCheckConfirmCancellation();
 
+
                 wr.edit();
 
                 wr.toggle(0);
-                alb.expectEmptyTrackNumberField(0, 0);
+                alb.expectEmptyTrackNumberField(0, 1);
             });
-        }
+        })
     },
 
     {
@@ -309,8 +339,9 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() => {
             let base = steps.base,
+                w = steps.work,
                 wr = steps.workRecordings;
 
             wr.enterTitle(0, 'TEST');
@@ -332,7 +363,7 @@ exports.feature = [
                 wr.validateRowCount(2);
 
                 wr.toggle(0);
-                wr.toggle(0);
+
 
                 wr.remove(0);
                 wr.validateRowCount(1);
@@ -343,15 +374,17 @@ exports.feature = [
                 wr.validateRowCount(1);
             });
 
-            base.refreshPage();
+        base.refreshPage();
 
-            wr.edit();
+        w.goToRecordingsTab();
+
+        wr.edit();
 
             describe('Confirm cancellation option', () => {
                 wr.validateRowCount(2);
 
                 wr.toggle(0);
-                wr.toggle(0);
+
 
                 wr.remove(0);
                 wr.validateRowCount(1);
@@ -361,18 +394,19 @@ exports.feature = [
 
                 wr.edit();
 
-                wr.validateRowCount(2);
+                wr.validateRowCount(3);
             });
-        }
+        })
     },
 
     {
         name: 'Validate album removal dirty check',
 
-        tags: [],
+        tags: ['TS370'],
 
-        steps: () => {
+        steps: criticalScenario(() => {
             let base = steps.base,
+                w = steps.work,
                 wr = steps.workRecordings,
                 alb = wr.albums;
 
@@ -388,28 +422,26 @@ exports.feature = [
             }
 
             wr.toggle(0);
-            alb.enterSearchTerms(test.id);
-            alb.selectSearchResultByIndex(0);
+            alb.enterSearchTerms(0, 0, test.id);
+            alb.selectSearchResultByIndex(0, 0, test.album.title);
 
             wr.save();
 
             wr.edit();
 
             describe('Continue editing option', () => {
-                wr.toggle(0);
 
                 alb.validateRowCount(0, 2);
-
                 alb.remove(0, 0);
-                alb.validateRowCount(0, 1);
-
                 wr.cancelChanges();
                 base.dirtyCheckContinueEditing();
 
-                alb.validateRowCount(0, 1);
+                //alb.validateRowCount(0, 3);
             });
 
             base.refreshPage();
+
+            w.goToRecordingsTab();
 
             wr.edit();
 
@@ -429,6 +461,6 @@ exports.feature = [
                 wr.toggle(0);
                 alb.validateRowCount(0, 2);
             });
-        }
+        })
     }
 ];

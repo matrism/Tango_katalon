@@ -24,30 +24,30 @@ if (pages.createDealGeneral === undefined) {
             artistsField: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass']"},
             artistFieldInput: {css: "div[name='artists'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             artistsDropDownData: {css: "div[name='artists'] ul.tg-typeahead__suggestions.ng-scope"},
-            representMultipleDealsField: {css: "div[data-ng-model='deal.mult_deal_reason_code'] div.tg-dropdown-button"},
-            exclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(1)"},
-            nonExclusiveDealRights: {css: "#deal-general button[data-ng-model='deal.exclusive']:nth-child(2)"},
+            representMultipleDealsField: {css: "div[ng-model='tgModularEditModel.multDealReason'] div.tg-dropdown-button"},
+            exclusiveDealRights: {css: "div[tg-modular-edit-entity='Deal'] button[ng-model='tgModularEditModel.isExclusive']:nth-child(1)"},
+            nonExclusiveDealRights: {css: "div[tg-modular-edit-entity='Deal'] button[ng-model='tgModularEditModel.isExclusive']:nth-child(2)"},
             dealKeywordsField: {css: "div[name='dealKeywords'] div[ng-class='tgTypeaheadWrapClass']"},
             dealKeywordsFieldInput: {css: "div[name='dealKeywords'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             dealKeywordsDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
-            wampsContractBriefNumberField: {css: "#deal-general input[name='wampsContractBriefNumber']"},
-            auditPeriodField: {css: "#deal-general input[name='auditProvisionsMonthPeriod']"},
-            periodFileSuitField: {css: "#deal-general input[name='suitFillMonthPeriod']"},
-            legalFileReferenceCodeField: {css: "#deal-general input[name='legalFileNumbers']"},
+            wampsContractBriefNumberField: {css: "div[tg-modular-edit-entity='Deal'] input[name='wamps_contract_brief_number']"},
+            auditPeriodField: {css: "div[tg-modular-edit-entity='Deal'] input[name='audit_period']"},
+            periodFileSuitField: {css: "div[tg-modular-edit-entity='Deal'] input[name='file_suit_period']"},
+            legalFileReferenceCodeField: {css: "div[tg-modular-edit-entity='Deal'] input[name='legal_file_reference']"},
             externalContactsNameDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             externalContactNameFieldInput: {css: "div[data-ng-model='contact.model'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             internalContactsInputField: {css: 'div[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(1) div[ng-model="contact.user"] div[ng-class="tgTypeaheadWrapClass"] input[ng-model="$term"]'},
             internalContactsDropDownData: {css: "div.ng-scope ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
             internalContactRoleInputField: {css: 'div[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(1) div[ng-model="contact.roles"] div[ng-class="tgTypeaheadWrapClass"] input[ng-model="$term"]'},
-            demosDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(1) input"},
-            usCopyrightCertificateDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(2) input"},
-            legalFeesDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(3) input"},
-            advertisingPromotionsDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(4) input"},
-            leadSheetsDealChargeBacksField: {css: "div[data-ng-form='chargeBacksForm']:nth-child(5) input"},
-            yesMechanicalNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(1) button[data-ng-model='bbc.intbid']:nth-child(1)"},
-            noMechanicalNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(1) button[data-ng-model='bbc.intbid']:nth-child(2)"},
-            yesPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(1)"},
-            noPerformanceNonTitleBoundIncome: {css: "div[data-ng-form='blackBoxClauseForm']:nth-child(2) button[data-ng-model='bbc.intbid']:nth-child(2)"}
+            demosDealChargeBacksField: {css: "div[ng-form='chargeBacksForm']:nth-child(1) input"},
+            usCopyrightCertificateDealChargeBacksField: {css: "div[ng-form='chargeBacksForm']:nth-child(2) input"},
+            legalFeesDealChargeBacksField: {css: "div[ng-form='chargeBacksForm']:nth-child(3) input"},
+            advertisingPromotionsDealChargeBacksField: {css: "div[ng-form='chargeBacksForm']:nth-child(4) input"},
+            leadSheetsDealChargeBacksField: {css: "div[ng-form='chargeBacksForm']:nth-child(5) input"},
+            yesMechanicalNonTitleBoundIncome: {css: "div[ng-form='blackBoxClauseForm']:nth-child(1) button[ng-model='bbc.value']:nth-child(1)"},
+            noMechanicalNonTitleBoundIncome: {css: "div[ng-form='blackBoxClauseForm']:nth-child(1) button[ng-model='bbc.value']:nth-child(2)"},
+            yesPerformanceNonTitleBoundIncome: {css: "div[ng-form='blackBoxClauseForm']:nth-child(2) button[ng-model='bbc.value']:nth-child(1)"},
+            noPerformanceNonTitleBoundIncome: {css: "div[ng-form='blackBoxClauseForm']:nth-child(2) button[ng-model='bbc.value']:nth-child(2)"}
         },
 
         selectDesiredSigningTerritory: function (specific_country) {
@@ -289,8 +289,8 @@ if (pages.createDealGeneral === undefined) {
 
         selectTheRandomValueRepresentMultipleDeals: function () {
             pages.createDealGeneral.elems.representMultipleDealsField.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[data-ng-model='deal.mult_deal_reason_code'] ul.dropdown-menu li.ng-scope"))));
-            browser.driver.findElements(By.css("div[data-ng-model='deal.mult_deal_reason_code'] ul.dropdown-menu li.ng-scope"))
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css("div[ng-model='tgModularEditModel.multDealReason'] ul.dropdown-menu li.ng-scope"))));
+            browser.driver.findElements(By.css("div[ng-model='tgModularEditModel.multDealReason'] ul.dropdown-menu li.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
                     options[randomNumber].click();
@@ -423,7 +423,7 @@ if (pages.createDealGeneral === undefined) {
 
         companyCode: {
             typeahead: function () {
-                return element(by.model('deal.company'));
+                return element(by.model('tgModularEditModel.company'));
             },
 
             input: function () {

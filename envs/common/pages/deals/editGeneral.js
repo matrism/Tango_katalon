@@ -18,7 +18,7 @@ if (pages.editDealGeneral === undefined) {
             editExecutionDateMonthElement: {css: "input[data-ng-model='date.month']"},
             editExecutionDateDayElement: {css: "input[data-ng-model='date.day']"},
             saveEditLeftGeneralTabArea: {css: "div[tg-modular-edit-model-holder='{model: generalView.summaryLeft}'] div.CONTROLS.ng-scope button[data-ng-click='tgModularViewMethods.save()']"},
-            cancelEditLeftGeneralTabArea: {css: "div[data-tg-modular-edit-id='generalLeft'] div.CONTROLS.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
+            cancelEditLeftGeneralTabArea: {css: "div[tg-modular-edit-model-holder='{model: generalView.summaryLeft}'] div.CONTROLS.clearfix.ng-scope button.btn.btn-cancel.ng-binding.pull-left"},
             internalContactTitle: {css: "div.ng-scope div.span12.nomargins:nth-child(3) h2"},
             internalContactsArea: {css: "div.ng-scope div.span12.nomargins:nth-child(3)"},
             internalContactTableData: {css: "table.view-internal-contact tbody"},

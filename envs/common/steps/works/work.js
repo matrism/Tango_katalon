@@ -37,6 +37,13 @@ module.exports.goToScopeDeliveryTab = function () {
     });
 };
 
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+
+    });
+};
+
 exports.goToIncomeRatesTab = function () {
     it('Go to Recordings tab', function () {
         pages.work.goToIncomeRatesTab();
@@ -262,6 +269,32 @@ module.exports.selectCreatorRole = function (i, role) {
         pages.work.selectCreatorRole(i, role);
     });
 };
+
+exports.selectRandomCreator = function(i) {
+    it('Type a random letter on creator name field #' + (i + 1), function() {
+        pages.work.enterRandomLetterOnCreatorNameField(i);
+    });
+
+    it('Expect creator suggestions dropdown to be displayed', function() {
+        pages.work.expectCreatorSuggestionsToBeDisplayed();
+    });
+
+    it('Select a random creator', function() {
+        var data = hash.currentEntityDataSlotsByType.work;
+        var creator;
+
+        data.creators = data.creators || [];
+        data.creators[i] = data.creators[i] || {};
+
+        creator = data.creators[i];
+
+        pages.newWork.selectRandomCreatorSuggestion().then(function(selected) {
+            creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
+        });
+    });
+};
+
 exports.enterMediumCreatorContribution = function (i, contribution, data, key) {
     it('Enter medium creator contribution #' + (i + 1), function () {
         var creator;
@@ -352,7 +385,7 @@ exports.selectFirstComponentWorkMatching = function (i, value, data, key) {
     });
 
     it('Wait for component work suggestions to load', function () {
-        pages.newWork.waitForEnterAsNewWorkToBeDisplayed();
+        pages.work.waitForEnterAsWorkToBeDisplayed(value);
     });
 
     it('Select a random work', function () {
@@ -1062,6 +1095,8 @@ exports.validateCompositeWorkType = function (data, key) {
         pages.work.validateCompositeWorkType(data[key]);
     });
 };
+
+
 exports.validateComponentWorkId = function (i, data, key) {
     it('Validate component work ID', function () {
         var component;
@@ -1073,28 +1108,38 @@ exports.validateComponentWorkId = function (i, data, key) {
         component = data[key][i] = data[key][i] || {};
 
         pages.work.validateComponentWorkId(i, component.workCode);
+
+
+
     });
 };
-exports.validateComponentWorkName = function (i, data, key) {
+exports.validateComponentWorkName = function (i, varName, data, key) {
     it('Validate component work name #' + (i + 1), function () {
-        var component;
+        var component,
+            row = pages.work.componentWorkRows;
+
 
         data = data || hash.currentEntityDataSlotsByType.work;
         key = key || 'components';
         component = data[key][i];
 
-        pages.work.validateComponentWorkName(i, component.name);
+        for ( var j=0 ; j < row.length ; j++ )
+        {
+            pages.work.validateComponentWorkName(j, component.name);
+        }
+
     });
 };
 exports.validateComponentWorkAllocation = function (i, data, key) {
     it('Validate component work allocation #' + (i + 1), function () {
-        var component;
+        var row = pages.work.componentWorkRows;
 
-        data = data || hash.currentEntityDataSlotsByType.work;
-        key = key || 'components';
-        component = data[key][i];
-
-        pages.work.validateComponentWorkAllocation(i, component.allocation);
+        // data = data || hash.currentEntityDataSlotsByType.work;
+        // key = key || 'components';
+        // component = data[key][i];
+        for ( var j=0 ; j < row.length ; j++ ) {
+            pages.work.validateComponentWorkAllocation(j, data);
+        }
     });
 };
 module.exports.validateCreatorContributionInputMask = function (i, validationTable) {
@@ -1124,6 +1169,7 @@ exports.validateShellWorkCreatorName = function (i, j, data, key) {
         ' of (shell) component work #' + (i + 1), function () {
             var component;
             var creator;
+            var row = pages.work.componentWorkRows;
 
             data = data || hash.currentEntityDataSlotsByType.work;
             key = key || 'components';
@@ -1134,7 +1180,9 @@ exports.validateShellWorkCreatorName = function (i, j, data, key) {
             component.creators = component.creators || [];
             creator = component.creators[j] = component.creators[j] || {};
 
-            pages.work.validateShellWorkCreatorName(i, j, creator.name);
+            for ( var i=0 ; i < row.length ; i++ ) {
+                pages.work.validateShellWorkCreatorName(i, j, creator.name);
+            }
         }
     );
 };
@@ -1464,7 +1512,7 @@ exports.clickOnConflictingWorksButtonFilterForWorkLog = function () {
 
 exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
     it("Check that the error message for work conflicts is ok ", function () {
-        browser.driver.findElement(By.css("p[data-ng-if='hasDealConflicts()'] span")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("p[data-ng-if='hasDealConflictsAtWork()'] span")).getText().then(function (promise) {
             console.log("The error message for work conflicts is " + promise);
             expect(promise).toEqual(message);
         });
@@ -1473,7 +1521,7 @@ exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
 
 exports.checkDefaultFilterContractPeriodForWorkLog = function () {
     it("Check the default filters for work log contract period ", function () {
-        browser.driver.findElement(By.css("div[data-tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow span")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow span.ng-binding.ng-scope")).getText().then(function (promise) {
             console.log("The default filters for work log contract period " + promise);
             expect(promise).toEqual("Contract Period 1");
         });
@@ -1482,7 +1530,7 @@ exports.checkDefaultFilterContractPeriodForWorkLog = function () {
 
 exports.checkDefaultFilterScopeForWorkLog = function () {
     it("Check the default filters for work log scope ", function () {
-        browser.driver.findElement(By.css("div[data-tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow span")).getText().then(function (promise) {
+        browser.driver.findElement(By.css("div[tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow span.ng-binding.ng-scope")).getText().then(function (promise) {
             console.log("The default filters for work log scope " + promise);
             expect(promise).toEqual("Scope 1");
         });
@@ -1491,7 +1539,7 @@ exports.checkDefaultFilterScopeForWorkLog = function () {
 
 exports.checkDefaultFilterAllWorksForWorkLog = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
-        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(1)")).getAttribute("class")
+        browser.driver.findElement(By.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(1)")).getAttribute("class")
             .then(function (promise) {
                 console.log("The default filters for work log all works is default " + promise);
                 expect(promise).toContain("active");
@@ -1502,7 +1550,7 @@ exports.checkDefaultFilterAllWorksForWorkLog = function () {
 
 exports.checkDefaultFilterConflictWorksForWorkLog = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
-        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
+        browser.driver.findElement(By.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(2)")).getAttribute("class")
             .then(function (promise) {
                 console.log("The default filters for work log conflict works is not default " + promise);
                 expect(promise).not.toContain("active");
@@ -1512,7 +1560,7 @@ exports.checkDefaultFilterConflictWorksForWorkLog = function () {
 
 exports.checkDefaultFilterConflictWorksForWorkLogSelected = function () {
     it("Check the default filters for work log all/conflict works is all works ", function () {
-        browser.driver.findElement(By.css("button[data-ng-model='stateHolder.workLog.filters.onlyConflicts']:nth-child(2)")).getAttribute("class")
+        browser.driver.findElement(By.css("button[ng-model='stateHolder.filters.inConflict']:nth-child(2)")).getAttribute("class")
             .then(function (promise) {
                 console.log("The default filters for work log conflict works is not default " + promise);
                 expect(promise).toContain("active");
@@ -1528,31 +1576,31 @@ exports.clickOnWorkLinkFromDeliveryWorksPageNumberI = function (i) {
 
 exports.createWork = (data, varName) => {
     var newWork = steps.newWork,
-    varName = varName || 'lastCreatedWorkId';
+        varName = varName || 'lastCreatedWorkId';
 
     describe('Create new Work', () => {
         //steps.mainHeader.createNewRecord('Work');
         newWork.goToNewWorkPage();
-        steps.base.useEntityDataSlot('work', 1);
+    steps.base.useEntityDataSlot('work', 1);
 
-        newWork.enterPrimaryWorkTitle(data.primary_work_title);
+    newWork.enterPrimaryWorkTitle(data.primary_work_title);
 
-        _.each(data.creators_and_contributions, (creator, i) => {
-            newWork.enterCreatorSearchTerms(i, creator.name);
-            newWork.selectCreatorSearchResultByIndex(0);
-            newWork.continueIfPrompted();
-            newWork.enterCreatorContribution(i, creator.percentage);
-        });
+    _.each(data.creators_and_contributions, (creator, i) => {
+        newWork.enterCreatorSearchTerms(i, creator.name);
+    newWork.selectCreatorSearchResultByIndex(0);
+    newWork.continueIfPrompted();
+    newWork.enterCreatorContribution(i, creator.percentage);
+});
 
-        newWork.optToIncludeWorkOnWebsite(true);
-        newWork.saveWork();
-        steps.work.storeTheWorkIdInTestVariable(varName);
-    });
+    newWork.optToIncludeWorkOnWebsite(true);
+    newWork.saveWork();
+    steps.work.storeTheWorkIdInTestVariable(varName);
+});
 };
 
 exports.storeTheWorkIdInTestVariable = function (varName) {
     it("Store Work Id in test variable", function () {
-        var binding = '::getWorkFullCode(work.pristine)',
+        var binding = 'tgWorkHeader.workCode.getFullCode()',
             idBinding = element(by.binding(binding));
 
         browser.wait(EC.visibilityOf(idBinding));

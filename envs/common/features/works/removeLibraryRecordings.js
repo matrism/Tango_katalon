@@ -84,7 +84,8 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() =>
+        {
             let base = steps.base,
                 nw = steps.newWork,
                 wr = steps.workRecordings;
@@ -109,7 +110,7 @@ exports.feature = [
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, test.work.libraryName);
+                        wr.validateLibraryName(i, 'AUDM');
 
                         wr.enterDuration(i, stringRepeat(
                             3, leftPad(i, 2, 0)
@@ -144,7 +145,7 @@ exports.feature = [
 
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, test.work.libraryName);
+                        wr.validateLibraryName(i, 'AUDM');
 
                         wr.validateEnteredDuration(i, arrayRepeat(3, leftPad(
                             i * 2 + 1, 2, 0
@@ -154,7 +155,7 @@ exports.feature = [
                     });
                 });
             });
-        }
+        })
     },
 
     {
@@ -162,7 +163,7 @@ exports.feature = [
 
         tags: [],
 
-        steps: () => {
+        steps: criticalScenario(() => {
             let base = steps.base,
                 nw = steps.newWork,
                 w = steps.work,
@@ -189,7 +190,7 @@ exports.feature = [
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, test.work.libraryName);
+                        wr.validateLibraryName(i, 'AUDM');
 
                         wr.enterDuration(i, stringRepeat(
                             3, leftPad(i, 2, 0)
@@ -224,7 +225,7 @@ exports.feature = [
 
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, test.work.libraryName);
+                        wr.validateLibraryName(i, 'AUDM');
 
                         wr.validateEnteredDuration(i, arrayRepeat(3, leftPad(
                             i * 2 + 1, 2, 0
@@ -234,15 +235,16 @@ exports.feature = [
                     });
                 });
             });
-        }
+        })
     },
 
     {
         name: 'Save recording rows, then edit and remove them',
 
-        tags: [],
+        tags: ['SaveRecording'],
 
-        steps: () => {
+        steps: criticalScenario(() =>
+        {
             let nw = steps.newWork,
                 w = steps.work,
                 wr = steps.workRecordings,
@@ -268,7 +270,7 @@ exports.feature = [
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, test.work.libraryName);
+                        wr.validateLibraryName(i, 'AUDM');
 
                         wr.enterDuration(i, stringRepeat(
                             3, leftPad(i, 2, 0)
@@ -278,8 +280,8 @@ exports.feature = [
                             3, leftPad(i, 2, 0)
                         ).join(' : '));
 
-                        wr.toggleFirstUseFlag(i);
-                        wr.validateFirstUseFlagState(i, true);
+                        //wr.toggleFirstUseFlag(i);
+                        //wr.validateFirstUseFlagState(i, true);
                     });
                 });
             });
@@ -299,7 +301,7 @@ exports.feature = [
                     let iFound = fromTestVariable('row index');
 
                     wr.toggle(iFound);
-                    wr.toggle(iFound);
+                    wr.toggleDown(iFound);
 
                     wr.remove(iFound);
                     testRecRows.splice(i, 1);
@@ -320,27 +322,24 @@ exports.feature = [
 
                             let iFound = fromTestVariable('row index');
 
-                            wr.validateLibraryName(iFound, test.work.libraryName);
+                            wr.validateLibraryName(iFound, 'AUDM');
 
                             wr.validateEnteredDuration(iFound, arrayRepeat(
                                 3, leftPad(i * 2 + 1, 2, 0)
                             ).join(' : '));
 
-                            wr.validateFirstUseFlagState(iFound, i === 1);
+                            //wr.validateFirstUseFlagState(iFound, i === 1);
                         });
                     });
                 });
             };
 
-            wr.edit();
-
-            validateRemainingOnes();
-
-            steps.base.refreshPage();
+            w.goToRecordingsTab();
 
             wr.edit();
 
             validateRemainingOnes();
-        }
+
+      })
     }
 ];

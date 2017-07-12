@@ -5,7 +5,7 @@ pages.workRecordings = exports;
 // ---
 
 exports.editContainer = () => $(
-    '[data-ng-controller="WorkRecordingsEditController"]'
+    '[tg-modular-edit-id="workRecordings"]'
 );
 
 // ---
@@ -61,7 +61,7 @@ exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
 // ---
 
 {
-    let locator = by.model('$term');
+    let locator = by.css('div[ng-model="recordingLink.recording.title"] input');
 
     exports.titleInput = i => exports.rows().get(i).element(locator);
 
@@ -290,7 +290,7 @@ exports.validateDuration = (i, val) => expect(
 // ---
 
 exports.firstUseCheckbox = i => exports.rows().get(i).$(
-    '.recordingLink.firstUse'
+    'input[ng-model="recordingLink.firstUse"]'
 );
 
 exports.toggleFirstUseFlag = i => asAlways(
@@ -308,7 +308,7 @@ exports.validateFirstUseFlagState = (i, st) => expect(
 // ---
 
 exports.removeButton = i => exports.rows().get(i).$(
-    '.content-border.m-remove'
+    'a.ng-scope i'
 );
 
 // ---
@@ -356,6 +356,10 @@ exports.toggle = i => asAlways(
     exports.toggleButton(i), 'scrollIntoView', 'click', 'waitForAjax'
 );
 
+exports.toggleDown = i => asAlways(
+    exports.toggleCloseButton(i), 'scrollIntoView', 'click', 'waitForAjax'
+);
+
 // ---
 
 exports.albums = (() => {
@@ -369,7 +373,7 @@ exports.albums = (() => {
     // ---
 
     alb.searchTypeaheadContainer = (i, j) => alb.rows(i).get(j).$(
-        '[data-tg-typeahead-id^="albumsSearchTypeahead_"]'
+        '[tg-typeahead-placeholder="Search by Title, Artist, Library, Catalog, or Label"]'
     );
 
     alb.searchInput = (i, j) => alb.searchTypeaheadContainer(i, j).element(
@@ -423,7 +427,7 @@ exports.albums = (() => {
     // ---
 
     alb.selectedAlbumTitleBinding = (i, j) => alb.rows(i).get(j).element(
-        by.binding(' ::track.album.title ')
+        by.binding('::track.album.title')
     );
 
     alb.selectedAlbumTitle = (i, j) => asAlways(
@@ -492,7 +496,7 @@ exports.albums = (() => {
     // ---
 
     alb.removeButton = (i, j) => alb.rows(i).get(j).$(
-        '.content-border.m-remove'
+        '[ng-click="recordingLink.recording.tracks.$remove(track); $viewForm && $viewForm.$setDirty();"]'
     );
 
     alb.remove = (i, j) => asAlways(

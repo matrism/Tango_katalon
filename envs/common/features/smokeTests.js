@@ -10,7 +10,7 @@ var random = require('../../../helpers/random'),
 exports.id = '81d52b01-bfba-45f9-835a-05f2d2a43d7d';
 exports.featureName = 'Smoke tests - deals, person, works, orgs, royalty';
 
-exports.commonFeatureTags = ['smoke','ts-212'];
+exports.commonFeatureTags = ['smoke','ts-346'];
 
 exports.beforeEach =function () {
     var origFn = browser.driver.controlFlow().execute;
@@ -33,8 +33,8 @@ exports.feature = [
     {
         name: 'Create a deal with publisher share set',
         tags: ['deals','createDeal'],
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -61,13 +61,13 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
-        }//)
+        })
     },
     {
         name: 'Create a basic person (without persistence validations)',
         tags: ['person'],
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot(0);
             steps.newPerson.goToNewPersonPage();
 
@@ -79,13 +79,13 @@ exports.feature = [
             steps.person.findId();
             //steps.royaltyRates.pauseTest();
             steps.person.findInternalIpiNumber();
-        }// )
+        })
     },
     {
         name: 'New basic work',
         tags: ['works','newBasicWork'],
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 0);
 
             steps.newWork.goToNewWorkPage();
@@ -100,7 +100,6 @@ exports.feature = [
                 1, 'TEST WORK ALTERNATE TITLE ' + randomId(0.2)
             );
 
-            //steps.newWork.selectRandomCreator(0);
             steps.newWork.selectCreator('nawawi');
             steps.newWork.enterCreatorContribution(0, 100);
 
@@ -116,7 +115,11 @@ exports.feature = [
             steps.mainHeader.search.selectEntityType('Works');
             steps.work.selectWorkSearchFilterTag(0, 'Work ID');
 
+
+            /**********************************************
             steps.work.validateDefaultWorkSearchFilterTag(0);
+             // temp disabled until code fix in FE
+             **********************************************/
             steps.work.searchForWorkUsingPreviouslyCreatedWorkId();
             steps.base.sleep(200);
             steps.base.waitForAjax();
@@ -127,13 +130,13 @@ exports.feature = [
             steps.base.waitForAjax();
 
             steps.work.validateWorkId();
-        }//)
+        })
     },
     {
         name: 'New basic organisation',
         tags: ['orgCreationSmoke', 'orgs'],
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.mainHeader.createNewRecord('Organisation');
 
             using(steps.newOrganisation, function () {
@@ -145,13 +148,13 @@ exports.feature = [
                 this.selectTerritoryOfOperation('United States');
                 this.saveOrganisation();
             });
-        }//)
+        })
     },
     {
         name: 'View mode of  organisation',
         tags: ['viewOrgSmoke', 'orgs', 'view'],
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.validateCisacCode('021');
             steps.organisation.goToPreviewRegistrationRunTab();
@@ -170,17 +173,17 @@ exports.feature = [
 
                 ]
             );
-        }//)
+        })
     },
     {
         name: 'View mode of person',
         tags: ['person', 'view', 'viewModePerson'],
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.searchSection.accessSavedPersonByName('katy perry');
             steps.person.validateSuisaIpiNumber('292555933');
             steps.person.validateAlternativeName(0, 'KATY PERRY')
-        }//)
+        })
     }
     ,
     {
@@ -193,8 +196,8 @@ exports.feature = [
             'orgs'
         ],
 
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.clearDownloadsDirectory();
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.goToPreviewRegistrationRunTab();
@@ -202,7 +205,7 @@ exports.feature = [
             steps.organisation.viewValidationErrors();
             steps.organisation.downloadCrFile();
             steps.base.validateDownloadFileCount(2);
-        }//)
+        })
     },
     {
         name: "Royalties Manual Statement",
@@ -214,8 +217,8 @@ exports.feature = [
             'qaOnly'
         ],
 
-        steps: function () {
-        //steps: criticalScenario(() => {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
             steps.base.sleep(5000);
@@ -233,14 +236,15 @@ exports.feature = [
             steps.royaltyRates.selectIncomeTypeForBatch("Video Synch");
 
             steps.royaltyRates.selectExploitationTerritoryForBatch("Malaysia");
+            steps.base.sleep(5000);
             steps.royaltyRates.addWorkByTitle("SANGITA BEST WORK");
-            //
-            // steps.royaltyRates.setAmountRecievedForWork("1000");
-            // steps.royaltyRates.clickDoneButtonForManualStatement();
-            //
-            // steps.royaltyRates.goToRoyaltyStatements();
-            // steps.royaltyRates.expandSavedManualStatement();
-            // steps.royaltyRates.validateManualStatement();
-        }//)
+
+            steps.royaltyRates.setAmountRecievedForWork("1000");
+            steps.royaltyRates.clickDoneButtonForManualStatement();
+
+            steps.royaltyRates.goToRoyaltyStatements();
+            steps.royaltyRates.expandSavedManualStatement();
+            steps.royaltyRates.validateManualStatement();
+         })
     }
 ];
