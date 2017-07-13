@@ -7,6 +7,7 @@ steps.editDealScope = exports;
 exports.editScopeArea = function () {
     it("Edit the scope area ", function () {
         pages.editDealScope.editTheScopeArea();
+        pages.editDealScope.waitForAjax();
     });
 };
 

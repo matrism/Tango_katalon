@@ -11,7 +11,7 @@ exports.waitForPage = timeout => {
 };
 
 exports.uploadWorksLink = () => exports.headingContainer().element(
-    by.cssContainingText('a', 'UPLOAD WORKS')
+    by.cssContainingText('a','UPLOAD WORKS')
 );
 
 exports.uploadWorks = () => asAlways(
@@ -77,6 +77,8 @@ exports.waitUntilFileNameIsStaged = fileName => {
         return exports.findRowByFileName(fileName, 'uploaded row', false).then(
             i => {
                 if(i === -1) {
+
+                   pages.base.refreshPage();
                     return false;
                 }
 
@@ -85,6 +87,7 @@ exports.waitUntilFileNameIsStaged = fileName => {
                         if(!displayed) {
                             pages.base.refreshPage();
                         }
+
 
                         return displayed;
                     }

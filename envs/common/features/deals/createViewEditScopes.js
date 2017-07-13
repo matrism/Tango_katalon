@@ -6,13 +6,14 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'scopes', 'regression'];
+exports.commonFeatureTags = ['deals', 'dealscopes', 'regression'];
 
 exports.feature = [
     {
         name: "Create and view deal scopes",
         tags: ["scopeAdded"],
         steps: function()
+
         {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -64,7 +65,7 @@ exports.feature = [
             steps.createDealScope.checkSocietyAwardCreditDisplayedOnPss();
             steps.createDealScope.checkSocietyAwardCreditPssTextTooltip();
             steps.createDealScope.clickOnYesSocietyAwardCreditPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -344,7 +345,7 @@ exports.feature = [
     {
         name: "Update PSS on scope, shared scope, delete a shared PSS on a scope",
         tags: ["shareScope"],
-        steps: function() {
+        steps: function(){
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
@@ -359,7 +360,7 @@ exports.feature = [
 
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -398,7 +399,7 @@ exports.feature = [
             steps.createDealScope.addScopeTypeAndTerritory("Administration", "worldwide");
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("40");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -417,7 +418,7 @@ exports.feature = [
             steps.editDealScope.selectScopeNumberI(3);
 
             //check initial values for the shared pss
-            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
 
@@ -463,7 +464,7 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
             steps.editDealScope.selectScopeNumberI(1);
 
-            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "40");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "20");
@@ -499,7 +500,7 @@ exports.feature = [
 
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -526,14 +527,14 @@ exports.feature = [
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
             steps.editDealScope.selectScopeNumberI(1);
             //check initial values for the scope 1
-            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(2);
             steps.editDealScope.selectScopeNumberI(1);
             //check values for shared scope
-            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wcm publisher");
+            steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "wb music corp");
             steps.editDealScope.expectPublisherShareSetTextValuePresentForChainI(1, "30");
 
@@ -581,7 +582,7 @@ exports.feature = [
 
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -644,7 +645,7 @@ exports.feature = [
 
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -712,7 +713,7 @@ exports.feature = [
 
             steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
             steps.createDealScope.clickOnAddPublisherShareSet();
-            steps.createDealScope.fillIntoFirstPublisherNameField("wcm publisher 1");
+            steps.createDealScope.fillIntoFirstPublisherNameField("wb music corp");
             steps.createDealScope.selectRandomPublisherNameDropDownValue();
             steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("30");
             steps.createDealScope.fillIntoFirstPublisherNameAMField("wb music corp");
@@ -832,9 +833,11 @@ exports.feature = [
     {
         name: "Delete shared PSS and shared scopes different scenarios",
         tags: ["creatorWorkForHire"],
-        steps: function() {
+        steps: criticalScenario(() =>
+    {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
+            steps.base.sleep(5000);
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2015-01-02");
 
             //add scope with pss to contract period 1
@@ -875,6 +878,7 @@ exports.feature = [
             steps.editDealScope.editCheckWorkForHireValueDetailsForScope("No");
 
             //edit scope area
+            steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editScopeArea();
 
             //add creators
@@ -901,6 +905,6 @@ exports.feature = [
             //check work for hire
             steps.editDealScope.editCheckCreatorNameWorkForHireDetailsForScope("work for hire");
             steps.editDealScope.editCheckWorkForHireValueDetailsForScope("Yes");
-        }
+        })
     }
 ];

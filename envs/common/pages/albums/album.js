@@ -233,8 +233,8 @@ exports.recordings = (function() {
         expect(exports.title(i)).toBe(value);
     };
 
-    exports.trackNumberBinding = i => exports.rows().get(i).element(by.binding(
-        ' track.track_number '
+    exports.trackNumberBinding = i => exports.rows().get(i).element(by.css(
+        'div.edit-album__track-col.ng-binding'
     ));
 
     exports.trackNumber = i => asAlways(
@@ -242,7 +242,7 @@ exports.recordings = (function() {
     );
 
     exports.validateTrackNumber = (i, val) => expect(
-        exports.trackNumber(i)
+        exports.trackNumber(i).get(i)
     ).toBe(val.toString());
 
     exports.artistNameBinding = function(i) {
