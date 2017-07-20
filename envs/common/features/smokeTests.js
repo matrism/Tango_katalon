@@ -166,9 +166,10 @@ exports.feature = [
 
             steps.organisation.subPublishers.expectNameToBeEither(
                 0, [
-                    'DANCING BEAR PUBLISHING LTD',
-                    'WARNER CHAPPELL MUSIC (MALAYSIA) SDN. BHD.',
-                    'AKIN WARNER'
+                    'INTERSONG MUSIKVERLAG GMBH (CH)',
+                    'LUMBREL MUSIC PUBLISHING DE GUATEMALA',
+                    'WARNER CHAPPELL MUSIC HELLAS SRL',
+                    'DANCING BEAR PUBLISHING LTD'
 
 
                 ]
@@ -181,8 +182,8 @@ exports.feature = [
         //steps: function () {
         steps: criticalScenario(() => {
             steps.searchSection.accessSavedPersonByName('katy perry');
-            steps.person.validateSuisaIpiNumber('292555933');
-            steps.person.validateAlternativeName(0, 'KATY PERRY')
+            steps.person.validateSuisaIpiNumber('515661558');
+            steps.person.validateAlternativeName(0, 'Perry, Katy Perry')
         })
     }
     ,
@@ -237,7 +238,7 @@ exports.feature = [
 
             steps.royaltyRates.selectExploitationTerritoryForBatch("Malaysia");
             steps.base.sleep(5000);
-            steps.royaltyRates.addWorkByTitle("SANGITA BEST WORK");
+            steps.royaltyRates.addWorkByTitle("EVERYTHING IS AWESOME MSI");
 
             steps.royaltyRates.setAmountRecievedForWork("1000");
             steps.royaltyRates.clickDoneButtonForManualStatement();
