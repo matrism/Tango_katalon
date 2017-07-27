@@ -913,8 +913,8 @@ exports.itAddIncompleteMdrcContractPeriod = function () {
         steps.createDealContractPeriod.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
         steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
         steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
-        steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
-        steps.createDealContractPeriod.selectMdrcRandomLabel();
+        //steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
+        //steps.createDealContractPeriod.selectMdrcRandomLabel();    disabled due to label search issue
         steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.createDealContractPeriod.fillMdrcPercentOfMinStatutoryRate();
         steps.createDealContractPeriod.fillMdrcInNoEventLessThan();
@@ -945,8 +945,8 @@ exports.itAddDeemedCompleteMdrcContractPeriod = function () {
         steps.createDealContractPeriod.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
         steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
         steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
-        steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
-        steps.createDealContractPeriod.selectMdrcRandomLabel();
+        //steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
+        //steps.createDealContractPeriod.selectMdrcRandomLabel();
         steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.createDealContractPeriod.fillMdrcPercentOfMinStatutoryRate();
         steps.createDealContractPeriod.fillMdrcInNoEventLessThan();
@@ -976,7 +976,7 @@ exports.itAddCompleteMdrcContractPeriod = function () {
         steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
         steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
         steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
-        steps.createDealContractPeriod.selectMdrcRandomLabel();
+        //steps.createDealContractPeriod.selectMdrcRandomLabel();
         steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.createDealContractPeriod.fillMdrcPercentOfMinStatutoryRate();
         steps.createDealContractPeriod.fillMdrcInNoEventLessThan();

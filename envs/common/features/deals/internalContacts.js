@@ -18,7 +18,7 @@ exports.feature = [
              //var i=2;
              steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
              steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
-             steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shilpa");
+             steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shahrul");
              for (var i = 2; i <= 4; i++) {
                  steps.createDealGeneral.itAddInternalContactsRowIToDealGeneralTab(i);
              }
@@ -56,12 +56,13 @@ exports.feature = [
     {
         name: "Create edit and view simple flow internal contact",
         tags: ["create", 'editInternal', 'view'],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             var j = 2;
             //create a deal with 1 internal contact
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
-            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shilpa");
+            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shahrul");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
@@ -104,21 +105,24 @@ exports.feature = [
             steps.editDealGeneral.returnAndCheckAddInternalContactsLinkPresent();
             steps.editDealGeneral.returnAndCheckInternalContactsValues(j);
             steps.editDealGeneral.printInternalContactList();
-        }
+        })
     },
     {
         name: "Dirty check flow internal contact",
-        tags: ["edit", 'TS21'],
+        tags: ["edit", 'dirtinternal'],
         steps: criticalScenario(() => {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
-            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shilpa");
+            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shahrul");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
+
+            //steps.searchSection.accessSavedDealByNumber(379880);
             steps.deal.goToGeneralDealTabDetails();
             steps.base.scrollIntoView("Edit Internal contacts area", pages.editDealGeneral.elems.internalContactsArea);
             steps.editDealGeneral.returnAndCheckInternalContactsTitle();
@@ -127,12 +131,14 @@ exports.feature = [
             steps.editDealGeneral.printInternalContactList();
             steps.editDealGeneral.editInternalContactsArea();
             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("a");
+            steps.editDealGeneral.itCheckInternalContactsRequiredField(2);
+
             steps.editDealGeneral.itCancelInternalContactsChanges();
             steps.editDealGeneral.cancelTheModalDialog();
             steps.base.scrollIntoView("Term header link", pages.deal.elems.termsHeader);
             steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.cancelTheModalDialog();
-            steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("shilpa");
+            steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("shahrul");
             steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
             steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.confirmTheCancelModalDialog();
