@@ -13,7 +13,8 @@ exports.uploadAckFile = function() {
         ackNewFile,
         deferred = promise.defer(),
         ackFilePath = './envs/common/features/orgs/data/',
-        ackFileName = 'CW131231021_001-WB.V21',
+        //ackFileName = 'CW131231021_001-WB.V21',CW170121WB_201.V21
+        ackFileName = 'CW170121WB_201.V21',
         ackFileFullName = ackFilePath + ackFileName,
         ackFilePrefix = ackFileName.split('_')[0],
         ftpOptionsPromise = [

@@ -10,7 +10,7 @@ var random = require('../../../helpers/random'),
 exports.id = '81d52b01-bfba-45f9-835a-05f2d2a43d7d';
 exports.featureName = 'Smoke tests - deals, person, works, orgs, royalty';
 
-exports.commonFeatureTags = ['smoke'];
+exports.commonFeatureTags = ['smoke','smoketest123'];
 
 exports.beforeEach =function () {
     var origFn = browser.driver.controlFlow().execute;
@@ -71,7 +71,7 @@ exports.feature = [
             steps.person.useBlankPersonSlot(0);
             steps.newPerson.goToNewPersonPage();
 
-            steps.newPerson.enterLastName('TEST PERSON ' + randomId(0));
+            steps.newPerson.enterLastName('TEST PERSON AUTO ' + randomId(0));
             steps.newPerson.enterAffiliatedSocietySearchTerms('ASCAP');
             steps.newPerson.selectAffiliatedSocietySearchResultByIndex(0);
             steps.newPerson.save();
@@ -90,7 +90,7 @@ exports.feature = [
 
             steps.newWork.goToNewWorkPage();
 
-            steps.newWork.enterPrimaryWorkTitle('TEST WORK ' + randomId(0));
+            steps.newWork.enterPrimaryWorkTitle('TEST WORK AUTO' + randomId(0));
 
             steps.newWork.enterAlternateWorkTitle(
                 0, 'TEST WORK ALTERNATE TITLE ' + randomId(0.1)
