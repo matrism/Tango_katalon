@@ -47,8 +47,10 @@ exports.feature = [
     {
         name: 'Edit DU data',
         tags: [],
-        steps: function () {
-            var argentinaItems = ['WCM ARGENTINA ADMINISTRATIONS DEALS',
+        //steps: function () {
+        steps: criticalScenario(() => {
+            var argentinaItems = ['TEST',
+                                    'WCM ARGENTINA ADMINISTRATIONS DEALS',
                                   'WCM ARGENTINA DIRECT FOREIGN DEALS',
                                   'WCM ARGENTINA LOCAL DEALS'];
 
@@ -107,6 +109,6 @@ exports.feature = [
                 this.openMenuBoardItemByIndex(0);
                 this.checkSaveAndRevert('Company Set Name');
             });
-        }
+        })
     }
 ];

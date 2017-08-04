@@ -346,6 +346,38 @@ exports.itRemoveInternalContactsRowIToDealGeneralTab = function (i) {
     });
 };
 
+exports.itCheckInternalContactsRequiredField = function (i) {
+    describe("Fill into Internal Contacts Field", function () {
+
+        steps.createDealGeneral.fillIntoInternalContactsFieldRowI(i);
+        steps.createDealGeneral.selectRandomInternalContactDropDown();
+
+
+    });
+
+    it("Check Internal Contacts required field", function () {
+
+        var rolerow = element(by.css('[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child('+ i +') .m-role .ng-invalid-tags-required'));
+        var personrowedit = element(by.css('[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(' + i + ') .m-person input'));
+        browser.sleep(2000);
+        expect(rolerow.isPresent()).toBe(true);
+        personrowedit.clear();
+    });
+
+
+    describe("Fill into Internal Contacts Role", function () {
+        steps.createDealGeneral.clickOnInternalContactsRoleRowI(i);
+        steps.createDealGeneral.selectRandomInternalContactDropDown();
+    });
+
+    it("Check Role Internal Contacts required field", function () {
+        var personrow = element(by.css('[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(' + i + ') .m-person .ng-invalid-required'));
+        //browser.wait(ExpectedConditions.visibilityOf(personrow));
+        browser.sleep(2000);
+        expect(personrow.isPresent()).toBe(true);
+    });
+};
+
 exports.editCheckDealSigningTerritoryCannotBeChangedTooltip = function () {
     it("Edit check that deal signing territory cannot be changed, it is greyed out and check the error message ", function () {
         pages.editDealGeneral.editCheckTheDealSigningTerritoryCannotBeChangedTooltip();
@@ -385,3 +417,5 @@ exports.editCheckDealSigningTerritoryValueIs = function (country) {
         });
     });
 };
+
+

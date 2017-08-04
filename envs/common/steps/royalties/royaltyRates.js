@@ -829,6 +829,7 @@ exports.setExchangeRate = function (value) {
 exports.createManualStatement = function () {
     it("Create manual statement", function () {
         pages.royaltyRates.createManualStatementClick();
+        pages.royaltyRates.getStatementID();
     });
 };
 exports.enterBatchArea = function (){
@@ -887,6 +888,7 @@ exports.manualStatementIsSaved = function () {
 
 exports.expandSavedManualStatement = function () {
     it("Expand Saved Manual Statement", function () {
+        pages.royaltyRates.validateCreatedStatement();
         pages.royaltyRates.clickExpandManualStatement();
     });
 };
@@ -894,5 +896,14 @@ exports.expandSavedManualStatement = function () {
 exports.validateManualStatement = function () {
     it("Validate Manual Statement", function () {
         expect(pages.royaltyRates.validateManualStatementData()).toBeTruthy();
+    });
+};
+
+exports.deleteManualStatement = function () {
+    it("Delete Manual Statement", function () {
+        pages.royaltyRates.clickEditManualStatement();
+        pages.royaltyRates.clickDeleteStatementHeader();
+        pages.royaltyRates.clickConfirmDeleteStatement();
+        //expect(pages.royaltyRates.validateManualStatementData()).toBeTruthy();
     });
 };

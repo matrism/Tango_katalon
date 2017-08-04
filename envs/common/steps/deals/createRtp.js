@@ -73,7 +73,8 @@ exports.selectSpecificScopeNumberJFromAcquisitionNumberI = function (i, j) {
 
 exports.selectRandomDurationTypeRetentionFromAcquisitionNumberI = function (i, durationType) {
     it("Select the random duration type retention from acquisition number i ", function () {
-        pages.createDealRtp.selectTheSpecificDurationTypeRetentionFromAcquisitionNumberI(i, durationType);
+        //pages.createDealRtp.selectTheSpecificDurationTypeRetentionFromAcquisitionNumberI(i, durationType);
+        pages.createDealRtp.selectTheSpecificDurationTypeRetentionFromAcquisitionNumberX(i, durationType);
     });
 };
 
@@ -83,21 +84,21 @@ exports.clickOnAddPostTermPeriodFromRetentionNumberI = function (i) {
     });
 };
 
-exports.fillIntoDescriptionPostTermPeriodNumberJFromRetentionNumberI = function (i, j) {
+exports.fillIntoDescriptionPostTermPeriodNumberJFromRetentionNumberI = function (i, j, k) {
     it("Fill into description post term period number i from retention j", function () {
-        pages.createDealRtp.fillIntoTheDescriptionPostTermPeriodNumberJFromRetentionNumberI(i, j);
+        pages.createDealRtp.fillIntoTheDescriptionPostTermPeriodNumberJFromRetentionNumberI(i, j, k);
     });
 };
 
-exports.selectSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ = function (i, j, k) {
-    it("Select the specific scope number " + k + " from acquisition number " + i + " and retention number " + j, function () {
-        pages.createDealRtp.selectTheSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ(i, j, k);
+exports.selectSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ = function (i, j, k, l) {
+    it("Select the specific scope number " + k + " from acquisition number " + i + " and retention number " + j + " and Post Term Collection Number " + l, function () {
+        pages.createDealRtp.selectTheSpecificScopeNumberKFromRetentionNumberIAndPostTermNumberJ(i, j, k, l);
     });
 };
 
-exports.fillIntoDurationPostTermPeriodNumberJFromRetentionNumberI = function (i, j) {
+exports.fillIntoDurationPostTermPeriodNumberJFromRetentionNumberI = function (i, j, l) {
     it('Fill into duration post term period number i from retention j', function () {
-        pages.createDealRtp.fillIntoTheDurationPostTermPeriodNumberJFromRetentionNumberI(i, j);
+        pages.createDealRtp.fillIntoTheDurationPostTermPeriodNumberJFromRetentionNumberI(i, j, l);
     });
 };
 
@@ -113,15 +114,15 @@ exports.fillIntoDescriptionPostTermPeriodNumberIFromAcquisition = function (i) {
     });
 };
 
-exports.selectSpecificScopeNumberJForPostTermNumberI = function (i, j) {
-    it("Select the specific scope number " + j + " from post term period number " + i, function () {
-        pages.createDealRtp.selectTheSpecificScopeNumberJForPostTermNumberI(i, j);
+exports.selectSpecificScopeNumberJForPostTermNumberI = function (i, j, k) {
+    it("Select the specific scope number " + k + " from post term period number " + j, function () {
+        pages.createDealRtp.selectTheSpecificScopeNumberJForPostTermNumberI(i, j, k);
     });
 };
 
-exports.fillIntoDurationPostTermPeriodNumberIFromAcquisition = function (i) {
+exports.fillIntoDurationPostTermPeriodNumberIFromAcquisition = function (i,j) {
     it("Fill into the duration post term period number " + i + " from acquisition", function () {
-        pages.createDealRtp.fillIntoTheDurationPostTermPeriodNumberIFromAcquisition(i);
+        pages.createDealRtp.fillIntoTheDurationPostTermPeriodNumberIFromAcquisition(i,j);
     });
 };
 

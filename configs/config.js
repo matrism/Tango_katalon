@@ -28,7 +28,8 @@ let jobRunnerConfig = require('./jobRunnerConfig'),
     env = cli.env || configer.getEnvVarByKey('ENV_TYPE');
 
 if(!env || env === true) {
-    env = 'refactor';
+    //env = 'refactor';
+    env = 'staging_test';
 }
 
 if(cli['app-url'] === true) {
@@ -40,8 +41,9 @@ if (userConfig.cli) {
     console.log(`User configuration params: ${Object.keys(userConfig.cli)}`);
 }
 
-var defaultUserName = 'TangoTest2',
-    defaultPassword = 'P@ssw0rd78',
+var defaultUserName = 'TangoTest1',
+    defaultPassword = 'P@ssw0rd87',
+
     user = cli['app-user'] || configer.getEnvVarByKey('TEST_USERNAME') || defaultUserName,
     password = cli['app-password'] || configer.getEnvVarByKey('TEST_PASSWORD') || defaultPassword,
     config = {

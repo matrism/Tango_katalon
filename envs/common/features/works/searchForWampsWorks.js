@@ -26,7 +26,7 @@ exports.feature = [
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BEYOND THE VEIL"]],
-
+            /* no longer valid
             [steps.work.enterWorkSearchTerms, ['WW 015001125 00']],
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
@@ -36,6 +36,7 @@ exports.feature = [
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BLUE SAILS UPON A SILVER SEA"]],
+            */
             ]);
         }
     },
@@ -56,7 +57,7 @@ exports.feature = [
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BEYOND THE VEIL"]],
-
+            /*
             [steps.work.enterWorkSearchTerms, ['015001125']],
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
@@ -66,6 +67,7 @@ exports.feature = [
             [steps.base.sleep, [200]],
             [steps.base.waitForAjax],
             [steps.work.expectWorkSearchMatchTitleToBe, [0, "BLUE SAILS UPON A SILVER SEA"]],
+            */
             ]);
         }
     }

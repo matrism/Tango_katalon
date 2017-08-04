@@ -427,7 +427,7 @@ exports.itAddAllGeneralFieldsForSanityToDealGeneralTab = function () {
         steps.createDealGeneral.fillContractingPartyField();
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectContractingPartySearchResultByIndex(1);
-        steps.createDealGeneral.selectRandomArtistValue();
+        //steps.createDealGeneral.selectRandomArtistValue();    disabled due to artist search issue
         steps.createDealGeneral.selectRandomValueRepresentMultipleDeals();
         steps.createDealGeneral.clickOnNonExclusiveDealRights(2);
         steps.createDealGeneral.clickOnExclusiveDealRights(1);

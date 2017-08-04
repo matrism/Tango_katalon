@@ -19,7 +19,8 @@ var stagingPerson = (systemConfig.tags.indexOf('stagingPerson') !== -1);
 exports.feature = [{
     name: 'Create a person',
     tags: [],
-    steps: function() {
+    //steps: function() {
+    steps: criticalScenario(() => {
         steps.person.useBlankPersonSlot('person', 0);
 
         using(steps.newPerson, function() {
@@ -27,7 +28,7 @@ exports.feature = [{
             this.enterFirstName(randomString(0) + ' FIRST');
             this.enterLastName(randomString(0) + ' LAST');
             this.addAlternativeName();
-            this.enterAlternativeFirstName(0, 'TEST ' + randomString(0.1));
+            this.enterAlternativeFirstName(0, 'TEST AUTO' + randomString(0.1));
             this.enterAlternativeLastName(0, 'PERSON ' + randomString(0.1));
             this.enterAffiliatedSocietySearchTerms('ASCAP');
             this.selectAffiliatedSocietySearchResultByIndex(0);
@@ -64,11 +65,12 @@ exports.feature = [{
 
         steps.person.findId();
         steps.person.findInternalIpiNumber();
-    }
+    })
 }, {
     name: 'Search for previously created person',
     tags: [],
-    steps: function() {
+    //steps: function() {
+        steps: criticalScenario(() => {
         steps.base.useEntityDataSlot('person', 0);
 
         ['Ipi Number', 'First Name', 'Last Name', 'Name'].forEach(function(field) {
@@ -78,11 +80,13 @@ exports.feature = [{
             steps.person.clickPersonSearchMatch(0);
             steps.person.validateIpiNumber();
         });
-    },
+    }),
 }, {
     name: 'Validate created person',
     tags: [],
-    steps: function() {
+    //steps: function() {
+    steps: criticalScenario(() => {     steps.base.useEntityDataSlot('person', 0);
+
         steps.base.useEntityDataSlot('person', 0);
 
         using(steps.person, function() {
@@ -115,11 +119,12 @@ exports.feature = [{
             this.validatePrimaryEmail(1);
             this.validatePayee()
         });
-    },
+    }),
 }, {
     name: 'Edit created person',
     tags: [],
-    steps: function() {
+    //steps: function() {
+    steps: criticalScenario(() => {     steps.base.useEntityDataSlot('person', 0);
 
         steps.base.useEntityDataSlot('person', 0);
 
@@ -180,5 +185,5 @@ exports.feature = [{
             this.enterCitizenship('Malaysian');
             this.saveOthers();
         });
-    },
+    }),
 }];

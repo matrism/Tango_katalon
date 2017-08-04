@@ -32,7 +32,7 @@ if (pages.editDealGeneral === undefined) {
             editInternalContactRoleInputField: {css: "div[ng-model='contact.roles'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             removeInternalContactRoleInputField: {css: "div[ng-model='contact.roles'] div div[ng-class='tgTypeaheadWrapClass'] span[ng-click='!$isDisabled() && $removeTag($tag)']"},
             removeInternalContactsElement: {css: 'div[ng-repeat="contact in tgModularEditModel.$getItems()"]:nth-child(1) button.internal-contact__remove'},
-            confirmationModalDialog: {css: "div.modal-dialog.ng-scope"},
+            confirmationModalDialog: {css: "div.m'div[ng-repeat=\"contact in tgModularEditModel.$getItems()\"]:nth-child(1) button.internal-contact__remove'odal-dialog.ng-scope"},
             cancelModalDialogElement: {css: "div.modal.fade.in div.ng-scope"},
             yesModalDialog: {css: "div.modal-footer button[ng-click='ok();']"},
             noModalDialog: {css: "div.modal-footer button[ng-click='cancel();']"},
@@ -142,6 +142,7 @@ if (pages.editDealGeneral === undefined) {
         },
 
         removeEditInternalContactsRow: function () {
+            browser.sleep(2000);
             browser.wait(ExpectedConditions.visibilityOf(pages.editDealGeneral.elems.removeInternalContactsElement));
             pages.base.scrollIntoView(pages.editDealGeneral.elems.removeInternalContactsElement);
             pages.editDealGeneral.elems.removeInternalContactsElement.click();

@@ -15,7 +15,8 @@ exports.feature = [
     {
         name: 'Navigate across every royalty utility menu item and check first form fields',
         tags: ['smoke', 'sanity', 'dataUtilitiesSmoke', 'dataUtilitiesSanity'],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             using(steps.dataUtilities, function () {
                 this.go();
 
@@ -104,6 +105,6 @@ exports.feature = [
 
                 this.navigateBreadcrumb('Royalty Utilities');
             });
-        }
+        })
     }
 ];

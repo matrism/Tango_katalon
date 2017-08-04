@@ -33,7 +33,10 @@ if (pages.royaltyRates === undefined) {
             interCompanyArrow: {css: "div.rate-set-header-row span.ng-scope i[data-ng-click='onChevronClick()']"},
             rateSetNameFieldIcon: {css: "div.rate-set-entity-name i[data-ng-click='onChevronClick()']"},
             editBatchArea: {css: "div[data-ng-controller='MaintainBatchesController']"},
-            editBatchButton: {css: "div[data-ng-controller='MaintainBatchesController'] i.fa.fa-pencil"}
+            editBatchButton: {css: "div[data-ng-controller='MaintainBatchesController'] i.fa.fa-pencil"},
+            editStatementButton: {css:'.accordion-body.collapse.in .btn.btn-toggle'},
+            clickDeleteStatementLink: {css:'.accordion-body.collapse.in a[data-ng-click="deleteStatement(statement)"]'},
+            clickConfirmDeleteButton: {css:'button[data-ng-click="data.deleteStatement()"]'}
         },
 
         activeContractPeriod: function () {
@@ -1028,6 +1031,28 @@ if (pages.royaltyRates === undefined) {
             pages.royaltyRates.elems.editBatchButton.click();
         },
 
+        clickEditManualStatement: function () {
+            pages.royaltyRates.elems.editStatementButton.click();
+            browser.sleep(2000);
+        },
+
+        clickDeleteStatementHeader: function () {
+            pages.royaltyRates.elems.clickDeleteStatementLink.click();
+            browser.sleep(2000);
+        },
+
+        clickConfirmDeleteStatement: function () {
+            var result;
+            var elm = element(by.css('[data-ng-repeat="statement in statements"]:nth-child(1) .statement-id'));
+            pages.royaltyRates.elems.clickConfirmDeleteButton.click();
+            pages.base.waitForAjax();
+            elm.getAttribute('textContent').then(function(id) {
+                expect(hash.statementID).not.toContain(id);
+            });
+
+            //browser.wait(ExpectedConditions.invisibilityOf(elm);
+        },
+
         typeInBatchAmount: function (value) {
 
             steps.base.sleep(5000);
@@ -1104,6 +1129,22 @@ if (pages.royaltyRates === undefined) {
         validateManualStatementData: function () {
             browser.sleep(3000);
             return true;
+        },
+
+        getStatementID: function () {
+
+            var elm = $('.RECORD-HEADER');
+            elm.getText().then(function (id) {
+                hash.statementID = id;
+                console.log('Statement ID: ' + hash.statementID );
+            })
+        },
+        validateCreatedStatement: function () {
+            var elm = element(by.css('[data-ng-repeat="statement in statements"]:nth-child(1) .statement-id'));
+            browser.wait(ExpectedConditions.visibilityOf(elm));
+            elm.getText().then(function (id) {
+                expect(hash.statementID).toContain(id);
+            })
         }
     });
 }

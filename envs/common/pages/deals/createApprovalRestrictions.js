@@ -7,21 +7,28 @@ var pages_path = _tf_config._system_.path_to_pages;
 if (pages.createDealApprovalRestrictions === undefined) {
     pages.createDealApprovalRestrictions = new ftf.pageObject({
         locators: {
-            financialNoApprovalRequired: {css: "fieldset[data-tg-view-nav-block='Financial'] table tbody:nth-child(1) tr:nth-child(1) td:nth-child(3) a[data-ng-click='AR.setApprovalStateSelected(category, AR.constants.STATE_NO_APPROVAL_REQUIRED)']"},
-            licensingRestricted: {css: "fieldset[data-tg-view-nav-block='Licensing'] table tbody:nth-child(1) tr:nth-child(1) td:nth-child(4) a[data-ng-click='AR.setApprovalStateSelected(category, AR.constants.STATE_RESTRICTED)']"}
+            financialNoApprovalRequired: {css: "div[ng-repeat='dealUsageType in view.dealUsageTypes.$filter(filterCategory) track by dealUsageType.id'] table tbody:nth-child(1) tr:nth-child(1) td:nth-child(3) a[ng-click='tgModularEditModel.selectConsentStatus(CONSENT_STATUSES.NO_APPROVAL_REQUIRED)']"},
+            licensingRestricted: {css: "div[ng-repeat='dealUsageType in view.dealUsageTypes.$filter(filterCategory) track by dealUsageType.id'] table tbody:nth-child(1) tr:nth-child(1) td:nth-child(3) a[ng-click='tgModularEditModel.selectConsentStatus(CONSENT_STATUSES.NO_APPROVAL_REQUIRED)']"}
         },
 
         clickOnTheFinancialNoApprovalRequired: function () {
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealApprovalRestrictions.elems.financialNoApprovalRequired));
-            pages.createDealApprovalRestrictions.elems.financialNoApprovalRequired.click();
-            pages.createDealApprovalRestrictions.waitForAjax();
+            var element=$$("div[ng-repeat='dealUsageType in view.dealUsageTypes.$filter(filterCategory) track by dealUsageType.id'] table tbody:nth-child(1) tr:nth-child(1) td:nth-child(3) a[ng-click='tgModularEditModel.selectConsentStatus(CONSENT_STATUSES.NO_APPROVAL_REQUIRED)']").get(0);
+                //element.click();
+                browser.wait(ExpectedConditions.elementToBeClickable(element));
+                element.click();
+                browser.sleep(1000);
+                //element.waitForAjax();
+
         },
 
 
         clickOnTheLicensingRestricted: function(){
-            browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealApprovalRestrictions.elems.licensingRestricted));
-            pages.createDealApprovalRestrictions.elems.licensingRestricted.click();
-            pages.createDealApprovalRestrictions.waitForAjax();
+            var element=$$("div[ng-repeat='dealUsageType in view.dealUsageTypes.$filter(filterCategory) track by dealUsageType.id'] table tbody:nth-child(1) tr:nth-child(1) td:nth-child(3) a[ng-click='tgModularEditModel.selectConsentStatus(CONSENT_STATUSES.NO_APPROVAL_REQUIRED)']").get(1);
+            //element.click();
+            browser.wait(ExpectedConditions.elementToBeClickable(element));
+            element.click();
+            browser.sleep(1000);
+            //element..waitForAjax();
         },
 
         clickOnTheAddExternalContactOnMissingApprovalModalDialog: function(){
