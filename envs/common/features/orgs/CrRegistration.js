@@ -1,6 +1,7 @@
 'use strict';
 
-var using = fnutils.using,
+var fnutils = require('../../../../helpers/fnutils'),
+    using = fnutils.using,
     data = requireFromEnvFolder('features/orgs/data/CrRegistration.js');
 
 exports.id = '283a2f02-cadd-44f1-8541-371c2762fbcc';
@@ -25,9 +26,10 @@ exports.feature = [
         tags: [],
         //steps: function() {
         steps: criticalScenario(() => {
+
             //create work and deliver it to scope
             steps.CreateWorkComp.CreateWork(1);
-            steps.ScopeDeliveryComp.scopeDelivery(0,0,374359);
+            steps.ScopeDeliveryComp.scopeDelivery(0,0,379900);
             //-----------------------------------
 
 

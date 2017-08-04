@@ -19,7 +19,7 @@ steps.CreateWorkComp = exports;
 exports.CreateWork = function (howMany) {
     describe('Create Work', function () {
         _.times(howMany, function (i) {
-            hash.PriWorkName[i]='TEST WORK ' + randomId('mainWork');
+            hash.PriWorkName[i]='TEST AUTO WORK ' + randomId('mainWork');
             hash.AltWorkName[i] = 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork');
             console.log(hash.PriWorkName[i]);
             steps.base.useBlankEntityDataSlot('work', 'mainWork');
@@ -33,7 +33,7 @@ exports.CreateWork = function (howMany) {
 
                 //steps.work.selectRandomCreator(i)
                 //steps.newWork.selectCreatorFromPersonSlot(0, 0);
-                steps.newWork.selectCreator('SHAHRUL, MSI BMI TEST');
+                steps.newWork.selectCreator('Mohd Ibrahim, Mohd Shahrul Iman');
                 //    [steps.newWork.selectCreatorSearchResultByIndex(0)],
                 steps.newWork.enterCreatorContribution(0, 100);
 
