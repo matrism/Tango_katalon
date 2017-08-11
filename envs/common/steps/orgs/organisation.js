@@ -1156,7 +1156,7 @@ exports.registration.resetDeliveryInfo = function(data) {
             using(steps.organisation.registration, function() {
                 this.editSection();
                 this.selectIsRegistrationRecipient('No');
-                steps.base.sleep(5000);
+                steps.base.sleep(3000);
                 this.confirmRemoveAll();
                 this.selectIsRegistrationRecipient('Yes');
                 using(this.delivery, function() {
@@ -1212,9 +1212,10 @@ exports.registration.resetDeliveryInfo = function(data) {
                     this.enterUsername(1, data.ack.ftp.username);
                     this.enterPassword(1, data.ack.ftp.password);
                 });
+                steps.base.sleep(6000);
                 this.saveSection();
                 steps.base.waitForAjax();
-                steps.base.sleep(1000);
+
             });
         });
     });

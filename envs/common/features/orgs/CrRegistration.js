@@ -29,6 +29,7 @@ exports.feature = [
 
             //create work and deliver it to scope
             steps.CreateWorkComp.CreateWork(1);
+            //steps.work.goToWorkPageById('WW 015123044 00');
             steps.ScopeDeliveryComp.scopeDelivery(0,0,379900);
             //-----------------------------------
 
@@ -48,8 +49,8 @@ exports.feature = [
                 this.confirmRegistrationRun();
 
                 this.goToRegistrationActivityTab();
-                this.saveRegActivityLastEvent();
                 this.verifyThatWorkIsDelivered();
+                this.saveRegActivityLastEvent();
                 this.checkThatAllDeliveriesAreDelivered();
 
                 steps.searchSection.accessSavedOrganisationByNameInHash();
@@ -77,8 +78,9 @@ exports.feature = [
                 this.find({ firstWithRecipientName: data.cr.org });
                 this.toggleBlind();
                 using(this.events, function() {
-                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
+                    this.find({ newDeliveredReg: 'New' });
                     this.toggleBlind();
+                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
                     this.validateStatus('Delivered');
                     this.validateInitiatedBy();
                     this.validateSocietyCode('021');
@@ -89,8 +91,9 @@ exports.feature = [
                 this.find({ firstWithRecipientName: 'Lyricfind' });
                 this.toggleBlind();
                 using(this.events, function() {
-                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
+
                     this.toggleBlind();
+                    this.find({ firstWithFileName: fromTestVariable('last event file name') });
                     this.validateStatus('Delivered');
                     this.validateInitiatedBy();
                     this.validateProcessedDate(data.cr.date);

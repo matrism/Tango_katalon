@@ -121,8 +121,8 @@ exports.activityGroup.events = (function() {
     events.container.all = function() {
         var target = exports.activityGroup.targets.latest;
 
-        return target.container.all(by.repeater(
-            'activity in activitiesGroup.activities'
+        return target.container.all(by.css(
+            '[ng-repeat-start="activity in activitiesGroup.activities"]'
         )).filter(function(containerElement) {
             return containerElement.isDisplayed();
         });
@@ -147,6 +147,14 @@ exports.activityGroup.events = (function() {
                 '[ng-repeat-start="activity in activitiesGroup.activities"]+tr', name
             )).first()
         );
+    };
+
+    events.container.newDeliveredReg = function(name) {
+        return element.all(
+            by.cssContainingText(
+                '[ng-bind="::registrationActivityUtility.translateRegistrationType(activity.registration_type)"]', name
+            )
+        ).first();
     };
 
     events.containerOfDetails  = function(detailsElement) {
@@ -177,7 +185,7 @@ exports.activityGroup.events = (function() {
     events.statusElement = function(status) {
         var target = events.targets.latest;
 
-        return target.container.element(by.cssContainingText('.label', status));
+        return element(by.cssContainingText('.accordion-body.collapse.in .label', status));
     };
 
     events.validateStatus = function(status) {
@@ -197,8 +205,9 @@ exports.activityGroup.events = (function() {
 
     events.getInitiatedBy = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.element(
-            by.binding('activity.initiated_by')
+        return element(
+            //by.binding('::activity.initiated_by')
+            by.css('.accordion-body.collapse.in [ng-bind="::activity.initiated_by"]')
         ).getText();
     };
 
@@ -226,15 +235,17 @@ exports.activityGroup.events = (function() {
 
     events.getSocietyCode = function() {
         var target = events.targets.latest;
-        return target.detailsContainer.element(
-            by.binding('activity.society_code')
+        return element(
+            //by.binding('activity.society_code')
+            by.css('.accordion-body.collapse.in [ng-bind="::activity.society_code"]')
         ).getText();
     };
 
     events.getProcessedDate = function() {
         var target = events.targets.latest;
-        return target.container.element(
-            by.binding('::activity.modified_date | tgIsoDate')
+        return element(
+            //by.binding('::activity.modified_date | tgIsoDate')
+            by.css('.accordion-body.collapse.in [ng-bind="::activity.modified_date | tgIsoDate"]')
         ).getText();
     };
 

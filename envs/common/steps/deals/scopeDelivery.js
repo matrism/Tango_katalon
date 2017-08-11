@@ -4,6 +4,7 @@ steps.scopeDelivery = exports;
 
 exports.deliverWork = function () {
     it('Click "Deliver Work to Deal / Scope" button', function () {
+        browser.sleep(2000);
         pages.scopeDelivery.deliverWork();
     });
 };
