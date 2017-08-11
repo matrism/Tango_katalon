@@ -141,7 +141,7 @@ exports.feature = [
 
             using(steps.newOrganisation, function () {
                 this.populateName('TestOrgName' + randomId(0));
-                //this.enterSuisaIpiNumber(random.id().slice(0, 11));   revisit this disable
+                this.enterSuisaIpiNumber(random.id().slice(0, 11));
                 this.enterAffiliatedSocietySearchTerms('BMI');
                 this.selectAffiliatedSocietySearchResultByIndex(0);
                 this.selectPublisherType('WCM');
