@@ -144,6 +144,29 @@ var defaultUserName = 'TangoTest1',
             user_password: password
 
         },
+        wmg_staging:{
+            urls:{
+                sso: configer.getEnvVarByKey('URL_SSO'),
+                app_url: (
+                    cli['app-url'] || 'http://musicpublishing.staging.wmg.com/'
+                ),
+                service_url: (
+                    cli['service-url'] || cli['app-url'] ||
+                    'http://musicpublishing.staging.wmg.com/'
+                ),
+                cr_url: (
+                    cli['cr-url'] || 'http://tancrsrv.internal.staging.wmg.com'
+                ),
+                royalties_url: (
+                    cli['royalties-url'] || 'http://tanroysrv.internal.staging.wmg.com'
+                )
+
+            },
+
+            user_name: user,
+            user_password: password
+
+        },
         qa: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),

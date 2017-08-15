@@ -967,6 +967,7 @@ exports.validateComponentWorkAllocation = function (i, value) {
     expect(exports.enteredComponentWorkAllocation(i)).toEqual(value);
 };
 exports.clickShowComponentWorkDetailsButton = function (i) {
+    browser.sleep(3000);
     var element = exports.showComponentWorkDetailsButton(i);
     pages.base.scrollIntoView(element);
     return element.click();
@@ -1106,7 +1107,8 @@ exports.enteredShellWorkTitle = function (i) {
     return element.getAttribute('value');
 };
 exports.selectEnterAsNewWorkSuggestion = function () {
-    return exports.enterAsNewWorkSuggestion().click();
+    //return exports.enterAsNewWorkSuggestion().click();
+    return element(by.cssContainingText('.tg-typeahead__suggestions-footer-inner', 'Enter as a new work')).click();
 };
 exports.validateEnteredShellWorkTitle = function (i, value) {
     expect(exports.enteredShellWorkTitle(i)).toBe(value);
@@ -1160,7 +1162,7 @@ exports.selectFirstCreatorSuggestion = function () {
     var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
         result = {};
 
-    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText());
+    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryName.presentationName | tgHighlight:$term"]').getText());
 
     return suggestion.click().then(function () {
         return result;
