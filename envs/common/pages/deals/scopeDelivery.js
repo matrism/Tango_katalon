@@ -313,8 +313,8 @@ exports.contributionDealIdBinding = function (i) {
 };
 
 exports.contributionScopeNameBinding = function (i) {
-    return exports.contributionRows().get(i).element(by.binding(
-        '::dealScopeLink.dealScope.description'
+    return exports.contributionRows().get(i).element(by.css(
+        'a[ui-sref="deal.view({briefNumber:dealLink.deal.contractBriefNumber})"] div:nth-child(3)'
     ));
 };
 
@@ -350,7 +350,7 @@ exports.contributionScopeName = function (i) {
 };
 
 exports.validateContributionScopeName = function (i, value) {
-    expect(exports.contributionScopeName(i)).toBe(value);
+    expect(exports.contributionScopeName(i)).toContain(value);
 };
 
 exports.validationMessage = function (message) {

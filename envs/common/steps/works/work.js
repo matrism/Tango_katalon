@@ -228,8 +228,10 @@ exports.selectCompositeWorkType = function (value, data, key) {
     it('Select composite work type', function () {
         key = key || 'compositeWorkType';
         data = data || hash.currentEntityDataSlotsByType.work;
-
-        pages.work.selectCompositeWorkType(value);
+        var element = pages.work.compositeWorkTypeDropdown();
+        //pages.work.selectCompositeWorkType(value);
+        element.click();
+        element.element(by.cssContainingText('li', value)).click();
         data[key] = value;
     });
 };
@@ -449,7 +451,9 @@ exports.enterNewShellWork = function (i, value) {
     });
 
     it('Wait for work suggestions to load', function () {
-        pages.work.waitForEnterAsNewWorkToBeDisplayed();
+        //browser.sleep(1000);
+        //pages.work.waitForEnterAsNewWorkToBeDisplayed();
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css(".tg-typeahead__suggestions-footer-inner"))));
     });
 
     it('Select "Enter as a new work" suggestion', function () {

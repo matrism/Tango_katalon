@@ -14,7 +14,7 @@ exports.commonFeatureTags = ['works', 'workCompositeShell', 'regression'];
 exports.feature = [
         {
             name: 'Create persons to use as creators for COS and MED composite work',
-            tags: ['TS364'],
+            tags: ['ts-reg1'],
             steps: criticalScenario(() => {
                 _.times(4, (i) => {
                     steps.person.useBlankPersonSlot(i);
@@ -37,8 +37,8 @@ exports.feature = [
         {
             name: 'Define a COS composite work with shell works',
             tags: [],
-            steps: function() {
-
+            //steps: function() {
+            steps: criticalScenario(() => {
 
                 steps.base.useBlankEntityDataSlot('work', 0);
 
@@ -77,13 +77,14 @@ exports.feature = [
                 steps.work.searchForPreviouslyEnteredComponentWork(0);
                 steps.work.expectNoResultsForWorkSearchMessageToBeDisplayed();
 
-            }
+            })
         },
         {
             name: 'Define a POT composite work with shell works',
             tags: [],
-            steps: function() {
-                executeLegacyStepsArray([
+            //steps: function() {
+            steps: criticalScenario(() => {
+                 executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 1]],
 
                 [steps.newWork.goToNewWorkPage],
@@ -110,12 +111,13 @@ exports.feature = [
                 [steps.work.validateShellWorkCreatorName, [0, 0]],
 
                 ]);
-            }
+            })
         },
         {
             name: 'Define a UCO composite work with shell works',
             tags: [],
-            steps: function () {
+            //steps: function () {
+            steps: criticalScenario(() => {
                 executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 2]],
 
@@ -142,7 +144,7 @@ exports.feature = [
                 [steps.work.validateShellWorkCreatorName, [0, 0]],
 
                 ]);
-            }
+            })
         },
         {
             name: 'Define a MED composite work with shell works',
@@ -324,13 +326,16 @@ exports.feature = [
         },
         {
             name: 'Edit a COS composite work with shell works',
-            tags: ['TS364'],
-            steps: function(){
-                executeLegacyStepsArray([
+            tags: ['ts-reg1'],
+            //steps: function(){
+            steps: criticalScenario(() => {
+
+            executeLegacyStepsArray([
                 [steps.base.useBlankEntityDataSlot, ['work', 7]],
 
                 [steps.newWork.goToNewWorkPage],
-                [steps.newWork.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomString(7)]],
+                 //[steps.work.goToWorkPageById, ['WW 015123136 00']],
+                    [steps.newWork.enterPrimaryWorkTitle, ['TEST COMPOSITE WORK ' + randomString(7)]],
                 [steps.newWork.clickCompositeWorkCheckbox],
                 [steps.newWork.selectCompositeWorkType, ['Composite of Samples']],
                 [steps.newWork.selectCreatorFromPersonSlot, [0, 0]],
@@ -357,6 +362,7 @@ exports.feature = [
                 [steps.work.expectShellWorkTitleToMatchEnteredOne, [0]],
                 [steps.work.selectShellWorkCreatorFromPersonSlot, [0, 0, 0]],
                 [steps.work.enterShellWorkCreatorContribution, [0, 0, 100]],
+                [steps.base.sleep,[2000]],
                 [steps.work.saveCreators],
 
                 [steps.base.refreshPage],
@@ -366,6 +372,6 @@ exports.feature = [
                 [steps.work.clickShowComponentWorkDetailsButton, [0]],
                 [steps.work.validateShellWorkCreatorName, [0, 0]],
               ]);
-            }
+            })
         }
 ];

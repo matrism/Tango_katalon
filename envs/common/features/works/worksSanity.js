@@ -138,24 +138,28 @@ exports.feature = [
                 [steps.newWork.optToIncludeWorkOnWebsite, [false]],
 
                 [steps.newWork.continueToNextTab],
-                /* disable due to artist error - revisit this after issue fix
-                [function () {
+
+
+                [
+                    function () {
                     _.times(3, function (i) {
-                        steps.workRecordings.focusTitleField(i);
-                        steps.workRecordings.selectTitleSuggestionByIndex(i);
+                        if(systemConfig.env.name ==='wmg_staging') {
+                    steps.workRecordings.focusTitleField(i);
+                    steps.workRecordings.selectTitleSuggestionByIndex(i);
 
-                        steps.workRecordings.enterArtistSearchTerms(
-                            i, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
-                        );
+                    steps.workRecordings.enterArtistSearchTerms(
+                    i, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
+                    );
 
-                        steps.workRecordings.createEnteredArtist();
+                    steps.workRecordings.createEnteredArtist();
 
-                        steps.workRecordings.enterDuration(
-                            i, '00' + leftPad(i + 1, 2, 0) + '00'
-                        );
+                    steps.workRecordings.enterDuration(
+                    i, '00' + leftPad(i + 1, 2, 0) + '00'
+                    );
+                    };
                     });
                 }],
-                */
+
                 [steps.newWork.continueToNextTab],
 
                 [function () {

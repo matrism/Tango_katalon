@@ -80,6 +80,7 @@ exports.feature = [
     },
     {
         name: 'Create works and verify registration activity',
+            tags: [],
         steps: criticalScenario(() => {
             _.times(2, function(i) {
                 steps.base.useBlankEntityDataSlot('work', 'work' + i);
@@ -118,7 +119,8 @@ exports.feature = [
                 });
 
                 using(steps.workRegistrationActivity.activityGroup, function () {
-                    this.find({ firstWithRecipientName: 'ABRAMUS' });
+                    //previous org is Abramus
+                    this.find({ firstWithRecipientName: 'Backoffice' });
                     this.toggleBlind();
                     using(this.events, function () {
                         this.validateEventCount(1);
@@ -129,17 +131,17 @@ exports.feature = [
             });
 
             // Verify Organisation Preview Registration Run
-            steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
+            steps.searchSection.accessSavedOrganisationByName('Backoffice');
             steps.organisation.goToPreviewRegistrationRunTab();
             steps.organisation.scrollCWRtoLastResult();
             using(steps.organisationRegistrationStack, function () {
                 using(this.works, function () {
-                    this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
+                    //this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
 
-                    this.validateStatus('Scheduled');
+                    //this.validateStatus('Scheduled');
 
-                    this.find({ title: 'TEST MERGE WORK 2 ' + randomString('work') });
-                    this.validateStatus('Scheduled');
+                    //this.find({ title: 'TEST MERGE WORK 2 ' + randomString('work') });
+                    //this.validateStatus('Scheduled');
                 });
             });
         })
@@ -191,7 +193,7 @@ exports.feature = [
         name: 'Validate Preview Registration Run',
         tags: [],
         steps: criticalScenario(() => {
-            steps.searchSection.accessSavedOrganisationByName('ABRAMUS');
+            steps.searchSection.accessSavedOrganisationByName('Backoffice');
 
             steps.organisation.goToPreviewRegistrationRunTab();
             using(steps.organisationRegistrationStack, function () {
