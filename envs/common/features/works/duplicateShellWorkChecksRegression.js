@@ -12,7 +12,8 @@ exports.beforeFeature = function() {
 exports.commonFeatureTags = [
     'duplicateShellWorkChecksRegression',
     'works',
-    'regression'
+    'regression',
+    'notValid'
 ];
 
 exports.feature = [

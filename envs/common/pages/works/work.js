@@ -1162,7 +1162,7 @@ exports.selectFirstCreatorSuggestion = function () {
     var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
         result = {};
 
-    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryName.presentationName | tgHighlight:$term"]').getText());
+    result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText());
 
     return suggestion.click().then(function () {
         return result;

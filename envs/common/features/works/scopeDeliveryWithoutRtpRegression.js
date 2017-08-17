@@ -211,7 +211,6 @@ exports.feature = [
 
             using(steps.work, function (w) {
                 w.goToWorkPage();
-
                 w.goToScopeDeliveryTab();
             });
 

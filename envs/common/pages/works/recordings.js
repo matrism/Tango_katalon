@@ -99,7 +99,7 @@ exports.selectTitleSuggestionByIndex = (i, val) => {
 // ---
 
 exports.enterTitle = (i, val) => asAlways(
-    exports.titleInput(i), 'scrollIntoView', 'clear'
+    exports.titleInputRec(i), 'scrollIntoView', 'clear'
 ).sendKeys(val);
 
 // ---
@@ -126,7 +126,7 @@ exports.findByEnteredTitle = (val, varName) => {
 };
 
 exports.enteredTitle = i => asAlways(
-    exports.titleInput(i), 'scrollIntoView', 'getValue'
+    exports.titleInputRec(i), 'scrollIntoView', 'getValue'
 );
 
 exports.validateEnteredTitle = (i, val) => expect(
