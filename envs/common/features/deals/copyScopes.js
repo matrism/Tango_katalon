@@ -6,13 +6,13 @@ exports.beforeFeature = function () {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['deals', 'copyScopes', 'regression'];
+exports.commonFeatureTags = ['not_run'];
 
 exports.feature = [
     {
         name: "Check copy scopes not available in create mode and use copy scope shares",
         tags: ["copy_shares"],
-        steps: criticalScenario(() =>
+        steps: function()
         {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -200,12 +200,12 @@ exports.feature = [
             steps.editDealScope.checkScopeNumberINoRr(10);
             steps.editDealScope.selectScopeNumberI(11);
             steps.editDealScope.checkScopeNumberINoRr(11);
-        })
+        }
     },
     {
         name: "Check copy scopes not available in create mode and check copy scopes unshares",
         tags: ["copy_unshares"],
-        steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -230,7 +230,7 @@ exports.feature = [
 
             steps.editDealScope.selectScopeNumberI(1);
             steps.editDealScope.editPublisherSharesSet();
-            steps.editDealScope.itEditOverridePublisherShare("france", "(71898243)\nFRANCE MUSIC CORP", "France");
+            steps.editDealScope.itEditOverridePublisherShare("france", "FRANCE MUSIC CORP", "France");
             steps.editDealScope.editSaveThePublisherShareSet();
 
             steps.editDealScope.selectScopeNumberI(2);
@@ -374,7 +374,7 @@ exports.feature = [
             steps.editDealScope.checkScopeNumberINameAndRates(8);
             steps.editDealScope.selectScopeNumberI(9);
             steps.editDealScope.checkScopeNumberINameAndRates(9);
-        }
+        })
     },
     {
         name: "Check copy scope for payees with shares pusblishers and rates",
