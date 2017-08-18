@@ -144,7 +144,7 @@ var defaultUserName = 'TangoTest1',
             user_password: password
 
         },
-        wmg_staging:{
+        staging:{
             urls:{
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: (
@@ -189,7 +189,7 @@ var defaultUserName = 'TangoTest1',
             user_name: user,
             user_password: password
         },
-        staging: {
+        old_staging: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: cli['app-url'] || 'http://tango.internal.staging.wmg.com',
