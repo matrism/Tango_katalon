@@ -77,6 +77,7 @@ if (pages.createDealAdvances === undefined) {
         },
 
         clickOnTheAddFirstAdvanceLink: function () {
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealAdvances.elems.addFirstAdvanceLink));
             pages.createDealAdvances.elems.addFirstAdvanceLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealAdvances.elems.advanceDetailsAmount));
         },

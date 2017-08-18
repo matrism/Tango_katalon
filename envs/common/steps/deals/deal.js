@@ -107,7 +107,7 @@ exports.findId = function () {
 
 exports.itContinueToNextPage = function () {
     describe("Check continue button enabled and go to next page", function () {
-        //steps.deal.waitContinueButtonEnabled();
+        steps.deal.waitContinueButtonEnabled();
         steps.deal.goToNextPage();
     });
 };

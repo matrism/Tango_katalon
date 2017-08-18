@@ -13,7 +13,7 @@ exports.feature = [
     {
         name: "Create a deal with publisher share set",
         tags: ["filterAdvances"],
-        steps: function()
+        steps: criticalScenario(() =>
         {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -23,6 +23,7 @@ exports.feature = [
             steps.createDealContractPeriod.addNewContractPeriodDialog();
             steps.createDealContractPeriod.fillEndTargetMonths();
             for (var i = 3; i <= 4; i++) {
+                steps.base.sleep(5000);
                 steps.createDealContractPeriod.addNewContractPeriod();
                 steps.createDealContractPeriod.fillEndTargetMonths();
             }
@@ -44,6 +45,7 @@ exports.feature = [
 
             //second advance
             steps.createDealAdvances.clickOnAddAnotherAdvanceButton();
+            steps.base.sleep(5000);
             steps.createDealAdvances.selectSpecificContractPeriodAdvanceDetailsByIndex(2);
             steps.base.scrollIntoView("Amount advances", pages.createDealAdvances.elems.advanceDetailsAmount);
             steps.createDealAdvances.fillIntoAmountAdvanceDetailsSpecificValue("345");
@@ -55,6 +57,7 @@ exports.feature = [
 
             //third advance
             steps.createDealAdvances.clickOnAddAnotherAdvanceButton();
+            steps.base.sleep(5000);
             steps.createDealAdvances.selectSpecificContractPeriodAdvanceDetailsByIndex(1);
             steps.base.scrollIntoView("Amount advances", pages.createDealAdvances.elems.advanceDetailsAmount);
             steps.createDealAdvances.fillIntoAmountAdvanceDetailsSpecificValue("500");
@@ -70,6 +73,7 @@ exports.feature = [
 
             //go to Advances tab
             steps.deal.goToTab('Advances');
+            steps.base.sleep(5000);
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(0, "All Advances");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(1, "Contract Period 1");
             steps.editAdvances.editCheckContractPeriodAdvancesDropDownContainsCp(2, "Contract Period 2");
@@ -141,7 +145,7 @@ exports.feature = [
             steps.editAdvances.editSaveAdvance();
 
         }
-    },
+)},
 
 
     {

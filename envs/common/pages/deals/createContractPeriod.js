@@ -126,7 +126,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         clickOnAddContractPeriod: function () {
-            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.addContractPeriodElem));
+            //browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.addContractPeriodElem));
             pages.createDealContractPeriod.elems.addContractPeriodElem.click();
             pages.createDealContractPeriod.waitForAjax();
         },

@@ -67,7 +67,7 @@ if (pages.deal === undefined) {
         continueToNextPage: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(pages.deal.elems.continueButton));
             pages.deal.elems.continueButton.click();
-            pages.deal.waitForAjax();
+            //pages.deal.waitForAjax();
         },
 
         saveNewDeal: function () {
