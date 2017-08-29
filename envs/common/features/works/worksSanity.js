@@ -250,7 +250,7 @@ exports.feature = [
 
                 [steps.work.goToRecordingsTab],
 
-                /* disable due to artist/album issue revisit this after fix
+
                 [function () {
                     let wr = steps.workRecordings;
 
@@ -260,18 +260,18 @@ exports.feature = [
                     );
 
                     // need to revisit this - row index is wrong
-                    // let iFound = fromTestVariable('row index');
-                    //
-                    // wr.validateArtistName(
-                    //     iFound, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
-                    // );
-                    //
-                    // wr.validateDuration(
-                    //    iFound, '00 : ' + leftPad(i + 1, 2, 0) + ' : 00'
-                    // );
+                    let iFound = fromTestVariable('row index');
+
+                    wr.validateArtistName(
+                        iFound, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
+                    );
+
+                    wr.validateDuration(
+                       iFound, '00 : ' + leftPad(i + 1, 2, 0) + ' : 00'
+                    );
                 });
                 }],
-                */
+
 
             ]);
         })

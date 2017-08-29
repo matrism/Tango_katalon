@@ -913,10 +913,10 @@ exports.itAddIncompleteMdrcContractPeriod = function () {
         steps.createDealContractPeriod.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
         steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
         steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
-        if(systemConfig.env.name ==='wmg_staging') {
+        //if(systemConfig.env.name ==='wmg_staging') {
             steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
             steps.createDealContractPeriod.selectMdrcRandomLabel();
-        }
+        //}
         steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.createDealContractPeriod.fillMdrcPercentOfMinStatutoryRate();
         steps.createDealContractPeriod.fillMdrcInNoEventLessThan();
@@ -947,8 +947,8 @@ exports.itAddDeemedCompleteMdrcContractPeriod = function () {
         steps.createDealContractPeriod.checkMdrcYesCommercialReleaseByMajorLabelOptionIsSelected();
         steps.createDealContractPeriod.clickMdrcNoCommercialReleaseByMajorLabel();
         steps.createDealContractPeriod.checkMdrcNoCommercialReleaseByMajorLabelOptionIsSelected();
-        //steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
-        //steps.createDealContractPeriod.selectMdrcRandomLabel();
+        steps.base.scrollIntoView("Label section", pages.createDealContractPeriod.elems.mdrcLabelsElement);
+        steps.createDealContractPeriod.selectMdrcRandomLabel();
         steps.createDealContractPeriod.checkMdrcNoSelfRecordOptionIsSelected();
         steps.createDealContractPeriod.fillMdrcPercentOfMinStatutoryRate();
         steps.createDealContractPeriod.fillMdrcInNoEventLessThan();
