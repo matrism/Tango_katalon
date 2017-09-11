@@ -62,6 +62,10 @@ config = {
         chromeOptions: {
           //  args: ['--test-type']
             args: chromeArgs,
+
+            //args: ['incognito', //Cookies-less
+            //    '--start-maximized' //'--window-size=1366,768'
+            //],
             prefs: {
                 'download': {
                     'prompt_for_download': false,

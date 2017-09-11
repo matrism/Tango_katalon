@@ -146,6 +146,7 @@ exports.feature = [
                 this.selectAffiliatedSocietySearchResultByIndex(0);
                 this.selectPublisherType('WCM');
                 this.selectTerritoryOfOperation('United States');
+                steps.base.sleep(8000);
                 this.saveOrganisation();
             });
         })
