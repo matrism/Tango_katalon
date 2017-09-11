@@ -532,6 +532,7 @@ exports.clickOnDeleteEndRulesButton = function(){
 
 exports.selectRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ = function (i, j, index) {
     it("Select the requirement end rules specific value by index rule number " + i + " row number " + j, function () {
+        browser.sleep(2000);
         pages.createDealContractPeriod.selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ(i, j, index);
     });
 };
