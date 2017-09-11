@@ -237,10 +237,12 @@ exports.feature = [
             steps.base.scrollIntoView("second line", element(by.css("table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(1) input[data-ng-model='apd.percent']")));
             steps.createDealAdvances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(1);
             steps.createDealAdvances.selectRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI(1);
+            steps.base.scrollToBottom(2);
             steps.createDealAdvances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(1);
             steps.createDealAdvances.fillIntoPercentDistributionRulesAdvanceDetailsNumberI(2);
             steps.base.scrollIntoView("second line", element(by.css("table.table.pay-table.payment-table tbody tr[data-ng-form='apdForm']:nth-child(2) div[data-validation-class='advancePaymentDistributionCurrency'] button.btn.dropdown-toggle")));
             steps.createDealAdvances.selectRandomOrganisationPaymentRecipientDistributionRulesAdvanceDetailsNumberI(2);
+            steps.base.scrollToBottom(2);
             steps.createDealAdvances.selectRandomCurrencyDistributionRulessAdvanceDetailsNumberI(2);
             //steps.createDealAdvances.itAddCompleteAdvanceApplicableEarnings();
             steps.deal.saveDeal();
