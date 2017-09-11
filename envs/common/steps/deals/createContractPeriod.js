@@ -38,6 +38,7 @@ exports.fillActualEndDateFieldSpecificValue = function (actualDate) {
 
 exports.fillContractPeriodDescription = function (description) {
     it("Fill in description field contract period ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("div.input-addition #description"))));
         pages.createDealContractPeriod.fillDescriptionField(description);
     });
 };
