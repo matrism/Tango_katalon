@@ -23,9 +23,9 @@ exports.feature = [
     {
         name: "Deals view work count",
         tags: ["dealsViewWork"],
-        //steps: function()
-        //{
-            steps: criticalScenario(() =>
+        steps: function()
+        {
+            //steps: criticalScenario(() =>
             {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
@@ -111,14 +111,14 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        })
+        }
     },
 
     {
         name: "Deals view multiple work count",
         tags: ["dealMultipleWorks"],
-        //steps: function()
-        steps: criticalScenario(() =>
+        steps: function()
+        //steps: criticalScenario(() =>
         {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
@@ -302,15 +302,15 @@ exports.feature = [
             steps.base.closeTheTabByIndex(2);
             steps.base.closeTheTabByIndex(1);
 
-        })
+        }
     },
 
 
     {
         name: "Deals view lad work count",
         tags: ['ladDealsWorks', 'lad'],
-        //steps: function()
-        steps: criticalScenario(() =>
+        steps: function()
+        //steps: criticalScenario(() =>
         {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
@@ -403,15 +403,15 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        })
+        }
     },
 
 
     {
         name: "Deals view additional work count",
         tags: ["additionalDealsWorks"],
-        steps: criticalScenario(() => {
-        //steps: function(){
+        //steps: criticalScenario(() => {
+        steps: function(){
 
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
@@ -480,15 +480,15 @@ exports.feature = [
             steps.base.closeTheTabByIndex(1);
 
 
-        })
+        }
     },
 
 
     {
         name: "Deals view filter work count",
         tags: ["filterDealsWorks"],
-        //steps: function() {
-        steps: criticalScenario(() => {
+        steps: function() {
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
 
@@ -668,6 +668,6 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        })
+        }
     }
 ];
