@@ -249,11 +249,21 @@ if (pages.editDealContractPeriod === undefined) {
         },
 
         validateTheMdrcTerritoriesListTextCommercialReleaseTextValueI: function (i) {
-            browser.driver.findElement(By.css("div[ng-repeat='mdrc in contractPeriod.minimumDeliveryCommitments.$getItems()']:nth-child(" + i + ") div[tg-territory-label='::tgModularEditModel.releaseTerritories'] a[ng-if='$isCounterVisible() && $getCount()']")).getText().
-                then(function (promise) {
-                    console.log("MDRC territories list Commercial Release right text value is " + promise);
-                    expect(promise).toContain("Countr");
-                });
+
+            element(by.css('[ng-repeat="mdrc in contractPeriod.minimumDeliveryCommitments.$getItems()"]:nth-child('+ i +') .tg-territory-label__list')).getText().then(function(countryx)
+            {
+                var str = countryx.replace(/\s+/g, '');
+
+                if( str == 'Central African Republic' || str == 'South Africa' || str == 'None') {
+                    console.log(str);
+                    browser.driver.findElement(By.css("div[ng-repeat='mdrc in contractPeriod.minimumDeliveryCommitments.$getItems()']:nth-child(" + i + ") div[tg-territory-label='::tgModularEditModel.releaseTerritories'] a[ng-if='$isCounterVisible() && $getCount()']")).getText().then(function (promise) {
+                        console.log("MDRC territories list Commercial Release right text value is " + promise);
+                        expect(promise).toContain("Countr");
+                    });
+                }else {
+                    console.log(str);
+                }
+            });
         },
 
         validateTheMdrcLabelsTextCommercialReleaseTextValueI: function (i) {

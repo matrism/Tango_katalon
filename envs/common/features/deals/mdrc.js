@@ -13,7 +13,8 @@ exports.feature = [
     {
         name: "Create a deal with incomplete MDRC",
         tags: ["create","view"],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -39,13 +40,14 @@ exports.feature = [
             steps.editDealContractPeriod.validateMdrcInNoEventLessThanTextValueI(i);
             steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(i);
             steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
-        }
+        })
     },
 
         {
             name: "Create a deal with deemed complete MDRC",
             tags: ["create"],
-            steps: function() {
+            //steps: function() {
+            steps: criticalScenario(() => {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -75,13 +77,14 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcInNoEventLessThanTextValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
-            }
+            })
         },
         {
             name: "Create a deal with complete MDRC",
             tags: ['create', 'view'],
-            steps: function()
-            {
+            //steps: function()
+            //{
+            steps: criticalScenario(() => {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -109,15 +112,17 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcInNoEventLessThanTextValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
-            }
+            })
         },
         {
             name: "Create a deal with multiple types of MDRC",
-            tags: ['create', 'view'],
-            steps: function(){
+            tags: ['create', 'view','dealmdrc'],
+            //steps: function(){
+            steps: criticalScenario(() => {
                 var i = 1;
                 var j = 2;
                 var k = 3;
+
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
                 steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -179,12 +184,13 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcInNoEventLessThanTextValueI(k);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(k);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(k);
-            }
+            })
         },
         {
             name: "Edit a deal with deemed complete MDRC into an incomplete MDRC",
             tags: ["'edit"],
-            steps: function() {
+            //steps: function() {
+            steps: criticalScenario(() => {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -226,12 +232,13 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcInNoEventLessThanTextValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
-            }
+            })
         },
         {
             name: "Edit a deal with incomplete MDRC into a deemed complete MDRC",
             tags: ["edit"],
-            steps: function() {
+            //steps: function() {
+            steps: criticalScenario(() => {
                 var i = 1;
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
                 steps.deal.itContinueToNextPage();
@@ -275,12 +282,13 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcInNoEventLessThanTextValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(i);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(i);
-            }
+            })
         },
         {
             name: "Edit a deal with multiple types of MDRC",
             tags: ['edit'],
-            steps: function() {
+            //steps: function() {
+            steps: criticalScenario(() => {
                 var i = 1;
                 var j = 2;
                 var k = 3;
@@ -416,6 +424,6 @@ exports.feature = [
                 steps.editDealContractPeriod.validateMdrcInNoEventLessThanTextValueI(k);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleLabelValueI(k);
                 steps.editDealContractPeriod.validateMdrcDeliveryScheduleTextValueI(k);
-            }
+            })
         }
 ];
