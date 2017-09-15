@@ -12,21 +12,27 @@ exports.beforeFeature = function () {
 
 exports.commonFeatureTags = ['deals', 'dealWorksCount', 'regression'];
 
-var urlUse = 'http://tango.tango-refactor.tango.dev.wmg.com';
+
+if (systemConfig.env.name == 'staging_test'){
+    var urlUse = 'http://tango.staging-test.tango.qa.wmg.com/';
+}else if (systemConfig.env.name == 'staging') {
+    var urlUse = 'http://musicpublishing.staging.wmg.com';
+}
 
 exports.feature = [
     {
         name: "Deals view work count",
         tags: ["dealsViewWork"],
-        steps: function()
-        {
+        //steps: function()
+        //{
+            steps: criticalScenario(() =>
+            {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('TEST WORK ' + (new Date()).getTime());
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(5000);
             steps.newWork.saveWork();
 
             steps.base.openTheNewTab(urlUse);
@@ -66,15 +72,14 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.base.focusOnNewOpenedTab(0);
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(1);
             steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDelivery(0);
 
             steps.base.focusOnNewOpenedTab(1);
-            steps.base.sleep(5000);
-            steps.deal.refreshThePage();
-            steps.base.sleep(5000);
+            steps.base.sleep(10000);
             steps.deal.refreshThePage();
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
             steps.work.goBackToMainPageFromWork();
@@ -87,18 +92,18 @@ exports.feature = [
             steps.deal.checkGrowlMessageDisplayedAfterScopeEdited("Delivered Works are being updated. Please check Deal later today for Delivery conflicts.");
 
             steps.base.focusOnNewOpenedTab(0);
+            steps.base.sleep(20000);
             steps.work.refreshThePage();
-            steps.base.sleep(50000);
             steps.work.goToScopeDeliveryTab();
             steps.work.checkErrorMessageDisplayedOnWorksConflicts("Deal Scopes are in conflict. Resolve by updating Delivery information or Deal Scope.");
 
             steps.base.focusOnNewOpenedTab(1);
+            steps.base.sleep(20000);
             steps.deal.refreshThePage();
-            steps.base.sleep(50000);
             steps.editDealScope.checkWorksCountOnScopeNumberI(1, "1");
             steps.editDealScope.checkWorksCountOnScopeNumberI(2, "1");
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
-            steps.base.sleep(50000);
+            steps.base.sleep(20000);
             steps.work.checkDefaultFilterContractPeriodForWorkLog();
             steps.work.checkDefaultFilterScopeForWorkLog();
             steps.work.checkDefaultFilterAllWorksForWorkLog();
@@ -106,13 +111,14 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        }
+        })
     },
 
     {
         name: "Deals view multiple work count",
         tags: ["dealMultipleWorks"],
-        steps: function()
+        //steps: function()
+        steps: criticalScenario(() =>
         {
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
@@ -160,6 +166,7 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.base.focusOnNewOpenedTab(0);
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(1);
@@ -178,7 +185,6 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId1 = steps.work.findCurrentlyOpenWorkId();
 
@@ -188,7 +194,6 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId2 = steps.work.findCurrentlyOpenWorkId();
 
@@ -199,11 +204,11 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId3 = steps.work.findCurrentlyOpenWorkId();
 
             steps.base.focusOnNewOpenedTab(0);
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.updateScopeDelivery();
             steps.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
@@ -246,6 +251,7 @@ exports.feature = [
             steps.base.waitForAjax();
             steps.work.clickWorkSearchMatch(0);
             steps.base.waitForAjax();
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(1);
@@ -261,6 +267,7 @@ exports.feature = [
             steps.base.waitForAjax();
             steps.work.clickWorkSearchMatch(0);
             steps.base.waitForAjax();
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(1);
@@ -275,6 +282,7 @@ exports.feature = [
             steps.base.waitForAjax();
             steps.work.clickWorkSearchMatch(0);
             steps.base.waitForAjax();
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(1);
@@ -283,7 +291,8 @@ exports.feature = [
             steps.base.focusOnNewOpenedTab(1);
             steps.deal.refreshThePage();
 
-            steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+            //steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+            steps.editDealScope.clickOnWorkLinkFromScopeName();
             steps.work.checkDefaultFilterContractPeriodForWorkLog();
             steps.work.checkDefaultFilterScopeForWorkLog();
             steps.work.checkDefaultFilterAllWorksForWorkLog();
@@ -293,14 +302,15 @@ exports.feature = [
             steps.base.closeTheTabByIndex(2);
             steps.base.closeTheTabByIndex(1);
 
-        }
+        })
     },
 
 
     {
         name: "Deals view lad work count",
         tags: ['ladDealsWorks', 'lad'],
-        steps: function()
+        //steps: function()
+        steps: criticalScenario(() =>
         {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
@@ -345,9 +355,9 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
 
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(0);
@@ -365,14 +375,12 @@ exports.feature = [
                 steps.work.selectRandomCreator(0);
                 steps.newWork.enterCreatorContribution(0, 100);
                 steps.newWork.optToIncludeWorkOnWebsite(false);
-                steps.base.sleep(7000);
                 steps.newWork.saveWork();
 
                 steps.work.goToScopeDeliveryTab();
                 steps.scopeDelivery.deliverWork();
                 steps.base.focusOnNewOpenedTab(0);
                 steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope(1);
-
                 steps.base.focusOnNewOpenedTab(0);
                 steps.deal.refreshThePage();
             }
@@ -384,7 +392,9 @@ exports.feature = [
             steps.editDealScope.editSaveAllChanges();
 
             steps.editDealContractPeriod.editSelectContractPeriodNumberI(1);
-            steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+            //steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
+
+            steps.editDealScope.clickOnWorkLinkFromScopeName();
             steps.work.checkDefaultFilterContractPeriodForWorkLog();
             steps.work.checkDefaultFilterScopeForWorkLog();
             steps.work.checkDefaultFilterAllWorksForWorkLog();
@@ -393,16 +403,17 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        }
+        })
     },
 
 
     {
         name: "Deals view additional work count",
         tags: ["additionalDealsWorks"],
-        steps: function(){
+        steps: criticalScenario(() => {
+        //steps: function(){
 
-            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
+                steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
@@ -431,10 +442,9 @@ exports.feature = [
                 steps.work.selectRandomCreator(0);
                 steps.newWork.enterCreatorContribution(0, 100);
                 steps.newWork.optToIncludeWorkOnWebsite(false);
-                steps.base.sleep(7000);
                 steps.newWork.saveWork();
 
-
+                steps.work.refreshThePage();
                 steps.work.goToScopeDeliveryTab();
                 steps.scopeDelivery.deliverWork();
                 steps.base.focusOnNewOpenedTab(0);
@@ -470,15 +480,15 @@ exports.feature = [
             steps.base.closeTheTabByIndex(1);
 
 
-        }
+        })
     },
 
 
     {
         name: "Deals view filter work count",
         tags: ["filterDealsWorks"],
-        steps: function() {
-
+        //steps: function() {
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
 
@@ -553,9 +563,9 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
             var workId = steps.work.findCurrentlyOpenWorkId();
+            steps.work.refreshThePage();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(0);
@@ -570,7 +580,6 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
@@ -586,7 +595,6 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
@@ -602,7 +610,6 @@ exports.feature = [
             steps.work.selectRandomCreator(0);
             steps.newWork.enterCreatorContribution(0, 100);
             steps.newWork.optToIncludeWorkOnWebsite(false);
-            steps.base.sleep(7000);
             steps.newWork.saveWork();
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
@@ -661,6 +668,6 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        }
+        })
     }
 ];

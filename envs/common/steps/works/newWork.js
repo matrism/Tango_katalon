@@ -923,8 +923,9 @@ exports.continueIfSimilarWorksPrompted = function() {
 
 exports.save = function() {
    // it('Saving work', function() {
-    steps.base.sleep(5000);
+    steps.base.sleep(7000);
      steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
+     pages.base.waitForAjax();
    // });
 };
 

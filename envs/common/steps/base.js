@@ -75,6 +75,7 @@ exports.goToHomePage = function () {
 module.exports.scrollIntoView = function (elName, el) {
     it(
         "Scroll '" + elName + "' into view", function () {
+            pages.base.waitForAjax();
             pages.base.scrollIntoView(el);
             expect(el.isDisplayed()).toBeTruthy();
         }
@@ -189,12 +190,14 @@ exports.validateDownloadFileCount = function (value) {
 
 exports.openTheNewTab = function (url) {
     it("Open a new tab with url", function () {
+        browser.sleep(1000);
         pages.base.openNewTab(url);
     });
 };
 
 exports.focusOnNewOpenedTab = function (i) {
     it("Focus on the new opened tab ", function () {
+        pages.base.waitForAjax();
         pages.base.focusOnTheNewOpenedTab(i);
         console.log("tab" + i);
     });

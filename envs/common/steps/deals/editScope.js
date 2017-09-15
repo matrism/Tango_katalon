@@ -1109,6 +1109,13 @@ exports.clickOnWorkLinkFromScopeNumberI = function (i) {
     });
 };
 
+exports.clickOnWorkLinkFromScopeName = function (name) {
+    it("Click on work link from scope name " + name, function () {
+        pages.editDealScope.clickOnTheWorkLinkFromScopeName();
+        pages.editDealScope.waitForAjax();
+    });
+};
+
 exports.checkWorksCountOnScopeNumberI = function (i, count) {
     it("Check that the works count on scope number " + i + " is equal to " + count, function () {
         browser.driver.findElement(By.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})'] span")).getText().then(function (promise) {

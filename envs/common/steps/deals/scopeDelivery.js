@@ -115,11 +115,11 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDelivery = function (i) {
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            steps.base.sleep(5000);
+            browser.sleep(5000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
-            pages.scopeDelivery.clickScopeDeliveryCheckbox(1, 0);
+            pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 1);
             pages.scopeDelivery.save();
         });
     });
@@ -131,13 +131,13 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex = func
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            steps.base.sleep(5000);
+            browser.sleep(5000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             // pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
             // pages.scopeDelivery.clickScopeDeliveryCheckbox(1, 0);
             for (var j = indexMin; j <= indexMax; j++) {
-                pages.scopeDelivery.clickScopeDeliveryCheckbox(indexMax, 0);
+                pages.scopeDelivery.clickScopeDeliveryCheckbox(0, j);
             }
             pages.scopeDelivery.save();
         });
@@ -165,11 +165,11 @@ exports.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithOneScope = functi
             console.log("Contract brief number promise is " + promise);
             pages.deal.printTheDealNumber();
             pages.base.focusOnTheNewOpenedTab(i);
-            steps.base.sleep(5000);
+            browser.sleep(1000);
             pages.scopeDelivery.searchDealsForContribution(0, promise);
-            steps.base.sleep(5000);
             pages.scopeDelivery.selectDealSearchResultByIndex(0);
             pages.scopeDelivery.clickScopeDeliveryCheckbox(0, 0);
+            pages.scopeDelivery.getScopeDeliveryScopeName(0);
             pages.scopeDelivery.save();
         });
     });

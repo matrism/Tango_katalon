@@ -1,7 +1,6 @@
 'use strict';
 
 var ExpectedConditions = protractor.ExpectedConditions;
-
 pages.scopeDelivery = exports;
 
 exports.deliverWorkButton = function () {
@@ -27,7 +26,9 @@ exports.scopeDeliveryTabElement = function () {
 };
 
 exports.deliverWork = function () {
+    pages.base.waitForAjax();
     browser.wait(ExpectedConditions.visibilityOf(exports.deliverWorkButton()));
+    pages.base.scrollIntoView(exports.deliverWorkButton());
     return exports.deliverWorkButton().click();
 };
 
@@ -55,7 +56,7 @@ exports.checkTheErrorMessageScopeDeliveryConflict = function () {
 };
 
 exports.dealSearchForAllContributionsInput = function () {
-    return $('[ng-if="tgModularEditModel.creatorLinks.$count() > 1"]').element(
+    return $('[ng-if="tgModularEditModel.creatorLinks.$count() > 1"]:nth-child(1)').element(
         by.model('$term')
     );
 };
@@ -105,6 +106,14 @@ exports.scopeSearchResultsFilter = function(i){
     return elements.get(i);
 };
 
+exports.getScopeDeliveryScopeName = function(i){
+        var el = $('[ng-repeat="dealScopeLink in dealLink.dealScopeLinks.$getItems()"]:nth-child('+ (i+1) +')').element(by.css('.scope-delivery-description'));
+        el.getText().then(function (promise) {
+            hash.scopeName = promise;
+            console.log("Selected Scope Name = " + hash.scopeName);
+        });
+};
+
 exports.selectContractPeriodSearchResultByIndexFromFilteredWorkDelivery = function (i) {
     var element = exports.contractPeriodSearchResultsFilter(i),
         clickPromise;
@@ -129,6 +138,7 @@ exports.searchDealsForContribution = function (i, terms) {
     var element = exports.dealSearchInput(i);
     pages.base.scrollIntoView(element);
     return element.sendKeys(terms);
+    pages.base.waitForAjax();
 };
 
 exports.contractPeriodDropDownResults = function () {

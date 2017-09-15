@@ -141,8 +141,8 @@ if (pages.editDealPayee === undefined) {
 
         editSelectTheSpecificPayeePersonFromDropDown: function (payee_name) {
             var desiredOption;
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(2) div.overflow.ng-binding"))));
-            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(2) div.overflow.ng-binding"))
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(1) div.overflow.ng-binding"))));
+            browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(1) div.overflow.ng-binding"))
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
@@ -159,7 +159,7 @@ if (pages.editDealPayee === undefined) {
                         desiredOption.click();
                     }
                 });
-            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(2) div.overflow.ng-binding"))));
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope:nth-child(1) div.overflow.ng-binding"))));
         },
 
         editSelectTheRandomValueForPayeeCompanyNameCode: function () {

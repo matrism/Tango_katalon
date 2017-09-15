@@ -98,6 +98,7 @@ if (pages.createDealScope === undefined) {
 
 
         addScopeForm: function () {
+            pages.base.scrollIntoView(pages.createDealScope.elems.addScopeIcon);
             pages.createDealScope.elems.addScopeIcon.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealScope.elems.contractTypeDropDown));
         },

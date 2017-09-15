@@ -75,6 +75,7 @@ exports.clickLastScopeHeader = function () {
 
 exports.waitForDealToBeSaved = function () {
     it("Expect deal screen to be loaded and brief number displayed ", function () {
+        pages.base.waitForAjax();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealBriefNumber));
     });
 };
@@ -114,12 +115,14 @@ exports.itContinueToNextPage = function () {
 
 exports.goToGeneralDealTabDetail = function () {
     it("Click on general header and go to general deal tab details ", function () {
+        pages.deal.waitForAjax();
         pages.deal.goToGeneralDealDetails();
     });
 };
 
 exports.goToGeneralDealTabDetails = function () {
     it("Click on general header and go to general deal tab details ", function () {
+        pages.deal.waitForAjax();
         pages.deal.goToGeneralDealDetails();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealGeneralSummaryHeader));
     });
@@ -134,6 +137,7 @@ exports.goToGeneralDealTabDetailsDirtyCheck = function () {
 
 exports.goToPayeesDealTabDetails = function () {
     it("Click on payees header and go to payees deal tab details ", function () {
+        pages.deal.waitForAjax();
         pages.deal.goToPayeesDealDetails();
         browser.wait(ExpectedConditions.visibilityOf(pages.deal.elems.dealPayeesSummaryHeader));
     });

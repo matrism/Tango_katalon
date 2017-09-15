@@ -12,7 +12,7 @@ if (pages.editDealScope === undefined) {
                 contractTypeDropDown: {css: "select[name='scopeContractType'] option"},
                 editTerritoryField: {css: "[ng-model='tgModularEditModel.dealScopeTerritories'] .tg-typeahead"},
                 editTerritoryInput: {css: "[ng-model='tgModularEditModel.dealScopeTerritories'] input"},
-                editTerritoryDeleteIcon: {css: "div[ng-model='modularEditModels.model.deal_scope_territories.territories'] span[ng-click='!$isDisabled() && $removeTag($tag); $event.stopPropagation();']"},
+                editTerritoryDeleteIcon: {css: "div[ng-model='tgModularEditModel.dealScopeTerritories'] span[ng-click='!$isDisabled() && $removeTag($tag); $event.stopPropagation();']"},
                 editTerritoryDropDown: {css: "div.tg-territory ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
                 publisherSharesTitle: {css: "div[name='scopeForm'] div.section-header-borderless.publisher-shares.ps-section-header.clearfix"},
                 publisherSharesSetArea: {css: "div[name='scopeForm'] [ng-controller='DealPssController']"},
@@ -26,7 +26,7 @@ if (pages.editDealScope === undefined) {
                 editFirstPublisherOwnPercent: {css: "#deal-publisher div[name='chainForm'] div.publisher-row.clearfix input[name='ownShare']"},
                 editFirstPublisherCollectPercent: {css: "#deal-publisher div[name='chainForm'] div.publisher-row.clearfix input[name='collectShare']"},
                 editFirstPublisherNameAMField: {css: "#deal-publisher div[data-name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] div[name='acquirer'] input"},
-                editFirstPublisherNameAMCollectPercent: {css: "#deal-publisher div[name='chainForm'] div.ng-scope:nth-child(4) div[data-name='amPub'] input[name='collectShare']"},
+                editFirstPublisherNameAMCollectPercent: {css: "#deal-publisher div[name='chainForm'] div.ng-scope:nth-child(4).am-share input[name='collectShare']"},
                 editPublisherNameDropDownData: {css: "ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"},
                 editFirstPublisherTypeEOrPAArrow: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-caret.fa.fa-caret-down"},
                 editFirstPublisherTypeEOrPADropDown: {css: "#deal-publisher div[data-name='chainForm'] div.publisher-row.clearfix ul.dropdown-menu li.ng-scope a[ng-click='selectItem($item);']"},
@@ -1125,6 +1125,23 @@ if (pages.editDealScope === undefined) {
                 browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))));
                 browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))).perform();
                 browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + i + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))).perform();
+                browser.wait(ExpectedConditions.visibilityOf(element(by.css('.val-works-heading'))));
+                },
+
+            clickOnTheWorkLinkFromScopeName: function (name) {
+                var scopename = element.all(by.css('strong[class="span2 nomargins overflow ng-binding"]'));
+                element.all(by.repeater('sp in availableScopes track by sp.id')).each(function(elm, index) {
+                    console.log (index);
+                    elm.element(by.css('strong[class="span2 nomargins overflow ng-binding"]')).getText().then(function(getName){
+                        if(getName == hash.scopeName){
+                            console.log('found');
+                            pages.base.scrollIntoView(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + (index + 1) + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']")));
+                            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + (index + 1) + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))));
+                            browser.actions().mouseMove(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + (index + 1)+ ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))).perform();
+                            browser.actions().click(element(by.css("div.ps-container ul.deal-list.scopes-menu li[ng-click='setActiveScope(sp.id)']:nth-child(" + (index + 1) + ") a[ui-sref='deal.view.workLog({cpId: activeContractPeriod.id, scopeId: sp.id, inConflict: false})']"))).perform();
+                        }
+                    })
+                });
             },
 
             clickOnTheCreatorSetSocietyAgreementNumberArea: function () {
