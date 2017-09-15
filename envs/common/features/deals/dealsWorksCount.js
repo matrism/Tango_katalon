@@ -79,8 +79,9 @@ exports.feature = [
             steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDelivery(0);
 
             steps.base.focusOnNewOpenedTab(1);
-            steps.base.sleep(10000);
+            steps.base.sleep(5000);
             steps.deal.refreshThePage();
+            steps.base.sleep(5000);
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
             steps.work.goBackToMainPageFromWork();
 
