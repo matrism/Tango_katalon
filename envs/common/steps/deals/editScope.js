@@ -1104,6 +1104,7 @@ exports.saveChangesSocietyAgreementNumberFormWait = function () {
 
 exports.clickOnWorkLinkFromScopeNumberI = function (i) {
     it("Click on work link from scope number  " + i, function () {
+        pages.base.waitForAjax();
         pages.editDealScope.clickOnTheWorkLinkFromScopeNumberI(i);
         pages.editDealScope.waitForAjax();
     });
