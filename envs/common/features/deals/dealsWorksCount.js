@@ -26,7 +26,7 @@ exports.feature = [
         steps: function()
         {
             //steps: criticalScenario(() =>
-            {
+
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('TEST WORK ' + (new Date()).getTime());
@@ -444,7 +444,7 @@ exports.feature = [
                 steps.newWork.optToIncludeWorkOnWebsite(false);
                 steps.newWork.saveWork();
 
-                steps.work.refreshThePage();
+                steps.base.sleep(5000);
                 steps.work.goToScopeDeliveryTab();
                 steps.scopeDelivery.deliverWork();
                 steps.base.focusOnNewOpenedTab(0);
