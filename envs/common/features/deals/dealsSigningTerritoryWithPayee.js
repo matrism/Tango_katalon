@@ -14,6 +14,7 @@ exports.feature = [
         tags: ["dealSigningTerritoryPayees"],
         steps: criticalScenario(() =>
         {
+            //steps.preDataCheck.accessSavedPersonByName('person 1 TAT payee');   future build
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -82,6 +83,7 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
+            steps.base.sleep(5000);
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             //check signing territory is not disabled and change it

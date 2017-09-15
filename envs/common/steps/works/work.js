@@ -33,6 +33,7 @@ pageStep('Go to General tab');
 
 module.exports.goToScopeDeliveryTab = function () {
     it('Go to Scope Delivery tab', function () {
+        pages.base.waitForAjax();
         pages.work.goToScopeDeliveryTab();
     });
 };
@@ -708,6 +709,7 @@ exports.removeWorkSearchTerm = function (i) {
 };
 exports.clickWorkSearchMatch = function (i) {
     it('Click work search match #' + (i + 1), function () {
+        browser.sleep(1000);
         pages.work.clickWorkSearchMatch(i);
     });
 };
@@ -1525,6 +1527,7 @@ exports.checkErrorMessageDisplayedOnWorksConflicts = function (message) {
 
 exports.checkDefaultFilterContractPeriodForWorkLog = function () {
     it("Check the default filters for work log contract period ", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css('.validate-work'))));
         browser.driver.findElement(By.css("div[tg-dropdown-id='workLogCPFilter'] button.tg-dropdown-label.overflow span.ng-binding.ng-scope")).getText().then(function (promise) {
             console.log("The default filters for work log contract period " + promise);
             expect(promise).toEqual("Contract Period 1");
@@ -1536,7 +1539,11 @@ exports.checkDefaultFilterScopeForWorkLog = function () {
     it("Check the default filters for work log scope ", function () {
         browser.driver.findElement(By.css("div[tg-dropdown-id='workLogScopeFilter'] button.tg-dropdown-label.overflow span.ng-binding.ng-scope")).getText().then(function (promise) {
             console.log("The default filters for work log scope " + promise);
-            expect(promise).toEqual("Scope 1");
+            if(hash.scopeName == null) {
+                expect(promise).toEqual("Scope 1");
+            } else {
+                expect(promise).toEqual(hash.scopeName);
+            }
         });
     });
 };

@@ -57,7 +57,7 @@ var defaultUserName = 'TangoTest1',
             seleniumAddress: cli['use-selenium-server'] ? 'http://selenium-hub.shared.wmg.com:4444/wd/hub' : '',
             resolution: {
                 width: 1400,
-                height: 1100 //1024
+                height: 1150 //1024
             },
             streamId: cli['stream'] || 1,
             //protractor Zapi related
