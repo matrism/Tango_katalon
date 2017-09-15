@@ -925,6 +925,7 @@ exports.save = function() {
    // it('Saving work', function() {
     steps.base.sleep(7000);
      steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
+    steps.base.sleep(3000);
      pages.base.waitForAjax();
    // });
 };
