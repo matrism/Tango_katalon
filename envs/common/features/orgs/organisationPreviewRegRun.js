@@ -20,6 +20,7 @@ exports.feature = [
         name: 'Preview Reg run and validate Errors',
         tags: ['organisationPreviewRegistrationRun'],
         steps: function () {
+        //steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.goToPreviewRegistrationRunTab();
 
@@ -31,7 +32,7 @@ exports.feature = [
                 this.checkFilters();
                 this.checkRunTypeFilters();
                 this.downloadCrFile();
-                this.validateCrFile('primary', 'BMI');
+                //this.validateCrFile('primary', 'BMI');
                 // validation errors
                 this.viewPrimaryValidationErrors();
                 this.scrollPrimaryValidationPage();
@@ -45,6 +46,8 @@ exports.feature = [
                 this.validatePrimaryErrorCrFile('error', 'BMI');
                 this.backValidationErrors();
                 //custom   CR_2013-09-15 CR_2013-10-01 CR_2013-06-15 CR_2013-10-15
+                //custom no longer a priority
+                /*
                 this.selectCustomRegistrationRun('CR_2200-05-15');
                 this.executeRegistrationRunValidation('CR_2200-05-15');
                 this.selectCustomRegistrationRun('CR_2013-09-15');
@@ -67,6 +70,7 @@ exports.feature = [
                 this.downloadCrFile('error');
                 this.validateErrorCrFile('errorCustom', 'BMI');
                 this.backValidationErrors('custom');
+                */
             });
         }
     }

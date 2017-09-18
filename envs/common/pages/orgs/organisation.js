@@ -518,7 +518,7 @@ if (pages.organisation === undefined) {
             }).then(() => {
                 let f = fs.readFileSync(filePath, { encoding: 'utf-8' }),
                     rows = f.split('\n'),
-                    selectedRow = rows[3],
+                    selectedRow = rows[2],
                     values = selectedRow.split('","');
 
                 returnObj = {
@@ -793,6 +793,7 @@ if (pages.organisation === undefined) {
         }
             ,
         clickSaveOrganisationButton: function () {
+
             this.saveOrganisationButton().click();
         },
         isSavedPageDisplayed: function () {

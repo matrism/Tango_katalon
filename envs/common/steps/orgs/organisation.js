@@ -322,7 +322,7 @@ if (steps.organisation === undefined) {
                 steps.organisation.clickValidationErrorsSortFilter();
                 steps.organisation.selectValidationErrorsSortFilter(1);
                 steps.organisation.selectErrorsStatusPanel();
-                steps.organisation.validateErrorTypeHeader(0, 'Ownership & Collection Shares');
+                steps.organisation.validateErrorTypeHeader(0, 'General Validation');
                 steps.organisation.clickValidationErrorsSortFilter();
                 steps.organisation.selectValidationErrorsSortFilter(2);
                 steps.organisation.validateSortHeader('Affected Party');
@@ -414,7 +414,8 @@ if (steps.organisation === undefined) {
         checkWorksFilter: function () {
             it("Check error works filter ", function () {
                 var workId = hash.validationErrorsSecondWorkId - hash.validationErrorsFirstWorkId;
-                expect(workId >= 0).toBeTruthy();
+                //expect(workId >= 0).toBeTruthy(); previous
+                expect(workId <= 0).toBeTruthy();
             });
         },
         checkErrorTypeFilters: function () {
@@ -966,7 +967,21 @@ if (steps.organisation === undefined) {
         saveOrganisation: function () {
             it("Save organisation ", function () {
 
-                pages.organisation.clickSaveOrganisationButton();
+                pages.organisation.clickSaveOrganisationButton().then(function(promise){
+                    element(by.css('.modal-header')).isDisplayed().then(function(result){
+                        if(result){
+                            element(by.cssContainingText('button','OK')).click();
+                            browser.sleep(5000);
+                            expect(pages.organisation.isSavedPageDisplayed()).toBeTruthy();
+                        } else {
+                            expect(pages.organisation.isSavedPageDisplayed()).toBeTruthy();
+                        }
+
+                    });
+
+                });
+
+
 
             });
         },

@@ -446,7 +446,7 @@ exports.feature = [
                 steps.newWork.saveWork();
 
                 steps.base.sleep(3000);
-                steps.work.refreshPage();
+                steps.work.refreshThePage();
                 steps.base.sleep(5000);
                 steps.work.goToScopeDeliveryTab();
                 steps.scopeDelivery.deliverWork();
@@ -568,9 +568,9 @@ exports.feature = [
             steps.newWork.optToIncludeWorkOnWebsite(false);
             steps.newWork.saveWork();
             var workId = steps.work.findCurrentlyOpenWorkId();
-            steps.work.sleep(5000);
+            steps.base.sleep(5000);
             steps.work.refreshThePage();
-            steps.work.sleep(5000);
+            steps.base.sleep(5000);
             steps.work.goToScopeDeliveryTab();
             steps.scopeDelivery.deliverWork();
             steps.base.focusOnNewOpenedTab(0);
