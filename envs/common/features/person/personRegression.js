@@ -22,7 +22,8 @@ exports.feature = [
     {
         name: 'Create a non-creator person',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot('person', 0);
 
             using(steps.newPerson, function () {
@@ -68,11 +69,12 @@ exports.feature = [
             });
 
             steps.person.findId();
-        }
+        })
     }, {
         name: 'Search for previously created non-creator person',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useEntityDataSlot('person', 0);
 
             ['First Name', 'Last Name', 'Name', 'Alternative First Name', 'Alternative Last Name', 'Alternative Name'].forEach(function (field) {
@@ -89,11 +91,12 @@ exports.feature = [
                     steps.person.validateAlternativeLastName(0);
                 });
             });
-        },
+        }),
     }, {
         name: 'Validate created non-creator person',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useEntityDataSlot('person', 0);
 
             using(steps.person, function () {
@@ -125,11 +128,12 @@ exports.feature = [
                 this.validatePrimaryEmail(1);
                 this.validatePayee()
             });
-        },
+        }),
     }, {
         name: 'Edit created non-creator person',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
 
             steps.base.useEntityDataSlot('person', 0);
 
@@ -202,12 +206,13 @@ exports.feature = [
                 this.enterCitizenship('Malaysian');
                 this.saveOthers();
             });
-        },
+        }),
     },
     {
         name: 'Create a person with suisa ipi number and minimum required fields',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot('person', 1);
 
             using(steps.newPerson, function () {
@@ -226,12 +231,13 @@ exports.feature = [
 
             steps.person.findId();
             steps.person.findSuisaIpiNumber();
-        }
+        })
     },
     {
         name: 'Search for previously using suisa ipi number and validate it is unique',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useEntityDataSlot('person', 1);
 
             ['Suisa Ipi Number', 'Alternative Suisa Ipi Number'].forEach(function (field) {
@@ -247,15 +253,17 @@ exports.feature = [
                     steps.person.validateAlternativeSuisaIpiNumber(0);
                 });
             });
-        }
+        })
     },
     {
         name: 'Create a creator person',
-        tags: [],
-        steps: function () {
+        tags: ['createnon'],
+        //steps: function () {
+        steps: criticalScenario(() => {
+            //var today = new Date();
             var today = moment();
             var yesterday = moment().subtract(1, 'days');
-            ;
+
             steps.person.useBlankPersonSlot('person', 2);
 
             using(steps.newPerson, function () {
@@ -302,10 +310,10 @@ exports.feature = [
                 this.setPrimaryEmail(1);
                 this.clickOnPayee('No');
                 this.makePersonStatementRecipient();
-                this.setStatementRecipientData('EDI', 'Email with Attachment');
-                this.setStatementRecipientData('EDI', 'Soft-Copy on Disk');
-                this.setStatementRecipientData('Excel', 'Email with Attachment');
-                this.setStatementRecipientData('Excel', 'Soft-Copy on Disk');
+                //this.setStatementRecipientData('EDI', 'Email with Attachment');
+                //this.setStatementRecipientData('EDI', 'Soft-Copy on Disk');
+                //this.setStatementRecipientData('Excel', 'Email with Attachment');
+                //this.setStatementRecipientData('Excel', 'Soft-Copy on Disk');
                 this.enterPlaceOfBirth('Alor Setar');
                 this.enterCitizenship('Malaysian');
                 this.selectRandomMaritalStatus();
@@ -318,11 +326,12 @@ exports.feature = [
 
             steps.person.findId();
             steps.person.findInternalIpiNumber();
-        }
+        })
     }, {
         name: 'Search for previously created person',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useEntityDataSlot('person', 2);
 
             ['Ipi Number', 'First Name', 'Last Name', 'Name'].forEach(function (field) {
@@ -340,11 +349,12 @@ exports.feature = [
                     steps.person.validateAlternativeLastName(0);
                 });
             });
-        },
+        }),
     }, {
         name: 'Validate created person',
         tags: [],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useEntityDataSlot('person', 2);
 
             using(steps.person, function () {
@@ -377,12 +387,12 @@ exports.feature = [
                 this.validatePrimaryEmail(1);
                 this.validatePayee()
             });
-        },
+        }),
     }, {
         name: 'Edit created person and change to non-creator',
         tags: [],
-        steps: function () {
-
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.base.useEntityDataSlot('person', 2);
 
             using(steps.person, function () {
@@ -416,6 +426,7 @@ exports.feature = [
                 steps.newPerson.confirmMakingNonCreator(true);
                 this.saveSocietyAffiliation();
 
+                steps.person.refreshThePage();
                 this.editAddress(0);
                 this.enterAddressOne(0, 'Abbey Road Updated');
                 this.cancelAddress(0);
@@ -452,8 +463,9 @@ exports.feature = [
                 this.validatePrimaryEmail(0);
 
                 this.editPayment();
-                this.setStatementRecipientData('PDF', 'Email with Attachment');
-                this.setStatementRecipientData('Printed Format', 'Hard-Copy Mailed');
+                this.clickOnPayee('Yes');
+                //this.setStatementRecipientData('PDF', 'Email with Attachment');
+                //this.setStatementRecipientData('Printed Format', 'Hard-Copy Mailed');
                 this.cancelPayment();
                 steps.base.dirtyCheckContinueEditing();
                 this.savePayment();
@@ -466,5 +478,5 @@ exports.feature = [
                 steps.base.dirtyCheckContinueEditing();
                 this.saveOthers();
             });
-        },
+        }),
     }];
