@@ -348,9 +348,11 @@ exports.findAlternativeSuisaIpiNumber = function (i) {
 
 exports.validateSuisaIpiNumber = function (suisaIpiNumber) {
     it('Validate SUISA IPI number', function () {
-
-        //expect(pages.person.getSuisaIPI()).toBe(hash.currentPersonSlot.suisaIpiNumber)
-        expect(pages.person.getSuisaIPI()).toBe(suisaIpiNumber);
+        if(suisaIpiNumber == "" || suisaIpiNumber == null) {
+            expect(pages.person.getSuisaIPI()).toBe(hash.currentPersonSlot.suisaIpiNumber);
+        }else {
+            expect(pages.person.getSuisaIPI()).toBe(suisaIpiNumber);
+        }
     });
 };
 
@@ -574,5 +576,13 @@ exports.enterMexicoRegDate = function (year, month, day) {
 exports.validateMexicoRegDateIsEnabled = function () {
     it('Validate Mexico Reg Date Is Enabled', function () {
         expect(pages.person.mexicoRegDate().isEnabled()).toBe(true);
+    });
+};
+
+exports.refreshThePage = function () {
+    it("Refresh the page", function () {
+        browser.driver.navigate().refresh();
+        pages.base.waitForAjax();
+        browser.sleep(5000);
     });
 };

@@ -41,7 +41,7 @@ module.exports.goToScopeDeliveryTab = function () {
 exports.refreshThePage = function () {
     it("Refresh the page", function () {
         browser.driver.navigate().refresh();
-
+        pages.base.waitForAjax();
     });
 };
 

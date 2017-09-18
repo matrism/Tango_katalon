@@ -165,20 +165,27 @@ if (pages.newPerson === undefined) {
         typeDateOfDeath: function (year, month, day) {
             this.dateOfDeathYear().clear();
             this.dateOfDeathYear().sendKeys(year);
-            this.dateOfDeathMonth().clear();
+            this.dateOfDeathYear().sendKeys(protractor.Key.TAB);
+            //this.dateOfDeathMonth().clear();
+
             this.dateOfDeathMonth().sendKeys(month);
-            this.dateOfDeathDay().clear();
+            this.dateOfDeathMonth().sendKeys(protractor.Key.TAB);
+            //this.dateOfDeathDay().clear();
             return this.dateOfDeathDay().sendKeys(day);
 
         },
 
         typeDateOfBirth: function (year, month, day) {
-            this.dateOfBirthYear().clear()
+            this.dateOfBirthYear().clear();
             this.dateOfBirthYear().sendKeys(year);
-            this.dateOfBirthMonth().clear();
+            this.dateOfBirthYear().sendKeys(protractor.Key.TAB);
+
             this.dateOfBirthMonth().sendKeys(month);
-            this.dateOfBirthDay().clear();
+            //this.dateOfBirthDay().clear();
+            this.dateOfBirthMonth().sendKeys(protractor.Key.TAB);
+
             return this.dateOfBirthDay().sendKeys(day);
+
 
         },
 
