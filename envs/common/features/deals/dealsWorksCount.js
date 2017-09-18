@@ -26,7 +26,7 @@ exports.feature = [
         steps: function()
         {
             //steps: criticalScenario(() =>
-
+            hash.scopeName = null; //reset var to null
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('TEST WORK ' + (new Date()).getTime());
@@ -121,6 +121,7 @@ exports.feature = [
         steps: function()
         //steps: criticalScenario(() =>
         {
+            hash.scopeName = null; //reset var to null
             steps.base.useBlankEntityDataSlot('work', 0);
             steps.newWork.goToNewWorkPage();
             steps.newWork.enterPrimaryWorkTitle('DENISA WORK ' + (new Date()).getTime());
@@ -313,7 +314,7 @@ exports.feature = [
         steps: function()
         //steps: criticalScenario(() =>
         {
-
+            hash.scopeName = null; //reset var to null
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
@@ -413,8 +414,8 @@ exports.feature = [
         tags: ["additionalDealsWorks"],
         //steps: criticalScenario(() => {
         steps: function(){
-
-                steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
+            hash.scopeName = null; //reset var to null
+            steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.fillMandatoryFieldsContractPeriodSpecificValue("2014-12-16");
             steps.createDealContractPeriod.enterTargetEndDateInMonths("12");
@@ -492,6 +493,7 @@ exports.feature = [
         tags: ["filterDealsWorks"],
         steps: function() {
         //steps: criticalScenario(() => {
+            hash.scopeName = null; //reset var to null
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithData("ascap", "Italy");
             steps.deal.itContinueToNextPage();
 
