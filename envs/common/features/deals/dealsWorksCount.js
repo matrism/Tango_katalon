@@ -455,8 +455,9 @@ exports.feature = [
                 steps.scopeDelivery.getDealNumberCreatedInTabNumberAndUseToWorkDeliveryWithScopeIndex(1, 0, 3);
 
                 steps.base.focusOnNewOpenedTab(0);
-                steps.deal.refreshThePage();
                 steps.base.sleep(5000);
+                steps.deal.refreshThePage();
+
             }
 
             steps.editDealScope.clickOnWorkLinkFromScopeNumberI(1);
