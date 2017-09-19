@@ -13,6 +13,7 @@ steps.royaltyRates = exports;
 exports.addNewRoyaltySet = function () {
     it("Add new Royalty Rate Set", function () {
         pages.royaltyRates.clickNewRoyaltySetButton();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("[ng-click='onRateSetCancel(set)']"))));
     });
 };
 

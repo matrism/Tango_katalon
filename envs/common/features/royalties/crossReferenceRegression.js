@@ -40,7 +40,8 @@ exports.feature = [
     {
         name: 'Add Cross Reference',
         tags: ['crossReferenceIncoming'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference,
                 cra = cr.addForm;
 
@@ -48,6 +49,7 @@ exports.feature = [
             cr.selectSearchCriterion('Tango Works');
 
             cr.searchForTangoWork(fromTestVariable('workId0'), 'Work ID');
+            //cr.searchForTangoWork('WORK TAT ALG5207OKQK3SMUND8Y4QZ90ERQZ9NUQ');
             cr.expectTangoWorkToBeVisible();
             cr.clickAddCrossReferenceButton();
             cra.expectCrossReferenceFormToBeVisible();
@@ -68,12 +70,13 @@ exports.feature = [
             cra.enterIncomeProvider('BMI');
             cra.confirm();
             cra.validateSuccessMessage();
-        },
+        }),
     },
     {
         name: 'Search for incoming work and rematch',
         tags: ['crossReferenceIncoming'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference,
                 cri = cr.items;
 
@@ -90,42 +93,47 @@ exports.feature = [
             cri.searchForRematchWork('WORK TAT ' + randomString(1), 'Title');
             cri.selectFirstRematchWork();
             cri.confirm();
-        },
+        }),
     },
     {
         name: 'Search for incoming work, validate rematched work and unmatch',
         tags: ['crossReferenceIncoming'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference,
                 cri = cr.items;
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             cr.selectSearchCriterion('Incoming Works');
             cr.searchForIncomingWork(randomStringLowerCase(0), 'Incoming Work ID');
+            //cr.searchForIncomingWork('qmr4dxc273fsj2s3yg9p21ohsckbuyl7', 'Incoming Work ID');
             cr.expectIncomingWorkToBeVisible();
             cr.expectIncomingWorkIdToContainSearchTerm();
-            cr.expectTangoWorkTitleToContain('WORK TAT ' + randomString(1));
+            cr.expectTangoWorkTitleToContain('WORK TAT ' + randomString(1),0);
+            //cr.expectTangoWorkTitleToContain('WORK TAT 6C8E0VOD3ZZOAG283ONCRRXLKJMMVTP4',0);
             cri.expand();
             cri.unmatch();
             cri.confirm();
-        },
+        }),
     },
     {
         name: 'Search for unmatched incoming work and expect no results',
         tags: ['crossReferenceIncoming'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference;
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             cr.selectSearchCriterion('Incoming Works');
             cr.enterIncomingWorkSearchTerms(randomStringLowerCase(0), 'Incoming Work ID');
             cr.expectNoResultsMessage();
-        },
+        }),
     },
     {
         name: 'Add Cross Reference',
         tags: ['crossReferenceTango'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference,
                 cra = cr.addForm;
 
@@ -140,12 +148,13 @@ exports.feature = [
             cra.enterId(randomStringLowerCase(1));
             cra.enterIncomeProvider('BMI');
             cra.confirm();
-        },
+        }),
     },
     {
         name: 'Search for Tango work and rematch',
         tags: ['crossReferenceTango'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference,
                 cri = cr.items;
 
@@ -161,12 +170,13 @@ exports.feature = [
             cri.searchForRematchWork('WORK TAT ' + randomString(1), 'Title');
             cri.selectFirstRematchWork();
             cri.confirm();
-        },
+        }),
     },
     {
         name: 'Search for Tango work, validate rematched work and unmatch',
         tags: ['crossReferenceTango'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference,
                 cri = cr.items;
 
@@ -177,19 +187,20 @@ exports.feature = [
             cri.expand();
             cri.unmatch();
             cri.confirm();
-        },
+        }),
     },
 
     {
         name: 'Search for unmatched Tango work and expect no match',
         tags: ['crossReferenceTango'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let cr = steps.crossReference;
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');
             cr.selectSearchCriterion('Tango Works');
             cr.searchForTangoWork(fromTestVariable('workId1'), 'Work ID');
             cr.expectNoCrossReference();
-        },
+        }),
     },
 ];

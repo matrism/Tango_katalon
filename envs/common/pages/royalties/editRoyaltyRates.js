@@ -8,7 +8,7 @@ if (pages.editRoyaltyRates === undefined) {
         url: _tf_config.urls.app_url + "#/create/deal",
         locators: {
             editRrArea: {css: "div.rate-set-summary-table"},
-            editRrIcon: {css: "button[data-ng-click='CR.onAddContractualRateSet(activeScope, false)']"},
+            editRrIcon: {css: "button[ng-click='onAddContractualRateSet()']"},
             newRoyaltyRate: {css: ".ng-pristine.ng-warn.ng-warn-check-publisher-share-set>div>a"},
             newRoyaltyRateSetButton: {css: ".ng-scope.ng-warn.ng-dirty>div>a"},
             closeRateSetButton: {css: ".rate-set-footer>.btn-cancel"},
@@ -37,11 +37,11 @@ if (pages.editRoyaltyRates === undefined) {
 
         clickCancelButtonForRRSet: function () {
             var RRCancelButton;
-            RRCancelButton = element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"));
+            RRCancelButton = element(by.css("button[ng-click='onRateSetCancel(set)']"));
 
             pages.base.scrollIntoView(RRCancelButton);
             RRCancelButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
+            //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='ok()']"))));
         },
 
         clickConfirmCancelButtonForRRSet: function () {
@@ -52,18 +52,18 @@ if (pages.editRoyaltyRates === undefined) {
 
         clickDeleteButtonForRRSet: function () {
             var RRDeleteButton;
-            RRDeleteButton = element(by.css("button[data-ng-click='CR.onRatesSetDelete(set, activeScope)']"));
+            RRDeleteButton = element(by.css("button[ng-click='onRatesSetDelete(set)']"));
 
             pages.base.scrollIntoView(RRDeleteButton);
             RRDeleteButton.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[data-ng-click='data.delete()']"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.cssContainingText("button","Delete"))));
         },
 
         clickConfirmDeleteButtonForRRSet: function () {
-            var elem = element(by.css('div.modal-footer button[data-ng-click="data.delete()"]'));
+            var elem = element(by.cssContainingText('[data-ng-click="data.delete()"]',"Delete"));
             pages.base.scrollIntoView(elem);
             elem.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css('a[data-ng-click="CR.onAddContractualRateSet(activeScope, true)"]'))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css('a[ng-click="onAddContractualRateSet(true)"]'))));
         },
 
         clickDeleteButtonForRRSetWithoutConfirm: function () {
@@ -76,7 +76,7 @@ if (pages.editRoyaltyRates === undefined) {
         },
 
         openRRButton: function () {
-            return element(by.css("div[data-ng-repeat='(index, set) in CR.model.contractualRatesSets']:nth-child(1) .rate-set-chevron"));
+            return element(by.css('div[ng-repeat="set in tgModularEditModel.ratesSets.$getItems() | tgOrderObjectBy : \'sequence_number\' : false"] .rate-set-chevron'));
             //return $(".icon-chevron-down");
         },
 
@@ -377,7 +377,7 @@ if (pages.editRoyaltyRates === undefined) {
             browser.wait(ExpectedConditions.elementToBeClickable(this.openRRButton()));
 
             this.openRRButton().click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("button[data-ng-click='CR.onRateSetCancel(set, activeScope)']"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("button[ng-click='onRateSetCancel(set)']"))));
         },
 
         clickEditSavedRRIcon: function () {

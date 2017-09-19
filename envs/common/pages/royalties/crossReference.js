@@ -18,6 +18,7 @@ exports.incomingWorksSearch = () => {
 };
 
 exports.searchForIncomingWork = (text, filter) => {
+    browser.sleep(4000);
     let typeahead = exports.incomingWorksSearch();
 
     if (filter) {
@@ -52,7 +53,7 @@ exports.searchForTangoWork = (text, filter) => {
     if (filter) {
         typeahead.setFilter(filter);
     }
-
+    browser.sleep(3000);
     typeahead.selectFirstTangoWork(text);
     setTestVariable('Last Tango Work search term', text);
 };
@@ -75,6 +76,7 @@ exports.expectTangoWorkToBeVisible = () => {
     let tangoWork = exports.tangoWorkContainer();
 
     expect(tangoWork.isDisplayed()).toBeTruthy();
+    pages.base.waitForAjax();
 };
 
 exports.expectNoCrossReference = () => {
@@ -102,10 +104,11 @@ exports.expectIncomingWorkIdToContainSearchTerm = () => {
 
 exports.tangoWorkTitle = (index) => {
     index = index || 0;
-    return $$('[data-ui-sref^="workView"]').get(index);
+    return $$('[data-ui-sref="workView({workCode:workUtility.makeFullCode(incomeWork.matchedWork)})"]').get(index);
 };
 
 exports.expectTangoWorkTitleToContain = (text, index) => {
+    pages.base.waitForAjax();
     let elem = exports.tangoWorkTitle(index);
     pages.base.scrollIntoView(elem);
     expect(elem.getText()).toContain(text);
@@ -248,7 +251,7 @@ exports.addForm = (() => {
     };
 
     addForm.incomeProviderTypeahead = () => {
-        return Typeahead(by.model('newCrossRefModel.incomeProvider'));
+        return Typeahead(by.css('[tg-org-typeahead-model="newCrossRefModel.incomeProvider"]'));
     };
 
     addForm.confirmButtom = () => {
