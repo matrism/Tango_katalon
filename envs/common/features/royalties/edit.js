@@ -31,18 +31,20 @@ exports.feature = [
     {
         name: 'Create basic Royalty Rate Set on a new deal',
         tags: ['create'],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.inspectRateSetForm();
                 this.closeRateSetForm({ confirm: false });
             });
-        }
+        })
     },
     {
         name: 'Create a complex Royalty Rate Set',
         tags: ['create', 'validation'],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.clearRoyaltyRateInput();
@@ -67,7 +69,7 @@ exports.feature = [
                     this.warnerChappellToggleIsSelected();
                 }
                 else {
-                    this.dealSigningTerritoryIsSelected();
+                    //this.dealSigningTerritoryIsSelected();
 
                     this.selectWarnerChappellToggle();
                     this.warnerChappellToggleIsSelected();
@@ -76,12 +78,13 @@ exports.feature = [
                     this.dealSigningTerritoryIsSelected();
                 }
             });
-        }
+        })
     },
     {
         name: 'Check Royalty Rate Set Effective Start Date Validation',
         tags: ['validation'],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.inspectEffectiveStartDateArea();
@@ -97,12 +100,13 @@ exports.feature = [
                     'Check that  %errorMessage% is displayed for date: %date% '
                 );
             });
-        }
+        })
     },
     {
         name: 'Edit Royalty Rate Set on a new deal',
         tags: ['edit'],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.inspectEffectiveStartDateArea();
@@ -114,6 +118,6 @@ exports.feature = [
                 this.saveRateSet();
                 this.rateSetSavedSuccesfully();
             });
-        }
+        })
     }
 ];

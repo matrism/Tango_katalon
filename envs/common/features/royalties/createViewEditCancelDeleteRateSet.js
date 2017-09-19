@@ -11,8 +11,9 @@ exports.commonFeatureTags = ['royaltyRates', 'rateSet', 'regression'];
 exports.feature = [
     {
         name: "Create a deal with RR edit, cancel and delete it in create mode",
-        tags: ["createRateSet"],
+        tags: ["createRateSet","disabled"],
         steps: function () {
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -34,7 +35,7 @@ exports.feature = [
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
             steps.editRoyaltyRates.cancelTheRateSet();
-            steps.editRoyaltyRates.confirmCancelTheRateSet();
+            //steps.editRoyaltyRates.confirmCancelTheRateSet();  no more confirm modal disabled
             steps.royaltyRates.saveRateSet();
             //verify RR saved ok
             steps.royaltyRates.verifyRateSetSavedData();
@@ -57,6 +58,7 @@ exports.feature = [
         name: "Create a deal with RR save it and edit cancel and delete RR in edit mode",
         tags: ["editRateSet"],
         steps: function () {
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -85,6 +87,7 @@ exports.feature = [
             //edit RR and cancel it
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
+            steps.editRoyaltyRates.typeIntoRRInput("Rate Set test");
             steps.editRoyaltyRates.cancelTheRateSet();
             steps.editRoyaltyRates.confirmCancelTheRateSet();
             steps.royaltyRates.saveRateSet();
@@ -103,6 +106,7 @@ exports.feature = [
         name: "Create a deal with RR and check dirty check functionality",
         tags: ["dirtyCheckRateSet"],
         steps: function () {
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();

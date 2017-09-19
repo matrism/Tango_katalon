@@ -13,6 +13,8 @@ steps.editRoyaltyRates = exports;
 exports.addNewRoyaltySet = function () {
     it("Add new Royalty Rate Set", function () {
         pages.editRoyaltyRates.clickNewRoyaltySetButton();
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css('.rate-set-entity-name'))));
+
     });
 };
 

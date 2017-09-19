@@ -14,10 +14,10 @@ if (pages.royaltyRates === undefined) {
             RRNameLabel: {css: ".rate-set-entity-name>div>label"},
             incomeProvidesLabel: {css: ".flex1>label"},
             incomeProviderInput: {css: ".tg-typeahead__input"},
-            incomeDateMethodLabel: {css: ".flex1>div:nth-child(2)>div:not([class])>label"},
+            incomeDateMethodLabel: {css: ".flex1.ng-scope>div:nth-child(3)>div:nth-child(3)>label"},
             effectiveStartDateLabel: {css: ".rate-set-calendar>label"},
             contractualRateLabel: {css: ".rate-set-rate-field>label"},
-            interCompanyLabel: {css: ".rate-set-header-row:nth-child(3)>div:not([class])>label"},
+            interCompanyLabel: {css: ".rate-set-header-row:nth-child(4) div:nth-child(3) .control-label"},
             scopeHeadingElement: {css: ".scope-heading"},
             yesInterCompanyRateCoverMechanical: {css: "div.rate-set_group__coverMechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
             yesInterCompanyRateMechanical: {css: "div.rate-set_group__mechanical button[data-ng-model='group.determines_inter_company_rate']:nth-child(1)"},
@@ -633,7 +633,7 @@ if (pages.royaltyRates === undefined) {
 
         clickDealSigningTerritoryToggle: function () {
             var dealSigningTerritoryToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\'DRDST\'"]'
+                '[btn-radio="\'DRDST\'"]'
             );
 
             dealSigningTerritoryToggle.click();
@@ -643,7 +643,7 @@ if (pages.royaltyRates === undefined) {
 
         clickWarnerChappellToggle: function () {
             var warnerChappellToggle = this.incomeDateMethodButtonsContainer().$(
-                '[data-btn-radio="\'DRWC\'"]'
+                '[btn-radio="\'DRWC\'"]'
             );
 
             warnerChappellToggle.click();
