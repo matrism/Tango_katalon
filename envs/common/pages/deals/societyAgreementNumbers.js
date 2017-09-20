@@ -34,8 +34,7 @@ exports.creatorToPublisher = (function () {
 
     ctp.creatorSearchTermsInput = function(i) {
         return ctp.creatorRows().get(i).element(
-            //by.model('creator.creator_model')
-            by.css('[tg-model-class-validation="item.creator"] input')
+           by.css('[tg-model-class-validation="item.creator"] input')
         );
     };
 
@@ -125,7 +124,8 @@ exports.creatorToPublisher = (function () {
     };
 
     ctp.societySearchResultDisabled = function (name) {
-        var els = ctp.element(by.css('.tg-typeahead__suggestions-group'));
+
+        var els = $('.tg-typeahead__suggestions-group-item');
 
         browser.wait(EC.visibilityOfAny(els));
 

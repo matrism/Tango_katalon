@@ -1577,9 +1577,7 @@ exports.merge = (function () {
     };
 
     merge.confirmButton = function () {
-        return pages.base.modalFooter().element(
-            by.cssContainingText('button', 'Confirm')
-        );
+        return element(by.css('div.modal-footer button[ng-click="data.merge(ok);"]'));
     };
 
     merge.mergeWork = function () {
@@ -1596,11 +1594,12 @@ exports.merge = (function () {
 
     merge.continue = function () {
         merge.continueButton().click();
+        browser.wait(ExpectedConditions.visibilityOf(merge.confirmButton()));
     };
 
     merge.confirm = function () {
         var element = merge.confirmButton();
-        browser.wait(ExpectedConditions.visibilityOf(element));
+        pages.base.scrollIntoView(element);
         return element.click();
     };
 

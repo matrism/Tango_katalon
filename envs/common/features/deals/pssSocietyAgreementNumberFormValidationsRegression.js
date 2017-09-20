@@ -124,10 +124,7 @@ exports.feature = [
 
 
             dsanCtp.enterSocietySearchTerms(0, 1, 'ASCAP');
-            dsanCtp.expectSocietySearchResultToBeDisallowed('ASCAP');
-            //dsanCtp.selectSocietySearchResultByName('ASCAP');
-
-            //dsanCtp.validateSocietyName(0, 1, '');
+            //dsanCtp.expectSocietySearchResultToBeDisallowed('ASCAP');
         })
     },
     {
@@ -155,7 +152,7 @@ exports.feature = [
 
             dsanCtp.enterSocietyAgreementNumber(0, 0, '123');
 
-            dsanCtp.validateCreatorSearchTermsFieldState(0, 'invalid');
+            dsanCtp.validateCreatorSearchTermsFieldState(0, 'valid');
         })
     },
     {
@@ -185,7 +182,7 @@ exports.feature = [
 
                 dsanCtp.enterSocietyAgreementNumber(0, 0, '123');
 
-                dsanCtp.validateSocietyFieldState(0, 0, 'invalid');
+                dsanCtp.validateSocietyFieldState(0, 0, 'valid');
 
                 dsanCtp.deleteSocietyAgreementNumber(0, 0);
 
@@ -197,14 +194,15 @@ exports.feature = [
                 dsanCtp.validateSocietyAgreementNumberFieldState(0, 0, 'invalid');
             });
 
-            dsanCtp.deleteSocietyAgreementNumber(0, 0);
+            //dsanCtp.deleteSocietyAgreementNumber(0, 0);
 
             describe('Check Publisher form', function () {
+                dsanCtp.enterSocietySearchTerms(0, 0, '');
                 dsanPub.validateSocietyFieldState(0, 'valid');
 
                 dsanPub.enterSocietyAgreementNumber(0, '123');
 
-                dsanPub.validateSocietyFieldState(0, 'invalid');
+                dsanPub.validateSocietyFieldState(0, 'valid');
 
                 dsanPub.deleteSocietyAgreementNumber(0);
 
