@@ -38,7 +38,7 @@ if (pages.editDealRtp === undefined) {
             editCancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
             editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
-            editCancelEndRulesLinkFromRetention: {css: "div[ng-form='rtpEndRulesModalForm'] div.modal-footer button[ng-click='cancel()']"},
+            editCancelEndRulesLinkFromRetention: {css: "div[ng-form='rtpEndRulesModalForm'] div.modal-footer button[ng-click='data.checkDirtyData()']"},
             editAddRuleLinkBottomEndRuleForm: {css: "a[ng-click='addEndRule()']"},
             editDeleteButtonEndRulesRetention: {css: "div.modal-footer button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
             editEndDatePreDefinedDateInputFieldEndRules: {css: "div[name='endDateTypeDate'] input"},
@@ -395,8 +395,9 @@ if (pages.editDealRtp === undefined) {
         editClickOnTheCancelEndRulesFromRetentionNumber: function () {
             pages.base.scrollIntoView(pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention);
             pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.modular-edit.ng-scope"))));
-            browser.driver.findElement(By.css("div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"));
+            pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog.click();
+            // browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.modular-edit.ng-scope"))));
+            // browser.driver.findElement(By.css("div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"));
         },
 
         editClickOnTheCancelEndRulesFromRetentionNumberWIthoutModal: function () {

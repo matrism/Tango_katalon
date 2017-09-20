@@ -22,7 +22,7 @@ exports.feature = [
 
         tags: [],
 
-        steps: criticalScenario(() => {
+        steps: function() {
         var base = steps.base,
 
                 deal = steps.deal,
@@ -96,7 +96,7 @@ exports.feature = [
 
                 deal.findId();
             });
-        })
+        }
     },
     {
         name: (
@@ -106,9 +106,8 @@ exports.feature = [
 
         tags: [],
 
-        //steps: function () {
-        steps: criticalScenario(() => {
-            var deal = steps.deal,
+        steps: function () {
+                var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
                 dsanCtp = dsan.creatorToPublisher,
@@ -136,16 +135,15 @@ exports.feature = [
 
                 dsanCtp.validateFormState('enabled');
             });
-        })
+        }
     },
     {
         name: 'Create 2 people (creators)',
 
         tags: [],
 
-        //steps: function () {
-        steps: criticalScenario(() => {
-            var p = steps.person,
+        steps: function () {
+             var p = steps.person,
                 np = steps.newPerson;
 
             _.times(2, function (i) {
@@ -164,7 +162,7 @@ exports.feature = [
 
                 p.findInternalIpiNumber();
             });
-        })
+        }
     },
     {
         name: (
@@ -174,9 +172,8 @@ exports.feature = [
 
         tags: [],
 
-        //steps: function () {
-        steps: criticalScenario(() => {
-            var deal = steps.deal,
+        steps: function () {
+                var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
                 dsanCtp = dsan.creatorToPublisher,
@@ -219,16 +216,15 @@ exports.feature = [
                     dsanCtp.addCreator();
                 }
             });
-        })
+        }
     },
     {
         name: 'Society Agreement Number forms should be highlighted on focus',
 
         tags: ['pssManual1'],
 
-        //steps: function () {
-        steps: criticalScenario(() => {
-            var deal = steps.deal,
+        steps: function () {
+                var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
                 dsanCtp = dsan.creatorToPublisher,
@@ -258,6 +254,6 @@ exports.feature = [
                 dsanPub.validateFormState('active');
                 dsanCtp.validateFormState('inactive');
             });
-        })
+        }
     }
 ];

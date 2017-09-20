@@ -53,6 +53,7 @@ exports.feature = [
             cds.selectPublisherSearchResultByIndex(0);
             cds.enterCollectPublisherShare(0, 1, 100);
             d.itContinueToNextPage();
+            steps.base.sleep(5000);
             dr.clickAcquisitionPeriodScopesField(0);
             dr.selectAllSuggestedAcquisitionPeriodScopes(0);
             dr.applyAcquisitionPeriodScopeChanges(0);

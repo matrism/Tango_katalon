@@ -40,7 +40,7 @@ exports.feature = [
     {
         name: "Create a deal with end rules on retention and add other end rules on retention on edit mode",
         tags: ["edit_update_end_rule"],
-        steps: function() {
+        steps: function(){
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -133,7 +133,7 @@ exports.feature = [
     {
         name: "Create a deal with end rules on contract period and check the dirty check",
         tags: ["dirty_check_end_rules_retention"],
-        steps: function() {
+        steps: function(){
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -154,6 +154,7 @@ exports.feature = [
 
             steps.editDealRtp.scrollIntoViewAddEndRuleToRetentionEditMode();
             steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
+            steps.base.sleep(5000);
             steps.editDealRtp.editSelectEndDateEndRulesSpecificValueRuleNumberI(1, "Recouped Date");
             steps.editDealRtp.editFillIntoOffsetByInputFieldEndRulesRuleNumberI(1);
             steps.editDealRtp.editSelectRandomOptionFromOffsetByChoiceEndRules(3);
