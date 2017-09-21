@@ -1162,6 +1162,8 @@ exports.selectFirstCreatorSuggestion = function () {
     var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
         result = {};
 
+    browser.wait(ExpectedConditions.visibilityOfAny($('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]')));
+
     result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText());
 
     return suggestion.click().then(function () {
