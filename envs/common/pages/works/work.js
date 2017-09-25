@@ -1160,9 +1160,10 @@ exports.selectFirstComponentWorkSuggestion = function () {
 };
 exports.selectFirstCreatorSuggestion = function () {
     var suggestion = $$('.tg-typeahead__suggestions-group-item').first(),
+
         result = {};
 
-    browser.wait(ExpectedConditions.visibilityOfAny($('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]')));
+    browser.wait(ExpectedConditions.visibilityOf($('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]')));
 
     result.name = pph.trim(suggestion.$('span[ng-bind-html="::$match.data.primaryTitle.title | tgHighlight:$term"]').getText());
 
@@ -1596,7 +1597,7 @@ exports.merge = (function () {
 
     merge.continue = function () {
         merge.continueButton().click();
-        browser.wait(ExpectedConditions.visibilityOf(merge.confirmButton()));
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css('div.modal-footer button[ng-click="data.merge(ok);"]'))));
     };
 
     merge.confirm = function () {
