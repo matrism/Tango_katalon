@@ -452,8 +452,6 @@ exports.enterNewShellWork = function (i, value) {
     });
 
     it('Wait for work suggestions to load', function () {
-        //browser.sleep(1000);
-        //pages.work.waitForEnterAsNewWorkToBeDisplayed();
         browser.wait(ExpectedConditions.visibilityOf(element(By.css(".tg-typeahead__suggestions-footer-inner"))));
     });
 
