@@ -119,6 +119,7 @@ if (pages.createDealRtp === undefined) {
 
         clickOnTheAddRetentionPeriodFromAcquisition: function () {
             var el = pages.createDealRtp.elems.addRetentionPeriodLinkFromAcquisition;
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css("a[ng-click='rightsTermPeriodSet.addPeriod(constants.RETENTION)']"))));
             asAlways(el, 'scrollIntoView', 'click');
             pages.createDealRtp.waitForAjax();
         },
@@ -195,7 +196,7 @@ if (pages.createDealRtp === undefined) {
         },
 
         selectTheSpecificDurationTypeRetentionFromAcquisitionNumberX: function (i, durationType) {
-            var elm = $$('[tg-model-class-validation="tgModularEditModel.durationType"] select').get(i);
+            var elm = $('[tg-model-class-validation="tgModularEditModel.durationType"] select[id="retentionDurationType"]');
             elm.click();
             browser.sleep(1000);
             switch(durationType){

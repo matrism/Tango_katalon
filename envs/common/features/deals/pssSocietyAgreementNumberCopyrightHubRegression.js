@@ -22,7 +22,7 @@ exports.feature = [
 
         tags: [],
 
-        steps: criticalScenario(() => {
+        steps: function() {
             var base = steps.base,
 
                 deal = steps.deal,
@@ -34,12 +34,10 @@ exports.feature = [
 
             describe('Fill general fields', function () {
                 cdg.selectSigningTerritory('Argentina');
+                cdg.fillCompanyCodeField('WCM');
+                cdg.waitForContractingPartyDropDown();
+                cdg.selectRandomCompanyCode();
 
-                //if(systemConfig.env.name === 'qa') {
-                    cdg.fillCompanyCodeField('WCM');
-                    cdg.waitForContractingPartyDropDown();
-                    cdg.selectRandomCompanyCode();
-                //}
 
                 cdg.enterContractingPartySearchTerms('ASCAP');
                 cdg.waitForContractingPartyDropDown();
@@ -97,15 +95,14 @@ exports.feature = [
 
                 deal.findId();
             });
-        })
+        }
     },
     {
         name: 'Ensure copyright hub organisations can be used as societies',
 
         tags: [],
 
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
             var deal = steps.deal,
 
                 dsan = steps.dealSocietyAgreementNumbers,
@@ -133,6 +130,6 @@ exports.feature = [
                 dsanPub.deleteSocietyAgreementNumber(0, 0);
 
             });
-        })
+        }
     }
 ];

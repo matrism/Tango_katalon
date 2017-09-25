@@ -141,6 +141,7 @@ if (pages.createDealContractPeriod === undefined) {
         },
 
         fillStartActualDateSpecificValue: function (value) {
+            browser.wait(ExpectedConditions.visibilityOf(pages.createDealContractPeriod.elems.startDate));
             pages.createDealContractPeriod.elems.startDate.sendKeys(value);
         },
 
