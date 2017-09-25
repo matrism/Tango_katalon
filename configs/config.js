@@ -155,10 +155,10 @@ var defaultUserName = 'TangoTest1',
                     'http://musicpublishing.staging.wmg.com/'
                 ),
                 cr_url: (
-                    cli['cr-url'] || 'http://tancrsrv.internal.staging.wmg.com'
+                    cli['cr-url'] || 'http://tancrsrv.tango-refactor.internal.staging.wmg.com'
                 ),
                 royalties_url: (
-                    cli['royalties-url'] || 'http://tanroysrv.internal.staging.wmg.com'
+                    cli['royalties-url'] || 'http://tanroysrv.tango-refactor.internal.staging.wmg.com'
                 )
 
             },
