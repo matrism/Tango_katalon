@@ -452,8 +452,6 @@ exports.enterNewShellWork = function (i, value) {
     });
 
     it('Wait for work suggestions to load', function () {
-        //browser.sleep(1000);
-        //pages.work.waitForEnterAsNewWorkToBeDisplayed();
         browser.wait(ExpectedConditions.visibilityOf(element(By.css(".tg-typeahead__suggestions-footer-inner"))));
     });
 
@@ -483,23 +481,23 @@ exports.expectShellWorkTitleToMatchEnteredOne = function (i) {
         pages.work.validateEnteredShellWorkTitle(i, shellWork.name);
     });
 };
-exports.selectShellWorkCreatorFromPersonSlot = function (i, j, slotIndex, data, key) {
+exports.selectShellWorkCreatorFromPersonSlot = function(i, j, slotIndex, data, key) {
     var person;
 
     it(
         'Enter previously selected IPI number into creator search terms field #' + (j + 1) +
-        ' of (shell) component work #' + (i + 1), function () {
+        ' of (shell) component work #' + (i + 1), function() {
             person = _.merge({}, hash.personSlots[slotIndex]);
-            pages.work.enterShellWorkCreatorSearchTerms(i, j, person.ipiNumber);
+            pages.newWork.enterShellWorkCreatorSearchTerms(i, j, person.ipiNumber);
         }
     );
 
-    it('Expect creator suggestions dropdown to be displayed', function () {
+    it('Expect creator suggestions dropdown to be displayed', function() {
         pages.work.expectCreatorSuggestionsToBeDisplayed();
     });
 
-    it('Select first search result', function () {
-        pages.work.selectFirstCreatorSuggestion().then(function (selected) {
+    it('Select result by IPI number', function() {
+        pages.newWork.selectCreatorSuggestionByIpiNumber(person.ipiNumber).then(function(selected) {
             var component,
                 creator;
 
@@ -513,6 +511,7 @@ exports.selectShellWorkCreatorFromPersonSlot = function (i, j, slotIndex, data, 
             creator = component.creators[j] = component.creators[j] || {};
 
             creator.name = selected.name;
+            creator.ipiNumber = selected.ipiNumber;
         });
     });
 };

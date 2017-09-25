@@ -21,7 +21,7 @@ exports.feature = [
     {
         name: 'Create a deal with publisher share set',
         tags: [],
-        steps: criticalScenario(() => {
+        steps: function() {
             var cds = steps.createDealScope,
                 d = steps.deal,
                 dr = steps.dealRtp;
@@ -60,12 +60,12 @@ exports.feature = [
             d.saveDeal();
             d.waitForDealToBeSaved();
             d.findId();
-        })
+        }
     },
     {
         name: 'Create person to use as creator',
         tags: [],
-        steps: criticalScenario(() => {
+        steps: function() {
             steps.person.useBlankPersonSlot(0);
             using(steps.newPerson, function () {
                 this.goToNewPersonPage();
@@ -77,12 +77,12 @@ exports.feature = [
                 this.save();
             });
             steps.person.findInternalIpiNumber();
-        })
+        }
     },
     {
         name: 'Create works and verify registration activity',
             tags: [],
-        steps: criticalScenario(() => {
+        steps: function() {
             _.times(2, function(i) {
                 steps.base.useBlankEntityDataSlot('work', 'work' + i);
                 using(steps.newWork, function () {
@@ -137,15 +137,15 @@ exports.feature = [
             steps.organisation.scrollCWRtoLastResult();
             using(steps.organisationRegistrationStack, function () {
                 using(this.works, function () {
-                    //this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
+                    this.find({ title: 'TEST MERGE WORK 1 ' + randomString('work') });
 
-                    //this.validateStatus('Scheduled');
+                    this.validateStatus('Scheduled');
 
-                    //this.find({ title: 'TEST MERGE WORK 2 ' + randomString('work') });
-                    //this.validateStatus('Scheduled');
+                    this.find({ title: 'TEST MERGE WORK 2 ' + randomString('work') });
+                    this.validateStatus('Scheduled');
                 });
             });
-        })
+        }
     },
 
     {
@@ -159,7 +159,9 @@ exports.feature = [
                 this.mergeWork();
                 steps.base.useEntityDataSlot('work', 'work1');
                 this.enterFindWorkUsingPreviouslyEnteredPrimaryTitle();
+                steps.base.sleep(5000);
                 this.continue();
+                steps.base.sleep(5000);
                 this.confirm();
             });
         })
