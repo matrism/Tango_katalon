@@ -23,7 +23,8 @@ exports.feature = [
     {
         name: "Deals view work count",
         tags: ["dealsViewWork"],
-        steps: function()
+        //steps: function()
+        steps: criticalScenario(() =>
         {
             //steps: criticalScenario(() =>
             hash.scopeName = null; //reset var to null
@@ -112,7 +113,7 @@ exports.feature = [
 
             steps.base.closeTheTabByIndex(1);
 
-        }
+        })
     },
 
     {

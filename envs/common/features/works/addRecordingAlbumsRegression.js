@@ -183,8 +183,8 @@ let addRecordings = () => {
                 alb.selectSearchResultByIndex(0, test.album.title);
                 alb.validateSelectedAlbumTitle(i, 0, test.album.title);
 
-                wr.validateRemoveButtonState(i, 'disabled');
-
+                //wr.validateRemoveButtonState(i, 'disabled');
+                wr.validateRemoveButtonStateDisabled(i);
                 wr.hoverRemoveButton(i);
                 base.validateTooltipMessage(test.cannotDeleteWithAlbumMsg);
 
@@ -220,7 +220,7 @@ let validateRecordingAlbumReleaseDetails = () => {
     describe('Validate recording album release details', () => {
         test.recRows.forEach((row, i) => {
             describe(`Recording ${i}`, () => {
-                wr.toggle(i);
+                wr.toggleNoEdit(i);
                 alb.toggle(i, 0);
 
                 test.album.releaseDetails.forEach((row, j) => {

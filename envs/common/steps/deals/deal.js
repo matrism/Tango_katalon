@@ -56,6 +56,7 @@ exports.waitContinueButtonEnabled = function () {
 
 exports.saveDeal = function () {
     it("Click on save deal button", function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.page-footer button[data-ng-click='done()']"))));
         pages.deal.saveNewDeal();
     });
 };
@@ -116,6 +117,7 @@ exports.itContinueToNextPage = function () {
 exports.goToGeneralDealTabDetail = function () {
     it("Click on general header and go to general deal tab details ", function () {
         pages.deal.waitForAjax();
+        pages.base.scrollIntoView(pages.deal.elems.generalHeader);
         pages.deal.goToGeneralDealDetails();
     });
 };

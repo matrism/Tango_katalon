@@ -12,7 +12,8 @@ exports.featureName = 'Albums Regression';
 
 exports.commonFeatureTags = [
     'albums',
-    'albumsRegression'
+    'albumsRegression',
+    'regression'
 ];
 
 exports.beforeFeature = function() {
@@ -73,7 +74,8 @@ exports.feature = [
         name: 'Create commercial album',
         tags: [
             'createCommercialAlbum',
-            'albumsSanity'
+            'albumsSanity',
+            'searchServiceRegression'
         ],
         steps: function () {
             var na = steps.newAlbum,
@@ -255,7 +257,8 @@ exports.feature = [
         name: 'Create library album',
         tags: [
             'createLibraryAlbum',
-            'albumsSanity'
+            'albumsSanity',
+            'searchServiceRegression'
         ],
         steps: function () {
             var na = steps.newAlbum,
@@ -463,7 +466,8 @@ exports.feature = [
         tags: [
             'searchForAlbums',
             'searchForAlbumsByTitle',
-            'albumsSanity'
+            'albumsSanity',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -486,7 +490,8 @@ exports.feature = [
         tags: [
             'searchForAlbums',
             'searchForAlbumsByArtist',
-            'albumsSanity'
+            'albumsSanity',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -507,7 +512,8 @@ exports.feature = [
         tags: [
             'searchForAlbums',
             'searchForAlbumsByCatalog',
-            'albumsSanity'
+            'albumsSanity',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -529,7 +535,8 @@ exports.feature = [
         name: 'Search for previously created commercial album by label',
         tags: [
             'searchForAlbums',
-            'searchForAlbumsByLabel'
+            'searchForAlbumsByLabel',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -549,7 +556,8 @@ exports.feature = [
         name: 'Search for previously created commercial album by title + artist',
         tags: [
             'searchForAlbums',
-            'searchForAlbumsByTitlePlusArtist'
+            'searchForAlbumsByTitlePlusArtist',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -574,7 +582,8 @@ exports.feature = [
         name: 'Search for previously created library album by title + catalog',
         tags: [
             'searchForAlbums',
-            'searchForAlbumsByTitlePlusCatalog'
+            'searchForAlbumsByTitlePlusCatalog',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -601,7 +610,8 @@ exports.feature = [
         name: 'Search for previously created library album by title + label',
         tags: [
             'searchForAlbums',
-            'searchForAlbumsByTitlePlusLabel'
+            'searchForAlbumsByTitlePlusLabel',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,
@@ -628,7 +638,8 @@ exports.feature = [
         name: 'Search for previously created library album by library + title',
         tags: [
             'searchForAlbums',
-            'searchForAlbumsByLibraryPlusTitle'
+            'searchForAlbumsByLibraryPlusTitle',
+            'searchServiceRegression'
         ],
         steps: function () {
             var mhs = steps.mainHeader.search,

@@ -41,6 +41,7 @@ exports.feature = [
         name: "Create a deal with end rules on retention and add other end rules on retention on edit mode",
         tags: ["edit_update_end_rule"],
         steps: function(){
+        //steps: criticalScenario(() => {
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -133,8 +134,8 @@ exports.feature = [
     {
         name: "Create a deal with end rules on contract period and check the dirty check",
         tags: ["dirty_check_end_rules_retention"],
-        steps: function(){
-
+        //steps: function(){
+        steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -150,8 +151,8 @@ exports.feature = [
             steps.base.sleep(5000);
             steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
             steps.base.sleep(5000);
-            steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetentionWithoutModal();
-
+            //steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetentionWithoutModal();
+            steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetention();
             steps.editDealRtp.scrollIntoViewAddEndRuleToRetentionEditMode();
             steps.editDealRtp.editClickOnAddEndRulesLinkOnRetention();
             steps.base.sleep(5000);
@@ -164,7 +165,7 @@ exports.feature = [
             steps.editDealRtp.editClickOnCancelEndRulesLinkOnRetention();
             steps.editDealRtp.saveRetentionFromAcquisition();
 
-        }
+        })
     },
 
     {

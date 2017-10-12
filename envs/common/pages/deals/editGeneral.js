@@ -257,7 +257,9 @@ if (pages.editDealGeneral === undefined) {
                 .then(function findMatchingOption(options) {
                     options.forEach(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
-                                if (text.indexOf(artistSearch) != -1) {
+                                console.log(text);
+                                console.log(text.indexOf(artistValue));
+                                if (text.indexOf(artistValue) != -1) {
                                     desiredOption = option;
                                     return true;
                                 }

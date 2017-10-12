@@ -133,6 +133,14 @@ exports.validateSubtotalOfOwnPublisherShareErrorMessageIsDisplayed = function ()
     });
 };
 
+exports.validateSubtotalOfOwnPublisherShareInputNumber = function (num) {
+    it("Validate that subtotal of own  publisher share should be displayed as " + num, function () {
+        pages.createDealScope.elems.firstPublisherOwnPercent.getAttribute('value').then(function(promise){
+            expect(promise).toEqual(num);
+        });
+    });
+};
+
 exports.validateSubtotalOfOwnLessThanCollectPublisherShareErrorMessageIsDisplayed = function () {
     it("Validate that subtotal of own less than collect publisher share error message is correctly displayed ", function () {
         expect(pages.createDealScope.elems.subtotalOwnPublisherShareErrorMessage.isDisplayed);
@@ -512,7 +520,7 @@ exports.fillIntoPublisherNameAMCollectPercentChainISpecificValue = function (i, 
 
 exports.fillPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
     it("Fill publisher name fields chain i based on publisher type E or PA", function () {
-        browser.driver.findElement(By.css("#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
+        browser.driver.findElement(By.css("#deal-publisher div[name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
             .then(function (promise) {
                 console.log("Publisher type is: " + promise);
                 switch (promise) {
@@ -885,6 +893,8 @@ exports.itCheckInvalidCasesPublisherShare = function () {
 exports.itCheckInvalid3DecimalCasesPublisherShare = function () {
     describe("Check validation 3 decimal places publisher shares set", function () {
         //check validation for decimal shares >3
+       // no longer in use as the input field is limited to 3 decimals
+        /*
         steps.base.scrollIntoView("First publisher name field", pages.createDealScope.elems.firstPublisherNameField);
         steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("3.3454");
         steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
@@ -895,6 +905,7 @@ exports.itCheckInvalid3DecimalCasesPublisherShare = function () {
         steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("4.5986");
         steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsDisplayed();
         steps.createDealScope.clearIntoFirstPublisherNameAMCollectField();
+        */
         //fill exact 3 decimals and check it is ok
         steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("33.345");
         steps.createDealScope.validate3DecimalsExceededPublisherShareWarningIsNotDisplayed();
@@ -932,7 +943,11 @@ exports.itCheckSubtotalValidationsCasesPublisherShare = function () {
     describe("Check validation for subtotals publisher shares set", function () {
         steps.base.scrollIntoView("First publisher name field", pages.createDealScope.elems.firstPublisherNameField);
         steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("120");
-        steps.createDealScope.validateSubtotalOfOwnPublisherShareErrorMessageIsDisplayed();
+        //steps.createDealScope.validateSubtotalOfOwnPublisherShareErrorMessageIsDisplayed();
+        steps.createDealScope.validateSubtotalOfOwnPublisherShareInputNumber('12');
+        steps.createDealScope.clearIntoFirstPublisherNameOwnField();
+        steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("100");
+        steps.createDealScope.validateSubtotalOfOwnPublisherShareInputNumber('100');
         steps.createDealScope.clearIntoFirstPublisherNameOwnField();
         steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("40");
         steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("50");
@@ -946,7 +961,8 @@ exports.itCheckTotalsValidationsCasesPublisherShare = function () {
     describe("Check validation for totals publisher shares set", function () {
         steps.base.scrollIntoView("First publisher name field", pages.createDealScope.elems.firstPublisherNameField);
         steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("120");
-        steps.createDealScope.validateChainTotalOfOwnPublisherShareErrorIsDisplayed();
+        //steps.createDealScope.validateChainTotalOfOwnPublisherShareErrorIsDisplayed();
+        steps.createDealScope.validateSubtotalOfOwnPublisherShareInputNumber('12');
         steps.createDealScope.clearIntoFirstPublisherNameOwnField();
         steps.createDealScope.fillIntoFirstPublisherNameOwnFieldSpecificValue("75");
         steps.createDealScope.fillIntoFirstPublisherNameCollectFieldSpecificValue("55");
@@ -1151,6 +1167,7 @@ exports.validateSharePublisherShareSetTextTooltip = function (text) {
 exports.mouseOverPublisherShareTextTooltip = function () {
     it("Mouse over the publisher text tooltip", function () {
         pages.createDealScope.mouseOverThePubisherShareTextTooltip();
+        browser.sleep(3000);
     });
 };
 

@@ -10,7 +10,8 @@ exports.commonFeatureTags = [
     'pssSocietyAgreementNumbersRegression',
     'pssSocietyAgreementNumbers',
     'deals',
-    'regression'
+    'regression',
+    'power'
 ];
 
 exports.beforeFeature = function () {

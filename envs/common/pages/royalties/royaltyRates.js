@@ -64,11 +64,12 @@ if (pages.royaltyRates === undefined) {
         },
 
         publisherSharesSaveButton: function () {
-            return $('.CONTROLS>div>button[data-ng-click="tgModularViewMethods.save();"]');
+            return $('.CONTROLS>div>button[data-ng-click="tgModularViewMethods.save()"]');
         },
 
         administratorInput: function () {
-            return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
+            //return $$(".publisher-share>div:not(.ng-hide).ng-scope>div>div.ps-name>div>div>div>div>div>div>input").last();
+            return $$("div.publisher-row.clearfix.ng-scope.am-share input").first();
         },
 
         originalPublishersDropdownList: function () {
@@ -80,7 +81,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         originalPublisherInput: function () {
-            return $$(".publisher-share>.publisher-row>.ps-name>div>div>div>div>div>div>input").last();
+            return $$(".publisher-share>.publisher-row>.ps-name>div>div>div>div>div>div input").first();
         },
 
         newPublisherSharedButton: function () {
@@ -180,7 +181,7 @@ if (pages.royaltyRates === undefined) {
         },
 
         newRoyaltyRateSetButtonEdit: function () {
-            return $(".rate-sets-container-inner>a");
+            return $('a[ng-click="onAddContractualRateSetInView()"]');
         },
 
         openRRButton: function () {

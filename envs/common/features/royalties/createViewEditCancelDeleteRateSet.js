@@ -34,17 +34,21 @@ exports.feature = [
             //edit RR and cancel it
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
-            steps.editRoyaltyRates.cancelTheRateSet();
-            //steps.editRoyaltyRates.confirmCancelTheRateSet();  no more confirm modal disabled
+            //steps.editRoyaltyRates.cancelTheRateSet();
             steps.royaltyRates.saveRateSet();
+            //steps.editRoyaltyRates.confirmCancelTheRateSet();
+            //steps.royaltyRates.saveRateSet();
             //verify RR saved ok
             steps.royaltyRates.verifyRateSetSavedData();
 
             //edit RR and delete it
             steps.editRoyaltyRates.editExistingRoyaltyRate();
             steps.editRoyaltyRates.openRateSetPanel();
-            steps.editRoyaltyRates.deleteTheRateSet();
-            steps.editRoyaltyRates.confirmDeleteTheRateSet();
+            //steps.editRoyaltyRates.deleteTheRateSet();
+            steps.editRoyaltyRates.cancelTheRateSet();
+            if(systemConfig.env.name ==='staging_test') {  //probably need to revisit this
+                steps.editRoyaltyRates.confirmCancelTheRateSet();
+            }
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();

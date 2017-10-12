@@ -65,7 +65,7 @@ if (steps.organisation === undefined) {
         },
         executeRegistrationRun: function (value, date, org) {
             it('Execute Registration Run', function () {
-                browser.wait(ExpectedConditions.visibilityOf(element(By.css('.ACTIVITY-HEADER button:not(.disabled)'))));
+                //browser.wait(ExpectedConditions.visibilityOf(element(By.css('.ACTIVITY-HEADER button:not(.disabled)'))));
                 pages.organisation.registrationCanBeRun().then(function (isVisible) {
                     console.log(isVisible.toString());
                     if (isVisible.toString() == 'true') {

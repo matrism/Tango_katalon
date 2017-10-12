@@ -321,6 +321,7 @@ exports.itFillDealMandatoryFieldsGeneralTab = function () {
 
         //steps.criticalSection.wrap(() => {
             steps.createDealGeneral.goToNewDealPage();
+            steps.base.waitForAjax();
             steps.createDealGeneral.selectDealSigningTerritory();
             if(systemConfig.env.name === 'refactor') {
                 steps.createDealGeneral.fillCompanyCodeField("a");

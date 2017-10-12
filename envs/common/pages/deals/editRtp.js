@@ -37,7 +37,7 @@ if (pages.editDealRtp === undefined) {
             editOffsetByArrowChoiceEndRules: {css: "div[data-ng-form='rulesForm'] div.clearfix.rule-header div:nth-child(4) button.btn.dropdown-toggle"},
             editCancelDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='cancel()']"},
             editDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope"},
-            editConfirmDeleteEndRulesModalDialog: {css: "div.modal-dialog.ng-scope div.modal-footer button[data-ng-click='ok()']"},
+            editConfirmDeleteEndRulesModalDialog: {css: "div.modal .modal-footer [data-ng-click='ok()']"},
             editCancelEndRulesLinkFromRetention: {css: "div[ng-form='rtpEndRulesModalForm'] div.modal-footer button[ng-click='data.checkDirtyData()']"},
             editAddRuleLinkBottomEndRuleForm: {css: "a[ng-click='addEndRule()']"},
             editDeleteButtonEndRulesRetention: {css: "div.modal-footer button[data-ng-click='showDeleteAllEndRulesModal(form.show.endRules.containerId, form.show.endRules.type)']"},
@@ -122,7 +122,9 @@ if (pages.editDealRtp === undefined) {
         clickOnTheAddRetentionFromAcquisitionLink: function () {
             var el = pages.editDealRtp.elems.editAddRetentionFromAcquisitionLink;
             pages.base.scrollIntoView(el);
+            browser.sleep(1000);
             el.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(By.css('[tg-modular-edit-id="retentionModulatEdit"]'))));
         },
 
         editDeleteTheAddAnotherAcquisitionForm: function () {
@@ -158,7 +160,7 @@ if (pages.editDealRtp === undefined) {
 
         editClickOnTheAddEndRulesFromRetentionNumber: function () {
             pages.editDealRtp.elems.editAddEndRulesLinkFromRetention.click();
-            //browser.wait(ExpectedConditions.visibilityOf(element(by.css("div[data-ng-form='rtpEndRulesModalForm']"))));
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css('.modal'))));
         },
 
         editFillIntoTheActualEndDateFieldRetentionFromAcquisition: function (actualEndDate) {
@@ -395,6 +397,7 @@ if (pages.editDealRtp === undefined) {
         editClickOnTheCancelEndRulesFromRetentionNumber: function () {
             pages.base.scrollIntoView(pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention);
             pages.editDealRtp.elems.editCancelEndRulesLinkFromRetention.click();
+            browser.wait(ExpectedConditions.visibilityOf(element(by.css(".modal"))));
             pages.editDealRtp.elems.editConfirmDeleteEndRulesModalDialog.click();
             // browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.EDITOR.modular-edit.ng-scope"))));
             // browser.driver.findElement(By.css("div.CONTROLS.clearfix.ng-scope button[data-ng-click='tgModularViewMethods.save()']"));

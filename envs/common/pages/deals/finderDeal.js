@@ -362,12 +362,14 @@ if (pages.finderDeal === undefined) {
         },
 
         fillIntoCreatorFoundSubmissionField: function () {
+            pages.base.scrollIntoView(pages.finderDeal.elems.creatorFoundSubmissionInputField);
             pages.finderDeal.elems.creatorFoundSubmissionInputField.clear();
             pages.finderDeal.elems.creatorFoundSubmissionInputField.sendKeys("test");
         },
 
         selectRandomValueFromCreatorFoundSubmissionDropDown: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.finderDeal.elems.creatorFoundSubmissionDropDownData));
+            pages.base.scrollIntoView(pages.finderDeal.elems.creatorFoundSubmissionDropDownData);
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -384,6 +386,7 @@ if (pages.finderDeal === undefined) {
         selectTheRandomWcmDecisionDropDown: function () {
             pages.finderDeal.elems.wcmDecisionField.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.finderDeal.elems.wcmDecisionDropDownData));
+            pages.base.scrollIntoView(pages.finderDeal.elems.wcmDecisionDropDownData);
             browser.driver.findElements(By.css("ul.dropdown-menu li.tg-dropdown-menu-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
@@ -392,12 +395,14 @@ if (pages.finderDeal === undefined) {
         },
 
         fillIntoFoundDealInputField: function () {
+            pages.base.scrollIntoView(pages.finderDeal.elems.foundDealInputField);
             pages.finderDeal.elems.foundDealInputField.clear();
             pages.finderDeal.elems.foundDealInputField.sendKeys("123");
         },
 
         selectTheRandomValueFromFoundDealDropDown: function () {
             browser.wait(ExpectedConditions.visibilityOf(pages.finderDeal.elems.foundDealDropDownData));
+            pages.base.scrollIntoView(pages.finderDeal.elems.foundDealDropDownData);
             browser.driver.findElements(By.css("ul.tg-typeahead__suggestions-group li.tg-typeahead__suggestions-group-item.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));
