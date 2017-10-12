@@ -11,7 +11,7 @@ exports.deleteEndRulesButton = function () {
 };
 
 exports.cancelEndRulesButton = function () {
-    return $('.modal-footer button[ng-click="cancel()"]');
+    return $('.modal-footer button[ng-click="data.checkDirtyData()"]');
 };
 
 exports.saveEndRules = function () {

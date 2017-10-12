@@ -12,8 +12,8 @@ exports.feature = [
     {
         name: "Create and view deal scopes",
         tags: ["scopeAdded"],
-        steps: function()
-
+        //steps: function()
+        steps: criticalScenario(() =>
         {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -200,6 +200,7 @@ exports.feature = [
 
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
+            steps.base.sleep(10000);
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
@@ -265,6 +266,7 @@ exports.feature = [
             steps.createDealScope.validateSharePublisherShareSetTextTooltip("Scope 3");
             steps.editDealScope.editUnsharePublisherShareSetFromSelectedScope();
             //validate unshare success scope 2 no pss
+            steps.base.sleep(10000);
             steps.deal.refreshThePage();
             steps.deal.goToTermsDealTabDetails();
             steps.editDealScope.checkScopeNumberINoPss(2);
@@ -338,7 +340,7 @@ exports.feature = [
 
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "publisher");
             steps.editDealScope.expectPublisherShareSetTextValueNotPresentForChainI(2, "33");
-        }
+        })
     },
 
 

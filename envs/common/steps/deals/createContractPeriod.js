@@ -506,9 +506,9 @@ exports.cancelDeleteEndRules = function () {
 
 exports.cancelDeleteEntireEndRules = function () {
     it("Cancel delete entire end rules modal dialog ", function () {
-        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[ng-click='cancel();']"))));
-        pages.base.scrollIntoView(element(by.css("div.modal-footer button[ng-click='cancel();']")));
-        browser.findElement(by.css("div.modal-footer button[ng-click='cancel();']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog button[data-ng-click='cancel()']"))));
+        pages.base.scrollIntoView(element(by.css("div.modal-dialog button[data-ng-click='cancel()']")));
+        browser.findElement(by.css("div.modal-dialog button[data-ng-click='cancel()']")).click();
         pages.createDealContractPeriod.waitForAjax();
 
     });
@@ -516,9 +516,9 @@ exports.cancelDeleteEntireEndRules = function () {
 
 exports.confirmDeleteEntireEndRules = function () {
     it("Confirm delete end rules modal dialog ", function () {
-        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-footer button[ng-click='ok();']"))));
-        pages.base.scrollIntoView(element(by.css("div.modal-footer button[ng-click='ok();']")));
-        browser.driver.findElement(by.css("div.modal-footer button[ng-click='ok();']")).click();
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.modal-dialog button[data-ng-click='ok()']"))));
+        pages.base.scrollIntoView(element(by.css("div.modal-dialog button[data-ng-click='ok()']")));
+        browser.driver.findElement(by.css("div.modal-dialog button[data-ng-click='ok()']")).click();
         pages.createDealContractPeriod.waitForAjax();
     });
 };

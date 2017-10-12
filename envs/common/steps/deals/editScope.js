@@ -575,7 +575,7 @@ exports.editCancelModalDialogDirtyCheck = function () {
 
 exports.editPublisherNameFieldsBasedOnPublisherTypeEOrPAChainI = function (i) {
     it("Edit -fill publisher name fields chain i based on publisher type E or PA", function () {
-        browser.driver.findElement(By.css("#deal-publisher div[data-name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
+        browser.driver.findElement(By.css("#deal-publisher div[name='dealChainsForm'] div.ng-scope:nth-child(" + i + ") div.publisher-row.clearfix div.tg-dropdown-button button.tg-dropdown-label.overflow")).getText()
             .then(function (promise) {
                 console.log("Publisher type is: " + promise);
                 switch (promise) {

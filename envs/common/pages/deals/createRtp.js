@@ -331,6 +331,7 @@ if (pages.createDealRtp === undefined) {
 
         fillIntoTheAcquisitionDescription: function (i) {
             var description = "Acquisition description " + i;
+            browser.wait(ExpectedConditions.visibilityOf((pages.createDealRtp.elems.acquisitionDescription)));
             pages.createDealRtp.elems.acquisitionDescription.sendKeys(description);
         },
 

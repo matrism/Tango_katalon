@@ -115,6 +115,8 @@ if (pages.relatedDeal === undefined) {
         },
 
         fillIntoTheContractingPartiesFieldSpecificValueRowNumberI: function (contracting, i) {
+            pages.deal.waitForAjax();
+            pages.base.scrollIntoView(element(by.css('[ng-model="relatedDeal.deal"]')));
             browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div[ng-class='tgTypeaheadWrapClass']")).click();
             browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']")).sendKeys(contracting);
         },
@@ -136,6 +138,7 @@ if (pages.relatedDeal === undefined) {
         selectTheRandomValueFromRelationshipDropDownRowNumberI: function (i) {
             browser.driver.findElement(By.css("div.table-body.clearfix>div:nth-child(" + i + ") div.pull-left.relationship div.tg-dropdown-button")).click();
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))));
+            pages.base.scrollIntoView(element(By.css("div.table-body.clearfix>div:nth-child(" + i + ") .relationship-dropdown li:nth-child(5)")));
             browser.driver.findElements(By.css("div.tg-dropdown-menu.ng-scope ul.dropdown-menu li.ng-scope"))
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * options.length));

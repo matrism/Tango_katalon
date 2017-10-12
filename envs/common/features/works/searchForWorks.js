@@ -10,7 +10,7 @@ exports.beforeFeature = function() {
     steps.login.itLogin();
 };
 
-exports.commonFeatureTags = ['works', 'search', 'regression', 'searchForWorks'];
+exports.commonFeatureTags = ['works', 'search', 'regression', 'searchForWorks','searchServiceRegression'];
 
 exports.feature = [
     {

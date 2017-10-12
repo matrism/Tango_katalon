@@ -8,7 +8,10 @@ exports.beforeFeature = function () {
 
 exports.commonFeatureTags = ['deals', "related", 'regression','ts-360'];
 
-var urlUse = 'http://tango.tango-refactor.tango.dev.wmg.com'; // use for open new tab
+// use for open new tab }
+var urlUse;
+if(systemConfig.env.name ==='staging')  { urlUse = 'http://musicpublishing.staging.wmg.com'; } else
+                                        { urlUse = 'http://tango.staging-test.tango.qa.wmg.com'; }
 
 exports.feature = [
     {
@@ -31,12 +34,7 @@ exports.feature = [
              steps.deal.waitForDealToBeSaved();
              steps.deal.returnDealNumber();
 
-            steps.deal.goToGeneralDealTabDetail();
-            steps.deal.goToRelatedDealsGeneralTabDetails();
-            steps.relatedDeal.checkRelatedDealsTitle();
-            steps.relatedDeal.checkRelatedDealsTooltipTitle();
-            steps.relatedDeal.checkTheHeaderTableTitlesRelatedDeals();
-            steps.relatedDeal.checkNoRelatedDealsDefined();
+            //steps.relatedDeal.checkNoRelatedDealsDefined();
 
             //steps.base.openTheNewTab(systemConfig.env.app_url);
             steps.base.sleep(1000);
@@ -65,6 +63,9 @@ exports.feature = [
             steps.relatedDeal.checkContractingPartyDropDownWithNoResult();
             steps.relatedDeal.clearIntoContractingPartiesField();
 
+            steps.relatedDeal.clickOnSaveRelatedDeal();
+            steps.relatedDeal.checkNoRelatedDealsDefined();
+            steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(2);
@@ -79,6 +80,9 @@ exports.feature = [
             steps.deal.returnDealNumber();
 
             steps.base.focusOnNewOpenedTab(0);
+            steps.deal.goToGeneralDealTabDetail();
+            //steps.deal.goToRelatedDealsGeneralTabDetails();
+            //steps.relatedDeal.clickOnAddRelatedDealLink();
             steps.relatedDeal.selectSpecificContractingPartyCreatedDealRelatedDeals(1);
             steps.relatedDeal.checkContractTypeValueRowNumberI("Administration", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
@@ -165,6 +169,7 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
+            steps.deal.refreshThePage();
             steps.relatedDeal.checkContractTypeValueRowNumberI("Joint Venture", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 1);
@@ -190,10 +195,12 @@ exports.feature = [
 
 
             steps.base.focusOnNewOpenedTab(1);
+            steps.base.sleep(4000);
             steps.deal.refreshThePage();
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
+            steps.deal.refreshThePage();
             steps.relatedDeal.checkContractTypeValueRowNumberI("Production Music Miscellaneous Services", 1);
             steps.relatedDeal.checkDealStatusValueRowNumberI("Executed", 1);
             steps.relatedDeal.checkContractExecutionDateValueRowNumberI("2015-07-07", 1);
@@ -237,6 +244,7 @@ exports.feature = [
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
+            steps.deal.refreshThePage();
             steps.relatedDeal.checkContractTypeValueRowNumberI("Audit / Settlement", 2);
             steps.relatedDeal.checkContractTypeValueRowNumberI("Co-Publishing", 2);
             steps.relatedDeal.checkContractTypeValueRowNumberI("Production Music Miscellaneous Services", 2);
@@ -266,14 +274,11 @@ exports.feature = [
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
 
-            steps.createDealScope.checkContractPeriodsAndScopesHeaderTitlePresent();
-            steps.createDealRtp.checkRightsTermPeriodsHeaderTitlePresent();
-            steps.finderDeal.checkFinderDealsHeaderTitlePresent();
+            //steps.relatedDeal.checkNoRelatedDealsDefined();
 
             steps.base.sleep(1000);
             steps.base.openTheNewTab(urlUse);
             steps.base.focusOnNewOpenedTab(1);
-
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -309,6 +314,7 @@ exports.feature = [
 
             steps.base.focusOnNewOpenedTab(1);
             //steps.deal.refreshThePage();
+            steps.deal.goToTermsDealTabDetails();
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToRelatedDealsGeneralTabDetails();
 
@@ -318,6 +324,7 @@ exports.feature = [
 
 
             steps.base.focusOnNewOpenedTab(0);
+            steps.deal.refreshThePage();
             steps.deal.goToGeneralDealTabDetail();
             steps.deal.goToDealSummaryGeneralTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
@@ -478,6 +485,7 @@ exports.feature = [
         //steps: function () {
         steps: criticalScenario(() => {
 
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.itFillDealGeneralYearExecutionDateValue("2004");
             steps.deal.itContinueToNextPage();
@@ -486,6 +494,7 @@ exports.feature = [
             steps.deal.itContinueToNextPage();
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
+
             steps.deal.returnDealNumber();
 
             steps.base.openTheNewTab(urlUse);
