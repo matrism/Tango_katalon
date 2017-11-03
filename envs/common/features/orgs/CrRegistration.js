@@ -31,7 +31,7 @@ exports.feature = [
             steps.CreateWorkComp.CreateWork(1);
             //steps.work.goToWorkPageById('WW 015123044 00');
             if(systemConfig.env.name ==='staging_test') {
-                steps.ScopeDeliveryComp.scopeDelivery(0,0,379900) }
+                steps.ScopeDeliveryComp.scopeDelivery(0,0,381809) } //379900
                 else {
                 steps.ScopeDeliveryComp.scopeDelivery(0,0,146968);
             }
