@@ -24,19 +24,27 @@ exports.filters = (() => {
     filters.currentSelectedPeriod = '';
 
     filters.royaltyPeriodDropdown = () => {
-        return tgRoyaltyPeriod.byModel('dataHolder.royalty_period');
+        return tgRoyaltyPeriod.byModel('dataHolder.filters.royaltyPeriod');
     };
 
     filters.selectRoyaltyPeriod = (name, index) => {
-        let dropdown = filters.royaltyPeriodDropdown();
+    let dropdown = filters.royaltyPeriodDropdown();
 
-        if (index) {
-            dropdown.select(index);
-        } else {
-            dropdown.selectValue(name);
-        }
-        pages.base.waitForAjax();
-    };
+    if (index) {
+        dropdown.select(index);
+    } else {
+        dropdown.selectValue(name);
+    }
+    pages.base.waitForAjax();
+};
+
+    filters.selectRoyaltyPeriod2 = (name) => {
+    let dropdown = filters.royaltyPeriodDropdown();
+
+        dropdown.selectValue(name);
+
+    pages.base.waitForAjax();
+};
 
     filters.selectClosedPeriod = (index) => {
         pages.base.waitForModal();
