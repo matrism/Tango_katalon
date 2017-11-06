@@ -63,11 +63,11 @@ exports.cancelChanges = () => asAlways(
 
 // ---
 
-exports.rows = () => $$('[ng-repeat="recordingLink in WorkRecordingsCtrl.getRecordingsView().getRecordingLinks()"]');
+exports.rows = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
 
 exports.rowsRec = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
 
-exports.validateRowCount = val => expect(exports.rows().count()).toBe(val);
+exports.validateRowCount = val => expect(exports.rowsRec().count()).toBe(val);
 
 // ---
 
@@ -257,8 +257,8 @@ exports.validateArtistName = (i, val) => expect(
 
 // ---
 
-exports.libraryNameBinding = i => exports.rows().get(i).$(
-    'span[ng-bind="::WorkRecordingsCtrl.getLibraryName(recordingLink.recording.libraryCode)"]'
+exports.libraryNameBinding = i => exports.rowsRec().get(i).$(
+    'div[ng-bind="WorkRecordingsCtrl.getLibraryName(WorkRecordingsCtrl.getLibraryCode())"]'
 );
 
 exports.libraryNameBindingRec = i => exports.rowsRec().get(i).$(
@@ -321,7 +321,7 @@ exports.validateDuration = (i, val) => expect(
 
 // ---
 
-exports.firstUseCheckbox = i => exports.rows().get(i).$(
+exports.firstUseCheckbox = i => exports.rowsRec().get(i).$(
     'input[ng-model="recordingLink.firstUse"]'
 );
 
@@ -371,9 +371,7 @@ exports.hoverRemoveButton = i => {
 // ---
 
 exports.remove = i => asAlways(
-    exports.removeButton(i), 'scrollIntoView', 'click'
-);
-
+    exports.removeButton(i), 'scrollIntoView').click();
 // ---
 
 exports.toggleButton = i => exports.rowsRec().get(i).$(
@@ -384,9 +382,14 @@ exports.toggleButtonNoEdit = i => exports.rows().get(i).$(
     '.fa.fa-angle-up.fa-angle-down'
 );
 
+exports.toggleCloseButton = i => exports.rows().get(i).$(
+    'i.fa.fa-angle-up'
+);
+
 exports.expanded = i => asAlways(
     exports.toggleButton(i), 'scrollIntoView'
-).then(el => pph.matchesCssSelector(el, '.fa-chevron-up'));
+).then(el => pph.matchesCssSelector(el, '.fa-chevron-up')
+);
 
 exports.toggle = i => asAlways(
     exports.toggleButton(i), 'scrollIntoView', 'click', 'waitForAjax'

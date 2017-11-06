@@ -110,7 +110,7 @@ exports.feature = [
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, 'AUDM');
+                        wr.validateLibraryName(i, 'AUDIOMACHINE');
 
                         wr.enterDuration(i, stringRepeat(
                             3, leftPad(i, 2, 0)
@@ -145,7 +145,7 @@ exports.feature = [
 
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, 'AUDM');
+                        wr.validateLibraryName(i, 'AUDIOMACHINE');
 
                         wr.validateEnteredDuration(i, arrayRepeat(3, leftPad(
                             i * 2 + 1, 2, 0
@@ -190,7 +190,7 @@ exports.feature = [
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, 'AUDM');
+                        wr.validateLibraryName(i, 'AUDIOMACHINE');
 
                         wr.enterDuration(i, stringRepeat(
                             3, leftPad(i, 2, 0)
@@ -225,7 +225,7 @@ exports.feature = [
 
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, 'AUDM');
+                        wr.validateLibraryName(i, 'AUDIOMACHINE');
 
                         wr.validateEnteredDuration(i, arrayRepeat(3, leftPad(
                             i * 2 + 1, 2, 0
@@ -270,7 +270,7 @@ exports.feature = [
                         wr.enterTitle(i, recRow.title);
                         wr.validateEnteredTitle(i, recRow.title);
 
-                        wr.validateLibraryName(i, 'AUDM');
+                        wr.validateLibraryName(i, 'AUDIOMACHINE');
 
                         wr.enterDuration(i, stringRepeat(
                             3, leftPad(i, 2, 0)
@@ -280,8 +280,8 @@ exports.feature = [
                             3, leftPad(i, 2, 0)
                         ).join(' : '));
 
-                        //wr.toggleFirstUseFlag(i);
-                        //wr.validateFirstUseFlagState(i, true);
+                        wr.toggleFirstUseFlag(i);
+                        wr.validateFirstUseFlagState(i, true);
                     });
                 });
             });
@@ -322,7 +322,7 @@ exports.feature = [
 
                             let iFound = fromTestVariable('row index');
 
-                            wr.validateLibraryName(iFound, 'AUDM');
+                            wr.validateLibraryName(iFound, 'AUDIOMACHINE');
 
                             wr.validateEnteredDuration(iFound, arrayRepeat(
                                 3, leftPad(i * 2 + 1, 2, 0)

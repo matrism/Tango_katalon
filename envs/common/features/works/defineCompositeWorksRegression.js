@@ -314,7 +314,7 @@ exports.feature = [
                 this.enterMediumComponentWorkAllocation(0);
                 steps.base.sleep(1000);
                 this.saveCreators();
-                steps.base.refreshPage();
+                //steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
                 this.validateComponentWorkName(0);
@@ -342,7 +342,7 @@ exports.feature = [
 
                 this.enterMediumComponentWorkAllocation(0);
                 this.optToIncludeWorkOnWebsite(false);
-                //steps.base.sleep(5000);
+                steps.base.sleep(5000);
                 this.saveWork();
                 this.validateSaveWorkRedirection();
             });
@@ -357,9 +357,8 @@ exports.feature = [
                 steps.base.sleep(4000);
                 this.confirmDisablingWorkAsComposite();
                 this.enterCreatorContribution(0, 100);
-                steps.base.sleep(4000);
                 this.saveCreators();
-                steps.base.refreshPage();
+                //steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
                 this.validateCompositeWorkCheckbox();
@@ -514,7 +513,7 @@ exports.feature = [
                 this.selectCreatorRole(0, 'PA');
                 this.selectCreatorRole(0, 'CA');              
                 this.saveCreators();
-                steps.base.refreshPage();
+                //steps.base.refreshPage();
                 this.hoverCreatorNamesContainer();
                 this.editCreators();
             });
