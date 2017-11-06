@@ -190,7 +190,7 @@ exports.validateDownloadFileCount = function (value) {
 
 exports.openTheNewTab = function (url) {
     it("Open a new tab with url", function () {
-        browser.sleep(1000);
+        pages.deal.waitForAjax();
         pages.base.openNewTab(url);
     });
 };
@@ -216,6 +216,13 @@ exports.scrollToBottom = function(index){
                 return pages.base.waitForAjax();
             });
         };
+    });
+};
+
+exports.tabOpenfix = function(index){
+    it('Tab Open Fix', function(){
+        var el=element(by.css('.tg-main-search-nav input'));
+        el.click();
     });
 };
 

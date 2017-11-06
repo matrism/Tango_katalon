@@ -63,7 +63,7 @@ if (pages.editRoyaltyRates === undefined) {
             var elem = element(by.cssContainingText('[data-ng-click="data.delete()"]',"Delete"));
             pages.base.scrollIntoView(elem);
             elem.click();
-            browser.wait(ExpectedConditions.visibilityOf(element(by.css('a[ng-click="onAddContractualRateSet(true)"]'))));
+            browser.wait(ExpectedConditions.invisibilityOf(element(by.css('[ng-model="set.description"]'))));
         },
 
         clickDeleteButtonForRRSetWithoutConfirm: function () {
@@ -122,8 +122,11 @@ if (pages.editRoyaltyRates === undefined) {
 
         ///END OF LOCATORS
         clickNewRoyaltySetButton: function () {
-            browser.driver.sleep(5000);
-            this.newRoyaltySetButton().click();
+            browser.driver.sleep(3000);
+            asAlways(
+                this.newRoyaltySetButton(),
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
         },
 
         closeRoyaltySet: function (options) {

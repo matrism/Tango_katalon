@@ -19,6 +19,7 @@ exports.feature = [
         name: 'Create a deal with publisher share set',
         tags: ['createPssRegression'],
         steps: function () {
+        //steps: criticalScenario(() =>{
             var nccs = steps.editDealScope.nonCtrlCreatorShare;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -29,7 +30,7 @@ exports.feature = [
                 steps.createDealScope.itAddPublisherShareWithMultipleThreeChains(i);
                 steps.createDealScope.validateDeleteChainIIconPublisherShare(i);
             }
-            steps.base.scrollIntoView("Delete chain icon publisher share set", element(By.css("#deal-publisher div.ng-scope:nth-child(1) div[data-name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")));
+            steps.base.scrollIntoView("Delete chain icon publisher share set", element(By.css("#deal-publisher div.ng-scope:nth-child(1) div[name='chainForm'] div.publisher-row.clearfix a.btn-remove-chain  i.fa.fa-times.ng-scope")));
             steps.createDealScope.deleteChainIPublisherShare(1);
             steps.base.scrollIntoView("Save publisher share set ", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveThePublisherShareSet();
@@ -55,6 +56,7 @@ exports.feature = [
         name: 'Create a deal with publisher share set having 100% percent',
         tags: ['createPssRegressionFullPercent'],
         steps: function () {
+        //steps: criticalScenario(() =>{
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -84,6 +86,7 @@ exports.feature = [
         name: 'Check the visual design for publisher shares',
         tags: ['viewPssRegression'],
         steps: function () {
+        //steps: criticalScenario(() =>{
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -109,6 +112,7 @@ exports.feature = [
         name: 'Check the invalid cases for publisher shares',
         tags: ['checkInvalidPssRegression'],
         steps: function () {
+        //: criticalScenario(() =>{
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -134,6 +138,7 @@ exports.feature = [
         name: 'Dirty check publisher share set',
         tags: ['dirtyCheckPssRegression'],
         steps: function () {
+        //steps: criticalScenario(() =>{
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -166,6 +171,7 @@ exports.feature = [
         name: 'Delete publisher share set from a deal',
         tags: ['deletePssRegression'],
         steps: function () {
+        //steps: criticalScenario(() =>{
             var i = 1;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -187,13 +193,14 @@ exports.feature = [
             steps.base.scrollIntoView("Edit publisher share set ", pages.editDealScope.elems.publisherSharesSetArea);
             steps.editDealScope.editPublisherSharesSet();
             steps.editDealScope.editDeleteThePublisherShareSet();
-            steps.editDealScope.editConfirmModalDialogDirtyCheck();
+            //steps.editDealScope.editConfirmModalDialogDirtyCheck();
         }
     },
     {
         name: 'Edit a deal with publisher share set',
         tags: ['editPssRegression'],
         steps: function () {
+        //steps: criticalScenario(() =>{
             var i = 1,
                 nccs = steps.editDealScope.nonCtrlCreatorShare;
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
@@ -238,6 +245,7 @@ exports.feature = [
         name: 'Create a deal with share PSS',
         tags: ['nonControlledCreatorShareWithSharePSS'],
         steps: function () {
+        //steps: criticalScenario(() =>{
             var nccs = steps.editDealScope.nonCtrlCreatorShare,
                 cds = steps.createDealScope,
                 cdg = steps.createDealGeneral,

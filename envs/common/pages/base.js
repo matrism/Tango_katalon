@@ -470,13 +470,14 @@ exports.openNewTab = function (url) {
             $('#TAT_TEMP_ELEMENT').remove();
             window.open(url);
         };
+        $('<div id="TAT_TEMP_ELEMENT">.</div>').appendTo('div[class="navbar-inner"]').on('click', openTab);
 
-        $('<div id="TAT_TEMP_ELEMENT">.</div>').appendTo('body').on('click', openTab);
-    };
+    }
 
     browser.executeScript(ptorOpenNewTab, url);
+    browser.sleep(1000);
     $('#TAT_TEMP_ELEMENT').click();
-};
+ };
 
 exports.focusOnTheNewOpenedTab = function (i) {
         return browser.getAllWindowHandles().then(function (handles) {

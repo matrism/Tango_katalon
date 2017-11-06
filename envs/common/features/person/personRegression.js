@@ -10,7 +10,7 @@ var random = require('../../../../helpers/random'),
 //exports.id = '810c445d-6aea-4b7d-8840-1ad9f741587a';
 exports.featureName = 'Person Regression';
 
-exports.commonFeatureTags = ['person', 'regression', 'personRegression'],
+exports.commonFeatureTags = ['person', 'regression', 'personRegression','searchServiceRegression'],
 
     exports.beforeFeature = () => {
         steps.login.itLogin();

@@ -32,8 +32,9 @@ exports.feature = [
         tags: ['crossReferenceAddSanity'],
         //steps: function() {
         steps: criticalScenario(() => {
-            let filters = ['Work ID', 'Title', 'Creator'],
-                terms = ['WW 015121724 00', 'EVERYTHING IS AWESOME MSI', 'Mohd Ibrahim, Mohd Shahrul Iman'];
+
+                    let filters = ['Work ID', 'Title', 'Creator'],
+                        terms = ['WW 009905357 00', 'GRENADE', 'Brown, Christopher Steven'];
 
             _.each(filters, (val, idx) => {
                 steps.mainHeader.goToSubLink('Royalty Processing', 'Cross Reference');

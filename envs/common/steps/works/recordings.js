@@ -6,9 +6,19 @@ exports.validateLibraryNameRec = function(){
     it('Validate Library Name', function () {
         pages.workRecordings.validateLibraryNameRec1;
     });
-}
+};
 
+exports.validateRemoveButtonStateDisabled = function(i){
+    it('Validate Delete Button disabled', function () {
+        pages.workRecordings.validateRemoveButtonStateDisabled(i);
+    });
+};
 
+exports.toggleNoEdit = function(i){
+    it('Toggle', function () {
+        pages.workRecordings.toggleNoEdit(i);
+    });
+};
 
 
 let page = pages.workRecordings;

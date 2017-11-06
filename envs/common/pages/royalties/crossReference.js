@@ -62,6 +62,10 @@ exports.incomingWorkContainer = () => {
     return $('.incoming-work');
 };
 
+exports.incomingWorkContainerNoResult = () => {
+    return $('[data-ng-show="!isLoadingResults && getCrossReferences().length === 0"]');
+};
+
 exports.tangoWorkContainer = () => {
     return $('.matching-work');
 };
@@ -80,6 +84,7 @@ exports.expectTangoWorkToBeVisible = () => {
 };
 
 exports.expectNoCrossReference = () => {
+    pages.base.waitForAjax();
     expect(exports.incomingWorkContainer().getText()).toContain('No cross references found using this criteria');
 };
 
@@ -136,6 +141,7 @@ exports.items = (() => {
     };
 
     item.expand = (index) => {
+        browser.sleep(1000);
         asAlways(
             item.get(index),
             'scrollIntoView',

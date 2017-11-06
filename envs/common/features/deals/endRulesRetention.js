@@ -33,9 +33,10 @@ exports.feature = [
     {
         name: 'Create a deal with end rules on retention period, validate fields and tooltips delete conditions',
         tags: ['createDeleteEndRulesRetention'],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             var today = new Date(),
-                currentDate = today.getFullYear() + '-' + today.getMonth() + 1 + '-' + today.getDate(),
+                currentDate = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate(),
                 er = steps.endRulesRetention,
                 cdr = steps.createDealRtp,
                 d = steps.deal;
@@ -49,7 +50,7 @@ exports.feature = [
             cdr.addEndRules();
 
             er.checkEndRulesTooltipTextValue();
-            er.checkRulesForEndDateDataTooltipTextEndRules();
+            //er.checkRulesForEndDateDataTooltipTextEndRules();
             er.checkSummaryOfRulesForEndDateTitleTextEndRules();
             er.checkSummaryOfRulesForEndDateDataTooltipTextEndRules();
             er.checkRulesTitleTextEndRules();
@@ -66,7 +67,7 @@ exports.feature = [
             er.selectEndDateEndRulesSpecificValueRuleNumberI(1, 'Repayment Date');
             er.validateAccountingPeriodEndRulesIsDisplayed();
 
-            er.selectEndDateEndRulesSpecificValueRuleNumberI(2, 'Pre-Defined Date');
+            er.selectEndDateEndRulesSpecificValueRuleNumberI(1, 'Pre-Defined Date'); //prev set to 2
             er.validatePreDefinedDateFieldEndRulesIsRequiredWarning('Date is required.');
             er.fillIntoPreDefinedDateFieldEndRulesSpecificDateRuleNumberI(1, '0000');
             er.validatePreDefinedDateFieldEndRulesIsRequiredWarning('Invalid date.');
@@ -123,12 +124,13 @@ exports.feature = [
             d.saveDeal();
             d.waitForDealToBeSaved();
             d.returnDealNumber();
-        }
+        })
     },
     {
         name: 'Create a deal with end rules on retention period and delete rules',
         tags: ['deleteEndRulesRetention'],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             var er = steps.endRulesRetention,
                 cdr = steps.createDealRtp,
                 d = steps.deal;
@@ -183,12 +185,13 @@ exports.feature = [
             d.saveDeal();
             d.waitForDealToBeSaved();
             d.returnDealNumber();
-        }
+        })
     },
     {
         name: 'Create a deal with end rules on retention period and check the summary for end rules',
         tags: ['summaryEndRulesRetention'],
-        steps: function(){
+        //steps: function(){
+        steps: criticalScenario(() => {
             var er = steps.endRulesRetention,
                 cdr = steps.createDealRtp,
                 d = steps.deal;
@@ -215,9 +218,10 @@ exports.feature = [
 
             // cancel end rules and add again end rules
             er.clickOnCancelEndRulesButton();
+            er.clickOnConfirmCancellationEndRulesModalButton();
 
             cdr.addEndRules();
-            steps.base.sleep(5000)
+            steps.base.sleep(5000);
             // check attribute left and % attribute left
             er.selectWhenVariableLeftEndRulesSpecificValueRuleNumberIRowNumberJ(1, 0, 'Recouped');
             er.fillIntoAttributeLeftPercentEndRulesSpecificValueRuleNumberIRowNumberJ(1, 0, '65.43');
@@ -246,6 +250,7 @@ exports.feature = [
 
             // cancel end rules and add again end rules
             er.clickOnCancelEndRulesButton();
+            er.clickOnConfirmCancellationEndRulesModalButton();
 
             cdr.addEndRules();
 
@@ -264,6 +269,7 @@ exports.feature = [
 
             // cancel end rules and add again end rules
             er.clickOnCancelEndRulesButton();
+            er.clickOnConfirmCancellationEndRulesModalButton();
 
             cdr.addEndRules();
 
@@ -346,7 +352,7 @@ exports.feature = [
             d.saveDeal();
             d.waitForDealToBeSaved();
             d.returnDealNumber();
-        }
+        })
     }
 
 ];

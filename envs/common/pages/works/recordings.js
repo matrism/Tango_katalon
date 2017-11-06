@@ -4,6 +4,15 @@ pages.workRecordings = exports;
 
 // ---
 
+exports.validateRemoveButtonStateDisabled = function(i) {
+    var el = exports.rowsRec().get(i).$('a.ng-scope');
+    el.getAttribute('tooltip').then(function(tooltip){
+        console.log(tooltip);
+        expect(tooltip).toEqual("Cannot Delete a Recording while associated to an Album");
+    });
+
+};
+
 exports.editContainer = () => $(
     '[tg-modular-edit-id="workRecordings"]'
 );
@@ -331,7 +340,7 @@ exports.validateFirstUseFlagState = (i, st) => expect(
 // ---
 
 exports.removeButton = i => exports.rowsRec().get(i).$(
-    'a.ng-scope i'
+    'i.fa.fa-times'
 );
 
 // ---
@@ -365,7 +374,11 @@ exports.remove = i => asAlways(
     exports.removeButton(i), 'scrollIntoView').click();
 // ---
 
-exports.toggleButton = i => exports.rows().get(i).$(
+exports.toggleButton = i => exports.rowsRec().get(i).$(
+    '.fa.fa-angle-up.fa-angle-down'
+);
+
+exports.toggleButtonNoEdit = i => exports.rows().get(i).$(
     '.fa.fa-angle-up.fa-angle-down'
 );
 
@@ -382,6 +395,10 @@ exports.toggle = i => asAlways(
     exports.toggleButton(i), 'scrollIntoView', 'click', 'waitForAjax'
 );
 
+exports.toggleNoEdit = i => asAlways(
+    exports.toggleButtonNoEdit(i), 'scrollIntoView', 'click', 'waitForAjax'
+);
+
 exports.toggleDown = i => asAlways(
     exports.toggleCloseButton(i), 'scrollIntoView', 'click', 'waitForAjax'
 );
@@ -391,8 +408,11 @@ exports.toggleDown = i => asAlways(
 exports.albums = (() => {
     let alb = {};
 
-    alb.rows = i => exports.rows().get(i).$$(
+    alb.rows = i => exports.rowsRec().get(i).$$(
         '[ng-repeat="track in recordingLink.recording.tracks.$getItems()"]');
+
+    alb.rowsNoEdit = i => exports.rows().get(i).$$(
+    '[ng-repeat="track in recordingLink.recording.tracks.$getItems()"]');
 
     alb.validateRowCount = (i, val) => expect(alb.rows(i).count()).toBe(val);
 
@@ -433,7 +453,7 @@ exports.albums = (() => {
     ));
 
     alb.searchResultRowTitleBindingByIndex = i => (
-        alb.searchResultRows().get(i).$('.span3')
+        alb.searchResultRows().get(i).$('div>span:nth-child(1)')
     );
 
     alb.selectSearchResultByIndex = (i, title) => {
@@ -532,12 +552,23 @@ exports.albums = (() => {
     // ---
 
     alb.toggleButton = (i, j) => alb.rows(i).get(j).$(
-        '.fa fa-angle-up.fa-angle-down'
+        '.fa.fa-angle-up.fa-angle-down'
+    );
+    alb.toggleButtonNoEdit = (i, j) => alb.rowsNoEdit(i).get(j).$(
+        '.fa.fa-angle-up.fa-angle-down'
     );
 
     alb.toggle = (i, j) => asAlways(
-        alb.toggleButton(i, j),
-        'scrollIntoView', 'click', 'waitForAjax'
+        element(by.css('[tg-modular-edit-id="workRecordings"] input'))).isDisplayed().then(function(result) {
+            if(result){
+                alb.toggleButton(i, j),
+                    'scrollIntoView', 'click', 'waitForAjax'
+            } else {
+                alb.toggleButtonNoEdit(i, j),
+                    'scrollIntoView', 'click', 'waitForAjax'
+            }
+        }
+
     );
 
     return alb;

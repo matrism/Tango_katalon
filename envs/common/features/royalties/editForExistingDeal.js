@@ -2,7 +2,7 @@
 
 var using = fnutils.using,
 
-    dealNum = { staging: '17277', prod: '3' }[systemConfig.env.name] || '205622';
+    dealNum = { staging: '179097', prod: '3' , staging_test: '380019' }[systemConfig.env.name] || '205622';
 
 exports.id = 'd0e81a6b-8520-4d4f-bff5-d6d9b0fece3c';
 
@@ -24,18 +24,20 @@ exports.feature = [
     {
         name: 'Create basic Royalty Rate Set on an existing deal',
         tags: ['create'],
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.inspectRateSetForm();
                 this.closeRateSetForm({ confirm: false });
             });
-        }
+        })
     },
     {
         name: 'Create complex Royalty Rate Set on an existing deal',
         tags: ['create'],
         steps: function () {
+        //steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.clearRoyaltyRateInput();
@@ -50,7 +52,6 @@ exports.feature = [
                 this.incomeProviderIsPresent('ASCAP');
                 this.incomeDateMethodToggleIsDisplayed();
 
-                if(systemConfig.env.name === 'qa') {
                     this.warnerChappellToggleIsSelected();
 
                     this.selectDealSigningTerritoryToggle();
@@ -58,16 +59,7 @@ exports.feature = [
 
                     this.selectWarnerChappellToggle();
                     this.warnerChappellToggleIsSelected();
-                }
-                else {
-                    this.dealSigningTerritoryIsSelected();
 
-                    this.selectWarnerChappellToggle();
-                    this.warnerChappellToggleIsSelected();
-
-                    this.selectDealSigningTerritoryToggle();
-                    this.dealSigningTerritoryIsSelected();
-                }
             });
         }
     },
@@ -75,6 +67,7 @@ exports.feature = [
         name: 'Check Effective Start Date validation on a Royalty Rate Set on an existing deal',
         tags: ['edit', 'validation'],
         steps: function () {
+        //steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
 
@@ -97,6 +90,7 @@ exports.feature = [
         name: 'Edit Royalty Rate Set on an existing deal',
         tags: ['edit'],
         steps: function () {
+        //steps: criticalScenario(() => {
             using(steps.editRoyaltyRates, function () {
                 this.addNewRoyaltySet();
                 this.inspectEffectiveStartDateArea();

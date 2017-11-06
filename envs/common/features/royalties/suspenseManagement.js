@@ -17,7 +17,8 @@ exports.feature = [
     {
         name: 'Suspense Management - Activity Summary',
         tags: ['suspenseManagementActivitySummary'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let sm = steps.suspenseManagement,
                 smf = sm.filters,
                 smas = sm.activitySummary,
@@ -49,28 +50,29 @@ exports.feature = [
 
             steps.mainHeader.goToSubLink('Royalty Processing', 'Suspense Management');
 
-            smf.validateProcessingTerritory('Argentina');
+            smf.validateProcessingTerritory('Argentina'); //Argentina
             sm.validateSelectedTab('Activity Summary');
             smas.validateLabels(activitySummaryLabels);
             smas.validateValues(numRegex);
-            smf.selectRoyaltyPeriod(null, 1);
+            smf.selectRoyaltyPeriod(null, 0);
             smas.validateValues(numRegex);
             smas.validateLabels(activitySummaryLabels);
-            smf.selectProcessingTerritory('United States');
+            smf.selectProcessingTerritory('Greece'); //United States
             smas.expectValuesToBeUpdated();
             smas.validateValues(numRegex);
             smf.selectRoyaltyPeriod('Closed Periods');
-            smf.selectClosedPeriod(2);
+            smf.selectClosedPeriod(0);
             smf.clickGo();
             smas.expectValuesToBeUpdated();
             smas.validateLabels(activitySummaryLabelsClosed);
             smas.validateValues(numRegex);
-        }
+        })
     },
     {
         name: 'Suspense Management - Suspense Tab',
         tags: ['suspenseManagementSuspenseTab'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let sm = steps.suspenseManagement,
                 smf = sm.filters,
                 sms = sm.suspense;
@@ -79,31 +81,32 @@ exports.feature = [
             sm.validateSelectedTab('Activity Summary');
             sm.clickTab('Suspense');
             sm.validateSelectedTab('Suspense');
-            smf.selectProcessingTerritory('Brazil');
+            smf.selectProcessingTerritory('Australia');
             sms.expectRowsToBePresent();
-            smf.selectRoyaltyPeriod(null, 1);
-            sms.expectRowsToBeUpdated();
-            sms.expectRowsToBePresent();
+            smf.selectRoyaltyPeriod(null, 0);
+            //sms.expectRowsToBeUpdated();
+            //sms.expectRowsToBePresent();
             smf.selectRoyaltyPeriod('Closed Periods');
             smf.selectClosedPeriod(1);
             smf.clickGo();
             sms.expectRowsToBeUpdated();
             sms.expectRowsToBePresent();
-            smf.selectProcessingTerritory('United States');
+            smf.selectProcessingTerritory('Greece');
             sms.expectRowsToBeUpdated();
             sms.expectRowsToBePresent();
-            smf.validateProcessingTerritory('United States');
+            smf.validateProcessingTerritory('Greece');
             smf.storeSelectedPeriod();
             sm.clickTab('Activity Summary');
             sm.validateSelectedTab('Activity Summary');
-            smf.validateProcessingTerritory('United States');
+            smf.validateProcessingTerritory('Greece');
             smf.validateRoyaltyPeriod();
-        }
+        })
     },
     {
         name: 'Validate if the selected territory and period are kept when change the page.',
         tags: ['suspenseManagementFilters'],
-        steps: () => {
+        //steps: () => {
+        steps: criticalScenario(() => {
             let sm = steps.suspenseManagement,
                 smf = sm.filters,
                 mh = steps.mainHeader,
@@ -122,6 +125,6 @@ exports.feature = [
             mh.goToSubLink('Royalty Processing', 'Suspense Management');
             smf.validateProcessingTerritory('United States');
             smf.validateRoyaltyPeriod(fromTestVariable('lastSelectedPeriod'));
-        }
+        })
     }
 ];

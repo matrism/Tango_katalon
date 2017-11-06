@@ -558,7 +558,7 @@ exports.affiliatedSocietySearchResult = function(i) {
     return this.affiliatedSocietySearchResults().get(i);
 };
 exports.clickAffiliatedSocietySearchResultByIndex = function(i) {
-    browser.sleep(5000);
+    browser.sleep(1000);
     pages.base.waitForAjax();
     return this.affiliatedSocietySearchResult(i).click();
 };

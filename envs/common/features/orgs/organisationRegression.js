@@ -13,7 +13,9 @@ exports.beforeFeature = () => {
 };
 
 exports.commonFeatureTags = [
-    'organisationRegression'
+    'organisationRegression',
+    'searchServiceRegression',
+    'regression'
 ];
 
 exports.feature = [{

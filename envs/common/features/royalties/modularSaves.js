@@ -34,7 +34,8 @@ exports.feature = [
 
         tags: ['edit'],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealScope.itAddSimpleScope();
             steps.createDealScope.itAddSimpleScope();
             steps.deal.itContinueToNextPage();
@@ -135,14 +136,15 @@ exports.feature = [
                     });
                 }));
             });
-        }
+        })
     },
     {
         name: 'Saving RR Set Saves whole Deal',
 
-        tags: ['edit'],
+        tags: ['edit123'],
 
-        steps: function () {
+        //steps: function () {
+        steps: criticalScenario(() => {
             steps.createDealScope.itAddSimpleScope();
             steps.createDealScope.itAddSimpleScope();
             steps.deal.itContinueToNextPage();
@@ -207,6 +209,6 @@ exports.feature = [
             steps.deal.clickLastScopeHeader();
 
             steps.royaltyRates.verifyPublisherShare();
-        }
+        })
     }
 ];

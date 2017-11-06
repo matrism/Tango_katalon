@@ -161,3 +161,10 @@ exports.clickOnContractingPartyValue = function(){
     });
 };
 
+exports.checkContractTypeLoop = function(){
+    it("Refresh page if contract type still not appearing", function(){
+
+
+    });
+};
+

@@ -12,8 +12,8 @@ exports.feature = [
     {
         name: "Create a deal and check the deal header",
         tags: ["header_general"],
-        //steps: function(){
-        steps: criticalScenario(() => {
+        steps: function(){
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -32,9 +32,9 @@ exports.feature = [
             steps.headerDeal.checkContractingPartyValue("bmi");
             steps.deal.goToTermsDealDetails();
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Administration", "Worldwide");
-            steps.editDealScope.editSaveAllChanges();
-
+            steps.deal.refreshThePage();
             steps.headerDeal.checkContractTypeText();
+            if(systemConfig.env.name ==='staging') { steps.base.sleep(60000);    }
             steps.headerDeal.checkExactContractTypeValue("Administration");
 
             steps.editDealScope.editAddSpecificScopeTypeAndTerritory("Finder", "Worldwide");
@@ -66,13 +66,14 @@ exports.feature = [
             steps.headerDeal.checkContractingPartyValue("bmi");
             steps.headerDeal.checkContractingPartyValue("ascap");
 
-        })
+        }
     },
     {
         name: "Create a deal and check the contracting party on deal header",
         tags: ["header_contracting_party"],
-        //steps: function(){
-        steps: criticalScenario(() => {
+        steps: function(){
+        //steps: criticalScenario(() => {
+
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -104,13 +105,28 @@ exports.feature = [
             steps.headerDeal.checkContractingPartyValue("bruno");
             steps.headerDeal.checkContractingPartyValue("alex");
             steps.headerDeal.checkContractingPartyValue("michael");
-        })
+        }
     },
     {
         name: "Create a deal add/remove artists and check deal header",
         tags: ["header_artist"],
-        //steps: function(){
-        steps: criticalScenario(() => {
+        steps: function(){
+        //steps: criticalScenario(() => {
+            //variables for search
+            var artist = [];
+            if(systemConfig.env.name ==='staging') {
+                artist[0] = 'ASHLEE';
+                artist[1] = 'SIMPSON';
+                artist[2] = 'Bruno Mars';
+                artist[3] = 'KATY PERRY';
+                artist[4] = 'Ron WilsonBruce MikeBill LameMichael';
+            } else {
+                artist[0] = 'Ashley';
+                artist[1] = 'Crowe';
+                artist[2] = 'Matt Tryner';
+                artist[3] = 'Billy Cogen';
+                artist[4] = 'Ron WilsonBruce MikeBill LameMichael';
+            }
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
@@ -121,42 +137,47 @@ exports.feature = [
 
             steps.deal.returnDealNumber();
 
+            //steps.searchSection.accessSavedDealByNumber(179285);
             steps.headerDeal.checkArtistText();
 
             steps.deal.goToGeneralDealTabDetails();
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField('Ashley', 'Ashley');
-            steps.editDealGeneral.editSpecificRandomArtistField('Matt Tryner', 'Matt Tryner');
-            steps.editDealGeneral.editSpecificRandomArtistField('Billy Cogen', 'Billy Cogen');
+
+            steps.editDealGeneral.editSpecificRandomArtistField(artist[0], artist[1]);
+            steps.editDealGeneral.editSpecificRandomArtistField(artist[2], artist[2]);
+            steps.editDealGeneral.editSpecificRandomArtistField(artist[3], artist[3]);
 
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Matt Tryner');
+            steps.headerDeal.checkArtistValue(artist[0] + ' ' + artist[1] + ', '+ artist[2] + ', '+ artist[3]);
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
 
-            steps.editDealGeneral.editSpecificRandomArtistField("Ron WilsonBruce MikeBill LameMichael", "Ron WilsonBruce MikeBill LameMichael");
+            steps.editDealGeneral.editSpecificRandomArtistField(artist[4], artist[4]);
 
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Matt Tryner, Ron WilsonBruce MikeBill LameMichael');
+            //steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Matt Tryner, Ron WilsonBruce MikeBill LameMichael');
+            steps.headerDeal.checkArtistValue(artist[0] + ' ' + artist[1] + ', '+ artist[2] + ', '+ artist[3] + ', ' + artist[4]);
 
             steps.editDealGeneral.editGeneralTabFirstElementsLeftArea();
             steps.editDealGeneral.editRemoveArtistNumberI(2);
             steps.editDealGeneral.saveEditGeneralTabFirstElementsLeftArea();
             steps.headerDeal.checkArtistText();
-            steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Ron WilsonBruce MikeBill LameMichael');
+            //steps.headerDeal.checkArtistValue('Ashley Crowe, Billy Cogen, Ron WilsonBruce MikeBill LameMichael');
+            steps.headerDeal.checkArtistValue(artist[0] + ' ' + artist[1] + ', '+ artist[3] + ', ' + artist[4]);
 
-        })
+
+        }
     },
 
     {
         name: "Create a deal add/edit dates and RTP and check the deal header",
         tags: ["header_rtp_brief_number"],
-        //steps: function() {
-        steps: criticalScenario(() => {
+        steps: function() {
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.fillIntoExecutionDateFieldSpecificYearValue("2014");
             steps.deal.itContinueToNextPage();
@@ -189,13 +210,13 @@ exports.feature = [
             steps.headerDeal.checkContractBriefNumberText();
             steps.headerDeal.checkContractBriefNumberValue();
 
-        })
+        }
     },
     {
         name: "Create a deal and check the deal header signing and last update",
         tags: ["header_signing_last_update"],
-        //steps: function() {
-        steps: criticalScenario(() => {
+        steps: function() {
+        //steps: criticalScenario(() => {
             var today = new Date();
             //var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1).toString() + "-" + today.getDate();
             if(today.getMonth()<=8){
@@ -234,13 +255,14 @@ exports.feature = [
             steps.headerDeal.checkLastUpdateValue(currentDate);
             
 
-        })
+        }
     },
 
     {
         name: "Open a deal check last update made some changes and check again last updated in deal header",
         tags: ["header_contract_status"],
-        steps: criticalScenario(() => {
+        steps: function() {
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.createDealGeneral.clickOnDraftContractStatus();
             steps.deal.itContinueToNextPage();
@@ -306,7 +328,7 @@ exports.feature = [
             steps.headerDeal.checkStatusValue("Post Term Collection");
 
 
-        })
+        }
     }
 
 

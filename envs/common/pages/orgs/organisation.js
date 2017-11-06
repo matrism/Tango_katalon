@@ -1154,8 +1154,11 @@ exports.registration = (function () {
 
         delivery.deleteRow = function (i) {
             var element = delivery.deleteRowButton(i);
-            pages.base.scrollIntoView(element);
-            return element.click();
+            //pages.base.scrollIntoView(element);
+            return asAlways(
+                element,
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
         };
 
         delivery.deleteConfirmDialog = function(value) {
@@ -1210,7 +1213,10 @@ exports.registration = (function () {
         };
 
         delivery.addMethod = function () {
-            return delivery.addMethodButton().click();
+            return asAlways(
+                delivery.addMethodButton(),
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
         };
         delivery.selectMethod = function (i, value) {
             var element = delivery.deliveryMethodSelect(i);
@@ -1306,10 +1312,14 @@ exports.registration = (function () {
 
         ack.selectAcknowledgementType = function (value) {
             var element = ack.acknowledgementTypeSelect();
-            return element.element(
-                by.cssContainingText('button', value)
-            ).click();
+            return asAlways(
+                element.element(
+                    by.cssContainingText('button', value)
+                ),
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
         };
+
         ack.selectDeliveryMethod = function (i, value) {
             var element = ack.deliveryMethodSelect(i);
             return element.all(
