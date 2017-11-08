@@ -187,6 +187,49 @@ module.exports.editCreators = function () {
         pages.base.waitForAjax();
     });
 };
+
+exports.editISWC = function () {
+    var el = pages.work.editISWCButton(); //start with 0
+    pages.base.waitForAjax();
+    it('Click edit ISWC button', function () {
+        return asAlways(
+            el,
+            'scrollIntoView', 'click', 'waitForAjax'
+        );
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css('[tg-modular-edit-model-key="iswcReferences"]'))));
+    });
+};
+
+exports.inputISWCCode = function (ISWCno,row,x) { //iswc no, row, tick primary
+    var el = pages.work.editISWCfield(row-1);
+    var el2 = pages.work.editISWCPrimary(row-1);
+
+    pages.base.waitForAjax();
+        it('Enter ISWC code', function () {
+            el.clear();
+            el.sendKeys(ISWCno);
+        });
+        if(x) {
+            it('Make it primary', function () {
+                el2.click();
+            });
+        }
+
+
+};
+
+exports.saveISWC = function () {
+    var el = pages.work.saveISWCButton(); //start with 0
+    pages.base.waitForAjax();
+    it('Click edit ISWC button', function () {
+        return asAlways(
+            el,
+            'scrollIntoView', 'click', 'waitForAjax'
+        );
+        browser.wait(ExpectedConditions.invisibilityOf(element(By.css('[tg-modular-edit-model-key="iswcReferences"]'))));
+    });
+};
+
 exports.clickCompositeWorkCheckbox = function (data, key) {
     it('Click composite work checkbox', function () {
         pages.work.clickCompositeWorkCheckbox().then(function (value) {

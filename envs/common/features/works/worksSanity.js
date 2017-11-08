@@ -1501,5 +1501,37 @@ steps.work.findCurrentlyOpenWorkId();
     this.validateVersionTypeId();
 });
 })
+},
+{
+    name: 'ISWC input and checking',
+        tags: [
+    'worksSanityISWC'
+],
+    //steps: function () {
+    steps: criticalScenario(() => {
+    using(steps.work, function () {
+    steps.base.useEntityDataSlot('work', 'mainWork');
+    //this.goToWorkPage();
+    this.goToWorkPageById('WW 015122915 00');
+    //this.goToGeneralTab();
+    this.editISWC();
+    this.inputISWCCode("T0293784739",1,"primary"); //iswc no, row, tick primary
+    this.inputISWCCode("T0293784739",1,"primary"); //iswc no, row, tick primary
+
+    this.saveISWC();
+
+
+    /*
+    using(this.copy, function () {
+        this.copyWork();
+        this.selectAdaptation();
+        this.continue();
+    });
+    steps.newWork.saveWork();
+    */
+    this.goToGeneralTab();
+    this.validateVersionTypeId();
+});
+})
 }
 ];

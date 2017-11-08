@@ -218,6 +218,19 @@ module.exports.editCreatorsContainer = function () {
 module.exports.editCreatorsButton = function () {
     return $('div[tg-modular-edit-id="workContributors"] button[data-ng-click="tgModularViewMethods.switchToEditView()"]');
 };
+exports.editISWCButton = function () {
+    return $('div[tg-work-header-id="WorkViewHeader"] button[ng-click="$onIswcReferencesEditFn()"]');
+};
+exports.editISWCfield = function (row) {
+    return $$('div[tg-modular-edit-id="iswcReferences"] input[ng-model="iswc.iswc"]').get(row);
+};
+exports.editISWCPrimary = function (row) {
+    return $$('div[tg-modular-edit-id="iswcReferences"] input[ng-model="iswc.isPrimary"]').get(row);
+};
+exports.saveISWCButton = function (row) {
+    return $('div[tg-modular-edit-id="iswcReferences"] button[data-ng-click="tgModularViewMethods.save()"]');
+};
+
 exports.compositeWorkCheckbox = function() {
     return element(by.model('tgModularEditModel.isCompositeWork'));
 };
