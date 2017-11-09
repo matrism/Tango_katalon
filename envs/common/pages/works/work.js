@@ -230,6 +230,12 @@ exports.editISWCPrimary = function (row) {
 exports.saveISWCButton = function (row) {
     return $('div[tg-modular-edit-id="iswcReferences"] button[data-ng-click="tgModularViewMethods.save()"]');
 };
+exports.cancelISWCButton = function (row) {
+    return $('div[tg-modular-edit-id="iswcReferences"] button[data-ng-click="tgModularViewMethods.cancel()"]');
+};
+exports.editISWCValue = function (row) {
+    return pages.work.editISWCfield(row).getAttribute("value");
+};
 
 exports.compositeWorkCheckbox = function() {
     return element(by.model('tgModularEditModel.isCompositeWork'));

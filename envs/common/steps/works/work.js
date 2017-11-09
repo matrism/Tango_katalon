@@ -201,11 +201,11 @@ exports.editISWC = function () {
 };
 
 exports.inputISWCCode = function (ISWCno,row,x) { //iswc no, row, tick primary
-    var el = pages.work.editISWCfield(row-1);
-    var el2 = pages.work.editISWCPrimary(row-1);
+    var el = pages.work.editISWCfield(row);
+    var el2 = pages.work.editISWCPrimary(row);
 
     pages.base.waitForAjax();
-        it('Enter ISWC code', function () {
+        it('Enter ISWC code' + ISWCno, function () {
             el.clear();
             el.sendKeys(ISWCno);
         });
@@ -214,8 +214,6 @@ exports.inputISWCCode = function (ISWCno,row,x) { //iswc no, row, tick primary
                 el2.click();
             });
         }
-
-
 };
 
 exports.saveISWC = function () {
@@ -227,6 +225,26 @@ exports.saveISWC = function () {
             'scrollIntoView', 'click', 'waitForAjax'
         );
         browser.wait(ExpectedConditions.invisibilityOf(element(By.css('[tg-modular-edit-model-key="iswcReferences"]'))));
+    });
+};
+
+exports.cancelISWC = function () {
+    var el = pages.work.cancelISWCButton(); //start with 0
+    pages.base.waitForAjax();
+    it('Click Cancel ISWC button', function () {
+        return asAlways(
+            el,
+            'scrollIntoView', 'click', 'waitForAjax'
+        );
+        browser.wait(ExpectedConditions.invisibilityOf(element(By.css('[tg-modular-edit-model-key="iswcReferences"]'))));
+    });
+};
+
+exports.validateISWCno = function (value,row) {
+    it("Validate ISWC code" + value, function () {
+        expect(pages.work.editISWCValue(row)).toBe(
+            pph.toString(value)
+        );
     });
 };
 

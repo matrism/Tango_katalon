@@ -4,6 +4,7 @@ var leftPad = require('left-pad'),
     moment = require('moment'),
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
+    randomISWC = random.tenDigitCode.makeMemoizedGenerator(),
     randomString = random.string.makeMemoizedGenerator(),
     fromTestVariable = require('../../../../helpers/fromTestVariable'),
     fnutils = require('../../../../helpers/fnutils'),
@@ -57,8 +58,7 @@ exports.feature = [
             'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun',
             'worksSanityMerge',
-            'worksSanityCopy'
-
+            'worksSanityCopy',
         ],
         steps: criticalScenario(() => {
         //steps: function () {
@@ -293,7 +293,8 @@ exports.feature = [
             'worksSanitySearchForWorksByAlternateTitle',
             'worksSanitySearchForWorksByCreatorPresentationName',
             'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
-        'worksSanityMerge'
+        'worksSanityMerge',
+        'worksSanityISWC'
         ],
         //steps: function () {
         steps: criticalScenario(() => {
@@ -1503,21 +1504,28 @@ steps.work.findCurrentlyOpenWorkId();
 })
 },
 {
-    name: 'ISWC input and checking',
+    name: 'ISWC input',
         tags: [
     'worksSanityISWC'
 ],
     //steps: function () {
+
     steps: criticalScenario(() => {
     using(steps.work, function () {
-    steps.base.useEntityDataSlot('work', 'mainWork');
-    //this.goToWorkPage();
-    this.goToWorkPageById('WW 015122915 00');
-    //this.goToGeneralTab();
-    this.editISWC();
-    this.inputISWCCode("T0293784739",1,"primary"); //iswc no, row, tick primary
-    this.inputISWCCode("T0293784739",1,"primary"); //iswc no, row, tick primary
 
+    steps.base.useEntityDataSlot('work', 'component0');
+    this.goToWorkPage();
+    //this.goToWorkPageById('WW 015122915 00');
+    this.goToGeneralTab();
+    this.editISWC();
+
+    _.times(3, function (i) {
+        if (i==0) {
+            steps.work.inputISWCCode("T" + randomISWC('iswc' + i), i, "primary"); //iswc no, row, tick primary
+        } else {
+            steps.work.inputISWCCode("T" + randomISWC('iswc' + i), i); //iswc no, row, tick primary
+        }
+    });
     this.saveISWC();
 
 
@@ -1530,8 +1538,11 @@ steps.work.findCurrentlyOpenWorkId();
     steps.newWork.saveWork();
     */
     this.goToGeneralTab();
-    this.validateVersionTypeId();
+
+    this.editISWC();
+    this.cancelISWC();
 });
 })
 }
+
 ];
