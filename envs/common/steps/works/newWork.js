@@ -453,7 +453,7 @@ exports.enterMediumComponentWorkAllocation = function(i, data, key) {
     });
 };
 exports.enterNewShellWork = function(i, title, data, key) {
-    it('Enter new shell work title as component work #' + (i + 1), function() {
+    it('Enter new shell work title as component work #' + (i + 1) + title, function() {
         pages.newWork.enterComponentWorkSearchTerms(i, title);
     });
 

@@ -40,15 +40,13 @@ exports.feature = [
     {
         name: 'Duplicate shell work check',
         tags: [],
-        steps: function() {
+        steps: criticalScenario(() => {
             using(steps.newWork, function() {
                 steps.base.useBlankEntityDataSlot('work', 0);
 
                 this.goToNewWorkPage();
 
-                this.enterPrimaryWorkTitle(
-                    'TEST COMPOSITE WORK ' + randomString(0)
-                );
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(0));
 
                 this.clickCompositeWorkCheckbox();
                 this.selectCompositeWorkType('Composite of Samples');
@@ -65,17 +63,19 @@ exports.feature = [
                 steps.base.useBlankEntityDataSlot('work', 1);
 
                 this.goToNewWorkPage();
-                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(1));
+                this.enterPrimaryWorkTitle('TEST COMPOSITE WORK ' + randomString(0));
                 this.clickCompositeWorkCheckbox();
                 this.selectCompositeWorkType('Composite of Samples');
                 this.selectCreatorFromPersonSlot(0, 0);
                 this.enterCreatorContribution(0, 50);
+                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
                 this.enterNewShellWork(0, 'TEST SHELL WORK ' + randomString(0));
                 this.enterComponentWorkAllocation(0, 50);
                 this.selectShellWorkCreatorFromPersonSlot(0, 0, 0);
 
-                steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
-                steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
+                // steps.duplicateWorkChecks.expectDuplicateWorksPopUpToBeDisplayed();
+                // steps.duplicateWorkChecks.ignoreSimilarWorksWarning();
 
                 this.enterShellWorkCreatorContribution(0, 0, 100);
                 this.optToIncludeWorkOnWebsite(false);
@@ -95,7 +95,7 @@ exports.feature = [
                 this.validateShellWorkCreatorName(0, 0);
                 this.validateShellWorkCreatorContribution(0, 0);
             });
-        }
+        })
     },
     {
         name: 'Duplicate shell work check: Ignore articles, extra whitespace, and punctuation',

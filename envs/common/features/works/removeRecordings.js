@@ -315,7 +315,7 @@ exports.feature = [
                     let iFound = fromTestVariable('row index');
 
                     wr.toggle(iFound);
-                    wr.toggle(iFound);
+
 
                     wr.remove(iFound);
                     testRecRows.splice(i, 1);
