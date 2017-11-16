@@ -227,15 +227,19 @@ exports.editISWCfield = function (row) {
 exports.editISWCPrimary = function (row) {
     return $$('div[tg-modular-edit-id="iswcReferences"] input[ng-model="iswc.isPrimary"]').get(row);
 };
-exports.saveISWCButton = function (row) {
+exports.saveISWCButton = function () {
     return $('div[tg-modular-edit-id="iswcReferences"] button[data-ng-click="tgModularViewMethods.save()"]');
 };
-exports.cancelISWCButton = function (row) {
+exports.cancelISWCButton = function () {
     return $('div[tg-modular-edit-id="iswcReferences"] button[data-ng-click="tgModularViewMethods.cancel()"]');
 };
 exports.editISWCValue = function (row) {
     return pages.work.editISWCfield(row).getAttribute("value");
 };
+exports.confirmISWCcancel = function () {
+    return element(by.css('.modal'));
+};
+
 
 exports.compositeWorkCheckbox = function() {
     return element(by.model('tgModularEditModel.isCompositeWork'));

@@ -79,11 +79,16 @@ module.exports.findCurrentlyOpenWorkId = function () {
     return deferred.promise;
 };
 
-exports.validateWorkId = function () {
+exports.validateWorkId = function (value) {
     it('Validate work ID', function () {
-        pages.work.validateWorkId(
-            hash.currentEntityDataSlotsByType.work.id
-        );
+        if(value){
+            pages.work.validateWorkId(value);
+        }
+        else {
+            pages.work.validateWorkId(
+                hash.currentEntityDataSlotsByType.work.id
+            );
+        }
     });
 };
 module.exports.workInclusionOnWebsite = function () {
@@ -192,7 +197,7 @@ exports.editISWC = function () {
     var el = pages.work.editISWCButton(); //start with 0
     pages.base.waitForAjax();
     it('Click edit ISWC button', function () {
-        return asAlways(
+        asAlways(
             el,
             'scrollIntoView', 'click', 'waitForAjax'
         );
@@ -205,10 +210,12 @@ exports.inputISWCCode = function (ISWCno,row,x) { //iswc no, row, tick primary
     var el2 = pages.work.editISWCPrimary(row);
 
     pages.base.waitForAjax();
-        it('Enter ISWC code' + ISWCno, function () {
-            el.clear();
-            el.sendKeys(ISWCno);
-        });
+        if(ISWCno) {
+            it('Enter ISWC code' + ISWCno, function () {
+                el.clear();
+                el.sendKeys(ISWCno);
+            });
+        }
         if(x) {
             it('Make it primary', function () {
                 el2.click();
@@ -219,8 +226,8 @@ exports.inputISWCCode = function (ISWCno,row,x) { //iswc no, row, tick primary
 exports.saveISWC = function () {
     var el = pages.work.saveISWCButton(); //start with 0
     pages.base.waitForAjax();
-    it('Click edit ISWC button', function () {
-        return asAlways(
+    it('Save ISWC', function () {
+        asAlways(
             el,
             'scrollIntoView', 'click', 'waitForAjax'
         );
@@ -228,15 +235,20 @@ exports.saveISWC = function () {
     });
 };
 
-exports.cancelISWC = function () {
+exports.cancelISWC = function (value) {
     var el = pages.work.cancelISWCButton(); //start with 0
     pages.base.waitForAjax();
     it('Click Cancel ISWC button', function () {
-        return asAlways(
-            el,
-            'scrollIntoView', 'click', 'waitForAjax'
-        );
+        pages.base.scrollIntoView(el);
+        el.click();
+        pages.base.waitForAjax();
+        browser.wait(ExpectedConditions.visibilityOf(pages.work.confirmISWCcancel()));
+        pages.work.confirmISWCcancel().element(by.cssContainingText('button', value)).click();
+        browser.wait(ExpectedConditions.invisibilityOf(pages.work.confirmISWCcancel()));
         browser.wait(ExpectedConditions.invisibilityOf(element(By.css('[tg-modular-edit-model-key="iswcReferences"]'))));
+
+
+
     });
 };
 
