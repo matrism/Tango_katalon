@@ -2,7 +2,8 @@
 
 var fnutils = require('../../../../helpers/fnutils'),
     using = fnutils.using,
-    data = requireFromEnvFolder('features/orgs/data/CrRegistration.js');
+    //data = requireFromEnvFolder('features/orgs/data/CrRegistration.js');
+    data = require('../../../../envs/common/features/orgs/data/CrRegistration.js');
 
 exports.id = '283a2f02-cadd-44f1-8541-371c2762fbcc';
 exports.featureName = 'Copyright Registration Sanity';
@@ -25,10 +26,7 @@ exports.feature = [
         name: 'Validate CR Registration scheduling',
         tags: [],
         //steps: function() {
-        steps: criticalScenario(() => {
-
-            //create work and deliver it to scope
-            steps.CreateWorkComp.CreateWork(1);
+        steps: criticalScenario(() => {/*s.CreateWorkComp.CreateWork(1);
             //steps.work.goToWorkPageById('WW 015123044 00');
             if(systemConfig.env.name ==='staging_test') {
                 steps.ScopeDeliveryComp.scopeDelivery(0,0,381809) } //379900
@@ -38,7 +36,7 @@ exports.feature = [
 
             //-----------------------------------
 
-
+*/
             steps.searchSection.accessSavedOrganisationByName(data.cr.org);
 
             using(steps.organisation, function () {

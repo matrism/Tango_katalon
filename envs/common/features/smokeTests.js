@@ -33,8 +33,8 @@ exports.feature = [
     {
         name: 'Create a deal with publisher share set',
         tags: ['deals','createDeal'],
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
+        //steps: criticalScenario(() => {
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
@@ -61,13 +61,13 @@ exports.feature = [
             steps.deal.saveDeal();
             steps.deal.waitForDealToBeSaved();
             steps.deal.returnDealNumber();
-        })
+        }
     },
     {
         name: 'Create a basic person (without persistence validations)',
         tags: ['person'],
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
+        //steps: criticalScenario(() => {
             steps.person.useBlankPersonSlot(0);
             steps.newPerson.goToNewPersonPage();
 
@@ -79,13 +79,13 @@ exports.feature = [
             steps.person.findId();
             //steps.royaltyRates.pauseTest();
             steps.person.findInternalIpiNumber();
-        })
+        }
     },
     {
         name: 'New basic work',
         tags: ['works','newBasicWork'],
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
+        //steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 0);
 
             steps.newWork.goToNewWorkPage();
@@ -130,13 +130,13 @@ exports.feature = [
             steps.base.waitForAjax();
 
             steps.work.validateWorkId();
-        })
+        }
     },
     {
         name: 'New basic organisation',
         tags: ['orgCreationSmoke', 'orgs'],
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
+        //steps: criticalScenario(() => {
             steps.mainHeader.createNewRecord('Organisation');
 
             using(steps.newOrganisation, function () {
@@ -149,13 +149,13 @@ exports.feature = [
                 steps.base.sleep(8000);
                 this.saveOrganisation();
             });
-        })
+        }
     },
     {
         name: 'View mode of  organisation',
         tags: ['viewOrgSmoke', 'orgs', 'view'],
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
+        //steps: criticalScenario(() => {
             steps.searchSection.accessSavedOrganisationByName('BMI');
             steps.organisation.validateCisacCode('021');
             steps.organisation.goToPreviewRegistrationRunTab();
@@ -187,18 +187,18 @@ exports.feature = [
                 );
             }
 
-        })
+        }
     },
 
     {
         name: 'View mode of person',
         tags: ['person', 'view', 'viewModePerson'],
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
+        //steps: criticalScenario(() => {
             steps.searchSection.accessSavedPersonByName('katy perry');
             steps.person.validateSuisaIpiNumber('515661558');
             steps.person.validateAlternativeName(0, 'Perry, Katy Perry')
-        })
+        }
     }
     ,
     {
@@ -208,7 +208,8 @@ exports.feature = [
             'crFileDownloadsSmoke',
             'crFileDownloads',
             'cr',
-            'orgs'
+            'orgs',
+            'broken'
         ],
 
         steps: function () {
@@ -232,11 +233,10 @@ exports.feature = [
             'qaOnly'
         ],
 
-        //steps: function () {
-        steps: criticalScenario(() => {
+        steps: function () {
+        //steps: criticalScenario(() => {
             steps.royaltyRates.goToRoyaltyStatements();
             steps.royaltyRates.clickCreateManualStatement();
-            steps.base.sleep(3000);
             steps.royaltyRates.typeIncomeProvider('BMI');
 
             steps.royaltyRates.setStatementDistributionPeriod("2016", "06", "2016", "12");
@@ -261,6 +261,6 @@ exports.feature = [
             steps.royaltyRates.expandSavedManualStatement();
             steps.royaltyRates.validateManualStatement();
             steps.royaltyRates.deleteManualStatement();
-         })
+         }
     }
 ];
