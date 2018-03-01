@@ -17,7 +17,7 @@ if (pages.createDealRtp === undefined) {
             scopeAcquisitionInputField: {css: "div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] div[ng-model='tgModularEditModel.dealScopeIds'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"},
             applyScopeAcquisitionButton: {css: "div[ng-repeat='rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id'] ul.tg-typeahead__suggestions.ng-scope li.tg-typeahead__suggestions-footer button[ng-click='applySelections($dataSets);']"},
             acquisitionActualEndDate: {css: "div[name='endDate'] input"},
-            acquisitionActualStartDate: {css: "div[name='acquisitionStartDate'] input"},
+            acquisitionActualStartDate: {css: "div[ng-model='tgModularEditModel.startDate'] input"},
             addRetentionPeriodLinkFromAcquisition: {css: "a[ng-click='rightsTermPeriodSet.addPeriod(constants.RETENTION)']"},
             addPostTermPeriodLinkFromAcquisition: {css: '[ng-repeat="rightsTermPeriodSet in rightsTermPeriodSets track by rightsTermPeriodSet.id"]:nth-child(1) [ng-click="rightsTermPeriodSet.addPeriod(constants.PTC)"]'},
             addEndRulesLinkRtpRetention2FromAcquisition: {css: "div[ng-repeat='rightsTermPeriod in rightsTermPeriodSet.getRightsTermsPeriodsByPeriod(constants.RETENTION, constants.PTC) | orderBy: orderRightsTermPeriods']:nth-child(2) a[ng-click='!__isFreshlyAdded && tgModularEditModel.addPostTermCollectionPeriod()']"},
@@ -47,7 +47,8 @@ if (pages.createDealRtp === undefined) {
         },
 
         selectTheRtpAllContractPeriods: function () {
-            pages.createDealRtp.elems.contractPeriodsRtpField.click();
+            pages.createDealRtp.waitForAjax();
+            asAlways(pages.createDealRtp.elems.contractPeriodsRtpField,'scrollIntoView', 'click', 'waitForAjax');
             browser.wait(ExpectedConditions.visibilityOf(element(by.css("ul.tg-typeahead__suggestions.ng-scope"))));
             pages.createDealRtp.elems.selectAllContractPeriodRtpLink.click();
             pages.createDealRtp.elems.applyContractPeriodRtpButton.click();

@@ -23,7 +23,11 @@ exports.clickAcquisitionPeriodScopesInput = function(i) {
 
     pages.base.scrollIntoView(inputElement);
 
-    return inputElement.click();
+    return asAlways(
+        inputElement,
+        'scrollIntoView', 'click', 'waitForAjax'
+    );
+
 };
 
 exports.acquisitionPeriodScopesTypeaheadContainer = function(i) {
@@ -46,7 +50,10 @@ exports.selectAllSuggestedAcquisitionPeriodScopes = function(i) {
 
     pages.base.scrollIntoView(optionElement);
 
-    return optionElement.click();
+    return asAlways(
+        optionElement,
+        'scrollIntoView', 'click', 'waitForAjax'
+    );
 };
 
 exports.applyAcquisitionPeriodScopeChangesButton = function(i) {
@@ -60,5 +67,8 @@ exports.applyAcquisitionPeriodScopeChanges = function(i) {
 
     pages.base.scrollIntoView(buttonElement);
 
-    return buttonElement.click();
+    return asAlways(
+        buttonElement,
+        'scrollIntoView', 'click', 'waitForAjax'
+    );
 };

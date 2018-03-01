@@ -63,7 +63,8 @@ exports.cancelChanges = () => asAlways(
 
 // ---
 
-exports.rows = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
+//exports.rows = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
+exports.rows = () => $$('[ng-repeat="recordingLink in WorkRecordingsCtrl.getRecordingsView().getRecordingLinks()"]');
 
 exports.rowsRec = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
 

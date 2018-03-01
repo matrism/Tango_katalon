@@ -699,7 +699,7 @@ module.exports.calculateEvenCreatorContributions = function () {
 exports.selectedCompositeWorkType = function () {
     var element = exports.compositeWorkTypeDropdown();
     pages.base.scrollIntoView(element);
-    return pages.base.selectedDropdownOption(element);
+    return pages.base.selectedDropdownOptionComp(element);
 };
 module.exports.enteredCreatorContribution = function (i) {
     var element = pages.work.editCreatorContributionInput(i);
@@ -1377,7 +1377,13 @@ exports.clickOnTheConflictingWorksButtonFilterForWorkLog = function(){
 
 exports.goToGeneralTab = function () {
     var element = exports.generalTab();
+    var element2 = $$(".nav-tabs>li[class='ng-scope']:nth-child(1)");
     pages.base.scrollIntoView(element);
+    element2.isDisplayed().then(function(result) {
+        if (result){
+            browser.sleep(6000);
+        }
+    });
     return element.click().then(function () {
         pages.base.waitForAjax();
     });

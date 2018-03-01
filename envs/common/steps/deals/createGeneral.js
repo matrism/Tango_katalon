@@ -366,11 +366,11 @@ exports.itFillDealMandatoryFieldsGeneralTabWithSpecificData = function (contract
     describe("Fill mandatory fields in deals general tab", function () {
         steps.createDealGeneral.goToNewDealPage();
         steps.createDealGeneral.selectSigningTerritory(country);
-        if(systemConfig.env.name === 'refactor') {
+        //if(systemConfig.env.name === 'refactor') {
             steps.createDealGeneral.fillCompanyCodeField(companyCode);
             steps.createDealGeneral.waitForContractingPartyDropDown();
             steps.createDealGeneral.selectRandomCompanyCode();
-        }
+        //}
         steps.createDealGeneral.fillContractingPartyFieldData(contractingParty);
         steps.createDealGeneral.waitForContractingPartyDropDown();
         steps.createDealGeneral.selectRandomContractingParty();

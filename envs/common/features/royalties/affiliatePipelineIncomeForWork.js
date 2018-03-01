@@ -13,7 +13,7 @@ var using = require('../../../../helpers/fnutils').using,
 
 exports.id = 'c629be22-73e2-429d-b68c-fe08309a154c';
 
-exports.commonFeatureTags = ['royaltyProcessing'];
+exports.commonFeatureTags = ['royaltyProcessing','aff_test'];
 
 exports.beforeFeature = function () {
     steps.login.itLogin();

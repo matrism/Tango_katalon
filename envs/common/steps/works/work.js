@@ -25,7 +25,8 @@ exports.goToWorkPageById = function (workId) {
     it('Go to work page by ID (' + workId + ')', function () {
         workId = callResultOrValue(workId);
         pages.work.open(workId);
-        steps.base.sleep(50000)
+        pages.base.waitForAjax();
+        steps.base.sleep(50000);
     });
 };
 

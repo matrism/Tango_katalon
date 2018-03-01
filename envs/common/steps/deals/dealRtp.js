@@ -4,6 +4,7 @@ steps.dealRtp = exports;
 
 exports.clickAcquisitionPeriodScopesField = function(i) {
     it('Click scopes field on acquisition period #' + (i + 1), function() {
+        pages.base.waitForAjax();
         pages.dealRtp.clickAcquisitionPeriodScopesInput(i);
     });
 };
