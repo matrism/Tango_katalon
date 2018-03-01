@@ -131,13 +131,14 @@ exports.feature = [
 
             describe('Create new  data', function () {
                 //add organisation
+/*
                 steps.mainHeader.createNewRecord("Organisation");
                 steps.newOrganisation.populateName("Org test 1 TAT DENISA");
                 steps.newOrganisation.selectOrgType("Publisher");
                 steps.newOrganisation.selectTerritoryOfOperation("Worldwide");
                 steps.newOrganisation.selectPublisherType("WCM");
                 steps.newOrganisation.saveOrganisation();
-
+*/
                 //create deal
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithSpecificData("bmi", "Canada", "CAM");
                 steps.deal.itContinueToNextPage();

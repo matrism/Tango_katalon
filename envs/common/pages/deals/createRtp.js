@@ -197,7 +197,7 @@ if (pages.createDealRtp === undefined) {
         },
 
         selectTheSpecificDurationTypeRetentionFromAcquisitionNumberX: function (i, durationType) {
-            var elm = $('[tg-model-class-validation="tgModularEditModel.durationType"] select[id="retentionDurationType"]');
+            var elm = $$('[tg-model-class-validation="tgModularEditModel.durationType"] select[id="retentionDurationType"]').get(i);
             elm.click();
             browser.sleep(1000);
             switch(durationType){

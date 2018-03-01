@@ -502,8 +502,9 @@ if (pages.createDealContractPeriod === undefined) {
         selectTheRequirementEndRulesSpecificValueByIndexRuleNumberIRowNumberJ: function (i, j, index) {
             browser.driver.findElement(By.css("div[ng-form='ruleForm']:nth-child(" + i + ") div[ng-form='conditionForm']:nth-child(" + (j + 2) + ") div[ng-model='condition.operator'] div.tg-dropdown-button")).click();
             browser.sleep(3000);
-            browser.driver.findElements(By.xpath("//*[@class='tg-dropdown-menu ng-scope']/ul[@class='dropdown-menu']/li[@class='tg-dropdown-menu-item ng-scope']"))
-                 .then(function (options) {
+            //browser.driver.findElements(By.xpath("//*[@class='tg-dropdown-menu ng-scope']/ul[@class='dropdown-menu']/li[@class='tg-dropdown-menu-item ng-scope']"))
+                $$(".tg-dropdown-menu.ng-scope:not(.ng-hide) .dropdown-menu .tg-dropdown-menu-item.ng-scope")
+                .then(function (options) {
                     var randomNumber = index;
                     var element = options[randomNumber];
                     browser.actions().mouseMove(element).perform();
