@@ -691,8 +691,11 @@ if (pages.organisation === undefined) {
         },
         clickPreviewRegistrationRunTab: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.navigationTab()));
-            this.previewRegistrationRunTab().click();
-            return pages.base.waitForAjax();
+            return asAlways(
+                this.previewRegistrationRunTab(),
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
+
         },
         downloadCrFile: function () {
             var button = this.downloadFileButton(),

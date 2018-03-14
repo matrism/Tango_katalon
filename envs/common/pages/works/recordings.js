@@ -63,7 +63,8 @@ exports.cancelChanges = () => asAlways(
 
 // ---
 
-exports.rows = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
+//exports.rows = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
+exports.rows = () => $$('[ng-repeat="recordingLink in WorkRecordingsCtrl.getRecordingsView().getRecordingLinks()"]');
 
 exports.rowsRec = () => $$('[ng-repeat="recordingLink in tgModularEditModel.recordingsLinks.$getItems()"]');
 
@@ -83,9 +84,10 @@ exports.validateRowCount = val => expect(exports.rowsRec().count()).toBe(val);
 
 // ---
 
-exports.focusTitleField = i => asAlways(
-    exports.titleInputRec(i), 'scrollIntoView', 'click'
-);
+exports.focusTitleField = i =>
+    asAlways(
+        exports.titleInputRec(i), 'scrollIntoView', 'click'
+    );
 
 // ---
 
@@ -101,7 +103,7 @@ exports.titleSuggestionRows = () => element.all(by.repeater(
 
 exports.selectTitleSuggestionByIndex = (i, val) => {
     let el = exports.titleSuggestionRows();
-
+browser.sleep(2000);
    el.click();
 };
 

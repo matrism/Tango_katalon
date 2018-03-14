@@ -14,6 +14,7 @@ steps.newPerson = exports;
 exports.goToNewPersonPage = function () {
     it('Go to new person page', function () {
         pages.newPerson.open();
+        pages.base.waitForAjax();
     });
 };
 

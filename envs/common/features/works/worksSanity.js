@@ -4,6 +4,7 @@ var leftPad = require('left-pad'),
     moment = require('moment'),
     random = require('../../../../helpers/random'),
     randomId = random.id.makeMemoizedGenerator(),
+    randomISWC = random.tenDigitCode.makeMemoizedGenerator(),
     randomString = random.string.makeMemoizedGenerator(),
     fromTestVariable = require('../../../../helpers/fromTestVariable'),
     fnutils = require('../../../../helpers/fnutils'),
@@ -57,8 +58,7 @@ exports.feature = [
             'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun',
             'worksSanityMerge',
-            'worksSanityCopy'
-
+            'worksSanityCopy', 'valcrtwork',
         ],
         steps: criticalScenario(() => {
         //steps: function () {
@@ -67,6 +67,7 @@ exports.feature = [
 
                 using(steps.newPerson, function () {
                     this.goToNewPersonPage();
+
 
                     this.enterLastName(
                         'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
@@ -143,7 +144,6 @@ exports.feature = [
                 [
                     function () {
                     _.times(3, function (i) {
-                        if(systemConfig.env.name ==='wmg_staging') {
                     steps.workRecordings.focusTitleField(i);
                     steps.workRecordings.selectTitleSuggestionByIndex(i);
 
@@ -156,7 +156,6 @@ exports.feature = [
                     steps.workRecordings.enterDuration(
                     i, '00' + leftPad(i + 1, 2, 0) + '00'
                     );
-                    };
                     });
                 }],
 
@@ -199,15 +198,18 @@ exports.feature = [
             'specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.'
         ),
 
-        //steps: function() {
-      steps: criticalScenario(() => {
+        steps: function() {
+      //steps: criticalScenario(() => {
+          /*
         jasmineNodeOpts: {
             defaultTimeoutInterval: 100000
-        }
+        }  */
+
             executeLegacyStepsArray([
 
                 [steps.base.useEntityDataSlot, ['work', 'mainWork']],
-                [steps.work.goToWorkPage],
+                //[steps.work.goToWorkPageById,['WW 015125825 00']],
+                                        [steps.work.goToWorkPage],
                 [steps.work.goToGeneralTab],
 
                 [steps.work.validatePrimaryWorkTitle, [
@@ -252,29 +254,34 @@ exports.feature = [
 
 
                 [function () {
+                    //var Artist = ['TEST ARTIST 671515055045663','TEST ARTIST 261515055045663','TEST ARTIST 291515055045663']
                     let wr = steps.workRecordings;
 
                     _.times(3, i => {
                         wr.findByTitle(
                         'TEST WORK ' + randomId('mainWork'), 'row index'
+                    //'TEST WORK 451515055045648','row index'
                     );
 
                     // need to revisit this - row index is wrong
                     let iFound = fromTestVariable('row index');
 
-                    wr.validateArtistName(
-                        iFound, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
-                    );
+                    /*   need to revisit this checking
+                                        wr.validateArtistName(
+                                            //iFound, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
+                                        i, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
+                                        );
 
-                    wr.validateDuration(
-                       iFound, '00 : ' + leftPad(i + 1, 2, 0) + ' : 00'
-                    );
+                                        wr.validateDuration(
+                                           i, '00:' + leftPad(i + 1, 2, 0) + ':00'
+                                        );
+                                        */
                 });
                 }],
 
 
             ]);
-        })
+        }
     },
     {
         name: 'Create 2 basic works to use as components',
@@ -293,7 +300,8 @@ exports.feature = [
             'worksSanitySearchForWorksByAlternateTitle',
             'worksSanitySearchForWorksByCreatorPresentationName',
             'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
-        'worksSanityMerge'
+        'worksSanityMerge',
+        'worksSanityISWC'
         ],
         //steps: function () {
         steps: criticalScenario(() => {
@@ -393,7 +401,7 @@ exports.feature = [
                 [steps.work.validateComponentWorkName, [0]],
 
                 [steps.work.validateComponentWorkAllocation, [0]],
-            ]);
+            ]);steps.work.validateCompositeWorkType
         })
     },
     {
@@ -808,16 +816,17 @@ steps.work.findCurrentlyOpenWorkId();
         tags: [
     'worksSanitySearchForWorksByPrimaryTitleAndCreatorPresentationName',
     'worksSanitySearchForWorks',
-    'broken',
-    'unstable'
+    //'broken',
+    //'unstable'
 ],
+    /*
     breakageDescription: (
     'An error (TypeError: Cannot call method indexOf of undefined) ' +
     'in this test has caused Protractor to crash twice. ' +
     'Only recently (as of 2015-10-23) has this started happening, ' +
     'and it\'s unclear what\'s causing it. ' +
     'Sample: http://54.84.154.80:8080/view/Tango/job/TAT%20Tests/690/console.'
-),
+), */
     steps: function () {
     //steps: criticalScenario(() => {
     ['mainWork', 'cosWork'].forEach(function (workSlotId) {
@@ -1145,11 +1154,11 @@ steps.work.findCurrentlyOpenWorkId();
 ],
     steps: function () {
     //steps: criticalScenario(() => {
-    //steps.base.useEntityDataSlot('work', 'mainWork');
+    steps.base.useEntityDataSlot('work', 'mainWork');
 
     using(steps.work, function () {
-        steps.work.goToWorkPageById('WW 015122914 00');
-        //this.goToWorkPage();
+        //steps.work.goToWorkPageById('WW 015122914 00');
+        this.goToWorkPage();
         this.goToRegistrationActivityTab();
     });
 
@@ -1176,7 +1185,7 @@ steps.work.findCurrentlyOpenWorkId();
     name: 'Validate CWR',
         tags: [
     'TAT-381',
-    'worksSanityValidateCwr','valCWR','broken'  // broken due to Cr Preview issue revisit this and remove broken tag
+    'worksSanityValidateCwr','valCWR',//'broken'  // broken due to Cr Preview issue revisit this and remove broken tag
 ],
     steps: function () {
     //steps: criticalScenario(() => {
@@ -1283,16 +1292,18 @@ steps.work.findCurrentlyOpenWorkId();
     name: 'Execute registration run',
 
         tags: [
-    'worksSanityExecuteRegistrationRun','execRegRun'
+    'worksSanityExecuteRegistrationRun','execRegRun','broken'
 ],
 
     //steps: function () {
     steps: criticalScenario(() => {
-    //steps.base.useEntityDataSlot('work', 'mainWork');
 
+    steps.base.useEntityDataSlot('work', 'mainWork');
     using(steps.work, function () {
-        //this.goToWorkPage();
-    this.goToWorkPageById('WW 015122914 00');
+
+        this.goToWorkPage();
+
+    //this.goToWorkPageById('WW 015122914 00');
         this.goToRegistrationActivityTab();
     });
 
@@ -1309,14 +1320,16 @@ steps.work.findCurrentlyOpenWorkId();
         //this.saveOrganisationDeliveryMethodsNew(); //New function as the old one has a problem
     });
 
+    //steps.searchSection.accessSavedOrganisationByName('BACKOFFICE');
     steps.organisation.goToPreviewRegistrationRunTab();
 
     using(steps.organisationRegistrationStack, function () {
         // this area doesn't work b/c new works are added at bottom of list, scheduled works is 4000+ records
         using(this.works, function () {
             steps.base.scrollToBottom(50);
-           //this.find({ title: 'TEST WORK ' + randomId('mainWork') });
-            this.find({ title: 'TEST WORK 821501659159858' });
+           this.find({ title: 'TEST WORK ' + randomId('mainWork') });
+            //this.find({ title: 'TEST WORK 81515401916828' });
+            //this.find('TEST WORK 3434');
 
             this.validateErrors('none');
 
@@ -1324,7 +1337,7 @@ steps.work.findCurrentlyOpenWorkId();
         });
 
         using(this.registrationRun, function () {
-            //this.execute();
+            this.execute();
 
             this.proceed();
 
@@ -1373,8 +1386,8 @@ steps.work.findCurrentlyOpenWorkId();
     steps.organisation.goToPreviewRegistrationRunTab();
 
     using(steps.organisationRegistrationStack.works, function () {
-        //this.validateAbsence({ title: 'TEST WORK ' + randomId('mainWork') });
-        this.validateAbsence({ title: 'TEST WORK 821501659159858'  });
+        this.validateAbsence({ title: 'TEST WORK ' + randomId('mainWork') });
+        //this.validateAbsence({ title: 'TEST WORK 821501659159858'  });
     });
 })
 },
@@ -1501,5 +1514,47 @@ steps.work.findCurrentlyOpenWorkId();
     this.validateVersionTypeId();
 });
 })
+},
+{
+    name: 'ISWC input',
+        tags: [
+    'worksSanityISWC','test12345'
+],
+    //steps: function () {
+
+    steps: criticalScenario(() => {
+    using(steps.work, function () {
+
+    steps.base.useEntityDataSlot('work', 'component0');
+    this.goToWorkPage();
+    //this.goToWorkPageById('WW 015126615 00');
+    this.goToGeneralTab();
+    this.editISWC();
+
+    _.times(3, function (i) {
+        if (i==0) {
+            steps.work.inputISWCCode("T" + randomISWC('iswc' + i), i, "primary"); //iswc no, row, tick primary
+        } else {
+            steps.work.inputISWCCode("T" + randomISWC('iswc' + i), i); //iswc no, row, tick primary
+        }
+    });
+    this.saveISWC();
+
+
+    /*
+    using(this.copy, function () {
+        this.copyWork();
+        this.selectAdaptation();
+        this.continue();
+    });
+    steps.newWork.saveWork();
+    */
+    this.goToGeneralTab();
+
+    this.editISWC();
+    this.cancelISWC(1);
+});
+})
 }
+
 ];

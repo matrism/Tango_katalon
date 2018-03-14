@@ -72,6 +72,22 @@ exports.goToHomePage = function () {
         pages.base.open();
     });
 };
+
+exports.confirmDialogBox = function (boxname,buttonname) {
+    it("Confirmation Box '" + boxname + "' and press button '" + buttonname , function () {
+        var el = $('.modal-header');
+        //el2 = $('');
+        pages.base.waitForAjax();
+        el.getText().then(function(promise){
+            expect(promise).toContain(boxname);
+        });
+        asAlways(
+            element(by.cssContainingText('button', buttonname)),
+            'scrollIntoView', 'click', 'waitForAjax'
+        );
+    });
+};
+
 module.exports.scrollIntoView = function (elName, el) {
     it(
         "Scroll '" + elName + "' into view", function () {

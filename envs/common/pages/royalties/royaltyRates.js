@@ -974,8 +974,12 @@ if (pages.royaltyRates === undefined) {
 
         clickCreateManualStatementButton: function () {
             browser.wait(ExpectedConditions.visibilityOf(this.royaltyStatementsTable()));
-            browser.driver.sleep(3000);
-            this.createManualStatementButton().click();
+            browser.sleep(2000);
+            asAlways(
+                this.createManualStatementButton(),
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
+
         },
 
         typeInIncomeProvider: function (sentKeys) {
@@ -1020,8 +1024,12 @@ if (pages.royaltyRates === undefined) {
 
         createManualStatementClick: function () {
             browser.wait(ExpectedConditions.elementToBeClickable(this.createManualStatementInnerButton()));
-            this.createManualStatementInnerButton().click();
-            pages.base.waitForAjax();
+            asAlways(
+                this.createManualStatementInnerButton(),
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
+
+
         },
 
         clickOnEditBatchArea: function () {

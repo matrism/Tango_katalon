@@ -10,7 +10,8 @@ steps.newWork = exports;
 module.exports.goToNewWorkPage = function() {
 	it (
 		"Go to New Work page", function() {
-			pages.newWork.open().waitForAjax();
+			//pages.newWork.open().waitForAjax();
+            pages.mainHeader.createNewRecord('Work');
 		}
 	);
 };

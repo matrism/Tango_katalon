@@ -13,7 +13,7 @@ var using = require('../../../../helpers/fnutils').using,
 
 exports.id = 'c629be22-73e2-429d-b68c-fe08309a154c';
 
-exports.commonFeatureTags = ['royaltyProcessing'];
+exports.commonFeatureTags = ['royaltyProcessing','aff_test'];
 
 exports.beforeFeature = function () {
     steps.login.itLogin();
@@ -131,13 +131,14 @@ exports.feature = [
 
             describe('Create new  data', function () {
                 //add organisation
+/*
                 steps.mainHeader.createNewRecord("Organisation");
                 steps.newOrganisation.populateName("Org test 1 TAT DENISA");
                 steps.newOrganisation.selectOrgType("Publisher");
                 steps.newOrganisation.selectTerritoryOfOperation("Worldwide");
                 steps.newOrganisation.selectPublisherType("WCM");
                 steps.newOrganisation.saveOrganisation();
-
+*/
                 //create deal
                 steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTabWithSpecificData("bmi", "Canada", "CAM");
                 steps.deal.itContinueToNextPage();

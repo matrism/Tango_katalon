@@ -764,7 +764,7 @@ exports.itAddPublisherShare = function () {
         nccs.click(0);
         nccs.validateHelpMessage(0);
         steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("53026414");
+        steps.createDealScope.fillIntoFirstPublisherNameAMField("5302641");
         steps.createDealScope.selectSpecificPublisherNameDropDown();
         steps.createDealScope.fillIntoFirstPublisherNameAMCollectFieldSpecificValue("10");
         //steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
@@ -788,7 +788,7 @@ exports.itAddPublisherShareWithSocietyAwardCredit = function () {
         steps.base.scrollIntoView("Add publisher shares set link", pages.createDealScope.elems.addPublisherShareSetLink);
         steps.createDealScope.clickOnAddPublisherShareSet();
         steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("53026414");
+        steps.createDealScope.fillIntoFirstPublisherNameAMField("5302641");
         steps.createDealScope.selectSpecificPublisherNameDropDown();
         steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
         steps.base.scrollIntoView("Yes society award credits", pages.createDealScope.elems.yesSocietyAwardCreditPss);
@@ -855,7 +855,7 @@ exports.itCheckVisualDesignPublisherShare = function () {
         steps.createDealScope.validatePublisherNameTooltipEOrPAIcon();
         steps.createDealScope.fillFirstPublisherNameFieldsBasedOnPublisherTypeEOrPA();
         steps.createDealScope.validatePublisherNameTooltipAMIcon();
-        steps.createDealScope.fillIntoFirstPublisherNameAMField("53026414");
+        steps.createDealScope.fillIntoFirstPublisherNameAMField("5302641");
         steps.createDealScope.selectSpecificPublisherNameDropDown();
         steps.createDealScope.fillIntoFirstPublisherNameAMCollectField();
         steps.createDealScope.saveThePublisherShareSet();

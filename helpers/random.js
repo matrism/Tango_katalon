@@ -21,6 +21,15 @@ exports.threeDigitCode = function() {
 	});
 };
 
+exports.tenDigitCode = function() {
+    return randomstring.generate({
+        length: 10,
+        charset: 'numeric'
+    });
+};
+
+exports.tenDigitCode.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.tenDigitCode);
+
 exports.string.threeDigitCodeGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.threeDigitCode);
 
 exports.string.makeMemoizedGenerator = memoizeNonNullaryCalls.makeFactoryFor(exports.string);

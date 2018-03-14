@@ -56,7 +56,7 @@ exports.checkTheErrorMessageScopeDeliveryConflict = function () {
 };
 
 exports.dealSearchForAllContributionsInput = function () {
-    return $('[ng-if="tgModularEditModel.creatorLinks.$count() > 1"]:nth-child(1)').element(
+    return $('[ng-if="tgModularEditModel.creatorLinks.$count() > 1"]').element(
         by.model('$term')
     );
 };

@@ -86,7 +86,7 @@ exports.feature = [
                 this.selectDefaultCurrency('BRL');
 
                 this.deleteIncomeFileType('ASCAP DOMESTIC');
-                this.enterIncomeFileTypeSearchTerms('ABRAMUS');
+                this.enterIncomeFileTypeSearchTerms('ASCAP FOREIGN'); //ABRAMUS NTO FOUND IN Staging env
                 this.selectIncomeFileTypeSearchResultByIndex(0);
             });
 
@@ -94,12 +94,13 @@ exports.feature = [
                 steps.organisation.incomeProvider.incomeTypeMapping,
                 function () {
                     this.deleteRow(0);
+                    steps.base.confirmDialogBox('DELETE INCOME TYPE MAPPING','Confirm');
 
                     this.enterInboundIncomeType(1, 'T3');
 
                     this.enterInboundIncomeTypeDescription(1, 'D3');
 
-                    this.enterIncomeFileTypeSearchTerms(1, 'ABRAMUS');
+                    this.enterIncomeFileTypeSearchTerms(1, 'ASCAP FOREIGN');
                     this.selectIncomeFileTypeSearchResultByIndex(0);
 
                     this.enterTangoIncomeTypeSearchTerms(1, 'Synchronisation');

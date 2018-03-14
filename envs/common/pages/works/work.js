@@ -218,6 +218,29 @@ module.exports.editCreatorsContainer = function () {
 module.exports.editCreatorsButton = function () {
     return $('div[tg-modular-edit-id="workContributors"] button[data-ng-click="tgModularViewMethods.switchToEditView()"]');
 };
+exports.editISWCButton = function () {
+    return $('div[tg-work-header-id="WorkViewHeader"] button[ng-click="$onIswcReferencesEditFn()"]');
+};
+exports.editISWCfield = function (row) {
+    return $$('div[tg-modular-edit-id="iswcReferences"] input[ng-model="iswc.iswc"]').get(row);
+};
+exports.editISWCPrimary = function (row) {
+    return $$('div[tg-modular-edit-id="iswcReferences"] input[ng-model="iswc.isPrimary"]').get(row);
+};
+exports.saveISWCButton = function () {
+    return $('div[tg-modular-edit-id="iswcReferences"] button[data-ng-click="tgModularViewMethods.save()"]');
+};
+exports.cancelISWCButton = function () {
+    return $('div[tg-modular-edit-id="iswcReferences"] button[data-ng-click="tgModularViewMethods.cancel()"]');
+};
+exports.editISWCValue = function (row) {
+    return pages.work.editISWCfield(row).getAttribute("value");
+};
+exports.confirmISWCcancel = function () {
+    return element(by.css('.modal'));
+};
+
+
 exports.compositeWorkCheckbox = function() {
     return element(by.model('tgModularEditModel.isCompositeWork'));
 };
@@ -676,7 +699,7 @@ module.exports.calculateEvenCreatorContributions = function () {
 exports.selectedCompositeWorkType = function () {
     var element = exports.compositeWorkTypeDropdown();
     pages.base.scrollIntoView(element);
-    return pages.base.selectedDropdownOption(element);
+    return pages.base.selectedDropdownOptionComp(element);
 };
 module.exports.enteredCreatorContribution = function (i) {
     var element = pages.work.editCreatorContributionInput(i);
@@ -1354,7 +1377,13 @@ exports.clickOnTheConflictingWorksButtonFilterForWorkLog = function(){
 
 exports.goToGeneralTab = function () {
     var element = exports.generalTab();
+    var element2 = $$(".nav-tabs>li[class='ng-scope']:nth-child(1)");
     pages.base.scrollIntoView(element);
+    element2.isDisplayed().then(function(result) {
+        if (result){
+            browser.sleep(6000);
+        }
+    });
     return element.click().then(function () {
         pages.base.waitForAjax();
     });
