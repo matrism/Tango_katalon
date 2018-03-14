@@ -59,7 +59,12 @@ exports.createNewRecord = function (type) {
     pages.base.scrollIntoView(button);
 
     return button.click().then(function (){
+
+        browser.sleep(2000);
+        browser.actions().mouseMove(element(by.css('.dropdown-menu > li > a'))).perform();
+
         if (type) {
+            /*
             button.dropdownOptions().filter(function(elem){
                 return elem.getText().then(function(text){
                     return text === type;
@@ -67,6 +72,18 @@ exports.createNewRecord = function (type) {
             }).first().click().then(function(){
                 pages.base.waitForAjax();
             });
+            */
+
+            asAlways(
+                button.dropdownOptions().filter(function(elem){
+                    return elem.getText().then(function(text){
+                        return text === type;
+                    });
+                }).first(),
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
+
+
         }
     });
 };

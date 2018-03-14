@@ -243,9 +243,11 @@ exports.cancelISWC = function (value) {
         pages.base.scrollIntoView(el);
         el.click();
         pages.base.waitForAjax();
-        browser.wait(ExpectedConditions.visibilityOf(pages.work.confirmISWCcancel()));
-        pages.work.confirmISWCcancel().element(by.cssContainingText('button', value)).click();
-        browser.wait(ExpectedConditions.invisibilityOf(pages.work.confirmISWCcancel()));
+        if (value != 1) {
+            browser.wait(ExpectedConditions.visibilityOf(pages.work.confirmISWCcancel()));
+            pages.work.confirmISWCcancel().element(by.cssContainingText('button', value)).click();
+            browser.wait(ExpectedConditions.invisibilityOf(pages.work.confirmISWCcancel()));
+        };
         browser.wait(ExpectedConditions.invisibilityOf(element(By.css('[tg-modular-edit-model-key="iswcReferences"]'))));
 
 

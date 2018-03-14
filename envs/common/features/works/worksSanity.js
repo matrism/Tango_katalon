@@ -58,7 +58,7 @@ exports.feature = [
             'worksSanityValidateCwr',
             'worksSanityExecuteRegistrationRun',
             'worksSanityMerge',
-            'worksSanityCopy',
+            'worksSanityCopy', 'valcrtwork',
         ],
         steps: criticalScenario(() => {
         //steps: function () {
@@ -67,6 +67,7 @@ exports.feature = [
 
                 using(steps.newPerson, function () {
                     this.goToNewPersonPage();
+
 
                     this.enterLastName(
                         'TEST PERSON ' + (i + 1) + ' ' + randomId('person' + i)
@@ -197,12 +198,13 @@ exports.feature = [
             'specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.'
         ),
 
-        //steps: function() {
-      steps: criticalScenario(() => {
+        steps: function() {
+      //steps: criticalScenario(() => {
           /*
         jasmineNodeOpts: {
             defaultTimeoutInterval: 100000
         }  */
+
             executeLegacyStepsArray([
 
                 [steps.base.useEntityDataSlot, ['work', 'mainWork']],
@@ -279,7 +281,7 @@ exports.feature = [
 
 
             ]);
-        })
+        }
     },
     {
         name: 'Create 2 basic works to use as components',
@@ -1516,7 +1518,7 @@ steps.work.findCurrentlyOpenWorkId();
 {
     name: 'ISWC input',
         tags: [
-    'worksSanityISWC'
+    'worksSanityISWC','test12345'
 ],
     //steps: function () {
 
@@ -1525,7 +1527,7 @@ steps.work.findCurrentlyOpenWorkId();
 
     steps.base.useEntityDataSlot('work', 'component0');
     this.goToWorkPage();
-    //this.goToWorkPageById('WW 015122915 00');
+    //this.goToWorkPageById('WW 015126615 00');
     this.goToGeneralTab();
     this.editISWC();
 
@@ -1550,7 +1552,7 @@ steps.work.findCurrentlyOpenWorkId();
     this.goToGeneralTab();
 
     this.editISWC();
-    this.cancelISWC();
+    this.cancelISWC(1);
 });
 })
 }
