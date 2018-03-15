@@ -295,7 +295,12 @@ if (pages.editDealScope === undefined) {
             },
 
             clickOnShareIconOnScope: function () {
-                pages.editDealScope.elems.shareIconOnScope.click();
+               asAlways(
+                   pages.editDealScope.elems.shareIconOnScope,
+                    'scrollIntoView', 'click', 'waitForAjax'
+                );
+
+                //pages.editDealScope.elems.shareIconOnScope.click();
                 browser.wait(ExpectedConditions.visibilityOf(pages.editDealScope.elems.shareScopesDetailsPopup));
             },
 

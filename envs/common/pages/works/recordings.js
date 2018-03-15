@@ -259,8 +259,8 @@ exports.validateArtistName = (i, val) => expect(
 
 // ---
 
-exports.libraryNameBinding = i => exports.rowsRec().get(i).$(
-    'div[ng-bind="WorkRecordingsCtrl.getLibraryName(WorkRecordingsCtrl.getLibraryCode())"]'
+exports.libraryNameBinding = i => exports.rows().get(i).$(
+    'span[ng-bind="::WorkRecordingsCtrl.getLibraryName(recordingLink.recording.libraryCode)"]'
 );
 
 exports.libraryNameBindingRec = i => exports.rowsRec().get(i).$(

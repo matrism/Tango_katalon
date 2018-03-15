@@ -961,8 +961,9 @@ steps.work.findCurrentlyOpenWorkId();
     steps.base.useEntityDataSlot('work', 'mainWork');
 
     steps.work.goToWorkPage();
-    //steps.work.goToWorkPageById('WW 015121061 00');
+    //steps.work.goToWorkPageById('WW 016000137 00');
 
+    steps.work.goToGeneralTab();
     steps.work.goToScopeDeliveryTab();
 
     steps.scopeDelivery.deliverWork();
@@ -1152,8 +1153,8 @@ steps.work.findCurrentlyOpenWorkId();
 
     'worksSanityValidateRegistrationActivity',
 ],
-    steps: function () {
-    //steps: criticalScenario(() => {
+    //steps: function () {
+    steps: criticalScenario(() => {
     steps.base.useEntityDataSlot('work', 'mainWork');
 
     using(steps.work, function () {
@@ -1166,7 +1167,11 @@ steps.work.findCurrentlyOpenWorkId();
         this.find('first');
 
         //this.validateRecipientName('ABRAMUS');
-        this.validateRecipientName('Backoffice');
+        if(systemConfig.env.name ==='staging') {
+            this.validateRecipientName('Backoffice');
+        } else {
+            this.validateRecipientName('Backoffice');
+        }
 
         this.toggleBlind();
 
@@ -1178,7 +1183,7 @@ steps.work.findCurrentlyOpenWorkId();
             this.validateStatus('Scheduled');
         });
     });
-},
+}),
 },
 
 {
@@ -1187,8 +1192,8 @@ steps.work.findCurrentlyOpenWorkId();
     'TAT-381',
     'worksSanityValidateCwr','valCWR',//'broken'  // broken due to Cr Preview issue revisit this and remove broken tag
 ],
-    steps: function () {
-    //steps: criticalScenario(() => {
+    //steps: function () {
+    steps: criticalScenario(() => {
     steps.base.useEntityDataSlot('work', 'mainWork');
 
     steps.work.goToWorkPage();
@@ -1285,7 +1290,7 @@ steps.work.findCurrentlyOpenWorkId();
         15, 'TEST WORK ALTERNATE TITLE ' + randomId('mainWork')
     );
 
-}
+})
 },
 
 {
@@ -1518,7 +1523,7 @@ steps.work.findCurrentlyOpenWorkId();
 {
     name: 'ISWC input',
         tags: [
-    'worksSanityISWC','test12345'
+    'worksSanityISWC'
 ],
     //steps: function () {
 

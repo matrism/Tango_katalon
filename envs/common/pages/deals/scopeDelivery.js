@@ -27,8 +27,13 @@ exports.scopeDeliveryTabElement = function () {
 
 exports.deliverWork = function () {
     pages.base.waitForAjax();
-    browser.wait(ExpectedConditions.visibilityOf(exports.deliverWorkButton()));
-    pages.base.scrollIntoView(exports.deliverWorkButton());
+    browser.executeScript("window.scrollTo(0, document.body.scrollHeight)").then(function () {
+        browser.actions().mouseMove(element(by.css('[ng-click="updateScopeDelivery(tgModularViewMethods)"]'))).perform();
+        pages.base.scrollIntoView(exports.deliverWorkButton());
+    });
+
+    //browser.wait(ExpectedConditions.visibilityOf(exports.deliverWorkButton()));
+
     return exports.deliverWorkButton().click();
 };
 

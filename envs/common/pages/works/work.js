@@ -1381,7 +1381,7 @@ exports.goToGeneralTab = function () {
     pages.base.scrollIntoView(element);
     element2.isDisplayed().then(function(result) {
         if (result){
-            browser.sleep(6000);
+            browser.sleep(8000);
         }
     });
     return element.click().then(function () {

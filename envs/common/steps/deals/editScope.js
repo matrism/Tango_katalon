@@ -99,6 +99,7 @@ exports.checkScopeNumberINameAndNotRates = function (i) {
 
 exports.validateShareScopesPopupDetailsContractPeriod1 = function () {
     it("Validate share scopes pop up details contract period 1 ", function () {
+        pages.base.waitForAjax();
         pages.editDealScope.clickOnShareIconOnScope();
         pages.editDealScope.elems.shareScopesDetailsPopup.getText().then(function (promise) {
             console.log("Shares scopes details popup contract periods: " + promise);
