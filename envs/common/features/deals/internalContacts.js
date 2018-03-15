@@ -38,7 +38,7 @@ exports.feature = [
              }
              steps.editDealGeneral.printInternalContactList();
              steps.editDealGeneral.editInternalContactsArea();
-             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("Brown,Annie");
+             steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("A");
              for (var i = 2; i <= 4; i++) {
                  //steps.editDealGeneral.itEditAddInternalContactsRowIToDealGeneralTab(i);
                  steps.editDealGeneral.itEditAndRemoveInternalContactsRowIToDealGeneralTab(i);
@@ -62,7 +62,7 @@ exports.feature = [
             //create a deal with 1 internal contact
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
-            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shahrul");
+            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("s");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
@@ -114,7 +114,7 @@ exports.feature = [
 
             steps.createDealGeneral.itFillDealMandatoryFieldsGeneralTab();
             steps.base.scrollIntoView("Internal contacts", pages.createDealGeneral.elems.internalContactsInputField);
-            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("shahrul");
+            steps.createDealGeneral.itAddInternalContactsToDealGeneralTab("s");
             steps.deal.itContinueToNextPage();
             steps.createDealContractPeriod.itFillDealMandatoryFieldsContractPeriod();
             steps.deal.itContinueToNextPage();
@@ -138,7 +138,7 @@ exports.feature = [
             steps.base.scrollIntoView("Term header link", pages.deal.elems.termsHeader);
             steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.cancelTheModalDialog();
-            steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("shahrul");
+            steps.editDealGeneral.itEditInternalContactsToDealGeneralTab("s");
             steps.base.scrollIntoView("Top of page ", pages.deal.elems.generalHeader);
             steps.deal.goToTermsDealTabDetailsDirtyCheck();
             steps.editDealGeneral.confirmTheCancelModalDialog();

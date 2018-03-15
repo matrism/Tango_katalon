@@ -185,7 +185,7 @@ if (pages.createDealGeneral === undefined) {
 
         fillIntoTheIRowInternalContactField: function (i) {
             var element = browser.findElement(By.css("div[ng-repeat='contact in tgModularEditModel.$getItems()']:nth-child(" + i + ") div[ng-model='contact.user'] div[ng-class='tgTypeaheadWrapClass'] input[ng-model='$term']"));
-            element.sendKeys("shilpa");
+            element.sendKeys("s");
         },
 
 

@@ -12,7 +12,7 @@ exports.commonFeatureTags = ['deals', 'sanity', 'dealsSanity'];
 exports.feature = [
     {
         name: "Deals sanity test flow create mode",
-        tags: [],
+        tags: ['test98273'],
         steps: criticalScenario(() =>
         {
             //fill all general screen fields
