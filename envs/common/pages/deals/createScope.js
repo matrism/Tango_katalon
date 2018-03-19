@@ -838,15 +838,23 @@ if (pages.createDealScope === undefined) {
             pages.createDealScope.elems.shareScopeLink.click();
             browser.wait(ExpectedConditions.visibilityOf(pages.createDealScope.elems.shareScopeModalDialog));
             browser.wait(ExpectedConditions.elementToBeClickable(pages.createDealScope.elems.selectAllLinkShareScopeModalDialog));
+            browser.sleep(1000);
         },
 
         selectAllContractPeriodsShareScopeModalDialog: function () {
-            pages.createDealScope.elems.selectAllLinkShareScopeModalDialog.click();
+            asAlways(
+                pages.createDealScope.elems.selectAllLinkShareScopeModalDialog,
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
+
         },
 
         expandTheMasterRights: function () {
             pages.base.scrollIntoView(pages.createDealScope.elems.expandMasterRightsElement);
-            pages.createDealScope.elems.expandMasterRightsElement.click();
+            asAlways(
+                pages.createDealScope.elems.expandMasterRightsElement,
+                'scrollIntoView', 'click', 'waitForAjax'
+            );
         },
 
         collapseTheMasterRights: function () {
