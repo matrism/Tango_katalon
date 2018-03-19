@@ -122,7 +122,12 @@ if (pages.createDealAdvances === undefined) {
                 .then(function (options) {
                     var randomNumber = Math.floor((Math.random() * 4) + 1);
                     var element = options[randomNumber];
-                    element.click();
+                    //element.click();
+                    asAlways(
+                        element,
+                        'scrollIntoView', 'click', 'waitForAjax'
+                    );
+
                 })
         },
 
