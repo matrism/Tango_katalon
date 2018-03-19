@@ -48,6 +48,7 @@ exports.feature = [
             steps.base.scrollIntoView("Save the publisher share set", pages.createDealScope.elems.savePublisherShareSet);
             steps.createDealScope.saveSharePublisherShareSet();
             //add rate set to Scope
+            steps.base.sleep(1000);
             steps.royaltyRates.addNewRoyaltySet();
             steps.royaltyRates.addEffectiveStartDate("2015-06-07");
             steps.royaltyRates.addIncomeProviderByPartialMatch("synch");
@@ -58,6 +59,7 @@ exports.feature = [
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
             //select contract period 3
+            steps.base.sleep(1000);
             steps.base.scrollIntoView("Contract period list", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(3)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(3);
             steps.createDealScope.addSpecificScopeTypeAndTerritory("Joint Venture", "Worldwide");
@@ -70,6 +72,7 @@ exports.feature = [
             steps.base.scrollIntoView("Done rate set button", element(by.css(".rate-sets-top-toolbar>button")));
             steps.royaltyRates.saveRateSet();
 
+            steps.base.sleep(1000);
             steps.base.scrollIntoView("contract period 1", element(By.css("ul.deal-list li[ng-click='setActiveContractPeriod(cp.id)']:nth-child(1)")));
             steps.createDealContractPeriod.selectContractPeriodNumberI(1);
             steps.base.scrollIntoView("Add end rules", pages.createDealContractPeriod.elems.addEndRulesLink);
