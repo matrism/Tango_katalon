@@ -257,6 +257,20 @@ exports.fillContactAddressLines = function (lines) {
     expect(pph.classList(lineInput(1))).not.toContain('ng-invalid-required');
 };
 
+exports.updateContactAddressLines = function (lines) {
+    var lineInput = exports.addressLineInput;
+
+    lineInput(2).clear();
+    lineInput(2).sendKeys(lines[1]);
+    expect(pph.classList(lineInput(1))).toContain('ng-valid-required');
+    lineInput(3).clear();
+    lineInput(3).sendKeys(lines[2]);
+    lineInput(1).clear();
+    lineInput(1).sendKeys(lines[0]);
+
+    expect(pph.classList(lineInput(1))).not.toContain('ng-invalid-required');
+};
+
 function sendKeysToElement(elem) {
     return function (val) {
         elem.clear();

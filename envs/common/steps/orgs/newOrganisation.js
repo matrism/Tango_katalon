@@ -12,6 +12,7 @@ pageStep([
     'Select publisher type',
     'Search for society',
     'Fill contact address lines',
+    'Update contact address lines',
     'Fill contact city',
     'Fill contact state',
     'Fill contact zip code',
