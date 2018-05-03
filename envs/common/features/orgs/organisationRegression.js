@@ -262,7 +262,7 @@ exports.feature = [{
 
                     describe('Edit Contact Information', function () {
                         orgPage.editSectionPart('Contact Information', 0);
-                        newOrg.fillContactAddressLines(org.contact.addressLines);
+                        newOrg.updateContactAddressLines(org.contact.addressLines);
                         newOrg.fillContactCity(org.contact.city + viewEditName);
                         newOrg.fillContactState(org.contact.state + viewEditName);
                         newOrg.fillContactZipCode(org.contact.zipCode + viewEditName);
@@ -448,7 +448,7 @@ exports.feature = [{
                             orgPage.expectValue('Contact Information', 'City').toEqual(org.contact.city + viewEditName);
                             orgPage.expectValue('Contact Information', 'State/Province/Region').toEqual(org.contact.state + viewEditName);
                             orgPage.expectValue('Contact Information', 'ZIP/Postal Code').toEqual(org.contact.zipCode + viewEditName);
-                            orgPage.expectValue('Contact Information', 'Country').toEqual(org.contact.country);
+                            orgPage.expectValue('Contact Information', 'Country').toEqual('Albania');
                             orgPage.expectValue('Contact Information', 'Telephone').toEqual('1234567890');
                             orgPage.expectValue('Contact Information', 'Fax').toEqual('0987654321');
                             orgPage.expectValue('Contact Information', 'Email').toEqual('edited' + org.contact.email);
