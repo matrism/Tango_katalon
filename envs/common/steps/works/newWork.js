@@ -3,7 +3,8 @@
 var _ = require('lodash'),
     random = require('../../../../helpers/random'),
     pph = require('../../../../helpers/pph'),
-    promise = protractor.promise;
+    promise = protractor.promise,
+    ExpectedConditions = protractor.ExpectedConditions;
 
 steps.newWork = exports;
 
@@ -923,12 +924,18 @@ exports.continueIfSimilarWorksPrompted = function() {
 };
 
 exports.save = function() {
-   // it('Saving work', function() {
-    steps.base.sleep(7000);
-     steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
-    steps.base.sleep(3000);
-     pages.base.waitForAjax();
-   // });
+   it('Saving work', function() {
+     //steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
+    //steps.base.sleep(10000);
+       asAlways(
+           pages.newWork.saveWorkButton(),
+           'scrollIntoView', 'click', 'waitForAjax'
+       );
+       //steps.base.sleep(5000);
+       browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
+       //browser.sleep(5000);
+
+    });
 };
 
 exports.saveWork = exports.save;

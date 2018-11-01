@@ -44,7 +44,8 @@ exports.feature = [
             'newAlbumSmokeTestCreateWork',
             'newAlbumSmokeCreateCommercialAlbum',
         ],
-        steps: function() {
+        //steps: function() {
+        steps: criticalScenario(() => {
             steps.base.useBlankEntityDataSlot('work', 'mainWork');
 
             using(steps.newWork, function() {
@@ -63,7 +64,7 @@ exports.feature = [
             });
 
             steps.work.findCurrentlyOpenWorkId();
-        }
+        })
     },
     {
         name: 'Create commercial album',
