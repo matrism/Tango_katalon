@@ -7,20 +7,33 @@
    <selectorCollection>
       <entry>
          <key>CSS</key>
-         <value></value>
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>div.control-group.relative.e2e-contact-email-address.ng-scope.error > div > div > div > div:nth-child(2) > div > ul > li:nth-child(${index})</value>
+         <value>//span[(text() = '${Type}' or . = '${Type}')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>css</name>
       <type>Main</type>
       <value>div.control-group.relative.e2e-contact-email-address.ng-scope.error > div > div > div > div:nth-child(2) > div > ul > li:nth-child(${index})</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>${Type}</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>span</value>
    </webElementProperties>
 </WebElementEntity>

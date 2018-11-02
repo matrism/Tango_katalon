@@ -23,21 +23,21 @@ import com.kms.katalon.core.webui.common.WebUiCommonHelper as WebUiCommonHelper
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 public class CommonUtil {
-	
+
 	@Keyword
-	def CheckDropDownList(String cssElement, Number actualRows, List Phone_type){
+	def CheckDropDownList(String cssElement, Number actualRows, List type){
 		WebDriver driver = DriverFactory.getWebDriver()
-		
+
 		List eleCount = driver.findElements(By.cssSelector(cssElement))
-		
+
 		int rowsInTable = eleCount.size()
-		
+
 		WebUI.verifyEqual(rowsInTable, actualRows)
-		
+
 		for (int n = 1; n <= rowsInTable; n = (n + 1)) {
-			WebUI.verifyElementText(findTestObject('Create Person/Dropdown_Phone_list', [('index') : n]), Phone_type[(n - 1)])
-		
-			WebUI.comment('Verifying Phone Type Dropdown List: ' + (Phone_type[(n - 1)]))
+			WebUI.verifyElementPresent(findTestObject('Create Person/Dropdown_Phone_list', [('Type') : type[(n - 1)]]),0)
+
+			WebUI.comment('Verifying Phone Type Dropdown List: ' + (type[(n - 1)]))
 		}
 	}
 }
