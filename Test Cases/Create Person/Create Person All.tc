@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Create Person All</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>6d312dbd-2671-4fcc-b346-18d5b1541013</testCaseGuid>
+   <variable>
+      <defaultValue>['Cell', 'Fax', 'Home', 'Office']</defaultValue>
+      <description></description>
+      <id>9a605160-ff10-4910-8094-ea4fd48d40ac</id>
+      <masked>false</masked>
+      <name>Phone_type</name>
+   </variable>
+   <variable>
+      <defaultValue>['Accountant', 'Agent', 'Business', 'Lawyer', 'Manager', 'Personal', 'Work']</defaultValue>
+      <description></description>
+      <id>25d68378-ff52-4dc1-9165-628be6fe35a6</id>
+      <masked>false</masked>
+      <name>Email_type</name>
+   </variable>
+   <variable>
+      <defaultValue>'ASCAP'</defaultValue>
+      <description></description>
+      <id>2b0bbc6a-7a78-46a8-9422-8c437c68c703</id>
+      <masked>false</masked>
+      <name>Affiliate_Society</name>
+   </variable>
+</TestCaseEntity>

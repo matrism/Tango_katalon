@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Date of Birth_span1 ng-u</name>
+   <tag></tag>
+   <elementGuidId>ffb26f3c-6241-49d7-af80-ebb307ab04b9</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@type='text'])[7]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//input[@type = 'text' and @placeholder = 'YYYY' and @class != 'disabled']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>data-ng-model</name>
+      <type>Main</type>
+      <value>date.year</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>data-ng-change</name>
+      <type>Main</type>
+      <value>changeDatePart()</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>placeholder</name>
+      <type>Main</type>
+      <value>YYYY</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>maxlength</name>
+      <type>Main</type>
+      <value>4</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>data-ng-disabled</name>
+      <type>Main</type>
+      <value>isDisabled()</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>data-ng-class</name>
+      <type>Main</type>
+      <value>{ 'ng-invalid': invalid.year }</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;person-create form-horizontal FORM ng-scope ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-required ng-invalid ng-invalid-year-length&quot;]/div[@class=&quot;ng-scope&quot;]/form[@class=&quot;form-horizontal ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-required ng-invalid ng-invalid-year-length&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[2]/div[@class=&quot;row ng-scope&quot;]/div[@class=&quot;span6 e2e-primary-name&quot;]/div[@class=&quot;person__primary-name_block EDITOR clearfix modular-edit ng-scope create ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-dirty ng-valid-parse ng-valid-required ng-invalid ng-invalid-year-length&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;control-group e2e-primary-name-birth ng-scope error&quot;]/div[@class=&quot;controls&quot;]/div[@class=&quot;span4 controls execution ng-scope ng-valid-year-integer ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-invalid ng-invalid-year-length&quot;]/input[@class=&quot;span1 ng-untouched ng-valid ng-valid-maxlength ng-animate ng-pristine-remove ng-dirty-add ng-valid-parse-add ng-invalid-add ng-dirty ng-valid-parse ng-invalid ng-pristine-remove-active ng-dirty-add-active ng-valid-parse-add-active ng-invalid-add-active&quot;]</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>not equal</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>disabled</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>(//input[@type='text'])[7]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/div/div[2]/form/div/div/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/div/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Date of Birth:'])[1]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Leave blank if unknown'])[1]/following::input[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='-'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='-'])[2]/preceding::input[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div[2]/div/div/div/input</value>
+   </webElementXpaths>
+</WebElementEntity>

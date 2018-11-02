@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Territory0fAffiliation_worldwide</name>
+   <tag></tag>
+   <elementGuidId>09a0ef78-473c-4c3b-a057-c33f9792166d</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>[name='territoriesOfAffiliation'] [class='tg-typeahead__tag-manager ng-scope']</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='SUB-VIEWS']/div[2]/div/div[2]/form/div/div[2]/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[2]/div/div/div/div/div/div/div/div/div/div</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>CSS</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>tg-typeahead__tags-text ng-binding ng-scope</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-switch-when</name>
+      <type>Main</type>
+      <value>true</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Worldwide</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;person-create form-horizontal FORM ng-scope ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-year-length ng-valid-month-range ng-valid ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/form[@class=&quot;form-horizontal ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-year-length ng-valid-month-range ng-valid ng-valid-required&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[2]/div[@class=&quot;row ng-scope&quot;]/div[@class=&quot;span6 e2e-society-affiliation&quot;]/div[@class=&quot;person__society-affiliation_block&quot;]/div[@class=&quot;EDITOR clearfix modular-edit ng-scope create ng-valid-tags-required ng-dirty ng-valid-parse ng-valid ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;control-group e2e-society-affiliation-territory ng-scope&quot;]/div[@class=&quot;controls&quot;]/div[@class=&quot;pull-left ng-pristine ng-untouched ng-valid ng-isolate-scope ng-valid-required&quot;]/div[@class=&quot;tg-territory&quot;]/div[@class=&quot;tg-territory__input-container&quot;]/div[@class=&quot;tg-territory__input ng-pristine ng-untouched ng-valid ng-isolate-scope ng-valid-required ng-valid-tags-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;tg-typeahead ng-scope&quot;]/div[1]/div[@class=&quot;tg-typeahead__tag-manager ng-scope&quot;]/div[@class=&quot;tg-typeahead__tags-text ng-binding ng-scope&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/div/div[2]/form/div/div[2]/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[2]/div/div/div/div/div/div/div/div/div/div</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Territory of Affiliation:'])[1]/following::div[10]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Remove All'])[2]/following::div[14]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Remove All'])[3]/preceding::div[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Types of Rights:'])[1]/preceding::div[6]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div/div/div[2]/div[2]/div/div/div/div/div/div/div/div/div/div</value>
+   </webElementXpaths>
+</WebElementEntity>

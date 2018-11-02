@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_Yes</name>
+   <tag></tag>
+   <elementGuidId>48cb0b68-2033-4b78-9ac1-cf194ca616ba</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//button[@type='button'])[11]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//button[@type = 'button' and (text() = 'Yes' or . = 'Yes')]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>button</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>button</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>btn</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tg-btn-radio</name>
+      <type>Main</type>
+      <value>true</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Yes</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;person-create form-horizontal FORM ng-scope ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-year-length ng-valid-month-range ng-valid ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/form[@class=&quot;form-horizontal ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-year-length ng-valid-month-range ng-valid ng-valid-required&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[2]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;row e2e-payee&quot;]/div[@class=&quot;span12&quot;]/div[@class=&quot;EDITOR clearfix modular-edit ng-pristine ng-valid ng-scope create&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;control-group e2e-payee-is&quot;]/div[@class=&quot;controls span6&quot;]/div[@class=&quot;btn-group ng-pristine ng-untouched ng-valid ng-scope&quot;]/button[@class=&quot;btn&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>(//button[@type='button'])[11]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/div/div[2]/form/div/div[4]/div[2]/div/div/div/div/div[2]/div/div/div/div/div/button</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Payee:'])[1]/following::button[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Payment/Statement Info'])[2]/following::button[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='No'])[2]/preceding::button[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Statement Recipient:'])[1]/preceding::button[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div[4]/div[2]/div/div/div/div/div[2]/div/div/div/div/div/button</value>
+   </webElementXpaths>
+</WebElementEntity>

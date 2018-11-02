@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Remove All_tg-typeahead__70</name>
+   <tag></tag>
+   <elementGuidId>751d9ff2-973e-462d-b0ff-c759e8db2a06</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@type='text'])[3]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>tg-typeahead__input ng-untouched ng-valid ng-dirty ng-valid-parse</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-attr-placeholder</name>
+      <type>Main</type>
+      <value>{{$getPlaceholder()}}</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-model</name>
+      <type>Main</type>
+      <value>$term</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-disabled</name>
+      <type>Main</type>
+      <value>$isDisabled()</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>placeholder</name>
+      <type>Main</type>
+      <value>Add a New Payee to Deal</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/ui-view[@class=&quot;ng-scope&quot;]/tg-sticky-headers[@class=&quot;ng-scope ng-isolate-scope&quot;]/div[@class=&quot;create-deal-wizard ng-scope&quot;]/form[@class=&quot;form-horizontal ng-dirty ng-submitted ng-valid ng-valid-parse ng-valid-tags-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;deal-payee deal-payee-tab ng-scope&quot;]/div[@class=&quot;clearfix ng-scope&quot;]/div[@class=&quot;new-payee__typeahead ng-scope ng-isolate-scope&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;tg-typeahead ng-scope&quot;]/div[1]/div[@class=&quot;tg-typeahead__input-container ng-scope&quot;]/div[@class=&quot;tg-typeahead__input-wrap&quot;]/input[@class=&quot;tg-typeahead__input ng-untouched ng-valid ng-dirty ng-valid-parse&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>(//input[@type='text'])[3]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/ui-view/tg-sticky-headers/div[2]/form/div/div/div/div/div/div/div/div/div[2]/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Remove All'])[3]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='On Hold'])[1]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='view all 0 results'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//form/div/div/div/div/div/div/div/div/div[2]/input</value>
+   </webElementXpaths>
+</WebElementEntity>

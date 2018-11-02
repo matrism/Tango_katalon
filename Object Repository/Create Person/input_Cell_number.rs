@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Cell_number</name>
+   <tag></tag>
+   <elementGuidId>eeefa698-d648-43b6-bfdf-d311b157bf97</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@name='number'])[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>name</name>
+      <type>Main</type>
+      <value>number</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>input-xlarge ng-pristine ng-untouched ng-invalid ng-invalid-required ng-animate ng-pristine-remove ng-invalid-remove ng-invalid-required-remove ng-dirty-add ng-valid-parse-add ng-valid-add ng-valid-required-add</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-model</name>
+      <type>Main</type>
+      <value>tgModularEditModel.number</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;person-create form-horizontal FORM ng-scope ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-year-length ng-valid-month-range ng-invalid ng-invalid-required ng-animate ng-invalid-remove ng-invalid-required-remove ng-valid-add ng-valid-required-add&quot;]/div[@class=&quot;ng-scope&quot;]/form[@class=&quot;form-horizontal ng-valid-maxlength ng-valid-year-integer ng-valid-month-integer ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid-year-length ng-valid-month-range ng-invalid ng-invalid-required ng-animate ng-invalid-remove ng-invalid-required-remove ng-valid-add ng-valid-required-add&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[2]/div[@class=&quot;row e2e-contact-information ng-scope&quot;]/div[@class=&quot;span6&quot;]/div[@class=&quot;person__contact-phone_block e2e-contact-phone ng-scope&quot;]/div[@class=&quot;EDITOR clearfix modular-edit ng-pristine ng-scope create ng-invalid ng-invalid-required ng-animate ng-pristine-remove ng-invalid-remove ng-invalid-required-remove ng-dirty-add ng-valid-parse-add ng-valid-add ng-valid-required-add&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;control-group relative e2e-contact-phone-number ng-scope&quot;]/input[@class=&quot;input-xlarge ng-pristine ng-untouched ng-invalid ng-invalid-required ng-animate ng-pristine-remove ng-invalid-remove ng-invalid-required-remove ng-dirty-add ng-valid-parse-add ng-valid-add ng-valid-required-add&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>(//input[@name='number'])[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/div/div[2]/form/div/div[3]/div[2]/div/div[2]/div[2]/div/div[2]/div/div/div[2]/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Cell'])[3]/following::input[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Primary Phone'])[1]/following::input[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Add Phone'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='No Email'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div[2]/div/div[2]/div/div/div[2]/input</value>
+   </webElementXpaths>
+</WebElementEntity>

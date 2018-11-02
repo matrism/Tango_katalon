@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Credits Name_creditsName</name>
+   <tag></tag>
+   <elementGuidId>419d834c-ace2-4ee7-bf48-8e7a2311cd50</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//input[@name='creditsName']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>name</name>
+      <type>Main</type>
+      <value>creditsName</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>input-xlarge ng-pristine ng-untouched ng-valid ng-valid-maxlength ng-animate ng-pristine-remove ng-dirty-add ng-valid-parse-add</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>maxlength</name>
+      <type>Main</type>
+      <value>255</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-model</name>
+      <type>Main</type>
+      <value>tgModularEditModel.creditsName</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;person-create form-horizontal FORM ng-scope ng-valid-maxlength ng-valid-year-integer ng-valid-year-length ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/form[@class=&quot;form-horizontal ng-valid-maxlength ng-valid-year-integer ng-valid-year-length ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-tags-required ng-dirty ng-valid-parse ng-valid ng-valid-required&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[2]/div[@class=&quot;row ng-scope&quot;]/div[@class=&quot;span6 e2e-primary-name&quot;]/div[@class=&quot;person__primary-name_block EDITOR clearfix modular-edit ng-scope create ng-valid-maxlength ng-valid-year-integer ng-valid-year-length ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-dirty ng-valid-parse ng-valid ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;control-group e2e-primary-name-credits&quot;]/div[@class=&quot;controls&quot;]/input[@class=&quot;input-xlarge ng-pristine ng-untouched ng-valid ng-valid-maxlength ng-animate ng-pristine-remove ng-dirty-add ng-valid-parse-add&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>//input[@name='creditsName']</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/div/div[2]/form/div/div/div[2]/div/div/div[2]/div[2]/div/div/div/div[4]/div/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Credits Name:'])[1]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Full Name/ Presentation:'])[1]/following::input[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Leave blank if unknown'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div[4]/div/input</value>
+   </webElementXpaths>
+</WebElementEntity>

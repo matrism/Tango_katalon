@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="test suite" time="66" tests="3" failures="2" errors="0">
+   <testsuite name="test suite" tests="3" failures="2" errors="0" time="66" timestamp="2018-10-24 17:24:59" hostname="ShahrulIbrahim - WCMMY-LTP-040.music.wmgis.com" id="Test Suites/Create Person/test suite">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455"/>
+         <property name="logFiles" value="C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455\\execution0.log"/>
+         <property name="attachments" value="C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455\\1540373129447.png, C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455\\1540373164593.png, C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455\\1540373164971.png"/>
+         <property name="hostName" value="ShahrulIbrahim - WCMMY-LTP-040.music.wmgis.com"/>
+         <property name="os" value="Windows 10 64bit"/>
+         <property name="katalonVersion" value="5.8.0.1"/>
+         <property name="browser" value="Chrome 70.0.3538.67"/>
+         <property name="hostAddress" value="10.139.221.47"/>
+         <property name="sessionId" value="fc322d08d790a776f59cbdaa778739ed"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Windows 10"/>
+      </properties>
+      <testcase name="Test Cases/Tango Login" classname="Test Cases/Tango Login" status="PASSED">
+         <system-out><![CDATA[2018-10-24 17:25:00 - [TEST_CASE][PASSED] - Test Cases/Tango Login: Test Cases/Tango Login
+
+2018-10-24 17:25:00 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+
+2018-10-24 17:25:04 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-10-24 17:25:04 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'http://tango.staging-test.tango.qa.wmg.com' successfully
+
+2018-10-24 17:25:10 - [MESSAGE][PASSED] - Navigate to 'http://tango.staging-test.tango.qa.wmg.com' successfully
+
+2018-10-24 17:25:10 - [TEST_STEP][PASSED] - setText: Text 'tangotest1' is set on object 'Object Repository/Login page/Username'
+
+2018-10-24 17:25:10 - [MESSAGE][PASSED] - Text 'tangotest1' is set on object 'Object Repository/Login page/Username'
+
+2018-10-24 17:25:10 - [TEST_STEP][PASSED] - setEncryptedText: Text ****** has been set on object 'Object Repository/Login page/Password'
+
+2018-10-24 17:25:10 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/Login page/Password'
+
+2018-10-24 17:25:10 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Login page/button_Login' is clicked on
+
+2018-10-24 17:25:20 - [MESSAGE][PASSED] - Object: 'Object Repository/Login page/button_Login' is clicked on
+
+2018-10-24 17:25:20 - [TEST_STEP][PASSED] - waitForPageLoad: Wait for page load successfully
+
+2018-10-24 17:25:21 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2018-10-24 17:25:21 - [TEST_STEP][PASSED] - waitForAngularLoad: Angular is ready.
+
+2018-10-24 17:25:21 - [MESSAGE][PASSED] - Angular is ready.
+
+2018-10-24 17:25:21 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Music Publishing' is visible
+
+2018-10-24 17:25:21 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Music Publishing' is visible
+
+2018-10-24 17:25:21 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/div_Works WorksAlbumsOrganisat' is visible
+
+2018-10-24 17:25:21 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/div_Works WorksAlbumsOrganisat' is visible
+
+2018-10-24 17:25:21 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Registration Activity' is visible
+
+2018-10-24 17:25:21 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Registration Activity' is visible
+
+2018-10-24 17:25:21 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Royalty Processing' is visible
+
+2018-10-24 17:25:21 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Royalty Processing' is visible
+
+2018-10-24 17:25:21 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Finance Processing' is visible
+
+2018-10-24 17:25:22 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Finance Processing' is visible
+
+2018-10-24 17:25:22 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Works Upload History' is visible
+
+2018-10-24 17:25:22 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Works Upload History' is visible
+
+2018-10-24 17:25:22 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Utilities' is visible
+
+2018-10-24 17:25:22 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Utilities' is visible]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/Create Person/Create Person All" classname="Test Cases/Create Person/Create Person All" status="FAILED">
+         <failure type="FAILED" message="(Stack trace: com.kms.katalon.core.exception.StepFailedException: Unable to click on object 'Object Repository/Create Person/button_Add Address' (Root cause: org.openqa.selenium.WebDriverException: unknown error: Element &lt;button type=&quot;button&quot; class=&quot;btn btn-link e2e-contact-address-add ng-scope&quot; style=&quot;padding:15px 10px&quot; access=&quot;['UPDATE']&quot; ng-click=&quot;dataHolder.person.contact.addAddress(dataHolder.references.defaultAddressType);&quot;>...&lt;/button> is not clickable at point (414, 900). Other element would receive the click: &lt;div class=&quot;FORM-CONTROLS-INNER span12 text-right clearfix&quot;>...&lt;/div>
+  (Session info: chrome=70.0.3538.67)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.7.1', revision: '8a0099a', time: '2017-11-06T21:07:36.161Z'
+System info: host: 'WCMMY-LTP-040', ip: '10.139.221.47', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.selenium.driver.CChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\SHAHRU~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 70.0.3538.67, webStorageEnabled: true}
+Session ID: fc322d08d790a776f59cbdaa778739ed)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.click(ClickKeyword.groovy:86)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.execute(ClickKeyword.groovy:67)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.click(WebUiBuiltInKeywords.groovy:616)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$click$3.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at Script1540372401213.run(Script1540372401213.groovy:54)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)"/>
+         <system-out><![CDATA[2018-10-24 17:25:22 - [TEST_CASE][FAILED] - Test Cases/Create Person/Create Person All: Test Cases/Create Person/Create Person All FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Unable to click on object 'Object Repository/Create Person/button_Add Address' (Root cause: org.openqa.selenium.WebDriverException: unknown error: Element <button type="button" class="btn btn-link e2e-contact-address-add ng-scope" style="padding:15px 10px" access="['UPDATE']" ng-click="dataHolder.person.contact.addAddress(dataHolder.references.defaultAddressType);">...</button> is not clickable at point (414, 900). Other element would receive the click: <div class="FORM-CONTROLS-INNER span12 text-right clearfix">...</div>
+  (Session info: chrome=70.0.3538.67)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.7.1', revision: '8a0099a', time: '2017-11-06T21:07:36.161Z'
+System info: host: 'WCMMY-LTP-040', ip: '10.139.221.47', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.selenium.driver.CChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\SHAHRU~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 70.0.3538.67, webStorageEnabled: true}
+Session ID: fc322d08d790a776f59cbdaa778739ed)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.click(ClickKeyword.groovy:86)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.execute(ClickKeyword.groovy:67)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.click(WebUiBuiltInKeywords.groovy:616)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$click$3.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at Script1540372401213.run(Script1540372401213.groovy:54)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)
+
+2018-10-24 17:25:22 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/span_New Record' is clicked on
+
+2018-10-24 17:25:22 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/span_New Record' is clicked on
+
+2018-10-24 17:25:22 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_Person' is clicked on
+
+2018-10-24 17:25:22 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_Person' is clicked on
+
+2018-10-24 17:25:22 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_Names' is clicked on
+
+2018-10-24 17:25:24 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_Names' is clicked on
+
+2018-10-24 17:25:24 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/div_Primary' is clicked on
+
+2018-10-24 17:25:25 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/div_Primary' is clicked on
+
+2018-10-24 17:25:25 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_Creator Society Affiliation' is clicked on
+
+2018-10-24 17:25:25 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_Creator Society Affiliation' is clicked on
+
+2018-10-24 17:25:25 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_Contact Information' is clicked on
+
+2018-10-24 17:25:25 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_Contact Information' is clicked on
+
+2018-10-24 17:25:25 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_PaymentStatement Info' is clicked on
+
+2018-10-24 17:25:25 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_PaymentStatement Info' is clicked on
+
+2018-10-24 17:25:25 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_Others' is clicked on
+
+2018-10-24 17:25:25 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_Others' is clicked on
+
+2018-10-24 17:25:25 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_Names' is clicked on
+
+2018-10-24 17:25:26 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_Names' is clicked on
+
+2018-10-24 17:25:26 - [TEST_STEP][PASSED] - setText: Text 'katalon test person 2' is set on object 'Object Repository/Create Person/input_First Name(s)_firstName'
+
+2018-10-24 17:25:26 - [MESSAGE][PASSED] - Text 'katalon test person 2' is set on object 'Object Repository/Create Person/input_First Name(s)_firstName'
+
+2018-10-24 17:25:26 - [TEST_STEP][PASSED] - setText: Text 'katalon last name' is set on object 'Object Repository/Create Person/input_Last Name_lastName'
+
+2018-10-24 17:25:27 - [MESSAGE][PASSED] - Text 'katalon last name' is set on object 'Object Repository/Create Person/input_Last Name_lastName'
+
+2018-10-24 17:25:27 - [TEST_STEP][PASSED] - setText: Text 'katalon credit name' is set on object 'Object Repository/Create Person/input_Credits Name_creditsName'
+
+2018-10-24 17:25:27 - [MESSAGE][PASSED] - Text 'katalon credit name' is set on object 'Object Repository/Create Person/input_Credits Name_creditsName'
+
+2018-10-24 17:25:27 - [TEST_STEP][PASSED] - setText: Text '1982' is set on object 'Object Repository/Create Person/input_Date of Birth_span1 ng-u'
+
+2018-10-24 17:25:28 - [MESSAGE][PASSED] - Text '1982' is set on object 'Object Repository/Create Person/input_Date of Birth_span1 ng-u'
+
+2018-10-24 17:25:28 - [TEST_STEP][PASSED] - setText: Text '09' is set on object 'Object Repository/Create Person/input_-_span1 ng-untouched ng-'
+
+2018-10-24 17:25:28 - [MESSAGE][PASSED] - Text '09' is set on object 'Object Repository/Create Person/input_-_span1 ng-untouched ng-'
+
+2018-10-24 17:25:28 - [TEST_STEP][PASSED] - setText: Text '30' is set on object 'Object Repository/Create Person/input_-_span1 ng-untouched ng-_1'
+
+2018-10-24 17:25:28 - [MESSAGE][PASSED] - Text '30' is set on object 'Object Repository/Create Person/input_-_span1 ng-untouched ng-_1'
+
+2018-10-24 17:25:28 - [TEST_STEP][PASSED] - setText: Text 'MACP' is set on object 'Object Repository/Create Person/input_Remove All_tg-typeahead_'
+
+2018-10-24 17:25:28 - [MESSAGE][PASSED] - Text 'MACP' is set on object 'Object Repository/Create Person/input_Remove All_tg-typeahead_'
+
+2018-10-24 17:25:28 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/div_Worldwide' is clicked on
+
+2018-10-24 17:25:28 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/div_Worldwide' is clicked on
+
+2018-10-24 17:25:28 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/input_Mechanical_typesOfRights' is clicked on
+
+2018-10-24 17:25:29 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/input_Mechanical_typesOfRights' is clicked on
+
+2018-10-24 17:25:29 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/input_Synchronisation_typesOfR' is clicked on
+
+2018-10-24 17:25:29 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/input_Synchronisation_typesOfR' is clicked on
+
+2018-10-24 17:25:29 - [TEST_STEP][FAILED] - click: Unable to click on object 'Object Repository/Create Person/button_Add Address' (Root cause: org.openqa.selenium.WebDriverException: unknown error: Element <button type="button" class="btn btn-link e2e-contact-address-add ng-scope" style="padding:15px 10px" access="['UPDATE']" ng-click="dataHolder.person.contact.addAddress(dataHolder.references.defaultAddressType);">...</button> is not clickable at point (414, 900). Other element would receive the click: <div class="FORM-CONTROLS-INNER span12 text-right clearfix">...</div>
+  (Session info: chrome=70.0.3538.67)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.7.1', revision: '8a0099a', time: '2017-11-06T21:07:36.161Z'
+System info: host: 'WCMMY-LTP-040', ip: '10.139.221.47', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.selenium.driver.CChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\SHAHRU~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 70.0.3538.67, webStorageEnabled: true}
+Session ID: fc322d08d790a776f59cbdaa778739ed)
+
+2018-10-24 17:25:29 - [MESSAGE][FAILED] - Unable to click on object 'Object Repository/Create Person/button_Add Address' (Root cause: org.openqa.selenium.WebDriverException: unknown error: Element <button type="button" class="btn btn-link e2e-contact-address-add ng-scope" style="padding:15px 10px" access="['UPDATE']" ng-click="dataHolder.person.contact.addAddress(dataHolder.references.defaultAddressType);">...</button> is not clickable at point (414, 900). Other element would receive the click: <div class="FORM-CONTROLS-INNER span12 text-right clearfix">...</div>
+  (Session info: chrome=70.0.3538.67)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.7.1', revision: '8a0099a', time: '2017-11-06T21:07:36.161Z'
+System info: host: 'WCMMY-LTP-040', ip: '10.139.221.47', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.selenium.driver.CChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\SHAHRU~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 70.0.3538.67, webStorageEnabled: true}
+Session ID: fc322d08d790a776f59cbdaa778739ed)
+[[ATTACHMENT|C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455\\1540373129447.png]]]]></system-out>
+         <system-err><![CDATA[2018-10-24 17:25:22 - [TEST_CASE][FAILED] - Test Cases/Create Person/Create Person All: Test Cases/Create Person/Create Person All FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Unable to click on object 'Object Repository/Create Person/button_Add Address' (Root cause: org.openqa.selenium.WebDriverException: unknown error: Element <button type="button" class="btn btn-link e2e-contact-address-add ng-scope" style="padding:15px 10px" access="['UPDATE']" ng-click="dataHolder.person.contact.addAddress(dataHolder.references.defaultAddressType);">...</button> is not clickable at point (414, 900). Other element would receive the click: <div class="FORM-CONTROLS-INNER span12 text-right clearfix">...</div>
+  (Session info: chrome=70.0.3538.67)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.7.1', revision: '8a0099a', time: '2017-11-06T21:07:36.161Z'
+System info: host: 'WCMMY-LTP-040', ip: '10.139.221.47', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.selenium.driver.CChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\SHAHRU~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 70.0.3538.67, webStorageEnabled: true}
+Session ID: fc322d08d790a776f59cbdaa778739ed)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.click(ClickKeyword.groovy:86)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.execute(ClickKeyword.groovy:67)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.click(WebUiBuiltInKeywords.groovy:616)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$click$3.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at Script1540372401213.run(Script1540372401213.groovy:54)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/Create Person/Add Additional Address" classname="Test Cases/Create Person/Add Additional Address" status="PASSED">
+         <system-out><![CDATA[2018-10-24 17:25:29 - [TEST_CASE][PASSED] - Test Cases/Create Person/Add Additional Address: Test Cases/Create Person/Add Additional Address
+
+2018-10-24 17:25:30 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Add Address' is clicked on
+
+2018-10-24 17:25:30 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Add Address' is clicked on
+
+2018-10-24 17:25:30 - [TEST_STEP][PASSED] - setText: Text 'Address 1' is set on object 'Object Repository/Create Person/input_Address 1_address1'
+
+2018-10-24 17:25:30 - [MESSAGE][PASSED] - Text 'Address 1' is set on object 'Object Repository/Create Person/input_Address 1_address1'
+
+2018-10-24 17:25:30 - [TEST_STEP][PASSED] - setText: Text 'address 2' is set on object 'Object Repository/Create Person/input_Address 2_address2'
+
+2018-10-24 17:25:30 - [MESSAGE][PASSED] - Text 'address 2' is set on object 'Object Repository/Create Person/input_Address 2_address2'
+
+2018-10-24 17:25:30 - [TEST_STEP][PASSED] - setText: Text 'address 3' is set on object 'Object Repository/Create Person/input_Address 3_address3'
+
+2018-10-24 17:25:31 - [MESSAGE][PASSED] - Text 'address 3' is set on object 'Object Repository/Create Person/input_Address 3_address3'
+
+2018-10-24 17:25:31 - [TEST_STEP][PASSED] - setText: Text 'city' is set on object 'Object Repository/Create Person/input_City_cityTown'
+
+2018-10-24 17:25:31 - [MESSAGE][PASSED] - Text 'city' is set on object 'Object Repository/Create Person/input_City_cityTown'
+
+2018-10-24 17:25:31 - [TEST_STEP][PASSED] - setText: Text 'state' is set on object 'Object Repository/Create Person/input_StateProvinceRegion_regi'
+
+2018-10-24 17:25:31 - [MESSAGE][PASSED] - Text 'state' is set on object 'Object Repository/Create Person/input_StateProvinceRegion_regi'
+
+2018-10-24 17:25:31 - [TEST_STEP][PASSED] - setText: Text '364733' is set on object 'Object Repository/Create Person/input_ZIPPostal Code_postalCod'
+
+2018-10-24 17:25:31 - [MESSAGE][PASSED] - Text '364733' is set on object 'Object Repository/Create Person/input_ZIPPostal Code_postalCod']]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/Create Person/Add additional Phone" classname="Test Cases/Create Person/Add additional Phone" status="PASSED">
+         <system-out><![CDATA[2018-10-24 17:25:31 - [TEST_CASE][PASSED] - Test Cases/Create Person/Add additional Phone: Test Cases/Create Person/Add additional Phone
+
+2018-10-24 17:25:32 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Country_tg-dropdown-car' is clicked on
+
+2018-10-24 17:25:32 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Country_tg-dropdown-car' is clicked on
+
+2018-10-24 17:25:32 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Add Phone' is clicked on
+
+2018-10-24 17:25:32 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Add Phone' is clicked on
+
+2018-10-24 17:25:32 - [TEST_STEP][PASSED] - setText: Text '13123123123123' is set on object 'Object Repository/Create Person/input_Office_number'
+
+2018-10-24 17:25:33 - [MESSAGE][PASSED] - Text '13123123123123' is set on object 'Object Repository/Create Person/input_Office_number']]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/Create Person/Verify Person after save" classname="Test Cases/Create Person/Verify Person after save" status="FAILED">
+         <failure type="FAILED" message="(Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: com.kms.katalon.core.webui.exception.WebElementNotFoundException: Web element with id: 'Object Repository/Create Person/strong_katalon test person 1' located by 'By.xpath: id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/tg-sticky-headers[@class=&quot;ng-scope ng-isolate-scope&quot;]/div[1]/div[@class=&quot;row person-view&quot;]/div[@class=&quot;span12&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;span6 e2e-primary-name&quot;]/div[@class=&quot;person__primary-name_block EDITOR clearfix modular-edit ng-pristine ng-valid ng-scope&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;control-group e2e-primary-name-first ng-scope&quot;]/div[@class=&quot;controls span4 break-word&quot;]/strong[@class=&quot;ng-binding&quot;][count(. | //strong[@class = 'ng-binding']) = count(//strong[@class = 'ng-binding'])]' not found)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$7.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)"/>
+         <system-out><![CDATA[2018-10-24 17:25:33 - [TEST_CASE][FAILED] - Test Cases/Create Person/Verify Person after save: Test Cases/Create Person/Verify Person after save FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: com.kms.katalon.core.webui.exception.WebElementNotFoundException: Web element with id: 'Object Repository/Create Person/strong_katalon test person 1' located by 'By.xpath: id("SUB-VIEWS")/div[@class="ng-scope"]/tg-sticky-headers[@class="ng-scope ng-isolate-scope"]/div[1]/div[@class="row person-view"]/div[@class="span12"]/div[@class="row"]/div[@class="span6 e2e-primary-name"]/div[@class="person__primary-name_block EDITOR clearfix modular-edit ng-pristine ng-valid ng-scope"]/div[@class="ng-scope"]/div[@class="form-horizontal ng-scope"]/div[@class="modular-container clearfix"]/div[@class="ng-scope"]/div[@class="control-group e2e-primary-name-first ng-scope"]/div[@class="controls span4 break-word"]/strong[@class="ng-binding"][count(. | //strong[@class = 'ng-binding']) = count(//strong[@class = 'ng-binding'])]' not found)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$7.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)
+
+2018-10-24 17:25:33 - [TEST_STEP][FAILED] - verifyElementText: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: com.kms.katalon.core.webui.exception.WebElementNotFoundException: Web element with id: 'Object Repository/Create Person/strong_katalon test person 1' located by 'By.xpath: id("SUB-VIEWS")/div[@class="ng-scope"]/tg-sticky-headers[@class="ng-scope ng-isolate-scope"]/div[1]/div[@class="row person-view"]/div[@class="span12"]/div[@class="row"]/div[@class="span6 e2e-primary-name"]/div[@class="person__primary-name_block EDITOR clearfix modular-edit ng-pristine ng-valid ng-scope"]/div[@class="ng-scope"]/div[@class="form-horizontal ng-scope"]/div[@class="modular-container clearfix"]/div[@class="ng-scope"]/div[@class="control-group e2e-primary-name-first ng-scope"]/div[@class="controls span4 break-word"]/strong[@class="ng-binding"][count(. | //strong[@class = 'ng-binding']) = count(//strong[@class = 'ng-binding'])]' not found)
+
+2018-10-24 17:26:04 - [MESSAGE][FAILED] - com.kms.katalon.core.webui.exception.WebElementNotFoundException: Web element with id: 'Object Repository/Create Person/strong_katalon test person 1' located by 'By.xpath: id("SUB-VIEWS")/div[@class="ng-scope"]/tg-sticky-headers[@class="ng-scope ng-isolate-scope"]/div[1]/div[@class="row person-view"]/div[@class="span12"]/div[@class="row"]/div[@class="span6 e2e-primary-name"]/div[@class="person__primary-name_block EDITOR clearfix modular-edit ng-pristine ng-valid ng-scope"]/div[@class="ng-scope"]/div[@class="form-horizontal ng-scope"]/div[@class="modular-container clearfix"]/div[@class="ng-scope"]/div[@class="control-group e2e-primary-name-first ng-scope"]/div[@class="controls span4 break-word"]/strong[@class="ng-binding"][count(. | //strong[@class = 'ng-binding']) = count(//strong[@class = 'ng-binding'])]' not found
+[[ATTACHMENT|C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455\\1540373164593.png]]
+
+2018-10-24 17:26:05 - [MESSAGE][FAILED] - Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: com.kms.katalon.core.webui.exception.WebElementNotFoundException: Web element with id: 'Object Repository/Create Person/strong_katalon test person 1' located by 'By.xpath: id("SUB-VIEWS")/div[@class="ng-scope"]/tg-sticky-headers[@class="ng-scope ng-isolate-scope"]/div[1]/div[@class="row person-view"]/div[@class="span12"]/div[@class="row"]/div[@class="span6 e2e-primary-name"]/div[@class="person__primary-name_block EDITOR clearfix modular-edit ng-pristine ng-valid ng-scope"]/div[@class="ng-scope"]/div[@class="form-horizontal ng-scope"]/div[@class="modular-container clearfix"]/div[@class="ng-scope"]/div[@class="control-group e2e-primary-name-first ng-scope"]/div[@class="controls span4 break-word"]/strong[@class="ng-binding"][count(. | //strong[@class = 'ng-binding']) = count(//strong[@class = 'ng-binding'])]' not found)
+[[ATTACHMENT|C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181024_172455\\1540373164971.png]]]]></system-out>
+         <system-err><![CDATA[2018-10-24 17:25:33 - [TEST_CASE][FAILED] - Test Cases/Create Person/Verify Person after save: Test Cases/Create Person/Verify Person after save FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: com.kms.katalon.core.webui.exception.WebElementNotFoundException: Web element with id: 'Object Repository/Create Person/strong_katalon test person 1' located by 'By.xpath: id("SUB-VIEWS")/div[@class="ng-scope"]/tg-sticky-headers[@class="ng-scope ng-isolate-scope"]/div[1]/div[@class="row person-view"]/div[@class="span12"]/div[@class="row"]/div[@class="span6 e2e-primary-name"]/div[@class="person__primary-name_block EDITOR clearfix modular-edit ng-pristine ng-valid ng-scope"]/div[@class="ng-scope"]/div[@class="form-horizontal ng-scope"]/div[@class="modular-container clearfix"]/div[@class="ng-scope"]/div[@class="control-group e2e-primary-name-first ng-scope"]/div[@class="controls span4 break-word"]/strong[@class="ng-binding"][count(. | //strong[@class = 'ng-binding']) = count(//strong[@class = 'ng-binding'])]' not found)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$7.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-10-24 17:24:59 - [TEST_SUITE][FAILED] - test suite: Test Cases/Create Person/Create Person All FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Unable to click on object 'Object Repository/Create Person/button_Add Address' (Root cause: org.openqa.selenium.WebDriverException: unknown error: Element <button type="button" class="btn btn-link e2e-contact-address-add ng-scope" style="padding:15px 10px" access="['UPDATE']" ng-click="dataHolder.person.contact.addAddress(dataHolder.references.defaultAddressType);">...</button> is not clickable at point (414, 900). Other element would receive the click: <div class="FORM-CONTROLS-INNER span12 text-right clearfix">...</div>
+  (Session info: chrome=70.0.3538.67)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.7.1', revision: '8a0099a', time: '2017-11-06T21:07:36.161Z'
+System info: host: 'WCMMY-LTP-040', ip: '10.139.221.47', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.selenium.driver.CChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\SHAHRU~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 70.0.3538.67, webStorageEnabled: true}
+Session ID: fc322d08d790a776f59cbdaa778739ed)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.click(ClickKeyword.groovy:86)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.execute(ClickKeyword.groovy:67)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.click(WebUiBuiltInKeywords.groovy:616)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$click$3.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at Script1540372401213.run(Script1540372401213.groovy:54)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)]]></system-out>
+      <system-err><![CDATA[2018-10-24 17:24:59 - [TEST_SUITE][FAILED] - test suite: Test Cases/Create Person/Create Person All FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Unable to click on object 'Object Repository/Create Person/button_Add Address' (Root cause: org.openqa.selenium.WebDriverException: unknown error: Element <button type="button" class="btn btn-link e2e-contact-address-add ng-scope" style="padding:15px 10px" access="['UPDATE']" ng-click="dataHolder.person.contact.addAddress(dataHolder.references.defaultAddressType);">...</button> is not clickable at point (414, 900). Other element would receive the click: <div class="FORM-CONTROLS-INNER span12 text-right clearfix">...</div>
+  (Session info: chrome=70.0.3538.67)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.7.1', revision: '8a0099a', time: '2017-11-06T21:07:36.161Z'
+System info: host: 'WCMMY-LTP-040', ip: '10.139.221.47', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.selenium.driver.CChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\SHAHRU~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 70.0.3538.67, webStorageEnabled: true}
+Session ID: fc322d08d790a776f59cbdaa778739ed)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.click(ClickKeyword.groovy:86)
+	at com.kms.katalon.core.webui.keyword.builtin.ClickKeyword.execute(ClickKeyword.groovy:67)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.click(WebUiBuiltInKeywords.groovy:616)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$click$3.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at Script1540372401213.run(Script1540372401213.groovy:54)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540373095926.run(TempTestSuite1540373095926.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)]]></system-err>
+   </testsuite>
+</testsuites>

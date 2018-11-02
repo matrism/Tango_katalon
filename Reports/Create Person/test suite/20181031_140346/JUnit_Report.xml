@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="test suite" time="55" tests="2" failures="1" errors="0">
+   <testsuite name="test suite" tests="2" failures="1" errors="0" time="55" timestamp="2018-10-31 14:03:49" hostname="ShahrulIbrahim - WCMMY-LTP-040.music.wmgis.com" id="Test Suites/Create Person/test suite">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181031_140346"/>
+         <property name="logFiles" value="C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181031_140346\\execution0.log"/>
+         <property name="attachments" value="C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181031_140346\\1540965882990.png, C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181031_140346\\1540965883293.png"/>
+         <property name="hostName" value="ShahrulIbrahim - WCMMY-LTP-040.music.wmgis.com"/>
+         <property name="os" value="Windows 10 64bit"/>
+         <property name="katalonVersion" value="5.8.4.14"/>
+         <property name="browser" value="Chrome 70.0.3538.77"/>
+         <property name="hostAddress" value="10.138.63.19"/>
+         <property name="sessionId" value="a711e380da438c9d4ac61c724aa8d1be"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Windows 10"/>
+      </properties>
+      <testcase name="Test Cases/Tango Login" classname="Test Cases/Tango Login" status="PASSED">
+         <system-out><![CDATA[2018-10-31 14:03:49 - [TEST_CASE][PASSED] - Test Cases/Tango Login: Test Cases/Tango Login
+
+2018-10-31 14:03:50 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+
+2018-10-31 14:03:54 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-10-31 14:03:54 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'http://tango.staging-test.tango.qa.wmg.com' successfully
+
+2018-10-31 14:03:57 - [MESSAGE][PASSED] - Navigate to 'http://tango.staging-test.tango.qa.wmg.com' successfully
+
+2018-10-31 14:03:57 - [TEST_STEP][PASSED] - setText: Text 'tangotest1' is set on object 'Object Repository/Login page/Username'
+
+2018-10-31 14:03:57 - [MESSAGE][PASSED] - Text 'tangotest1' is set on object 'Object Repository/Login page/Username'
+
+2018-10-31 14:03:57 - [TEST_STEP][PASSED] - setEncryptedText: Text ****** has been set on object 'Object Repository/Login page/Password'
+
+2018-10-31 14:03:58 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/Login page/Password'
+
+2018-10-31 14:03:58 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Login page/button_Login' is clicked on
+
+2018-10-31 14:04:05 - [MESSAGE][PASSED] - Object: 'Object Repository/Login page/button_Login' is clicked on
+
+2018-10-31 14:04:05 - [TEST_STEP][PASSED] - waitForPageLoad: Wait for page load successfully
+
+2018-10-31 14:04:05 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2018-10-31 14:04:05 - [TEST_STEP][PASSED] - waitForAngularLoad: Angular is ready.
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Angular is ready.
+
+2018-10-31 14:04:11 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Music Publishing' is visible
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Music Publishing' is visible
+
+2018-10-31 14:04:11 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/div_Works WorksAlbumsOrganisat' is visible
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/div_Works WorksAlbumsOrganisat' is visible
+
+2018-10-31 14:04:11 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Registration Activity' is visible
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Registration Activity' is visible
+
+2018-10-31 14:04:11 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Royalty Processing' is visible
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Royalty Processing' is visible
+
+2018-10-31 14:04:11 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Finance Processing' is visible
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Finance Processing' is visible
+
+2018-10-31 14:04:11 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Works Upload History' is visible
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Works Upload History' is visible
+
+2018-10-31 14:04:11 - [TEST_STEP][PASSED] - verifyElementVisible: Object 'Object Repository/Main Nav Bar/a_Utilities' is visible
+
+2018-10-31 14:04:11 - [MESSAGE][PASSED] - Object 'Object Repository/Main Nav Bar/a_Utilities' is visible]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/Create Person/Create Person All" classname="Test Cases/Create Person/Create Person All" status="PASSED">
+         <system-out><![CDATA[2018-10-31 14:04:11 - [TEST_CASE][PASSED] - Test Cases/Create Person/Create Person All: Test Cases/Create Person/Create Person All
+
+2018-10-31 14:04:12 - [TEST_STEP][PASSED] - Statement - FirstName = "Test Person Auto " + org.apache.commons.lang.RandomStringUtils.randomNumeric(6): null
+
+2018-10-31 14:04:12 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/span_New Record' is clicked on
+
+2018-10-31 14:04:12 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/span_New Record' is clicked on
+
+2018-10-31 14:04:12 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/a_Person' is clicked on
+
+2018-10-31 14:04:13 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/a_Person' is clicked on
+
+2018-10-31 14:04:13 - [TEST_STEP][PASSED] - waitForPageLoad: Wait for page load successfully
+
+2018-10-31 14:04:13 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2018-10-31 14:04:13 - [TEST_STEP][PASSED] - waitForAngularLoad: Angular is ready.
+
+2018-10-31 14:04:13 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:14 - [MESSAGE][PASSED] - Angular is ready.
+
+2018-10-31 14:04:14 - [TEST_STEP][NOT_RUN] - click: NOT_RUN: click
+
+2018-10-31 14:04:14 - [MESSAGE][NOT_RUN] - NOT_RUN: click
+
+2018-10-31 14:04:14 - [TEST_STEP][NOT_RUN] - click: NOT_RUN: click
+
+2018-10-31 14:04:14 - [MESSAGE][NOT_RUN] - NOT_RUN: click
+
+2018-10-31 14:04:14 - [TEST_STEP][NOT_RUN] - click: NOT_RUN: click
+
+2018-10-31 14:04:14 - [MESSAGE][NOT_RUN] - NOT_RUN: click
+
+2018-10-31 14:04:14 - [TEST_STEP][NOT_RUN] - click: NOT_RUN: click
+
+2018-10-31 14:04:14 - [MESSAGE][NOT_RUN] - NOT_RUN: click
+
+2018-10-31 14:04:14 - [TEST_STEP][NOT_RUN] - click: NOT_RUN: click
+
+2018-10-31 14:04:14 - [MESSAGE][NOT_RUN] - NOT_RUN: click
+
+2018-10-31 14:04:14 - [TEST_STEP][NOT_RUN] - click: NOT_RUN: click
+
+2018-10-31 14:04:14 - [MESSAGE][NOT_RUN] - NOT_RUN: click
+
+2018-10-31 14:04:14 - [TEST_STEP][PASSED] - setText: Text 'Test Person Auto 534763' is set on object 'Object Repository/Create Person/input_First Name(s)_firstName'
+
+2018-10-31 14:04:15 - [MESSAGE][PASSED] - Text 'Test Person Auto 534763' is set on object 'Object Repository/Create Person/input_First Name(s)_firstName'
+
+2018-10-31 14:04:15 - [TEST_STEP][PASSED] - setText: Text 'last name' is set on object 'Object Repository/Create Person/input_Last Name_lastName'
+
+2018-10-31 14:04:15 - [MESSAGE][PASSED] - Text 'last name' is set on object 'Object Repository/Create Person/input_Last Name_lastName'
+
+2018-10-31 14:04:15 - [TEST_STEP][PASSED] - setText: Text 'credit name' is set on object 'Object Repository/Create Person/input_Credits Name_creditsName'
+
+2018-10-31 14:04:16 - [MESSAGE][PASSED] - Text 'credit name' is set on object 'Object Repository/Create Person/input_Credits Name_creditsName'
+
+2018-10-31 14:04:16 - [TEST_STEP][PASSED] - setText: Text 'TAB + TAB + 19820930' is set on object 'Object Repository/Create Person/input_Date of Birth_span1 ng-u'
+
+2018-10-31 14:04:16 - [MESSAGE][PASSED] - Text 'TAB + TAB + 19820930' is set on object 'Object Repository/Create Person/input_Date of Birth_span1 ng-u'
+
+2018-10-31 14:04:16 - [TEST_STEP][PASSED] - verifyElementNotHasAttribute: Object 'Object Repository/Create Person/input_Date of Birth_span1 ng-u' does not have attribute 'disabled'
+
+2018-10-31 14:04:16 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:16 - [MESSAGE][PASSED] - Object 'Object Repository/Create Person/input_Date of Birth_span1 ng-u' does not have attribute 'disabled'
+
+2018-10-31 14:04:16 - [TEST_STEP][PASSED] - setText: Text 'ASCAP' is set on object 'Object Repository/Create Person/input_Remove All_tg-typeahead_'
+
+2018-10-31 14:04:16 - [MESSAGE][PASSED] - Text 'ASCAP' is set on object 'Object Repository/Create Person/input_Remove All_tg-typeahead_'
+
+2018-10-31 14:04:16 - [TEST_STEP][PASSED] - waitForAngularLoad: Angular is ready.
+
+2018-10-31 14:04:16 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:16 - [MESSAGE][PASSED] - Angular is ready.
+
+2018-10-31 14:04:16 - [TEST_STEP][PASSED] - waitForElementPresent: Object 'Object Repository/Create Person/AffiliateSociety_Dropdown_text' is present
+
+2018-10-31 14:04:16 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:23 - [MESSAGE][PASSED] - Object 'Object Repository/Create Person/AffiliateSociety_Dropdown_text' is present
+
+2018-10-31 14:04:23 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/AffiliateSociety_Dropdown_text' is clicked on
+
+2018-10-31 14:04:23 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/AffiliateSociety_Dropdown_text' is clicked on
+
+2018-10-31 14:04:23 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Territory0fAffiliation_worldwide' are matched.
+
+2018-10-31 14:04:23 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Territory0fAffiliation_worldwide' are matched.
+
+2018-10-31 14:04:23 - [TEST_STEP][PASSED] - scrollToElement: Scroll to object 'Object Repository/Create Person/div_CreatorYes NoAffiliated So' successfully
+
+2018-10-31 14:04:23 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:23 - [MESSAGE][PASSED] - Scroll to object 'Object Repository/Create Person/div_CreatorYes NoAffiliated So' successfully
+
+2018-10-31 14:04:23 - [TEST_STEP][PASSED] - verifyElementChecked: Object 'Object Repository/Create Person/Checkbox_Performance' is checked
+
+2018-10-31 14:04:23 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Object 'Object Repository/Create Person/Checkbox_Performance' is checked
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - verifyElementNotChecked: Object 'Object Repository/Create Person/Checkbox_Mechanical' is not checked
+
+2018-10-31 14:04:24 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Object 'Object Repository/Create Person/Checkbox_Mechanical' is not checked
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - verifyElementNotChecked: Object 'Object Repository/Create Person/Checkbox_Synchronisation' is not checked
+
+2018-10-31 14:04:24 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Object 'Object Repository/Create Person/Checkbox_Synchronisation' is not checked
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/Checkbox_Mechanical' is clicked on
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/Checkbox_Mechanical' is clicked on
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/Checkbox_Synchronisation' is clicked on
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/Checkbox_Synchronisation' is clicked on
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - scrollToElement: Scroll to object 'Object Repository/Create Person/button_Add Email' successfully
+
+2018-10-31 14:04:24 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Scroll to object 'Object Repository/Create Person/button_Add Email' successfully
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Add Address' is clicked on
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Add Address' is clicked on
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - setText: Text 'Address 1' is set on object 'Object Repository/Create Person/input_Address 1_address1'
+
+2018-10-31 14:04:24 - [MESSAGE][PASSED] - Text 'Address 1' is set on object 'Object Repository/Create Person/input_Address 1_address1'
+
+2018-10-31 14:04:24 - [TEST_STEP][PASSED] - setText: Text 'address 2' is set on object 'Object Repository/Create Person/input_Address 2_address2'
+
+2018-10-31 14:04:25 - [MESSAGE][PASSED] - Text 'address 2' is set on object 'Object Repository/Create Person/input_Address 2_address2'
+
+2018-10-31 14:04:25 - [TEST_STEP][PASSED] - setText: Text 'address 3' is set on object 'Object Repository/Create Person/input_Address 3_address3'
+
+2018-10-31 14:04:25 - [MESSAGE][PASSED] - Text 'address 3' is set on object 'Object Repository/Create Person/input_Address 3_address3'
+
+2018-10-31 14:04:25 - [TEST_STEP][PASSED] - setText: Text 'city' is set on object 'Object Repository/Create Person/input_City_cityTown'
+
+2018-10-31 14:04:25 - [MESSAGE][PASSED] - Text 'city' is set on object 'Object Repository/Create Person/input_City_cityTown'
+
+2018-10-31 14:04:25 - [TEST_STEP][PASSED] - setText: Text 'state' is set on object 'Object Repository/Create Person/input_StateProvinceRegion_regi'
+
+2018-10-31 14:04:25 - [MESSAGE][PASSED] - Text 'state' is set on object 'Object Repository/Create Person/input_StateProvinceRegion_regi'
+
+2018-10-31 14:04:25 - [TEST_STEP][PASSED] - setText: Text '364733' is set on object 'Object Repository/Create Person/input_ZIPPostal Code_postalCod'
+
+2018-10-31 14:04:26 - [MESSAGE][PASSED] - Text '364733' is set on object 'Object Repository/Create Person/input_ZIPPostal Code_postalCod'
+
+2018-10-31 14:04:26 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Country_tg-dropdown-car' is clicked on
+
+2018-10-31 14:04:26 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Country_tg-dropdown-car' is clicked on
+
+2018-10-31 14:04:26 - [TEST_STEP][PASSED] - setText: Text 'Malaysia' is set on object 'Object Repository/Create Person/SearchCountry_input'
+
+2018-10-31 14:04:26 - [MESSAGE][PASSED] - Text 'Malaysia' is set on object 'Object Repository/Create Person/SearchCountry_input'
+
+2018-10-31 14:04:26 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/CountrySelect' are matched.
+
+2018-10-31 14:04:26 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/CountrySelect' are matched.
+
+2018-10-31 14:04:26 - [TEST_STEP][PASSED] - Statement - If (true): Object: 'Object Repository/Create Person/CountrySelect' is clicked on
+
+2018-10-31 14:04:26 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/CountrySelect' is clicked on
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/CountrySelect' is clicked on
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Yes - Payee' is clicked on
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Yes - Payee' is clicked on
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Yes - StatementRecipient' is clicked on
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Yes - StatementRecipient' is clicked on
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - focus: Object: 'Object Repository/Create Person/div_CreatorYes NoAffiliated So' is focused
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/div_CreatorYes NoAffiliated So' is focused
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Add Phone' is clicked on
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Add Phone' is clicked on
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Select_PhoneType' is clicked on
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Select_PhoneType' is clicked on
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - Statement - driver = com.kms.katalon.core.webui.driver.DriverFactory.getWebDriver(): null
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - Statement - eleCount = driver.findElements(org.openqa.selenium.By.cssSelector("[tg-model-class-validation="tgModularEditModel.number"] .dropdown-menu .tg-dropdown-menu-item.ng-scope")): null
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - Statement - rowsInTable = eleCount.size(): null
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - verifyEqual: Actual object '4' and expected object '4' are equal
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Actual object '4' and expected object '4' are equal
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - Statement - For ([n = 1, n <= rowsInTable, n = n + 1]): Verifying Phone Type Dropdown List: Office
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - comment: Verifying Phone Type Dropdown List: Cell
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:27 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - comment: Verifying Phone Type Dropdown List: Fax
+
+2018-10-31 14:04:27 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - comment: Verifying Phone Type Dropdown List: Home
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Phone_list' are matched.
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - comment: Verifying Phone Type Dropdown List: Office
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/Dropdown_Phone_list' is clicked on
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/Dropdown_Phone_list' is clicked on
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/button_Select_PhoneType' are matched.
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/button_Select_PhoneType' are matched.
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - setText: Text '13123123123123' is set on object 'Object Repository/Create Person/input_PhoneNumber'
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Text '13123123123123' is set on object 'Object Repository/Create Person/input_PhoneNumber'
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Add Email' is clicked on
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Add Email' is clicked on
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Select_EmailType' is clicked on
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Select_EmailType' is clicked on
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - Statement - driver2 = com.kms.katalon.core.webui.driver.DriverFactory.getWebDriver(): null
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - Statement - eleCount1 = driver2.findElements(org.openqa.selenium.By.cssSelector("form > div > div:nth-child(3) > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(3) [ng-model="tgModularEditModel.type"] .dropdown-menu .tg-dropdown-menu-item.ng-scope")): null
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - Statement - rowsInTable1 = eleCount1.size(): null
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - verifyEqual: Actual object '7' and expected object '7' are equal
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Actual object '7' and expected object '7' are equal
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - Statement - For ([n = 1, n <= rowsInTable1, n = n + 1]): Verifying Email Type Dropdown List: Work
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:28 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - comment: Verifying Email Type Dropdown List: Accountant
+
+2018-10-31 14:04:28 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - comment: Verifying Email Type Dropdown List: Agent
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - comment: Verifying Email Type Dropdown List: Business
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - comment: Verifying Email Type Dropdown List: Lawyer
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - comment: Verifying Email Type Dropdown List: Manager
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - comment: Verifying Email Type Dropdown List: Personal
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/Dropdown_Email_list' are matched.
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - comment: Verifying Email Type Dropdown List: Work
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/Dropdown_Email_list' is clicked on
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/Dropdown_Email_list' is clicked on
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - verifyElementText: Actual text and expected text of test object 'Object Repository/Create Person/button_Select_EmailType' are matched.
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Actual text and expected text of test object 'Object Repository/Create Person/button_Select_EmailType' are matched.
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - setText: Text 'test@email.com' is set on object 'Object Repository/Create Person/input_Emaill_Address'
+
+2018-10-31 14:04:29 - [MESSAGE][PASSED] - Text 'test@email.com' is set on object 'Object Repository/Create Person/input_Emaill_Address'
+
+2018-10-31 14:04:29 - [TEST_STEP][PASSED] - setText: Text 'selangor' is set on object 'Object Repository/Create Person/input_Place of Birth_placeOfBi'
+
+2018-10-31 14:04:30 - [MESSAGE][PASSED] - Text 'selangor' is set on object 'Object Repository/Create Person/input_Place of Birth_placeOfBi'
+
+2018-10-31 14:04:30 - [TEST_STEP][PASSED] - setText: Text 'Malaysia' is set on object 'Object Repository/Create Person/input_Citizenship_citizenship'
+
+2018-10-31 14:04:30 - [MESSAGE][PASSED] - Text 'Malaysia' is set on object 'Object Repository/Create Person/input_Citizenship_citizenship'
+
+2018-10-31 14:04:30 - [TEST_STEP][NOT_RUN] - click: NOT_RUN: click
+
+2018-10-31 14:04:30 - [MESSAGE][NOT_RUN] - NOT_RUN: click
+
+2018-10-31 14:04:30 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Create Person/button_Done' is clicked on
+
+2018-10-31 14:04:30 - [MESSAGE][PASSED] - Object: 'Object Repository/Create Person/button_Done' is clicked on]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/Create Person/Verify Person after save" classname="Test Cases/Create Person/Verify Person after save" status="FAILED">
+         <failure type="FAILED" message="(Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$9.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540965826610.run(TempTestSuite1540965826610.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)"/>
+         <system-out><![CDATA[2018-10-31 14:04:30 - [TEST_CASE][FAILED] - Test Cases/Create Person/Verify Person after save: Test Cases/Create Person/Verify Person after save FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$9.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540965826610.run(TempTestSuite1540965826610.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)
+
+2018-10-31 14:04:31 - [TEST_STEP][FAILED] - verifyElementText: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.)
+
+2018-10-31 14:04:43 - [MESSAGE][FAILED] - Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.
+[[ATTACHMENT|C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181031_140346\\1540965882990.png]]
+
+2018-10-31 14:04:43 - [MESSAGE][FAILED] - Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.)
+[[ATTACHMENT|C:\\Users\\shahrulibrahim\\Katalon Studio\\TANGO\\Reports\\Create Person\\test suite\\20181031_140346\\1540965883293.png]]]]></system-out>
+         <system-err><![CDATA[2018-10-31 14:04:30 - [TEST_CASE][FAILED] - Test Cases/Create Person/Verify Person after save: Test Cases/Create Person/Verify Person after save FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$9.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540965826610.run(TempTestSuite1540965826610.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-10-31 14:03:49 - [TEST_SUITE][FAILED] - test suite: Test Cases/Create Person/Verify Person after save FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$9.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540965826610.run(TempTestSuite1540965826610.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)]]></system-out>
+      <system-err><![CDATA[2018-10-31 14:03:49 - [TEST_SUITE][FAILED] - test suite: Test Cases/Create Person/Verify Person after save FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: Verify element text of test object 'Object Repository/Create Person/strong_katalon test person 1' FAILED. (Root cause: Actual text 'Test Person Auto 534763' and expected text 'katalon test person 2' of test object 'Object Repository/Create Person/strong_katalon test person 1' are NOT matched.)
+	at com.kms.katalon.core.keyword.internal.KeywordMain.stepFailed(KeywordMain.groovy:36)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.stepFailed(WebUIKeywordMain.groovy:65)
+	at com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain.runKeyword(WebUIKeywordMain.groovy:27)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.verifyElementText(VerifyElementTextKeyword.groovy:72)
+	at com.kms.katalon.core.webui.keyword.builtin.VerifyElementTextKeyword.execute(VerifyElementTextKeyword.groovy:40)
+	at com.kms.katalon.core.keyword.internal.KeywordExecutor.executeKeywordForPlatform(KeywordExecutor.groovy:53)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.verifyElementText(WebUiBuiltInKeywords.groovy:3663)
+	at com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$verifyElementText$9.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:133)
+	at Script1540372825746.run(Script1540372825746.groovy:16)
+	at com.kms.katalon.core.main.ScriptEngine.run(ScriptEngine.java:183)
+	at com.kms.katalon.core.main.ScriptEngine.runScriptAsRawText(ScriptEngine.java:108)
+	at com.kms.katalon.core.main.TestCaseExecutor.runScript(TestCaseExecutor.java:294)
+	at com.kms.katalon.core.main.TestCaseExecutor.doExecute(TestCaseExecutor.java:285)
+	at com.kms.katalon.core.main.TestCaseExecutor.processExecutionPhase(TestCaseExecutor.java:264)
+	at com.kms.katalon.core.main.TestCaseExecutor.accessMainPhase(TestCaseExecutor.java:256)
+	at com.kms.katalon.core.main.TestCaseExecutor.execute(TestCaseExecutor.java:200)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestCaseMainPhase(TestSuiteExecutor.java:129)
+	at com.kms.katalon.core.main.TestSuiteExecutor.accessTestSuiteMainPhase(TestSuiteExecutor.java:112)
+	at com.kms.katalon.core.main.TestSuiteExecutor.execute(TestSuiteExecutor.java:81)
+	at com.kms.katalon.core.main.TestCaseMain.startTestSuite(TestCaseMain.java:142)
+	at com.kms.katalon.core.main.TestCaseMain$startTestSuite$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:141)
+	at TempTestSuite1540965826610.run(TempTestSuite1540965826610.groovy:36)
+	at groovy.lang.GroovyShell.runScriptOrMainOrTestOrRunnable(GroovyShell.java:263)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:518)
+	at groovy.lang.GroovyShell.run(GroovyShell.java:507)
+	at groovy.ui.GroovyMain.processOnce(GroovyMain.java:653)
+	at groovy.ui.GroovyMain.run(GroovyMain.java:384)
+	at groovy.ui.GroovyMain.process(GroovyMain.java:370)
+	at groovy.ui.GroovyMain.processArgs(GroovyMain.java:129)
+	at groovy.ui.GroovyMain.main(GroovyMain.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:109)
+	at org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:131)
+)]]></system-err>
+   </testsuite>
+</testsuites>

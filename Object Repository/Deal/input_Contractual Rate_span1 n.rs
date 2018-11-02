@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Contractual Rate_span1 n</name>
+   <tag></tag>
+   <elementGuidId>be53b59a-d2c1-4971-8c6a-87fa97537c79</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@type='text'])[8]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>span1 ng-untouched ng-valid ng-isolate-scope ng-dirty ng-valid-parse</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-model</name>
+      <type>Main</type>
+      <value>set.rate_percentage</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>selectize-contractual-rate</name>
+      <type>Main</type>
+      <value>onICRateSelectFormulaClick(type, value, set)</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>menu-data</name>
+      <type>Main</type>
+      <value>getPreparedContractualRatesTypes(set)</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/ui-view[@class=&quot;ng-scope&quot;]/tg-sticky-headers[@class=&quot;ng-scope ng-isolate-scope&quot;]/div[@class=&quot;create-deal-wizard ng-scope&quot;]/form[@class=&quot;form-horizontal ng-dirty ng-submitted ng-valid-parse ng-valid-tags-required ng-valid-required ng-valid-rate-set-has-rates ng-valid-maxlength ng-valid-year ng-valid-month ng-valid-day-range ng-valid-date ng-valid-min ng-valid-rate-percentage-exeeds-limit ng-invalid ng-invalid-is-any-determines-i-c-r-yes ng-valid-is-i-c-r-lesser ng-valid-is-i-c-r-zero ng-invalid-is-ram-defined ng-invalid-rates-have-errors&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;deal-terms ng-scope ng-dirty ng-valid-parse ng-valid-tags-required ng-valid-required ng-valid-rate-set-has-rates ng-valid-maxlength ng-valid-year ng-valid-month ng-valid-day-range ng-valid-date ng-valid-min ng-valid-rate-percentage-exeeds-limit ng-invalid ng-invalid-is-any-determines-i-c-r-yes ng-valid-is-i-c-r-lesser ng-valid-is-i-c-r-zero ng-invalid-is-ram-defined ng-invalid-rates-have-errors&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;span6 column js-details-column&quot;]/tg-view[@class=&quot;ng-scope&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;FORM DETAIL ng-scope ng-dirty ng-valid-parse ng-valid-tags-required ng-valid-required ng-valid-rate-set-has-rates ng-valid-maxlength ng-valid-year ng-valid-month ng-valid-day-range ng-valid-date ng-valid-min ng-valid-rate-percentage-exeeds-limit ng-invalid ng-invalid-is-any-determines-i-c-r-yes ng-valid-is-i-c-r-lesser ng-valid-is-i-c-r-zero ng-invalid-is-ram-defined ng-invalid-rates-have-errors&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;rate-sets-padd ng-scope&quot;]/div[@class=&quot;span12 rate-sets-container modular-edit ng-scope create ng-valid-rate-set-has-rates ng-valid-required ng-valid-maxlength ng-valid-year ng-valid-month ng-valid-day-range ng-valid-date ng-valid-min ng-valid-rate-percentage-exeeds-limit ng-invalid ng-invalid-is-any-determines-i-c-r-yes ng-valid-is-i-c-r-lesser ng-valid-is-i-c-r-zero ng-invalid-is-ram-defined ng-valid-tags-required ng-dirty ng-valid-parse&quot;]/div[@class=&quot;rate-sets-container-inner ng-scope ng-valid-rate-set-has-rates ng-valid-required ng-valid-maxlength ng-valid-year ng-valid-month ng-valid-day-range ng-valid-date ng-valid-min ng-valid-rate-percentage-exeeds-limit ng-invalid ng-invalid-is-any-determines-i-c-r-yes ng-valid-is-i-c-r-lesser ng-valid-is-i-c-r-zero ng-invalid-is-ram-defined ng-valid-tags-required ng-dirty ng-valid-parse&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;rate-set-container-inner ng-scope ng-valid-rate-set-has-rates ng-valid-required ng-valid-maxlength ng-valid-year ng-valid-month ng-valid-day-range ng-valid-date ng-valid-min ng-valid-rate-percentage-exeeds-limit ng-invalid ng-invalid-is-any-determines-i-c-r-yes ng-valid-is-i-c-r-lesser ng-valid-is-i-c-r-zero ng-invalid-is-ram-defined ng-valid-tags-required ng-dirty ng-valid-parse&quot;]/div[@class=&quot;rate-set-inview&quot;]/div[@class=&quot;rate-set-row rate-set-header&quot;]/div[@class=&quot;flex1 ng-scope&quot;]/div[@class=&quot;rate-set-header-row&quot;]/div[@class=&quot;rate-set-rate-field&quot;]/div[@class=&quot;input-append&quot;]/input[@class=&quot;span1 ng-untouched ng-valid ng-isolate-scope ng-dirty ng-valid-parse&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>(//input[@type='text'])[8]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/ui-view/tg-sticky-headers/div[2]/form/div/div/div[2]/div[2]/tg-view/div/div/div/div[5]/div/div/div/div/div/div[3]/div[9]/div/div/div[4]/div[2]/div/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Contractual Rate'])[1]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Effective Start Date'])[1]/following::input[2]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Remove All'])[5]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div[2]/div/input</value>
+   </webElementXpaths>
+</WebElementEntity>
