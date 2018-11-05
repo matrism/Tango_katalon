@@ -4,7 +4,7 @@
    <name>test suite</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-10-31T14:03:46</lastRun>
+   <lastRun>2018-11-05T16:32:42</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
@@ -47,7 +47,7 @@
    <testCaseLink>
       <guid>cda666a0-2ed8-4d83-8017-409fbcf9b36d</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
+      <isRun>false</isRun>
       <testCaseId>Test Cases/Create Person/Verify Person after save</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>
