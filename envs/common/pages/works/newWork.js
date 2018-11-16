@@ -735,13 +735,18 @@ exports.continueToNextTab = function() {
     return exports.continueToNextTabButton().click();
 };
 exports.continueIfPrompted = function () {
-    var btn = element.all(by.buttonText('Ignore and continue to enter new work'));
-    browser.sleep(1000);
-
+    var btn = element(by.buttonText('Ignore and continue to enter new work'));
+    browser.wait(ExpectedConditions.visibilityOf(btn));
+    /*
     btn.count().then(function(num){
         if (num > 0) {
             btn.first().click();
             browser.sleep(500);
         }
     });
+    */
+    asAlways(
+        btn,
+        'scrollIntoView', 'click', 'waitForAjax'
+    );
 };

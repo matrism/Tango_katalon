@@ -931,9 +931,9 @@ exports.save = function() {
            pages.newWork.saveWorkButton(),
            'scrollIntoView', 'click', 'waitForAjax'
        );
-       //steps.base.sleep(5000);
-       browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
-       //browser.sleep(5000);
+           //browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
+
+       browser.sleep(2000);
 
     });
 };
@@ -947,8 +947,8 @@ exports.validateIgnoreModal = function() {
 };
 
 exports.validateSaveWorkRedirection = function() {
-    it('Checking redirection Page', function() {
-        steps.base.validateRedirection("created work page", "/rights/summary");
+    describe('Checking redirection Page', function() {
+        steps.base.validateRedirection("created work page", "/rights");
     });
 };
 

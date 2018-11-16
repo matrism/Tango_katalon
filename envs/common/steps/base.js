@@ -162,6 +162,7 @@ addBasicStep(exports, pages.base, 'Dirty check confirm cancellation');
 
 module.exports.validateRedirection = function (pageName, expUrl) {
     it("User should be redirected to " + pageName, function () {
+        browser.wait(ExpectedConditions.visibilityOf(element(by.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
         browser.getCurrentUrl().then(function (url) {
             expect(url).toContain(expUrl);
         });

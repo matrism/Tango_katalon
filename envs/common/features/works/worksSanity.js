@@ -150,7 +150,7 @@ exports.feature = [
                     steps.workRecordings.enterArtistSearchTerms(
                     i, 'TEST ARTIST ' + randomId('mainWorkArtist' + i)
                     );
-
+                    steps.base.sleep(2000);
                     steps.workRecordings.createEnteredArtist();
 
                     steps.workRecordings.enterDuration(
@@ -789,7 +789,9 @@ steps.work.findCurrentlyOpenWorkId();
 ],
     //steps: function () {
     steps: criticalScenario(() => {
+        var x = 0;
     ['mainWork', 'cosWork'].forEach(function (workSlotId) {
+
     steps.base.useEntityDataSlot('work', workSlotId);
 
     steps.searchSection.selectEntityType('Works');
@@ -800,14 +802,19 @@ steps.work.findCurrentlyOpenWorkId();
 
     steps.base.sleep(200);
     steps.base.waitForAjax();
-
-    steps.work.expectWorkSearchMatchCountToBe(1);
-
-    steps.work.clickWorkSearchMatch(0);
+    if (x==0){
+        steps.work.expectWorkSearchMatchCountToBe(3);
+        steps.work.clickWorkSearchMatch(2);
+    }else
+        {
+        steps.work.expectWorkSearchMatchCountToBe(1);
+        steps.work.clickWorkSearchMatch(0);
+        }
 
     steps.base.waitForAjax();
 
     steps.work.validateWorkId();
+    x=x+1;
 });
 }),
 },
@@ -1421,8 +1428,8 @@ steps.work.findCurrentlyOpenWorkId();
     'worksSanitySearchForMergedWorks',
     'worksSanityMerge',
 ],
-    //steps: function () {
-    steps: criticalScenario(() => {
+    steps: function () {
+    //steps: criticalScenario(() => {
     using(steps.work, function() {
     steps.base.useEntityDataSlot('work', 'mainWork');
     steps.searchSection.selectEntityType('Works');
@@ -1443,7 +1450,7 @@ steps.work.findCurrentlyOpenWorkId();
     steps.base.waitForAjax();
     this.expectWorkSearchMatchCountToBe(0);
 });
-})
+}
 },
 {
     name: 'Copy work - Original',
@@ -1507,7 +1514,7 @@ steps.work.findCurrentlyOpenWorkId();
     using(steps.work, function () {
     steps.base.useEntityDataSlot('work', 'mainWork');
     this.goToWorkPage();
-    //this.goToWorkPageById('WW 015122073 00');
+    //this.goToWorkPageById('WW 015124424 00');
     this.goToGeneralTab();
     using(this.copy, function () {
         this.copyWork();
@@ -1515,6 +1522,7 @@ steps.work.findCurrentlyOpenWorkId();
         this.continue();
     });
     steps.newWork.saveWork();
+    steps.newWork.continueIfSimilarWorksPrompted();
     this.goToGeneralTab();
     this.validateVersionTypeId();
 });
