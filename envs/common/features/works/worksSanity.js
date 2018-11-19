@@ -1538,7 +1538,7 @@ steps.work.findCurrentlyOpenWorkId();
     steps: criticalScenario(() => {
     using(steps.work, function () {
 
-    steps.base.useEntityDataSlot('work', 'component0');
+    steps.base.useEntityDataSlot('work', 'mainWork');
     this.goToWorkPage();
     //this.goToWorkPageById('WW 015126615 00');
     this.goToGeneralTab();

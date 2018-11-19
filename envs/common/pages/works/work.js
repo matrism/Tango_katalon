@@ -1482,6 +1482,7 @@ exports.registrationActivityTab = function () {
 exports.goToRegistrationActivityTab = function () {
     var element = exports.registrationActivityTab();
 
+    browser.sleep(1000);
     pages.base.scrollIntoView(element);
 
     return element.click().then(function () {
