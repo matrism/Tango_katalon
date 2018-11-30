@@ -67,7 +67,7 @@ module.exports.findCurrentlyOpenWorkId = function () {
 
     it("Find currently open work ID", function () {
         var workId = pages.work.workId();
-
+        browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
         workId.then(function (workId) {
             var data = hash.currentEntityDataSlotsByType.work;
             data.id = workId;

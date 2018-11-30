@@ -933,7 +933,7 @@ exports.save = function() {
        );
            //browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
 
-       browser.sleep(2000);
+       browser.sleep(8000);
 
     });
 };

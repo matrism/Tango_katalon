@@ -167,23 +167,23 @@ var defaultUserName = 'TangoTest1',
             user_password: password
 
         },
-        qa: {
+        e2e: {
             urls: {
                 sso: configer.getEnvVarByKey('URL_SSO'),
                 app_url: (
-                    cli['app-url'] || 'http://tango.tango.qa.wmg.com/'
+                    cli['app-url'] || 'http://tango.tango-roy.e2e.wmg.com/'
                     //cli['app-url'] || 'http://tango.tango-refactor.tango.dev.wmg.com/'
                 ),
                 service_url: (
                     cli['service-url'] || cli['app-url'] ||
                     //'http://tango.tango-refactor.tango.dev.wmg.com/'
-                    'http://tango.tango.qa.wmg.com/'
+                    'http://tango.tango-roy.e2e.wmg.com/'
                 ),
                 cr_url: (
-                    cli['cr-url'] || 'http://tancrsrv.tango.qa.wmg.com:80'
+                    cli['cr-url'] || 'http://tango.tango-roy.e2e.wmg.com:80'
                 ),
                 royalties_url: (
-                    cli['royalties-url'] || 'http://tanroysrv.tango.qa.wmg.com:80'
+                    cli['royalties-url'] || 'http://tango.tango-roy.e2e.wmg.com:80'
                 )
             },
             user_name: user,
