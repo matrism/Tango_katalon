@@ -927,13 +927,21 @@ exports.save = function() {
    it('Saving work', function() {
      //steps.base.clickElement("Save Work", pages.newWork.saveWorkButton());
     //steps.base.sleep(10000);
+       /*
        asAlways(
            pages.newWork.saveWorkButton(),
            'scrollIntoView', 'click', 'waitForAjax'
        );
-           //browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
+       */
+       pages.newWork.saveWorkButton().click();
 
-       browser.sleep(8000);
+           //browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
+       browser.sleep(500);
+       browser.wait(ExpectedConditions.visibilityOf(element(By.css("[data-ng-bind=\"msg.text\"]"))));
+       browser.sleep(1000);
+       browser.wait(ExpectedConditions.invisibilityOf(element(By.css("[data-ng-bind=\"msg.text\"]"))));
+       pages.base.waitForAjax();
+       browser.wait(ExpectedConditions.visibilityOf(element(By.css("[ng-bind=\"tgWorkHeader.workCode.getFullCode()\"]"))));
 
     });
 };
