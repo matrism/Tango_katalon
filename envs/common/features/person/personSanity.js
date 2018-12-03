@@ -15,6 +15,9 @@ exports.commonFeatureTags = ['person', 'sanity', 'personSanity', 'dataUtilities'
     };
 
 var stagingPerson = (systemConfig.tags.indexOf('stagingPerson') !== -1);
+var emailprob = 'no';
+if(systemConfig.env.name ==='staging') { emailprob = 'yes'; }
+
 
 exports.feature = [{
     name: 'Create a person',
@@ -53,11 +56,13 @@ exports.feature = [{
             this.addPhone();
             this.enterPhone(1, '98765432');
             this.setPrimaryPhone(1);
-            this.addEmail();
-            this.enterEmail(0, randomString(0.2).toLowerCase() + '@email.com');
-            this.addEmail();
-            this.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
-            this.setPrimaryEmail(1);
+            if(emailprob !='yes') {
+                this.addEmail();
+                this.enterEmail(0, randomString(0.2).toLowerCase() + '@email.com');
+                this.addEmail();
+                this.enterEmail(1, randomString(0.3).toLowerCase() + '@email.com');
+                this.setPrimaryEmail(1);
+            }
             this.clickOnPayee('No');
             this.save();
             this.validateSaveRedirection();
@@ -114,9 +119,11 @@ exports.feature = [{
             this.validatePhone(0);
             this.validatePhone(1);
             this.validatePrimaryPhone(1);
-            this.validateEmail(0);
-            this.validateEmail(1);
-            this.validatePrimaryEmail(1);
+            if(emailprob !='yes') {
+                this.validateEmail(0);
+                this.validateEmail(1);
+                this.validatePrimaryEmail(1);
+            }
             this.validatePayee()
         });
     }),
@@ -168,13 +175,14 @@ exports.feature = [{
             this.validatePhone(0);
             this.validatePrimaryPhone(0);
 
-            this.editEmail(0);
-            this.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
-            this.setPrimaryEmail(0);
-            this.saveEmail(0);
-            this.validateEmail(0);
-            this.validatePrimaryEmail(0);
-
+            if(emailprob !='yes') {
+                this.editEmail(0);
+                this.enterEmail(0, randomString(1.2).toLowerCase() + '@email.com');
+                this.setPrimaryEmail(0);
+                this.saveEmail(0);
+                this.validateEmail(0);
+                this.validatePrimaryEmail(0);
+            }
             this.editPayment();
             this.clickOnPayee('No');
             this.savePayment();
