@@ -4,7 +4,7 @@
    <name>test suite</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-11-05T16:32:42</lastRun>
+   <lastRun>2018-12-05T10:38:17</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
@@ -30,7 +30,7 @@
       <guid>5955e4fb-c68e-4405-91db-5e23794dee63</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Create Person/Create Person All</testCaseId>
+      <testCaseId>Test Cases/Person/Create Person All</testCaseId>
       <variableLink>
          <testDataLinkId></testDataLinkId>
          <type>DEFAULT</type>
@@ -45,9 +45,15 @@
       </variableLink>
    </testCaseLink>
    <testCaseLink>
+      <guid>e836f475-954e-440a-ab3a-bdc3c997e598</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Person/Add additional Phone</testCaseId>
+   </testCaseLink>
+   <testCaseLink>
       <guid>cda666a0-2ed8-4d83-8017-409fbcf9b36d</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>false</isRun>
-      <testCaseId>Test Cases/Create Person/Verify Person after save</testCaseId>
+      <testCaseId>Test Cases/Person/Verify Person after save</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>
