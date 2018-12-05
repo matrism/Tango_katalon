@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_ContractingParties</name>
+   <tag></tag>
+   <elementGuidId>b7bdea0d-4ea8-4097-969a-352a9ab64544</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@type='text'])[7]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>tg-typeahead__input ng-pristine ng-untouched ng-valid ng-animate ng-pristine-remove ng-dirty-add ng-valid-parse-add</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-attr-placeholder</name>
+      <type>Main</type>
+      <value>{{$getPlaceholder()}}</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-model</name>
+      <type>Main</type>
+      <value>$term</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-disabled</name>
+      <type>Main</type>
+      <value>$isDisabled()</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>placeholder</name>
+      <type>Main</type>
+      <value>Search by Name or IPI Number</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/ui-view[@class=&quot;ng-scope&quot;]/tg-sticky-headers[@class=&quot;ng-scope ng-isolate-scope&quot;]/div[@class=&quot;create-deal-wizard ng-scope&quot;]/form[@class=&quot;form-horizontal ng-valid-year-integer ng-valid-year-length ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-maxlength ng-valid-decimal ng-valid-negative ng-valid-number ng-valid-limit ng-invalid ng-invalid-tags-required ng-dirty ng-valid-parse ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;span12 nomargins create-deal general-step ng-scope&quot;]/div[@class=&quot;EDITOR span6 editor-left modular-edit ng-scope create ng-valid-year-integer ng-valid-year-length ng-valid-month-integer ng-valid-month-range ng-valid-day-integer ng-valid-day-range ng-valid-date ng-valid-min ng-valid-future ng-valid-maxlength ng-invalid ng-invalid-tags-required ng-dirty ng-valid-parse ng-valid-required&quot;]/div[@class=&quot;FORM ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;control-group ng-scope error&quot;]/div[@class=&quot;span4 controls&quot;]/div[@class=&quot;ng-pristine ng-untouched ng-isolate-scope ng-valid-required ng-invalid ng-invalid-tags-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;tg-typeahead ng-scope&quot;]/div[2]/div[@class=&quot;tg-typeahead__input-container ng-scope&quot;]/div[@class=&quot;tg-typeahead__input-wrap&quot;]/input[@class=&quot;tg-typeahead__input ng-pristine ng-untouched ng-valid ng-animate ng-pristine-remove ng-dirty-add ng-valid-parse-add&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>(//input[@type='text'])[7]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/ui-view/tg-sticky-headers/div[2]/form/div/div/div/div[2]/div/div/div[5]/div/div/div/div/div[2]/div/div[2]/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Remove All'])[3]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Contracting Parties:'])[1]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Required'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Artist Name(s):'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div[5]/div/div/div/div/div[2]/div/div[2]/input</value>
+   </webElementXpaths>
+</WebElementEntity>

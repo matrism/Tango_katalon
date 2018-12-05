@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Remove All_tg-typeahead__10</name>
+   <tag></tag>
+   <elementGuidId>60f6b5d2-d545-4cc3-9213-9983cc289cf8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@type='text'])[3]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>tg-typeahead__input ng-untouched ng-valid ng-dirty ng-valid-parse</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-attr-placeholder</name>
+      <type>Main</type>
+      <value>{{$getPlaceholder()}}</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-model</name>
+      <type>Main</type>
+      <value>$term</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-disabled</name>
+      <type>Main</type>
+      <value>$isDisabled()</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;SUB-VIEWS&quot;)/div[@class=&quot;ng-scope&quot;]/ui-view[@class=&quot;ng-scope&quot;]/tg-sticky-headers[@class=&quot;ng-scope ng-isolate-scope&quot;]/div[@class=&quot;create-deal-wizard ng-scope&quot;]/form[@class=&quot;form-horizontal ng-dirty ng-submitted ng-invalid ng-invalid-tags-required ng-valid-parse ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;deal-terms ng-scope ng-dirty ng-invalid ng-invalid-tags-required ng-valid-parse ng-valid-required&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;span6 column js-details-column&quot;]/tg-view[@class=&quot;ng-scope&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;FORM DETAIL ng-scope ng-invalid ng-invalid-tags-required ng-dirty ng-valid-parse ng-valid-required&quot;]/div[@class=&quot;EDITOR modular-edit ng-scope create ng-invalid ng-invalid-tags-required ng-dirty ng-valid-parse ng-valid-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;form-horizontal ng-scope&quot;]/div[@class=&quot;modular-container clearfix&quot;]/div[@class=&quot;ng-invalid ng-invalid-tags-required ng-dirty ng-valid-parse ng-valid-required&quot;]/div[1]/fieldset[2]/div[@class=&quot;control-group&quot;]/div[@class=&quot;span3 controls&quot;]/div[@class=&quot;pull-left ng-pristine ng-untouched ng-valid ng-isolate-scope ng-valid-required&quot;]/div[@class=&quot;tg-territory&quot;]/div[@class=&quot;tg-territory__input-container&quot;]/div[@class=&quot;tg-territory__input ng-pristine ng-untouched ng-isolate-scope ng-valid-required ng-invalid ng-invalid-tags-required&quot;]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;tg-typeahead ng-scope&quot;]/div[2]/div[@class=&quot;tg-typeahead__input-container ng-scope&quot;]/div[@class=&quot;tg-typeahead__input-wrap&quot;]/input[@class=&quot;tg-typeahead__input ng-untouched ng-valid ng-dirty ng-valid-parse&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <value>(//input[@type='text'])[3]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <value>//div[@id='SUB-VIEWS']/div[2]/ui-view/tg-sticky-headers/div[2]/form/div/div/div[2]/div[2]/tg-view/div/div/div/div[2]/div[2]/div/div/div/div/fieldset[2]/div/div/div/div/div/div/div/div/div[2]/div/div[2]/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Remove All'])[2]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Territory:'])[1]/following::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Contractual Right Types:'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Summary:'])[1]/preceding::input[1]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <value>//div/div/div/div/div/div/div/div[2]/div/div[2]/input</value>
+   </webElementXpaths>
+</WebElementEntity>
