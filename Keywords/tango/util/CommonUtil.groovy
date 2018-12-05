@@ -40,4 +40,24 @@ public class CommonUtil {
 			WebUI.comment('Verifying Phone Type Dropdown List: ' + (type[(n - 1)]))
 		}
 	}
+	
+	@Keyword
+	def SearchDropDownList(String cssElement){
+		WebUI.waitForAngularLoad(0)
+		
+		WebUI.waitForElementPresent(findTestObject('Create Person/AffiliateSociety_Dropdown_text', [('AffSoc') : findTestData('Person/Basic Person').getValue(
+			7, 1)]), 0)
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		List eleCount = driver.findElements(By.cssSelector(cssElement))
+
+		int rowsInTable = eleCount.size()
+
+		WebUI.verifyEqual(rowsInTable, actualRows)
+
+			WebUI.verifyElementPresent(findTestObject('Create Person/Dropdown_Phone_list', [('Type') : type[(n - 1)]]),0)
+
+			WebUI.comment('Verifying Phone Type Dropdown List: ' + (type[(n - 1)]))
+
+	}
 }

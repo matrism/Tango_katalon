@@ -13,114 +13,102 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-WebUI.click(findTestObject('Object Repository/Deal/span_New Record'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/span_New Record'))
 
-WebUI.click(findTestObject('Object Repository/Deal/a_Deal'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/a_Deal'))
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Deal Signing Territory__2'))
+WebUI.waitForAngularLoad(0)
 
-WebUI.click(findTestObject('Deal/Dropdown_SigningTerritory', [('country') : findTestData('Deals/Complete Deal').getValue(
-                1, 1)]))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Deal Signing Territory_'))
 
-WebUI.setText(findTestObject('Deal/Input_Company_Code'), findTestData('Deals/Complete Deal').getValue(2, 1))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/DST_dropdown', [('DST_country') : 'Argentina']))
 
-WebUI.verifyElementPresent(findTestObject('Deal/Dropdown_Company_Code', [('CompanyCode') : findTestData('Deals/Complete Deal').getValue(
-                2, 1)]), 0)
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_CompanyCode'), 'a')
 
-WebUI.click(findTestObject('Deal/Dropdown_Company_Code', [('CompanyCode') : findTestData('Deals/Complete Deal').getValue(
-                2, 1)]))
+WebUI.waitForAngularLoad(0)
 
-WebUI.setText(findTestObject('Deal/input_ContractingParties'), findTestData('Deals/Complete Deal').getValue(3, 1))
+not_run: WebUI.waitForElementPresent(findTestObject('Deal/Search_list_dropdown'), 0)
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Continue'))
+WebUI.click(findTestObject('Deal/Search_list_dropdown', [('CompanyCode') : 'WCM ARGENTINA DIRECT FOREIGN DEALS']))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Start (Actual)_date-pick'), '2017-01-01')
+WebUI.verifyElementAttributeValue(findTestObject('Deal/Deal with PSS_RR_RTP/Selected_CompanyCode'), 'value', 'WCM ARGENTINA DIRECT FOREIGN DEALS', 
+    0)
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_End (Target)_targetEndDu'), '64')
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_ContractingParties'), 'mars, bruno')
 
-WebUI.click(findTestObject('Object Repository/Deal/span_Add Scope'))
+WebUI.click(findTestObject('Deal/Search_list_dropdown', [('CompanyCode') : 'Mars, Bruno']))
 
-WebUI.click(findTestObject('Object Repository/Deal/div_Share Scope 1  Conflicting'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Continue'))
 
-WebUI.selectOptionByValue(findTestObject('Object Repository/Deal/select_Select oneAdministratio'), '0', true)
+WebUI.waitForAngularLoad(0)
 
-WebUI.click(findTestObject('Object Repository/Deal/div_Territory_tg-typeahead__ta'))
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_Start (Actual)_date-pick'), '2016-01-01')
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__46'), 'worldwide')
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_End (Target)_targetEndDu'), '62')
 
-WebUI.click(findTestObject('Object Repository/Deal/div_Music PublishingLog outPer'))
+WebUI.mouseOver(findTestObject('Deal/Deal with PSS_RR_RTP/AddScopeButton'))
 
-WebUI.click(findTestObject('Object Repository/Deal/a_Add Publisher Shares Set'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/AddScopeButton'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__58'), 'ENDEMOL ARGENTINA S.A.')
+WebUI.waitForAngularLoad(0)
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__59'), '258988397')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/div_Share Scope 1  Conflicting'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__60'), 'WARNER CHAPPELL MUSIC ARGENTINA')
+WebUI.selectOptionByValue(findTestObject('Deal/Deal with PSS_RR_RTP/select_Select oneAdministratio'), '0', true)
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_ownShare'), '100')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/div_Territory_tg-typeahead__ta'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input__collectShare'), '100')
+WebUI.setText(findTestObject('null'), 'w')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Done'))
+WebUI.setText(findTestObject('null'), 'wo')
 
-WebUI.click(findTestObject('Object Repository/Deal/a_Add Royalty Rate Set'))
+WebUI.setText(findTestObject('null'), 'wor')
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Contractual Rate_span1 n'), '60')
+WebUI.setText(findTestObject('null'), 'worl')
 
-WebUI.click(findTestObject('Object Repository/Deal/i_Contractual Rate_fa fa-caret'))
+WebUI.setText(findTestObject('null'), 'world')
 
-WebUI.click(findTestObject('Object Repository/Deal/li_Payout 1'))
+WebUI.setText(findTestObject('null'), 'worldw')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_At Source'))
+WebUI.setText(findTestObject('null'), 'worldwi')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Yes'))
+WebUI.setText(findTestObject('null'), 'worldwid')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Done_1'))
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_Remove All_tg-typeahead__10'), 'worldwide')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Continue'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/a_Add Publisher Shares Set'))
 
-WebUI.click(findTestObject('Object Repository/Deal/div_Contract Period 1 - Exerci'))
+WebUI.setText(findTestObject('null'), 'WB Music Corp.')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Apply'))
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_Remove All_ownShare'), '100')
 
-WebUI.click(findTestObject('Object Repository/Deal/strong_Select All (1)'))
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_Remove All_tg-typeahead__60'), 'WB Music Corp.')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Apply_1'))
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input__collectShare'), '100')
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Continue'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Done'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__61'), 't')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/a_Add Royalty Rate Set'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__62'), 'te')
+WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_Contractual Rate_span1 n'), '60')
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__63'), 'tes')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/i_Contractual Rate_fa fa-caret'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__64'), 'test')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/li_Payout 1'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__65'), 'test ')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_At Source'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__66'), 'test a')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Yes'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__67'), 'test au')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Done_1'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__68'), 'test aut')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Continue'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__69'), 'test auto')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/div_Contract Period 1 - Exerci'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Remove All_tg-typeahead__70'), 'test auto')
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Apply'))
 
-WebUI.click(findTestObject('Object Repository/Deal/button_Payout_tg-dropdown-care'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/div_Select All (1)'))
 
-WebUI.setText(findTestObject('Object Repository/Deal/input_Legal Right_legalRight'), '100')
-
-WebUI.setText(findTestObject('Object Repository/Deal/input_Distribution_distributio'), '100')
-
-WebUI.click(findTestObject('Object Repository/Deal/button_TEST ACCOUNT 2309823048'))
-
-WebUI.click(findTestObject('Object Repository/Deal/button_ADD PAYEE'))
-
-WebUI.click(findTestObject('Object Repository/Deal/button_Continue'))
-
-WebUI.click(findTestObject('Object Repository/Deal/button_Continue'))
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Apply_1'))
 
