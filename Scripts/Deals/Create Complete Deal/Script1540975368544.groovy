@@ -54,25 +54,11 @@ WebUI.waitForAngularLoad(0)
 
 WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/div_Share Scope 1  Conflicting'))
 
-WebUI.selectOptionByValue(findTestObject('Deal/Deal with PSS_RR_RTP/select_Select oneAdministratio'), '0', true)
+WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/select_ContractType'))
+
+WebUI.selectOptionByValue(findTestObject('Deal/Deal with PSS_RR_RTP/select_ContractType'), '0', true)
 
 WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/div_Territory_tg-typeahead__ta'))
-
-WebUI.setText(findTestObject('null'), 'w')
-
-WebUI.setText(findTestObject('null'), 'wo')
-
-WebUI.setText(findTestObject('null'), 'wor')
-
-WebUI.setText(findTestObject('null'), 'worl')
-
-WebUI.setText(findTestObject('null'), 'world')
-
-WebUI.setText(findTestObject('null'), 'worldw')
-
-WebUI.setText(findTestObject('null'), 'worldwi')
-
-WebUI.setText(findTestObject('null'), 'worldwid')
 
 WebUI.setText(findTestObject('Deal/Deal with PSS_RR_RTP/input_Remove All_tg-typeahead__10'), 'worldwide')
 
