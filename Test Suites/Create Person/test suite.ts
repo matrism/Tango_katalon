@@ -167,16 +167,4 @@
          <variableId>2d6d181d-53c5-44d8-9570-442f26b436d4</variableId>
       </variableLink>
    </testCaseLink>
-   <testCaseLink>
-      <guid>e836f475-954e-440a-ab3a-bdc3c997e598</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
-      <testCaseId>Test Cases/Person/Add additional Phone</testCaseId>
-   </testCaseLink>
-   <testCaseLink>
-      <guid>cda666a0-2ed8-4d83-8017-409fbcf9b36d</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
-      <testCaseId>Test Cases/Person/Verify Person after save</testCaseId>
-   </testCaseLink>
 </TestSuiteEntity>

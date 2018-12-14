@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//li[@class = 'tg-typeahead__suggestions-group-item ng-scope' and (contains(text(), '${CompanyCode}') or contains(., '${CompanyCode}'))]</value>
+         <value>//li[@class = 'tg-typeahead__suggestions-group-item ng-scope' and (contains(text(), '${text}') or contains(., '${text}'))]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>contains</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>${CompanyCode}</value>
+      <value>${text}</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
