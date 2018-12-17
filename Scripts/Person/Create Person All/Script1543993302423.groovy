@@ -49,8 +49,8 @@ println(FullName)
 
 WebUI.setText(findTestObject('Create Person/input_Credits Name_creditsName'), CreditName)
 
-WebUI.setText(findTestObject('Create Person/input_Date of Birth_span1 ng-u'), Keys.chord(DOBYear, Keys.TAB, DOBMonth, Keys.TAB, 
-        DOBDay))
+not_run: WebUI.setText(findTestObject('Create Person/input_Date of Birth_span1 ng-u'), Keys.chord(DOBYear, Keys.TAB, DOBMonth, 
+        Keys.TAB, DOBDay))
 
 WebUI.verifyElementNotHasAttribute(findTestObject('Create Person/input_Date of Birth_span1 ng-u'), 'disabled', 0, FailureHandling.STOP_ON_FAILURE)
 
@@ -77,7 +77,7 @@ WebUI.click(findTestObject('Create Person/Checkbox_Mechanical'))
 
 WebUI.click(findTestObject('Create Person/Checkbox_Synchronisation'))
 
-WebUI.scrollToElement(findTestObject('Create Person/button_Add Email'), 0)
+WebUI.scrollToElement(findTestObject('Create Person/Contact Information header'), 0)
 
 WebUI.click(findTestObject('Create Person/button_Add Address'))
 
@@ -101,6 +101,8 @@ WebUI.verifyElementText(findTestObject('Create Person/CountrySelect'), Country)
 
 if (true) {
     WebUI.click(findTestObject('Create Person/CountrySelect'))
+
+    WebUI.scrollToElement(findTestObject('Create Person/button_Add Address'), 0)
 }
 
 WebUI.click(findTestObject('Create Person/button_Yes - Payee'))
