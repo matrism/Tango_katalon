@@ -17,10 +17,8 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.Dimension as Dimension
 
 
-//WebUI.openBrowser('')
-System.setProperty("webdriver.chrome.driver", "/usr/bin/google-chrome")
-
 WebUI.openBrowser('')
+
 // resize browser
 WebDriver driver = DriverFactory.getWebDriver()
 
