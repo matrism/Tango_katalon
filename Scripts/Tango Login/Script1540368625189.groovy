@@ -16,6 +16,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.Dimension as Dimension
 
+
 WebUI.openBrowser('')
 
 // resize browser
