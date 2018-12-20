@@ -77,7 +77,7 @@ WebUI.click(findTestObject('Create Person/Checkbox_Mechanical'))
 
 WebUI.click(findTestObject('Create Person/Checkbox_Synchronisation'))
 
-WebUI.scrollToElement(findTestObject('Create Person/button_Add Email'), 0)
+WebUI.scrollToElement(findTestObject('Create Person/Contact Information header'), 0)
 
 WebUI.click(findTestObject('Create Person/button_Add Address'))
 
@@ -101,6 +101,8 @@ WebUI.verifyElementText(findTestObject('Create Person/CountrySelect'), Country)
 
 if (true) {
     WebUI.click(findTestObject('Create Person/CountrySelect'))
+
+    WebUI.scrollToElement(findTestObject('Create Person/button_Add Address'), 0)
 }
 
 WebUI.click(findTestObject('Create Person/button_Yes - Payee'))
@@ -108,6 +110,8 @@ WebUI.click(findTestObject('Create Person/button_Yes - Payee'))
 WebUI.click(findTestObject('Create Person/button_Yes - StatementRecipient'))
 
 WebUI.focus(findTestObject('Create Person/div_CreatorYes NoAffiliated So'))
+
+WebUI.scrollToElement(findTestObject('Create Person/Contact Information header'), 0)
 
 WebUI.click(findTestObject('Create Person/button_Add Phone'))
 
