@@ -5,4 +5,11 @@
    <tag>Deal</tag>
    <comment></comment>
    <testCaseGuid>1fe9443f-8e52-44ab-9efa-42245efeaf94</testCaseGuid>
+   <variable>
+      <defaultValue>2</defaultValue>
+      <description></description>
+      <id>69d51f4f-ed0d-4530-96a2-e2d92e01c47a</id>
+      <masked>false</masked>
+      <name>ACQ_index</name>
+   </variable>
 </TestCaseEntity>

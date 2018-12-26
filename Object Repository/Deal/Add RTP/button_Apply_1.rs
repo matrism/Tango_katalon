@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//div[@id='SUB-VIEWS']/div[2]/ui-view/tg-sticky-headers/div[2]/form/div/div/div/div/div/div[2]/div/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[4]/ul/li[3]/div/button</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//button[(text() = 'Apply                             ' or . = 'Apply                             ')]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>true</isSelected>
