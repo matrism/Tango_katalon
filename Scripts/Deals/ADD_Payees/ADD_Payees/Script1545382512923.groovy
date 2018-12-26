@@ -13,19 +13,15 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-WebUI.click(findTestObject('Deal/Add RTP/Input_Contract Period', [('ACQ_index') : ACQ_index]))
+WebUI.verifyElementPresent(findTestObject('Deal/ADD_Payees/Header_Payees_selected'), 10)
 
-WebUI.click(findTestObject('Deal/Add RTP/Select_Contract Period'))
+WebUI.click(findTestObject('Deal/ADD_Payees/Add_PayeeToDeal'))
 
-WebUI.click(findTestObject('Object Repository/Deal/Add RTP/button_Apply'))
+WebUI.setText(findTestObject('Deal/ADD_Payees/Add_PayeeToDeal'), payee)
 
-WebUI.setText(findTestObject('Deal/Add RTP/input_Post-Term Collection_inp', [('ACQ_index') : ACQ_index]), 'acq description')
+WebUI.waitForAngularLoad(0)
 
-WebUI.click(findTestObject('Deal/Add RTP/Acq_ScopeSelection_field', [('ACQ_index') : ACQ_index]))
+WebUI.click(findTestObject('Deal/Search_list_dropdown', [('text') : payee]))
 
-WebUI.click(findTestObject('Deal/Add RTP/Select_Scope', [('scope') : 'Select All (1)']))
-
-WebUI.click(findTestObject('Object Repository/Deal/Add RTP/button_Apply_1'))
-
-WebUI.click(findTestObject('Object Repository/Deal/Add RTP/button_Continue'))
+WebUI.selectOptionByValue(findTestObject('Deal/Search_list_dropdown'), '', false)
 

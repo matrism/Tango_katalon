@@ -19,7 +19,7 @@ WebUI.click(findTestObject('Object Repository/Deal/Add RTP/button_Apply'))
 
 WebUI.setText(findTestObject('Object Repository/Deal/Add RTP/input_Post-Term Collection_inp'), 'acq description')
 
-WebUI.click(findTestObject('Object Repository/Deal/Add RTP/div_Scope 1'))
+WebUI.click(findTestObject('Deal/Add RTP/Select_Scope'))
 
 WebUI.click(findTestObject('Object Repository/Deal/Add RTP/button_Apply_1'))
 

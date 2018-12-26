@@ -96,11 +96,11 @@ WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/li_Payout 1'))
 
 WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_At Source'))
 
-WebUI.waitForElementVisible(findTestObject('Deal/Deal with PSS_RR_RTP/button_Yes'), 0)
+WebUI.waitForElementVisible(findTestObject('Deal/Deal with PSS_RR_RTP/button_Yes'), 5)
 
 WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Yes'))
 
-WebUI.scrollToPosition(1350, 900)
+WebUI.scrollToPosition(0, 1000)
 
 WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Done_1'))
 
@@ -108,5 +108,5 @@ WebUI.click(findTestObject('Deal/Deal with PSS_RR_RTP/button_Continue'))
 
 WebUI.waitForAngularLoad(0)
 
-WebUI.callTestCase(findTestCase('Deals/RTP/ADD_RTP_Acquisition'), [:], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Deals/RTP/ADD_RTP_Acquisition'), [('ACQ_index') : 1], FailureHandling.STOP_ON_FAILURE)
 

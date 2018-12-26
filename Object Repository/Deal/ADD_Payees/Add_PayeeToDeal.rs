@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Add_PayeeToDeal</name>
+   <tag></tag>
+   <elementGuidId>b8113209-ac8d-496b-9a23-14386689a308</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;SUB-VIEWS&quot;]/div[2]/ui-view/tg-sticky-headers/div[2]/form/div[1]/div/div/div/div/div/div[1]/div/div[2]/input</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+</WebElementEntity>

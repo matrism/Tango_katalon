@@ -13,6 +13,10 @@
          <key>BASIC</key>
          <value>//li[@class = 'tg-typeahead__suggestions-header' and (contains(text(), 'Select All (1)') or contains(., 'Select All (1)'))]</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>

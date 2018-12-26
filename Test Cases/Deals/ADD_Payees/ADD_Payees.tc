@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>ADD_RTP_Acquisition</name>
+   <name>ADD_Payees</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>156351ff-46df-4d52-9de0-1e07e96f3fb6</testCaseGuid>
+   <testCaseGuid>53fbcbc1-a702-4a8f-ab6a-97e38068c5c8</testCaseGuid>
    <variable>
-      <defaultValue>1</defaultValue>
+      <defaultValue>'Mohd Shahrul Iman'</defaultValue>
       <description></description>
-      <id>8e356324-74e1-435c-bca8-bd0f07b22e87</id>
+      <id>b45e99f5-5378-4236-9982-bf457a6f6e43</id>
       <masked>false</masked>
-      <name>ACQ_index</name>
+      <name>payee</name>
    </variable>
 </TestCaseEntity>
